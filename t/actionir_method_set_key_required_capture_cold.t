@@ -21,7 +21,7 @@ my $deps = {
  local *LinkedSpec::ActionIR::MethodLowering::_lower_mutation_slot_value_expr = sub {push @events, 'mutation'; return 'VALUE'};
  local *LinkedSpec::ActionIR::MethodLowering::_uniform_binding_target_symbol = sub {push @events, 'binding'; return undef};
  is(LinkedSpec::ActionIR::MethodLowering::_lower_set_key_statement('set_key(target,key,value)', $deps),
-  '$meta{KEY} = VALUE', 'cold set-key retains controlled fallback result');
+  'do { my $__ls_set_key_key = KEY; my $__ls_set_key_value = VALUE; $meta{$__ls_set_key_key} = $__ls_set_key_value }', 'cold set-key retains controlled fallback result');
  is_deeply(\@events, [qw(ast parse normalize trim trim trim hash key mutation binding)], 'cold callbacks retain native order');
  is(refaddr($deps->{trim_action_ir_value}), refaddr($trim), 'cold public trim reference remains actual');
  for my $role (qw(parse_method_function_expr normalize_method_args_with_optional_scope extract_hash_symbol_name lower_scalar_access_key_expr trim_action_ir_value)) {

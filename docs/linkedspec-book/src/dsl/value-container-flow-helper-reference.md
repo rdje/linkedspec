@@ -1137,12 +1137,11 @@ For Perl callable `count`/`first`, see the [worked selection, terminal and effec
 
 Hash helpers return scalar information about an object or a new hash/array value derived from it.
 
-On Perl, `drop_keys(meta, "debug")` and `meta.drop_keys("debug")` leave `meta`
-unchanged and return a copy. Use `flat_array(keys)` to expand an array of keys;
-an empty splice removes none. Each key value is captured before the next key
-operand runs. Scalar-key generated parsers also load with fatal syntax warnings.
-See [Removing keys in Perl](values-containers-and-flow-helpers.md#removing-keys-in-perl)
-for complete copy, splice and callback-order examples.
+On Perl, `drop_keys(meta, "debug")` and `meta.drop_keys("debug")` leave `meta` unchanged and return a copy. Use `flat_array(keys)` to expand an array of keys; an empty splice removes none. Each key value is captured before the next key operand runs. Scalar-key generated parsers also load with fatal syntax warnings. See [Removing keys in Perl](values-containers-and-flow-helpers.md#removing-keys-in-perl) for complete copy, splice and callback-order examples.
+
+Ordinary Perl `set_key` accepts eager String key blocks in value, receiver and statement forms: `meta.set_key({return("kind")},{return("node")})` produces a copy with `"kind":"node"`. Block returns stay local. Pure source, key and value evaluate once in that order; the source copy and selected key survive later operand effects. With `meta={"old":1}; key="before"`, `changed=set_key(meta,key,{key="after";2})` yields `{"old":1,"before":2}`, leaves `meta` as `{"old":1}` and leaves `key` as `"after"`. Statement `set_key(meta,key,...)` and String-key `meta[key]=...` also capture the key before their value.
+
+Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)` produces `{"k":1}`. A scalar-producing prefix has its own guarded result boundary: `n.add(0).set_key("k",1)` yields undef. This compatibility rule does not change helper arities, copy depth, mutation target kinds or deferred callable permissions.
 
 | Helper | Result | Use it when |
 | --- | --- | --- |

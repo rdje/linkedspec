@@ -965,7 +965,7 @@ dispatch rule.
 ### `set_key(h, key, value)`
 - **Signature**: `set_key(h: hash, key: string, value: expr)`
 - **Returns**: hash
-- **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input.
+- **Behavior**: Returns a new hash with the key set to the value. Does not mutate the input. Ordinary Perl value/receiver/statement forms accept eager String key blocks with local returns, for example `meta.set_key({return("kind")},{return("node")})`. Pure source, key and value evaluate once in that order; a later value cannot change the captured key. With `key="before"`, `set_key(meta,key,{key="after";2})` sets `"before"` in the copy. Statement and String-key operator writes also preserve the key selected before their value.
 - **Statement form**: `set_key(name, key, value)` mutates the named working hash `name` directly. An absent target
   starts as an empty harray; an incompatible existing value fails with `binding_kind_mismatch`.
 - **Operator form**: `name[key] = value` is a separate typed-path contract on all five backends. An evaluated string has the

@@ -14,7 +14,7 @@ answers:
   - how do Julia input reader results retain actual kinds through with
   - why do malformed Lua input readers retain typed arity errors
 date: 2026-10-27
-status: all five bounded27 implementations complete; compiler/policy28.1 next then capture-name29.1; full admission separate
+status: all five bounded27 implementations and key-operand28.1 complete; capture-name29.1 next; full admission separate
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
@@ -127,3 +127,11 @@ indices, returned with Array/Hash/Bool/outer scope and operand skips pass; scala
 counts yield null and bound/flat counts0 remain. Direct computed six groups and
 luac/loadfile/normal registration pass. All bounded27 children complete;28.1 then
 29.1 follow before admission, with declared5.4/full23.4/pressure/registration separate.
+
+
+28.1 resolves the broader first-consumer policy from aggregate snapshot authority:
+legacy []/constructed-Hash fallbacks stay. It repairs eager set_key block keys and
+source/key/value staging, including a real before-to-after key snapshot defect;
+working native/fresh metadata and required/cold helper passthrough controls pass.
+Current mechanism/target belongs to terse-hash-receiver-value-chains.md and
+set-key-operands.md. Capture-name29.1 remains next before admission.

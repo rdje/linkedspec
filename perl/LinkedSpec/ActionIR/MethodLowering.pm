@@ -486,6 +486,14 @@ sub _lower_inline_value_branch_payload_expr {
  return $payload_expr
 }
 
+sub _lower_eager_block_key_expr {
+ my ($source, $deps) = @_;
+ return undef unless defined($source) && $source =~ /\A\s*\{/s;
+ my $node = _parse_method_value_ast_expr($source, $deps);
+ return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'block_value';
+ return _lower_inline_value_branch_payload_expr($source, $deps)
+}
+
 sub _lower_inline_switch_case_value_expr {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
@@ -1368,7 +1376,8 @@ sub _uniform_binding_hash_index_set_expr {
  return undef unless defined($key_expr) && length($key_expr);
  return undef unless defined($value_expr) && length($value_expr);
  return 'do { require LinkedSpec::BindingRuntime; $'.$target.' = '
-  .'LinkedSpec::BindingRuntime::index_set($'.$target.', "'.$target.'", '.$key_expr.', '.$value_expr.') }'
+  .'LinkedSpec::BindingRuntime::index_set($'.$target.', "'.$target.'", '
+  ._materialize_list_operand_expr($key_expr).', '.$value_expr.') }'
 }
 
 sub _uniform_binding_array_end_expr {
@@ -2428,7 +2437,9 @@ sub _lower_ast_call_statement {
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($hash_symbol) && length($hash_symbol);
-  my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+  my $key_lowered = _lower_eager_block_key_expr($key_expr, $deps);
+  $key_lowered = $lower_scalar_access_key_expr->($key_expr)
+   unless defined($key_lowered) && length($key_lowered);
   return _actionir_ast_unsupported_helper_expr($method)
    unless defined($key_lowered) && length($key_lowered);
   my $value_lowered = _lower_mutation_slot_value_expr($value_expr, $deps);
@@ -2445,7 +2456,9 @@ sub _lower_ast_call_statement {
     $inner,
    );
   }
-  return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
+  my $operands = 'my $__ls_set_key_key = '.$key_lowered.'; '
+   .'my $__ls_set_key_value = '.$value_lowered.'; ';
+  return 'do { '.$operands.'$'.$hash_symbol.'{$__ls_set_key_key} = $__ls_set_key_value }'
  }
 
  if ($method eq 'push') {
@@ -7224,7 +7237,9 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($key_expr) && length($key_expr);
   return undef unless defined($value_expr) && length($value_expr);
 
-  my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+  my $key_lowered = _lower_eager_block_key_expr($key_expr, $deps);
+  $key_lowered = $lower_scalar_access_key_expr->($key_expr)
+   unless defined($key_lowered) && length($key_lowered);
   return undef unless defined($key_lowered) && length($key_lowered);
 
   my $value_lowered = _lower_method_value_expr($value_expr, $deps);
@@ -7241,7 +7256,9 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_set_key_source = '.$lowered_target.'; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{'.$key_lowered.'} = '.$value_lowered.'; \%__ls_set_key }';
+  return 'do { my $__ls_set_key_source = '.$lowered_target.'; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); '
+   .'my $__ls_set_key_key = '.$key_lowered.'; my $__ls_set_key_value = '.$value_lowered.'; '
+   .'$__ls_set_key{$__ls_set_key_key} = $__ls_set_key_value; \%__ls_set_key }';
  }
  if ($method_call && $method_call->{method} eq 'rename_key') {
   my $rename_key_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 3, 3);
@@ -8848,7 +8865,9 @@ sub _lower_set_key_statement {
  my $hash_symbol = $extract_hash_symbol_name->($target_expr);
  return undef unless defined($hash_symbol) && length($hash_symbol);
 
- my $key_lowered = $lower_scalar_access_key_expr->($key_expr);
+ my $key_lowered = _lower_eager_block_key_expr($key_expr, $deps);
+ $key_lowered = $lower_scalar_access_key_expr->($key_expr)
+  unless defined($key_lowered) && length($key_lowered);
  return undef unless defined($key_lowered) && length($key_lowered);
 
  my $value_lowered = _lower_mutation_slot_value_expr($value_expr, $deps);
@@ -8864,7 +8883,9 @@ sub _lower_set_key_statement {
  my $binding_symbol = _uniform_binding_target_symbol($target_expr, 'hash', $deps);
  return _uniform_binding_hash_index_set_expr($binding_symbol, $key_lowered, $value_lowered)
   if defined($binding_symbol);
- return '$'.$hash_symbol.'{'.$key_lowered.'} = '.$value_lowered
+ my $operands = 'my $__ls_set_key_key = '.$key_lowered.'; '
+  .'my $__ls_set_key_value = '.$value_lowered.'; ';
+ return 'do { '.$operands.'$'.$hash_symbol.'{$__ls_set_key_key} = $__ls_set_key_value }'
 }
 
 #------------------------------------------------------------------------------

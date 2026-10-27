@@ -142,7 +142,7 @@ sub branch_cases {
  my @keyed = (@hashed, 'lower_scalar_access_key_expr');
  my @valued = (@keyed, 'mutation');
  my @full = (@valued, 'binding');
- my $plain = '$HASH_SLOT{KEY} = VALUE';
+ my $plain = 'do { my $__ls_set_key_key = KEY; my $__ls_set_key_value = VALUE; $HASH_SLOT{$__ls_set_key_key} = $__ls_set_key_value }';
  for my $ast ('FAST', '0', '') {
   push @cases, ['ast-'.$ast, {ast => $ast}, length($ast) ? $ast : $plain, length($ast) ? ['ast'] : \@full];
  }
@@ -169,11 +169,11 @@ sub branch_cases {
  }
  for my $value (undef, '', '0') {
   my $nonempty = defined($value) && length($value);
-  push @cases, ['symbol-'.($value // 'undefined'), {symbol => $value}, $nonempty ? '$0{KEY} = VALUE' : undef,
+  push @cases, ['symbol-'.($value // 'undefined'), {symbol => $value}, $nonempty ? 'do { my $__ls_set_key_key = KEY; my $__ls_set_key_value = VALUE; $0{$__ls_set_key_key} = $__ls_set_key_value }' : undef,
    $nonempty ? \@full : \@hashed];
-  push @cases, ['key-'.($value // 'undefined'), {key => $value}, $nonempty ? '$HASH_SLOT{0} = VALUE' : undef,
+  push @cases, ['key-'.($value // 'undefined'), {key => $value}, $nonempty ? 'do { my $__ls_set_key_key = 0; my $__ls_set_key_value = VALUE; $HASH_SLOT{$__ls_set_key_key} = $__ls_set_key_value }' : undef,
    $nonempty ? \@full : \@keyed];
-  push @cases, ['value-'.($value // 'undefined'), {value => $value}, $nonempty ? '$HASH_SLOT{KEY} = 0' : undef,
+  push @cases, ['value-'.($value // 'undefined'), {value => $value}, $nonempty ? 'do { my $__ls_set_key_key = KEY; my $__ls_set_key_value = 0; $HASH_SLOT{$__ls_set_key_key} = $__ls_set_key_value }' : undef,
    $nonempty ? \@full : \@valued];
  }
  for my $binding (undef, '', '0') {
@@ -230,7 +230,7 @@ for my $role (@roles) {
   } else {
    is($row->{error}, undef, "$label bounded native route completes");
    is($row->{success_error}, 'successful set-key required callback', "$label successful error effect survives");
-   is($row->{value}, $outcome eq 'undefined' ? undef : '$HASH_SLOT{KEY} = VALUE', "$label native result");
+   is($row->{value}, $outcome eq 'undefined' ? undef : 'do { my $__ls_set_key_key = KEY; my $__ls_set_key_value = VALUE; $HASH_SLOT{$__ls_set_key_key} = $__ls_set_key_value }', "$label native result");
    my $expected_args = $role eq 'normalize_method_args_with_optional_scope'
     ? ['legacy target', 'key', 'value', 'effect'] : $role eq 'trim_action_ir_value'
     ? ['legacy target!', 'key!', 'value!'] : ['legacy target', 'key', 'value'];

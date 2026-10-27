@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
+Perl eager set_key operands/snapshots repaired with legacy roots/helper passthrough preserved; capture-name29.1 next.
 
 ## Latest Completed Slice
 
-Safe Lua independently reproduces nine RED reader-result comparisons per available host while source/default/named/snapshot and malformed-source controls already work. A function field in the existing private receiver table reuses the eleven INPUT_CURSOR_HELPERS names plus source_method/no-trailing/zero-two operand shapes, enabling existing actual-kind guards without new chunk locals. Four execution groups pass native/plan/fresh on PUC5.5.1/LuaJIT2.1.1788460057; two malformed source-error groups retain native helper_arity_mismatch fields/generated text on those routes. Shared positions/kinds/SWC/lazy/split/signed flow, Number selector snapshots and with returned Array/Hash/Bool/outer restoration hold; operands skip, scalar counts yield null and bound/flat counts0 remain. Direct computed six groups per host, luac/loadfile/normal registration, qualified book/catalog/target/fact/map and history/fast continuity align. All five bounded27 children complete; scalar-root compiler/policy28.1 then capture-name29.1 follow before admission. Full23.4/pressure/required Perl registration/declared5.4 remain owned; no push.
+Repaired existing Perl set_key eager key blocks and operand snapshots without changing frozen scalar-root fallback policy. Public source/native counterfactuals distinguish invalid key-block compilation/false-ready metadata from a separate before-to-after key alias defect. Semantic block keys reuse existing child value/block lowering/local returns; pure/fallback emission stages key then value and native uniform-binding index emission materializes the earlier key. Original helper invocation/return passthrough is retained. Three new native/fresh/Top-metadata groups and direct required539/cold17 pass, covering four key-block roles/KVKVKVKV, pure source/key snapshots, statement/String-key operator writes, legacy []/Hash versus normalized guards, callback order/identity/diagnostics/reference/falsy results. Initial candidate reference wrapping is disclosed with exact patch/test/log before correction; fallback-only source oracles reflect staging. Module syntax, worked book/catalog, target/current facts/map and history/fast continuity align. Capture-name29.1 follows; full23.4/pressure/required Perl registration/declared5.4 and broader SESSION17 host-slot owners stay separate; no push.
 
 ## Next Action
 
-Activate owned scalar-root compiler/policy28.1 from this clean Lua boundary. Read relevant first-consumer/free-helper/binding/result authority and the retained refined context packet before production. Distinguish legacy literal/named/context constant []/Hash behavior from the confirmed set_key eager block-key compile failure/raw0-ready1. Resolve scoped policy from canonical contracts, preserve unrelated free/bound/copy/write rights and repair the actual compiler defect through existing typed key/value owners. Run small public source distinctions and focused native/fresh/metadata/source checks, compile/docs/commit; then capture-name29.1. No exhaustive matrix/full suite/admission/push; pressure/required Perl registration/declared-host owners remain separate.
+Activate capture-name29.1 from this clean key-operand boundary. Read current static entry/match named/has syntax, typed source-location/formal/book contracts and retained bare/quoted observations. Resolve identifier versus String-literal authority without inferring dynamic-name rights; repair supported lowering or explicit rejection/readiness so no known call reaches an undefined host helper. Preserve bare capture identity/local-entry absence/kinds/source errors and existing callback/function contexts. Small native/fresh/metadata/name-shape RED/GREEN, compile/docs/commit before further feature selection. No full matrix/admission/push; pressure/required Perl registration/declared-host owners remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.28.1` — Perl eager set_key operands/snapshots repaired with legacy roots/helper passthrough preserved; capture-name29.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.5` — All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.3` — Dart readonly input/cursor result guards implemented/targeted-checked; independent Julia27.4 follows.
@@ -29,7 +30,6 @@ Activate owned scalar-root compiler/policy28.1 from this clean Lua boundary. Rea
 - `TYPE-REFERENCE-BOOK.1.2.23.1.6` — Inline conditional bracket target26 frozen; P1 first/elseif eager-condition lowering26.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.5` — Safe Lua capture guards implemented on available hosts; all bounded25 children complete; next-feature selection23.1.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.4` — Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.25.3` — Dart canonical capture-source guards implemented/targeted-checked; independent Julia25.4 next.
 
 ## History
 
