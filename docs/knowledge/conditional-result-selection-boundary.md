@@ -1,6 +1,6 @@
 ---
 id: conditional-result-selection-boundary
-title: Inline conditional brackets need source composition and eager conditions need lowering repair
+title: Inline conditional values compose with ordinary Perl typed bracket reads
 answers:
   - can an inline if or switch result be indexed directly
   - do inline conditional results already support direct methods on Perl
@@ -10,11 +10,13 @@ answers:
   - which task owns conditional result bracket composition
   - why did is_defined false select the wrong inline condition branch
   - why did a named early-return block work while an inline payload failed
+  - why does a one-argument switch remain outside computed read sources
 date: 2026-10-27
-status: producer26.0 repaired; conditional bracket selection Perl26.1 next
+status: producer26.0 repaired; bounded Perl26.1 implemented; independent Rust26.2 next
 tags: [perl, actionir, control, selection, fluent, laziness]
 evidence: "TYPE23.1.6 finite public native/fresh/descriptor/substitution and AST intake at fcfb7dcdc; ADR0007/current inline-value authority."
 reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/conditional_selection.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/inline_condition_value_blocks.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_conditional_result_composition.pl"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_conditional_result_composition.pl --condition-controls"
@@ -63,3 +65,18 @@ No new AST/schema/executor or deferred operation is introduced. Retained regress
 covers native/fresh working lowering/ready metadata, lazy ordered conditions,
 local early returns, function-local slots, existing direct methods, typed predicates
 and nested conditionals. Conditional bracket expansion26.1 follows separately.
+
+
+Perl26.1 passes the complete parsed Call into its static computed-source predicate.
+Canonical inline if/switch calls with value arity and no attached block join the
+existing value_access reader/result guards. One-operand headers are control_if/
+control_switch AST nodes, not value Call nodes; marker aliases and unrelated
+controls remain excluded. The initial zero-branch prototype is not part of this
+role. The final authored baseline fails12/43; all43 pass after this narrow change,
+including the unchanged shared target, actual Bool/Number/String/null/container
+kinds, CTIM lazy order, snapshots, signed/missing/IJ paths, operand skips, bridges,
+function-local selector/condition slots, Unicode spans and original source errors.
+Explicit and both contextual callbacks retain raw AST; actual callback execution
+keeps raw_perl rejection/raw1/unready. Ordinary metadata is raw0/unresolved0/ready1.
+No parser node/schema/read-builder/executor field or wider control role is added.
+Independent Rust26.2 follows; full admission stays23.4.

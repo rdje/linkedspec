@@ -1,7 +1,7 @@
 # Inline conditional result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.6; family23.3.26.
-Status: frozen ordinary target; prerequisite26.0 repaired, Perl26.1 bracket expansion next.
+Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1 implemented/targeted-checked; independent Rust26.2 next.
 
 ADR0007 and the current inline-control contract make if/switch value expressions:
 they evaluate the selected payload lazily and yield its actual kind. Existing
@@ -68,3 +68,13 @@ while leaving parent/sibling flags unchanged. Working native/fresh values now ag
 with existing ready metadata. Predicate and two-site-candidate early-return packets
 retain the distinct failures/counterfactuals; the candidate patch binds its epoch.
 No conditional bracket syntax is admitted by this producer repair.
+
+
+## Bounded Perl selection
+
+26.1 passes the parsed Call to the existing static computed-source classifier.
+Only canonical inline if/switch spellings, value-call arity and no attached block
+join the existing read path. Single-operand control_if/control_switch headers,
+marker aliases and unrelated control names stay excluded. The shared fixture and
+finite function-local/missing/Unicode/error/deferred/native/fresh/metadata controls
+pass43 after12/43 RED. No new read builder/getter/schema/executor operation.

@@ -1509,7 +1509,7 @@ sub _user_function_registry_by_name {
 # the semantic value families; trace labels are not a grammar contract. Registered
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
- my ($name, $registry) = @_;
+ my ($name, $registry, $call) = @_;
  my $method = _actionir_ast_known_value_call_method($name);
  if (!defined($method)
      && defined(_user_function_definition_for_name({user_function_registry => $registry}, $name))) {
@@ -1519,6 +1519,14 @@ sub _actionir_ast_computed_data_call_method {
  # These helpers expose list splices rather than one boxed source value.
  return undef if $method =~ /\Aflat(?:_array|_hash)?\z/o;
  return undef if _is_tree_traversal_receiver_method($method);
+ if ($method eq 'if' || $method eq 'switch') {
+  # Only inline value calls join the read grammar; headers and aliases retain
+  # their control roles. The parser owns that distinction before this predicate.
+  return undef unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+   && ($call->{name} // '') eq $method && ($call->{source_method} // $method) eq $method
+   && !$call->{trailing_block_arg} && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} >= 2;
+  return $method;
+ }
  # These read-only context helpers already return boxed Array/Hash snapshots.
  # Other context, cursor and control helpers keep their existing source grammar.
  return $method if $method =~ /\A(?:entry|match)_(?:groups|map|named_map)\z/o;
