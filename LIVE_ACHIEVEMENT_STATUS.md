@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded parser-context function repairs complete; remaining feature selection23.1.8 next.
+Frozen Number reader composition30 selected; independent with-Hash continuation31 owned after30.
 
 ## Latest Completed Slice
 
-Safe Lua independently reproduces six authored function sources on native/plan/fresh per confirmed PUC5.5.1/LuaJIT2.1.1788460057 host, with18 missing-purity negatives and9 healthy explicit-caller controls each. Existing private parser-state table adds only call/entry_slot/gap_span/gap_text/gap_kind, reusing current guard/error/helper_name without persistent chunk locals. All new and prior function-state controls pass on both hosts; luac/loadfile changed module/test/full-runner syntax and normal registration pass. Ordinary parser results/gap values/slot provenance retain exact kinds as explicit arguments; null List context is distinct from real incoming slots. No new API/helper/IR/schema/serialization path. Qualified book/executable caller example, retained host/evidence/target/fact/map/roadmap/task/live/resume align. All five bounded noncatalogued repairs complete; feature selection23.1.8 is next. Stale neutral example29.2.6.6 remains P1 before admission/push after feature/prerequisite work; pressure/Perl registration/declared5.4/full23.4 stay separate; no push.
+Select bounded entry/match Number result composition30 from existing getters/Number/default contracts. Six original/five refined public native/fresh/Value metadata/substitution cases preserve healthy producers/text chains/named Number controls, while direct entry_len default/add leaves host coalesce and match_end_col default/sub fails fresh compilation with raw0/unresolved0/ready1. Native outer null/no ctx error is not success. Literal/bound/getter with-Hash sorted_values failures independently establish separate general continuation owner31, P1 after30. Retain exact readable producers/refinement/channels and initial quoting setup failure without product RED credit. Freeze prospective shared getter/Number/default/String/regex/signed/normalized-prefix fixture with independent offsets/columns; production untouched. Preserve legacy first-consumer/root/malformed and parser/function/callback/deferred/write/copy/flat policies. Scoped book binding workaround/with caveat, new/existing fact routes, corrected current task/card pointers and roadmap/live/resume align. Producer syntax/fixture JSON/book/history/fast continuity are the focused checks; no full suite/population/admission/push. Perl30.1 next; all backend implementation owners split before production.
 
 ## Next Action
 
-Activate feature selection23.1.8 from this clean Lua boundary. Read canonical remaining operation/source/signature inventory, completed targets and relevant book/Knowledge Map. Assess useful readonly entry/match scalar reader flow and other remaining data/result transitions with a few public distinctions only where unresolved; do not assume missing methods or infer completeness from names. Freeze the next justified bounded feature and independent owners before production, preserving callback/parser/deferred/control/list-splice/mutation/copy/error and legacy special-source policies. Compile/quick checks/docs/commit, then implement per leaf. No exhaustive matrix/full suite/admission/push; stale neutral-example29.2.6.6 and pressure/Perl registration/declared5.4/full23.4 remain scheduled.
+Activate Perl Number reader30.1 from this clean selection boundary. Read frozen entry-match-number-results target/fixture, current native Number getter callbacks and MethodLowering source/value owners plus canonical source/Number/default contracts. Reproduce the new target and direct missing/zero/legacy-root/function-fence controls before production. Share existing exact getter expressions with early value lowering rather than changing source/frame/projection/arity/absence/error semantics; preserve all first-consumer/root policies and specific pure-function parser-state diagnostics. Implement only this slice, compile/quick native/fresh/direct checks/book/docs/commit, then independent Rust30.2. Generic with-Hash31 remains separately P1 after30; no full suite/matrix/admission/push, with stale neutral-example29.2.6.6/pressure/Perl registration/declared5.4/full23.4 still owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.8` — Frozen Number reader composition30 selected; independent with-Hash continuation31 owned after30.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5` — All five bounded parser-context function repairs complete; remaining feature selection23.1.8 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4` — Perl/Rust/Dart/Julia noncatalogued parser-context repairs complete; safe Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3` — Perl/Rust/Dart noncatalogued parser-context boundaries repaired; independent Julia next.
@@ -29,7 +30,6 @@ Activate feature selection23.1.8 from this clean Lua boundary. Read canonical re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.5` — All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.3` — Dart readonly input/cursor result guards implemented/targeted-checked; independent Julia27.4 follows.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.27.2` — Rust readonly input/cursor result guards implemented/targeted-checked; independent Dart27.3 follows.
 
 ## History
 

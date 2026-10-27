@@ -14,7 +14,7 @@ answers:
   - how do Julia input reader results retain actual kinds through with
   - why do malformed Lua input readers retain typed arity errors
 date: 2026-10-27
-status: bounded27/28.1/29.1 repairs complete; remaining function boundary29.2 next; full admission separate
+status: bounded27/28.1/29.1 and function parser-state repairs complete; entry-match Number30 selected; full admission separate
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
@@ -134,7 +134,7 @@ legacy []/constructed-Hash fallbacks stay. It repairs eager set_key block keys a
 source/key/value staging, including a real before-to-after key snapshot defect;
 working native/fresh metadata and required/cold helper passthrough controls pass.
 Current mechanism/target belongs to terse-hash-receiver-value-chains.md and
-set-key-operands.md. Capture-name29.1 remains next before admission.
+set-key-operands.md. Static names29.1 and bounded function-state repairs29.2 are now complete; Number reader30 and independently owned with-Hash31 follow from selection23.1.8.
 
 
 29.1 completes ordinary static bare/quoted named capture lowering and explicit
