@@ -504,6 +504,12 @@ sub _lower_direct_nested_access_value_expr {
 sub _emit_guarded_direct_read_expr {
  my ($base_symbol, $segments) = @_;
  return undef unless defined($base_symbol) && $base_symbol =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+ return _emit_guarded_value_read_expr('$'.$base_symbol, $segments)
+}
+
+sub _emit_guarded_value_read_expr {
+ my ($source_expr, $segments) = @_;
+ return undef unless defined($source_expr) && !ref($source_expr) && length($source_expr);
  return undef unless ref($segments) eq 'ARRAY' && @$segments;
  return undef if grep {
   ref($_) ne 'HASH' || ($_->{kind} // '') !~ /\A(?:ARRAY|HASH)\z/o
@@ -515,13 +521,13 @@ sub _emit_guarded_direct_read_expr {
  # rebinds it. Evaluate selectors once, left-to-right, then use only rvalue reads
  # from a compatible retained container. Missing and wrong-kind paths stay null.
  # The generated locals must not shadow authored names or nested lowered locals.
- my $name_source = join(' ', $base_symbol, map { $_->{expr} } @$segments);
+ my $name_source = join(' ', $source_expr, map { $_->{expr} } @$segments);
  my %used_names = map { $_ => 1 } $name_source =~ /([A-Za-z_][A-Za-z0-9_]*)/g;
  my $prefix = '__ls_read';
  $prefix .= '_' while $used_names{$prefix.'_value'} || $used_names{$prefix.'_index'};
  my $cursor = '$'.$prefix.'_value';
  my $selector = '$'.$prefix.'_index';
- my @read_steps = ('my '.$cursor.' = $'.$base_symbol.';', 'my '.$selector.';');
+ my @read_steps = ('my '.$cursor.' = '.$source_expr.';', 'my '.$selector.';');
  foreach my $segment (@$segments) {
   my ($open, $close) = $segment->{kind} eq 'HASH' ? ('{', '}') : ('[', ']');
   push @read_steps, $selector.' = '.$segment->{expr}.';';

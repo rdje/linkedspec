@@ -1154,8 +1154,8 @@ subtest 'standalone AST value statements drop covered values without raw fallbac
     unlike($bad_count, qr/^count\s*\(/, 'malformed covered standalone helper no longer remains as raw host-call text');
 
     my $string_chain = LinkedSpec::call_spec_handler_subst('Top', q{" x ".trim()});
-    like($string_chain, qr/^do \{ do \{ my \$__ls_trim = " x ";.*undef \}$/s,
-        'standalone string receiver chain lowers as a discarded value expression');
+    is_deeply(lowered_observation("no warnings 'void'; ".$string_chain), { value => undef },
+        'standalone string receiver chain executes and discards its value');
     unlike($string_chain, qr/^" x "\.trim\(\)/, 'standalone string receiver chain no longer remains as raw source text');
 
     my $ready_spec = qq{Top::\n /x/ -> Done { trim(" x "); cat("a","b"); " y ".trim() }\nDone::\n /y/\n};
@@ -1292,7 +1292,7 @@ subtest 'fluent_chain value lowering consumes AST nodes' => sub {
 
         my $bad_substr = LinkedSpec::call_spec_handler_subst('Top', q{return("abc".substr())});
         unlike($bad_substr, qr/\breturn\s+substr\s*\(/, 'unsupported covered chain helper no longer lowers to a host substr call');
-        like($bad_substr, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered chain helper leaves diagnostic sentinel');
+        is_deeply(lowered_observation($bad_substr), { value => undef }, 'malformed ordinary substr shape rejects to null');
 
         my $all = join("\n", $numeric, $string_array, $block_array, $hash_array, $number_comparison_continuation, $bad_substr);
         unlike($all, qr/__bad_/, 'AST fluent_chain lowering does not reuse fake chain, call, receiver, or argument source text');
@@ -1390,7 +1390,7 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
 
         my $bad_chain = LinkedSpec::call_spec_handler_subst('Top', q{return(["x", "abc".substr()])});
         unlike($bad_chain, qr/\bsubstr\s*\(/, 'unsupported covered return-payload chain helper does not leak as a host call');
-        like($bad_chain, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr/, 'unsupported covered return-payload chain helper keeps diagnostic sentinel');
+        is_deeply(lowered_observation($bad_chain), { value => ['x', undef] }, 'return payload preserves malformed substr null rejection');
 
         my $unknown_call = LinkedSpec::call_spec_handler_subst('Top', q{return(user_fn("x"))});
         unlike($unknown_call, qr/\breturn\s+user_fn\s*\(/, 'unknown return-payload call does not leak as a host call');

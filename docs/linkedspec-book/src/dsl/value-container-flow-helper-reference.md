@@ -434,9 +434,7 @@ labels and a value expression such as `case(cat(foo, ""), body)` when the case v
 
 ### Copying a container stored in a scalar on Perl
 
-On Perl, a single receiver `.copy()` on a bound working variable preserves its
-runtime container type, just like `copy(name)`. A hash stays a hash, including an
-empty hash; an array stays an array, including an empty array.
+On Perl, a single receiver `.copy()` on a bound working variable preserves its runtime container type, just like `copy(name)`. A hash stays a hash, including an empty hash; an array stays an array, including an empty array.
 
 ```text
 meta = { "k": "v", "nested": [1, 2] };
@@ -451,11 +449,7 @@ The returned value is:
 [{"k":"v","nested":[1,2]}, {}, [1,2]]
 ```
 
-The copy creates a new outer container. Nested array and hash references remain
-shared with the original, matching Perl's function-form `copy(name)` semantics.
-Changing an outer entry of the snapshot therefore leaves the original outer
-container alone; changing a shared nested container can affect both. Ordinary text and
-numeric values produce an empty array through either spelling; logical-result receiver chains reject scalar copy to null.
+The copy creates a new outer container. Nested array and hash references remain shared with the original, matching Perl's function-form `copy(name)` semantics. Changing an outer entry of the snapshot therefore leaves the original outer container alone; changing a shared nested container can affect both. Ordinary text and numeric values produce an empty array through either spelling; logical-result receiver chains reject scalar copy to null.
 
 Examples:
 
@@ -472,9 +466,15 @@ set(value, "token");
 return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 ```
 
-Use `binding[index]` or nested access when the base is a working binding that holds an array/hash payload.
-Direct computed-source reads such as `"a,b,c".split(",")[-2].uppercase()` are planned under computed-value selection; current Perl requires an intermediate binding.
-The older path-helper spelling is retirement-bound; new specs and examples should use direct nested access.
+Use `binding[index]` or nested access for a working Array/Hash binding; older path helpers are retirement-bound.
+
+Perl also supports brackets on fluent results, Array/Hash literals and immediate blocks. The source evaluates once, selectors run left-to-right, and the selected value keeps its type for compatible methods. Reads do not create storage; missing/out-of-range entries yield undef. Direct helper/function-call results, other backend source shapes and complete portable/context admission are being assessed.
+
+```text
+"a,b,c".split(",")[-2].uppercase()                  # "B"
+{"items":["a","b"]}["items"][-1].uppercase()       # "B"
+[[3,1]][0].sorted().last().add(1)                  # 4
+```
 
 Example:
 

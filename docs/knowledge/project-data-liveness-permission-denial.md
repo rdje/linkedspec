@@ -11,7 +11,7 @@ answers:
   - does the run wrapper verify child process group establishment
   - can a warned managed child still have the expected process group
   - why did the Lua consumer return correct JSON with unexpected stderr
-date: 2026-09-20
+date: 2026-10-27
 status: confirmed defect; repair pending under SESSION-STARTUP-READING.7
 tags: [storage, cleanup, process, liveness, permissions, sandbox, defect]
 evidence: "SESSION-STARTUP-READING.6 at source d6d3c890c2e4aa49747879b2db227f2577db0fb6 launches a managed 45-second sleep. Same-run restricted list reports abandoned and permitted list reports live. Restricted kill-zero on wrapper 91044, child 91271, and group -91271 returns zero with errno 1 / EPERM; permitted ps shows both alive at 27 seconds and all three kill-zero probes succeed. The wrapper exits 0 and final permitted list finds zero leftovers. No recover/purge/deletion probe runs."
@@ -110,3 +110,14 @@ the observation into this existing repair owner; no wrapper or Lua engine fix is
 claimed. Do not suppress the warning to pass a consumer check. Recovery/purge stay
 prohibited. Exact raw streams and group observations are retained in
 .linkedspec-data/scratch/backend-integration53, including state.json and group-probe.json.
+
+## October 27: focused commit-guard recurrence
+
+TYPE24.1.1 fast validation emits the known child setpgid warning for children
+37469 and42122 while memory/cadence/acceptance guards complete. Required guard
+output and selected test/book artifacts are independently inspected; no process-
+group identity was captured for these children, so no establishment/lifecycle
+claim follows. SESSION7 still owns the repair. No recovery/purge runs. Completed guard/test artifacts remain under
+.linkedspec-data/verification/computed-selection-noncall-*; warning texts/PIDs
+are recorded here from tool output. This adds no new root cause and does not
+change the feature test results.

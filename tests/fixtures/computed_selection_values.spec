@@ -23,5 +23,11 @@ Top:: I {
   absent=[missing,order];
   order="";
   rejected={order=cat(order,"S");[false]}[0].take({order=cat(order,"A");1});
-  return([basics,kinds,snapshot,absent,[rejected,order]]);
+  bridges=[
+    [[3,1]][0].sorted().last().add(1),
+    [{"b":2,"a":1}][0].sorted_keys().last().uppercase(),
+    [undef][0].coalesce([7]).first().add(1),
+    [false][0].not().cat("!")
+  ];
+  return([basics,kinds,snapshot,absent,[rejected,order],bridges]);
 }

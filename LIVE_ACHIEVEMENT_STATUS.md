@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
+Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
 
 ## Latest Completed Slice
 
-Public Perl Get/fresh intake distinguishes working named signed/typed selected controls from five computed sources that fail rule_handler_compile/raw bracket host syntax: pure call, fluent call, Array/Hash literal and block. Retain exact probe/observations and a bounded normative fixture. Freeze additive read-only computed-selection.md: existing typed value_access, once-only receiver then ordered selectors/consumer, real entry kinds, signed in-range positions, null missing/wrong-kind reads, compatible result chains and source snapshots. No new helper/type, computed lvalue, grouping, dynamic Hash-key/coercion, copy-depth/domain or deferred/context admission. Canonical existing source owners show the general Perl typed path is missing; other backends already carry value_access and need independent source-shape assessment. Own family24.1-.5 before production, Perl first, splitting if needed. Current book explicitly qualifies working-binding versus planned computed selection; new canonical fact/map/roadmap/task/live pointer align. Probe syntax/authored controls/book/history/continuity only; full admission23.4 remains later and copy decision4.2.2 stays pending.
+Perl typed value_access now supports fluent/literal/immediate-block reads and bracket-method alternation through shared guarded rvalue emission, preserving selected kinds, signed positions, snapshots/ordered effects and function-local source/selector writes. Direct-call sources remain on their prior paths: candidate recognition changed frozen callable float/string counts0 to2/null and raw markers1 to0. Excluding direct calls restores all four frozen values1/2/0/0 and raw1; retained intake/original producer records the distinction. Parent24.1 stays open;24.1.2 owns safe pure/helper/function call indexing before full Perl target/Rust handoff. Bounded strict native/fresh noncall test PASS36, frozen callable compatibility PASS5 top-level and parser component PASS24; direct selected-scalar/container/indexed-book PASS36, module syntax and representative zero-fallback readiness pass. Three old parser assertions independently fail with clean-base producers; ea6f82c2a/current String contract justify semantic-oracle repairs, component GREEN. Book/contract/fixtures/fact/map/roadmap/task/live pointer align. No complete computed-call, callback/grouping/lvalue/copy/deferred/context/portable or canonical admission claim; copy choice4.2.2 remains pending.
 
 ## Next Action
 
-Activate Perl computed-value read selection24.1 against computed-selection.md and authored shared fixture. Inspect AST construction/provenance and existing CodeblockRuntime::read_path; preserve bare-binding/signed/callable/grouping/copy domains. Add typed postfix source selection/lowering and actual-result continuations with small native/fresh and direct selected/signed checks; split before edits if scope grows. Then independent Rust/Dart/Julia/safe Lua. Copy-domain4.2.2 awaits the director; no implicit copy change.
+Activate Perl direct computed-call child24.1.2 before Rust24.2. Preserve all four frozen callable-result values/readers/coercions/count-on-missing/raw1 while adding statically owned pure/helper/typed-function call indexing. Read canonical callable provenance, result reader and raw-dependency classification owners before changes; full computed_selection_values fixture remains required. Split safe implementation children before edits if needed. No callback/metadata/copy/deferred or format promotion; copy-domain4.2.2 awaits director decision. Focused native/fresh/descriptor/compile/docs/commit only.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.1` — Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.4` — Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.1` — Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.5` — Safe Lua logical receiver methods targeted-checked; all five bounded family23 backends complete; scalar-copy domains next.
@@ -29,7 +30,6 @@ Activate Perl computed-value read selection24.1 against computed-selection.md an
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.2` — Perl22.1 producer and receiver bridge are repaired/targeted-checked; independent Rust22.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` — Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.2` — Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.21.5` — All bounded reduction accumulator result implementations21 are targeted-checked on recorded routes/hosts; next ordinary fluent selection23.1.2. Error-phase/pressure/full admission prerequisites remain open.
 
 ## History
 

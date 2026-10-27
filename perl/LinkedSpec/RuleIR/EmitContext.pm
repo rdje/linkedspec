@@ -2363,8 +2363,12 @@ sub _collect_auto_working_var_decls {
    return;
   }
 
-  if ($kind eq 'nested_access') {
-   $record->('$', $node->{base});
+  if ($kind eq 'nested_access' || $kind eq 'value_access') {
+   if ($kind eq 'value_access') {
+    $collect_ast_node_refs->($node->{receiver}, 1);
+   } else {
+    $record->('$', $node->{base});
+   }
    foreach my $segment (@{$node->{segments} || []}) {
     next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
     $collect_ast_node_refs->($segment->{expr}, 1);

@@ -1066,9 +1066,12 @@ sub _actionir_ast_value_source_expr {
   return undef unless defined($index) && length($index);
   return $node->{name}.'['.$index.']'
  }
- if ($kind eq 'nested_access') {
-  return undef unless defined($node->{base}) && $node->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
-  my $expr = $node->{base};
+ if ($kind eq 'nested_access' || $kind eq 'value_access') {
+  return undef if $kind eq 'nested_access'
+   && !(defined($node->{base}) && $node->{base} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o);
+  my $expr = $kind eq 'value_access'
+   ? _actionir_ast_value_source_expr($node->{receiver}) : $node->{base};
+  return undef unless defined($expr) && length($expr);
   foreach my $segment (@{$node->{segments} || []}) {
    return undef unless ref($segment) eq 'HASH';
    if (($segment->{kind} // '') eq 'key') {
@@ -1836,8 +1839,12 @@ sub _user_function_collect_local_decls_from_node {
   return;
  }
 
- if ($kind eq 'nested_access') {
-  _user_function_record_local_decl($decls, $params, '$', $node->{base});
+ if ($kind eq 'nested_access' || $kind eq 'value_access') {
+  if ($kind eq 'value_access') {
+   _user_function_collect_local_decls_from_node($node->{receiver}, $decls, $params);
+  } else {
+   _user_function_record_local_decl($decls, $params, '$', $node->{base});
+  }
   foreach my $segment (@{$node->{segments} || []}) {
    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
    _user_function_collect_local_decls_from_node($segment->{expr}, $decls, $params);
@@ -2148,7 +2155,11 @@ sub _actionir_ast_first_unknown_value_call_name {
   return _actionir_ast_first_unknown_value_call_name($node->{index}, $deps)
  }
 
- if ($kind eq 'nested_access') {
+ if ($kind eq 'nested_access' || $kind eq 'value_access') {
+  if ($kind eq 'value_access') {
+   my $unknown = _actionir_ast_first_unknown_value_call_name($node->{receiver}, $deps);
+   return $unknown if defined($unknown) && length($unknown);
+  }
   foreach my $segment (@{$node->{segments} || []}) {
    next unless ref($segment) eq 'HASH' && ($segment->{kind} // '') eq 'index';
    my $unknown = _actionir_ast_first_unknown_value_call_name($segment->{expr}, $deps);
@@ -3827,9 +3838,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return undef unless defined($index_expr) && length($index_expr);
    return $node->{name}.'['.$index_expr.']';
   }
-  if ($kind eq 'nested_access') {
-   return undef unless defined($node->{base}) && length($node->{base});
-   my $expr = $node->{base};
+  if ($kind eq 'nested_access' || $kind eq 'value_access') {
+   my $expr = $kind eq 'value_access' ? $ast_expr_source_node->($node->{receiver}) : $node->{base};
+   return undef unless defined($expr) && length($expr);
    foreach my $segment (@{$node->{segments} || []}) {
     my $segment_kind = $segment->{kind} // '';
     if ($segment_kind eq 'key') {
@@ -4370,6 +4381,28 @@ my $lower_numeric_array_reducer_source_expr = sub {
    if $kind eq 'assign_scalar' || $kind eq 'assign_array_append' || $kind eq 'assign_hash_index' || $kind eq 'assign_nested_access';
   return $lower_ast_direct_access_node->($node)
    if $kind eq 'indexed_var' || $kind eq 'nested_access';
+  if ($kind eq 'value_access') {
+   my $receiver = $lower_ast_value_node->($node->{receiver}, { bare_scalar_read => 1 });
+   return undef unless defined($receiver) && length($receiver);
+   my @segments;
+   foreach my $segment (@{$node->{segments} || []}) {
+    my $segment_kind = $segment->{kind} // '';
+    my $expression;
+    if ($segment_kind eq 'key') {
+     $expression = _actionir_ast_quote_string_source($segment->{value}, '"');
+    } elsif ($segment_kind eq 'index') {
+     $expression = $lower_ast_value_node->($segment->{expr}, { bare_scalar_read => 1 });
+    } else {
+     return undef;
+    }
+    return undef unless defined($expression) && length($expression);
+    push @segments, { kind => $segment_kind eq 'key' ? 'HASH' : 'ARRAY', expr => $expression };
+   }
+   return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+    __PACKAGE__, 'LinkedSpec::ActionIR::ValueExpr', '_emit_guarded_value_read_expr',
+    $receiver, \@segments,
+   );
+  }
   if ($kind eq 'array_literal') {
    my @lowered_items;
    foreach my $item (@{$node->{items} || []}) {
@@ -5154,7 +5187,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $scalar_string_chain = $first_method !~ /^(?:push_front|push_back|pop_front|pop_back)$/o
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '') } @$calls)
    && (grep { _is_scalar_string_receiver_value_chain_method($_->{method} // '') } @$calls);
-  my $emitted_result_chain = $defined_default_chain || $scalar_string_chain;
+  my $emitted_result_chain = $defined_default_chain || $scalar_string_chain
+   || ($receiver->{kind} // '') eq 'value_access';
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
     ? $lower_ast_logical_call_node->($receiver)

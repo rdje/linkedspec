@@ -79,3 +79,33 @@ independently assess source/literal/block/interleaving support and repair bounde
 gaps. Strict native/generated routes and direct selected/signed controls suffice
 per ordinary child; complete source-domain/context/portable/canonical admission
 remains23.4 after feature coverage. Existing copy-domain decision4.2.2 stays pending.
+
+## Bounded Perl noncall implementation and direct-call prerequisite
+
+24.1.1 adds typed postfix selection from fluent/literal/immediate-block sources,
+shared guarded rvalue emission and actual-result/visitor routing. Bounded noncall
+native/fresh regression PASS36; parser PASS24 and direct selected/indexed PASS36.
+Function-local source/selector writes, source snapshots, ordered missing-path
+selectors, result guards, AST/spans and quote/regex boundaries pass. A representative
+noncall descriptor remains ready with zero raw/unresolved/compatibility fallback.
+The complete fixture stays unchanged in its required call/function source cases;
+computed_selection_noncall_values is the explicit subset for this first child.
+
+The initial broader candidate passes its new value fixture but changes existing
+frozen callable result_path_float0 to2, result_path_string0 to null and raw1 to0.
+General guarded Array reads bypass the prior CodeblockRuntime::read_path coercion
+boundary; actual-kind guards also change count-on-missing. Recognition alone would
+promote raw status. Excluding direct Call receivers restores all four frozen
+values1/2/0/0 and raw1, with permanent native/fresh/descriptor compatibility tests.
+computed-callable-compat-intake.json retains actual RED/restored observations and
+the original producer/frozen input selection. Parent24.1 stays open;24.1.2 must
+distinguish statically owned pure/functions from legacy callable paths without
+changing their values, lookup, reader or metadata. Full Perl fixture/Rust handoff
+requires that second child; no reduced full-target or callback admission claim.
+
+Three parser assertions also remained stale after scalar String19.1. Exact base
+producers reproduce their old trim-layout/substr-sentinel failures; ea6f82c2a and
+the current String contract justify executed semantic oracles. Retained public
+probe_parser_expectation_baseline.pl/JSON reconstructs the three original modules.
+The first -I-only overlay was rejected when bootstrap selected working modules;
+explicit require/standard %INC aliases establish the historical baseline.

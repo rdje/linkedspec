@@ -469,6 +469,9 @@ sub _parse_expr {
  my $receiver_mutation = _parse_receiver_mutation_expr($trimmed, $start, $end);
  return $receiver_mutation if $receiver_mutation;
 
+ my $access = _parse_value_access_expr($trimmed, $start, $end);
+ return $access if $access;
+
  my $chain = _parse_fluent_chain_expr($trimmed, $start, $end);
  return $chain if $chain;
 
@@ -1579,20 +1582,57 @@ sub _parse_receiver_mutation_expr {
  )
 }
 
+sub _parse_value_access_expr {
+ my ($text, $start, $end) = @_;
+ return undef unless substr($text, -1, 1) eq ']';
+ my $state = _new_scan_state();
+ for (my $idx = 0; $idx < length($text); ++$idx) {
+  my $ch = substr($text, $idx, 1);
+  if ($idx > 0 && $ch eq '[' && _scan_is_top_level($state)
+   && !$state->{in_single_quote} && !$state->{in_double_quote} && !$state->{in_slash_quote}) {
+   my $segments = _parse_access_segments($text, $idx, $start);
+   if (ref($segments) eq 'ARRAY' && @$segments) {
+    my ($prefix, $prefix_start, $prefix_end) = _trim_with_offsets(substr($text, 0, $idx), $start);
+    my $receiver = _parse_expr($prefix, $prefix_start, $prefix_end);
+    # Keep named, direct-call and grouped reads on their existing paths.
+    if (($receiver->{kind} // '') =~ /\A(?:fluent_chain|array_literal|hash_literal|block_value|value_access)\z/o) {
+     return _node('value_access', $text, $start, $end,
+      receiver => $receiver, segments => $segments);
+    }
+   }
+  }
+  _consume_scan_char($state, $text, $idx, $ch);
+ }
+ return undef
+}
+
 sub _parse_fluent_chain_expr {
  my ($trimmed, $start, $end) = @_;
  my $segments = _split_top_level_fluent_segments($trimmed);
  return undef unless ref($segments) eq 'ARRAY' && @$segments > 1;
 
- my $receiver_seg = $segments->[0];
- my $receiver = _parse_expr_without_chain(
-  $receiver_seg->{text},
-  $start + $receiver_seg->{start},
-  $start + $receiver_seg->{end},
- );
+ my ($receiver, $first_call);
+ # A bracket may follow any completed producer chain. Select the last such
+ # prefix so later methods consume its typed result; recursion handles earlier
+ # method/bracket alternations without synthesizing authored source.
+ for (my $idx = $#$segments; $idx > 0; --$idx) {
+  my $prefix_end = $segments->[$idx - 1]{end};
+  next unless substr($trimmed, $prefix_end - 1, 1) eq ']';
+  $receiver = _parse_value_access_expr(substr($trimmed, 0, $prefix_end), $start, $start + $prefix_end);
+  if ($receiver) { $first_call = $idx; last; }
+ }
+ unless ($receiver) {
+  my $receiver_seg = $segments->[0];
+  $receiver = _parse_expr_without_chain(
+   $receiver_seg->{text},
+   $start + $receiver_seg->{start},
+   $start + $receiver_seg->{end},
+  );
+  $first_call = 1;
+ }
 
  my @calls;
- for (my $idx = 1; $idx < @$segments; ++$idx) {
+ for (my $idx = $first_call; $idx < @$segments; ++$idx) {
   my $seg = $segments->[$idx];
   my $call = _parse_fluent_call_segment(
    $seg->{text},

@@ -1,0 +1,31 @@
+{
+   "base_commit" : "b4afbe7bc2897e90b898f844e4dfacd2da5a1425",
+   "modules" : {
+      "LinkedSpec/ActionIR/AST/Parser.pm" : "./.linkedspec-data/verification/parser-expectation-baseline/perl/LinkedSpec/ActionIR/AST/Parser.pm",
+      "LinkedSpec/ActionIR/MethodLowering.pm" : "./.linkedspec-data/verification/parser-expectation-baseline/perl/LinkedSpec/ActionIR/MethodLowering.pm",
+      "LinkedSpec/ActionIR/ValueExpr.pm" : "./.linkedspec-data/verification/parser-expectation-baseline/perl/LinkedSpec/ActionIR/ValueExpr.pm"
+   },
+   "observations" : [
+      {
+         "error" : "",
+         "lowered" : "do { do { my $__ls_selected_default = do { my $__ls_scalar_source = \" x \"; $__ls_scalar_source }; do { my $__ls_trim = $__ls_selected_default; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } }; undef }",
+         "source" : "\" x \".trim()",
+         "value" : null
+      },
+      {
+         "error" : "",
+         "lowered" : "return undef",
+         "source" : "return(\"abc\".substr())",
+         "value" : null
+      },
+      {
+         "error" : "",
+         "lowered" : "return [do { my @__ls_evaluated_values = (\"x\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (undef); @__ls_evaluated_values }]",
+         "source" : "return([\"x\",\"abc\".substr()])",
+         "value" : [
+            "x",
+            null
+         ]
+      }
+   ]
+}

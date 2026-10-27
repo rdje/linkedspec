@@ -1,0 +1,79 @@
+{
+  "candidate_red": [
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 1,
+      "id": "control/result_path_positive",
+      "raw": 0,
+      "value": 1
+    },
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 2,
+      "id": "control/result_path_negative",
+      "raw": 0,
+      "value": 2
+    },
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 0,
+      "id": "control/result_path_float",
+      "raw": 0,
+      "value": 2
+    },
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 0,
+      "id": "control/result_path_string",
+      "raw": 0,
+      "value": null
+    }
+  ],
+  "historical_probe_source": "use strict;use warnings;use JSON::PP ();use LinkedSpec ();\n$|=1;open my $f,'<','tests/numeric-codeblocks/signed-array-selectors.json' or die $!;local $/;my $plan=JSON::PP->new->decode(<$f>);\nfor my $c (@{$plan->{cases}}) {next unless $c->{id}=~m{control/result_path_};my $s=$c->{source};my %ctx;my $p=LinkedSpec::Get(\\$s,runtime_ctx_ref=>\\%ctx);my $in='x';my $v=$p->(\\$in);my $d=LinkedSpec::Get(\\$s,return_descriptor=>1);my $m=$d->{spec}{Top}{meta}{action_rewriter};print JSON::PP->new->canonical->encode({id=>$c->{id},value=>$v,expected=>$c->{expected},error=>$ctx{last_error},raw=>$m->{raw_perl_dependency_count},compatibility=>$m->{compatibility_surface_count}}),\"\\n\";}\n",
+  "input": "tests/numeric-codeblocks/signed-array-selectors.json",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.24.1.1",
+  "regression_control": {
+    "bounded_receiver_kinds": "fluent_chain|array_literal|hash_literal|block_value|value_access",
+    "candidate_receiver_kinds": "call|fluent_chain|array_literal|hash_literal|block_value|value_access",
+    "path": "perl/LinkedSpec/ActionIR/AST/Parser.pm"
+  },
+  "restored": [
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 1,
+      "id": "control/result_path_positive",
+      "raw": 1,
+      "value": 1
+    },
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 2,
+      "id": "control/result_path_negative",
+      "raw": 1,
+      "value": 2
+    },
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 0,
+      "id": "control/result_path_float",
+      "raw": 1,
+      "value": 0
+    },
+    {
+      "compatibility": 0,
+      "error": null,
+      "expected": 0,
+      "id": "control/result_path_string",
+      "raw": 1,
+      "value": 0
+    }
+  ],
+  "selection": "control/result_path_*"
+}
