@@ -65,7 +65,7 @@ num_add(1,2).copy().add(1)                  # 4
 3. Perl context1.3 preserved/targeted-checked: independently assess already-supported interpreted copy helper
    and method paths; fix only actual scalar/result drift without vocabulary or
    callable-origin/depth changes. Close as preserved if already healthy.
-4. Rust2, Dart3, Julia4, safe Lua5 independently assess function/method/scalar-result
+4. Rust2 implemented/targeted-checked; Dart3, Julia4, safe Lua5 independently assess function/method/scalar-result
    and scope/shape/snapshot controls before changes. Lua uses only safe named
    PUC5.5.1/LuaJIT fixtures; declared5.4/full runner remain separate.
 
@@ -82,3 +82,13 @@ origin guards remain. Its wrong-kind take returns[] and skips its count operand,
 retaining that executor's prior method policy. Recursive container copying remains
 source-observed at CodeblockRuntime::_copy_value; returned equal JSON alone is not
 used as depth/identity evidence because invocation/container boundaries also copy.
+
+Rust2 preserves primitive values by cloning the captured RuntimeValue for valid
+one-source calls; old empty/extra free-call behavior and Codeblock fallback remain.
+Copy uses generic typed receiver dispatch; copied-result continuations guard the
+actual kind before every incompatible Array/Hash operand, including subsequent
+bridges and with/logical prefixes. Named rule accumulator copying and recursive
+container cloning remain. value_copy.rs uses the shared value_copy_values fixtures
+plus finite source/shape/selector/legacy controls on native/restored/generated-plan
+routes. Only the old scalar/missing/with-copy expectations advance under ADR0138.
+No AST/type/wire-format, new callable-copy domain or complete context admission.

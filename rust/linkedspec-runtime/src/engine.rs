@@ -6014,23 +6014,23 @@ impl Engine {
                     return self
                         .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
                 }
-                if calls.first().is_some_and(|call| {
-                    Self::is_generic_receiver_predicate(&call.method)
-                        || (call.method == "copy"
-                            && calls.get(1).is_some_and(|next| {
-                                Self::is_generic_receiver_predicate(&next.method)
-                            }))
-                }) {
+                if matches!(receiver.as_ref(), Expr::Call { name, .. } if name == "copy") {
+                    let current = self.eval_expr(receiver, ctx, rule_label)?;
+                    return self.eval_copied_receiver_value_chain(current, calls, ctx, rule_label);
+                }
+                if calls
+                    .first()
+                    .is_some_and(|call| Self::is_generic_receiver_value_method(&call.method))
+                {
                     let current = self.eval_expr(receiver, ctx, rule_label)?;
                     return self.eval_selected_receiver_value_chain(
                         current, calls, false, ctx, rule_label,
                     );
                 }
-                if calls.first().is_some_and(|call| {
-                    Self::is_hash_receiver_value_chain_method(&call.method)
-                        && (call.method != "copy"
-                            || Self::copy_receiver_starts_hash_chain(receiver, calls, ctx))
-                }) {
+                if calls
+                    .first()
+                    .is_some_and(|call| Self::is_hash_receiver_value_chain_method(&call.method))
+                {
                     return self.eval_hash_receiver_value_chain(receiver, calls, ctx, rule_label);
                 }
                 if calls
@@ -6355,34 +6355,6 @@ impl Engine {
         matches!(method, "count_keys" | "has_key" | "reduce_leaves")
     }
 
-    fn copy_receiver_starts_hash_chain(
-        receiver: &linkedspec_core::expr::Expr,
-        calls: &[linkedspec_core::expr::FluentCall],
-        ctx: &RuntimeContext,
-    ) -> bool {
-        use linkedspec_core::expr::Expr;
-
-        match receiver {
-            Expr::Variable { name } => match ctx.bare_kind(name) {
-                Some(RuntimeVarKind::Hash) => return true,
-                Some(RuntimeVarKind::Array) => return false,
-                _ => {}
-            },
-            _ => {}
-        }
-
-        if let Some(next) = calls.get(1) {
-            if Self::is_hash_receiver_value_chain_method(&next.method) {
-                return true;
-            }
-            if Self::is_array_receiver_value_chain_method(&next.method) {
-                return false;
-            }
-        }
-
-        false
-    }
-
     fn is_string_receiver_value_chain_method(method: &str) -> bool {
         Self::is_string_receiver_string_returning_method(method)
             || Self::is_string_receiver_array_returning_method(method)
@@ -6597,6 +6569,7 @@ impl Engine {
         let mut current = self.eval_expr(receiver, ctx, rule_label)?;
         let mut reduced_value = false;
         let mut logical_prefix = false;
+        let mut copied_value = matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
         for (index, call) in calls.iter().enumerate() {
             if Self::is_receiver_with_trailing_block_call(call)
@@ -6608,19 +6581,11 @@ impl Engine {
                 continue;
             }
 
-            // Logical scalar results need an explicit container bridge for copy.
-            // Preserve the existing reduction-only copy policy.
-            if logical_prefix
-                && call.method == "copy"
-                && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_))
-            {
-                return Ok(RuntimeValue::Undef);
-            }
             // Guard actual kinds after reductions and logical methods before
             // evaluating incompatible container operands, preserving the prefix.
-            if (reduced_value || logical_prefix)
+            if (reduced_value || logical_prefix || copied_value)
                 && call.method != "copy"
-                && !Self::is_generic_receiver_predicate(&call.method)
+                && !Self::is_generic_receiver_value_method(&call.method)
             {
                 let method = call.method.as_str();
                 let array_only = Self::is_array_receiver_value_chain_method(method)
@@ -6634,16 +6599,15 @@ impl Engine {
                 }
             }
 
-            let next_call = calls.get(index + 1);
             current = self.eval_receiver_dynamic_value_chain_call(
                 current,
                 call,
-                next_call,
                 index + 1 == calls.len(),
                 ctx,
                 rule_label,
             )?;
             logical_prefix |= matches!(call.method.as_str(), "and" | "or" | "not");
+            copied_value |= call.method == "copy";
         }
 
         Ok(current)
@@ -6899,7 +6863,6 @@ impl Engine {
                 current = self.eval_receiver_dynamic_value_chain_call(
                     current,
                     call,
-                    calls.get(index + 1),
                     index + 1 == calls.len(),
                     ctx,
                     rule_label,
@@ -7309,29 +7272,15 @@ impl Engine {
         &self,
         current: RuntimeValue,
         call: &linkedspec_core::expr::FluentCall,
-        next_call: Option<&linkedspec_core::expr::FluentCall>,
         is_last: bool,
         ctx: &mut RuntimeContext,
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         let method = call.method.as_str();
 
-        if Self::is_generic_receiver_predicate(method) {
+        if Self::is_generic_receiver_value_method(method) {
             let (raw_args, values) = self.receiver_call_args(current, call, ctx, rule_label)?;
             return self.call_helper_with_args(method, &raw_args, &values, ctx, rule_label);
-        }
-
-        if method == "copy" {
-            if matches!(current, RuntimeValue::Hash(_))
-                || next_call
-                    .is_some_and(|next| Self::is_hash_receiver_value_chain_method(&next.method))
-            {
-                return self.eval_hash_receiver_dynamic_value_call(
-                    current, call, is_last, ctx, rule_label,
-                );
-            }
-            return self
-                .eval_array_receiver_dynamic_value_call(current, call, is_last, ctx, rule_label);
         }
 
         if Self::is_hash_receiver_value_chain_method(method) {
@@ -7522,10 +7471,17 @@ impl Engine {
             || Self::is_scalar_result_receiver_method(method)
     }
 
-    fn is_generic_receiver_predicate(method: &str) -> bool {
+    fn is_generic_receiver_value_method(method: &str) -> bool {
         matches!(
             method,
-            "is_empty" | "is_nonempty" | "is_defined" | "is_undefined" | "and" | "or" | "not"
+            "is_empty"
+                | "is_nonempty"
+                | "is_defined"
+                | "is_undefined"
+                | "and"
+                | "or"
+                | "not"
+                | "copy"
         )
     }
 
@@ -7582,10 +7538,18 @@ impl Engine {
         rule_label: &str,
     ) -> Result<RuntimeValue, String> {
         for (index, call) in calls.iter().enumerate() {
+            if call.method == "copy" {
+                return self.eval_copied_receiver_value_chain(
+                    current,
+                    &calls[index..],
+                    ctx,
+                    rule_label,
+                );
+            }
             // Scalar producers retain the incompatible-array boundary
             // until a compatible helper explicitly returns a container.
             if scalar_result
-                && !Self::is_generic_receiver_predicate(&call.method)
+                && !Self::is_generic_receiver_value_method(&call.method)
                 && !Self::is_string_receiver_value_chain_method(&call.method)
                 && !Self::is_number_receiver_value_chain_method(&call.method)
             {
@@ -7594,13 +7558,46 @@ impl Engine {
             current = self.eval_receiver_dynamic_value_chain_call(
                 current,
                 call,
-                calls.get(index + 1),
                 index + 1 == calls.len(),
                 ctx,
                 rule_label,
             )?;
             scalar_result = (scalar_result || Self::is_scalar_result_receiver_method(&call.method))
                 && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
+        }
+        Ok(current)
+    }
+
+    // Copy preserves the source kind. Its continuations must validate that
+    // actual kind before evaluating container-only operands, including after
+    // a later scalar/default/container bridge changes the value again.
+    fn eval_copied_receiver_value_chain(
+        &self,
+        mut current: RuntimeValue,
+        calls: &[linkedspec_core::expr::FluentCall],
+        ctx: &mut RuntimeContext,
+        rule_label: &str,
+    ) -> Result<RuntimeValue, String> {
+        for (index, call) in calls.iter().enumerate() {
+            let method = call.method.as_str();
+            if !Self::is_generic_receiver_value_method(method) {
+                let array_only = Self::is_array_receiver_value_chain_method(method)
+                    && !Self::is_string_receiver_value_chain_method(method)
+                    && !(matches!(method, "min" | "max") && !call.args.is_empty());
+                let hash_only = Self::is_hash_receiver_value_chain_method(method);
+                if (array_only && !matches!(current, RuntimeValue::Array(_)))
+                    || (hash_only && !matches!(current, RuntimeValue::Hash(_)))
+                {
+                    return Ok(RuntimeValue::Undef);
+                }
+            }
+            current = self.eval_receiver_dynamic_value_chain_call(
+                current,
+                call,
+                index + 1 == calls.len(),
+                ctx,
+                rule_label,
+            )?;
         }
         Ok(current)
     }
@@ -7632,7 +7629,7 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_generic_receiver_predicate(&call.method) {
+            if Self::is_generic_receiver_value_method(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
@@ -7727,7 +7724,7 @@ impl Engine {
             if family == ReceiverFamily::Terminal {
                 return Ok(RuntimeValue::Undef);
             }
-            if Self::is_generic_receiver_predicate(&call.method) {
+            if Self::is_generic_receiver_value_method(&call.method) {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
@@ -7856,7 +7853,7 @@ impl Engine {
             }
             let numeric_method = family == ReceiverFamily::String
                 && Self::is_number_receiver_value_chain_method(&call.method);
-            if Self::is_generic_receiver_predicate(&call.method) || numeric_method {
+            if Self::is_generic_receiver_value_method(&call.method) || numeric_method {
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index..],
@@ -8554,6 +8551,14 @@ impl Engine {
                     match arg {
                         RuntimeValue::Array(a) => Ok(RuntimeValue::Array(a.clone())),
                         RuntimeValue::Hash(h) => Ok(RuntimeValue::Hash(h.clone())),
+                        RuntimeValue::Bool(_)
+                        | RuntimeValue::Number(_)
+                        | RuntimeValue::Scalar(_)
+                        | RuntimeValue::Undef
+                            if args.len() == 1 =>
+                        {
+                            Ok(arg.clone())
+                        }
                         _ => {
                             let arr_name = self.resolve_array_target(raw_args, arg, true);
                             if !arr_name.is_empty() {

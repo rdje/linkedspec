@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl existing interpreted free copy1.3 is preserved/targeted-checked; all bounded Perl copy children complete. Independent Rust2 is next.
+Rust copy2 preserves primitive values and actual-kind consumers; strict native/restored/plan and direct focused tests pass. Dart3 is next.
 
 ## Latest Completed Slice
 
-Independent public native/fresh interpreted-copy assessment passes without runtime edits. Existing free copy preserves primitive/null kinds and source snapshots; deferred receiver copy remains unknown_helper/copy and its malformed free signature policy is retained. New test PASS10 covers literals/names/results/Unicode/null,0!/7/2 snapshots, wrong-Array count suppression, typed Number/String write distinction, original logical source errors and copied-callable recursion-origin rejection. Existing recursive container copying stays source-qualified rather than inferred from equal returned JSON or ordinary shallow-copy proof. Direct computed deferred-boundary regression PASS22 and new test syntax/book/history/fast staged continuity pass. Current book/catalog/copy target/facts/map/roadmap/task/live align; no new deferred vocabulary, depth/origin policy, full CI or context/portable admission is claimed. All bounded Perl copy children complete; independent Rust2 is next, with new Perl canonical registrations mandatory23.4.1 before admission/push.
+Rust valid one-source copy preserves captured Bool/Number/String/null without target-name lookup; empty/extra free-call policies and Codeblock fallback remain. Generic receiver copy and a dedicated copied-result dispatcher retain actual kinds before incompatible Array/Hash operands, including subsequent bridges; with/logical prefixes drop only the approved scalar-copy rejection. Remove obsolete copy lookahead and rename the generic value-method discriminator. Shared strict value/effect fixtures plus native/restored/generated-plan copy tests PASS6 after actual selector-Array and wrong-container AKV RED; legacy accumulator, String payload/typed selector, source snapshots/scopes, malformed signatures and container controls retain their expectations. Final focused Cargo selection PASS15 including direct arity/logical/selected suites; changed Rust compiles/formats and book/history/fast staged continuity pass. Only superseded receiver text/missing/with-copy expectations advance under ADR0138. No type/schema, callable-copy rights, unrelated consumer normalization, full suite or complete context/portable admission. Book/current facts/map/roadmap/task/live align; Dart3 independently assesses next.
 
 ## Next Action
 
-Activate Rust scalar/null value-copy2 from the clean completed Perl rollout. Consult canonical Rust copy/scalar-result facts; independently observe function/method/prior-result values and actual-kind/shape/snapshot controls through native/restored/plan before changes. Preserve recursive container copying, source/errors, callable/context/serialization bounds and malformed free signatures. Implement/compile/quick targeted checks/docs/commit, then Dart3/Julia4/safe Lua5. No full suite, direct computed-call pivot or push.
+Activate Dart scalar/null value-copy3 from the clean Perl/Rust rollout. Consult canonical Dart copy/result facts and independently run the shared value-copy fixture plus finite method/shape/source/snapshot/typed selector/container controls on native/restored/plan before changes. Preserve healthy primitive production, recursive copying, free malformed policies and callable/context/serialization bounds; repair only actual admitted result drift. Small compile/analyze/targeted checks/docs/commit, then Julia4/safe Lua5. Direct computed calls, broad verification/admission and push remain queued.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.2` — Rust copy2 preserves primitive values and actual-kind consumers; strict native/restored/plan and direct focused tests pass. Dart3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.3` — Perl existing interpreted free copy1.3 is preserved/targeted-checked; all bounded Perl copy children complete. Independent Rust2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.2` — Perl ordinary receiver copy1.2 preserves primitive/result/scoped continuations and shape/source guards. Existing interpreted context1.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.1` — Perl function copy1.1 preserves primitive kinds, once-only snapshots and actual-kind consumers; ordinary container/legacy controls retained. Generic receiver1.2 is next.
@@ -29,7 +30,6 @@ Activate Rust scalar/null value-copy2 from the clean completed Perl rollout. Con
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.1` — Perl23.1 eager logical receiver methods are implemented/targeted-checked; independent Rust23.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.3` — Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.5` — All five bounded tagged-record22 implementations are targeted-checked; remaining ordinary feature selection23.1.3 is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.22.4` — Julia22.4 tagged-record receiver roles/minimum shape repaired/targeted-checked; safe Lua22.5 is next.
 
 ## History
 

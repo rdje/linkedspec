@@ -1,0 +1,11 @@
+[
+ [true,false,0,7,-2.5,"0","","🙂",null,null],
+ [true,false,0,"0","","🙂",null,null],
+ [false,0,"0",null],
+ [false,4,"A","0!",7,true],
+ [null,null,"SR"],
+ ["0!",7,2],
+ [false,"outer",9],
+ [[[2,1]],[[2,1]],[[2,1]],{"a":[1]},{"a":[1]},{"a":[1]},[],{}],
+ ["changed"]
+]

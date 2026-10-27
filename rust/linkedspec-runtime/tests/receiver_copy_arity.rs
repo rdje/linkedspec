@@ -21,8 +21,8 @@ fn receiver_copy_rejects_extra_operands_before_effects() {
     let parsed = parse_spec_with_user_functions(source).expect("parse");
     validate(&parsed).expect("validate");
     let spec = compile(&parsed).expect("compile");
-    // Perl/Rust currently keep scalar/missing-copy empty-array fallback.
-    let expected = json!([null, null, 0, ["a", "b"], [["a"]], 1, [], []]);
+    // ADR0138 advances only the primitive/null copy results; shape/depth controls stay.
+    let expected = json!([null, null, 0, ["a", "b"], [["a"]], 1, "x", null]);
     assert_eq!(
         Engine::new(spec.clone())
             .execute_value("x", &ExecutionOptions::new())

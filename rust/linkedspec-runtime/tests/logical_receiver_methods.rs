@@ -55,10 +55,10 @@ fn existing_with_scope_restores_before_logical_result_rejection() {
 }
 
 #[test]
-fn existing_with_prefix_keeps_scalar_copy_boundary_and_container_recovery() {
+fn existing_with_prefix_preserves_scalar_copy_and_container_recovery() {
     assert_methods(
         r#"Top:: I { scalar="x".with() {return(false)}.not().copy();hash="x".with() {return(false)}.not().add(1).coalesce({"key":7}).copy().sorted_values().first().add(1);array="x".with() {return(false)}.not().add(1).coalesce([7]).copy().first().add(1);return([scalar,hash,array]); }"#,
-        json!([null, 8, 8]),
+        json!([true, 8, 8]),
     );
 }
 
