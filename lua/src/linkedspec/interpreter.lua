@@ -3489,6 +3489,17 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
       return receiver.name == name and (receiver.source_method or receiver.name) == name and
         not receiver.trailing_block_arg and #(receiver.args or {}) >= 2
     end
+    -- Only metadata-approved immediate contextual helper bodies join selected
+    -- actual-kind guards; explicit/bound final callbacks retain their policy.
+    if name == "with" then
+      local normalized, contract = action_contracts.normalize_contextual_codeblock_call(
+        "function", receiver, engine.compiled_spec.function_registry)
+      local args = normalized.args or {}
+      local callback = args[#args] and argument_expr(args[#args])
+      return receiver.name == name and (receiver.source_method or receiver.name) == name and
+        callback ~= nil and callback.kind == "codeblock_argument" and
+        action_contracts.accepts_final_codeblock_argument_count(contract, #args - 1)
+    end
     if ARRAY_SPLICE_HELPERS[name] then return false end
     return not not (is_pure_string_helper(name) or PURE_ARRAY_HELPERS[name] or PURE_HASH_HELPERS[name] or
       LOGICAL_HELPERS[name] or scalar_numeric.supports(name) or scalar_numeric.supports_reducer(name) or

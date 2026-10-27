@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia selected immediate with-result kind guards repaired/targeted-checked; independent safe Lua32.5 next.
+All five bounded immediate with-result selection children targeted-checked; next fluent feature assessment23.1.10.
 
 ## Latest Completed Slice
 
-Julia immediate with-result selected kind guards32.4 are implemented. Independent source/body reads already work; selected scalar .take yields[]/runs bad because the ordinary computed classifier omits helper with. Frozen28pass/3RED -> candidate31pass native/generated-plan/fresh Module with strict Bool/Number and depwarn=error; normal runner include added. Canonical metadata/count/normalized contextual role alone joins current guards after registered-function precedence. Shared14 kinds/order/scopes/snapshots/default/missing bridges and legacy bound-read policy pass; explicit/bound final selected methods and callback-body reads retain existing rights. Ordinary unknown source, active body unknown_helper, pure-function entry_len and malformed arity keep specific owners. No parser/reader/schema/vocabulary/coercion/write/copy-depth change. Packet/book/target/card/map/task/live/resume align; known SESSION7 launcher prelude is distinguished from actual passing execution. Safe Lua32.5 next with authorized focused commits; no full runner/matrix/isolated package/admission/push.
+Safe Lua immediate with-result selected kind guards32.5 are implemented. Independent shared14 source/body reads already work; selected scalar .take yields[]/runs bad. Frozen82 checks/4RED per available PUC5.5.1/LuaJIT2.1.1788460057 -> first candidate4RED -> final82pass native/restored SpecFile-to-recompile/generated-plan/fresh loaded module. Public normalization proves raw block_value contextual sources clone to codeblock_argument while explicit/bound finals remain unchanged; only canonical metadata-approved with role joins existing guards after registered-function precedence. Shared14 kinds/order/scopes/snapshots/missing/default bridges and legacy bound-read policies pass. Lua malformed arity retains runtime phase; source/body/state errors retain typed runtime/generated owners. Normal fixture registered and interpreter/runner source loads pass; no new persistent chunk local, parser/schema/body/coercion/write/copy-depth expansion. Packet/book/target/card/map/task/live/resume align. All five bounded children targeted-checked; feature assessment23.1.10 next. No declared5.4/full or unsafe runner/isolated package/matrix/admission/push.
 
 ## Next Action
 
-Activate independent safe Lua immediate-with selection32.5 from this clean Julia boundary. Read frozen target/shared14 fixture and Lua current computed/with/callable contracts; establish actual native/restored/generated-plan/fresh-module source/kind/scope/error/explicit/bound/body/malformed controls on available PUC5.5.1/LuaJIT before production. Repair only confirmed bounded gap using existing typed owners and no new persistent interpreter locals. Quick focused tests/source-load/normal registration/book/docs/commit; declared5.4/unsafe malformed pattern/full runners/full23.4 remain separate. Explicit --no-verify focused workflow is authorized until pressure repair20.1; full gates before admission/push.
+Activate feature assessment23.1.10 from this clean all-five bounded with-selection boundary. Read current canonical helper/source/signature inventory, completed result families and relevant book; select the next useful missing ordinary fluent method or inter-type transition using only a few public distinctions where uncertainty remains. Freeze target/independent implementation or prerequisite leaves before production. Preserve deferred/callback/unknown/parser/root/first-consumer/mutation/copy boundaries; do not infer completeness or run a full matrix. Continue authorized focused feature commit workflow; full23.4/readiness/registration/pressure/declared-host admission remain scheduled after feature coverage.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.32.5` — All five bounded immediate with-result selection children targeted-checked; next fluent feature assessment23.1.10.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.4` — Julia selected immediate with-result kind guards repaired/targeted-checked; independent safe Lua32.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.3` — Dart selected immediate with-result kind guards repaired/targeted-checked; independent Julia32.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.2` — Rust selected immediate with-result kind guards repaired/targeted-checked; independent Dart32.3 next.
@@ -29,7 +30,6 @@ Activate independent safe Lua immediate-with selection32.5 from this clean Julia
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1` — Rust callback identity repaired/targeted-checked; adjacent Rust snapshot31.6.5 next, then Dart/Julia identity.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.5` — All bounded non-nested with-result children targeted-checked; priority Rust/Dart/Julia identity31.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` — Julia with-result guards repaired/targeted-checked; safe Lua31.5 next, then priority identity31.6.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.3` — Dart with-result guards repaired/targeted-checked; independent Julia31.4 next; identity31.6 stays P1.
 
 ## History
 

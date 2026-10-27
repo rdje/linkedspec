@@ -9,16 +9,19 @@ answers:
   - "why does Rust run Array operands after selecting a scalar from with"
   - "why does Dart run Array operands after selecting a scalar from with"
   - "why does Julia run Array operands after selecting a scalar from with"
+  - "why does Lua with selection need clone-only contextual normalization"
   - "does Rust unknown with source warn or reject before callback activity"
 date: 2026-10-28
-status: bounded Perl32.1/Rust32.2/Dart32.3/Julia32.4 repaired; remaining backends/full admission next
-tags: [perl, rust, dart, julia, with, selection, fluent, scope, computed]
+status: all five bounded backend children repaired/targeted-checked on recorded routes/available hosts; full admission open
+tags: [perl, rust, dart, julia, lua, with, selection, fluent, scope, computed]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.9; activationad752f204ea99e928c757184d8e58a130111cba2; with-result-selection-intake.json.gz retains eight public source pairs and exact raw channels."
 reverify:
   - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test with_result_selection"
   - "(cd dart && bash ../tools/run_dart_project_data.sh test test/with_result_selection_test.dart)"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/with_result_selection_test.jl\")'"
+  - "bash tools/run_lua_project_data.sh puc lua/test/with_result_selection_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/with_result_selection_test.lua"
 ---
 
 At the recorded clean base, direct helper-with Array/Hash/no-value/parenthesized
@@ -43,7 +46,7 @@ Preserve existing receiver forms and delayed/bound/opaque/registered callback
 read/vocabulary/raw-status boundaries. Explicit mutation, selector-coercion,
 unknown-body and pure-function parser-state fences remain separately governed.
 
-The fourteen-coordinate shared fixture is normative. Recorded Perl/Rust/Dart/Julia bounded
+The fourteen-coordinate shared fixture is normative. Recorded five-backend bounded
 execution is below; remaining backend children start with their own baseline.
 No other backend failure or full context/portable/generated admission is inferred.
 Full23.4, excluded deferred readiness31.6.4.4, canonical fixture
@@ -141,3 +144,23 @@ unsupported runtime helper; active body reports unknown_helper; function-state a
 malformed arity remain specific. No parser/reader/schema/body-rights expansion.
 Packet with-result-selection-julia-intake.json.gz retains actual source/channels and
 known SESSION7 launcher-prelude limits. Safe Lua32.5 next; full23.4 separate.
+
+## Current bounded safe Lua32.5
+
+Lua already reads immediate helper-with results and existing callback bodies. The
+ordinary computed-read classifier omits helper with; scalar .take runs bad/yields[].
+Frozen82 checks/4RED per available host precede the first candidate, which still
+fails4 routes because source nodes keep block_value. Public normalization clones
+attached/parenthesized/no-value contextual sources to codeblock_argument without
+changing originals; explicit/bound finals stay unchanged. Scoped canonical-with
+classification now uses that metadata normalization and accepted arity after
+registered-function precedence, then current selected actual-kind guards.
+
+Final82 checks pass per PUC5.5.1/LuaJIT2.1.1788460057 across native/restored SpecFile/
+plan/fresh loaded module. Explicit/bound count0/operand effects, legacy bound-read
+policy, callback-body reads and typed source/body/state error owners remain. Lua
+malformed arity retains runtime diagnosis. Normal runner registration/source loads
+pass; no new persistent chunk local, AST/schema/body-rights/coercion expansion.
+Packet with-result-selection-lua-intake.json.gz retains both candidates and exact
+normalization probe. All five bounded children targeted-checked; next feature
+assessment23.1.10, full23.4/declared5.4/unsafe/full-runner proof remain separate.

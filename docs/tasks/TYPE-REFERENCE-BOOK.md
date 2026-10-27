@@ -1334,9 +1334,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Required same-slice engineering-notes rollover: Existing pressure check requires archival; --apply creates immutable segment4950 from cleanad752f204e DEVELOPMENT_NOTES lines109-203,95 lines/27368 bytes. Independent Git blob/exact ordered suffix/line/byte/SHA checks pass: blobd2e5331153bfe35d44ec08ef0a9b105b323f0f3b; SHA256cc9f00be65ec6baf00238f72c359ed4003693a0c22cd4ac7062ffd1e0cf55d7c. Only segment_count/new immutable row and whole clean suffix move; old segments/caps unchanged. Both hot-shard checks are rerun before staging.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.10`
+  Status: `pending`
+  Goal: Select the next useful bounded fluent method/result transition after immediate with-selection32.
+  Dependencies: Current canonical helper/source/signature inventory, bounded implemented families and relevant book. Full context/portable23.4, pressure20.1, excluded deferred readiness31.6.4.4 and declared-host admission remain separately scheduled.
+  Acceptance: Reconcile meaningful remaining per-type methods and inter-type transitions with implemented coverage; use Knowledge Map/canonical authorities first, then a few public source/actual-result distinctions for uncertainty. Freeze the next safe additive target and independent implementation/prerequisite leaves before production. Preserve current deferred/callback/control/parser/unknown/source/first-consumer/root/mutation/copy boundaries. No completeness claim or maintenance/full-matrix pivot while useful features remain.
+  Planned verification tier: focused
+  Planned focused checks: Relevant inventory/contracts/book and small public distinctions where needed, producer syntax/JSON/book/history/manual continuity; no full suite/matrix.
+  Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; actual public contract/schema movement separately owned.
+  Planned claim verification: none: Prospective finite authored feature selection, no population measurement.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -6974,7 +6984,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5 - resolve Rust final callbacks before scoped value rebinding`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32`
-  Status: `in_progress`
+  Status: `active` / bounded children32.1-.5 implemented and targeted-checked; full23.4 admission remains separate
   Goal: Implement ordinary immediate helper-with result bracket composition, preserving current receiver-with readers and callback boundaries.
   Authority: docs/checkpoints/type-operation-inventory/with-result-selection.md; tests/fixtures/with_result_selection_values.spec/json; independent intake in with-result-selection-intake.json.gz.
   Acceptance: Complete bounded children32.1-.5 on recorded routes/hosts, reusing typed readers/source roles and exact current contracts. Preserve contextual arity, signed/quoted selectors, actual kinds, source/body/selector ordering, snapshots, scoped restoration and incompatible operand guards. No broad source/domain/context/portable admission or deferred/unknown-call promotion; full23.4 stays separate.
@@ -7064,14 +7074,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.4 - guard selected immediate Julia with results by their actual kind`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently implement/check safe Lua ordinary immediate helper-with result selection.
   Authority: Frozen with-result-selection.md/shared fixture and current backend computed/with/callable contracts; do not infer another backend's failure.
   Acceptance: Establish a small actual baseline before production. Add only canonical metadata-approved immediate contextual helper-with sources with valid zero/one value arity and attached/parenthesized forms, preserving existing receiver-with reads. Use current value_access/segments/kind/error/source/scope/snapshot owners without schema changes. Check typed shared outputs, source/selector/consumer order and scope, specific pure-function/unknown-body diagnostics, legacy callable/deferred/registered contextual fences and malformed with roles. Split an independently confirmed prerequisite before production; already-compatible behavior gets focused regression without invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New bounded native/reconstructed/generated/fresh routes supported by this backend, nearest with/computed/callback boundaries, compile/format/normal registration/book/history/continuity. Safe Lua uses only available PUC5.5.1/LuaJIT and explicit source loads, no unsafe/full runner. No full suite/matrix.
-  Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; declared host and canonical fixture registration remain separately owned.
-  Planned claim verification: none: Prospective finite authored feature/preservation controls; no population measurement.
+  Verification tier: `focused`
+  Focused checks: Per PUC5.5.1/LuaJIT2.1.1788460057, frozen82 checks/4RED -> first candidate4RED -> final82pass native/restored SpecFile-to-recompile/generated-plan/fresh loaded module. Public source/normalized-role probe, source-load interpreter/normal runner and normal test registration; book/map/history/manual continuity. No full/unsafe runner, declared5.4 or isolated package.
+  Canonical trigger: Next feature assessment23.1.10; full23.4/new Perl registration23.4.1/excluded deferred readiness31.6.4.4/document-pressure repair20.1/declared5.4/final clean push after feature coverage remain separate.
+  Claim verification: none: Finite authored feature/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent shared14 all four routes per host run .take on a selected scalar, yield[] and execute bad. Actual nested/pure/callback/body/error roles are frozen; unchanged production gives82 checks/4RED per host. Lua malformed contextual arity is runtime diagnosed, unlike the other current backend compile phase.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: interpreter.lua typed_source.receiver_mutation.is_ordinary_computed_read omits helper with. First candidate checks only codeblock_argument and still4RED: public AST retains block_value on immediate helper sources. Public normalizer clones attached/parenthesized/no-value blocks to codeblock_argument without mutating original nodes; explicit literals/bound finals remain unchanged. The with executor already handles current immediate raw blocks.
+  - [x] **FIX**: After existing registered-function precedence, normalize only the canonical with source through current action_contracts metadata on a temporary clone. Require normalized contextual kind and accepted helper value count; reuse current selected actual-kind guards. No global AST mutation, grammar change or new persistent interpreter chunk local. Register normal focused fixture in run.lua.
+  - [x] **ADDRESSED (verified)**: Final82 checks pass per available host on native/restored SpecFile/plan/fresh module: shared14 exact JSON kinds, signed/nested/default/bridges, A-M order, skipped bad operand, missing-path effects, source snapshot and outer restoration. Nested/pure scopes and ordinary/registered callback-body reads retain current behavior.
+  - [x] **NO REGRESSION**: Explicit/bound finals keep count0/.take effect/B; legacy bound-call false/TAIL/0/0 remains. Malformed with keeps runtime arity diagnosis, ordinary unknown source keeps unsupported-helper, active body keeps unknown_helper and entry_len remains specific. Native/restored typed runtime and plan/fresh typed generated envelopes remain. Source loads pass; no full/unsafe runner, declared5.4, isolated-process, parser/schema/body/coercion/write/copy-depth or global context-source grant.
+  - [x] **LOCKSTEP**: Packet retains baseline/failed candidate/public normalization probe/final source and channels; target/card/map/book and roadmap/task/live/resume reflect all five bounded children without full23.4 admission. Activation helper setup failure before writing receives no product RED credit. Next23.1.10 feature assessment is owned before activation; focused --no-verify workflow is explicitly authorized until pressure repair.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.5 - guard immediate Lua with selections through contextual source normalization`.
 
 ## Current Frontier
 
@@ -7079,7 +7097,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.5` | `pending` | Independently implement/check safe Lua immediate helper-with bracket selection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.10` | `pending` | Select/freeze the next useful bounded fluent method/result transition from inventory. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

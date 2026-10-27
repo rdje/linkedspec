@@ -1,7 +1,7 @@
 # Ordinary immediate with-result bracket reads
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.9; implementation family23.3.32.
-Status: bounded Perl32.1/Rust32.2/Dart32.3/Julia32.4 implemented/targeted-checked; remaining backend children independently follow; full23.4 remains open.
+Status: all five bounded backend children implemented/targeted-checked on recorded routes/available hosts; full23.4 remains open.
 
 The existing with helper returns its immediate contextual body's actual value.
 At the original Perl intake, receiver-with already supports direct Array/Hash reads;
@@ -150,3 +150,23 @@ No parser/reader/schema/body/coercion/write/copy-depth change. Known SESSION7
 setpgid prelude accompanies an actual completed passing candidate, without a new
 process-lifecycle claim. Exact packet: with-result-selection-julia-intake.json.gz.
 No reconstructed CompiledSpec/isolated package/full runner/matrix; safe Lua32.5 next.
+
+## Bounded safe Lua implementation32.5
+
+Independent shared14 all four routes per PUC5.5.1/LuaJIT2.1.1788460057 host already
+read immediate results, but scalar-selected .take runs bad/yields[]. Frozen82 checks
+have4 failures per host. First candidate still fails because sources retain raw
+block_value nodes. Public normalization probe shows three contextual forms clone to
+codeblock_argument without mutating originals, while explicit/bound finals stay
+unchanged. Use that existing metadata normalizer only for canonical with source
+classification, then require contextual kind/accepted arity and reuse current guards.
+
+Final82 checks pass per host native/restored SpecFile-to-recompile/plan/fresh loaded
+module, with normal test registration and interpreter/runner source loads. Existing
+callback-body reads, explicit/bound count0/operand effects and legacy bound-read
+policy stay intact. Malformed arity remains runtime diagnosed; unknown source/body
+and function-state errors retain typed runtime/generated envelopes and specific
+messages. No new persistent chunk local, AST mutation/parser/schema/vocabulary/
+coercion/write/copy-depth change. Exact packet: with-result-selection-lua-intake.json.gz.
+No declared5.4/unsafe or full runner/isolated package proof. All five bounded source
+children are targeted-checked; feature assessment23.1.10 follows, full23.4 separate.
