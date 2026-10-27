@@ -1521,6 +1521,22 @@ sub _user_function_registry_by_name {
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
  my ($name, $registry, $call) = @_;
+ # Immediate contextual with has its own metadata-approved source role. Keep
+ # explicit callable values and the global known-name/function lookup unchanged.
+ if (defined($name) && $name eq 'with' && ref($call) eq 'HASH'
+     && ($call->{kind} // '') eq 'call' && ($call->{name} // '') eq 'with'
+     && ($call->{source_method} // 'with') eq 'with'
+     && ref($call->{args}) eq 'ARRAY' && @{$call->{args}}) {
+  my $block = $call->{args}[-1];
+  if (ref($block) eq 'HASH'
+      && ($block->{kind} // '') =~ /\A(?:block_value|codeblock_argument)\z/o) {
+   LinkedSpec::OwnerDispatch::require_pkg(__PACKAGE__, 'LinkedSpec::CallableContract');
+   my $contract = LinkedSpec::CallableContract::builtin_contract('helper', 'with');
+   return 'with' if LinkedSpec::CallableContract::accepts_argument_count(
+    $contract, $#{$call->{args}},
+   );
+  }
+ }
  my $method = _actionir_ast_known_value_call_method($name);
  if (!defined($method)
      && defined(_user_function_definition_for_name({user_function_registry => $registry}, $name))) {
@@ -2244,6 +2260,18 @@ sub _actionir_ast_first_unknown_value_call_name {
  my $kind = $node->{kind} // '';
 
  if ($kind eq 'call') {
+  if (($node->{name} // '') eq 'with'
+      && defined(_actionir_ast_computed_data_call_method('with', undef, $node))) {
+   # Match the immediate source role without making with a global value name.
+   # Validate ordinary value operands here; the typed with owner validates its
+   # contextual body, including unknown helpers and pure-function state fences.
+   my $args = $node->{args};
+   for (my $index = 0; $index + 1 < @$args; ++$index) {
+    my $unknown = _actionir_ast_first_unknown_value_call_name($args->[$index], $deps);
+    return $unknown if defined($unknown) && length($unknown);
+   }
+   return undef;
+  }
   my $method = _actionir_ast_known_value_call_method($node->{name});
   my $definition = _user_function_definition_for_name($deps, $node->{name});
   return $node->{name}

@@ -1,7 +1,7 @@
 # Ordinary immediate with-result bracket reads
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.9; implementation family23.3.32.
-Status: frozen additive target; backend support is independently checked next.
+Status: bounded Perl32.1 implemented/targeted-checked; other backend children independently follow; full23.4 remains open.
 
 The existing with helper returns its immediate contextual body's actual value.
 On current Perl, a receiver-with result already supports direct Array/Hash reads;
@@ -42,7 +42,7 @@ input x. Fourteen coordinates cover helper/receiver and parenthesized/no-value
 forms, signed/nested reads, strict scalar kinds, Array/Hash/String/Number bridges,
 missing/default behavior, skipped bad consumer operands, selector order, source
 rebinding snapshot, outer value restoration and exact ABCDEFGHIJKLM effects. It
-is a normative future target, not a claim of current execution or full admission.
+is the frozen expectation. Recorded bounded Perl execution is below; other backend execution and full admission are not inferred.
 
 ## Independent Perl intake
 
@@ -76,3 +76,21 @@ that existing predicate truth to String empty, preserving each backend's current
 predicate result kind rather than adding a body-policy change. The eight source-
 role distinctions/four admission gaps remain unchanged; this producer-kind control
 is separate and receives no new product RED credit.
+
+## Bounded Perl implementation32.1
+
+A separate exact immediate-with contract check joins computed-call sources without
+adding with to the shared known-value-name table. First candidate passes direct
+reads and10/11 groups, but selected fluent consumers still mark with unsupported.
+Public direct-read/.add traces isolate the first-unknown helper precheck; reuse the
+same source role there, scan value operands and let the typed with owner validate
+the contextual body. Three specific consumer-bearing fence controls independently
+RED before that refinement and GREEN afterward. No parser/body/reader/schema rewrite.
+
+Final11 groups/shared14 strict values and one valid helper source native/fresh/
+raw0/ready1 pass, retaining nested/pure scopes, source/body/selector/consumer order,
+missing paths and explicit/bound/registered/malformed boundaries. Final metadata
+loader uses OwnerDispatch; cold post-chdir/incoming-error,15 parser assertions and
+final public chain traces pass afterward. Packet with-result-selection-perl-
+intake.json.gz retains sources/channels and explicit initial-input recovery/setup
+provenance. No full suite/matrix/source/context admission; Rust32.2 is next.

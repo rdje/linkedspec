@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
+Perl immediate with-result bracket composition repaired/targeted-checked; independent Rust32.2 next.
 
 ## Latest Completed Slice
 
-Assessment23.1.9 freezes ordinary immediate contextual helper-with result bracket composition32 from eight public Perl source pairs. Helper attached Array/Hash/no-value and parenthesized contextual reads fail native/fresh compilation with raw1/unready, while receiver Array/Hash/named/method controls preserve exact kinds, W once and outer value with raw0/ready1. AST/substitution isolate static helper source admission: helper receiver stays raw while completed receiver-with uses typed value_access; body production and current reader are healthy. Reuse metadata-approved contextual with roles and existing readers, retaining deferred/bound/opaque/registered callback, source/error, selector/coercion/write/copy boundaries. The independent prospective oracle is RED4 helper gaps/4 controls. A mixed stdout/stderr refinement corrupts buffered JSON; exact boundary is inspected, producer flushes and the three-source replay separates streams, without extra product RED credit. Frozen target/shared14-coordinate fixture, readonly syntax-checked probe, retained raw packet/new causal card/map/current Perl book workaround and roadmap/task/live/resume align. A separate no-value producer confirms existing Perl Number1, withdrawing an unexecuted true hypothesis; final shared fixture uses truth-selected String empty to preserve predicate-kind policy. Production unchanged; fixture execution/other backend support/full admission are not claimed. Perl32.1 next, then independent32.2-.5; broad23.4/readiness/registration/pressure/declared-host owners remain separate. No full suite/matrix/push.
+Perl immediate contextual with-result bracket composition32.1 is implemented through one scoped metadata/count/kind source role and the corresponding unknown-call precheck. The global known-value-name table, parser deferred fences, typed reader/segments, body owner and formats stay unchanged. Independent legacy-role baseline and parser9/15 RED precede production; first source-only candidate10/11 and three specific chained-fence RED isolate the remaining consumer precheck through public traces. Final11 groups/shared14 strict native/fresh values and one valid helper source raw0/ready1 pass: signed/nested/default/kind bridges, A-M once/order, missing-selector effects, source rebind snapshot, scoped restoration, ordinary nested/pure bodies and specific entry_len/missing/missing_source diagnoses. Explicit/registered callbacks keep typed raw_perl/raw1/unready; bound/malformed roles retain old compile/raw channels. Final canonical loader routing is checked with cold post-chdir/incoming-error,15 parser assertions and final chain traces. Book/target/packet/current causal card/map and roadmap/task/live/resume align; canonical registration23.4.1 owns the new fixture. Initial source/test recovery and premature-consumer/multiline-caller guard corrections are disclosed, with no fake product RED or historical hash claim. Independent Rust32.2 next; no full suite/matrix/admission/push.
 
 ## Next Action
 
-Activate Perl immediate-with result selection32.1 from this clean frozen-target boundary. Read with-result-selection.md/shared fixture, canonical source-gap/computed/with/callable records and current parser/source-role owners. Establish focused actual behavior and legacy deferred/bound/registered callback/with-role diagnostics before production; admit only metadata-approved immediate contextual helper-with sources with existing zero/one value arity, not arbitrary control/callback values. Reuse typed value_access/kinds/segments/effect/snapshot/scope and exact source/error owners, preserving receiver-with reads and specific function-state fences. Compile/quick native/fresh/metadata plus nearest checks/docs/book/commit; independently assess Rust/Dart/Julia/safe Lua next. No full suite/matrix/push.
+Activate independent Rust immediate-with selection32.2 from this clean Perl boundary. Read frozen with-result-selection.md/shared14 fixture and current Rust computed/with/callable contracts. Establish actual native/restored/plan source/parser/kind/scope/error and explicit/bound/registered/unknown/malformed role controls before production; do not infer the Perl defect. Implement only a confirmed immediate contextual helper source/consumer gap through current typed owners, retaining legacy callable/read/coercion/unknown/function-state boundaries and schema. Compile/quick focused checks/docs/book/commit; then independent Dart32.3/Julia32.4/safe Lua32.5. Broad23.4/readiness/registration/pressure/declared-host owners stay separate; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.32.1` — Perl immediate with-result bracket composition repaired/targeted-checked; independent Rust32.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.9` — Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` — Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
@@ -29,7 +30,6 @@ Activate Perl immediate-with result selection32.1 from this clean frozen-target 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1` — Rust with-result guards repaired; nested identity P1-owned31.6; independent Dart31.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.0` — Ordinary eager with-Hash dispatch diagnosed/frozen31.0; independent Perl31.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
 
 ## History
 
