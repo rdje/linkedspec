@@ -3442,21 +3442,21 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       source_span = call.source_span,
     }
     local canonical_name = action_contracts.canonical_action_helper_name(call.method)
+    -- Dispatcher families describe output; tagged records consume text.
+    local array_only = canonical_name ~= "split_tagged_records" and (
+      PURE_ARRAY_HELPERS[canonical_name] or
+      canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
+      (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name)))
     -- Reduced values may switch container family; check before operands.
     if reduction_result then
       local kind = json.kind(value)
-      local array_only = PURE_ARRAY_HELPERS[canonical_name] or
-        canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
-        (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name))
       if (array_only and kind ~= "array") or (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray") then
         return json.null
       end
     end
     -- Reducers yield scalars; array/hash-only consumers remain invalid until
     -- a compatible helper produces a container. Case maps live with string helpers.
-    if scalar_result and (PURE_ARRAY_HELPERS[canonical_name] or PURE_HASH_HELPERS[canonical_name] or
-        canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
-        (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name))) then
+    if scalar_result and (array_only or PURE_HASH_HELPERS[canonical_name]) then
       return json.null
     end
     if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then
@@ -3936,7 +3936,8 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
       end
       if ((name == "num_clamp" or name == "replace_substr") and argument_count ~= 2) or
           ((name == "num_add" or name == "num_mul" or name == "coalesce" or name == "cat") and argument_count == 0) or
-          (name == "substr" and (argument_count < 1 or argument_count > 2)) then
+          (name == "substr" and (argument_count < 1 or argument_count > 2)) or
+          (name == "split_tagged_records" and argument_count < 2) then
         return json.null
       end
       if (name == "join_values" or name == "index_of" or name == "contains" or name == "has_key" or

@@ -929,7 +929,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -989,6 +989,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] NO REGRESSION: Production unchanged; probe syntax and healthy direct record/copy controls pass. Count-like invalid-domain exclusions remain explicit, with no policy normalization. No CLI rebuild/full six-runtime boundary matrix/old oracle rewrite or complete type-family admission.
   - [x] LOCKSTEP: Frozen target/probe, current tagged/Rust teaching qualifiers, canonical tagged fact/map and TYPE/SESSION33/root/index/live/resume align. Book/history/diff/final staged memory/cadence/diagnosis checked before commit; broad pressure FAIL20.1 remains owned, no global-gate receipt. Perl22.1.1 next.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.2 - freeze tagged-record String bridge repairs`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.3`
+  Status: `pending`
+  Goal: Select the next meaningful ordinary fluent family/transition after bounded data-result, reduction and tagged-record families1-22.
+  Dependencies: .23.3.22.5.
+  Acceptance: Reconcile retained helper/wrapper/receiver roles, current canonical facts/contracts/book and ordinary exclusions against implemented bounded families. Choose a useful missing operation/transition without treating resolver output category as input type, reviving compatibility spellings or inventing meaningless symmetry. Small independent public producer-first distinction as needed; freeze one safe target and schedule backend leaves before production. Full type/context/domain matrix/admission, error parity and pressure maintenance stay separately owned.
+  Planned verification tier: focused
+  Planned focused checks: Targeted canonical inventory/contracts/book and small distinguishing public observation, syntax/book/history/staged continuity. No full suite/population census or historical replay campaign.
+  Planned canonical trigger: Full domain/context/portable admission and final clean push remain separate under director feature-first cadence.
+  Planned claim verification: none: normative bounded feature selection and authored examples; no population/completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Status: `active` / bounded selection contract; full matrix remains open
@@ -4593,7 +4603,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.21.5 - compose Lua reduction accumulator results`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.22`
-  Status: `active` / frozen ordinary tagged-record bridge and Perl producer prerequisite
+  Status: `active` / all five bounded backend children targeted-checked; full admission separate
   Goal: Repair existing split_tagged_records eager value construction and meaningful text-to-Array receiver composition.
   Dependencies: .23.1.2 tagged-record-string-bridge.md; SESSION33 retains broader split-domain/admission authority.
   Children: `.23.3.22.1` Perl prerequisite/receiver, `.23.3.22.2` Rust, `.23.3.22.3` Dart, `.23.3.22.4` Julia, `.23.3.22.5` safe Lua.
@@ -4738,7 +4748,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.22.4 - repair Julia tagged-record receiver roles`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.22.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and repair/confirm safe Lua tagged-record text-to-Array bridge.
   Dependencies: .23.3.22.4.
   Acceptance: Follow tagged-record-string-bridge.md. Retain actual field/record kinds, source-delimiter-tag-field/consumer order and snapshots/copy, existing helper conversions/pure-split policies and free signatures. Producer22.1.1 repairs once-only/dynamic operand lowering and tagged reuse of the already-admitted split without global boundary normalization; subsequent receiver leaves enforce actual text input/Array output, minimum two RHS and compatible continuation through selected fields. Independent native/generated RED/GREEN, small direct split/record/compile checks/docs/commit. Old33 broad admission remains open.
@@ -4747,13 +4757,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full split-domain/context/portable admission and final clean push separate under director feature-first cadence.
   Planned claim verification: none: deterministic authored regression/preservation controls; no population/completeness measurement.
 
+  Activation: clean `6fa54bd6032fb9ee4d8a0cb5ad8bb9d801a6d0ad`; Julia feature committed/tree clean/brief0.
+  Owned paths: Lua safe producer/receiver native-plan-fresh test/runner registration and bounded actual-input-role/minimum-shape repair if observed; current book/frozen contract/tagged/Lua facts/SESSION33 index/live continuity; own next ordinary selection leaf before handoff.
+  Verification tier: `focused`
+  Focused checks: Strict canonical JSON safe producer/shared/eager/snapshot/copy/minimum-shape/free controls plus direct scalar String and interpreter/runner loadfile only on PUC5.5.1/LuaJIT. No full runner/unsafe regex/declared5.4 claim. Book/history/staged guards.
+  Canonical trigger: SESSION33 full split-domain/context/portable admission, canonical registration/error parity1.2.1.4.1/pressure20.1 and Lua5.4 prerequisites before later admission/push.
+  Claim verification: none: deterministic authored regression and preservation controls; no population/completeness measurement.
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Public safe PUC5.5.1/LuaJIT producer/copy/short-free groups pass before changes; shared trim-prefix gives null versus3 and malformed calls0/[]/SSDC on native/plan/fresh, six route failures per host.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: interpreter.lua evaluate_fluent_calls scalar/reduction guards use PURE_ARRAY_HELPERS output-family membership as input requirement. The existing tagged producer consumes text; fluent preflight lacks its min-two-RHS rule.
+  - [x] **FIX**: Derive one function-local actual Array-input predicate excluding tagged records and reuse in both guards; add min-two-RHS preflight before receiver/operand/consumer effects. No new module-level local or producer/pattern/split/conversion/copy/free-error changes.
+  - [x] **ADDRESSED (verified)**: tagged_record_receivers_test five strict canonical JSON groups PASS both safe hosts/native-plan-fresh: shared typed chains/SDTFCE/regex/empty-trailing, prior fields/independent rows, malformed no effects and short free eager empty Arrays.
+  - [x] **NO REGRESSION**: Direct scalar_string_results_test passes both hosts/all routes; interpreter and runner loadfile-only checks pass. No full runner/unsafe native patterns/declared5.4/full context or portable admission claim; git diff --check passes.
+  - [x] **LOCKSTEP**: Safe runner registration/current book/frozen contract/tagged and Lua facts/SESSION33 partial progress/refreshed index/map/history/live pointer align. New ordinary selection23.1.3 is owned before handoff; full domain/admission/parity/pressure/declared5.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.22.5 - repair Lua tagged-record receiver roles`.
+
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; safe Lua22.5 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; remaining ordinary selection23.1.3 is next; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.22.5` | `pending` | Independent safe Lua tagged-record producer/String-to-Array receiver assessment and bounded repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.3` | `pending` | Select the next useful ordinary fluent family after bounded tagged-record22 coverage. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

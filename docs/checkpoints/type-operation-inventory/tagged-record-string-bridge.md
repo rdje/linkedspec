@@ -121,3 +121,13 @@ preflight; preserve producer/regex/conversion/split/copy/free short behavior.
 Registered native/plan/fresh test PASS51 strict Number-not-Bool/false assertions,
 plus direct String PASS54 and strict compilation. Safe Lua22.5 follows; full33
 split-domain/context/portable admission remains separately owned.
+
+## Safe Lua22.5 partial completion
+
+Producer/named/literal/regex/copy/free-short controls already work on safe PUC5.5.1/
+LuaJIT. Fix prior-String result rejection by Array result-family-as-input guards and
+min-two-RHS preflight; use one function-local predicate and no new module locals.
+Five tagged groups plus direct scalar String pass native/plan/fresh on both hosts;
+interpreter/runner loadfile only. All five bounded22 children are targeted-checked.
+Full33 six-runtime split-domain/context/portable admission, canonical registration,
+error parity/pressure and declared Lua5.4 remain open. Next ordinary selection23.1.3.

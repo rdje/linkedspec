@@ -13,7 +13,7 @@ answers:
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
 date: 2026-10-27
-status: bounded Perl/Rust/Dart/Julia tagged-record producer/receiver implemented; full split-domain admission remains owned
+status: all five bounded tagged-record producer/receiver implementations targeted-checked; full split-domain admission remains owned
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
 evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; Rust22.2 adds the missing producer/bridge; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
 reverify: "For current Perl producer run bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/tagged_record_producer_contract.t. Historical comparisons below retain their original scope; rebuild the Rust CLI before the paired Rust/Perl controls. Older Lua observations remain separately reproducible and dated."
@@ -74,6 +74,20 @@ Registered julia/test/tagged_record_receivers_test.jl passes51 strict assertions
 project-data wrapper, --project=julia --startup-file=no --history-file=no
 --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include("julia/test/tagged_record_receivers_test.jl")'.
 Full split-domain/context/portable admission remains with SESSION33.
+
+## Safe Lua bounded receiver repair, October27
+
+TYPE22.5 safe PUC5.5.1/LuaJIT producer/copy/free-short controls already work;
+named/literal/regex chains are healthy. Scalar/reduction guards block prior String
+results using Array dispatch membership, and absent min-two-RHS preflight runs
+SSDC effects. One function-local actual Array-input predicate excludes tagged
+records and serves both guards; preflight requires delimiter/tag before effects.
+No new module locals; healthy producer/conversion/split/regex/copy/free-short paths
+remain. lua/test/tagged_record_receivers_test.lua five strict groups and direct
+scalar String fixture pass native/plan/fresh on both safe hosts, with source/runner
+loadfile only. Reverify using tools/run_lua_project_data.sh puc and luajit with the
+named tagged fixture. Never infer full runner/unsafe malformed native regex or
+current declared5.4/full SESSION33 split-domain/context/portable admission.
 
 ## Historical producer and cross-runtime split observations
 

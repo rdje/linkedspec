@@ -639,6 +639,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
 
   October27 partial repair TYPE22.4: Julia eager producer/named/literal/regex/copy paths were healthy; derived String source was blocked by Array result-family-as-input guard, and malformed calls ran SSDC. Actual Array-only receiver set excludes tagged records and preflight requires delimiter/tag. Registered new fixture PASS51 strict native/plan/fresh plus direct String PASS54; safe Lua and full33 boundary/context/admission remain open.
 
+  October27 partial repair TYPE22.5: Safe PUC5.5.1/LuaJIT eager producer/named/literal/regex/copy paths were healthy. Exclude text producer from actual Array-input scalar/reduction guards and preflight min-two RHS before effects. Five new tagged groups plus direct scalar String fixture pass native/plan/fresh on both safe hosts; source/runner loadfile-only passes. All five bounded22 implementations now targeted-checked, while full33 six-runtime boundary/context/portable admission and declared Lua5.4 remain open; next ordinary selection TYPE23.1.3.
+
 
 - ID: `SESSION-STARTUP-READING.34`
   Status: `pending`
