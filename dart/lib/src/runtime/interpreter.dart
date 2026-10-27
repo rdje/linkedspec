@@ -5153,7 +5153,18 @@ final class LinkedSpecRuntimeEngine {
         return false;
       }
       return _runtimeReceiverHelperNames.contains(helper) ||
-          const {'array', 'hash', 'copy', 'and', 'or', 'not'}.contains(helper);
+          const {
+            'array',
+            'hash',
+            'copy',
+            'and',
+            'or',
+            'not',
+            'entry_groups',
+            'entry_map',
+            'match_groups',
+            'match_map',
+          }.contains(helper);
     }
     if (receiver is ActionValueAccessExpr) {
       return _isOrdinaryComputedRead(receiver);

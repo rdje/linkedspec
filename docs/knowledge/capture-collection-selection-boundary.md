@@ -1,6 +1,6 @@
 ---
 id: capture-collection-selection-boundary
-title: Read-only capture collection results compose with ordinary Perl and Rust typed reads
+title: Read-only capture collection results compose with ordinary typed reads
 answers:
   - can entry_map result be indexed directly on Perl
   - can entry_groups feed a signed bracket and String method
@@ -9,11 +9,13 @@ answers:
   - is entry_named_map still an accepted source compatibility alias
   - which task repairs contextual callback computed read readiness
   - why does Rust capture selection evaluate incompatible method operands
+  - how do Dart named-map aliases receive capture result kind guards
 date: 2026-10-27
-status: bounded Perl25.1/Rust25.2 implemented; independent Dart25.3 next
+status: bounded Perl25.1/Rust25.2/Dart25.3 implemented; independent Julia25.4 next
 tags: [captures, actionir, fluent, selection, perl, codeblock, documentation]
 evidence: "TYPE23.1.5 public native/fresh/descriptor/substitution intake and callback-form distinction; ADR0044 resolves the old child-mode teaching."
 reverify:
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/capture_collection_selection_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_collection_selection"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/capture_collection_selection.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_capture_collection_selection.pl default"
@@ -85,3 +87,14 @@ new tests pass native/restored CompiledSpec/generated plan, including the unchan
 shared oracle; six direct computed controls also pass. Bound-call counts0/0 and
 other context/flat count policies remain unchanged. No standalone emitted crate
 or full context/portable admission; independent Dart25.3 follows.
+
+
+Dart25.3 independently observes3 failing/1 healthy capture cases on native,
+restoredSpec and generated plan: source/read values already work, but wrong-kind
+consumers run operands and missing captures retain counts0. The static classifier
+canonicalizes aliases before testing receiver/helper ownership, so adding only
+four canonical capture names covers all six spellings. Existing kindGuardedResult
+persists through with and bridges. New4 and direct computed7 pass all routes;
+String zero/empty/compaction/static names and bound/context/flat count controls
+stay unchanged. Format/fatal analyze pass; no parser/getter/read/codec or deferred
+vocabulary change. Independent Julia25.4 follows; full admission remains23.4.

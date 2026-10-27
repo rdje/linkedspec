@@ -1,7 +1,7 @@
 # Read-only capture collection result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.5; implementation family23.3.25.
-Status: frozen bounded ordinary target; Perl25.1 and Rust25.2 implemented/targeted-checked, independent Dart25.3 next; complete admission remains23.4.
+Status: frozen bounded ordinary target; Perl25.1/Rust25.2/Dart25.3 implemented/targeted-checked, independent Julia25.4 next; complete admission remains23.4.
 
 ## Existing authority and scope
 
@@ -100,3 +100,13 @@ prevents incompatible operands and legacy count fallthrough. The frozen target,
 alias/with guard controls, String zero/empty/compaction/static names and absent-
 capture versus bound/context/flat count controls pass native/restored/plan. No
 parser/getter/read/serde field or standalone emitted-source admission changes.
+
+
+## Bounded Dart implementation
+
+Dart25.3 likewise reuses its existing parser, unmodifiable capture getters and
+readers. Four canonical collection names join _isOrdinaryComputedRead; the
+existing canonical alias owner supplies both named-map aliases. Persistent
+actual-kind guards then cover wrong consumers and with/bridges. Four capture
+cases and seven direct computed cases pass native/restoredSpec/generated plan;
+format/fatal analyze pass. No schema, getter or standalone source admission.
