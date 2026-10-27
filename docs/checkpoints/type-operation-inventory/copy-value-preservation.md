@@ -65,7 +65,7 @@ num_add(1,2).copy().add(1)                  # 4
 3. Perl context1.3 preserved/targeted-checked: independently assess already-supported interpreted copy helper
    and method paths; fix only actual scalar/result drift without vocabulary or
    callable-origin/depth changes. Close as preserved if already healthy.
-4. Rust2/Dart3/Julia4 implemented/targeted-checked; safe Lua5 independently assesses function/method/scalar-result
+4. Rust2/Dart3/Julia4/safe Lua5 implemented/targeted-checked after independently assessing function/method/scalar-result
    and scope/shape/snapshot controls before changes. Lua uses only safe named
    PUC5.5.1/LuaJIT fixtures; declared5.4/full runner remain separate.
 
@@ -110,3 +110,14 @@ copy links retain it; existing actual-kind guards now skip incompatible operands
 Shared values/shape/legacy and direct arity/logical/selected controls pass without
 old oracle changes. Register value_copy_test.jl in the normal runner; full runner
 and complete source/context/portable admission remain deferred.
+
+Safe Lua5 retains healthy primitive/null copy producers and recursive copies.
+Both named PUC5.5.1/LuaJIT hosts independently reproduce the copied Number/Hash/
+Array guard failures on native/plan/fresh routes, preserving shape/legacy controls.
+A local copied_result flag initializes from direct free-copy receivers and persists
+from method copy links; the existing actual-kind guard now skips incompatible
+operands. Four new strict JSON groups plus direct copy/logical/selected controls
+pass on both hosts; module/runner loadfile compiles without new module locals.
+The new test is registered; no unsafe patterns/full runner/declared5.4 claim.
+All bounded backend children are complete. Full source/context/portable/canonical
+admission23.4, declared Lua5.4 and required Perl registration remain separate.

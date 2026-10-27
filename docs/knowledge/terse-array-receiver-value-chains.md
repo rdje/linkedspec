@@ -100,3 +100,11 @@ results after independent native/plan/fresh SRKV/AKV RED. Strict Bool-versus-Num
 value-copy and direct copy/logical/selected checks pass; the new test is registered.
 [[julia-runtime-array-helpers]] owns the bounded mechanism. Safe Lua5 is next;
 complete context/portable/canonical admission remains separate.
+
+Safe Lua4.2.2.5 preserves primitive/null producers and guards copied results
+after independent PUC5.5.1/LuaJIT native/plan/fresh SRKV/AKV RED. Four strict JSON
+copy groups and direct copy/logical/source-error/selected controls pass; no new
+module locals or unsafe runner/pattern use. [[lua-receiver-copy-value-preservation]]
+owns the bounded mechanism. All approved bounded copy implementation children
+are complete; full source/context/portable/canonical admission23.4 and declared
+Lua5.4 remain open. Return to queued direct-call computed selection24.1.2.

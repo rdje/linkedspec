@@ -3436,6 +3436,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
 )
   local scalar_result = type(value) == "boolean"
   local reduction_result = false
+  local copied_result = target_receiver ~= nil and target_receiver.kind == "call" and
+    action_contracts.canonical_action_helper_name(target_receiver.name) == "copy"
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -3450,8 +3452,9 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       PURE_ARRAY_HELPERS[canonical_name] or
       canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
       (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name)))
-    -- Reduced values may switch container family; check before operands.
-    if reduction_result then
+    -- Copied and reduced values keep their actual kind through bridges.
+    -- Check container-only consumers before evaluating their operands.
+    if reduction_result or copied_result then
       local kind = json.kind(value)
       if (array_only and kind ~= "array") or (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray") then
         return json.null
@@ -3566,6 +3569,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     else
       value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
     end
+    copied_result = copied_result or canonical_name == "copy"
     local result_kind = json.kind(value)
     scalar_result = (scalar_result or type(value) == "boolean") and
       result_kind ~= "array" and result_kind ~= "harray"
