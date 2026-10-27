@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
+Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
 
 ## Latest Completed Slice
 
-Public Perl Get/fresh probe retains eight authored cases and exact observations at clean73735f4fb: ordinary/free/named/literal/selected scalar-null copies return[], logical-result and with/not copies return null, valid source effects run SR once, malformed receiver operands skip effects, and container kinds/false/null remain. Substitution identifies intentional aggregate fallback[] versus logical-result terminal rejection; this is not a lost Bool producer. ADR0006/0007/current catalog establish container copying and qualified backend differences, without admitting generic scalar copies. Director choice requested: recommended value-preserving scalar/null extension with Perl first, or container-only behavior aligned to the existing reference. No domain/production/expected-result change is adopted. Decision/repair1.2.1.4.2.2 stays open with bounded implementation obligations; documentation alone does not close parent4.2. Correct current book qualification, route canonical fact/map and retain probe/observations. Focused probe syntax/routes/book/history/continuity only; broader admission remains separate.
+Public Perl Get/fresh intake distinguishes working named signed/typed selected controls from five computed sources that fail rule_handler_compile/raw bracket host syntax: pure call, fluent call, Array/Hash literal and block. Retain exact probe/observations and a bounded normative fixture. Freeze additive read-only computed-selection.md: existing typed value_access, once-only receiver then ordered selectors/consumer, real entry kinds, signed in-range positions, null missing/wrong-kind reads, compatible result chains and source snapshots. No new helper/type, computed lvalue, grouping, dynamic Hash-key/coercion, copy-depth/domain or deferred/context admission. Canonical existing source owners show the general Perl typed path is missing; other backends already carry value_access and need independent source-shape assessment. Own family24.1-.5 before production, Perl first, splitting if needed. Current book explicitly qualifies working-binding versus planned computed selection; new canonical fact/map/roadmap/task/live pointer align. Probe syntax/authored controls/book/history/continuity only; full admission23.4 remains later and copy decision4.2.2 stays pending.
 
 ## Next Action
 
-Select the next independent ordinary feature under23.1.4 while scalar/null copy decision1.2.1.4.2.2 awaits the director. Read current inventory/contracts and public reference before owning a bounded implementation family. Do not change copy domains without the requested decision; return to4.2.2 when it arrives. Focused compile/quick checks/docs/commit only; broad admission/canonical/pressure work remains deferred.
+Activate Perl computed-value read selection24.1 against computed-selection.md and authored shared fixture. Inspect AST construction/provenance and existing CodeblockRuntime::read_path; preserve bare-binding/signed/callable/grouping/copy domains. Add typed postfix source selection/lowering and actual-result continuations with small native/fresh and direct selected/signed checks; split before edits if scope grows. Then independent Rust/Dart/Julia/safe Lua. Copy-domain4.2.2 awaits the director; no implicit copy change.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.4` — Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.1` — Copy authority/reference intake retained; scalar-domain decision pending; independent feature selection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.5` — Safe Lua logical receiver methods targeted-checked; all five bounded family23 backends complete; scalar-copy domains next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.4` — Julia23.4 logical receiver shapes are repaired/targeted-checked; safe Lua23.5 next, then scalar-copy domain owner1.2.1.4.2.
@@ -29,7 +30,6 @@ Select the next independent ordinary feature under23.1.4 while scalar/null copy 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.22.1.1` — Perl22.1.1 eager tagged-record producer is repaired/targeted-checked; scalar receiver22.1.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.2` — Tagged-record String-to-Array bridge22 selected/frozen with Perl eager producer prerequisite22.1.1 next. Broader33 split-domain/pressure/error-signature/full admission remain separately owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.21.5` — All bounded reduction accumulator result implementations21 are targeted-checked on recorded routes/hosts; next ordinary fluent selection23.1.2. Error-phase/pressure/full admission prerequisites remain open.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.21.4` — Julia reduction result consumer guards21.4 implemented/targeted-checked; safe Lua21.5 independently follows. Full signature/context/portable and declared5.4 admission remain open.
 
 ## History
 

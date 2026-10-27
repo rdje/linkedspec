@@ -951,7 +951,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Deterministic contract decision and bounded feature repairs, not a completeness measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Select the next independent ordinary fluent feature while copy-domain4.2.2 awaits the director.
   Dependencies: Logical family23 all five bounded children targeted-checked; copy authority intake4.2.1 complete.
   Acceptance: Use current helper/signature/receiver inventory and canonical facts; assess public reference before inferring a missing feature or backend defect. Own a bounded family/producer repair and frozen target before changes. Do not change scalar-copy domains without the requested decision. Preserve feature-first focused checks/docs/commit cadence; full admission/context/matrices remain separate.
@@ -959,6 +959,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact public producer/receiver probes and changed documentation/continuity only; no full CI or registry audit.
   Planned canonical trigger: Actual contract movement/full family admission and final clean push after ordinary feature coverage.
   Planned claim verification: none: Deterministic feature selection, no population/completeness measurement.
+
+  Activation: clean `d98e139d712cb28a9b4c5bb1504a43e5c8fd13b1`; copy authority review committed/tree clean/brief0.
+  Owned paths: Public computed-value read-selection probe/target and task/book/fact/live continuity; no production change in selection. Reconcile existing value_access versus bare-binding access and grouping owner87.4; do not expand mutation/grouped syntax or copy domains implicitly.
+  Verification tier: `focused`
+  Focused checks: Canonical typed read/signed-selector and existing value_access contracts, public Perl Get/substitution/native/fresh comparisons against equivalent intermediate-binding controls; source syntax/book/history/staged continuity. No broad matrix or full CI.
+  Canonical trigger: Full input/context/portable and new surface admission remain23.4 after feature coverage; any actual generated-format movement must be owned explicitly before code.
+  Claim verification: none: Bounded normative feature selection and deterministic authored public controls, no population/completeness measurement.
+
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE**: Named signed/typed control Get/fresh values B/[true,1,0!,missing,B] pass; five computed-source forms fail both routes, with native rule_handler_compile and matching fresh raw bracket syntax errors. Retain exact observations, never classify these as successful null reads.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Perl AST parse order has binding-based access/fluent call segments but no general typed value_access; MethodLowering's special callable-result bridge is narrower. Other runtimes carry value_access with restricted source shapes; no inferred runtime failure there.
+  - [x] **FIX**: Freeze computed-selection.md additive read-only target and shared authored value/effect fixture; own24.1-.5 independent backend work, Perl first. Preserve grouping87.4, lvalues, dynamic-key/coercion, copy-domain/depth, callback/deferred/context and actual schema boundaries.
+  - [x] **ADDRESSED (verified)**: Public controls and RED classification asserted from actual routes; diagnostic probe syntax passes. Existing read/signed/type authorities establish expected admitted subset and source/selector ordering; no new portable runtime support claimed.
+  - [x] **NO REGRESSION**: No production/grammar/serialized artifact or previous expectation edits. Existing named-binding lookup order, callable provenance and snapshot/copy semantics stay; complete matrices/canonical admission deferred.
+  - [x] **LOCKSTEP**: Frozen target/fixture/retained probe-observations/planned-only book qualification/new causal fact/map/roadmap/task/live pointer align. Perl24.1 next; copy decision4.2.2 remains owned/pending rather than silently selected.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.4 - define computed-value bracket selection`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.2`
   Status: `pending`
@@ -979,7 +995,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -1620,7 +1636,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`, `.23.3.20`, `.23.3.21`, `.23.3.22`, `.23.3.23`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`, `.23.3.20`, `.23.3.21`, `.23.3.22`, `.23.3.23`, `.23.3.24`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -4980,13 +4996,70 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Safe runner registration/book/frozen contract/Lua-neutral facts/map/roadmap/task/live pointer align. All five bounded logical backend children targeted-checked; scalar-copy1.2.1.4.2 next, with full admission/canonical/parity/pressure/declared-host prerequisites separate.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.23.5 - add Lua eager logical receiver methods`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.24`
+  Status: `active` / frozen computed-value bracket reads; backend support not admitted
+  Goal: Select arbitrary entries/fields from computed Array/Hash values and continue by actual selected kind.
+  Dependencies:23.1.4 computed-selection.md and existing signed pure-read/result-family semantics.
+  Children:24.1 Perl,24.2 Rust,24.3 Dart,24.4 Julia,24.5 safe Lua.
+  Acceptance: Follow frozen read-only source/selector/result/effect rules; preserve named bindings, grouping/lvalues/coercion/copy/callable/deferred/context boundaries. Independent small producer-first/native/generated/direct checks and commit per backend; full portable/context/canonical admission23.4 remains separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.24.1`
+  Status: `pending`
+  Goal: Independently assess and implement Perl ordinary computed-value bracket reads.
+  Dependencies: 23.1.4; computed-selection.md.
+  Acceptance: Typed computed call/fluent/literal/block/function sources, repeated bracket/method alternation, signed valid positions and actual selected kinds; once-only source/ordered selectors/consumer, null missing/wrong-kind, compatible continuations/rejected consumer operands. Preserve named read lookup order, supported key/index classification, callable provenance, source/span construction, grouping/lvalue/copy/deferred/context/schema boundaries. Reuse existing value_access shape; own actual format movement explicitly before production. Split before edits if needed. Safe Lua only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first source/AST/shared-kind/effect native/generated controls, direct selected/signed regressions and changed-surface compile/format checks; current book/history/continuity only. No full suite/matrix.
+  Planned canonical trigger: Full method/source-domain/context/portable and format admission23.4 after feature coverage and final clean push.
+  Planned claim verification: none: Deterministic authored feature regression/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.24.2`
+  Status: `pending`
+  Goal: Independently assess and implement Rust ordinary computed-value bracket reads.
+  Dependencies: 24.1; computed-selection.md.
+  Acceptance: Typed computed call/fluent/literal/block/function sources, repeated bracket/method alternation, signed valid positions and actual selected kinds; once-only source/ordered selectors/consumer, null missing/wrong-kind, compatible continuations/rejected consumer operands. Preserve named read lookup order, supported key/index classification, callable provenance, source/span construction, grouping/lvalue/copy/deferred/context/schema boundaries. Reuse existing value_access shape; own actual format movement explicitly before production. Split before edits if needed. Safe Lua only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first source/AST/shared-kind/effect native/generated controls, direct selected/signed regressions and changed-surface compile/format checks; current book/history/continuity only. No full suite/matrix.
+  Planned canonical trigger: Full method/source-domain/context/portable and format admission23.4 after feature coverage and final clean push.
+  Planned claim verification: none: Deterministic authored feature regression/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.24.3`
+  Status: `pending`
+  Goal: Independently assess and implement Dart ordinary computed-value bracket reads.
+  Dependencies: 24.2; computed-selection.md.
+  Acceptance: Typed computed call/fluent/literal/block/function sources, repeated bracket/method alternation, signed valid positions and actual selected kinds; once-only source/ordered selectors/consumer, null missing/wrong-kind, compatible continuations/rejected consumer operands. Preserve named read lookup order, supported key/index classification, callable provenance, source/span construction, grouping/lvalue/copy/deferred/context/schema boundaries. Reuse existing value_access shape; own actual format movement explicitly before production. Split before edits if needed. Safe Lua only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first source/AST/shared-kind/effect native/generated controls, direct selected/signed regressions and changed-surface compile/format checks; current book/history/continuity only. No full suite/matrix.
+  Planned canonical trigger: Full method/source-domain/context/portable and format admission23.4 after feature coverage and final clean push.
+  Planned claim verification: none: Deterministic authored feature regression/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.24.4`
+  Status: `pending`
+  Goal: Independently assess and implement Julia ordinary computed-value bracket reads.
+  Dependencies: 24.3; computed-selection.md.
+  Acceptance: Typed computed call/fluent/literal/block/function sources, repeated bracket/method alternation, signed valid positions and actual selected kinds; once-only source/ordered selectors/consumer, null missing/wrong-kind, compatible continuations/rejected consumer operands. Preserve named read lookup order, supported key/index classification, callable provenance, source/span construction, grouping/lvalue/copy/deferred/context/schema boundaries. Reuse existing value_access shape; own actual format movement explicitly before production. Split before edits if needed. Safe Lua only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first source/AST/shared-kind/effect native/generated controls, direct selected/signed regressions and changed-surface compile/format checks; current book/history/continuity only. No full suite/matrix.
+  Planned canonical trigger: Full method/source-domain/context/portable and format admission23.4 after feature coverage and final clean push.
+  Planned claim verification: none: Deterministic authored feature regression/preservation controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.24.5`
+  Status: `pending`
+  Goal: Independently assess and implement safe Lua ordinary computed-value bracket reads.
+  Dependencies: 24.4; computed-selection.md.
+  Acceptance: Typed computed call/fluent/literal/block/function sources, repeated bracket/method alternation, signed valid positions and actual selected kinds; once-only source/ordered selectors/consumer, null missing/wrong-kind, compatible continuations/rejected consumer operands. Preserve named read lookup order, supported key/index classification, callable provenance, source/span construction, grouping/lvalue/copy/deferred/context/schema boundaries. Reuse existing value_access shape; own actual format movement explicitly before production. Split before edits if needed. Safe Lua only named PUC5.5.1/LuaJIT fixtures/loadfile, no unsafe patterns/full runner/declared5.4 claim.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first source/AST/shared-kind/effect native/generated controls, direct selected/signed regressions and changed-surface compile/format checks; current book/history/continuity only. No full suite/matrix.
+  Planned canonical trigger: Full method/source-domain/context/portable and format admission23.4 after feature coverage and final clean push.
+  Planned claim verification: none: Deterministic authored feature regression/preservation controls, no population/completeness measurement.
+
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; director decision/repair4.2.2 stays pending while independent selection23.1.4 follows; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; director decision/repair4.2.2 stays pending while independent selection23.1.4 freezes computed bracket reads24; Perl24.1 follows; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.4` | `pending` | Select independent feature while scalar-copy decision4.2.2 is pending. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.24.1` | `pending` | Implement Perl typed computed-value read selection before independent backends. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

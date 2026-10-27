@@ -1,0 +1,184 @@
+{
+  "base_commit": "d98e139d712cb28a9b4c5bb1504a43e5c8fd13b1",
+  "observations": [
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "named_control",
+      "route": "native",
+      "thrown": "",
+      "value": "B"
+    },
+    {
+      "error": "",
+      "label": "named_control",
+      "loaded": 1,
+      "route": "fresh",
+      "value": "B"
+    },
+    {
+      "compile_error": "",
+      "error": {
+        "detail": "syntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \")[\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "free_call",
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": "syntax error at (eval 13665) line 48, near \")[\"\n",
+      "label": "free_call",
+      "loaded": 0,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": {
+        "detail": "syntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \"}[\"\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:<none> line 21, near \"{ my\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 22, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "fluent_call",
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": "syntax error at (eval 14016) line 48, near \"}[\"\nCan't redeclare \"my\" in \"my\" at (eval 14016) line 48, near \"{ my\"\nsyntax error at (eval 14016) line 49, at EOF\n",
+      "label": "fluent_call",
+      "loaded": 0,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": {
+        "detail": "syntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \"][\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "literal",
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": "syntax error at (eval 14367) line 48, near \"][\"\n",
+      "label": "literal",
+      "loaded": 0,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": {
+        "detail": "syntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \"\"items\":\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 22, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "hash",
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": "syntax error at (eval 14726) line 48, near \"\"items\":\"\nsyntax error at (eval 14726) line 49, at EOF\n",
+      "label": "hash",
+      "loaded": 0,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": {
+        "detail": "syntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \"}[\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Top:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Top",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Top",
+        "type": "runtime_handler"
+      },
+      "label": "block",
+      "route": "native",
+      "thrown": "",
+      "value": null
+    },
+    {
+      "error": "syntax error at (eval 15081) line 48, near \"}[\"\n",
+      "label": "block",
+      "loaded": 0,
+      "route": "fresh",
+      "value": null
+    },
+    {
+      "compile_error": "",
+      "error": null,
+      "label": "typed",
+      "route": "native",
+      "thrown": "",
+      "value": [
+        true,
+        1,
+        "0!",
+        "missing",
+        "B"
+      ]
+    },
+    {
+      "error": "",
+      "label": "typed",
+      "loaded": 1,
+      "route": "fresh",
+      "value": [
+        true,
+        1,
+        "0!",
+        "missing",
+        "B"
+      ]
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.1.4",
+  "producer": "docs/checkpoints/type-operation-inventory/probe_computed_selection.pl"
+}

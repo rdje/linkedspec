@@ -472,8 +472,8 @@ set(value, "token");
 return({ field : value, "seen" : true, "parts" : [value, entry_text()] });
 ```
 
-Use `array_expr[index]` when the container is already known and the access path is one level deep.
-Use direct nested access when the base is a working scalar that holds a structured array/hash payload.
+Use `binding[index]` or nested access when the base is a working binding that holds an array/hash payload.
+Direct computed-source reads such as `"a,b,c".split(",")[-2].uppercase()` are planned under computed-value selection; current Perl requires an intermediate binding.
 The older path-helper spelling is retirement-bound; new specs and examples should use direct nested access.
 
 Example:
