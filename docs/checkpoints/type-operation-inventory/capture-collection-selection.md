@@ -1,7 +1,7 @@
 # Read-only capture collection result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.5; implementation family23.3.25.
-Status: frozen bounded ordinary target; Perl25.1 implemented/targeted-checked, independent Rust25.2 next; complete admission remains23.4.
+Status: frozen bounded ordinary target; Perl25.1 and Rust25.2 implemented/targeted-checked, independent Dart25.3 next; complete admission remains23.4.
 
 ## Existing authority and scope
 
@@ -90,3 +90,13 @@ The unchanged shared fixture and finite String/empty/compaction/static-name/no-
 local-capture/span/deferred controls pass on native/fresh routes with typed ready
 metadata. No getter/cursor/schema/evaluator change or wider context classification.
 Independent backend work and complete source/context admission remain separate.
+
+
+## Bounded Rust implementation
+
+Rust25.2 already parses the existing helper calls and selection fields. Extending
+only the static computed-source result guard to those six boxed collection names
+prevents incompatible operands and legacy count fallthrough. The frozen target,
+alias/with guard controls, String zero/empty/compaction/static names and absent-
+capture versus bound/context/flat count controls pass native/restored/plan. No
+parser/getter/read/serde field or standalone emitted-source admission changes.

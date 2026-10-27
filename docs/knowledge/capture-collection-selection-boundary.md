@@ -1,6 +1,6 @@
 ---
 id: capture-collection-selection-boundary
-title: Read-only capture collection results compose with ordinary Perl typed reads
+title: Read-only capture collection results compose with ordinary Perl and Rust typed reads
 answers:
   - can entry_map result be indexed directly on Perl
   - can entry_groups feed a signed bracket and String method
@@ -8,11 +8,13 @@ answers:
   - why did the capture collection probe controls return null
   - is entry_named_map still an accepted source compatibility alias
   - which task repairs contextual callback computed read readiness
+  - why does Rust capture selection evaluate incompatible method operands
 date: 2026-10-27
-status: Perl25.1 implemented; contextual25.0 repaired; independent Rust25.2 next
+status: bounded Perl25.1/Rust25.2 implemented; independent Dart25.3 next
 tags: [captures, actionir, fluent, selection, perl, codeblock, documentation]
 evidence: "TYPE23.1.5 public native/fresh/descriptor/substitution intake and callback-form distinction; ADR0044 resolves the old child-mode teaching."
 reverify:
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_collection_selection"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/capture_collection_selection.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_capture_collection_selection.pl default"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contextual_selection_boundary.pl"
@@ -68,3 +70,18 @@ operand skips and bridges. Finite String zero/empty/optional-capture compaction,
 static helper shadowing, absent-capture and Unicode-span controls preserve current
 contracts. Other context/control/unknown/grouped/flat sources remain excluded.
 Independent Rust25.2 follows; full admission stays23.4.
+
+
+Rust25.2 independently parses/read-selects capture calls already, but its static
+ordinary-computed classifier excludes them. Before production the new four-test
+probe records three failing cases and one healthy String/empty/compaction/static-
+name case. Shared wrong-kind consumers return [[],name,AKV]; aliases/with also
+run incompatible operands, and six missing collection selections yield legacy
+counts0. All three execution routes agree on those observations. The repair adds
+exactly the six existing capture helper spellings to is_ordinary_computed_read;
+existing selected-result guards and persistent with tracking then reject before
+operands, without changing the reader, getters, parser or representation. Four
+new tests pass native/restored CompiledSpec/generated plan, including the unchanged
+shared oracle; six direct computed controls also pass. Bound-call counts0/0 and
+other context/flat count policies remain unchanged. No standalone emitted crate
+or full context/portable admission; independent Dart25.3 follows.

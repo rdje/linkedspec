@@ -7601,7 +7601,17 @@ impl Engine {
                     || Self::is_generic_receiver_value_method(name)
                     || Self::numeric_word_helper_name(name.strip_prefix("num_").unwrap_or(name))
                         .is_some()
-                    || matches!(name.as_str(), "array" | "hash")
+                    || matches!(
+                        name.as_str(),
+                        "array"
+                            | "hash"
+                            | "entry_groups"
+                            | "entry_map"
+                            | "entry_named_map"
+                            | "match_groups"
+                            | "match_map"
+                            | "match_named_map"
+                    )
             }
             Expr::ValueAccess { .. } => self.is_ordinary_computed_read(receiver),
             _ => true,
