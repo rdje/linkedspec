@@ -1632,7 +1632,7 @@ when(matches(kind, /^node_/)) {
 ## Inline value-control flow
 
 Inline `if(...)` and `switch(...)` are portable value expressions when simple branch payloads need to feed
-`return(...)`, an assignment RHS, or fluent `.return(...)`. They evaluate only the selected payload branch.
+`return(...)`, an assignment RHS, or fluent `.return(...)`. They evaluate only the selected payload branch. Ordinary Perl direct methods already work: `if(true,["a","b"],[]).last().uppercase()` returns `"B"`. For direct bracket selection, currently use a binding first: `chosen=if(true,["a","b"],[]); chosen[-1].uppercase()`; direct conditional postfix selection is planned. Perl currently also requires an eager condition block to be evaluated into a binding before inline `if`/`elseif`, because direct condition blocks have a known compiler defect. Branch payload blocks and eager `switch` subjects keep their documented behavior.
 Perl callable bodies also execute attached and marker branches, including nested local returns. Conditions
 use the same truthiness and skip unselected bodies. A statement conditional yields null unless
 an explicit return exits the callable; an eager expression block keeps its own return boundary.

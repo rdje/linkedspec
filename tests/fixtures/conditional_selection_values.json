@@ -1,0 +1,9 @@
+[
+  ["B", "B", "A"],
+  [false, 0, "0", null, [1], {"a": 1}],
+  ["b!", "CTIM"],
+  ["TAIL", ["new"]],
+  [null, null, ""],
+  [null, "IJ", null, null],
+  "TAIL"
+]

@@ -1,0 +1,166 @@
+{
+   "cases" : [
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            [
+               "a",
+               "b"
+            ],
+            "CT"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               "CT"
+            ]
+         },
+         "id" : "named_condition",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               "CT"
+            ]
+         },
+         "source" : "Top:: I {order=\"\";flag={order=cat(order,\"C\");true};selected=if(flag,{order=cat(order,\"T\");[\"a\",\"b\"]},{order=cat(order,\"F\");[\"bad\"]});return([selected,order])}",
+         "substitution" : "$order = \"\";$flag = do { $order = do { my @__ls_cat_parts = ($order, \"C\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::true } };$selected = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy($flag) }) { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }] }; } else { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"F\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }] }; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($selected); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            [
+               "a",
+               "b"
+            ],
+            "T"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               "T"
+            ]
+         },
+         "id" : "block_payload",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               "T"
+            ]
+         },
+         "source" : "Top:: I {order=\"\";selected=if(true,{order=cat(order,\"T\");[\"a\",\"b\"]},{order=cat(order,\"F\");[\"bad\"]});return([selected,order])}",
+         "substitution" : "$order = \"\";$selected = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }] }; } else { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"F\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }] }; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($selected); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            [
+               "a",
+               "b"
+            ],
+            "ET"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : "Can't modify constant item in scalar assignment at (eval 14632) line 51, at EOF\nsyntax error at (eval 14632) line 51, near \";true\"\nsyntax error at (eval 14632) line 51, at EOF\nCan't redeclare \"my\" in \"my\" at (eval 14632) line 51, near \"; my\"\nsyntax error at (eval 14632) line 51, near \"; [\"\nsyntax error at (eval 14632) line 51, near \"@__ls_evaluated_values }\"\nsyntax error at (eval 14632) line 51, near \"@__ls_evaluated_values }\"\nCan't redeclare \"my\" in \"my\" at (eval 14632) line 51, near \"; my\"\nsyntax error at (eval 14632) line 51, near \"undef }\"\nsyntax error at (eval 14632) line 51, near \") }\"\n(eval 14632) has too many errors.\n",
+            "loaded" : false,
+            "value" : null
+         },
+         "id" : "elseif_condition",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : {
+               "detail" : "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \";true\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:<none> line 24, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"] }\"\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:<none> line 24, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"undef }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"] }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nLinkedSpec::generated_handler:Top:<none> has too many errors.\n",
+               "stage" : "rule_handler_compile",
+               "summary" : "Rule handler compilation failed",
+               "type" : "runtime_handler"
+            },
+            "value" : null
+         },
+         "source" : "Top:: I {order=\"\";selected=if(false,[\"bad\"],elseif({order=cat(order,\"E\");true},{order=cat(order,\"T\");[\"a\",\"b\"]}),else({order=cat(order,\"F\");[\"bad\"]}));return([selected,order])}",
+         "substitution" : "$order = \"\";$selected = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { $__ls_if_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; } elsif (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy({order=cat(order,\"E\");true}) }) { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }] }; } else { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"F\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }] }; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($selected); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            [
+               "a",
+               "b"
+            ],
+            "ST"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               "ST"
+            ]
+         },
+         "id" : "switch_subject",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               "ST"
+            ]
+         },
+         "source" : "Top:: I {order=\"\";selected=switch({order=cat(order,\"S\");\"k\"},case(\"k\",{order=cat(order,\"T\");[\"a\",\"b\"]}),default({order=cat(order,\"F\");[\"bad\"]}));return([selected,order])}",
+         "substitution" : "$order = \"\";$selected = do { my $__ls_switch_source = do { $order = do { my @__ls_cat_parts = ($order, \"S\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"k\" }; my $__ls_switch_value; my $__ls_switch_done = 0; if (!$__ls_switch_done) { my $__ls_switch_case = \"k\"; if ((defined($__ls_switch_source) ? $__ls_switch_source : \"\") eq (defined($__ls_switch_case) ? $__ls_switch_case : \"\")) { $__ls_switch_value = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }] }; $__ls_switch_done = 1; } } if (!$__ls_switch_done) { $__ls_switch_value = do { $order = do { my @__ls_cat_parts = ($order, \"F\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }] }; $__ls_switch_done = 1; } $__ls_switch_value };return [do { my @__ls_evaluated_values = ($selected); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      }
+   ],
+   "scope" : "four authored inline condition, payload and subject controls; no population claim"
+}

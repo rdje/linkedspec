@@ -1,0 +1,212 @@
+{
+   "cases" : [
+      {
+         "ast" : {
+            "args" : [
+               {
+                  "kind" : "boolean",
+                  "source" : "true",
+                  "source_span" : {
+                     "end" : 7,
+                     "start" : 3
+                  },
+                  "value" : 1
+               },
+               {
+                  "items" : [
+                     {
+                        "kind" : "string",
+                        "quote" : "\"",
+                        "source" : "\"a\"",
+                        "source_span" : {
+                           "end" : 12,
+                           "start" : 9
+                        },
+                        "value" : "a"
+                     },
+                     {
+                        "kind" : "string",
+                        "quote" : "\"",
+                        "source" : "\"b\"",
+                        "source_span" : {
+                           "end" : 16,
+                           "start" : 13
+                        },
+                        "value" : "b"
+                     }
+                  ],
+                  "kind" : "array_literal",
+                  "source" : "[\"a\",\"b\"]",
+                  "source_span" : {
+                     "end" : 17,
+                     "start" : 8
+                  }
+               },
+               {
+                  "items" : [
+                     {
+                        "kind" : "string",
+                        "quote" : "\"",
+                        "source" : "\"bad\"",
+                        "source_span" : {
+                           "end" : 24,
+                           "start" : 19
+                        },
+                        "value" : "bad"
+                     }
+                  ],
+                  "kind" : "array_literal",
+                  "source" : "[\"bad\"]",
+                  "source_span" : {
+                     "end" : 25,
+                     "start" : 18
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "if",
+            "source" : "if(true,[\"a\",\"b\"],[\"bad\"])",
+            "source_method" : "if",
+            "source_span" : {
+               "end" : 26,
+               "start" : 0
+            }
+         },
+         "source" : "if(true,[\"a\",\"b\"],[\"bad\"])"
+      },
+      {
+         "ast" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "if(true,[\"a\",\"b\"],[\"bad\"])[-1]",
+            "source_span" : {
+               "end" : 30,
+               "start" : 0
+            }
+         },
+         "source" : "if(true,[\"a\",\"b\"],[\"bad\"])[-1]"
+      },
+      {
+         "ast" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"k\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "k"
+               },
+               {
+                  "args" : [
+                     {
+                        "kind" : "string",
+                        "quote" : "\"",
+                        "source" : "\"k\"",
+                        "source_span" : {
+                           "end" : 19,
+                           "start" : 16
+                        },
+                        "value" : "k"
+                     },
+                     {
+                        "items" : [
+                           {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"a\"",
+                              "source_span" : {
+                                 "end" : 24,
+                                 "start" : 21
+                              },
+                              "value" : "a"
+                           },
+                           {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"b\"",
+                              "source_span" : {
+                                 "end" : 28,
+                                 "start" : 25
+                              },
+                              "value" : "b"
+                           }
+                        ],
+                        "kind" : "array_literal",
+                        "source" : "[\"a\",\"b\"]",
+                        "source_span" : {
+                           "end" : 29,
+                           "start" : 20
+                        }
+                     }
+                  ],
+                  "kind" : "call",
+                  "name" : "case",
+                  "source" : "case(\"k\",[\"a\",\"b\"])",
+                  "source_method" : "case",
+                  "source_span" : {
+                     "end" : 30,
+                     "start" : 11
+                  }
+               },
+               {
+                  "args" : [
+                     {
+                        "items" : [
+                           {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"bad\"",
+                              "source_span" : {
+                                 "end" : 45,
+                                 "start" : 40
+                              },
+                              "value" : "bad"
+                           }
+                        ],
+                        "kind" : "array_literal",
+                        "source" : "[\"bad\"]",
+                        "source_span" : {
+                           "end" : 46,
+                           "start" : 39
+                        }
+                     }
+                  ],
+                  "kind" : "call",
+                  "name" : "default",
+                  "source" : "default([\"bad\"])",
+                  "source_method" : "default",
+                  "source_span" : {
+                     "end" : 47,
+                     "start" : 31
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "switch",
+            "source" : "switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]))",
+            "source_method" : "switch",
+            "source_span" : {
+               "end" : 48,
+               "start" : 0
+            }
+         },
+         "source" : "switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]))"
+      },
+      {
+         "ast" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]))[-1]",
+            "source_span" : {
+               "end" : 52,
+               "start" : 0
+            }
+         },
+         "source" : "switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]))[-1]"
+      }
+   ],
+   "scope" : "existing inline producers and direct bracket AST distinction; no population claim"
+}

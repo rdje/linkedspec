@@ -1,0 +1,222 @@
+{
+   "cases" : [
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            [
+               "a",
+               "b"
+            ],
+            [
+               "a",
+               "b"
+            ]
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               [
+                  "a",
+                  "b"
+               ]
+            ]
+         },
+         "id" : "producers",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               [
+                  "a",
+                  "b"
+               ],
+               [
+                  "a",
+                  "b"
+               ]
+            ]
+         },
+         "source" : "Top:: I {return([if(true,[\"a\",\"b\"],[\"bad\"]),switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]))])}",
+         "substitution" : "return [do { my @__ls_evaluated_values = (do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; } else { $__ls_if_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; } $__ls_if_value }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_switch_source = \"k\"; my $__ls_switch_value; my $__ls_switch_done = 0; if (!$__ls_switch_done) { my $__ls_switch_case = \"k\"; if ((defined($__ls_switch_source) ? $__ls_switch_source : \"\") eq (defined($__ls_switch_case) ? $__ls_switch_case : \"\")) { $__ls_switch_value = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; $__ls_switch_done = 1; } } if (!$__ls_switch_done) { $__ls_switch_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; $__ls_switch_done = 1; } $__ls_switch_value }); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "B",
+            "B"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               "B",
+               "B"
+            ]
+         },
+         "id" : "named",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               "B",
+               "B"
+            ]
+         },
+         "source" : "Top:: I {a=if(true,[\"a\",\"b\"],[\"bad\"]);b=switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]));return([a[-1].uppercase(),b.last().uppercase()])}",
+         "substitution" : "$a = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; } else { $__ls_if_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; } $__ls_if_value };$b = do { my $__ls_switch_source = \"k\"; my $__ls_switch_value; my $__ls_switch_done = 0; if (!$__ls_switch_done) { my $__ls_switch_case = \"k\"; if ((defined($__ls_switch_source) ? $__ls_switch_source : \"\") eq (defined($__ls_switch_case) ? $__ls_switch_case : \"\")) { $__ls_switch_value = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; $__ls_switch_done = 1; } } if (!$__ls_switch_done) { $__ls_switch_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; $__ls_switch_done = 1; } $__ls_switch_value };return [do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_read_value = $a; my $__ls_read_index; $__ls_read_index = -1; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }; $__ls_scalar_source }; do { my $__ls_upper = $__ls_selected_default; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_upper = do { my $__ls_selected_default = do { my $__ls_scalar_source = $b; $__ls_scalar_source }; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_last = $__ls_selected_default; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }) : undef }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "B",
+            "B"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               "B",
+               "B"
+            ]
+         },
+         "id" : "direct_methods",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               "B",
+               "B"
+            ]
+         },
+         "source" : "Top:: I {return([if(true,[\"a\",\"b\"],[\"bad\"]).last().uppercase(),switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"])).last().uppercase()])}",
+         "substitution" : "return [do { my @__ls_evaluated_values = (do { my $__ls_upper = do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(1) }) { $__ls_if_value = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; } else { $__ls_if_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; } $__ls_if_value }; $__ls_scalar_source }; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_last = $__ls_selected_default; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }) : undef }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_upper = do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_switch_source = \"k\"; my $__ls_switch_value; my $__ls_switch_done = 0; if (!$__ls_switch_done) { my $__ls_switch_case = \"k\"; if ((defined($__ls_switch_source) ? $__ls_switch_source : \"\") eq (defined($__ls_switch_case) ? $__ls_switch_case : \"\")) { $__ls_switch_value = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; $__ls_switch_done = 1; } } if (!$__ls_switch_done) { $__ls_switch_value = [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; $__ls_switch_done = 1; } $__ls_switch_value }; $__ls_scalar_source }; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_last = $__ls_selected_default; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }) : undef }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "B",
+            "B"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : "syntax error at (eval 15137) line 48, near \"}[\"\nsyntax error at (eval 15137) line 48, near \"}[\"\n",
+            "loaded" : false,
+            "value" : null
+         },
+         "id" : "direct_brackets",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 0,
+            "raw_perl_dependency_count" : 2,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : {
+               "detail" : "syntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \"}[\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 21, near \"}[\"\n",
+               "stage" : "rule_handler_compile",
+               "summary" : "Rule handler compilation failed",
+               "type" : "runtime_handler"
+            },
+            "value" : null
+         },
+         "source" : "Top:: I {return([if(true,[\"a\",\"b\"],[\"bad\"])[-1].uppercase(),switch(\"k\",case(\"k\",[\"a\",\"b\"]),default([\"bad\"]))[-1].uppercase()])}",
+         "substitution" : "return [do { my @__ls_evaluated_values = (do { my $__ls_upper = do { if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy([\"a\",\"b\"]) }) { do { [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; undef } } }[-1]; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_upper = do { my $__ls_switch_value_1 = \"k\"; my $__ls_switch_hit_1 = 0; if (!$__ls_switch_hit_1 && $__ls_switch_value_1 eq \"k\") { $__ls_switch_hit_1 = 1; do { [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }]; undef } }; if (!$__ls_switch_hit_1) { $__ls_switch_hit_1 = 1; do { [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }]; undef } } }[-1]; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            "A",
+            5
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : null,
+            "loaded" : true,
+            "value" : [
+               "A",
+               5
+            ]
+         },
+         "id" : "scalar_methods",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : null,
+            "value" : [
+               "A",
+               5
+            ]
+         },
+         "source" : "Top:: I {return([if(false,\"bad\",\" a \").trim().uppercase(),switch(\"k\",case(\"k\",2),default(0)).add(3)])}",
+         "substitution" : "return [do { my @__ls_evaluated_values = (do { my $__ls_upper = do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy(0) }) { $__ls_if_value = \"bad\"; } else { $__ls_if_value = \" a \"; } $__ls_if_value }; $__ls_scalar_source }; do { my $__ls_trim = $__ls_selected_default; if (defined($__ls_trim)) { $__ls_trim =~ s/^\\s+|\\s+$//g; } $__ls_trim } }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my @__ls_num_add_terms = (do { my @__ls_evaluated_values = (do { my $__ls_switch_source = \"k\"; my $__ls_switch_value; my $__ls_switch_done = 0; if (!$__ls_switch_done) { my $__ls_switch_case = \"k\"; if ((defined($__ls_switch_source) ? $__ls_switch_source : \"\") eq (defined($__ls_switch_case) ? $__ls_switch_case : \"\")) { $__ls_switch_value = 2; $__ls_switch_done = 1; } } if (!$__ls_switch_done) { $__ls_switch_value = 0; $__ls_switch_done = 1; } $__ls_switch_value }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (3); @__ls_evaluated_values }); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }); @__ls_evaluated_values }]"
+      },
+      {
+         "descriptor_error" : null,
+         "expected" : [
+            [
+               "a",
+               "b"
+            ],
+            "CT"
+         ],
+         "fresh" : {
+            "emission_error" : null,
+            "error" : null,
+            "load_error" : "Can't modify constant item in scalar assignment at (eval 16228) line 51, at EOF\nsyntax error at (eval 16228) line 51, near \";true\"\nsyntax error at (eval 16228) line 51, at EOF\nCan't redeclare \"my\" in \"my\" at (eval 16228) line 51, near \"; my\"\nsyntax error at (eval 16228) line 51, near \"; [\"\nsyntax error at (eval 16228) line 51, near \"@__ls_evaluated_values }\"\nsyntax error at (eval 16228) line 51, near \"@__ls_evaluated_values }\"\nCan't redeclare \"my\" in \"my\" at (eval 16228) line 51, near \"; my\"\nsyntax error at (eval 16228) line 51, near \"undef }\"\nsyntax error at (eval 16228) line 51, near \") }\"\n(eval 16228) has too many errors.\n",
+            "loaded" : false,
+            "value" : null
+         },
+         "id" : "lazy_producer",
+         "input" : "x",
+         "metadata" : {
+            "language_agnostic_action_ir_ready" : 1,
+            "raw_perl_dependency_count" : 0,
+            "unresolved_helper_count" : 0
+         },
+         "native" : {
+            "error" : {
+               "detail" : "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \";true\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, at EOF\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:<none> line 24, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"] }\"\nCan't redeclare \"my\" in \"my\" at LinkedSpec::generated_handler:Top:<none> line 24, near \"; my\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"undef }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \"] }\"\nsyntax error at LinkedSpec::generated_handler:Top:<none> line 24, near \") }\"\nLinkedSpec::generated_handler:Top:<none> has too many errors.\n",
+               "stage" : "rule_handler_compile",
+               "summary" : "Rule handler compilation failed",
+               "type" : "runtime_handler"
+            },
+            "value" : null
+         },
+         "source" : "Top:: I {order=\"\";selected=if({order=cat(order,\"C\");true},{order=cat(order,\"T\");[\"a\",\"b\"]},{order=cat(order,\"F\");[\"bad\"]});return([selected,order])}",
+         "substitution" : "$order = \"\";$selected = do { my $__ls_if_value; if (do { require LinkedSpec::RuntimeLogical; LinkedSpec::RuntimeLogical::truthy({order=cat(order,\"C\");true}) }) { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values }] }; } else { $__ls_if_value = do { $order = do { my @__ls_cat_parts = ($order, \"F\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"bad\"); @__ls_evaluated_values }] }; } $__ls_if_value };return [do { my @__ls_evaluated_values = ($selected); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+      }
+   ],
+   "scope" : "six authored ordinary inline-control producer and composition distinctions; no population claim"
+}
