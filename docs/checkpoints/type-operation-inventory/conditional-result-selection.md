@@ -1,7 +1,7 @@
 # Inline conditional result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.6; family23.3.26.
-Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1/Rust26.2 implemented/targeted-checked; independent Dart26.3 next.
+Status: frozen ordinary target; prerequisite26.0 repaired and Perl26.1/Rust26.2/Dart26.3 implemented/targeted-checked; independent Julia26.4 next.
 
 ADR0007 and the current inline-control contract make if/switch value expressions:
 they evaluate the selected payload lazily and yield its actual kind. Existing
@@ -87,3 +87,13 @@ Its existing static result guard now recognizes only if/switch Calls with payloa
 operands. One-operand headers retain their old count policy. Four new cases and
 six direct computed cases pass native/restored CompiledSpec/generated plan;
 with/kind/missing guards are repaired without parser/read/serde/equality changes.
+
+
+## Bounded Dart selection
+
+Dart26.3 enables the existing computed-result guard only for canonical if/switch
+Call/sourceMethod names with payload arity and no attached block. Its existing
+parser and lazy/read owners remain; i/when normalization does not broaden this
+source role. Four execution cases pass native/restoredSpec/plan with unchanged legacy counts;
+a native parser group checks header/alias/attached fields, and seven direct
+computed cases also pass. Format/fatal analyze pass; no parser/reader/codec movement.

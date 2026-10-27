@@ -12,11 +12,13 @@ answers:
   - why did a named early-return block work while an inline payload failed
   - why does a one-argument switch remain outside computed read sources
   - how does Rust distinguish inline conditional result guards from headers
+  - why must Dart inline result guards inspect sourceMethod and trailingBlockArg
 date: 2026-10-27
-status: producer26.0 repaired; bounded Perl26.1/Rust26.2 implemented; independent Dart26.3 next
+status: producer26.0 repaired; bounded Perl26.1/Rust26.2/Dart26.3 implemented; independent Julia26.4 next
 tags: [perl, actionir, control, selection, fluent, laziness]
 evidence: "TYPE23.1.6 finite public native/fresh/descriptor/substitution and AST intake at fcfb7dcdc; ADR0007/current inline-value authority."
 reverify:
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/conditional_selection_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test conditional_selection"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/conditional_selection.t"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/inline_condition_value_blocks.t"
@@ -93,3 +95,14 @@ kinds/CTIM/snapshots/IJ/bridges, CETM/local returns and old header/bound/flat co
 remain; wrong-kind operands skip and missing inline counts become null. No parser,
 reader, serde, equality or deferred vocabulary change. Dart26.3 follows; full
 source/context/portable/generated admission stays23.4.
+
+
+Dart26.3 independently observes3 RED result cases/2 healthy lazy/AST cases. The
+same missing static source flag bypasses existing actual-kind guards. Alias
+canonicalization maps i/when to if, so guard admission checks canonical name plus
+sourceMethod, payload arity and no trailingBlockArg. Four new execution cases pass native/restoredSpec/plan; a native parser group
+and seven direct computed tests also pass. Shared kinds/CTIM/snapshots/IJ/bridges,
+with operand skips and CETM/local returns pass; headers/i-alias/bound/flat counts0
+and parsed role fields stay unchanged. Format/fatal analyze pass; no parser/read/
+codec/truth/equality or deferred vocabulary change. Julia26.4 follows; full
+admission stays23.4.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust inline conditional result guards implemented/targeted-checked; independent Dart26.3 next.
+Dart canonical inline conditional result guards implemented/targeted-checked; Julia26.4 next.
 
 ## Latest Completed Slice
 
-Rust now applies existing actual-kind guards to inline if/switch bracket results only when their static Call has payload operands. The parser, lazy dispatcher and reader already work. Independent RED gives3 failed cases/1 healthy lazy producer across native/restored CompiledSpec/plan; wrong-kind operands run and missing conditional results retain legacy counts. All4 new and6 direct computed cases pass after the classifier change, including unchanged shared kinds/CTIM/snapshots/IJ/bridges, CETM/local returns, with operand skips and unchanged header/bound/flat counts0. Rustfmt/compilation, qualified book/catalog, target/fact/map and history/fast staged continuity/diff pass. No parser/reader/serde/equality/executor change or standalone source admission. Independent Dart26.3 follows; full23.4/pressure/required Perl registration/declared Lua5.4 remain separate; no push.
+Dart now applies existing actual-kind guards only to canonical inline if/switch Call/sourceMethod names with payload arity and no attached block. Existing alias normalization otherwise broadens i/when, so parsed role fields keep those boundaries. Independent RED gives3 failed result cases/2 healthy lazy/AST cases across native/restoredSpec/plan. New5 and direct computed7 pass with unchanged shared kinds/CTIM/snapshots/IJ/bridges, with operand skips, CETM/local returns, guarded missing counts and unchanged header/i-alias/bound/flat counts0. AST role fields, format and fatal analyze pass. No parser/reader/codec/truth/equality/executor change. Current book/catalog, target/fact/map and history/fast staged continuity/diff align. Julia26.4 follows; full23.4/pressure/required Perl registration/declared Lua5.4 remain separate; no push.
 
 ## Next Action
 
-Activate independent Dart conditional selection26.3 from this clean Rust boundary. Read canonical inline Call/header roles and existing computed-source guard; use unchanged shared input x plus finite with/lazy/local-return/missing/header/bound/flat native/restoredSpec/plan controls. Reuse existing parser/readers/static ownership and preserve condition/equality/statement/deferred/context/copy/write policies. Format/fatal analyze/targeted/docs/commit before Julia26.4. No broad suite/admission/push; pressure/required Perl registration/declared Lua5.4 stay separate.
+Activate independent Julia conditional selection26.4 from this clean Dart boundary. Read current inline Call/header/alias metadata and computed-result guard; use unchanged shared input x plus finite with/lazy/local-return/missing/legacy native/plan/fresh controls with strict Bool/Number identity. Reuse existing parser/readers/static role ownership, preserving equality/truth/statement/deferred/context/copy/write semantics. Compile/targeted/docs/commit before safe Lua26.5. No full package/matrix/admission/push; pressure/required Perl registration/declared Lua5.4 stay separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.26.3` — Dart canonical inline conditional result guards implemented/targeted-checked; Julia26.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.2` — Rust inline conditional result guards implemented/targeted-checked; independent Dart26.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.1` — Perl inline conditional result selection implemented/targeted-checked; independent Rust26.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.0` — Inline condition typed-value and child AST lowering repaired; Perl conditional brackets26.1 next.
@@ -29,7 +30,6 @@ Activate independent Dart conditional selection26.3 from this clean Rust boundar
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.4` — Julia computed selection implemented/targeted-checked; bounded Perl/Rust/Dart/Julia children complete; safe Lua24.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.3` — Dart computed selection implemented/targeted-checked; bounded Perl/Rust/Dart children complete; Julia24.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.2` — Rust computed selection implemented/targeted-checked with preserved bound-call counts; Dart24.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.2` — Perl bounded computed-selection implementation complete, including registered results and preserved callable/deferred boundaries; Rust24.2 next.
 
 ## History
 

@@ -5149,6 +5149,12 @@ final class LinkedSpecRuntimeEngine {
         return true;
       }
       final helper = canonicalActionHelperName(receiver.name);
+      if (helper == 'if' || helper == 'switch') {
+        return receiver.name == helper &&
+            (receiver.sourceMethod ?? receiver.name) == helper &&
+            !receiver.trailingBlockArg &&
+            receiver.args.length >= 2;
+      }
       if (const {'flat', 'flat_array', 'flat_hash'}.contains(helper)) {
         return false;
       }
