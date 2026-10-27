@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia computed selection implemented/targeted-checked; bounded Perl/Rust/Dart/Julia children complete; safe Lua24.5 next.
+All five bounded computed-selection implementations complete; safe Lua checked on PUC5.5.1/LuaJIT. Next ordinary fluent gap selection23.1.5.
 
 ## Latest Completed Slice
 
-Julia now composes supported Call/fluent/Array/Hash/immediate-block bracket reads through its existing character-indexed delimiter scanner, ValueAccess node and access segments. Maximal contiguous fluent suffixes retain arity preflight and recurse into shorter receivers, rejecting empty invalid suffixes before recursion. Static registered-function and semantic pure/Array/Hash helper ownership extends copied-result actual-kind guards through with/bridges, preserving unknown bound-call counts0/0. Public native/plan/fresh RED15 failures/3 controls is resolved; wrong-kind [null,[1],KV] becomes [null,null,empty] before operands. New registered strict regression PASS25 covers the unchanged shared target, kinds/signed reads/snapshots/SIC/IJ/scopes/repeated bridges/with/regex Unicode and invalid/named/grouped/raw-receiver/scalar-span controls. Direct selected/copy/signed tests PASS50 (3/12/35), total75 focused assertions with freshly loaded emitted execution. Package compilation with depwarn=error, book/history/fast staged continuity/diff pass. No AST/schema/evaluator field, runtime-value callable classification, named/grouped/write or existing bound policy movement. Bounded Perl/Rust/Dart/Julia implementations complete; safe Lua24.5 next. Full source/context/portable/standalone generated/canonical admission23.4, Perl registrations, pressure repair and declared Lua5.4 remain separate; no push.
+Safe Lua now composes supported Call/fluent/Array/Hash/immediate-block bracket reads through the existing scanner, Unicode span map, ValueAccess/access-segment owners and shorter receiver/fluent suffix recursion. Contiguous arity preflight and empty-suffix rejection retain invalid/named/grouped/raw/direct-call boundaries. Static registry/semantic helper ownership extends copied-result actual-kind guards through with/bridges, using the existing private receiver table and no new module-level locals. Each available host resolves original15 failing native/plan/fresh comparisons while retaining3 bound controls; wrong-kind [null,[1],KV] becomes [null,null,empty] before operands. Six strict groups pass on all three routes of actual PUC5.5.1 and LuaJIT2.1.1788460057: unchanged full target, kinds/signed/snapshots/SIC/IJ/function/with/repeated bridges/regex Unicode and old bound counts0/0. Parser/scalar-span/contiguous malformed-copy and direct selected/copy/signed checks pass both hosts. luac/loadfile syntax, book/history/fast staged continuity/diff pass; unsafe patterns/full runner are not executed. No AST/schema/evaluator field, runtime-value callable classifier or named/grouped/write policy movement. All five bounded computed-selection backend children complete; remaining feature selection23.1.5 next. Full source/context/portable/generated/canonical admission23.4, required Perl registrations, pressure repair and declared Lua5.4/native-formatting repairs remain separate; no push.
 
 ## Next Action
 
-Activate safe Lua computed-selection24.5 from this clean Julia boundary; read canonical parser/value_access/selector/receiver owners and safe host runner conventions. Run unchanged shared target plus small strict source/kind/guard/scope/regex/bound controls on named PUC5.5.1/LuaJIT native/plan/fresh routes; implement only bounded gaps without adding module-level locals or running unsafe patterns/full runner. Small compile/direct checks/docs/commit, then resume remaining feature selection23.1. Full admission/pressure/Perl registration/declared Lua5.4 remain separate; no push.
+Activate remaining fluent-feature selection23.1.5 from this clean all-five bounded computed-selection boundary. Read retained helpers/roles/source inventory, current per-type/generic/result contracts and canonical book/facts; choose and own the next useful ordinary method or inter-type transition before production. Use only small public probes for an unresolved distinction, preserve deferred/context/control/list-splice/mutation/copy rights and existing defect owners, and keep focused implement/compile/targeted/docs/commit cadence. Do not infer comprehensive feature exhaustion or start full admission/maintenance; no push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.24.5` — All five bounded computed-selection implementations complete; safe Lua checked on PUC5.5.1/LuaJIT. Next ordinary fluent gap selection23.1.5.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.4` — Julia computed selection implemented/targeted-checked; bounded Perl/Rust/Dart/Julia children complete; safe Lua24.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.3` — Dart computed selection implemented/targeted-checked; bounded Perl/Rust/Dart children complete; Julia24.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.2` — Rust computed selection implemented/targeted-checked with preserved bound-call counts; Dart24.3 next.
@@ -29,7 +30,6 @@ Activate safe Lua computed-selection24.5 from this clean Julia boundary; read ca
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.0` — Approved scalar/null copy target adopted; bounded Perl-first rollout owned; ordinary producer1.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.2.0` — Deferred literal selection AST/errors/readiness restored; approved scalar/null value-copy extension is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.1.1` — Perl computed noncall reads targeted-checked; legacy callable compatibility restored; direct-call child24.1.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.1.4` — Computed-value bracket selection frozen; public Perl RED retained; bounded family24 owns implementation.
 
 ## History
 

@@ -23,8 +23,9 @@ answers:
   - why does Dart split result indexing become an invalid fluent chain
   - how does Dart avoid recursion when a fluent suffix is invalid
   - why does Julia split result indexing remain a raw action
+  - how do Lua computed reads preserve the module local budget and bound call counts
 date: 2026-10-27
-status: Perl/Rust/Dart/Julia bounded computed sources checked; Lua/full admission open
+status: all five bounded computed-source implementations checked; full admission remains23.4
 tags: [actionir, selection, fluent, arrays, hash, perl, composition]
 evidence: "TYPE23.1.4 public Get/fresh probe and exact computed-selection-intake.json; normative computed-selection.md/shared fixture."
 reverify:
@@ -36,6 +37,7 @@ reverify:
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test computed_selection"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/computed_selection_test.dart"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/computed_selection_test.jl\")'"
+  - "bash tools/run_lua_project_data.sh puc lua/test/computed_selection_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/computed_selection_test.lua"
 ---
 
 At d98e139d7, named signed/typed selected continuations work on public Perl
@@ -156,3 +158,14 @@ semantic pure/Array/Hash helper sets extend copied-result kind guards through wi
 and bridges; unknown bound counts0/0 remain. New registered regression passes25
 and direct selected/copy/signed checks50, without serialized/evaluator movement.
 Safe Lua24.5 is next; complete source/context/portable admission stays23.4.
+
+Safe Lua24.5 independently observes15 failing comparisons/3 bound controls per
+available host. Existing scanner/Unicode span/access owners now parse computed
+prefixes and shorter fluent receivers, rejecting empty suffixes before recursion.
+Static registry/helper classification and copied-result guards live on the existing
+private receiver table with no chunk-local additions. Full target and six finite
+native/plan/fresh groups, parser/spans/shape and selected/copy/signed controls pass
+on actual PUC5.5.1/LuaJIT2.1.1788460057. Unknown bound counts0/0 stay. luac/loadfile
+pass; no unsafe pattern/full runner/declared5.4 or new schema/evaluator claim.
+All bounded backend children complete;23.1.5 selects the next feature, full23.4
+and declared-host/native-formatting repair owners remain open.

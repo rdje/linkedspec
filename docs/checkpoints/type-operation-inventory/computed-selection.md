@@ -227,3 +227,23 @@ stay; no value-based callable classification or serialized/evaluator field is ad
 New registered regression passes25, including the unchanged full target, strict
 kinds/effects/signed/function/with/regex/Unicode/parser controls. Direct selected/
 copy/signed tests pass50. Safe Lua24.5 follows; full admission remains23.4.
+
+## Bounded safe Lua implementation
+
+24.5 independently observes15 failing native/plan/fresh comparisons and3 bound
+controls per available host. Its existing scanner/Unicode span map/access segments
+now compose supported computed prefixes and maximal contiguous fluent suffixes.
+Empty suffixes reject before recursion; direct-call/raw/named/grouped policies
+remain. The classifier lives on the existing private receiver table, adding no
+module-level locals. Static registry and semantic helper owners extend copied-
+result actual-kind guards through with/bridges; unknown bound counts0/0 remain.
+
+The unchanged full target, strict kinds/effects/scopes/with/regex/Unicode and bound
+controls pass six groups on native/plan/fresh routes of PUC5.5.1 and
+LuaJIT2.1.1788460057. Parser/scalar-span/contiguous-shape and direct selected/copy/
+signed checks pass on both. luac/loadfile checks retain syntax/local-budget proof;
+the full runner and unsafe patterns do not execute. No schema/evaluator field or
+runtime-value callable inference is added. All five bounded backend children are
+complete; full source/context/portable/generated/canonical admission remains23.4,
+with declared Lua5.4 restoration and native formatting repairs separately owned.
+Resume remaining fluent-feature selection23.1.5 before claiming feature exhaustion.

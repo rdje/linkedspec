@@ -3425,6 +3425,24 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
 end
 
+function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
+  if expr == nil or expr.kind ~= "value_access" then return false end
+  local receiver = expr.receiver
+  if receiver.kind == "call" then
+    -- Static owners preserve legacy unknown bound-call result policies.
+    if engine.compiled_spec.function_registry:has_name(receiver.name) then return true end
+    local name = action_contracts.canonical_action_helper_name(receiver.name)
+    if ARRAY_SPLICE_HELPERS[name] then return false end
+    return not not (is_pure_string_helper(name) or PURE_ARRAY_HELPERS[name] or PURE_HASH_HELPERS[name] or
+      LOGICAL_HELPERS[name] or scalar_numeric.supports(name) or scalar_numeric.supports_reducer(name) or
+      name == "array" or name == "hash" or name == "copy" or name == "coalesce" or name == "coalesce_nonempty")
+  end
+  if receiver.kind == "value_access" then
+    return typed_source.receiver_mutation.is_ordinary_computed_read(engine, receiver)
+  end
+  return true
+end
+
 function typed_source.receiver_mutation.evaluate_fluent_calls(
   engine,
   value,
@@ -3436,8 +3454,9 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
 )
   local scalar_result = type(value) == "boolean"
   local reduction_result = false
-  local copied_result = target_receiver ~= nil and target_receiver.kind == "call" and
-    action_contracts.canonical_action_helper_name(target_receiver.name) == "copy"
+  local kind_guarded_result = typed_source.receiver_mutation.is_ordinary_computed_read(engine, target_receiver) or
+    (target_receiver ~= nil and target_receiver.kind == "call" and
+      action_contracts.canonical_action_helper_name(target_receiver.name) == "copy")
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -3452,9 +3471,9 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       PURE_ARRAY_HELPERS[canonical_name] or
       canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
       (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name)))
-    -- Copied and reduced values keep their actual kind through bridges.
+    -- Copied, computed and reduced values keep actual kinds through bridges.
     -- Check container-only consumers before evaluating their operands.
-    if reduction_result or copied_result then
+    if reduction_result or kind_guarded_result then
       local kind = json.kind(value)
       if (array_only and kind ~= "array") or (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray") then
         return json.null
@@ -3569,7 +3588,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     else
       value = evaluate_call(engine, call_expr, ctx, accumulator, edge_state)
     end
-    copied_result = copied_result or canonical_name == "copy"
+    kind_guarded_result = kind_guarded_result or canonical_name == "copy"
     local result_kind = json.kind(value)
     scalar_result = (scalar_result or type(value) == "boolean") and
       result_kind ~= "array" and result_kind ~= "harray"

@@ -1449,21 +1449,29 @@ local function parser(root_source)
   end
 
   local function parse_value_access(text, start_byte)
-    local open_position = text:find("(", 1, true)
-    if open_position == nil then return nil end
-    local close_position = find_matching(text, open_position, "(", ")")
-    if close_position == nil or close_position == #text then return nil end
-    local position = skip_space(text, close_position + 1)
-    if text:sub(position, position) ~= "[" then return nil end
-
-    local receiver = parse_call(text:sub(1, close_position), start_byte)
-    if receiver == nil then return nil end
-    local segments = parse_access_segments(text, position, start_byte)
-    if segments == nil then return nil end
-    return action_ast.expr("value_access", text, span(start_byte, start_byte + #text), {
-      receiver = receiver,
-      segments = segments,
-    })
+    local state = scan_state()
+    for position = 1, #text do
+      if position > 1 and top_level(state) and text:sub(position, position) == "[" then
+        local prefix, prefix_start = trim_offsets(text:sub(1, position - 1), start_byte)
+        -- Grouped postfix reconciliation retains its existing owner.
+        if prefix:sub(1, 1) ~= "(" then
+          local receiver = parse_call(prefix, prefix_start) or parse_expression(prefix, prefix_start)
+          local kind = receiver.kind
+          if kind == "call" or kind == "fluent_chain" or kind == "array_literal" or
+              kind == "hash_literal" or kind == "block_value" or kind == "value_access" then
+            local segments = parse_access_segments(text, position, start_byte)
+            if segments ~= nil and #segments > 0 then
+              return action_ast.expr("value_access", text, span(start_byte, start_byte + #text), {
+                receiver = receiver,
+                segments = segments,
+              })
+            end
+          end
+        end
+      end
+      consume_scan(state, text, position)
+    end
+    return nil
   end
 
   parse_expression = function(source, absolute_start)
@@ -1473,21 +1481,33 @@ local function parser(root_source)
     if assignment then return assignment end
     local receiver_mutation = parse_receiver_mutation_chain(text, start_byte)
     if receiver_mutation then return receiver_mutation end
+    local value_access = parse_value_access(text, start_byte)
+    if value_access then return value_access end
     local fluent_segments = split_fluent(text, start_byte)
     if #fluent_segments > 1 then
-      local receiver_text = fluent_segments[1].text
-      local receiver_start = fluent_segments[1].start
-      if outer_balanced(receiver_text, "(", ")") then
-        receiver_text, receiver_start = trim_offsets(receiver_text:sub(2, -2), receiver_start + 1)
+      local receiver_end = fluent_segments[1]["end"]
+      local reversed_calls = {}
+      -- Keep contiguous calls together for existing arity preflight.
+      for index = #fluent_segments, 2, -1 do
+        local call = parse_fluent_call(fluent_segments[index], index == #fluent_segments)
+        if not call then
+          receiver_end = fluent_segments[index]["end"]
+          break
+        end
+        reversed_calls[#reversed_calls + 1] = call
+      end
+      if #reversed_calls == 0 then return raw_expr(text, start_byte, "invalid_fluent_chain") end
+      local receiver_text, receiver_start = trim_offsets(text:sub(1, receiver_end - start_byte), start_byte)
+      local receiver = parse_expression(receiver_text, receiver_start)
+      if receiver.kind == "raw_perl" and receiver_end ~= fluent_segments[1]["end"] then
+        return raw_expr(text, start_byte, "invalid_fluent_chain")
       end
       local calls = {}
-      for index = 2, #fluent_segments do
-        local call = parse_fluent_call(fluent_segments[index], index == #fluent_segments)
-        if not call then return raw_expr(text, start_byte, "invalid_fluent_chain") end
-        calls[#calls + 1] = call
+      for index = #reversed_calls, 1, -1 do
+        calls[#calls + 1] = reversed_calls[index]
       end
       return action_ast.expr("fluent_chain", text, span(start_byte, start_byte + #text), {
-        receiver = parse_expression(receiver_text, receiver_start),
+        receiver = receiver,
         calls = calls,
       })
     end
@@ -1542,8 +1562,6 @@ local function parser(root_source)
     end
     local control = parse_control(text, start_byte)
     if control then return control end
-    local value_access = parse_value_access(text, start_byte)
-    if value_access then return value_access end
     local call = parse_call(text, start_byte)
     if call then return call end
     local access = parse_access(text, start_byte)
