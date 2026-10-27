@@ -1514,6 +1514,9 @@ sub _actionir_ast_computed_data_call_method {
  # These helpers expose list splices rather than one boxed source value.
  return undef if $method =~ /\Aflat(?:_array|_hash)?\z/o;
  return undef if _is_tree_traversal_receiver_method($method);
+ # These read-only context helpers already return boxed Array/Hash snapshots.
+ # Other context, cursor and control helpers keep their existing source grammar.
+ return $method if $method =~ /\A(?:entry|match)_(?:groups|map|named_map)\z/o;
  return $method if $method =~ /\A(?:array|hash|and|or|not)\z/o
   || _is_string_receiver_value_chain_method($method)
   || _is_array_receiver_value_chain_method($method)

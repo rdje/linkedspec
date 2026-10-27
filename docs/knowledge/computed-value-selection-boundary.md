@@ -184,3 +184,9 @@ adding an executor operation. Pure-function callbacks still see invocation-local
 parameters, not implicit rule captures. Bounded ordinary support is not full
 callback admission; readonly capture source expansion25.1 follows.
 See [[capture-collection-selection-boundary]] for the public six-form distinction.
+
+
+Perl25.1 separately admits the six readonly capture collection helper spellings
+as static computed sources after25.0 preservation. They reuse existing boxed
+getters/read builder/result guards; other context sources stay excluded. See
+[[capture-collection-selection-boundary]] for the frozen target and direct checks.

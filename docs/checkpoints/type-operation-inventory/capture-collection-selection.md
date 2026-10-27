@@ -1,7 +1,7 @@
 # Read-only capture collection result selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.5; implementation family23.3.25.
-Status: frozen bounded ordinary feature target; implementations not yet admitted.
+Status: frozen bounded ordinary target; Perl25.1 implemented/targeted-checked, independent Rust25.2 next; complete admission remains23.4.
 
 ## Existing authority and scope
 
@@ -79,3 +79,14 @@ computed reads still pass.25.0 must restore the explicit-literal grammar/error/
 metadata boundary using the actual final-slot signature/count owner, while keeping
 ordinary arguments and immediate/inline helpers supported. This is a P1 repair,
 not admission of a new deferred operation. Full callback/context proof remains23.4.
+
+
+## Bounded Perl implementation
+
+Preservation25.0 restores the registered callback grammar before source expansion.
+Perl25.1 recognizes only the six existing capture collection names through its
+static known-helper owner, then reuses the current typed reader and kind guards.
+The unchanged shared fixture and finite String/empty/compaction/static-name/no-
+local-capture/span/deferred controls pass on native/fresh routes with typed ready
+metadata. No getter/cursor/schema/evaluator change or wider context classification.
+Independent backend work and complete source/context admission remain separate.

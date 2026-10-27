@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Contextual callback grammar/readiness restored under registered final-slot metadata; readonly capture selection25.1 next.
+Perl readonly capture collection selection implemented with existing reader/guards; independent Rust25.2 next.
 
 ## Latest Completed Slice
 
-Registered final callbacks now reuse the explicit deferred-literal computed-read grammar. Parser localizes its existing deferred flag only under actual final-slot signature/count ownership, alongside registry fencing; parenthesized blocks retain ordinary shape identification first. No executor/AST/schema operation is added. Before production the retained regression fails6/23 top-level controls; afterward all23 pass, including helper/noncall native/fresh error-kind and raw1/unresolved0/unready equivalence, Unicode raw source/spans, role exclusions and success/failure scope restoration. Ordinary argument/inline reads and fresh function-frame boundaries stay intact; explicit parameter forwarding yields the named selection. Direct deferred22/registered-functions76/frozen-callable5 pass. Changed Parser/test syntax, qualified book, canonical facts/map, history/fast staged continuity/diff pass. New test registration remains required under23.4.1 before admission/push. Perl capture collection composition25.1 follows; full source/context/portable/generated/canonical admission23.4, pressure and declared Lua5.4 remain separate; no push.
+Perl now composes direct reads of existing entry_groups/entry_map/match_groups/match_map and accepted named-map aliases. The static known-helper classifier admits exactly those boxed collection producers; existing getters, zero-argument signatures, typed read lowering and actual-kind guards do all execution. Original6/18 failing feature/parser controls resolve. Expanded capture30 passes native/fresh values and raw0/unresolved0/ready1, preserving the unchanged shared target, entry/local identity, signed/missing/IJ paths, wrong-kind operand skips, bridges, String zero/empty/compaction, static names, absent captures, Unicode spans and explicit/contextual deferred exclusions. The extra definedness control follows documented Perl numeric1; producer payloads stay Strings. Direct computed helpers43/contextual boundary23 pass; changed source/test syntax, current book/catalog, target/facts/map and history/fast staged continuity/diff pass. No getter/cursor/reader/copy/schema/executor change. Required new Perl test registration23.4.1 and full admission23.4 remain separate. Independent Rust25.2 follows; no push.
 
 ## Next Action
 
-Activate Perl capture collection result selection25.1 from this clean callback preservation commit. Use the frozen capture-collection target/input/oracle, actual helper/alias source ownership and existing bracket reader; retain ordered selectors, snapshots/actual-kind guards, entry-local identity and deferred/named/bound-call/write boundaries. Run small producer-first native/fresh/descriptor checks plus changed-surface compilation, update docs and commit before Rust25.2. Full admission/required Perl registration/pressure/declared Lua5.4 remain separate; no push.
+Activate independent Rust capture collection selection25.2 from this clean Perl boundary. Read canonical Rust capture helper/result source authority and existing computed-source kind guard. Run the frozen shared input name=Alpha plus a small distinguishing source/actual-kind/effect/native/restored/plan check; reuse static helper ownership and existing reader, preserve entry/local/alias/deferred/bound-call/flat/write contracts. Compile/targeted/docs/commit before Dart25.3. No standalone emitted crate/full suite/admission/push; pressure/required Perl registration/declared Lua5.4 remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.25.1` — Perl readonly capture collection selection implemented with existing reader/guards; independent Rust25.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.0` — Contextual callback grammar/readiness restored under registered final-slot metadata; readonly capture selection25.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.5` — Capture-collection source feature25 selected; stale capture examples corrected. P1 contextual callback vocabulary25.0 precedes implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.5` — All five bounded computed-selection implementations complete; safe Lua checked on PUC5.5.1/LuaJIT. Next ordinary fluent gap selection23.1.5.
@@ -29,7 +30,6 @@ Activate Perl capture collection result selection25.1 from this clean callback p
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.3` — Perl existing interpreted free copy1.3 is preserved/targeted-checked; all bounded Perl copy children complete. Independent Rust2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.2` — Perl ordinary receiver copy1.2 preserves primitive/result/scoped continuations and shape/source guards. Existing interpreted context1.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.1` — Perl function copy1.1 preserves primitive kinds, once-only snapshots and actual-kind consumers; ordinary container/legacy controls retained. Generic receiver1.2 is next.
-- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.0` — Approved scalar/null copy target adopted; bounded Perl-first rollout owned; ordinary producer1.1 next.
 
 ## History
 

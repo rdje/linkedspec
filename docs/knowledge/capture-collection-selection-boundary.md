@@ -1,6 +1,6 @@
 ---
 id: capture-collection-selection-boundary
-title: Read-only capture collection producers need ordinary direct result selection
+title: Read-only capture collection results compose with ordinary Perl typed reads
 answers:
   - can entry_map result be indexed directly on Perl
   - can entry_groups feed a signed bracket and String method
@@ -9,16 +9,17 @@ answers:
   - is entry_named_map still an accepted source compatibility alias
   - which task repairs contextual callback computed read readiness
 date: 2026-10-27
-status: target25 selected; contextual preservation25.0 repaired; Perl25.1 next
+status: Perl25.1 implemented; contextual25.0 repaired; independent Rust25.2 next
 tags: [captures, actionir, fluent, selection, perl, codeblock, documentation]
 evidence: "TYPE23.1.5 public native/fresh/descriptor/substitution intake and callback-form distinction; ADR0044 resolves the old child-mode teaching."
 reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/capture_collection_selection.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_capture_collection_selection.pl default"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_contextual_selection_boundary.pl"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/check_capture_collection_examples.pl"
 ---
 
-Existing entry_groups/entry_map/match_groups/match_map produce ordinary capture
+At intake d0551dcc, existing entry_groups/entry_map/match_groups/match_map produce ordinary capture
 Array/Hash snapshots. Native/fresh producers, named readers, existing fluent
 methods, copy bridges and accepted entry_named_map/match_named_map aliases retain
 their values, raw0/unresolved0/ready1. Direct four-helper postfix reads instead
@@ -52,3 +53,18 @@ Frozen target/input/oracle, retained intake and scheduled children are in
 docs/checkpoints/type-operation-inventory/capture-collection-selection.md.
 Full source/context/portable/generated admission remains23.4; Lua uses only
 available safe hosts until its declared-primary/native-formatting owners resolve.
+
+
+Perl25.1 adds exactly these six already-known collection names to the existing
+static computed-source classifier. Their old getters already box capture
+Array/Hash snapshots; the existing value_access lowerer/read builder evaluates
+that source once and ordered selectors, and selected-result dispatch owns actual-
+kind guards. No getter, cursor, matching, copy depth, schema or executor changes.
+The original6/18 failing target/parser controls resolve; the expanded regression
+also checks all six source names in explicit and both contextual deferred forms.
+The unchanged shared fixture passes native/fresh with raw0/unresolved0/ready1,
+including entry/local divergence, signed/missing paths, IJ ordering, incompatible
+operand skips and bridges. Finite String zero/empty/optional-capture compaction,
+static helper shadowing, absent-capture and Unicode-span controls preserve current
+contracts. Other context/control/unknown/grouped/flat sources remain excluded.
+Independent Rust25.2 follows; full admission stays23.4.
