@@ -6417,7 +6417,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.1 - lower entry and match Number values before fluent defaults`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/implement Rust readonly entry/match Number result composition under frozen30.
   Dependencies: Selection23.1.8, existing getter/Number/default contracts and30 target; previous backend child where applicable.
   Acceptance: Establish actual behavior through small producer/default/normalized-result/preservation controls before production. Use existing getter/render/value owners, preserving exact semantic source/signature/projection/error/alias behavior and first-consumer/root policies. Keep malformed/backend differences explicit, function-state fences and callback/serialization rights. Split larger independent gaps before writes; no failure inferred from another backend.
@@ -6425,6 +6425,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen fixture and a few native/current reconstructed/generated direct/preservation controls, relevant compile/format/source/getter/function checks as warranted, book/history/continuity. Safe Lua only available hosts/no unsafe patterns/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement separately owned.
   Planned claim verification: none: Prospective deterministic finite authored feature checks; no population measurement.
+
+  Independent intake: At clean88bad5402, Rust's frozen Number fixture, absent-match lazy default and specific function fence pass before any production change. The initial preservation oracle borrows Perl's direct scalar set_key Hash result and fails: current Rust returns the original Number5, with take[]/normalized null/skipped operands intact. Correct only this test expectation to current backend behavior; retain first source/log/refinement. This is not product RED and does not authorize legacy-domain normalization. Existing runtime already implements the target; add focused regression/docs and keep complete domain/backend parity with23.4.
+
+  Activation: clean88bad54022fb4f30692e2ffffb8199b18f1ced3e; Perl30.1 committed/tree clean/brief0.
+  Owned paths: New Rust integration regression/retained independent intake and oracle refinement; scoped book/target/fact/map/roadmap/task/live/resume. Runtime unchanged because it already implements the target.
+  Verification tier: `focused`
+  Focused checks: Four native/restored-CompiledSpec/plan tests pass for unchanged frozen target, absent-match lazy default, current legacy/normalized policies and specific function fence; rustfmt/offline compile. Retain instrument-only mismatch, book/history/fast continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; no admission from this bounded existing-behavior proof.
+  Claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Rust independently passes the frozen Number target, absent-match F fallback and function fence before runtime changes. Initial preservation test wrongly expects Perl's constructed Hash; actual direct match_len set_key returns Number5, with take[]/normalized null/skips intact. Retain initial source/log/refinement; no product RED claimed.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: The implementation gap is Perl's early getter lowering, not shared getter semantics. Rust already evaluates its ordinary getter values before compatible default/math/text links. The sole first-run failure is a borrowed legacy oracle, outside the frozen compatible-flow extension.
+  - [x] **FIX**: Keep the existing Rust runtime. Add an automatically discovered integration test and correct only its backend-specific legacy expectation. Preserve each existing source/arity/error/alias/root policy; no blanket conversion to Perl's invalid-domain result.
+  - [x] **ADDRESSED (verified)**: All four tests pass native/restored/plan. Frozen getters/offsets/columns, defined-zero/lazy skip, text/regex/signed flow and C-versus-skipped-AKV hold. Missing match runs F once/yields8; current legacy direct set_key5/take[] differs from normalized null; pure-function reader error remains specific.
+  - [x] **NO REGRESSION**: Rustfmt/offline compilation pass; no runtime/AST/helper/coordinate/callback/serialization change. Current direct source-error and root differences are preserved, not admitted as uniform; full domain/context/backend parity remains23.4.
+  - [x] **LOCKSTEP**: Book now qualifies direct Number chains on Perl/Rust; target/retained evidence/canonical fact/map and roadmap/task/live/resume align. Standard Rust discovery needs no runner edit. Dart30.3 next; with-Hash31/stale example/pressure/Perl registration/declared5.4/full23.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.2 - retain Rust entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.3`
   Status: `pending`
@@ -6474,7 +6491,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.2` | `pending` | Independently assess Rust entry/match Number reader composition; with Hash31 follows. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` | `pending` | Independently assess Dart entry/match Number reader composition; with Hash31 follows. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

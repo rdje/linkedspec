@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl entry/match Number reader composition implemented; independent Rust30.2 next.
+Perl Number reader repair and existing Rust compatibility are targeted-checked; Dart30.3 next.
 
 ## Latest Completed Slice
 
-Perl shares existing entry/match Number getter expression strings between current native Contracts callbacks and early ordinary zero-argument MethodLowering values, after the function-state guard. Outer defaults/numeric aliases now compose before primitive substitution; native callback regex/order/metadata/output and source/projection/absence/error/alias semantics stay unchanged. No root kind flags or with-family code. Four new native/fresh/metadata groups pass after RED2/healthy2, plus typed-source contract4, total8; module/test syntax and exact extracted expression parity pass. Frozen getters/independent offsets/columns, defined-zero/lazy skip, absent-match F once, math/text and existing regex/signed String flow hold; normalized prefixes skip A/K/V and run C once. Legacy direct set_key Hash/take[] policies and specific pure-function getter fences remain intact. Book/target/retained RED/expression evidence/fact/map/roadmap/task/live/resume and future Perl registration align. Independent Rust30.2 next; with-Hash31/stale neutral example/pressure/declared5.4/full23.4 stay separate; no push.
+Rust independently already implements frozen entry/match Number reader composition: target/absent-match fallback/specific function fence pass before runtime changes. Initial preservation control borrows Perl direct scalar set_key Hash output, while Rust returns original Number5; correct only that oracle and retain first source/log/refinement without product RED credit. Four new native/restored-CompiledSpec/plan tests pass, preserving all frozen values/kinds/offsets/columns/zero/lazy/String inter-type flow, C order and skipped AKV; missing match runs F once/yields8 and legacy take[]/normalized null stay distinct. Rustfmt/offline compilation pass; runtime, getter/source/arity/error/root/callback/serialization unchanged. Book/target/fact/map/roadmap/task/live/resume align; standard Rust discovery needs no runner edit. Independent Dart30.3 next. Full domain/context/backend23.4, with-Hash31/stale example/pressure/Perl registration/declared5.4 remain separate; no push.
 
 ## Next Action
 
-Activate Rust Number reader30.2 from this clean Perl boundary. Read frozen entry-match-number-results target/fixture and current getter/default/numeric/runtime source ownership, then independently run producer/frozen/zero-missing/legacy-root/function controls before production. Preserve exact getter/coordinate/alias/arity/error semantics and first-consumer/root policies, with existing normalized math guards rather than blanket root conversion. Implement only confirmed gaps through current value owners, compile/quick native/restored/plan checks/docs/commit, then Dart30.3. Generic with-Hash31 remains separately P1 after30. No full suite/matrix/admission/push; stale neutral-example29.2.6.6/pressure/Perl registration/declared5.4/full23.4 remain owned.
+Activate Dart Number reader30.3 from this clean Rust boundary. Read frozen target/fixture and existing getter/default/numeric/source ownership, independently run producer/frozen/zero-missing/legacy-root/function controls before production, and retain actual backend differences rather than copying Perl/Rust legacy expectations. Preserve exact getter/coordinate/alias/arity/error and root policies; implement only confirmed compatible-flow gaps through current value owners. Compile/quick native/restored/plan checks/book/docs/commit, then Julia30.4. Generic with-Hash31 stays P1 after30; no full suite/matrix/admission/push, with stale example/pressure/Perl registration/declared5.4/full23.4 still owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.30.2` — Perl Number reader repair and existing Rust compatibility are targeted-checked; Dart30.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.1` — Perl entry/match Number reader composition implemented; independent Rust30.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.8` — Frozen Number reader composition30 selected; independent with-Hash continuation31 owned after30.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.5` — All five bounded parser-context function repairs complete; remaining feature selection23.1.8 next.
@@ -29,7 +30,6 @@ Activate Rust Number reader30.2 from this clean Perl boundary. Read frozen entry
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.1` — Perl static capture names/current reader function fences repaired; remaining function boundary29.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.28.1` — Perl eager set_key operands/snapshots repaired with legacy roots/helper passthrough preserved; capture-name29.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.5` — All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 
 ## History
 

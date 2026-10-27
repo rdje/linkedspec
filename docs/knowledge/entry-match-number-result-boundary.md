@@ -9,8 +9,10 @@ answers:
   - does with returned Hash sorted_values fail only for a numeric getter
   - which task owns generic eager with Hash result continuation
   - should Number reader repair change legacy first consumer root policies
+  - does Rust already compose entry match Number reader defaults
+  - does Rust direct scalar set_key keep the same result as Perl
 date: 2026-10-27
-status: bounded Perl Number30.1 repaired; independent other backends and with-Hash31 follow
+status: Perl30.1 repaired; Rust30.2 already compatible; independent other backends and with-Hash31 follow
 tags: [perl, fluent, source-location, entry, match, number, with]
 evidence: "TYPE23.1.8 retains six original/five refined public native/fresh/Value metadata/substitution cases at cleanc0bf78088; source/target/shared prospective fixture and independently owned30/31."
 reverify:
@@ -53,3 +55,11 @@ regex/order/metadata remain. Frozen getters/offsets/columns, zero/lazy/missing
 fallback, numeric/text/String inter-type flow and C-versus-skipped-AKV hold. Legacy
 root Hash/[] and specific function diagnostics stay unchanged. Independent Rust
 follows; with-Hash31/full context/portable admission remain separate.
+
+Rust30.2 already passes the frozen compatible-flow target, absent-match default
+and function fence. Current direct match_len().set_key("k",1) returns Number5,
+where Perl constructs a Hash; take[]/normalized null remain. Initial test borrowed
+Perl's oracle, then corrected it against unchanged Rust, retaining exact first
+source/log/refinement. Four native/restored/plan tests plus rustfmt/offline compile
+pass; runtime unchanged. This preserves existing root policies and makes no full
+invalid-domain or backend-parity admission. Independent Dart follows;31 stays P1.

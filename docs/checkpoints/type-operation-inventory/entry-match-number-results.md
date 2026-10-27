@@ -1,7 +1,7 @@
 # Entry and match Number reader result composition
 
 Selection owner: TYPE-REFERENCE-BOOK.1.2.23.1.8; implementation family23.3.30.
-Status: bounded Perl30.1 implemented/targeted-checked; independent other backend children follow.
+Status: Perl30.1 implemented and Rust30.2 already-compatible/targeted-checked; independent other backend children follow.
 
 Existing zero-argument entry/match length and position readers return Numbers or
 null under the current typed source-location contract. Ordinary compatible value
@@ -70,3 +70,13 @@ fallback once, numeric/text and existing String/regex/signed flow hold; normaliz
 prefixes skip A/K/V and execute C once. Legacy first-consumer Hash/[] and specific
 function-state fences remain distinct. Rust30.2 independently follows; with-Hash31
 and full source/domain/context/portable admission remain separate.
+
+Rust30.2 independently already implements the frozen target and absent-match lazy
+fallback/function fence. Its initial preservation test borrows Perl's direct scalar
+set_key Hash result, but Rust returns the original Number5. That is corrected only
+in the oracle, with exact first source/log/refinement retained; no product RED or
+runtime fix is claimed. Four new native/restored-CompiledSpec/plan tests pass,
+including current take[]/normalized null/skips, frozen values/kinds/coordinates/
+zero/lazy/String flow and C order, plus rustfmt/offline compile. Runtime and all
+legacy getter/shape/error/root/callback/serialized policies stay unchanged. Dart30.3
+independently follows; complete domain/backend parity remains23.4.
