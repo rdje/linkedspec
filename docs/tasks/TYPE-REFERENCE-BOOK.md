@@ -6234,7 +6234,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.1 - fence parser calls and gap readers in pure Perl functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 existing pure-function contract repair.
   Goal: Independently establish and repair Rust call(rule)/public gap-reader parser-state access inside pure functions.
   Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
@@ -6242,6 +6242,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
   Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+  Before-production finding: The corrected unchanged-production Rust harness independently returns child, real incoming slot records and empty/comma gap text in three first-native negative controls; explicit ordinary caller-value group passes. Each group stops at its first failed route/case; later helper cases/restored/plan are not historical RED. Initial harness failed compilation because GeneratedPlanRow labels require static lifetimes; retain that source/log/refinement and do not call it behavioral RED. Add only the five current parser-context roles to the existing Engine active-function predicate, preserving ordinary dispatch/cache/gap/slot semantics and explicit arguments.
+
+  Activation: cleandea17d89d275eee6f430a462b01b36431ae8ceba; Perl context29.2.6.1 committed/tree clean/brief0.
+  Owned paths: Existing Engine parser-state predicate adds five public context roles; new automatically discovered integration test/retained actual harness/refinement/RED; scoped book/target/fact/map/roadmap/task/live/resume.
+  Verification tier: `focused`
+  Focused checks: New four native/restored-CompiledSpec/plan groups after refined RED3/healthy1; prior function-state four, total8 tests pass; rustfmt/offline compilation, book/history/fast continuity/diff. No full suite/matrix/standalone crate.
+  Canonical trigger: Full source/function/context/portable23.4 and final clean push; stale neutral example29.2.6.6 remains independently canonical after prerequisites.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Corrected unchanged-production Rust controls independently return child, real incoming child slot records and empty/comma gap text in three first-native negative groups; explicit caller values pass. Initial test compilation fails GeneratedPlanRow's static label lifetime requirement and is corrected before behavioral RED; exact first/refined producers/channels retained. Later loop cases/routes are not historical RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine's existing active-function helper guard covers catalogued source roles but omits call and the four current public gap/slot accessors. Their helper dispatch continues to read/invoke parser state despite local function stores.
+  - [x] **FIX**: Add exactly call, entry_slot, gap_span, gap_text and gap_kind to the existing Engine predicate; reuse the current pre-operand guard and ordinary descriptive error. No new runtime/context/API/parser/IR/compiled field or source-format change.
+  - [x] **ADDRESSED (verified)**: Four new groups pass native/restored/plan: child calls, all four gap/slot reader spellings and non-null incoming child slot access reject in pure bodies. Ordinary child results, gap text/kind/span and slot provenance remain exact when passed explicitly to pure functions, including String continuation.
+  - [x] **NO REGRESSION**: Prior four function-state groups pass, total8; rustfmt/offline compilation pass. Ordinary parser dispatch/selected-child cache, gap/source/slot/lifecycle/arity/callback/local-data semantics and serialization retain owners. No exhaustive or other-backend admission is inferred.
+  - [x] **LOCKSTEP**: Scoped call/gap book error distinctions, target/retained actual RED/canonical fact/map and roadmap/task/live/resume align. Standard Rust integration discovery needs no runner edit. Independent Dart follows; stale example/pressure/Perl registration/declared5.4/full23.4 stay separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2 - reject parser calls and gap readers in pure Rust functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3`
   Status: `pending`
@@ -6291,7 +6308,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2` | `pending` | Independently assess Rust rule-call and public gap-reader function boundaries. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3` | `pending` | Independently assess Dart rule-call and public gap-reader function boundaries. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

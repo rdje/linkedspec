@@ -1846,7 +1846,7 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `call(child_rule)`
 - **Signature**: `call(rule_name: bare rule-label token)`
 - **Returns**: the child rule's return value
-- **Behavior**: Invokes a child rule directly from action code and returns its result. Used for nested parsing delegation. This is parser-state work. On ordinary Perl, `fn bad(){return(call(Child))}` remains unsupported/unready under the pure-function contract. Read the child result in the ordinary caller and pass that value explicitly, such as `upper(call(Child))` for `fn upper(text){return(text.uppercase())}`.
+- **Behavior**: Invokes a child rule directly from action code and returns its result. Used for nested parsing delegation. This is parser-state work. On ordinary Perl, `fn bad(){return(call(Child))}` remains unsupported/unready under the pure-function contract. Rust rejects the same parser-state function call at runtime before helper operands. Read the child result in the ordinary caller and pass that value explicitly, such as `upper(call(Child))` for `fn upper(text){return(text.uppercase())}`.
 - **Edge cases**: The child rule must exist and be a valid body rule in the same `.spec` file. Use the bare
   rule label (`call(child)`), not a quoted string: current runtimes resolve the target from the raw action
   argument token. Inside an action edge, calling that edge's current target reads the one cached selected-child

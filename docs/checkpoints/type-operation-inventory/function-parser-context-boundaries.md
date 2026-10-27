@@ -1,6 +1,6 @@
 # Parser calls and public gap readers in pure functions
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl child.1 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl/Rust children.1-.2 repaired/targeted-checked.
 
 call(rule) performs parser work; entry_slot/gap_span/gap_text/gap_kind are current
 public source_read helpers under ADR0079. Their absence from source-location
@@ -35,3 +35,16 @@ calls, gap text/kind/span and incoming slot records passed into pure functions
 retain exact values/provenance. No runtime/context/lifecycle/parser/IR/schema,
 callback or arity change. Independent Rust.2, Dart.3, Julia.4 and safe Lua.5 follow;
 stale example.6/full source/context/portable23.4 remain separate.
+
+Rust child.2 independently returns child, non-null incoming slot records and real
+empty/comma gaps in three first-native negative groups; ordinary explicit-value
+controls already pass. Initial harness compilation needs static GeneratedPlanRow
+label lifetimes; exact initial source/log and correction precede actual unchanged
+production RED. Negative groups stop at their first native failure, so later cases
+and restored/plan routes are not historical RED. The Rust intake packet retains
+all channels; the producer is the tracked integration test. Engine adds only the
+five known context roles to its existing pre-operand active-function predicate.
+Four new native/restored-CompiledSpec/plan groups and four prior function-state
+tests pass, total8, plus rustfmt/offline compilation. Ordinary child/gap/slot
+values/provenance remain valid explicit arguments. Independent Dart child.3 is
+next; stale example child.6 and full context/portable admission remain separate.

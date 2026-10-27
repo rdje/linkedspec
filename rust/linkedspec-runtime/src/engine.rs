@@ -6474,7 +6474,10 @@ impl Engine {
     // Arguments are still caller expressions until execute_user_function enters
     // its local scope; explicit reader values therefore remain valid arguments.
     fn is_parser_state_helper(name: &str) -> bool {
-        Self::is_mark_capture_helper(name)
+        matches!(
+            name,
+            "call" | "entry_slot" | "gap_span" | "gap_text" | "gap_kind"
+        ) || Self::is_mark_capture_helper(name)
             || matches!(
                 name,
                 "entry_col"

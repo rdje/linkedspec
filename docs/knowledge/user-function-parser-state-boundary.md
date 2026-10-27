@@ -12,6 +12,7 @@ answers:
   - can a pure function receive an entry_group value explicitly
   - which backends have the repaired parser-state function fence
   - can a Perl pure function call a parser rule or read gap_text
+  - can a Rust pure function call a parser rule or read gap_text
   - why are call and gap accessors outside the projection catalog still forbidden
 date: 2026-10-27
 status: all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
@@ -92,3 +93,12 @@ results and gap/slot values remain valid explicit arguments. Other backends requ
 independent repair assessment. function-parser-context-boundaries.md and its Perl
 intake own exact source/RED and known OR/LX instrument refinement; the stale neutral
 executable example is separately owned29.2.6.6 before admission.
+
+Noncatalogued Rust context29.2.6.2 independently returns child/gap text/incoming
+slot records in three first-native RED groups, with ordinary explicit values
+healthy. Engine adds the five current parser-context roles to its existing guard;
+four new native/restored/plan and four prior function-state tests pass, plus
+rustfmt/offline compile. The exact Rust packet discloses initial static plan-label
+lifetime harness failure/correction and first-case RED limits. No new schema or
+runtime path; ordinary parser results/gap/slot values remain explicit arguments.
+Independent Dart/Julia/safe Lua context children and stale example.6 remain open.

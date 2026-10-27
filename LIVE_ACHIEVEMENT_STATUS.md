@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl noncatalogued parser-call/gap function boundary repaired; independent Rust next.
+Perl/Rust noncatalogued parser-context boundaries repaired; independent Dart next.
 
 ## Latest Completed Slice
 
-Perl independently allows pure functions to call Child and read public gap text/kind/span/incoming slot with raw0/unresolved0/ready1. Contracts adds only call/entry_slot/gap_span/gap_text/gap_kind to the existing semantic predicate; current function guards now diagnose/unready and return no parser data. Six new native/fresh/metadata groups pass after RED3/healthy3, plus existing function-boundary4, total10; module/test syntax passes. Ordinary child results/gap values/slot records remain valid explicit pure-function arguments with exact provenance. Initial OR/LX null rows follow the documented repetition EX collector path; default-loop refinement establishes actual gap access. Original/refined source/substitution/emission/channels are retained. The neutral contract still has old OR/LX example source despite corrected book/readiness; P1 canonical repair29.2.6.6 is owned before admission. Scoped book/target/existing fact cards/map/roadmap/task/live/resume and future Perl registration align. Independent Rust29.2.6.2 follows; no runtime/IR/schema or portable admission/push.
+Rust independently returns child, incoming slot records and real gap text from pure functions in three first-native negative groups, with ordinary explicit-value controls healthy. Initial generated-plan harness label lifetimes are corrected before actual unchanged-production RED; exact source/log/refinement and first-case limits are retained. Engine adds only call/entry_slot/gap_span/gap_text/gap_kind to its current pre-operand active-function predicate. Four new native/restored-CompiledSpec/plan groups plus prior function-state4 pass, total8; rustfmt/offline compilation pass. Ordinary parser child results, gap text/kind/span and slot provenance remain exact explicit function arguments. No runtime/context/API/parser/IR/schema or serialization change. Scoped book/target/fact/map/roadmap/task/live/resume align; independent Dart29.2.6.3 follows. Stale neutral-example29.2.6.6, pressure/Perl registration/declared5.4/full23.4 remain separate; no push.
 
 ## Next Action
 
-Activate Rust parser-context child29.2.6.2 from this clean Perl boundary. Read current public call/gap/function contracts and existing engine call/helper ownership; independently test controlled ordinary versus function parser-call/gap/slot access before production. Use documented default-loop finalization and distinguish null/unavailable contexts from rejection; other-backend results do not establish Rust failure. Repair confirmed roles through current active-function guard, preserving ordinary child-cache/gap values/explicit arguments/callback/arity/serialization. Compile/quick focused checks/book/docs/commit, then Dart. No full suite/matrix/admission/push; stale neutral-example29.2.6.6, pressure/Perl registration/declared5.4 remain owned.
+Activate Dart parser-context child29.2.6.3 from this clean Rust boundary. Read current public call/gap/function contracts and existing interpreter ownership; independently test controlled ordinary versus function parser-call/gap/slot access before production. Use documented default-loop finalization and distinguish null/unavailable contexts from rejection; other-backend results do not establish Dart failure. Repair confirmed roles through current active-function guard, preserving ordinary child-cache/gap values/explicit arguments/callback/arity/serialization. Compile/quick checks/book/docs/commit, then Julia. No full suite/matrix/admission/push; stale neutral-example.6, pressure/Perl registration/declared5.4 remain owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2` — Perl/Rust noncatalogued parser-context boundaries repaired; independent Dart next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.1` — Perl noncatalogued parser-call/gap function boundary repaired; independent Rust next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5` — All five bounded catalogued function-state repairs complete; remaining parser-context intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` — Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
@@ -29,7 +30,6 @@ Activate Rust parser-context child29.2.6.2 from this clean Perl boundary. Read c
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.1` — Perl input/cursor reader values implemented/targeted-checked; independent Rust27.2 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.7` — Readonly input/cursor result target27 frozen; Perl27.1 next, with separate compiler/policy28.1 and capture-name29.1 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.5` — All five bounded conditional-result backends implemented/targeted-checked; next-feature selection23.1.7 follows.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.26.4` — Julia canonical inline conditional guards implemented/targeted-checked; safe Lua26.5 next.
 
 ## History
 
