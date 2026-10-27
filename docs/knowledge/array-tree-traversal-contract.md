@@ -16,7 +16,7 @@ date: 2026-10-27
 status: current
 tags: [spec-format-terse, array-tree, traversal, trailing-block, perl-reference, rust, oracle, SPEC-FORMAT-TERSE]
 evidence: "SPEC-FORMAT-TERSE.13.1 reactivated and split array-tree traversal before parser/runtime code. The accepted MVP reuses the immediate receiver block method names `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` on array-valued receivers. Array roots and nested arrays are traversal nodes; scalar and hash values are leaves; hashes are not traversed recursively. Traversal is depth-first in zero-based index order. Callback bindings are scoped `value`, `index`, `path`, `depth`, and reduce-only `acc`. SPEC-FORMAT-TERSE.13.2 landed the Perl reference implementation and phase0 `1..1028`; SPEC-FORMAT-TERSE.13.3 landed Rust parser/runtime parity plus the Perl-backed oracle fixture `terse_13_3_array_tree_traversal_receiver_blocks`, raising the checked-in manifest to 97 fixtures. SPEC-FORMAT-TERSE.13.4 closed final docs/KM/no-drift alignment, so `.13` is closed/exhausted."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_reduction_results.pl"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/reduction_result_receiver_contract.t"
 ---
 
 # Array-Tree Traversal Contract
@@ -54,7 +54,7 @@ Scalar receivers return `undef` without running callbacks; oracle JSON serialize
 Hash receivers retain their separate hash-tree behavior through the shared dispatcher, as recorded in
 [[perl-array-tree-traversal-callback-frame]]; the original array-lane non-array wording did not retire it.
 `walk_leaves` and `map_leaves` may feed later array-family receiver methods such as `.count()`.
-`reduce_leaves(...)` is terminal.
+`reduce_leaves(...)` was terminal at that milestone; current bounded Perl flow is recorded below.
 
 TYPE23.1.1 selects bounded reduction result continuations as a feature addition,
 not a producer repair. Public native/fresh accumulators include Number/String/
@@ -69,3 +69,22 @@ all five backend children21.1-.5, preserving root/callback/copy/order and actual
 accumulator kinds. Current terminal behavior stays until targeted implementation;
 full signature/context/portable admission remains23.4. Original July reverify
 command/history is retained exactly at Git7222ff78668d6fd08ee0dc448d1c8bb4d3da9855.
+
+Perl21.1 now tags reduction results with existing default_result actual-kind
+dispatch, starts the dedicated first tree step as tree_source, and keeps reduce
+chains out of emitted-default bypass. Callback/root/initial bodies are unchanged.
+The tree selected-tail rejection now binds the valid prefix once before null;
+first feature RED had empty order, Toolbox result=undef, final order is SILC.
+Twelve native/fresh shared/direct traversal checks plus syntax pass: exact result
+kinds/typed indices/copies, empty/null/false/default/generic/numeric/Array/Hash
+consumers, named/reversed roots, SI(L*)C snapshots/scope restoration, invalid-root
+skipping and malformed/rejected operands. Rust21.2 independently follows; deferred/
+context/full portable admission and canonical Perl registration23.4.1 remain open.
+
+Immediate traversal consumers of dynamic results also delegate to that existing
+tree lowerer through a forward declaration, before generic result guards. Public
+pre-route reduction/map brace compilation fails native/fresh; final shared
+[3,B,b,4,4] retains Array/Hash accumulator maps, repeated reduction after a pipeline
+and a coalesced container reducing. Twelve final assertions pass native/fresh
+with these additional fields. This adds ordinary composition, not deferred/bang
+callback policy.

@@ -2,7 +2,7 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.1; implementation23.3.21.1-.5.
 Feature addition to the existing receiver-only reduce_leaves(initial) { body }.
-Current traversal is explicitly terminal; its producer/callback contract stays.
+At freeze traversal is explicitly terminal; its producer/callback contract stays.
 This bounded result feature is not full signature/context/portable admission23.4.
 
 ## Frozen bounded feature
@@ -64,3 +64,28 @@ children independently establish producers and RED/GREEN on their public routes;
 no backend result follows from another's implementation. Perl21.1 first, then
 Rust21.2, Dart21.3, Julia21.4 and safe Lua21.5. Preserve declared Lua5.4/malformed
 native pattern exclusions and full context/standalone admission ownership.
+
+## Perl21.1 bounded implementation
+
+Use the existing actual-kind default_result bridge for reduction results and a
+separate first-step tree_source state. Keep reduce chains on dedicated traversal
+rather than the generic emitted-default path. Callback/root/initial code remains
+unchanged. A first implementation preserves every shared value except scalar
+rejection prefix effects; public rejection_prefix shows return undef and no
+effects. Bind the valid emitted prefix before returning null, skipping operand A.
+
+Twelve native/fresh shared/direct traversal checks and source syntax pass after
+RED. Shared exact kinds/typed indices, numeric/text/container/generic/default
+consumers, named/reversed roots, source/initial/callback/consumer snapshots, scoped
+restoration, invalid-root skipping, shape no-effects, copies and SIL/SILC rejection
+are retained. Admitted Array/Hash walk/map/plain reduce and path order pass. New
+Perl test registration is owned by23.4.1 before full admission/push. Rust21.2 is
+independent next; no full context/deferred/standalone/portable admission follows.
+
+Immediate traversal consumers also reuse the dedicated lowerer from dynamic
+results. A public pre-route Array reduction/map case fails native/fresh callback
+brace compilation; the bridge had excluded traversal blocks. The shared field
+[3,B,b,4,4] now passes Array/Hash accumulator mapping, another reduction after a
+pipeline, and reduction from a coalesced container. The final twelve-assertion
+fixture passes native/fresh with those added transitions; no deferred/bang policy
+change or independent backend admission is inferred.

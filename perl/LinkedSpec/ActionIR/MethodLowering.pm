@@ -4890,15 +4890,19 @@ my $lower_numeric_array_reducer_source_expr = sub {
   # Preserve each helper's runtime domain and null behavior instead of
   # retaining the original receiver family.
   my $lower_synthetic_chain_expr;
+  my $lower_tree_receiver_block_call;
   my $append_selected_value_chain_call;
   $append_selected_value_chain_call = sub {
    my ($current_expr, $call, $receiver_family) = @_;
    my $method = $call->{method} // '';
    my $source_args = $call->{args} || [];
    return undef unless ref($source_args) eq 'ARRAY';
-   # A lazy default may select a container even when its source was scalar.
-   # Bind the selection once, then guard container consumers by its actual kind.
+   # Defaults and reductions may return either a scalar or a container.
+   # Bind the result once, then guard consumers by its actual kind.
    if (($receiver_family // '') eq 'default_result') {
+    if (_is_tree_traversal_receiver_method($method)) {
+     return $lower_tree_receiver_block_call->($method, $current_expr, $call, 'default_result');
+    }
     my $value_expr = '$__ls_selected_default';
     my $applied = $append_selected_value_chain_call->($value_expr, $call, 'selected');
     return undef unless ref($applied) eq 'ARRAY';
@@ -5012,7 +5016,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
 
   my $tree_receiver_return_family = sub {
    my ($method, $target_expr, $candidate_calls, $call_idx) = @_;
-   return 'terminal' if ($method // '') eq 'reduce_leaves';
+   return 'default_result' if ($method // '') eq 'reduce_leaves';
    my $next_method = (ref($candidate_calls) eq 'ARRAY' && defined($call_idx) && $call_idx + 1 < @$candidate_calls)
     ? ($candidate_calls->[$call_idx + 1]{method} // '')
     : '';
@@ -5028,7 +5032,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'hash'
   };
 
-  my $lower_tree_receiver_block_call = sub {
+  $lower_tree_receiver_block_call = sub {
    my ($method, $target_expr, $call, $return_family) = @_;
    return undef unless _is_tree_traversal_receiver_method($method);
    my $unsupported = sub {
@@ -5057,7 +5061,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
    return undef unless defined($lowered_target) && length($lowered_target);
 
-   $return_family = 'terminal' if $method eq 'reduce_leaves';
+   $return_family = 'default_result' if $method eq 'reduce_leaves';
    $return_family = 'hash' unless defined($return_family) && length($return_family);
 
    my $hash_leaf_bindings = 'my $value = $__ls_hash_tree_leaf_value; my @value = (defined($value) && ref($value) eq \'ARRAY\') ? @{$value} : (); my %value = (defined($value) && ref($value) eq \'HASH\') ? %{$value} : (); my $key = $__ls_hash_tree_leaf_key; my $path = [@{$__ls_hash_tree_leaf_path}]; my @path = @{$path}; my $depth = scalar(@{$__ls_hash_tree_leaf_path}); ';
@@ -5089,14 +5093,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
     my $hash_expr = 'do { my $__ls_hash_tree_source = $__ls_tree_source; my $__ls_hash_tree_acc = '.$initial_expr.'; my $__ls_hash_tree_reduce; $__ls_hash_tree_reduce = sub { my ($__ls_hash_tree_node, $__ls_hash_tree_path) = @_; foreach my $__ls_hash_tree_leaf_key (sort keys %{$__ls_hash_tree_node}) { my $__ls_hash_tree_leaf_value = $__ls_hash_tree_node->{$__ls_hash_tree_leaf_key}; my @__ls_hash_tree_next_path = (@{$__ls_hash_tree_path}, $__ls_hash_tree_leaf_key); if (defined($__ls_hash_tree_leaf_value) && ref($__ls_hash_tree_leaf_value) eq \'HASH\') { $__ls_hash_tree_reduce->($__ls_hash_tree_leaf_value, \@__ls_hash_tree_next_path); } else { my $__ls_hash_tree_leaf_path = \@__ls_hash_tree_next_path; $__ls_hash_tree_acc = '.$hash_reduce_block.'; } } return undef }; $__ls_hash_tree_reduce->($__ls_hash_tree_source, []); $__ls_hash_tree_acc }';
     my $array_expr = 'do { my $__ls_array_tree_source = $__ls_tree_source; my $__ls_array_tree_acc = '.$initial_expr.'; my $__ls_array_tree_reduce; $__ls_array_tree_reduce = sub { my ($__ls_array_tree_node, $__ls_array_tree_path) = @_; for (my $__ls_array_tree_leaf_index = 0; $__ls_array_tree_leaf_index < @{$__ls_array_tree_node}; ++$__ls_array_tree_leaf_index) { my $__ls_array_tree_leaf_value = $__ls_array_tree_node->[$__ls_array_tree_leaf_index]; my @__ls_array_tree_next_path = (@{$__ls_array_tree_path}, $__ls_array_tree_leaf_index); if (defined($__ls_array_tree_leaf_value) && ref($__ls_array_tree_leaf_value) eq \'ARRAY\') { $__ls_array_tree_reduce->($__ls_array_tree_leaf_value, \@__ls_array_tree_next_path); } else { my $__ls_array_tree_leaf_path = \@__ls_array_tree_next_path; $__ls_array_tree_acc = '.$array_reduce_block.'; } } return undef }; $__ls_array_tree_reduce->($__ls_array_tree_source, []); $__ls_array_tree_acc }';
     my $expr = 'do { my $__ls_tree_source = '.$lowered_target.'; if (defined($__ls_tree_source) && ref($__ls_tree_source) eq \'HASH\') { '.$hash_expr.' } elsif (defined($__ls_tree_source) && ref($__ls_tree_source) eq \'ARRAY\') { '.$array_expr.' } else { undef } }';
-    return [$expr, 'terminal'];
+    return [$expr, $return_family];
    }
    return undef
   };
 
   my $first_method = $calls->[0]{method} // '';
   my $first_args = $calls->[0]{args} || [];
-  my $defined_default_chain = grep { ($_->{method} // '') eq 'coalesce' } @$calls;
+  my $reduction_chain = grep { ($_->{method} // '') eq 'reduce_leaves' } @$calls;
+  my $defined_default_chain = !$reduction_chain
+   && (grep { ($_->{method} // '') eq 'coalesce' } @$calls);
   # Keep dedicated mutation/traversal routes on their existing dispatchers.
   my $scalar_string_chain = $first_method !~ /^(?:push_front|push_back|pop_front|pop_back)$/o
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '') } @$calls)
@@ -5149,15 +5155,21 @@ my $lower_numeric_array_reducer_source_expr = sub {
     context => { first_method => $first_method, steps => scalar(@$calls) },
    );
    my $current_expr = $tree_receiver_target_expr->($receiver_expr, $calls, 0);
-   my $current_family = $tree_receiver_return_family->($first_method, $current_expr, $calls, 0);
+   # The first step consumes the tree; its result family applies afterward.
+   my $current_family = 'tree_source';
    for (my $idx = 0; $idx < @$calls; ++$idx) {
     my $call = $calls->[$idx];
     my $method = $call->{method} // '';
     if ($current_family eq 'selected' || $current_family eq 'scalar_result' || $current_family eq 'default_result') {
+     my $source_expr = $current_expr;
      my $applied = $append_selected_value_chain_call->($current_expr, $call, $current_family);
      return undef unless ref($applied) eq 'ARRAY';
      ($current_expr, $current_family) = @$applied;
-     return 'undef' if $current_family eq 'terminal' && $idx != $#$calls;
+     if ($current_family eq 'terminal') {
+      $source_expr = $lower_synthetic_chain_expr->($source_expr);
+      return undef unless defined($source_expr) && length($source_expr);
+      return 'do { my $__ls_rejected_result = '.$source_expr.'; undef }';
+     }
      next;
     }
     my $is_last = ($idx == $#$calls) ? 1 : 0;
@@ -7778,7 +7790,7 @@ sub _hash_receiver_value_chain_return_family {
  return 'hash' if $method =~ /^(?:copy|merge_hash|set_key|rename_key|drop_keys|pick_keys|flat_hash|walk_leaves|map_leaves)$/o;
  return 'array' if $method =~ /^(?:sorted_keys|sorted_values)$/o;
  return 'scalar_result' if $method =~ /^(?:has_key|is_empty|is_nonempty|is_defined|is_undefined)$/o;
- return 'terminal' if $method eq 'reduce_leaves';
+ return 'default_result' if $method eq 'reduce_leaves';
  return undef
 }
 

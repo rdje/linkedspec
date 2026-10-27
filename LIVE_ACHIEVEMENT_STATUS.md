@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
+Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
 
 ## Latest Completed Slice
 
-Selection23.1.1 freezes reduce_leaves accumulator result continuations from canonical helper/role and tree traversal contracts. Perl native/fresh producers retain Number/String/Array/Hash/false/null/empty initial and nested num_add gives7; appended numeric/Array/Hash links return null through explicit terminal classification. Public AST retains callback/add while substitution is return undef. Healthy source capture is[3,SILL,1,[9]], appended cat skips all effects, scalar root skips initial/callback and malformed zero/two initials skip all effects. Appended coalesce bypass leaks raw DSL and is owned within upcoming Perl21.1 result dispatch. Producer/callback/root/copy/order/shape contracts remain; five independent backend leaves21.1-.5 scheduled. Production unchanged, current book keeps terminal guidance with working nested workaround. Probe syntax/book/history/diff/staged continuity guards pass; no coverage/full matrix/admission claim.
+Perl21.1 composes reduce_leaves actual scalar/null/Array/Hash accumulators through the existing dynamic result bridge and dedicated traversal, including immediate map/reduce consumers. Producer/root/initial/callback bodies remain unchanged. Twelve final shared/direct native-fresh checks plus syntax pass after RED: exact kinds/typed index0, copies, numeric/default/container consumers, Array/Hash accumulator maps, repeated pipeline reduction and coalesced-container reduction, named/reversed roots, SI(L*)C snapshots/scoped restoration, invalid-root skipping and malformed no-effects. First implementation dropped rejection prefix; public Toolbox confirms undef, bind-once guard restores SILC while skipping operand A. Missing immediate traversal route is independently reproduced as callback brace compilation failure, then delegated to the existing lowerer. Book/frozen ledger/fact/map/TYPE/SESSION/live/resume align; explicit Perl registration23.4.1 remains queued. Required engineering-note rollover preserves exact segment4954; book/history/diff/staged continuity guards pass. No full gate/deferred/bang/context/portable admission; Rust21.2 independently next.
 
 ## Next Action
 
-Implement Perl21.1 actual reduction accumulator result continuations from frozen reduction-result-continuations.md. Retained public producer/nested/current-terminal/effect/shape controls precede production; preserve dedicated Array/Hash traversal/callback/copy/scope/order and clean wrong-family boundaries. Add small native/fresh result/direct traversal checks, sync docs and commit then Rust21.2. No new free helper/deferred/context expansion or full matrix.
+Independently assess/implement Rust21.2 reduce_leaves actual accumulator result flow from reduction-result-continuations.md and shared fixture. Public producer-first native/restored/plan distinctions before production; preserve dedicated root/callback/copy/scope/order/shape and runtime domains. Small changed/direct traversal/compile checks/docs/commit, then Dart21.3. No full suite/matrix/standalone admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.21.1` — Perl reduction accumulator result continuations21.1 implemented/targeted-checked; independent Rust21.2 next, then Dart/Julia/safe Lua. Full context/portable admission stays open.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.1` — Reduction accumulator result feature21 selected/frozen; Perl21.1 next, then independent Rust/Dart/Julia/safe Lua leaves. Full fluent matrix/context/portable admission remains open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.3` — All bounded optional substring argument repairs20 are targeted-checked; remaining fluent feature selection23.1.1 next. Complete signature/context/portable admission stays open.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.20.2` — Julia optional substring argument repair20.2 targeted-checked; safe Lua20.3 follows. Complete signature/context/portable admission remains open.
@@ -29,7 +30,6 @@ Implement Perl21.1 actual reduction accumulator result continuations from frozen
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.4` — Julia defined-only default result18.4 targeted-checked; four bounded backends complete, safe Lua18.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.3` — Dart defined-only default result18.3 targeted-checked; Perl/Rust/Dart bounded flow complete, Julia18.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.18.2` — Rust defined-only default receiver18.2 implemented and targeted-checked; Perl/Rust bounded flow complete, Dart18.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.18.1` — Perl defined-only default receiver18.1 implemented and targeted-checked; blocking pick_keys block staging repaired, Rust18.2 next.
 
 ## History
 

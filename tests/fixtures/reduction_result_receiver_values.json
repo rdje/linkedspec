@@ -1,0 +1,10 @@
+{
+ "traversals":[3,"B","b",4,4],
+ "numbers":[7,4],"texts":"AB!","arrays":4,"hashes":"b",
+ "booleans":["0!","1!",null],"recovery":8,"empty":[1,"0!"],
+ "named":"3!","pipeline":4,"effects":["3outer","SILLC",1,null],
+ "scope":["outer","outer-acc",["outer"],99,88,"outer"],
+ "invalid_effects":["FALLBACK","SC"],"rejected_effects":[null,"SIL"],
+ "prefix_effects":[null,"SILC"],"malformed":[null,null,""],
+ "copies":[["a"],["a","b"]],"slots":["updated","one"]
+}

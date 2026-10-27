@@ -23,6 +23,8 @@ my @cases = (
  [effects => q{items=[1,2];order="";calls=0;result={order=cat(order,"S");calls=num_add(calls,1);items}.reduce_leaves({order=cat(order,"I");items=[9];0}) { order=cat(order,"L");return(acc.add(value)) }.cat({order=cat(order,"C");items=undef;"!"});return([result,order,calls,items])}],
  [invalid_control => q{order="";result={order=cat(order,"S");"x"}.reduce_leaves({order=cat(order,"I");0}) {order=cat(order,"L");return(value)};return([result,order])}],
  [invalid => q{order="";result={order=cat(order,"S");"x"}.reduce_leaves({order=cat(order,"I");0}) {order=cat(order,"L");return(value)}.coalesce({order=cat(order,"C");"fallback"});return([result,order])}],
+ [traversal_consumer => q{return([1,[2]].reduce_leaves([]) {return(concat_arrays(acc,[value]))}.map_leaves() {return(value.add(1))}.last())}],
+ [rejection_prefix => q{order="";result={order=cat(order,"S");[1]}.reduce_leaves({order=cat(order,"I");0}) {order=cat(order,"L");return(acc.add(value))}.cat({order=cat(order,"C");"!"}).take({order=cat(order,"A");1});return([result,order])}],
  [shapes => q{order="";a={order=cat(order,"S");[1]}.reduce_leaves() {order=cat(order,"L");return(value)};b={order=cat(order,"S");[1]}.reduce_leaves({order=cat(order,"I");0},{order=cat(order,"X");1}) {order=cat(order,"L");return(value)};return([a,b,order])}],
 );
 my $sequence = 0;
@@ -42,6 +44,9 @@ for my $case (@cases) {
  }
  print JSON::PP->new->canonical->allow_nonref->encode({route=>'native',label=>$label,
    value=>$value,error=>error_snapshot($context{last_error}),thrown=>$thrown,compile_error=>$compile_error}),"\n";
+ if ($label eq 'rejection_prefix') {
+  print 'LOWERED ',LinkedSpec::call_spec_handler_subst('Top',$body),"\n";
+ }
  if ($label eq 'fluent') {
   require LinkedSpec::ActionIR::AST;
   print 'AST ',JSON::PP->new->canonical->encode(LinkedSpec::ActionIR::AST::parse_action_expr(
