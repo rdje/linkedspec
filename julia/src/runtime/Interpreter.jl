@@ -4004,6 +4004,18 @@ function _evaluate_runtime_structured_control!(engine, expr, context, rule_label
     return nothing
 end
 
+# Parser-state roles come from the existing source-boundary catalog, not name
+# prefixes. Explicit caller reader arguments precede function-scope entry.
+const _RUNTIME_PARSER_STATE_HELPER_NAMES = let names = Set{String}()
+    for rows in values(SourceLocation.projection_rows()), row in rows
+        push!(names, String(first(row)))
+    end
+    for row in SourceLocation.compatibility_aliases()
+        push!(names, String(first(row)))
+    end
+    names
+end
+
 function _evaluate_runtime_call!(
     engine::LinkedSpecRuntimeEngine,
     call::ActionCallExpr,
@@ -4015,6 +4027,11 @@ function _evaluate_runtime_call!(
     keyword_arg_count = count(arg -> arg isa ActionKeywordArgument, call.args)
     args = ActionExpr[getfield(arg, :value) for arg in call.args if arg isa ActionPositionalArgument]
     helper_name = canonical_action_helper_name(call.name)
+    if !isempty(context.active_user_functions) && helper_name in _RUNTIME_PARSER_STATE_HELPER_NAMES
+        throw(RuntimeInterpreterException(
+            "parser-state helper '$(call.name)' is not supported in user functions",
+        ))
+    end
 
     if helper_name in _RUNTIME_DIAGNOSTIC_OUTPUT_HELPER_NAMES
         _validate_runtime_diagnostic_output_arity!(

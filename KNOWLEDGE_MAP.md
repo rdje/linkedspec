@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1358** facts · **10757** question keys.
+> **1358** facts · **10758** question keys.
 
 ## Questions → fact
 
@@ -551,6 +551,7 @@
 - "can a Julia codeblock result feed key access or a receiver chain" -> [julia-callable-codeblock-dynamic-invocation](docs/knowledge/julia-callable-codeblock-dynamic-invocation.md) · 2026-07-30 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/callable_codeblock_literal_contract_test.jl\")' && bash tools/run_julia_local.sh`
 - "can a Julia parent matcher shift semantic structural slot correlation" -> [julia-semantic-static-correlation-gaps](docs/knowledge/julia-semantic-static-correlation-gaps.md) · 2026-09-11 · reverify: `Run both managed blocks below; no source repair or counterpart/MCP recurrence is claimed.`
 - "can a Julia progressive child dispatch after its local remaining budget reaches zero" -> [julia-progressive-authority-boundary-gaps](docs/knowledge/julia-progressive-authority-boundary-gaps.md) · 2026-09-11 · reverify: `Run the native and neutral managed blocks below; these assert pre-repair observations, not desired acceptance.`
+- "can a Julia pure function read caller captures or input_text" -> [user-function-parser-state-boundary](docs/knowledge/user-function-parser-state-boundary.md) · 2026-10-27 · reverify: [2 entries](#user-function-parser-state-boundary)
 - "can a Julia user function result feed a receiver chain" -> [julia-user-function-runtime-execution](docs/knowledge/julia-user-function-runtime-execution.md) · 2026-07-10 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'`
 - "can a Julia variadic user function have a null rest parameter" -> [julia-callable-codeblock-literal-state](docs/knowledge/julia-callable-codeblock-literal-state.md) · 2026-07-30 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/callable_codeblock_literal_contract_test.jl\")' && bash tools/run_julia_local.sh`
 - "can a LinkedSpec MCP server compile or load a specification" -> [mcp-native-server-topology](docs/knowledge/mcp-native-server-topology.md) · 2026-07-29 · reverify: `bash tools/run_python_project_data.sh tools/check_mcp_semantic_transport_contract.py && rg -n 'one exact MCP contract|five native server implementations|six runtime admissions|aggregator' docs/decisions/0054-one-mcp-contract-native-per-backend-servers.md docs/tasks/FUTURE-PARITY-BACKLOG.md docs/linkedspec-book/src/public-api/semantic-introspection.md`
@@ -21496,8 +21497,8 @@ _LinkedSpec compatibility is temporary and variables have one duck-typed value b
 
 ### user-function-parser-state-boundary
 _Pure functions reject known parser-state helpers while accepting explicit caller values_
-- **answers:** can a Rust pure function read caller captures or input_text | can a Dart pure function read caller captures or input_text | why does swapping function locals not isolate parser state | where is the Perl Rust pure function parser-state boundary enforced | does a function name starting entry or capture get rejected | can a pure function receive an entry_group value explicitly | which backends have the repaired parser-state function fence
-- **date:** 2026-10-27 · **status:** bounded Perl Rust Dart repaired; independent Julia safe Lua and full context admission open
+- **answers:** can a Rust pure function read caller captures or input_text | can a Dart pure function read caller captures or input_text | can a Julia pure function read caller captures or input_text | why does swapping function locals not isolate parser state | where is the Perl Rust pure function parser-state boundary enforced | does a function name starting entry or capture get rejected | can a pure function receive an entry_group value explicitly | which backends have the repaired parser-state function fence
+- **date:** 2026-10-27 · **status:** bounded Perl Rust Dart Julia repaired; independent safe Lua and full context admission open
 - **evidence:** `TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/user_function_parser_state_boundary.t` · `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test user_function_parser_state_boundary`
 - **source:** [`docs/knowledge/user-function-parser-state-boundary.md`](docs/knowledge/user-function-parser-state-boundary.md)

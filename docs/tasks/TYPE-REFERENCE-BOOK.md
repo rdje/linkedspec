@@ -6137,7 +6137,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3 - guard pure Dart functions against parser-state helpers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and repair Julia generic parser-state helper calls inside pure function bodies.
   Dependencies: Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 negative, semantic source/helper contracts and29.1 scoped reader fence; previous backend child where applicable.
   Acceptance: Use small public representative source-role/function controls to establish actual failures before production. Fence known parser-state helper names through existing function/compiler owners, preserving pure value helpers, explicit argument forwarding, user functions whose names merely resemble helper prefixes, source getters outside functions and all callback/format/arity/cursor rules. Derive boundaries from canonical contracts, not trace categories or runtime values; split larger work before changes. No backend failure is inferred from another backend.
@@ -6145,6 +6145,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Finite parser-reader function negative/pure value/explicit argument/ordinary getter source controls, changed compile/format and direct negative/positive tests, book/history/continuity. Safe Lua only available PUC5.5.1/LuaJIT/loadfile with no unsafe patterns/full runner/new chunk locals. No whole suite/matrix/standalone.
   Planned canonical trigger: Full function/source/context/portable/generated admission23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement requires separate ownership.
   Planned claim verification: none: Deterministic finite authored feature/boundary controls; no population/completeness measurement.
+
+  Before-production finding: At cleanfe5918167, Julia's unchanged four-group regression records45 failed parser-state expectations across15 authored source/helper controls on native/plan/fresh, with explicit-value positives3 already passing. Exact per-route actual values/errors are logged; missing purity rejection does not imply each reader returns non-null data (mark/capture context can already be empty). Current active_user_functions/local-store swapping does not guard parser registers. Derive private cached names from SourceLocation projection/alias catalogs and check call entry before operands/statement processing.
+
+  Activation: cleanfe5918167a239f657865508ce94e8445fbefc690; Dart29.2.3 committed/tree clean/brief0.
+  Owned paths: Interpreter private catalog-derived known-name cache and active-function call guard; new test/normal registration/retained RED; scoped book/target/fact/map/roadmap/task/live/resume.
+  Verification tier: `focused`
+  Focused checks: New four groups48 assertions native/plan/fresh after45 RED/healthy3; direct input12/capture12, all72 pass under depwarn=error including module load/compile. Book/history/fast continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/function/context/portable admission23.4 and final clean push after feature coverage; independent safe Lua follows.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Julia independently lacks the required purity rejection for15 authored helper/source controls on native/plan/fresh, yielding45 failures and3 healthy explicit-value positives before production. Eight collection/group spellings, representative input/position/mark/capture/cursor helpers and nested/discarded reads are observed; a null context reader still lacks required rejection and is not mislabeled as a non-null data leak. Exact per-route values/errors retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: active_user_functions protects recursion and invocation-local stores, while _evaluate_runtime_call! continues reading parser registers without a function-context guard. Variable-store isolation alone does not enforce parser-state purity.
+  - [x] **FIX**: Derive one private cached Set from existing SourceLocation projection/compatibility catalogs and reject active-function helper names at call entry before operands/statement handling. Use existing RuntimeInterpreterException and explicit semantic membership; no duplicate list, prefix ban, runtime artifact input or new helper/API/schema.
+  - [x] **ADDRESSED (verified)**: All48 new assertions pass native/plan/fresh: required parser-state failures name the helper, nested/discarded calls reject, and explicit caller capture values/local assignment/nested pure helpers/prefix names and ordinary getter continuations remain exact. Fresh emitted modules use normal public source emission and execute through invokelatest.
+  - [x] **NO REGRESSION**: Direct input12/capture12 also pass, all72 assertions under depwarn=error. Existing getter/frame/bounds/callback/local-data/arity/registry and serialization policies retain owners; full private rule-dispatch/deferred/context admission is separate. Normal runner includes the new test; no full runner execution.
+  - [x] **LOCKSTEP**: Book backend/error boundary, target/retained evidence/canonical fact/map and roadmap/task/live/resume align. Safe Lua is independently next; declared5.4/full23.4/pressure/Perl registration owners remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4 - enforce pure Julia function parser-state boundaries`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5`
   Status: `pending`
@@ -6162,7 +6179,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` | `pending` | Independently assess Julia parser-state helper boundaries in pure functions. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.5` | `pending` | Independently assess safe Lua parser-state helper boundaries in pure functions. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -4,13 +4,14 @@ title: Pure functions reject known parser-state helpers while accepting explicit
 answers:
   - can a Rust pure function read caller captures or input_text
   - can a Dart pure function read caller captures or input_text
+  - can a Julia pure function read caller captures or input_text
   - why does swapping function locals not isolate parser state
   - where is the Perl Rust pure function parser-state boundary enforced
   - does a function name starting entry or capture get rejected
   - can a pure function receive an entry_group value explicitly
   - which backends have the repaired parser-state function fence
 date: 2026-10-27
-status: bounded Perl Rust Dart repaired; independent Julia safe Lua and full context admission open
+status: bounded Perl Rust Dart Julia repaired; independent safe Lua and full context admission open
 tags: [functions, purity, parser-state, perl, rust]
 evidence: "TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets."
 reverify:
@@ -56,3 +57,12 @@ or duplicate source list. Four new native/restored-SpecFile/plan groups plus dir
 capture4/input4 pass, total12; selected fatal analysis/format clean. The exact
 tracked test and Dart intake packet retain RED first-case limits. Julia/safe Lua
 and complete context admission remain open.
+
+Julia29.2.4 independently records45 missing-purity failures over15 authored sources
+on native/plan/fresh, with3 healthy explicit-value assertions. Interpreter derives
+a private cached Set from SourceLocation projection/compatibility catalogs and
+checks active_user_functions before call operands/statement handling, throwing
+existing RuntimeInterpreterException. All48 new and direct input12/capture12 pass
+under depwarn=error; normal runner registration is present. The Julia intake
+packet retains actual per-route values/errors; null-valued context reads are not
+claimed non-null leaks. Safe Lua and complete context admission remain open.

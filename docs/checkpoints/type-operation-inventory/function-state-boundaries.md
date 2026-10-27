@@ -1,6 +1,6 @@
 # Pure-function parser-state boundaries
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl/Rust/Dart children29.2.1-.3 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2; Perl/Rust/Dart/Julia children29.2.1-.4 repaired/targeted-checked.
 
 Accepted authority is SPEC-FORMAT-TERSE.4.2.3 and its existing Phase0 entry_text
 negative: pure function bodies cannot implicitly read caller parser state. This
@@ -30,8 +30,7 @@ functions/ordinary getter continuations. Existing named-capture five and source
 location contract four pass. No state writes are executed in the descriptor-only
 control. No full suite, complete function/context proof or cross-backend admission.
 
-Next: Rust29.2.2 independently establishes its behavior before any implementation;
-Dart/Julia/safe Lua have separate children. Rule-dispatch/private context helpers,
+Sequencing: backend children independently establish behavior before implementation. Rule-dispatch/private context helpers,
 deferred callbacks and exhaustive admission remain separately assessed under29.2
 and23.4; this catalog fence does not establish their behavior.
 
@@ -49,7 +48,7 @@ collection/group helpers, representative input/position/mark/capture/cursor role
 nested/discarded calls and healthy explicit values/locals/prefix names. Capture4
 and input/cursor4 direct compatibility tests also pass; rustfmt/offline compile
 pass. No new compiled field, helper, diagnostic schema or full-context admission.
-Independent Dart29.2.3 follows, then Julia/safe Lua.
+Dart assessment was selected after the Rust checkpoint.
 
 Dart29.2.3 independently reproduces the same three first-native negative failures
 with a healthy pure explicit-value control at cleanb697a8979. The tracked test and
@@ -60,4 +59,16 @@ operands/statement dispatch through existing RuntimeInterpreterException. No new
 API/schema/helper or duplicated list. Four new native/restored-SpecFile/plan groups
 and direct capture4/input4 pass, total12; format/fatal selected analysis are clean.
 Explicit caller values/locals/pure helpers/prefix names/getters remain valid.
-Independent Julia29.2.4 follows; full context/portable admission remains open.
+Julia assessment was selected after the Dart checkpoint.
+
+Julia29.2.4 independently records45 missing-purity failures across15 source/helper
+controls on native/plan/fresh and3 healthy explicit-value positives at cleanfe5918167.
+Null-valued context readers still lack the required rejection; that is distinct
+from saying each helper leaks non-null data. The tracked producer and Julia intake
+packet retain all actual values/errors. Interpreter caches names from existing
+SourceLocation projection/compatibility catalogs, then rejects active-function
+call entry before operands via existing RuntimeInterpreterException. All48 new
+assertions plus input12/capture12 pass under depwarn=error, with normal test
+registration and module load/compile. Explicit caller values/locals/pure helpers/
+prefix names/getters remain valid. Independent safe Lua29.2.5 is next; full context,
+private dispatch/deferred/portable admission remains open.

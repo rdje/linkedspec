@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl/Rust/Dart function-state boundaries repaired; independent Julia assessment next.
+Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
 
 ## Latest Completed Slice
 
-Dart independently reproduces caller capture/full-input/nested parser reads in three first-native negative controls, with pure explicit-value control healthy. Interpreter derives a private cached helper-name set from its existing source projection/compatibility catalogs and rejects active-function calls before operands/statement handling using RuntimeInterpreterException. No duplicate list, new API/helper/IR/schema or serialization change. Four new native/restored-SpecFile/plan groups plus direct capture4/input4 pass, total12; formatting/fatal selected analysis are clean. Explicit caller values/local assignment/nested pure helpers/prefix-named functions and ordinary getters remain exact. Retained RED discloses first-route/case limits. Book/target/fact/map/roadmap/task/live/resume align; independent Julia29.2.4 follows. Full context/source/portable23.4, pressure and declared-host owners remain separate; no push.
+Julia independently records45 missing-purity failures across15 authored parser-helper/source controls on native/plan/fresh, with3 healthy explicit-value positives. Interpreter derives a private cached Set from existing SourceLocation projection/compatibility catalogs and rejects active-function calls before operands/statement handling through RuntimeInterpreterException. Null-valued context readers lack rejection but are not labeled non-null leaks. All48 new assertions plus direct input12/capture12 pass under depwarn=error, including module load/compile; new test is registered normally. Explicit caller captures/local assignment/nested pure helpers/prefix-named functions and ordinary getters remain exact. No duplicate list/new API/helper/IR/schema or serialization change. Retained source/log, book/target/fact/map/roadmap/task/live/resume align. Independent safe Lua29.2.5 follows; full source/function/context/portable23.4, pressure and declared-host owners remain separate; no push.
 
 ## Next Action
 
-Activate Julia function-state boundary29.2.4 from this clean Dart boundary. Read canonical function/helper/context owners and current runtime function stack; independently probe small readonly capture/input/group and pure explicit-argument controls before production. Repair only confirmed existing-contract escapes through current owners, preserving ordinary getters/local data methods/prefix-named functions and callback/serialization/arity rules. Compile/quick targeted check/book/docs/commit, then safe Lua29.2.5. No exhaustive matrix/full suite/admission/push; pressure/required Perl registration/declared-host owners remain separate.
+Activate safe Lua function-state boundary29.2.5 from this clean Julia boundary. Read canonical function/helper/context owners and current interpreter stack; independently probe small readonly capture/input/group and pure explicit-argument controls on confirmed available PUC/LuaJIT hosts before production. Repair only confirmed existing-contract escapes via current private table/catalog owners, with no new chunk locals or unsafe pattern/full runner. Preserve ordinary getters/local data/prefix names/callback/serialization/arity rules. Compile/quick targeted check/book/docs/commit; then select remaining function/context or feature work from clean frontier. No exhaustive matrix/full suite/admission/push; declared5.4/pressure/Perl registration owners remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.4` — Perl/Rust/Dart/Julia function-state boundaries repaired; independent safe Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` — Perl/Rust/Dart function-state boundaries repaired; independent Julia assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2` — Perl/Rust catalogued function-state boundaries repaired; independent Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.1` — Perl catalogued function-state boundary repaired; independent Rust assessment next.
@@ -29,7 +30,6 @@ Activate Julia function-state boundary29.2.4 from this clean Dart boundary. Read
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.4` — Julia canonical inline conditional guards implemented/targeted-checked; safe Lua26.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.3` — Dart canonical inline conditional result guards implemented/targeted-checked; Julia26.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.2` — Rust inline conditional result guards implemented/targeted-checked; independent Dart26.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.26.1` — Perl inline conditional result selection implemented/targeted-checked; independent Rust26.2 next.
 
 ## History
 
