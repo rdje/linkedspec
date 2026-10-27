@@ -10,8 +10,9 @@ answers:
   - should generic with repair widen deferred or unknown call rights
   - why does signed selection after with still report unsupported with
   - why do Rust with scalar results evaluate incompatible container operands
+  - why do Dart with scalar results evaluate incompatible container operands
 date: 2026-10-27
-status: Perl31.1 and Rust guard31.2.1 repaired; nested identity31.6 and full admission separate
+status: Perl31.1 and Rust31.2.1/Dart31.3 guards repaired; nested identity31.6/full admission separate
 tags: [perl, fluent, with, hash, scope, continuation]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl"
@@ -60,3 +61,10 @@ guarded. Four final native/restored/plan tests and direct input-with pass; scope
 and callback machinery remain unchanged. Distinct nested with also fails through
 active helper-name collision; [[rust-with-callback-name-collision]] and31.6.1 own
 that P1 repair before unrelated selection/parent admission. No full/nested claim.
+
+Dart31.3 independently exposes the same guard omission with first-native
+3/[]/3/[]/SWKVANJLT, while frozen Hash/pure-function/indexed state fence already
+pass. Current guarded-source/result flags gain with; four native/restored/plan
+tests and direct input-with pass with format/fatal analysis clean. No frame/parser/
+schema changes. Known [[dart-callback-helper-recursion-identity-gap]] remains its
+existing owner under priority31.6; no new nested failure or admission inferred.

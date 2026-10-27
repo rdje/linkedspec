@@ -6622,7 +6622,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1 - guard actual values returned by ordinary Rust with`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/repair Dart ordinary eager with returned-Hash continuations.
   Dependencies: Frozen31 target/shared fixture and accepted immediate with/Hash/value/scope contracts; prior backend child where applicable.
   Acceptance: Establish actual frozen/terminal Hash/default-dispatch/scalar/scope/function-boundary behavior independently before production; do not borrow another backend's failure or legacy oracle. Use existing typed value/with/compatible method owners; preserve actual returned kinds, source/body once, outer value restoration and other caller effects. Retain specific parser-state helper diagnostics inside pure-function with bodies and existing error/arity/root/copy/list-splice/mutation/callback/deferred/unknown-bound-call/schema boundaries. Split larger independent gaps before writes. Safe Lua uses available hosts only, no unsafe pattern/full runner/new persistent chunk locals.
@@ -6630,6 +6630,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen result fixture and a few native/reconstructed/generated/source, scope/effect/scalar/function diagnostics; relevant compile/format/direct dependent checks/book/history/continuity. No exhaustive suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual API/context/schema changes separately owned.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+  Activation: cleanc2f6e2ab00c124c8c9dd5e1e2827cc29dc07043d; Rust guard31.2.1 committed/tree clean/brief0.
+  Scope refinement: Known nested identity remains DART-STARTUP-READING.2.10 under priority31.6 before unrelated selection/parent admission; this leaf covers ordinary non-nested result flow, not nested identity closeout.
+  Verification tier: `focused`
+  Focused checks: Four native/restored-SpecFile/plan tests after one independently confirmed guard RED; direct input-with-only one case, format/fatal selected analysis clean, book/history/fast continuity. No nested/full suite/matrix.
+  Canonical trigger: Parent31 requires callback identity31.6; full source/domain/context/backend23.4 and final clean push after feature coverage.
+  Claim verification: none: Finite authored repair/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Frozen Hash/pure-function scope/indexed parser-state fence already pass native/restored/plan. Independently observed first-native scalar guard output3/[]/3/[] and SWKVANJLT violates frozen actual-result operand skipping; exact source/log retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter fluent dispatch omits helper-with from kindGuardedResult sources and does not retain that boundary after receiver with, allowing legacy scalar consumers/operands instead of current actual-kind guards.
+  - [x] **FIX**: Include helper with in existing guarded sources and retain kindGuardedResult after receiver with. Current value/callback/frame/error owners stay unchanged; no new helper/parser/AST/schema/deferred permissions.
+  - [x] **ADDRESSED (verified)**: Four final tests pass all three routes: frozen false/a-b/Y/a,z/2/ABCDE/outer, helper/receiver null consumers/skipped AKVJLT/SWN, healthy Array/Bool/default8/scope, pure-function OK and indexed specific entry_len rejection.
+  - [x] **NO REGRESSION**: Direct input-with-only case and format/fatal selected analysis pass. No outside-with root, copy depth, arity/error, callback/deferred/unknown-call or serialized changes. Known nested identity remains explicitly open under its existing owner, without borrowing a Rust failure or rerunning a broad matrix.
+  - [x] **LOCKSTEP**: Qualified book/target/retained independent RED/fact/map and roadmap/task/live/resume align; ordinary test discovery needs no runner edit. Julia31.4 next; priority31.6 and other prerequisite/admission owners stay scheduled.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.3 - guard actual values returned by ordinary Dart with`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.4`
   Status: `pending`
@@ -6680,7 +6695,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.3` | `pending` | Independently assess Dart with-result composition; identity31.6 follows bounded children. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` | `pending` | Independently assess Julia with-result composition; identity31.6 follows bounded children. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

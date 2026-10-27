@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1361** facts · **10790** question keys.
+> **1361** facts · **10791** question keys.
 
 ## Questions → fact
 
@@ -9927,6 +9927,7 @@
 - "why do Dart rm_prefix and rm_suffix numeric identities fail typed Array indices" -> [dart-runtime-string-numeric-helpers](docs/knowledge/dart-runtime-string-numeric-helpers.md) · 2026-10-27 · reverify: [2 entries](#dart-runtime-string-numeric-helpers)
 - "why do Dart tclite fixtures pass" -> [dart-recursive-dispatch-rule-local-scope](docs/knowledge/dart-recursive-dispatch-rule-local-scope.md) · 2026-07-09 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/compiled_spec_test[.]dart test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31 || true`
 - "why do Dart top-level fn corpus fixtures still fail" -> [dart-middle-corpus-batch](docs/knowledge/dart-middle-corpus-batch.md) · 2026-07-09 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/action_ast_parser_test[.]dart test/runtime_interpreter_test.dart && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 40 --limit 17 && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 58 --limit 2 && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --offset 62 --limit 6 && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings`
+- "why do Dart with scalar results evaluate incompatible container operands" -> [ordinary-with-hash-result-continuation](docs/knowledge/ordinary-with-hash-result-continuation.md) · 2026-10-27 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - "why do Julia EBNF quoted strings now match" -> [julia-statement-regex-mutation](docs/knowledge/julia-statement-regex-mutation.md) · 2026-07-10 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()'`
 - "why do Julia EBNF values still contain quotes after child push" -> [julia-action-edge-child-push](docs/knowledge/julia-action-edge-child-push.md) · 2026-07-10 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --case ebnf_expression_rules --case ebnf_logging_annotation --case spec_spec_minimal_rule --case spec_spec_action_edge --case spec_spec_user_function_definition --case spec_spec_comment_skip || true`
 - "why do Julia contains checks reject Bool lookalikes" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: [5 entries](#array-contains-result-handoff)
@@ -16513,8 +16514,8 @@ _Native parser acceleration is optional, measured, and derived from the dynamic 
 
 ### ordinary-with-hash-result-continuation
 _Ordinary eager with Hash results need typed continuation dispatch_
-- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with | why do Rust with scalar results evaluate incompatible container operands
-- **date:** 2026-10-27 · **status:** Perl31.1 and Rust guard31.2.1 repaired; nested identity31.6 and full admission separate
+- **answers:** why does literal String with returned Hash sorted_values stay unsupported | why does helper with returned Hash sorted_values return null | does with Hash failure lose the block result or method dispatch | why does coalesce null repair a with Hash continuation | which task owns ordinary with returned Hash method composition | should generic with repair widen deferred or unknown call rights | why does signed selection after with still report unsupported with | why do Rust with scalar results evaluate incompatible container operands | why do Dart with scalar results evaluate incompatible container operands
+- **date:** 2026-10-27 · **status:** Perl31.1 and Rust31.2.1/Dart31.3 guards repaired; nested identity31.6/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl`
 - **source:** [`docs/knowledge/ordinary-with-hash-result-continuation.md`](docs/knowledge/ordinary-with-hash-result-continuation.md)

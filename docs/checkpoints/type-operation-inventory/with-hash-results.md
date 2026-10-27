@@ -1,7 +1,7 @@
 # Ordinary eager with returned-Hash continuations
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.31; intake31.0; independent backend children31.1-.5.
-Status: Perl31.1 repaired; Rust31.2.1 actual-kind guards repaired/targeted-checked with nested identity31.6.1 open. Independent other backends/full admission follow.
+Status: Perl31.1 repaired; Rust31.2.1/Dart31.3 actual-kind guards repaired/targeted-checked with priority nested identity31.6 open. Independent other backends/full admission follow.
 
 Existing helper `with(value){body}` and receiver `source.with(){body}` execute
 immediately, bind scoped `value`, return the block result and restore the outer
@@ -71,3 +71,11 @@ The original nested control separately exposes helper-name recursion collision;
 its exact source/first-native error is retained and P1-owned31.6.1 after bounded
 backend children, before unrelated selection or parent admission. Known Dart2.10/
 Julia2.8 identity owners remain independent. No nested/full with admission follows.
+
+Dart31.3 independently already passes frozen Hash/pure-function/indexed-fence
+controls. Its helper/receiver scalar guard source returns3/[]/3/[] and SWKVANJLT at
+first native assertion. Existing guarded-source/result flags now include with;
+four native/restored-SpecFile/plan tests, direct input-with one case and format/
+fatal selected analysis pass. No frame/parser/schema changes. Existing nested
+identity DART-STARTUP-READING.2.10 remains priority31.6, not freshly assessed or
+called covered here. Independent Julia31.4 follows; parent/full admission stays open.

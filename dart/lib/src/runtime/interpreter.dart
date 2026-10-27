@@ -3844,7 +3844,8 @@ final class LinkedSpecRuntimeEngine {
               _isOrdinaryComputedRead(receiver) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
-                  canonicalActionHelperName(receiver.name) == 'copy'),
+                  (canonicalActionHelperName(receiver.name) == 'copy' ||
+                      canonicalActionHelperName(receiver.name) == 'with')),
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -5233,7 +5234,7 @@ final class LinkedSpecRuntimeEngine {
     var reductionResult = false;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
-      // Reduced, copied and computed values retain actual kinds through bridges.
+      // Reduced, copied, scoped and computed values retain their actual kinds.
       // Validate container-only consumers before evaluating their operands.
       if ((reductionResult || kindGuardedResult) &&
           helper != 'copy' &&
@@ -5289,7 +5290,8 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       );
       reductionResult = reductionResult || helper == 'reduce_leaves';
-      kindGuardedResult = kindGuardedResult || helper == 'copy';
+      kindGuardedResult =
+          kindGuardedResult || helper == 'copy' || helper == 'with';
       scalarResult =
           value is bool ||
           ((scalarResult || mayProduceScalar) &&
