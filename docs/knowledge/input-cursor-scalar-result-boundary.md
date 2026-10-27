@@ -12,11 +12,14 @@ answers:
   - how does Rust guard direct input reader results and preserve malformed call policies
   - do Dart input reader guards preserve malformed call count policies
   - how do Julia input reader results retain actual kinds through with
+  - why do malformed Lua input readers retain typed arity errors
 date: 2026-10-27
-status: bounded Perl27.1/Rust27.2/Dart27.3/Julia27.4 implemented; safe Lua27.5 next; compiler/policy28.1 and capture-name29.1 owned
+status: all five bounded27 implementations complete; compiler/policy28.1 next then capture-name29.1; full admission separate
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
+  - "bash tools/run_lua_project_data.sh puc lua/test/input_cursor_results_test.lua"
+  - "bash tools/run_lua_project_data.sh luajit lua/test/input_cursor_results_test.lua"
   - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/input_cursor_results_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/input_cursor_results_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test input_cursor_results"
@@ -109,3 +112,18 @@ positions/kinds/lazy/split/signed values, Number indices and returned with Array
 Hash/Bool/outer restoration hold; operands skip. Malformed reader/bound/flat
 counts0 remain. No getter/parser/coordinate/bounds/compiled/free/callback policy
 change; safe Lua27.5 follows.
+
+
+Safe Lua27.5 independently records nine RED result comparisons per available host,
+with healthy source/default/named/snapshot and malformed-source controls. A new
+function field in the existing private receiver table reuses INPUT_CURSOR_HELPERS
+and name/source_method/no-trailing/zero-two operand shapes to enable existing
+kind_guarded_result. No new chunk locals or getter/table/schema changes. Four
+execution groups pass native/plan/fresh on PUC5.5.1/LuaJIT2.1.1788460057, plus two
+source-error groups on those routes. Lua malformed input_text/input_slice retain
+native helper_arity_mismatch fields and generated message text, unlike other
+backends' legacy counts. Shared SWC/positions/kinds/lazy/split/signed data, Number
+indices, returned with Array/Hash/Bool/outer scope and operand skips pass; scalar
+counts yield null and bound/flat counts0 remain. Direct computed six groups and
+luac/loadfile/normal registration pass. All bounded27 children complete;28.1 then
+29.1 follow before admission, with declared5.4/full23.4/pressure/registration separate.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
+All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
 
 ## Latest Completed Slice
 
-Julia independently reproduces nine RED result comparisons and three healthy source/default/named/snapshot controls. A static predicate for ten zero-argument readers and two-argument input_slice, matching name/source_method and excluding trailing blocks, now enables existing actual-kind guards through with/bridges. All12 new native/plan/fresh strict Bool/Number/String/null/container comparisons and direct computed25 pass. Shared eleven spellings/coordinates/SWC/lazy/split/signed flow, typed Number index snapshots and with returned Array/Hash/Bool/outer restoration hold; incompatible operands skip and scalar counts yield null. Malformed reader/bound/flat counts0 remain. --depwarn=error compilation/normal registration, qualified book/catalog/target/fact/map and history/fast continuity align. No parser/getter/source-location/bounds/compiled/free-arity/callback/copy/write change. Safe Lua27.5 follows;28.1/29.1/full23.4/pressure/required Perl registration/declared5.4 stay owned; no push.
+Safe Lua independently reproduces nine RED reader-result comparisons per available host while source/default/named/snapshot and malformed-source controls already work. A function field in the existing private receiver table reuses the eleven INPUT_CURSOR_HELPERS names plus source_method/no-trailing/zero-two operand shapes, enabling existing actual-kind guards without new chunk locals. Four execution groups pass native/plan/fresh on PUC5.5.1/LuaJIT2.1.1788460057; two malformed source-error groups retain native helper_arity_mismatch fields/generated text on those routes. Shared positions/kinds/SWC/lazy/split/signed flow, Number selector snapshots and with returned Array/Hash/Bool/outer restoration hold; operands skip, scalar counts yield null and bound/flat counts0 remain. Direct computed six groups per host, luac/loadfile/normal registration, qualified book/catalog/target/fact/map and history/fast continuity align. All five bounded27 children complete; scalar-root compiler/policy28.1 then capture-name29.1 follow before admission. Full23.4/pressure/required Perl registration/declared5.4 remain owned; no push.
 
 ## Next Action
 
-Activate safe Lua input/cursor result composition27.5 from this clean Julia boundary. Confirm available PUC5.5.1/LuaJIT identities, then independently assess unchanged shared name=Alpha fixture and finite source/default/with/Number/legacy native/plan/fresh controls. Inspect actual Lua malformed reader diagnostics before selecting their preservation oracle. Extend only existing private tables/fields and result guards, no new chunk locals, unsafe patterns or full runner. luac/loadfile/quick checks/docs/commit, then owned scalar-root compiler/policy28.1 and capture-name29.1 before further feature selection/admission. Full23.4/pressure/required Perl registration/declared5.4 stay separate; no push.
+Activate owned scalar-root compiler/policy28.1 from this clean Lua boundary. Read relevant first-consumer/free-helper/binding/result authority and the retained refined context packet before production. Distinguish legacy literal/named/context constant []/Hash behavior from the confirmed set_key eager block-key compile failure/raw0-ready1. Resolve scoped policy from canonical contracts, preserve unrelated free/bound/copy/write rights and repair the actual compiler defect through existing typed key/value owners. Run small public source distinctions and focused native/fresh/metadata/source checks, compile/docs/commit; then capture-name29.1. No exhaustive matrix/full suite/admission/push; pressure/required Perl registration/declared-host owners remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.27.5` — All five bounded readonly input/cursor implementations complete; owned scalar-root compiler/policy28.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.3` — Dart readonly input/cursor result guards implemented/targeted-checked; independent Julia27.4 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.2` — Rust readonly input/cursor result guards implemented/targeted-checked; independent Dart27.3 follows.
@@ -29,7 +30,6 @@ Activate safe Lua input/cursor result composition27.5 from this clean Julia boun
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.5` — Safe Lua capture guards implemented on available hosts; all bounded25 children complete; next-feature selection23.1.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.4` — Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.3` — Dart canonical capture-source guards implemented/targeted-checked; independent Julia25.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.25.2` — Rust static capture-source actual-kind guards implemented/targeted-checked; independent Dart25.3 next.
 
 ## History
 

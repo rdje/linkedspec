@@ -3425,6 +3425,14 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
 end
 
+function typed_source.receiver_mutation.is_input_cursor_value_source(expr)
+  if expr == nil or expr.kind ~= "call" or expr.trailing_block_arg or
+    (expr.source_method or expr.name) ~= expr.name or not INPUT_CURSOR_HELPERS[expr.name] then
+    return false
+  end
+  return #(expr.args or {}) == (expr.name == "input_slice" and 2 or 0)
+end
+
 function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
   if expr == nil or expr.kind ~= "value_access" then return false end
   local receiver = expr.receiver
@@ -3460,6 +3468,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
   local scalar_result = type(value) == "boolean"
   local reduction_result = false
   local kind_guarded_result = typed_source.receiver_mutation.is_ordinary_computed_read(engine, target_receiver) or
+    typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       action_contracts.canonical_action_helper_name(target_receiver.name) == "copy")
   for index, call in ipairs(calls) do

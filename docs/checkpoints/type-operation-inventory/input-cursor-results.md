@@ -1,7 +1,7 @@
 # Read-only input and cursor scalar result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.7; implementation family23.3.27.
-Status: bounded Perl27.1/Rust27.2/Dart27.3/Julia27.4 implemented/targeted-checked; safe Lua27.5 next.
+Status: all five bounded backend children implemented/targeted-checked; full admission23.4 separate.
 
 The existing scalar readers input_text, input_len, input_end_pos, input_end_line,
 input_end_col, input_slice, cursor_pos, cursor_line, cursor_col, cursor_rest and
@@ -127,3 +127,19 @@ pass with --depwarn=error/normal registration. Shared SWC/positions/kinds/lazy/
 split/signed data, Number indices and returned with Array/Hash/Bool/outer scope
 hold; incompatible operands skip. Malformed reader/bound/flat counts0 remain.
 No parser/getter/coordinate/bounds/compiled format/free/callback policy change.
+
+
+## Bounded safe Lua implementation
+
+27.5 independently records nine RED result comparisons on each available host;
+source/default/named/snapshot and malformed-source controls already work. A private
+table-field predicate reuses INPUT_CURSOR_HELPERS and existing name/source_method/
+no-trailing/zero-two argument shapes, enabling existing actual-kind guards without
+new chunk locals. Four execution groups pass native/plan/fresh on PUC5.5.1 and
+LuaJIT2.1.1788460057; two malformed source-error groups preserve native typed
+helper_arity_mismatch fields/generated text across those routes. Six direct
+computed groups and luac/loadfile/normal registration pass. Shared SWC/positions/
+kinds/lazy/split/signed data, Number indices and actual returned with kinds/scope
+hold; operands skip and scalar counts yield null, bound/flat counts0 remain.
+No getter/parser/source coordinate/bounds/format/callback policy change. All five
+bounded27 children complete;28.1/29.1/declared5.4/full admission stay separately owned.
