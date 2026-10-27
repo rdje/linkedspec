@@ -52,3 +52,13 @@ with-result5 and one argument/body failure-cleanup unit pass. Argument effects
 persist on validation failure; body-local value and temporary parameters restore
 on failure. No captured environment/schema/arity/error vocabulary changes. See
 rust-with-final-callback-snapshot.md; independent Dart31.6.2 resumes next.
+
+Dart31.6.2 independently observes original5 first-native identity RED/2 healthy
+and refined explicit/Hash-nested2 RED. A private owned record copy and invocation
+frames retain bound names, callback data and existing finally cleanup. Equality is
+limited to inert callback JSON data; general runtime-value comparison does not move.
+Final identity8/with5 and existing mutual/named-value-scope2 pass with typed native/
+restored fields and plan text, format/fatal selected analysis clean. The initial
+writer assertion occurred before runtime write; unchanged replay is not candidate
+semantic RED. Existing Dart2.10 broader carrier/trace/public/context closeout stays
+open; independent Julia31.6.3 and remaining scoped controls follow.

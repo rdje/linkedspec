@@ -6,7 +6,7 @@
 - Status: `active` / reading closed under .3.2 / ADR0114; 25 repair roots remain open
 - Roadmap lane: `Session required reading / SESSION-STARTUP-READING.3.4`
 - Created: `2026-09-09`
-- Last updated: `2026-09-12`
+- Last updated: `2026-10-27`
 - Owner: repo-local workflow
 
 ## Goal
@@ -1091,12 +1091,15 @@ reading-closeout owner; this separate bounded tree owns its decomposition and re
   Commit: `pending`
 
 - ID: `DART-STARTUP-READING.2.10`
-  Status: `pending`
+  Status: `in_progress` — bounded runtime prerequisite implemented by TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2; broad closeout remains open.
   Goal: Separate callback recursion identity from helper names while preserving real bound-codeblock recursion rejection.
-  Dependencies: Startup `.3`, `.4` and `.5`; source finding from `.1.18`.
+  Dependencies: Startup `.3`, `.4` and `.5` remain required for full startup/public closeout; source finding from `.1.18`. The director’s focused feature phase executes bounded runtime prerequisite TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2 without a new full-reading audit.
   Acceptance: Allow distinct nested contextual/explicit callbacks through helper and receiver with and tree traversal without treating the helper name as callable identity. Preserve the bound callback identity through helper/receiver dispatch so direct, mutual and helper-mediated cycles report the correct ordered callable cycle. Resolve callbacks before installing scoped values; preserve once-only argument evaluation, copied parameter/rest values, restoration on success/failure and the separate map_leaves! receiver guard. Cover nested same/different helpers, sequential calls, named callbacks and real recursion through native, reconstructed, generated-plan and fresh emitted execution. Use the existing neutral contract and Lua identity record as evidence, not fresh backend proof; own any cross-backend follow-up. Update public evidence and use canonical proof at public closeout.
-  Verification: `pending`; nine native/SpecFile-JSON controls confirm four false recursion rejections for distinct nested with/map_leaves callbacks and incorrect with identity/cycle for real helper-mediated cb recursion. Single/sequential with and mixed map/reduce succeed; direct cb recursion reports cb correctly. _executeCodeblockValue keys activeCodeblocks by its name argument; helper/receiver/tree callers pass their helper name. Exact replay and locations live in docs/knowledge/dart-callback-helper-recursion-identity-gap.md. No fresh generated/emitted or other-backend defect result is claimed.
-  Commit: `pending`
+  Historical intake (2026-09-09): nine native/SpecFile-JSON controls confirm four false recursion rejections for distinct nested with/map_leaves callbacks and incorrect with identity/cycle for real helper-mediated cb recursion. Single/sequential with and mixed map/reduce succeed; direct cb recursion reports cb correctly. The original _executeCodeblockValue keyed activeCodeblocks by its name argument; helper/receiver/tree callers passed their helper name. Exact replay and locations live in docs/knowledge/dart-callback-helper-recursion-identity-gap.md. No fresh generated/emitted or other-backend defect result is claimed.
+  Commit: `pending` for the canonical parent only; bounded implementation subject is recorded below.
+
+  Bounded implementation update2026-10-27: TYPE31.6.2 fixes private helper/receiver/tree/direct callback frames with retained bound names and owned inert record comparison. Original7 controls reproduce5 first-native RED/2 healthy; refined explicit and Hash-nested2 fail separately. Final identity8/with5 plus existing mutual/named-value-scope2 pass on recorded native/restored/plan routes; format/fatal selected analysis clean. No new schema/dependency/capture/deferred/computed rights. Existing try/finally cleanup and pre-scope callback resolution stay unchanged. Exact packet: docs/checkpoints/type-operation-inventory/callback-identity-dart-intake.json.gz. Fresh emitted/trace/full alias/context and designated canonical/public parent admission are not claimed by this bounded implementation.
+  Bounded commit subject: TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2 - distinguish Dart callback invocations from helper labels; derive identity from Git. Parent commit/admission remains open.
 
 - ID: `DART-STARTUP-READING.2.11`
   Status: `pending`

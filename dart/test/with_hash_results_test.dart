@@ -34,6 +34,24 @@ void check(String source, String input, Object? expected) {
 String action(String action) =>
     'Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {$action}\n';
 void main() {
+  test('distinct nested Hash results preserve value scopes', () {
+    check(
+      action(r'''
+value="outer";order="";
+result="outside".with(){inner="inside".with(){order=cat(order,"I");return({"k":[value]})}.sorted_values().first().first();order=cat(order,"O");return({"k":[value,inner]});}.sorted_values().first();
+return([result,value,order]);
+'''),
+      'name=Alpha',
+      [
+        [
+          ['outside', 'inside'],
+          'outer',
+          'IO',
+        ],
+      ],
+    );
+  });
+
   test('unchanged frozen with Hash target', () {
     String fixture(String extension) => File.fromUri(
       Directory.current.parent.uri.resolve(

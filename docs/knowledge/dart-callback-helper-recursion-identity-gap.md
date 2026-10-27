@@ -6,14 +6,20 @@ answers:
   - can Dart nest distinct map_leaves callbacks
   - does Dart preserve bound callback identity through with
   - which task owns Dart helper callback recursion identity
-date: 2026-09-09
-status: confirmed-open
+date: 2026-10-27
+status: bounded TYPE31.6.2 repaired; DART startup2.10 broad closeout remains open
 tags: [dart, runtime, callable, codeblock, recursion, callback, startup, defect]
-evidence: "DART-STARTUP-READING.1.18; nine native/SpecFile-JSON controls; interpreter.dart helper/receiver with calls at 2932/2977, tree callback name at 3027-3028, leaf calls at 3240/3376, active-name lookup at 4881 and insertion at 4907; gated repair .2.10."
-reverify: "Run DART_CALLBACK_IDENTITY, the managed Dart invocation and DART_CALLBACK_IDENTITY_VERIFY below; assertions describe pre-repair output."
+evidence: "Historical2026-09-09 DART-STARTUP-READING.1.18; nine native/SpecFile-JSON controls; interpreter.dart helper/receiver with calls at 2932/2977, tree callback name at 3027-3028, leaf calls at 3240/3376, active-name lookup at 4881 and insertion at 4907; gated repair .2.10."
+reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/callback_identity_test.dart test/with_hash_results_test.dart"
 ---
 
 # Callback identity through helpers
+
+October27 bounded implementation TYPE31.6.2 repairs the runtime defect below;
+existing startup2.10 still owns broader carrier/trace/public/context closeout.
+The original dated observations/commands remain historical evidence.
+
+## Historical intake — September9, before the bounded repair
 
 Distinct nested callbacks are separate invocations. The helper name with or
 map_leaves is not the identity of each callback passed to that helper. Dart
@@ -46,7 +52,7 @@ no compilation rejection is substituted for a runtime result. The single/sequent
 different-helper controls distinguish nested helper-name collision from general
 callback invocation failure.
 
-## Mechanism and repair boundary
+## Historical mechanism and broader repair boundary
 
 In dart/lib/src/runtime/interpreter.dart, _executeCodeblockValue takes a name,
 checks activeCodeblocks.indexOf(name) at 4881 and pushes that name at 4907.
@@ -67,7 +73,7 @@ All 140 selected Dart interpreter/callable/variadic/mutation/observation/source/
 logical/diagnostic tests pass, including their existing emitted/CLI consumers.
 Those passes do not establish the new nested-callback boundary.
 
-## Reproduce
+## Historical reproduction
 
 All generated inputs and logs use managed repository-local storage.
 
@@ -114,3 +120,23 @@ DART_CALLBACK_IDENTITY_VERIFY
 Related: [[dart-callable-codeblock-dynamic-invocation]],
 [[dart-runtime-value-control-tree-helpers]], [[callable-codeblock-literal-contract]],
 [[map-leaves-mutation-dart-runtime]].
+
+## Current bounded repair — October27
+
+TYPE31.6.2 independently observes original5 first-native identity RED/2 healthy
+and refined explicit/nested-Hash2 RED. Private runtime callback views retain an
+owned inert record copy; invocation frames preserve optional bound names and
+compare callback JSON data, not helper labels. Existing bound-name fences and
+try/finally cleanup remain; callback resolution still precedes scoped value.
+Opaque existing coalesce(cb,cb) values keep active-cycle rejection without new
+deferred/computed permissions or environment capture. General value equality,
+dependencies and serialized literal fields do not change.
+
+Identity8/with5 and existing mutual/named-value-scope2 pass native/restored/plan,
+including typed code/stage/callable/cycle/handler-label fields, contextual/explicit/tree/Hash
+nesting, normal parameter/outer restoration and anonymous unknown errors. Format/
+fatal selected analysis clean. Initial writer assertion stops before runtime write;
+its unchanged replay is retained as setup evidence, not product-candidate RED.
+Exact sources/channels: callback-identity-dart-intake.json.gz. Existing2.10 keeps
+fresh emitted/trace/full alias/context/public closeout open. Julia31.6.3 and remaining
+scoped31.6.4 follow before unrelated selection/parent admission; no full proof claim.

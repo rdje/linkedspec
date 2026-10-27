@@ -6737,7 +6737,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1 - distinguish Rust callback invocations from helper labels`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 before unrelated selection/parent31 admission.
   Goal: Implement bounded Dart helper callback identity prerequisite under existing DART-STARTUP-READING.2.10.
   Authority: ADR0031/current callable contract, callback-invocation-identity.md and existing backend canonical identity record. Existing startup broad/public/context signoff remains separately owned; this leaf does not depend on a new full-reading audit.
@@ -6746,6 +6746,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Small finite native/reconstructed/generated/source success/error controls, direct dependent with/cleanup/typed-cycle checks, compile/format/normal registration/book/history/continuity; no full suite/matrix.
   Planned canonical trigger: Existing startup parent and full source/domain/context/backend23.4/final clean push after feature coverage; no broad parent closeout in this bounded leaf.
   Planned claim verification: none: Prospective finite authored repair/preservation controls; no population measurement.
+
+  Before-production intake at cleanb31e7bf7f: Original7 finite public tests confirm5 first-native identity failures/2 healthy tests across native/restored/plan. Two refined explicit-nested/Hash-scope controls independently fail first native with with→with. Existing _RuntimeCodeblockValue decoding discards the full inert record; retain an owned copy for cycle comparison, propagate optional variable identity through current dispatch and keep every invocation frame/try-finally cleanup. Anonymous unknown and direct/mutual controls must remain healthy; existing callback resolution before scoped value is unchanged.
+
+  Activation: cleanb31e7bf7fe683e28d07ac2d4ce5b23ef91199367; Rust snapshot31.6.5 committed/tree clean/brief0.
+  Verification tier: `focused`
+  Focused checks: Original7 after5 first-native RED/2 healthy; refined explicit/nested-Hash2 RED; final identity8/with-result5 and existing typed mutual/named-value-scope2 pass native/restored-SpecFile/plan with typed native/restored fields. Format/fatal selected analysis/book/history/fast continuity; no full suite/matrix/emitted package.
+  Canonical trigger: Existing DART-STARTUP-READING.2.10 broad carrier/public/context closeout stays open; coordinator31.6 and full23.4/final clean push after feature coverage.
+  Claim verification: none: Finite authored identity/diagnostic/scope controls; no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Original5 first-native failures cover distinct with/tree and wrong bound helper/receiver/opaque cb identity; unknown/direct/mutual controls are healthy all routes. Refined explicit-literal and returned-Hash nesting also fail first native. Initial edit-script assertion stops before runtime write; unmodified replay is retained separately, without calling it product-candidate RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter activeCodeblocks compares helper labels; decoded runtime callback view also drops the full inert record needed to distinguish opaque values. Caller callback resolution already precedes scoped value and must stay there.
+  - [x] **FIX**: Keep an owned callback-record copy in the private view; active invocation frames carry optional bound name and diagnostic label. Preserve bound-name fences, compare inert JSON records only for callback identity, propagate bound names through helper/receiver/tree/direct dispatch and close cycles with matched identity. Keep existing try/finally cleanup and callback argument order.
+  - [x] **ADDRESSED (verified)**: Identity8/with5 pass all routes: contextual/explicit with/tree/Hash nesting, outer value and temporary parameter restoration, cb→cb through helper/receiver/coalesce, direct/mutual order and anonymous unknown errors. Native/restored typed code/stage/name/cycle/handler-label fields and generated-plan text agree.
+  - [x] **NO REGRESSION**: Existing mutual-cycle and named-value callback-scope cases pass; format/fatal selected analysis clean. Existing success/failure finally cleanup remains unchanged. No dependency/helper/AST/serialized/capture/deferred/computed/unknown-call rights or generic runtime equality policy changes; broader error/trace/alias/carrier admission remains separate.
+  - [x] **LOCKSTEP**: Book removes the repaired Dart caveat; bounded target/retained sources/evidence/updated canonical card/map and roadmap/task/live/resume align. Existing Dart2.10 records bounded implementation while broader closeout stays open; ordinary discovery needs no runner edit. Julia31.6.3 next, then remaining31.6.4 before unrelated selection/parent admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2 - distinguish Dart callback invocations from helper labels`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3`
   Status: `pending`
@@ -6801,7 +6817,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` | `pending` | Repair bounded Dart callback identity, then Julia and remaining scoped controls. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` | `pending` | Repair bounded Julia callback identity, then remaining scoped controls. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

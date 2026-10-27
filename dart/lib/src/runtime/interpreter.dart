@@ -2953,6 +2953,9 @@ final class LinkedSpecRuntimeEngine {
         context,
         ruleLabel,
         currentEdge,
+        bindingName: callbackExpr is ActionVariableExpr
+            ? callbackExpr.name
+            : null,
         evaluatedValues: callbackExpr is ActionCodeblockArgumentExpr
             ? const []
             : [_copyValue(scopedValue)],
@@ -2998,6 +3001,9 @@ final class LinkedSpecRuntimeEngine {
         context,
         ruleLabel,
         currentEdge,
+        bindingName: callbackExpr is ActionVariableExpr
+            ? callbackExpr.name
+            : null,
         evaluatedValues: callbackExpr is ActionCodeblockArgumentExpr
             ? const []
             : [_copyValue(receiver)],
@@ -3043,6 +3049,9 @@ final class LinkedSpecRuntimeEngine {
     );
     final callback = _TreeCodeblockCallback(
       name: method,
+      bindingName: callbackExpr is ActionVariableExpr
+          ? callbackExpr.name
+          : null,
       codeblock: _requireFinalCodeblockValue(
         method,
         callbackValue,
@@ -3261,6 +3270,7 @@ final class LinkedSpecRuntimeEngine {
         context,
         ruleLabel,
         currentEdge,
+        bindingName: callback.bindingName,
         evaluatedValues: callback.passLeafValue
             ? [_copyValue(value)]
             : const [],
@@ -3397,6 +3407,7 @@ final class LinkedSpecRuntimeEngine {
         context,
         ruleLabel,
         currentEdge,
+        bindingName: callback.bindingName,
         evaluatedValues: callback.passLeafValue
             ? [_copyValue(value)]
             : const [],
@@ -4881,6 +4892,7 @@ final class LinkedSpecRuntimeEngine {
             context,
             ruleLabel,
             currentEdge,
+            bindingName: call.name,
           );
         }
         final detail =
@@ -4936,6 +4948,7 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel,
     _CurrentActionEdge? currentEdge, {
     List<Object?>? evaluatedValues,
+    String? bindingName,
   }) {
     final values =
         evaluatedValues ??
@@ -4977,11 +4990,20 @@ final class LinkedSpecRuntimeEngine {
       );
     }
 
-    final activeIndex = context.activeCodeblocks.indexOf(name);
+    final activeIndex = context.activeCodeblocks.indexWhere(
+      (active) =>
+          _sameCodeblockRecord(active.codeblock.record, codeblock.record) ||
+          (bindingName != null && active.bindingName == bindingName),
+    );
     if (activeIndex >= 0) {
-      final cycle = [...context.activeCodeblocks.sublist(activeIndex), name];
+      final identity = context.activeCodeblocks[activeIndex].name;
+      final cycle = [
+        for (final active in context.activeCodeblocks.sublist(activeIndex))
+          active.name,
+        identity,
+      ];
       final detail =
-          'codeblock_recursion_unsupported callable_name="$name" '
+          'codeblock_recursion_unsupported callable_name="$identity" '
           'cycle=$cycle rule_label="$ruleLabel"';
       throw RuntimeInterpreterException(
         detail,
@@ -4990,10 +5012,10 @@ final class LinkedSpecRuntimeEngine {
           summary: 'Dart callable codeblock invocation failed',
           detail: detail,
           code: 'codeblock_recursion_unsupported',
-          callableName: name,
+          callableName: identity,
           cycle: cycle,
           ruleLabel: ruleLabel,
-          handlerSourceLabel: 'dart_runtime:codeblock:$name',
+          handlerSourceLabel: 'dart_runtime:codeblock:$identity',
         ),
       );
     }
@@ -5003,7 +5025,13 @@ final class LinkedSpecRuntimeEngine {
       () => parseActionBlock(codeblock.bodySource),
     );
     final bindings = <_ScopedVariableBinding>[];
-    context.activeCodeblocks.add(name);
+    context.activeCodeblocks.add(
+      _ActiveCodeblockInvocation(
+        name: bindingName ?? name,
+        bindingName: bindingName,
+        codeblock: codeblock,
+      ),
+    );
     try {
       for (
         var index = 0;
@@ -8332,7 +8360,8 @@ final class _RuntimeExecutionContext {
       <String, Map<String, int>>{};
   final Set<String> activeRuleEntries = <String>{};
   final List<String> activeUserFunctions = <String>[];
-  final List<String> activeCodeblocks = <String>[];
+  final List<_ActiveCodeblockInvocation> activeCodeblocks =
+      <_ActiveCodeblockInvocation>[];
   final List<RuntimeLifecycleEvent> lifecycleEvents = <RuntimeLifecycleEvent>[];
   final List<int> cursorStack = <int>[];
   final List<String> _ruleStack = <String>[];
@@ -10645,6 +10674,7 @@ _RuntimeCodeblockValue? _decodeRuntimeCodeblock(Object? value) {
     return null;
   }
   return _RuntimeCodeblockValue(
+    record: _copyValue(value) as Map<String, Object?>,
     positionalParams: List.unmodifiable(positionalParams),
     restParam: restParam as String?,
     minArity: minArity,
@@ -10656,6 +10686,7 @@ _RuntimeCodeblockValue? _decodeRuntimeCodeblock(Object? value) {
 
 final class _RuntimeCodeblockValue {
   const _RuntimeCodeblockValue({
+    required this.record,
     required this.positionalParams,
     required this.restParam,
     required this.minArity,
@@ -10664,6 +10695,8 @@ final class _RuntimeCodeblockValue {
     required this.bodySource,
   });
 
+  // An owned copy keeps caller mutations out of active-cycle matching.
+  final Map<String, Object?> record;
   final List<String> positionalParams;
   final String? restParam;
   final int minArity;
@@ -10672,14 +10705,53 @@ final class _RuntimeCodeblockValue {
   final String bodySource;
 }
 
+// Compare the inert callback data retained for active-cycle detection.
+bool _sameCodeblockRecord(Object? left, Object? right) {
+  if (identical(left, right)) return true;
+  if (left is Map && right is Map) {
+    return left.length == right.length &&
+        left.entries.every(
+          (entry) =>
+              right.containsKey(entry.key) &&
+              _sameCodeblockRecord(entry.value, right[entry.key]),
+        );
+  }
+  if (left is List && right is List) {
+    if (left.length != right.length) return false;
+    for (var index = 0; index < left.length; index += 1) {
+      if (!_sameCodeblockRecord(left[index], right[index])) return false;
+    }
+    return true;
+  }
+  if (left is String && right is String) return left == right;
+  if (left is num && right is num) return left == right;
+  if (left is bool && right is bool) return left == right;
+  return false;
+}
+
+final class _ActiveCodeblockInvocation {
+  const _ActiveCodeblockInvocation({
+    required this.name,
+    required this.bindingName,
+    required this.codeblock,
+  });
+
+  // Diagnostic label used when rendering cycle details.
+  final String name;
+  final String? bindingName;
+  final _RuntimeCodeblockValue codeblock;
+}
+
 final class _TreeCodeblockCallback {
   const _TreeCodeblockCallback({
     required this.name,
+    required this.bindingName,
     required this.codeblock,
     required this.passLeafValue,
   });
 
   final String name;
+  final String? bindingName;
   final _RuntimeCodeblockValue codeblock;
   final bool passLeafValue;
 }

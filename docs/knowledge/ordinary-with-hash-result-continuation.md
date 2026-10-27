@@ -14,7 +14,7 @@ answers:
   - why do Julia with scalar results evaluate incompatible container operands
   - why do Lua with scalar results evaluate incompatible container operands
 date: 2026-10-27
-status: bounded result children and Rust identity31.6.1 repaired; other identity/full admission open
+status: bounded result children and Rust31.6.1/Dart31.6.2 identity repaired; Julia/remaining/full admission open
 tags: [perl, fluent, with, hash, scope, continuation]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.31.0; with-hash-intake.json.gz retains public source/AST/native/fresh/Value metadata/substitution distinctions at clean912c803435."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_with_hash_results.pl"
@@ -95,3 +95,10 @@ failed-frame cleanup pass; exact nested Hash source is restored to normal tests.
 See [[rust-with-callback-name-collision]] and callback-invocation-identity.md.
 Independent Dart/Julia and remaining scoped controls still precede unrelated
 selection/parent admission; no full callback/context closeout is claimed.
+
+Dart31.6.2 now repairs the nested prerequisite through private data/name-aware
+invocation frames, with owned inert records and unchanged finally/scope order.
+Identity8/with5 and existing mutual/named-value-scope2 pass with fatal analysis;
+see [[dart-callback-helper-recursion-identity-gap]] for exact evidence/limits.
+Julia31.6.3 and remaining scoped controls still precede unrelated selection/parent
+admission; existing Dart2.10 broader public/context closeout remains open.
