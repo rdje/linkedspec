@@ -6383,7 +6383,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Prospective finite authored example repair; declare any actual measurement at activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30`
-  Status: `pending`
+  Status: `in_progress` — all bounded backend children complete on recorded routes/hosts; full admission23.4 remains separate.
   Goal: Compose existing readonly entry/match Number results through compatible ordinary defaults/numeric/text methods without a binding.
   Authority: Frozen docs/checkpoints/type-operation-inventory/entry-match-number-results.md and shared fixture; current source-location getter semantics and existing Number/default/value contracts. No new primitive/helper/signature/type/schema.
   Acceptance: Implement only independently confirmed producer/result gaps. Preserve all getter/frame/coordinate/absence/error and alias behavior, zero/lazy defaults, values/kinds and ordinary operand order. Existing arithmetic prefixes keep normalized-result guards; legacy literal/named/context first-consumer fallback and malformed-source policies stay unchanged. Keep function-state fences and explicit caller arguments, callback/deferred/control/mutation/copy/flat/list-splice/unknown-call boundaries. With Hash continuation31 remains independent.
@@ -6496,7 +6496,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.4 - retain Julia entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.30.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/implement safe Lua readonly entry/match Number result composition under frozen30.
   Dependencies: Selection23.1.8, existing getter/Number/default contracts and30 target; previous backend child where applicable.
   Acceptance: Establish actual behavior through small producer/default/normalized-result/preservation controls before production. Use existing getter/render/value owners, preserving exact semantic source/signature/projection/error/alias behavior and first-consumer/root policies. Keep malformed/backend differences explicit, function-state fences and callback/serialization rights. Split larger independent gaps before writes; no failure inferred from another backend.
@@ -6504,6 +6504,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Frozen fixture and a few native/current reconstructed/generated direct/preservation controls, relevant compile/format/source/getter/function checks as warranted, book/history/continuity. Safe Lua only available hosts/no unsafe patterns/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; actual public contract/schema/infrastructure movement separately owned.
   Planned claim verification: none: Prospective deterministic finite authored feature checks; no population measurement.
+
+  Activation: clean76b3a61220d32bef804b5f7fefac240312fdd594; Julia30.4 committed/tree clean/brief0.
+  Owned paths: New safe Lua regression/normal runner registration/retained host-qualified observations; scoped book/target/fact/map/roadmap/task/live/resume. Runtime unchanged; no new persistent chunk locals.
+  Verification tier: `focused`
+  Focused checks: Twelve native/plan/fresh comparisons across four groups per available PUC5.5.1/LuaJIT2.1.1788460057 host, luac/loadfile test/full-runner syntax only, book/history/fast continuity/diff. No unsafe pattern/full runner/suite/matrix.
+  Canonical trigger: Full source/domain/context/portable/generated23.4 and final clean push after feature coverage; declared5.4 separately owned. No admission from finite existing-behavior proof.
+  Claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Unchanged Lua passes frozen target, absent-match fallback and specific function fence on both available hosts. Independently observe direct scalar set_key5/take[]/normalized-null/order-empty on each native/plan/fresh route before freezing the exact oracle. Retain original source/log/refinement/host versions; no borrowed behavior or product RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing interpreter value/default/numeric paths already compose returned Number values correctly. Perl's source-lowering defect does not establish a Lua defect; existing scalar-root compatibility is preserved independently.
+  - [x] **FIX**: Keep runtime untouched; retain a safe normally registered regression with independently established exact legacy results. No persistent interpreter chunk locals or new method/helper/source/schema permissions.
+  - [x] **ADDRESSED (verified)**: Twelve comparisons per host pass across frozen getter/coordinate/kind/zero/lazy/String flow, allowed C/skipped AKV, absent F once/yields8, direct scalar preservation and specific pure-function getter rejection with native helper metadata/generated error channels.
+  - [x] **NO REGRESSION**: luac/loadfile changed test and full-runner syntax pass without executing the full runner. No runtime/getter/source/coordinate/alias/arity/error/root/callback/AST/serialized changes. Declared5.4 and full invalid-domain/backend admission remain separately owned.
+  - [x] **LOCKSTEP**: Qualified book/target/retained host observations/fact/map and roadmap/task/live/resume align; normal Lua registration retained. All five bounded Number children now implemented or already compatible on recorded routes/hosts. P1 with-Hash31 next; stale example/pressure/Perl registration/declared5.4/full23.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.30.5 - retain safe Lua entry and match Number composition controls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31`
   Status: `pending`
@@ -6523,7 +6538,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` | `pending` | Independently assess safe Lua entry/match Number reader composition; with Hash31 follows. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.31` | `pending` | Diagnose and repair ordinary eager with returned-Hash continuations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

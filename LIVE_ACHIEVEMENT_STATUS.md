@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
+All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
 
 ## Latest Completed Slice
 
-Julia independently already implements frozen entry/match Number reader composition, absent-match lazy fallback and the specific function fence. Legacy direct scalar set_key5/take[]/normalized-null/order-empty is observed on native/plan/fresh before freezing the exact preservation oracle, without borrowed output or product RED. Twelve comparisons across four groups pass with recursive Bool-versus-Number checks: frozen values/coordinates/zero/lazy/String flow, C and skipped AKV, F once/yields8, direct scalar preservation and specific pure-function getter rejection. --depwarn=error compile and normal runner registration complete; runtime unchanged. Exact initial observation source/log/refinement retained. Book/target/fact/map/roadmap/task/live/resume align; safe Lua30.5 next and with-Hash31 immediately after30. Stale example/pressure/Perl registration/declared5.4/full23.4 remain separate; no push.
+Safe Lua independently already implements frozen entry/match Number reader composition, absent lazy fallback and specific pure-function rejection on confirmed PUC5.5.1/LuaJIT2.1.1788460057. Direct scalar setter5/take[]/normalized-null/order-empty is observed on each native/plan/fresh route before the exact oracle, with no borrowed output/product RED/runtime changes. Twelve final comparisons per host pass across frozen values/coordinates/kinds/zero/lazy/String flow, C/skipped AKV, absent F once/yields8, legacy roots and function diagnostic/helper metadata. luac/loadfile test/full-runner syntax only and normal registration complete. Initial source/log/refinement/host versions retained. Book/target/fact/map/roadmap/task/live/resume align; all five bounded Number children implemented or already compatible on recorded hosts. P1 generic eager with returned-Hash31 next; declared5.4/stale example/pressure/Perl registration/full23.4 remain separate; no push.
 
 ## Next Action
 
-Activate safe Lua Number reader30.5 from this clean Julia boundary. Read frozen target/fixture/current getter/default owners; independently run producer/frozen/zero-missing/function controls and observe legacy-root behavior before freezing its oracle on available PUC/LuaJIT hosts. Preserve exact getter/coordinate/alias/arity/error/root policies; repair only confirmed gaps through current owners, no new persistent chunk locals/unsafe patterns/full runner. Small native/plan/fresh/compile checks, docs/book/commit, then P1 generic eager with returned-Hash31. No full suite/matrix/admission/push; stale example/pressure/Perl registration/declared5.4/full23.4 still owned.
+Activate P1 ordinary eager with returned-Hash continuation31 from this clean Lua boundary. Read current with returned-value/scope contracts, generic chain/Hash owners, Knowledge Map and retained literal/named/getter twins. Diagnose exact source/substitution/AST/value/chain and function diagnostic channels with LinkedSpec public tools first. Freeze a bounded target and independent backend children before production; preserve outer value restoration/effects, actual returned kinds and existing root/arity/error/callback/deferred/unknown-bound-call/serialization boundaries. Compile and small direct native/fresh controls/docs/commit per child; no full matrix/suite/admission/push. Stale example/pressure/Perl registration/declared5.4/full23.4 remain owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.30.5` — All bounded Number reader children targeted-checked on recorded hosts; P1 eager with-Hash31 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.4` — Perl Number repair and existing Rust/Dart/Julia compatibility targeted-checked; safe Lua30.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.3` — Perl Number repair and existing Rust/Dart compatibility targeted-checked; Julia30.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.30.2` — Perl Number reader repair and existing Rust compatibility are targeted-checked; Dart30.3 next.
@@ -29,7 +30,6 @@ Activate safe Lua Number reader30.5 from this clean Julia boundary. Read frozen 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.3` — Perl/Rust/Dart function-state boundaries repaired; independent Julia assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.2` — Perl/Rust catalogued function-state boundaries repaired; independent Dart assessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.1` — Perl catalogued function-state boundary repaired; independent Rust assessment next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.29.1` — Perl static capture names/current reader function fences repaired; remaining function boundary29.2 next.
 
 ## History
 

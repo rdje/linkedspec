@@ -1,7 +1,7 @@
 # Entry and match Number reader result composition
 
 Selection owner: TYPE-REFERENCE-BOOK.1.2.23.1.8; implementation family23.3.30.
-Status: Perl30.1 implemented and Rust30.2/Dart30.3/Julia30.4 already-compatible/targeted-checked; independent other backend children follow.
+Status: All five bounded backend children implemented or already compatible on recorded routes/hosts; full admission23.4 remains separate.
 
 Existing zero-argument entry/match length and position readers return Numbers or
 null under the current typed source-location contract. Ordinary compatible value
@@ -95,3 +95,12 @@ observed on native/plan/fresh before the final oracle. Twelve comparisons across
 four groups pass with recursive Bool-versus-Number checks and --depwarn=error;
 normal runner registration is added. Exact initial observation source/log and
 refinement are retained. Runtime unchanged; safe Lua30.5 independently follows.
+
+Safe Lua30.5 independently already passes the frozen target, missing-match fallback
+and specific function fence on available PUC5.5.1/LuaJIT2.1.1788460057. Direct scalar
+setter5/take[]/normalized-null/order-empty is observed per native/plan/fresh route
+before the exact preservation oracle. Twelve final comparisons per host pass;
+luac/loadfile runner syntax only and normal registration complete. Initial source,
+logs, refinement and exact host versions retained; runtime unchanged. All bounded
+Number children are complete on recorded hosts. P1 with-Hash31 follows; declared5.4
+and full source/domain/context/portable/generated admission stay separate.

@@ -12,9 +12,10 @@ answers:
   - does Rust already compose entry match Number reader defaults
   - does Dart already compose entry match Number reader defaults
   - does Julia already compose entry match Number reader defaults
+  - does Lua already compose entry match Number reader defaults
   - does Rust direct scalar set_key keep the same result as Perl
 date: 2026-10-27
-status: Perl30.1 repaired; Rust30.2/Dart30.3/Julia30.4 already compatible; independent other backends and with-Hash31 follow
+status: all bounded Number children implemented or already compatible on recorded routes/hosts; with-Hash31 next, full admission separate
 tags: [perl, fluent, source-location, entry, match, number, with]
 evidence: "TYPE23.1.8 retains six original/five refined public native/fresh/Value metadata/substitution cases at cleanc0bf78088; source/target/shared prospective fixture and independently owned30/31."
 reverify:
@@ -79,3 +80,10 @@ exact oracle. Twelve native/plan/fresh comparisons pass with strict Bool/Number
 comparison and --depwarn=error; normal runner include registered. Initial source/
 log/refinement retained, runtime unchanged, no product RED. Safe Lua follows;
 with-Hash31/full domain/context/backend admission remain separate.
+
+Safe Lua30.5 independently already implements the target on available PUC5.5.1/
+LuaJIT2.1.1788460057, with exact legacy results observed before final oracle. Twelve
+native/plan/fresh comparisons per host, luac/loadfile syntax and normal registration
+pass; runtime unchanged/no persistent chunk locals/product RED. Initial source,
+logs/refinement/versions retained. All bounded Number children are complete on
+recorded routes/hosts; with-Hash31 next, declared5.4/full admission separate.
