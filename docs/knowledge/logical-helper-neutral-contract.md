@@ -152,3 +152,10 @@ Existing copy domains are backend-qualified, not normalized by this feature.
 TYPE1.2.1.4.2 owns accepted-domain authority review and necessary parity/feature
 repairs immediately after logical23, before ordinary coverage/admission closes.
 Only Perl/Rust/Dart method support is established here; Julia23.4 follows.
+
+Julia23.3.23.4 already has valid logical receiver dispatch and actual Bool/result
+handling. Its missing positional shape preflight alone runs malformed source/RHS
+effects; add and/or one-plus RHS/not zero before effects. Registered new strict
+native/plan/fresh PASS109 plus direct result PASS100 and strict compilation retain
+snapshots, true Bool/Number counters, source diagnostics and with/value copies.
+Only Perl/Rust/Dart/Julia method support is established; safe Lua23.5 follows.

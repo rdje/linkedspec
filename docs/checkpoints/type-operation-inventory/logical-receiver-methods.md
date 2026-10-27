@@ -106,3 +106,13 @@ copy gives null. Current domains/depths are already backend-qualified in copy fa
 This family does not silently choose a universal scalar-copy domain: P2
 TYPE1.2.1.4.2 must resolve authority and own required repairs immediately after
 family23, before coverage/admission closure. Julia23.4 independently follows.
+
+## Bounded Julia implementation
+
+23.3.23.4 independently finds valid receiver/pure dispatch, eager typed snapshots,
+Bool/result guards, source errors and with/value-copy behavior already healthy.
+Only malformed shapes run effects/unknown operands. Add positional one-plus RHS
+and/or and zero-RHS not preflight. Registered native/plan/fresh strict test PASS109
+plus direct logical-result PASS100 and strict compilation; no producer/free/copy/
+callback/model change. Julia retains Bool copies like Dart. Safe Lua23.5 next;
+copy-domain owner1.2.1.4.2 follows this family before coverage/admission closes.

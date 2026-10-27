@@ -5887,6 +5887,12 @@ function _evaluate_runtime_fluent_chain!(
     # scalar min/max overloads retain their ordinary operands.
     for call in chain.calls
         helper_name = canonical_action_helper_name(call.method)
+        if helper_name in _RUNTIME_LOGICAL_HELPER_NAMES && (
+            any(arg -> !(arg isa ActionPositionalArgument), call.args) ||
+            (helper_name == "not" ? !isempty(call.args) : isempty(call.args))
+        )
+            return nothing
+        end
         if (helper_name in ("num_clamp", "replace_substr") && length(call.args) != 2) ||
             (helper_name in ("num_add", "num_mul", "coalesce", "cat") && isempty(call.args)) ||
             (helper_name == "substr" && !(1 <= length(call.args) <= 2)) ||

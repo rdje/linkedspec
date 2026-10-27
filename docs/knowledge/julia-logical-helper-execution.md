@@ -2,6 +2,8 @@
 id: julia-logical-helper-execution
 title: Julia consumes the typed eager logical-helper contract through one truth seam
 answers:
+  - does Julia support and or not receiver methods
+  - do malformed Julia logical receiver shapes evaluate their source
   - does Julia support and or not helpers
   - are Julia LinkedSpec logical helpers short circuit
   - what arity do Julia and or not accept
@@ -13,11 +15,11 @@ answers:
   - what does FUTURE-PARITY-BACKLOG.5.2.5 prove
   - which Julia portmap fixtures pass after logical helpers
   - why did Julia portmap_constant fail after its first logical implementation
-date: 2026-10-26
+date: 2026-10-27
 status: current
 tags: [julia, runtime, logical, truthiness, arity, generated-source, primary-cli, corpus, FUTURE-PARITY-BACKLOG]
 evidence: "TYPE23.3.17.4 public producer/shared/rejected-effect/actual-Bool/source-error and direct neutral/default native-plan-fresh focused proof. Full prior July/September admission, reading and replay detail at Git40cc7b4581a8826200c65f04b9fa1622515042d8 for this path."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/logical_result_receivers_test.jl\");include(\"julia/test/default_selected_receivers_test.jl\")'"
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include(\"julia/test/logical_result_receivers_test.jl\");include(\"julia/test/default_selected_receivers_test.jl\");include(\"julia/test/logical_receiver_methods_test.jl\")'"
 
 ---
 
@@ -56,3 +58,15 @@ replayed or promoted by the current narrow checks.
 
 Related: [[logical-helper-neutral-contract]], [[julia-generated-source-scaffold]],
 [[julia-helper-regex-flag-normalization]], [[julia-callable-codeblock-literal-state]].
+
+## Ordinary logical receiver methods, October27
+
+TYPE23.4 confirms existing pure-helper fluent dispatch already preserves valid
+logical kinds/eager snapshots/Boolean boundaries/scopes/free errors and value
+copies. Producer/copy PASS12, valid/error controls PASS91 before changes; malformed
+shapes run SCSCSAC or an unknown operand. Six preflight lines require positional
+one-plus RHS and/or and zero-RHS not before effects. Registered strict native/
+plan/fresh test PASS109 plus direct logical result PASS100 and strict compilation.
+No free producer/truth/arity/callback/deferred/copy/serialized model changes;
+Bool value copies stay true/false. Copy-domain1.2.1.4.2 and full method/context/
+portable admission remain separate; safe Lua23.5 independently follows.
