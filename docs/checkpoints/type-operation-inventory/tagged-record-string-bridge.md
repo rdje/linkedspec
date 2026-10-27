@@ -112,3 +112,12 @@ receiver Array-input role confusion (result dispatcher membership is insufficien
 regex pattern evaluation and min-two-RHS no-effects preflight. Five new tagged
 and seven direct String tests pass plus format/fatal analysis. Preserve existing
 split/conversion/copy/free short-call behavior; Julia22.4 next, full33 admission open.
+
+## Julia22.4 partial completion
+
+Eager producer/named/literal/regex/copy controls already work. Fix derived String
+results rejected by result-family Array-input guards and absent min-two-RHS
+preflight; preserve producer/regex/conversion/split/copy/free short behavior.
+Registered native/plan/fresh test PASS51 strict Number-not-Bool/false assertions,
+plus direct String PASS54 and strict compilation. Safe Lua22.5 follows; full33
+split-domain/context/portable admission remains separately owned.

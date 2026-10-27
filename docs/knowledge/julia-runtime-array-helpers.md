@@ -10,6 +10,7 @@ answers:
   - can Julia first and last continue through selected scalar and container methods
   - which task owns Julia receiver copy arity validation
   - do Julia standalone split_each filter_match and uniq update arrays
+  - does Julia split_tagged_records accept String helper results and preserve typed fields
   - does Julia runtime support array receiver chains
   - does Julia runtime support sorted drop_front first
   - does Julia runtime support split_each trim_each filter_nonempty
@@ -20,11 +21,11 @@ answers:
   - does Julia runtime support split array target replacement
   - does Julia runtime support push_back and pop_front statements
   - do Julia value position array end mutations avoid mutation
-date: 2026-10-26
+date: 2026-10-27
 status: bounded value/predicate guards; full admission open
 tags: [julia, runtime, helpers, array, receiver-chains, JULIA-BACKEND-PARITY]
-evidence: "Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/emptiness_result_receivers_test.jl\"); include(\"julia/test/has_key_result_receivers_test.jl\")'"
+evidence: "TYPE22.4 separates tagged-record String input from Array output and preflights min-two operands with strict native/plan/fresh controls. Array4.3.3/end12.1.5/transform5.3.3; selected/copy/count/aggregate/join23.3 focused fixtures."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/emptiness_result_receivers_test.jl\"); include(\"julia/test/has_key_result_receivers_test.jl\"); include(\"julia/test/tagged_record_receivers_test.jl\")'"
 ---
 
 Julia array helper execution lives in `julia/src/runtime/Interpreter.jl`.
@@ -34,6 +35,13 @@ count/select/order/membership, take/drop/slice, string transforms and filters,
 stable uniqueness, regex filtering, split-and-flatten pipelines, delimiter-first
 joining, one-level flatten/concatenation, and tagged record construction. Array
 numeric receiver methods reuse the canonical numeric reducer implementation.
+
+Tagged records consume text and return record Arrays. TYPE22.4 keeps dispatcher
+membership separate from actual Array-input guards, enabling prior String results
+such as trim, and requires delimiter/tag before receiver/operand effects. Existing
+producer/pattern/conversion/copy/free short-call behavior is retained. The registered
+julia/test/tagged_record_receivers_test.jl passes51 strict native/plan/fresh assertions;
+full split-domain/context admission remains with SESSION33.
 
 `array(...)` splices only values explicitly produced by `flat(...)` or
 `flat_array(...)`; ordinary arrays and `copy(array(...))` stay nested. Pure

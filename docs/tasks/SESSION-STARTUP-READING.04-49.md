@@ -637,6 +637,8 @@ After an owned edit run: perl tools/update_task_tree_index.pl --tree SESSION-STA
 
   October27 partial repair TYPE22.3: Dart producer/eager/copy controls were healthy. Receiver result-family classification wrongly required Array input, regex operands lacked wrapping and malformed shapes evaluated SSDC. Exclude text producer from Array-only set, preserve pattern evaluation and preflight min-two RHS. Five tagged plus seven direct String groups PASS native/restored/plan; full33 boundaries/context/admission and other backend assessments remain open.
 
+  October27 partial repair TYPE22.4: Julia eager producer/named/literal/regex/copy paths were healthy; derived String source was blocked by Array result-family-as-input guard, and malformed calls ran SSDC. Actual Array-only receiver set excludes tagged records and preflight requires delimiter/tag. Registered new fixture PASS51 strict native/plan/fresh plus direct String PASS54; safe Lua and full33 boundary/context/admission remain open.
+
 
 - ID: `SESSION-STARTUP-READING.34`
   Status: `pending`

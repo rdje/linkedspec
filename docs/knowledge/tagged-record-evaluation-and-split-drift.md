@@ -13,7 +13,7 @@ answers:
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
 date: 2026-10-27
-status: bounded Perl/Rust/Dart tagged-record producer/receiver implemented; full split-domain admission remains owned
+status: bounded Perl/Rust/Dart/Julia tagged-record producer/receiver implemented; full split-domain admission remains owned
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
 evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; Rust22.2 adds the missing producer/bridge; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
 reverify: "For current Perl producer run bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/tagged_record_producer_contract.t. Historical comparisons below retain their original scope; rebuild the Rust CLI before the paired Rust/Perl controls. Older Lua observations remain separately reproducible and dated."
@@ -60,6 +60,20 @@ new tagged tests and seven direct String tests pass with format/fatal analysis.
 Reverify from dart: bash ../tools/run_dart_project_data.sh test
 test/tagged_record_receivers_test.dart. Short free calls still return empty Arrays
 and evaluate operands; full SESSION33 split-domain/context admission remains open.
+
+## Julia bounded receiver repair, October27
+
+TYPE22.4 producer-first native/plan/fresh strict controls pass15; named/literal/
+regex/copy behavior is already healthy. Only trim-prefix and malformed receiver
+shapes fail: Array dispatch-family membership incorrectly rejects a scalar String
+result, and absent min-two-RHS preflight runs SSDC. A separate actual Array-only
+receiver set excludes tagged records; the preflight requires delimiter/tag before
+effects. Keep the producer/pattern/copy/split/conversion/free short-call paths.
+Registered julia/test/tagged_record_receivers_test.jl passes51 strict assertions;
+54 direct String assertions and strict compilation pass. Reverify with the Julia
+project-data wrapper, --project=julia --startup-file=no --history-file=no
+--depwarn=error -e 'using LinkedSpecJulia,JSON3,Test;include("julia/test/tagged_record_receivers_test.jl")'.
+Full split-domain/context/portable admission remains with SESSION33.
 
 ## Historical producer and cross-runtime split observations
 

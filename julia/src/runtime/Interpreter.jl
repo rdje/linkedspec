@@ -5559,6 +5559,12 @@ const _RUNTIME_ARRAY_HELPER_NAMES = Set{String}([
     "uppercase_each",
 ])
 
+# Dispatcher families describe output; tagged records consume text, not Arrays.
+const _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES = setdiff(
+    _RUNTIME_ARRAY_HELPER_NAMES,
+    Set(["split_tagged_records"]),
+)
+
 const _RUNTIME_HASH_HELPER_NAMES = Set{String}([
     "count_keys",
     "drop_keys",
@@ -5883,7 +5889,8 @@ function _evaluate_runtime_fluent_chain!(
         helper_name = canonical_action_helper_name(call.method)
         if (helper_name in ("num_clamp", "replace_substr") && length(call.args) != 2) ||
             (helper_name in ("num_add", "num_mul", "coalesce", "cat") && isempty(call.args)) ||
-            (helper_name == "substr" && !(1 <= length(call.args) <= 2))
+            (helper_name == "substr" && !(1 <= length(call.args) <= 2)) ||
+            (helper_name == "split_tagged_records" && length(call.args) < 2)
             return nothing
         end
         if helper_name in (
@@ -5916,7 +5923,7 @@ function _evaluate_runtime_fluent_chain!(
         # Reduction results may change container family; check before operands.
         if reduction_result && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && (
-                helper_name in _RUNTIME_ARRAY_HELPER_NAMES ||
+                helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
                 helper_name in ("num_sum", "num_avg", "num_median", "num_range")
             )) ||
             (!(value isa AbstractDict) && helper_name in _RUNTIME_HASH_HELPER_NAMES)
@@ -5926,7 +5933,7 @@ function _evaluate_runtime_fluent_chain!(
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
         if scalar_result && !(helper_name in ("is_empty", "is_nonempty")) && (
-            helper_name in _RUNTIME_ARRAY_HELPER_NAMES ||
+            helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
             helper_name in _RUNTIME_HASH_HELPER_NAMES ||
             helper_name in ("num_sum", "num_avg", "num_median", "num_range")
         )
