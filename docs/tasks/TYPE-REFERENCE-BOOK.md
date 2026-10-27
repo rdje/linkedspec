@@ -1184,7 +1184,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Retain exact current entries/anchors/includes/examples/backend qualifications for every inventory item, mark precise depth/navigation gaps, preserve old anchors and schedule bounded family work. Close .1.2 only after all inventory children agree; independent layout review .1.3 follows. No exhaustive public-reference coverage claim from an inventory closeout.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23`
-  Status: `active` / bounded ordinary families1-25 targeted-checked; conditional26 in implementation; comprehensive coverage/matrix/admission remain open
+  Status: `active` / bounded ordinary families1-26 targeted-checked; input/cursor27 selected; comprehensive coverage/matrix/admission remain open
   Goal: Establish comprehensive fluent method families for every supported type and complete inter-type chaining.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1`
   Children: `TYPE-REFERENCE-BOOK.1.2.23.1`, `TYPE-REFERENCE-BOOK.1.2.23.2`, `TYPE-REFERENCE-BOOK.1.2.23.3`, `TYPE-REFERENCE-BOOK.1.2.23.4`.
@@ -1251,7 +1251,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.6 - select inline conditional result selection`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.7`
-  Status: `pending`
+  Status: `completed`
   Goal: Select the next useful ordinary fluent method family or inter-type transition after conditional result composition26.
   Dependencies: Completed bounded26 children and prerequisite26.0; canonical helper roles/signatures, per-type contracts, current book and preservation owners.
   Acceptance: Reconcile remaining semantic operations and result transitions against implemented families and practical use cases. Freeze the next justified bounded feature and independent implementation owners before production; use small public distinctions only for unresolved facts. Preserve callback/control/marker/list-splice/mutation/copy/error boundaries and existing defect owners. Do not infer exhaustive completeness from name inventories or passing finite checks, and do not pivot to admission/maintenance while feature gaps remain.
@@ -1259,6 +1259,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Relevant canonical inventory/contracts/book; small public source/producer/result distinctions as needed; docs/history/continuity. No full suite/exhaustive matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage.
   Planned claim verification: none: Prospective bounded feature selection; declare any actual measurement at activation.
+  Intake diagnostic ownership: Existing match_text/input_text direct and named String-to-Array-to-String controls pass. Two first-packet forms unexpectedly report Top ready0-raw/ready1 while child execution fails: quoted match_has("value") leaves an undefined host helper; scalar named/direct take/set_key chains with effectful operands fail emitted-source compilation. Do not classify these as clean null rejections. Reduce against supported bare capture-name syntax and constant consumers, correct the instrument to action-bearing Value metadata/substitution, retain exact first instrument/stdout/stderr, and own/schedule verified repairs before continuing. Existing SESSION7 child-setpgid EPERM recurs in stderr; no lifecycle or cleanup claim.
+
+  Activation: cleanaf1fda3923056ec94ca8b7822e7530617390b8bf; bounded26 complete/tree clean/brief0.
+  Owned paths: Finite public Get/fresh/Value-descriptor/substitution probe and retained first/refined/input packets, frozen input-cursor target/future fixture/independent owners, scoped book/fact/map/roadmap/task/live/resume. Production unchanged.
+  Verification tier: `focused`
+  Focused checks: Canonical semantic spelling/role inventory, typed source-location reader contracts, current reader/default/value book; nine corrected authored distinctions plus three input/cursor controls, original instrument/channels retained; producer syntax, packet/fixture JSON, book/history/fast staged continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage; actual format/contract/infrastructure changes require separate ownership.
+  Claim verification: none: Normative bounded feature selection and deterministic finite authored controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Named input/cursor defaults yield ALPHA/11/!/1 on native/fresh, while their direct form fails emitted compilation near )[ and input scalar consumer blocks fail near {{, with Value raw0/unresolved0/ready1. Existing direct String split flows and bare-name presence helpers work. First six-case Top-metadata instrument is retained and excluded from action-bearing readiness proof; corrected Value packets establish that proof.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering's typed Call fallback lacks several input/cursor getters; later Contracts substitutions replace names after fluent composition has failed, leaving authored coalesce or brackets. Legacy Array/Hash family dispatch bypasses actual-result guards and emits a block key authored in set_key. Constant named/literal/context roots also expose legacy []/constructed-Hash policies; normalized scalar prefixes already guard correctly.
+  - [x] **FIX**: Freeze input-cursor-results.md and eleven existing readonly scalar readers under27 with independent backend children. Select Perl27.1 first for proper getter/result lowering without new helper/schema/cursor effects. Own and schedule quoted capture-name false-ready repair29.1 and broader root-consumer policy/block-key compiler repair28.1 after bounded27, before admission. No production or global legacy policy change in this intake.
+  - [x] **ADDRESSED (verified)**: Retained source/input/expected/native/fresh/Value metadata/substitution and diagnostic preludes distinguish real compilation/execution failure from successful null results. First instrument/stdout/stderr and exact refinement writer remain recoverable. Future fixture fixes source operand SWC order, empty/zero lazy defaults, all reader spellings, split/signed/String flow and consumer operand skips; it is a target, not an implementation pass.
+  - [x] **NO REGRESSION**: Production untouched; public healthy named/direct controls agree. Producer syntax, JSON, book/history/fast staged continuity/diff pass. Existing SESSION7 setpgid EPERM is disclosed without process/receipt/cleanup claims. No callback grammar, scalar-copy depth, write target, host coercion or broad admission is changed.
+  - [x] **LOCKSTEP**: Target/future shared fixture, retained observations and new canonical card/map, qualified current reader book and corrected end-of-input boundary wording, roadmap/task/live/resume align. Perl27.1 is next;28.1/29.1 are owned before admission, with existing full23.4/pressure/Perl registration/declared5.4 owners separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.7 - select input and cursor value composition`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
@@ -1903,7 +1919,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3`
   Status: `active` / bounded selected-value rollout; full gap matrix remains open
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`, `.23.3.20`, `.23.3.21`, `.23.3.22`, `.23.3.23`, `.23.3.24`, `.23.3.25`, `.23.3.26`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.3.1`, `.23.3.2`, `.23.3.3`, `.23.3.4`, `.23.3.5`, `.23.3.6`, `.23.3.7`, `.23.3.8`, `.23.3.9`, `.23.3.10`, `.23.3.11`, `.23.3.12`, `.23.3.13`, `.23.3.14`, `.23.3.15`, `.23.3.16`, `.23.3.17`, `.23.3.18`, `.23.3.19`, `.23.3.20`, `.23.3.21`, `.23.3.22`, `.23.3.23`, `.23.3.24`, `.23.3.25`, `.23.3.26`, `.23.3.27`, `.23.3.28.1`, `.23.3.29.1`
   Goal: Resolve every verified method-family and type-transition gap through bounded implementation leaves.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.2`
   Acceptance: Before activation create per-operation/family and backend children from the gap matrix. Each owns its contract, native/generated implementation, independent RED/GREEN and source inverses, compatibility, current book examples and separate commit. Existing defect owners remain authoritative. Generic, boolean/null and codeblock operations must follow their real semantics, including dispatch on a callable's yielded value rather than a fabricated codeblock method table.
@@ -5837,13 +5853,92 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Qualified book/catalog, frozen target and canonical fact/map, roadmap/task/live/resume align. All five bounded26 backend children and prerequisite26.0 are complete; next-feature selection23.1.7 owns the next action. Full23.4/pressure/required Perl registration/declared-host owners remain separate.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.26.5 - guard safe Lua inline conditional selection`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.27`
+  Status: `pending`
+  Goal: Compose existing readonly input/cursor scalar results with compatible ordinary methods and actual-kind guards.
+  Dependencies: Scoped selection23.1.7 and input-cursor-results.md; current typed source-location/reader/default contracts.
+  Children:27.1 Perl;27.2 Rust;27.3 Dart;27.4 Julia;27.5 safe Lua.
+  Acceptance: Eleven existing reader spellings, source operands once/ordered, empty/zero/null and actual result kinds, lazy defaults, String-to-Array selection and later String methods, compatible numeric/generic/with flow and incompatible-operand skips. Preserve signature/bounds/source authority/cursor/deferred/control/capture/write/copy/format rights and separately owned legacy roots.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.27.1`
+  Status: `pending`
+  Goal: Independently assess and implement Perl input/cursor reader value composition.
+  Dependencies: selection23.1.7; frozen input-cursor target/shared fixture and current getter/result owners.
+  Acceptance: Lower only eleven existing readonly reader values through existing typed owners before ordinary composition. Retain source/bounds/absence/kinds/order/defaults/guards and all other policies; split unsafe expansion before writes. Safe Lua uses available hosts/private tables/no new chunk locals, no unsafe patterns/full runner. No failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first shared input name=Alpha and finite native/generated source/default/order/with/error controls, compile/format and book/history/continuity. No full matrix/standalone build.
+  Planned canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage; actual schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.27.2`
+  Status: `pending`
+  Goal: Independently assess and implement Rust input/cursor reader value composition.
+  Dependencies: 27.1; frozen input-cursor target/shared fixture and current getter/result owners.
+  Acceptance: Lower only eleven existing readonly reader values through existing typed owners before ordinary composition. Retain source/bounds/absence/kinds/order/defaults/guards and all other policies; split unsafe expansion before writes. Safe Lua uses available hosts/private tables/no new chunk locals, no unsafe patterns/full runner. No failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first shared input name=Alpha and finite native/generated source/default/order/with/error controls, compile/format and book/history/continuity. No full matrix/standalone build.
+  Planned canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage; actual schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.27.3`
+  Status: `pending`
+  Goal: Independently assess and implement Dart input/cursor reader value composition.
+  Dependencies: 27.2; frozen input-cursor target/shared fixture and current getter/result owners.
+  Acceptance: Lower only eleven existing readonly reader values through existing typed owners before ordinary composition. Retain source/bounds/absence/kinds/order/defaults/guards and all other policies; split unsafe expansion before writes. Safe Lua uses available hosts/private tables/no new chunk locals, no unsafe patterns/full runner. No failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first shared input name=Alpha and finite native/generated source/default/order/with/error controls, compile/format and book/history/continuity. No full matrix/standalone build.
+  Planned canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage; actual schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.27.4`
+  Status: `pending`
+  Goal: Independently assess and implement Julia input/cursor reader value composition.
+  Dependencies: 27.3; frozen input-cursor target/shared fixture and current getter/result owners.
+  Acceptance: Lower only eleven existing readonly reader values through existing typed owners before ordinary composition. Retain source/bounds/absence/kinds/order/defaults/guards and all other policies; split unsafe expansion before writes. Safe Lua uses available hosts/private tables/no new chunk locals, no unsafe patterns/full runner. No failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first shared input name=Alpha and finite native/generated source/default/order/with/error controls, compile/format and book/history/continuity. No full matrix/standalone build.
+  Planned canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage; actual schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.27.5`
+  Status: `pending`
+  Goal: Independently assess and implement safe Lua input/cursor reader value composition.
+  Dependencies: 27.4; frozen input-cursor target/shared fixture and current getter/result owners.
+  Acceptance: Lower only eleven existing readonly reader values through existing typed owners before ordinary composition. Retain source/bounds/absence/kinds/order/defaults/guards and all other policies; split unsafe expansion before writes. Safe Lua uses available hosts/private tables/no new chunk locals, no unsafe patterns/full runner. No failure is inferred from another backend.
+  Planned verification tier: focused
+  Planned focused checks: Producer-first shared input name=Alpha and finite native/generated source/default/order/with/error controls, compile/format and book/history/continuity. No full matrix/standalone build.
+  Planned canonical trigger: Full source/domain/context/portable/generated admission23.4 and final clean push after feature coverage; actual schema/infrastructure movement requires separate ownership.
+  Planned claim verification: none: Deterministic finite authored feature/preservation controls; no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.28.1`
+  Status: `pending` / P1 compiler defect and bounded policy assessment; scheduled after27 before admission
+  Goal: Resolve first-consumer scalar-root policy from authority and fix block-key consumers that generate invalid Perl.
+  Reproduction: Refined context packet named_kind_rejection/direct_kind_rejection emit invalid Perl near {{ for scalar set_key with an eager key block, while constant_scalar_root_consumers returns []/constructed Hashes for literal/named/context roots. normalized_scalar_root_consumers already returns null/skips operands after cat/add prefixes.
+  Impact / ownership: Actual generated compilation fails with Value raw0/unresolved0/ready1. Own the compiler defect now; assess legacy first-consumer compatibility before changing its constants/free/named policies. Root cause is legacy Hash receiver key emission retaining authored block DSL and missing result-boundary dispatch.
+  Acceptance: Reconcile canonical first-consumer policy, retain distinguishing legacy controls, repair compiler lowering/guards and typed readiness together; focused RED/GREEN native/fresh/source checks and book update. No blanket coercion or free-helper policy change without authority.
+  Planned verification tier: focused
+  Planned focused checks: Small literal/named/context/normalized root distinctions, supported block keys/source effects and original errors; module/test syntax/docs/continuity.
+  Planned canonical trigger: Full public/source/domain/context admission and final clean push; a normative policy change requires explicit separate contract ownership.
+  Planned claim verification: none: Deterministic finite diagnostic/repair controls; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.1`
+  Status: `pending` / P1 capture-name diagnostic/lowering defect; scheduled after27 before admission
+  Goal: Resolve supported static capture-name spellings and fix ready metadata accompanying unlowered known capture calls.
+  Reproduction: Quoted match_has("value")/entry_has("head") leave host calls, native child diagnostics/fresh undefined-subroutine failure and Value raw0/unresolved0/ready1; canonical bare match_has(value) works. Original/refined exact programs and channels are retained.
+  Root cause / impact: Contracts only rewrites bare word names and unresolved patterns also match only that form; known-helper admission otherwise allows the Call through. The public catalog string-typed signature needs explicit source syntax. Unsupported or supported names cannot silently reach missing host functions with ready metadata.
+  Acceptance: Establish intended static identifier/literal contract without dynamic-name inference; implement supported typed lowering or explicit rejection with honest readiness and preserve bare-name capture identity. Audit the same entry/match named/has family, focused native/fresh/metadata/errors and book examples.
+  Planned verification tier: focused
+  Planned focused checks: Small bare/quoted/empty/missing/invalid name controls, source/diagnostic metadata, compile/docs/continuity.
+  Planned canonical trigger: Full source/context/portable admission and final clean push; actual public contract extension requires separate ownership/tier.
+  Planned claim verification: none: Deterministic finite authored diagnostic/repair controls; no population measurement.
+
 ## Current Frontier
 
-Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; next-feature selection23.1.7 follows; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
+Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27 with Perl27.1 next; compiler/policy28.1 and capture-name29.1 precede admission; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.7` | `pending` | Select the next roadmap-aligned ordinary fluent feature from the remaining semantic inventory. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.27.1` | `pending` | Implement readonly input/cursor reader values through existing typed lowering and result guards. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

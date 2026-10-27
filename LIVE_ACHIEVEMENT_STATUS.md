@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded conditional-result backends implemented/targeted-checked; next-feature selection23.1.7 follows.
+Readonly input/cursor result target27 frozen; Perl27.1 next, with separate compiler/policy28.1 and capture-name29.1 owned.
 
 ## Latest Completed Slice
 
-Safe Lua now recognizes canonical inline if/switch source roles in the existing private classifier table, enabling actual-kind guards without new chunk locals or parser/read/format fields. Both available PUC5.5.1/LuaJIT2.1.1788460057 independently reproduce nine RED route comparisons; four execution groups then pass native/plan/fresh, six native parser assertions and two source-error groups retain their routes, and six direct computed groups pass. Shared kinds/CTIM/snapshots/IJ/bridges, with operand skips and CETM/local returns work; missing inline counts yield null. Existing switch-header/bound/flat counts0, typed if-header arity failure and alias rejection remain. luac/loadfile/normal registration, qualified book/catalog/target/fact/map and history/fast continuity align. All five bounded26 children complete; next-feature selection23.1.7 follows. Full23.4/pressure/required Perl registration/declared5.4 stay separate; no push.
+Selected bounded readonly input/cursor scalar result composition27 for eleven existing readers, preserving signatures/bounds/source authority/empty-zero-null/kinds/order/defaults and compatible String-to-Array-to-String or numeric flow. Public named defaults work; direct equivalents and input scalar consumer blocks fail generated compilation with corrected Value raw0/unresolved0/ready1. MethodLowering lacks typed getter lowering before legacy Contracts substitution and legacy consumer dispatch bypasses result guards. Production unchanged. Retained first instrument/channels/refinement writer disclose Top-metadata limitation; corrected nine-case and three input/cursor packets retain actual Value metadata/substitution and diagnostic preludes. Own/schedule broader scalar-root policy/block-key compiler repair28.1 and capture-name spelling/false-ready repair29.1 after27 before admission. Future shared fixture, qualified current reader book/end-boundary wording, target/fact/map and history/fast continuity align. Perl27.1 next; full23.4/pressure/required Perl registration/declared5.4 remain separate; no push.
 
 ## Next Action
 
-Activate remaining-feature selection23.1.7 from the clean Lua boundary. Read canonical semantic inventory and relevant current contracts/book; choose the next useful ordinary fluent family or inter-type transition, probe only unresolved public distinctions and freeze independent owners before production. Continue implement/compile/quick targeted checks/docs/commit. No admission/maintenance pivot, full matrix or push; existing pressure/required Perl registration/declared-host owners remain separate.
+Activate Perl input/cursor result composition27.1 from this clean intake. Reuse existing readonly getter owners before typed fluent/default composition; add only the eleven static reader result guards, preserving their signatures/source/bounds/cursor authority and other legacy roots. Run new shared/finite source-order/default/with/error native/fresh/metadata controls RED/GREEN and small direct defaults; compile/docs/commit before independent Rust27.2. Keep28.1/29.1 owned after bounded27 before admission. No callback/format/legacy policy expansion, broad suite or push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.7` — Readonly input/cursor result target27 frozen; Perl27.1 next, with separate compiler/policy28.1 and capture-name29.1 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.5` — All five bounded conditional-result backends implemented/targeted-checked; next-feature selection23.1.7 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.4` — Julia canonical inline conditional guards implemented/targeted-checked; safe Lua26.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.26.3` — Dart canonical inline conditional result guards implemented/targeted-checked; Julia26.4 next.
@@ -29,7 +30,6 @@ Activate remaining-feature selection23.1.7 from the clean Lua boundary. Read can
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.0` — Contextual callback grammar/readiness restored under registered final-slot metadata; readonly capture selection25.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.5` — Capture-collection source feature25 selected; stale capture examples corrected. P1 contextual callback vocabulary25.0 precedes implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.24.5` — All five bounded computed-selection implementations complete; safe Lua checked on PUC5.5.1/LuaJIT. Next ordinary fluent gap selection23.1.5.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.24.4` — Julia computed selection implemented/targeted-checked; bounded Perl/Rust/Dart/Julia children complete; safe Lua24.5 next.
 
 ## History
 

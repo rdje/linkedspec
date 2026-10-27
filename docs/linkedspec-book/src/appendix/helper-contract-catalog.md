@@ -1824,7 +1824,7 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `input_text()`
 - **Signature**: `input_text()`
 - **Returns**: scalar
-- **Behavior**: Returns the entire current input as a string.
+- **Behavior**: Returns the entire current input as a string. Ordinary Perl String flow such as `input_text().split("=")[-1].uppercase()` works. For default chains currently bind first: `text=input_text(); text.coalesce("fallback").uppercase()`; direct input/cursor default/result-guard composition has a known compiler gap under repair.
 
 ### `input_slice(start, len)`
 - **Signature**: `input_slice(start: int, length: int)`
@@ -1839,7 +1839,7 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `input_end_line()`, `input_end_col()`
 - **Signature**: `input_end_line()`, `input_end_col()`
 - **Returns**: int
-- **Behavior**: Line/column of the last character in the input. Computed without storing explicit marks.
+- **Behavior**: Line/column at the end-of-input boundary, one character position past the final character. Computed without storing explicit marks.
 
 ## 10. Call Expression
 

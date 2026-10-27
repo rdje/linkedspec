@@ -1,0 +1,386 @@
+{
+  "base": "af1fda3923056ec94ca8b7822e7530617390b8bf",
+  "cases": [
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          "name",
+          "Alpha",
+          5,
+          1,
+          "name=Alpha",
+          10,
+          ""
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": null,
+        "loaded": true,
+        "value": [
+          [
+            "name",
+            "Alpha",
+            5,
+            1,
+            "name=Alpha",
+            10,
+            ""
+          ]
+        ]
+      },
+      "id": "producers",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "name",
+            "Alpha",
+            5,
+            1,
+            "name=Alpha",
+            10,
+            ""
+          ]
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {return([entry_text(),match_text(),match_len(),match_has(value),input_text(),input_len(),cursor_rest()])}\n",
+      "substitution": "return [do { my @__ls_evaluated_values = (do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, \"entry_text\") : undef }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_len\") : undef }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists $LMATCH_HASH{'value'}) }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::source_text($info, $STRING, \"input_text\") }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"input_len\") }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"cursor_rest\"), \"cursor_rest\") : undef }); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          "PHA",
+          "ALPHA"
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": null,
+        "loaded": true,
+        "value": [
+          [
+            "PHA",
+            "ALPHA"
+          ]
+        ]
+      },
+      "id": "named_string_flow",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "PHA",
+            "ALPHA"
+          ]
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {a=match_text();b=input_text();return([a.lowercase().split(\"l\")[-1].uppercase(),b.split(\"=\")[-1].uppercase()])}\n",
+      "substitution": "$a = do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef };$b = do { LinkedSpec::SourceLocation::Runtime::source_text($info, $STRING, \"input_text\") };return [do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_read_value = do { my $__ls_split_value = do { my $__ls_selected_default = do { my $__ls_scalar_source = $a; $__ls_scalar_source }; do { my $__ls_lower = $__ls_selected_default; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower } }; my $__ls_split_delimiter = \"l\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; my $__ls_read_index; $__ls_read_index = -1; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }; $__ls_scalar_source }; do { my $__ls_upper = $__ls_selected_default; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_read_value = do { my $__ls_split_value = $b; my $__ls_split_delimiter = \"=\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; my $__ls_read_index; $__ls_read_index = -1; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }; $__ls_scalar_source }; do { my $__ls_upper = $__ls_selected_default; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper } }); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          "PHA",
+          "ALPHA"
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": null,
+        "loaded": true,
+        "value": [
+          [
+            "PHA",
+            "ALPHA"
+          ]
+        ]
+      },
+      "id": "direct_string_flow",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            "PHA",
+            "ALPHA"
+          ]
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {return([match_text().lowercase().split(\"l\")[-1].uppercase(),input_text().split(\"=\")[-1].uppercase()])}\n",
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_read_value = do { my $__ls_split_value = do { my $__ls_selected_default = do { my $__ls_scalar_source = do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef }; $__ls_scalar_source }; do { my $__ls_lower = $__ls_selected_default; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower } }; my $__ls_split_delimiter = \"l\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; my $__ls_read_index; $__ls_read_index = -1; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }; $__ls_scalar_source }; do { my $__ls_upper = $__ls_selected_default; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_read_value = do { my $__ls_split_value = do { LinkedSpec::SourceLocation::Runtime::source_text($info, $STRING, \"input_text\") }; my $__ls_split_delimiter = \"=\"; (defined($__ls_split_value) && defined($__ls_split_delimiter)) ? [split /\\Q$__ls_split_delimiter\\E/, $__ls_split_value, -1] : [] }; my $__ls_read_index; $__ls_read_index = -1; $__ls_read_value = ref($__ls_read_value) eq \"ARRAY\" ? $__ls_read_value->[$__ls_read_index] : undef; $__ls_read_value }; $__ls_scalar_source }; do { my $__ls_upper = $__ls_selected_default; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper } }); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          6,
+          "10!",
+          "1!",
+          "!"
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": {
+          "code": "generated_execution_failed",
+          "detail": "Undefined subroutine &LinkedSpec::ContextScalarResultIntake4::coalesce called at (eval 21087) line 152.\n",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "load_error": null,
+        "loaded": true,
+        "value": null
+      },
+      "id": "direct_scalar_flow",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          null
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {return([match_len().add(1),input_len().cat(\"!\"),match_has(value).cat(\"!\"),cursor_rest().coalesce(\"missing\").cat(\"!\")])}\n",
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my @__ls_num_add_terms = (do { my @__ls_evaluated_values = (do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_len\") : undef }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (1); @__ls_evaluated_values }); LinkedSpec::Numeric::evaluate('num_add', @__ls_num_add_terms) }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my @__ls_cat_parts = (do { LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"input_len\") }, \"!\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my @__ls_cat_parts = (do { LinkedSpec::SourceLocation::Runtime::capture_group_exists(exists $LMATCH_HASH{'value'}) }, \"!\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"cursor_rest\"), \"cursor_rest\") : undef }.coalesce(\"missing\").cat(\"!\")); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          null,
+          null,
+          ""
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": "syntax error at (eval 23145) line 158, near \"{{\"\nsyntax error at (eval 23145) line 169, near \",\n }\"\nsyntax error at (eval 23145) line 171, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 23145) line 172, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 23145) line 176, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 23145) line 179, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 23145) line 180, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 23145) line 181, near \"qr/$linkedspec_pattern/ }\"\n",
+        "loaded": false,
+        "value": null
+      },
+      "id": "named_kind_rejection",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          null
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {order=\"\";a=match_text();b=match_len();x=a.take({order=cat(order,\"A\");1});y=b.set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([x,y,order])}\n",
+      "substitution": "$order = \"\";$a = do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef };$b = do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_len\") : undef };$x = do { my $__ls_take = do { my $__ls_array_value = $a; (defined($__ls_array_value) && ref($__ls_array_value) eq 'ARRAY') ? [@{$__ls_array_value}] : [] }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = do { $order = do { my @__ls_cat_parts = ($order, \"A\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } };$y = do { my $__ls_set_key_source = do { my $__ls_hash_value = $b; (defined($__ls_hash_value) && ref($__ls_hash_value) eq 'HASH') ? { %{$__ls_hash_value} } : {} }; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{{order=cat(order,\"K\");\"k\"}} = do { $order = do { my @__ls_cat_parts = ($order, \"V\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; \\%__ls_set_key };return [do { my @__ls_evaluated_values = ($x); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($y); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          null,
+          null,
+          ""
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": "syntax error at (eval 25197) line 156, near \"{{\"\nsyntax error at (eval 25197) line 167, near \",\n }\"\nsyntax error at (eval 25197) line 169, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 25197) line 170, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 25197) line 174, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 25197) line 177, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 25197) line 178, near \"qr/$linkedspec_pattern/ }\"\nsyntax error at (eval 25197) line 179, near \"qr/$linkedspec_pattern/ }\"\n",
+        "loaded": false,
+        "value": null
+      },
+      "id": "direct_kind_rejection",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          null
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {order=\"\";x=match_text().take({order=cat(order,\"A\");1});y=match_len().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([x,y,order])}\n",
+      "substitution": "$order = \"\";$x = do { my $__ls_take = do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = do { $order = do { my @__ls_cat_parts = ($order, \"A\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } };$y = do { my $__ls_set_key_source = do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_len\") : undef }; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{{order=cat(order,\"K\");\"k\"}} = do { $order = do { my @__ls_cat_parts = ($order, \"V\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; \\%__ls_set_key };return [do { my @__ls_evaluated_values = ($x); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($y); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          1,
+          1
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": {
+          "code": "generated_execution_failed",
+          "detail": "Undefined subroutine &LinkedSpec::ContextScalarResultIntake7::match_has called at (eval 27224) line 152.\n",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "load_error": null,
+        "loaded": true,
+        "value": null
+      },
+      "id": "quoted_capture_name",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          null
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {return([match_has(\"value\"),entry_has(\"head\")])}\n",
+      "substitution": "return [do { my @__ls_evaluated_values = (match_has(\"value\")); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (entry_has(\"head\")); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": null,
+        "loaded": true,
+        "value": [
+          [
+            [],
+            {
+              "k": 1
+            },
+            [],
+            {
+              "k": 1
+            },
+            [],
+            {
+              "k": 1
+            }
+          ]
+        ]
+      },
+      "id": "constant_scalar_root_consumers",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            [],
+            {
+              "k": 1
+            },
+            [],
+            {
+              "k": 1
+            },
+            [],
+            {
+              "k": 1
+            }
+          ]
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {a=\"Alpha\";b=5;return([\"Alpha\".take(1),5.set_key(\"k\",1),a.take(1),b.set_key(\"k\",1),match_text().take(1),match_len().set_key(\"k\",1)])}\n",
+      "substitution": "$a = \"Alpha\";$b = 5;return [do { my @__ls_evaluated_values = (do { my $__ls_take = \"Alpha\"; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_set_key_source = \\%5; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{\"k\"} = 1; \\%__ls_set_key }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_take = do { my $__ls_array_value = $a; (defined($__ls_array_value) && ref($__ls_array_value) eq 'ARRAY') ? [@{$__ls_array_value}] : [] }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_set_key_source = do { my $__ls_hash_value = $b; (defined($__ls_hash_value) && ref($__ls_hash_value) eq 'HASH') ? { %{$__ls_hash_value} } : {} }; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{\"k\"} = 1; \\%__ls_set_key }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_take = do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_set_key_source = do { defined($LMATCH) && defined($LSPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_len\") : undef }; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{\"k\"} = 1; \\%__ls_set_key }); @__ls_evaluated_values }]"
+    },
+    {
+      "descriptor_error": null,
+      "expected": [
+        [
+          null,
+          null,
+          ""
+        ]
+      ],
+      "fresh": {
+        "emission_error": null,
+        "error": null,
+        "load_error": null,
+        "loaded": true,
+        "value": [
+          [
+            null,
+            null,
+            ""
+          ]
+        ]
+      },
+      "id": "normalized_scalar_root_consumers",
+      "input": "name=Alpha",
+      "metadata": {
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0
+      },
+      "native": {
+        "error": null,
+        "value": [
+          [
+            null,
+            null,
+            ""
+          ]
+        ]
+      },
+      "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>name)/\n /=/\n /(?<value>Alpha)/\n -> Value[2] {order=\"\";x=match_text().cat(\"\").take({order=cat(order,\"A\");1});y=match_len().add(0).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([x,y,order])}\n",
+      "substitution": "$order = \"\";$x = do { my $__ls_rejected_result = do { my $__ls_selected_default = do { my $__ls_scalar_source = do { defined($LMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $LSPOS - length($LMATCH), $LSPOS, \"match_text\") : undef }; $__ls_scalar_source }; do { my @__ls_cat_parts = ($__ls_selected_default, \"\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef } }; undef };$y = undef;return [do { my @__ls_evaluated_values = ($x); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($y); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]"
+    }
+  ],
+  "limits": "native child failures can be in diagnostic stdout while outer returns [null]; generated channels distinguish failure. Existing SESSION7 setpgid EPERM is not resolved.",
+  "scope": "nine authored readonly scalar producer, named/direct consumer and capture-name distinctions; Value metadata/substitution corrected; no population claim",
+  "stderr": "Unquoted string \"order\" may clash with future reserved word at (eval 23145) line 158.\nUnquoted string \"order\" may clash with future reserved word at (eval 23145) line 158.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 23145) line 171.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 23145) line 172.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 23145) line 172.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 23145) line 176.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 23145) line 176.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 23145) line 179.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 23145) line 179.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 23145) line 180.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 23145) line 180.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 23145) line 181.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 23145) line 181.\nUnquoted string \"order\" may clash with future reserved word at (eval 25197) line 156.\nUnquoted string \"order\" may clash with future reserved word at (eval 25197) line 156.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 25197) line 169.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 25197) line 170.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 25197) line 170.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 25197) line 174.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 25197) line 174.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 25197) line 177.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 25197) line 177.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 25197) line 178.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 25197) line 178.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same scope at (eval 25197) line 179.\n\"my\" variable $linkedspec_pattern masks earlier declaration in same statement at (eval 25197) line 179.\n",
+  "stdout_prelude": "[2026-10-27 15:41:28][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Value => SKIPPED\n[2026-10-27 15:41:28][NONE][SpecEntry.pm][trace_decision:63]   Context: Undefined subroutine &LinkedSpec::SpecEntry::coalesce called at LinkedSpec::generated_handler:Value:_default line 57.\n[2026-10-27 15:41:28][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Value => SKIPPED\n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: syntax error at LinkedSpec::generated_handler:Value:_default line 63, near \"{{\"\n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: syntax error at LinkedSpec::generated_handler:Value:_default line 72, near \"}\n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context:   \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context:   \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context:   \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context:  }\"\n[2026-10-27 15:41:29][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_compile:Value => SKIPPED\n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: syntax error at LinkedSpec::generated_handler:Value:_default line 61, near \"{{\"\n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: syntax error at LinkedSpec::generated_handler:Value:_default line 70, near \"}\n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context:   \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context:   \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context:   \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context:  }\"\n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: \n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63] DECISION rule_handler_eval:Value => SKIPPED\n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: Undefined subroutine &LinkedSpec::SpecEntry::match_has called at LinkedSpec::generated_handler:Value:_default line 57.\n[2026-10-27 15:41:30][NONE][SpecEntry.pm][trace_decision:63]   Context: "
+}

@@ -21,7 +21,7 @@ Most value helpers return one expression. They become useful when they are place
 | Switch driver | `switch(value)` | one value should drive equality cases. |
 | Constructor payload | `array(...)` / `hash(...)` | nested values should become one array or hash payload. |
 
-Scalar working variables are read with bare names such as `name`. Use that spelling when a payload should
+Input/cursor readers yield scalar values. On ordinary Perl, `input_text().split("=")[-1].uppercase()` already composes directly; bind before defaults for now (`text=input_text(); text.coalesce("fallback").uppercase()`), because direct reader default/result-guard composition has a known compiler gap under repair. Scalar working variables are read with bare names such as `name`. Use that spelling when a payload should
 visibly come from the working variable named `name`:
 
 ```text
