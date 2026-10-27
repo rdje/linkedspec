@@ -11,11 +11,13 @@ answers:
   - did the first context scalar probe inspect the correct rule metadata
   - how does Rust guard direct input reader results and preserve malformed call policies
   - do Dart input reader guards preserve malformed call count policies
+  - how do Julia input reader results retain actual kinds through with
 date: 2026-10-27
-status: bounded Perl27.1/Rust27.2/Dart27.3 implemented; independent Julia27.4 next; compiler/policy28.1 and capture-name29.1 owned
+status: bounded Perl27.1/Rust27.2/Dart27.3/Julia27.4 implemented; safe Lua27.5 next; compiler/policy28.1 and capture-name29.1 owned
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
+  - "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/input_cursor_results_test.jl\")'"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/input_cursor_results_test.dart"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test input_cursor_results"
   - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/input_cursor_result_continuations.t"
@@ -95,3 +97,15 @@ Hash/Bool and outer scope hold; consumer operands skip. Dart malformed reader
 counts0/0 and bound/flat counts0 remain; the initial borrowed Rust malformed
 oracle was corrected before final unchanged-production RED. No getter/parser/
 source coordinate/bounds/codec/free/callback policy change; Julia27.4 follows.
+
+
+Julia27.4 independently observes nine RED route comparisons and three healthy
+source/default/named/snapshot controls. A static ten-zero-argument/two-argument-
+input_slice predicate, matching name/source_method and excluding trailing blocks,
+now enables the existing kind_guarded_result through with/bridges. All12 new
+native/plan/fresh strict Bool/Number/String/null/container comparisons and
+computed25 pass, with --depwarn=error and normal registration. Shared SWC/
+positions/kinds/lazy/split/signed values, Number indices and returned with Array/
+Hash/Bool/outer restoration hold; operands skip. Malformed reader/bound/flat
+counts0 remain. No getter/parser/coordinate/bounds/compiled/free/callback policy
+change; safe Lua27.5 follows.

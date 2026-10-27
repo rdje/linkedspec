@@ -5925,6 +5925,7 @@ function _evaluate_runtime_fluent_chain!(
     scalar_result = value isa Bool
     reduction_result = false
     kind_guarded_result = _runtime_is_ordinary_computed_read(engine, chain.receiver) ||
+        _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) == "copy")
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
@@ -5993,6 +5994,17 @@ function _evaluate_runtime_fluent_chain!(
             !(value isa AbstractVector || value isa AbstractDict))
     end
     return value
+end
+
+function _runtime_is_input_cursor_value_source(expression)
+    expression isa ActionCallExpr || return false
+    expression.trailing_block_arg && return false
+    something(expression.source_method, expression.name) == expression.name || return false
+    expression.name == "input_slice" && return length(expression.args) == 2
+    return isempty(expression.args) && expression.name in (
+        "input_text", "input_len", "input_end_pos", "input_end_line", "input_end_col",
+        "cursor_pos", "cursor_line", "cursor_col", "cursor_rest", "cursor_rest_len",
+    )
 end
 
 function _runtime_is_ordinary_computed_read(engine, expression)

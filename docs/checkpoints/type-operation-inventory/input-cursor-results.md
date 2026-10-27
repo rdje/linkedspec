@@ -1,7 +1,7 @@
 # Read-only input and cursor scalar result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.7; implementation family23.3.27.
-Status: bounded Perl27.1/Rust27.2/Dart27.3 implemented/targeted-checked; independent Julia27.4 next.
+Status: bounded Perl27.1/Rust27.2/Dart27.3/Julia27.4 implemented/targeted-checked; safe Lua27.5 next.
 
 The existing scalar readers input_text, input_len, input_end_pos, input_end_line,
 input_end_col, input_slice, cursor_pos, cursor_line, cursor_col, cursor_rest and
@@ -115,3 +115,15 @@ SWC/positions/kinds/lazy/split/signed data, Number indices and actual returned w
 kinds/outer restoration hold. Malformed reader counts0/0 and bound/flat counts0
 stay unchanged, without borrowing Rust's10/0 oracle. Format/fatal analysis pass;
 no parser/getter/source coordinate/bounds/codec/free/callback policy change.
+
+
+## Bounded Julia implementation
+
+27.4 independently records nine RED result comparisons and three healthy source/
+default/named/snapshot controls. Its existing source flag now recognizes ten zero-
+argument readers and two-argument input_slice, with matching name/source_method and
+no trailing block. All12 native/plan/fresh strict-kind comparisons and computed25
+pass with --depwarn=error/normal registration. Shared SWC/positions/kinds/lazy/
+split/signed data, Number indices and returned with Array/Hash/Bool/outer scope
+hold; incompatible operands skip. Malformed reader/bound/flat counts0 remain.
+No parser/getter/coordinate/bounds/compiled format/free/callback policy change.

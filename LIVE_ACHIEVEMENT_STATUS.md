@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart readonly input/cursor result guards implemented/targeted-checked; independent Julia27.4 follows.
+Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 
 ## Latest Completed Slice
 
-Dart independently confirms healthy readonly reader producers/defaults/source order/with result kinds, but three result cases fail because the fluent dispatcher lacks their static result flag. A name/sourceMethod/no-trailing predicate for ten zero-argument readers and two-argument input_slice now enables existing kindGuardedResult through with/bridges. Four new native/restoredSpec/plan cases and seven direct computed cases pass after RED. Shared all-spelling positions/kinds/SWC/lazy/split/signed flow, Number selector snapshots and with returned Array/Hash/Bool/outer restoration hold; incompatible operands skip. Existing malformed reader counts0/0 and bound/flat counts0 remain; the initial Rust malformed oracle was corrected before final baseline RED. Format/fatal selected analysis pass. No parser/getter/source-location/bounds/codec/free-arity/callback/copy/write change. Qualified book/catalog/target/fact/map/history/fast continuity align. Julia27.4 independently follows;28.1/29.1/full23.4/pressure/required Perl registration/declared5.4 remain owned; no push.
+Julia independently reproduces nine RED result comparisons and three healthy source/default/named/snapshot controls. A static predicate for ten zero-argument readers and two-argument input_slice, matching name/source_method and excluding trailing blocks, now enables existing actual-kind guards through with/bridges. All12 new native/plan/fresh strict Bool/Number/String/null/container comparisons and direct computed25 pass. Shared eleven spellings/coordinates/SWC/lazy/split/signed flow, typed Number index snapshots and with returned Array/Hash/Bool/outer restoration hold; incompatible operands skip and scalar counts yield null. Malformed reader/bound/flat counts0 remain. --depwarn=error compilation/normal registration, qualified book/catalog/target/fact/map and history/fast continuity align. No parser/getter/source-location/bounds/compiled/free-arity/callback/copy/write change. Safe Lua27.5 follows;28.1/29.1/full23.4/pressure/required Perl registration/declared5.4 stay owned; no push.
 
 ## Next Action
 
-Activate independent Julia input/cursor result composition27.4 from this clean Dart boundary. Assess unchanged shared name=Alpha Top/Value fixture and finite source/default/with/Number/legacy controls on native/plan/fresh before production; compare malformed-call controls to actual Julia policies, not other backend oracles. Repair only observed static reader guard gaps through existing fields/owners; preserve getter signatures/bounds/source coordinates/cursor/free-error/deferred/copy/write rules. Compile with --depwarn=error, quick targeted tests/docs/commit before safe Lua27.5. Keep28.1/29.1 before admission; no full suite/matrix/standalone or push.
+Activate safe Lua input/cursor result composition27.5 from this clean Julia boundary. Confirm available PUC5.5.1/LuaJIT identities, then independently assess unchanged shared name=Alpha fixture and finite source/default/with/Number/legacy native/plan/fresh controls. Inspect actual Lua malformed reader diagnostics before selecting their preservation oracle. Extend only existing private tables/fields and result guards, no new chunk locals, unsafe patterns or full runner. luac/loadfile/quick checks/docs/commit, then owned scalar-root compiler/policy28.1 and capture-name29.1 before further feature selection/admission. Full23.4/pressure/required Perl registration/declared5.4 stay separate; no push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.27.4` — Julia readonly input/cursor result guards implemented/targeted-checked; safe Lua27.5 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.3` — Dart readonly input/cursor result guards implemented/targeted-checked; independent Julia27.4 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.2` — Rust readonly input/cursor result guards implemented/targeted-checked; independent Dart27.3 follows.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.27.1` — Perl input/cursor reader values implemented/targeted-checked; independent Rust27.2 follows.
@@ -29,7 +30,6 @@ Activate independent Julia input/cursor result composition27.4 from this clean D
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.4` — Julia canonical capture-source guards implemented/targeted-checked; safe Lua25.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.3` — Dart canonical capture-source guards implemented/targeted-checked; independent Julia25.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.25.2` — Rust static capture-source actual-kind guards implemented/targeted-checked; independent Dart25.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.25.1` — Perl readonly capture collection selection implemented with existing reader/guards; independent Rust25.2 next.
 
 ## History
 
