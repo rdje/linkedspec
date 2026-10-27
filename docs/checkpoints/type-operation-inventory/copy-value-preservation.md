@@ -62,7 +62,7 @@ num_add(1,2).copy().add(1)                  # 4
    primitive identity from old[]/null. Receiver rollout follows separately.
 2. Perl receiver1.2 implemented/targeted-checked: generic copy role across primitive/result/scoped continuations;
    malformed-method preflight remains. Existing container consumers/depths stay.
-3. Perl context1.3: independently assess already-supported interpreted copy helper
+3. Perl context1.3 preserved/targeted-checked: independently assess already-supported interpreted copy helper
    and method paths; fix only actual scalar/result drift without vocabulary or
    callable-origin/depth changes. Close as preserved if already healthy.
 4. Rust2, Dart3, Julia4, safe Lua5 independently assess function/method/scalar-result
@@ -73,3 +73,12 @@ Each bounded child compiles and runs the new finite strict-kind/value/effect tes
 plus direct copy/result checks, updates the book/current facts and commits. Full
 signature/source/context/portable admission, explicit Perl canonical registration,
 pressure repair and clean-push canonical CI remain separate under23.4.
+
+Perl context1.3 public native/fresh preservation checks pass without runtime changes.
+Existing deferred free copy preserves primitives/null and snapshots; receiver copy
+remains unknown_helper/copy there. Invalid free signatures retain their existing
+unknown_helper/copy error; logical source errors and copied-callable recursion
+origin guards remain. Its wrong-kind take returns[] and skips its count operand,
+retaining that executor's prior method policy. Recursive container copying remains
+source-observed at CodeblockRuntime::_copy_value; returned equal JSON alone is not
+used as depth/identity evidence because invocation/container boundaries also copy.

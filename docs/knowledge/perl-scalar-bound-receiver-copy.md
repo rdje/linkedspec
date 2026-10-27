@@ -9,6 +9,8 @@ answers:
   - "does scalar receiver copy consume typed AST fields"
   - "where is the scalar bound receiver copy repair verified"
   - "does ordinary Perl function copy preserve primitive values and selector kinds"
+  - "does deferred Perl copy support primitive values or receiver methods"
+  - "does ordinary Perl shallow copy describe interpreted copy depth"
 date: 2026-10-10
 status: accepted public repair at770cffcc; original proof requires its accepted Git input state
 tags: [perl, actionir, ast, copy, containers, receivers]
@@ -72,3 +74,18 @@ and a compatible Hash block key runs once. No change to free-key vocabulary,
 operand execution order, container depth, callable origins or deferred grammar.
 Existing interpreted paths1.3 require independent assessment; canonical admission23.4
 and explicit new Perl fixture registration remain open.
+
+Existing interpreted-context1.3 is independently preserved by
+ t/value_copy_interpreted.t public native/fresh checks without runtime edits.
+CodeblockRuntime::_eval_call already sends valid free copy to _copy_value:
+no-ref scalars retain flags; Bool cloning retains its kind; Array/Hash recursion
+and callable origins retain their existing implementation. Public values,
+Number/String typed writes, snapshots0!/7/2, wrong-Array count suppression/S,
+source/helper errors and copied-callable recursion rejection pass. Deferred
+receiver copy remains unknown_helper/copy; invalid free arity keeps that existing
+error. Its take wrong-kind policy returns[], distinct from ordinary guarded null.
+No new vocabulary/depth/origin policy is admitted; equal returned JSON is not
+used to infer producer depth because invocation/container boundaries also copy.
+The separate computed deferred raw/readiness boundary remains covered. Perl's
+bounded producer/receiver/context children are complete; independent backends
+and full source/context/portable/canonical admission remain open.
