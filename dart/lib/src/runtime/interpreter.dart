@@ -3828,6 +3828,9 @@ final class LinkedSpecRuntimeEngine {
           context,
           ruleLabel,
           currentEdge: currentEdge,
+          copiedResult:
+              receiver is ActionCallExpr &&
+              canonicalActionHelperName(receiver.name) == 'copy',
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -5140,13 +5143,15 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
+    bool copiedResult = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
-      // Reduced values may switch container family. Check before operands.
-      if (reductionResult &&
+      // Reduced and copied values retain their actual kind through bridges.
+      // Validate container-only consumers before evaluating their operands.
+      if ((reductionResult || copiedResult) &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
@@ -5200,6 +5205,7 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: currentEdge,
       );
       reductionResult = reductionResult || helper == 'reduce_leaves';
+      copiedResult = copiedResult || helper == 'copy';
       scalarResult =
           value is bool ||
           ((scalarResult || mayProduceScalar) &&

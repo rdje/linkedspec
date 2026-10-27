@@ -62,4 +62,6 @@ typed source-error fields/tokens. Generic value copies preserve Bool (pre-change
 and(true).copy()/true.copy()/copy(false) are true/true/false); retain this local
 compatibility. TYPE1.2.1.4.2 resolves the differing backend scalar-copy domains
 and necessary repairs after family23, before full method/portable admission.
+ADR0138 and4.2.2.3 retain these healthy primitive producers/copies and add only
+actual copied-result container guards; see [[dart-runtime-array-helpers]].
 No standalone emitted/context/deferred/callback/serialized-model expansion.

@@ -65,7 +65,7 @@ num_add(1,2).copy().add(1)                  # 4
 3. Perl context1.3 preserved/targeted-checked: independently assess already-supported interpreted copy helper
    and method paths; fix only actual scalar/result drift without vocabulary or
    callable-origin/depth changes. Close as preserved if already healthy.
-4. Rust2 implemented/targeted-checked; Dart3, Julia4, safe Lua5 independently assess function/method/scalar-result
+4. Rust2/Dart3 implemented/targeted-checked; Julia4/safe Lua5 independently assess function/method/scalar-result
    and scope/shape/snapshot controls before changes. Lua uses only safe named
    PUC5.5.1/LuaJIT fixtures; declared5.4/full runner remain separate.
 
@@ -92,3 +92,12 @@ container cloning remain. value_copy.rs uses the shared value_copy_values fixtur
 plus finite source/shape/selector/legacy controls on native/restored/generated-plan
 routes. Only the old scalar/missing/with-copy expectations advance under ADR0138.
 No AST/type/wire-format, new callable-copy domain or complete context admission.
+
+Dart3 retains its existing primitive-preserving producer and recursive copying.
+Native/restored/plan intake agrees on primitive values/kinds and only exposes
+copied-result guard gaps: Number0 runs KV and yields0; copied Hash/Array wrong
+consumers yield[]/[1]/AKV. A copied-result flag now initializes for direct free
+copy receivers and persists from receiver copy links; the existing guard checks
+actual kind before later container-only operands. Shared values/shape/legacy
+controls and direct arity/logical/selected tests pass without old oracle changes.
+No producer, malformed free-call, container depth, callable or wire-format change.

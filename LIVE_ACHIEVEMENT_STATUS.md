@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust copy2 preserves primitive values and actual-kind consumers; strict native/restored/plan and direct focused tests pass. Dart3 is next.
+Dart copy3 retains healthy primitive production and guards actual copied-result consumers; focused native/restored/plan checks pass. Julia4 is next.
 
 ## Latest Completed Slice
 
-Rust valid one-source copy preserves captured Bool/Number/String/null without target-name lookup; empty/extra free-call policies and Codeblock fallback remain. Generic receiver copy and a dedicated copied-result dispatcher retain actual kinds before incompatible Array/Hash operands, including subsequent bridges; with/logical prefixes drop only the approved scalar-copy rejection. Remove obsolete copy lookahead and rename the generic value-method discriminator. Shared strict value/effect fixtures plus native/restored/generated-plan copy tests PASS6 after actual selector-Array and wrong-container AKV RED; legacy accumulator, String payload/typed selector, source snapshots/scopes, malformed signatures and container controls retain their expectations. Final focused Cargo selection PASS15 including direct arity/logical/selected suites; changed Rust compiles/formats and book/history/fast staged continuity pass. Only superseded receiver text/missing/with-copy expectations advance under ADR0138. No type/schema, callable-copy rights, unrelated consumer normalization, full suite or complete context/portable admission. Book/current facts/map/roadmap/task/live align; Dart3 independently assesses next.
+Dart preserves its already-healthy primitive copy producers and recursive container copying. Independent native/restored/generated-plan intake exposes only copied-result guards: Number0 runs KV and yields0; copied Hash/Array consumers return[]/[1]/AKV. The existing fluent actual-kind guard now tracks direct free-copy receivers and later copy links before container-only operands; compatible scalar/default/container bridges remain. Shared strict source/value/scope/snapshot/selector tests and direct arity/logical/selected checks PASS15, with no old oracle changes; changed files format/analyze with no issues. Source errors, malformed method/free policies, legacy rule accumulator/String payload, depth and callable/serialization bounds retain their controls. Book/catalog/copy target, Dart/current generic facts/map and roadmap/task/live align. No full suite, standalone emitted-source or complete context/portable admission claim. Julia4 independently assesses next, followed by safe Lua5; full admission/canonical registration/pressure repair remain separate.
 
 ## Next Action
 
-Activate Dart scalar/null value-copy3 from the clean Perl/Rust rollout. Consult canonical Dart copy/result facts and independently run the shared value-copy fixture plus finite method/shape/source/snapshot/typed selector/container controls on native/restored/plan before changes. Preserve healthy primitive production, recursive copying, free malformed policies and callable/context/serialization bounds; repair only actual admitted result drift. Small compile/analyze/targeted checks/docs/commit, then Julia4/safe Lua5. Direct computed calls, broad verification/admission and push remain queued.
+Activate Julia scalar/null value-copy4 from the clean Perl/Rust/Dart rollout. Consult canonical Julia copy/result facts and independently run shared value-copy/finite method/shape/source/snapshot/strict typed selector/container controls native/plan/fresh before changes. Preserve healthy primitive production, recursive copies, free malformed signatures, callable/context/serialization bounds; repair only observed admitted result drift. Small compile/targeted checks/docs/commit, then safe Lua5. Full verification/admission and direct computed calls remain queued; no push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.3` — Dart copy3 retains healthy primitive production and guards actual copied-result consumers; focused native/restored/plan checks pass. Julia4 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.2` — Rust copy2 preserves primitive values and actual-kind consumers; strict native/restored/plan and direct focused tests pass. Dart3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.3` — Perl existing interpreted free copy1.3 is preserved/targeted-checked; all bounded Perl copy children complete. Independent Rust2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.1.4.2.2.1.2` — Perl ordinary receiver copy1.2 preserves primitive/result/scoped continuations and shape/source guards. Existing interpreted context1.3 is next.
@@ -29,7 +30,6 @@ Activate Dart scalar/null value-copy3 from the clean Perl/Rust rollout. Consult 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.2` — Rust23.2 eager logical receiver methods are implemented/targeted-checked; independent Dart23.3 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.23.1` — Perl23.1 eager logical receiver methods are implemented/targeted-checked; independent Rust23.2 is next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.3` — Selection23.1.3 freezes ordinary eager logical receiver counterparts; Perl23.3.23.1 is next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.22.5` — All five bounded tagged-record22 implementations are targeted-checked; remaining ordinary feature selection23.1.3 is next.
 
 ## History
 

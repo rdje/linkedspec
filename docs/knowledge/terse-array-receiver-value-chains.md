@@ -88,3 +88,9 @@ source/shape/snapshot/scope/container/legacy controls pass in value_copy.rs;
 direct receiver arity, logical receiver and selected-value tests pass. Only old
 text/missing/with scalar copy expectations advance. Earlier observations stay
 historical. No type/schema, callable-copy rights, full context or portable admission.
+
+Dart4.2.2.3 preserves healthy primitive copy production and adds copied-result
+actual-kind guards after independent native/restored/plan SRKV/AKV RED. Shared
+values and direct copy/logical/selected controls pass without oracle changes;
+[[dart-runtime-array-helpers]] owns the bounded mechanism. Julia/safe Lua remain
+next; no complete context/portable/canonical copy admission.

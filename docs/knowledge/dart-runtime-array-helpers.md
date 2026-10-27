@@ -8,6 +8,8 @@ answers:
   - how do Dart aggregate results retain scalar boundaries after named array mutations
   - why does Dart count return zero for nonarrays and reject extra receiver operands
   - does Dart receiver copy reject extra arguments before effects
+  - why do copied Dart Number values run incompatible Hash operands
+  - how does Dart preserve actual kind after free and receiver copy
   - do Dart standalone split_each filter_match and uniq update arrays
   - does Dart runtime support array receiver chains
   - does Dart runtime support sorted drop_front first
@@ -20,7 +22,9 @@ date: 2026-10-27
 status: scalar/default/index/predicate guards; ordering/slice/admission open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "TYPE22.3 repairs tagged-record String-input/Array-output guards, receiver regex/minimum shape with native/restored/plan checks. Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
-reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/emptiness_result_receivers_test.dart test/has_key_result_receivers_test.dart test/tagged_record_receivers_test.dart"
+reverify:
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/emptiness_result_receivers_test.dart test/has_key_result_receivers_test.dart test/tagged_record_receivers_test.dart"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/value_copy_test.dart test/receiver_copy_arity_test.dart test/logical_receiver_methods_test.dart test/selected_value_receivers_test.dart"
 ---
 
 Dart runtime array helper execution lives in
@@ -75,3 +79,16 @@ count policy.
 5.3.2 implements standalone transforms with target validation, pure operands and rebinding; value/receiver forms stay pure. Julia5.3.3 is also implemented; broad5.3.4 remains open.
 
 23.3 ordinary guards retain Count List-only/Length wider; join/index/has_key/contains take one operand, emptiness predicates zero. Defaults/index/has_key/contains/emptiness results stay scalar until actual List/Map output; generic emptiness consumers remain allowed.23.3.9.3 retains Bool flow/source/copy kinds/1!/SA, fixing container[]/bad1!/0!/four effects. Native/restored/plan/direct has_key and fatal analysis pass. Domains/source/copy unchanged; full admission open.
+
+October27 ADR0138 copy rollout4.2.2.3 preserves the already-healthy primitive
+producer/_copyValue and recursive containers. Public shared value-copy intake
+(native/restored/generated-plan) agrees except wrong Number/Hash/Array consumer
+operands: null/0/SRKV and[]/[1]/AKV. _evaluateFluentCallsWithValue now accepts an
+initial copiedResult flag for direct free-copy receivers and retains it after
+receiver copy links. The existing reduction-kind guard also checks copied
+results before container-only operands; actual List/Map/scalar bridges remain
+valid. No other source/result policy is normalized. value_copy_test.dart PASS4
+and direct receiver arity/logical methods/selected values give15 focused tests;
+changed-file analysis passes. No old expectation, copy producer, malformed free
+signature, container depth, callable/context or serialization change. Full
+context/portable admission remains separate; Julia4/safe Lua5 independently follow.
