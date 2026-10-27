@@ -6261,7 +6261,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.2 - reject parser calls and gap readers in pure Rust functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3`
-  Status: `pending`
+  Status: `completed`
   Priority: P1 existing pure-function contract repair.
   Goal: Independently establish and repair Dart call(rule)/public gap-reader parser-state access inside pure functions.
   Acceptance: Use small public controlled ordinary/function distinctions before production, with source-layout/finalizer and null-context limits explicit. Reject known call/entry_slot/gap_span/gap_text/gap_kind source roles under active function context through existing owners; preserve ordinary parser calls/gap values, explicit caller function arguments, prefix-named functions, diagnostics/arity/callback/serialization rights. Do not infer another backend's failure. Split larger independent defects before changes.
@@ -6269,6 +6269,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Direct function negative/ordinary caller-positive native and current reconstructed/generated routes, changed compile and adjacent function/source checks, book/history/continuity; safe Lua only confirmed available hosts with no unsafe/full runner/new persistent locals. No full suite/matrix.
   Planned canonical trigger: Full source/function/context/portable23.4 and final clean push after feature coverage; public schema/contract movement separately owned.
   Planned claim verification: none: Deterministic finite authored defect/preservation controls; no population measurement.
+
+  Before-production finding: At clean4c6cd70c3, unchanged Dart controls independently return child, empty/comma gaps and full incoming child slot records in three first-native negative groups; ordinary explicit child/gap/slot arguments pass. Each group stops at its first failure; later cases/routes are not historical RED. Existing helper switch precedes bound-codeblock fallback, so known builtin names retain parser roles; prefix-named functions are independent. Add exactly five known public parser-context names to the existing private cache/active-function guard; no alternate callback permission is inferred.
+
+  Activation: clean4c6cd70c3109b6bf2f7d99d5069ebc56c6f82560; Rust context29.2.6.2 committed/tree clean/brief0.
+  Owned paths: Existing Interpreter private parser-state name cache adds five public context roles; new automatically discovered test/retained RED; scoped book/target/fact/map/roadmap/task/live/resume.
+  Verification tier: `focused`
+  Focused checks: New four native/restored-SpecFile/plan groups after RED3/healthy1; prior function-state four, total8 tests pass; format/fatal selected analysis clean, book/history/fast continuity/diff. No full suite/matrix.
+  Canonical trigger: Full source/function/context/portable23.4 and final clean push; stale neutral example29.2.6.6 remains separately canonical after prerequisites.
+  Claim verification: none: Deterministic finite authored defect/preservation controls; no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Unchanged Dart independently returns child, real empty/comma gaps and incoming child slot records in three first-native negative groups; ordinary explicit caller child/gap/slot values pass. Later helper cases/routes are not historical RED; exact log and tracked producer retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: The existing active-function check uses source-location projection/alias names and omits call plus the four current public gap/slot source_read helpers. Their ordinary helper dispatch reads or invokes parser state within a function.
+  - [x] **FIX**: Add exactly call, entry_slot, gap_span, gap_text and gap_kind to the existing private cache, reusing current pre-operand active-function guard and RuntimeInterpreterException. Known builtin switch dispatch precedes bound-codeblock fallback, so builtin role ownership is preserved; no alternate callback or prefix permission.
+  - [x] **ADDRESSED (verified)**: Four new groups pass native/restored-SpecFile/plan: child calls, all four gap/slot spellings and incoming child slot access reject; ordinary parser child results/gap text/kind/span and slot provenance remain exact explicit pure-function arguments with String continuation.
+  - [x] **NO REGRESSION**: Prior four function-state tests pass, total8; formatting/fatal selected analysis clean. Ordinary selected-child cache/gap/source/slot/lifecycle/arity/callback/local-data and serialization policies retain owners. No new path/API/parser/helper/IR/diagnostic or compiled schema; no exhaustive/other-backend admission.
+  - [x] **LOCKSTEP**: Scoped book error distinctions, target/retained RED/canonical fact/map and roadmap/task/live/resume align. Standard Dart discovery needs no runner edit. Independent Julia follows; stale example/pressure/Perl registration/declared5.4/full23.4 remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3 - reject parser calls and gap readers in pure Dart functions`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4`
   Status: `pending`
@@ -6308,7 +6325,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.3` | `pending` | Independently assess Dart rule-call and public gap-reader function boundaries. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6.4` | `pending` | Independently assess Julia rule-call and public gap-reader function boundaries. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

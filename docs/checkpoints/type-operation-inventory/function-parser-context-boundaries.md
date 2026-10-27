@@ -1,6 +1,6 @@
 # Parser calls and public gap readers in pure functions
 
-Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl/Rust children.1-.2 repaired/targeted-checked.
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.29.2.6; Perl/Rust/Dart children.1-.3 repaired/targeted-checked.
 
 call(rule) performs parser work; entry_slot/gap_span/gap_text/gap_kind are current
 public source_read helpers under ADR0079. Their absence from source-location
@@ -48,3 +48,13 @@ Four new native/restored-CompiledSpec/plan groups and four prior function-state
 tests pass, total8, plus rustfmt/offline compilation. Ordinary child/gap/slot
 values/provenance remain valid explicit arguments. Independent Dart child.3 is
 next; stale example child.6 and full context/portable admission remain separate.
+
+Dart child.3 independently returns child, real gaps and incoming slot records in
+three first-native RED groups; explicit caller child/gap/slot arguments already
+pass. Its tracked test and Dart packet retain exact log and first-case limits.
+The private cache adds exactly the five current context roles, reusing existing
+pre-operand function guard/RuntimeInterpreterException. Builtin helper dispatch
+precedes bound-codeblock fallback, so the source role remains unchanged. Four
+new native/restored-SpecFile/plan and four prior function-state tests pass, total8;
+format/fatal selected analysis clean. Ordinary child/gap/slot/provenance values
+remain explicit arguments. Independent Julia child.4 follows; no new API/schema.

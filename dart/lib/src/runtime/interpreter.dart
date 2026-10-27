@@ -22,6 +22,8 @@ import 'unicode_case_mapping.dart';
 // Source-boundary roles own these names; arbitrary user-function prefixes do
 // not grant or deny parser-state access. Build once from the existing catalog.
 final _parserStateHelperNames = <String>{
+  // Public parser-context roles outside source-location projection rows.
+  'call', 'entry_slot', 'gap_span', 'gap_text', 'gap_kind',
   for (final rows in sourceLocationProjectionRows().values)
     for (final row in rows as List<Object?>)
       (row as List<Object?>).first as String,

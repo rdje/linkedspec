@@ -13,14 +13,16 @@ answers:
   - which backends have the repaired parser-state function fence
   - can a Perl pure function call a parser rule or read gap_text
   - can a Rust pure function call a parser rule or read gap_text
+  - can a Dart pure function call a parser rule or read gap_text
   - why are call and gap accessors outside the projection catalog still forbidden
 date: 2026-10-27
 status: all five bounded catalogued-helper backends repaired on recorded hosts; noncatalogued contexts and full admission open
 tags: [functions, purity, parser-state, perl, rust]
 evidence: "TYPE29.2.1 Perl13 focused groups; independent Rust29.2.2 first-native RED3/healthy1, then new4 plus direct capture4/input4 GREEN; exact retained intake packets."
 reverify:
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/user_function_parser_state_boundary.t"
-  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test user_function_parser_state_boundary"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/user_function_parser_state_boundary.t t/user_function_parser_context_boundary.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test user_function_parser_state_boundary --test user_function_parser_context_boundary"
+  - "cd dart && bash ../tools/run_dart_project_data.sh test test/user_function_parser_state_boundary_test.dart test/user_function_parser_context_boundary_test.dart"
 ---
 
 Accepted SPEC-FORMAT-TERSE.4.2.3/Phase0 entry_text negative forbids implicit parser
@@ -102,3 +104,12 @@ rustfmt/offline compile. The exact Rust packet discloses initial static plan-lab
 lifetime harness failure/correction and first-case RED limits. No new schema or
 runtime path; ordinary parser results/gap/slot values remain explicit arguments.
 Independent Dart/Julia/safe Lua context children and stale example.6 remain open.
+
+Noncatalogued Dart context29.2.6.3 independently returns child/gaps/slot records in
+three first-native RED groups, with explicit values healthy. The existing private
+cache gains five current roles and reuses its pre-operand function guard. Known
+helper switch dispatch precedes bound-codeblock fallback, preserving builtin roles
+without a prefix or runtime-value permission inference. New4/prior4 tests pass
+native/restored-SpecFile/plan, with clean format/fatal selected analysis. Exact
+Dart packet discloses first-case RED limits. Independent Julia/safe Lua contexts
+and stale neutral example.6/full context admission remain open.
