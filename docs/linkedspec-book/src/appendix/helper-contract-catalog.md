@@ -1824,7 +1824,7 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `input_text()`
 - **Signature**: `input_text()`
 - **Returns**: scalar
-- **Behavior**: Returns the entire current input as a string. Ordinary Perl String flow such as `input_text().split("=")[-1].uppercase()` works. For default chains currently bind first: `text=input_text(); text.coalesce("fallback").uppercase()`; direct input/cursor default/result-guard composition has a known compiler gap under repair.
+- **Behavior**: Returns the entire current input as a string. Ordinary Perl supports direct scalar/default/inter-type flow: `input_text().coalesce("fallback").split("=")[-1].uppercase()`. The source is captured before later operands; defined empty text skips a defined-only fallback. Input/cursor scalar results reject Array/Hash-only consumers before their operands; other backend checks/full admission remain separate.
 
 ### `input_slice(start, len)`
 - **Signature**: `input_slice(start: int, length: int)`
@@ -1834,7 +1834,7 @@ These helpers read from the **current match** — the regex capture that trigger
 ### `input_len()`
 - **Signature**: `input_len()`
 - **Returns**: int
-- **Behavior**: Total length of the current input.
+- **Behavior**: Total length of the current input. Ordinary Perl preserves its Number kind through `input_len().coalesce(0).add(1)`, including zero-valued indices; a container-only consumer yields undef and skips its operands.
 
 ### `input_end_line()`, `input_end_col()`
 - **Signature**: `input_end_line()`, `input_end_col()`

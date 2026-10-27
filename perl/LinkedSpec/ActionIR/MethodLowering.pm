@@ -1539,6 +1539,20 @@ sub _actionir_ast_computed_data_call_method {
  return undef
 }
 
+sub _ordinary_input_cursor_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH';
+ return _ordinary_input_cursor_result_source($call->{receiver})
+  if ($call->{kind} // '') eq 'fluent_chain';
+ return 0 unless ($call->{kind} // '') eq 'call' && ref($call->{args}) eq 'ARRAY';
+ my $name = $call->{name} // '';
+ return _ordinary_input_cursor_result_source($call->{args}[0])
+  if $name eq 'with' && $call->{trailing_block_arg} && @{$call->{args}} == 2;
+ return 0 if $call->{trailing_block_arg};
+ return @{$call->{args}} == 2 if $name eq 'input_slice';
+ return @{$call->{args}} == 0 && $name =~ /\A(?:input_(?:text|len|end_pos|end_line|end_col)|cursor_(?:pos|line|col|rest|rest_len))\z/o;
+}
+
 sub _user_function_definition_for_name {
  my ($deps, $name) = @_;
  return undef unless defined($name) && $name =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
@@ -4946,6 +4960,32 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   if (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} && !_is_tree_traversal_receiver_method($_->{method} // '') } @$calls) {
+   # Retain this statically owned reader origin through with. Rebuilding host
+   # source loses that origin before the following actual-kind guard runs.
+   if (_ordinary_input_cursor_result_source($receiver)
+    && !(grep { $_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with' } @$calls)) {
+    my $value_node = $receiver;
+    my @prefix;
+    foreach my $call (@$calls) {
+     if ($call->{receiver_trailing_block_arg}) {
+      return _actionir_ast_unsupported_helper_expr('with')
+       unless ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 1;
+      $value_node = {kind => 'fluent_chain', receiver => $value_node, calls => [@prefix]}
+       if @prefix;
+      @prefix = ();
+      $value_node = {
+       kind => 'call', name => 'with', source_method => 'with',
+       args => [$value_node, @{$call->{args}}], trailing_block_arg => 1,
+       source_span => $call->{source_span},
+      };
+     } else {
+      push @prefix, $call;
+     }
+    }
+    $value_node = {kind => 'fluent_chain', receiver => $value_node, calls => [@prefix]}
+     if @prefix;
+    return $lower_ast_value_node->($value_node, {bare_scalar_read => 1});
+   }
    _trace_method_decision(
     phase => 'lower_ast_fluent_chain_node',
     label => 'fluent_chain',
@@ -5292,6 +5332,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && (grep { _is_scalar_string_receiver_value_chain_method($_->{method} // '') } @$calls);
   my $emitted_result_chain = $defined_default_chain || $scalar_string_chain
    || ($receiver->{kind} // '') eq 'value_access'
+   || _ordinary_input_cursor_result_source($receiver)
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
@@ -6081,6 +6122,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return undef unless defined($width_expr) && length($width_expr);
 
   return 'do { my $__ls_input_slice_start = '.$start_expr.'; my $__ls_input_slice_width = '.$width_expr.'; LinkedSpec::SourceLocation::Runtime::source_slice_text($info, $STRING, $__ls_input_slice_start, $__ls_input_slice_width, "input_slice") }';
+ }
+ if ($method_call && $method_call->{method} =~ /\A(?:input_(?:text|len|end_pos|end_line|end_col)|cursor_(?:pos|line|col|rest|rest_len))\z/o) {
+  my $reader_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);
+  return undef unless $reader_args;
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_input_cursor_value_expr',
+   $method_call->{method},
+  );
  }
  if ($method_call && $method_call->{method} eq 'entry_text') {
   my $entry_text_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 0, 0);

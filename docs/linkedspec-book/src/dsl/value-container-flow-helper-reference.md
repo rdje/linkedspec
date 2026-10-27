@@ -21,7 +21,7 @@ Most value helpers return one expression. They become useful when they are place
 | Switch driver | `switch(value)` | one value should drive equality cases. |
 | Constructor payload | `array(...)` / `hash(...)` | nested values should become one array or hash payload. |
 
-Input/cursor readers yield scalar values. On ordinary Perl, `input_text().split("=")[-1].uppercase()` already composes directly; bind before defaults for now (`text=input_text(); text.coalesce("fallback").uppercase()`), because direct reader default/result-guard composition has a known compiler gap under repair. Scalar working variables are read with bare names such as `name`. Use that spelling when a payload should
+Input/cursor readers yield scalar values. Ordinary Perl supports direct defaults and inter-type flow: `input_text().coalesce("fallback").split("=")[-1].uppercase()` selects the final field, and `input_len().coalesce(0).add(1)` preserves a Number result. Empty String and zero are defined, so their fallback operands stay skipped. Array/Hash-only consumers reject scalar results before their operands. Source arguments run once in order, before later consumers. A scoped block can change the kind: `input_text().with() {return(["a","b"])}.last().uppercase()` yields `"B"`; the outer `value` binding is restored. Named readers remain equivalent; source signatures/bounds/cursor rules, deferred vocabulary and other backend/full-admission checks keep their owners. Scalar working variables are read with bare names such as `name`. Use that spelling when a payload should
 visibly come from the working variable named `name`:
 
 ```text

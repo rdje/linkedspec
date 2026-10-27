@@ -658,9 +658,30 @@ sub _build_return_contracts {
 }
 
 #------------------------------------------------------------------------------
-# Function: _build_capture_and_cursor_contracts
-# Purpose : Contracts that normalize capture and cursor-control helpers.
+# Function: _readonly_input_cursor_value_expr
+# Purpose : One emitted getter body for typed and contract-based composition.
 #------------------------------------------------------------------------------
+# Shared emitted values for the existing zero-argument input/cursor readers.
+# Keep the native contract callbacks and typed method lowering on one getter body.
+sub _readonly_input_cursor_value_expr {
+ my ($method) = @_;
+ return undef unless defined $method;
+ my %values = (
+  cursor_pos => 'do { LinkedSpec::SourceLocation::Runtime::cursor_position($info, $STRING, pos $$STRING, "cursor_pos") }',
+  cursor_line => 'do { my $__ls_cursor_pos = pos $$STRING; LinkedSpec::SourceLocation::Runtime::position_line($info, $STRING, defined($__ls_cursor_pos) ? $__ls_cursor_pos : 0, "cursor_line") }',
+  cursor_col => 'do { my $__ls_cursor_pos = pos $$STRING; LinkedSpec::SourceLocation::Runtime::position_column($info, $STRING, defined($__ls_cursor_pos) ? $__ls_cursor_pos : 0, "cursor_col") }',
+  cursor_rest => 'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "cursor_rest"), "cursor_rest") : undef }',
+  cursor_rest_len => 'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "cursor_rest_len"), "cursor_rest_len") : undef }',
+  input_text => 'do { LinkedSpec::SourceLocation::Runtime::source_text($info, $STRING, "input_text") }',
+  input_len => 'do { LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "input_len") }',
+  input_end_pos => 'do { LinkedSpec::SourceLocation::Runtime::position_offset($info, $STRING, length($$STRING), "input_end_pos") }',
+  input_end_line => 'do { LinkedSpec::SourceLocation::Runtime::position_line($info, $STRING, length($$STRING), "input_end_line") }',
+  input_end_col => 'do { LinkedSpec::SourceLocation::Runtime::position_column($info, $STRING, length($$STRING), "input_end_col") }',
+ );
+ return $values{$method}
+}
+
+# Contracts that normalize capture and cursor-control helpers.
 sub _build_capture_and_cursor_contracts {
  my ($label, $d) = @_;
  $d = {} unless ref($d) eq 'HASH';
@@ -1513,7 +1534,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::cursor_position(\$info, \$STRING, pos \$\$STRING, "cursor_pos") }/g;
+    $code =~ s/\bcursor_pos\s*\(\s*\)/_readonly_input_cursor_value_expr('cursor_pos')/ge;
     return $code
    },
   },
@@ -1524,7 +1545,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_line\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0, "cursor_line") }/g;
+    $code =~ s/\bcursor_line\s*\(\s*\)/_readonly_input_cursor_value_expr('cursor_line')/ge;
     return $code
    },
   },
@@ -1535,7 +1556,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bcursor_col\s*\(\s*\)/do { my \$__ls_cursor_pos = pos \$\$STRING; LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, defined(\$__ls_cursor_pos) ? \$__ls_cursor_pos : 0, "cursor_col") }/g;
+    $code =~ s/\bcursor_col\s*\(\s*\)/_readonly_input_cursor_value_expr('cursor_col')/ge;
     return $code
    },
   },
@@ -1546,11 +1567,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_rest\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcursor_rest\s*\(\s*\)
-    }{
-     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "cursor_rest"), "cursor_rest") : undef }'
-    }gex;
+    $code =~ s/\bcursor_rest\s*\(\s*\)/_readonly_input_cursor_value_expr('cursor_rest')/ge;
     return $code
    },
   },
@@ -1561,11 +1578,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcursor_rest_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcursor_rest_len\s*\(\s*\)
-    }{
-     'do { my $__ls_cursor = pos $$STRING; defined($__ls_cursor) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_cursor, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "cursor_rest_len"), "cursor_rest_len") : undef }'
-    }gex;
+    $code =~ s/\bcursor_rest_len\s*\(\s*\)/_readonly_input_cursor_value_expr('cursor_rest_len')/ge;
     return $code
    },
   },
@@ -1589,7 +1602,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_text\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_text\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::source_text(\$info, \$STRING, "input_text") }/g;
+    $code =~ s/\binput_text\s*\(\s*\)/_readonly_input_cursor_value_expr('input_text')/ge;
     return $code
    },
   },
@@ -1600,7 +1613,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_len\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::source_length(\$info, \$STRING, "input_len") }/g;
+    $code =~ s/\binput_len\s*\(\s*\)/_readonly_input_cursor_value_expr('input_len')/ge;
     return $code
    },
   },
@@ -1611,7 +1624,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_end_pos\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_end_pos\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_offset(\$info, \$STRING, length(\$\$STRING), "input_end_pos") }/g;
+    $code =~ s/\binput_end_pos\s*\(\s*\)/_readonly_input_cursor_value_expr('input_end_pos')/ge;
     return $code
    },
   },
@@ -1622,7 +1635,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_end_line\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_end_line\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_line(\$info, \$STRING, length(\$\$STRING), "input_end_line") }/g;
+    $code =~ s/\binput_end_line\s*\(\s*\)/_readonly_input_cursor_value_expr('input_end_line')/ge;
     return $code
    },
   },
@@ -1633,7 +1646,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\binput_end_col\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\binput_end_col\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::position_column(\$info, \$STRING, length(\$\$STRING), "input_end_col") }/g;
+    $code =~ s/\binput_end_col\s*\(\s*\)/_readonly_input_cursor_value_expr('input_end_col')/ge;
     return $code
    },
   },

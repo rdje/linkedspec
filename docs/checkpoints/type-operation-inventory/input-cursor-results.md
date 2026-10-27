@@ -1,7 +1,7 @@
 # Read-only input and cursor scalar result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.7; implementation family23.3.27.
-Status: frozen bounded target; Perl27.1 first, independent backends after it.
+Status: bounded Perl27.1 implemented/targeted-checked; independent Rust27.2 next.
 
 The existing scalar readers input_text, input_len, input_end_pos, input_end_line,
 input_end_col, input_slice, cursor_pos, cursor_line, cursor_col, cursor_rest and
@@ -70,3 +70,22 @@ source-order/default/with/error distinctions, not an exhaustive matrix. No backe
 failure is inferred from Perl; no new serialized fields. Full source/domain/context/
 portable/generated admission23.4, required Perl test registration, pressure repair
 and declared Lua5.4 stay separately owned. Other findings28.1/29.1 precede admission.
+
+
+## Bounded Perl implementation
+
+27.1 shares ten zero-argument getter expression bodies between the existing native
+contract callbacks and typed method lowering. Input_slice retains its existing
+two-operand implementation. Exactly eleven static readonly source shapes enter
+the existing actual-result dispatcher. The typed reader origin propagates through
+with/fluent nodes; the owned trailing-with path folds existing AST fields instead
+of rebuilding host text and losing the guard. No new schema or callback operation.
+
+Five native/fresh/Value-metadata groups pass; the with group is expanded and
+independently rechecked for Array/Hash/Bool results and outer value restoration.
+The shared fixture preserves all spellings, kinds/empty/zero, source SWC order,
+lazy fallbacks, split/signed/String flow, typed Number selector and operand skips.
+Direct defaults13 and source-location contract4 pass, as do module/test syntax.
+The retained with-result packet labels its first getter/direct-guard candidate
+epoch and supplies the actual AST/substitution producer, then the repaired output.
+Other backend failures are not inferred. Full admission and28.1/29.1 stay open.

@@ -1,0 +1,549 @@
+{
+  "activation": "1d03ea58e7eb2ecdb1c10d11668e6f91ea68018e",
+  "candidate": {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(value)",
+                "source_span": {
+                  "end": 33,
+                  "start": 20
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "variable",
+                          "name": "value",
+                          "source": "value",
+                          "source_span": {
+                            "end": 32,
+                            "start": 27
+                          }
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(value)",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 33,
+                        "start": 20
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(value)",
+                    "source_span": {
+                      "end": 33,
+                      "start": 20
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(value)}",
+              "source_span": {
+                "end": 34,
+                "start": 19
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with() {return(value)}",
+          "source_method": "with",
+          "source_span": {
+            "end": 34,
+            "start": 12
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 34,
+            "start": 19
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "order=cat(order,\"K\");\"k\"",
+                "source_span": {
+                  "end": 68,
+                  "start": 44
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "assign_scalar",
+                      "name": "order",
+                      "source": "order=cat(order,\"K\")",
+                      "source_span": {
+                        "end": 64,
+                        "start": 44
+                      },
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "order",
+                            "source": "order",
+                            "source_span": {
+                              "end": 59,
+                              "start": 54
+                            }
+                          },
+                          {
+                            "kind": "string",
+                            "quote": "\"",
+                            "source": "\"K\"",
+                            "source_span": {
+                              "end": 63,
+                              "start": 60
+                            },
+                            "value": "K"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "cat",
+                        "source": "cat(order,\"K\")",
+                        "source_method": "cat",
+                        "source_span": {
+                          "end": 64,
+                          "start": 50
+                        }
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "order=cat(order,\"K\")",
+                    "source_span": {
+                      "end": 64,
+                      "start": 44
+                    }
+                  },
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "string",
+                      "quote": "\"",
+                      "source": "\"k\"",
+                      "source_span": {
+                        "end": 68,
+                        "start": 65
+                      },
+                      "value": "k"
+                    },
+                    "kind": "action_stmt",
+                    "source": "\"k\"",
+                    "source_span": {
+                      "end": 68,
+                      "start": 65
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{order=cat(order,\"K\");\"k\"}",
+              "source_span": {
+                "end": 69,
+                "start": 43
+              }
+            },
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "order=cat(order,\"V\");1",
+                "source_span": {
+                  "end": 93,
+                  "start": 71
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "assign_scalar",
+                      "name": "order",
+                      "source": "order=cat(order,\"V\")",
+                      "source_span": {
+                        "end": 91,
+                        "start": 71
+                      },
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "order",
+                            "source": "order",
+                            "source_span": {
+                              "end": 86,
+                              "start": 81
+                            }
+                          },
+                          {
+                            "kind": "string",
+                            "quote": "\"",
+                            "source": "\"V\"",
+                            "source_span": {
+                              "end": 90,
+                              "start": 87
+                            },
+                            "value": "V"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "cat",
+                        "source": "cat(order,\"V\")",
+                        "source_method": "cat",
+                        "source_span": {
+                          "end": 91,
+                          "start": 77
+                        }
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "order=cat(order,\"V\")",
+                    "source_span": {
+                      "end": 91,
+                      "start": 71
+                    }
+                  },
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "number",
+                      "source": 1,
+                      "source_span": {
+                        "end": 93,
+                        "start": 92
+                      },
+                      "value": 1
+                    },
+                    "kind": "action_stmt",
+                    "source": "1",
+                    "source_span": {
+                      "end": 93,
+                      "start": 92
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{order=cat(order,\"V\");1}",
+              "source_span": {
+                "end": 94,
+                "start": 70
+              }
+            }
+          ],
+          "method": "set_key",
+          "source": "set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})",
+          "source_method": "set_key",
+          "source_span": {
+            "end": 95,
+            "start": 35
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [],
+        "kind": "call",
+        "name": "input_len",
+        "source": "input_len()",
+        "source_method": "input_len",
+        "source_span": {
+          "end": 11,
+          "start": 0
+        }
+      },
+      "source": "input_len().with() {return(value)}.set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})",
+      "source_span": {
+        "end": 95,
+        "start": 0
+      }
+    },
+    "source": "input_len().with() {return(value)}.set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})",
+    "substitution": "return do { my $__ls_set_key_source = do { my $__ls_with_value = do { LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"input_len\") }; my $value = $__ls_with_value; do { $value } }; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{{order=cat(order,\"K\");\"k\"}} = do { $order = do { my @__ls_cat_parts = ($order, \"V\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; \\%__ls_set_key }"
+  },
+  "producer": "use strict;use warnings;use JSON::PP ();use LinkedSpec ();use LinkedSpec::ActionIR::AST::Parser ();\nmy $expr=q{input_len().with() {return(value)}.set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})};\nprint JSON::PP->new->canonical->encode({source=>$expr,ast=>LinkedSpec::ActionIR::AST::Parser::parse_action_expr($expr),substitution=>LinkedSpec::call_spec_handler_subst('Value','return('.$expr.')')}),\"\\n\";\n",
+  "repaired": {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(value)",
+                "source_span": {
+                  "end": 33,
+                  "start": 20
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "variable",
+                          "name": "value",
+                          "source": "value",
+                          "source_span": {
+                            "end": 32,
+                            "start": 27
+                          }
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(value)",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 33,
+                        "start": 20
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(value)",
+                    "source_span": {
+                      "end": 33,
+                      "start": 20
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(value)}",
+              "source_span": {
+                "end": 34,
+                "start": 19
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with() {return(value)}",
+          "source_method": "with",
+          "source_span": {
+            "end": 34,
+            "start": 12
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 34,
+            "start": 19
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "order=cat(order,\"K\");\"k\"",
+                "source_span": {
+                  "end": 68,
+                  "start": 44
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "assign_scalar",
+                      "name": "order",
+                      "source": "order=cat(order,\"K\")",
+                      "source_span": {
+                        "end": 64,
+                        "start": 44
+                      },
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "order",
+                            "source": "order",
+                            "source_span": {
+                              "end": 59,
+                              "start": 54
+                            }
+                          },
+                          {
+                            "kind": "string",
+                            "quote": "\"",
+                            "source": "\"K\"",
+                            "source_span": {
+                              "end": 63,
+                              "start": 60
+                            },
+                            "value": "K"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "cat",
+                        "source": "cat(order,\"K\")",
+                        "source_method": "cat",
+                        "source_span": {
+                          "end": 64,
+                          "start": 50
+                        }
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "order=cat(order,\"K\")",
+                    "source_span": {
+                      "end": 64,
+                      "start": 44
+                    }
+                  },
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "string",
+                      "quote": "\"",
+                      "source": "\"k\"",
+                      "source_span": {
+                        "end": 68,
+                        "start": 65
+                      },
+                      "value": "k"
+                    },
+                    "kind": "action_stmt",
+                    "source": "\"k\"",
+                    "source_span": {
+                      "end": 68,
+                      "start": 65
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{order=cat(order,\"K\");\"k\"}",
+              "source_span": {
+                "end": 69,
+                "start": 43
+              }
+            },
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "order=cat(order,\"V\");1",
+                "source_span": {
+                  "end": 93,
+                  "start": 71
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "assign_scalar",
+                      "name": "order",
+                      "source": "order=cat(order,\"V\")",
+                      "source_span": {
+                        "end": 91,
+                        "start": 71
+                      },
+                      "value": {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "order",
+                            "source": "order",
+                            "source_span": {
+                              "end": 86,
+                              "start": 81
+                            }
+                          },
+                          {
+                            "kind": "string",
+                            "quote": "\"",
+                            "source": "\"V\"",
+                            "source_span": {
+                              "end": 90,
+                              "start": 87
+                            },
+                            "value": "V"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "cat",
+                        "source": "cat(order,\"V\")",
+                        "source_method": "cat",
+                        "source_span": {
+                          "end": 91,
+                          "start": 77
+                        }
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "order=cat(order,\"V\")",
+                    "source_span": {
+                      "end": 91,
+                      "start": 71
+                    }
+                  },
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "kind": "number",
+                      "source": 1,
+                      "source_span": {
+                        "end": 93,
+                        "start": 92
+                      },
+                      "value": 1
+                    },
+                    "kind": "action_stmt",
+                    "source": "1",
+                    "source_span": {
+                      "end": 93,
+                      "start": 92
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{order=cat(order,\"V\");1}",
+              "source_span": {
+                "end": 94,
+                "start": 70
+              }
+            }
+          ],
+          "method": "set_key",
+          "source": "set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})",
+          "source_method": "set_key",
+          "source_span": {
+            "end": 95,
+            "start": 35
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [],
+        "kind": "call",
+        "name": "input_len",
+        "source": "input_len()",
+        "source_method": "input_len",
+        "source_span": {
+          "end": 11,
+          "start": 0
+        }
+      },
+      "source": "input_len().with() {return(value)}.set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})",
+      "source_span": {
+        "end": 95,
+        "start": 0
+      }
+    },
+    "source": "input_len().with() {return(value)}.set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1})",
+    "substitution": "return do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_with_value = do { LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"input_len\") }; my $value = $__ls_with_value; do { $value } }; $__ls_scalar_source }; ref($__ls_selected_default) eq 'HASH' ? (do { my $__ls_set_key_source = $__ls_selected_default; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{do { $order = do { my @__ls_cat_parts = ($order, \"K\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"k\" }} = do { $order = do { my @__ls_cat_parts = ($order, \"V\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; \\%__ls_set_key }) : undef }"
+  },
+  "scope": "finite actual public AST/substitution distinction for reader with-result origin; candidate is getter-sharing/direct-reader-guard epoch before with AST repair, not clean base execution"
+}

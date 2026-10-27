@@ -10,10 +10,11 @@ answers:
   - why does quoted match_has fail while a bare capture name works
   - did the first context scalar probe inspect the correct rule metadata
 date: 2026-10-27
-status: bounded input/cursor target27 frozen; Perl27.1 next; separate compiler/policy28.1 and capture-name29.1 owned
+status: bounded Perl27.1 implemented; independent Rust27.2 next; compiler/policy28.1 and capture-name29.1 owned
 tags: [perl, fluent, source-location, input, cursor, scalar]
 evidence: "TYPE23.1.7 public native/fresh/Value descriptor/substitution packets at af1fda392; input-cursor-results.md and current typed source-location contracts."
 reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/input_cursor_result_continuations.t"
   - "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_context_scalar_results.pl named_input_cursor_defaults direct_input_cursor_defaults input_cursor_consumer_rejection"
 ---
 
@@ -46,3 +47,20 @@ Frozen target/shared fixture and independent27 children preserve eleven readonly
 input/cursor readers, signatures/bounds/kinds/source order/defaults and compatible
 String/Number/inter-type methods. No new helper/type/AST field/callback/write/copy
 or legacy root policy is selected. Full admission stays23.4.
+
+
+Perl27.1 shares the ten zero-argument getter bodies with native contract rewriting
+and uses the existing input_slice lowering. Exactly eleven static source shapes
+now enable typed actual-result dispatch. A first candidate repairs ordinary reader
+chains but loses origin through the legacy trailing-with source rebuild. The
+retained candidate/repaired AST/substitution packet shows the raw block Hash key
+before repair. Folding only reader-owned with prefixes through existing AST nodes
+retains that origin, including fluent prefixes, without changing parser/schema.
+
+Five new native/fresh/Value raw0/unresolved0/ready1 groups pass; expanded with
+controls also pass independently for Array/Hash/Bool results and outer restoration.
+Shared all-spelling output, empty/zero/kinds, source SWC/snapshots, lazy defaults,
+String split/signed/String transitions, typed Number index and operand skips hold.
+Direct defaults13 and source-location contract4 pass. No cursor/bounds/projection,
+callback/control/free/named legacy policy or generated field changes. Rust27.2
+independently follows; full23.4/28.1/29.1/registration/pressure owners remain.
