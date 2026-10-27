@@ -5227,6 +5227,20 @@ final class LinkedSpecRuntimeEngine {
             !receiver.trailingBlockArg &&
             receiver.args.length >= 2;
       }
+      // Only immediate contextual helper bodies join selected-value guards.
+      // Explicit/bound final callbacks retain their existing consumer policies.
+      if (helper == 'with') {
+        final contract = builtinFinalCodeblockContract(
+          CallableSurface.helper,
+          helper,
+        );
+        return receiver.name == helper &&
+            (receiver.sourceMethod ?? receiver.name) == helper &&
+            receiver.args.isNotEmpty &&
+            receiver.args.last.value is ActionCodeblockArgumentExpr &&
+            contract != null &&
+            contract.accepts(receiver.args.length - 1);
+      }
       if (const {'flat', 'flat_array', 'flat_hash'}.contains(helper)) {
         return false;
       }

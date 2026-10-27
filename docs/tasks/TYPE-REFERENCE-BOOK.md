@@ -7028,14 +7028,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing resolution2026-10-28: 2026-10-28 director explicitly authorized git commit --no-verify for the prepared Rust32.2 slice and subsequent focused feature commits until the scheduled document-pressure repair, retaining manual focused checks and full gates before admission/push. Normal commit session10761 completed exit1: eight doctrine checks pass; TASK-TREE-METADATA and README-STABILITY fail on the already-owned pressure debt. Original automatic-review rejection and observed partial/final hook report are retained in the Rust packet. This explicit authorization supersedes local hook-bypass restrictions for the stated feature phase; it does not waive pressure repair or canonical admission. No background job remains.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently implement/check Dart ordinary immediate helper-with result selection.
   Authority: Frozen with-result-selection.md/shared fixture and current backend computed/with/callable contracts; do not infer another backend's failure.
   Acceptance: Establish a small actual baseline before production. Add only canonical metadata-approved immediate contextual helper-with sources with valid zero/one value arity and attached/parenthesized forms, preserving existing receiver-with reads. Use current value_access/segments/kind/error/source/scope/snapshot owners without schema changes. Check typed shared outputs, source/selector/consumer order and scope, specific pure-function/unknown-body diagnostics, legacy callable/deferred/registered contextual fences and malformed with roles. Split an independently confirmed prerequisite before production; already-compatible behavior gets focused regression without invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New bounded native/reconstructed/generated/fresh routes supported by this backend, nearest with/computed/callback boundaries, compile/format/normal registration/book/history/continuity. Safe Lua uses only available PUC5.5.1/LuaJIT and explicit source loads, no unsafe/full runner. No full suite/matrix.
-  Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; declared host and canonical fixture registration remain separately owned.
-  Planned claim verification: none: Prospective finite authored feature/preservation controls; no population measurement.
+  Verification tier: `focused`
+  Focused checks: New Dart target independent refined5pass/1RED -> candidate6pass, native/restored SpecFile-to-recompile/generated-plan; exact legacy computed bound-read1pass. Format/fatal selected analysis/compile/book/map/history/manual continuity checks. No full suite/matrix or standalone emitted package.
+  Canonical trigger: Independent Julia32.4/safe Lua32.5 next; full23.4/new Perl registration23.4.1/excluded deferred readiness31.6.4.4/document-pressure repair20.1/final clean push after feature coverage remain separate.
+  Claim verification: none: Finite authored feature/preservation assertions, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent shared14 three routes already support attached/parenthesized/no-value/signed/nested reads. Selected scalar .take instead yields Array[] and runs bad, producing ABCDEFGHIbadJKLM. Freeze actual callback/body/error/malformed controls; refined unchanged-production target is5pass/1RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: interpreter.dart _isOrdinaryComputedRead does not own helper with selected sources, so _evaluateFluentCallsWithValue omits current actual-kind guards. Parser/contextual normalization/typed reader already work. Unlike Rust's ordinary warning/undef, Dart already diagnoses unknown source and active body helpers; preserve that distinction.
+  - [x] **FIX**: Add only canonical helper with whose final normalized value is ActionCodeblockArgumentExpr and whose value count is accepted by builtinFinalCodeblockContract helper metadata, after registered-function precedence. Reuse current guard; explicit/bound final callable source classification stays unchanged.
+  - [x] **ADDRESSED (verified)**: New6 groups pass shared14 exact values/kinds/order/scoped restoration/snapshots/missing/default/bridges on native/restored SpecFile-to-recompile/plan. Wrong-kind .take skips bad. Nested/pure scopes and current explicit/registered callback-body reads remain healthy.
+  - [x] **NO REGRESSION**: Explicit/bound final sources keep count0/.take effect/B; malformed contextual arity keeps compile code/with/got2. Unknown source/body errors keep unknown_helper/name and pure-function state helper keeps entry_len/specific fence on all routes. One exact existing computed bound-call test passes. Format and selected fatal analysis are clean. No parser/schema/body/unknown/selector/coercion/write/copy-depth expansion.
+  - [x] **LOCKSTEP**: Packet/target/current causal card/map/book and roadmap/task/live/resume distinguish Dart's guard omission and actual callback/error policies. Initial failed file creation from the wrong working directory, observation-only intake and test-only empty-list inference warning receive no product RED credit; explicit Object? typing changes no runtime assertion. New test is normally auto-discovered. Explicit director-authorized focused --no-verify workflow applies until pressure repair; no full admission claim. Julia32.4 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.3 - guard selected immediate Dart with results by their actual kind`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.32.4`
   Status: `pending`
@@ -7063,7 +7071,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.3` | `pending` | Independently implement/check Dart immediate helper-with bracket selection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.32.4` | `pending` | Independently implement/check Julia immediate helper-with bracket selection. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

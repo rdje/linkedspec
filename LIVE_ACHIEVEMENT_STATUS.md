@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust selected immediate with-result kind guards repaired/targeted-checked; independent Dart32.3 next.
+Dart selected immediate with-result kind guards repaired/targeted-checked; independent Julia32.4 next.
 
 ## Latest Completed Slice
 
-Rust immediate with-result selection32.2 now keeps selected actual-kind guards for metadata-approved contextual helper sources. Independent parser/body reads already work; shared14 isolates the excluded-source guard: scalar .take returns[] and runs bad. Refined baseline5pass/1RED precedes candidate6pass native/restored CompiledSpec/generated-plan, shared14 exact kinds/A-M order/scopes/snapshots/missing bridges; one exact legacy bound-call computed-read check passes. Explicit/bound final sources keep existing count0/operand effects, callback-body reads remain valid, pure-function entry_len/body unknown and malformed arity keep specific errors. Initial unknown-source rejection expectation is corrected from the canonical warning/undef policy before callback activity, with no additional product RED or unknown semantic change. Scoped classifier only; parser/reader/schema/body vocabulary stay unchanged. Rustfmt/compile and book/target/retained packet/card/map/task/live/resume align. Dart32.3 next; no full suite/matrix/standalone emitted package/admission/push.
+Dart immediate with-result selected kind guards32.3 are implemented. Independent shared14 source parsing/body reads already work; selected scalar .take yields[]/runs bad because the ordinary computed-read classifier omits helper with. Refined unchanged-production5pass/1RED -> candidate6pass across native/restored SpecFile-to-recompile/generated-plan; exact legacy computed bound-read1pass and format/selected fatal analysis pass. Only canonical metadata/count/normalized contextual role joins existing guards after registered-function precedence. Shared14 kinds/order/scopes/snapshots/default/missing bridges pass; explicit/bound final methods and callback-body reads retain existing rules; unknown source/body, pure-function entry_len and malformed arity retain specific errors. No parser/reader/schema/vocabulary/coercion/write/copy-depth change. Packet/book/target/card/map/task/live/resume align; wrong-cwd setup and observation-only intake get no product RED. Explicit authorized focused commit workflow continues; Julia32.4 next. No full suite/matrix/standalone emitted package/admission/push.
 
 ## Next Action
 
-Activate independent Dart immediate-with selection32.3 from this clean Rust boundary. Read frozen target/shared14 fixture and current Dart computed/with/callable contracts. Establish actual native/restored SpecFile-to-recompile/generated-plan/fresh routes and source/kind/scope/error/explicit/bound/body/malformed controls before production; preserve each backend current boundaries and unknown policy rather than importing Perl or Rust assumptions. Implement only confirmed bounded gap through typed owners, compile/quick focused checks/docs/book/commit; then Julia32.4/safe Lua32.5. Broad23.4/readiness/registration/pressure/declared-host owners remain separate; no full suite/matrix/push.
+Activate independent Julia immediate-with selection32.4 from this clean Dart boundary. Read frozen target/shared14 fixture and current Julia computed/with/callable contracts. Establish actual native/plan/fresh Module source/kind/scope/error/explicit/bound/body/malformed controls before production; preserve Julia existing boundaries rather than importing another backend assumptions. Repair only independently confirmed bounded gap through typed owners; compile/quick focused checks/docs/book/commit, then safe Lua32.5. Director explicitly authorizes --no-verify focused feature commits until document-pressure repair20.1; manual focused checks retained, full gates before admission/push. Broad23.4/readiness/registration/declared-host owners remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.32.3` — Dart selected immediate with-result kind guards repaired/targeted-checked; independent Julia32.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.2` — Rust selected immediate with-result kind guards repaired/targeted-checked; independent Dart32.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.1` — Perl immediate with-result bracket composition repaired/targeted-checked; independent Rust32.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.9` — Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
@@ -29,7 +30,6 @@ Activate independent Dart immediate-with selection32.3 from this clean Rust boun
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` — Julia with-result guards repaired/targeted-checked; safe Lua31.5 next, then priority identity31.6.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.3` — Dart with-result guards repaired/targeted-checked; independent Julia31.4 next; identity31.6 stays P1.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.2.1` — Rust with-result guards repaired; nested identity P1-owned31.6; independent Dart31.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.1` — Perl ordinary eager with Hash-result composition repaired/targeted-checked; independent Rust31.2 next.
 
 ## History
 

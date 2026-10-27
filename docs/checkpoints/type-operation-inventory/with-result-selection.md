@@ -1,7 +1,7 @@
 # Ordinary immediate with-result bracket reads
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.9; implementation family23.3.32.
-Status: bounded Perl32.1/Rust32.2 implemented/targeted-checked; remaining backend children independently follow; full23.4 remains open.
+Status: bounded Perl32.1/Rust32.2/Dart32.3 implemented/targeted-checked; remaining backend children independently follow; full23.4 remains open.
 
 The existing with helper returns its immediate contextual body's actual value.
 At the original Perl intake, receiver-with already supports direct Array/Hash reads;
@@ -114,3 +114,21 @@ is corrected before production, with no extra product RED. Callback-body reads,
 pure-function entry_len and malformed arity boundaries remain. Exact producer/
 source/log packet: with-result-selection-rust-intake.json.gz. No standalone emitted
 package/full suite/matrix; Dart32.3 independently follows, full23.4 stays open.
+
+## Bounded Dart implementation32.3
+
+Independent shared14 already parses/executes immediate source reads. The selected
+scalar instead reaches Array .take, yielding[]/bad. _isOrdinaryComputedRead lacks
+helper-with ownership. Only canonical helper spelling with normalized contextual
+ActionCodeblockArgumentExpr and existing builtin metadata-approved arity now joins
+current selected actual-kind guards, after registered-function precedence.
+
+Refined unchanged-production5pass/1RED -> candidate6pass covers native/restored
+SpecFile-to-recompile/generated-plan; exact legacy bound-read1pass and fatal
+selected analysis pass. Explicit/bound callback sources keep count0/operand effects;
+callback-body reads work already. Unknown source/body and function entry_len keep
+specific errors, unlike Rust's ordinary unknown-source warning policy. No parser,
+reader/schema/vocabulary/coercion/write/copy-depth expansion. Retained packet:
+with-result-selection-dart-intake.json.gz. Initial wrong-cwd file creation failed
+before writing and receives no product RED credit; actual source baseline follows
+corrected setup. No standalone package/full suite/matrix; Julia32.4 next.

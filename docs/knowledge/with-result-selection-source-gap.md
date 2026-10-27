@@ -7,12 +7,13 @@ answers:
   - "which task owns direct with result bracket reads"
   - "does immediate with selection admit deferred callback reads"
   - "why does Rust run Array operands after selecting a scalar from with"
+  - "why does Dart run Array operands after selecting a scalar from with"
   - "does Rust unknown with source warn or reject before callback activity"
-date: 2026-10-27
-status: bounded Perl32.1/Rust32.2 repaired; remaining backends/full admission next
-tags: [perl, rust, with, selection, fluent, scope, computed]
+date: 2026-10-28
+status: bounded Perl32.1/Rust32.2/Dart32.3 repaired; remaining backends/full admission next
+tags: [perl, rust, dart, with, selection, fluent, scope, computed]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.9; activationad752f204ea99e928c757184d8e58a130111cba2; with-result-selection-intake.json.gz retains eight public source pairs and exact raw channels."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test with_result_selection"
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/with_result_selection.t; bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test with_result_selection; cd dart && bash ../tools/run_dart_project_data.sh test test/with_result_selection_test.dart"
 ---
 
 At the recorded clean base, direct helper-with Array/Hash/no-value/parenthesized
@@ -37,7 +38,7 @@ Preserve existing receiver forms and delayed/bound/opaque/registered callback
 read/vocabulary/raw-status boundaries. Explicit mutation, selector-coercion,
 unknown-body and pure-function parser-state fences remain separately governed.
 
-The fourteen-coordinate shared fixture is normative. Recorded Perl/Rust bounded
+The fourteen-coordinate shared fixture is normative. Recorded Perl/Rust/Dart bounded
 execution is below; remaining backend children start with their own baseline.
 No other backend failure or full context/portable/generated admission is inferred.
 Full23.4, excluded deferred readiness31.6.4.4, canonical fixture
@@ -104,3 +105,19 @@ The ordinary with value operand runs before callback activity; all routes retain
 String1, while missing() inside the active body diagnoses. No unknown-call repair
 or extra semantic RED is claimed. Packet with-result-selection-rust-intake.json.gz
 retains actual source inputs/refinements/channels. Dart32.3 next; full23.4 separate.
+
+## Current bounded Dart32.3
+
+Dart already supports immediate helper-with brackets and ordinary/registered
+callback-body reads. _isOrdinaryComputedRead omits this source, so scalar-selected
+Array consumers run their operands and yield[]. Only canonical with with normalized
+ActionCodeblockArgumentExpr and builtin helper metadata arity now joins the existing
+guard after registered-function precedence. Explicit/bound finals keep their current
+count0/.take policies. Refined baseline5pass/1RED precedes candidate6pass across
+native/restored SpecFile-to-recompile/generated-plan; exact bound-call compatibility
+and selected fatal analysis pass. Dart's unknown source/body calls already diagnose
+and remain strict; no Rust warning/undef policy is imported. Entry_len/malformed
+arity and scopes/order/snapshots/missing bridges are preserved. No parser/reader/
+schema/vocabulary expansion. Packet with-result-selection-dart-intake.json.gz keeps
+sources/channels and discloses the failed wrong-cwd setup separately from RED.
+Julia32.4 next; full23.4 separate.
