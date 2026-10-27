@@ -84,3 +84,12 @@ literal quoting, legacy tag atoms, kinds/DSL copy bounds and earlier snapshots.
 Empty source still gives zero records under Perl pure split but fields run once;
 a,b, now has three records with the same captured field. No global split policy
 or SDK deep-copy promise changes. Scalar receiver22.1.2 remains the next unit.
+
+## Perl receiver22.1.2 partial completion
+
+The String receiver return-family map includes tagged records beside split; its
+input is text and its output is Array. AST/compatibility chains reject fewer than
+two RHS operands before effects. Native/fresh shared valid/local shape PASS12:
+named/literal/trim source, regex/trailing item, selected Number/Bool/null/Array/Hash
+continuation, numeric selector and SDTFCE snapshots. Direct producer/String PASS43.
+Independent Rust22.2 follows; this is not full SESSION33 split-domain admission.

@@ -11,9 +11,9 @@ answers:
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
 date: 2026-10-27
-status: bounded Perl eager producer repaired; receiver and full split-domain admission remain owned
+status: bounded Perl eager producer and receiver repaired; full split-domain admission remains owned
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
-evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 and SESSION33 broad admission remain. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
+evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
 reverify: "For current Perl producer run bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/tagged_record_producer_contract.t. Historical comparisons below retain their original scope; rebuild the Rust CLI before the paired Rust/Perl controls. Older Lua observations remain separately reproducible and dated."
 ---
 
@@ -25,8 +25,10 @@ even when splitting produces no records; map only assembles captured values.
 Literal regex flags, dynamic literal delimiters, legacy tag atoms and carried
 kinds/DSL copy bounds are preserved. Native/fresh t/tagged_record_producer_contract.t
 passes36 assertions after observed RED; direct ordinary split stays unchanged.
-Earlier source/delimiter/tag/field values survive later rebinding. Receiver22.1.2
-still follows; SESSION33 retains full split-domain/cross-runtime/context admission.
+Earlier source/delimiter/tag/field values survive later rebinding. Receiver22.1.2 now classifies text input/Array output alongside split and rejects
+fewer than two RHS operands before effects. Its shared valid/local shape native/fresh
+regression passes12 assertions; Number/Bool/null/Array/Hash field continuations and
+SDTFCE source/operand/consumer order pass. SESSION33 retains full split-domain/cross-runtime/context admission.
 The old per-row/zero-field Perl results below describe the historical defect.
 
 ## Historical producer and cross-runtime split observations

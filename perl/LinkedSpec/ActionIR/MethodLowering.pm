@@ -4701,6 +4701,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;
    return 'undef' if $method eq 'coalesce' && !@$aggregate_args;
+   return 'undef' if $method eq 'split_tagged_records' && @$aggregate_args < 2;
    if (_is_scalar_string_receiver_value_chain_method($method)) {
     return 'undef' unless defined($ast_value_only_call_method->($method, 1 + @$aggregate_args));
    }
@@ -7842,7 +7843,7 @@ sub _string_receiver_value_chain_return_family {
  return 'default_result' if $method eq 'coalesce' || $method eq 'coalesce_nonempty';
  return 'selected' if $method eq 'length';
  return 'scalar_result' if _is_scalar_string_receiver_value_chain_method($method);
- return 'array' if $method =~ /^(?:split)$/o;
+ return 'array' if $method =~ /^(?:split|split_tagged_records)$/o;
  return 'scalar_result' if $method =~ /^(?:starts_with|ends_with|contains_substr|matches|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|is_defined|is_undefined)$/o;
  return undef
 }
@@ -8109,6 +8110,7 @@ sub _normalize_string_receiver_value_chain_expr {
   my $method = $call->{method} // '';
   my @args = @{$call->{args} || []};
   my $is_last = ($idx == $#calls) ? 1 : 0;
+  return 'undef' if $method eq 'split_tagged_records' && @args < 2;
   _trace_method_decision(
    phase => 'normalize_string_receiver_value_chain_expr',
    label => 'receiver_chain',
