@@ -1,7 +1,7 @@
 # Ordinary Perl mark-name roles and readiness
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.42; target freeze42.0.
-Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 repaired/targeted-checked; advancing42.2.3 next; wider42.3 separate.
+Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 repaired/targeted-checked; advancing42.2.3 repaired/targeted-checked; range42.5 immediate next, wider42.3 separate.
 
 The helper catalog declares logical String mark-name arguments. The complete
 named-mark contract explicitly makes a bare identifier symbolic rather than a
@@ -141,3 +141,14 @@ invalid new fixture layout; public source/separator authority isolates it before
 test-only layout/ASCII-output correction, with exact other15 preservation and no
 extra product RED credit. Packet: mark-name-readonly-text-intake.json.gz.
 42.2.3 advancing/bridge follows; function/deferred/domain/admission limits stay.
+
+42.2.3 is now repaired/targeted-checked: unchanged22 groups17RED/final22pass,
+nearest readonly ordering2 and both module syntax pass. Original nine named
+advancing/bridge bodies plus final historical7 Number/5 text/10 writer controls
+are byte-identical, preserving old operation/trace spellings and endpoint moves.
+Anonymous capture_take() and bare bound bridge0 remain legacy; new bridge names
+are statement-only. Feature packet: mark-name-advancing-intake.json.gz.
+Independent legacy19 exposes two old local-start take reversed errors;42.5 owns
+their documented undef/no-advance guards immediately next/before39, with original
+inputs and strict framework-prefix parsing in mark-advance-legacy-intake.json.gz.
+Do not claim those errors or native delivery41/pre-match40/wider42.3 are resolved.

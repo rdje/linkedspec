@@ -780,12 +780,13 @@ sub _named_mark_write_statement_arity {
   mark_entry_start => 1, mark_entry_end => 1,
   mark_match_start => 1, mark_match_end => 1,
   mark_copy => 2, mark_capture_slice => 1, clear_mark => 1,
+  start_capture_slice_from => 1,
  };
  return defined($method) ? $arity->{$method} : undef
 }
 
 sub _named_mark_write_statement_method_re {
- state $methods = qr/(?:mark_(?:input_start|input_end|here|entry_start|entry_end|match_start|match_end|copy|capture_slice)|clear_mark)/o;
+ state $methods = qr/(?:mark_(?:input_start|input_end|here|entry_start|entry_end|match_start|match_end|copy|capture_slice)|clear_mark|start_capture_slice_from)/o;
  return $methods
 }
 
@@ -794,10 +795,22 @@ sub _readonly_named_mark_method_re {
  return $methods
 }
 
+sub _named_mark_advance_method_re {
+ state $methods = qr/(?:capture_take(?:_len_from|_rest_from|_rest_len_from|_until_cursor_from|_until_cursor_len_from|_between|_between_len)?)/o;
+ return $methods
+}
+
+sub _named_mark_value_method_re {
+ state $readers = _readonly_named_mark_method_re();
+ state $advances = _named_mark_advance_method_re();
+ state $methods = qr/(?:$readers|$advances)/o;
+ return $methods
+}
+
 sub _named_mark_statement_method_re {
  state $writers = _named_mark_write_statement_method_re();
- state $readers = _readonly_named_mark_method_re();
- state $methods = qr/(?:$writers|$readers)/o;
+ state $values = _named_mark_value_method_re();
+ state $methods = qr/(?:$writers|$values)/o;
  return $methods
 }
 
@@ -817,6 +830,9 @@ sub _named_mark_write_statement_body_expr {
  return undef unless defined($arity) && @marks == $arity;
  $label = '' unless defined $label;
  my $mark = $marks[0];
+ if ($method eq 'start_capture_slice_from') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "start_capture_slice_from"); defined($__ls_mark) ? ($IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_mark, "start_capture_slice_from")) : undef }';
+ }
  if ($method eq 'clear_mark') {
   return 'do { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', '.$mark.') }';
  }
@@ -939,6 +955,63 @@ sub _readonly_named_mark_text_body_expr {
   : '$LSPOS - length($LMATCH)';
  return 'do { my $__ls_mark = '.$reads[0]
   .'; defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, '.$end.', '.$operation.') : undef }'
+}
+
+# Named advancing value forms retain each original endpoint, movement and
+# trace operation. New name representations reuse the existing argument owner.
+sub _named_mark_advance_arity {
+ my ($method) = @_;
+ state $arity = {
+  capture_take => 1,
+  capture_take_len_from => 1,
+  capture_take_rest_from => 1,
+  capture_take_rest_len_from => 1,
+  capture_take_until_cursor_from => 1,
+  capture_take_until_cursor_len_from => 1,
+  capture_take_between => 2,
+  capture_take_between_len => 2,
+ };
+ return defined($method) ? $arity->{$method} : undef
+}
+
+sub _named_mark_advance_value_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _named_mark_advance_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
+ return undef if grep { !defined($_) || ref($_) || !/\A\w+\z/o } @marks;
+ return _named_mark_advance_body_expr($label, $method, map { "'".$_."'" } @marks)
+}
+
+sub _named_mark_advance_body_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _named_mark_advance_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
+ $label = '' unless defined $label;
+ if ($method eq 'capture_take') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take"); if (defined($__ls_mark)) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', pos $$STRING, "capture_take"); '. _build_mark_trace_call(operation => 'capture_take', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }';
+ }
+ if ($method eq 'capture_take_len_from') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_len_from"); if (defined($__ls_mark)) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', pos $$STRING, "capture_take_len_from"); '. _build_mark_trace_call(operation => 'capture_take_len_from', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }';
+ }
+ if ($method eq 'capture_take_rest_from') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_rest_from"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_from"); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_end, "capture_take_rest_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', $__ls_end, "capture_take_rest_from"); '. _build_mark_trace_call(operation => 'capture_take_rest_from', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }';
+ }
+ if ($method eq 'capture_take_rest_len_from') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_rest_len_from"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_len_from"); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_end, "capture_take_rest_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', $__ls_end, "capture_take_rest_len_from"); '. _build_mark_trace_call(operation => 'capture_take_rest_len_from', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }';
+ }
+ if ($method eq 'capture_take_until_cursor_from') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_until_cursor_from"); my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_cursor, "capture_take_until_cursor_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', $__ls_cursor, "capture_take_until_cursor_from"); '. _build_mark_trace_call(operation => 'capture_take_until_cursor', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }';
+ }
+ if ($method eq 'capture_take_until_cursor_len_from') {
+  return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_until_cursor_len_from"); my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_cursor, "capture_take_until_cursor_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', $__ls_cursor, "capture_take_until_cursor_len_from"); '. _build_mark_trace_call(operation => 'capture_take_until_cursor_len', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }';
+ }
+ if ($method eq 'capture_take_between') {
+  return 'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[1].', "capture_take_between"); if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_start, $__ls_end, "capture_take_between"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', $__ls_end, "capture_take_between"); '. _build_mark_trace_call(operation => 'capture_take_between', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }';
+ }
+ if ($method eq 'capture_take_between_len') {
+  return 'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[0].', "capture_take_between_len"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[1].', "capture_take_between_len"); if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_start, $__ls_end, "capture_take_between_len"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$marks[0].', $__ls_end, "capture_take_between_len"); '. _build_mark_trace_call(operation => 'capture_take_between_len', label => $label, mark_name_expr => $marks[0], mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }';
+ }
+ return undef
 }
 
 # Contracts that normalize capture and cursor-control helpers.
@@ -1178,7 +1251,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bstart_capture_slice_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "start_capture_slice_from"); defined($__ls_mark) ? ($IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_mark, "start_capture_slice_from")) : undef }'
+     _named_mark_write_statement_expr($label, 'start_capture_slice_from', $+{mark})
     }gex;
     return $code
    },
@@ -1371,7 +1444,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take"); if (defined($__ls_mark)) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', pos $$STRING, "capture_take"); '. _build_mark_trace_call(operation => 'capture_take', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take', $+{mark})
     }gex;
     return $code
    },
@@ -1386,7 +1459,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_len_from"); if (defined($__ls_mark)) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', pos $$STRING, "capture_take_len_from"); '. _build_mark_trace_call(operation => 'capture_take_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_len_from', $+{mark})
     }gex;
     return $code
    },
@@ -1431,7 +1504,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_rest_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_rest_from"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_from"); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_end, "capture_take_rest_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_end, "capture_take_rest_from"); '. _build_mark_trace_call(operation => 'capture_take_rest_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_rest_from', $+{mark})
     }gex;
     return $code
    },
@@ -1446,7 +1519,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_rest_len_from"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_len_from"); if (defined($__ls_mark) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_end, "capture_take_rest_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_end, "capture_take_rest_len_from"); '. _build_mark_trace_call(operation => 'capture_take_rest_len_from', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_rest_len_from', $+{mark})
     }gex;
     return $code
    },
@@ -1491,7 +1564,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_until_cursor_from"); my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_cursor, "capture_take_until_cursor_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_cursor, "capture_take_until_cursor_from"); '. _build_mark_trace_call(operation => 'capture_take_until_cursor', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_until_cursor_from', $+{mark})
     }gex;
     return $code
    },
@@ -1506,7 +1579,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_take_until_cursor_len_from"); my $__ls_cursor = pos $$STRING; if (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_cursor, "capture_take_until_cursor_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_cursor, "capture_take_until_cursor_len_from"); '. _build_mark_trace_call(operation => 'capture_take_until_cursor_len', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_until_cursor_len_from', $+{mark})
     }gex;
     return $code
    },
@@ -1551,7 +1624,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_take_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_take_between"); if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_start, $__ls_end, "capture_take_between"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{start}.'\', $__ls_end, "capture_take_between"); '. _build_mark_trace_call(operation => 'capture_take_between', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_between', $+{start}, $+{end})
     }gex;
     return $code
    },
@@ -1566,7 +1639,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_between_len\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_take_between_len"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_take_between_len"); if (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_start, $__ls_end, "capture_take_between_len"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{start}.'\', $__ls_end, "capture_take_between_len"); '. _build_mark_trace_call(operation => 'capture_take_between_len', label => $label, mark_name => $+{start}, mark_pos_expr => '$__ls_new_mark') .'; $__ls_capture_len } else { undef } }'
+     _named_mark_advance_value_expr($label, 'capture_take_between_len', $+{start}, $+{end})
     }gex;
     return $code
    },

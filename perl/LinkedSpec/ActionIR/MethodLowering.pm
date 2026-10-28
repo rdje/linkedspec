@@ -1430,7 +1430,7 @@ sub _mark_name_arguments_expr {
   .'&& $__ls_mark_name =~ /\A\w+\z/; } '.$body.' }'
 }
 
-sub _lower_named_mark_readonly_call {
+sub _lower_named_mark_value_call {
  my ($call, $deps) = @_;
  my $method = $call->{method};
  return _actionir_ast_unsupported_helper_expr($method)
@@ -1440,6 +1440,11 @@ sub _lower_named_mark_readonly_call {
  my $owner = '_readonly_named_mark_number';
  unless (defined($arity)) {
   $owner = '_readonly_named_mark_text';
+  $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', $owner.'_arity', $method);
+ }
+ unless (defined($arity)) {
+  $owner = '_named_mark_advance';
   $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
    __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', $owner.'_arity', $method);
  }
@@ -6124,11 +6129,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
  }
  # Resolve this governed argument role before generic AST fallback can retain a
  # raw call or reinterpret a nested control expression as a host return.
- state $readonly_mark_methods = LinkedSpec::OwnerDispatch::dispatch_owner_call(
-  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_method_re');
- if ($trimmed =~ /\A(?:$readonly_mark_methods)\s*\(/o) {
-  my $named_number_call = $parse_method_function_expr->($trimmed);
-  return _lower_named_mark_readonly_call($named_number_call, $deps) if $named_number_call;
+ state $named_mark_value_methods = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_named_mark_value_method_re');
+ if ($trimmed =~ /\A(?:$named_mark_value_methods)\s*\(/o) {
+  my $named_mark_call = $parse_method_function_expr->($trimmed);
+  # The zero-argument anonymous overload keeps its existing owner and effects.
+  return _lower_named_mark_value_call($named_mark_call, $deps)
+   if $named_mark_call && !($named_mark_call->{method} eq 'capture_take'
+    && !@{$named_mark_call->{args} || []});
  }
  # Compatibility helpers still receive authored grouped assignment operands.
  # Admit only those typed assignments; retain the bridge for other raw forms.

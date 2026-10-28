@@ -1,7 +1,10 @@
 ---
 id: perl-mark-name-argument-readiness-gap
-title: Perl ordinary readonly mark readers and write statements share ordered String word-name lowering
+title: Perl ordinary named capture and mark calls share ordered String word-name lowering
 answers:
+  - "can Perl capture_take accept quoted or computed mark names"
+  - "does capture_take with no arguments remain anonymous"
+  - "can start_capture_slice_from accept a computed String name"
   - "can capture_from and mark_exists accept computed names in Perl"
   - "do unused named readonly calls evaluate name arguments"
   - "can Perl mark_input_end accept quoted or computed names"
@@ -12,7 +15,7 @@ answers:
   - "why does quoted capture_len_between report ready1"
   - "which task owns mark-name argument validation and readiness"
 date: 2026-10-28
-status: readers42.1/42.2.2 and writer statements42.2.1 repaired; advancing42.2.3 next; wider and bare Unicode42.3 separate
+status: bounded42.1/42.2.1-.3 targeted-checked; reversed guards42.5 immediate next; wider and bare Unicode42.3 separate
 tags: [perl, marks, arguments, readiness, diagnostics, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.0 retains actual quoted/evaluated/bare-shadowing controls, source/emitted bytes/metadata/channels in named-mark-number-authority.json.gz."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/mark_name_number_arguments.t"
@@ -143,3 +146,24 @@ output to remove Test2 formatter warnings; exact inverse preserves other15 cases
 Production is unchanged for the refinement, with no extra product RED credit.
 Actual epochs: mark-name-readonly-text-intake.json.gz. Advancing42.2.3, native
 delivery41, bare Unicode/wider42.3 and full source-context23.4 remain separate.
+
+## Advancing value and bridge names42.2.3
+
+Eight named take values now use the same ordered names through sole original
+bodies. New bridge name expressions use statement roles; existing bare bound
+result0 remains legacy. Zero-arg capture_take value and unused anonymous effects
+retain their old owner. All22 unchanged source groups go17failed to22pass; five
+old controls were already healthy. Original9 named bodies and final historical7
+Number/5 text/10 writer controls remain byte-identical, including old until-cursor
+trace spellings. Nearest readonly ordering2 and both changed module syntax pass.
+String/Number snapshots, empty/zero/missing/guarded-reversed spans, distinct local/
+cursor/EOF/between advances, Unicode word Strings/EOF bridge, local returns/order,
+specific static/runtime guards and all9 function fences are preserved.
+
+Before-code19 legacy sources expose two different old local-start take reversed
+errors. [[perl-local-start-named-take-reversed-span-gap]] owns42.5 immediately next;
+they are not credited as correct undef behavior. Native child loss41 and pre-match
+endpoint40 stay separate. mark-name-advancing-intake.json.gz retains feature22
+and exact source/body inputs; mark-advance-legacy-intake.json.gz retains independent
+legacy19 and strict four-line framework-prefix handling, including initial JSON
+reader instrumentation failure. Wider/bare Unicode42.3/full23.4 remain open.

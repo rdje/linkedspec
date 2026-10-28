@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Readonly Perl text/predicate names and unused readonly calls repaired; advancing42.2.3 next.
+Advancing/bridge String word names targeted-checked; immediate two-guard range repair42.5 next.
 
 ## Latest Completed Slice
 
-Four ordinary named text readers and mark_exists now share ordered String word-name lowering with seven Number readers. Five original primitive bodies, seven Number bodies and ten writer bodies remain byte-identical in final public probes. One readonly call owner preserves each existing arity/body/type/provenance, snapshots names once before mark reads, and enforces static/helper/runtime guards. Existing standalone statement recognition now also reaches all12 readonly calls: independent before substitutions retain all12 raw, final source/effect oracle executes all12 names once in order and discards results. Initial16-source baseline fails15 including one invalid new fixture newline before .cat; candidate repairs14 valid failing groups, leaving only that invalid layout. Public emitted/substitution twin and canonical separator contract show depth-zero newline starts a new statement. Join only the fixture expression and use ASCII JSON diagnostics to remove Test2 formatting warnings, exact inverse verified; no production change or extra product RED credit. Final scoped16 pass; nearest Number ordering/function2 and three module syntax pass. Missing/reversed/empty/defined-default/String snapshot/local-return/symbolic/quoted Unicode/control/arity/function and controlled invalid runtime-name cases pass. Packet binds actual producer/input/result/refinement epochs. Native error delivery41, advancing42.2.3, wider/bare Unicode42.3 and full23.4 remain separate. Book/card/map/task/live/resume/roadmap/history align; focused authorized commit/no full gate/push.
+Eight ordinary named advancing capture values and start_capture_slice_from statement names now reuse governed ordered String word-name capture/validation through sole original bodies. Unchanged22-source groups go17failed before code to22pass, with five old bare/anonymous/bridge/function controls already healthy. Original nine named bodies plus historical seven Number/five text/ten writer controls are byte-identical in current public probes, preserving native returns, endpoint/movement and operation/trace spellings. Shared named value-call owner handles Number/text/advance families; the anonymous zero-argument capture_take overload stays with its old owner. New bridge name representations remain statement effects; bare bound bridge result0 stays legacy. Exact eager name2-moves-start, local returns, completed String/Number snapshots, empty/zero/defaults, missing and already-guarded cursor/between reversal, Word shadow/numeric0, Unicode word Strings/EOF bridge, arity/unknown/direct-control/new value-role guards, all9 pure-function fences and controlled runtime name failures pass. Nearest readonly ordering2 and both changed module syntax pass. Public19-case legacy intake separately roots two old local-start reversed-span errors in omitted range guards;42.5 owns an immediate repair after this clean feature commit/before39, with native child loss41 and pre-match40 separate. Legacy and feature packets retain actual producer/input/result/Word-body epochs and strict known-prefix parsing, no hidden error success claim. Book/card/map/task/live/resume/roadmap/history align. Focused authorized commit; no full gate/push.
 
 ## Next Action
 
-Activate42.2.3 from this clean readonly boundary. Apply the same governed String word-name owner to eight existing named advancing span forms plus start_capture_slice_from, preserving original primitive bodies, overloads/aliases, effects/return values and statement/value/function/deferred roles. Establish targeted public/body/source RED then implement/quick focused checks/docs/commit. Then39/38/37/40/41; wider/bare Unicode42.3 after feature coverage/before full23.4. Authorized focused --no-verify continues.
+Activate42.5 immediately from this clean42.2.3 feature boundary, before39. Add the documented reversed-local-start guards for capture_take(name)/capture_take_len_from(name) in the sole shared bodies. Reproduce actual Word/new-name failures with public native/fresh metadata and continued post-call mark/boundary/cursor reads, fix lazy range guards without weakening SourceLocation validation or broadening pre-match policy40, focused tests/docs/commit. Then39/38/37/40/41; wider/bare Unicode42.3 and full23.4 remain after feature coverage. Authorized focused --no-verify continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.3` — Advancing/bridge String word names targeted-checked; immediate two-guard range repair42.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.2` — Readonly Perl text/predicate names and unused readonly calls repaired; advancing42.2.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.1` — Ten ordinary Perl mark write statements support governed String names; readonly42.2.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.1` — Ordinary Perl named Number readers accept governed ordered String word names;42.2 remaining names next.
@@ -29,7 +30,6 @@ Activate42.2.3 from this clean readonly boundary. Apply the same governed String
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.0` — Named-mark34 target/owners frozen; Perl34.1 next, argument-readiness42 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.5` — Safe Lua reset102 plus Number155 pass per host; all bounded35 checked, named-mark34.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.4` — Julia reset block70 plus Number75 pass; no runtime edit, safe Lua35.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.35.3` — Dart reset block3 plus Number6/fresh14 pass; no runtime edit, Julia35.4 next.
 
 ## History
 
