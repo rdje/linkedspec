@@ -100,12 +100,13 @@ return([original,snapshot,capture_slice_pos(),order]);'''),
       ],
     );
   });
-  test('entry setup zero stays defined and does not run a lazy fallback', () {
+  test('defined capture-boundary position zero skips a lazy fallback', () {
+    // The missing local-match endpoint width is diagnostic-only under40.
     check(
-      r'''Top:: I {order="";primitive=[capture_slice_len(),capture_slice_pos(),capture_slice_line(),capture_slice_col(),capture_slice_until_cursor_len(),capture_rest_len()];value=capture_slice_len().coalesce({order=cat(order,"F");7}).add(1);return([primitive,value,order])}''',
+      r'''Top:: I {order="";primitive=[capture_slice_pos(),capture_slice_line(),capture_slice_col(),capture_slice_until_cursor_len(),capture_rest_len()];zero=capture_slice_pos().coalesce({order=cat(order,"F");7}).add(1);return([primitive,zero,order])}''',
       'x',
       [
-        [0, 0, 1, 1, 0, 1],
+        [0, 1, 1, 0, 1],
         1,
         '',
       ],

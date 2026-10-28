@@ -1,7 +1,7 @@
 # Readonly anonymous capture-boundary Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.10; bounded implementation33.1-.5.
-Status: bounded Perl33.1 repaired/Rust33.2 method-compatible; bounded Default/OR prerequisite36 is targeted-checked across recorded backends/hosts, Dart33.3/Julia33.4 compatibility is targeted-checked; immediate Dart test-scope33.3.1 then safe Lua33.5 follows. Formal source/context/admission remains23.4.
+Status: bounded Perl33.1 repaired/Rust33.2 method-compatible; bounded Default/OR prerequisite36 is targeted-checked across recorded backends/hosts, Dart33.3/Julia33.4 compatibility is targeted-checked; Dart test-scope33.3.1 is verified and safe Lua33.5 follows. Formal source/context/admission remains23.4.
 Named mark/width gaps are P1 family34; value-block capture mutation is P1 family35 immediately after33 and before34. Neither is folded into this slice.
 
 ## Existing authority and observed gap
@@ -165,3 +165,13 @@ neither current result is newly admitted as portable. Normal33.4 zero coverage
 uses defined positions rather than that unsettled width. Immediate test-only
 33.3.1 refines Dart's new zero test similarly; original observed outputs remain
 diagnostic evidence, with no runtime rebasing. Then safe Lua33.5 continues.
+
+## Dart test-scope followup33.3.1
+
+The six normal Dart groups still pass after isolating the zero control to defined
+capture-boundary position/line/column/through-cursor/rest values. It no longer
+asserts capture_slice_len0 without a local-match endpoint. Original0 and Julia
+null/reference warnings remain intact in diagnostic packets under40; no runtime
+rebasing or new absence policy is introduced. All matched-context/alias/snapshot/
+legacy/function/callback checks remain unchanged. Exact before/after and outputs:
+capture-boundary-number-dart-zero-scope.json.gz. Safe Lua33.5 independently follows.

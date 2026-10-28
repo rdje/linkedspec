@@ -11209,7 +11209,7 @@ _Capture width before a local match differs and Perl zero uses unset position ar
 ### capture-boundary-number-dart-method-compatibility
 _Dart readonly anonymous capture Number sources already compose through ordinary methods_
 - **answers:** does Dart capture_rest_len support coalesce and String methods | can Dart anonymous capture Number readers feed Array selection | which Dart capture Number aliases retain function-state errors
-- **date:** 2026-10-28 · **status:** bounded33.3 targeted-checked without runtime edits; Julia/safe Lua intake and full admission open
+- **date:** 2026-10-28 · **status:** bounded33.3/33.3.1 targeted-checked without runtime edits; safe Lua/full admission and endpoint40 open
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.33.3 at clean7e366408c; capture-boundary-number-dart-intake.json.gz contains actual sources, generated libraries/caller, outputs and strict verifier.`
 - **reverify:** `cd dart && bash ../tools/run_dart_project_data.sh test test/capture_boundary_number_results_test.dart test/entry_match_number_results_test.dart`
 - **source:** [`docs/knowledge/capture-boundary-number-dart-method-compatibility.md`](docs/knowledge/capture-boundary-number-dart-method-compatibility.md)
@@ -11225,7 +11225,7 @@ _Julia readonly capture Number sources already compose through ordinary methods_
 ### capture-boundary-number-result-lowering-gap
 _Capture and mark Number sources need early method-value lowering_
 - **answers:** can capture_rest_len compose with coalesce and String methods directly | why does mark_pos sub fail as an anonymous subroutine declaration | why does capture_len_between coalesce call an undefined host function | which task owns readonly capture boundary Number fluent composition | does capture Number ready1 metadata prove generated execution | why does start_capture_slice inside a method value block fail compilation | which task owns value block capture boundary mutation
-- **date:** 2026-10-28 · **status:** bounded Perl repaired/Rust/Dart/Julia compatible; Dart test-scope33.3.1 then Lua33.5; endpoint40 owned
+- **date:** 2026-10-28 · **status:** bounded Perl repaired/Rust/Dart/Julia compatible; Dart test-scope33.3.1 verified, Lua33.5 next; endpoint40 owned
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/capture_boundary_number_results.t` · `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_boundary_number_results`
 - **source:** [`docs/knowledge/capture-boundary-number-result-lowering-gap.md`](docs/knowledge/capture-boundary-number-result-lowering-gap.md)

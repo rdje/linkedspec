@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: bounded Perl repaired/Rust/Dart/Julia compatible; Dart test-scope33.3.1 then Lua33.5; endpoint40 owned
+status: bounded Perl repaired/Rust/Dart/Julia compatible; Dart test-scope33.3.1 verified, Lua33.5 next; endpoint40 owned
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -116,3 +116,7 @@ fresh uninitialized LSPOS warnings. [[capture-boundary-before-match-policy-diver
 owns40 before admission. New normal zero coverage uses defined positions; immediate
 33.3.1 quarantines the unset-endpoint width assumption in Dart's recent test.
 No choice of zero versus unavailable, runtime rebasing or policy admission here.
+
+33.3.1 completes the immediate Dart test-scope correction: six groups pass using
+defined position zero, with the original no-match width retained diagnostically
+under40. Runtime remains unchanged and safe Lua33.5 is next.

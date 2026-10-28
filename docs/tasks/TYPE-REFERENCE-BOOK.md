@@ -7156,7 +7156,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2 - lock Rust capture Number flow and own active-edge dispatch prerequisite`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3`
-  Status: `in_progress` / method compatibility committed75365a176; immediate test-scope33.3.1
+  Status: `completed` / method compatibility75365a176 plus isolated test-scope33.3.1 verified
   Goal: Independently establish/lock Dart readonly anonymous capture-boundary Number method composition.
   Authority: Frozen33 target/shared11 and existing source/method/function/alias contracts; packet capture-boundary-number-dart-intake.json.gz retains all actual source/normal-test/generated-library/caller/output epochs and strict verifier.
   Verification tier: `focused`
@@ -7171,6 +7171,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: Fresh Dart VM caller independently loads emitted libraries for all seven intake sources and verifies five exact values/two expected typed errors. It shares current project package configuration, not an isolated package workspace. JSON encoding distinguishes Bool/Number; actual generated libraries/caller and all outputs retained. Fatal analysis/format pass; no runtime diff or new normal-test temporary owner. Named marks/advancing/brackets/void-block/callback vocabulary/copy/arity remain outside this source grant.
   - [x] **LOCKSTEP**: Target/causal card/current Dart card/map and public book now include verified Dart compatibility with correctly scoped Perl named-mark/void-block caveats. Refresh stale dispatch-next/ignored-regression pointer to completed bounded36 and enabled Rust regression. Roadmap/task/live/resume/history agree; Julia33.4 independently next, formal admission and owned adjacent defects remain separate.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3 - lock Dart readonly capture Number method compatibility`.
+
+  Current scope qualification33.3.1: The retained initial-I capture_slice_len0 observation is diagnostic under40, not portable endpoint authority. Normal zero coverage now uses defined positions only; the current matched-context method target is unchanged.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.4`
   Status: `completed`
@@ -7453,14 +7455,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1`
-  Status: `pending` / P1 immediately after33.4 before33.5
-  Goal: Remove unsettled no-local-match capture-width semantics from the new Dart compatibility regression while retaining portable position-zero coverage.
-  Reproduction: New33.3 entry-setup case fixes capture_slice_len at0. Independent33.4 calibration finds Julia null; reference Perl returns0 but fresh emission warns about uninitialized LSPOS subtraction and its emitted expression uses unset package LSPOS/LMATCH. Actual source/outputs are retained with33.4. No value is yet admitted as the cross-backend absence contract.
-  Acceptance: Refine only the normal Dart zero test to defined capture-boundary position/line/column/through-cursor/rest getters, excluding the unsettled current-match-endpoint width. Retain original observed0 as diagnostic evidence under40, without rebasing Julia or labeling either result portable. Runtime remains unchanged; check exact new test/analysis, update current card/book/target status and commit before33.5. This repairs a test-scope omission introduced by33.3, not the producer policy itself.
-  Planned verification tier: focused
-  Planned focused checks: New six-group Dart test and fatal changed-file analysis/format, exact difference excluding only unadjudicated width, docs/continuity; no full gate.
-  Planned canonical trigger: Formal source/context admission23.4 requires40 authority and any confirmed producer/diagnostic repairs first.
-  Planned claim verification: none: Finite named test-scope correction, no population measurement.
+  Status: `completed`
+  Goal: Keep the new Dart Number zero regression independent of unsettled pre-match endpoint semantics.
+  Evidence: capture-boundary-number-dart-zero-scope.json.gz retains exact before/after test, focused outputs and original Dart/Julia packets. No source evidence is deleted or rebased.
+  Verification tier: `focused`
+  Focused checks: Six normal Dart groups pass with fatal changed-file analysis/format; exact isolated test diff, runtime unchanged, book/map/history/manual continuity. No broad gate.
+  Canonical trigger: Source/context admission23.4/final push requires40 authority and producer/diagnostic repairs; current test-only scope change does not decide the public absence policy.
+  Claim verification: none: Finite named test-scope correction and authored regression, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**:33.3 added a fixed0 expectation for capture_slice_len before any local match.33.4 independent source comparison finds Julia null and Perl0 with uninitialized-position warnings, making that producer boundary unadjudicated. This test-scope omission was introduced by33.3 and owned immediately under this followup/40.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: dart/test/capture_boundary_number_results_test.dart combined legitimate defined entry-boundary position zero with a current-match-endpoint width assumption. Method composition does not supply authority for the getter's absence policy. Existing parent packets retain exact sources/results, including reference warnings and both native producer paths.
+  - [x] **FIX**: Only the zero test now reads capture_slice_pos/line/col/through-cursor/rest and applies lazy default/add to defined position0. Remove the unsettled width assertion; retain its original observed0 as diagnostic40 evidence. No runtime, native getter result, callback/helper vocabulary, argument, schema or public policy change.
+  - [x] **ADDRESSED (verified)**: Six groups pass; position0 skips F and primitive0/1/1/0/1 stays exact. All matched-context shared11/original9/aliases/snapshot/legacy/function/callback assertions remain unchanged. Fatal analysis/format pass; direct diff is confined to test label/comment/source/expected position tuple.
+  - [x] **NO REGRESSION**: Runtime diff is empty. Original fresh/source observations are preserved, with the before-match width explicitly diagnostic rather than portable semantic credit. No Julia null or Dart/Perl0 is normalized to a new target.40 owns concrete authority and confirmed repairs before admission; other feature proof is not needlessly repeated.
+  - [x] **LOCKSTEP**: Packet/current Dart card/map/target/book and task/live/resume/history agree on defined position zero and unadjudicated endpoint width. Bounded Dart compatibility unit status is restored; formal source/context admission remains23.4. Safe Lua33.5 follows.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1 - keep Dart zero regression independent of unsettled match endpoints`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `pending` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
@@ -7533,7 +7542,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1` | `pending` | Refine Dart zero regression to exclude unadjudicated pre-match width before33.5. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.5` | `pending` | Independently check safe Lua capture Number method composition. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
