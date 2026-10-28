@@ -291,3 +291,13 @@ formerly qualified falsey aa rows; old packets stay frozen. Nearest collection
 prior fixtures unchanged. Packet julia-blind-postcall-intake.json.gz retains
 actual reference/SDK/fresh closure, normal suite registered once. Nullable .7
 qualification next before safe Lua/diagnostic .8/full admission prerequisites.
+
+2026-10-29 Julia nullable39.3.7.0 independently qualifies33 exact sources54
+inputs on SDK/native/restored/plan and33 modules separate process:13healthy
+20failed sources.15 return-context failures plus5 observations; one matched-null
+E outcome belongs to return provenance .7.1 and four pure coordinators to .7.2.
+Actual9 trace inputs/five sources distinguish selected/accepted completion from
+failed null projection and no-selection normal return. No production change;
+packet julia-null-context-intake.json.gz retains exact closure. Typed/local
+return .1 next then pure classifier .2 before safe Lua/full admission; no global
+null success, sticky prior match, invented span or parser matched override.
