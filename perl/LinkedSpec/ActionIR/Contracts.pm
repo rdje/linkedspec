@@ -764,6 +764,22 @@ sub _anonymous_capture_reset_statement_expr {
  return 'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "'.$method.'") }'
 }
 
+# Share the existing input-boundary mark bodies with ordinary block statements.
+# Their legacy return remains inside the native body, not a new value-source API.
+sub _input_boundary_mark_statement_expr {
+ my ($label, $method, $mark) = @_;
+ return undef unless defined($method)
+  && $method =~ /\A(?:mark_input_start|mark_input_end)\z/o;
+ return undef unless defined($mark) && !ref($mark) && $mark =~ /\A\w+\z/o;
+ $label = '' unless defined $label;
+ my $position = $method eq 'mark_input_start'
+  ? '0'
+  : 'LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "mark_input_end")';
+ return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$mark.'\', '.$position.', "'.$method.'"); '
+  ._build_mark_trace_call(operation => $method, label => $label, mark_name => $mark, mark_pos_expr => '$__ls_mark')
+  .'; 1 }'
+}
+
 # Readonly named Number readers share their original bodies with ordinary value
 # lowering. Names remain symbolic words and the current rule label stays explicit.
 sub _readonly_named_mark_number_value_expr {
@@ -1444,7 +1460,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_input_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', 0, "mark_input_start"); '. _build_mark_trace_call(operation => 'mark_input_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; 1 }'
+     _input_boundary_mark_statement_expr($label, 'mark_input_start', $+{mark})
     }gex;
     return $code
    },
@@ -1459,7 +1475,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_input_end\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "mark_input_end"), "mark_input_end"); '. _build_mark_trace_call(operation => 'mark_input_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; 1 }'
+     _input_boundary_mark_statement_expr($label, 'mark_input_end', $+{mark})
     }gex;
     return $code
    },

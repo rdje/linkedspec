@@ -206,8 +206,8 @@ Named marks are stable, rule-local checkpoints. Use them when one anonymous roll
 | Helper | Writes or reads | Meaning |
 | --- | --- | --- |
 | `@mark(name)` | write | mark the current parser position at a rule slot marker. |
-| `mark_input_start(name)` | write | store absolute input start. |
-| `mark_input_end(name)` | write | store absolute input end. |
+| `mark_input_start(name)` | write | store absolute input start. In ordinary Perl action value blocks it can be a nonfinal statement: `"seen".cat({mark_input_start(begin); "!"})` gives `"seen!"` and sets `begin` to `0`. |
+| `mark_input_end(name)` | write | store absolute input end. On `αβ:cat`, `"seen".cat({mark_input_end(finish); "!"})` gives `"seen!"` and sets `finish` to `6`; these nonfinal statements preserve the live cursor and anonymous capture boundary. |
 | `mark_here(name)` | write | store the live parser cursor now. |
 | `mark_entry_start(name)` | write | store the immediate entry-match left edge. |
 | `mark_entry_end(name)` | write | store the immediate entry-match right edge. |

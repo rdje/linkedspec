@@ -684,6 +684,21 @@ sub _lower_block_value_component_expr {
  return undef
 }
 
+sub _lower_input_boundary_mark_statement {
+ my ($source, $deps) = @_;
+ return undef unless defined($source)
+  && $source =~ /\A\s*(?<operation>mark_input_start|mark_input_end)\s*\(\s*(?<mark>\w+)\s*\)\s*\z/o;
+ my ($method, $mark) = @+{qw(operation mark)};
+ return _actionir_ast_unsupported_helper_expr($method)
+  if _parser_state_helper_is_forbidden_in_function($method, $deps);
+ my $label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
+ return undef unless defined($label) && !ref($label);
+ return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_input_boundary_mark_statement_expr',
+  $label, $method, $mark,
+ );
+}
+
 sub _lower_block_side_effect_statement {
  my ($expr, $deps) = @_;
  my $require_dep = sub {
@@ -705,6 +720,8 @@ sub _lower_block_side_effect_statement {
 
  my $call = $parse_method_function_expr->($trimmed);
  return undef if $call && ($call->{method} // '') eq 'return';
+ my $input_mark = _lower_input_boundary_mark_statement($trimmed, $deps);
+ return $input_mark if defined($input_mark);
  if ($call && $trimmed =~ /\A(?:start_capture_slice|capture_slice_here)\s*\(\s*\)\z/o) {
   return _actionir_ast_unsupported_helper_expr($call->{method})
    if _parser_state_helper_is_forbidden_in_function($call->{method}, $deps);
@@ -746,6 +763,8 @@ sub _lower_ast_block_side_effect_statement {
  my $kind = $node->{kind} // '';
  return _actionir_ast_unsupported_helper_expr($node->{name})
   if $kind eq 'call' && _parser_state_helper_is_forbidden_in_function($node->{name}, $deps);
+ my $input_mark = _lower_input_boundary_mark_statement($node->{source}, $deps);
+ return $input_mark if defined($input_mark);
  if ($kind eq 'call' && ($node->{name} // '') =~ /\A(?:start_capture_slice|capture_slice_here)\z/o
      && ref($node->{args}) eq 'ARRAY' && !@{$node->{args}} && !$node->{trailing_block_arg}) {
   return LinkedSpec::OwnerDispatch::dispatch_owner_call(

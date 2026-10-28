@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl mark-name roles/readiness42.0 frozen with raw-host return owned; seven-reader42.1 next.
+Input-boundary Word statement prerequisite42.4 repaired/targeted-checked; seven-reader42.1 resumes.
 
 ## Latest Completed Slice
 
-Freeze perl-mark-name-roles.md from logical String signatures, neutral bare-symbol exception, existing Perl word-key grammar/native bodies and four peer word-name observations. Public13-case intake confirms bare shadow0/6 and numeric token0=>6; quoted/computed/wrong-arity readers falsely ready1, but quoted/computed writers are already raw1/ready0. New exact source mechanism: unlowered mark_pos block contains host return, returning String finish native/fresh before helper invocation despite ready0. Own it under42; no blessed offset or metadata-only cure. Julia four-route valid-expression oracles fix eager key capture before mark reads(width0/AB/begin6) and local return before consumer(6!/AB). Bounded42.1 seven readers then42.2 remaining name calls add quoted/evaluated String word representations and governed unsupported-form readiness/failure, preserving bare words/functions/scopes/body identities;42.3 owns wider key authority after feature coverage/before full23.4, canonical for real policy movement. No production edit. Packet retains exact source/producer/refinement/results; initial final-output UTF8 warning and absent native dump are disclosed, refined producer syntax only. Book/map/task/live/resume/roadmap/history/manual focused guards align;42.1 next, no full gate/push.
+Repair ordinary nonfinal bare-word mark_input_start/end statements through a shared Contracts factory used by unchanged native callbacks and narrow AST/text statement lowering after pure-function guards. Two original native/public bodies are byte-identical. Initial10-source test has8 failed groups; candidate fixes all values, leaving only2 unadjudicated Unicode ready1 assertions in one group. Bare Unicode already native/fresh6/raw2/ready0 outside blocks: public raw dependencies identify two τέλος arguments, ASCII AST variable parsing/RawDependencies explains the qualification, now owned42.3. Remove only that portable-admission expectation, with exact remainder identity. Final scoped9 passes (seven ordinary RED/GREEN and two existing function fences); append one isolated no-prior-writer source and run it separately1pass with unchanged9 prefix. Nearest reset/named2 and both module syntax pass. Zero snapshot, cursor/capture-boundary, lazy skip, local returns, numeric word0, helper identity/scopes and function fences preserved; no final10 combined claim or writer-as-value/String-name/deferred/domain grant. Packet retains before/refinement/after source/results/producer inputs. Book/card/map/task/live/resume/roadmap/history/manual focused guards align;42.1 reactivates from clean prerequisite, no full gate/push.
 
 ## Next Action
 
-Activate42.1 from this clean authority boundary. Read exact method/value/native/scanner/dependent source paths; preserve seven original symbolic producer bodies while adding quoted/evaluated String word-name arguments with once-only left-to-right name capture before mark reads and local-return lowering. Reject unsupported shape/arity before operand effects through governed helper/readiness owners; preserve function fences and41 error-delivery ownership. Add exact owned RED/GREEN and nearest34/mark checks, commit, then42.2 and39/38/37/40/41. Wider key42.3 remains after feature coverage/before full23.4; no routine full gate.
+Reactivate42.1 from this clean repaired42.4 boundary. Input-boundary Word statements now work in ordinary value blocks, enabling the frozen name2-moves-begin oracle. Implement seven readonly reader quoted/computed String word-name arguments with existing sole primitive/value owners, once-only ordered name capture and local returns, guarded unsupported shape/arity/readiness and unchanged native Word bodies/function fences. Finish focused tests/docs/commit, then42.2 and39/38/37/40/41. Unicode bare-name/wider domain42.3 remains after feature coverage/before full23.4. Authorized focused --no-verify continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.42.4` — Input-boundary Word statement prerequisite42.4 repaired/targeted-checked; seven-reader42.1 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.0` — Perl mark-name roles/readiness42.0 frozen with raw-host return owned; seven-reader42.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` — Safe installed Lua named Number/caller scopes34.5 compatible/targeted-checked; ordinary Perl roles/readiness42 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` — Julia named Number methods/caller scopes34.4 compatible/targeted-checked; safe Lua34.5 next.
@@ -29,7 +30,6 @@ Activate42.1 from this clean authority boundary. Read exact method/value/native/
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.2` — Rust reset block3 plus Number6 pass; no runtime edit, independent Dart35.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.1` — Perl value-block reset core8/fence6/Number7 pass; independent Rust35.2 next, error41 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.0` — Capture-reset value-block35.0 target frozen; confirmed Perl statement repair35.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.33.5` — Safe Lua capture Number155+12 pass per installed host; all bounded33 children checked,35.0 next.
 
 ## History
 

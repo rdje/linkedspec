@@ -89,3 +89,23 @@ full23.4. Any actual key-domain/policy movement is canonical after document-pres
 repair; no implicit portability claim from low-level Hash storage or peer examples.
 42.1/42.2 commit separately, then resume39/38/37/40/41. No AST/schema/inventory,
 rule-label lifetime, invocation-frame, alias, grammar or writer-as-value/fluent grant.
+
+## Verified prerequisite42.4 before42.1
+
+Before production, two public String-block controls with bare mark_input_end(begin)
+produce malformed Perl/native handler compile skips and fresh load errors while
+still raw0/unresolved0/ready1. Substitution shows the late native do-block inserted
+inside raw Hash braces in cat's parts initializer; the ordinary statement owner
+has not lowered the value block. This is independent of String name representations.
+42.4 first exposes original mark_input_start/end word bodies to the existing
+nonfinal statement owners, matching35's bounded reset pattern. Preserve primitive
+body identities, zero/snapshots/cursor/capture-boundary/function/lazy/local-return
+rules; no writer-as-data, final-expression, deferred or quoted-name grant. Then
+reactivate42.1 and its eager name2-moves-begin oracle from the clean repaired base.
+
+42.4 is now repaired/targeted-checked: shared original input-boundary bodies are
+byte-identical, final scoped9 and appended isolated1 pass separately, nearest2
+and module syntax pass.42.1 reactivates from the clean boundary. Bare Unicode
+legacy already native/fresh6/raw2/ready0 is qualified under42.3; no portable-ready
+expectation or new name grammar is smuggled into the statement repair. Exact
+source/refinement/results: input-mark-value-block-intake.json.gz.
