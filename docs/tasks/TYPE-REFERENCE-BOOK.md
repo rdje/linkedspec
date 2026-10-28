@@ -7211,21 +7211,79 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.5 - lock safe Lua readonly capture Number method flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34`
-  Status: `pending` / P1 after anonymous-reader33 and value-block repair35, before full23.4
+  Status: `in_progress` / target34.0 frozen after bounded33/35; independent34.1-.5 implementation and full23.4 open
   Goal: Own and repair verified named-mark/capture Number fluent composition and false-ready output.
   Reproduction: capture-number refined intake at clean4f91e544b uses explicit Value[2], input alpha beta :cat. Producers capture_len_between(begin,finish)=6 and mark_pos(finish)=6; named bridges yield7/5/4!, native/fresh. Direct capture_len_between(...).coalesce(0).add(1), mark_pos(...).coalesce(0).sub(1) and missing-mark defaults leave primitive do-blocks followed by DSL method syntax, despite raw0/unresolved0/ready1. Native null/no context error is not success; fresh runtime undefined-coalesce or compile anonymous-sub failure supplies actual RED.
   Impact / ownership: Useful existing Number readers cannot reliably feed methods directly and readiness overstates generated-code usability. Own readonly named-mark locations and span-width sources, including current missing mark behavior; capture-boundary-number-intake.json.gz retains exact inputs/channels and old E-carrier calibration. No unowned report.
   Schedule / boundaries: Authority/target34.0 follows bounded33 and separate value-block35, then independent backend repair leaves before full23.4. Freeze current mark-name argument roles, signatures, coordinates, parser-state/function/alias/error/first-consumer/source-order contracts before production; no write/take/advancing helpers or global unknown/callback vocabulary expansion. Existing lifecycle E omission stays SESSION-STARTUP-READING.27, not this feature.
-  Children:34.0 target/independent repair ownership; implementation children split after target freeze.
+  Children:34.0 target frozen;34.1 Perl then34.2 Rust/34.3 Dart/34.4 Julia/34.5 safe Lua independent implementation or compatibility proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.0`
-  Status: `pending` / P1 after33 and35
-  Goal: Freeze readonly named-mark Number method composition and schedule independent backend implementation from34 intake.
-  Acceptance: Read canonical mark/source contracts and retained producer/named/direct/missing distinctions, preserve current symbolic/literal/dynamic name roles and source/error/function/alias/arity/first-consumer policies, and freeze bounded target before production. Repair actual functional/readiness gap without absorbing lifecycle or advancing-reader work.
+  Status: `completed`
+  Goal: Freeze readonly named-mark Number method composition without changing accepted mark-name roles.
+  Authority: Existing source-boundary/helper catalog, complete_named_mark_contract symbolic-name/coordinate/missing/rule-label policy, actual native/fresh sources. named-mark-number-results.md/shared prospective fixture own exact target; named-mark-number-authority.json.gz retains nine-source distinction/producers/emitted bytes/channels.
+  Verification tier: `focused`
+  Focused checks: Nine finite public Get/native/fresh/descriptor/substitution cases, exact shared failing-source/bound-expected equality, strict JSON/source/metadata checks, existing role/provenance records, book/map/history/manual continuity/claim-input/diff. No runtime or broad gate.
+  Canonical trigger: Full23.4/clean push after independent34,42/39/38/37/40/41 and pressure/registration/declared-host repair; actual public argument-policy/schema movement remains separately canonical.
+  Claim verification: none: Finite authored source/argument/value distinctions and normative target, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Seven readonly primitive sources yield6/1/7/3/6/6/6; bound methods yield5/2/7!/TAIL/7/5/7 native/fresh/raw0/ready1. Exact direct twin returns native[null] and fresh anonymous-subroutine load error with raw0/unresolved0/ready1. This proves the combined method-source gap without claiming each helper independently fails;34.1 starts per-helper intake.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: call_spec_handler_subst/emitted source retain native mark do-expressions followed by unlowered methods; early MethodLowering value source ownership lacks the seven named location/width readers. Existing Contracts consume symbolic words and preserve rule-label operation tags. Quoted/computed forms escape the same unresolved regex via RewritePipeline/Diagnostics and yield false-ready EmitContext counts; new42 owns that adjacent role/diagnostic defect, not a vocabulary grant.
+  - [x] **FIX**: Freeze seven readonly producers, compatible Number/String/Array/default methods, symbolic-name shadowing, source snapshot/order and actual per-backend/direct-root policies. Shared prospective direct fixture exactly matches the failed source with healthy bound expected output; create independent34.1-.5 owners before runtime edits. No writer/take/Boolean/bracket/deferred/function/arity/AST/schema grant.
+  - [x] **ADDRESSED (verified)**: Nine exact distinctions retain six healthy controls and three actual failing source forms. Eight absent reads stay undef; begin/finish scalar shadowing does not change6/0/6; bound6! snapshot survives clear, leaving finish absent/begin0/S. Actual binding legacy Hash/[]/undef/KVT skips normalized X/Y; it is not substituted for a direct-source oracle. Source/emitted/error bytes remain recoverable.
+  - [x] **NO REGRESSION**: Runtime/frontend/schema diff empty. Keep current rule-label buckets, Unicode offsets/one-based locations, missing/reversed spans and function-state errors. Unset local-match endpoints40 and native child error41 remain separate; quoted/computed argument authority/readiness42 is scheduled after bounded34 before39/admission. No unsupported form or misleading ready bit is promoted into healthy semantic credit.
+  - [x] **LOCKSTEP**: Target/fixture/packet/new method-source and argument-gap cards/map/book, task/live/resume/roadmap/history agree. Perl34.1 follows, then independent Rust/Dart/Julia/safe Lua;42/39/38/37/40/41 precede full23.4. Focused authorized workflow continues without broad suite/gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.0 - freeze readonly named-mark Number method sources and name-role boundaries`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.1`
+  Status: `pending`
+  Goal: Independently implement or lock Perl readonly named-mark Number method sources.
+  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
+  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
   Planned verification tier: focused
-  Planned focused checks: Small public source-role/actual-result distinctions and syntax/JSON/book/manual continuity, no full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; public schema movement separately owned.
-  Planned claim verification: none: Finite authored feature target/ownership, no population measurement.
+  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.2`
+  Status: `pending`
+  Goal: Independently implement or lock Rust readonly named-mark Number method sources.
+  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
+  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.3`
+  Status: `pending`
+  Goal: Independently implement or lock Dart readonly named-mark Number method sources.
+  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
+  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.4`
+  Status: `pending`
+  Goal: Independently implement or lock Julia readonly named-mark Number method sources.
+  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
+  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.5`
+  Status: `pending`
+  Goal: Independently implement or lock safe installed-host Lua readonly named-mark Number method sources.
+  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
+  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35`
   Status: `in_progress` / all bounded35.1-.5 children targeted-checked on recorded routes/hosts; formal source/context/parent admission23.4 remains open
@@ -7651,13 +7709,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push requires verified error-delivery repair; actual public diagnostic policy movement gets separately owned canonical authority.
   Planned claim verification: none: Finite authored error-delivery distinction, no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42`
+  Status: `pending` / P1 after bounded34 before39/full23.4/push
+  Goal: Reconcile ordinary Perl mark-name argument authority and prevent false-ready output for name forms the native lowerer does not execute.
+  Reproduction:34.0 public native/fresh source/metadata intake creates bare begin/finish marks. mark_pos("finish") and capture_len_between("begin","finish") remain raw calls; generated execution fails undefined mark_pos. mark_pos(cat("fin","ish")) leaves nested cat raw and fails undefined cat. Both cases report raw0/unresolved0/ready1 and native collecting parent returns[null], with error loss independently owned41. Exact source/substitution/emitted bytes and channels belong to named-mark-number authority evidence.
+  Root / impact: Existing Legacy/Contracts mark-name producers accept symbolic word arguments, while ordinary known-helper metadata does not reject these unmatched argument shapes. The public catalog describes string mark names and the neutral contract explicitly distinguishes unquoted identifiers from variable reads; authority for quoted/evaluated forms must be reconciled before deciding support or typed rejection. Host undefined-subroutine errors and ready1 do not constitute a valid argument policy. This is separate from deferred vocabulary31.6.4.4 and readonly Number method34.
+  Exact root evidence: RewritePipeline forwards Contracts unresolved_pattern; Diagnostics::_find_unresolved_action_helpers counts only those regexes in lowered statements. The same symbolic-word pattern misses quoted/computed forms for both native replacement and unresolved reporting. RuleIR::EmitContext readiness uses fallback/unresolved counts, so zero counts falsely accompany raw unusable calls. Public substitution/fresh errors establish this mechanism before classification; no producer-absence or vocabulary decision is inferred.
+  Acceptance: Freeze accepted symbolic/literal/evaluated name roles from canonical contracts and actual producer/consumer source evidence, preserving bare-name shadowing, arity, evaluation order, Unicode/provenance, scopes and helper identity. Implement governed roles or honest typed unsupported-form diagnostics/readiness through the existing sole argument/lowering owners; no guessed string-to-variable conversion or generic unknown-helper grant. Add exact live/fresh/metadata guards and current book qualifications before admission, including nearest valid bare-name and missing-mark controls.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/metadata/diagnostic RED/GREEN and nearest valid role/provenance/function/generated controls, syntax/book/history/manual continuity; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push requires verified42; actual public argument-policy/schema movement gets separately owned canonical authority.
+  Planned claim verification: none: Finite authored argument/readiness distinctions, no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.0` | `pending` | Freeze readonly named-mark Number method target and argument roles. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.1` | `pending` | Repair confirmed Perl named-mark Number method source gaps. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

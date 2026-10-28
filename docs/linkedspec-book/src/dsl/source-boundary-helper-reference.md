@@ -201,7 +201,7 @@ The line and column helpers are for diagnostics and metadata. They should replac
 
 ## Named mark helpers
 
-Named marks are stable, rule-local checkpoints. Use them when one anonymous rolling boundary is not enough, when a boundary needs a name, or when two saved boundaries define a span.
+Named marks are stable, rule-local checkpoints. Use them when one anonymous rolling boundary is not enough, when a boundary needs a name, or when two saved boundaries define a span. An unquoted mark-name identifier is symbolic: even if the working variable `finish` contains `"begin"`, `mark_pos(finish)` still reads the mark named `finish`. Use bare symbolic names in current Perl; quoted or computed mark-name expressions can fail generated execution despite ready metadata, and that argument/diagnostic gap is tracked for repair.
 
 | Helper | Writes or reads | Meaning |
 | --- | --- | --- |

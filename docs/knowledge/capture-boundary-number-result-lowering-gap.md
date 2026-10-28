@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: all bounded33 children targeted-checked; void-block Perl35.1 repaired/Rust35.2 next; named-mark34/endpoint40/full admission open
+status: all bounded33/35 children targeted-checked; named-mark34 target frozen/Perl34.1 next;42/40/full admission open
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -142,3 +142,9 @@ Contracts boundary-write body; eight core groups pass after six RED, six added
 fences pass separately, nearby Number7pass. Canonical/alias bodies and native
 readonly getter owner stay byte-identical. No mutator-as-data/deferred grant;
 independent Rust35.2 follows. Adjacent child error loss is owned41 before admission.
+
+All bounded ordinary reset35 peers are now targeted-checked. Named-mark34.0
+freezes seven readonly Number sources and exact symbolic-name/absence/snapshot/
+root distinctions; see [[named-mark-number-method-source-gap]]. New42 owns quoted/
+evaluated name false-ready argument diagnostics after34 before admission; no new
+name-form semantics are inferred. Perl34.1 follows the frozen shared target.
