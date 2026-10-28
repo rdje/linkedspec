@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust active-edge ownership repaired12pass plus Number6; independent Dart36.2 next.
+Dart active-edge repair13pass; immediate Rust trace-test storage followup before independent peers.
 
 ## Latest Completed Slice
 
-Rust outgoing-edge body choice is repaired through shared Engine::select_native_match for native/generated execution. Query existing compiled edge slots in authored order; earliest start wins and ties keep first authored, with safe cursor-start short circuit. Full catalogs and indexed-first/AND/blind/no-edge/frame/gap/formats stay intact. Refined unchanged-production5pass/7RED -> first candidate12pass native/restored CompiledSpec/generated-plan, covering duplicate order, cross-target indices, captures/Unicode positions, colon gap, boundary catalog, five neutral duplicate fixtures, seek/consume and exact written-slot traces. Number6pass includes now-enabled original wildcard regression with no ignores. Initial LS instrument refined to existing capture_gaps selected-first policy without extra product RED credit; all epochs retained. Rustfmt/book/map/history/manual continuity pass, causal cards/target/roadmap/task/live/resume align. Separate Perl emitted boundary37 stays owned; no full suite/matrix/peer/independent emitted-package/admission/push claim.
+Dart outgoing-edge body choice independently repaired through shared _matchChoice at ordinary/gap selection sites; existing compiled edge indices in authored order preserve earliest-start/first-authored ties and complete catalogs, indexed-first/AND/blind/no-edge/cursor/frames/formats. Final13pass native/restored SpecFile/generated-plan, selected capture/Unicode positions/gap/boundary/duplicate/mode controls and in-memory slot2 traces; existing duplicate15-role/rule-local5/capture collection4 selected groups pass; fatal changed analysis/format clean. Baseline5pass/8mismatches includes a compounded LS-return carrier; exact Hcat public probes prove separate Dart cursor1 versus Perl native/fresh4. Own38 before admission, isolate final dispatch gap test to edge payload without runtime cursor change, retain epochs and correct values. New Rust trace temporary-owner omission is independently observed by official census fragment; immediate36.1.1 removes it through public in-memory emitters, no manifest/gate change. Packet/cards/map/target/book/roadmap/task/live/resume/history agree. No full suite/matrix/independent emitted package/peer admission/push.
 
 ## Next Action
 
-Activate independent Dart outgoing-edge candidate intake36.2 from this clean Rust repair. Use frozen36.0 target and actual public compile/native/restored SpecFile/generated-plan routes for wildcard/literal, reverse duplicate priority, earliest start and source-slot/mode/catalog/gap controls. Repair only any confirmed candidate-role gap through existing shared owner, preserve full catalogs/indices/AND/blind/no-edge/formats, targeted-check and commit; then Julia/safe Lua36.3-.4 before33.3. Full23.4 and generated boundary37/pressure/new Perl registration remain separate. Authorized focused --no-verify workflow continues.
+Activate immediate Rust trace-test storage repair36.1.1 from this clean Dart boundary. Replace only active_edge_body_candidates temporary trace files with public TraceEmitter::with_stdout caller-owned in-memory writers and Engine native/generated emitter APIs; keep exact slot assertions, preserve runtime/manifest/storage gate. Run exact trace/new test and official unchanged census fragment to GREEN, format/compile and commit before Julia36.3/safe Lua36.4 then Number33.3. Dart gap LS cursor38 and Perl generated boundary37 remain owned before full23.4/push. Authorized focused --no-verify workflow continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` — Dart active-edge repair13pass; immediate Rust trace-test storage followup before independent peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.1` — Rust active-edge ownership repaired12pass plus Number6; independent Dart36.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.0` — Active-edge choice target frozen; Rust shared-owner repair36.1 next, separate Perl boundary37 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.2` — Rust capture Number methods already compatible; P1 active-edge dispatch36 prerequisite immediately next.
@@ -29,7 +30,6 @@ Activate independent Dart outgoing-edge candidate intake36.2 from this clean Rus
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
 
 ## History
 

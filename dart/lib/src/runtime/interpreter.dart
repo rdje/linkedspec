@@ -1281,11 +1281,7 @@ final class LinkedSpecRuntimeEngine {
     }
     return entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
         ? _matchSpecific(plan, entryRegexIndex, context, cursorPolicy)
-        : plan.matcher.match(
-            context.input,
-            context.cursorCodeUnit,
-            parseMode: cursorPolicy,
-          );
+        : _matchChoice(rule, plan, context, cursorPolicy);
   }
 
   void _prepareGapCandidate(
@@ -1394,11 +1390,7 @@ final class LinkedSpecRuntimeEngine {
         ? preselectedMatch
         : entryRegexIndex > 0 && entryRegexIndex < plan.patterns.length
         ? _matchSpecific(plan, entryRegexIndex, context, cursorPolicy)
-        : plan.matcher.match(
-            context.input,
-            context.cursorCodeUnit,
-            parseMode: cursorPolicy,
-          );
+        : _matchChoice(rule, plan, context, cursorPolicy);
     if (match == null) {
       if (!matchPreselected) {
         _traceRegexDecision(
@@ -1474,6 +1466,44 @@ final class LinkedSpecRuntimeEngine {
           'cursor_before=$cursorBefore',
       LinkedSpecTraceLevel.debug,
     );
+  }
+
+  RuntimeRegexMatch? _matchChoice(
+    CompiledRule rule,
+    _RegexPlan plan,
+    _RuntimeExecutionContext context,
+    LinkedSpecParseMode cursorPolicy,
+  ) {
+    if (rule.modeMetadata.isAnd || rule.actionEdges.isEmpty) {
+      return plan.matcher.match(
+        context.input,
+        context.cursorCodeUnit,
+        parseMode: cursorPolicy,
+      );
+    }
+    // Keep the complete catalog for entry selectors and boundary lookahead;
+    // body choice considers outgoing edges in authored order.
+    RuntimeRegexMatch? selected;
+    for (final edge in rule.actionEdges) {
+      final candidate = _matchSpecific(
+        plan,
+        edge.regexIndex,
+        context,
+        cursorPolicy,
+      );
+      if (candidate == null) {
+        continue;
+      }
+      // No later edge can start sooner; equal starts keep the earlier edge.
+      if (candidate.codeUnitStart == context.cursorCodeUnit) {
+        return candidate;
+      }
+      if (selected == null ||
+          candidate.codeUnitStart < selected.codeUnitStart) {
+        selected = candidate;
+      }
+    }
+    return selected;
   }
 
   RuntimeRegexMatch? _matchSpecific(

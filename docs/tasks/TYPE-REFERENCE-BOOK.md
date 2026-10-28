@@ -7245,7 +7245,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.0 - freeze active-edge body candidates and source identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1`
-  Status: `completed`
+  Status: `in_progress` / runtime repair committed2d832df45; immediate test-storage followup36.1.1
   Goal: Repair confirmed Rust native/generated-plan outgoing-edge body candidate ownership through the shared selection owner.
   Authority: Frozen36.0 active-edge-body-candidates.md and existing ADR0044/0047/entry/edge/source/gap contracts. Packet active-edge-body-rust-intake.json.gz retains actual pre-refinement/refined/candidate test/source/log epochs.
   Verification tier: `focused`
@@ -7261,15 +7261,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Target/packet and updated causal card/map, public book removes repaired Rust caveat and preserves the distinct Perl emitted-boundary caveat, generated boundary37 retrieval card, roadmap/task/live/resume/history agree. Peers independently intake next; no inferred failure or backend admission.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1 - select Rust body matches from authored outgoing edges`.
 
-- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.2`
-  Status: `pending` / P1 after36.0
-  Goal: Independently implement/check Dart outgoing-edge body candidate ownership.
-  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
-  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1`
+  Status: `pending` / P1 immediately after36.2 before36.3
+  Goal: Remove the new Rust active-edge test's unregistered temporary trace owner by using public caller-owned in-memory trace emitters.
+  Reproduction: Official tools/test_rust_project_data_storage.sh owner census fragment fails after36.1 because tracked active_edge_body_candidates.rs calls std::env::temp_dir but is absent from the exact expected owner array. This omission was introduced by36.1; feature/runtime assertions pass but canonical storage would reject it.
+  Root / acceptance: Rust Engine already exposes execute_value_with_trace_emitter and execute_generated_with_plan_with_trace_emitter, and TraceEmitter::with_stdout accepts a caller-owned writer. Retain native/generated exact slot trace assertions in memory; remove only the test filesystem owner and clean up imports. No production, registry, manifest, storage gate or path workaround. Run exact trace/new test, format/compile, unchanged official census fragment to GREEN, update evidence/book/live docs and commit before peers.
   Planned verification tier: focused
-  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
-  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+  Planned focused checks: Actual owner-census RED/GREEN, exact native/generated trace and new active-edge test, Rustfmt/compile/manual continuity; no full gate.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; storage infrastructure remains unchanged.
+  Planned claim verification: none: Finite named test-owner predicate and functional trace assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.2`
+  Status: `completed`
+  Goal: Independently establish and repair Dart outgoing-edge body candidate ownership.
+  Authority: Frozen36.0 target and existing edge/mode/slot/source/gap owners; packet active-edge-body-dart-intake.json.gz retains baseline/candidate/refinement sources, exact channels and independent adjacent probes.
+  Verification tier: `focused`
+  Focused checks: Independent13-group baseline5pass/8mismatches; seven direct selection failures fixed, one LS-return carrier isolated after separately confirming/owning cursor defect38. Final13pass native/restored SpecFile/generated-plan and exact in-memory traces; existing duplicate15-role, rule-local cursor5 and capture collection4 selected groups pass. Fatal analysis/format/book/map/history/manual continuity. No full suite/matrix.
+  Canonical trigger: Immediate Rust test storage repair36.1.1 then independent peers36.3-.4 before33.3. Full23.4/final clean push also require pressure, generated boundary37 and Dart LS cursor38 repairs; no public format movement.
+  Claim verification: none: Finite authored functional/source distinctions and exact named test-owner finding, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Public Dart native/restored/plan return null for wildcard/cross-target,1 for both reversed Default/OR duplicate choices and untargeted slot0 source/gap traces. Five controls pass; eight initial mismatches include an LS-return carrier that compounds a distinct cursor defect. Exact observations are retained, not converted to legacy expected nulls.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _selectRegexMatch and _executeRegexOnce each fall back to full catalog choice. They share the existing indexed _matchSpecific primitive but no eligible-edge choice owner. Full patterns must remain available for entry/boundary use; regexIndex differs from target index. _prepareGapCandidate's separate cursor installation timing remains unchanged and is owned38 after independent Perl comparison.
+  - [x] **FIX**: Both choice sites call private _matchChoice. Non-AND action-edge choice queries existing compiled edge.regexIndex alternatives in authored order; earliest start and first-authored ties are retained, with safe cursor-start short circuit. Preserve indexed-first/AND/no-edge/blind/selector/format/source/gap-frame owners and complete catalogs; no extra per-selection regex compilation or text-derived identity.
+  - [x] **ADDRESSED (verified)**: Final13pass covers wildcard/literal, reversed Default/OR, earliest/cross-target/no eligible edge, captures and Unicode positions3/6, untargeted boundary catalog, selected colon gap2/3, five neutral duplicate fixtures and seek/consume. Exact native/generated trace slot2 once each uses public caller-owned in-memory emitters; value routes independently exercise public v2 adapter. Ordinary restoration is SpecFile JSON followed by compile, not a compiled-descriptor decoder.
+  - [x] **NO REGRESSION**: Fatal changed-file analysis and formatting clean; existing duplicate15-role/rule-local5/capture collection4 selected tests pass. No independent emitted-package/full matrix or peer admission inferred. LS-return gap source still fails desired cursor semantics: Hcat native/plan returns1 while reference native/fresh returns4, owned38. Only the dispatch gap control moves to accepted edge-payload access; runtime cursor code unchanged. Rust's newly introduced trace temp-owner omission is owned36.1.1 immediately next, not waived; final Dart test adds no temporary owner.
+  - [x] **LOCKSTEP**: Packet/target/current Dart and adjacent cursor cards/map, public book accurately distinguishes repaired choice from owned LS-return cursor drift, task/live/resume/history/roadmap align. Immediate test-storage repair precedes independent peer intake; all adjacent defects remain scheduled before admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.2 - select Dart body candidates through one authored-edge owner`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.3`
   Status: `pending` / P1 after36.0
@@ -7302,13 +7319,37 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4 and clean push must include verified repair; actual public format movement separately owned.
   Planned claim verification: none: Finite authored defect/source evidence, no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38`
+  Status: `pending` / P1 after bounded33/35/34 before37/full23.4 admission/push
+  Goal: Reconcile and repair Dart selected-match live cursor state before early LS return under capture_gaps.
+  Reproduction: Exact Hcat source/producers retained in active-edge-body-dart-intake.json.gz. Top matches H, calls Value, then returns payload and caller cursor. Value selects cat under capture_gaps; LS returns gap text, match text and live cursor. Perl native/fresh returns[[empty,cat,4],4]; Dart native/plan returns[[empty,cat,1],1]. Untargeted candidates do not compete in this control, isolating cursor state from36's repair.
+  Root / impact: _prepareGapCandidate installs selected registers and gap context but not cursorCodeUnit; _acceptRegexMatch writes selected end only after LS. Early LS return unwinds before that assignment, leaving caller at the entry boundary; broad incoming patterns may reconsume remaining input and append null payloads. No cursor code changed by36.2. Preserve exact return authority, gap boundary commit/discard, rollback and authored LS cursor mutations when reconciling the narrow repair.
+  Children:38.0 authority/target,38.1 focused Dart native/generated repair before admission. Other runtimes not inferred defective.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.0`
+  Status: `pending` / P1 after34 before38.1/37
+  Goal: Freeze selected-match live cursor versus gap-boundary state and lifecycle return authority from ADR0045/0048, source contracts and exact public reference/native/generated probes.
+  Planned verification tier: focused
+  Planned focused checks: Distinguishing Hcat LS/caller positions, normal edge/LE, explicit LS cursor mutation, return/unwind versus rollback, exact source/trace; no full gate.
+  Planned canonical trigger: Full23.4/final clean push requires verified38 repair.
+  Planned claim verification: none: Finite authored contract/causal distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.1`
+  Status: `pending` / P1 after38.0 before37/full23.4
+  Goal: Repair confirmed Dart early LS selected-match cursor gap without changing lifecycle return or gap-commit authority.
+  Acceptance: Correct Hcat native/restored/generated positions4/4 and retain original broad-carrier expected output without null rebasing. Add normal edge/LE/rewind/rollback/nested direct-dependent controls, preserve sole cursor/recognition authority and generated v2, targeted-check/book/docs/commit before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN and focused existing gap lifecycle/recognition/source/generated dependents, format/analysis; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4 and clean push require verified repair; actual infrastructure/format movement separately owned.
+  Planned claim verification: none: Finite authored functional/source regressions, no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` | `pending` | Independently check Dart active-edge ownership before resuming33.3. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1` | `pending` | Remove Rust test temporary trace owner before peer36.3 intake. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1,7 +1,7 @@
 # Outgoing-edge body candidates
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.36.0; bounded backend repairs36.1-.4.
-Status: target frozen; Rust36.1 repaired/targeted-checked, independent peer intake follows.
+Status: target frozen; Rust36.1/Dart36.2 repaired/targeted-checked; Rust trace-test followup then independent peers follow.
 
 This target implements existing semantics, rather than introducing a new grammar
 or generated-source contract. Read ADR0044 for rule-local cursor ownership,
@@ -107,3 +107,23 @@ instrument refinement retains historical unflagged pre-selection hook ordering;
 the distinguishing hook control uses capture_gaps's accepted selected-first
 contract. Packet active-edge-body-rust-intake.json.gz retains all epochs. No
 independent emitted-package, full regex-context, peer or admission claim.
+
+## Bounded Dart36.2
+
+Private _matchChoice now owns both gap-preselected and ordinary choice sites,
+using existing indexed alternatives from outgoing edges in authored order.
+Complete catalogs and indexed-first/AND/blind/no-edge/format owners stay intact.
+Final13 tests pass native/restored SpecFile/generated plans, including exact
+native/generated slot2 traces held in memory. Existing duplicate15-role,
+rule-local5 and capture collection4 selected groups pass; changed-file analysis
+is fatal-clean. No independent emitted package/full admission is claimed.
+
+Initial13 groups have5pass/8mismatches; seven directly expose selection. The
+LS-return gap carrier also exposes a distinct Dart live-cursor bug: selected
+registers see cat while live/caller cursor remains1, versus reference4 on Hcat.
+Own38 before admission; preserve all epochs and correct desired values, never
+bless null suffixes. The final dispatch gap control reads its gap inside the
+accepted edge, isolating eligibility without changing runtime cursor code.
+Packet active-edge-body-dart-intake.json.gz retains exact probes/channels.
+Immediate36.1.1 removes the prior Rust test's unregistered temporary trace owner
+through public in-memory emitters; no storage manifest/gate change is needed.

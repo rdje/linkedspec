@@ -50,3 +50,12 @@ the existing runtime and compare structural target/index sequences. Invalid-stat
 cover source validation, compiled validation, runtime, generated-plan and emitter rejection,
 plus explicit ordered cross-target mismatch. The neutral checker remains 7 complete/0
 pending with 59 drift mutations; no capability or generated-format change occurs.
+
+## October28 bounded outgoing-edge choice correction
+
+TYPE-REFERENCE-BOOK.1.2.23.3.36.2 supersedes the full-catalog choice detail above:
+Default/OR action-edge choice now uses outgoing edge indices in authored order
+through shared _matchChoice, while retaining complete catalogs for entry and
+boundary use. Existing duplicate15-role consumer passes unchanged; historical
+admission totals above are not new full-suite measurements. See
+[[dart-active-edge-body-candidate-ownership]] for bounded current proof/limits.
