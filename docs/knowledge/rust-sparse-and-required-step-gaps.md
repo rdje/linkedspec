@@ -7,9 +7,11 @@ answers:
   - "why do duplicate Rust AND dependencies fire at cursor one"
   - "why does indexed Rust AND return two nulls"
   - "why does Rust repeated AND return before its minimum"
+  - "how do Rust repeated AND early returns count groups"
+  - "does custom IT replace Rust repeated AND default collection"
   - "why does default blind Rust plan stop at cursor four instead of eight"
 date: 2026-10-28
-status: default-blind iteration39.1.4.1/dependency39.1.1/indexed39.1.2 repaired; returns/minimum/implicit results remain
+status: default-blind iteration/dependency/index/group outcomes repaired; remaining minimum families and blind implicit results owned
 tags: [rust, and, sparse, sequence, dependencies, slots, generated-plan, repetition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0; sparse-and-rust-repair-target.md and sparse-and-rust-intake.json.gz retain actual initial/refined source, compiled serde, emitted text, native trace, all reached routes and owned dormant tests."
 reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test sparse_and_structural_sequence -- --nocapture; explicitly select owned ignored regressions with --ignored when repairing. Independent emitted package execution remains unassessed."
@@ -70,3 +72,20 @@ pass. Exact24 full source/compiled/plan/emitted records unchanged; only3 result
 groups change. Existing generated applications rebuild with updated runtime.
 Packet rust-and-index-intake.json.gz.39.1.3 group returns next,4 remaining dormant
 regressions required before admission; independent emitted package unassessed.
+
+39.1.3.1 now repairs repeated AND acode group outcomes. Each loop has a typed
+optional group value separate from required-step position and accepted count.
+An explicit action return leaves current dispatch, skips remaining group slots
+and post-return LE, finalizes/counts once, then resets to the first step.
+Falsey values preserve kinds; a nonreturning complete group defaults to[];
+authored IT replaces default push, and lifecycle returns remain whole-rule.
+AND-acode under-minimum now returnsnull. CHOICE helper stays unchanged.
+14 actual runtime RED groups ->GREEN, final37pass/1 remaining blind ignored;
+duplicate-slot15 roles/default-blind6/repeated-choice3 tests15 roles pass.
+Exact41 source/serde/plan/emitted and legacy records unchanged, only14
+results change. AND remains ineligible for capture_gaps; the original2 invalid
+fixtures earn no product RED credit, exact typed rejection is preserved.
+Packet rust-and-group-outcomes-intake.json.gz retains all source/epoch/patch/
+receipt. Rebuild generated applications with updated runtime; no source rewrite
+or independent emitted-package proof. Remaining minimum families39.1.5 then
+blind implicit results39.1.4.2 precede peers;39.8/SESSION27 before admission.

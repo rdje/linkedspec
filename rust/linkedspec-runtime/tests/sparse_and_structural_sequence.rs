@@ -360,14 +360,13 @@ fn dependency_case(first: usize, input: &str, captured: &str) {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3; retained actual RED, required before admission"]
 fn repeated_sparse_groups_keep_minimum_and_reset() {
     check(
         "repeat",
         &SINGLE.replacen("Value:AND", "Value::AND{2}", 1),
         2,
         Some("rep_and_acode"),
-        &[("HcatHcat", json!(["BODY", "BODY"]))],
+        &[("HcatHcat", json!(["BODY", "BODY"])), ("Hcat", Value::Null)],
     );
 }
 #[test]
@@ -411,7 +410,6 @@ const NONRETURN_REPEAT: &str = r#"Value::AND{2}
 "#;
 
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5; ordinary minimum miss Err/null reconciliation"]
 fn explicit_return_below_minimum_is_an_ordinary_miss() {
     check(
         "repeat_under_min",
@@ -422,7 +420,6 @@ fn explicit_return_below_minimum_is_an_ordinary_miss() {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5; ordinary minimum miss Err/null reconciliation"]
 fn nonreturning_group_below_minimum_is_an_ordinary_miss() {
     check(
         "repeat_nonreturn_under_min",
@@ -430,5 +427,159 @@ fn nonreturning_group_below_minimum_is_an_ordinary_miss() {
         2,
         Some("rep_and_acode"),
         &[("Hcat", Value::Null)],
+    );
+}
+
+fn repeated_value(name: &str, value: &str, expected: Value) {
+    check(
+        name,
+        &format!("Value::AND{{2}}\n /H/\n /cat/ -> Value[1] {{return({value})}}\n"),
+        2,
+        Some("rep_and_acode"),
+        &[
+            ("HcatHcat", json!([expected.clone(), expected])),
+            ("Hcat", Value::Null),
+        ],
+    );
+}
+
+#[test]
+fn repeated_and_preserves_zero() {
+    repeated_value("group_zero", "0", json!(0));
+}
+#[test]
+fn repeated_and_preserves_false() {
+    repeated_value("group_false", "false", json!(false));
+}
+#[test]
+fn repeated_and_preserves_empty_string() {
+    repeated_value("group_empty", "\"\"", json!(""));
+}
+#[test]
+fn repeated_and_preserves_null() {
+    repeated_value("group_null", "undef", Value::Null);
+}
+
+#[test]
+fn early_group_return_skips_remaining_slots_and_counts_once() {
+    check(
+        "group_early",
+        "Value::AND{2}\n /H/\n /cat/\n -> Value[0] {return([match_text(),cursor_pos()])}\n",
+        2,
+        Some("rep_and_acode"),
+        &[
+            ("HH", json!([["H", 1], ["H", 2]])),
+            ("HcatHcat", Value::Null),
+            ("H", Value::Null),
+        ],
+    );
+}
+
+#[test]
+fn nonreturning_groups_default_to_empty_arrays() {
+    check(
+        "group_implicit",
+        "Value::AND{2}\n /H/\n /cat/ -> Value[1] {x=match_text()}\n",
+        2,
+        Some("rep_and_acode"),
+        &[("HcatHcat", json!([[], []])), ("Hcat", Value::Null)],
+    );
+}
+
+#[test]
+fn custom_it_replaces_the_default_group_collection() {
+    check(
+        "group_custom_it",
+        "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n IT {seen=cursor_pos()}\n",
+        2,
+        Some("rep_and_acode"),
+        &[("HcatHcat", json!([]))],
+    );
+}
+
+#[test]
+fn it_keeps_whole_rule_return_authority() {
+    check_group_lifecycle_return("group_it", "IT");
+}
+
+#[test]
+fn e_keeps_whole_rule_return_authority() {
+    check_group_lifecycle_return("group_e", "E");
+}
+
+fn check_group_lifecycle_return(name: &str, hook: &str) {
+    check(
+        name,
+        &format!(
+            "Value::AND{{2}}\n /H/\n /cat/ -> Value[1] {{return(\"BODY\")}}\n {hook} {{return(\"{hook}\")}}\n"
+        ),
+        2,
+        Some("rep_and_acode"),
+        &[("HcatHcat", json!(hook))],
+    );
+}
+
+#[test]
+fn prior_lifecycle_overrides_remain_whole_rule() {
+    for hook in ["I", "LS", "LE"] {
+        check(
+            &format!("group_prior_{hook}"),
+            &format!(
+                "Value::AND{{2}}\n /H/\n /cat/ -> Value[1] {{return(\"BODY\")}}\n {hook} {{return(\"{hook}\")}}\n"
+            ),
+            2,
+            Some("rep_and_acode"),
+            &[("HcatHcat", json!(hook))],
+        );
+    }
+}
+
+#[test]
+fn zero_allowed_groups_return_an_empty_collection() {
+    check(
+        "group_zero_allowed",
+        "Value::AND{0,2}\n /H/\n /cat/ -> Value[1] {return(0)}\n",
+        2,
+        Some("rep_and_acode"),
+        &[("", json!([])), ("Hbad", json!([])), ("Hcat", json!([0]))],
+    );
+}
+
+#[test]
+fn group_outcome_rejects_capture_gaps_on_and() {
+    for (name, source) in [
+        (
+            "group_gap_final",
+            "Value::AND{2}\n @capture_gaps\n /H/\n /cat/ -> Value[1] {return(0)}\n E {return([gap_text(),cursor_pos()])}\n",
+        ),
+        (
+            "group_gap_early",
+            "Value::AND{2}\n @capture_gaps\n /H/\n /cat/\n -> Value[0] {return(0)}\n E {return([gap_text(),cursor_pos()])}\n",
+        ),
+    ] {
+        let parsed = parse_spec_with_user_functions(source).unwrap();
+        let error = validate(&parsed).expect_err("AND remains ineligible for capture_gaps");
+        let diagnostic = error.diagnostic().expect("portable directive diagnostic");
+        eprintln!(
+            "RUST_AND_GROUP_REJECTED {name} {}",
+            json!({"source":source,"diagnostic":diagnostic})
+        );
+        assert_eq!(diagnostic.code, "capture_gaps_rule_ineligible");
+        assert_eq!(diagnostic.stage, "validate_directive");
+    }
+}
+
+#[test]
+fn group_outcome_one_slot_fluent_return_is_per_group() {
+    check(
+        "group_fluent_one_slot",
+        "Value::AND{2}\n /H/ -> Value[0] .return(0)\n",
+        1,
+        Some("rep_and_acode"),
+        &[
+            ("HH", json!([0, 0])),
+            ("H", Value::Null),
+            ("HHH", json!([0, 0])),
+        ],
     );
 }

@@ -7791,8 +7791,9 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2 - honor required AND slots before inherited entry selectors`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3`
-  Status: `in_progress` / prerequisite intake39.1.3.0 complete; reference39.7 before Rust implementation
+  Status: `completed` / bounded39.1.3.1 group outcomes targeted-checked; broader admission23.4 separate
   Goal: Reconcile and repair repeated AND action return per-group unwind and minimum enforcement.
+  Children:39.1.3.0 reference intake and39.1.3.1 bounded runtime implementation; reference prerequisite39.7 complete. Remaining family minimum/blind/full admission is separately owned.
   Scope: Initial AND{2} returns scalarBODY after first group, including below-minimum Hcat. Establish existing per-group return/collection authority and early-return control; do not reuse CHOICE-only ADR0048 collector or force execution after an explicit group return.
   Planned verification tier: focused
   Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
@@ -7802,6 +7803,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Activation: clean `81ea96e21f3944d9b4506b2c16a47284ee211c0a` after dependency/index repairs. Read current sparse target/card, ADR0044/0047/0048, normal Perl repeated sparse return fixture and engine native/generated action-return/count/iteration paths. Establish public native/fresh reference outcomes and emitted mechanism for final/early/falsey returns, group minima, lifecycle ordering and nonreturn controls before production. Do not extend CHOICE-only collector or force execution after an explicit group return. Keep ordinary nonreturn minimum miss39.1.5 and blind-result39.1.4.2 separate; add bounded children if actual authority exceeds one safe implementation slice.
 
   Dependency:39.1.3.0 qualified the reference falsey defect;39.7 now repairs accepted-group/value separation and unlocks this Rust return implementation. LS/LE omission stays SESSION-STARTUP-READING.27, P1 before full admission. Preserve default IT replacement semantics, per-group early unwind and real minimum misses.
+
+  Reactivation: clean `9fee9c8000c42d9c981bf0a569e0bb827ea5017e` after reference39.7. Current authority preserves0/false/empty/null, per-group early unwind, empty nonreturn groups, custom IT replacement and lifecycle whole-rule overrides. Gap contract requires accepted repeated payload then iteration finalization/commit-before-IT, lifecycle unwind stays whole-rule. Runtime group-result/count/minimum must be separate from CHOICE-only collection.39.1.3.1 owns bounded AND-acode group outcomes including its directly dependent ordinary minimum null and implicit empty-group/default-IT result;39.1.5 retains remaining mode/bcode minimum reconciliation,39.1.4.2 blind results unchanged.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.1`
+  Status: `completed` / repeated AND acode group outcomes targeted-checked
+  Activation: clean `9fee9c8000c42d9c981bf0a569e0bb827ea5017e` after repaired falsey reference39.7.
+  Goal: Preserve repeated AND group return/unwind/count/minimum and default collection in Rust native/restored/plan.
+  Verification tier: `focused`
+  Focused checks:14 actual runtime RED groups ->GREEN; normal37pass/1 owned ignored, exact41 source/serde/plan/emission and legacy records unchanged, negative gap eligibility unchanged; duplicate-slot15 roles/default-blind6/repeated-choice3 tests15 roles; exact-file format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining minimum/blind/peer owners; no new family/schema/directive/progress policy.
+  Claim verification: none: Finite authored group/value/count/lifecycle/source distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Initial/refined sources reproduce first-group whole-rule scalar/falsey return, skipped IT/E, missing nonreturn/zero-min collection and under-minimum Err.14 independently reached runtime result groups fail; initial2 ineligible gap fixtures are instrument failures, not product RED. Original3 dormant return/minimum tests enabled after correcting the two-minimum-ignore count, and E/IT split for independent reach.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Both engine acode loops route repeated AND action returns through whole-rule return instead of a per-group outcome. Slot ordinal/count and result collection lack a distinct accepted group, so return bypasses reset/minimum/IT/E and implicit empty values never collect. Shared CHOICE-only collector correctly excludes AND and is not its repair owner.
+  - [x] **FIX**: In each existing loop, capture a typed optional AND group value and leave only the current labeled action dispatch on explicit return. Skip remaining slots/post-return LE, finalize the accepted group, reset sequence position and count once. Default group result is an empty Array; append only when authored IT does not replace default collection. Keep lifecycle returns whole-rule. AND-acode under-minimum returns null as the direct group-count dependency; other families stay39.1.5. No new serialized state or eligibility.
+  - [x] **ADDRESSED (verified)**:14 runtime RED groups pass across native/restored/plan; final37pass/1 remaining blind regression ignored. Covers final/early/one-slot fluent returns,0/Bool false/empty/null, implicit empty groups, partial/min0/under-minimum, IT/E authority and prior I/LS/LE overrides. Exact negative AND-gap diagnostics remain unchanged; no accepted AND-gap runtime claim.
+  - [x] **NO REGRESSION**: Duplicate-slot15 roles, default-blind6 and repeated-choice3 tests15 roles pass; exact41 full source/compiled-serde/plan/emission and legacy records identical, only14 intended result groups change. Source emitter/core schema/CHOICE helper/ordinary progress policy unchanged. Rebuild generated applications with updated runtime; independent emitted package execution unassessed. Remaining minimum/blind/peer/full admission owners stay open.
+  - [x] **LOCKSTEP**: rust-and-group-outcomes-intake.json.gz retains actual producers/initial/refined/extra RED/GREEN/source/patch/receipt and discloses invalid gap/ignore-count/reach refinements. Target/card/book/roadmap/task/live/resume/history aligned; parent39.1.3 bounded implementation complete.39.1.5 next, then39.1.4.2; zero-width39.8 and lifecycle SESSION27 before admission. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.1 - preserve repeated AND group values and early unwind`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0`
   Status: `completed` / reference prerequisite qualified; no production change
@@ -7892,6 +7912,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact native/restored/plan minimum behavior and recovery distinctions, safe representative repetition modes and typed error controls, compile/format, retained actual inputs and book/docs/commit.
   Planned canonical trigger: Actual new policy/error authority separately owned canonical; full39/23.4/final clean push.
   Planned claim verification: none: Finite authored minimum/no-match/diagnostic distinctions, no population measurement.
+
+  Current boundary after39.1.3.1: Original explicit/nonreturn AND-acode under-minimum controls now returnnull and are active/green. Keep the retained historical Err observations dated. This owner next independently qualifies remaining regex-without-action/blind/repetition minimum paths and recovery/recognition/error distinctions; do not re-fix or infer unresolved AND-acode failure.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8225,7 +8247,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3` | `in_progress` | Resume Rust per-group return/unwind/count with repaired falsey reference. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5` | `pending` | Reconcile remaining ordinary minimum families after AND-acode group repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1375,12 +1375,19 @@ impl GeneratedPlanExecutor<'_> {
         let rep_min = rule.rep_min.unwrap_or(0);
         let rep_max = rule.rep_max;
         let collects_action_values = collects_explicit_action_iteration_values(rule);
+        // AND returns unwind the current group, unlike per-hit CHOICE values.
+        // Keep its value separate from slot position and accepted-group count.
+        let collects_and_groups = is_rep && rule.mode.is_and() && !rule.acode_dispatch.is_empty();
+        let mut and_group_return = None;
         let mut action_iteration_values = Vec::new();
 
         macro_rules! collect_or_return_action_value {
-            () => {
+            ($group_dispatch:lifetime) => {
                 if let Some(value) = ctx.take_return_value() {
-                    if collects_action_values {
+                    if collects_and_groups {
+                        and_group_return = Some(value);
+                        break $group_dispatch;
+                    } else if collects_action_values {
                         action_iteration_values.push(value);
                     } else {
                         ctx.restore_return_value(caller_return);
@@ -1514,7 +1521,9 @@ impl GeneratedPlanExecutor<'_> {
             if let Some(m) = match_result {
                 ctx.set_gap_phase("edge");
                 let mut dispatched_acode = false;
-                for (action_index, entry) in rule.acode_dispatch.iter().enumerate() {
+                'and_group_dispatch: for (action_index, entry) in
+                    rule.acode_dispatch.iter().enumerate()
+                {
                     if entry.regex_idx == m.index
                         && required_step.is_none_or(|step| step.dispatches(action_index))
                     {
@@ -1543,7 +1552,7 @@ impl GeneratedPlanExecutor<'_> {
                                     || (entry.child_label == label && !calls_child && !reads_retv)
                                 {
                                     self.engine.execute_block(block, ctx, label)?;
-                                    collect_or_return_action_value!();
+                                    collect_or_return_action_value!('and_group_dispatch);
                                 } else if calls_child || reads_retv {
                                     let child_retv =
                                         self.execute_action_edge_child_entry(entry, ctx)?;
@@ -1555,11 +1564,11 @@ impl GeneratedPlanExecutor<'_> {
                                     let block_result = self.engine.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
-                                    collect_or_return_action_value!();
+                                    collect_or_return_action_value!('and_group_dispatch);
                                     ctx.set_retv(child_retv);
                                 } else {
                                     self.engine.execute_block(block, ctx, label)?;
-                                    collect_or_return_action_value!();
+                                    collect_or_return_action_value!('and_group_dispatch);
                                     let child_retv =
                                         self.execute_action_edge_child_entry(entry, ctx)?;
                                     ctx.set_retv(child_retv);
@@ -1574,7 +1583,7 @@ impl GeneratedPlanExecutor<'_> {
                             .execute_action_edge_fluent_chain(entry, ctx, label)?
                             == ActionEdgeFlow::Returned
                         {
-                            collect_or_return_action_value!();
+                            collect_or_return_action_value!('and_group_dispatch);
                         }
                     }
                 }
@@ -1587,22 +1596,37 @@ impl GeneratedPlanExecutor<'_> {
                     );
                 }
 
-                ctx.set_gap_phase("LE");
-                if let Some(ref lecode) = rule.lecode {
-                    self.engine
-                        .execute_lifecycle_block("LE", lecode, ctx, label)?;
-                    return_if_rule_returned!();
+                if and_group_return.is_none() {
+                    ctx.set_gap_phase("LE");
+                    if let Some(ref lecode) = rule.lecode {
+                        self.engine
+                            .execute_lifecycle_block("LE", lecode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
                 }
+                // An accepted early group return skips its remaining slots,
+                // then finalizes this candidate before the outer IT hook.
                 ctx.commit_gap_candidate(label)?;
 
                 if is_rep_and_acode_seq {
-                    and_acode_idx += 1;
-                    if and_acode_idx < and_acode_seq_len {
-                        continue;
+                    if and_group_return.is_none() {
+                        and_acode_idx += 1;
+                        if and_acode_idx < and_acode_seq_len {
+                            continue;
+                        }
                     }
                     and_acode_idx = 0;
                 }
                 matches += 1;
+                if collects_and_groups {
+                    let group_value = and_group_return
+                        .take()
+                        .unwrap_or_else(|| RuntimeValue::Array(Vec::new()));
+                    // Authored IT replaces the reference's default push.
+                    if rule.itcode.is_none() {
+                        action_iteration_values.push(group_value);
+                    }
+                }
 
                 ctx.set_gap_phase("IT");
                 if let Some(ref itcode) = rule.itcode {
@@ -1640,7 +1664,7 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         if is_rep && matches < rep_min {
-            if collects_action_values {
+            if collects_action_values || collects_and_groups {
                 ctx.restore_return_value(caller_return);
                 saved_match.restore(ctx);
                 return Ok(RuntimeValue::Undef);
@@ -1678,7 +1702,7 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         let my_return = ctx.take_return_value().unwrap_or_else(|| {
-            if collects_action_values {
+            if collects_action_values || collects_and_groups {
                 RuntimeValue::Array(action_iteration_values)
             } else {
                 RuntimeValue::Undef
@@ -3585,12 +3609,19 @@ impl Engine {
 
         // ── Regex-based matching loop ──
         let collects_action_values = collects_explicit_action_iteration_values(rule);
+        // AND returns unwind the current group, unlike per-hit CHOICE values.
+        // Keep its value separate from slot position and accepted-group count.
+        let collects_and_groups = is_rep && rule.mode.is_and() && !rule.acode_dispatch.is_empty();
+        let mut and_group_return = None;
         let mut action_iteration_values = Vec::new();
 
         macro_rules! collect_or_return_action_value {
-            () => {
+            ($group_dispatch:lifetime) => {
                 if let Some(value) = ctx.take_return_value() {
-                    if collects_action_values {
+                    if collects_and_groups {
+                        and_group_return = Some(value);
+                        break $group_dispatch;
+                    } else if collects_action_values {
                         action_iteration_values.push(value);
                     } else {
                         ctx.restore_return_value(caller_return);
@@ -3749,7 +3780,9 @@ impl Engine {
                 // ── Action-edge dispatch ──
                 ctx.set_gap_phase("edge");
                 let mut dispatched_acode = false;
-                for (action_index, entry) in rule.acode_dispatch.iter().enumerate() {
+                'and_group_dispatch: for (action_index, entry) in
+                    rule.acode_dispatch.iter().enumerate()
+                {
                     if entry.regex_idx == m.index
                         && required_step.is_none_or(|step| step.dispatches(action_index))
                     {
@@ -3777,7 +3810,7 @@ impl Engine {
                                     || (entry.child_label == label && !calls_child && !reads_retv)
                                 {
                                     self.execute_block(block, ctx, label)?;
-                                    collect_or_return_action_value!();
+                                    collect_or_return_action_value!('and_group_dispatch);
                                 } else if calls_child || reads_retv {
                                     // Perl lowers `call(child)` inside the edge
                                     // block to the already matched edge child.
@@ -3794,7 +3827,7 @@ impl Engine {
                                     let block_result = self.execute_block(block, ctx, label);
                                     ctx.pop_action_edge_call_result();
                                     block_result?;
-                                    collect_or_return_action_value!();
+                                    collect_or_return_action_value!('and_group_dispatch);
                                     ctx.set_retv(child_retv);
                                 } else {
                                     // Blocks that do not call the child run before
@@ -3802,7 +3835,7 @@ impl Engine {
                                     // child. The child return then seeds `retv`
                                     // for later edges / lifecycle blocks.
                                     self.execute_block(block, ctx, label)?;
-                                    collect_or_return_action_value!();
+                                    collect_or_return_action_value!('and_group_dispatch);
                                     let child_retv =
                                         self.execute_action_edge_child_entry(entry, ctx)?;
                                     ctx.set_retv(child_retv);
@@ -3815,7 +3848,7 @@ impl Engine {
                         } else if self.execute_action_edge_fluent_chain(entry, ctx, label)?
                             == ActionEdgeFlow::Returned
                         {
-                            collect_or_return_action_value!();
+                            collect_or_return_action_value!('and_group_dispatch);
                         }
                     }
                 }
@@ -3829,21 +3862,36 @@ impl Engine {
                 }
 
                 // ── LE-block (loop end, after successful match) ──
-                ctx.set_gap_phase("LE");
-                if let Some(ref lecode) = rule.lecode {
-                    self.execute_lifecycle_block("LE", lecode, ctx, label)?;
-                    return_if_rule_returned!();
+                if and_group_return.is_none() {
+                    ctx.set_gap_phase("LE");
+                    if let Some(ref lecode) = rule.lecode {
+                        self.execute_lifecycle_block("LE", lecode, ctx, label)?;
+                        return_if_rule_returned!();
+                    }
                 }
+                // An accepted early group return skips its remaining slots,
+                // then finalizes this candidate before the outer IT hook.
                 ctx.commit_gap_candidate(label)?;
 
                 if is_rep_and_acode_seq {
-                    and_acode_idx += 1;
-                    if and_acode_idx < and_acode_seq_len {
-                        continue;
+                    if and_group_return.is_none() {
+                        and_acode_idx += 1;
+                        if and_acode_idx < and_acode_seq_len {
+                            continue;
+                        }
                     }
                     and_acode_idx = 0;
                 }
                 matches += 1;
+                if collects_and_groups {
+                    let group_value = and_group_return
+                        .take()
+                        .unwrap_or_else(|| RuntimeValue::Array(Vec::new()));
+                    // Authored IT replaces the reference's default push.
+                    if rule.itcode.is_none() {
+                        action_iteration_values.push(group_value);
+                    }
+                }
 
                 // ── IT-block (per-iteration, REP only) ──
                 ctx.set_gap_phase("IT");
@@ -3889,7 +3937,7 @@ impl Engine {
 
         // Check min bound for REP variants (not for non-REP with no matches)
         if is_rep && matches < rep_min {
-            if collects_action_values {
+            if collects_action_values || collects_and_groups {
                 ctx.restore_return_value(caller_return);
                 saved_match.restore(ctx);
                 return Ok(RuntimeValue::Undef);
@@ -3930,7 +3978,7 @@ impl Engine {
         // restore the caller's pending return and match lexicals so nested
         // dispatch is transparent to the parent.
         let my_return = ctx.take_return_value().unwrap_or_else(|| {
-            if collects_action_values {
+            if collects_action_values || collects_and_groups {
                 RuntimeValue::Array(action_iteration_values)
             } else {
                 RuntimeValue::Undef

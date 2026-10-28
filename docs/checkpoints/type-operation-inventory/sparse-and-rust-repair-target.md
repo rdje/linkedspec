@@ -126,3 +126,19 @@ to two preserved values at8. Schema/family/global predicate unchanged; regenerat
 older standalone Perl sources. Packet perl-and-falsey-intake.json.gz. Rust39.1.3
 resumes; SESSION27 lifecycle and new39.8 /g zero-width slot/progress remain owned
 before admission. Do not reinterpret either as accepted portable behavior.
+
+39.1.3.1 completed: repeated AND acode return is a separate typed group outcome,
+not a CHOICE hit or whole-rule return. Early return skips the remaining slots,
+resets the next group and counts once. Falsey values stay exact; nonreturn groups
+default to[], custom IT replaces the push, lifecycle overrides remain whole-rule.
+The directly dependent AND-acode minimum now returnsnull; its original3 dormant
+return/minimum tests are active/green. Remaining ordinary minimum families stay
+39.1.5, then blind implicit results39.1.4.2. Final37pass/1 owned blind ignored;
+duplicate-slot/default-blind/repeated-choice nearest checks pass. Exact41 full
+source/serde/plan/emitted records and legacy inputs/results unchanged;14 actual
+runtime RED groups repaired. AND-gap sources intentionally reject at validation,
+not runtime defects or an eligibility extension.
+Packet rust-and-group-outcomes-intake.json.gz retains all epochs/refinements/patch/receipt. Rebuild generated
+applications with updated runtime; independent emitted package remains unassessed.
+Parent39.1.3 bounded implementation complete; broader23.4/peer/zero-width39.8/
+lifecycle SESSION27 remain open.

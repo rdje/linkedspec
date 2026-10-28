@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl repeated AND falsey group acceptance repaired/targeted-checked; Rust39.1.3 resumes.
+Rust repeated AND group outcomes repaired/targeted-checked; remaining minimum families39.1.5 next.
 
 ## Latest Completed Slice
 
-Perl REP_AND_ACODE now passes a fresh loop-local acceptance flag into its inner group by reference; actual slot miss/identity failure clears it, while explicit action return keeps its original value, including0/Bool false/empty/null. The raw result no longer decides whether the group matched. Early returns still skip remaining slots, accepted groups count once, real partial misses/minima/reset and custom IT replacement/whole-rule returns stay intact. Main12 groups/28 inputs baseline2pass10RED plus transaction3 groups/6 route rows0pass3RED ->final15pass native/fresh. Transactions now commit two falsey groups at9 (caller consumes entryH), and zero-progress falsey repetition retains its typed rejection. Nearest4 suites79groups and emitter syntax pass on the same fixed bytes. Exact15 source inputs/12 metadata sets unchanged; every emitted difference is limited to the local outcome channel/accurate trace text. Replay of16 historical reference pairs changes only3 full falsey results to[0,0]/[empty,empty]/[null,null] at8. Global recognition predicate, Rust, schemas/family rows and other handler bodies unchanged; regenerate older standalone Perl sources to install this fix. Original two-zero-width-slot probe reaches a separate /g continuation-state defect, owned P2 39.8 before admission; final one-group zero-width control isolates acceptance. Initial transaction probe lacked the caller entryH; corrected/reached baseline and prior instrument/results retained with no false product RED credit. Packet perl-and-falsey-intake.json.gz retains all source/epoch/result/producers/patch/receipt. Lifecycle omission SESSION27 stays owned. Book/card/target/roadmap/task/live/resume/history synchronized; next Rust39.1.3; focused authorized commit, full admission/push open.
+Rust repeated AND acode now separates group return from typed required-step position and accepted-group count. Native/restored/generated-plan preserve0/Bool false/empty/null, final and early block/fluent returns, empty nonreturn groups, min0/under-minimum null, custom IT replacing default push and lifecycle whole-rule overrides. Early return skips remaining group slots and resets the next group; CHOICE-only collector stays unchanged. Three original dormant return/AND-minimum regressions enabled;14 actual runtime RED groups become GREEN, final37pass/1 owned blind-result ignored. Nearest duplicate-slot15 roles, default-blind6 and repeated-choice3 tests/15 roles pass; scoped format passes. Exact41 full source/serde/plan/emitted records and legacy inputs/results unchanged, only14 result groups change. Two initial gap fixtures correctly reject AND before runtime and earn no product RED credit; their final exact typed rejection is unchanged. No capture_gaps eligibility, source-emitter/schema/row or global progress policy change. Rebuild generated Rust applications with updated runtime, no source regeneration; independent emitted package execution unassessed. Retain activation ignore-count refinement, separately reached E/IT, all initial/refined source/result/patch epochs in rust-and-group-outcomes-intake.json.gz. AND-acode minimum null is a direct group-count dependency; remaining minimum families39.1.5 and blind implicit results39.1.4.2 stay open. Parent39.1.3 bounded implementation complete; zero-width39.8/lifecycle SESSION27/full23.4 remain owned. Book/card/target/roadmap/task/live/resume/history synchronized; authorized focused commit/no push, next39.1.5.
 
 ## Next Action
 
-Resume Rust39.1.3 from clean falsey reference repair39.7. Enable original repeated-action regression and add final/early/falsey/minimum/IT/E controls against repaired reference. Separate group return/unwind/count/result from CHOICE-only ADR0048 and lifecycle whole-rule returns, preserve typed required steps/captures/cursor and real minimum failure. Implement bounded runtime-only repair with focused compile/targeted checks/docs/commit; ordinary nonreturn minimum39.1.5 and blind implicit collection39.1.4.2 follow before peer39.2-.4. P2 zero-width slot/progress39.8 and SESSION27 lifecycle remain before admission.
+Activate39.1.5 from clean repeated-AND acode group outcome repair. Reverify remaining ordinary minimum-miss paths against current public reference, including repeated blind modes, recovery and accepted-null versus actual miss/real typed errors; AND-acode original minima now pass and are not dormant. Freeze exact authority before changes; focused compile/targeted repair/docs/commit. Then39.1.4.2 implicit blind collection and independent peers39.2-.4. Remaining sole blind regression must enable before full23.4/push; zero-width39.8 and lifecycle SESSION27 remain owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.1` — Rust repeated AND group outcomes repaired/targeted-checked; remaining minimum families39.1.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.7` — Perl repeated AND falsey group acceptance repaired/targeted-checked; Rust39.1.3 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0` — Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` — Rust indexed AND priority repaired/targeted-checked; repeated per-group returns39.1.3 next.
@@ -29,7 +30,6 @@ Resume Rust39.1.3 from clean falsey reference repair39.7. Enable original repeat
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.5` — Named local-start reversed-span guards repaired/targeted-checked; sparseAND authority39.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.3` — Advancing/bridge String word names targeted-checked; immediate two-guard range repair42.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.2` — Readonly Perl text/predicate names and unused readonly calls repaired; advancing42.2.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.1` — Ten ordinary Perl mark write statements support governed String names; readonly42.2.2 next.
 
 ## History
 
