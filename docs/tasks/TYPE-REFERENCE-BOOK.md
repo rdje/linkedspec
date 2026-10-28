@@ -7156,7 +7156,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2 - lock Rust capture Number flow and own active-edge dispatch prerequisite`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3`
-  Status: `completed`
+  Status: `in_progress` / method compatibility committed75365a176; immediate test-scope33.3.1
   Goal: Independently establish/lock Dart readonly anonymous capture-boundary Number method composition.
   Authority: Frozen33 target/shared11 and existing source/method/function/alias contracts; packet capture-boundary-number-dart-intake.json.gz retains all actual source/normal-test/generated-library/caller/output epochs and strict verifier.
   Verification tier: `focused`
@@ -7173,14 +7173,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3 - lock Dart readonly capture Number method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.4`
-  Status: `pending`
-  Goal: Independently implement/check Julia readonly anonymous capture-boundary Number result composition.
-  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
-  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
-  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
-  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+  Status: `completed`
+  Goal: Independently establish/lock Julia readonly anonymous capture Number method composition.
+  Authority: Frozen33 target/shared11 and current source/method/function/alias contracts; packet capture-boundary-number-julia-intake.json.gz retains sixteen-source native/reconstructed/plan/fresh intake, normal tests and exact adjacent source/warning authority evidence.
+  Verification tier: `focused`
+  Focused checks: Current runtime already supports shared11/original9 and ordinary compatible method flow; new75 plus existing Number12 pass native/reconstructed SpecFile/generated-plan/fresh emitted Module under depwarn=error. Strict Bool/Number, zero position/lazy skip/snapshot/legacy/function/callback/source controls; normal registration/book/map/history/manual continuity. No product RED/runtime edit/full suite.
+  Canonical trigger: Immediate Dart test-scope33.3.1 then safe Lua33.5,35/34. Full23.4/clean push also require39/38/37 and new endpoint policy40, pressure/registration/declared-host proof. Public policy movement gets separate canonical authority.
+  Claim verification: none: Finite authored functional/source/diagnostic observations, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Sixteen-source independent intake is method-compatible in matched contexts on all four supported routes. Shared11/original9/alias/snapshot/legacy and typed function/callback controls agree. The additional no-local-match width differs: Julia null causes8/F; Dart0 causes1/empty, reference0 also has fresh uninitialized-position warnings. That discrepancy is diagnostic-only, not a new portable absence contract.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: julia/src/runtime/Interpreter.jl already feeds native capture-helper Number values through the existing typed call/method evaluator and checks parser-state call.name in pure functions. No missing Perl host-expression lowering seam. Separate endpoint branch explicitly returns nothing without local_match, Dart falls back to cursor, and emitted Perl computes LSPOS-length(LMATCH) from unset package operands;40 owns authority/repair before admission.
+  - [x] **FIX**: Add module-scoped normal75-assertion coverage without runtime/frontend/emitter changes. Preserve shared11, nine native getter/alias values, snapshot4!/later boundary6/S, direct legacy4/[]/KVT, function-state/source identity and callback context. Defined zero test uses position/line/column/through-cursor/rest values, excluding unsettled local-match endpoint width. Immediate33.3.1 removes that unadjudicated assertion from the new Dart test before33.5; original evidence remains retained.
+  - [x] **ADDRESSED (verified)**: New75 and existing Number12 pass four supported routes with strict scalar kinds. Ordinary getter/default/String/Array/signed-selection and normalized bad-operand skip work unchanged. Nine function sources keep authored helper names and typed native versus generated exception classes; literal callback parser context1! and registered callback inside pure apply preserve current specific state rejection. Real defined position0 skips F.
+  - [x] **NO REGRESSION**: Runtime diff is empty; normal runtests registers the self-contained module. Fresh means independently loaded emitted Module in the same process, not isolated package proof. Separate channels are complete/clean for Julia checks. Exact Perl/Dart/Julia no-match discrepancy and reference warnings are retained; no warning suppression, null/zero rebasing, implicit new endpoint authority, metadata waiver or healthy semantic credit.40 links typed-source/host-isolation owners and requires concrete source/absence target first.
+  - [x] **LOCKSTEP**: Packet/target/current Julia and pre-match-policy cards/map, book matched-context method compatibility and actual unresolved pre-match limits, task/live/resume/roadmap/history agree. Dart compatibility parent reopens only for immediate test-scope followup; formal endpoint/source-context admission remains separate. Follow33.3.1 then33.5.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.4 - lock Julia capture Number flow and own pre-match endpoint policy`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.5`
   Status: `pending`
@@ -7445,13 +7452,88 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
   Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1`
+  Status: `pending` / P1 immediately after33.4 before33.5
+  Goal: Remove unsettled no-local-match capture-width semantics from the new Dart compatibility regression while retaining portable position-zero coverage.
+  Reproduction: New33.3 entry-setup case fixes capture_slice_len at0. Independent33.4 calibration finds Julia null; reference Perl returns0 but fresh emission warns about uninitialized LSPOS subtraction and its emitted expression uses unset package LSPOS/LMATCH. Actual source/outputs are retained with33.4. No value is yet admitted as the cross-backend absence contract.
+  Acceptance: Refine only the normal Dart zero test to defined capture-boundary position/line/column/through-cursor/rest getters, excluding the unsettled current-match-endpoint width. Retain original observed0 as diagnostic evidence under40, without rebasing Julia or labeling either result portable. Runtime remains unchanged; check exact new test/analysis, update current card/book/target status and commit before33.5. This repairs a test-scope omission introduced by33.3, not the producer policy itself.
+  Planned verification tier: focused
+  Planned focused checks: New six-group Dart test and fatal changed-file analysis/format, exact difference excluding only unadjudicated width, docs/continuity; no full gate.
+  Planned canonical trigger: Formal source/context admission23.4 requires40 authority and any confirmed producer/diagnostic repairs first.
+  Planned claim verification: none: Finite named test-scope correction, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
+  Status: `pending` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
+  Goal: Freeze anonymous capture end/absence behavior before a local match, remove unsafe reference arithmetic, and align confirmed producer/diagnostic outliers.
+  Reproduction: Exact Top:: I primitive-plus-method source on x returns[[null,0,1,1,0,1],8,F] on Julia native/reconstructed/plan/fresh Module. Dart native/restored/plan/fresh VM returns[[0,0,1,1,0,1],1,empty]. Perl native/fresh also returns the zero version, but fresh emitted code warns on uninitialized LSPOS subtraction; it computes span end from package LSPOS-length(LMATCH) without local match variables in that handler. Exact sources/results/emitted Perl/warnings are retained with33.4. A coercion side effect is not silently elevated into new semantic authority; other backends remain unassessed.
+  Root / impact: Julia explicitly has no current-match endpoint; Dart falls back to the live cursor; reference raw subtraction manufactures0 from missing state. Width/default effects therefore differ; emitted operands are package-global, with residue influence to be falsified explicitly in40.0. Source/method composition is healthy in valid matched contexts; the unresolved question is producer absence and diagnostic authority. Link existing typed-source/ordinary local-match presence contracts and SESSION-STARTUP-READING.17 host isolation, without duplicating their broader repairs.
+  Acceptance:40.0 reconciles current capture span/typed absence/legacy compatibility/reference authority with initial and nested I, no regex versus regex-driven handlers, real empty matches, explicit cursor/boundary moves before first local match, aliases/text/length/take variants and package-state residue controls. Freeze a concrete target before production; obtain director decision only if canonical requirements actually conflict. Then split explicit backend/Perl warning repair leaves as needed, implement through existing sole source/cursor owners, retain valid zero versus unavailable distinctions and normal/fresh typed proof, update book and all affected tests before admission. Do not patch a missing endpoint by guesswork or preserve a warning-derived value as a healthy contract.
+  Planned verification tier: focused
+  Planned focused checks: Finite authority/descriptor/generated-source/trace distinctions and exact value/kind/fallback effects; each later repair receives its own focused leaf before implementation.
+  Planned canonical trigger: Public contract/policy movement needs canonical authority; full23.4/final clean push cannot pass with unresolved40.
+  Planned claim verification: none: Finite authored discrepancy/causal intake, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.0`
+  Status: `pending` / P1 after39/38/37, before40.1-.5/full23.4/push
+  Goal: Freeze capture endpoint/absence semantics and diagnostic authority before a local match.
+  Acceptance: Reconcile existing typed-source span/presence, capture/alias and reference-compatibility decisions using exact current probes, real empty matches, initial/nested I, regex/no-regex handlers, cursor/boundary changes and package residue controls. Keep live cursor distinct from last/current match endpoint. A warning-derived zero is evidence, not automatic new authority. Choose the repository-supported policy; request a concrete director decision only if canonical requirements actually conflict. Publish target before producer edits and distinguish required warning repair from value changes.
+  Planned verification tier: focused
+  Planned focused checks: Public Get/source dump/descriptor and supported native/generated context distinctions with exact values/kinds/effects, retained actual producers; no full matrix.
+  Planned canonical trigger: New public absence-policy authority requires canonical tier; full23.4/push requires resolved40 and verified repairs.
+  Planned claim verification: none: Finite authored contract/causal distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1`
+  Status: `pending` / P1 after40.0 before full23.4/push
+  Goal: Independently intake and repair confirmed Perl warning/unsafe-operand capture absence/diagnostic drift against frozen40.0.
+  Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
+  Status: `pending` / P1 after40.0 before full23.4/push
+  Goal: Independently intake and repair confirmed Rust capture absence/diagnostic drift against frozen40.0.
+  Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.3`
+  Status: `pending` / P1 after40.0 before full23.4/push
+  Goal: Independently intake and repair confirmed Dart capture absence/diagnostic drift against frozen40.0.
+  Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.4`
+  Status: `pending` / P1 after40.0 before full23.4/push
+  Goal: Independently intake and repair confirmed Julia capture absence/diagnostic drift against frozen40.0.
+  Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.5`
+  Status: `pending` / P1 after40.0 before full23.4/push
+  Goal: Independently intake and repair confirmed safe installed-host Lua capture absence/diagnostic drift against frozen40.0.
+  Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.4` | `pending` | Independently check Julia readonly capture Number method composition. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1` | `pending` | Refine Dart zero regression to exclude unadjudicated pre-match width before33.5. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1,0 +1,27 @@
+# Anonymous capture endpoint before a local match
+
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.40; introduced during independent33.4 intake.
+Status: P1 authority and repair scheduled before full23.4 admission/push. This is
+not a newly accepted backend-specific or cross-backend value policy.
+
+The exact same Top:: I source on x reads six primitive getters and then performs
+capture_slice_len().coalesce({append F;7}).add(1). Julia four routes return
+[[null,0,1,1,0,1],8,"F"]. Dart native/restored/plan/fresh VM returns
+[[0,0,1,1,0,1],1,""]; Perl native/fresh returns the latter too, but fresh code
+emits uninitialized LSPOS subtraction warnings. Generated Perl uses package
+LSPOS-length(LMATCH) without local-match variables in that handler. Julia retains
+no endpoint when local_match is absent; Dart explicitly falls back to live cursor.
+
+Neither a bare reference value with warning-derived arithmetic nor an inferred
+unavailable policy is accepted here.40 must reconcile existing span/absence/legacy
+contracts and real empty-match controls, handler variants, nested entry, authored
+cursor/boundary moves, aliases/text/length/take and package-state residue before
+fixing anything. Existing broader typed-source and host-isolation owners retain
+their scope. Exact producers/channels are retained with capture-boundary-number-
+julia-intake.json.gz; no untested Rust/Lua failure is inferred.
+
+Normal33.4 feature proof uses matched contexts and defined position zero. The
+original absence discrepancy stays diagnostic, with no healthy semantic credit.
+Immediate test-only33.3.1 removes the unsettled width from Dart's new zero control;
+it preserves the legitimate position/line/column/through-cursor/rest cases. No
+runtime rebasing or API/arity grant is made by either feature unit.

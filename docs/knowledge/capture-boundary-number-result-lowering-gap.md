@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: bounded Perl33.1 repaired/Rust33.2 and Dart33.3 compatible; bounded36 targeted-checked, Julia33.4 next
+status: bounded Perl repaired/Rust/Dart/Julia compatible; Dart test-scope33.3.1 then Lua33.5; endpoint40 owned
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -105,3 +105,14 @@ runtime edits. New6 plus existing Number4 pass, final6 retains authored alias
 error names. Seven-source fresh Dart VM execution agrees; exact bytes/channels
 are retained. See [[capture-boundary-number-dart-method-compatibility]]. Julia33.4
 and safe Lua33.5 follow; full23.4 and39/38/37/35/34 remain separately owned.
+
+## Current Julia33.4 and unadjudicated endpoint case
+
+Julia ordinary target is already compatible:75 new plus12 existing Number
+assertions pass native/reconstructed/plan/fresh Module without runtime changes.
+See [[capture-boundary-number-julia-method-compatibility]]. A separate initial-I
+width discrepancy is diagnostic-only: Julia null/8/F, Dart0/1/empty, Perl0 with
+fresh uninitialized LSPOS warnings. [[capture-boundary-before-match-policy-divergence]]
+owns40 before admission. New normal zero coverage uses defined positions; immediate
+33.3.1 quarantines the unset-endpoint width assumption in Dart's recent test.
+No choice of zero versus unavailable, runtime rebasing or policy admission here.

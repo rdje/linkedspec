@@ -1,0 +1,35 @@
+---
+id: capture-boundary-before-match-policy-divergence
+title: Capture width before a local match differs and Perl zero uses unset position arithmetic
+answers:
+  - "what does capture_slice_len return before a local match"
+  - "why does Julia use the capture width fallback while Dart skips it"
+  - "why does generated Perl capture_slice_len warn about uninitialized LSPOS"
+  - "which task owns capture endpoint absence policy before matching"
+date: 2026-10-28
+status: P1 authority40 before full23.4/push; immediate Dart test-scope33.3.1, no policy admission
+tags: [capture, absence, endpoint, perl, dart, julia, source, diagnostics]
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.33.4 exact three-backend initial-I source/probes/emitted Perl/warnings retained in capture-boundary-number-julia-intake.json.gz, including prior Dart packet."
+reverify: "Recover probe_capture_number_absence_perl.pl and probe_capture_number_julia.jl plus retained Dart inputs; use packet project-routed commands. Current outputs are diagnostic, not a resolved expected policy."
+---
+
+Same Top:: I source on x reads six primitives and then capture_slice_len with
+lazy fallback7/add1. Julia native/reconstructed/plan/fresh returns
+[[null,0,1,1,0,1],8,F]; Dart native/restored/plan/fresh VM returns
+[[0,0,1,1,0,1],1,empty]. Perl native/fresh returns the latter but fresh execution
+warns about uninitialized LSPOS subtraction. Its emitted handler has no local
+match variables and computes end from package LSPOS-length(LMATCH). Julia's
+capture helper explicitly has no endpoint without local_match; Dart falls back
+to live cursor. Reference coercion alone does not settle intended absence policy.
+
+40.0 reconciles span/presence/capture/compatibility authority, real empty matches,
+initial/nested and regex/no-regex handlers, authored cursor/boundary changes,
+aliases/text/width/take and package-residue controls before40.1-.5 repairs.
+Existing typed-source and SESSION-STARTUP-READING.17 host-isolation owners retain
+their wider scope. Rust/Lua values are unassessed, not inferred defective.
+
+Current33.4 normal feature test uses matched contexts and defined position zero.
+Immediate33.3.1 removes the unsettled width from Dart's recent zero control;
+original exact outputs remain diagnostic with no healthy contract credit. No
+runtime rebasing, warning suppression or new zero/unavailable policy occurs in
+the method-composition leaves. Full23.4/push requires resolved authority/repair.
