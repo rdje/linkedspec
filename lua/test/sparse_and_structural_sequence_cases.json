@@ -1,0 +1,426 @@
+[
+  {
+    "name": "sparse_two",
+    "source": "Value::AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": "BODY"
+      },
+      {
+        "input": "cat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "sparse_three",
+    "source": "Value::AND\n /H/\n /:/\n /cat/ -> Value[2] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "H:cat",
+        "expected": "BODY"
+      },
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "incoming",
+    "source": "Top::|\n -> Value[0] {return(retv)}\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "HHcat",
+        "expected": "BODY"
+      },
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "indexed",
+    "source": "Top::|\n -> Value[1] {return(retv)}\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "catHcat",
+        "expected": "BODY"
+      }
+    ]
+  },
+  {
+    "name": "reversed",
+    "source": "Value::AND\n /a/\n /b/\n -> Value[1] {cursor_pos()}\n -> Value[0] {return(cursor_pos())}\n",
+    "cases": [
+      {
+        "input": "ba",
+        "expected": 2
+      },
+      {
+        "input": "ab",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "duplicate",
+    "source": "Value::AND\n I {hits=0}\n /a/\n /unused/\n -> Value[0] {hits=add(hits,1)}\n -> Value[0] {return([cursor_pos(),hits])}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "input": "a",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "cross_owner",
+    "source": "Value::AND\n /H/\n -> Part[1] {return(\"BODY\")}\nPart:\n /x/\n /cat/\n",
+    "cases": [
+      {
+        "input": "cat",
+        "expected": "BODY"
+      },
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "falsey_zero",
+    "source": "Value::AND\n /H/\n /cat/ -> Value[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "name": "falsey_false",
+    "source": "Value::AND\n /H/\n /cat/ -> Value[1] {return(false)}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": false
+      }
+    ]
+  },
+  {
+    "name": "falsey_empty",
+    "source": "Value::AND\n /H/\n /cat/ -> Value[1] {return(\"\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": ""
+      }
+    ]
+  },
+  {
+    "name": "falsey_null",
+    "source": "Value::AND\n /H/\n /cat/ -> Value[1] {return(undef)}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "nonreturn_tail",
+    "source": "Value::AND\n /H/\n /cat/\n /!/\n -> Value[1] {cursor_pos()}\n",
+    "cases": [
+      {
+        "input": "Hcat!",
+        "expected": null,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "repeated_return",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          "BODY",
+          "BODY"
+        ]
+      },
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "repeated_nonreturn",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {cursor_pos()}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          [],
+          []
+        ]
+      },
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "blind_default",
+    "source": "Top::\n => Value\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          "BODY"
+        ]
+      },
+      {
+        "input": "HcatHcat",
+        "expected": [
+          "BODY",
+          "BODY"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "blind_and",
+    "source": "Top::AND\n => Value\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          "BODY"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "blind_minimum",
+    "source": "Top::OR{2}\n => Value\n EX {return([\"EXIT\",cursor_pos()])}\n E {return([\"EXIT\",cursor_pos()])}\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          "EXIT",
+          8
+        ]
+      },
+      {
+        "input": "Hcat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "boundary",
+    "source": "Top::\n I {return(capture_until_boundary(\"Value\"))}\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "bodyHcat",
+        "expected": "body"
+      }
+    ]
+  },
+  {
+    "name": "recognition_progress",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));recognition_commit(tx);return(matched)}\n /never/\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_contains": "recognition_zero_progress_repetition"
+        }
+      }
+    ]
+  },
+  {
+    "name": "recognition_one_shot",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:|\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "blind_default_cursor",
+    "source": "Top::\n => Value\n EX {return(cursor_pos())}\n E {return(cursor_pos())}\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": 8
+      }
+    ]
+  },
+  {
+    "name": "no_edge_structure",
+    "source": "Value::AND\n /H/\n /cat/\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_match": true
+      },
+      {
+        "input": "cat",
+        "expected": null,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "duplicate_one_slot",
+    "source": "Value::AND\n I {hits=0}\n /a/\n -> Value[0] {hits=add(hits,1)}\n -> Value[0] {return([cursor_pos(),hits])}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "input": "a",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "compact_duplicate",
+    "source": "Value::&\n I {hits=0}\n /a/\n -> Value[0] {hits=add(hits,1)}\n -> Value[0] {return([cursor_pos(),hits])}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "input": "a",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "compact_reversed",
+    "source": "Value::&\n /a/\n /b/\n -> Value[1] {cursor_pos()}\n -> Value[0] {return(cursor_pos())}\n",
+    "cases": [
+      {
+        "input": "ba",
+        "expected": 2
+      },
+      {
+        "input": "ab",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "parent_mixed",
+    "source": "Value::AND\n I {hits=[]}\n /a/\n /b/ -> Value[1] {push(hits,\"B\")}\n -> Value[0] {push(hits,\"A\")}\n E {return(copy(hits))}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          "A",
+          "B"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "parent_anchor",
+    "source": "Value::AND\n /H/ -> Part[1] {return(\"PARENT\")}\nPart:\n /x/\n /cat/\n",
+    "cases": [
+      {
+        "input": "H",
+        "expected": "PARENT"
+      },
+      {
+        "input": "cat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "repeated_reversed_nonreturn",
+    "source": "Value::AND{2}\n /a/\n /b/\n -> Value[1] {cursor_pos()}\n -> Value[0] {cursor_pos()}\n EX {return(cursor_pos())}\n E {return(cursor_pos())}\n",
+    "cases": [
+      {
+        "input": "baba",
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "name": "one_slot_compat",
+    "source": "Value::AND\n /a/ -> Value[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "name": "local_edge_only",
+    "source": "Value::AND\n /H/\n /cat/\n -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": "BODY"
+      },
+      {
+        "input": "cat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "cross_distinct_indices",
+    "source": "Value::AND\n /H/\n /unused/\n -> Part[1] {return([match_text(),match_named(token),cursor_pos()])}\nPart:\n /x/\n /(?<token>cat)/\n",
+    "cases": [
+      {
+        "input": "cat",
+        "expected": [
+          "cat",
+          "cat",
+          3
+        ]
+      },
+      {
+        "input": "Hunusedcat",
+        "expected": null
+      }
+    ]
+  }
+]

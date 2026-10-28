@@ -321,3 +321,12 @@ matrices. Nullable390/legacy observation/progress234 neighbors pass, prior
 fixtures/compiler/emitter/matching/recognition authority unchanged. Packet
 julia-pure-observation-intake.json.gz retains actual closure, normal suite once.
 Bounded .7 complete; safe Lua39.4 next and P2 diagnostic/full admission remain.
+
+2026-10-29 independent safe Lua39.4.0 executes31 exact sources49inputs per
+installed PUC5.5/LuaJIT SDK/restored/plan plus31 modules in separate processes.
+18healthy13failed sources, exact host input/trace identity; selected-null
+matchedtrue at4 already healthy. P1 .1 required steps/.2 groups/.3 minima/.4
+blind/.6 live progress owned, .6 next. .5 post-call/.7 nullable qualification
+not inferred defects.102 normal assertions18healthy13owned dormant per host,
+registration23.4.1 pending before admission. Packet lua-sparse-intake.json.gz
+retains actual closure; no Lua product edit/declared5.4/unsafe formatter/full CI.

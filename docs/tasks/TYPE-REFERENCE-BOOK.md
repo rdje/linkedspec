@@ -4815,6 +4815,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Repeated blind parent publication39.9.2 adds t/repeated_blind_parent_acceptance.t; explicit canonical syntax/execution registration is required before admission/push.
 
+  Lua intake39.4.0: tools/run_lua_local.sh also selects explicit files rather than automatically discovering new consumers. Register lua/test/sparse_and_structural_sequence_test.lua and subsequent bounded Lua feature consumers exactly once per installed ABI/declared host in ordinary and canonical owners before23.4 admission/push. Current direct focused102 assertions per host does not imply runner admission. No infrastructure change in the focused intake.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8536,13 +8538,95 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4`
-  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Status: `in_progress` / independent safe installed-host Lua intake and bounded repairs
   Goal: Independently intake and repair safe installed-host Lua sparse-AND body candidate/required-sequence ownership.
   Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
   Planned verification tier: focused
   Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
   Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
   Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.0`
+  Status: `completed` / independent31-source installed-host baseline
+  Goal: Establish Lua structural/dependency/entry/group/minimum/blind/nullable/progress outcomes independently before runtime changes.
+  Acceptance: Use exact frozen39.0 structural sources and safe patterns/existing-table helpers. Preserve source/normalized/compiled/plan/emitted bytes and native/restored/generated/fresh observations on each installed host. Use public actual trace before code diagnosis; own each confirmed gap with bounded repair children, preserving healthy controls. Installed host proof is not declared5.4 conformance; unsafe /(/ formatter and full suite excluded. Commit intake before repairs, no peer inference or new policy.
+  Verification tier: `focused`
+  Focused checks:31sources49inputs each host SDK/restored/plan and31 modules per separate-process fresh consumer, exact host/input/trace identity; normal102 assertions18healthy13owned dormant each. No product diff; book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after declared-host/unsafe formatter/registration/pressure/lifecycle/slot and bounded repairs; public authority separately canonical.
+  Claim verification: none: Finite authored source/functional/route distinctions, no population measurement.
+  Activation: Clean `3af61e339d85e3dd8b842dfe2e230f550967f34b`; bounded Julia fixes committed. Lua failures not inferred from peers. Other repositories read-only, project outputs/native/temp on-volume through wrappers.
+
+
+  - [x] **REPRODUCE / ISSUE**:31 exact safe sources49 inputs per installed PUC5.5/LuaJIT SDK/restored/plan plus31 separate-process modules produce18healthy13failed value/error sources. All builds complete; source/normalized/compiled/plan/emitted and all49 native trace observations are host-identical. Selected-null acceptedtrue at4 is healthy, not an inferred peer defect.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual debug traces show duplicate actions sharing one hit, reversed/cross stepping local catalog, early repeated return at4, blind children consumed to8 without collection and zero-progress recognition accepted at0. interpreter.lua regex_once/accept_match use local slot order/all matching-index actions; FLOW_MT return leaves the invocation; repeated loop lacks group/blind choice collector and live progress validation; generic under-min fail throws. recognition_transaction.validate_progress exists but is not connected to actual completed repeated execution. These are actual source/results, not peer inference.
+  - [x] **FIX**: Intake only: own P1 .1 dependency order, .2 group outcomes, .3 minima, .4 implicit blind, .6 live progress immediate first. .5 post-call and .7 nullable contexts require independent qualification, no failure inferred. Preserve all production bytes and healthy controls; normal consumer retains13 dormant rows with exact owners and no passing credit.
+  - [x] **ADDRESSED (verified)**: Fresh public value/error results equal plan for all31 sources49inputs per host, full SDK/restored and host input/trace identity asserted.102 assertions18healthy13owned dormant per host, including selected-null matchedtrue/cursor4. Initial raw-plan JSON harness error retained and qualified before valid replay, no invalid product RED.
+  - [x] **NO REGRESSION**: Lua production/fixture authority/schema/family unchanged; safe patterns and installed hosts only. No /(/ formatter/full suite/declared5.4 claim. Increasing local sparse/entry/parent/mixed/no-edge/boundary/plain AND controls retain values. Broader error/nullable/post-call contexts explicitly unassessed until scheduled children.
+  - [x] **LOCKSTEP**: lua-sparse-intake.json.gz retains actual producer/consumer/inputs/runtime/trace/emission/receipts; book/card/target/roadmap/task/live/resume/history align.23.4.1 owns explicit new Lua ordinary/canonical registration before admission/push. Live progress .6 next, full prerequisites remain; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.0 - intake independent safe installed Lua structural and repetition gaps`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1`
+  Status: `pending` / P1 after live progress .6
+  Goal: Preserve authored required AND dependency steps and one selected action occurrence.
+  Acceptance: Reproduce reversed/duplicate/cross failures against frozen39.0, preserve increasing local sparse structural slots and full entry/boundary catalogs; assert physical/logical identities and nearest duplicate controls.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2`
+  Status: `pending` / P1 after required steps .1
+  Goal: Preserve one copied repeated AND result per accepted group.
+  Acceptance: Reproduce early return escaping whole rule and absent implicit groups; distinguish acceptance from falsey payload, complete vs partial groups, IT replacement/lifecycle/progress/minimum without changing ordinary authority.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3`
+  Status: `pending` / P1 after group .2
+  Goal: Return failed null for remaining ordinary regex/blind minimum misses.
+  Acceptance: Reproduce actual under-min generic throw, preserve consumed cursor and LX authority; true helper/progress errors propagate, no catch-all normalization.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4`
+  Status: `pending` / P1 after minima .3
+  Goal: Retain implicit repeated blind choice and complete AND group values.
+  Acceptance: Reproduce missing collections; exact accepted child values, nested groups, partial discard, custom IT, Default no-hit/zero-min/plain and generated routes.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5`
+  Status: `pending` / P1 independent qualification after .4
+  Goal: Independently qualify Lua repeated blind post-call value/count/progress.
+  Acceptance: Use safe actual public block/fluent/retv/Default/AND/minimum/lifecycle sources against current authority, no peer defect inferred; decompose confirmed repairs before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6`
+  Status: `pending` / P1 immediate before further feature owners/admission
+  Goal: Connect live recognition repetition progress to typed existing authority.
+  Acceptance: Actual source recognizes Guard zero-width at0 as true; qualify both hosts and scoped caller origin. Check completed iterations before count/IT/max/ordinary zero exit, preserve legal whole-LE/one-shot/ordinary routes and cleanup; no public schema/export change.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7`
+  Status: `pending` / P1 independent qualification after .5
+  Goal: Independently qualify Lua nullable lifecycle and pure observation contexts.
+  Acceptance: Selected null action already matchedtrue at4. Use exact safe context/record/error sources, no return-provenance defect inferred; repair only confirmed gaps with typed owning context before admission.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1`
   Status: `completed`
@@ -8849,7 +8933,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4` | `pending` | Independently intake safe installed Lua structural and repetition outcomes. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6` | `pending` | Repair live Lua recognition repetition progress on safe installed hosts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

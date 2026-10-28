@@ -1,0 +1,15 @@
+{
+  "blind_default": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4",
+  "blind_minimum": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3",
+  "compact_duplicate": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "compact_reversed": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "cross_distinct_indices": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "cross_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "duplicate": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "duplicate_one_slot": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "recognition_progress": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6",
+  "repeated_nonreturn": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2",
+  "repeated_return": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2",
+  "repeated_reversed_nonreturn": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1",
+  "reversed": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1"
+}
