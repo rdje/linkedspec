@@ -1,7 +1,7 @@
 # Readonly named-mark Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.34; target freeze34.0.
-Status: frozen bounded target; Perl34.1, Rust34.2/43.1, Dart34.3 and Julia34.4 targeted-checked; safe installed Lua34.5 follows.
+Status: all bounded34.1-.5 and Rust scope43.1 targeted-checked; full source/context/portable23.4 admission remains.
 
 ## Authority and observed distinctions
 
@@ -147,3 +147,14 @@ Fresh Module means current process/project. Direct6/[]/KVT and bound6/[]/undef/K
 preserve Julia copied-scalar set_key fallback outside the Hash domain, without
 Dart promotion or portable invalid-input admission. Exact source/payload/results:
 named-mark-number-julia-intake.json.gz. No runtime edit/invented RED; safe Lua next.
+
+## Bounded safe installed Lua34.5 compatibility
+
+PUC Lua5.5.1/LuaJIT2.1.1788460057 already support ordinary named Number chains,
+accepted quoted/computed names and callback caller-read/write/isolation/call-time
+scopes.31 authored sources/four public routes agree; new registered219/nearest
+anonymous155 checks pass per host with syntax/empty stderr. Direct6/[]/KVT and
+bound6/[]/undef/KVT remain qualified legacy outside Hash domain. Runtime unchanged;
+fresh module means same host process. Packet named-mark-number-lua-intake.json.gz
+retains exact inputs/payload/results; no declared5.4/unsafe-pattern/full admission
+claim. All bounded34 children are targeted-checked;42 then39/38/37/40/41 follow.

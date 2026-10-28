@@ -7214,12 +7214,12 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.5 - lock safe Lua readonly capture Number method flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34`
-  Status: `in_progress` / target34.0 frozen after bounded33/35; independent34.1-.5 implementation and full23.4 open
+  Status: `in_progress` / all bounded34.1-.5 and Rust scope43.1 targeted-checked; full23.4 open
   Goal: Own and repair verified named-mark/capture Number fluent composition and false-ready output.
   Reproduction: capture-number refined intake at clean4f91e544b uses explicit Value[2], input alpha beta :cat. Producers capture_len_between(begin,finish)=6 and mark_pos(finish)=6; named bridges yield7/5/4!, native/fresh. Direct capture_len_between(...).coalesce(0).add(1), mark_pos(...).coalesce(0).sub(1) and missing-mark defaults leave primitive do-blocks followed by DSL method syntax, despite raw0/unresolved0/ready1. Native null/no context error is not success; fresh runtime undefined-coalesce or compile anonymous-sub failure supplies actual RED.
   Impact / ownership: Useful existing Number readers cannot reliably feed methods directly and readiness overstates generated-code usability. Own readonly named-mark locations and span-width sources, including current missing mark behavior; capture-boundary-number-intake.json.gz retains exact inputs/channels and old E-carrier calibration. No unowned report.
   Schedule / boundaries: Authority/target34.0 follows bounded33 and separate value-block35, then independent backend repair leaves before full23.4. Freeze current mark-name argument roles, signatures, coordinates, parser-state/function/alias/error/first-consumer/source-order contracts before production; no write/take/advancing helpers or global unknown/callback vocabulary expansion. Existing lifecycle E omission stays SESSION-STARTUP-READING.27, not this feature.
-  Children:34.0 target frozen;34.1 Perl repaired/34.2 Rust ordinary-compatible and targeted-checked;43 scope prerequisite then34.3 Dart/34.4 Julia/34.5 safe Lua independent intake.
+  Children:34.0 frozen;34.1 Perl repaired,34.2 Rust/43.1 scope repaired and34.3 Dart/34.4 Julia/34.5 safe installed Lua compatible, all targeted-checked. Full context/portable admission23.4 remains.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.0`
   Status: `completed`
@@ -7309,14 +7309,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.4 - lock Julia named Number methods and dynamic caller mark scopes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.5`
-  Status: `pending`
-  Goal: Independently implement or lock safe installed-host Lua readonly named-mark Number method sources.
-  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
-  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
-  Planned verification tier: focused
-  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+  Status: `completed` / bounded safe installed-host compatibility; full context admission23.4 separate
+  Goal: Lock existing safe Lua readonly named Number methods and independently healthy caller mark scopes.
+  Activation: clean `0b6ecbd0b74586c8134eb185304dd99719a84d6c`; Julia34.4 committed, tree clean and brief0.
+  Authority: named-mark-number-results.md/shared fixture and current Lua name/root/function/mark contracts. Exact31-source/four-route dual-host evidence in named-mark-number-lua-intake.json.gz.
+  Verification tier: `focused`
+  Focused checks: New normal registered219 plus nearest anonymous Number155 checks per installed PUC5.5.1/LuaJIT2.1.1788460057; native/restored SpecFile/plan/fresh module, loadfile syntax/empty stderr. Actual values/kinds/source/scope/helper/error roles, book/map/history/manual memory/cadence/diagnosis/claim-input/diff; no runtime edit/full runner.
+  Canonical trigger: Full23.4/final clean push after42/39/38/37/40/41 plus pressure/registration/declared-host prerequisites; Lua5.4/unsafe malformed patterns stay separate. Fresh module is same process, not independent host/workspace admission.
+  Claim verification: none: Finite authored functional/scope/error assertions and named installed hosts, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent31-source intake on each installed host already supports seven ordinary producers/methods/shared fixture and caller mark scopes. No method/namespace defect or runtime RED inferred from peers. Accepted name forms and qualified scalar legacy roots come from actual host observations.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing public parser/compiler/interpreter/value and generated routes already compose readonly Number sources and retain caller label buckets. Native/reconstructed/plan/fresh results agree. Direct6/[]/KVT and bound6/[]/undef/KVT are outside-Hash-domain legacy observations, not portable policy or inferred Hash promotion.
+  - [x] **FIX**: Add normal named_mark_number_results_test.lua and runner registration with shared fixture, exact source/value/root/scope controls and helper-specific function envelopes. No runtime/module chunk local/helper alias/argument/AST/schema/domain grant. Known unsafe full runner and malformed pattern probes are not invoked.
+  - [x] **ADDRESSED (verified)**: New219/nearest155 checks pass per host, including Unicode/partial/default/missing/reversed/symbolic/quoted/computed/snapshot and actual first-consumer effects. Literal seven readers, visible writes, different-rule same-name isolation and returned callback Top call-time0/6 pass. All7 function and registered callback fences preserve native helper_name and native/generated error predicates.
+  - [x] **NO REGRESSION**: Runtime diff empty; normal runner compiles without execution. Both installed versions retained exactly with four public routes and empty stderr. Fresh loaded modules share current host process; no independent VM/dependency or Lua5.4/unsafe-pattern/full context claim. Scalar invalid-domain legacy remains qualified.
+  - [x] **LOCKSTEP**: Packet/Lua fact/map/book/target/task/live/resume/roadmap/history agree. All bounded34 children targeted-checked; parent/full admission23.4 stays open. Ordinary Perl name-role/readiness42 then39/38/37/40/41 are next, with existing pressure/registration/declared-host owners before full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.5 - lock safe Lua named Number methods and dynamic caller mark scopes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35`
   Status: `in_progress` / all bounded35.1-.5 children targeted-checked on recorded routes/hosts; formal source/context/parent admission23.4 remains open
@@ -7806,7 +7814,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` | `pending` | Independently intake safe installed Lua named Number sources and caller scopes. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.42` | `pending` | Reconcile ordinary Perl mark-name roles and repair false-ready output. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
