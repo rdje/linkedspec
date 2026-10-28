@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All five bounded immediate with-result selection children targeted-checked; next fluent feature assessment23.1.10.
+Readonly capture Number33 target frozen; adjacent P1 block35/named34 owned; Perl33.1 next.
 
 ## Latest Completed Slice
 
-Safe Lua immediate with-result selected kind guards32.5 are implemented. Independent shared14 source/body reads already work; selected scalar .take yields[]/runs bad. Frozen82 checks/4RED per available PUC5.5.1/LuaJIT2.1.1788460057 -> first candidate4RED -> final82pass native/restored SpecFile-to-recompile/generated-plan/fresh loaded module. Public normalization proves raw block_value contextual sources clone to codeblock_argument while explicit/bound finals remain unchanged; only canonical metadata-approved with role joins existing guards after registered-function precedence. Shared14 kinds/order/scopes/snapshots/missing/default bridges and legacy bound-read policies pass. Lua malformed arity retains runtime phase; source/body/state errors retain typed runtime/generated owners. Normal fixture registered and interpreter/runner source loads pass; no new persistent chunk local, parser/schema/body/coercion/write/copy-depth expansion. Packet/book/target/card/map/task/live/resume align. All five bounded children targeted-checked; feature assessment23.1.10 next. No declared5.4/full or unsafe runner/isolated package/matrix/admission/push.
+Capture/mark Number source assessment23.1.10 is complete without production changes. Explicit Value[2] native/fresh producer and bound controls work, while four authored direct chains fail actual fresh runtime/compile with raw0/unresolved0/ready1; public substitution/early entry-match-only versus late capture Contracts identify missing source lowering. Freeze readonly anonymous Number33 six canonical getters/three aliases and eleven-coordinate prospective fixture; independent Perl33.1 next. Final calibrated producers/aliases and supported bound snapshot/standalone reset pass native/fresh. Own named-mark source/false-ready gap34 and separate value-block void capture mutation/false-ready gap35 as P1 after33, with35 before34/full23.4. Initial no-edge E all0 is invalid carrier evidence, reverified via Get dumps under existing startup27; NONE stdout prefix/initial JSON consumer and failed block-mutator calibration are separately retained, not extra anonymous-reader RED. Target/packet/probe/card/map/book workaround and roadmap/task/live/resume agree. No advancing/deferred/function/mark-name/legacy-root/type/schema/coercion or copy changes, no complete matrix/runtime implementation claim. Director delegates remedy choice and demands production quality; canonical getter reuse plus actual execution/readiness checks govern implementation.
 
 ## Next Action
 
-Activate feature assessment23.1.10 from this clean all-five bounded with-selection boundary. Read current canonical helper/source/signature inventory, completed result families and relevant book; select the next useful missing ordinary fluent method or inter-type transition using only a few public distinctions where uncertainty remains. Freeze target/independent implementation or prerequisite leaves before production. Preserve deferred/callback/unknown/parser/root/first-consumer/mutation/copy boundaries; do not infer completeness or run a full matrix. Continue authorized focused feature commit workflow; full23.4/readiness/registration/pressure/declared-host admission remain scheduled after feature coverage.
+Activate bounded Perl readonly capture-boundary Number33.1 from this clean frozen assessment. Read target/shared fixture, actual valid-producer/named/direct/alias/calibrated snapshot/error/readiness records and current source getters/method/function owners. Establish exact independent target/first-consumer/fence baseline before production. Share canonical getter expressions with existing late callbacks, retain native tags/coordinates/alias/zero/absence/function/deferred/legacy-root policies, and add only missing ordinary method-value composition. Compile/quick focused native/fresh/readiness checks/book/docs/commit, then Rust/Dart/Julia/safe Lua33.2-.5. P1 ordinary-block mutation35 then named34 follow before full23.4. Explicit --no-verify focused workflow remains authorized until pressure repair; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.10` — Readonly capture Number33 target frozen; adjacent P1 block35/named34 owned; Perl33.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.5` — All five bounded immediate with-result selection children targeted-checked; next fluent feature assessment23.1.10.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.4` — Julia selected immediate with-result kind guards repaired/targeted-checked; independent safe Lua32.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.3` — Dart selected immediate with-result kind guards repaired/targeted-checked; independent Julia32.4 next.
@@ -29,7 +30,6 @@ Activate feature assessment23.1.10 from this clean all-five bounded with-selecti
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` — Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1` — Rust callback identity repaired/targeted-checked; adjacent Rust snapshot31.6.5 next, then Dart/Julia identity.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.5` — All bounded non-nested with-result children targeted-checked; priority Rust/Dart/Julia identity31.6 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.4` — Julia with-result guards repaired/targeted-checked; safe Lua31.5 next, then priority identity31.6.
 
 ## History
 

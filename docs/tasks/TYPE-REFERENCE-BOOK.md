@@ -1335,7 +1335,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Required same-slice engineering-notes rollover: Existing pressure check requires archival; --apply creates immutable segment4950 from cleanad752f204e DEVELOPMENT_NOTES lines109-203,95 lines/27368 bytes. Independent Git blob/exact ordered suffix/line/byte/SHA checks pass: blobd2e5331153bfe35d44ec08ef0a9b105b323f0f3b; SHA256cc9f00be65ec6baf00238f72c359ed4003693a0c22cd4ac7062ffd1e0cf55d7c. Only segment_count/new immutable row and whole clean suffix move; old segments/caps unchanged. Both hot-shard checks are rerun before staging.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.10`
-  Status: `pending`
+  Status: `completed`
   Goal: Select the next useful bounded fluent method/result transition after immediate with-selection32.
   Dependencies: Current canonical helper/source/signature inventory, bounded implemented families and relevant book. Full context/portable23.4, pressure20.1, excluded deferred readiness31.6.4.4 and declared-host admission remain separately scheduled.
   Acceptance: Reconcile meaningful remaining per-type methods and inter-type transitions with implemented coverage; use Knowledge Map/canonical authorities first, then a few public source/actual-result distinctions for uncertainty. Freeze the next safe additive target and independent implementation/prerequisite leaves before production. Preserve current deferred/callback/control/parser/unknown/source/first-consumer/root/mutation/copy boundaries. No completeness claim or maintenance/full-matrix pivot while useful features remain.
@@ -1343,6 +1343,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Relevant inventory/contracts/book and small public distinctions where needed, producer syntax/JSON/book/history/manual continuity; no full suite/matrix.
   Planned canonical trigger: Full source/domain/context/portable/generated23.4/final clean push after feature coverage; actual public contract/schema movement separately owned.
   Planned claim verification: none: Prospective finite authored feature selection, no population measurement.
+
+  Intake2026-10-28: Current helpers/book identify capture-width and mark-position Number sources as the next public composition question. Six initial cases all return0, including producer/named controls, because the no-outgoing-edge Top /cat/ E carrier never executes its action. Canonical perl-lifecycle-final-value-e-drift identifies existing owner SESSION-STARTUP-READING.27; exact cat-input Get/generated-source calibration confirms no-edge0 versus explicit edge42. Original source/output/dumps are retained, no feature RED credited. Refined producer uses established Top-to-Value[2] action carrier; await actual source/named/direct/missing distinctions before freezing target or editing production. No implicit lifecycle repair/pivot.
+
+  Verification tier: `focused`
+  Focused checks: Canonical helpers/source/getter contracts/book and public Get/native/fresh/descriptor/substitution/dump controls. Exact final-row JSON consumer guards separate NONE diagnostic prefix. Producer syntax and prospective fixture JSON, readonly/alias/bound snapshot calibration native/fresh, book/map/history/manual continuity. No production change/full suite/matrix.
+  Canonical trigger: Independent bounded33 children, P1 block35 then named34; full23.4/new Perl registration23.4.1/document pressure20.1/final clean push after feature coverage remain separate.
+  Claim verification: none: Finite authored feature selection/calibration and defect ownership, no population or completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Correct explicit Value[2] carrier, six-character Unicode input: producers yield6/6/6/1/7/1/2/1/3/4 and bound methods7/5/4!, native/fresh/raw0/ready1. Four direct width/position/missing/anonymous chains fail actual fresh execution or compilation despite raw0/unresolved0/ready1. Public substitution retains method syntax after late primitive do-blocks; native null/no context error is not proof of successful execution.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering _lower_method_value_expr early Number source route handles entry/match; capture/mark primitives still arrive through late Contracts rewrites after outer method composition. Direct capture_rest_len/capture_len_between/mark_pos leave coalesce/sub links in generated host code. Independent bound cat operand with start_capture_slice leaves a raw DSL block, then late mutation substitution cannot repair it; separate statement-role owner35. Known no-edge E omission belongs to startup27 and invalidates only the original carrier.
+  - [x] **FIX**: Freeze readonly anonymous Number33 target/six canonical getters/three existing aliases and eleven-coordinate prospective fixture before production, preserving native tags/coordinates/zero/default/order/snapshot/guards/scopes/first-consumer policies. Schedule independent33.1-.5. Own adjacent verified named-mark gaps as P1 family34 and ordinary value-block void mutation/false-ready gap as P1 family35, immediately after33 with35 before34/full23.4. No mutator-as-data or generic source/body grant.
+  - [x] **ADDRESSED (verified)**: Final producer calibration covers all six canonical/three alias values1/2/1/3/4/4/1/1/4 and supported bound snapshot4!/standalone boundary6/S, native/fresh/raw0/ready1. Normative fixture uses that supported statement-level reset; direct Number links remain future33 implementation. Exact raw source/channels/calibrations/dumps and input identities are retained in capture-boundary-number-intake.json.gz.
+  - [x] **NO REGRESSION**: Production files unchanged. Initial E all0, whole-stream JSON consumer failure on18 diagnostic prefix lines and failed value-block-mutator calibration receive no anonymous-reader RED credit. Original/final producer epochs are distinct. Existing lifecycle27, deferred/callback/function/mark-name/advancing/coercion/mutation/copy/arity/AST/serialization/legacy-root boundaries remain owned and unchanged; no runtime fix or complete matrix claim in this selection commit.
+  - [x] **LOCKSTEP**: New target/prospective fixture/readonly public probe/causal card/map/book workaround and roadmap/task/live/resume align. Director delegates remedy choice and requires production quality; preserve canonical getter sources and verify actual execution/readiness during implementation. Book distinguishes direct-chain and block-mutation limits. Perl33.1 next; explicit canonical Perl registration23.4.1 will own its focused fixture.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.10 - select readonly capture Number composition and own adjacent source defects`.
+
+  Same-slice required CHANGES rollover: registered tool archives clean4f91e544b CHANGES lines109-199,91 lines/27091 bytes as immutable segment4952. Independent clean Git blob/source suffix/ordered previous-manifest/line/byte/SHA checks pass: blobd84578e1f3d0f25a27b1c3b7a86ec423a093686b; SHA256a953972329c344aef370a177b61e635c7828d1a6fd3d3cfd354719115fcd9b5d. Only header segment_count/new immutable row/suffix move; no old segment or budget changes. Hot-shard checks rerun before staging.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
@@ -7091,13 +7108,104 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Packet retains baseline/failed candidate/public normalization probe/final source and channels; target/card/map/book and roadmap/task/live/resume reflect all five bounded children without full23.4 admission. Activation helper setup failure before writing receives no product RED credit. Next23.1.10 feature assessment is owned before activation; focused --no-verify workflow is explicitly authorized until pressure repair.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.5 - guard immediate Lua with selections through contextual source normalization`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33`
+  Status: `pending` / P1 next bounded feature and false-ready functional repair
+  Goal: Compose existing readonly anonymous capture-boundary Number readers through compatible ordinary fluent methods.
+  Authority: capture-boundary-number-results.md/shared fixture and assessment23.1.10; retain existing source-boundary contracts, function fences and first-consumer policies.
+  Acceptance: Independent backend baseline before production; preserve current six canonical zero-argument getters and three existing compatibility aliases, Unicode scalar spans/locations, source/frame/error/absence semantics and original runtime tags. Source evaluates once before operands, compatible scalar/String/Array bridges and defined-zero defaults work, normalized incompatible consumers skip operands. Subsequent statement-level boundary mutations leave the completed Number result intact; no advancing-reader source grants, named-mark argument changes, getter-bracket admission, body-vocabulary/schema/mutation/copy/legacy-root normalization. Full23.4 separate.
+  Children:33.1 Perl,33.2 Rust,33.3 Dart,33.4 Julia,33.5 available safe Lua.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.1`
+  Status: `pending`
+  Goal: Independently implement/check Perl readonly anonymous capture-boundary Number result composition.
+  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
+  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
+  Planned verification tier: focused
+  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
+  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
+  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2`
+  Status: `pending`
+  Goal: Independently implement/check Rust readonly anonymous capture-boundary Number result composition.
+  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
+  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
+  Planned verification tier: focused
+  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
+  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
+  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3`
+  Status: `pending`
+  Goal: Independently implement/check Dart readonly anonymous capture-boundary Number result composition.
+  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
+  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
+  Planned verification tier: focused
+  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
+  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
+  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.4`
+  Status: `pending`
+  Goal: Independently implement/check Julia readonly anonymous capture-boundary Number result composition.
+  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
+  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
+  Planned verification tier: focused
+  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
+  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
+  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.5`
+  Status: `pending`
+  Goal: Independently implement/check safe available Lua readonly anonymous capture-boundary Number result composition.
+  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
+  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
+  Planned verification tier: focused
+  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
+  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
+  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34`
+  Status: `pending` / P1 after anonymous-reader33 and value-block repair35, before full23.4
+  Goal: Own and repair verified named-mark/capture Number fluent composition and false-ready output.
+  Reproduction: capture-number refined intake at clean4f91e544b uses explicit Value[2], input alpha beta :cat. Producers capture_len_between(begin,finish)=6 and mark_pos(finish)=6; named bridges yield7/5/4!, native/fresh. Direct capture_len_between(...).coalesce(0).add(1), mark_pos(...).coalesce(0).sub(1) and missing-mark defaults leave primitive do-blocks followed by DSL method syntax, despite raw0/unresolved0/ready1. Native null/no context error is not success; fresh runtime undefined-coalesce or compile anonymous-sub failure supplies actual RED.
+  Impact / ownership: Useful existing Number readers cannot reliably feed methods directly and readiness overstates generated-code usability. Own readonly named-mark locations and span-width sources, including current missing mark behavior; capture-boundary-number-intake.json.gz retains exact inputs/channels and old E-carrier calibration. No unowned report.
+  Schedule / boundaries: Authority/target34.0 follows bounded33 and separate value-block35, then independent backend repair leaves before full23.4. Freeze current mark-name argument roles, signatures, coordinates, parser-state/function/alias/error/first-consumer/source-order contracts before production; no write/take/advancing helpers or global unknown/callback vocabulary expansion. Existing lifecycle E omission stays SESSION-STARTUP-READING.27, not this feature.
+  Children:34.0 target/independent repair ownership; implementation children split after target freeze.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.0`
+  Status: `pending` / P1 after33 and35
+  Goal: Freeze readonly named-mark Number method composition and schedule independent backend implementation from34 intake.
+  Acceptance: Read canonical mark/source contracts and retained producer/named/direct/missing distinctions, preserve current symbolic/literal/dynamic name roles and source/error/function/alias/arity/first-consumer policies, and freeze bounded target before production. Repair actual functional/readiness gap without absorbing lifecycle or advancing-reader work.
+  Planned verification tier: focused
+  Planned focused checks: Small public source-role/actual-result distinctions and syntax/JSON/book/manual continuity, no full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; public schema movement separately owned.
+  Planned claim verification: none: Finite authored feature target/ownership, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35`
+  Status: `pending` / P1 immediately after bounded33, before named-mark34/full23.4
+  Goal: Own and repair ordinary value-block start_capture_slice side-effect lowering and false-ready output.
+  Reproduction: At clean4f91e544b explicit Value[2], width=capture_rest_len(); snapshot=width.cat({order=cat(order,"S");start_capture_slice();"!"}) fails native handler/fresh compilation with cannot-modify-constant/syntax errors, despite raw0/unresolved0/ready1. It does not depend on a direct Number source; exact capture-number-block-reset producer/output and substitution are retained in capture-boundary-number intake.
+  Root / impact: Public substitution leaves order=cat(...) as raw DSL inside the method operand while late Contracts rewrites only start_capture_slice to a do-block. MethodLowering _lower_block_side_effect_statement falls back to value-component lowering without this void statement owner; _lower_block_value_expr abandons the block if a component is unavailable. The generated expression cannot compile and readiness overstates usability. Exact dispatcher/source role and authoritative ordinary-versus-deferred contract need final35.0 reconciliation before production.
+  Ownership / schedule: Fix the actual ordinary-block statement role through canonical state-effect owners, preserving void semantics, frame/cursor/source/trace/order/errors, local-return behavior and function/callback vocabulary boundaries. Authority/target35.0 then bounded independent backend repair/compatibility leaves immediately after33, before34/full23.4. No generic mutator-as-data grant, silent raw fallback or lifecycle pivot.
+  Children:35.0 authority/target and independent repair ownership; implementation split after target freeze.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.0`
+  Status: `pending` / P1 after33.5
+  Goal: Freeze ordinary value-block capture-boundary side-effect repair from actual bound-source failure.
+  Acceptance: Reconcile current block/state-effect contracts, public AST/substitution and specific dispatcher path with distinguishing supported-without-mutator/standalone/inside-block controls. Freeze exact statement-only scope and independent repair leaves before production; preserve source/frame/cursor/return/error/function/deferred boundaries and diagnose unsupported sources honestly.
+  Planned verification tier: focused
+  Planned focused checks: Small public native/fresh role/source/error controls, canonical toolbox traces as needed and syntax/JSON/book/manual continuity; no full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; public schema movement separately owned.
+  Planned claim verification: none: Finite authored feature/defect target, no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.10` | `pending` | Select/freeze the next useful bounded fluent method/result transition from inventory. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.1` | `pending` | Implement bounded Perl readonly capture-boundary Number method composition. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

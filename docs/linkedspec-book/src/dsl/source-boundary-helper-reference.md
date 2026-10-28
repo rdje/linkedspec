@@ -86,7 +86,7 @@ The anonymous capture boundary is the simplest stateful capture tool: one rollin
 | `capture_take()` | text | advances anonymous boundary to the live cursor | read to the current local-match left edge, then roll the boundary forward. |
 | `capture_take_len()` | width | advances anonymous boundary to the live cursor | record that current-edge width and roll forward. |
 
-Anonymous capture readers can be returned directly. For example, `return(capture_slice_len())` and fluent `.return(capture_slice_len())` both return the current anonymous capture span width without materializing the text.
+Anonymous capture readers can be returned directly. For example, `return(capture_slice_len())` and fluent `.return(capture_slice_len())` both return the current anonymous capture span width without materializing the text. On Perl, first bind a Number before fluent defaults: `n=capture_rest_len(); return(n.coalesce(0).cat("!"))`. Direct chains from `capture_rest_len()`, `capture_len_between(...)`, or `mark_pos(...)` through `.coalesce(...)` can currently fail in generated code. Keep `start_capture_slice()` as a standalone action statement; using it inside an expression-valued method operand can also fail compilation.
 
 `start_capture_slice()` is a boundary mutation, not a position reader. Use `capture_slice_pos()` after it when the
 stored character position is needed. Current Perl lowering still exposes its internal assignment-expression result;
