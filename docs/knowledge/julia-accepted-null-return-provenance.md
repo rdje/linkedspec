@@ -6,7 +6,7 @@ answers:
   - "why does Julia completed blind EX or IT null return report unmatched"
   - "does Julia nullable return globally accept early I LS or failed minimum"
 date: 2026-10-29
-status: bounded39.3.7.1 repaired/targeted-checked; pure observation .2 and admission remain
+status: bounded return39.3.7.1 and pure observation39.3.7.2 repaired/targeted-checked; peers/admission remain
 tags: [julia, null, acceptance, return-provenance, lifecycle, observation]
 evidence: "julia-null-returns-intake.json.gz retains21 sources39 inputs5healthy16actualRED ->21pass390 assertions, same21 baseline modules, original33 remaining-context replay and nearest proof."
 reverify: "bash tools/run_julia_project_data.sh --project=julia julia/test/null_return_acceptance_test.jl"
@@ -34,3 +34,8 @@ under .2; matched-null observation repaired. Fresh execute exposes values only,
 direct matched flags asserted in SDK paths. Compiler/emitter/matching/recognition
 authority and public schemas unchanged. Pure normal observation classifier is
 still separately owned: [[julia-null-return-and-pure-observation-gaps]].
+
+2026-10-29 .7.2 now fixes the separate pure normal coordinator classifier
+without parser matched override or selected span. Original33 modules54 inputs
+satisfy all fresh public oracles; current mechanism/proof:
+[[julia-null-return-and-pure-observation-gaps]]. Original .7.1 packet stays frozen.

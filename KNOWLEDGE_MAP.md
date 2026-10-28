@@ -13596,7 +13596,7 @@ _Rust gap parity is split across authored metadata, native state, generated carr
 ### julia-accepted-null-return-provenance
 _Julia accepted null return derives from the owning selected match or completed iteration independently of payload_
 - **answers:** does Julia accepted null action preserve matched status | why does Julia completed blind EX or IT null return report unmatched | does Julia nullable return globally accept early I LS or failed minimum
-- **date:** 2026-10-29 · **status:** bounded39.3.7.1 repaired/targeted-checked; pure observation .2 and admission remain
+- **date:** 2026-10-29 · **status:** bounded return39.3.7.1 and pure observation39.3.7.2 repaired/targeted-checked; peers/admission remain
 - **evidence:** `julia-null-returns-intake.json.gz retains21 sources39 inputs5healthy16actualRED ->21pass390 assertions, same21 baseline modules, original33 remaining-context replay and nearest proof.`
 - **reverify:** `bash tools/run_julia_project_data.sh --project=julia julia/test/null_return_acceptance_test.jl`
 - **source:** [`docs/knowledge/julia-accepted-null-return-provenance.md`](docs/knowledge/julia-accepted-null-return-provenance.md)
@@ -14092,7 +14092,7 @@ _Julia exposes native named and exact-path spec loading with structured pipeline
 ### julia-null-return-and-pure-observation-gaps
 _Julia nullable return and pure coordinator observation intake distinguishes lost acceptance from normal no-match completion_
 - **answers:** why does Julia pure null coordinator observation report failed | which Julia nullable observation failure belongs to return provenance
-- **date:** 2026-10-29 · **status:** accepted-null return39.3.7.1 repaired/targeted-checked; four pure coordinator observation39.3.7.2 next
+- **date:** 2026-10-29 · **status:** bounded return39.3.7.1 and pure observation39.3.7.2 repaired/targeted-checked; safe Lua/admission remain
 - **evidence:** `julia-null-context-intake.json.gz retains33 sources54 inputs13healthy20failed sources SDK/native/restored/plan and33 fresh modules, actual9 trace inputs/five sources and full records/errors.`
 - **reverify:** `Recover retained probes; bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_null_context.jl and probe_julia_null_context_fresh.jl; read_julia_null_context.py --fresh only after both exit.`
 - **source:** [`docs/knowledge/julia-null-return-and-pure-observation-gaps.md`](docs/knowledge/julia-null-return-and-pure-observation-gaps.md)
@@ -14684,7 +14684,7 @@ _Julia source value authority reading completes decoded tables and typed project
 ### julia-sparse-and-independent-intake
 _Independent Julia sparse AND intake owns dependency group minimum blind progress and nullable acceptance gaps_
 - **answers:** what did independent Julia sparse AND intake establish
-- **date:** 2026-10-28 · **status:** structural/repetition/return repairs through39.3.7.1 targeted-checked; four pure observations .7.2 next
+- **date:** 2026-10-28 · **status:** bounded Julia structural/repetition/nullable repairs through39.3.7.2 targeted-checked; safe Lua/P2 diagnostic/admission remain
 - **evidence:** `julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources.`
 - **reverify:** `Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish.`
 - **source:** [`docs/knowledge/julia-sparse-and-independent-intake.md`](docs/knowledge/julia-sparse-and-independent-intake.md)

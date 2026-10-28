@@ -311,3 +311,13 @@ structural297 nearest assertions pass, prior fixtures unchanged. Original33
 modules replay fresh leaves only four pure observations .7.2. Packet
 julia-null-returns-intake.json.gz retains actual closure, normal suite once.
 Pure classifier next before safe Lua/full admission; no public schema movement.
+
+2026-10-29 Julia39.3.7.2 observes normal no-matching-structure coordinator null
+completion as accepted without parser matched override or invented span.13
+sources17inputs9healthy4RED ->13pass156 assertions, same13 baseline modules/
+exact inputs/nine controls. Original33 modules54 inputs now satisfy all fresh
+public value/record/error oracles, direct flags/cursor covered by owned SDK
+matrices. Nullable390/legacy observation/progress234 neighbors pass, prior
+fixtures/compiler/emitter/matching/recognition authority unchanged. Packet
+julia-pure-observation-intake.json.gz retains actual closure, normal suite once.
+Bounded .7 complete; safe Lua39.4 next and P2 diagnostic/full admission remain.

@@ -5,7 +5,7 @@ answers:
   - "why does Julia pure null coordinator observation report failed"
   - "which Julia nullable observation failure belongs to return provenance"
 date: 2026-10-29
-status: accepted-null return39.3.7.1 repaired/targeted-checked; four pure coordinator observation39.3.7.2 next
+status: bounded return39.3.7.1 and pure observation39.3.7.2 repaired/targeted-checked; safe Lua/admission remain
 tags: [julia, null, acceptance, lifecycle, observation, coordinator, return-provenance]
 evidence: "julia-null-context-intake.json.gz retains33 sources54 inputs13healthy20failed sources SDK/native/restored/plan and33 fresh modules, actual9 trace inputs/five sources and full records/errors."
 reverify: "Recover retained probes; bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_null_context.jl and probe_julia_null_context_fresh.jl; read_julia_null_context.py --fresh only after both exit."
@@ -44,3 +44,13 @@ baseline modules/exact inputs. All33 original modules replay fresh leaves only
 four pure coordinator outcomes wrong, with direct flags asserted in SDK. Current
 return mechanism/proof: [[julia-accepted-null-return-provenance]]. Original
 intake packet stays frozen; pure classifier .2 immediately next.
+
+2026-10-29 .7.2 now classifies normal no-regex/action/blind-structure coordinator
+completion independently of parser matched flag, requiring no terminal error
+and an actual normal result. No selected span or parser match is fabricated.
+13 sources17inputs9healthy4RED ->13pass156 assertions, same13 baseline modules/
+exact inputs and nine controls; original33 modules54 inputs now satisfy all fresh
+public value/record/error oracles. Current SDK direct flag/cursor proof remains
+in the21-return and13-observation matrices. Nullable390/legacy observation/
+progress234 neighbors pass, new suite registered once. Packet
+julia-pure-observation-intake.json.gz retains exact closure; bounded .7 complete.

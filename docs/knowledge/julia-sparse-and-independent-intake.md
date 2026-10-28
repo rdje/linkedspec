@@ -4,7 +4,7 @@ title: Independent Julia sparse AND intake owns dependency group minimum blind p
 answers:
   - "what did independent Julia sparse AND intake establish"
 date: 2026-10-28
-status: structural/repetition/return repairs through39.3.7.1 targeted-checked; four pure observations .7.2 next
+status: bounded Julia structural/repetition/nullable repairs through39.3.7.2 targeted-checked; safe Lua/P2 diagnostic/admission remain
 tags: [julia, sparse-and, dependency, repetition, minimum, blind-call, progress, nullable, intake]
 evidence: "julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources."
 reverify: "Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish."
@@ -92,3 +92,9 @@ observation; original strict multi-slot reproducer now matchedtrue/cursor4.
 21 sources39inputs5healthy16RED ->21pass390 assertions, same baseline modules
 and exact inputs, original33 fresh replay leaves only four pure cases .7.2.
 Current mechanism: [[julia-accepted-null-return-provenance]].
+
+2026-10-29 .7.2 completes bounded nullable return/pure coordinator observation
+repairs,13 sources17inputs9healthy4RED ->13pass156 assertions and same baseline
+modules. Original33-module54-input replay now satisfies all fresh public oracles.
+Current proof: [[julia-null-return-and-pure-observation-gaps]]. Independent safe
+Lua39.4 follows, P2 helper-code .8 and full admission prerequisites remain.

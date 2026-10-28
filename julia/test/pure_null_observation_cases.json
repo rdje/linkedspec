@@ -1,0 +1,445 @@
+[
+  {
+    "name": "pure_null",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {return(undef)}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "pure_implicit",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {x=1}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "pure_undef_helper",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {return_undef()}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "pure_false",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {return(false)}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [
+          false,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "pure_string",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {return(\"coordinated\")}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [
+          "coordinated",
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "matcher_null",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:AND\n /a/\n E {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": {
+              "source_id": "input",
+              "start": 0,
+              "end": 1,
+              "provenance": "match"
+            },
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 1
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": null,
+            "outcome": "failed",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "matcher_early_null",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:AND\n I {return(undef)}\n /a/\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": null,
+            "outcome": "failed",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "blind_min",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:OR{2}\n => Part\nPart:AND\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            1,
+            1
+          ],
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 2
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 2
+      },
+      {
+        "input": "a",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": null,
+            "outcome": "failed",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": null,
+            "outcome": "failed",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "blind_zero",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:OR{0,1}\n => Part\nPart:AND\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "b",
+        "expected": [
+          [],
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": null,
+            "outcome": "failed",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "pure_child_null",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {child=call(Part);return(undef)}\nPart:AND\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 1
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "parser_null",
+    "source": "Coordinator::\n I {return(undef)}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "aborted",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {recognition_commit(missing)}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": {
+          "error_contains": "recognition_token_expected"
+        },
+        "expected_match": null,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "rejected",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:\n I {value=observe_recognition(nested,call(Coordinator));return(value)}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": {
+          "error_contains": "source_location_nonprogress_direct_recursion"
+        },
+        "expected_match": null,
+        "expected_cursor": 0
+      }
+    ]
+  }
+]

@@ -118,3 +118,11 @@ numeric reading owners; no full component/canonical gate or dependency build run
 
 The fresh .1.39 run passes207 recognition +30 observation +162 repeated-result
 +137 root-admission +127 typed-source assertions,663 total, and all four neutral checks.
+
+2026-10-29 bounded39.3.7.2 fixes pure normal null coordinator classification
+using compiled regex/action/blind structure presence without modifying parser
+matched status or creating a selected span.13 sources17inputs9healthy4RED ->
+13pass156 assertions, same13 baseline modules/exact inputs/nine control records.
+Original33 modules54 inputs satisfy all fresh public value/record/error oracles;
+legacy observation/current nullable/progress neighbors pass. Current proof:
+[[julia-null-return-and-pure-observation-gaps]]. No new facade/schema/full admission.

@@ -654,6 +654,7 @@ function _leave_runtime_recognition_invocation!(
     ;
     result,
     error,
+    has_recognition_structure::Bool,
 )
     frame = _runtime_recognition_frame(context, rule_label)
     actual = _runtime_recognition_frame_state(context, rule_label)
@@ -675,7 +676,10 @@ function _leave_runtime_recognition_invocation!(
     finally
         if frame.observation_scope !== nothing
             terminal_error = error === nothing ? leave_error : error
-            accepted = terminal_error === nothing && result !== nothing && result.matched
+            # Pure coordinators have no matching structure that can miss;
+            # normal completion is observed independently of nullable payload.
+            accepted = terminal_error === nothing && result !== nothing &&
+                (result.matched || !has_recognition_structure)
             frame.observation_scope.completion = _RuntimeRecursiveObservationCompletion(
                 frame.identity,
                 frame.entry_codeunit,
@@ -2097,6 +2101,8 @@ function _execute_runtime_rule!(
                 label;
                 result = terminal_result,
                 error = terminal_error,
+                has_recognition_structure = !isempty(rule.regex_patterns) ||
+                    !isempty(rule.action_edges) || !isempty(rule.blind_edges),
             )
         finally
             _restore_runtime_rule_local_bindings!(context)

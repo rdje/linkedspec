@@ -8458,7 +8458,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6 - enforce Julia live recognition repetition progress`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7`
-  Status: `in_progress` / independent nullable context intake and bounded repairs
+  Status: `completed` / bounded nullable return and pure observation repairs
   Goal: Preserve Julia accepted null result independently of payload and qualify nullable lifecycle/observation contexts.
   Acceptance: falsey_null fully consumes Hcat at4 but SDK matchedfalse; _runtime_returned uses value !== nothing and _RuntimeActionReturn has no acceptance. Value-only census would hide this. Own selected action acceptance and qualify completed lifecycle/plain blind/pure observation before edits; preserve initial I/LS/real miss/minimum/no-hit and non-null authority, never universal null success or sticky prior match. Split independently confirmed observation repair if warranted.
   Planned verification tier: focused
@@ -8506,13 +8506,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.1 - preserve Julia accepted null return provenance`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.2`
-  Status: `pending` / P1 before safe Lua/admission
+  Status: `completed` / pure coordinator normal observation
   Goal: Accept normal pure-null Julia coordinator observation without fabricating selected spans or changing parser match status.
   Acceptance: Run after .1; four pure coordinator failures should remain, matched-null observation must already pass. Use exact13 observation sources17inputs with full detached nine-field records, normal-return/no compiled recognition structure distinction and terminal-error/actual matcher strictness. Preserve actual regex/blind minimum/no-hit/early-I failures, selected-null success, parent/child identity/entry/exit/source/nullable selection, aborted/rejected/error and ordinary parser matchedfalse. Exact SDK/generated/fresh RED-GREEN/nearest observation/null/progress controls/book/docs/commit, no public schema or second authority.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned authored source/SDK/generated/fresh RED-GREEN plus direct-dependent null/record/error/progress controls, compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after bounded repairs/peer/diagnostic/registration/pressure/lifecycle; public schema/authority separately canonical.
-  Planned claim verification: none: Finite authored functional/null/record/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:13 sources17 inputs9healthy4actualRED ->13pass156 assertions, exact inputs/nine-control identity/same13 baseline modules; original33 modules54 inputs satisfy fresh public oracles; Julia accepted-null return contexts:390, Julia recursive-observation contract:30, Julia live recognition repetition progress:234; normal single registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after safe Lua/diagnostic/declared host/registration/pressure/lifecycle repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/null/record/control-flow distinctions, no population measurement.
+
+  Activation: clean `d7c400cd79ed0a8c8c9a0550be8816fe8398cf4e` after accepted-null provenance. Original33-module replay leaves only four pure coordinator public record failures; qualified matched-null observation fixed. Exact13-source SDK/fresh baseline before private no-structure normal-completion distinction; no parser matched override, fake span or global null acceptance.
+
+
+  - [x] **REPRODUCE / ISSUE**:13 exact sources17 inputs9healthy4actualRED native/restored/generated and same emitted baseline. Pure null/implicit/return_undef/ordinary child coordinators report failed/no accepted exit despite normal completion and no matching structure. Matched-null observation already fixed, full nine-field records and negative controls retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _leave_runtime_recognition_invocation! classifies solely by result.matched. Actual earlier public trace shows no selected slot and normal coordinator return; current compile/source metadata has no regex/action/blind matching structure. Pure normal completion is observed independently of parser matching, unlike genuine failed regex/blind/minimum/early-I paths.
+  - [x] **FIX**: Private has_recognition_structure Bool derived at compiled rule owner/caller enters completion. Require no terminal error and an actual normal result, then accept matchedtrue or no compiled matching structure. Do not alter _RuntimeRuleResult, cursor/lineage/selected span, matcher strictness or public schema. No second invocation authority/history.
+  - [x] **ADDRESSED (verified)**:13pass156 assertions17 inputs SDK matched/value/cursor/full records/plan and same13 baseline modules/consumer separate process. Raw source/normalized/compiled/plan/emitted strings and nine healthy observations unchanged. Original33 baseline modules54 inputs now satisfy all fresh public value/record/error oracles; direct flags/cursor belong to composed SDK matrices, no direct fresh matched claim.
+  - [x] **NO REGRESSION**: Neighbors Julia accepted-null return contexts:390, Julia recursive-observation contract:30, Julia live recognition repetition progress:234 pass. Pure coordinators retain null selected span/current accepted exit, ordinary pure-null parser matchedfalse unchanged. Actual failed matcher/minimum/no-hit/zero-min/early-I, matched-null accepted span, false/String payload, abort/rejected codes and lineage retained. Compiler/emitter/matching/recognition authority/prior fixtures/schema unchanged; no broad lifecycle/Unicode/full admission claim.
+  - [x] **LOCKSTEP**: New normal suite registered once. julia-pure-observation-intake.json.gz retains actual producer/fixture/runtime epochs/emission/SDK/fresh/original33 replay/receipt closure. Book/cards/target/roadmap/task/live/resume/history align; bounded .7 complete, original packets frozen. Safe Lua39.4 next, P2 diagnostic .8/declared host/admission/registration/pressure/lifecycle/slot owners stay open; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.2 - accept Julia normal pure-null coordinator observations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8`
   Status: `pending` / P2 after bounded feature coverage before full23.4/admission
@@ -8838,7 +8849,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.2` | `pending` | Accept normal pure-null Julia coordinator observations without fabricated spans. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4` | `pending` | Independently intake safe installed Lua structural and repetition outcomes. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
