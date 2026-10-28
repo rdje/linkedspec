@@ -1,17 +1,19 @@
 ---
 id: perl-local-start-named-take-reversed-span-gap
-title: Perl named local-start take helpers omit the documented reversed-span guard
+title: Perl named local-start take helpers now guard documented reversed spans
 answers:
   - "why does capture_take of a later mark throw source_location_reversed_span"
   - "does capture_take_len_from return undef on a reversed span in Perl"
   - "which task owns reversed named local-start take guards"
   - "why does native capture_take return null while generated execution throws"
 date: 2026-10-28
-status: owned42.5 P1 immediately after42.2.3 before39/full admission
+status: repaired42.5 and targeted-checked; pre-match40/native error delivery41 and full admission separate
 tags: [perl, capture, marks, spans, errors, generated-source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.42.2.3 public19-case legacy intake at clean14c41151e; mark-advance-legacy-intake.json.gz retains exact producer/source/native/fresh/metadata/substitution and strict raw stdout prefix handling."
-reverify: "Recover probe_mark_advance_legacy.pl and use bash tools/project_data_run.sh env PERL5LIB= perl -Iperl with reversed_capture_take reversed_capture_take_len_from labels; the output includes known framework diagnostics before one JSON object."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/named_take_reversed_span.t"
 ---
+
+## Historical before-state
 
 Onαβ:catTAIL at Value[2], finish is input end10, local match starts3,
 live cursor6 and capture boundary2. Both existing bare-word capture_take(finish)
@@ -35,3 +37,18 @@ and native child-error delivery41 remain distinct repairs.
 Contracts::_named_mark_advance_body_expr; original9 identities and22 name-source
 groups pass without altering this known range defect.42.5 repairs that factory
 immediately after the clean name-feature commit, before39.
+
+## Current repaired42.5
+
+The two shared branches now cache legacy local end once only if the mark exists
+and check non-reversal before projection/write. Low-level typed span validation
+is unchanged. Current unchanged11-source baseline fails8; final11 pass. Six
+Word/quoted/computed reversals and two repeated uses produce full continued
+post-call tuples with unchanged mark/capture boundary/cursor; native parent null
+alone cannot pass. Equal empty String/Number0 remain defined and advance normally;
+missing-before-match returns legitimate nulls without warnings. Nearest eight-
+helper quoted/effect matrix plus anonymous0 overload2 and module syntax pass.
+Exactly two public bodies change, other7 advancing/bridge bodies are identical.
+Actual source/input/result/body/patch epochs: named-take-reversed-span-intake.json.gz.
+Present-mark pre-match authority40 and native child error delivery41 stay open;
+no new domain/role/deferred or full portable admission. SparseAND39.0 follows.

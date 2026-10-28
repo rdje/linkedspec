@@ -1,7 +1,7 @@
 # Ordinary Perl mark-name roles and readiness
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.42; target freeze42.0.
-Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 repaired/targeted-checked; advancing42.2.3 repaired/targeted-checked; range42.5 immediate next, wider42.3 separate.
+Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 repaired/targeted-checked; advancing42.2.3 repaired/targeted-checked; range42.5 repaired/targeted-checked, wider42.3 separate.
 
 The helper catalog declares logical String mark-name arguments. The complete
 named-mark contract explicitly makes a bare identifier symbolic rather than a
@@ -152,3 +152,10 @@ Independent legacy19 exposes two old local-start take reversed errors;42.5 owns
 their documented undef/no-advance guards immediately next/before39, with original
 inputs and strict framework-prefix parsing in mark-advance-legacy-intake.json.gz.
 Do not claim those errors or native delivery41/pre-match40/wider42.3 are resolved.
+
+42.5 now repairs those two local-start reversed guards after the clean name
+feature boundary: unchanged11 groups8RED/final11pass, nearest2 and syntax pass.
+Exactly two body strings change; other seven advancing/bridge bodies remain
+identical. Missing-before-match endpoint laziness and equal/zero behavior are
+preserved; present-mark endpoint40/native error delivery41 remain separate.
+Packet: named-take-reversed-span-intake.json.gz. SparseAND authority39.0 next.

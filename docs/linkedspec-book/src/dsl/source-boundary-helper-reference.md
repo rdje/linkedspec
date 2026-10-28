@@ -256,7 +256,7 @@ on both Lua ABIs. `.8.2` adds authoritative family routing and portable generate
 `.8.3` with exact interpreter-first 8/105 fresh-host proof. Final census admission `.8.4` is now complete at
 five-backend 80/0/0; the earlier native closeout did not claim that later surface prematurely.
 
-Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards. Current Perl `capture_take(name)` and `capture_take_len_from(name)` still throw in generated execution when the mark lies after the local-match start; native collecting parents can lose that error. This missing-guard defect is the immediate next repair; the intended result remains `undef` with no mark advancement.
+Named mark span readers return `undef` when their needed mark is absent or when an invalid span would run backwards. Perl `capture_take(name)` and `capture_take_len_from(name)` guard that case too: after a first take moves a mark beyond the same local-match start, a second take returns `undef` and leaves the mark there. An empty String or width `0` at equal endpoints stays defined, skips `.coalesce(...)` and advances the mark normally.
 
 | Helper | Result | Right edge | Boundary movement |
 | --- | --- | --- | --- |

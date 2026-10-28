@@ -15,7 +15,7 @@ answers:
   - "why does quoted capture_len_between report ready1"
   - "which task owns mark-name argument validation and readiness"
 date: 2026-10-28
-status: bounded42.1/42.2.1-.3 targeted-checked; reversed guards42.5 immediate next; wider and bare Unicode42.3 separate
+status: bounded42.1/42.2.1-.3 and reversed guards42.5 targeted-checked; sparseAND39 next; wider and bare Unicode42.3 separate
 tags: [perl, marks, arguments, readiness, diagnostics, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.0 retains actual quoted/evaluated/bare-shadowing controls, source/emitted bytes/metadata/channels in named-mark-number-authority.json.gz."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/mark_name_number_arguments.t"
@@ -167,3 +167,10 @@ endpoint40 stay separate. mark-name-advancing-intake.json.gz retains feature22
 and exact source/body inputs; mark-advance-legacy-intake.json.gz retains independent
 legacy19 and strict four-line framework-prefix handling, including initial JSON
 reader instrumentation failure. Wider/bare Unicode42.3/full23.4 remain open.
+
+42.5 now fixes the two old local-start take reversed guards in their shared
+factory. Current11 groups8RED/final11pass, nearest2 and syntax pass; exact2-body
+change/7-body equality is retained in named-take-reversed-span-intake.json.gz.
+Earlier31/nine-body equality describes the preceding name-feature epoch, not
+the later behavior fix. [[perl-local-start-named-take-reversed-span-gap]] records
+continuation/equal/missing-silence proof and remaining40/41/admission limits.
