@@ -170,7 +170,6 @@ fn explicit_and_blind_entry_collects_the_child_value() {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1; native8/restored8/plan4 actual RED"]
 fn default_blind_parent_plan_preserves_iteration_cursor() {
     check(
         "blind_cursor",

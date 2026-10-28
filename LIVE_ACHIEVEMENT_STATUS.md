@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust intake retained; default-blind classifier39.1.4.1 first, other owned P1 repairs before peers.
+Rust generated Default blind iteration repaired with unchanged v2 rows; typed sequence39.1.1 next.
 
 ## Latest Completed Slice
 
-Independent Rust intake confirms healthy local sparse structural/ordinary incoming/falsey/effect/one-regex/early-return/explicit-AND-blind controls, but separates real dependency/index/return/mode gaps. Initial12 tests7pass/5fail; refined15 tests8pass/7fail with24 reached native/restored/plan input rows and public native traces. Cross-target uses catalog0 instead of appended dependency2; reversed order misses; duplicate actions co-fire at cursor1; inherited indexed entry overrides required AND0. Explicit repeated return bypasses count/min; nonreturn full groups work but under-min errors differ from null. Default blind child succeeds but implicit result is lost. A distinguishing cursor source returns8 native/restored versus4 plan because default-blind emitsor_bcode despite native repetition; narrow classifier39.1.4.1 is first. Own typed sequence39.1.1, indexed39.1.2, group-return39.1.3, minimum39.1.5 and implicit-result39.1.4.2 before peers. Final normal18 target9 healthy pass/9 explicitly owned dormant regressions; no dormant success credit. Exact producers/inputs/compiled/emitted artifacts/trace/result epochs retained. No production change, new schema/family authority, filesystem owner or independent emitted-package claim. Book/card/map/target/live/resume/history align; focused intake commit, full admission/push remain open.
+Rust generated bcode execution now honors unsuffixed Default repetition bounds while preserving canonical or_bcode rows; pipe sharing that row stays single. The initial classifier-change proposal is superseded by existing v2 policy before production: no classifier/emitter/validator/schema/metadata change. Unchanged6 mode/validation groups baseline5pass/1fail ->6pass; cursor8 native/8 restored/4 plan becomes8/8/8. Explicit OR/AND, pipe, default-acode and old-valid-plan/wrong-rep-row controls pass. Structural matrix now10 active pass/8 owned dormant after enabling the cursor regression; no dormant success credit. Exact6 source/compiled-serde/plan/emitted records remain byte-identical and other mode results unchanged; focused format passes. Existing generated Rust sources/plans remain valid; rebuild applications with updated runtime, no source regeneration. Retain actual source/input/result/patch/receipt epochs. Current target/card/book/roadmap/task/live/resume/history correct the earlier hypothesis. Next39.1.1 dependency steps, then indexed/group-return/minimum/implicit-result repairs before peers. Focused authorized commit; full admission/push open.
 
 ## Next Action
 
-Activate39.1.4.1 first from clean Rust intake. Read existing classifier/mode authority and source-emitter controls, then reproduce the owned native8/restored8/plan4 cursor RED and correct only default-blind derived family to existing rep_bcode if confirmed. Explicitly record row correction and old-artifact regeneration/rejection; preserve default-acode/pipe/OR/AND families. Focused compile/quick targeted check/docs/commit. Then39.1.1 typed dependency steps,39.1.2 indexed AND priority,39.1.3 per-group returns,39.1.5 ordinary minimum miss and39.1.4.2 implicit blind results, enabling each owned dormant regression before peers39.2-.4. No full gate except designated admission/push.
+Activate39.1.1 from clean generated-default repetition repair. Implement typed runtime-only AND required steps from existing compiled identities: valid increasing same-owner sparse actions use every authored local slot; dependency routes use authored acode order and exactly one action index per step, retaining full catalogs/patterns/schema. Reproduce owned cross/reversed/duplicate RED before production, preserve exact match target/index and local sparse controls on native/restored/plan. Focused compile/targeted check/docs/commit, then39.1.2 indexed priority,39.1.3 per-group returns,39.1.5 minimum miss and39.1.4.2 implicit blind collection before peers. Full gates at designated admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1` — Rust generated Default blind iteration repaired with unchanged v2 rows; typed sequence39.1.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0` — Rust intake retained; default-blind classifier39.1.4.1 first, other owned P1 repairs before peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.2` — Standalone shared recursion guard wired/targeted-checked; independent Rust sparse-AND intake39.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1` — Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
@@ -29,7 +30,6 @@ Activate39.1.4.1 first from clean Rust intake. Read existing classifier/mode aut
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.4` — Input-boundary Word statement prerequisite42.4 repaired/targeted-checked; seven-reader42.1 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.0` — Perl mark-name roles/readiness42.0 frozen with raw-host return owned; seven-reader42.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` — Safe installed Lua named Number/caller scopes34.5 compatible/targeted-checked; ordinary Perl roles/readiness42 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` — Julia named Number methods/caller scopes34.4 compatible/targeted-checked; safe Lua34.5 next.
 
 ## History
 

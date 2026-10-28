@@ -1748,7 +1748,16 @@ impl GeneratedPlanExecutor<'_> {
 
         let mut implicit_and_result = Vec::new();
         match family {
-            GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode => {
+            // Default and pipe share or_bcode in v2. Spend Default's existing
+            // repetition bounds without changing that row or repeating pipe.
+            family
+                if matches!(
+                    family,
+                    GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode
+                ) || (matches!(family, GeneratedRuleFamily::OrBcode)
+                    && matches!(rule.mode, RuleMode::Default)
+                    && rule.rep_min.is_some()) =>
+            {
                 let rep_min = rule.rep_min.unwrap_or(0);
                 let rep_max = rule.rep_max;
                 let mut matches = 0usize;

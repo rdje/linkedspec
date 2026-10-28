@@ -23,13 +23,14 @@ Lua hypothesis. Native/restored/plan observations are independently retained.
 
 ## Required repair slices
 
-39.1.4.1 first: actual default-blind cursor probe on HcatHcat returns8 native,
-8 restored,4 plan. Top has modeDefault/rep_min0/bcodes1; emitted familyor_bcode
-selects nonrepeat execution while native repeats. Fix the existing derived
-classification explicitly (expected rep_bcode), preserve explicit pipe/OR/AND
-and default-acode cases, and verify safe old-plan rejection/regeneration needs.
-No new family meaning/field/version or validator waiver. This probe separates
-real representation drift from identical null outputs in the no-tail example.
+39.1.4.1 is repaired/targeted-checked: cursor8/8/4 is now8/8/8. The initial
+proposal to changeor_bcode torep_bcode was superseded before production by the
+canonical v2 explicit-repetition-only policy. Keep existingor_bcode, classifier,
+validator, emitted source and serialized state unchanged; generated execution
+now spends authored Default bounds while pipe sharingor_bcode stays single.
+Unchanged6 tests5pass1RED/all6pass; structural10pass/8 remaining owned dormant.
+Exact6 source/artifact records unchanged. Existing source/plans remain valid;
+rebuild applications with the fixed runtime, no source regeneration required.
 
 39.1.1: local sparse slots and dependency steps need distinct runtime roles.
 Cross-target Value declares H/cat, appends Part[1] cat as regex_idx2, but its

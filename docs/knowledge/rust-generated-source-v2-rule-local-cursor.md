@@ -37,7 +37,7 @@ it:
 
 The authored unsuffixed `Default` mode is a useful boundary. Live execution
 repeats it, so core `RuleMode::is_repetition()` correctly returns true. The
-generated contract nevertheless reserves the `default` family row and uses
+generated contract nevertheless reserves `default` for its action form, projects its blind form as `or_bcode`, and uses
 `rep_*` only for explicit repetition suffixes. Generated classification must
 therefore test explicit repetition variants rather than reuse the broader live
 execution predicate.
@@ -82,3 +82,13 @@ Fresh generated, cursor and typed-source neutral proof passes. Actual emitted mo
 gaps: [[rust-generated-source-literal-encoding-gap]] (.71) and
 [[rust-generated-recognition-parse-adapter-gap]] (.72). These later native controls supersede the prefix
 checkpoint's "no emitted module freshly built" scope limit without converting earlier dated gates into new runs.
+
+39.1.4.1 repairs generated default-blind iteration while preserving those rows.
+Default and pipe shareor_bcode, but generated execution must spend Default's
+existing repetition bounds. Unchanged6 controls5pass1RED/all6pass; exact6
+source/compiled/plan/emitted records unchanged, source_emitter.rs unchanged.
+Oldor_bcode remains valid and substitutingrep_bcode still fails validation.
+Native/restored/plan cursor8/8/4 becomes8/8/8; explicit modes/default-acode stay
+unchanged. Rebuild generated applications with updated runtime; no source
+regeneration. Structural target10pass/8 remaining owned dormant; no broad gate
+or independent emitted-package refresh. [[rust-sparse-and-required-step-gaps]].

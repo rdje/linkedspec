@@ -7749,7 +7749,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Finite authored source/functional/identity/cursor controls, no population measurement.
 
   - [x] **REPRODUCE / ISSUE**: Initial12 and refined15 sources distinguish native/restored/plan mismatches; duplicate aa now reached separately. Refined24 input rows include real mixed results, not all-pass credit. Extra default-blind cursor inputHcatHcat returns8/8/4. Exact raw source/compiled/emitted/trace/result producers retained.
-  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine native/plan lengths select regex_patterns rather than dependency steps; dispatch fires every matching regex_idx so duplicate actions co-fire. Shared selection prioritizes inherited entry_idx over required AND index. CHOICE-only collector leaves repeated AND returns exiting early. Minimum checks returnErr; repeated blind paths discard implicit results; emitted default-blind classifier choosesor_bcode while native repeats. Public traces distinguish healthy child matching from parent/result defects.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine native/plan lengths select regex_patterns rather than dependency steps; dispatch fires every matching regex_idx so duplicate actions co-fire. Shared selection prioritizes inherited entry_idx over required AND index. CHOICE-only collector leaves repeated AND returns exiting early. Minimum checks returnErr; repeated blind paths discard implicit results; generated default-blind or_bcode execution fails to spend authored repetition;39.1.4.1 later confirms the row itself is canonical and preserves it. Public traces distinguish healthy child matching from parent/result defects.
   - [x] **FIX**: Freeze bounded targets in sparse-and-rust-repair-target.md; no production edit.39.1.4.1 narrow classifier first, then39.1.1 typed steps/one action per dependency,39.1.2 AND indexed priority,39.1.3 per-group return,39.1.5 minimum miss and39.1.4.2 implicit collection. Preserve full catalogs, typed identities, explicit returns and existing format; no blanket outgoing-only fix or AND-to-CHOICE collector shortcut.
   - [x] **ADDRESSED (verified)**: Normal target retains9 healthy groups and9 explicitly dormant regressions with exact P1 owners, required before admission/push. Native/restored/plan and actual emission inspection only; independent emitted package not claimed. Healthy full nonreturn repeated reset is live, below-minimum targets separate. Diagnostic intake is complete, actual defects remain scheduled and unclosed.
   - [x] **NO REGRESSION**: No production change. Scoped normal gate9pass/9ignored and exact-file formatting pass; ignored tests carry no success credit. Original initial/refined failures and extra cursor RED preserved byte-for-byte; no source/body/schema/alias/domain/dependency-internal change. Rust full compatibility and broader admission remain open.
@@ -7793,14 +7793,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1`
-  Status: `pending` / immediate P1 after intake39.1.0, before sequence repairs
-  Goal: Repair the confirmed Rust default-blind generated-family classifier mismatch so emitted plan execution preserves native iteration and cursor.
-  Reproduction: Top:: =>Value E{return(cursor_pos())}, Value:AND H/cat with action1 BODY, inputHcatHcat. Current public native8/restored8/plan4, no execution error. Compiled Top modeDefault/rep_min0/bcodes1; emitted rowor_bcode selects nonrepeat handling while native repeats through both groups. This independent source-input result distinguishes real representation drift even when no-tail outputs allnull.
-  Scope: Reconcile current native/perl default-blind repetition with the existing rep_bcode family, then explicitly correct only derived default-blind rowor_bcode-to-rep_bcode if confirmed. No new row fields/family meaning/format/validation waiver. Old generated Rust plans need regeneration and must fail safely if no longer valid. Keep explicit pipe/OR/AND/default-acode and implicit-result work39.1.4.2 separate.
-  Planned verification tier: focused
-  Planned focused checks: Exact native/restored/plan8-versus4 RED/GREEN, emitted row/source/typed old-plan rejection, nearest classifier/mode source tests and default-acode/explicit blind family controls; compile/format/book/retained epochs/commit.
-  Planned canonical trigger: New authority/format/family meaning separately owned canonical; existing derived-family correction explicit. Full39/23.4/final clean push.
-  Planned claim verification: none: Finite authored source/cursor/classification distinctions, no population measurement.
+  Status: `completed` / generated Default blind repetition repaired with neutral rows preserved
+  Activation: clean `3b68f73a32794983ef562392e9013aa33160011f` after independent intake.
+  Goal: Match native default-blind iteration without changing accepted v2 rows or pipe behavior.
+  Verification tier: `focused`
+  Focused checks: Unchanged6 mode/compatibility tests5pass1RED ->6pass, enabled cursor regression in structural target10pass/8 owned dormant; exact6 source/serde/plan/emitted identities and other results unchanged; classifier/emitter byte equality; scoped format and book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining dormant regressions; no new policy/family meaning/format or row correction. Existing v2 policy preserved.
+  Claim verification: none: Finite authored mode/cursor/source/validation controls, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Default-blind HcatHcat returns8 native/restored but4 generated-plan. Unchanged6 controls baseline5pass/1fail distinguish default from pipe even though both project or_bcode; explicit OR/AND/default-acode and existing-plan validation already pass.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: GeneratedPlanExecutor::execute_direct_bcode_rule_inner routes allor_bcode through single-choice, ignoring Default's compiled repetition bounds. Canonical v2 intentionally reserves rep_* for explicit syntax, so initial classifier-change hypothesis is superseded before production. Existing classifier and neutral row are correct; executor must spend authored mode/bounds.
+  - [x] **FIX**: Extend only the existing generated repetition match arm toor_bcode with authoredDefault and present repetition bounds. Reuse its loop/counters/lifecycle/progress logic; pipe/other family arms stay unchanged. No classifier/emitter/row/validator/schema modification or source rewrite.
+  - [x] **ADDRESSED (verified)**: All6 unchanged tests pass; default becomes8/8/8 and pipe remains4/4/4. Explicit OR/AND and default-acode unchanged; accepted oldor_bcode validates, proposedrep_bcode substitution still produces GeneratedPlanFamilyMismatch. Enabled the original cursor regression; structural target10pass/8 owned ignored, no ignored success credit.
+  - [x] **NO REGRESSION**: Exact6 source/serialized compiled/plan/emitted records are byte-identical before/after, other runtime results identical, source_emitter.rs unchanged and scoped format passes. Existing generated source/plans need no regeneration; rebuild applications with updated runtime. Independent emitted package execution and remaining dependency/index/return/minimum/implicit-result gaps remain open.
+  - [x] **LOCKSTEP**: default-blind-plan-repetition-intake.json.gz retains actual producers/inputs/source/result/patch/receipt and superseded proposal. Target/card/map/book/roadmap/live/resume/history reflect preserved rows and fixed execution.39.1.1 next; all8 remaining dormant cases required before admission/push. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1 - honor default blind repetition in generated execution without changing v2 rows`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2`
   Status: `pending` / P1 implicit blind-result reconciliation after39.1.4.1
@@ -8153,7 +8160,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1` | `pending` | Repair default-blind native8/restored8/plan4 classifier drift, then owned sequence/return/minimum gaps. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1` | `pending` | Repair typed dependency sequence steps and duplicate action co-dispatch, preserving local sparse slots. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
