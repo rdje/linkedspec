@@ -8139,7 +8139,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4 - retain Dart implicit blind repetition collections`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5`
-  Status: `pending` / P1 immediately after39.2.4 before peers/admission/push
+  Status: `in_progress` / bounded public authority intake then owned repairs
   Goal: Reconcile and repair repeated blind post-call return/retv authority from public evidence.
   Reproduce: Top::OR{2} =>First {return(["POST",retv,cursor_pos()])}, =>Second; First AND/a/ returns A, Second AND/b/ returns B. On ab Dart native/restored/plan/fresh returns[POST,A,1] at1; Perl public native/fresh returnsnull at1 without errors. Existing generated Perl Top inner or_code returns the post-call Array; outer REP_BCODE continues toward min2, then a no-progress attempt fails the minimum. Its emitted child assignment targets $Top while $retv stays unbound. Dart _executeBlindOnce throws whole-rule _ActionReturn and _executeRule catches it before minimum accounting. No peer failure inferred.
   Impact/ownership: This is an actual portable behavior gap, not proof that Dart whole-rule post-call exit or Perl unbound retv is intended. Current39.2.4 preserves existing Dart compatibility only. Owner follows immediately after bounded implicit collection, reconciles existing published retv/post-call/return contracts and uses direct/code/fluent/nonreturn/count/minimum/zero-progress/IT/lifecycle controls before production. Fix every established defect through typed shared owners; carry any reference repair under its own leaf. No change to serialized contracts without separately owned authority.
@@ -8148,6 +8148,43 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact public source/SDK/plan/fresh/code/fluent/retv/iteration/minimum/progress/lifecycle distinctions, focused compile/book/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push; any new public authority/schema decision separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0`
+  Status: `completed` / public post-call authority and repair split
+  Goal: Separate existing return-scope authority from latest-child retv binding using public tools before production.
+  Acceptance: Read canonical child-result/retv/book/ADR0048 and current owners. Preserve exact native/fresh public Perl and Dart source/normalized/compiled/plan/emitted observations for plain/repeated AND/choice, block/fluent/no-return, complete/minimum/failed-child and recognition progress controls. Qualify unsupported fixtures before credit. Schedule concrete bounded repairs for each established defect; do not infer peers or change contract/schema. Book/docs/evidence/commit, then immediate repair owners before Julia.
+  Verification tier: `focused`
+  Focused checks:12 same raw public sources18 inputs, Perl native/fresh values/cursors/errors internally equal and Dart native/restored/plan/fresh values internally equal; constant/code/fluent/retv/nonreturn/IT/E/failed-child/progress distinctions, exact module/input closure; no production diff; book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after bounded fixes/peers/registration/pressure; no new contract/schema authority.
+  Claim verification: none: Finite authored functional/control-flow/error distinctions, no population measurement.
+  Activation: clean `b8bcac3e7e8c52fd2cf7187156954480674daa86` after39.2.4. spec-lifecycle-retv-order explicitly requires latest child return in attached blind-call code. Existing canonical blind-call collection shape owns repeated child/group values; ADR0048 preserves blind boundaries rather than redefining them. Public emission from first probe separates inner closure return from outer minimum and late/unbound retv. Verify distinguishing plain/IT/E and constant-value controls before fixing either mechanism.
+
+
+  - [x] **REPRODUCE / ISSUE**:12 same raw sources18 inputs reproduce plain/repeated retv, constant block/fluent scope, nonreturn effects, IT/E and recognition zero distinction on public Perl native/fresh and Dart native/restored/plan/fresh. No production change; no peer failure inferred.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual emitted reference inner bcode closure returns to outer repeat/minimum loop; declared retv is not bound before attached code/IT. Dart _executeBlindOnce sets child retv but throws whole-rule _ActionReturn, caught in _executeRule before counting/progress. Constant values separate scope from binding, E/nonreturn/IT distinguish binding timing.
+  - [x] **FIX**: Intake freezes existing published latest-child retv and canonical blind repetition boundaries, without new policy. Schedule immediate bounded reference retv39.2.5.1 then Dart per-iteration/group return/count/minimum/progress39.2.5.2 before peers/admission. Production repairs are not claimed complete here.
+  - [x] **ADDRESSED (verified)**: Exact12 source and18 input closures retained; all four Dart routes agree internally, both Perl routes agree on values/cursors/errors. aa constant return Perl[[C,1],[C,2]]at2 vs Dart[C,1]at1; actual post-call zero Perl typed rejection vs Dart[true,C,0]. Reader asserts discriminators and no production diff.
+  - [x] **NO REGRESSION**: This slice changes documentation/tracking/evidence only; no Perl/Dart runtime or schema edits, no broad test/full-admission claim. Existing implicit collections remain committed/targeted-checked; no new intended failure or observed reference bug is blessed as portable behavior.
+  - [x] **LOCKSTEP**: blind-postcall-intake.json.gz retains actual public producers/inputs/emission/modules/results/receipt. Book/card/target/roadmap/task/live/resume/history align; immediate .5.1/.5.2 own verified fixes before peer progression. All global admission prerequisites retained; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0 - isolate blind post-call retv and repeated return defects`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1`
+  Status: `pending` / P1 immediate after TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0 before peers/admission/push
+  Goal: Repair Perl blind child return binding before attached code and per-iteration lifecycle.
+  Acceptance: Use current published latest-child retv contract and actual public intake. Shared emitter/typed owners bind the child result once before attached block/fluent code and IT/LE where existing lifecycle executes. Preserve call counts, captures, caller return/error/recursion, falsey/null kinds, collection/lifecycle phase and v2 metadata; qualify reference acceptance/progress owners independently. Exact public native/fresh RED-GREEN and nearest blind/retv/recursion controls, book/docs/focused commit.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored public/native/fresh and supported SDK/plan/source/return/cursor/progress/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push; new public contract/schema movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2`
+  Status: `pending` / P1 immediate after TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1 before peers/admission/push
+  Goal: Repair Dart repeated blind post-call return scope and progress.
+  Acceptance: Use repaired reference and constant block/fluent controls. Repeated choice returns one iteration value, repeated AND returns one group value/early skip, preserving accepted count/reset/minimum, falsey/null/nesting, custom IT/lifecycle whole-rule and post-call failed-child semantics. Common loop progress must reject actual zero-progress recognition before IT/max/ordinary exits, preserving diagnostic provenance and ordinary zero behavior. Exact source/normalized/compiled/plan/emitted identity/fresh reuse, owned RED-GREEN/nearest controls/book/docs/focused commit; do not infer peers.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored public/native/fresh and supported SDK/plan/source/return/cursor/progress/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push; new public contract/schema movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8472,7 +8509,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5` | `pending` | Reconcile and repair repeated blind post-call return scope and retv. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1` | `pending` | Bind reference latest child retv before attached blind code and IT. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

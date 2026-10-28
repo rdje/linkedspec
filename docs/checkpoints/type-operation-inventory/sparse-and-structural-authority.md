@@ -151,3 +151,11 @@ guard24 artifact records unchanged, fatal analysis pass. Default no-hitnull vs
 explicit zero-min[], partial discard/IT/lifecycle/healthy iteration preserved.
 Packet dart-blind-collection-intake.json.gz retains references/actual emitted
 control-flow owners. No public post-call parity/schema/classifier claim.
+
+Post-call39.2.5.0 intake12 same public sources18 inputs separates reference
+latest-child retv binding from Dart repeated return/group/count/minimum/progress.
+Constant block/fluent returns and nonreturn/IT/E controls distinguish mechanisms.
+Actual Dart recognize_once post-call zero bypasses progress, unlike typed Perl
+rejection. Immediate reference.5.1 then Dart.5.2 precede peers/admission; no new
+contract/schema or peer inference. Packet blind-postcall-intake.json.gz retains
+all public input/producer/emission/native/fresh and SDK/plan/module evidence.

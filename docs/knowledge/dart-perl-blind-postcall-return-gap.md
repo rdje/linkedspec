@@ -5,7 +5,7 @@ answers:
   - "does a repeated blind post-call return exit the Dart rule or one iteration"
   - "why does Perl repeated blind post-call retv return null while Dart returns a child value"
 date: 2026-10-28
-status: open P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5 immediately after implicit collection before peers/admission
+status: intake39.2.5.0 complete; P1 reference binding.1 then Dart return/progress.2 before peers/admission
 tags: [dart, perl, blind-call, repetition, return-scope, retv, authority-gap]
 evidence: "dart-blind-collection-intake.json.gz retains postcall_return public Perl native/fresh/emitted and Dart native/restored/plan/fresh baseline; read_dart_blind_postcall.py retains exact generated owner locations."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_dart_blind_collection_postcall.pl; cd dart && bash ../tools/run_dart_project_data.sh test test/blind_repetition_collection_test.dart --name postcall_return"
@@ -34,3 +34,15 @@ per-iteration/group outcomes, minimum/progress and lifecycle authority with publ
 probes. Fix established defects in separately owned bounded slices. Current
 implicit collection preserves existing Dart post-call behavior only; neither
 this output nor reference unbound retv is blessed as portable authority.
+
+12-source18-input public intake now distinguishes two defects. Published
+latest-child retv applies in attached blind code and IT: Perl post_effect
+collects[null,null], Dart[A,A]; plain/IT retv is null in Perl while E control
+returns A. Constant block/fluent OR{2}/AND{2} returns two[C,position] values
+in Perl on aa, but Dart exits at first. Actual recognize_once post-call zero
+returns[true,C,0] on Dart and typed recognition_zero_progress_repetition in
+Perl. Same12 raw sources, each backend native/fresh routes agree internally;
+no peer inference. No new contract is needed: reference retv binding.5.1 then
+Dart repeated return/count/minimum/progress.5.2 are immediate P1 repairs.
+Packet blind-postcall-intake.json.gz retains exact producers/emission/results/
+modules/receipt. Earlier gap packet remains frozen.

@@ -12285,7 +12285,7 @@ _Dart ordinary repetition minimum misses return failed null outcomes and preserv
 ### dart-perl-blind-postcall-return-gap
 _Repeated blind post-call return scope and retv differ between Dart and the Perl reference_
 - **answers:** does a repeated blind post-call return exit the Dart rule or one iteration | why does Perl repeated blind post-call retv return null while Dart returns a child value
-- **date:** 2026-10-28 · **status:** open P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5 immediately after implicit collection before peers/admission
+- **date:** 2026-10-28 · **status:** intake39.2.5.0 complete; P1 reference binding.1 then Dart return/progress.2 before peers/admission
 - **evidence:** `dart-blind-collection-intake.json.gz retains postcall_return public Perl native/fresh/emitted and Dart native/restored/plan/fresh baseline; read_dart_blind_postcall.py retains exact generated owner locations.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_dart_blind_collection_postcall.pl; cd dart && bash ../tools/run_dart_project_data.sh test test/blind_repetition_collection_test.dart --name postcall_return`
 - **source:** [`docs/knowledge/dart-perl-blind-postcall-return-gap.md`](docs/knowledge/dart-perl-blind-postcall-return-gap.md)
