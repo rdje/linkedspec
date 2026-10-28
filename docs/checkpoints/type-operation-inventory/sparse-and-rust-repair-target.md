@@ -116,3 +116,13 @@ Do not bless omitted LS/LE hooks: SESSION-STARTUP-READING.27 owns that existing
 P1 lifecycle gap before admission. Nonreturn full groups produce[[],[]]; custom
 IT replaces default collection. Packet rust-and-returns-reference-intake.json.gz.
 No production repair yet;4 Rust dormant regressions remain owned/no success credit.
+
+Reference39.7 now repairs falsey per-group acceptance before Rust39.1.3. Local
+group match state is separate from raw action return; early unwind/count/minimum,
+IT replacement and typed recognition progress remain explicit. Main12 groups/
+28 inputs2pass10RED plus transaction3 groups0pass3RED ->15pass native/fresh;
+nearest4 suites79groups pass. Replay changes only3 falsey full-input results
+to two preserved values at8. Schema/family/global predicate unchanged; regenerate
+older standalone Perl sources. Packet perl-and-falsey-intake.json.gz. Rust39.1.3
+resumes; SESSION27 lifecycle and new39.8 /g zero-width slot/progress remain owned
+before admission. Do not reinterpret either as accepted portable behavior.

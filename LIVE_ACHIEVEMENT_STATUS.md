@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
+Perl repeated AND falsey group acceptance repaired/targeted-checked; Rust39.1.3 resumes.
 
 ## Latest Completed Slice
 
-Repeated AND return prerequisite qualified through10 actual public Perl sources/16 native-fresh pairs without errors. Truthy final returns collect[BODY,BODY]; early H return on HH collects two values/cursor2 and skips remaining cat; below-minimum returnsnull. Unexpectedly0/empty/null return stops after first complete group at4 and falsely misses minimum2. Emitted inner coderef returns raw values; outer REP_AND_ACODE calls result_is_match, whose ordinary path tests truthiness without per-group acceptance. Own immediate P1 reference repair39.7 before Rust39.1.3; preserve falsey values using a distinct accepted-group outcome, actual misses/minima/progress/errors and existing schema. Do not broaden global result_is_match or infer acceptance from a sticky prior match. LS/LE hooks are omitted by this inner sequence builder, reinforcing existing lifecycle owner SESSION-STARTUP-READING.27 before admission; do not normalize that omission into Rust. IT remains whole-rule authority and custom IT replaces default collection; nonreturn complete groups currently produce[[],[]]. Packet rust-and-returns-reference-intake.json.gz retains source/emission/metadata/actual outcomes/instruments. No production change or Rust compatibility success; original4 dormant regressions stay owned. Book/card/target/roadmap/task/live/resume/history synchronized; focused commit, next39.7 then39.1.3, no push.
+Perl REP_AND_ACODE now passes a fresh loop-local acceptance flag into its inner group by reference; actual slot miss/identity failure clears it, while explicit action return keeps its original value, including0/Bool false/empty/null. The raw result no longer decides whether the group matched. Early returns still skip remaining slots, accepted groups count once, real partial misses/minima/reset and custom IT replacement/whole-rule returns stay intact. Main12 groups/28 inputs baseline2pass10RED plus transaction3 groups/6 route rows0pass3RED ->final15pass native/fresh. Transactions now commit two falsey groups at9 (caller consumes entryH), and zero-progress falsey repetition retains its typed rejection. Nearest4 suites79groups and emitter syntax pass on the same fixed bytes. Exact15 source inputs/12 metadata sets unchanged; every emitted difference is limited to the local outcome channel/accurate trace text. Replay of16 historical reference pairs changes only3 full falsey results to[0,0]/[empty,empty]/[null,null] at8. Global recognition predicate, Rust, schemas/family rows and other handler bodies unchanged; regenerate older standalone Perl sources to install this fix. Original two-zero-width-slot probe reaches a separate /g continuation-state defect, owned P2 39.8 before admission; final one-group zero-width control isolates acceptance. Initial transaction probe lacked the caller entryH; corrected/reached baseline and prior instrument/results retained with no false product RED credit. Packet perl-and-falsey-intake.json.gz retains all source/epoch/result/producers/patch/receipt. Lifecycle omission SESSION27 stays owned. Book/card/target/roadmap/task/live/resume/history synchronized; next Rust39.1.3; focused authorized commit, full admission/push open.
 
 ## Next Action
 
-Activate39.7 from clean repeated-AND prerequisite intake. Add normal native/fresh Perl regressions for0/empty/null/Bool false accepted group values versus real group miss/minimum, early return, nonreturn, IT override and progress. Fix only REP_AND_ACODE per-group acceptance/result separation at its emitter owner; retain raw payloads, ordinary matching errors and schema. Focused checks/docs/commit, then resume Rust39.1.3 with repaired reference; lifecycle omissions stay SESSION27 before full admission.
+Resume Rust39.1.3 from clean falsey reference repair39.7. Enable original repeated-action regression and add final/early/falsey/minimum/IT/E controls against repaired reference. Separate group return/unwind/count/result from CHOICE-only ADR0048 and lifecycle whole-rule returns, preserve typed required steps/captures/cursor and real minimum failure. Implement bounded runtime-only repair with focused compile/targeted checks/docs/commit; ordinary nonreturn minimum39.1.5 and blind implicit collection39.1.4.2 follow before peer39.2-.4. P2 zero-width slot/progress39.8 and SESSION27 lifecycle remain before admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.7` — Perl repeated AND falsey group acceptance repaired/targeted-checked; Rust39.1.3 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0` — Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` — Rust indexed AND priority repaired/targeted-checked; repeated per-group returns39.1.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1` — Rust typed AND dependency steps repaired/targeted-checked; indexed-entry priority39.1.2 next.
@@ -29,7 +30,6 @@ Activate39.7 from clean repeated-AND prerequisite intake. Add normal native/fres
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.3` — Advancing/bridge String word names targeted-checked; immediate two-guard range repair42.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.2` — Readonly Perl text/predicate names and unused readonly calls repaired; advancing42.2.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.1` — Ten ordinary Perl mark write statements support governed String names; readonly42.2.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.42.1` — Ordinary Perl named Number readers accept governed ordered String word names;42.2 remaining names next.
 
 ## History
 

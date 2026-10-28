@@ -1022,7 +1022,7 @@ sub _emit_and_single_acode_handler {
 # _emit_and_acode_seq_handler — sequential index matching loop, acode dispatch.
 #------------------------------------------------------------------------------
 sub _emit_and_acode_seq_handler {
-    my ($ir) = @_;
+    my ($ir, $on_miss) = @_;
     my $label       = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
@@ -1030,7 +1030,8 @@ sub _emit_and_acode_seq_handler {
     my $match_expr  = $uses_local_structural_slots
         ? _linkedre_local_structural_slot_expr(%$ir, label => $label, index_expr => '$idx')
         : _linkedre_required_slot_expr(%$ir, label => $label, index_expr => '$idx');
-    my $lxcode      = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
+    my $lxcode      = ($on_miss // '') . _recognition_miss_statement($label)
+        . ($ir->{lxcode} || 'return undef');
     my $lscode      = $ir->{lscode} || '';
     my $lecode      = $ir->{lecode} || '';
     my $acode_count = $ir->{acode_count};
@@ -1584,7 +1585,7 @@ sub _emit_rep_and_acode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'iteration_result',
-        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $and_ret)',
+        taken_expr => '$and_group_matched',
         meta => [
             [ loop_count => '$ccount' ],
             [ rep_min => '$min' ],
@@ -1605,7 +1606,7 @@ sub _emit_rep_and_acode_handler {
             [ rep_max => '$max' ],
             [ pos => 'pos($$STRING)' ],
         ],
-        details_expr => 'sub { "inner AND_ACODE result was false" }',
+        details_expr => 'sub { "inner AND_ACODE group did not match" }',
     );
     my $max_continue_condition = _trace_branch_condition(
         enabled => $trace_enabled,
@@ -1622,14 +1623,17 @@ sub _emit_rep_and_acode_handler {
         details_expr => 'sub { "continue while loop_count < max" }',
     );
 
-    # Build inner AND_ACODE as a coderef
+    # The inner coderef may return any authored value, including undef. Pass a
+    # separate per-call match flag by reference and clear it only on a real
+    # sequence miss. Its loop-local binding is outside the authored code's
+    # lexical scope, and the inner body needs no new named author-visible local.
     my $and_body = _emit_and_acode_seq_handler({
         %$ir,
         kind        => 'and_acode_seq',
         acode_count => $ir->{acode_count},
         ecode       => 'return \@' . $label . '_collect',
         trace_generated_handler_branches => 0,
-    });
+    }, '${$_[0]} = 0; ');
     return undef unless defined $and_body;
 
     return '
@@ -1644,7 +1648,8 @@ sub _emit_rep_and_acode_handler {
    while(1) {
 ' . $loop_enter_trace . '
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    my $and_ret = $and_code->();
+    my $and_group_matched = 1;
+    my $and_ret = $and_code->(\$and_group_matched);
     unless (' . $and_result_condition . ') {
      if (' . $miss_min_condition . ') {
       ' . $excode . '
