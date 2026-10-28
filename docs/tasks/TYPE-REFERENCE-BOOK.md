@@ -8259,20 +8259,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2 - complete Dart repeated blind post-call outcomes and progress`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7`
-  Status: `pending` / P1 immediately after Perl39.9.2 before peers/admission
+  Status: `in_progress` / null return provenance then pure observation
   Goal: Repair Dart null-return acceptance provenance and pure-null observation classification.
   Reproduce: Same10 public parent sources emitted by current Perl39.9.2 intake compile on Dart native/restored/generated-plan. OR/AND completed two children then EX/E returnundef yields[false,null,2], and completed first child then IT returnundef yields[false,null,1]; existing match/payload separation requires accepted null. Pure Coordinator I returnundef observed with no regex returns failed/no accepted exit, while canonical coordinator normal return is accepted with no selected span. Post-call group null and ordinary observation failed-min controls are healthy. Emitted Dart modules retained but fresh execution is not claimed in this diagnostic.
   Root/ownership: _returned derives matched from value != null, losing actual return-context acceptance. Observation completion uses result.matched without a no-recognition-structure normal-return distinction. Repair typed context provenance, never infer success from a stale prior regex hit or globally mark all null returns accepted. New children .1/.2 own bounded fixes immediately after current Perl parent leaf.
   Evidence: forthcoming perl-blind-parent-intake.json.gz retains prepare_dart_parent_probe.py, actual same-source/SDK inputs/results/modules and read_parent_dart_probe.py receipt; no peer inference or new public contract.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1`
-  Status: `pending` / P1 after Perl39.9.2 before peers/admission
+  Status: `completed` / accepted null return provenance
   Goal: Preserve actual Dart accepted return context independently of null lifecycle/action payload.
   Acceptance: Use observed completed blind EX/E/IT null cases and canonical strict match/payload separation. Qualify nonrepeated action/null and other lifecycle contexts independently before edit; preserve true miss/partial/minimum, no-hit/zero-min, early I/no-match, caller return/captures/cursor, bounds, real errors/progress and schema/source identities. Typed matched provenance at owning return paths, no blanket null success or sticky match. Exact native/restored/plan/fresh RED-GREEN/nearest controls/book/docs/focused commit.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored SDK/plan/fresh/source/match/value/observation/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push; new public authority/schema movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:20 authored sources37 inputs5healthy15actualRED ->20pass native/restored/plan; same20 baseline emitted modules/consumer public values; exact source/normalized/compiled/plan/emitted identity;122 adjacent tests/fatal static analysis/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after peers/observation/registration/pressure; public schema/authority movement separately canonical.
+  Claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+  Activation: clean `708a1d7cf42d0bef9444906263d2c6c5b212d5a2` after reference parent publication. Current _returned uses value != null; selected action and completed EX/E/IT contexts lose successful-null status. Qualify same-source direct SDK/trace and current reference repeated-blind controls before edits, preserve unaccepted I/LS/LX/misses and non-null authority. Use typed return provenance/local completed counts at owning paths; no sticky context match flag or universal null acceptance. Existing pure-null observation.7.2 remains separate.
+
+
+  - [x] **REPRODUCE / ISSUE**:20 authored sources37 inputs5healthy15actualRED. Completed blind EX/IT null returns lose recognize_once status; ordinary selected action/early AND/E/LE and repeated E/LX null returns lose matched status. Early I/LS, true misses/minimum and non-null whole-rule controls are healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _returned derives matched from value != null and _ActionReturn carries payload alone. Actual SDK lifecycle events/outputs locate the accepted source path before null is projected to false; existing strict result/payload contract and five exact repaired reference blind sources distinguish failure from nullable acceptance.
+  - [x] **FIX**: Private _ActionReturn accepted provenance is attached at selected action/regex LE/successful plain blind post-call owners. Lifecycle return factories use current complete attempt or completed count; initial I/LS/no-hit and under-minimum LX remain unaccepted. Non-null explicit whole-rule authority remains unchanged; no sticky prior regex, universal null success, cursor rollback or broad entry/placement rewrite.
+  - [x] **ADDRESSED (verified)**:20pass37 inputs SDK native/restored/generated-plan, exact source/normalized/compiled/plan/emitted inputs unchanged. Same20 baseline modules/main consumer reused fresh and returned values agree, including six recognition wrapper sources. Fresh execute exposes values only; direct flags asserted through SDK paths. Caller mark/max1/zero-min/true minimum/no-hit and legal zero-width LE authority retained.
+  - [x] **NO REGRESSION**:122 direct-dependent sparse/group/minimum/blind-collection/post-call/live-progress tests pass, fatal static analysis clean. Typed progress/error paths remain errors, early I/LS null stays false and non-null overrides stay accepted. Compiler/emitter/recognition transaction unchanged; pure-null coordinator observation remains separately owned .7.2; no peer/full admission claim.
+  - [x] **LOCKSTEP**: dart-null-returns-intake.json.gz retains actual producer/fixture/RED-GREEN/runtime epochs/module/main/receipt closure. Book/card/target/roadmap/task/live/resume/history align. Generated Dart source/plans remain valid; use updated runtime. Next .7.2 before Julia/safe Lua, admission/registration/pressure prerequisites remain; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1 - preserve Dart accepted null return provenance`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2`
   Status: `pending` / P1 after Perl39.9.2 before peers/admission
@@ -8606,7 +8617,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1` | `pending` | Preserve actual Dart null-return acceptance provenance before peers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2` | `pending` | Preserve pure-null coordinator observation acceptance without a selected span. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

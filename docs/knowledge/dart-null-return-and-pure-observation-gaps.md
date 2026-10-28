@@ -2,10 +2,9 @@
 id: dart-null-return-and-pure-observation-gaps
 title: Dart completed null lifecycle returns lose match status and pure-null coordinator observations are classified failed
 answers:
-  - "why does Dart recognized completed blind parent with E or IT null return report false"
   - "why does Dart pure null coordinator observation report failed"
 date: 2026-10-28
-status: open P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1-.2 immediately after Perl39.9.2 before peers/admission
+status: original null-return gap repaired39.2.7.1; pure-null observation39.2.7.2 remains immediate before peers/admission
 tags: [dart, null, acceptance, lifecycle, observation, coordinator, return-provenance]
 evidence: "perl-blind-parent-intake.json.gz retains same10 raw source SDK inputs/results/modules and read_parent_dart_probe.py receipt; native/restored/generated-plan agree, fresh execution unassessed in this diagnostic."
 reverify: "Recover retained dart/.dart_tool/blind-parent-probe/intake.dart and fixture; cd dart && bash ../tools/run_dart_project_data.sh run .dart_tool/blind-parent-probe/intake.dart"
@@ -32,3 +31,9 @@ mark every null accepted or use a sticky previous child match.
 All10 sources compile and execute the three SDK carriers; emitted modules are
 retained but fresh execution is not claimed in this diagnostic. No Dart code
 edit or inferred Julia/Lua defect occurs in the current Perl parent repair.
+
+39.2.7.1 now repairs accepted-null action/lifecycle provenance on20 exact
+authored sources37 inputs5healthy15RED ->20pass SDK/plan, same baseline emitted
+modules and122 nearest controls. Current mechanism/proof is owned by
+[[dart-accepted-null-return-provenance]]. Original diagnostic above remains
+historical; pure-null coordinator observation .7.2 is the next separate repair.

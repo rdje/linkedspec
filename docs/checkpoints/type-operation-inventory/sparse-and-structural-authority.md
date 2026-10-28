@@ -196,3 +196,15 @@ coordinator remains accepted, failed repeated observation loses accepted exit.
 Packet perl-blind-parent-intake.json.gz also retains actual same10-source Dart
 SDK null lifecycle/pure-null gaps, now immediate39.2.7.1-.2 before peers. No
 fresh Dart/peer inference; regenerate standalone Perl with updated runtime.
+
+Dart39.2.7.1 preserves owning accepted-null return context without sticky
+prior-match state or universal null success: selected action/LE/plain blind
+child and completed lifecycle counts feed private return provenance. Early
+I/LS, no-hit/zero-min and under-minimum LX stay unaccepted, non-null overrides
+retain authority.20 sources37 inputs5healthy15actualRED ->20pass SDK/plan; same
+source/normalized/compiled/plan/emitted bytes and20 baseline fresh modules.
+Fresh execute exposes value only; direct matched flags are asserted through
+SDK routes and six recognition wrappers expose flags in fresh payload.122
+nearest tests/fatal analysis pass, compiler/emitter/recognition_transaction
+unchanged. Packet dart-null-returns-intake.json.gz retains exact closure.
+Pure-null observation39.2.7.2 immediately next before peers/admission.

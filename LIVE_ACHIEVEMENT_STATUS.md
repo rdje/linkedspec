@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Reference completed blind parent recognition repaired; Dart null provenance and pure observation next.
+Dart accepted-null return provenance repaired; pure-null observation next.
 
 ## Latest Completed Slice
 
-Perl repeated blind parents now publish actual completed-count acceptance independently of payload and last child miss. Completed iterations publish before IT; satisfied exits restore ccount>0, under-minimum publishes false. Private acceptance_known distinguishes executed blind outcomes from pure coordinator observation fallback; selected span is never fabricated and global truthiness predicate is unchanged.10 native/fresh groups20 inputs2healthy8actualRED ->10pass, exact source/v2 metadata unchanged. Successful-null EX/E/IT, partial/minimum/zero-min/no-hit, post-call null groups, caller mark, failed observation and pure-null coordinator controls pass. Falsey iteration15groups36inputs unchanged and existing observation contract7groups pass; both syntax checks clean. Actual quiet-build native/fresh trace shows2 accepted iterations/parent1 versus1 under-min/parent0. Same-source Dart SDK probe confirms separately owned null lifecycle and pure-null observation gaps39.2.7.1-.2, immediate afterward; emitted Dart modules retained, fresh execution not claimed. Packet perl-blind-parent-intake.json.gz retains actual producers/inputs/emission/native/fresh/trace/SDK diagnostics/patch/receipt. Book/cards/target/roadmap/task/live/resume/history align; normal test queued23.4.1. Regenerate standalone sources with updated runtime; public schema/family/Dart unchanged. Bounded reference repairs complete, Dart null provenance next before peers/admission; focused authorized commit/no full gate/push.
+Dart accepted null returns now retain owning match/completed-iteration provenance. Private action returns carry acceptance from selected regex/LE or successful plain blind child; lifecycle returns use completed match/count context, with under-minimum LX and initial I/LS unaccepted. Existing non-null whole-rule authority remains.20 authored sources37 inputs5healthy15actualRED ->20pass native/restored/generated-plan; raw source/normalized/compiled/plan/emitted bytes identical. Same20 baseline emitted modules/main consumer reused and public values agree; direct matched flags asserted through SDK routes, six wrapper sources expose recognition flags in fresh returned values. Successful-null action/early AND/E/LE/EX/IT/LX, blind post-call, max1/zero-min/no-hit/minimum, initial I/LS, caller mark and legal zero-width LE controls pass.122 adjacent Dart tests and fatal static analysis pass. Compiler/emitter/recognition transaction/public schemas unchanged. Packet dart-null-returns-intake.json.gz retains producers/inputs/runtime epochs/source/fresh receipts; book/card/target/roadmap/live/task/resume/history align. Pure-null observation39.2.7.2 next before Julia/safe Lua; broad lifecycle authority/admission/registration/pressure prerequisites remain. Authorized focused commit/no full gate/push.
 
 ## Next Action
 
-Activate Dart39.2.7.1 from clean reference parent publication repair. Preserve actual accepted return context independently of null payload in completed blind EX/E/IT paths; qualify nonrepeated action/null and other lifecycle cases first. Use correct owning structural/count/return provenance, never globally mark null accepted or rely on sticky previous regex. Preserve true misses/partial/minimum/no-hit/zero-min, early I/norecognition, captures/cursor/returns, bounds, errors/progress and source/v2 identity; exact SDK/plan/fresh RED-GREEN/nearest controls/book/docs/focused commit. Then39.2.7.2 repairs pure-null coordinator observation with no invented selected match, before Julia39.3/safe Lua39.4. Full admission/registration/pressure/Perl39.8/lifecycle prerequisites remain before push.
+Activate Dart39.2.7.2 from clean committed null-return repair. Classify normal pure-null zero-regex coordinator observation accepted without selected span; preserve actual failed regex/blind minima, early I matcher failure, accepted-null spans/exit, lineage/errors/progress and normal parser matched flag. Exact SDK/plan/fresh RED-GREEN/nearest observation controls, book/docs/focused commit, then independent Julia39.3 and safe Lua39.4; full admission/registration/pressure and other owned prerequisites remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1` — Dart accepted-null return provenance repaired; pure-null observation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.2` — Reference completed blind parent recognition repaired; Dart null provenance and pure observation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.1` — Reference blind falsey iteration outcomes repaired; parent recognition publication next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2` — Dart repeated blind post-call outcomes/progress repaired; reference falsey/parent acceptance next before peers.
@@ -29,7 +30,6 @@ Activate Dart39.2.7.1 from clean reference parent publication repair. Preserve a
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` — Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` — Rust live recognition repetition progress repaired; ordinary minimum/API39.1.5.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0` — Minimum/API/progress intake qualified; immediate live recognition progress39.1.6 before bounded minimum repair.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.1` — Rust repeated AND group outcomes repaired/targeted-checked; remaining minimum families39.1.5 next.
 
 ## History
 

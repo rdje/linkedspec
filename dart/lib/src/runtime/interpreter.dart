@@ -717,7 +717,10 @@ final class LinkedSpecRuntimeEngine {
             'matched=${result.matched} cursor=${context.cursorCodeUnit}';
         return result;
       } on _ActionReturn catch (returnSignal) {
-        final result = _returned(returnSignal.value);
+        final result = _returned(
+          returnSignal.value,
+          accepted: returnSignal.accepted,
+        );
         terminalResult = result;
         traceExitDetails =
             'matched=${result.matched} cursor=${context.cursorCodeUnit}';
@@ -906,12 +909,15 @@ final class LinkedSpecRuntimeEngine {
         if (!matched.value) {
           final loopExit = _executeLifecycle(rule, 'LX', context);
           if (loopExit != null) {
-            return _returned(loopExit.value);
+            return _returned(loopExit.value, accepted: matchedAny);
           }
         }
         final exitReturn = _executeLifecycle(rule, 'E', context);
         if (exitReturn != null) {
-          return _returned(exitReturn.value);
+          return _returned(
+            exitReturn.value,
+            accepted: matched.value || matchedAny,
+          );
         }
         return _RuleResult(
           matched: matched.value || matchedAny,
@@ -922,11 +928,11 @@ final class LinkedSpecRuntimeEngine {
       }
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
-        return _returned(loopExit.value);
+        return _returned(loopExit.value, accepted: matchedAny);
       }
       final exitReturn = _executeLifecycle(rule, 'E', context);
       if (exitReturn != null) {
-        return _returned(exitReturn.value);
+        return _returned(exitReturn.value, accepted: matchedAny);
       }
       return _RuleResult(
         matched: matchedAny,
@@ -950,7 +956,7 @@ final class LinkedSpecRuntimeEngine {
       final before = context.cursorCodeUnit;
       final loopStart = _executeLifecycle(rule, 'LS', context);
       if (loopStart != null) {
-        return _returned(loopStart.value);
+        return _returned(loopStart.value, accepted: matches > 0);
       }
 
       final iterationValues = <Object?>[];
@@ -988,7 +994,7 @@ final class LinkedSpecRuntimeEngine {
       if (!returnedIterationValue) {
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
-          return _returned(loopEnd.value);
+          return _returned(loopEnd.value, accepted: true);
         }
       }
       context.assertRecognitionRepetitionProgress(rule.label, before);
@@ -1001,7 +1007,7 @@ final class LinkedSpecRuntimeEngine {
       matches += 1;
       final iterationReturn = _executeLifecycle(rule, 'IT', context);
       if (iterationReturn != null) {
-        return _returned(iterationReturn.value);
+        return _returned(iterationReturn.value, accepted: true);
       }
       if (!hasCustomIteration) {
         if (returnedIterationValue) {
@@ -1020,24 +1026,24 @@ final class LinkedSpecRuntimeEngine {
     if (matches < min) {
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
-        return _returned(loopExit.value);
+        return _returned(loopExit.value, accepted: false);
       }
       return const _RuleResult(matched: false, value: null);
     }
 
     final extendedExit = _executeLifecycle(rule, 'EX', context);
     if (extendedExit != null) {
-      return _returned(extendedExit.value);
+      return _returned(extendedExit.value, accepted: matches > 0);
     }
     if (madeFailedAttempt || matches > 0) {
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
-        return _returned(loopExit.value);
+        return _returned(loopExit.value, accepted: matches > 0);
       }
     }
     final exitReturn = _executeLifecycle(rule, 'E', context);
     if (exitReturn != null) {
-      return _returned(exitReturn.value);
+      return _returned(exitReturn.value, accepted: matches > 0);
     }
     return _RuleResult(
       matched: matches > 0,
@@ -1092,7 +1098,7 @@ final class LinkedSpecRuntimeEngine {
           if (returnIterationValue) {
             throw _BlindIterationReturn(edgeReturn.value);
           }
-          throw _ActionReturn(edgeReturn.value);
+          throw _ActionReturn(edgeReturn.value, accepted: childMatched);
         }
         if (!childMatched) {
           matchedAll = false;
@@ -1133,7 +1139,7 @@ final class LinkedSpecRuntimeEngine {
         if (returnIterationValue) {
           throw _BlindIterationReturn(edgeReturn.value);
         }
-        throw _ActionReturn(edgeReturn.value);
+        throw _ActionReturn(edgeReturn.value, accepted: childMatched);
       }
       if (childMatched) {
         return true;
@@ -1184,22 +1190,25 @@ final class LinkedSpecRuntimeEngine {
         if (!matched.value) {
           final loopExit = _executeLifecycle(rule, 'LX', context);
           if (loopExit != null) {
-            return _returned(loopExit.value);
+            return _returned(loopExit.value, accepted: matchedAny);
           }
         }
         final exitReturn = _executeLifecycle(rule, 'E', context);
         if (exitReturn != null) {
-          return _returned(exitReturn.value);
+          return _returned(
+            exitReturn.value,
+            accepted: matched.value || matchedAny,
+          );
         }
         return _RuleResult(matched: matched.value || matchedAny, value: null);
       }
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
-        return _returned(loopExit.value);
+        return _returned(loopExit.value, accepted: matchedAny);
       }
       final exitReturn = _executeLifecycle(rule, 'E', context);
       if (exitReturn != null) {
-        return _returned(exitReturn.value);
+        return _returned(exitReturn.value, accepted: matchedAny);
       }
       return _RuleResult(matched: matchedAny, value: null);
     }
@@ -1244,13 +1253,13 @@ final class LinkedSpecRuntimeEngine {
           context.setGapPhase(rule.label, 'LS');
           final loopStart = _executeLifecycle(rule, 'LS', context);
           if (loopStart != null) {
-            return _returned(loopStart.value);
+            return _returned(loopStart.value, accepted: matches > 0);
           }
         }
       } else {
         final loopStart = _executeLifecycle(rule, 'LS', context);
         if (loopStart != null) {
-          return _returned(loopStart.value);
+          return _returned(loopStart.value, accepted: matches > 0);
         }
       }
 
@@ -1299,7 +1308,7 @@ final class LinkedSpecRuntimeEngine {
       context.setGapPhase(rule.label, 'IT');
       final iterationReturn = _executeLifecycle(rule, 'IT', context);
       if (iterationReturn != null) {
-        return _returned(iterationReturn.value);
+        return _returned(iterationReturn.value, accepted: true);
       }
       if (andIterationValues != null && !hasCustomIteration) {
         andIterationValues.add(_copyValue(groupValue));
@@ -1313,7 +1322,7 @@ final class LinkedSpecRuntimeEngine {
       context.setGapPhase(rule.label, 'LX');
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
-        return _returned(loopExit.value);
+        return _returned(loopExit.value, accepted: false);
       }
       return const _RuleResult(matched: false, value: null);
     }
@@ -1324,19 +1333,19 @@ final class LinkedSpecRuntimeEngine {
     context.setGapPhase(rule.label, 'EX');
     final extendedExit = _executeLifecycle(rule, 'EX', context);
     if (extendedExit != null) {
-      return _returned(extendedExit.value);
+      return _returned(extendedExit.value, accepted: matches > 0);
     }
     if (madeFailedAttempt || matches > 0) {
       context.setGapPhase(rule.label, 'LX');
       final loopExit = _executeLifecycle(rule, 'LX', context);
       if (loopExit != null) {
-        return _returned(loopExit.value);
+        return _returned(loopExit.value, accepted: matches > 0);
       }
     }
     context.setGapPhase(rule.label, 'E');
     final exitReturn = _executeLifecycle(rule, 'E', context);
     if (exitReturn != null) {
-      return _returned(exitReturn.value);
+      return _returned(exitReturn.value, accepted: matches > 0);
     }
     return _RuleResult(
       matched: matches > 0,
@@ -1463,7 +1472,7 @@ final class LinkedSpecRuntimeEngine {
         context.setGapPhase(rule.label, 'LE');
         final loopEnd = _executeLifecycle(rule, 'LE', context);
         if (loopEnd != null) {
-          throw _ActionReturn(loopEnd.value);
+          throw _ActionReturn(loopEnd.value, accepted: true);
         }
       }
       return true;
@@ -1526,7 +1535,7 @@ final class LinkedSpecRuntimeEngine {
     context.setGapPhase(rule.label, 'LE');
     final loopEnd = _executeLifecycle(rule, 'LE', context);
     if (loopEnd != null) {
-      throw _ActionReturn(loopEnd.value);
+      throw _ActionReturn(loopEnd.value, accepted: true);
     }
     return true;
   }
@@ -1783,7 +1792,7 @@ final class LinkedSpecRuntimeEngine {
           throw _AndGroupReturn(actionReturn.value);
         }
         if (actionIterationValues == null) {
-          throw _ActionReturn(actionReturn.value);
+          throw _ActionReturn(actionReturn.value, accepted: true);
         }
         actionIterationValues.add(_copyValue(actionReturn.value));
       }
@@ -9905,9 +9914,10 @@ final class _RuleResult {
 }
 
 final class _ActionReturn implements Exception {
-  const _ActionReturn(this.value);
+  const _ActionReturn(this.value, {this.accepted = false});
 
   final Object? value;
+  final bool accepted;
 }
 
 /// Only an action-edge return can finish one repeated AND group.
@@ -9988,8 +9998,13 @@ _NextableBool _nextableBool(bool Function() callback) {
   }
 }
 
-_RuleResult _returned(Object? value) {
-  return _RuleResult(matched: value != null, value: _copyValue(value));
+_RuleResult _returned(Object? value, {bool accepted = false}) {
+  // Non-null explicit returns retain their existing whole-rule authority.
+  // Null needs acceptance from the owning match or completed-iteration path.
+  return _RuleResult(
+    matched: accepted || value != null,
+    value: _copyValue(value),
+  );
 }
 
 Object? _captureAt(
