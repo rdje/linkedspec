@@ -987,9 +987,7 @@ final class LinkedSpecRuntimeEngine {
       if (loopExit != null) {
         return _returned(loopExit.value);
       }
-      throw RuntimeInterpreterException(
-        "rule '${rule.label}' expected at least $min matches, got $matches",
-      );
+      return const _RuleResult(matched: false, value: null);
     }
 
     final extendedExit = _executeLifecycle(rule, 'EX', context);
@@ -1266,12 +1264,7 @@ final class LinkedSpecRuntimeEngine {
       if (loopExit != null) {
         return _returned(loopExit.value);
       }
-      if (actionIterationValues != null || andIterationValues != null) {
-        return const _RuleResult(matched: false, value: null);
-      }
-      throw RuntimeInterpreterException(
-        "rule '${rule.label}' expected at least $min matches, got $matches",
-      );
+      return const _RuleResult(matched: false, value: null);
     }
 
     if (captureGaps) {

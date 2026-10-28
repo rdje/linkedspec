@@ -133,3 +133,11 @@ falsey/null/nested values preserve kinds; custom IT/lifecycle authority and
 progress remain. Three guard expectations intentionally become arrays, sources
 unchanged. Packet dart-and-groups-intake.json.gz retains invalid fluent fixture
 without RED credit and corrected exact-base replay. Remaining minima39.2.3 next.
+
+Dart39.2.3 normalizes remaining ordinary blind/noncollector regex minima:
+12 sources29 inputs4healthy8actualRED ->12pass, exact source/normalized/compiled/
+plan/emitted identity and same12 fresh modules/consumer. Combined88pass1owned-
+dormant, group21/guard24 source records unchanged, fatal analysis and typed
+unknown_helper code/rule provenance pass. Consumed cursor/caller recovery and
+successful-null acceptance remain distinct. Initial invalid static-edge/message
+assumptions qualified; packet dart-minimum-intake.json.gz. Blind collection.4 next.

@@ -8095,14 +8095,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2 - collect Dart repeated AND group outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3`
-  Status: `pending` / P1 after.6/.2, before collection/peers, before full39/23.4/push
+  Status: `completed` / ordinary minimum misses
   Goal: Normalize remaining ordinary Dart minimum misses.
   Reproduce/root: Blind OR{2} under-min throws RuntimeInterpreterException; _executeBlindRule and noncollector _executeRegexRule have generic min error branches. Typed real progress is prerequisite.
   Acceptance: Ordinary misses return null/matchedfalse without cursor rollback; retain successful-null matchedtrue, caller capture/return restoration, zero-min/max, recovery and actual errors. Qualify EX/E placement under SESSION27; no blanket exception swallowing. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
-  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
-  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:12 final sources29 inputs4healthy8actualRED ->12pass; exact raw source/normalized/compiled/plan/emitted identity and same12 fresh modules/consumer reuse; combined minimum/group/structural/live-progress88pass1owned-dormant; unchanged group21/guard24 inputs, typed helper diagnostics; fatal changed analysis/format/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining repair/registration/pressure; no public format/schema movement.
+  Claim verification: none: Finite authored functional/miss/error/interface distinctions, no population measurement.
+
+  Activation: clean `7b78e94e795fa3dc04e8c0582acb09282c138e65` after repeated group39.2.2. Remaining _executeBlindRule and noncollector _executeRegexRule generic min exceptions are normal misses, not errors. Preserve existing lifecycle LX returns and qualify broader SESSION27 attribution; no blanket exception handling. Exact independent blind/regex/recognition/caller-state/null/progress/error controls before production, source identity/fresh reuse and focused docs/checks/commit. Collection.4 remains separate.
+
+
+  - [x] **REPRODUCE / ISSUE**: Final12 authored sources29 input rows yield4healthy8actualRED before production. Blind/noncollector regex minima throw instead of returning an ordinary miss; caller continuation and recognition abort. Initial static-edge recovery fails existing regex-slot validation and wrong error wording gets no product RED credit; refined exact baseline retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _executeBlindRule and noncollector _executeRegexRule explicitly throw RuntimeInterpreterException when accepted count is below min. Collector minimum paths already use _RuleResult(false,null). Caller frames restore in _executeRule finally, but generic errors prevent normal call recovery.
+  - [x] **FIX**: Replace only two under-minimum generic exception branches with explicit null/matchedfalse after existing LX authority; remove redundant collector conditional. No rollback, blanket catch, counting/collection, frame or lifecycle placement change.
+  - [x] **ADDRESSED (verified)**:12pass29 inputs native/restored/plan; same12 fresh modules/consumer agree. Exact source/normalized/compiled/plan/emitted bytes unchanged. Cursor/no-hit/zero-min/max, successful-null matchedtrue, failed-min recognition, caller capture/retv and subsequent direct-call recovery pass.
+  - [x] **NO REGRESSION**: Combined minimum/group/structural/live-progress88pass1owned-dormant.21 group and24 guard source/artifact records unchanged; real unknown_helper code/rule diagnostics exactly unchanged and live progress/error trace controls pass. Fatal changed analysis clean. Compiler/emitter/matching/recognition authority/schema/family unchanged; broader lifecycle SESSION27 and blind collections remain separate.
+  - [x] **LOCKSTEP**: dart-minimum-intake.json.gz retains actual producers/refinements/inputs/results/modules/runtime patch/receipt. Book/cards/target/roadmap/task/live/resume/history align. Existing generated source/plans remain valid with updated runtime. Sole dormant Dart blind-collection owner39.2.4 next, then independent peers; admission/registration/pressure prerequisites remain. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3 - return ordinary Dart repetition minimum misses as failed matches`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4`
   Status: `pending` / P1 after minima, before peers, before full39/23.4/push
@@ -8437,7 +8448,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3` | `pending` | Normalize remaining Dart ordinary minimum misses. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4` | `pending` | Retain implicit Dart repeated/default blind collections. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -20,7 +20,6 @@ Map<String, Object?> observe(Object? Function() call) {
 }
 
 const repairOwners = <String, String>{
-  'blind_minimum': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3',
   'blind_default': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4',
 };
 
