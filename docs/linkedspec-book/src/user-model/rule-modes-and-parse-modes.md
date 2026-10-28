@@ -217,7 +217,7 @@ CaptureSpan:AND
 On `AxxBC`, the middle `/xxB/` is consumed even though it has no action; the
 final action sees the span between the first and last action sites. Omitting an
 edge means "no code for this slot," not "remove this slot from the sequence." Incoming entry matching belongs to the caller and does not silently skip the child's first structural slot. Cross-rule or reordered dependency sequences retain compiled order.
-The same rule applies inside each `AND+` or `AND{...}` iteration. If an
+The same structural rule applies inside each `AND+` or `AND{...}` iteration. Current Rust supports the increasing sparse case but still has owned gaps for reordered/cross-rule/duplicate dependencies, indexed entry and repeated returns/minima. If an
 edge-less separator should contribute to a captured value directly, fold it
 into an action-owning regex or use the explicit capture-boundary helpers.
 

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Standalone shared recursion guard wired/targeted-checked; independent Rust sparse-AND intake39.1 next.
+Rust intake retained; default-blind classifier39.1.4.1 first, other owned P1 repairs before peers.
 
 ## Latest Completed Slice
 
-Standalone Perl now wraps every emitted rule CODE entry once after descriptor construction using the shared runtime progress guard. Preserve descriptor/rule/cursor identity, typed rejection, call context/aliases and automatic cleanup on return/throw; keep published blind parent-injected push(rule) calls. Final unchanged13 groups reproduce5 fresh cycle timeouts before code and all13 pass afterward:12 complete native/fresh source pairs plus context/list/scalar/void/alias/opaque-error controls. Cover direct/mutual cycles, three original blind failures, no-tail collection, consuming recursion, reuse/early returns, matcher error/retry and3 typed recursion codes. Nearest sparse AND15 including falsey/repeated cases and syntax2 pass. Exact12 before/after emitted artifacts differ only by guard registration; all metadata unchanged, native SpecEntry unchanged. Retain actual producer/input/source/result/patch epochs and instrument-only locked-hash/capture refinements without product RED credit. No new v2 fields/family/format/DSL/frame policy. Regenerate existing standalone sources; runtime update alone does not add registration. Book/card/map/target/roadmap/live/resume/history align; independent Rust39.1 next before Dart/Julia/safe Lua and38/37/40/41. Focused authorized commit, full admission/push gates remain open.
+Independent Rust intake confirms healthy local sparse structural/ordinary incoming/falsey/effect/one-regex/early-return/explicit-AND-blind controls, but separates real dependency/index/return/mode gaps. Initial12 tests7pass/5fail; refined15 tests8pass/7fail with24 reached native/restored/plan input rows and public native traces. Cross-target uses catalog0 instead of appended dependency2; reversed order misses; duplicate actions co-fire at cursor1; inherited indexed entry overrides required AND0. Explicit repeated return bypasses count/min; nonreturn full groups work but under-min errors differ from null. Default blind child succeeds but implicit result is lost. A distinguishing cursor source returns8 native/restored versus4 plan because default-blind emitsor_bcode despite native repetition; narrow classifier39.1.4.1 is first. Own typed sequence39.1.1, indexed39.1.2, group-return39.1.3, minimum39.1.5 and implicit-result39.1.4.2 before peers. Final normal18 target9 healthy pass/9 explicitly owned dormant regressions; no dormant success credit. Exact producers/inputs/compiled/emitted artifacts/trace/result epochs retained. No production change, new schema/family authority, filesystem owner or independent emitted-package claim. Book/card/map/target/live/resume/history align; focused intake commit, full admission/push remain open.
 
 ## Next Action
 
-Activate39.1 from clean repaired Perl structural/reference/ordinary-guard boundary. Independently assess Rust plain sparse single-action structural AND against frozen existing authority, including full local slots versus dependency-only order, direct/incoming/indexed/blind, nonreturn/falsey, duplicate/reversed, repetition/minimum and exact supported native/restored/plan/emitted routes. Implement only independently reproduced defects; compatibility is a valid result, no inferred Lua/outgoing-only fix. Focused compile/quick targeted check/docs/commit, then39.2 Dart/39.3 Julia/39.4 safe installed Lua and38/37/40/41/features. Full gates at designated admission/push.
+Activate39.1.4.1 first from clean Rust intake. Read existing classifier/mode authority and source-emitter controls, then reproduce the owned native8/restored8/plan4 cursor RED and correct only default-blind derived family to existing rep_bcode if confirmed. Explicitly record row correction and old-artifact regeneration/rejection; preserve default-acode/pipe/OR/AND families. Focused compile/quick targeted check/docs/commit. Then39.1.1 typed dependency steps,39.1.2 indexed AND priority,39.1.3 per-group returns,39.1.5 ordinary minimum miss and39.1.4.2 implicit blind results, enabling each owned dormant regression before peers39.2-.4. No full gate except designated admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0` — Rust intake retained; default-blind classifier39.1.4.1 first, other owned P1 repairs before peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.2` — Standalone shared recursion guard wired/targeted-checked; independent Rust sparse-AND intake39.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1` — Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.44` — Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
@@ -29,7 +30,6 @@ Activate39.1 from clean repaired Perl structural/reference/ordinary-guard bounda
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.0` — Perl mark-name roles/readiness42.0 frozen with raw-host return owned; seven-reader42.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` — Safe installed Lua named Number/caller scopes34.5 compatible/targeted-checked; ordinary Perl roles/readiness42 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` — Julia named Number methods/caller scopes34.4 compatible/targeted-checked; safe Lua34.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` — Dart named Number methods/caller mark scopes34.3 already compatible/targeted-checked; Julia34.4 next.
 
 ## History
 

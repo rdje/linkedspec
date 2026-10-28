@@ -7726,13 +7726,100 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.2 - guard standalone rule entrypoints with shared recursion progress`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1`
-  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Status: `in_progress` / independent Rust structural/dependency/entry intake after repaired Perl reference
   Goal: Independently intake and repair Rust sparse-AND body candidate/required-sequence ownership.
   Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
   Planned verification tier: focused
   Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
   Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
   Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+  Activation: clean `87a9eb83dcd067b1bfa4b821097e4f75eb914c42` after Perl39.5/39.6.1/.2. Read current structural target, Rust ordered generated/native execution/identity/cursor cards, existing normal route harness and relevant native/plan sequence branches. Native/restored/generated-plan are executable public routes; independent emitted package execution is not inferred. Use no new filesystem owner/workspace or dependency internal; preserve full catalog and separately assess indexed and reordered dependency controls.
+
+  Independent initial Rust intake: normal12 tests7pass/5fail on native/restored/generated-plan, no ignored cases. Plain sparse2/3 slots, ordinary incoming full/missing prefix, all3 falsey values, nonreturn action/edge-less tail, one-regex and early return pass. Failures: default no-tail blind returnsnull instead of[BODY]; cross-target cat returnsnull; indexed catHcat gives[[null,null],7]; reversed ba returnsnull; repeated explicit BODY returns scalarBODY even below min2. Combined reversed/duplicate test aborts after ba, so aa is unassessed and must get a separate reached test. No independent emitted Rust package execution credit. Source/compiled serde/emission and every reached route retained in sparse-and-rust-initial-intake.log.
+  Root work before production: published native/plan select_native_match prioritizes inherited entry_idx over required AND index; both sequence lengths/required steps use regex_patterns, so inspect exact compiled dependency/catalog state and public trace before any local/dependency repair. Repeated explicit action return exits current rule because CHOICE-only collector excludes AND; do not add AND to that collector without preserving its separate per-group unwind/minimum contract. Default blind null needs explicit AND/iteration/return controls and contract reconciliation before labeling all blind semantics broken.39.1.0 owns complete diagnostic/authority packet;39.1.1/.2 slot and entry repairs,39.1.3/.4 return/mode prerequisites before39.2. No blanket outgoing-only filter or hidden family/schema change.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0`
+  Status: `completed` / independent roots and bounded targets retained; Rust compatibility incomplete
+  Activation: clean `87a9eb83dcd067b1bfa4b821097e4f75eb914c42`; no Rust production edit.
+  Goal: Qualify independent Rust structural/dependency/index/return/mode observations and own exact repairs.
+  Verification tier: `focused`
+  Focused checks: Initial12 tests7pass/5fail; refined15 tests8pass/7fail/24 reached input rows with compiled serde/emitted/public native trace; extra native8/restored8/plan4 RED; final normal18 target9pass/9 owned dormant, exact-file rustfmt and retained source/epoch closure, book/map/history/manual continuity/diff.
+  Canonical trigger: Full39/23.4/final clean push after every dormant regression is enabled/verified. New family meaning/format/policy separately owned; existing derived correction must be explicit. No admission claim here.
+  Claim verification: none: Finite authored source/functional/identity/cursor controls, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Initial12 and refined15 sources distinguish native/restored/plan mismatches; duplicate aa now reached separately. Refined24 input rows include real mixed results, not all-pass credit. Extra default-blind cursor inputHcatHcat returns8/8/4. Exact raw source/compiled/emitted/trace/result producers retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine native/plan lengths select regex_patterns rather than dependency steps; dispatch fires every matching regex_idx so duplicate actions co-fire. Shared selection prioritizes inherited entry_idx over required AND index. CHOICE-only collector leaves repeated AND returns exiting early. Minimum checks returnErr; repeated blind paths discard implicit results; emitted default-blind classifier choosesor_bcode while native repeats. Public traces distinguish healthy child matching from parent/result defects.
+  - [x] **FIX**: Freeze bounded targets in sparse-and-rust-repair-target.md; no production edit.39.1.4.1 narrow classifier first, then39.1.1 typed steps/one action per dependency,39.1.2 AND indexed priority,39.1.3 per-group return,39.1.5 minimum miss and39.1.4.2 implicit collection. Preserve full catalogs, typed identities, explicit returns and existing format; no blanket outgoing-only fix or AND-to-CHOICE collector shortcut.
+  - [x] **ADDRESSED (verified)**: Normal target retains9 healthy groups and9 explicitly dormant regressions with exact P1 owners, required before admission/push. Native/restored/plan and actual emission inspection only; independent emitted package not claimed. Healthy full nonreturn repeated reset is live, below-minimum targets separate. Diagnostic intake is complete, actual defects remain scheduled and unclosed.
+  - [x] **NO REGRESSION**: No production change. Scoped normal gate9pass/9ignored and exact-file formatting pass; ignored tests carry no success credit. Original initial/refined failures and extra cursor RED preserved byte-for-byte; no source/body/schema/alias/domain/dependency-internal change. Rust full compatibility and broader admission remain open.
+  - [x] **LOCKSTEP**: sparse-and-rust-intake.json.gz retains actual input/source/emission/compiled/trace/result/producers; target/card/map/book/roadmap/live/resume/history reflect all open gaps and first classifier owner. All dormant tests must be active before23.4/push. Authorized focused intake commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0 - isolate Rust AND sequence and blind-plan parity repairs`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1`
+  Status: `pending` / P1 before39.2/full23.4
+  Goal: Repair confirmed Rust dependency-only required-slot ordering without losing local sparse structural slots.
+  Scope: Cross-target/reversed/duplicate dependency cases versus healthy same-owner increasing sparse slots, full incoming/boundary catalogs and exact typed target/index identity. Choose sole shared owners from actual trace; no new compiled/plan schema.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
+  Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2`
+  Status: `pending` / P1 before39.2/full23.4
+  Goal: Reconcile and repair inherited indexed entry versus required AND sequence priority.
+  Scope: Initial catHcat result[[null,null],7] differs from repaired Perl[[BODY],7]; source entry-specific selection currently precedes required AND slot. Check canonical numeric compatibility/ADR0044/0047 before changing only proven AND behavior; preserve default/OR and recursion compatibility.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
+  Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3`
+  Status: `pending` / P1 before39.2/full23.4
+  Goal: Reconcile and repair repeated AND action return per-group unwind and minimum enforcement.
+  Scope: Initial AND{2} returns scalarBODY after first group, including below-minimum Hcat. Establish existing per-group return/collection authority and early-return control; do not reuse CHOICE-only ADR0048 collector or force execution after an explicit group return.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
+  Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4`
+  Status: `pending` / P1 before39.2/full23.4
+  Goal: Reconcile and repair confirmed repeated/default blind implicit-result differences.
+  Scope: Initial Top default no-tail blind returnsnull; add explicit AND/mode/IT/E controls and exact compiled family/counter/trace first. Preserve existing call/post-call/return boundaries; no inference that child AND matching fails or blanket new default semantics.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
+  Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1`
+  Status: `pending` / immediate P1 after intake39.1.0, before sequence repairs
+  Goal: Repair the confirmed Rust default-blind generated-family classifier mismatch so emitted plan execution preserves native iteration and cursor.
+  Reproduction: Top:: =>Value E{return(cursor_pos())}, Value:AND H/cat with action1 BODY, inputHcatHcat. Current public native8/restored8/plan4, no execution error. Compiled Top modeDefault/rep_min0/bcodes1; emitted rowor_bcode selects nonrepeat handling while native repeats through both groups. This independent source-input result distinguishes real representation drift even when no-tail outputs allnull.
+  Scope: Reconcile current native/perl default-blind repetition with the existing rep_bcode family, then explicitly correct only derived default-blind rowor_bcode-to-rep_bcode if confirmed. No new row fields/family meaning/format/validation waiver. Old generated Rust plans need regeneration and must fail safely if no longer valid. Keep explicit pipe/OR/AND/default-acode and implicit-result work39.1.4.2 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact native/restored/plan8-versus4 RED/GREEN, emitted row/source/typed old-plan rejection, nearest classifier/mode source tests and default-acode/explicit blind family controls; compile/format/book/retained epochs/commit.
+  Planned canonical trigger: New authority/format/family meaning separately owned canonical; existing derived-family correction explicit. Full39/23.4/final clean push.
+  Planned claim verification: none: Finite authored source/cursor/classification distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2`
+  Status: `pending` / P1 implicit blind-result reconciliation after39.1.4.1
+  Goal: Reconcile and repair normal repeated/default blind implicit result collection against published child-result contracts.
+  Root/evidence: Public native trace proves Value BODY is produced, then Top repeats and replaces retv with final miss; no default collection is retained. Current default no-tail returnsnull, explicit AND parent returns[BODY]. Both native/generated repeated bcode branches lack implicit result accumulation while nonrepeat AndBcode has its own collection. Freeze exact default/explicit OR/AND repetition/IT/E/return/falsey/group contracts before editing result channels; preserve the separate fixed family classifier.
+  Planned verification tier: focused
+  Planned focused checks: Public native/restored/plan and Perl oracle shape/order/cursor/IT/E/return/minimum/falsey distinctions, scoped actual RED/GREEN, compile/format and book/docs/commit.
+  Planned canonical trigger: Any actual new return/mode policy separately owned canonical; full39/23.4/final clean push.
+  Planned claim verification: none: Finite authored implicit-result/return controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5`
+  Status: `pending` / P1 minimum-miss reconciliation before39.2/full23.4
+  Goal: Reconcile and repair ordinary Rust under-minimum failure against existing portable no-match semantics, separately from repeated-AND action returns.
+  Reproduction: Value::AND{2} nonreturning sparse action with IT/E collector on HcatHcat returns[[cat],[cat]] on all3 routes; Hcat returns generic expected-at-least2-got1 Err, while current Perl returnsnull. Exact source/serialized/plan and native trace retained in refined Rust intake.
+  Root/acceptance: Interpreted/generated regex and bcode minimum checks currently returnErr after ordinary input misses. Audit published mode/no-match/typed error authority before changing scope; prove a distinguishing recovery path and below-minimum/zero/empty/accepted-null/explicit-return controls. Preserve real execution/validation/progress errors and no cursor rollback policy change. Do not silently rewrite error schemas or broaden a local AND fix into unreviewed mode policy.
+  Planned verification tier: focused
+  Planned focused checks: Exact native/restored/plan minimum behavior and recovery distinctions, safe representative repetition modes and typed error controls, compile/format, retained actual inputs and book/docs/commit.
+  Planned canonical trigger: Actual new policy/error authority separately owned canonical; full39/23.4/final clean push.
+  Planned claim verification: none: Finite authored minimum/no-match/diagnostic distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8066,7 +8153,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1` | `pending` | Independently assess Rust sparse structural AND against repaired Perl authority before other peers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1` | `pending` | Repair default-blind native8/restored8/plan4 classifier drift, then owned sequence/return/minimum gaps. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
