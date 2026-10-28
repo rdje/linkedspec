@@ -330,3 +330,13 @@ blind/.6 live progress owned, .6 next. .5 post-call/.7 nullable qualification
 not inferred defects.102 normal assertions18healthy13owned dormant per host,
 registration23.4.1 pending before admission. Packet lua-sparse-intake.json.gz
 retains actual closure; no Lua product edit/declared5.4/unsafe formatter/full CI.
+
+2026-10-29 Lua39.4.6 connects actual completed recognition repetitions to
+shared private typed progress with scoped caller origin and fatal-token unwind.
+24sources24inputs9healthy15RED ->24pass234 assertions per installed host,
+same24 baseline modules/consumer, exact inputs/nine healthy controls. Actual
+SDK code/rule/phase and low MARK caller origin/raw offsets retained;246/175/105
+nearest assertions pass per host, structural19healthy12owned dormant. Packet
+lua-live-progress-intake.json.gz retains actual closure and corrected initial
+context/consumer failures. No compiler/emitter/matching/neutral schema change;
+required steps .1 next, explicit registration23.4.1/declared5.4/admission remain.

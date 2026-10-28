@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: independent31-source installed-host intake complete; P1 repairs39.4.1-.7 owned, live progress .6 next
+status: independent intake complete; live progress39.4.6 repaired/targeted-checked, required steps .1 next
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -44,3 +44,10 @@ corrects that harness error before valid execution. Initial producer/logs remain
 retained without product RED credit. No Lua production/schema/family/authority
 change, declared5.4 conformance, unsafe /(/ formatter/full suite or performance
 claim belongs to this intake. Project-owned data/native/temp stay on-volume.
+
+2026-10-29 live progress .6 now repairs actual accepted repetition validation;
+24sources24inputs9healthy15RED ->24pass234 assertions per installed host,
+same24 baseline modules/fresh consumer and exact input/nine-control identity.
+Current proof: [[lua-live-recognition-progress]]. Structural19healthy12owned
+dormant105 assertions; original intake packet stays frozen. Required steps .1
+next, other repairs/qualification/admission owners remain.

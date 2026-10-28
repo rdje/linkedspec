@@ -619,6 +619,18 @@ local function progress_offset(value)
   return value
 end
 
+-- Shared by the neutral fixture adapter and actual completed repetitions.
+function M.validate_repetition_progress(authority_value, rule, origin, start_offset, end_offset)
+  authority_state(authority_value)
+  if end_offset > start_offset then return end
+  raise_transaction_error(ZERO_PROGRESS_REPETITION_CODE, {
+    rule = rule,
+    origin = origin,
+    start_offset = start_offset,
+    end_offset = end_offset,
+  })
+end
+
 function M.validate_progress(authority_value, fixture)
   authority_state(authority_value)
   local context = type(fixture) == "table" and fixture.context or nil
@@ -638,12 +650,9 @@ function M.validate_progress(authority_value, fixture)
       end_offset = end_offset,
     })
   end
-  raise_transaction_error(ZERO_PROGRESS_REPETITION_CODE, {
-    rule = rule,
-    origin = rule .. ":recognize_once",
-    start_offset = start_offset,
-    end_offset = end_offset,
-  })
+  return M.validate_repetition_progress(
+    authority_value, rule, rule .. ":recognize_once", start_offset, end_offset
+  )
 end
 
 function M.leave_invocation(authority_value, frame_value)

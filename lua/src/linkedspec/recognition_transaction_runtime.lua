@@ -110,6 +110,7 @@ function M.context(source_runtime)
     }),
     recognition_frames = {},
     recursive_observation_scopes = {},
+    recognition_progress_origins = {},
   }
 end
 
@@ -441,6 +442,32 @@ function M.checkpoint(ctx, rule_label, slot)
     gap_snapshot = copy_gap_state(frame.gap_state),
     gap_phase_snapshot = frame.gap_phase,
   }
+end
+
+-- The scope follows the executing child, including all nested dispatches,
+-- and is removed on every normal or exceptional return.
+function M.with_progress_scope(ctx, origin, operation)
+  local origins = ctx.recognition_progress_origins
+  origins[#origins + 1] = origin
+  local ok, value = pcall(operation)
+  origins[#origins] = nil
+  if not ok then error(value, 0) end
+  return value
+end
+
+function M.validate_repetition_progress(ctx, rule_label, start_offset)
+  local origins = ctx.recognition_progress_origins
+  if #origins == 0 then return end
+  return transaction.validate_repetition_progress(
+    ctx.recognition_authority, rule_label, origins[#origins], start_offset, ctx.cursor_byte
+  )
+end
+
+function M.progress_error_record(value)
+  if not transaction.is_error(value) then return nil end
+  local record = transaction.to_json(value)
+  if record.code == "recognition_zero_progress_repetition" then return record end
+  return nil
 end
 
 function M.attempt(ctx, rule_label, slot, matched, payload)

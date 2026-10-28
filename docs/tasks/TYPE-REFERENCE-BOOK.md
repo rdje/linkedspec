@@ -4796,7 +4796,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
-  Goal: Register new bounded Perl feature regressions in canonical CI before full admission/final push.
+  Goal: Register new bounded feature regressions in canonical CI before full admission/final push.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.
   Reproduction: rg -n -F -e 't/string_predicate_result_receiver_contract.t' -e 't/emptiness_result_receiver_contract.t' -e 't/has_key_result_receiver_contract.t' tools/run_ci_local.sh returns no matches/exit1 after these fixtures are introduced. This confirms omission of these named direct selections; no complete omission population has been measured.
   Impact / ownership: Direct focused runs protect current feature commits, but merely retaining new t files does not add their execution to the final canonical receipt. This includes t/defined_default_receiver_contract.t, t/scalar_string_result_receiver_contract.t, t/reduction_result_receiver_contract.t, t/tagged_record_producer_contract.t, t/tagged_record_receiver_contract.t, t/logical_receiver_method_contract.t, t/computed_selection_noncall_contract.t, t/computed_selection_callable_compat.t and t/computed_selection_deferred_boundary.t; the approved primitive-copy producer/receiver add t/value_copy_function.t, t/value_copy_receiver.t and t/value_copy_interpreted.t; computed helper sources add t/computed_selection_helper_calls.t. Registered sources add t/computed_selection_functions.t; contextual grammar preservation adds t/computed_selection_contextual_boundary.t. Readonly capture composition adds t/capture_collection_selection.t. Inline condition producer repair adds t/inline_condition_value_blocks.t. Conditional bracket selection adds t/conditional_selection.t. Input/cursor reader composition adds t/input_cursor_result_continuations.t. Eager key/order repair adds t/set_key_block_operands.t. Static capture-name/function-fence repair adds t/named_capture_literal_names.t. Catalogued function-state fence adds t/user_function_parser_state_boundary.t. Noncatalogued parser-context fence adds t/user_function_parser_context_boundary.t. Number reader composition adds t/entry_match_number_result_continuations.t. Ordinary eager with Hash composition adds t/with_hash_result_continuations.t. Callback origin-label repair adds t/callback_identity.t. Callback snapshot repair adds t/with_callback_snapshot.t. Immediate with-result bracket composition adds t/with_result_selection.t. Anonymous capture Number composition adds t/capture_boundary_number_results.t; ordinary value-block reset adds t/capture_reset_value_block.t; readonly named-mark Number composition adds t/named_mark_number_results.t. Input-boundary mark value-block statements add t/input_mark_value_block_statements.t. Governed Number-reader name arguments add t/mark_name_number_arguments.t. Governed named writer statements add t/mark_name_write_arguments.t. Readonly named text/predicate names and unused calls add t/mark_name_text_arguments.t. Named advancing/bridge names add t/mark_name_advance_arguments.t. Reversed local-start named take guards add t/named_take_reversed_span.t. Sparse single-action AND classification adds t/sparse_and_single_action.t. Shared ordinary progress guard adds t/shared_rule_progress_guard.t. Standalone wiring adds t/emitted_rule_progress_guard.t. Repeated AND falsey group acceptance adds t/repeated_and_falsey_group.t and t/repeated_and_falsey_recognition.t. This owner must inventory all newly added feature fixtures/helpers, classify actual selection and repair every omission before admission/push; do not infer completeness from the three named controls.
@@ -4816,6 +4816,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Repeated blind parent publication39.9.2 adds t/repeated_blind_parent_acceptance.t; explicit canonical syntax/execution registration is required before admission/push.
 
   Lua intake39.4.0: tools/run_lua_local.sh also selects explicit files rather than automatically discovering new consumers. Register lua/test/sparse_and_structural_sequence_test.lua and subsequent bounded Lua feature consumers exactly once per installed ABI/declared host in ordinary and canonical owners before23.4 admission/push. Current direct focused102 assertions per host does not imply runner admission. No infrastructure change in the focused intake.
+
+  Lua live progress39.4.6 adds lua/test/recognition_repetition_progress_test.lua to the required exact ordinary/canonical registration inventory; direct focused234 assertions per installed host does not imply discovery.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
@@ -8611,13 +8613,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6`
-  Status: `pending` / P1 immediate before further feature owners/admission
+  Status: `completed` / P1 immediate before further feature owners/admission
   Goal: Connect live recognition repetition progress to typed existing authority.
   Acceptance: Actual source recognizes Guard zero-width at0 as true; qualify both hosts and scoped caller origin. Check completed iterations before count/IT/max/ordinary zero exit, preserve legal whole-LE/one-shot/ordinary routes and cleanup; no public schema/export change.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:24sources24inputs per installed host9healthy15actualRED ->24pass234 assertions, same24 baseline modules separate fresh processes, exact inputs/nine-control identity and typed SDK/actual raw-origin traces. Neighbors246/175/105 per host;19structural healthy12owned dormant. Book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after bounded repairs and declared-host/unsafe formatter/registration/pressure/lifecycle/slot; no public authority movement.
+  Claim verification: none: Finite authored progress/control-flow/diagnostic distinctions, no population measurement.
+
+  Activation: clean `fc82fecefe18dcfc380de8700a8e9ef743527149`; exact installed-host progress RED before runtime edits, no unsafe patterns/full suite.
+
+
+  - [x] **REPRODUCE / ISSUE**:24 safe exact sources per installed PUC5.5/LuaJIT give9healthy15actualRED on SDK/restored/plan and same baseline24 modules fresh. Accepted zero Guard returns true at0, including bounded/AND/blind/next and IT/max bypass forms, after-prefix offsets retained. Three early-AND scalar controls qualified .2, not altered or claimed portable group parity.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual debug trace selects accepted zero-width slot; interpreter.lua repetition counts/breaks without private authority validation. recognition_transaction.validate_progress existed only as fixture adapter. Actual recognize_once dispatch has no caller-origin scope; early AND action return bypasses loop entirely. Fatal guard must survive parent outstanding-token unwinding, which otherwise replaces it with terminal-required.
+  - [x] **FIX**: Shared private validate_repetition_progress serves fixture adapter and live completed iterations; scoped caller origin stack is created and carried into context, cleaned through protected calls. Loop checks precede count/IT/max/ordinary zero exits; temporary early-AND check shares authority before return. Specific typed fatal-code token discard preserves original progress diagnostic, no broad error catch/suppression. Actual low MARK carries code/rule/origin/start/end.
+  - [x] **ADDRESSED (verified)**:24pass234 assertions per installed host, same24 baseline modules/consumer in separate processes, exact source/normalized/compiled/plan/emitted and nine healthy observations unchanged. SDK typed code/rule/runtime phase and observed origin/offset traces asserted. No direct fresh matched/cursor claim beyond public payloads.
+  - [x] **NO REGRESSION**: Recognition246/repeated-action175/structural105 assertions per host pass,19healthy12owned dormant. Ordinary/one-shot/legal whole-LE/consuming/cleanup controls retain values. Initial missing context wiring caught/corrected and retained, structural consumer expected-error handling enabled with original neighbor failure retained. Compiler/emitter/matching/neutral fixtures/schema unchanged; no declared5.4/unsafe formatter/full suite claim.
+  - [x] **LOCKSTEP**: Packet lua-live-progress-intake.json.gz retains actual producers/epochs/inputs/runtime/SDK/fresh/trace/receipts; book/card/target/roadmap/task/live/resume/history align. New direct regression registration remains23.4.1 before admission/push. Required steps .1 next, other bounded/host/pressure/lifecycle/slot owners stay open; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6 - enforce Lua live recognition repetition progress`.
+
+  History: exact committed suffix/manifest/kept-prefix verification passed for `docs/history/changes/segment-4948-0684fd3e514a.md`; normal rollover, no cap raise/history loss.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7`
   Status: `pending` / P1 independent qualification after .5
@@ -8933,7 +8948,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6` | `pending` | Repair live Lua recognition repetition progress on safe installed hosts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1` | `pending` | Repair Lua required AND dependency step and action occurrence ownership. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

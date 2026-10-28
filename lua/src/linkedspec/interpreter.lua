@@ -388,6 +388,7 @@ local function context(
     mark_buckets = {},
     recognition_frames = recognition_state.recognition_frames,
     recursive_observation_scopes = recognition_state.recursive_observation_scopes,
+    recognition_progress_origins = recognition_state.recognition_progress_origins,
     active = {},
     lifecycle_events = {},
     diagnostic_sink = diagnostic_sink,
@@ -3962,12 +3963,13 @@ evaluate_expr = function(engine, expr, ctx, accumulator, edge_state)
     )
   end
   if kind == "recognize_once" then
-    local child
-    if edge_state ~= nil and edge_state.target.label == expr.rule then
-      child = dispatch_edge_child(engine, edge_state, ctx)
-    else
-      child = execute_rule(engine, expr.rule, 0, ctx)
-    end
+    local origin = (ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule) .. ":recognize_once"
+    local child = typed_source.recognition.with_progress_scope(ctx, origin, function()
+      if edge_state ~= nil and edge_state.target.label == expr.rule then
+        return dispatch_edge_child(engine, edge_state, ctx)
+      end
+      return execute_rule(engine, expr.rule, 0, ctx)
+    end)
     ctx.retv = copy_value(child.value)
     return typed_source.recognition.attempt(
       ctx,
@@ -4993,7 +4995,35 @@ local function collects_explicit_action_iteration_values(rule)
     mode == "OrPlus" or mode == "OrBounded"
 end
 
-local function accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
+function M.assert_recognition_repetition_progress(engine, ctx, rule_label, start_offset)
+  local ok, failure = pcall(
+    typed_source.recognition.validate_repetition_progress, ctx, rule_label, start_offset
+  )
+  if ok then return end
+  local record = typed_source.recognition.progress_error_record(failure)
+  if record == nil then error(failure, 0) end
+  runtime_trace_event(
+    ctx, trace.TRACE_MARK, "lua_runtime:recognition_repetition_progress_failure",
+    "code=" .. record.code .. " rule=" .. record.rule .. " origin=" .. record.origin ..
+      " start_offset=" .. tostring(record.start_offset) .. " end_offset=" .. tostring(record.end_offset),
+    trace.TRACE_LOW
+  )
+  local detail = tostring(failure)
+  fail(detail, {
+    code = record.code,
+    rule_label = record.rule,
+    diagnostic = runtime_diagnostic(engine, {
+      stage = "runtime_execution",
+      code = record.code,
+      summary = "Lua recognition repetition made no progress",
+      detail = detail,
+      top_rule = ctx.top_rule,
+      rule_label = record.rule,
+    }),
+  })
+end
+
+local function accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte)
   ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
   typed_source.recognition.note_match(ctx, one)
@@ -5020,6 +5050,10 @@ local function accept_match(engine, rule, one, ctx, accumulator, action_iteratio
               action_flow.kind == "return" then
             action_iteration_values[#action_iteration_values + 1] = copy_value(action_flow.value)
           else
+            if repetition_start_byte ~= nil and rule.mode_metadata.is_and and
+                getmetatable(action_flow) == FLOW_MT and action_flow.kind == "return" then
+              M.assert_recognition_repetition_progress(engine, ctx, rule.label, repetition_start_byte)
+            end
             error(action_flow, 0)
           end
         end
@@ -5072,7 +5106,8 @@ local function regex_once(
     execution_policy,
     action_iteration_values,
     match_preselected,
-    preselected_match
+    preselected_match,
+    repetition_start_byte
   )
   local cursor_before = ctx.cursor_byte
   if not match_preselected and #rule.regex_patterns == 0 then
@@ -5109,7 +5144,7 @@ local function regex_once(
       )
       M.trace_regex_slot_selected(ctx, rule, index, "ordered_required")
       M.emit_semantic_regex_slot(ctx, rule, one)
-      accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
+      accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte)
     end
     return true
   end
@@ -5152,7 +5187,7 @@ local function regex_once(
     )
     M.emit_semantic_regex_slot(ctx, rule, one)
   end
-  accept_match(engine, rule, one, ctx, accumulator, action_iteration_values)
+  accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte)
   return true
 end
 
@@ -5408,14 +5443,17 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
           execution_policy,
           action_iteration_values,
           capture_gaps,
-          selected_match
+          selected_match,
+          before
         )
       end)
       if attempt.nexted then
+        M.assert_recognition_repetition_progress(engine, ctx, rule.label, before)
         count = count + 1
         if ctx.cursor_byte == before then break end
       else
         if not attempt.value then failed = true; break end
+        M.assert_recognition_repetition_progress(engine, ctx, rule.label, before)
         if capture_gaps then
           local committed, commit_error = pcall(
             typed_source.recognition.commit_gap_candidate,
@@ -5477,7 +5515,9 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     end
   end
   if recognition_terminal_error ~= nil and
-      typed_source.progressive.is_dispatch_error(recognition_terminal_error) and
+      (typed_source.progressive.is_dispatch_error(recognition_terminal_error) or
+        (getmetatable(recognition_terminal_error) == ERROR_MT and
+          recognition_terminal_error.code == "recognition_zero_progress_repetition")) and
       typed_source.recognition.has_live_tokens(ctx) then
     typed_source.recognition.discard_live_tokens(ctx, label)
   end
