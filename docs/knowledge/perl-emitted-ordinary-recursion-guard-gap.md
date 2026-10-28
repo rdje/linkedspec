@@ -1,16 +1,16 @@
 ---
 id: perl-emitted-ordinary-recursion-guard-gap
-title: Standalone Perl handlers omit the native ordinary non-progress recursion guard
+title: Standalone Perl handlers now share native ordinary non-progress recursion protection
 answers:
   - "why does blind fluent push hang in a standalone Perl parser"
   - "does blind fluent push append the child result or call the parent"
   - "why does native Perl terminate a direct cycle while emitted source recurses"
   - "which owner repairs ordinary recursion guard parity in generated Perl"
 date: 2026-10-28
-status: native shared extraction39.6.1 targeted-checked; emitted wiring39.6.2 before peers
+status: shared native39.6.1 and emitted39.6.2 targeted-checked; full admission separate
 tags: [perl, generated-source, recursion, progress, blind-call, fluent, push]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0; blind-postcall-progress-authority.md and retained intake contain actual current92a6eeb95 bounded3 cases,2 fresh timeouts and1 completed pair, substitutions and source/phase/trace closure."
-reverify: "Recover bounded probe, cases, runner and strict summary from blind-postcall-progress-authority-intake.json.gz; use project_data_run.sh/run_python_project_data.sh with retained per-phase hard limits. Never run known hanging fresh cycles unbounded."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/emitted_rule_progress_guard.t t/shared_rule_progress_guard.t; historical timeout producers require their retained base Git inputs."
 ---
 
 Blind fluent rendering injects the parent label. push(rule) intentionally calls
@@ -40,3 +40,11 @@ reject order stay, trace topic stays but debug file attribution follows runtime.
 Get bootstrap compilation also uses native handlers; reset handoff probes after
 Get to count only invocation. Exact epochs: shared-rule-progress-intake.json.gz.
 Standalone ordinary cycles still need39.6.2; no generated completion claim.
+
+39.6.2 now wraps all emitted CODE entries once after descriptor construction.
+Final unchanged13 groups5 fresh timeout RED/final13pass; nearest sparse15 and
+syntax2 pass. Exact12 actual source pairs differ only by registration and all
+metadata stays identical. Native SpecEntry unchanged; call context, aliases,
+opaque error identity and cleanup preserved. Packet:
+emitted-rule-progress-intake.json.gz. Regenerate old standalone sources;
+updating runtime alone does not add the registration. Broad admission separate.

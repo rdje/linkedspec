@@ -1,7 +1,7 @@
 # Ordinary recursion progress parity for blind post-call execution
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.39.6; reconciliation39.6.0.
-Status: semantics reconciled and shared native guard39.6.1 extracted/targeted-checked; emitted wiring39.6.2 remains.
+Status: semantics reconciled and shared native guard39.6.1 extracted/targeted-checked; emitted wiring39.6.2 is now targeted-checked.
 
 Published push(rule) calls that rule and appends to the current rule accumulator.
 Blind fluent rendering injects the parent label into helper-style post-call
@@ -53,3 +53,11 @@ final12 groups/no skips, syntax2 passes. Actual native handoff, idempotent token
 descriptor/rule/cursor distinctions and caller/thrown error cleanup are covered.
 Debug trace topic stays; emitting file follows the shared owner. Packet:
 shared-rule-progress-intake.json.gz. Standalone ordinary wiring is still open.
+
+39.6.2 installs the shared wrapper once over all emitted CODE table entries.
+Unchanged13 groups5 fresh timeout RED/final13pass; nearest15 and syntax2 pass.
+All12 actual emitted source pairs differ only by registration, metadata stays
+identical, native SpecEntry unchanged. Context/aliases/opaque error identity and
+cleanup are covered separately. Old standalone sources need regeneration;
+runtime update alone cannot add registration. Exact packet:
+emitted-rule-progress-intake.json.gz. Full portable admission remains separate.

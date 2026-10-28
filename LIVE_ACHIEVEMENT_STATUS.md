@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
+Standalone shared recursion guard wired/targeted-checked; independent Rust sparse-AND intake39.1 next.
 
 ## Latest Completed Slice
 
-Extracted the existing native descriptor/rule/cursor ordinary recursion guard into RecognitionTransactionRuntime. SpecEntry delegates entry/typed rejection and releases the idempotent token immediately after eval; scope destruction preserves caller error and releases on unwind. Keep key/sentinel, cut-before-invocation order and trace topic; debug file attribution follows the shared runtime owner. Before8 public groups pass/new shared4 skip; final12 pass without skips plus syntax2. Cover direct/mutual cuts, consuming recursion, reuse/early return, forced native matcher-error recovery, observation direct/mutual and recognition zero-progress codes, actual native handoff, descriptor/rule/position identity, idempotent release and opaque thrown-object/error preservation. Retain exact source/patch/test/result epochs; division-null and bootstrap-count fixture corrections receive no product RED credit. All8 public controls unchanged; final counter reset changes only a previously skipped seam. Fresh emitted ordinary wiring remains39.6.2, no new DSL/format/frame policy or full admission. Book/card/map/task/target/live/resume/history align; focused authorized commit, no full gate/push.
+Standalone Perl now wraps every emitted rule CODE entry once after descriptor construction using the shared runtime progress guard. Preserve descriptor/rule/cursor identity, typed rejection, call context/aliases and automatic cleanup on return/throw; keep published blind parent-injected push(rule) calls. Final unchanged13 groups reproduce5 fresh cycle timeouts before code and all13 pass afterward:12 complete native/fresh source pairs plus context/list/scalar/void/alias/opaque-error controls. Cover direct/mutual cycles, three original blind failures, no-tail collection, consuming recursion, reuse/early returns, matcher error/retry and3 typed recursion codes. Nearest sparse AND15 including falsey/repeated cases and syntax2 pass. Exact12 before/after emitted artifacts differ only by guard registration; all metadata unchanged, native SpecEntry unchanged. Retain actual producer/input/source/result/patch epochs and instrument-only locked-hash/capture refinements without product RED credit. No new v2 fields/family/format/DSL/frame policy. Regenerate existing standalone sources; runtime update alone does not add registration. Book/card/map/target/roadmap/live/resume/history align; independent Rust39.1 next before Dart/Julia/safe Lua and38/37/40/41. Focused authorized commit, full admission/push gates remain open.
 
 ## Next Action
 
-Activate39.6.2 from clean shared-guard extraction. Add the shared runtime guarded-CODE wrapper and install it once over standalone emitted rule table entries before Execute. Reproduce bounded fresh direct/mutual and blind push gaps, then GREEN with legal consuming recursion, repeated use/error/control cleanup, native/fresh plan and typed dependents. Preserve parent-injected blind push(rule) semantics, existing guard key and format2/families. Focused compile/quick targeted test/docs/commit, then independent39.1-.4 and38/37/40/41/features; full gate at designated admission/push.
+Activate39.1 from clean repaired Perl structural/reference/ordinary-guard boundary. Independently assess Rust plain sparse single-action structural AND against frozen existing authority, including full local slots versus dependency-only order, direct/incoming/indexed/blind, nonreturn/falsey, duplicate/reversed, repetition/minimum and exact supported native/restored/plan/emitted routes. Implement only independently reproduced defects; compatibility is a valid result, no inferred Lua/outgoing-only fix. Focused compile/quick targeted check/docs/commit, then39.2 Dart/39.3 Julia/39.4 safe installed Lua and38/37/40/41/features. Full gates at designated admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.2` — Standalone shared recursion guard wired/targeted-checked; independent Rust sparse-AND intake39.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1` — Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.44` — Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0` — Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
@@ -29,7 +30,6 @@ Activate39.6.2 from clean shared-guard extraction. Add the shared runtime guarde
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` — Safe installed Lua named Number/caller scopes34.5 compatible/targeted-checked; ordinary Perl roles/readiness42 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` — Julia named Number methods/caller scopes34.4 compatible/targeted-checked; safe Lua34.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` — Dart named Number methods/caller mark scopes34.3 already compatible/targeted-checked; Julia34.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` — Rust callable caller mark scope43.1 repaired/targeted-checked; independent Dart34.3 next.
 
 ## History
 

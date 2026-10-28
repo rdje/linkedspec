@@ -305,7 +305,7 @@ store the child result as the current blind-call entry
 run the attached post-call block
 ```
 
-Fluent post-call chains inject the parent rule label into helper-style calls. In particular, `.push` means `push(Parent)`, which calls `Parent` recursively; it does not merely append the child value already returned. A plain blind call already collects child results. Native Perl uses a shared runtime guard to cut non-progressing recursion and release active entries on return or exception. Standalone emitted ordinary cycles still await wiring to that guard. General return payloads remain compact sugar over the same post-call model:
+Fluent post-call chains inject the parent rule label into helper-style calls. In particular, `.push` means `push(Parent)`, which calls `Parent` recursively; it does not merely append the child value already returned. A plain blind call already collects child results. Native and standalone emitted Perl share the same guard: a rule re-entered at an already active descriptor/rule/cursor position is cut before invocation; consuming recursion remains legal, and return or exception releases the active entry. Typed recognition/observation scopes keep their typed rejection. Regenerate existing standalone parser sources to install this registration; updating the runtime alone does not rewrite old generated tables. General return payloads remain compact sugar over the same post-call model:
 
 ```text
 Wrapper::AND

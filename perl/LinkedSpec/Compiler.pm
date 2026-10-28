@@ -1762,6 +1762,15 @@ if ($recognition_transaction_policy_error || ref($recognition_transaction_diagno
    }
   }
   _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n }\n};\n");
+  _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, <<'RULE_PROGRESS');
+
+for my $linkedspec_rule_label (sort keys %{$descr->{spec}}) {
+ $descr->{spec}{$linkedspec_rule_label} =
+  LinkedSpec::RecognitionTransactionRuntime::guard_rule_handler(
+   $linkedspec_rule_label, $descr->{spec}{$linkedspec_rule_label},
+  );
+}
+RULE_PROGRESS
   _call_runtime_ctx(
    'emit_runtime_ctx_parser_source_line',
    $runtime_ctx,

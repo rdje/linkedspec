@@ -46,6 +46,19 @@ sub enter_rule_progress {
   'LinkedSpec::RecognitionTransactionRuntime::RuleProgressGuard';
 }
 
+sub guard_rule_handler {
+ my ($rule, $handler) = @_;
+ _internal_error('guarded rule must have a label')
+  unless defined($rule) && !ref($rule) && length($rule);
+ _internal_error('guarded rule handler must be a CODE reference')
+  unless ref($handler) eq 'CODE';
+ return sub {
+  my $guard = enter_rule_progress($_[0], $_[1], $rule);
+  return undef unless defined $guard;
+  return $handler->(@_);
+ };
+}
+
 sub _finish_rule_progress {
  my ($guard) = @_;
  return if $guard->{finished};

@@ -145,3 +145,9 @@ native ordinary cycles cut, emitted cycles time out; no-tail blind control
 agrees. [[perl-emitted-ordinary-recursion-guard-gap]] owns shared runtime
 extraction39.6.1/emitted wiring39.6.2. Preserve existing blind fluent parent
 injection and push(rule) calls; no implicit child-value append policy.
+
+39.6.1/.2 now share the native ordinary guard with emitted CODE entrypoints.
+Final13 groups5 fresh timeout RED/all13pass, nearest sparse15 and syntax2;
+actual12 source pairs differ only by registration/metadata unchanged. See
+[[perl-emitted-ordinary-recursion-guard-gap]] for current focused proof and
+regeneration requirement. This does not refresh the historical broad gates.

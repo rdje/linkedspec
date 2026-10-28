@@ -82,7 +82,7 @@ their compiled dependency order. Standalone generated source embeds every local
 regex required by the structural walk, including repeated `AND` with only one
 sparse action. This prevents cursor-derived consuming execution from silently
 skipping an edge-less delimiter while leaving the minimal generated family plan
-unchanged. Plain multi-regex AND with one qualifying sparse action uses `and_acode_seq` too. This corrects its former `default` classification without changing the minimal v2 schema or family vocabulary; regenerate affected standalone parsers to obtain the repaired structural walk.
+schema unchanged. Plain multi-regex AND with one qualifying sparse action uses `and_acode_seq` too. This corrects its former `default` classification without changing the minimal v2 schema or family vocabulary; regenerate affected standalone parsers to obtain the repaired structural walk. Emitted CODE table entries are also wrapped once with the same ordinary recursion progress guard used by native handlers; their bodies and minimal metadata remain unchanged. Regenerate older standalone sources to install that guard registration.
 
 Rust's source-emitter implements contract-v2 identity, metadata, and typed
 errors. Native callers use

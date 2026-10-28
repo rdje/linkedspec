@@ -7,7 +7,7 @@ answers:
   - "which task owns sparse AND outgoing-edge sequence repair"
   - "does the Default OR active-edge repair also fix AND sequence ownership"
 date: 2026-10-28
-status: 39.0/39.6.0 reconciled and39.5 repaired; shared guard39.6.1/.2 before peers
+status: authority reconciled; Perl39.5 and shared/emitted guard39.6.1/.2 targeted-checked; independent peers next
 tags: [lua, luajit, and, regex, slots, sequence, source, trace]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.0; sparse-and-structural-authority.md and sparse-and-structural-authority-intake.json.gz retain27 authored Perl controls,24 completed pairs,3 incomplete fresh timeouts, protected3 and original/refined producer epochs. Prior36.4 Hcat discrepancy is historical, its outgoing-only diagnosis superseded."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/sparse_and_single_action.t t/sparse_and_action_slots_perl_regression.t t/duplicate_regex_slot_identity_perl_contract.t; historical phase probes recover from sparse-and-structural-authority-intake.json.gz."
@@ -38,3 +38,9 @@ v2 family/schema/authority, broad admission or inferred peer failure. Historical
 stable-ID lookup failure is owned20.1; cause unassessed, no lost-history claim.
 Initial Lua serialization failure remains instrument-only historical evidence
 in active-edge-body-lua-intake.json.gz and carries no product RED credit.
+
+39.6.1/.2 are now targeted-checked: shared native guard and standalone table
+wrapping preserve existing push calls. Final13 groups5 fresh timeout RED/all13
+pass, nearest sparse15 and syntax2. Exact12 source pairs differ only by guard
+registration; metadata unchanged. Regenerate old standalone source. Independent
+peers follow; no outgoing-only AND rewrite or full admission claim.
