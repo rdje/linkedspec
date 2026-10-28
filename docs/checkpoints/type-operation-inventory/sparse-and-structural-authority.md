@@ -259,3 +259,13 @@ progress234 and CHOICE162 nearest assertions pass. No compiler/emitter/matching/
 recognition authority/schema change. Packet julia-and-groups-intake.json.gz
 retains exact closure, normal driver registered once. Remaining no-action/blind
 minimum39.3.3 next, other Julia/peer/admission owners remain.
+
+Julia39.3.3 now returns failed null for remaining ordinary no-action regex/blind
+minimum misses after LX authority, preserving consumed input and true errors.
+12 qualified sources29inputs4healthy8RED ->12pass289 assertions, same12 baseline
+fresh modules/exact inputs/four-control/error identity; group21/live24/sparse31
+fixture bytes unchanged. Group390/progress234/sparse283pass1dormant nearest
+assertions pass. New P2 ordinary unknown-helper missing-code reconciliation
+39.3.8 owned before admission; initial peer-code oracle explicitly unqualified,
+no invalid RED credit. Packet julia-minimum-intake.json.gz retains exact closure.
+Normal driver registered once; blind39.3.4 next, other peer/admission owners open.

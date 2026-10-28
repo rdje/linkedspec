@@ -4,7 +4,6 @@ using LinkedSpecJulia, JSON3, Test
 
 const REPAIR_OWNERS = Dict(
     "blind_default" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4",
-    "blind_minimum" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3",
 )
 
 function strict_equal(actual, expected)

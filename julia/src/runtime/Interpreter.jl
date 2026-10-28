@@ -2234,9 +2234,7 @@ function _execute_runtime_blind_rule!(
         if loop_exit !== nothing
             return _runtime_returned(loop_exit.value)
         end
-        throw(RuntimeInterpreterException(
-            "rule '$(rule.label)' expected at least $minimum matches, got $matches",
-        ))
+        return _RuntimeRuleResult(false, nothing)
     end
 
     extended_exit = _execute_runtime_lifecycle!(engine, rule, "EX", context)
@@ -2485,12 +2483,7 @@ function _execute_runtime_regex_rule!(
         if loop_exit !== nothing
             return _runtime_returned(loop_exit.value)
         end
-        if action_iteration_values !== nothing || and_iteration_values !== nothing
-            return _RuntimeRuleResult(false, nothing)
-        end
-        throw(RuntimeInterpreterException(
-            "rule '$(rule.label)' expected at least $minimum matches, got $matches",
-        ))
+        return _RuntimeRuleResult(false, nothing)
     end
 
     capture_gaps && _install_runtime_gap_tail!(context, rule.label, "EX")

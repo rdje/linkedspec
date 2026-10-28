@@ -7,7 +7,7 @@ answers:
   - "does Julia custom IT replace the default AND group collection"
   - "where do Julia early AND group returns enforce recognition progress"
 date: 2026-10-28
-status: bounded39.3.2 repaired/targeted-checked; remaining minima blind null and admission open
+status: bounded39.3.2 and ordinary minima39.3.3 repaired/targeted-checked; blind null and admission open
 tags: [julia, and, repetition, group-results, return, collection, progress, null]
 evidence: "julia-and-groups-intake.json.gz retains21 sources39 inputs3healthy18actualRED ->21pass390 assertions, same21 baseline modules, exact inputs and nearest proof."
 reverify: "bash tools/run_julia_project_data.sh --project=julia julia/test/repeated_and_group_results_test.jl"
@@ -40,3 +40,8 @@ blind/minimum owners remain dormant. Live progress234, sparse271pass2dormant
 and CHOICE162 nearest assertions pass. New normal suite registered once; compiler,
 emitter, matching, recognition authority and public schemas remain unchanged.
 Remaining ordinary minima .3 is next before blind/post-call/null/peer admission.
+
+39.3.3 now repairs no-action regex/blind ordinary minima; current sparse suite
+passes283 assertions with only blind_default dormant, group390/progress234 stay
+green. Mechanism/proof: [[julia-ordinary-repetition-minimum-misses]]. Original
+group packet stays frozen; blind/post-call/null/admission remain separately owned.

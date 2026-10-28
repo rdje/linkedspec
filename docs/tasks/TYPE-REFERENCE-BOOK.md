@@ -8374,15 +8374,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2 - collect Julia repeated AND group outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3`
-  Status: `pending` / P1 ordinary minimum miss
+  Status: `completed` / ordinary minimum misses
   Goal: Return ordinary regex/blind under-minimum null/matchedfalse without swallowing real errors or rolling back input.
   Acceptance: repeated_nonreturn and blind_minimum partial Hcat throw generic expected-at-least errors; target is ordinary miss at4. Preserve explicit LX authority, successful null, no-hit/zero-min/max, recovery/caller registers and actual runtime/progress errors; qualify non-acode and generated routes before edits.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:12 qualified sources29 inputs4healthy8actualRED ->12pass289 assertions native/restored matched/value/cursor and same12 baseline emitted modules/consumer; exact input/four-control/error identity and original fixture bytes; Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:283pass1owned-dormant; single normal registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining Julia/peer/diagnostic/registration/pressure/lifecycle repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/minimum/error/cursor distinctions, no population measurement.
 
   Group collector39.3.2 now returns ordinary null/matchedfalse for AND-acode minima. Remaining .3 scope is noncollecting regex and blind generic under-minimum throws after LX authority; qualify before edit, preserve real errors/cursor/no-hit/zero-min.
+
+  Activation: clean `4e1cdaa65eb47cbddb32b0c257c3e39473224931`. Group collectors already return failed/null below min. Qualify remaining no-action regex/blind generic throw paths, actual successful-null/miss/cursor/LX/recovery/register/error controls, then replace only two explicit under-minimum branches after LX authority. No general catch/rollback, lifecycle placement, collector or null provenance rewrite.
+
+
+  - [x] **REPRODUCE / ISSUE**:12 qualified sources29 inputs4healthy8actualRED. No-action regex/blind/AND partial minima throw generic interpreter errors, preventing recognize_once failed results and direct caller recovery. Successful null, zero-min/max, LX explicit override and real helper failure controls are retained; peer error-code assumption is separately qualified/owned .8.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Exact SDK/generated/fresh baseline and independent earlier public trace locate accepted partial consumption then generic expected-at-least throw in _execute_runtime_blind_rule! and noncollector _execute_runtime_regex_rule!. Existing collector paths already return failed/null. _execute_runtime_rule! finally restores caller match registers; changing only result path allows continuation while preserving consumed cursor.
+  - [x] **FIX**: Replace exactly two generic under-minimum throw branches with _RuntimeRuleResult(false,nothing) after unchanged LX authority; remove redundant collector condition. No broad exception catch, rewind, return/lifecycle normalization, count change or diagnostic rewrite.
+  - [x] **ADDRESSED (verified)**:12pass289 assertions29 inputs native/restored matched/value/cursor/plan and same12 baseline modules/consumer separate process. Exact raw source/normalized/compiled/plan/emitted strings and four healthy full observations unchanged. True miss/minimum versus accepted-null, partial cursor/no-hit/zero-min/max/LX override, recognition/caller capture/retv/recovery controls pass.
+  - [x] **NO REGRESSION**: Neighbors Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:283pass1owned-dormant pass; original group21/live24/sparse31 fixture bytes unchanged. Owned blind_minimum enabled, one unrelated blind-default owner remains dormant. Compiler/emitter/matching/recognition authority unchanged. Real helper failure text/rule/runtime phase and existing absent code unchanged; P2 .8 owns diagnostic authority reconciliation before admission. Initial unqualified peer-code oracle is retained without valid product RED credit; no broad lifecycle/Unicode/null/collection claim.
+  - [x] **LOCKSTEP**: New normal suite registered once. julia-minimum-intake.json.gz retains producer/fixture/runtime epochs/input/emission/native/generated/fresh/qualification/receipt closure. Book/cards/target/roadmap/task/live/resume/history align. .4 implicit blind next, then .5/.7/safe Lua/admission/pressure/lifecycle/slot and diagnostic .8; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3 - return ordinary failed Julia repetition minima`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4`
   Status: `pending` / P1 blind iteration collections
@@ -8430,6 +8441,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8`
+  Status: `pending` / P2 after bounded feature coverage before full23.4/admission
+  Goal: Reconcile and repair Julia unclassified unknown runtime-helper diagnostics against portable authority.
+  Reproduce: Julia39.3.3 real_error exact source Value OR{2} blind-calls Atom AND /a/ action unknown_minimum_probe(). Native/restored raises unsupported runtime helper in Atom with RuntimeDiagnostic stage runtime_execution/rule_label Atom but no code; generated/fresh preserve that failure text. Dart same source has unknown_helper code, which is not assumed as current Julia oracle without authority reconciliation. Raw source/SDK results retained in julia-minimum-intake packet/epochs.
+  Impact/ownership: Callers cannot select this Julia fallback failure by diagnostic code, and portable diagnostic admission needs explicit reconciliation. _evaluate_runtime_call! fallback throws unsupported runtime helper without a code, unlike its callable-codeblock-specific unknown-helper branch. Own required canonical contract/reference qualification and focused diagnostic repair before full admission, preserving rule/source/phase/original failure and no global error swallowing.
+  Planned verification tier: focused
+  Planned focused checks: Exact public helper/error authority and SDK/generated/fresh fail-closed/code/phase/rule oracles, nearest error controls, book/docs/commit; no routine full suite.
+  Planned canonical trigger: Full23.4/final clean push and any new public diagnostic authority separately canonical.
+  Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8745,7 +8766,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3` | `pending` | Repair remaining Julia no-action regex and blind ordinary minimum misses. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4` | `pending` | Retain Julia implicit blind choice and complete AND iteration values. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
