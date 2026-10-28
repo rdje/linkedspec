@@ -159,3 +159,11 @@ Actual Dart recognize_once post-call zero bypasses progress, unlike typed Perl
 rejection. Immediate reference.5.1 then Dart.5.2 precede peers/admission; no new
 contract/schema or peer inference. Packet blind-postcall-intake.json.gz retains
 all public input/producer/emission/native/fresh and SDK/plan/module evidence.
+
+Reference39.2.5.1 publishes latest child retv before attached blind code/IT.
+10 native/fresh groups11 inputs2healthy8RED ->10pass, exact source/v2 metadata,
+sole emitted child-binding delta;4 source/provenance/compatibility/recursion
+suites61groups and syntax pass. Prefix fail-closed bridge preserves original
+authored lowering/diagnostics. Regenerate old standalone Perl; no DSL/schema/
+family change. Packet perl-blind-retv-intake.json.gz. Dart39.2.5.2 next; reference
+accepted-bit39.9/lifecycle/admission stay owned, new test registration23.4.1.

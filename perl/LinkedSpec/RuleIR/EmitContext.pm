@@ -1684,14 +1684,29 @@ sub _rewrite_bcode_entries {
   # matching assignment after it remains part of the diagnostic action source.
   my $action_source = $bcode_entry->{code};
   my $bridge = '$'.$label.' = call('.$bcode_entry->{call}.')';
+  my $has_compiler_bridge = 0;
   if ($action_source eq $bridge) {
    $action_source = '';
+   $has_compiler_bridge = 1;
   } elsif (index($action_source, $bridge.";\n") == 0) {
    $action_source = substr($action_source, length($bridge) + 2);
+   $has_compiler_bridge = 1;
   }
   my ($rewritten_bcode, $diag) = _rewrite_action_code_with_diagnostics($label, $bcode_entry->{code}, $rewrite_rules,
    {kind => 'bcode', index => $source_index++, target => $bcode_entry->{call}, source => $action_source});
   _accumulate_action_rewrite_diagnostics($rewrite_diag_acc, $diag);
+  if ($has_compiler_bridge) {
+   # Keep authored lowering/diagnostics unchanged. Compile the exact Core-owned
+   # bridge through the same owner, then bind retv at that emission boundary.
+   # A changed compiler prefix must fail closed rather than place the binding
+   # after authored code (which may already have returned).
+   my ($compiled_bridge) = _rewrite_action_code_with_diagnostics(
+    $label, $bridge, $rewrite_rules, {kind => 'bcode_bridge', source => ''});
+   die "BCODE compiler bridge emission mismatch for '$label' -> '$bcode_entry->{call}'\n"
+    unless defined($compiled_bridge) && length($compiled_bridge)
+     && index($rewritten_bcode, $compiled_bridge) == 0;
+   substr($rewritten_bcode, length($compiled_bridge), 0) = '; $retv = $'.$label.';';
+  }
   push @BCALLs, $bcode_entry->{call};
   $BCODEs{$bcode_entry->{call}} = $rewritten_bcode;
  }

@@ -4809,6 +4809,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Canonical fixture addition from33.1: Register t/capture_boundary_number_results.t alongside the other bounded Perl feature fixtures before full23.4/admission/push.
 
+  Latest-child blind binding39.2.5.1 adds t/blind_child_retv.t; explicit canonical syntax/execution registration is required before admission/push, alongside all existing named bounded fixtures.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8169,13 +8171,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0 - isolate blind post-call retv and repeated return defects`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1`
-  Status: `pending` / P1 immediate after TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0 before peers/admission/push
+  Status: `completed` / reference latest-child binding
   Goal: Repair Perl blind child return binding before attached code and per-iteration lifecycle.
   Acceptance: Use current published latest-child retv contract and actual public intake. Shared emitter/typed owners bind the child result once before attached block/fluent code and IT/LE where existing lifecycle executes. Preserve call counts, captures, caller return/error/recursion, falsey/null kinds, collection/lifecycle phase and v2 metadata; qualify reference acceptance/progress owners independently. Exact public native/fresh RED-GREEN and nearest blind/retv/recursion controls, book/docs/focused commit.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored public/native/fresh and supported SDK/plan/source/return/cursor/progress/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push; new public contract/schema movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:10 normal public native/fresh groups11 inputs2healthy8actualRED ->10pass; exact source/v2 metadata identity and sole emitted latest-child binding difference; source-provenance/metadata/compatibility/shared recursion4suites61groups; syntax/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after Dart/peer/registration/pressure fixes; no new schema/contract authority.
+  Claim verification: none: Finite authored functional/value/error/source distinctions, no population measurement.
+
+  Activation: clean `9824d129962f45b55bed9bfa5c6972bf7ede70a3` after12-source public intake. Published latest-child retv requires attached code and IT to read actual child value. Public source identifies inner dispatch assignment before unbound read; E control is healthy. Read common RuleIR/variant emitters and relevant blind/retv/recursion tests, then exact public native/fresh RED-GREEN. No Dart/peer/return-scope or v2 contract edit in this reference binding slice.
+
+
+  - [x] **REPRODUCE / ISSUE**:10 normal public native/fresh groups11 inputs2healthy8actualRED. Attached blind retv returnsnull or stale OLD, IT seesnull and nonreturn effects collectnulls instead of A. End and explicit authored override controls are healthy. Public substitution rejects a chained-assignment candidate before production; no invalid RED credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Core-owned bridge assigns child result to the rule scalar. _rewrite_bcode_entries lowers that bridge plus attached code without publishing latest child into lexical retv. Early attached return and inner-repeat IT read before later outer result assignment. Public emitted source identifies exact bridge; original authored diagnostics must stay separate.
+  - [x] **FIX**: Recognize exact existing Core bridge, keep original lowering/diagnostic accumulation, compile bridge through same owner and insert retv assignment at its exact emitted boundary. Prefix mismatch fails closed. No second child invocation, authored-text heuristic or generic call/bootstrap/variant emitter change; mismatched bridge source remains fully diagnosed.
+  - [x] **ADDRESSED (verified)**:10pass11 inputs native/fresh values/cursors/errors agree. Exact sources and v2 metadata unchanged; removing the one new binding per emitted source recovers byte-identical prior source. Plain/AND/repetition, IT/E, nonreturn, stale/override/nested/zero payload controls pass.
+  - [x] **NO REGRESSION**: Source-provenance/metadata/compatibility/shared recursion4suites61groups and syntax pass. Same child invocation/cursor and all other emitted bytes retained. Dart/runtime bootstrap/variant emitters/schema/family unchanged; reference accepted-bit39.9, broader lifecycle and Dart return/progress remain separately owned, no full admission claim.
+  - [x] **LOCKSTEP**: perl-blind-retv-intake.json.gz retains actual producers/inputs/epochs/patch/results/rejected candidate/receipt. Book/card/target/roadmap/task/live/resume/history align. Old standalone Perl requires regeneration; original DSL/v2 metadata remain compatible. t/blind_child_retv.t explicitly queued23.4.1 before admission. Immediate Dart39.2.5.2 next before peers; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1 - bind Perl latest child retv before blind post-call code`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2`
   Status: `pending` / P1 immediate after TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1 before peers/admission/push
@@ -8509,7 +8522,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1` | `pending` | Bind reference latest child retv before attached blind code and IT. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2` | `pending` | Repair Dart repeated blind post-call outcomes and live progress. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

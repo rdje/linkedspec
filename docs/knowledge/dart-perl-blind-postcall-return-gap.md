@@ -3,9 +3,8 @@ id: dart-perl-blind-postcall-return-gap
 title: Repeated blind post-call return scope and retv differ between Dart and the Perl reference
 answers:
   - "does a repeated blind post-call return exit the Dart rule or one iteration"
-  - "why does Perl repeated blind post-call retv return null while Dart returns a child value"
 date: 2026-10-28
-status: intake39.2.5.0 complete; P1 reference binding.1 then Dart return/progress.2 before peers/admission
+status: intake39.2.5.0/reference binding.1 complete; P1 Dart return/progress.2 before peers/admission
 tags: [dart, perl, blind-call, repetition, return-scope, retv, authority-gap]
 evidence: "dart-blind-collection-intake.json.gz retains postcall_return public Perl native/fresh/emitted and Dart native/restored/plan/fresh baseline; read_dart_blind_postcall.py retains exact generated owner locations."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_dart_blind_collection_postcall.pl; cd dart && bash ../tools/run_dart_project_data.sh test test/blind_repetition_collection_test.dart --name postcall_return"
@@ -46,3 +45,8 @@ no peer inference. No new contract is needed: reference retv binding.5.1 then
 Dart repeated return/count/minimum/progress.5.2 are immediate P1 repairs.
 Packet blind-postcall-intake.json.gz retains exact producers/emission/results/
 modules/receipt. Earlier gap packet remains frozen.
+
+39.2.5.1 now fixes reference latest-child binding; current mechanism/proof:
+[[perl-blind-latest-child-retv-binding]]. Original intake remains frozen, not
+current reference behavior. Dart repeated return/count/minimum/progress.5.2
+remains immediate P1; retv is no longer a prerequisite blocker.

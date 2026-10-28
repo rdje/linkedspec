@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Post-call authority intake complete; reference retv binding then Dart repeated outcome/progress repairs.
+Reference blind latest-child retv binding repaired; Dart repeated outcome/progress next.
 
 ## Latest Completed Slice
 
-Public post-call intake retains12 identical raw sources18 inputs on Perl native/fresh and Dart native/restored/generated-plan/fresh modules; each backend agrees internally, cross-backend differences retained. Published latest-child retv contract plus plain/IT/E/nonreturn controls prove reference binding defect: attached code and IT see null while E control sees A; nonreturn effects collect[null,null] instead of[A,A]. Constant block/fluent return controls independently prove Dart repeated choice/AND scope defect: aa returns first[C,1]at1 instead of two iteration values at2; below-min input exits early. Actual recognize_once post-call zero accepts[true,C,0] on Dart but Perl rejects typed recognition_zero_progress_repetition. Public emitted reference inner closure/outer bound and Dart _ActionReturn owners explain WHY/WHERE. No production change or peer inference; existing contracts suffice, no new schema/policy. Immediate bounded reference binding39.2.5.1 then Dart group/count/minimum/progress39.2.5.2 are scheduled before peers/admission. Packet blind-postcall-intake.json.gz retains actual producers/all inputs/results/fresh modules/receipt. Book/card/target/roadmap/task/live/resume/history align; focused continuity/book checks and authorized commit, no full gate/push.
+Perl shared BCODE rewrite now binds latest child retv immediately after its compiler-owned invocation, before attached code and IT. Original authored lowering/diagnostics are retained; the same owner compiles the exact Core bridge to identify the emission boundary and prefix drift fails closed. No duplicate child call or generic call/source parser change. Normal10 public native/fresh groups11 inputs2healthy8actualRED ->10pass, exact source/v2 metadata unchanged; each emitted difference is one binding after existing child call. Plain/AND/repetition, IT/E, nonreturn effects, stale/explicit override, nested and zero values preserve kinds/cursors. Source-provenance/metadata/compatibility/shared recursion4 suites61groups and syntax pass. Rejected chained-assignment lowering candidate retained without product RED credit. Packet perl-blind-retv-intake.json.gz retains actual producers/inputs/epochs/source/body differences/results/receipt. Regenerate old standalone Perl sources; DSL/v2 family/schema unchanged. Book/card/target/roadmap/task/live/resume/history align; new normal test explicitly queued23.4.1 before admission. Dart repeated post-call scope/count/minimum/progress39.2.5.2 next; no peer/full admission/reference acceptance39.9 claim. Focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate39.2.5.1 from clean public intake. Fix Perl latest-child retv before attached blind code and IT through the shared typed/emission owners; preserve child call once, capture/return/error/recursion/value kinds and source metadata. Use public native/fresh plain/AND/repetition/block/fluent/no-return/IT/E controls and exact RED-GREEN, book/docs/focused commit. Then39.2.5.2 fixes Dart repeated blind post-call per-iteration/group early unwind, count/minimum/progress with lifecycle whole-rule authority and source/fresh identity; no peer inference. Independent Julia39.3/safe Lua39.4 follow; full admission/registration/pressure/owned Perl defects remain before push.
+Activate39.2.5.2 from clean reference latest-child binding repair. Re-derive exact supported public reference post-call outcomes with fixed retv; repair Dart repeated blind code/fluent returns as per-iteration choice/per-group AND values with early skip, accepted counts/reset/minimum, falsey/null/nesting and custom IT. Common completion guard must reject real zero-progress recognition before IT/max/ordinary exits and preserve diagnostic origin/rule/offset provenance; lifecycle returns stay whole-rule and plain pipe/AND stay direct. Source/normalized/compiled/plan/emitted identity/fresh reuse, exact owned RED-GREEN/nearest controls/book/docs/focused commit. Investigate/own any newly reproduced reference acceptance issue without blessing it; peer features Julia39.3/safe Lua39.4 follow. Full admission/registration/pressure/Perl39.8-.9 remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1` — Reference blind latest-child retv binding repaired; Dart repeated outcome/progress next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0` — Post-call authority intake complete; reference retv binding then Dart repeated outcome/progress repairs.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4` — Dart implicit blind collections repaired; P1 post-call scope/retv gap next before peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3` — Dart ordinary minimum misses normalized; implicit blind collections next.
@@ -29,7 +30,6 @@ Activate39.2.5.1 from clean public intake. Fix Perl latest-child retv before att
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.7` — Perl repeated AND falsey group acceptance repaired/targeted-checked; Rust39.1.3 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0` — Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` — Rust indexed AND priority repaired/targeted-checked; repeated per-group returns39.1.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1` — Rust typed AND dependency steps repaired/targeted-checked; indexed-entry priority39.1.2 next.
 
 ## History
 
