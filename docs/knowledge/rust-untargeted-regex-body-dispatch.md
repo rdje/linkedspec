@@ -1,6 +1,6 @@
 ---
 id: rust-untargeted-regex-body-dispatch
-title: Rust body alternation includes untargeted declarations and can suppress a written edge
+title: Rust outgoing-edge choice now excludes untargeted declarations through one shared selector
 answers:
   - "why does a wildcard entry pattern swallow a Rust action edge"
   - "why does the Rust capture Number fixture return null before its action"
@@ -8,11 +8,13 @@ answers:
   - "which task owns active outgoing regex candidate projection"
   - "why must a body matcher preserve complete entry and boundary regex catalogs"
 date: 2026-10-28
-status: P1 family36 next after33.2, before33.3/admission; exact dormant RED retained
+status: Rust36.1 repaired/targeted-checked; independent peers36.2-.4 next before33.3
 tags: [rust, regex, dispatch, slots, source, trace, mode, capture]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.33.2 public constant payload/compiled descriptors/trace at aba15c5f1; active-edge-regex-dispatch-intake.json and capture-boundary-number-rust-intake.json.gz retain exact producers/epochs."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_boundary_number_results outgoing_edge_dispatch_ignores_untargeted_declarations -- --exact --ignored --nocapture (expected RED until36.1; update command/remove ignore after repair)"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_boundary_number_results outgoing_edge_dispatch_ignores_untargeted_declarations -- --exact --nocapture"
 ---
+
+## Historical intake before36.1
 
 Valid source: Top dispatches Value entry0, which declares named head .., colon,
 cat slots0/1/2 and only outgoing Value[2] returning constant BODY. Input alpha beta
@@ -55,3 +57,23 @@ recognition matcher was diagnosed. Full catalogs remain intact for entry/boundar
 uses. Exact sources/channels are in active-edge-body-authority.json.gz. A distinct
 Perl emitted boundary catalog omission is owned37 before full23.4, not attributed
 to this Rust finding or used to change boundary semantics.
+
+## Rust36.1 repair
+
+Engine::select_native_match now queries the existing indexed regex programs for
+outgoing edge.regex_idx values in authored order on non-AND action-edge choice.
+Strict earlier-start replacement retains first-authored ties; a cursor-start
+candidate is the earliest possible and returns immediately. No new per-selection
+allocation, regex recompilation, text-derived identity or catalog truncation.
+Native and generated execution share that owner; indexed-first/required-AND,
+no-edge/blind/frame/cursor/gap/trace/format behavior keeps its existing branches.
+
+Refined5pass/7RED becomes12pass native/restored CompiledSpec/generated-plan. Tests
+retain full catalogs, reversed Default/OR duplicates, earliest start, cross-target
+compiled/child identity, Unicode captures/positions3/6, colon gap span2/3, selected
+slot2 traces, five neutral duplicate fixtures and seek/consume. Number6pass now
+includes the enabled original wildcard regression, with no ignores. Initial
+unflagged LS control was unsuitable for historical ordering and refined to the
+accepted capture_gaps contract before production; exact sources/channels remain
+in active-edge-body-rust-intake.json.gz. No extra product RED credit or full
+context/backend/emitted-package admission. Independent peers follow next.

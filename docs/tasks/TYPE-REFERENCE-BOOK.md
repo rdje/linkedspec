@@ -7245,14 +7245,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.0 - freeze active-edge body candidates and source identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1`
-  Status: `pending` / P1 after36.0
-  Goal: Independently implement/check Rust native and generated-plan outgoing-edge body candidate ownership.
-  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
-  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
-  Planned verification tier: focused
-  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
-  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+  Status: `completed`
+  Goal: Repair confirmed Rust native/generated-plan outgoing-edge body candidate ownership through the shared selection owner.
+  Authority: Frozen36.0 active-edge-body-candidates.md and existing ADR0044/0047/entry/edge/source/gap contracts. Packet active-edge-body-rust-intake.json.gz retains actual pre-refinement/refined/candidate test/source/log epochs.
+  Verification tier: `focused`
+  Focused checks: Refined unchanged-production12 tests5pass/7RED -> first candidate12pass native/restored CompiledSpec/generated-plan, plus Number6pass including enabled wildcard regression; exact slot traces, five existing duplicate fixtures, mode/capture/source/gap/catalog controls. Rustfmt/compilation/book/map/history/manual continuity, no full suite/matrix.
+  Canonical trigger: Independent peers36.2-.4 then33.3; full23.4/source-context/final clean push after feature coverage. Document pressure and generated boundary37 remain owned prerequisites; no public schema movement.
+  Claim verification: none: Finite authored functional/source-identity regressions and retained test outputs, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Public engine/plan controls return null for wildcard BODY and cross-target choice,1 for reversed duplicate edges, wrong local-gap source and hook selection. Native/generated traces both select untargeted0 twice. Refined baseline has5 healthy/7 failing groups; initial unflagged LS control would change historical ordering and was replaced with capture_gaps before production, receiving no extra product RED credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine::select_native_match uses complete alternation fallback for action-edge choice; catalog order includes untargeted declarations and ignores authored edge order. Native Engine and GeneratedPlanExecutor share it. Catalog and candidate roles are distinct; existing indexed matcher already preserves original index and captures.
+  - [x] **FIX**: For non-AND rules with outgoing action edges, query existing compiled slots by each edge.regex_idx in authored edge order; retain earlier starts and first-authored ties, with safe earliest-cursor short circuit. Keep full catalog, indexed-first and required-AND branches, no-edge/blind algorithms, formats and existing frame/cursor/gap/trace/error owners. No new allocation, regex recompilation or text-derived identity in the selection loop.
+  - [x] **ADDRESSED (verified)**: First candidate12pass native/restored/plan, including reversed Default/OR duplicate selectors, cross-target parent-declaration exclusion, earliest start, no eligible edge, exact Unicode source positions3/6 and named/group/entry captures, boundary lookup of an untargeted catalog slot, inter-match colon gap span2/3, and both traces report written Value slot2 exactly once. Remove the prior ignore; Number6pass including the original wildcard regression.
+  - [x] **NO REGRESSION**: All five existing neutral duplicate-slot fixtures preserve choice/ordered/repeated/cross-target results on three routes; focused rule-family seek/consume controls remain correct. Number getters/aliases/snapshot/legacy/function/callback policies retain exact results. Full catalog length3 and compiled/child index2 remain; cross-target result distinguishes compiled versus child indexes. Rustfmt clean; ordinary Cargo integration discovery includes the new test. No independent emitted-package or global regex-context claim; startup27/63.2 and broader admission remain separate.
+  - [x] **LOCKSTEP**: Target/packet and updated causal card/map, public book removes repaired Rust caveat and preserves the distinct Perl emitted-boundary caveat, generated boundary37 retrieval card, roadmap/task/live/resume/history agree. Peers independently intake next; no inferred failure or backend admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1 - select Rust body matches from authored outgoing edges`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.2`
   Status: `pending` / P1 after36.0
@@ -7301,7 +7308,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.1` | `pending` | Repair confirmed Rust active-edge selection through shared native/generated owner. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` | `pending` | Independently check Dart active-edge ownership before resuming33.3. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Active-edge choice target frozen; Rust shared-owner repair36.1 next, separate Perl boundary37 owned.
+Rust active-edge ownership repaired12pass plus Number6; independent Dart36.2 next.
 
 ## Latest Completed Slice
 
-Existing edge/entry/mode/duplicate-slot authority freezes Default/OR body candidates from outgoing edges, earliest start then authored edge order. Public Perl native/fresh reverse duplicates return2 and earlier-positioned later edge returns A. Native Engine and GeneratedPlanExecutor share Rust select_native_match; preserve original indices/captures and full entry/boundary catalogs, AND/blind/no-edge/indexed-first/frame/gap/formats. No production edit. Separate Perl emitted boundary control returns null versus native body; public generated source pinpoints missing HASH.re catalog, owned P1 family37 after33/35/34 before admission. Packet retains exact producers/channels/source, including diagnostic setup exit25 without product RED credit. Target/card/book/map/task/live/resume/history agree; no full suite/matrix/admission/push.
+Rust outgoing-edge body choice is repaired through shared Engine::select_native_match for native/generated execution. Query existing compiled edge slots in authored order; earliest start wins and ties keep first authored, with safe cursor-start short circuit. Full catalogs and indexed-first/AND/blind/no-edge/frame/gap/formats stay intact. Refined unchanged-production5pass/7RED -> first candidate12pass native/restored CompiledSpec/generated-plan, covering duplicate order, cross-target indices, captures/Unicode positions, colon gap, boundary catalog, five neutral duplicate fixtures, seek/consume and exact written-slot traces. Number6pass includes now-enabled original wildcard regression with no ignores. Initial LS instrument refined to existing capture_gaps selected-first policy without extra product RED credit; all epochs retained. Rustfmt/book/map/history/manual continuity pass, causal cards/target/roadmap/task/live/resume align. Separate Perl emitted boundary37 stays owned; no full suite/matrix/peer/independent emitted-package/admission/push claim.
 
 ## Next Action
 
-Activate Rust active-edge choice repair36.1 from this clean authority commit. Establish exact native/restored/generated baseline for wildcard/literal, reverse duplicate priority, earliest start and source-slot/capture/mode/catalog controls. Repair shared select_native_match only for confirmed Default/OR action-edge body choice, retain complete catalogs and indexed-first/AND/blind/no-edge/frame/gap/errors/formats, enable owned wildcard regression and run focused direct dependents; then independently intake peers36.2-.4 before33.3. Separate generated Perl boundary37 stays scheduled before full23.4/push. Authorized focused --no-verify workflow continues.
+Activate independent Dart outgoing-edge candidate intake36.2 from this clean Rust repair. Use frozen36.0 target and actual public compile/native/restored SpecFile/generated-plan routes for wildcard/literal, reverse duplicate priority, earliest start and source-slot/mode/catalog/gap controls. Repair only any confirmed candidate-role gap through existing shared owner, preserve full catalogs/indices/AND/blind/no-edge/formats, targeted-check and commit; then Julia/safe Lua36.3-.4 before33.3. Full23.4 and generated boundary37/pressure/new Perl registration remain separate. Authorized focused --no-verify workflow continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.36.1` — Rust active-edge ownership repaired12pass plus Number6; independent Dart36.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.0` — Active-edge choice target frozen; Rust shared-owner repair36.1 next, separate Perl boundary37 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.2` — Rust capture Number methods already compatible; P1 active-edge dispatch36 prerequisite immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.1` — Perl readonly capture Number method composition repaired/targeted-checked; independent Rust33.2 next.
@@ -29,7 +30,6 @@ Activate Rust active-edge choice repair36.1 from this clean authority commit. Es
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` — Dart bounded callback identity repaired/targeted-checked; independent Julia31.6.3 next.
 
 ## History
 

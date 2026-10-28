@@ -1,7 +1,7 @@
 # Outgoing-edge body candidates
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.36.0; bounded backend repairs36.1-.4.
-Status: target frozen from existing entry/edge/choice authority; execution repairs follow.
+Status: target frozen; Rust36.1 repaired/targeted-checked, independent peer intake follows.
 
 This target implements existing semantics, rather than introducing a new grammar
 or generated-source contract. Read ADR0044 for rule-local cursor ownership,
@@ -88,3 +88,22 @@ This is a separate generated descriptor reconstruction defect, not evidence for
 changing the helper's boundary semantics or for truncating Rust catalogs. Own it
 under37 after the bounded Number/named/block feature work and before full23.4
 admission or push; its runtime/generated regression and repair are required.
+
+## Bounded Rust36.1
+
+The shared selection owner now considers only outgoing compiled edge slots for
+non-AND action-edge choice, in authored edge order. Existing individual regex
+programs are reused; full catalogs and serialization remain intact. Earliest
+cursor-start candidates may return immediately because no later candidate can
+start sooner and ties retain the first authored edge. Other candidates compare
+starts strictly, without replacing a tied earlier edge.
+
+Refined unchanged-production12 tests have5pass/7RED; first candidate12pass across
+native/restored CompiledSpec/generated plans. Source/capture/spans/gap, full
+boundary catalog, reversed Default/OR duplicate priority, cross-target identity,
+five existing duplicate fixtures, seek/consume and selected slot traces pass.
+Number6pass includes the original now-enabled wildcard regression. Initial LS
+instrument refinement retains historical unflagged pre-selection hook ordering;
+the distinguishing hook control uses capture_gaps's accepted selected-first
+contract. Packet active-edge-body-rust-intake.json.gz retains all epochs. No
+independent emitted-package, full regex-context, peer or admission claim.

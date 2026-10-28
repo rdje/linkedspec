@@ -124,9 +124,8 @@ fn callback_sources_keep_their_dynamic_caller_context() {
         );
     }
 }
-// Explicitly owned36.1 RED. Do not turn the observed null into a success oracle.
+// TYPE-REFERENCE-BOOK.1.2.23.3.36.1 — active-edge dispatch prerequisite repaired.
 #[test]
-#[ignore = "TYPE-REFERENCE-BOOK.1.2.23.3.36.1: untargeted declarations preempt active edge"]
 fn outgoing_edge_dispatch_ignores_untargeted_declarations() {
     let source = action(r#"return("BODY")"#).replace("(?<head>αβ)", "(?<head>..)");
     check(&source, "αβ:cat", json!(["BODY"]), true);

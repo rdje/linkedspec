@@ -3191,6 +3191,32 @@ impl Engine {
                 ParseMode::Seek => alt.seek_slot_match(input, position, required_index),
             });
         }
+        if !rule.mode.is_and() && !rule.acode_dispatch.is_empty() {
+            // The full catalog also serves incoming selectors and boundary
+            // lookahead. Only outgoing edges participate in body choice, in
+            // authored edge order rather than numeric catalog order.
+            let mut selected: Option<MatchResult> = None;
+            for edge in &rule.acode_dispatch {
+                let candidate = match parse_mode {
+                    ParseMode::Consume => alt.consume_slot_match(input, position, edge.regex_idx),
+                    ParseMode::Seek => alt.seek_slot_match(input, position, edge.regex_idx),
+                };
+                if let Some(candidate) = candidate {
+                    // No later edge can start earlier than the current cursor;
+                    // an equal start must retain this first-authored edge.
+                    if candidate.start == position {
+                        return Ok(Some(candidate));
+                    }
+                    if selected
+                        .as_ref()
+                        .is_none_or(|best| candidate.start < best.start)
+                    {
+                        selected = Some(candidate);
+                    }
+                }
+            }
+            return Ok(selected);
+        }
         Ok(match parse_mode {
             ParseMode::Consume => alt.consume_match(input, position),
             ParseMode::Seek => alt.seek_match(input, position),
