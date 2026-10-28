@@ -77,3 +77,14 @@ unflagged LS control was unsuitable for historical ordering and refined to the
 accepted capture_gaps contract before production; exact sources/channels remain
 in active-edge-body-rust-intake.json.gz. No extra product RED credit or full
 context/backend/emitted-package admission. Independent peers follow next.
+
+## Trace test storage36.1.1
+
+The newly introduced temporary trace owner was caught by the official storage
+census and removed immediately after Dart36.2. Native/generated slot2 assertions
+now use public caller-owned in-memory TraceEmitter::with_stdout buffers; exact
+test1pass and unchanged census GREEN are retained in active-edge-body-rust-trace-
+owner.json.gz. Runtime/manifest/gates stay unchanged. Compatibility emitter APIs
+retain their accumulator envelope; unchanged value controls retain direct v2.
+An initial instrument projection mismatch is preserved, not a product RED or
+an unwrap-policy change. See [[rust-generated-source-v1-result-projection]].

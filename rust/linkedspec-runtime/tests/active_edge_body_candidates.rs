@@ -1,17 +1,34 @@
 //! TYPE-REFERENCE-BOOK.1.2.23.3.36.1 — outgoing edges own body choice candidates.
 use linkedspec_core::compiler::compile;
-use linkedspec_core::trace::{TraceConfig, TraceLevel};
+use linkedspec_core::trace::{TraceConfig, TraceEmitter, TraceLevel};
 use linkedspec_core::types::CompiledSpec;
 use linkedspec_core::validation::validate;
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, classify_generated_rule_family,
-    execute_generated_parser_v2, execute_generated_parser_with_trace_v2,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, GeneratedRuleSpec, classify_generated_rule_family,
+    execute_generated_parser_v2,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::{Value, json};
-use std::fs;
-use std::time::{SystemTime, UNIX_EPOCH};
+use std::io::{self, Write};
+use std::sync::{Arc, Mutex};
+
+#[derive(Clone, Default)]
+struct TraceBuffer(Arc<Mutex<Vec<u8>>>);
+
+impl Write for TraceBuffer {
+    fn write(&mut self, bytes: &[u8]) -> io::Result<usize> {
+        self.0
+            .lock()
+            .expect("trace buffer lock")
+            .extend_from_slice(bytes);
+        Ok(bytes.len())
+    }
+
+    fn flush(&mut self) -> io::Result<()> {
+        Ok(())
+    }
+}
 
 fn compiled(source: &str) -> CompiledSpec {
     let parsed = parse_spec_with_user_functions(source).expect("parse active-edge source");
@@ -186,43 +203,39 @@ fn inter_match_gap_uses_selected_edge_span() {
 fn native_and_generated_trace_attribute_the_written_structural_slot() {
     let source = carrier("..", "return(\"BODY\")");
     let spec = compiled(&source);
-    let serialized = serde_json::to_string(&spec).unwrap();
     let plan = plan(&spec);
+    let generated_rules: Vec<_> = spec
+        .rules
+        .iter()
+        .zip(&plan)
+        .map(|(rule, row)| GeneratedRuleSpec {
+            label: row.label,
+            family: classify_generated_rule_family(rule),
+        })
+        .collect();
     assert_eq!(spec.find("Value").unwrap().regex_patterns.len(), 3);
     let edge = &spec.find("Value").unwrap().acode_dispatch[0];
     assert_eq!((edge.regex_idx, edge.child_regex_idx), (2, 2));
-    let nonce = SystemTime::now()
-        .duration_since(UNIX_EPOCH)
-        .unwrap()
-        .as_nanos();
     let mut observations = Vec::new();
     for generated in [false, true] {
-        let path = std::env::temp_dir().join(format!(
-            "active-edge-{}-{nonce}-{generated}.log",
-            std::process::id()
-        ));
-        let trace = TraceConfig::enabled(TraceLevel::DEBUG)
-            .with_trace_file(path.clone())
-            .with_reset_file(true);
+        let buffer = TraceBuffer::default();
+        let mut trace = TraceEmitter::with_stdout(
+            TraceConfig::enabled(TraceLevel::DEBUG),
+            Box::new(buffer.clone()),
+        )
+        .expect("create in-memory trace emitter");
+        let engine = Engine::new(spec.clone());
         let actual = if generated {
-            execute_generated_parser_with_trace_v2(
-                &serialized,
-                &plan,
+            engine.execute_generated_with_plan_with_trace_emitter(
+                &generated_rules,
                 "αβ:cat",
-                trace,
-                "active-edge-body.spec",
-                GENERATED_SOURCE_CONTRACT,
+                &mut trace,
             )
-            .map_err(|error| error.to_string())
         } else {
-            Engine::new(spec.clone()).execute_value_with_trace(
-                "αβ:cat",
-                &ExecutionOptions::new(),
-                trace,
-            )
+            engine.execute_with_trace_emitter("αβ:cat", &mut trace)
         };
-        let trace = fs::read_to_string(&path).expect("read active-edge trace");
-        fs::remove_file(path).expect("remove owned trace");
+        let trace = String::from_utf8(buffer.0.lock().expect("read trace buffer").clone())
+            .expect("trace is UTF-8");
         let selected: Vec<_> = trace
             .lines()
             .filter(|line| {
@@ -234,7 +247,9 @@ fn native_and_generated_trace_attribute_the_written_structural_slot() {
         observations.push((actual, selected));
     }
     for (actual, selected) in observations {
-        assert_eq!(actual.unwrap(), json!(["BODY"]));
+        // These caller-owned emitter methods retain the documented legacy
+        // accumulator envelope. The value controls above exercise direct v2.
+        assert_eq!(actual.unwrap(), json!([["BODY"]]));
         assert_eq!(selected.len(), 1);
         assert!(selected[0].contains("target_rule=Value regex_index=2"));
     }

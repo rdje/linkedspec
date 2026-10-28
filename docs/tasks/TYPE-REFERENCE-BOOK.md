@@ -7220,7 +7220,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored feature/defect target, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36`
-  Status: `pending` / P1 immediately after current33.2, before33.3 and further feature work
+  Status: `in_progress` / P1 before33.3; Rust/Dart and test-storage followup complete, independent peers next
   Goal: Reconcile and repair outgoing-edge regex candidate ownership so untargeted declarations cannot consume body input and suppress a valid edge.
   Reproduction: Exact constant-payload Top-to-Value grammar from33.2 has declared Value slots0 named head ..,1 colon,2 cat and only outgoing Value[2] return BODY. Input alpha beta :cat. Perl public Get returns[BODY]; current Rust native/restored/plan shared producer controls return[null]. Public native runtime trace selects untargeted0 at bytes4-6 and6-8 with acode child=none, consuming :c/at; literal Unicode/ASCII entry heads reach slot2 and returnBODY. This is not a Number getter defect or an invalid grammar.
   Root / impact: Compiled descriptors correctly retain only acode regex_idx2 but both Rust rule-body matcher construction sites compile full rule.regex_patterns; unmatched declared slots can win alternatives and consume input. Canonical action-and-lifecycle-placement says outgoing edges select their target slots. Own complete regex catalogs remain necessary for incoming entry selection, explicit selectors and boundary helpers; do not truncate shared compiled catalogs or change pins/schema. Native Engine and GeneratedPlanExecutor share select_native_match and need one choice-eligibility repair; the earlier separate recognition-path wording is corrected by36.0.
@@ -7245,7 +7245,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.0 - freeze active-edge body candidates and source identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1`
-  Status: `in_progress` / runtime repair committed2d832df45; immediate test-storage followup36.1.1
+  Status: `completed` / runtime repair2d832df45 and test-storage followup36.1.1 verified
   Goal: Repair confirmed Rust native/generated-plan outgoing-edge body candidate ownership through the shared selection owner.
   Authority: Frozen36.0 active-edge-body-candidates.md and existing ADR0044/0047/entry/edge/source/gap contracts. Packet active-edge-body-rust-intake.json.gz retains actual pre-refinement/refined/candidate test/source/log epochs.
   Verification tier: `focused`
@@ -7262,14 +7262,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1 - select Rust body matches from authored outgoing edges`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1`
-  Status: `pending` / P1 immediately after36.2 before36.3
-  Goal: Remove the new Rust active-edge test's unregistered temporary trace owner by using public caller-owned in-memory trace emitters.
-  Reproduction: Official tools/test_rust_project_data_storage.sh owner census fragment fails after36.1 because tracked active_edge_body_candidates.rs calls std::env::temp_dir but is absent from the exact expected owner array. This omission was introduced by36.1; feature/runtime assertions pass but canonical storage would reject it.
-  Root / acceptance: Rust Engine already exposes execute_value_with_trace_emitter and execute_generated_with_plan_with_trace_emitter, and TraceEmitter::with_stdout accepts a caller-owned writer. Retain native/generated exact slot trace assertions in memory; remove only the test filesystem owner and clean up imports. No production, registry, manifest, storage gate or path workaround. Run exact trace/new test, format/compile, unchanged official census fragment to GREEN, update evidence/book/live docs and commit before peers.
-  Planned verification tier: focused
-  Planned focused checks: Actual owner-census RED/GREEN, exact native/generated trace and new active-edge test, Rustfmt/compile/manual continuity; no full gate.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; storage infrastructure remains unchanged.
-  Planned claim verification: none: Finite named test-owner predicate and functional trace assertions, no population measurement.
+  Status: `completed`
+  Goal: Remove the Rust active-edge test's unregistered temporary trace owner through public caller-owned in-memory trace emitters.
+  Evidence: active-edge-body-rust-trace-owner.json.gz retains exact test epochs, actual focused outputs, unchanged official storage census fragment/owner script and actual GREEN exit receipt. Prior RED is also retained in Dart36.2 intake.
+  Verification tier: `focused`
+  Focused checks: Official unchanged Rust owner census RED -> GREEN after removing this named test owner; focused exact native/generated trace1pass with11 unrelated tests filtered, Rust compilation/rustfmt, book/map/history/manual continuity. Runtime and registry unchanged; no full gate.
+  Canonical trigger: Independent Julia36.3/safe Lua36.4 then Number33.3; full23.4/final clean push after feature coverage and remaining owned prerequisites.
+  Claim verification: none: Finite named test-owner invariant and authored trace assertion, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Official storage-owner census fragment fails because newly tracked active_edge_body_candidates.rs calls temp_dir but is absent from its exact expected owner array. This was introduced by36.1 and owned immediately, not waived behind passing runtime tests.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: New file-backed trace harness added an unregistered filesystem owner. Public TraceEmitter::with_stdout and Engine native/generated caller-owned emitter APIs already support in-memory writers. Existing rust-generated-source-v1-result-projection distinguishes these compatibility result envelopes from direct-value v2.
+  - [x] **FIX**: Replace only the test's file/temp/time handling with a shared in-memory Write buffer and public native/generated emitters. Preserve exact selected slot2 once per route, full catalog/indices and direct-value controls. No runtime/storage manifest/gate/cap changes or spelling-based census escape.
+  - [x] **ADDRESSED (verified)**: Exact trace test compiles and passes1 group with both native/generated observations; unchanged official census fragment returns0 with explicit retained receipt. No temporary owner remains in this test. First memory candidate used mismatched direct/legacy projections; final pairs documented compatibility APIs and retains their expected accumulator envelope, while ordinary direct-value tests stay unchanged. Initial instrument mismatch is retained without product RED credit.
+  - [x] **NO REGRESSION**: Only trace test harness changes; previous12 dispatch/6 Number proof remains the runtime boundary, with11 unrelated tests intentionally filtered for this test-only slice. Public v2 direct-value adapters still run in unchanged value controls. Rustfmt passes; no production, generated format, registry or dependency change. Existing legacy projection is not an unwrap heuristic or new runtime policy.
+  - [x] **LOCKSTEP**: Packet/target/causal card/map and public trace API describe in-memory emitters and exact compatibility projection; task/live/resume/history agree. Runtime parent36.1 closes again after this verified followup. Independent peers next; generated boundary37/Dart LS cursor38 remain owned before admission.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1 - keep Rust slot traces in caller-owned memory`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.2`
   Status: `completed`
@@ -7349,7 +7356,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1` | `pending` | Remove Rust test temporary trace owner before peer36.3 intake. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.3` | `pending` | Independently check Julia active-edge candidate ownership before Number33.3. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

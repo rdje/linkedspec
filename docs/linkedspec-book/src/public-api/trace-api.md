@@ -100,7 +100,7 @@ primitives, opt-in traced entrypoints beside the existing quiet entrypoints, and
 `parse_spec`, validation passes, `compile`, dependency-regex mapping, user-function definition parsing, full-spec
 function projection, and staged parse-job normalize/resolve/load/compile/execute phases. Runtime branch and
 mark/capture event coverage now includes interpreted `Engine::execute_with_trace(...)` and generated-plan
-`Engine::execute_generated_with_plan_with_trace(...)` execution.
+`Engine::execute_generated_with_plan_with_trace(...)` execution. For in-memory collection, `TraceEmitter::with_stdout` accepts a caller-owned writer, reused through `Engine::execute_with_trace_emitter` and `Engine::execute_generated_with_plan_with_trace_emitter`; these compatibility methods retain accumulator results, while the direct-value v2 entrypoints retain their own result projection.
 
 The required Rust mapping is:
 

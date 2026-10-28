@@ -1,7 +1,7 @@
 # Outgoing-edge body candidates
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.36.0; bounded backend repairs36.1-.4.
-Status: target frozen; Rust36.1/Dart36.2 repaired/targeted-checked; Rust trace-test followup then independent peers follow.
+Status: target frozen; Rust36.1/Dart36.2 repaired/targeted-checked; Rust trace-test followup complete, independent peers follow.
 
 This target implements existing semantics, rather than introducing a new grammar
 or generated-source contract. Read ADR0044 for rule-local cursor ownership,
@@ -127,3 +127,19 @@ accepted edge, isolating eligibility without changing runtime cursor code.
 Packet active-edge-body-dart-intake.json.gz retains exact probes/channels.
 Immediate36.1.1 removes the prior Rust test's unregistered temporary trace owner
 through public in-memory emitters; no storage manifest/gate change is needed.
+
+## Rust trace-test storage followup36.1.1
+
+The new file-backed trace test initially introduced an unregistered temporary
+owner. The unchanged official storage-owner census detects it. The final test
+uses TraceEmitter::with_stdout and a caller-owned in-memory Write buffer, with
+public native/generated compatibility emitter methods; exact slot2 traces pass
+and the same census returns0. Runtime/manifest/gate/format stay unchanged.
+
+These compatibility emitter methods retain their documented accumulator envelope;
+the unchanged value controls exercise direct native/restored/v2 projection. An
+initial in-memory candidate incorrectly mixed those projections and is retained
+as an instrument mismatch, with no product RED credit. Exact trace test1pass,
+compile/rustfmt and actual owner-census GREEN receipt are retained in
+active-edge-body-rust-trace-owner.json.gz. Other runtime tests were not repeated
+for this test-only correction; prior12/6 proof keeps its recorded boundary.
