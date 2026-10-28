@@ -1,7 +1,7 @@
 # Outgoing-edge body candidates
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.36.0; bounded backend repairs36.1-.4.
-Status: target frozen; Rust36.1/Dart36.2/Julia36.3 and Rust trace-test followup repaired/targeted-checked; safe Lua intake follows.
+Status: target frozen; All bounded Default/OR backend children36.1-.4 and trace-test followup are targeted-checked; formal23.4 admission remains.
 
 This target implements existing semantics, rather than introducing a new grammar
 or generated-source contract. Read ADR0044 for rule-local cursor ownership,
@@ -162,3 +162,29 @@ syntax checked. A standalone retained probe confirms Julia live/caller cursor1
 on four routes versus reference4, independently owned38.2 before admission. No
 healthy credit for that diagnostic, cursor repair or null rebasing in this slice.
 Packet active-edge-body-julia-intake.json.gz retains exact epochs and commands.
+
+## Bounded safe Lua36.4 and next feature
+
+Both installed hosts PUC5.5.1/LuaJIT2.1.1788460057 have92 checks/34RED before
+production and92pass after the first candidate. Shared existing-table helper
+M._match_body_choice owns ordinary and gap choice, reusing cached indexed edge
+programs in authored order. Full catalogs/indices, entry/AND/blind/no-edge/cursor/
+frame/gap/formats remain. Exact source/capture/Unicode/gap/catalog/priority/mode
+and in-memory slot2 traces pass; duplicate112/rule-local108/capture checks pass
+per host. No persistent interpreter chunk-local or new temp owner is introduced;
+module/runner loadfile and normal registration pass. Declared5.4 proof staysLUA2.2;
+no unsafe pattern, full suite/matrix or isolated package admission is claimed.
+
+Independent Hcat early-LS probes confirm cursor1 versus reference4 on both hosts,
+owned38.3 before admission. A separate AND source also exposes an unaddressed
+sequence role: catalogH/cat and only edge1, reference[BODY] versus Lua[null], with
+trace requiring0 at cursor1. Own39 after bounded33/35/34 and before38/37/full23.4;
+peer intake is independent. Choice filtering cannot substitute for an AND
+sequence/counter repair; include non-returning actions and repetition before
+claiming that fix. Initial AND descriptor serialization requires explicit JSON
+array/object tags; setup failure/source are retained without product RED credit.
+Packet active-edge-body-lua-intake.json.gz retains all epochs/oracles/commands.
+
+The bounded Default/OR functional prerequisite permits Number33.3 next. Formal
+source/context/backend closure remains canonical23.4; no focused parent-admission
+claim or waiver of sparseAND39, earlyLS38, generated boundary37 follows.

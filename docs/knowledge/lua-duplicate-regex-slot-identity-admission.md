@@ -50,3 +50,14 @@ Related: [[duplicate-regex-slot-identity-contract]],
 [[lua-runtime-matching-state]], [[lua-runtime-rule-interpreter]],
 [[lua-generated-source-v2-rule-local-cursor]], and
 [[FUTURE-PARITY-BACKLOG]].
+
+## October28 bounded outgoing-edge choice correction
+
+TYPE-REFERENCE-BOOK.1.2.23.3.36.4 supersedes the full-catalog body-choice detail:
+Default/OR action-edge choice now uses outgoing compiled indices in authored
+order through existing-table M._match_body_choice, while retaining complete
+catalogs and low-level full-alternation APIs. Existing duplicate112 assertions
+pass unchanged on both installed hosts; historical full-suite counts above are
+not new measurements. Current scope: [[lua-active-edge-body-candidate-ownership]].
+Sparse AND required-sequence ownership is separately confirmed under39; existing
+duplicate fixtures with dense aligned edges do not establish that sparse case.

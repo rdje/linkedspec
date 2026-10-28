@@ -28,7 +28,7 @@ Unless an example includes a `Top::` wrapper, treat it as a rule-paragraph fragm
 Selecting a rule starts that rule's handler and mode-driven loop; selection alone does not test the selected rule's
 own regex. Each outgoing `->` match edge selects the regex slot owned by its written target. A rule's own regex
 participates when a self-edge or another incoming match edge targets that rule. A blind `=>` call enters its target
-without selecting one of the target's regex slots. Rust, Dart, and Julia Default/OR body choice now uses only outgoing edge candidates, so a broad entry declaration cannot shadow an unrelated body edge; complete declared catalogs remain available to incoming selectors and boundary lookahead.
+without selecting one of the target's regex slots. Rust, Dart, Julia, and safe Lua Default/OR body choice now uses only outgoing edge candidates, so a broad entry declaration cannot shadow an unrelated body edge; complete declared catalogs remain available to incoming selectors and boundary lookahead. Lua AND bodies still have a separate sequence defect: after an incoming `/H/` on `Hcat`, a body targeting only `/cat/` can retest declaration slot `0` and miss. That repair is tracked before admission; the Default/OR fix does not change AND execution.
 
 For example, this entry rule's loop tests `Done`'s `/[a-z]+/`; `Top` needs and owns no regex for that dispatch:
 
@@ -404,7 +404,7 @@ LE { ... }
 continue matching
 ```
 
-Use `LS { ... }` when code must run after the local match is known but before the action body for that slot. With `@capture_gaps`, Dart and Julia currently leave the live cursor before the selected match when `LS` returns before the edge runs. For entry `/H/` and selected `/cat/` on `Hcat`, they report position `1`, while Perl reports `4`. This separate lifecycle cursor defect is tracked for repair before admission.
+Use `LS { ... }` when code must run after the local match is known but before the action body for that slot. `@capture_gaps` installs the selected match before `LS`; unflagged native handlers preserve historical timing and can run `LS` before selection. With `@capture_gaps`, Dart, Julia, and safe Lua currently leave the live cursor before the selected match when `LS` returns before the edge runs. For entry `/H/` and selected `/cat/` on `Hcat`, they report position `1`, while Perl reports `4`. This separate lifecycle cursor defect is tracked for repair before admission.
 
 Use `LE { ... }` when code must run after local action processing for a slot and before the handler continues.
 

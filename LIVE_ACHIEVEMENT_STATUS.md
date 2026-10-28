@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
+Safe dual-host Lua choice92pass per host; bounded prerequisite done, Number33.3 resumes next.
 
 ## Latest Completed Slice
 
-Julia outgoing-edge body choice independently repaired through shared _match_runtime_choice at ordinary/gap sites, reusing compiled outgoing edge indices in authored order. Preserve earliest-start/first-authored priority, full catalogs, original captures/indices, indexed-first/AND/blind/no-edge/cursor/frame/formats. Refined unchanged-production58pass/34RED -> first candidate92pass native/reconstructed SpecFile/generated-plan/fresh emitted Module, exact in-memory slot2 traces and source/capture/Unicode/gap/catalog/mode/priority controls; selected duplicate121/rule-local104/capture collection12 pass under depwarn=error. Initial merged JSON/stderr instrument ambiguity is resolved by separate streams before production; final normal test removes only unasserted diagnostic with exact assertion equality/syntax guard and normal registration. Independent Hcat probe confirms Julia cursor1 on four routes versus identical-source Perl native/fresh4; own38.2 before admission without changing cursor code or blessing nulls. Packet/cards/map/target/book/roadmap/task/live/resume/history agree. No new temp owner, full suite/matrix/isolated emitted package/peer admission/push; safe Lua36.4 next.
+Safe Lua Default/OR outgoing-edge choice independently repaired through existing-table M._match_body_choice at ordinary/gap sites, reusing cached compiled edge indices in authored order. Earliest-start/first-authored ties and full catalogs/indices/captures, indexed-first/AND/blind/no-edge/cursor/frame/gap/formats remain. Each installed PUC5.5.1/LuaJIT2.1.1788460057 host92checks/34RED -> first candidate92pass on native/restored SpecFile/plan/fresh loaded module; exact source/Unicode/gap/catalog/mode/priority and in-memory slot2 traces pass. Selected duplicate112/rule-local108/capture checks pass per host; loadfile/normal registration hold without new persistent chunk locals or temp owners. Independent Hcat earlyLS cursor1 versus Perl4 is owned38.3. Separate sparse AND source returns reference BODY versus dual-host null; compiled sole edge1 versus traced required0 isolates sequence-catalog gap, owned39 after33/35/34 before38/37/full23.4. Initial descriptor JSON tagging setup failure is retained without product RED credit. Packet/cards/map/target/book/roadmap/task/live/resume/history agree. Bounded functional prerequisite permits Number33.3; formal parent/source/context admission stays canonical23.4. No declared5.4/full suite/matrix/isolated package/push claim.
 
 ## Next Action
 
-Activate independent safe Lua active-edge intake36.4 from this clean Julia boundary. Use frozen36.0 target and only safe supported patterns on installed PUC/LuaJIT hosts; establish native/restored SpecFile/plan/fresh module wildcard/literal/reverse-priority/earliest/source-slot/mode/catalog/edge-payload gap baseline before runtime edits. Repair only confirmed candidate role gap through existing owner, preserve full catalogs, indexed-first/AND/blind/no-edge/cursor/frame/format contracts and Lua chunk-local limits; in-memory traces avoid new temp owners. Independently probe Hcat early-LS cursor if source recovery suggests same issue, own any confirmed peer under38 before admission. Focused compile/check/book/docs/commit then Number33.3. No full gate/push; authorized --no-verify workflow continues.
+Activate independent Dart readonly capture-boundary Number33.3 from this clean completed bounded Default/OR prerequisite. Read frozen capture-boundary-number-results.md and shared11/current getter/alias source/consumer/function/callback contracts; establish native/restored SpecFile/plan/fresh supported-route baseline before any runtime edit. Preserve six canonical/three aliases, zero/default/String-Array-selection/snapshot-reset and actual legacy/error/function/callback policies; implement only a confirmed narrow method-source gap and targeted-check/commit, then Julia33.4/safe Lua33.5. SparseAND39, earlyLS38 and generated boundary37 are scheduled after33/35/34 before full23.4/push; no scope pivot or null rebasing. Authorized focused --no-verify continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.36.4` — Safe dual-host Lua choice92pass per host; bounded prerequisite done, Number33.3 resumes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.3` — Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1` — Rust trace-test storage owner removed; exact trace/census green, independent Julia36.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` — Dart active-edge repair13pass; immediate Rust trace-test storage followup before independent peers.
@@ -29,7 +30,6 @@ Activate independent safe Lua active-edge intake36.4 from this clean Julia bound
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.1` — Perl immediate with-result bracket composition repaired/targeted-checked; independent Rust32.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.9` — Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` — Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
 
 ## History
 

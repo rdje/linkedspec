@@ -4923,6 +4923,31 @@ local function match_specific(engine, rule, index, ctx, execution_policy)
   )
 end
 
+function M._match_body_choice(engine, rule, ctx, execution_policy)
+  local alternation = engine.regex_cache[rule.label]
+  if not alternation then
+    alternation = matching.compile_runtime_regex_alternation(rule)
+    engine.regex_cache[rule.label] = alternation
+  end
+  if execution_policy.uses_and_execution or #rule.action_edges == 0 then
+    return alternation:match(ctx.input, ctx.cursor_byte, execution_policy.cursor_policy)
+  end
+  -- Full catalogs also serve entry selectors and boundary lookahead. Body
+  -- choice considers only outgoing compiled slots, in authored edge order.
+  local selected
+  for _, edge in ipairs(rule.action_edges) do
+    local candidate = match_specific(engine, rule, edge.regex_index, ctx, execution_policy)
+    if candidate ~= nil then
+      -- No later edge can start sooner; equal starts retain this edge.
+      if candidate.byte_start == ctx.cursor_byte then return candidate end
+      if selected == nil or candidate.byte_start < selected.byte_start then
+        selected = candidate
+      end
+    end
+  end
+  return selected
+end
+
 function M.assert_ordered_regex_slot_identity(
     rule_label,
     expected_target_rule,
@@ -5094,12 +5119,7 @@ local function regex_once(
   elseif entry_index > 0 and entry_index < #rule.regex_patterns then
     one = match_specific(engine, rule, entry_index, ctx, execution_policy)
   else
-    local alternation = engine.regex_cache[rule.label]
-    if not alternation then
-      alternation = matching.compile_runtime_regex_alternation(rule)
-      engine.regex_cache[rule.label] = alternation
-    end
-    one = alternation:match(ctx.input, ctx.cursor_byte, execution_policy.cursor_policy)
+    one = M._match_body_choice(engine, rule, ctx, execution_policy)
   end
   if not match_preselected then
     trace_regex_decision(
@@ -5359,16 +5379,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
       local before = ctx.cursor_byte
       local selected_match = nil
       if capture_gaps then
-        local alternation = engine.regex_cache[rule.label]
-        if not alternation then
-          alternation = matching.compile_runtime_regex_alternation(rule)
-          engine.regex_cache[rule.label] = alternation
-        end
-        selected_match = alternation:match(
-          ctx.input,
-          ctx.cursor_byte,
-          execution_policy.cursor_policy
-        )
+        selected_match = M._match_body_choice(engine, rule, ctx, execution_policy)
         trace_regex_decision(
           ctx,
           rule,

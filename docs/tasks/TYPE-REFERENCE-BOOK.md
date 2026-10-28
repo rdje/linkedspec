@@ -7220,12 +7220,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored feature/defect target, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36`
-  Status: `in_progress` / P1 before33.3; Rust/Dart and test-storage followup complete, independent peers next
+  Status: `in_progress` / bounded Default/OR functional children36.0-.4/36.1.1 complete; formal source/context/backend closure23.4 remains
   Goal: Reconcile and repair outgoing-edge regex candidate ownership so untargeted declarations cannot consume body input and suppress a valid edge.
   Reproduction: Exact constant-payload Top-to-Value grammar from33.2 has declared Value slots0 named head ..,1 colon,2 cat and only outgoing Value[2] return BODY. Input alpha beta :cat. Perl public Get returns[BODY]; current Rust native/restored/plan shared producer controls return[null]. Public native runtime trace selects untargeted0 at bytes4-6 and6-8 with acode child=none, consuming :c/at; literal Unicode/ASCII entry heads reach slot2 and returnBODY. This is not a Number getter defect or an invalid grammar.
   Root / impact: Compiled descriptors correctly retain only acode regex_idx2 but both Rust rule-body matcher construction sites compile full rule.regex_patterns; unmatched declared slots can win alternatives and consume input. Canonical action-and-lifecycle-placement says outgoing edges select their target slots. Own complete regex catalogs remain necessary for incoming entry selection, explicit selectors and boundary helpers; do not truncate shared compiled catalogs or change pins/schema. Native Engine and GeneratedPlanExecutor share select_native_match and need one choice-eligibility repair; the earlier separate recognition-path wording is corrected by36.0.
   Schedule / ownership:36.0 freezes exact Default/OR active-edge/body candidate contract, source-slot identity and mode exclusions after33.2 commits clean;36.1 repairs Rust,36.2-.4 independently intake/repair Dart/Julia/safe Lua as needed, then resume33.3. No assumption about another backend failure. Keep original wildcard repro as explicit dormant RED until36.1 removes its ignore; no admission/push with this defect. Preserve separate startup27 no-edge lifecycle reconciliation, AND/blind semantics, frame/cursor/gap/provenance/selector/codeblock contracts and complete boundary-rule catalogs.
   Children:36.0 authority/target,36.1 Rust native/generated-plan repair,36.2 Dart,36.3 Julia,36.4 safe Lua independent intake/repair.
+
+  Current boundary: Bounded functional prerequisite no longer blocks33.3. Formal parent/admission closure belongs canonical23.4. Sparse AND sequence ownership is separately confirmed for Lua under39, with peer intake independent; preserving AND in this Default/OR target never grants its admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.0`
   Status: `completed`
@@ -7313,14 +7315,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.3 - select Julia body candidates from authored outgoing edges`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.4`
-  Status: `pending` / P1 after36.0
-  Goal: Independently implement/check safe available Lua outgoing-edge body candidate ownership.
-  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
-  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
-  Planned verification tier: focused
-  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
-  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+  Status: `completed`
+  Goal: Independently establish and repair safe installed-host Lua outgoing-edge body choice ownership.
+  Authority: Frozen36.0 Default/OR target and existing slot/mode/source/gap owners. Packet active-edge-body-lua-intake.json.gz retains actual baseline/candidate/source/version/trace and independent adjacent source probes.
+  Verification tier: `focused`
+  Focused checks: Each PUC5.5.1/LuaJIT2.1.1788460057 host92 checks/34RED -> first candidate92pass native/restored SpecFile/plan/fresh loaded module. Selected duplicate112/rule-local108 and capture selection checks pass per host; interpreter/runner loadfile and normal registration/book/map/history/manual continuity. No malformed regex/full suite/matrix.
+  Canonical trigger: Bounded Default/OR children allow Number33.3 next; formal source/context/backend closure23.4/full clean push also require pressure/declared5.4/new Perl registration, sparseAND39, earlyLS38 and generated boundary37. No schema change.
+  Claim verification: none: Finite authored safe functional/source checks and exact version receipt, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Both installed hosts/four routes return null for wildcard/cross-target/capture-gap,1 for reversed Default/OR and wrong selected-first hook;17 value rows and both traces retain untargeted slot0. Each baseline has92 checks/34failures; no invalid pattern or full runner is used.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: regex_once and capture-gaps selection each use full cached alternation. Existing match_specific preserves compiled slot identity but no shared eligible-edge choice owner exists. Catalog order includes untargeted declarations and can override authored choice priority; descriptor/source/trace separate this from Number getters.
+  - [x] **FIX**: Attach M._match_body_choice to the existing table, adding no persistent interpreter chunk-local declaration. Both choice sites reuse cached indexed edge.regex_index alternatives in authored order with earliest-start/first-authored ties and safe cursor-start short circuit. Keep complete catalogs, indexed-first/AND/blind/no-edge/cursor/frame/gap/format owners and existing error envelopes. No regex recompilation inside candidate loop.
+  - [x] **ADDRESSED (verified)**: First candidate92pass on each host/four routes covers wildcard/literal, reversed Default/OR, earliest/cross-target/no eligible edge, named/group/entry capture and Unicode3/6, colon gap2/3, complete boundary catalog, five neutral duplicate fixtures, seek/consume and exact native/generated slot2 once. In-memory traces add no temp owner; native module/runner compile and normal test registration hold. Fresh means loaded emitted module in process, not isolated package.
+  - [x] **NO REGRESSION**: Existing duplicate112/rule-local108 and capture selection checks pass per installed host. Declared5.4 proof remains LUA2.2, unsafe malformed native pattern issue stays LUA2.3. Exact Hcat early LS probes independently confirm cursor1 versus Perl4, owned38.3; no cursor change/null rebasing. A separate AND control returns reference BODY but Lua null; compiled sole edge1 versus traced required0 isolates catalog-driven sequence, owned39 before admission. Initial AND descriptor JSON tagging setup error is retained without product RED credit.
+  - [x] **LOCKSTEP**: Packet/target/current Lua and adjacent cursor/sparseAND cards/map, public book Default/OR completion with explicit remaining AND/earlyLS limits and historical unflagged LS timing, roadmap/task/live/resume/history agree. All bounded36 functional children are targeted-checked; formal source/context/backend closure stays23.4, without a focused-tier parent-admission claim. Resume33.3 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.36.4 - select safe Lua body candidates through one cached edge owner`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.37`
   Status: `pending` / P1 after bounded33/35/34, before full23.4 admission/push
@@ -7335,10 +7344,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38`
   Status: `pending` / P1 after bounded33/35/34 before37/full23.4 admission/push
-  Goal: Reconcile and repair independently confirmed Dart/Julia selected-match live cursor state before early LS return under capture_gaps.
+  Goal: Reconcile and repair independently confirmed Dart/Julia/Lua selected-match live cursor state before early LS return under capture_gaps.
   Reproduction: Exact Hcat source/producers retained in active-edge-body-dart-intake.json.gz. Top matches H, calls Value, then returns payload and caller cursor. Value selects cat under capture_gaps; LS returns gap text, match text and live cursor. Perl native/fresh returns[[empty,cat,4],4]; Dart native/plan returns[[empty,cat,1],1]. Untargeted candidates do not compete in this control, isolating cursor state from36's repair.
   Root / impact: _prepareGapCandidate installs selected registers and gap context but not cursorCodeUnit; _acceptRegexMatch writes selected end only after LS. Early LS return unwinds before that assignment, leaving caller at the entry boundary; broad incoming patterns may reconsume remaining input and append null payloads. No cursor code changed by36.2. Preserve exact return authority, gap boundary commit/discard, rollback and authored LS cursor mutations when reconciling the narrow repair.
-  Children:38.0 shared authority/target,38.1 focused Dart repair,38.2 independently confirmed Julia repair before admission. Lua is not inferred defective.
+  Children:38.0 shared authority/target,38.1 Dart,38.2 Julia and38.3 safe dual-host Lua independently confirmed repairs before admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.0`
   Status: `pending` / P1 after34 before38.1/37
@@ -7367,13 +7376,75 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4 and clean push require verified38 repair; public format/infrastructure movement separately owned.
   Planned claim verification: none: Finite authored functional/source regression, no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.3`
+  Status: `pending` / P1 after shared38.0 and peer38.1/.2, before37/full23.4/push
+  Goal: Repair independently confirmed safe Lua early-LS selected-match live/caller cursor drift on installed PUC/LuaJIT hosts.
+  Reproduction: Exact Hcat source matches the Perl oracle. Both hosts/native/restored SpecFile/plan/fresh module return[[empty,cat,1],1] instead of reference native/fresh[[empty,cat,4],4]. Source/channels retained in active-edge-body-lua-intake.json.gz. No competing untargeted pattern exists;36.4 leaves cursor code unchanged.
+  Root / acceptance: M.prepare_gap_candidate installs local registers/context but accept_match advances the live cursor only after LS. Reuse shared38.0 live-cursor versus gap-boundary/return/rollback/authored-mutation authority. Correct4/4 plus original broad-carrier values must pass, preserve sole recognition/frame/cursor owner and chunk-local limits, run safe focused dependents, update book/docs and commit before admission. Do not bless1/null suffixes or claim declared5.4 execution.
+  Planned verification tier: focused
+  Planned focused checks: Exact dual-host four-route RED/GREEN and safe direct-dependent lifecycle/return/cursor/rollback/source controls, loadfile/normal registration/book continuity; no malformed patterns/full suite.
+  Planned canonical trigger: Full23.4/final clean push requires verified38 repair and separately owned declared-host proof.
+  Planned claim verification: none: Finite authored safe functional/source regression, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39`
+  Status: `pending` / P1 after bounded33/35/34, before38/37/full23.4/push
+  Goal: Reconcile and repair sparse outgoing-edge ownership for AND body sequences while retaining complete declaration catalogs.
+  Reproduction: Top dispatches Value entry H; Value:AND declares H/cat and only ->Value[1] return BODY; input Hcat. Public Perl native/fresh returns[BODY]. Both installed Lua hosts/native/restored/plan/fresh return[null]. Compiled catalogH/cat and sole edge regex_index1/child1 are correct; trace retests required0 H at cursor1 and misses. Packet active-edge-body-lua-intake.json.gz retains exact source/oracle/emitted Perl/compiled fields/trace. Other backend failures are not inferred.
+  Root / impact: AND loops enumerate catalog positions rather than the authored required outgoing-edge sequence. The bounded36 Default/OR fix intentionally preserves AND and cannot repair its counters/sequence semantics by filtering a choice fallback. Canonical written-edge/ordered-slot authority requires a dedicated target before production; no catalog truncation, text-derived identity or new implicit entry match.
+  Schedule:39.0 freezes exact sequence/counter/entry/mode/identity and generated-family scope, then39.1 Rust/39.2 Dart/39.3 Julia independent intake/repair and39.4 confirmed safe Lua. Include non-returning actions, falsey values, reversed duplicate edge order, required-step counts, failed minimum, repetition, indexed-entry compatibility and full entry/boundary catalog controls; a constant-return case alone cannot establish complete sequence repair. Before38/37/full23.4, after current bounded feature work.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.0`
+  Status: `pending` / P1 after34 before39.1-.4
+  Goal: Freeze sparse-AND required-edge sequence/counter semantics from existing ADR0044/0047/written-edge/source/entry authority and public reference probes.
+  Acceptance: Distinguish catalog versus outgoing sequence roles, indexed-entry compatibility, direct/blind entry, lifecycle/iteration/minimum/count behavior and generated-family classification. Prove desired results with independent non-returning/reversed/falsey/repeated cases before production. No public family/schema movement hidden in an ordinary repair.
+  Planned verification tier: focused
+  Planned focused checks: Public reference/native source/descriptor/trace distinctions, exact authored expected sequence and scalar/cursor/capture values, focused book/continuity; no full matrix.
+  Planned canonical trigger: Actual public family/format authority movement separately owned; full23.4/final clean push requires complete verified39 repair.
+  Planned claim verification: none: Finite authored contract/causal distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1`
+  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Goal: Independently intake and repair Rust sparse-AND body candidate/required-sequence ownership.
+  Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
+  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Goal: Independently intake and repair Dart sparse-AND body candidate/required-sequence ownership.
+  Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
+  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Goal: Independently intake and repair Julia sparse-AND body candidate/required-sequence ownership.
+  Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4`
+  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Goal: Independently intake and repair safe installed-host Lua sparse-AND body candidate/required-sequence ownership.
+  Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
+  Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.4` | `pending` | Independently check safe Lua active-edge ownership before Number33.3. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.3` | `pending` | Resume Dart readonly capture Number feature after bounded dispatch prerequisite. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
