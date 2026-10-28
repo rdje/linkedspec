@@ -142,3 +142,17 @@ Packet rust-and-group-outcomes-intake.json.gz retains all epochs/refinements/pat
 applications with updated runtime; independent emitted package remains unassessed.
 Parent39.1.3 bounded implementation complete; broader23.4/peer/zero-width39.8/
 lifecycle SESSION27 remain open.
+
+39.1.5.0 now qualifies remaining minimum/progress/API boundaries.8 refined
+reference sources/24 native-fresh pairs agree. Rust normal9 tests1pass8fail:
+7 ordinary minimum/API groups owned.5.1,1 missing real progress guard owned
+immediate39.1.6. Public trace shows recognized Guard zero0..0 returns normally,
+Part bool at0, then misleading Value minErr; neutral progress fixture validation
+does not wire the authored runtime guard. Progress repair must precede min
+normalization, with diagnostics and ordinary/one-shot compatibility preserved.
+All8 regressions retained dormant/no success credit; required before admission.
+Full regex-adjacent E result shape is qualified separately.5.2/SESSION27: Perl
+RuleIR turns adjacent lifecycle into acode and REP collects[1,1], Rust E once1.
+Below-minimum ordinary miss remains.5.1, with legacy API change explicit.
+Refined EX/E same sentinel isolates bounds/recovery, not lifecycle phase parity.
+Packet rust-minimum-miss-intake.json.gz; no production change in this intake.

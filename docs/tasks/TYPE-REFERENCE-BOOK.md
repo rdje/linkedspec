@@ -7904,7 +7904,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored implicit-result/return controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5`
-  Status: `pending` / P1 minimum-miss reconciliation before39.2/full23.4
+  Status: `in_progress` / intake39.1.5.0 complete; progress39.1.6 before bounded minimum39.1.5.1
   Goal: Reconcile and repair ordinary Rust under-minimum failure against existing portable no-match semantics, separately from repeated-AND action returns.
   Reproduction: Value::AND{2} nonreturning sparse action with IT/E collector on HcatHcat returns[[cat],[cat]] on all3 routes; Hcat returns generic expected-at-least2-got1 Err, while current Perl returnsnull. Exact source/serialized/plan and native trace retained in refined Rust intake.
   Root/acceptance: Interpreted/generated regex and bcode minimum checks currently returnErr after ordinary input misses. Audit published mode/no-match/typed error authority before changing scope; prove a distinguishing recovery path and below-minimum/zero/empty/accepted-null/explicit-return controls. Preserve real execution/validation/progress errors and no cursor rollback policy change. Do not silently rewrite error schemas or broaden a local AND fix into unreviewed mode policy.
@@ -7914,6 +7914,58 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored minimum/no-match/diagnostic distinctions, no population measurement.
 
   Current boundary after39.1.3.1: Original explicit/nonreturn AND-acode under-minimum controls now returnnull and are active/green. Keep the retained historical Err observations dated. This owner next independently qualifies remaining regex-without-action/blind/repetition minimum paths and recovery/recognition/error distinctions; do not re-fix or infer unresolved AND-acode failure.
+
+  Activation: clean `ec72cc2511534e6e687d39138cc6788e69b757a3` after repeated AND acode group repair. Read current target/card, ADR0048 minimum-null and lifecycle authority, blind collection contract, both bcode minimum guards and no-action regex minimum guards. Existing engine unit rep_min_enforced expects an Err for a no-action regex/lifecycle shape; qualify that source's public reference/legacy boundary before changing it. First independently intake explicit repeated blind OR/AND with E override to isolate min failure from still-owned implicit collection, plus recovery/min0/accepted-null and real error distinctions. No blanket Err-to-null conversion or legacy test rewrite. Split bounded production ownership after actual reference/source evidence if required.
+
+  Children/dependencies:39.1.5.0 completes authority intake;39.1.6 fixes missing real progress error first;39.1.5.1 owns bounded min normalization;39.1.5.2 qualifies regex-adjacent lifecycle attribution/full shape with SESSION27 before full admission. Original AND-acode JSON minima are already green, not new dormant success.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0`
+  Status: `completed` / qualified minimum/API/progress intake; no production change
+  Activation: clean `ec72cc2511534e6e687d39138cc6788e69b757a3` after group outcomes39.1.3.1.
+  Goal: Freeze ordinary miss versus genuine error boundaries and qualify current legacy/lifecycle and entry-model evidence before production.
+  Verification tier: `focused`
+  Focused checks:8 refined reference sources/24 exact native-fresh pairs; Rust9 groups1pass8RED on native/restored/plan; native TraceConfig zero0..0 causal trace, existing source/helper placement diagnosis; final normal1pass8 owned dormant, exact-file format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after every new dormant regression enabled; no contract/schema/ledger promotion here.
+  Claim verification: none: Finite authored bound/recovery/null/error/source cases, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Rust throws generic minimum errors instead ofnull for ordinary misses; legacy accumulator API also throws. Real typed-progress source instead returns the outer minimum error. Refined24 reference native/fresh pairs agree, including actual typed progress rejection. Initial E-only probes retained; refined EX/E sentinels deliberately avoid unrelated phase/result differences.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Four engine minimum guards returnErr after ordinary input exhaustion. Separately, Guard's recognized0..0 repetition exits normally via ordinary no-progress break; the existing validate_recognition_progress is only exercised by neutral fixtures, not engine/runtime authored execution. Trace shows Guard Ok array ->Part bool ->Value min Err. Legacy regex-adjacent E is acode in Perl RuleIR, then REP_ACODE rewrites return to assignment/collect, versus Rust rule-E; full-shape attribution stays separate.
+  - [x] **FIX**: Own immediate runtime progress39.1.6 before bounded min normalization39.1.5.1. Require preserved real error code/fields, ordinary termination and max-bound ordering; min fix must retain consumed cursor/caller state, actual match status, null payloads and explicit legacy API migration.39.1.5.2/SESSION27 owns full regex-adjacent E attribution before admission. No production edit in this intake.
+  - [x] **ADDRESSED (verified)**: Intake complete, defects remain scheduled/open. Normal target keeps1 healthy min0 group active and8 actual regressions explicitly dormant:7 min/API under39.1.5.1,1 progress under39.1.6. All required before admission, never success credit. Reference/plain/generated observations and current Rust full-result compatibility control are distinguished.
+  - [x] **NO REGRESSION**: Engine/runtime/recognition authority/emitter/schema unchanged. Final focused normal target1pass8ignored and format pass; no broad CI or fresh emitted Rust package claim. Existing sole structural blind-result regression remains separately owned. Exact raw source/producers/trace/results retained.
+  - [x] **LOCKSTEP**: rust-minimum-miss-intake.json.gz, causal card/target/book/roadmap/task/live/resume/history record priority and limits. Correct stale book Hcat-as-Lua-defect sentence against already-frozen structural authority, without inferring peer success. Next39.1.6 then39.1.5.1;39.1.5.2/SESSION27 before full admission. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0 - isolate ordinary minimum misses and missing recognition progress guard`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1`
+  Status: `pending` / P1 after39.1.6, before39.1.4.2/peers/admission
+  Goal: Return ordinary no-match for unmet repetition minima while preserving genuine errors and correct recognition outcome.
+  Evidence: minimum_miss_routes.rs contains7 actual dormant native/restored/plan/API failures from39.1.5.0. Four ordinary minimum error branches in native/generated regex/bcode owners; existing explicit choice/AND-acode JSON minima already null. Legacy engine unit rep_min_not_met_returns_error encodes older Err behavior for the same minimum grammar and needs an explicit compatibility update, not silent removal.
+  Acceptance: Freeze actual recovery, zero/positive minimum, accepted-null versus actual miss (including recognition match boolean), no rollback/unchanged consumed cursor, caller capture/return restoration, and real validation/execution/progress errors. Normalize only the proven min-failure control path. Modern value API returnsnull; legacy accumulator returns no new value, preserving its envelope. Keep full regex-adjacent E attribution/shape qualified under.5.2/SESSION27 rather than forcing unrelated alignment. Enable all7 regressions and update old unit deliberately; source/serde/plan/emitted identities unchanged.
+  Planned verification tier: focused
+  Planned focused checks: Exact7 min/API RED-GREEN plus real typed-progress guard control, recovery/null/match-status cases, changed legacy unit, scoped compile/format, book/docs/manual continuity/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; actual new policy/schema requires separate ownership before production.
+  Planned claim verification: none: Finite authored minimum/result/error/API distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.2`
+  Status: `pending` / P1 after bounded feature coverage, before full39/23.4/push; associated SESSION-STARTUP-READING.27
+  Goal: Reconcile regex-adjacent lifecycle attribution and full-result shape across current backends.
+  Reproduce: Top::OR{2,}, /hello/, E return1 on hello hello yields[1,1] native/fresh Perl at11 but1 on Rust native/restored/plan; below minimum hello world isnull in Perl versus current RustErr. The minimum boundary is.5.1; full result attribution belongs here/SESSION27. Exact source/emitted/input/results retained with.5.0.
+  Root/qualification: Perl RuleIR::_collect_rule_ir routes lifecycle immediately following RE to acode for REP/OR; REP_ACODE rewrites return into per-hit assignment then collects. Rust places E on the rule. Qualify canonical placement/compatibility authority and descriptor ownership before changing either backend; do not call the observed Perl lowering a defect without that reconciliation. Preserve identities and unrelated lifecycle/edge behavior; independently assess peers.
+  Planned verification tier: focused
+  Planned focused checks: Public native/fresh and all relevant typed carriers, placement/blank-member/action/regex controls, exact AST/descriptor attribution, scoped repair and book/docs/commit.
+  Planned canonical trigger: Any actual authority change separately canonical before rollout; full39/23.4/final clean push.
+  Planned claim verification: none: Finite authored placement/result distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6`
+  Status: `pending` / P1 immediate prerequisite before39.1.5.1/peers/admission
+  Goal: Enforce existing cursor-only recognition repetition progress in actual native/generated execution.
+  Reproduce: minimum_miss_routes.rs a_real_progress_error_is_not_converted_to_a_miss: Part I recognizes Guard:+ /(?=a)/ returningzero on inputa. Perl native/fresh throws recognition_zero_progress_repetition at0. Rust native/restored/plan instead reports Value minimum2/got1. Public native trace shows Guard regex0..0 exits Ok array, Part exits bool at0, Value counts one then minErr.
+  Root: Engine native/generated acode/bcode repetition uses silent ordinary progress break and can exit at max before consulting a recognition-specific guard. validate_recognition_progress in recognition_transaction.rs validates neutral fixtures but is not wired into authored engine/runtime execution. Do not infer runtime enforcement from the unchanged neutral fixture test or historical12-test admission.
+  Acceptance: Wire a typed private live guard at accepted repetition/group finalization before max-bound and ordinary zero-progress exits, only in the accepted recognition context. Preserve canonical code/stage/rule/origin/start/end fields, current scope/cancellation cleanup, ordinary zero-progress termination, legal consuming repetitions and one-shot zero-width recognition. Audit all native/generated acode/bcode owners and early AND group return path. Do not use fixture-shaped JSON as the new production interface, change public schemas or broaden recognition-safe effects. Enable exact dormant progress regression and retain distinguishing max1/unbounded/AND/OR/blind/ordinary/one-shot/error-origin controls. Minimum and lifecycle-attribution owners remain separate.
+  Planned verification tier: focused
+  Planned focused checks: Public authored native/restored/plan RED-GREEN with typed diagnostic fields and live trace; existing neutral progress fixture remains unchanged; scoped normal controls/compile/format, book/docs/manual continuity/commit.
+  Planned canonical trigger: Existing recognition contract/schema retained; actual authority/format change separately owned canonical. Full39/23.4/final clean push after all regressions enabled.
+  Planned claim verification: none: Finite authored dynamic-progress/error/control distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8247,7 +8299,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5` | `pending` | Reconcile remaining ordinary minimum families after AND-acode group repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` | `pending` | Wire missing live recognition progress guard before ordinary minimum normalization. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

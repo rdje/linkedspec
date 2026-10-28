@@ -265,7 +265,7 @@ source execution pass the ordinary 12-test contract. Canonical CI requires and e
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract
 ```
 
-Rust's admission advanced only its rollout row; no later row was promoted early.
+Rust's admission advanced only its rollout row; no later row was promoted early. Current limitation: an authored zero-width repetition inside `recognize_once` still takes the ordinary silent progress exit instead of raising `recognition_zero_progress_repetition`; the neutral fixture check does not cover that live route. This has an immediate tracked runtime repair before ordinary minimum normalization and full admission.
 
 Dart has the same package-private end-to-end integration. The parser lowers the four forms to dedicated non-eager
 ActionIR nodes, retains static `call(Rule)` structurally, and synchronizes live UTF-16 cursor, anonymous-boundary,

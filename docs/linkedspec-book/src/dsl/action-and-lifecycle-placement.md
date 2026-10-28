@@ -26,9 +26,9 @@ Use the simple forms first. Reach for the advanced lifecycle hooks only when the
 Unless an example includes a `Top::` wrapper, treat it as a rule-paragraph fragment. Complete public examples should use the two-rule shape: a no-regex `::` entry rule dispatches to one or more normal `:` rules that own the regexes. In a dispatched normal rule, `I { ... }` sees the entry match, while `-> Rule[index] { ... }` actions run for later local slots in that rule.
 
 Selecting a rule starts that rule's handler and mode-driven loop; selection alone does not test the selected rule's
-own regex. Each outgoing `->` match edge selects the regex slot owned by its written target. A rule's own regex
-participates when a self-edge or another incoming match edge targets that rule. A blind `=>` call enters its target
-without selecting one of the target's regex slots. Rust, Dart, Julia, and safe Lua Default/OR body choice now uses only outgoing edge candidates, so a broad entry declaration cannot shadow an unrelated body edge; complete declared catalogs remain available to incoming selectors and boundary lookahead. Lua AND bodies still have a separate sequence defect: after an incoming `/H/` on `Hcat`, a body targeting only `/cat/` can retest declaration slot `0` and miss. That repair is tracked before admission; the Default/OR fix does not change AND execution.
+own regex. Each outgoing `->` match edge selects the regex slot owned by its written target. In Default/OR body choice, a rule's own regex
+participates when a self-edge targets it; AND separately retains its required structural/dependency sequence. A blind `=>` call enters its target
+without selecting one of the target's regex slots. Rust, Dart, Julia, and safe Lua Default/OR body choice now uses only outgoing edge candidates, so a broad entry declaration cannot shadow an unrelated body edge; complete declared catalogs remain available to incoming selectors and boundary lookahead. For a qualifying sparse AND child with `/H/` and `/cat/`, an incoming caller that already consumed `/H/` needs `HHcat` for the child's full structural sequence. `Hcat` lacks the child's required prefix and its miss is not evidence of a Lua defect. Cross-rule or reordered dependencies keep authored order; Rust repairs are targeted-checked and independent Dart/Julia/safe Lua intakes remain owned.
 
 For example, this entry rule's loop tests `Done`'s `/[a-z]+/`; `Top` needs and owns no regex for that dispatch:
 
