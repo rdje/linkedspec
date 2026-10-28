@@ -10,10 +10,10 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: frozen anonymous33 target; named34 and ordinary-block35 P1 owned; no production implementation
+status: bounded Perl33.1 repaired; independent other backends/full admission open; named34/block35 owned
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_capture_number_results.pl; stdout includes diagnostic prefixes before final compact JSON on current failures, use guarded final-row consumer."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/capture_boundary_number_results.t"
 ---
 
 Existing Number producers and named method controls work native/fresh: explicit
@@ -51,3 +51,25 @@ an initial whole-stream consumer fails and the refined consumer requires exactly
 one final JSON row and recognized preceding trace lines. Raw output is retained;
 no silent extraction/extra product RED. Full source/context/portable23.4 remains
 separate; ordinary feature commits use explicit director-authorized focused proof.
+
+## Current bounded Perl33.1
+
+Readonly anonymous sources now use _readonly_capture_boundary_number_value_expr:
+the original nine native expressions feed existing late Contracts callbacks and
+the narrow early MethodLowering value path. OwnerDispatch loads the owner, after
+the existing function guard; registered AST functions retain precedence. Public
+getter output bytes are unchanged for all nine native bodies and operation tags.
+Final unchanged-production7groups/1RED -> first candidate7pass, native/fresh loaded
+source/metadata. Shared11 exact Number/String/Array/zero/order/snapshot/reset output
+has real raw0/ready1 execution. Original getter/alias values and direct legacy
+Hash/take[]/KV remain. Nine function fences stay specifically unresolved/unready;
+under-fluent fallback's existing String0 was initially misexpected as undef, then
+corrected before production, with no extra semantic RED.
+
+Explicit/registered callback capture_rest_len remains typed unknown_helper on
+native/fresh; its old ready1 status joins known deferred-readiness31.6.4.4 before
+full23.4. Tests preserve runtime exclusions without locking the defective ready
+bit. No helper/body vocabulary, named-mark/advancing/void-block/bracket/root/arity/
+coercion/write/copy/schema expansion. Packet capture-boundary-number-perl-intake.json.gz
+retains exact source/refinements/channels, including probe quote and nested typed
+error encoding failures as setup only. Independent Rust33.2 follows.

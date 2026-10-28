@@ -1,7 +1,7 @@
 # Readonly anonymous capture-boundary Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.10; bounded implementation33.1-.5.
-Status: frozen additive target before production; independent backend intake next.
+Status: bounded Perl33.1 implemented/targeted-checked; independent remaining backend intake next.
 Named mark/width gaps are P1 family34; value-block capture mutation is P1 family35 immediately after33 and before34. Neither is folded into this slice.
 
 ## Existing authority and observed gap
@@ -52,7 +52,7 @@ Producer intake yields readonly widths/position/line/column1/2/1/3, rest width4.
 Frozen method target has eleven coordinates: defaults/zero, scalar/String/Array
 bridges, three compatibility sources, normalized bad-operand skip, source-before-
 later boundary-reset snapshot, resulting boundary6 and ordered AS effects. Prospective
-fixture is normative, not execution/admission proof. Independent33.1-.5 follow;
+fixture is normative. Recorded Perl33.1 execution is below; independent other backends follow;
 full source/domain/context/portable/generated admission stays23.4 after features.
 
 A preliminary bound-source calibration put start_capture_slice() inside a cat
@@ -70,3 +70,23 @@ reset. Native/fresh yield [[1,2,1,3,4,4,1,1,4],"4!",6,"S"] inside the parent res
 with raw0/ready1 and no compile/execution error. This validates getter kinds,
 through-cursor width, alias values and supported snapshot/reset inputs; it does not
 claim the prospective direct-method fixture already runs.
+
+## Bounded Perl33.1
+
+Nine original native getter bodies now share one Contracts value table with their
+existing callbacks and a narrow early method-value source hook through OwnerDispatch.
+The existing function guard and registered AST function precedence remain. Public
+primitive getter emission is byte-identical before/after, including alias operation
+tags. Final7 groups pass native/fresh loaded source, shared11 exact output and valid
+raw0/unresolved0/ready1 metadata. Nine function fences, original getter/alias values,
+legacy direct Hash/take[]/KV and unsupported explicit/registered callbacks remain.
+
+An initial under-function expected undef was wrong: the existing outer fallback
+yields String0 while the source remains specifically unresolved/unready; preserve
+that observed behavior, no extra product RED. Callback probes also need corrected
+quote delimiters and recursive typed-error encoding; setup epochs are retained.
+Excluded callback capture_rest_len still raises typed unknown_helper with legacy
+ready1 metadata; P2 readiness31.6.4.4 owns that guard before full context admission,
+with no deferred-vocabulary expansion here. Exact packet capture-boundary-number-
+perl-intake.json.gz; canonical registration23.4.1 owns the new focused test. Rust33.2
+independently follows; no full suite/matrix/isolated emitted process/admission.

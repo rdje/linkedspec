@@ -6129,6 +6129,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $method_call->{method},
   );
  }
+ # Preserve current capture coordinates, absence rules and operation tags;
+ # expose the existing readonly Number before outer fluent operands are lowered.
+ if ($method_call && $trimmed =~ /\A(?:capture_slice_(?:len|pos|line|col|until_cursor_len|length)|capture_len_from_rule_start|capture_rest_(?:len|length))\s*\(\s*\)\z/o) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_capture_boundary_number_value_expr',
+   $method_call->{method},
+  );
+ }
  if ($method_call && ($method_call->{method} eq 'and' || $method_call->{method} eq 'or' || $method_call->{method} eq 'not')) {
   my $logical_node = _parse_method_value_ast_expr($trimmed, $deps);
   my $logical_expr = $lower_ast_logical_call_node->($logical_node);

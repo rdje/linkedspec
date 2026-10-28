@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Readonly capture Number33 target frozen; adjacent P1 block35/named34 owned; Perl33.1 next.
+Perl readonly capture Number method composition repaired/targeted-checked; independent Rust33.2 next.
 
 ## Latest Completed Slice
 
-Capture/mark Number source assessment23.1.10 is complete without production changes. Explicit Value[2] native/fresh producer and bound controls work, while four authored direct chains fail actual fresh runtime/compile with raw0/unresolved0/ready1; public substitution/early entry-match-only versus late capture Contracts identify missing source lowering. Freeze readonly anonymous Number33 six canonical getters/three aliases and eleven-coordinate prospective fixture; independent Perl33.1 next. Final calibrated producers/aliases and supported bound snapshot/standalone reset pass native/fresh. Own named-mark source/false-ready gap34 and separate value-block void capture mutation/false-ready gap35 as P1 after33, with35 before34/full23.4. Initial no-edge E all0 is invalid carrier evidence, reverified via Get dumps under existing startup27; NONE stdout prefix/initial JSON consumer and failed block-mutator calibration are separately retained, not extra anonymous-reader RED. Target/packet/probe/card/map/book workaround and roadmap/task/live/resume agree. No advancing/deferred/function/mark-name/legacy-root/type/schema/coercion or copy changes, no complete matrix/runtime implementation claim. Director delegates remedy choice and demands production quality; canonical getter reuse plus actual execution/readiness checks govern implementation.
+Perl readonly capture-boundary Number composition33.1 is implemented through one shared original-getter table and a narrow early method-value source hook after current function guard. Final unchanged-production7 groups/1RED -> first candidate7pass native/fresh loaded source and metadata; shared11 exact kinds/zero/order/String-Array-selection/default/snapshot-reset flow is raw0/unresolved0/ready1 with actual execution. All9 original emitted getter bodies/native operation tags remain byte-identical. Nine pure-function helpers remain specifically unresolved/unready, including baseline outer fallback String0; legacy direct Hash/take[]/KV and typed excluded explicit/registered callback errors are intact. Excluded callback false-ready metadata is added to existing P2 owner31.6.4.4 before full23.4, without vocabulary promotion. Initial oracle and callback-probe quote/nested-error serialization refinements are retained separately, no extra product RED. Both modules syntax/book/map/history/manual continuity pass; canonical fixture registration23.4.1 owns the new test. No named-mark/advancing/void-block/bracket/body/coercion/mutation/copy/AST/schema expansion. Independent Rust33.2 next; no full suite/matrix/isolated emitted process/admission/push.
 
 ## Next Action
 
-Activate bounded Perl readonly capture-boundary Number33.1 from this clean frozen assessment. Read target/shared fixture, actual valid-producer/named/direct/alias/calibrated snapshot/error/readiness records and current source getters/method/function owners. Establish exact independent target/first-consumer/fence baseline before production. Share canonical getter expressions with existing late callbacks, retain native tags/coordinates/alias/zero/absence/function/deferred/legacy-root policies, and add only missing ordinary method-value composition. Compile/quick focused native/fresh/readiness checks/book/docs/commit, then Rust/Dart/Julia/safe Lua33.2-.5. P1 ordinary-block mutation35 then named34 follow before full23.4. Explicit --no-verify focused workflow remains authorized until pressure repair; no full suite/matrix/push.
+Activate independent Rust readonly capture-boundary Number33.2 from this clean Perl boundary. Read frozen target/shared11 fixture and current Rust source/method/function/alias/first-consumer contracts. Establish actual native/restored CompiledSpec/generated-plan producer, target, aliases, zero/snapshot/consumer/function and callback controls before production; preserve Rust policies rather than importing Perl. Add only confirmed missing compatible source flow, or regression if already supported; compile/quick targeted checks/docs/book/commit, then Dart/Julia/safe Lua33.3-.5. P1 block35 then named34 follow; P2 excluded deferred readiness31.6.4.4/full23.4/canonical registration/pressure/declared-host owners stay scheduled. Explicit --no-verify focused workflow remains authorized; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.33.1` — Perl readonly capture Number method composition repaired/targeted-checked; independent Rust33.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.10` — Readonly capture Number33 target frozen; adjacent P1 block35/named34 owned; Perl33.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.5` — All five bounded immediate with-result selection children targeted-checked; next fluent feature assessment23.1.10.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.4` — Julia selected immediate with-result kind guards repaired/targeted-checked; independent safe Lua32.5 next.
@@ -29,7 +30,6 @@ Activate bounded Perl readonly capture-boundary Number33.1 from this clean froze
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` — Dart bounded callback identity repaired/targeted-checked; independent Julia31.6.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` — Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1` — Rust callback identity repaired/targeted-checked; adjacent Rust snapshot31.6.5 next, then Dart/Julia identity.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.5` — All bounded non-nested with-result children targeted-checked; priority Rust/Dart/Julia identity31.6 next.
 
 ## History
 

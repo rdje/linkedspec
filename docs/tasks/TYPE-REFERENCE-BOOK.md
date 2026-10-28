@@ -4807,6 +4807,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Added ownership: t/computed_selection_helper_calls.t and t/computed_selection_functions.t require explicit canonical registration after the bounded computed-source rollout and before admission/push.
 
+  Canonical fixture addition from33.1: Register t/capture_boundary_number_results.t alongside the other bounded Perl feature fixtures before full23.4/admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -6973,6 +6975,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push requires this guard or an explicitly owned authorized vocabulary implementation.
   Planned claim verification: none: Finite authored metadata/execution mismatch; no population measurement.
 
+  Additional exact intake2026-10-28 from33.1: Explicit literal cb and registered contextual callback containing capture_rest_len().coalesce(0).cat("!") retain typed unknown_helper/name capture_rest_len native/fresh, but metadata is raw0/unresolved0/ready1. Current readonly capture source33 adds no deferred vocabulary. This is the same ordinary-recognition versus deferred-evaluator readiness gap; own these exact two sources alongside coalesce before full23.4. New33.1 runtime-fence tests record metadata without asserting the defective ready bit; the separate guard repair must update readiness honestly without promoting excluded helpers. Exact source/channels retained with33.1 packet.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5`
   Status: `completed`
   Priority: P1 immediately after Rust31.6.1, before Dart31.6.2 and unrelated selection/admission.
@@ -7109,21 +7113,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.32.5 - guard immediate Lua with selections through contextual source normalization`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33`
-  Status: `pending` / P1 next bounded feature and false-ready functional repair
+  Status: `in_progress` / bounded Perl33.1 implemented and targeted-checked; independent other backends follow
   Goal: Compose existing readonly anonymous capture-boundary Number readers through compatible ordinary fluent methods.
   Authority: capture-boundary-number-results.md/shared fixture and assessment23.1.10; retain existing source-boundary contracts, function fences and first-consumer policies.
   Acceptance: Independent backend baseline before production; preserve current six canonical zero-argument getters and three existing compatibility aliases, Unicode scalar spans/locations, source/frame/error/absence semantics and original runtime tags. Source evaluates once before operands, compatible scalar/String/Array bridges and defined-zero defaults work, normalized incompatible consumers skip operands. Subsequent statement-level boundary mutations leave the completed Number result intact; no advancing-reader source grants, named-mark argument changes, getter-bracket admission, body-vocabulary/schema/mutation/copy/legacy-root normalization. Full23.4 separate.
   Children:33.1 Perl,33.2 Rust,33.3 Dart,33.4 Julia,33.5 available safe Lua.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently implement/check Perl readonly anonymous capture-boundary Number result composition.
   Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
   Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
-  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
-  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+  Verification tier: `focused`
+  Focused checks: New7 groups: final unchanged-production1RED -> first candidate7pass native/fresh loaded source/metadata, shared11 exact coordinates. Original/final public getter expression JSON byte-identical for all9 native bodies/tags. Both modules syntax; book/map/history/manual continuity. No full suite/matrix or isolated emitted process.
+  Canonical trigger: Independent Rust/Dart/Julia/safe Lua33.2-.5 next; P1 block35 then named34, P2 excluded deferred readiness31.6.4.4 and full23.4/new Perl registration23.4.1/document pressure20.1/final clean push remain separate.
+  Claim verification: none: Finite authored feature/error/source-identity controls, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent frozen shared11 fails native values/fresh compilation with ready1/raw0. Initial5 groups includes one wrong under-function undef expectation; corrected String0 remains specifically unresolved/unready. Final7 groups give1 actual feature RED before production; producer/aliases, legacy root and function/callback controls stay healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering _lower_method_value_expr reaches its current early Number source branch for entry/match only; capture primitives arrive in late Contracts callbacks after outer fluent composition, leaving authored coalesce/sub in host code. Public substitution and actual fresh errors distinguish missing early source lowering from working readonly getters. Existing function guard precedes this branch, and registered AST function dispatch still precedes primitive fallback.
+  - [x] **FIX**: Share the exact original nine readonly native getter expression strings in Contracts _readonly_capture_boundary_number_value_expr and reuse them from existing callbacks. Narrow zero-argument canonical/compatibility source hook calls that owner through OwnerDispatch after current function guard. Preserve all coordinates/absence fallback/native operation tags; no duplicate native getter implementation or global name/classification/schema change.
+  - [x] **ADDRESSED (verified)**: Seven groups pass native/fresh and public metadata. Shared11 yields2/0/2/3!/5/TAIL/aliases/null/4!/6/AS; readonly kinds, defined-zero defaults, String/Array/selection bridges, skipped bad operands and supported snapshot/reset hold. Valid target is raw0/unresolved0/ready1 with actual compilation/execution success. Original9 public emitted getter bodies are byte-identical, preserving existing native operation labels.
+  - [x] **NO REGRESSION**: Nine pure-function helpers remain specifically unresolved/unready; outer fallback still returns baseline String0 without admission. Direct legacy setter Hash/take[]/KV remains exact. Explicit/registered callbacks keep typed native/fresh unknown_helper/name capture_rest_len; no deferred vocabulary grant. Their existing false-ready metadata is owned under31.6.4.4, recorded without asserting it as healthy. No named-mark/advancing/void-block/bracket/function/arity/coercion/mutation/copy/AST or serialized-field expansion.
+  - [x] **LOCKSTEP**: Book replaces the anonymous-reader workaround with direct examples and keeps named/block limits. Target/packet/causal card/map and roadmap/task/live/resume align. Initial oracle/quote/nested-error encoding refinements get no product RED credit. Canonical new Perl fixture registration23.4.1 owns t/capture_boundary_number_results.t. Independent Rust33.2 follows; no full source/context/portable admission claimed.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.1 - compose readonly capture Number getters through shared native value bodies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2`
   Status: `pending`
@@ -7205,7 +7217,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.1` | `pending` | Implement bounded Perl readonly capture-boundary Number method composition. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.2` | `pending` | Independently implement/check Rust readonly capture-boundary Number method composition. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
