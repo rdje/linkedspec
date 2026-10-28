@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
+Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
 
 ## Latest Completed Slice
 
-Plain Perl multi-regex AND with one qualifying same-owner sparse action now selects existing AND_ACODE/and_acode_seq, requiring edge-less structural slots. Reuse the existing local_structural eligibility predicate; dependency-only conditions stay unchanged, Compiler/emitter remain byte-identical. Final unchanged15 groups/22 inputs reproduce9 failures before code and all15 pass afterward, native plus independently loaded emitted package/plan. Cover required/missing prefixes, three slots, incoming/indexed full child sequence, exact0/empty/null, nonreturning effects with edge-less tail, early-return unwind, single-regex, cross-target/reversed/duplicate dependencies, repeated reset/minimum and unchanged no-edge control. Protected sparse/duplicate15 and syntax pass on byte-identical production. Retain all producer/source/result/patch epochs, including test-only syntax/pos/numeric-eq refinements without product RED credit. Explicitly correct derived default-to-existing-and_acode_seq; no new v2 family/schema/format/authority. Known E omission stays startup27 and blind/fresh recursion39.6 is next before independent peers. Book/card/target/roadmap/live/resume/history agree; focused authorized commit, no full gate/push.
+Reconciled blind fluent .push against published parent injection and push(rule) child-call overload: preserve its recursive parent call, do not invent a child-value append. Current92a6eeb95 public bounded3-case intake roots ordinary emitted guard absence: native blind push returns[BODY] at4 and direct cycle returnsnull at0, both fresh paths time out in fresh_execute; no-tail blind control returns[BODY] at4 native/fresh. All build/load/native phases complete; incomplete2 get no parity credit. Native SpecEntry guards descriptor/rule/cursor before invocation and cleans entries after eval; emitted raw CODE table lacks that wrapper. Own39.6.1 shared runtime guard extraction and39.6.2 emitted table wiring, preserving current key, typed rejection, trace topic, return/error identity, legal consuming recursion and exception cleanup. No new push/recursion/format policy. Retain actual producers/inputs/source/phases/substitution and history-roll proof. Book/card/map/target/live/resume align. Daily safe artifact cleanup44 is due at the clean boundary before39.6.1; broader gates stay at admission/push.
 
 ## Next Action
 
-Activate39.6 from clean39.5. Reconcile blind fluent .push child-result/post-call overload semantics and generated non-progress recursion through public source/descriptor/probes. Reproduce process-bounded RED before changing sole owners, preserve legal consuming recursion and other overloads, then focused compile/quick targeted check/docs/commit. Independent39.1-.4 follow, then38/37/40/41 and further feature coverage. Recheck daily safe cleanup due date at the next clean boundary; full admission/registration/pressure/startup27 remain owned.
+Activate44 for the now-due daily safe artifact cleanup: losslessly compress only completed, retained diagnostic duplicates after proving no live claim input/job needs them; verify bytes/hash before deleting exact raw copies, update the latest cleanup record, focused docs/commit. Then activate39.6.1 shared ordinary progress guard extraction, followed by39.6.2 emitted wiring and independent peers39.1-.4; preserve published blind push call semantics. Continue38/37/40/41/features; no full gate except designated admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0` — Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` — Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.0` — Sparse AND structural authority reconciled; Perl39.5/.6 precede independent peer intake.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.5` — Named local-start reversed-span guards repaired/targeted-checked; sparseAND authority39.0 next.
@@ -29,7 +30,6 @@ Activate39.6 from clean39.5. Reconcile blind fluent .push child-result/post-call
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` — Rust callable caller mark scope43.1 repaired/targeted-checked; independent Dart34.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.0` — Rust callable caller-rule-label repair43.0 frozen; production43.1 next before Dart34.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.2` — Rust ordinary named Number27 controls pass; confirmed callback mark leak43 target/repair immediately next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.34.1` — Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
 
 ## History
 

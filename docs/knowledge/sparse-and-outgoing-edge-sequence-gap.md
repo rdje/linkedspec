@@ -7,7 +7,7 @@ answers:
   - "which task owns sparse AND outgoing-edge sequence repair"
   - "does the Default OR active-edge repair also fix AND sequence ownership"
 date: 2026-10-28
-status: 39.0 reconciled and39.5 repaired/targeted-checked;39.6 before independent peers
+status: 39.0/39.6.0 reconciled and39.5 repaired; shared guard39.6.1/.2 before peers
 tags: [lua, luajit, and, regex, slots, sequence, source, trace]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.0; sparse-and-structural-authority.md and sparse-and-structural-authority-intake.json.gz retain27 authored Perl controls,24 completed pairs,3 incomplete fresh timeouts, protected3 and original/refined producer epochs. Prior36.4 Hcat discrepancy is historical, its outgoing-only diagnosis superseded."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/sparse_and_single_action.t t/sparse_and_action_slots_perl_regression.t t/duplicate_regex_slot_identity_perl_contract.t; historical phase probes recover from sparse-and-structural-authority-intake.json.gz."
@@ -24,9 +24,11 @@ Exact packet: sparse-and-single-action-intake.json.gz.
 Do not fix Lua by removing required local slots or skipping child slot0.
 
 Separate39.6 owns blind .push fresh recursion: emitted source calls Value, then
-Top inside push. Native guard terminates; fresh hard-times out. Reconcile child
-result/overload and progress semantics before repair; native null/guard behavior
-is not a healthy oracle. Exact interrupted/refined producer/source/phase epochs
+Top inside push.39.6.0 confirms that parent injection and push(rule) calls are
+existing semantics; preserve them. Native guard terminates; emitted ordinary
+cycles lack it. Shared runtime extraction39.6.1 and emitted wiring39.6.2 repair
+the gap. [[perl-emitted-ordinary-recursion-guard-gap]] has current3-case proof.
+Exact earlier interrupted/refined producer/source/phase epochs
 are retained in sparse-and-structural-authority-intake.json.gz. The target keeps
 existing structural/dependency, entry/indexed, falsey/nonreturn/group/minimum
 roles. Reversed/duplicate/cross-owner references keep compiled dependency order.

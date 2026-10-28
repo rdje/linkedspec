@@ -7646,14 +7646,60 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.5 - classify plain single-action sparse AND through structural slots`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6`
-  Status: `pending` / P1 after39.0 authority, before healthy blind/fresh peer admission
+  Status: `in_progress` / public blind fluent post-call and fresh-progress root intake
   Goal: Reconcile blind fluent .push post-call result lowering and ensure emitted execution terminates non-progressing recursive paths consistently with native execution.
   Reproduction: Top:: =>Value .push with LX copy(Top), safe Hcat/AxxBC/HcatHcat child cases. Bounded reference probe builds/loads all; native cuts Top recursive re-entry, emitted fresh execution warns deep recursion and hard exits124 after5s. Emitted line63 already invokesValue; line64 invokesTop again inside push. Retain exact native/prepared/source/phase logs and do not credit incomplete fresh values.
-  Root/acceptance: Use public post-call semantics and helper overload authority to decide correct result flow before altering lowering. Reproduce exact scope/child-result/side-effect/cursor controls and explicit non-progress recursion; fix through sole existing owners, not a timeout in product code or a global semantic escape. Known native guard suppression is not proof that source lowering is correct.
+  Root/acceptance:39.6.0 confirms parent injection plus push(rule) recursive calls are existing semantics. Preserve that lowering;39.6.1/.2 own missing ordinary guard parity. Reproduce exact scope/child-result/side-effect/cursor controls and explicit non-progress recursion; fix through sole existing owners, not a timeout in product code or a global semantic escape. Known native guard suppression is not proof that source lowering is correct.
   Planned verification tier: focused
   Planned focused checks: Process-bounded actual RED/GREEN, deterministic source/child calls/results/progress, native and independently loaded emitted parity, existing blind/action/post-call/recursion dependents and syntax/book/continuity.
   Planned canonical trigger: Full39/23.4/final clean push; any actual new post-call policy/family/format requires separate canonical authority. No hidden change to legal consuming recursion or helper vocabulary.
   Planned claim verification: none: Finite authored source/progress/result controls, no population measurement.
+
+  Activation: clean `92a6eeb9531e0f076b5842d47556bc87768dcdcc` after verified39.5, tree clean/brief0. Read published post-call and push overload contracts; Core-owned bridge already calls the child, while a rendered push(parent) is a legitimate child-call overload and re-enters parent. Reconcile fluent context/result/collection owner before choosing a repair; independently emitted progress guard remains a separate observed discrepancy within this leaf until exact public distinctions split it.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0`
+  Status: `completed` / existing blind push calls preserved; emitted ordinary guard gap isolated
+  Activation: clean `92a6eeb9531e0f076b5842d47556bc87768dcdcc`; public bounded intake only, no production edit.
+  Goal: Reconcile blind post-call semantics and freeze narrow ordinary progress parity repair.
+  Verification tier: `focused`
+  Focused checks: Public bounded3 native/source/load/fresh phases2 actual timeouts and1 completed pair, public helper substitutions, strict known trace-pair reader, existing public push/post-call/ADR0010 and native/emitted owner review, retained exact inputs, book/map/history/manual continuity/diff.
+  Canonical trigger: Full39/23.4/final clean push; no new language/format/recursion policy. Shared extraction39.6.1 and emitted wiring39.6.2 remain implementation owners.
+  Claim verification: none: Finite authored recursion/source/termination distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: At92a6eeb95 native blind push returns[BODY]/4 and bare direct cycle returnsnull/0; both fresh executions hard-time out. Suffix-free blind control returns[BODY]/4 native/fresh. All three build/load/native phases complete; incomplete2 carry no parity credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Core injects the parent into blind fluent calls; published push(rule) intentionally calls it. Public substitution and source confirm that meaning, so parent selfcall alone is no lowering defect. Native SpecEntry wraps descriptor/rule/cursor re-entry and typed scope rejection; Compiler standalone CODE table lacks that ordinary guard. Existing typed InvocationGuard does not cut unscoped cycles.
+  - [x] **FIX**: Preserve call semantics; target one shared RecognitionTransactionRuntime scope guard39.6.1 and emitted table wrapping39.6.2. Keep existing key, pre-invocation typed rejection, trace topic, cleanup/return/error/control identity and consuming recursion; no product timeout, invented value append or new policy.
+  - [x] **ADDRESSED (verified)**: Three exact input/source/phase/status rows and helper substitutions distinguish missing ordinary guard from broken child matching or blanket post-call failure. Planned native/fresh direct/mutual/consuming/cleanup/typed dependents are owned before peer admission; no implementation completion claimed.
+  - [x] **NO REGRESSION**: No production change or redefinition of push/frames/format. Current proper child Value uses repaired AND family. Strict reader preserves exact native guard traces and rejects unknown output; fresh timeouts are incomplete. Earlier source packets remain historical, not refreshed or silently overwritten.
+  - [x] **LOCKSTEP**: Target/card/map/book/task/live/resume/history and exact retained producers agree on39.6.1/.2. Due daily cleanup44 is owned next at this clean boundary; registration/pressure/startup27/full admission remain separate. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0 - preserve blind push calls and isolate emitted progress-guard repair`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.44`
+  Status: `pending` / daily cleanup due2026-10-28T11:55:33.267350Z at next clean boundary
+  Goal: Losslessly compress only completed retained diagnostic duplicates; verify exact decompressed bytes/hash before removing each raw copy and update docs/ARTIFACT_CLEANUP.md latest-only record.
+  Scope: No broad cache, evidence, submodule, other-repository or ambiguous artifact deletion. Check exact live claim inputs/jobs first; leave protected historical inputs recoverable. Existing broad216GiB cleanup stays historical and deferred24 unchanged. Resume39.6.1 immediately after focused cleanup commit.
+  Planned verification tier: focused
+  Planned focused checks: Exact selected file census and retained packet/input closure, lossless compression/decompression/hash equality, raw removal/residue and latest record, book/continuity/history/diff; no infrastructure change or full gate.
+  Planned canonical trigger: Full admission/final clean push; no policy/tooling/store migration.
+  Planned claim verification: none: Exact named artifact byte/hash identities only, no population or space-recovery measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1`
+  Status: `pending` / after39.6.0 before emitted wiring
+  Goal: Extract the current ordinary descriptor/rule/cursor progress guard into one shared runtime owner with exception-safe active-entry cleanup, preserving native cuts, typed recognition/observation rejection, trace topic and consume-before-recurse behavior.
+  Scope: Preserve current key and scalar native invocation/error delivery, no new source/frame/domain/helper/format policy. Reuse the existing RecognitionTransactionRuntime owner; generated callers consume the same guard next. Reject before invocation entry as current native behavior requires.
+  Planned verification tier: focused
+  Planned focused checks: Native direct/mutual cycles, legal consuming recursion, repeated parser use, exception/control-object cleanup, context-free and typed recognition/observation dependents; compile and quick targeted check, docs/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; no ordinary full suite.
+  Planned claim verification: none: Finite authored recursion/cleanup controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.2`
+  Status: `pending` / after shared guard39.6.1 before independent peers
+  Goal: Apply the shared ordinary guard to all standalone emitted rule entrypoints once at descriptor construction, before execution, so direct/mutual/no-progress calls terminate while legal consuming recursion and blind fluent semantics remain intact.
+  Scope: Existing generated v2 fields/families and call targets remain unchanged. Every rule table call must pass the same runtime guard before invocation frames; preserve return/error/control identity and release entries after early return/exception. Do not add product timeouts or rewrite blind .push into an invented value append.
+  Planned verification tier: focused
+  Planned focused checks: Process-bounded actual RED/GREEN for ordinary cycles and three retained blind failures, native/fresh no-tail and consuming/error/cleanup controls, typed recognition/observation dependent cases, exact native/emitted source/plan and book/docs/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; no new v2 policy/format.
+  Planned claim verification: none: Finite authored recursion/parity/error controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -7996,7 +8042,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.6` | `pending` | Reconcile and repair blind post-call child-result/fresh non-progress recursion before independent peer intake. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.44` | `pending` | Complete due safe daily cleanup, then shared guard39.6.1 and emitted wiring39.6.2. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

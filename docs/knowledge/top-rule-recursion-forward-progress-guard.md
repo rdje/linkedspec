@@ -139,3 +139,9 @@ gap into two independent layers:
 - Related: [[top-rule-is-ordinary-rule-entered-first]], [[spec-top-rule-no-regex-two-rule-minimum]],
   [[lispish-corpus-catastrophic-backtracking]], [[cross-variant-output-parity]],
   [[cursor-transaction-safety-audit-plan]]
+
+Current39.6.0 explicitly reproduces the standalone omission at92a6eeb95:
+native ordinary cycles cut, emitted cycles time out; no-tail blind control
+agrees. [[perl-emitted-ordinary-recursion-guard-gap]] owns shared runtime
+extraction39.6.1/emitted wiring39.6.2. Preserve existing blind fluent parent
+injection and push(rule) calls; no implicit child-value append policy.

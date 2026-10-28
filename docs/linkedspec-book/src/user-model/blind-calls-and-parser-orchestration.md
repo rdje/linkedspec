@@ -305,7 +305,7 @@ store the child result as the current blind-call entry
 run the attached post-call block
 ```
 
-Fluent post-call chains are compact sugar over the same idea:
+Fluent post-call chains inject the parent rule label into helper-style calls. In particular, `.push` means `push(Parent)`, which calls `Parent` recursively; it does not merely append the child value already returned. A plain blind call already collects child results. Current native Perl cuts non-progressing recursion, while standalone emitted ordinary cycles still lack that guard and are under repair. General return payloads remain compact sugar over the same post-call model:
 
 ```text
 Wrapper::AND
