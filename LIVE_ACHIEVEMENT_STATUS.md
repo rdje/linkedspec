@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl readonly capture Number method composition repaired/targeted-checked; independent Rust33.2 next.
+Rust capture Number methods already compatible; P1 active-edge dispatch36 prerequisite immediately next.
 
 ## Latest Completed Slice
 
-Perl readonly capture-boundary Number composition33.1 is implemented through one shared original-getter table and a narrow early method-value source hook after current function guard. Final unchanged-production7 groups/1RED -> first candidate7pass native/fresh loaded source and metadata; shared11 exact kinds/zero/order/String-Array-selection/default/snapshot-reset flow is raw0/unresolved0/ready1 with actual execution. All9 original emitted getter bodies/native operation tags remain byte-identical. Nine pure-function helpers remain specifically unresolved/unready, including baseline outer fallback String0; legacy direct Hash/take[]/KV and typed excluded explicit/registered callback errors are intact. Excluded callback false-ready metadata is added to existing P2 owner31.6.4.4 before full23.4, without vocabulary promotion. Initial oracle and callback-probe quote/nested-error serialization refinements are retained separately, no extra product RED. Both modules syntax/book/map/history/manual continuity pass; canonical fixture registration23.4.1 owns the new test. No named-mark/advancing/void-block/bracket/body/coercion/mutation/copy/AST/schema expansion. Independent Rust33.2 next; no full suite/matrix/isolated emitted process/admission/push.
+Rust readonly capture Number33.2 is independently method-compatible; runtime unchanged. Initial shared/producer controls[null] reveal a distinct valid-source dispatch defect, not Number RED. Public constant BODY source, compiled descriptors and native trace show untargeted slot0 consumes :c/at before written2; Perl returns[BODY]. Own P1 family36 immediately next before33.3. Shared Number entry head changes only to exact Unicode alpha beta, retaining input/anonymous boundary and all11 expected bytes; Perl UTF-8 fixture target1 native/fresh/raw0/ready1 passes. Final Rust5 normal tests pass native/restored CompiledSpec/plan, original9 aliases/snapshot, legacy4/[]/KVT, explicit callback1! and strict registered/user-function state fences. One owned dispatch regression is ignored in normal run and explicitly executed1RED null versus BODY; never counted healthy, to be enabled36.1. Packet/active-edge intake/causal cards/map/book current caveat and roadmap/task/live/resume agree. No runtime source fix, global source-context/backend admission, full suite/matrix/isolated emitted package or push claim.
 
 ## Next Action
 
-Activate independent Rust readonly capture-boundary Number33.2 from this clean Perl boundary. Read frozen target/shared11 fixture and current Rust source/method/function/alias/first-consumer contracts. Establish actual native/restored CompiledSpec/generated-plan producer, target, aliases, zero/snapshot/consumer/function and callback controls before production; preserve Rust policies rather than importing Perl. Add only confirmed missing compatible source flow, or regression if already supported; compile/quick targeted checks/docs/book/commit, then Dart/Julia/safe Lua33.3-.5. P1 block35 then named34 follow; P2 excluded deferred readiness31.6.4.4/full23.4/canonical registration/pressure/declared-host owners stay scheduled. Explicit --no-verify focused workflow remains authorized; no full suite/matrix/push.
+Activate P1 outgoing-edge regex candidate authority36.0 from this clean Rust Number boundary before33.3/further features. Read canonical edge/entry/mode/slot/source/recognition/trace contracts and exact constant BODY Perl/Rust descriptors/traces/explicit dormant RED. Freeze a bounded shared body-candidate projection target preserving full entry/selector/boundary catalogs, original regex_idx versus child_regex_idx, duplicate slot ids, frame/gap/cursor/errors/formats and existing AND/blind/no-edge startup27 boundaries. Then implement Rust36.1 and independently intake Dart/Julia/safe Lua36.2-.4, enabling the owned regression before admission; resume33.3 after prerequisite. Focused --no-verify workflow remains explicitly authorized; no full suite/matrix/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.33.2` — Rust capture Number methods already compatible; P1 active-edge dispatch36 prerequisite immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.1` — Perl readonly capture Number method composition repaired/targeted-checked; independent Rust33.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.10` — Readonly capture Number33 target frozen; adjacent P1 block35/named34 owned; Perl33.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.32.5` — All five bounded immediate with-result selection children targeted-checked; next fluent feature assessment23.1.10.
@@ -29,7 +30,6 @@ Activate independent Rust readonly capture-boundary Number33.2 from this clean P
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` — Dart bounded callback identity repaired/targeted-checked; independent Julia31.6.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` — Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.1` — Rust callback identity repaired/targeted-checked; adjacent Rust snapshot31.6.5 next, then Dart/Julia identity.
 
 ## History
 

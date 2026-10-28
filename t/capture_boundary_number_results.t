@@ -10,7 +10,7 @@ my $json = JSON::PP->new->canonical->allow_nonref;
 my $sequence = 0;
 sub read_file {
  my ($path) = @_;
- open my $fh, '<', $path or die "cannot read $path: $!";
+ open my $fh, '<:encoding(UTF-8)', $path or die "cannot read $path: $!";
  local $/; my $text = <$fh>; close $fh or die $!; return $text;
 }
 sub error_value {
@@ -60,6 +60,7 @@ sub observe_source {
 }
 sub check_source {
  my ($label, $source, $input, $expected, $rule, $unsupported) = @_;
+ return if @ARGV && !grep {$_ eq $label} @ARGV;
  $unsupported //= [];
  subtest $label => sub {
   my $actual = observe_source($source, $input, $rule);
@@ -104,6 +105,7 @@ for my $case (
  ['explicit callback keeps its excluded source fence', q~Top:: I {cb={||return(capture_rest_len().coalesce(0).cat("!"))};return(cb())}~],
  ['registered callback keeps its excluded source fence', q~fn apply(callback: codeblock){return(callback())} Top:: I {return(apply(){return(capture_rest_len().coalesce(0).cat("!"))})}~],
 ) {
+ next if @ARGV && !grep {$_ eq $case->[0]} @ARGV;
  subtest $case->[0] => sub {
   my $actual = observe_source($case->[1], 'x', 'Top');
   diag('CAPTURE_NUMBER_CALLBACK ' . $json->encode($actual));

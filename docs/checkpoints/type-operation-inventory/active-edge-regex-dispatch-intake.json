@@ -1,0 +1,539 @@
+{
+  "base": "aba15c5f13764f74d167ec0d62bbe07ee122db71",
+  "input": "αβ:cat",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.36",
+  "perl": {
+    "actual": [
+      "BODY"
+    ],
+    "error": null,
+    "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>..)/\n /:/\n /cat/\n -> Value[2] {return(\"BODY\")}\n"
+  },
+  "raw_source_packet": "capture-boundary-number-rust-intake.json.gz",
+  "rust": {
+    "literal_ascii": {
+      "active_dispatch_indices": [
+        2
+      ],
+      "compiled": {
+        "functions": [],
+        "rules": [
+          {
+            "acode_dispatch": [
+              {
+                "child_label": "Value",
+                "child_regex_idx": 0,
+                "code": null,
+                "fluent_chain": [
+                  [
+                    "push",
+                    ""
+                  ]
+                ],
+                "has_parent_regex": false,
+                "line": 2,
+                "regex_idx": 0,
+                "selector_kind": "unindexed",
+                "source_id": "inline"
+              }
+            ],
+            "bcode_dispatch": [],
+            "dependency_refs": [
+              {
+                "idx": 0,
+                "label": "Value"
+              }
+            ],
+            "ecode": null,
+            "excode": null,
+            "is_top": true,
+            "itcode": null,
+            "label": "Top",
+            "lecode": null,
+            "lscode": null,
+            "lxcode": {
+              "statements": [
+                {
+                  "expr": {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "Top"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "copy"
+                      }
+                    ],
+                    "kind": "call",
+                    "name": "return"
+                  }
+                }
+              ]
+            },
+            "mode": "Default",
+            "preamble": null,
+            "regex_patterns": [
+              "(?<head>ab)"
+            ],
+            "regex_slots": [],
+            "rep_max": null,
+            "rep_min": 0
+          },
+          {
+            "acode_dispatch": [
+              {
+                "authored_selector": 2,
+                "child_label": "Value",
+                "child_regex_idx": 2,
+                "code": {
+                  "statements": [
+                    {
+                      "expr": {
+                        "args": [
+                          {
+                            "kind": "string",
+                            "value": "BODY"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "return"
+                      }
+                    }
+                  ]
+                },
+                "fluent_chain": [],
+                "has_parent_regex": false,
+                "line": 8,
+                "regex_idx": 2,
+                "selector_kind": "numeric",
+                "source_id": "inline"
+              }
+            ],
+            "bcode_dispatch": [],
+            "dependency_refs": [
+              {
+                "authored_selector": 2,
+                "idx": 2,
+                "label": "Value",
+                "selector_kind": "numeric"
+              }
+            ],
+            "ecode": null,
+            "excode": null,
+            "is_top": false,
+            "itcode": null,
+            "label": "Value",
+            "lecode": null,
+            "lscode": null,
+            "lxcode": null,
+            "mode": "Default",
+            "preamble": null,
+            "regex_patterns": [
+              "(?<head>ab)",
+              ":",
+              "cat"
+            ],
+            "regex_slots": [
+              {
+                "line": 5,
+                "regex_index": 0,
+                "slot_id": null,
+                "source_id": "inline"
+              },
+              {
+                "line": 6,
+                "regex_index": 1,
+                "slot_id": null,
+                "source_id": "inline"
+              },
+              {
+                "line": 7,
+                "regex_index": 2,
+                "slot_id": null,
+                "source_id": "inline"
+              }
+            ],
+            "rep_max": null,
+            "rep_min": 0
+          }
+        ]
+      },
+      "result": "Ok(Array [String(\"BODY\")])",
+      "trace": [
+        "[LOW][decision]   rust_runtime:engine:entry_rule taken=1 reason=label=Top basis=first_authored_marker input_bytes=6",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_match taken=1 reason=rule=Top regex_idx=0 start=0 end=2 pos_before=0 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Top selection_role=choice target_rule=Value regex_index=0",
+        "[MEDIUM][decision]     rust_runtime:engine:acode_dispatch taken=1 reason=rule=Top regex_idx=0 child=Value child_regex_idx=0 fluent_chain_len=1 has_code=false",
+        "[MEDIUM][decision]     rust_runtime:engine:child_dispatch taken=1 reason=label=Value entry_regex_idx=0 pos=2 accumulator_len=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=1 reason=rule=Value regex_idx=1 start=2 end=3 pos_before=2 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Value selection_role=choice target_rule=Value regex_index=1",
+        "[MEDIUM][decision]       rust_runtime:engine:acode_dispatch taken=0 reason=rule=Value regex_idx=1 child=none",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=1 reason=rule=Value regex_idx=2 start=3 end=6 pos_before=3 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Value selection_role=choice target_rule=Value regex_index=2",
+        "[MEDIUM][decision]       rust_runtime:engine:acode_dispatch taken=1 reason=rule=Value regex_idx=2 child=Value child_regex_idx=2 fluent_chain_len=0 has_code=true",
+        "[MEDIUM][decision]     rust_runtime:engine:child_dispatch_result taken=1 reason=label=Value value_kind=scalar",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_match taken=0 reason=rule=Top pos_before=6 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:lifecycle_block taken=1 reason=rule=Top phase=LX pos=6",
+        "[MEDIUM][decision]     rust_runtime:engine:lifecycle_block_result taken=1 reason=rule=Top phase=LX pos=6"
+      ],
+      "value_patterns": [
+        "(?<head>ab)",
+        ":",
+        "cat"
+      ]
+    },
+    "literal_unicode": {
+      "active_dispatch_indices": [
+        2
+      ],
+      "compiled": {
+        "functions": [],
+        "rules": [
+          {
+            "acode_dispatch": [
+              {
+                "child_label": "Value",
+                "child_regex_idx": 0,
+                "code": null,
+                "fluent_chain": [
+                  [
+                    "push",
+                    ""
+                  ]
+                ],
+                "has_parent_regex": false,
+                "line": 2,
+                "regex_idx": 0,
+                "selector_kind": "unindexed",
+                "source_id": "inline"
+              }
+            ],
+            "bcode_dispatch": [],
+            "dependency_refs": [
+              {
+                "idx": 0,
+                "label": "Value"
+              }
+            ],
+            "ecode": null,
+            "excode": null,
+            "is_top": true,
+            "itcode": null,
+            "label": "Top",
+            "lecode": null,
+            "lscode": null,
+            "lxcode": {
+              "statements": [
+                {
+                  "expr": {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "Top"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "copy"
+                      }
+                    ],
+                    "kind": "call",
+                    "name": "return"
+                  }
+                }
+              ]
+            },
+            "mode": "Default",
+            "preamble": null,
+            "regex_patterns": [
+              "(?<head>αβ)"
+            ],
+            "regex_slots": [],
+            "rep_max": null,
+            "rep_min": 0
+          },
+          {
+            "acode_dispatch": [
+              {
+                "authored_selector": 2,
+                "child_label": "Value",
+                "child_regex_idx": 2,
+                "code": {
+                  "statements": [
+                    {
+                      "expr": {
+                        "args": [
+                          {
+                            "kind": "string",
+                            "value": "BODY"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "return"
+                      }
+                    }
+                  ]
+                },
+                "fluent_chain": [],
+                "has_parent_regex": false,
+                "line": 8,
+                "regex_idx": 2,
+                "selector_kind": "numeric",
+                "source_id": "inline"
+              }
+            ],
+            "bcode_dispatch": [],
+            "dependency_refs": [
+              {
+                "authored_selector": 2,
+                "idx": 2,
+                "label": "Value",
+                "selector_kind": "numeric"
+              }
+            ],
+            "ecode": null,
+            "excode": null,
+            "is_top": false,
+            "itcode": null,
+            "label": "Value",
+            "lecode": null,
+            "lscode": null,
+            "lxcode": null,
+            "mode": "Default",
+            "preamble": null,
+            "regex_patterns": [
+              "(?<head>αβ)",
+              ":",
+              "cat"
+            ],
+            "regex_slots": [
+              {
+                "line": 5,
+                "regex_index": 0,
+                "slot_id": null,
+                "source_id": "inline"
+              },
+              {
+                "line": 6,
+                "regex_index": 1,
+                "slot_id": null,
+                "source_id": "inline"
+              },
+              {
+                "line": 7,
+                "regex_index": 2,
+                "slot_id": null,
+                "source_id": "inline"
+              }
+            ],
+            "rep_max": null,
+            "rep_min": 0
+          }
+        ]
+      },
+      "result": "Ok(Array [String(\"BODY\")])",
+      "trace": [
+        "[LOW][decision]   rust_runtime:engine:entry_rule taken=1 reason=label=Top basis=first_authored_marker input_bytes=8",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_match taken=1 reason=rule=Top regex_idx=0 start=0 end=4 pos_before=0 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Top selection_role=choice target_rule=Value regex_index=0",
+        "[MEDIUM][decision]     rust_runtime:engine:acode_dispatch taken=1 reason=rule=Top regex_idx=0 child=Value child_regex_idx=0 fluent_chain_len=1 has_code=false",
+        "[MEDIUM][decision]     rust_runtime:engine:child_dispatch taken=1 reason=label=Value entry_regex_idx=0 pos=4 accumulator_len=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=1 reason=rule=Value regex_idx=1 start=4 end=5 pos_before=4 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Value selection_role=choice target_rule=Value regex_index=1",
+        "[MEDIUM][decision]       rust_runtime:engine:acode_dispatch taken=0 reason=rule=Value regex_idx=1 child=none",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=1 reason=rule=Value regex_idx=2 start=5 end=8 pos_before=5 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Value selection_role=choice target_rule=Value regex_index=2",
+        "[MEDIUM][decision]       rust_runtime:engine:acode_dispatch taken=1 reason=rule=Value regex_idx=2 child=Value child_regex_idx=2 fluent_chain_len=0 has_code=true",
+        "[MEDIUM][decision]     rust_runtime:engine:child_dispatch_result taken=1 reason=label=Value value_kind=scalar",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_match taken=0 reason=rule=Top pos_before=8 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:lifecycle_block taken=1 reason=rule=Top phase=LX pos=8",
+        "[MEDIUM][decision]     rust_runtime:engine:lifecycle_block_result taken=1 reason=rule=Top phase=LX pos=8"
+      ],
+      "value_patterns": [
+        "(?<head>αβ)",
+        ":",
+        "cat"
+      ]
+    },
+    "wildcard": {
+      "active_dispatch_indices": [
+        2
+      ],
+      "compiled": {
+        "functions": [],
+        "rules": [
+          {
+            "acode_dispatch": [
+              {
+                "child_label": "Value",
+                "child_regex_idx": 0,
+                "code": null,
+                "fluent_chain": [
+                  [
+                    "push",
+                    ""
+                  ]
+                ],
+                "has_parent_regex": false,
+                "line": 2,
+                "regex_idx": 0,
+                "selector_kind": "unindexed",
+                "source_id": "inline"
+              }
+            ],
+            "bcode_dispatch": [],
+            "dependency_refs": [
+              {
+                "idx": 0,
+                "label": "Value"
+              }
+            ],
+            "ecode": null,
+            "excode": null,
+            "is_top": true,
+            "itcode": null,
+            "label": "Top",
+            "lecode": null,
+            "lscode": null,
+            "lxcode": {
+              "statements": [
+                {
+                  "expr": {
+                    "args": [
+                      {
+                        "args": [
+                          {
+                            "kind": "variable",
+                            "name": "Top"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "copy"
+                      }
+                    ],
+                    "kind": "call",
+                    "name": "return"
+                  }
+                }
+              ]
+            },
+            "mode": "Default",
+            "preamble": null,
+            "regex_patterns": [
+              "(?<head>..)"
+            ],
+            "regex_slots": [],
+            "rep_max": null,
+            "rep_min": 0
+          },
+          {
+            "acode_dispatch": [
+              {
+                "authored_selector": 2,
+                "child_label": "Value",
+                "child_regex_idx": 2,
+                "code": {
+                  "statements": [
+                    {
+                      "expr": {
+                        "args": [
+                          {
+                            "kind": "string",
+                            "value": "BODY"
+                          }
+                        ],
+                        "kind": "call",
+                        "name": "return"
+                      }
+                    }
+                  ]
+                },
+                "fluent_chain": [],
+                "has_parent_regex": false,
+                "line": 8,
+                "regex_idx": 2,
+                "selector_kind": "numeric",
+                "source_id": "inline"
+              }
+            ],
+            "bcode_dispatch": [],
+            "dependency_refs": [
+              {
+                "authored_selector": 2,
+                "idx": 2,
+                "label": "Value",
+                "selector_kind": "numeric"
+              }
+            ],
+            "ecode": null,
+            "excode": null,
+            "is_top": false,
+            "itcode": null,
+            "label": "Value",
+            "lecode": null,
+            "lscode": null,
+            "lxcode": null,
+            "mode": "Default",
+            "preamble": null,
+            "regex_patterns": [
+              "(?<head>..)",
+              ":",
+              "cat"
+            ],
+            "regex_slots": [
+              {
+                "line": 5,
+                "regex_index": 0,
+                "slot_id": null,
+                "source_id": "inline"
+              },
+              {
+                "line": 6,
+                "regex_index": 1,
+                "slot_id": null,
+                "source_id": "inline"
+              },
+              {
+                "line": 7,
+                "regex_index": 2,
+                "slot_id": null,
+                "source_id": "inline"
+              }
+            ],
+            "rep_max": null,
+            "rep_min": 0
+          }
+        ]
+      },
+      "result": "Ok(Array [Null])",
+      "trace": [
+        "[LOW][decision]   rust_runtime:engine:entry_rule taken=1 reason=label=Top basis=first_authored_marker input_bytes=8",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_match taken=1 reason=rule=Top regex_idx=0 start=0 end=4 pos_before=0 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Top selection_role=choice target_rule=Value regex_index=0",
+        "[MEDIUM][decision]     rust_runtime:engine:acode_dispatch taken=1 reason=rule=Top regex_idx=0 child=Value child_regex_idx=0 fluent_chain_len=1 has_code=false",
+        "[MEDIUM][decision]     rust_runtime:engine:child_dispatch taken=1 reason=label=Value entry_regex_idx=0 pos=4 accumulator_len=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=1 reason=rule=Value regex_idx=0 start=4 end=6 pos_before=4 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Value selection_role=choice target_rule=Value regex_index=0",
+        "[MEDIUM][decision]       rust_runtime:engine:acode_dispatch taken=0 reason=rule=Value regex_idx=0 child=none",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=1 reason=rule=Value regex_idx=0 start=6 end=8 pos_before=6 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_slot_selected taken=1 reason=rule_label=Value selection_role=choice target_rule=Value regex_index=0",
+        "[MEDIUM][decision]       rust_runtime:engine:acode_dispatch taken=0 reason=rule=Value regex_idx=0 child=none",
+        "[MEDIUM][decision]       rust_runtime:engine:regex_match taken=0 reason=rule=Value pos_before=8 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:child_dispatch_result taken=0 reason=label=Value value_kind=undef",
+        "[MEDIUM][decision]     rust_runtime:engine:regex_match taken=0 reason=rule=Top pos_before=8 parse_mode=Seek entry_regex_idx=0",
+        "[MEDIUM][decision]     rust_runtime:engine:lifecycle_block taken=1 reason=rule=Top phase=LX pos=8",
+        "[MEDIUM][decision]     rust_runtime:engine:lifecycle_block_result taken=1 reason=rule=Top phase=LX pos=8"
+      ],
+      "value_patterns": [
+        "(?<head>..)",
+        ":",
+        "cat"
+      ]
+    }
+  },
+  "scope": "Finite public compiled descriptor/runtime trace/constant payload distinctions. Wildcard source is valid and Perl executes its written edge. Not a Number defect or invalid-program oracle. Both Rust rule matcher construction sites compile full regex_patterns; active body roles must retain full catalogs for entry/selector/boundary uses and preserve original dispatch slot ids. No production change or other-backend failure inferred."
+}

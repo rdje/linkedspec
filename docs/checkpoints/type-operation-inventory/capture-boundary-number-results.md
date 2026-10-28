@@ -1,7 +1,7 @@
 # Readonly anonymous capture-boundary Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.10; bounded implementation33.1-.5.
-Status: bounded Perl33.1 implemented/targeted-checked; independent remaining backend intake next.
+Status: bounded Perl33.1 repaired/Rust33.2 method-compatible on isolated carrier; P1 dispatch36 next before remaining backend intake.
 Named mark/width gaps are P1 family34; value-block capture mutation is P1 family35 immediately after33 and before34. Neither is folded into this slice.
 
 ## Existing authority and observed gap
@@ -90,3 +90,37 @@ ready1 metadata; P2 readiness31.6.4.4 owns that guard before full context admiss
 with no deferred-vocabulary expansion here. Exact packet capture-boundary-number-
 perl-intake.json.gz; canonical registration23.4.1 owns the new focused test. Rust33.2
 independently follows; no full suite/matrix/isolated emitted process/admission.
+
+## Carrier refinement during independent Rust33.2 intake
+
+The first frozen entry head .. overlaps later body tokens. It is a valid source
+but exposes a distinct Rust outgoing-edge dispatch defect: both shared Number
+fixture and primitive-only control yield[null]. Constant BODY source and public
+trace show untargeted slot0 consumes :c/at with no acode; Perl returns[BODY]. Literal
+Unicode/ASCII heads reach written slot2 in Rust. P1 family36 owns active body
+candidate selection immediately after33.2, before33.3/further feature work; no
+Number defect/RED is inferred from this nonexecuted carrier. Complete original
+fixture/test/trace/descriptors are retained and an explicit ignored36.1 regression
+expects correct[BODY], to be enabled by that repair before any admission.
+
+The shared Number fixture now uses exact Unicode alpha beta as its entry head,
+retaining input/anonymous boundary and all eleven expected values unchanged. Perl
+fixture reads explicitly decode UTF-8 and its exact shared target is rechecked.
+This isolates Number semantics; it does not fix or waive the valid wildcard source
+dispatch defect. Standalone marker/readonly getters and body effects stay identical.
+
+## Bounded Rust33.2
+
+On a nonoverlap carrier Rust already supports the entire Number target; runtime
+unchanged. Five normal tests pass native/restored CompiledSpec/generated-plan,
+including shared11, original9/aliases, zero/snapshot, strict function-state errors,
+legacy4/[]/KVT, explicit callback1! and registered-callback function fence. The
+shared Perl target also passes native/fresh/raw0/ready1 after explicit UTF-8 fixture
+reading; no Number expected value changes. Source epoch/refinements and exact logs
+are retained in capture-boundary-number-rust-intake.json.gz.
+
+The original valid wildcard source remains a separate failing dispatch regression,
+ignored in the normal Number target and explicitly run to observed RED null versus
+BODY. P1 family36 is next before33.3; remove that ignore and verify active slot
+identity/mode/recognition behavior in the repair. No source-context/full backend
+admission, runtime dispatch repair or isolated emitted-package claim here.

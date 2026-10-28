@@ -28,7 +28,7 @@ Unless an example includes a `Top::` wrapper, treat it as a rule-paragraph fragm
 Selecting a rule starts that rule's handler and mode-driven loop; selection alone does not test the selected rule's
 own regex. Each outgoing `->` match edge selects the regex slot owned by its written target. A rule's own regex
 participates when a self-edge or another incoming match edge targets that rule. A blind `=>` call enters its target
-without selecting one of the target's regex slots.
+without selecting one of the target's regex slots. Current Rust Default-rule bodies can still consume declared slots that no outgoing edge targets, so a broad untargeted entry pattern can suppress a later body edge. A nonoverlapping entry literal avoids that shadowing while the active-slot dispatch defect is being repaired.
 
 For example, this entry rule's loop tests `Done`'s `/[a-z]+/`; `Top` needs and owns no regex for that dispatch:
 

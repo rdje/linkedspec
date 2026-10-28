@@ -2,7 +2,7 @@ Top::
  -> Value .push
  LX {return(copy(Top))}
 Value:
- /(?<head>..)/
+ /(?<head>αβ)/
  /:/
  /cat/
  -> Value[2] {

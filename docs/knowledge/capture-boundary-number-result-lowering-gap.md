@@ -10,10 +10,12 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: bounded Perl33.1 repaired; independent other backends/full admission open; named34/block35 owned
+status: bounded Perl33.1 repaired/Rust33.2 method-compatible; P1 dispatch36 next before remaining backends
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/capture_boundary_number_results.t"
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/capture_boundary_number_results.t"
+  - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_boundary_number_results"
 ---
 
 Existing Number producers and named method controls work native/fresh: explicit
@@ -73,3 +75,22 @@ bit. No helper/body vocabulary, named-mark/advancing/void-block/bracket/root/ari
 coercion/write/copy/schema expansion. Packet capture-boundary-number-perl-intake.json.gz
 retains exact source/refinements/channels, including probe quote and nested typed
 error encoding failures as setup only. Independent Rust33.2 follows.
+
+## Current bounded Rust33.2 and carrier prerequisite
+
+Rust already supports the readonly Number target once its action executes. Initial
+wildcard shared/producer controls yield[null] because untargeted declared regex0
+consumes :c/at before written2; public constant BODY trace/compiled descriptor and
+Perl[BODY] isolate an independent valid-source dispatch defect. See
+[[rust-untargeted-regex-body-dispatch]] and P1 family36 immediately next. Number
+fixture entry head is now exact Unicode alpha beta, with all11 expected bytes/input
+unchanged; Perl UTF-8 target1 native/fresh/raw0/ready1 rechecks the carrier.
+
+Rust5 normal tests pass native/restored CompiledSpec/generated-plan, including
+shared11/original9/aliases/zero/snapshot, legacy4/[]/KVT, explicit parser-context
+callback1! and registered-callback function-state error. Runtime unchanged/no Number
+RED invented. Original wildcard source is one explicitly owned ignored regression,
+separately executed to actual RED expecting BODY; it is not success credit and
+must be enabled by36.1 before continuing33.3/admission. Packet
+capture-boundary-number-rust-intake.json.gz retains all epochs, descriptors/traces
+and direct-dependent Perl proof. No full source/context/backend admission.

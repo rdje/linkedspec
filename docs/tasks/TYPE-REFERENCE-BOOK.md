@@ -7138,14 +7138,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.1 - compose readonly capture Number getters through shared native value bodies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2`
-  Status: `pending`
+  Status: `completed` / bounded Number regression; P1 dispatch36 next
   Goal: Independently implement/check Rust readonly anonymous capture-boundary Number result composition.
   Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
   Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
-  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
-  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+  Verification tier: `focused`
+  Focused checks: Public constant-payload native trace/compiled descriptors/Perl reference isolate valid wildcard dispatch failure. Refined nonoverlap Unicode Number carrier: Rust5pass native/restored CompiledSpec/plan,1 separate owned dispatch ignore; explicit ignored execution gives1 actual RED. Perl shared target1pass native/fresh/raw0/ready1 after UTF-8 fixture read, expected11 unchanged. Rustfmt/compile/book/map/history/manual continuity; no full suite/matrix.
+  Canonical trigger: P1 active-edge candidate36.0/.1-.4 immediately next before33.3 and any admission; remove owned ignored regression during36.1. Full23.4/new Perl registration/document pressure/declared-host/final clean push remain separate.
+  Claim verification: none: Finite authored method/source-dispatch distinctions and functional regressions, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Initial shared and producer-only controls yield[null], so do not infer a Number bug or accept that as a legacy oracle. Constant BODY source also returns[null] on Rust but[BODY] on Perl. Public trace consumes untargeted slot0 at bytes4-6/6-8 with child=none while compiled acode contains only written2. Literal Unicode/ASCII entry heads reach BODY.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Rust rule-body matcher construction compiles full regex_patterns, letting untargeted declarations win/consume before written edges. Native trace and compiled descriptors identify this distinct dispatch defect, owned36; no submodule internals or regex implementation defect inferred. The Number value path already supports the bounded methods when their action executes.
+  - [x] **FIX**: Refine only the shared test entry head from wildcard to exact Unicode alpha beta; keep input/anonymous boundary and all11 expected outputs unchanged. Perl fixture reads explicitly decode UTF-8 and optional label filtering permits its exact direct-dependent check. Add focused Rust assertions for actual getter/alias/zero/snapshot/method/legacy/function/callback policies. Keep wildcard source as explicit owned dormant RED, immediately repaired in36 after this clean commit; no runtime patch or dispatch-fix claim here.
+  - [x] **ADDRESSED (verified)**: Rust5 normal tests pass native/restored CompiledSpec/plan with shared11 and original9 getter/alias snapshot values. Existing source methods already work; no invented Number RED. Legacy direct consumers return4/[]/KVT, explicit callback in parser context1!, and a callback invoked in apply retains specific function-state rejection. Shared Perl target1 native/fresh passes raw0/ready1 on the refined UTF-8 carrier.
+  - [x] **NO REGRESSION**: Rust/Core/Perl production files unchanged. Numeric expected JSON bytes unchanged and exact old shared source/test epoch retained. One ignored dispatch regression is not success credit: explicit execution observes1 actual mismatch null versus BODY. Both matcher construction sites/full entry-selector-boundary catalogs need36 reconciliation; separate no-edge lifecycle27, AND/blind semantics and existing method/error/root/callback scopes remain unchanged.
+  - [x] **LOCKSTEP**: Packet/active-edge intake/new causal card/map and source-boundary/dispatch book caveat distinguish Number compatibility from valid-source dispatch failure. Roadmap/task/live/resume schedule36 immediately before continuing33.3; book makes the current Rust limitation explicit. Original wildcard failures are preserved, not recast as invalid grammar or erased by changing expected values. No full context/backend admission or release claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2 - lock Rust capture Number flow and own active-edge dispatch prerequisite`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3`
   Status: `pending`
@@ -7211,13 +7219,70 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push after feature coverage; public schema movement separately owned.
   Planned claim verification: none: Finite authored feature/defect target, no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36`
+  Status: `pending` / P1 immediately after current33.2, before33.3 and further feature work
+  Goal: Reconcile and repair outgoing-edge regex candidate ownership so untargeted declarations cannot consume body input and suppress a valid edge.
+  Reproduction: Exact constant-payload Top-to-Value grammar from33.2 has declared Value slots0 named head ..,1 colon,2 cat and only outgoing Value[2] return BODY. Input alpha beta :cat. Perl public Get returns[BODY]; current Rust native/restored/plan shared producer controls return[null]. Public native runtime trace selects untargeted0 at bytes4-6 and6-8 with acode child=none, consuming :c/at; literal Unicode/ASCII entry heads reach slot2 and returnBODY. This is not a Number getter defect or an invalid grammar.
+  Root / impact: Compiled descriptors correctly retain only acode regex_idx2 but both Rust rule-body matcher construction sites compile full rule.regex_patterns; unmatched declared slots can win alternatives and consume input. Canonical action-and-lifecycle-placement says outgoing edges select their target slots. Own complete regex catalogs remain necessary for incoming entry selection, explicit selectors and boundary helpers; do not truncate shared compiled catalogs or change pins/schema. Native and speculative/recognition paths need coordinated authority/projection review before patching.
+  Schedule / ownership:36.0 freezes exact Default/OR active-edge/body candidate contract, source-slot identity and mode exclusions after33.2 commits clean;36.1 repairs Rust,36.2-.4 independently intake/repair Dart/Julia/safe Lua as needed, then resume33.3. No assumption about another backend failure. Keep original wildcard repro as explicit dormant RED until36.1 removes its ignore; no admission/push with this defect. Preserve separate startup27 no-edge lifecycle reconciliation, AND/blind semantics, frame/cursor/gap/provenance/selector/codeblock contracts and complete boundary-rule catalogs.
+  Children:36.0 authority/target,36.1 Rust native/recognition repair,36.2 Dart,36.3 Julia,36.4 safe Lua independent intake/repair.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.0`
+  Status: `pending` / P1 next after33.2
+  Goal: Freeze outgoing-edge active regex candidate ownership and exact source-slot projection repair target.
+  Acceptance: Read canonical entry/edge/mode/slot/trace/source contracts and retained constant-payload Perl/Rust traces/descriptors. Distinguish catalog/entry/boundary regex roles from Default/OR body candidates, preserve source and duplicate slot identities and existing AND/blind/no-edge behavior, and freeze bounded native/recognition/per-backend scope before production. Independent probes and meaningful RED/GREEN proof, no source-root/global grammar guess or submodule inspection.
+  Planned verification tier: focused
+  Planned focused checks: Small public constant-return wildcard/literal/control and descriptor/runtime trace/source-slot/mode distinctions, syntax/fixture/book/manual continuity; no full suite/matrix.
+  Planned canonical trigger: Full23.4/source-context admission/final clean push requires this P1 repair; public schema or infrastructure changes separately owned.
+  Planned claim verification: none: Finite authored defect/target distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.1`
+  Status: `pending` / P1 after36.0
+  Goal: Independently implement/check Rust native and recognition outgoing-edge body candidate ownership.
+  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
+  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
+  Planned verification tier: focused
+  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
+  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.2`
+  Status: `pending` / P1 after36.0
+  Goal: Independently implement/check Dart outgoing-edge body candidate ownership.
+  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
+  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
+  Planned verification tier: focused
+  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
+  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.3`
+  Status: `pending` / P1 after36.0
+  Goal: Independently implement/check Julia outgoing-edge body candidate ownership.
+  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
+  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
+  Planned verification tier: focused
+  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
+  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36.4`
+  Status: `pending` / P1 after36.0
+  Goal: Independently implement/check safe available Lua outgoing-edge body candidate ownership.
+  Authority: Frozen36.0 target and canonical edge/mode/slot/source/trace contracts; do not infer another backend defect.
+  Acceptance: Establish exact native/restored/generated/fresh supported-route wildcard/literal and active-slot/mode/provenance baseline before production. Repair only confirmed candidate-role gap through a shared typed owner, retain full catalogs for entry and boundary uses, preserve original selected indices and existing no-edge/AND/blind/frame/cursor/gap/error/format contracts. Enable owned dormant regression after repair; no half-fix limited to one duplicated execution path.
+  Planned verification tier: focused
+  Planned focused checks: Exact new behavior and direct-dependent source-slot/selector/trace/recognition/mode controls plus compile/format/normal registration/book/manual continuity; no routine full suite/matrix.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; actual public schema movement separately owned.
+  Planned claim verification: none: Prospective finite authored functional/source-identity controls, no population/completeness measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; Perl30.1 follows while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.2` | `pending` | Independently implement/check Rust readonly capture-boundary Number method composition. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.36.0` | `pending` | Freeze P1 outgoing-edge body candidate repair before33.3/further features. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
