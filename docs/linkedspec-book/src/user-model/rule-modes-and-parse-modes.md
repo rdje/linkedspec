@@ -202,7 +202,7 @@ Embed this matcher behind a no-regex `Top::` wrapper when it is part of a stream
 The rule mode controls the ordered matching; the action code controls what value the rule
 returns.
 
-Actions may be sparse; structural matching is not. Every authored regex in an
+Actions may be sparse; structural matching is not. For valid increasing same-owner sparse references, every authored regex in an
 `AND` rule remains a required, consuming slot even when that slot has no `->`
 edge. The handler walks all slots in order and runs code only at the authored
 action indices:
@@ -216,7 +216,7 @@ CaptureSpan:AND
 
 On `AxxBC`, the middle `/xxB/` is consumed even though it has no action; the
 final action sees the span between the first and last action sites. Omitting an
-edge means "no code for this slot," not "remove this slot from the sequence."
+edge means "no code for this slot," not "remove this slot from the sequence." Incoming entry matching belongs to the caller and does not silently skip the child's first structural slot. Cross-rule or reordered dependency sequences retain compiled order.
 The same rule applies inside each `AND+` or `AND{...}` iteration. If an
 edge-less separator should contribute to a captured value directly, fold it
 into an action-owning regex or use the explicit capture-boundary helpers.

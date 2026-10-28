@@ -69,3 +69,13 @@ assertions through the public loader and fresh generated processes; restoring
 the old example in isolation fails only the expected book group. `.27.1-.3`
 still own lifecycle reconciliation/repair; the carrier correction changes no
 production implementation or lifecycle contract.
+
+October28 authority39.0 adds two explicit-edge plain AND controls. Reversed
+dependency order consumes ba and duplicate index consumes aa, both cursor2,
+but E{return(copy(seen))} is omitted and native/fresh return[]. Public source
+shows the actions are present, while HandlerVariantEmitter's ordered builder
+omits ecode and its emitter hardcodes collection return. This is an additional
+concrete lifecycle-divergence shape, owned SESSION-STARTUP-READING.27 before
+admission;39.5 classification will not normalize it. The structural authority
+packet retains exact producers/source/results. Use explicit final action
+returns for healthy dependency-order/effect proof until that repair lands.

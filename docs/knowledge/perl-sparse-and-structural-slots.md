@@ -9,7 +9,7 @@ answers:
   - "how does a generated Perl AND handler map sparse actions to structural slots"
   - "why must generated dependency slot maps include edge-less local regexes"
   - "does repeated AND support one sparse action after edge-less regex slots"
-date: 2026-07-22
+date: 2026-10-28
 status: current
 tags: [perl, AND, generated-source, regex-slots, actions, cursor, corpus]
 evidence: "FUTURE-PARITY-BACKLOG.10.5.0.1.2.0; perl/LinkedSpec/SpecEntry.pm classifies same-owner strictly increasing sparse action refs; perl/LinkedSpec/HandlerVariantEmitter.pm traverses the complete local structural sequence and dispatches only authored action indices; perl/LinkedSpec/Compiler.pm embeds every required local regex in standalone generated source; t/sparse_and_action_slots_perl_regression.t proves live/generated ordinary and repeated AND routes."
@@ -36,3 +36,11 @@ implementation boundary lives in
 
 Related: [[perl-rule-local-cursor-rollout-boundaries]],
 [[duplicate-regex-slot-identity-contract]], [[rust-perl-output-oracle]].
+
+Current39.0 preserves this authority. Perl plain multi-regex/one-action currently
+falls through _default/default because eligibility omits the sparse shape;
+39.5 owns repair and explicit existing-family transition. Incoming entry can
+mask it; full child matching does not silently skip slot0. Blind .push fresh
+recursion39.6 is separate. [[sparse-and-outgoing-edge-sequence-gap]] and the
+structural target/packet retain27 controls and3 incomplete fresh timeouts.
+Historical stable-ID lookup needs20.1 pointer/index audit; no lost-history claim.

@@ -82,7 +82,7 @@ their compiled dependency order. Standalone generated source embeds every local
 regex required by the structural walk, including repeated `AND` with only one
 sparse action. This prevents cursor-derived consuming execution from silently
 skipping an edge-less delimiter while leaving the minimal generated family plan
-unchanged.
+unchanged. Current Perl plain multi-regex/one-action AND incorrectly falls through to `default`; the owned repair must restore structural matching and explicitly report derived `and_acode_seq`. Regenerate affected standalone parsers after repair.
 
 Rust's source-emitter implements contract-v2 identity, metadata, and typed
 errors. Native callers use

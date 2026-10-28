@@ -7605,20 +7605,48 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored safe functional/source regression, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39`
-  Status: `pending` / P1 after bounded33/35/34, before38/37/full23.4/push
+  Status: `in_progress` / sparse-AND authority39.0 after bounded name/range work, before38/37/full23.4/push
   Goal: Reconcile and repair sparse outgoing-edge ownership for AND body sequences while retaining complete declaration catalogs.
   Reproduction: Top dispatches Value entry H; Value:AND declares H/cat and only ->Value[1] return BODY; input Hcat. Public Perl native/fresh returns[BODY]. Both installed Lua hosts/native/restored/plan/fresh return[null]. Compiled catalogH/cat and sole edge regex_index1/child1 are correct; trace retests required0 H at cursor1 and misses. Packet active-edge-body-lua-intake.json.gz retains exact source/oracle/emitted Perl/compiled fields/trace. Other backend failures are not inferred.
-  Root / impact: AND loops enumerate catalog positions rather than the authored required outgoing-edge sequence. The bounded36 Default/OR fix intentionally preserves AND and cannot repair its counters/sequence semantics by filtering a choice fallback. Canonical written-edge/ordered-slot authority requires a dedicated target before production; no catalog truncation, text-derived identity or new implicit entry match.
-  Schedule:39.0 freezes exact sequence/counter/entry/mode/identity and generated-family scope, then39.1 Rust/39.2 Dart/39.3 Julia independent intake/repair and39.4 confirmed safe Lua. Include non-returning actions, falsey values, reversed duplicate edge order, required-step counts, failed minimum, repetition, indexed-entry compatibility and full entry/boundary catalog controls; a constant-return case alone cannot establish complete sequence repair. Before38/37/full23.4, after current bounded feature work.
+  Initial root hypothesis (superseded by39.0 authority intake): AND loops enumerate catalog positions rather than the authored required outgoing-edge sequence. Canonical local structural-slot traversal must be preserved; plain Perl one-action classification and blind/fresh defects39.5/.6 are now explicit prerequisites. The bounded36 Default/OR fix intentionally preserves AND and cannot repair its counters/sequence semantics by filtering a choice fallback. Canonical written-edge/ordered-slot authority requires a dedicated target before production; no catalog truncation, text-derived identity or new implicit entry match.
+  Schedule:39.0 reconciles structural authority; repair Perl39.5 and blind/fresh39.6 first, then39.1 Rust/39.2 Dart/39.3 Julia independent intake/repair and39.4 confirmed safe Lua. Include non-returning actions, falsey values, reversed duplicate edge order, required-step counts, failed minimum, repetition, indexed-entry compatibility and full entry/boundary catalog controls; a constant-return case alone cannot establish complete sequence repair. Before38/37/full23.4, after current bounded feature work.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.0`
-  Status: `pending` / P1 after34 before39.1-.4
-  Goal: Freeze sparse-AND required-edge sequence/counter semantics from existing ADR0044/0047/written-edge/source/entry authority and public reference probes.
-  Acceptance: Distinguish catalog versus outgoing sequence roles, indexed-entry compatibility, direct/blind entry, lifecycle/iteration/minimum/count behavior and generated-family classification. Prove desired results with independent non-returning/reversed/falsey/repeated cases before production. No public family/schema movement hidden in an ordinary repair.
+  Status: `completed` / existing structural authority reconciled; reference prerequisites owned
+  Activation: clean `81713bb2e6ef66f35e2dd0c7b6c6c8f72a1e1eed`; no production edit.
+  Goal: Reconcile sparse AND structural/action/dependency/entry/counter authority before peer repairs.
+  Verification tier: `focused`
+  Focused checks: Public27 authored source/descriptor/native/emitted/metadata/phase controls24 complete pairs and3 retained fresh timeouts; strict framed/known trace-pair reader; normal protected3; exact packet closure; book/map/history/manual continuity/diff.
+  Canonical trigger: New public family/format/authority separately owned; full39/23.4/final clean push after reference/peer and pressure/registration prerequisites. No new policy here.
+  Claim verification: none: Finite authored structural/classification/progress controls, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Lua-null/Hcat versus Perl-BODY is real but an unqualified outgoing-only oracle. Current27 controls yield24 native/fresh pairs and3 fresh hard timeouts. Initial unbounded run interrupted130 is retained separately.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Accepted sparse structural card/book/normal3 require full local slots for increasing same-owner actions. Public descriptor/source roots plain one-action fallthrough at SpecEntry eligibility; separate blind source invokes Value then Top inside push. Native guard suppression does not validate its result. Exact historical-ID retrieval failure has unassessed cause owned20.1, not inferred lost history.
+  - [x] **FIX**: Freeze existing structural/dependency, incoming/indexed entry and group/counter target in sparse-and-structural-authority.md. Reject blanket catalog filtering; own P1 classification39.5 and post-call/progress39.6 before peers. No code or AND policy imported from CHOICE-only ADR0048.
+  - [x] **ADDRESSED (verified)**: Target binds direct/incoming/full-prefix/indexed, falsey/nonreturn, sparse middle/repeated/minimum, one-regex, cross-target/reversed/duplicate/no-edge distinctions to retained observations.39.5 must explicitly correct default-to-existing-and_acode_seq; minimalv2 schema/vocabulary stay fixed. Actual27 inputs, phases, code and producer epochs retained.
+  - [x] **NO REGRESSION**: No code change. Protected normal3 pass;24 fresh pairs agree on values/cursors without build/load/runtime errors. Incomplete fresh3 carry no parity credit. Strict reader retains exact known trace pairs and rejects unknown output. One initial30s build cutoff/reader rejection and identical successful retry are retained, no product RED credit. Plain ordered reversed/duplicate E probes return[] after cursor2 because builder omits ecode/emitter hardcodes collection; this concrete lifecycle shape is owned SESSION-STARTUP-READING.27 before admission, not blessed as correct output. EarlyLS38/pre-match40/native error41 stay open.
+  - [x] **LOCKSTEP**: Book/card/map/target/roadmap/live/resume/history reject earlier hypothesis; own39.5/.6 before39.1-.4 and20.1 historical lookup audit before admission; artifact closure retained. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.0 - reconcile sparse AND structural authority and own Perl prerequisites`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.5`
+  Status: `pending` / P1 after39.0 authority, before independent39.1-.4
+  Goal: Repair the uncovered Perl plain-AND multi-structural-regex/single-action classification using existing structural-slot authority and existing v2 families.
+  Root/evidence: At clean81713bb2e, public descriptor and emitted metadata choose _default/default for Value:AND with H/cat and only action1. Direct Hcat returnsnull while direct cat returnsBODY; incoming Hcat returnsBODY and hides missing prefix. SpecEntry enables single-regex AND only at regex_count1 and ordered AND only when actions/dependencies>1, omitting the sparse one-action local route. Protected sparse structural3 tests pass; repeated one-action source works. Preserve full local structural slots and dependency/identity semantics; do not filter AND to outgoing actions.
+  Scope: Explicitly retain before/after selected handler and plan rows, including any default-to-existing-and_acode_seq correction. No new family, row field, version, mutable policy or weakened validator. Audit related one-dependency/cross-target/indexed/no-edge conditions before choosing bounded changes; do not silently broaden beyond proven authority.
   Planned verification tier: focused
-  Planned focused checks: Public reference/native source/descriptor/trace distinctions, exact authored expected sequence and scalar/cursor/capture values, focused book/continuity; no full matrix.
-  Planned canonical trigger: Actual public family/format authority movement separately owned; full23.4/final clean push requires complete verified39 repair.
-  Planned claim verification: none: Finite authored contract/causal distinctions, no population measurement.
+  Planned focused checks: Actual public direct/incoming/blind/nonreturn/falsey/minimum/repetition/slot/cursor RED/GREEN; protected structural/duplicate controls, native/source/loaded/plan metadata, exact producer/body epochs and syntax/book/continuity. No blanket backend repair or full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after remaining prerequisites; any new family meaning/format or authority beyond the accepted structural model requires separately owned canonical approval/proof. Existing derived-family correction must be explicit.
+  Planned claim verification: none: Finite authored source/classification/effect controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6`
+  Status: `pending` / P1 after39.0 authority, before healthy blind/fresh peer admission
+  Goal: Reconcile blind fluent .push post-call result lowering and ensure emitted execution terminates non-progressing recursive paths consistently with native execution.
+  Reproduction: Top:: =>Value .push with LX copy(Top), safe Hcat/AxxBC/HcatHcat child cases. Bounded reference probe builds/loads all; native cuts Top recursive re-entry, emitted fresh execution warns deep recursion and hard exits124 after5s. Emitted line63 already invokesValue; line64 invokesTop again inside push. Retain exact native/prepared/source/phase logs and do not credit incomplete fresh values.
+  Root/acceptance: Use public post-call semantics and helper overload authority to decide correct result flow before altering lowering. Reproduce exact scope/child-result/side-effect/cursor controls and explicit non-progress recursion; fix through sole existing owners, not a timeout in product code or a global semantic escape. Known native guard suppression is not proof that source lowering is correct.
+  Planned verification tier: focused
+  Planned focused checks: Process-bounded actual RED/GREEN, deterministic source/child calls/results/progress, native and independently loaded emitted parity, existing blind/action/post-call/recursion dependents and syntax/book/continuity.
+  Planned canonical trigger: Full39/23.4/final clean push; any actual new post-call policy/family/format requires separate canonical authority. No hidden change to legal consuming recursion or helper vocabulary.
+  Planned claim verification: none: Finite authored source/progress/result controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -7961,7 +7989,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.0` | `pending` | Freeze sparse AND required outgoing-edge sequence and counter authority before the bounded Lua repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` | `pending` | Repair Perl single-action sparse AND classification using full structural slots, then39.6 blind/fresh recursion before independent peers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
