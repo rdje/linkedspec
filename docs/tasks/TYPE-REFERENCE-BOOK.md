@@ -8379,13 +8379,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6`
-  Status: `pending` / P1 immediate live progress prerequisite
+  Status: `completed` / live recognition progress
   Goal: Enforce typed progress on actual accepted repetitions reached through recognize_once.
   Acceptance: Actual recognition_progress native/restored/generated/fresh returns true at0, expected recognition_zero_progress_repetition. Public trace confirms accepted zero-width Guard hit at0, no live scoped progress edge. Existing neutral RecognitionTransaction.validate_progress remains separate. Qualify safe zero/consuming/bounds/LE/ordinary/one-shot/scope cleanup/error routes, integrate typed private live owner without new public schema or blanket Unicode policy.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:24 safe sources9healthy15actualRED ->24pass234 assertions SDK/plan and same24 baseline modules/consumer; exact source/normalized/compiled/plan/emitted identity and9 control observations; direct-dependent Julia admitted recognition-transaction contract:207, Julia explicit-repetition action-result admission:162; normal single registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after Julia/peer/lifecycle/registration/pressure repairs; no public schema/family/export movement.
+  Claim verification: none: Finite authored functional/diagnostic/control-flow assertions, no population measurement.
+
+  Activation: clean `81b70dd9e5b8b1d3696931d0f427d15c421998d1`. Independent actual Julia progress case returns true at0 native/restored/plan/fresh; existing public debug selected zero-width Guard at0. Qualify safe authored completed iterations and scoped origin/lifecycle paths before production edit, with group values separately owned .2.
+
+
+  - [x] **REPRODUCE / ISSUE**:24 safe authored sources9healthy15actualRED native/restored/plan and same emitted baseline process. Completed nonconsuming recognition repetitions return success or IT value, expected existing recognition_zero_progress_repetition. Independent intake trace shows selected zero-width Guard at0; actual baseline SDK/fresh retains legal ordinary/one-shot/LE controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: ActionRecognizeOnceExpr directly invokes a child without a live progress scope; accepted repeated loops count/IT/cutoff without typed authority. Early AND action returns escape loop finalization. Existing neutral validate_progress checks detached fixtures only, not actual interpreter repetition. Actual selected/return and newly typed failure MARK locate the live edge/owner without guessed regex or Unicode policy.
+  - [x] **FIX**: Private typed validate_repetition_progress shared by neutral adapter/live interpreter. try/finally scoped caller-origin stack around actual recognize_once child. Repeated normal/next edges validate before count/IT/max/ordinary zero exit; LE whole-rule return remains legal first. Current early AND action completion validates before existing whole-rule escape, with group semantics separately .2-owned. Existing SDK error/diagnostic and generated envelope preserved; low MARK includes actual origin/start/end.
+  - [x] **ADDRESSED (verified)**:24pass234 assertions SDK native/restored/generated-plan, same24 baseline emitted modules/consumer rerun separate process. All raw source/normalized/compiled/plan/emitted strings identical and9 control observations unchanged.15 typed failures preserve Guard/code/runtime phase and native actual trace, including caller prefix1/current edge/scope cleanup. Fresh checks code envelope, no private trace field claim there.
+  - [x] **NO REGRESSION**: Neighbor suites Julia admitted recognition-transaction contract:207, Julia explicit-repetition action-result admission:162 pass. Compiler/emitter/matching unchanged; no new exported helper/schema/format. Ordinary zero/one-shot/whole LE/consuming cases retain results. Three historical early-AND scalar controls remain .2-owned, no portable group parity. No recursive admission, broad lifecycle/Unicode or unsafe-host claim. Initial inferred-Dict harness error corrected before valid RED; combined-stream interleaving requires separated stdout/stderr/full baseline replay, all epochs retained.
+  - [x] **LOCKSTEP**: Normal Julia driver includes the new suite exactly once. julia-live-progress-intake.json.gz retains actual producers/fixture/runtime epochs/emission/native/generated/fresh/trace/receipts/corrections. Book/toolbox/cards/target/roadmap/task/live/resume/history align. .1 required steps next, remaining Julia/safe Lua/admission/registration/pressure/lifecycle/slot owners stay open; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6 - enforce Julia live recognition repetition progress`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7`
   Status: `pending` / P1 accepted-null provenance before peers
@@ -8710,7 +8721,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6` | `pending` | Qualify and repair Julia live recognition repetition progress. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.1` | `pending` | Repair Julia authored required-step order and single-occurrence dispatch. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1,0 +1,393 @@
+[
+  {
+    "name": "plus",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:+\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "or",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "or_one",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "and_one",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "and_two",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{2}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "and_zero_group",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{1}\n /(?=a)/\n /(?=a)/ -> Guard[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "and_early_zero",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{1}\n /(?=a)/\n /a/\n -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "it_cannot_bypass",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n IT {return(\"IT\")}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "blind_or",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n => Atom\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "blind_and",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{1}\n => Atom\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "blind_default",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:\n => Atom\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "default_no_action",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:\n /(?=a)/\n EX {return(0)}\n E {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "zero_then_consuming",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{1}\n /(?=a)/\n /a/ -> Guard[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          0,
+          1
+        ]
+      }
+    ],
+    "expected_group_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2"
+  },
+  {
+    "name": "consuming_then_zero",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:AND{1}\n /a/\n /(?=b)/ -> Guard[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          true,
+          0,
+          1
+        ]
+      }
+    ],
+    "expected_group_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2"
+  },
+  {
+    "name": "consuming_choice",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n /a/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          [
+            0
+          ],
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "name": "consuming_blind",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n => Atom\n EX {return(\"BLIND\")}\n E {return(\"BLIND\")}\nAtom:|\n /a/ -> Atom[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          "BLIND",
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "name": "one_shot",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:|\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "le_whole_rule_return",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n LE {return(\"LE\")}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          "LE",
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ordinary_or",
+    "source": "Guard::OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ordinary_and",
+    "source": "Guard::AND{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": 0
+      }
+    ],
+    "expected_group_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2"
+  },
+  {
+    "name": "ordinary_blind",
+    "source": "Guard::OR{1}\n => Atom\n EX {return(\"ORDINARY\")}\n E {return(\"ORDINARY\")}\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": "ORDINARY"
+      }
+    ]
+  },
+  {
+    "name": "after_prefix",
+    "source": "Top::AND\n /x/ -> Top[0] {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return(matched)}\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "xa",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 1,
+            "end_offset": 1
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "current_edge",
+    "source": "Top::|\n -> Guard[0] {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return(matched)}\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "scope_cleanup",
+    "source": "Top::\n I {first=recognition_checkpoint();recognize_once(first,call(Once));initial=recognition_commit(first);ordinary=call(Plain);tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return(matched)}\n /never/\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\nOnce:|\n /(?=a)/ -> Once[0] {return(0)}\nPlain:OR{1}\n /(?=a)/ -> Plain[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  }
+]

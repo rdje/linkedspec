@@ -440,6 +440,7 @@ mutable struct _RuntimeExecutionContext
     mark_buckets::Dict{String,Dict{String,Int}}
     recognition_frames::Vector{_RuntimeRecognitionFrame}
     recursive_observation_scopes::Vector{_RuntimeRecursiveObservationScope}
+    recognition_progress_origins::Vector{String}
     cursor_stack::Vector{Int}
     active_rule_entries::Set{Tuple{String,Int,Int}}
     rule_local_binding_scopes::Vector{Dict{String,_RuntimeRuleLocalBinding}}
@@ -493,6 +494,7 @@ function _RuntimeExecutionContext(
         Dict{String,Dict{String,Int}}(),
         _RuntimeRecognitionFrame[],
         _RuntimeRecursiveObservationScope[],
+        String[],
         Int[],
         Set{Tuple{String,Int,Int}}(),
         Dict{String,_RuntimeRuleLocalBinding}[],
@@ -763,6 +765,63 @@ function _reject_runtime_recursive_observation!(
             code = code,
         ),
     )
+end
+
+function _with_runtime_recognition_progress_scope(
+    recognize::Function,
+    context::_RuntimeExecutionContext,
+    caller::String,
+)
+    push!(context.recognition_progress_origins, "$caller:recognize_once")
+    try
+        return recognize()
+    finally
+        pop!(context.recognition_progress_origins)
+    end
+end
+
+function _assert_runtime_recognition_repetition_progress!(
+    engine::LinkedSpecRuntimeEngine,
+    context::_RuntimeExecutionContext,
+    rule::String,
+    start_codeunit::Int,
+)
+    isempty(context.recognition_progress_origins) && return nothing
+    try
+        RecognitionTransaction.validate_repetition_progress(
+            context.recognition_authority;
+            rule = rule,
+            origin = last(context.recognition_progress_origins),
+            start_offset = start_codeunit,
+            end_offset = context.cursor_codeunit,
+        )
+    catch failure
+        failure isa RecognitionTransaction.RecognitionTransactionException || rethrow()
+        record = RecognitionTransaction.to_json(failure)
+        _emit_runtime_trace_event!(
+            context,
+            LinkedSpecTraceMark,
+            "julia_runtime:recognition_repetition_progress_failure",
+            "code=$(record["code"]) rule=$(record["rule"]) " *
+            "origin=$(record["origin"]) start_offset=$(record["start_offset"]) " *
+            "end_offset=$(record["end_offset"])",
+            LinkedSpecTraceLow,
+        )
+        detail = sprint(showerror, failure)
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "runtime_execution",
+                summary = "Julia recognition repetition made no progress",
+                detail = detail,
+                code = record["code"],
+                rule_label = record["rule"],
+            ),
+        ))
+    end
+    return nothing
 end
 
 function _note_runtime_recognition_match!(
@@ -2132,6 +2191,7 @@ function _execute_runtime_blind_rule!(
             uses_and_execution = uses_and_execution,
         ))
         if matched.nexted
+            _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
             matches += 1
             if context.cursor_codeunit == before
                 break
@@ -2143,11 +2203,12 @@ function _execute_runtime_blind_rule!(
             break
         end
 
-        matches += 1
         loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
         if loop_end !== nothing
             return _runtime_returned(loop_end.value)
         end
+        _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
+        matches += 1
         iteration_return = _execute_runtime_lifecycle!(engine, rule, "IT", context)
         if iteration_return !== nothing
             return _runtime_returned(iteration_return.value)
@@ -2360,10 +2421,12 @@ function _execute_runtime_regex_rule!(
             cursor_policy = cursor_policy,
             and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
             action_iteration_values = action_iteration_values,
+            repetition_start_codeunit = before,
             match_preselected = capture_gaps,
             preselected_match = selected_match,
         ))
         if matched.nexted
+            _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
             matches += 1
             if context.cursor_codeunit == before
                 break
@@ -2375,6 +2438,7 @@ function _execute_runtime_regex_rule!(
             break
         end
 
+        _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
         capture_gaps && _commit_runtime_gap_candidate!(engine, rule, context)
         matches += 1
         _set_runtime_gap_phase!(context, rule.label, "IT")
@@ -2473,6 +2537,7 @@ function _execute_runtime_regex_once!(
     cursor_policy::LinkedSpecParseMode,
     and_sequence::Bool = false,
     action_iteration_values = nothing,
+    repetition_start_codeunit = nothing,
     match_preselected::Bool = false,
     preselected_match = nothing,
 )
@@ -2536,6 +2601,7 @@ function _execute_runtime_regex_once!(
                 one_match,
                 context;
                 action_iteration_values = action_iteration_values,
+                repetition_start_codeunit = repetition_start_codeunit,
             )
             _set_runtime_gap_phase!(context, rule.label, "LE")
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
@@ -2592,6 +2658,7 @@ function _execute_runtime_regex_once!(
         one_match,
         context;
         action_iteration_values = action_iteration_values,
+        repetition_start_codeunit = repetition_start_codeunit,
     )
     _set_runtime_gap_phase!(context, rule.label, "LE")
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
@@ -2766,6 +2833,7 @@ function _accept_runtime_regex_match!(
     context::_RuntimeExecutionContext,
     ;
     action_iteration_values = nothing,
+    repetition_start_codeunit = nothing,
 )
     context.cursor_codeunit = one_match.codeunit_end
     context.registers = with_local_match(context.registers, one_match)
@@ -2792,6 +2860,11 @@ function _accept_runtime_regex_match!(
         )
         if action_return !== nothing
             if action_iteration_values === nothing
+                if rule.mode_metadata.is_and && repetition_start_codeunit !== nothing
+                    _assert_runtime_recognition_repetition_progress!(
+                        engine, context, rule.label, repetition_start_codeunit,
+                    )
+                end
                 throw(action_return)
             end
             push!(action_iteration_values, _runtime_copy(action_return.value))
@@ -3892,9 +3965,11 @@ function _evaluate_runtime_action_expr!(
     elseif expr isa ActionRecognizeOnceExpr
         target_index = current_edge !== nothing &&
             current_edge.target.label == expr.rule ? current_edge.target.index : 0
-        child = current_edge !== nothing && current_edge.target.label == expr.rule ?
-            _execute_runtime_action_edge_child!(engine, current_edge, context) :
-            _execute_runtime_rule!(engine, expr.rule, target_index, context)
+        child = _with_runtime_recognition_progress_scope(context, rule_label) do
+            current_edge !== nothing && current_edge.target.label == expr.rule ?
+                _execute_runtime_action_edge_child!(engine, current_edge, context) :
+                _execute_runtime_rule!(engine, expr.rule, target_index, context)
+        end
         context.retv = child.value
         return _runtime_recognition_attempt!(
             context,

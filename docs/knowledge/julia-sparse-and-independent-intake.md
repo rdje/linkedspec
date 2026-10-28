@@ -6,10 +6,9 @@ answers:
   - "why does Julia duplicate AND run two actions on one regex hit"
   - "why does Julia repeated AND return only the first group"
   - "why does Julia implicit Default blind return null after accepted children"
-  - "does live Julia recognize_once enforce repetition progress"
   - "does Julia accepted null action preserve matched status"
 date: 2026-10-28
-status:31-source independent intake complete; P1 repairs39.3.1-.7 before peers/admission, live progress .6 next
+status:31-source intake complete; live progress39.3.6 repaired/targeted-checked, required steps .1 next before peers/admission
 tags: [julia, sparse-and, dependency, repetition, minimum, blind-call, progress, nullable, intake]
 evidence: "julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources."
 reverify: "Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish."
@@ -47,3 +46,9 @@ and loads31 emitted modules. Exact source/normalized/compiled/plan/emitted bytes
 and actual runtime/producer inputs retained. One initial summary reader raced an
 empty fresh log and raised KeyError; explicit --fresh after process exit fixes
 the harness race, not a product defect. No performance/full admission claim.
+
+39.3.6 now connects actual accepted repetition to private typed progress,
+with caller origin scope and existing SDK/generated diagnostics.24 sources
+9healthy15RED ->24pass234 assertions, same24 baseline fresh modules and exact
+input/control identity. Current mechanism/proof: [[julia-live-recognition-progress]].
+The original31-source packet remains historical, other bounded repairs stay open.

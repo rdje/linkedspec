@@ -227,3 +227,14 @@ missing blind collections and accepted recognition zero-progress. Children
 39.3.1-.7 own confirmed repairs and post-call qualification, .6 progress next.
 Packet julia-sparse-intake.json.gz retains exact producers/inputs/trace/SDK/fresh.
 No Julia production change or inferred Lua gap; full admission remains separate.
+
+Julia39.3.6 now connects live recognize_once accepted repetitions to private
+typed progress validation with scoped caller origin, preserving ordinary/
+one-shot/whole-LE authority and current .2-owned early-AND scalar controls.
+24 sources9healthy15RED ->24pass234 assertions and same24 baseline fresh modules,
+exact input/9 control identity. SDK diagnostic code/rule/phase and native low
+MARK caller origin/start/end retained; generated errors retain existing envelope.
+Direct-dependent recognition/repeated-result suites pass. Compiler/emitter/
+matching unchanged; normal driver includes new suite once. Packet
+julia-live-progress-intake.json.gz retains exact producer/runtime epochs.
+Required steps39.3.1 next, other Julia/peer/full admission owners remain.

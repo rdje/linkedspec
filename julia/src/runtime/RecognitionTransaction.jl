@@ -951,9 +951,27 @@ function _progress_offset(value)
     end
 end
 
+"""Validate one completed live repetition through the private authority."""
+function validate_repetition_progress(
+    ::RecognitionTransactionAuthority;
+    rule::AbstractString,
+    origin::AbstractString,
+    start_offset::Int,
+    end_offset::Int,
+)
+    end_offset > start_offset && return nothing
+    throw(_error(
+        _ZERO_PROGRESS_REPETITION_CODE,
+        "rule" => String(rule),
+        "origin" => String(origin),
+        "start_offset" => start_offset,
+        "end_offset" => end_offset,
+    ))
+end
+
 """Enforce cursor-only progress for accepted repetition and recursion edges."""
 function validate_progress(
-    ::RecognitionTransactionAuthority,
+    authority::RecognitionTransactionAuthority,
     fixture::AbstractDict,
 )
     context_value = get(fixture, "context", "unknown")
@@ -981,14 +999,12 @@ function validate_progress(
             ),
         )
     end
-    throw(
-        _error(
-            _ZERO_PROGRESS_REPETITION_CODE,
-            "rule" => rule,
-            "origin" => "$rule:recognize_once",
-            "start_offset" => start_offset,
-            "end_offset" => end_offset,
-        ),
+    return validate_repetition_progress(
+        authority;
+        rule = rule,
+        origin = "$rule:recognize_once",
+        start_offset = start_offset,
+        end_offset = end_offset,
     )
 end
 
