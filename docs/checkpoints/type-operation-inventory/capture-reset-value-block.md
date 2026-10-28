@@ -1,7 +1,7 @@
 # Anonymous capture reset as an ordinary value-block statement
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.35; target freeze35.0.
-Status: frozen bounded repair target; implementation35.1-.5 independently follows.
+Status: frozen bounded target; Perl35.1 repaired/targeted-checked, independent Rust35.2 then Dart/Julia/safe Lua follows.
 
 ## Authority and observed failure
 
@@ -83,3 +83,24 @@ exactly one final CAPTURE_RESET JSON row and only recognized prefixed diagnostic
 The actual producer/channels, initial/final consumer and prefix rejection output
 are retained. The first cardinality failure's tool-only text was not separately
 retained. These are instrument failures, not extra product RED or semantic credit.
+
+## Bounded Perl35.1
+
+The original eight-group regression has six actual RED groups, then first
+candidate8pass without expected-value changes. Contracts now shares the two
+original reset bodies with narrow AST/text block statement lowering after function
+guards. Native reset/public standalone bytes remain identical; readonly Number
+owner is unchanged. No mutator-as-data or new deferred vocabulary is admitted.
+Final test only appends six function/deferred groups, executed separately6pass;
+its first8 source prefix is byte-identical to the healthy candidate. Existing
+Number7pass and both module syntax checks pass. One fresh shared fixture retains
+actual candidate emitted source/raw0/ready1. Packet: capture-reset-value-block-
+perl-intake.json.gz. No full14-in-one-run or full context/admission claim.
+
+Pure-function reset remains unready and leaves outer boundary2; four deferred
+canonical/alias literal/registered bodies retain typed unknown_helper rejection.
+Their false-ready metadata extends existing31.6.4.4. Native collecting parent
+clears the real child error and returns[null]; public runtime-only trace confirms
+SpecEntry failure followed by Compiler defined-AST clearing. New P1 owner41 after40
+before admission repairs that separate error-delivery defect without treating null
+as healthy. Independent Rust35.2 follows; complete35/context admission stays open.

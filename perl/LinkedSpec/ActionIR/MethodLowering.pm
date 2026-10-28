@@ -705,6 +705,14 @@ sub _lower_block_side_effect_statement {
 
  my $call = $parse_method_function_expr->($trimmed);
  return undef if $call && ($call->{method} // '') eq 'return';
+ if ($call && $trimmed =~ /\A(?:start_capture_slice|capture_slice_here)\s*\(\s*\)\z/o) {
+  return _actionir_ast_unsupported_helper_expr($call->{method})
+   if _parser_state_helper_is_forbidden_in_function($call->{method}, $deps);
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_anonymous_capture_reset_statement_expr',
+   $call->{method},
+  );
+ }
 
  for my $lowerer (
   \&_lower_scalar_assignment_operator_statement,
@@ -738,6 +746,13 @@ sub _lower_ast_block_side_effect_statement {
  my $kind = $node->{kind} // '';
  return _actionir_ast_unsupported_helper_expr($node->{name})
   if $kind eq 'call' && _parser_state_helper_is_forbidden_in_function($node->{name}, $deps);
+ if ($kind eq 'call' && ($node->{name} // '') =~ /\A(?:start_capture_slice|capture_slice_here)\z/o
+     && ref($node->{args}) eq 'ARRAY' && !@{$node->{args}} && !$node->{trailing_block_arg}) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_anonymous_capture_reset_statement_expr',
+   $node->{name},
+  );
+ }
  foreach my $candidate_kind ('assign_scalar', 'assign_array_append', 'assign_hash_index', 'assign_nested_access') {
   next unless $kind eq $candidate_kind;
   my $lowered = _lower_ast_assignment_operator_statement($node, $deps, $candidate_kind);

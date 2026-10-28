@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: all bounded33 children targeted-checked; void-block35 target frozen/Perl35.1 next; named-mark34/endpoint40/full admission open
+status: all bounded33 children targeted-checked; void-block Perl35.1 repaired/Rust35.2 next; named-mark34/endpoint40/full admission open
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -136,3 +136,9 @@ independent35.1-.5 owners. Seven fresh public Perl controls confirm two healthy
 no-reset/standalone forms and five failing inside/alias/return/lazy forms with
 misleading ready1. See [[capture-reset-value-block-statement-gap]]. No runtime or
 mutator-as-data/deferred vocabulary change in the authority leaf; Perl35.1 next.
+
+Perl35.1 repairs the ordinary nonfinal reset statement role through the original
+Contracts boundary-write body; eight core groups pass after six RED, six added
+fences pass separately, nearby Number7pass. Canonical/alias bodies and native
+readonly getter owner stay byte-identical. No mutator-as-data/deferred grant;
+independent Rust35.2 follows. Adjacent child error loss is owned41 before admission.

@@ -7,7 +7,7 @@ answers:
   - "which task owns capture reset inside expression-valued blocks"
   - "does capture reset block ready1 mean generated source compiles"
 date: 2026-10-28
-status: bounded target35.0 frozen; independent implementation35.1-.5 next; no runtime change
+status: Perl35.1 repaired/targeted-checked; independent Rust35.2 next, peers/full admission open
 tags: [perl, blocks, capture, void, source, readiness, statement]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.35.0 at clean0d0382338; seven public native/fresh/metadata/substitution sources and emitted bytes retained in capture-reset-value-block-authority.json.gz."
 reverify: "Recover probe_capture_reset_value_block.pl from the packet and run through tools/project_data_run.sh env PERL5LIB= perl -Iperl; require completed output before the strict consumer."
@@ -30,3 +30,21 @@ Target/fixture and backend owners35.1-.5 are frozen in capture-reset-value-block
 other backend failures are not inferred and healthy implementations need no patch.
 See [[terse-expression-valued-block-early-return]] and
 [[capture-boundary-number-result-lowering-gap]].
+
+## Current bounded Perl35.1
+
+The six failing groups of the unchanged eight-group regression become8pass on
+the first candidate. Contracts _anonymous_capture_reset_statement_expr provides
+the exact original canonical/alias reset body to late contracts and new narrow
+AST/text nonfinal ordinary statement paths after function guards. Both original
+bodies/public standalone substitutions are byte-identical and readonly Number
+owner is unchanged; no mutator value-source or deferred grant follows.
+
+Final test appends six function/deferred groups, checked separately6pass with
+byte-identical healthy core prefix; nearby Number7pass and syntax pass. Fresh
+shared fixture/native/metadata/source confirm real execution/raw0/ready1. Packet
+capture-reset-value-block-perl-intake.json.gz retains epochs and actual artifacts.
+No full14 combined run/global admission is claimed. Pure function reset stays
+blocked/unready with boundary2; excluded callback helpers stay typed unknown.
+Their false-ready metadata is31.6.4.4; defined-parent native child error loss is
+[[perl-collecting-parent-runtime-error-loss]], scheduled41 before admission.

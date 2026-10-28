@@ -755,6 +755,15 @@ sub _readonly_capture_boundary_number_value_expr {
  return $expressions->{$method}
 }
 
+# The existing anonymous reset body is shared by the late native contract and
+# ordinary block statement lowering. This is not a value-source admission.
+sub _anonymous_capture_reset_statement_expr {
+ my ($method) = @_;
+ return undef unless defined($method)
+  && $method =~ /\A(?:start_capture_slice|capture_slice_here)\z/o;
+ return 'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "'.$method.'") }'
+}
+
 # Contracts that normalize capture and cursor-control helpers.
 sub _build_capture_and_cursor_contracts {
  my ($label, $d) = @_;
@@ -977,7 +986,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bstart_capture_slice\s*\(\s*\)
     }{
-     'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "start_capture_slice") }'
+     _anonymous_capture_reset_statement_expr('start_capture_slice')
     }gex;
     return $code
    },
@@ -1008,7 +1017,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice_here\s*\(\s*\)
     }{
-     'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_slice_here") }'
+     _anonymous_capture_reset_statement_expr('capture_slice_here')
     }gex;
     return $code
    },
