@@ -224,7 +224,6 @@ fn legacy_accumulator_api_does_not_raise_for_a_minimum_miss() {
 }
 
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6; retained actual RED, required before admission"]
 fn a_real_progress_error_is_not_converted_to_a_miss() {
     let source = "Value::OR{2}\n => Part\nPart:\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));recognition_rollback(tx);return(matched)}\n /never/\nGuard:+\n /(?=a)/ -> Guard {return(\"zero\")}\n";
     check(

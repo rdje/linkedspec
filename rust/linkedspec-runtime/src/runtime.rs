@@ -219,8 +219,11 @@ pub struct RuntimeContext {
     /// Optional host-seeded progressive child-parse authority for this execution.
     progressive_dispatch: Option<crate::bounded_child_parse_authority::ProgressiveExecutionState>,
     /// Active non-eager recognition scopes publish explicit child acceptance.
-    recognition_scope_depth: usize,
+    recognition_scope_origins: Vec<String>,
     recognition_completions: Vec<RecognitionInvocationCompletion>,
+    /// Actual typed live error retained for existing diagnostic projection.
+    recognition_progress_failure:
+        Option<crate::recognition_transaction::RecognitionTransactionError>,
     /// Active explicit observation boundaries; invocation lineage remains owned
     /// solely by `recognition_transactions` rather than this scope metadata.
     recursive_observation_scopes: Vec<RecursiveObservationScope>,
@@ -441,8 +444,9 @@ impl RuntimeContext {
                 INPUT_SOURCE_ID,
             ),
             progressive_dispatch: None,
-            recognition_scope_depth: 0,
+            recognition_scope_origins: Vec::new(),
             recognition_completions: Vec::new(),
+            recognition_progress_failure: None,
             recursive_observation_scopes: Vec::new(),
             source_authority,
             pos: 0,
@@ -673,7 +677,9 @@ impl RuntimeContext {
         } else {
             self.marks.remove(rule_label);
         }
-        if self.recognition_scope_depth > 0 || !self.recursive_observation_scopes.is_empty() {
+        if !self.recognition_scope_origins.is_empty()
+            || !self.recursive_observation_scopes.is_empty()
+        {
             self.recognition_completions
                 .push(RecognitionInvocationCompletion {
                     identity: exit.identity,
@@ -828,8 +834,9 @@ impl RuntimeContext {
             .map_err(|error| error.to_string())
     }
 
-    pub(crate) fn begin_recognition_scope(&mut self) -> usize {
-        self.recognition_scope_depth += 1;
+    pub(crate) fn begin_recognition_scope(&mut self, rule_label: &str) -> usize {
+        self.recognition_scope_origins
+            .push(format!("{rule_label}:recognize_once"));
         self.recognition_completions.len()
     }
 
@@ -838,10 +845,9 @@ impl RuntimeContext {
         completion_base: usize,
         expected_rule: &str,
     ) -> Result<bool, String> {
-        self.recognition_scope_depth = self
-            .recognition_scope_depth
-            .checked_sub(1)
-            .expect("recognition scope depth is balanced");
+        self.recognition_scope_origins
+            .pop()
+            .expect("recognition scope is balanced");
         let completions = self.recognition_completions.split_off(completion_base);
         let completion = completions
             .into_iter()
@@ -856,15 +862,44 @@ impl RuntimeContext {
     }
 
     pub(crate) fn cancel_recognition_scope(&mut self, completion_base: usize) {
-        self.recognition_scope_depth = self
-            .recognition_scope_depth
-            .checked_sub(1)
-            .expect("recognition scope depth is balanced");
+        self.recognition_scope_origins
+            .pop()
+            .expect("recognition scope is balanced");
         self.recognition_completions.truncate(completion_base);
     }
 
+    pub(crate) fn assert_recognition_repetition_progress(
+        &mut self,
+        rule_label: &str,
+        start: usize,
+        end: usize,
+    ) -> Result<(), String> {
+        let Some(origin) = self.recognition_scope_origins.last() else {
+            return Ok(());
+        };
+        if let Err(error) = crate::recognition_transaction::validate_repetition_progress(
+            rule_label,
+            origin,
+            u64::try_from(start).expect("Rust recognition start fits u64"),
+            u64::try_from(end).expect("Rust recognition end fits u64"),
+        ) {
+            let message = error.to_string();
+            if self.recognition_progress_failure.is_none() {
+                self.recognition_progress_failure = Some(error);
+            }
+            return Err(message);
+        }
+        Ok(())
+    }
+
+    pub(crate) fn recognition_progress_failure(
+        &self,
+    ) -> Option<&crate::recognition_transaction::RecognitionTransactionError> {
+        self.recognition_progress_failure.as_ref()
+    }
+
     pub(crate) fn recognition_result_is_match(&mut self, fallback: bool) -> bool {
-        if self.recognition_scope_depth == 0 {
+        if self.recognition_scope_origins.is_empty() {
             return fallback;
         }
         self.recognition_completions

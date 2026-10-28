@@ -156,3 +156,13 @@ RuleIR turns adjacent lifecycle into acode and REP collects[1,1], Rust E once1.
 Below-minimum ordinary miss remains.5.1, with legacy API change explicit.
 Refined EX/E same sentinel isolates bounds/recovery, not lifecycle phase parity.
 Packet rust-minimum-miss-intake.json.gz; no production change in this intake.
+
+39.1.6 repairs live recognition repetition progress through typed completed-group
+native/generated acode/bcode guards before IT/max/ordinary zero exits. Whole AND
+group cursor permits zero-width slots when the group consumes. Private record
+retains caller origin/offsets; existing public code/rule/stage only.18 public
+cases retain exact source/input/serde/plan/emitted identity RED2pass2fail ->GREEN4pass.
+Generated expression callbacks use native callees; private direct generated loops
+cover5 error modes/2 consuming groups. Actual native offsets0/1 and cleanup pass.
+Minimum target2pass7 owned dormant;39.1.5.1 next, no ignored success credit/full
+admission. Packet rust-live-progress-intake.json.gz retains producers/inputs/logs.

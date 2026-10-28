@@ -7904,7 +7904,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored implicit-result/return controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5`
-  Status: `in_progress` / intake39.1.5.0 complete; progress39.1.6 before bounded minimum39.1.5.1
+  Status: `in_progress` / intake39.1.5.0 and progress39.1.6 complete; bounded minimum39.1.5.1 next
   Goal: Reconcile and repair ordinary Rust under-minimum failure against existing portable no-match semantics, separately from repeated-AND action returns.
   Reproduction: Value::AND{2} nonreturning sparse action with IT/E collector on HcatHcat returns[[cat],[cat]] on all3 routes; Hcat returns generic expected-at-least2-got1 Err, while current Perl returnsnull. Exact source/serialized/plan and native trace retained in refined Rust intake.
   Root/acceptance: Interpreted/generated regex and bcode minimum checks currently returnErr after ordinary input misses. Audit published mode/no-match/typed error authority before changing scope; prove a distinguishing recovery path and below-minimum/zero/empty/accepted-null/explicit-return controls. Preserve real execution/validation/progress errors and no cursor rollback policy change. Do not silently rewrite error schemas or broaden a local AND fix into unreviewed mode policy.
@@ -7957,15 +7957,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored placement/result distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6`
-  Status: `pending` / P1 immediate prerequisite before39.1.5.1/peers/admission
-  Goal: Enforce existing cursor-only recognition repetition progress in actual native/generated execution.
-  Reproduce: minimum_miss_routes.rs a_real_progress_error_is_not_converted_to_a_miss: Part I recognizes Guard:+ /(?=a)/ returningzero on inputa. Perl native/fresh throws recognition_zero_progress_repetition at0. Rust native/restored/plan instead reports Value minimum2/got1. Public native trace shows Guard regex0..0 exits Ok array, Part exits bool at0, Value counts one then minErr.
-  Root: Engine native/generated acode/bcode repetition uses silent ordinary progress break and can exit at max before consulting a recognition-specific guard. validate_recognition_progress in recognition_transaction.rs validates neutral fixtures but is not wired into authored engine/runtime execution. Do not infer runtime enforcement from the unchanged neutral fixture test or historical12-test admission.
-  Acceptance: Wire a typed private live guard at accepted repetition/group finalization before max-bound and ordinary zero-progress exits, only in the accepted recognition context. Preserve canonical code/stage/rule/origin/start/end fields, current scope/cancellation cleanup, ordinary zero-progress termination, legal consuming repetitions and one-shot zero-width recognition. Audit all native/generated acode/bcode owners and early AND group return path. Do not use fixture-shaped JSON as the new production interface, change public schemas or broaden recognition-safe effects. Enable exact dormant progress regression and retain distinguishing max1/unbounded/AND/OR/blind/ordinary/one-shot/error-origin controls. Minimum and lifecycle-attribution owners remain separate.
-  Planned verification tier: focused
-  Planned focused checks: Public authored native/restored/plan RED-GREEN with typed diagnostic fields and live trace; existing neutral progress fixture remains unchanged; scoped normal controls/compile/format, book/docs/manual continuity/commit.
-  Planned canonical trigger: Existing recognition contract/schema retained; actual authority/format change separately owned canonical. Full39/23.4/final clean push after all regressions enabled.
-  Planned claim verification: none: Finite authored dynamic-progress/error/control distinctions, no population measurement.
+  Status: `completed` / actual native/generated live repetition guard
+  Activation: clean `916ee53ce3558638aacec2975c1abd48b5f135ad` after minimum/progress intake39.1.5.0.
+  Goal: Enforce cursor-only recognition repetition progress in actual execution, preserving ordinary/one-shot behavior.
+  Verification tier: `focused`
+  Focused checks:18 public cases native/restored/plan/v2 RED2pass2fail ->GREEN4pass; exact source/serde/plan/emitted identity; private3pass actual offsets0/1/cleanup/direct generated5error2positive; minimum target2pass7 owned dormant; neutral1/false-payload1/group2 pass; exact-file format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push; no public contract/schema/format movement or ledger promotion.
+  Claim verification: none: Finite authored dynamic-progress/error/control distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Guard zero0..0 inside recognize_once silently exits; outer Value misleadingly raises minimumErr.18 reached cases distinguish11 actual repetition errors from7 controls, baseline2pass2fail. Initial compile typo retained without product RED credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Native/generated acode/bcode loops used ordinary zero/max exits without recognition progress enforcement. Neutral validator was not wired to live completion. Generated-plan expression callees use native Engine dispatch, so public plan results alone cannot certify generated Guard loops.
+  - [x] **FIX**: Typed validate_repetition_progress shared by neutral adapter/live guard. Active origin stack replaces depth; retained private error projects existing code/rule/stage. Four loop owners check completed hits/groups after LE authority, before IT/max/ordinary exits; AND uses whole group start including early return. No fixture-shaped production API/public schema or classifier change.
+  - [x] **ADDRESSED (verified)**: Public4pass/private3pass; actual native offsets0/1 and canceled scope, five direct generated error modes/two consuming groups. Original progress regression enabled; minimum target2pass7 owned dormant under39.1.5.1, no ignored success credit. Exact18 source/input/serde/plan/emitted records unchanged.
+  - [x] **NO REGRESSION**: Ordinary zero termination, one-shot zero, consuming choice, leading/trailing zero AND group, max1 and IT controls pass; neutral1/false-payload1/group-reset2 pass. No full suite/independent emitted package/Unicode position claim; callback versus direct loop routing explicit.
+  - [x] **LOCKSTEP**: rust-live-progress-intake.json.gz, card/target/book/roadmap/task/live/resume/history align. Minimum/API39.1.5.1 next; blind39.1.4.2/attribution39.1.5.2/SESSION27/peers remain owned before admission. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6 - enforce live recognition repetition progress in Rust`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8299,7 +8305,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` | `pending` | Wire missing live recognition progress guard before ordinary minimum normalization. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` | `pending` | Normalize ordinary minimum misses after the live progress repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

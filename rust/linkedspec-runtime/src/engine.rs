@@ -1604,6 +1604,21 @@ impl GeneratedPlanExecutor<'_> {
                         return_if_rule_returned!();
                     }
                 }
+                // Only a completed group/hit is a repetition iteration. In
+                // AND, an intermediate zero-width slot can precede consuming
+                // slots, and the last slot can itself be zero-width.
+                if is_rep
+                    && (!is_rep_and_acode_seq
+                        || and_group_return.is_some()
+                        || and_acode_idx + 1 == and_acode_seq_len)
+                {
+                    let iteration_start = if is_rep_and_acode_seq {
+                        rep_and_start_pos
+                    } else {
+                        pos_before
+                    };
+                    ctx.assert_recognition_repetition_progress(label, iteration_start, ctx.pos)?;
+                }
                 // An accepted early group return skips its remaining slots,
                 // then finalizes this candidate before the outer IT hook.
                 ctx.commit_gap_candidate(label)?;
@@ -1942,6 +1957,7 @@ impl GeneratedPlanExecutor<'_> {
                         return_if_rule_returned!();
                     }
 
+                    ctx.assert_recognition_repetition_progress(label, pos_before, ctx.pos)?;
                     matches += 1;
 
                     if let Some(ref itcode) = rule.itcode {
@@ -2671,13 +2687,24 @@ impl Engine {
         message: String,
     ) -> RuntimeExecutionError {
         let failure = ctx.diagnostic_failure();
+        let progress_record = ctx
+            .recognition_progress_failure()
+            .map(|error| error.as_record());
         let stage = failure
             .map(|context| context.stage)
             .unwrap_or("runtime_execution");
         let summary = failure
             .map(|context| context.summary)
             .unwrap_or("Rust runtime interpreter failed");
-        let rule_label = failure.and_then(|context| context.rule_label.clone());
+        let rule_label = failure
+            .and_then(|context| context.rule_label.clone())
+            .or_else(|| {
+                progress_record
+                    .as_ref()
+                    .and_then(|record| record.get("rule"))
+                    .and_then(Value::as_str)
+                    .map(str::to_string)
+            });
         let effective_rule = rule_label.as_deref().or_else(|| ctx.diagnostic_top_rule());
         let entry_rule = failure
             .filter(|context| context.code == Some(ENTRY_RULE_NOT_FOUND_CODE))
@@ -2692,7 +2719,15 @@ impl Engine {
             RuntimeDiagnostic {
                 diagnostic_type: "runtime_parser".to_string(),
                 stage: stage.to_string(),
-                code: failure.and_then(|context| context.code.map(str::to_string)),
+                code: failure
+                    .and_then(|context| context.code.map(str::to_string))
+                    .or_else(|| {
+                        progress_record
+                            .as_ref()
+                            .and_then(|record| record.get("code"))
+                            .and_then(Value::as_str)
+                            .map(str::to_string)
+                    }),
                 owner_stage: Some("rust_runtime".to_string()),
                 summary: summary.to_string(),
                 detail: message,
@@ -3514,6 +3549,7 @@ impl Engine {
                         return_if_rule_returned!();
                     }
 
+                    ctx.assert_recognition_repetition_progress(label, pos_before, ctx.pos)?;
                     matches += 1;
 
                     if let Some(ref itcode) = rule.itcode {
@@ -3868,6 +3904,21 @@ impl Engine {
                         self.execute_lifecycle_block("LE", lecode, ctx, label)?;
                         return_if_rule_returned!();
                     }
+                }
+                // Only a completed group/hit is a repetition iteration. In
+                // AND, an intermediate zero-width slot can precede consuming
+                // slots, and the last slot can itself be zero-width.
+                if is_rep
+                    && (!is_rep_and_acode_seq
+                        || and_group_return.is_some()
+                        || and_acode_idx + 1 == and_acode_seq_len)
+                {
+                    let iteration_start = if is_rep_and_acode_seq {
+                        rep_and_start_pos
+                    } else {
+                        pos_before
+                    };
+                    ctx.assert_recognition_repetition_progress(label, iteration_start, ctx.pos)?;
                 }
                 // An accepted early group return skips its remaining slots,
                 // then finalizes this candidate before the outer IT hook.
@@ -6007,7 +6058,7 @@ impl Engine {
                 "recognition_checkpoint must be assigned to a rule-local token in rule '{rule_label}'"
             )),
             Expr::RecognizeOnce { token, rule } => {
-                let completion_base = ctx.begin_recognition_scope();
+                let completion_base = ctx.begin_recognition_scope(rule_label);
                 let payload = match self.execute_rule(rule, 0, ctx) {
                     Ok(payload) => payload,
                     Err(error) => {
@@ -11093,6 +11144,170 @@ mod tests {
     use linkedspec_core::compiler::compile;
     use linkedspec_core::parser::parse_spec;
     use linkedspec_core::validation::validate;
+
+    #[test]
+    fn live_recognition_progress_keeps_provenance_and_cleans_scope() {
+        for (name, source, input, offset) in [
+            (
+                "entry_zero",
+                "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));recognition_commit(tx);return(matched)}\n /never/\nGuard:+\n /(?=a)/ -> Guard[0] {return(0)}\n",
+                "a",
+                0,
+            ),
+            (
+                "after_prefix",
+                "Top::AND\n /x/ -> Top[0] {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));recognition_commit(tx);return(matched)}\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+                "xa",
+                1,
+            ),
+        ] {
+            let parsed = crate::spec_parser::parse_spec_with_user_functions(source).unwrap();
+            validate(&parsed).unwrap();
+            let engine = Engine::new(compile(&parsed).unwrap());
+            let mut ctx = RuntimeContext::new(input);
+            let message = engine
+                .execute_value_with_context(&mut ctx, &ExecutionOptions::new())
+                .expect_err("live guard");
+            let record = ctx.recognition_progress_failure().unwrap().as_record();
+            eprintln!(
+                "RUST_LIVE_PROGRESS_PRIVATE {name} {}",
+                serde_json::json!({"source":source,"input":input,"record":record,"message":message})
+            );
+            assert_eq!(
+                record,
+                serde_json::json!({"code":"recognition_zero_progress_repetition","rule":"Guard","origin":"Top:recognize_once","start_offset":offset,"end_offset":offset})
+            );
+            let projected = engine.structured_runtime_error(&ctx, message);
+            assert_eq!(
+                projected.diagnostic().code.as_deref(),
+                Some("recognition_zero_progress_repetition")
+            );
+            assert_eq!(projected.diagnostic().rule_label.as_deref(), Some("Guard"));
+            // The actual RecognizeOnce error path canceled its scope. A later
+            // ordinary loop must not inherit strict recognition behavior.
+            assert!(
+                ctx.assert_recognition_repetition_progress(
+                    "After",
+                    offset as usize,
+                    offset as usize
+                )
+                .is_ok()
+            );
+        }
+    }
+
+    #[test]
+    fn live_recognition_progress_direct_generated_loops_reject_and_clean() {
+        for (name, source) in [
+            (
+                "acode_choice",
+                "Guard::OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+            ),
+            (
+                "acode_and",
+                "Guard::AND{1}\n /(?=a)/ -> Guard[0] {return(0)}\n",
+            ),
+            (
+                "bcode_choice",
+                "Guard::OR{1}\n => Atom\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+            ),
+            (
+                "bcode_and",
+                "Guard::AND{1}\n => Atom\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+            ),
+            (
+                "bcode_default",
+                "Guard::\n => Atom\nAtom:|\n /(?=a)/ -> Atom[0] {return(0)}\n",
+            ),
+        ] {
+            let parsed = crate::spec_parser::parse_spec_with_user_functions(source).unwrap();
+            validate(&parsed).unwrap();
+            let compiled = compile(&parsed).unwrap();
+            let rules: Vec<_> = compiled
+                .rules
+                .iter()
+                .map(|rule| GeneratedRuleSpec {
+                    label: match rule.label.as_str() {
+                        "Guard" => "Guard",
+                        "Atom" => "Atom",
+                        _ => unreachable!(),
+                    },
+                    family: crate::source_emitter::classify_generated_rule_family(rule),
+                })
+                .collect();
+            let engine = Engine::new(compiled);
+            let mut ctx = RuntimeContext::new("a");
+            // Exercise the existing lower-level generated-loop entrypoint in
+            // an active caller scope, independently of shared expression
+            // callbacks that dispatch their recognize_once callee natively.
+            let base = ctx.begin_recognition_scope("Observer");
+            let message = engine
+                .execute_generated_value_with_plan_context(
+                    &rules,
+                    &mut ctx,
+                    Some("direct-live-progress.spec"),
+                    &ExecutionOptions::new(),
+                )
+                .expect_err("generated live guard");
+            let record = ctx.recognition_progress_failure().unwrap().as_record();
+            eprintln!(
+                "RUST_LIVE_PROGRESS_DIRECT {name} {}",
+                serde_json::json!({"source":source,"record":record,"message":message})
+            );
+            assert_eq!(
+                record,
+                serde_json::json!({"code":"recognition_zero_progress_repetition","rule":"Guard","origin":"Observer:recognize_once","start_offset":0,"end_offset":0})
+            );
+            ctx.cancel_recognition_scope(base);
+            assert!(
+                ctx.assert_recognition_repetition_progress("After", 0, 0)
+                    .is_ok()
+            );
+        }
+    }
+
+    #[test]
+    fn live_recognition_progress_direct_generated_groups_measure_whole_cursor() {
+        for (name, source, input) in [
+            (
+                "leading_zero",
+                "Guard::AND{1}\n /(?=a)/\n /a/ -> Guard[1] {return(0)}\n",
+                "a",
+            ),
+            (
+                "trailing_zero",
+                "Guard::AND{1}\n /a/\n /(?=b)/ -> Guard[1] {return(0)}\n",
+                "ab",
+            ),
+        ] {
+            let parsed = crate::spec_parser::parse_spec_with_user_functions(source).unwrap();
+            validate(&parsed).unwrap();
+            let compiled = compile(&parsed).unwrap();
+            let rules = [GeneratedRuleSpec {
+                label: "Guard",
+                family: crate::source_emitter::classify_generated_rule_family(&compiled.rules[0]),
+            }];
+            let engine = Engine::new(compiled);
+            let mut ctx = RuntimeContext::new(input);
+            let base = ctx.begin_recognition_scope("Observer");
+            let value = engine
+                .execute_generated_value_with_plan_context(
+                    &rules,
+                    &mut ctx,
+                    Some("direct-live-progress.spec"),
+                    &ExecutionOptions::new(),
+                )
+                .unwrap();
+            eprintln!(
+                "RUST_LIVE_PROGRESS_DIRECT_POSITIVE {name} {}",
+                serde_json::json!({"source":source,"input":input,"value":value,"cursor":ctx.pos})
+            );
+            assert_eq!(value, serde_json::json!([0]));
+            assert_eq!(ctx.pos, 1);
+            assert!(ctx.recognition_progress_failure().is_none());
+            assert!(ctx.finish_recognition_scope(base, "Guard").unwrap());
+        }
+    }
 
     #[test]
     fn indexed_var_observes_current_binding_instead_of_stale_private_array() {

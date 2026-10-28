@@ -19834,10 +19834,10 @@ _Rust MCP accepts one extra payload byte at final EOF_
 - **source:** [`docs/knowledge/rust-mcp-final-eof-byte-limit-gap.md`](docs/knowledge/rust-mcp-final-eof-byte-limit-gap.md)
 
 ### rust-minimum-miss-and-live-progress
-_Rust ordinary minimum errors are separate from an unwired live recognition progress guard_
+_Rust ordinary minimum errors and the repaired live recognition progress guard_
 - **answers:** why does a Rust blind child minimum abort its caller | does actual Rust recognition repetition reject zero-width iterations | why does Guard zero-width recognition surface an outer minimum error | does the Rust neutral recognition progress test prove live engine enforcement | which task owns the legacy Rust minimum error compatibility change | why does regex-adjacent E yield two values in Perl but one in Rust
-- **date:** 2026-10-28 · **status:** intake39.1.5.0 complete; immediate progress39.1.6 then minimum39.1.5.1; attribution.5.2 before admission
-- **evidence:** `rust-minimum-miss-intake.json.gz retains8 reference sources/24 native-fresh pairs, Rust9-test1pass8RED, actual native trace, source owners, producers and explicit dormant repair IDs.`
+- **date:** 2026-10-28 · **status:** live progress39.1.6 repaired; minimum39.1.5.1 next; attribution.5.2 before admission
+- **evidence:** `rust-minimum-miss-intake.json.gz retains authority/trace; rust-live-progress-intake.json.gz retains18 unchanged public source records RED/GREEN, private generated checks and exact producers/inputs.`
 - **reverify:** `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test minimum_miss_routes -- --nocapture; select exact owned ignored tests only when repairing; no dormant success credit.`
 - **source:** [`docs/knowledge/rust-minimum-miss-and-live-progress.md`](docs/knowledge/rust-minimum-miss-and-live-progress.md)
 

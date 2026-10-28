@@ -821,7 +821,28 @@ fn effect_error(code: &'static str, rule: &str, effect: &str) -> RecognitionTran
     )
 }
 
-/// Enforce cursor-only progress for accepted repetition and recursive edges.
+/// Validate one completed repetition using its live caller origin and cursor.
+pub(crate) fn validate_repetition_progress(
+    rule: &str,
+    origin: &str,
+    start: u64,
+    end: u64,
+) -> Result<(), RecognitionTransactionError> {
+    if end > start {
+        return Ok(());
+    }
+    Err(RecognitionTransactionError::new(
+        "recognition_zero_progress_repetition",
+        [
+            ("rule", json!(rule)),
+            ("origin", json!(origin)),
+            ("start_offset", json!(start)),
+            ("end_offset", json!(end)),
+        ],
+    ))
+}
+
+/// Enforce the neutral cursor-only repetition and recursion progress fixtures.
 pub fn validate_recognition_progress(fixture: &Value) -> Result<(), RecognitionTransactionError> {
     let context = fixture
         .get("context")
@@ -832,26 +853,24 @@ pub fn validate_recognition_progress(fixture: &Value) -> Result<(), RecognitionT
     if end > start || context == "one_shot" {
         return Ok(());
     }
-
     let rule = fixture
         .get("id")
         .and_then(Value::as_str)
         .unwrap_or("<rule>");
-    let code = if context == "accepted_repetition_iteration" {
-        "recognition_zero_progress_repetition"
-    } else {
-        "recognition_zero_progress_recursive_cycle"
-    };
-    let mut fields = vec![
-        ("rule", json!(rule)),
-        ("origin", json!(format!("{rule}:recognize_once"))),
-    ];
-    if code == "recognition_zero_progress_recursive_cycle" {
-        fields.push(("cycle", json!(context)));
+    let origin = format!("{rule}:recognize_once");
+    if context == "accepted_repetition_iteration" {
+        return validate_repetition_progress(rule, &origin, start, end);
     }
-    fields.push(("start_offset", json!(start)));
-    fields.push(("end_offset", json!(end)));
-    Err(RecognitionTransactionError::new(code, fields))
+    Err(RecognitionTransactionError::new(
+        "recognition_zero_progress_recursive_cycle",
+        [
+            ("rule", json!(rule)),
+            ("origin", json!(origin)),
+            ("cycle", json!(context)),
+            ("start_offset", json!(start)),
+            ("end_offset", json!(end)),
+        ],
+    ))
 }
 
 #[derive(Clone)]

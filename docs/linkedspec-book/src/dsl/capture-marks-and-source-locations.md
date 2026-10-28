@@ -265,7 +265,7 @@ source execution pass the ordinary 12-test contract. Canonical CI requires and e
 cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract
 ```
 
-Rust's admission advanced only its rollout row; no later row was promoted early. Current limitation: an authored zero-width repetition inside `recognize_once` still takes the ordinary silent progress exit instead of raising `recognition_zero_progress_repetition`; the neutral fixture check does not cover that live route. This has an immediate tracked runtime repair before ordinary minimum normalization and full admission.
+Rust's admission advanced only its rollout row; no later row was promoted early. Rust now rejects an accepted zero-width repetition inside `recognize_once` with `recognition_zero_progress_repetition`, including a maximum of one: `Guard:OR{1}` with `/(?=a)/ -> Guard[0] {return(0)}` on `a` raises that error before IT or the maximum can stop the loop. Progress is measured over a complete AND group, so a zero-width slot followed by a consuming slot is legal. Ordinary zero-width termination and one-shot zero-width recognition retain their behavior. Targeted native/restored/plan and separate direct generated-loop checks pass; minimum normalization and full admission remain tracked.
 
 Dart has the same package-private end-to-end integration. The parser lowers the four forms to dedicated non-eager
 ActionIR nodes, retains static `call(Rule)` structurally, and synchronizes live UTF-16 cursor, anonymous-boundary,
