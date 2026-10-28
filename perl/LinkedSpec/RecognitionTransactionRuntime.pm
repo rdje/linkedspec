@@ -132,6 +132,7 @@ sub enter_invocation {
   rule => $rule,
   entry_cursor => $cursor,
   accepted => 0,
+  acceptance_known => 0,
   selected_match_start => undef,
   selected_match_end => undef,
   gap_phase => 'I',
@@ -329,8 +330,11 @@ sub observe_static {
  splice @{$context->{completions}}, $completion_count
   if @{$context->{completions}} > $completion_count;
 
+ # A blind parser may own no regex slots. Its published outcome distinguishes
+ # actual recognition from a pure coordinator's normal-return fallback.
  my $has_recognition_structure = @{_local_regexes($descr, $callee)}
-  || _has_dependency_slots($descr, $callee);
+  || _has_dependency_slots($descr, $callee)
+  || $completion->{acceptance_known};
  my $accepted = $ok
   ? ($has_recognition_structure ? ($completion->{accepted} ? 1 : 0) : 1)
   : 0;
@@ -424,6 +428,15 @@ sub note_match {
   );
  }
  return 1
+}
+
+# Publish a parent's actual rule outcome without inventing a local regex span.
+sub note_rule_acceptance {
+ my ($descr, $string_ref, $rule, $accepted) = @_;
+ my $guard = _current_guard($descr, $string_ref, $rule);
+ $guard->{accepted} = $accepted ? 1 : 0;
+ $guard->{acceptance_known} = 1;
+ return $guard->{accepted}
 }
 
 sub note_miss {
@@ -674,6 +687,7 @@ sub _finish_guard {
    rule => $guard->{rule},
    identity => {%{$guard->{identity}}},
    accepted => $guard->{accepted} ? 1 : 0,
+   acceptance_known => $guard->{acceptance_known} ? 1 : 0,
    start_offset => $guard->{entry_cursor},
    end_offset => _cursor($guard->{string_ref}),
    selected_match_start => $guard->{selected_match_start},

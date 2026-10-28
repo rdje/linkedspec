@@ -64,3 +64,10 @@ native/fresh, including an isolated process. attempt_static reads parent accepte
 but bcode completion does not publish it; note_match only marks regex extraction.
 P1 owner39.9 verifies/fixes that actual outcome gap after bounded features and
 before full39/23.4/push. Null payload never defines the match boolean.
+
+Reference39.9.1-.2 now repairs the separately owned repeated blind falsey
+iteration/parent completion mechanisms on defined native/fresh sources. Parent
+publication/current proof: [[perl-repeated-blind-parent-acceptance]]. Original
+Rust/public intake packets remain frozen; no retroactive whole-census claim.
+Same-source Dart SDK null lifecycle/pure-null gaps are now owned39.2.7.1-.2
+before peer progression; broad entry/lifecycle/admission qualifications remain.

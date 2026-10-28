@@ -4813,6 +4813,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Falsey blind iteration39.9.1 adds t/repeated_blind_falsey_group.t; explicit canonical syntax/execution registration is required before admission/push.
 
+  Repeated blind parent publication39.9.2 adds t/repeated_blind_parent_acceptance.t; explicit canonical syntax/execution registration is required before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8026,13 +8028,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.1 - separate Perl blind iteration acceptance from falsey payloads`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.2`
-  Status: `pending` / P1 immediate before peers/admission
+  Status: `completed` / completed repeated blind-parent acceptance
   Goal: Publish completed Perl blind-parent recognition acceptance independently of null value.
   Acceptance: Use retained bcode OR/AND repeated parent controls and actual static-recognition preselection contract. Publish only completed accepted parent exit, clear actual miss/under-min and preserve caller origin/cursor/frame/value/error/recognition/progress semantics. Distinguish successful-null from miss, explicit lifecycle/IT/early override and zero-min/no-hit; no global sticky prior child bit or entry-policy inference. Exact native/fresh public RED-GREEN/trace/nearest controls/book/docs/focused commit before Julia/safe Lua/admission.
-  Planned verification tier: focused
-  Planned focused checks: Exact public native/fresh source/value/count/cursor/minimum/progress/error distinctions, syntax/nearest controls/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push; new public authority/schema movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:10 public native/fresh groups20 inputs2healthy8actualRED ->10pass, exact source/v2 metadata; falsey15groups36input results unchanged, observation contract7groups; actual native/fresh runtime trace2 accepted/parent1 vs1under-min/parent0; successful-null/partial/zero-min/IT/mark/pure/failed-observation/error controls; syntax/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after owned Dart gaps/peers/registration/pressure; no new public schema/contract authority.
+  Claim verification: none: Finite authored functional/match/value/observation/error distinctions, no population measurement.
+
+  Activation: clean `94abe06a2f2cb54b86cfac7ac48afb5d2299d133` after falsey group.1. Runtime guards start accepted0, regex note_match sets it, and attempt_static reads callee completion. Blind repeated counters have no parent publication. Read current Runtime/Emitter/observation contracts; parent status must come from actual completed count and real misses, not payload/last child. Observation pure-coordinator fallback must stay healthy while actual blind failed outcomes are distinguished, with no fabricated selected span/public schema. Exact public native/fresh RED-GREEN before production.
+
+  Baseline additionally proves failed blind-parent observations are classified accepted because the pure-coordinator fallback only checks regex/dependency slots, not executed blind outcome. Current leaf owns a private explicit-acceptance marker/reader distinction with pure-null coordinator control and no fabricated selected span. Same-source Dart null lifecycle/pure-null observation differences are separately owned39.2.7.1-.2 immediately afterward; no Dart write in this Perl leaf.
+
+
+  - [x] **REPRODUCE / ISSUE**:10 public native/fresh groups20 inputs2healthy8actualRED. Completed OR/AND/IT null parents report false; last partial child can erase successful parent status. Failed repeated blind observations report accepted because no local regex/dependency slot triggers pure-coordinator fallback. Pure-null coordinator and progress controls are healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Runtime guard starts accepted0 and note_match marks regex extraction only; repeated bcode owners count accepted iterations without publishing parent completion. attempt_static reads parent guard completion. observe_static cannot distinguish executed blind outcome from no-recognition pure coordinator. Actual generated branch trace proves2 versus1 accepted iterations independently of null payload.
+  - [x] **FIX**: Private note_rule_acceptance publishes count-derived parent bit/known marker without local regex coordinates. Repeated owners publish after accepted completion/before IT and at satisfied exits; under-minimum explicitly clears. Observation reads private known marker before coordinator fallback. No global result_is_match change, stale child flag or invented selected span/public schema.
+  - [x] **ADDRESSED (verified)**:10pass20 inputs native/fresh preserve successful-null EX/E/IT/post-call, minimum/no-hit/zero-min/max1, partial final group, caller mark and observation outcome/nullable exit/selection. Exact sources/v2 metadata unchanged; four actual quiet-build native/fresh traced parses show accepted counts2/1 and strict parent flags1/0 with expected cursor.
+  - [x] **NO REGRESSION**: Falsey iteration15groups36inputs unchanged and existing observation contract7groups pass, both syntax checks clean. Pure-null coordinator stays accepted at0 with no selected span; failed repeated matcher loses accepted exit. Dart and EmitContext untouched, no broad lifecycle/mixed-regex entry/plain-case/Unicode/full admission claim. Actual Dart SDK null lifecycle/pure-null gaps separately owned39.2.7.1-.2, no fresh/peer inference.
+  - [x] **LOCKSTEP**: perl-blind-parent-intake.json.gz retains actual producer/input/epoch/emission/runtime/native/fresh/trace/Dart-diagnostic/patch/receipt closure. Book/cards/target/roadmap/task/live/resume/history align; t/repeated_blind_parent_acceptance.t queued23.4.1. Regenerate old standalone sources with updated runtime, schema/family stable. Immediate Dart null provenance39.2.7.1 then pure observation.2 before peers/admission; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.2 - publish completed Perl blind parent recognition outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `in_progress` / independent Dart intake and bounded repairs
@@ -8242,6 +8257,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: Combined post-call/blind/minimum/group/structural/live progress122pass no skips; fatal changed analysis clean. Existing blind15/min12/group21/guard24 source/artifact records unchanged. One old postcall_return compatibility expectation intentionally becomes null minimum miss at1; no source rewrite. Compiler/emitter/matching/recognition authority/schema/family/Perl unchanged; no full lifecycle/Unicode/peer/admission claim.
   - [x] **LOCKSTEP**: dart-blind-postcall-repair-intake.json.gz retains actual producer/input/reference/emission/module/result/trace/patch/receipt closure. Book/cards/target/roadmap/task/live/resume/history align; runtime rebuild uses existing sources/plans. Existing P1 reference acceptance39.9 now includes exact falsey post-call defect and is immediate before peers/admission. Authorized focused commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2 - complete Dart repeated blind post-call outcomes and progress`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7`
+  Status: `pending` / P1 immediately after Perl39.9.2 before peers/admission
+  Goal: Repair Dart null-return acceptance provenance and pure-null observation classification.
+  Reproduce: Same10 public parent sources emitted by current Perl39.9.2 intake compile on Dart native/restored/generated-plan. OR/AND completed two children then EX/E returnundef yields[false,null,2], and completed first child then IT returnundef yields[false,null,1]; existing match/payload separation requires accepted null. Pure Coordinator I returnundef observed with no regex returns failed/no accepted exit, while canonical coordinator normal return is accepted with no selected span. Post-call group null and ordinary observation failed-min controls are healthy. Emitted Dart modules retained but fresh execution is not claimed in this diagnostic.
+  Root/ownership: _returned derives matched from value != null, losing actual return-context acceptance. Observation completion uses result.matched without a no-recognition-structure normal-return distinction. Repair typed context provenance, never infer success from a stale prior regex hit or globally mark all null returns accepted. New children .1/.2 own bounded fixes immediately after current Perl parent leaf.
+  Evidence: forthcoming perl-blind-parent-intake.json.gz retains prepare_dart_parent_probe.py, actual same-source/SDK inputs/results/modules and read_parent_dart_probe.py receipt; no peer inference or new public contract.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1`
+  Status: `pending` / P1 after Perl39.9.2 before peers/admission
+  Goal: Preserve actual Dart accepted return context independently of null lifecycle/action payload.
+  Acceptance: Use observed completed blind EX/E/IT null cases and canonical strict match/payload separation. Qualify nonrepeated action/null and other lifecycle contexts independently before edit; preserve true miss/partial/minimum, no-hit/zero-min, early I/no-match, caller return/captures/cursor, bounds, real errors/progress and schema/source identities. Typed matched provenance at owning return paths, no blanket null success or sticky match. Exact native/restored/plan/fresh RED-GREEN/nearest controls/book/docs/focused commit.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored SDK/plan/fresh/source/match/value/observation/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push; new public authority/schema movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2`
+  Status: `pending` / P1 after Perl39.9.2 before peers/admission
+  Goal: Classify a normal pure-null Dart coordinator observation as accepted without a selected match.
+  Acceptance: Use canonical zero-regex coordinator observation contract and actual SDK false outcome. Distinguish no recognition structure from actual failed matcher/minimum and aborted/rejected paths; preserve lineage/entry/exit/source/nullable selection, payload kinds, native/generated/source/trace and normal parser match status. Private outcome classification, no fabricated span or new public schema. Exact owned RED-GREEN/nearest observations/book/docs/focused commit.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored SDK/plan/fresh/source/match/value/observation/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push; new public authority/schema movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8566,7 +8606,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.2` | `pending` | Publish completed blind-parent recognition acceptance independently of payload. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1` | `pending` | Preserve actual Dart null-return acceptance provenance before peers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

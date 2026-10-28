@@ -578,6 +578,12 @@ sub _recognition_miss_statement {
         . _quote_perl_string($label) . '); '
 }
 
+sub _recognition_acceptance_statement {
+    my ($label, $predicate) = @_;
+    return 'LinkedSpec::RecognitionTransactionRuntime::note_rule_acceptance($descr, $STRING, '
+        . _quote_perl_string($label) . ', (' . $predicate . ')); ';
+}
+
 sub _quote_perl_string {
     my ($value) = @_;
     $value = '' unless defined $value;
@@ -1260,6 +1266,8 @@ sub _emit_rep_bcode_handler {
     my $excode = $ir->{excode} || 'return \@' . $label . '_collect';
     my $ecode  = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $itcode = $ir->{itcode} || 'push @' . $label . '_collect, $or_ret;';
+    my $acceptance = _recognition_acceptance_statement($label, '$ccount > 0');
+    my $miss_acceptance = _recognition_acceptance_statement($label, '0');
     my $loop_enter_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '    ',
@@ -1373,8 +1381,9 @@ sub _emit_rep_bcode_handler {
     my $or_ret = $or_code->(\$or_group_matched);
     unless (' . $or_result_condition . ') {
      if (' . $miss_min_condition . ') {
-      ' . $excode . '
+      ' . $acceptance . $excode . '
      } else {
+      ' . $miss_acceptance . '
       return undef
      }
     }
@@ -1385,20 +1394,22 @@ sub _emit_rep_bcode_handler {
     );
     if (' . $zero_progress_condition . ') {
      if (' . $zero_progress_min_condition . ') {
-      ' . $excode . '
+      ' . $acceptance . $excode . '
      } else {
+      ' . $miss_acceptance . '
       return undef
      }
     }
 
     ++$ccount;
+    ' . $acceptance . '
 
     ' . $itcode . '
 
     last unless ' . $max_continue_condition . '
    }
 
-   ' . $ecode . '
+   ' . $acceptance . $ecode . '
    ';
 }
 
@@ -1415,6 +1426,8 @@ sub _emit_rep_and_bcode_handler {
     my $excode = $ir->{excode} || 'return \@' . $label . '_collect';
     my $ecode  = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $itcode = $ir->{itcode} || 'push @' . $label . '_collect, $and_ret;';
+    my $acceptance = _recognition_acceptance_statement($label, '$ccount > 0');
+    my $miss_acceptance = _recognition_acceptance_statement($label, '0');
     my $loop_enter_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => '    ',
@@ -1527,8 +1540,9 @@ sub _emit_rep_and_bcode_handler {
     my $and_ret = $and_code->(\$and_group_matched);
     unless (' . $and_result_condition . ') {
      if (' . $miss_min_condition . ') {
-      ' . $excode . '
+      ' . $acceptance . $excode . '
      } else {
+      ' . $miss_acceptance . '
       return undef
      }
     }
@@ -1539,20 +1553,22 @@ sub _emit_rep_and_bcode_handler {
     );
     if (' . $zero_progress_condition . ') {
      if (' . $zero_progress_min_condition . ') {
-      ' . $excode . '
+      ' . $acceptance . $excode . '
      } else {
+      ' . $miss_acceptance . '
       return undef
      }
     }
 
     ++$ccount;
+    ' . $acceptance . '
 
     ' . $itcode . '
 
     last unless ' . $max_continue_condition . '
    }
 
-   ' . $ecode . '
+   ' . $acceptance . $ecode . '
    ';
 }
 

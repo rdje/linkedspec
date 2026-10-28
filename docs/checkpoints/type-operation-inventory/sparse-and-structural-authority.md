@@ -186,3 +186,13 @@ replay claim. Typed/ordinary zero, IT/partial/minimum controls and syntax pass.
 Unbound commit compile failure qualified against frozen payload-binding form.
 Packet perl-blind-falsey-intake.json.gz; regenerate standalone source. Parent
 recognition publication39.9.2 remains immediate before peers/admission.
+
+Reference39.9.2 publishes completed repeated blind parent acceptance and known
+outcome marker for observations, without fake selected spans.10 native/fresh
+groups20inputs2healthy8RED ->10pass; exact source/v2 metadata, falsey15 results
+unchanged, observation7/syntax pass. Actual quiet-build native/fresh traces
+prove2 accepted/parent1 vs1under-min/parent0 independently of null payload. Pure
+coordinator remains accepted, failed repeated observation loses accepted exit.
+Packet perl-blind-parent-intake.json.gz also retains actual same10-source Dart
+SDK null lifecycle/pure-null gaps, now immediate39.2.7.1-.2 before peers. No
+fresh Dart/peer inference; regenerate standalone Perl with updated runtime.

@@ -5,7 +5,7 @@ answers:
   - "why does Perl repeated blind post-call return zero or null stop after one child"
   - "what additionally blocks Perl repeated blind falsey result parity"
 date: 2026-10-28
-status: iteration/group39.9.1 repaired/targeted-checked; parent completion39.9.2 remains before peers/admission
+status: iteration/group39.9.1 and parent completion39.9.2 repaired/targeted-checked; owned Dart gaps/admission remain
 tags: [perl, blind-call, repetition, falsey, acceptance, post-call, minimum]
 evidence: "dart-blind-postcall-repair-intake.json.gz retains18 public reference sources27 inputs and exact source/emission/results, including OR zero/null and AND early-zero controls; existing binding39.2.5.1 is fixed."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_blind_postcall_repair.pl"
@@ -41,3 +41,9 @@ Initial bare commit probe is outside frozen bound-commit authoring and gets
 no runtime RED credit; public recognition_terminal_required/corrected epochs
 retained. Regenerate standalone Perl source; no schema/family/Dart change.
 Packet perl-blind-falsey-intake.json.gz. Parent completion39.9.2 remains next.
+
+39.9.2 now publishes completed repeated blind parent acceptance and distinguishes
+failed observations from pure coordinators without fake selected spans. Current
+mechanism/proof: [[perl-repeated-blind-parent-acceptance]].10 native/fresh groups
+20inputs2healthy8RED ->10pass, falsey15 unchanged/observation7 and actual counted
+traces pass. Next immediate work is Dart39.2.7.1-.2 null status gaps before peers.

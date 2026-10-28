@@ -1,0 +1,34 @@
+---
+id: dart-null-return-and-pure-observation-gaps
+title: Dart completed null lifecycle returns lose match status and pure-null coordinator observations are classified failed
+answers:
+  - "why does Dart recognized completed blind parent with E or IT null return report false"
+  - "why does Dart pure null coordinator observation report failed"
+date: 2026-10-28
+status: open P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1-.2 immediately after Perl39.9.2 before peers/admission
+tags: [dart, null, acceptance, lifecycle, observation, coordinator, return-provenance]
+evidence: "perl-blind-parent-intake.json.gz retains same10 raw source SDK inputs/results/modules and read_parent_dart_probe.py receipt; native/restored/generated-plan agree, fresh execution unassessed in this diagnostic."
+reverify: "Recover retained dart/.dart_tool/blind-parent-probe/intake.dart and fixture; cd dart && bash ../tools/run_dart_project_data.sh run .dart_tool/blind-parent-probe/intake.dart"
+---
+
+Same-source native/restored/generated-plan Dart probes show completed blind
+OR{2}/AND{2} children followed by EX/E returnundef report[false,null,2]; IT
+returnundef after one completed child reports[false,null,1]. _returned derives
+matched from value != null, losing the owning path's actual accepted outcome.
+Existing strict match/payload separation requires successful null to remain
+distinct from true minimum/no-hit failure. No full action/lifecycle family is
+inferred defective without its own qualifier/probe. Child post-call group null
+and actual ordinary observation failure controls are already healthy.
+
+A pure Coordinator I returnundef with no regex/edges is observed as failed,
+with no accepted exit. Canonical normal zero-regex coordinator observation is
+accepted and has no invented selected match. Current completion uses matched
+without a pure normal-return distinction. P1 .7.1 owns return provenance, .7.2
+owns pure-observation classification, both immediately after current Perl39.9.2
+before peers/admission. Preserve actual failed matcher/minimum, no-hit, early I,
+real errors/progress/source/cursor/lineage and public schema. Never globally
+mark every null accepted or use a sticky previous child match.
+
+All10 sources compile and execute the three SDK carriers; emitted modules are
+retained but fresh execution is not claimed in this diagnostic. No Dart code
+edit or inferred Julia/Lua defect occurs in the current Perl parent repair.
