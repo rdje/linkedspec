@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
+Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
 
 ## Latest Completed Slice
 
-Reconciled blind fluent .push against published parent injection and push(rule) child-call overload: preserve its recursive parent call, do not invent a child-value append. Current92a6eeb95 public bounded3-case intake roots ordinary emitted guard absence: native blind push returns[BODY] at4 and direct cycle returnsnull at0, both fresh paths time out in fresh_execute; no-tail blind control returns[BODY] at4 native/fresh. All build/load/native phases complete; incomplete2 get no parity credit. Native SpecEntry guards descriptor/rule/cursor before invocation and cleans entries after eval; emitted raw CODE table lacks that wrapper. Own39.6.1 shared runtime guard extraction and39.6.2 emitted table wiring, preserving current key, typed rejection, trace topic, return/error identity, legal consuming recursion and exception cleanup. No new push/recursion/format policy. Retain actual producers/inputs/source/phases/substitution and history-roll proof. Book/card/map/target/live/resume align. Daily safe artifact cleanup44 is due at the clean boundary before39.6.1; broader gates stay at admission/push.
+Completed the due daily cleanup at a clean boundary: three exact completed42.5 diagnostic red/green/neighbor logs were already retained byte-for-byte in the committed packet and absent from all claim durability inputs. Verified exclusive gzip creation, decompressed bytes/hash and unchanged raw identity before removing only each raw duplicate, then verified residue absence and retained recovery. Checked Rust release/incremental/deps .bin/.log metadata and retained all build caches. Latest-only cleanup record refreshed at 2026-10-28T12:07:27.088260+00:00. Retain actual producer, artifact bytes, metadata census and verification receipt in daily-safe-cleanup-44.json.gz; original42.5 proof packet stays unchanged. No broad deletion, disk-space claim, off-volume write or deferred24 pivot. Book/live/task/resume/history agree; focused maintenance commit, then shared recursion guard39.6.1 and emitted wiring39.6.2.
 
 ## Next Action
 
-Activate44 for the now-due daily safe artifact cleanup: losslessly compress only completed, retained diagnostic duplicates after proving no live claim input/job needs them; verify bytes/hash before deleting exact raw copies, update the latest cleanup record, focused docs/commit. Then activate39.6.1 shared ordinary progress guard extraction, followed by39.6.2 emitted wiring and independent peers39.1-.4; preserve published blind push call semantics. Continue38/37/40/41/features; no full gate except designated admission/push.
+Activate39.6.1 from this clean daily-cleanup boundary. Extract the existing native descriptor/rule/cursor ordinary recursion guard into the shared RecognitionTransactionRuntime owner, preserving pre-invocation typed rejection, trace topic, result/error/control identity and exception-safe cleanup. Compile and run quick focused native direct/mutual/consuming/repeated-use/error cleanup plus typed dependents, document/commit, then39.6.2 emitted table wiring and independent39.1-.4. Continue38/37/40/41/features; full gates remain at designated admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.44` — Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0` — Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` — Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.0` — Sparse AND structural authority reconciled; Perl39.5/.6 precede independent peer intake.
@@ -29,7 +30,6 @@ Activate44 for the now-due daily safe artifact cleanup: losslessly compress only
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` — Dart named Number methods/caller mark scopes34.3 already compatible/targeted-checked; Julia34.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` — Rust callable caller mark scope43.1 repaired/targeted-checked; independent Dart34.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.0` — Rust callable caller-rule-label repair43.0 frozen; production43.1 next before Dart34.3.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.34.2` — Rust ordinary named Number27 controls pass; confirmed callback mark leak43 target/repair immediately next.
 
 ## History
 

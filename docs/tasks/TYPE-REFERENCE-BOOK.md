@@ -7675,13 +7675,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0 - preserve blind push calls and isolate emitted progress-guard repair`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.44`
-  Status: `pending` / daily cleanup due2026-10-28T11:55:33.267350Z at next clean boundary
-  Goal: Losslessly compress only completed retained diagnostic duplicates; verify exact decompressed bytes/hash before removing each raw copy and update docs/ARTIFACT_CLEANUP.md latest-only record.
-  Scope: No broad cache, evidence, submodule, other-repository or ambiguous artifact deletion. Check exact live claim inputs/jobs first; leave protected historical inputs recoverable. Existing broad216GiB cleanup stays historical and deferred24 unchanged. Resume39.6.1 immediately after focused cleanup commit.
-  Planned verification tier: focused
-  Planned focused checks: Exact selected file census and retained packet/input closure, lossless compression/decompression/hash equality, raw removal/residue and latest record, book/continuity/history/diff; no infrastructure change or full gate.
-  Planned canonical trigger: Full admission/final clean push; no policy/tooling/store migration.
-  Planned claim verification: none: Exact named artifact byte/hash identities only, no population or space-recovery measurement.
+  Status: `completed` / due daily safe diagnostic cleanup
+  Activation: clean `0445a810d3b62f5664ece67ef46b2a21d102f41d` after39.6.0; all previous jobs terminal.
+  Goal: Losslessly compress only completed retained diagnostic duplicates and refresh the latest cleanup record.
+  Verification tier: `focused`
+  Focused checks: Exact3 committed-packet raw identities/all-claim input exclusion, same-volume/non-symlink/nested-repository guards, exclusive gzip/decompressed hash equality, unchanged raw metadata/content before unlink, final raw absence/recovery, Rust release/incremental/deps .bin/.log metadata-only census; retained producer/receipt/book/history/manual continuity/diff.
+  Canonical trigger: Full admission/final clean push; no storage/tooling/policy migration or cache removal.
+  Claim verification: none: Exact named artifact byte/hash identities, no population or disk-space measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Latest cleanup2026-10-27T11:55:33.267350Z is older than24h; three completed42.5 log duplicates are retained in its committed packet and no claim durability input requires their raw paths.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Completed project-local diagnostic captures retain duplicate raw bytes after successful proof retention; select only named closed-leaf logs rather than infer that caches/build outputs are unused. Rust targets are metadata-only checks and stay retained.
+  - [x] **FIX**: Verify each exact retained packet input, compress exclusively on-volume, compare decompressed bytes/hash and unchanged raw metadata/content, then unlink only those raw paths. Keep local gzip copies plus unchanged original packet and latest-only cleanup record.
+  - [x] **ADDRESSED (verified)**: Red/green/neighbor raw logs are absent; all three gzip copies recover the exact original bytes and hashes. Claim-input intersections empty. Rust release/incremental/deps .bin/.log metadata census retained, no target deletion. Cleanup timestamp2026-10-28T12:07:27.088260+00:00.
+  - [x] **NO REGRESSION**: Original42.5 packet unchanged; complete producer/receipt/compressed bytes and recovery instructions retained. No production code, build cache, submodule, other repository or ambiguous artifact touched. Existing broad cleanup and deferred24 stay separate; no disk-space or exhaustive cleanup claim.
+  - [x] **LOCKSTEP**: docs/ARTIFACT_CLEANUP.md latest record, daily-safe-cleanup-44.json.gz, book/live/task/resume/history agree; Knowledge facts unchanged. Resume39.6.1 shared guard then39.6.2 emitted wiring/features immediately. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.44 - compress completed diagnostic duplicates and record daily cleanup`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1`
   Status: `pending` / after39.6.0 before emitted wiring
@@ -8042,7 +8050,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.44` | `pending` | Complete due safe daily cleanup, then shared guard39.6.1 and emitted wiring39.6.2. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1` | `pending` | Extract the shared native ordinary recursion guard, then39.6.2 emitted wiring and independent peers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
