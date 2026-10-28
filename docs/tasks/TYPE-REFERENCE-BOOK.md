@@ -8259,7 +8259,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2 - complete Dart repeated blind post-call outcomes and progress`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7`
-  Status: `in_progress` / null return provenance then pure observation
+  Status: `completed` / bounded null return and pure observation repairs
   Goal: Repair Dart null-return acceptance provenance and pure-null observation classification.
   Reproduce: Same10 public parent sources emitted by current Perl39.9.2 intake compile on Dart native/restored/generated-plan. OR/AND completed two children then EX/E returnundef yields[false,null,2], and completed first child then IT returnundef yields[false,null,1]; existing match/payload separation requires accepted null. Pure Coordinator I returnundef observed with no regex returns failed/no accepted exit, while canonical coordinator normal return is accepted with no selected span. Post-call group null and ordinary observation failed-min controls are healthy. Emitted Dart modules retained but fresh execution is not claimed in this diagnostic.
   Root/ownership: _returned derives matched from value != null, losing actual return-context acceptance. Observation completion uses result.matched without a no-recognition-structure normal-return distinction. Repair typed context provenance, never infer success from a stale prior regex hit or globally mark all null returns accepted. New children .1/.2 own bounded fixes immediately after current Perl parent leaf.
@@ -8286,13 +8286,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1 - preserve Dart accepted null return provenance`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2`
-  Status: `pending` / P1 after Perl39.9.2 before peers/admission
+  Status: `completed` / pure coordinator observation
   Goal: Classify a normal pure-null Dart coordinator observation as accepted without a selected match.
   Acceptance: Use canonical zero-regex coordinator observation contract and actual SDK false outcome. Distinguish no recognition structure from actual failed matcher/minimum and aborted/rejected paths; preserve lineage/entry/exit/source/nullable selection, payload kinds, native/generated/source/trace and normal parser match status. Private outcome classification, no fabricated span or new public schema. Exact owned RED-GREEN/nearest observations/book/docs/focused commit.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored SDK/plan/fresh/source/match/value/observation/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push; new public authority/schema movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:13 authored sources17 inputs9healthy4actualRED ->13pass native/restored/plan and same13 baseline modules/consumer full detached records/error codes; exact source/normalized/compiled/plan/emitted identity;63 nearest tests/fatal static analysis/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after peers/lifecycle/registration/pressure; public schema/authority movement separately canonical.
+  Claim verification: none: Finite authored functional/control-flow/record distinctions, no population measurement.
+
+  Activation: clean `f6c62feefb66c6a4176d9f1ec464e5ac349a5e17`. Null-return .7.1 committed. Pure Coordinator I returnundef has normal return/no recognition structure yet observation completion uses matchedfalse and reports failed. Qualify source/SDK/plan/fresh plus regex/blind failure/null/lineage/error controls, then private no-structure normal-return distinction; no fabricated span or parser matched override.
+
+
+  - [x] **REPRODUCE / ISSUE**:13 authored sources17 inputs9healthy4actualRED. Pure explicit null/return_undef/implicit return and null after an ordinary child all report observation failed/no accepted exit despite normal coordinator completion. Exact nine-field expected records retain null selected span and direct invocation lineage.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: leaveRecognitionInvocation derives observation acceptance only from result.matched. Pure no-regex/action/blind structure coordinators legitimately have no match but normal completion must be observed separately. Existing canonical coordinator observation authority and exact Perl pure-null control distinguish this from failed matcher/minimum outcomes.
+  - [x] **FIX**: Pass compiled recognition-structure presence into private invocation completion; require normal non-null result/no terminal error, then accept matchedtrue or absence of recognition structure. Actual regex/action/blind structure keeps strict matched authority. No changes to _RuleResult/parser status, cursor, identity, selected spans or public schema.
+  - [x] **ADDRESSED (verified)**:13pass17 inputs native/restored/generated-plan and same13 baseline emitted modules/main reused. Exact source/normalized/compiled/plan/emitted bytes unchanged; full detached records preserve source/rule/lineage/entry/selection/exit/outcome/diagnostic. Nested ordinary child does not fabricate parent selected span; nullable values remain nullable.
+  - [x] **NO REGRESSION**:63 nearest null-return/observation/minimum/live-progress tests and fatal analysis pass. Failed regex/blind minimum/no-hit/zero-min, early matcher I null and pure-null ordinary parser matchedfalse retained. False/String payload, original abort and direct rejected-recursion codes retained. Compiler/emitter/recognition transaction unchanged; no peer/full admission claim.
+  - [x] **LOCKSTEP**: dart-pure-observation-intake.json.gz retains producers/fixtures/SDK/fresh/runtime epochs/actual patch/receipts. Book/cards/target/roadmap/task/live/resume/history align. .7 bounded parent complete; independent Julia39.3 then safe Lua39.4 next, broad lifecycle/slot/admission/registration/pressure remain. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2 - accept normal pure-null Dart coordinator observations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8617,7 +8628,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2` | `pending` | Preserve pure-null coordinator observation acceptance without a selected span. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3` | `pending` | Independently intake Julia structural/sequence/repetition outcomes before repairs. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -4,7 +4,7 @@ title: Dart completed null lifecycle returns lose match status and pure-null coo
 answers:
   - "why does Dart pure null coordinator observation report failed"
 date: 2026-10-28
-status: original null-return gap repaired39.2.7.1; pure-null observation39.2.7.2 remains immediate before peers/admission
+status: bounded null-return39.2.7.1 and pure-null observation39.2.7.2 repaired/targeted-checked; peers/admission remain
 tags: [dart, null, acceptance, lifecycle, observation, coordinator, return-provenance]
 evidence: "perl-blind-parent-intake.json.gz retains same10 raw source SDK inputs/results/modules and read_parent_dart_probe.py receipt; native/restored/generated-plan agree, fresh execution unassessed in this diagnostic."
 reverify: "Recover retained dart/.dart_tool/blind-parent-probe/intake.dart and fixture; cd dart && bash ../tools/run_dart_project_data.sh run .dart_tool/blind-parent-probe/intake.dart"
@@ -37,3 +37,14 @@ authored sources37 inputs5healthy15RED ->20pass SDK/plan, same baseline emitted
 modules and122 nearest controls. Current mechanism/proof is owned by
 [[dart-accepted-null-return-provenance]]. Original diagnostic above remains
 historical; pure-null coordinator observation .7.2 is the next separate repair.
+
+39.2.7.2 now repairs the pure-normal completion classifier using compiled
+recognition-structure presence (regex/action/blind edges), without modifying
+parser matched status or selected span. Normal pure coordinators are observed
+accepted even for explicit/implicit null and after ordinary child calls. Real
+matcher/minimum/no-hit/early I failures still need matchedtrue; abort/rejected
+errors remain errors.13 sources17 inputs9healthy4actualRED ->13pass SDK/plan
+and same13 baseline fresh modules, exact nine-field records/input identity;63
+nearest tests/fatal analysis pass. Packet dart-pure-observation-intake.json.gz
+retains actual input/producer/runtime epochs. Bounded .7 complete; peers and
+full admission remain.

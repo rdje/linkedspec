@@ -761,6 +761,10 @@ final class LinkedSpecRuntimeEngine {
           label,
           result: terminalResult,
           error: terminalError,
+          hasRecognitionStructure:
+              rule.regexPatterns.isNotEmpty ||
+              rule.actionEdges.isNotEmpty ||
+              rule.blindEdges.isNotEmpty,
         );
       } finally {
         context.exitRuleLocalBindingScope();
@@ -8666,6 +8670,7 @@ final class _RuntimeExecutionContext {
     String ruleLabel, {
     required _RuleResult? result,
     required Object? error,
+    required bool hasRecognitionStructure,
   }) {
     final frame = _recognitionFrame(ruleLabel);
     final actual = _recognitionFrameState(ruleLabel);
@@ -8685,7 +8690,12 @@ final class _RuntimeExecutionContext {
       final observation = frame.observationScope;
       if (observation != null) {
         final terminalError = error ?? leaveError;
-        final accepted = terminalError == null && (result?.matched ?? false);
+        // A pure coordinator has no matching structure that can miss. Its
+        // normal return is observed independently of its nullable payload.
+        final accepted =
+            terminalError == null &&
+            result != null &&
+            (result.matched || !hasRecognitionStructure);
         observation.completion = _RecursiveObservationCompletion(
           identity: frame.identity,
           entryCodeUnit: frame.entryCodeUnit,

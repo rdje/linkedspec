@@ -6,7 +6,7 @@ answers:
   - "how does Dart distinguish accepted null action returns from actual misses"
   - "does Dart null lifecycle return globally accept early I LS or failed minimum"
 date: 2026-10-28
-status: bounded39.2.7.1 repaired/targeted-checked; pure-null observation .7.2 and admission remain
+status: bounded39.2.7.1 repaired/targeted-checked; pure-null observation .7.2 also repaired, peers/admission remain
 tags: [dart, null, acceptance, lifecycle, action, return-provenance]
 evidence: "dart-null-returns-intake.json.gz retains20 authored sources37 inputs5healthy15actualRED ->20pass SDK/plan, same20 baseline emitted modules and122 nearest controls."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/null_return_acceptance_test.dart test/recognition_repetition_progress_test.dart test/minimum_miss_routes_test.dart"
@@ -38,3 +38,7 @@ Generated applications use the updated runtime; source/plans remain valid.
 Pure-null coordinator observation is still separately owned39.2.7.2:
 [[dart-null-return-and-pure-observation-gaps]]. Broad lifecycle attribution,
 peer intake and full admission remain tracked; no full family parity inferred.
+
+39.2.7.2 separately fixes normal pure-null coordinator observation without
+changing parser matched status. Current mechanism/proof is in
+[[dart-null-return-and-pure-observation-gaps]]; original .7.1 packet stays frozen.

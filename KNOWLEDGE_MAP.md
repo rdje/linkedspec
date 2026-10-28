@@ -11797,7 +11797,7 @@ _Cursor transactions require invocation frames, opaque generations, a closed eff
 ### dart-accepted-null-return-provenance
 _Dart null return acceptance comes from the owning selected match or completed iteration_
 - **answers:** why does Dart recognized completed blind parent with E or IT null return report false | how does Dart distinguish accepted null action returns from actual misses | does Dart null lifecycle return globally accept early I LS or failed minimum
-- **date:** 2026-10-28 · **status:** bounded39.2.7.1 repaired/targeted-checked; pure-null observation .7.2 and admission remain
+- **date:** 2026-10-28 · **status:** bounded39.2.7.1 repaired/targeted-checked; pure-null observation .7.2 also repaired, peers/admission remain
 - **evidence:** `dart-null-returns-intake.json.gz retains20 authored sources37 inputs5healthy15actualRED ->20pass SDK/plan, same20 baseline emitted modules and122 nearest controls.`
 - **reverify:** `cd dart && bash ../tools/run_dart_project_data.sh test test/null_return_acceptance_test.dart test/recognition_repetition_progress_test.dart test/minimum_miss_routes_test.dart`
 - **source:** [`docs/knowledge/dart-accepted-null-return-provenance.md`](docs/knowledge/dart-accepted-null-return-provenance.md)
@@ -12293,7 +12293,7 @@ _Dart reconstructed null named selectors can resolve anonymous regex declaration
 ### dart-null-return-and-pure-observation-gaps
 _Dart completed null lifecycle returns lose match status and pure-null coordinator observations are classified failed_
 - **answers:** why does Dart pure null coordinator observation report failed
-- **date:** 2026-10-28 · **status:** original null-return gap repaired39.2.7.1; pure-null observation39.2.7.2 remains immediate before peers/admission
+- **date:** 2026-10-28 · **status:** bounded null-return39.2.7.1 and pure-null observation39.2.7.2 repaired/targeted-checked; peers/admission remain
 - **evidence:** `perl-blind-parent-intake.json.gz retains same10 raw source SDK inputs/results/modules and read_parent_dart_probe.py receipt; native/restored/generated-plan agree, fresh execution unassessed in this diagnostic.`
 - **reverify:** `Recover retained dart/.dart_tool/blind-parent-probe/intake.dart and fixture; cd dart && bash ../tools/run_dart_project_data.sh run .dart_tool/blind-parent-probe/intake.dart`
 - **source:** [`docs/knowledge/dart-null-return-and-pure-observation-gaps.md`](docs/knowledge/dart-null-return-and-pure-observation-gaps.md)

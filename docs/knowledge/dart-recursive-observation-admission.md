@@ -72,3 +72,11 @@ Failure predicates check text, not exception identity or every aborted record fi
 A fresh offline caller strictly analyzes and directly executes the accepted false/astral
 example; emitted failure and traced matrices are not claimed. The observation effect
 qualification remains [[dart-recognition-effect-integration-gap]] and .2.4.
+
+October28 bounded39.2.7.2 repairs normal pure-null coordinator classification:
+compiled regex/action/blind structure distinguishes a matching rule from a
+pure coordinator, so normal null/no-structure return is observed accepted
+without a fabricated span or parser matched override.13 exact sources17 inputs
+9healthy4RED ->13pass SDK/plan and same baseline modules/full records,63 nearest
+controls/fatal analysis. Current proof: [[dart-null-return-and-pure-observation-gaps]].
+No new facade/schema or broad admission claim; older packets remain historical.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart accepted-null return provenance repaired; pure-null observation next.
+Dart bounded null-return and pure coordinator observation repairs complete; Julia intake next.
 
 ## Latest Completed Slice
 
-Dart accepted null returns now retain owning match/completed-iteration provenance. Private action returns carry acceptance from selected regex/LE or successful plain blind child; lifecycle returns use completed match/count context, with under-minimum LX and initial I/LS unaccepted. Existing non-null whole-rule authority remains.20 authored sources37 inputs5healthy15actualRED ->20pass native/restored/generated-plan; raw source/normalized/compiled/plan/emitted bytes identical. Same20 baseline emitted modules/main consumer reused and public values agree; direct matched flags asserted through SDK routes, six wrapper sources expose recognition flags in fresh returned values. Successful-null action/early AND/E/LE/EX/IT/LX, blind post-call, max1/zero-min/no-hit/minimum, initial I/LS, caller mark and legal zero-width LE controls pass.122 adjacent Dart tests and fatal static analysis pass. Compiler/emitter/recognition transaction/public schemas unchanged. Packet dart-null-returns-intake.json.gz retains producers/inputs/runtime epochs/source/fresh receipts; book/card/target/roadmap/live/task/resume/history align. Pure-null observation39.2.7.2 next before Julia/safe Lua; broad lifecycle authority/admission/registration/pressure prerequisites remain. Authorized focused commit/no full gate/push.
+Dart pure coordinator observation now distinguishes normal return from parser matching status. Private invocation completion receives compiled regex/action/blind structure presence and accepts normal zero-structure return independently of null payload; errors/absent results remain aborted and actual matching structure still requires matchedtrue. No selected span is fabricated and ordinary pure-null parser matchedfalse remains unchanged.13 authored sources17 inputs9healthy4actualRED ->13pass native/restored/generated-plan and same13 baseline emitted modules/main consumer reused. Full detached nine-field records preserve entry/exit/nullable selection/lineage, including a pure coordinator returning null after an ordinary child. Failed regex/blind minimum/zero-min/no-hit, early matcher I null, false/String payload, abort and rejected recursion controls pass. Exact source/normalized/compiled/plan/emitted bytes identical; compiler/emitter/recognition transaction unchanged.63 adjacent null-return/observation/minimum/live-progress tests and fatal analysis pass. Packet dart-pure-observation-intake.json.gz retains actual producers/inputs/runtime epochs/patch/SDK/fresh/receipts. Book/cards/target/roadmap/task/live/resume/history align; bounded .7 parent complete. Independent Julia39.3 then safe installed Lua39.4 next; broader lifecycle/slot/admission/registration/pressure prerequisites remain. Authorized focused commit/no full gate/push.
 
 ## Next Action
 
-Activate Dart39.2.7.2 from clean committed null-return repair. Classify normal pure-null zero-regex coordinator observation accepted without selected span; preserve actual failed regex/blind minima, early I matcher failure, accepted-null spans/exit, lineage/errors/progress and normal parser matched flag. Exact SDK/plan/fresh RED-GREEN/nearest observation controls, book/docs/focused commit, then independent Julia39.3 and safe Lua39.4; full admission/registration/pressure and other owned prerequisites remain before push.
+Activate independent Julia39.3 intake from clean committed Dart null/observation repairs. Read frozen39.0 target, Julia public commands and relevant canonical cards; establish exact source/native/restored/generated-plan/fresh body/structural/index/duplicate/reversed/cross/entry/group/minimum/blind/progress baseline before changes, without inferring peer defects. Decompose confirmed repairs into bounded owned children, implement with focused checks/book/docs/commit per child, then safe installed Lua39.4. Full admission/registration/pressure and separately owned lifecycle/slot prerequisites remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2` — Dart bounded null-return and pure coordinator observation repairs complete; Julia intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1` — Dart accepted-null return provenance repaired; pure-null observation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.2` — Reference completed blind parent recognition repaired; Dart null provenance and pure observation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.1` — Reference blind falsey iteration outcomes repaired; parent recognition publication next.
@@ -29,7 +30,6 @@ Activate Dart39.2.7.2 from clean committed null-return repair. Classify normal p
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2` — Rust blind collections repaired; bounded Rust regression ignores all enabled; independent Dart intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` — Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` — Rust live recognition repetition progress repaired; ordinary minimum/API39.1.5.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0` — Minimum/API/progress intake qualified; immediate live recognition progress39.1.6 before bounded minimum repair.
 
 ## History
 

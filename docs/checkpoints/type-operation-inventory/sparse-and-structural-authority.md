@@ -208,3 +208,12 @@ SDK routes and six recognition wrappers expose flags in fresh payload.122
 nearest tests/fatal analysis pass, compiler/emitter/recognition_transaction
 unchanged. Packet dart-null-returns-intake.json.gz retains exact closure.
 Pure-null observation39.2.7.2 immediately next before peers/admission.
+
+Dart39.2.7.2 now accepts normal pure-null coordinator observations based on
+absence of compiled regex/action/blind matching structure, preserving strict
+matched authority for actual matchers and ordinary parser matchedfalse. No
+selected span is fabricated.13 sources17 inputs9healthy4RED ->13pass SDK/plan
+and same13 baseline emitted modules/main, full detached records/input identity,
+63 nearest controls/fatal analysis. Packet dart-pure-observation-intake.json.gz
+retains exact producers/inputs/epochs/patch/receipts. Bounded .7 repairs complete;
+independent Julia39.3 then safe installed Lua39.4 next, admission remains.
