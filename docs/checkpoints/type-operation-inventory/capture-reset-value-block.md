@@ -1,7 +1,7 @@
 # Anonymous capture reset as an ordinary value-block statement
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.35; target freeze35.0.
-Status: frozen bounded target; Perl35.1 repaired/targeted-checked, independent Rust35.2 then Dart/Julia/safe Lua follows.
+Status: frozen bounded target; Perl35.1 repaired/Rust35.2 compatible and targeted-checked; independent Dart35.3 then Julia/safe Lua follows.
 
 ## Authority and observed failure
 
@@ -104,3 +104,17 @@ clears the real child error and returns[null]; public runtime-only trace confirm
 SpecEntry failure followed by Compiler defined-AST clearing. New P1 owner41 after40
 before admission repairs that separate error-delivery defect without treating null
 as healthy. Independent Rust35.2 follows; complete35/context admission stays open.
+
+## Bounded Rust35.2
+
+Independent14-source intake already matches the target native/restored
+CompiledSpec/generated-plan. Runtime remains unchanged; no product RED is
+invented. New3 plus nearby Number6 pass with rustfmt/locked offline compilation.
+Eight ordinary controls retain snapshot/order/local returns/lazy skip; literal
+callbacks preserve existing x!/boundary6 for canonical/alias reset. Four direct
+function/pure-apply callback controls reject the authored helper, with the existing
+generated error envelope prefix retained. This preserves current Rust context
+support rather than adding Perl's excluded vocabulary. Packet capture-reset-value-
+block-rust-intake.json.gz retains actual source/log/refinement epochs, including
+an initial consumer error-string equality failure as instrument-only. No fresh
+emitted package or full source/context admission; Dart35.3 independently follows.

@@ -7228,12 +7228,12 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored feature target/ownership, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35`
-  Status: `pending` / P1 immediately after bounded33, before named-mark34/full23.4
+  Status: `in_progress` / bounded Perl35.1 repaired/Rust35.2 compatible and targeted-checked; independent peers/formal admission open
   Goal: Own and repair ordinary value-block start_capture_slice side-effect lowering and false-ready output.
   Reproduction: At clean4f91e544b explicit Value[2], width=capture_rest_len(); snapshot=width.cat({order=cat(order,"S");start_capture_slice();"!"}) fails native handler/fresh compilation with cannot-modify-constant/syntax errors, despite raw0/unresolved0/ready1. It does not depend on a direct Number source; exact capture-number-block-reset producer/output and substitution are retained in capture-boundary-number intake.
   Root / impact: Public substitution leaves order=cat(...) as raw DSL inside the method operand while late Contracts rewrites only start_capture_slice to a do-block. MethodLowering _lower_block_side_effect_statement falls back to value-component lowering without this void statement owner; _lower_block_value_expr abandons the block if a component is unavailable. The generated expression cannot compile and readiness overstates usability. Exact dispatcher/source role and authoritative ordinary-versus-deferred contract need final35.0 reconciliation before production.
   Ownership / schedule: Fix the actual ordinary-block statement role through canonical state-effect owners, preserving void semantics, frame/cursor/source/trace/order/errors, local-return behavior and function/callback vocabulary boundaries. Authority/target35.0 then bounded independent backend repair/compatibility leaves immediately after33, before34/full23.4. No generic mutator-as-data grant, silent raw fallback or lifecycle pivot.
-  Children:35.0 target frozen;35.1 Perl repaired/targeted-checked;35.2 Rust then35.3 Dart/35.4 Julia/35.5 safe Lua independent implementation or compatibility proof.
+  Children:35.0 target frozen;35.1 Perl repaired/35.2 Rust compatible and targeted-checked;35.3 Dart then35.4 Julia/35.5 safe Lua independent implementation or compatibility proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.0`
   Status: `completed`
@@ -7270,14 +7270,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.35.1 - lower anonymous capture resets as ordinary value-block statements`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.2`
-  Status: `pending`
-  Goal: Independently implement or lock Rust ordinary value-block anonymous reset statement behavior.
-  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
-  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
-  Planned verification tier: focused
-  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
-  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
+  Status: `completed`
+  Goal: Lock existing Rust ordinary capture-reset value-block statement behavior independently.
+  Authority: Frozen capture-reset-value-block.md/shared target and existing block/source/function/callback contracts. Exact14-source baseline/test/refinement/output epochs are retained in capture-reset-value-block-rust-intake.json.gz at clean d048d5fd3.
+  Verification tier: `focused`
+  Focused checks: New3 plus nearby Number6 pass with locked/offline runtime compilation and rustfmt. Independent native/restored CompiledSpec/generated-plan values/errors, strict source/JSON/helper identities, no runtime diff, book/map/history/manual continuity/cadence/diagnosis/claim-input/diff; no broad gate.
+  Canonical trigger: Full23.4/clean push after independent35 peers/34 and39/38/37/40/41, pressure/registration/declared-host repair; fresh emitted package/full source/context admission remains separate.
+  Claim verification: none: Finite authored functional/source/error controls, no population measurement or backend completeness claim.
+
+  - [x] **REPRODUCE / ISSUE**: Public14-source native/restored CompiledSpec/plan baseline already agrees with frozen ordinary target before final expectations are authored. No-reset/standalone/inside/alias/local-return/lazy/direct-source values all work; no product RED is invented. Existing literal callback reset yields x!/boundary6; pure-function and pure-apply callback cases reject both authored helper names.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine::eval_block_value executes nonfinal statement effects before final values, handles local return without writing the rule return channel and respects lazy consumer selection. Existing start_capture_slice/capture_slice_here branch writes current capture_start through typed live-position validation and returns RuntimeValue::Undef. Current function/callback state guards already distinguish dynamic invocation scope; runtime needs no repair.
+  - [x] **FIX**: Add normal capture_reset_value_block integration regression only, with shared inside fixture exact-source equality and existing semantic/control sources. No engine/frontend/emitter, AST/schema/generated family, value-source, body-vocabulary, frame/cursor or new temporary owner changes.
+  - [x] **ADDRESSED (verified)**: Three tests pass across native/restored/plan: eight ordinary controls preserve4! snapshot, boundary2 versus6/rest4 versus0, SA order, skipped reset/T and surrounding action continuation. Two literal callback aliases preserve existing x!/6 behavior; four function/registered-callback aliases preserve helper/function identity and generated error prefix. Nearby Number6pass; rustfmt/locked offline compile pass.
+  - [x] **NO REGRESSION**: Runtime diff empty and shared source/expected bytes unchanged. No mutator-as-data or new callback helper grant; Rust's existing supported literal body and pure-function fence are retained independently of Perl exclusions. Initial consumer's error-envelope equality assumption is preserved/refined as instrument-only failure, with no extra product RED. No fresh source package, declared-host or full context/admission credit.
+  - [x] **LOCKSTEP**: Packet/target/new Rust card/map/book and task/live/resume/roadmap/history agree on existing Rust compatibility. Parent35 stays in progress for independent peers/formal admission; Dart35.3 follows, then Julia/safe Lua/34 and39/38/37/40/41. Focused authorized workflow continues without broad suite/gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.35.2 - lock existing Rust ordinary capture-reset block behavior`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.3`
   Status: `pending`
@@ -7628,7 +7635,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.35.2` | `pending` | Independently intake Rust ordinary value-block capture reset behavior. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.35.3` | `pending` | Independently intake Dart ordinary value-block capture reset behavior. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

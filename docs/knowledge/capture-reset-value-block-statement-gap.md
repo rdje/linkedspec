@@ -7,7 +7,7 @@ answers:
   - "which task owns capture reset inside expression-valued blocks"
   - "does capture reset block ready1 mean generated source compiles"
 date: 2026-10-28
-status: Perl35.1 repaired/targeted-checked; independent Rust35.2 next, peers/full admission open
+status: Perl35.1 repaired/Rust35.2 compatible and targeted-checked; Dart35.3 next, peers/full admission open
 tags: [perl, blocks, capture, void, source, readiness, statement]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.35.0 at clean0d0382338; seven public native/fresh/metadata/substitution sources and emitted bytes retained in capture-reset-value-block-authority.json.gz."
 reverify: "Recover probe_capture_reset_value_block.pl from the packet and run through tools/project_data_run.sh env PERL5LIB= perl -Iperl; require completed output before the strict consumer."
@@ -48,3 +48,9 @@ No full14 combined run/global admission is claimed. Pure function reset stays
 blocked/unready with boundary2; excluded callback helpers stay typed unknown.
 Their false-ready metadata is31.6.4.4; defined-parent native child error loss is
 [[perl-collecting-parent-runtime-error-loss]], scheduled41 before admission.
+
+Rust35.2 independently already supports all eight ordinary controls. New3 plus
+nearby Number6 pass native/restored CompiledSpec/plan, runtime unchanged. Existing
+literal callback reset is supported, while pure-function/pure-apply callbacks stay
+blocked for both aliases. See [[capture-reset-value-block-rust-compatibility]].
+No new vocabulary or full admission follows; independent Dart35.3 is next.
