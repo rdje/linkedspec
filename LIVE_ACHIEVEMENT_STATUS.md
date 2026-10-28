@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart bounded null-return and pure coordinator observation repairs complete; Julia intake next.
+Independent Julia intake complete; live progress then bounded feature repairs next.
 
 ## Latest Completed Slice
 
-Dart pure coordinator observation now distinguishes normal return from parser matching status. Private invocation completion receives compiled regex/action/blind structure presence and accepts normal zero-structure return independently of null payload; errors/absent results remain aborted and actual matching structure still requires matchedtrue. No selected span is fabricated and ordinary pure-null parser matchedfalse remains unchanged.13 authored sources17 inputs9healthy4actualRED ->13pass native/restored/generated-plan and same13 baseline emitted modules/main consumer reused. Full detached nine-field records preserve entry/exit/nullable selection/lineage, including a pure coordinator returning null after an ordinary child. Failed regex/blind minimum/zero-min/no-hit, early matcher I null, false/String payload, abort and rejected recursion controls pass. Exact source/normalized/compiled/plan/emitted bytes identical; compiler/emitter/recognition transaction unchanged.63 adjacent null-return/observation/minimum/live-progress tests and fatal analysis pass. Packet dart-pure-observation-intake.json.gz retains actual producers/inputs/runtime epochs/patch/SDK/fresh/receipts. Book/cards/target/roadmap/task/live/resume/history align; bounded .7 parent complete. Independent Julia39.3 then safe installed Lua39.4 next; broader lifecycle/slot/admission/registration/pressure prerequisites remain. Authorized focused commit/no full gate/push.
+Independent Julia intake executes31 exact authored sources49 inputs native/restored/generated-plan and31 emitted modules in a separate Julia process. Raw source/normalized/compiled/plan/emitted inputs and full SDK matched/value/cursor/lifecycle results retained; no production change. Value/error oracles18healthy13failed sources; additional accepted-null action qualifier shows falsey_null has matching value but wrong matchedfalse at cursor4, owned .7. Public debug traces11 inputs/six sources locate reversed/cross dispatch walking local slots, duplicate actions sharing one hit, repeated action escaping whole rule, completed blind iterations losing values and recognition zero-progress acceptedtrue at0. Source confirms local catalog/action scan, value-only _RuntimeActionReturn, no repeated-AND group collector, generic under-min throw, no repeated choice value collection and missing live recognition scope/loop progress validation. Bounded owners .1 required steps, .2 group outcomes, .3 ordinary minima, .4 blind collections, .5 post-call qualification, .6 live progress, .7 accepted-null provenance are scheduled before peers/admission; .6 next. Local sparse/full entry/indexed/parent/mixed/no-edge/boundary/plain blind AND/Default cursor controls retain their observed passing values. Packet julia-sparse-intake.json.gz retains actual probes/reader/SDK/fresh/trace/modules/runtime/receipt inputs. Book/card/target/roadmap/task/live/resume/history align. One initial summary reader raced an empty fresh log and raised KeyError; reader now requires explicit --fresh after process exit, no product RED credit. Focused intake only/no Julia repair/full gate/push.
 
 ## Next Action
 
-Activate independent Julia39.3 intake from clean committed Dart null/observation repairs. Read frozen39.0 target, Julia public commands and relevant canonical cards; establish exact source/native/restored/generated-plan/fresh body/structural/index/duplicate/reversed/cross/entry/group/minimum/blind/progress baseline before changes, without inferring peer defects. Decompose confirmed repairs into bounded owned children, implement with focused checks/book/docs/commit per child, then safe installed Lua39.4. Full admission/registration/pressure and separately owned lifecycle/slot prerequisites remain before push.
+Activate Julia39.3.6 from clean independent intake. Qualify actual live recognize_once accepted repetition progress with exact safe authored source/native/restored/generated/fresh controls and existing typed authority. Add private scoped origin/live loop validation before count/IT/max/ordinary zero exits while preserving legal whole-rule LE/one-shot/ordinary zero paths, original errors and scope cleanup; no neutral schema/export change. Targeted RED-GREEN/nearest checks/book/docs/focused commit, then .1 required steps/.2 groups/.3 minima/.4 blind/.5 post-call qualification/.7 nullable provenance before safe Lua39.4 and admission. Full registration/pressure/lifecycle/slot prerequisites remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.0` — Independent Julia intake complete; live progress then bounded feature repairs next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2` — Dart bounded null-return and pure coordinator observation repairs complete; Julia intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1` — Dart accepted-null return provenance repaired; pure-null observation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.2` — Reference completed blind parent recognition repaired; Dart null provenance and pure observation next.
@@ -29,7 +30,6 @@ Activate independent Julia39.3 intake from clean committed Dart null/observation
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.0` — Independent Dart intake complete;22 sources34 inputs14healthy/8ownedRED; live progress guard first.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2` — Rust blind collections repaired; bounded Rust regression ignores all enabled; independent Dart intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` — Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` — Rust live recognition repetition progress repaired; ordinary minimum/API39.1.5.1 next.
 
 ## History
 

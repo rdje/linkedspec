@@ -8306,13 +8306,95 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2 - accept normal pure-null Dart coordinator observations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
-  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Status: `in_progress` / independent Julia intake and bounded repairs
   Goal: Independently intake and repair Julia sparse-AND body candidate/required-sequence ownership.
   Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
   Planned verification tier: focused
   Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
   Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
   Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.0`
+  Status: `completed` / independent31-source baseline and owned repairs
+  Goal: Establish exact Julia structural/dependency/entry/group/minimum/blind/nullable/progress outcomes before production changes.
+  Acceptance: Consume frozen39.0 authority and exact authored fixtures, qualify source/normalized/compiled/plan/emitted inputs and native/restored/generated/fresh values/match/cursor/error roles. Use public trace for confirmed mechanisms before code diagnosis. Log/own every confirmed gap with bounded priority/repair children, preserve healthy cases and distinguish unsupported fixture/build issues from runtime RED. No peer inference, outgoing-only oracle or broad new policy. Commit intake/book/docs before repair children.
+  Verification tier: `focused`
+  Focused checks:31 authored sources49 inputs SDK/restored/generated-plan plus31 emitted modules in separate process; exact raw input/module identity,18healthy13value/error failures plus nullable matched qualifier; actual11 trace inputs/six sources; no Julia production diff; book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after owned Julia/peer repairs and registration/pressure; public schema/authority movement separately canonical.
+  Claim verification: none: Finite authored functional/source/route distinctions, no population measurement.
+  Activation: clean `e6a49f24bb000e653febcd0c269be8f74ac0b47f`. Dart bounded null/observation repairs committed; no Julia production change. Installed Julia through project-local wrapper, other repositories read-only. Full existing structural catalogs and dependency order are authority; no defect inferred from Rust/Dart/Lua.
+
+
+  - [x] **REPRODUCE / ISSUE**:31 authored sources49 inputs native/restored/plan plus31 emitted modules in a separate process produce18healthy13value/error-failed sources. Accepted-null direct action additionally consumes4 but matchedfalse, despite value-only null equality. All build routes complete; fresh plan values/error classes agree, actual SDK fields retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual debug11 inputs/six sources show local slot0 attempted on reversed/cross forms, duplicate actions execute on one selected hit, repeated return exits at4, blind child hits finish at4/8 with no values, and recognition accepts zero at0. Interpreter local-catalog loop/action-index scan, _RuntimeActionReturn catch, absent AND collector, under-minimum throw, blind no-collection result and missing live progress scope/validation explain the exact bounded mechanisms; no peer inference.
+  - [x] **FIX**: Intake establishes bounded repair owners .1 required steps, .2 group outcomes, .3 ordinary minimum miss, .4 blind collections, .5 post-call qualification, .6 live progress and .7 accepted-null provenance/qualification. P1 .6 next, then .1-.5/.7 before safe Lua/admission. Full structural catalogs/indexed entry contracts remain authority; no production policy/format change or blanket regex filtering.
+  - [x] **ADDRESSED (verified)**: Independent source/normalized/compiled/plan/emitted inputs and native/restored full result records retained; separate fresh process loads every baseline emitted module. Value/error census and additional strict matched qualifier explicitly distinguished. Current failures remain open under named children, not declared fixed by intake.
+  - [x] **NO REGRESSION**: All Julia production/runtime/compiler/emitter/matching/recognition files unchanged. Healthy local sparse, structural/entry/indexed/parent/mixed/no-edge/boundary/falsey value/plain blind AND/Default cursor controls keep observations; falsey null matched defect is separately owned. Trace producers use public debug surface, no submodule/other-repo writes, unsafe patterns or full-suite claim.
+  - [x] **LOCKSTEP**: julia-sparse-intake.json.gz retains actual probe/reader/raw fixture/SDK/fresh/module/trace/source/receipt closure. Book/card/target/roadmap/task/live/resume/history align and schedule every confirmed defect. Initial summary reader empty-log KeyError is a harness race, repaired by explicit --fresh after process exit; no product RED credit. Focused intake commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.0 - intake independent Julia structural and repetition gaps`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.1`
+  Status: `pending` / P1 required dependency steps
+  Goal: Honor authored reversed/duplicate/cross-owner AND required steps while retaining full local increasing structural catalogs.
+  Acceptance: Eight observed dependency sources fail order/hit count: reversed ba misses, ab exits1; duplicate aa/a share a single hit and return[1,1]; cross cases use local H catalog. Actual slot/match trace and compiled actions retained. Typed shared required-step owner must select one action per authored occurrence and preserve logical target/index/captures, full entry/lookahead catalogs, mixed/parent behavior and source/v2 plan identity.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2`
+  Status: `pending` / P1 repeated AND group outcomes
+  Goal: Collect exactly one result per accepted repeated AND group with falsey values independent of acceptance.
+  Acceptance: repeated_return exits whole rule with BODY at4 instead of two values at8, and repeated_nonreturn full8 returns null instead of[[],[]]. Keep custom IT/whole-rule lifecycle authority, skip remaining slots after group action return, reset counters/sequence and preserve partial/minimum/cursor/progress. Qualify falsey/nested cases before production edit, no CHOICE-only blanket policy.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3`
+  Status: `pending` / P1 ordinary minimum miss
+  Goal: Return ordinary regex/blind under-minimum null/matchedfalse without swallowing real errors or rolling back input.
+  Acceptance: repeated_nonreturn and blind_minimum partial Hcat throw generic expected-at-least errors; target is ordinary miss at4. Preserve explicit LX authority, successful null, no-hit/zero-min/max, recovery/caller registers and actual runtime/progress errors; qualify non-acode and generated routes before edits.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4`
+  Status: `pending` / P1 blind iteration collections
+  Goal: Retain implicit repeated blind choice/AND results at accepted complete iteration boundaries.
+  Acceptance: Default blind Hcat and HcatHcat accept child hits at4/8 but return null instead of BODY collections. Plain AND blind is healthy. Qualify repeated AND nesting, partial final groups, custom IT replacement, bounds/default no-hit/zero-min and explicit child values with public reference controls before edits.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5`
+  Status: `pending` / P1 post-call scope qualification before admission
+  Goal: Independently qualify Julia blind post-call return/binding/count/progress against the frozen public contract.
+  Acceptance: Source shows attached blind returns throw whole-rule channel, but the31-source intake has no authored post-call fixture and establishes no defect here. Probe exact raw public sources first; repair only actual confirmed iteration/group/count/minimum/retv gaps, retain ordinary/lifecycle whole-rule authority and typed errors, split if needed.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6`
+  Status: `pending` / P1 immediate live progress prerequisite
+  Goal: Enforce typed progress on actual accepted repetitions reached through recognize_once.
+  Acceptance: Actual recognition_progress native/restored/generated/fresh returns true at0, expected recognition_zero_progress_repetition. Public trace confirms accepted zero-width Guard hit at0, no live scoped progress edge. Existing neutral RecognitionTransaction.validate_progress remains separate. Qualify safe zero/consuming/bounds/LE/ordinary/one-shot/scope cleanup/error routes, integrate typed private live owner without new public schema or blanket Unicode policy.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7`
+  Status: `pending` / P1 accepted-null provenance before peers
+  Goal: Preserve Julia accepted null result independently of payload and qualify nullable lifecycle/observation contexts.
+  Acceptance: falsey_null fully consumes Hcat at4 but SDK matchedfalse; _runtime_returned uses value !== nothing and _RuntimeActionReturn has no acceptance. Value-only census would hide this. Own selected action acceptance and qualify completed lifecycle/plain blind/pure observation before edits; preserve initial I/LS/real miss/minimum/no-hit and non-null authority, never universal null success or sticky prior match. Split independently confirmed observation repair if warranted.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
+  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8628,7 +8710,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3` | `pending` | Independently intake Julia structural/sequence/repetition outcomes before repairs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6` | `pending` | Qualify and repair Julia live recognition repetition progress. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

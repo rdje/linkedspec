@@ -217,3 +217,13 @@ and same13 baseline emitted modules/main, full detached records/input identity,
 63 nearest controls/fatal analysis. Packet dart-pure-observation-intake.json.gz
 retains exact producers/inputs/epochs/patch/receipts. Bounded .7 repairs complete;
 independent Julia39.3 then safe installed Lua39.4 next, admission remains.
+
+Independent Julia39.3.0 now executes31 exact authored sources49 inputs native/
+restored/generated-plan and31 emitted modules in a separate process.18 sources
+satisfy value/error oracles,13 fail; selected null action additionally loses
+matched status at4 despite equal null payload. Actual11 trace inputs/six sources
+locate required-step order/duplicate dispatch, whole-rule repeated returns,
+missing blind collections and accepted recognition zero-progress. Children
+39.3.1-.7 own confirmed repairs and post-call qualification, .6 progress next.
+Packet julia-sparse-intake.json.gz retains exact producers/inputs/trace/SDK/fresh.
+No Julia production change or inferred Lua gap; full admission remains separate.
