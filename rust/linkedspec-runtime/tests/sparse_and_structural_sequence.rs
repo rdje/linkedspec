@@ -189,7 +189,6 @@ fn indexed_choice_keeps_the_selected_entry_first() {
     }
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4; retained actual RED, required before admission"]
 fn blind_entry_without_tail_collects_the_child_value() {
     check(
         "blind",

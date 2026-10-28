@@ -1858,18 +1858,17 @@ impl GeneratedPlanExecutor<'_> {
             ));
         }
 
-        let mut implicit_and_result = Vec::new();
+        let mut implicit_bcode_result = Vec::new();
+        let mut repeated_blind_matched = false;
+        // Default and pipe share or_bcode in v2, but only Default repeats.
+        let repeats_blind_calls = matches!(
+            family,
+            GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode
+        ) || (matches!(family, GeneratedRuleFamily::OrBcode)
+            && matches!(rule.mode, RuleMode::Default)
+            && rule.rep_min.is_some());
         match family {
-            // Default and pipe share or_bcode in v2. Spend Default's existing
-            // repetition bounds without changing that row or repeating pipe.
-            family
-                if matches!(
-                    family,
-                    GeneratedRuleFamily::RepBcode | GeneratedRuleFamily::RepAndBcode
-                ) || (matches!(family, GeneratedRuleFamily::OrBcode)
-                    && matches!(rule.mode, RuleMode::Default)
-                    && rule.rep_min.is_some()) =>
-            {
+            _ if repeats_blind_calls => {
                 let rep_min = rule.rep_min.unwrap_or(0);
                 let rep_max = rule.rep_max;
                 let mut matches = 0usize;
@@ -1889,6 +1888,7 @@ impl GeneratedPlanExecutor<'_> {
                         return_if_rule_returned!();
                     }
 
+                    let mut iteration_values = Vec::new();
                     let matched = if matches!(family, GeneratedRuleFamily::RepAndBcode) {
                         let mut completed_sequence = true;
                         for entry in &rule.bcode_dispatch {
@@ -1904,6 +1904,9 @@ impl GeneratedPlanExecutor<'_> {
                                 ),
                                 TraceLevel::MEDIUM,
                             );
+                            if child_matched && rule.itcode.is_none() {
+                                iteration_values.push(child_retv.clone());
+                            }
                             ctx.set_retv(child_retv);
                             self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -1928,6 +1931,9 @@ impl GeneratedPlanExecutor<'_> {
                                 ),
                                 TraceLevel::MEDIUM,
                             );
+                            if child_matched && rule.itcode.is_none() {
+                                iteration_values.push(child_retv.clone());
+                            }
                             ctx.set_retv(child_retv);
                             self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -1955,6 +1961,14 @@ impl GeneratedPlanExecutor<'_> {
                     }
 
                     ctx.assert_recognition_repetition_progress(label, pos_before, ctx.pos)?;
+                    repeated_blind_matched = true;
+                    if rule.itcode.is_none() {
+                        if rule.mode.is_and() {
+                            implicit_bcode_result.push(RuntimeValue::Array(iteration_values));
+                        } else {
+                            implicit_bcode_result.extend(iteration_values);
+                        }
+                    }
                     matches += 1;
 
                     if let Some(ref itcode) = rule.itcode {
@@ -2001,7 +2015,7 @@ impl GeneratedPlanExecutor<'_> {
                         ),
                         TraceLevel::MEDIUM,
                     );
-                    implicit_and_result.push(child_retv.clone());
+                    implicit_bcode_result.push(child_retv.clone());
                     ctx.set_retv(child_retv);
                     self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -2052,9 +2066,14 @@ impl GeneratedPlanExecutor<'_> {
             return_if_rule_returned!();
         }
 
+        // Historical Default retains null with no accepted iteration; explicit
+        // repetition exposes an empty collection when its minimum permits it.
         let my_return = ctx.take_return_value().unwrap_or_else(|| {
-            if matches!(family, GeneratedRuleFamily::AndBcode) {
-                RuntimeValue::Array(implicit_and_result)
+            if matches!(family, GeneratedRuleFamily::AndBcode)
+                || (repeats_blind_calls
+                    && (repeated_blind_matched || !matches!(rule.mode, RuleMode::Default)))
+            {
+                RuntimeValue::Array(implicit_bcode_result)
             } else {
                 RuntimeValue::Undef
             }
@@ -3472,7 +3491,8 @@ impl Engine {
 
         // ── Blind-call dispatch ──
         if !rule.bcode_dispatch.is_empty() {
-            let mut implicit_and_result = Vec::new();
+            let mut implicit_bcode_result = Vec::new();
+            let mut repeated_blind_matched = false;
             if is_rep {
                 let mut matches = 0usize;
                 for _iter in 0..LINKEDSPEC_WHILE_ITERATION_LIMIT {
@@ -3489,6 +3509,7 @@ impl Engine {
                         return_if_rule_returned!();
                     }
 
+                    let mut iteration_values = Vec::new();
                     let matched = if rule.mode.is_and() {
                         let mut completed_sequence = true;
                         for entry in &rule.bcode_dispatch {
@@ -3504,6 +3525,9 @@ impl Engine {
                                 ),
                                 TraceLevel::MEDIUM,
                             );
+                            if child_matched && rule.itcode.is_none() {
+                                iteration_values.push(child_retv.clone());
+                            }
                             ctx.set_retv(child_retv);
                             self.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -3528,6 +3552,9 @@ impl Engine {
                                 ),
                                 TraceLevel::MEDIUM,
                             );
+                            if child_matched && rule.itcode.is_none() {
+                                iteration_values.push(child_retv.clone());
+                            }
                             ctx.set_retv(child_retv);
                             self.execute_bcode_entry_tail(entry, ctx, label)?;
                             return_if_rule_returned!();
@@ -3553,6 +3580,14 @@ impl Engine {
                     }
 
                     ctx.assert_recognition_repetition_progress(label, pos_before, ctx.pos)?;
+                    repeated_blind_matched = true;
+                    if rule.itcode.is_none() {
+                        if rule.mode.is_and() {
+                            implicit_bcode_result.push(RuntimeValue::Array(iteration_values));
+                        } else {
+                            implicit_bcode_result.extend(iteration_values);
+                        }
+                    }
                     matches += 1;
 
                     if let Some(ref itcode) = rule.itcode {
@@ -3599,7 +3634,7 @@ impl Engine {
                         ),
                         TraceLevel::MEDIUM,
                     );
-                    implicit_and_result.push(child_retv.clone());
+                    implicit_bcode_result.push(child_retv.clone());
                     ctx.set_retv(child_retv);
                     self.execute_bcode_entry_tail(entry, ctx, label)?;
                     return_if_rule_returned!();
@@ -3637,9 +3672,14 @@ impl Engine {
                 self.execute_lifecycle_block("E", ecode, ctx, label)?;
                 return_if_rule_returned!();
             }
+            // Historical Default retains null with no accepted iteration;
+            // explicit zero-min repetition exposes an empty collection.
             let my_return = ctx.take_return_value().unwrap_or_else(|| {
-                if !is_rep && rule.mode.is_and() {
-                    RuntimeValue::Array(implicit_and_result)
+                if rule.mode.is_and()
+                    || (is_rep
+                        && (repeated_blind_matched || !matches!(rule.mode, RuleMode::Default)))
+                {
+                    RuntimeValue::Array(implicit_bcode_result)
                 } else {
                     RuntimeValue::Undef
                 }

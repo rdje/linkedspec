@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
+Rust blind collections repaired; bounded Rust regression ignores all enabled; independent Dart intake next.
 
 ## Latest Completed Slice
 
-Four native/generated regex/bcode minimum guards now return ordinary Undef/null, restore caller return/capture lexicals and preserve consumed cursor. Minimum failure explicitly clears partial-hit recognition acceptance; completed nonempty blind repetitions publish parent acceptance independently of null payload. Zero-hit recognition status and real errors are unchanged. All7 dormant min/API cases enabled; new4 recognition tests distinguish accepted-null from minimum miss. Refined baseline13tests2pass11fail ->13pass0ignored, with12 exact source/serde/plan/emitted records unchanged; legacy serialized input unchanged. Old rep_min_not_met_returns_error deliberately becomes an ordinary-miss compatibility test: modernnull, legacy[]; full regex-adjacent E shape remains.5.2/SESSION27. Private2pass retains8 native/generated cursor2->3 caller-state restorations and12 direct generated recognition outcomes, qualifying shared native callback dispatch. Legacy unit1/live progress4/group-reset2 pass, exact-file format. New public Perl probes6sources18pairs and isolated descriptor processes preserve preselection entry-model qualification; a successful repeated blind parent has no accepted bit, now P1 owned39.9 after bounded features/before admission. Packet rust-minimum-fix-intake.json.gz retains exact producers/before/fix/inputs/results/receipt. Book/card/target/roadmap/task/live/resume/history synchronized. Implicit blind result39.1.4.2 next, peers/attribution/Perl39.8-.9/full admission remain owned; focused authorized commit, no push.
+Rust native/generated repeated blind owners now retain accepted child values instead of losing them to a final miss: choice collections are flat, AND collections contain complete ordered groups, and incomplete groups contribute nothing while keeping cursor movement. Custom IT replaces default collection; existing lifecycle/post-call returns and bounds keep authority. Historical Default no-hit null is preserved separately from explicit zero-min[].14 final authored sources23 public native/fresh reference pairs agree with empty stderr; same14 Rust source/serde/plan/emitted records and23cases reached native/restored/v2plan baseline1fail ->final1pass. Sole structural blind regression enabled,3 blind controls pass with zero remaining structural ignores; minimum13/progress4 neighbors pass, exact-file format. Source emitter/core unchanged; rebuild generated applications with updated runtime, no source regeneration or independent emitted-package claim. Fixture refinements preserve ADR0044 child-owned seek/consume and existing EX exhaustion priority: use one-anchor AND children, EX/E identical override sentinel, and pure custom-IT read. Initial mismatched expectations/merged warning-corrupted JSON retained without product RED credit. Packet rust-blind-collection-intake.json.gz retains exact producers/epochs/inputs/outputs/patch/receipt. Book/card/target/roadmap/task/live/resume/history align. Bounded Rust collection complete; independent Dart39.2 next, then Julia/safe Lua.39.1.5.2/SESSION27/Perl39.8-.9/full admission remain owned; focused authorized commit/no push.
 
 ## Next Action
 
-Activate39.1.4.2 from clean minimum/API repair. Read sole remaining ignored structural group test and implicit Default/repeated blind collection authority; repair native/generated default result collection without altering explicit EX/E/IT/early returns, match status, cursor, existing v2 rows or lifecycle placement. Exact authored RED-GREEN/quick dependent checks/book/docs/commit. Then independent Dart/Julia/safe Lua39.2-.4;39.1.5.2/SESSION27, Perl39.8/39.9 and all registration/pressure/admission prerequisites remain before full39/23.4/push.
+Activate independent Dart sparse AND39.2 from clean Rust blind collection repair. Recover frozen39.0 authority/current cards, current Dart public integration instructions and relevant runtime/tests/book; establish exact authored native/restored/generated-plan/fresh baseline for structural slots, ordered/cross/duplicate dependencies, indexed entry, returns/count/minima/falsey results. Repair only confirmed bounded gaps, split safe slices as needed, focused compile/check/docs/commit. Do not infer failure from Lua or filter every AND to outgoing edges. Then Julia39.3/safe installed Lua39.4; attribution39.1.5.2/SESSION27, Perl39.8-.9 and admission/registration/pressure prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2` — Rust blind collections repaired; bounded Rust regression ignores all enabled; independent Dart intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` — Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` — Rust live recognition repetition progress repaired; ordinary minimum/API39.1.5.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0` — Minimum/API/progress intake qualified; immediate live recognition progress39.1.6 before bounded minimum repair.
@@ -29,7 +30,6 @@ Activate39.1.4.2 from clean minimum/API repair. Read sole remaining ignored stru
 - `TYPE-REFERENCE-BOOK.1.2.23.3.44` — Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0` — Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` — Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.0` — Sparse AND structural authority reconciled; Perl39.5/.6 precede independent peer intake.
 
 ## History
 

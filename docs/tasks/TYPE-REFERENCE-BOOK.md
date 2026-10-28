@@ -7869,7 +7869,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored zero-width matcher/progress distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4`
-  Status: `pending` / P1 before39.2/full23.4
+  Status: `completed` / bounded default iteration and implicit collection targeted-checked
   Goal: Reconcile and repair confirmed repeated/default blind implicit-result differences.
   Scope: Initial Top default no-tail blind returnsnull; add explicit AND/mode/IT/E controls and exact compiled family/counter/trace first. Preserve existing call/post-call/return boundaries; no inference that child AND matching fails or blanket new default semantics.
   Planned verification tier: focused
@@ -7895,13 +7895,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1 - honor default blind repetition in generated execution without changing v2 rows`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2`
-  Status: `pending` / P1 implicit blind-result reconciliation after39.1.4.1
-  Goal: Reconcile and repair normal repeated/default blind implicit result collection against published child-result contracts.
-  Root/evidence: Public native trace proves Value BODY is produced, then Top repeats and replaces retv with final miss; no default collection is retained. Current default no-tail returnsnull, explicit AND parent returns[BODY]. Both native/generated repeated bcode branches lack implicit result accumulation while nonrepeat AndBcode has its own collection. Freeze exact default/explicit OR/AND repetition/IT/E/return/falsey/group contracts before editing result channels; preserve the separate fixed family classifier.
-  Planned verification tier: focused
-  Planned focused checks: Public native/restored/plan and Perl oracle shape/order/cursor/IT/E/return/minimum/falsey distinctions, scoped actual RED/GREEN, compile/format and book/docs/commit.
-  Planned canonical trigger: Any actual new return/mode policy separately owned canonical; full39/23.4/final clean push.
-  Planned claim verification: none: Finite authored implicit-result/return controls, no population measurement.
+  Status: `completed` / implicit native/generated blind collections
+  Activation: clean `541561d99d196aeaaa9c167f117bbe1df9620804` after minimum/API39.1.5.1.
+  Goal: Preserve child-result collection shape independently of final failed probes and explicit lifecycle overrides.
+  Verification tier: `focused`
+  Focused checks:14 final authored sources23 native/fresh reference pairs exact value/cursor/error agreement; native/restored/v2plan baseline1test RED ->final1pass, all14 sources23cases reached; exact source/serde/plan/emitted identity;3 blind structural controls/13 minimum/4 progress tests pass; zero remaining structural ignores; exact-file format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push; no public mode/family/schema/source movement or ledger promotion.
+  Claim verification: none: Finite authored implicit-result/return/bound/control distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Healthy BODY child result is replaced by final miss, default parent returnsnull. Native/generated repeated bcode paths discard successful results, unlike existing nonrepeat AND.14 final sources23cases reached before assertion, observed runtime RED retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Engine/GeneratedPlanExecutor repeated bcode owners update retv but keep no collection. Distinguish flat successful choice hits from complete AND group values; incomplete candidates must not append. Default and pipe retain shared row with distinct mode/bounds.
+  - [x] **FIX**: Collect successful child values locally per iteration, append flat choice or one AND group only on completed accepted iteration and only absent custom IT. Preserve progress/lifecycle/post-call ordering and Default no-hitnull versus explicit zero-min[]. Reuse bcode result storage for nonrepeat AND; classifier/emitter/core unchanged.
+  - [x] **ADDRESSED (verified)**:14-source/23-case native/restored/plan target passes; exact source/input/serde/plan/emitted records unchanged. Sole structural regression enabled and3 blind controls pass, no ignored structural cases remain. Reference native/fresh23pairs agree without errors/stderr.
+  - [x] **NO REGRESSION**: Bounds, partial groups, nested child values, customIT replacement, IT whole-rule return, EX/E override values, nonrepeat AND and explicit pipe override pass. Minimum13/progress4 pass. First pipe-child assumptions violated child-owned seek; final one-anchor AND controls honor ADR0044. E-only exhaustion remains.5.2/SESSION27; final EX/E same sentinel does not claim phase parity. Initial warning-corrupted merged JSON and invalid expectations receive no product RED credit.
+  - [x] **LOCKSTEP**: rust-blind-collection-intake.json.gz retains all source epochs/actual producers/logs/fix/receipt and limits. Book/card/target/roadmap/task/live/resume/history align; rebuilt runtime consumes unchanged generated source/plans. No independent emitted package/full admission/complete falsey blind parity claim. Independent Dart39.2 next; remaining peers/attribution/Perl39.8-.9/admission prerequisites owned. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2 - retain implicit Rust blind repetition collections`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5`
   Status: `in_progress` / intake39.1.5.0/progress39.1.6/minimum39.1.5.1 complete; attribution39.1.5.2 remains before admission
@@ -8323,7 +8331,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2` | `pending` | Complete implicit repeated/default blind result collection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2` | `pending` | Independently intake Dart sparse/ordered AND against the frozen authority. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1,7 +1,7 @@
 # Rust sparse AND: independent intake and bounded repairs
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.39.1; intake39.1.0.
-Status: default-blind iteration39.1.4.1 and typed dependency steps39.1.1 repaired/targeted-checked; indexed39.1.2 repaired/targeted-checked; returns/minimum/implicit-result P1 repairs remain before peers/admission.
+Status: bounded Rust dependency/index/group/progress/minimum/blind-collection repairs targeted-checked; independent peers and lifecycle/Perl repairs remain before admission.
 
 ## Retained observations
 
@@ -177,3 +177,14 @@ migration explicit, full regex-adjacent E attribution stays.5.2/SESSION27.
 Perl static recognition preselects local regex; no cursor/bounds parity inference.
 Actual repeated blind parent false accepted bit is P1 owned39.9 before admission.
 Packet rust-minimum-fix-intake.json.gz; implicit blind39.1.4.2 next, then peers.
+
+39.1.4.2 completes Rust implicit blind results: flat choice values, nested complete
+AND groups, no incomplete group append, custom IT replacing default push.
+Default no-hitnull and explicit zero-min[] stay distinct.14 final sources23
+reference native/fresh pairs agree; exact Rust source/serde/plan/emitted records
+unchanged RED ->GREEN;3 blind structural controls/13 minimum/4 progress pass.
+No structural ignores remain. Initial child-seek/EX-priority fixture assumptions
+are corrected using existing ADR0044/lifecycle authority, not new semantics;
+all originals retained without false RED credit. Packet
+rust-blind-collection-intake.json.gz. Independent Dart39.2 next, then Julia/safe
+Lua; attribution.5.2/SESSION27 and Perl39.8-.9 remain before full admission.

@@ -10,12 +10,15 @@ answers:
   - "how do Rust repeated AND early returns count groups"
   - "does custom IT replace Rust repeated AND default collection"
   - "why does default blind Rust plan stop at cursor four instead of eight"
+  - "why does a Rust default blind parent lose its child result"
 date: 2026-10-28
-status: default-blind iteration/dependency/index/group outcomes repaired; remaining minimum families and blind implicit results owned
+status: dependency/index/group/minimum/progress/blind collection repairs targeted-checked; peers and admission remain
 tags: [rust, and, sparse, sequence, dependencies, slots, generated-plan, repetition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0; sparse-and-rust-repair-target.md and sparse-and-rust-intake.json.gz retain actual initial/refined source, compiled serde, emitted text, native trace, all reached routes and owned dormant tests."
 reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test sparse_and_structural_sequence -- --nocapture; explicitly select owned ignored regressions with --ignored when repairing. Independent emitted package execution remains unassessed."
 ---
+
+Initial39.1.0 observations below are historical; subsequent repair entries supersede their failures.
 
 Same-owner increasing sparse local slots work on native/restored/generated-plan,
 including3 slots, falsey values, effects/tail, ordinary incoming and early return.
@@ -89,3 +92,19 @@ Packet rust-and-group-outcomes-intake.json.gz retains all source/epoch/patch/
 receipt. Rebuild generated applications with updated runtime; no source rewrite
 or independent emitted-package proof. Minimum/API39.1.5.1 and live progress39.1.6 are now targeted-checked;
 blind implicit results39.1.4.2 precede peers;39.8/39.9/SESSION27 before admission.
+
+39.1.4.2 completes implicit repeated/default blind collections. Flat choice
+results and nested complete AND groups survive the final miss; partial groups
+do not append. Custom IT replaces default push, lifecycle/post-call returns keep
+authority. Default with zero accepted iterations retainsnull; explicit zero-min
+repetition yields[].14 final authored sources/23 native-fresh reference pairs
+agree, and all14 exact source/serde/plan/emitted records stay unchanged across
+Rust RED/GREEN native/restored/v2plan execution. Sole structural ignore is enabled;
+three blind controls, minimum13 and progress4 tests pass. No source generation,
+schema/classifier change or independent emitted-package/full admission claim.
+Packet rust-blind-collection-intake.json.gz retains original/refined/final inputs,
+producers and outputs. Initial pipe children seek by their own mode; final
+one-anchor AND children isolate collection order under ADR0044. EX/E identical
+sentinel avoids the independently owned exhaustion-phase gap. Invalid fixture
+expectations/merged warning-corrupted JSON earn no product RED credit. Dart39.2
+next; Julia/safe Lua, lifecycle.5.2/SESSION27 and Perl39.8-.9 remain before admission.
