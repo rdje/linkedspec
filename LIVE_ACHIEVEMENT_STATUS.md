@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Sparse AND structural authority reconciled; Perl39.5/.6 precede independent peer intake.
+Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
 
 ## Latest Completed Slice
 
-Reconciled sparse AND against accepted local structural-slot/dependency authority; no production edit. Reject outgoing-only semantics: qualifying sparse actions require every local regex, while reversed/duplicate/cross-target sequences keep compiled dependency order and incoming entry does not skip child slot0. Public27-case reference intake yields24 native/fresh pairs and3 fresh-only bounded timeouts; protected normal3 groups pass. Plain multi-regex/one-action Perl selects _default/default and accepts direct cat while rejecting Hcat, unlike protected proper AND families. P1 child39.5 owns classification repair and explicit derived default-to-existing-and_acode_seq transition without new family/format/authority. Separate39.6 owns blind .push post-call/fresh non-progress recursion; exact emitted selfcall and incomplete phases retained, native guard termination is no result oracle. Packet retains actual source/input/descriptor/native/emitted/phase/error epochs, including interrupted run and strict trace-aware reader. Independent peers39.1-.4 follow repaired references, then38/37/40/41. Historical stable-ID lookup failure owned20.1 before admission; no lost-history claim. Book/card/target/roadmap/live/resume/history agree. Focused authority/docs commit; broader admission/full push gate remain open.
+Plain Perl multi-regex AND with one qualifying same-owner sparse action now selects existing AND_ACODE/and_acode_seq, requiring edge-less structural slots. Reuse the existing local_structural eligibility predicate; dependency-only conditions stay unchanged, Compiler/emitter remain byte-identical. Final unchanged15 groups/22 inputs reproduce9 failures before code and all15 pass afterward, native plus independently loaded emitted package/plan. Cover required/missing prefixes, three slots, incoming/indexed full child sequence, exact0/empty/null, nonreturning effects with edge-less tail, early-return unwind, single-regex, cross-target/reversed/duplicate dependencies, repeated reset/minimum and unchanged no-edge control. Protected sparse/duplicate15 and syntax pass on byte-identical production. Retain all producer/source/result/patch epochs, including test-only syntax/pos/numeric-eq refinements without product RED credit. Explicitly correct derived default-to-existing-and_acode_seq; no new v2 family/schema/format/authority. Known E omission stays startup27 and blind/fresh recursion39.6 is next before independent peers. Book/card/target/roadmap/live/resume/history agree; focused authorized commit, no full gate/push.
 
 ## Next Action
 
-Activate39.5 from this clean authority boundary. Reproduce plain same-owner multi-regex/one-action AND with structural/nonreturn/falsey, direct/incoming/indexed, dependency-order/repetition controls, then repair sole selection/emitted slot owners using existing and_acode_seq. Preserve cross-target/reversed/duplicate/no-edge behavior. Focused compile/targeted RED-GREEN, docs/commit, then39.6 blind post-call fresh recursion before independent39.1-.4; continue38/37/40/41 and feature coverage. Full gate only at designated admission/push.
+Activate39.6 from clean39.5. Reconcile blind fluent .push child-result/post-call overload semantics and generated non-progress recursion through public source/descriptor/probes. Reproduce process-bounded RED before changing sole owners, preserve legal consuming recursion and other overloads, then focused compile/quick targeted check/docs/commit. Independent39.1-.4 follow, then38/37/40/41 and further feature coverage. Recheck daily safe cleanup due date at the next clean boundary; full admission/registration/pressure/startup27 remain owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` — Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.0` — Sparse AND structural authority reconciled; Perl39.5/.6 precede independent peer intake.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.5` — Named local-start reversed-span guards repaired/targeted-checked; sparseAND authority39.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.3` — Advancing/bridge String word names targeted-checked; immediate two-guard range repair42.5 next.
@@ -29,7 +30,6 @@ Activate39.5 from this clean authority boundary. Reproduce plain same-owner mult
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.0` — Rust callable caller-rule-label repair43.0 frozen; production43.1 next before Dart34.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.2` — Rust ordinary named Number27 controls pass; confirmed callback mark leak43 target/repair immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.1` — Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.34.0` — Named-mark34 target/owners frozen; Perl34.1 next, argument-readiness42 owned.
 
 ## History
 

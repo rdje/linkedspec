@@ -205,7 +205,7 @@ returns.
 Actions may be sparse; structural matching is not. For valid increasing same-owner sparse references, every authored regex in an
 `AND` rule remains a required, consuming slot even when that slot has no `->`
 edge. The handler walks all slots in order and runs code only at the authored
-action indices:
+action indices; an explicit action return still exits the current handler before later slots:
 
 ```text
 CaptureSpan:AND

@@ -1,7 +1,7 @@
 # Sparse AND structural slots and reference repair target
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.39; reconciliation39.0.
-Status: existing authority reconciled; Perl39.5/39.6 repairs precede independent peer intake39.1-.4. No production edit or new contract here.
+Status: authority39.0 reconciled; Perl39.5 classification repaired/targeted-checked,39.6 blind/fresh remains before independent peers. No new contract.
 
 ## Existing authority
 
@@ -35,7 +35,7 @@ healthy order/effect controls while that owner remains open.
 ## Required reference repairs
 
 39.5: Plain same-owner multi-regex AND with one sparse action must select the
-existing ordered structural family. Current Perl eligibility selects
+existing ordered structural family. At39.0 Perl eligibility selected
 `_default` / v2 `default`, unlike protected two-action and repeated sparse cases.
 For `Value::AND` with `/H/`, `/cat/` and only `->Value[1] return("BODY")`, direct
 `Hcat` must return BODY at4 and direct `cat` must miss. A parent consuming H first
@@ -89,3 +89,10 @@ installed host limits and unsafe-pattern exclusions. Full admission,
 registration, document-pressure and declared-host owners stay open. Failed
 historical stable-ID lookup is scheduled under20.1 before admission; its cause
 is unassessed and does not establish lost history. Preserve immutable history.
+
+39.5 now repairs the qualifying plain single-action route through existing
+SpecEntry eligibility: unchanged15 groups/22 inputs9RED/final15pass; nearest15
+and syntax pass. Compiler/emitter unchanged. Packet:
+sparse-and-single-action-intake.json.gz. Derived default-to-and_acode_seq is
+explicit; no new format/family/authority. Known E omission/startup27 and39.6
+remain separate; full portable admission stays open.

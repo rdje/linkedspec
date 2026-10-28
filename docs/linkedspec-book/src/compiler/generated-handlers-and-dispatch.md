@@ -82,7 +82,7 @@ their compiled dependency order. Standalone generated source embeds every local
 regex required by the structural walk, including repeated `AND` with only one
 sparse action. This prevents cursor-derived consuming execution from silently
 skipping an edge-less delimiter while leaving the minimal generated family plan
-unchanged. Current Perl plain multi-regex/one-action AND incorrectly falls through to `default`; the owned repair must restore structural matching and explicitly report derived `and_acode_seq`. Regenerate affected standalone parsers after repair.
+unchanged. Plain multi-regex AND with one qualifying sparse action uses `and_acode_seq` too. This corrects its former `default` classification without changing the minimal v2 schema or family vocabulary; regenerate affected standalone parsers to obtain the repaired structural walk.
 
 Rust's source-emitter implements contract-v2 identity, metadata, and typed
 errors. Native callers use
@@ -471,7 +471,7 @@ Each `_build_*_variant` function takes a normalized argument hash (label, derive
 | `_build_default_handler_variant` | `default` | Base case: acodes present |
 | `_build_and_bcode_variant` / `_build_and_bcode_sequence_body` | `and_bcode` | AND rules with bcodes |
 | `_build_and_single_acode_variant` | `and_single_acode` | AND rules with single regex + acodes or I-block |
-| `_build_and_acode_variant` / `_build_and_acode_sequence_body` | `and_acode_seq` | AND rules with >1 regex and >1 acode |
+| `_build_and_acode_variant` / `_build_and_acode_sequence_body` | `and_acode_seq` | AND with multiple dependencies, or qualifying sparse local structural slots even with one acode |
 | `_build_or_bcode_variant` / `_build_or_bcode_choice_body` | `or_bcode` | OR rules with bcodes |
 | `_build_or_acode_variant` | `or_acode` | OR rules with acodes |
 | `_build_rep_bcode_variant` | `rep_bcode` | REP rules (or default with bcodes), inner OR_BCODE |

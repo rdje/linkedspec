@@ -7,18 +7,20 @@ answers:
   - "which task owns sparse AND outgoing-edge sequence repair"
   - "does the Default OR active-edge repair also fix AND sequence ownership"
 date: 2026-10-28
-status: authority39.0 reconciled; P1 Perl39.5/.6 before independent peer39.1-.4
+status: 39.0 reconciled and39.5 repaired/targeted-checked;39.6 before independent peers
 tags: [lua, luajit, and, regex, slots, sequence, source, trace]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.0; sparse-and-structural-authority.md and sparse-and-structural-authority-intake.json.gz retain27 authored Perl controls,24 completed pairs,3 incomplete fresh timeouts, protected3 and original/refined producer epochs. Prior36.4 Hcat discrepancy is historical, its outgoing-only diagnosis superseded."
-reverify: "Recover the bounded probe/case/runner/strict-summary producers from sparse-and-structural-authority-intake.json.gz; run through tools/project_data_run.sh and tools/run_python_project_data.sh. Protected reference: prove -Iperl t/sparse_and_action_slots_perl_regression.t."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/sparse_and_single_action.t t/sparse_and_action_slots_perl_regression.t t/duplicate_regex_slot_identity_perl_contract.t; historical phase probes recover from sparse-and-structural-authority-intake.json.gz."
 ---
 
 The Hcat discrepancy is factual, but its outgoing-only diagnosis is superseded.
 Canonical [[perl-sparse-and-structural-slots]] and normal3 require all local
 structural regexes for qualifying sparse actions. Current27 Perl cases yield24
-native/fresh pairs and3 fresh-only timeouts. Plain multi-regex/one-action selects
-_default/default: direct Hcat fails while cat succeeds, so incoming H masks the
-missing prefix. SpecEntry eligibility omits this shape;39.5 owns the repair.
+native/fresh pairs and3 fresh-only timeouts. At39.0 plain multi-regex/one-action selected
+_default/default, so incoming H masked the missing prefix.39.5 now admits the
+existing structural route: final15 groups9RED/final15pass, nearest15/syntax pass;
+explicit derived default-to-and_acode_seq, no Compiler/emitter or format change.
+Exact packet: sparse-and-single-action-intake.json.gz.
 Do not fix Lua by removing required local slots or skipping child slot0.
 
 Separate39.6 owns blind .push fresh recursion: emitted source calls Value, then

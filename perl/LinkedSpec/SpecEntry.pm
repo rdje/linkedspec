@@ -239,7 +239,10 @@ sub _build_handler_variants {
      acode_dispatch_indices => \@local_action_indices,
     )
   : ();
- if ($isAND && $has_acodes && @$acodes_ref > 1 && $dependency_count > 1) {
+ # A single sparse action still needs the complete local structural walk.
+ # Non-local/dependency-only sequences retain their existing eligibility.
+ if ($isAND && $has_acodes
+  && ((@$acodes_ref > 1 && $dependency_count > 1) || $local_structural_sequence)) {
   my $ir_v = LinkedSpec::HandlerVariantEmitter::_build_and_acode_variant(
    %ir_args, %ordered_slot_args,
    acodes_ref => $acodes_ref, acode_count => scalar(@$acodes_ref),
