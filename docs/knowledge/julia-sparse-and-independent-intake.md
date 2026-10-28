@@ -3,12 +3,11 @@ id: julia-sparse-and-independent-intake
 title: Independent Julia sparse AND intake owns dependency group minimum blind progress and nullable acceptance gaps
 answers:
   - "what did independent Julia sparse AND intake establish"
-  - "why does Julia duplicate AND run two actions on one regex hit"
   - "why does Julia repeated AND return only the first group"
   - "why does Julia implicit Default blind return null after accepted children"
   - "does Julia accepted null action preserve matched status"
 date: 2026-10-28
-status:31-source intake complete; live progress39.3.6 repaired/targeted-checked, required steps .1 next before peers/admission
+status:31-source intake complete; live progress39.3.6 and required steps39.3.1 repaired/targeted-checked, groups .2 next
 tags: [julia, sparse-and, dependency, repetition, minimum, blind-call, progress, nullable, intake]
 evidence: "julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources."
 reverify: "Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish."
@@ -52,3 +51,10 @@ with caller origin scope and existing SDK/generated diagnostics.24 sources
 9healthy15RED ->24pass234 assertions, same24 baseline fresh modules and exact
 input/control identity. Current mechanism/proof: [[julia-live-recognition-progress]].
 The original31-source packet remains historical, other bounded repairs stay open.
+
+39.3.1 now repairs authored required steps with one selected action occurrence
+and logical identity while preserving full structural catalogs.27 active sources
+41inputs19healthy8RED ->27pass247 assertions, four owned dormant, exact input/
+19control identity and same27 baseline fresh modules. Current mechanism/proof:
+[[julia-and-required-dependency-steps]]. Original intake packet stays frozen;
+accepted-null matched gap .7 and other bounded children remain open.

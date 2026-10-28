@@ -8334,13 +8334,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.0 - intake independent Julia structural and repetition gaps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.1`
-  Status: `pending` / P1 required dependency steps
+  Status: `completed` / typed required dependency steps
   Goal: Honor authored reversed/duplicate/cross-owner AND required steps while retaining full local increasing structural catalogs.
   Acceptance: Eight observed dependency sources fail order/hit count: reversed ba misses, ab exits1; duplicate aa/a share a single hit and return[1,1]; cross cases use local H catalog. Actual slot/match trace and compiled actions retained. Typed shared required-step owner must select one action per authored occurrence and preserve logical target/index/captures, full entry/lookahead catalogs, mixed/parent behavior and source/v2 plan identity.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:27 active sources41 inputs19healthy8actualRED ->27pass247 assertions/four owned dormant; exact input/19control identity; same27 baseline fresh modules/consumer, logical duplicate/cross traces; Julia live recognition repetition progress:234, Contract-declared Julia duplicate regex slot roles execute once and only once:121, Julia outgoing-edge body candidates:92; normal single registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining Julia/peer/lifecycle/registration/pressure repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/slot/route/control-flow assertions, no population measurement.
+
+  Activation: clean `8f89b34577dd1ae460b75215a3399ec0c717ec1a` after live progress39.3.6. Actual independent31-source SDK/fresh and public traces prove required-order/duplicate/cross gaps. Preserve full increasing local structural catalogs and existing parent/mixed/indexed/choice/boundary contracts; typed one-action-per-step owner and logical selected identity, no compiler/catalog filtering. Group/minimum/blind/null siblings remain owned.
+
+
+  - [x] **REPRODUCE / ISSUE**:27 active sources41 inputs19healthy8actualRED native/restored/plan and same emitted baseline. Reversed/cross forms walk local H rather than authored dependency slots; duplicate actions run on one hit and return at1. Compact/one-pattern duplicates and repeated nonreturn reversed controls distinguish required steps from catalogs. Four unrelated group/minimum/blind sources remain owned dormant.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent public trace and exact SDK metadata show _execute_runtime_regex_once! iterating physical local catalog while _accept_runtime_regex_match! dispatches every action with that physical index. This conflates structural slots with authored action occurrences and logical child indices. Duplicate action effects/cursor and distinct named-capture Part#1 control distinguish the mechanism.
+  - [x] **FIX**: Private _RuntimeAndRequiredStep retains physical slot plus selected action. One invocation-level builder preserves full increasing local/parent/mixed/no-edge catalogs, but edge-only reversed/duplicate/cross refs keep authored occurrences. Sequence length handles one-pattern duplicates/compact &: one selected action each. Ordered assertions/selected traces use chosen logical identity; compiler/emitter/matching and public identity helper unchanged.
+  - [x] **ADDRESSED (verified)**:27pass247 assertions/41 inputs native/restored/plan and same27 baseline emitted modules/consumer in separate process. Exact raw source/normalized/compiled/plan/emitted inputs and19 healthy full observations/selected traces unchanged. Three duplicate fixtures select Value#0 twice, cross-index cat selects Part#1 once with cat capture/value/cursor3. Full prefix/entry/indexed/parent/mixed/no-edge/boundary/one-slot/Default cursor remain healthy.
+  - [x] **NO REGRESSION**: Neighbors Julia live recognition repetition progress:234, Contract-declared Julia duplicate regex slot roles execute once and only once:121, Julia outgoing-edge body candidates:92 pass. Live progress preserved, four group/minimum/blind owners dormant and nullable matched defect .7 explicitly not credited by equal null value. No compiler/emitter/matching/recognition authority/schema/family change. Initial verifier assumed all baseline errors were progress; strict full plan/fresh equality now retains generic under-min baseline too. Initial nearest command omitted Main.REPO_ROOT; progress234 passed and corrected duplicate/choice command supplies canonical root. No harness product RED credit.
+  - [x] **LOCKSTEP**: Normal Julia driver includes the new suite once. julia-and-steps-intake.json.gz retains actual fixture/producer/runtime epochs/SDK/fresh/events/control/receipt closure. Book/card/target/roadmap/task/live/resume/history align. .2 group results next; other Julia/peer/admission/pressure/lifecycle/slot owners remain; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.1 - preserve Julia authored AND required dependency steps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2`
   Status: `pending` / P1 repeated AND group outcomes
@@ -8721,7 +8732,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.1` | `pending` | Repair Julia authored required-step order and single-occurrence dispatch. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2` | `pending` | Repair Julia repeated AND per-group results and common progress completion. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

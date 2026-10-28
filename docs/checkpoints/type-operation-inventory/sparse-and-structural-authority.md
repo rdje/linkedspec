@@ -238,3 +238,13 @@ Direct-dependent recognition/repeated-result suites pass. Compiler/emitter/
 matching unchanged; normal driver includes new suite once. Packet
 julia-live-progress-intake.json.gz retains exact producer/runtime epochs.
 Required steps39.3.1 next, other Julia/peer/full admission owners remain.
+
+Julia39.3.1 now retains authored reversed/duplicate/cross required steps with
+one selected action occurrence and logical identity, while preserving full
+increasing local/parent/mixed/no-edge structural catalogs.27 active sources
+41inputs19healthy8RED ->27pass247 assertions, four owned dormant, exact input/
+19control identity and same27 baseline fresh modules. Native duplicate/cross
+logical traces and capture/cursor controls pass; live progress/duplicate-slot/
+choice neighbors pass. Compiler/emitter/matching/recognition authority unchanged.
+Packet julia-and-steps-intake.json.gz retains actual closure; normal driver
+registered once. Repeated group39.3.2 next, remaining Julia/peers/admission open.

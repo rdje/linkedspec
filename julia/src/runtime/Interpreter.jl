@@ -1626,6 +1626,12 @@ function _trace_runtime_decision!(
     return taken
 end
 
+# One runtime-only required step; physical pattern and action occurrence differ.
+struct _RuntimeAndRequiredStep
+    regex_index::Int
+    action::Union{Nothing,CompiledActionEdge}
+end
+
 struct _RuntimeActionReturn <: Exception
     value::Any
 end
@@ -2332,6 +2338,7 @@ function _execute_runtime_regex_rule!(
 )
     minimum = rule.mode_metadata.rep_min
     capture_gaps = rule.capture_gaps !== nothing
+    and_required_steps = uses_and_execution ? _runtime_and_required_steps(rule) : nothing
     if minimum === nothing
         matched_any = false
         for _ in 1:engine.max_iterations
@@ -2342,7 +2349,9 @@ function _execute_runtime_regex_rule!(
                 context;
                 entry_regex_index = entry_regex_index,
                 cursor_policy = cursor_policy,
-                and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
+                and_sequence = and_required_steps !== nothing &&
+                    (length(rule.regex_patterns) > 1 || length(and_required_steps) > 1),
+                and_required_steps = and_required_steps,
             ))
             if matched.nexted
                 matched_any = true
@@ -2419,7 +2428,9 @@ function _execute_runtime_regex_rule!(
             rule,
             context;
             cursor_policy = cursor_policy,
-            and_sequence = uses_and_execution && length(rule.regex_patterns) > 1,
+            and_sequence = and_required_steps !== nothing &&
+                (length(rule.regex_patterns) > 1 || length(and_required_steps) > 1),
+            and_required_steps = and_required_steps,
             action_iteration_values = action_iteration_values,
             repetition_start_codeunit = before,
             match_preselected = capture_gaps,
@@ -2536,6 +2547,7 @@ function _execute_runtime_regex_once!(
     entry_regex_index::Int = 0,
     cursor_policy::LinkedSpecParseMode,
     and_sequence::Bool = false,
+    and_required_steps = nothing,
     action_iteration_values = nothing,
     repetition_start_codeunit = nothing,
     match_preselected::Bool = false,
@@ -2556,8 +2568,12 @@ function _execute_runtime_regex_once!(
     alternation = RuntimeRegexAlternation(rule)
 
     if !match_preselected && and_sequence
-        for expected_index in eachindex(rule.regex_patterns)
-            zero_based_index = expected_index - 1
+        required_steps = and_required_steps === nothing ?
+            _runtime_and_required_steps(rule) : and_required_steps
+        for step in required_steps
+            zero_based_index = step.regex_index
+            selected_identity = step.action === nothing ? nothing :
+                (only(step.action.targets).label, step.action.child_regex_index)
             one_match = _match_runtime_specific(
                 alternation,
                 zero_based_index,
@@ -2575,10 +2591,11 @@ function _execute_runtime_regex_once!(
             if one_match === nothing
                 return false
             end
-            expected_target, expected_regex_index =
-                _runtime_regex_slot_identity(rule, zero_based_index)
-            actual_target, actual_regex_index =
-                _runtime_regex_slot_identity(rule, one_match.alternative_index)
+            expected_target, expected_regex_index = selected_identity === nothing ?
+                _runtime_regex_slot_identity(rule, zero_based_index) : selected_identity
+            actual_target, actual_regex_index = selected_identity !== nothing &&
+                    one_match.alternative_index == zero_based_index ?
+                selected_identity : _runtime_regex_slot_identity(rule, one_match.alternative_index)
             assert_ordered_regex_slot_identity(
                 rule_label = rule.label,
                 expected_target_rule = expected_target,
@@ -2602,6 +2619,7 @@ function _execute_runtime_regex_once!(
                 context;
                 action_iteration_values = action_iteration_values,
                 repetition_start_codeunit = repetition_start_codeunit,
+                required_action = step.action,
             )
             _set_runtime_gap_phase!(context, rule.label, "LE")
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
@@ -2740,6 +2758,39 @@ function _match_runtime_specific(
     )
 end
 
+function _runtime_and_required_steps(rule::CompiledRule)
+    edges = rule.action_edges
+    edge_only = !isempty(edges) && all(
+        edge -> !edge.has_parent_regex && length(edge.targets) == 1,
+        edges,
+    )
+    if edge_only
+        increasing_local = true
+        previous = -1
+        for edge in edges
+            index = edge.child_regex_index
+            if only(edge.targets).label != rule.label || index <= previous ||
+                    index < 0 || index >= length(rule.regex_patterns)
+                increasing_local = false
+                break
+            end
+            previous = index
+        end
+        if !increasing_local
+            # Keep one action occurrence per authored dependency, even when
+            # several dependencies name the same immutable pattern slot.
+            return _RuntimeAndRequiredStep[
+                _RuntimeAndRequiredStep(edge.regex_index, edge) for edge in edges
+            ]
+        end
+    end
+    # Increasing sparse local, parent-anchored, mixed and edge-less rules keep
+    # the complete structural catalog, including slots without action code.
+    return _RuntimeAndRequiredStep[
+        _RuntimeAndRequiredStep(index - 1, nothing) for index in eachindex(rule.regex_patterns)
+    ]
+end
+
 function _runtime_regex_slot_identity(rule::CompiledRule, alternative_index::Int)
     for edge in rule.action_edges
         if edge.regex_index == alternative_index
@@ -2834,12 +2885,14 @@ function _accept_runtime_regex_match!(
     ;
     action_iteration_values = nothing,
     repetition_start_codeunit = nothing,
+    required_action = nothing,
 )
     context.cursor_codeunit = one_match.codeunit_end
     context.registers = with_local_match(context.registers, one_match)
     _note_runtime_recognition_match!(context, one_match)
 
-    for edge in rule.action_edges
+    actions = required_action === nothing ? rule.action_edges : (required_action,)
+    for edge in actions
         if edge.regex_index != one_match.alternative_index
             continue
         end
