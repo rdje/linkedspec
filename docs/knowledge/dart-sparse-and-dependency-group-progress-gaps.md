@@ -6,7 +6,7 @@ answers:
   - "does default blind Dart plan already iterate to cursor eight"
   - "does Dart indexed incoming AND start required slot zero"
 date: 2026-10-28
-status: intake/progress/steps/groups/minima39.2.3 complete; blind39.2.4 remains
+status: original intake repairs complete through39.2.4; new post-call39.2.5 and admission remain
 tags: [dart, and, dependencies, repetition, recognition, progress, generated-source]
 evidence: "dart-sparse-and-intake.json.gz retains22 final source/normalized/compiled/plan/emitted records,34 inputs on native/restored/plan/fresh modules,14pass8RED, actual public traces and all original/refined epochs."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/sparse_and_structural_sequence_test.dart; dormant cases have exact repair owners and receive no success credit."
@@ -62,3 +62,8 @@ ordinary blind minimum.3 and implicit blind collection.4 precede admission.
 39.2.3 now repairs remaining ordinary minima; current mechanism and exact
 proof: [[dart-ordinary-repetition-minimum-misses]]. Combined minimum/group/
 structural/live guard88pass1owned-dormant; implicit blind collection39.2.4 next.
+
+39.2.4 now retains implicit blind collections; current mechanism/proof:
+[[dart-implicit-blind-repetition-collections]]. Combined104pass no skips.
+All original eight failures are enabled; new public post-call scope/retv gap
+[[dart-perl-blind-postcall-return-gap]] is P1 immediately before peer progression.

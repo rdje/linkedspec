@@ -141,3 +141,13 @@ dormant, group21/guard24 source records unchanged, fatal analysis and typed
 unknown_helper code/rule provenance pass. Consumed cursor/caller recovery and
 successful-null acceptance remain distinct. Initial invalid static-edge/message
 assumptions qualified; packet dart-minimum-intake.json.gz. Blind collection.4 next.
+
+Dart39.2.4 retains implicit blind collections:15 sources24 inputs7healthy8RED
+->15pass, unchanged source/normalized/compiled/plan/emitted and same15 fresh
+modules/consumer.14 exact public Perl source/value reference pairs23 rows agree;
+added post-call case is Dart compatibility only, exposing P1 scope/retv gap39.2.5
+immediately before peers/admission. Combined104pass no skips, min12/group21/
+guard24 artifact records unchanged, fatal analysis pass. Default no-hitnull vs
+explicit zero-min[], partial discard/IT/lifecycle/healthy iteration preserved.
+Packet dart-blind-collection-intake.json.gz retains references/actual emitted
+control-flow owners. No public post-call parity/schema/classifier claim.

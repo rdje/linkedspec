@@ -878,7 +878,7 @@ final class LinkedSpecRuntimeEngine {
   }) {
     final min = rule.modeMetadata.repMin;
     if (min == null) {
-      final implicitAndResult = <Object?>[];
+      final implicitIterationResults = <Object?>[];
       var matchedAny = false;
       for (
         var iteration = 0;
@@ -891,7 +891,9 @@ final class LinkedSpecRuntimeEngine {
             rule,
             context,
             usesAndExecution: usesAndExecution,
-            implicitAndResult: implicitAndResult,
+            implicitIterationResults: usesAndExecution
+                ? implicitIterationResults
+                : null,
           ),
         );
         if (matched.nexted) {
@@ -913,8 +915,8 @@ final class LinkedSpecRuntimeEngine {
         }
         return _RuleResult(
           matched: matched.value || matchedAny,
-          value: usesAndExecution && implicitAndResult.isNotEmpty
-              ? List<Object?>.unmodifiable(implicitAndResult)
+          value: usesAndExecution && implicitIterationResults.isNotEmpty
+              ? List<Object?>.unmodifiable(implicitIterationResults)
               : null,
         );
       }
@@ -928,12 +930,16 @@ final class LinkedSpecRuntimeEngine {
       }
       return _RuleResult(
         matched: matchedAny,
-        value: usesAndExecution && implicitAndResult.isNotEmpty
-            ? List<Object?>.unmodifiable(implicitAndResult)
+        value: usesAndExecution && implicitIterationResults.isNotEmpty
+            ? List<Object?>.unmodifiable(implicitIterationResults)
             : null,
       );
     }
 
+    final collectedValues = <Object?>[];
+    final hasCustomIteration = rule.lifecycleActionPayloads.any(
+      (payload) => payload.lifecycle == 'IT',
+    );
     var matches = 0;
     var madeFailedAttempt = false;
     for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
@@ -947,11 +953,13 @@ final class LinkedSpecRuntimeEngine {
         return _returned(loopStart.value);
       }
 
+      final iterationValues = <Object?>[];
       final matched = _nextableBool(
         () => _executeBlindOnce(
           rule,
           context,
           usesAndExecution: usesAndExecution,
+          implicitIterationResults: iterationValues,
         ),
       );
       if (matched.nexted) {
@@ -976,6 +984,13 @@ final class LinkedSpecRuntimeEngine {
       final iterationReturn = _executeLifecycle(rule, 'IT', context);
       if (iterationReturn != null) {
         return _returned(iterationReturn.value);
+      }
+      if (!hasCustomIteration) {
+        if (usesAndExecution) {
+          collectedValues.add(List<Object?>.unmodifiable(iterationValues));
+        } else {
+          collectedValues.addAll(iterationValues);
+        }
       }
       if (context.cursorCodeUnit == before) {
         break;
@@ -1004,14 +1019,20 @@ final class LinkedSpecRuntimeEngine {
     if (exitReturn != null) {
       return _returned(exitReturn.value);
     }
-    return _RuleResult(matched: matches > 0, value: null);
+    return _RuleResult(
+      matched: matches > 0,
+      // Historical Default distinguishes no hit from explicit zero-min[].
+      value: rule.modeMetadata.name == 'Default' && matches == 0
+          ? null
+          : List<Object?>.unmodifiable(collectedValues),
+    );
   }
 
   bool _executeBlindOnce(
     CompiledRule rule,
     _RuntimeExecutionContext context, {
     required bool usesAndExecution,
-    List<Object?>? implicitAndResult,
+    List<Object?>? implicitIterationResults,
   }) {
     if (usesAndExecution) {
       var matchedAll = true;
@@ -1038,7 +1059,7 @@ final class LinkedSpecRuntimeEngine {
         );
         context.retv = child.value;
         if (childMatched) {
-          implicitAndResult?.add(_copyValue(child.value));
+          implicitIterationResults?.add(_copyValue(child.value));
         }
         final edgeReturn = _executeOptionalPayload(
           edge.actionPayload,
@@ -1075,6 +1096,9 @@ final class LinkedSpecRuntimeEngine {
         LinkedSpecTraceLevel.debug,
       );
       context.retv = child.value;
+      if (childMatched) {
+        implicitIterationResults?.add(_copyValue(child.value));
+      }
       final edgeReturn = _executeOptionalPayload(
         edge.actionPayload,
         context,

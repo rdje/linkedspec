@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart ordinary minimum misses normalized; implicit blind collections next.
+Dart implicit blind collections repaired; P1 post-call scope/retv gap next before peers.
 
 ## Latest Completed Slice
 
-Dart remaining ordinary blind/noncollector regex repetition minimum misses now return null/matchedfalse after existing LX authority, preserving consumed input. Two generic exception branches are replaced directly; execution errors are not caught. Final12 sources29 input rows4healthy8actualRED ->12pass, exact raw source/normalized/compiled/plan/emitted identity and same12 emitted module/consumer reuse baseline/fixed fresh. Successful-null matchedtrue, no-hit/zero-min/max, caller capture/retv restoration, subsequent call recovery and typed unknown_helper code/rule provenance pass. Combined minimum/group/structural/live-progress88pass1owned-dormant; unchanged21 group and24 guard source/artifact records, fatal changed analysis clean. Initial regex-less static-edge recovery and error-word assumptions refined to supported direct calls/actual typed diagnostics, retained without invalid RED credit. Packet dart-minimum-intake.json.gz retains actual producers/epochs/inputs/results/modules/patch/receipt. Book/cards/target/roadmap/task/live/resume/history align. No compiler/emitter/matching/recognition authority/iteration/collection/schema/family change; broader lifecycle attribution remains SESSION27. Blind implicit collection39.2.4 next, then independent Julia/safe Lua and admission prerequisites. Focused authorized commit/no full gate/push.
+Dart repeated/default blind choice now retains flat child values and repeated AND retains complete nested groups. Fresh per-attempt values discard partial groups while preserving cursor; custom IT replaces default push, lifecycle returns and existing Dart post-call exits retain authority. Historical Default no-hitnull stays distinct from explicit zero-min[]; healthy iteration/bounds/classifier unchanged. Final15 sources24 inputs7healthy8actualRED ->15pass, raw source/normalized/compiled/plan/emitted bytes identical and same15 emitted modules/consumer reused baseline/fixed fresh.14 sources23 pairs match exact canonical public Perl native/fresh references; added post-call case is compatibility only, exposing separate P1 scope/retv gap39.2.5. Combined blind/minimum/group/structural/live-progress104pass with no skips; min12/group21/guard24 source/artifact records unchanged and fatal runtime/two-test analysis clean. One-shot pipe avoids unused collection copies; plain AND preserved. Packet dart-blind-collection-intake.json.gz retains producers/inputs/epochs/public reference/generated owner locations/results/modules/patch/receipt. Book/cards/target/roadmap/task/live/resume/history align. Compiler/emitter/matching/recognition authority/schema/families unchanged. All original Dart intake failures enabled; new post-call authority/repair39.2.5 follows immediately before peers/admission. Focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate Dart39.2.4 from clean minimum repair. Retain implicit repeated/default blind child-result collections: choice flat values, AND complete nested groups, partial-group exclusion, existing bounds/minimum, custom IT replacement and lifecycle/post-call whole-rule authority. Preserve historical Default no-hit null separately from explicit zero-min[] with actual reference controls. Default iteration already reaches8; do not change classifier or healthy iteration. Exact source/SDK/plan/fresh RED-GREEN and direct guard/minimum/group controls, focused checks/book/docs/commit; then independent Julia39.3 and safe installed Lua39.4. Full admission/registration/pressure/owned Perl defects remain before push.
+Activate P1 Dart39.2.5 from clean implicit collection repair. Reconcile actual repeated blind post-call return scope and child retv binding against existing public contracts: ab under OR{2} yields Dart[POST,A,1]at1 but Perl native/fresh nullat1, with inner closure return/outer minimum vs whole-rule _ActionReturn. Distinguish complete/partial/failed child, direct/code/fluent/no-return, counts/minimum/progress and lifecycle channels using public tools, then repair established defects in bounded owned slices. Do not bless either backend output or infer peer failures. Exact source/fresh evidence and focused checks/book/docs/commit; independent Julia39.3/safe Lua39.4 follow. Full admission/registration/pressure/owned Perl defects remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4` — Dart implicit blind collections repaired; P1 post-call scope/retv gap next before peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3` — Dart ordinary minimum misses normalized; implicit blind collections next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2` — Dart repeated AND group outcomes repaired; remaining ordinary minimum misses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1` — Dart AND dependency order/action ordinals repaired; repeated group outcomes next.
@@ -29,7 +30,6 @@ Activate Dart39.2.4 from clean minimum repair. Retain implicit repeated/default 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` — Rust indexed AND priority repaired/targeted-checked; repeated per-group returns39.1.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1` — Rust typed AND dependency steps repaired/targeted-checked; indexed-entry priority39.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1` — Rust generated Default blind iteration repaired with unchanged v2 rows; typed sequence39.1.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0` — Rust intake retained; default-blind classifier39.1.4.1 first, other owned P1 repairs before peers.
 
 ## History
 
