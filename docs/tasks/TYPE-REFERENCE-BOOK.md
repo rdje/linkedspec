@@ -7739,7 +7739,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored argument/readiness distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.43`
-  Status: `pending` / P1 immediately after Rust34.2 before34.3/full23.4/push
+  Status: `in_progress` / P1 frozen43.0; production43.1 before34.3/full23.4/push
   Goal: Preserve the caller's semantic rule-label namespace when Rust invokes callable codeblocks; keep diagnostic identity separate.
   Reproduction: Rust34.2 literal callback reads all seven Value begin/finish named Number sources and produces seven0! fallbacks on native/restored CompiledSpec/plan, whereas the direct source has valid6/1/7/3/6/6/6. No method-source failure is inferred: the callback's named-mark producer visibility is wrong. Exact28-source intake and source scopes are retained with34.2; no healthy credit for these0! values.
   Root / impact: Engine::execute_codeblock_value builds codeblock_label="codeblock 'cb'" and passes it as rule_label to eval_block_value. Named mark helpers index ctx.typed_mark_byte using that parameter. A diagnostic pseudo-label therefore becomes a semantic mark bucket. Existing callable dynamic-caller and named rule-label isolation contracts require exact scope controls before repair; verify callback writes/readback and different-rule same-callback-name leakage as distinguishing public oracles. Pure-function state fences and diagnostic prefixes must remain.
@@ -7749,12 +7749,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Children:43.0 authority/target,43.1 Rust repair.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.43.0`
-  Status: `pending` / P1 immediately after34.2
+  Status: `completed`
   Goal: Freeze Rust callable semantic rule-label propagation and diagnostic identity target before production repair.
-  Planned verification tier: focused
-  Planned focused checks: Exact public direct/callback/write-read/different-rule/name/helper/nested/function controls and source/trace mechanism, canonical callable/mark authority, book/history/manual continuity; no broad gate.
-  Planned canonical trigger: Full23.4/final clean push after verified43; actual public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored scope distinctions and normative target, no population measurement.
+  Activation: clean `b1c54ebd2e4266611747071d8414814dcb582933`;34.2 committed, tree clean and brief0.
+  Authority: Existing ADR0031/callable dynamic-caller contract and complete_named_mark_contract rule-label isolation; rust-callable-rule-label.md freezes their exact repair intersection, not a new lifetime or parser-state policy.
+  Verification tier: `focused`
+  Focused checks: Retained34.2 actual3RED/public scope controls and source reading of the shared execution owner, all five invocation sites, eval_block_value and typed mark lookups; neutral authority, book/map/history/manual memory/cadence/diagnosis/claim-input/diff. No repeat full matrix.
+  Canonical trigger: Verified43.1 before34.3/full23.4/final clean push; full context/domain/backend admission and other owned prerequisites remain separate.
+  Claim verification: none: Existing-contract clarification and finite authored scope/source distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Exact retained three RED regressions expose seven missing caller readers, callback write/read bucket separation and same-cb-name leakage between First/Second. Ordinary named Number methods already pass, so the repair concerns semantic namespace rather than method composition.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: execute_codeblock_value already receives rule_label from bound calls, free/receiver with and Hash/Array tree callbacks; it substitutes diagnostic codeblock_label only for eval_block_value. Statements/expressions and typed mark readers subsequently use that parameter as the bucket key.
+  - [x] **FIX**: Freeze sole-owner rule_label evaluation target, retaining name-based error/recursion identity, parameter/rest copies and cleanup, static precedence, local returns and function-state fences. No new API/threading is needed; construction captures no namespace and different invocation labels isolate marks.
+  - [x] **ADDRESSED (verified)**: Canonical dynamic caller and rule-label lifetime authorities agree on narrow repair.43.1 owns exact three enabled regressions plus supported helper/tree/nested/call-time context distinctions and nearest callable/mark/function controls. Existing14.3 invocation-frame migration is explicitly excluded.
+  - [x] **NO REGRESSION**: No production/test/schema/domain/metadata change in authority leaf. Existing retained RED is used honestly without replaying unchanged ordinary/backend matrices or claiming healthy callback behavior. Error wrapper, cycles and parameter cleanup remain explicit verification obligations.
+  - [x] **LOCKSTEP**: Target/canonical scope card/map/book/task/live/resume/roadmap/history state the frozen repair and next43.1. Focused guards and book render selected; full23.4/pressure/registration/declared-host/final clean push remain later.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.0 - freeze callable caller rule-label repair with separate diagnostic identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1`
   Status: `pending` / P1 after43.0 before34.3
@@ -7770,7 +7780,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.43.0` | `pending` | Freeze confirmed Rust callable mark caller-scope repair before34.3. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` | `pending` | Repair frozen caller-rule-label handoff and enable scope regressions before34.3. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -33,3 +33,10 @@ function fences, cycles, names and errors; no lexical closure/global bucket or
 schema grant. Existing rule-label lifetime and future same-label invocation-frame
 migration14.3 stay distinct. Do not count the current0! callback as healthy Number
 composition. Other backend scopes are independently assessed by their34 peers.
+
+43.0 freezes rust-callable-rule-label.md from ADR0031 and the exact named mark
+scope policy. All five call sites already forward rule_label to the shared owner;
+the repair needs no new parameter. Keep name-based diagnostics/recursion, cleanup
+and function fences, while evaluating in the caller's rule bucket. Construction
+captures no namespace. Production43.1 owns enabled oracles and helper/tree/nested
+controls before34.3; no full admission is implied by authority freeze.
