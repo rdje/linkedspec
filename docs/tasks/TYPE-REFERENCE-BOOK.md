@@ -8000,13 +8000,80 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored parent-completion distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
-  Status: `pending` / P1 after39.0 before38/37/full23.4/push
+  Status: `in_progress` / independent Dart intake and bounded repairs
   Goal: Independently intake and repair Dart sparse-AND body candidate/required-sequence ownership.
   Acceptance: Use frozen39.0 target; establish exact native/restored/generated/fresh supported baseline before edits. Repair only confirmed gaps through typed shared owners, preserve full catalogs/indices/captures/trace and entry/no-edge/blind/frame/cursor/return/repetition/format contracts. Verify non-returning actions, falsey and reversed duplicates, counts/minimum/repetition and full entry/boundary roles as well as constant BODY. Lua uses only safe patterns/installed hosts and existing-table helpers; other backend failure is not inferred from Lua.
   Planned verification tier: focused
   Planned focused checks: Exact owned RED/GREEN, direct-dependent mode/slot/source/sequence/return/generated cases plus compile/normal registration/book continuity; no routine full suite/matrix.
   Planned canonical trigger: Full23.4/final clean push requires repair; public schema/family movement requires separately owned canonical authority.
   Planned claim verification: none: Finite authored functional/source assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.0`
+  Status: `completed` / independent actual native/restored/plan/fresh intake; no production edit
+  Activation: clean `717188e604d1d629bae4b957f392580a3467d55e` after Rust39.1.4.2.
+  Goal: Freeze Dart's own structural/dependency/entry/group/minimum/blind/error outcomes against39.0 authority.
+  Verification tier: `focused`
+  Focused checks:22 sources34 inputs native/restored/generated-plan and22 independently executed emitted modules; final14pass8RED; exact values/match/cursor across3 result carriers and fresh value/underlying-error agreement; public five-group traces/source diagnosis; normal14pass8 owned dormant; fatal changed test analysis/format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after all8 regressions enabled; no new policy/schema/family/ledger movement here.
+  Claim verification: none: Finite authored functional/interface distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**:22 final sources34 inputs expose8 actual failing groups on all4 routes. Healthy14 groups include sparse local slots, incoming/indexed, falsey values, required-tail/no-edge match status, boundary, explicit AND blind, Default cursor8 and legal one-shot zero. Final14pass8fail; fresh exposes values/errors only.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _executeRegexOnce walks complete plan positions; _acceptRegexMatch dispatches all edges sharing an index. Public reversed/cross traces follow catalog; duplicate co-fires at1. Repeated AND lacks CHOICE collector and _ActionReturn escapes before group count/minimum. _executeBlindRule/_executeRegexRule generic minimum throws and absent repeated blind collection are separate; Default iteration already healthy8. Actual recognize_once Guard0..0 returns true; authority validateProgress checks neutral fixtures, not live completion.
+  - [x] **FIX**: Intake/scheduling only. Own immediate progress.6 before steps.1/groups.2/minima.3/blind.4, preserving existing contracts. Eight normal RED groups are deliberately dormant under exact P1 owners and mandatory before admission. No production/schema/family edit or outgoing-only AND rewrite.
+  - [x] **ADDRESSED (verified)**: Intake complete; defects remain scheduled.22 source/normalized/compiled/plan/emitted records and all actual results retained. Native/restored/plan value/matched/cursor agree;22 emitted modules in fresh process reproduce values or same underlying errors. No fresh acceptance/cursor claim or ignored success credit.
+  - [x] **NO REGRESSION**: Dart lib unchanged. Initial infix hits+1 was unsupported instrumentation per canonical call grammar; final add(hits,1) exposes real duplicate failure. Initial E-tail probe deliberately overrides default failure; final no-E matched-flag control isolates structure. Original/refined/final epochs retained without false product RED/lifecycle claims. Default cursor8/indexed entry are healthy, not copied Rust defects.
+  - [x] **LOCKSTEP**: dart-sparse-and-intake.json.gz/new causal card/target/book/roadmap/task/live/resume/history agree. Authorized focused commit; next.6 then bounded features. All8 dormant regressions/registration/pressure/declared-host/full admission remain mandatory; peers not inferred.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.0 - isolate Dart AND dependency group minimum and progress gaps`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6`
+  Status: `pending` / P1 immediate after intake, before minimum normalization, before full39/23.4/push
+  Goal: Enforce live typed recognition repetition progress.
+  Reproduce/root: Guard:OR{1} /(?=a)/ returning0 inside recognize_once returns true at0 on all4 routes; public trace selects Guard0..0. Runtime loops silently stop, authority validateProgress is fixture-only.
+  Acceptance: Use typed internal producer shared with neutral adapter, not fixture-shaped production JSON. Guard completed accepted hit/group before IT/max/ordinary exits; preserve existing canonical code/stage/rule/origin/start/end, complete-group progress, ordinary/one-shot zero behavior and cancellation/nesting cleanup. No new exported facade, public error schema or widened effects. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
+  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
+  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1`
+  Status: `pending` / P1 after.6, before group/minimum repairs, before full39/23.4/push
+  Goal: Separate required dependency steps from structural regex catalogs.
+  Reproduce/root: Reversed ba misses while ab returns1; duplicate aa/a returns[1,1] at1; cross-owner cat misses while Hcat returnsBODY. Trace/catalog walk and all-index dispatch identify _executeRegexOnce/_acceptRegexMatch owners.
+  Acceptance: Typed runtime steps preserve all local structural slots for qualifying same-owner increasing sparse refs; reversed/duplicate/cross-owner dependencies preserve authored action ordinals/one action per step. Preserve compact &, one-slot/no-edge/entry/indexed/capture/boundary/trace behavior and child-owned cursors. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
+  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
+  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2`
+  Status: `pending` / P1 after.1, before remaining minimum/blind repairs, before full39/23.4/push
+  Goal: Implement repeated AND group outcomes and default collection.
+  Reproduce/root: Repeated AND{2} returns first BODY at4 on one/two groups; nonreturn full two groups returnsnull and under-min throws. _ActionReturn escapes whole rule; CHOICE-only collector is ineligible.
+  Acceptance: Retain per-group early unwind/skipped tail, falsey/null/empty/nested values, group counts/reset/minimum and empty implicit groups, custom IT replacement and lifecycle whole-rule authority. Include directly dependent AND-acode min miss null/false; remaining generic minima.3 stay separate. No AND-to-CHOICE shortcut or AND gap eligibility change. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
+  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
+  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3`
+  Status: `pending` / P1 after.6/.2, before collection/peers, before full39/23.4/push
+  Goal: Normalize remaining ordinary Dart minimum misses.
+  Reproduce/root: Blind OR{2} under-min throws RuntimeInterpreterException; _executeBlindRule and noncollector _executeRegexRule have generic min error branches. Typed real progress is prerequisite.
+  Acceptance: Ordinary misses return null/matchedfalse without cursor rollback; retain successful-null matchedtrue, caller capture/return restoration, zero-min/max, recovery and actual errors. Qualify EX/E placement under SESSION27; no blanket exception swallowing. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
+  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
+  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4`
+  Status: `pending` / P1 after minima, before peers, before full39/23.4/push
+  Goal: Retain repeated/default blind child-result collections.
+  Reproduce/root: Default parent returnsnull after one/two healthy BODY children, but explicit AND yields[BODY] and Default cursor8 already passes. Repeated _executeBlindRule does not retain implicit results.
+  Acceptance: Flat choice values/nested complete AND groups, incomplete-group exclusion, bounds/minima, custom IT replacement and lifecycle/post-call return authority. Preserve historical Default no-hitnull and explicit zero-min[] with actual reference controls; do not change existing classifier or repair already-healthy iteration. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
+  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
+  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8331,7 +8398,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2` | `pending` | Independently intake Dart sparse/ordered AND against the frozen authority. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6` | `pending` | Enforce actual Dart recognition progress before ordinary minimum normalization. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

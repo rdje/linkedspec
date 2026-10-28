@@ -96,3 +96,14 @@ and syntax pass. Compiler/emitter unchanged. Packet:
 sparse-and-single-action-intake.json.gz. Derived default-to-and_acode_seq is
 explicit; no new format/family/authority. Known E omission/startup27 and39.6
 remain separate; full portable admission stays open.
+
+Independent Dart39.2.0 intake22 final sources34 inputs yields14pass8fail on
+native/restored/plan; all22 fresh emitted modules reproduce values/underlying
+errors. Local sparse/entry/indexed/falsey/tail/no-edge/boundary/Default cursor8
+controls are healthy. Required dependency order/duplicate dispatch, repeated
+group outcomes, remaining minima, implicit blind values and live recognition
+zero0..0 guard are owned. Immediate39.2.6 then.1/.2/.3/.4; all8 actual RED
+groups are dormant with exact owners/no success credit and required before
+admission. Packet dart-sparse-and-intake.json.gz; no Dart production or
+schema/family movement, no inferred Julia/Lua results. Initial unsupported infix
+and lifecycle-override fixture assumptions are qualified, not product failures.
