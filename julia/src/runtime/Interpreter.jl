@@ -2440,12 +2440,7 @@ function _select_runtime_regex_match(
             cursor_policy,
         )
     else
-        runtime_match(
-            alternation,
-            context.input,
-            context.cursor_codeunit;
-            parse_mode = cursor_policy,
-        )
+        _match_runtime_choice(rule, alternation, context, cursor_policy)
     end
 end
 
@@ -2561,12 +2556,7 @@ function _execute_runtime_regex_once!(
             cursor_policy,
         )
     else
-        runtime_match(
-            alternation,
-            context.input,
-            context.cursor_codeunit;
-            parse_mode = cursor_policy,
-        )
+        _match_runtime_choice(rule, alternation, context, cursor_policy)
     end
     if !match_preselected
         _trace_runtime_regex_decision!(
@@ -2631,6 +2621,41 @@ function _trace_runtime_regex_decision!(
         LinkedSpecTraceDebug,
     )
     return nothing
+end
+
+function _match_runtime_choice(
+    rule::CompiledRule,
+    alternation::RuntimeRegexAlternation,
+    context::_RuntimeExecutionContext,
+    cursor_policy::LinkedSpecParseMode,
+)
+    if rule.mode_metadata.is_and || isempty(rule.action_edges)
+        return runtime_match(
+            alternation,
+            context.input,
+            context.cursor_codeunit;
+            parse_mode = cursor_policy,
+        )
+    end
+    # Full catalogs also serve entry selectors and boundary lookahead. Body
+    # choice considers only outgoing compiled slots, in authored edge order.
+    selected = nothing
+    for edge in rule.action_edges
+        candidate = _match_runtime_specific(
+            alternation, edge.regex_index, context, cursor_policy,
+        )
+        if candidate === nothing
+            continue
+        end
+        # No later edge can start sooner; equal starts retain this edge.
+        if candidate.codeunit_start == context.cursor_codeunit
+            return candidate
+        end
+        if selected === nothing || candidate.codeunit_start < selected.codeunit_start
+            selected = candidate
+        end
+    end
+    return selected
 end
 
 function _match_runtime_specific(

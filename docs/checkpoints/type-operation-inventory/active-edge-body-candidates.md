@@ -1,7 +1,7 @@
 # Outgoing-edge body candidates
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.36.0; bounded backend repairs36.1-.4.
-Status: target frozen; Rust36.1/Dart36.2 repaired/targeted-checked; Rust trace-test followup complete, independent peers follow.
+Status: target frozen; Rust36.1/Dart36.2/Julia36.3 and Rust trace-test followup repaired/targeted-checked; safe Lua intake follows.
 
 This target implements existing semantics, rather than introducing a new grammar
 or generated-source contract. Read ADR0044 for rule-local cursor ownership,
@@ -143,3 +143,22 @@ as an instrument mismatch, with no product RED credit. Exact trace test1pass,
 compile/rustfmt and actual owner-census GREEN receipt are retained in
 active-edge-body-rust-trace-owner.json.gz. Other runtime tests were not repeated
 for this test-only correction; prior12/6 proof keeps its recorded boundary.
+
+## Bounded Julia36.3
+
+Private _match_runtime_choice now serves ordinary and gap-preselected choice,
+reusing compiled outgoing edge.regex_index alternatives in authored order.
+Full catalogs and entry/AND/blind/no-edge/cursor/frame/format owners remain.
+Refined58pass/34RED becomes92pass on native/reconstructed SpecFile/generated-plan
+and independently loaded emitted Module. Exact source/capture/Unicode/gap/slot
+and priority controls plus duplicate121/rule-local104/capture collection12 pass.
+Traces stay in memory; normal runtests registers the module-scoped new test.
+No independent isolated package/full matrix/backend admission is claimed.
+
+Initial merged output interleaves one stderr error inside a JSON row; separated
+streams resolve that instrument ambiguity before production. Final normal test
+removes only the unasserted Hcat diagnostic, with exact assertion equality and
+syntax checked. A standalone retained probe confirms Julia live/caller cursor1
+on four routes versus reference4, independently owned38.2 before admission. No
+healthy credit for that diagnostic, cursor repair or null rebasing in this slice.
+Packet active-edge-body-julia-intake.json.gz retains exact epochs and commands.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust trace-test storage owner removed; exact trace/census green, independent Julia36.3 next.
+Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
 
 ## Latest Completed Slice
 
-Rust active-edge trace test no longer creates an unregistered temporary owner. Public TraceEmitter::with_stdout accepts the shared in-memory writer, reused through native/generated caller-owned emitter APIs; exact slot2 once per route is retained. Official unchanged owner-census fragment RED -> actual GREEN exit0 receipt; no runtime/manifest/storage gate/cap/format change. Focused exact trace1pass with11 unrelated tests filtered, compilation/rustfmt clean; prior dispatch12/Number6 runtime proof not unnecessarily repeated. Initial memory candidate mixed direct and compatibility projections; canonical existing authority resolves it, final compatibility pair retains accumulator envelope while unchanged value controls retain direct v2. All actual epochs/output retained, no product RED credit for that instrument mismatch. Packet/target/card/map/public trace API/task/live/resume/history agree; Rust parent36.1 complete, independent Julia36.3 next. Full admission and remaining boundary37/cursor38/pressure owners remain separate; no full gate/push.
+Julia outgoing-edge body choice independently repaired through shared _match_runtime_choice at ordinary/gap sites, reusing compiled outgoing edge indices in authored order. Preserve earliest-start/first-authored priority, full catalogs, original captures/indices, indexed-first/AND/blind/no-edge/cursor/frame/formats. Refined unchanged-production58pass/34RED -> first candidate92pass native/reconstructed SpecFile/generated-plan/fresh emitted Module, exact in-memory slot2 traces and source/capture/Unicode/gap/catalog/mode/priority controls; selected duplicate121/rule-local104/capture collection12 pass under depwarn=error. Initial merged JSON/stderr instrument ambiguity is resolved by separate streams before production; final normal test removes only unasserted diagnostic with exact assertion equality/syntax guard and normal registration. Independent Hcat probe confirms Julia cursor1 on four routes versus identical-source Perl native/fresh4; own38.2 before admission without changing cursor code or blessing nulls. Packet/cards/map/target/book/roadmap/task/live/resume/history agree. No new temp owner, full suite/matrix/isolated emitted package/peer admission/push; safe Lua36.4 next.
 
 ## Next Action
 
-Activate independent Julia outgoing-edge intake36.3 from this clean test-storage boundary. Use frozen36.0 target, exact wildcard/literal/reverse-priority/earliest/source-slot/mode/catalog/gap native/reconstructed/generated routes, establish actual baseline before production and repair only a confirmed gap through the existing owner. Keep full catalogs and indexed-first/AND/blind/no-edge/frame/cursor/format contracts; source/gap early-return distinctions are separate owners, never bless null outputs. Focused compile/check/commit then safe Lua36.4 before Number33.3. Full23.4/37/38/pressure/new Perl registration remain owned; authorized focused --no-verify continues.
+Activate independent safe Lua active-edge intake36.4 from this clean Julia boundary. Use frozen36.0 target and only safe supported patterns on installed PUC/LuaJIT hosts; establish native/restored SpecFile/plan/fresh module wildcard/literal/reverse-priority/earliest/source-slot/mode/catalog/edge-payload gap baseline before runtime edits. Repair only confirmed candidate role gap through existing owner, preserve full catalogs, indexed-first/AND/blind/no-edge/cursor/frame/format contracts and Lua chunk-local limits; in-memory traces avoid new temp owners. Independently probe Hcat early-LS cursor if source recovery suggests same issue, own any confirmed peer under38 before admission. Focused compile/check/book/docs/commit then Number33.3. No full gate/push; authorized --no-verify workflow continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.36.3` — Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1` — Rust trace-test storage owner removed; exact trace/census green, independent Julia36.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` — Dart active-edge repair13pass; immediate Rust trace-test storage followup before independent peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.1` — Rust active-edge ownership repaired12pass plus Number6; independent Dart36.2 next.
@@ -29,7 +30,6 @@ Activate independent Julia outgoing-edge intake36.3 from this clean test-storage
 - `TYPE-REFERENCE-BOOK.1.2.23.1.9` — Immediate helper-with bracket target32 frozen; independent Perl32.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.3` — Perl callback snapshots repaired; immediate P1 prerequisites complete, feature assessment23.1.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2` — Perl matched-origin cycle labels repaired; callback snapshot31.6.4.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.1` — Safe Lua callback identity/activity repaired; Perl origin labels31.6.4.2 next.
 
 ## History
 

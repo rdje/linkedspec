@@ -60,3 +60,12 @@ boundaries. These finite index checks do not reject reconstructed named/null
 provenance selecting an anonymous slot; Julia .2.23 remains pending under
 [[julia-null-selector-and-identifier-validation-gaps]]. Exact current consumer
 reading and replay: [[julia-contract-consumer-reading]].
+
+## October28 bounded outgoing-edge choice correction
+
+TYPE-REFERENCE-BOOK.1.2.23.3.36.3 supersedes the full-catalog body-choice detail:
+Default/OR action-edge choice now uses outgoing compiled indices in authored
+order through _match_runtime_choice. Public full-alternation primitives and
+complete catalogs remain intact. Existing duplicate121 assertions pass unchanged;
+dated full-suite/admission counts above are not new measurements. Current scope:
+[[julia-active-edge-body-candidate-ownership]].
