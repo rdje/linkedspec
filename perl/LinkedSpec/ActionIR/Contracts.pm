@@ -782,16 +782,30 @@ sub _input_boundary_mark_statement_expr {
 
 # Readonly named Number readers share their original bodies with ordinary value
 # lowering. Names remain symbolic words and the current rule label stays explicit.
-sub _readonly_named_mark_number_value_expr {
- my ($label, $method, @marks) = @_;
+sub _readonly_named_mark_number_arity {
+ my ($method) = @_;
  state $arity = {
   mark_pos => 1, mark_line => 1, mark_col => 1,
   capture_len_from => 1, capture_until_cursor_len_from => 1,
   capture_rest_len_from => 1, capture_len_between => 2,
  };
- return undef unless defined($method) && exists($arity->{$method})
-  && @marks == $arity->{$method};
+ return defined($method) ? $arity->{$method} : undef
+}
+
+sub _readonly_named_mark_number_value_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _readonly_named_mark_number_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
  return undef if grep { !defined($_) || ref($_) || !/\A\w+\z/o } @marks;
+ return _readonly_named_mark_number_body_expr($label, $method, map { "'".$_."'" } @marks)
+}
+
+# The name-role owner supplies captured scalar expressions; native callbacks
+# supply the original quoted symbolic names. Both use identical mark semantics.
+sub _readonly_named_mark_number_body_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _readonly_named_mark_number_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
  $label = '' unless defined $label;
  state $location_reader = {
   mark_pos => 'mark_read_offset', mark_line => 'mark_read_line',
@@ -800,10 +814,10 @@ sub _readonly_named_mark_number_value_expr {
  my $operation = '"'.$method.'"';
  if (my $reader = $location_reader->{$method}) {
   return 'do { LinkedSpec::SourceLocation::Runtime::'.$reader
-   .'($info, $STRING, \''.$label.'\', \''.$marks[0].'\', '.$operation.') }';
+   .'($info, $STRING, \''.$label.'\', '.$marks[0].', '.$operation.') }';
  }
  my @reads = map {
-  'LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$_.'\', '.$operation.')'
+  'LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$_.', '.$operation.')'
  } @marks;
  if ($method eq 'capture_len_between') {
   return 'do { my $__ls_start = '.$reads[0].'; my $__ls_end = '.$reads[1]

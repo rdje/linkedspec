@@ -1,16 +1,16 @@
 ---
 id: perl-mark-name-argument-readiness-gap
-title: Ordinary quoted and evaluated Perl mark names fail execution despite ready metadata
+title: Perl ordinary Number readers now lower ordered String word-name arguments
 answers:
   - "can Perl mark_pos accept a quoted name"
   - "why does mark_pos of cat fail an undefined host helper"
   - "why does quoted capture_len_between report ready1"
   - "which task owns mark-name argument validation and readiness"
 date: 2026-10-28
-status: authority42.0 frozen; readers42.1 then remaining42.2 repair before39/full23.4; wider domain42.3 separate
+status: readers42.1 repaired; remaining42.2 before39/full23.4; wider and bare Unicode42.3 separate
 tags: [perl, marks, arguments, readiness, diagnostics, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.0 retains actual quoted/evaluated/bare-shadowing controls, source/emitted bytes/metadata/channels in named-mark-number-authority.json.gz."
-reverify: "Recover probe_named_mark_number_authority.pl and run the project-routed Perl command with quoted_names evaluated_name symbolic_shadow labels."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/mark_name_number_arguments.t"
 ---
 
 With existing bare begin/finish marks, mark_pos("finish") and quoted two-mark
@@ -68,3 +68,32 @@ forms must not execute raw host calls; readiness/diagnostics must name the helpe
 key authority42.3 follows feature coverage before full portable admission and is
 canonical for real policy movement. No runtime implementation in authority leaf.
 Exact inputs/producer epochs/results: perl-mark-name-role-authority.json.gz.
+
+## Current bounded reader repair42.1
+
+Seven ordinary Number readers now accept quoted and evaluated actual String
+values yielding existing Word keys. Bare names remain symbolic, including legacy
+numeric token0. The sole original Contracts bodies now take either quoted native
+symbols or captured name expressions; all seven original public bodies remain
+byte-identical. One MethodLowering argument owner captures names once left-to-right
+before any mark read. The name2-writes-begin oracle yields0/AB/6, and an argument
+local return skipsX before a later consumer, giving6!/AB. A smaller operand must
+use the existing value-branch owner to clear its parent's recursion fence; public
+emitted source isolates the first candidate's raw-block failure and final repair.
+
+Unchanged18 authored groups fail17 before code,1 in the first candidate, then pass18.
+Exact local-return1, nearest reset/named2 and both module syntax pass. Static bad
+arity/unknown/direct-return roles use helper-specific unready placeholders before
+effects. Actual runtime Number/Array, empty and nonword String results use controlled
+LINKEDSPEC_MARK_NAME_ARGUMENT failures in fresh generated execution; fully lowered
+syntax can remain ready1. The native collecting parent still loses these real
+errors under41, and its null is never credited as a valid result. Pure-function7
+fences remain specific/unready. Exact producer/source/result epochs are retained
+in mark-name-number-reader-intake.json.gz. Historical gap descriptions above are
+before-state evidence. Remaining ordinary names42.2, bare Unicode/wider keys42.3,
+deferred vocabulary31.6.4.4 and full source/context23.4 admission remain separate.
+
+Source-identity review also distinguishes lowering a trimmed local copy from
+mutating authored argument bytes. Direct probe has one failing assertion before
+the local-copy fix; both assertions and the unchanged18-source final rerun pass
+afterward. Packet retains the earlier18-green epoch and exact final source/result.

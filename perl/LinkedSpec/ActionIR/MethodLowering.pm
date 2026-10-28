@@ -1345,6 +1345,91 @@ sub _materialize_list_operand_expr {
  return 'do { my @__ls_evaluated_values = ('.$expr.'); @__ls_evaluated_values }'
 }
 
+# Names are data operands. A return is local only as a statement owned by an
+# ordinary value block; raw host syntax must never reach a name initializer.
+sub _mark_name_value_has_unsupported_role {
+ my ($node, $local_return) = @_;
+ return 0 unless ref($node);
+ if (ref($node) eq 'ARRAY') {
+  return scalar grep { _mark_name_value_has_unsupported_role($_, 0) } @$node;
+ }
+ return 0 unless ref($node) eq 'HASH';
+ my $kind = $node->{kind} // '';
+ return 1 if $kind eq 'raw_perl';
+ return 1 if $kind eq 'call' && ($node->{name} // '') eq 'return' && !$local_return;
+ # Deferred bodies retain their existing vocabulary and return owners.
+ return 0 if $kind eq 'codeblock_literal' || $kind eq 'codeblock_argument';
+ if ($kind eq 'block_value') {
+  return scalar grep {
+   _mark_name_value_has_unsupported_role($_->{expr}, 1)
+  } @{$node->{block}{statements} || []};
+ }
+ for my $slot (keys %$node) {
+  next if $slot eq 'source' || $slot eq 'source_span';
+  return 1 if _mark_name_value_has_unsupported_role($node->{$slot}, 0);
+ }
+ return 0
+}
+
+sub _lower_mark_name_arguments {
+ my ($args, $deps) = @_;
+ my @lowered;
+ for my $argument (@$args) {
+  return undef unless defined($argument) && !ref($argument);
+  my $source = $argument;
+  $source =~ s/\A\s+|\s+\z//g;
+  if ($source =~ /\A\w+\z/o) {
+   push @lowered, _actionir_ast_quote_string_source($source);
+   next;
+  }
+  my $node = _parse_method_value_ast_expr($source, $deps);
+  return undef unless ref($node) eq 'HASH';
+  return undef if _mark_name_value_has_unsupported_role($node, 0)
+   || defined(_actionir_ast_first_unknown_value_call_name($node, $deps));
+  # A smaller operand must not inherit the parent's same-expression fence.
+  my $value = _lower_inline_value_branch_payload_expr($source, $deps);
+  return undef unless defined($value) && length($value);
+  push @lowered, $value;
+ }
+ return \@lowered
+}
+
+sub _mark_name_arguments_expr {
+ my ($method, $names, $body) = @_;
+ return 'do { my @__ls_named_mark_values = ('.join(', ', map {
+  _materialize_list_operand_expr('scalar('.$_ .')')
+ } @$names).'); require LinkedSpec::BindingRuntime; '
+  .'for my $__ls_mark_name (@__ls_named_mark_values) { '
+  .'die "LINKEDSPEC_MARK_NAME_ARGUMENT:'.$method.': expected String word name" '
+  .'unless LinkedSpec::BindingRuntime::_runtime_kind($__ls_mark_name) eq "string" '
+  .'&& $__ls_mark_name =~ /\A\w+\z/; } '.$body.' }'
+}
+
+sub _lower_named_mark_number_call {
+ my ($call, $deps) = @_;
+ my $method = $call->{method};
+ return _actionir_ast_unsupported_helper_expr($method)
+  if _parser_state_helper_is_forbidden_in_function($method, $deps);
+ my $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_arity', $method);
+ my $args = $call->{args} || [];
+ return _actionir_ast_unsupported_helper_expr($method) unless @$args == $arity;
+ my $label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
+ return _actionir_ast_unsupported_helper_expr($method) unless defined($label) && !ref($label);
+ my @words = map { my $word = $_; $word =~ s/\A\s+|\s+\z//g; $word } @$args;
+ if (!grep { !/\A\w+\z/o } @words) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_value_expr',
+   $label, $method, @words);
+ }
+ my $names = _lower_mark_name_arguments($args, $deps);
+ return _actionir_ast_unsupported_helper_expr($method) unless $names;
+ my $body = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_body_expr',
+  $label, $method, map { '$__ls_named_mark_values['.$_.']' } 0..$#$names);
+ return _mark_name_arguments_expr($method, $names, $body)
+}
+
 # Ordinary copy detaches only the outer container. Primitive values retain
 # their host scalar flags; inspecting their text here would change selector kinds.
 sub _value_copy_expr {
@@ -5991,6 +6076,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
  my $compat_bridge = ref($deps) eq 'HASH' && $deps->{__actionir_ast_value_lowering_compat_bridge};
+ # Resolve this governed argument role before generic AST fallback can retain a
+ # raw call or reinterpret a nested control expression as a host return.
+ if ($trimmed =~ /\A(?:mark_(?:pos|line|col)|capture_(?:len_from|until_cursor_len_from|rest_len_from|len_between))\s*\(/o) {
+  my $named_number_call = $parse_method_function_expr->($trimmed);
+  return _lower_named_mark_number_call($named_number_call, $deps) if $named_number_call;
+ }
  # Compatibility helpers still receive authored grouped assignment operands.
  # Admit only those typed assignments; retain the bridge for other raw forms.
  my $ast_node = ref($provided_ast) eq 'HASH' ? $provided_ast
@@ -6169,17 +6260,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return LinkedSpec::OwnerDispatch::dispatch_owner_call(
    __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_capture_boundary_number_value_expr',
    $method_call->{method},
-  );
- }
- if ($method_call && $trimmed =~ /\A(?<named_number>mark_(?:pos|line|col)|capture_(?:len_from|until_cursor_len_from|rest_len_from|len_between))\s*\(\s*(?<first_mark>\w+)\s*(?:,\s*(?<second_mark>\w+)\s*)?\)\z/o) {
-  my ($method, $first, $second) = @+{qw(named_number first_mark second_mark)};
-  my $needs_two = $method eq 'capture_len_between';
-  return undef if $needs_two != defined($second);
-  my $label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
-  return undef unless defined($label) && !ref($label);
-  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
-   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_value_expr',
-   $label, $method, $first, (defined($second) ? ($second) : ()),
   );
  }
  if ($method_call && ($method_call->{method} eq 'and' || $method_call->{method} eq 'or' || $method_call->{method} eq 'not')) {

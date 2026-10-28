@@ -8,7 +8,7 @@ answers:
   - "do same-named scalar bindings change symbolic mark lookup"
   - "where does named Number method lowering get the current rule label"
 date: 2026-10-28
-status: Perl34.1 and Rust34.2/43.1 targeted-checked; independent peers/full admission open
+status: bounded34.1-.5 and Rust43.1 targeted-checked; Perl reader names42.1 repaired; full admission open
 tags: [perl, marks, capture, number, fluent, source, arguments]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.0 at clean902d9ab1b; named-mark-number-authority.json.gz retains exact nine-source native/fresh/metadata/substitution/emitted bytes and original/refined producers."
 reverify: "Recover probe_named_mark_number_authority.pl and use tools/project_data_run.sh env PERL5LIB= perl -Iperl; its optional labels select exact cases. Require completed output before reading."
@@ -65,3 +65,9 @@ regressions. Helper/tree/nested and returned-callback call-time controls pass
 against retained RED; [[rust-callable-named-mark-scope-gap]] records the exact
 repair, cleanup/diagnostic/function proof and limits. Historical gap descriptions
 above remain before-state evidence; Dart34.3 resumes independently.
+
+Perl42.1 now separately repairs the quoted/computed String word-name role for
+all seven ordinary readers, with once-only ordered snapshots, local returns and
+pre-effect static guards. Historical42 restrictions above describe the original
+34 boundary. [[perl-mark-name-argument-readiness-gap]] records unchanged18-source
+RED/GREEN, seven original body identities and remaining42.2/42.3/41 limits.

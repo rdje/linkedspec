@@ -31,7 +31,7 @@ first-consumer control returns Hash{k:1}/[]/undef/KVT, with normalized bad Hash
 operands X/Y skipped. This binding observation is not silently substituted for a
 different direct-source root policy; implementations must intake those separately.
 
-Quoted and evaluated name forms are not admitted by this method repair. Current
+Quoted and evaluated name forms are not admitted by this method repair. At the34.0 boundary,
 Perl raw ordinary calls fail generated execution while reporting ready1.42 owns
 their accepted-argument authority, lowering/typed diagnostics and metadata before
 admission. The catalog's logical string name type must not be silently equated
@@ -158,3 +158,9 @@ bound6/[]/undef/KVT remain qualified legacy outside Hash domain. Runtime unchang
 fresh module means same host process. Packet named-mark-number-lua-intake.json.gz
 retains exact inputs/payload/results; no declared5.4/unsafe-pattern/full admission
 claim. All bounded34 children are targeted-checked;42 then39/38/37/40/41 follow.
+
+Perl42.1 separately repairs quoted/computed actual String word-name arguments for
+the seven ordinary Number readers. The34 symbolic fixture remains unchanged;
+ordered names/local returns/static guards and exact unchanged native bodies are
+tracked in perl-mark-name-roles.md and mark-name-number-reader-intake.json.gz.
+Remaining42.2/bare Unicode-wider42.3/deferred/error/admission boundaries stay open.

@@ -1,7 +1,7 @@
 # Ordinary Perl mark-name roles and readiness
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.42; target freeze42.0.
-Status: bounded representation/diagnostic target frozen; production42.1/42.2 next.
+Status: bounded reader42.1 repaired/targeted-checked; remaining42.2 next; wider42.3 separate.
 
 The helper catalog declares logical String mark-name arguments. The complete
 named-mark contract explicitly makes a bare identifier symbolic rather than a
@@ -109,3 +109,16 @@ and module syntax pass.42.1 reactivates from the clean boundary. Bare Unicode
 legacy already native/fresh6/raw2/ready0 is qualified under42.3; no portable-ready
 expectation or new name grammar is smuggled into the statement repair. Exact
 source/refinement/results: input-mark-value-block-intake.json.gz.
+
+## Verified reader implementation42.1
+
+All seven ordinary Number readers now use the shared ordered String word-name
+argument owner and original primitive bodies. Unchanged18 groups go17 failed
+before code,1 failed first candidate,18 pass final; nearest reset/named2 and both
+module syntax pass. Seven original native/public body strings are byte-identical.
+Existing value-branch lowering removes the smaller operand's inherited recursion
+fence, preserving local returns without new body grammar. Static unsupported
+roles/arity are helper-specific/unready before effects; runtime-invalid String
+domain/kinds produce controlled fresh generated errors, with native delivery41
+still separately owned. Packet: mark-name-number-reader-intake.json.gz.42.2 reuses
+this same owner; wider keys/bare Unicode qualification42.3/full admission stay open.
