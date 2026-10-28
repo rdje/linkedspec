@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: all bounded33 children targeted-checked; void-block35/named-mark34 next; endpoint40/full admission open
+status: all bounded33 children targeted-checked; void-block35 target frozen/Perl35.1 next; named-mark34/endpoint40/full admission open
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -130,3 +130,9 @@ literal callback1! and pure apply rejection are preserved; no product RED.
 [[capture-boundary-number-lua-method-compatibility]] owns evidence/limits. Initial
 width null on x joins diagnostic40, not portable authority. All bounded33 children
 have focused proof; ordinary-block35.0 then named-mark34 follow before admission.
+
+35.0 now freezes the narrow nonfinal ordinary capture-reset statement target and
+independent35.1-.5 owners. Seven fresh public Perl controls confirm two healthy
+no-reset/standalone forms and five failing inside/alias/return/lazy forms with
+misleading ready1. See [[capture-reset-value-block-statement-gap]]. No runtime or
+mutator-as-data/deferred vocabulary change in the authority leaf; Perl35.1 next.

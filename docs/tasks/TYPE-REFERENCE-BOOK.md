@@ -7231,16 +7231,74 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Reproduction: At clean4f91e544b explicit Value[2], width=capture_rest_len(); snapshot=width.cat({order=cat(order,"S");start_capture_slice();"!"}) fails native handler/fresh compilation with cannot-modify-constant/syntax errors, despite raw0/unresolved0/ready1. It does not depend on a direct Number source; exact capture-number-block-reset producer/output and substitution are retained in capture-boundary-number intake.
   Root / impact: Public substitution leaves order=cat(...) as raw DSL inside the method operand while late Contracts rewrites only start_capture_slice to a do-block. MethodLowering _lower_block_side_effect_statement falls back to value-component lowering without this void statement owner; _lower_block_value_expr abandons the block if a component is unavailable. The generated expression cannot compile and readiness overstates usability. Exact dispatcher/source role and authoritative ordinary-versus-deferred contract need final35.0 reconciliation before production.
   Ownership / schedule: Fix the actual ordinary-block statement role through canonical state-effect owners, preserving void semantics, frame/cursor/source/trace/order/errors, local-return behavior and function/callback vocabulary boundaries. Authority/target35.0 then bounded independent backend repair/compatibility leaves immediately after33, before34/full23.4. No generic mutator-as-data grant, silent raw fallback or lifecycle pivot.
-  Children:35.0 authority/target and independent repair ownership; implementation split after target freeze.
+  Children:35.0 target frozen;35.1 Perl then35.2 Rust/35.3 Dart/35.4 Julia/35.5 safe Lua independent implementation or compatibility proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.0`
-  Status: `pending` / P1 after33.5
-  Goal: Freeze ordinary value-block capture-boundary side-effect repair from actual bound-source failure.
-  Acceptance: Reconcile current block/state-effect contracts, public AST/substitution and specific dispatcher path with distinguishing supported-without-mutator/standalone/inside-block controls. Freeze exact statement-only scope and independent repair leaves before production; preserve source/frame/cursor/return/error/function/deferred boundaries and diagnose unsupported sources honestly.
+  Status: `completed`
+  Goal: Freeze narrow ordinary value-block capture reset statement repair and independent backend owners.
+  Authority: Existing terse expression-block/local-return and source-boundary void mutation contracts. capture-reset-value-block.md/shared prospective fixture own exact target; capture-reset-value-block-authority.json.gz retains actual public source/emitted/metadata/substitution channels.
+  Verification tier: `focused`
+  Focused checks: Seven exact public Perl native/fresh/metadata/substitution controls at clean0d0382338, strict completed-output reader/source equivalence/JSON, book/map/history/manual continuity/claim-input/diff. No production or broad suite/gate.
+  Canonical trigger: Full23.4/clean push after bounded35/34 and39/38/37/40 plus pressure/registration/declared-host repairs; actual public/schema movement remains separately canonical.
+  Claim verification: none: Finite authored source-role distinctions and normative target, no population measurement or backend completeness claim.
+
+  - [x] **REPRODUCE / ISSUE**: Public Get/native/fresh emitted source independently calibrates no-reset4!/2/4/SA and standalone4!/6/0/SA. Inside canonical reset/alias, local returns before/after and lazy-skipped reset block produce native[null]/fresh compile error despite raw0/unresolved0/ready1; five actual source failures, not valid null values.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: call_spec_handler_subst retains operand order=cat DSL with only late Contracts reset replacement. MethodLowering AST/text block side-effect paths fall through to readonly value-component lowering; no void capture-reset statement owner means the whole value block is abandoned. Exact generated load errors and source mechanism are retained; no peer failure is inferred.
+  - [x] **FIX**: Freeze statement-only zero-argument start_capture_slice/capture_slice_here target through existing boundary-write owner, source-before-effects snapshot, operation/frame/cursor identity, lazy skips and block-local return/action continuation. Create shared prospective exact inside fixture and independent35.1-.5 owners before runtime edits.
+  - [x] **ADDRESSED (verified)**: Strict completed-input seven-row verifier confirms two native/fresh healthy controls and five compile failures with misleading ready metadata; prospective target distinguishes reset/alias/local return before/after and defined lazy skip. Source fixture equals actual failing inside source exactly. No claim that implementation is already repaired.
+  - [x] **NO REGRESSION**: Runtime/frontend/schema diff is empty. No final mutator data value, advancing/named-mark/bracket/deferred/callback/helper/function grant; existing guards and actual exclusions remain. Initial premature/prefix consumer failures are retained/disclosed instrument errors without extra product RED. All source/error bytes remain recoverable; full admission stays separate.
+  - [x] **LOCKSTEP**: Target/fixture/packet/causal card/map/book and roadmap/task/live/resume/history agree. Ordinary Perl35.1 follows, independent native peers then named-mark34. Existing endpoint40 and39/38/37 remain before full23.4; focused authorized workflow continues.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.35.0 - freeze statement-only capture reset inside ordinary value blocks`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.1`
+  Status: `pending`
+  Goal: Independently implement or lock Perl ordinary value-block anonymous reset statement behavior.
+  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
+  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
   Planned verification tier: focused
-  Planned focused checks: Small public native/fresh role/source/error controls, canonical toolbox traces as needed and syntax/JSON/book/manual continuity; no full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; public schema movement separately owned.
-  Planned claim verification: none: Finite authored feature/defect target, no population measurement.
+  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.2`
+  Status: `pending`
+  Goal: Independently implement or lock Rust ordinary value-block anonymous reset statement behavior.
+  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
+  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.3`
+  Status: `pending`
+  Goal: Independently implement or lock Dart ordinary value-block anonymous reset statement behavior.
+  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
+  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.4`
+  Status: `pending`
+  Goal: Independently implement or lock Julia ordinary value-block anonymous reset statement behavior.
+  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
+  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.5`
+  Status: `pending`
+  Goal: Independently implement or lock safe installed-host Lua ordinary value-block anonymous reset statement behavior.
+  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
+  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
+  Planned verification tier: focused
+  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
+  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
+  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.36`
   Status: `in_progress` / bounded Default/OR functional children36.0-.4/36.1.1 complete; formal source/context/backend closure23.4 remains
@@ -7550,7 +7608,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.35.0` | `pending` | Freeze ordinary value-block capture mutation repair before implementation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.35.1` | `pending` | Repair confirmed Perl ordinary value-block capture reset statement gap. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -87,7 +87,7 @@ return channel.
 Expression-valued blocks are the separate value form used inside value-consuming
 expressions. They can also be receiver-dot receivers when their yielded value matches
 the helper family, for example `{ [3, 1, 2] }.sorted().join_values(",")` or
-`{ " a-b " }.trim().split("-").count`.
+`{ " a-b " }.trim().split("-").count`. Within an expression-valued block, `return(expr)` supplies only that block’s value, skips its later statements, and lets the enclosing action continue. Perl currently fails compilation when `start_capture_slice()` or its `capture_slice_here()` alias is a nonfinal effect in this value form; use a standalone capture reset until that statement-role repair is complete.
 
 ```text
 rule:AND+
