@@ -138,7 +138,6 @@ fn incoming_entry_keeps_the_complete_child_sequence() {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2; retained actual RED, required before admission"]
 fn indexed_incoming_entry_keeps_child_slot_zero() {
     check(
         "indexed",
@@ -147,6 +146,47 @@ fn indexed_incoming_entry_keeps_child_slot_zero() {
         Some("and_acode_seq"),
         &[("catHcat", json!([["BODY"], 7]))],
     );
+}
+
+#[test]
+fn indexed_and_preserves_distinct_entry_and_local_captures() {
+    check_indexed_captures("indexed_capture_and", "AND", "and_acode_seq");
+}
+
+#[test]
+fn indexed_compact_and_preserves_distinct_entry_and_local_captures() {
+    check_indexed_captures("indexed_capture_compact", "&", "and_single_acode");
+}
+
+fn check_indexed_captures(name: &str, mode: &str, family: &str) {
+    check(
+        name,
+        &format!(
+            "Top::\n -> Value[1] .push\n LX {{return([copy(Top),cursor_pos()])}}\nValue:{mode}\n /H/\n /(cat)/\n -> Value[0] {{seen=match_text()}}\n -> Value[1] {{return([entry_text(),seen,match_text(),cursor_pos()])}}\n"
+        ),
+        2,
+        Some(family),
+        &[("catHcat", json!([[["cat", "H", "cat", 7]], 7]))],
+    );
+}
+
+#[test]
+fn indexed_choice_keeps_the_selected_entry_first() {
+    for (name, mode, family, expected) in [
+        ("indexed_default", "", "default", json!("CAT")),
+        ("indexed_pipe", "|", "or_acode", json!("CAT")),
+        ("indexed_or_once", "OR{1}", "rep_acode", json!(["CAT"])),
+    ] {
+        check(
+            name,
+            &format!(
+                "Top::\n -> Value[1] .push\n LX {{return([copy(Top),cursor_pos()])}}\nValue:{mode}\n /H/\n /cat/\n -> Value[0] {{return(\"H\")}}\n -> Value[1] {{return(\"CAT\")}}\n"
+            ),
+            2,
+            Some(family),
+            &[("catHcat", json!([[expected], 7]))],
+        );
+    }
 }
 #[test]
 #[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4; retained actual RED, required before admission"]

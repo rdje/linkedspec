@@ -3260,6 +3260,15 @@ impl Engine {
         matches: usize,
         entry_regex_idx: usize,
     ) -> Result<Option<MatchResult>, String> {
+        // The caller already consumed the incoming entry match. An AND body
+        // now owns its required sequence; the inherited selector cannot replace
+        // the next structural/dependency step. Choice entry priority stays below.
+        if let Some(required_index) = required_and_idx {
+            return Ok(match parse_mode {
+                ParseMode::Consume => alt.consume_slot_match(input, position, required_index),
+                ParseMode::Seek => alt.seek_slot_match(input, position, required_index),
+            });
+        }
         if has_entry_idx && matches == 0 {
             let entry_pat = &rule.regex_patterns[entry_regex_idx];
             let entry_alt = CompiledAlternation::compile(std::slice::from_ref(entry_pat))?;
@@ -3271,12 +3280,6 @@ impl Engine {
                 matched.index = entry_regex_idx;
                 matched
             }));
-        }
-        if let Some(required_index) = required_and_idx {
-            return Ok(match parse_mode {
-                ParseMode::Consume => alt.consume_slot_match(input, position, required_index),
-                ParseMode::Seek => alt.seek_slot_match(input, position, required_index),
-            });
         }
         if !rule.mode.is_and() && !rule.acode_dispatch.is_empty() {
             // The full catalog also serves incoming selectors and boundary

@@ -7774,13 +7774,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1 - preserve typed AND dependency order and distinct action steps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2`
-  Status: `pending` / P1 before39.2/full23.4
-  Goal: Reconcile and repair inherited indexed entry versus required AND sequence priority.
-  Scope: Initial catHcat result[[null,null],7] differs from repaired Perl[[BODY],7]; source entry-specific selection currently precedes required AND slot. Check canonical numeric compatibility/ADR0044/0047 before changing only proven AND behavior; preserve default/OR and recursion compatibility.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
-  Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
-  Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+  Status: `completed` / required AND slots precede inherited entry selectors
+  Activation: clean `b7955668cf242fe03de08c22ddc28c4648f7c18a` after typed dependency steps.
+  Goal: Preserve the entered AND algorithm after the caller consumes its indexed entry match.
+  Verification tier: `focused`
+  Focused checks: Unchanged25 tests18pass3RED4ignored ->21pass0fail4ignored on native/restored/plan; duplicate-slot contract15 roles; exact24 source/serde/plan/emitted records and other results unchanged; exact-file format, book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining dormant regressions; existing ADR0044/0047 preserved, no new format/family authority.
+  Claim verification: none: Finite authored index/capture/mode/source distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Original indexed catHcat returns[[null,null],7]; distinct-capture AND and compact & also return two nulls. Initial grouped capture test aborts before compact, so separate normal tests reach both before production. Refined baseline18pass3fail4ignored; Default/pipe/OR once already pass.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Shared Engine::select_native_match prioritizes entry_regex_idx on the first iteration over a present required_and_idx. The parent has already consumed the entry match; the AND child must consume its own slot0 and subsequent typed required steps at the resulting cursor under ADR0044/0047.
+  - [x] **FIX**: Move the existing required-slot selection ahead of entry-only priority. Only callers with a present required step take the changed branch; choice and single-slot compatibility retain their existing entry behavior. No cursor rollback, new mode, capture rewrite, schema or generated family change.
+  - [x] **ADDRESSED (verified)**: All3 failed groups pass on native/restored/plan; matrix21pass/4 remaining owned dormant. Original returns[[BODY],7]; explicit AND/compact & preserve entry cat while local actions observe H then cat at7. Default, pipe and bounded OR indexed controls keep their exact expected results.
+  - [x] **NO REGRESSION**: Duplicate-slot contract15 roles passes; exact24 full source/serialized/plan/emitted records identical before/after, only3 expected result groups change. Full sparse prefixes/falsey/tail/dependency/legacy/complete-repeat controls remain green. Source emitter/core schema unchanged. Existing generated artifacts rebuild with updated runtime; independent emitted package execution unassessed.
+  - [x] **LOCKSTEP**: rust-and-index-intake.json.gz retains actual sources/producers/initial and independently reached refined RED/GREEN/results/patch/receipt. Book/card/target/roadmap/live/resume/history reflect scoped repair;39.1.3 returns next, minimum/implicit results and4 remaining regressions before admission/push. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2 - honor required AND slots before inherited entry selectors`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3`
   Status: `pending` / P1 before39.2/full23.4
@@ -8168,7 +8176,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` | `pending` | Repair inherited indexed entry priority while preserving required AND steps and Default/OR compatibility. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3` | `pending` | Repair repeated AND per-group action returns without changing CHOICE-only collection policy. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

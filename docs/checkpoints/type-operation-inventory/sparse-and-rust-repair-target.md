@@ -1,7 +1,7 @@
 # Rust sparse AND: independent intake and bounded repairs
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.39.1; intake39.1.0.
-Status: default-blind iteration39.1.4.1 and typed dependency steps39.1.1 repaired/targeted-checked; indexed/returns/minimum/implicit-result P1 repairs remain before peers/admission.
+Status: default-blind iteration39.1.4.1 and typed dependency steps39.1.1 repaired/targeted-checked; indexed39.1.2 repaired/targeted-checked; returns/minimum/implicit-result P1 repairs remain before peers/admission.
 
 ## Retained observations
 
@@ -94,3 +94,14 @@ applications with the updated runtime, no source rewrite. Remaining5 dormant
 regressions require39.1.2/.3/.5/.4.2 before admission; no emitted-package proof.
 Packet: rust-and-steps-intake.json.gz. Earlier no-production statements describe
 the historical intake, not the subsequent runtime repairs.
+
+39.1.2 completed: shared selection tests a present required AND slot before
+the inherited entry selector. The caller has already consumed the entry; child
+AND starts its own sequence at the current cursor. Original indexed catHcat now
+returns[[BODY],7]; explicit AND/compact & retain entry cat and local H/cat at7.
+Default/pipe/OR once selection stays unchanged. Unchanged25 tests18pass/3RED/
+4ignored ->21pass/4ignored, duplicate-slot15 roles pass. Exact24 full source/
+serde/plan/emitted records unchanged; only3 result groups change. No generated
+source rewrite; rebuild with updated runtime. Packet rust-and-index-intake.json.gz.
+Remaining4 dormant regressions require group-return/minimum/implicit-result
+repairs before admission;39.1.3 is next. No independent emitted package proof.

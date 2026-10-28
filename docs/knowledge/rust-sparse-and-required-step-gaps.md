@@ -9,7 +9,7 @@ answers:
   - "why does Rust repeated AND return before its minimum"
   - "why does default blind Rust plan stop at cursor four instead of eight"
 date: 2026-10-28
-status: default-blind iteration39.1.4.1 and dependency steps39.1.1 repaired; indexed/returns/minimum/implicit results remain
+status: default-blind iteration39.1.4.1/dependency39.1.1/indexed39.1.2 repaired; returns/minimum/implicit results remain
 tags: [rust, and, sparse, sequence, dependencies, slots, generated-plan, repetition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0; sparse-and-rust-repair-target.md and sparse-and-rust-intake.json.gz retain actual initial/refined source, compiled serde, emitted text, native trace, all reached routes and owned dormant tests."
 reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test sparse_and_structural_sequence -- --nocapture; explicitly select owned ignored regressions with --ignored when repairing. Independent emitted package execution remains unassessed."
@@ -59,3 +59,14 @@ pass; exact18 full source/artifact records and legacy inputs/results unchanged.
 Only5 result groups change. Rebuild generated applications with updated runtime.
 Packet rust-and-steps-intake.json.gz.39.1.2 indexed priority is next; remaining5
 dormant regressions are required before admission, never success credit.
+
+39.1.2 now selects a present required AND step before inherited entry priority
+in shared select_native_match. The caller already consumed the entry match;
+an AND child starts its own required sequence at the resulting cursor. Original
+indexed catHcat returns[[BODY],7], and explicit AND/compact & preserve entry cat
+with local H then cat at7. Default/pipe/OR once indexed controls unchanged.
+Unchanged25 tests18pass3RED4ignored ->21pass4ignored; duplicate-slot15 roles
+pass. Exact24 full source/compiled/plan/emitted records unchanged; only3 result
+groups change. Existing generated applications rebuild with updated runtime.
+Packet rust-and-index-intake.json.gz.39.1.3 group returns next,4 remaining dormant
+regressions required before admission; independent emitted package unassessed.
