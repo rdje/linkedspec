@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe installed Lua named Number/caller scopes34.5 compatible/targeted-checked; ordinary Perl roles/readiness42 next.
+Perl mark-name roles/readiness42.0 frozen with raw-host return owned; seven-reader42.1 next.
 
 ## Latest Completed Slice
 
-Installed PUC Lua5.5.1/LuaJIT2.1.1788460057 already compose all seven readonly named Number sources; runtime unchanged/no invented RED.31 authored sources agree native/restored SpecFile/generated-plan/fresh loaded module in each current host process. New registered219 plus nearest anonymous Number155 checks pass per host, syntax/empty stderr. Shared/direct/per-helper/alternate label/partial cursor, zero/missing/reversed defaults, symbolic shadowing, accepted quoted/computed names and clear snapshot pass. Literal all-seven/caller-visible write/cross-rule same-name/returned-callback call-time0/6 scopes are independently healthy; all7 pure-function/registered callback fences preserve native helper_name and typed native/generated envelopes. Direct6/[]/KVT and bound6/[]/undef/KVT preserve actual scalar legacy outside Hash input domain. No runtime chunk local, dependency/pin/alias/schema/vocabulary/domain change or Lua5.4/unsafe-pattern/fresh-VM grant. Packet retains producers/inputs/generated payloads/results. All bounded34 children targeted-checked; full context23.4 remains. Book/map/task/live/resume/roadmap/history/manual focused guards align; ordinary Perl name-role/readiness42 next, then39/38/37/40/41 before full gate/push.
+Freeze perl-mark-name-roles.md from logical String signatures, neutral bare-symbol exception, existing Perl word-key grammar/native bodies and four peer word-name observations. Public13-case intake confirms bare shadow0/6 and numeric token0=>6; quoted/computed/wrong-arity readers falsely ready1, but quoted/computed writers are already raw1/ready0. New exact source mechanism: unlowered mark_pos block contains host return, returning String finish native/fresh before helper invocation despite ready0. Own it under42; no blessed offset or metadata-only cure. Julia four-route valid-expression oracles fix eager key capture before mark reads(width0/AB/begin6) and local return before consumer(6!/AB). Bounded42.1 seven readers then42.2 remaining name calls add quoted/evaluated String word representations and governed unsupported-form readiness/failure, preserving bare words/functions/scopes/body identities;42.3 owns wider key authority after feature coverage/before full23.4, canonical for real policy movement. No production edit. Packet retains exact source/producer/refinement/results; initial final-output UTF8 warning and absent native dump are disclosed, refined producer syntax only. Book/map/task/live/resume/roadmap/history/manual focused guards align;42.1 next, no full gate/push.
 
 ## Next Action
 
-Activate ordinary Perl mark-name authority/readiness42 from this clean bounded34 boundary. Reconcile bare-symbol/literal/evaluated name roles with canonical contracts, actual source consumers and current native peer observations; freeze governed support or honest typed unsupported-form diagnostics through existing owners before production. Preserve symbolic shadowing, scopes, helper identity, source order and function fences; any actual public input-policy movement requires its separately owned canonical boundary. Then39/38/37/40/41 before full23.4/admission/final clean push; focused authorized --no-verify continues.
+Activate42.1 from this clean authority boundary. Read exact method/value/native/scanner/dependent source paths; preserve seven original symbolic producer bodies while adding quoted/evaluated String word-name arguments with once-only left-to-right name capture before mark reads and local-return lowering. Reject unsupported shape/arity before operand effects through governed helper/readiness owners; preserve function fences and41 error-delivery ownership. Add exact owned RED/GREEN and nearest34/mark checks, commit, then42.2 and39/38/37/40/41. Wider key42.3 remains after feature coverage/before full23.4; no routine full gate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.42.0` — Perl mark-name roles/readiness42.0 frozen with raw-host return owned; seven-reader42.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` — Safe installed Lua named Number/caller scopes34.5 compatible/targeted-checked; ordinary Perl roles/readiness42 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` — Julia named Number methods/caller scopes34.4 compatible/targeted-checked; safe Lua34.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` — Dart named Number methods/caller mark scopes34.3 already compatible/targeted-checked; Julia34.4 next.
@@ -29,7 +30,6 @@ Activate ordinary Perl mark-name authority/readiness42 from this clean bounded34
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.1` — Perl value-block reset core8/fence6/Number7 pass; independent Rust35.2 next, error41 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.0` — Capture-reset value-block35.0 target frozen; confirmed Perl statement repair35.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.5` — Safe Lua capture Number155+12 pass per installed host; all bounded33 children checked,35.0 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1` — Dart zero test uses defined positions6pass; safe Lua capture Number33.5 next.
 
 ## History
 

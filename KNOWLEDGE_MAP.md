@@ -17730,7 +17730,7 @@ _Blanket interval consumption breaks executable nested residual continuation_
 ### perl-mark-name-argument-readiness-gap
 _Ordinary quoted and evaluated Perl mark names fail execution despite ready metadata_
 - **answers:** can Perl mark_pos accept a quoted name | why does mark_pos of cat fail an undefined host helper | why does quoted capture_len_between report ready1 | which task owns mark-name argument validation and readiness
-- **date:** 2026-10-28 · **status:** P1 owner42 after bounded34 before39/full23.4/push; authority and repair open
+- **date:** 2026-10-28 · **status:** authority42.0 frozen; readers42.1 then remaining42.2 repair before39/full23.4; wider domain42.3 separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.34.0 retains actual quoted/evaluated/bare-shadowing controls, source/emitted bytes/metadata/channels in named-mark-number-authority.json.gz.`
 - **reverify:** `Recover probe_named_mark_number_authority.pl and run the project-routed Perl command with quoted_names evaluated_name symbolic_shadow labels.`
 - **source:** [`docs/knowledge/perl-mark-name-argument-readiness-gap.md`](docs/knowledge/perl-mark-name-argument-readiness-gap.md)

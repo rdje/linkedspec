@@ -7751,7 +7751,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored error-delivery distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42`
-  Status: `pending` / P1 after bounded34 before39/full23.4/push
+  Status: `in_progress` / P1 after bounded34 before39/full23.4/push
   Goal: Reconcile ordinary Perl mark-name argument authority and prevent false-ready output for name forms the native lowerer does not execute.
   Reproduction:34.0 public native/fresh source/metadata intake creates bare begin/finish marks. mark_pos("finish") and capture_len_between("begin","finish") remain raw calls; generated execution fails undefined mark_pos. mark_pos(cat("fin","ish")) leaves nested cat raw and fails undefined cat. Both cases report raw0/unresolved0/ready1 and native collecting parent returns[null], with error loss independently owned41. Exact source/substitution/emitted bytes and channels belong to named-mark-number authority evidence.
   Root / impact: Existing Legacy/Contracts mark-name producers accept symbolic word arguments, while ordinary known-helper metadata does not reject these unmatched argument shapes. The public catalog describes string mark names and the neutral contract explicitly distinguishes unquoted identifiers from variable reads; authority for quoted/evaluated forms must be reconciled before deciding support or typed rejection. Host undefined-subroutine errors and ready1 do not constitute a valid argument policy. This is separate from deferred vocabulary31.6.4.4 and readonly Number method34.
@@ -7761,6 +7761,51 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned source/metadata/diagnostic RED/GREEN and nearest valid role/provenance/function/generated controls, syntax/book/history/manual continuity; no routine full gate.
   Planned canonical trigger: Full23.4/final clean push requires verified42; actual public argument-policy/schema movement gets separately owned canonical authority.
   Planned claim verification: none: Finite authored argument/readiness distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42.0`
+  Status: `completed`
+  Goal: Freeze ordinary Perl mark-name representation/readiness repair from canonical roles and exact public source evidence.
+  Activation: clean `c156983620dd9265dfdfb2e6b7d9a0e3288dfd49`; all bounded34 leaves committed, tree clean and brief0.
+  Authority: perl-mark-name-roles.md; logical String signatures, neutral symbolic bare-name exception, existing Perl word-key grammar and four native peer word-name intakes. Wider key policy is separately owned42.3, not inferred from low-level Hash storage.
+  Verification tier: `focused`
+  Focused checks: Public13-case descriptor/substitution/native/fresh/metadata controls and exact emitted host-return mechanism; Julia2 valid-expression/four-route ordering/local-return oracles, refined Perl producer syntax. Book/map/history/manual memory/cadence/diagnosis/claim-input/diff; no production edit/full gate.
+  Canonical trigger: Verified42.1/42.2 before39/full23.4/final clean push; wider key authority42.3 after feature coverage and canonical for actual policy movement after pressure repair. Broad error-phase parity/native delivery41 remain separate.
+  Claim verification: none: Finite authored argument/readiness/source distinctions and bounded authority, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Bare shadow0/6 and numeric symbol0=>6 pass. Quoted/computed/wrong-arity readers remain raw/ready1; writer forms instead raw1/ready0. Block name argument returns String finish native/fresh with ready0/unresolved return, not a valid mark result. Exact13 source/metadata/error/trace rows retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Word-only Contracts/LegacyRules patterns also drive unresolved detection through RewritePipeline/Diagnostics; unmatched reader calls evade both. Public substitution/emitted handler retain host return mark_pos({return("finish")}), so the inner host return exits before undefined mark_pos runs. Runtime storage already keys rule/name; lowering owns repair, not frame migration.
+  - [x] **FIX**: Freeze quoted/evaluated String representations for existing Perl word keys, preserving bare symbols/numeric-token compatibility.42.1 owns seven Number readers;42.2 remaining name operations share one argument owner and governed unsupported-form/readiness handling.42.3 owns wider domains separately; no silent key grammar/non-String/callback grant.
+  - [x] **ADDRESSED (verified)**: Julia native/reconstructed/plan/fresh valid String oracles distinguish eager key capture before mark reads(0/AB/6) and local argument returns before later consumer(6!/AB). Exact native/emitted/substitution and metadata distinguish false-ready readers, unready writer failures and raw-host return escape. No implementation success inferred from authority.
+  - [x] **NO REGRESSION**: Production diff empty. Existing String decoding/value lowering, primitive bodies/operation/provenance/coordinates, word shadowing/function scopes and deferred vocabulary stay authoritative. Initial output UTF8 warning and absent native dump are disclosed; refined producer syntax passes without a rerun claim. Strict trace-aware JSON reader does not discard unknown output.
+  - [x] **LOCKSTEP**: Target/packet/canonical gap card/map/book/task/live/resume/roadmap/history align.42.1 first then42.2 and39/38/37/40/41;42.3 after feature coverage/before full23.4. Existing pressure/registration/declared-host/deferred metadata/error owners stay open. Focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.42.0 - freeze governed Perl mark-name roles and prevent raw argument execution`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42.1`
+  Status: `pending`
+  Goal: Implement governed String word-name arguments and safe readiness for the seven ordinary Perl readonly Number readers.
+  Authority: Frozen perl-mark-name-roles.md. Preserve original bare-word bodies/zero/missing/reversed/coordinate/provenance/function/consumer policies; no key-domain/callback/alias/schema grant.
+  Planned verification tier: focused
+  Planned focused checks: Exact quoted/computed/local-return/arity/effect/readiness RED/GREEN, standalone original bodies and nearest34/complete-mark/function/native/fresh checks; syntax/book/history/manual continuity.
+  Planned canonical trigger: Full23.4/final clean push after42.2 and other prerequisites; actual broader key-domain policy42.3 canonical separately.
+  Planned claim verification: none: Finite authored functional/source/readiness controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42.2`
+  Status: `pending`
+  Goal: Apply the same governed String word-name argument owner to remaining ordinary mark/capture name operations and suppress raw known-helper fallback.
+  Authority: Frozen42.0, verified42.1 argument owner and current writer/copy/clear/exists/text/advancing arities/aliases/returns/effects/scopes. Preserve original bare-word primitive bodies; no writer-as-value/fluent/deferred/key-domain grant.
+  Planned verification tier: focused
+  Planned focused checks: Named writes/copy/clear/exists/text/take literal/computed/word Unicode/order/missing/arity/readiness and nearest source-boundary/mark controls, syntax/book/history/manual continuity; no broad gate.
+  Planned canonical trigger: Full23.4/final clean push after42/39/38/37/40/41 and other prerequisites; broader key-domain policy42.3 separately canonical.
+  Planned claim verification: none: Finite authored functional/source/readiness controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42.3`
+  Status: `pending` / P2 after ordinary feature coverage, before full23.4/portable argument admission
+  Goal: Reconcile wider mark-key domain authority, including nonword/punctuation/empty keys and per-backend existing accepted behavior, before any broader policy grant.
+  Authority: Existing logical String signatures, Perl legacy word-key grammar, actual peer argument observations and42.0 qualified target. Do not infer language domains from low-level Hash capability or normalize String keys silently.
+  Planned verification tier: canonical
+  Planned focused checks: Exact independent domain/type/empty/Unicode/escape/provenance/effect observations and explicit policy/contract/docs alignment; no fabricated supported forms.
+  Planned canonical trigger: Any actual public argument/key-domain policy movement and final admission/push after scheduled document-pressure repair; ordinary42.1/42.2 remain bounded representation repairs.
+  Planned claim verification: none: Normative domain authority and finite authored distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.43`
   Status: `completed` / bounded Rust repair43.1 targeted-checked; full context admission23.4 separate
@@ -7814,7 +7859,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.42` | `pending` | Reconcile ordinary Perl mark-name roles and repair false-ready output. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.42.1` | `pending` | Implement frozen seven-reader String word-name arguments and safe readiness. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
