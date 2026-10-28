@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart repeated blind post-call outcomes/progress repaired; reference falsey/parent acceptance next before peers.
+Reference blind falsey iteration outcomes repaired; parent recognition publication next.
 
 ## Latest Completed Slice
 
-Dart repeated blind post-call block/fluent returns now complete one choice/Default iteration or one early-return AND group, preserving accepted count/reset/minimum and typed falsey/null/nested payload. Private return channel skips remaining group/post-return LE; lifecycle/plain returns remain whole-rule. Common completion guard now rejects actual post-call recognition zero before count/IT/max/ordinary cutoff; nonconsuming ordinary returned iterations discard value before count, preserving Default no-hitnull. Final18 sources27 inputs5healthy13actualRED ->18pass, identical raw source/normalized/compiled/plan/emitted across independent intake/normal RED/GREEN and same18 fresh modules/consumer reused. Fixed-retv public Perl native/fresh24 value/cursor/error pairs agree;3 aa falsey rows deliberately follow existing accepted-vs-value authority and expose reference predicate defect owned39.9, not parity credit. Combined post-call/blind/minimum/group/structural/live-progress122pass no skips; fatal changed analysis clean. One old postcall compatibility expectation deliberately becomes a true minimum miss; sources unchanged. Packet dart-blind-postcall-repair-intake.json.gz retains all actual producers/inputs/reference/emission/modules/results/trace/patch/receipt. Book/cards/target/roadmap/task/live/resume/history align. No compiler/emitter/matching/recognition authority/schema/family/Perl edit. Immediate reference acceptance39.9 before peers/admission; focused authorized commit/no full gate/push.
+Perl REP_BCODE/REP_AND_BCODE now pass a fresh loop-local accepted flag to the inner dispatch/group. Actual no-child/required-child misses clear it; raw post-call payload remains independent, preserving zero/false/empty/null and early group returns. No global result_is_match/runtime predicate edit or new author-visible named binding. Final15 native/fresh groups36 inputs5healthy10actualRED ->15pass, exact authored sources/v2 metadata unchanged. Latest-child retv10 groups11 inputs unchanged; plain or_bcode/and_bcode emitted sources byte-identical. Real partial/minimum/reset/zero-min/nested/custom IT/IT-return and ordinary/typed zero controls pass; syntax clean. Three previously qualified Dart aa rows now match repaired reference on exact source/value kind/cursor, retained Dart runtime hash unchanged; no full18-current replay claim. Initial bare commit fixture rejected recognition_terminal_required under frozen payload-binding form, corrected before valid baseline and retained without product RED credit. Packet perl-blind-falsey-intake.json.gz retains actual producers/epochs/inputs/emission/results/policy diagnostics/patch/receipt. Book/cards/target/roadmap/task/live/resume/history align, new normal test queued23.4.1. Regenerate old standalone Perl source; schema/family/Dart unchanged. Parent completion publication39.9.2 immediately next before peers/admission; focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate P1 reference acceptance39.9 from clean Dart post-call repair, before Julia/safe Lua. Repair reproduced falsey/null post-call iteration/group acceptance separately from payload and publish completed repeated blind-parent acceptance, preserving true misses/minimum/cursor/progress/errors/retv/IT/lifecycle/source metadata. Use retained public falsey sources and earlier static-recognition parent controls, verify exact mechanisms with toolbox, split bounded leaves where needed. Do not infer entry/cursor policy from Perl static preselection or bless broken null outputs. Exact native/fresh RED-GREEN, focused checks/book/docs/commit; then independent Julia39.3/safe Lua39.4. Full admission/registration/pressure/Perl39.8/lifecycle prerequisites remain before push.
+Activate39.9.2 from clean falsey iteration repair. Publish actual completed blind-parent acceptance independently of null payload and last child miss. Use retained public static-recognition bcode OR/AND parent controls, exact loop counts/trace and existing invocation authority; preserve under-min/no-hit/zero-min, early IT/lifecycle/post-call authority, selected/entry/cursor/marks/return/error/progress semantics and scope cleanup. No global sticky child flag/truthiness widening or preselection-based cursor-policy inference. Exact public native/fresh RED-GREEN, focused checks/book/docs/commit, then Julia39.3/safe Lua39.4. Full admission/registration/pressure/Perl39.8/lifecycle prerequisites remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.9.1` — Reference blind falsey iteration outcomes repaired; parent recognition publication next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2` — Dart repeated blind post-call outcomes/progress repaired; reference falsey/parent acceptance next before peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1` — Reference blind latest-child retv binding repaired; Dart repeated outcome/progress next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.0` — Post-call authority intake complete; reference retv binding then Dart repeated outcome/progress repairs.
@@ -29,7 +30,6 @@ Activate P1 reference acceptance39.9 from clean Dart post-call repair, before Ju
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0` — Minimum/API/progress intake qualified; immediate live recognition progress39.1.6 before bounded minimum repair.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.1` — Rust repeated AND group outcomes repaired/targeted-checked; remaining minimum families39.1.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.7` — Perl repeated AND falsey group acceptance repaired/targeted-checked; Rust39.1.3 resumes.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0` — Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
 
 ## History
 

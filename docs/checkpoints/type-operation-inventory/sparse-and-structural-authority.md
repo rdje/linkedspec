@@ -177,3 +177,12 @@ immediate before peers/admission. Default also repeats by actual reference;
 ordinary returned-zero cutoff/count and typed post-call guards are proved.
 Packet dart-blind-postcall-repair-intake.json.gz retains all actual reference/
 SDK/plan/fresh/trace inputs/results. Compiler/emitter/schema/Perl unchanged.
+
+Reference39.9.1 separates repeated blind local acceptance from falsey post-call
+payload.15 valid normal native/fresh groups36 inputs5healthy10RED ->15pass;
+exact source/v2 metadata, retv10groups11inputs unchanged/plain sources identical.
+3 retained Dart aa source/value-kind/cursor pairs now match, no full18-current
+replay claim. Typed/ordinary zero, IT/partial/minimum controls and syntax pass.
+Unbound commit compile failure qualified against frozen payload-binding form.
+Packet perl-blind-falsey-intake.json.gz; regenerate standalone source. Parent
+recognition publication39.9.2 remains immediate before peers/admission.

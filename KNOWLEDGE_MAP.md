@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1408** facts · **10983** question keys.
+> **1409** facts · **10985** question keys.
 
 ## Questions → fact
 
@@ -5393,6 +5393,7 @@
 - "how should a dangling block normalize" -> [standalone-lifecycle-block-audit](docs/knowledge/standalone-lifecycle-block-audit.md) · 2026-09-08 · reverify: `bash tools/check_standalone_lifecycle_block_five_backend.sh`
 - "how should a failed Python reviewer replay bind diagnostic source text" -> [python-replay-traceback-source-binding](docs/knowledge/python-replay-traceback-source-binding.md) · 2026-10-05 · reverify: [1 entry](#python-replay-traceback-source-binding)
 - "how should a new task leaf declare measured claims" -> [claim-publishing-disclosure-identity](docs/knowledge/claim-publishing-disclosure-identity.md) · 2026-10-02 · reverify: `bash scripts/check_claim_verification.sh --self-test && perl tools/check_task_verification_fields.pl --self-test && bash scripts/check_verification_cadence.sh --self-test && bash scripts/check_claim_verification.sh`
+- "how should a progress fixture author recognition_commit portably" -> [recognition-transaction-bound-commit-authoring](docs/knowledge/recognition-transaction-bound-commit-authoring.md) · 2026-10-28 · reverify: `Read capability_conformance/recognition_transaction_contract.json authored_surface.commit; bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/repeated_blind_falsey_group.t`
 - "how should a unified copy() resolve array vs hash" -> [terse-helper-rename-lowering-sites](docs/knowledge/terse-helper-rename-lowering-sites.md) · 2026-07-04 · reverify: `perl -Iperl -MLinkedSpec -e 'for my $stmt (q{set(x, 1)},q{return(cat(\"a\",\"b\"))},q{items = [\"a\"]; return(copy(items))},q{meta = { key : \"v\" }; return(copy(meta))}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime terse_1_4_2 --quiet && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime helpers_5_1_retired_terse_8_4_spellings_diagnose --quiet`
 - "how should array pipeline helper examples return arrays" -> [array-helper-return-shape-caveats](docs/knowledge/array-helper-return-shape-caveats.md) · 2026-10-26 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/array_pipeline_value_contract.t`
 - "how should canonical CI run when nested macOS sandbox initialization is denied" -> [project-data-process-locality-proof](docs/knowledge/project-data-process-locality-proof.md) · 2026-07-27 · reverify: `bash -n tools/test_project_data_process_locality.sh tools/run_dart_project_data.sh tools/build_lua_native.sh && bash tools/test_project_data_process_locality.sh && bash scripts/check_project_data_storage_locality.sh`
@@ -10504,6 +10505,7 @@
 - "why does an unused function remove Lua entry explanation records" -> [lua-static-completion-sha-emitter-reading-and-conditional-gaps](docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md) · 2026-09-13 · reverify: [4 entries](#lua-static-completion-sha-emitter-reading-and-conditional-gaps)
 - "why does array(3) return an empty array on Perl" -> [perl-single-numeric-array-constructor](docs/knowledge/perl-single-numeric-array-constructor.md) · 2026-09-26 · reverify: `Replay the checkpoint sources through LinkedSpec::Get/runtime_ctx_ref and call_spec_handler_subst under tools/project_data_run.sh; inspect values and numeric aggregate-name residue.`
 - "why does array(value,value) inside a Perl function return the word value" -> [perl-function-array-constructor-bare-values](docs/knowledge/perl-function-array-constructor-bare-values.md) · 2026-09-25 · reverify: `env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/uniform_binding_contract.t t/variadic_user_function_contract.t t/actionir_ast_parser.t t/trace_actionir_method_lowering.t t/trace_emit_context_bridge.t; env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t`
+- "why does bare recognition_commit get recognition_terminal_required in Perl" -> [recognition-transaction-bound-commit-authoring](docs/knowledge/recognition-transaction-bound-commit-authoring.md) · 2026-10-28 · reverify: `Read capability_conformance/recognition_transaction_contract.json authored_surface.commit; bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/repeated_blind_falsey_group.t`
 - "why does blind fluent push hang in a standalone Perl parser" -> [perl-emitted-ordinary-recursion-guard-gap](docs/knowledge/perl-emitted-ordinary-recursion-guard-gap.md) · 2026-10-28 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/emitted_rule_progress_guard.t t/shared_rule_progress_guard.t; historical timeout producers require their retained base Git inputs.`
 - "why does calls_symbols_and_shapes fail through MCP" -> [mcp-all-twenty-transport-blocker](docs/knowledge/mcp-all-twenty-transport-blocker.md) · 2026-09-07 · reverify: [4 entries](#mcp-all-twenty-transport-blocker)
 - "why does canonical CI keep losing the repeated-action closeout marker" -> [task-index-marker-anchor-hazard](docs/knowledge/task-index-marker-anchor-hazard.md) · 2026-09-24 · reverify: `bash scripts/check_task_tree_metadata.sh; bash tools/run_python_project_data.sh tools/check_repeated_action_result_contract.py; rg -n 'BEGIN CANONICAL CLOSED-CAPABILITY MARKERS|repeated-action recurring/public no-drift is closed|END CANONICAL CLOSED-CAPABILITY MARKERS' docs/TASK_TREE.md`
@@ -17259,7 +17261,7 @@ _Perl blind-call bridge publishes latest child retv before attached code and IT_
 ### perl-blind-postcall-falsey-acceptance
 _Perl repeated blind post-call falsey payload is incorrectly treated as a failed iteration_
 - **answers:** why does Perl repeated blind post-call return zero or null stop after one child | what additionally blocks Perl repeated blind falsey result parity
-- **date:** 2026-10-28 · **status:** open P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.9 immediately after Dart39.2.5.2 before peers/admission
+- **date:** 2026-10-28 · **status:** iteration/group39.9.1 repaired/targeted-checked; parent completion39.9.2 remains before peers/admission
 - **evidence:** `dart-blind-postcall-repair-intake.json.gz retains18 public reference sources27 inputs and exact source/emission/results, including OR zero/null and AND early-zero controls; existing binding39.2.5.1 is fixed.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_blind_postcall_repair.pl`
 - **source:** [`docs/knowledge/perl-blind-postcall-falsey-acceptance.md`](docs/knowledge/perl-blind-postcall-falsey-acceptance.md)
@@ -19221,6 +19223,14 @@ _Rendered review caught a stale neutral-next sentence after the transaction auth
 - **evidence:** `FUTURE-PARITY-BACKLOG.14.3.1.2 rendered the capture/source page and found adjacent claims that the neutral authority was executable and still next. Git blame traced the old sentence to 7c2ff407 and the missed update to e0cc7182. FUTURE-PARITY-BACKLOG.14.3.1.2.0 then extended the same canonical checker with a separate exact public projection over 3 documents, 8 forbidden claims, and 13 in-memory mutations while preserving the JSON and its 40 semantic mutations.`
 - **reverify:** `bash tools/run_mdbook_local.sh && rg -n 'neutral artifact/checker is executable|neutral artifact/checker is next' docs/linkedspec-book/book/dsl/capture-marks-and-source-locations.html && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py`
 - **source:** [`docs/knowledge/recognition-transaction-book-sequence-drift.md`](docs/knowledge/recognition-transaction-book-sequence-drift.md)
+
+### recognition-transaction-bound-commit-authoring
+_Portable recognition commit authoring binds its staged payload and bare commit is not a recognized Perl terminal_
+- **answers:** why does bare recognition_commit get recognition_terminal_required in Perl | how should a progress fixture author recognition_commit portably
+- **date:** 2026-10-28 · **status:** frozen authored form confirmed during39.9.1
+- **evidence:** `perl-blind-falsey-intake.json.gz retains initial bare-commit source/Get/emitted structured diagnostic, frozen contract and corrected bound-commit baseline/GREEN typed progress control.`
+- **reverify:** `Read capability_conformance/recognition_transaction_contract.json authored_surface.commit; bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/repeated_blind_falsey_group.t`
+- **source:** [`docs/knowledge/recognition-transaction-bound-commit-authoring.md`](docs/knowledge/recognition-transaction-bound-commit-authoring.md)
 
 ### recognition-transaction-capability-guide-drift
 _Recognition transaction capability guidance has its own stale-claim guard_

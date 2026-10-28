@@ -43,3 +43,9 @@ records remain identical; one old postcall_return expected value deliberately
 changes from first direct payload to true minimum miss at1. Compiler/emitter/
 matching/recognition authority/schema/families/Perl unchanged. Rebuild runtime
 with existing generated source/plans; broader lifecycle/peer/admission remain.
+
+Reference iteration39.9.1 now repairs the three previously qualified aa rows:
+exact same source/current native-fresh values/kinds/cursors match retained Dart
+results, with unchanged Dart runtime hash. Original18-source proof remains
+frozen; no full18-current reference replay is claimed. Parent publication39.9.2
+remains separate; see [[perl-blind-postcall-falsey-acceptance]].

@@ -785,11 +785,12 @@ sub _emit_default_handler {
 # _emit_and_bcode_handler — foreach call loop, bcode dispatch, collect array.
 #------------------------------------------------------------------------------
 sub _emit_and_bcode_handler {
-    my ($ir) = @_;
+    my ($ir, $miss_statement) = @_;
+    $miss_statement //= '';
     my $label      = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
-    my $lxcode     = _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
+    my $lxcode     = $miss_statement . _recognition_miss_statement($label) . ($ir->{lxcode} || 'return undef');
     my $lecode     = $ir->{lecode} || 'push @' . $label . '_collect, $' . $label;
     my $ecode      = $ir->{ecode}  || 'return \@' . $label . '_collect';
     my $bcodes     = _build_bcodes_dispatch_block(
@@ -1126,7 +1127,8 @@ sub _emit_and_acode_seq_handler {
 # _emit_or_bcode_handler — first-match-wins foreach over bcalls.
 #------------------------------------------------------------------------------
 sub _emit_or_bcode_handler {
-    my ($ir) = @_;
+    my ($ir, $miss_statement) = @_;
+    $miss_statement //= '';
     my $label  = $ir->{label};
     my $handler_kind = $ir->{kind};
     my $trace_enabled = _trace_branches_enabled($ir);
@@ -1178,7 +1180,7 @@ sub _emit_or_bcode_handler {
   }
 
 ' . $no_child_trace . '
-  ' . $ecode . '
+  ' . $miss_statement . $ecode . '
  ';
 }
 
@@ -1278,7 +1280,7 @@ sub _emit_rep_bcode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'iteration_result',
-        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $or_ret)',
+        taken_expr => '$or_group_matched',
         meta => [
             [ loop_count => '$ccount' ],
             [ rep_min => '$min' ],
@@ -1299,7 +1301,7 @@ sub _emit_rep_bcode_handler {
             [ rep_max => '$max' ],
             [ pos => 'pos($$STRING)' ],
         ],
-        details_expr => 'sub { "inner OR_BCODE result was false" }',
+        details_expr => 'sub { "inner OR_BCODE dispatch did not match" }',
     );
     my $zero_progress_condition = _trace_branch_condition(
         enabled => $trace_enabled,
@@ -1351,7 +1353,7 @@ sub _emit_rep_bcode_handler {
         ecode  => 'return undef',
         lxcode => $ir->{lxcode} || 'return $' . $label,
         trace_generated_handler_branches => 0,
-    });
+    }, '${$_[0]} = 0; ');
     return undef unless defined $or_body;
 
     return '
@@ -1367,7 +1369,8 @@ sub _emit_rep_bcode_handler {
    while(1) {
 ' . $loop_enter_trace . '
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    my $or_ret = $or_code->();
+    my $or_group_matched = 1;
+    my $or_ret = $or_code->(\$or_group_matched);
     unless (' . $or_result_condition . ') {
      if (' . $miss_min_condition . ') {
       ' . $excode . '
@@ -1432,7 +1435,7 @@ sub _emit_rep_and_bcode_handler {
         label => $label,
         handler_kind => $handler_kind,
         branch => 'iteration_result',
-        taken_expr => 'LinkedSpec::RecognitionTransactionRuntime::result_is_match($descr, $STRING, $and_ret)',
+        taken_expr => '$and_group_matched',
         meta => [
             [ loop_count => '$ccount' ],
             [ rep_min => '$min' ],
@@ -1453,7 +1456,7 @@ sub _emit_rep_and_bcode_handler {
             [ rep_max => '$max' ],
             [ pos => 'pos($$STRING)' ],
         ],
-        details_expr => 'sub { "inner AND_BCODE result was false" }',
+        details_expr => 'sub { "inner AND_BCODE group did not match" }',
     );
     my $zero_progress_condition = _trace_branch_condition(
         enabled => $trace_enabled,
@@ -1504,7 +1507,7 @@ sub _emit_rep_and_bcode_handler {
         kind  => 'and_bcode',
         ecode => 'return \@' . $label . '_collect',
         trace_generated_handler_branches => 0,
-    });
+    }, '${$_[0]} = 0; ');
     return undef unless defined $and_body;
 
     return '
@@ -1520,7 +1523,8 @@ sub _emit_rep_and_bcode_handler {
    while(1) {
 ' . $loop_enter_trace . '
     my $loop_start_pos = defined(pos $$STRING) ? pos $$STRING : -1;
-    my $and_ret = $and_code->();
+    my $and_group_matched = 1;
+    my $and_ret = $and_code->(\$and_group_matched);
     unless (' . $and_result_condition . ') {
      if (' . $miss_min_condition . ') {
       ' . $excode . '
