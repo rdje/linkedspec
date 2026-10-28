@@ -1430,27 +1430,33 @@ sub _mark_name_arguments_expr {
   .'&& $__ls_mark_name =~ /\A\w+\z/; } '.$body.' }'
 }
 
-sub _lower_named_mark_number_call {
+sub _lower_named_mark_readonly_call {
  my ($call, $deps) = @_;
  my $method = $call->{method};
  return _actionir_ast_unsupported_helper_expr($method)
   if _parser_state_helper_is_forbidden_in_function($method, $deps);
  my $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_arity', $method);
+ my $owner = '_readonly_named_mark_number';
+ unless (defined($arity)) {
+  $owner = '_readonly_named_mark_text';
+  $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', $owner.'_arity', $method);
+ }
  my $args = $call->{args} || [];
- return _actionir_ast_unsupported_helper_expr($method) unless @$args == $arity;
+ return _actionir_ast_unsupported_helper_expr($method) unless defined($arity) && @$args == $arity;
  my $label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
  return _actionir_ast_unsupported_helper_expr($method) unless defined($label) && !ref($label);
  my @words = map { my $word = $_; $word =~ s/\A\s+|\s+\z//g; $word } @$args;
  if (!grep { !/\A\w+\z/o } @words) {
   return LinkedSpec::OwnerDispatch::dispatch_owner_call(
-   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_value_expr',
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', $owner.'_value_expr',
    $label, $method, @words);
  }
  my $names = _lower_mark_name_arguments($args, $deps);
  return _actionir_ast_unsupported_helper_expr($method) unless $names;
  my $body = LinkedSpec::OwnerDispatch::dispatch_owner_call(
-  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_body_expr',
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', $owner.'_body_expr',
   $label, $method, map { '$__ls_named_mark_values['.$_.']' } 0..$#$names);
  return _mark_name_arguments_expr($method, $names, $body)
 }
@@ -6118,9 +6124,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
  }
  # Resolve this governed argument role before generic AST fallback can retain a
  # raw call or reinterpret a nested control expression as a host return.
- if ($trimmed =~ /\A(?:mark_(?:pos|line|col)|capture_(?:len_from|until_cursor_len_from|rest_len_from|len_between))\s*\(/o) {
+ state $readonly_mark_methods = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_method_re');
+ if ($trimmed =~ /\A(?:$readonly_mark_methods)\s*\(/o) {
   my $named_number_call = $parse_method_function_expr->($trimmed);
-  return _lower_named_mark_number_call($named_number_call, $deps) if $named_number_call;
+  return _lower_named_mark_readonly_call($named_number_call, $deps) if $named_number_call;
  }
  # Compatibility helpers still receive authored grouped assignment operands.
  # Admit only those typed assignments; retain the bridge for other raw forms.

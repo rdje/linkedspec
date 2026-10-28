@@ -1,7 +1,7 @@
 # Ordinary Perl mark-name roles and readiness
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.42; target freeze42.0.
-Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 and advancing42.2.3 next; wider42.3 separate.
+Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 repaired/targeted-checked; advancing42.2.3 next; wider42.3 separate.
 
 The helper catalog declares logical String mark-name arguments. The complete
 named-mark contract explicitly makes a bare identifier symbolic rather than a
@@ -132,3 +132,12 @@ one shared method regex connects existing statement recognition to42.1 names.
 Quoted Unicode word Strings work without a new bare Unicode/variable grammar
 claim. Original native returns/trace/effects and function/deferred/value-role
 limits remain. Packet: mark-name-write-statement-intake.json.gz.
+
+42.2.2 is now repaired/targeted-checked: four text/predicate names share the
+readonly argument-call owner, and all12 unused readonly statements reach it.
+Final scoped16, nearest Number order/function2, three module syntax and original
+five/Number7/writer10 body identities pass. Initial15 failed groups include one
+invalid new fixture layout; public source/separator authority isolates it before
+test-only layout/ASCII-output correction, with exact other15 preservation and no
+extra product RED credit. Packet: mark-name-readonly-text-intake.json.gz.
+42.2.3 advancing/bridge follows; function/deferred/domain/admission limits stay.

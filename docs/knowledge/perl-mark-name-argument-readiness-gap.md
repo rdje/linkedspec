@@ -1,7 +1,9 @@
 ---
 id: perl-mark-name-argument-readiness-gap
-title: Perl ordinary Number readers and mark statements share ordered String word-name lowering
+title: Perl ordinary readonly mark readers and write statements share ordered String word-name lowering
 answers:
+  - "can capture_from and mark_exists accept computed names in Perl"
+  - "do unused named readonly calls evaluate name arguments"
   - "can Perl mark_input_end accept quoted or computed names"
   - "why did standalone named mark writes stay raw while nested statements worked"
   - "when does mark_copy read its source relative to name arguments"
@@ -10,7 +12,7 @@ answers:
   - "why does quoted capture_len_between report ready1"
   - "which task owns mark-name argument validation and readiness"
 date: 2026-10-28
-status: readers42.1 and writer statements42.2.1 repaired; readonly42.2.2/advancing42.2.3 next; wider and bare Unicode42.3 separate
+status: readers42.1/42.2.2 and writer statements42.2.1 repaired; advancing42.2.3 next; wider and bare Unicode42.3 separate
 tags: [perl, marks, arguments, readiness, diagnostics, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.0 retains actual quoted/evaluated/bare-shadowing controls, source/emitted bytes/metadata/channels in named-mark-number-authority.json.gz."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/mark_name_number_arguments.t"
@@ -120,3 +122,24 @@ unready diagnostics; runtime invalid names produce controlled fresh errors, with
 native delivery41 still open. Quoted Unicode String keys do not widen working-
 variable grammar or claim bare Unicode readiness42.3. Remaining readonly42.2.2 and
 advancing42.2.3 are next. Exact evidence: mark-name-write-statement-intake.json.gz.
+
+## Readonly text/predicate and unused statements42.2.2
+
+Four named text readers and mark_exists now share ordered String word-name
+lowering with Number readers. Five original bodies remain byte-identical, as do
+final historical7 Number/10 writer probes. The readonly call owner selects each
+original body/arity without changing its value/kind, endpoints or empty/absence
+rules. Independent public substitution exposed all12 computed unused readonly
+calls still raw; shared scanner/contract statement recognition now routes them
+through existing value lowering and discards results. The combined runtime oracle
+observes all12 name effects once in order. No new method/value/deferred rights.
+
+Final scoped16 pass; nearest Number order/function2 and three module syntax pass.
+Initial16 has15 failures including one invalid new test line break before .cat;
+candidate fixes14 valid failures, leaving only that invalid layout. Public source
+twin and [[terse-statement-separator-contract]] confirm a depth-zero newline starts
+a new statement. Join only that fixture expression and use ASCII JSON diagnostic
+output to remove Test2 formatter warnings; exact inverse preserves other15 cases.
+Production is unchanged for the refinement, with no extra product RED credit.
+Actual epochs: mark-name-readonly-text-intake.json.gz. Advancing42.2.3, native
+delivery41, bare Unicode/wider42.3 and full source-context23.4 remain separate.

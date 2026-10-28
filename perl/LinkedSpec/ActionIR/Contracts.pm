@@ -789,6 +789,18 @@ sub _named_mark_write_statement_method_re {
  return $methods
 }
 
+sub _readonly_named_mark_method_re {
+ state $methods = qr/(?:mark_(?:pos|line|col|exists)|capture_(?:from|rest_from|until_cursor_from|between|len_from|until_cursor_len_from|rest_len_from|len_between))/o;
+ return $methods
+}
+
+sub _named_mark_statement_method_re {
+ state $writers = _named_mark_write_statement_method_re();
+ state $readers = _readonly_named_mark_method_re();
+ state $methods = qr/(?:$writers|$readers)/o;
+ return $methods
+}
+
 sub _named_mark_write_statement_expr {
  my ($label, $method, @marks) = @_;
  my $arity = _named_mark_write_statement_arity($method);
@@ -883,6 +895,50 @@ sub _readonly_named_mark_number_body_expr {
   : '$LSPOS - length($LMATCH)';
  return 'do { my $__ls_mark = '.$reads[0]
   .'; defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, '.$end.', '.$operation.') : undef }'
+}
+
+sub _readonly_named_mark_text_arity {
+ my ($method) = @_;
+ state $arity = {
+  capture_from => 1, capture_rest_from => 1, capture_until_cursor_from => 1,
+  capture_between => 2, mark_exists => 1,
+ };
+ return defined($method) ? $arity->{$method} : undef
+}
+
+sub _readonly_named_mark_text_value_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _readonly_named_mark_text_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
+ return undef if grep { !defined($_) || ref($_) || !/\A\w+\z/o } @marks;
+ return _readonly_named_mark_text_body_expr($label, $method, map { "'".$_."'" } @marks)
+}
+
+sub _readonly_named_mark_text_body_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _readonly_named_mark_text_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
+ $label = '' unless defined $label;
+ if ($method eq 'mark_exists') {
+  return 'do { LinkedSpec::SourceLocation::Runtime::mark_exists($info, \''.$label.'\', '.$marks[0].') }';
+ }
+ my $operation = '"'.$method.'"';
+ my @reads = map {
+  'LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$_.', '.$operation.')'
+ } @marks;
+ if ($method eq 'capture_between') {
+  return 'do { my $__ls_start = '.$reads[0].'; my $__ls_end = '.$reads[1]
+   .'; (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_start, $__ls_end, '.$operation.') : undef }';
+ }
+ if ($method eq 'capture_until_cursor_from') {
+  return 'do { my $__ls_mark = '.$reads[0]
+   .'; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_cursor, '.$operation.') : undef }';
+ }
+ my $end = $method eq 'capture_rest_from'
+  ? 'LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, '.$operation.')'
+  : '$LSPOS - length($LMATCH)';
+ return 'do { my $__ls_mark = '.$reads[0]
+  .'; defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, '.$end.', '.$operation.') : undef }'
 }
 
 # Contracts that normalize capture and cursor-control helpers.
@@ -1285,7 +1341,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_from") : undef }'
+     _readonly_named_mark_text_value_expr($label, 'capture_from', $+{mark})
     }gex;
     return $code
    },
@@ -1345,7 +1401,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_rest_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_from"), "capture_rest_from") : undef }'
+     _readonly_named_mark_text_value_expr($label, 'capture_rest_from', $+{mark})
     }gex;
     return $code
    },
@@ -1405,7 +1461,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_until_cursor_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_until_cursor_from"); my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_cursor, "capture_until_cursor_from") : undef }'
+     _readonly_named_mark_text_value_expr($label, 'capture_until_cursor_from', $+{mark})
     }gex;
     return $code
    },
@@ -1465,7 +1521,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_between"); (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_start, $__ls_end, "capture_between") : undef }'
+     _readonly_named_mark_text_value_expr($label, 'capture_between', $+{start}, $+{end})
     }gex;
     return $code
    },
@@ -1675,7 +1731,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_exists\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::mark_exists($info, \''.$label.'\', \''.$+{mark}.'\') }'
+     _readonly_named_mark_text_value_expr($label, 'mark_exists', $+{mark})
     }gex;
     return $code
    },
@@ -2501,7 +2557,7 @@ sub _build_array_pipeline_contracts {
 #------------------------------------------------------------------------------
 sub _build_dropped_value_contracts {
  my ($d) = @_;
- my $mark_statement_re = _named_mark_write_statement_method_re();
+ my $mark_statement_re = _named_mark_statement_method_re();
  my $value_call_re = qr/(?:and|or|not|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_named|entry_has|match_named|match_has|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
  my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
