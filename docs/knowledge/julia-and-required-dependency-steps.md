@@ -46,3 +46,9 @@ retained. These harness refinements supply no product RED credit.
 passes271 assertions with only blind/default/minimum two owners dormant.
 Group repair/proof: [[julia-repeated-and-group-outcomes]]. Original .1 packet
 remains frozen, raw structural fixture source unchanged.
+
+39.3.4 now enables the final blind_default source; all31 original structural
+sources execute295 assertions with no dormant rows and empty repair scaffolding
+removed. Current implicit collection mechanism/proof:
+[[julia-implicit-blind-iteration-collections]]. Original .1 packet stays frozen;
+nullable match status and confirmed post-call .5 remain separately owned.

@@ -6,7 +6,7 @@ answers:
   - "does Julia ordinary minimum failure roll back consumed input"
   - "can Julia recover after a child repetition minimum miss"
 date: 2026-10-28
-status: bounded39.3.3 repaired/targeted-checked; blind post-call nullable and admission remain
+status: bounded39.3.3 and implicit blind39.3.4 repaired/targeted-checked; post-call nullable and admission remain
 tags: [julia, repetition, minimum, recognition, cursor, errors, recovery]
 evidence: "julia-minimum-intake.json.gz retains12 qualified sources29 inputs4healthy8actualRED ->12pass289 assertions, exact inputs/control/error identity and same12 baseline fresh modules."
 reverify: "bash tools/run_julia_project_data.sh --project=julia julia/test/minimum_miss_routes_test.jl"
@@ -35,3 +35,9 @@ actual text/rule/phase and exact before-after identity; initial epochs retained
 without invalid product RED credit. One recognition source uses canonical bound
 commit spelling before baseline. Compiler/emitter/matching/recognition authority
 unchanged; no broad lifecycle/null/collection/full admission claim.
+
+39.3.4 now retains implicit blind values and enables all31 original structural
+sources (295 assertions). Minimum289/group390/progress234 remain green, raw
+fixture bytes unchanged. Current proof: [[julia-implicit-blind-iteration-collections]].
+Actual post-call scope/count defect39.3.5 is immediately next; no retv binding
+defect inferred, and nullable/diagnostic/full admission remain owned.

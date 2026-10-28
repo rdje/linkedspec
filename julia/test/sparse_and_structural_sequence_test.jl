@@ -2,10 +2,6 @@
 module JuliaSparseAndStructuralSequence
 using LinkedSpecJulia, JSON3, Test
 
-const REPAIR_OWNERS = Dict(
-    "blind_default" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4",
-)
-
 function strict_equal(actual, expected)
     if expected isa Bool
         return actual === expected
@@ -41,10 +37,6 @@ end
     for fixture in fixtures
         name = fixture["name"]
         @testset "$name" begin
-            if haskey(REPAIR_OWNERS, name)
-                @test_skip "$(REPAIR_OWNERS[name]) owns this independent result gap"
-                continue
-            end
             source = fixture["source"]
             println("JULIA_AND_STEPS_AUTHORED ", name, " ", JSON3.write(fixture))
             parsed = parse_spec_with_staged_user_function_definitions(source)

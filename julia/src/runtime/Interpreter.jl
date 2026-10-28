@@ -2137,7 +2137,7 @@ function _execute_runtime_blind_rule!(
 )
     minimum = rule.mode_metadata.rep_min
     if minimum === nothing
-        implicit_and_result = Any[]
+        implicit_iteration_results = Any[]
         matched_any = false
         for _ in 1:engine.max_iterations
             before = context.cursor_codeunit
@@ -2146,7 +2146,7 @@ function _execute_runtime_blind_rule!(
                 rule,
                 context;
                 uses_and_execution = uses_and_execution,
-                implicit_and_result = implicit_and_result,
+                implicit_iteration_results = uses_and_execution ? implicit_iteration_results : nothing,
             ))
             if matched.nexted
                 matched_any = true
@@ -2165,8 +2165,8 @@ function _execute_runtime_blind_rule!(
             if exit_return !== nothing
                 return _runtime_returned(exit_return.value)
             end
-            value = uses_and_execution && !isempty(implicit_and_result) ?
-                Any[implicit_and_result...] : nothing
+            value = uses_and_execution && !isempty(implicit_iteration_results) ?
+                Any[implicit_iteration_results...] : nothing
             return _RuntimeRuleResult(matched.value || matched_any, value)
         end
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
@@ -2177,11 +2177,13 @@ function _execute_runtime_blind_rule!(
         if exit_return !== nothing
             return _runtime_returned(exit_return.value)
         end
-        value = uses_and_execution && !isempty(implicit_and_result) ?
-            Any[implicit_and_result...] : nothing
+        value = uses_and_execution && !isempty(implicit_iteration_results) ?
+            Any[implicit_iteration_results...] : nothing
         return _RuntimeRuleResult(matched_any, value)
     end
 
+    collected_values = Any[]
+    has_custom_iteration = any(payload -> payload.lifecycle == "IT", rule.lifecycle_action_payloads)
     matches = 0
     made_failed_attempt = false
     for _ in 1:engine.max_iterations
@@ -2195,11 +2197,13 @@ function _execute_runtime_blind_rule!(
             return _runtime_returned(loop_start.value)
         end
 
+        iteration_results = Any[]
         matched = _runtime_nextable_bool(() -> _execute_runtime_blind_once!(
             engine,
             rule,
             context;
             uses_and_execution = uses_and_execution,
+            implicit_iteration_results = iteration_results,
         ))
         if matched.nexted
             _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
@@ -2223,6 +2227,13 @@ function _execute_runtime_blind_rule!(
         iteration_return = _execute_runtime_lifecycle!(engine, rule, "IT", context)
         if iteration_return !== nothing
             return _runtime_returned(iteration_return.value)
+        end
+        if !has_custom_iteration
+            if uses_and_execution
+                push!(collected_values, Any[iteration_results...])
+            else
+                append!(collected_values, iteration_results)
+            end
         end
         if context.cursor_codeunit == before
             break
@@ -2251,7 +2262,9 @@ function _execute_runtime_blind_rule!(
     if exit_return !== nothing
         return _runtime_returned(exit_return.value)
     end
-    return _RuntimeRuleResult(matches > 0, nothing)
+    value = rule.mode_metadata.name == "Default" && matches == 0 ?
+        nothing : Any[collected_values...]
+    return _RuntimeRuleResult(matches > 0, value)
 end
 
 function _execute_runtime_blind_once!(
@@ -2259,7 +2272,7 @@ function _execute_runtime_blind_once!(
     rule::CompiledRule,
     context::_RuntimeExecutionContext;
     uses_and_execution::Bool,
-    implicit_and_result = nothing,
+    implicit_iteration_results = nothing,
 )
     if uses_and_execution
         for (edge_index, edge) in enumerate(rule.blind_edges)
@@ -2280,8 +2293,8 @@ function _execute_runtime_blind_once!(
                 LinkedSpecTraceDebug,
             )
             context.retv = child.value
-            if child.matched && implicit_and_result !== nothing
-                push!(implicit_and_result, _runtime_copy(child.value))
+            if child.matched && implicit_iteration_results !== nothing
+                push!(implicit_iteration_results, _runtime_copy(child.value))
             end
             edge_return = _execute_runtime_optional_payload!(
                 engine,
@@ -2313,6 +2326,9 @@ function _execute_runtime_blind_once!(
             LinkedSpecTraceDebug,
         )
         context.retv = child.value
+        if child.matched && implicit_iteration_results !== nothing
+            push!(implicit_iteration_results, _runtime_copy(child.value))
+        end
         edge_return = _execute_runtime_optional_payload!(
             engine,
             edge.action_payload,

@@ -8396,13 +8396,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3 - return ordinary failed Julia repetition minima`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4`
-  Status: `pending` / P1 blind iteration collections
+  Status: `completed` / implicit blind iteration values
   Goal: Retain implicit repeated blind choice/AND results at accepted complete iteration boundaries.
   Acceptance: Default blind Hcat and HcatHcat accept child hits at4/8 but return null instead of BODY collections. Plain AND blind is healthy. Qualify repeated AND nesting, partial final groups, custom IT replacement, bounds/default no-hit/zero-min and explicit child values with public reference controls before edits.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:14 owned sources23 inputs6healthy8actualRED ->14pass230 assertions, one separate post-call diagnostic unchanged; SDK matched/value/cursor and same15 baseline modules/consumer; exact owned inputs/six-control identity and prior fixture bytes; Julia ordinary minimum miss routes:289, Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:295; normal single registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining post-call/null/peer/diagnostic/registration/pressure/lifecycle repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/collection/route/control-flow distinctions, no population measurement.
+
+  Activation: clean `01e1f90f7e684d1d430f199e7dd355a1e92bc7e8` after ordinary minima. Qualify exact public shared15 raw sources on SDK/generated/fresh; post-call row is diagnostic under .5 and must remain independently owned. Implement only implicit copied values at accepted complete iteration boundaries, flat choice/nested AND, preserving plain/pipe/custom IT/bounds/minimum/zero/default/progress/whole-rule lifecycle/source identity.
+
+
+  - [x] **REPRODUCE / ISSUE**:15 diagnostic sources24 inputs initially6healthy9fail;14 owned implicit sources23 inputs have8actualRED, post-call .5 has one independent failure. Default/choice/explicit-zero/AND partial/full/customIT/nested cases lose collections. Plain AND/pipe/lifecycle whole returns are healthy. Actual post-call returns[POST,A,1] at1 in SDK/fresh instead of min-failed null, retv A healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent public child-dispatch traces and SDK outputs show accepted complete blind iterations without retained values. _execute_runtime_blind_rule! never passes a per-attempt collector and finishes with nothing; _execute_runtime_blind_once! collects only plain AND values. Shared child calls/return registers/progress already work; no catalog/entry or post-call policy inferred.
+  - [x] **FIX**: Optional implicit_iteration_results copies accepted child values for AND/choice; repeated owner supplies a fresh per-attempt list and appends only accepted complete iteration, flat choice/nested AND. Partial list discarded, custom IT suppresses append, Default no-hit null versus explicit zero-min[] preserved. Plain AND keeps flat values; one-shot pipe passes no collector. Bounds/minimum/lifecycle/progress and post-call channel unchanged.
+  - [x] **ADDRESSED (verified)**:14pass230 assertions23 inputs SDK matched/value/cursor and same baseline emitted modules/consumer separate process. Owned raw source/normalized/compiled/plan/emitted strings and six healthy observations identical. Same15 modules retain one separately wrong post-call diagnostic unchanged in fixed fresh execution; no current SDK post-call repair/parity claim. Nested child Array remains one value, complete AND groups nest, partial cursor stays consumed.
+  - [x] **NO REGRESSION**: Neighbors Julia ordinary minimum miss routes:289, Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:295 pass, all31 original structural sources active and empty repair scaffolding removed. Original minimum12/group21/live24/sparse31 fixture bytes unchanged. Plain AND/pipe/IT/lifecycle/bounds/minimum/default no-hit/zero-min controls pass. Compiler/emitter/matching/recognition authority unchanged; no post-call/null/Unicode/full admission claim.
+  - [x] **LOCKSTEP**: New normal suite registered once with one explicitly owned post-call .5 dormant. julia-blind-collection-intake.json.gz retains actual fixture/producer/runtime epochs/input/emission/SDK/fresh/diagnostic/receipt closure. Book/cards/target/roadmap/task/live/resume/history align, actual post-call defect P1 immediately next. Remaining nullable/peer/admission/pressure/lifecycle/slot/P2 diagnostic owners stay open; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4 - retain Julia implicit blind iteration values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5`
   Status: `pending` / P1 post-call scope qualification before admission
@@ -8412,6 +8423,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+  Actual39.3.4 diagnostic: same authored postcall_return source Top OR{2} =>First return([POST,retv,cursor]) on ab returns[POST,A,1]/matchedtrue at1 on native/restored/plan/fresh, instead of ordinary under-minimum null at1. Child retv A is healthy; explicit post-call return escapes whole rule before repetition. This is now a confirmed P1 scope/count repair immediately after .4, not source suspicion. Broader falsey/minimum/zero/progress/default/AND/IT public qualification remains required before .5 production edit.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6`
   Status: `completed` / live recognition progress
@@ -8766,7 +8779,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4` | `pending` | Retain Julia implicit blind choice and complete AND iteration values. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5` | `pending` | Qualify and repair actual Julia blind post-call iteration return scope. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

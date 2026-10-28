@@ -269,3 +269,14 @@ assertions pass. New P2 ordinary unknown-helper missing-code reconciliation
 39.3.8 owned before admission; initial peer-code oracle explicitly unqualified,
 no invalid RED credit. Packet julia-minimum-intake.json.gz retains exact closure.
 Normal driver registered once; blind39.3.4 next, other peer/admission owners open.
+
+Julia39.3.4 retains copied implicit repeated blind values: flat choice/nested
+complete AND groups, no partial append, custom IT replacement and Default no-hit
+null versus explicit-zero[].14 owned sources23inputs6healthy8RED ->14pass230
+assertions, exact owned input/six-control identity and same15 baseline modules.
+One additional post-call source/input stays separately wrong unchanged in fixed
+fresh execution, P1 .5 immediately next; retv A healthy. All31 original sparse
+sources active295 assertions, empty repair scaffolding removed; minimum289/
+group390/progress234 nearest proof passes, prior fixture bytes unchanged.
+Packet julia-blind-collection-intake.json.gz retains actual closure; new normal
+suite registered once with only post-call .5 dormant. Nullable/admission remain.
