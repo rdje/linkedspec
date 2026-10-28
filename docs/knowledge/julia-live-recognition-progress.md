@@ -41,3 +41,10 @@ pass. Compiler/emitter/matching unchanged. Normal Julia driver includes exactly
 one new consumer. The packet retains initial harness Dict/interleaved-stream
 corrections before valid evidence; neither is product RED. Other Julia feature,
 lifecycle/Unicode/recursive admission and full canonical checks remain tracked.
+
+39.3.2 now routes early and normal repeated AND groups through the common loop
+progress guard and removes repetition_start_codeunit plumbing. All24 original
+guard sources remain unchanged; three historical scalar expectations become
+arrays and234 assertions pass. Current group mechanism/proof:
+[[julia-repeated-and-group-outcomes]]. Original .6 packet/9-control identity
+claim stays historical to that commit; no private early escape remains current.

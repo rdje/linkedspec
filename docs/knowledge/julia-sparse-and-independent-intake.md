@@ -3,11 +3,10 @@ id: julia-sparse-and-independent-intake
 title: Independent Julia sparse AND intake owns dependency group minimum blind progress and nullable acceptance gaps
 answers:
   - "what did independent Julia sparse AND intake establish"
-  - "why does Julia repeated AND return only the first group"
   - "why does Julia implicit Default blind return null after accepted children"
   - "does Julia accepted null action preserve matched status"
 date: 2026-10-28
-status:31-source intake complete; live progress39.3.6 and required steps39.3.1 repaired/targeted-checked, groups .2 next
+status:31-source intake complete; live progress39.3.6 required steps39.3.1 groups39.3.2 repaired/targeted-checked, remaining minima .3 next
 tags: [julia, sparse-and, dependency, repetition, minimum, blind-call, progress, nullable, intake]
 evidence: "julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources."
 reverify: "Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish."
@@ -58,3 +57,9 @@ and logical identity while preserving full structural catalogs.27 active sources
 19control identity and same27 baseline fresh modules. Current mechanism/proof:
 [[julia-and-required-dependency-steps]]. Original intake packet stays frozen;
 accepted-null matched gap .7 and other bounded children remain open.
+
+39.3.2 now separates accepted repeated AND groups from whole-rule lifecycle
+returns and collects one value/[] per complete group.21 sources39inputs3healthy
+18RED ->21pass390 assertions, same baseline modules and exact input identity.
+Current mechanism/proof: [[julia-repeated-and-group-outcomes]]. Remaining
+noncollecting regex/blind minimum paths .3 follow; original intake stays frozen.

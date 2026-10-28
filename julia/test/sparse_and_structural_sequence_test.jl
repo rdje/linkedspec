@@ -3,8 +3,6 @@ module JuliaSparseAndStructuralSequence
 using LinkedSpecJulia, JSON3, Test
 
 const REPAIR_OWNERS = Dict(
-    "repeated_return" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2",
-    "repeated_nonreturn" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2",
     "blind_default" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4",
     "blind_minimum" => "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3",
 )

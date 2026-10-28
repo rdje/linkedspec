@@ -8354,13 +8354,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.1 - preserve Julia authored AND required dependency steps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2`
-  Status: `pending` / P1 repeated AND group outcomes
+  Status: `completed` / repeated AND per-group outcomes
   Goal: Collect exactly one result per accepted repeated AND group with falsey values independent of acceptance.
   Acceptance: repeated_return exits whole rule with BODY at4 instead of two values at8, and repeated_nonreturn full8 returns null instead of[[],[]]. Keep custom IT/whole-rule lifecycle authority, skip remaining slots after group action return, reset counters/sequence and preserve partial/minimum/cursor/progress. Qualify falsey/nested cases before production edit, no CHOICE-only blanket policy.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:21 sources39 inputs3healthy18actualRED ->21pass390 assertions SDK matched/value/cursor/generated/fresh; same21 baseline modules, exact inputs/three control observations; all24 guard sources unchanged/three owned result oracles updated; Julia live recognition repetition progress:234, Julia explicit-repetition action-result admission:162, Julia sparse AND structural and required sequence:271pass2owned-dormant; single normal registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining Julia/peer/registration/pressure/lifecycle repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/return/value/control-flow distinctions, no population measurement.
+
+  Activation: clean `58a6cc6988eb929748bb0dfff0417785571a854b` after typed required-step repair. Qualify exact early/falsey/null/nested/no-return/IT/partial/minimum/native/generated/fresh sources before distinct group-return implementation. Lifecycle returns stay whole-rule; common .6 progress must own normal/early accepted completion. Only owned dormant fixtures and three historical scalar guard expectations may change.
+
+
+  - [x] **REPRODUCE / ISSUE**:21 sources39 inputs3healthy18actualRED. Repeated AND acode returns one scalar before count/minimum/IT rather than group values; null loses matched status, implicit full groups lose[], partial minima throw. Exact native/restored/generated/fresh baseline and original I/LS/LE controls retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _accept_runtime_regex_match! throws whole-rule _RuntimeActionReturn because AND has no CHOICE collector; _execute_runtime_rule! catches before repeated loop counts/reset/IT. _execute_runtime_regex_rule! has no independent accepted group value/collector. Actual baseline cursor/action/trace and matched/value records distinguish early whole-rule exit from completed groups.
+  - [x] **FIX**: Private _RuntimeAndGroupReturn accepts one early action group independently of payload, skips remaining slots/post-return LE and reaches shared completion. Collect one copied explicit value or[] per complete group, discard partial groups and return failed/null below AND-acode minimum; custom IT suppresses default append. Lifecycle return channel stays whole-rule. Common live progress owns early/normal groups, removing obsolete start parameter/early escape guard.
+  - [x] **ADDRESSED (verified)**:21pass390 assertions39 inputs SDK matched/value/cursor/plan and same21 baseline emitted modules/consumer separate process. Exact raw source/normalized/compiled/plan/emitted and three healthy lifecycle observations unchanged. Nested/falsey/null/early/implicit/IT/partial/zero-min/max/reset/recognition controls pass; true nullable aggregate versus failed-null minimum/cursor is explicit.
+  - [x] **NO REGRESSION**: Neighbors Julia live recognition repetition progress:234, Julia explicit-repetition action-result admission:162, Julia sparse AND structural and required sequence:271pass2owned-dormant pass. All24 guard source strings unchanged, only three .2-owned scalar expectations become arrays. Two owned sparse groups enabled; two unrelated blind/minimum owners stay dormant. Compiler/emitter/matching/recognition authority unchanged; no general null provenance/no-action/blind minimum/whole family admission claim. CHOICE collector and lifecycle authority remain separately tested.
+  - [x] **LOCKSTEP**: New normal suite registered once. julia-and-groups-intake.json.gz retains actual producer/fixture/runtime epochs/input/emission/native/generated/fresh/control/receipt closure. Book/cards/target/roadmap/task/live/resume/history align; original .6/.1 packets remain historical. .3 ordinary minima next, remaining Julia/safe Lua/admission/pressure/lifecycle/slot owners stay open; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2 - collect Julia repeated AND group outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3`
   Status: `pending` / P1 ordinary minimum miss
@@ -8370,6 +8381,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+
+  Group collector39.3.2 now returns ordinary null/matchedfalse for AND-acode minima. Remaining .3 scope is noncollecting regex and blind generic under-minimum throws after LX authority; qualify before edit, preserve real errors/cursor/no-hit/zero-min.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4`
   Status: `pending` / P1 blind iteration collections
@@ -8732,7 +8745,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.2` | `pending` | Repair Julia repeated AND per-group results and common progress completion. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.3` | `pending` | Repair remaining Julia no-action regex and blind ordinary minimum misses. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -248,3 +248,14 @@ logical traces and capture/cursor controls pass; live progress/duplicate-slot/
 choice neighbors pass. Compiler/emitter/matching/recognition authority unchanged.
 Packet julia-and-steps-intake.json.gz retains actual closure; normal driver
 registered once. Repeated group39.3.2 next, remaining Julia/peers/admission open.
+
+Julia39.3.2 separates accepted repeated AND group values from whole-rule
+lifecycle returns, with common progress and one copied explicit/[] value per
+complete group. Partial groups append nothing, AND-acode minima return failed
+null.21 sources39inputs3healthy18RED ->21pass390 assertions and same21 baseline
+fresh modules/exact inputs. All24 guard sources unchanged/three scalar oracles
+become arrays, two owned sparse groups enabled: current sparse271pass2dormant,
+progress234 and CHOICE162 nearest assertions pass. No compiler/emitter/matching/
+recognition authority/schema change. Packet julia-and-groups-intake.json.gz
+retains exact closure, normal driver registered once. Remaining no-action/blind
+minimum39.3.3 next, other Julia/peer/admission owners remain.

@@ -1636,6 +1636,11 @@ struct _RuntimeActionReturn <: Exception
     value::Any
 end
 
+# An action-edge return completes one repeated AND group, not the rule.
+struct _RuntimeAndGroupReturn <: Exception
+    value::Any
+end
+
 struct _RuntimeActionNext <: Exception end
 
 struct _RuntimeNextableBool
@@ -2384,6 +2389,8 @@ function _execute_runtime_regex_rule!(
     end
 
     action_iteration_values = _collects_explicit_action_iteration_values(rule) ? Any[] : nothing
+    and_iteration_values = uses_and_execution && !isempty(rule.action_edges) ? Any[] : nothing
+    has_custom_iteration = any(payload -> payload.lifecycle == "IT", rule.lifecycle_action_payloads)
     matches = 0
     made_failed_attempt = false
     for _ in 1:engine.max_iterations
@@ -2423,19 +2430,26 @@ function _execute_runtime_regex_rule!(
             end
         end
 
-        matched = _runtime_nextable_bool(() -> _execute_runtime_regex_once!(
-            engine,
-            rule,
-            context;
-            cursor_policy = cursor_policy,
-            and_sequence = and_required_steps !== nothing &&
-                (length(rule.regex_patterns) > 1 || length(and_required_steps) > 1),
-            and_required_steps = and_required_steps,
-            action_iteration_values = action_iteration_values,
-            repetition_start_codeunit = before,
-            match_preselected = capture_gaps,
-            preselected_match = selected_match,
-        ))
+        group_value = Any[]
+        matched = try
+            _runtime_nextable_bool(() -> _execute_runtime_regex_once!(
+                engine,
+                rule,
+                context;
+                cursor_policy = cursor_policy,
+                and_sequence = and_required_steps !== nothing &&
+                    (length(rule.regex_patterns) > 1 || length(and_required_steps) > 1),
+                and_required_steps = and_required_steps,
+                action_iteration_values = action_iteration_values,
+                collect_and_group_value = and_iteration_values !== nothing,
+                match_preselected = capture_gaps,
+                preselected_match = selected_match,
+            ))
+        catch failure
+            failure isa _RuntimeAndGroupReturn || rethrow()
+            group_value = failure.value
+            _RuntimeNextableBool(true, false)
+        end
         if matched.nexted
             _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
             matches += 1
@@ -2457,6 +2471,9 @@ function _execute_runtime_regex_rule!(
         if iteration_return !== nothing
             return _runtime_returned(iteration_return.value)
         end
+        if and_iteration_values !== nothing && !has_custom_iteration
+            push!(and_iteration_values, _runtime_copy(group_value))
+        end
         if context.cursor_codeunit == before
             break
         end
@@ -2468,7 +2485,7 @@ function _execute_runtime_regex_rule!(
         if loop_exit !== nothing
             return _runtime_returned(loop_exit.value)
         end
-        if action_iteration_values !== nothing
+        if action_iteration_values !== nothing || and_iteration_values !== nothing
             return _RuntimeRuleResult(false, nothing)
         end
         throw(RuntimeInterpreterException(
@@ -2494,8 +2511,8 @@ function _execute_runtime_regex_rule!(
     if exit_return !== nothing
         return _runtime_returned(exit_return.value)
     end
-    value = action_iteration_values === nothing ?
-        nothing : Any[action_iteration_values...]
+    value = and_iteration_values !== nothing ? Any[and_iteration_values...] :
+        action_iteration_values === nothing ? nothing : Any[action_iteration_values...]
     return _RuntimeRuleResult(matches > 0, value)
 end
 
@@ -2549,7 +2566,7 @@ function _execute_runtime_regex_once!(
     and_sequence::Bool = false,
     and_required_steps = nothing,
     action_iteration_values = nothing,
-    repetition_start_codeunit = nothing,
+    collect_and_group_value::Bool = false,
     match_preselected::Bool = false,
     preselected_match = nothing,
 )
@@ -2618,7 +2635,7 @@ function _execute_runtime_regex_once!(
                 one_match,
                 context;
                 action_iteration_values = action_iteration_values,
-                repetition_start_codeunit = repetition_start_codeunit,
+                collect_and_group_value = collect_and_group_value,
                 required_action = step.action,
             )
             _set_runtime_gap_phase!(context, rule.label, "LE")
@@ -2676,7 +2693,7 @@ function _execute_runtime_regex_once!(
         one_match,
         context;
         action_iteration_values = action_iteration_values,
-        repetition_start_codeunit = repetition_start_codeunit,
+        collect_and_group_value = collect_and_group_value,
     )
     _set_runtime_gap_phase!(context, rule.label, "LE")
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
@@ -2884,7 +2901,7 @@ function _accept_runtime_regex_match!(
     context::_RuntimeExecutionContext,
     ;
     action_iteration_values = nothing,
-    repetition_start_codeunit = nothing,
+    collect_and_group_value::Bool = false,
     required_action = nothing,
 )
     context.cursor_codeunit = one_match.codeunit_end
@@ -2912,12 +2929,10 @@ function _accept_runtime_regex_match!(
             current_edge,
         )
         if action_return !== nothing
+            if collect_and_group_value
+                throw(_RuntimeAndGroupReturn(action_return.value))
+            end
             if action_iteration_values === nothing
-                if rule.mode_metadata.is_and && repetition_start_codeunit !== nothing
-                    _assert_runtime_recognition_repetition_progress!(
-                        engine, context, rule.label, repetition_start_codeunit,
-                    )
-                end
                 throw(action_return)
             end
             push!(action_iteration_values, _runtime_copy(action_return.value))

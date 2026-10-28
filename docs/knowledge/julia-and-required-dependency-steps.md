@@ -7,7 +7,7 @@ answers:
   - "does Julia sparse AND retain edge-less structural regex slots"
   - "how does Julia preserve logical slot identity for duplicate required steps"
 date: 2026-10-28
-status: bounded39.3.1 repaired/targeted-checked; groups minima blind nullable and admission remain
+status: bounded39.3.1 and group39.3.2 repaired/targeted-checked; remaining minima blind nullable and admission open
 tags: [julia, and, required-steps, dependencies, regex-slots, action-order]
 evidence: "julia-and-steps-intake.json.gz retains27 active sources41 inputs19healthy8actualRED ->27pass247 assertions, four owned dormant, exact inputs/control identity and same27 baseline fresh modules."
 reverify: "bash tools/run_julia_project_data.sh --project=julia julia/test/sparse_and_structural_sequence_test.jl"
@@ -41,3 +41,8 @@ plan/fresh equality now also retains known under-minimum baseline error. Initial
 neighbor command omitted existing consumer's required Main.REPO_ROOT; corrected
 focused command sets const REPO_ROOT=pwd(), with initial progress234 success
 retained. These harness refinements supply no product RED credit.
+
+39.3.2 now enables the two owned repeated group cases; current sparse suite
+passes271 assertions with only blind/default/minimum two owners dormant.
+Group repair/proof: [[julia-repeated-and-group-outcomes]]. Original .1 packet
+remains frozen, raw structural fixture source unchanged.
