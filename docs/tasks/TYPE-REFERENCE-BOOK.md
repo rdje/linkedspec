@@ -8051,14 +8051,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6 - enforce live Dart recognition repetition progress and diagnostics`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1`
-  Status: `pending` / P1 after.6, before group/minimum repairs, before full39/23.4/push
+  Status: `completed` / typed required steps/action ordinals
   Goal: Separate required dependency steps from structural regex catalogs.
   Reproduce/root: Reversed ba misses while ab returns1; duplicate aa/a returns[1,1] at1; cross-owner cat misses while Hcat returnsBODY. Trace/catalog walk and all-index dispatch identify _executeRegexOnce/_acceptRegexMatch owners.
   Acceptance: Typed runtime steps preserve all local structural slots for qualifying same-owner increasing sparse refs; reversed/duplicate/cross-owner dependencies preserve authored action ordinals/one action per step. Preserve compact &, one-slot/no-edge/entry/indexed/capture/boundary/trace behavior and child-owned cursors. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
-  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
-  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:27 active sources41 inputs, exact RED/GREEN and source/normalized/compiled/plan/emitted identity; same27 fresh modules/consumer; actual native/generated event/trace identities; sparse28pass4owned-dormant and live guard combined52pass4skip; duplicate/body neighbors14pass; fatal changed analysis/format/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining repairs/registration/pressure; no public format/schema movement.
+  Claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+
+  Activation: clean `89f3f16ff70439fe3973837c06108f80a800dcda` after live guard39.2.6. Read frozen39.0 authority, current Dart/Rust cards, compiled edge resolution/identity contracts and current matcher/dispatch/trace/semantic-event owners. Compiler flattens each target into one edge with typed regexIndex/childRegexIndex/hasParentRegex; preserve compiler/format. Runtime steps use full structural catalog for local increasing sparse refs and existing parent-anchored/mixed/no-edge paths; pure edge-only reversed/duplicate/cross-owner refs use authored edge ordinal and one selected action. Include one-pattern duplicates/compact &, nonreturn group reset, local edge-only success, parent/mixed and original incoming/indexed/falsey/guard controls. Required-step identity must also prevent duplicate trace/semantic events for one physical hit. No outgoing-only generic AND filter or choice-policy change.
+
+
+  - [x] **REPRODUCE / ISSUE**: Final19healthy9RED4owned-dormant separates eight value/order sources and one observation test. Reversed ba/ab, duplicate aa/a and cross-owner cat/Hcat expose catalog-first traversal, co-fired actions and duplicate observations. Final41 active input rows retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _executeRegexOnce enumerated the full regex plan; _acceptRegexMatch dispatched every action at an index. _recordRegexSlotSelected expanded all logical identities for each duplicate hit. Physical catalog indices and authored action ordinals require separate runtime owners.
+  - [x] **FIX**: Private typed required steps select authored dependency/action occurrences for pure edge-only nonincreasing/cross-owner references; valid increasing local/parent/mixed/no-edge paths retain full catalogs. Build once per invocation, preserve repetition reset, compact & and one-pattern duplicate steps; carry selected logical identity through assertion/trace/semantic event.
+  - [x] **ADDRESSED (verified)**:27 source/normalized/compiled/plan/emitted records unchanged,41 active input rows native/restored/plan/fresh agree after repair. Same27 emitted modules and consumer reused.28pass4owned-dormant, actual duplicate Value#0 positions1/2 and cross physical2/logical Part#1 at3 with named capture pass.
+  - [x] **NO REGRESSION**: Live guard combined52pass4skip, duplicate15-role consumer plus13 active-body tests14pass. Local sparse/incoming/indexed/falsey/no-edge/parent/mixed/compact/reset/boundary controls retained. Fatal interpreter/test analysis and exact observation gate pass after type-only raw-Map warning correction. Compiler/emitter/matching/public identity helper and choice policy unchanged; no group/minimum/blind/full admission claim.
+  - [x] **LOCKSTEP**: dart-and-steps-intake.json.gz retains producers/epochs/inputs/results/runtime and fresh modules. Book/cards/target/roadmap/task/live/resume/history align. Rebuild runtime with existing generated source/plans. Repeated AND groups39.2.2 next; four unrelated owned regressions remain mandatory before admission. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1 - preserve Dart AND dependency order and action ordinals`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2`
   Status: `pending` / P1 after.1, before remaining minimum/blind repairs, before full39/23.4/push
@@ -8415,7 +8426,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1` | `pending` | Repair Dart required dependency steps and one action per ordinal. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2` | `pending` | Implement Dart repeated AND group outcomes and collection. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -116,3 +116,11 @@ record traces at0/1 pass; ordinary/one-shot/LE/cleanup preserved. Neutral2 and
 fatal analysis pass. Original sparse guard enabled:15pass7 owned dormant.
 Packet dart-live-progress-intake.json.gz retains all refinements/restoration.
 Required steps39.2.1 next; positive AND scalar controls qualified until.2.
+
+Dart39.2.1 now separates structural catalogs from authored dependency steps.
+27 active source records41 inputs preserve source/normalized/compiled/plan/emitted
+identity and reuse the same fresh modules/consumer.28pass4owned-dormant; with
+live guard52pass4skip, duplicate/body neighbors14pass. Actual duplicate and
+cross physical/logical event identities pass. Runtime-only; parent/mixed/local/
+no-edge/choice contracts preserved. Packet dart-and-steps-intake.json.gz retains
+all producers/inputs/epochs. Repeated groups39.2.2 next, then minimum/blind.

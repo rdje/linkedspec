@@ -3,13 +3,11 @@ id: dart-sparse-and-dependency-group-progress-gaps
 title: Dart sparse AND intake separates healthy local slots from dependency group minimum blind and live-progress gaps
 answers:
   - "does Dart sparse AND need all local regex slots"
-  - "why do reversed Dart AND dependencies miss ba"
-  - "why do duplicate Dart AND actions return at cursor one"
   - "does default blind Dart plan already iterate to cursor eight"
   - "does Dart indexed incoming AND start required slot zero"
   - "why does repeated AND return only the first scalar in Dart"
 date: 2026-10-28
-status: intake39.2.0/progress39.2.6 complete; steps.1/groups.2/minima.3/blind.4 remain
+status: intake39.2.0/progress39.2.6/steps39.2.1 complete; groups.2/minima.3/blind.4 remain
 tags: [dart, and, dependencies, repetition, recognition, progress, generated-source]
 evidence: "dart-sparse-and-intake.json.gz retains22 final source/normalized/compiled/plan/emitted records,34 inputs on native/restored/plan/fresh modules,14pass8RED, actual public traces and all original/refined epochs."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/sparse_and_structural_sequence_test.dart; dormant cases have exact repair owners and receive no success credit."
@@ -20,11 +18,12 @@ zero/false/empty/null payloads, required-tail/no-edge public match flags, bounda
 explicit AND blind collection, Default blind cursor8 and one-shot zero-width.
 Do not copy Rust's former indexed or Default iteration failures onto Dart.
 
-Required dependency order is broken separately: reversed ba misses while ab
+At intake required dependency order was broken separately: reversed ba misses while ab
 returns1; duplicate aa/a returns[1,1] at1; cross-owner cat misses while Hcat
 returnsBODY. Public trace and compiled catalogs show _executeRegexOnce full-plan
 enumeration and _acceptRegexMatch dispatching every edge sharing an index.
-39.2.1 owns typed structural/dependency steps after immediate progress.6.
+39.2.1 now repairs typed structural/dependency steps; current behavior and exact
+proof are in [[dart-and-required-dependency-steps]].
 
 Repeated AND returns escape as whole-rule _ActionReturn before group counts;
 the explicit action collector includes CHOICE only. Full nonreturn two groups
@@ -44,7 +43,8 @@ scope cleanup controls required. No exported facade/schema/effect widening.
 agree on value/matched/cursor; all22 emitted modules in a fresh Dart process
 agree on value or underlying wrapped errors. Fresh generated API exposes values,
 so its acceptance flags/cursors are not claimed. At intake all8 failures were retained with P1 owners. Progress39.2.6 is now
-enabled; current sparse15pass7 owned dormant, all7 required before admission.
+enabled at its commit. After required-step39.2.1 repair, current sparse28pass4
+owned dormant; all4 group/minimum/blind regressions are required before admission.
 
 Initial counter hits+1 was unsupported infix, not a product regression; canonical
 call-form add(hits,1) exposes the real duplicate bug. An explicit E return may
@@ -54,5 +54,5 @@ final producer/input/output/module/trace epochs are retained; no production,
 schema/family/ledger change, canonical admission or inferred peer result.
 
 Current guard/SDK/trace provenance and exact24-source RED/GREEN/fresh reuse are
-in [[dart-live-recognition-repetition-progress]]. Required steps39.2.1 next;
-no other initial failure is inferred repaired.
+in [[dart-live-recognition-repetition-progress]]. Repeated groups39.2.2 next;
+minimum/blind failures are not inferred repaired.

@@ -1102,6 +1102,9 @@ final class LinkedSpecRuntimeEngine {
   }) {
     final min = rule.modeMetadata.repMin;
     final captureGaps = rule.captureGaps != null;
+    final andRequiredSteps = usesAndExecution
+        ? _andRequiredStepsFor(rule)
+        : null;
     if (min == null) {
       var matchedAny = false;
       for (
@@ -1116,7 +1119,10 @@ final class LinkedSpecRuntimeEngine {
             context,
             entryRegexIndex: entryRegexIndex,
             cursorPolicy: cursorPolicy,
-            andSequence: usesAndExecution && rule.regexPatterns.length > 1,
+            andSequence:
+                andRequiredSteps != null &&
+                (rule.regexPatterns.length > 1 || andRequiredSteps.length > 1),
+            andRequiredSteps: andRequiredSteps,
           ),
         );
         if (matched.nexted) {
@@ -1197,7 +1203,10 @@ final class LinkedSpecRuntimeEngine {
           rule,
           context,
           cursorPolicy: cursorPolicy,
-          andSequence: usesAndExecution && rule.regexPatterns.length > 1,
+          andSequence:
+              andRequiredSteps != null &&
+              (rule.regexPatterns.length > 1 || andRequiredSteps.length > 1),
+          andRequiredSteps: andRequiredSteps,
           actionIterationValues: actionIterationValues,
           repetitionStartCodeUnit: before,
           matchPreselected: captureGaps,
@@ -1312,6 +1321,7 @@ final class LinkedSpecRuntimeEngine {
     int entryRegexIndex = 0,
     required LinkedSpecParseMode cursorPolicy,
     bool andSequence = false,
+    List<_AndRequiredStep>? andRequiredSteps,
     List<Object?>? actionIterationValues,
     int? repetitionStartCodeUnit,
     bool matchPreselected = false,
@@ -1332,11 +1342,9 @@ final class LinkedSpecRuntimeEngine {
     }
 
     if (!matchPreselected && andSequence) {
-      for (
-        var expectedIndex = 0;
-        expectedIndex < plan.patterns.length;
-        expectedIndex += 1
-      ) {
+      for (final step in andRequiredSteps ?? _andRequiredStepsFor(rule)) {
+        final expectedIndex = step.regexIndex;
+        final requiredIdentity = step.identity;
         final match = _matchSpecific(
           plan,
           expectedIndex,
@@ -1368,6 +1376,7 @@ final class LinkedSpecRuntimeEngine {
           rule,
           expectedIndex,
           match.alternativeIndex,
+          requiredIdentity: requiredIdentity,
         );
         _recordRegexSlotSelected(
           context,
@@ -1375,6 +1384,7 @@ final class LinkedSpecRuntimeEngine {
           match.alternativeIndex,
           positionCodeUnit: match.codeUnitEnd,
           selectionRole: 'ordered_required',
+          requiredIdentity: requiredIdentity,
         );
         context.setGapPhase(rule.label, 'edge');
         _acceptRegexMatch(
@@ -1383,6 +1393,7 @@ final class LinkedSpecRuntimeEngine {
           context,
           actionIterationValues: actionIterationValues,
           repetitionStartCodeUnit: repetitionStartCodeUnit,
+          requiredAction: step.action,
         );
         context.setGapPhase(rule.label, 'LE');
         final loopEnd = _executeLifecycle(rule, 'LE', context);
@@ -1532,10 +1543,15 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     CompiledRule rule,
     int expectedIndex,
-    int actualIndex,
-  ) {
-    final expected = compiledRegexSlotIdentitiesFor(rule, expectedIndex).first;
-    final actual = compiledRegexSlotIdentitiesFor(rule, actualIndex).first;
+    int actualIndex, {
+    CompiledRegexSlotIdentity? requiredIdentity,
+  }) {
+    final expected =
+        requiredIdentity ??
+        compiledRegexSlotIdentitiesFor(rule, expectedIndex).first;
+    final actual = requiredIdentity != null && actualIndex == expectedIndex
+        ? requiredIdentity
+        : compiledRegexSlotIdentitiesFor(rule, actualIndex).first;
     try {
       assertOrderedRegexSlotIdentity(
         ruleLabel: rule.label,
@@ -1567,8 +1583,12 @@ final class LinkedSpecRuntimeEngine {
     int regexIndex, {
     required int positionCodeUnit,
     required String selectionRole,
+    CompiledRegexSlotIdentity? requiredIdentity,
   }) {
-    for (final identity in compiledRegexSlotIdentitiesFor(rule, regexIndex)) {
+    final identities = requiredIdentity == null
+        ? compiledRegexSlotIdentitiesFor(rule, regexIndex)
+        : <CompiledRegexSlotIdentity>[requiredIdentity];
+    for (final identity in identities) {
       if (context.semanticObservationSink != null) {
         _emitSemanticObservation(
           context,
@@ -1662,12 +1682,15 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context, {
     List<Object?>? actionIterationValues,
     int? repetitionStartCodeUnit,
+    _MatchedActionEdge? requiredAction,
   }) {
     context.cursorCodeUnit = match.codeUnitEnd;
     context.registers = context.registers.withLocalMatch(match);
     context.noteRecognitionMatch(match);
 
-    final edgeMatches = _actionEdgesFor(rule, match.alternativeIndex);
+    final edgeMatches = requiredAction == null
+        ? _actionEdgesFor(rule, match.alternativeIndex)
+        : <_MatchedActionEdge>[requiredAction];
     if (edgeMatches.isEmpty) {
       return;
     }
@@ -1708,6 +1731,48 @@ final class LinkedSpecRuntimeEngine {
         context.retv = child.value;
       }
     }
+  }
+
+  List<_AndRequiredStep> _andRequiredStepsFor(CompiledRule rule) {
+    final edges = rule.actionEdges;
+    final edgeOnly =
+        edges.isNotEmpty &&
+        edges.every((edge) => !edge.hasParentRegex && edge.targets.length == 1);
+    if (edgeOnly) {
+      var increasingLocal = true;
+      var previous = -1;
+      for (final edge in edges) {
+        final index = edge.childRegexIndex;
+        if (edge.targets.single.label != rule.label ||
+            index <= previous ||
+            index < 0 ||
+            index >= rule.regexPatterns.length) {
+          increasingLocal = false;
+          break;
+        }
+        previous = index;
+      }
+      if (!increasingLocal) {
+        // Each authored dependency owns one action occurrence, even when
+        // two dependencies name the same immutable structural regex slot.
+        return List.unmodifiable([
+          for (final edge in edges)
+            _AndRequiredStep(
+              edge.regexIndex,
+              action: _MatchedActionEdge(
+                edge: edge,
+                target: edge.targets.single,
+              ),
+            ),
+        ]);
+      }
+    }
+    // Sparse increasing local references and parent-anchored/mixed/no-edge
+    // rules retain their complete structural catalog, including delimiters.
+    return List.unmodifiable([
+      for (var index = 0; index < rule.regexPatterns.length; index += 1)
+        _AndRequiredStep(index),
+    ]);
   }
 
   _RegexPlan _regexPlanFor(CompiledRule rule) {
@@ -9730,6 +9795,24 @@ final class _RegexPlan {
 
   final List<String> patterns;
   final RuntimeRegexAlternation matcher;
+}
+
+/// One runtime-only required step; pattern and action ordinal stay distinct.
+final class _AndRequiredStep {
+  const _AndRequiredStep(this.regexIndex, {this.action});
+
+  final int regexIndex;
+  final _MatchedActionEdge? action;
+
+  CompiledRegexSlotIdentity? get identity {
+    final selected = action;
+    return selected == null
+        ? null
+        : CompiledRegexSlotIdentity(
+            targetRule: selected.target.label,
+            regexIndex: selected.edge.childRegexIndex,
+          );
+  }
 }
 
 final class _MatchedActionEdge {

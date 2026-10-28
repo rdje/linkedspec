@@ -295,5 +295,132 @@
         "expected_match": false
       }
     ]
+  },
+  {
+    "name": "duplicate_one_slot",
+    "source": "Value::AND\n I {hits=0}\n /a/\n -> Value[0] {hits=add(hits,1)}\n -> Value[0] {return([cursor_pos(),hits])}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "input": "a",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "compact_duplicate",
+    "source": "Value::&\n I {hits=0}\n /a/\n -> Value[0] {hits=add(hits,1)}\n -> Value[0] {return([cursor_pos(),hits])}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          2,
+          1
+        ]
+      },
+      {
+        "input": "a",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "compact_reversed",
+    "source": "Value::&\n /a/\n /b/\n -> Value[1] {cursor_pos()}\n -> Value[0] {return(cursor_pos())}\n",
+    "cases": [
+      {
+        "input": "ba",
+        "expected": 2
+      },
+      {
+        "input": "ab",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "parent_mixed",
+    "source": "Value::AND\n I {hits=[]}\n /a/\n /b/ -> Value[1] {push(hits,\"B\")}\n -> Value[0] {push(hits,\"A\")}\n E {return(copy(hits))}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          "A",
+          "B"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "parent_anchor",
+    "source": "Value::AND\n /H/ -> Part[1] {return(\"PARENT\")}\nPart:\n /x/\n /cat/\n",
+    "cases": [
+      {
+        "input": "H",
+        "expected": "PARENT"
+      },
+      {
+        "input": "cat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "repeated_reversed_nonreturn",
+    "source": "Value::AND{2}\n /a/\n /b/\n -> Value[1] {cursor_pos()}\n -> Value[0] {cursor_pos()}\n EX {return(cursor_pos())}\n E {return(cursor_pos())}\n",
+    "cases": [
+      {
+        "input": "baba",
+        "expected": 4
+      }
+    ]
+  },
+  {
+    "name": "one_slot_compat",
+    "source": "Value::AND\n /a/ -> Value[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": 0
+      }
+    ]
+  },
+  {
+    "name": "local_edge_only",
+    "source": "Value::AND\n /H/\n /cat/\n -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": "BODY"
+      },
+      {
+        "input": "cat",
+        "expected": null
+      }
+    ]
+  },
+  {
+    "name": "cross_distinct_indices",
+    "source": "Value::AND\n /H/\n /unused/\n -> Part[1] {return([match_text(),match_named(token),cursor_pos()])}\nPart:\n /x/\n /(?<token>cat)/\n",
+    "cases": [
+      {
+        "input": "cat",
+        "expected": [
+          "cat",
+          "cat",
+          3
+        ]
+      },
+      {
+        "input": "Hunusedcat",
+        "expected": null
+      }
+    ]
   }
 ]

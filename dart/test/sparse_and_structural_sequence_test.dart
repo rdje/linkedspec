@@ -20,9 +20,6 @@ Map<String, Object?> observe(Object? Function() call) {
 }
 
 const repairOwners = <String, String>{
-  'reversed': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1',
-  'duplicate': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1',
-  'cross_owner': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1',
   'repeated_return': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2',
   'repeated_nonreturn': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2',
   'blind_minimum': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3',
@@ -164,4 +161,88 @@ void main() {
           : 'P1 ${repairOwners[name]}; retained actual RED, required before admission',
     );
   }
+  test(
+    'Dart required-step observations retain one identity per actual hit',
+    () {
+      final observations = <String, Object?>{};
+      for (final name in ['duplicate_one_slot', 'cross_distinct_indices']) {
+        final row = fixtures.singleWhere((row) => row['name'] == name);
+        final source = row['source']! as String;
+        final input = name == 'duplicate_one_slot' ? 'aa' : 'cat';
+        final compiled = compileSpec(
+          parseSpecWithStagedUserFunctionDefinitions(source),
+        );
+        final plan = buildGeneratedRulePlan(compiled);
+        for (final generated in [false, true]) {
+          final events = <RuntimeSemanticObservationEvent>[];
+          final trace = LinkedSpecTraceEmitter(
+            LinkedSpecTraceConfig.enabled(LinkedSpecTraceLevel.high),
+            stdoutWriter: (_) {},
+          );
+          final result = generated
+              ? LinkedSpecRuntimeEngine(compiled).executeGeneratedWithPlan(
+                  input,
+                  {
+                    for (final row in plan)
+                      row.label: GeneratedRuleFamily.fromWireName(row.family)!,
+                  },
+                  'dart-and-steps.spec',
+                  trace: trace,
+                  semanticObservationSink: events.add,
+                )
+              : LinkedSpecRuntimeEngine(compiled).execute(
+                  input,
+                  trace: trace,
+                  semanticObservationSink: events.add,
+                );
+          observations['$name/$generated'] = {
+            'source': source,
+            'value': result.value,
+            'slots': [
+              for (final event in events)
+                if (event.eventKind ==
+                    RuntimeSemanticObservationEventKind.regexSlotSelected)
+                  event.toJson(),
+            ],
+            'trace': [
+              for (final event in trace.events)
+                if (event.topic == 'dart_runtime:regex_slot_selected')
+                  event.details,
+            ],
+          };
+        }
+      }
+      print('DART_AND_STEPS_OBSERVATION ${jsonEncode(observations)}');
+      for (final item in observations.entries) {
+        final duplicate = item.key.startsWith('duplicate_one_slot/');
+        final actual = item.value as Map<String, Object?>;
+        expect(actual['value'], duplicate ? [2, 1] : ['cat', 'cat', 3]);
+        final slots = (actual['slots'] as List).cast<Map<String, Object?>>();
+        expect(
+          slots.map((row) => row['position']).toList(),
+          duplicate ? [1, 2] : [3],
+        );
+        expect(
+          slots.map((row) => row['target_rule']).toList(),
+          duplicate ? ['Value', 'Value'] : ['Part'],
+        );
+        expect(
+          slots.map((row) => row['regex_index']).toList(),
+          duplicate ? [0, 0] : [1],
+        );
+        final trace = (actual['trace'] as List).cast<String>();
+        expect(trace, hasLength(duplicate ? 2 : 1));
+        for (final selected in trace) {
+          expect(
+            selected,
+            contains(
+              duplicate
+                  ? 'target_rule=Value regex_index=0'
+                  : 'target_rule=Part regex_index=1',
+            ),
+          );
+        }
+      }
+    },
+  );
 }
