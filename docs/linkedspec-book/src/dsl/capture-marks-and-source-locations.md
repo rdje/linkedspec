@@ -270,9 +270,9 @@ Rust's admission advanced only its rollout row; no later row was promoted early.
 Dart has the same package-private end-to-end integration. The parser lowers the four forms to dedicated non-eager
 ActionIR nodes, retains static `call(Rule)` structurally, and synchronizes live UTF-16 cursor, anonymous-boundary,
 and invocation-mark state through the private authority. Recursive effect closure and cursor-only progress use the
-neutral policy fixtures. Current Dart limitation: actual zero-width repetition inside `recognize_once` can return true instead of `recognition_zero_progress_repetition`; an immediate tracked live guard repair precedes minimum normalization. Native, serialized reconstruction, generated-plan, and freshly analyzed emitted-source execution
+neutral policy. Dart now rejects completed zero-progress repetition iterations in the example above before IT/max/ordinary termination. Whole AND-group progress permits zero-width slots when another slot consumes. Existing SDK diagnostics identify failing rule/runtime phase; caller-owned trace retains origin/offsets. Ordinary/one-shot zero behavior and whole-rule LE authority remain. Targeted24-case native/restored/plan checks and emitted-module reuse pass; other Dart dependency/group/minimum/blind repairs remain tracked. Native, serialized reconstruction, generated-plan, and freshly analyzed emitted-source execution
 preserve a successful `false` payload, while ordinary cursor-stack behavior remains compatible. The ordinary
-10-test consumer is required and executed exactly once by canonical CI:
+12-test consumer is required and executed exactly once by canonical CI:
 
 ```bash
 cd dart

@@ -8026,14 +8026,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.0 - isolate Dart AND dependency group minimum and progress gaps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6`
-  Status: `pending` / P1 immediate after intake, before minimum normalization, before full39/23.4/push
+  Status: `completed` / typed live guard and existing SDK diagnostics
   Goal: Enforce live typed recognition repetition progress.
   Reproduce/root: Guard:OR{1} /(?=a)/ returning0 inside recognize_once returns true at0 on all4 routes; public trace selects Guard0..0. Runtime loops silently stop, authority validateProgress is fixture-only.
   Acceptance: Use typed internal producer shared with neutral adapter, not fixture-shaped production JSON. Guard completed accepted hit/group before IT/max/ordinary exits; preserve existing canonical code/stage/rule/origin/start/end, complete-group progress, ordinary/one-shot zero behavior and cancellation/nesting cleanup. No new exported facade, public error schema or widened effects. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
-  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
-  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:24 final valid sources exact-base9pass15RED ->24pass; raw source/normalized/compiled/plan/emitted identity, reused24 fresh modules/consumer;3 SDK code/rule/phase and actual native record trace offsets0/1/direct/current-edge/scope cleanup; sparse15pass7owned dormant, combined39pass7skip; neutral/false-payload2 and fatal changed analysis/format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push; no exported facade/schema/format/ledger movement.
+  Claim verification: none: Finite authored live-progress/error/control/interface distinctions, no population measurement.
+
+  Activation: clean `548909ff64be427affd0047a570a683cf1430bb4` after independent intake. Read actual non-eager direct/current-edge dispatch, rule invocation/error/finally lifecycle, repetition next/normal/max exits, early repeated-AND action return and package-internal non-exported authority. Use an origin stack scoped with try/finally around actual callee, typed internal progress producer shared by neutral adapter, and completed-group cursor. Preserve existing package-private RecognitionTransactionException five-field record/message; it has no stage field. Assert phase only where an existing carrier exposes it (generated execute_generated), never invent a new native record field or exported facade. Native record fields remain tested through existing internal error type, fresh message/phase through public envelope. Whole lifecycle override semantics remain; early repeated-AND action return needs a progress check without prematurely implementing group collection.
+
+  Diagnostic integration finding: First live wire rejects14 valid zero-progress cases;9 controls stay healthy, while one invalid nested-checkpoint test raises the existing nesting error, but _executeActionBlock wraps the private authority error into generic RuntimeInterpreterException, losing typed code/rule fields. The initial test assumption of direct private SDK errors was wrong. Preserve established public RuntimeInterpreterException: project existing code/rule/runtime_execution at the live guard, retain private five-field record and expose its image through caller-owned trace using the existing event schema. Refined tests require SDK fields on all3 carriers and actual native trace code/rule/origin/offsets; fresh envelope phase separately. No new exported accessor or error schema. Retain initial wire/source/results, then demonstrate corrected diagnostic test RED before projection.
+
+  Cleanup-proof correction: Nested checkpoint creation is canonically forbidden and was not a valid progress-error control. Preserve original source/module/output and give it no progress RED credit. Replace it with scope_cleanup: complete one legal one-shot scope, call an ordinary zero-width rule outside scope, then enter a new zero-width repeated recognition scope. This distinguishes a leaked strict scope without widening effects or nesting. Final24 sources will be re-falsified against exact clean-base runtime snapshots, then restored to fixed snapshots with hashes/pointer before final GREEN; no task-tree pivot.
+
+
+  - [x] **REPRODUCE / ISSUE**: Final24 valid sources separate15 progress errors from9 controls; exact-base9pass15fail retained. Actual Guard0..0 was accepted on all4 routes. Invalid nested-checkpoint source is preserved without progress RED credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Repetition loops had only ordinary zero exits; validateProgress was fixture-only. Early repeated-AND action returns bypass normal completion. Generic action wrapping erased private error attribution; corrected diagnostic RED proves missing SDK fields. observe_recognition binds aborted records then rethrows, preserving first unwinding cause.
+  - [x] **FIX**: Typed internal producer plus try/finally caller scope; completed normal/next iteration guards after LE authority and before IT/max/ordinary exits; whole repetition start for early AND action return. Retain private record, project existing SDK fields and caller-owned trace image. No fixture-shaped live interface/public schema or action-wrapper-wide error change.
+  - [x] **ADDRESSED (verified)**:24pass and original guard enabled, combined39pass7 owned skipped.24 raw source/normalized/compiled/plan/emitted records unchanged across exact-base/fixed replay; same24 fresh modules/consumer reused.3 SDK code/rule/runtime phase, actual native trace five-field image at0/1 and fresh phase/source/rule/code pass.
+  - [x] **NO REGRESSION**: Ordinary/one-shot zero, consuming choice/blind, leading/trailing zero AND, max1/unbounded/IT/direct/current-edge and whole-rule LE controls pass. Legal completed scope then ordinary zero then failing scope detects leaked strictness. Neutral/false-payload2 and fatal changed analysis pass; compiler/action/emitter unchanged. Positive AND scalar shapes stay qualified until39.2.2; no full group-shape/Unicode/fresh private-origin claim.
+  - [x] **LOCKSTEP**: dart-live-progress-intake.json.gz retains all actual producers/inputs/results/modules/trace/restoration/refinements. Book/Toolbox/cards/target/roadmap/task/live/resume/history align; book10-test count corrected to current12 declarations without full rerun. Updated runtime uses existing emitted source. Required steps39.2.1 next;7 remaining regressions and full admission prerequisites owned. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6 - enforce live Dart recognition repetition progress and diagnostics`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1`
   Status: `pending` / P1 after.6, before group/minimum repairs, before full39/23.4/push
@@ -8054,6 +8069,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
   Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
   Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+
+  Direct dependent: recognition_repetition_progress_test.dart preserves current positive/ordinary AND scalar shapes until this group repair. Update their value expectations deliberately under frozen collection authority while preserving error/progress/trace distinctions and source identities.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3`
   Status: `pending` / P1 after.6/.2, before collection/peers, before full39/23.4/push
@@ -8398,7 +8415,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6` | `pending` | Enforce actual Dart recognition progress before ordinary minimum normalization. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1` | `pending` | Repair Dart required dependency steps and one action per ordinal. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

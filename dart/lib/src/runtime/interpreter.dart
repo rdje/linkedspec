@@ -955,6 +955,7 @@ final class LinkedSpecRuntimeEngine {
         ),
       );
       if (matched.nexted) {
+        context.assertRecognitionRepetitionProgress(rule.label, before);
         matches += 1;
         if (context.cursorCodeUnit == before) {
           break;
@@ -971,6 +972,7 @@ final class LinkedSpecRuntimeEngine {
       if (loopEnd != null) {
         return _returned(loopEnd.value);
       }
+      context.assertRecognitionRepetitionProgress(rule.label, before);
       final iterationReturn = _executeLifecycle(rule, 'IT', context);
       if (iterationReturn != null) {
         return _returned(iterationReturn.value);
@@ -1197,11 +1199,13 @@ final class LinkedSpecRuntimeEngine {
           cursorPolicy: cursorPolicy,
           andSequence: usesAndExecution && rule.regexPatterns.length > 1,
           actionIterationValues: actionIterationValues,
+          repetitionStartCodeUnit: before,
           matchPreselected: captureGaps,
           preselectedMatch: selectedMatch,
         ),
       );
       if (matched.nexted) {
+        context.assertRecognitionRepetitionProgress(rule.label, before);
         matches += 1;
         if (context.cursorCodeUnit == before) {
           break;
@@ -1213,6 +1217,7 @@ final class LinkedSpecRuntimeEngine {
         break;
       }
 
+      context.assertRecognitionRepetitionProgress(rule.label, before);
       if (captureGaps) {
         _commitGapCandidate(rule, context);
       }
@@ -1308,6 +1313,7 @@ final class LinkedSpecRuntimeEngine {
     required LinkedSpecParseMode cursorPolicy,
     bool andSequence = false,
     List<Object?>? actionIterationValues,
+    int? repetitionStartCodeUnit,
     bool matchPreselected = false,
     RuntimeRegexMatch? preselectedMatch,
   }) {
@@ -1376,6 +1382,7 @@ final class LinkedSpecRuntimeEngine {
           match,
           context,
           actionIterationValues: actionIterationValues,
+          repetitionStartCodeUnit: repetitionStartCodeUnit,
         );
         context.setGapPhase(rule.label, 'LE');
         final loopEnd = _executeLifecycle(rule, 'LE', context);
@@ -1438,6 +1445,7 @@ final class LinkedSpecRuntimeEngine {
       match,
       context,
       actionIterationValues: actionIterationValues,
+      repetitionStartCodeUnit: repetitionStartCodeUnit,
     );
     context.setGapPhase(rule.label, 'LE');
     final loopEnd = _executeLifecycle(rule, 'LE', context);
@@ -1653,6 +1661,7 @@ final class LinkedSpecRuntimeEngine {
     RuntimeRegexMatch match,
     _RuntimeExecutionContext context, {
     List<Object?>? actionIterationValues,
+    int? repetitionStartCodeUnit,
   }) {
     context.cursorCodeUnit = match.codeUnitEnd;
     context.registers = context.registers.withLocalMatch(match);
@@ -1683,6 +1692,12 @@ final class LinkedSpecRuntimeEngine {
       );
       if (actionReturn != null) {
         if (actionIterationValues == null) {
+          if (rule.modeMetadata.isAnd && repetitionStartCodeUnit != null) {
+            context.assertRecognitionRepetitionProgress(
+              rule.label,
+              repetitionStartCodeUnit,
+            );
+          }
           throw _ActionReturn(actionReturn.value);
         }
         actionIterationValues.add(_copyValue(actionReturn.value));
@@ -3703,9 +3718,12 @@ final class LinkedSpecRuntimeEngine {
         context.hashes.remove(target);
         return _copyValue(stored);
       case ActionRecognizeOnceExpr(:final token, :final rule):
-        final child = currentEdge != null && currentEdge.target.label == rule
-            ? _executeActionEdgeChild(currentEdge, context)
-            : _executeRule(rule, 0, context);
+        final child = context.withRecognitionProgressScope(
+          ruleLabel,
+          () => currentEdge != null && currentEdge.target.label == rule
+              ? _executeActionEdgeChild(currentEdge, context)
+              : _executeRule(rule, 0, context),
+        );
         context.retv = child.value;
         return context.recognitionAttempt(
           ruleLabel,
@@ -8413,6 +8431,8 @@ final class _RuntimeExecutionContext {
       <Map<String, _VariableSnapshot>>[];
   final List<_RecognitionRuntimeFrame> _recognitionFrames =
       <_RecognitionRuntimeFrame>[];
+  final List<String> _recognitionProgressOrigins = <String>[];
+  RecognitionTransactionException? _recognitionProgressFailure;
   final List<_RecursiveObservationScope> _recursiveObservationScopes =
       <_RecursiveObservationScope>[];
   int _ruleLocalBindingSuppressionDepth = 0;
@@ -8609,6 +8629,55 @@ final class _RuntimeExecutionContext {
     frame
       ..entryCodeUnit = entryCodeUnit
       ..observationScope = scope;
+  }
+
+  _RuleResult withRecognitionProgressScope(
+    String caller,
+    _RuleResult Function() recognize,
+  ) {
+    _recognitionProgressOrigins.add('$caller:recognize_once');
+    try {
+      return recognize();
+    } finally {
+      _recognitionProgressOrigins.removeLast();
+    }
+  }
+
+  void assertRecognitionRepetitionProgress(String rule, int startCodeUnit) {
+    if (_recognitionProgressOrigins.isEmpty) {
+      return;
+    }
+    try {
+      recognitionAuthority.validateRepetitionProgress(
+        rule: rule,
+        origin: _recognitionProgressOrigins.last,
+        startOffset: startCodeUnit,
+        endOffset: cursorCodeUnit,
+      );
+    } on RecognitionTransactionException catch (error) {
+      // Keep the typed producer record private, while preserving the existing
+      // public SDK exception and diagnostic fields through action unwinding.
+      final failure = _recognitionProgressFailure ??= error;
+      final record = failure.toJson();
+      trace?.emitEvent(
+        LinkedSpecTraceEventKind.mark,
+        'dart_runtime:recognition_repetition_progress_failure',
+        'code=${record['code']} rule=${record['rule']} '
+            'origin=${record['origin']} start_offset=${record['start_offset']} '
+            'end_offset=${record['end_offset']}',
+        LinkedSpecTraceLevel.low,
+      );
+      throw RuntimeInterpreterException(
+        failure.toString(),
+        diagnostic: diagnostic(
+          stage: 'runtime_execution',
+          code: record['code']! as String,
+          summary: 'Dart recognition repetition made no progress',
+          detail: failure.toString(),
+          ruleLabel: record['rule']! as String,
+        ),
+      );
+    }
   }
 
   void noteRecognitionMatch(RuntimeRegexMatch match) {

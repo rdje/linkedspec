@@ -800,7 +800,25 @@ final class RecognitionTransactionAuthority {
     }
   }
 
-  /// Enforces cursor-only progress for accepted repetition/recursion edges.
+  /// Checks one completed live repetition through this non-exported authority.
+  void validateRepetitionProgress({
+    required String rule,
+    required String origin,
+    required int startOffset,
+    required int endOffset,
+  }) {
+    if (endOffset > startOffset) {
+      return;
+    }
+    throw _error(_zeroProgressRepetitionCode, <String, Object?>{
+      'rule': rule,
+      'origin': origin,
+      'start_offset': startOffset,
+      'end_offset': endOffset,
+    });
+  }
+
+  /// Adapts the neutral cursor-only repetition/recursion fixtures.
   void validateProgress(Map<String, Object?> fixture) {
     final context = fixture['context'] is String
         ? fixture['context']! as String
@@ -814,17 +832,22 @@ final class RecognitionTransactionAuthority {
     }
 
     final rule = fixture['id'] is String ? fixture['id']! as String : '<rule>';
-    final recursive = context != 'accepted_repetition_iteration';
-    throw _error(
-      recursive ? _zeroProgressRecursiveCycleCode : _zeroProgressRepetitionCode,
-      <String, Object?>{
-        'rule': rule,
-        'origin': '$rule:recognize_once',
-        if (recursive) 'cycle': context,
-        'start_offset': start,
-        'end_offset': end,
-      },
-    );
+    if (context == 'accepted_repetition_iteration') {
+      validateRepetitionProgress(
+        rule: rule,
+        origin: '$rule:recognize_once',
+        startOffset: start,
+        endOffset: end,
+      );
+      return;
+    }
+    throw _error(_zeroProgressRecursiveCycleCode, <String, Object?>{
+      'rule': rule,
+      'origin': '$rule:recognize_once',
+      'cycle': context,
+      'start_offset': start,
+      'end_offset': end,
+    });
   }
 
   _InvocationState _frameForAuthority(Object frame) {

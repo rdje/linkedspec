@@ -107,3 +107,12 @@ groups are dormant with exact owners/no success credit and required before
 admission. Packet dart-sparse-and-intake.json.gz; no Dart production or
 schema/family movement, no inferred Julia/Lua results. Initial unsupported infix
 and lifecycle-override fixture assumptions are qualified, not product failures.
+
+Dart39.2.6 repairs actual recognition repetition progress with typed internal
+producer/origin scope/completed-group checks.24 valid raw source/normalized/
+compiled/plan/emitted records unchanged exact-base9pass15RED ->24pass; same24
+emitted modules/consumer reused fresh. SDK code/rule/phase and actual native
+record traces at0/1 pass; ordinary/one-shot/LE/cleanup preserved. Neutral2 and
+fatal analysis pass. Original sparse guard enabled:15pass7 owned dormant.
+Packet dart-live-progress-intake.json.gz retains all refinements/restoration.
+Required steps39.2.1 next; positive AND scalar controls qualified until.2.
