@@ -7,7 +7,7 @@ answers:
   - "which task owns capture reset inside expression-valued blocks"
   - "does capture reset block ready1 mean generated source compiles"
 date: 2026-10-28
-status: Perl35.1 repaired/Rust35.2-Dart35.3-Julia35.4 compatible, targeted-checked; safe Lua35.5 next, full admission open
+status: all bounded35 children targeted-checked; named-mark34.0 next, full source/context/admission open
 tags: [perl, blocks, capture, void, source, readiness, statement]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.35.0 at clean0d0382338; seven public native/fresh/metadata/substitution sources and emitted bytes retained in capture-reset-value-block-authority.json.gz."
 reverify: "Recover probe_capture_reset_value_block.pl from the packet and run through tools/project_data_run.sh env PERL5LIB= perl -Iperl; require completed output before the strict consumer."
@@ -66,3 +66,9 @@ New70 plus Number75 pass four routes under depwarn=error with empty stderr and
 normal module registration, runtime unchanged; see
 [[capture-reset-value-block-julia-compatibility]]. Safe Lua35.5 independently
 follows; full context/admission remains separate.
+
+Safe Lua35.5 independently supports the14-source target/context controls on both
+installed hosts/four routes. New102 plus Number155 pass per host with normal
+registration/loadfile and no runtime edit; see
+[[capture-reset-value-block-lua-compatibility]]. All bounded35 children have
+focused proof;34.0 follows, while parent/full source/context admission stays open.

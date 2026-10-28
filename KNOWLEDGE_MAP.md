@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1383** facts · **10879** question keys.
+> **1384** facts · **10882** question keys.
 
 ## Questions → fact
 
@@ -484,6 +484,7 @@
 - "can Lua invocation discard a cycle stored in an extra array member" -> [lua-invocation-and-callable-consumer-reading](docs/knowledge/lua-invocation-and-callable-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_INVOCATION_READING_30 and the managed commands below; malformed acceptances are intake evidence, not passing repair criteria.`
 - "can Lua invoke a codeblock variable with cb parentheses" -> [lua-callable-codeblock-dynamic-invocation](docs/knowledge/lua-callable-codeblock-dynamic-invocation.md) · 2026-08-01 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`
 - "can Lua invoke a codeblock variable with cb parentheses" -> [lua-callable-codeblock-literal-state](docs/knowledge/lua-callable-codeblock-literal-state.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_local.sh`
+- "can Lua literal callbacks reset their caller capture boundary" -> [capture-reset-value-block-lua-compatibility](docs/knowledge/capture-reset-value-block-lua-compatibility.md) · 2026-10-28 · reverify: [2 entries](#capture-reset-value-block-lua-compatibility)
 - "can Lua loaded paths enter semantic responses" -> [lua-semantic-introspection-authority-map](docs/knowledge/lua-semantic-introspection-authority-map.md) · 2026-07-28 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test`
 - "can Lua malformed source_id select a caller-owned runtime placeholder source" -> [lua-declaration-trace-reading-and-validation-gaps](docs/knowledge/lua-declaration-trace-reading-and-validation-gaps.md) · 2026-09-13 · reverify: [4 entries](#lua-declaration-trace-reading-and-validation-gaps)
 - "can Lua map_leaves bang mutate callback leaves" -> [map-leaves-mutation-lua-runtime](docs/knowledge/map-leaves-mutation-lua-runtime.md) · 2026-09-04 · reverify: `bash tools/run_python_project_data.sh tools/check_map_leaves_mutation_contract.py && bash tools/run_lua_project_data.sh puc lua/test/map_leaves_mutation_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/map_leaves_mutation_contract_test.lua && bash tools/run_lua_local.sh`
@@ -1971,6 +1972,7 @@
 - "does Lua capture_rest_len support coalesce and String methods" -> [capture-boundary-number-lua-method-compatibility](docs/knowledge/capture-boundary-number-lua-method-compatibility.md) · 2026-10-28 · reverify: [2 entries](#capture-boundary-number-lua-method-compatibility)
 - "does Lua capture_rest_length match capture_rest_len" -> [lua-typed-source-compatibility-alias-gap](docs/knowledge/lua-typed-source-compatibility-alias-gap.md) · 2026-08-07 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/source_boundary_compatibility_aliases_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/source_boundary_compatibility_aliases_test.lua && perl tools/check_language_capability_coverage.pl`
 - "does Lua capture_slice_here match start_capture_slice" -> [lua-typed-source-compatibility-alias-gap](docs/knowledge/lua-typed-source-compatibility-alias-gap.md) · 2026-08-07 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/source_boundary_compatibility_aliases_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/source_boundary_compatibility_aliases_test.lua && perl tools/check_language_capability_coverage.pl`
+- "does Lua capture_slice_here preserve local return and lazy skip" -> [capture-reset-value-block-lua-compatibility](docs/knowledge/capture-reset-value-block-lua-compatibility.md) · 2026-10-28 · reverify: [2 entries](#capture-reset-value-block-lua-compatibility)
 - "does Lua capture_slice_length match capture_slice_len" -> [lua-typed-source-compatibility-alias-gap](docs/knowledge/lua-typed-source-compatibility-alias-gap.md) · 2026-08-07 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/source_boundary_compatibility_aliases_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/source_boundary_compatibility_aliases_test.lua && perl tools/check_language_capability_coverage.pl`
 - "does Lua child 26 change Unicode casing or close earlier repairs" -> [lua-unicode-lower-completion-reading](docs/knowledge/lua-unicode-lower-completion-reading.md) · 2026-09-13 · reverify: `Run LUA_UNICODE_LOWER_READING_26 and the managed commands below; exact coverage remains independently owned by lua-startup-reading-coverage.`
 - "does Lua claim full trace parity after diagnostics trace closeout" -> [lua-diagnostics-trace-boundary](docs/knowledge/lua-diagnostics-trace-boundary.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'runtime-trace-events|LUA-BACKEND-PARITY\\.4\\.4\\.4|lua_runtime:(rule|regex_match|child_dispatch|lifecycle_block|recursion_guard|cursor_control|source_boundary|mark_capture)' lua/src lua/test lua/README.md README.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md docs/tasks/LUA-BACKEND-PARITY.md docs/linkedspec-book/src docs/knowledge`
@@ -2246,6 +2248,7 @@
 - "does Lua staged AST admission change production behavior" -> [lua-staged-ast-enrichment-carriers-admission](docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md) · 2026-08-27 · reverify: [7 entries](#lua-staged-ast-enrichment-carriers-admission)
 - "does Lua staged AST recomposition change executable behavior" -> [lua-staged-ast-enrichment-recomposition](docs/knowledge/lua-staged-ast-enrichment-recomposition.md) · 2026-08-28 · reverify: [8 entries](#lua-staged-ast-enrichment-recomposition)
 - "does Lua staged total_calls reject false" -> [lua-staged-completion-reading-and-boundary-gaps](docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: [5 entries](#lua-staged-completion-reading-and-boundary-gaps)
+- "does Lua start_capture_slice work inside a cat operand block" -> [capture-reset-value-block-lua-compatibility](docs/knowledge/capture-reset-value-block-lua-compatibility.md) · 2026-10-28 · reverify: [2 entries](#capture-reset-value-block-lua-compatibility)
 - "does Lua startup reading execute all generated families and the accepted eight modules in fresh children" -> [lua-package-generated-runtime-cursor-reading](docs/knowledge/lua-package-generated-runtime-cursor-reading.md) · 2026-09-13 · reverify: `Run LUA_PACKAGE_RUNTIME_READING_41 and the managed commands below; the selector omits the entire known native-error group 5193-5215 and the partial boundary group 6312 onward.`
 - "does Lua statement split mutate its source" -> [lua-array-split-mutation](docs/knowledge/lua-array-split-mutation.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua static projection expose query trace or runtime observations" -> [lua-semantic-static-projection-plan](docs/knowledge/lua-semantic-static-projection-plan.md) · 2026-07-27 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh`
@@ -11281,6 +11284,14 @@ _Julia already executes anonymous reset statements inside ordinary value blocks_
 - **reverify:** `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/capture_reset_value_block_test.jl"); include("julia/test/capture_boundary_number_results_test.jl")'`
 - **source:** [`docs/knowledge/capture-reset-value-block-julia-compatibility.md`](docs/knowledge/capture-reset-value-block-julia-compatibility.md)
 
+### capture-reset-value-block-lua-compatibility
+_Safe Lua already executes anonymous reset statements inside ordinary value blocks_
+- **answers:** does Lua start_capture_slice work inside a cat operand block | does Lua capture_slice_here preserve local return and lazy skip | can Lua literal callbacks reset their caller capture boundary
+- **date:** 2026-10-28 · **status:** bounded35.5 targeted-checked without runtime edits; declared5.4/isolated-package/context admission open
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.35.5 at clean2dd3116ba; capture-reset-value-block-lua-intake.json.gz retains14-source/four-route dual-host intake, generated bytes and normal regression outputs.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/capture_reset_value_block_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/capture_reset_value_block_test.lua`
+- **source:** [`docs/knowledge/capture-reset-value-block-lua-compatibility.md`](docs/knowledge/capture-reset-value-block-lua-compatibility.md)
+
 ### capture-reset-value-block-rust-compatibility
 _Rust already executes anonymous reset statements inside ordinary value blocks_
 - **answers:** does Rust start_capture_slice work inside a cat operand block | does Rust capture_slice_here preserve local return and lazy skip | can Rust literal callbacks reset their caller capture boundary
@@ -11292,7 +11303,7 @@ _Rust already executes anonymous reset statements inside ordinary value blocks_
 ### capture-reset-value-block-statement-gap
 _Perl ordinary value blocks lack a void anonymous capture-reset statement role_
 - **answers:** why does start_capture_slice fail inside a cat operand block | can capture_slice_here run as a value-block statement | which task owns capture reset inside expression-valued blocks | does capture reset block ready1 mean generated source compiles
-- **date:** 2026-10-28 · **status:** Perl35.1 repaired/Rust35.2-Dart35.3-Julia35.4 compatible, targeted-checked; safe Lua35.5 next, full admission open
+- **date:** 2026-10-28 · **status:** all bounded35 children targeted-checked; named-mark34.0 next, full source/context/admission open
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.35.0 at clean0d0382338; seven public native/fresh/metadata/substitution sources and emitted bytes retained in capture-reset-value-block-authority.json.gz.`
 - **reverify:** `Recover probe_capture_reset_value_block.pl from the packet and run through tools/project_data_run.sh env PERL5LIB= perl -Iperl; require completed output before the strict consumer.`
 - **source:** [`docs/knowledge/capture-reset-value-block-statement-gap.md`](docs/knowledge/capture-reset-value-block-statement-gap.md)
