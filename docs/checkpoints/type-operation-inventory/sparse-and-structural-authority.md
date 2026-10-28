@@ -124,3 +124,12 @@ live guard52pass4skip, duplicate/body neighbors14pass. Actual duplicate and
 cross physical/logical event identities pass. Runtime-only; parent/mixed/local/
 no-edge/choice contracts preserved. Packet dart-and-steps-intake.json.gz retains
 all producers/inputs/epochs. Repeated groups39.2.2 next, then minimum/blind.
+
+Dart39.2.2 repairs repeated AND action-group outcomes:21 authored sources39
+inputs,3healthy18actualRED ->21pass; same source/normalized/compiled/plan/emitted
+bytes and21 fresh module reuse. Group/structural/live guard75pass2owned-dormant,
+choice3tests15roles and fatal analysis pass. Early returns count one group,
+falsey/null/nested values preserve kinds; custom IT/lifecycle authority and
+progress remain. Three guard expectations intentionally become arrays, sources
+unchanged. Packet dart-and-groups-intake.json.gz retains invalid fluent fixture
+without RED credit and corrected exact-base replay. Remaining minima39.2.3 next.

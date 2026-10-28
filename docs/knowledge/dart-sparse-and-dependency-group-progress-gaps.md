@@ -5,9 +5,8 @@ answers:
   - "does Dart sparse AND need all local regex slots"
   - "does default blind Dart plan already iterate to cursor eight"
   - "does Dart indexed incoming AND start required slot zero"
-  - "why does repeated AND return only the first scalar in Dart"
 date: 2026-10-28
-status: intake39.2.0/progress39.2.6/steps39.2.1 complete; groups.2/minima.3/blind.4 remain
+status: intake39.2.0/progress39.2.6/steps39.2.1/groups39.2.2 complete; minima.3/blind.4 remain
 tags: [dart, and, dependencies, repetition, recognition, progress, generated-source]
 evidence: "dart-sparse-and-intake.json.gz retains22 final source/normalized/compiled/plan/emitted records,34 inputs on native/restored/plan/fresh modules,14pass8RED, actual public traces and all original/refined epochs."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/sparse_and_structural_sequence_test.dart; dormant cases have exact repair owners and receive no success credit."
@@ -25,10 +24,11 @@ enumeration and _acceptRegexMatch dispatching every edge sharing an index.
 39.2.1 now repairs typed structural/dependency steps; current behavior and exact
 proof are in [[dart-and-required-dependency-steps]].
 
-Repeated AND returns escape as whole-rule _ActionReturn before group counts;
+At intake repeated AND returns escaped as whole-rule _ActionReturn before group counts;
 the explicit action collector includes CHOICE only. Full nonreturn two groups
-returnnull, below minimum throws.39.2.2 owns group outcomes, including its
-directly dependent AND-acode minimum;39.2.3 owns remaining ordinary minima.
+returnnull, below minimum throws.39.2.2 now repairs group outcomes, including its directly dependent AND-acode
+minimum; current mechanism/proof: [[dart-repeated-and-group-outcomes]].
+39.2.3 owns remaining ordinary minima.
 Repeated/default blind owners lack implicit collection, although iteration is
 healthy;39.2.4 owns values/groups/IT/lifecycle collection rather than classifier.
 
@@ -54,5 +54,7 @@ final producer/input/output/module/trace epochs are retained; no production,
 schema/family/ledger change, canonical admission or inferred peer result.
 
 Current guard/SDK/trace provenance and exact24-source RED/GREEN/fresh reuse are
-in [[dart-live-recognition-repetition-progress]]. Repeated groups39.2.2 next;
-minimum/blind failures are not inferred repaired.
+in [[dart-live-recognition-repetition-progress]]. Repeated groups39.2.2 repaired; remaining minima39.2.3 next;
+minimum/blind failures are not inferred repaired. After39.2.2 group repair,
+current combined group/structural/live guard75pass2owned-dormant; remaining
+ordinary blind minimum.3 and implicit blind collection.4 precede admission.

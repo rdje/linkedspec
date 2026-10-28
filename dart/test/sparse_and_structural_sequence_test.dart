@@ -20,8 +20,6 @@ Map<String, Object?> observe(Object? Function() call) {
 }
 
 const repairOwners = <String, String>{
-  'repeated_return': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2',
-  'repeated_nonreturn': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2',
   'blind_minimum': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3',
   'blind_default': 'TYPE-REFERENCE-BOOK.1.2.23.3.39.2.4',
 };

@@ -1158,6 +1158,13 @@ final class LinkedSpecRuntimeEngine {
     final actionIterationValues = _collectsExplicitActionIterationValues(rule)
         ? <Object?>[]
         : null;
+    // AND values belong to accepted groups, independently of choice hits.
+    final andIterationValues = usesAndExecution && rule.actionEdges.isNotEmpty
+        ? <Object?>[]
+        : null;
+    final hasCustomIteration = rule.lifecycleActionPayloads.any(
+      (payload) => payload.lifecycle == 'IT',
+    );
     var matches = 0;
     var madeFailedAttempt = false;
     for (var iteration = 0; iteration < context.maxIterations; iteration += 1) {
@@ -1198,21 +1205,30 @@ final class LinkedSpecRuntimeEngine {
         }
       }
 
-      final matched = _nextableBool(
-        () => _executeRegexOnce(
-          rule,
-          context,
-          cursorPolicy: cursorPolicy,
-          andSequence:
-              andRequiredSteps != null &&
-              (rule.regexPatterns.length > 1 || andRequiredSteps.length > 1),
-          andRequiredSteps: andRequiredSteps,
-          actionIterationValues: actionIterationValues,
-          repetitionStartCodeUnit: before,
-          matchPreselected: captureGaps,
-          preselectedMatch: selectedMatch,
-        ),
-      );
+      _NextableBool matched;
+      Object? groupValue = const <Object?>[];
+      try {
+        matched = _nextableBool(
+          () => _executeRegexOnce(
+            rule,
+            context,
+            cursorPolicy: cursorPolicy,
+            andSequence:
+                andRequiredSteps != null &&
+                (rule.regexPatterns.length > 1 || andRequiredSteps.length > 1),
+            andRequiredSteps: andRequiredSteps,
+            actionIterationValues: actionIterationValues,
+            collectAndGroupValue: andIterationValues != null,
+            matchPreselected: captureGaps,
+            preselectedMatch: selectedMatch,
+          ),
+        );
+      } on _AndGroupReturn catch (groupReturn) {
+        // An action return accepts this group and skips its remaining slots.
+        // Lifecycle _ActionReturn remains the separate whole-rule channel.
+        groupValue = groupReturn.value;
+        matched = const _NextableBool.value(true);
+      }
       if (matched.nexted) {
         context.assertRecognitionRepetitionProgress(rule.label, before);
         matches += 1;
@@ -1236,6 +1252,9 @@ final class LinkedSpecRuntimeEngine {
       if (iterationReturn != null) {
         return _returned(iterationReturn.value);
       }
+      if (andIterationValues != null && !hasCustomIteration) {
+        andIterationValues.add(_copyValue(groupValue));
+      }
       if (context.cursorCodeUnit == before) {
         break;
       }
@@ -1247,7 +1266,7 @@ final class LinkedSpecRuntimeEngine {
       if (loopExit != null) {
         return _returned(loopExit.value);
       }
-      if (actionIterationValues != null) {
+      if (actionIterationValues != null || andIterationValues != null) {
         return const _RuleResult(matched: false, value: null);
       }
       throw RuntimeInterpreterException(
@@ -1277,7 +1296,9 @@ final class LinkedSpecRuntimeEngine {
     }
     return _RuleResult(
       matched: matches > 0,
-      value: actionIterationValues == null
+      value: andIterationValues != null
+          ? List<Object?>.unmodifiable(andIterationValues)
+          : actionIterationValues == null
           ? null
           : List<Object?>.unmodifiable(actionIterationValues),
     );
@@ -1323,7 +1344,7 @@ final class LinkedSpecRuntimeEngine {
     bool andSequence = false,
     List<_AndRequiredStep>? andRequiredSteps,
     List<Object?>? actionIterationValues,
-    int? repetitionStartCodeUnit,
+    bool collectAndGroupValue = false,
     bool matchPreselected = false,
     RuntimeRegexMatch? preselectedMatch,
   }) {
@@ -1392,7 +1413,7 @@ final class LinkedSpecRuntimeEngine {
           match,
           context,
           actionIterationValues: actionIterationValues,
-          repetitionStartCodeUnit: repetitionStartCodeUnit,
+          collectAndGroupValue: collectAndGroupValue,
           requiredAction: step.action,
         );
         context.setGapPhase(rule.label, 'LE');
@@ -1456,7 +1477,7 @@ final class LinkedSpecRuntimeEngine {
       match,
       context,
       actionIterationValues: actionIterationValues,
-      repetitionStartCodeUnit: repetitionStartCodeUnit,
+      collectAndGroupValue: collectAndGroupValue,
     );
     context.setGapPhase(rule.label, 'LE');
     final loopEnd = _executeLifecycle(rule, 'LE', context);
@@ -1681,7 +1702,7 @@ final class LinkedSpecRuntimeEngine {
     RuntimeRegexMatch match,
     _RuntimeExecutionContext context, {
     List<Object?>? actionIterationValues,
-    int? repetitionStartCodeUnit,
+    bool collectAndGroupValue = false,
     _MatchedActionEdge? requiredAction,
   }) {
     context.cursorCodeUnit = match.codeUnitEnd;
@@ -1714,13 +1735,10 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: edgeContext,
       );
       if (actionReturn != null) {
+        if (collectAndGroupValue) {
+          throw _AndGroupReturn(actionReturn.value);
+        }
         if (actionIterationValues == null) {
-          if (rule.modeMetadata.isAnd && repetitionStartCodeUnit != null) {
-            context.assertRecognitionRepetitionProgress(
-              rule.label,
-              repetitionStartCodeUnit,
-            );
-          }
           throw _ActionReturn(actionReturn.value);
         }
         actionIterationValues.add(_copyValue(actionReturn.value));
@@ -9844,6 +9862,13 @@ final class _RuleResult {
 
 final class _ActionReturn implements Exception {
   const _ActionReturn(this.value);
+
+  final Object? value;
+}
+
+/// Only an action-edge return can finish one repeated AND group.
+final class _AndGroupReturn implements Exception {
+  const _AndGroupReturn(this.value);
 
   final Object? value;
 }

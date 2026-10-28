@@ -8072,16 +8072,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1 - preserve Dart AND dependency order and action ordinals`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2`
-  Status: `pending` / P1 after.1, before remaining minimum/blind repairs, before full39/23.4/push
+  Status: `completed` / repeated AND group outcomes
   Goal: Implement repeated AND group outcomes and default collection.
   Reproduce/root: Repeated AND{2} returns first BODY at4 on one/two groups; nonreturn full two groups returnsnull and under-min throws. _ActionReturn escapes whole rule; CHOICE-only collector is ineligible.
   Acceptance: Retain per-group early unwind/skipped tail, falsey/null/empty/nested values, group counts/reset/minimum and empty implicit groups, custom IT replacement and lifecycle whole-rule authority. Include directly dependent AND-acode min miss null/false; remaining generic minima.3 stay separate. No AND-to-CHOICE shortcut or AND gap eligibility change. Preserve source/normalized/compiled/plan/emitted identity where runtime-only, full catalogs and existing v2 family/schema contracts. Add exact owned RED-GREEN and direct-dependent controls, enable owned dormant groups, book/docs/commit; no routine full suite.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored native/restored/plan/fresh failures and typed/source/trace/nearest mode/slot/cursor/return controls; fatal changed analysis/format/book/manual continuity.
-  Planned canonical trigger: Full39/23.4/final clean push after all actual regressions enabled; genuine contract/schema movement separately owned canonical.
-  Planned claim verification: none: Finite authored functional/error/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:21 final sources39 inputs,3healthy18actualRED ->21pass; same21 raw source/normalized/compiled/plan/emitted records and fresh module reuse; group/structural/live guard75pass2owned-dormant; choice3tests15roles; fatal changed analysis/format/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after remaining repairs/registration/pressure; no public format/schema movement.
+  Claim verification: none: Finite authored functional/return/error/interface distinctions, no population measurement.
 
   Direct dependent: recognition_repetition_progress_test.dart preserves current positive/ordinary AND scalar shapes until this group repair. Update their value expectations deliberately under frozen collection authority while preserving error/progress/trace distinctions and source identities.
+
+  Activation: clean `b1358d34352a9778c36a27b2a1512f51ad331295` after typed required steps39.2.1. Frozen39.0/ADR0048 and Perl/Rust group authority apply; preserve early per-group action return, lifecycle whole-rule returns and custom IT replacement. Current _ActionReturn escapes the rule and collector eligibility is CHOICE-only. Read exact loops/return/recognition/copy/register owners and direct live-progress fixture before production. Own exact group/minimum/falsey/reset/IT/lifecycle controls, including intentional scalar-to-array guard expectation updates.
+
+
+  - [x] **REPRODUCE / ISSUE**:21 final authored sources39 input rows retain18 actual group/result/minimum failures and3 healthy lifecycle controls. First scalar exits at4 before group count/minimum; full implicit groups returnnull, under-minimum throws, falsey recognition misses. Invalid 0.return value method gets no product RED credit; correct edge-suffix source independently replays baseline RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _acceptRegexMatch throws whole-rule _ActionReturn; only CHOICE has an iteration collector. _executeRegexRule cannot count/collect one early-return group, distinguish null payload from acceptance or normalize its under-minimum path. Shared loop completion owns progress after the new local group unwind.
+  - [x] **FIX**: Private _AndGroupReturn accepts one action group and skips tail/post-return LE. Independent per-group value/count/default collection, copied nested/falsey/null kinds and empty nonreturn groups; custom IT replaces default push. Lifecycle _ActionReturn remains whole-rule. AND-acode min miss returns null/false; early/normal progress share common guard, obsolete start parameter removed.
+  - [x] **ADDRESSED (verified)**:21pass39 input rows native/restored/plan and same21 fresh modules/consumer agree. Exact raw source/normalized/compiled/plan/emitted identity before/after. Partial-group cursor and discard, duplicate reset, fluent suffix, falsey/null, zero-min and accepted-null/failed-min recognition distinctions pass.
+  - [x] **NO REGRESSION**: Combined group/structural/live guard75pass2owned-dormant; choice3tests15roles and fatal changed analysis pass.24 guard source/artifact records unchanged; exactly3 intentional positive/ordinary AND scalar-to-array expectations, typed progress/error/trace controls preserved. I/LS/LE/IT/E returns retain authority. Compiler/emitter/matching/recognition authority/family/schema unchanged; no remaining minimum/blind/full admission claim.
+  - [x] **LOCKSTEP**: dart-and-groups-intake.json.gz retains all actual producers, invalid/refined/final epochs, runtime base/fixed/restoration, results and reused modules. Book/cards/target/roadmap/task/live/resume/history align. Runtime rebuild uses existing generated source/plans. Two remaining blind minimum/collection regressions owned before admission; ordinary minima39.2.3 next. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2 - collect Dart repeated AND group outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3`
   Status: `pending` / P1 after.6/.2, before collection/peers, before full39/23.4/push
@@ -8426,7 +8437,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2` | `pending` | Implement Dart repeated AND group outcomes and collection. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.3` | `pending` | Normalize remaining Dart ordinary minimum misses. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1,0 +1,433 @@
+[
+  {
+    "name": "zero",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          0,
+          0
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_cursor": 4,
+        "expected_match": false
+      },
+      {
+        "input": "HcatHbad",
+        "expected": null,
+        "expected_cursor": 5,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "false",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(false)}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          false,
+          false
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_cursor": 4,
+        "expected_match": false
+      },
+      {
+        "input": "HcatHbad",
+        "expected": null,
+        "expected_cursor": 5,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "empty",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(\"\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          "",
+          ""
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_cursor": 4,
+        "expected_match": false
+      },
+      {
+        "input": "HcatHbad",
+        "expected": null,
+        "expected_cursor": 5,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "null",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(undef)}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          null,
+          null
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_cursor": 4,
+        "expected_match": false
+      },
+      {
+        "input": "HcatHbad",
+        "expected": null,
+        "expected_cursor": 5,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "early",
+    "source": "Value::AND{2}\n /H/\n /cat/\n -> Value[0] {return([match_text(),cursor_pos()])}\n",
+    "cases": [
+      {
+        "input": "HH",
+        "expected": [
+          [
+            "H",
+            1
+          ],
+          [
+            "H",
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "HcatHcat",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "early_false",
+    "source": "Value::AND{2}\n /H/\n /cat/\n -> Value[0] {return(false)}\n",
+    "cases": [
+      {
+        "input": "HH",
+        "expected": [
+          false,
+          false
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "H",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "implicit",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {cursor_pos()}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          [],
+          []
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": null,
+        "expected_cursor": 4,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "partial",
+    "source": "Value::AND{1,2}\n /H/\n /cat/ -> Value[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "HcatHbad",
+        "expected": [
+          0
+        ],
+        "expected_cursor": 5,
+        "expected_match": true
+      },
+      {
+        "input": "Hbad",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "zero_allowed",
+    "source": "Value::AND{0,2}\n /H/\n /cat/ -> Value[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [],
+        "expected_cursor": 0,
+        "expected_match": false
+      },
+      {
+        "input": "Hbad",
+        "expected": [],
+        "expected_cursor": 1,
+        "expected_match": false
+      },
+      {
+        "input": "Hcat",
+        "expected": [
+          0
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "it_return",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n IT {return(\"IT\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": "IT",
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "custom_it",
+    "source": "Value::AND{2}\n I {seen=[]}\n /H/\n /cat/ -> Value[1] {return(0)}\n IT {push(seen,cursor_pos())}\n E {return(copy(seen))}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          4,
+          8
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "custom_it_default",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n IT {cursor_pos()}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [],
+        "expected_cursor": 8,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "le_return",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n LE {return(\"LE\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": "LE",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "ls_return",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n LS {return(\"LS\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": "LS",
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "i_return",
+    "source": "Value::AND{2}\n I {return(\"I\")}\n /H/\n /cat/ -> Value[1] {return(0)}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": "I",
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "e_return",
+    "source": "Value::AND{2}\n /H/\n /cat/ -> Value[1] {return(0)}\n E {return(\"E\")}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": "E",
+        "expected_cursor": 8,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "nested_copy",
+    "source": "Value::AND{2}\n I {seen=[]}\n /a/ -> Value[0] {push(seen,cursor_pos());return(copy(seen))}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "fluent_one_slot",
+    "source": "Value::AND{2}\n /a/ -> Value[0] .return(0)\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          0,
+          0
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "duplicate_reset",
+    "source": "Value::AND{2}\n I {hits=0}\n /a/\n -> Value[0] {hits=add(hits,1)}\n -> Value[0] {return([cursor_pos(),hits])}\n",
+    "cases": [
+      {
+        "input": "aaaa",
+        "expected": [
+          [
+            2,
+            1
+          ],
+          [
+            4,
+            2
+          ]
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "aaa",
+        "expected": null,
+        "expected_cursor": 3,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "ordinary_zero",
+    "source": "Value::AND{1}\n /(?=a)/ -> Value[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "recognition_null",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nValue:AND{2}\n /H/\n /cat/ -> Value[1] {return(undef)}\n",
+    "cases": [
+      {
+        "input": "HcatHcat",
+        "expected": [
+          true,
+          [
+            null,
+            null
+          ],
+          8
+        ],
+        "expected_cursor": 8,
+        "expected_match": true
+      },
+      {
+        "input": "Hcat",
+        "expected": [
+          false,
+          null,
+          4
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "HcatHbad",
+        "expected": [
+          false,
+          null,
+          5
+        ],
+        "expected_cursor": 5,
+        "expected_match": true
+      }
+    ]
+  }
+]

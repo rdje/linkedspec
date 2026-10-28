@@ -223,7 +223,9 @@
         "input": "a",
         "expected": [
           true,
-          0,
+          [
+            0
+          ],
           1
         ]
       }
@@ -237,7 +239,9 @@
         "input": "ab",
         "expected": [
           true,
-          0,
+          [
+            0
+          ],
           1
         ]
       }
@@ -319,7 +323,9 @@
     "cases": [
       {
         "input": "a",
-        "expected": 0
+        "expected": [
+          0
+        ]
       }
     ]
   },

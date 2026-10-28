@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart AND dependency order/action ordinals repaired; repeated group outcomes next.
+Dart repeated AND group outcomes repaired; remaining ordinary minimum misses next.
 
 ## Latest Completed Slice
 
-Dart AND now builds typed required steps once per invocation. Pure edge-only reversed/duplicate/cross-owner references select one authored action per step; increasing local sparse references and parent/mixed/no-edge rules retain the complete structural catalog. One-pattern duplicates and compact & use required-step count; exact logical identities prevent duplicate trace/semantic events. Final27 active sources41 input rows preserve raw source/normalized/compiled/plan/emitted bytes across19healthy9RED4owned-dormant ->28pass4skip; same27 emitted modules/consumer reused in fresh processes. Native/restored/plan/fresh values agree. Combined live-progress target52pass4skip; duplicate15-role consumer and active-body neighbors14pass. Fatal interpreter/test analysis and exact observation gate pass after correcting a raw-Map test warning; no DSL input change. Compiler/emitter/matching/public identity helper/schema unchanged. Packet dart-and-steps-intake.json.gz retains actual producers, snapshots, outputs, modules and receipt. Book/cards/target/roadmap/task/live/resume/history align. Repeated group39.2.2 next; four group/minimum/blind regressions remain owned before admission. Focused authorized commit; no full CI/push.
+Dart repeated AND acode now distinguishes one accepted group from its result with a private group-return channel. Early action returns skip remaining slots/post-return LE, then count/reset once; falsey/null/nested values preserve kind, complete nonreturn groups contribute[], partial groups do not append. Custom IT replaces default push; lifecycle returns retain whole-rule authority. Under-minimum AND-acode returns null/matchedfalse with consumed cursor. Common loop guard now handles early/normal group progress; obsolete early-return parameter removed. Final21 authored sources39 inputs:3healthy18 actual RED ->21pass; exact raw source/normalized/compiled/plan/emitted records unchanged, same21 emitted modules/consumer reused baseline/fixed fresh. Combined group/structural/live guard75pass2owned-dormant; choice3 tests15roles and fatal changed analysis pass. All24 guard source/artifact records unchanged; exactly3 intentional scalar-to-array expected values updated. Invalid value-method fixture corrected to actual action-edge .return suffix and re-falsified baseline before fixed reuse, with original epochs retained/no invalid RED credit. Packet dart-and-groups-intake.json.gz retains producers/inputs/results/restoration/modules/receipt. Book/cards/target/roadmap/task/live/resume/history align. Remaining ordinary minima39.2.3 next, then blind collection.4 and independent peers. Compiler/emitter/matching/recognition authority/schema/families unchanged; focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate Dart39.2.2 from clean required-step repair. Implement repeated AND per-group return/collection with falsey/null/nested results, early skipped tail, group count/reset/minimum and empty implicit groups. Preserve custom IT replacement and lifecycle whole-rule authority. Deliberately update positive AND scalar guard controls to group arrays while retaining progress/error/source distinctions. Exact owned RED-GREEN/native/restored/plan/fresh, focused checks/book/docs/commit; remaining ordinary minima39.2.3 and blind collection.4 follow, then independent Julia/safe Lua. Admission/registration/pressure prerequisites remain before push.
+Activate Dart39.2.3 from clean repeated AND group repair. Normalize remaining ordinary blind/regex noncollector minimum misses to null/matchedfalse without cursor rollback, preserving successful-null acceptance, caller captures/return state, zero-min/max, recovery and real typed errors. Use exact existing authority and public source/SDK/plan/fresh controls; qualify lifecycle placement under SESSION27. Enable owned blind-minimum regression, focused checks/book/docs/commit; implicit blind collection39.2.4 follows, then independent Julia/safe Lua. Full admission/registration/pressure prerequisites remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.2` — Dart repeated AND group outcomes repaired; remaining ordinary minimum misses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.1` — Dart AND dependency order/action ordinals repaired; repeated group outcomes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.6` — Dart live recognition progress/error attribution repaired; required dependency steps next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.0` — Independent Dart intake complete;22 sources34 inputs14healthy/8ownedRED; live progress guard first.
@@ -29,7 +30,6 @@ Activate Dart39.2.2 from clean required-step repair. Implement repeated AND per-
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1` — Rust generated Default blind iteration repaired with unchanged v2 rows; typed sequence39.1.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0` — Rust intake retained; default-blind classifier39.1.4.1 first, other owned P1 repairs before peers.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.2` — Standalone shared recursion guard wired/targeted-checked; independent Rust sparse-AND intake39.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1` — Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
 
 ## History
 

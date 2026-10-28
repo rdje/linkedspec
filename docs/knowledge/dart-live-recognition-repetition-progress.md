@@ -50,3 +50,9 @@ Ordinary/one-shot zero and whole-rule LE authority remain. Positive AND scalar
 shapes are compatibility controls until39.2.2; its group repair must deliberately
 update values while preserving progress. Dependency/group/minimum/blind features
 and full admission remain owned.
+
+39.2.2 now unifies early action-group and normal completion at the existing
+loop progress guard; the former repetition-start parameter is removed. All24
+source/artifact records stay identical, three scalar expectations intentionally
+become AND group arrays, and all typed progress/trace controls pass. See
+[[dart-repeated-and-group-outcomes]] for current group behavior.
