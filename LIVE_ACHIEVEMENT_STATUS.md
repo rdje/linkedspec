@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust capture Number methods already compatible; P1 active-edge dispatch36 prerequisite immediately next.
+Active-edge choice target frozen; Rust shared-owner repair36.1 next, separate Perl boundary37 owned.
 
 ## Latest Completed Slice
 
-Rust readonly capture Number33.2 is independently method-compatible; runtime unchanged. Initial shared/producer controls[null] reveal a distinct valid-source dispatch defect, not Number RED. Public constant BODY source, compiled descriptors and native trace show untargeted slot0 consumes :c/at before written2; Perl returns[BODY]. Own P1 family36 immediately next before33.3. Shared Number entry head changes only to exact Unicode alpha beta, retaining input/anonymous boundary and all11 expected bytes; Perl UTF-8 fixture target1 native/fresh/raw0/ready1 passes. Final Rust5 normal tests pass native/restored CompiledSpec/plan, original9 aliases/snapshot, legacy4/[]/KVT, explicit callback1! and strict registered/user-function state fences. One owned dispatch regression is ignored in normal run and explicitly executed1RED null versus BODY; never counted healthy, to be enabled36.1. Packet/active-edge intake/causal cards/map/book current caveat and roadmap/task/live/resume agree. No runtime source fix, global source-context/backend admission, full suite/matrix/isolated emitted package or push claim.
+Existing edge/entry/mode/duplicate-slot authority freezes Default/OR body candidates from outgoing edges, earliest start then authored edge order. Public Perl native/fresh reverse duplicates return2 and earlier-positioned later edge returns A. Native Engine and GeneratedPlanExecutor share Rust select_native_match; preserve original indices/captures and full entry/boundary catalogs, AND/blind/no-edge/indexed-first/frame/gap/formats. No production edit. Separate Perl emitted boundary control returns null versus native body; public generated source pinpoints missing HASH.re catalog, owned P1 family37 after33/35/34 before admission. Packet retains exact producers/channels/source, including diagnostic setup exit25 without product RED credit. Target/card/book/map/task/live/resume/history agree; no full suite/matrix/admission/push.
 
 ## Next Action
 
-Activate P1 outgoing-edge regex candidate authority36.0 from this clean Rust Number boundary before33.3/further features. Read canonical edge/entry/mode/slot/source/recognition/trace contracts and exact constant BODY Perl/Rust descriptors/traces/explicit dormant RED. Freeze a bounded shared body-candidate projection target preserving full entry/selector/boundary catalogs, original regex_idx versus child_regex_idx, duplicate slot ids, frame/gap/cursor/errors/formats and existing AND/blind/no-edge startup27 boundaries. Then implement Rust36.1 and independently intake Dart/Julia/safe Lua36.2-.4, enabling the owned regression before admission; resume33.3 after prerequisite. Focused --no-verify workflow remains explicitly authorized; no full suite/matrix/push.
+Activate Rust active-edge choice repair36.1 from this clean authority commit. Establish exact native/restored/generated baseline for wildcard/literal, reverse duplicate priority, earliest start and source-slot/capture/mode/catalog controls. Repair shared select_native_match only for confirmed Default/OR action-edge body choice, retain complete catalogs and indexed-first/AND/blind/no-edge/frame/gap/errors/formats, enable owned wildcard regression and run focused direct dependents; then independently intake peers36.2-.4 before33.3. Separate generated Perl boundary37 stays scheduled before full23.4/push. Authorized focused --no-verify workflow continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.36.0` — Active-edge choice target frozen; Rust shared-owner repair36.1 next, separate Perl boundary37 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.2` — Rust capture Number methods already compatible; P1 active-edge dispatch36 prerequisite immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.1` — Perl readonly capture Number method composition repaired/targeted-checked; independent Rust33.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.10` — Readonly capture Number33 target frozen; adjacent P1 block35/named34 owned; Perl33.1 next.
@@ -29,7 +30,6 @@ Activate P1 outgoing-edge regex candidate authority36.0 from this clean Rust Num
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.0` — Remaining callback gaps independently owned; safe Lua31.6.4.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.3` — Julia callback identity repaired/targeted-checked; remaining scoped Perl/Lua31.6.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.2` — Dart bounded callback identity repaired/targeted-checked; independent Julia31.6.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.31.6.5` — Rust final-callback snapshot repaired/targeted-checked; independent Dart callback identity31.6.2 resumes.
 
 ## History
 

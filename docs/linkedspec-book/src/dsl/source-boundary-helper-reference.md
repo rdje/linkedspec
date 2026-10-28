@@ -618,7 +618,7 @@ search-tree backtracking.
 | `restore_cursor()` | Pop the explicit cursor stack and move the live cursor to that saved position. Empty stack is a no-op. | paired code should retry or inspect from a previously saved cursor. |
 | `rewind_match_start()` | Move the live cursor to the current local-match start. | the current local match was consumed only to inspect a boundary and should be re-scanned by the next rule-level match. |
 | `rewind_entry_start()` | Move the live cursor to the entry/initial-match start for this context. | the whole entry match should be re-scanned by the next rule-level match. |
-| `capture_until_boundary(rule[, ...])` | From the live cursor, seek for the earliest match of any named boundary rule, capture the text before it, and leave the cursor at that boundary start. | an open-ended payload should stop before the next structural token without consuming and rewinding that token. |
+| `capture_until_boundary(rule[, ...])` | From the live cursor, seek for the earliest match of any named boundary rule, capture the text before it, and leave the cursor at that boundary start. Independently emitted Perl currently omits the boundary-rule regex catalog and can return null for a boundary that native Perl resolves; this reconstruction defect is tracked for repair before admission. | an open-ended payload should stop before the next structural token without consuming and rewinding that token. |
 
 Keep these semantics separate. `save_cursor()` / `restore_cursor()` are an
 explicit stack. `rewind_match_start()` / `rewind_entry_start()` are direct

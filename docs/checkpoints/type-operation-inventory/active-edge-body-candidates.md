@@ -1,0 +1,90 @@
+# Outgoing-edge body candidates
+
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.36.0; bounded backend repairs36.1-.4.
+Status: target frozen from existing entry/edge/choice authority; execution repairs follow.
+
+This target implements existing semantics, rather than introducing a new grammar
+or generated-source contract. Read ADR0044 for rule-local cursor ownership,
+ADR0047 and its neutral duplicate-slot artifact for structural identity/choice
+priority, and the book's action-and-lifecycle-placement entry/edge explanation.
+The retained constant BODY source distinguishes dispatch from Number helper work.
+
+## Catalog and candidate roles
+
+Keep every compiled rule's complete regex catalog. Incoming numeric selectors,
+entry captures, descriptors, and capture_until_boundary still require declared
+patterns even when no outgoing edge uses them. Never truncate that catalog or
+infer an edge from a nearby regex declaration.
+
+For Default/OR-family action-edge body choice, only the compiled outgoing edges
+are eligible. Iterate in authored edge order using each edge's regex_idx to
+address the existing compiled matcher. child_regex_idx describes the written
+target's slot; it is not interchangeable with the enclosing compiled index.
+Preserve the selected original compiled index, target identity, capture groups,
+named captures, source spans, diagnostics, trace and descriptor identity.
+
+Seek chooses the earliest match start among eligible edges. Equal starts retain
+the first authored edge, even when its target selector is numerically larger or
+two slots have identical patterns. Do not sort by declared slot number, recover
+identity from regex text, or return the first later-starting edge without checking
+whether another eligible edge starts earlier. Keep current zero-progress handling.
+
+The scope excludes changing AND sequence/required-slot selection, indexed-first
+entry compatibility, blind dispatch, no-edge handlers and lifecycle reconciliation
+SESSION-STARTUP-READING.27. Existing repetition, cursor, frame restoration and
+inter-match gap hooks keep their owners. Rust's preceding-input regex-context
+defect remains independently owned by SESSION-STARTUP-READING.63.2; this repair
+does not claim to fix sliced-input anchor/lookbehind semantics.
+
+## Distinguishing evidence and implementation seam
+
+active-edge-regex-dispatch-intake.json retains the original wildcard/literal
+constant-payload sources, full compiled descriptors and exact native trace. Perl
+Get returns ["BODY"] for the valid wildcard source. Rust selects untargeted0 on
+:c and at, dispatches no child, and returns [null], although only edge2 is written.
+The Number-method fixture's nonoverlap literal is a separate isolation carrier;
+it neither invalidates the wildcard source nor waives this defect.
+
+The additional public Perl probe retains native/fresh [2] when edges Value[2],
+Value[1] reverse declaration order over duplicate /a/ patterns, and ["A"] when
+edge /b/ is authored before /a/ but the input has a earlier. These distinguish
+authored edge priority from catalog order and earliest start from edge order.
+Exact sources, channels and generated boundary diagnostic are retained with the
+authority packet. Finite authored examples do not establish population coverage.
+
+Rust's two body matcher construction sites belong to the native Engine and
+GeneratedPlanExecutor. Both call Engine::select_native_match; the existing
+consume_slot_match/seek_slot_match APIs reuse individually compiled regexes and
+return the original index/captures. Repair choice eligibility in that shared
+selection owner, without rebuilding/truncating catalogs, adding serialized fields
+or independently duplicating native/generated algorithms. The earlier intake's
+"native and recognition" wording was imprecise: there is no separately diagnosed
+recognition matcher in this finding. Recognition traversals using these execution
+owners share the repaired selection; transaction semantics remain unchanged.
+
+## Focused completion per backend
+
+Establish native, supported restoration and generated-plan/fresh execution before
+editing production. Lock wildcard/literal payloads, reverse duplicate priority,
+earliest start, cross-target identity, local OR policy and untargeted no-match.
+Inspect selected source/capture/slot trace, and prove complete catalogs remain
+usable for incoming selectors and boundary lookahead. Run the relevant existing
+duplicate-slot, rule-local cursor and inter-match gap checks; select focused tests
+where existing suites include unrelated package/build admission.
+
+Rust36.1 enables the previously ignored wildcard regression and records actual
+RED/GREEN across native/restored CompiledSpec/generated plans. Other backend
+children independently establish their own baseline; no peer failure or repair is
+inferred. Preserve normal test registration, public book accuracy and per-leaf
+commits. Full23.4/source-context admission and clean push gates remain separate.
+
+## Independently discovered Perl generated boundary gap
+
+The complete-catalog control Top:: I returning capture_until_boundary("Landmark")
+with Landmark /END/ on bodyEND returns "body" natively but null from independently
+loaded emitted Perl. The emitted helper requires descr.spec.Landmark.re, while
+the emitted descriptor stores Landmark as a CODE handler with no regex catalog.
+This is a separate generated descriptor reconstruction defect, not evidence for
+changing the helper's boundary semantics or for truncating Rust catalogs. Own it
+under37 after the bounded Number/named/block feature work and before full23.4
+admission or push; its runtime/generated regression and repair are required.

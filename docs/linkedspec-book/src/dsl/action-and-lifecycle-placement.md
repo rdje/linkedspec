@@ -43,7 +43,7 @@ Done:
 Adding `/x/` to `Top` would not make that regex participate in `-> Done`. It would need a self-edge or another
 incoming edge that explicitly targets `Top`.
 
-Action-edge identity comes from the written target, never adjacency. `-> Document[2]` selects regex
+Action-edge identity comes from the written target, never adjacency. Choice compares only outgoing edges: earliest match start wins, and equal starts retain authored edge order, including reversed numeric selectors and duplicate patterns. `-> Document[2]` selects regex
 slot 2 declared by `Document`, even when the enclosing rule is `Top`; a regex line immediately before
 the edge does not trigger its block. Compact same-rule examples below place declarations and edges in
 one paragraph, but their edges still resolve by explicit rule name and zero-based slot index.

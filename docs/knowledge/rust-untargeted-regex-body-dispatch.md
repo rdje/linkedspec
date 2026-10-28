@@ -27,7 +27,7 @@ Both Rust rule matcher construction sites compile the complete rule.regex_patter
 catalog; the native trace proves untargeted candidates can preempt the intended edge.
 Canonical action-and-lifecycle-placement requires outgoing match edges to select
 written target slots. Body candidate ownership must be reconciled/shared across
-native and speculative/recognition paths, preserving original compiled dispatch
+native Engine and GeneratedPlanExecutor through their shared select_native_match, preserving original compiled dispatch
 indices, source/duplicate slot identities, frame/gap/cursor/trace fields and formats.
 Do not truncate the complete regex catalog needed for incoming selectors or boundary
 helpers; distinguish compiled regex_idx from child_regex_idx. Preserve separate
@@ -43,3 +43,15 @@ an exact Unicode entry literal, preserving expected11/input; direct-dependent Pe
 UTF-8 fixture target passes. That carrier refinement does not fix or waive this
 source-dispatch defect. Exact compact descriptor/trace distinctions are in
 active-edge-regex-dispatch-intake.json; full source/log epochs are in the Rust packet.
+
+## Authority36.0 clarification
+
+The existing choice contract orders eligible outgoing edges, not declared catalog
+numbers. Public Perl native/fresh reverse Value[2]/Value[1] duplicate source returns
+2; a later-authored but earlier-positioned /a/ returns A before /b/. The target
+active-edge-body-candidates.md freezes these distinctions and all exclusions.
+Native Engine and GeneratedPlanExecutor share select_native_match; no separate
+recognition matcher was diagnosed. Full catalogs remain intact for entry/boundary
+uses. Exact sources/channels are in active-edge-body-authority.json.gz. A distinct
+Perl emitted boundary catalog omission is owned37 before full23.4, not attributed
+to this Rust finding or used to change boundary semantics.
