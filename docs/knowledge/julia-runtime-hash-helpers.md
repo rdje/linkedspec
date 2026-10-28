@@ -39,5 +39,8 @@ ordinary map values remain nested.
 
 Related facts: [[julia-runtime-value-control-tree-helpers]], [[julia-runtime-array-helpers]],
 [[julia-runtime-core-value-capture-helpers]], [[dart-runtime-hash-helpers]],
-[[terse-hash-receiver-value-chains]], [[hash-helper-return-shape-caveats]],
+[[terse-hash-receiver-value-chains]], [[named-mark-number-julia-compatibility]],
 [[terse-statement-separator-contract]].
+
+October28 reference repair replaces the absent hash-helper-return-shape-caveats
+fact with qualified Julia scalar legacy intake, without changing the Hash domain.

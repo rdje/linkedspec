@@ -1,7 +1,7 @@
 # Readonly named-mark Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.34; target freeze34.0.
-Status: frozen bounded target; Perl34.1, Rust34.2/43.1 and Dart34.3 targeted-checked; independent Julia34.4 then safe Lua34.5 follow.
+Status: frozen bounded target; Perl34.1, Rust34.2/43.1, Dart34.3 and Julia34.4 targeted-checked; safe installed Lua34.5 follows.
 
 ## Authority and observed distinctions
 
@@ -137,3 +137,13 @@ configuration, not isolated dependencies or snapshot fresh proof. Final fatal
 analysis/format pass after annotation-only empty expected-list warnings; exact
 refinement/source/output epochs are in named-mark-number-dart-intake.json.gz.
 No invented RED/full admission; independent Julia34.4 next.
+
+## Bounded Julia34.4 compatibility
+
+Julia already supports seven ordinary named Number methods/quoted/computed names
+and caller mark read/write/isolation/call-time scopes.31 sources/four routes and
+new registered155/nearest complete-mark13 pass with depwarn=error/empty stderr.
+Fresh Module means current process/project. Direct6/[]/KVT and bound6/[]/undef/KVT
+preserve Julia copied-scalar set_key fallback outside the Hash domain, without
+Dart promotion or portable invalid-input admission. Exact source/payload/results:
+named-mark-number-julia-intake.json.gz. No runtime edit/invented RED; safe Lua next.

@@ -7291,14 +7291,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.3 - lock Dart named Number methods and dynamic caller mark scopes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.4`
-  Status: `pending`
-  Goal: Independently implement or lock Julia readonly named-mark Number method sources.
-  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
-  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
-  Planned verification tier: focused
-  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+  Status: `completed` / bounded Julia compatibility; full context admission23.4 separate
+  Goal: Lock existing Julia readonly named Number methods and independently healthy caller mark scopes.
+  Activation: clean `cd3d8aeb9f9d74f2fdfa39daf2942089f2a61986`; Dart34.3 committed, tree clean and brief0.
+  Authority: named-mark-number-results.md/shared fixture, Julia pure copied-value Hash policy, ADR0031 and named mark rule-label isolation; exact31-source/four-route packet named-mark-number-julia-intake.json.gz.
+  Verification tier: `focused`
+  Focused checks: New registered155 plus nearest complete-mark13 pass with depwarn=error/empty stderr; native/reconstructed SpecFile/plan/fresh Module. Exact values/kinds/error classes/source/scope, book/map/history/manual memory/cadence/diagnosis/claim-input/diff. Runtime unchanged/no broad gate.
+  Canonical trigger: Full23.4/final clean push after safe Lua34.5 and42/39/38/37/40/41 plus pressure/registration/declared-host prerequisites; fresh Module is current process/project, not independent VM admission.
+  Claim verification: none: Finite authored functional/scope/error assertions and existing-source authority, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent31-source intake already supports ordinary seven producers/methods/shared fixture and callback scopes. Julia bound scalar set_key returns copied6, preserving its outside-Hash-domain legacy rather than Dart's promotion; no method defect or portable input grant inferred.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing interpreter composes Number sources; _execute_runtime_codeblock_value! forwards semantic rule_label. set_key returns _runtime_copy(first(values)) when _runtime_hash_items finds no Hash. Reached Julia hash card links a nonexistent fact; callable card still labels bounded identity defect current despite canonical31.6.3 repair.
+  - [x] **FIX**: Add named_mark_number_results_test.jl and normal runner registration with shared fixture, explicit values/scope/function classes. Route missing hash fact pointer to this qualified Julia intake fact; update callable current qualification to bounded31.6.3 repair, retaining broad2.8.2 closeout. No runtime/API/domain/schema/alias change.
+  - [x] **ADDRESSED (verified)**: New155/nearest13 assertions pass across supported routes. Quoted/computed names, zero/missing/reversed/default/partial/snapshot and actual root effects remain. All-seven callback reads, visible writes, cross-rule equal-name isolation and returned callback Top call-time0/6 pass; all7 function/registered callback fences preserve helper/error classes.
+  - [x] **NO REGRESSION**: Strict recursive comparator distinguishes Bool/Number/null/containers. Direct6/[]/KVT and bound6/[]/undef/KVT remain qualified, normalized scalar prefix skips X/Y. Expected-data extractor initially rejects repetition before consumer writes; corrected only instrument, no product RED. No isolated VM/dependency/full context or portable invalid-input claim.
+  - [x] **LOCKSTEP**: Packet/Julia fact/corrected authority pointers/map/book/target/task/live/resume/roadmap/history agree; safe Lua34.5 next. Broad identity2.8.2/full context23.4 and remaining owned prerequisites stay open. Focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.4 - lock Julia named Number methods and dynamic caller mark scopes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.5`
   Status: `pending`
@@ -7798,7 +7806,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` | `pending` | Independently intake Julia named Number sources and caller mark scopes. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.5` | `pending` | Independently intake safe installed Lua named Number sources and caller scopes. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

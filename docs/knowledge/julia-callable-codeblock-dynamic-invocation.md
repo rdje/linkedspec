@@ -13,7 +13,7 @@ answers:
   - "does emitted Julia execute callable codeblocks"
   - "does Julia preserve ordinary unknown helper diagnostics outside codeblocks"
 date: 2026-07-30
-status: implemented; helper callback identity limitation remains open under Julia .2.8
+status: implemented; bounded TYPE31.6.3 identity repair checked, broad Julia startup2.8.2 closeout open
 tags: [julia, actionir, codeblock, callable, dynamic-scope, diagnostics, generated-source, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.6.2 adds bound-codeblock fallback after static callables, once-only ordered arguments, recursively copied temporary fixed/rest bindings, cleanup-safe three-store restoration, caller-visible nonparameter state, invocation-local results, typed value access, exact portable failures and ordered cycles. Focused proof passes 125 dynamic plus 239 construction assertions across native/reconstructed/generated-plan/fresh emitted-module roles; the complete package and Julia local gate pass with unchanged 18-owner/five-package repository storage, primary CLI, and corpus 105/105. Final proof passes Knowledge Map 770/6251, mdBook 79/13972 KiB, all seven doctrines, canonical containment/moved-root, CLI 66x2, RAM 57%, and Phase 0 1031/1031 in 655 seconds."
 reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(\"julia/test/callable_codeblock_literal_contract_test.jl\")' && bash tools/run_julia_local.sh"
@@ -21,12 +21,11 @@ reverify: "bash tools/run_python_project_data.sh tools/check_callable_codeblock_
 
 # Julia Callable Codeblock Dynamic Invocation
 
-**Current qualification (2026-09-11):** helper names incorrectly act as callback
-recursion identities. Distinct nested with/map callbacks can fail, and a bound
-callback passed through with loses its name in the cycle. Exact evidence and repair
-are [[julia-callback-helper-recursion-identity-gap]], Julia .2.8. Generic final-block
-normalization is now implemented under .11.6.3; the pending wording below describes
-the original dynamic-invocation milestone.
+**Current qualification (2026-10-28):** the September11 helper-name recursion
+identity defect was repaired in bounded TYPE31.6.3; exact scope is recorded in
+[[julia-callback-helper-recursion-identity-gap]]. Broad Julia startup2.8.2 closeout
+remains open. Historical milestone wording below predates that repair and generic
+final-block normalization under .11.6.3.
 
 Julia resolves `cb(args)` as a bound codeblock only after controls, helpers, and registered user functions. A
 colliding static callable wins. A bound non-codeblock fails as `value_not_callable`; an unknown call reached
