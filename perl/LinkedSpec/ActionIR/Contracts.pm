@@ -764,6 +764,46 @@ sub _anonymous_capture_reset_statement_expr {
  return 'do { $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "'.$method.'") }'
 }
 
+# Readonly named Number readers share their original bodies with ordinary value
+# lowering. Names remain symbolic words and the current rule label stays explicit.
+sub _readonly_named_mark_number_value_expr {
+ my ($label, $method, @marks) = @_;
+ state $arity = {
+  mark_pos => 1, mark_line => 1, mark_col => 1,
+  capture_len_from => 1, capture_until_cursor_len_from => 1,
+  capture_rest_len_from => 1, capture_len_between => 2,
+ };
+ return undef unless defined($method) && exists($arity->{$method})
+  && @marks == $arity->{$method};
+ return undef if grep { !defined($_) || ref($_) || !/\A\w+\z/o } @marks;
+ $label = '' unless defined $label;
+ state $location_reader = {
+  mark_pos => 'mark_read_offset', mark_line => 'mark_read_line',
+  mark_col => 'mark_read_column',
+ };
+ my $operation = '"'.$method.'"';
+ if (my $reader = $location_reader->{$method}) {
+  return 'do { LinkedSpec::SourceLocation::Runtime::'.$reader
+   .'($info, $STRING, \''.$label.'\', \''.$marks[0].'\', '.$operation.') }';
+ }
+ my @reads = map {
+  'LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$_.'\', '.$operation.')'
+ } @marks;
+ if ($method eq 'capture_len_between') {
+  return 'do { my $__ls_start = '.$reads[0].'; my $__ls_end = '.$reads[1]
+   .'; (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_start, $__ls_end, '.$operation.') : undef }';
+ }
+ if ($method eq 'capture_until_cursor_len_from') {
+  return 'do { my $__ls_mark = '.$reads[0]
+   .'; my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_cursor, '.$operation.') : undef }';
+ }
+ my $end = $method eq 'capture_rest_len_from'
+  ? 'LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, '.$operation.')'
+  : '$LSPOS - length($LMATCH)';
+ return 'do { my $__ls_mark = '.$reads[0]
+  .'; defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, '.$end.', '.$operation.') : undef }'
+}
+
 # Contracts that normalize capture and cursor-control helpers.
 sub _build_capture_and_cursor_contracts {
  my ($label, $d) = @_;
@@ -1179,7 +1219,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_len_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_len_from") : undef }'
+     _readonly_named_mark_number_value_expr($label, 'capture_len_from', $+{mark})
     }gex;
     return $code
    },
@@ -1239,7 +1279,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_rest_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_rest_len_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_len_from"), "capture_rest_len_from") : undef }'
+     _readonly_named_mark_number_value_expr($label, 'capture_rest_len_from', $+{mark})
     }gex;
     return $code
    },
@@ -1299,7 +1339,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_until_cursor_len_from\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "capture_until_cursor_len_from"); my $__ls_cursor = pos $$STRING; (defined($__ls_mark) && defined($__ls_cursor) && $__ls_cursor >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_cursor, "capture_until_cursor_len_from") : undef }'
+     _readonly_named_mark_number_value_expr($label, 'capture_until_cursor_len_from', $+{mark})
     }gex;
     return $code
    },
@@ -1359,7 +1399,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_len_between\s*\(\s*(?<start>\w+)\s*,\s*(?<end>\w+)\s*\)
     }{
-     'do { my $__ls_start = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{start}.'\', "capture_len_between"); my $__ls_end = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{end}.'\', "capture_len_between"); (defined($__ls_start) && defined($__ls_end) && $__ls_end >= $__ls_start) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_start, $__ls_end, "capture_len_between") : undef }'
+     _readonly_named_mark_number_value_expr($label, 'capture_len_between', $+{start}, $+{end})
     }gex;
     return $code
    },
@@ -1569,7 +1609,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_pos\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "mark_pos") }'
+     _readonly_named_mark_number_value_expr($label, 'mark_pos', $+{mark})
     }gex;
     return $code
    },
@@ -1584,7 +1624,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_line\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::mark_read_line($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "mark_line") }'
+     _readonly_named_mark_number_value_expr($label, 'mark_line', $+{mark})
     }gex;
     return $code
    },
@@ -1599,7 +1639,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_col\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::mark_read_column($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', "mark_col") }'
+     _readonly_named_mark_number_value_expr($label, 'mark_col', $+{mark})
     }gex;
     return $code
    },

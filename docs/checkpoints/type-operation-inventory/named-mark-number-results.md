@@ -1,7 +1,7 @@
 # Readonly named-mark Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.34; target freeze34.0.
-Status: frozen bounded target; independent34.1-.5 implementation follows.
+Status: frozen bounded target; Perl34.1 repaired/targeted-checked, independent Rust34.2 then peers follow.
 
 ## Authority and observed distinctions
 
@@ -75,3 +75,28 @@ healthy implementations receive regression without invented RED. Retain native,
 restored/generated/fresh routes where supported and exact typed diagnostic limits.
 Focused checks and per-leaf commits continue; full source/context/portable23.4
 admission follows34,42/39/38/37/40/41 and pressure/registration/declared-host repair.
+
+## Bounded Perl34.1
+
+All seven original direct-source coalesce/cat probes independently fail fresh
+undefined coalesce before production. The new sole Contracts body factory feeds
+unchanged native callbacks and early MethodLowering value sources, after function
+guard, with existing deps.rule_label and symbolic word/arity rules. All seven
+original native/public standalone body strings remain byte-identical.
+
+First implementation has10 healthy groups; seven remaining expected arrays in
+the new test had an extra wrapper for scalar child returns. Only those test
+expectations are corrected, then their seven selections pass with production
+and other10 inputs/assertions unchanged. This covers current17 groups across
+focused runs, not a final17 combined-run claim or extra product RED. Nearest
+anonymous Number/reset2 groups and both module syntax checks pass. Shared target,
+alternate label/names, cursor6 versus end10, zero/missing/reversed defaults,
+symbolic shadowing, clear snapshot and normalized bad-operand skip are preserved.
+
+Direct legacy remains Hash/[]/KV; bindingKVT remains distinct. All seven pure
+function sources retain specific unready helper metadata and0! placeholders;
+literal/registered mark_pos callbacks remain typed unknown_helper, with false-ready
+metadata owned31.6.4.4 and native child error loss41. Quoted/computed substitutions
+are byte-unchanged under42; no new argument/deferred rights. Actual fresh shared
+emitted source/raw0/ready1 and all epochs are retained in named-mark-number-perl-
+intake.json.gz. Independent Rust34.2 follows; full23.4 remains separate.

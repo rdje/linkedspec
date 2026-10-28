@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Named-mark34 target/owners frozen; Perl34.1 next, argument-readiness42 owned.
+Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
 
 ## Latest Completed Slice
 
-Readonly named-mark Number34.0 target is frozen without runtime changes. Nine finite public Perl native/fresh/metadata/substitution distinctions retain seven primitive values6/1/7/3/6/6/6 and healthy bound methods5/2/7!/TAIL/7/5/7 versus a failing direct-method twin with raw0/ready1. Missing8/symbolic scalar shadowing/snapshot after clear and actual binding legacy Hash/[]/undef/KVT with normalized X/Y skip are preserved; direct-root policies require independent intake. Shared prospective source equals failed direct twin and expected equals healthy bound output; independent34.1-.5 owners created. Quoted/evaluated names fail fresh execution with false-ready metadata: exact Contracts/RewritePipeline/Diagnostics/EmitContext mechanism is logged under new P1 owner42 after34 before39/admission, without a name-role grant. Target/fixture/packet/cards/map/book/task/live/resume/roadmap/history agree. Perl34.1 next, then peers and42/39/38/37/40/41 before full23.4/push; no broad gate or push.
+Perl readonly named-mark Number34.1 is repaired through a shared sole native body owner and narrow early value path after function guard, using current rule_label and existing symbolic word/arity rules. Seven independent original direct sources show actual fresh RED; original seven native/public body strings stay byte-identical. First code passes10 groups and yields correct direct scalar values in seven new tests with wrongly nested expected arrays. Test-only oracle correction reruns7pass, with runtime and other10 source/assertions unchanged; current17 contexts are covered across focused runs, not a final17 combined claim. Nearest anonymous Number/reset2 selections and both module syntax checks pass. Shared/alternate label/partial cursor-vs-end/zero/missing/reversed/symbolic-shadow/snapshot/normalized skip/direct legacyKV controls agree native/fresh; bindingKVT stays distinct. All7 function guards remain unready; deferred mark_pos stays typed unknown under31.6.4.4/41, and quoted/computed substitution bytes remain unchanged under42. Actual producer/source/emitted bytes/oracle epochs retained; book/cards/map/task/live/resume/roadmap/history and scheduled canonical registration agree. Rust34.2 next, then peers/42/39/38/37/40/41 before full23.4/push; no broad gate or push.
 
 ## Next Action
 
-Activate Perl34.1 from this clean named-mark target boundary. Establish per-helper direct/bound/producer/absence/zero/symbolic-shadow/snapshot/legacy/function/deferred baseline before production. Reuse original seven readonly mark/span producer bodies through early method-value ownership with exact current label/name/arity/operation semantics; preserve existing accepted roles and keep quoted/evaluated role authority42 separate. Targeted new/nearest Number/reset checks, syntax, book/evidence/docs/commit then independent34.2-.5;42/39/38/37/40/41 before full23.4/push, authorized focused --no-verify continues.
+Activate independent Rust34.2 from this clean Perl named Number repair boundary. Establish actual seven producers/per-helper direct/bound/shared/missing/zero/symbolic-shadow/snapshot/legacy/function/callback/name-role behavior on native/restored CompiledSpec/plan before production. Already-compatible behavior gets regression without invented RED; repair only confirmed source gaps, preserving accepted argument roles and direct-root policies. Focused compile/new/nearby Number checks, book/evidence/docs/commit then independent34.3-.5;42/39/38/37/40/41 before full23.4/push. Authorized focused --no-verify continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.34.1` — Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.0` — Named-mark34 target/owners frozen; Perl34.1 next, argument-readiness42 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.5` — Safe Lua reset102 plus Number155 pass per host; all bounded35 checked, named-mark34.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.4` — Julia reset block70 plus Number75 pass; no runtime edit, safe Lua35.5 next.
@@ -29,7 +30,6 @@ Activate Perl34.1 from this clean named-mark target boundary. Establish per-help
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.3` — Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1` — Rust trace-test storage owner removed; exact trace/census green, independent Julia36.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` — Dart active-edge repair13pass; immediate Rust trace-test storage followup before independent peers.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.36.1` — Rust active-edge ownership repaired12pass plus Number6; independent Dart36.2 next.
 
 ## History
 

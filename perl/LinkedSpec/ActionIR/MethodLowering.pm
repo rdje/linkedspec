@@ -6152,6 +6152,17 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $method_call->{method},
   );
  }
+ if ($method_call && $trimmed =~ /\A(?<named_number>mark_(?:pos|line|col)|capture_(?:len_from|until_cursor_len_from|rest_len_from|len_between))\s*\(\s*(?<first_mark>\w+)\s*(?:,\s*(?<second_mark>\w+)\s*)?\)\z/o) {
+  my ($method, $first, $second) = @+{qw(named_number first_mark second_mark)};
+  my $needs_two = $method eq 'capture_len_between';
+  return undef if $needs_two != defined($second);
+  my $label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
+  return undef unless defined($label) && !ref($label);
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_named_mark_number_value_expr',
+   $label, $method, $first, (defined($second) ? ($second) : ()),
+  );
+ }
  if ($method_call && ($method_call->{method} eq 'and' || $method_call->{method} eq 'or' || $method_call->{method} eq 'not')) {
   my $logical_node = _parse_method_value_ast_expr($trimmed, $deps);
   my $logical_expr = $lower_ast_logical_call_node->($logical_node);

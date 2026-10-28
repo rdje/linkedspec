@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1386** facts · **10890** question keys.
+> **1386** facts · **10891** question keys.
 
 ## Questions → fact
 
@@ -8110,6 +8110,7 @@
 - "where does last_error live" -> [runtimecontext-boundary](docs/knowledge/runtimecontext-boundary.md) · 2026-06-12 · reverify: `grep -l 'RuntimeContext' perl/LinkedSpec/*.pm perl/LinkedSpec/RuleIR/*.pm | wc -l`
 - "where does log_output go" -> [trace-verbosity-and-formatting](docs/knowledge/trace-verbosity-and-formatting.md) · 2026-09-19 · reverify: `rg -n 'DUMP_NONE|DUMP_DEBUG|configure_trace|trace_log_file|trace_reset_log' perl/LinkedSpec.pm perl/LinkedSpec/Trace.pm docs/tasks/TRACE-OBSERVABILITY.md`
 - "where does migration-summary shaping live" -> [compilerstate-internal-model](docs/knowledge/compilerstate-internal-model.md) · 2026-06-12 · reverify: `test -f perl/LinkedSpec/CompilerState.pm && grep -l CompilerState perl/LinkedSpec/Compiler.pm perl/LinkedSpec/Validation.pm`
+- "where does named Number method lowering get the current rule label" -> [named-mark-number-method-source-gap](docs/knowledge/named-mark-number-method-source-gap.md) · 2026-10-28 · reverify: `Recover probe_named_mark_number_authority.pl and use tools/project_data_run.sh env PERL5LIB= perl -Iperl; its optional labels select exact cases. Require completed output before reading.`
 - "where does named spec resolution currently live in Rust Dart and Julia" -> [native-spec-resolution-policy-drift](docs/knowledge/native-spec-resolution-policy-drift.md) · 2026-09-07 · reverify: `sed -n '1,180p' perl/PathSearch.pm && rg -n '_resolve_local_spec_path|PathSearch::go|resolve_named_spec|resolvePrimaryCliNamedSpec|_resolve_named_spec_path|_find_primary_cli_repository_spec' perl/LinkedSpec/Resolver.pm rust/linkedspec-runtime/src/primary_cli.rs dart/lib/src/cli/primary_cli.dart julia/src/cli/LinkedSpecJuliaCli.jl`
 - "where does ptchange split input paths through a shell" -> [ptchange-spaced-input-shell-read-defect](docs/knowledge/ptchange-spaced-input-shell-read-defect.md) · 2026-09-06 · reverify: [3 entries](#ptchange-spaced-input-shell-read-defect)
 - "where does reading resume after the integration documentation pivot" -> [archogen-rust-lispish-integration](docs/knowledge/archogen-rust-lispish-integration.md) · 2026-09-27 · reverify: `Follow the public preparation/workspace sequence in docs/linkedspec-book/src/public-api/integration-rust.md, then its native consumer checks. Treat rgx/docs/INTEGRATION.md as the dependency authority; do not inspect implementation.`
@@ -11263,7 +11264,7 @@ _Safe Lua readonly capture Number sources already compose through ordinary metho
 ### capture-boundary-number-result-lowering-gap
 _Capture and mark Number sources need early method-value lowering_
 - **answers:** can capture_rest_len compose with coalesce and String methods directly | why does mark_pos sub fail as an anonymous subroutine declaration | why does capture_len_between coalesce call an undefined host function | which task owns readonly capture boundary Number fluent composition | does capture Number ready1 metadata prove generated execution | why does start_capture_slice inside a method value block fail compilation | which task owns value block capture boundary mutation
-- **date:** 2026-10-28 · **status:** all bounded33/35 children targeted-checked; named-mark34 target frozen/Perl34.1 next;42/40/full admission open
+- **date:** 2026-10-28 · **status:** all bounded33/35 children targeted-checked; named-mark Perl34.1 repaired/Rust34.2 next;42/40/full admission open
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/capture_boundary_number_results.t` · `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test capture_boundary_number_results`
 - **source:** [`docs/knowledge/capture-boundary-number-result-lowering-gap.md`](docs/knowledge/capture-boundary-number-result-lowering-gap.md)
@@ -16637,8 +16638,8 @@ _One governed driver recurs both mutation authorities across six runtime routes_
 
 ### named-mark-number-method-source-gap
 _Readonly named-mark Number methods need early source lowering while preserving symbolic names_
-- **answers:** can mark_pos and mark_line feed coalesce and arithmetic directly | can named capture width getters feed String and Array methods | which task owns named-mark Number fluent composition | do same-named scalar bindings change symbolic mark lookup
-- **date:** 2026-10-28 · **status:** target34.0 frozen; independent34.1-.5 next; no runtime change
+- **answers:** can mark_pos and mark_line feed coalesce and arithmetic directly | can named capture width getters feed String and Array methods | which task owns named-mark Number fluent composition | do same-named scalar bindings change symbolic mark lookup | where does named Number method lowering get the current rule label
+- **date:** 2026-10-28 · **status:** Perl34.1 repaired/targeted-checked; independent Rust34.2 next, peers/full admission open
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.34.0 at clean902d9ab1b; named-mark-number-authority.json.gz retains exact nine-source native/fresh/metadata/substitution/emitted bytes and original/refined producers.`
 - **reverify:** `Recover probe_named_mark_number_authority.pl and use tools/project_data_run.sh env PERL5LIB= perl -Iperl; its optional labels select exact cases. Require completed output before reading.`
 - **source:** [`docs/knowledge/named-mark-number-method-source-gap.md`](docs/knowledge/named-mark-number-method-source-gap.md)
