@@ -7904,7 +7904,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored implicit-result/return controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5`
-  Status: `in_progress` / intake39.1.5.0 and progress39.1.6 complete; bounded minimum39.1.5.1 next
+  Status: `in_progress` / intake39.1.5.0/progress39.1.6/minimum39.1.5.1 complete; attribution39.1.5.2 remains before admission
   Goal: Reconcile and repair ordinary Rust under-minimum failure against existing portable no-match semantics, separately from repeated-AND action returns.
   Reproduction: Value::AND{2} nonreturning sparse action with IT/E collector on HcatHcat returns[[cat],[cat]] on all3 routes; Hcat returns generic expected-at-least2-got1 Err, while current Perl returnsnull. Exact source/serialized/plan and native trace retained in refined Rust intake.
   Root/acceptance: Interpreted/generated regex and bcode minimum checks currently returnErr after ordinary input misses. Audit published mode/no-match/typed error authority before changing scope; prove a distinguishing recovery path and below-minimum/zero/empty/accepted-null/explicit-return controls. Preserve real execution/validation/progress errors and no cursor rollback policy change. Do not silently rewrite error schemas or broaden a local AND fix into unreviewed mode policy.
@@ -7937,14 +7937,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0 - isolate ordinary minimum misses and missing recognition progress guard`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1`
-  Status: `pending` / P1 after39.1.6, before39.1.4.2/peers/admission
-  Goal: Return ordinary no-match for unmet repetition minima while preserving genuine errors and correct recognition outcome.
-  Evidence: minimum_miss_routes.rs contains7 actual dormant native/restored/plan/API failures from39.1.5.0. Four ordinary minimum error branches in native/generated regex/bcode owners; existing explicit choice/AND-acode JSON minima already null. Legacy engine unit rep_min_not_met_returns_error encodes older Err behavior for the same minimum grammar and needs an explicit compatibility update, not silent removal.
-  Acceptance: Freeze actual recovery, zero/positive minimum, accepted-null versus actual miss (including recognition match boolean), no rollback/unchanged consumed cursor, caller capture/return restoration, and real validation/execution/progress errors. Normalize only the proven min-failure control path. Modern value API returnsnull; legacy accumulator returns no new value, preserving its envelope. Keep full regex-adjacent E attribution/shape qualified under.5.2/SESSION27 rather than forcing unrelated alignment. Enable all7 regressions and update old unit deliberately; source/serde/plan/emitted identities unchanged.
-  Planned verification tier: focused
-  Planned focused checks: Exact7 min/API RED-GREEN plus real typed-progress guard control, recovery/null/match-status cases, changed legacy unit, scoped compile/format, book/docs/manual continuity/commit.
-  Planned canonical trigger: Full39/23.4/final clean push; actual new policy/schema requires separate ownership before production.
-  Planned claim verification: none: Finite authored minimum/result/error/API distinctions, no population measurement.
+  Status: `completed` / ordinary minimum/API and real recognition outcomes
+  Activation: clean `bdc4dbf0c64fed3e526521a477ef1a82fbb45273` after live progress39.1.6.
+  Goal: Return ordinary no-match for unmet repetition minima while preserving real errors and accepted-null distinction.
+  Verification tier: `focused`
+  Focused checks:13 normal tests2pass11RED ->13pass0ignored;12 exact source/serde/plan/emitted records and legacy input unchanged; private2pass with8 native/generated caller-restoration and12 direct generated recognition executions; changed legacy unit1/live progress4/group-reset2 pass; exact-file format/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push; no public policy/schema/classifier/generated-format movement.
+  Claim verification: none: Finite authored minimum/result/error/API distinctions, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Seven retained min/API regressions plus four independently reached recognition cases expose13test2pass11fail. Partial acode hits incorrectly remain accepted below minimum; full blind parents fail to publish acceptance despite a successful null result.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Four engine native/generated regex/bcode min branches returnErr or fail to clear partial acceptance. Runtime live acceptance only records local regex hits, so blind parent completion staysfalse. SavedMatchState/caller return already define lexical restoration; the new ordinary exits must use them.
+  - [x] **FIX**: Normalize exact min branches to Undef, restore caller match/return, keep physical cursor. Private note_outcome clears under-min acceptance and publishes successful nonempty blind repetition independent of payload; zero-hit behavior preserved. Explicitly update legacy unit to directnull/legacy[]; no blanket error swallowing or source/classifier/schema movement.
+  - [x] **ADDRESSED (verified)**:13pass0ignored, all7 minimum regressions enabled.12 exact public source/serde/plan/emitted records unchanged. Private2pass proves8 caller-state restorations at2->3 and12 direct generated match/null cases. Historical first combined recognition test only reached one case and is retained separately; refined4 tests reach all.
+  - [x] **NO REGRESSION**: Real progress errors remain errors; consuming cursor, nullable EX/E, zero-min ordinary success, full existing Rust result shape and max bounds retained. Legacy unit1/live progress4/group-reset2 pass. Shared expression callbacks still native; private tests independently cover generated loops. No independent emitted package/full admission claim.
+  - [x] **LOCKSTEP**: rust-minimum-fix-intake.json.gz/card/target/book/roadmap/task/live/resume/history agree. Perl reference preselects local regex, so cursor differences are qualified rather than treated as bounds defects; independently reproduced repeated blind parent acceptance gap is P1 owned39.9 before admission. Implicit blind39.1.4.2 next;.5.2/SESSION27/peers/39.8-.9 remain owned. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1 - normalize Rust repetition minimum misses and recognition outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.2`
   Status: `pending` / P1 after bounded feature coverage, before full39/23.4/push; associated SESSION-STARTUP-READING.27
@@ -7972,6 +7979,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: Ordinary zero termination, one-shot zero, consuming choice, leading/trailing zero AND group, max1 and IT controls pass; neutral1/false-payload1/group-reset2 pass. No full suite/independent emitted package/Unicode position claim; callback versus direct loop routing explicit.
   - [x] **LOCKSTEP**: rust-live-progress-intake.json.gz, card/target/book/roadmap/task/live/resume/history align. Minimum/API39.1.5.1 next; blind39.1.4.2/attribution39.1.5.2/SESSION27/peers remain owned before admission. Authorized focused commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6 - enforce live recognition repetition progress in Rust`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.9`
+  Status: `pending` / P1 after bounded Rust/peer features, before full39/23.4/push
+  Goal: Repair Perl repeated blind-parent recognition acceptance without collapsing successful null into a miss.
+  Reproduce: probe_rust_minimum_outcome.pl bcode-OR{2}/AND{2}, Top I checkpoint/recognize Value/commit; Value repeats Part pipe /a/ returning1 twice, EX/E returnundef. Inputaa consumes2, native/fresh return[0,null,2]. Isolated process/descriptor controls reproduce;39.1.5.1 packet retains sources/emitted/output/producers.
+  Root: RecognitionTransactionRuntime::attempt_static reads the callee completion accepted bit; bcode loops count successful child completions but do not note completed parent acceptance. note_match only marks regex extraction. Canonical recognition separates matched state from null payload. Verify full parent counts/trace in repair; preserve under-min/early-return/progress/entry/ordinary behavior.
+  Qualification: Perl static recognition preselects callee local regex before invoking handler. Acode/AND entry treatment differs from Rust. Zero-min acode consuming2 withmax1 includes preselection, not a proven bound violation. Do not infer cursor parity or modify bounds from it.
+  Planned verification tier: focused
+  Planned focused checks: Exact native/fresh parent-success versus under-min/null/falsey/error, descriptor/emitted trace, repair/normal registration/book/docs/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; actual authority movement separately owned canonical.
+  Planned claim verification: none: Finite authored parent-completion distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8305,7 +8323,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` | `pending` | Normalize ordinary minimum misses after the live progress repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.2` | `pending` | Complete implicit repeated/default blind result collection. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

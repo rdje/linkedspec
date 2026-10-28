@@ -87,5 +87,5 @@ results change. AND remains ineligible for capture_gaps; the original2 invalid
 fixtures earn no product RED credit, exact typed rejection is preserved.
 Packet rust-and-group-outcomes-intake.json.gz retains all source/epoch/patch/
 receipt. Rebuild generated applications with updated runtime; no source rewrite
-or independent emitted-package proof. Remaining minimum families39.1.5 then
-blind implicit results39.1.4.2 precede peers;39.8/SESSION27 before admission.
+or independent emitted-package proof. Minimum/API39.1.5.1 and live progress39.1.6 are now targeted-checked;
+blind implicit results39.1.4.2 precede peers;39.8/39.9/SESSION27 before admission.

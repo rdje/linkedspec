@@ -1679,15 +1679,12 @@ impl GeneratedPlanExecutor<'_> {
         }
 
         if is_rep && matches < rep_min {
-            if collects_action_values || collects_and_groups {
-                ctx.restore_return_value(caller_return);
-                saved_match.restore(ctx);
-                return Ok(RuntimeValue::Undef);
-            }
-            return Err(format!(
-                "rule '{}': expected at least {} matches, got {}",
-                label, rep_min, matches
-            ));
+            // A partial hit is not an accepted invocation when its minimum
+            // fails. Keep the consumed cursor, but restore caller lexicals.
+            ctx.note_recognition_outcome(false);
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Ok(RuntimeValue::Undef);
         }
 
         if !is_rep && is_and_acode_seq && matches < and_acode_seq_len {
@@ -1972,10 +1969,16 @@ impl GeneratedPlanExecutor<'_> {
                 }
 
                 if matches < rep_min {
-                    return Err(format!(
-                        "rule '{}': expected at least {} matches, got {}",
-                        label, rep_min, matches
-                    ));
+                    ctx.note_recognition_outcome(false);
+                    ctx.restore_return_value(caller_return);
+                    saved_match.restore(ctx);
+                    return Ok(RuntimeValue::Undef);
+                }
+                if matches > 0 {
+                    // Blind parents have no local regex to publish their
+                    // accepted child sequence/choice. Payload nullness does
+                    // not determine this completed repetition's outcome.
+                    ctx.note_recognition_outcome(true);
                 }
 
                 if let Some(ref excode) = rule.excode {
@@ -3563,10 +3566,16 @@ impl Engine {
                 }
 
                 if matches < rep_min {
-                    return Err(format!(
-                        "rule '{}': expected at least {} matches, got {}",
-                        label, rep_min, matches
-                    ));
+                    ctx.note_recognition_outcome(false);
+                    ctx.restore_return_value(caller_return);
+                    saved_match.restore(ctx);
+                    return Ok(RuntimeValue::Undef);
+                }
+                if matches > 0 {
+                    // Blind parents have no local regex to publish their
+                    // accepted child sequence/choice. Payload nullness does
+                    // not determine this completed repetition's outcome.
+                    ctx.note_recognition_outcome(true);
                 }
 
                 if let Some(ref excode) = rule.excode {
@@ -3988,15 +3997,12 @@ impl Engine {
 
         // Check min bound for REP variants (not for non-REP with no matches)
         if is_rep && matches < rep_min {
-            if collects_action_values || collects_and_groups {
-                ctx.restore_return_value(caller_return);
-                saved_match.restore(ctx);
-                return Ok(RuntimeValue::Undef);
-            }
-            return Err(format!(
-                "rule '{}': expected at least {} matches, got {}",
-                label, rep_min, matches
-            ));
+            // A partial hit is not an accepted invocation when its minimum
+            // fails. Keep the consumed cursor, but restore caller lexicals.
+            ctx.note_recognition_outcome(false);
+            ctx.restore_return_value(caller_return);
+            saved_match.restore(ctx);
+            return Ok(RuntimeValue::Undef);
         }
 
         if !is_rep && is_and_acode_seq && matches < and_acode_seq_len {
@@ -11146,6 +11152,147 @@ mod tests {
     use linkedspec_core::validation::validate;
 
     #[test]
+    fn minimum_miss_restores_caller_match_and_return_without_rollback() {
+        fn capture_fields(ctx: &RuntimeContext) -> Value {
+            serde_json::json!({
+                "entry_groups":ctx.entry_groups,"entry_spans":ctx.entry_group_spans,
+                "entry_named":ctx.entry_named,"entry_present":ctx.entry_match_present,
+                "match_groups":ctx.match_groups,"match_spans":ctx.match_group_spans,
+                "match_named":ctx.match_named,"match_present":ctx.match_present,
+                "entry_start":ctx.entry_start_byte,"entry_end":ctx.entry_end_byte,
+                "match_start":ctx.match_start_byte,"match_end":ctx.match_end_byte,
+                "capture_start":ctx.capture_start
+            })
+        }
+        for kind in ["regex", "blind"] {
+            for mode in ["OR{2}", "AND{2}"] {
+                let body = if kind == "regex" {
+                    "/a/\n"
+                } else {
+                    "=> Part\n"
+                };
+                let child = if kind == "blind" {
+                    "Part:|\n /a/ -> Part[0] {return(1)}\n"
+                } else {
+                    ""
+                };
+                let source = format!(
+                    "Value::{mode}\n {body} EX {{return(\"EXIT\")}}\n E {{return(\"EXIT\")}}\n{child}"
+                );
+                let parsed = crate::spec_parser::parse_spec_with_user_functions(&source).unwrap();
+                validate(&parsed).unwrap();
+                let compiled = compile(&parsed).unwrap();
+                let rules: Vec<_> = compiled
+                    .rules
+                    .iter()
+                    .map(|rule| GeneratedRuleSpec {
+                        label: match rule.label.as_str() {
+                            "Value" => "Value",
+                            "Part" => "Part",
+                            _ => unreachable!(),
+                        },
+                        family: crate::source_emitter::classify_generated_rule_family(rule),
+                    })
+                    .collect();
+                let engine = Engine::new(compiled);
+                for generated in [false, true] {
+                    let mut ctx = RuntimeContext::new("EPa");
+                    ctx.pos = 2;
+                    ctx.entry_groups = vec!["E".into()];
+                    ctx.entry_group_spans = vec![(0, 1)];
+                    ctx.entry_named.insert("entry".into(), "E".into());
+                    ctx.entry_match_present = true;
+                    ctx.entry_start_byte = 0;
+                    ctx.entry_end_byte = 1;
+                    ctx.match_groups = vec!["P".into()];
+                    ctx.match_group_spans = vec![(1, 2)];
+                    ctx.match_named.insert("local".into(), "P".into());
+                    ctx.match_present = true;
+                    ctx.match_start_byte = 1;
+                    ctx.match_end_byte = 2;
+                    ctx.capture_start = Some(1);
+                    ctx.set_return_value(RuntimeValue::Scalar("CALLER".into()));
+                    let before = capture_fields(&ctx);
+                    let result = if generated {
+                        GeneratedPlanExecutor {
+                            engine: &engine,
+                            generated_rules: &rules,
+                            source_identity: None,
+                        }
+                        .execute_rule("Value", 0, &mut ctx)
+                    } else {
+                        engine.execute_rule("Value", 0, &mut ctx)
+                    }
+                    .unwrap();
+                    let after = capture_fields(&ctx);
+                    let caller = ctx.take_return_value().unwrap().to_json();
+                    eprintln!(
+                        "RUST_MINIMUM_PRIVATE_RESTORE {kind}_{mode}_{generated} {}",
+                        serde_json::json!({"source":source,"before":before,"after":after,"caller":caller,"result":result.to_json(),"cursor":ctx.pos})
+                    );
+                    assert_eq!(result.to_json(), Value::Null);
+                    assert_eq!(ctx.pos, 3, "minimum miss must keep consumed cursor");
+                    assert_eq!(after, before);
+                    assert_eq!(caller, serde_json::json!("CALLER"));
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn minimum_miss_direct_generated_recognition_separates_null_and_match() {
+        for kind in ["acode", "bcode"] {
+            for mode in ["OR{2}", "AND{2}"] {
+                let (body, child) = if kind == "acode" {
+                    ("/a/ -> Value[0] {return(1)}", "")
+                } else {
+                    ("=> Part", "Part:|\n /a/ -> Part[0] {return(1)}\n")
+                };
+                let source = format!(
+                    "Value::{mode}\n {body}\n EX {{return(undef)}}\n E {{return(undef)}}\n{child}"
+                );
+                let parsed = crate::spec_parser::parse_spec_with_user_functions(&source).unwrap();
+                validate(&parsed).unwrap();
+                let compiled = compile(&parsed).unwrap();
+                let rules: Vec<_> = compiled
+                    .rules
+                    .iter()
+                    .map(|rule| GeneratedRuleSpec {
+                        label: match rule.label.as_str() {
+                            "Value" => "Value",
+                            "Part" => "Part",
+                            _ => unreachable!(),
+                        },
+                        family: crate::source_emitter::classify_generated_rule_family(rule),
+                    })
+                    .collect();
+                let engine = Engine::new(compiled);
+                for (input, accepted, cursor) in [("aa", true, 2), ("a", false, 1), ("", false, 0)]
+                {
+                    let mut ctx = RuntimeContext::new(input);
+                    let base = ctx.begin_recognition_scope("Observer");
+                    let result = GeneratedPlanExecutor {
+                        engine: &engine,
+                        generated_rules: &rules,
+                        source_identity: None,
+                    }
+                    .execute_rule("Value", 0, &mut ctx)
+                    .unwrap()
+                    .to_json();
+                    let matched = ctx.finish_recognition_scope(base, "Value").unwrap();
+                    eprintln!(
+                        "RUST_MINIMUM_PRIVATE_GENERATED {kind}_{mode} {}",
+                        serde_json::json!({"source":source,"input":input,"result":result,"matched":matched,"cursor":ctx.pos})
+                    );
+                    assert_eq!(result, Value::Null);
+                    assert_eq!(matched, accepted);
+                    assert_eq!(ctx.pos, cursor);
+                }
+            }
+        }
+    }
+
+    #[test]
     fn live_recognition_progress_keeps_provenance_and_cleans_scope() {
         for (name, source, input, offset) in [
             (
@@ -11623,7 +11770,7 @@ Item: /x/ I.return("x")
     // ── REP bounds tests ──
 
     #[test]
-    fn rep_min_not_met_returns_error() {
+    fn rep_min_not_met_returns_an_ordinary_miss() {
         // OR{2,} — minimum 2 matches required
         let grammar = r#"Top::OR{2,}
  /hello/
@@ -11633,10 +11780,18 @@ Item: /x/ I.return("x")
         validate(&spec).unwrap();
         let compiled = compile(&spec).unwrap();
         let engine = Engine::new(compiled);
-        // Only one "hello" — should fail
-        let result = engine.execute("hello world");
-        assert!(result.is_err());
-        assert!(result.unwrap_err().contains("expected at least 2 matches"));
+        // Compatibility correction: an input miss is a null direct value
+        // and contributes no value to the legacy accumulator envelope.
+        assert_eq!(
+            engine
+                .execute_value("hello world", &ExecutionOptions::new())
+                .unwrap(),
+            Value::Null
+        );
+        assert_eq!(
+            engine.execute("hello world").unwrap(),
+            serde_json::json!([])
+        );
     }
 
     #[test]

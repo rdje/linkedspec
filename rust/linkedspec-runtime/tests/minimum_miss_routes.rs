@@ -140,17 +140,14 @@ fn check_mode(name: &str, mode: &str, minimum: usize, max_one: bool) {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn repeated_blind_choice_minimum_is_an_ordinary_miss() {
     check_mode("or_two", "OR{2}", 2, false);
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn repeated_blind_sequence_minimum_is_an_ordinary_miss() {
     check_mode("and_two", "AND{2}", 2, false);
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn bare_blind_or_keeps_its_minimum_one() {
     check_mode("or_one", "OR", 1, false);
 }
@@ -160,7 +157,6 @@ fn zero_minimum_and_bounded_success_keep_exit_values() {
 }
 
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn a_caller_can_recover_from_a_child_minimum_miss() {
     check(
         "recovery",
@@ -176,7 +172,6 @@ fn a_caller_can_recover_from_a_child_minimum_miss() {
 }
 
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn a_successful_null_lifecycle_result_remains_a_value() {
     check(
         "null_exit",
@@ -190,7 +185,6 @@ fn a_successful_null_lifecycle_result_remains_a_value() {
 
 const LEGACY_SOURCE: &str = "Top::OR{2,}\n /hello/\n E { return(1) }\n";
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn regex_only_minimum_has_the_same_ordinary_miss_boundary() {
     // The reference's full regex-only E result shaping is separately owned by
     // SESSION-STARTUP-READING.27. Preserve existing Rust full-result behavior.
@@ -205,7 +199,6 @@ fn regex_only_minimum_has_the_same_ordinary_miss_boundary() {
 }
 
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1; retained actual RED, required before admission"]
 fn legacy_accumulator_api_does_not_raise_for_a_minimum_miss() {
     let compiled = compile_source(LEGACY_SOURCE);
     let serialized = serde_json::to_string(&compiled).unwrap();
@@ -234,4 +227,40 @@ fn a_real_progress_error_is_not_converted_to_a_miss() {
             Expected::ErrorContaining("recognition_zero_progress_repetition"),
         )],
     );
+}
+
+fn check_recognition_minimum(kind: &str, mode: &str) {
+    let (body, child) = if kind == "acode" {
+        ("/a/ -> Value[0] {return(1)}", "")
+    } else {
+        ("=> Part", "Part:|\n /a/ -> Part[0] {return(1)}\n")
+    };
+    let source = format!(
+        "Top::\n I {{tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}}\n /never/\nValue:{mode}\n {body}\n EX {{return(undef)}}\n E {{return(undef)}}\n{child}"
+    );
+    check(
+        &format!("recognition_{kind}_{mode}"),
+        &source,
+        &[
+            ("aa", Expected::Value(json!([true, null, 2]))),
+            ("a", Expected::Value(json!([false, null, 1]))),
+            ("", Expected::Value(json!([false, null, 0]))),
+        ],
+    );
+}
+#[test]
+fn recognition_acode_choice_distinguishes_minimum_miss_from_accepted_null() {
+    check_recognition_minimum("acode", "OR{2}");
+}
+#[test]
+fn recognition_acode_sequence_distinguishes_minimum_miss_from_accepted_null() {
+    check_recognition_minimum("acode", "AND{2}");
+}
+#[test]
+fn recognition_blind_choice_distinguishes_minimum_miss_from_accepted_null() {
+    check_recognition_minimum("bcode", "OR{2}");
+}
+#[test]
+fn recognition_blind_sequence_distinguishes_minimum_miss_from_accepted_null() {
+    check_recognition_minimum("bcode", "AND{2}");
 }

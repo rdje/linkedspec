@@ -490,7 +490,7 @@ Practical model:
 | Hook | Practical meaning | Common use |
 | --- | --- | --- |
 | `IT { ... }` | iteration item hook | customize what happens after one repeated item is accepted. |
-| `EX { ... }` | repetition exit hook | customize what happens when a repetition stops after satisfying its minimum. |
+| `EX { ... }` | repetition exit hook | customize what happens when a repetition stops after satisfying its minimum. In Rust, falling below the minimum is an ordinary no-match: e.g. `OR{2}` with one `/hello/` returns null through the direct-value API and adds nothing to the legacy accumulator (an otherwise empty result is `[]`). Consumed input is retained for caller recovery; EX/E do not override that minimum miss. A successful parse returning null remains distinguishable through recognition’s match boolean. |
 | `E { ... }` | rule end/finalization hook | customize the final value for a completed handler path. |
 
 Example:

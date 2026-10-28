@@ -1113,6 +1113,14 @@ impl RecognitionRuntime {
         Ok(())
     }
 
+    /// Publish a completed repetition outcome independently of its payload.
+    /// A miss keeps the physical cursor and the last selected regex evidence.
+    pub(crate) fn note_outcome(&self, accepted: bool) {
+        if let Some(frame) = self.state.borrow_mut().frames.last_mut() {
+            frame.accepted = accepted;
+        }
+    }
+
     pub(crate) fn note_match(&self, start: u64, end: u64) {
         if let Some(frame) = self.state.borrow_mut().frames.last_mut() {
             frame.accepted = true;

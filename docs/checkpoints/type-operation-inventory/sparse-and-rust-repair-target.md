@@ -166,3 +166,14 @@ Generated expression callbacks use native callees; private direct generated loop
 cover5 error modes/2 consuming groups. Actual native offsets0/1 and cleanup pass.
 Minimum target2pass7 owned dormant;39.1.5.1 next, no ignored success credit/full
 admission. Packet rust-live-progress-intake.json.gz retains producers/inputs/logs.
+
+39.1.5.1 normalizes four native/generated regex/bcode min guards to ordinarynull,
+preserving consumed cursor and restoring caller match/return state. Partial
+under-min acceptance clears; completed nonempty blind repetitions publish actual
+parent acceptance independently of null payload. Zero-hit status unchanged.
+13 normal tests2pass11RED ->13pass0ignored;12 source/serde/plan/emitted records
+unchanged; private2/legacy1/progress4/group2 pass. Legacy modernnull/accumulator[]
+migration explicit, full regex-adjacent E attribution stays.5.2/SESSION27.
+Perl static recognition preselects local regex; no cursor/bounds parity inference.
+Actual repeated blind parent false accepted bit is P1 owned39.9 before admission.
+Packet rust-minimum-fix-intake.json.gz; implicit blind39.1.4.2 next, then peers.

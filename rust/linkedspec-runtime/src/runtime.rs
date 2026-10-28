@@ -702,6 +702,10 @@ impl RuntimeContext {
             .map_err(|error| error.to_string())
     }
 
+    pub(crate) fn note_recognition_outcome(&mut self, accepted: bool) {
+        self.recognition_transactions.note_outcome(accepted);
+    }
+
     pub(crate) fn note_recognition_match(&mut self, start: usize, end: usize) {
         self.recognition_transactions.note_match(
             u64::try_from(start).expect("Rust recognition match start fits u64"),

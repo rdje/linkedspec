@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust live recognition repetition progress repaired; ordinary minimum/API39.1.5.1 next.
+Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
 
 ## Latest Completed Slice
 
-Actual Rust recognize_once repetition now raises recognition_zero_progress_repetition at completed zero-width hits/groups before IT/max/ordinary zero exits, using a typed private producer shared with the neutral adapter. Active scope origins replace the duplicate depth counter; whole AND group start permits zero-width slots when the group consumes. Private five-field record retains rule/caller origin/start/end; existing SDK code/rule/stage project it without a public schema change. All18 source/input/serde/plan/emitted records exactly unchanged across RED2pass2fail and GREEN4pass:11 error cases and7 consuming/ordinary/one-shot controls on native/restored/plan/v2 routes. Generated expression callees reuse native dispatch, so separate existing private generated-loop checks cover5 error modes and2 consuming groups; actual native offsets0/1 records and cancellation cleanup pass. Private3pass; minimum target2pass7 owned dormant; neutral1/false-payload1/group-neighbor2 pass; exact-file format clean. Packet rust-live-progress-intake.json.gz retains producers/inputs/baseline/fix/logs/receipt, including initial compile typo without product RED credit. No schema/source/classifier/contract/ledger movement or independent emitted package/full admission. Minimum/API39.1.5.1 next, implicit blind39.1.4.2, attribution39.1.5.2/SESSION27 and peers remain owned. Book/card/target/roadmap/task/live/resume/history synchronize; authorized focused checks/commit, no push.
+Four native/generated regex/bcode minimum guards now return ordinary Undef/null, restore caller return/capture lexicals and preserve consumed cursor. Minimum failure explicitly clears partial-hit recognition acceptance; completed nonempty blind repetitions publish parent acceptance independently of null payload. Zero-hit recognition status and real errors are unchanged. All7 dormant min/API cases enabled; new4 recognition tests distinguish accepted-null from minimum miss. Refined baseline13tests2pass11fail ->13pass0ignored, with12 exact source/serde/plan/emitted records unchanged; legacy serialized input unchanged. Old rep_min_not_met_returns_error deliberately becomes an ordinary-miss compatibility test: modernnull, legacy[]; full regex-adjacent E shape remains.5.2/SESSION27. Private2pass retains8 native/generated cursor2->3 caller-state restorations and12 direct generated recognition outcomes, qualifying shared native callback dispatch. Legacy unit1/live progress4/group-reset2 pass, exact-file format. New public Perl probes6sources18pairs and isolated descriptor processes preserve preselection entry-model qualification; a successful repeated blind parent has no accepted bit, now P1 owned39.9 after bounded features/before admission. Packet rust-minimum-fix-intake.json.gz retains exact producers/before/fix/inputs/results/receipt. Book/card/target/roadmap/task/live/resume/history synchronized. Implicit blind result39.1.4.2 next, peers/attribution/Perl39.8-.9/full admission remain owned; focused authorized commit, no push.
 
 ## Next Action
 
-Activate39.1.5.1 from clean live progress repair. Normalize ordinary native/generated regex/bcode minimum misses to modern null and legacy no accumulator value, preserving consumed cursor, actual recognition miss versus accepted-null, caller state and real typed progress errors. Enable7 dormant minimum/API regressions, explicitly update old rep_min_not_met_returns_error compatibility unit, add distinguishing accepted-null/miss controls, focused compile/check/docs/commit. Then39.1.4.2 implicit blind results and independent peers;39.1.5.2/SESSION27 attribution remains before admission.
+Activate39.1.4.2 from clean minimum/API repair. Read sole remaining ignored structural group test and implicit Default/repeated blind collection authority; repair native/generated default result collection without altering explicit EX/E/IT/early returns, match status, cursor, existing v2 rows or lifecycle placement. Exact authored RED-GREEN/quick dependent checks/book/docs/commit. Then independent Dart/Julia/safe Lua39.2-.4;39.1.5.2/SESSION27, Perl39.8/39.9 and all registration/pressure/admission prerequisites remain before full39/23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.1` — Rust ordinary minimum/API and recognition outcomes repaired; implicit blind collection next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6` — Rust live recognition repetition progress repaired; ordinary minimum/API39.1.5.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.5.0` — Minimum/API/progress intake qualified; immediate live recognition progress39.1.6 before bounded minimum repair.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.1` — Rust repeated AND group outcomes repaired/targeted-checked; remaining minimum families39.1.5 next.
@@ -29,7 +30,6 @@ Activate39.1.5.1 from clean live progress repair. Normalize ordinary native/gene
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0` — Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` — Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.0` — Sparse AND structural authority reconciled; Perl39.5/.6 precede independent peer intake.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.42.5` — Named local-start reversed-span guards repaired/targeted-checked; sparseAND authority39.0 next.
 
 ## History
 
