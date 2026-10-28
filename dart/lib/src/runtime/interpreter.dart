@@ -954,14 +954,24 @@ final class LinkedSpecRuntimeEngine {
       }
 
       final iterationValues = <Object?>[];
-      final matched = _nextableBool(
-        () => _executeBlindOnce(
-          rule,
-          context,
-          usesAndExecution: usesAndExecution,
-          implicitIterationResults: iterationValues,
-        ),
-      );
+      var returnedIterationValue = false;
+      Object? explicitIterationValue;
+      _NextableBool matched;
+      try {
+        matched = _nextableBool(
+          () => _executeBlindOnce(
+            rule,
+            context,
+            usesAndExecution: usesAndExecution,
+            implicitIterationResults: iterationValues,
+            returnIterationValue: true,
+          ),
+        );
+      } on _BlindIterationReturn catch (iterationReturn) {
+        returnedIterationValue = true;
+        explicitIterationValue = iterationReturn.value;
+        matched = const _NextableBool.value(true);
+      }
       if (matched.nexted) {
         context.assertRecognitionRepetitionProgress(rule.label, before);
         matches += 1;
@@ -975,18 +985,28 @@ final class LinkedSpecRuntimeEngine {
         break;
       }
 
-      matches += 1;
-      final loopEnd = _executeLifecycle(rule, 'LE', context);
-      if (loopEnd != null) {
-        return _returned(loopEnd.value);
+      if (!returnedIterationValue) {
+        final loopEnd = _executeLifecycle(rule, 'LE', context);
+        if (loopEnd != null) {
+          return _returned(loopEnd.value);
+        }
       }
       context.assertRecognitionRepetitionProgress(rule.label, before);
+      // A post-call return completes the inner dispatch, not the rule. The
+      // reference repetition cutoff discards a non-consuming returned value.
+      if (returnedIterationValue && context.cursorCodeUnit == before) {
+        madeFailedAttempt = true;
+        break;
+      }
+      matches += 1;
       final iterationReturn = _executeLifecycle(rule, 'IT', context);
       if (iterationReturn != null) {
         return _returned(iterationReturn.value);
       }
       if (!hasCustomIteration) {
-        if (usesAndExecution) {
+        if (returnedIterationValue) {
+          collectedValues.add(_copyValue(explicitIterationValue));
+        } else if (usesAndExecution) {
           collectedValues.add(List<Object?>.unmodifiable(iterationValues));
         } else {
           collectedValues.addAll(iterationValues);
@@ -1033,6 +1053,7 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context, {
     required bool usesAndExecution,
     List<Object?>? implicitIterationResults,
+    bool returnIterationValue = false,
   }) {
     if (usesAndExecution) {
       var matchedAll = true;
@@ -1068,6 +1089,9 @@ final class LinkedSpecRuntimeEngine {
           currentEdge: null,
         );
         if (edgeReturn != null) {
+          if (returnIterationValue) {
+            throw _BlindIterationReturn(edgeReturn.value);
+          }
           throw _ActionReturn(edgeReturn.value);
         }
         if (!childMatched) {
@@ -1106,6 +1130,9 @@ final class LinkedSpecRuntimeEngine {
         currentEdge: null,
       );
       if (edgeReturn != null) {
+        if (returnIterationValue) {
+          throw _BlindIterationReturn(edgeReturn.value);
+        }
         throw _ActionReturn(edgeReturn.value);
       }
       if (childMatched) {
@@ -9886,6 +9913,13 @@ final class _ActionReturn implements Exception {
 /// Only an action-edge return can finish one repeated AND group.
 final class _AndGroupReturn implements Exception {
   const _AndGroupReturn(this.value);
+
+  final Object? value;
+}
+
+/// A blind post-call return leaves one repeated dispatch/group, not its rule.
+final class _BlindIterationReturn implements Exception {
+  const _BlindIterationReturn(this.value);
 
   final Object? value;
 }

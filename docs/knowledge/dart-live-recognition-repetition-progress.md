@@ -56,3 +56,9 @@ loop progress guard; the former repetition-start parameter is removed. All24
 source/artifact records stay identical, three scalar expectations intentionally
 become AND group arrays, and all typed progress/trace controls pass. See
 [[dart-repeated-and-group-outcomes]] for current group behavior.
+
+39.2.5.2 additionally routes repeated blind post-call early returns through
+common completion. Actual explicit OR and Default post-call zero controls now
+reject with existing SDK diagnostics/native origin/offset trace; current scope:
+[[dart-blind-postcall-iteration-outcomes]]. Earlier neutral/loop proof did not
+cover that bypass. No new public error schema or Unicode policy.

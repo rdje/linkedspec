@@ -167,3 +167,13 @@ suites61groups and syntax pass. Prefix fail-closed bridge preserves original
 authored lowering/diagnostics. Regenerate old standalone Perl; no DSL/schema/
 family change. Packet perl-blind-retv-intake.json.gz. Dart39.2.5.2 next; reference
 accepted-bit39.9/lifecycle/admission stay owned, new test registration23.4.1.
+
+Dart39.2.5.2 now handles repeated blind post-call iteration/group returns,
+count/minimum and live progress.18 sources27 inputs5healthy13RED ->18pass,
+unchanged raw/normalized/compiled/plan/emitted and same18 fresh module reuse;
+combined122pass no skips, fatal analysis.24 fixed-retv reference pairs agree;
+3 falsey aa pairs intentionally qualify broken reference predicate39.9, now
+immediate before peers/admission. Default also repeats by actual reference;
+ordinary returned-zero cutoff/count and typed post-call guards are proved.
+Packet dart-blind-postcall-repair-intake.json.gz retains all actual reference/
+SDK/plan/fresh/trace inputs/results. Compiler/emitter/schema/Perl unchanged.

@@ -2,9 +2,9 @@
 id: dart-perl-blind-postcall-return-gap
 title: Repeated blind post-call return scope and retv differ between Dart and the Perl reference
 answers:
-  - "does a repeated blind post-call return exit the Dart rule or one iteration"
+  - "what isolated post-call defects were found in Dart and Perl at39.2.5"
 date: 2026-10-28
-status: intake39.2.5.0/reference binding.1 complete; P1 Dart return/progress.2 before peers/admission
+status: original binding/scope/progress repairs complete39.2.5.1-.2; reference falsey acceptance39.9 remains
 tags: [dart, perl, blind-call, repetition, return-scope, retv, authority-gap]
 evidence: "dart-blind-collection-intake.json.gz retains postcall_return public Perl native/fresh/emitted and Dart native/restored/plan/fresh baseline; read_dart_blind_postcall.py retains exact generated owner locations."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_dart_blind_collection_postcall.pl; cd dart && bash ../tools/run_dart_project_data.sh test test/blind_repetition_collection_test.dart --name postcall_return"
@@ -50,3 +50,10 @@ modules/receipt. Earlier gap packet remains frozen.
 [[perl-blind-latest-child-retv-binding]]. Original intake remains frozen, not
 current reference behavior. Dart repeated return/count/minimum/progress.5.2
 remains immediate P1; retv is no longer a prerequisite blocker.
+
+39.2.5.2 now repairs Dart repeated blind post-call return/count/minimum/progress:
+[[dart-blind-postcall-iteration-outcomes]].18 sources27 inputs5healthy13RED
+->18pass, combined122pass no skips.24 fixed-reference pairs agree;3 falsey aa
+reference results expose separately owned39.9 accepted-vs-value predicate defect.
+It is immediate before peers/admission; original two defects are repaired,
+without blessing the remaining reference falsey outputs.

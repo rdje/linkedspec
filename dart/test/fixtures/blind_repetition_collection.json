@@ -270,11 +270,7 @@
     "cases": [
       {
         "input": "ab",
-        "expected": [
-          "POST",
-          "A",
-          1
-        ],
+        "expected": null,
         "expected_cursor": 1
       }
     ]

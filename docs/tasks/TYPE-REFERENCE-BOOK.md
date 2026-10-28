@@ -7991,8 +7991,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.6 - enforce live recognition repetition progress in Rust`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.9`
-  Status: `pending` / P1 after bounded Rust/peer features, before full39/23.4/push
-  Goal: Repair Perl repeated blind-parent recognition acceptance without collapsing successful null into a miss.
+  Status: `pending` / P1 immediately after Dart39.2.5.2 before peers/admission/push
+  Goal: Repair Perl repeated blind iteration/group and parent recognition acceptance without collapsing falsey/null payloads into a miss.
   Reproduce: probe_rust_minimum_outcome.pl bcode-OR{2}/AND{2}, Top I checkpoint/recognize Value/commit; Value repeats Part pipe /a/ returning1 twice, EX/E returnundef. Inputaa consumes2, native/fresh return[0,null,2]. Isolated process/descriptor controls reproduce;39.1.5.1 packet retains sources/emitted/output/producers.
   Root: RecognitionTransactionRuntime::attempt_static reads the callee completion accepted bit; bcode loops count successful child completions but do not note completed parent acceptance. note_match only marks regex extraction. Canonical recognition separates matched state from null payload. Verify full parent counts/trace in repair; preserve under-min/early-return/progress/entry/ordinary behavior.
   Qualification: Perl static recognition preselects callee local regex before invoking handler. Acode/AND entry treatment differs from Rust. Zero-min acode consuming2 withmax1 includes preselection, not a proven bound violation. Do not infer cursor parity or modify bounds from it.
@@ -8000,6 +8000,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact native/fresh parent-success versus under-min/null/falsey/error, descriptor/emitted trace, repair/normal registration/book/docs/commit.
   Planned canonical trigger: Full39/23.4/final clean push; actual authority movement separately owned canonical.
   Planned claim verification: none: Finite authored parent-completion distinctions, no population measurement.
+
+  Additional reproduced scope from39.2.5.2: After latest-child retv repair, exact public Perl native/fresh OR{2} post-call return0/undef on aa still returnsnull at1; repeated AND{2} early post-call return0 on aa also returnsnull at1. Same constant nonfalsey controls consume/count two groups at2. Actual emitted outer REP_BCODE/REP_AND_BCODE result_is_match tests raw post-call payload without a separate local accepted-group outcome. This is an additional accepted-vs-value defect, not a new policy. Canonical falsey group acceptance/recognition payload separation applies. Exact18-source27-input native/fresh source/results are retained in the forthcoming dart-blind-postcall-repair packet; no falsey reference parity credit. Priority is immediate after Dart39.2.5.2, before Julia/safe Lua/admission. Own both per-iteration falsey acceptance and previously reproduced parent completion publication; split bounded leaves if needed, preserve live progress/real miss/minimum/IT/lifecycle/retv and all source metadata. No report-only deferral.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2`
   Status: `in_progress` / independent Dart intake and bounded repairs
@@ -8191,13 +8193,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1 - bind Perl latest child retv before blind post-call code`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2`
-  Status: `pending` / P1 immediate after TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.1 before peers/admission/push
+  Status: `completed` / repeated blind post-call outcomes and progress
   Goal: Repair Dart repeated blind post-call return scope and progress.
   Acceptance: Use repaired reference and constant block/fluent controls. Repeated choice returns one iteration value, repeated AND returns one group value/early skip, preserving accepted count/reset/minimum, falsey/null/nesting, custom IT/lifecycle whole-rule and post-call failed-child semantics. Common loop progress must reject actual zero-progress recognition before IT/max/ordinary exits, preserving diagnostic provenance and ordinary zero behavior. Exact source/normalized/compiled/plan/emitted identity/fresh reuse, owned RED-GREEN/nearest controls/book/docs/focused commit; do not infer peers.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored public/native/fresh and supported SDK/plan/source/return/cursor/progress/error distinctions, compile/nearest controls/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push; new public contract/schema movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:18 final sources27 inputs5healthy13actualRED ->18pass; exact independent intake/normal RED/GREEN source/normalized/compiled/plan/emitted identity and same18 fresh modules/consumer reuse; fixed-retv Perl24 matching pairs/3 falsey aa qualifications owned39.9; actual SDK diagnostics/native origin-offset trace for2 zero guards. Combined122pass no skips; fatal runtime/new-test analysis/format/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after reference acceptance/peers/registration/pressure; no new contract/schema authority.
+  Claim verification: none: Finite authored functional/control-flow/error/interface distinctions, no population measurement.
+
+  Activation: clean `7f02954db99e54410ca9f2bad17fee8c64cdd133` after reference retv.1. Preserve historical Default/plain post-call returns unless actual public authority says otherwise; ADR0048 explicitly preserves Default boundary. Re-derive repaired reference outputs, include constant/code/fluent/retv/failed-child/zero/falsey/null controls and actual recognition diagnostics. Use private iteration/group outcome channel at repeated blind owner, preserving lifecycle whole-rule authority and source/v2 identities. Qualify/own any reference acceptance issue under39.9 with exact mechanism before proceeding.
+
+
+  - [x] **REPRODUCE / ISSUE**:18 final sources27 inputs5healthy13actualRED. Repeated post-call returns exit before count/minimum and accept real zero-progress recognition. Fresh public reference proves Default also repeats; no historical Default exemption inferred.3 aa zero/null/AND-zero reference failures are separately owned39.9, not a Dart intended-output oracle.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _executeBlindOnce throws whole-rule _ActionReturn after attached code, caught in _executeRule before repeated owner completion. _executeBlindRule therefore bypasses count/minimum/progress. Separate local returned-iteration payload is required; ordinary returned zero cutoff belongs before count, while normal LE/lifecycle authority stays independent.
+  - [x] **FIX**: Private _BlindIterationReturn accepted independently of payload. Repeated choice/Default append one explicit iteration value; AND early return skips tail/post-return LE and appends one group value. Common progress before returned-value zero cutoff/count/IT/max; plain/lifecycle channels unchanged. Preserve implicit child collections/custom IT/Default no-hitnull.
+  - [x] **ADDRESSED (verified)**:18pass27 inputs native/restored/plan/fresh; same18 emitted modules/consumer reused. Raw source/normalized/compiled/plan/emitted bytes identical across independent intake/normal RED/GREEN. Fixed reference24 value/cursor/error pairs agree;3 falsey aa rows qualify current reference defect.2 SDK code/rule/runtime phase and native origin/offset0 images pass.
+  - [x] **NO REGRESSION**: Combined post-call/blind/minimum/group/structural/live progress122pass no skips; fatal changed analysis clean. Existing blind15/min12/group21/guard24 source/artifact records unchanged. One old postcall_return compatibility expectation intentionally becomes null minimum miss at1; no source rewrite. Compiler/emitter/matching/recognition authority/schema/family/Perl unchanged; no full lifecycle/Unicode/peer/admission claim.
+  - [x] **LOCKSTEP**: dart-blind-postcall-repair-intake.json.gz retains actual producer/input/reference/emission/module/result/trace/patch/receipt closure. Book/cards/target/roadmap/task/live/resume/history align; runtime rebuild uses existing sources/plans. Existing P1 reference acceptance39.9 now includes exact falsey post-call defect and is immediate before peers/admission. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2 - complete Dart repeated blind post-call outcomes and progress`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3`
   Status: `pending` / P1 after39.0 before38/37/full23.4/push
@@ -8522,7 +8535,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.5.2` | `pending` | Repair Dart repeated blind post-call outcomes and live progress. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.9` | `pending` | Repair reference falsey iteration and completed blind-parent acceptance before peers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
