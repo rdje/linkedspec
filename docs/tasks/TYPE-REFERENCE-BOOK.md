@@ -7273,14 +7273,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.2 - lock ordinary Rust named Number methods and own callable mark-scope prerequisite`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.3`
-  Status: `pending`
-  Goal: Independently implement or lock Dart readonly named-mark Number method sources.
-  Authority: Frozen named-mark-number-results.md/shared fixture and current source/name/coordinate/function/alias/root contracts.
-  Acceptance: Establish actual seven producer/per-helper direct/bound/missing/zero/symbolic-shadowing/snapshot/legacy/function/callback/name-role baseline first. Repair only confirmed early method-value source gaps through existing sole native producer/value owners; preserve accepted argument forms, original operation/label/arity, error/absence/coordinate semantics and source-before-effects. No writer/take/Boolean/bracket/body-vocabulary/coercion/schema grant;42 owns unresolved name-role diagnostics. Healthy implementations get regression without invented RED; safe Lua only, declared5.4 separate.
-  Planned verification tier: focused
-  Planned focused checks: Exact shared/per-helper sources plus nearest missing/zero/order/legacy/function/alias/generated controls, compile/normal registration/book/history/manual continuity; no broad/unsafe runner or routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after bounded features and42/39/38/37/40/41 plus pressure/registration/declared-host repair; actual public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+  Status: `completed` / bounded Dart compatibility; full context admission23.4 separate
+  Goal: Lock existing Dart readonly named Number methods and independently healthy dynamic caller mark scopes.
+  Activation: clean `dbfc12ea9519b8429e178c6be543e7d3579445a7`; Rust43.1 committed, tree clean and brief0.
+  Authority: named-mark-number-results.md/shared fixture, existing Dart argument/root/function policies, ADR0031 dynamic caller and rule-label mark isolation. Exact31-source intake and fresh carriers retained in named-mark-number-dart-intake.json.gz.
+  Verification tier: `focused`
+  Focused checks: New2 tests/31 sources plus nearest complete-mark3 pass native/restored SpecFile/plan as supported;9 emitted modules fresh VM/current package configuration/empty stderr, final fatal analysis/zero-change format and exact expected-list annotation-only refinement. Book/map/history/manual memory/cadence/diagnosis/claim-input/diff; no runtime edit/full gate.
+  Canonical trigger: Full23.4/final clean push after independent34 peers and owned42/39/38/37/40/41 plus pressure/registration/declared-host prerequisites; no portable/all-context promotion from bounded compatibility.
+  Claim verification: none: Finite authored functional/scope/error assertions and exact refinement identities, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent31-source public intake already satisfies ordinary seven producers/methods/shared fixture and callback scopes; no method or namespace defect is inferred from Rust. Accepted quoted/computed names, missing/reversed/zero, original values, snapshots and legacy direct/binding distinction are retained from actual Dart outputs.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing compiled ActionIR/interpreter value owners already compose Number results and preserve semantic caller labels for callable bodies. Native, reconstructed SpecFile and generated plan agree; no runtime cause/repair or artificial RED is claimed for healthy behavior.
+  - [x] **FIX**: Add normal named_mark_number_results_test.dart with shared fixture plus explicit producer/per-helper/source/argument/root/scope expectations and helper-specific function error classes. Preserve metadata/vocabulary/aliases/schema/domains and current compiler/runtime owners. No new host fallback or parser-state grant.
+  - [x] **ADDRESSED (verified)**: New2 tests cover23 value/scope and8 pure-function sources; existing complete-mark3 passes. Nine selected modules execute in fresh VM using current project package configuration with exact expected values/function rejection and empty stderr. Scope includes all-seven literal callback, caller-visible writes, equal-name rule isolation and First-returned callback observing Top's0 then6 marks.
+  - [x] **NO REGRESSION**: Runtime diff empty. Direct6/[]/KVT versus binding Hash/[]/undef/KVT and accepted quoted/computed names preserved. Initial analyzer reports two empty-list inference warnings after5 functional tests pass; explicit Object? annotations alone correct them, exact before/after check plus final fatal analysis/format pass. No additional product RED or final combined post-annotation test claim; snapshot has normal-route proof, not fresh-subset credit.
+  - [x] **LOCKSTEP**: Packet/canonical Dart card/map/book/target/task/live/resume/roadmap/history agree on bounded compatibility and limits. Julia34.4 next; no full gate/portable/context admission or push. Existing41/42 and other prerequisites retain scheduled owners.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.34.3 - lock Dart named Number methods and dynamic caller mark scopes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.34.4`
   Status: `pending`
@@ -7790,7 +7798,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` | `pending` | Independently intake Dart named Number methods and callable scopes after repaired Rust. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` | `pending` | Independently intake Julia named Number sources and caller mark scopes. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

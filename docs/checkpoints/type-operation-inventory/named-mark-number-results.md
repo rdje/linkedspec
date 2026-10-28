@@ -1,7 +1,7 @@
 # Readonly named-mark Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.34; target freeze34.0.
-Status: frozen bounded target; Perl34.1 and Rust34.2/43.1 targeted-checked; independent Dart34.3 then peers follow.
+Status: frozen bounded target; Perl34.1, Rust34.2/43.1 and Dart34.3 targeted-checked; independent Julia34.4 then safe Lua34.5 follow.
 
 ## Authority and observed distinctions
 
@@ -125,3 +125,15 @@ helper/tree/nested and returned-callback call-time controls. Ordinary34.2 policy
 and original scope oracles remain unchanged. See rust-callable-rule-label.md and
 its intake packet for exact RED/GREEN/refinement/cleanup/diagnostic limits;
 independent Dart34.3 now resumes, without full context/admission credit.
+
+## Bounded Dart34.3 compatibility
+
+Dart needs no runtime repair.31 authored sources agree native/restored SpecFile/
+plan; new2 consumer tests and nearest complete-mark3 pass. Ordinary methods, names,
+roots/defaults/snapshot and callback caller-read/write/isolation/call-time scopes
+are independently healthy; pure functions keep all7 reader and registered-callback
+fences. Nine representative emitted modules run in a fresh VM/current project
+configuration, not isolated dependencies or snapshot fresh proof. Final fatal
+analysis/format pass after annotation-only empty expected-list warnings; exact
+refinement/source/output epochs are in named-mark-number-dart-intake.json.gz.
+No invented RED/full admission; independent Julia34.4 next.
