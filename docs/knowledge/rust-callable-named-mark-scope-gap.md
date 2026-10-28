@@ -1,15 +1,15 @@
 ---
 id: rust-callable-named-mark-scope-gap
-title: Rust callable diagnostic labels become mark buckets and leak state across rules
+title: Rust callable bodies preserve the invoking rule mark namespace after43.1
 answers:
   - "why does Rust mark_pos use coalesce fallback inside a literal callback"
   - "can equal Rust callback names share marks across different rules"
   - "which task fixes Rust callable named-mark caller context"
 date: 2026-10-28
-status: P1 owner43 immediately after34.2 before34.3/full23.4/push; root confirmed
+status: repaired43.1 focused checks pass; full context admission23.4 separate
 tags: [rust, callbacks, marks, scope, dynamic-caller, diagnostics]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.2 retains28-source intake, two distinguishing public scope controls and owned regressions in named-mark-number-rust-intake.json.gz."
-reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test named_mark_number_results -- --ignored --test-threads=1 --nocapture"
+reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test named_mark_number_results -- --test-threads=1 --nocapture"
 ---
 
 Ordinary seven named Number sources work, but a literal cb reads seven0! defaults
@@ -40,3 +40,16 @@ the repair needs no new parameter. Keep name-based diagnostics/recursion, cleanu
 and function fences, while evaluating in the caller's rule bucket. Construction
 captures no namespace. Production43.1 owns enabled oracles and helper/tree/nested
 controls before34.3; no full admission is implied by authority freeze.
+
+## Repair43.1 supersedes the observed gap
+
+execute_codeblock_value now passes its existing caller rule_label to body
+evaluation, keeping callback identity in the error wrapper and cycle machinery.
+All three original oracles are enabled and pass. Seven helper/contextual/explicit/
+Hash-tree/Array-tree/nested source controls and a returned callback observing Top's
+call-time0 then6 go RED/GREEN. Original scope expectations were not rebased.
+Nearest callable, mark, snapshot and function checks plus the cleanup unit pass;
+bound/helper errors retain callback prefixes with semantic Top diagnostics and
+restore parameters/active identity. Source/output epochs and exact summaries live
+in rust-callable-rule-label-intake.json.gz. No new helper rights, lexical capture,
+global bucket, invocation-frame migration or independent emitted-package claim.

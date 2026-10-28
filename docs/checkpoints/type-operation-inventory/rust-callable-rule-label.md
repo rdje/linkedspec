@@ -1,7 +1,7 @@
 # Rust callable semantic rule label
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.43; target freeze43.0.
-Status: frozen existing-contract repair target; production43.1 follows.
+Status: frozen existing-contract target; Rust43.1 repaired and focused checks pass.
 
 ADR0031 and callable_codeblock_contract.json require dynamic caller state at
 invocation time, without capturing an environment at construction. The complete
@@ -48,3 +48,16 @@ nearest callable diagnostics/cycles/parameter cleanup, named marks, ordinary
 Number methods and function fences. Retain actual before/after source and output
 epochs. No runtime or schema change in43.0, no new vocabulary/name-role/domain,
 global bucket, lexical closure, invocation-frame migration or full admission.
+
+## Bounded Rust43.1 result
+
+The sole evaluation call now uses existing rule_label. The three original oracles
+are enabled and pass; seven helper/tree/nested scopes and a callback returned from
+First then invoked in Top distinguish RED/GREEN. The latter sees Top's changing0
+then6 marks rather than First's construction mark6. An initial probe instead
+assumed a bare rule-local reader binding crossed rules, yielding unknown-helper
+warnings; it was replaced before production, not classified as another defect.
+Nearest callable/mark/snapshot/function and failure-cleanup controls pass with
+diagnostic callback prefixes preserved and semantic Top label. Exact terminal
+summaries/source epochs are retained in rust-callable-rule-label-intake.json.gz.
+No independently emitted package or full context/backend admission is claimed.

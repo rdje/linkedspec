@@ -1,12 +1,12 @@
 ---
 id: named-mark-number-rust-ordinary-compatibility
-title: Rust ordinary named Number sources already compose; callable mark scope needs repair43
+title: Rust named Number sources compose in ordinary actions and dynamic callbacks
 answers:
   - "does Rust mark_pos support coalesce and numeric methods"
   - "can Rust named capture widths feed String and Array methods"
   - "which named Number Rust contexts are verified before callable scope repair"
 date: 2026-10-28
-status: bounded ordinary34.2 targeted-checked; immediate callable prerequisite43/full context admission open
+status: bounded ordinary34.2 and callable scope43.1 targeted-checked; full context admission open
 tags: [rust, marks, number, fluent, arguments, callback, scope]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.2 at clean f213bb463; named-mark-number-rust-intake.json.gz retains28-source and two public scope-control epochs, normal and explicit RED outputs."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test named_mark_number_results --test complete_named_mark_contract -- --test-threads=1"
@@ -26,3 +26,9 @@ codeblock 'cb' as bucket, causing caller invisibility and cross-rule leakage.
 [[rust-callable-named-mark-scope-gap]] owns immediate43.0/43.1 before34.3/admission.
 Three ignored regressions are explicitly run to3RED and must be enabled by repair.
 No fresh emitted package or full source/context/backend admission is claimed.
+
+Rust43.1 now repairs the caller-rule-label handoff and enables all three scope
+regressions. Helper/tree/nested and returned-callback call-time controls pass
+against retained RED; [[rust-callable-named-mark-scope-gap]] records the exact
+repair, cleanup/diagnostic/function proof and limits. Historical gap descriptions
+above remain before-state evidence; Dart34.3 resumes independently.

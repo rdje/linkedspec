@@ -7739,7 +7739,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored argument/readiness distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.43`
-  Status: `in_progress` / P1 frozen43.0; production43.1 before34.3/full23.4/push
+  Status: `completed` / bounded Rust repair43.1 targeted-checked; full context admission23.4 separate
   Goal: Preserve the caller's semantic rule-label namespace when Rust invokes callable codeblocks; keep diagnostic identity separate.
   Reproduction: Rust34.2 literal callback reads all seven Value begin/finish named Number sources and produces seven0! fallbacks on native/restored CompiledSpec/plan, whereas the direct source has valid6/1/7/3/6/6/6. No method-source failure is inferred: the callback's named-mark producer visibility is wrong. Exact28-source intake and source scopes are retained with34.2; no healthy credit for these0! values.
   Root / impact: Engine::execute_codeblock_value builds codeblock_label="codeblock 'cb'" and passes it as rule_label to eval_block_value. Named mark helpers index ctx.typed_mark_byte using that parameter. A diagnostic pseudo-label therefore becomes a semantic mark bucket. Existing callable dynamic-caller and named rule-label isolation contracts require exact scope controls before repair; verify callback writes/readback and different-rule same-callback-name leakage as distinguishing public oracles. Pure-function state fences and diagnostic prefixes must remain.
@@ -7767,12 +7767,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.0 - freeze callable caller rule-label repair with separate diagnostic identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1`
-  Status: `pending` / P1 after43.0 before34.3
+  Status: `completed` / bounded Rust scope repair; full context admission23.4 remains
   Goal: Repair confirmed Rust callable rule-label propagation through its existing owner against frozen43.0.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN and nearest named-mark/callable/helper/function/trace/source/Number controls, locked offline compile/rustfmt/book/manual continuity; no broad gate.
-  Planned canonical trigger: Full23.4/final clean push after verified43; actual public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored functional/source/error assertions, no population measurement.
+  Activation: clean `c0c1c4df181c9e2f1407c151d12a8737d6f1681e`;43.0 committed, tree clean and brief0.
+  Authority: rust-callable-rule-label.md, ADR0031 dynamic caller and existing named rule-label isolation; no new parser-state/lifetime policy.
+  Verification tier: `focused`
+  Focused checks: Exact three retained RED regressions enabled; seven helper/tree/nested and one returned-callback call-time source RED/GREEN. Focused named/mark/callable/snapshot/function targets and cleanup unit pass; source/typed diagnostic/locked offline compile/rustfmt/book/map/history/manual memory/cadence/diagnosis/claim-input/diff. Independently emitted tests excluded; no broad gate.
+  Canonical trigger: Full source/context/portable23.4/final clean push after independent34 peers and owned42/39/38/37/40/41 plus pressure/registration/declared-host prerequisites.
+  Claim verification: none: Finite authored functional/scope/error controls and exact source/history identities, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Original caller-read/write-read/cross-rule same-name tests are actual3RED. Seven helper/contextual/explicit/tree/nested source outputs also expose missing caller marks. Refined cross-rule returned callback gives null/null instead of call-time0/6 before repair. Initial unresolved bare-name probe is a fixture error, retained separately and never blamed on production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Shared execute_codeblock_value receives the correct caller rule_label from all five entry sites, then substitutes a diagnostic label for eval_block_value. Named readers/writers consequently index a pseudo-bucket. No new API or mark storage migration is needed.
+  - [x] **FIX**: Evaluate the body with existing rule_label and remove the unused formatted label; keep original callback name in error wrapper, typed identity and recursion stack. Enable the exact three oracles, add supported helper/tree/nested/returned-callback regressions and strengthen the existing failure-cleanup unit's prefix/semantic-label assertions. Test plans derive actual compiled rule labels/families and use specific named-mark parse messages.
+  - [x] **ADDRESSED (verified)**: Focused terminal summaries retained in rust-callable-rule-label-intake.json.gz; all selected tests pass. Seven original Number readers are visible in callbacks, writes stay in caller buckets, equal callback names cannot leak across First/Second, helper/tree/nested paths inherit caller marks, and a callback returned by First reads Top's current0 then6 rather than construction state.
+  - [x] **NO REGRESSION**: Nearest callable neutral values/typed failures/cycles/static precedence/copies/local returns/contextual normalization, snapshots and function fences pass. Cleanup unit confirms temporary value restoration and active-name removal for bound and helper errors, retaining codeblock name prefixes with rule_label Top. No vocabulary/name-role/schema/domain/frame-isolation expansion; independently emitted source/full matrix not claimed.
+  - [x] **LOCKSTEP**: Exact before/refinement/after source and outputs, target/current canonical cards/map/book plus task/live/resume/roadmap/history align; bounded43 repair complete. Dart34.3 resumes independently. Full23.4/pressure/registration/declared-host and remaining owned defects stay scheduled, with authorized focused commits/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1 - preserve the invoking rule namespace in Rust callable bodies`.
 
 ## Current Frontier
 
@@ -7780,7 +7790,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` | `pending` | Repair frozen caller-rule-label handoff and enable scope regressions before34.3. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` | `pending` | Independently intake Dart named Number methods and callable scopes after repaired Rust. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

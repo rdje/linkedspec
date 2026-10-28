@@ -1,7 +1,7 @@
 # Readonly named-mark Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.34; target freeze34.0.
-Status: frozen bounded target; Perl34.1 repaired/Rust34.2 ordinary-compatible and targeted-checked; immediate callable prerequisite43 then peers follow.
+Status: frozen bounded target; Perl34.1 and Rust34.2/43.1 targeted-checked; independent Dart34.3 then peers follow.
 
 ## Authority and observed distinctions
 
@@ -118,3 +118,10 @@ codeblock 'cb'. Three permanent ignored regressions are separately executed to
 actual3RED. No healthy callback or full admission credit. Packet named-mark-number-
 rust-intake.json.gz retains all epochs. Immediate43.0 target/43.1 Rust repair must
 enable them before34.3; peer scopes are independently assessed, not inferred.
+
+Rust43.1 repairs the callable producer namespace through the existing evaluation
+owner. All three previously ignored scope tests are enabled and pass alongside
+helper/tree/nested and returned-callback call-time controls. Ordinary34.2 policy
+and original scope oracles remain unchanged. See rust-callable-rule-label.md and
+its intake packet for exact RED/GREEN/refinement/cleanup/diagnostic limits;
+independent Dart34.3 now resumes, without full context/admission credit.

@@ -1,49 +1,34 @@
-//! TYPE-REFERENCE-BOOK.1.2.23.3.34.2 — ordinary named Number methods; callable mark scope is owned43.
+//! TYPE-REFERENCE-BOOK.1.2.23.3.34.2 / 43.1 — named Number values and dynamic caller mark scope.
 use linkedspec_core::{compiler::compile, types::CompiledSpec, validation::validate};
 use linkedspec_runtime::engine::{Engine, ExecutionOptions};
 use linkedspec_runtime::source_emitter::{
-    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, execute_generated_parser_v2,
+    GENERATED_SOURCE_CONTRACT, GeneratedPlanRow, classify_generated_rule_family,
+    execute_generated_parser_v2,
 };
 use linkedspec_runtime::spec_parser::parse_spec_with_user_functions;
 use serde_json::{Value, json};
 
 fn routes(source: &str, input: &str) -> Value {
-    let parsed = parse_spec_with_user_functions(source).expect("parse reset block");
-    validate(&parsed).expect("validate reset block");
-    let compiled = compile(&parsed).expect("compile reset block");
+    let parsed = parse_spec_with_user_functions(source).expect("parse named mark source");
+    validate(&parsed).expect("validate named mark source");
+    let compiled = compile(&parsed).expect("compile named mark source");
     let serialized = serde_json::to_string(&compiled).unwrap();
     let restored: CompiledSpec = serde_json::from_str(&serialized).unwrap();
-    let plan = if source.contains("\nFirst::") {
-        vec![
-            GeneratedPlanRow {
-                label: "Top",
-                family: "default",
+    let plan: Vec<_> = compiled
+        .rules
+        .iter()
+        .map(|rule| GeneratedPlanRow {
+            label: match rule.label.as_str() {
+                "Top" => "Top",
+                "Value" => "Value",
+                "Other" => "Other",
+                "First" => "First",
+                "Second" => "Second",
+                label => panic!("unowned named-mark test rule: {label}"),
             },
-            GeneratedPlanRow {
-                label: "First",
-                family: "default",
-            },
-            GeneratedPlanRow {
-                label: "Second",
-                family: "default",
-            },
-        ]
-    } else {
-        vec![
-            GeneratedPlanRow {
-                label: "Top",
-                family: "default",
-            },
-            GeneratedPlanRow {
-                label: if source.contains("\nOther:") {
-                    "Other"
-                } else {
-                    "Value"
-                },
-                family: "default",
-            },
-        ]
-    };
+            family: classify_generated_rule_family(rule).contract_name(),
+        })
+        .collect();
     let mut result = serde_json::Map::new();
     for (route, value) in [
         (
@@ -552,7 +537,6 @@ fn scope_case(id: &str, expected: Value) {
     expect_value(id, source, input, expected);
 }
 #[test]
-#[ignore = "TYPE-REFERENCE-BOOK.1.2.23.3.43.1 owns diagnostic-name mark bucket repair before admission"]
 fn literal_callback_reads_the_callers_named_marks() {
     scope_case(
         "literal_callback_all",
@@ -560,12 +544,78 @@ fn literal_callback_reads_the_callers_named_marks() {
     );
 }
 #[test]
-#[ignore = "TYPE-REFERENCE-BOOK.1.2.23.3.43.1 owns diagnostic-name mark bucket repair before admission"]
 fn callback_mark_writes_remain_in_the_callers_rule_bucket() {
     scope_case("callback_write_read_scope", json!([[[6, 6], 6, 6]]));
 }
 #[test]
-#[ignore = "TYPE-REFERENCE-BOOK.1.2.23.3.43.1 owns diagnostic-name mark bucket repair before admission"]
 fn equal_callback_names_cannot_share_marks_between_different_rules() {
     scope_case("callback_cross_rule_scope", json!([[1, 1], [null, null]]));
+}
+
+#[test]
+fn callback_scope_survives_helper_tree_and_nested_invocations() {
+    let cases = [
+        (
+            "free_contextual",
+            r#"result=with("x"){mark_input_end(inside);return([mark_pos(finish),value])};return([result,mark_pos(inside)])"#,
+            json!([[[6, "x"], 6]]),
+        ),
+        (
+            "receiver_contextual",
+            r#"result="x".with(){mark_input_end(inside);return([mark_pos(finish),value])};return([result,mark_pos(inside)])"#,
+            json!([[[6, "x"], 6]]),
+        ),
+        (
+            "free_explicit",
+            r#"cb={|item|mark_input_end(inside);return([mark_pos(finish),item])};result=with("x",cb);return([result,mark_pos(inside)])"#,
+            json!([[[6, "x"], 6]]),
+        ),
+        (
+            "receiver_explicit",
+            r#"cb={|item|mark_input_end(inside);return([mark_pos(finish),item])};result="x".with(cb);return([result,mark_pos(inside)])"#,
+            json!([[[6, "x"], 6]]),
+        ),
+        (
+            "hash_tree",
+            r#"items={"a":1};result=items.map_leaves(){mark_input_end(inside);return(mark_pos(finish))};return([result,mark_pos(inside)])"#,
+            json!([[{"a":6}, 6]]),
+        ),
+        (
+            "array_tree",
+            r#"items=[1];result=items.map_leaves(){mark_input_end(inside);return(mark_pos(finish))};return([result,mark_pos(inside)])"#,
+            json!([[[6], 6]]),
+        ),
+        (
+            "nested_callback",
+            r#"inner={||mark_input_end(inside);return(mark_pos(finish))};outer={||return(inner())};return([outer(),mark_pos(inside)])"#,
+            json!([[6, 6]]),
+        ),
+    ];
+    // Capture each public route before assertions so a RED run retains every case.
+    let observations: Vec<_> = cases
+        .into_iter()
+        .map(|(id, action, expected)| {
+            let source = format!(
+                "Top::\n -> Value .push\n LX {{return(copy(Top))}}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {{mark_input_end(finish);{action}}}\n"
+            );
+            let observed = routes(&source, "αβ:cat");
+            eprintln!("CALLBACK_SCOPE {id} {observed}");
+            (id, observed, expected)
+        })
+        .collect();
+    for (id, observed, expected) in observations {
+        for route in ["native", "restored", "plan"] {
+            assert_eq!(observed[route], json!({"value":expected}), "{id} {route}");
+        }
+    }
+}
+
+#[test]
+fn callback_scope_uses_the_invocation_rule_and_call_time_marks() {
+    let source = r#"Top::
+ I {reader=call(First);mark_input_start(shared);a=reader();mark_input_end(shared);b=reader();return([a,b])}
+First::
+ I {mark_input_end(shared);return({||return(mark_pos(shared))})}
+"#;
+    expect_value("dynamic_invocation", source, "αβ:cat", json!([0, 6]));
 }

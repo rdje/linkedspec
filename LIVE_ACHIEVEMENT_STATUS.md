@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust callable caller-rule-label repair43.0 frozen; production43.1 next before Dart34.3.
+Rust callable caller mark scope43.1 repaired/targeted-checked; independent Dart34.3 next.
 
 ## Latest Completed Slice
 
-Freeze rust-callable-rule-label.md from existing ADR0031 dynamic invocation and complete named-mark rule-label isolation. Retained34.2 three actual RED scope tests distinguish caller invisibility, callback write visibility and different-rule same-name leakage. Source reading verifies execute_codeblock_value already receives the caller label; all five invocation sites forward it, but the body replaces it with a diagnostic label.43.1 changes only that evaluation handoff and enables exact regressions, with helper/nested/dynamic-construction/tree/function and cleanup/diagnostic controls. No production/API/schema/domain change or new public policy; same-label invocation frames remain14.3. Target/card/map/book/task/live/roadmap/history agree; focused manual continuity checks, no full gate or push.
+Rust execute_codeblock_value now evaluates with its existing caller rule_label, retaining callback names for error/recursion identity and all copy/restoration/return mechanics. Exact three previously RED regressions are enabled and pass; seven new helper/contextual/explicit/Hash-tree/Array-tree/nested sources and a returned-callback call-time source independently go RED to GREEN. The first cross-rule probe assumed a bare callback binding survived across rule stores; that unresolved-name fixture is retained and replaced by a supported returned value before production, not credited as an extra defect. Focused named7, complete-mark1, callable non-standalone15, snapshot5 and pure-function4 tests pass native/restored/plan as supported; cleanup unit1 verifies both bound/helper failure restoration, active identity cleanup, callback error prefixes and semantic Top diagnostics. Locked/offline compile/rustfmt pass; no independently emitted package/full gate/push. Retained before/refinement/after source/output epochs and history receipt; target/cards/map/book/task/live/resume/roadmap align.43 bounded repair complete; Dart34.3 resumes before42/39/38/37/40/41 and full23.4.
 
 ## Next Action
 
-Activate43.1 from this clean target boundary. Retain exact current callable owner and three RED oracles; add distinguishing supported helper/nested/tree/dynamic-invocation and function/diagnostic controls, then use existing caller rule_label for body evaluation while preserving copies/restoration, cycles, local return and error names. Run only focused named/callable/helper/function checks and commit, then resume Dart34.3. Authorized focused --no-verify continues; full23.4/push remains after owned prerequisites.
+Activate Dart34.3 from this clean repaired Rust boundary. Independently intake seven readonly named Number producers/direct/shared/source/name/zero/missing/snapshot/legacy/function/callback scope controls, then implement only confirmed gaps or lock existing compatibility. Preserve accepted names and backend root/function policies. Continue Julia34.4/safe Lua34.5,42 and scheduled39/38/37/40/41 before full23.4/admission/final clean push; focused authorized --no-verify remains.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` — Rust callable caller mark scope43.1 repaired/targeted-checked; independent Dart34.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.0` — Rust callable caller-rule-label repair43.0 frozen; production43.1 next before Dart34.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.2` — Rust ordinary named Number27 controls pass; confirmed callback mark leak43 target/repair immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.1` — Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
@@ -29,7 +30,6 @@ Activate43.1 from this clean target boundary. Retain exact current callable owne
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.4` — Julia capture Number already compatible75pass plus12; endpoint40 owned, immediate Dart test-scope followup next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.33.3` — Dart capture Number already compatible6pass plus selected4/fresh seven cases; Julia33.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.4` — Safe dual-host Lua choice92pass per host; bounded prerequisite done, Number33.3 resumes next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.36.3` — Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
 
 ## History
 

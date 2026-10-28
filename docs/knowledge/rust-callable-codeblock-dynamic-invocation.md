@@ -87,3 +87,9 @@ above do not prove named mark scope: caller marks are hidden and equal cb names
 leak marks across different rules. [[rust-callable-named-mark-scope-gap]] owns
 immediate43 before34.3/admission, with public differentiating controls and three
 actual RED regressions. No lexical closure or global mark bucket is authorized.
+
+Rust43.1 now repairs the caller-rule-label handoff and enables all three scope
+regressions. Helper/tree/nested and returned-callback call-time controls pass
+against retained RED; [[rust-callable-named-mark-scope-gap]] records the exact
+repair, cleanup/diagnostic/function proof and limits. Historical gap descriptions
+above remain before-state evidence; Dart34.3 resumes independently.

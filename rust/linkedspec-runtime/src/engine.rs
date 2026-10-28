@@ -6290,8 +6290,8 @@ impl Engine {
         let body = linkedspec_core::expr::CodeBlock {
             statements: literal.body_ast.statements.clone(),
         };
-        let codeblock_label = format!("codeblock '{name}'");
-        let result = self.eval_block_value(&body, ctx, &codeblock_label);
+        // Callback identity belongs in diagnostics; parser state uses the caller's rule.
+        let result = self.eval_block_value(&body, ctx, rule_label);
         for binding in bindings.into_iter().rev() {
             ctx.exit_scoped_variable_binding(binding);
         }
@@ -13067,6 +13067,8 @@ Boundary: /END/
             .expect("bound callable")
             .unwrap_err();
         assert!(error.contains("unknown_helper"), "{error}");
+        assert!(error.starts_with("codeblock 'cb': "), "{error}");
+        assert!(error.contains("rule_label=\"Top\""), "{error}");
         assert_eq!(
             ctx.get_scalar("value"),
             RuntimeValue::Scalar("outer".into())
@@ -13081,6 +13083,8 @@ Boundary: /END/
             .execute_codeblock_value("with", None, &codeblock, &evaluated, &mut ctx, "Top")
             .unwrap_err();
         assert!(error.contains("unknown_helper"), "{error}");
+        assert!(error.starts_with("codeblock 'with': "), "{error}");
+        assert!(error.contains("rule_label=\"Top\""), "{error}");
         assert_eq!(
             ctx.get_scalar("value"),
             RuntimeValue::Scalar("outer".into())
