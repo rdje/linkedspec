@@ -5,7 +5,7 @@ answers:
   - "what did independent Julia sparse AND intake establish"
   - "does Julia accepted null action preserve matched status"
 date: 2026-10-28
-status:31-source intake complete; progress/steps/groups/minima/implicit blind repaired through39.3.4, post-call .5 next
+status:31-source intake complete; progress/steps/groups/minima/blind/post-call repaired through39.3.5, nullable .7 next
 tags: [julia, sparse-and, dependency, repetition, minimum, blind-call, progress, nullable, intake]
 evidence: "julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources."
 reverify: "Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish."
@@ -75,3 +75,9 @@ controls/input identity unchanged; all31 original structural sources active
 with295 assertions. Actual independent post-call scope defect .5 immediately
 next, retv A healthy. Current proof: [[julia-implicit-blind-iteration-collections]].
 Original intake packet stays frozen; nullable/diagnostic/admission remain owned.
+
+2026-10-29:39.3.5 repairs blind explicit returned iterations/groups under exact
+current public reference.18 sources27inputs5healthy13RED ->18pass274 assertions,
+same18 modules/input identity, all15 original collection rows active. Current
+proof: [[julia-blind-postcall-iteration-outcomes]]. Nullable .7 qualification
+follows; original intake/source packets and diagnostic .8 owner stay intact.

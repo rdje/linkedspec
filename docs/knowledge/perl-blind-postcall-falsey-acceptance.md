@@ -47,3 +47,11 @@ failed observations from pure coordinators without fake selected spans. Current
 mechanism/proof: [[perl-repeated-blind-parent-acceptance]].10 native/fresh groups
 20inputs2healthy8RED ->10pass, falsey15 unchanged/observation7 and actual counted
 traces pass. Next immediate work is Dart39.2.7.1-.2 null status gaps before peers.
+
+2026-10-29 Julia39.3.5 public qualification replays all18 shared sources27
+inputs on current Perl native and emitted execution: values/cursor/errors all
+agree with the exact target, including all three formerly qualified falsey aa
+rows. Actual producer/inputs/emission/context errors are retained in
+julia-blind-postcall-intake.json.gz, linked through
+[[julia-blind-postcall-iteration-outcomes]]. Original .9/.Dart proof packets
+remain frozen; this is a new current replay, not retroactive census credit.

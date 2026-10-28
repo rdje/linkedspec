@@ -280,3 +280,14 @@ sources active295 assertions, empty repair scaffolding removed; minimum289/
 group390/progress234 nearest proof passes, prior fixture bytes unchanged.
 Packet julia-blind-collection-intake.json.gz retains actual closure; new normal
 suite registered once with only post-call .5 dormant. Nullable/admission remain.
+
+2026-10-29 Julia39.3.5 repairs explicit blind returned iteration/group values
+with independent acceptance, common progress/minimum and ordinary nonconsuming
+discard, preserving plain/lifecycle authority/retv.18 sources27inputs5healthy
+13RED ->18pass274 assertions and same18 baseline modules/exact inputs. Current
+public Perl native/emitted all18/27 values/cursor/errors agree, including three
+formerly qualified falsey aa rows; old packets stay frozen. Nearest collection
+240/minimum289/group390/progress234/structural295 pass, all original rows active,
+prior fixtures unchanged. Packet julia-blind-postcall-intake.json.gz retains
+actual reference/SDK/fresh closure, normal suite registered once. Nullable .7
+qualification next before safe Lua/diagnostic .8/full admission prerequisites.

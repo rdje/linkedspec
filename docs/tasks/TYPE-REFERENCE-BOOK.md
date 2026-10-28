@@ -8416,15 +8416,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.4 - retain Julia implicit blind iteration values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5`
-  Status: `pending` / P1 post-call scope qualification before admission
+  Status: `completed` / repeated post-call iteration outcomes
   Goal: Independently qualify Julia blind post-call return/binding/count/progress against the frozen public contract.
   Acceptance: Source shows attached blind returns throw whole-rule channel, but the31-source intake has no authored post-call fixture and establishes no defect here. Probe exact raw public sources first; repair only actual confirmed iteration/group/count/minimum/retv gaps, retain ordinary/lifecycle whole-rule authority and typed errors, split if needed.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned source/native/restored/generated/fresh RED-GREEN, direct-dependent controls and compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs/registration/pressure; public schema/authority movement separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow/interface distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:18 sources27 inputs5healthy13actualRED ->18pass274 assertions, exact inputs/five-control identity and same18 baseline modules; current public Perl18/27 native/fresh value/cursor/error parity; two actual typed SDK/native trace controls; Julia implicit blind repetition collection:240, Julia ordinary minimum miss routes:289, Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:295; normal single registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff. Exact engineering-notes committed suffix/hash/bytes/old-manifest/kept-prefix archival verified.
+  Canonical trigger: Full39/23.4/final clean push after nullable/peer/diagnostic/registration/pressure/lifecycle repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/return/iteration/error distinctions, no population measurement.
 
   Actual39.3.4 diagnostic: same authored postcall_return source Top OR{2} =>First return([POST,retv,cursor]) on ab returns[POST,A,1]/matchedtrue at1 on native/restored/plan/fresh, instead of ordinary under-minimum null at1. Child retv A is healthy; explicit post-call return escapes whole rule before repetition. This is now a confirmed P1 scope/count repair immediately after .4, not source suspicion. Broader falsey/minimum/zero/progress/default/AND/IT public qualification remains required before .5 production edit.
+
+  Activation: clean `5200fc8e8946a1d8ec3ac0eb20d4805df2662b9c` after implicit blind collection. Current same-source diagnostic SDK/fresh confirms premature whole-rule post-call exit, retv binding healthy. Requalify full public reference/native/fresh18-source matrix and actual Julia SDK/generated/fresh before private iteration-return repair; preserve lifecycle/plain authority and real typed progress, zero/min/bounds/falsey semantics. No new compiler/emitter/schema authority.
+
+
+  - [x] **REPRODUCE / ISSUE**:18 exact sources27 inputs5healthy13actualRED on SDK and baseline emitted modules. Post-call block/fluent returns escape whole rule at first child, bypassing count/minimum/IT and typed zero guard. Same-source diagnostic[POST,A,1] at1 is confirmed; latest child retv/plain/lifecycle controls are healthy. Current public reference all18/27 native/fresh now agrees with target, including formerly qualified falsey aa.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _execute_runtime_blind_once! throws _RuntimeActionReturn after payload; _execute_runtime_rule! catches before repeated owner can finish/count/guard. _execute_runtime_blind_rule! has only ordinary boolean/next completion. Actual child dispatch/SDK cursor/value and generated/native baseline distinguish one inner iteration from whole-rule return; no missing retv or public contract invented.
+  - [x] **FIX**: Private _RuntimeBlindIterationReturn enabled only by repeated owner catches explicit value as accepted iteration independent payload. Returned value replaces implicit collection; AND skips remaining group slots/post-return LE. Common progress precedes count/IT/max/ordinary zero discard; nonconsuming ordinary returned value is discarded before count. Plain/lifecycle whole-rule channels and child retv binding stay unchanged.
+  - [x] **ADDRESSED (verified)**:18pass274 assertions27 inputs SDK matched/value/cursor/plan and same18 baseline emitted modules/consumer separate process. Exact source/normalized/compiled/plan/emitted strings and five healthy observations unchanged. Current public Perl native/emitted all27 values/cursor/errors agree; two typed progress controls retain actual SDK/native trace identity and generated code envelope, no private fresh offset claim.
+  - [x] **NO REGRESSION**: Neighbors Julia implicit blind repetition collection:240, Julia ordinary minimum miss routes:289, Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:295 pass. All15 original collection/all31 structural sources active, no dormant scaffold, all prior fixture bytes unchanged. Compiler/emitter/matching/recognition authority/schema/family unchanged. Plain/IT/lifecycle/retv/ordinary zero/one-shot/bounds/minimum/progress retained; Default explicit post-call actually repeats per current reference, no inferred CHOICE-only exemption. No general nullable/observation/Unicode/full admission claim.
+  - [x] **LOCKSTEP**: New normal suite registered once. julia-blind-postcall-intake.json.gz retains current public reference/raw input/emission/producer/runtime epochs/SDK/generated/fresh/trace/receipt closure. Book/cards/target/roadmap/task/live/resume/history align; historical Dart/Perl packets not rewritten. .7 nullable qualification next before safe Lua/admission/pressure/lifecycle/slot/P2 diagnostic .8; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5 - preserve Julia repeated blind post-call iteration returns`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6`
   Status: `completed` / live recognition progress
@@ -8779,7 +8790,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5` | `pending` | Qualify and repair actual Julia blind post-call iteration return scope. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7` | `pending` | Qualify Julia nullable return/observation context and own bounded repairs. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

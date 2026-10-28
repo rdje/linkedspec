@@ -1,0 +1,352 @@
+[
+  {
+    "name": "pipe_retv",
+    "source": "Top::|\n => Atom {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and_retv",
+    "source": "Top::AND\n => Atom {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "or_retv",
+    "source": "Top::OR{2}\n => Atom {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          "A",
+          "A"
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "or_constant",
+    "source": "Top::OR{2}\n => Atom {return([\"C\",cursor_pos()])}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            "C",
+            1
+          ],
+          [
+            "C",
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "or_fluent",
+    "source": "Top::OR{2}\n => Atom .return([\"C\",cursor_pos()])\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            "C",
+            1
+          ],
+          [
+            "C",
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "and_constant",
+    "source": "Top::AND{2}\n => Atom {return([\"C\",cursor_pos()])}\n => Tail\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\nTail:AND\n /b/ -> Tail[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            "C",
+            1
+          ],
+          [
+            "C",
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "ab",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "and_fluent",
+    "source": "Top::AND{2}\n => Atom .return([\"C\",cursor_pos()])\n => Tail\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\nTail:AND\n /b/ -> Tail[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            "C",
+            1
+          ],
+          [
+            "C",
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "pipe_end_retv",
+    "source": "Top::|\n => Atom\n E {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "it_retv",
+    "source": "Top::OR{2}\n => Atom\n IT {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "post_effect",
+    "source": "Top::OR{2}\n I {seen=[]}\n => Atom {push(seen,retv)}\n EX {return(copy(seen))}\n E {return(copy(seen))}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          "A",
+          "A"
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "failed_child",
+    "source": "Top::OR{0,1}\n => Atom {return(\"C\")}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "b",
+        "expected": [],
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "recognition_zero",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n => Atom {return(\"C\")}\nAtom:AND\n /(?=a)/ -> Atom[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "default_constant",
+    "source": "Top::\n => Atom {return([\"C\",cursor_pos()])}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          [
+            "C",
+            1
+          ],
+          [
+            "C",
+            2
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          [
+            "C",
+            1
+          ]
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "default_zero",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:\n => Atom {return(\"C\")}\nAtom:AND\n /(?=a)/ -> Atom[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_record": {
+            "code": "recognition_zero_progress_repetition",
+            "rule": "Guard",
+            "origin": "Top:recognize_once",
+            "start_offset": 0,
+            "end_offset": 0
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "ordinary_zero",
+    "source": "Top::OR{1}\n => Atom {return(\"C\")}\nAtom:AND\n /(?=a)/ -> Atom[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "or_zero",
+    "source": "Top::OR{2}\n => Atom {return(0)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          0,
+          0
+        ],
+        "expected_cursor": 2,
+        "expected_match": true,
+        "reference_qualification": "P1 accepted-vs-value39.9: actual reference stops at1; intended falsey group acceptance is independent of payload. No reference parity credit."
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "or_null",
+    "source": "Top::OR{2}\n => Atom {return(undef)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          null,
+          null
+        ],
+        "expected_cursor": 2,
+        "expected_match": true,
+        "reference_qualification": "P1 accepted-vs-value39.9: actual reference stops at1; intended falsey group acceptance is independent of payload. No reference parity credit."
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "and_zero",
+    "source": "Top::AND{2}\n => Atom {return(0)}\n => Tail\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\nTail:AND\n /b/ -> Tail[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          0,
+          0
+        ],
+        "expected_cursor": 2,
+        "expected_match": true,
+        "reference_qualification": "P1 accepted-vs-value39.9: actual reference stops at1; intended falsey group acceptance is independent of payload. No reference parity credit."
+      }
+    ]
+  }
+]

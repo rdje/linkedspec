@@ -7,7 +7,7 @@ answers:
   - "what happens to partial Julia blind AND group results"
   - "does Julia custom IT replace implicit blind collection"
 date: 2026-10-28
-status: bounded39.3.4 repaired/targeted-checked; post-call39.3.5 next, nullable/admission open
+status: bounded39.3.4 and post-call39.3.5 repaired/targeted-checked; nullable/admission open
 tags: [julia, blind-call, iteration, collection, and, default, partial]
 evidence: "julia-blind-collection-intake.json.gz retains14 owned sources23 inputs6healthy8actualRED ->14pass230 assertions and one separate post-call diagnostic, same15 baseline modules and nearest proof."
 reverify: "bash tools/run_julia_project_data.sh --project=julia julia/test/blind_repetition_collection_test.jl"
@@ -37,3 +37,9 @@ module stays wrong unchanged on fixed fresh runtime; current fixed SDK post-call
 execution is not claimed. P1 .5 owns public qualification/repair immediately next,
 with one normal dormant case. No general null/full family/admission credit.
 Compiler/emitter/matching/recognition authority and public schemas unchanged.
+
+2026-10-29:39.3.5 now repairs the separately owned post-call iteration/count
+channel. All15 original collection sources pass240 assertions without dormant
+scaffolding, raw fixtures unchanged. Current mechanism/proof:
+[[julia-blind-postcall-iteration-outcomes]]. Original .4 diagnostic remains
+historical to that commit; no unresolved post-call issue remains in those rows.

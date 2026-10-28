@@ -37,10 +37,6 @@ end
     for fixture in fixtures
         name = fixture["name"]
         @testset "$name" begin
-            if name == "postcall_return" && get(ENV, "LINKEDSPEC_JULIA_BLIND_INTAKE_POSTCALL", "") != "1"
-                @test_skip "TYPE-REFERENCE-BOOK.1.2.23.3.39.3.5 owns post-call return scope"
-                continue
-            end
             source = fixture["source"]
             println("JULIA_BLIND_COLLECTION_AUTHORED ", name, " ", JSON3.write(fixture))
             parsed = parse_spec_with_staged_user_function_definitions(source)

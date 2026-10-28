@@ -1641,6 +1641,11 @@ struct _RuntimeAndGroupReturn <: Exception
     value::Any
 end
 
+# A repeated blind post-call return accepts one iteration independently of value.
+struct _RuntimeBlindIterationReturn <: Exception
+    value::Any
+end
+
 struct _RuntimeActionNext <: Exception end
 
 struct _RuntimeNextableBool
@@ -2198,13 +2203,23 @@ function _execute_runtime_blind_rule!(
         end
 
         iteration_results = Any[]
-        matched = _runtime_nextable_bool(() -> _execute_runtime_blind_once!(
-            engine,
-            rule,
-            context;
-            uses_and_execution = uses_and_execution,
-            implicit_iteration_results = iteration_results,
-        ))
+        returned_iteration_value = false
+        explicit_iteration_value = nothing
+        matched = try
+            _runtime_nextable_bool(() -> _execute_runtime_blind_once!(
+                engine,
+                rule,
+                context;
+                uses_and_execution = uses_and_execution,
+                implicit_iteration_results = iteration_results,
+                return_iteration_value = true,
+            ))
+        catch failure
+            failure isa _RuntimeBlindIterationReturn || rethrow()
+            returned_iteration_value = true
+            explicit_iteration_value = failure.value
+            _RuntimeNextableBool(true, false)
+        end
         if matched.nexted
             _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
             matches += 1
@@ -2218,18 +2233,27 @@ function _execute_runtime_blind_rule!(
             break
         end
 
-        loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
-        if loop_end !== nothing
-            return _runtime_returned(loop_end.value)
+        if !returned_iteration_value
+            loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
+            if loop_end !== nothing
+                return _runtime_returned(loop_end.value)
+            end
         end
         _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
+        # The reference ordinary cutoff discards a nonconsuming returned value.
+        if returned_iteration_value && context.cursor_codeunit == before
+            made_failed_attempt = true
+            break
+        end
         matches += 1
         iteration_return = _execute_runtime_lifecycle!(engine, rule, "IT", context)
         if iteration_return !== nothing
             return _runtime_returned(iteration_return.value)
         end
         if !has_custom_iteration
-            if uses_and_execution
+            if returned_iteration_value
+                push!(collected_values, _runtime_copy(explicit_iteration_value))
+            elseif uses_and_execution
                 push!(collected_values, Any[iteration_results...])
             else
                 append!(collected_values, iteration_results)
@@ -2273,6 +2297,7 @@ function _execute_runtime_blind_once!(
     context::_RuntimeExecutionContext;
     uses_and_execution::Bool,
     implicit_iteration_results = nothing,
+    return_iteration_value::Bool = false,
 )
     if uses_and_execution
         for (edge_index, edge) in enumerate(rule.blind_edges)
@@ -2304,6 +2329,9 @@ function _execute_runtime_blind_once!(
                 nothing,
             )
             if edge_return !== nothing
+                if return_iteration_value
+                    throw(_RuntimeBlindIterationReturn(edge_return.value))
+                end
                 throw(edge_return)
             end
             if !child.matched
@@ -2337,6 +2365,9 @@ function _execute_runtime_blind_once!(
             nothing,
         )
         if edge_return !== nothing
+            if return_iteration_value
+                throw(_RuntimeBlindIterationReturn(edge_return.value))
+            end
             throw(edge_return)
         end
         if child.matched
