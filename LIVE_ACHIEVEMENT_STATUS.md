@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
+Rust ordinary named Number27 controls pass; confirmed callback mark leak43 target/repair immediately next.
 
 ## Latest Completed Slice
 
-Perl readonly named-mark Number34.1 is repaired through a shared sole native body owner and narrow early value path after function guard, using current rule_label and existing symbolic word/arity rules. Seven independent original direct sources show actual fresh RED; original seven native/public body strings stay byte-identical. First code passes10 groups and yields correct direct scalar values in seven new tests with wrongly nested expected arrays. Test-only oracle correction reruns7pass, with runtime and other10 source/assertions unchanged; current17 contexts are covered across focused runs, not a final17 combined claim. Nearest anonymous Number/reset2 selections and both module syntax checks pass. Shared/alternate label/partial cursor-vs-end/zero/missing/reversed/symbolic-shadow/snapshot/normalized skip/direct legacyKV controls agree native/fresh; bindingKVT stays distinct. All7 function guards remain unready; deferred mark_pos stays typed unknown under31.6.4.4/41, and quoted/computed substitution bytes remain unchanged under42. Actual producer/source/emitted bytes/oracle epochs retained; book/cards/map/task/live/resume/roadmap/history and scheduled canonical registration agree. Rust34.2 next, then peers/42/39/38/37/40/41 before full23.4/push; no broad gate or push.
+Rust ordinary named Number34.2 is independently compatible without runtime edits. New2 tests cover27 healthy source/function controls; nearest named-mark1 passes native/restored CompiledSpec/plan with rustfmt/locked offline compile. Shared/per-helper/alternate label/partial/default/missing/reversed/symbolic/snapshot, accepted quoted/evaluated names and direct6/[]/KVT versus binding Hash/[]/undef/KVT are retained; all7 function fences/registered callback rejection remain. Literal named-reader callback instead yields seven0! defaults. Public write/read and cross-rule controls prove diagnostic codeblock_label becomes semantic mark bucket, hiding caller marks and leaking equal-cb-name marks across First/Second. New P1 owner43 immediately after this boundary before34.3/admission; three ignored permanent scope tests explicitly run to3RED/exit101, with no healthy callback credit. Exact producer/source/result epochs retained. Target/cards/map/book/task/live/resume/roadmap/history agree;43.0 target/43.1 Rust repair then34.3-.5 and42/39/38/37/40/41 before full23.4/push. No fresh package, broad gate or push.
 
 ## Next Action
 
-Activate independent Rust34.2 from this clean Perl named Number repair boundary. Establish actual seven producers/per-helper direct/bound/shared/missing/zero/symbolic-shadow/snapshot/legacy/function/callback/name-role behavior on native/restored CompiledSpec/plan before production. Already-compatible behavior gets regression without invented RED; repair only confirmed source gaps, preserving accepted argument roles and direct-root policies. Focused compile/new/nearby Number checks, book/evidence/docs/commit then independent34.3-.5;42/39/38/37/40/41 before full23.4/push. Authorized focused --no-verify continues.
+Activate callable semantic rule-label authority43.0 from this clean Rust ordinary-method boundary. Reconcile dynamic caller/callable and rule-label mark contracts with exact caller-read/write-read/cross-rule scope controls and diagnostic-label call chain. Freeze narrow semantic caller-label versus diagnostic identity target and supported direct/helper/nested/function boundaries before production. Then repair Rust43.1 through the existing callable owner, enable all3 ignored regressions and targeted-check before resuming34.3. Preserve parameter cleanup/copies, cycles, diagnostics, accepted vocabulary and existing14.3 lifetime scope. Authorized focused --no-verify continues; full23.4/push stays after all owned prerequisites.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.34.2` — Rust ordinary named Number27 controls pass; confirmed callback mark leak43 target/repair immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.1` — Perl named Number34.1 covered17 contexts across focused runs; original7 bodies exact, Rust34.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.0` — Named-mark34 target/owners frozen; Perl34.1 next, argument-readiness42 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.35.5` — Safe Lua reset102 plus Number155 pass per host; all bounded35 checked, named-mark34.0 next.
@@ -29,7 +30,6 @@ Activate independent Rust34.2 from this clean Perl named Number repair boundary.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.4` — Safe dual-host Lua choice92pass per host; bounded prerequisite done, Number33.3 resumes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.3` — Julia active-edge repair92pass plus selected dependents; safe Lua36.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.36.1.1` — Rust trace-test storage owner removed; exact trace/census green, independent Julia36.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.36.2` — Dart active-edge repair13pass; immediate Rust trace-test storage followup before independent peers.
 
 ## History
 

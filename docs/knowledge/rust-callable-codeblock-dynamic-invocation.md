@@ -78,3 +78,12 @@ neutral expected field, then reconstructed diagnostics equal the complete native
 errors and independently emitted error details require the expected code substring instead of full
 envelope equality. Those distinct assertions must not become an exhaustive diagnostic parity claim.
 This is source comprehension plus the fresh neutral contract check, not a fresh native consumer run.
+
+## 2026-10-28 named-mark caller-scope qualification
+
+34.2 discovers that semantic rule_label is replaced by diagnostic codeblock_label
+inside execute_codeblock_value. Ordinary variable/store observations
+above do not prove named mark scope: caller marks are hidden and equal cb names
+leak marks across different rules. [[rust-callable-named-mark-scope-gap]] owns
+immediate43 before34.3/admission, with public differentiating controls and three
+actual RED regressions. No lexical closure or global mark bucket is authorized.

@@ -1,7 +1,7 @@
 # Readonly named-mark Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.34; target freeze34.0.
-Status: frozen bounded target; Perl34.1 repaired/targeted-checked, independent Rust34.2 then peers follow.
+Status: frozen bounded target; Perl34.1 repaired/Rust34.2 ordinary-compatible and targeted-checked; immediate callable prerequisite43 then peers follow.
 
 ## Authority and observed distinctions
 
@@ -100,3 +100,21 @@ metadata owned31.6.4.4 and native child error loss41. Quoted/computed substituti
 are byte-unchanged under42; no new argument/deferred rights. Actual fresh shared
 emitted source/raw0/ready1 and all epochs are retained in named-mark-number-perl-
 intake.json.gz. Independent Rust34.2 follows; full23.4 remains separate.
+
+## Bounded ordinary Rust34.2 and callable prerequisite43
+
+Ordinary seven-source composition already works native/restored CompiledSpec/plan;
+runtime unchanged/no method-source RED invented. New2 tests cover27 healthy
+value/function cases plus nearest named-mark1 passes with rustfmt/locked offline
+compile. Quoted/evaluated names already work on Rust; direct legacy6/[]/KVT stays
+distinct from binding Hash/[]/undef/KVT. Shared/per-helper/alternate label/partial
+cursor/default/missing/symbolic/snapshot and all7 pure-function fences agree.
+
+Literal cb named lookups yield seven0! defaults because diagnostic codeblock_label
+is passed as semantic rule_label. Two public controls prove scope, not missing
+data: callback writes/readback give[[[6,null],null,6]], and different First/Second
+rules sharing cb return[[1,null],[1,null]], leaking a mark through pseudo-bucket
+codeblock 'cb'. Three permanent ignored regressions are separately executed to
+actual3RED. No healthy callback or full admission credit. Packet named-mark-number-
+rust-intake.json.gz retains all epochs. Immediate43.0 target/43.1 Rust repair must
+enable them before34.3; peer scopes are independently assessed, not inferred.
