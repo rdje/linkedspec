@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
+Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
 
 ## Latest Completed Slice
 
-Completed the due daily cleanup at a clean boundary: three exact completed42.5 diagnostic red/green/neighbor logs were already retained byte-for-byte in the committed packet and absent from all claim durability inputs. Verified exclusive gzip creation, decompressed bytes/hash and unchanged raw identity before removing only each raw duplicate, then verified residue absence and retained recovery. Checked Rust release/incremental/deps .bin/.log metadata and retained all build caches. Latest-only cleanup record refreshed at 2026-10-28T12:07:27.088260+00:00. Retain actual producer, artifact bytes, metadata census and verification receipt in daily-safe-cleanup-44.json.gz; original42.5 proof packet stays unchanged. No broad deletion, disk-space claim, off-volume write or deferred24 pivot. Book/live/task/resume/history agree; focused maintenance commit, then shared recursion guard39.6.1 and emitted wiring39.6.2.
+Extracted the existing native descriptor/rule/cursor ordinary recursion guard into RecognitionTransactionRuntime. SpecEntry delegates entry/typed rejection and releases the idempotent token immediately after eval; scope destruction preserves caller error and releases on unwind. Keep key/sentinel, cut-before-invocation order and trace topic; debug file attribution follows the shared runtime owner. Before8 public groups pass/new shared4 skip; final12 pass without skips plus syntax2. Cover direct/mutual cuts, consuming recursion, reuse/early return, forced native matcher-error recovery, observation direct/mutual and recognition zero-progress codes, actual native handoff, descriptor/rule/position identity, idempotent release and opaque thrown-object/error preservation. Retain exact source/patch/test/result epochs; division-null and bootstrap-count fixture corrections receive no product RED credit. All8 public controls unchanged; final counter reset changes only a previously skipped seam. Fresh emitted ordinary wiring remains39.6.2, no new DSL/format/frame policy or full admission. Book/card/map/task/target/live/resume/history align; focused authorized commit, no full gate/push.
 
 ## Next Action
 
-Activate39.6.1 from this clean daily-cleanup boundary. Extract the existing native descriptor/rule/cursor ordinary recursion guard into the shared RecognitionTransactionRuntime owner, preserving pre-invocation typed rejection, trace topic, result/error/control identity and exception-safe cleanup. Compile and run quick focused native direct/mutual/consuming/repeated-use/error cleanup plus typed dependents, document/commit, then39.6.2 emitted table wiring and independent39.1-.4. Continue38/37/40/41/features; full gates remain at designated admission/push.
+Activate39.6.2 from clean shared-guard extraction. Add the shared runtime guarded-CODE wrapper and install it once over standalone emitted rule table entries before Execute. Reproduce bounded fresh direct/mutual and blind push gaps, then GREEN with legal consuming recursion, repeated use/error/control cleanup, native/fresh plan and typed dependents. Preserve parent-injected blind push(rule) semantics, existing guard key and format2/families. Focused compile/quick targeted test/docs/commit, then independent39.1-.4 and38/37/40/41/features; full gate at designated admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.1` — Shared native progress guard extracted/targeted-checked; standalone wiring39.6.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.44` — Daily safe diagnostic cleanup complete; resume shared recursion guard39.6.1 then emitted wiring39.6.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0` — Blind push semantics preserved; ordinary emitted guard repair split39.6.1/.2 after due safe cleanup44.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.5` — Perl sparse single-action AND structural classification repaired/targeted-checked; blind39.6 next.
@@ -29,7 +30,6 @@ Activate39.6.1 from this clean daily-cleanup boundary. Extract the existing nati
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.4` — Julia named Number methods/caller scopes34.4 compatible/targeted-checked; safe Lua34.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.34.3` — Dart named Number methods/caller mark scopes34.3 already compatible/targeted-checked; Julia34.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.43.1` — Rust callable caller mark scope43.1 repaired/targeted-checked; independent Dart34.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.43.0` — Rust callable caller-rule-label repair43.0 frozen; production43.1 next before Dart34.3.
 
 ## History
 

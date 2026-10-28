@@ -1,7 +1,7 @@
 # Ordinary recursion progress parity for blind post-call execution
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.39.6; reconciliation39.6.0.
-Status: existing semantics reconciled; shared runtime extraction39.6.1 then emitted wiring39.6.2.
+Status: semantics reconciled and shared native guard39.6.1 extracted/targeted-checked; emitted wiring39.6.2 remains.
 
 Published push(rule) calls that rule and appends to the current rule accumulator.
 Blind fluent rendering injects the parent label into helper-style post-call
@@ -46,3 +46,10 @@ distinct descriptor identity, early returns and exception/control cleanup, plus
 existing typed recognition/observation dependents and the retained blind cases.
 Keep existing native child-error delivery41 separate. Full39/23.4/final clean
 push gates remain after focused repairs and admission prerequisites.
+
+39.6.1 now centralizes the existing key and typed rejects in runtime scope
+entry/release. Native8 public controls preserve behavior; new shared4 bring
+final12 groups/no skips, syntax2 passes. Actual native handoff, idempotent token,
+descriptor/rule/cursor distinctions and caller/thrown error cleanup are covered.
+Debug trace topic stays; emitting file follows the shared owner. Packet:
+shared-rule-progress-intake.json.gz. Standalone ordinary wiring is still open.

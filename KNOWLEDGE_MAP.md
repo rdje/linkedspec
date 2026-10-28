@@ -17416,7 +17416,7 @@ _Independently emitted Perl omits the catalog required by boundary lookahead_
 ### perl-emitted-ordinary-recursion-guard-gap
 _Standalone Perl handlers omit the native ordinary non-progress recursion guard_
 - **answers:** why does blind fluent push hang in a standalone Perl parser | does blind fluent push append the child result or call the parent | why does native Perl terminate a direct cycle while emitted source recurses | which owner repairs ordinary recursion guard parity in generated Perl
-- **date:** 2026-10-28 · **status:** owned39.6.1 shared extraction and39.6.2 emitted wiring before independent peers
+- **date:** 2026-10-28 · **status:** native shared extraction39.6.1 targeted-checked; emitted wiring39.6.2 before peers
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0; blind-postcall-progress-authority.md and retained intake contain actual current92a6eeb95 bounded3 cases,2 fresh timeouts and1 completed pair, substitutions and source/phase/trace closure.`
 - **reverify:** `Recover bounded probe, cases, runner and strict summary from blind-postcall-progress-authority-intake.json.gz; use project_data_run.sh/run_python_project_data.sh with retained per-phase hard limits. Never run known hanging fresh cycles unbounded.`
 - **source:** [`docs/knowledge/perl-emitted-ordinary-recursion-guard-gap.md`](docs/knowledge/perl-emitted-ordinary-recursion-guard-gap.md)

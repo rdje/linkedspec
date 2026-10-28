@@ -7,7 +7,7 @@ answers:
   - "why does native Perl terminate a direct cycle while emitted source recurses"
   - "which owner repairs ordinary recursion guard parity in generated Perl"
 date: 2026-10-28
-status: owned39.6.1 shared extraction and39.6.2 emitted wiring before independent peers
+status: native shared extraction39.6.1 targeted-checked; emitted wiring39.6.2 before peers
 tags: [perl, generated-source, recursion, progress, blind-call, fluent, push]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.6.0; blind-postcall-progress-authority.md and retained intake contain actual current92a6eeb95 bounded3 cases,2 fresh timeouts and1 completed pair, substitutions and source/phase/trace closure."
 reverify: "Recover bounded probe, cases, runner and strict summary from blind-postcall-progress-authority-intake.json.gz; use project_data_run.sh/run_python_project_data.sh with retained per-phase hard limits. Never run known hanging fresh cycles unbounded."
@@ -31,3 +31,12 @@ trace topic, error/control/result identity, cleanup and consuming recursion.
 Exact current inputs/producers/source/phases and incomplete2 are retained; no
 new policy/format or broad admission. [[top-rule-recursion-forward-progress-guard]]
 is dated native mechanics, not proof that standalone ordinary cycles terminate.
+
+39.6.1 now extracts ordinary entry/release to RecognitionTransactionRuntime.
+SpecEntry delegates and explicitly releases after eval; idempotent destruction
+preserves caller error and opaque thrown-object identity. Before8 public groups
+pass/shared4 skip; final12/no skips and syntax2 pass. Key/sentinel and typed
+reject order stay, trace topic stays but debug file attribution follows runtime.
+Get bootstrap compilation also uses native handlers; reset handoff probes after
+Get to count only invocation. Exact epochs: shared-rule-progress-intake.json.gz.
+Standalone ordinary cycles still need39.6.2; no generated completion claim.

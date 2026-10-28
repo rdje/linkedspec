@@ -16,6 +16,44 @@ use LinkedRE ();
 
 my %CONTEXT_BY_KEY;
 
+# Ordinary rule re-entry is guarded before any recognition invocation frame.
+# Keep the existing descriptor/rule/cursor identity for native and emitted calls.
+my %RULE_PROGRESS_ACTIVE;
+
+sub enter_rule_progress {
+ my ($descr, $string_ref, $rule) = @_;
+ my $position = (ref($string_ref) eq 'SCALAR' || ref($string_ref) eq 'REF')
+  ? pos($$string_ref) : undef;
+ my $key = ref($descr) eq 'HASH'
+  ? ("$descr\0$rule\0" . (defined($position) ? $position : -1))
+  : undef;
+ if (defined($key) && $RULE_PROGRESS_ACTIVE{$key}) {
+  reject_recursive_observation($descr, $string_ref, $rule)
+   if recursive_observation_active($descr, $string_ref);
+  reject_recursive_zero_progress($descr, $string_ref, $rule)
+   if recognition_active($descr, $string_ref);
+  {
+   local $@;
+   require LinkedSpec::Trace;
+   LinkedSpec::Trace::trace_decision("rule_handler_forward_progress:$rule", 0,
+    "non-progressing recursive re-entry at pos " . (defined($position) ? $position : -1)
+     . "; cut to terminate", 0);
+  }
+  return undef;
+ }
+ $RULE_PROGRESS_ACTIVE{$key} = 1 if defined($key);
+ return bless {key => $key, finished => 0},
+  'LinkedSpec::RecognitionTransactionRuntime::RuleProgressGuard';
+}
+
+sub _finish_rule_progress {
+ my ($guard) = @_;
+ return if $guard->{finished};
+ $guard->{finished} = 1;
+ delete $RULE_PROGRESS_ACTIVE{$guard->{key}} if defined($guard->{key});
+ return;
+}
+
 sub enter_invocation {
  my ($descr, $string_ref, $info, $boundary_ref, $rule) = @_;
  _internal_error('descriptor must be a hash reference') unless ref($descr) eq 'HASH';
@@ -653,6 +691,27 @@ sub _throw {
 sub _internal_error {
  my ($detail) = @_;
  die "(LinkedSpec::RecognitionTransactionRuntime) -E- $detail\n"
+}
+
+#------------------------------------------------------------------------------
+# Package: LinkedSpec::RecognitionTransactionRuntime::RuleProgressGuard
+# Purpose: Release an ordinary active rule entry on every return and exception.
+#------------------------------------------------------------------------------
+package LinkedSpec::RecognitionTransactionRuntime::RuleProgressGuard;
+
+use 5.010;
+use strict;
+use warnings;
+
+sub finish {
+ LinkedSpec::RecognitionTransactionRuntime::_finish_rule_progress($_[0]);
+ return;
+}
+
+sub DESTROY {
+ local ($@, $!, $?);
+ $_[0]->finish();
+ return;
 }
 
 #------------------------------------------------------------------------------
