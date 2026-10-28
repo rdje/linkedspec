@@ -1,7 +1,7 @@
 # Ordinary Perl mark-name roles and readiness
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.42; target freeze42.0.
-Status: bounded reader42.1 repaired/targeted-checked; remaining42.2 next; wider42.3 separate.
+Status: bounded reader42.1 and writer statements42.2.1 repaired/targeted-checked; readonly42.2.2 and advancing42.2.3 next; wider42.3 separate.
 
 The helper catalog declares logical String mark-name arguments. The complete
 named-mark contract explicitly makes a bare identifier symbolic rather than a
@@ -122,3 +122,13 @@ roles/arity are helper-specific/unready before effects; runtime-invalid String
 domain/kinds produce controlled fresh generated errors, with native delivery41
 still separately owned. Packet: mark-name-number-reader-intake.json.gz.42.2 reuses
 this same owner; wider keys/bare Unicode qualification42.3/full admission stay open.
+
+42.2 is split into ten statement writers/copy/clear42.2.1, five readonly text/
+predicate42.2.2 and eight advancing spans plus bridge42.2.3.42.2.1 is repaired:
+unchanged16 groups14RED/candidate12RED/final16pass, nearest complete named3,
+three module syntax and ten final native/public body identities pass. Public
+standalone/nested source twins isolate missing statement scanner/contract handoff;
+one shared method regex connects existing statement recognition to42.1 names.
+Quoted Unicode word Strings work without a new bare Unicode/variable grammar
+claim. Original native returns/trace/effects and function/deferred/value-role
+limits remain. Packet: mark-name-write-statement-intake.json.gz.

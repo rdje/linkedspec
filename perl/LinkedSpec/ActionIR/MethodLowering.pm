@@ -684,19 +684,44 @@ sub _lower_block_value_component_expr {
  return undef
 }
 
-sub _lower_input_boundary_mark_statement {
+sub _named_mark_write_statement_method {
+ my ($source) = @_;
+ return undef unless defined($source);
+ state $methods = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_named_mark_write_statement_method_re');
+ my ($method) = $source =~ /\A\s*($methods)\s*\(/o;
+ return $method
+}
+
+sub _lower_named_mark_write_statement {
  my ($source, $deps) = @_;
- return undef unless defined($source)
-  && $source =~ /\A\s*(?<operation>mark_input_start|mark_input_end)\s*\(\s*(?<mark>\w+)\s*\)\s*\z/o;
- my ($method, $mark) = @+{qw(operation mark)};
+ my $method = _named_mark_write_statement_method($source);
+ return undef unless defined($method);
  return _actionir_ast_unsupported_helper_expr($method)
   if _parser_state_helper_is_forbidden_in_function($method, $deps);
+ my $parse = ref($deps) eq 'HASH' ? $deps->{parse_method_function_expr} : undef;
+ die "missing dependency callback 'parse_method_function_expr' for mark statement"
+  unless ref($parse) eq 'CODE';
+ my $call = _bind_emission_dependency($parse)->($source);
+ return _actionir_ast_unsupported_helper_expr($method) unless $call;
+ my $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_named_mark_write_statement_arity', $method);
+ my $args = $call->{args} || [];
+ return _actionir_ast_unsupported_helper_expr($method) unless @$args == $arity;
  my $label = ref($deps) eq 'HASH' ? $deps->{rule_label} : undef;
- return undef unless defined($label) && !ref($label);
- return LinkedSpec::OwnerDispatch::dispatch_owner_call(
-  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_input_boundary_mark_statement_expr',
-  $label, $method, $mark,
- );
+ return _actionir_ast_unsupported_helper_expr($method) unless defined($label) && !ref($label);
+ my @words = map { my $word = $_; $word =~ s/\A\s+|\s+\z//g; $word } @$args;
+ if (!grep { !/\A\w+\z/o } @words) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_named_mark_write_statement_expr',
+   $label, $method, @words);
+ }
+ my $names = _lower_mark_name_arguments($args, $deps);
+ return _actionir_ast_unsupported_helper_expr($method) unless $names;
+ my $body = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+  __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_named_mark_write_statement_body_expr',
+  $label, $method, map { '$__ls_named_mark_values['.$_.']' } 0..$#$names);
+ return _mark_name_arguments_expr($method, $names, $body)
 }
 
 sub _lower_block_side_effect_statement {
@@ -720,7 +745,7 @@ sub _lower_block_side_effect_statement {
 
  my $call = $parse_method_function_expr->($trimmed);
  return undef if $call && ($call->{method} // '') eq 'return';
- my $input_mark = _lower_input_boundary_mark_statement($trimmed, $deps);
+ my $input_mark = _lower_named_mark_write_statement($trimmed, $deps);
  return $input_mark if defined($input_mark);
  if ($call && $trimmed =~ /\A(?:start_capture_slice|capture_slice_here)\s*\(\s*\)\z/o) {
   return _actionir_ast_unsupported_helper_expr($call->{method})
@@ -763,7 +788,7 @@ sub _lower_ast_block_side_effect_statement {
  my $kind = $node->{kind} // '';
  return _actionir_ast_unsupported_helper_expr($node->{name})
   if $kind eq 'call' && _parser_state_helper_is_forbidden_in_function($node->{name}, $deps);
- my $input_mark = _lower_input_boundary_mark_statement($node->{source}, $deps);
+ my $input_mark = _lower_named_mark_write_statement($node->{source}, $deps);
  return $input_mark if defined($input_mark);
  if ($kind eq 'call' && ($node->{name} // '') =~ /\A(?:start_capture_slice|capture_slice_here)\z/o
      && ref($node->{args}) eq 'ARRAY' && !@{$node->{args}} && !$node->{trailing_block_arg}) {
@@ -2494,6 +2519,8 @@ sub _lower_dropped_value_statement {
 
  my $trimmed = _bind_emission_dependency($trim_action_ir_value)->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ my $mark_statement = _lower_named_mark_write_statement($trimmed, $deps);
+ return $mark_statement if defined($mark_statement);
  my $ast_node = _parse_method_value_ast_expr($trimmed, $deps);
  return undef unless ref($ast_node) eq 'HASH' && ($ast_node->{kind} // '') ne 'raw_perl';
 
@@ -6076,6 +6103,19 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
  my $compat_bridge = ref($deps) eq 'HASH' && $deps->{__actionir_ast_value_lowering_compat_bridge};
+ # New name representations belong to statement writers only. Preserve the
+ # original bare-word route, but do not retain raw new-form calls as data.
+ my $writer_method = _named_mark_write_statement_method($trimmed);
+ if (defined($writer_method)) {
+  return _actionir_ast_unsupported_helper_expr($writer_method)
+   if _parser_state_helper_is_forbidden_in_function($writer_method, $deps);
+  my $writer_call = $parse_method_function_expr->($trimmed);
+  my $arity = LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_named_mark_write_statement_arity', $writer_method);
+  return _actionir_ast_unsupported_helper_expr($writer_method)
+   unless $writer_call && @{$writer_call->{args} || []} == $arity
+    && !grep { !/\A\s*\w+\s*\z/o } @{$writer_call->{args}};
+ }
  # Resolve this governed argument role before generic AST fallback can retain a
  # raw call or reinterpret a nested control expression as a host return.
  if ($trimmed =~ /\A(?:mark_(?:pos|line|col)|capture_(?:len_from|until_cursor_len_from|rest_len_from|len_between))\s*\(/o) {

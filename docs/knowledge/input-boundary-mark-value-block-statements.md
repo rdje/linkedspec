@@ -35,3 +35,9 @@ with the same qualification. Its portable-ready expectation is removed from
 normal scope, not blessed;42.3 owns symbolic role/domain admission before full23.4.
 No String-name, writer-as-data/fluent, deferred, alias/schema or frame grant.
 42.1 can now implement its eager name2-moves-begin oracle against valid blocks.
+
+42.2.1 now separately extends the same statement path to quoted/computed String
+word names and all ten existing writer/copy/clear statements. Its shared body
+factory preserves all ten original native strings and the input-boundary42.4
+behavior; [[perl-mark-name-argument-readiness-gap]] records exact source/readiness
+handoff and current limits. No new writer-as-value or bare Unicode admission.

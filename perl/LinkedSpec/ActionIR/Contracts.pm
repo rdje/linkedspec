@@ -335,7 +335,7 @@ sub _build_mark_trace_call {
  return '_trace_runtime_mark_event('
   ."operation => '$args{operation}', "
   ."rule_label => '$args{label}', "
-  ."mark_name => '$args{mark_name}', "
+  .'mark_name => '.(defined($args{mark_name_expr}) ? $args{mark_name_expr} : "'$args{mark_name}'").', '
   ."string_ref => \$STRING, "
   ."mark_pos => $args{mark_pos_expr}, "
   ."left_edge => (defined(\$LSPOS) && defined(\$LMATCH) ? \$LSPOS - length \$LMATCH : pos \$\$STRING), "
@@ -770,14 +770,65 @@ sub _input_boundary_mark_statement_expr {
  my ($label, $method, $mark) = @_;
  return undef unless defined($method)
   && $method =~ /\A(?:mark_input_start|mark_input_end)\z/o;
- return undef unless defined($mark) && !ref($mark) && $mark =~ /\A\w+\z/o;
+ return _named_mark_write_statement_expr($label, $method, $mark)
+}
+
+sub _named_mark_write_statement_arity {
+ my ($method) = @_;
+ state $arity = {
+  mark_input_start => 1, mark_input_end => 1, mark_here => 1,
+  mark_entry_start => 1, mark_entry_end => 1,
+  mark_match_start => 1, mark_match_end => 1,
+  mark_copy => 2, mark_capture_slice => 1, clear_mark => 1,
+ };
+ return defined($method) ? $arity->{$method} : undef
+}
+
+sub _named_mark_write_statement_method_re {
+ state $methods = qr/(?:mark_(?:input_start|input_end|here|entry_start|entry_end|match_start|match_end|copy|capture_slice)|clear_mark)/o;
+ return $methods
+}
+
+sub _named_mark_write_statement_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _named_mark_write_statement_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
+ return undef if grep { !defined($_) || ref($_) || !/\A\w+\z/o } @marks;
+ return _named_mark_write_statement_body_expr($label, $method, map { "'".$_."'" } @marks)
+}
+
+# Only statement owners admit new name representations. Keep native body returns
+# and operation/trace provenance unchanged, without adding a value-source role.
+sub _named_mark_write_statement_body_expr {
+ my ($label, $method, @marks) = @_;
+ my $arity = _named_mark_write_statement_arity($method);
+ return undef unless defined($arity) && @marks == $arity;
  $label = '' unless defined $label;
- my $position = $method eq 'mark_input_start'
-  ? '0'
-  : 'LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "mark_input_end")';
- return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$mark.'\', '.$position.', "'.$method.'"); '
-  ._build_mark_trace_call(operation => $method, label => $label, mark_name => $mark, mark_pos_expr => '$__ls_mark')
-  .'; 1 }'
+ my $mark = $marks[0];
+ if ($method eq 'clear_mark') {
+  return 'do { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', '.$mark.') }';
+ }
+ if ($method eq 'mark_copy') {
+  return 'do { my $__ls_source = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', '.$marks[1].', "mark_copy"); if (defined($__ls_source)) { my $__ls_target = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$mark.', $__ls_source, "mark_copy"); '
+   ._build_mark_trace_call(operation => $method, label => $label, mark_name_expr => $mark, mark_pos_expr => '$__ls_target')
+   .'; $__ls_target } else { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', '.$mark.'); undef } }';
+ }
+ if ($method eq 'mark_capture_slice') {
+  return 'do { my $__ls_capture_boundary = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $IPOS, "mark_capture_slice"); my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$mark.', $__ls_capture_boundary, "mark_capture_slice"); '
+   ._build_mark_trace_call(operation => $method, label => $label, mark_name_expr => $mark, mark_pos_expr => '$__ls_mark')
+   .'; $__ls_mark }';
+ }
+ state $positions = {
+  mark_input_start => '0',
+  mark_input_end => 'LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "mark_input_end")',
+  mark_here => 'pos $$STRING',
+  mark_entry_start => '$IPOS - length($IMATCH // "")', mark_entry_end => '$IPOS',
+  mark_match_start => '$LSPOS - length($LMATCH)', mark_match_end => '$LSPOS',
+ };
+ my $result = $method =~ /\Amark_input_/o ? '1' : '$__ls_mark';
+ return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$mark.', '.$positions->{$method}.', "'.$method.'"); '
+  ._build_mark_trace_call(operation => $method, label => $label, mark_name_expr => $mark, mark_pos_expr => '$__ls_mark')
+  .'; '.$result.' }'
 }
 
 # Readonly named Number readers share their original bodies with ordinary value
@@ -1504,7 +1555,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_here\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', pos $$STRING, "mark_here"); '. _build_mark_trace_call(operation => 'mark_here', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     _named_mark_write_statement_expr($label, 'mark_here', $+{mark})
     }gex;
     return $code
    },
@@ -1519,7 +1570,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_entry_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $IPOS - length($IMATCH // ""), "mark_entry_start"); '. _build_mark_trace_call(operation => 'mark_entry_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     _named_mark_write_statement_expr($label, 'mark_entry_start', $+{mark})
     }gex;
     return $code
    },
@@ -1534,7 +1585,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_entry_end\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $IPOS, "mark_entry_end"); '. _build_mark_trace_call(operation => 'mark_entry_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     _named_mark_write_statement_expr($label, 'mark_entry_end', $+{mark})
     }gex;
     return $code
    },
@@ -1549,7 +1600,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_match_start\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $LSPOS - length($LMATCH), "mark_match_start"); '. _build_mark_trace_call(operation => 'mark_match_start', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     _named_mark_write_statement_expr($label, 'mark_match_start', $+{mark})
     }gex;
     return $code
    },
@@ -1564,7 +1615,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_match_end\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $LSPOS, "mark_match_end"); '. _build_mark_trace_call(operation => 'mark_match_end', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     _named_mark_write_statement_expr($label, 'mark_match_end', $+{mark})
     }gex;
     return $code
    },
@@ -1579,7 +1630,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_copy\s*\(\s*(?<target>\w+)\s*,\s*(?<source>\w+)\s*\)
     }{
-     'do { my $__ls_source = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, \''.$label.'\', \''.$+{source}.'\', "mark_copy"); if (defined($__ls_source)) { my $__ls_target = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{target}.'\', $__ls_source, "mark_copy"); '. _build_mark_trace_call(operation => 'mark_copy', label => $label, mark_name => $+{target}, mark_pos_expr => '$__ls_target') .'; $__ls_target } else { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', \''.$+{target}.'\'); undef } }'
+     _named_mark_write_statement_expr($label, 'mark_copy', $+{target}, $+{source})
     }gex;
     return $code
    },
@@ -1594,7 +1645,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bmark_capture_slice\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { my $__ls_capture_boundary = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $IPOS, "mark_capture_slice"); my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', \''.$+{mark}.'\', $__ls_capture_boundary, "mark_capture_slice"); '. _build_mark_trace_call(operation => 'mark_capture_slice', label => $label, mark_name => $+{mark}, mark_pos_expr => '$__ls_mark') .'; $__ls_mark }'
+     _named_mark_write_statement_expr($label, 'mark_capture_slice', $+{mark})
     }gex;
     return $code
    },
@@ -1609,7 +1660,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bclear_mark\s*\(\s*(?<mark>\w+)\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::mark_delete($info, \''.$label.'\', \''.$+{mark}.'\') }'
+     _named_mark_write_statement_expr($label, 'clear_mark', $+{mark})
     }gex;
     return $code
    },
@@ -2450,10 +2501,11 @@ sub _build_array_pipeline_contracts {
 #------------------------------------------------------------------------------
 sub _build_dropped_value_contracts {
  my ($d) = @_;
+ my $mark_statement_re = _named_mark_write_statement_method_re();
  my $value_call_re = qr/(?:and|or|not|trim|lowercase|uppercase|length|substr|replace_substr|rm_prefix|rm_suffix|cat|str_eq|str_ne|str_gt|str_ge|str_lt|str_le|starts_with|ends_with|contains_substr|matches|coalesce|coalesce_nonempty|num_abs|num_floor|num_ceil|num_round|num_add|num_sub|num_mul|num_div|num_mod|num_clamp|num_min|num_max|num_eq|num_ne|num_gt|num_ge|num_lt|num_le|abs|floor|ceil|round|sum|avg|median|range|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le|array|hash|copy|flat|flat_array|flat_hash|count|first|last|drop_front|take|slice|take_last|drop_back|concat_arrays|split|split_tagged_records|sorted|reversed|contains|index_of|split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match|count_keys|sorted_keys|sorted_values|has_key|merge_hash|rename_key|drop_keys|pick_keys|join_values|entry_named|entry_has|match_named|match_has|entry_groups|match_groups|entry_map|entry_named_map|match_map|match_named_map|num_sum|num_avg|num_median|num_range)/;
  my $receiver_method_re = qr/(?:trim|lowercase|uppercase|length|sorted|reversed|count|first|last|is_empty|is_nonempty|flat_hash|count_keys|sorted_keys|sorted_values|abs|floor|ceil|round)/;
  my $literal_receiver_re = qr/(?:"(?:\\.|[^\"])*"|'(?:\\.|[^'])*'|-?\d+(?:\.\d+)?|[A-Za-z_][A-Za-z0-9_]*(?!\s*\())/;
- my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;
+ my $value_drop_statement_re = qr/^\s*(?:(?:$value_call_re|$mark_statement_re)\s*(?<PAREN>\((?:[^\(\)\"\']++|\"(?:\\.|[^\"])*\"|\'(?:\\.|[^\'])*\'|(?&PAREN))*\))|(?:$literal_receiver_re)\s*\.\s*(?:$receiver_method_re)\s*\(\s*\))\s*\z/so;
  return _register_native_contracts([
   {
    id                 => 'value_drop_statement',
