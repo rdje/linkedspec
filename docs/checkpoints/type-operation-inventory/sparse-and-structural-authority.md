@@ -301,3 +301,13 @@ failed null projection and no-selection normal return. No production change;
 packet julia-null-context-intake.json.gz retains exact closure. Typed/local
 return .1 next then pure classifier .2 before safe Lua/full admission; no global
 null success, sticky prior match, invented span or parser matched override.
+
+2026-10-29 Julia39.3.7.1 retains owning accepted-null return and dependent
+matched-null observation, without universal null acceptance/sticky match.21
+sources39inputs5healthy16RED ->21pass390 assertions, same21 baseline modules
+and exact inputs/five controls. Original multi-slot strict matchedtrue/cursor4
+reproducer passes; post274/collection240/minimum289/group390/progress234/
+structural297 nearest assertions pass, prior fixtures unchanged. Original33
+modules replay fresh leaves only four pure observations .7.2. Packet
+julia-null-returns-intake.json.gz retains actual closure, normal suite once.
+Pure classifier next before safe Lua/full admission; no public schema movement.

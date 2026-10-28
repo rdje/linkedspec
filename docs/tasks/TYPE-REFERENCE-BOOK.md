@@ -8486,13 +8486,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.0 - qualify Julia nullable return and pure observation contexts`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.1`
-  Status: `pending` / P1 before safe Lua/admission
+  Status: `completed` / accepted-null return provenance
   Goal: Preserve actual Julia accepted-null return provenance independently of payload.
   Acceptance: Use20 qualified return sources plus matched-null observation source,21sources39inputs: selected action/early AND/LE/plain blind post-call and completed EX/E/IT/LX null acceptance. Typed return/local match/count owners only; preserve early I/LS/under-minimum/no-hit/zero-min and non-null whole-rule authority, physical/logical captures/cursor/retv/lineage and real errors/progress. No sticky regex bit or universal null success. Exact SDK/generated/fresh RED-GREEN/input identity/nearest controls/book/docs/commit; four pure observation gaps remain separately .2-owned.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned authored source/SDK/generated/fresh RED-GREEN plus direct-dependent null/record/error/progress controls, compile/book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after bounded repairs/peer/diagnostic/registration/pressure/lifecycle; public schema/authority separately canonical.
-  Planned claim verification: none: Finite authored functional/null/record/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:21 sources39 inputs5healthy16actualRED ->21pass390 assertions, exact input/five-control identity/same21 baseline modules; original33 fresh public replay leaves only4 pure observations; original multi-slot matchedtrue/cursor4 strict reproducer; Julia blind post-call iteration results:274, Julia implicit blind repetition collection:240, Julia ordinary minimum miss routes:289, Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:297; normal single registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after pure observation/peer/diagnostic/registration/pressure/lifecycle repairs; no public schema/family/authority movement.
+  Claim verification: none: Finite authored functional/null/return/record/control-flow distinctions, no population measurement.
+
+  Activation: clean `70182532756ea3f1aa2908073b7d261caf50a2bb` after independent33-source qualifier. Exact21-source return/matched-null-observation matrix before private typed owner acceptance; four pure coordinator classifiers remain .2. Preserve current ordinary miss/initial I/LS/under-min/no-hit/non-null authority and every typed progress/control channel.
+
+
+  - [x] **REPRODUCE / ISSUE**:21 exact sources39 inputs5healthy16actualRED. Selected/completed null action/E/EX/IT/LE/LX/plain blind post-call returns lose match status; matched-null observation inherits failure. Initial I/LS/under-min/no-hit and non-null overrides stay healthy. Independent earlier trace shows actual physical match/completed children before false/null projection.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _runtime_returned tests value !== nothing and _RuntimeActionReturn stores only value, discarding owning accepted match/count context. Existing matched/nullable payload separation, actual source/SDK trace and exact public predecessor oracles distinguish real acceptance from unaccepted lifecycle/miss paths. No global prior regex inference.
+  - [x] **FIX**: Private accepted Bool on return signal/defaultfalse; selected regex/LE/plain successful child owners tag actual acceptance and root catch propagates. Lifecycle factories use current complete attempt/prior completed next/count; initial I/LS/no-hit/zero-min/under-min LX remain unaccepted. Existing non-null whole authority remains. Group/blind iteration channels and pure observation classifier unchanged.
+  - [x] **ADDRESSED (verified)**:21pass390 assertions39 inputs SDK matched/value/cursor/full matched-null record/plan and same21 baseline modules/consumer separate process. Exact raw source/normalized/compiled/plan/emitted strings and five healthy observations unchanged. Original multi-slot falsey_null now matchedtrue/cursor4 explicitly; early AND/caller mark/minimum/zero/whole LE controls hold.
+  - [x] **NO REGRESSION**: Neighbors Julia blind post-call iteration results:274, Julia implicit blind repetition collection:240, Julia ordinary minimum miss routes:289, Julia repeated AND group results:390, Julia live recognition repetition progress:234, Julia sparse AND structural and required sequence:297 pass; all prior fixture bytes unchanged and new suite registered once. Original33 baseline modules replay fresh leaves exactly four pure observation failures .2, matched-null record repaired; direct fresh matched flag not claimed. Compiler/emitter/matching/recognition authority/schema unchanged, no universal null success/sticky context/entry or broad lifecycle/Unicode/full admission claim.
+  - [x] **LOCKSTEP**: julia-null-returns-intake.json.gz retains actual fixture/producer/runtime epochs/SDK/fresh/original33 replay/receipt closure. Book/cards/target/roadmap/task/live/resume/history align. .2 pure classifier next, then safe Lua/P2 diagnostic/admission/pressure/lifecycle/slot; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.1 - preserve Julia accepted null return provenance`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.2`
   Status: `pending` / P1 before safe Lua/admission
@@ -8827,7 +8838,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.1` | `pending` | Preserve Julia accepted-null return provenance before pure observation repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.2` | `pending` | Accept normal pure-null Julia coordinator observations without fabricated spans. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

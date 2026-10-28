@@ -2,12 +2,10 @@
 id: julia-null-return-and-pure-observation-gaps
 title: Julia nullable return and pure coordinator observation intake distinguishes lost acceptance from normal no-match completion
 answers:
-  - "does Julia accepted null action preserve matched status"
-  - "why does Julia completed blind EX or IT null return report unmatched"
   - "why does Julia pure null coordinator observation report failed"
   - "which Julia nullable observation failure belongs to return provenance"
 date: 2026-10-29
-status: 33-source intake complete; P1 return39.3.7.1 then pure observation39.3.7.2 before safe Lua/admission
+status: accepted-null return39.3.7.1 repaired/targeted-checked; four pure coordinator observation39.3.7.2 next
 tags: [julia, null, acceptance, lifecycle, observation, coordinator, return-provenance]
 evidence: "julia-null-context-intake.json.gz retains33 sources54 inputs13healthy20failed sources SDK/native/restored/plan and33 fresh modules, actual9 trace inputs/five sources and full records/errors."
 reverify: "Recover retained probes; bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_null_context.jl and probe_julia_null_context_fresh.jl; read_julia_null_context.py --fresh only after both exit."
@@ -39,3 +37,10 @@ No Julia production change in intake. Exact producer/source/normalized/compiled/
 plan/emitted/module/SDK/fresh/trace closure retained. Canonical return/reference/
 observation oracles are reused, no peer or broad family/lifecycle/Unicode/full
 admission inference. New bounded children commit separately before safe Lua.
+
+2026-10-29 .7.1 now repairs owning accepted-null return and matched-null
+observation:21 sources39inputs5healthy16RED ->21pass390 assertions, same21
+baseline modules/exact inputs. All33 original modules replay fresh leaves only
+four pure coordinator outcomes wrong, with direct flags asserted in SDK. Current
+return mechanism/proof: [[julia-accepted-null-return-provenance]]. Original
+intake packet stays frozen; pure classifier .2 immediately next.

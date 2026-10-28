@@ -1634,7 +1634,10 @@ end
 
 struct _RuntimeActionReturn <: Exception
     value::Any
+    accepted::Bool
 end
+
+_RuntimeActionReturn(value; accepted::Bool = false) = _RuntimeActionReturn(value, accepted)
 
 # An action-edge return completes one repeated AND group, not the rule.
 struct _RuntimeAndGroupReturn <: Exception
@@ -2051,7 +2054,7 @@ function _execute_runtime_rule!(
             return terminal_result
         catch error
             if error isa _RuntimeActionReturn
-                terminal_result = _runtime_returned(error.value)
+                terminal_result = _runtime_returned(error.value; accepted = error.accepted)
                 return terminal_result
             end
             rethrow()
@@ -2163,12 +2166,12 @@ function _execute_runtime_blind_rule!(
             if !matched.value
                 loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
                 if loop_exit !== nothing
-                    return _runtime_returned(loop_exit.value)
+                    return _runtime_returned(loop_exit.value; accepted = matched_any)
                 end
             end
             exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
             if exit_return !== nothing
-                return _runtime_returned(exit_return.value)
+                return _runtime_returned(exit_return.value; accepted = matched.value || matched_any)
             end
             value = uses_and_execution && !isempty(implicit_iteration_results) ?
                 Any[implicit_iteration_results...] : nothing
@@ -2176,11 +2179,11 @@ function _execute_runtime_blind_rule!(
         end
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
-            return _runtime_returned(loop_exit.value)
+            return _runtime_returned(loop_exit.value; accepted = matched_any)
         end
         exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
         if exit_return !== nothing
-            return _runtime_returned(exit_return.value)
+            return _runtime_returned(exit_return.value; accepted = matched_any)
         end
         value = uses_and_execution && !isempty(implicit_iteration_results) ?
             Any[implicit_iteration_results...] : nothing
@@ -2199,7 +2202,7 @@ function _execute_runtime_blind_rule!(
         before = context.cursor_codeunit
         loop_start = _execute_runtime_lifecycle!(engine, rule, "LS", context)
         if loop_start !== nothing
-            return _runtime_returned(loop_start.value)
+            return _runtime_returned(loop_start.value; accepted = matches > 0)
         end
 
         iteration_results = Any[]
@@ -2236,7 +2239,7 @@ function _execute_runtime_blind_rule!(
         if !returned_iteration_value
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
             if loop_end !== nothing
-                return _runtime_returned(loop_end.value)
+                return _runtime_returned(loop_end.value; accepted = true)
             end
         end
         _assert_runtime_recognition_repetition_progress!(engine, context, rule.label, before)
@@ -2248,7 +2251,7 @@ function _execute_runtime_blind_rule!(
         matches += 1
         iteration_return = _execute_runtime_lifecycle!(engine, rule, "IT", context)
         if iteration_return !== nothing
-            return _runtime_returned(iteration_return.value)
+            return _runtime_returned(iteration_return.value; accepted = true)
         end
         if !has_custom_iteration
             if returned_iteration_value
@@ -2267,24 +2270,24 @@ function _execute_runtime_blind_rule!(
     if matches < minimum
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
-            return _runtime_returned(loop_exit.value)
+            return _runtime_returned(loop_exit.value; accepted = false)
         end
         return _RuntimeRuleResult(false, nothing)
     end
 
     extended_exit = _execute_runtime_lifecycle!(engine, rule, "EX", context)
     if extended_exit !== nothing
-        return _runtime_returned(extended_exit.value)
+        return _runtime_returned(extended_exit.value; accepted = matches > 0)
     end
     if made_failed_attempt || matches > 0
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
-            return _runtime_returned(loop_exit.value)
+            return _runtime_returned(loop_exit.value; accepted = matches > 0)
         end
     end
     exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
     if exit_return !== nothing
-        return _runtime_returned(exit_return.value)
+        return _runtime_returned(exit_return.value; accepted = matches > 0)
     end
     value = rule.mode_metadata.name == "Default" && matches == 0 ?
         nothing : Any[collected_values...]
@@ -2332,7 +2335,7 @@ function _execute_runtime_blind_once!(
                 if return_iteration_value
                     throw(_RuntimeBlindIterationReturn(edge_return.value))
                 end
-                throw(edge_return)
+                throw(_RuntimeActionReturn(edge_return.value; accepted = child.matched))
             end
             if !child.matched
                 return false
@@ -2368,7 +2371,7 @@ function _execute_runtime_blind_once!(
             if return_iteration_value
                 throw(_RuntimeBlindIterationReturn(edge_return.value))
             end
-            throw(edge_return)
+            throw(_RuntimeActionReturn(edge_return.value; accepted = child.matched))
         end
         if child.matched
             return true
@@ -2413,22 +2416,22 @@ function _execute_runtime_regex_rule!(
             if !matched.value
                 loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
                 if loop_exit !== nothing
-                    return _runtime_returned(loop_exit.value)
+                    return _runtime_returned(loop_exit.value; accepted = matched_any)
                 end
             end
             exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
             if exit_return !== nothing
-                return _runtime_returned(exit_return.value)
+                return _runtime_returned(exit_return.value; accepted = matched.value || matched_any)
             end
             return _RuntimeRuleResult(matched.value || matched_any, nothing)
         end
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
-            return _runtime_returned(loop_exit.value)
+            return _runtime_returned(loop_exit.value; accepted = matched_any)
         end
         exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
         if exit_return !== nothing
-            return _runtime_returned(exit_return.value)
+            return _runtime_returned(exit_return.value; accepted = matched_any)
         end
         return _RuntimeRuleResult(matched_any, nothing)
     end
@@ -2465,13 +2468,13 @@ function _execute_runtime_regex_rule!(
                 _set_runtime_gap_phase!(context, rule.label, "LS")
                 loop_start = _execute_runtime_lifecycle!(engine, rule, "LS", context)
                 if loop_start !== nothing
-                    return _runtime_returned(loop_start.value)
+                    return _runtime_returned(loop_start.value; accepted = matches > 0)
                 end
             end
         else
             loop_start = _execute_runtime_lifecycle!(engine, rule, "LS", context)
             if loop_start !== nothing
-                return _runtime_returned(loop_start.value)
+                return _runtime_returned(loop_start.value; accepted = matches > 0)
             end
         end
 
@@ -2514,7 +2517,7 @@ function _execute_runtime_regex_rule!(
         _set_runtime_gap_phase!(context, rule.label, "IT")
         iteration_return = _execute_runtime_lifecycle!(engine, rule, "IT", context)
         if iteration_return !== nothing
-            return _runtime_returned(iteration_return.value)
+            return _runtime_returned(iteration_return.value; accepted = true)
         end
         if and_iteration_values !== nothing && !has_custom_iteration
             push!(and_iteration_values, _runtime_copy(group_value))
@@ -2528,7 +2531,7 @@ function _execute_runtime_regex_rule!(
         _set_runtime_gap_phase!(context, rule.label, "LX")
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
-            return _runtime_returned(loop_exit.value)
+            return _runtime_returned(loop_exit.value; accepted = false)
         end
         return _RuntimeRuleResult(false, nothing)
     end
@@ -2537,19 +2540,19 @@ function _execute_runtime_regex_rule!(
     _set_runtime_gap_phase!(context, rule.label, "EX")
     extended_exit = _execute_runtime_lifecycle!(engine, rule, "EX", context)
     if extended_exit !== nothing
-        return _runtime_returned(extended_exit.value)
+        return _runtime_returned(extended_exit.value; accepted = matches > 0)
     end
     if made_failed_attempt || matches > 0
         _set_runtime_gap_phase!(context, rule.label, "LX")
         loop_exit = _execute_runtime_lifecycle!(engine, rule, "LX", context)
         if loop_exit !== nothing
-            return _runtime_returned(loop_exit.value)
+            return _runtime_returned(loop_exit.value; accepted = matches > 0)
         end
     end
     _set_runtime_gap_phase!(context, rule.label, "E")
     exit_return = _execute_runtime_lifecycle!(engine, rule, "E", context)
     if exit_return !== nothing
-        return _runtime_returned(exit_return.value)
+        return _runtime_returned(exit_return.value; accepted = matches > 0)
     end
     value = and_iteration_values !== nothing ? Any[and_iteration_values...] :
         action_iteration_values === nothing ? nothing : Any[action_iteration_values...]
@@ -2681,7 +2684,7 @@ function _execute_runtime_regex_once!(
             _set_runtime_gap_phase!(context, rule.label, "LE")
             loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
             if loop_end !== nothing
-                throw(loop_end)
+                throw(_RuntimeActionReturn(loop_end.value; accepted = true))
             end
         end
         return true
@@ -2738,7 +2741,7 @@ function _execute_runtime_regex_once!(
     _set_runtime_gap_phase!(context, rule.label, "LE")
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
     if loop_end !== nothing
-        throw(loop_end)
+        throw(_RuntimeActionReturn(loop_end.value; accepted = true))
     end
     return true
 end
@@ -2973,7 +2976,7 @@ function _accept_runtime_regex_match!(
                 throw(_RuntimeAndGroupReturn(action_return.value))
             end
             if action_iteration_values === nothing
-                throw(action_return)
+                throw(_RuntimeActionReturn(action_return.value; accepted = true))
             end
             push!(action_iteration_values, _runtime_copy(action_return.value))
         end
@@ -9515,7 +9518,11 @@ function _runtime_nextable_bool(callback)
     end
 end
 
-_runtime_returned(value) = _RuntimeRuleResult(value !== nothing, _runtime_copy(value))
+function _runtime_returned(value; accepted::Bool = false)
+    # Non-null explicit returns retain their existing whole-rule authority.
+    # Null needs acceptance from its owning match or completed-iteration path.
+    return _RuntimeRuleResult(accepted || value !== nothing, _runtime_copy(value))
+end
 _runtime_copy(value) = deepcopy(value)
 
 _with_runtime_diagnostic(error::RuntimeInterpreterException, diagnostic::RuntimeDiagnostic) =

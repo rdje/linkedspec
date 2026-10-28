@@ -1,0 +1,452 @@
+[
+  {
+    "name": "or",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nValue:OR{2}\n => Part\n EX {return(undef)}\n E {return(undef)}\nPart:|\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          null,
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          false,
+          null,
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": [
+          false,
+          null,
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nValue:AND{2}\n => Part\n EX {return(undef)}\n E {return(undef)}\nPart:|\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          null,
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          false,
+          null,
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": [
+          false,
+          null,
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "zero_min",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nValue:OR{0,1}\n => Part\n EX {return(undef)}\n E {return(undef)}\nPart:|\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          null,
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": [
+          false,
+          null,
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "it_null",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nValue:OR{2}\n => Part\n IT {return(undef)}\nPart:|\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          null,
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "caller_mark",
+    "source": "Top::\n I {mark_here(origin);tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos(),mark_pos(origin)])}\n /never/\nValue:OR{2}\n => Part\n EX {return(undef)}\n E {return(undef)}\nPart:|\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          null,
+          2,
+          0
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          false,
+          null,
+          1,
+          0
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "action_null",
+    "source": "Value::AND\n /a/ -> Value[0] {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "action_nonnull",
+    "source": "Value::AND\n /a/ -> Value[0] {return(\"OK\")}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": "OK",
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "and_early_null",
+    "source": "Value::AND\n /a/\n /b/\n -> Value[0] {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "regex_e",
+    "source": "Value::AND\n /a/\n E {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "blind_e",
+    "source": "Value::AND\n => Part\n E {return(undef)}\nPart:AND\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "blind_post_null",
+    "source": "Value::AND\n => Part {return(undef)}\nPart:AND\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "regex_repeated_e",
+    "source": "Value::OR{2}\n /a/ -> Value[0] {return(1)}\n E {return(undef)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 2
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 1
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "regex_le",
+    "source": "Value::AND\n /a/ -> Value[0] {x=1}\n LE {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "blind_le",
+    "source": "Value::OR{2}\n => Part\n LE {return(undef)}\nPart:AND\n /a/ -> Part[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "early_i",
+    "source": "Value::AND\n I {return(undef)}\n /a/\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "early_ls",
+    "source": "Value::OR{2}\n /a/ -> Value[0] {return(1)}\n LS {return(undef)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "early_ls_nonnull",
+    "source": "Value::OR{2}\n /a/ -> Value[0] {return(1)}\n LS {return(\"LS\")}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": "LS",
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "min_lx",
+    "source": "Value::OR{2}\n /a/ -> Value[0] {return(1)}\n LX {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 1
+      },
+      {
+        "input": "aa",
+        "expected": null,
+        "expected_match": true,
+        "expected_cursor": 2
+      }
+    ]
+  },
+  {
+    "name": "min_lx_nonnull",
+    "source": "Value::OR{2}\n /a/ -> Value[0] {return(1)}\n LX {return(\"LX\")}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": "LX",
+        "expected_match": true,
+        "expected_cursor": 1
+      }
+    ]
+  },
+  {
+    "name": "zero_le",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Guard));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nGuard:OR{1}\n /(?=a)/ -> Guard[0] {return(0)}\n LE {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          true,
+          null,
+          0
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "matched_null_observation",
+    "source": "Top::\n I {value=observe_recognition(observation,call(Coordinator));return([value,observation])}\n /never/\nCoordinator:AND\n /a/\n E {return(undef)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": {
+              "source_id": "input",
+              "start": 0,
+              "end": 1,
+              "provenance": "match"
+            },
+            "accepted_exit": {
+              "source_id": "input",
+              "offset": 1
+            },
+            "outcome": "accepted",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 1
+      },
+      {
+        "input": "b",
+        "expected": [
+          null,
+          {
+            "source_id": "input",
+            "rule_label": "Coordinator",
+            "invocation_id": 2,
+            "parent_invocation_id": 1,
+            "entry_position": {
+              "source_id": "input",
+              "offset": 0
+            },
+            "selected_match": null,
+            "accepted_exit": null,
+            "outcome": "failed",
+            "diagnostic": null
+          }
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  }
+]

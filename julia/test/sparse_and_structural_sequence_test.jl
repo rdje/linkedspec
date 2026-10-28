@@ -111,6 +111,9 @@ end
                     @test row["selected"] == [
                         "rule_label=Value selection_role=ordered_required target_rule=Part regex_index=1",
                     ]
+                elseif name == "falsey_null"
+                    @test row["routes"]["native"]["result"]["matched"] === true
+                    @test row["routes"]["native"]["result"]["cursor_code_unit"] == 4
                 end
             end
         end

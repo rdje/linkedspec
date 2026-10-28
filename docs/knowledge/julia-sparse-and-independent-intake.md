@@ -4,7 +4,7 @@ title: Independent Julia sparse AND intake owns dependency group minimum blind p
 answers:
   - "what did independent Julia sparse AND intake establish"
 date: 2026-10-28
-status: 31-source intake and33-source nullable intake complete; return39.3.7.1 then pure observation39.3.7.2 next
+status: structural/repetition/return repairs through39.3.7.1 targeted-checked; four pure observations .7.2 next
 tags: [julia, sparse-and, dependency, repetition, minimum, blind-call, progress, nullable, intake]
 evidence: "julia-sparse-intake.json.gz retains31 sources49 inputs native/restored/generated plus31 separately loaded emitted modules;18healthy13value/error failed sources, additional accepted-null matched qualifier and11 actual trace inputs/six sources."
 reverify: "Recover retained probes then bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_sparse.jl and probe_julia_sparse_fresh.jl; run read_julia_sparse.py --fresh only after both finish."
@@ -86,3 +86,9 @@ observation failures: one matched-null E belongs to return provenance, four
 pure coordinators need a classifier.13healthy20failed sources on SDK/plan/fresh,
 actual9 traces/five sources, no production edit. Current mechanism/owners:
 [[julia-null-return-and-pure-observation-gaps]]. .7.1 then .7.2 before safe Lua.
+
+2026-10-29 .7.1 repairs accepted-null return provenance and dependent matched-null
+observation; original strict multi-slot reproducer now matchedtrue/cursor4.
+21 sources39inputs5healthy16RED ->21pass390 assertions, same baseline modules
+and exact inputs, original33 fresh replay leaves only four pure cases .7.2.
+Current mechanism: [[julia-accepted-null-return-provenance]].
