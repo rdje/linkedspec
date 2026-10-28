@@ -9,7 +9,7 @@ answers:
   - "why does Rust repeated AND return before its minimum"
   - "why does default blind Rust plan stop at cursor four instead of eight"
 date: 2026-10-28
-status: intake complete/default-blind plan39.1.4.1 repaired; remaining P1 slots/returns/minimum/implicit results before peers
+status: default-blind iteration39.1.4.1 and dependency steps39.1.1 repaired; indexed/returns/minimum/implicit results remain
 tags: [rust, and, sparse, sequence, dependencies, slots, generated-plan, repetition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0; sparse-and-rust-repair-target.md and sparse-and-rust-intake.json.gz retain actual initial/refined source, compiled serde, emitted text, native trace, all reached routes and owned dormant tests."
 reverify: "bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test sparse_and_structural_sequence -- --nocapture; explicitly select owned ignored regressions with --ignored when repairing. Independent emitted package execution remains unassessed."
@@ -44,3 +44,18 @@ all6pass, structural10 active pass/8 owned dormant. Exact6 source/serde/plan/
 emission records unchanged, oldor_bcode valid/proposedrep_bcode rejected.
 Rebuild applications with updated runtime; no generated-source rewrite.
 Packet: default-blind-plan-repetition-intake.json.gz.39.1.1 is next.
+
+39.1.1 repairs the dependency gaps above with shared runtime AndRequiredStep:
+existing pattern index plus optional exact action ordinal, independent of
+sequence position. Same-owner increasing sparse references retain every
+structural slot; other edge-only dependencies keep authored acode order.
+Native/generated loops select/count/reset these steps and dispatch one action
+per dependency; identity comes from that selected action. Parent-anchored/mixed
+catalog matching stays compatible, and omitted optional slot metadata falls
+back to the pattern catalog. Compact & keeps its existing row but executes its
+ordered typed mode. No catalog/schema/classifier/emitter rewrite. Unchanged22
+tests12pass5RED5ignored ->17pass5ignored; duplicate-slot15 roles/default-blind6
+pass; exact18 full source/artifact records and legacy inputs/results unchanged.
+Only5 result groups change. Rebuild generated applications with updated runtime.
+Packet rust-and-steps-intake.json.gz.39.1.2 indexed priority is next; remaining5
+dormant regressions are required before admission, never success credit.

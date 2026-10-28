@@ -126,6 +126,76 @@ fn structural_slot_identity(rule: &CompiledRule, dispatch_index: usize) -> (&str
         .unwrap_or((rule.label.as_str(), dispatch_index))
 }
 
+/// One required match in an AND sequence. Dependency order is independent of
+/// both the regex catalog and the action table: repeated references to one
+/// pattern must consume separate matches and dispatch separate actions.
+#[derive(Clone, Copy)]
+struct AndRequiredStep {
+    regex_index: usize,
+    action_index: Option<usize>,
+}
+
+impl AndRequiredStep {
+    fn slot_identity(self, rule: &CompiledRule, matched_index: usize) -> (&str, usize) {
+        self.action_index
+            .and_then(|index| rule.acode_dispatch.get(index))
+            .filter(|entry| entry.regex_idx == matched_index)
+            .map(|entry| (entry.child_label.as_str(), entry.child_regex_idx))
+            .unwrap_or_else(|| structural_slot_identity(rule, matched_index))
+    }
+
+    fn dispatches(self, action_index: usize) -> bool {
+        self.action_index.is_none_or(|index| index == action_index)
+    }
+}
+
+fn and_required_steps(rule: &CompiledRule) -> Vec<AndRequiredStep> {
+    if !rule.mode.is_and() {
+        return Vec::new();
+    }
+
+    // Parent-anchored and mixed rules retain their catalog-based matching and
+    // dispatch. Only edge-only dependency sequences need an action per step.
+    let has_parent_pattern = rule
+        .acode_dispatch
+        .iter()
+        .any(|entry| entry.has_parent_regex);
+    let local_slot_count = if rule.regex_slots.is_empty() {
+        // Older compiled inputs may omit the optional authored-slot metadata.
+        rule.regex_patterns.len()
+    } else {
+        rule.regex_slots.len()
+    };
+    let mut previous_index = None;
+    let local_sparse_sequence = rule.acode_dispatch.iter().all(|entry| {
+        let increasing = previous_index.is_none_or(|index| entry.child_regex_idx > index);
+        previous_index = Some(entry.child_regex_idx);
+        entry.child_label == rule.label
+            && entry.child_regex_idx < local_slot_count
+            && entry.regex_idx == entry.child_regex_idx
+            && increasing
+    });
+
+    if !has_parent_pattern && !local_sparse_sequence {
+        return rule
+            .acode_dispatch
+            .iter()
+            .enumerate()
+            .map(|(index, entry)| AndRequiredStep {
+                regex_index: entry.regex_idx,
+                action_index: Some(index),
+            })
+            .collect();
+    }
+
+    (0..rule.regex_patterns.len())
+        .map(|regex_index| AndRequiredStep {
+            regex_index,
+            action_index: None,
+        })
+        .collect()
+}
+
 /// True only for the explicit choice-repetition action families admitted by
 /// ADR 0048. The historical unadorned default handler and every AND/blind
 /// family deliberately retain their existing return contract.
@@ -1022,15 +1092,17 @@ impl GeneratedPlanExecutor<'_> {
         rule: &CompiledRule,
         label: &str,
         matched: &MatchResult,
-        required_and_idx: Option<usize>,
+        required_step: Option<AndRequiredStep>,
         ctx: &mut RuntimeContext,
     ) -> Result<(), String> {
         ctx.note_recognition_match(matched.start, matched.end);
-        let dispatch_index = required_and_idx.unwrap_or(matched.index);
-        let (target_rule, target_regex_index) = structural_slot_identity(rule, dispatch_index);
-        let (actual_target_rule, actual_regex_index) =
-            structural_slot_identity(rule, matched.index);
-        if required_and_idx.is_some()
+        let (target_rule, target_regex_index) = required_step
+            .map(|step| step.slot_identity(rule, step.regex_index))
+            .unwrap_or_else(|| structural_slot_identity(rule, matched.index));
+        let (actual_target_rule, actual_regex_index) = required_step
+            .map(|step| step.slot_identity(rule, matched.index))
+            .unwrap_or_else(|| structural_slot_identity(rule, matched.index));
+        if required_step.is_some()
             && let Err(error) = assert_ordered_regex_slot_identity(
                 label,
                 target_rule,
@@ -1318,14 +1390,13 @@ impl GeneratedPlanExecutor<'_> {
                 }
             };
         }
-        let is_rep_and_acode_seq = is_rep
-            && matches!(family, GeneratedRuleFamily::RepAndAcode)
-            && rule.regex_patterns.len() > 1;
-        let is_and_acode_seq = (!is_rep
-            && matches!(family, GeneratedRuleFamily::AndAcodeSeq)
-            && rule.regex_patterns.len() > 1)
-            || is_rep_and_acode_seq;
-        let and_acode_seq_len = rule.regex_patterns.len();
+        let and_steps = and_required_steps(rule);
+        let is_and_acode_seq = and_steps.len() > 1
+            || and_steps
+                .first()
+                .is_some_and(|step| step.action_index.is_some());
+        let is_rep_and_acode_seq = is_rep && is_and_acode_seq;
+        let and_acode_seq_len = and_steps.len();
         let mut matches: usize = 0;
         let mut and_acode_idx: usize = 0;
         let mut rep_and_start_pos = ctx.pos;
@@ -1357,11 +1428,14 @@ impl GeneratedPlanExecutor<'_> {
             // Generated-source v2 derives cursor spending from the validated
             // family row; no mutable/global cursor field crosses the artifact.
             let cursor_policy = family.cursor_policy();
-            let required_and_idx = is_and_acode_seq.then_some(if is_rep_and_acode_seq {
-                and_acode_idx
-            } else {
-                matches
+            let required_step = is_and_acode_seq.then(|| {
+                and_steps[if is_rep_and_acode_seq {
+                    and_acode_idx
+                } else {
+                    matches
+                }]
             });
+            let required_and_idx = required_step.map(|step| step.regex_index);
             let match_result = if capture_gaps {
                 Engine::select_native_match(
                     rule,
@@ -1422,7 +1496,7 @@ impl GeneratedPlanExecutor<'_> {
             }
 
             if let Some(matched) = &match_result {
-                self.prepare_selected_acode_match(rule, label, matched, required_and_idx, ctx)?;
+                self.prepare_selected_acode_match(rule, label, matched, required_step, ctx)?;
                 if capture_gaps {
                     ctx.install_gap_candidate(matched.start);
                 }
@@ -1440,8 +1514,10 @@ impl GeneratedPlanExecutor<'_> {
             if let Some(m) = match_result {
                 ctx.set_gap_phase("edge");
                 let mut dispatched_acode = false;
-                for entry in &rule.acode_dispatch {
-                    if entry.regex_idx == m.index {
+                for (action_index, entry) in rule.acode_dispatch.iter().enumerate() {
+                    if entry.regex_idx == m.index
+                        && required_step.is_none_or(|step| step.dispatches(action_index))
+                    {
                         dispatched_acode = true;
                         ctx.trace_decision(
                             "rust_runtime:generated_plan:acode_dispatch",
@@ -3105,15 +3181,17 @@ impl Engine {
         rule: &CompiledRule,
         label: &str,
         matched: &MatchResult,
-        required_and_idx: Option<usize>,
+        required_step: Option<AndRequiredStep>,
         ctx: &mut RuntimeContext,
     ) -> Result<(), String> {
         ctx.note_recognition_match(matched.start, matched.end);
-        let dispatch_index = required_and_idx.unwrap_or(matched.index);
-        let (target_rule, target_regex_index) = structural_slot_identity(rule, dispatch_index);
-        let (actual_target_rule, actual_regex_index) =
-            structural_slot_identity(rule, matched.index);
-        if required_and_idx.is_some()
+        let (target_rule, target_regex_index) = required_step
+            .map(|step| step.slot_identity(rule, step.regex_index))
+            .unwrap_or_else(|| structural_slot_identity(rule, matched.index));
+        let (actual_target_rule, actual_regex_index) = required_step
+            .map(|step| step.slot_identity(rule, matched.index))
+            .unwrap_or_else(|| structural_slot_identity(rule, matched.index));
+        if required_step.is_some()
             && let Err(error) = assert_ordered_regex_slot_identity(
                 label,
                 target_rule,
@@ -3519,10 +3597,13 @@ impl Engine {
                 }
             };
         }
-        let is_rep_and_acode_seq = is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1;
-        let is_and_acode_seq = (!is_rep && rule.mode.is_and() && rule.regex_patterns.len() > 1)
-            || is_rep_and_acode_seq;
-        let and_acode_seq_len = rule.regex_patterns.len();
+        let and_steps = and_required_steps(rule);
+        let is_and_acode_seq = and_steps.len() > 1
+            || and_steps
+                .first()
+                .is_some_and(|step| step.action_index.is_some());
+        let is_rep_and_acode_seq = is_rep && is_and_acode_seq;
+        let and_acode_seq_len = and_steps.len();
         let mut matches: usize = 0;
         let mut and_acode_idx: usize = 0;
         let mut rep_and_start_pos = ctx.pos;
@@ -3561,11 +3642,14 @@ impl Engine {
 
             // ── Match ──
             let parse_mode = rule.cursor_policy();
-            let required_and_idx = is_and_acode_seq.then_some(if is_rep_and_acode_seq {
-                and_acode_idx
-            } else {
-                matches
+            let required_step = is_and_acode_seq.then(|| {
+                and_steps[if is_rep_and_acode_seq {
+                    and_acode_idx
+                } else {
+                    matches
+                }]
             });
+            let required_and_idx = required_step.map(|step| step.regex_index);
             let match_result;
 
             if capture_gaps {
@@ -3591,7 +3675,7 @@ impl Engine {
                             ),
                             TraceLevel::MEDIUM,
                         );
-                        self.prepare_native_selected_match(rule, label, m, required_and_idx, ctx)?;
+                        self.prepare_native_selected_match(rule, label, m, required_step, ctx)?;
                         ctx.install_gap_candidate(m.start);
                     }
                     None => {
@@ -3642,7 +3726,7 @@ impl Engine {
                             ),
                             TraceLevel::MEDIUM,
                         );
-                        self.prepare_native_selected_match(rule, label, m, required_and_idx, ctx)?;
+                        self.prepare_native_selected_match(rule, label, m, required_step, ctx)?;
                     }
                     None => {
                         ctx.trace_decision(
@@ -3662,8 +3746,10 @@ impl Engine {
                 // ── Action-edge dispatch ──
                 ctx.set_gap_phase("edge");
                 let mut dispatched_acode = false;
-                for entry in &rule.acode_dispatch {
-                    if entry.regex_idx == m.index {
+                for (action_index, entry) in rule.acode_dispatch.iter().enumerate() {
+                    if entry.regex_idx == m.index
+                        && required_step.is_none_or(|step| step.dispatches(action_index))
+                    {
                         dispatched_acode = true;
                         ctx.trace_decision(
                             "rust_runtime:engine:acode_dispatch",

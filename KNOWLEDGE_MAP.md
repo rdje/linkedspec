@@ -20172,7 +20172,7 @@ _RUST-PARITY.8 is split into narrow source-emitter leaves; Rust generated source
 ### rust-sparse-and-required-step-gaps
 _Rust sparse AND intake separates dependency steps indexed entry group returns and blind-plan drift_
 - **answers:** does Rust preserve local sparse AND structural slots | why does Rust reordered AND miss ba | why do duplicate Rust AND dependencies fire at cursor one | why does indexed Rust AND return two nulls | why does Rust repeated AND return before its minimum | why does default blind Rust plan stop at cursor four instead of eight
-- **date:** 2026-10-28 · **status:** intake complete/default-blind plan39.1.4.1 repaired; remaining P1 slots/returns/minimum/implicit results before peers
+- **date:** 2026-10-28 · **status:** default-blind iteration39.1.4.1 and dependency steps39.1.1 repaired; indexed/returns/minimum/implicit results remain
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0; sparse-and-rust-repair-target.md and sparse-and-rust-intake.json.gz retain actual initial/refined source, compiled serde, emitted text, native trace, all reached routes and owned dormant tests.`
 - **reverify:** `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test sparse_and_structural_sequence -- --nocapture; explicitly select owned ignored regressions with --ignored when repairing. Independent emitted package execution remains unassessed.`
 - **source:** [`docs/knowledge/rust-sparse-and-required-step-gaps.md`](docs/knowledge/rust-sparse-and-required-step-gaps.md)

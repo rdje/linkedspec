@@ -7757,13 +7757,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.0 - isolate Rust AND sequence and blind-plan parity repairs`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1`
-  Status: `pending` / P1 before39.2/full23.4
-  Goal: Repair confirmed Rust dependency-only required-slot ordering without losing local sparse structural slots.
-  Scope: Cross-target/reversed/duplicate dependency cases versus healthy same-owner increasing sparse slots, full incoming/boundary catalogs and exact typed target/index identity. Choose sole shared owners from actual trace; no new compiled/plan schema.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
-  Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
-  Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+  Status: `completed` / typed runtime dependency steps preserve structural catalogs
+  Activation: clean `f9bb31df2e9b059783eb5e7c9ab6974a620fc518` after preserved-row default blind repetition repair.
+  Goal: Repair edge-only cross-target/reversed/duplicate AND ordering without losing sparse structural slots.
+  Verification tier: `focused`
+  Focused checks: Unchanged22 tests12pass5RED5ignored ->17pass0fail5ignored across native/restored/plan; nearest duplicate-slot contract15 roles and6 default-blind controls; exact18 source/serde/plan/emission records and legacy inputs/results unchanged; exact-file format, book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after all remaining dormant regressions; no new family/format/schema/authority.
+  Claim verification: none: Finite authored dependency/structure/source/result controls, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Cross-target cat and reversed ba miss; duplicate aa co-fires actions at cursor1. One-slot/two-action duplicate also returns at1; generated compact & misses while native ordered execution succeeds. Unchanged baseline12pass/5fail/5ignored reaches all route inputs before expected checks.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Both engine acode loops use regex catalog ordinal/length instead of dependency steps and dispatch every action sharing a pattern. Generated ordered detection additionally depends on a classifier row that does not distinguish compact &; the existing typed rule mode already supplies its ordered algorithm.
+  - [x] **FIX**: Shared runtime-only AndRequiredStep separates existing pattern index from optional exact action ordinal. Edge-only non-increasing/cross-target dependencies retain authored acode order; valid increasing local sparse refs retain complete structural walk. Native/generated loops select/count/reset logical steps and dispatch only that dependency action. Selected-match identity uses that action's target/index. Parent-anchored/mixed matching and catalogs stay intact; optional missing slot metadata falls back to pattern catalog. No text inference/serialization change.
+  - [x] **ADDRESSED (verified)**: All5 reached failures now pass; matrix17pass/5 remaining owned dormant. Cross/reversed/duplicate, one-slot multiplicity and compact & verified on native/restored/plan. Legacy omitted metadata preserves full-prefix success/missing-prefix miss. Falsey/edge-less tail/early return and nonreturn complete-repeat reset stay green.
+  - [x] **NO REGRESSION**: Existing duplicate-slot contract15 roles and6 default-blind controls pass. Exact18 source/compiled-serde/plan/emitted records unchanged, plus legacy inputs/results; only5 expected result groups change. Core types/source emitter unchanged. Rebuild generated applications with updated runtime; independent emitted package execution not inferred. Indexed priority/group returns/minimum/implicit-result repairs stay separately owned.
+  - [x] **LOCKSTEP**: rust-and-steps-intake.json.gz retains actual source/test/epoch/log/patch/receipt and verifier correction (aa/ba names; no product RED credit). Target/card/book/roadmap/live/resume/history reflect scoped repair and5 remaining dormant cases, required before admission/push. Next39.1.2; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1 - preserve typed AND dependency order and distinct action steps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2`
   Status: `pending` / P1 before39.2/full23.4
@@ -8160,7 +8168,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1` | `pending` | Repair typed dependency sequence steps and duplicate action co-dispatch, preserving local sparse slots. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` | `pending` | Repair inherited indexed entry priority while preserving required AND steps and Default/OR compatibility. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

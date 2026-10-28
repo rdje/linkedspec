@@ -213,7 +213,6 @@ fn nonreturning_action_and_edgeless_tail_preserve_effects() {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1; retained actual RED, required before admission"]
 fn cross_target_dependencies_do_not_become_local_structural_slots() {
     check(
         "cross",
@@ -224,14 +223,89 @@ fn cross_target_dependencies_do_not_become_local_structural_slots() {
     );
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1; retained actual RED, required before admission"]
 fn reordered_dependencies_keep_authored_order() {
     dependency_case(1, "ba", "b");
 }
 #[test]
-#[ignore = "P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1; retained actual RED, required before admission"]
 fn duplicate_dependency_index_remains_two_steps() {
     dependency_case(0, "aa", "a");
+}
+#[test]
+fn two_dependencies_on_one_authored_slot_are_two_matches() {
+    check(
+        "one_slot_two_steps",
+        "Value::AND\n I {seen=[]}\n /a/\n -> Value[0] {push(seen,match_text())}\n -> Value[0] {return([copy(seen),match_text(),cursor_pos()])}\n",
+        1,
+        Some("and_acode_seq"),
+        &[("aa", json!([["a"], "a", 2]))],
+    );
+}
+#[test]
+fn compact_and_keeps_the_native_ordered_algorithm() {
+    check(
+        "compact_and",
+        "Value::&\n I {seen=[]}\n /a/ -> Value[0] {push(seen,match_text())}\n /b/ -> Value[1] {return([copy(seen),match_text(),cursor_pos()])}\n",
+        2,
+        Some("and_single_acode"),
+        &[("ab", json!([["a"], "b", 2]))],
+    );
+}
+#[test]
+fn parent_owned_pattern_keeps_its_existing_role() {
+    check(
+        "parent_pattern",
+        "Value::AND\n /a/ -> Part {return(match_text())}\nPart:\n /b/\n",
+        1,
+        Some("and_single_acode"),
+        &[("a", json!("a"))],
+    );
+}
+#[test]
+fn legacy_omitted_slot_metadata_keeps_sparse_structure() {
+    let source = SINGLE.replacen("Value:AND", "Value::AND", 1);
+    let parsed = parse_spec_with_user_functions(&source).unwrap();
+    validate(&parsed).unwrap();
+    let mut wire = serde_json::to_value(compile(&parsed).unwrap()).unwrap();
+    for rule in wire["rules"].as_array_mut().unwrap() {
+        rule.as_object_mut().unwrap().remove("regex_slots");
+    }
+    let serialized = serde_json::to_string(&wire).unwrap();
+    let compiled: CompiledSpec = serde_json::from_str(&serialized).unwrap();
+    let plan = [GeneratedPlanRow {
+        label: "Value",
+        family: "and_acode_seq",
+    }];
+    let emitted = emit_rust_source_v2(&compiled, "legacy-and-slots.spec").unwrap();
+    eprintln!(
+        "RUST_AND_LEGACY_INPUT {}",
+        json!({"source":source,"serialized":serialized,"emitted":emitted})
+    );
+    let mut results = Vec::new();
+    for (input, expected) in [("Hcat", json!("BODY")), ("cat", Value::Null)] {
+        let values = [
+            Engine::new(compiled.clone()).execute_value(input, &ExecutionOptions::new()),
+            Engine::new(serde_json::from_str(&serialized).unwrap())
+                .execute_value(input, &ExecutionOptions::new()),
+            execute_generated_parser_v2(
+                &serialized,
+                &plan,
+                input,
+                "legacy-and-slots.spec",
+                GENERATED_SOURCE_CONTRACT,
+            )
+            .map_err(|error| error.to_string()),
+        ];
+        eprintln!(
+            "RUST_AND_LEGACY_ACTUAL {}",
+            json!({"input":input,"routes":values})
+        );
+        results.push((expected, values));
+    }
+    for (expected, values) in results {
+        for value in values {
+            assert_eq!(value.unwrap(), expected);
+        }
+    }
 }
 fn dependency_case(first: usize, input: &str, captured: &str) {
     let source = format!(

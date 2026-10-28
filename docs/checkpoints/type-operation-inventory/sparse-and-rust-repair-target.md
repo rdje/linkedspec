@@ -1,7 +1,7 @@
 # Rust sparse AND: independent intake and bounded repairs
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.39.1; intake39.1.0.
-Status: structural subset compatible; independent P1 repairs owned before peers/admission. No production change here.
+Status: default-blind iteration39.1.4.1 and typed dependency steps39.1.1 repaired/targeted-checked; indexed/returns/minimum/implicit-result P1 repairs remain before peers/admission.
 
 ## Retained observations
 
@@ -80,3 +80,17 @@ preparation. Cargo warnings are not semantic observations. No Rust production
 file changed, no generated schema/family authority was redefined, no new
 filesystem owner or dependency-internal procedure was introduced. Independent
 peer work follows these repairs; full39/23.4 and final push remain separate.
+
+39.1.1 completed: runtime-only typed required steps separate pattern/action
+indices and ordinal. Edge-only cross-target/reversed/duplicate sequences consume
+authored dependency order; same-owner increasing sparse actions retain every
+structural slot. Parent-anchored/mixed behavior stays catalog based; legacy
+omitted slot metadata falls back to the full pattern catalog. Compact & uses
+the same ordered algorithm without changing its existing and_single_acode row.
+Unchanged22 tests12pass/5RED/5ignored ->17pass/5ignored. Nearest duplicate-slot
+15 roles/default-blind6 pass. Exact18 full source/serde/plan/emitted records and
+legacy inputs/results unchanged; only5 result groups change. Rebuild generated
+applications with the updated runtime, no source rewrite. Remaining5 dormant
+regressions require39.1.2/.3/.5/.4.2 before admission; no emitted-package proof.
+Packet: rust-and-steps-intake.json.gz. Earlier no-production statements describe
+the historical intake, not the subsequent runtime repairs.
