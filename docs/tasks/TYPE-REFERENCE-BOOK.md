@@ -7156,14 +7156,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.2 - lock Rust capture Number flow and own active-edge dispatch prerequisite`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3`
-  Status: `pending`
-  Goal: Independently implement/check Dart readonly anonymous capture-boundary Number result composition.
-  Authority: Frozen capture-boundary-number-results.md/shared fixture and current backend source/method/function/alias contracts.
-  Acceptance: Establish actual valid-producer/bound/direct/alias/zero/snapshot/error/first-consumer baseline before production. Add only missing compatible method flow for six readonly zero-argument capture-boundary Number readers and existing aliases through current typed owners. Preserve field/source/getter tags, character coordinates, absence/error/function-state fences, source-before-operand evaluation and current direct legacy consumers. No new advancing/named-mark/bracket/callback/type/arity/AST/schema rights; already-compatible behavior receives regression, no invented RED.
-  Planned verification tier: focused
-  Planned focused checks: New exact fixture and nearest source/function/first-consumer boundaries through current native/restored/generated/fresh routes, small compile/format/registration/book/history/manual continuity; safe available Lua only, no unsafe/full runner or matrix.
-  Planned canonical trigger: Full23.4/new Perl registration23.4.1/document pressure20.1/declared-host/final clean push after feature coverage remain separate.
-  Planned claim verification: none: Prospective finite authored feature controls, no completeness/population measurement.
+  Status: `completed`
+  Goal: Independently establish/lock Dart readonly anonymous capture-boundary Number method composition.
+  Authority: Frozen33 target/shared11 and existing source/method/function/alias contracts; packet capture-boundary-number-dart-intake.json.gz retains all actual source/normal-test/generated-library/caller/output epochs and strict verifier.
+  Verification tier: `focused`
+  Focused checks: Current runtime already supports shared11 and original9/aliases/snapshot/zero/String-Array-selection/guarded bad operands; no runtime edit/product RED. New6 plus existing Number4 pass; final strict-authored-name6 pass native/restored SpecFile/plan. Seven-source fresh Dart VM caller proves five exact value cases/two typed function rejections. Fatal analysis/format, normal discovery/book/map/history/manual continuity.
+  Canonical trigger: Independent Julia33.4/safe Lua33.5 then35/34; full23.4/final clean push also require39/38/37, pressure, new Perl registration and declared-host proof. No global source/context/package admission.
+  Claim verification: none: Finite authored functional/source controls and retained execution, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent valid-producer/direct/bound/alias/zero/snapshot intake at clean7e366408c is already healthy across native/restored/plan. Fresh generated execution agrees; no Number defect or RED is inferred from the earlier repaired dispatch carrier. Shared expected11 remains byte-identical.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: dart/lib/src/runtime/interpreter.dart already evaluates these zero-argument parser-state calls as Number values through ordinary typed call/method evaluation; its capture_slice_len/_captureSliceLength, position/line/column and capture_rest_len dispatch feed that path directly. It has no missing late Perl host-expression lowering seam. Current nine primitive values and ordinary bridges need regression coverage and accurate status, not a speculative runtime change.
+  - [x] **FIX**: Add six normal-discovery regression groups and retain a seven-case source/emission/fresh-process verifier. Protect six canonical/three alias values, source before later standalone reset, defined zero/lazy skip, compatible scalar/String/Array selection and actual legacy4/[]/KVT. Runtime/frontend/emitter/metadata/schema remain unchanged.
+  - [x] **ADDRESSED (verified)**: New6 plus direct-dependent Number4 pass; final6 tightens authored helper names after actual observation. Shared11, original9/snapshot4!/boundary6/S, entry-setup0/0/1/1/0/1 and zero fallback skip pass. All nine function sources retain specific authored names and typed RuntimeInterpreterException/native versus GeneratedSourceException/plan; literal callback in parser context1!, registered callback invoked inside pure apply retains helper-specific state rejection.
+  - [x] **NO REGRESSION**: Fresh Dart VM caller independently loads emitted libraries for all seven intake sources and verifies five exact values/two expected typed errors. It shares current project package configuration, not an isolated package workspace. JSON encoding distinguishes Bool/Number; actual generated libraries/caller and all outputs retained. Fatal analysis/format pass; no runtime diff or new normal-test temporary owner. Named marks/advancing/brackets/void-block/callback vocabulary/copy/arity remain outside this source grant.
+  - [x] **LOCKSTEP**: Target/causal card/current Dart card/map and public book now include verified Dart compatibility with correctly scoped Perl named-mark/void-block caveats. Refresh stale dispatch-next/ignored-regression pointer to completed bounded36 and enabled Rust regression. Roadmap/task/live/resume/history agree; Julia33.4 independently next, formal admission and owned adjacent defects remain separate.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3 - lock Dart readonly capture Number method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.4`
   Status: `pending`
@@ -7444,7 +7451,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.3` | `pending` | Resume Dart readonly capture Number feature after bounded dispatch prerequisite. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.33.4` | `pending` | Independently check Julia readonly capture Number method composition. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

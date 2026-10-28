@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: bounded Perl33.1 repaired/Rust33.2 method-compatible; P1 dispatch36 next before remaining backends
+status: bounded Perl33.1 repaired/Rust33.2 and Dart33.3 compatible; bounded36 targeted-checked, Julia33.4 next
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -94,3 +94,14 @@ separately executed to actual RED expecting BODY; it is not success credit and
 must be enabled by36.1 before continuing33.3/admission. Packet
 capture-boundary-number-rust-intake.json.gz retains all epochs, descriptors/traces
 and direct-dependent Perl proof. No full source/context/backend admission.
+
+## Current Dart33.3 and dispatch boundary
+
+All bounded Default/OR36 children are targeted-checked; Rust36.1 enabled its
+original wildcard Number regression and Number6 passes. Older ignored/next36
+wording above describes33.2 intake, not the current handoff. Dart33.3 independently
+supports shared11/original9/zero/snapshot/legacy/function/callback policies without
+runtime edits. New6 plus existing Number4 pass, final6 retains authored alias
+error names. Seven-source fresh Dart VM execution agrees; exact bytes/channels
+are retained. See [[capture-boundary-number-dart-method-compatibility]]. Julia33.4
+and safe Lua33.5 follow; full23.4 and39/38/37/35/34 remain separately owned.
