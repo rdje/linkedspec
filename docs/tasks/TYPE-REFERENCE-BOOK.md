@@ -7233,7 +7233,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Reproduction: At clean4f91e544b explicit Value[2], width=capture_rest_len(); snapshot=width.cat({order=cat(order,"S");start_capture_slice();"!"}) fails native handler/fresh compilation with cannot-modify-constant/syntax errors, despite raw0/unresolved0/ready1. It does not depend on a direct Number source; exact capture-number-block-reset producer/output and substitution are retained in capture-boundary-number intake.
   Root / impact: Public substitution leaves order=cat(...) as raw DSL inside the method operand while late Contracts rewrites only start_capture_slice to a do-block. MethodLowering _lower_block_side_effect_statement falls back to value-component lowering without this void statement owner; _lower_block_value_expr abandons the block if a component is unavailable. The generated expression cannot compile and readiness overstates usability. Exact dispatcher/source role and authoritative ordinary-versus-deferred contract need final35.0 reconciliation before production.
   Ownership / schedule: Fix the actual ordinary-block statement role through canonical state-effect owners, preserving void semantics, frame/cursor/source/trace/order/errors, local-return behavior and function/callback vocabulary boundaries. Authority/target35.0 then bounded independent backend repair/compatibility leaves immediately after33, before34/full23.4. No generic mutator-as-data grant, silent raw fallback or lifecycle pivot.
-  Children:35.0 target frozen;35.1 Perl repaired/35.2 Rust compatible and targeted-checked;35.3 Dart then35.4 Julia/35.5 safe Lua independent implementation or compatibility proof.
+  Children:35.0 target frozen;35.1 Perl repaired/35.2 Rust and35.3 Dart compatible and targeted-checked;35.4 Julia then35.5 safe Lua independent implementation or compatibility proof.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.0`
   Status: `completed`
@@ -7287,14 +7287,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.35.2 - lock existing Rust ordinary capture-reset block behavior`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.3`
-  Status: `pending`
-  Goal: Independently implement or lock Dart ordinary value-block anonymous reset statement behavior.
-  Authority: Frozen capture-reset-value-block.md/shared fixture and canonical block/void/source/function/alias contracts.
-  Acceptance: Establish exact current valid producer/no-reset/standalone/inside/alias/local-return/lazy/function/deferred baseline first. Repair only confirmed statement-role gaps through existing boundary owner, preserve operation names/frame/live cursor/match registers/source snapshot/order and no-data semantics. Native/restored/generated/fresh supported routes; already-compatible behavior gets regression without invented RED. No global mutator/helper/body/type/AST/schema grant; safe Lua only, declared5.4 separate.
-  Planned verification tier: focused
-  Planned focused checks: Exact target and nearest Number/block/function/error/alias controls, compile/normal registration/book/history/manual continuity; no broad/unsafe full runner or routine canonical gate.
-  Planned canonical trigger: Full23.4/final clean push after bounded features and prerequisite repairs; public policy/schema movement remains separately canonical.
-  Planned claim verification: none: Finite authored functional/source controls, no population measurement.
+  Status: `completed`
+  Goal: Lock existing Dart ordinary anonymous capture-reset block statement behavior independently.
+  Authority: Frozen capture-reset-value-block.md/shared target and existing block/source/function/callback contracts; exact14-source/14 emitted libraries/fresh caller/normal-test/output epochs retained in capture-reset-value-block-dart-intake.json.gz at clean425b8ce78.
+  Verification tier: `focused`
+  Focused checks: New3 plus nearby Number6 pass, changed-file format/fatal analysis clean; independent native/restored SpecFile/plan/fresh VM strict JSON/type/error proof, no runtime diff, book/map/bounded history/manual continuity/cadence/diagnosis/claim-input/diff. No broad gate.
+  Canonical trigger: Full23.4/clean push after independent35 peers/34 and39/38/37/40/41, pressure/registration/declared-host repair; isolated package/full source/context admission remains separate.
+  Claim verification: none: Finite authored functional/source/error regressions and exact artifact identities, no population/completeness measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Independent14-source intake before final expectations already agrees on native/restored SpecFile/plan and fresh generated VM. Eight ordinary controls meet frozen values; literal callback canonical/alias reset yields x!/6, while direct pure functions and pure-apply callback invocation reject authored reset names. No product RED is invented for compatible behavior.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Interpreter _evaluateBlockValue delegates ordered nonfinal effects and local return to _executeValueBlockStatements. Existing canonical start_capture_slice branch calls context.startCaptureSlice then returns null; alias normalization preserves authored diagnostics. Existing function/callback invocation guards distinguish parser versus pure-function context without a special block reset path.
+  - [x] **FIX**: Add normal capture_reset_value_block_test only, retaining exact shared inside source/expected fixture and independent actual context boundaries. Runtime/frontend/emitter untouched; no value-source, body-vocabulary, temporary owner, AST/schema/generated family or frame/cursor change.
+  - [x] **ADDRESSED (verified)**: New3 plus Number6 pass. Eight ordinary controls preserve4! snapshot, boundary2/6/rest4/0, SA order, local returns before/after reset/T skip/action continuation and defined lazy suppression. Two literal callback aliases retain existing x!/6; four direct/registered function cases preserve helper identity and runtime versus generated exception classes. Fresh fourteen-library VM caller agrees with exact kind-sensitive verifier.
+  - [x] **NO REGRESSION**: Runtime diff empty; shared source/expected bytes unchanged. Format/fatal analysis clean. Existing literal parser-context support is retained independently of Perl exclusions; pure-function scope remains closed. Fresh caller uses current project package configuration, not an isolated dependency workspace. No global source/context/backend admission or new helper rights.
+  - [x] **LOCKSTEP**: Packet/target/new Dart and causal cards/map/book, task/live/resume/roadmap/history agree. Keep bounded history within existing budgets through the required same-slice lossless rollover when selected; no cap increase. Parent35 remains open; Julia35.4 follows, then safe Lua/34 and39/38/37/40/41 before full23.4/push. Focused authorized workflow continues.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.35.3 - lock existing Dart capture-reset value-block behavior`.
+  History receipt: Required engineering_notes rollover4949 retains exact committed425b8ce78 DEVELOPMENT_NOTES lines107-197,91lines/27856bytes/SHA256 a94a75ca17d72e88818297389ef480adb0972a6bc3ce9266156d8cff35ae0a83. Original manifest segment rows and retained current prefix are byte-identical; current109lines/31933bytes is within existing budgets. Actual independent verifier/receipt are retained with this packet.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.35.4`
   Status: `pending`
@@ -7635,7 +7643,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.35.3` | `pending` | Independently intake Dart ordinary value-block capture reset behavior. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.35.4` | `pending` | Independently intake Julia ordinary value-block capture reset behavior. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
