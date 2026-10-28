@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust indexed AND priority repaired/targeted-checked; repeated per-group returns39.1.3 next.
+Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
 
 ## Latest Completed Slice
 
-Rust shared selection now tests a present required AND slot before the inherited entry selector: the caller has already consumed that entry match. Native/restored/generated-plan indexed catHcat now returns[[BODY],7] rather than[[null,null],7]; explicit AND and compact & controls retain entry cat, local H/cat and cursor7. Default/pipe/OR{1} indexed selection remains unchanged. Unchanged25-test matrix18pass/3RED/4owned ignored ->21pass/0fail/4ignored; nearest duplicate-slot contract15 roles pass. Exact24 full source/compiled-serde/plan/emitted records unchanged and only3 expected result groups change; no schema/classifier/catalog/capture-owner rewrite. Regenerate no Rust source: rebuild applications with updated runtime. Initial grouped capture probe was split so compact & is independently reached before production; both epochs retained, no credit for the initially unreached case. Packet rust-and-index-intake.json.gz retains exact producers/inputs/patch/results/receipt. Book/target/card/roadmap/live/resume/history synchronized; next39.1.3 repeated AND per-group returns, then minimum/implicit-result owners. Focused authorized commit; full admission/push and4 remaining dormant regressions remain open, no independent emitted-package claim.
+Repeated AND return prerequisite qualified through10 actual public Perl sources/16 native-fresh pairs without errors. Truthy final returns collect[BODY,BODY]; early H return on HH collects two values/cursor2 and skips remaining cat; below-minimum returnsnull. Unexpectedly0/empty/null return stops after first complete group at4 and falsely misses minimum2. Emitted inner coderef returns raw values; outer REP_AND_ACODE calls result_is_match, whose ordinary path tests truthiness without per-group acceptance. Own immediate P1 reference repair39.7 before Rust39.1.3; preserve falsey values using a distinct accepted-group outcome, actual misses/minima/progress/errors and existing schema. Do not broaden global result_is_match or infer acceptance from a sticky prior match. LS/LE hooks are omitted by this inner sequence builder, reinforcing existing lifecycle owner SESSION-STARTUP-READING.27 before admission; do not normalize that omission into Rust. IT remains whole-rule authority and custom IT replaces default collection; nonreturn complete groups currently produce[[],[]]. Packet rust-and-returns-reference-intake.json.gz retains source/emission/metadata/actual outcomes/instruments. No production change or Rust compatibility success; original4 dormant regressions stay owned. Book/card/target/roadmap/task/live/resume/history synchronized; focused commit, next39.7 then39.1.3, no push.
 
 ## Next Action
 
-Activate39.1.3 from clean indexed-priority repair. Reconcile repeated AND action returns with Perl per-group unwind/count/minimum semantics using early returns before remaining slots, falsey values, IT/E and full-group controls. Do not add AND to CHOICE-only ADR0048 collection. Freeze targeted authority, reproduce native/restored/plan RED, implement a bounded per-group outcome repair, focused compile/check/docs/commit. Then39.1.5 ordinary minimum miss and39.1.4.2 implicit blind collection before peers; full admission/push after all owned regressions.
+Activate39.7 from clean repeated-AND prerequisite intake. Add normal native/fresh Perl regressions for0/empty/null/Bool false accepted group values versus real group miss/minimum, early return, nonreturn, IT override and progress. Fix only REP_AND_ACODE per-group acceptance/result separation at its emitter owner; retain raw payloads, ordinary matching errors and schema. Focused checks/docs/commit, then resume Rust39.1.3 with repaired reference; lifecycle omissions stay SESSION27 before full admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0` — Repeated AND reference falsey prerequisite qualified; immediate39.7 repair before Rust39.1.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2` — Rust indexed AND priority repaired/targeted-checked; repeated per-group returns39.1.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.1` — Rust typed AND dependency steps repaired/targeted-checked; indexed-entry priority39.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4.1` — Rust generated Default blind iteration repaired with unchanged v2 rows; typed sequence39.1.1 next.
@@ -29,7 +30,6 @@ Activate39.1.3 from clean indexed-priority repair. Reconcile repeated AND action
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.2` — Readonly Perl text/predicate names and unused readonly calls repaired; advancing42.2.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.2.1` — Ten ordinary Perl mark write statements support governed String names; readonly42.2.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.42.1` — Ordinary Perl named Number readers accept governed ordered String word names;42.2 remaining names next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.42.4` — Input-boundary Word statement prerequisite42.4 repaired/targeted-checked; seven-reader42.1 resumes.
 
 ## History
 

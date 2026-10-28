@@ -7791,13 +7791,44 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.2 - honor required AND slots before inherited entry selectors`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3`
-  Status: `pending` / P1 before39.2/full23.4
+  Status: `in_progress` / prerequisite intake39.1.3.0 complete; reference39.7 before Rust implementation
   Goal: Reconcile and repair repeated AND action return per-group unwind and minimum enforcement.
   Scope: Initial AND{2} returns scalarBODY after first group, including below-minimum Hcat. Establish existing per-group return/collection authority and early-return control; do not reuse CHOICE-only ADR0048 collector or force execution after an explicit group return.
   Planned verification tier: focused
   Planned focused checks: Exact owned public native/restored/plan source/value/metadata/identity RED-GREEN or qualified authority intake, compile/format and nearest controls, retained actual producers/inputs, book/continuity/commit.
   Planned canonical trigger: Full39/23.4/final clean push; any actual new family/format/authority requires separately owned canonical proof.
   Planned claim verification: none: Finite authored functional/source distinctions, no population measurement.
+
+  Activation: clean `81ea96e21f3944d9b4506b2c16a47284ee211c0a` after dependency/index repairs. Read current sparse target/card, ADR0044/0047/0048, normal Perl repeated sparse return fixture and engine native/generated action-return/count/iteration paths. Establish public native/fresh reference outcomes and emitted mechanism for final/early/falsey returns, group minima, lifecycle ordering and nonreturn controls before production. Do not extend CHOICE-only collector or force execution after an explicit group return. Keep ordinary nonreturn minimum miss39.1.5 and blind-result39.1.4.2 separate; add bounded children if actual authority exceeds one safe implementation slice.
+
+  Dependency:39.1.3.0 qualified the reference falsey defect;39.7 must repair accepted-group/value separation before this Rust return implementation. LS/LE omission stays SESSION-STARTUP-READING.27, P1 before full admission. Preserve default IT replacement semantics, per-group early unwind and real minimum misses.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0`
+  Status: `completed` / reference prerequisite qualified; no production change
+  Activation: clean `81ea96e21f3944d9b4506b2c16a47284ee211c0a` after indexed AND repair.
+  Goal: Freeze repeated AND action-return group boundaries without copying a falsey reference defect.
+  Verification tier: `focused`
+  Focused checks:10 public reference sources/16 exact native-fresh value/cursor/error pairs; emitted mechanism/source-location diagnosis, retained producer/input/result reader; book/map/history/manual continuity/claim-input/diff. No changed Rust producer, no new Cargo run needed.
+  Canonical trigger: Parent39/23.4/final clean push after reference/Rust repairs and lifecycle owner; no new policy/schema/family admitted here.
+  Claim verification: none: Finite authored reference return/cursor/source observations, no population measurement.
+
+  - [x] **REPRODUCE / ISSUE**: Truthy final and early returns collect per group, but0/empty/null full HcatHcat input stops at4 and returnsnull below min2. All16 native/fresh pairs finish without execution error. LS/LE are absent in lifecycle controls; existing SESSION27 owns that separate defect.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Emitted REP_AND_ACODE wraps its inner AND body in a coderef returning authored scalar values. Outer acceptance uses RecognitionTransactionRuntime::result_is_match; outside recognition scopes it falls back to truthiness. Successful falsey action and actual matcher miss share one channel. HandlerVariantEmitter::_build_rep_and_acode_variant drops supplied lscode/lecode before the inner emitter could use them; exact emitted source and producer retained.
+  - [x] **FIX**: Qualify authority and schedule immediate P1 reference39.7 before Rust parent39.1.3. Separate local accepted-group outcome from payload, never broaden global fallback/use sticky state/convert null to miss. Preserve early unwind/minimum, custom IT replacement and whole-rule return. Lifecycle omission remains existing P1 owner before full admission.
+  - [x] **ADDRESSED (verified)**: Diagnostic intake complete, actual defects remain open and prioritized. Truthy HH early return skips cat and collects two values at2; final BODY collects twice at8. IT return exits with IT; custom IT omits implicit collection; nonreturn full group returns[[],[]]. Falsey observations are defect evidence, not accepted policy.
+  - [x] **NO REGRESSION**: No Rust/Perl production or normal test change; existing4 dormant Rust regressions retain exact owners/no success credit. Native/fresh public sources and exact metadata retained. No dependency internals, new storage owner, schema/family change or broad CI/admission claim.
+  - [x] **LOCKSTEP**: rust-and-returns-reference-intake.json.gz, new causal card/target, book/roadmap/task/live/resume/history record evidence and immediate39.7 repair. Next reference39.7 then Rust parent39.1.3, with SESSION27 lifecycle before admission. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3.0 - isolate falsey repeated AND reference prerequisite`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.7`
+  Status: `pending` / P1 immediate prerequisite before Rust39.1.3
+  Goal: Preserve accepted falsey repeated AND action-group values independently of ordinary match failure.
+  Reproduce: Public Value::AND{2}, /H/, /cat/ ->Value[1] return0/empty/undef on HcatHcat yieldsnull at4 native/fresh; truthy BODY yields[BODY,BODY] at8. Intake39.1.3.0 retains exact sources/emission/results. Bool false extension required before implementation.
+  Root/scope: HandlerVariantEmitter::_emit_rep_and_acode_handler inner coderef returns raw payload; result_is_match ordinary fallback uses truthiness. Give this group a distinct local acceptance outcome set by actual inner matcher success/miss and preserved through action return. Do not modify global recognition predicate, schema, other families, lifecycle authority or progress/error contracts. Successful partial early-return group counts once; actual later matcher miss rejects the group. Verify no sticky prior acceptance and no stale recognition completions.
+  Planned verification tier: focused
+  Planned focused checks: Normal native/fresh RED-GREEN with exact values/cursors/metadata for0/empty/null/Bool false, full/early return, true miss/minimum/reset/progress, nonreturn and IT override; protected sparse/choice/recognition nearest controls as warranted; syntax/book/docs/commit.
+  Planned canonical trigger: Full39/23.4/final clean push; no new family/schema/recognition policy. Any actual contract ambiguity separately owned before production.
+  Planned claim verification: none: Finite authored group acceptance/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4`
   Status: `pending` / P1 before39.2/full23.4
@@ -8176,7 +8207,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.3` | `pending` | Repair repeated AND per-group action returns without changing CHOICE-only collection policy. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.7` | `pending` | Repair falsey reference group acceptance before Rust repeated-return parity. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

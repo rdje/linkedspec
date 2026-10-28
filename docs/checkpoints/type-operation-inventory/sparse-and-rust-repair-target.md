@@ -105,3 +105,14 @@ serde/plan/emitted records unchanged; only3 result groups change. No generated
 source rewrite; rebuild with updated runtime. Packet rust-and-index-intake.json.gz.
 Remaining4 dormant regressions require group-return/minimum/implicit-result
 repairs before admission;39.1.3 is next. No independent emitted package proof.
+
+39.1.3.0 prerequisite intake:10 public Perl sources/16 native-fresh pairs confirm
+truthy per-group return/early unwind/minimum and IT whole-rule/replacement rules.
+But0/empty/null action results falsely reject the first accepted group at4:
+REP_AND_ACODE uses ordinary result_is_match truthiness on an inner raw return.
+Immediate P1 reference39.7 now precedes Rust39.1.3; separate local group acceptance
+from payload, actual miss and minima, without global fallback/schema changes.
+Do not bless omitted LS/LE hooks: SESSION-STARTUP-READING.27 owns that existing
+P1 lifecycle gap before admission. Nonreturn full groups produce[[],[]]; custom
+IT replaces default collection. Packet rust-and-returns-reference-intake.json.gz.
+No production repair yet;4 Rust dormant regressions remain owned/no success credit.
