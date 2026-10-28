@@ -10,7 +10,7 @@ answers:
   - "why does start_capture_slice inside a method value block fail compilation"
   - "which task owns value block capture boundary mutation"
 date: 2026-10-28
-status: bounded Perl repaired/Rust/Dart/Julia compatible; Dart test-scope33.3.1 verified, Lua33.5 next; endpoint40 owned
+status: all bounded33 children targeted-checked; void-block35/named-mark34 next; endpoint40/full admission open
 tags: [perl, capture, marks, number, fluent, source-location, readiness, block]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.10 at clean4f91e544b; capture-boundary-number-intake.json.gz retains exact source/actual result/readiness/substitution/carrier and producer calibration epochs."
 reverify:
@@ -120,3 +120,13 @@ No choice of zero versus unavailable, runtime rebasing or policy admission here.
 33.3.1 completes the immediate Dart test-scope correction: six groups pass using
 defined position zero, with the original no-match width retained diagnostically
 under40. Runtime remains unchanged and safe Lua33.5 is next.
+
+## Current safe Lua33.5
+
+Safe Lua independently already supports the target:155 new plus12 existing
+Number route assertions pass per installed host on native/restored/plan/fresh
+module, runtime unchanged. Exact legacy4/[]/KVT, authored alias/function errors,
+literal callback1! and pure apply rejection are preserved; no product RED.
+[[capture-boundary-number-lua-method-compatibility]] owns evidence/limits. Initial
+width null on x joins diagnostic40, not portable authority. All bounded33 children
+have focused proof; ordinary-block35.0 then named-mark34 follow before admission.
