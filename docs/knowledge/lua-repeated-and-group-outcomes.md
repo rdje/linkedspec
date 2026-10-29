@@ -7,7 +7,7 @@ answers:
   - "does Lua custom IT replace default repeated AND collection"
   - "where do Lua early AND group returns check recognition progress"
 date: 2026-10-29
-status: bounded39.4.2 repaired/targeted-checked on installed hosts; other minima/blind/admission remain
+status: bounded39.4.2 repaired/targeted-checked on installed hosts; implicit blind/P2 diagnostic/admission remain
 tags: [lua, luajit, and, repetition, group, return, collection, progress, null]
 evidence: "lua-and-groups-intake.json.gz retains21sources39inputs per installed host3healthy18actualRED ->21pass390 assertions, same21 baseline modules and exact inputs/three I-LS-LE control observations."
 reverify: "bash tools/run_lua_project_data.sh puc lua/test/repeated_and_group_results_test.lua and the same luajit route; explicit new-test registration23.4.1 before admission."
@@ -39,3 +39,8 @@ scalar expectations become arrays. Compiler/emitter/matching/recognition authori
 and prior group/structural fixtures/schema unchanged. No other minima/blind/null
 context/declared5.4/unsafe formatter/full admission claim. Explicit ordinary and
 canonical new-test registration remains23.4.1 before admission/push.
+
+2026-10-29 ordinary minima .3 now fixes remaining no-action/blind misses;
+minimum289/group390/progress234 and structural197/30healthy1owned dormant pass
+per host, prior sources unchanged. Current proof:
+[[lua-ordinary-repetition-minimum-misses]]. Original group packet frozen.

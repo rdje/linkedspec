@@ -4821,6 +4821,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua repeated-group39.4.2 adds lua/test/repeated_and_group_results_test.lua to the exact ordinary/canonical registration inventory before admission; direct390 assertions per installed host is not automatic discovery.
 
+  Lua ordinary-minimum39.4.3 adds lua/test/minimum_miss_routes_test.lua to required explicit ordinary/canonical registration; direct289 assertions per installed host is not discovery/admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8610,13 +8612,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2 - retain Lua repeated AND group return outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3`
-  Status: `pending` / P1 after group .2
+  Status: `completed` / P1 after group .2
   Goal: Return failed null for remaining ordinary regex/blind minimum misses.
   Acceptance: Reproduce actual under-min generic throw, preserve consumed cursor and LX authority; true helper/progress errors propagate, no catch-all normalization.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:12qualified sources29inputs per host4healthy8actualRED ->12pass289 assertions SDK matched/value/cursor and same12 fresh modules; exact inputs/four-control/error identity. Group390/progress234/structural197 per host30healthy1owned dormant, prior sources unchanged; book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after bounded repairs/P2 .8 and declared-host/unsafe formatter/registration/pressure/lifecycle/slot; no public authority movement.
+  Claim verification: none: Finite authored minimum/cursor/error distinctions, no population measurement.
+
+  Activation: clean `1d0fcb70f8ed2062712e0d57bad846a835f5df17`; exact safe installed-host ordinary minimum RED and actual error authority before runtime edits.
+
+
+  - [x] **REPRODUCE / ISSUE**:12 qualified sources29inputs per installed PUC5.5/LuaJIT give4healthy8actualRED SDK/restored/plan and same12 modules fresh. Ordinary no-action/blind under-minimum execution throws instead of failed null and blocks caller capture/recovery; partial consumed cursor and true helper error separately asserted. Initial peer helper-code oracle unqualified, not minimum product RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual repeated-loop trace reaches count below required minimum after consuming accepted input. interpreter.lua count<minimum branches after LX: collectors return failed null but remaining ordinary paths generic fail. This is control-flow outcome, no need to catch/normalize real errors. Ordinary unsupported-helper fallback separately lacks code; .8 owns reconciliation before admission.
+  - [x] **FIX**: Replace only redundant collector distinction/generic minimum failure with rule_result(false,json.null) after LX. Keep consumed cursor, lifecycle overrides/count/bounds, no rewind/catch-all. Successful null stays distinct from minimum failure via matched state; real helper/progress failures propagate.
+  - [x] **ADDRESSED (verified)**:12pass289 assertions29inputs per host SDK matched/value/cursor and generated/fresh public values/errors, same12 baseline modules/consumer separate processes. Source/normalized/compiled/plan/emitted and four healthy observations/error identity unchanged. No-hit/zero-min/max/partial cursor/LX override/recognition/caller capture/retv/recovery controls pass.
+  - [x] **NO REGRESSION**: Group390/progress234/structural197 per host pass30healthy1owned dormant, prior group/live/structural source fixtures unchanged. Actual helper text/rule/runtime phase preserved, code absence not promoted to target policy; P2 .8 owns repair after bounded features before admission. Initial unqualified oracle/secondary-route wording and correction retained; callable branch already supplies unknown_helper. Compiler/emitter/matching/recognition authority/schema unchanged.
+  - [x] **LOCKSTEP**: lua-minimum-intake.json.gz retains actual producer/fixture/runtime epochs/SDK/fresh/trace/qualification/receipts. Book/cards/target/roadmap/task/live/resume/history align. New normal source registration remains23.4.1; implicit blind .4 next, P2 .8/declared-host/unsafe formatter/pressure/lifecycle/slot/full admission remain. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3 - return failed null for ordinary Lua repetition minimum misses`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4`
   Status: `pending` / P1 after minima .3
@@ -8666,6 +8679,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8`
+  Status: `pending` / P2 after bounded Lua feature coverage before23.4/full admission
+  Goal: Reconcile and repair Lua ordinary unknown-helper diagnostic-code omission.
+  Reproduction:39.4.3 safe real_error source Value::OR{2} =>Atom, Atom:AND /a/ ->Atom[0] {unknown_minimum_probe()}, input a. Both installed SDK/restored hosts raise RuntimeInterpreterException, detail unsupported runtime helper, rule Atom/runtime_execution, but no diagnostic code. Same public generated envelope retained. Initial peer unknown_helper expectation is unqualified, not a minimum product RED.
+  Root cause: Actual public runtime trace/results reach interpreter.lua ordinary unsupported-helper fallback, which calls fail with helper_name only; diagnostic wrapping cannot invent the missing code. The separate callable-codeblock unknown-helper branch already supplies unknown_helper. Reconcile the existing authority and ordinary/callable distinction; do not infer all routes fixed from one case.
+  Impact / ownership: Error still fails closed and retains rule/text/phase, but machine-readable code is unavailable. Own exact public authority reconciliation, focused typed repair and native/restored/generated/fresh/callable nearest tests before admission; no broad global catch or new error-policy assumption.
+  Planned verification tier: focused
+  Planned focused checks: Exact authored error-code/rule/phase/fail-closed RED-GREEN and nearest helper/control/generated routes on both installed hosts, book/map/history/manual continuity; no routine full suite.
+  Planned canonical trigger: Full39/23.4/final clean push, separately canonical if authority changes.
+  Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1`
   Status: `completed`
@@ -8972,7 +8996,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3` | `pending` | Repair remaining ordinary Lua repetition minimum misses. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4` | `pending` | Retain Lua implicit repeated blind choice and complete AND collections. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

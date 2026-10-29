@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Lua repeated AND group outcomes repaired; ordinary minimum misses next.
+Lua ordinary repetition minima repaired; implicit blind collections next.
 
 ## Latest Completed Slice
 
-Lua repeated AND action returns now use private and_group_return flow, caught as an accepted completed group independently of false/0/empty/null payload. Each complete group contributes one copied explicit value or[]; early return skips remaining slots/post-return LE, partial groups append nothing and retain consumed cursor. Custom IT replaces default append, explicit lifecycle returns retain whole-rule authority, AND-action minimum misses return failed null. All early/normal groups reach common live progress before count/IT/max/ordinary zero cutoff; obsolete early-return offset plumbing removed.21sources39inputs per installed PUC5.5/LuaJIT:3healthy18actualRED ->21pass390 assertions SDK matched/value/cursor and generated/fresh public values. Same21 baseline modules/consumer separate processes, exact raw/normalized/compiled/plan/emitted inputs and three I/LS/LE observations unchanged. Normal structural189 assertions29healthy2owned dormant, progress234/CHOICE175 per host pass. All24 progress sources/other fixture rows unchanged; exactly three .2-owned scalar expectations become arrays and two structural sources enabled. Compiler/emitter/matching/recognition authority/prior group/structural fixtures/schema unchanged. Packet lua-and-groups-intake.json.gz retains actual producer/inputs/runtime epochs/SDK/fresh/trace/control-receipts. Book/cards/target/roadmap/task/live/resume/history align; no other minima/blind/null/lifecycle/admission claim, explicit new Lua registration23.4.1/declared5.4/unsafe formatter remain before admission/push. Authorized focused commit/no full gate/push; ordinary minima .3 next.
+Lua remaining ordinary no-action regex/blind repetition minimum misses now return failed null after existing LX authority, preserving consumed cursor and caller recovery. Remove only redundant collector split/generic minimum fail; no real exception catch, rewind, lifecycle/count/bounds change.12 qualified sources29inputs per installed PUC5.5/LuaJIT:4healthy8actualRED ->12pass289 assertions SDK matched/value/cursor and generated/fresh public values/errors. Same12 baseline modules/consumer separate processes; raw/normalized/compiled/plan/emitted inputs and four healthy full observations/error identity unchanged. Group390/progress234/structural197 nearest assertions per host pass,30structural healthy1owned dormant, blind_minimum enabled; prior group/live/structural sources unchanged. Actual ordinary unknown-helper text/Atom/runtime phase survives with no code; initial peer unknown_helper oracle unqualified, not minimum product RED. P2 .8 owns authority reconciliation/typed repair before admission; current preservation oracle uses actual text/rule/phase, initial source/log/receipt retained. Callable-codeblock unknown-helper branch already supplies code, distinct from ordinary fallback; initial secondary-route wording corrected against source. Packet lua-minimum-intake.json.gz retains actual producer/fixture/runtime epochs/SDK/fresh/trace/qualification/receipts. Book/cards/target/roadmap/task/live/resume/history align; no compiler/emitter/matching/recognition authority/schema change. Explicit new Lua registration23.4.1/declared5.4/unsafe formatter/full admission remain before push. Authorized focused commit/no full gate/push; implicit blind .4 next.
 
 ## Next Action
 
-Activate Lua39.4.3 from clean committed group repair. Independently qualify safe ordinary no-action regex and blind under-minimum sources/native/restored/generated/fresh on both installed hosts. Replace only confirmed generic minimum throws after LX authority with failed null, preserving consumed cursor, acceptance independent of null, zero-min/bounds/caller recovery and true helper/progress errors. Targeted RED-GREEN/nearest controls/book/docs/focused commit, then .4 blind/.5 post-call/.7 nullable qualification before admission. Declared5.4/unsafe formatter/registration/pressure/lifecycle/slot/full39/23.4 remain before push.
+Activate Lua39.4.4 from clean committed minimum repair. Independently qualify safe implicit repeated blind collection sources/native/restored/generated/fresh on both installed hosts. Retain copied flat accepted choice values and nested complete AND groups through private iteration ownership, discard partial groups while preserving consumed cursor, custom IT/lifecycle authority, Default no-hitnull versus explicit zero-min[], plain/one-shot behavior. Qualify post-call behavior separately; do not infer peer defects or extend scope silently. Targeted RED-GREEN/nearest controls/book/docs/focused commit, then .5 post-call/.7 nullable qualification and P2 .8 before admission. Declared5.4/unsafe formatter/registration/pressure/lifecycle/slot/full39/23.4 remain before push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3` — Lua ordinary repetition minima repaired; implicit blind collections next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2` — Lua repeated AND group outcomes repaired; ordinary minimum misses next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1` — Lua required AND dependency steps repaired; repeated group outcomes next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6` — Lua live recognition progress repaired; required AND steps next.
@@ -29,7 +30,6 @@ Activate Lua39.4.3 from clean committed group repair. Independently qualify safe
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.6` — Julia live recognition progress repaired; authored required steps next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.0` — Independent Julia intake complete; live progress then bounded feature repairs next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.2` — Dart bounded null-return and pure coordinator observation repairs complete; Julia intake next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.2.7.1` — Dart accepted-null return provenance repaired; pure-null observation next.
 
 ## History
 

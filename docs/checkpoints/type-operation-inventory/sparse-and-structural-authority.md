@@ -358,3 +358,11 @@ modules/input/three-control identity. Structural189/29healthy2owned dormant,
 progress234/CHOICE175 pass; all24 guard sources unchanged, exactly three owned
 scalar oracles become arrays. Packet lua-and-groups-intake.json.gz retains
 closure. Ordinary minima .3 next, other prerequisites/full admission remain.
+
+2026-10-29 Lua39.4.3 returns failed null after LX for ordinary no-action/blind
+minimum misses, consumed cursor/real errors preserved.12qualified29inputs
+4healthy8RED ->12pass289 per installed host, same12 modules/exact inputs/four
+healthy/error identity. Group390/progress234/structural197 pass30healthy1owned
+dormant. P2 .8 owns actual ordinary unknown-helper code omission before admission;
+initial peer oracle qualified, no invalid minimum RED. Packet lua-minimum-intake.json.gz
+retains closure. Implicit blind .4 next, full prerequisites remain.

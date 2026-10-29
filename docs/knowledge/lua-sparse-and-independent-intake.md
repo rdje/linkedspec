@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: independent intake complete; live progress .6/required steps .1/groups .2 repaired/targeted-checked, minima .3 next
+status: bounded live progress .6/required steps .1/groups .2/minima .3 targeted-checked; implicit blind .4 next, P2 .8/admission remain
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -65,3 +65,10 @@ minima.21sources39inputs3healthy18RED ->21pass390 per host, same21 modules/
 three-control identity; structural189/29healthy2owned dormant, progress234/
 CHOICE175 pass. Current proof: [[lua-repeated-and-group-outcomes]]. Minima .3
 next, original intake packet frozen and full prerequisites remain.
+
+2026-10-29 minima .3 now return failed null without rewind after LX.12qualified
+sources29inputs4healthy8RED ->12pass289 per host, same12 modules/inputs/four
+healthy observations/error identity. Structural197/30healthy1owned dormant,
+group390/progress234 pass. Current proof: [[lua-ordinary-repetition-minimum-misses]].
+P2 .8 owns ordinary unknown-helper missing code before admission; initial peer
+oracle qualified. Implicit blind .4 next, original intake packet frozen.

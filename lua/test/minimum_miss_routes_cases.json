@@ -1,0 +1,297 @@
+[
+  {
+    "name": "regex_choice",
+    "source": "Value::OR{2}\n /a/\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": null,
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "regex_and",
+    "source": "Value::AND{2}\n /a/\n /b/\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": null,
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "ab",
+        "expected": null,
+        "expected_cursor": 2,
+        "expected_match": false
+      },
+      {
+        "input": "aba",
+        "expected": null,
+        "expected_cursor": 3,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "regex_zero",
+    "source": "Value::OR{0,2}\n /a/\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "aaa",
+        "expected": null,
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "blind_choice",
+    "source": "Value::OR{2}\n => Atom\n EX {return([\"OK\",cursor_pos()])}\n E {return([\"OK\",cursor_pos()])}\nAtom:AND\n /a/\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          "OK",
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "blind_and",
+    "source": "Value::AND{2}\n => Atom\n => Tail\n EX {return([\"OK\",cursor_pos()])}\n E {return([\"OK\",cursor_pos()])}\nAtom:AND\n /a/\nTail:AND\n /b/\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": [
+          "OK",
+          4
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "ab",
+        "expected": null,
+        "expected_cursor": 2,
+        "expected_match": false
+      },
+      {
+        "input": "aba",
+        "expected": null,
+        "expected_cursor": 3,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "blind_zero",
+    "source": "Value::OR{0,2}\n => Atom\n EX {return([\"OK\",cursor_pos()])}\n E {return([\"OK\",cursor_pos()])}\nAtom:AND\n /a/\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": [
+          "OK",
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          "OK",
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "aaa",
+        "expected": [
+          "OK",
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "recognition_regex",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,payload,cursor_pos()])}\n /never/\nValue:OR{2}\n /a/\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          null,
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          false,
+          null,
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": [
+          false,
+          null,
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "recognition_blind",
+    "source": "Top::\n I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Value));payload=recognition_commit(tx);return([matched,cursor_pos()])}\n /never/\nValue:OR{2}\n => Atom\nAtom:AND\n /a/\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          true,
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": [
+          false,
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": [
+          false,
+          0
+        ],
+        "expected_cursor": 0,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "caller_capture",
+    "source": "Top::AND\n /X/ -> Top[0] {before=match_text();result=call(Value);return([before,match_text(),result,retv,cursor_pos()])}\nValue:OR{2}\n /a/\n",
+    "cases": [
+      {
+        "input": "Xa",
+        "expected": [
+          "X",
+          "X",
+          null,
+          null,
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "recovery",
+    "source": "Top::\n I {first=call(Value);second=call(Fallback);return([first,second,cursor_pos()])}\n /never/\nValue:OR{2}\n => Atom\nAtom:AND\n /a/\nFallback:AND\n /b/ -> Fallback[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          null,
+          "B",
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "real_error",
+    "source": "Value::OR{2}\n => Atom\nAtom:AND\n /a/ -> Atom[0] {unknown_minimum_probe()}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": {
+          "error_contains": "unsupported runtime helper 'unknown_minimum_probe'",
+          "error_rule": "Atom"
+        },
+        "expected_cursor": null
+      }
+    ],
+    "diagnostic_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8"
+  },
+  {
+    "name": "lx_override",
+    "source": "Value::OR{2}\n /a/\n LX {return(\"LX\")}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": "LX",
+        "expected_cursor": 1,
+        "expected_match": true
+      },
+      {
+        "input": "aa",
+        "expected": "LX",
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  }
+]

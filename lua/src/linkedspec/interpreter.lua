@@ -5554,12 +5554,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     if count < minimum then
       typed_source.recognition.set_gap_phase(ctx, rule.label, "LX")
       lifecycle(engine, rule, "LX", ctx, accumulator)
-      if action_iteration_values ~= nil or and_iteration_values ~= nil then
-        return rule_result(false, json.null)
-      end
-      fail("rule '" .. label .. "' expected at least " .. minimum .. " matches, got " .. count, {
-        rule_label = label,
-      })
+      return rule_result(false, json.null)
     end
     if capture_gaps then typed_source.recognition.install_gap_tail(ctx, rule.label, "EX") end
     typed_source.recognition.set_gap_phase(ctx, rule.label, "EX")
