@@ -1,0 +1,187 @@
+[
+  {
+    "name": "original_boundary",
+    "source": "Top:: I {return(capture_until_boundary(\"Landmark\"))}\nLandmark: /END/\n",
+    "cases": [
+      {
+        "input": "bodyEND",
+        "expected": "body",
+        "expected_cursor": 4
+      },
+      {
+        "input": "body",
+        "expected": "body",
+        "expected_cursor": 4
+      },
+      {
+        "input": "END",
+        "expected": "",
+        "expected_cursor": 0
+      },
+      {
+        "input": "",
+        "expected": "",
+        "expected_cursor": 0
+      },
+      {
+        "input": "08END",
+        "expected": "08",
+        "expected_cursor": 2
+      }
+    ]
+  },
+  {
+    "name": "multiple_boundaries",
+    "source": "Top:: I {return(capture_until_boundary(\"End\", \"Stop\"))}\nEnd: /END/\nStop: /STOP/\n",
+    "cases": [
+      {
+        "input": "bodySTOPtailEND",
+        "expected": "body",
+        "expected_cursor": 4
+      },
+      {
+        "input": "bodyENDtailSTOP",
+        "expected": "body",
+        "expected_cursor": 4
+      }
+    ]
+  },
+  {
+    "name": "complete_catalog",
+    "source": "Top:: I {return(capture_until_boundary(\"Landmark\"))}\nLandmark:\n /END/\n /!/\n -> Landmark[1] {return(1)}\n",
+    "cases": [
+      {
+        "input": "bodyEND!",
+        "expected": "body",
+        "expected_cursor": 4
+      }
+    ]
+  },
+  {
+    "name": "nonzero_entry",
+    "source": "Top::\n /H/ -> Top[0] {return(capture_until_boundary(\"Landmark\"))}\nLandmark: /END/\n",
+    "cases": [
+      {
+        "input": "HbodyEND",
+        "expected": "body",
+        "expected_cursor": 5
+      }
+    ]
+  },
+  {
+    "name": "unicode_capture",
+    "source": "Top:: I {return(capture_until_boundary(\"Landmark\"))}\nLandmark: /END/\n",
+    "cases": [
+      {
+        "input": "αβEND",
+        "expected": "αβ",
+        "expected_cursor": 2
+      }
+    ]
+  },
+  {
+    "name": "inline_flags",
+    "source": "Top:: I {return(capture_until_boundary(\"Landmark\"))}\nLandmark: /(?i:END)/\n",
+    "cases": [
+      {
+        "input": "bodyend",
+        "expected": "body",
+        "expected_cursor": 4
+      }
+    ]
+  },
+  {
+    "name": "unresolved",
+    "source": "Top:: I {body=capture_until_boundary(\"Missing\");return([body,cursor_pos(),cursor_rest()])}\nLandmark: /END/\n",
+    "cases": [
+      {
+        "input": "bodyEND",
+        "expected": [
+          null,
+          0,
+          "bodyEND"
+        ],
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "empty_rule",
+    "source": "Top:: I {body=capture_until_boundary(\"Empty\");return([body,cursor_pos(),cursor_rest()])}\nEmpty:\n I {return(1)}\n",
+    "cases": [
+      {
+        "input": "bodyEND",
+        "expected": [
+          null,
+          0,
+          "bodyEND"
+        ],
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "quoted_label",
+    "source": "Top:: I {return(capture_until_boundary(\"a,b,c\", end))}\nb: /b/\nend: /END/\n",
+    "cases": [
+      {
+        "input": "body b rest",
+        "expected": "body b rest",
+        "expected_cursor": 11
+      }
+    ]
+  },
+  {
+    "name": "repeated_calls",
+    "source": "Top:: I {first=capture_until_boundary(\"Landmark\");second=capture_until_boundary(\"Landmark\");return([first,second,cursor_pos(),cursor_rest()])}\nLandmark: /(?=END)/\n",
+    "cases": [
+      {
+        "input": "bodyEND",
+        "expected": [
+          "body",
+          "",
+          4,
+          "END"
+        ],
+        "expected_cursor": 4
+      }
+    ]
+  },
+  {
+    "name": "recognition_only",
+    "source": "Top:: I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Lead));payload=recognition_commit(tx);return(\"OK\")}\n\nLead:AND\n /H/ -> Lead[0] {return(1)}\n",
+    "cases": [
+      {
+        "input": "H",
+        "expected": "OK",
+        "expected_cursor": 1
+      }
+    ]
+  },
+  {
+    "name": "recognition_and_boundary",
+    "source": "Top:: I {tx=recognition_checkpoint();matched=recognize_once(tx,call(Lead));payload=recognition_commit(tx);body=capture_until_boundary(\"Landmark\");return([body,cursor_pos(),cursor_rest()])}\n\nLead:AND\n /H/ -> Lead[0] {return(1)}\nLandmark: /END/\n",
+    "cases": [
+      {
+        "input": "HbodyEND",
+        "expected": [
+          "body",
+          5,
+          "END"
+        ],
+        "expected_cursor": 5
+      }
+    ]
+  },
+  {
+    "name": "dispatch_only",
+    "source": "Top::\n -> Part[1] {return(\"OK\")}\nPart:\n /BAD/\n /a/\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": "OK",
+        "expected_cursor": 1
+      }
+    ]
+  }
+]

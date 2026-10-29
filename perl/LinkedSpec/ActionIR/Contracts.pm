@@ -736,6 +736,43 @@ sub _static_named_capture_value_expr {
  return 'do { LinkedSpec::SourceLocation::Runtime::capture_group_text(exists '.$slot.' ? '.$slot.' : undef) }'
 }
 
+# Native rules carry regex metadata; generated rules retain CODE handlers and
+# read their full regex arrays from the descriptor's private catalog.
+sub _capture_until_boundary_value_expr {
+ my ($labels) = @_;
+ return join(' ',
+  'do {',
+  'my @__ls_boundary_labels = ('.$labels.');',
+  'my $__ls_saved_cursor = pos $$STRING;',
+  'my $__ls_capture_start = defined($__ls_saved_cursor) ? $__ls_saved_cursor : 0;',
+  'my $__ls_boundary_start;',
+  'my $__ls_boundary_valid = 0;',
+  'for my $__ls_boundary_label (@__ls_boundary_labels) {',
+  'LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "capture_until_boundary_probe") if defined($__ls_saved_cursor);',
+  'my $__ls_boundary_rule = (ref($$descr{spec}) eq "HASH") ? $$descr{spec}{$__ls_boundary_label} : undef;',
+  'my $__ls_boundary_regexes = ref($__ls_boundary_rule) eq "HASH" ? $__ls_boundary_rule->{re}',
+  ': ((ref($__ls_boundary_rule) eq "CODE" && ref($$descr{recognition_regex_map}) eq "HASH")',
+  '? $$descr{recognition_regex_map}{$__ls_boundary_label} : undef);',
+  'next unless ref($__ls_boundary_regexes) eq "ARRAY" && @{$__ls_boundary_regexes};',
+  'my $__ls_boundary_re = LinkedRE::oredRE(@{$__ls_boundary_regexes});',
+  '$__ls_boundary_valid = 1;',
+  'my $__ls_boundary_info = LinkedRE::or($STRING, $__ls_boundary_re, $info);',
+  'next unless defined($__ls_boundary_info);',
+  'my $__ls_candidate_start = (pos $$STRING) - length($__ls_boundary_info->{match});',
+  '$__ls_boundary_start = $__ls_candidate_start if !defined($__ls_boundary_start) || $__ls_candidate_start < $__ls_boundary_start;',
+  '}',
+  '$__ls_boundary_start = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_until_boundary") if $__ls_boundary_valid && !defined($__ls_boundary_start);',
+  'if ($__ls_boundary_valid && $__ls_boundary_start >= $__ls_capture_start) {',
+  'LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_boundary_start, "capture_until_boundary");',
+  'LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_capture_start, $__ls_boundary_start, "capture_until_boundary")',
+  '} else {',
+  'LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "capture_until_boundary_restore") if defined($__ls_saved_cursor);',
+  'undef',
+  '}',
+  '}',
+ );
+}
+
 # Readonly anonymous capture Number getters have one emitted body for native
 # contracts and ordinary method-value composition. Preserve each operation tag.
 sub _readonly_capture_boundary_number_value_expr {
@@ -1138,7 +1175,7 @@ sub _build_capture_and_cursor_contracts {
       push @boundary_labels, "'$boundary'" if length($boundary);
      }
      my $labels = join(', ', @boundary_labels);
-     'do { my @__ls_boundary_labels = ('.$labels.'); my $__ls_saved_cursor = pos $$STRING; my $__ls_capture_start = defined($__ls_saved_cursor) ? $__ls_saved_cursor : 0; my $__ls_boundary_start; my $__ls_boundary_valid = 0; for my $__ls_boundary_label (@__ls_boundary_labels) { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "capture_until_boundary_probe") if defined($__ls_saved_cursor); my $__ls_boundary_rule = (ref($$descr{spec}) eq "HASH") ? $$descr{spec}{$__ls_boundary_label} : undef; next unless ref($__ls_boundary_rule) eq "HASH" && ref($__ls_boundary_rule->{re}) eq "ARRAY" && @{$__ls_boundary_rule->{re}}; my $__ls_boundary_re = LinkedRE::oredRE(@{$__ls_boundary_rule->{re}}); $__ls_boundary_valid = 1; my $__ls_boundary_info = LinkedRE::or($STRING, $__ls_boundary_re, $info); next unless defined($__ls_boundary_info); my $__ls_candidate_start = (pos $$STRING) - length($__ls_boundary_info->{match}); $__ls_boundary_start = $__ls_candidate_start if !defined($__ls_boundary_start) || $__ls_candidate_start < $__ls_boundary_start; } $__ls_boundary_start = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_until_boundary") if $__ls_boundary_valid && !defined($__ls_boundary_start); if ($__ls_boundary_valid && $__ls_boundary_start >= $__ls_capture_start) { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_boundary_start, "capture_until_boundary"); LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_capture_start, $__ls_boundary_start, "capture_until_boundary") } else { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "capture_until_boundary_restore") if defined($__ls_saved_cursor); undef } }'
+     _capture_until_boundary_value_expr($labels)
     }gex;
     return $code
    },

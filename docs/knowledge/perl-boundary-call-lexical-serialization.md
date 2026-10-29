@@ -52,9 +52,11 @@ Unicode-CRLF routes and artificial AST sources. Phase0 adds four actual public
 comma/unknown-escape routes, so the standard recurring gate exercises the repair.
 The previous quoted fixture no longer skips unknown-escape runtime assertions.
 
-The retained quoted-marker control still fails rule_handler_compile because a
-helper-looking string is rewritten as code. It is P1 .7.2.2 executable quoted-source
-membership, scheduled after source-producer prerequisites before .7.2.3 closeout.
-It is neither an accepted literal behavior nor a reason to generalize this lexical
-serializer. Other backends, origin sidecars, zero-argument portability and broad
-quoted/comment membership remain outside this focused acceptance.
+The immutable October6 quoted-marker record observed rule_handler_compile for
+a helper-looking string. On October29 exact committed HEAD already preserves the
+literal; applying that old failure expectation in the current test was stale.
+[[perl-boundary-quoted-marker-current-oracle]] retains the canonical baseline
+matrix and current positive oracle. No historical repair-commit identity is
+inferred. P1 .7.2.2 broad executable quoted/comment-source membership remains owned
+before .7.2.3; other backends, origin sidecars and zero-argument portability remain
+outside this focused acceptance.

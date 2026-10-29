@@ -115,20 +115,6 @@ sub _recognition_regex_source_expression {
  return '['.join(', ', @patterns).']'
 }
 
-sub _compiled_spec_uses_recognition_transactions {
- my ($compiled_spec_state) = @_;
- for my $row (@{_call_compiler_state('compiled_spec_state_rule_rows', $compiled_spec_state)}) {
-  my $info = $row->[1];
-  my $hits = ref($info) eq 'HASH'
-   && ref($info->{meta}) eq 'HASH'
-   && ref($info->{meta}{action_rewriter}) eq 'HASH'
-   ? $info->{meta}{action_rewriter}{canonical_action_ir_hits}
-   : undef;
-  return 1 if ref($hits) eq 'HASH' && ($hits->{RECOGNIZE_ONCE} // 0);
- }
- return 0
-}
-
 sub _generated_source_plan_literal {
  my ($plan) = @_;
  return "[\n" . join('', map {
@@ -1748,7 +1734,9 @@ if ($recognition_transaction_policy_error || ref($recognition_transaction_diagno
     $prefix . ' ' . $label . ' => ' . $slot_rows,
    );
   }
-  if (_compiled_spec_uses_recognition_transactions($compiled_spec_state)) {
+  # Generated spec entries are CODE handlers. Preserve the complete private
+  # catalog for regex readers independently of which helper was lowered.
+  {
    _call_runtime_ctx('emit_runtime_ctx_parser_source_line', $runtime_ctx, "\n },\n recognition_regex_map => {\n");
    my @recognition_labels = @{_call_compiler_state('compiled_spec_state_compiled_rule_order', $compiled_spec_state)};
    for (my $i = 0; $i < @recognition_labels; ++$i) {
