@@ -8544,14 +8544,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.7.2 - accept Julia normal pure-null coordinator observations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8`
-  Status: `pending` / P2 after bounded feature coverage before full23.4/admission
+  Status: `completed` / P2 after bounded feature coverage before full23.4/admission
   Goal: Reconcile and repair Julia unclassified unknown runtime-helper diagnostics against portable authority.
   Reproduce: Julia39.3.3 real_error exact source Value OR{2} blind-calls Atom AND /a/ action unknown_minimum_probe(). Native/restored raises unsupported runtime helper in Atom with RuntimeDiagnostic stage runtime_execution/rule_label Atom but no code; generated/fresh preserve that failure text. Dart same source has unknown_helper code, which is not assumed as current Julia oracle without authority reconciliation. Raw source/SDK results retained in julia-minimum-intake packet/epochs.
   Impact/ownership: Callers cannot select this Julia fallback failure by diagnostic code, and portable diagnostic admission needs explicit reconciliation. _evaluate_runtime_call! fallback throws unsupported runtime helper without a code, unlike its callable-codeblock-specific unknown-helper branch. Own required canonical contract/reference qualification and focused diagnostic repair before full admission, preserving rule/source/phase/original failure and no global error swallowing.
-  Planned verification tier: focused
-  Planned focused checks: Exact public helper/error authority and SDK/generated/fresh fail-closed/code/phase/rule oracles, nearest error controls, book/docs/commit; no routine full suite.
-  Planned canonical trigger: Full23.4/final clean push and any new public diagnostic authority separately canonical.
-  Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent6sources7inputs3healthy3actual missing-code RED ->6pass105 SDK/restored/plan/six unchanged modules fresh; only ordinary diagnostic code in three cases per native/restored route changes, all remaining observations/inputs/generated envelopes identical. Minimum289/callable125+118+239 neighbors, normal registration once, book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after phase/lifecycle/slot/pressure/registration/declared-host/unsafe formatter prerequisites; no new public diagnostic authority.
+  Claim verification: none: Finite authored diagnostic/route/control distinctions, no population measurement.
+
+  Activation: clean `27dc97e9c7a15a637994f314dfbd606b7c010e50`; canonical Julia ordinary/callable diagnostic qualification and existing unknown-call authority read. Independently establish actual RED before any Julia runtime mutation.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent6sources7inputs3healthy3ordinary missing-code RED SDK/restored/plan/six modules fresh. Original minimum child, action and initial lifecycle error retain text/failing rule/runtime phase but no code; callable unknown already coded. Actual native trace/diagnostics retained before product mutation, no peer inference.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _evaluate_runtime_call! ordinary fallback throws RuntimeInterpreterException without typed diagnostic. Generic rule/runtime wrapping supplies general execution fields but cannot invent unknown_helper; active callable branch already builds its typed context/stage.
+  - [x] **FIX**: Only unbound unknown-name branch uses _runtime_context_diagnostic with existing unknown_helper and unchanged summary/detail/top/current rule/runtime stage. Known governed fallback, bound values/static precedence/active callable handling remain separate. No global catch or public error policy change.
+  - [x] **ADDRESSED (verified)**:6pass105, same six module bytes/fresh public errors/values. Removing only added ordinary code in three cases per native/restored route yields identical structured observations; all exact raw/normalized/compiled/plan/emitted inputs and three healthy source controls plus miss unchanged. Native trace actual results match SDK/restored.
+  - [x] **NO REGRESSION**: Minimum289/callable dynamic125/generic118/construction239 pass, new normal consumer once in runtests.jl. GeneratedSourceException class/text/envelope unchanged, no inner SDK-code transport claim. Initial precompilation-info reader/cursor-property consumer errors corrected/retained without product RED credit; public normalized cursor used, matching/recognition/compiler/emitter/schema unchanged.
+  - [x] **LOCKSTEP**: Packet julia-unknown-helper-intake.json.gz retains producers/epochs/inputs/runtime/SDK/fresh/trace/modules/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. P1 cursor38.0 next then independent backend children, phase39.4.5.2.1/.2/39.8/lifecycle/slot/pressure/registration/declared-host/full admission remain. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8 - retain Julia ordinary unknown-helper diagnostic code`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4`
   Status: `in_progress` / independent safe installed-host Lua intake and bounded repairs
@@ -9181,7 +9192,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8` | `pending` | Repair the independently owned Julia ordinary unknown-helper diagnostic. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.0` | `pending` | Freeze selected-match live cursor authority before early LS return repairs. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

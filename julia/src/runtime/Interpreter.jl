@@ -4935,6 +4935,20 @@ function _evaluate_runtime_call!(
                 rule_label = rule_label,
             ),
         ))
+    elseif !is_known_action_ir_call_name(call.name)
+        detail = "unsupported runtime helper '$(call.name)' in rule $rule_label"
+        throw(RuntimeInterpreterException(
+            detail;
+            diagnostic = _runtime_context_diagnostic(
+                engine,
+                context;
+                stage = "runtime_execution",
+                summary = "Julia runtime interpreter failed",
+                detail = detail,
+                code = "unknown_helper",
+                rule_label = rule_label,
+            ),
+        ))
     end
 
     throw(RuntimeInterpreterException(

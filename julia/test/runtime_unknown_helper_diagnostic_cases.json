@@ -1,0 +1,90 @@
+[
+  {
+    "name": "minimum_action",
+    "source": "Value::OR{2}\n => Atom\nAtom:AND\n /a/ -> Atom[0] {unknown_minimum_probe()}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "error_code": "unknown_helper",
+        "error_stage": "runtime_execution",
+        "error_rule": "Atom",
+        "error_contains": "unsupported runtime helper"
+      }
+    ]
+  },
+  {
+    "name": "ordinary_initial",
+    "source": "Top::\n I { return(unknown_diagnostic_probe()) }\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": null,
+        "error_code": "unknown_helper",
+        "error_stage": "runtime_execution",
+        "error_rule": "Top",
+        "error_contains": "unsupported runtime helper"
+      }
+    ]
+  },
+  {
+    "name": "ordinary_action",
+    "source": "Top:AND\n /a/ -> Top[0] { return(unknown_diagnostic_probe()) }\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": null,
+        "error_code": "unknown_helper",
+        "error_stage": "runtime_execution",
+        "error_rule": "Top",
+        "error_contains": "unsupported runtime helper"
+      },
+      {
+        "input": "b",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "callable_unknown",
+    "source": "Top::\n I { cb={|| return(unknown_diagnostic_probe()) }; return(cb()) }\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": null,
+        "error_code": "unknown_helper",
+        "error_stage": "callable_codeblock_invocation",
+        "error_rule": "Top",
+        "error_contains": "unknown_helper"
+      }
+    ]
+  },
+  {
+    "name": "bound_noncallable",
+    "source": "Top::\n I { cb=0; return(cb()) }\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": null,
+        "error_code": "value_not_callable",
+        "error_stage": "callable_codeblock_invocation",
+        "error_rule": "Top",
+        "error_contains": "value_not_callable"
+      }
+    ]
+  },
+  {
+    "name": "known_helper",
+    "source": "Top::\n I { return(cat(\"A\",\"B\")) }\n",
+    "cases": [
+      {
+        "input": "",
+        "expected": "AB",
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  }
+]

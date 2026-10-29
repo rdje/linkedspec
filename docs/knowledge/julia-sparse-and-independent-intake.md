@@ -98,3 +98,10 @@ repairs,13 sources17inputs9healthy4RED ->13pass156 assertions and same baseline
 modules. Original33-module54-input replay now satisfies all fresh public oracles.
 Current proof: [[julia-null-return-and-pure-observation-gaps]]. Independent safe
 Lua39.4 follows, P2 helper-code .8 and full admission prerequisites remain.
+
+2026-10-29 ordinary diagnostic39.3.8 is repaired/targeted-checked: independent
+6sources7inputs3healthy3actualRED ->6pass105, six unchanged modules fresh; only
+ordinary code in three cases per native/restored route changes, all other
+observations/inputs/generated envelopes identical. Minimum289/callable125+118+
+239 pass, normal consumer once. [[julia-unknown-runtime-helper-diagnostic-gap]]
+retains closure; broader phase/slot/admission prerequisites remain open.

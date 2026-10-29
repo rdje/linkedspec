@@ -14905,9 +14905,9 @@ _Julia bare mutations use one typed binding on native and generated execution_
 - **source:** [`docs/knowledge/julia-uniform-binding-runtime.md`](docs/knowledge/julia-uniform-binding-runtime.md)
 
 ### julia-unknown-runtime-helper-diagnostic-gap
-_Julia ordinary unknown runtime helper fallback lacks a diagnostic code while retaining its error rule and phase_
+_Julia ordinary unknown-helper errors retain the existing diagnostic code at their owning runtime fallback_
 - **answers:** why does Julia unknown runtime helper diagnostic omit code | which task owns Julia unknown_helper diagnostic parity
-- **date:** 2026-10-28 · **status:** open P2 TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8 after bounded feature coverage before admission
+- **date:** 2026-10-28 · **status:** bounded39.3.8 fixed/targeted-checked; broader admission remains
 - **evidence:** `julia-minimum-intake.json.gz retains actual real_error source/native/restored/plan/fresh results and initial unqualified peer-code oracle; no diagnostic repair in39.3.3.`
 - **reverify:** `bash tools/run_julia_project_data.sh --project=julia julia/test/minimum_miss_routes_test.jl; inspect retained real_error raw diagnostic before .8 authority reconciliation`
 - **source:** [`docs/knowledge/julia-unknown-runtime-helper-diagnostic-gap.md`](docs/knowledge/julia-unknown-runtime-helper-diagnostic-gap.md)

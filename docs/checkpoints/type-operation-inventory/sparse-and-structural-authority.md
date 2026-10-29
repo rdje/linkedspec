@@ -426,3 +426,10 @@ route changes; exact inputs/modules/fresh public envelopes/healthy controls
 preserved. Minimum289/callable449 pass; lua-unknown-helper-intake.json.gz retains
 actual closure, including unsuccessful instruments/patch without passing credit.
 Independent Julia39.3.8 next; phase/registration/full admission remain.
+
+2026-10-29 Julia39.3.8 ordinary unknown-helper code is independently repaired:
+6sources7inputs3healthy3RED ->6pass105, six unchanged modules fresh, other
+observations/inputs/generated errors unchanged. Minimum289/callable125+118+239
+pass, normal consumer included once; julia-unknown-helper-intake.json.gz retains
+closure including corrected instruments without product RED credit. P1 cursor
+38.0 next; phase/slot/admission prerequisites remain.

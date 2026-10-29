@@ -30,7 +30,7 @@ final-block normalization under .11.6.3.
 Julia resolves `cb(args)` as a bound codeblock only after controls, helpers, and registered user functions. A
 colliding static callable wins. A bound non-codeblock fails as `value_not_callable`; an unknown call reached
 inside an active codeblock fails with the portable `unknown_helper` record. Ordinary unknown helpers outside a
-codeblock retain Julia's established general `runtime_execution` diagnostic.
+codeblock retain the general `runtime_execution` stage and, after bounded TYPE39.3.8, also carry the existing `unknown_helper` code. Their original error text and rule attribution are unchanged; callable-specific stage and diagnostics remain separate.
 
 Positional arguments evaluate exactly once from left to right. Fixed values and a fresh final-rest array are
 recursively copied into `_RuntimeScopedBinding` frames. The frames restore all prior same-name scalar, array, and
