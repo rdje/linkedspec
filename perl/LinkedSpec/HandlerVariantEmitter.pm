@@ -1212,7 +1212,12 @@ sub _emit_or_acode_handler {
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
     );
-    my $lmatch     = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
+    # OR extraction also shares handler scope with the preamble declarations.
+    my $lmatch = _build_lmatch_extraction(
+        label => $label,
+        handler_kind => $handler_kind,
+        reuse_preamble_locals => 1,
+    );
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => ' ',

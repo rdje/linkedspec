@@ -7,7 +7,7 @@ answers:
   - "do duplicate match lexical warnings occur at native build or emitted load"
   - "which Perl handler still masks match locals after the single-action AND fix"
 date: 2026-10-29
-status: repaired40.1.1; OR action40.1.1.1 next before admission
+status: single-action AND40.1.1 and OR action40.1.1.1 repaired; scalar40.1.2 next
 evidence: "perl-referenced-intermediate-intake.json.gz retains actual normal/probe/source/channels/receipts."
 reverify: "Restore retained public producer under an owning leaf; run through project_data_run.sh env PERL5LIB= perl -Iperl, preserving warning channels."
 ---
@@ -35,3 +35,22 @@ source gives entry H/local a. Unsupported entry_text inside callable is a typed
 unknown_helper control per existing body envelope; valid callback reads the
 match in its caller and passes text explicitly. No environment capture or helper
 vocabulary extension, blanket phase or all-emitter warning-free claim.
+
+## OR follow-up40.1.1.1 (2026-10-30)
+
+Only _emit_or_acode_handler now opts into preamble-local extraction too. Own10
+controls7actual warning RED/3 healthy ->all10 new modules load warning-free;
+Default/repeated/fixed-AND controls remain byte-identical and full metadata/
+results/cursors exact. Seven OR emissions change only5 my tokens each. Both
+ordinary declaration normals now reject every load warning; the old entry/local
+allowance and fixture field are removed. OR10/AND9/anonymous16 pass35 groups,
+empty focused/probe/fresh stderr, same old/new runtime behavior. Regenerate old
+OR modules to remove warnings; public format remains v2.
+
+An initial generic patch hit Default rather than OR. Diff inspection and failing
+normal controls rejected it, then exact function-bounded correction restores
+Default and fixed AND bodies to activation HEAD and selects OR. Wrong source/
+output/failed tests/correction retained in perl-or-match-locals-intake.json.gz,
+without product RED credit from that mistake. Existing nested extraction owners
+stay declaring, no broader phase/variable policy or all-emitter proof. Separate
+empty-blind scalar40.1.2 remains before admission.

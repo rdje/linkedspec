@@ -21,10 +21,7 @@ for my $fixture(@$fixtures) {
   my $package='LinkedSpec::MatchLocalDeclarationTest'.++$number;
   {local $SIG{__WARN__}=sub{push @load,@_};$loaded=eval "package $package; $emitted; 1";$load_error=$@}
   ok($loaded,'warning-enabled emitted source loads') or do{diag($load_error);return};
-  my @masks=map {/"my" variable [\$\@%](LMATCH(?:_LIST|_HASH)?|LINDEX|LSPOS) masks earlier declaration/ ? $1 : "UNEXPECTED:$_"} @load;
-  # The OR action owner is tracked separately, never silently suppressed.
-  my @expected_masks=$fixture->{remaining_load_masks} ? qw(LMATCH LMATCH_LIST LMATCH_HASH LINDEX LSPOS) : ();
-  is_deeply([sort @masks],[sort @expected_masks],'exact remaining load masks (OR owner40.1.1.1 only)');
+  is_deeply(\@load,[],'emitted loading has no warnings');
   is($json->encode($package->can('LinkedSpecGeneratedMetadata')->()),$json->encode($fixture->{expected_metadata}),'full generated metadata unchanged');
   for my $route(['native',$parser],['emitted',$package->can('Execute')]) {
    my($input,$value,$error,@warnings,$output)=($fixture->{input});

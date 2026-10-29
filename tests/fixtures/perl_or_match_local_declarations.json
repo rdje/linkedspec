@@ -1,0 +1,292 @@
+[
+  {
+    "input": "a",
+    "name": "or_basic",
+    "repair": true,
+    "source": "Top::|\n /a/ -> Top[0] {return(\"A\")}\n",
+    "expected": "A",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "z",
+    "name": "or_miss",
+    "repair": true,
+    "source": "Top::|\n /a/ -> Top[0] {return(\"A\")}\n",
+    "expected": null,
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "b",
+    "name": "or_multiple",
+    "repair": true,
+    "source": "Top::|\n /a/ -> Top[0] {return(\"A\")}\n /b/ -> Top[1] {return(\"B\")}\n",
+    "expected": "B",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "a",
+    "name": "or_empty",
+    "repair": true,
+    "source": "Top::|\n /(?=a)/ -> Top[0] {return(array(match_text(),match_len(),match_start_pos(),match_end_pos(),cursor_pos()))}\n",
+    "expected": [
+      "",
+      0,
+      0,
+      0,
+      0
+    ],
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "αβ",
+    "name": "or_unicode",
+    "repair": true,
+    "source": "Top::|\n /αβ/ -> Top[0] {return(array(match_text(),match_len(),match_start_pos(),match_end_pos(),cursor_pos()))}\n",
+    "expected": [
+      "αβ",
+      2,
+      0,
+      2,
+      2
+    ],
+    "expected_cursor": 2,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "a",
+    "name": "or_callback",
+    "repair": true,
+    "source": "Top::|\n I{cb={|text|return(array(text,\"C\"))}}\n /a/ -> Top[0] {return(cb(match_text()))}\n",
+    "expected": [
+      "a",
+      "C"
+    ],
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "Ha",
+    "name": "or_entry_local",
+    "repair": true,
+    "source": "Top::|\n -> Atom[0] {return(call(Atom))}\nAtom:AND\n /H|a/ -> Atom[0] {return(array(entry_text(),match_text(),cursor_pos()))}\n",
+    "expected": [
+      "H",
+      "a",
+      2
+    ],
+    "expected_cursor": 2,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Atom"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Atom"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "a",
+    "name": "default_control",
+    "repair": false,
+    "source": "Top::\n /a/ -> Top[0] {return(\"A\")}\n",
+    "expected": "A",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "default",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "aa",
+    "name": "repeated_control",
+    "repair": false,
+    "source": "Top::OR{2}\n /a/ -> Top[0] {return(\"A\")}\n",
+    "expected": [
+      "A",
+      "A"
+    ],
+    "expected_cursor": 2,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "rep_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  },
+  {
+    "input": "a",
+    "name": "and_control",
+    "repair": false,
+    "source": "Top::AND\n /a/ -> Top[0] {return(\"A\")}\n",
+    "expected": "A",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "or-locals.spec"
+    }
+  }
+]

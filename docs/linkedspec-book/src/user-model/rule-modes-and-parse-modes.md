@@ -96,12 +96,13 @@ pass. Three default coordinators still collect a final empty ordinary iteration,
 as in Dart and Julia; ordinary progress/lifecycle authority remains under review.
 This bounded compiler support does not establish Lua5.4 or full backend parity.
 
-Standalone Perl source for single-action AND rules now loads without duplicate
-match-register declarations on the recorded controls, including zero-width and
+Standalone Perl source for single-action AND and OR action rules now loads without
+duplicate match-register declarations on the recorded controls, including zero-width and
 Unicode matches, per-regex initializers and callback arguments. Regenerate older
 emitted modules to remove those loading warnings; their behavior, public metadata
-and generated-source format remain valid. A separately tracked OR action warning
-still affects one entry/local composition control.
+and generated-source format remain valid. The entry/local composition control
+also loads without warnings after the OR action repair. Default and repeated
+control emissions remain unchanged.
 
 ## Current rule-label surface
 

@@ -4907,6 +4907,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl40.1.1 adds t/perl_match_local_declarations.t9 groups plus finite fixture. Exact canonical selection must include it and retain explicit OR warning40.1.1.1 ownership until repaired, with unsupported callback typed failure unchanged.
 
+  Perl40.1.1.1 adds t/perl_or_match_local_declarations.t10 groups, closes prior AND normal OR warning allowance, and requires both normals in exact canonical selection. All new OR/AND generated loading checks now require0 warnings.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9848,14 +9850,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1 - reuse Perl single-action AND match declarations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1`
-  Status: `pending` / P1 immediately after40.1.1 before40.1.2/45/admission
+  Status: `completed` / P1 immediately after40.1.1 before40.1.2/45/admission
   Goal: Remove duplicate invocation match-local declarations from the independently observed Perl OR action handler through its sole emitter scope owner.
   Reproduce / impact:40.1.1 entry/local public control emits Top or_acode and Atom and_single_acode. Warning-enabled fresh load reports10 masks, five LMATCH/LMATCH_LIST/LMATCH_HASH/LINDEX/LSPOS per handler. Public source shows or_acode extraction also occurs at subroutine scope after the SpecEntry absent-register preamble. Isolated AND repair may remove only its five; do not silently suppress the remaining OR warnings or change all common extraction callers indiscriminately. Actual source/channels retained in perl-match-locals intake.
   Acceptance: Own independent OR/default action sources, single/multiple/zero/Unicode/entry/local/closures and nested caller scopes before edits. Reuse correct declaration owner only for confirmed same-scope callers, preserve other nested scopes and phases. Source-diff/metadata/runtime/error/warning RED-GREEN, regenerate warning-bearing source, focused normal/direct dependents/book/docs/commit before40.1.2/45. Never disable warnings or infer value corruption from masks.
-  Planned verification tier: focused
-  Planned focused checks: Public isolated warning channels and exact emitter/source/metadata/runtime/typed local-match controls plus single-AND fixed controls; no routine full suite.
-  Planned canonical trigger: Full23.4/final clean push after other owners, pressure20.1 and exact selection23.4.1; no scope/policy normalization.
-  Planned claim verification: none: Finite authored lexical warning/behavior assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent10 source warning channels7 OR RED/3 healthy ->all10 new modules warning-free; whole-source5-my OR transform/3 unchanged emissions/full metadata/results/cursors/fresh old-new exact. OR10/AND9/anonymous16 pass35 groups, empty stderr/syntax. Wrong Default attempt rejected/retained and corrected by exact function; book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full23.4/final clean push after40.1.2/45 and20.1/39.8.1/48.4.2.1/selection23.4.1/lifecycle/host prerequisites. No policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored warning/lexical/source/behavior controls, no population measurement.
+
+  Activation: clean `18df968b09a2b4b5796427ec0f19061316b46e26`; AND repair committed/brief0/no jobs. Actual OR warning source and preamble/common extraction scopes recovered from40.1.1. Own OR source/phase baseline and healthy nested Default/repeated/fixed AND controls before selective call-site opt-in; preserve metadata/typed captures/I/callback semantics.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own10 public controls before source edits7 OR sources have5 emitted-load masks each; Default/repeated/fixed-AND controls have0. Other phase warning arrays empty and values/cursors/full metadata healthy. Original normal fails only7 load-warning assertions,3 controls healthy; independent old modules reproduce.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _emit_or_acode_handler places declaring extraction at handler scope after SpecEntry preamble. Default/repeated extraction owners are nested and must retain declarations. First generic patch selected Default; source diff and actual failures rejected it before landing, then exact function-bounded selection corrected the owner.
+  - [x] **FIX**: Opt only OR action into existing reuse_preamble_locals. Preserve Default and fixed AND function bodies exactly; all other callers unchanged. Remove first regression's entry/local mask allowance and fixture field so both suites reject any load warning. No warning suppression, new scope/phase/variable/helper/schema policy.
+  - [x] **ADDRESSED (verified)**: All10 new modules load without warnings, including entry H/local a and supported callback arguments. Seven complete emissions differ only by5 my tokens;3 healthy controls byte-identical, full metadata/results/cursors/errors unchanged. Separate old/new modules keep behavior; regenerate older OR source to remove warnings with same v2 format.
+  - [x] **NO REGRESSION**: OR10/AND9/anonymous16 pass35 focused groups, empty focused/probe/fresh stderr and syntax clean. Wrong Default epoch/source/failing tests retained without product RED credit; corrected owner asserts Default/AND functions match activation HEAD. Unsupported callback remains typed in prior AND normal. No all-family/whole-phase/variable-policy/full-suite/admission claim.
+  - [x] **LOCKSTEP**: perl-or-match-locals-intake.json.gz retains actual source/producers/fixtures/normals/baseline/wrong-attempt/correction/modules/warnings/metadata/results/receipts. Canonical selection23.4.1 required for both ordinary normals; book/card/map/roadmap/task/live/resume/history align. Scalar40.1.2 next then45, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1 - reuse Perl OR action match declarations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
   Status: `completed` / P1 after40.0 before full23.4/push
@@ -10208,7 +10221,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1` | `pending` | Remove duplicate Perl OR action match-local declarations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2` | `pending` | Remove duplicate Perl empty-blind return scalar declarations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

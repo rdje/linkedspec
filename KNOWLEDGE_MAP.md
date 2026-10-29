@@ -17834,7 +17834,7 @@ _Perl AND I-block and repeated-action return rewriting corrupts literals and use
 ### perl-and-single-acode-duplicate-match-locals
 _Perl emitted single action AND handlers duplicate preamble match lexicals_
 - **answers:** why does emitted Perl warn LMATCH masks earlier declaration | which leaf owns duplicate local match variables in and_single_acode | do duplicate match lexical warnings occur at native build or emitted load | which Perl handler still masks match locals after the single-action AND fix
-- **date:** 2026-10-29 · **status:** repaired40.1.1; OR action40.1.1.1 next before admission
+- **date:** 2026-10-29 · **status:** single-action AND40.1.1 and OR action40.1.1.1 repaired; scalar40.1.2 next
 - **evidence:** `perl-referenced-intermediate-intake.json.gz retains actual normal/probe/source/channels/receipts.`
 - **reverify:** `Restore retained public producer under an owning leaf; run through project_data_run.sh env PERL5LIB= perl -Iperl, preserving warning channels.`
 - **source:** [`docs/knowledge/perl-and-single-acode-duplicate-match-locals.md`](docs/knowledge/perl-and-single-acode-duplicate-match-locals.md)
