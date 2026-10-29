@@ -875,22 +875,20 @@ function _check_target(
         throw(SpecValidationException("rule '$(owner.header.label)' references undefined rule '$target'"))
     end
 
+    # Blind edges call declarations; only action edges select regex slots.
+    structural_action || return nothing
+
     regex_count = _regex_count(target_rule)
     if index < 0 || index >= regex_count
-        if structural_action
-            throw(_portable_validation_exception(
-                code = "regex_slot_identity_invalid",
-                stage = "validate_compiled_rule",
-                message = "rule '$(owner.header.label)' references rule '$target' regex slot $index, but that structural slot does not exist",
-                fields = Dict{String,Any}(
-                    "rule_label" => owner.header.label,
-                    "target_rule" => target,
-                    "regex_index" => index,
-                ),
-            ))
-        end
-        throw(SpecValidationException(
-            "rule '$(owner.header.label)' references rule '$target' regex slot $index, but that rule has $regex_count regex slot(s)",
+        throw(_portable_validation_exception(
+            code = "regex_slot_identity_invalid",
+            stage = "validate_compiled_rule",
+            message = "rule '$(owner.header.label)' references rule '$target' regex slot $index, but that structural slot does not exist",
+            fields = Dict{String,Any}(
+                "rule_label" => owner.header.label,
+                "target_rule" => target,
+                "regex_index" => index,
+            ),
         ))
     end
     return nothing

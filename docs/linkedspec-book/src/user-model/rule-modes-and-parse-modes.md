@@ -60,6 +60,14 @@ child; both remain call dependencies, while only the latter supplies a regex.
 Action targets still require real slots. These one-shot examples do not depend
 on the ordinary repetition policy currently under review.
 
+Julia also compiles the pure-code examples above. The recorded native,
+restored, plan and emitted routes preserve `entry_slot()` as null, call both
+children in the mixed sequence and retain only real regexes in the dependency
+map. Referenced AND literal-return and direct-call examples pass too. Blind
+fluent `.push` still fails in Julia because it requires an action-edge context;
+its repair is tracked separately. This compiler support does not establish
+complete repeated coordinator or lifecycle parity.
+
 ## Current rule-label surface
 
 A rule label is one or more Unicode 17.0.0 `XID_Continue` characters. The class is the same at the first and later
@@ -600,7 +608,7 @@ The short version is:
 - `-> Header` is regex-slot oriented: the enclosing rule selects slot zero declared by `Header`, then runs the action path.
 - `=> Header` is parser-step oriented: the parent directly calls the child rule and works with the child result.
 
-A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Current Dart validation incorrectly applies that slot requirement to blind targets with no regex, including bare AND members; this tracked validation defect is pending repair. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
+A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Dart and Julia now validate blind declarations independently of action-slot requirements, including bare AND members. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
 
 Perl and Rust execute the following coordinator through native and generated parsers. The default parent collects its child results implicitly:
 

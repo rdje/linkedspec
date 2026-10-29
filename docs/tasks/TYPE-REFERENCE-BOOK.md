@@ -4897,6 +4897,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Dart48.3.3 adds pure_blind_targets_test.dart (15 cases incl3 bypass) and pure_blind_targets.json8. Exact canonical selection must include these and retain6 negative/immutable map/call-ref/entry-slot absence properties. Ordinary policy/source fixture candidates remain separately owned39.8.1.
 
+  Julia48.4 adds referenced_blind_targets_test.jl with one runtests include,36 compiler roles plus strict bypass/real-empty and10 runtime controls (180 assertions). Qualified push3 excluded under48.4.1 with compile coverage; original parent-LX runtime unqualified48.2.2.1. Exact canonical selection must include this normal and completed runtime repair before admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9650,15 +9652,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3 - separate pure blind calls from regex dependencies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4`
-  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Status: `completed` / P1 after49 before45/wider features/full23.4/push
   Goal: Independently assess Julia referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Activation: clean `9a6b373d77458e217e069431713abf0bfa7feac7`; brief0/no jobs. Own original12/qualified12/pure8/strict4 source/compile/diagnostic/metadata baseline and native/restored/plan/fresh runtime before production edits. Existing Julia invocation/reset/blind-postcall facts recovered, no peer-derived defect or new ordinary/lifecycle policy.
   Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
-  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
-  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
-  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Own36 source roles17 valid compilerRED ->22 accepts14 exact rejects; four bypass/real-empty controls unchanged;10 runtime controls SDK/restored/plan/fresh pass;22 modules exact identity/plan. New180/postcall274/duplicate slots121 pass575 assertions; fresh/focused stderr empty. Manual continuity/cadence/diagnosis/map/history/claim-input/diff and book.
+  Canonical trigger: Full23.4/final clean push after48.4.1/48.5/45, pressure20.1/selection23.4.1/lifecycle/progress and other prerequisites; no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored compile/slot/map/runtime/diagnostic assertions; no population measurement.
 
   Added target scope from48.3.3: assess shared pure_blind_targets8 (6 valid/2 action rejects, actual current reference6 native/emitted pairs) plus4 strict blind negatives alongside original/qualified12. Own baseline and compiler/map/slot/source/runtime/fresh proof; do not assume Dart or Rust failures exist in Julia. Ordinary progress39.8.1/parent-LX authority exclusions remain independent.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent36 roles original12/qualified12/pure8/strict4 have5 healthy builds17 intended-valid compiler RED14 intended rejects. Native/restored/plan/fresh baseline actual, no peer inference. New normal original RED17fail32pass retained before compiler changes.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: spec/Validator _check_target unconditionally applied regex count to declared blind calls; compiler/CompiledSpec _build_dependency_regex_state then interpreted every call dependency as a regex dependency. Validator-only epoch isolates12 accepted referenced roles/five pure-code missing-slot errors and three independently observed blind-push runtime failures.
+  - [x] **FIX**: After declaration existence, skip action slot checks for blind/bare AND. Filter absent-regex call refs only for exclusively blind dependency maps; retain complete rule refs, real empty patterns, action/mixed strictness and unknown-target errors. No invented pattern or entry slot, new API/schema/family/interpreter/emitter/lifecycle policy.
+  - [x] **ADDRESSED (verified)**: All22 intended-valid source roles compile.14 strict full rejection objects/five healthy full artifact-result records/four bypass-empty controls exact. Ten runtime controls native/restored/plan/fresh pass, pure targets have0 patterns/slots and null entry_slot; mixed map only real Token/x while call refs include Child/Token.22 modules full v2 metadata/plan exact,5 original healthy+12 intermediate reused/5 new pure emitted.
+  - [x] **NO REGRESSION**: New180/blind postcall274/duplicate slots121 pass575 assertions, fresh/focused stderr empty. Original parent-LX runtime3 excluded48.2.2.1; qualified .push failures3 owned48.4.1 with compiler coverage retained, no runtime parity claim. Runtime/emitter/fixtures unchanged; no ordinary zero-progress or full gate/admission claim. Initial stderr precompile coordination is retained, final focused/fresh empty.
+  - [x] **LOCKSTEP**: Packet julia-referenced-intake.json.gz retains actual source/instrument/normal baseline and final/runtime/compiler epochs/modules/metadata/results/receipts. Normal included once; exact canonical selection23.4.1 remains. Book/card/map/roadmap/task/live/resume/history align;48.4.1 immediately next before48.5/warnings/45, authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4 - compile Julia blind targets without regex slots`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1`
+  Status: `pending` / P1 immediately after48.4 before48.5/45/admission/push
+  Goal: Preserve the public enclosing-parent call semantics of Julia blind fluent push through the existing typed call/mutation owner.
+  Reproduce / impact:48.4 independent original12/qualified12 baseline rejected blind no-regex declarations. Validator-only repair compiles qualified blind_no_regex, marked_blind_target and markerless_blind, then native/restored raises push() in rule Top requires an action-edge child context; generated plan wraps same failure. Public reference qualified values are[[x]] at cursor1. Exact producer/source/compiled/plan/results retained in julia-referenced-intake. Existing _require_runtime_action_edge_child! rejects current_edge=nothing for blind post-call push; do not append prior child result as substitute.
+  Acceptance: Own13 shared blind_parent_push/repeated source native/restored/plan/fresh baseline and exact typed String/zero/false/null/Array/explicit target/guard/no-tail controls before edits. Route only blind fluent call through existing typed enclosing-parent call machinery; preserve target/index/argument/function precedence/recursion and other action/free/callback behavior. Track independently observed fresh rule-array or progress defects with precise scope; do not infer Dart failures in Julia. Remove exactly owned runtime exclusions after actual repair and retain same emitted modules/metadata/healthy controls where applicable. Normal/direct dependents/book/docs/proof/commit before48.5.
+  Planned verification tier: focused
+  Planned focused checks: Own13 source controls and qualified referenced7 runtime, typed/native/restored/plan/fresh outcomes and direct blind/post-call/progress neighbors; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after exact selection23.4.1, pressure20.1 and lifecycle/progress/Phase0 prerequisites.
+  Planned claim verification: none: Finite authored feature/diagnostic assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -10096,7 +10118,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.4` | `pending` | Independently assess Julia referenced and pure-code blind targets. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1` | `pending` | Preserve Julia blind fluent enclosing-parent push calls. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

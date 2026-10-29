@@ -1833,13 +1833,24 @@ function _build_dependency_regex_state(; compiled_rule_order, rules_by_label)
         if isempty(rule.dependency_refs)
             continue
         end
+        # Keep calls on the rule, but project only real regex dependencies for
+        # exclusively blind owners. Action and mixed owners remain slot-strict.
+        regex_refs = if !isempty(rule.blind_edges) && isempty(rule.action_edges)
+            filter(rule.dependency_refs) do ref
+                target = get(rules_by_label, ref.label, nothing)
+                target === nothing || !isempty(target.regex_patterns)
+            end
+        else
+            rule.dependency_refs
+        end
+        isempty(regex_refs) && continue
         patterns = [
             _dependency_pattern_for(owner_label = label, ref = ref, rules_by_label = rules_by_label)
-            for ref in rule.dependency_refs
+            for ref in regex_refs
         ]
         dependency_regex_map[label] = CompiledDependencyRegexEntry(
             owner_label = label,
-            dependency_refs = rule.dependency_refs,
+            dependency_refs = regex_refs,
             patterns = patterns,
         )
     end

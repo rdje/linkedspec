@@ -44,6 +44,23 @@ an instrument refinement, not product RED. Packet perl-referenced-intermediate-
 intake.json.gz retains actual inputs/producers/source/channels/receipts.
 Canonical selection23.4.1, peers and full admission remain separate.
 
+## Julia48.4 bounded compiler repair (2026-10-29)
+
+Julia independently reproduced17 valid compiler failures across original12,
+qualified12 and pure8, retaining14 strict rejects and5 healthy builds. Validation
+now distinguishes declaration calls from action slots; exclusively blind regex
+dependency projection omits absent patterns while rule call refs remain complete.
+All22 valid roles compile,14 full diagnostic objects/five healthy artifact-result
+records/four bypass-empty controls remain exact. Qualified4 and pure6 runtime
+controls pass native/restored/plan/fresh;22 emitted modules keep v2 metadata and
+plan. Three qualified parent-push failures are owned48.4.1 immediately next,
+with compiler coverage retained. Original parent-LX runtime remains unqualified.
+New180/postcall274/duplicate slots121 pass575 assertions, fresh/focused stderr
+empty; no interpreter/emitter/fixture/schema/ordinary policy change. Packet
+julia-referenced-intake.json.gz retains actual sources/producers/compiler epochs/
+normal RED-GREEN/modules/results/receipts. Canonical selection23.4.1 and full
+admission remain separate. See [[julia-blind-target-regex-projection]].
+
 ## Dart48.3 bounded validator repair (2026-10-29)
 
 Target validation now checks only declared-rule existence for blind/bare AND,
