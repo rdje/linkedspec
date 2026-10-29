@@ -1,0 +1,319 @@
+[
+  {
+    "name": "root_blind_I",
+    "source": "Top:: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "root_regex_I",
+    "source": "Top:: /x/ I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "cursor_move_before_local",
+    "source": "Top:: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);ignored=capture_until_boundary(End);primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0,
+      0,
+      0,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "boundary_move_before_local",
+    "source": "Top:: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);ignored=capture_until_boundary(End);start_capture_slice();primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0,
+      0,
+      0,
+      2,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "incoming_child_I",
+    "source": "Top::\n /αβ/\n -> Top[0] {return(call(Child))}\nChild: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0,
+      0,
+      0,
+      2,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "matched_unicode_prefix",
+    "source": "Top::\n /cat/\n I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "αβ",
+        2,
+        "αβ",
+        2
+      ],
+      2,
+      "",
+      0,
+      5,
+      5,
+      5,
+      0
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "empty_at_zero",
+    "source": "Top::\n /(?=x)/\n I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "",
+        0,
+        "",
+        0
+      ],
+      0,
+      "",
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "empty_after_prefix",
+    "source": "Top::\n /(?=x)/\n I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "αβ",
+        2,
+        "αβ",
+        2
+      ],
+      2,
+      "",
+      0,
+      2,
+      2,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "zero_text_present",
+    "source": "Top::\n /0/\n I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "0",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "",
+        0,
+        "",
+        0
+      ],
+      0,
+      "",
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    "expected_cursor": 1
+  },
+  {
+    "name": "reversed_named_origins",
+    "source": "Top::\n /cat/\n I {mark_input_end(stable);mark_input_end(text);mark_input_end(width);}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      5,
+      5,
+      5,
+      5,
+      0
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "missing_marks_present_match",
+    "source": "Top::\n /cat/\n I {clear_mark(stable);clear_mark(text);clear_mark(width);}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      null,
+      null,
+      null,
+      5,
+      0
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "independent_anonymous_origin",
+    "source": "Top::\n /cat/\n I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);ignored=capture_until_boundary(Cat);start_capture_slice();}\n -> Top[0] {primitive=[capture_from(stable),capture_len_from(stable),capture_take(text),capture_take_len_from(width)];order=\"\";value=capture_len_from(stable).coalesce({order=cat(order,\"F\");7});return([primitive,value,order,mark_pos(stable),mark_pos(text),mark_pos(width),cursor_pos(),capture_slice_pos()])}\nCat: /cat/\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "αβ",
+        2,
+        "αβ",
+        2
+      ],
+      2,
+      "",
+      0,
+      5,
+      5,
+      5,
+      2
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "independent_cursor_rest_between",
+    "source": "Top:: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);mark_input_end(finish);ignored=capture_until_boundary(End);primitive=[capture_until_cursor_from(stable),capture_until_cursor_len_from(stable),capture_rest_from(stable),capture_rest_len_from(stable),capture_between(stable,finish),capture_len_between(stable,finish)];\ncursor_text=capture_take_until_cursor_from(text);rest_width=capture_take_rest_len_from(width);between=capture_take_between(stable,finish);\nreturn([primitive,cursor_text,rest_width,between,mark_pos(stable),mark_pos(text),mark_pos(width),capture_slice_pos(),cursor_pos()]);}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "αβ",
+        2,
+        "αβEND",
+        5,
+        "αβEND",
+        5
+      ],
+      "αβ",
+      5,
+      "αβEND",
+      5,
+      2,
+      5,
+      0,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "name_effect_read",
+    "source": "Top:: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);ignored=capture_until_boundary(End);order=\"\";value=capture_len_from({order=cat(order,\"N\");mark_here(stable);return(\"stable\")}).coalesce({order=cat(order,\"F\");7});return([value,order,mark_pos(stable),cursor_pos(),capture_slice_pos()]);}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      7,
+      "NF",
+      2,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "name_effect_take",
+    "source": "Top:: I {mark_input_start(stable);mark_input_start(text);mark_input_start(width);ignored=capture_until_boundary(End);order=\"\";value=capture_take({order=cat(order,\"N\");mark_here(text);return(\"text\")}).coalesce({order=cat(order,\"F\");7});return([value,order,mark_pos(text),cursor_pos(),capture_slice_pos()]);}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      7,
+      "NF",
+      2,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  }
+]

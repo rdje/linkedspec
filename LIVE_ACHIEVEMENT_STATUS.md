@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Named-mark error guidance aligned with41.1; named47 next. Prose-only focused PNT/no push.
+Named47.0 target qualified15: Perl7/8, Dart2/13;47.1 next, then peers/49/48/45. Focused PNT/no push.
 
 ## Latest Completed Slice
 
-The named-mark overview still described collecting-parent native error loss after generic41.1 fixed it. Replace that one stale sentence with the verified structured-context/undefined-result/inner-error channel and valid-null distinction. Exact old/new occurrence checks and mdBook render pass; no runtime, test, helper, argument or endpoint changes and no repeated feature verification. Task/live/resume/chronology updated; named47 remains next, then48/45 and existing admission prerequisites. Focused authorized commit/no push.
+Existing typed span/local-match presence, named-span undef/valid-only take and ordered String word-name42 authority freeze15 named read/take/overload controls before production. Missing local-match left edge returns undef without projection or extra mark mutation; names still finish once before mark reads, real empty/zero stays present, and capture_take(name) uses/advances only that named mark while capture_take() stays anonymous. Independent current Perl native/separate emitted clean+seeded has7 healthy8RED across routes; native alone8healthy7RED because name_effect_take returns correct value but fresh arithmetic warns. Public substitutions show raw LSPOS-length(LMATCH) without presence and readonly reversal guards; defined mark alone is insufficient. Dart native/restored/plan/separate VM has2healthy13RED: nullable endpoint fallback manufactures spans and named capture_take ignores its name/effects and mutates the anonymous boundary. Exact source/compiled/emitted/metadata/results/cursors/traces/channels retained; no peer failures inferred. Initial16 includes writer discovery: Perl missing-local mark writers create marks with invalid-offset frame cleanup warning, plus two fresh uninitialized arithmetic warnings; Dart control is healthy. Public emitted raw offset assignments identify writer producer, not a frame-validator defect. Separate diagnostic-only source/record and P1 owner49 after47 before48/45 own writer authority/independent repairs; qualified normative47 fixture has15, no silent writer policy selected. Initial writer separator assumed identical warning arrays and initial reader assumed fresh health from native values; actual channels qualified before freeze, no product or input correction credit. No production/helper/key/frame/schema/policy change. Packet named-capture-endpoint-authority-intake.json.gz retains actual producers/initial16+qualified15/source/modules/substitution/metadata/writer diagnostic/results/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. Independent47.1 Perl then47.2 Rust/47.3 Dart/47.4 Julia/47.5 safe Lua each own repairs/compatibility before49/48/45/selection/full admission. Focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.47 from clean41.1.1. Follow frozen41.1 resume plan: recover named endpoint/mark/source/name-order authority, split target/backend leaves, independently assess all five backends before repairs. Preserve writers/through-cursor/rest/missing/reversed/zero/Unicode/name effects; then48/45 before wider features/full23.4/push. Pressure20.1/selection23.4.1 and all broader prerequisites remain separate.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.47.1 from clean47.0. Read named-capture-endpoint-presence-authority.md and15-source fixture/current Perl native+clean/seeded baseline7healthy8RED (native8/7). Public lowering shows raw local endpoint arithmetic and readonly reversed spans; capture_take(name) already works in valid Perl contexts. Normal RED before guarded local endpoint/ordered-span changes in sole Contracts named factories, preserving captured names/effects/helper identities/valid zero/Unicode/available cursor-rest-between/anonymous overload. Preserve exact healthy behavior/public metadata; qualify stale emitted artifacts/regeneration. Focused nearby named argument/range/Number/anonymous tests/book/docs/commit, then independent47.2-.5. Writer invalid-offset warning/state49 is separately owned after47 before referenced-blind48/Phase0 owner45/wider features/full23.4/push. No peer/policy/schema/frame/right expansion; selection23.4.1/pressure20.1/declared-host/phase and broader prerequisites separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.47.0` — Named47.0 target qualified15: Perl7/8, Dart2/13;47.1 next, then peers/49/48/45. Focused PNT/no push.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.41.1.1` — Named-mark error guidance aligned with41.1; named47 next. Prose-only focused PNT/no push.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.41.1` — Nested native error41.1 repaired12 losses,2 direct/8 healthy preserved; named47 then48/45 next. Focused PNT/no push.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.41.0` — Nested error41.0 target qualified9/22 with12 actual native losses;41.1 next, then47/48/45. No full gate/push.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.47 from clean41.1.1. Follow frozen41.1 res
 - `TYPE-REFERENCE-BOOK.1.2.23.3.38.2` — Julia selected-match LS cursor repaired; safe dual-host Lua next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.38.1` — Dart selected-match LS cursor repaired; independent Julia repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.38.0` — Early-LS selected cursor authority frozen; independent Dart repair next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8` — Julia ordinary unknown-helper code repaired; P1 early-LS cursor authority next.
 
 ## History
 

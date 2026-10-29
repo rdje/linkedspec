@@ -1,0 +1,229 @@
+{
+  "dart_sdk": {
+    "native": {
+      "result": {
+        "cursor_char_offset": 2,
+        "cursor_code_unit": 2,
+        "lifecycle_events": [
+          {
+            "lifecycle": "I",
+            "line": 1,
+            "rule_label": "Top"
+          }
+        ],
+        "matched": true,
+        "output": [
+          [
+            0,
+            0,
+            0,
+            0,
+            2,
+            2
+          ]
+        ],
+        "value": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          2
+        ]
+      }
+    },
+    "plan": {
+      "value": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        2
+      ]
+    },
+    "restored": {
+      "result": {
+        "cursor_char_offset": 2,
+        "cursor_code_unit": 2,
+        "lifecycle_events": [
+          {
+            "lifecycle": "I",
+            "line": 1,
+            "rule_label": "Top"
+          }
+        ],
+        "matched": true,
+        "output": [
+          [
+            0,
+            0,
+            0,
+            0,
+            2,
+            2
+          ]
+        ],
+        "value": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          2
+        ]
+      }
+    }
+  },
+  "dart_separate_vm": {
+    "actual": {
+      "value": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        2
+      ]
+    },
+    "input": "αβEND",
+    "metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "format_version": 2,
+      "source_identity": "named-capture-endpoint-absence.spec"
+    },
+    "plan": [
+      {
+        "family": "default",
+        "label": "Top"
+      },
+      {
+        "family": "default",
+        "label": "End"
+      }
+    ]
+  },
+  "initial_candidate_expected": [
+    0,
+    0,
+    0,
+    0,
+    2,
+    2
+  ],
+  "input": "αβEND",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.49",
+  "perl_fresh_clean_seeded": [
+    {
+      "cursor": 2,
+      "error": "",
+      "error_fields": null,
+      "metadata": {
+        "contract_id": "linkedspec-generated-source-v2",
+        "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+        "entry_rules": [
+          {
+            "is_top": 1,
+            "label": "Top"
+          },
+          {
+            "is_top": 0,
+            "label": "End"
+          }
+        ],
+        "format_version": 2,
+        "plan": [
+          {
+            "family": "default",
+            "label": "Top"
+          },
+          {
+            "family": "default",
+            "label": "End"
+          }
+        ],
+        "source_identity": "named-capture-endpoint-absence.spec"
+      },
+      "seed": "clean",
+      "value": [
+        1,
+        1,
+        0,
+        0,
+        2,
+        2
+      ],
+      "warnings": [
+        "Use of uninitialized value in subtraction (-) at (eval 100) line 55.\n",
+        "Use of uninitialized value $LSPOS in subtraction (-) at (eval 100) line 55.\n",
+        "\t(in cleanup) (LinkedSpec::RecognitionTransaction) -E- frame state mark offset must be a nonnegative integer\n"
+      ]
+    },
+    {
+      "cursor": 2,
+      "error": "",
+      "error_fields": null,
+      "metadata": {
+        "contract_id": "linkedspec-generated-source-v2",
+        "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+        "entry_rules": [
+          {
+            "is_top": 1,
+            "label": "Top"
+          },
+          {
+            "is_top": 0,
+            "label": "End"
+          }
+        ],
+        "format_version": 2,
+        "plan": [
+          {
+            "family": "default",
+            "label": "Top"
+          },
+          {
+            "family": "default",
+            "label": "End"
+          }
+        ],
+        "source_identity": "named-capture-endpoint-absence.spec"
+      },
+      "seed": "poisoned",
+      "value": [
+        1,
+        1,
+        0,
+        0,
+        2,
+        2
+      ],
+      "warnings": [
+        "Use of uninitialized value in subtraction (-) at (eval 100) line 55.\n",
+        "Use of uninitialized value $LSPOS in subtraction (-) at (eval 100) line 55.\n",
+        "\t(in cleanup) (LinkedSpec::RecognitionTransaction) -E- frame state mark offset must be a nonnegative integer\n"
+      ]
+    }
+  ],
+  "perl_native": {
+    "context_error": null,
+    "cursor": 2,
+    "emitted": "# LinkedSpec generated parser source.\n# contract_id: linkedspec-generated-source-v2\n# format_version: 2\n# source_identity: LINKEDSPEC_GENERATED_SOURCE_IDENTITY\nno strict;\nno warnings 'void';\nuse re 'eval';\nuse LinkedSpec::GeneratedSource ();\nuse LinkedSpec::Runtime ();\nuse LinkedSpec::Trace ();\nuse LinkedSpec::EntryRuleSelection ();\nuse LinkedSpec::RuntimeDiagnosticOutput ();\nuse LinkedSpec::RuntimeSemanticObservation ();\nuse LinkedSpec::Numeric ();\nuse LinkedSpec::UnicodeCaseMapping ();\nuse LinkedSpec::RecognitionTransactionRuntime ();\nuse LinkedSpec::InterMatchGapRuntime ();\nuse LinkedSpec::ProgressiveSpanDispatchRuntime ();\nuse LinkedSpec::StagedASTEnrichmentRuntime ();\nsub _trace_runtime_mark_event { return LinkedSpec::GeneratedSource::trace_mark_event(@_) }\nour $LINKEDSPEC_GENERATED_SOURCE_CONTRACT = 'linkedspec-generated-source-v2';\nour $LINKEDSPEC_GENERATED_SOURCE_FORMAT = 2;\nour $LINKEDSPEC_GENERATED_SOURCE_IDENTITY = 'named-capture-endpoint-absence.spec';\n\nmy $descr = {\n spec => {\n\n Top => sub {\nmy ($descr, $STRING, $info) = @_;\n$info = {} unless ref($info) eq \"HASH\";\nrequire LinkedSpec::SourceLocation;\nLinkedSpec::SourceLocation::Runtime::ensure_authority($info, $STRING);\nmy $IMATCH      = $$info{match};\nmy @IMATCH_LIST = @{$$info{match_list} // []};\nmy %IMATCH_HASH = %{$$info{match_hash} // {}};\nmy $IINDEX      = $$info{index};\n# I and blind handlers have no selected local match. Bind their registers here\n# so they cannot resolve to package globals outside a matching branch.\nmy ($LMATCH, $LINDEX, $LSPOS);\nmy (@LMATCH_LIST, %LMATCH_HASH);\nmy $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(\n $info, $STRING, pos $$STRING, \"handler_entry\"\n);\n$$info{marks} = {} unless ref($$info{marks}) eq \"HASH\";\nmy $__ls_recognition_invocation = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(\n $descr, $STRING, $info, \\$IPOS, \"Top\"\n);\n\n\nmy @Top;\n\nmy $ignored;\nmy %__ls_binding_presence;\ndo { LinkedSpec::SourceLocation::Runtime::mark_delete($info, 'Top', 'fresh_start') };do { LinkedSpec::SourceLocation::Runtime::mark_delete($info, 'Top', 'fresh_end') };do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'fresh_start', $LSPOS - length($LMATCH), \"mark_match_start\"); _trace_runtime_mark_event(operation => 'mark_match_start', rule_label => 'Top', mark_name => 'fresh_start', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark };do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'fresh_end', $LSPOS, \"mark_match_end\"); _trace_runtime_mark_event(operation => 'mark_match_end', rule_label => 'Top', mark_name => 'fresh_end', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark };\ndo { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'here', pos $$STRING, \"mark_here\"); _trace_runtime_mark_event(operation => 'mark_here', rule_label => 'Top', mark_name => 'here', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark };do { my $__ls_capture_boundary = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $IPOS, \"mark_capture_slice\"); my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'boundary', $__ls_capture_boundary, \"mark_capture_slice\"); _trace_runtime_mark_event(operation => 'mark_capture_slice', rule_label => 'Top', mark_name => 'boundary', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark };do { $ignored = do { my @__ls_boundary_labels = ('End'); my $__ls_saved_cursor = pos $$STRING; my $__ls_capture_start = defined($__ls_saved_cursor) ? $__ls_saved_cursor : 0; my $__ls_boundary_start; my $__ls_boundary_valid = 0; for my $__ls_boundary_label (@__ls_boundary_labels) { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, \"capture_until_boundary_probe\") if defined($__ls_saved_cursor); my $__ls_boundary_rule = (ref($$descr{spec}) eq \"HASH\") ? $$descr{spec}{$__ls_boundary_label} : undef; my $__ls_boundary_regexes = ref($__ls_boundary_rule) eq \"HASH\" ? $__ls_boundary_rule->{re} : ((ref($__ls_boundary_rule) eq \"CODE\" && ref($$descr{recognition_regex_map}) eq \"HASH\") ? $$descr{recognition_regex_map}{$__ls_boundary_label} : undef); next unless ref($__ls_boundary_regexes) eq \"ARRAY\" && @{$__ls_boundary_regexes}; my $__ls_boundary_re = LinkedRE::oredRE(@{$__ls_boundary_regexes}); $__ls_boundary_valid = 1; my $__ls_boundary_info = LinkedRE::or($STRING, $__ls_boundary_re, $info); next unless defined($__ls_boundary_info); my $__ls_candidate_start = (pos $$STRING) - length($__ls_boundary_info->{match}); $__ls_boundary_start = $__ls_candidate_start if !defined($__ls_boundary_start) || $__ls_candidate_start < $__ls_boundary_start; } $__ls_boundary_start = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, \"capture_until_boundary\") if $__ls_boundary_valid && !defined($__ls_boundary_start); if ($__ls_boundary_valid && $__ls_boundary_start >= $__ls_capture_start) { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_boundary_start, \"capture_until_boundary\"); LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_capture_start, $__ls_boundary_start, \"capture_until_boundary\") } else { LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, \"capture_until_boundary_restore\") if defined($__ls_saved_cursor); undef } }; $__ls_binding_presence{\"ignored\"} = 1; scalar($ignored) };do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'moved', pos $$STRING, \"mark_here\"); _trace_runtime_mark_event(operation => 'mark_here', rule_label => 'Top', mark_name => 'moved', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark };\nreturn [do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::mark_exists($info, 'Top', 'fresh_start') }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::mark_exists($info, 'Top', 'fresh_end') }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'here', \"mark_pos\") }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'boundary', \"mark_pos\") }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'moved', \"mark_pos\") }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { LinkedSpec::SourceLocation::Runtime::cursor_position($info, $STRING, pos $$STRING, \"cursor_pos\") }); @__ls_evaluated_values }];\n },\n\n End => sub {\nmy ($descr, $STRING, $info) = @_;\n$info = {} unless ref($info) eq \"HASH\";\nrequire LinkedSpec::SourceLocation;\nLinkedSpec::SourceLocation::Runtime::ensure_authority($info, $STRING);\nmy $IMATCH      = $$info{match};\nmy @IMATCH_LIST = @{$$info{match_list} // []};\nmy %IMATCH_HASH = %{$$info{match_hash} // {}};\nmy $IINDEX      = $$info{index};\n# I and blind handlers have no selected local match. Bind their registers here\n# so they cannot resolve to package globals outside a matching branch.\nmy ($LMATCH, $LINDEX, $LSPOS);\nmy (@LMATCH_LIST, %LMATCH_HASH);\nmy $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(\n $info, $STRING, pos $$STRING, \"handler_entry\"\n);\n$$info{marks} = {} unless ref($$info{marks}) eq \"HASH\";\nmy $__ls_recognition_invocation = LinkedSpec::RecognitionTransactionRuntime::enter_invocation(\n $descr, $STRING, $info, \\$IPOS, \"End\"\n);\n\n\nmy @End;\n\n\n },\n },\n dependency_regex_map => {\n\n },\n dependency_slot_map => {\n\n },\n recognition_regex_map => {\n Top => [],\n End => [do { my $linkedspec_pattern = '(?^:END)'; qr/$linkedspec_pattern/ }]\n }\n};\n\nfor my $linkedspec_rule_label (sort keys %{$descr->{spec}}) {\n $descr->{spec}{$linkedspec_rule_label} =\n  LinkedSpec::RecognitionTransactionRuntime::guard_rule_handler(\n   $linkedspec_rule_label, $descr->{spec}{$linkedspec_rule_label},\n  );\n}\n\nmy $LINKEDSPEC_GENERATED_EXPECTED_PLAN = [\n { label => 'Top', family => 'default' },\n { label => 'End', family => 'default' },\n];\nmy $LINKEDSPEC_GENERATED_ACTIVE_PLAN = LinkedSpec::GeneratedSource::clone_plan($LINKEDSPEC_GENERATED_EXPECTED_PLAN);\nmy $LINKEDSPEC_GENERATED_ENTRY_RULES = [\n { label => 'Top', is_top => 1 },\n { label => 'End', is_top => 0 },\n];\nmy $LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE = undef;\n\nsub LinkedSpecGeneratedMetadata {\n return {\n  contract_id => $LINKEDSPEC_GENERATED_SOURCE_CONTRACT,\n  format_version => $LINKEDSPEC_GENERATED_SOURCE_FORMAT,\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  plan => LinkedSpec::GeneratedSource::clone_plan($LINKEDSPEC_GENERATED_EXPECTED_PLAN),\n  entry_rule_contract => $LinkedSpec::EntryRuleSelection::CONTRACT_ID,\n  entry_rules => LinkedSpec::GeneratedSource::clone_entry_rules($LINKEDSPEC_GENERATED_ENTRY_RULES),\n }\n}\n\nsub LinkedSpecGeneratedPlan {\n return LinkedSpec::GeneratedSource::clone_plan($LINKEDSPEC_GENERATED_EXPECTED_PLAN)\n}\n\nsub ValidateGeneratedPlan {\n my ($plan, $actual_contract) = @_;\n $plan = $LINKEDSPEC_GENERATED_ACTIVE_PLAN unless defined $plan;\n $actual_contract = $LINKEDSPEC_GENERATED_SOURCE_CONTRACT unless defined $actual_contract;\n return LinkedSpec::GeneratedSource::validate_plan(\n  expected => $LINKEDSPEC_GENERATED_EXPECTED_PLAN,\n  actual => $plan,\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  expected_contract => 'linkedspec-generated-source-v2',\n  actual_contract => $actual_contract,\n )\n}\n\nsub Execute {\n my ($input_ref, $invocation_options) = @_;\n ValidateGeneratedPlan();\n LinkedSpec::Runtime::_prepare_public_input($input_ref);\n my $diagnostic_sink = LinkedSpec::RuntimeDiagnosticOutput::validate_invocation_options(\n  $invocation_options,\n );\n my $semantic_observation_sink = LinkedSpec::RuntimeSemanticObservation::validate_invocation_options(\n  $invocation_options,\n );\n my $progressive_dispatch_state = LinkedSpec::ProgressiveSpanDispatchRuntime::begin_invocation(\n  $input_ref,\n  $invocation_options,\n );\n my $staged_enrichment_state = LinkedSpec::StagedASTEnrichmentRuntime::begin_invocation(\n  $input_ref,\n  $invocation_options,\n );\n my $explicit_entry_rule = $LINKEDSPEC_GENERATED_CONFIGURED_ENTRY_RULE;\n if (ref($invocation_options) eq 'HASH'\n  && defined($invocation_options->{top_rule})\n  && length($invocation_options->{top_rule})) {\n  $explicit_entry_rule = $invocation_options->{top_rule};\n }\n my $entry_selection = LinkedSpec::EntryRuleSelection::select_entry_rule(\n  $LINKEDSPEC_GENERATED_ENTRY_RULES,\n  $explicit_entry_rule,\n );\n unless ($entry_selection->{ok}) {\n  my $entry_rule = $entry_selection->{entry_rule};\n  LinkedSpec::GeneratedSource::trace_role(\n   role => 'generated_entry_selection',\n   source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n   rule_label => defined($entry_rule) ? $entry_rule : '',\n   status => 'error',\n  );\n  die LinkedSpec::GeneratedSource::new_error(\n   stage => $entry_selection->{stage},\n   code => $entry_selection->{code},\n   summary => 'Generated parser entry-rule selection failed',\n   source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n   defined($entry_rule) ? (entry_rule => $entry_rule, rule_label => $entry_rule) : (),\n   detail => defined($entry_rule)\n    ? \"No declared rule matches explicit entry selector '$entry_rule'\"\n    : 'Generated parser source has no declared entry rule',\n  )\n }\n my $entry_rule = $entry_selection->{entry_rule};\n my $entry_family = LinkedSpec::GeneratedSource::family_for_rule(\n  $LINKEDSPEC_GENERATED_EXPECTED_PLAN,\n  $entry_rule,\n );\n my $sink_slot = LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name();\n my $control_error_slot = LinkedSpec::RuntimeDiagnosticOutput::control_error_slot_name();\n my $semantic_sink_slot = LinkedSpec::RuntimeSemanticObservation::sink_slot_name();\n my $semantic_control_error_slot = LinkedSpec::RuntimeSemanticObservation::control_error_slot_name();\n my $progressive_dispatch_slot = LinkedSpec::ProgressiveSpanDispatchRuntime::descriptor_slot_name();\n local $descr->{$sink_slot} = $diagnostic_sink;\n local $descr->{$control_error_slot} = undef;\n local $descr->{$semantic_sink_slot} = $semantic_observation_sink;\n local $descr->{$semantic_control_error_slot} = undef;\n local $descr->{$progressive_dispatch_slot} = $progressive_dispatch_state;\n my $semantic_input_identity = defined($semantic_observation_sink)\n  ? LinkedSpec::RuntimeSemanticObservation::input_identity($input_ref)\n  : undef;\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_entry_selection',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n  selection_basis => $entry_selection->{basis},\n  status => 'ok',\n );\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_rule_enter',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n );\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_family_decision',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n );\n my ($result, $execution_error);\n my $ok = eval {\n  $result = &{$descr->{spec}{$entry_rule}}($descr, $input_ref);\n  $result = LinkedSpec::StagedASTEnrichmentRuntime::complete_invocation(\n   $staged_enrichment_state,\n   $descr,\n   $input_ref,\n   $result,\n  );\n  1\n };\n $execution_error = $@;\n LinkedSpec::GeneratedSource::trace_role(\n  role => 'generated_rule_exit',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n  status => $ok ? 'ok' : 'error',\n );\n die $execution_error\n  if !$ok && (\n   LinkedSpec::RuntimeDiagnosticOutput::is_marked_control_error(\n    $descr,\n    $execution_error,\n   )\n   || LinkedSpec::RuntimeSemanticObservation::is_marked_control_error(\n    $descr,\n    $execution_error,\n   )\n  );\n die $execution_error\n  if !$ok && (\n   LinkedSpec::RecognitionTransactionRuntime::is_error($execution_error)\n   || LinkedSpec::RecognitionTransactionRuntime::is_recursive_observation_error($execution_error)\n   || LinkedSpec::InterMatchGapRuntime::is_error($execution_error)\n   || LinkedSpec::ProgressiveSpanDispatchRuntime::is_error($execution_error)\n   || LinkedSpec::StagedASTEnrichmentRuntime::is_error($execution_error)\n  );\n die LinkedSpec::GeneratedSource::new_error(\n  stage => 'execute_generated',\n  code => 'generated_execution_failed',\n  summary => 'Generated parser execution failed',\n  source_identity => $LINKEDSPEC_GENERATED_SOURCE_IDENTITY,\n  rule_label => $entry_rule,\n  handler_family => $entry_family,\n  detail => $execution_error,\n ) unless $ok;\n LinkedSpec::RuntimeSemanticObservation::emit_rule_result(\n  $descr,\n  rule_label => $entry_rule,\n  position => pos($$input_ref),\n  input_identity => $semantic_input_identity,\n );\n return $result\n}\n\nsub ExecuteWithTrace {\n my ($input_ref, $trace_config, $invocation_options) = @_;\n require LinkedSpec::Trace;\n LinkedSpec::Trace::configure_trace(%$trace_config) if ref($trace_config) eq 'HASH';\n return Execute($input_ref, $invocation_options)\n}\n\nsub Get { return Execute(@_) }\n",
+    "error": "",
+    "error_fields": null,
+    "source": "Top:: I {clear_mark(fresh_start);clear_mark(fresh_end);mark_match_start(fresh_start);mark_match_end(fresh_end);\nmark_here(here);mark_capture_slice(boundary);ignored=capture_until_boundary(End);mark_here(moved);\nreturn([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(here),mark_pos(boundary),mark_pos(moved),cursor_pos()]);}\nEnd: /END/\n",
+    "value": [
+      1,
+      1,
+      0,
+      0,
+      2,
+      2
+    ],
+    "warnings": [
+      "\t(in cleanup) (LinkedSpec::RecognitionTransaction) -E- frame state mark offset must be a nonnegative integer\n"
+    ]
+  },
+  "scope": "Diagnostic-only writer absence, outside normative47 read/take fixture; authority pending before repair.",
+  "source": "Top:: I {clear_mark(fresh_start);clear_mark(fresh_end);mark_match_start(fresh_start);mark_match_end(fresh_end);\nmark_here(here);mark_capture_slice(boundary);ignored=capture_until_boundary(End);mark_here(moved);\nreturn([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(here),mark_pos(boundary),mark_pos(moved),cursor_pos()]);}\nEnd: /END/\n"
+}
