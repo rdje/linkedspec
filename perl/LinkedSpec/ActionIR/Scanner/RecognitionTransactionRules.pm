@@ -8,6 +8,8 @@ use 5.010;
 use strict;
 use warnings;
 
+use LinkedSpec::UnicodeXIDContinue ();
+
 sub try_scan_contract_ir_events {
  my ($id, $code) = @_;
  my %dispatch = (
@@ -20,6 +22,17 @@ sub try_scan_contract_ir_events {
  my $scanner = $dispatch{$id};
  return undef unless ref($scanner) eq 'CODE';
  return $scanner->($code)
+}
+
+# Only the unevaluated call's rule label uses the pinned rule-name class.
+# Result, token and observation-target variables keep their own grammar.
+sub _static_rule_callee {
+ my ($operand) = @_;
+ return undef unless defined($operand) && !ref($operand)
+  && $operand =~ /\Acall\s*\(\s*(.*?)\s*\)\z/s;
+ my $callee = $1;
+ return LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($callee)
+  ? $callee : undef
 }
 
 sub _scan_observation {
@@ -38,10 +51,7 @@ sub _scan_observation {
   my $args = $call->{args};
   my $target = ref($args) eq 'ARRAY' && @$args ? _trim_action_ir_value($args->[0]) : undef;
   my $operand = ref($args) eq 'ARRAY' && @$args > 1 ? _trim_action_ir_value($args->[1]) : undef;
-  my $callee = defined($operand)
-   && $operand =~ /\Acall\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\z/o
-   ? $1
-   : undef;
+  my $callee = _static_rule_callee($operand);
   my $operand_kind = !defined($operand) ? 'missing'
    : $operand =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o ? 'bare_value'
    : $operand =~ /\Acall\s*\(/o ? 'call_expression'
@@ -105,9 +115,7 @@ sub _scan_attempt {
   next unless defined($raw) && $raw =~ /\A(?<matched>[A-Za-z_][A-Za-z0-9_]*)\s*=\s*recognize_once\s*\(\s*(?<token>[A-Za-z_][A-Za-z0-9_]*)\s*,\s*(?<operand>.+)\s*\)\z/so;
   my ($matched, $token, $raw_operand) = ($+{matched}, $+{token}, $+{operand});
   my $operand = _trim_action_ir_value($raw_operand);
-  my $callee = defined($operand) && $operand =~ /\Acall\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)\z/o
-   ? $1
-   : undef;
+  my $callee = _static_rule_callee($operand);
   push @events, LinkedSpec::ActionIR::ScannerCore::_record_statement_source_event({
    raw => $raw,
    args => {

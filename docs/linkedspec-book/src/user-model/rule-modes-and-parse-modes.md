@@ -67,9 +67,46 @@ pinned class. For example, this root consumes `x` and returns `"OK"`:
 The recorded Perl native and emitted routes also execute `Töp`, `Töp` and
 `töp` as blind and direct-call targets. Existing emitted modules need the
 updated runtime; these guards require no source regeneration. Static Unicode
-operands inside `recognize_once` and `observe_recognition` still have a separate
-scanner restriction under repair. This does not change the ASCII grammar of
+operands inside `recognize_once` and `observe_recognition` use the same pinned
+rule-label class through scanning, lowering and execution. This does not change the ASCII grammar of
 transaction tokens, result bindings or observation target variables.
+
+Static operands remain unevaluated rule references. `call( Ω )` is valid when
+`Ω` is declared; `call("Ω")`, computed names, extra arguments and undeclared
+rules remain invalid in recognition and observation.
+
+For example, this recursive observation consumes `x` and returns `["OK","Ω"]`:
+
+```text
+Top::
+ I {
+  value = observe_recognition(observation, call(Ω))
+  return(array(value, observation["rule_label"]))
+ }
+Ω:AND
+ /x/ -> Ω[0] { return("OK") }
+```
+
+This transaction consumes `cd` and returns `"OK"`:
+
+```text
+Top::
+ I {
+  tx = recognition_checkpoint()
+  matched = recognize_once(tx, call(Ω))
+  payload = recognition_commit(tx)
+  return(payload)
+ }
+Ω:AND
+ /c/ -> Payload { return("OK") }
+Payload:AND
+ /d/
+```
+
+Unicode rule identity does not turn the transaction token `tx`, result variables
+or the observation target into Unicode variable names. The selected native,
+emitted and fresh-process controls also preserve precomposed, decomposed and
+case-distinct labels as authored.
 
 A rule label is followed by a colon form. The ordinary form uses one colon:
 

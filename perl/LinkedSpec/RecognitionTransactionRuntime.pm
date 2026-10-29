@@ -172,7 +172,7 @@ sub begin {
 sub attempt_static {
  my ($descr, $string_ref, $info, $boundary_ref, $token, $callee, $rule) = @_;
  my $guard = _current_guard($descr, $string_ref, $rule);
- unless (defined($callee) && !ref($callee) && $callee =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o) {
+ unless (LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($callee)) {
   _throw(
    code => 'recognition_static_rule_required',
    rule => $rule,

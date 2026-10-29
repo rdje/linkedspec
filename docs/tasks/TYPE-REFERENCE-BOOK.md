@@ -4887,6 +4887,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl48.2.6 adds t/unicode_rule_recognition_runtime.t (20 groups); exact canonical discovery must select it before admission. Static operand scanner48.2.6.1 remains separately owned immediately next.
 
+  Perl48.2.6.1 adds t/unicode_recognition_operands.t (22 groups), with scanner/lowering/runtime closure and exact negative diagnostics; canonical discovery must include it before admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9522,14 +9524,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6 - validate recognition rule identities with pinned Unicode`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1`
-  Status: `pending` / P1 immediately after48.2.6 before48.3/admission
-  Goal: Repair pinned Unicode static rule-callee extraction for recognize_once and observe_recognition without broadening token/result/target variable grammars.
+  Status: `completed` / P1 immediately after48.2.6 before48.3/admission
+  Goal: Repair pinned Unicode static rule-callee extraction, lowering and runtime validation for recognize_once and observe_recognition without broadening token/result/target variable grammars.
   Reproduction/impact: Current public Top I checkpoint/recognize_once(tx,call(Ω))/commit or observe_recognition(observation,call(Ω)) with declared Ω fails compiler policy before runtime. Four selected Unicode labels fail both routes; ASCII observation builds/runs. Initial ASCII recognition fixture used a return/recognition-acceptance mismatch and is not credited as product RED; nearest known two-level recognition source replaces it for guard compatibility. Scanner RecognitionTransactionRules.pm lines42/108 extract static callees through ASCII letter-first patterns, so event callee is missing. RecognitionTransactionPolicy rejects recognition_static_rule_required; RecursiveObservationPolicy rejects source_location_recursive_observation_operand/call_expression. Existing ADR0051 already authorizes these rule identities; do not widen result/token/observation-target identifiers or dynamic call expressions.
   Acceptance: Independently reproduce exact own compiler diagnostics/events and normal RED before edits; consume pinned classifier for static rule roles only, retain malformed/dynamic/unknown operands and full diagnostic compatibility, exact Unicode identity, source/emitted/fresh proof and focused recognition/observation neighbors. Qualify old emitted source reuse versus regeneration; no broad Unicode frontend completion.
-  Planned verification tier: focused
-  Planned focused checks: Own selected Unicode and ASCII recognition/observation compiler/runtime controls, static negatives and direct neighbors, book/map/docs/commit.
-  Planned canonical trigger: Existing Unicode policy unchanged; full23.4/final clean push after all prerequisites.
-  Planned claim verification: none: Finite authored functional and diagnostic assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Own selected Unicode and ASCII recognition/observation compiler/runtime controls, static negatives and direct neighbors, book/map/docs/commit.
+  Canonical trigger: Existing Unicode policy unchanged; full23.4/final clean push after all prerequisites.
+  Claim verification: none: Finite authored functional and diagnostic assertions, no population measurement.
+
+  Activation: clean `747b81a699789b12a2e9bf391a05683db9067c36`;48.2.6 committed/brief empty/no jobs. Full affected scanner and both policy callers recovered, plus public descriptor ActionIR event projection and known two-level recognition acceptance source. Both static-callee regexes are ASCII; token/result/target variables remain separate. Own compile/event/diagnostic/runtime baseline and normal RED before producer edits; classify new source generation versus reusable healthy modules honestly.
+
+  Bounded causal extension: Scanner-only intermediate proves event/compile acceptance but exposes two adjacent copies of the same ASCII rule-role restriction: RecognitionTransactionRuntime::attempt_static rejects the now-extracted Unicode callee with typed recognition_static_rule_required at0, and Contracts::_build_recursive_observation_contracts refuses to lower the Unicode callee, leaving generated assignment syntax that fails independent loading. Own both under this same static-operand feature before landing; three small role checks/one authority, no phase or variable policy change. Exact intermediate normal and source retained; initial intake JSON serialization refused a blessed typed error, so snapshot/projection repair precedes final receipt. This instrument failure is not product RED.
+
+  Instrument defect owned/fixed now: Unicode label-derived intermediate module filenames Töp/Töp/töp alias the same filesystem device/inode, so later writes overwrite earlier module files. Exact source remains in per-row JSON. Fresh replay source-integrity assertion refuses before execution. Qualify actual aliases, restore source bodies byte-exact to ASCII numeric artifact IDs, and gate them; logical labels remain exact metadata. Do not claim physical original-file reuse for reconstructed intermediate modules. Durable fact perl-unicode-artifact-filename-aliases records this portability rule.
+
+  - [x] **REPRODUCE / ISSUE**: Own22-source normal has2 valid ASCII healthy/8 valid Unicode compiler RED and12 strict negatives. Scanner-only causal intermediate accepts all10 but4 Unicode recognition calls fail typed runtime validation at0 and4 observation modules fail loading. No incomplete intermediate is feature credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Scanner extracts static callees with ASCII; Contracts observation lowerer repeats that rule-role restriction and leaves invalid generated syntax; Runtime attempt_static repeats ASCII and raises typed rejection. Distinct variable roles keep their own grammar. Actual events/public diagnostics/generated source locate each boundary.
+  - [x] **FIX**: Share scanner static-call extraction through pinned classifier; use the same existing predicate for observation callee lowering and runtime attempt. No token/result/target pattern or diagnostic/policy/state/schema/family change.
+  - [x] **ADDRESSED (verified)**: All10 valid sources pass native/emitted and separate-process modules, including exact Unicode identity.12 strict negative diagnostic objects and2 healthy ASCII source/metadata/event/results retained. Fresh reuses2 original ASCII modules and4 retained intermediate recognition source bodies restored byte-exact to numeric paths;4 intermediate malformed observation source bodies regenerated. Original Unicode compiler rejects produced no usable source. Numeric restoration verifies16 distinct physical files; no overwritten original-file reuse claim.
+  - [x] **NO REGRESSION**: New22 plus58 recognition/observation neighbor groups pass. Original observation fixture assumed the recognition-specific two-level dependency shape had the same ordinary observation input behavior; corrected to existing observed /x/ child authority before product edits, no oracle credit for that mistake. Scanner-only JSON instrument initially refused blessed errors; recursive plain projection retains typed fields and failed generated source. Fresh integrity check caught Unicode-derived filename aliases before replay; actual device/inode/hash cause recorded, byte-exact JSON source bodies restored under numeric IDs. Both initial/intermediate artifacts retained. Known emitted declaration warnings remain40.1.1. No full frontend/coexistence/peer claim.
+  - [x] **LOCKSTEP**: Packet perl-unicode-operand-intake.json.gz retains actual producer/inputs/before snapshots/RED/intermediate/GREEN/normal/modules/metadata/events/results/errors/receipts. Book/cards/map/roadmap/task/live/resume/history align; new normal canonical selection23.4.1 required before admission. Dart48.3 next then peers/warnings/45, parent-LX authority after20.1; authorized focused commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1 - honor pinned Unicode static recognition callees`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9986,7 +10002,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1` | `pending` | Repair Unicode static recognition and observation rule operands. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3` | `pending` | Repair Dart declared blind-target validation without a regex-slot requirement. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

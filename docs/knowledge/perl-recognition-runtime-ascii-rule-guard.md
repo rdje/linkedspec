@@ -36,3 +36,8 @@ eval IDs are normalized only in comparison. Initial instrument acceptance/cycle/
 transport/undef-inner corrections are disclosed in the packet. Static Unicode
 recognition/observation source operands fail earlier in the scanner; see
 [[perl-unicode-recognition-operand-extraction]], scheduled immediately next.
+
+The immediate static-operand owner48.2.6.1 subsequently repaired scanner,
+observation lowering and recognition-attempt rule guards. Its separate packet
+qualifies native/emitted/fresh and intermediate source regeneration requirements;
+the earlier runtime guard proof is not enlarged retroactively.

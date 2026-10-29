@@ -15,6 +15,7 @@ BEGIN {
 }
 
 use LinkedSpec::OwnerDispatch ();
+use LinkedSpec::UnicodeXIDContinue ();
 use LinkedSpec::ActionIR::BoundaryLabels ();
 use LinkedSpec::ActionIR::ProgressiveSpanDispatch ();
 use LinkedSpec::ActionIR::StagedParseJob ();
@@ -92,7 +93,7 @@ sub _build_recursive_observation_contracts {
     my ($result, $target, $callee) = @{$args}{qw/result target callee/};
     return $code unless defined($result) && $result =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
      && defined($target) && $target =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
-     && defined($callee) && $callee =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+     && LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($callee);
     return '$'.$result.' = LinkedSpec::RecognitionTransactionRuntime::observe_static('
      .'$descr, $STRING, $info, \\$IPOS, \\$'.$target.', '
      ._quote_recognition_transaction_string($callee).', '
