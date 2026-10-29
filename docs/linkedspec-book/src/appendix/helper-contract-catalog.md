@@ -1463,7 +1463,7 @@ captures the text before the earliest boundary match without consuming that
 boundary.
 
 Text readers return the captured substring; `*_len*` readers return its length in
-**characters** (not bytes). A reader whose mark is unset, or whose span is
+**characters** (not bytes). A reader whose mark or required match endpoint is absent, or whose span is
 reversed (end before start), returns `undef`. The `capture_take*` variants are
 destructive: after reading they advance the capture origin — the anonymous cursor
 or the named mark — to the **current scan position** (or to **end of input** for

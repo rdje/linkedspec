@@ -8988,7 +8988,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored existing regression failures and exact selected baseline/candidate distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
-  Status: `pending` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
+  Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
   Goal: Freeze anonymous capture end/absence behavior before a local match, remove unsafe reference arithmetic, and align confirmed producer/diagnostic outliers.
   Reproduction: Exact Top:: I primitive-plus-method source on x returns[[null,0,1,1,0,1],8,F] on Julia native/reconstructed/plan/fresh Module. Dart native/restored/plan/fresh VM returns[[0,0,1,1,0,1],1,empty]. Perl native/fresh also returns the zero version, but fresh emitted code warns on uninitialized LSPOS subtraction; it computes span end from package LSPOS-length(LMATCH) without local match variables in that handler. Exact sources/results/emitted Perl/warnings are retained with33.4. A coercion side effect is not silently elevated into new semantic authority; other backends remain unassessed.
   Root / impact: Julia explicitly has no current-match endpoint; Dart falls back to the live cursor; reference raw subtraction manufactures0 from missing state. Width/default effects therefore differ; emitted operands are package-global, with residue influence to be falsified explicitly in40.0. Source/method composition is healthy in valid matched contexts; the unresolved question is producer absence and diagnostic authority. Link existing typed-source/ordinary local-match presence contracts and SESSION-STARTUP-READING.17 host isolation, without duplicating their broader repairs.
@@ -8999,13 +8999,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored discrepancy/causal intake, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.0`
-  Status: `pending` / P1 after39/38/37, before40.1-.5/full23.4/push
+  Status: `completed` / P1 after39/38/37, before40.1-.5/full23.4/push
   Goal: Freeze capture endpoint/absence semantics and diagnostic authority before a local match.
   Acceptance: Reconcile existing typed-source span/presence, capture/alias and reference-compatibility decisions using exact current probes, real empty matches, initial/nested I, regex/no-regex handlers, cursor/boundary changes and package residue controls. Keep live cursor distinct from last/current match endpoint. A warning-derived zero is evidence, not automatic new authority. Choose the repository-supported policy; request a concrete director decision only if canonical requirements actually conflict. Publish target before producer edits and distinguish required warning repair from value changes.
-  Planned verification tier: focused
-  Planned focused checks: Public Get/source dump/descriptor and supported native/generated context distinctions with exact values/kinds/effects, retained actual producers; no full matrix.
-  Planned canonical trigger: New public absence-policy authority requires canonical tier; full23.4/push requires resolved40 and verified repairs.
-  Planned claim verification: none: Finite authored contract/causal distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:16 authored public native/separate-process emitted source controls with clean/seeded package state; six matched/empty/zero/take healthy and ten absence RED before product edits. Exact source/metadata/values/cursors/typed errors/warnings, existing structural presence4 groups and neutral typed231 mutations; book/map/history/manual continuity.
+  Canonical trigger: Existing span/presence/valid-only take authority composed without public policy/schema movement. Independent40.1-.5 repairs and exact final23.4/push canonical proof remain required.
+  Claim verification: none: Finite authored endpoint/presence/take/host-state distinctions and existing-contract composition, no population measurement.
+
+  Activation: clean `bc621142449b27505b7e351184daa79172b68613`; recover ADR0056 typed span/presence/compatibility authority, anonymous helper catalog and exact33.4/33.5 diagnostic inputs. No producer changes until endpoint/absence/diagnostic target is grounded; retain real empty-match versus unavailable distinctions and package-residue controls.
+
+
+  - [x] **REPRODUCE / ISSUE**: Final16 authored controls native/separate-process emitted clean+seeded state have six healthy valid-match/take groups and ten absence RED before production. Initial coercion returns empty/0, boundary moves can raise reversed-span errors, failed takes advance the boundary and package globals can manufacture match text/spans. No healthy width credit from previous diagnostic zero.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public source and typed context show Contracts computing LSPOS-length(LMATCH) without available local match. Generated I handlers can reference package globals because relevant lexical match declarations occur inside later match branches or are absent in blind handlers. Both-defined package state is insufficient presence. Incoming entry match/live cursor are separate endpoints. Exact native reversed-span detail and emitted package-state results retained; broader SESSION17 isolation and child error41 remain owned.
+  - [x] **FIX**: Freeze capture-endpoint-absence-authority.md and shared16-source target from existing typed span/presence/take contracts. Missing local endpoint gives undef/no invalid constructor; failed take leaves boundary. Preserve defined empty/zero, successful take movement, valid coordinates and independent cursor/rest readers. No product/syntax/schema/diagnostic change or peer-majority policy choice in this authority leaf.
+  - [x] **ADDRESSED (verified)**: Current public metadata/source channels and native/clean/seeded exact outcomes distinguish six real-match/empty/zero/take controls from ten absence outliers. Real empty-at-zero skips fallback, empty-after-prefix retains Unicode prefix, successful take advances to5. Package state changes absent outcomes but no valid control. Existing neutral typed231 mutations and current structural presence4 groups pass.
+  - [x] **NO REGRESSION**: Production/neutral authority bytes unchanged. Root public-pos reset is an explicit compatibility control; cursor2 movement is authored inside I. Initial wrong root/edge carrier/pos target, UTF8 serialization, typed-error JSON and known trace-reader corrections are retained without product failure credit. No full backend parity, repair, fully cold bootstrap, performance or full admission claim.
+  - [x] **LOCKSTEP**: Packet capture-endpoint-absence-authority-intake.json.gz retains actual producers/epochs/16 current modules/native/fresh clean+seeded/input/source/metadata/errors/warnings/receipts and exact accepted authority inputs. Shared fixture/target/book/cards/map/roadmap/task/live/resume/history align. Independent Perl40.1 then40.2-.5 before41/Phase0 owner45/wider features/full admission. Daily cleanup at next clean due boundary; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.0 - ground capture endpoints in local match presence`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1`
   Status: `pending` / P1 after40.0 before full23.4/push
@@ -9015,6 +9026,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
   Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
   Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+
+  Frozen target/intake:40.0 capture-endpoint-absence-authority.md and capture_endpoint_absence.json; actual16-source six healthy/ten absence RED. Public generated source proves I/blind handlers can resolve LSPOS/LMATCH to package globals. Require invocation-local absence/presence, not warning suppression or a both-defined ambient-variable guard. Coordinate SESSION-STARTUP-READING.17 wider isolation; preserve actual matched/empty/Unicode/take and other lifecycle state.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
   Status: `pending` / P1 after40.0 before full23.4/push
@@ -9275,7 +9288,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.0` | `pending` | Reconcile pre-local-match capture endpoint/absence authority before producer edits. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1` | `pending` | Repair Perl capture endpoint reads through invocation-local match presence. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

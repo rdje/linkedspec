@@ -1,0 +1,452 @@
+[
+  {
+    "name": "root_blind_I",
+    "source": "Top:: I {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        "",
+        0,
+        "x",
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0
+    ],
+    "expected_cursor": 0,
+    "authority": {
+      "boundary": 0,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "root_regex_I",
+    "source": "Top:\n /x/\n I {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        "",
+        0,
+        "x",
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0
+    ],
+    "expected_cursor": 0,
+    "authority": {
+      "boundary": 0,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "root_public_pos_reset_I",
+    "source": "Top:: I {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "αβx",
+    "entry_cursor": 2,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        "",
+        0,
+        "αβx",
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0
+    ],
+    "expected_cursor": 0,
+    "authority": {
+      "boundary": 0,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "incoming_child_I",
+    "source": "Top::\n -> Child[0] .push\n LX {return(copy(Top))}\nChild:\n /αβ/\n I {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        [
+          null,
+          null,
+          null,
+          null,
+          null,
+          2,
+          "",
+          0,
+          "x",
+          1,
+          null,
+          null,
+          null,
+          null
+        ],
+        7,
+        "F",
+        2
+      ]
+    ],
+    "expected_cursor": 2,
+    "authority": {
+      "boundary": 2,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "direct_child_I",
+    "source": "Top:: I {return(call(Child))}\nChild: I {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        "",
+        0,
+        "x",
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      0
+    ],
+    "expected_cursor": 0,
+    "authority": {
+      "boundary": 0,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "matched_parent_direct_child_I",
+    "source": "Top::\n /αβ/\n -> Top[0] {return(call(Child))}\nChild: I {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        2,
+        "",
+        0,
+        "x",
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      2
+    ],
+    "expected_cursor": 2,
+    "authority": {
+      "boundary": 2,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "cursor_move_before_local",
+    "source": "Top:: I {ignored=capture_until_boundary(End);primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}\nEnd: /END/",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        "αβ",
+        2,
+        "αβEND",
+        5,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      2
+    ],
+    "expected_cursor": 2,
+    "authority": {
+      "boundary": 0,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "boundary_move_before_local",
+    "source": "Top:: I {ignored=capture_until_boundary(End);start_capture_slice();primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}\nEnd: /END/",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        2,
+        "",
+        0,
+        "END",
+        3,
+        null,
+        null,
+        null,
+        null
+      ],
+      7,
+      "F",
+      2
+    ],
+    "expected_cursor": 2,
+    "authority": {
+      "boundary": 2,
+      "local_start": null,
+      "local_end": null
+    }
+  },
+  {
+    "name": "empty_at_zero",
+    "source": "Top:\n /(?=x)/\n -> Top[0] {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "",
+        0,
+        "",
+        0,
+        0,
+        0,
+        "",
+        0,
+        "x",
+        1,
+        "",
+        0,
+        0,
+        0
+      ],
+      0,
+      "",
+      0
+    ],
+    "expected_cursor": 0,
+    "authority": {
+      "boundary": 0,
+      "local_start": 0,
+      "local_end": 0
+    }
+  },
+  {
+    "name": "empty_after_prefix",
+    "source": "Top:\n /(?=x)/\n -> Top[0] {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "αβ",
+        2,
+        "αβ",
+        2,
+        2,
+        0,
+        "αβ",
+        2,
+        "αβx",
+        3,
+        "",
+        0,
+        2,
+        2
+      ],
+      2,
+      "",
+      2
+    ],
+    "expected_cursor": 2,
+    "authority": {
+      "boundary": 0,
+      "local_start": 2,
+      "local_end": 2
+    }
+  },
+  {
+    "name": "zero_text_present",
+    "source": "Top:\n /0/\n -> Top[0] {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "0",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "",
+        0,
+        "",
+        0,
+        0,
+        0,
+        "0",
+        1,
+        "0",
+        1,
+        "0",
+        1,
+        0,
+        1
+      ],
+      0,
+      "",
+      1
+    ],
+    "expected_cursor": 1,
+    "authority": {
+      "boundary": 0,
+      "local_start": 0,
+      "local_end": 1
+    }
+  },
+  {
+    "name": "matched_unicode_prefix",
+    "source": "Top:\n /cat/\n -> Top[0] {primitive=[capture_slice(),capture_slice_len(),capture_from_rule_start(),capture_slice_length(),capture_len_from_rule_start(),capture_slice_pos(),capture_slice_until_cursor(),capture_slice_until_cursor_len(),capture_rest(),capture_rest_len(),match_text(),match_len(),match_start_pos(),match_end_pos()]; order=\"\"; width=capture_slice_len().coalesce({order=cat(order,\"F\");7});return([primitive,width,order,cursor_pos()])}",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      [
+        "αβ",
+        2,
+        "αβ",
+        2,
+        2,
+        0,
+        "αβcat",
+        5,
+        "αβcat",
+        5,
+        "cat",
+        3,
+        2,
+        5
+      ],
+      2,
+      "",
+      5
+    ],
+    "expected_cursor": 5,
+    "authority": {
+      "boundary": 0,
+      "local_start": 2,
+      "local_end": 5
+    }
+  },
+  {
+    "name": "capture_take_absent",
+    "source": "Top:: I {ignored=capture_until_boundary(End);before=capture_slice_pos();value=capture_take();return([before,value,capture_slice_pos(),cursor_pos()])}\nEnd: /END/",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      null,
+      0,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "capture_take_present",
+    "source": "Top:\n /cat/\n -> Top[0] {before=capture_slice_pos();value=capture_take();return([before,value,capture_slice_pos(),cursor_pos()])}",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      "αβ",
+      5,
+      5
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "capture_take_len_absent",
+    "source": "Top:: I {ignored=capture_until_boundary(End);before=capture_slice_pos();value=capture_take_len();return([before,value,capture_slice_pos(),cursor_pos()])}\nEnd: /END/",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      null,
+      0,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "capture_take_len_present",
+    "source": "Top:\n /cat/\n -> Top[0] {before=capture_slice_pos();value=capture_take_len();return([before,value,capture_slice_pos(),cursor_pos()])}",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      2,
+      5,
+      5
+    ],
+    "expected_cursor": 5
+  }
+]
