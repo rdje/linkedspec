@@ -11,7 +11,7 @@ answers:
   - do invalid or reversed Lua named spans move marks
   - are Lua named capture positions and lengths Unicode characters
 date: 2026-07-15
-status: bounded47.0-.5 focused work verified on recorded routes/hosts; writer49/selection/declared hosts/full admission separate
+status: bounded49.0-.5 local writer work focused-verified on recorded routes/hosts; selection/declared hosts/full admission separate
 tags: [lua, capture, marks, bridges, unicode, parity, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.7.3 extends lua/src/linkedspec/interpreter.lua over the FUTURE-PARITY-BACKLOG.17.4 parse-scoped rule-label/name/UTF-8-byte-offset store. lua/test/run.lua executes capability_capture_named_surface.spec unchanged through native and serialized SpecFile reconstruction and adds a multibyte bridge/edge/arity proof. tools/run_lua_local.sh passes 120/120 on PUC Lua and LuaJIT plus syntax, CLI scaffold, and 105 manifest checks."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report"
@@ -60,3 +60,20 @@ Packet lua-named-capture-endpoint-intake.json.gz retains closure. Bounded47.0-.5
 targeted-checked; writer49/referenced-blind48/Phase0 owner45 precede wider features.
 
 See [[lua-named-capture-endpoint-origin-compatibility]] for independent current proof. Earlier broad observations remain historical.
+
+## Safe Lua compatibility49.5 (2026-10-29)
+
+Installed PUC5.5/LuaJIT2.1.1788460057 independently pass all15 native/restored/plan/
+separate emitted cases. Existing name evaluation then nullable local_match guard
+before validated write_mark already preserves fresh/seeded/name-effect targets
+and real empty/zero/Unicode/local-live cursor behavior. No runtime edit. Writer105/
+named endpoint105/named Number-function-scope219 pass429 checks per host, empty
+healthy stderr/syntax loads. Wrong first-mark oracle3fail102pass per host, actual
+fixture/runtime unchanged, no product RED. Full source/normalized/compiled/plan/
+emitted/metadata/results/debug traces retained, runtime/emitter/fixture match HEAD,
+no regeneration. Packet lua-writer-endpoint-intake.json.gz retains closure. Normal
+run.lua registration verified; exact selection23.4.1/declared5.4/unsafe formatter/
+phase/full admission remain separate. Bounded49.0-.5 focused work complete on
+recorded routes/hosts; parent admission open,48/45 precede wider features/push.
+
+See [[lua-local-match-writer-presence-compatibility]] for independent current proof; earlier observations remain historical.

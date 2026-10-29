@@ -7,7 +7,7 @@ answers:
   - "does local-match writer absence also erase Perl root entry boundaries"
   - "which task owns missing local-match writer repairs and independent backend proof"
 date: 2026-10-29
-status: bounded Julia49.4 local writer compatibility focused-verified; safe Lua/selection/full admission separate
+status: bounded49.0-.5 local writer work focused-verified on recorded routes/hosts; selection/declared hosts/full admission separate
 tags: [marks, writer, match, absence, endpoint, mutation, authority]
 evidence: "named-writer-absence-authority-intake.json.gz retains15-source current Perl7healthy8RED and Dart15pass, fresh/seeded target distinction, public10 writer bodies and existing entry-boundary authority inputs."
 reverify: "Recover public probe_perl_named_writer_endpoint.pl and Dart SDK/fresh producers from named-writer-absence-authority-intake.json.gz under an owning task; use retained project-routed commands."
@@ -91,3 +91,20 @@ verified; selection23.4.1/safe Lua49.5/48/45/full admission remain separate. Sam
 project/depot, no isolated dependency or full package claim.
 
 See [[julia-local-match-writer-presence-compatibility]] for independent current proof; earlier observations remain historical.
+
+## Safe Lua compatibility49.5 (2026-10-29)
+
+Installed PUC5.5/LuaJIT2.1.1788460057 independently pass all15 native/restored/plan/
+separate emitted cases. Existing name evaluation then nullable local_match guard
+before validated write_mark already preserves fresh/seeded/name-effect targets
+and real empty/zero/Unicode/local-live cursor behavior. No runtime edit. Writer105/
+named endpoint105/named Number-function-scope219 pass429 checks per host, empty
+healthy stderr/syntax loads. Wrong first-mark oracle3fail102pass per host, actual
+fixture/runtime unchanged, no product RED. Full source/normalized/compiled/plan/
+emitted/metadata/results/debug traces retained, runtime/emitter/fixture match HEAD,
+no regeneration. Packet lua-writer-endpoint-intake.json.gz retains closure. Normal
+run.lua registration verified; exact selection23.4.1/declared5.4/unsafe formatter/
+phase/full admission remain separate. Bounded49.0-.5 focused work complete on
+recorded routes/hosts; parent admission open,48/45 precede wider features/push.
+
+See [[lua-local-match-writer-presence-compatibility]] for independent current proof; earlier observations remain historical.

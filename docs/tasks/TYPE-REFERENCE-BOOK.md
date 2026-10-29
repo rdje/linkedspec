@@ -4869,6 +4869,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Julia49.4 adds julia/test/named_writer_endpoint_absence_test.jl with explicit runtests include. Ordinary105 assertions/current three SDK routes and separate emitted15-source proof verified; exact canonical presence/selection remains before admission/push.
 
+  Safe Lua49.5 adds lua/test/named_writer_endpoint_absence_test.lua and explicit run.lua registration. Current15/four routes plus429 selected checks per installed host verified; exact canonical presence/selection remains before admission/push, no declared5.4/full suite credit.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9177,6 +9179,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push after49/48/45 and all prerequisite selection/policy/host repairs.
   Planned claim verification: none: Finite authored public writer discrepancy and warning, no population measurement.
 
+  Bounded implementation update2026-10-29:49.0 existing local-writer target/entry compatibility, Perl49.1 and Rust49.2 repairs, Dart49.3/Julia49.4/safe dual-host Lua49.5 compatibility/normal coverage are focused-verified. No validator weakening/new helper/domain/frame/schema/policy. Parent admission remains open for exact canonical selection23.4.1/full23.4 and independent prerequisites; proceed48 then45 before wider features/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.0`
   Status: `completed` / P1 after47 before48/45/wider features/full23.4/push
   Goal: Qualify existing local-match mark-writer availability/no-op/name-effect authority and freeze a bounded target without changing entry-boundary policy.
@@ -9274,13 +9278,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.4 - retain Julia local-match writer target preservation`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.5`
-  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Status: `completed` / P1 after47 before48/45/wider features/full23.4/push
   Goal: Independently assess safe installed-host Lua local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Activation: clean `f63483483ac033212668dad2d27f10e399207c67`; Julia49.4 committed/brief empty/no jobs. Frozen15 writer target, current Lua named writer/name/local_match/typed mark owner and public SDK/emitted/normal conventions recovered. Own current safe dual-host native/restored/plan/separate emitted baseline before actual repair or compatibility proof; preserve other writers/names/frame/source/anonymous policy and declared-host boundaries.
   Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
-  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
-  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
-  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent current15 native/restored/plan/separate emitted allpass per safe PUC5.5/LuaJIT. Writer105/named endpoint105/named Number-function-scope219 pass429 checks per host; wrong first-mark oracle3RED102pass per host, empty healthy stderr/syntax loads/normal registration. Runtime/source/metadata identity/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after48/45/prerequisites; normal run.lua registration verified, exact canonical selection23.4.1 remains. Declared5.4/unsafe formatter2.3/phase39.4.5.2.2 separately owned; no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored local writer/state/name-effect functional assertions and deliberately false first-mark oracle, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own current15 native/restored/plan/separate emitted allpass independently on installed PUC5.5/LuaJIT2.1.1788460057. Exact source/metadata/results/debug traces retain absent/fresh/seeded/name-effect targets and local/live cursor/real empty/zero/Unicode distinctions. No peer-derived defect or product RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: evaluate_named_mark_helper evaluates the first mark name before local writer selection. mark_match_start/end require existing local_match before selecting byte_start/end and invoking validated write_mark. Existing targets/name effects survive absence, while other writers retain their own endpoints/owners.
+  - [x] **FIX**: No runtime edit needed. Add frozen15 normal consumer/false-oracle control and explicit run.lua registration. Preserve source/emitter/helper/domain/frame/schema/arity/entry/current/input/capture/anonymous contracts; no new chunk locals, unsafe formatter or declared-host promotion.
+  - [x] **ADDRESSED (verified)**: All15 pass all four routes per host, full matched/value/Unicode cursor/output/lifecycle/typed result and public metadata retained. Runtime/compiler/emitter/fixture match activation HEAD and existing emitted modules remain valid without regeneration.
+  - [x] **NO REGRESSION**: Writer105/named endpoint105/named Number-function-scope219 pass429 checks per host, empty healthy stderr/syntax loads. Wrong first-mark oracle fails3values102pass per host, fixture/runtime untouched; no product RED. No full suite/declared5.4/dependency-isolation claim.
+  - [x] **LOCKSTEP**: Packet lua-writer-endpoint-intake.json.gz retains actual producers/normal+rival/runtime/emitter/fixture/modules/public build wrappers/logs/receipts. Normal registration verified, exact canonical selection23.4.1 remains. Book/cards/map/target/roadmap/task/live/resume/history align; bounded49.0-.5 focused work complete, parent admission open. Next48/45, authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.5 - retain safe Lua local-match writer target preservation`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48`
   Status: `pending` / P1 after41/47/49 before45/wider features/full23.4/push
@@ -9698,7 +9712,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.5` | `pending` | Independently assess safe PUC5.5/LuaJIT local-match writer target preservation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48` | `pending` | Qualify referenced blind-intermediate compilation and repair actual catalog/classification outliers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
