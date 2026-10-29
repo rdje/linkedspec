@@ -560,12 +560,13 @@ sub _build_lmatch_extraction {
     my (%args) = @_;
     my $label = _quote_perl_string($args{label});
     my $handler_kind = _quote_perl_string($args{handler_kind});
+    my $declaration = $args{reuse_preamble_locals} ? '' : 'my ';
     return '
-   my $LMATCH      = $$minfo{match};
-   my @LMATCH_LIST = @{$$minfo{match_list} // []};
-   my %LMATCH_HASH = %{$$minfo{match_hash} // {}};
-   my $LINDEX      = $$minfo{index};
-   my $LSPOS       = pos $$STRING;
+   ' . $declaration . '$LMATCH      = $$minfo{match};
+   ' . $declaration . '@LMATCH_LIST = @{$$minfo{match_list} // []};
+   ' . $declaration . '%LMATCH_HASH = %{$$minfo{match_hash} // {}};
+   ' . $declaration . '$LINDEX      = $$minfo{index};
+   ' . $declaration . '$LSPOS       = pos $$STRING;
    LinkedSpec::RecognitionTransactionRuntime::note_match(
     $descr, $STRING, ' . $label . ', ' . $handler_kind . ',
     $LSPOS - length($LMATCH // ""), $LSPOS
@@ -929,7 +930,12 @@ sub _emit_and_single_acode_handler {
         handler_kind => $handler_kind,
         trace_enabled => $trace_enabled,
     );
-    my $lmatch     = _build_lmatch_extraction(label => $label, handler_kind => $handler_kind);
+    # This extraction is at handler scope; SpecEntry owns its declarations.
+    my $lmatch = _build_lmatch_extraction(
+        label => $label,
+        handler_kind => $handler_kind,
+        reuse_preamble_locals => 1,
+    );
     my $match_trace = _trace_branch_statement(
         enabled => $trace_enabled,
         indent => ' ',

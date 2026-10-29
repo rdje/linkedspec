@@ -4905,6 +4905,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Safe Lua48.5 adds referenced_blind_targets_test.lua with one run.lua registration,189 checks including36 source compiler roles/strict bypass/real empty/10 runtime controls. Both safe hosts809 selected assertions;3 coordinator runtime exclusions remain39.8.1 and original parent-LX unqualified48.2.2.1. Exact canonical selection before admission/push.
 
+  Perl40.1.1 adds t/perl_match_local_declarations.t9 groups plus finite fixture. Exact canonical selection must include it and retain explicit OR warning40.1.1.1 ownership until repaired, with unsupported callback typed failure unchanged.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9824,15 +9826,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Recurrence48.2.4: Explicit-target parent push also exposes duplicate parent scalar, while every Value AND source reproduces known40.1.1 local-match masks. Initial combined warning arrays do not isolate stages; refined public producer adds per-phase capture and exact original empty-return source to qualify the previously inferred load attribution before repair. No suppression or runtime-value defect inferred from warning alone.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1`
-  Status: `pending` / P1 after48.5 before45/wider features/full23.4/push
+  Status: `completed` / P1 after48.5 before45/wider features/full23.4/push
   Goal: Remove duplicate local-match declarations in generated single-action AND handlers without warning suppression or scope/phase changes.
   Reproduction:48.1 nearest t/blind_child_retv.t passes10 groups but warning-enabled loading reports my LMATCH/LMATCH_LIST/LMATCH_HASH/LINDEX/LSPOS masking earlier declarations. Its published emitted Atom and_single_acode handler contains the40.1 invocation-local preamble declarations and later my declarations from common _build_lmatch_extraction in the same subroutine scope. Exact stderr/source retained under48.1; independent public native/emission/fresh channel qualification follows before repair.
   Root / impact:SpecEntry::_build_handler_preamble introduces absent local-match registers, while _emit_and_single_acode_handler inserts declaring _build_lmatch_extraction at the same scope. Other emitter call sites have their own nesting and must not be changed indiscriminately. Correct values in the neighbor do not make generated warning output production-grade. No runtime scope/callback correctness failure inferred from warnings alone.
   Acceptance: Freeze actual native/emission/standalone warning channels and declaration scopes with public Get/source/trace, plus single-action AND positive/empty/zero/Unicode/entry/local/per-regex-I/callback controls. Repair through the sole emitter/preamble owner without disabling warnings or reviving unbound AND_BCODE paths. Preserve existing match/typed position/phase/return/mark behavior and other families; verify old/new source/metadata/regeneration, focused normal/book/docs/proof/commit before45/admission.
-  Planned verification tier: focused; public schema/state/frame/policy movement needs separate canonical ownership.
-  Planned focused checks: Actual duplicate-local warning RED/GREEN with full source/runtime/metadata and native/fresh channels, anonymous/named endpoint and single-action/child-retv neighbors; no routine full suite.
-  Planned canonical trigger: Full23.4/final clean push after40.1.1/48/45/selection23.4.1 and other prerequisites; SESSION10 unbound handoff remains separate.
-  Planned claim verification: none: Finite authored generated-scope/warning and behavior assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Nine public sources/independent warning phases/native+emitted+separate old/new modules;9 actual warning RED->GREEN groups, exact five-my source transform/full metadata/results/typed errors. New9/retv10/anonymous16/named15 pass50 groups, no mask warnings in neighbors. Eight final loads empty/entry control exactly5 OR masks owned next. Syntax/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full23.4/final clean push after40.1.1.1/40.1.2/45 and20.1/39.8.1/48.4.2.1/selection23.4.1/lifecycle/host prerequisites. No schema/state/frame/policy movement; SESSION10 remains independent.
+  Claim verification: none: Finite authored warning/lexical owner/source/behavior controls, no population measurement.
+
+  Activation: clean `e08bc9d28dd13fd4e9302827cdc8118eccb84a7d`; safe Lua48.5 committed/brief0/no jobs. Existing public five-warning witness and preamble/common extraction/single-action AND declaration scopes recovered. Own native build/emission/native run/fresh load/fresh run and finite capture/zero/Unicode/I/callback baseline before repair. Scope choice follows actual public source and before/after behavior, no warning suppression/general emitter change.
+
+
+  - [x] **REPRODUCE / ISSUE**: Public9 source channel baseline:5 AND masks each at fresh load, plus5 OR masks in entry/local control; other phase warning arrays empty. Normal9 groups fail only load-mask expectation while values/cursors/errors/metadata pass. Separate emitted process reproduces.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: SpecEntry preamble owns absent invocation match registers; _emit_and_single_acode_handler inserts declaring common extraction at same subroutine scope, masking all5. OR emitter independently has equivalent collision, owned40.1.1.1 immediately next; other common callers have nested scopes and retain defaults.
+  - [x] **FIX**: Add private reuse_preamble_locals switch to common extraction and opt in only single-action AND. Assign existing registers instead of redeclaring. All other extraction output unchanged, no warning suppression/new scope/phase or runtime policy.
+  - [x] **ADDRESSED (verified)**: Exact9 emitted source transforms remove only5 my tokens in each AND extraction. Full metadata/native+emitted values/cursors/typed errors identical. Eight loads now warning-free; entry control retains exactly5 explicitly owned OR masks. Old modules still run and warn, regeneration installs fix with same v2 metadata/format. Zero-width/Unicode/capture/per-regex-I/entry-local/callback argument behavior preserved.
+  - [x] **NO REGRESSION**: New9/child-retv10/anonymous16/named15 pass50 selected groups. New normal/probe/fresh stderr empty; neighbor diagnostics retained with no duplicate masks. Designed unsupported callable helper keeps native context/generated typed error; supported callback uses explicit arguments. Initial harness serializer/stdout/unsupported-positive/entry-slot-source/mask-order refinements are retained without product RED credit. No wider lifecycle/variable scope/admission credit or full Phase0/CI run.
+  - [x] **LOCKSTEP**: perl-match-locals-intake.json.gz retains actual source/instrument/normal RED-GREEN/warning phases/metadata/results/old-new modules/fresh receipts. Ordinary t discovery normal requires exact canonical selection23.4.1. Book/card/map/roadmap/task/live/resume/history align; OR40.1.1.1 immediately next then scalar40.1.2/45, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1 - reuse Perl single-action AND match declarations`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1`
+  Status: `pending` / P1 immediately after40.1.1 before40.1.2/45/admission
+  Goal: Remove duplicate invocation match-local declarations from the independently observed Perl OR action handler through its sole emitter scope owner.
+  Reproduce / impact:40.1.1 entry/local public control emits Top or_acode and Atom and_single_acode. Warning-enabled fresh load reports10 masks, five LMATCH/LMATCH_LIST/LMATCH_HASH/LINDEX/LSPOS per handler. Public source shows or_acode extraction also occurs at subroutine scope after the SpecEntry absent-register preamble. Isolated AND repair may remove only its five; do not silently suppress the remaining OR warnings or change all common extraction callers indiscriminately. Actual source/channels retained in perl-match-locals intake.
+  Acceptance: Own independent OR/default action sources, single/multiple/zero/Unicode/entry/local/closures and nested caller scopes before edits. Reuse correct declaration owner only for confirmed same-scope callers, preserve other nested scopes and phases. Source-diff/metadata/runtime/error/warning RED-GREEN, regenerate warning-bearing source, focused normal/direct dependents/book/docs/commit before40.1.2/45. Never disable warnings or infer value corruption from masks.
+  Planned verification tier: focused
+  Planned focused checks: Public isolated warning channels and exact emitter/source/metadata/runtime/typed local-match controls plus single-AND fixed controls; no routine full suite.
+  Planned canonical trigger: Full23.4/final clean push after other owners, pressure20.1 and exact selection23.4.1; no scope/policy normalization.
+  Planned claim verification: none: Finite authored lexical warning/behavior assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
   Status: `completed` / P1 after40.0 before full23.4/push
@@ -10185,7 +10208,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1` | `pending` | Remove duplicate Perl single-action AND match-local declarations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1` | `pending` | Remove duplicate Perl OR action match-local declarations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

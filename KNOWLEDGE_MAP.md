@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1482** facts · **11245** question keys.
+> **1482** facts · **11246** question keys.
 
 ## Questions → fact
 
@@ -8985,6 +8985,7 @@
 - "which Perl contracts are deliberately excluded from the public current inventory" -> [public-call-inventory-independent-coverage](docs/knowledge/public-call-inventory-independent-coverage.md) · 2026-07-15 · reverify: `perl tools/check_language_capability_coverage.pl --report && bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py`
 - "which Perl entry helpers use an absent entry match width" -> [perl-absent-entry-boundary-warnings](docs/knowledge/perl-absent-entry-boundary-warnings.md) · 2026-09-27 · reverify: `bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/typed_source_location_perl_contract.t t/complete_named_mark_contract.t t/nested_tree_readiness.t`
 - "which Perl files own rule local cursor implementation" -> [perl-rule-local-cursor-rollout-boundaries](docs/knowledge/perl-rule-local-cursor-rollout-boundaries.md) · 2026-07-18 · reverify: `prove -Iperl t/generated_source_contract.t t/rule_local_cursor_perl_descriptor.t t/rule_local_cursor_perl_execution.t t/rule_local_cursor_perl_contract.t; PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py`
+- "which Perl handler still masks match locals after the single-action AND fix" -> [perl-and-single-acode-duplicate-match-locals](docs/knowledge/perl-and-single-acode-duplicate-match-locals.md) · 2026-10-29 · reverify: `Restore retained public producer under an owning leaf; run through project_data_run.sh env PERL5LIB= perl -Iperl, preserving warning channels.`
 - "which Perl helper calls lower from AST call nodes" -> [perl-actionir-ast-value-only-call-lowering](docs/knowledge/perl-actionir-ast-value-only-call-lowering.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
 - "which Perl helper spellings are already retired before SPEC-FORMAT-TERSE.8" -> [legacy-helper-retirement-split-inventory](docs/knowledge/legacy-helper-retirement-split-inventory.md) · 2026-07-06 · reverify: `perl -Iperl -MLinkedSpec -e 'my @stmts=(q{return(concat(\"a\", \"b\"))}, q{return(array_copy(array(items)))}, q{return(hash_copy(hash(meta)))}, q{push_value(items, \"a\")}, q{push_nonempty(array(items), \"a\")}, q{declare(array, items)}, q{return(a(foo))}, q{return(h(foo))}); for my $stmt (@stmts) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test integration_test unknown_ -- --nocapture`
 - "which Perl leaves own root selection implementation" -> [perl-root-rule-selection-preflight](docs/knowledge/perl-root-rule-selection-preflight.md) · 2026-07-18 · reverify: `git show 2e01e13b:perl/LinkedSpec/Validation.pm | rg 'found_top_rule|top rule'; git show 2e01e13b:perl/LinkedSpec/Compiler.pm | rg 'selected_top_rule|top_rule_literal'`
@@ -17832,8 +17833,8 @@ _Perl AND I-block and repeated-action return rewriting corrupts literals and use
 
 ### perl-and-single-acode-duplicate-match-locals
 _Perl emitted single action AND handlers duplicate preamble match lexicals_
-- **answers:** why does emitted Perl warn LMATCH masks earlier declaration | which leaf owns duplicate local match variables in and_single_acode | do duplicate match lexical warnings occur at native build or emitted load
-- **date:** 2026-10-29 · **status:** confirmed warning defect; P1 repair40.1.1 pending before admission
+- **answers:** why does emitted Perl warn LMATCH masks earlier declaration | which leaf owns duplicate local match variables in and_single_acode | do duplicate match lexical warnings occur at native build or emitted load | which Perl handler still masks match locals after the single-action AND fix
+- **date:** 2026-10-29 · **status:** repaired40.1.1; OR action40.1.1.1 next before admission
 - **evidence:** `perl-referenced-intermediate-intake.json.gz retains actual normal/probe/source/channels/receipts.`
 - **reverify:** `Restore retained public producer under an owning leaf; run through project_data_run.sh env PERL5LIB= perl -Iperl, preserving warning channels.`
 - **source:** [`docs/knowledge/perl-and-single-acode-duplicate-match-locals.md`](docs/knowledge/perl-and-single-acode-duplicate-match-locals.md)

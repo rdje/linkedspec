@@ -1,0 +1,293 @@
+[
+  {
+    "input": "a",
+    "name": "basic",
+    "source": "Top::|\n => Atom {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "expected": "A",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Atom"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Atom"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  },
+  {
+    "input": "z",
+    "name": "miss",
+    "source": "Top::|\n => Atom {return(retv)}\nAtom:AND\n /a/ -> Atom[0] {return(\"A\")}\n",
+    "expected": null,
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Atom"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Atom"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  },
+  {
+    "input": "a",
+    "name": "captures",
+    "source": "Top::AND\n /(?<letter>a)/ -> Top[0] {return(array(match_text(),match_len(),match_start_pos(),match_end_pos(),capture_slice(),cursor_pos()))}\n",
+    "expected": [
+      "a",
+      1,
+      0,
+      1,
+      "",
+      1
+    ],
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  },
+  {
+    "input": "a",
+    "name": "empty",
+    "source": "Top::AND\n /(?=a)/ -> Top[0] {return(array(match_text(),match_len(),match_start_pos(),match_end_pos(),cursor_pos()))}\n",
+    "expected": [
+      "",
+      0,
+      0,
+      0,
+      0
+    ],
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  },
+  {
+    "input": "αβ",
+    "name": "unicode",
+    "source": "Top::AND\n /αβ/ -> Top[0] {return(array(match_text(),match_len(),match_start_pos(),match_end_pos(),capture_slice(),cursor_pos()))}\n",
+    "expected": [
+      "αβ",
+      2,
+      0,
+      2,
+      "",
+      2
+    ],
+    "expected_cursor": 2,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  },
+  {
+    "input": "a",
+    "name": "per_regex_I",
+    "source": "Top::AND\n /a/\n I{value=array(entry_text(),match_text(),cursor_pos())}\n -> Top[0] {return(copy(value))}\n",
+    "expected": [
+      "a",
+      "a",
+      1
+    ],
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  },
+  {
+    "input": "a",
+    "name": "unsupported_callback_control",
+    "role": "typed_error_control",
+    "source": "Top::AND\n /a/\n I{cb={||return(array(entry_text(),match_text(),cursor_pos()))}}\n -> Top[0] {return(cb())}\n",
+    "expected": null,
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0,
+    "expected_error_code": "unknown_helper"
+  },
+  {
+    "input": "Ha",
+    "name": "entry_local",
+    "source": "Top::|\n -> Atom[0] {return(call(Atom))}\nAtom:AND\n /H|a/ -> Atom[0] {return(array(entry_text(),match_text(),cursor_pos()))}\n",
+    "expected": [
+      "H",
+      "a",
+      2
+    ],
+    "expected_cursor": 2,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Atom"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_acode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Atom"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 5
+  },
+  {
+    "input": "a",
+    "name": "callback",
+    "source": "Top::AND\n /a/\n I{cb={|text|return(array(text,\"C\"))}}\n -> Top[0] {return(cb(match_text()))}\n",
+    "expected": [
+      "a",
+      "C"
+    ],
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_single_acode",
+          "label": "Top"
+        }
+      ],
+      "source_identity": "match-locals.spec"
+    },
+    "remaining_load_masks": 0
+  }
+]

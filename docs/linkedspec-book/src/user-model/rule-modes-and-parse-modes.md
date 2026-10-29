@@ -96,6 +96,13 @@ pass. Three default coordinators still collect a final empty ordinary iteration,
 as in Dart and Julia; ordinary progress/lifecycle authority remains under review.
 This bounded compiler support does not establish Lua5.4 or full backend parity.
 
+Standalone Perl source for single-action AND rules now loads without duplicate
+match-register declarations on the recorded controls, including zero-width and
+Unicode matches, per-regex initializers and callback arguments. Regenerate older
+emitted modules to remove those loading warnings; their behavior, public metadata
+and generated-source format remain valid. A separately tracked OR action warning
+still affects one entry/local composition control.
+
 ## Current rule-label surface
 
 A rule label is one or more Unicode 17.0.0 `XID_Continue` characters. The class is the same at the first and later
