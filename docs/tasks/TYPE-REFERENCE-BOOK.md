@@ -4873,6 +4873,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl48.1 adds t/referenced_blind_intermediate.t: focused12 groups cover8valid4reject and7native/fresh runtime controls. Exact canonical presence/selection remains required before admission/push.
 
+  Rust48.2 adds referenced_blind_intermediate.rs compile-only regression; runtime closure48.2.3 remains open. Exact canonical selection must include final complete consumer before admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9351,13 +9353,52 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.1 - retain Perl regex-free blind target compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2`
-  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Status: `completed` / P1 after49 before45/wider features/full23.4/push
   Goal: Independently assess Rust referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Activation: clean `3ea6748fdc0e4bd2abf074155e50d999c5c3791f`; Perl48.1 committed/brief empty/no jobs. Frozen12 ownership target/public SDK/normal/emitted conventions recovered. Independently qualify compiler/error/source/serialized/native/plan/fresh routes; no product or peer defect inferred. Public value-only execution does not expose final cursor; retain that limit rather than claim Perl cursor proof applies.
   Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
-  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
-  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
-  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Compiler/emission12-source normal1 plus nearest default-blind plan6 PASS; full intake runtime5RED on four routes retained, public trace/source/metadata/lock identity, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after runtime repairs48.2.1-.3/remaining48/40.1.1/45/selection23.4.1 and prerequisites.
+  Claim verification: none: Finite authored compiler/runtime/error/source functional assertions, no population measurement.
+
+  Qualification/safe slicing: Public native/reconstructed/plan RED reproduces three coordinator duplicates and two quoted fluent return values; compiler8valid4reject is already compatible. Keep48.2 as independently retained intake/compile regression. Own runtime repairs in48.2.1 (typed blind fluent return arguments),48.2.2 (coordinator invocation/collection mechanism qualification and repair),48.2.3 (full frozen runtime normal/fresh closure), in that order before Dart48.3. The published blind-push contract intentionally injects/calls the parent, so do not invent child-append semantics. Current source baselines retained before any product edit.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own public12 compile/7 runtime cases and exact8 separate compiled modules. Compiler8valid4reject compatible; five runtime cases fail all four routes, two controls healthy. Full initial normal RED15 SDK assertions retained before product edits.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Shared execute_bcode_entry_tail sends raw argument text as Scalar to call_helper, explaining quotes in return. Trace independently shows Middle re-entry at EOF returns retained array through LX; full scope/collection mechanism and parent-calling push contract qualification owned48.2.2, not guessed from payload alone.
+  - [x] **FIX**: Keep current leaf bounded to intake/ordinary compile regression; explicit repair children48.2.1 typed fluent returns,48.2.2 coordinator mechanics,48.2.3 complete runtime closure now own all outliers before48.3. No production/fixture/schema/family edit or invented child-append policy.
+  - [x] **ADDRESSED (verified)**: Ordinary compile/emission normal passes all12 distinctions; nearest default-blind plan6 tests pass, total7 selected. Exact8 emitted modules compile and metadata retain v2/source identity. Runtime failures remain open owned repairs, not compatibility signoff.
+  - [x] **NO REGRESSION**: Product unchanged, typed action structural identity and indexed selector diagnostics remain distinct. Native value-only API has no final cursor channel. Fresh dependencies retain native versions/sources/checksums; diagnostics opaque. Historical callback twin compile-only; no full gate or peer inference.
+  - [x] **LOCKSTEP**: Packet rust-referenced-intermediate-intake.json.gz retains actual full RED producer/compile consumer/source/modules/traces/compiled/results/metadata/locks/readers. Book/cards/map/roadmap/task/live/resume/history align.48.2.1 next then.2/.3 before48.3, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2 - qualify Rust blind target compilation and own runtime outliers`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.1`
+  Status: `pending` / P1 immediately after48.2 before48.3/admission
+  Goal: Repair blind-edge fluent return argument evaluation through the existing expression owner, preserving types/effects/empty return and return_undef on native/generated routes.
+  Reproduction/impact: Retained48.2 native/reconstructed/plan results show three duplicated nested coordinator arrays and two fluent literal returns containing quote characters; full normal fails15 route assertions. Compile ownership8valid4reject is healthy. Separate emitted qualification belongs to48.2 intake.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN normal and direct blind/fluent/collection controls, retained public source/compiled/metadata; book/docs/commit, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/40.1.1/45/selection23.4.1 and prerequisites.
+  Planned claim verification: none: Finite authored functional assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2`
+  Status: `pending` / P1 immediately after48.2 before48.3/admission
+  Goal: Qualify and repair repeated regex-free coordinator collection reuse with public trace and reference controls. Preserve existing parent-calling blind .push meaning, invocation scope, recognition outcomes/progress and custom lifecycle authority; do not assume child append.
+  Reproduction/impact: Retained48.2 native/reconstructed/plan results show three duplicated nested coordinator arrays and two fluent literal returns containing quote characters; full normal fails15 route assertions. Compile ownership8valid4reject is healthy. Separate emitted qualification belongs to48.2 intake.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN normal and direct blind/fluent/collection controls, retained public source/compiled/metadata; book/docs/commit, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/40.1.1/45/selection23.4.1 and prerequisites.
+  Planned claim verification: none: Finite authored functional assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3`
+  Status: `pending` / P1 immediately after48.2 before48.3/admission
+  Goal: Close full frozen12-source Rust runtime regression and separate compiled-source proof after48.2.1/.2; preserve compile diagnostics/metadata and disclose artifact rebuild or regeneration from actual source comparison.
+  Reproduction/impact: Retained48.2 native/reconstructed/plan results show three duplicated nested coordinator arrays and two fluent literal returns containing quote characters; full normal fails15 route assertions. Compile ownership8valid4reject is healthy. Separate emitted qualification belongs to48.2 intake.
+  Planned verification tier: focused
+  Planned focused checks: Exact owned RED/GREEN normal and direct blind/fluent/collection controls, retained public source/compiled/metadata; book/docs/commit, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/40.1.1/45/selection23.4.1 and prerequisites.
+  Planned claim verification: none: Finite authored functional assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9803,7 +9844,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2` | `pending` | Independently assess Rust referenced regex-free intermediate compatibility. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.1` | `pending` | Repair typed Rust blind fluent return arguments, then coordinator runtime outliers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

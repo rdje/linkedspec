@@ -75,3 +75,20 @@ No production or fixture edit. Initial indexed-error assertion correction is
 an instrument refinement, not product RED. Packet perl-referenced-intermediate-
 intake.json.gz retains actual inputs/producers/source/channels/receipts.
 Canonical selection23.4.1, peers and full admission remain separate.
+
+## Independent Rust48.2 intake (2026-10-29)
+
+Compiler8valid4reject and separate compilation of8 emitted modules are healthy.
+Seven runtime cases across native/reconstructed/plan/separate compiled code have
+two healthy controls and five outliers: three repeated coordinators duplicate
+nested arrays; two blind fluent literal returns preserve quote characters.
+Shared execute_bcode_entry_tail passes raw fluent argument text as Scalar;
+48.2.1 owns typed return evaluation. A public debug trace shows Middle re-entry
+at EOF returns a retained array through LX;48.2.2 owns full mechanism/repair,
+preserving the published parent-calling blind-push meaning.48.2.3 owns complete
+runtime regression/fresh closure. No product change/runtime compatibility signoff.
+Current compile normal1/default-blind plan6 pass7 selected tests. Metadata v2
+and source identity exact; fresh lock versions/sources/checksums match native.
+Value-only public API exposes no final cursor; no cursor/performance claim.
+Packet rust-referenced-intermediate-intake.json.gz retains the actual producer,
+full RED/source/compiled/modules/traces/metadata/locks/results and readers.
