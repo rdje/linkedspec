@@ -697,13 +697,11 @@ local function check_target(owner, rules_by_label, target, index, structural_act
     end
     validation_fail(message)
   end
+  -- Blind edges call declarations; only action edges select regex slots.
+  if not structural_action then return end
   local count = regex_count(target_rule)
   if index < 0 or index >= count then
-    if structural_action then
-      M.regex_slot_identity_invalid(owner.header.label, target, index)
-    end
-    validation_fail("rule '" .. owner.header.label .. "' references rule '" .. target .. "' regex slot " .. index ..
-      ", but that rule has " .. count .. " regex slot(s)")
+    M.regex_slot_identity_invalid(owner.header.label, target, index)
   end
 end
 

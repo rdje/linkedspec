@@ -4903,6 +4903,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Julia48.4.2 adds rule_invocation_accumulators_test.jl with one runtests include,3 original plus4 binding-scope controls56 assertions. Preserve explicit implicit-tail39.8.1 and undeclared-write48.4.2.1 qualifications; no portable credit until canonical authority/repair.
 
+  Safe Lua48.5 adds referenced_blind_targets_test.lua with one run.lua registration,189 checks including36 source compiler roles/strict bypass/real empty/10 runtime controls. Both safe hosts809 selected assertions;3 coordinator runtime exclusions remain39.8.1 and original parent-LX unqualified48.2.2.1. Exact canonical selection before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8039,6 +8041,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Julia48.4.2 independent scope-only follow-up: implicit_parent_no_tail and qualified blind_no_regex/marked_blind_target/markerless_blind change[[x],[x]] ->[[x],[]] at1 after fresh conventional arrays; direct_twice becomes portable[[x],[]], explicit reset unchanged. Julia existing ordinary_blind source/ORDINARY expectation is byte-identical to Dart counterpart. Keep ordinary count/IT/progress/LX behavior unchanged in scope feature, qualify backend extra empty iteration and add Julia to this canonical policy intake after20.1 before admission. No unconditional cutoff experiment or inferred phase repair is authorized by this observation; preserve previous evidence. Retain actual source/compiler/SDK/fresh/normal inputs in julia-rule-accumulator-intake.
 
+  Safe Lua48.5 independent compiler intake: after blind declaration repair, qualified blind_no_regex/marked_blind_target/markerless_blind already produce[[x],[]] on both installed PUC5.5/LuaJIT native/restored/plan, versus reference[[x]]. No action-context error or stale duplicate array is inferred. Preserve ordinary runtime/count/IT/progress/LX behavior and qualify these3 under this canonical owner after20.1 before admission. Own raw fixtures/source/SDK/fresh/metadata in lua-referenced-intake; no cutoff experiment or broader host/peer claim.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4`
   Status: `completed` / bounded default iteration and implicit collection targeted-checked
   Goal: Reconcile and repair confirmed repeated/default blind implicit-result differences.
@@ -9733,15 +9737,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored rule-frame/lifetime behavior and exact emitted declarations, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5`
-  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Status: `completed` / P1 after49 before45/wider features/full23.4/push
   Goal: Independently assess safe installed-host Lua referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
   Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
-  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
-  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
-  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Each safe PUC5.5/LuaJIT36 source roles17 validRED->22accepts/14 exact rejects/5 healthy artifacts and results unchanged;10 portable runtime4routes and3 qualified empty-tail rows;22 earliest modules exact v2 identity/plan/4 bypass-empty controls exact. New189/postcall274/progress234/duplicate112 pass809 assertions per host, empty fresh/focused stderr; registration syntax/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full23.4/final clean push after warnings40.1.1/.2/45, pressure20.1/39.8.1/48.4.2.1/selection23.4.1/lifecycle/declared host and other prerequisites. No public schema/policy/infrastructure movement.
+  Claim verification: none: Finite authored compiler/ownership/slot/runtime/diagnostic controls, no population measurement.
 
   Added target scope: Include pure_blind_targets8 and strict negatives4 alongside original/qualified12. Independent safe-host compiler/runtime/fresh baseline, no peer inference. Conventional arrays/parent push assessed only on actual evidence;39.8.1 ordinary and48.4.2.1 cross-rule lifetime authority remain canonical after20.1, not implicit feature permission.
+
+  Activation: clean `cc6210159cbda5045bfbfa157c978338762a3e8b`; Julia repair committed/brief0/no jobs. Lua published package/project wrapper, typed JSON/spec/runtime/emitter APIs and existing Default family/blind postcall/phase facts recovered. Own36 source compile/catalog/diagnostic/runtime baseline before edits on installed safe PUC5.5/LuaJIT. No peer inference, unsafe formatter, full suite or new ordinary/scope authority.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independently both installed safe hosts36 source roles5 healthy builds/17 intended-valid compiler RED/14 intended rejects; original normal17fail63 assertions per host. Original5 emitted modules load fresh/3 eligible runtime controls pass before production edits; no peer inference.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: spec_validator.check_target applies regex_count after every target lookup, including blind and bare AND. compiled_spec.build_dependency_regex_state then resolves every call ref as regex; validator-only epoch isolates12 referenced accepts/five pure-code compiler failures. No runtime context error or stale-array defect assumed from peers.
+  - [x] **FIX**: Blind existence check returns before action slot counting; exclusively blind maps project only actual regex-bearing targets, retaining complete rule call refs and unknown/action/mixed strictness. Existing copies/metatables remain, absent regex does not fabricate a slot and real empty pattern remains. No interpreter/emitter/schema/family/ordinary phase or cross-rule lifetime change.
+  - [x] **ADDRESSED (verified)**: Each host22 valid accepts/14 full negative records/5 healthy artifact-result records exact. Ten portable runtime controls4routes, pure Child0 patterns/slots/null entry_slot and mixed map Token/x while call refs complete.22 final earliest modules per host full v2 metadata/plan exact:5 original healthy12 intermediate reused5 pure newly emitted. Four bypass/real-empty full records exact.
+  - [x] **NO REGRESSION**: New189/postcall274/progress234/duplicate112 pass809 assertions per host; fresh/focused stderr empty and syntax loads pass. Original parent-LX runtime3 unqualified48.2.2.1; qualified3 coordinators already[[x],[]] under39.8.1 with compile coverage retained. No new runtime/push/array scope policy repair, unsafe formatter/full suite/declared5.4/peer admission credit.
+  - [x] **LOCKSTEP**: lua-referenced-intake.json.gz retains actual dual-host inputs/source/producers/normal baseline-final/intermediate/results/modules/metadata/receipts. One run.lua normal registration/exact canonical selection23.4.1 required. Book/cards/map/roadmap/task/live/resume/history align; warnings40.1.1/.2 then45 next, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5 - compile safe Lua blind targets without regex slots`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
@@ -10170,7 +10185,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.5` | `pending` | Independently assess safe Lua referenced and pure-code blind targets. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1` | `pending` | Remove duplicate Perl single-action AND match-local declarations. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

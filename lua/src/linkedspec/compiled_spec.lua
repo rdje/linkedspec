@@ -475,15 +475,29 @@ local function build_dependency_regex_state(order, rules_by_label)
   for _, label in ipairs(order) do
     local rule = rules_by_label[label]
     if #rule.dependency_refs > 0 then
+      -- Keep calls on the rule, but project real regex dependencies for blind
+      -- owners. Unknown targets and action/mixed owners retain strict checks.
+      local regex_refs = rule.dependency_refs
+      if #rule.blind_edges > 0 and #rule.action_edges == 0 then
+        regex_refs = {}
+        for _, ref in ipairs(rule.dependency_refs) do
+          local target = rules_by_label[ref.label]
+          if not target or #target.regex_patterns > 0 then
+            regex_refs[#regex_refs + 1] = ref
+          end
+        end
+      end
       local patterns = {}
-      for index, ref in ipairs(rule.dependency_refs) do
+      for index, ref in ipairs(regex_refs) do
         patterns[index] = dependency_pattern_for(label, ref, rules_by_label)
       end
-      dependency_regex_map[label] = setmetatable({
-        owner_label = label,
-        dependency_refs = copy_list(rule.dependency_refs),
-        patterns = patterns,
-      }, DEPENDENCY_ENTRY_MT)
+      if #regex_refs > 0 then
+        dependency_regex_map[label] = setmetatable({
+          owner_label = label,
+          dependency_refs = copy_list(regex_refs),
+          patterns = patterns,
+        }, DEPENDENCY_ENTRY_MT)
+      end
     end
   end
   return setmetatable({ dependency_regex_map = dependency_regex_map }, DEPENDENCY_STATE_MT)

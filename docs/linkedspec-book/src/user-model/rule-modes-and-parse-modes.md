@@ -89,6 +89,13 @@ or an Array retains its kind; an Array is appended as one nested value.
 the explicit iteration result, so the equivalent default example returns
 `[["TAIL"]]`. Existing emitted Julia modules reuse the runtime repair.
 
+The installed PUC Lua5.5 and LuaJIT routes also compile and execute these
+pure-code examples, preserving null `entry_slot()` and complete call references
+without invented regex slots. Direct and AND literal-return coordinator controls
+pass. Three default coordinators still collect a final empty ordinary iteration,
+as in Dart and Julia; ordinary progress/lifecycle authority remains under review.
+This bounded compiler support does not establish Lua5.4 or full backend parity.
+
 ## Current rule-label surface
 
 A rule label is one or more Unicode 17.0.0 `XID_Continue` characters. The class is the same at the first and later
@@ -629,7 +636,7 @@ The short version is:
 - `-> Header` is regex-slot oriented: the enclosing rule selects slot zero declared by `Header`, then runs the action path.
 - `=> Header` is parser-step oriented: the parent directly calls the child rule and works with the child result.
 
-A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Dart and Julia now validate blind declarations independently of action-slot requirements, including bare AND members. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
+A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Dart, Julia and the recorded safe Lua hosts now validate blind declarations independently of action-slot requirements, including bare AND members. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
 
 Perl and Rust execute the following coordinator through native and generated parsers. The default parent collects its child results implicitly:
 
