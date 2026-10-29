@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart named endpoints/origins repaired:15pass/36 focused tests; Julia47.4 next.
+Julia named take repaired:15pass/385 focused assertions; safe Lua47.5 next.
 
 ## Latest Completed Slice
 
-Dart named match-start text/width/take-width now use the nullable local-match endpoint after existing name evaluation. One-argument capture_take reads and advances its named mark through existing typed owners, preserving the anonymous boundary. Missing/reversed spans remain null with no extra take mutation; real empty/zero/Unicode and name effects remain valid. Independent15-source native/restored/plan/separate VM2healthy13RED ->15pass, ordinary15 cases13RED ->15pass. Four selected files pass36 tests including anonymous endpoints, named Number/callback/function fences and complete mark contracts. Exact source/normalized/compiled/plan/emitted/full metadata and both healthy complete results/traces remain unchanged. The same15 baseline emitted modules pass against the updated runtime; no source regeneration, rebuild AOT applications. Fatal changed-file analysis passes; final formatting passes after a single switch-arm wrapping correction, tested preformat source retained. Whole-package SDK deprecations stay DART-STARTUP-READING.2.25. Initial instrument generator brace substitution error recovered before baseline, no product failure credit. Packet dart-named-capture-endpoint-intake.json.gz retains actual producers/runtime epochs/patch/fixtures/modules/SDK/fresh/results/traces/checks/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; canonical selection23.4.1 remains before admission. Independent Julia47.4 then safe Lua47.5, writer49/referenced-blind48/Phase0 owner45; authorized focused commit, no full gate/push.
+Julia already preserves nullable local-match endpoints on named text/width/take-width; its one-argument capture_take incorrectly dispatched anonymously, skipped name effects and moved the anonymous boundary. That overload now reaches the existing named owner, sharing name/typed span/null/reversal/valid-only update logic; zero-argument dispatch remains anonymous. Independent15-source native/restored/plan/separate-process emitted8healthy7RED ->15pass; ordinary105 assertions84pass21fail ->105pass. New named105/anonymous112/named Number-function-scope155/complete marks13 pass385 assertions with depwarn=error. Source/normalized/compiled/plan/emitted/full public metadata and8 healthy complete outcomes/traces remain exact; same15 baseline modules reuse updated runtime without regeneration. Actual post-edit precompile/cache-coordination stderr is strictly qualified and retained; no warnings/errors suppressed, no isolated-dependency/full-package claim. Runtime reuse needs updated Julia package/precompile image. Packet julia-named-capture-endpoint-intake.json.gz retains actual producers/runtime epochs/patch/normal RED/fixture/modules/SDK/fresh/full results/traces/checks/receipts. Normal registered in runtests; exact canonical selection23.4.1 remains. Book/cards/map/target/roadmap/task/live/resume/history align. Safe dual-host Lua47.5 next, then writer49/referenced-blind48/Phase0 owner45 before wider features/admission; authorized focused commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.47.4 from clean Dart47.3. Recover frozen15 named-capture-endpoint-presence-authority.md and current Julia mark/span/name/function owners, ordinary anonymous normal and public SDK/emitted producer conventions. Independently execute native/restored/plan/separate emitted current15 before edits; repair only actual outliers or retain compatibility proof. Preserve named versus anonymous origins, valid-only takes, absent/empty/zero/Unicode, name effects and available cursor/rest/between/writers without new helper/domain/frame/schema policy. Focused normal/direct dependents/book/docs/proof/commit, then safe Lua47.5. Writer49/referenced-blind48/Phase0 owner45 precede wider features/full23.4/push. Exact canonical selection23.4.1, pressure20.1, declared hosts/phase/deprecations and broader prerequisites remain separate.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.47.5 from clean Julia47.4. Read frozen15 named endpoint/origin authority and current safe Lua named mark/anonymous owners/public SDK/emitted probe/normal conventions. Independently execute native/restored/plan/separate emitted on installed PUC5.5 and LuaJIT before edits; repair actual outliers or retain compatibility. Preserve names, valid-only mark movement, anonymous zero-arg, available cursor/rest/between/writers with no new helper/domain/schema/frame or declared5.4/unsafe formatter/full suite claim. Focused normal/direct dependents/book/docs/proof/commit then writer49, referenced-blind48, exact Phase0 owner45 before wider features/full23.4/push. Selection23.4.1/pressure20.1/declared hosts/phase/Dart deprecations and broader prerequisites remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.47.4` — Julia named take repaired:15pass/385 focused assertions; safe Lua47.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.3` — Dart named endpoints/origins repaired:15pass/36 focused tests; Julia47.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.2` — Rust47.2 named endpoint/origin15pass/9 tests, source unchanged; Dart47.3 next, then peers/49/48/45. Focused PNT/no push.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.1` — Perl47.1 named endpoint/range15pass,29 selected groups; regenerate old emitted parsers. Rust47.2 next, then peers/49/48/45; no push.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.47.4 from clean Dart47.3. Recover frozen15
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46` — Daily safe cleanup complete; resume Perl capture endpoint implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.0` — Capture endpoint target grounded; independent Perl repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.37` — Perl emitted boundary catalogs repaired; pre-match endpoint authority next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.38.3` — Recorded-host early-LS cursor repairs complete; Perl emitted boundary catalog next.
 
 ## History
 

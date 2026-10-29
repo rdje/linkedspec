@@ -124,3 +124,20 @@ baseline; formatting only wraps a new switch arm, tested preformat source retain
 Whole-package SDK deprecations2.25/selection23.4.1 remain. Packet
 dart-named-capture-endpoint-intake.json.gz retains closure. Independent Julia47.4/
 safe Lua47.5, writer49/referenced-blind48/Phase0 owner45 precede full admission.
+
+## Julia repair47.4 (2026-10-29)
+
+Named nullable endpoint guards already work. One-argument capture_take previously
+dispatches anonymously; it now shares the existing named helper's name/typed span/
+valid-only mark update paths. Zero-argument anonymous and available endpoints/
+writers remain unchanged, no new state/frame/schema/helper/domain policy.
+Independent15-source SDK/restored/plan/separate-process8healthy7RED ->15pass;
+ordinary84pass21fail ->105pass. Named105/anonymous112/named Number-function-scope155/
+complete marks13 pass385 assertions with depwarn=error. Source/normalized/compiled/
+plan/emitted/full metadata and8 healthy complete outcomes/traces exact. Same15 old
+modules reuse updated runtime/precompile image; no source regeneration. Actual
+post-edit precompile/cache notices are strictly qualified/retained, no warning/
+error suppression or empty-stderr claim. Current project/depot, no isolation.
+Packet julia-named-capture-endpoint-intake.json.gz retains closure, normal runtests
+registration verified; exact selection23.4.1 remains. Safe Lua47.5/49/48/45 and full
+admission remain separate. Earlier anonymous/Number observations remain historical.

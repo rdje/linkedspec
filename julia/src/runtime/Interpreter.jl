@@ -4696,6 +4696,16 @@ function _evaluate_runtime_call!(
             helper_name,
         )
     elseif helper_name in _RUNTIME_ANONYMOUS_CAPTURE_HELPER_NAMES
+        if helper_name == "capture_take" && length(args) == 1
+            return _call_runtime_named_capture_helper!(
+                engine,
+                helper_name,
+                args,
+                context,
+                rule_label,
+                current_edge,
+            )
+        end
         return _call_runtime_anonymous_capture_helper!(
             helper_name,
             context,
@@ -8436,6 +8446,7 @@ function _call_runtime_named_capture_helper!(
         end
         return nothing
     elseif helper_name in (
+            "capture_take",
             "capture_from",
             "capture_len_from",
             "capture_until_cursor_from",
@@ -8455,6 +8466,7 @@ function _call_runtime_named_capture_helper!(
             return nothing
         end
         endpoint = if helper_name in (
+                "capture_take",
                 "capture_from",
                 "capture_len_from",
                 "capture_take_len_from",
@@ -8475,7 +8487,8 @@ function _call_runtime_named_capture_helper!(
         end
         length_result = occursin("_len_", helper_name) || helper_name == "capture_len_from"
         result = length_result ? span_length(start, endpoint) : span_text(start, endpoint)
-        if result !== nothing && startswith(helper_name, "capture_take_")
+        if result !== nothing &&
+                (helper_name == "capture_take" || startswith(helper_name, "capture_take_"))
             _typed_mark_set!(
                 context,
                 rule_label,

@@ -7,7 +7,7 @@ answers:
   - "must mark-name expressions run when a capture endpoint is unavailable"
   - "which task owns named capture endpoint absence and overload repairs"
 date: 2026-10-29
-status: bounded Dart47.3 named endpoint/origin repair focused-verified; independent peers/writer49/selection/admission separate
+status: bounded Julia47.4 named take repair focused-verified; safe Lua/writer49/selection/full admission separate
 tags: [capture, named, endpoint, absence, overload, mutation, arguments]
 evidence: "TYPE47.0 named-capture-endpoint-authority-intake.json.gz retains15 normative sources, independent Perl7healthy8RED/native8-7 and Dart2healthy13RED, full source/module/metadata/result/state/lowering and separate writer49 discovery."
 reverify: "Recover probe_perl_named_capture_endpoint.pl and Dart native/fresh probes plus read_named_capture_endpoint_authority.py from47.0 packet; run project wrappers. Initial16 includes separate writer49 source, normative fixture15 excludes it. Read named-capture-endpoint-presence-authority.md before producer edits."
@@ -72,3 +72,22 @@ dart-named-capture-endpoint-intake.json.gz retains closure. Independent Julia47.
 safe Lua47.5, writer49/referenced-blind48/Phase0 owner45 precede full admission.
 
 See [[dart-named-capture-endpoint-presence-repair]] for current cause and recovery. Earlier observations remain historical.
+
+## Julia repair47.4 (2026-10-29)
+
+Named nullable endpoint guards already work. One-argument capture_take previously
+dispatches anonymously; it now shares the existing named helper's name/typed span/
+valid-only mark update paths. Zero-argument anonymous and available endpoints/
+writers remain unchanged, no new state/frame/schema/helper/domain policy.
+Independent15-source SDK/restored/plan/separate-process8healthy7RED ->15pass;
+ordinary84pass21fail ->105pass. Named105/anonymous112/named Number-function-scope155/
+complete marks13 pass385 assertions with depwarn=error. Source/normalized/compiled/
+plan/emitted/full metadata and8 healthy complete outcomes/traces exact. Same15 old
+modules reuse updated runtime/precompile image; no source regeneration. Actual
+post-edit precompile/cache notices are strictly qualified/retained, no warning/
+error suppression or empty-stderr claim. Current project/depot, no isolation.
+Packet julia-named-capture-endpoint-intake.json.gz retains closure, normal runtests
+registration verified; exact selection23.4.1 remains. Safe Lua47.5/49/48/45 and full
+admission remain separate. Earlier anonymous/Number observations remain historical.
+
+See [[julia-named-capture-take-origin-repair]] for current cause and recovery.

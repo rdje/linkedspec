@@ -4857,6 +4857,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Dart47.3 adds dart/test/named_capture_endpoint_absence_test.dart using frozen15 target; ordinary discovery/current three SDK routes verified and separate VM reuses original15 emitted modules. Exact canonical presence/selection remains required before admission/push.
 
+  Julia47.4 adds julia/test/named_capture_endpoint_absence_test.jl and explicit runtests include. Ordinary105 assertions and separate emitted current15 verified; exact canonical presence/selection remains before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9115,13 +9117,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.3 - preserve Dart named capture endpoints and take origins`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.4`
-  Status: `pending` / P1 after47.0 before48/45/full23.4/push
+  Status: `completed` / P1 after47.0 before48/45/full23.4/push
   Goal: Independently assess and repair confirmed Julia named endpoint/absence/overload outliers against frozen47.0.
+  Activation: clean `7b61f057a9834424d1a52ad525c5661bf3e7ec6e`; Dart47.3 committed/brief empty/no background work. Frozen15 authority, current named Number/mark/anonymous facts, nullable named span owner and public SDK/emitted/ordinary test conventions reviewed. Execute own native/restored/plan/separate-process emitted baseline and ordinary consumer before runtime edits; preserve existing names/origins/available endpoints/writers/function scope.
   Acceptance: Establish own native/restored/plan/fresh supported baseline before edits; repair only actual outliers or retain compatibility proof. Preserve available cursor/rest/between/writers, missing/reversed/real zero/Unicode, existing anonymous zero-arg and named take overloads, ordered accepted names and valid-only mark mutation through existing sole owners. No peer-failure inference, new helper/key/schema/frame policy or unsafe/undeclared-host claim. Focused normal regression/book/docs/proof/commit per child before admission.
-  Planned verification tier: focused
-  Planned focused checks: Frozen named RED/GREEN/healthy/state/name-effect/full-source/metadata and direct named/anonymous/range/function dependents per backend; safe Lua uses installed PUC5.5/LuaJIT, no unsafe formatter/full suite.
-  Planned canonical trigger: Full23.4/final clean push after47/48/45 and existing prerequisites; canonical selection23.4.1 includes each new normal.
-  Planned claim verification: none: Finite authored named capture functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent15 SDK/restored/plan/separate-process8healthy7RED ->15pass; ordinary84pass21fail ->105pass. New named105/anonymous112/named Number-scope-function155/complete marks13 pass385; depwarn=error/strict precompile stderr qualification; exact source/metadata/healthy traces/old15 modules, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after47.5/49/48/45 and existing prerequisites; normal runtests registration verified, exact canonical selection23.4.1 remains. No public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored named take/origin/endpoint/name-effect and direct-dependent functional assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own current15 native/restored/plan/separate emitted baseline has8 healthy7RED. Ordinary105 assertions fail21 values across7 sources; missing/real-empty endpoints already behave correctly, but named takes skip name effects and use/mutate the anonymous origin. Full source/state/result/trace/modules/metadata retained before edits.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _evaluate_runtime_call! dispatches capture_take via the anonymous helper set regardless of its one argument. Existing _call_runtime_named_capture_helper! already evaluates names and guards nullable/ordered named spans and updates valid takes; reuse it rather than altering working endpoint/state owners.
+  - [x] **FIX**: Dispatch the one-argument capture_take overload to the named helper. Include its existing spelling in named match-start text selection and successful named-mark movement. Anonymous zero-arg remains on its original path; no new helper/state/frame/schema/domain or writer/available-endpoint policy.
+  - [x] **ADDRESSED (verified)**: All15 pass all four routes, including distinct origins, missing/reversed/real empty/zero/Unicode and name effects. Same15 original emitted modules reuse updated runtime, source/normalized/compiled/plan/emitted/full metadata unchanged, and8 healthy complete SDK/fresh outcomes/traces exact. Update Julia runtime/precompile image, no source regeneration.
+  - [x] **NO REGRESSION**: Named105/anonymous112/named Number-function-scope155/complete marks13 pass385 assertions with depwarn=error. Actual post-edit package precompilation and concurrent cache notices strictly qualified/retained; no warning/error suppression or empty-stderr claim. Same project/depot, no isolated dependencies/full package or peer credit.
+  - [x] **LOCKSTEP**: Packet julia-named-capture-endpoint-intake.json.gz retains actual producers/runtime patch/before+after/normal RED/fixture/modules/SDK/fresh/full results/traces/tests/receipts. Ordinary include registration verified; exact canonical selection23.4.1 remains. Book/cards/map/target/roadmap/task/live/resume/history align. Safe Lua47.5 then49/48/45, authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.4 - route Julia named capture_take through named span ownership`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.5`
   Status: `pending` / P1 after47.0 before48/45/full23.4/push
@@ -9559,7 +9571,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.4` | `pending` | Independently assess Julia named endpoint presence and named take origins. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.5` | `pending` | Independently assess safe PUC5.5/LuaJIT named endpoint presence and take origins. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
