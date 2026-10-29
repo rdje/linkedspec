@@ -108,3 +108,19 @@ lock identities match; dependency diagnostics remain opaque. Actual red/final
 producer and initial logging-only format correction retained, temporary probe
 verified/archived/removed, no normal allocator. Packet rust-named-capture-endpoint-intake.json.gz
 retains closure. Independent47.3-.5/49/48/45/selection/admission remain separate.
+
+## Dart repair47.3 (2026-10-29)
+
+Named text/width/take-width now require nullable localMatch after name evaluation;
+one-argument capture_take uses/advances its named mark and preserves the anonymous
+boundary. Missing/reversed returns null without extra mutation, empty/zero/Unicode
+and name effects remain. No new owner/state/frame/schema/helper/domain policy.
+Independent15-source SDK/restored/plan/separate VM2healthy13RED ->15pass, ordinary
+15 cases13RED ->15pass. Four targets36 tests/fatal changed-file analysis/final format
+pass; original source/normalized/compiled/plan/emitted/full metadata and both healthy
+complete results/traces exact. Same15 old modules reuse updated runtime: rebuild
+AOT apps, no source regeneration. Initial instrument brace error recovered before
+baseline; formatting only wraps a new switch arm, tested preformat source retained.
+Whole-package SDK deprecations2.25/selection23.4.1 remain. Packet
+dart-named-capture-endpoint-intake.json.gz retains closure. Independent Julia47.4/
+safe Lua47.5, writer49/referenced-blind48/Phase0 owner45 precede full admission.

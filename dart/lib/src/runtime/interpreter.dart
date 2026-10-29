@@ -6810,6 +6810,21 @@ final class LinkedSpecRuntimeEngine {
       case 'capture_rest_len':
         return spanLength(captureStart, inputEnd);
       case 'capture_take':
+        if (args.length == 1) {
+          final name = markName(0);
+          final start = name == null
+              ? null
+              : context.typedMarkCodeUnit(ruleLabel, name, helperName);
+          final end = context.registers.localMatch?.codeUnitStart;
+          if (name == null || start == null || end == null) {
+            return null;
+          }
+          final value = spanText(start, end);
+          if (value != null) {
+            context.typedMarkSet(ruleLabel, name, cursor, helperName);
+          }
+          return value;
+        }
         if (args.isEmpty && context.registers.localMatch == null) {
           return null;
         }
@@ -6981,15 +6996,17 @@ final class LinkedSpecRuntimeEngine {
           return null;
         }
         final end = switch (helperName) {
-          'capture_from' ||
-          'capture_len_from' ||
-          'capture_take_len_from' => matchStart,
+          'capture_from' || 'capture_len_from' || 'capture_take_len_from' =>
+            context.registers.localMatch?.codeUnitStart,
           'capture_until_cursor_from' ||
           'capture_until_cursor_len_from' ||
           'capture_take_until_cursor_from' ||
           'capture_take_until_cursor_len_from' => cursor,
           _ => inputEnd,
         };
+        if (end == null) {
+          return null;
+        }
         final lengthResult =
             helperName.contains('_len_') || helperName == 'capture_len_from';
         final value = lengthResult

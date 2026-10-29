@@ -7,7 +7,7 @@ answers:
   - "must mark-name expressions run when a capture endpoint is unavailable"
   - "which task owns named capture endpoint absence and overload repairs"
 date: 2026-10-29
-status: bounded Perl47.1/Rust47.2 named endpoint and Rust named take repair verified; independent47.3-.5/writer49/selection/full admission separate
+status: bounded Dart47.3 named endpoint/origin repair focused-verified; independent peers/writer49/selection/admission separate
 tags: [capture, named, endpoint, absence, overload, mutation, arguments]
 evidence: "TYPE47.0 named-capture-endpoint-authority-intake.json.gz retains15 normative sources, independent Perl7healthy8RED/native8-7 and Dart2healthy13RED, full source/module/metadata/result/state/lowering and separate writer49 discovery."
 reverify: "Recover probe_perl_named_capture_endpoint.pl and Dart native/fresh probes plus read_named_capture_endpoint_authority.py from47.0 packet; run project wrappers. Initial16 includes separate writer49 source, normative fixture15 excludes it. Read named-capture-endpoint-presence-authority.md before producer edits."
@@ -54,3 +54,21 @@ source/serde/plan/emitted/public metadata exact, old modules relink without
 regeneration. [[rust-named-capture-endpoint-presence-repair]] retains actual
 producers/normal RED/format/temp cleanup/lock/diagnostic limits. No new state/
 frame/schema/helper/domain/arity policy;47.3-.5/49/48/45/admission remain independent.
+
+## Dart repair47.3 (2026-10-29)
+
+Named text/width/take-width now require nullable localMatch after name evaluation;
+one-argument capture_take uses/advances its named mark and preserves the anonymous
+boundary. Missing/reversed returns null without extra mutation, empty/zero/Unicode
+and name effects remain. No new owner/state/frame/schema/helper/domain policy.
+Independent15-source SDK/restored/plan/separate VM2healthy13RED ->15pass, ordinary
+15 cases13RED ->15pass. Four targets36 tests/fatal changed-file analysis/final format
+pass; original source/normalized/compiled/plan/emitted/full metadata and both healthy
+complete results/traces exact. Same15 old modules reuse updated runtime: rebuild
+AOT apps, no source regeneration. Initial instrument brace error recovered before
+baseline; formatting only wraps a new switch arm, tested preformat source retained.
+Whole-package SDK deprecations2.25/selection23.4.1 remain. Packet
+dart-named-capture-endpoint-intake.json.gz retains closure. Independent Julia47.4/
+safe Lua47.5, writer49/referenced-blind48/Phase0 owner45 precede full admission.
+
+See [[dart-named-capture-endpoint-presence-repair]] for current cause and recovery. Earlier observations remain historical.

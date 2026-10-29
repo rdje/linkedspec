@@ -4855,6 +4855,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust named endpoint47.2 adds rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs; ordinary Cargo discovery/three SDK routes and retained separately compiled emitted sources pass, exact canonical selection remains required before admission/push. Runtime relink consumes unchanged source, temporary probe removed; no writer49/peer/full admission credit.
 
+  Dart47.3 adds dart/test/named_capture_endpoint_absence_test.dart using frozen15 target; ordinary discovery/current three SDK routes verified and separate VM reuses original15 emitted modules. Exact canonical presence/selection remains required before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9093,13 +9095,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.2 - preserve Rust named capture endpoint presence and take origins`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.3`
-  Status: `pending` / P1 after47.0 before48/45/full23.4/push
+  Status: `completed` / P1 after47.0 before48/45/full23.4/push
   Goal: Independently assess and repair confirmed Dart named endpoint/absence/overload outliers against frozen47.0.
+  Activation: clean `648cb168ced740d98b72666962b3f343b044da98`; Rust47.2 committed, brief empty, no background work. Frozen target/known Dart gap/public SDK probe, nullable local-match mark helper and ordinary anonymous/Number tests reviewed. Reverify own current15 native/restored/plan/separate VM and ordinary RED before runtime edits; preserve names, anonymous origin, available endpoints/writers and source metadata. No new schema/frame/helper/domain policy.
   Acceptance: Establish own native/restored/plan/fresh supported baseline before edits; repair only actual outliers or retain compatibility proof. Preserve available cursor/rest/between/writers, missing/reversed/real zero/Unicode, existing anonymous zero-arg and named take overloads, ordered accepted names and valid-only mark mutation through existing sole owners. No peer-failure inference, new helper/key/schema/frame policy or unsafe/undeclared-host claim. Focused normal regression/book/docs/proof/commit per child before admission.
-  Planned verification tier: focused
-  Planned focused checks: Frozen named RED/GREEN/healthy/state/name-effect/full-source/metadata and direct named/anonymous/range/function dependents per backend; safe Lua uses installed PUC5.5/LuaJIT, no unsafe formatter/full suite.
-  Planned canonical trigger: Full23.4/final clean push after47/48/45 and existing prerequisites; canonical selection23.4.1 includes each new normal.
-  Planned claim verification: none: Finite authored named capture functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Own current15 SDK/restored/plan/separate VM2healthy13RED ->15pass; ordinary15 cases13RED ->15pass. Four targets36 tests, changed-file fatal analysis/final format, source/metadata/healthy full result+trace identity, original15 emitted modules reuse; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after47.4-.5/49/48/45 and existing prerequisites. Exact new normal canonical selection23.4.1 and whole-package SDK deprecations DART-STARTUP-READING.2.25 remain; no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored named endpoint/origin/state/name-effect and direct-dependent functional assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent current15 native/restored/plan/separate VM reproduces2healthy13RED exactly matching retained47.0 source/full SDK/fresh observations. Ordinary15-case consumer fails13 cases. Distinct named/anonymous origins and final marks expose wrong-origin takes even when returned text happens to agree; computed name effects are skipped by the old named text take.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _callCaptureMarkHelper routes three named match-start readers/width take through _captureEndCodeUnit's cursor fallback. capture_take ignores its argument and reads/mutates anonymous captureStart. Existing _captureName, nullable localMatch and typed mark/span methods already own the needed semantics; no new frame/state/helper is required.
+  - [x] **FIX**: Named match-start grouped cases use nullable codeUnitStart after names and return null before projection if absent. Existing one-argument text take evaluates its name, uses its named typed span, requires the local endpoint and advances only that named mark on success. Anonymous zero-arg path, available cursor/rest/between/writers/name domain/function ownership remain.
+  - [x] **ADDRESSED (verified)**: All15 pass native/restored/full matched/value/character cursor and plan/separate VM values. Failed takes add no movement, missing marks stay missing, zero/empty/Unicode remain defined, name effects finish. Source/normalized/compiled/plan/emitted/full public metadata and both original healthy complete results/traces are exact. Same15 baseline modules pass with updated runtime; rebuild AOT apps, no source regeneration.
+  - [x] **NO REGRESSION**: Four selected files pass36 tests including anonymous endpoint, named Number/callback/function fences and complete named-mark/CLI contracts. Fatal changed-file analysis and final format pass. Formatter only wraps one new nullable switch arm; actual tested preformat source retained. Whole-package SDK deprecations2.25 stay owned, no suppression/full component claim. Initial generator literal-brace error recovered before product baseline with exact initial/final producers retained.
+  - [x] **LOCKSTEP**: Packet dart-named-capture-endpoint-intake.json.gz retains actual producers/runtime patch/before+after/tested epoch/fixtures/normal RED/modules/SDK/fresh/trace/tests/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; ordinary discovery verified, exact canonical selection23.4.1 before admission. Independent47.4 Julia then safe Lua47.5/49/48/45; authorized focused commit/no push.
+  History pressure: CHANGES.md crossed its rollover threshold; the normal tool archived exactly63 committed suffix lines into docs/history/changes/segment-4946-53463af50f50.md. Source commit/blob/bytes/hash, prior manifest rows and retained prefix are verified; no immutable history edited or caps raised. Producer/receipt and before/after inputs are retained in the same packet.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.3 - preserve Dart named capture endpoints and take origins`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.4`
   Status: `pending` / P1 after47.0 before48/45/full23.4/push
@@ -9546,7 +9559,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.3` | `pending` | Repair independently confirmed Dart named endpoint/absence and named text-take origin outliers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.4` | `pending` | Independently assess Julia named endpoint presence and named take origins. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
