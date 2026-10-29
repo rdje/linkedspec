@@ -4833,6 +4833,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua diagnostic39.4.8 requires exact ordinary/canonical registration of lua/test/runtime_unknown_helper_diagnostic_test.lua. Direct105 plus minimum289/callable449 per host is focused proof, not runner registration or full admission.
 
+  Selected cursor38 adds dart/test/fixtures/gap_ls_broad_carrier.json as the original wildcard-carrier acceptance supplement. SDK/restored/plan current Dart/Julia proof is explicit; require actual separate-process Dart/Julia emitted replay of this supplemental1/1 before full admission/push. Existing core8-module fresh proof does not include it. Lua38.3 intake will include core plus broad from its RED epoch; exact new Lua normal registration remains required.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -7630,15 +7632,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Packet dart-gap-ls-cursor-intake.json.gz retains actual producers/epochs/inputs/SDK/fresh/trace/modules/normal/analysis/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; normal fixture uses existing discovery. Independent Julia38.2 then Lua38.3 next, parent38 and broader prerequisites remain open. Authorized focused commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.1 - advance Dart selected cursor before capture-enabled LS`.
 
+  Acceptance supplement in38.2: the original broad wildcard carrier was not in the earlier7/9 matrix. Its exact new normal fixture now passes SDK/restored/plan with one payload/span/cursor6 and no null suffixes; current Dart9normal/fatal changed-test analysis and public Perl native/separate emitted1/1 pass. Earlier28/core8-module receipts remain frozen; no supplemental newer-backend fresh replay credit.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.2`
-  Status: `pending` / P1 after shared authority38.0/Dart38.1, before37/full23.4/push
+  Status: `completed` / P1 after shared authority38.0/Dart38.1, before37/full23.4/push
   Goal: Repair independently confirmed Julia early-LS selected-match live/caller cursor drift through the existing sole runtime state owner.
   Reproduction: Exact Hcat source matches the Perl oracle source byte-for-byte. Julia native/reconstructed SpecFile/plan/fresh Module returns[[empty,cat,1],1] while public reference native/fresh returns[[empty,cat,4],4]. Source/probe/channels retained in active-edge-body-julia-intake.json.gz. No competing untargeted pattern in this control;36.3 selection repair leaves this separate path unchanged.
   Root / acceptance: _prepare_runtime_gap_candidate! installs selected registers and gap context; _accept_runtime_regex_match! updates live cursor only after LS. Reuse frozen38.0 live-cursor versus gap-boundary/return/rollback/explicit-mutation authority. Add exact correct4/4 regression and original broad-carrier values, preserve native/generated parity and current commit/discard/frame contracts, run focused lifecycle/recognition/source controls, update book/docs and commit before admission. Do not bless1/null suffixes or infer a Lua defect.
-  Planned verification tier: focused
-  Planned focused checks: Exact native/reconstructed/plan/fresh RED/GREEN, direct-dependent gap/return/cursor/rollback assertions, compilation/normal registration/book continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4 and clean push require verified38 repair; public format/infrastructure movement separately owned.
-  Planned claim verification: none: Finite authored functional/source regression, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Core portable7/9,3healthy4RED ->7pass plus legacy1/1 SDK/restored/plan/same8 baseline modules fresh, exact inputs/four healthy outcomes/legacy traces preserved. Current normal124 including original broad1/1, nullable390/recognition207, nested-gap/rollback6 assertions; Julia registration once. Supplemental Dart9normal/fatal analysis and public Perl broad1/1 native/separate emitted; no supplemental newer-backend fresh claim. Book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after Lua38.3, phase/lifecycle/slot/registration/pressure/declared-host/unsafe formatter/Dart SDK prerequisites; supplemental broad Dart/Julia fresh emission explicitly23.4.1 before admission. No public format/infrastructure movement.
+  Claim verification: none: Finite authored selected-cursor/rewind/broad-carrier/rollback distinctions, no population measurement.
+
+  Activation: clean `7d0ea6493b01fe2ca78b6012c0248d82b5e11f35`; shared38.0 target and Julia canonical gap-preselection/accept owners reviewed. Independent actual SDK/restored/plan/fresh RED and own unflagged baseline before product changes.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent core8sources10inputs: portable7/9 has3healthy4actualRED, plus healthy legacy1/1. Early and normal LS read entry cursor; acceptance overwrites explicit LS rewind; repeated rewind bypasses typed gap commit regression. Actual native/full SDK/trace/emitted/fresh observations retained before product mutation, no peer inference.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _prepare_runtime_gap_candidate! installs registers/candidate without live advance; _accept_runtime_regex_match! unconditionally assigns match end after LS. Whole return skips that write and LS mutation is otherwise reset. Frozen selection/end/rewind/commit reference oracles distinguish both causes.
+  - [x] **FIX**: Advance existing context.cursor_codeunit during flagged preselection and carry private match_preselected to acceptance to skip redundant write. Preserve ordinary acceptance, registers, sole recognition/gap owner, separate post-LE boundary validation/commit, whole returns and unflagged timing; no new cursor/frame/token/schema.
+  - [x] **ADDRESSED (verified)**:7portable/9inputs pass plus legacy1/1; SDK/restored value/matched/character cursor/typed guards and same8 modules fresh public values/errors agree. Exact raw/normalized/compiled/plan/emitted and four healthy observations/legacy traces preserved. Current normal124 also verifies original broad carrier1/1 across SDK/restored/plan with one exact payload/span/cursor6, no null suffixes. Supplemental public reference native/separate emitted1/1 agrees.
+  - [x] **NO REGRESSION**: Nullable390/recognition207 plus focused existing nested-gap/rollback6 assertions pass; current normal included once. Supplemental Dart normal9 and fatal changed-test analysis pass, completing its explicit original-broad acceptance without rewriting prior28-test/core8-module evidence. Supplemental Dart/Julia broad fresh emission remains admission23.4.1-owned, no false fresh credit. Compiler/emitter/matching/recognition authority/schema untouched.
+  - [x] **LOCKSTEP**: Packet julia-gap-ls-cursor-intake.json.gz retains producers/epochs/inputs/SDK/fresh/trace/modules/core/supplement/reference/direct controls/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. Lua38.3 independent core+broad intake next, parent38/broader prerequisites remain open; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.2 - advance Julia selected cursor before capture-enabled LS`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.3`
   Status: `pending` / P1 after shared38.0 and peer38.1/.2, before37/full23.4/push
@@ -9214,7 +9229,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.2` | `pending` | Independently repair Julia capture-enabled LS selected-match live cursor. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.3` | `pending` | Independently repair safe Lua capture-enabled LS selected-match live cursor. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

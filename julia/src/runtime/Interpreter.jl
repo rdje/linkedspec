@@ -2600,6 +2600,8 @@ function _prepare_runtime_gap_candidate!(
         regex_index,
         one_match.codeunit_end,
     )
+    # LS observes the selected end; gap-boundary commit still follows LE.
+    context.cursor_codeunit = one_match.codeunit_end
     context.registers = with_local_match(context.registers, one_match)
     _note_runtime_recognition_match!(context, one_match)
     _install_runtime_gap_candidate!(context, rule.label, one_match)
@@ -2743,6 +2745,7 @@ function _execute_runtime_regex_once!(
         context;
         action_iteration_values = action_iteration_values,
         collect_and_group_value = collect_and_group_value,
+        match_preselected = match_preselected,
     )
     _set_runtime_gap_phase!(context, rule.label, "LE")
     loop_end = _execute_runtime_lifecycle!(engine, rule, "LE", context)
@@ -2952,8 +2955,11 @@ function _accept_runtime_regex_match!(
     action_iteration_values = nothing,
     collect_and_group_value::Bool = false,
     required_action = nothing,
+    match_preselected::Bool = false,
 )
-    context.cursor_codeunit = one_match.codeunit_end
+    if !match_preselected
+        context.cursor_codeunit = one_match.codeunit_end
+    end
     context.registers = with_local_match(context.registers, one_match)
     _note_runtime_recognition_match!(context, one_match)
 

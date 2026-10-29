@@ -7,7 +7,7 @@ answers:
   - "is selected-match cursor advance the same as gap boundary commit"
   - "what is the shared early LS cursor repair target"
 date: 2026-10-29
-status: shared38.0 frozen; Dart38.1 fixed/targeted-checked, independent Julia38.2/Lua38.3 next
+status: shared38.0/Dart38.1/Julia38.2 targeted-checked; independent Lua38.3 next
 tags: [cursor, lifecycle, LS, capture-gaps, mutation, authority, qualification]
 evidence: "gap-ls-cursor-authority-intake.json.gz retains public Perl8sources10inputs native/separate emitted process exact values/cursors/typed error fields; portable7sources9inputs plus unflagged compatibility1/1, current neutral checker and exact producers/receipts."
 reverify: "Recover prepare_gap_ls_cursor.py and probe_gap_ls_cursor_reference.pl from the packet; run Perl native and --fresh separately through tools/project_data_run.sh, then read_gap_ls_reference.py. Run tools/check_inter_match_gap_capture_contract.py through tools/run_python_project_data.sh."
@@ -45,3 +45,14 @@ healthy observations/legacy traces unchanged.28normal/nullable plus2gap native/
 rollback/reconstructed/plan tests and fatal changed-file analysis pass. Existing
 matching SDK warnings stay startup2.25-owned; no full gate claim. Current proof:
 [[dart-gap-early-ls-return-cursor-drift]]. Julia/Lua remain independent owners.
+
+2026-10-29 Julia38.2 independently fixes the same core7/9 with own3healthy4RED,
+plus legacy1/1; eight baseline modules/four healthy outcomes/legacy traces stay
+identical. Current normal124 includes the original broad carrier1/1 supplement,
+nullable390/recognition207 and six focused nested-gap/rollback assertions pass.
+The supplement also completes Dart38.1 broad acceptance (current9normal tests/
+fatal analysis). Public Perl native/separate emitted1/1 confirms exact nested
+payload/gap span/cursor6. Supplemental Dart/Julia broad fresh emission is not
+part of the core8-module claim;23.4.1 owns it before admission. Lua38.3 will
+independently include core and broad from RED. Current proof:
+[[julia-gap-early-ls-return-cursor-drift]].

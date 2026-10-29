@@ -20,9 +20,14 @@ Map<String, Object?> observeGapCursor(Object? Function() operation) {
 }
 
 void main() {
-  final fixtures =
-      jsonDecode(File('test/fixtures/gap_ls_cursor.json').readAsStringSync())
-          as List;
+  final fixtures = [
+    ...jsonDecode(File('test/fixtures/gap_ls_cursor.json').readAsStringSync())
+        as List,
+    ...jsonDecode(
+          File('test/fixtures/gap_ls_broad_carrier.json').readAsStringSync(),
+        )
+        as List,
+  ];
   for (final fixture in fixtures) {
     final name = fixture['name'] as String;
     test('Dart selected cursor before LS $name', () {

@@ -22,3 +22,11 @@ no new backend RED or repair credit. No new cursor/frame/token/schema authority.
 28normal/nullable+2gap native/rollback/reconstructed/plan tests and fatal changed
 analysis pass. Whole-package SDK matching warnings remain startup2.25-owned.
 Closure: dart-gap-ls-cursor-intake.json.gz; independent Julia38.2/Lua38.3 next.
+
+2026-10-29 Julia38.2 core7/9,3healthy4RED ->7pass plus legacy1/1, same8 modules
+fresh/input/four healthy outcomes preserved. Current normal124 includes original
+broad carrier supplement1/1 (dart/test/fixtures/gap_ls_broad_carrier.json);
+nullable390/recognition207/direct nested-gap+rollback6 pass. Supplemental Dart
+normal9/fatal test analysis and public Perl native/separate emitted1/1 pass.
+Broader newer-backend fresh replay remains23.4.1-owned before admission, outside
+core8-module claim. Lua38.3 independently intakes both fixtures next.

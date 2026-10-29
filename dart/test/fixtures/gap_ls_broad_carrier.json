@@ -1,0 +1,25 @@
+[
+  {
+    "name": "original_broad_carrier",
+    "source": "Top::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>..)/\n /:/\n /(?<token>cat)/\n @capture_gaps\n LS {return([gap_text(),gap_span(),match_text()])}\n -> Value[2] {return(\"unreached\")}\n",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "expected": [
+          [
+            ":",
+            {
+              "source_id": "input",
+              "start": 2,
+              "end": 3,
+              "provenance": "gap"
+            },
+            "cat"
+          ]
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 6
+      }
+    ]
+  }
+]

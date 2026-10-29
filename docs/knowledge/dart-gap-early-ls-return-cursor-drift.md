@@ -52,3 +52,9 @@ rollback/reconstruction/plan2tests pass; formatted/fatal changed analysis clean.
 Whole-package analysis still has only owned SDK matching warnings under startup
 2.25, not a complete gate pass. Packet dart-gap-ls-cursor-intake.json.gz retains
 closure. Julia38.2/Lua38.3 independent repairs and broader admission remain.
+
+2026-10-29 Julia38.2 supplies explicit original broad-carrier acceptance
+supplement for Dart38.1: current9normal/fatal test analysis and reference native/
+separate emitted1/1 pass, one exact payload/span/cursor6 and no null suffixes.
+Earlier core7/9 and8-module fresh receipts remain frozen; supplemental broad
+Dart/Julia fresh emission is23.4.1-owned before admission.
