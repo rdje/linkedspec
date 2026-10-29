@@ -77,3 +77,14 @@ observation; coherent .7.1 must preserve healthy explicit pure-null records.
 Current proof: [[lua-null-return-and-pure-observation-gaps]],
 [[blind-le-public-phase-authority-gap]]. Original43-assert admission evidence
 remains historical; no public schema/facade/second authority change in intake.
+
+2026-10-29 coherent nullable39.4.7.1 now carries private owning accepted
+return provenance and independently classifies pure structure-free normal
+observation. No parser matched override, selected span or authority/schema change.
+Qualified32sources52inputs21healthy11RED ->32pass506 per installed host, same33
+baseline modules fresh/full records; all inputs/21healthy observations preserved.
+Deferred blind_LE source/two inputs unchanged, no passing credit until phase .5.2.
+Observation43/recognition246/progress234/postcall274 pass per host. Current packet
+lua-nullable-repair-intake.json.gz retains closure; original intake stays frozen.
+P1 phase .5.2 next, P2 .8/declared-host/unsafe formatter/registration/pressure/
+slot/full admission remain separate.

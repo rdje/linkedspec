@@ -8,7 +8,7 @@ answers:
   - "why must Lua null return and observation be repaired together"
   - "which Lua nullable source is phase-authority qualified"
 date: 2026-10-29
-status: independent33-source intake complete; qualified32/52 coherent repair39.4.7.1 next, phase .5.2 deferred
+status: bounded nullable39.4.7.1 repaired/targeted-checked; phase .5.2 and broader admission remain
 tags: [lua, luajit, null, acceptance, return, observation, provenance, qualification]
 evidence: "lua-null-context-intake.json.gz retains33sources54inputs per host21healthy12target differences; qualified32sources52inputs21healthy11nullableRED, one blind_LE source/two inputs excluded with public phase proof.33 modules fresh/full records/54 actual traces and host input identity retained."
 reverify: "Recover actual Lua nullable probes/readers/qualification from retained packet, run SDK and separate fresh process per installed host before --fresh. Preserve phase exclusion and exact fixture-derived row census."
@@ -43,3 +43,14 @@ reference proves repeated Perl LE omission/plain AND preservation versus Lua
 omission in both; P1 .5.2 linked startup27.1 owns authority before admission.
 Earlier passing peer native observations are retained, not portable phase credit.
 Declared5.4/unsafe formatter/registration/pressure/P2 .8/full admission remain.
+
+2026-10-29 coherent nullable39.4.7.1 now carries private owning accepted
+return provenance and independently classifies pure structure-free normal
+observation. No parser matched override, selected span or authority/schema change.
+Qualified32sources52inputs21healthy11RED ->32pass506 per installed host, same33
+baseline modules fresh/full records; all inputs/21healthy observations preserved.
+Deferred blind_LE source/two inputs unchanged, no passing credit until phase .5.2.
+Observation43/recognition246/progress234/postcall274 pass per host. Current packet
+lua-nullable-repair-intake.json.gz retains closure; original intake stays frozen.
+P1 phase .5.2 next, P2 .8/declared-host/unsafe formatter/registration/pressure/
+slot/full admission remain separate.

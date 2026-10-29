@@ -407,3 +407,10 @@ need coherent .7.1 preserving healthy explicit pure-null; no product change.
 Public3source8input phase qualification/reference emitted-source omission vs
 preservation recorded separately, no blind LE policy inferred. Packet
 lua-null-context-intake.json.gz retains closure; .7.1 next before admission.
+
+2026-10-29 Lua39.4.7.1 coherently repairs private nullable return acceptance
+and pure normal observation classification: qualified32/52,21healthy11RED ->
+32pass506 per host, same33 modules fresh/full records and21healthy identity.
+One blind_LE source/two inputs remains unchanged/unqualified under P1 .5.2.
+Observation43/recognition246/progress234/postcall274 pass. Closure retained in
+lua-nullable-repair-intake.json.gz; no new authority/schema/full admission.

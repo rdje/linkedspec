@@ -4829,6 +4829,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua post-call39.4.5.1 adds lua/test/blind_postcall_results_test.lua to required exact ordinary/canonical registration. All15 collection/all31 structural rows are active, no residual dormancy; direct274/240/289/390/234/205 per host is focused proof, not full admission.
 
+  Lua nullable39.4.7.1 requires exact ordinary/canonical registration of lua/test/null_return_and_observation_test.lua. Its32qualified sources/52inputs pass506 per host; blind_LE one source/two inputs is explicitly excluded pending .5.2 and must be qualified/covered before full admission. Direct focused execution is not runner registration or canonical admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8743,7 +8745,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   History: exact committed suffix/manifest/kept-prefix verification passed for `docs/history/changes/segment-4948-0684fd3e514a.md`; normal rollover, no cap raise/history loss.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7`
-  Status: `in_progress` / P1 independent qualification after .5
+  Status: `in_progress` / bounded .7.1 repaired; linked phase .5.2 before full admission
   Goal: Independently qualify Lua nullable lifecycle and pure observation contexts.
   Acceptance: Selected null action already matchedtrue at4. Use exact safe context/record/error sources, no return-provenance defect inferred; repair only confirmed gaps with typed owning context before admission.
   Planned verification tier: focused
@@ -8771,13 +8773,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.0 - qualify Lua nullable return and pure observation contexts`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.1`
-  Status: `pending` / P1 immediate coherent nullable/observation repair after .7.0
+  Status: `completed` / qualified nullable scope only / P1 immediate coherent nullable/observation repair after .7.0
   Goal: Preserve Lua nullable-return owning acceptance and pure normal observation independently in one coherent fix.
   Acceptance: Qualified32sources52inputs21healthy11RED; retain one unqualified blind_LE source/two inputs under .5.2 with no success credit. Private accepted bit selected action/LE/plain successful blind/appropriate lifecycle context, not sticky match; early I/LS/no-hit/zero-min/under-min LX null false, non-null whole authority unchanged. Pure no-regex/action/blind-structure normal completion observed accepted independently of parser matched flag, actual matcher/error strict; no invented span/second authority. Repair together so currently healthy explicit pure-null observations never regress. Full records/input/21control identity and same33 baseline modules/fresh consumer, meaningful normal and nearest tests before commit.
-  Planned verification tier: focused
-  Planned focused checks: Exact qualified32/52 RED-GREEN per installed host SDK matched/value/cursor/full nine-field records and fresh public values/errors, same33 baseline modules/input/21healthy identity, deferred phase unchanged; normal provenance/classifier/recognition/progress/post-call neighbors/book/map/history/manual continuity, no routine full gate.
-  Planned canonical trigger: Full39/23.4/final clean push after phase .5.2/P2 .8/declared-host/unsafe formatter/registration/pressure/slot; new authority separately canonical.
-  Planned claim verification: none: Finite authored nullable/context/record distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Qualified32sources52inputs21healthy11RED ->32pass506 per installed host SDK/restored/plan/full records and same33 baseline modules fresh; all inputs/21healthy observations identical, phase source/two inputs unchanged. Observation43/recognition246/progress234/postcall274 neighbors per host, book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after P1 phase .5.2/P2 .8/declared-host/unsafe formatter/registration/pressure/slot; new authority separately canonical.
+  Claim verification: none: Finite authored nullable/context/record distinctions, no population measurement.
+
+  Activation: clean `faf2884a4d69dc9557b887e38570587dec1e00af`; both runtime files equal actual RED baseline, qualified32/52 exact census and deferred phase/source ownership retained. Joint repair required to preserve healthy explicit pure-null records.
+
+
+  - [x] **REPRODUCE / ISSUE**: Qualified32sources52inputs per installed host21healthy11actualRED. Unconditional Flow-return matchedtrue overaccepts early/failed null; result.matched-only observation rejects implicit pure normal completion. Healthy explicit pure-null records require a coherent repair. One phase source/two inputs excluded, no product RED credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: interpreter.lua lifecycle/action/blind dispatch lacks private owning acceptance at both recognition completion and final return; recognition_transaction_runtime.lua classifies normal completion only from parser matched. Actual native trace/full records and original runtime byte identity retain causal evidence independently of peer implementation.
+  - [x] **FIX**: Private return accepted bit attached at owning selected action/regex LE/plain child/lifecycle sites; one helper controls both completion projections. Null requires accepted completion, non-null whole authority retained. Pure normal completion explicitly supplied with no matching structure is independently observable; actual matching structures/errors remain strict. No parser matched override, sticky prior hit, fabricated span or new authority.
+  - [x] **ADDRESSED (verified)**:32pass506 assertions per host, SDK/restored/plan full records/flags/cursors and same33 baseline modules separate fresh public values/errors. Exact raw/normalized/compiled/plan/emitted and21healthy source observations unchanged. Deferred blind_LE source/two inputs exactly unchanged with no nullable completion credit.
+  - [x] **NO REGRESSION**: Observation43/recognition246/progress234/postcall274 per host pass. Selected/completed null, explicit pure-null, falsey/non-null/error/lineage controls retained. Compiler/emitter/matching/recognition authority/schema unchanged; declared5.4, unsafe formatter, broad phase, full suite/admission/performance unclaimed.
+  - [x] **LOCKSTEP**: Packet lua-nullable-repair-intake.json.gz retains producers/epochs/inputs/SDK/fresh/trace/modules/receipts; book/card/map/target/roadmap/task/live/resume/history align. New normal regression registration23.4.1 required before admission. Phase .5.2 next then P2 .8 and broader prerequisites; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.1 - preserve Lua nullable acceptance and pure observation`.
+
+  History: exact committed suffix/hash/bytes, prior manifest rows and retained prefix verified in `docs/history/development-notes/segment-4945-a0f98d868021.md`; no history loss or cap change.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8`
   Status: `pending` / P2 after bounded Lua feature coverage before23.4/full admission
@@ -9117,7 +9132,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.1` | `pending` | Coherently repair Lua nullable return acceptance and pure observation classification. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2` | `pending` | Reconcile blind-parent lifecycle phase authority before admission. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

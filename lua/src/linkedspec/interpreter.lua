@@ -138,6 +138,11 @@ local function rule_result(matched, value)
   return { matched = matched, value = value }
 end
 
+function M._return_flow_matched(result)
+  -- Null needs owning acceptance; non-null whole-rule overrides keep authority.
+  return result.accepted == true or (result.value ~= nil and result.value ~= json.null)
+end
+
 function M.reject_removed_runtime_options(options, spec_name, spec_path)
   if options.parse_mode == nil and options.parseMode == nil then return end
   local diagnostic = runtime_diagnostic({ spec_name = spec_name, spec_path = spec_path }, {
@@ -4847,7 +4852,7 @@ execute_block = function(engine, block, ctx, accumulator, edge_state)
   execute_statement_range(engine, block.statements, 1, #block.statements + 1, ctx, accumulator, edge_state)
 end
 
-local function lifecycle(engine, rule, name, ctx, accumulator)
+local function lifecycle(engine, rule, name, ctx, accumulator, accepted)
   for _, payload in ipairs(rule.lifecycle_action_payloads) do
     if payload.lifecycle == name then
       ctx.lifecycle_events[#ctx.lifecycle_events + 1] = setmetatable({
@@ -4863,7 +4868,13 @@ local function lifecycle(engine, rule, name, ctx, accumulator)
           " cursor=" .. tostring(ctx.cursor_byte),
         trace.TRACE_HIGH
       )
-      execute_block(engine, payload.action_ast, ctx, accumulator, nil)
+      local ok, failure = pcall(execute_block, engine, payload.action_ast, ctx, accumulator, nil)
+      if not ok then
+        if getmetatable(failure) == FLOW_MT and failure.kind == "return" then
+          failure.accepted = accepted == true
+        end
+        error(failure, 0)
+      end
     end
   end
 end
@@ -5097,6 +5108,9 @@ local function accept_match(
           edge_state
         )
         if not action_ok then
+          if getmetatable(action_flow) == FLOW_MT and action_flow.kind == "return" then
+            action_flow.accepted = true
+          end
           if collect_and_group_value and getmetatable(action_flow) == FLOW_MT and
               action_flow.kind == "return" then
             flow("and_group_return", action_flow.value)
@@ -5117,7 +5131,7 @@ local function accept_match(
   end
   execute_rule_slot_events(rule, one.alternative_index, ctx)
   typed_source.recognition.set_gap_phase(ctx, rule.label, "LE")
-  lifecycle(engine, rule, "LE", ctx, accumulator)
+  lifecycle(engine, rule, "LE", ctx, accumulator, true)
 end
 
 function M.emit_semantic_regex_slot(ctx, rule, one, required_action)
@@ -5269,6 +5283,9 @@ local function blind_once(
       if not ok then
         if return_iteration_value and getmetatable(failure) == FLOW_MT and failure.kind == "return" then
           flow("blind_iteration_return", failure.value)
+        end
+        if getmetatable(failure) == FLOW_MT and failure.kind == "return" then
+          failure.accepted = child.matched
         end
         error(failure, 0)
       end
@@ -5483,8 +5500,8 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
         matched_any = true
         if ctx.cursor_byte == before then matched = true; break end
       end
-      if not matched then lifecycle(engine, rule, "LX", ctx, accumulator) end
-      lifecycle(engine, rule, "E", ctx, accumulator)
+      if not matched then lifecycle(engine, rule, "LX", ctx, accumulator, false) end
+      lifecycle(engine, rule, "E", ctx, accumulator, matched)
       return rule_result(matched, finish_value(accumulator, ctx.retv))
     end
 
@@ -5507,10 +5524,10 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
         if selected_match ~= nil then
           M.prepare_gap_candidate(rule, selected_match, ctx)
           typed_source.recognition.set_gap_phase(ctx, rule.label, "LS")
-          lifecycle(engine, rule, "LS", ctx, accumulator)
+          lifecycle(engine, rule, "LS", ctx, accumulator, count > 0)
         end
       else
-        lifecycle(engine, rule, "LS", ctx, accumulator)
+        lifecycle(engine, rule, "LS", ctx, accumulator, count > 0)
       end
       local implicit_iteration_results = nil
       if blind_iteration_values ~= nil then implicit_iteration_results = json.array() end
@@ -5568,7 +5585,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
         end
         count = count + 1
         typed_source.recognition.set_gap_phase(ctx, rule.label, "IT")
-        lifecycle(engine, rule, "IT", ctx, accumulator)
+        lifecycle(engine, rule, "IT", ctx, accumulator, true)
         if and_iteration_values ~= nil and not has_custom_iteration then
           local group_value = json.array()
           if attempt.group_returned then group_value = attempt.group_value end
@@ -5590,18 +5607,18 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     end
     if count < minimum then
       typed_source.recognition.set_gap_phase(ctx, rule.label, "LX")
-      lifecycle(engine, rule, "LX", ctx, accumulator)
+      lifecycle(engine, rule, "LX", ctx, accumulator, false)
       return rule_result(false, json.null)
     end
     if capture_gaps then typed_source.recognition.install_gap_tail(ctx, rule.label, "EX") end
     typed_source.recognition.set_gap_phase(ctx, rule.label, "EX")
-    lifecycle(engine, rule, "EX", ctx, accumulator)
+    lifecycle(engine, rule, "EX", ctx, accumulator, count > 0)
     if failed or count > 0 then
       typed_source.recognition.set_gap_phase(ctx, rule.label, "LX")
-      lifecycle(engine, rule, "LX", ctx, accumulator)
+      lifecycle(engine, rule, "LX", ctx, accumulator, count > 0)
     end
     typed_source.recognition.set_gap_phase(ctx, rule.label, "E")
-    lifecycle(engine, rule, "E", ctx, accumulator)
+    lifecycle(engine, rule, "E", ctx, accumulator, count > 0)
     local value
     if and_iteration_values ~= nil then
       value = finish_value(accumulator, and_iteration_values)
@@ -5624,7 +5641,9 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     recognition_terminal_error = result_or_flow
     if getmetatable(result_or_flow) == FLOW_MT and
         (result_or_flow.kind == "return" or result_or_flow.kind == "next") then
-      recognition_result = rule_result(true, result_or_flow.value)
+      recognition_result = rule_result(
+        result_or_flow.kind == "next" or M._return_flow_matched(result_or_flow), result_or_flow.value
+      )
       recognition_terminal_error = nil
     end
   end
@@ -5640,7 +5659,8 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     ctx,
     label,
     recognition_result,
-    recognition_terminal_error
+    recognition_terminal_error,
+    #rule.regex_patterns > 0 or #rule.action_edges > 0 or #rule.blind_edges > 0
   )
   if not recognition_leave_ok then
     ok = false
@@ -5686,7 +5706,9 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
   ctx.active[recursion_key] = nil
   if ok then return result_or_flow end
   if getmetatable(result_or_flow) == FLOW_MT then
-    if result_or_flow.kind == "return" then return rule_result(true, copy_value(result_or_flow.value)) end
+    if result_or_flow.kind == "return" then
+      return rule_result(M._return_flow_matched(result_or_flow), copy_value(result_or_flow.value))
+    end
     if result_or_flow.kind == "next" then return rule_result(true, finish_value(accumulator, ctx.retv)) end
   end
   error(result_or_flow, 0)

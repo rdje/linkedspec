@@ -162,7 +162,7 @@ function M.enter_invocation(ctx, rule_label, options)
   }
 end
 
-local function leave_invocation_with_outcome(ctx, rule_label, result, terminal_error)
+local function leave_invocation_with_outcome(ctx, rule_label, result, terminal_error, has_recognition_structure)
   local frame = active_frame(ctx, rule_label)
   local actual = frame_state(ctx, rule_label)
   local restored = actual
@@ -176,7 +176,10 @@ local function leave_invocation_with_outcome(ctx, rule_label, result, terminal_e
   end)
   if frame.observation_scope ~= nil then
     local completion_error = terminal_error or (not ok and failure or nil)
-    local accepted = completion_error == nil and type(result) == "table" and result.matched == true
+    -- Only an explicitly structure-free normal coordinator bypasses the
+    -- parser match flag. Actual matchers and terminal errors stay strict.
+    local accepted = completion_error == nil and type(result) == "table" and
+      (result.matched == true or has_recognition_structure == false)
     frame.observation_scope.completion = {
       identity = frame.identity,
       entry_byte = frame.entry_byte,
@@ -196,8 +199,8 @@ function M.leave_invocation(ctx, rule_label)
   return leave_invocation_with_outcome(ctx, rule_label, nil, nil)
 end
 
-function M.leave_invocation_with_outcome(ctx, rule_label, result, terminal_error)
-  return leave_invocation_with_outcome(ctx, rule_label, result, terminal_error)
+function M.leave_invocation_with_outcome(ctx, rule_label, result, terminal_error, has_recognition_structure)
+  return leave_invocation_with_outcome(ctx, rule_label, result, terminal_error, has_recognition_structure)
 end
 
 function M.begin_observation(ctx, rule_label)

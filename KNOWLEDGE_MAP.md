@@ -15755,7 +15755,7 @@ _Lua exposes typed deterministic named and exact-path spec resolution and strict
 ### lua-null-return-and-pure-observation-gaps
 _Lua nullable return overacceptance and pure normal observation require a coherent private repair_
 - **answers:** does Lua null lifecycle return force a match | why does Lua implicit pure-null observation fail | are Lua selected null actions already healthy | why must Lua null return and observation be repaired together | which Lua nullable source is phase-authority qualified
-- **date:** 2026-10-29 · **status:** independent33-source intake complete; qualified32/52 coherent repair39.4.7.1 next, phase .5.2 deferred
+- **date:** 2026-10-29 · **status:** bounded nullable39.4.7.1 repaired/targeted-checked; phase .5.2 and broader admission remain
 - **evidence:** `lua-null-context-intake.json.gz retains33sources54inputs per host21healthy12target differences; qualified32sources52inputs21healthy11nullableRED, one blind_LE source/two inputs excluded with public phase proof.33 modules fresh/full records/54 actual traces and host input identity retained.`
 - **reverify:** `Recover actual Lua nullable probes/readers/qualification from retained packet, run SDK and separate fresh process per installed host before --fresh. Preserve phase exclusion and exact fixture-derived row census.`
 - **source:** [`docs/knowledge/lua-null-return-and-pure-observation-gaps.md`](docs/knowledge/lua-null-return-and-pure-observation-gaps.md)
@@ -16563,7 +16563,7 @@ _Lua static semantic projection must correlate complete authored members with re
 ### lua-sparse-and-independent-intake
 _Independent safe Lua intake owns dependency group minimum blind and live progress gaps_
 - **answers:** what did independent safe Lua sparse AND intake establish | why does Lua duplicate AND execute two actions on one hit | why does Lua repeated AND return only the first group | does live Lua recognize_once enforce repetition progress | does Lua selected null action preserve matched status | are new Lua feature tests automatically discovered
-- **date:** 2026-10-29 · **status:** bounded repairs through .5.1 checked; nullable intake .7.0 qualified32/52, coherent .7.1 next; phase .5.2/P2 .8/admission remain
+- **date:** 2026-10-29 · **status:** bounded nullable39.4.7.1 repaired/targeted-checked; phase .5.2 and broader admission remain
 - **evidence:** `lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant.`
 - **reverify:** `Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh.`
 - **source:** [`docs/knowledge/lua-sparse-and-independent-intake.md`](docs/knowledge/lua-sparse-and-independent-intake.md)

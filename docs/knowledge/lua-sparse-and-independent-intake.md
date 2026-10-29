@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: bounded repairs through .5.1 checked; nullable intake .7.0 qualified32/52, coherent .7.1 next; phase .5.2/P2 .8/admission remain
+status: bounded nullable39.4.7.1 repaired/targeted-checked; phase .5.2 and broader admission remain
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -100,3 +100,14 @@ inputs unqualified under phase .5.2. Selected null/pure explicit-null already
 healthy; coherent .7.1 repairs owning acceptance/classifier together. Current
 proof: [[lua-null-return-and-pure-observation-gaps]]. No product edits, original
 intake frozen; phase authority .5.2/P2 .8/full prerequisites remain.
+
+2026-10-29 coherent nullable39.4.7.1 now carries private owning accepted
+return provenance and independently classifies pure structure-free normal
+observation. No parser matched override, selected span or authority/schema change.
+Qualified32sources52inputs21healthy11RED ->32pass506 per installed host, same33
+baseline modules fresh/full records; all inputs/21healthy observations preserved.
+Deferred blind_LE source/two inputs unchanged, no passing credit until phase .5.2.
+Observation43/recognition246/progress234/postcall274 pass per host. Current packet
+lua-nullable-repair-intake.json.gz retains closure; original intake stays frozen.
+P1 phase .5.2 next, P2 .8/declared-host/unsafe formatter/registration/pressure/
+slot/full admission remain separate.
