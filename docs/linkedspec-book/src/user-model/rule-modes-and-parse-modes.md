@@ -36,9 +36,11 @@ targets remain invalid.
 
 Dart now validates this distinction. Its native, restored, plan and emitted
 controls execute no-regex direct calls and AND blind literal returns. Blind `.push` now
-calls its enclosing parent on the13 recorded single-pass/repeated routes. Three
-qualified coordinator examples still duplicate a retained conventional rule
-accumulator; their invocation-scope repair is separate.
+calls its enclosing parent on the13 recorded single-pass/repeated routes. Conventional arrays
+are fresh per invocation. Three qualified coordinator examples still collect an
+extra empty nonconsuming iteration; ordinary cutoff/lifecycle authority remains
+under review. A pure-code blind child with only lifecycle code and no regex or
+dependencies is still rejected during Dart compilation.
 Portable blind-parent `LX` phase authority remains separately tracked.
 
 ## Current rule-label surface
@@ -598,11 +600,31 @@ Value:
  I { return(entry_text()) }
 ```
 
-On `x`, it returns `[["x"]]`: `Middle` collects the matched value, then `Top` collects that child result.
+On `x`, Perl and Rust return `[["x"]]`: `Middle` collects the matched value, then `Top` collects that child result. Dart currently produces `[["x"],[]]` here; its extra empty ordinary iteration remains under authority review.
 Replacing Top's body with `I { return(call(Middle)) }` returns `["x"]` directly. An ordered parent
 `Top::AND` with `=> Middle .return("OK")` returns `"OK"` after the child consumes its input. A bare
 `Middle.return("OK")` in that AND parent has the same blind ownership. Use a real expression or a bound
 value in return examples; the name `child_result` is not an automatic binding.
+
+Dart creates a fresh conventional Array for each invoked rule and restores
+the caller binding on exit. Calling the same rule twice does not reuse its
+first result:
+
+```text
+Top::
+ I { return(array(call(Middle),call(Middle))) }
+Middle:
+ -> Value.push
+ LX { return(copy(Middle)) }
+Value:
+ /x/
+ I { return(entry_text()) }
+```
+
+On `x`, the result is `[["x"],[]]`: the first call consumes the input and the
+second starts with an empty `Middle` array. Explicit initializers remain local
+to each call. Mutations to other undeclared working arrays remain visible to
+the caller; this does not reset every working variable.
 
 Portable blind-parent `LX` behavior remains under authority review. Rust and Dart now preserve blind `.push` parent-call effects on the checked single-pass and repeated routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
 

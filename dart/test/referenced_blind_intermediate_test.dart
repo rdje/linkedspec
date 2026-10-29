@@ -45,8 +45,8 @@ void main() {
             .cast<String, Object?>(),
       );
       compileSpec(restored);
-      // Invocation accumulator repair48.3.2 owns these three duplicate results.
-      // Parent-push now succeeds; full runtime failure evidence is retained.
+      //39.8.1 owns the preserved ordinary blind cutoff/lifecycle distinction.
+      // Fresh rule arrays now expose an extra empty final iteration here.
       if ({
         'blind_no_regex',
         'marked_blind_target',

@@ -650,7 +650,7 @@ final class LinkedSpecRuntimeEngine {
           savedRegisters.localMatch?.codeUnitEnd ?? context.cursorCodeUnit,
     );
     context.enterRule(label);
-    context.enterRuleLocalBindingScope();
+    context.enterRuleLocalBindingScope(label);
     context.enterRecognitionInvocation(
       label,
       captureGaps: rule.captureGaps != null,
@@ -9470,8 +9470,14 @@ final class _RuntimeExecutionContext {
     }
   }
 
-  void enterRuleLocalBindingScope() {
-    _ruleLocalBindingScopes.add(<String, _VariableSnapshot>{});
+  void enterRuleLocalBindingScope(String label) {
+    _ruleLocalBindingScopes.add({
+      label: _VariableSnapshot.capture(this, label),
+    });
+    variables.remove(label);
+    hashes.remove(label);
+    arrays[label] = <Object?>[];
+    bindFreshIdentity(label);
   }
 
   void exitRuleLocalBindingScope() {

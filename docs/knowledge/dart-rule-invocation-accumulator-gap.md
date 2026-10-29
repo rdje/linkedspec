@@ -5,7 +5,7 @@ answers:
   - "why does a Dart no regex coordinator return duplicate x values"
   - "which task scopes the Dart conventional rule accumulator on invocation entry"
 date: 2026-10-29
-status: confirmed; P1 repair48.3.2 immediately after parent-push48.3.1
+status: own-array scope repaired48.3.2; implicit ordinary cutoff remains39.8.1
 evidence: "dart-blind-parent-push-intake.json.gz retains actual full referenced normal and native/restored/plan duplicate outcomes after parent-push repair."
 reverify: "Recover retained public Dart probe and full normal under an owning leaf; rule_invocation_accumulators.json distinguishes implicit, direct-twice and explicit-reset cases before scope repair."
 ---
@@ -24,3 +24,19 @@ accumulator repair immediately next, using the existing three-source target.
 It must preserve other variable bindings/kinds/restoration and remove the three
 explicit runtime normal exclusions only after qualification. Original parent-LX
 authority remains separately owned48.2.2.1.
+
+## Bounded fresh-array repair48.3.2 (2026-10-29)
+
+Sole scope entry captures the invoked label through the existing full-kind/
+binding-ID snapshot, installs its fresh Array/identity, and existing finally
+restores the caller. Other undeclared mutation/explicit resets stay. Direct-twice
+returns[[x],[]]; explicit reset unchanged on native/restored/plan/fresh old3
+modules, with exact artifacts/metadata. Implicit Scope control is current
+Dart[[x],[]], not portable[[x]]; the empty tail replaces stale[x]. Three reference
+runtime exclusions remain;92 selected checks pass.
+
+Unconditional cutoff experiment matches current Perl candidates but changes
+preserved ordinary Dart EX/E behavior.39.8.1 owns canonical authority after20.1;
+see [[dart-ordinary-blind-progress-authority-boundary]]. The experiment is rolled
+back byte-exact and candidate normal retained outside ordinary discovery.
+Pure-code compiler rejection is independently owned48.3.3.

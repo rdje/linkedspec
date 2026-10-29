@@ -4893,6 +4893,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Dart48.3.1 adds blind_parent_push_test.dart (13 shared PIPE/repeated controls); exact canonical selection must include it and referenced_blind_intermediate_test.dart after48.3.2 removes the3 remaining accumulator exclusions.
 
+  Dart48.3.2 adds rule_invocation_accumulators_test.dart (3 Scope controls, implicit backend-qualified),92 selected checks.39.8.1, not completed Scope repair, owns3 referenced runtime exclusions. Candidate progress normal remains outside discovery; pure-code48.3.3 next. Canonical selection must preserve these qualifications.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8017,6 +8019,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full39/23.4/final clean push; any actual progress policy conflict separately resolved before production.
   Planned claim verification: none: Finite authored zero-width matcher/progress distinctions, no population measurement.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1`
+  Status: `pending` / P1 after20.1 before39.8/full23.4/admission
+  Goal: Resolve ordinary blind nonconsuming iteration/count/collection/lifecycle authority without silently replacing preserved backend compatibility with current Perl behavior.
+  Evidence/impact: Dart fresh rule arrays48.3.2 expose an extra empty final coordinator iteration [[x],[]] on3 qualified sources. Existing Dart ordinary_blind guard control expects ORDINARY at0 through EX/E for a nonconsuming bounded blind call. Current public Perl native/emitted returns null at0; actual rep_bcode source checks progress before counter/IT/collection/max and returns below minimum before those hooks. Four independently qualified pure-code and zero-width-regex counterparts return null/null/[] at0 and consuming empty-array[[]] at1. Unconditional Dart cutoff before count fixes those4 and original3 coordinator values, but changes the preserved ordinary_blind control from ORDINARY to null. Prior Dart progress/minimum records explicitly preserve ordinary behavior and defer broad placement/ordinary zero policy; ADR0020/SESSION27 remain separate. Do not relabel the old compatibility assertion as a stale portable oracle without that reconciliation.
+  Acceptance: Recover exact retained source/metadata/runtime experiment, prior39.2.6 compatibility and39.2.3 minimum authorities, ADR0044/0047/0020 and SESSION27. Distinguish actual match from payload truth, nonconsuming early I/empty regex/zero/null return, one-shot vs repeated/bounded/zero-min/IT/max, min failure and explicit lifecycle authority. Qualify source family/counters/trace and both reference routes; independently assess peers before assigning failures. Choose existing canonical contract where unambiguous, otherwise obtain the concrete director authority decision with evidence. Own later implementation/normal changes explicitly, including3 referenced runtime exclusions and Scope-only implicit case qualification. No new policy through a coordinator-array patch; full admission cannot pass with this unresolved.
+  Planned verification tier: canonical for authority/policy selection; subsequent bounded existing-policy implementations may be focused.
+  Planned focused checks: Exact current/frozen ordinary controls, candidate4+4 pairs and3 coordinator sources, source-family/count/progress/hook distinctions and reference/native/restored/plan/fresh proof with explicit exclusions.
+  Planned canonical trigger: Authority selection after20.1 and before full39/23.4/admission/push; no default per-feature full gate.
+  Planned claim verification: none: Finite authored authority/counterexample intake, no population measurement.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4`
   Status: `completed` / bounded default iteration and implicit collection targeted-checked
   Goal: Reconcile and repair confirmed repeated/default blind implicit-result differences.
@@ -9592,14 +9604,38 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1 - execute blind fluent pushes as parent rule calls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2`
-  Status: `pending` / P1 immediately after48.3.1 before48.4/admission
+  Status: `completed` / P1 immediately after48.3.1 before48.4/admission
   Goal: Make Dart conventional rule-name accumulators invocation-local under existing binding-scope authority, preserving undeclared caller-visible mutations.
   Reproduction/impact: After blind parent-push repair13 source controls pass, but qualified blind_no_regex/marked_blind_target/markerless_blind now return [[x],[x]] instead of [[x]] on x. Full native/restored/plan observations and full normal retain all3 duplicate outcomes. Runtime enterRuleLocalBindingScope only starts an empty snapshot map; own conventional accumulator is not initialized/scoped at entry. Prior explicit-reset authority deliberately preserves other undeclared mutations. Existing reference/Rust3-source rule_invocation_accumulators target distinguishes implicit coordinator, direct twice and explicit reset. No parent-LX policy movement.
   Acceptance: Own independent Dart3-source RED/healthy controls and7 qualified runtime baselines before edits. Use existing snapshot/restore and variable-kind owners for only the invoked rule's conventional array binding, restore caller state on success/error, preserve other shared mutations and explicit initializer/reset behavior. Remove only3 tracked runtime exclusions after repair. Preserve generated source/full metadata/plans and healthy diagnostics, qualify reuse versus regeneration. Focused normal/recursion/progress/binding neighbors/book/docs/commit, then Julia48.4.
-  Planned verification tier: focused
-  Planned focused checks: Invocation accumulator3 target, all7 qualified referenced runtime controls, parent push13/direct recursion/progress/binding neighbors and selective analysis/book/docs/commit.
-  Planned canonical trigger: Full23.4/final clean push after all prerequisites; no new policy/schema/family.
-  Planned claim verification: none: Finite authored scope/restore functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: 3 Scope controls (implicit backend-qualified),4 healthy qualified reference runtime controls/3 excluded under39.8.1, parent push/blind/progress main89,3 shared/reset/recursive binding neighbors, exact README Lispish smoke, selective analysis/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after all prerequisites; no new policy/schema/family.
+  Claim verification: none: Finite authored scope/restore functional assertions, no population measurement.
+
+  Activation: clean `90e483adeaf76fc9cfaa35c1db0a4cc05d5b3c23`; parent-push committed/brief empty/no jobs. Recovered current actual3 duplicate outcomes, existing3-source authority, narrow explicit-reset/shared-mutation fact and sole scope entry/finally exit/snapshot full-kind+identity owners. Scope entry creates no own conventional binding. Own current3-source baseline/normal RED before edits; use existing snapshot/restore for only invoked label and preserve other mutations. Format and snapshot new instruments before first execution.
+
+  Bounded causal extension before further edits: Existing own-array snapshot/reset fixes direct_twice and retains explicit-reset control, but implicit coordinator/qualified3 now return [[x],[]]. Scope-only exact runtime/normal/results/fresh are retained. Blind repetition currently discards only explicitly returned nonconsuming iterations, collecting an implicit empty child return at unchanged cursor. Qualify current public Perl choice/AND/zero-min nonconsuming controls versus consuming empty Array before selecting common cutoff repair; preserve lifecycle/protected progress order and real consuming empty payloads. No policy inferred solely from peer or non-null truth.
+
+  Scope boundary resolved conservatively: unconditional nonconsuming cutoff is a rejected current-slice experiment, because it changes preserved ordinary_blind EX/E behavior. Current public reference/source and existing deferrals recovered;39.8.1/P1 now owns canonical ordinary policy after20.1 before admission. Retain only fresh own-array scope implementation, preserve existing Dart progress/count/lifecycle, and qualify implicit coordinator Scope result [[x],[]] rather than claim portable [[x]]. Three referenced runtime exclusions remain under39.8.1, not a falsely completed48.3.2. Candidate progress normal removed from ordinary discovery but exact bytes/probes/fixtures retained; pure-code compiler48.3.3 remains next independent feature.
+
+  - [x] **REPRODUCE / ISSUE**: Independent3-source baseline has1 explicit-reset healthy/2 wrong values; direct second call reuses[x]. Scope-only fix makes direct result fresh but exposes a separate extra empty implicit iteration. Original/partial/final source/normal/fresh retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Empty scope snapshot map leaves own conventional array live across calls. Existing snapshot captures all value kinds/binding-ID and paired finally restores. Unconditional cutoff changes preserved ordinary EX/E control; actual Perl source/results and prior39.8/SESSION27 deferrals establish an authority boundary, not a silently stale oracle.
+  - [x] **FIX**: Pass current label to sole scope entry, snapshot its previous binding, clear other kinds, create fresh Array/identity. Existing finally and other working-variable behavior stay. No new frame/schema/policy. Unconditional cutoff fully rolled back; canonical39.8.1 owns ordinary policy after20.1.
+  - [x] **ADDRESSED (verified)**: Four routes/same3 old modules verify direct2 portable controls (one observed RED->GREEN/one healthy) and1 qualified fresh-empty-tail Scope property. Full artifacts/metadata exact; no regeneration. No portable implicit-value or3-reference runtime closure credit; exclusions moved to39.8.1.
+  - [x] **NO REGRESSION**: Main89 plus3 shared/reset/recursive binding controls pass92 distinct checks; fatal analysis/format clean. Four pure-code+four qualified reference pairs and exact ordinary source retained; candidate normal outside ordinary discovery. Initial OR* draft corrected to OR{0,2}, no product RED. Pure-code compiler3 failures are real separate48.3.3; qualified zero-width controls give no pure-code compiler credit.
+  - [x] **LOCKSTEP**: Packet dart-rule-accumulator-intake.json.gz retains actual original/final producers, code epochs, reference/candidate/normal/fresh/source/results/receipts. Book/cards/map/roadmap/task/live/resume/history align. New Scope normal canonical selection23.4.1 required;48.3.3 next before peers/warnings/45, ordinary authority after20.1 before admission. Authorized focused commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2 - initialize conventional rule arrays in their invocation scope`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3`
+  Status: `pending` / P1 immediately after48.3.2 before48.4/admission
+  Goal: Compile declared pure-code blind targets without inventing a regex slot or weakening action-slot catalogs.
+  Reproduction/impact: Public Perl native/emitted4-source blind_implicit_zero_progress target accepts a Child with only I{return("C")};3 nonconsuming cases return null/null/[] at0 and consuming empty-array control returns[[]] at1. Dart validation accepts these pure-code blind targets after48.3, but compileSpec dependency-regex construction raises CompiledSpecException Top references Child regex slot0 with0 slots. Public stack identifies _dependencyPatternFor / _buildDependencyRegexState in compiled_spec.dart. Initial normal/probe rejection and inputs retained in rule-scope packet; this is a separate compiler defect, not runtime progress RED.
+  Acceptance: Own independent original pure-code target compiler/source/diagnostic RED before edits; distinguish blind declaration/call refs from actual regex dependency slots. Retain strict action/catalog/index/unknown diagnostics and semantic graph/plan/metadata requirements, no fabricated regex fallback. Use the already-qualified zero-width-regex counterparts only for progress isolation, never imply pure-code source support from them. Qualify native/restored/plan/fresh source, exact public metadata/diagnostics and direct compiler/blind neighbors before commit; canonical tier if the actual mechanical/public-contract change requires it. Existing policy suffices unless canonical requirements conflict.
+  Planned verification tier: focused; any actual public schema/policy movement requires canonical ownership before edits.
+  Planned focused checks: Pure-code4 target and existing compiler/strict slot/blind controls, original12/qualified referenced runtime, source/metadata/error identity and selective analysis/book/docs/commit.
+  Planned canonical trigger: Public schema/policy movement if actually required; otherwise full23.4/final clean push after prerequisites.
+  Planned claim verification: none: Finite authored functional/compiler distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -10046,7 +10082,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2` | `pending` | Scope Dart conventional rule accumulators per invocation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3` | `pending` | Compile pure-code blind targets without a fabricated regex dependency. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

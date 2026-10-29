@@ -1,0 +1,32 @@
+[
+  {
+    "name": "choice_no_progress",
+    "source": "Top::OR+\n => Child\nChild:\n I{return(\"C\")}\n /(?=x)/\n",
+    "input": "x",
+    "expected": null,
+    "expected_cursor": 0
+  },
+  {
+    "name": "and_no_progress",
+    "source": "Top::AND+\n => Child\nChild:\n I{return(\"C\")}\n /(?=x)/\n",
+    "input": "x",
+    "expected": null,
+    "expected_cursor": 0
+  },
+  {
+    "name": "zero_min_no_progress",
+    "source": "Top::OR{0,2}\n => Child\nChild:\n I{return(\"C\")}\n /(?=x)/\n",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "consuming_empty_array",
+    "source": "Top::OR+\n => Child\nChild:AND\n /x/ -> Child[0] {return(array())}\n",
+    "input": "x",
+    "expected": [
+      []
+    ],
+    "expected_cursor": 1
+  }
+]
