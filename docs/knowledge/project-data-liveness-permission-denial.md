@@ -121,3 +121,15 @@ claim follows. SESSION7 still owns the repair. No recovery/purge runs. Completed
 .linkedspec-data/verification/computed-selection-noncall-*; warning texts/PIDs
 are recorded here from tool output. This adds no new root cause and does not
 change the feature test results.
+
+## October 29: Rust local-writer artifact retention recurrence
+
+TYPE49.2's managed retain_rust_writer_endpoint.py invocation emits the known
+child setpgid warning for child7590, then exits0 after85 retained-input byte/hash
+roundtrip checks. The original child's actual PGID was not captured; neither a
+mismatched group nor verified establishment/lifecycle follows. The emitting
+monitor-mode background launch/bookkeeping is unchanged, and SESSION7 retains
+the existing establishment/denied-liveness repair. No recover/purge or deletion
+probe ran. rust-writer-endpoint-wrapper-notice.json in the retained TYPE49.2 packet
+records this exact tool-output observation and its limits; this is a recurrence,
+not a new feature defect, root cause, or storage-correctness claim.

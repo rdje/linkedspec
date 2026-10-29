@@ -9857,6 +9857,9 @@ impl Engine {
             "mark_match_start" => {
                 if !args.is_empty() {
                     let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    if !ctx.match_present {
+                        return Ok(RuntimeValue::Undef);
+                    }
                     ctx.typed_mark_set(rule_label, mark_name, ctx.match_start_byte, name);
                 }
                 Ok(RuntimeValue::Undef)
@@ -9864,6 +9867,9 @@ impl Engine {
             "mark_match_end" => {
                 if !args.is_empty() {
                     let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    if !ctx.match_present {
+                        return Ok(RuntimeValue::Undef);
+                    }
                     ctx.typed_mark_set(rule_label, mark_name, ctx.match_end_byte, name);
                 }
                 Ok(RuntimeValue::Undef)

@@ -11,7 +11,7 @@ answers:
   - "what does mark_input_start / mark_input_end store in the Rust engine"
   - "how does the mark-based capture family work in the Rust engine"
 date: 2026-09-07
-status: bounded Perl47.1/Rust47.2 named endpoint and Rust named take repair verified; independent47.3-.5/writer49/selection/full admission separate
+status: bounded Rust49.2 local writer presence repair focused-verified; independent peers/selection/full admission separate
 tags: [rust, engine, runtime, capture, marks, RUST-PARITY]
 evidence: "RUST-PARITY.5.5.3 (2026-06-16): rust/linkedspec-runtime/src/engine.rs call_helper arms for capture_from (fixed), capture_len_from, capture_until_cursor_from(+_len), capture_take_until_cursor_from(+_len), capture_take_len_from, capture_rest_from(+_len), capture_take_rest_from(+_len), capture_between, capture_len_between, mark_input_start, mark_input_end, mark_copy; span_text/span_char_len helpers. Authoritative contract: perl/LinkedSpec/ActionIR/Contracts.pm ~690-1047. 223/223 tests green (207 baseline + 16 helpers_5_5_3_*)."
 reverify: "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract"
@@ -86,3 +86,20 @@ source/serde/plan/emitted/public metadata exact, old modules relink without
 regeneration. [[rust-named-capture-endpoint-presence-repair]] retains actual
 producers/normal RED/format/temp cleanup/lock/diagnostic limits. No new state/
 frame/schema/helper/domain/arity policy;47.3-.5/49/48/45/admission remain independent.
+
+## Rust repair49.2 (2026-10-29)
+
+mark_match_start/end now require existing match_present after name resolution;
+two guards prevent default numeric registers from fabricating/replacing targets.
+Names already evaluate, current typed mark owner/state/frame/schema/domain/arity
+remain. Independent15 SDK/reconstructed/plan/separate emitted7healthy8RED ->15pass;
+ordinary1 harness24 bad routes ->pass. Writer1/named read-take1/complete marks1
+tests pass3; engine/new normal/temp format clean. Seven healthy observations and
+all source/parsed/compiled/serde/plan/emitted/public metadata exact. Same15 baseline
+modules relink with updated runtime, rebuild apps/no source regeneration. Native/
+fresh lock identities match; dependency diagnostics opaque. Temporary producer
+exactly verified/snapshotted/removed, normal no allocator. Packet
+rust-writer-endpoint-intake.json.gz retains closure. Independent49.3-.5/48/45,
+selection23.4.1/full admission remain separate.
+
+See [[rust-local-match-writer-presence-repair]] for current cause and recovery.

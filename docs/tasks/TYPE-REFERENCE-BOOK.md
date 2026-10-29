@@ -4863,6 +4863,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl49.1 adds t/named_writer_endpoint_absence.t using frozen15 target. Ordinary discovery/native+emitted15 groups and separate clean/seeded15-source proof verified; exact canonical presence/selection remains required before admission/push.
 
+  Rust49.2 adds rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs with frozen15 current target. Ordinary Cargo discovery/three SDK routes and separate compiled original15 source proof verified; exact canonical presence/selection remains before admission/push. Temporary probe archived/removed.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9210,13 +9212,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.1 - guard Perl mark writers when local matches are unavailable`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.2`
-  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Status: `completed` / P1 after47 before48/45/wider features/full23.4/push
   Goal: Independently assess Rust local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Activation: clean `6326bea38ba7f63e1d1a89faf1041974a1b7d381`; Perl49.1 committed/brief empty/no jobs. Frozen15 target, Rust named/presence/typed mark and public SDK/normal/fresh conventions recovered. Existing mark_match_start/end write numeric match registers without testing existing match_present; qualify own actual runtime first. Preserve names/effects/anonymous/entry/current/input/capture writers, static plan labels and opaque dependency diagnostics.
   Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
-  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
-  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
-  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Own15 SDK/reconstructed/plan/separate compiled emitted7healthy8RED ->15pass; normal1 harness24 bad routes ->pass. Writer1/named endpoint1/complete marks1 pass3 integration tests; changed engine/new normal/temp format, exact source/metadata/healthy observations and old15 relink, native/fresh lock identity, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after49.3-.5/48/45 and prerequisites; new ordinary Cargo target discovered, exact canonical selection23.4.1 remains. No public policy/schema/dependency/infrastructure movement.
+  Claim verification: none: Finite authored local writer/endpoint/mark-target/name-effect functional assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent current15 native/reconstructed/plan/separate compiled emitted7healthy8RED, ordinary1 harness24 bad value routes across8 sources. Numeric match registers at unavailable endpoints create/replace marks, including authored name-effect targets. Actual source/compiled/serde/plan/modules/results/traces/metadata retained before runtime edits; no peer-derived failure.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: engine.rs mark_match_start/end write match_start_byte/match_end_byte without testing existing match_present. Names/args already evaluate before call_helper and existing resolver/typed mark owner already supplies scope and valid-coordinate storage; absence must be qualified before writing default numeric registers.
+  - [x] **FIX**: Two branches resolve existing names then return Undef if match_present is false. Present writes keep original typed mark calls; no state/frame/schema/helper/domain/arity or entry/input/capture/anonymous/available-endpoint change. Accepted name effects remain, no fabricated mark or extra write when absent.
+  - [x] **ADDRESSED (verified)**: All15 pass all four routes, fresh targets stay missing/existing targets/name effects survive; real empty/zero/Unicode and local/live cursor distinction remain. Seven healthy SDK/fresh observations/source/parsed/compiled/serde/plan/emitted/full metadata exact. Same15 baseline source modules relink against updated runtime and pass; rebuild apps, no source regeneration.
+  - [x] **NO REGRESSION**: Writer1/named read-take1/complete named marks1 integration tests pass3; engine/new normal/temp formatting pass. Fresh/native locked versions/sources/checksums match. Dependency diagnostics retained opaquely, no implementation/pin inspection/repair. No direct SDK final-cursor/Perl host seed/peer/full suite/admission credit.
+  - [x] **LOCKSTEP**: Packet rust-writer-endpoint-intake.json.gz retains actual producers/runtime patch/before+after/normal RED/fixture/modules/fresh crate/locks/traces/tests/receipts. Temporary probe exactly verified/snapshotted/removed; ordinary consumer has no allocator, exact canonical selection23.4.1 remains. Book/cards/map/target/roadmap/task/live/resume/history align; Dart49.3 then peers/48/45, authorized focused commit/no push.
+  Managed wrapper observation: Known monitor-mode child setpgid warning for7590 during packet retention; command exits0 and packet byte/hash checks pass. Actual original PGID unmeasured, no establishment/lifecycle claim or recover/purge probe. Existing SESSION-STARTUP-READING.7 retains repair ownership; canonical liveness fact and retained notice record recurrence, no feature pivot.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.2 - preserve Rust mark targets without a current local match`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.3`
   Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
@@ -9661,7 +9674,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.2` | `pending` | Independently assess Rust local-match writer availability and target preservation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.3` | `pending` | Independently assess Dart local-match writers and retain compatibility or repair actual outliers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -7,7 +7,7 @@ answers:
   - "does local-match writer absence also erase Perl root entry boundaries"
   - "which task owns missing local-match writer repairs and independent backend proof"
 date: 2026-10-29
-status: bounded Perl49.1 missing-local writer repair focused-verified; independent peers/selection/full admission separate
+status: bounded Rust49.2 local writer presence repair focused-verified; independent peers/selection/full admission separate
 tags: [marks, writer, match, absence, endpoint, mutation, authority]
 evidence: "named-writer-absence-authority-intake.json.gz retains15-source current Perl7healthy8RED and Dart15pass, fresh/seeded target distinction, public10 writer bodies and existing entry-boundary authority inputs."
 reverify: "Recover public probe_perl_named_writer_endpoint.pl and Dart SDK/fresh producers from named-writer-absence-authority-intake.json.gz under an owning task; use retained project-routed commands."
@@ -43,3 +43,20 @@ Packet perl-writer-absence-intake.json.gz retains closure. New normal canonical
 selection23.4.1/independent49.2-.5/48/45/full admission remain separate.
 
 See [[perl-local-match-writer-presence-repair]] for current cause and regeneration proof.
+
+## Rust repair49.2 (2026-10-29)
+
+mark_match_start/end now require existing match_present after name resolution;
+two guards prevent default numeric registers from fabricating/replacing targets.
+Names already evaluate, current typed mark owner/state/frame/schema/domain/arity
+remain. Independent15 SDK/reconstructed/plan/separate emitted7healthy8RED ->15pass;
+ordinary1 harness24 bad routes ->pass. Writer1/named read-take1/complete marks1
+tests pass3; engine/new normal/temp format clean. Seven healthy observations and
+all source/parsed/compiled/serde/plan/emitted/public metadata exact. Same15 baseline
+modules relink with updated runtime, rebuild apps/no source regeneration. Native/
+fresh lock identities match; dependency diagnostics opaque. Temporary producer
+exactly verified/snapshotted/removed, normal no allocator. Packet
+rust-writer-endpoint-intake.json.gz retains closure. Independent49.3-.5/48/45,
+selection23.4.1/full admission remain separate.
+
+See [[rust-local-match-writer-presence-repair]] for current cause and recovery.
