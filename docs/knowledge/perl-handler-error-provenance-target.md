@@ -7,7 +7,7 @@ answers:
   - "does a valid collection containing null imply a Perl runtime error"
   - "which target preserves native direct failure and next-call recovery during nested error repair"
 date: 2026-10-29
-status:41.0 existing-contract target qualified; actual nested errors remain41.1-owned, no production repair
+status: bounded41.0 target/41.1 native repair focused-verified; named47/referenced-blind48/Phase0 owner45/selection/full admission separate
 tags: [perl, errors, provenance, context, recovery, collection, generated]
 evidence: "TYPE41.0 perl-nested-error-authority-intake.json.gz retains9-source/22-call native/separate emitted proof,12 actual nested losses,2 preserved direct errors,8 healthy values and six canonical groups75 nested assertions plus discovery."
 reverify: "Recover probe_perl_nested_error.pl/fresh.pl and read_perl_nested_error.py from the41.0 packet; use project-routed Perl/Python and frozen tests/fixtures/nested_handler_error.json. Read nested-handler-error-provenance-authority.md before41.1."
@@ -35,3 +35,13 @@ separately, owned48; qualified deep error source uses direct calls. Four nonmatc
 candidate expectations changed[null] to actual[] before freeze, with source/input/
 observations unchanged. No product error credit for setup epochs. Deferred helper
 readiness31.6.4.4, named47/referenced-blind48/Phase0 owner45 and admission separate.
+
+2026-10-29 bounded41.1 now preserves actual invocation-local handler failure
+identity through RuntimeContext/SpecEntry/Compiler.12 nested losses repaired,
+2 original direct failures/8 healthy observations retained; normal original-object
+and no-slot-leak checks pass. Three selected files30 groups/six canonical groups75
+nested assertions plus discovery and module syntax pass. Source/rewriter/emitted/
+all fresh outcomes/metadata exact; NONE timestamps alone normalized for direct/
+forced-compile controls. [[perl-invocation-handler-failure-provenance]] retains
+closure. No public schema/helper/throwing/generation change;47/48/45 and broader
+readiness/host isolation/selection/full admission remain independent.

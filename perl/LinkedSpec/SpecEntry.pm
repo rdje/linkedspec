@@ -332,9 +332,8 @@ sub _build_runtime_handler {
   );
   if ($compile_error) {
    _call_runtime_ctx(
-    'set_runtime_ctx_last_error_for_owner',
+    'set_runtime_ctx_handler_failure',
     $runtime_ctx,
-    'runtime_handler',
     stage => 'rule_handler_compile',
     summary => 'Rule handler compilation failed',
     detail => $compile_error,
@@ -390,9 +389,8 @@ sub _build_runtime_handler {
     die $eval_error
    }
    _call_runtime_ctx(
-    'set_runtime_ctx_last_error_for_owner',
+    'set_runtime_ctx_handler_failure',
     $runtime_ctx,
-    'runtime_handler',
     stage => 'rule_handler_eval',
     summary => 'Rule handler execution failed',
     detail => $eval_error,

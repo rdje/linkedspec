@@ -1796,6 +1796,8 @@ RULE_PROGRESS
 
  my $top_rule = _call_runtime_ctx('get_runtime_ctx_top_rule', $runtime_ctx);
  return sub {
+  my $handler_failure_slot = _call_runtime_ctx('runtime_ctx_handler_failure_slot_name');
+  local $runtime_ctx->{$handler_failure_slot} = undef;
   _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx);
   my $top_rule_entry = (defined($top_rule) && length($top_rule) && ref($final_descriptor->{spec}{$top_rule}) eq 'HASH')
    ? $final_descriptor->{spec}{$top_rule}
@@ -1967,7 +1969,14 @@ RULE_PROGRESS
    die $eval_error;
   }
   my $invoke_reason = defined($retv) ? 'top-level handler returned defined AST' : 'top-level handler returned undef';
-  if (_call_runtime_ctx('has_runtime_ctx_last_error_type', $runtime_ctx, 'runtime_handler')) {
+  my $handler_failure = _call_runtime_ctx('get_runtime_ctx_handler_failure', $runtime_ctx);
+  if (defined $handler_failure) {
+   $invoke_reason = defined($retv)
+    ? 'top-level handler discarded defined AST while preserving actual runtime_handler failure'
+    : 'top-level handler returned undef while preserving runtime_handler context';
+   $retv = undef;
+   $@ = $handler_failure->{detail};
+  } elsif (_call_runtime_ctx('has_runtime_ctx_last_error_type', $runtime_ctx, 'runtime_handler')) {
    if (defined($retv)) {
     _call_runtime_ctx('clear_runtime_ctx_last_error', $runtime_ctx);
     $@ = '';

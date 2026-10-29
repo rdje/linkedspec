@@ -59,3 +59,25 @@ No production changes here.41.1 retains exact healthy/direct/emitted compatibili
 establishes real RED/GREEN and registers a normal regression before full23.4/push.
 Named47/referenced-blind48/exact28 Phase0 owner45 and all broader prerequisites
 remain separately owned; no peer/full admission claim follows from this intake.
+
+## Bounded repair41.1 (2026-10-29)
+
+RuntimeContext owns a dynamically scoped pointer to the actual current SpecEntry
+failure record. Identity must still match last_error; owning clear/replacement
+invalidates it, and the first actual child failure retains its original payload.
+SpecEntry compile/eval paths record actual failures; Compiler scopes provenance
+per invocation and returns undef/original inner error/context despite a defined
+parent value. Synthetic stale-context success, healthy null/nonmatch and next-call
+reset remain. No public diagnostic field/schema/throwing/helper/generation change.
+
+New normal6/9 groups RED ->9pass. Native9-source/22-call proof repairs12 losses,
+retains2 original direct errors and8 exact healthy observations/cursors; normal
+tests verify exception reference identity and no private slot leak. Three selected
+files pass30 groups, six canonical diagnostic/recovery groups75 nested assertions
+plus discovery pass, three modules compile. Only volatile timestamp prefixes
+normalized in two direct/forced-compile NONE traces; full raw bytes retained.
+Source/rewriter/emitted inputs and all fresh outcomes/public metadata remain exact;
+the actual old9 artifacts replay before native emission, no regeneration needed.
+Packet perl-nested-error-repair-intake.json.gz retains closure. Named47/referenced-
+blind48/Phase0 owner45, readiness31.6.4.4/SESSION17/registration/full admission remain
+independent; no peer or whole Phase0/gate claim.

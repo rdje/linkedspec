@@ -4849,6 +4849,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua endpoint40.5 adds lua/test/capture_endpoint_absence_test.lua and ordinary run.lua registration.112 normal/three SDK routes plus retained separate-process modules pass independently on safe installed PUC5.5/LuaJIT; no declared5.4/unsafe formatter/full phase credit. Exact canonical selection remains required before admission/push.
 
+  Native nested error41.1 adds t/nested_handler_error.t using frozen9-source/22-call fixture; ordinary discovery and selected30 groups/75 canonical nested assertions verified. Exact canonical selection remains required before admission/push, no full Phase0 or peer completion credit.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9182,6 +9184,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push requires verified error-delivery repair; actual public diagnostic policy movement gets separately owned canonical authority.
   Planned claim verification: none: Finite authored error-delivery distinction, no population measurement.
 
+  Bounded implementation update2026-10-29:41.0 target and41.1 native repair are complete/focused-verified. Actual12 nested losses repaired with original direct failure surface/object/child attribution,8 healthy observations and synthetic stale/next-call recovery preserved. Parent admission remains open for canonical selection23.4.1/full23.4 and independent prerequisites; proceed47 then48/45 before wider features/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.41.0`
   Status: `completed` / P1 after40 before41.1/full23.4/push
   Goal: Freeze existing nested native handler-error provenance/recovery target before production.
@@ -9202,13 +9206,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.41.0 - freeze nested Perl handler error provenance target`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.41.1`
-  Status: `pending` / P1 after41.0 before47/45/full23.4/push
+  Status: `completed` / P1 after41.0 before47/45/full23.4/push
   Goal: Preserve actual invocation-local Perl child handler errors through defined parents using frozen41.0, while retaining stale-context success and valid null/rejection behavior.
+  Activation: clean `30963fbbe14ba7ba4d24e6583a2038bd4dfed83e`;41.0 committed/brief empty/no jobs pending. Read frozen provenance target,9-source/22-call actual native/emitted RED/healthy/metadata, original public trace and six canonical recovery/diagnostic groups75 assertions. Use RuntimeContext-scoped actual record identity, mark only real SpecEntry failures, preserve synthetic stale success/explicit owning clear/direct error and next-call reset. Production only after ordinary RED.
   Acceptance: Repair confirmed error loss through existing RuntimeContext/SpecEntry/Compiler owners, retain original error object/detail/rule/handler attribution, direct failure surface and operation-boundary reset. Do not manufacture failures from null values, suppress legitimate recovery, widen excluded callback vocabulary or overwrite richer errors. Normal/fresh/direct dependent coverage, book/docs/proof/commit before admission.
-  Planned verification tier: focused
-  Planned focused checks: Frozen direct/nested/collecting/falsey/null/nonmatch/stale/reuse RED/GREEN plus selected diagnostic and callback controls, syntax and book/manual continuity; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after41.1/47/45 and other prerequisites; canonical selection23.4.1 includes new normal test.
-  Planned claim verification: none: Finite authored handler-error delivery and recovery assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: New normal6/9 groups actual RED ->9pass; selected normal/reset/Number30 groups pass, six canonical diagnostic/recovery groups75 nested assertions plus discovery pass. Exact9-source/22-call native/fresh12 losses repaired/2 direct+8 healthy preserved; old artifacts/source/metadata/fresh exact. Three module syntax/book/map/history/manual continuity. Only existing NONE timestamps normalized; raw retained.
+  Canonical trigger: Full23.4/final clean push after47/48/45 and other prerequisites; exact new normal canonical selection23.4.1 remains required. No public schema/helper/throwing/generation or infrastructure movement.
+  Claim verification: none: Finite authored handler-error delivery, identity and recovery assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: New ordinary9-source regression has6 groups RED on frozen baseline, covering12 actual nested error-loss calls. Existing direct2 and healthy8 remain controls. Actual public context/debug/source/native/fresh41.0 establishes SpecEntry failure followed by defined-parent error deletion before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Compiler treated any defined top-level value as recovery and erased child runtime_handler. Context payload/AST shape alone also matches established synthetic stale success and healthy null collections. RuntimeContext now qualifies actual SpecEntry failure identity within the current invocation, rather than guessing from text or returned data.
+  - [x] **FIX**: RuntimeContext owns private slot name/get/actual failure setter; its marker references the same current last_error record, owning clear/replacement invalidates it, and first actual child remains original. SpecEntry compile/eval paths record through that owner. Compiler dynamically scopes the slot and converts only actual outstanding failures to existing undef/inner-error/context surface. Synthetic stale success branch and ordinary null/nonmatch/reset stay intact; no new public field/schema/exception/helper/generation owner.
+  - [x] **ADDRESSED (verified)**: All14 real native errors now retain original typed detail/helper/rule/handler attribution,12 repaired nested losses plus2 unchanged direct failures. Eight healthy observations/cursors are exact. Normal test proves inner eval/detail share the original object and private invocation key is absent after return. All source/rewriter/emitted bytes and all fresh observations/public metadata exact; old9 modules replay before native re-emission, no regeneration required.
+  - [x] **NO REGRESSION**: Normal/reset/Number three files pass30 groups, six exact canonical diagnostic/recovery groups pass75 nested assertions plus discovery, three changed modules compile. Direct native/forced-compile canonical NONE trace comparison normalizes timestamp prefixes only; raw records retained. Explicit synthetic stale success and actual failure/next-call success remain. Initial pointer-preparation assertion and timestamp-only reader correction are instrument setup, no product failure credit.
+  - [x] **LOCKSTEP**: Packet perl-nested-error-repair-intake.json.gz retains actual producers/normal RED/current/runtime patches/before+after/source/inputs/modules/channels/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; canonical selection23.4.1 includes new normal before admission. Bounded41 complete, named47 then48/45; readiness31.6.4.4/SESSION17/other prerequisites remain independently owned. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.41.1 - preserve actual Perl child handler failures through defined parents`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42`
   Status: `in_progress` / P1 after bounded34 before39/full23.4/push
@@ -9421,7 +9435,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.41.1` | `pending` | Preserve actual native child handler-error provenance through defined parents. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47` | `pending` | Freeze named capture endpoint/absence and writer/name-effect authority before independent backend repairs. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

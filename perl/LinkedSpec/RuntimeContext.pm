@@ -262,7 +262,37 @@ sub clear_runtime_ctx_last_error {
  my ($runtime_ctx) = @_;
  return unless ref($runtime_ctx) eq 'HASH';
  delete $runtime_ctx->{last_error};
+ my $slot = runtime_ctx_handler_failure_slot_name();
+ $runtime_ctx->{$slot} = undef if exists $runtime_ctx->{$slot};
  return
+}
+
+# The parser dynamically scopes this private slot. It records the identity of
+# an actual SpecEntry failure, not a second diagnostic or an AST-shape guess.
+sub runtime_ctx_handler_failure_slot_name {
+ return '_runtime_handler_failure';
+}
+
+sub get_runtime_ctx_handler_failure {
+ my ($runtime_ctx) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ my $failure = $runtime_ctx->{runtime_ctx_handler_failure_slot_name()};
+ my $last_error = $runtime_ctx->{last_error};
+ return undef unless ref($failure) eq 'HASH' && ref($last_error) eq 'HASH';
+ return $failure == $last_error ? $failure : undef;
+}
+
+sub set_runtime_ctx_handler_failure {
+ my ($runtime_ctx, %args) = @_;
+ return undef unless ref($runtime_ctx) eq 'HASH';
+ # Preserve the original child when a parent subsequently fails while handling
+ # its unavailable result. Explicit owning clear/replacement invalidates it.
+ my $failure = get_runtime_ctx_handler_failure($runtime_ctx);
+ return $failure if defined $failure;
+ my $error = set_runtime_ctx_last_error_for_owner($runtime_ctx, 'runtime_handler', %args);
+ my $slot = runtime_ctx_handler_failure_slot_name();
+ $runtime_ctx->{$slot} = $error if exists $runtime_ctx->{$slot};
+ return $error;
 }
 
 sub get_runtime_ctx_last_error {
