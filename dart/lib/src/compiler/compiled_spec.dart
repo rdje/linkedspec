@@ -1880,8 +1880,24 @@ CompiledDependencyRegexState _buildDependencyRegexState({
     if (rule.dependencyRefs.isEmpty) {
       continue;
     }
+    // Blind call references remain on the rule even when the callee has no
+    // regex. Only real slots belong in this regex-only projection. Mixed or
+    // action owners retain their strict catalog checks, including bypass mode.
+    final onlyBlindEdges =
+        rule.blindEdges.isNotEmpty && rule.actionEdges.isEmpty;
+    final regexRefs = onlyBlindEdges
+        ? rule.dependencyRefs
+              .where((ref) {
+                final target = rulesByLabel[ref.label];
+                return target == null || target.regexPatterns.isNotEmpty;
+              })
+              .toList(growable: false)
+        : rule.dependencyRefs;
+    if (regexRefs.isEmpty) {
+      continue;
+    }
     final patterns = [
-      for (final ref in rule.dependencyRefs)
+      for (final ref in regexRefs)
         _dependencyPatternFor(
           ownerLabel: label,
           ref: ref,
@@ -1890,7 +1906,9 @@ CompiledDependencyRegexState _buildDependencyRegexState({
     ];
     dependencyRegexMap[label] = CompiledDependencyRegexEntry(
       ownerLabel: label,
-      dependencyRefs: rule.dependencyRefs,
+      dependencyRefs: regexRefs.length == rule.dependencyRefs.length
+          ? rule.dependencyRefs
+          : List.unmodifiable(regexRefs),
       patterns: List.unmodifiable(patterns),
     );
   }

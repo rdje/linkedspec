@@ -1,0 +1,82 @@
+[
+  {
+    "name": "explicit_and",
+    "source": "Top::AND\n => Child {return(array(retv,cursor_pos()))}\nChild:\n I{return(\"C\")}\n",
+    "expected_builds": true,
+    "input": "x",
+    "expected": [
+      "C",
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "bare_and",
+    "source": "Top::AND\n Child {return(array(retv,cursor_pos()))}\nChild:\n I{return(\"C\")}\n",
+    "expected_builds": true,
+    "input": "x",
+    "expected": [
+      "C",
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "pipe",
+    "source": "Top::|\n => Child {return(array(retv,cursor_pos()))}\nChild:\n I{return(\"C\")}\n",
+    "expected_builds": true,
+    "input": "x",
+    "expected": [
+      "C",
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "entry_slot_absent",
+    "source": "Top::AND\n => Child {return(array(retv,cursor_pos()))}\nChild:\n I{return(array(\"C\",entry_slot()))}\n",
+    "expected_builds": true,
+    "input": "x",
+    "expected": [
+      [
+        "C",
+        null
+      ],
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "direct_control",
+    "source": "Top::\n I{return(call(Child))}\nChild:\n I{return(\"C\")}\n",
+    "expected_builds": true,
+    "input": "x",
+    "expected": "C",
+    "expected_cursor": 0
+  },
+  {
+    "name": "mixed_regex_child",
+    "source": "Top::AND\n => Child\n => Token {return(\"OK\")}\nChild:\n I{return(\"C\")}\nToken:AND\n /x/ -> Token[0] {return(\"T\")}\n",
+    "expected_builds": true,
+    "input": "x",
+    "expected": "OK",
+    "expected_cursor": 1,
+    "expected_call_refs": [
+      "Child",
+      "Token"
+    ],
+    "expected_regex_refs": [
+      "Token"
+    ]
+  },
+  {
+    "name": "action_no_regex",
+    "source": "Top::\n -> Child.push\nChild:\n I{return(\"C\")}\n",
+    "expected_builds": false
+  },
+  {
+    "name": "indexed_action_no_regex",
+    "source": "Top::\n -> Child[0].push\nChild:\n I{return(\"C\")}\n",
+    "expected_builds": false
+  }
+]

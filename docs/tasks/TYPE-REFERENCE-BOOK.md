@@ -4895,6 +4895,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Dart48.3.2 adds rule_invocation_accumulators_test.dart (3 Scope controls, implicit backend-qualified),92 selected checks.39.8.1, not completed Scope repair, owns3 referenced runtime exclusions. Candidate progress normal remains outside discovery; pure-code48.3.3 next. Canonical selection must preserve these qualifications.
 
+  Dart48.3.3 adds pure_blind_targets_test.dart (15 cases incl3 bypass) and pure_blind_targets.json8. Exact canonical selection must include these and retain6 negative/immutable map/call-ref/entry-slot absence properties. Ordinary policy/source fixture candidates remain separately owned39.8.1.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9628,14 +9630,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2 - initialize conventional rule arrays in their invocation scope`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3`
-  Status: `pending` / P1 immediately after48.3.2 before48.4/admission
+  Status: `completed` / P1 immediately after48.3.2 before48.4/admission
   Goal: Compile declared pure-code blind targets without inventing a regex slot or weakening action-slot catalogs.
   Reproduction/impact: Public Perl native/emitted4-source blind_implicit_zero_progress target accepts a Child with only I{return("C")};3 nonconsuming cases return null/null/[] at0 and consuming empty-array control returns[[]] at1. Dart validation accepts these pure-code blind targets after48.3, but compileSpec dependency-regex construction raises CompiledSpecException Top references Child regex slot0 with0 slots. Public stack identifies _dependencyPatternFor / _buildDependencyRegexState in compiled_spec.dart. Initial normal/probe rejection and inputs retained in rule-scope packet; this is a separate compiler defect, not runtime progress RED.
   Acceptance: Own independent original pure-code target compiler/source/diagnostic RED before edits; distinguish blind declaration/call refs from actual regex dependency slots. Retain strict action/catalog/index/unknown diagnostics and semantic graph/plan/metadata requirements, no fabricated regex fallback. Use the already-qualified zero-width-regex counterparts only for progress isolation, never imply pure-code source support from them. Qualify native/restored/plan/fresh source, exact public metadata/diagnostics and direct compiler/blind neighbors before commit; canonical tier if the actual mechanical/public-contract change requires it. Existing policy suffices unless canonical requirements conflict.
-  Planned verification tier: focused; any actual public schema/policy movement requires canonical ownership before edits.
-  Planned focused checks: Pure-code4 target and existing compiler/strict slot/blind controls, original12/qualified referenced runtime, source/metadata/error identity and selective analysis/book/docs/commit.
-  Planned canonical trigger: Public schema/policy movement if actually required; otherwise full23.4/final clean push after prerequisites.
-  Planned claim verification: none: Finite authored functional/compiler distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Pure-code4 target and existing compiler/strict slot/blind controls, original12/qualified referenced runtime, source/metadata/error identity and selective analysis/book/docs/commit.
+  Canonical trigger: Public schema/policy movement if actually required; otherwise full23.4/final clean push after prerequisites.
+  Claim verification: none: Finite authored functional/compiler distinctions, no population measurement.
+
+  Activation: clean `b67c80bb3f30d0cda12f806f7e661cdb976d4c61`; Scope repair committed/brief empty/no jobs. Recovered pure-code compiler error, compiled-state/descriptor authority, dependency builder and action resolver, immutable entry lists and validateSource:false public behavior. Dependency builder treats every call ref as a regex ref after action resolution. Own independent one-shot AND/bare AND/pipe/entry-slot absence/direct controls plus strict action/index/unknown/blind-index and bypass-validation proof before edits. Filter only genuinely absent regexes for exclusively blind owners; preserve rule call refs, strict undefined/actions, healthy metadata/immutability and deferred ordinary policy.
+
+  - [x] **REPRODUCE / ISSUE**: Independent8-source reference6 valid pairs/2 rejects. Own12 source roles+3 bypass controls have1 healthy direct/5 valid compiler RED and6 strict negatives/3 bypass errors. Pure and mixed targets fail during dependency-map construction before source emission.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Builder applies _dependencyPatternFor to all edge call refs, including pure blind targets. Action resolver already enforces actual slot catalogs; blind calls do not acquire regexes merely by declaration. Validated bypass controls include mixed action/blind with a parent regex, preventing accidental catalog weakening.
+  - [x] **FIX**: Filter genuinely absent target regexes only for exclusively blind owners. Keep semantic call refs on rule, undefined refs and all action/mixed refs strict; preserve unchanged lists and wrap filtered refs immutable. No invented pattern/slot/state/schema/policy.
+  - [x] **ADDRESSED (verified)**: All6 valid source forms native/restored/plan/fresh pass; child regex patterns/slots stay empty and entry_slot null. Mixed case retains both call refs/only Token regex ref and refuses mutation. Six negative diagnostic objects/3 bypass results exact; old direct artifact/module reused. New5 emit v2 source from repaired compiler; no prior module existed for those recorded rejects.
+  - [x] **NO REGRESSION**: New15+32 compiler/validator/referenced neighbors47 pass, fatal analysis/format clean. Existing28 source/compiled/plan/emitted/results/errors exact, retaining ordinary39.8.1 exclusions. Initial7-source epoch retained before adding mixed subset and bypass falsifiers; no harness failure credited. No ordinary policy, runtime phase or peer parity inference.
+  - [x] **LOCKSTEP**: Packet dart-pure-blind-intake.json.gz retains actual inputs/producers/reference/baseline/normal/fresh/metadata/strict receipts. Book/cards/map/roadmap/task/live/resume/history align; new normal selection23.4.1 required. Julia48.4 then safe Lua48.5/warnings/45; ordinary authority after20.1 before admission. Authorized focused commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3 - separate pure blind calls from regex dependencies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9645,6 +9657,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
   Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
   Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+  Added target scope from48.3.3: assess shared pure_blind_targets8 (6 valid/2 action rejects, actual current reference6 native/emitted pairs) plus4 strict blind negatives alongside original/qualified12. Own baseline and compiler/map/slot/source/runtime/fresh proof; do not assume Dart or Rust failures exist in Julia. Ordinary progress39.8.1/parent-LX authority exclusions remain independent.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -10082,7 +10096,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3` | `pending` | Compile pure-code blind targets without a fabricated regex dependency. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.4` | `pending` | Independently assess Julia referenced and pure-code blind targets. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

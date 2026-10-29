@@ -12741,7 +12741,7 @@ _Dart public exports and the first ActionIR data declarations retain distinct bo
 ### dart-pure-blind-dependency-regex-gap
 _Dart dependency-regex construction rejects declared pure-code blind targets_
 - **answers:** why does Dart compileSpec require a regex for a pure code blind child after validation succeeds | which task repairs Dart dependency pattern construction for no regex blind rules
-- **date:** 2026-10-29 · **status:** confirmed; P1 repair48.3.3 after48.3.2 before48.4/admission
+- **date:** 2026-10-29 · **status:** repaired48.3.3; focused one-shot source/slot/map/runtime proof
 - **evidence:** `dart-rule-accumulator-intake.json.gz retains public Perl4 source pairs, Dart pure-code compiler normal/stack, and separate qualified progress controls.`
 - **reverify:** `Recover retained public probe and original blind_implicit_zero_progress.json; use routed Perl/Dart wrappers under owning48.3.3.`
 - **source:** [`docs/knowledge/dart-pure-blind-dependency-regex-gap.md`](docs/knowledge/dart-pure-blind-dependency-regex-gap.md)

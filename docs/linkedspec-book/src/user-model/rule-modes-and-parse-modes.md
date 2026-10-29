@@ -39,9 +39,26 @@ controls execute no-regex direct calls and AND blind literal returns. Blind `.pu
 calls its enclosing parent on the13 recorded single-pass/repeated routes. Conventional arrays
 are fresh per invocation. Three qualified coordinator examples still collect an
 extra empty nonconsuming iteration; ordinary cutoff/lifecycle authority remains
-under review. A pure-code blind child with only lifecycle code and no regex or
-dependencies is still rejected during Dart compilation.
+under review. A pure-code blind child can contain only lifecycle code, with no regex
+or dependencies. Dart retains its call reference without creating a regex slot.
 Portable blind-parent `LX` phase authority remains separately tracked.
+
+A pure-code child can return a value without consuming input. This one-shot
+AND example returns `["C",0]` on `x`:
+
+```text
+Top::AND
+ => Child { return(array(retv,cursor_pos())) }
+Child:
+ I { return("C") }
+```
+
+The same attached return works with a bare AND target or a pipe parent.
+`entry_slot()` inside this child is null because the call does not manufacture
+a regex slot. A mixed blind sequence can call a pure-code child and a regex
+child; both remain call dependencies, while only the latter supplies a regex.
+Action targets still require real slots. These one-shot examples do not depend
+on the ordinary repetition policy currently under review.
 
 ## Current rule-label surface
 

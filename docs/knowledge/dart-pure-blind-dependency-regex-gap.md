@@ -5,7 +5,7 @@ answers:
   - "why does Dart compileSpec require a regex for a pure code blind child after validation succeeds"
   - "which task repairs Dart dependency pattern construction for no regex blind rules"
 date: 2026-10-29
-status: confirmed; P1 repair48.3.3 after48.3.2 before48.4/admission
+status: repaired48.3.3; focused one-shot source/slot/map/runtime proof
 evidence: "dart-rule-accumulator-intake.json.gz retains public Perl4 source pairs, Dart pure-code compiler normal/stack, and separate qualified progress controls."
 reverify: "Recover retained public probe and original blind_implicit_zero_progress.json; use routed Perl/Dart wrappers under owning48.3.3."
 ---
@@ -24,3 +24,19 @@ a regex for a blind call. The separate qualified progress fixture adds only a
 zero-width `/(?=x)/` slot to the three Child definitions; it isolates the current
 runtime cutoff and gives no pure-code compiler credit. Both actual fixture
 epochs, source errors and reference results are retained.
+
+## Bounded compiler repair48.3.3 (2026-10-29)
+
+The regex-only projection omits absent patterns for exclusively blind owners,
+retaining all rule call refs, undefined checks and strict action/mixed-owner
+catalogs even when source validation is disabled. Unchanged entry lists retain
+their identity; filtered lists are immutable. No invented regex or slot.
+Independent8 reference sources give6 valid runtime pairs/2 action rejects.
+Dart12 source roles+3 bypass controls have5 valid compiler RED/1 direct healthy
+->all6 native/restored/plan/fresh pass. Entry-slot absence remains null, mixed
+case retains Child+Token calls but only Token/x regex dependency. Six negative
+diagnostics and3 bypass results exact. Same old direct module reused; new5
+sources emitted, v2 metadata exact. Existing28 artifacts/results/errors remain,
+including ordinary exclusions.47 selected checks/analysis pass; no phase or
+ordinary-policy39.8.1 movement. Packet dart-pure-blind-intake.json.gz retains
+actual initial/refined epochs and recoverable evidence. Julia48.4 next.
