@@ -7,7 +7,7 @@ answers:
   - "does local-match writer absence also erase Perl root entry boundaries"
   - "which task owns missing local-match writer repairs and independent backend proof"
 date: 2026-10-29
-status: bounded Rust49.2 local writer presence repair focused-verified; independent peers/selection/full admission separate
+status: bounded Dart49.3 local writer compatibility focused-verified; peers/selection/SDK deprecations/full admission separate
 tags: [marks, writer, match, absence, endpoint, mutation, authority]
 evidence: "named-writer-absence-authority-intake.json.gz retains15-source current Perl7healthy8RED and Dart15pass, fresh/seeded target distinction, public10 writer bodies and existing entry-boundary authority inputs."
 reverify: "Recover public probe_perl_named_writer_endpoint.pl and Dart SDK/fresh producers from named-writer-absence-authority-intake.json.gz under an owning task; use retained project-routed commands."
@@ -60,3 +60,18 @@ rust-writer-endpoint-intake.json.gz retains closure. Independent49.3-.5/48/45,
 selection23.4.1/full admission remain separate.
 
 See [[rust-local-match-writer-presence-repair]] for current cause and recovery.
+
+## Dart compatibility49.3 (2026-10-29)
+
+Current15 native/restored/plan/separate VM allpass. Existing markName evaluation
+and nullable localMatch start/end guard already preserve fresh/seeded/name-effect
+targets without extra writes; valid empty/zero/Unicode and local/live cursor remain.
+No runtime change. Exact source/normalized/compiled/plan/emitted/full metadata/
+results/traces equal49.0; original15 modules reused. Writer15/named endpoint15/
+named Number-function-scope2/complete marks3 pass35 tests, fatal new-file analysis/
+format clean. Wrong first-mark oracle fails1case14pass, actual fixture unchanged,
+no product RED. Packet dart-writer-endpoint-intake.json.gz retains closure. Ordinary
+normal discovered, canonical selection23.4.1/SDK deprecations2.25/independent49.4-.5/
+48/45/full admission remain separate. No AOT/full-package/dependency isolation claim.
+
+See [[dart-local-match-writer-presence-compatibility]] for current owner and proof; earlier observations remain historical.

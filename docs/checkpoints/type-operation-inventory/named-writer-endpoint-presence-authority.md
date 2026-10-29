@@ -86,3 +86,16 @@ fresh lock identities match; dependency diagnostics opaque. Temporary producer
 exactly verified/snapshotted/removed, normal no allocator. Packet
 rust-writer-endpoint-intake.json.gz retains closure. Independent49.3-.5/48/45,
 selection23.4.1/full admission remain separate.
+
+## Dart compatibility49.3 (2026-10-29)
+
+Current15 native/restored/plan/separate VM allpass. Existing markName evaluation
+and nullable localMatch start/end guard already preserve fresh/seeded/name-effect
+targets without extra writes; valid empty/zero/Unicode and local/live cursor remain.
+No runtime change. Exact source/normalized/compiled/plan/emitted/full metadata/
+results/traces equal49.0; original15 modules reused. Writer15/named endpoint15/
+named Number-function-scope2/complete marks3 pass35 tests, fatal new-file analysis/
+format clean. Wrong first-mark oracle fails1case14pass, actual fixture unchanged,
+no product RED. Packet dart-writer-endpoint-intake.json.gz retains closure. Ordinary
+normal discovered, canonical selection23.4.1/SDK deprecations2.25/independent49.4-.5/
+48/45/full admission remain separate. No AOT/full-package/dependency isolation claim.

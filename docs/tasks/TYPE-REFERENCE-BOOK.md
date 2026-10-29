@@ -4865,6 +4865,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust49.2 adds rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs with frozen15 current target. Ordinary Cargo discovery/three SDK routes and separate compiled original15 source proof verified; exact canonical presence/selection remains before admission/push. Temporary probe archived/removed.
 
+  Dart49.3 adds dart/test/named_writer_endpoint_absence_test.dart with frozen15 writer target. Ordinary discovery/three SDK routes and original15 separate-VM modules verified; exact canonical presence/selection remains before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9232,13 +9234,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.2 - preserve Rust mark targets without a current local match`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.3`
-  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Status: `completed` / P1 after47 before48/45/wider features/full23.4/push
   Goal: Independently assess Dart local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Activation: clean `5d88acc39747eea82338dfcefb9ae647a9c2e929`; Rust49.2 committed/brief empty/no jobs. Frozen15 writer target, retained49.0 Dart15pass and existing nullable local writer/name/typed mark owner recovered. Independently reverify current source/modules/metadata/native/restored/plan/separate VM and normal before runtime edits. Preserve named/anonymous origins and other writers, exact host/package/deprecation limits.
   Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
-  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
-  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
-  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Current15 native/restored/plan/separate VM15pass, exact source/full metadata/results/traces equal49.0/original15 modules. Writer15/named endpoint15/named Number2/complete marks3 pass35 tests; rival1RED14pass, fatal new-file analysis/format/unchanged runtime, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after49.4-.5/48/45 and prerequisites; ordinary normal discovered, exact canonical selection23.4.1/whole-package SDK deprecations2.25 remain. No public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored writer/state/name-effect functional assertions and deliberately false first-mark oracle, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent current15 native/restored/plan/separate VM allpass. Same original49.0 source/module bytes and full native/fresh observations/traces match, including missing/existing/name-effect targets and local/live cursor distinction. No peer-derived defect or product RED claim.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _callCaptureMarkHelper already evaluates markName before reading nullable localMatch.codeUnitStart/end. Its writer guard requires both accepted name and available offset before existing typedMarkSet, so absence adds no write while preserving authored name effects. No numeric fallback/frame reconstruction is needed.
+  - [x] **FIX**: No runtime edit. Add frozen15 ordinary consumer plus retained false-oracle control. Preserve existing source/emitter/helper/domain/frame/schema/arity/entry/current/input/capture/anonymous contracts and package/SDK limits.
+  - [x] **ADDRESSED (verified)**: All15 pass all four routes with full matched/value/character cursor/output/lifecycle/result/trace and public metadata retained; exact source/normalized/compiled/plan/emitted/full observations/traces equal49.0. Same original15 modules execute; no regeneration/runtime change required.
+  - [x] **NO REGRESSION**: Writer15/named endpoint15/named Number-function-scope2/complete marks3 pass35 selected tests. Fatal new-file analysis and format pass. Deliberately fabricated first-mark oracle fails1 case with14pass, fixture/runtime untouched. Whole-package SDK deprecations2.25 remain; no full-package/AOT/isolation claim.
+  - [x] **LOCKSTEP**: Packet dart-writer-endpoint-intake.json.gz retains actual producers/normal+rival/runtime/emitter/fixture/modules/SDK/fresh/full result/trace/tests/receipts. Normal discovered, exact canonical selection23.4.1 before admission; book/cards/map/target/roadmap/task/live/resume/history align. Julia49.4 then safe Lua49.5/48/45, authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.3 - retain Dart local-match writer target preservation`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.4`
   Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
@@ -9674,7 +9686,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.3` | `pending` | Independently assess Dart local-match writers and retain compatibility or repair actual outliers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.4` | `pending` | Independently assess Julia local-match writer availability and target preservation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
