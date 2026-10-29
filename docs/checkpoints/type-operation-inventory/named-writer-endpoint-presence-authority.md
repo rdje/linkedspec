@@ -99,3 +99,17 @@ format clean. Wrong first-mark oracle fails1case14pass, actual fixture unchanged
 no product RED. Packet dart-writer-endpoint-intake.json.gz retains closure. Ordinary
 normal discovered, canonical selection23.4.1/SDK deprecations2.25/independent49.4-.5/
 48/45/full admission remain separate. No AOT/full-package/dependency isolation claim.
+
+## Julia compatibility49.4 (2026-10-29)
+
+Current15 native/restored/plan/separate emitted allpass. Existing name evaluation
+then nullable local_match guard before typed mark update already preserves fresh/
+seeded/name-effect targets and real empty/zero/Unicode/local-live cursor behavior.
+No runtime change. Writer105/named endpoint105/named Number-function-scope155/
+complete marks13 pass378 assertions with depwarn=error/empty healthy stderr. Wrong
+first-mark oracle3fail102pass, fixture/runtime untouched; no product RED. Exact
+source/normalized/compiled/plan/emitted/full metadata/results/high traces retained;
+runtime/compiler/emitter/fixture match activation HEAD, no regeneration. Packet
+julia-writer-endpoint-intake.json.gz retains closure. Normal runtests include
+verified; selection23.4.1/safe Lua49.5/48/45/full admission remain separate. Same
+project/depot, no isolated dependency or full package claim.

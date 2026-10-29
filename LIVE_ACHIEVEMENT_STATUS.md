@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart local writers already compatible:15pass/35 focused tests; Julia49.4 next.
+Julia local writers already compatible:15pass/378 focused assertions; safe Lua49.5 next.
 
 ## Latest Completed Slice
 
-Dart existing mark_match_start/end evaluate names then write only when nullable localMatch supplies their endpoint. No current local match leaves fresh targets absent and seeded/name-effect targets unchanged; valid empty/zero/Unicode and local/live cursor distinctions already work. Independent current15 native/restored/plan/separate VM15pass, exact source/normalized/compiled/plan/emitted/full metadata/results/traces match49.0; original15 modules reused. No runtime repair or product RED claim. New writer15/named endpoint15/named Number-function-scope2/complete mark3 tests pass35, fatal new-file analysis/format clean. Deliberately fabricated first-mark expectation fails1 case with14pass, actual fixture/runtime untouched. Whole-package SDK deprecations2.25 remain, no full package/AOT/dependency isolation claim. Packet dart-writer-endpoint-intake.json.gz retains actual producers/normal+rival/runtime/emitter/fixture/modules/SDK/fresh/full results/traces/checks/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; ordinary normal discovered, exact canonical selection23.4.1 remains. Julia49.4 then safe Lua49.5,48/45 before wider features/admission; authorized focused commit/no full gate/push.
+Julia existing local writer owner evaluates mark names then requires non-null local_match before typed mark updates. Independent15-source native/restored/plan/separate-process emitted allpass: fresh targets stay absent, seeded/name-effect targets survive, empty/zero/Unicode and local/live cursor distinctions remain valid. No runtime repair/product RED. Writer105/named endpoint105/named Number-function-scope155/complete marks13 pass378 assertions with depwarn=error/empty healthy stderr. False first-mark oracle produces3fail102pass with fixture/runtime untouched. Exact source/normalized/compiled/plan/emitted/full metadata/results/high traces retained; runtime/compiler/emitter/fixture match activation HEAD and require no regeneration. Normal explicitly registered in runtests; exact canonical selection23.4.1 remains. Packet julia-writer-endpoint-intake.json.gz retains actual producers/normal+rival/runtime/emitter/fixture/modules/SDK/fresh/checks/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. Same project/depot, no isolated dependency/full package/peer claim. Safe Lua49.5 then48/45 before wider features/admission; authorized focused commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.49.4 from clean Dart49.3. Recover frozen15 named writer target, current Julia nullable writer/name/typed mark owner and existing SDK/emitted/normal conventions. Independently execute native/restored/plan/separate emitted current15 before edits; repair actual outliers or retain compatibility. Preserve fresh/seeded/name-effect targets, empty/zero/Unicode/local versus live cursor, entry/current/input/capture/anonymous contracts and source/metadata. Focused normal/quick named direct dependents/depwarn=error/book/docs/proof/commit then safe Lua49.5,48/45 before wider features/full23.4/push. Selection23.4.1/pressure20.1/declared hosts/phase/Dart SDK and broader prerequisites remain separately owned.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.49.5 from clean Julia49.4. Recover frozen15 writer target, current Lua explicit named writer/name/local-match/typed mark owner and public SDK/emitted/normal conventions. Independently execute native/restored/plan/separate emitted on installed PUC5.5 and LuaJIT before edits; repair actual outliers or retain compatibility. Preserve fresh/seeded/name-effect targets, empty/zero/Unicode/local versus live cursor, entry/current/input/capture/anonymous/name/frame/schema authority. Focused normal/quick direct dependents/syntax/book/docs/proof/commit, no unsafe formatter/full suite/declared5.4 or isolated dependency claim. Then referenced-blind48 and exact Phase0 owner45 before wider features/full23.4/push; selection23.4.1/pressure20.1/declared hosts/phase/Dart SDK and broader prerequisites remain separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.49.4` — Julia local writers already compatible:15pass/378 focused assertions; safe Lua49.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.49.3` — Dart local writers already compatible:15pass/35 focused tests; Julia49.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.49.2` — Rust local writer absence repaired:15pass/3 focused integration tests; Dart49.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.49.1` — Perl local writer absence repaired:15pass/34 focused groups; Rust49.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.49.4 from clean Dart49.3. Recover frozen15
 - `TYPE-REFERENCE-BOOK.1.2.23.3.41.0` — Nested error41.0 target qualified9/22 with12 actual native losses;41.1 next, then47/48/45. No full gate/push.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.5` — Safe Lua40.5 independently compatible16/1411 per host; bounded40 focused complete,41 then47/45 next. No full gate/push.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.4` — Julia40.4 independently compatible16/718 assertions; safe Lua40.5 next, then41/47/45. Focused PNT, no full gate/push.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.40.3` — Dart anonymous endpoints repaired; named gap47 owned, Julia intake next.
 
 ## History
 

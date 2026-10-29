@@ -12,7 +12,7 @@ answers:
   - "does Julia preserve bare mark names symbolically"
   - "does Julia AND blind-call return ordered child values implicitly"
 date: 2026-07-10
-status: bounded Julia47.4 named take repair focused-verified; safe Lua/writer49/selection/full admission separate
+status: bounded Julia49.4 local writer compatibility focused-verified; safe Lua/selection/full admission separate
 tags: [julia, capture, marks, blind-call, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.1.6.1.2.2.4.3 plus FUTURE-PARITY-BACKLOG.17.3; exact governed, implicit-result, rule-local-mark, multibyte-projection, and complete seven-helper locks in julia/test/runtests.jl and julia/test/complete_named_mark_contract_test.jl; tools/run_julia_local.sh plus the shared CLI runner pass 1,414 package assertions, 61x2 CLI, and 105/105 corpus."
 reverify: "bash tools/run_julia_local.sh"
@@ -69,3 +69,19 @@ registration verified; exact selection23.4.1 remains. Safe Lua47.5/49/48/45 and 
 admission remain separate. Earlier anonymous/Number observations remain historical.
 
 See [[julia-named-capture-take-origin-repair]] for current cause and recovery.
+
+## Julia compatibility49.4 (2026-10-29)
+
+Current15 native/restored/plan/separate emitted allpass. Existing name evaluation
+then nullable local_match guard before typed mark update already preserves fresh/
+seeded/name-effect targets and real empty/zero/Unicode/local-live cursor behavior.
+No runtime change. Writer105/named endpoint105/named Number-function-scope155/
+complete marks13 pass378 assertions with depwarn=error/empty healthy stderr. Wrong
+first-mark oracle3fail102pass, fixture/runtime untouched; no product RED. Exact
+source/normalized/compiled/plan/emitted/full metadata/results/high traces retained;
+runtime/compiler/emitter/fixture match activation HEAD, no regeneration. Packet
+julia-writer-endpoint-intake.json.gz retains closure. Normal runtests include
+verified; selection23.4.1/safe Lua49.5/48/45/full admission remain separate. Same
+project/depot, no isolated dependency or full package claim.
+
+See [[julia-local-match-writer-presence-compatibility]] for independent current proof; earlier observations remain historical.
