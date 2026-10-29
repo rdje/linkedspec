@@ -536,7 +536,36 @@ Replacing Top's body with `I { return(call(Middle)) }` returns `["x"]` directly.
 `Middle.return("OK")` in that AND parent has the same blind ownership. Use a real expression or a bound
 value in return examples; the name `child_result` is not an automatic binding.
 
-Portable blind-parent `LX` behavior remains under authority review. Rust blind `.push` parent-call effects also remain separately tracked; the example above uses implicit collection.
+Portable blind-parent `LX` behavior remains under authority review. Rust now preserves blind `.push` parent-call effects on the checked single-pass routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
+
+On a blind chain, `.push` calls the enclosing parent after the child returns.
+This single-pass example makes the second call visible:
+
+```text
+Top::|
+ I { if(gt(cursor_pos(),0)) { return("TAIL") } }
+ => Value .push.return(copy(Top))
+Value:AND
+ /x/ -> Value[0] { return("X") }
+```
+
+On `x`, Perl and Rust return `["TAIL"]`: `Value` consumes `x`, then `.push`
+calls `Top` at the advanced cursor and stores its `"TAIL"` result in the
+current parent array. `.push(out)` stores that parent-call result in `out`.
+Changing the value returned by the `I` branch preserves its kind:
+
+| Parent branch payload | Result on `x` |
+| --- | --- |
+| `0` | `[0]` |
+| `false` | `[false]` |
+| `undef` | `[null]` |
+| `array(1,"x")` | `[[1,"x"]]` |
+
+On empty input, the ordinary same-position recursion guard cuts the parent
+call and its stored value is null. Rebuild Rust runtime consumers for this
+correction; existing emitted source can be reused. Rust repeated blind
+post-call return grouping/minimum/progress still has a separate assessment.
+
 
 Blind calls do not secretly turn a rule into a sequence. The rule label still decides the composition model.
 

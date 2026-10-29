@@ -4881,6 +4881,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust48.2.3 adds referenced_blind_intermediate_qualified.rs and separate qualified12 target, four-route7-runtime proof and4 selected normals. Original compile consumer remains. Exact canonical selection must preserve original parent-LX authority exclusions.
 
+  Rust48.2.4 adds blind_parent_push.rs with8 single-pass witnesses, four-route RED/GREEN and8 selected tests. Exact canonical selection must preserve repeated/Unicode/phase exclusions until their owners close.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9433,13 +9435,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored phase/source assertions; no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.4`
-  Status: `pending` / P1 after48.2.3 before48.3/admission
+  Status: `completed` / P1 after48.2.3 before48.3/admission
   Goal: Qualify and repair Rust blind fluent push under the existing parent-calling reference meaning; preserve native/generated dispatch and progress guards.
   Reproduction/impact: Public emitted reference original48.0 source explicitly calls Top through push(Top) after Middle; Rust execute_bcode_entry_tail currently passes zero args to generic push helper, which returns undef without any call. Current original value witness does not isolate that inert tail from implicit collection; own effect/recursion witness and actual RED required before repair, no invented child append.
-  Planned verification tier: focused
-  Planned focused checks: Own public reference/SDK/plan/fresh parent-call effects and error/progress/recursion controls, nearest fluent/collection normals, book/docs/commit.
-  Planned canonical trigger: Full23.4/final clean push after48.2.4 and other prerequisites; phase48.2.2.1 remains separate.
-  Planned claim verification: none: Finite authored functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Public8 pipe controls/isolated9 warning channels; own8 four-route1healthy7RED ->8pass, unchanged source/metadata/old modules/no-tail control;8 selected tests, strict value-kind artifact checks, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after repeated48.2.5/Unicode48.2.6/remaining48/phase48.2.2.1 after20.1/warnings/45/selection23.4.1 and prerequisites.
+  Claim verification: none: Finite authored parent-call/value/guard/source and direct-dependent functional assertions, no population measurement.
+
+  Activation: clean `30fb4d2492c071f9b0a93e30d9ec7c102c637f6f`;48.2.3 committed/brief empty/no jobs. Published parent-calling reference contract/current inert no-arg push owner recovered. Probe conditional parent I return at advanced cursor, then .push.return(copy(Parent)), falsey/aggregate/explicit-target/empty guard/no-tail/Unicode controls. Existing typed statement push owner preferred only after actual public source/results and own RED qualification. No child append or blind-phase policy change.
+
+  Initial public qualification: Default-mode return is per-iteration, so original scalar/array hypotheses were not an oracle. Preserve initial9 raw sources/results/warnings and refine current push-only normal to single-pass pipe parents. Repeated scope is48.2.5; Unicode Ω rejection before input is confirmed ASCII runtime name guard48.2.6. Known LMATCH/parent scalar warning recurrences link40.1.1/.2; refined probe will isolate warning phases including original empty-return source. No product edits yet.
+
+
+  - [x] **REPRODUCE / ISSUE**: Public8 single-pass pipe parent controls establish actual parent-call payloads rather than child X. Own8 fail7/pass no-tail control on native/reconstructed/plan/separate compiled. Initial Default9 probe mixed iteration return/minimum; raw observations retained, repeated scope48.2.5 and Unicode runtime rejection48.2.6 separately owned.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Shared execute_bcode_entry_tail passed raw arguments to generic push; no-arg call_helper push returns undef and never dispatches a rule. Published Core injects parent label and free push(rule,target,index) already has a typed statement owner with recursion/progress/call semantics. Reuse that owner, not prior-child append.
+  - [x] **FIX**: Parse authored push args, prepend parent Expr::Variable and execute existing statement dispatcher. Preserve target and inherited index handling, typed payloads and ordinary guard; no new state/frame/helper/schema/family/arity rule. Return short-circuit stays existing owner.
+  - [x] **ADDRESSED (verified)**: Eight pipe witnesses pass four routes, including String/0/false/null/nested Array/explicit target/empty recursion cut and unchanged no-tail control. Source/compiled/serialized/full metadata/plan exact; original8 modules replay after runtime rebuild, no regeneration. Kind-strict JSON rechecks current8 and prior17 emitted returns; ordinary serde_json already distinguishes Bool/Number.
+  - [x] **NO REGRESSION**: New/typed-return/accumulator/qualified normals4 plus recursion4 PASS8. Refined9 reference producer isolates fresh-load masks only, including original empty-return source;40.1.1/.2 own warnings. Initial hypothesis/refinement/receipt ordering corrections retained as instruments, no product RED credit. Repeated-loop48.2.5, Unicode48.2.6 and phase authority remain open; no full-context/full suite/peer admission claim. Dependency diagnostics opaque, locks unchanged.
+  - [x] **LOCKSTEP**: Packet rust-blind-parent-push-intake.json.gz retains actual initial/refined public inputs/source/results/typed errors/warning phases, own RED+GREEN/producers/patch/modules/locks/receipts. Book/cards/map/roadmap/task/live/resume/history align; new normal canonical selection23.4.1 required.48.2.5 next then48.2.6/48.3/peers/warnings/45, phase authority after20.1; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.4 - preserve parent calls in Rust blind fluent push`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3`
   Status: `completed` / P1 immediately after48.2 before48.3/admission
@@ -9460,6 +9475,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: Original compile normal1/qualified normal1/accumulator1/typed return1 PASS4 selected tests. Product/original fixture unchanged. Rust final cursor unexposed; reference counterparts cursor1. Inert parent-push remains48.2.4 with effect RED required, no method-effect parity credit. Dependencies retain native locked identities, diagnostics opaque. No broad phase/peer/full-suite admission claim.
   - [x] **LOCKSTEP**: Packet rust-referenced-qualified-intake.json.gz retains actual reference/qualified producers/inputs/source/compiled/modules/errors/results/metadata/locks/receipts. Book/cards/map/roadmap/task/live/resume/history align, new normal canonical selection23.4.1 before admission. Parent-push48.2.4 next then48.3/peers/warnings/45, phase authority after20.1; focused authorized commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3 - retain qualified Rust referenced intermediate routes`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5`
+  Status: `pending` / P1 after48.2.4 before48.3/admission
+  Goal: Independently qualify and repair Rust repeated blind post-call return scope under existing per-iteration authority, preserving grouping/count/minimum/progress/null and whole-rule I/E/EX authority.
+  Reproduction/impact:48.2.4 initial public9-source probe shows Default parent .push.return(copy(Top)) returns nested per-iteration values; suffix-free return control returns[[]], empty guarded input returnsnull. Emitted or_code closure return is collected by repeated parent. Current Rust tail sets whole-rule return; own SDK/fresh distinguishing RED required before repair. Existing Dart/Julia/Lua blind-postcall authority and reference39.2.5.1 are canonical retrieval pointers; do not redefine scope from payload alone.
+  Planned verification tier: focused
+  Planned focused checks: Own public/SDK/restored/plan/fresh group/count/minimum/progress/falsey/whole-return controls and nearest collection/return normals, book/docs/commit.
+  Planned canonical trigger: Full23.4/final clean push after48.2.5 and all admission prerequisites; no phase policy movement.
+  Planned claim verification: none: Finite authored functional assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6`
+  Status: `pending` / P1 after48.2.5 before48.3/admission
+  Goal: Repair Perl recognition runtime rejection of valid declared Unicode rule labels through the existing pinned XID authority, preserving exact identity and unrelated identifier grammars.
+  Reproduction/impact:48.2.4 public Ω root compiles and is selected as top_rule Ω, but native/emitted execution fails at0 with runtime_handler detail RecognitionTransactionRuntime rule must be a bare identifier. _required_name at runtime line707 validates every role with ASCII letter/underscore and ASCII continuation. ADR0051/Unicode17 XID_Continue authority already supports Ω and digit starts; use its existing Perl classifier for rule-role boundaries only. Qualify ordinary/recognition/observation/direct/native/generated/negative contexts before selecting bounded repair. No peer defect inferred; broad existing Unicode frontend/code-generation alignment owners remain separate.
+  Planned verification tier: focused
+  Planned focused checks: Own public Unicode/ASCII role RED/GREEN and exact identity/negative isolation plus nearest recognition/progress normals, source/metadata/artifact qualification, book/docs/commit.
+  Planned canonical trigger: Full23.4/final clean push after48.2.6 and all admission prerequisites; pinned Unicode policy unchanged.
+  Planned claim verification: none: Finite authored rule-role functional assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9551,6 +9584,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Own public warning RED/source root, empty/general/scoped return and nearest declaration normals; preserve values and metadata, book/docs/commit.
   Planned canonical trigger: Full23.4/final clean push after repair and existing prerequisites.
   Planned claim verification: none: Finite functional source/warning assertions, no population measurement.
+
+  Recurrence48.2.4: Explicit-target parent push also exposes duplicate parent scalar, while every Value AND source reproduces known40.1.1 local-match masks. Initial combined warning arrays do not isolate stages; refined public producer adds per-phase capture and exact original empty-return source to qualify the previously inferred load attribution before repair. No suppression or runtime-value defect inferred from warning alone.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1`
   Status: `pending` / P1 after48.5 before45/wider features/full23.4/push
@@ -9914,7 +9949,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.4` | `pending` | Qualify and repair Rust blind fluent parent push effects. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5` | `pending` | Qualify and repair Rust repeated blind post-call return ownership. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

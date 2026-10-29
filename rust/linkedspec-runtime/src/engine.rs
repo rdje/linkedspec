@@ -3245,6 +3245,26 @@ impl Engine {
         }
 
         for (method, args_str) in &entry.fluent_chain {
+            if method == "push" {
+                // Blind fluent syntax injects the parent rule, preserving
+                // push(rule[, target[, index]]) and ordinary recursion guards.
+                let mut args = Self::parse_action_edge_fluent_call_args(method, args_str)?;
+                args.insert(
+                    0,
+                    Arg::Positional(Expr::Variable {
+                        name: label.to_string(),
+                    }),
+                );
+                self.execute_block_statement_expr(
+                    &Expr::Call {
+                        name: method.clone(),
+                        args,
+                    },
+                    ctx,
+                    label,
+                )?;
+                continue;
+            }
             if method == "return" {
                 let args = Self::parse_action_edge_fluent_call_args(method, args_str)?;
                 let value = if args.is_empty() {

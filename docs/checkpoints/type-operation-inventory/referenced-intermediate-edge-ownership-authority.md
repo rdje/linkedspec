@@ -143,3 +143,23 @@ fixture/schema/family/helper/phase-policy edit; no Rust final-cursor channel.
 Parent-push48.2.4 and phase authority/admission remain open. Book uses the already
 checked no-tail/no-parent-LX implicit coordinator. Packet rust-referenced-qualified-
 intake.json.gz retains actual sources/producers/inputs/modules/results/receipts.
+
+## Rust blind parent push48.2.4 (2026-10-29)
+
+Blind push now parses args, injects parent as typed variable and delegates to
+the existing statement owner. Own8 pipe controls1healthy7RED ->8pass on native,
+reconstructed, plan and separate compiled routes; no-tail unchanged. Parent
+String/0/false/null/Array values, explicit target and same-position guard retain
+their existing meanings. Eight selected tests pass; source/compiled/serialized/
+full metadata/plan exact and original8 modules reused. Rebuild, no regeneration.
+Initial Default9 hypotheses mixed repeated grouping/minimum and push. Existing
+reference or_code closure returns collect per iteration;48.2.5 owns independent
+Rust qualification/repair. Unicode Ω compiles/selects but fails recognition at0
+under ASCII _required_name, despite pinned XID membershiptrue;48.2.6 owns that
+before48.3. Neither excluded population gains passing credit here.
+Refined9 reference producer now isolates fresh-load masks only; exact original
+empty-return source confirms40.1.2 attribution that earlier combined capture did
+not isolate.40.1.1 owns LMATCH masks,40.1.2 parent scalar masks. Kind-strict
+current8/prior17 emitted-result artifact checks pass; no runtime rerun claim.
+Packet rust-blind-parent-push-intake.json.gz retains actual initial/refined
+inputs/producers/source/errors/warning phases/RED+GREEN/modules/patch/receipts.

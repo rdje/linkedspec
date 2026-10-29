@@ -1,0 +1,67 @@
+[
+  {
+    "name": "parent_string",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(\"TAIL\");}}\n => Value.push.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": [
+      "TAIL"
+    ]
+  },
+  {
+    "name": "parent_zero",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(0);}}\n => Value.push.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": [
+      0
+    ]
+  },
+  {
+    "name": "parent_false",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(false);}}\n => Value.push.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": [
+      false
+    ]
+  },
+  {
+    "name": "parent_undef",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(undef);}}\n => Value.push.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": [
+      null
+    ]
+  },
+  {
+    "name": "parent_array",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(array(1,\"x\"));}}\n => Value.push.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": [
+      [
+        1,
+        "x"
+      ]
+    ]
+  },
+  {
+    "name": "explicit_target",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(\"TAIL\");}}\n => Value.push(out).return(copy(out))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": [
+      "TAIL"
+    ]
+  },
+  {
+    "name": "empty_guard",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(\"TAIL\");}}\n => Value.push.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "",
+    "expected": [
+      null
+    ]
+  },
+  {
+    "name": "no_tail_control",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(\"TAIL\");}}\n => Value.return(copy(Top))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "input": "x",
+    "expected": []
+  }
+]

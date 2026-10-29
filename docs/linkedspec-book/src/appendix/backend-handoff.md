@@ -1,5 +1,7 @@
 # Backend Handoff
 
+Current focused Rust work preserves typed blind returns, invocation-local accumulators and parent-calling blind `.push` on the recorded routes. Repeated post-call return ownership and portable blind-parent `LX` authority remain open. Current Perl emitted AND handlers can report duplicate-declaration warnings during loading; runtime values in the recorded controls remain correct. A declared Unicode root such as `Ω` also currently fails the recognition runtime's ASCII name guard before consuming input. These defects have repair owners before broader admission; earlier bounded admissions below retain their stated scope.
+
 > **Nested-write and `map_leaves!` parity is publicly closed:** ordinary bare-binding nested assignment performs
 > evaluated string/integer path selection, dense unambiguous creation, isolated publication, and detached result
 > delivery on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT. The sole v1 bang method maps only an existing bare
