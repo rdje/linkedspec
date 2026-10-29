@@ -7,7 +7,7 @@ answers:
   - "what happens to partial Lua blind AND collection"
   - "does custom IT replace Lua implicit blind collection"
 date: 2026-10-29
-status: bounded runtime39.4.4 and Default generated39.4.9 repaired/targeted-checked; post-call .5 next
+status: runtime .4/Default generated .9/post-call .5.1 targeted-checked; nullable and broader phase/admission remain
 tags: [lua, luajit, blind, iteration, collection, and, default, partial]
 evidence: "lua-blind-collection-intake.json.gz retains15sources24inputs fully observed per host, bounded13portable sources20inputs6healthy7RED ->13pass200 assertions, same15 baseline modules and exact inputs/six healthy results, two separately owned diagnostics."
 reverify: "bash tools/run_lua_project_data.sh puc lua/test/blind_repetition_collection_test.lua and the same luajit route; two dormant rows explicitly owned .9/.5, no success credit."
@@ -55,3 +55,10 @@ observations/input identity. P1 .5.1 now repairs repeated return/count/progress
 channel immediately; retv/plain/lifecycle controls healthy, broader LE authority
 not established by that matrix. Current proof:
 [[lua-blind-postcall-return-scope-gap]]. Original collection packet frozen.
+
+2026-10-29 bounded .5.1 now fixes the separate post-call return/count/progress
+channel; all15 collection sources pass240 assertions without dormant scaffold.
+New18 post-call sources274/minimum289/group390/progress234/structural205 pass
+per host, original fixtures unchanged. Current proof:
+[[lua-blind-postcall-return-scope-gap]]. Broader phase qualifier .5.2 before
+admission, nullable .7 next; original .4 packet stays frozen.

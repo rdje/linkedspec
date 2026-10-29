@@ -78,6 +78,9 @@ local function nextable(callback)
   if getmetatable(result) == FLOW_MT and result.kind == "and_group_return" then
     return { value = true, nexted = false, group_returned = true, group_value = result.value }
   end
+  if getmetatable(result) == FLOW_MT and result.kind == "blind_iteration_return" then
+    return { value = true, nexted = false, iteration_returned = true, iteration_value = result.value }
+  end
   error(result, 0)
 end
 
@@ -5243,7 +5246,9 @@ local function regex_once(
   return true
 end
 
-local function blind_once(engine, rule, ctx, accumulator, execution_policy, implicit_iteration_results)
+local function blind_once(
+    engine, rule, ctx, accumulator, execution_policy, implicit_iteration_results, return_iteration_value
+  )
   local any = false
   for edge_index, edge in ipairs(rule.blind_edges) do
     local cursor_before = ctx.cursor_byte
@@ -5259,7 +5264,15 @@ local function blind_once(engine, rule, ctx, accumulator, execution_policy, impl
       trace.TRACE_DEBUG
     )
     ctx.retv = copy_value(child.value)
-    if edge.action_payload then execute_block(engine, edge.action_payload.action_ast, ctx, accumulator, nil) end
+    if edge.action_payload then
+      local ok, failure = pcall(execute_block, engine, edge.action_payload.action_ast, ctx, accumulator, nil)
+      if not ok then
+        if return_iteration_value and getmetatable(failure) == FLOW_MT and failure.kind == "return" then
+          flow("blind_iteration_return", failure.value)
+        end
+        error(failure, 0)
+      end
+    end
     if execution_policy.uses_and_execution and not child.matched then return false end
     if child.matched then
       any = true
@@ -5503,7 +5516,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
       if blind_iteration_values ~= nil then implicit_iteration_results = json.array() end
       local attempt = nextable(function()
         if execution_policy.uses_blind_dispatch then
-          return blind_once(engine, rule, ctx, accumulator, execution_policy, implicit_iteration_results)
+          return blind_once(engine, rule, ctx, accumulator, execution_policy, implicit_iteration_results, true)
         end
         return regex_once(
           engine,
@@ -5525,6 +5538,12 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
       else
         if not attempt.value then failed = true; break end
         M.assert_recognition_repetition_progress(engine, ctx, rule.label, before)
+        if attempt.iteration_returned and ctx.cursor_byte == before then
+          -- Ordinary returned zero-progress iterations contribute no value
+          -- or count. Recognized execution has already failed above.
+          failed = true
+          break
+        end
         if capture_gaps then
           local committed, commit_error = pcall(
             typed_source.recognition.commit_gap_candidate,
@@ -5556,7 +5575,9 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
           and_iteration_values[#and_iteration_values + 1] = copy_value(group_value)
         end
         if blind_iteration_values ~= nil and not has_custom_iteration then
-          if execution_policy.uses_and_execution then
+          if attempt.iteration_returned then
+            blind_iteration_values[#blind_iteration_values + 1] = copy_value(attempt.iteration_value)
+          elseif execution_policy.uses_and_execution then
             blind_iteration_values[#blind_iteration_values + 1] = copy_value(implicit_iteration_results)
           else
             for _, value in ipairs(implicit_iteration_results) do

@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: bounded runtime through .4 and Default generated .9 targeted-checked; post-call .5 next, .7/P2 .8/admission remain
+status: bounded repairs through post-call .5.1 targeted-checked; nullable .7 next, P2 .8/.5.2/admission remain
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -85,3 +85,11 @@ old artifact rejection/regeneration proof.8sources16inputs4healthy4RED ->8pass
 304 per host, metadata/schema/native controls unchanged; normal blind14active/
 230 one post-call dormant, structural31fully active205, progress234/v2 family222.
 Current proof: [[lua-default-blind-generated-family-gap]]. Post-call .5 next.
+
+2026-10-29 post-call .5.1 fixes private returned iteration/group outcomes with
+common progress/count/cutoff and preserved plain/lifecycle/retv channels.18
+sources27inputs5healthy13RED ->18pass274 per host, same18 modules/exact inputs/
+five healthy observations. All15collection240/all31structural205 plus289/390/
+234 neighbors pass, no residual dormancy. Current proof:
+[[lua-blind-postcall-return-scope-gap]]. Nullable .7 next, broader phase .5.2
+and P2 helper code .8 before full admission. Original intake packet frozen.

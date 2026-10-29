@@ -4,17 +4,12 @@ local json = ls.json
 local file = assert(io.open('lua/test/blind_repetition_collection_cases.json', 'rb'))
 local fixtures = json.decode(file:read('*a'))
 assert(file:close())
-local assertions, owned, dormant = 0, 0, 0
+local assertions, owned = 0, 0
 local function check(condition, label)
   assertions = assertions + 1
   assert(condition, label)
 end
 for _, fixture in ipairs(fixtures) do
-  if fixture.name == 'postcall_return' then
-    dormant = dormant + 1
-    local owner = '39.4.5'
-    print('OWNED DORMANT ' .. fixture.name .. ' TYPE-REFERENCE-BOOK.1.2.23.3.' .. owner)
-  else
     owned = owned + 1
   local parsed = ls.parse_spec_with_staged_user_function_definitions(fixture.source)
   local compiled = ls.compile_spec(parsed)
@@ -43,6 +38,5 @@ for _, fixture in ipairs(fixtures) do
       end
     end
   end
-  end
 end
-print('Lua implicit blind iteration collections: ' .. assertions .. ' assertions, ' .. owned .. ' sources, ' .. dormant .. ' owned dormant')
+print('Lua implicit blind iteration collections: ' .. assertions .. ' assertions, ' .. owned .. ' sources')

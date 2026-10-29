@@ -15135,9 +15135,9 @@ _Lua backend planning inherits the complete LinkedSpec parity contract_
 - **source:** [`docs/knowledge/lua-backend-full-parity-plan.md`](docs/knowledge/lua-backend-full-parity-plan.md)
 
 ### lua-blind-postcall-return-scope-gap
-_Lua repeated blind post-call returns escape before iteration counts and recognized progress_
+_Lua repeated blind post-call returns complete accepted iteration or early AND group_
 - **answers:** why does Lua repeated blind post-call return only first child | does Lua Default blind post-call return repeat | can Lua blind post-call return bypass recognition progress | is Lua post-call latest-child retv healthy
-- **date:** 2026-10-29 · **status:** independent18-source intake complete; P1 .5.1 immediate before nullable/admission
+- **date:** 2026-10-29 · **status:** bounded39.4.5.1 repaired/targeted-checked; nullable .7 next and broader lifecycle .5.2/admission remain
 - **evidence:** `lua-blind-postcall-intake.json.gz retains18exact sources27inputs per installed host SDK/restored/plan plus18 modules fresh,5healthy13actualRED and27 actual native traces with exact host input/result identity.`
 - **reverify:** `Recover retained probe_lua_blind_postcall.lua/fresh.lua then run with both project-data Lua wrappers, followed by read_lua_blind_postcall.py red --fresh only after completion; no product edits in intake.`
 - **source:** [`docs/knowledge/lua-blind-postcall-return-scope-gap.md`](docs/knowledge/lua-blind-postcall-return-scope-gap.md)
@@ -15553,7 +15553,7 @@ _Lua regex/split parity has separate value, PCRE2 flag, scalar mutation, and arr
 ### lua-implicit-blind-iteration-collections
 _Lua repeated blind execution retains flat choice values and nested complete AND groups_
 - **answers:** how does Lua collect implicit repeated blind choice values | how does Lua retain repeated blind AND groups | what happens to partial Lua blind AND collection | does custom IT replace Lua implicit blind collection
-- **date:** 2026-10-29 · **status:** bounded runtime39.4.4 and Default generated39.4.9 repaired/targeted-checked; post-call .5 next
+- **date:** 2026-10-29 · **status:** runtime .4/Default generated .9/post-call .5.1 targeted-checked; nullable and broader phase/admission remain
 - **evidence:** `lua-blind-collection-intake.json.gz retains15sources24inputs fully observed per host, bounded13portable sources20inputs6healthy7RED ->13pass200 assertions, same15 baseline modules and exact inputs/six healthy results, two separately owned diagnostics.`
 - **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/blind_repetition_collection_test.lua and the same luajit route; two dormant rows explicitly owned .9/.5, no success credit.`
 - **source:** [`docs/knowledge/lua-implicit-blind-iteration-collections.md`](docs/knowledge/lua-implicit-blind-iteration-collections.md)
@@ -16537,7 +16537,7 @@ _Lua static semantic projection must correlate complete authored members with re
 ### lua-sparse-and-independent-intake
 _Independent safe Lua intake owns dependency group minimum blind and live progress gaps_
 - **answers:** what did independent safe Lua sparse AND intake establish | why does Lua duplicate AND execute two actions on one hit | why does Lua repeated AND return only the first group | does live Lua recognize_once enforce repetition progress | does Lua selected null action preserve matched status | are new Lua feature tests automatically discovered
-- **date:** 2026-10-29 · **status:** bounded runtime through .4 and Default generated .9 targeted-checked; post-call .5 next, .7/P2 .8/admission remain
+- **date:** 2026-10-29 · **status:** bounded repairs through post-call .5.1 targeted-checked; nullable .7 next, P2 .8/.5.2/admission remain
 - **evidence:** `lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant.`
 - **reverify:** `Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh.`
 - **source:** [`docs/knowledge/lua-sparse-and-independent-intake.md`](docs/knowledge/lua-sparse-and-independent-intake.md)

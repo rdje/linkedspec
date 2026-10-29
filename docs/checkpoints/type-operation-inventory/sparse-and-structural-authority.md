@@ -389,3 +389,12 @@ trace identity. Repeated return escapes before count/progress; retv and five
 controls healthy. No product edit, corrected Default classification unchanged.
 Packet lua-blind-postcall-intake.json.gz retains closure; bounded .5.1 immediate
 before nullable/admission, broader LE/lifecycle authority separately owned.
+
+2026-10-29 Lua39.4.5.1 uses private repeated blind returned-iteration/group
+flow, copied explicit values/independent acceptance/common progress before count
+and ordinary nonconsuming discard.18sources27inputs5healthy13RED ->18pass274
+per host, same18 baseline modules/input/five controls; native typed guards keep
+code/rule/runtime phase/caller origin/raw offsets. Neighbors240/289/390/234/205
+pass all15collection/all31structural active; prior fixtures unchanged. Packet
+lua-blind-postcall-repair-intake.json.gz retains closure. Nullable .7 next, P2
+.8 and broader lifecycle qualifier .5.2 explicitly before admission.

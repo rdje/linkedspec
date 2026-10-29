@@ -1,13 +1,13 @@
 ---
 id: lua-blind-postcall-return-scope-gap
-title: Lua repeated blind post-call returns escape before iteration counts and recognized progress
+title: Lua repeated blind post-call returns complete accepted iteration or early AND group
 answers:
   - "why does Lua repeated blind post-call return only first child"
   - "does Lua Default blind post-call return repeat"
   - "can Lua blind post-call return bypass recognition progress"
   - "is Lua post-call latest-child retv healthy"
 date: 2026-10-29
-status: independent18-source intake complete; P1 .5.1 immediate before nullable/admission
+status: bounded39.4.5.1 repaired/targeted-checked; nullable .7 next and broader lifecycle .5.2/admission remain
 tags: [lua, luajit, blind, post-call, return, iteration, progress, minimum]
 evidence: "lua-blind-postcall-intake.json.gz retains18exact sources27inputs per installed host SDK/restored/plan plus18 modules fresh,5healthy13actualRED and27 actual native traces with exact host input/result identity."
 reverify: "Recover retained probe_lua_blind_postcall.lua/fresh.lua then run with both project-data Lua wrappers, followed by read_lua_blind_postcall.py red --fresh only after completion; no product edits in intake."
@@ -33,3 +33,18 @@ existing lifecycle owners remain before admission, no peer mechanism is inferred
 Corrected Default family stays intact. Runtime/compiler/emitter/matching/private
 recognition authority/schema unchanged in intake; no declared5.4/unsafe formatter/
 full suite/admission/performance claim. New normal regression follows repair.
+
+2026-10-29 .5.1 now enables private blind_iteration_return only in repeated
+blind owner and catches independent accepted returned value at common loop.
+Progress runs before count/IT/max/ordinary cutoff; nonconsuming ordinary returned
+value is discarded before counting/minimum, consuming null/0 count normally.
+Explicit copied value replaces implicit collection, early AND skips remaining
+children; plain/lifecycle whole authority/retv/nonreturn effects stay unchanged.
+18sources27inputs5healthy13RED ->18pass274 per host SDK matched/value/cursor
+and same18 baseline modules/fresh; exact inputs/five controls, typed native
+code/Guard/runtime phase/caller origin/raw offsets retained. Collection240/all15
+active, minimum289/group390/progress234/structural205/all31active pass, original
+fixtures unchanged; compiler/emitter/matching/recognition authority/schema stay.
+Packet lua-blind-postcall-repair-intake.json.gz retains actual closure. Broader
+LE/lifecycle execution qualification explicitly owned .5.2 before admission,
+parent remains open; nullable .7 next, no blanket phase/full-admission claim.
