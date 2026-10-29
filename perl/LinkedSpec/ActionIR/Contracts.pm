@@ -918,9 +918,12 @@ sub _named_mark_write_statement_body_expr {
   mark_match_start => '$LSPOS - length($LMATCH)', mark_match_end => '$LSPOS',
  };
  my $result = $method =~ /\Amark_input_/o ? '1' : '$__ls_mark';
- return 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$mark.', '.$positions->{$method}.', "'.$method.'"); '
+ my $body = 'do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, \''.$label.'\', '.$mark.', '.$positions->{$method}.', "'.$method.'"); '
   ._build_mark_trace_call(operation => $method, label => $label, mark_name_expr => $mark, mark_pos_expr => '$__ls_mark')
-  .'; '.$result.' }'
+  .'; '.$result.' }';
+ return 'do { if (defined($LMATCH) && defined($LSPOS)) { '.$body.' } else { undef } }'
+  if $method eq 'mark_match_start' || $method eq 'mark_match_end';
+ return $body
 }
 
 # Readonly named Number readers share their original bodies with ordinary value

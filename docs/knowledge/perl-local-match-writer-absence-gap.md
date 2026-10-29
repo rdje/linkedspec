@@ -6,7 +6,7 @@ answers:
   - "why do Perl match-position writers warn in an initial I handler"
   - "which task owns unavailable local-match mark writer semantics"
 date: 2026-10-29
-status: target49.0 frozen; Perl15-source7healthy8RED owned49.1, independent peers/admission separate
+status: bounded Perl49.1 missing-local writer repair focused-verified; independent peers/selection/full admission separate
 tags: [perl, marks, writer, absence, match, warning]
 evidence: "TYPE47.0 named-capture-endpoint-authority-intake.json.gz retains initial16-source writer discovery, actual Perl native/fresh clean+seeded and Dart SDK/separate VM; named-capture-writer-absence-diagnostic.json stores exact diagnostic-only record."
 reverify: "Recover initial16 fixture and probe_perl_named_capture_endpoint.pl from the47.0 packet under an owning leaf; use project-routed Perl native/fresh modes. Qualified normative47 read/take fixture deliberately excludes this separately owned writer source."
@@ -41,3 +41,21 @@ fresh clean+seeded7healthy8RED; Dart SDK/restored/plan/separate VM15pass. Public
 writer bodies and full source/errors/warnings/results/modules/metadata/traces
 retained. Production unchanged;49.1-.5 own independent repairs/compatibility before
 48/45/admission. See [[named-writer-endpoint-presence-authority]].
+
+## Perl repair49.1 (2026-10-29)
+
+Only mark_match_start/end now require defined LMATCH/LSPOS before their original
+storage/trace body. Names already finish outside that body; no missing-endpoint
+write/delete/trace is added, and existing targets/name effects survive. Other8
+public writer bodies, including valid root entry/IPOS fallback, remain exact.
+No new state/frame/helper/domain/schema or validator weakening. Current15 native/
+separate clean+seeded7healthy8RED ->15pass; ordinary15 groups8RED ->15pass. Writer15/
+name-write17/complete marks2 pass34 groups and Contracts syntax. Seven healthy
+full semantic records and all metadata unchanged. All15 emitted payloads change;
+original15 modules replay30 calls with original outcomes/errors/warnings and v2
+accepted: regenerate affected emitted parsers. Warning eval ordinals normalize;
+raw host error text excluded only with typed fields, full raw channels retained.
+Packet perl-writer-absence-intake.json.gz retains closure. New normal canonical
+selection23.4.1/independent49.2-.5/48/45/full admission remain separate.
+
+See [[perl-local-match-writer-presence-repair]] for current cause and regeneration proof.

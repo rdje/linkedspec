@@ -4861,6 +4861,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Safe Lua47.5 adds lua/test/named_capture_endpoint_absence_test.lua and explicit run.lua registration; current15/four routes plus436 focused checks per installed host verified. Exact canonical presence/selection remains before admission/push; declared5.4 and unsafe formatter not covered.
 
+  Perl49.1 adds t/named_writer_endpoint_absence.t using frozen15 target. Ordinary discovery/native+emitted15 groups and separate clean/seeded15-source proof verified; exact canonical presence/selection remains required before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9189,13 +9191,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.0 - qualify unavailable local-match mark writer behavior`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.1`
-  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Status: `completed` / P1 after47 before48/45/wider features/full23.4/push
   Goal: Independently assess Perl local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Activation: clean `165d4ba5cb0150c93302ecdb692bb763b3642171`;49.0 committed/brief empty/no jobs. Frozen15/no-op/name-effect target and public10 body/raw warning/error evidence recovered. Read sole _named_mark_write_statement_body_expr factory and existing entry boundary record; actual local endpoint factories/name wrapping are existing owners. Independently reverify15 current native/fresh/ordinary RED before changing only missing-local writer execution; preserve other8 public bodies and current valid trace operations.
   Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
-  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
-  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
-  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Own current15 native/separate clean+seeded7healthy8RED ->15pass; ordinary15 groups8RED ->15pass. Writer15/name-write17/complete marks2 pass34 selected groups, Contracts syntax; public10 bodies2changed8exact, healthy semantic/metadata identity and original15-module30-call replay, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after49.2-.5/48/45 and prerequisites; exact new normal selection23.4.1 remains. Existing endpoint validity corrected, no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored writer endpoint/state/name-effect and direct-dependent functional assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own current15 public native/separate emitted clean+seeded reproduces7healthy8RED against49.0 source/full semantic fields/metadata; ordinary15-group normal fails8. Invalid fresh/existing mark writes produce typed read/frame cleanup errors and warning channels; all raw data retained before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _named_mark_write_statement_body_expr emits raw local LSPOS/LMATCH-derived arithmetic/storage and trace without presence qualification. The typed mark/frame guard correctly rejects invalid offsets; existing named argument lowering already evaluates captured names before primitive bodies. Entry IPOS fallback is separately valid and must remain.
+  - [x] **FIX**: Build original writer body once, wrap only local start/end in defined LMATCH/LSPOS guard. Missing local endpoint returns undef before write/trace, adds no delete, and preserves accepted name effects. Original successful bodies/helper labels/trace arguments remain inside the guard; other8 public writer bodies and entry calculations byte-identical. No new owner/state/helper/domain/schema/frame or validator weakening.
+  - [x] **ADDRESSED (verified)**: All15 pass native/new separate clean+seeded with no warning/error, correct fresh/existing targets/name effects/local-live cursor/real empty/zero/Unicode state. Seven healthy full semantic records and full metadata remain. All15 emitted payloads change; unchanged original15 modules replay30 calls retaining original outcomes/typed errors/warnings/accepted-v2 metadata. Regenerate affected emitted parsers; no implicit runtime rescue claim.
+  - [x] **NO REGRESSION**: Writer15/name-write arguments17/complete neutral marks2 pass34 selected groups and Contracts syntax. Public10 writer bodies exactly2changed8unchanged, including entry fallback, input/current/capture/copy/clear. Warning eval ordinals normalize; raw host error text excluded only where actual typed fields exist, all raw channels retained. No peer/full suite/admission claim.
+  - [x] **LOCKSTEP**: Packet perl-writer-absence-intake.json.gz retains actual producers/runtime patch/before+after/normal RED/fixture/public bodies/modules/results/old-source replay/tests/receipts. Normal discovered, exact canonical selection23.4.1 before admission. Book/cards/map/target/roadmap/task/live/resume/history align. Rust49.2 next then independent peers/48/45, authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.1 - guard Perl mark writers when local matches are unavailable`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.2`
   Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
@@ -9649,7 +9661,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.1` | `pending` | Repair independently confirmed Perl local-match writer absence without changing entry compatibility. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.2` | `pending` | Independently assess Rust local-match writer availability and target preservation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
