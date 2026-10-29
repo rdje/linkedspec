@@ -702,6 +702,7 @@ final class LinkedSpecRuntimeEngine {
         final result = usesBlindDispatch
             ? _executeBlindRule(
                 rule,
+                entryRegexIndex,
                 context,
                 usesAndExecution: executionPolicy.usesAndExecution,
               )
@@ -880,6 +881,7 @@ final class LinkedSpecRuntimeEngine {
 
   _RuleResult _executeBlindRule(
     CompiledRule rule,
+    int entryRegexIndex,
     _RuntimeExecutionContext context, {
     required bool usesAndExecution,
   }) {
@@ -896,6 +898,7 @@ final class LinkedSpecRuntimeEngine {
         final matched = _nextableBool(
           () => _executeBlindOnce(
             rule,
+            entryRegexIndex,
             context,
             usesAndExecution: usesAndExecution,
             implicitIterationResults: usesAndExecution
@@ -971,6 +974,7 @@ final class LinkedSpecRuntimeEngine {
         matched = _nextableBool(
           () => _executeBlindOnce(
             rule,
+            entryRegexIndex,
             context,
             usesAndExecution: usesAndExecution,
             implicitIterationResults: iterationValues,
@@ -1060,6 +1064,7 @@ final class LinkedSpecRuntimeEngine {
 
   bool _executeBlindOnce(
     CompiledRule rule,
+    int entryRegexIndex,
     _RuntimeExecutionContext context, {
     required bool usesAndExecution,
     List<Object?>? implicitIterationResults,
@@ -1097,6 +1102,7 @@ final class LinkedSpecRuntimeEngine {
           context,
           rule.label,
           currentEdge: null,
+          blindParentRegexIndex: edge.code == null ? entryRegexIndex : null,
         );
         if (edgeReturn != null) {
           if (returnIterationValue) {
@@ -1138,6 +1144,7 @@ final class LinkedSpecRuntimeEngine {
         context,
         rule.label,
         currentEdge: null,
+        blindParentRegexIndex: edge.code == null ? entryRegexIndex : null,
       );
       if (edgeReturn != null) {
         if (returnIterationValue) {
@@ -1944,6 +1951,7 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
+    int? blindParentRegexIndex,
   }) {
     if (payload == null) {
       return null;
@@ -1953,6 +1961,7 @@ final class LinkedSpecRuntimeEngine {
       context,
       ruleLabel,
       currentEdge: currentEdge,
+      blindParentRegexIndex: blindParentRegexIndex,
     );
   }
 
@@ -1961,9 +1970,27 @@ final class LinkedSpecRuntimeEngine {
     _RuntimeExecutionContext context,
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
+    int? blindParentRegexIndex,
   }) {
     try {
       for (var index = 0; index < block.statements.length; index += 1) {
+        final statement = block.statements[index];
+        final expr = statement.expr;
+        // Fluent blind push calls the parent rule. Resolve the authored call
+        // normally first, including user-function precedence and arity.
+        if (blindParentRegexIndex != null &&
+            expr is ActionCallExpr &&
+            canonicalActionHelperName(expr.name) == 'push') {
+          _evaluateCall(
+            expr,
+            context,
+            ruleLabel,
+            currentEdge: currentEdge,
+            statementContext: statement.dropsValue,
+            blindParentRegexIndex: blindParentRegexIndex,
+          );
+          continue;
+        }
         final step = _executeActionStatementAt(
           block.statements,
           index,
@@ -4303,6 +4330,7 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
     bool statementContext = false,
+    int? blindParentRegexIndex,
   }) {
     final positionalArgs = call.args.map((arg) => arg.value).toList();
     final helperName = canonicalActionHelperName(call.name);
@@ -4437,6 +4465,7 @@ final class LinkedSpecRuntimeEngine {
           context,
           ruleLabel,
           currentEdge,
+          blindParentRegexIndex: blindParentRegexIndex,
         );
       case 'array':
         return _callArray(positionalArgs, context, ruleLabel, currentEdge);
@@ -5770,8 +5799,19 @@ final class LinkedSpecRuntimeEngine {
     ActionSourceSpan callSpan,
     _RuntimeExecutionContext context,
     String ruleLabel,
-    _CurrentActionEdge? currentEdge,
-  ) {
+    _CurrentActionEdge? currentEdge, {
+    int? blindParentRegexIndex,
+  }) {
+    if (blindParentRegexIndex != null) {
+      args = [
+        ActionVariableExpr(
+          source: ruleLabel,
+          sourceSpan: callSpan,
+          name: ruleLabel,
+        ),
+        ...args,
+      ];
+    }
     if (args.isEmpty) {
       _assertReceiverMutationWritable(
         context,
@@ -5783,7 +5823,8 @@ final class LinkedSpecRuntimeEngine {
       return _appendArrayValue(context, ruleLabel, child.value);
     }
 
-    if (args.length == 1 && currentEdge != null) {
+    if (args.length == 1 &&
+        (currentEdge != null || blindParentRegexIndex != null)) {
       final childRule = _variableName(args[0]);
       if (childRule != null && compiledSpec.rule(childRule) != null) {
         _assertReceiverMutationWritable(
@@ -5792,9 +5833,10 @@ final class LinkedSpecRuntimeEngine {
           'helper:push',
           callSpan,
         );
-        final child = childRule == currentEdge.target.label
+        final child =
+            currentEdge != null && childRule == currentEdge.target.label
             ? _executeActionEdgeChild(currentEdge, context)
-            : _executeRule(childRule, 0, context);
+            : _executeRule(childRule, blindParentRegexIndex ?? 0, context);
         context.retv = child.value;
         return _appendArrayValue(context, ruleLabel, child.value);
       }
@@ -5805,7 +5847,7 @@ final class LinkedSpecRuntimeEngine {
         );
       }
       _assertReceiverMutationWritable(context, target, 'helper:push', callSpan);
-      final child = _executeActionEdgeChild(currentEdge, context);
+      final child = _executeActionEdgeChild(currentEdge!, context);
       context.retv = child.value;
       return _appendArrayValue(context, target, child.value);
     }
@@ -5813,7 +5855,7 @@ final class LinkedSpecRuntimeEngine {
     if (args.length >= 2) {
       final firstName = _variableName(args[0]);
       final secondTarget = _variableName(args[1]);
-      if (currentEdge != null &&
+      if ((currentEdge != null || blindParentRegexIndex != null) &&
           firstName != null &&
           compiledSpec.rule(firstName) != null) {
         final childIndex = _literalNonNegativeInteger(args[1]);
@@ -5825,9 +5867,10 @@ final class LinkedSpecRuntimeEngine {
             'helper:push',
             callSpan,
           );
-          final child = firstName == currentEdge.target.label
+          final child =
+              currentEdge != null && firstName == currentEdge.target.label
               ? _executeActionEdgeChild(currentEdge, context)
-              : _executeRule(firstName, 0, context);
+              : _executeRule(firstName, blindParentRegexIndex ?? 0, context);
           context.retv = child.value;
           if (secondTarget != null) {
             return _appendArrayValue(context, secondTarget, child.value);

@@ -35,9 +35,10 @@ Entry markers do not change these rules. Blind indexes and indexed bare AND
 targets remain invalid.
 
 Dart now validates this distinction. Its native, restored, plan and emitted
-controls execute no-regex direct calls and AND blind literal returns. Three
-qualified blind `.push` examples still hit an action-edge-context restriction;
-their runtime repair is separate from accepting a declared blind target.
+controls execute no-regex direct calls and AND blind literal returns. Blind `.push` now
+calls its enclosing parent on the13 recorded single-pass/repeated routes. Three
+qualified coordinator examples still duplicate a retained conventional rule
+accumulator; their invocation-scope repair is separate.
 Portable blind-parent `LX` phase authority remains separately tracked.
 
 ## Current rule-label surface
@@ -603,7 +604,7 @@ Replacing Top's body with `I { return(call(Middle)) }` returns `["x"]` directly.
 `Middle.return("OK")` in that AND parent has the same blind ownership. Use a real expression or a bound
 value in return examples; the name `child_result` is not an automatic binding.
 
-Portable blind-parent `LX` behavior remains under authority review. Rust now preserves blind `.push` parent-call effects on the checked single-pass routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
+Portable blind-parent `LX` behavior remains under authority review. Rust and Dart now preserve blind `.push` parent-call effects on the checked single-pass and repeated routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
 
 On a blind chain, `.push` calls the enclosing parent after the child returns.
 This single-pass example makes the second call visible:
@@ -616,7 +617,7 @@ Value:AND
  /x/ -> Value[0] { return("X") }
 ```
 
-On `x`, Perl and Rust return `["TAIL"]`: `Value` consumes `x`, then `.push`
+On `x`, Perl, Rust and Dart return `["TAIL"]`: `Value` consumes `x`, then `.push`
 calls `Top` at the advanced cursor and stores its `"TAIL"` result in the
 current parent array. `.push(out)` stores that parent-call result in `out`.
 Changing the value returned by the `I` branch preserves its kind:
@@ -629,8 +630,8 @@ Changing the value returned by the `I` branch preserves its kind:
 | `array(1,"x")` | `[[1,"x"]]` |
 
 On empty input, the ordinary same-position recursion guard cuts the parent
-call and its stored value is null. Rebuild Rust runtime consumers for this
-correction; existing emitted source can be reused. Rust repeated blind
+call and its stored value is null. Rebuild Rust and Dart runtime consumers for
+this correction; existing emitted source can be reused. Rust repeated blind
 post-call returns also preserve iteration grouping, minima and progress on the
 focused native/restored/plan/emitted routes.
 

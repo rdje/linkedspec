@@ -4891,6 +4891,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Dart48.3 adds referenced_blind_intermediate_test.dart (16 checks); exact canonical selection must include it after48.3.1 removes the3 explicitly owned runtime exclusions.12 original compile sources, qualified runtime and4 strict negatives remain separate authority.
 
+  Dart48.3.1 adds blind_parent_push_test.dart (13 shared PIPE/repeated controls); exact canonical selection must include it and referenced_blind_intermediate_test.dart after48.3.2 removes the3 remaining accumulator exclusions.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9570,14 +9572,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3 - validate blind targets by declared rule identity`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1`
-  Status: `pending` / P1 immediately after48.3 before48.4/admission
+  Status: `completed` / P1 immediately after48.3 before48.4/admission
   Goal: Implement existing blind fluent push parent-call semantics in Dart, preserving ordinary/action push roles, explicit targets, typed values and recursion/progress.
   Reproduction/impact: After the blind validator repair, qualified blind_no_regex/marked_blind_target/markerless_blind compile but native/JSON-restored/plan execution rejects push() in rule Top requires an action-edge child context. Other4 runtime controls pass. _executeBlindOnce invokes its action payload with currentEdge:null; emitted fluent push has no arguments, _callPush takes args.isEmpty and calls _requireCurrentEdgeChild, which rejects null. Existing Perl/Rust authority injects the parent rule as the blind push callee, not the prior child value. No new ownership/phase policy; parent-LX original exclusions remain48.2.2.1.
   Acceptance: Recover actual current28-row validator intake and full16-test intermediate normal, canonical parent-push fact/8 PIPE target and5 repeated compositions. Own independent Dart native/restored/plan/fresh RED/typed diagnostics and normal before runtime edits. Implement through existing child dispatch and mutation owners, preserving action/free push, all typed/falsey/null values, explicit target/inherited selector and recursion/progress contracts. Remove only the explicit3 runtime normal exclusions after fixing/qualifying them. Keep source/schema/metadata and diagnostic boundaries honest; no old emitted source regeneration assumption.
+  Verification tier: `focused`
+  Focused checks: New parent-push target, all7 qualified referenced runtime controls, direct blind postcall/collection/recursion neighbors and selective analysis/book/docs/commit.
+  Canonical trigger: Full23.4/final clean push after all admission prerequisites; no new policy/schema/family.
+  Claim verification: none: Finite authored behavior and diagnostic assertions, no population measurement.
+
+  Activation: clean `2b1bcebc4cefcdab66d20576a3483dc8a031c9b5`; Dart validator committed/brief empty/no jobs. Existing parent-call8 PIPE/5 repeated authority, actual Dart3 qualified runtime diagnostics, affected blind/optional payload/free push/current action owners and compile payload path recovered. Own full13 target/public SDK/restored/plan/fresh baseline and normal RED before implementation. Select bounded runtime/compiler owner only after preserving free/action roles, inherited entry selector, typed falsey/null values, explicit target and progress contracts; never synthesize a fake action-edge regex context.
+
+  - [x] **REPRODUCE / ISSUE**: Own13 source controls have2 no-tail healthy/11 RED on native/restored/plan/fresh. No-arg push raises missing action-child context; single explicit target silently falls through to null/[null]. Full qualified3 failures retained separately.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Blind post-call payload runs with currentEdge:null; _callPush assumes action context for child-call forms. Existing Perl authority injects enclosing parent, not previous child. Public typed diagnostics/stacks/trace and compiled payload identify exact path. After repair qualified3 sources instead expose retained rule accumulator duplicates, owned48.3.2.
+  - [x] **FIX**: Thread current parent entry index through blind loop/optional block to top-level fluent push call, retain _evaluateCall function resolution before builtin dispatch, inject typed parent variable and reuse existing child dispatch/guard/mutation/append owners. No persistent state/frame or fake action edge; free/action/attached/callback roles unchanged.
+  - [x] **ADDRESSED (verified)**: All13 pass native/restored/plan/fresh; exact normalized/compiled/source/plan/full metadata and2 healthy results/traces remain. Same13 original emitted modules reused after runtime update, no regeneration. Root index0 exercised; entry-selector threading/function precedence retained by code, no dedicated nonzero-selector/shadow runtime proof.
+  - [x] **NO REGRESSION**:13 target/16 bounded referenced/57 blind collection/postcall/progress neighbors are86 distinct passing selected tests; selective analysis/format clean. Full reference normal3 errors advance to accumulator duplicates, explicitly re-excluded under immediate48.3.2; no complete referenced parity or original parent-LX phase credit. All other qualified observations/diagnostics/artifacts unchanged. Before formatting exact red producer/test bytes were not snapshotted; logical source/result baseline retained, no exact initial instrument-byte claim.
+  - [x] **LOCKSTEP**: Packet dart-blind-parent-push-intake.json.gz retains actual inputs/RED/GREEN/normal/old modules/metadata/traces/duplicate outliers/receipts/producers. Book/cards/map/roadmap/task/live/resume/history align. New normal and eventual3-exclusion removal canonical selection23.4.1 required;48.3.2 next before48.4/.5/warnings/45. Authorized focused commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1 - execute blind fluent pushes as parent rule calls`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2`
+  Status: `pending` / P1 immediately after48.3.1 before48.4/admission
+  Goal: Make Dart conventional rule-name accumulators invocation-local under existing binding-scope authority, preserving undeclared caller-visible mutations.
+  Reproduction/impact: After blind parent-push repair13 source controls pass, but qualified blind_no_regex/marked_blind_target/markerless_blind now return [[x],[x]] instead of [[x]] on x. Full native/restored/plan observations and full normal retain all3 duplicate outcomes. Runtime enterRuleLocalBindingScope only starts an empty snapshot map; own conventional accumulator is not initialized/scoped at entry. Prior explicit-reset authority deliberately preserves other undeclared mutations. Existing reference/Rust3-source rule_invocation_accumulators target distinguishes implicit coordinator, direct twice and explicit reset. No parent-LX policy movement.
+  Acceptance: Own independent Dart3-source RED/healthy controls and7 qualified runtime baselines before edits. Use existing snapshot/restore and variable-kind owners for only the invoked rule's conventional array binding, restore caller state on success/error, preserve other shared mutations and explicit initializer/reset behavior. Remove only3 tracked runtime exclusions after repair. Preserve generated source/full metadata/plans and healthy diagnostics, qualify reuse versus regeneration. Focused normal/recursion/progress/binding neighbors/book/docs/commit, then Julia48.4.
   Planned verification tier: focused
-  Planned focused checks: New parent-push target, all7 qualified referenced runtime controls, direct blind postcall/collection/recursion neighbors and selective analysis/book/docs/commit.
-  Planned canonical trigger: Full23.4/final clean push after all admission prerequisites; no new policy/schema/family.
-  Planned claim verification: none: Finite authored behavior and diagnostic assertions, no population measurement.
+  Planned focused checks: Invocation accumulator3 target, all7 qualified referenced runtime controls, parent push13/direct recursion/progress/binding neighbors and selective analysis/book/docs/commit.
+  Planned canonical trigger: Full23.4/final clean push after all prerequisites; no new policy/schema/family.
+  Planned claim verification: none: Finite authored scope/restore functional assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -10024,7 +10046,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1` | `pending` | Implement Dart blind fluent parent-push dispatch. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2` | `pending` | Scope Dart conventional rule accumulators per invocation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

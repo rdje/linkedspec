@@ -45,8 +45,8 @@ void main() {
             .cast<String, Object?>(),
       );
       compileSpec(restored);
-      // Runtime parent-push repair48.3.1 owns these three exact outliers.
-      // Their full failing normal/intake is retained; compiler coverage stays.
+      // Invocation accumulator repair48.3.2 owns these three duplicate results.
+      // Parent-push now succeeds; full runtime failure evidence is retained.
       if ({
         'blind_no_regex',
         'marked_blind_target',

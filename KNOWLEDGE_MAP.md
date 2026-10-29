@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1475** facts · **11217** question keys.
+> **1476** facts · **11219** question keys.
 
 ## Questions → fact
 
@@ -9805,6 +9805,7 @@
 - "which task repairs the tagged-record String to Array bridge" -> [tagged-record-evaluation-and-split-drift](docs/knowledge/tagged-record-evaluation-and-split-drift.md) · 2026-10-27 · reverify: `For current Perl producer run bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/tagged_record_producer_contract.t. Historical comparisons below retain their original scope; rebuild the Rust CLI before the paired Rust/Perl controls. Older Lua observations remain separately reproducible and dated.`
 - "which task repairs unsupported control_while in a deferred Perl callback" -> [perl-callable-attached-conditional-execution](docs/knowledge/perl-callable-attached-conditional-execution.md) · 2026-10-03 · reverify: `prove -Iperl t/codeblock_attached_if_perl.t; current successor replay: bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5-review.py. Earlier full reviews are historical because old loop failures are superseded.`
 - "which task resolves the numeric string digit language" -> [scalar-numeric-unicode-digit-oracle-drift](docs/knowledge/scalar-numeric-unicode-digit-oracle-drift.md) · 2026-09-06 · reverify: [3 entries](#scalar-numeric-unicode-digit-oracle-drift)
+- "which task scopes the Dart conventional rule accumulator on invocation entry" -> [dart-rule-invocation-accumulator-gap](docs/knowledge/dart-rule-invocation-accumulator-gap.md) · 2026-10-29 · reverify: `Recover retained public Dart probe and full normal under an owning leaf; rule_invocation_accumulators.json distinguishes implicit, direct-twice and explicit-reset cases before scope repair.`
 - "which task strengthens Julia diagnostic callable literal coverage" -> [julia-contract-consumer-reading](docs/knowledge/julia-contract-consumer-reading.md) · 2026-09-11 · reverify: [1 entry](#julia-contract-consumer-reading)
 - "which task tree owns scalaref removal" -> [scalaref-retirement-directive](docs/knowledge/scalaref-retirement-directive.md) · 2026-07-02 · reverify: `rg -n 'SCALAREF-RETIREMENT.5|scalaref.*retired|scalaref.*removed|RUST-PARITY.7.2' docs/TASK_TREE.md docs/tasks/SCALAREF-RETIREMENT.md ROADMAP_V2.md MEMORY.md`
 - "which task will make root selection roadmap checks mechanical" -> [root-rule-rollout-roadmap-projection](docs/knowledge/root-rule-rollout-roadmap-projection.md) · 2026-07-18 · reverify: `bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py && rg -n 'ROADMAP.md|ROADMAP_V2.md' tools/check_root_rule_selection_contract.py capability_conformance/root_rule_selection_contract.json`
@@ -10608,6 +10609,7 @@
 - "why does a DSL error repeat the current line as Next" -> [perl-validation-diagnostic-source-drift](docs/knowledge/perl-validation-diagnostic-source-drift.md) · 2026-09-06 · reverify: `rg -n 'sub get_dsl_context|my [$]current_line|my [$]next_line|index[(][$][$]spec_content, [$]line|my [$]regex_depth|Invalid regex pattern' perl/LinkedSpec/Validation.pm`
 - "why does a Dart attached else inside a marker value branch get skipped" -> [dart-mixed-control-value-block-gap](docs/knowledge/dart-mixed-control-value-block-gap.md) · 2026-09-09 · reverify: `Run DART_MIXED_CONTROLS, the managed Dart invocation and DART_MIXED_CONTROLS_VERIFY below; assertions describe pre-repair output.`
 - "why does a Dart character class unexpectedly accept zero" -> [dart-regex-quantifier-literal-corruption](docs/knowledge/dart-regex-quantifier-literal-corruption.md) · 2026-09-09 · reverify: `Run DART_REGEX_LITERAL and DART_REGEX_LITERAL_VERIFY below; assertions pin raw host, normalized bridge and both parser carriers plus Perl source evidence.`
+- "why does a Dart no regex coordinator return duplicate x values" -> [dart-rule-invocation-accumulator-gap](docs/knowledge/dart-rule-invocation-accumulator-gap.md) · 2026-10-29 · reverify: `Recover retained public Dart probe and full normal under an owning leaf; rule_invocation_accumulators.json distinguishes implicit, direct-twice and explicit-reset cases before scope repair.`
 - "why does a Dart semantic callback expose RuntimeSemanticObservationSinkFailure" -> [dart-semantic-observer-action-failure-wrapping](docs/knowledge/dart-semantic-observer-action-failure-wrapping.md) · 2026-09-09 · reverify: `Run DART_OBSERVER_ACTION, the managed Dart invocation and DART_OBSERVER_ACTION_VERIFY below; assertions describe pre-repair output.`
 - "why does a Hash default sorted_values first uppercase return null" -> [rust-coalesce-evaluation-drift](docs/knowledge/rust-coalesce-evaluation-drift.md) · 2026-10-27 · reverify: [5 entries](#rust-coalesce-evaluation-drift)
 - "why does a Perl CLI failure write trace to stdout" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
@@ -12126,7 +12128,7 @@ _Dart backend scaffold package lives under dart/ and has manifest IO, AST types,
 ### dart-blind-fluent-parent-push-gap
 _Dart blind fluent push incorrectly requires an action-edge child context_
 - **answers:** why does Dart blind push require an action edge child context | which task implements Dart blind fluent push parent calls
-- **date:** 2026-10-29 · **status:** confirmed; P1 repair48.3.1 immediately after validator48.3
+- **date:** 2026-10-29 · **status:** bounded13-source repair48.3.1 verified; invocation accumulator48.3.2 next
 - **evidence:** `dart-referenced-intermediate-intake.json.gz retains original/qualified28-row baseline, repaired-validator runtime diagnostics, compiled action payloads and full normal RED.`
 - **reverify:** `Recover retained Dart probe and use the project-routed Dart wrapper; preserve original parent-LX runtime exclusions and qualified counterparts.`
 - **source:** [`docs/knowledge/dart-blind-fluent-parent-push-gap.md`](docs/knowledge/dart-blind-fluent-parent-push-gap.md)
@@ -12874,6 +12876,14 @@ _Dart loaded, normalized, generated, emitted, and traced routes reuse one root r
 - **evidence:** `FUTURE-PARITY-BACKLOG.9.1.1.2.3.2 adds `dart/test/root_rule_selection_routes_test.dart` and expands loader/emitter tests. File-loaded and normalized-JSON reconstructed `CompiledSpec` state preserves definition order, authored `is_top`, and descriptor JSON while default and explicit execution call `CompiledSpec.resolveEntryRule`. Generated direct/traced and a fresh isolated emitted package apply explicit selector > first authored marker > first authored rule through the same runtime. `dart_runtime:entry_rule_selection` is a low-level decision with requested/effective/basis; failure records requested identity plus portable stage/code. Loader zero-rule validation projects `no_rules_defined` / `validate_spec`. Generated zero and unknown selection project `no_rules_defined` / `validate_spec` and `entry_rule_not_found` / `select_entry_rule` with requested `entry_rule`, while unrelated execution failures retain the generic wrapper. Contract/plan validation remains before selection. Generated artifacts stay `linkedspec-generated-source-v2` / format 2 with the unchanged minimal ordered label/family plan and existing optional-`topRule` API signatures. Focused proof passes 86+14; full Dart format 59/0, analyzer, package 269/269, primary 65x2, and corpus 105/105 pass. No Dart admission object or rollout row changes; `.3.3` remains required and rollout stays 3/7.`
 - **reverify:** `cd dart && bash ../tools/run_dart_project_data.sh test test/root_rule_selection_routes_test[.]dart test/source_emitter_test[.]dart test/spec_loader_test[.]dart test/trace_test[.]dart test/runtime_interpreter_test.dart && cd .. && bash tools/run_dart_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py`
 - **source:** [`docs/knowledge/dart-root-rule-selection-routes.md`](docs/knowledge/dart-root-rule-selection-routes.md)
+
+### dart-rule-invocation-accumulator-gap
+_Dart retains a conventional rule accumulator across invocations without an explicit reset_
+- **answers:** why does a Dart no regex coordinator return duplicate x values | which task scopes the Dart conventional rule accumulator on invocation entry
+- **date:** 2026-10-29 · **status:** confirmed; P1 repair48.3.2 immediately after parent-push48.3.1
+- **evidence:** `dart-blind-parent-push-intake.json.gz retains actual full referenced normal and native/restored/plan duplicate outcomes after parent-push repair.`
+- **reverify:** `Recover retained public Dart probe and full normal under an owning leaf; rule_invocation_accumulators.json distinguishes implicit, direct-twice and explicit-reset cases before scope repair.`
+- **source:** [`docs/knowledge/dart-rule-invocation-accumulator-gap.md`](docs/knowledge/dart-rule-invocation-accumulator-gap.md)
 
 ### dart-rule-local-cursor-admission
 _Dart is admitted against the complete rule-local cursor contract_
