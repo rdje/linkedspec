@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia named take repaired:15pass/385 focused assertions; safe Lua47.5 next.
+Safe Lua named endpoints/origins already compatible:15pass/436 checks per host; writer49 next.
 
 ## Latest Completed Slice
 
-Julia already preserves nullable local-match endpoints on named text/width/take-width; its one-argument capture_take incorrectly dispatched anonymously, skipped name effects and moved the anonymous boundary. That overload now reaches the existing named owner, sharing name/typed span/null/reversal/valid-only update logic; zero-argument dispatch remains anonymous. Independent15-source native/restored/plan/separate-process emitted8healthy7RED ->15pass; ordinary105 assertions84pass21fail ->105pass. New named105/anonymous112/named Number-function-scope155/complete marks13 pass385 assertions with depwarn=error. Source/normalized/compiled/plan/emitted/full public metadata and8 healthy complete outcomes/traces remain exact; same15 baseline modules reuse updated runtime without regeneration. Actual post-edit precompile/cache-coordination stderr is strictly qualified and retained; no warnings/errors suppressed, no isolated-dependency/full-package claim. Runtime reuse needs updated Julia package/precompile image. Packet julia-named-capture-endpoint-intake.json.gz retains actual producers/runtime epochs/patch/normal RED/fixture/modules/SDK/fresh/full results/traces/checks/receipts. Normal registered in runtests; exact canonical selection23.4.1 remains. Book/cards/map/target/roadmap/task/live/resume/history align. Safe dual-host Lua47.5 next, then writer49/referenced-blind48/Phase0 owner45 before wider features/admission; authorized focused commit/no full gate/push.
+Installed PUC Lua5.5 and LuaJIT2.1.1788460057 independently pass all15 named endpoint/origin sources on native/restored/plan/separate-process emitted routes. Existing explicit named capture_take dispatch, evaluated name owner, nullable local-match endpoint and valid-only typed span/mark update already satisfy the target; no runtime repair or invented product RED. Named105/anonymous112/named Number-function-scope219 checks pass436 per host with empty stderr and syntax loads. One deliberately wrong root empty-text oracle fails3 value routes per host with102pass; actual fixture/runtime untouched. Source/normalized/compiled/plan/emitted/full metadata/results/traces retained, no regeneration needed. New normal registered in run.lua, exact canonical selection23.4.1 remains; no unsafe formatter/full Lua suite/declared5.4/dependency-isolation claim. Packet lua-named-capture-endpoint-intake.json.gz retains actual producers/current normal/rival/runtime/emitter/fixtures/modules/native build wrappers/logs/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. Bounded47.0-.5 feature work targeted-checked, parent admission remains open. Writer49 then referenced-blind48/Phase0 owner45 precede wider features/full23.4/push; authorized focused commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.47.5 from clean Julia47.4. Read frozen15 named endpoint/origin authority and current safe Lua named mark/anonymous owners/public SDK/emitted probe/normal conventions. Independently execute native/restored/plan/separate emitted on installed PUC5.5 and LuaJIT before edits; repair actual outliers or retain compatibility. Preserve names, valid-only mark movement, anonymous zero-arg, available cursor/rest/between/writers with no new helper/domain/schema/frame or declared5.4/unsafe formatter/full suite claim. Focused normal/direct dependents/book/docs/proof/commit then writer49, referenced-blind48, exact Phase0 owner45 before wider features/full23.4/push. Selection23.4.1/pressure20.1/declared hosts/phase/Dart deprecations and broader prerequisites remain separate.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.49 from clean safe Lua47.5. Recover named-capture-writer-absence-diagnostic.json, retained initial16 writer source/native+fresh warning channels, neutral complete named-mark contracts and Knowledge Map facts. Freeze missing entry/local writer behavior from existing authority, especially preexisting-target no-op versus clear and name effects, before editing; split qualification/independent backend repairs into bounded owned children first. Reproduce through public own tools/source substitution, never weaken the validating mark frame or invent zero offsets. Then focused normal/book/docs/proof/commit per repair, followed by referenced-blind48 and exact Phase0 owner45.47 parent admission, canonical selection23.4.1/pressure20.1/declared hosts/phase/Dart SDK and broader prerequisites remain before full23.4/final clean push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.47.5` — Safe Lua named endpoints/origins already compatible:15pass/436 checks per host; writer49 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.4` — Julia named take repaired:15pass/385 focused assertions; safe Lua47.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.3` — Dart named endpoints/origins repaired:15pass/36 focused tests; Julia47.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.2` — Rust47.2 named endpoint/origin15pass/9 tests, source unchanged; Dart47.3 next, then peers/49/48/45. Focused PNT/no push.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.47.5 from clean Julia47.4. Read frozen15 n
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1` — Perl capture endpoints repaired; independent Rust intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46` — Daily safe cleanup complete; resume Perl capture endpoint implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.0` — Capture endpoint target grounded; independent Perl repair next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.37` — Perl emitted boundary catalogs repaired; pre-match endpoint authority next.
 
 ## History
 

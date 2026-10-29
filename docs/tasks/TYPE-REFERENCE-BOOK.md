@@ -4859,6 +4859,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Julia47.4 adds julia/test/named_capture_endpoint_absence_test.jl and explicit runtests include. Ordinary105 assertions and separate emitted current15 verified; exact canonical presence/selection remains before admission/push.
 
+  Safe Lua47.5 adds lua/test/named_capture_endpoint_absence_test.lua and explicit run.lua registration; current15/four routes plus436 focused checks per installed host verified. Exact canonical presence/selection remains before admission/push; declared5.4 and unsafe formatter not covered.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9039,6 +9041,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final push after all confirmed repairs and canonical selection; genuinely new writer/policy authority requires separate canonical ownership.
   Planned claim verification: none: Finite authored named span/take discrepancy and contract-led functional controls, no population measurement.
 
+  Bounded implementation update2026-10-29:47.0 frozen target, Perl47.1/Rust47.2/Dart47.3/Julia47.4 repairs and safe dual-host Lua47.5 compatibility/normal coverage are focused-verified. Parent admission remains open for exact canonical selection23.4.1/full23.4 and independent prerequisites; writer49 then referenced-blind48/Phase0 owner45 before wider features/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.0`
   Status: `completed` / P1 after41.1.1 before47.1-.5/48/45/full23.4/push
   Goal: Freeze existing named match-start endpoint/absence and valid-only take target while preserving names, writers and other endpoint families.
@@ -9136,13 +9140,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.4 - route Julia named capture_take through named span ownership`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.5`
-  Status: `pending` / P1 after47.0 before48/45/full23.4/push
+  Status: `completed` / P1 after47.0 before48/45/full23.4/push
   Goal: Independently assess and repair confirmed safe installed-host Lua named endpoint/absence/overload outliers against frozen47.0.
+  Activation: clean `5bf4326a616c1363e2d68d2d3d83622e37cc96d2`; Julia47.4 committed/brief empty/no background work. Frozen15 authority, Lua governed named-span/Number facts, explicit named capture_take dispatch and nullable valid-span owner/public probes/normal conventions reviewed. Execute own PUC5.5/LuaJIT native/restored/plan/separate-process baseline; no runtime edit without actual outlier. Preserve names, named/anonymous origins, available endpoints/writers and safe-host boundaries.
   Acceptance: Establish own native/restored/plan/fresh supported baseline before edits; repair only actual outliers or retain compatibility proof. Preserve available cursor/rest/between/writers, missing/reversed/real zero/Unicode, existing anonymous zero-arg and named take overloads, ordered accepted names and valid-only mark mutation through existing sole owners. No peer-failure inference, new helper/key/schema/frame policy or unsafe/undeclared-host claim. Focused normal regression/book/docs/proof/commit per child before admission.
-  Planned verification tier: focused
-  Planned focused checks: Frozen named RED/GREEN/healthy/state/name-effect/full-source/metadata and direct named/anonymous/range/function dependents per backend; safe Lua uses installed PUC5.5/LuaJIT, no unsafe formatter/full suite.
-  Planned canonical trigger: Full23.4/final clean push after47/48/45 and existing prerequisites; canonical selection23.4.1 includes each new normal.
-  Planned claim verification: none: Finite authored named capture functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent current15 native/restored/plan/separate emitted allpass per safe PUC5.5/LuaJIT; named105/anonymous112/named Number-scope-function219 pass436 checks per host. Rival empty oracle3RED/102pass per host, empty healthy stderr/syntax loads; exact source/metadata/runtime identity, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites; normal run.lua registration verified, exact canonical selection23.4.1 remains. Declared5.4/unsafe formatter2.3/phase39.4.5.2.2 independently owned; no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored named endpoint/overload/name-effect functional assertions and a deliberately false oracle control, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own current15 native/restored/plan/separate-process emitted allpass independently on installed PUC5.5 and LuaJIT2.1.1788460057. Root/incoming/cursor/boundary/empty/zero/Unicode/reversed/missing/independent origins/name effects and available endpoints retained; no peer-derived defect claim.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing named capture_take dispatch precedes anonymous handling. evaluate_named_mark_helper evaluates its name, selects nullable local-match byte_start, and uses anonymous_capture_span's validity guard before updating only its named mark. Zero-arg takes stay anonymous; the existing sole owner already supplies the required behavior.
+  - [x] **FIX**: No runtime edit needed. Add frozen15 ordinary consumer and run.lua registration. Preserve source/emitter/helper/frame/schema/name domain/arity/writer/available-endpoint contracts and actual host boundaries; no new chunk locals or unsafe formatter.
+  - [x] **ADDRESSED (verified)**: All15 pass all four routes per host with exact full matched/value/Unicode cursor/output/lifecycle/typed result and public emitted metadata retained. Runtime/compiler/emitter/fixture match activation HEAD; existing emitted modules remain compatible without regeneration.
+  - [x] **NO REGRESSION**: New named105/anonymous112/named Number-function-scope219 pass436 checks per host, empty stderr/syntax loads. A wrong root empty-text oracle fails3 native/restored/plan values per host with102pass; original fixture/runtime unchanged, no product RED claim. No full suite/declared5.4/dependency-isolation admission.
+  - [x] **LOCKSTEP**: Packet lua-named-capture-endpoint-intake.json.gz retains actual producers/normal+rival/runtime/emitter/fixture/modules/build wrappers/logs/receipts. Normal registration verified, exact selection23.4.1 remains. Book/cards/map/target/roadmap/task/live/resume/history align; bounded47.0-.5 targeted-checked, parent admission open. Next49/48/45, authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.5 - lock safe Lua named capture endpoint and origin compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49`
   Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
@@ -9571,7 +9585,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.5` | `pending` | Independently assess safe PUC5.5/LuaJIT named endpoint presence and take origins. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49` | `pending` | Qualify absent entry/local mark writers and repair confirmed invalid-state/warning outliers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

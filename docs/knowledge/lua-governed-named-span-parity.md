@@ -11,7 +11,7 @@ answers:
   - do invalid or reversed Lua named spans move marks
   - are Lua named capture positions and lengths Unicode characters
 date: 2026-07-15
-status: current
+status: bounded47.0-.5 focused work verified on recorded routes/hosts; writer49/selection/declared hosts/full admission separate
 tags: [lua, capture, marks, bridges, unicode, parity, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.3.7.3 extends lua/src/linkedspec/interpreter.lua over the FUTURE-PARITY-BACKLOG.17.4 parse-scoped rule-label/name/UTF-8-byte-offset store. lua/test/run.lua executes capability_capture_named_surface.spec unchanged through native and serialized SpecFile reconstruction and adds a multibyte bridge/edge/arity proof. tools/run_lua_local.sh passes 120/120 on PUC Lua and LuaJIT plus syntax, CLI scaffold, and 105 manifest checks."
 reverify: "bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report"
@@ -43,3 +43,20 @@ writers, and exact one-/two-argument diagnostics on PUC Lua and LuaJIT.
 - Store foundation: [[lua-complete-named-mark-parity]].
 - Family taxonomy: [[spec-capture-mark-family-taxonomy]].
 - Audit and next timing mechanism: [[lua-capture-cursor-runtime-audit]].
+
+## Safe Lua compatibility47.5 (2026-10-29)
+
+Installed PUC5.5 and LuaJIT2.1.1788460057 independently pass all15 on native/restored/
+plan/separate-process emitted routes. Existing explicit named take dispatch/name
+evaluation/nullable local-match byte endpoint/valid-only typed span and mark update
+already preserve named/anonymous origins and failed takes; no runtime repair.
+Named105/anonymous112/named Number-function-scope219 pass436 checks per host,
+empty stderr/syntax loads. Wrong root empty-text oracle fails3 values/102pass per
+host, actual fixture unchanged; no product RED claim. Exact source/normalized/
+compiled/plan/emitted/full metadata/results/traces retained, runtime/emitter/fixture
+match activation HEAD, no regeneration. New normal/run.lua registration verified;
+selection23.4.1/declared5.4/unsafe formatter/phase/full admission remain separate.
+Packet lua-named-capture-endpoint-intake.json.gz retains closure. Bounded47.0-.5
+targeted-checked; writer49/referenced-blind48/Phase0 owner45 precede wider features.
+
+See [[lua-named-capture-endpoint-origin-compatibility]] for independent current proof. Earlier broad observations remain historical.

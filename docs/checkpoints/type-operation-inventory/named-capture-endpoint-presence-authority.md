@@ -141,3 +141,18 @@ error suppression or empty-stderr claim. Current project/depot, no isolation.
 Packet julia-named-capture-endpoint-intake.json.gz retains closure, normal runtests
 registration verified; exact selection23.4.1 remains. Safe Lua47.5/49/48/45 and full
 admission remain separate. Earlier anonymous/Number observations remain historical.
+
+## Safe Lua compatibility47.5 (2026-10-29)
+
+Installed PUC5.5 and LuaJIT2.1.1788460057 independently pass all15 on native/restored/
+plan/separate-process emitted routes. Existing explicit named take dispatch/name
+evaluation/nullable local-match byte endpoint/valid-only typed span and mark update
+already preserve named/anonymous origins and failed takes; no runtime repair.
+Named105/anonymous112/named Number-function-scope219 pass436 checks per host,
+empty stderr/syntax loads. Wrong root empty-text oracle fails3 values/102pass per
+host, actual fixture unchanged; no product RED claim. Exact source/normalized/
+compiled/plan/emitted/full metadata/results/traces retained, runtime/emitter/fixture
+match activation HEAD, no regeneration. New normal/run.lua registration verified;
+selection23.4.1/declared5.4/unsafe formatter/phase/full admission remain separate.
+Packet lua-named-capture-endpoint-intake.json.gz retains closure. Bounded47.0-.5
+targeted-checked; writer49/referenced-blind48/Phase0 owner45 precede wider features.
