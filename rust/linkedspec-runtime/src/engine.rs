@@ -9563,6 +9563,10 @@ impl Engine {
                 // cursor as before this leaf — `capture_slice` is the anonymous
                 // counterpart of the mark-based `capture_from` (.5.5.3), so the
                 // captured text is everything between `capture_start` and the match.
+                // Offset zero alone cannot distinguish absence from an empty match.
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 let start = ctx.capture_start.unwrap_or(0);
                 Ok(ctx
                     .typed_span_text_from_bytes(start, ctx.match_start_byte, rule_label, name)
@@ -9570,6 +9574,9 @@ impl Engine {
                     .unwrap_or(RuntimeValue::Undef))
             }
             "capture_slice_len" | "capture_slice_length" | "capture_len_from_rule_start" => {
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 let start = ctx.capture_start.unwrap_or(0);
                 Ok(ctx
                     .typed_span_length_from_bytes(start, ctx.match_start_byte, rule_label, name)
@@ -9688,6 +9695,9 @@ impl Engine {
             "capture_take" => {
                 // text capture_start→match-START; advance capture_start to the
                 // cursor (Contracts.pm CAPTURE_SLICE_TAKE, `$IPOS = pos $$STRING`).
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 let start = ctx.capture_start.unwrap_or(0);
                 match ctx.typed_span_text_from_bytes(start, ctx.match_start_byte, rule_label, name)
                 {
@@ -9701,6 +9711,9 @@ impl Engine {
             "capture_take_len" => {
                 // length capture_start→match-START; advance capture_start to the
                 // cursor (Contracts.pm CAPTURE_SLICE_TAKE_LEN).
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 let start = ctx.capture_start.unwrap_or(0);
                 match ctx.typed_span_length_from_bytes(
                     start,

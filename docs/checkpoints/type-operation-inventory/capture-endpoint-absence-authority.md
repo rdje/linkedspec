@@ -62,3 +62,18 @@ metadata in32 calls; raw host-address strings are excluded only when exact typed
 fields exist. Regenerate affected emitted parsers. Packet perl-capture-endpoint-intake.json.gz
 retains closure. New normal/canonical registration23.4.1 and independent40.2-.5,
 broader SESSION17/other prerequisites and full admission remain separate.
+
+## Rust repair40.2 (2026-10-29)
+
+Independent16-source native/reconstructed/plan/separate compiled emitted intake
+has nine healthy/seven RED ->16pass. Four anonymous match-start helper guards use
+existing match_present before span projection/take mutation. Real empty/zero and
+Unicode controls, nine healthy observations and all parsed/compiled/serialized/
+plan/emitted bytes/public metadata remain exact. Same16 baseline source modules
+relinked against the repaired runtime pass: rebuild applications, no source
+regeneration/format change. Endpoint1/Number6/alias1 integration groups and10
+focused anonymous library tests pass. Fresh lock identities match native lock.
+Cursor values are authored DSL observations, no direct native final-state API.
+Packet rust-capture-endpoint-intake.json.gz retains actual proof. Temporary probe
+is archived/removed; normal target is capture_endpoint_absence.rs with no allocator.
+Independent40.3-.5/selection/other prerequisites/full admission remain separate.

@@ -102,3 +102,12 @@ take-to-match still advances to cursor 4, while take-rest advances to 7. The mul
 asserts eight characters for nine bytes. Named tests independently cover missing/deleted marks,
 reversed spans and post-take state. No fresh native test execution is claimed. Typed-source and
 rule-local-cursor neutral checks pass (231 and 60 drift mutations respectively).
+
+## October29 local-match presence correction
+
+40.2 requires existing match_present before match-start text/width/take reads;
+an initialized offset0 alone is not a selected match. Missing endpoints yield
+undef and failed takes preserve the boundary. Actual16-source four-route9healthy/
+7RED ->16pass and unchanged emitted bytes/metadata are retained in
+[[rust-capture-endpoint-match-presence-repair]]. Existing real empty/zero/Unicode
+and successful take behavior stays intact; peer/full admission remains separate.

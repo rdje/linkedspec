@@ -7,7 +7,7 @@ answers:
   - "why does generated Perl capture_slice_len warn about uninitialized LSPOS"
   - "which task owns capture endpoint absence policy before matching"
 date: 2026-10-29
-status: target40.0 and Perl40.1 focused repair verified; independent40.2-.5/full admission pending
+status: target40.0 and Perl40.1/Rust40.2 focused repairs verified; independent40.3-.5/full admission pending
 tags: [capture, absence, endpoint, perl, dart, julia, lua, source, diagnostics]
 evidence: "TYPE40.0 capture-endpoint-absence-authority-intake.json.gz retains actual16-source native/fresh clean+seeded controls and accepted source/presence inputs; original33.4 diagnostics remain in capture-boundary-number-julia-intake.json.gz."
 reverify: "Recover probe_capture_endpoint_authority.pl and read_capture_endpoint_authority.py from capture-endpoint-absence-authority-intake.json.gz; use project-routed Perl/Python. Dated intake is diagnostic, not backend repair admission."
@@ -70,3 +70,11 @@ unchanged. Normal16/typed-source4/Number7 groups pass27. Old16 modules retain ex
 semantic outcomes/errors/warnings/metadata in32 calls, so regeneration is required.
 [[perl-capture-endpoint-local-register-repair]] retains current cause/closure;
 independent40.2-.5/broader SESSION17/full admission remain separately owned.
+
+2026-10-29 independent Rust40.2 has9healthy7RED ->16pass on native/reconstructed/
+plan/separate emitted routes using existing match_present guards. Exact input/
+emitted/metadata and nine healthy outcomes stay unchanged; same baseline modules
+relinked against new runtime pass without source regeneration. Endpoint1/Number6/
+alias1 integration groups and10 anonymous library tests pass. See
+[[rust-capture-endpoint-match-presence-repair]]. Independent40.3-.5/full admission
+and broader prerequisites remain separate.

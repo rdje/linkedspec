@@ -4841,6 +4841,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl endpoint40.1 requires exact ordinary/canonical registration of t/capture_endpoint_absence.t and tests/fixtures/capture_endpoint_absence.json. Native/arbitrary-package eval16 groups and retained separate-process clean+seeded proof are focused coverage, not canonical selection. Existing typed-source4/Number7 controls stay selected; no blanket broader SESSION17 closure.
 
+  Rust endpoint40.2 adds rust/linkedspec-runtime/tests/capture_endpoint_absence.rs over the frozen16-source fixture. Actual ordinary Cargo target discovery and three-route execution are verified; exact canonical presence/selection remains in this owner audit before admission/push. Temporary capture_endpoint_intake_probe.rs was snapshotted/removed and is not a normal consumer.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9062,13 +9064,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1 - preserve unavailable Perl capture endpoints without ambient match state`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
-  Status: `pending` / P1 after40.0 before full23.4/push
+  Status: `completed` / P1 after40.0 before full23.4/push
   Goal: Independently intake and repair confirmed Rust capture absence/diagnostic drift against frozen40.0.
+  Activation: clean `dbc56b85a4c807d762e1bb1b1cc13fa59b7d4bbf`; Perl40.1 committed/brief empty, all prior jobs terminal. Existing Rust match_present/SavedMatchState and anonymous capture facts plus frozen16-source target reviewed. Independently probe supported native/reconstructed/plan/emitted routes before inferring any Rust defect or changing producers; dependencies remain black boxes.
   Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
-  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent16-source native/reconstructed/plan/separate compiled emitted9healthy7RED ->16pass; exact parsed/compiled/serialized/plan/emitted/public metadata and nine healthy observations. Same16 baseline modules relinked unchanged. Endpoint1/Number6/alias1 integration groups and10 anonymous library tests pass; changed-file rustfmt, lock identities, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after remaining40.3-.5 and other prerequisites. Ordinary Cargo discovers new integration target; exact canonical selection audit23.4.1 remains required. No public policy/schema/dependency/infrastructure movement.
+  Claim verification: none: Finite authored presence/endpoint/take/zero/typed source/carrier distinctions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent16-source native/reconstructed/plan/fresh emitted baseline has nine healthy/seven actual failures; new ordinary consumer observes the same seven sources across three SDK routes before production. Root I reads initialized match_start0 despite structural match helpers returning null; absent takes capture empty/0 and advance boundary0 to cursor2. Initial producer wrong GeneratedPlanRow lifetime is compile setup only, no product RED credit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public root-I debug trace calls capture helpers at pos0/match_start0 before selection. Engine::call_helper anonymous text/width/take arms project that offset without consulting existing RuntimeContext.match_present, unlike structural match readers. Zero offset is valid for both no match and a present empty match; source-span bounds alone cannot distinguish them.
+  - [x] **FIX**: Four early guards use the existing match_present flag before anonymous match-start text/length projection or take mutation. Existing aliases share those arms. Keep matching/frame/presence ownership, typed source projections, arity/function fences and successful take movement unchanged; no new bit/API/schema/compiler/emitter/policy.
+  - [x] **ADDRESSED (verified)**: All16 sources pass native/reconstructed/plan/separate compiled emitted. Exact parsed/compiled/serialized/plan/emitted bytes/public metadata and nine healthy observations remain unchanged. Real empty/zero/Unicode values and cursor readers retain target results. Same16 baseline emitted modules relink successfully against new runtime with all16 pass; no regeneration, prebuilt applications need rebuilding.
+  - [x] **NO REGRESSION**: New endpoint1/adjacent Number6/alias1 integration groups and10 targeted anonymous library tests pass; changed source/new test rustfmt clean. Fresh dependency identities/checksums match native lock. Native default value API creates input context0; cursor observations are authored DSL readers, no direct final-state API or Perl host-seed coverage claimed. Dependencies untouched/black boxes; no full suite/full admission or broader phase/slot/SESSION17 closure.
+  - [x] **LOCKSTEP**: Packet rust-capture-endpoint-intake.json.gz retains actual producer epochs/product patch/before+after/source/modules/locks/SDK/fresh/trace/tests/receipts. Temporary producer snapshot verified before removal; ordinary test has no allocator. Book/cards/map/target/roadmap/task/live/resume/history align; canonical selection audit23.4.1 remains before admission/push. Independent Dart40.3 next; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2 - require Rust match presence for capture endpoints`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.3`
   Status: `pending` / P1 after40.0 before full23.4/push
@@ -9320,7 +9332,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.2` | `pending` | Independently intake Rust capture endpoint/presence behavior against frozen40.0. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.3` | `pending` | Independently intake Dart capture endpoint/presence behavior against frozen40.0. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
