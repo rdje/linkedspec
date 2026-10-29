@@ -7,7 +7,7 @@ answers:
   - "why does generated Perl capture_slice_len warn about uninitialized LSPOS"
   - "which task owns capture endpoint absence policy before matching"
 date: 2026-10-29
-status: target40.0 and Perl/Rust/Dart40.1-.3 focused repairs verified; independent40.4-.5/named47/full admission pending
+status: target40.0 and Perl/Rust/Dart repairs plus independent Julia40.4 compatibility verified; Lua40.5/named47/full admission pending
 tags: [capture, absence, endpoint, perl, dart, julia, lua, source, diagnostics]
 evidence: "TYPE40.0 capture-endpoint-absence-authority-intake.json.gz retains actual16-source native/fresh clean+seeded controls and accepted source/presence inputs; original33.4 diagnostics remain in capture-boundary-number-julia-intake.json.gz."
 reverify: "Recover probe_capture_endpoint_authority.pl and read_capture_endpoint_authority.py from capture-endpoint-absence-authority-intake.json.gz; use project-routed Perl/Python. Dated intake is diagnostic, not backend repair admission."
@@ -86,3 +86,11 @@ analysis/format verified. Same baseline modules reuse updated runtime. See
 [[dart-capture-endpoint-match-absence-repair]]. Adjacent named match-start read/take
 absence is confirmed/owned47 after40/41, before45/wider features/admission; it has
 no fresh credit. Independent40.4-.5 and full admission remain separate.
+
+2026-10-29 Julia40.4 independently passes all16 current native/restored/plan/
+separate-process emitted sources without runtime edits. Existing nullable endpoint
+guard preserves unavailable versus empty/zero and failed-take boundaries. Registered
+normal112 plus Number75/alias141/null390 assertions pass718 with depwarn=error;
+rival empty-text oracle fails3 value routes/109pass/0error, not product RED. See
+[[julia-capture-endpoint-absence-compatibility]]. Lua40.5/named47/full admission
+remain separate; no generation or shared fixture change.

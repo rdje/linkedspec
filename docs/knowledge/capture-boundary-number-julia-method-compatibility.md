@@ -6,7 +6,7 @@ answers:
   - "can Julia anonymous capture Number readers feed Array selection"
   - "which Julia capture Number aliases preserve function-state errors"
 date: 2026-10-28
-status: bounded33.4 targeted-checked without runtime edits; pre-match endpoint40 and full admission open
+status: bounded33.4 composition and40.4 independent endpoint compatibility verified without runtime edits; Lua/named/full admission separate
 tags: [julia, capture, number, fluent, aliases, source, generated]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.33.4 at clean75365a176; capture-boundary-number-julia-intake.json.gz retains exact intake/normal-test/source/output epochs."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include("julia/test/capture_boundary_number_results_test.jl"); include("julia/test/entry_match_number_results_test.jl")'"
@@ -31,3 +31,13 @@ returns null, Dart0, and Perl0 with unset-position warnings; see
 [[capture-boundary-before-match-policy-divergence]]. Normal zero coverage uses
 defined boundary positions, with no healthy credit for that unresolved width.
 40 must resolve authority before admission;33.3.1 refines Dart's recent test.
+
+## Endpoint compatibility40.4 (2026-10-29)
+
+The33.4 diagnostic above is historical. Frozen40.0 now supplies the target;
+independent current16-source native/restored/plan/separate-process emitted execution
+passes all16. Existing nullable local-match endpoint is correct, no runtime edit.
+New registered normal112 plus Number75/aliases141/null390 assertions pass718;
+actual rival empty-text oracle fails3 value checks/109pass/0error. See
+[[julia-capture-endpoint-absence-compatibility]] for exact producer/input/result/
+trace/module custody. Lua/named/full admission remain independent.

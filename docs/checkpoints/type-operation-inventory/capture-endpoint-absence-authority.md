@@ -90,3 +90,16 @@ Four selected files46 tests/fatal changed-file analysis/format pass; whole-packa
 SDK deprecations2.25 stay separately owned. Packet dart-capture-endpoint-intake.json.gz
 retains closure/adjacent discovery. Julia40.4/Lua40.5/41/47/45 and canonical selection/
 other prerequisites/full admission remain separate.
+
+## Julia compatibility40.4 (2026-10-29)
+
+Independent current16-source native/restored/plan/separate-process emitted Module
+baseline passes all16 without runtime edits. Existing nullable local_match endpoint
+returns nothing before span/take mutation; cursor/rest/real zero remain distinct.
+New registered normal112/Number75/aliases141/null390 assertions pass718 total with
+depwarn=error. Rival empty-text expectation fails3 value routes,109 pass/0error;
+this is an oracle control, not product RED. Runtime/compiler/emitter/shared fixture
+are exact base bytes. Full results/Unicode cursor/trace/inputs/generated/metadata
+retained in julia-capture-endpoint-intake.json.gz. No generation/dependency/schema/
+policy change, isolated package, named/peer or full admission claim. Lua40.5 and
+41/47/45/canonical selection/other admission prerequisites remain independently owned.
