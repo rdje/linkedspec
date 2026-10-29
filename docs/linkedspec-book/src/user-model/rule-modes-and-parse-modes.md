@@ -515,12 +515,11 @@ The short version is:
 
 A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Current Dart validation incorrectly applies that slot requirement to blind targets with no regex, including bare AND members; this tracked validation defect is pending repair. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
 
-Rust accepts these targets and preserves action-slot validation, but its fluent return values are now corrected; invocation-local accumulator reuse is corrected too. The original parent-`LX` example still needs portable blind-phase authority reconciliation, and Rust blind `.push` behavior remains separately tracked. A coordinator without that parent hook has focused runtime coverage. The example below is currently checked through native and emitted Perl parsers:
+Perl and Rust execute the following coordinator through native and generated parsers. The default parent collects its child results implicitly:
 
 ```text
 Top::
- => Middle .push
- LX { return(copy(Top)) }
+ => Middle
 
 Middle:
  -> Value .push
@@ -536,6 +535,8 @@ Replacing Top's body with `I { return(call(Middle)) }` returns `["x"]` directly.
 `Top::AND` with `=> Middle .return("OK")` returns `"OK"` after the child consumes its input. A bare
 `Middle.return("OK")` in that AND parent has the same blind ownership. Use a real expression or a bound
 value in return examples; the name `child_result` is not an automatic binding.
+
+Portable blind-parent `LX` behavior remains under authority review. Rust blind `.push` parent-call effects also remain separately tracked; the example above uses implicit collection.
 
 Blind calls do not secretly turn a rule into a sequence. The rule label still decides the composition model.
 
