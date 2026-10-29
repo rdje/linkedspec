@@ -1273,7 +1273,7 @@ impl GeneratedPlanExecutor<'_> {
         }
         ctx.note_recursive_observation_entry(label);
 
-        ctx.enter_rule_variable_scope();
+        ctx.enter_rule_variable_scope(label);
         ctx.trace_enter(
             "rust_runtime:generated_plan:direct_acode_rule",
             format!(
@@ -1759,7 +1759,7 @@ impl GeneratedPlanExecutor<'_> {
         }
         ctx.note_recursive_observation_entry(label);
 
-        ctx.enter_rule_variable_scope();
+        ctx.enter_rule_variable_scope(label);
         ctx.trace_enter(
             "rust_runtime:generated_plan:direct_bcode_rule",
             format!(
@@ -3098,7 +3098,7 @@ impl Engine {
         ctx.note_recursive_observation_entry(label);
         // Run the body, then leave the frame on BOTH the Ok and Err paths so the
         // active set stays balanced (empty between top-level parses).
-        ctx.enter_rule_variable_scope();
+        ctx.enter_rule_variable_scope(label);
         let result = self.execute_rule_inner(label, entry_regex_idx, ctx);
         if result.is_err() {
             ctx.capture_diagnostic_failure(

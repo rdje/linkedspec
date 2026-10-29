@@ -1,0 +1,34 @@
+[
+  {
+    "name": "implicit_parent_no_tail",
+    "source": "Top::\n => Middle\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "input": "x",
+    "expected": [
+      [
+        "x"
+      ]
+    ]
+  },
+  {
+    "name": "direct_twice",
+    "source": "Top::\n I{return(array(call(Middle),call(Middle)))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "input": "x",
+    "expected": [
+      [
+        "x"
+      ],
+      []
+    ]
+  },
+  {
+    "name": "direct_twice_explicit_reset",
+    "source": "Top::\n I{return(array(call(Middle),call(Middle)))}\nMiddle:\n I{set(Middle,[])}\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "input": "x",
+    "expected": [
+      [
+        "x"
+      ],
+      []
+    ]
+  }
+]

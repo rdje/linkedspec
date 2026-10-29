@@ -4877,6 +4877,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust48.2.1 adds blind_fluent_return_values.rs consuming17 reference-qualified cases, with focused native/reconstructed/plan/fresh proof. Exact canonical presence/selection remains required before admission.
 
+  Rust48.2.2 adds rule_invocation_accumulators.rs with3 qualified source fixtures, focused four-route proof and13 selected tests. Exact canonical selection required before admission; original parent-LX exclusions remain48.2.2.1.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9398,17 +9400,48 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.1 - evaluate Rust blind fluent return payloads and stop the chain`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2`
-  Status: `pending` / P1 immediately after48.2 before48.3/admission
+  Status: `completed` / P1 immediately after48.2 before48.3/admission
   Goal: Qualify and repair repeated regex-free coordinator collection reuse with public trace and reference controls. Preserve existing parent-calling blind .push meaning, invocation scope, recognition outcomes/progress and custom lifecycle authority; do not assume child append.
   Reproduction/impact: Retained48.2 native/reconstructed/plan results show three duplicated nested coordinator arrays and two fluent literal returns containing quote characters; full normal fails15 route assertions. Compile ownership8valid4reject is healthy. Separate emitted qualification belongs to48.2 intake.
+  Verification tier: `focused`
+  Focused checks: Reference6 source/value controls; qualified3 own four-route1healthy2RED ->3pass, unchanged source/metadata/old modules/healthy control;13 selected tests, recursion4 pre/post, formatting/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after qualified48.2.3/push48.2.4/remaining48/phase48.2.2.1 linked startup27.1/40.1.1/.2/45/selection23.4.1 and prerequisites.
+  Claim verification: none: Finite authored invocation/state/source and direct-dependent functional assertions, no population measurement.
+
+  Activation: clean `540695a9ec4052cc703e874964af63285ec8ee0d`;48.2.1 committed/brief empty/no jobs. Public original48.2 trace/source shows Middle re-entry at EOF retains array and no-tail blind fluent currently inert; reference emitted parent .push intentionally calls parent and default bcode miss returns implicit collection. Separate direct sequential calls, own explicit reset and parent-tail/LX controls before choosing scope/phase repair. No assumed child append or broad phase authority.
+
+  Qualified scope: Six reference native/emitted controls all agree; direct_twice returns[[x],[]], explicit own-array reset is a control, no-parent-LX/no-tail repetition returns[[x]]. Own phase-neutral3-source normal will isolate invocation arrays. Original parent LX omission is unresolved phase authority48.2.2.1 linked startup27.1, not automatically a Rust policy defect; retain original observations without portable credit. Separately own inert Rust zero-arg blind push48.2.4 before48.3, public distinguishing effect RED required.
+
+
+  - [x] **REPRODUCE / ISSUE**: Public reference6 native/emitted controls distinguish scope/tail/parent LX. Qualified3 source normal has1healthy2RED on native/reconstructed/plan/separate compiled: second direct call and no-parent-LX repetition leak the earlier Middle array. Explicit own reset remains healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: RuntimeContext::enter_rule_variable_scope only starts a declaration map; implicit action pushes create/update the rule label array without registering an invocation-local declaration. Thus later calls read the previous invocation's array. Existing exit frame can restore all binding kinds and identity once declare_array records the rule binding.
+  - [x] **FIX**: Pass label from native and both direct generated-plan entry wrappers; declare the rule's own array inside the existing declaration scope. No new state/frame/schema/family, global clearing, invented child append or blind-phase policy. Existing success/error exit cleanup owns restoration.
+  - [x] **ADDRESSED (verified)**: All3 qualified sources pass four routes; explicit-reset control unchanged. Original3 modules replay with updated runtime and exact source/compiled/serialized/full metadata/plan. Rebuild consumers, no regeneration. Reference6 cursor1; Rust final cursor unexposed.
+  - [x] **NO REGRESSION**: New normal1/typed returns1/blind collection1/default plan6 plus recursion4 pass13 selected tests; recursion4 also pre-edit healthy. Original parent LX omission/execution difference remains unqualified portable phase authority48.2.2.1 linked startup27.1 after20.1. Parent-calling blind push remains independently owned48.2.4; no broad compatibility or full gate claim. Dependency diagnostics opaque, locked identities preserved.
+  - [x] **LOCKSTEP**: Packet rust-coordinator-scope-intake.json.gz retains actual reference6/qualified3 RED+GREEN/producers/initial lineage/source/patch/modules/locks/receipts. Book/cards/map/roadmap/task/live/resume/history align; new normal canonical selection23.4.1 required. Qualified48.2.3 then push48.2.4/remaining48/warnings/45; phase authority before admission, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2 - isolate Rust rule accumulators per invocation`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2.1`
+  Status: `pending` / P1 linked SESSION-STARTUP-READING.27.1 after20.1 before full admission
+  Goal: Reconcile blind-parent LX phase authority before closing the original referenced-intermediate portable runtime target; canonical normative decision first, bounded backend/fixture repairs afterward.
+  Reproduction/impact: Original48.0 Top:: =>Middle .push LX{return(copy(Top))} reference emitted parent omits LX and returns implicit collection; Rust executes authored LX on blind repetition miss.48.2.2 controls remove parent LX without changing reference values and distinguish own invocation-array reuse. Existing blind-le-public-phase-authority-gap links unresolved portable blind phases to startup27.1/ADR0020; current Perl omission cannot silently become normative. Preserve original target and observed output, qualify these phase-confounded original runtime rows rather than crediting them as portable parity.
+  Planned verification tier: canonical
+  Planned focused checks: Exact authored LX/non-LX sentinels, original6 scope controls and full phase authority evidence on reference/peers before policy; no silent normalization to a backend.
+  Planned canonical trigger: Normative phase authority linked startup27.1 after document-pressure20.1; full23.4/push requires resulting repairs.
+  Planned claim verification: none: Finite authored phase/source assertions; no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.4`
+  Status: `pending` / P1 after48.2.3 before48.3/admission
+  Goal: Qualify and repair Rust blind fluent push under the existing parent-calling reference meaning; preserve native/generated dispatch and progress guards.
+  Reproduction/impact: Public emitted reference original48.0 source explicitly calls Top through push(Top) after Middle; Rust execute_bcode_entry_tail currently passes zero args to generic push helper, which returns undef without any call. Current original value witness does not isolate that inert tail from implicit collection; own effect/recursion witness and actual RED required before repair, no invented child append.
   Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN normal and direct blind/fluent/collection controls, retained public source/compiled/metadata; book/docs/commit, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/40.1.1/45/selection23.4.1 and prerequisites.
+  Planned focused checks: Own public reference/SDK/plan/fresh parent-call effects and error/progress/recursion controls, nearest fluent/collection normals, book/docs/commit.
+  Planned canonical trigger: Full23.4/final clean push after48.2.4 and other prerequisites; phase48.2.2.1 remains separate.
   Planned claim verification: none: Finite authored functional assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3`
   Status: `pending` / P1 immediately after48.2 before48.3/admission
-  Goal: Close full frozen12-source Rust runtime regression and separate compiled-source proof after48.2.1/.2; preserve compile diagnostics/metadata and disclose artifact rebuild or regeneration from actual source comparison.
+  Goal: Close qualified Rust referenced-intermediate compile/runtime/fresh coverage after48.2.1/.2; preserve original12 observations and qualify parent-LX rows under48.2.2.1/startup27.1. Establish phase-neutral counterparts before portable credit; no silent phase policy. Preserve diagnostics/metadata and qualify artifact reuse.
   Reproduction/impact: Retained48.2 native/reconstructed/plan results show three duplicated nested coordinator arrays and two fluent literal returns containing quote characters; full normal fails15 route assertions. Compile ownership8valid4reject is healthy. Separate emitted qualification belongs to48.2 intake.
   Planned verification tier: focused
   Planned focused checks: Exact owned RED/GREEN normal and direct blind/fluent/collection controls, retained public source/compiled/metadata; book/docs/commit, no routine full gate.
@@ -9868,7 +9901,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2` | `pending` | Qualify and repair Rust coordinator invocation and blind collection outliers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3` | `pending` | Close qualified Rust referenced-intermediate routes while preserving phase exclusions. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

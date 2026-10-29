@@ -2390,9 +2390,12 @@ impl RuntimeContext {
         self.descriptor_scalar_bare_reads = stores.descriptor_scalar_bare_reads;
     }
 
-    pub(crate) fn enter_rule_variable_scope(&mut self) {
+    pub(crate) fn enter_rule_variable_scope(&mut self, label: &str) {
         self.declaration_scopes
             .push(std::collections::HashMap::new());
+        // The rule's implicit accumulator is fresh on every invocation. The
+        // existing declaration frame restores any caller binding on exit.
+        self.declare_array(label);
     }
 
     pub(crate) fn exit_rule_variable_scope(&mut self) {

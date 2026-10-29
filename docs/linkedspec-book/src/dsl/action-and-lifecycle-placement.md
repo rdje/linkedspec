@@ -390,6 +390,13 @@ over raw variables such as `LMATCH`, `IMATCH`, or manual capture-list indexing i
 
 Use `entry_*` helpers when code wants the match that entered the current rule, typically from `I { ... }` in a dispatched child. Use `match_*` helpers when an action is about the current local slot being processed. The [Source Boundary Helper Reference](source-boundary-helper-reference.md) documents the exact `entry_*` and `match_*` families.
 
+A rule's implicit accumulator starts fresh for each invocation. For example,
+if `Middle` collects `"x"` on its first call and reaches EOF on its second call,
+two direct calls return `[["x"],[]]`; the second call does not reuse the first
+array. Rust now preserves this on native and generated-plan execution, including
+restoration across consuming recursion. Rebuild Rust runtime consumers; existing
+emitted source can be reused.
+
 ## `LS { ... }` and `LE { ... }`: local-slot hooks
 
 `LS { ... }` and `LE { ... }` are advanced hooks around local slot processing in regex-driven handler shapes.
