@@ -64,3 +64,11 @@ Related facts: [[generated-source-contract-v1]],
 [[lua-five-backend-capability-admission]],
 [[lua-generated-source-fresh-process-isolation]],
 [[lua-generated-source-scaffold-split]], [[lua-backend-full-parity-plan]].
+
+2026-10-29 bounded39.4.9 adds the necessary narrow exception: Default with blind
+edges is implicit repeated choice and must classify rep_bcode, not and_bcode.
+Ordinary Default regex scanning still classifies default, preserving the broad-
+boolean warning above. Existing ten-family vocabulary/format2/minimal rows are
+unchanged; current mechanism/artifact proof:
+[[lua-default-blind-generated-family-gap]]. Affected old modules require
+regeneration and reject typed family mismatch with the corrected runtime.

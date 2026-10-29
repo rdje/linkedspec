@@ -39,7 +39,7 @@ bcode; repetition acode and bcode; and repetition-AND acode and bcode.
 Before execution, the backend rejects row-count, label, family, and unknown-
 family mismatches. Generated-source failures use stable emission, compile/load,
 plan-validation, and execution stages with source identity and available rule/
-family attribution.
+family attribution. Lua Default blind repetition uses `rep_bcode`; ordinary Default regex scanning keeps `default`. Regenerate older Lua Default blind modules that contain the wrong `and_bcode` row: the corrected validator rejects them with `generated_plan_family_mismatch` at `validate_generated_plan`. The ten-family vocabulary, minimal plan and format 2 are unchanged.
 
 Conformance remains interpreter-first. The neutral direct fixture proves result,
 trace roles, and identity. The initial generated corpus subset contains eight
@@ -59,8 +59,8 @@ caller-global mode. The five seek families are `default`, `or_acode`,
 at `validate_generated_plan` with
 `generated_source_contract_version_mismatch`, including `expected_contract`
 and `actual_contract`; regenerate it from the original `.spec` source. Rust and
-Dart now implement the same v2/format-2 contract; Julia and Lua retain their admitted v1
-emitters until their ordered cursor leaves.
+Dart now implement the same v2/format-2 contract; Julia and Lua also implement the same current v2
+contract through their completed ordered cursor migrations.
 
 Perl generated artifacts also preserve root-selection identity without widening
 the minimal family plan. `LinkedSpecGeneratedMetadata()` publishes

@@ -6,17 +6,12 @@ local function read(path)
   local value=file:read('*a');assert(file:close());return value
 end
 local rows=json.decode(read('lua/test/sparse_and_structural_sequence_cases.json'))
-local owners=json.decode(read('lua/test/sparse_and_structural_sequence_owners.json'))
-local assertions,healthy,dormant=0,0,0
+local assertions,healthy=0,0
 local function check(condition,message)
   assertions=assertions+1
   assert(condition,message)
 end
 for _,row in ipairs(rows) do
-  if owners[row.name] then
-    dormant=dormant+1
-    print('OWNED DORMANT '..row.name..' '..owners[row.name])
-  else
     healthy=healthy+1
     local parsed=ls.parse_spec_with_staged_user_function_definitions(row.source)
     local restored=ls.spec_ast.from_json('SpecFile',json.decode(json.encode(ls.spec_ast.to_json(parsed))))
@@ -75,6 +70,5 @@ for _,row in ipairs(rows) do
         end
         end
     end
-  end
 end
-print('Lua sparse AND structural sequence: '..assertions..' assertions, '..healthy..' healthy sources, '..dormant..' owned dormant')
+print('Lua sparse AND structural sequence: '..assertions..' assertions, '..healthy..' healthy sources')

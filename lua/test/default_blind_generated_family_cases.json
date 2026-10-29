@@ -1,0 +1,197 @@
+[
+  {
+    "name": "default",
+    "source": "Top::\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "A",
+          "B",
+          "B",
+          "A"
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      },
+      {
+        "input": "x",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ],
+    "expected_family": "rep_bcode"
+  },
+  {
+    "name": "or",
+    "source": "Top::OR\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "A",
+          "B",
+          "B",
+          "A"
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      },
+      {
+        "input": "ax",
+        "expected": [
+          "A"
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ],
+    "expected_family": "rep_bcode"
+  },
+  {
+    "name": "and_two",
+    "source": "Top::AND{2}\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "ab",
+        "expected": null,
+        "expected_cursor": 2,
+        "expected_match": false
+      },
+      {
+        "input": "ababa",
+        "expected": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ],
+    "expected_family": "rep_and_bcode"
+  },
+  {
+    "name": "and_once",
+    "source": "Top::AND\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          "A",
+          "B"
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ],
+    "expected_family": "and_bcode"
+  },
+  {
+    "name": "pipe_exit",
+    "source": "Top::|\n => First\n => Second\n E {return(retv)}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ],
+    "expected_family": "or_bcode"
+  },
+  {
+    "name": "blind_default",
+    "source": "Top::\n => Value\nValue:AND\n /H/\n /cat/ -> Value[1] {return(\"BODY\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          "BODY"
+        ],
+        "expected_match": true,
+        "expected_cursor": 4
+      },
+      {
+        "input": "HcatHcat",
+        "expected": [
+          "BODY",
+          "BODY"
+        ],
+        "expected_match": true,
+        "expected_cursor": 8
+      }
+    ],
+    "expected_family": "rep_bcode"
+  },
+  {
+    "name": "default_null",
+    "expected_family": "rep_bcode",
+    "source": "Top::\n => Null\nNull:|\n /a/ -> Null[0] {return(null)}\n",
+    "cases": [
+      {
+        "input": "aa",
+        "expected": [
+          null,
+          null
+        ],
+        "expected_match": true,
+        "expected_cursor": 2
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_match": false,
+        "expected_cursor": 0
+      }
+    ]
+  },
+  {
+    "name": "default_zero",
+    "expected_family": "rep_bcode",
+    "source": "Top::\n => Empty\nEmpty:|\n /(?=a)/ -> Empty[0] {return(0)}\n",
+    "cases": [
+      {
+        "input": "a",
+        "expected": [
+          0
+        ],
+        "expected_match": true,
+        "expected_cursor": 0
+      }
+    ]
+  }
+]

@@ -4825,6 +4825,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua implicit-blind39.4.4 adds lua/test/blind_repetition_collection_test.lua to exact ordinary/canonical registration inventory. Current13active2owned dormant (Default .9/post-call .5) is direct focused proof only; remove satisfied dormancy before full admission.
 
+  Lua Default-family39.4.9 adds lua/test/default_blind_generated_family_test.lua to required explicit ordinary/canonical registration. Current blind14active1post-call dormant/structural31fully active; direct304/230/205/234/222 assertions per installed host is not full admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8653,6 +8655,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Packet lua-blind-collection-intake.json.gz retains actual producers/input/runtime epochs/SDK/fresh/trace/Default diagnosis/initial readers/receipts. Book/cards/target/roadmap/task/live/resume/history align. Direct blind13active2owned dormant/structural30active1dormant, no passing credit for .9/.5; registration23.4.1 before admission. P1 .9 next, then .5/.7/P2 .8 and full prerequisites; authorized focused commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4 - retain Lua implicit blind iteration collections`.
 
+  2026-10-29 .9 now repairs the independent Default generated classifier: current14 implicit sources230 assertions per host, only post-call .5 dormant; all31 structural sources205 active. Original .4 packet/13-source scoped proof remains frozen.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5`
   Status: `pending` / P1 independent qualification after .4
   Goal: Independently qualify Lua repeated blind post-call value/count/progress.
@@ -8707,15 +8711,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9`
-  Status: `pending` / P1 immediate after runtime collection39.4.4 before post-call .5/admission
+  Status: `completed` / P1 immediate after runtime collection39.4.4 before post-call .5/admission
   Goal: Correct Default blind generated-family classification under existing format2 authority.
   Reproduction:39.4.4 exact default source Top:: =>First =>Second, First:AND /a/ returns A, Second:AND /b/ returns B, input abba. Compiled Top metadata Default/is_repetitiontrue/rep_min0/is_andfalse, native trace OR/default seek. Emitted plan incorrectly selects and_bcode, yielding AND grouped values while native collects flat A/B/B/A after runtime fix. Both installed hosts reproduce SDK/restored/plan; initial red plan A/B already differed from native A. No peer inference.
   Root cause: source_emitter.lua classify_generated_rule_family recognizes explicit repetition mode names but omits implicit Default blind repetition; nonrepeating blind fallback routes Default to and_bcode. Interpreter follows generated family by contract, so adjusting only collection cannot correct generated cursor/group policy.
   Acceptance: Reconcile existing rule-local cursor/Default blind/public family authority; correct only derived row and_bcode ->existing rep_bcode, preserve ten-family vocabulary/minimal label-family rows/format2/schema. Explicitly qualify changed output and stale artifact behavior; regenerate affected modules as required, prove SDK/plan/fresh/metadata/trace/entry/count/minimum/zero/empty/plain/explicit-family controls. Default row is not counted as completed portable39.4.4 proof. Before .5/admission, no silent ignoring generated family.
-  Planned verification tier: focused
-  Planned focused checks: Exact installed-host Default family/source/native/restored/generated/fresh RED-GREEN, stale artifact/normal collection/nearest family controls, book/map/history/manual continuity; separately canonical if schema/authority moves.
-  Planned canonical trigger: Full39/23.4/final clean push and any new public schema/family meaning/authority separately canonical.
-  Planned claim verification: none: Finite authored generated-family distinction, no population measurement.
+  Verification tier: `focused`
+  Focused checks:8sources16inputs per host4healthy4actualRED ->8pass304 assertions SDK/restored/plan/regenerated modules fresh; raw/normalized/compiled/native observations unchanged, four control emitted bytes identical, affected source sole Top family literal delta.8 old Default executions reject typed family mismatch,8 old controls valid. Neighbors230/205/234/222 per host; book/map/history/manual continuity, predecessor explicit committed audit retained.
+  Canonical trigger: Full39/23.4/final clean push after .5/.7/P2 .8/declared-host/unsafe formatter/registration/pressure/lifecycle/slot. Existing derived-row correction only, any new schema/family meaning/authority separately canonical.
+  Claim verification: none: Finite authored family/artifact/functional distinctions, no population measurement.
+
+  Activation: clean `2e66bc395d869d64f197e45f2a4cdc135df5da24`; existing ten-family/v2 rule-local cursor authority read, retain Default regex default classification and explicit modes. Predecessor final manual gate overlapped commit; explicit HEAD^..HEAD audit verify_lua_blind_committed_scope.py/receipt passes actual owner six checks/four fields, no live-claim intersections, memory/whitespace/clean tree. Diagnosis script excludes actual Lua paths; no behavior proof was pending. Await every current staged gate exit before committing this leaf.
+
+
+  - [x] **REPRODUCE / ISSUE**:8safe sources16inputs per installed PUC5.5/LuaJIT give4healthy4actualRED Default families on SDK/generated/fresh. Native SDK already correct, metadata Default/is_repetitiontrue/rep_min0/is_andfalse, actual native OR/default trace; generated and_bcode incorrectly forces AND grouping. Four explicit controls preserve their existing families and values.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual plan/compiled metadata/trace and source locate source_emitter.lua classify_generated_rule_family explicit repeated-mode list omitting Default blind, then blind fallback selects and_bcode. Existing family plan authoritatively determines generated dispatch. Broad is_repetition would incorrectly change ordinary Default regex scanning; existing contract preserves its default family.
+  - [x] **FIX**: Narrow Default-with-blind-edges classification returns existing rep_bcode before explicit-mode handling. Correct derived Top row and_bcode ->rep_bcode only; no new family/field/meaning/version. Regenerate affected artifacts; do not ignore supplied stale generated family or fork runtime authority.
+  - [x] **ADDRESSED (verified)**:8pass304 assertions16inputs per host, SDK/restored/plan and regenerated8 modules fresh. Raw/normalized/compiled and all native/restored full observations identical, four explicit controls fully identical including emitted bytes; affected emitted source sole Top family literal delta. Actual8 old Default executions reject generated_plan_family_mismatch at validate_generated_plan/Top/and_bcode with expected rep_bcode,8 old controls valid.
+  - [x] **NO REGRESSION**: Normal blind230 assertions14active1post-call dormant, structural205/all31active, live234, v2 ten-family222 per host pass. Ordinary Default regex stays default; minimal label-family rows/ten families/contract id/format2 remain. Runtime/interpreter/compiler/matching/recognition authority/prior fixtures unchanged. Empty structural owner scaffolding removed. No declared5.4/unsafe formatter/full admission claim.
+  - [x] **LOCKSTEP**: Packet lua-default-family-intake.json.gz retains actual producer/input/old-new modules/SDK/fresh/metadata/trace/stale/receipts/predecessor committed audit. Book/cards/target/roadmap/task/live/resume/history align; old affected modules require regeneration. Earlier stale book Julia/Lua-v1 claim corrected to current five-backend v2. Explicit new regression registration23.4.1; .5 next, .7/P2 .8/full prerequisites stay open. All staged manual gates must return before authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9 - classify Lua Default blind repetition as rep_bcode`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1`
   Status: `completed`
@@ -9022,7 +9037,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9` | `pending` | Correct Lua Default blind generated-family classification and qualify artifacts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5` | `pending` | Independently qualify and repair Lua blind post-call iteration outcomes. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

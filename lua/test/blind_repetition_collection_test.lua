@@ -10,9 +10,9 @@ local function check(condition, label)
   assert(condition, label)
 end
 for _, fixture in ipairs(fixtures) do
-  if fixture.name == 'default' or fixture.name == 'postcall_return' then
+  if fixture.name == 'postcall_return' then
     dormant = dormant + 1
-    local owner = fixture.name == 'default' and '39.4.9' or '39.4.5'
+    local owner = '39.4.5'
     print('OWNED DORMANT ' .. fixture.name .. ' TYPE-REFERENCE-BOOK.1.2.23.3.' .. owner)
   else
     owned = owned + 1

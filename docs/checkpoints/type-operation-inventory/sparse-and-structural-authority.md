@@ -374,3 +374,11 @@ immediate; post-call .5 remains wrong unchanged/retv healthy. No portable Defaul
 credit. Neighbors289/390/234/197 pass30structural active1owned dormant. Packet
 lua-blind-collection-intake.json.gz retains all diagnostics/epochs/closure.
 Runtime-only/no classifier/schema change, .9 next before .5/admission.
+
+2026-10-29 Lua39.4.9 corrects Default blind derived and_bcode ->existing
+rep_bcode, same format2/ten-family/minimal rows/native authority.8sources16inputs
+4healthy4RED ->8pass304 per host; sole affected emitted Top literal delta,
+regenerated modules fresh pass.8 old Default executions reject typed family
+mismatch,8 old controls valid; regenerate affected artifacts. Normal blind230/
+14active1post-call dormant, structural205/all31active, progress234/v2 family222
+pass. Packet lua-default-family-intake.json.gz retains actual closure; .5 next.

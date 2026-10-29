@@ -336,6 +336,9 @@ function M.classify_generated_rule_family(rule)
     fail("classify_generated_rule_family expects CompiledRule")
   end
   local mode = rule.mode_metadata.name
+  -- Default regex scanning keeps its own family, but Default blind dispatch
+  -- is an implicit repeated choice, never an ordered AND sequence.
+  if mode == "Default" and #rule.blind_edges > 0 then return "rep_bcode" end
   local is_generated_repetition = mode == "Plus" or mode == "Star" or mode == "Optional" or mode == "Or" or
     mode == "OrPlus" or mode == "AndPlus" or mode == "OrBounded" or mode == "AndBounded"
   if is_generated_repetition then

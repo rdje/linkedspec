@@ -51,3 +51,11 @@ existing contract-sourced interpreter-first 8/105 emitted-module proof remains r
 Related: [[lua-generated-source-family-plan]], [[lua-generated-source-emitter-core]],
 [[lua-generated-source-fresh-process-isolation]], [[lua-generated-source-accepted-subset]],
 [[lua-rule-local-cursor-execution]], and [[rule-local-cursor-neutral-contract]].
+
+2026-10-29 bounded39.4.9 corrects the derived Default blind row and_bcode ->
+existing rep_bcode, matching OR/default repetition. Ordinary Default regex and
+explicit families unchanged, same format2/id/ten-family/minimal rows.8sources/
+16inputs4healthy4RED ->8pass304 per host; fresh regenerated modules pass,8 old
+Default executions reject generated_plan_family_mismatch before execution and
+8 old controls remain valid. Current v2 ten-family consumer222 per host passes.
+Proof/regeneration boundary: [[lua-default-blind-generated-family-gap]].

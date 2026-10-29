@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: bounded runtime repairs through implicit blind .4 targeted-checked; generated Default .9 immediate then .5/.7/P2 .8/admission
+status: bounded runtime through .4 and Default generated .9 targeted-checked; post-call .5 next, .7/P2 .8/admission remain
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -79,3 +79,9 @@ correct but generated classifier is wrong independently, P1 .9 immediate next;
 post-call .5 unchanged wrong/retv healthy. Current proof:
 [[lua-implicit-blind-iteration-collections]], [[lua-default-blind-generated-family-gap]].
 Structural30active1owned dormant/197, minimum289/group390/progress234 pass.
+
+2026-10-29 .9 now repairs generated Default derived and_bcode ->rep_bcode with
+old artifact rejection/regeneration proof.8sources16inputs4healthy4RED ->8pass
+304 per host, metadata/schema/native controls unchanged; normal blind14active/
+230 one post-call dormant, structural31fully active205, progress234/v2 family222.
+Current proof: [[lua-default-blind-generated-family-gap]]. Post-call .5 next.
