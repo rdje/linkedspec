@@ -1,0 +1,162 @@
+[
+  {
+    "name": "literal_start_capture_slice",
+    "source": "\nTop::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {cb={||return(\"x\".cat({start_capture_slice();\"!\"}))};result=cb();return([result,capture_slice_pos()])}\n",
+    "helper": "start_capture_slice",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      },
+      {
+        "input": "x",
+        "expected": []
+      },
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      }
+    ]
+  },
+  {
+    "name": "registered_start_capture_slice",
+    "source": "fn apply(callback: codeblock){return(callback())}\nTop::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {result=apply(){return(\"x\".cat({start_capture_slice();\"!\"}))};return([result,capture_slice_pos()])}\n",
+    "helper": "start_capture_slice",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      },
+      {
+        "input": "x",
+        "expected": []
+      },
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      }
+    ]
+  },
+  {
+    "name": "direct_start_capture_slice",
+    "source": "Top:: I {cb={||return(\"x\".cat({start_capture_slice();\"!\"}))};return(cb())}",
+    "helper": "start_capture_slice",
+    "cases": [
+      {
+        "input": "x",
+        "error_rule": "Top"
+      }
+    ]
+  },
+  {
+    "name": "literal_capture_slice_here",
+    "source": "\nTop::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {cb={||return(\"x\".cat({capture_slice_here();\"!\"}))};result=cb();return([result,capture_slice_pos()])}\n",
+    "helper": "capture_slice_here",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      },
+      {
+        "input": "x",
+        "expected": []
+      },
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      }
+    ]
+  },
+  {
+    "name": "registered_capture_slice_here",
+    "source": "fn apply(callback: codeblock){return(callback())}\nTop::\n -> Value .push\n LX {return(copy(Top))}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {result=apply(){return(\"x\".cat({capture_slice_here();\"!\"}))};return([result,capture_slice_pos()])}\n",
+    "helper": "capture_slice_here",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      },
+      {
+        "input": "x",
+        "expected": []
+      },
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      }
+    ]
+  },
+  {
+    "name": "direct_capture_slice_here",
+    "source": "Top:: I {cb={||return(\"x\".cat({capture_slice_here();\"!\"}))};return(cb())}",
+    "helper": "capture_slice_here",
+    "cases": [
+      {
+        "input": "x",
+        "error_rule": "Top"
+      }
+    ]
+  },
+  {
+    "name": "deep_collection",
+    "source": "Top:: I {return([call(Middle)])}\nMiddle: I {return([call(Value)])}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {cb={||return(\"x\".cat({start_capture_slice();\"!\"}))};return(cb())}\n",
+    "helper": "start_capture_slice",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      },
+      {
+        "input": "x",
+        "expected": [
+          [
+            null
+          ]
+        ]
+      },
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      }
+    ]
+  },
+  {
+    "name": "defined_override",
+    "source": "\nTop::\n -> Value .push\n LX {return([\"override\"])}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {cb={||return(\"x\".cat({start_capture_slice();\"!\"}))};return(cb())}\n",
+    "helper": "start_capture_slice",
+    "cases": [
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      },
+      {
+        "input": "x",
+        "expected": [
+          "override"
+        ]
+      },
+      {
+        "input": "αβ:cat",
+        "error_rule": "Value"
+      }
+    ]
+  },
+  {
+    "name": "valid_null_collection",
+    "source": "Top:: I {return([match_text()])}",
+    "cases": [
+      {
+        "input": "x",
+        "expected": [
+          null
+        ]
+      },
+      {
+        "input": "",
+        "expected": [
+          null
+        ]
+      }
+    ]
+  }
+]

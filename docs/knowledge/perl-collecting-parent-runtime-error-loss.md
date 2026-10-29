@@ -6,7 +6,7 @@ answers:
   - "why does native Perl clear a child runtime_handler error"
   - "which task owns nested Perl error delivery through defined parent values"
 date: 2026-10-28
-status: P1 owner41 after40 before full23.4/push; root confirmed, repair not yet implemented
+status:41.0 qualified existing-contract target frozen;12 actual nested losses remain41.1-owned before47/48/45/full admission
 tags: [perl, errors, callbacks, context, collection, generated]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.35.1 retains exact six-source intake/native/fresh bytes and focused public runtime trace in capture-reset-value-block-perl-intake.json.gz."
 reverify: "Recover probe_capture_reset_native_error.pl; use tools/project_data_run.sh env PERL5LIB= perl -Iperl. It enables debug only after Get compilation; inspect rule_handler_eval:Value and invoke_top_rule:Top context."
@@ -32,3 +32,15 @@ collecting/legitimately handled controls before repair. Preserve actual typed
 detail and rule attribution; do not remove valid recovery by guessing or reject
 ordinary null values. Deferred false-ready metadata stays31.6.4.4; the ordinary
 reset statement fix35.1 grants neither deferred vocabulary nor silent-null credit.
+
+## Qualified target41.0 (2026-10-29)
+
+Independent9-source/22-call current native/separate emitted intake confirms12
+native nested losses,2 preserved direct errors and8 healthy null/nonmatch/reuse
+observations. Fresh reports all14 errors. Six exact canonical diagnostic/recovery
+groups pass75 nested assertions plus discovery, including synthetic stale-context
+success and actual-error next-call recovery. [[perl-handler-error-provenance-target]]
+freezes private actual-failure provenance, original detail/child attribution and
+existing direct undef/inner-eval/context surface before41.1. No production repair
+yet. Initial intermediate-no-regex build gap is separately owned48 after41/47,
+before45/wider features/admission; qualified deeper source uses direct calls.

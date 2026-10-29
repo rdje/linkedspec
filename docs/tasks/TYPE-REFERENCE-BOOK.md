@@ -8986,7 +8986,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1 - keep Dart zero regression independent of unsettled match endpoints`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45`
-  Status: `pending` / P1 after40/41, before wider feature expansion/full23.4/push
+  Status: `pending` / P1 after40/41/47/48, before wider feature expansion/full23.4/push
   Goal: Resolve every exact retained current Phase0 failure without blessing invalid runtime behavior or rewriting historical proof.
   Reproduction: TYPE37 standard prove -q -Iperl t/phase0_regression.t fails28/1035 groups; raw TAP/stderr and exact selected names retained in perl-emitted-boundary-catalog-intake.json.gz. Canonical committed-baseline versus candidate Compiler/Contracts selected28-group TAP/diagnostics are byte-identical. All other production and Phase0 source bytes remain HEAD. This proves existing failures for this patch boundary, not blanket stale tests or a full baseline run.
   Impact / ownership: Full primary regression gate is not green. Own all28 named groups, including lazy owner loading, immediate/local maps, container/value helper lowering, hash mutations/value calls and fluent receiver results. Some diagnostics are old source-shape expectations; some assert wrong runtime values. Classify only after public source/context/debug probes and accepted contracts. Cross-link existing receiver/deferred readiness/diagnostic owners rather than duplicate repairs.
@@ -9028,6 +9028,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact named absent/present/missing/reversed/empty/Unicode/name-effect controls and direct dependents per backend; no repeated full suite per slice.
   Planned canonical trigger: Full23.4/final push after all confirmed repairs and canonical selection; genuinely new writer/policy authority requires separate canonical ownership.
   Planned claim verification: none: Finite authored named span/take discrepancy and contract-led functional controls, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48`
+  Status: `pending` / P1 after41/47 before45/wider features/full23.4/push
+  Goal: Reconcile and repair referenced no-regex intermediate rule compilation through the published ordinary-rule contract.
+  Reproduction:41.0 public Get deep_collection source Top -> Middle .push/LX copy, Middle -> Value .push/LX copy, Value with three regex slots fails to build. Actual runtime_ctx_ref says compiler_pipeline:build_final_descriptor, rule_label Top, detail build_dependency_regex_map expects referenced rule Middle regex list for rule Top to be ARRAY ref; got undef. Original exact source/fixture/failed current intake and dedicated Get/context qualification retained in perl-nested-error-authority-intake.json.gz. No production repair or peer failure credit.
+  Root / impact: A referenced intermediate blind rule without its own regex cannot supply the expected dependency regex list; public final-descriptor assembly rejects before execution. Existing ordinary-rule/top-marker authority requires qualification rather than assuming only roots can be blind.41.0 uses already-supported direct call composition for deeper error propagation and keeps this independent compiler surface owned here.
+  Acceptance: Qualify canonical no-regex/default/AND/blind reference versus ordinary direct-call authority with public descriptors/generated source/native/fresh controls, then split bounded compiler/generated/backend repairs for every confirmed outlier. Preserve valid regex catalogs, source/index/matcher identity, finite progress and public errors; no guessed permissive catalog fallback or submodule inspection. Fix/verify/book/docs/commit before45/wider features/admission.
+  Planned verification tier: focused; split any genuine new policy/schema authority before implementation.
+  Planned focused checks: Exact missing-intermediate-regex public RED/control distinction plus existing blind/default/direct-call/dependency/catalog neighbors and syntax/book continuity; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push requires verified48 plus exact canonical selection and other prerequisites.
+  Planned claim verification: none: Finite authored public compiler discrepancy, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
@@ -9161,7 +9172,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.5 - lock safe Lua anonymous capture endpoint compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.41`
-  Status: `pending` / P1 after40 before full23.4/push
+  Status: `in_progress` / P1 after40 before full23.4/push
   Goal: Preserve real nested Perl handler errors when the parent returns a defined collection containing an unavailable child result.
   Reproduction:35.1 exact matched Value[2] literal/registered callback sources invoke excluded start_capture_slice/capture_slice_here. Fresh source raises typed generated_execution_failed/detail unknown_helper/name; native returns[null] and leaves runtime_ctx_ref last_error empty. Direct Top callback errors are already covered by33.1. Six source/emitted/native/fresh controls are retained with35.1, without granting helper vocabulary or blessing silent null as successful execution.
   Root / impact: Runtime-only public debug confirms SpecEntry rule_handler_eval:Value failure then Compiler invoke_top_rule:Top clears stale runtime_handler context solely because the parent AST is defined. SpecEntry::_build_runtime_handler records the real exception and returns undef; collecting parent yields defined Array[null], which does not establish recovery. Exact11KiB trace/source/channels retained with35.1. Preserve legitimate recovery under a concrete authority target before repair. This is error delivery, independent of35's ordinary statement repair and31.6.4.4 deferred readiness.
@@ -9170,6 +9181,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact public trace/context/source RED/GREEN plus nearby native structured-error/recovery/generated controls; no automatic full gate.
   Planned canonical trigger: Full23.4/final clean push requires verified error-delivery repair; actual public diagnostic policy movement gets separately owned canonical authority.
   Planned claim verification: none: Finite authored error-delivery distinction, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.41.0`
+  Status: `completed` / P1 after40 before41.1/full23.4/push
+  Goal: Freeze existing nested native handler-error provenance/recovery target before production.
+  Activation: clean `be5f3b45de998f653881dd13554aa0e490c15bfc`; Lua40.5 committed, brief empty, all jobs terminal. Knowledge Map directs runtimecontext-boundary/perl-collecting-parent-runtime-error-loss and typed-error observation cards; public diagnostics fallback contract preserves richer child payload. Existing Phase0 compiler_pipeline_clears_stale_runtime_handler_error_after_successful_parse deliberately injects a synthetic payload and expects a healthy AST/clear context; preserve that compatibility while distinguishing actual SpecEntry failures.
+  Acceptance: Independently reverify direct/nested/collecting failures and current source/trace attribution through LinkedSpec tools; retain legitimate ordinary-null/nonmatch fallback, synthetic stale-context success and parser reuse controls. Freeze invocation-scoped actual-failure provenance rather than inferring error or recovery from defined/undefined payload shapes. Split bounded repair41.1; no production/helper/schema/policy grant in this intake.
+  Verification tier: `focused`
+  Focused checks: Qualified9 sources/22 public native/separate emitted invocations:12 native nested error loss/2 preserved direct errors/8 healthy; full source/metadata/trace retained. Six exact Phase0 diagnostic/recovery groups75 nested assertions plus discovery pass. No production edits; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push requires41.1 repair/normal canonical selection23.4.1 plus47/48/45/other prerequisites; existing diagnostic/recovery contract composed without new public policy/schema.
+  Claim verification: none: Finite authored error/provenance/recovery distinctions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Actual9-source/22-call public Get/context and separate emitted probe has12 native nested error losses versus2 healthy direct failure and8 healthy null/nonmatch/reuse observations. Fresh reports all14 errors. Full native value/inner eval/context/cursor/channels, descriptor metadata, emitted bytes and public metadata retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Runtime-only public debug records rule_handler_eval:Value failure then Compiler invoke_top_rule:Top clears runtime_handler because the parent AST is defined. SpecEntry captures the original typed callback error and returns undef; collecting/direct nested/explicit-return parents can still produce defined values. Existing synthetic-stale Phase0 success intentionally injects a payload without a real failed SpecEntry; content/AST shape cannot distinguish origin.
+  - [x] **FIX**: Freeze existing-contract target in nested-handler-error-provenance-authority.md and qualified fixture before production.41.1 owns private invocation-local real-failure provenance through existing RuntimeContext/SpecEntry/Compiler, original object/detail/child identity and direct undef/inner-eval/context surface; healthy null/rejection/stale-success/reset remain. No helper/readiness/schema/policy grant.
+  - [x] **ADDRESSED (verified)**: Qualified source/input/value/error/cursor records distinguish12 actual native losses from14 real generated errors and all8 healthy values. Bad/nonmatching/bad reuses same native parser; valid[null] and deep nonmatch[[null]] are healthy, proving payload shape is insufficient. Two direct native errors preserve original typed detail and context. Target is authoritative, production RED stays open41.1.
+  - [x] **NO REGRESSION**: Six canonical diagnostic/recovery groups pass75 nested assertions plus discovery, including actual failure/reused success and synthetic stale-context success. Perl production bytes unchanged. Initial deep no-regex compile failure is independently owned48 after41/47 before45/wider features/admission; use supported direct calls for qualified deep source. Four nonmatch expectation candidates corrected from[null] to actual[] before freeze; all initial epochs retained without product RED credit.
+  - [x] **LOCKSTEP**: Packet perl-nested-error-authority-intake.json.gz retains actual producers/initial+qualified target/source/modules/full metadata/channels/traces/selected canonical tests/receipts. Required engineering-notes rollover preserves exact committed suffix/blob/hash/bytes, kept prefix and all prior manifest rows; receipt retained, no cap changes. Book/cards/map/target/roadmap/task/live/resume/history align; bounded41.1 next, then47/48/45. No production/peer/full admission claim; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.41.0 - freeze nested Perl handler error provenance target`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.41.1`
+  Status: `pending` / P1 after41.0 before47/45/full23.4/push
+  Goal: Preserve actual invocation-local Perl child handler errors through defined parents using frozen41.0, while retaining stale-context success and valid null/rejection behavior.
+  Acceptance: Repair confirmed error loss through existing RuntimeContext/SpecEntry/Compiler owners, retain original error object/detail/rule/handler attribution, direct failure surface and operation-boundary reset. Do not manufacture failures from null values, suppress legitimate recovery, widen excluded callback vocabulary or overwrite richer errors. Normal/fresh/direct dependent coverage, book/docs/proof/commit before admission.
+  Planned verification tier: focused
+  Planned focused checks: Frozen direct/nested/collecting/falsey/null/nonmatch/stale/reuse RED/GREEN plus selected diagnostic and callback controls, syntax and book/manual continuity; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after41.1/47/45 and other prerequisites; canonical selection23.4.1 includes new normal test.
+  Planned claim verification: none: Finite authored handler-error delivery and recovery assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42`
   Status: `in_progress` / P1 after bounded34 before39/full23.4/push
@@ -9382,7 +9421,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.41` | `pending` | Freeze nested Perl handler-error provenance/recovery target before bounded repairs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.41.1` | `pending` | Preserve actual native child handler-error provenance through defined parents. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
