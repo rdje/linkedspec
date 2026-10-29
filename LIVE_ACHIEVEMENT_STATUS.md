@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Daily safe cleanup complete; resume Perl capture endpoint implementation.
+Perl capture endpoints repaired; independent Rust intake next.
 
 ## Latest Completed Slice
 
-Completed due daily cleanup after clean40.0: exact completed37 primary-run log/stderr were already byte-identical in its unchanged committed packet and absent from all claim durability inputs. Verified exclusive on-volume gzip creation, decompressed byte/hash equality and unchanged raw inode/metadata/content before removing only those two raw duplicates. Verified raw absence/recovery; retained local gzip copies and actual producer/receipt/artifact bytes in daily-safe-cleanup-46.json.gz. Rust release/incremental/deps .bin/.log paths checked by metadata; all caches/build artifacts retained. Latest-only cleanup record refreshed at 2026-10-29T12:14:38.245462+00:00. Historical Phase0 replay must first restore its exact raw inputs from gzip or packet; owner45 remains after40/41, no failure waiver. No production, storage/tooling/policy migration, broad deletion, disk-space or exhaustive cleanup claim, off-volume/other-repository write. Book/live/task/resume/history align; immediately resume Perl40.1 capture endpoint repair with focused checks/commit, then independent peers/features. Full gates remain designated admission/push, no push now.
+Perl handler preambles bind local match registers before I/blind execution, preventing ambient package LMATCH/LSPOS from manufacturing a match. Selected matching branches retain their own existing register bindings. Seven anonymous text/width/take/alias lowerings share one guarded projection: absent or reversed local endpoint gives undef before typed construction; failed takes leave the boundary, successful takes retain live-cursor movement. Independent16-source current native/separate-process emitted clean+seeded RED has six healthy/ten failures ->all16 pass; exact six healthy values/cursors/errors/warnings and complete public v2 metadata/minimal plans unchanged. Initial/root regex/incoming/direct/nested I, public input-pos reset, authored cursor/boundary moves, real empty/zero/Unicode and successful/failed take controls retained. Same16 old modules replay32 calls with identical values/cursors/structured error fields/warnings/metadata; ten absence failures persist, so regenerate affected emitted parsers. Raw error strings containing host addresses are excluded only where exact structured error fields exist. SpecEntry/Contracts compile; normal16 + structural typed-source4 + adjacent capture Number7 groups pass27 total. Initial probe launch ordering error and redundant initial normal-context assertions retained without product failure credit. New t/capture_endpoint_absence.t canonical registration23.4.1 remains before admission. Packet perl-capture-endpoint-intake.json.gz retains actual producers/patch/before+after/source/modules/epochs/receipts/test inputs. Book/cards/map/target/roadmap/task/live/resume/history align. No new schema/helper/cursor/diagnostic policy, broader SESSION17 closure, peer backend or full admission claim. Independent Rust40.2 then Dart/Julia/safe Lua before41/Phase0 owner45/wider features/full admission/push. Focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.40.1 from this clean daily-cleanup commit. Read frozen capture-endpoint-absence-authority.md and exact16-source native/fresh clean+seeded baseline. Use LinkedSpec source/context/trace tools to isolate handler-local match registers and private helper projections; ambient package definedness is not presence. Repair missing-endpoint reads/aliases/text/length/take while preserving matched/empty/Unicode/successful take and independent cursor/rest behavior. Establish exact current RED before production; focused checks/book/docs/commit, then independent40.2-.5 and native nested error41. Existing Phase0 failures45 remain owned before wider features/full admission/push; restore gzip/packet raw inputs before historical replay. Broader SESSION17/phase/slot39.8/pressure/registration/declared hosts/Dart SDK/full admission remain separate.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.40.2 from clean Perl endpoint40.1. Read frozen capture-endpoint-absence-authority.md, shared16-source target and canonical Rust match-presence/capture facts before deriving runtime code. Independently execute native/reconstructed/generated/fresh supported baseline, using real absent versus empty/zero/incoming/direct/cursor/take distinctions. Preserve existing sole source/cursor/register owner and public generated format; repair only confirmed outliers with focused tests/book/docs/commit, then40.3-.5. No peer-based failure inference. Wider SESSION17/phase/slot39.8/nested41/Phase0 owner45/pressure/registration/declared hosts/Dart SDK/full admission remain separate. Latest safe cleanup46 is committed at2026-10-29T12:14:38Z; caches/evidence retained, restore compressed raw diagnostics before historical replay.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.40.1` — Perl capture endpoints repaired; independent Rust intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46` — Daily safe cleanup complete; resume Perl capture endpoint implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.0` — Capture endpoint target grounded; independent Perl repair next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.37` — Perl emitted boundary catalogs repaired; pre-match endpoint authority next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.40.1 from this clean daily-cleanup commit.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.1` — Lua blind post-call iteration outcomes repaired; independent nullable qualification next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.0` — Lua post-call intake complete; private returned-iteration repair immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9` — Lua Default blind generated family repaired; blind post-call qualification next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4` — Lua implicit blind runtime collection repaired; generated Default classifier immediate next.
 
 ## History
 

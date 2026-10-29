@@ -48,3 +48,17 @@ No producer changes in40.0. Each40.1-.5 backend gets an independent current inta
 RED/GREEN, direct dependents and a commit before full23.4/push. Final canonical
 selection must include each new regression; pressure/Phase0/declared-host and
 other admission prerequisites retain their existing owners.
+
+## Perl repair40.1 (2026-10-29)
+
+Handler preambles now bind existing local registers before I/blind code; selected
+branches keep their existing bindings. Seven anonymous text/width/take/alias
+lowerings share defined-match/ordered-span guards and mutate takes only after a
+successful read. Current16-source native/separate-process clean+seeded intake has
+six healthy/ten RED ->16pass, preserving all six healthy outcomes and complete v2
+metadata/minimal plans. Ordinary16/typed-source4/Number7 groups pass27 total.
+Same16 old modules still reproduce exact values/cursors/structured errors/warnings/
+metadata in32 calls; raw host-address strings are excluded only when exact typed
+fields exist. Regenerate affected emitted parsers. Packet perl-capture-endpoint-intake.json.gz
+retains closure. New normal/canonical registration23.4.1 and independent40.2-.5,
+broader SESSION17/other prerequisites and full admission remain separate.

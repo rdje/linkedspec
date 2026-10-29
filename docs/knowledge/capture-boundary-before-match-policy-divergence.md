@@ -7,7 +7,7 @@ answers:
   - "why does generated Perl capture_slice_len warn about uninitialized LSPOS"
   - "which task owns capture endpoint absence policy before matching"
 date: 2026-10-29
-status: target40.0 frozen from existing authority; Perl40.1 and independent peers40.2-.5 pending before admission/push
+status: target40.0 and Perl40.1 focused repair verified; independent40.2-.5/full admission pending
 tags: [capture, absence, endpoint, perl, dart, julia, lua, source, diagnostics]
 evidence: "TYPE40.0 capture-endpoint-absence-authority-intake.json.gz retains actual16-source native/fresh clean+seeded controls and accepted source/presence inputs; original33.4 diagnostics remain in capture-boundary-number-julia-intake.json.gz."
 reverify: "Recover probe_capture_endpoint_authority.pl and read_capture_endpoint_authority.py from capture-endpoint-absence-authority-intake.json.gz; use project-routed Perl/Python. Dated intake is diagnostic, not backend repair admission."
@@ -62,3 +62,11 @@ Existing structural presence4 groups and neutral typed231 mutations pass. The
 packet capture-endpoint-absence-authority-intake.json.gz retains actual corrected
 sources, observations, modules, setup epochs and authority inputs. No backend
 repair or full admission credit;40.1-.5 independently establish RED/GREEN.
+
+2026-10-29 Perl40.1 binds local registers before I/blind code and shares guarded
+anonymous match-endpoint/take lowerings. Current16-source native/separate-process
+clean+seeded6healthy10RED ->16pass; six healthy outcomes and complete metadata
+unchanged. Normal16/typed-source4/Number7 groups pass27. Old16 modules retain exact
+semantic outcomes/errors/warnings/metadata in32 calls, so regeneration is required.
+[[perl-capture-endpoint-local-register-repair]] retains current cause/closure;
+independent40.2-.5/broader SESSION17/full admission remain separately owned.

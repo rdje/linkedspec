@@ -773,20 +773,47 @@ sub _capture_until_boundary_value_expr {
  );
 }
 
+# Match-start capture readers require a present local match. A failed read must
+# not construct an invalid typed span or advance an anonymous take boundary.
+sub _anonymous_local_match_capture_value_expr {
+ my ($method) = @_;
+ state $operations = {
+  capture_slice => ['span_text', 0],
+  capture_from_rule_start => ['span_text', 0],
+  capture_slice_len => ['span_length', 0],
+  capture_slice_length => ['span_length', 0],
+  capture_len_from_rule_start => ['span_length', 0],
+  capture_take => ['span_text', 1],
+  capture_take_len => ['span_length', 1],
+ };
+ return undef unless defined($method) && exists($operations->{$method});
+ my ($projection, $take) = @{$operations->{$method}};
+ return join(' ',
+  'do {',
+  'my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef;',
+  'if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) {',
+  'my $__ls_capture = LinkedSpec::SourceLocation::Runtime::'.$projection.'($info, $STRING, $IPOS, $__ls_end, "'.$method.'");',
+  ($take ? '$IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "'.$method.'");' : ''),
+  '$__ls_capture',
+  '} else { undef }',
+  '}',
+ );
+}
+
 # Readonly anonymous capture Number getters have one emitted body for native
 # contracts and ordinary method-value composition. Preserve each operation tag.
 sub _readonly_capture_boundary_number_value_expr {
  my ($method) = @_;
  return undef unless defined $method;
  state $expressions = {
-  capture_slice_len => q{do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_len") }},
+  capture_slice_len => _anonymous_local_match_capture_value_expr('capture_slice_len'),
   capture_slice_pos => q{do { LinkedSpec::SourceLocation::Runtime::span_start_offset($info, $STRING, $IPOS, $IPOS, "capture_slice_pos") }},
   capture_slice_line => q{do { my $__ls_capture_pos = defined($IPOS) ? $IPOS : 0; LinkedSpec::SourceLocation::Runtime::span_start_line($info, $STRING, $__ls_capture_pos, $__ls_capture_pos, "capture_slice_line") }},
   capture_slice_col => q{do { LinkedSpec::SourceLocation::Runtime::span_start_column($info, $STRING, defined($IPOS) ? $IPOS : 0, defined($IPOS) ? $IPOS : 0, "capture_slice_col") }},
   capture_slice_until_cursor_len => q{do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_cursor, "capture_slice_until_cursor_len") : undef }},
   capture_rest_len => q{do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_len"), "capture_rest_len") }},
-  capture_slice_length => q{do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_length") }},
-  capture_len_from_rule_start => q{do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_len_from_rule_start") }},
+  capture_slice_length => _anonymous_local_match_capture_value_expr('capture_slice_length'),
+  capture_len_from_rule_start => _anonymous_local_match_capture_value_expr('capture_len_from_rule_start'),
   capture_rest_length => q{do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest_length"), "capture_rest_length") }},
  };
  return $expressions->{$method}
@@ -1112,7 +1139,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_slice\s*\(\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice") }'
+     _anonymous_local_match_capture_value_expr('capture_slice')
     }gex;
     return $code
    },
@@ -1391,7 +1418,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take\s*\(\s*\)
     }{
-     'do { my $__ls_end = $LSPOS - length($LMATCH); my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_take"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take"); $__ls_capture }'
+     _anonymous_local_match_capture_value_expr('capture_take')
     }gex;
     return $code
    },
@@ -1406,7 +1433,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_take_len\s*\(\s*\)
     }{
-     'do { my $__ls_end = $LSPOS - length($LMATCH); my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take_len"); $__ls_capture_len }'
+     _anonymous_local_match_capture_value_expr('capture_take_len')
     }gex;
     return $code
    },
@@ -1422,7 +1449,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_from_rule_start\s*\(\s*\)
     }{
-     'do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_from_rule_start") }'
+     _anonymous_local_match_capture_value_expr('capture_from_rule_start')
     }gex;
     return $code
    },

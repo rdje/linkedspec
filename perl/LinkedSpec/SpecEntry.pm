@@ -116,6 +116,10 @@ my $IMATCH      = $$info{match};
 my @IMATCH_LIST = @{$$info{match_list} // []};
 my %IMATCH_HASH = %{$$info{match_hash} // {}};
 my $IINDEX      = $$info{index};
+# I and blind handlers have no selected local match. Bind their registers here
+# so they cannot resolve to package globals outside a matching branch.
+my ($LMATCH, $LINDEX, $LSPOS);
+my (@LMATCH_LIST, %LMATCH_HASH);
 my $IPOS        = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position(
  $info, $STRING, pos $$STRING, "handler_entry"
 );

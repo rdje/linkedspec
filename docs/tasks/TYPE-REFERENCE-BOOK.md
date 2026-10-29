@@ -4839,6 +4839,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl boundary37 requires exact ordinary/canonical registration of t/emitted_boundary_catalog.t and its tests/fixtures/emitted_boundary_catalog.json input. Direct13-group native/arbitrary-package eval and separately retained13-source18-input fresh emitted proof do not imply canonical selection. Existing current nested boundary consumer remains; archival case/claim inputs are unchanged.
 
+  Perl endpoint40.1 requires exact ordinary/canonical registration of t/capture_endpoint_absence.t and tests/fixtures/capture_endpoint_absence.json. Native/arbitrary-package eval16 groups and retained separate-process clean+seeded proof are focused coverage, not canonical selection. Existing typed-source4/Number7 controls stay selected; no blanket broader SESSION17 closure.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9039,15 +9041,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.0 - ground capture endpoints in local match presence`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1`
-  Status: `pending` / P1 after40.0 before full23.4/push
+  Status: `completed` / P1 after40.0 before full23.4/push
   Goal: Independently intake and repair confirmed Perl warning/unsafe-operand capture absence/diagnostic drift against frozen40.0.
+  Activation: clean `46ef38e306d7a6b2282d0cf7b0e7e6344e8aaad2`; daily46 committed/brief empty, prior jobs terminal. Frozen target16-source fixture and actual native/fresh clean+seeded observations reviewed. Scope existing handler-local registers plus anonymous match-endpoint readers/takes; preserve local matching/lifecycle behavior and broader SESSION17 ownership. Establish current focused RED before production.
   Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
-  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Current native/separate-process emitted16sources clean+seeded, six healthy/ten actual RED ->16pass; exact healthy outcomes/full public metadata/minimal plans. Same16 old modules32-call stale replay exact semantic/error-field/warning/metadata identity. SpecEntry/Contracts compile; normal16/typed-source4/adjacent Number7 groups pass27; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after independent40.2-.5 and other prerequisites; new exact normal/canonical regression registration23.4.1 required. No public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored match-presence/endpoint/take/host-state/stale-module distinctions, no population measurement.
 
   Frozen target/intake:40.0 capture-endpoint-absence-authority.md and capture_endpoint_absence.json; actual16-source six healthy/ten absence RED. Public generated source proves I/blind handlers can resolve LSPOS/LMATCH to package globals. Require invocation-local absence/presence, not warning suppression or a both-defined ambient-variable guard. Coordinate SESSION-STARTUP-READING.17 wider isolation; preserve actual matched/empty/Unicode/take and other lifecycle state.
+
+
+  - [x] **REPRODUCE / ISSUE**: Current ordinary consumer fails ten/16 groups and separate-process native/clean+seeded input has six healthy/ten absence RED before production. Missing endpoints manufacture empty/0, can raise typed reversed spans or advance failed takes; package globals change absent match projections. Initial missing-script launch raced preparation and receives no product RED credit; corrected complete baseline retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: SpecEntry::_build_handler_preamble has incoming registers but no handler-scope local registers; HandlerVariantEmitter declares local registers only inside selected branches. I/blind helper source therefore resolves LMATCH/LSPOS to package globals. Contracts' anonymous readers/takes subtract before presence/order checks and unconditional takes mutate after manufactured spans. Guarding ambient definedness alone cannot repair seeded state.
+  - [x] **FIX**: Bind five existing local-match registers in the handler preamble; existing selected-branch bindings remain unchanged. Shared private anonymous projection guards defined local text/end/boundary and ordered span before text/length construction; take writes only after successful read. Apply to seven existing canonical/alias lowerings, preserving tags, cursor/rest endpoints, scope and no new helper/frame/policy/schema.
+  - [x] **ADDRESSED (verified)**: All16 sources native/separate-process clean+seeded pass exact expected JSON kinds/cursors, no warnings/errors. Six healthy matched/empty/zero/take controls and complete metadata/minimal plans unchanged. Empty-at-zero remains defined, Unicode prefix width2 and successful takes move to5; unavailable takes preserve boundary0 at cursor2. Old16 modules replay32 calls with exact values/cursors/structured errors/warnings/metadata and ten retained failures; regenerate affected emitted parsers.
+  - [x] **NO REGRESSION**: SpecEntry/Contracts compile; normal16/structural typed-source4/adjacent capture Number7 groups pass27 total. Source/fixture bytes remain exact; negative pure-function/callback fences stay enforced. Raw host-address strings excluded from stale byte comparison only where exact structured fields exist. No full Phase0 rerun/waiver, broader SESSION17 closure, peer backend or full admission credit. Initial normal native-context assertion was narrowed to native route before final consumer proof.
+  - [x] **LOCKSTEP**: Packet perl-capture-endpoint-intake.json.gz retains actual producers/product patch/before+after/source/modules/RED+GREEN/stale/tests/inputs/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; exact t/capture_endpoint_absence.t registration23.4.1 remains before admission/push. Independent Rust40.2 next; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1 - preserve unavailable Perl capture endpoints without ambient match state`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
   Status: `pending` / P1 after40.0 before full23.4/push
@@ -9308,7 +9320,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1` | `pending` | Repair Perl capture endpoint reads through invocation-local match presence. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.2` | `pending` | Independently intake Rust capture endpoint/presence behavior against frozen40.0. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

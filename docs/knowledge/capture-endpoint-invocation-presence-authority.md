@@ -7,7 +7,7 @@ answers:
   - "does an unavailable capture_take advance the anonymous boundary"
   - "can package LMATCH LSPOS values establish local match presence"
 date: 2026-10-29
-status: existing authority composed in TYPE40.0; independent40.1-.5 repairs pending
+status: target40.0 and Perl40.1 focused repair verified; independent40.2-.5/full admission pending
 tags: [capture, source-location, absence, presence, invocation, portability]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.40.0 capture-endpoint-absence-authority-intake.json.gz retains16-source native/clean+seeded emitted controls, six healthy/ten RED, current presence4 groups and neutral typed231 mutations."
 reverify: "Recover probe_capture_endpoint_authority.pl and read_capture_endpoint_authority.py from the retained packet; use project_data_run.sh env PERL5LIB= perl -Iperl and the Python project runner. Baseline counts are dated, not repaired backend admission."
@@ -34,3 +34,11 @@ manufacture text/spans, and failed takes advance the boundary. Narrow Perl40.1 o
 the actual register/presence repair, with wider SESSION17 host isolation separate.
 Six valid controls and ten absence RED are independently retained before production;
 initial incorrect target/carrier/serialization instruments receive no defect credit.
+
+2026-10-29 Perl40.1 binds local registers before I/blind code and shares guarded
+anonymous match-endpoint/take lowerings. Current16-source native/separate-process
+clean+seeded6healthy10RED ->16pass; six healthy outcomes and complete metadata
+unchanged. Normal16/typed-source4/Number7 groups pass27. Old16 modules retain exact
+semantic outcomes/errors/warnings/metadata in32 calls, so regeneration is required.
+[[perl-capture-endpoint-local-register-repair]] retains current cause/closure;
+independent40.2-.5/broader SESSION17/full admission remain separately owned.
