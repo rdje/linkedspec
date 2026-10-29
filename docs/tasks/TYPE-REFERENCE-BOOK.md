@@ -9297,7 +9297,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.5 - retain safe Lua local-match writer target preservation`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48`
-  Status: `pending` / P1 after41/47/49 before45/wider features/full23.4/push
+  Status: `in_progress` / P1 after41/47/49 before45/wider features/full23.4/push
   Goal: Reconcile and repair referenced no-regex intermediate rule compilation through the published ordinary-rule contract.
   Reproduction:41.0 public Get deep_collection source Top -> Middle .push/LX copy, Middle -> Value .push/LX copy, Value with three regex slots fails to build. Actual runtime_ctx_ref says compiler_pipeline:build_final_descriptor, rule_label Top, detail build_dependency_regex_map expects referenced rule Middle regex list for rule Top to be ARRAY ref; got undef. Original exact source/fixture/failed current intake and dedicated Get/context qualification retained in perl-nested-error-authority-intake.json.gz. No production repair or peer failure credit.
   Root / impact: A referenced intermediate blind rule without its own regex cannot supply the expected dependency regex list; public final-descriptor assembly rejects before execution. Existing ordinary-rule/top-marker authority requires qualification rather than assuming only roots can be blind.41.0 uses already-supported direct call composition for deeper error propagation and keeps this independent compiler surface owned here.
@@ -9306,6 +9306,72 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact missing-intermediate-regex public RED/control distinction plus existing blind/default/direct-call/dependency/catalog neighbors and syntax/book continuity; no routine full gate.
   Planned canonical trigger: Full23.4/final clean push requires verified48 plus exact canonical selection and other prerequisites.
   Planned claim verification: none: Finite authored public compiler discrepancy, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.0`
+  Status: `completed` / P1 after49 before45/wider features/full23.4/push
+  Goal: Qualify written action/blind ownership and ordinary no-regex intermediate references before classifying the initial compiler failure.
+  Current qualification:12 compile-only candidates, Perl8 valid builds/4 action-slot rejects; all6 valid blind variants fail Dart validation, while direct-call/regex-action controls build. Original Perl witness used -> not=>, so its no-regex blind-target inference is withdrawn; no permissive catalog fix. Root cause confirmed at Dart _checkEdgeTargets BlindEdge/BareAND -> _checkTarget(...,0) -> regex-count check. Durable referenced-intermediate-initial-findings.md records correction and actual P1 owner48.3; native/fresh/finite-progress qualification still in flight.
+  Activation: clean `01c72448f1b2118a54b1328937ca2307f9800395`;49.5 committed/brief empty/no jobs. Recovered exact41.0 failed Get source/context, ordinary top-rule fact/ADR0010 and book action-versus-blind ownership. Initial Top uses -> Middle; -> selects a declared target regex slot, while => invokes a parser step. Preserve this distinction and investigate actual current variants before assuming the absence of a regex catalog is a defect.
+  Acceptance: Compare original source with explicit blind/direct-call twins, ordinary/default/AND/top-marker variants and valid regex-bearing controls through public Get/descriptors/generated source/native/fresh. Record compile rejects separately from runtime effects, source/slot/metadata/finite progress and strict malformed-catalog guards. Freeze only existing authority; no guessed no-regex action-edge acceptance, permissive missing-array fallback or peer inference. Own every confirmed repair or withdraw an unqualified premise with exact evidence.
+  Verification tier: `focused`
+  Focused checks: Frozen12 Perl8valid4action-slot rejects,7runtime controls14native/fresh calls pass with exact values/cursor/v2 metadata/descriptors/traces. Actual Dart6valid blind compile failures owned48.3, direct/regex controls build. Original/refined/unbound/premature-reader epochs retained, unchanged production/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after48.1-.5/45/selection23.4.1 and prerequisites; existing written ownership qualified, no permissive catalog or new policy/schema/family/diagnostic authority.
+  Claim verification: none: Finite authored compile/ownership/native-fresh value/cursor/control assertions, no population measurement or performance claim.
+
+
+  - [x] **REPRODUCE / ISSUE**: Initial12 compile candidates show Perl8valid/4missing-action-slot rejects, Dart6valid blind failures with direct/regex-action controls building. Historical witness exact, but it uses -> not=>; wrong valid-blind Perl inference explicitly withdrawn. Full descriptor/source/actual error channels retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Written -> requires a target slot; => is a parser step. Perl valid blind/direct descriptors have no Top dependency refs while real action retains Value#0. Actual Dart _checkEdgeTargets passes BlindEdge and bare AND through regex-count _checkTarget(...,0); this blocks no-regex coordinators before emission, owned48.3.
+  - [x] **FIX**: Freeze existing ownership/ordinary-rule/bare/root/direct/progress contracts in12 sources, preserve strict catalogs and independently own48.1-.5. No production change/new policy/schema/family/diagnostic or peer inference. Book unbound child_result illustration clarified to literal; no return policy changed.
+  - [x] **ADDRESSED (verified)**: Frozen12 has8valid/4reject with7runtime controls passing14native/separate emitted calls at cursor1 and correct nested/default/direct/AND literal values/full v2 metadata. Historical callback twin compile-only. Source/descriptors/regex dependency distinction and actual traces retained; original action witness rejected, => twin compiles.
+  - [x] **NO REGRESSION**: Production unchanged. Initial AND unbound placeholder emits declared/unassigned scalar and tagged return, not automatic child payload; literal replacements pass OK. Original12/refined2/18actual runtime observations retained, only14normative; initial reader refused incomplete native rows, no product RED credit. No Dart runtime/fresh or full diagnostic-field completeness claim;48.3 owns those before repair.
+  - [x] **LOCKSTEP**: Packet referenced-intermediate-authority-intake.json.gz retains actual producers/inputs/modules/descriptors/source/results/errors/traces/validator+return-owner/receipts. Target/book/cards/map/roadmap/task/live/resume/history align. Perl48.1 compatibility normal then independent peers/actual Dart48.3 fix/45 before wider features/admission; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.0 - qualify referenced intermediates by written edge ownership`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.1`
+  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Goal: Independently assess Perl referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
+  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
+  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
+  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2`
+  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Goal: Independently assess Rust referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
+  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
+  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
+  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3`
+  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Goal: Independently assess Dart referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Confirmed defect/P1:48.0 current12 compile-only sources show6 valid blind-target forms rejected at compileSpec validation with SpecValidationException requiring Middle regex slot0 despite0 slots; direct-call and real regex-action controls build. Explicit => and bare AND both route through _checkTarget regex validation in spec_validator.dart, conflating declared-rule existence with action-slot identity. Preserve unknown target/action index/blind-index diagnostics, no schema/family change. Reproduce own baseline/normal RED then repair this sole validation owner before45/admission; no peer failure inferred.
+  Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
+  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
+  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
+  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4`
+  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Goal: Independently assess Julia referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
+  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
+  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
+  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5`
+  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Goal: Independently assess safe installed-host Lua referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
+  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
+  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
+  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
@@ -9712,7 +9778,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48` | `pending` | Qualify referenced blind-intermediate compilation and repair actual catalog/classification outliers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.1` | `pending` | Retain Perl referenced-intermediate ownership compatibility with ordinary regression coverage. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

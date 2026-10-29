@@ -1,0 +1,144 @@
+[
+  {
+    "name": "historical_action_no_regex",
+    "source": "\nTop::\n -> Middle .push\n LX {return(copy(Top))}\nMiddle:\n -> Value .push\n LX {return(copy(Middle))}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {cb={||return(\"x\".cat({start_capture_slice();\"!\"}))};return(cb())}\n",
+    "expected_builds": false,
+    "cases": [],
+    "role": "historical_compile_witness"
+  },
+  {
+    "name": "historical_explicit_blind",
+    "source": "\nTop::\n => Middle .push\n LX {return(copy(Top))}\nMiddle:\n -> Value .push\n LX {return(copy(Middle))}\nValue:\n /(?<head>αβ)/\n /:/\n /cat/\n -> Value[2] {cb={||return(\"x\".cat({start_capture_slice();\"!\"}))};return(cb())}\n",
+    "expected_builds": true,
+    "cases": [],
+    "role": "historical_compile_witness"
+  },
+  {
+    "name": "action_no_regex",
+    "source": "Top::\n -> Middle .push\n LX{return(copy(Top))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": false,
+    "cases": [],
+    "role": "missing_action_slot_reject"
+  },
+  {
+    "name": "blind_no_regex",
+    "source": "Top::\n => Middle .push\n LX{return(copy(Top))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": [
+          [
+            "x"
+          ]
+        ],
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "direct_no_regex",
+    "source": "Top::\n I{return(call(Middle))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": [
+          "x"
+        ],
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "bare_default_no_regex",
+    "source": "Top::\n Middle .push\n LX{return(copy(Top))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": false,
+    "cases": [],
+    "role": "missing_action_slot_reject"
+  },
+  {
+    "name": "bare_and_no_regex_literal_return",
+    "source": "Top::AND\n Middle .return(\"OK\")\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": "OK",
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "explicit_and_blind_no_regex_literal_return",
+    "source": "Top::AND\n => Middle .return(\"OK\")\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": "OK",
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "marked_blind_target",
+    "source": "Top::\n => Middle .push\n LX{return(copy(Top))}\nMiddle::\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": [
+          [
+            "x"
+          ]
+        ],
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "markerless_blind",
+    "source": "Top:\n => Middle .push\n LX{return(copy(Top))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": [
+          [
+            "x"
+          ]
+        ],
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "regex_action_control",
+    "source": "Top::\n -> Value .push\n LX{return(copy(Top))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": true,
+    "cases": [
+      {
+        "input": "x",
+        "expected": [
+          "x"
+        ],
+        "expected_cursor": 1
+      }
+    ],
+    "role": "runtime"
+  },
+  {
+    "name": "indexed_action_no_regex",
+    "source": "Top::\n -> Middle[0] .push\n LX{return(copy(Top))}\nMiddle:\n -> Value .push\n LX{return(copy(Middle))}\nValue:\n /x/\n I{return(entry_text())}\n",
+    "expected_builds": false,
+    "cases": [],
+    "role": "missing_action_slot_reject"
+  }
+]

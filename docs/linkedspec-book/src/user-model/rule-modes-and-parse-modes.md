@@ -455,7 +455,7 @@ the rule-header rest:
 ```text
 Record::AND
  Header
- Body.return(child_result)
+ Body.return("complete")
 
 Header:
  /HEADER/
@@ -512,6 +512,30 @@ The short version is:
 
 - `-> Header` is regex-slot oriented: the enclosing rule selects slot zero declared by `Header`, then runs the action path.
 - `=> Header` is parser-step oriented: the parent directly calls the child rule and works with the child result.
+
+A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Current Dart validation incorrectly applies that slot requirement to blind targets with no regex, including bare AND members; this tracked validation defect is pending repair. Perl compiles the documented blind forms.
+
+The following regex-free intermediate is checked through native and emitted Perl parsers:
+
+```text
+Top::
+ => Middle .push
+ LX { return(copy(Top)) }
+
+Middle:
+ -> Value .push
+ LX { return(copy(Middle)) }
+
+Value:
+ /x/
+ I { return(entry_text()) }
+```
+
+On `x`, it returns `[["x"]]`: `Middle` collects the matched value, then `Top` collects that child result.
+Replacing Top's body with `I { return(call(Middle)) }` returns `["x"]` directly. An ordered parent
+`Top::AND` with `=> Middle .return("OK")` returns `"OK"` after the child consumes its input. A bare
+`Middle.return("OK")` in that AND parent has the same blind ownership. Use a real expression or a bound
+value in return examples; the name `child_result` is not an automatic binding.
 
 Blind calls do not secretly turn a rule into a sequence. The rule label still decides the composition model.
 
@@ -833,7 +857,7 @@ cursor at which it was entered:
 ```text
 Top::AND
  Header
- Body.return(child_result)
+ Body.return("complete")
 
 Header:
  /BEGIN/
