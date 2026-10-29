@@ -48,3 +48,10 @@ All31 structural sources205/progress234/v2 ten-family222 pass; original source
 fixtures unchanged. Affected older Default blind modules must be regenerated,
 old family rejected before execution. Current proof:
 [[lua-default-blind-generated-family-gap]]. Original .4 packet stays frozen.
+
+2026-10-29 post-call .5.0 independently qualifies18sources27inputs per host:
+5healthy13RED SDK/restored/plan and18 baseline modules fresh, actual27 trace
+observations/input identity. P1 .5.1 now repairs repeated return/count/progress
+channel immediately; retv/plain/lifecycle controls healthy, broader LE authority
+not established by that matrix. Current proof:
+[[lua-blind-postcall-return-scope-gap]]. Original collection packet frozen.

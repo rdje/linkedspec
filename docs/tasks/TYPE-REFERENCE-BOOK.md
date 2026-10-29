@@ -8658,7 +8658,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   2026-10-29 .9 now repairs the independent Default generated classifier: current14 implicit sources230 assertions per host, only post-call .5 dormant; all31 structural sources205 active. Original .4 packet/13-source scoped proof remains frozen.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5`
-  Status: `pending` / P1 independent qualification after .4
+  Status: `in_progress` / P1 independent qualification after .4
   Goal: Independently qualify Lua repeated blind post-call value/count/progress.
   Acceptance: Use safe actual public block/fluent/retv/Default/AND/minimum/lifecycle sources against current authority, no peer defect inferred; decompose confirmed repairs before admission.
   Planned verification tier: focused
@@ -8667,6 +8667,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
 
   Confirmed .4 evidence: exact postcall_return source/input ab returns [POST,A,1] at1 matchedtrue across SDK/plan/fresh, expected under-min null at1; retv A healthy. .5 after immediate Default generated .9 must qualify broader return/count/progress/LE authority independently.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.0`
+  Status: `completed` / independent safe post-call baseline
+  Goal: Establish exact Lua blind post-call return/count/progress behavior before bounded repairs.
+  Acceptance: Execute18 exact reconciled source fixtures27inputs per installed host SDK/restored/plan and18 modules fresh; preserve source/normalized/compiled/plan/emitted plus matched/cursor/value/error/trace roles. No peer defect inference. Qualify controls/retv/Default/AND/ordinary/typed zero from actual results, own bounded repairs before nullable/admission. Broader lifecycle/LE authority not established merely by this matrix remains separately owned before admission.
+  Verification tier: `focused`
+  Focused checks:18exact sources27inputs per host SDK/restored/plan plus18 modules fresh,5healthy13actualRED sources, exact host inputs/27 actual traces and full SDK results; fresh public plan agreement, product bytes unchanged; book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after owned repair .5.1/.7/P2 .8 and declared-host/unsafe formatter/registration/pressure/lifecycle/slot; authority separately canonical.
+  Claim verification: none: Finite authored post-call/result/control-flow distinctions, no population measurement.
+  Activation: clean `82ad1d9d978947ec37f446e0f9658725b6473efe`; generated Default .9 committed. Existing public post-call authority reconciled in frozen target/cards; no unsafe formatter/full suite/declared5.4 claim.
+
+
+  - [x] **REPRODUCE / ISSUE**:18 exact sources27inputs per installed PUC5.5/LuaJIT SDK/restored/plan and18 fresh modules give5healthy13actualRED. Repeated block/fluent OR/AND/Default returns escape at first child before count/minimum; zero recognition accepts rather than typed rejection, ordinary returned zero and failed-child cases bypass cutoff. Raw/normalized/compiled/plan/emitted closure retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual native traces show selected child/returned value at first cursor, no repeated IT/count progression, and accepted zero. interpreter.lua blind_once executes attached block, FLOW_MT return propagates through nextable to whole-rule invocation owner; no private returned-iteration/group outcome exists. Common loop progress cannot inspect an outcome that escapes it. Latest-child retv remains healthy.
+  - [x] **FIX**: Intake only: own P1 .5.1 private repeated-blind returned-iteration/group channel and common count/progress/cutoff before nullable/admission. Preserve plain/lifecycle whole authority, current retv and nonreturn effects; no peer inference or new policy. Broader LE/lifecycle not established by this matrix and remains separately owned.
+  - [x] **ADDRESSED (verified)**: Both hosts have exact source/normalized/compiled/plan/emitted, all27 native trace/results and SDK/restored agreement; all18 baseline fresh modules reproduce public plan values/errors.5healthy13failed sources independently classified. Corrected Default classification retained, no product diff or invalid fixture credit.
+  - [x] **NO REGRESSION**: Runtime/compiler/emitter/matching/recognition authority/schema unchanged. Five healthy controls retain actual plain pipe/AND, IT/E/nonreturn/retv observations, no complete broader lifecycle/LE claim. Native exposes matched/cursor, fresh exposes values/errors only. No declared5.4/unsafe formatter/full suite/admission/performance claim.
+  - [x] **LOCKSTEP**: lua-blind-postcall-intake.json.gz retains actual producer/fixture/runtime/SDK/fresh/trace/modules/receipts. Book/card/target/roadmap/task/live/resume/history align.13 confirmed gaps owned .5.1 immediately before .7/P2 .8 and full prerequisites, no terminal report-only defect. Authorized focused intake commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.0 - qualify Lua blind post-call iteration return gaps`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.1`
+  Status: `pending` / P1 immediate after .5.0 before .7/P2 .8/admission
+  Goal: Preserve Lua repeated blind post-call returned iteration/group values and existing count/progress policy.
+  Acceptance:18 exact source matrix5healthy13RED, same baseline emitted modules/consumer, private returned-iteration flow enabled only by repeated blind owner. Independent acceptance/null/false/0 payload; copied explicit result replaces implicit collection, AND early group skips remaining children. Common recognized progress before count/IT/max/ordinary zero, ordinary nonconsuming returned value discarded before count then minimum. Plain/lifecycle/retv/nonreturn controls unchanged. Broader LE/lifecycle authority remains separate unless independently reconciled/proved, no inferred peer repair.
+  Planned verification tier: focused
+  Planned focused checks: Exact18source27input SDK/restored/plan/fresh RED-GREEN per installed host with expected matched/cursor and two typed code/rule/phase/origin/offset guards; exact source/artifact/five-control identity, nearest collection/minimum/group/progress/structural, normal registration owner/book/map/history/manual continuity; no routine full gate.
+  Planned canonical trigger: Full39/23.4/final clean push after .7/P2 .8/declared-host/unsafe formatter/registration/pressure/lifecycle/slot; new schema/authority separately canonical.
+  Planned claim verification: none: Finite authored iteration/control-flow/diagnostic distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6`
   Status: `completed` / P1 immediate before further feature owners/admission
@@ -9037,7 +9065,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5` | `pending` | Independently qualify and repair Lua blind post-call iteration outcomes. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.1` | `pending` | Repair Lua blind post-call returned iteration/group outcomes. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

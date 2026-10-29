@@ -382,3 +382,10 @@ regenerated modules fresh pass.8 old Default executions reject typed family
 mismatch,8 old controls valid; regenerate affected artifacts. Normal blind230/
 14active1post-call dormant, structural205/all31active, progress234/v2 family222
 pass. Packet lua-default-family-intake.json.gz retains actual closure; .5 next.
+
+2026-10-29 Lua39.4.5.0 independent post-call18sources27inputs per host
+5healthy13RED SDK/restored/plan and18 modules fresh, exact input/host/27 actual
+trace identity. Repeated return escapes before count/progress; retv and five
+controls healthy. No product edit, corrected Default classification unchanged.
+Packet lua-blind-postcall-intake.json.gz retains closure; bounded .5.1 immediate
+before nullable/admission, broader LE/lifecycle authority separately owned.
