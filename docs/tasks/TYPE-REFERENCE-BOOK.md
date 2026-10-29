@@ -7585,19 +7585,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored defect/source evidence, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38`
-  Status: `pending` / P1 after bounded33/35/34 before37/full23.4 admission/push
+  Status: `in_progress` / P1 after bounded33/35/34 before37/full23.4 admission/push
   Goal: Reconcile and repair independently confirmed Dart/Julia/Lua selected-match live cursor state before early LS return under capture_gaps.
   Reproduction: Exact Hcat source/producers retained in active-edge-body-dart-intake.json.gz. Top matches H, calls Value, then returns payload and caller cursor. Value selects cat under capture_gaps; LS returns gap text, match text and live cursor. Perl native/fresh returns[[empty,cat,4],4]; Dart native/plan returns[[empty,cat,1],1]. Untargeted candidates do not compete in this control, isolating cursor state from36's repair.
   Root / impact: _prepareGapCandidate installs selected registers and gap context but not cursorCodeUnit; _acceptRegexMatch writes selected end only after LS. Early LS return unwinds before that assignment, leaving caller at the entry boundary; broad incoming patterns may reconsume remaining input and append null payloads. No cursor code changed by36.2. Preserve exact return authority, gap boundary commit/discard, rollback and authored LS cursor mutations when reconciling the narrow repair.
   Children:38.0 shared authority/target,38.1 Dart,38.2 Julia and38.3 safe dual-host Lua independently confirmed repairs before admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.0`
-  Status: `pending` / P1 after34 before38.1/37
+  Status: `completed` / P1 after34 before38.1/37
   Goal: Freeze selected-match live cursor versus gap-boundary state and lifecycle return authority from ADR0045/0048, source contracts and exact public reference/native/generated probes.
-  Planned verification tier: focused
-  Planned focused checks: Distinguishing Hcat LS/caller positions, normal edge/LE, explicit LS cursor mutation, return/unwind versus rollback, exact source/trace; no full gate.
-  Planned canonical trigger: Full23.4/final clean push requires verified38 repair.
-  Planned claim verification: none: Finite authored contract/causal distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Public Perl8sources10inputs native/separate emitted process exact values/cursors/typed errors; portable7/9 plus unflagged compatibility1/1. ADR0045/0048/neutral policy, current neutral checker/mutations, dated independent peer evidence, book/map/history/manual continuity; no new backend execution/repair credit.
+  Canonical trigger: Full23.4/final clean push after independent38.1-.3 repairs and other prerequisites; existing authority/schema unchanged.
+  Claim verification: none: Finite authored selected-cursor/lifecycle/mutation distinctions, no population measurement.
+
+  Activation: clean `f2f2d92aebbcb59ab076d855cdda295b1145de85`; ADR0045/0048, neutral gap selection/commit/unwind authority and three canonical early-LS drift cards reviewed. Freeze exact public reference/live cursor, mutation and preserved unflagged controls before backend repair; no new cursor or phase authority.
+
+
+  - [x] **REPRODUCE / ISSUE**: Existing exact Hcat peer cards establish selected captures with cursor1 versus public Perl4. Current reference8sources10inputs independently native/separate emitted agree, including prefix/Unicode, normal LS/LE, early rewind, LS rewind then action and typed repeated commit rejection. Seven portable sources/nine inputs; unflagged1/1 compatibility is not a convergence oracle.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Dated Dart/Julia/Lua canonical causes place selected registers/candidate before LS but live cursor advance in accept after LS. Early return skips it; normal LS cannot observe selected end and a later accept write can overwrite authored rewind. Reference distinguishes live selected cursor from committed gap-boundary state; rewind after LS must not be reset.
+  - [x] **FIX**: Freeze exact shared fixture and canonical authority under existing ADR0045/0048/neutral contract. Backend38.1-.3 must advance the existing live cursor at capture-enabled selection and avoid overwriting LS mutation at acceptance, preserving unflagged timing, candidate discard/rollback and accepted post-LE commit. No product edit or new cursor/frame/token/schema in this leaf.
+  - [x] **ADDRESSED (verified)**: All8reference sources10inputs native/separate emitted agree in value/cursor/error/typed source fields. Hcat4/H-cat5/emoji scalar5, rewinds1, typed repeated rewind3->0 and healthy action-rewind guard retained. Initial print/reader instrument errors rejected/corrected/retained without product outcome credit. Original Hcat source byte identity verified.
+  - [x] **NO REGRESSION**: Existing neutral contract checker passes9complete/63semantic and public/admission locks; source/cursor/recognition authority and product code unchanged. Rollback/unwind/gap policy is retained authority, no new runtime coverage claim. Earlier peer evidence stays historical; no fresh backend RED, full admission or unflagged timing parity inferred.
+  - [x] **LOCKSTEP**: Packet gap-ls-cursor-authority-intake.json.gz retains actual producers/source/emitted/native/fresh/neutral/receipts and dated peer records. Book/fact/map/target/roadmap/task/live/resume/history align; Dart38.1 then Julia38.2/Lua38.3 independently before admission. Focused authorized commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.0 - freeze selected-match cursor before capture-enabled LS`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.1`
   Status: `pending` / P1 after38.0 before37/full23.4
@@ -9192,7 +9203,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.0` | `pending` | Freeze selected-match live cursor authority before early LS return repairs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.1` | `pending` | Repair Dart capture-enabled LS selected-match live cursor. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

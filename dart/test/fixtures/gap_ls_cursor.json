@@ -1,0 +1,168 @@
+[
+  {
+    "name": "early_return",
+    "source": "Top::\n -> Value {payload=call(Value);mark_here(after);return([payload,mark_pos(after)])}\nValue:\n /H/\n /cat/\n @capture_gaps\n LS {mark_here(before);return([gap_text(),match_text(),mark_pos(before)])}\n -> Value[1] {return(\"unreached\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          [
+            "",
+            "cat",
+            4
+          ],
+          4
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 4
+      },
+      {
+        "input": "H-cat",
+        "expected": [
+          [
+            "-",
+            "cat",
+            5
+          ],
+          5
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 5
+      },
+      {
+        "input": "H😀cat",
+        "expected": [
+          [
+            "😀",
+            "cat",
+            5
+          ],
+          5
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 5
+      }
+    ]
+  },
+  {
+    "name": "normal_ls_read",
+    "source": "Top::\n -> Value {payload=call(Value);mark_here(after);return([payload,mark_pos(after)])}\nValue:\n /H/\n /cat/\n @capture_gaps\n LS {mark_here(before);selected=mark_pos(before)}\n -> Value[1] {return([gap_text(),match_text(),selected,cursor_pos()])}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          [
+            "",
+            "cat",
+            4,
+            4
+          ],
+          4
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 4
+      }
+    ]
+  },
+  {
+    "name": "normal_le",
+    "source": "Top::\n -> Value {payload=call(Value);mark_here(after);return([payload,mark_pos(after)])}\nValue:\n /H/\n /cat/\n @capture_gaps\n LE {mark_here(before);return([gap_text(),match_text(),mark_pos(before)])}\n -> Value[1] {seen=1}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          [
+            "",
+            "cat",
+            4
+          ],
+          4
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 4
+      }
+    ]
+  },
+  {
+    "name": "early_rewind",
+    "source": "Top::\n -> Value {payload=call(Value);mark_here(after);return([payload,mark_pos(after)])}\nValue:\n /H/\n /cat/\n @capture_gaps\n LS {rewind_match_start();mark_here(before);return([gap_text(),match_text(),mark_pos(before)])}\n -> Value[1] {return(\"unreached\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          [
+            "",
+            "cat",
+            1
+          ],
+          1
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 1
+      }
+    ]
+  },
+  {
+    "name": "ls_rewind_then_action",
+    "source": "Top::\n -> Value {payload=call(Value);mark_here(after);return([payload,mark_pos(after)])}\nValue:\n /H/\n /cat/\n @capture_gaps\n LS {rewind_match_start();mark_here(before);selected=mark_pos(before)}\n -> Value[1] {return([gap_text(),match_text(),selected,cursor_pos()])}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "expected": [
+          [
+            "",
+            "cat",
+            1,
+            1
+          ],
+          1
+        ],
+        "expected_match": true,
+        "expected_char_cursor": 1
+      }
+    ]
+  },
+  {
+    "name": "repeated_ls_rewind",
+    "source": "Top::OR{1}\n @capture_gaps\n LS {rewind_match_start()}\n -> Part[0] {return(\"A\")}\nPart: /cat/\n",
+    "cases": [
+      {
+        "input": "cat",
+        "expected": {
+          "error_contains": "source_location_cursor_regression",
+          "error_code": "source_location_cursor_regression",
+          "error_rule": "Top"
+        }
+      }
+    ]
+  },
+  {
+    "name": "unflagged_timing_control",
+    "source": "Top::\n -> Value {payload=call(Value);mark_here(after);return([payload,mark_pos(after)])}\nValue:\n /H/\n /cat/\n LS {mark_here(before);return(mark_pos(before))}\n -> Value[1] {return(\"unreached\")}\n",
+    "cases": [
+      {
+        "input": "Hcat",
+        "reference_expected": [
+          4,
+          4
+        ],
+        "qualification": "backend compatibility control only; preserve each independently observed backend baseline, no portable timing target"
+      }
+    ],
+    "qualification": "preserve each backend existing unflagged timing; reference value alone is not portable target"
+  },
+  {
+    "name": "action_rewind_guard",
+    "source": "Top::OR{1}\n @capture_gaps\n -> Part[0] {rewind_match_start();return(\"A\")}\nPart: /cat/\n",
+    "cases": [
+      {
+        "input": "cat",
+        "expected": {
+          "error_contains": "source_location_cursor_regression",
+          "error_code": "source_location_cursor_regression",
+          "error_rule": "Top"
+        }
+      }
+    ]
+  }
+]

@@ -404,7 +404,7 @@ LE { ... }
 continue matching
 ```
 
-Use `LS { ... }` when code must run after the local match is known but before the action body for that slot. `@capture_gaps` installs the selected match before `LS`; unflagged native handlers preserve historical timing and can run `LS` before selection. With `@capture_gaps`, Dart, Julia, and safe Lua currently leave the live cursor before the selected match when `LS` returns before the edge runs. For entry `/H/` and selected `/cat/` on `Hcat`, they report position `1`, while Perl reports `4`. This separate lifecycle cursor defect is tracked for repair before admission.
+Use `LS { ... }` when code must run after the local match is known but before the action body for that slot. `@capture_gaps` installs the selected match before `LS`; unflagged native handlers preserve historical timing and can run `LS` before selection. With `@capture_gaps`, Dart, Julia, and safe Lua currently leave the live cursor before the selected match when `LS` returns before the edge runs. For entry `/H/` and selected `/cat/` on `Hcat`, they report position `1`, while Perl reports `4`. This separate lifecycle cursor defect is tracked for repair before admission. The required model distinguishes live cursor from committed gap boundary: LS sees the selected match end, an explicit `rewind_match_start()` in LS remains effective for the following action or early return, and only accepted post-LE completion commits the gap boundary. A repeated edge that finishes behind its selected end retains the existing `source_location_cursor_regression` error.
 
 Use `LE { ... }` when code must run after local action processing for a slot and before the handler continues.
 

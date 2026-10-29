@@ -28,3 +28,10 @@ Correct4/4 and broad-carrier expected values must be verified before admission;
 do not bless current1/nulls or infer a Lua defect. Diagnostic is separate from
 the healthy normal test, with no semantic success credit. See also
 [[dart-gap-early-ls-return-cursor-drift]].
+
+2026-10-29 shared authority38.0 freezes selected live end before flagged LS,
+preserved explicit LS rewind through action/return, separate post-LE boundary
+commit and existing cursor-regression guard. Public reference8sources10inputs
+native/separate emitted agree, portable7/9 plus unflagged compatibility1/1.
+[[gap-selected-match-ls-live-cursor-authority]] retains exact target/proof.
+Independent backend repair still pending; no new backend RED or completion credit.

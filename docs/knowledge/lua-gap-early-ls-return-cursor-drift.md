@@ -26,3 +26,10 @@ and broad-carrier values must be verified before admission, without null rebasin
 or a new cursor/frame owner. Declared5.4 proof remains separate. See also
 [[dart-gap-early-ls-return-cursor-drift]] and
 [[julia-gap-early-ls-return-cursor-drift]].
+
+2026-10-29 shared authority38.0 freezes selected live end before flagged LS,
+preserved explicit LS rewind through action/return, separate post-LE boundary
+commit and existing cursor-regression guard. Public reference8sources10inputs
+native/separate emitted agree, portable7/9 plus unflagged compatibility1/1.
+[[gap-selected-match-ls-live-cursor-authority]] retains exact target/proof.
+Independent backend repair still pending; no new backend RED or completion credit.

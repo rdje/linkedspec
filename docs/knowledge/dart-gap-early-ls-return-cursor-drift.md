@@ -29,3 +29,10 @@ early-return, rollback and explicit LS cursor mutation authority before38.1 fixe
 Dart through its existing sole state owner. Correct expected4 and original broad
 carrier values must be verified; do not bless current1/null suffixes. Other
 backends are not inferred defective. Full23.4/push waits for verified repair.
+
+2026-10-29 shared authority38.0 freezes selected live end before flagged LS,
+preserved explicit LS rewind through action/return, separate post-LE boundary
+commit and existing cursor-regression guard. Public reference8sources10inputs
+native/separate emitted agree, portable7/9 plus unflagged compatibility1/1.
+[[gap-selected-match-ls-live-cursor-authority]] retains exact target/proof.
+Independent backend repair still pending; no new backend RED or completion credit.
