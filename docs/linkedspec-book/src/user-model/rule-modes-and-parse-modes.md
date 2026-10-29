@@ -513,7 +513,7 @@ The short version is:
 - `-> Header` is regex-slot oriented: the enclosing rule selects slot zero declared by `Header`, then runs the action path.
 - `=> Header` is parser-step oriented: the parent directly calls the child rule and works with the child result.
 
-A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Current Dart validation incorrectly applies that slot requirement to blind targets with no regex, including bare AND members; this tracked validation defect is pending repair. Perl compiles the documented blind forms.
+A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Current Dart validation incorrectly applies that slot requirement to blind targets with no regex, including bare AND members; this tracked validation defect is pending repair. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
 
 The following regex-free intermediate is checked through native and emitted Perl parsers:
 

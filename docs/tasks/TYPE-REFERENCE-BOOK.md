@@ -4871,6 +4871,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Safe Lua49.5 adds lua/test/named_writer_endpoint_absence_test.lua and explicit run.lua registration. Current15/four routes plus429 selected checks per installed host verified; exact canonical presence/selection remains before admission/push, no declared5.4/full suite credit.
 
+  Perl48.1 adds t/referenced_blind_intermediate.t: focused12 groups cover8valid4reject and7native/fresh runtime controls. Exact canonical presence/selection remains required before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9328,13 +9330,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.0 - qualify referenced intermediates by written edge ownership`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.1`
-  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Status: `completed` / P1 after49 before45/wider features/full23.4/push
   Goal: Independently assess Perl referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
+  Activation: base `74102687350df0b88274421a9a89a0c935fc5bf7`;48.0 committed/brief empty/no jobs. One owned test was prepared before pointer activation; initial clean assertion refused it, then exact-only untracked scope/no tracked dirt verified. Frozen12/8valid4reject/7runtime14native-fresh oracle and public descriptor/source/cause recovered. Valid Perl blind forms already supported; do not change catalog/ownership. Initial normal incorrectly expected the same detail for indexed/unindexed action rejects; indexed source has its existing earlier selector error, to preserve. Nearest child-retv10 groups pass with duplicate-local warnings separately owned before admission. Original wrong action inference withdrawn; actual Dart48.3 independent.
   Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
-  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
-  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
-  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: New referenced-intermediate normal12 groups PASS/empty stderr; nearest child-retv10 groups PASS with duplicate warnings owned40.1.1; isolated public warning-channel probe; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after48.2-.5/40.1.1/45/selection23.4.1 and other prerequisites; no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored compile/runtime/error and warning-channel functional assertions, no population measurement.
+
+  Encountered defect ownership:40.1.1/P1 after48.5 before45 now owns actual duplicate local-match declarations/warnings in and_single_acode source. Current48.1 normal remains compatibility-only; do not suppress the neighbor warnings or claim the generated family is warning-free.
+
+
+  - [x] **REPRODUCE / ISSUE**: Current reference already supports all8 valid fixture builds;4 action-to-missing-slot sources reject. New ordinary12-group normal/nearest10-group normal execute. Historical callback twin remains compile/load-only; seven nonhistorical controls exercise native/fresh results.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Written action edges require actual regex identity; blind/direct calls target declared rules. Existing Perl catalog/selector checks are correct. Indexed source rejects earlier with selector detail, so the initial unified-error assertion was an instrument mistake. Separate public warning probe shows5 fresh-load lexical masks from SpecEntry preamble plus and_single_acode extraction; repair40.1.1 owns that independently.
+  - [x] **FIX**: Add ordinary referenced_blind_intermediate.t consuming frozen12 target, preserving8valid4reject distinctions, all7 runtime native/fresh value/cursor assertions, v2 identity and ValidateGeneratedPlan. No product/catalog fallback, fixture change or new policy/schema/family. Initial owned-test activation ordering and assertion refinement retained honestly.
+  - [x] **ADDRESSED (verified)**: New normal12 groups PASS/empty stderr; nearest child-retv10 groups PASS. Public warning qualification has native build/emission/native-run/fresh-run warning arrays empty, fresh-load5 masks; both A/cursor1. No runtime warning/callback scope defect inferred from lexical masks.
+  - [x] **NO REGRESSION**: Production and frozen fixture unchanged; malformed action contracts retain exact distinct diagnostics. Historical callback execution/other peers/full suite remain unassessed here. Neighbor warning not suppressed: P1 repair40.1.1 after48.5 before45/admission, separate from SESSION10.
+  - [x] **LOCKSTEP**: Packet perl-referenced-intermediate-intake.json.gz retains actual instruments/first+corrected normal/raw outputs/public emitted source/owner snapshots/fixture/receipts. Book/cards/map/roadmap/task/live/resume/history align; new normal exact canonical selection23.4.1 required. Rust48.2 next, then actual Dart/Julia/safe Lua/40.1.1/45; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.1 - retain Perl regex-free blind target compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9426,6 +9440,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: SpecEntry/Contracts compile; normal16/structural typed-source4/adjacent capture Number7 groups pass27 total. Source/fixture bytes remain exact; negative pure-function/callback fences stay enforced. Raw host-address strings excluded from stale byte comparison only where exact structured fields exist. No full Phase0 rerun/waiver, broader SESSION17 closure, peer backend or full admission credit. Initial normal native-context assertion was narrowed to native route before final consumer proof.
   - [x] **LOCKSTEP**: Packet perl-capture-endpoint-intake.json.gz retains actual producers/product patch/before+after/source/modules/RED+GREEN/stale/tests/inputs/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; exact t/capture_endpoint_absence.t registration23.4.1 remains before admission/push. Independent Rust40.2 next; focused authorized commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1 - preserve unavailable Perl capture endpoints without ambient match state`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1`
+  Status: `pending` / P1 after48.5 before45/wider features/full23.4/push
+  Goal: Remove duplicate local-match declarations in generated single-action AND handlers without warning suppression or scope/phase changes.
+  Reproduction:48.1 nearest t/blind_child_retv.t passes10 groups but warning-enabled loading reports my LMATCH/LMATCH_LIST/LMATCH_HASH/LINDEX/LSPOS masking earlier declarations. Its published emitted Atom and_single_acode handler contains the40.1 invocation-local preamble declarations and later my declarations from common _build_lmatch_extraction in the same subroutine scope. Exact stderr/source retained under48.1; independent public native/emission/fresh channel qualification follows before repair.
+  Root / impact:SpecEntry::_build_handler_preamble introduces absent local-match registers, while _emit_and_single_acode_handler inserts declaring _build_lmatch_extraction at the same scope. Other emitter call sites have their own nesting and must not be changed indiscriminately. Correct values in the neighbor do not make generated warning output production-grade. No runtime scope/callback correctness failure inferred from warnings alone.
+  Acceptance: Freeze actual native/emission/standalone warning channels and declaration scopes with public Get/source/trace, plus single-action AND positive/empty/zero/Unicode/entry/local/per-regex-I/callback controls. Repair through the sole emitter/preamble owner without disabling warnings or reviving unbound AND_BCODE paths. Preserve existing match/typed position/phase/return/mark behavior and other families; verify old/new source/metadata/regeneration, focused normal/book/docs/proof/commit before45/admission.
+  Planned verification tier: focused; public schema/state/frame/policy movement needs separate canonical ownership.
+  Planned focused checks: Actual duplicate-local warning RED/GREEN with full source/runtime/metadata and native/fresh channels, anonymous/named endpoint and single-action/child-retv neighbors; no routine full suite.
+  Planned canonical trigger: Full23.4/final clean push after40.1.1/48/45/selection23.4.1 and other prerequisites; SESSION10 unbound handoff remains separate.
+  Planned claim verification: none: Finite authored generated-scope/warning and behavior assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2`
   Status: `completed` / P1 after40.0 before full23.4/push
@@ -9778,7 +9803,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.1` | `pending` | Retain Perl referenced-intermediate ownership compatibility with ordinary regression coverage. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2` | `pending` | Independently assess Rust referenced regex-free intermediate compatibility. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

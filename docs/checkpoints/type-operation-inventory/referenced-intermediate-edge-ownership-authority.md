@@ -60,3 +60,18 @@ Native compiler preparation precedes refined bounded children via a recorded
 public warmup; no cold/warm performance or general process-lifecycle claim.
 48.1-.5 independently repair actual outliers or retain compatibility before45,
 exact canonical selection23.4.1/full23.4 and other admission/push prerequisites.
+
+## Perl48.1 ordinary compatibility (2026-10-29)
+
+The ordinary t/referenced_blind_intermediate.t consumes the frozen12 target:
+8 valid builds/4 action-slot rejects, with distinct indexed/unindexed errors,
+seven native/fresh runtime value/cursor controls and public v2 plan validation.
+It passes12 groups with empty stderr; nearest child-retv passes10 groups but
+exposes duplicate lexical declarations in a different emitted AND handler.
+An isolated public probe attributes5 warnings solely to fresh emitted loading,
+with both native/fresh returning A at cursor1. P1 repair40.1.1 owns the
+SpecEntry-preamble/common-extraction collision after48.5 before45/admission.
+No production or fixture edit. Initial indexed-error assertion correction is
+an instrument refinement, not product RED. Packet perl-referenced-intermediate-
+intake.json.gz retains actual inputs/producers/source/channels/receipts.
+Canonical selection23.4.1, peers and full admission remain separate.
