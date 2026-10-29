@@ -25,6 +25,21 @@ A default/OR-family label composes choices or repetition and gives that rule the
 > 8 complete / 0 pending with 54 rejected mutations. Run
 > `tools/check_repeated_action_result_five_backend.sh` for the exact proof.
 
+## Rule targets and regex slots
+
+An action edge such as `-> Middle` selects a declared regex slot on `Middle`.
+A blind edge such as `=> Middle` calls the declared rule itself, so `Middle`
+may coordinate other rules without having regexes of its own. Bare targets in
+AND mode are blind; bare targets in the default mode select action slots.
+Entry markers do not change these rules. Blind indexes and indexed bare AND
+targets remain invalid.
+
+Dart now validates this distinction. Its native, restored, plan and emitted
+controls execute no-regex direct calls and AND blind literal returns. Three
+qualified blind `.push` examples still hit an action-edge-context restriction;
+their runtime repair is separate from accepting a declared blind target.
+Portable blind-parent `LX` phase authority remains separately tracked.
+
 ## Current rule-label surface
 
 A rule label is one or more Unicode 17.0.0 `XID_Continue` characters. The class is the same at the first and later

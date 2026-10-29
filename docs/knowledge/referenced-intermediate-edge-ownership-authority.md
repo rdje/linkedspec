@@ -43,3 +43,18 @@ No production or fixture edit. Initial indexed-error assertion correction is
 an instrument refinement, not product RED. Packet perl-referenced-intermediate-
 intake.json.gz retains actual inputs/producers/source/channels/receipts.
 Canonical selection23.4.1, peers and full admission remain separate.
+
+## Dart48.3 bounded validator repair (2026-10-29)
+
+Target validation now checks only declared-rule existence for blind/bare AND,
+while action slot counts and exact errors remain. Original12/qualified12 plus4
+strict negatives independently establish6 valid compiler RED per target -> all8
+valid forms accepted,12 strict diagnostic objects unchanged. Four qualified
+runtime controls pass native/restored/plan/fresh; three .push controls still
+require an action-edge child context and are owned48.3.1 immediately next.
+All8 emitted modules load with exact v2 identity; two original healthy modules
+are reused.16 ordinary checks plus44 direct neighbors pass, selective analysis
+clean. No full runtime parity, original parent-LX authority or admission credit.
+Full failing runtime normal is retained before3 explicit exclusions that preserve
+compile coverage; next leaf must remove them after repair. Packet
+dart-referenced-intermediate-intake.json.gz retains actual sources/results/errors.

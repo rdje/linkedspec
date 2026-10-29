@@ -859,14 +859,16 @@ void _checkTarget(
     );
   }
 
+  // Blind edges call a declared rule; only action edges select its regex slot.
+  if (!regexSlotIdentity) {
+    return;
+  }
+
   final regexCount = _regexCount(targetRule);
   if (index < 0 || index >= regexCount) {
     final message =
         "rule '${owner.header.label}' references rule '$target' regex slot "
         '$index, but that rule has $regexCount regex slot(s)';
-    if (!regexSlotIdentity) {
-      throw SpecValidationException(message);
-    }
     throw SpecValidationException(
       message,
       diagnostic: SpecPortableDiagnostic(

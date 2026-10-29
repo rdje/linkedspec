@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1474** facts · **11215** question keys.
+> **1475** facts · **11217** question keys.
 
 ## Questions → fact
 
@@ -9598,6 +9598,7 @@
 - "which task follows SPEC-FORMAT-TERSE.7.3" -> [terse-array-numeric-reducer-receiver-methods](docs/knowledge/terse-array-numeric-reducer-receiver-methods.md) · 2026-10-26 · reverify: [2 entries](#terse-array-numeric-reducer-receiver-methods)
 - "which task follows SPEC-FORMAT-TERSE.7.4" -> [terse-type-method-surface-closed](docs/knowledge/terse-type-method-surface-closed.md) · 2026-07-04 · reverify: `rg -n 'SPEC-FORMAT-TERSE\\.7\\.4|type-method|Receiver-Dot Method Families|scores\\.sum|TRACE-OBSERVABILITY\\.4\\.5|frontier empty|RUST-PARITY\\.7\\.3\\.5' ROADMAP_V2.md docs/TASK_TREE.md docs/tasks/SPEC-FORMAT-TERSE.md docs/linkedspec-book/src/appendix/helper-contract-catalog.md docs/knowledge && bash tools/run_mdbook_local.sh && bash knowledge-map/scripts/check_knowledge_map.sh`
 - "which task history files are excluded from current id uniqueness" -> [current-task-id-uniqueness](docs/knowledge/current-task-id-uniqueness.md) · 2026-09-24 · reverify: `perl scripts/check_task_tree_current_ids.pl`
+- "which task implements Dart blind fluent push parent calls" -> [dart-blind-fluent-parent-push-gap](docs/knowledge/dart-blind-fluent-parent-push-gap.md) · 2026-10-29 · reverify: `Recover retained Dart probe and use the project-routed Dart wrapper; preserve original parent-LX runtime exclusions and qualified counterparts.`
 - "which task implements logical receiver counterparts" -> [logical-helper-neutral-contract](docs/knowledge/logical-helper-neutral-contract.md) · 2026-10-27 · reverify: [2 entries](#logical-helper-neutral-contract)
 - "which task isolates legacy PathSearch verification from build cache size" -> [phase0-legacy-pathsearch-generated-tree-scan](docs/knowledge/phase0-legacy-pathsearch-generated-tree-scan.md) · 2026-09-27 · reverify: `env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/legacy_pathsearch_fallback.t t/native_spec_resolution.t; env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/phase0_regression.t`
 - "which task leaves admit Perl Rust Dart Julia PUC Lua and LuaJIT typed values" -> [typed-source-location-runtime-rollout-plan](docs/knowledge/typed-source-location-runtime-rollout-plan.md) · 2026-09-07 · reverify: `bash tools/check_typed_authoring_model_six_runtime.sh`
@@ -10392,6 +10393,7 @@
 - "why does Dart accept unexpected text after a regex in a spec" -> [dart-body-suffix-omission](docs/knowledge/dart-body-suffix-omission.md) · 2026-09-09 · reverify: `Run DART_BODY_SUFFIX, the managed Dart invocation and DART_BODY_SUFFIX_VERIFY below. Assertions describe the pre-repair defect, not repair acceptance.`
 - "why does Dart adding zero change a large finite number" -> [dart-large-number-helper-corruption](docs/knowledge/dart-large-number-helper-corruption.md) · 2026-09-09 · reverify: `Run DART_NUMBER_BOUNDARY and DART_NUMBER_BOUNDARY_VERIFY below; assertions pin pre-repair output and JSON kinds.`
 - "why does Dart bare AND require a child regex slot zero" -> [dart-blind-target-regex-validation-gap](docs/knowledge/dart-blind-target-regex-validation-gap.md) · 2026-10-29 · reverify: `Recover probe_referenced_intermediate_compile.dart and candidate12 inputs under TYPE48; run via tools/run_dart_project_data.sh with the Dart project package configuration.`
+- "why does Dart blind push require an action edge child context" -> [dart-blind-fluent-parent-push-gap](docs/knowledge/dart-blind-fluent-parent-push-gap.md) · 2026-10-29 · reverify: `Recover retained Dart probe and use the project-routed Dart wrapper; preserve original parent-LX runtime exclusions and qualified counterparts.`
 - "why does Dart blind repetition minimum miss throw an interpreter error" -> [dart-ordinary-repetition-minimum-misses](docs/knowledge/dart-ordinary-repetition-minimum-misses.md) · 2026-10-28 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/minimum_miss_routes_test.dart test/repeated_and_group_results_test.dart test/sparse_and_structural_sequence_test.dart test/recognition_repetition_progress_test.dart`
 - "why does Dart capacity need an exception to the startup reading gate" -> [startup-task-chronology-compaction](docs/knowledge/startup-task-chronology-compaction.md) · 2026-09-08 · reverify: [3 entries](#startup-task-chronology-compaction)
 - "why does Dart cat clamp 1e20 to a signed integer endpoint" -> [dart-large-number-helper-corruption](docs/knowledge/dart-large-number-helper-corruption.md) · 2026-09-09 · reverify: `Run DART_NUMBER_BOUNDARY and DART_NUMBER_BOUNDARY_VERIFY below; assertions pin pre-repair output and JSON kinds.`
@@ -12120,6 +12122,14 @@ _Dart backend scaffold package lives under dart/ and has manifest IO, AST types,
 - **evidence:** `DART-BACKEND-PARITY.1.2 creates the Dart package scaffold; DART-BACKEND-PARITY.1.3 adds corpus manifest IO; DART-BACKEND-PARITY.2.1 adds dart/lib/src/ast/spec_ast.dart and JSON round-trip tests; DART-BACKEND-PARITY.2.2 adds dart/lib/src/parser/spec_parser.dart and parser fixtures; DART-BACKEND-PARITY.2.3 adds dart/lib/src/validation/spec_validator.dart and validation fixtures; DART-BACKEND-PARITY.3.1 adds typed ActionIR parsing; DART-BACKEND-PARITY.3.2 adds dart/lib/src/action/action_contracts.dart; DART-BACKEND-PARITY.3.3 adds dart/lib/src/action/function_registry.dart and exact-arity user-call classification; DART-BACKEND-PARITY.3.4 adds compiled-spec state; DART-BACKEND-PARITY.4.1 adds runtime matching; DART-BACKEND-PARITY.4.2 adds the first runtime rule interpreter; DART-BACKEND-PARITY.6.1 adds executeCorpusFixtures for controlled manifest fixtures; DART-BACKEND-PARITY.6.2.1 adds opt-in named/bounded corpus execution selection; DART-BACKEND-PARITY.6.3 enables full-manifest CLI execution and proves the checked-in 99-fixture corpus green.`
 - **reverify:** `git ls-files dart && (cd dart && bash ../tools/run_dart_project_data.sh format --set-exit-if-changed . && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && bash ../tools/run_dart_project_data.sh test && bash ../tools/run_dart_project_data.sh run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute)`
 - **source:** [`docs/knowledge/dart-backend-scaffold-package.md`](docs/knowledge/dart-backend-scaffold-package.md)
+
+### dart-blind-fluent-parent-push-gap
+_Dart blind fluent push incorrectly requires an action-edge child context_
+- **answers:** why does Dart blind push require an action edge child context | which task implements Dart blind fluent push parent calls
+- **date:** 2026-10-29 · **status:** confirmed; P1 repair48.3.1 immediately after validator48.3
+- **evidence:** `dart-referenced-intermediate-intake.json.gz retains original/qualified28-row baseline, repaired-validator runtime diagnostics, compiled action payloads and full normal RED.`
+- **reverify:** `Recover retained Dart probe and use the project-routed Dart wrapper; preserve original parent-LX runtime exclusions and qualified counterparts.`
+- **source:** [`docs/knowledge/dart-blind-fluent-parent-push-gap.md`](docs/knowledge/dart-blind-fluent-parent-push-gap.md)
 
 ### dart-blind-postcall-iteration-outcomes
 _Dart repeated blind post-call returns finish one iteration or group and retain progress diagnostics_

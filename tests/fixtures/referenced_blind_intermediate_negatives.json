@@ -1,0 +1,6 @@
+[
+  {"name":"undefined_explicit_blind","source":"Top::AND\n => Missing\n","expected_builds":false},
+  {"name":"undefined_bare_and","source":"Top::AND\n Missing\n","expected_builds":false},
+  {"name":"indexed_explicit_blind","source":"Top::AND\n => Child[0]\nChild:\n /x/\n","expected_builds":false},
+  {"name":"indexed_bare_and","source":"Top::AND\n Child[0]\nChild:\n /x/\n","expected_builds":false}
+]

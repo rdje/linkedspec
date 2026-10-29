@@ -4889,6 +4889,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl48.2.6.1 adds t/unicode_recognition_operands.t (22 groups), with scanner/lowering/runtime closure and exact negative diagnostics; canonical discovery must include it before admission.
 
+  Dart48.3 adds referenced_blind_intermediate_test.dart (16 checks); exact canonical selection must include it after48.3.1 removes the3 explicitly owned runtime exclusions.12 original compile sources, qualified runtime and4 strict negatives remain separate authority.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9548,14 +9550,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1 - honor pinned Unicode static recognition callees`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3`
-  Status: `pending` / P1 after49 before45/wider features/full23.4/push
+  Status: `completed` / P1 after49 before45/wider features/full23.4/push
   Goal: Independently assess Dart referenced no-regex intermediates against qualified48.0 and repair actual outliers or retain compatibility.
   Confirmed defect/P1:48.0 current12 compile-only sources show6 valid blind-target forms rejected at compileSpec validation with SpecValidationException requiring Middle regex slot0 despite0 slots; direct-call and real regex-action controls build. Explicit => and bare AND both route through _checkTarget regex validation in spec_validator.dart, conflating declared-rule existence with action-slot identity. Preserve unknown target/action index/blind-index diagnostics, no schema/family change. Reproduce own baseline/normal RED then repair this sole validation owner before45/admission; no peer failure inferred.
   Acceptance: Own native/descriptor/normalized/generated/fresh baseline before edits. Distinguish written action versus blind ownership, ordinary root markers/default/AND/direct-call controls and actual catalog/slot identity. Preserve finite progress, healthy metadata/errors and strict malformed input contracts; no permissive fallback or peer-based defect. Focused normal/direct dependents/book/docs/proof/commit per child; safe Lua only installed PUC5.5/LuaJIT with no unsafe formatter/full suite.
-  Planned verification tier: focused; genuinely new public policy/schema requires separate canonical ownership.
-  Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
-  Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
+  Canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
+  Claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+  Activation: clean `c8e5915bac021523b4dfb1a9aa6f34083fead96a`; Perl static Unicode closure committed/brief empty/no jobs. Recovered48.0 and qualified48.2.3 authority, all _checkTarget callers, earlier bare-AND/blind-index validators and public Dart native/JSON-restored/plan/source routes. Both blind roles pass regexSlotIdentity false but target validator still counts regexes unconditionally; action roles pass true. Own original12 and qualified runtime baseline plus unknown/blind-index negatives/normal RED before edit. Preserve original3 parent-LX runtime exclusions and exact healthy diagnostics/source/metadata; no peer or phase-policy inference.
+
+  - [x] **REPRODUCE / ISSUE**: Original12 and qualified12 plus4 strict negatives independently captured:6 valid blind forms rejected per target because Middle has0 regex slots;2 healthy per target and12 total strict rejects. New16 normal has6 observed compiler RED before edits.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _checkEdgeTargets marks blind/bare AND as non-slot identities, but _checkTarget unconditionally counts target regexes. Both action callers explicitly request slot identity. Earlier unknown/bare-index/blind-index validators remain authoritative. After compiler fix three qualified .push cases independently reveal currentEdge:null -> zero-arg push -> required action-child error, owned48.3.1 next.
+  - [x] **FIX**: Return after declared target existence when regexSlotIdentity is false; action regex range/identity/diagnostic checks remain. No parser/compiler catalog fallback, helper/phase/state/schema/family change.
+  - [x] **ADDRESSED (verified)**: All8 valid original and qualified sources compile;12 strict diagnostic objects/full fields and4 healthy source/compiled/plan artifacts exact. Qualified4 runtime controls pass native/restored/plan/fresh;8 modules load/metadata exact and2 original healthy modules reused. Three runtime parent-push rejects explicitly excluded/owned immediately next, no full-runtime credit.
+  - [x] **NO REGRESSION**:16 ordinary checks and44 validator/blind collection/postcall neighbors pass,60 distinct selected tests; selective fatal analysis clean. Full post-validator failing normal retained before exactly3 runtime exclusions; compile coverage stays. Frozen original/qualified inputs unchanged; original3 parent-LX runtime exclusions and authority owner48.2.2.1 remain. No phase/coordinator/push parity or broad admission claim.
+  - [x] **LOCKSTEP**: Packet dart-referenced-intermediate-intake.json.gz retains actual inputs/producers/RED/repaired compiler/runtime outliers/source/modules/typed errors/normal/receipts. Book/cards/map/roadmap/task/live/resume/history align. New normal exact canonical selection23.4.1 required; parent-push48.3.1 immediately next before48.4/.5/warnings/45. Authorized focused commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3 - validate blind targets by declared rule identity`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1`
+  Status: `pending` / P1 immediately after48.3 before48.4/admission
+  Goal: Implement existing blind fluent push parent-call semantics in Dart, preserving ordinary/action push roles, explicit targets, typed values and recursion/progress.
+  Reproduction/impact: After the blind validator repair, qualified blind_no_regex/marked_blind_target/markerless_blind compile but native/JSON-restored/plan execution rejects push() in rule Top requires an action-edge child context. Other4 runtime controls pass. _executeBlindOnce invokes its action payload with currentEdge:null; emitted fluent push has no arguments, _callPush takes args.isEmpty and calls _requireCurrentEdgeChild, which rejects null. Existing Perl/Rust authority injects the parent rule as the blind push callee, not the prior child value. No new ownership/phase policy; parent-LX original exclusions remain48.2.2.1.
+  Acceptance: Recover actual current28-row validator intake and full16-test intermediate normal, canonical parent-push fact/8 PIPE target and5 repeated compositions. Own independent Dart native/restored/plan/fresh RED/typed diagnostics and normal before runtime edits. Implement through existing child dispatch and mutation owners, preserving action/free push, all typed/falsey/null values, explicit target/inherited selector and recursion/progress contracts. Remove only the explicit3 runtime normal exclusions after fixing/qualifying them. Keep source/schema/metadata and diagnostic boundaries honest; no old emitted source regeneration assumption.
+  Planned verification tier: focused
+  Planned focused checks: New parent-push target, all7 qualified referenced runtime controls, direct blind postcall/collection/recursion neighbors and selective analysis/book/docs/commit.
+  Planned canonical trigger: Full23.4/final clean push after all admission prerequisites; no new policy/schema/family.
+  Planned claim verification: none: Finite authored behavior and diagnostic assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -10002,7 +10024,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3` | `pending` | Repair Dart declared blind-target validation without a regex-slot requirement. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1` | `pending` | Implement Dart blind fluent parent-push dispatch. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
