@@ -8568,13 +8568,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.0 - intake independent safe installed Lua structural and repetition gaps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1`
-  Status: `pending` / P1 after live progress .6
+  Status: `completed` / P1 after live progress .6
   Goal: Preserve authored required AND dependency steps and one selected action occurrence.
   Acceptance: Reproduce reversed/duplicate/cross failures against frozen39.0, preserve increasing local sparse structural slots and full entry/boundary catalogs; assert physical/logical identities and nearest duplicate controls.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:27active sources41inputs per host19healthy8actualRED ->27pass, same27 baseline modules/fresh consumer, exact inputs/19-control identity; normal173 structural/semantic assertions27healthy4owned dormant, live234/duplicate112 per host; book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full39/23.4/final clean push after bounded repairs and declared-host/unsafe formatter/registration/pressure/lifecycle/slot; no public schema/authority movement.
+  Claim verification: none: Finite authored source/functional/identity distinctions, no population measurement.
+
+  Activation: clean `07caa23c5f5bf629680884d7f16e9c614375c498`; exact safe installed-host required-step RED before runtime edits.
+
+
+  - [x] **REPRODUCE / ISSUE**:27active exact sources41inputs per installed PUC5.5/LuaJIT give19healthy8actualRED SDK/restored/plan and same27 fresh baseline modules. Reversed/cross local-catalog mismatch and duplicate actions sharing one hit reproduce; four other owned sources excluded without passing credit. Raw input/emitted closure retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual trace/intake shows local slot0 attempted for reversed/cross and duplicate actions run on one selected hit. interpreter.lua regex_once loops only physical catalog, gated by more than one pattern; accept_match dispatches every action sharing that physical slot. Trace/semantic derive all compiled identities without selecting the authored action occurrence.
+  - [x] **FIX**: Invocation-owned private required-step list keeps authored occurrence order for edge-only reversed/duplicate/cross dependencies; increasing local sparse/parent/mixed/no-edge paths keep complete catalogs. Each step selects one action and logical identity while matching the physical slot; one-pattern duplicates sequence too. Invariant/trace/semantic use selected identity, compiled helper/catalog unchanged.
+  - [x] **ADDRESSED (verified)**:27pass41inputs per host across SDK/restored/plan/same27 baseline modules fresh. Raw source/normalized/compiled/plan/emitted and19 healthy full observations identical. Normal173 assertions includes duplicate two hits/logical identity/semantic positions1/2, cross Part#1 at3 plus captures/cursor and strict matched-null at4;27healthy4owned dormant.
+  - [x] **NO REGRESSION**: Live234/duplicate112 nearest assertions per host pass; source compiler/emitter/matching/recognition authority/prior fixtures unchanged. Sparse structural edgeless delimiters, parent/indexed/entry/boundary/mixed/no-edge/choice and consumed cursor controls retain outcomes. No group/minimum/blind repair credit or declared5.4/unsafe formatter/full suite claim.
+  - [x] **LOCKSTEP**: lua-and-steps-intake.json.gz retains actual producers/fixtures/runtime epochs/input/SDK/fresh/trace/semantic/receipts. Book/card/target/roadmap/task/live/resume/history align. Explicit new Lua normal/canonical registration23.4.1 before admission; .2 groups next, all other prerequisites stay open. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1 - preserve Lua authored AND dependency step occurrences`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2`
   Status: `pending` / P1 after required steps .1
@@ -8948,7 +8959,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1` | `pending` | Repair Lua required AND dependency step and action occurrence ownership. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2` | `pending` | Repair Lua repeated AND group return and collection outcomes. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

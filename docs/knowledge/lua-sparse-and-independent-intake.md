@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: independent intake complete; live progress39.4.6 repaired/targeted-checked, required steps .1 next
+status: independent intake complete; live progress39.4.6 and required steps39.4.1 repaired/targeted-checked, group .2 next
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -51,3 +51,10 @@ same24 baseline modules/fresh consumer and exact input/nine-control identity.
 Current proof: [[lua-live-recognition-progress]]. Structural19healthy12owned
 dormant105 assertions; original intake packet stays frozen. Required steps .1
 next, other repairs/qualification/admission owners remain.
+
+2026-10-29 required steps .1 now preserve authored reversed/duplicate/cross
+occurrences, single selected action and logical trace/semantic identity while
+keeping full structural catalogs.27active41inputs19healthy8RED ->27pass per
+host, same27 baseline modules/19-control identity; normal173 assertions27healthy
+4owned dormant, live234/duplicate112. Current proof:
+[[lua-and-required-dependency-steps]]. Group .2 next; original intake frozen.

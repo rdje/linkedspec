@@ -34,7 +34,19 @@ for _,row in ipairs(rows) do
           check(not ok and tostring(failure):find(error_contains,1,true)~=nil,row.name..' expected error')
         end
       else
-        local native=ls.runtime_parse(ls.runtime_engine(compiled),item.input)
+        local emitter=ls.trace_emitter(ls.trace_config_enabled(ls.TRACE_HIGH),{
+          stdout_writer=function() end,
+        })
+        local semantic_slots={}
+        local native=ls.runtime_parse(ls.runtime_engine(compiled),item.input,{
+          trace=emitter,
+          semantic_observation_sink=function(event)
+            local record=ls.runtime_semantic_observation_event_to_json(event)
+            if record.event_kind=='regex_slot_selected' then
+              semantic_slots[#semantic_slots+1]=record.target_rule..'#'..record.regex_index..'@'..record.position
+            end
+          end,
+        })
         local reconstructed=ls.runtime_parse(ls.runtime_engine(ls.compile_spec(restored)),item.input)
         local plan=ls.execute_generated_parser_v2(compiled,ls.build_generated_rule_plan(compiled),item.input,'lua-sparse-intake.spec')
         check(json.encode(native.value)==json.encode(item.expected),row.name..' native value')
@@ -44,6 +56,22 @@ for _,row in ipairs(rows) do
         if row.name=='falsey_null' then
           check(native.matched==true,'selected null remains matched')
           check(native.cursor_code_unit==4,'selected null consumes full structure')
+        end
+        if (row.name=='duplicate' or row.name=='duplicate_one_slot' or row.name=='compact_duplicate') and item.input=='aa' then
+          local selected={}
+          for _,event in ipairs(ls.trace_events(emitter)) do
+            if event.topic=='lua_runtime:regex_slot_selected' then selected[#selected+1]=event.details end
+          end
+          local identity='rule_label=Value selection_role=ordered_required target_rule=Value regex_index=0'
+          check(#selected==2 and selected[1]==identity and selected[2]==identity,row.name..' two selected occurrences')
+          check(table.concat(semantic_slots,',')=='Value#0@1,Value#0@2',row.name..' semantic occurrences and positions')
+        elseif row.name=='cross_distinct_indices' and item.input=='cat' then
+          local selected={}
+          for _,event in ipairs(ls.trace_events(emitter)) do
+            if event.topic=='lua_runtime:regex_slot_selected' then selected[#selected+1]=event.details end
+          end
+          check(#selected==1 and selected[1]=='rule_label=Value selection_role=ordered_required target_rule=Part regex_index=1',row.name..' logical dependency identity')
+          check(table.concat(semantic_slots,',')=='Part#1@3',row.name..' semantic logical identity and position')
         end
         end
     end

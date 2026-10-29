@@ -4975,8 +4975,50 @@ function M.assert_ordered_regex_slot_identity(
   })
 end
 
-function M.trace_regex_slot_selected(ctx, rule, regex_index, selection_role)
-  for _, identity in ipairs(compiled_spec.compiled_regex_slot_identities_for(rule, regex_index)) do
+-- Authored dependency occurrences and complete structural catalogs have
+-- different owners. Keep this execution-only plan out of compiled/source state.
+function M.and_required_steps(rule)
+  local edge_only = #rule.action_edges > 0
+  for _, edge in ipairs(rule.action_edges) do
+    if edge.has_parent_regex or #edge.targets ~= 1 then edge_only = false; break end
+  end
+  if edge_only then
+    local increasing_local = true
+    local previous = -1
+    for _, edge in ipairs(rule.action_edges) do
+      local index = edge.child_regex_index
+      if edge.targets[1].label ~= rule.label or index <= previous or
+          index < 0 or index >= #rule.regex_patterns then
+        increasing_local = false
+        break
+      end
+      previous = index
+    end
+    if not increasing_local then
+      local steps = {}
+      for _, edge in ipairs(rule.action_edges) do
+        steps[#steps + 1] = { regex_index = edge.regex_index, action = edge }
+      end
+      return steps
+    end
+  end
+  local steps = {}
+  for index = 0, #rule.regex_patterns - 1 do
+    steps[#steps + 1] = { regex_index = index }
+  end
+  return steps
+end
+
+function M.selected_regex_slot_identities(rule, regex_index, required_action)
+  if required_action ~= nil then
+    return { { target_rule = required_action.targets[1].label,
+      regex_index = required_action.child_regex_index } }
+  end
+  return compiled_spec.compiled_regex_slot_identities_for(rule, regex_index)
+end
+
+function M.trace_regex_slot_selected(ctx, rule, regex_index, selection_role, required_action)
+  for _, identity in ipairs(M.selected_regex_slot_identities(rule, regex_index, required_action)) do
     runtime_trace_event(
       ctx,
       trace.TRACE_MARK,
@@ -5023,13 +5065,16 @@ function M.assert_recognition_repetition_progress(engine, ctx, rule_label, start
   })
 end
 
-local function accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte)
+local function accept_match(
+    engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte, required_action
+  )
   ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
   typed_source.recognition.note_match(ctx, one)
   typed_source.recognition.set_gap_phase(ctx, rule.label, "edge")
   for _, edge in ipairs(rule.action_edges) do
-    if edge.regex_index == one.alternative_index then
+    if edge.regex_index == one.alternative_index and
+        (required_action == nil or edge == required_action) then
       local edge_state = {
         edge = edge,
         target = edge.targets[1],
@@ -5070,12 +5115,12 @@ local function accept_match(engine, rule, one, ctx, accumulator, action_iteratio
   lifecycle(engine, rule, "LE", ctx, accumulator)
 end
 
-function M.emit_semantic_regex_slot(ctx, rule, one)
+function M.emit_semantic_regex_slot(ctx, rule, one, required_action)
   if ctx.semantic_observation_sink == nil then return end
   local semantic_observation = require("linkedspec.semantic_observation")
   local position = one:char_end()
   for _, identity in ipairs(
-    compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)
+    M.selected_regex_slot_identities(rule, one.alternative_index, required_action)
   ) do
     semantic_observation.deliver(
       ctx.semantic_observation_sink,
@@ -5120,8 +5165,9 @@ local function regex_once(
     )
     return false
   end
-  if execution_policy.uses_and_execution and #rule.regex_patterns > 1 then
-    for index = 0, #rule.regex_patterns - 1 do
+  if execution_policy.uses_and_execution then
+    for _, step in ipairs(execution_policy.required_steps) do
+      local index = step.regex_index
       cursor_before = ctx.cursor_byte
       local one = match_specific(engine, rule, index, ctx, execution_policy)
       trace_regex_decision(
@@ -5133,8 +5179,10 @@ local function regex_once(
           " mode=AND expected_index=" .. tostring(index)
       )
       if not one then return false end
-      local expected = compiled_spec.compiled_regex_slot_identities_for(rule, index)[1]
-      local actual = compiled_spec.compiled_regex_slot_identities_for(rule, one.alternative_index)[1]
+      local expected = M.selected_regex_slot_identities(rule, index, step.action)[1]
+      local selected_action = nil
+      if one.alternative_index == index then selected_action = step.action end
+      local actual = M.selected_regex_slot_identities(rule, one.alternative_index, selected_action)[1]
       M.assert_ordered_regex_slot_identity(
         rule.label,
         expected.target_rule,
@@ -5142,9 +5190,11 @@ local function regex_once(
         actual.target_rule,
         actual.regex_index
       )
-      M.trace_regex_slot_selected(ctx, rule, index, "ordered_required")
-      M.emit_semantic_regex_slot(ctx, rule, one)
-      accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte)
+      M.trace_regex_slot_selected(ctx, rule, index, "ordered_required", step.action)
+      M.emit_semantic_regex_slot(ctx, rule, one, step.action)
+      accept_match(
+        engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte, step.action
+      )
     end
     return true
   end
@@ -5284,6 +5334,9 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     uses_and_execution = uses_and_execution,
     uses_blind_dispatch = uses_blind_dispatch,
   }
+  if uses_and_execution and not uses_blind_dispatch then
+    execution_policy.required_steps = M.and_required_steps(rule)
+  end
   local recursion_key = label .. ":" .. entry_index .. ":" .. ctx.cursor_byte
   if ctx.active[recursion_key] then
     runtime_trace_decision(

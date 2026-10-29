@@ -340,3 +340,12 @@ nearest assertions pass per host, structural19healthy12owned dormant. Packet
 lua-live-progress-intake.json.gz retains actual closure and corrected initial
 context/consumer failures. No compiler/emitter/matching/neutral schema change;
 required steps .1 next, explicit registration23.4.1/declared5.4/admission remain.
+
+2026-10-29 Lua39.4.1 preserves authored required dependency occurrence order,
+one action/logical trace/semantic identity and full local sparse/parent/mixed/
+entry/boundary catalogs.27active41inputs19healthy8RED ->27pass per installed
+host, same27 modules/fresh consumer/exact inputs/19healthy results. Normal173
+assertions27healthy4owned dormant includes duplicate semantic positions1/2 and
+cross Part#1 at3; live234/duplicate112 neighbors pass. Runtime-only, compiler/
+emitter/matching/recognition authority/prior fixtures unchanged. Packet
+lua-and-steps-intake.json.gz retains closure; group .2 next, admission remains.
