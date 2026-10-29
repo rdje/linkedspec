@@ -30,3 +30,10 @@ nullable390/recognition207/direct nested-gap+rollback6 pass. Supplemental Dart
 normal9/fatal test analysis and public Perl native/separate emitted1/1 pass.
 Broader newer-backend fresh replay remains23.4.1-owned before admission, outside
 core8-module claim. Lua38.3 independently intakes both fixtures next.
+
+2026-10-29 Lua38.3 independently verifies core+broad9/11 per host: portable
+8/10,3healthy5RED ->8pass plus legacy1/1, nine unchanged modules fresh. Exact
+inputs/four healthy observations/legacy traces and host identity preserved.
+Normal118/nullable506/recognition246/direct gap controls6 pass. Closure retained
+in lua-gap-ls-cursor-intake.json.gz. Bounded38 complete on recorded hosts;
+declared5.4/registration/supplemental Dart+Julia broad fresh/full admission separate.

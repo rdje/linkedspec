@@ -7,7 +7,7 @@ answers:
   - "is selected-match cursor advance the same as gap boundary commit"
   - "what is the shared early LS cursor repair target"
 date: 2026-10-29
-status: shared38.0/Dart38.1/Julia38.2 targeted-checked; independent Lua38.3 next
+status: bounded38 authority and three backend repairs targeted-checked on recorded hosts; full admission separate
 tags: [cursor, lifecycle, LS, capture-gaps, mutation, authority, qualification]
 evidence: "gap-ls-cursor-authority-intake.json.gz retains public Perl8sources10inputs native/separate emitted process exact values/cursors/typed error fields; portable7sources9inputs plus unflagged compatibility1/1, current neutral checker and exact producers/receipts."
 reverify: "Recover prepare_gap_ls_cursor.py and probe_gap_ls_cursor_reference.pl from the packet; run Perl native and --fresh separately through tools/project_data_run.sh, then read_gap_ls_reference.py. Run tools/check_inter_match_gap_capture_contract.py through tools/run_python_project_data.sh."
@@ -56,3 +56,11 @@ payload/gap span/cursor6. Supplemental Dart/Julia broad fresh emission is not
 part of the core8-module claim;23.4.1 owns it before admission. Lua38.3 will
 independently include core and broad from RED. Current proof:
 [[julia-gap-early-ls-return-cursor-drift]].
+
+2026-10-29 Lua38.3 independently intakes core+broad9sources11inputs per host:
+portable8/10 has3healthy5RED ->8pass plus legacy1/1. Nine baseline modules fresh,
+exact inputs/four healthy outcomes/legacy traces and host identity preserved.
+Normal118/qualified nullable506/recognition246/nested-gap+rollback6 pass per host.
+[[lua-gap-early-ls-return-cursor-drift]] retains actual closure. Bounded38 is
+complete on recorded hosts; normal Lua registration, supplemental Dart/Julia broad
+fresh replay and declared5.4/full admission remain separate before push.

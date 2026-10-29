@@ -4835,6 +4835,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Selected cursor38 adds dart/test/fixtures/gap_ls_broad_carrier.json as the original wildcard-carrier acceptance supplement. SDK/restored/plan current Dart/Julia proof is explicit; require actual separate-process Dart/Julia emitted replay of this supplemental1/1 before full admission/push. Existing core8-module fresh proof does not include it. Lua38.3 intake will include core plus broad from its RED epoch; exact new Lua normal registration remains required.
 
+  Lua cursor38.3 requires exact ordinary/canonical registration of lua/test/gap_ls_selected_cursor_test.lua. It reads core+broad fixtures and passes118 assertions per installed host; direct nullable506/recognition246/gap controls6 are focused proof, not runner registration/full admission. Nine baseline modules per host include broad from RED and fresh; supplemental Dart/Julia broad emitted replay remains independently required.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -7587,11 +7589,13 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored defect/source evidence, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38`
-  Status: `in_progress` / P1 after bounded33/35/34 before37/full23.4 admission/push
+  Status: `completed` / bounded recorded-host implementation; full admission separate / P1 after bounded33/35/34 before37/full23.4 admission/push
   Goal: Reconcile and repair independently confirmed Dart/Julia/Lua selected-match live cursor state before early LS return under capture_gaps.
   Reproduction: Exact Hcat source/producers retained in active-edge-body-dart-intake.json.gz. Top matches H, calls Value, then returns payload and caller cursor. Value selects cat under capture_gaps; LS returns gap text, match text and live cursor. Perl native/fresh returns[[empty,cat,4],4]; Dart native/plan returns[[empty,cat,1],1]. Untargeted candidates do not compete in this control, isolating cursor state from36's repair.
   Root / impact: _prepareGapCandidate installs selected registers and gap context but not cursorCodeUnit; _acceptRegexMatch writes selected end only after LS. Early LS return unwinds before that assignment, leaving caller at the entry boundary; broad incoming patterns may reconsume remaining input and append null payloads. No cursor code changed by36.2. Preserve exact return authority, gap boundary commit/discard, rollback and authored LS cursor mutations when reconciling the narrow repair.
   Children:38.0 shared authority/target,38.1 Dart,38.2 Julia and38.3 safe dual-host Lua independently confirmed repairs before admission.
+
+  Bounded completion:38.0 authority, Dart38.1/Julia38.2/safe dual-host Lua38.3 are independently targeted-checked; original broad acceptance supplement is explicit. Full23.4 retains declared-host/registration and supplemental Dart/Julia broad fresh replay; no blanket full portable admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.0`
   Status: `completed` / P1 after34 before38.1/37
@@ -7656,14 +7660,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.2 - advance Julia selected cursor before capture-enabled LS`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.3`
-  Status: `pending` / P1 after shared38.0 and peer38.1/.2, before37/full23.4/push
+  Status: `completed` / P1 after shared38.0 and peer38.1/.2, before37/full23.4/push
   Goal: Repair independently confirmed safe Lua early-LS selected-match live/caller cursor drift on installed PUC/LuaJIT hosts.
   Reproduction: Exact Hcat source matches the Perl oracle. Both hosts/native/restored SpecFile/plan/fresh module return[[empty,cat,1],1] instead of reference native/fresh[[empty,cat,4],4]. Source/channels retained in active-edge-body-lua-intake.json.gz. No competing untargeted pattern exists;36.4 leaves cursor code unchanged.
   Root / acceptance: M.prepare_gap_candidate installs local registers/context but accept_match advances the live cursor only after LS. Reuse shared38.0 live-cursor versus gap-boundary/return/rollback/authored-mutation authority. Correct4/4 plus original broad-carrier values must pass, preserve sole recognition/frame/cursor owner and chunk-local limits, run safe focused dependents, update book/docs and commit before admission. Do not bless1/null suffixes or claim declared5.4 execution.
-  Planned verification tier: focused
-  Planned focused checks: Exact dual-host four-route RED/GREEN and safe direct-dependent lifecycle/return/cursor/rollback/source controls, loadfile/normal registration/book continuity; no malformed patterns/full suite.
-  Planned canonical trigger: Full23.4/final clean push requires verified38 repair and separately owned declared-host proof.
-  Planned claim verification: none: Finite authored safe functional/source regression, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent9sources11inputs per installed host portable8/10,3healthy5actualRED ->8pass plus legacy1/1. SDK/restored/full value/matched/character cursor/typed errors, same9 modules fresh and exact inputs/four healthy outcomes/legacy traces; cross-host input/result/trace/fresh identity. Normal118/nullable506/recognition246/direct nested-gap+rollback6 per host, book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after phase/lifecycle/slot/pressure/registration/declared5.4/unsafe formatter/Dart SDK prerequisites. New Lua normal registration and supplemental Dart/Julia broad fresh playback23.4.1 required; no public format/infrastructure movement.
+  Claim verification: none: Finite authored safe selected-cursor/rewind/broad/rollback distinctions, no population measurement.
+
+  Activation: clean `06282b0771a2d4fe722feab6309d25af3d9f8881`; shared38.0 plus original broad target and canonical Lua gap-preselection/accept owners reviewed. Independent dual-host SDK/restored/plan/fresh RED before mutation, core and broad included from intake.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent9sources11inputs per installed PUC5.5/LuaJIT includes original broad carrier from RED: portable8/10 has3healthy5actualRED plus legacy1/1. Early and normal LS read preselected entry cursor, acceptance resets rewind, repeated rewind bypasses commit regression and broad carrier appends null suffixes. SDK/restored/plan/fresh/full native traces retained before edits, no peer inference.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: M.prepare_gap_candidate installs selected registers/candidate but not ctx.cursor_byte; accept_match assigns match end after LS. Whole return skips advance while normal continuation overwrites authored mutation. Exact shared cursor/rewind/commit/broad oracles distinguish all observed mechanisms.
+  - [x] **FIX**: Advance existing live cursor in flagged preselection, carry existing private match_preselected to accept_match after optional required_action, and skip redundant end write for that preselected match. Keep ordinary/AND acceptance advance, whole-return/nullable provenance, registers, sole gap/recognition owner and separate post-LE commit/regression guard unchanged.
+  - [x] **ADDRESSED (verified)**:8portable/10inputs pass plus legacy1/1 per host SDK/restored value/matched/character cursor/typed diagnostics and same9 baseline modules fresh public outcomes. Exact raw/normalized/compiled/plan/emitted and four healthy source observations/legacy traces preserved, host inputs/results/traces/fresh identical. Hcat4/prefix5/emoji scalar5, rewind1/typed repeated commit regression and broad one payload/span/cursor6 without null suffixes verified.
+  - [x] **NO REGRESSION**: Normal118/qualified nullable506/recognition246 and six nested-gap/rollback assertions pass per host. Two nullable blind_LE phase inputs remain unqualified/owned, no passing credit. Compiler/emitter/matching/recognition authority/schema unchanged; declared5.4/unsafe formatter/full phase/full component/admission/performance unclaimed.
+  - [x] **LOCKSTEP**: Packet lua-gap-ls-cursor-intake.json.gz retains producers/epochs/inputs/runtime/SDK/fresh/trace/modules/direct controls/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. Bounded38 complete on recorded hosts, new Lua consumer registration and supplemental Dart/Julia broad emitted replay remain23.4.1 before admission. P1 Perl boundary37 next; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.3 - advance Lua selected cursor before capture-enabled LS`.
+
+  History: exact committed suffix/hash/bytes, prior manifest rows and retained prefix verified for `docs/history/changes/segment-4947-7de5da102dd9.md`; no cap change/history loss.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39`
   Status: `in_progress` / sparse-AND authority39.0 after bounded name/range work, before38/37/full23.4/push
@@ -9229,7 +9246,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.3` | `pending` | Independently repair safe Lua capture-enabled LS selected-match live cursor. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.37` | `pending` | Preserve boundary catalogs in independently emitted Perl descriptor reconstruction. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

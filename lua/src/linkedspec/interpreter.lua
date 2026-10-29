@@ -5096,9 +5096,10 @@ function M.assert_recognition_repetition_progress(engine, ctx, rule_label, start
 end
 
 local function accept_match(
-    engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value, required_action
+    engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value, required_action,
+    match_preselected
   )
-  ctx.cursor_byte = one.byte_end
+  if not match_preselected then ctx.cursor_byte = one.byte_end end
   ctx.registers = ctx.registers:with_local_match(one)
   typed_source.recognition.note_match(ctx, one)
   typed_source.recognition.set_gap_phase(ctx, rule.label, "edge")
@@ -5169,6 +5170,8 @@ end
 function M.prepare_gap_candidate(rule, one, ctx)
   M.trace_regex_slot_selected(ctx, rule, one.alternative_index, "choice")
   M.emit_semantic_regex_slot(ctx, rule, one)
+  -- LS observes the selected end; gap-boundary commit still follows LE.
+  ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
   typed_source.recognition.note_match(ctx, one)
   typed_source.recognition.install_gap_candidate(ctx, rule.label, one.byte_start)
@@ -5269,7 +5272,10 @@ local function regex_once(
     )
     M.emit_semantic_regex_slot(ctx, rule, one)
   end
-  accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value)
+  accept_match(
+    engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value, nil,
+    match_preselected
+  )
   return true
 end
 
