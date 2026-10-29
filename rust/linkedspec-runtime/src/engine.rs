@@ -9693,6 +9693,28 @@ impl Engine {
                 }
             }
             "capture_take" => {
+                if args.len() == 1 {
+                    let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                    if !ctx.match_present {
+                        return Ok(RuntimeValue::Undef);
+                    }
+                    let cursor = ctx.pos;
+                    return Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
+                        Some(mark) => match ctx.typed_span_text_from_bytes(
+                            mark,
+                            ctx.match_start_byte,
+                            rule_label,
+                            name,
+                        ) {
+                            Some(text) => {
+                                ctx.typed_mark_set(rule_label, mark_name, cursor, name);
+                                RuntimeValue::Scalar(text)
+                            }
+                            None => RuntimeValue::Undef,
+                        },
+                        None => RuntimeValue::Undef,
+                    });
+                }
                 // text capture_start→match-START; advance capture_start to the
                 // cursor (Contracts.pm CAPTURE_SLICE_TAKE, `$IPOS = pos $$STRING`).
                 if !ctx.match_present {
@@ -9893,6 +9915,9 @@ impl Engine {
                 // mark → match-START (was match-END before .5.5.3; fixed for Perl
                 // parity — `capture_from` is a non-cursor reader).
                 let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
                     Some(mark) => ctx
                         .typed_span_text_from_bytes(mark, ctx.match_start_byte, rule_label, name)
@@ -9903,6 +9928,9 @@ impl Engine {
             }
             "capture_len_from" => {
                 let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 Ok(match ctx.typed_mark_byte(rule_label, &mark_name, name) {
                     Some(mark) => ctx
                         .typed_span_length_from_bytes(mark, ctx.match_start_byte, rule_label, name)
@@ -9969,6 +9997,9 @@ impl Engine {
                 // length mark→match-START; advances the mark to the cursor
                 // (Contracts.pm CAPTURE_TAKE_LEN_FROM_MARK).
                 let mark_name = self.resolve_bare_identifier_at(raw_args, args.first(), 0);
+                if !ctx.match_present {
+                    return Ok(RuntimeValue::Undef);
+                }
                 let cursor = ctx.pos;
                 let end = ctx.match_start_byte;
                 match ctx.typed_mark_byte(rule_label, &mark_name, name) {

@@ -7,7 +7,7 @@ answers:
   - "must mark-name expressions run when a capture endpoint is unavailable"
   - "which task owns named capture endpoint absence and overload repairs"
 date: 2026-10-29
-status: Perl47.1 named endpoint/range repair focused-verified; independent47.2-.5/writer49/wider42.3/selection/full admission separate
+status: bounded Perl47.1/Rust47.2 named endpoint and Rust named take repair verified; independent47.3-.5/writer49/selection/full admission separate
 tags: [capture, named, endpoint, absence, overload, mutation, arguments]
 evidence: "TYPE47.0 named-capture-endpoint-authority-intake.json.gz retains15 normative sources, independent Perl7healthy8RED/native8-7 and Dart2healthy13RED, full source/module/metadata/result/state/lowering and separate writer49 discovery."
 reverify: "Recover probe_perl_named_capture_endpoint.pl and Dart native/fresh probes plus read_named_capture_endpoint_authority.py from47.0 packet; run project wrappers. Initial16 includes separate writer49 source, normative fixture15 excludes it. Read named-capture-endpoint-presence-authority.md before producer edits."
@@ -44,3 +44,13 @@ historical pre-repair epochs. Old15 modules retain original outcomes in30 calls
 and require regeneration. [[perl-named-capture-endpoint-presence-repair]] retains
 actual proof/limits. Peers/writer49/wider domains/canonical selection/admission
 remain independent; no new helper/key/schema/frame or argument-role policy.
+
+2026-10-29 Rust47.2 independently repairs11 named endpoint/origin groups using
+existing match_present, evaluated name resolver and typed mark/span store; four
+healthy groups preserved and all15 pass SDK/reconstructed/plan/separate compiled
+emitted. Named text take now uses/advances only its named origin, anonymous zero-
+arg unchanged. Endpoint1/anonymous1/named Number-scope-function7 pass9 tests;
+source/serde/plan/emitted/public metadata exact, old modules relink without
+regeneration. [[rust-named-capture-endpoint-presence-repair]] retains actual
+producers/normal RED/format/temp cleanup/lock/diagnostic limits. No new state/
+frame/schema/helper/domain/arity policy;47.3-.5/49/48/45/admission remain independent.

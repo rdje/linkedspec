@@ -6,7 +6,7 @@ answers:
   - "can Rust named capture widths feed String and Array methods"
   - "which named Number Rust contexts are verified before callable scope repair"
 date: 2026-10-28
-status: bounded ordinary34.2 and callable scope43.1 targeted-checked; full context admission open
+status: bounded Perl47.1/Rust47.2 named endpoint and Rust named take repair verified; independent47.3-.5/writer49/selection/full admission separate
 tags: [rust, marks, number, fluent, arguments, callback, scope]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.2 at clean f213bb463; named-mark-number-rust-intake.json.gz retains28-source and two public scope-control epochs, normal and explicit RED outputs."
 reverify: "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test named_mark_number_results --test complete_named_mark_contract -- --test-threads=1"
@@ -32,3 +32,13 @@ regressions. Helper/tree/nested and returned-callback call-time controls pass
 against retained RED; [[rust-callable-named-mark-scope-gap]] records the exact
 repair, cleanup/diagnostic/function proof and limits. Historical gap descriptions
 above remain before-state evidence; Dart34.3 resumes independently.
+
+2026-10-29 Rust47.2 independently repairs11 named endpoint/origin groups using
+existing match_present, evaluated name resolver and typed mark/span store; four
+healthy groups preserved and all15 pass SDK/reconstructed/plan/separate compiled
+emitted. Named text take now uses/advances only its named origin, anonymous zero-
+arg unchanged. Endpoint1/anonymous1/named Number-scope-function7 pass9 tests;
+source/serde/plan/emitted/public metadata exact, old modules relink without
+regeneration. [[rust-named-capture-endpoint-presence-repair]] retains actual
+producers/normal RED/format/temp cleanup/lock/diagnostic limits. No new state/
+frame/schema/helper/domain/arity policy;47.3-.5/49/48/45/admission remain independent.

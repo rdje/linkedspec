@@ -92,3 +92,19 @@ affected emitted parsers. Warning eval ordinals normalize and raw host error tex
 is excluded only where typed fields exist; full raw channels retained. Packet
 perl-named-capture-endpoint-intake.json.gz retains closure. No new helper/key/schema/
 frame/runtime/writer policy; independent47.2-.5/49/48/45/selection/admission remain.
+
+## Rust repair47.2 (2026-10-29)
+
+Three named match-start branches now require existing match_present after name
+resolution. One-argument capture_take uses the existing named mark/typed span
+and advances only that mark, leaving anonymous zero-argument behavior intact.
+No new state/frame/schema/helper/domain/arity or compiler/emitter change. Independent
+15-source SDK/reconstructed/plan/separate compiled emitted4healthy11RED ->15pass;
+normal1 harness33 bad route observations ->pass. Endpoint1/anonymous1/named Number-
+scope-function7 tests pass9; changed engine/new normal format clean. Four healthy
+observations/source/serde/plan/emitted/public metadata exact. Same15 baseline source
+modules relink against updated runtime: rebuild apps, no regeneration. Fresh/native
+lock identities match; dependency diagnostics remain opaque. Actual red/final
+producer and initial logging-only format correction retained, temporary probe
+verified/archived/removed, no normal allocator. Packet rust-named-capture-endpoint-intake.json.gz
+retains closure. Independent47.3-.5/49/48/45/selection/admission remain separate.

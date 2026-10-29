@@ -4853,6 +4853,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl named endpoint47.1 adds t/named_capture_endpoint_absence.t using frozen15-source fixture; ordinary native/fresh target15 plus range11/Number3 groups verified, exact canonical presence/selection remains required before admission/push. Old emitted modules remain v2 accepted with original defects and require regeneration; no stale-artifact repair credit.
 
+  Rust named endpoint47.2 adds rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs; ordinary Cargo discovery/three SDK routes and retained separately compiled emitted sources pass, exact canonical selection remains required before admission/push. Runtime relink consumes unchanged source, temporary probe removed; no writer49/peer/full admission credit.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9072,13 +9074,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.1 - guard Perl named capture endpoints and readonly ranges`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.2`
-  Status: `pending` / P1 after47.0 before48/45/full23.4/push
+  Status: `completed` / P1 after47.0 before48/45/full23.4/push
   Goal: Independently assess and repair confirmed Rust named endpoint/absence/overload outliers against frozen47.0.
+  Activation: clean `e324916dbc5a2e12293898eb5edc75a2d9b3eef7`; Perl47.1 committed/brief empty, all jobs terminal. Read frozen15 target, current Rust mark-based/Number/callable-scope facts and existing public SDK/generated probe/normal conventions. Independently execute native/reconstructed/plan/separate emitted before producer changes, preserve names/anonymous overload/available endpoints/source/scope and static GeneratedPlanRow labels Top/Child/End/Cat. No peer failure inference or dependency implementation inspection. Supplied policy read-only identities rechecked unchanged against canonical provenance.
   Acceptance: Establish own native/restored/plan/fresh supported baseline before edits; repair only actual outliers or retain compatibility proof. Preserve available cursor/rest/between/writers, missing/reversed/real zero/Unicode, existing anonymous zero-arg and named take overloads, ordered accepted names and valid-only mark mutation through existing sole owners. No peer-failure inference, new helper/key/schema/frame policy or unsafe/undeclared-host claim. Focused normal regression/book/docs/proof/commit per child before admission.
-  Planned verification tier: focused
-  Planned focused checks: Frozen named RED/GREEN/healthy/state/name-effect/full-source/metadata and direct named/anonymous/range/function dependents per backend; safe Lua uses installed PUC5.5/LuaJIT, no unsafe formatter/full suite.
-  Planned canonical trigger: Full23.4/final clean push after47/48/45 and existing prerequisites; canonical selection23.4.1 includes each new normal.
-  Planned claim verification: none: Finite authored named capture functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent15-source SDK/reconstructed/plan/separate emitted4healthy11RED ->15pass; normal1 harness33 route failures ->pass. Three integration targets pass9 tests (endpoint1/anonymous1/named Number-scope-function7); exact four healthy observations/source/metadata and old15 source bytes preserved, locked dependencies match. Changed-file formatting/book/map/history/manual continuity; temporary probe archived/removed.
+  Canonical trigger: Full23.4/final clean push after47.3-.5/49/48/45 and existing prerequisites; exact new normal selection23.4.1 remains. No helper/domain/schema/frame/infrastructure or public policy movement.
+  Claim verification: none: Finite authored named endpoint/origin/name-effect/zero/cursor/metadata assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent current15-source native/reconstructed/plan/separate compiled emitted baseline has4 healthy11RED; ordinary1 harness records33 bad route observations across11 sources. Full source/compiled/serde/plan/emitted/result/public metadata and root I debug retained. No peer-derived failure or direct native final-cursor claim; cursor evidence is authored readers in payload.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: engine.rs named text/width/take-width project match_start_byte without existing match_present. capture_take ignores its one named argument, reads/mutates anonymous capture_start even when returned text coincidentally matches. Existing argument vector is evaluated before call_helper; raw symbol/actual-value resolver and typed mark store already own names/scope. Actual state/empty/independent-origin/name effects distinguish both defects.
+  - [x] **FIX**: Three named branches resolve names then require match_present. One-argument capture_take resolves the same name owner, requires present match/valid named typed text span and advances only the named mark; existing anonymous branch remains. No new state/frame/owner/schema/helper/domain/arity policy or emitter/compiler change, function/context ownership retained.
+  - [x] **ADDRESSED (verified)**: All15 pass SDK/reconstructed/plan/separate compiled emitted with correct null/real zero/Unicode/name effects/named versus anonymous state. Original4 healthy observations and exact source/parsed/compiled/serialized/plan/emitted/public metadata unchanged. Same15 baseline emitted source modules relink against updated runtime and pass; existing applications need rebuild, no source regeneration.
+  - [x] **NO REGRESSION**: Endpoint1/anonymous1/named Number-scope-function7 integration tests pass9. New normal/engine format clean; temporary logging expansion corrected before green source and both actual producer epochs retained. Fresh lock identities/checksums match native. Dependency build diagnostics retained opaquely, no implementation/pin inspection/repair. Supplied policy hashes rechecked read-only unchanged; no donor update or broad adoption claim.
+  - [x] **LOCKSTEP**: Packet rust-named-capture-endpoint-intake.json.gz retains actual producers/runtime patch/before+after/normal RED/current/source/fixture/modules/fresh crate/locks/traces/tests/receipts. Temporary probe verified/snapshotted/removed; normal consumer has no allocator. Book/cards/map/target/roadmap/task/live/resume/history align, canonical selection23.4.1 before admission. Independent47.3 Dart then47.4-.5/49/48/45; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.2 - preserve Rust named capture endpoint presence and take origins`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.3`
   Status: `pending` / P1 after47.0 before48/45/full23.4/push
@@ -9534,7 +9546,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.2` | `pending` | Independently assess Rust named endpoint/absence/overload behavior against frozen47.0. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.3` | `pending` | Repair independently confirmed Dart named endpoint/absence and named text-take origin outliers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

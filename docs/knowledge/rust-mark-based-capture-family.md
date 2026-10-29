@@ -11,7 +11,7 @@ answers:
   - "what does mark_input_start / mark_input_end store in the Rust engine"
   - "how does the mark-based capture family work in the Rust engine"
 date: 2026-09-07
-status: historical endpoint fix confirmed; current typed projection reconciled
+status: bounded Perl47.1/Rust47.2 named endpoint and Rust named take repair verified; independent47.3-.5/writer49/selection/full admission separate
 tags: [rust, engine, runtime, capture, marks, RUST-PARITY]
 evidence: "RUST-PARITY.5.5.3 (2026-06-16): rust/linkedspec-runtime/src/engine.rs call_helper arms for capture_from (fixed), capture_len_from, capture_until_cursor_from(+_len), capture_take_until_cursor_from(+_len), capture_take_len_from, capture_rest_from(+_len), capture_take_rest_from(+_len), capture_between, capture_len_between, mark_input_start, mark_input_end, mark_copy; span_text/span_char_len helpers. Authoritative contract: perl/LinkedSpec/ActionIR/Contracts.pm ~690-1047. 223/223 tests green (207 baseline + 16 helpers_5_5_3_*)."
 reverify: "bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test typed_source_location_contract"
@@ -76,3 +76,13 @@ the admitted native projection suite.
 - Files: `rust/linkedspec-runtime/src/engine.rs`,
   `perl/LinkedSpec/ActionIR/Contracts.pm`,
   `docs/linkedspec-book/src/appendix/helper-contract-catalog.md`
+
+2026-10-29 Rust47.2 independently repairs11 named endpoint/origin groups using
+existing match_present, evaluated name resolver and typed mark/span store; four
+healthy groups preserved and all15 pass SDK/reconstructed/plan/separate compiled
+emitted. Named text take now uses/advances only its named origin, anonymous zero-
+arg unchanged. Endpoint1/anonymous1/named Number-scope-function7 pass9 tests;
+source/serde/plan/emitted/public metadata exact, old modules relink without
+regeneration. [[rust-named-capture-endpoint-presence-repair]] retains actual
+producers/normal RED/format/temp cleanup/lock/diagnostic limits. No new state/
+frame/schema/helper/domain/arity policy;47.3-.5/49/48/45/admission remain independent.
