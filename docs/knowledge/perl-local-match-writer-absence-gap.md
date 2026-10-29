@@ -6,7 +6,7 @@ answers:
   - "why do Perl match-position writers warn in an initial I handler"
   - "which task owns unavailable local-match mark writer semantics"
 date: 2026-10-29
-status: P1 TYPE49 after47 before48/45/wider features/full admission; authority/repair/peers pending
+status: target49.0 frozen; Perl15-source7healthy8RED owned49.1, independent peers/admission separate
 tags: [perl, marks, writer, absence, match, warning]
 evidence: "TYPE47.0 named-capture-endpoint-authority-intake.json.gz retains initial16-source writer discovery, actual Perl native/fresh clean+seeded and Dart SDK/separate VM; named-capture-writer-absence-diagnostic.json stores exact diagnostic-only record."
 reverify: "Recover initial16 fixture and probe_perl_named_capture_endpoint.pl from the47.0 packet under an owning leaf; use project-routed Perl native/fresh modes. Qualified normative47 read/take fixture deliberately excludes this separately owned writer source."
@@ -28,3 +28,16 @@ P1 TYPE49 owns independent target/backend assessments and every confirmed repair
 after47 before48/45/wider features/full admission.47 preserves this actual writer
 discovery separately rather than silently selecting a new writer policy or
 counting it as normative read/take coverage. No peer failure/repair credit.
+
+## Writer target49.0 (2026-10-29)
+
+Frozen15 local-match writer cases distinguish unchanged seeded targets from clear
+and fresh missing targets from invalid/fabricated writes. Names finish once before
+endpoint qualification, their own effects survive. Real empty/zero/Unicode and
+local versus moved live cursor remain valid. Existing Perl root entry coordinates
+are valid without entry text; preserve that documented IPOS boundary fallback
+separately, never apply local-match absence policy to it. Independent Perl native/
+fresh clean+seeded7healthy8RED; Dart SDK/restored/plan/separate VM15pass. Public10
+writer bodies and full source/errors/warnings/results/modules/metadata/traces
+retained. Production unchanged;49.1-.5 own independent repairs/compatibility before
+48/45/admission. See [[named-writer-endpoint-presence-authority]].

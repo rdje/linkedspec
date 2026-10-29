@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe Lua named endpoints/origins already compatible:15pass/436 checks per host; writer49 next.
+Writer49.0 target qualified; Perl49.1 repair next, entry compatibility preserved.
 
 ## Latest Completed Slice
 
-Installed PUC Lua5.5 and LuaJIT2.1.1788460057 independently pass all15 named endpoint/origin sources on native/restored/plan/separate-process emitted routes. Existing explicit named capture_take dispatch, evaluated name owner, nullable local-match endpoint and valid-only typed span/mark update already satisfy the target; no runtime repair or invented product RED. Named105/anonymous112/named Number-function-scope219 checks pass436 per host with empty stderr and syntax loads. One deliberately wrong root empty-text oracle fails3 value routes per host with102pass; actual fixture/runtime untouched. Source/normalized/compiled/plan/emitted/full metadata/results/traces retained, no regeneration needed. New normal registered in run.lua, exact canonical selection23.4.1 remains; no unsafe formatter/full Lua suite/declared5.4/dependency-isolation claim. Packet lua-named-capture-endpoint-intake.json.gz retains actual producers/current normal/rival/runtime/emitter/fixtures/modules/native build wrappers/logs/receipts. Book/cards/map/target/roadmap/task/live/resume/history align. Bounded47.0-.5 feature work targeted-checked, parent admission remains open. Writer49 then referenced-blind48/Phase0 owner45 precede wider features/full23.4/push; authorized focused commit/no full gate/push.
+Frozen15 local-match writer target composes existing named writer/current-match/typed-position and ordered String-word name contracts. An unavailable local endpoint performs no write: missing targets stay absent, existing targets survive, and accepted name-expression effects finish once. Real empty/zero/Unicode matches write actual edges; moved live cursor is independent. Existing documented Perl root entry-boundary fallback remains valid without entry text, so entry writers retain that compatibility rather than borrowing local-match absence policy. Independent current Perl native/separate clean+seeded has7healthy8RED; Dart native/restored/plan/separate VM15pass, explicitly distinguishing no-op from clearing with seeded marks. Public10 writer substitution bodies retain exact helper identities: Perl local start uses raw LSPOS-length(LMATCH), local end raw LSPOS; both lack presence qualification. Entry start uses its already-qualified absent-width fallback and entry end IPOS. No production change/validator weakening/new helper/domain/schema/frame or new policy. Packet named-writer-absence-authority-intake.json.gz retains actual producers/candidate+frozen fixture/public bodies/full source/modules/results/errors/warnings/metadata/traces and canonical entry authority inputs. Initial reader reused a prior pure-comparison producer through runpy; accepted reader is self-contained and reproduces identical classification without that extra replay. Book/cards/map/target/roadmap/task/live/resume/history align,49.1-.5 own independent backend fixes or compatibility before48/45/wider features/admission. Authorized focused commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.49 from clean safe Lua47.5. Recover named-capture-writer-absence-diagnostic.json, retained initial16 writer source/native+fresh warning channels, neutral complete named-mark contracts and Knowledge Map facts. Freeze missing entry/local writer behavior from existing authority, especially preexisting-target no-op versus clear and name effects, before editing; split qualification/independent backend repairs into bounded owned children first. Reproduce through public own tools/source substitution, never weaken the validating mark frame or invent zero offsets. Then focused normal/book/docs/proof/commit per repair, followed by referenced-blind48 and exact Phase0 owner45.47 parent admission, canonical selection23.4.1/pressure20.1/declared hosts/phase/Dart SDK and broader prerequisites remain before full23.4/final clean push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.49.1 from clean49.0. Recover frozen named-writer-endpoint-presence-authority.md and15-source named_writer_endpoint_absence.json, current Perl7healthy8RED native/fresh clean+seeded and10 public writer bodies. Reverify current baseline before production; add focused normal RED. Repair only mark_match_start/end missing local endpoints through existing named writer factory after accepted names, no extra write/delete/trace on unavailable endpoint and no weakened frame guard. Preserve valid empty/zero/Unicode, cursor independence, entry/IPOS fallback, other8 writer bodies, named read/take/domain/scope/function owners. Compare new versus old emitted bytes/metadata and actual stale-module behavior, run quick writer/named/entry checks/book/docs/commit. Then49.2 Rust/49.3 Dart/49.4 Julia/49.5 safe Lua,48/45 before wider features/full23.4/push. Selection23.4.1/pressure20.1/declared hosts/phase/deprecations stay owned.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.49.0` — Writer49.0 target qualified; Perl49.1 repair next, entry compatibility preserved.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.5` — Safe Lua named endpoints/origins already compatible:15pass/436 checks per host; writer49 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.4` — Julia named take repaired:15pass/385 focused assertions; safe Lua47.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.47.3` — Dart named endpoints/origins repaired:15pass/36 focused tests; Julia47.4 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.49 from clean safe Lua47.5. Recover named-
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.2` — Rust capture endpoints repaired; independent Dart intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1` — Perl capture endpoints repaired; independent Rust intake next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46` — Daily safe cleanup complete; resume Perl capture endpoint implementation.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.40.0` — Capture endpoint target grounded; independent Perl repair next.
 
 ## History
 

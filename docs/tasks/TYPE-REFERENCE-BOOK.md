@@ -9159,7 +9159,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.5 - lock safe Lua named capture endpoint and origin compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49`
-  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Status: `in_progress` / P1 after47 before48/45/wider features/full23.4/push
   Goal: Qualify unavailable local-match mark-writer authority and repair confirmed Perl missing-state warning/mark creation.
   Reproduction:47.0 initial16-source public native/fresh control clears fresh_start/fresh_end, then calls mark_match_start/end with no local match in Top I. Perl reports mark_exists1/1 with frame cleanup warning that a mark offset must be a nonnegative integer; fresh clean+seeded also emits two uninitialized subtraction warnings. Dart SDK/restored/plan/separate VM reports0/0. mark_here/mark_capture_slice and moved live cursor remain0/0/2 with cursor2 on αβEND. Exact writer source/native/fresh clean+seeded/SDK/generated/warnings retained in named-capture-endpoint-authority-intake.json.gz and named-capture-writer-absence-diagnostic.json. No writer target or peer repair inferred from this single control.
   Root / impact: Public emitted writer bodies assign raw LSPOS/LMATCH-derived offsets despite their absent invocation-local values; the actual uninitialized subtraction and frame cleanup nonnegative-integer guard expose invalid stored mark state. The writer primitive needs presence qualification; do not weaken frame validation or normalize missing data to zero. Existing typed position/mark and neutral writer contract must determine no-op versus clearing semantics, including already-present targets, before changing writer bodies.47 keeps this diagnostic outside its normative read/take target.
@@ -9168,6 +9168,70 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact writer source/absence/presence/state/name-effect/native/fresh/metadata/warning RED/GREEN and existing neutral writer/mark neighbors; no routine full suite.
   Planned canonical trigger: Full23.4/final clean push after49/48/45 and all prerequisite selection/policy/host repairs.
   Planned claim verification: none: Finite authored public writer discrepancy and warning, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.0`
+  Status: `completed` / P1 after47 before48/45/wider features/full23.4/push
+  Goal: Qualify existing local-match mark-writer availability/no-op/name-effect authority and freeze a bounded target without changing entry-boundary policy.
+  Activation: clean `f646d667d36d677883cf14309d1c73ecd3532d41`;47.5 committed/brief empty/no background work. Existing49 diagnostic, ADR0056, complete named-mark neutral contract, named42 ordered String-word statement names and canonical Perl absent-entry-boundary record/book reviewed. Perl root entry positions remain valid without entry text; do not infer absent local-match semantics for those writers or erase this existing compatibility behavior. Public tools/source substitution and independent current Perl/Dart before production edits; other backends independently assessed in49.2-.5.
+  Acceptance: Distinguish fresh versus seeded marks, missing local match after I/incoming/cursor moves, real empty/zero/Unicode, name effects and current/local endpoint independence. Establish no-op versus clearing from existing named writer/span contracts and independently observed public owners; no zero fabrication or validator weakening. Freeze source/expected state, retain actual warnings/metadata/modules/traces and root entry compatibility; split genuinely new policy to canonical ownership before implementation.
+  Verification tier: `focused`
+  Focused checks: Independent15-source Perl native/separate clean+seeded7healthy8RED; Dart native/restored/plan/separate VM15pass. Full candidate/frozen source/modules/errors/warnings/metadata/traces, seeded no-op-versus-clear/name-effect distinction, public10 writer body/entry authority, unchanged production/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after49.1-.5/48/45 and prerequisites; no new helper/domain/schema/frame/policy, existing valid-only local writer behavior qualified. Genuinely new entry policy remains excluded.
+  Claim verification: none: Finite authored local writer/state/name-effect and existing entry-boundary compatibility assertions, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Frozen15-source current Perl native/separate clean+seeded7healthy8RED, Dart SDK/restored/plan/separate VM15pass. Exact fresh/seeded targets, names, local versus live cursor and actual value/error/warning channels retained; no peer inference.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public10 writer substitution bodies show unguarded LSPOS-length(LMATCH) and LSPOS in Perl local writers. Frame cleanup correctly rejects invalid stored offsets. Entry writers use independently documented valid root IPOS fallback, not the absent local match; canonical entry record/book reviewed before choosing scope.
+  - [x] **FIX**: Freeze existing local-match no-write behavior, distinguishing unchanged seeded targets from clear. Accepted name effects finish first; empty/zero/Unicode/current local edges remain real. Own49.1-.5 before implementation; preserve entry/input/capture/current writers, frame validation and existing names/arity. No production or new policy/schema/helper/domain/frame change.
+  - [x] **ADDRESSED (verified)**: Candidate15 bytes equal frozen fixture, including verbatim original writer discovery; Dart15allpass independently discriminates no-op/clearing/name effects. Perl actual8 failures owned49.1. Full public metadata/modules/source/traces/structured errors/warnings retained, no hidden normalization or manufactured expected runtime.
+  - [x] **NO REGRESSION**: All production directories unchanged. Existing typed source/complete named writer/Perl root entry-boundary policy inputs retained; no universal missing-entry policy inferred. Accepted self-contained reader repeats classification without replaying prior comparison producer; initial instrument history retained without product failure credit.
+  - [x] **LOCKSTEP**: Packet named-writer-absence-authority-intake.json.gz retains closure; target/book/cards/map/roadmap/task/live/resume/history align. Next49.1 Perl then independent49.2-.5 before48/45/wider features/full admission; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.49.0 - qualify unavailable local-match mark writer behavior`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.1`
+  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Goal: Independently assess Perl local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
+  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
+  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
+  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.2`
+  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Goal: Independently assess Rust local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
+  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
+  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
+  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.3`
+  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Goal: Independently assess Dart local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
+  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
+  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
+  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.4`
+  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Goal: Independently assess Julia local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
+  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
+  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
+  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.49.5`
+  Status: `pending` / P1 after47 before48/45/wider features/full23.4/push
+  Goal: Independently assess safe installed-host Lua local-match writer absence against frozen49.0 and repair actual outliers or retain compatibility.
+  Acceptance: Establish own current native/generated baseline before edits. Preserve absent/existing marks, accepted name effects, real empty/zero/Unicode and root entry/input/capture/cursor writers; valid writers keep their existing source/mark/trace identity. Existing sole owners only, no new frame/helper/domain/schema or peer-based repair. Focused normal/direct dependents/book/docs/proof/commit before next child. Safe Lua only PUC5.5/LuaJIT, no unsafe formatter/declared5.4/full suite.
+  Planned verification tier: focused; genuinely new public policy requires a separate canonical leaf.
+  Planned focused checks: Exact writer state/name-effect/absence/presence/native/fresh/source/full metadata/warnings and existing named read/take/entry/writer direct dependents; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after49/48/45 and prerequisites, including normal canonical selection23.4.1.
+  Planned claim verification: none: Finite authored writer/state/name-effect and compatibility assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48`
   Status: `pending` / P1 after41/47/49 before45/wider features/full23.4/push
@@ -9585,7 +9649,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49` | `pending` | Qualify absent entry/local mark writers and repair confirmed invalid-state/warning outliers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.49.1` | `pending` | Repair independently confirmed Perl local-match writer absence without changing entry compatibility. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -1,0 +1,219 @@
+[
+  {
+    "name": "root_blind_I",
+    "source": "Top::\n I{mark_input_end(saved_start);mark_input_end(saved_end);mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "root_regex_I",
+    "source": "Top::\n /x/ I{mark_input_end(saved_start);mark_input_end(saved_end);mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "cursor_move_before_local",
+    "source": "Top::\n I{mark_input_end(saved_start);mark_input_end(saved_end);ignored=capture_until_boundary(End);mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      0,
+      5,
+      5,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "boundary_move_before_local",
+    "source": "Top::\n I{mark_input_end(saved_start);mark_input_end(saved_end);ignored=capture_until_boundary(End);start_capture_slice();mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      0,
+      5,
+      5,
+      2,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "incoming_child_I",
+    "source": "Top::\n /αβ/ ->Top[0]{return(call(Child))}\nChild:\n I{mark_input_end(saved_start);mark_input_end(saved_end);mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      0,
+      3,
+      3,
+      2,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "matched_unicode_prefix",
+    "source": "Top::\n /cat/ I{mark_input_end(saved_start);mark_input_end(saved_end);}\n ->Top[0]{mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      1,
+      1,
+      2,
+      5,
+      5,
+      0
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "empty_at_zero",
+    "source": "Top::\n /(?=x)/ I{mark_input_end(saved_start);mark_input_end(saved_end);}\n ->Top[0]{mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "x",
+    "entry_cursor": 0,
+    "expected": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "empty_after_prefix",
+    "source": "Top::\n /(?=x)/ I{mark_input_end(saved_start);mark_input_end(saved_end);}\n ->Top[0]{mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβx",
+    "entry_cursor": 0,
+    "expected": [
+      1,
+      1,
+      2,
+      2,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "zero_text_present",
+    "source": "Top::\n /0/ I{mark_input_end(saved_start);mark_input_end(saved_end);}\n ->Top[0]{mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "0",
+    "entry_cursor": 0,
+    "expected": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+    ],
+    "expected_cursor": 1
+  },
+  {
+    "name": "local_match_independent_cursor",
+    "source": "Top::\n /cat/ I{mark_input_end(saved_start);mark_input_end(saved_end);}\n ->Top[0]{ignored=capture_until_boundary(End);mark_match_start(fresh_start);mark_match_end(fresh_end);mark_match_start(saved_start);mark_match_end(saved_end);return([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(saved_start),mark_pos(saved_end),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβcatTAILEND",
+    "entry_cursor": 0,
+    "expected": [
+      1,
+      1,
+      2,
+      5,
+      9,
+      0
+    ],
+    "expected_cursor": 9
+  },
+  {
+    "name": "available_writers_absent_local",
+    "source": "Top:: I {clear_mark(fresh_start);clear_mark(fresh_end);mark_match_start(fresh_start);mark_match_end(fresh_end);\nmark_here(here);mark_capture_slice(boundary);ignored=capture_until_boundary(End);mark_here(moved);\nreturn([mark_exists(fresh_start),mark_exists(fresh_end),mark_pos(here),mark_pos(boundary),mark_pos(moved),cursor_pos()]);}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      2
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "name_effect_absent_mark_match_start",
+    "source": "Top::\n I{mark_input_end(saved);ignored=capture_until_boundary(End);order=\"\";mark_match_start({order=cat(order,\"N\");mark_here(saved);return(\"saved\")});return([order,mark_pos(saved),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      "N",
+      2,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "name_effect_present_mark_match_start",
+    "source": "Top::\n /cat/ ->Top[0]{order=\"\";mark_match_start({order=cat(order,\"N\");mark_input_start(saved);return(\"saved\")});return([order,mark_pos(saved),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      "N",
+      2,
+      5,
+      0
+    ],
+    "expected_cursor": 5
+  },
+  {
+    "name": "name_effect_absent_mark_match_end",
+    "source": "Top::\n I{mark_input_end(saved);ignored=capture_until_boundary(End);order=\"\";mark_match_end({order=cat(order,\"N\");mark_here(saved);return(\"saved\")});return([order,mark_pos(saved),cursor_pos(),capture_slice_pos()])}\nEnd: /END/\n",
+    "input": "αβEND",
+    "entry_cursor": 0,
+    "expected": [
+      "N",
+      2,
+      2,
+      0
+    ],
+    "expected_cursor": 2
+  },
+  {
+    "name": "name_effect_present_mark_match_end",
+    "source": "Top::\n /cat/ ->Top[0]{order=\"\";mark_match_end({order=cat(order,\"N\");mark_input_start(saved);return(\"saved\")});return([order,mark_pos(saved),cursor_pos(),capture_slice_pos()])}\n",
+    "input": "αβcat",
+    "entry_cursor": 0,
+    "expected": [
+      "N",
+      5,
+      5,
+      0
+    ],
+    "expected_cursor": 5
+  }
+]
