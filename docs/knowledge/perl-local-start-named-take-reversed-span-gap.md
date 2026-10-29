@@ -7,7 +7,7 @@ answers:
   - "which task owns reversed named local-start take guards"
   - "why does native capture_take return null while generated execution throws"
 date: 2026-10-28
-status: repaired42.5 and targeted-checked; pre-match40/native error delivery41 and full admission separate
+status: Perl47.1 named endpoint/range repair focused-verified; independent47.2-.5/writer49/wider42.3/selection/full admission separate
 tags: [perl, capture, marks, spans, errors, generated-source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.42.2.3 public19-case legacy intake at clean14c41151e; mark-advance-legacy-intake.json.gz retains exact producer/source/native/fresh/metadata/substitution and strict raw stdout prefix handling."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/named_take_reversed_span.t"
@@ -52,3 +52,14 @@ Exactly two public bodies change, other7 advancing/bridge bodies are identical.
 Actual source/input/result/body/patch epochs: named-take-reversed-span-intake.json.gz.
 Present-mark pre-match authority40 and native child error delivery41 stay open;
 no new domain/role/deferred or full portable admission. SparseAND39.0 follows.
+
+2026-10-29 Perl47.1 guards missing local endpoints in all four named match-start
+bodies and readonly reversals through existing sole Contracts factories.15-source
+7healthy8RED ->15pass native/separate clean+seeded; ordinary15 groups8RED ->15pass.
+Endpoint15/range11/Number target-snapshot-function3 pass29 groups and syntax.
+Public33 bodies exactly4 changed/29 unchanged, retaining name/effect/trace/available
+endpoint/writer/anonymous semantics and full metadata. Prior byte identities are
+historical pre-repair epochs. Old15 modules retain original outcomes in30 calls
+and require regeneration. [[perl-named-capture-endpoint-presence-repair]] retains
+actual proof/limits. Peers/writer49/wider domains/canonical selection/admission
+remain independent; no new helper/key/schema/frame or argument-role policy.

@@ -4851,6 +4851,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Native nested error41.1 adds t/nested_handler_error.t using frozen9-source/22-call fixture; ordinary discovery and selected30 groups/75 canonical nested assertions verified. Exact canonical selection remains required before admission/push, no full Phase0 or peer completion credit.
 
+  Perl named endpoint47.1 adds t/named_capture_endpoint_absence.t using frozen15-source fixture; ordinary native/fresh target15 plus range11/Number3 groups verified, exact canonical presence/selection remains required before admission/push. Old emitted modules remain v2 accepted with original defects and require regeneration; no stale-artifact repair credit.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9051,13 +9053,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.0 - freeze named capture endpoint presence and overload target`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.1`
-  Status: `pending` / P1 after47.0 before48/45/full23.4/push
+  Status: `completed` / P1 after47.0 before48/45/full23.4/push
   Goal: Independently assess and repair confirmed Perl named endpoint/absence/overload outliers against frozen47.0.
+  Activation: clean `1b04a7013025d3cadbef1159842b4e58ee3e55fb`;47.0 committed, brief empty, all intake jobs terminal. Read frozen15 target and exact public native/fresh7healthy8RED (native8/7), raw lowering and sole readonly Number/text/advancing factories in Contracts. Independently rerun current15 without the49-owned writer candidate before code to exclude invalid writer-frame contamination; new ordinary native/fresh RED then guarded local endpoint/non-reversal only. Preserve captured names, available endpoints/real zero/Unicode/helper tags and old artifact diagnosis.
   Acceptance: Establish own native/restored/plan/fresh supported baseline before edits; repair only actual outliers or retain compatibility proof. Preserve available cursor/rest/between/writers, missing/reversed/real zero/Unicode, existing anonymous zero-arg and named take overloads, ordered accepted names and valid-only mark mutation through existing sole owners. No peer-failure inference, new helper/key/schema/frame policy or unsafe/undeclared-host claim. Focused normal regression/book/docs/proof/commit per child before admission.
-  Planned verification tier: focused
-  Planned focused checks: Frozen named RED/GREEN/healthy/state/name-effect/full-source/metadata and direct named/anonymous/range/function dependents per backend; safe Lua uses installed PUC5.5/LuaJIT, no unsafe formatter/full suite.
-  Planned canonical trigger: Full23.4/final clean push after47/48/45 and existing prerequisites; canonical selection23.4.1 includes each new normal.
-  Planned claim verification: none: Finite authored named capture functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent current15 native/separate clean+seeded7healthy8RED ->15pass; ordinary15 groups8RED ->15pass. Endpoint15/range11/selected Number target-snapshot-function3 pass29 groups; Contracts syntax. Exactly4 of33 primitive bodies change/29 unchanged; complete public metadata/healthy semantic fields preserved, old15 modules30-call replay retains original defects. Book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after47.2-.5/49/48/45 and existing prerequisites; exact new normal canonical selection23.4.1 remains required. No helper/domain/schema/frame/writer policy or infrastructure movement.
+  Claim verification: none: Finite authored named capture/range/name-effect/state/source functional assertions and actual body/artifact comparisons, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Current15-source native/separate clean+seeded baseline excludes49 writer and exactly reproduces47.0 core defects:7 full-route healthy8RED, native8/7 with one fresh-warning-only take case. New ordinary15-source regression fails8 groups before product. Public lowering/actual errors/warnings/source/metadata retained; no writer-frame contamination or peer failure inference.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Sole Contracts readonly Number/text and advancing factories use raw LSPOS-length(LMATCH) under mark existence only. Missing local registers manufacture empty/0 or warnings/advances; readonly reversed origins reach typed span validation rather than documented undef. Existing name owner already captures effects before primitive bodies and is not the defect.
+  - [x] **FIX**: Shared private named local-match end expression requires defined LMATCH/LSPOS before arithmetic; readonly local text/width cache/guard ordered endpoints before projection. Two existing take bodies reuse that end expression and retain their original valid-only writes/operation tags. Existing value/native callbacks share the same factories. No argument-lowering, schema/helper/key/frame/runtime/writer-policy change.
+  - [x] **ADDRESSED (verified)**: All15 pass native/separate new emitted clean+seeded with correct absent/reversed/null versus real empty/zero/Unicode, name effects and named/anonymous state. Seven full-route healthy and extra native-correct take semantic fields preserved; full public metadata unchanged. Public33 primitive bodies exactly4 changed/29 byte-identical, including all writer/available-endpoint/anonymous controls.14 emitted source payloads change; independent cursor/rest/between source remains exact.
+  - [x] **NO REGRESSION**: Endpoint15/range11 plus selected Number target/snapshot/function-fence3 pass29 groups, Contracts syntax passes. Old15 actual modules retain original semantic outcomes/errors/warnings/metadata in30 clean/seeded calls and still acceptv2: affected parsers need regeneration. Only warning eval ordinals normalize; raw host error string excluded only with actual typed fields, full raw channels retained. Writer49 remains separately owned/unchanged; no full Phase0/gate/peer/admission claim.
+  - [x] **LOCKSTEP**: Packet perl-named-capture-endpoint-intake.json.gz retains actual producers/normal/current RED/GREEN/patch/before+after/source/old+new modules/full metadata/channels/body identities/test+fixture/receipts. Book/cards/map/targets/roadmap/task/live/resume/history align; new normal selection23.4.1 before admission. Independent47.2 Rust then47.3-.5/49/48/45; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.47.1 - guard Perl named capture endpoints and readonly ranges`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47.2`
   Status: `pending` / P1 after47.0 before48/45/full23.4/push
@@ -9522,7 +9534,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.1` | `pending` | Guard confirmed Perl named endpoint/readonly range outliers against frozen47.0. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.47.2` | `pending` | Independently assess Rust named endpoint/absence/overload behavior against frozen47.0. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

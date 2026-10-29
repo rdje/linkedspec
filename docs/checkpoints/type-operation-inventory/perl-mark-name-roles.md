@@ -159,3 +159,21 @@ Exactly two body strings change; other seven advancing/bridge bodies remain
 identical. Missing-before-match endpoint laziness and equal/zero behavior are
 preserved; present-mark endpoint40/native error delivery41 remain separate.
 Packet: named-take-reversed-span-intake.json.gz. SparseAND authority39.0 next.
+
+## Perl repair47.1 (2026-10-29)
+
+Four existing named match-start bodies now share a defined local-match endpoint
+expression; readonly text/width share cached ordered-span guards. Names finish
+first, missing/reversed returns undef without arithmetic/projection/extra take
+mutation, real empty/zero/Unicode and valid advances remain. Current15 native/
+new separate clean+seeded7healthy8RED ->15pass; ordinary15 groups8RED ->15pass.
+Seven full-route healthy and extra native-correct take semantics/full metadata
+preserved. Endpoint15/range11/Number target-snapshot-function3 pass29 groups and
+Contracts syntax. Public33 primitive bodies exactly4 changed/29 unchanged, including
+writers/available endpoints/anonymous overloads.14 emitted payloads change while
+independent cursor/rest/between source remains exact. Old15 actual modules retain
+original outcomes/errors/warnings/metadata in30 calls, v2 still accepted: regenerate
+affected emitted parsers. Warning eval ordinals normalize and raw host error text
+is excluded only where typed fields exist; full raw channels retained. Packet
+perl-named-capture-endpoint-intake.json.gz retains closure. No new helper/key/schema/
+frame/runtime/writer policy; independent47.2-.5/49/48/45/selection/admission remain.

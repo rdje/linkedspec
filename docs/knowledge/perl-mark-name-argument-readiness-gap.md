@@ -15,7 +15,7 @@ answers:
   - "why does quoted capture_len_between report ready1"
   - "which task owns mark-name argument validation and readiness"
 date: 2026-10-28
-status: bounded42.1/42.2.1-.3 and reversed guards42.5 targeted-checked; sparseAND39 next; wider and bare Unicode42.3 separate
+status: Perl47.1 named endpoint/range repair focused-verified; independent47.2-.5/writer49/wider42.3/selection/full admission separate
 tags: [perl, marks, arguments, readiness, diagnostics, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.34.0 retains actual quoted/evaluated/bare-shadowing controls, source/emitted bytes/metadata/channels in named-mark-number-authority.json.gz."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/mark_name_number_arguments.t"
@@ -174,3 +174,14 @@ change/7-body equality is retained in named-take-reversed-span-intake.json.gz.
 Earlier31/nine-body equality describes the preceding name-feature epoch, not
 the later behavior fix. [[perl-local-start-named-take-reversed-span-gap]] records
 continuation/equal/missing-silence proof and remaining40/41/admission limits.
+
+2026-10-29 Perl47.1 guards missing local endpoints in all four named match-start
+bodies and readonly reversals through existing sole Contracts factories.15-source
+7healthy8RED ->15pass native/separate clean+seeded; ordinary15 groups8RED ->15pass.
+Endpoint15/range11/Number target-snapshot-function3 pass29 groups and syntax.
+Public33 bodies exactly4 changed/29 unchanged, retaining name/effect/trace/available
+endpoint/writer/anonymous semantics and full metadata. Prior byte identities are
+historical pre-repair epochs. Old15 modules retain original outcomes in30 calls
+and require regeneration. [[perl-named-capture-endpoint-presence-repair]] retains
+actual proof/limits. Peers/writer49/wider domains/canonical selection/admission
+remain independent; no new helper/key/schema/frame or argument-role policy.
