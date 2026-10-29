@@ -1889,6 +1889,8 @@ impl GeneratedPlanExecutor<'_> {
                     }
 
                     let mut iteration_values = Vec::new();
+                    // A post-call return completes this iteration, including undef.
+                    let mut iteration_return = None;
                     let matched = if matches!(family, GeneratedRuleFamily::RepAndBcode) {
                         let mut completed_sequence = true;
                         for entry in &rule.bcode_dispatch {
@@ -1909,7 +1911,10 @@ impl GeneratedPlanExecutor<'_> {
                             }
                             ctx.set_retv(child_retv);
                             self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
-                            return_if_rule_returned!();
+                            if let Some(value) = ctx.take_return_value() {
+                                iteration_return = Some(value);
+                                break;
+                            }
                             if !child_matched {
                                 completed_sequence = false;
                                 break;
@@ -1936,7 +1941,11 @@ impl GeneratedPlanExecutor<'_> {
                             }
                             ctx.set_retv(child_retv);
                             self.engine.execute_bcode_entry_tail(entry, ctx, label)?;
-                            return_if_rule_returned!();
+                            if let Some(value) = ctx.take_return_value() {
+                                iteration_return = Some(value);
+                                matched_choice = true;
+                                break;
+                            }
                             if child_matched {
                                 matched_choice = true;
                                 break;
@@ -1954,16 +1963,25 @@ impl GeneratedPlanExecutor<'_> {
                         break;
                     }
 
-                    if let Some(ref lecode) = rule.lecode {
+                    if iteration_return.is_none()
+                        && let Some(ref lecode) = rule.lecode
+                    {
                         self.engine
                             .execute_lifecycle_block("LE", lecode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
                     ctx.assert_recognition_repetition_progress(label, pos_before, ctx.pos)?;
+                    // Returned non-consuming payloads do not count. Scoped
+                    // recognition progress still rejects before this cutoff.
+                    if iteration_return.is_some() && ctx.pos == pos_before {
+                        break;
+                    }
                     repeated_blind_matched = true;
                     if rule.itcode.is_none() {
-                        if rule.mode.is_and() {
+                        if let Some(value) = iteration_return {
+                            implicit_bcode_result.push(value);
+                        } else if rule.mode.is_and() {
                             implicit_bcode_result.push(RuntimeValue::Array(iteration_values));
                         } else {
                             implicit_bcode_result.extend(iteration_values);
@@ -3698,6 +3716,8 @@ impl Engine {
                     }
 
                     let mut iteration_values = Vec::new();
+                    // A post-call return completes this iteration, including undef.
+                    let mut iteration_return = None;
                     let matched = if rule.mode.is_and() {
                         let mut completed_sequence = true;
                         for entry in &rule.bcode_dispatch {
@@ -3718,7 +3738,10 @@ impl Engine {
                             }
                             ctx.set_retv(child_retv);
                             self.execute_bcode_entry_tail(entry, ctx, label)?;
-                            return_if_rule_returned!();
+                            if let Some(value) = ctx.take_return_value() {
+                                iteration_return = Some(value);
+                                break;
+                            }
                             if !child_matched {
                                 completed_sequence = false;
                                 break;
@@ -3745,7 +3768,11 @@ impl Engine {
                             }
                             ctx.set_retv(child_retv);
                             self.execute_bcode_entry_tail(entry, ctx, label)?;
-                            return_if_rule_returned!();
+                            if let Some(value) = ctx.take_return_value() {
+                                iteration_return = Some(value);
+                                matched_choice = true;
+                                break;
+                            }
                             if child_matched {
                                 matched_choice = true;
                                 break;
@@ -3762,15 +3789,24 @@ impl Engine {
                         break;
                     }
 
-                    if let Some(ref lecode) = rule.lecode {
+                    if iteration_return.is_none()
+                        && let Some(ref lecode) = rule.lecode
+                    {
                         self.execute_lifecycle_block("LE", lecode, ctx, label)?;
                         return_if_rule_returned!();
                     }
 
                     ctx.assert_recognition_repetition_progress(label, pos_before, ctx.pos)?;
+                    // Returned non-consuming payloads do not count. Scoped
+                    // recognition progress still rejects before this cutoff.
+                    if iteration_return.is_some() && ctx.pos == pos_before {
+                        break;
+                    }
                     repeated_blind_matched = true;
                     if rule.itcode.is_none() {
-                        if rule.mode.is_and() {
+                        if let Some(value) = iteration_return {
+                            implicit_bcode_result.push(value);
+                        } else if rule.mode.is_and() {
                             implicit_bcode_result.push(RuntimeValue::Array(iteration_values));
                         } else {
                             implicit_bcode_result.extend(iteration_values);

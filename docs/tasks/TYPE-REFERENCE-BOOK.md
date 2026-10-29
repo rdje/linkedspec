@@ -4883,6 +4883,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust48.2.4 adds blind_parent_push.rs with8 single-pass witnesses, four-route RED/GREEN and8 selected tests. Exact canonical selection must preserve repeated/Unicode/phase exclusions until their owners close.
 
+  Rust48.2.5 adds blind_postcall_results.rs and5-source repeated composition in blind_parent_push.rs; main18/27 four-route proof/15 selected tests. Exact canonical selection must include both and preserve stated diagnostic/phase/cursor projection limits before admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9477,13 +9479,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3 - retain qualified Rust referenced intermediate routes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5`
-  Status: `pending` / P1 after48.2.4 before48.3/admission
+  Status: `completed` / P1 after48.2.4 before48.3/admission
   Goal: Independently qualify and repair Rust repeated blind post-call return scope under existing per-iteration authority, preserving grouping/count/minimum/progress/null and whole-rule I/E/EX authority.
   Reproduction/impact:48.2.4 initial public9-source probe shows Default parent .push.return(copy(Top)) returns nested per-iteration values; suffix-free return control returns[[]], empty guarded input returnsnull. Emitted or_code closure return is collected by repeated parent. Current Rust tail sets whole-rule return; own SDK/fresh distinguishing RED required before repair. Existing Dart/Julia/Lua blind-postcall authority and reference39.2.5.1 are canonical retrieval pointers; do not redefine scope from payload alone.
-  Planned verification tier: focused
-  Planned focused checks: Own public/SDK/restored/plan/fresh group/count/minimum/progress/falsey/whole-return controls and nearest collection/return normals, book/docs/commit.
-  Planned canonical trigger: Full23.4/final clean push after48.2.5 and all admission prerequisites; no phase policy movement.
-  Planned claim verification: none: Finite authored functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Reference18/27; own18/27 four-route5healthy13RED ->18pass, unchanged healthy/source/metadata/same18 modules;14 main tests plus one new5-source SDK composition test=15 distinct tests, typed public guard fields/trace, formatting/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after Unicode48.2.6/remaining48/phase48.2.2.1 after20.1/warnings/45/selection23.4.1 and prerequisites.
+  Claim verification: none: Finite authored iteration/group/minimum/progress/source and direct-dependent functional assertions, no population measurement.
+
+  Activation: clean `c1ac07f64336616ddd56e3ebe2f0c5e2d89e1c2d`;48.2.4 committed/brief empty/no jobs. Existing Dart/Julia post-call authority18sources27inputs and public reference39.9 falsey repairs recovered, plus Rust progress/diagnostic SDK interfaces. Own current reference/SDK/restored/plan/fresh baseline before changes. Preserve per-iteration return/early AND group, null/0 acceptance, real minima, progress-before-count/IT, nonconsuming returned-value discard, plain/lifecycle whole-rule authority and current nonreturning phase behavior. No new phase/schema/family/state policy; direct Rust final cursor/matched flags unexposed.
+
+  Direct-dependent composition: Add5 exact original48.2.4 Default-mode parent-push sources using retained actual reference nested/null/minimum outcomes, separate from initial flat hypotheses and Unicode failure. These verify the two repairs compose on native/restored/v2-plan after the18-source baseline repair; no pre-edit RED or separate fresh credit claimed for these5 added composition rows. Public reference source/runtime is unchanged; retain prior actual inputs/producer.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own18-source27-input current target has5healthy13RED on native/restored/v2-plan/separate compiled. Early post-call returns bypass later iterations/minimum/progress and AND completion. Independent current reference18/27 value/cursor/error-code pairs agree, including3 formerly qualified falsey aa rows; no ordinary matched-field claim.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Both repeated blind loops use whole-rule return_if_rule_returned immediately after attached/fluent tail. That exits before common progress/count/minimum and remaining group ownership. Existing return channel already distinguishes Some(undef) from no return; the owner must capture that local value instead of unwinding the rule.
+  - [x] **FIX**: Add iteration-local Option payload in native/direct-plan repetition. Reached returns accept/complete the inner choice or early AND group independently of payload, skip post-return LE, then common progress precedes ordinary nonconsuming returned-value discard/count/IT/max. Explicit payload replaces implicit collection; existing custom IT, plain/lifecycle and nonreturning phase behavior stay. No new state/frame/public schema/family or phase policy; accumulator convention follows existing action-loop style.
+  - [x] **ADDRESSED (verified)**: All18/27 pass four routes;5healthy source observations/full source/compiled/serialized/emitted/metadata/plan exact, original18 modules reused. Rebuild runtime consumers/no regeneration. Native guard code/rule/stage and Guard/pos0 trace checked; private origin/end fields/direct final cursor/matched flags and private generated guarded-callback path unclaimed.
+  - [x] **NO REGRESSION**: Main14 tests cover new target/collection/live progress/default-plan/parent-push/typed returns. Additional5 exact reference-backed SDK-only parent-push compositions pass, adding1 distinct test for15 total; no new composition RED/fresh claim. Initial strict patch anchor refusal precedes any product write; instrument retained. Actual dependency diagnostics opaque, versions/sources/checksums unchanged. No broad peer/phase/full-suite admission claim.
+  - [x] **LOCKSTEP**: Packet rust-blind-postcall-intake.json.gz retains actual producers/inputs/reference/RED+GREEN/patch/trace/modules/diagnostics/composition/receipts. Original peer fixtures unchanged; common target has existing current authority. Book/cards/map/roadmap/task/live/resume/history align, canonical new normal/composition selection23.4.1 before admission.48.2.6 next then48.3/peers/warnings/45, phase authority after20.1; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5 - complete repeated blind returns as local iterations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6`
   Status: `pending` / P1 after48.2.5 before48.3/admission
@@ -9949,7 +9964,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5` | `pending` | Qualify and repair Rust repeated blind post-call return ownership. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6` | `pending` | Repair Perl recognition rejection of valid declared Unicode rule labels. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

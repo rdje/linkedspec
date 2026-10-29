@@ -231,6 +231,36 @@ calls: `.return("first").return("later")` yields `"first"`.
 Rebuild Rust runtime consumers for this correction; existing emitted source
 can be reused. The example's child returns in `I`, before matching input.
 
+### Repeated blind post-call returns
+
+In a repeated blind parent, a return in attached post-call code or its fluent
+chain completes the current iteration. Repetition then continues:
+
+```text
+Top::OR{2}
+ => Atom { return(["C",cursor_pos()]) }
+Atom:AND
+ /a/ -> Atom[0] { return("A") }
+```
+
+Perl and Rust return `[["C",1],["C",2]]` on `aa`. On `a`, the minimum of two
+iterations is not met, so the result is null after the first input character.
+The fluent `.return(["C",cursor_pos()])` form has the same behavior. An
+unadorned default blind parent also repeats and collects returned iterations.
+
+In repeated AND, a reached post-call return completes that group and skips
+its remaining children. Zero and null payloads still count when input advanced:
+two successful iterations returning `0` produce `[0,0]`; returning `undef`
+produces `[null,null]`. A returned group skips its post-return local hook.
+Where lifecycle hooks are entered, their returns retain whole-rule authority;
+custom `IT` still replaces implicit collection.
+
+An ordinary returned iteration that consumes no input is discarded before
+counting and checking the minimum. In a protected recognition attempt, the
+same zero progress reports `recognition_zero_progress_repetition` before
+count, `IT` or maximum can hide it. Rust consumers need a runtime rebuild;
+existing emitted source and plans can be reused.
+
 ### If family: attached blocks
 
 Attached blocks put each branch body directly after its condition. The parser lowers them to the

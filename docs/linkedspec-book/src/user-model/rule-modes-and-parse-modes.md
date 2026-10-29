@@ -564,7 +564,8 @@ Changing the value returned by the `I` branch preserves its kind:
 On empty input, the ordinary same-position recursion guard cuts the parent
 call and its stored value is null. Rebuild Rust runtime consumers for this
 correction; existing emitted source can be reused. Rust repeated blind
-post-call return grouping/minimum/progress still has a separate assessment.
+post-call returns also preserve iteration grouping, minima and progress on the
+focused native/restored/plan/emitted routes.
 
 
 Blind calls do not secretly turn a rule into a sequence. The rule label still decides the composition model.

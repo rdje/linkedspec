@@ -163,3 +163,25 @@ not isolate.40.1.1 owns LMATCH masks,40.1.2 parent scalar masks. Kind-strict
 current8/prior17 emitted-result artifact checks pass; no runtime rerun claim.
 Packet rust-blind-parent-push-intake.json.gz retains actual initial/refined
 inputs/producers/source/errors/warning phases/RED+GREEN/modules/patch/receipts.
+
+## Rust repeated blind post-call repair48.2.5 (2026-10-29)
+
+Native/direct-plan repeated loops capture Some(payload), including undef, as
+iteration-local output. Early AND returns skip remaining children/post-return
+LE; common progress precedes nonconsuming returned-payload discard/count/IT/max.
+Explicit output replaces implicit collection; custom IT and plain/lifecycle
+whole-rule owners stay. No new state/frame/schema/family/phase policy. Existing
+legacy accumulator convention follows action-loop handling.
+Own18sources27inputs5healthy13RED ->18pass native/restored/v2-plan/fresh with
+same18 modules and exact source/compiled/serialized/emitted/metadata/plan;5healthy
+source observations remain exact. Rebuild consumers, no regeneration. Current
+public reference18/27 values/cursor/error codes agree; ordinary matched flags
+unexposed. Rust direct final cursor/matched fields unexposed; native guard
+code/rule/stage and trace Guard/pos0 checked, no private origin/end-offset or
+direct generated guarded-callback path claim. Fourteen main selected tests and
+one new5-source SDK-only parent-push composition test pass15 distinct tests;
+no prior RED/fresh credit for extra5. Initial patch anchor assertion refused
+before product write and was corrected to existing mode condition. Packet
+rust-blind-postcall-intake.json.gz retains actual inputs/producers/RED+GREEN/
+patch/modules/trace/typed diagnostics/composition/receipts. Unicode48.2.6 next,
+phase authority48.2.2.1/remaining peers/warnings/admission remain separate.
