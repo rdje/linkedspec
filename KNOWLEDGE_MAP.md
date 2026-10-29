@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1472** facts · **11211** question keys.
+> **1473** facts · **11213** question keys.
 
 ## Questions → fact
 
@@ -10837,6 +10837,7 @@
 - "why does not false true select the second argument in Perl" -> [logical-helper-five-backend-audit](docs/knowledge/logical-helper-five-backend-audit.md) · 2026-07-16 · reverify: `bash tools/check_logical_helper_five_backend.sh`
 - "why does numeric array minimum return a string on Perl" -> [perl-numeric-reducer-string-result-kinds](docs/knowledge/perl-numeric-reducer-string-result-kinds.md) · 2026-10-21 · reverify: [2 entries](#perl-numeric-reducer-string-result-kinds)
 - "why does numeric serde change values adjacent to the i64 limits" -> [rust-large-number-conversion-defect](docs/knowledge/rust-large-number-conversion-defect.md) · 2026-10-25 · reverify: `bash tools/run_python_project_data.sh docs/checkpoints/rust-numeric-boundaries/publish.py`
+- "why does observe_recognition report call_expression for a Unicode static callee" -> [perl-unicode-recognition-operand-extraction](docs/knowledge/perl-unicode-recognition-operand-extraction.md) · 2026-10-29 · reverify: `Restore retained inputs and use the routed public Perl probe; owning48.2.6.1 qualifies exact independent normal RED before repair.`
 - "why does odd median of capture groups return a quoted number" -> [perl-numeric-reducer-string-result-kinds](docs/knowledge/perl-numeric-reducer-string-result-kinds.md) · 2026-10-21 · reverify: [2 entries](#perl-numeric-reducer-string-result-kinds)
 - "why does ordinary Cargo run zero Rust recognition transaction tests" -> [rust-recognition-transaction-dormant-red](docs/knowledge/rust-recognition-transaction-dormant-red.md) · 2026-09-07 · reverify: `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract && ! rg -n 'linkedspec_recognition_transaction' rust/linkedspec-core rust/linkedspec-runtime`
 - "why does ordinary Dart test not discover recognition transactions" -> [dart-recognition-transaction-dormant-red](docs/knowledge/dart-recognition-transaction-dormant-red.md) · 2026-08-11 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test --reporter failures-only test/recognition_transaction_contract_test.dart && bash ../tools/run_dart_project_data.sh analyze --fatal-infos --fatal-warnings && cd .. && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py`
@@ -10871,6 +10872,7 @@
 - "why does receiver with Hash indexing work but helper with indexing fail" -> [with-result-selection-source-gap](docs/knowledge/with-result-selection-source-gap.md) · 2026-10-28 · reverify: [6 entries](#with-result-selection-source-gap)
 - "why does recognition source scanning retain a statement list snapshot" -> [perl-recognition-annotation-statement-origins](docs/knowledge/perl-recognition-annotation-statement-origins.md) · 2026-10-06 · reverify: [2 entries](#perl-recognition-annotation-statement-origins)
 - "why does recognition_token_escape appear as dependency_target_missing in Perl semantics" -> [perl-semantic-compile-failure-diagnostic-drift](docs/knowledge/perl-semantic-compile-failure-diagnostic-drift.md) · 2026-09-06 · reverify: [3 entries](#perl-semantic-compile-failure-diagnostic-drift)
+- "why does recognize_once reject call Ω despite a declared Unicode rule" -> [perl-unicode-recognition-operand-extraction](docs/knowledge/perl-unicode-recognition-operand-extraction.md) · 2026-10-29 · reverify: `Restore retained inputs and use the routed public Perl probe; owning48.2.6.1 qualifies exact independent normal RED before repair.`
 - "why does recursive observation public closeout leave typed source rollout at nine complete and five pending" -> [typed-source-location-runtime-rollout-plan](docs/knowledge/typed-source-location-runtime-rollout-plan.md) · 2026-09-07 · reverify: `bash tools/check_typed_authoring_model_six_runtime.sh`
 - "why does regex-adjacent E yield two values in Perl but one in Rust" -> [rust-minimum-miss-and-live-progress](docs/knowledge/rust-minimum-miss-and-live-progress.md) · 2026-10-28 · reverify: `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test minimum_miss_routes -- --nocapture; select exact owned ignored tests only when repairing; no dormant success credit.`
 - "why does repeated AND return only the first scalar in Dart" -> [dart-repeated-and-group-outcomes](docs/knowledge/dart-repeated-and-group-outcomes.md) · 2026-10-28 · reverify: `cd dart && bash ../tools/run_dart_project_data.sh test test/repeated_and_group_results_test.dart test/sparse_and_structural_sequence_test.dart test/recognition_repetition_progress_test.dart test/repeated_action_result_contract_test.dart`
@@ -19077,7 +19079,7 @@ _Invalidated Perl recognition tokens can restore obsolete snapshots on cross-own
 ### perl-recognition-runtime-ascii-rule-guard
 _Perl recognition runtime rejects valid Unicode rule labels through an ASCII-only name guard_
 - **answers:** why does a compiled Perl Unicode rule fail with rule must be a bare identifier | which task repairs Perl recognition rule labels under pinned XID authority
-- **date:** 2026-10-29 · **status:** confirmed Ω recognition rejection; P1 repair48.2.6 before48.3/admission
+- **date:** 2026-10-29 · **status:** runtime guard repaired48.2.6; scanner operands separately owned48.2.6.1
 - **evidence:** `rust-blind-parent-push-intake.json.gz retains actual public/SDK/fresh source/results/typed context/producer receipts.`
 - **reverify:** `Restore retained producers under owning leaf; use routed public Perl and locked offline Cargo wrappers, preserving initial/refined inputs and exclusions.`
 - **source:** [`docs/knowledge/perl-recognition-runtime-ascii-rule-guard.md`](docs/knowledge/perl-recognition-runtime-ascii-rule-guard.md)
@@ -19449,6 +19451,14 @@ _Permissive JSON encoding can display a retained Perl typed error as null_
 - **evidence:** `SESSION-STARTUP-READING.31 preserves the recorded Toolbox/source controls at reading baseline baeb984e36a94a15951cd23d4c52def5064cdaca. The owning task is SESSION-STARTUP-READING.31. No implementation repair or whole-project signoff is claimed.`
 - **reverify:** `git diff baeb984e36a94a15951cd23d4c52def5064cdaca -- perl/LinkedSpec/RuntimeContext.pm perl/LinkedSpec/SpecEntry.pm` · `sed -n '380,423p' perl/LinkedSpec/SpecEntry.pm` · `sed -n '343,363p' perl/LinkedSpec/RuntimeContext.pm`
 - **source:** [`docs/knowledge/perl-typed-error-json-observation-boundary.md`](docs/knowledge/perl-typed-error-json-observation-boundary.md)
+
+### perl-unicode-recognition-operand-extraction
+_Perl recognition and observation static callee extraction rejects Unicode rule identities_
+- **answers:** why does recognize_once reject call Ω despite a declared Unicode rule | why does observe_recognition report call_expression for a Unicode static callee
+- **date:** 2026-10-29 · **status:** confirmed; P1 repair48.2.6.1 immediately after runtime guard48.2.6
+- **evidence:** `perl-unicode-guard-intake.json.gz retains initial public diagnostic log, current scanner and policy owners.`
+- **reverify:** `Restore retained inputs and use the routed public Perl probe; owning48.2.6.1 qualifies exact independent normal RED before repair.`
+- **source:** [`docs/knowledge/perl-unicode-recognition-operand-extraction.md`](docs/knowledge/perl-unicode-recognition-operand-extraction.md)
 
 ### perl-uniform-binding-runtime
 _Perl bare mutations execute through one typed binding and return independent updated values_

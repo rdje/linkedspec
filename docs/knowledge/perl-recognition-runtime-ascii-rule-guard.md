@@ -5,7 +5,7 @@ answers:
   - "why does a compiled Perl Unicode rule fail with rule must be a bare identifier"
   - "which task repairs Perl recognition rule labels under pinned XID authority"
 date: 2026-10-29
-status: confirmed Ω recognition rejection; P1 repair48.2.6 before48.3/admission
+status: runtime guard repaired48.2.6; scanner operands separately owned48.2.6.1
 evidence: "rust-blind-parent-push-intake.json.gz retains actual public/SDK/fresh source/results/typed context/producer receipts."
 reverify: "Restore retained producers under owning leaf; use routed public Perl and locked offline Cargo wrappers, preserving initial/refined inputs and exclusions."
 ---
@@ -20,3 +20,19 @@ new Unicode policy.48.2.6/P1 after48.2.5 before48.3 owns role-specific repair an
 strict negative isolation, preserving other identifier grammars. No peer failure
 or broad Unicode/frontend completion is inferred. Actual source/typed context/
 classifier producer and results are retained in rust-blind-parent-push-intake.json.gz.
+
+## Runtime repair48.2.6 (2026-10-29)
+
+Both private guard callers are rule identities, at invocation and recursive
+observation callee entry. They now share `_required_rule_label` using the existing
+generated Unicode17 classifier. Error detail stays; token/result/target/method
+grammars are unchanged. Nine pinned positives and strict negative/undef/reference
+controls cover both runtime roles.17 public source controls have5 ASCII healthy
+and12 Unicode RED ->GREEN, with exact old modules reused in a separate process.
+Full source/metadata and healthy values/cursors remain; runtime update suffices.
+Selected labels are checked independently, without a coexistence proof. Corrected
+normal20 and direct neighbors83 groups pass. Raw known declaration warnings remain;
+eval IDs are normalized only in comparison. Initial instrument acceptance/cycle/
+transport/undef-inner corrections are disclosed in the packet. Static Unicode
+recognition/observation source operands fail earlier in the scanner; see
+[[perl-unicode-recognition-operand-extraction]], scheduled immediately next.

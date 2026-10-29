@@ -56,6 +56,21 @@ The pinned class comes from Unicode data shipped in this repository, so it does 
 engine or toolchain. ADR `0051` and the [formal grammar §2.1](../appendix/formal-grammar.md#21-rule-labels) are the
 normative references.
 
+Perl runtime invocation and recursive-observation callee guards use that same
+pinned class. For example, this root consumes `x` and returns `"OK"`:
+
+```text
+Ω::|
+ /x/ -> Ω[0] { return("OK") }
+```
+
+The recorded Perl native and emitted routes also execute `Töp`, `Töp` and
+`töp` as blind and direct-call targets. Existing emitted modules need the
+updated runtime; these guards require no source regeneration. Static Unicode
+operands inside `recognize_once` and `observe_recognition` still have a separate
+scanner restriction under repair. This does not change the ASCII grammar of
+transaction tokens, result bindings or observation target variables.
+
 A rule label is followed by a colon form. The ordinary form uses one colon:
 
 ```text

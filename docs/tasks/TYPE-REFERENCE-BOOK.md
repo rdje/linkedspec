@@ -4885,6 +4885,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust48.2.5 adds blind_postcall_results.rs and5-source repeated composition in blind_parent_push.rs; main18/27 four-route proof/15 selected tests. Exact canonical selection must include both and preserve stated diagnostic/phase/cursor projection limits before admission.
 
+  Perl48.2.6 adds t/unicode_rule_recognition_runtime.t (20 groups); exact canonical discovery must select it before admission. Static operand scanner48.2.6.1 remains separately owned immediately next.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9501,13 +9503,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5 - complete repeated blind returns as local iterations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6`
-  Status: `pending` / P1 after48.2.5 before48.3/admission
+  Status: `completed` / P1 after48.2.5 before48.3/admission
   Goal: Repair Perl recognition runtime rejection of valid declared Unicode rule labels through the existing pinned XID authority, preserving exact identity and unrelated identifier grammars.
   Reproduction/impact:48.2.4 public Ω root compiles and is selected as top_rule Ω, but native/emitted execution fails at0 with runtime_handler detail RecognitionTransactionRuntime rule must be a bare identifier. _required_name at runtime line707 validates every role with ASCII letter/underscore and ASCII continuation. ADR0051/Unicode17 XID_Continue authority already supports Ω and digit starts; use its existing Perl classifier for rule-role boundaries only. Qualify ordinary/recognition/observation/direct/native/generated/negative contexts before selecting bounded repair. No peer defect inferred; broad existing Unicode frontend/code-generation alignment owners remain separate.
+  Verification tier: `focused`
+  Focused checks: Own public Unicode/ASCII role RED/GREEN and exact identity/negative isolation plus nearest recognition/progress normals, source/metadata/artifact qualification, book/docs/commit.
+  Canonical trigger: Full23.4/final clean push after48.2.6 and all admission prerequisites; pinned Unicode policy unchanged.
+  Claim verification: none: Finite authored rule-role functional assertions, no population measurement.
+
+  Activation: base `10d789f641c7ec738edf6049db00e3a969becd25` was clean at recovery; preceding leaf committed/brief empty/no jobs. Owned test prepared before pointer activation; initial strict clean assertion refused it, then exact-only untracked test/no tracked dirt verified. ADR0051/pinned classifier and actual Ω failure recovered. Both _required_name callers are rule identities (invocation and recursive-observation callee); no handler/method identifiers use it. Own pinned membership runtime/strict negatives and public native/emitted/root/blind/direct/recognition/observation baselines before producer edit; preserve exact identity and error messages, no host Unicode or policy expansion.
+
+  - [x] **REPRODUCE / ISSUE**: Seven of nine pinned runtime invocation positives and Unicode observation callees rejected before repair.17 public sources have5 ASCII healthy/12 Unicode runtime RED on native/emitted/separate retained-module replay;20 normal groups fail14 before repair. Eight additional Unicode static recognition/observation compiler rejects separately owned48.2.6.1.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Both _required_name users are rule identities; ASCII letter-first validation contradicts ADR0051. Shared scanner independently strips Unicode static callees before compiler policy. No handler/method role uses this guard; unrelated variable grammar unchanged.
+  - [x] **FIX**: Rename private helper _required_rule_label and both callers, use generated UnicodeXIDContinue predicate. No new table/state/schema/policy, no host Unicode, exact failure detail remains.
+  - [x] **ADDRESSED (verified)**: Nine pinned positives and eight negatives plus undef/reference checked at invocation and observation boundaries.17 source controls pass native/emitted and original-module fresh replay; exact source/full metadata retained, healthy values/cursors unchanged. Runtime update/no regeneration. No full frontend/coexisting-label completion claim.
+  - [x] **NO REGRESSION**: Corrected20-group normal plus83 groups from recognition/observation/shared/emitted progress neighbors pass. Initial harness assumed recognition acceptance for a different child shape and used Top as both observer and callee; corrected to existing authority source and distinct observer. Initial clean activation refused a prepared owned test; exact-only recovery recorded. Raw warning differences include eval IDs, initial byte-stream transport and undef-inner instrument warnings; known declaration signatures unchanged, owned40.1.1. No product RED credited to instrument errors.
+  - [x] **LOCKSTEP**: Packet perl-unicode-guard-intake.json.gz retains actual inputs/producer snapshots/normal/old modules/fresh/results/errors/receipts and correction limits. Book/cards/map/roadmap/task/live/resume/history align. New normal selection23.4.1 before admission;48.2.6.1 immediately next then Dart48.3/peers/warnings/45. Authorized focused commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6 - validate recognition rule identities with pinned Unicode`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1`
+  Status: `pending` / P1 immediately after48.2.6 before48.3/admission
+  Goal: Repair pinned Unicode static rule-callee extraction for recognize_once and observe_recognition without broadening token/result/target variable grammars.
+  Reproduction/impact: Current public Top I checkpoint/recognize_once(tx,call(Ω))/commit or observe_recognition(observation,call(Ω)) with declared Ω fails compiler policy before runtime. Four selected Unicode labels fail both routes; ASCII observation builds/runs. Initial ASCII recognition fixture used a return/recognition-acceptance mismatch and is not credited as product RED; nearest known two-level recognition source replaces it for guard compatibility. Scanner RecognitionTransactionRules.pm lines42/108 extract static callees through ASCII letter-first patterns, so event callee is missing. RecognitionTransactionPolicy rejects recognition_static_rule_required; RecursiveObservationPolicy rejects source_location_recursive_observation_operand/call_expression. Existing ADR0051 already authorizes these rule identities; do not widen result/token/observation-target identifiers or dynamic call expressions.
+  Acceptance: Independently reproduce exact own compiler diagnostics/events and normal RED before edits; consume pinned classifier for static rule roles only, retain malformed/dynamic/unknown operands and full diagnostic compatibility, exact Unicode identity, source/emitted/fresh proof and focused recognition/observation neighbors. Qualify old emitted source reuse versus regeneration; no broad Unicode frontend completion.
   Planned verification tier: focused
-  Planned focused checks: Own public Unicode/ASCII role RED/GREEN and exact identity/negative isolation plus nearest recognition/progress normals, source/metadata/artifact qualification, book/docs/commit.
-  Planned canonical trigger: Full23.4/final clean push after48.2.6 and all admission prerequisites; pinned Unicode policy unchanged.
-  Planned claim verification: none: Finite authored rule-role functional assertions, no population measurement.
+  Planned focused checks: Own selected Unicode and ASCII recognition/observation compiler/runtime controls, static negatives and direct neighbors, book/map/docs/commit.
+  Planned canonical trigger: Existing Unicode policy unchanged; full23.4/final clean push after all prerequisites.
+  Planned claim verification: none: Finite authored functional and diagnostic assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.3`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9964,7 +9986,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6` | `pending` | Repair Perl recognition rejection of valid declared Unicode rule labels. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1` | `pending` | Repair Unicode static recognition and observation rule operands. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

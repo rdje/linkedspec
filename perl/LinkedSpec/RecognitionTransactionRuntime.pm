@@ -12,6 +12,7 @@ use warnings;
 use Scalar::Util qw(blessed refaddr weaken);
 use LinkedSpec::RecognitionTransaction ();
 use LinkedSpec::SourceLocation ();
+use LinkedSpec::UnicodeXIDContinue ();
 use LinkedRE ();
 
 my %CONTEXT_BY_KEY;
@@ -73,7 +74,7 @@ sub enter_invocation {
  _internal_error('input must be a scalar reference') unless ref($string_ref) eq 'SCALAR' || ref($string_ref) eq 'REF';
  _internal_error('match info must be a hash reference') unless ref($info) eq 'HASH';
  _internal_error('boundary must be a scalar reference') unless ref($boundary_ref) eq 'SCALAR';
- _required_name($rule, 'rule');
+ _required_rule_label($rule, 'rule');
 
  my $key = refaddr($descr).':'.refaddr($string_ref);
  my $context = $CONTEXT_BY_KEY{$key};
@@ -269,7 +270,7 @@ sub observe_static {
  my $guard = _current_guard($descr, $string_ref, $rule);
  _internal_error('recursive observation target must be a scalar reference')
   unless ref($target_ref) eq 'SCALAR' || ref($target_ref) eq 'REF';
- _required_name($callee, 'recursive observation callee');
+ _required_rule_label($callee, 'recursive observation callee');
  my $entry = $descr->{spec}{$callee};
  my $handler = ref($entry) eq 'CODE' ? $entry
   : ref($entry) eq 'HASH' ? $entry->{handler}
@@ -704,10 +705,10 @@ sub _finish_guard {
  return
 }
 
-sub _required_name {
+sub _required_rule_label {
  my ($value, $label) = @_;
  _internal_error("$label must be a bare identifier")
-  unless defined($value) && !ref($value) && $value =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o;
+  unless LinkedSpec::UnicodeXIDContinue::is_xid_continue_string($value);
  return $value
 }
 
