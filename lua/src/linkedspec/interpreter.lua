@@ -3478,6 +3478,19 @@ local function evaluate_call(engine, expr, ctx, accumulator, edge_state)
         handler_source_label = "lua_runtime",
       })
     end
+    local message = "unsupported runtime helper '" .. tostring(name) .. "'"
+    fail(message, {
+      code = "unknown_helper",
+      helper_name = name,
+      diagnostic = runtime_diagnostic(engine, {
+        stage = "runtime_execution",
+        code = "unknown_helper",
+        summary = "Lua runtime interpreter failed",
+        detail = message,
+        top_rule = ctx.top_rule,
+        rule_label = ctx.rule_stack[#ctx.rule_stack] or ctx.top_rule,
+      }),
+    })
   end
   fail("unsupported runtime helper '" .. tostring(name) .. "'", { helper_name = name })
 end

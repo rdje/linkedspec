@@ -4831,6 +4831,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua nullable39.4.7.1 requires exact ordinary/canonical registration of lua/test/null_return_and_observation_test.lua. Its32qualified sources/52inputs pass506 per host; blind_LE one source/two inputs is explicitly excluded pending .5.2 and must be qualified/covered before full admission. Direct focused execution is not runner registration or canonical admission.
 
+  Lua diagnostic39.4.8 requires exact ordinary/canonical registration of lua/test/runtime_unknown_helper_diagnostic_test.lua. Direct105 plus minimum289/callable449 per host is focused proof, not runner registration or full admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8831,15 +8833,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   History: exact committed suffix/hash/bytes, prior manifest rows and retained prefix verified in `docs/history/development-notes/segment-4945-a0f98d868021.md`; no history loss or cap change.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8`
-  Status: `pending` / P2 after bounded Lua feature coverage before23.4/full admission
+  Status: `completed` / P2 after bounded Lua feature coverage before23.4/full admission
   Goal: Reconcile and repair Lua ordinary unknown-helper diagnostic-code omission.
   Reproduction:39.4.3 safe real_error source Value::OR{2} =>Atom, Atom:AND /a/ ->Atom[0] {unknown_minimum_probe()}, input a. Both installed SDK/restored hosts raise RuntimeInterpreterException, detail unsupported runtime helper, rule Atom/runtime_execution, but no diagnostic code. Same public generated envelope retained. Initial peer unknown_helper expectation is unqualified, not a minimum product RED.
   Root cause: Actual public runtime trace/results reach interpreter.lua ordinary unsupported-helper fallback, which calls fail with helper_name only; diagnostic wrapping cannot invent the missing code. The separate callable-codeblock unknown-helper branch already supplies unknown_helper. Reconcile the existing authority and ordinary/callable distinction; do not infer all routes fixed from one case.
   Impact / ownership: Error still fails closed and retains rule/text/phase, but machine-readable code is unavailable. Own exact public authority reconciliation, focused typed repair and native/restored/generated/fresh/callable nearest tests before admission; no broad global catch or new error-policy assumption.
-  Planned verification tier: focused
-  Planned focused checks: Exact authored error-code/rule/phase/fail-closed RED-GREEN and nearest helper/control/generated routes on both installed hosts, book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push, separately canonical if authority changes.
-  Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
+  Verification tier: `focused`
+  Focused checks:6sources7inputs3healthy3actual missing-code RED ->6pass105 per installed host SDK/restored/plan/six baseline modules fresh; only the code in three ordinary cases per native/restored route change, full remaining observations/inputs/generated envelopes identical. Minimum289/callable449 neighbors, actual trace/root cause/initial epochs retained; book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after phase/declared-host/unsafe formatter/registration/pressure/slot prerequisites. No public authority/schema change.
+  Claim verification: none: Finite authored error-code/route/control distinctions, no population measurement.
+
+  Activation: clean `fa071e7b6893b0528b8c4f972b467aeef7cb966f`; ordinary/callable distinction and ADR0031 unknown-call retention read; establish actual public diagnostic RED before changing fallback.
+
+
+  - [x] **REPRODUCE / ISSUE**:6exact sources7inputs per installed host3healthy3actual ordinary missing-code RED. Action, initial lifecycle and original repeated-minimum child error fail closed but diagnostic.code is absent; callable unknown already supplies unknown_helper. SDK/restored/plan/fresh/actual native traces retained before final product repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: interpreter.lua evaluate_call ordinary unknown fallback calls fail without typed diagnostic. execute_rule/runtime_parse generic wrapping builds selected fields and does not copy a bare fail code; the initial code-only patch stays RED. The callable-specific raise_failure already constructs its own diagnostic, so routing ordinary calls through it would misattribute stage.
+  - [x] **FIX**: Only the unbound unknown-name branch constructs runtime_diagnostic with existing unknown_helper, unchanged summary/detail/top/current rule/runtime stage, then fails closed. Governed unsupported fallback, known helpers, bound values and callable invocation remain unchanged; no global catch or peer-derived new policy.
+  - [x] **ADDRESSED (verified)**:6pass105 assertions per host with native/restored exact code/rule/stage/text and plan/fresh public error/value controls. Exact source/normalized/compiled/plan/emitted unchanged; stripping only the added ordinary diagnostic code in three cases per native/restored route yields identical structured observations. Three healthy source outcomes plus matcher miss unchanged. All six baseline emitted module bytes preserved.
+  - [x] **NO REGRESSION**: Minimum289/callable449 per host pass. Public generated_execution_failed envelope/text/rule/execute_generated stage is exactly unchanged; no inner SDK-code transport claim. Matching/recognition authority/compiler/emitter/schema untouched. Initial no-trace capture/code-only patch retained without admission credit; complete RED recaptured from restored original runtime before final repair.
+  - [x] **LOCKSTEP**: Packet lua-unknown-helper-intake.json.gz retains producers/epochs/input/runtime/SDK/fresh/trace/modules/receipts. Book/card/map/target/roadmap/task/live/resume/history align; exact new Lua normal/canonical registration23.4.1 before admission. Julia .39.3.8 next, phase/declared-host/unsafe formatter/pressure/slot/full prerequisites stay owned; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8 - retain Lua ordinary unknown-helper diagnostic code`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9`
   Status: `completed` / P1 immediate after runtime collection39.4.4 before post-call .5/admission
@@ -9168,7 +9181,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8` | `pending` | Repair the independently owned Lua ordinary unknown-helper diagnostic. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.3.8` | `pending` | Repair the independently owned Julia ordinary unknown-helper diagnostic. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

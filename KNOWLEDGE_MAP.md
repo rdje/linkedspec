@@ -16563,7 +16563,7 @@ _Lua static semantic projection must correlate complete authored members with re
 ### lua-sparse-and-independent-intake
 _Independent safe Lua intake owns dependency group minimum blind and live progress gaps_
 - **answers:** what did independent safe Lua sparse AND intake establish | why does Lua duplicate AND execute two actions on one hit | why does Lua repeated AND return only the first group | does live Lua recognize_once enforce repetition progress | does Lua selected null action preserve matched status | are new Lua feature tests automatically discovered
-- **date:** 2026-10-29 · **status:** bounded nullable39.4.7.1 repaired/targeted-checked; phase .5.2 and broader admission remain
+- **date:** 2026-10-29 · **status:** bounded nullable and ordinary diagnostic39.4.8 repaired/targeted-checked; phase/admission remain
 - **evidence:** `lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant.`
 - **reverify:** `Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh.`
 - **source:** [`docs/knowledge/lua-sparse-and-independent-intake.md`](docs/knowledge/lua-sparse-and-independent-intake.md)
@@ -16841,9 +16841,9 @@ _Lua bare mutations use one typed binding on PUC Lua and LuaJIT_
 - **source:** [`docs/knowledge/lua-uniform-binding-runtime.md`](docs/knowledge/lua-uniform-binding-runtime.md)
 
 ### lua-unknown-runtime-helper-diagnostic-gap
-_Lua ordinary unknown-helper fallback retains text and rule but omits a diagnostic code_
+_Lua ordinary unknown-helper diagnostics preserve the existing code at the owning fallback_
 - **answers:** does Lua ordinary unknown helper include a diagnostic code | why is Lua minimum error preservation qualified | who owns Lua unknown helper diagnostic parity
-- **date:** 2026-10-29 · **status:** P2 owned39.4.8 after bounded features before full admission
+- **date:** 2026-10-29 · **status:** bounded39.4.8 fixed/targeted-checked; registration and broader admission remain
 - **evidence:** `Lua39.4.3 actual12-source baseline real_error on both installed hosts retains unsupported runtime helper text, Atom rule/runtime phase, no code; initial unqualified peer oracle and corrected preservation proof retained in lua-minimum-intake.json.gz.`
 - **reverify:** `Use retained Lua minimum real_error source/probe on puc and luajit; diagnose actual public output before adopting any peer code oracle.`
 - **source:** [`docs/knowledge/lua-unknown-runtime-helper-diagnostic-gap.md`](docs/knowledge/lua-unknown-runtime-helper-diagnostic-gap.md)

@@ -419,3 +419,10 @@ lua-nullable-repair-intake.json.gz; no new authority/schema/full admission.
 completion: .5.2.1 linked startup27.1 freezes normative timing/return, canonical
 after20.1; .5.2.2 implements confirmed backend gaps before admission. Shared
 blind_LE source/two inputs remains excluded; independent Lua .8 proceeds.
+
+2026-10-29 Lua39.4.8 ordinary unknown-helper code repaired at owning diagnostic:
+6sources7inputs3healthy3RED ->6pass105 per host, only the code in three ordinary cases per native/restored
+route changes; exact inputs/modules/fresh public envelopes/healthy controls
+preserved. Minimum289/callable449 pass; lua-unknown-helper-intake.json.gz retains
+actual closure, including unsuccessful instruments/patch without passing credit.
+Independent Julia39.3.8 next; phase/registration/full admission remain.

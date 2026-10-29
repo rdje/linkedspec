@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: bounded nullable39.4.7.1 repaired/targeted-checked; phase .5.2 and broader admission remain
+status: bounded nullable and ordinary diagnostic39.4.8 repaired/targeted-checked; phase/admission remain
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -111,3 +111,9 @@ Observation43/recognition246/progress234/postcall274 pass per host. Current pack
 lua-nullable-repair-intake.json.gz retains closure; original intake stays frozen.
 P1 phase .5.2 next, P2 .8/declared-host/unsafe formatter/registration/pressure/
 slot/full admission remain separate.
+
+2026-10-29 ordinary diagnostic .8 is fixed with an owning typed diagnostic:
+6sources7inputs3healthy3RED ->6pass105 per host, only the code in three ordinary cases per native/restored route
+change; generated envelopes and healthy observations identical. Minimum289/
+callable449 pass; proof [[lua-unknown-runtime-helper-diagnostic-gap]]. Phase
+.5.2.1/.2 linked startup27.1 and broader admission prerequisites remain open.
