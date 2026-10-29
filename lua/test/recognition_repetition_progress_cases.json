@@ -223,12 +223,13 @@
         "input": "a",
         "expected": [
           true,
-          0,
+          [
+            0
+          ],
           1
         ]
       }
-    ],
-    "expected_group_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2"
+    ]
   },
   {
     "name": "consuming_then_zero",
@@ -238,12 +239,13 @@
         "input": "ab",
         "expected": [
           true,
-          0,
+          [
+            0
+          ],
           1
         ]
       }
-    ],
-    "expected_group_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2"
+    ]
   },
   {
     "name": "consuming_choice",
@@ -321,10 +323,11 @@
     "cases": [
       {
         "input": "a",
-        "expected": 0
+        "expected": [
+          0
+        ]
       }
-    ],
-    "expected_group_repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2"
+    ]
   },
   {
     "name": "ordinary_blind",

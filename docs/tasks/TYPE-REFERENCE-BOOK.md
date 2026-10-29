@@ -4819,6 +4819,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua live progress39.4.6 adds lua/test/recognition_repetition_progress_test.lua to the required exact ordinary/canonical registration inventory; direct focused234 assertions per installed host does not imply discovery.
 
+  Lua repeated-group39.4.2 adds lua/test/repeated_and_group_results_test.lua to the exact ordinary/canonical registration inventory before admission; direct390 assertions per installed host is not automatic discovery.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8588,13 +8590,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.1 - preserve Lua authored AND dependency step occurrences`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2`
-  Status: `pending` / P1 after required steps .1
+  Status: `completed` / P1 after required steps .1
   Goal: Preserve one copied repeated AND result per accepted group.
   Acceptance: Reproduce early return escaping whole rule and absent implicit groups; distinguish acceptance from falsey payload, complete vs partial groups, IT replacement/lifecycle/progress/minimum without changing ordinary authority.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:21sources39inputs per host3healthy18actualRED ->21pass390 assertions SDK matched/value/cursor and same21 fresh modules, exact inputs/three-control identity. Structural189/29healthy2owned dormant, progress234/CHOICE175 per host, exact three oracle-only changes/all24 guard sources unchanged; book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after bounded repairs and declared-host/unsafe formatter/registration/pressure/lifecycle/slot; no schema/authority movement.
+  Claim verification: none: Finite authored group/result/control-flow distinctions, no population measurement.
+
+  Activation: clean `aabb4cbdd38cb3c97091a8e14f0055bd1f17959d`; exact safe installed-host repeated-group RED before runtime edits.
+
+
+  - [x] **REPRODUCE / ISSUE**:21 exact sources39inputs per installed PUC5.5/LuaJIT give3healthy18actualRED SDK/restored/plan and same21 baseline modules fresh. Repeated action returns only first scalar, null/false/nested values fail group/count/minimum/cursor oracles, implicit complete groups disappear; I/LS/LE whole-rule controls retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual returned group exits at first cursor, before completion/count/IT and remaining repetition. interpreter.lua accept_match rethrows FLOW_MT return to whole-rule owner; repeated AND has no separate accepted group value/collector. Nonreturn groups fall through to last retv/null. Whole lifecycle and action return channels were conflated.
+  - [x] **FIX**: Private and_group_return flow belongs only to repeated AND action context and nextable catches it as accepted with independent group_value. Common loop progress/count/IT executes; one copied explicit/[] value appended after IT unless custom IT replaces it. Partial groups append nothing/cursor retained, collector minimum misses failed null. Lifecycle returns keep original channel; remove obsolete early-action offset guard plumbing.
+  - [x] **ADDRESSED (verified)**:21pass390 assertions39inputs per host SDK matched/value/cursor and generated/fresh public values, same21 baseline modules/consumer separate processes; raw/normalized/compiled/plan/emitted and three healthy I/LS/LE observations identical. Nullable recognized groups commit true/[null,null]/8 versus false/null at4/5; nested arrays stay one group each.
+  - [x] **NO REGRESSION**: Structural189 assertions29healthy2owned dormant, progress234 and CHOICE175 per host pass. All24 raw guard sources and other rows unchanged; exactly three .2-owned scalar expectations become arrays, two structural cases enabled. Compiler/emitter/matching/recognition authority/prior group/structural fixtures/schema unchanged. No other ordinary minima/blind/null/context/full admission credit.
+  - [x] **LOCKSTEP**: lua-and-groups-intake.json.gz retains actual producers/input/runtime epochs/SDK/fresh/trace/control receipts. Book/cards/target/roadmap/task/live/resume/history align. New normal source registration remains23.4.1 before admission; .3 minima next, other declared-host/unsafe formatter/pressure/lifecycle/slot prerequisites stay open. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2 - retain Lua repeated AND group return outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3`
   Status: `pending` / P1 after group .2
@@ -8959,7 +8972,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.2` | `pending` | Repair Lua repeated AND group return and collection outcomes. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3` | `pending` | Repair remaining ordinary Lua repetition minimum misses. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

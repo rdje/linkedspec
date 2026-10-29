@@ -8,7 +8,7 @@ answers:
   - "how do Lua cross-rule AND traces preserve logical slot identity"
   - "does Lua one-pattern duplicate AND sequence two hits"
 date: 2026-10-29
-status: bounded39.4.1 repaired/targeted-checked on installed hosts; group/minimum/blind/admission remain
+status: bounded39.4.1 repaired/targeted-checked on installed hosts; minimum/blind/admission remain
 tags: [lua, luajit, and, sparse, dependency, slot, trace, semantic, runtime]
 evidence: "lua-and-steps-intake.json.gz retains27active sources41inputs per installed host19healthy8actualRED ->27pass, same27 baseline modules/consumer and exact inputs/19controls; normal173 structural/semantic assertions, live234/duplicate112 per host."
 reverify: "bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route; remaining four dormant rows have exact other repair owners."
@@ -34,3 +34,7 @@ cross Part#1 at3/captures/cursor and selected-null matchedtrue at4;27healthy4own
 dormant, no success credit for other group/minimum/blind gaps. Live234/duplicate112
 neighbors pass per host. Explicit ordinary/canonical new-test registration23.4.1,
 declared5.4/unsafe formatter/full admission remain separate prerequisites.
+
+2026-10-29 group .2 now enables two further structural rows: current normal
+189 assertions29healthy2owned dormant; dependency fixture sources unchanged.
+Current group proof: [[lua-repeated-and-group-outcomes]]. Original .1 packet frozen.

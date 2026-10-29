@@ -75,6 +75,9 @@ local function nextable(callback)
   if getmetatable(result) == FLOW_MT and result.kind == "next" then
     return { value = false, nexted = true }
   end
+  if getmetatable(result) == FLOW_MT and result.kind == "and_group_return" then
+    return { value = true, nexted = false, group_returned = true, group_value = result.value }
+  end
   error(result, 0)
 end
 
@@ -5066,7 +5069,7 @@ function M.assert_recognition_repetition_progress(engine, ctx, rule_label, start
 end
 
 local function accept_match(
-    engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte, required_action
+    engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value, required_action
   )
   ctx.cursor_byte = one.byte_end
   ctx.registers = ctx.registers:with_local_match(one)
@@ -5091,14 +5094,13 @@ local function accept_match(
           edge_state
         )
         if not action_ok then
-          if action_iteration_values ~= nil and getmetatable(action_flow) == FLOW_MT and
+          if collect_and_group_value and getmetatable(action_flow) == FLOW_MT and
+              action_flow.kind == "return" then
+            flow("and_group_return", action_flow.value)
+          elseif action_iteration_values ~= nil and getmetatable(action_flow) == FLOW_MT and
               action_flow.kind == "return" then
             action_iteration_values[#action_iteration_values + 1] = copy_value(action_flow.value)
           else
-            if repetition_start_byte ~= nil and rule.mode_metadata.is_and and
-                getmetatable(action_flow) == FLOW_MT and action_flow.kind == "return" then
-              M.assert_recognition_repetition_progress(engine, ctx, rule.label, repetition_start_byte)
-            end
             error(action_flow, 0)
           end
         end
@@ -5152,7 +5154,7 @@ local function regex_once(
     action_iteration_values,
     match_preselected,
     preselected_match,
-    repetition_start_byte
+    collect_and_group_value
   )
   local cursor_before = ctx.cursor_byte
   if not match_preselected and #rule.regex_patterns == 0 then
@@ -5193,7 +5195,7 @@ local function regex_once(
       M.trace_regex_slot_selected(ctx, rule, index, "ordered_required", step.action)
       M.emit_semantic_regex_slot(ctx, rule, one, step.action)
       accept_match(
-        engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte, step.action
+        engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value, step.action
       )
     end
     return true
@@ -5237,7 +5239,7 @@ local function regex_once(
     )
     M.emit_semantic_regex_slot(ctx, rule, one)
   end
-  accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, repetition_start_byte)
+  accept_match(engine, rule, one, ctx, accumulator, action_iteration_values, collect_and_group_value)
   return true
 end
 
@@ -5398,6 +5400,15 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
   typed_source.recognition.note_observation_entry(ctx, label, ctx.cursor_byte)
   local accumulator = json.array()
   local action_iteration_values = collects_explicit_action_iteration_values(rule) and json.array() or nil
+  local and_iteration_values = nil
+  if execution_policy.uses_and_execution and not execution_policy.uses_blind_dispatch and
+      rule.mode_metadata.rep_min ~= nil and #rule.action_edges > 0 then
+    and_iteration_values = json.array()
+  end
+  local has_custom_iteration = false
+  for _, payload in ipairs(rule.lifecycle_action_payloads) do
+    if payload.lifecycle == "IT" then has_custom_iteration = true; break end
+  end
   ctx.accumulator_stack[#ctx.accumulator_stack + 1] = { label = label, values = accumulator }
   local trace_scope = runtime_trace_scope(
     ctx,
@@ -5497,7 +5508,7 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
           action_iteration_values,
           capture_gaps,
           selected_match,
-          before
+          and_iteration_values ~= nil
         )
       end)
       if attempt.nexted then
@@ -5532,13 +5543,20 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
         count = count + 1
         typed_source.recognition.set_gap_phase(ctx, rule.label, "IT")
         lifecycle(engine, rule, "IT", ctx, accumulator)
+        if and_iteration_values ~= nil and not has_custom_iteration then
+          local group_value = json.array()
+          if attempt.group_returned then group_value = attempt.group_value end
+          and_iteration_values[#and_iteration_values + 1] = copy_value(group_value)
+        end
         if ctx.cursor_byte == before then break end
       end
     end
     if count < minimum then
       typed_source.recognition.set_gap_phase(ctx, rule.label, "LX")
       lifecycle(engine, rule, "LX", ctx, accumulator)
-      if action_iteration_values ~= nil then return rule_result(false, json.null) end
+      if action_iteration_values ~= nil or and_iteration_values ~= nil then
+        return rule_result(false, json.null)
+      end
       fail("rule '" .. label .. "' expected at least " .. minimum .. " matches, got " .. count, {
         rule_label = label,
       })
@@ -5552,7 +5570,14 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     end
     typed_source.recognition.set_gap_phase(ctx, rule.label, "E")
     lifecycle(engine, rule, "E", ctx, accumulator)
-    local value = action_iteration_values ~= nil and action_iteration_values or finish_value(accumulator, ctx.retv)
+    local value
+    if and_iteration_values ~= nil then
+      value = finish_value(accumulator, and_iteration_values)
+    elseif action_iteration_values ~= nil then
+      value = action_iteration_values
+    else
+      value = finish_value(accumulator, ctx.retv)
+    end
     return rule_result(count > 0, value)
   end)
   local recognition_result

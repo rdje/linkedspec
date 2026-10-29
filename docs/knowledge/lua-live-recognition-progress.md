@@ -39,3 +39,9 @@ failure and initial structural expected-error consumer failure are retained and
 corrected, no failed epoch hidden. Compiler/emitter/matching/neutral fixtures and
 schema unchanged. Direct new test registration remains23.4.1 before admission.
 Declared5.4/unsafe formatter/full suite/performance remain outside this proof.
+
+2026-10-29 group .2 routes early AND action completion through the common guard
+and removes temporary repetition_start_byte plumbing. All24 source strings and
+other fixture rows unchanged; exactly three .2-owned scalar expectations become
+arrays. Progress234 per host remains green. Current group proof:
+[[lua-repeated-and-group-outcomes]]. Original progress packet stays frozen.

@@ -349,3 +349,12 @@ assertions27healthy4owned dormant includes duplicate semantic positions1/2 and
 cross Part#1 at3; live234/duplicate112 neighbors pass. Runtime-only, compiler/
 emitter/matching/recognition authority/prior fixtures unchanged. Packet
 lua-and-steps-intake.json.gz retains closure; group .2 next, admission remains.
+
+2026-10-29 Lua39.4.2 retains one copied accepted repeated AND group outcome,
+independent of falsey/null payload, complete[] groups/partial discard/IT override
+and lifecycle whole-return authority. Common progress handles early/normal groups.
+21sources39inputs3healthy18RED ->21pass390 per installed host, same21 baseline
+modules/input/three-control identity. Structural189/29healthy2owned dormant,
+progress234/CHOICE175 pass; all24 guard sources unchanged, exactly three owned
+scalar oracles become arrays. Packet lua-and-groups-intake.json.gz retains
+closure. Ordinary minima .3 next, other prerequisites/full admission remain.

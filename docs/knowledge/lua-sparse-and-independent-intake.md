@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: independent intake complete; live progress39.4.6 and required steps39.4.1 repaired/targeted-checked, group .2 next
+status: independent intake complete; live progress .6/required steps .1/groups .2 repaired/targeted-checked, minima .3 next
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -58,3 +58,10 @@ keeping full structural catalogs.27active41inputs19healthy8RED ->27pass per
 host, same27 baseline modules/19-control identity; normal173 assertions27healthy
 4owned dormant, live234/duplicate112. Current proof:
 [[lua-and-required-dependency-steps]]. Group .2 next; original intake frozen.
+
+2026-10-29 repeated AND group .2 now retains independent accepted copied values,
+including null/false/0/nested arrays, complete[] groups and failed-null collector
+minima.21sources39inputs3healthy18RED ->21pass390 per host, same21 modules/
+three-control identity; structural189/29healthy2owned dormant, progress234/
+CHOICE175 pass. Current proof: [[lua-repeated-and-group-outcomes]]. Minima .3
+next, original intake packet frozen and full prerequisites remain.
