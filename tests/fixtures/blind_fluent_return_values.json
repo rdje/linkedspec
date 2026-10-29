@@ -1,0 +1,129 @@
+[
+  {
+    "name": "quoted",
+    "source": "Top::AND\n => Child.return(\"OK\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": "OK"
+  },
+  {
+    "name": "unicode",
+    "source": "Top::AND\n => Child.return(\"α\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": "α"
+  },
+  {
+    "name": "number",
+    "source": "Top::AND\n => Child.return(42)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": 42
+  },
+  {
+    "name": "zero",
+    "source": "Top::AND\n => Child.return(0)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": 0
+  },
+  {
+    "name": "true",
+    "source": "Top::AND\n => Child.return(true)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      "?Top:",
+      true
+    ]
+  },
+  {
+    "name": "false",
+    "source": "Top::AND\n => Child.return(false)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      "?Top:",
+      false
+    ]
+  },
+  {
+    "name": "undef",
+    "source": "Top::AND\n => Child.return(undef)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      "?Top:",
+      null
+    ]
+  },
+  {
+    "name": "array",
+    "source": "Top::AND\n => Child.return(array(1,\"x\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      1,
+      "x"
+    ]
+  },
+  {
+    "name": "hash",
+    "source": "Top::AND\n => Child.return(hash(\"key\",\"value\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": {
+      "key": "value"
+    }
+  },
+  {
+    "name": "computed",
+    "source": "Top::AND\n => Child.return(cat(\"O\",\"K\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": "OK"
+  },
+  {
+    "name": "retv",
+    "source": "Top::AND\n => Child.return(retv)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      "?Top:",
+      "CHILD"
+    ]
+  },
+  {
+    "name": "fallback",
+    "source": "Top::AND\n => Child.return(coalesce(undef,\"F\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": "F"
+  },
+  {
+    "name": "effect_order",
+    "source": "Top::AND\n => Child.return(array({push(audit,\"once\");\"OK\"},copy(audit)))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      "OK",
+      [
+        "once"
+      ]
+    ]
+  },
+  {
+    "name": "first_return",
+    "source": "Top::AND\n => Child.return(\"first\").return(\"later\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": "first"
+  },
+  {
+    "name": "null_return",
+    "source": "Top::AND\n => Child.return(undef).return(\"later\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": [
+      "?Top:",
+      null
+    ]
+  },
+  {
+    "name": "return_undef",
+    "source": "Top::AND\n => Child.return_undef.return(\"later\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": null
+  },
+  {
+    "name": "empty",
+    "source": "Top::AND\n => Child.return()\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "input": "x",
+    "expected": []
+  }
+]

@@ -3245,6 +3245,31 @@ impl Engine {
         }
 
         for (method, args_str) in &entry.fluent_chain {
+            if method == "return" {
+                let args = Self::parse_action_edge_fluent_call_args(method, args_str)?;
+                let value = if args.is_empty() {
+                    RuntimeValue::Array(ctx.get_array(label))
+                } else if Self::blind_fluent_return_uses_general_payload(args_str) {
+                    self.eval_action_edge_fluent_return(args_str, ctx, label)?
+                } else {
+                    // Bare-name forms retain the reference's implicit scope
+                    // label. Evaluate each payload once, in authored order.
+                    let mut values = vec![RuntimeValue::Scalar(format!("?{label}:"))];
+                    for arg in &args {
+                        values.push(self.eval_expr(arg.value(), ctx, label)?);
+                    }
+                    RuntimeValue::Array(values)
+                };
+                if ctx.is_effective_entry_rule(label) {
+                    ctx.push_accumulator(value.clone());
+                }
+                ctx.set_return_value(value);
+                return Ok(());
+            }
+            if method == "return_undef" {
+                ctx.set_return_value(RuntimeValue::Undef);
+                return Ok(());
+            }
             let args_val: Vec<RuntimeValue> = if args_str.is_empty() {
                 vec![]
             } else {
@@ -3255,6 +3280,149 @@ impl Engine {
         }
 
         Ok(())
+    }
+
+    /// Keep the existing reference distinction between general payloads and
+    /// scope-injected bare-name forms. This is a lexical surface contract;
+    /// evaluation still belongs to the ordinary typed expression evaluator.
+    fn blind_fluent_return_uses_general_payload(args: &str) -> bool {
+        let payload = args.trim();
+        let bytes = payload.as_bytes();
+        if matches!(
+            bytes.first(),
+            Some(b'[' | b'{' | b'"' | b'\'' | b'0'..=b'9')
+        ) || (bytes.first() == Some(&b'-') && bytes.get(1).is_some_and(u8::is_ascii_digit))
+        {
+            return true;
+        }
+        let Some((name, _)) = payload.split_once('(') else {
+            return false;
+        };
+        // Mirrors BootstrapSpec::Core::_method_chain_return_uses_general_payload.
+        const GENERAL_RETURN_HELPERS: &[&str] = &[
+            "array",
+            "hash",
+            "trim",
+            "lowercase",
+            "uppercase",
+            "length",
+            "replace_substr",
+            "rm_prefix",
+            "rm_suffix",
+            "cat",
+            "num_abs",
+            "num_floor",
+            "num_ceil",
+            "num_round",
+            "num_sum",
+            "num_avg",
+            "num_median",
+            "num_range",
+            "num_add",
+            "num_sub",
+            "num_mul",
+            "num_div",
+            "num_mod",
+            "num_clamp",
+            "num_min",
+            "num_max",
+            "abs",
+            "floor",
+            "ceil",
+            "round",
+            "sum",
+            "avg",
+            "median",
+            "range",
+            "add",
+            "sub",
+            "mul",
+            "div",
+            "mod",
+            "clamp",
+            "min",
+            "max",
+            "starts_with",
+            "ends_with",
+            "contains_substr",
+            "matches",
+            "coalesce_nonempty",
+            "is_empty",
+            "is_nonempty",
+            "count",
+            "first",
+            "last",
+            "take",
+            "slice",
+            "take_last",
+            "drop_back",
+            "drop_front",
+            "concat_arrays",
+            "split_tagged_records",
+            "sorted",
+            "reversed",
+            "contains",
+            "index_of",
+            "count_keys",
+            "sorted_keys",
+            "sorted_values",
+            "has_key",
+            "merge_hash",
+            "set_key",
+            "rename_key",
+            "drop_keys",
+            "pick_keys",
+            "join_values",
+            "coalesce",
+            "copy",
+            "flat_array",
+            "flat_hash",
+            "flat",
+            "capture_slice",
+            "capture_slice_len",
+            "capture_slice_length",
+            "capture_slice_until_cursor",
+            "capture_slice_until_cursor_len",
+            "capture_take_until_cursor",
+            "capture_take_until_cursor_len",
+            "capture_take_rest",
+            "capture_take_rest_len",
+            "capture_take",
+            "capture_take_len",
+            "capture_rest",
+            "capture_rest_len",
+            "capture_rest_length",
+            "capture_slice_pos",
+            "capture_slice_line",
+            "capture_slice_col",
+            "capture_from_rule_start",
+            "capture_len_from_rule_start",
+            "capture_from",
+            "capture_len_from",
+            "capture_until_cursor_from",
+            "capture_until_cursor_len_from",
+            "capture_take_until_cursor_from",
+            "capture_take_until_cursor_len_from",
+            "capture_take_rest_from",
+            "capture_take_rest_len_from",
+            "capture_take_len_from",
+            "capture_rest_from",
+            "capture_rest_len_from",
+            "capture_between",
+            "capture_len_between",
+            "capture_take_between",
+            "capture_take_between_len",
+            "entry_text",
+            "match_text",
+            "entry_group",
+            "match_group",
+            "entry_groups",
+            "match_groups",
+            "input_text",
+            "input_len",
+            "input_slice",
+        ];
+        GENERAL_RETURN_HELPERS.contains(&name.trim())
     }
 
     fn prepare_native_selected_match(

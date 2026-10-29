@@ -4875,6 +4875,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust48.2 adds referenced_blind_intermediate.rs compile-only regression; runtime closure48.2.3 remains open. Exact canonical selection must include final complete consumer before admission.
 
+  Rust48.2.1 adds blind_fluent_return_values.rs consuming17 reference-qualified cases, with focused native/reconstructed/plan/fresh proof. Exact canonical presence/selection remains required before admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9374,13 +9376,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2 - qualify Rust blind target compilation and own runtime outliers`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.1`
-  Status: `pending` / P1 immediately after48.2 before48.3/admission
+  Status: `completed` / P1 immediately after48.2 before48.3/admission
   Goal: Repair blind-edge fluent return argument evaluation through the existing expression owner, preserving types/effects/empty return and return_undef on native/generated routes.
   Reproduction/impact: Retained48.2 native/reconstructed/plan results show three duplicated nested coordinator arrays and two fluent literal returns containing quote characters; full normal fails15 route assertions. Compile ownership8valid4reject is healthy. Separate emitted qualification belongs to48.2 intake.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN normal and direct blind/fluent/collection controls, retained public source/compiled/metadata; book/docs/commit, no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after48/40.1.1/45/selection23.4.1 and prerequisites.
-  Planned claim verification: none: Finite authored functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Reference17 native/fresh; own17 four-route RED/GREEN and unchanged source/metadata/old-module replay; normal1/blind-collection1/default-plan6 PASS8, formatting/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after48.2.2/.3/remaining48/40.1.1/.2/45/selection23.4.1 and prerequisites.
+  Claim verification: none: Finite authored typed return/flow/source and direct-dependent functional assertions, no population measurement.
+
+  Activation: clean `9d9e7f4807944ee13ea7f6eda64dbdc2fc9efec2`;48.2 committed/brief empty/no jobs. Raw Scalar argument owner confirmed by public compiled metadata. Qualify reference typed/empty/short-circuit behavior, then own Rust normal RED before bounded return dispatch edit; preserve other methods and parent-calling push.
+
+  Reference qualification:17 native/emitted candidates agree on actual shapes. General literal/helper payloads return directly; bare true/false/undef/retv retain parent tag; empty return yields[] with separate Perl warning40.1.2. Core::_method_chain_return_uses_general_payload and _render_method_call_chain own this existing syntax distinction. Initial reader wrongly expected consumed cursor1, but child I returns before matching, actual0; candidate expected bare values were hypotheses, corrected only after complete observed output/source authority. Preserve exact initial instruments, no product RED credit for those reader hypotheses.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent reference17 native/fresh qualifies actual general/scoped/empty shapes. Own17 fail all four Rust routes before production, including quoted text, numbers/zero, bool/null payloads, aggregates, computed/name effects, retv and return/return_undef short-circuit.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Shared execute_bcode_entry_tail passes raw fluent argument text as one Scalar and continues after setting the return channel. Existing Core::_method_chain_return_uses_general_payload/_render_method_call_chain distinguishes direct general payloads from scope-injected bare names; preserve that actual authority rather than initial hypothetical untagged values.
+  - [x] **FIX**: Parse return arguments through existing ActionIR evaluator; direct general payloads use existing action-return evaluator, scoped forms evaluate each typed payload once with parent tag, empty reads own array. return/return_undef stop tail immediately. Existing lexical prefix helper spellings copied/verified against current Core authority; other method dispatch untouched, no new state/schema/family/arity policy.
+  - [x] **ADDRESSED (verified)**: All17 pass native/reconstructed/plan/separate compiled; source/compiled/serialized/full metadata/plan unchanged and original17 modules reused with rebuilt runtime. Rebuild consumers, no regeneration. Reference cursor0 follows child I early return; Rust final cursor unexposed, no matching claim.
+  - [x] **NO REGRESSION**: New17-case normal plus blind-collection1/default-plan6 pass8 selected tests and formatting. Reference empty warning exposes duplicate my Top declarations, separately owned40.1.2; no suppression or runtime failure inference. Reader hypotheses/helper-extractor refusal retained as instrument-only corrections before product edits. Dependency warnings opaque, lock identities unchanged. Coordinator failure48.2.2/.3 remains open.
+  - [x] **LOCKSTEP**: Packet rust-blind-fluent-return-intake.json.gz retains actual reference/Rust RED+GREEN producers/initial inputs/fixture/modules/source/classifier/patch/receipts. Book/cards/map/roadmap/task/live/resume/history align; new normal canonical selection23.4.1 required.48.2.2 next then.3/remaining48/warnings/45; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.1 - evaluate Rust blind fluent return payloads and stop the chain`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2`
   Status: `pending` / P1 immediately after48.2 before48.3/admission
@@ -9481,6 +9496,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: SpecEntry/Contracts compile; normal16/structural typed-source4/adjacent capture Number7 groups pass27 total. Source/fixture bytes remain exact; negative pure-function/callback fences stay enforced. Raw host-address strings excluded from stale byte comparison only where exact structured fields exist. No full Phase0 rerun/waiver, broader SESSION17 closure, peer backend or full admission credit. Initial normal native-context assertion was narrowed to native route before final consumer proof.
   - [x] **LOCKSTEP**: Packet perl-capture-endpoint-intake.json.gz retains actual producers/product patch/before+after/source/modules/RED+GREEN/stale/tests/inputs/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; exact t/capture_endpoint_absence.t registration23.4.1 remains before admission/push. Independent Rust40.2 next; focused authorized commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1 - preserve unavailable Perl capture endpoints without ambient match state`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2`
+  Status: `pending` / P2 after40.1.1 before45/admission
+  Goal: Repair emitted Perl empty blind fluent return duplicate scalar declaration without changing current array result or return/scoped-name semantics.
+  Reproduction/impact:48.2.1 public native/emitted Top::AND =>Child.return() with Child I{return("CHILD")} returns[]/cursor0 on both; fresh loading warns my variable $Top masks earlier declaration. Full emitted source and warning channel retained in rust-blind-fluent-return-intake.json.gz; inspect exact two declarations before selecting repair. This differs from40.1.1 local-match variables. No runtime failure inferred.
+  Planned verification tier: focused
+  Planned focused checks: Own public warning RED/source root, empty/general/scoped return and nearest declaration normals; preserve values and metadata, book/docs/commit.
+  Planned canonical trigger: Full23.4/final clean push after repair and existing prerequisites.
+  Planned claim verification: none: Finite functional source/warning assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1`
   Status: `pending` / P1 after48.5 before45/wider features/full23.4/push
@@ -9844,7 +9868,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.1` | `pending` | Repair typed Rust blind fluent return arguments, then coordinator runtime outliers. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2` | `pending` | Qualify and repair Rust coordinator invocation and blind collection outliers. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

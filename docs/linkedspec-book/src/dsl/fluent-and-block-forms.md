@@ -205,6 +205,32 @@ surface: no-arg `.push`, `.return(expr)`, `.return_undef()`, explicit-target `.p
 to the preceding action edge, so this form is equivalent to keeping the same calls on one chain.
 Compact lifecycle-marker chains such as `I.return(...)` are portable too.
 
+### Return values on blind edges
+
+Perl and Rust preserve the existing distinction between general return payloads
+and bare-name scoped forms on a blind edge. For example:
+
+```text
+Top::AND
+ => Child.return(hash("kind", "result", "items", array(1, "x")))
+Child:
+ I { return("child") }
+```
+
+The result is `{"kind":"result","items":[1,"x"]}`. Literal strings and
+numbers, array/hash constructors and supported general-value helpers evaluate
+their payload normally: `.return("OK")` yields `"OK"`, `.return(42)` yields
+`42`, and `.return(cat("O", "K"))` yields `"OK"`. Argument effects run once.
+
+Bare-name forms retain their scoped shape. In the same parent,
+`.return(retv)` yields `["?Top:","child"]`, `.return(false)` yields
+`["?Top:",false]`, and `.return(undef)` yields `["?Top:",null]`.
+`.return_undef` yields null directly. `.return()` returns the parent's own
+array, which is empty in this example. A reached return stops later fluent
+calls: `.return("first").return("later")` yields `"first"`.
+Rebuild Rust runtime consumers for this correction; existing emitted source
+can be reused. The example's child returns in `I`, before matching input.
+
 ### If family: attached blocks
 
 Attached blocks put each branch body directly after its condition. The parser lowers them to the

@@ -27,3 +27,21 @@ and source identity exact; fresh lock versions/sources/checksums match native.
 Value-only public API exposes no final cursor; no cursor/performance claim.
 Packet rust-referenced-intermediate-intake.json.gz retains the actual producer,
 full RED/source/compiled/modules/traces/metadata/locks/results and readers.
+
+## Rust typed blind return repair48.2.1 (2026-10-29)
+
+The shared blind tail now parses/evaluates return payloads through existing
+typed expression owners and stops immediately for return/return_undef. Existing
+Core lexical general-payload versus scoped bare-name forms remain: direct
+literal/helper values, tagged bare true/false/undef/retv, and empty own array.
+All17 reference-qualified sources improve from allRED to allpass on native,
+reconstructed, plan and separate compiled routes;8 selected tests pass. All
+compiled/serialized/emitted source/full metadata/plan remain exact; original17
+modules replay against updated runtime. Rebuild consumers, no regeneration.
+Reference Child I returns before matching, cursor0; Rust final cursor unexposed.
+Initial cursor/untagged-value hypotheses and helper-extractor refusal corrected
+as instruments, not product RED. Empty Perl .return() emits duplicate my Top
+declarations at lines52/55 and one load warning;40.1.2 owns repair after40.1.1
+before45/admission. Other reference cases warning-free. Coordinator48.2.2/.3
+and full admission remain separate. Packet rust-blind-fluent-return-intake.json.gz
+retains actual inputs/producers/source/classifier/modules/RED+GREEN/receipts.

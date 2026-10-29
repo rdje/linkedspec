@@ -515,7 +515,7 @@ The short version is:
 
 A blind target may itself be a coordinator with no regex slots; its body performs the parser steps. A `->` action edge still requires the selected target regex slot. Current Dart validation incorrectly applies that slot requirement to blind targets with no regex, including bare AND members; this tracked validation defect is pending repair. Perl compiles the documented blind forms. Its ordinary regression checks the valid blind and direct-call forms through native and emitted execution, and separately checks that action edges without a target regex still reject.
 
-Rust accepts these targets and preserves action-slot validation, but its fluent return and repeated coordinator results still have tracked runtime mismatches. The example below is currently checked through native and emitted Perl parsers:
+Rust accepts these targets and preserves action-slot validation, but its fluent return values are now corrected; repeated coordinator results still have a tracked runtime mismatch. The example below is currently checked through native and emitted Perl parsers:
 
 ```text
 Top::
