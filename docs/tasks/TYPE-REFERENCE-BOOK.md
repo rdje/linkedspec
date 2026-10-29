@@ -4899,6 +4899,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Julia48.4 adds referenced_blind_targets_test.jl with one runtests include,36 compiler roles plus strict bypass/real-empty and10 runtime controls (180 assertions). Qualified push3 excluded under48.4.1 with compile coverage; original parent-LX runtime unqualified48.2.2.1. Exact canonical selection must include this normal and completed runtime repair before admission.
 
+  Julia48.4.1 adds blind_parent_push_test.jl with one runtests include,13 exact source controls104 assertions. Qualified coordinator3 runtime qualification moves to actual invocation-array owner48.4.2; original parent-LX remains unqualified. Exact canonical selection must include repaired normals before admission/push.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9673,14 +9675,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4 - compile Julia blind targets without regex slots`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1`
-  Status: `pending` / P1 immediately after48.4 before48.5/45/admission/push
+  Status: `completed` / P1 immediately after48.4 before48.5/45/admission/push
   Goal: Preserve the public enclosing-parent call semantics of Julia blind fluent push through the existing typed call/mutation owner.
   Reproduce / impact:48.4 independent original12/qualified12 baseline rejected blind no-regex declarations. Validator-only repair compiles qualified blind_no_regex, marked_blind_target and markerless_blind, then native/restored raises push() in rule Top requires an action-edge child context; generated plan wraps same failure. Public reference qualified values are[[x]] at cursor1. Exact producer/source/compiled/plan/results retained in julia-referenced-intake. Existing _require_runtime_action_edge_child! rejects current_edge=nothing for blind post-call push; do not append prior child result as substitute.
   Acceptance: Own13 shared blind_parent_push/repeated source native/restored/plan/fresh baseline and exact typed String/zero/false/null/Array/explicit target/guard/no-tail controls before edits. Route only blind fluent call through existing typed enclosing-parent call machinery; preserve target/index/argument/function precedence/recursion and other action/free/callback behavior. Track independently observed fresh rule-array or progress defects with precise scope; do not infer Dart failures in Julia. Remove exactly owned runtime exclusions after actual repair and retain same emitted modules/metadata/healthy controls where applicable. Normal/direct dependents/book/docs/proof/commit before48.5.
+  Verification tier: `focused`
+  Focused checks:13 sources2healthy11actualRED ->13pass4routes/same13 baseline modules, full input/emission/v2 metadata and2healthy results exact;36 existing source/artifact/diagnostic records exact/33 runtime unchanged3 array-leak owners. New104/referenced180/postcall274/progress234/uniform61 pass853 assertions, fresh/focused stderr empty. Normal registration/book/map/history/manual memory/cadence/diagnosis/claim-input/diff.
+  Canonical trigger: Full23.4/final clean push after48.4.2/48.5/45 and20.1/23.4.1/lifecycle/ordinary policy prerequisites; no public policy/schema/infrastructure movement.
+  Claim verification: none: Finite authored typed parent-call/diagnostic/source identity controls, no population measurement.
+
+  Activation: clean `cd4d6d1ef1dade0e97705c11a830b629c97b8562`; compiler repair committed/brief0/no jobs. Own13 shared fixture native/restored/plan/fresh and normal RED before edits; recover compiled fluent-only payload role, current action child cache and typed call push, parent entry index and helper/function precedence. Keep source/compiler/emitter stable and diagnose actual invocation-array/progress outcomes independently.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own13 native/restored/plan/fresh baseline has2healthy/11actualRED:9 push action-context errors and2 explicit-target silent null/[null]. Normal RED33 failed26passed, actual emitted baseline reproduces. Public parent call, not child append, is the distinguishing typed oracle.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Blind optional payload supplies no action edge; compiled fluent push becomes ordinary push()/push(out), whose no-argument branch requires an action child and one free argument can silently return nothing. Existing typed push(rule,target,index) already owns dispatch/append/mutation. The fluent-only context must supply enclosing parent and inherited entry index through this owner.
+  - [x] **FIX**: Thread private nullable parent entry index from rule dispatch through both blind modes/optional payload/block/call to push. Only top-level fluent-only push takes authored call resolution (function precedence/arity) then typed enclosing-rule injection. Existing push call branch inherits parent entry index, preserves result index/target/mutation, performs actual parent call and appends its typed result. No fake action edge/global frame/new schema/compiler/emitter/family/progress policy.
+  - [x] **ADDRESSED (verified)**: All13 controls pass4routes using same13 original modules, exact source/normalized/compiled/plan/emitted/full v2 metadata. String/0/false/null/nested Array/out/guard/no-tail remain typed. Two healthy full observations exact. No dedicated nonzero-selector or shadowed-push runtime proof is claimed; code threads/resolves through existing owners.
+  - [x] **NO REGRESSION**: New104/referenced180/postcall274/progress234/uniform61 pass853 assertions, final focused/fresh stderr empty. Existing36 full source/artifact/diagnostic records exact;33 runtime unchanged. Three repaired runtime errors reveal[[x],[x]] versus[[x]]; own conventional array leak48.4.2 immediately next and retain explicit runtime qualification. No ordinary count/IT/minimum/LX/parent phase authority movement or peer/full admission claim.
+  - [x] **LOCKSTEP**: Packet julia-blind-parent-push-intake.json.gz retains actual producer/fixture/normal baseline+final/runtime epochs/modules/SDK/fresh/metadata/receipts. One normal include; exact canonical selection23.4.1 required. Book/cards/map/roadmap/task/live/resume/history align;48.4.2 next before48.5/warnings/45, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1 - preserve Julia blind fluent parent push calls`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2`
+  Status: `pending` / P1 immediately after48.4.1 before48.5/45/admission/push
+  Goal: Make Julia conventional rule arrays fresh per invocation through the existing scoped typed binding owner; independently qualify coordinator progress outcomes.
+  Reproduce / impact:48.4.1 after-push native/restored/plan qualified blind_no_regex, marked_blind_target, markerless_blind now return[[x],[x]] at cursor1 versus qualified reference[[x]]. Same fixture/compiler/source preserved; actual missing-context error is repaired. Existing rule entry pushes an empty snapshot map but implicit same-name array mutation does not snapshot/reset it; only explicit aggregate initializer/reset currently enters rule-local scope. Inspect current public toolbox/trace and frozen3 rule_invocation_accumulators before changes to isolate direct repeated calls from ordinary coordinator iteration policy; no Dart-derived failure assumption.
+  Acceptance: Own original3 source SDK/restored/plan/fresh baseline, direct twice and explicit-reset controls, typed binding identity/snapshot restore and undeclared mutation neighbors. Scope only invoked rule conventional array, restoring full caller kind/binding identity via existing owner. Do not reset unrelated variables or change minimum/count/IT/progress/LX policy to force reference output. If fresh arrays expose an ordinary-phase discrepancy, log precise Julia source/reference/compatibility authority under canonical39.8.1 or linked owner before admission; keep explicit runtime qualification. Normal/direct dependents/same modules/healthy metadata/errors/book/docs/proof/commit, then safe Lua48.5.
   Planned verification tier: focused
-  Planned focused checks: Own13 source controls and qualified referenced7 runtime, typed/native/restored/plan/fresh outcomes and direct blind/post-call/progress neighbors; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after exact selection23.4.1, pressure20.1 and lifecycle/progress/Phase0 prerequisites.
-  Planned claim verification: none: Finite authored feature/diagnostic assertions, no population measurement.
+  Planned focused checks: Own3 typed source targets and qualified runtime7, same old modules/native/restored/plan/fresh, invocation reset/undeclared mutation and blind/progress direct neighbors; no routine full gate.
+  Planned canonical trigger: Full23.4/final clean push after exact selection23.4.1, pressure20.1, ordinary policy39.8.1 and lifecycle/Phase0 prerequisites.
+  Planned claim verification: none: Finite authored invocation/scoping functional assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -10118,7 +10141,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1` | `pending` | Preserve Julia blind fluent enclosing-parent push calls. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2` | `pending` | Scope Julia conventional rule arrays per invocation. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

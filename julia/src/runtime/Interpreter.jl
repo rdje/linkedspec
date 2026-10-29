@@ -2043,6 +2043,7 @@ function _execute_runtime_rule!(
                     engine,
                     rule,
                     context;
+                    entry_regex_index = entry_regex_index,
                     uses_and_execution = execution_policy.uses_and_execution,
                 )
                 return terminal_result
@@ -2147,6 +2148,7 @@ function _execute_runtime_blind_rule!(
     rule::CompiledRule,
     context::_RuntimeExecutionContext,
     ;
+    entry_regex_index::Int,
     uses_and_execution::Bool,
 )
     minimum = rule.mode_metadata.rep_min
@@ -2159,6 +2161,7 @@ function _execute_runtime_blind_rule!(
                 engine,
                 rule,
                 context;
+                entry_regex_index = entry_regex_index,
                 uses_and_execution = uses_and_execution,
                 implicit_iteration_results = uses_and_execution ? implicit_iteration_results : nothing,
             ))
@@ -2219,6 +2222,7 @@ function _execute_runtime_blind_rule!(
                 engine,
                 rule,
                 context;
+                entry_regex_index = entry_regex_index,
                 uses_and_execution = uses_and_execution,
                 implicit_iteration_results = iteration_results,
                 return_iteration_value = true,
@@ -2304,6 +2308,7 @@ function _execute_runtime_blind_once!(
     engine::LinkedSpecRuntimeEngine,
     rule::CompiledRule,
     context::_RuntimeExecutionContext;
+    entry_regex_index::Int,
     uses_and_execution::Bool,
     implicit_iteration_results = nothing,
     return_iteration_value::Bool = false,
@@ -2335,7 +2340,8 @@ function _execute_runtime_blind_once!(
                 edge.action_payload,
                 context,
                 rule.label,
-                nothing,
+                nothing;
+                blind_parent_regex_index = edge.code === nothing ? entry_regex_index : nothing,
             )
             if edge_return !== nothing
                 if return_iteration_value
@@ -2371,7 +2377,8 @@ function _execute_runtime_blind_once!(
             edge.action_payload,
             context,
             rule.label,
-            nothing,
+            nothing;
+            blind_parent_regex_index = edge.code === nothing ? entry_regex_index : nothing,
         )
         if edge_return !== nothing
             if return_iteration_value
@@ -3063,7 +3070,8 @@ function _execute_runtime_optional_payload!(
     payload,
     context::_RuntimeExecutionContext,
     rule_label::String,
-    current_edge,
+    current_edge;
+    blind_parent_regex_index::Union{Nothing,Int} = nothing,
 )
     if payload === nothing
         return nothing
@@ -3073,7 +3081,8 @@ function _execute_runtime_optional_payload!(
         payload.action_ast,
         context,
         rule_label,
-        current_edge,
+        current_edge;
+        blind_parent_regex_index = blind_parent_regex_index,
     )
 end
 
@@ -3082,12 +3091,25 @@ function _execute_runtime_action_block!(
     block::ActionBlock,
     context::_RuntimeExecutionContext,
     rule_label::String,
-    current_edge,
+    current_edge;
+    blind_parent_regex_index::Union{Nothing,Int} = nothing,
 )
     try
         index = 1
         stop = length(block.statements) + 1
         while index < stop
+            statement = block.statements[index]
+            expr = statement.expr
+            # Fluent blind push calls the parent; resolve authored calls first
+            # so user-function precedence and arity keep their existing owner.
+            if blind_parent_regex_index !== nothing && expr isa ActionCallExpr &&
+                    canonical_action_helper_name(expr.name) == "push"
+                _evaluate_runtime_call!(engine, expr, context, rule_label,
+                    current_edge, statement.drops_value;
+                    blind_parent_regex_index = blind_parent_regex_index)
+                index += 1
+                continue
+            end
             index = _execute_runtime_action_statement_at!(
                 engine,
                 block.statements,
@@ -4254,7 +4276,8 @@ function _evaluate_runtime_call!(
     context::_RuntimeExecutionContext,
     rule_label::String,
     current_edge,
-    statement_context::Bool,
+    statement_context::Bool;
+    blind_parent_regex_index::Union{Nothing,Int} = nothing,
 )
     keyword_arg_count = count(arg -> arg isa ActionKeywordArgument, call.args)
     args = ActionExpr[getfield(arg, :value) for arg in call.args if arg isa ActionPositionalArgument]
@@ -4420,7 +4443,8 @@ function _evaluate_runtime_call!(
     elseif helper_name == "set"
         return _call_runtime_set!(engine, args, call.source_span, context, rule_label, current_edge)
     elseif helper_name == "push"
-        return _call_runtime_push!(engine, args, call.source_span, context, rule_label, current_edge)
+        return _call_runtime_push!(engine, args, call.source_span, context, rule_label,
+            current_edge; blind_parent_regex_index = blind_parent_regex_index)
     elseif helper_name == "array"
         return _call_runtime_array(engine, args, context, rule_label, current_edge)
     elseif helper_name == "hash"
@@ -5580,7 +5604,15 @@ function _call_runtime_set!(engine, args, call_span, context, rule_label, curren
     ))
 end
 
-function _call_runtime_push!(engine, args, call_span, context, rule_label, current_edge)
+function _call_runtime_push!(engine, args, call_span, context, rule_label, current_edge;
+    blind_parent_regex_index::Union{Nothing,Int} = nothing,
+)
+    if blind_parent_regex_index !== nothing
+        args = ActionExpr[
+            ActionVariableExpr(source = rule_label, source_span = call_span, name = rule_label),
+            args...,
+        ]
+    end
     child_rule = isempty(args) ? nothing : _runtime_variable_name(first(args))
     if child_rule !== nothing &&
             compiled_rule(engine.compiled_spec, child_rule) !== nothing &&
@@ -5609,7 +5641,7 @@ function _call_runtime_push!(engine, args, call_span, context, rule_label, curre
             )
             child = current_edge !== nothing && child_rule == current_edge.target.label ?
                 _execute_runtime_action_edge_child!(engine, current_edge, context) :
-                _execute_runtime_rule!(engine, child_rule, 0, context)
+                _execute_runtime_rule!(engine, child_rule, something(blind_parent_regex_index, 0), context)
             context.retv = child.value
             value = index === nothing ? child.value : _runtime_index_value(child.value, index)
             return _append_runtime_array_value!(context, target, value)

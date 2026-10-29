@@ -64,9 +64,29 @@ Julia also compiles the pure-code examples above. The recorded native,
 restored, plan and emitted routes preserve `entry_slot()` as null, call both
 children in the mixed sequence and retain only real regexes in the dependency
 map. Referenced AND literal-return and direct-call examples pass too. Blind
-fluent `.push` still fails in Julia because it requires an action-edge context;
-its repair is tracked separately. This compiler support does not establish
+fluent `.push` now calls its enclosing parent on the recorded13 Julia routes.
+Three coordinator examples still reuse a conventional rule array; that
+invocation-scope repair remains open. This compiler support does not establish
 complete repeated coordinator or lifecycle parity.
+
+Blind fluent `.push` calls the enclosing parent after its child. For example,
+this pipe rule returns `["TAIL"]` on `x` on the recorded Perl/Rust/Dart/Julia
+routes:
+
+```text
+Top::|
+ I { if(gt(cursor_pos(),0)) { return("TAIL"); } }
+ => Value.push.return(copy(Top))
+Value:AND
+ /x/ -> Value[0] { return("X") }
+```
+
+`Value` first consumes `x`. The fluent push then invokes `Top`, whose initializer
+returns `"TAIL"`, and appends that result. A parent result of zero, false, null
+or an Array retains its kind; an Array is appended as one nested value.
+`.push(out)` selects the output binding. A default repeated parent collects
+the explicit iteration result, so the equivalent default example returns
+`[["TAIL"]]`. Existing emitted Julia modules reuse the runtime repair.
 
 ## Current rule-label surface
 
@@ -651,7 +671,7 @@ second starts with an empty `Middle` array. Explicit initializers remain local
 to each call. Mutations to other undeclared working arrays remain visible to
 the caller; this does not reset every working variable.
 
-Portable blind-parent `LX` behavior remains under authority review. Rust and Dart now preserve blind `.push` parent-call effects on the checked single-pass and repeated routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
+Portable blind-parent `LX` behavior remains under authority review. Rust, Dart and Julia now preserve blind `.push` parent-call effects on the checked single-pass and repeated routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
 
 On a blind chain, `.push` calls the enclosing parent after the child returns.
 This single-pass example makes the second call visible:
