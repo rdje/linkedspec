@@ -77,3 +77,16 @@ Cursor values are authored DSL observations, no direct native final-state API.
 Packet rust-capture-endpoint-intake.json.gz retains actual proof. Temporary probe
 is archived/removed; normal target is capture_endpoint_absence.rs with no allocator.
 Independent40.3-.5/selection/other prerequisites/full admission remain separate.
+
+## Dart repair40.3 (2026-10-29)
+
+Four anonymous caller guards require nullable localMatch for match-start text/
+width and zero-argument takes. Shared named/writer fallback remains47-owned after
+two public named controls confirm manufacture/mark movement; no fresh named proof.
+Core16-source SDK/restored/plan/separate VM6healthy10RED ->16pass, exact input/
+emitted/metadata and six healthy full results/traces unchanged. Same baseline
+modules run against updated runtime; no regeneration, rebuild AOT applications.
+Four selected files46 tests/fatal changed-file analysis/format pass; whole-package
+SDK deprecations2.25 stay separately owned. Packet dart-capture-endpoint-intake.json.gz
+retains closure/adjacent discovery. Julia40.4/Lua40.5/41/47/45 and canonical selection/
+other prerequisites/full admission remain separate.

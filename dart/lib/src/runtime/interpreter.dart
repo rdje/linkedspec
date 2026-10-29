@@ -6714,6 +6714,9 @@ final class LinkedSpecRuntimeEngine {
     required String ruleLabel,
     required String projection,
   }) {
+    if (!untilCursor && context.registers.localMatch == null) {
+      return null;
+    }
     final start = _captureStartCodeUnit(context);
     final end = _captureEndCodeUnit(context, untilCursor: untilCursor);
     return context.typedSpanTextFromCodeUnits(
@@ -6730,6 +6733,9 @@ final class LinkedSpecRuntimeEngine {
     required String ruleLabel,
     required String projection,
   }) {
+    if (!untilCursor && context.registers.localMatch == null) {
+      return null;
+    }
     final start = _captureStartCodeUnit(context);
     final end = _captureEndCodeUnit(context, untilCursor: untilCursor);
     return context.typedSpanLengthFromCodeUnits(
@@ -6804,12 +6810,18 @@ final class LinkedSpecRuntimeEngine {
       case 'capture_rest_len':
         return spanLength(captureStart, inputEnd);
       case 'capture_take':
+        if (args.isEmpty && context.registers.localMatch == null) {
+          return null;
+        }
         final value = spanText(captureStart, matchStart);
         if (value != null) {
           context.startCaptureSliceAt(cursor, ruleLabel, helperName);
         }
         return value;
       case 'capture_take_len':
+        if (args.isEmpty && context.registers.localMatch == null) {
+          return null;
+        }
         final value = spanLength(captureStart, matchStart);
         if (value != null) {
           context.startCaptureSliceAt(cursor, ruleLabel, helperName);

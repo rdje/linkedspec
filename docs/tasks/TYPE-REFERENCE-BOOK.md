@@ -4843,6 +4843,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Rust endpoint40.2 adds rust/linkedspec-runtime/tests/capture_endpoint_absence.rs over the frozen16-source fixture. Actual ordinary Cargo target discovery and three-route execution are verified; exact canonical presence/selection remains in this owner audit before admission/push. Temporary capture_endpoint_intake_probe.rs was snapshotted/removed and is not a normal consumer.
 
+  Dart endpoint40.3 adds dart/test/capture_endpoint_absence_test.dart using the frozen16-source fixture. Ordinary target discovery/three SDK routes and retained separate-VM modules are verified; exact canonical presence/selection remains in this audit before admission/push. Adjacent named47 discovery has SDK-only proof and no normal/fresh completion credit.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8984,7 +8986,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Goal: Resolve every exact retained current Phase0 failure without blessing invalid runtime behavior or rewriting historical proof.
   Reproduction: TYPE37 standard prove -q -Iperl t/phase0_regression.t fails28/1035 groups; raw TAP/stderr and exact selected names retained in perl-emitted-boundary-catalog-intake.json.gz. Canonical committed-baseline versus candidate Compiler/Contracts selected28-group TAP/diagnostics are byte-identical. All other production and Phase0 source bytes remain HEAD. This proves existing failures for this patch boundary, not blanket stale tests or a full baseline run.
   Impact / ownership: Full primary regression gate is not green. Own all28 named groups, including lazy owner loading, immediate/local maps, container/value helper lowering, hash mutations/value calls and fluent receiver results. Some diagnostics are old source-shape expectations; some assert wrong runtime values. Classify only after public source/context/debug probes and accepted contracts. Cross-link existing receiver/deferred readiness/diagnostic owners rather than duplicate repairs.
-  Schedule: After existing P1 endpoint40 and nested-error41, before wider feature expansion/full23.4 admission or final push. Split bounded actual defect or current-oracle repair children before edits; commit each verified repair. Preserve historical claim/case inputs and inverse constraints.
+  Schedule: After existing P1 endpoint40, nested-error41 and named endpoint47, before wider feature expansion/full23.4 admission or final push. Split bounded actual defect or current-oracle repair children before edits; commit each verified repair. Preserve historical claim/case inputs and inverse constraints.
   Acceptance: Recover exact28-name set and raw diagnostics from retained packet; use LinkedSpec public probes to isolate WHY/WHERE and current authority for each. Retain distinguishing RED/GREEN and correct normal/canonical selection. No global expected-value refresh, silent null acceptance, full admission claim from a subset, or routine repeated full suite. After bounded repairs, require exact canonical receipt at23.4/push.
   Planned verification tier: focused; split repairs and final canonical boundary explicitly before implementation.
   Planned focused checks: Exact authored failed assertions/public source/value/error controls and direct dependents per child; no repeated full primary suite for every repair.
@@ -9010,6 +9012,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **NO REGRESSION**: Complete actual producer/receipt/compressed bytes retained; historical producers restore raw inputs before replay. No production/build cache/submodule/other-repository/shared artifact touched, no broad cleanup or disk-space claim. Phase0 failures remain P1 owner45; deferred24 unchanged.
   - [x] **LOCKSTEP**: docs/ARTIFACT_CLEANUP.md latest record, daily-safe-cleanup-46.json.gz, dev book/live/task/resume/history align; no Knowledge fact change. Immediate Perl40.1 feature repair resumes from clean commit; authorized focused checks/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.46 - compress retained primary diagnostics at the daily boundary`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47`
+  Status: `pending` / P1 after40/41, before45/wider feature expansion/full23.4/push
+  Goal: Resolve named match-start capture absence and successful-only named-take movement through independently verified backend targets.
+  Reproduction: Discovered during Dart40.3 shared-helper intake. Top I marks begin at0, capture_until_boundary(End) moves to2 on αβEND, then capture_from(begin), capture_len_from(begin), capture_take_len_from(begin), mark_pos(begin), cursor_pos() return [αβ,2,2,2,2] on Dart native/restored/plan. Existing required-match-endpoint/valid-only-take target is [null,null,null,0,2]. Matched αβcat control returns [αβ,2,2,5,5] on all three routes. Exact two sources/compiled/generated bytes/SDK records retained with Dart40.3; these named modules have no fresh execution credit.
+  Root / impact: Dart _captureEndCodeUnit falls back to the live cursor without a local match; _callCaptureMarkHelper shares it among anonymous operations, named readers/takes and mark operations. Named reads manufacture prefix values and a failed named take advances its saved mark. Broadly changing the shared helper without qualifying writer/argument contracts would expand scope;40.3 repairs anonymous callers only. No other backend failure inferred.
+  Schedule: After bounded40.1-.5 and existing nested-error41, before Phase0 owner45, wider feature expansion/full23.4 or push. Own all confirmed failures; split authority and independent backend slices before implementation.
+  Acceptance: Freeze exact named read/take endpoint/absence, symbolic/evaluated-name ordering, scope/source and valid-only mutation authority. Preserve missing marks, defined zero/empty matches, valid Unicode/through-cursor/rest readers and successful takes. Independently assess Perl/Rust/Dart/Julia/safe Lua; establish actual current native/generated RED where defective or compatibility proof where healthy. Do not select new mark-writer or argument policies by accident. Repair/verify/book/docs/commit every confirmed outlier before admission.
+  Planned verification tier: focused; split any genuine new policy/infrastructure authority into a canonical leaf before edits.
+  Planned focused checks: Exact named absent/present/missing/reversed/empty/Unicode/name-effect controls and direct dependents per backend; no repeated full suite per slice.
+  Planned canonical trigger: Full23.4/final push after all confirmed repairs and canonical selection; genuinely new writer/policy authority requires separate canonical ownership.
+  Planned claim verification: none: Finite authored named span/take discrepancy and contract-led functional controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
@@ -9083,13 +9097,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.2 - require Rust match presence for capture endpoints`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.3`
-  Status: `pending` / P1 after40.0 before full23.4/push
+  Status: `completed` / P1 after40.0 before full23.4/push
   Goal: Independently intake and repair confirmed Dart capture absence/diagnostic drift against frozen40.0.
+  Activation: clean `7702e620c1701f3283d7b1cd5e6ddb696b79b8fc`; Rust40.2 committed/brief empty, prior jobs terminal. Read frozen16-source endpoint target and current Dart Number/capture facts; independently probe native/restored/plan/separate emitted execution before production. Preserve existing nullable match/source/cursor owners and known SDK deprecation owner DART-STARTUP-READING.2.25; no suppression, whole-package parity inference or peer-based failure credit.
   Acceptance: Establish exact native/restored/generated/fresh supported baseline before production. Remove only confirmed outliers through existing capture/span/context owners; preserve real empty-match zero, unavailable endpoint distinctions, aliases/text/width/take behavior, source identity, function fences and mutation/no-advance rules. Perl must avoid uninitialized/package-residue arithmetic; other failures are not inferred from current Julia/Dart difference. Update prior diagnostic-only or quarantined assertions to the accepted target only after authority; safe Lua retains chunk-local/installed-host boundaries. Commit focused repair before admission.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN plus direct-dependent span/presence/context/cursor/alias/function/generated controls, compile/normal registration/book continuity; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push requires verified40; actual public policy/schema movement receives separately owned canonical authority.
-  Planned claim verification: none: Finite authored functional/source/diagnostic assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent16-source SDK/restored/plan/separate VM6healthy10RED ->16pass; exact input/emitted/metadata and six healthy full native results/traces unchanged. Same baseline modules reused. Four target files46 tests, changed-file fatal analysis/format pass. Adjacent named two-source SDK discovery/post-patch identity retained/owned47; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after40.4-.5/41/47/45 and other prerequisites; exact new normal/canonical selection23.4.1 remains required. Whole-package SDK deprecations DART-STARTUP-READING.2.25 remain before admission; no new schema/policy/infrastructure movement.
+  Claim verification: none: Finite authored anonymous endpoint/absence/take/zero/carrier and adjacent named discrepancy controls, no population measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Current16-source SDK/restored/plan/separate VM baseline has six healthy/ten actual absence RED, corroborated by ordinary consumer. Initial/nested I readers manufacture empty/0 or cursor prefix, and absent anonymous takes advance the boundary. Actual public full results/cursors/flags/typed diagnostics/source/trace/modules retained before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _captureEndCodeUnit uses localMatch?.codeUnitStart ?? cursorCodeUnit; anonymous text/width and take callers treat that fallback as an available match-start span. It also feeds named reads/takes/mark operations. Two public named sources independently confirm [αβ,2,2,2,2] without a local match versus healthy [αβ,2,2,5,5]; required absence target [null,null,null,0,2] is owned47, not silently folded into anonymous coverage.
+  - [x] **FIX**: Four caller guards require existing nullable localMatch for match-start anonymous text/width and zero-argument takes. untilCursor readers bypass that requirement; rest/boundary/valid span and successful take paths unchanged. Existing alias dispatch preserved. Leave shared named/writer fallback and name-argument semantics for47 authority/independent repairs; no new state/owner/schema/cursor/helper policy.
+  - [x] **ADDRESSED (verified)**: All16 pass SDK/restored full matched/value/character cursor and plan/separate VM values/errors. Exact source/normalized/compiled/plan/emitted bytes/metadata and six healthy full outcomes/traces unchanged. Defined empty/zero/Unicode remain valid; absent takes preserve boundary0 at cursor2. Same16 original emitted modules run against updated runtime without regeneration; AOT binaries require rebuilding.
+  - [x] **NO REGRESSION**: Four selected files pass46 tests, including Number, aliases and accepted-null controls. Changed runtime/new test fatal analysis and formatting pass. Full package SDK infos remain DART-STARTUP-READING.2.25; no suppression/full component claim. Adjacent named source/compiled/emitted/SDK observations unchanged after patch, owned47. Number-test comment-only clarification retains actual executed source; no expected value or code behavior change.
+  - [x] **LOCKSTEP**: Packet dart-capture-endpoint-intake.json.gz retains actual producers/epochs/runtime patch/before+after/input/modules/SDK/fresh/trace/tests/receipts and adjacent named discovery. Book/cards/map/target/roadmap/task/live/resume/history align; canonical selection audit23.4.1 remains before admission. Julia40.4 next, then Lua40.5/41/47/45; focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.3 - preserve unavailable Dart anonymous capture endpoints`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.4`
   Status: `pending` / P1 after40.0 before full23.4/push
@@ -9332,7 +9356,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.3` | `pending` | Independently intake Dart capture endpoint/presence behavior against frozen40.0. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.4` | `pending` | Independently intake Julia capture endpoint/presence behavior against frozen40.0. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

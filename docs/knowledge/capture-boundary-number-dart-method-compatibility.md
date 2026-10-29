@@ -6,7 +6,7 @@ answers:
   - "can Dart anonymous capture Number readers feed Array selection"
   - "which Dart capture Number aliases retain function-state errors"
 date: 2026-10-28
-status: bounded33.3/33.3.1 targeted-checked without runtime edits; safe Lua/full admission and endpoint40 open
+status: bounded33.3/33.3.1 historical composition and40.3 endpoint repair verified; named47/peers/full admission separate
 tags: [dart, capture, number, fluent, aliases, source, generated]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.33.3 at clean7e366408c; capture-boundary-number-dart-intake.json.gz contains actual sources, generated libraries/caller, outputs and strict verifier."
 reverify: "cd dart && bash ../tools/run_dart_project_data.sh test test/capture_boundary_number_results_test.dart test/entry_match_number_results_test.dart"
@@ -42,3 +42,12 @@ width removed from the zero control. Initial width0 remains a retained observed
 diagnostic, not current portable semantic authority.40 owns its null-versus-zero
 and reference-warning resolution; see
 [[capture-boundary-before-match-policy-divergence]]. No runtime change follows.
+
+## Endpoint repair40.3 (2026-10-29)
+
+The preceding33 composition/scope proof remains historical.40.3 now requires a
+present local match for anonymous match-start reads/takes:16-source6healthy10RED
+->16pass on SDK/restored/plan/separate VM, exact input/emitted/metadata and healthy
+full results/traces preserved.46 focused tests and changed-file fatal analysis/
+format pass. [[dart-capture-endpoint-match-absence-repair]] retains current cause/
+closure and independently confirmed named gap47. Peer/full admission stays separate.

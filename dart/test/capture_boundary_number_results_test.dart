@@ -101,7 +101,7 @@ return([original,snapshot,capture_slice_pos(),order]);'''),
     );
   });
   test('defined capture-boundary position zero skips a lazy fallback', () {
-    // The missing local-match endpoint width is diagnostic-only under40.
+    // Endpoint absence has its own capture_endpoint_absence_test.dart coverage.
     check(
       r'''Top:: I {order="";primitive=[capture_slice_pos(),capture_slice_line(),capture_slice_col(),capture_slice_until_cursor_len(),capture_rest_len()];zero=capture_slice_pos().coalesce({order=cat(order,"F");7}).add(1);return([primitive,zero,order])}''',
       'x',

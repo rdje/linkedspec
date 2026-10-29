@@ -7,7 +7,7 @@ answers:
   - "does an unavailable capture_take advance the anonymous boundary"
   - "can package LMATCH LSPOS values establish local match presence"
 date: 2026-10-29
-status: target40.0 and Perl40.1/Rust40.2 focused repairs verified; independent40.3-.5/full admission pending
+status: target40.0 and Perl/Rust/Dart40.1-.3 focused repairs verified; independent40.4-.5/named47/full admission pending
 tags: [capture, source-location, absence, presence, invocation, portability]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.40.0 capture-endpoint-absence-authority-intake.json.gz retains16-source native/clean+seeded emitted controls, six healthy/ten RED, current presence4 groups and neutral typed231 mutations."
 reverify: "Recover probe_capture_endpoint_authority.pl and read_capture_endpoint_authority.py from the retained packet; use project_data_run.sh env PERL5LIB= perl -Iperl and the Python project runner. Baseline counts are dated, not repaired backend admission."
@@ -50,3 +50,11 @@ relinked against new runtime pass without source regeneration. Endpoint1/Number6
 alias1 integration groups and10 anonymous library tests pass. See
 [[rust-capture-endpoint-match-presence-repair]]. Independent40.3-.5/full admission
 and broader prerequisites remain separate.
+
+2026-10-29 Dart40.3 independently observes6healthy10RED ->16pass on SDK/restored/
+plan/separate VM, preserving input/emitted/metadata and six healthy full results/
+traces. Four anonymous nullable-match guards,46 selected tests/fatal changed-file
+analysis/format verified. Same baseline modules reuse updated runtime. See
+[[dart-capture-endpoint-match-absence-repair]]. Adjacent named match-start read/take
+absence is confirmed/owned47 after40/41, before45/wider features/admission; it has
+no fresh credit. Independent40.4-.5 and full admission remain separate.
