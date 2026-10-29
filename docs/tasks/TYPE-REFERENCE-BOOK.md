@@ -7611,13 +7611,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.0 - freeze selected-match cursor before capture-enabled LS`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.1`
-  Status: `pending` / P1 after38.0 before37/full23.4
+  Status: `completed` / P1 after38.0 before37/full23.4
   Goal: Repair confirmed Dart early LS selected-match cursor gap without changing lifecycle return or gap-commit authority.
   Acceptance: Correct Hcat native/restored/generated positions4/4 and retain original broad-carrier expected output without null rebasing. Add normal edge/LE/rewind/rollback/nested direct-dependent controls, preserve sole cursor/recognition authority and generated v2, targeted-check/book/docs/commit before admission.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned RED/GREEN and focused existing gap lifecycle/recognition/source/generated dependents, format/analysis; no routine full suite/matrix.
-  Planned canonical trigger: Full23.4 and clean push require verified repair; actual infrastructure/format movement separately owned.
-  Planned claim verification: none: Finite authored functional/source regressions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Independent7portable sources9inputs3healthy4actualRED ->7pass plus legacy compatibility1/1, SDK/restored/full cursor/value/flags and plan/same8 baseline modules fresh; all inputs/four healthy source observations and legacy traces identical.28normal/nullable plus2gap native/rollback/reconstructed/plan tests, formatted/fatal changed-file analysis clean. Whole package analysis reproduces only owned matching SDK deprecations; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after Julia38.2/Lua38.3 and phase/lifecycle/slot/registration/pressure/declared-host/unsafe formatter/Dart SDK2.25 prerequisites. No infrastructure/format/schema movement.
+  Claim verification: none: Finite authored selected-cursor/rewind/commit distinctions, no population measurement.
+
+  Activation: clean `919e9558ad5bb70dd6b0f937c819fbefba2a56f4`; shared38.0 fixture/authority and current Dart preselection/accept cursor owners reviewed. Establish independent actual RED/legacy control before product edits, preserving baseline emitted module bytes.
+
+
+  - [x] **REPRODUCE / ISSUE**: Independent8sources10inputsSDK/restored/plan/same8 modules fresh: portable7/9 has3healthy4actualRED, plus healthy legacy1/1. Early return and normal LS see entry cursor, acceptance overwrites LS rewind, repeated LS rewind misses the required commit regression. Actual full native traces/SDK observations and input/module bytes retained before mutation.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: _prepareGapCandidate installs selected registers/candidate but not context.cursorCodeUnit; _acceptRegexMatch writes match end only after LS. Whole lifecycle return skips that write, while a returning action after LS mutation receives a reset cursor. Actual shared-reference rewind/commit oracles distinguish both defects.
+  - [x] **FIX**: Move live end advance to flagged preselection via existing context cursor. Carry existing private matchPreselected into acceptance and skip redundant cursor write for that preselected match. Keep ordinary acceptance advance, selected registers, sole recognition/gap owner, post-LE boundary validation/commit, whole-return and unflagged timing unchanged.
+  - [x] **ADDRESSED (verified)**:7portable/9inputs pass plus legacy1/1; SDK/restored value/matched/character cursor/typed guards and same8 modules fresh public values/errors agree with target. Exact raw/normalized/compiled/plan/emitted and four healthy source observations preserved; legacy full trace unchanged. Hcat4/prefix5/emoji scalar5, explicit rewind1 and repeated selected3->cursor0 commit error verified.
+  - [x] **NO REGRESSION**: New normal+nullable28tests, native gap lifecycle/rollback and reconstruction/generated-plan2tests pass. Both changed files formatted/fatal analysis clean. Whole-package analysis has only the two already-owned matching.dart SDK deprecations under DART-STARTUP-READING.2.25; no complete component-gate/admission claim. Compiler/emitter/matching/recognition authority/schema untouched.
+  - [x] **LOCKSTEP**: Packet dart-gap-ls-cursor-intake.json.gz retains actual producers/epochs/inputs/SDK/fresh/trace/modules/normal/analysis/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; normal fixture uses existing discovery. Independent Julia38.2 then Lua38.3 next, parent38 and broader prerequisites remain open. Authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.38.1 - advance Dart selected cursor before capture-enabled LS`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.38.2`
   Status: `pending` / P1 after shared authority38.0/Dart38.1, before37/full23.4/push
@@ -9203,7 +9214,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.1` | `pending` | Repair Dart capture-enabled LS selected-match live cursor. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.38.2` | `pending` | Independently repair Julia capture-enabled LS selected-match live cursor. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

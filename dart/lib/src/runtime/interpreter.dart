@@ -1388,6 +1388,8 @@ final class LinkedSpecRuntimeEngine {
       positionCodeUnit: match.codeUnitEnd,
       selectionRole: 'choice',
     );
+    // LS observes the selected end; gap-boundary commit still follows LE.
+    context.cursorCodeUnit = match.codeUnitEnd;
     context.registers = context.registers.withLocalMatch(match);
     context.noteRecognitionMatch(match);
     context.installGapCandidate(rule.label, match);
@@ -1535,6 +1537,7 @@ final class LinkedSpecRuntimeEngine {
       context,
       actionIterationValues: actionIterationValues,
       collectAndGroupValue: collectAndGroupValue,
+      matchPreselected: matchPreselected,
     );
     context.setGapPhase(rule.label, 'LE');
     final loopEnd = _executeLifecycle(rule, 'LE', context);
@@ -1761,8 +1764,11 @@ final class LinkedSpecRuntimeEngine {
     List<Object?>? actionIterationValues,
     bool collectAndGroupValue = false,
     _MatchedActionEdge? requiredAction,
+    bool matchPreselected = false,
   }) {
-    context.cursorCodeUnit = match.codeUnitEnd;
+    if (!matchPreselected) {
+      context.cursorCodeUnit = match.codeUnitEnd;
+    }
     context.registers = context.registers.withLocalMatch(match);
     context.noteRecognitionMatch(match);
 

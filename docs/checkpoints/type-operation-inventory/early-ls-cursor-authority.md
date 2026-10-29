@@ -16,3 +16,9 @@ Public Perl native/separate emitted8/10 agree, including scalar Unicode offsets.
 Exact producers/typed fields and current neutral checker are retained in
 `gap-ls-cursor-authority-intake.json.gz`. Existing peer intake is historical;
 no new backend RED or repair credit. No new cursor/frame/token/schema authority.
+
+2026-10-29 Dart38.1 is repaired/targeted-checked: portable7/9,3healthy4RED ->
+7pass plus legacy1/1, same8 modules/exact inputs/four healthy outcomes preserved.
+28normal/nullable+2gap native/rollback/reconstructed/plan tests and fatal changed
+analysis pass. Whole-package SDK matching warnings remain startup2.25-owned.
+Closure: dart-gap-ls-cursor-intake.json.gz; independent Julia38.2/Lua38.3 next.

@@ -12133,9 +12133,9 @@ _Dart propagates one optional trace emitter through function extraction and stag
 - **source:** [`docs/knowledge/dart-function-staged-trace-events.md`](docs/knowledge/dart-function-staged-trace-events.md)
 
 ### dart-gap-early-ls-return-cursor-drift
-_Dart early LS return exposes selected captures before advancing its live cursor_
+_Dart capture-enabled LS observes selected end and preserves explicit cursor rewind_
 - **answers:** why does Dart LS return leave a child cursor before its selected match | why can Dart capture_gaps LS return append unexpected null payloads | which task owns Dart early LS selected-match cursor drift
-- **date:** 2026-10-28 · **status:** P1 owned38.0/.1 after33/35/34 and before37/full23.4 admission or push
+- **date:** 2026-10-28 · **status:** bounded38.1 fixed/targeted-checked; independent peers and full admission remain
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.36.2 public Hcat native/generated/reference native/fresh probes, exact source/trace/channels in active-edge-body-dart-intake.json.gz.`
 - **reverify:** `Recover probe_dart_gap_ls_cursor.dart and probe_perl_gap_ls_cursor.pl from active-edge-body-dart-intake.json.gz; use the project-routed Dart/Perl commands retained there.`
 - **source:** [`docs/knowledge/dart-gap-early-ls-return-cursor-drift.md`](docs/knowledge/dart-gap-early-ls-return-cursor-drift.md)
@@ -13359,7 +13359,7 @@ _Future parity task evidence has stable ID lookup over bounded semantic parts_
 ### gap-selected-match-ls-live-cursor-authority
 _Capture-enabled LS observes selected end while gap-boundary commit and authored cursor mutation remain distinct_
 - **answers:** where should the live cursor be before capture_gaps LS | does LS rewind survive selected edge acceptance | is selected-match cursor advance the same as gap boundary commit | what is the shared early LS cursor repair target
-- **date:** 2026-10-29 · **status:** shared38.0 target frozen; independent Dart38.1 Julia38.2 Lua38.3 repairs next
+- **date:** 2026-10-29 · **status:** shared38.0 frozen; Dart38.1 fixed/targeted-checked, independent Julia38.2/Lua38.3 next
 - **evidence:** `gap-ls-cursor-authority-intake.json.gz retains public Perl8sources10inputs native/separate emitted process exact values/cursors/typed error fields; portable7sources9inputs plus unflagged compatibility1/1, current neutral checker and exact producers/receipts.`
 - **reverify:** `Recover prepare_gap_ls_cursor.py and probe_gap_ls_cursor_reference.pl from the packet; run Perl native and --fresh separately through tools/project_data_run.sh, then read_gap_ls_reference.py. Run tools/check_inter_match_gap_capture_contract.py through tools/run_python_project_data.sh.`
 - **source:** [`docs/knowledge/gap-selected-match-ls-live-cursor-authority.md`](docs/knowledge/gap-selected-match-ls-live-cursor-authority.md)
