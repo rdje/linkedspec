@@ -41,3 +41,12 @@ fresh-process claim. Lua diagnostic covers native/restored/plan; three emitted
 modules per host are retained but not independently executed in this diagnostic.
 Current33-source fresh intake remains separate. No direct Perl matched flag,
 broader lifecycle population or source-reading credit is inferred.
+
+2026-10-29 authority assessment .5.2.0 reads ADR0020 and exact indexed
+startup27.1: current guide does not settle blind phases and current Perl cannot
+be adopted silently. .5.2.1 explicitly owns normative convergence linked
+startup27.1 (canonical after20.1); .5.2.2 owns resulting bounded backend/fixture
+repairs before39/23.4 admission. Parent remains open, one source/two inputs
+stays unqualified; no new runtime execution or policy claim. Independent
+Lua .8 diagnostic proceeds meanwhile. Current authority assessment packet:
+lua-blind-phase-authority-intake.json.gz; earlier phase packet stays frozen.

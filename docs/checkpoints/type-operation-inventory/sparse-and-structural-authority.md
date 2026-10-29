@@ -414,3 +414,8 @@ and pure normal observation classification: qualified32/52,21healthy11RED ->
 One blind_LE source/two inputs remains unchanged/unqualified under P1 .5.2.
 Observation43/recognition246/progress234/postcall274 pass. Closure retained in
 lua-nullable-repair-intake.json.gz; no new authority/schema/full admission.
+
+2026-10-29 blind phase39.4.5.2.0 records authority dependency, not product
+completion: .5.2.1 linked startup27.1 freezes normative timing/return, canonical
+after20.1; .5.2.2 implements confirmed backend gaps before admission. Shared
+blind_LE source/two inputs remains excluded; independent Lua .8 proceeds.

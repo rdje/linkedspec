@@ -8712,7 +8712,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.1 - retain Lua blind post-call returned iteration outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2`
-  Status: `pending` / P1 phase-authority convergence after bounded nullable repair before full39/23.4 admission
+  Status: `in_progress` / authority intake complete; behavior depends on startup27.1 / P1 phase-authority convergence after bounded nullable repair before full39/23.4 admission
   Goal: Qualify broader Lua blind LE/lifecycle execution and whole-return authority independently.
   Acceptance: Existing18-source post-call proof covers only actual five healthy plain/IT/E/nonreturn controls, not all LE placements. Reconcile frozen public phase/source contracts and public Perl execution first; safe installed-host direct/restored/generated/fresh probes distinguish plain/repeated/default/blind LE, I/LS/IT/EX/LX/E ordering/returns/early group paths. Log/own confirmed gaps with bounded repair children, preserve correct existing authority; no phase inferred from peer implementation or misleading full-family claim. This is a scheduled qualification, not an asserted new Lua defect.
   Planned verification tier: focused
@@ -8721,6 +8721,42 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Finite authored lifecycle/control-flow qualification, no population measurement.
 
   Actual .7.0 qualification: Shared return__blind_le source is not a qualified portable nullable oracle. Public Perl native/emitted repeated OR{2} ignores LE (nonnull sentinel absent from emitted body), while plain AND preserves/executes sentinel at1. Lua SDK/restored/plan ignores both; named three-source/eight-input controls retained. Public placement guide frames LS/LE as local regex-slot hooks and does not settle this blind-parent difference. Reconcile with SESSION-STARTUP-READING.27.1/ADR0020 before phase changes; qualify existing Dart/Julia blind_le target credit without rewriting their observed native counts. No fabricated Perl matched flag from null scalar value. One source excluded from current32-source nullable repair completion credit, all evidence retained.
+
+  Scheduling: ADR0020 explicitly preserves current handler-shape caveats until a separately owned implementation/parity decision. SESSION-STARTUP-READING.27.1 is the existing normative reconciliation owner; this subtree does not silently decide broader blind LS/LE behavior from one backend. Child .0 records the bounded assessment; .1 owns normative convergence, .2 owns ensuing backend/fixture conformance before full39/23.4 admission. Independent Lua diagnostic .8 proceeds next while this dependency remains open.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2.0`
+  Status: `completed`
+  Goal: Resolve the owning authority and safe implementation boundary for blind-parent LE qualification.
+  Verification tier: `focused`
+  Focused checks: Read ADR0020 in full, exact indexed startup27.1, current placement guide393-411 and canonical lifecycle/phase cards; verify retained three-source/eight-input public-reference/Lua receipts and phase source exclusion. No product mutation or new runtime execution claim. Book/map/history/manual continuity.
+  Canonical trigger: Normative phase convergence and ensuing backend changes before full39/23.4/final push; canonical policy decision remains required under startup27.1, document pressure20.1 first.
+  Claim verification: none: Documentary authority/dependency assessment using retained finite functional cases, no new measurement or runtime population claim.
+  Activation: clean `99affdf820a012b6c574620c870cb208830010fd` after coherent nullable repair; all product files unchanged in this leaf.
+  - [x] **REPRODUCE / ISSUE**: Retained three sources/eight inputs distinguish repeated Perl LE omission from plain AND LE preservation; Lua omits both. Null alone cannot prove LE execution or Perl matched status. Existing shared blind_LE source/two inputs is unqualified, not a nullable product RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public placement guide defines regex-slot LS/LE; it does not choose blind-parent behavior. ADR0020 preserves known handler-shape drift until separately owned implementation/parity reconciliation. Indexed startup27.1 explicitly owns required handler/return cases and normative intent, so a local Lua LE insertion would invent authority and could entrench a Perl divergence.
+  - [x] **FIX**: Preserve current behavior; add explicit .1 normative-convergence and .2 backend/fixture-conformance children linked startup27.1. Schedule them before admission and qualify prior native blind_LE observations without erasing historical results. Independent diagnostic .8 next; no false completion of parent .5/.7 or broad phase family.
+  - [x] **ADDRESSED (verified)**: Exact authority sources/retained public source-selection/qualification receipts are retained with this assessment. Dependency is explicit and scheduled, two phase inputs remain excluded without passing credit. No new runtime/fresh/code-reading or phase policy claim.
+  - [x] **NO REGRESSION**: No product/compiler/emitter/consumer/fixture/schema change. Prior32qualified nullable sources remain backed by committed repair proof; no new test run is credited or required for documentary scheduling.
+  - [x] **LOCKSTEP**: Book caveat, phase card/map/target/roadmap/task/live/resume/history agree. Parent remains open; normative and backend closure required before admission. Focused authorized commit/no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2.0 - schedule blind lifecycle authority before backend convergence`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2.1`
+  Status: `pending` / P1 depends on SESSION-STARTUP-READING.27.1 before admission
+  Goal: Freeze normative blind LS/LE applicability, successful/failed-child timing, whole-rule return and early-action ordering alongside broader lifecycle shape reconciliation.
+  Acceptance: Use explicit regex/no-regex, plain/repeated/default/AND/OR, null/nonnull/side-effect/nonreturn/early-return controls with public reference/source and all affected backend observations. Resolve compatibility/migration with existing statement-oriented lifecycle authority; do not bless current Perl or peer behavior merely because it exists. If normative intent remains unresolved after this evidence, startup27.1 requires director clarification. Define bounded implementation children before product changes; new authority requires canonical proof after20.1.
+  Planned verification tier: canonical
+  Planned focused checks: Exact proposed phase catalog, distinguishing source/trace/oracles, existing contracts/compatibility analysis and book/docs.
+  Planned canonical trigger: New or changed public lifecycle authority before implementation/admission/push; scheduled pressure20.1 repair first.
+  Planned claim verification: none: Finite authored phase/return authority distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2.2`
+  Status: `pending` / P1 depends on .1 and startup27.1 before full39/23.4
+  Goal: Implement and verify only confirmed backend phase gaps under the resolved authority, then qualify the excluded blind_LE nullable source/two inputs.
+  Acceptance: Decompose actual gaps into bounded backend leaves after .1, retain legacy diagnostics/migration where needed, verify native/restored/plan/fresh flags/cursors/records and early/null/nonnull/nonreturn phase controls. Reconcile Dart/Julia prior passing native observations without retroactive unsupported parity credit. Register focused fixtures under23.4.1; no blanket parent completion until conformance is proven.
+  Planned verification tier: focused
+  Planned focused checks: Per confirmed bounded backend slice exact actual RED-GREEN and nearest phase/return/recognition controls, book/map/history/continuity.
+  Planned canonical trigger: Full phase/39/23.4 admission and final clean push, with separately canonical .1 authority proof first.
+  Planned claim verification: none: Finite authored phase/nullable functional distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6`
   Status: `completed` / P1 immediate before further feature owners/admission
@@ -9132,7 +9168,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2` | `pending` | Reconcile blind-parent lifecycle phase authority before admission. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8` | `pending` | Repair the independently owned Lua ordinary unknown-helper diagnostic. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
