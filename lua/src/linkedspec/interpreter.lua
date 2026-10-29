@@ -5243,7 +5243,7 @@ local function regex_once(
   return true
 end
 
-local function blind_once(engine, rule, ctx, accumulator, execution_policy)
+local function blind_once(engine, rule, ctx, accumulator, execution_policy, implicit_iteration_results)
   local any = false
   for edge_index, edge in ipairs(rule.blind_edges) do
     local cursor_before = ctx.cursor_byte
@@ -5263,11 +5263,12 @@ local function blind_once(engine, rule, ctx, accumulator, execution_policy)
     if execution_policy.uses_and_execution and not child.matched then return false end
     if child.matched then
       any = true
-      if execution_policy.uses_and_execution then
+      if implicit_iteration_results ~= nil then
+        implicit_iteration_results[#implicit_iteration_results + 1] = copy_value(child.value)
+      elseif execution_policy.uses_and_execution then
         accumulator[#accumulator + 1] = copy_value(child.value)
-      else
-        return true
       end
+      if not execution_policy.uses_and_execution then return true end
     end
   end
   return execution_policy.uses_and_execution and true or any
@@ -5405,6 +5406,10 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
       rule.mode_metadata.rep_min ~= nil and #rule.action_edges > 0 then
     and_iteration_values = json.array()
   end
+  local blind_iteration_values = nil
+  if execution_policy.uses_blind_dispatch and rule.mode_metadata.rep_min ~= nil then
+    blind_iteration_values = json.array()
+  end
   local has_custom_iteration = false
   for _, payload in ipairs(rule.lifecycle_action_payloads) do
     if payload.lifecycle == "IT" then has_custom_iteration = true; break end
@@ -5494,9 +5499,11 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
       else
         lifecycle(engine, rule, "LS", ctx, accumulator)
       end
+      local implicit_iteration_results = nil
+      if blind_iteration_values ~= nil then implicit_iteration_results = json.array() end
       local attempt = nextable(function()
         if execution_policy.uses_blind_dispatch then
-          return blind_once(engine, rule, ctx, accumulator, execution_policy)
+          return blind_once(engine, rule, ctx, accumulator, execution_policy, implicit_iteration_results)
         end
         return regex_once(
           engine,
@@ -5548,6 +5555,15 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
           if attempt.group_returned then group_value = attempt.group_value end
           and_iteration_values[#and_iteration_values + 1] = copy_value(group_value)
         end
+        if blind_iteration_values ~= nil and not has_custom_iteration then
+          if execution_policy.uses_and_execution then
+            blind_iteration_values[#blind_iteration_values + 1] = copy_value(implicit_iteration_results)
+          else
+            for _, value in ipairs(implicit_iteration_results) do
+              blind_iteration_values[#blind_iteration_values + 1] = copy_value(value)
+            end
+          end
+        end
         if ctx.cursor_byte == before then break end
       end
     end
@@ -5568,6 +5584,10 @@ execute_rule = function(engine, label, entry_index, ctx, entry_slot)
     local value
     if and_iteration_values ~= nil then
       value = finish_value(accumulator, and_iteration_values)
+    elseif blind_iteration_values ~= nil then
+      local fallback = blind_iteration_values
+      if rule.mode_metadata.name == "Default" and count == 0 then fallback = json.null end
+      value = finish_value(accumulator, fallback)
     elseif action_iteration_values ~= nil then
       value = action_iteration_values
     else

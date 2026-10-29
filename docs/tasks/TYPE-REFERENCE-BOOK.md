@@ -4823,6 +4823,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Lua ordinary-minimum39.4.3 adds lua/test/minimum_miss_routes_test.lua to required explicit ordinary/canonical registration; direct289 assertions per installed host is not discovery/admission.
 
+  Lua implicit-blind39.4.4 adds lua/test/blind_repetition_collection_test.lua to exact ordinary/canonical registration inventory. Current13active2owned dormant (Default .9/post-call .5) is direct focused proof only; remove satisfied dormancy before full admission.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8632,13 +8634,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.3 - return failed null for ordinary Lua repetition minimum misses`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4`
-  Status: `pending` / P1 after minima .3
+  Status: `completed` / bounded runtime collection; generated Default separately owned .9 / P1 after minima .3
   Goal: Retain implicit repeated blind choice and complete AND group values.
   Acceptance: Reproduce missing collections; exact accepted child values, nested groups, partial discard, custom IT, Default no-hit/zero-min/plain and generated routes.
-  Planned verification tier: focused
-  Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
-  Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
-  Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:15sources24inputs fully observed; bounded13sources20inputs6healthy7actualRED ->13pass200 assertions per installed host, same15 baseline modules/fresh and exact inputs/six healthy results. Default native corrected/generated .9 pending; post-call .5 unchanged. Neighbors289/390/234/197 per host, prior sources unchanged; book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after immediate generated Default .9/post-call .5/P2 .8 and declared-host/unsafe formatter/registration/pressure/lifecycle/slot; public schema/authority separately canonical.
+  Claim verification: none: Finite authored collection/control-flow/generated distinctions, no population measurement.
+
+  Activation: clean `6b92d7677510aac350d69d994128e70fc35c61f4`; exact safe installed-host implicit blind RED before runtime edits, post-call separately qualified.
+
+
+  - [x] **REPRODUCE / ISSUE**:15exact sources24inputs per host SDK/restored/plan/fresh distinguish implicit collection from post-call and generated policy. Initial14 implicit scope6healthy8RED exposes independent Default generated-family defect; bounded runtime portable scope13sources20inputs6healthy7actualRED, Default native corrected/no portable credit and post-call still wrong separately owned.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual trace shows accepted children at cursor4/8 but missing choice values/flat repeated AND/partial leak. interpreter.lua blind_once only appends AND children to whole accumulator; loop has no per-attempt value ownership. Default metadata is repetition OR/default, but emitted and_bcode forces AND grouping; source_emitter classifier omits implicit Default, P1 .9 not hidden by runtime fix. Post-call return escapes whole rule before count, .5 owns independently.
+  - [x] **FIX**: Optional private implicit_iteration_results receives copied accepted child values; repeated owner supplies a fresh list per attempt, appends complete choice values flat or complete AND groups nested after IT unless custom IT replaces append. Partial values discarded/cursor retained. Default no-hitnull versus zero-min[], plain/one-shot/lifecycle/post-call/count/progress owners retained. Compiler/emitter classification intentionally unchanged until separately owned immediate .9.
+  - [x] **ADDRESSED (verified)**:13portable owned sources20inputs ->13pass200 assertions per host, same15 baseline modules/fresh consumer; exact raw/normalized/compiled/plan/emitted and six healthy observations identical. Additional Default SDK correct, generated still wrong with no success credit; actual metadata/trace diagnosis retained. Post-call SDK/fresh wrong unchanged at1 with healthy retv A; .5 immediately follows .9.
+  - [x] **NO REGRESSION**: Minimum289/group390/progress234/structural197 assertions per host pass,30structural healthy1owned dormant .9. Prior group/live/minimum/structural source fixtures unchanged, plain AND/pipe/custom IT/lifecycle overrides/nested copies preserved. No inferred LE/nullable/post-call/full family admission; compiler/emitter/matching/recognition authority/schema unchanged.
+  - [x] **LOCKSTEP**: Packet lua-blind-collection-intake.json.gz retains actual producers/input/runtime epochs/SDK/fresh/trace/Default diagnosis/initial readers/receipts. Book/cards/target/roadmap/task/live/resume/history align. Direct blind13active2owned dormant/structural30active1dormant, no passing credit for .9/.5; registration23.4.1 before admission. P1 .9 next, then .5/.7/P2 .8 and full prerequisites; authorized focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4 - retain Lua implicit blind iteration collections`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5`
   Status: `pending` / P1 independent qualification after .4
@@ -8648,6 +8661,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+  Confirmed .4 evidence: exact postcall_return source/input ab returns [POST,A,1] at1 matchedtrue across SDK/plan/fresh, expected under-min null at1; retv A healthy. .5 after immediate Default generated .9 must qualify broader return/count/progress/LE authority independently.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6`
   Status: `completed` / P1 immediate before further feature owners/admission
@@ -8690,6 +8705,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact authored error-code/rule/phase/fail-closed RED-GREEN and nearest helper/control/generated routes on both installed hosts, book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push, separately canonical if authority changes.
   Planned claim verification: none: Finite authored diagnostic distinction, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9`
+  Status: `pending` / P1 immediate after runtime collection39.4.4 before post-call .5/admission
+  Goal: Correct Default blind generated-family classification under existing format2 authority.
+  Reproduction:39.4.4 exact default source Top:: =>First =>Second, First:AND /a/ returns A, Second:AND /b/ returns B, input abba. Compiled Top metadata Default/is_repetitiontrue/rep_min0/is_andfalse, native trace OR/default seek. Emitted plan incorrectly selects and_bcode, yielding AND grouped values while native collects flat A/B/B/A after runtime fix. Both installed hosts reproduce SDK/restored/plan; initial red plan A/B already differed from native A. No peer inference.
+  Root cause: source_emitter.lua classify_generated_rule_family recognizes explicit repetition mode names but omits implicit Default blind repetition; nonrepeating blind fallback routes Default to and_bcode. Interpreter follows generated family by contract, so adjusting only collection cannot correct generated cursor/group policy.
+  Acceptance: Reconcile existing rule-local cursor/Default blind/public family authority; correct only derived row and_bcode ->existing rep_bcode, preserve ten-family vocabulary/minimal label-family rows/format2/schema. Explicitly qualify changed output and stale artifact behavior; regenerate affected modules as required, prove SDK/plan/fresh/metadata/trace/entry/count/minimum/zero/empty/plain/explicit-family controls. Default row is not counted as completed portable39.4.4 proof. Before .5/admission, no silent ignoring generated family.
+  Planned verification tier: focused
+  Planned focused checks: Exact installed-host Default family/source/native/restored/generated/fresh RED-GREEN, stale artifact/normal collection/nearest family controls, book/map/history/manual continuity; separately canonical if schema/authority moves.
+  Planned canonical trigger: Full39/23.4/final clean push and any new public schema/family meaning/authority separately canonical.
+  Planned claim verification: none: Finite authored generated-family distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1`
   Status: `completed`
@@ -8996,7 +9022,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.4` | `pending` | Retain Lua implicit repeated blind choice and complete AND collections. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.9` | `pending` | Correct Lua Default blind generated-family classification and qualify artifacts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

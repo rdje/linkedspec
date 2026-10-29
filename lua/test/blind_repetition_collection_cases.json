@@ -1,0 +1,302 @@
+[
+  {
+    "name": "default",
+    "source": "Top::\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "A",
+          "B",
+          "B",
+          "A"
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      },
+      {
+        "input": "x",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "or",
+    "source": "Top::OR\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "A",
+          "B",
+          "B",
+          "A"
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": null,
+        "expected_cursor": 0,
+        "expected_match": false
+      },
+      {
+        "input": "ax",
+        "expected": [
+          "A"
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "bounded",
+    "source": "Top::OR{0,2}\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "A",
+          "B"
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      },
+      {
+        "input": "",
+        "expected": [],
+        "expected_cursor": 0,
+        "expected_match": false
+      }
+    ]
+  },
+  {
+    "name": "and_two",
+    "source": "Top::AND{2}\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      },
+      {
+        "input": "ab",
+        "expected": null,
+        "expected_cursor": 2,
+        "expected_match": false
+      },
+      {
+        "input": "ababa",
+        "expected": [
+          [
+            "A",
+            "B"
+          ],
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and_partial",
+    "source": "Top::AND+\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "aba",
+        "expected": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "expected_cursor": 3,
+        "expected_match": true
+      },
+      {
+        "input": "a",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      },
+      {
+        "input": "ab",
+        "expected": [
+          [
+            "A",
+            "B"
+          ]
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and_once",
+    "source": "Top::AND\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          "A",
+          "B"
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "pipe_exit",
+    "source": "Top::|\n => First\n => Second\n E {return(retv)}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": "A",
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "or_custom_it",
+    "source": "Top::OR\n => First\n => Second\n IT {cursor_pos()}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "or_it_return",
+    "source": "Top::OR\n => First\n => Second\n IT {return([\"IT\",cursor_pos()])}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "IT",
+          1
+        ],
+        "expected_cursor": 1,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "or_end_return",
+    "source": "Top::OR\n => First\n => Second\n EX {return([\"FINAL\",cursor_pos()])}\n E {return([\"FINAL\",cursor_pos()])}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abba",
+        "expected": [
+          "FINAL",
+          4
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and_custom_it",
+    "source": "Top::AND+\n => First\n => Second\n IT {cursor_pos()}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": [],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and_it_return",
+    "source": "Top::AND+\n => First\n => Second\n IT {return([\"IT\",cursor_pos()])}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": [
+          "IT",
+          2
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "and_end_return",
+    "source": "Top::AND+\n => First\n => Second\n EX {return([\"FINAL\",cursor_pos()])}\n E {return([\"FINAL\",cursor_pos()])}\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "abab",
+        "expected": [
+          "FINAL",
+          4
+        ],
+        "expected_cursor": 4,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "nested",
+    "source": "Top::OR\n => First\n => Second\nFirst:AND\n /a/ -> First[0] {return([\"A\",[\"N\"]])}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": [
+          [
+            "A",
+            [
+              "N"
+            ]
+          ],
+          "B"
+        ],
+        "expected_cursor": 2,
+        "expected_match": true
+      }
+    ]
+  },
+  {
+    "name": "postcall_return",
+    "source": "Top::OR{2}\n => First {return([\"POST\",retv,cursor_pos()])}\n => Second\nFirst:AND\n /a/ -> First[0] {return(\"A\")}\nSecond:AND\n /b/ -> Second[0] {return(\"B\")}\n",
+    "cases": [
+      {
+        "input": "ab",
+        "expected": null,
+        "expected_cursor": 1,
+        "expected_match": false
+      }
+    ]
+  }
+]

@@ -35,3 +35,9 @@ initial source/log/receipt retained without invalid minimum RED credit. Separate
 callable-codeblock branch already supplies code; initial secondary-route wording
 was corrected against source. Compiler/emitter/matching/recognition authority/
 schema unchanged. Declared5.4/unsafe formatter/registration/full admission remain.
+
+2026-10-29 runtime blind .4 now retains implicit copied iteration values;
+13portable sources200 assertions per host, generated Default .9 remains immediate
+independent repair before post-call .5. Minimum289/group390/progress234 and
+structural197 stay green, prior fixtures unchanged. Current proof:
+[[lua-implicit-blind-iteration-collections]]. Original minimum packet frozen.

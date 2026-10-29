@@ -366,3 +366,11 @@ healthy/error identity. Group390/progress234/structural197 pass30healthy1owned
 dormant. P2 .8 owns actual ordinary unknown-helper code omission before admission;
 initial peer oracle qualified, no invalid minimum RED. Packet lua-minimum-intake.json.gz
 retains closure. Implicit blind .4 next, full prerequisites remain.
+
+2026-10-29 Lua39.4.4 runtime blind collection13portable sources20inputs
+6healthy7RED ->13pass200 per host, same15 modules/inputs/six healthy results.
+Default native corrected but actual generated and_bcode misclassification P1 .9
+immediate; post-call .5 remains wrong unchanged/retv healthy. No portable Default
+credit. Neighbors289/390/234/197 pass30structural active1owned dormant. Packet
+lua-blind-collection-intake.json.gz retains all diagnostics/epochs/closure.
+Runtime-only/no classifier/schema change, .9 next before .5/admission.
