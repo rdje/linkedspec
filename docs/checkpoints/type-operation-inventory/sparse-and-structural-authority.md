@@ -398,3 +398,12 @@ code/rule/runtime phase/caller origin/raw offsets. Neighbors240/289/390/234/205
 pass all15collection/all31structural active; prior fixtures unchanged. Packet
 lua-blind-postcall-repair-intake.json.gz retains closure. Nullable .7 next, P2
 .8 and broader lifecycle qualifier .5.2 explicitly before admission.
+
+2026-10-29 Lua39.4.7.0 nullable33sources54inputs per host21healthy12raw
+differences; qualified32sources52inputs21healthy11nullableRED, one blind_LE/
+two inputs unqualified phase .5.2.33 modules fresh/input/54 native trace identity,
+full records retained. Explicit-null overacceptance and implicit-pure classifier
+need coherent .7.1 preserving healthy explicit pure-null; no product change.
+Public3source8input phase qualification/reference emitted-source omission vs
+preservation recorded separately, no blind LE policy inferred. Packet
+lua-null-context-intake.json.gz retains closure; .7.1 next before admission.

@@ -8710,13 +8710,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.1 - retain Lua blind post-call returned iteration outcomes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.5.2`
-  Status: `pending` / P2 after bounded nullable/diagnostic features before full39/23.4 admission
+  Status: `pending` / P1 phase-authority convergence after bounded nullable repair before full39/23.4 admission
   Goal: Qualify broader Lua blind LE/lifecycle execution and whole-return authority independently.
   Acceptance: Existing18-source post-call proof covers only actual five healthy plain/IT/E/nonreturn controls, not all LE placements. Reconcile frozen public phase/source contracts and public Perl execution first; safe installed-host direct/restored/generated/fresh probes distinguish plain/repeated/default/blind LE, I/LS/IT/EX/LX/E ordering/returns/early group paths. Log/own confirmed gaps with bounded repair children, preserve correct existing authority; no phase inferred from peer implementation or misleading full-family claim. This is a scheduled qualification, not an asserted new Lua defect.
   Planned verification tier: focused
   Planned focused checks: Exact authored safe public reference/Lua phase oracles and actual trace, bounded confirmed RED-GREEN/nearest checks/book/docs/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push, any newly changed public phase authority separately canonical.
   Planned claim verification: none: Finite authored lifecycle/control-flow qualification, no population measurement.
+
+  Actual .7.0 qualification: Shared return__blind_le source is not a qualified portable nullable oracle. Public Perl native/emitted repeated OR{2} ignores LE (nonnull sentinel absent from emitted body), while plain AND preserves/executes sentinel at1. Lua SDK/restored/plan ignores both; named three-source/eight-input controls retained. Public placement guide frames LS/LE as local regex-slot hooks and does not settle this blind-parent difference. Reconcile with SESSION-STARTUP-READING.27.1/ADR0020 before phase changes; qualify existing Dart/Julia blind_le target credit without rewriting their observed native counts. No fabricated Perl matched flag from null scalar value. One source excluded from current32-source nullable repair completion credit, all evidence retained.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.6`
   Status: `completed` / P1 immediate before further feature owners/admission
@@ -8741,13 +8743,41 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   History: exact committed suffix/manifest/kept-prefix verification passed for `docs/history/changes/segment-4948-0684fd3e514a.md`; normal rollover, no cap raise/history loss.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7`
-  Status: `pending` / P1 independent qualification after .5
+  Status: `in_progress` / P1 independent qualification after .5
   Goal: Independently qualify Lua nullable lifecycle and pure observation contexts.
   Acceptance: Selected null action already matchedtrue at4. Use exact safe context/record/error sources, no return-provenance defect inferred; repair only confirmed gaps with typed owning context before admission.
   Planned verification tier: focused
   Planned focused checks: Exact owned safe installed-host SDK/restored/generated/fresh RED-GREEN and nearest controls, book/map/history/manual continuity; no routine full suite.
   Planned canonical trigger: Full39/23.4/final clean push after repairs and declared-host/unsafe formatter/registration/pressure prerequisites; public authority separately canonical.
   Planned claim verification: none: Finite authored functional/control-flow distinctions, no population measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.0`
+  Status: `completed` / qualified nullable scope and explicit phase deferral / independent nullable-context intake
+  Goal: Establish actual Lua nullable-return and pure-coordinator observation outcomes before edits.
+  Acceptance: Combine exact20return-context/13pure-observation sources54inputs, safe installed-host SDK/restored/plan and33 modules fresh. Preserve matched/cursor/value/error/full detached nine-field records and actual public traces, exact source/normalized/compiled/plan/emitted. Selected null is already healthy; no peer inference. Decompose confirmed causal gaps and preserve healthy observations during coherent repairs, no global null acceptance/sticky regex/fabricated selection or new authority.
+  Verification tier: `focused`
+  Focused checks:33exact sources54inputs per host SDK/restored/plan/33 modules fresh,21healthy12raw target differences; qualified32sources52inputs21healthy11RED and one phase source/two inputs excluded. Full54 actual traces/host input identity, selected causal snapshots,3source8input public reference/Lua phase controls and emitted sentinel preservation/omission; no product diff, book/map/history/manual continuity.
+  Canonical trigger: Full39/23.4/final clean push after coherent .7.1/P1 phase .5.2/P2 .8/declared-host/unsafe formatter/registration/pressure/slot, new phase/schema authority separately canonical.
+  Claim verification: none: Finite authored nullable/record/phase distinctions, no population measurement.
+  Activation: clean `69a7fb032d6a9c2a6fa716ddfb8dc2050d1726f2`; bounded post-call repair committed, public Lua recognition/observation and existing nullable scope authority read. No Lua defect inferred from peers or unsupported unsafe patterns.
+
+
+  - [x] **REPRODUCE / ISSUE**:33exact sources54inputs per installed PUC5.5/LuaJIT SDK/restored/plan and33 modules fresh produce21healthy12target differences. Qualified32sources52inputs21healthy11nullableRED, one blind_LE phase source/two inputs excluded without completion credit. Raw source/normalized/compiled/plan/emitted and all54 actual native trace/results identical across hosts; full nine-field records retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Actual early-I and under-min LX null report matchedtrue despite absent accepted completion; interpreter.lua recognition_result and final Flow-return path force true unconditionally. Observation adapter leave_invocation_with_outcome uses only result.matched, so implicit pure normal null reports failed. Healthy explicit pure-null records currently rely on global true; changes must be coherent. Blind phase differs independently: public repeated LE sentinel omitted/plain preserved, Lua LE called only in regex accept_match; guide documents local regex-slot hooks, no settled blind target.
+  - [x] **FIX**: Intake only: P1 .7.1 owns joint private nullable acceptance provenance/pure normal observation completion, preserving21healthy outcomes/no fake span. P1 .5.2 linked SESSION27.1 owns actual mode-specific phase authority before admission; do not count blind_LE as a nullable defect or impose peer implementation. No product or new authority changes.
+  - [x] **ADDRESSED (verified)**: All33 baseline modules fresh agree with plan public values/errors; SDK/restored matched/cursor/full records and host input/trace identity retained. Exact qualified fixture census32/52 verifies two excluded inputs, correcting initial53 assumption before landing; original failed instrument/receipt preserved without product RED credit. Three-source/eight-input public reference and Lua phase controls independently distinguish LE absence from null projection.
+  - [x] **NO REGRESSION**: Product runtime/compiler/emitter/matching/recognition authority/schema unchanged; selected null/completed contexts/pure explicit null/false/String/error controls remain observed healthy. Public Perl emitted eval is same-process, not fresh; Lua phase diagnostics SDK/restored/plan only, original33 fresh separate. Earlier Dart/Julia blind_LE native observations remain true but get no new portable phase authority. No declared5.4/unsafe formatter/full suite/admission claim.
+  - [x] **LOCKSTEP**: Packet lua-null-context-intake.json.gz retains actual producer/input/runtime/SDK/fresh/trace/public-reference/emitted selection/qualification/initial instruments/receipts. Book/cards/target/roadmap/task/live/resume/history align. Coherent .7.1 next, phase .5.2/P2 .8/full prerequisites stay owned. Authorized focused intake commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.0 - qualify Lua nullable return and pure observation contexts`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.1`
+  Status: `pending` / P1 immediate coherent nullable/observation repair after .7.0
+  Goal: Preserve Lua nullable-return owning acceptance and pure normal observation independently in one coherent fix.
+  Acceptance: Qualified32sources52inputs21healthy11RED; retain one unqualified blind_LE source/two inputs under .5.2 with no success credit. Private accepted bit selected action/LE/plain successful blind/appropriate lifecycle context, not sticky match; early I/LS/no-hit/zero-min/under-min LX null false, non-null whole authority unchanged. Pure no-regex/action/blind-structure normal completion observed accepted independently of parser matched flag, actual matcher/error strict; no invented span/second authority. Repair together so currently healthy explicit pure-null observations never regress. Full records/input/21control identity and same33 baseline modules/fresh consumer, meaningful normal and nearest tests before commit.
+  Planned verification tier: focused
+  Planned focused checks: Exact qualified32/52 RED-GREEN per installed host SDK matched/value/cursor/full nine-field records and fresh public values/errors, same33 baseline modules/input/21healthy identity, deferred phase unchanged; normal provenance/classifier/recognition/progress/post-call neighbors/book/map/history/manual continuity, no routine full gate.
+  Planned canonical trigger: Full39/23.4/final clean push after phase .5.2/P2 .8/declared-host/unsafe formatter/registration/pressure/slot; new authority separately canonical.
+  Planned claim verification: none: Finite authored nullable/context/record distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.8`
   Status: `pending` / P2 after bounded Lua feature coverage before23.4/full admission
@@ -9087,7 +9117,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7` | `pending` | Independently qualify Lua nullable return and pure-observation contexts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.39.4.7.1` | `pending` | Coherently repair Lua nullable return acceptance and pure observation classification. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

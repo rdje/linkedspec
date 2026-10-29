@@ -9,7 +9,7 @@ answers:
   - "does Lua selected null action preserve matched status"
   - "are new Lua feature tests automatically discovered"
 date: 2026-10-29
-status: bounded repairs through post-call .5.1 targeted-checked; nullable .7 next, P2 .8/.5.2/admission remain
+status: bounded repairs through .5.1 checked; nullable intake .7.0 qualified32/52, coherent .7.1 next; phase .5.2/P2 .8/admission remain
 tags: [lua, luajit, sparse-and, dependency, repetition, minimum, blind, recognition, progress, intake]
 evidence: "lua-sparse-intake.json.gz retains exact31sources49inputs per installed host, SDK/restored/generated and31 separate-process emitted modules, all49 actual traces,18healthy13failed sources and102 normal assertions per host with13 owned dormant."
 reverify: "Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh."
@@ -93,3 +93,10 @@ five healthy observations. All15collection240/all31structural205 plus289/390/
 234 neighbors pass, no residual dormancy. Current proof:
 [[lua-blind-postcall-return-scope-gap]]. Nullable .7 next, broader phase .5.2
 and P2 helper code .8 before full admission. Original intake packet frozen.
+
+2026-10-29 nullable .7.0 independently records33/54 per host21healthy12raw
+differences; qualified32/52 has21healthy11nullable defects, one blind_LE/two
+inputs unqualified under phase .5.2. Selected null/pure explicit-null already
+healthy; coherent .7.1 repairs owning acceptance/classifier together. Current
+proof: [[lua-null-return-and-pure-observation-gaps]]. No product edits, original
+intake frozen; phase authority .5.2/P2 .8/full prerequisites remain.

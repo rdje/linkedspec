@@ -68,3 +68,12 @@ exact local-CI success marker and exit 0. A sandboxed attempt stopped only at th
 - Recognition authority: [[lua-recognition-transaction-admission]].
 - Decision: ADR `0056`, section 26.
 - Task owner: [[FUTURE-PARITY-BACKLOG.14]] `.14.4.6`.
+
+2026-10-29 bounded39.4.7.0 adds independent nullable qualification:33sources/
+54inputs21healthy12raw differences, qualified32/52 has11nullable defects and
+one blind_LE source/two inputs deferred to phase .5.2. Lua currently forces
+explicit null returns matchedtrue while implicit pure normal completion fails
+observation; coherent .7.1 must preserve healthy explicit pure-null records.
+Current proof: [[lua-null-return-and-pure-observation-gaps]],
+[[blind-le-public-phase-authority-gap]]. Original43-assert admission evidence
+remains historical; no public schema/facade/second authority change in intake.
