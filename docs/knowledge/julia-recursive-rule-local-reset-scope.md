@@ -43,3 +43,15 @@ This closes `top_rule_body_recursion_sexpr`, `top_rule_lx_recursion_nested`, and
 
 Related facts: [[dart-recursive-dispatch-rule-local-scope]], [[rust-declare-type-token-rule-scope]],
 [[top-rule-recursion-forward-progress-guard]], [[julia-shipped-corpus-smoke-split]].
+
+## Conventional rule-array extension48.4.2 (2026-10-29)
+
+Accepted rule entry now records its own name in that existing snapshot map,
+clears scalar/hash representations and installs a fresh conventional Array and
+binding ID. The existing finally restore handles the caller. Explicit initializer
+and unrelated undeclared mutation policies remain unchanged. Direct repeated
+call scope is repaired; implicit coordinator empty-tail policy remains39.8.1.
+A new exact source shows current Perl child-local undeclared working variables
+versus Julia shared stores; canonical48.4.2.1 owns reconciliation after20.1,
+before admission. Do not infer portable shared-variable authority from this
+historical Julia-local compatibility fact. See [[julia-rule-invocation-accumulator-scope]].

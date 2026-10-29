@@ -1,0 +1,32 @@
+[
+  {
+    "name": "restore_scalar_caller",
+    "source": "Top::\n I{Middle=7;seen=call(Middle);return(array(seen,Middle))}\nMiddle:\n I{return(copy(Middle))}\n",
+    "input": "x",
+    "expected": [[], 7],
+    "expected_cursor": 0
+  },
+  {
+    "name": "restore_array_caller",
+    "source": "Top::\n I{Middle=[\"P\"];seen=call(Middle);return(array(seen,Middle))}\nMiddle:\n I{return(copy(Middle))}\n",
+    "input": "x",
+    "expected": [[], ["P"]],
+    "expected_cursor": 0
+  },
+  {
+    "name": "restore_hash_caller",
+    "source": "Top::\n I{Middle={\"key\":\"P\"};seen=call(Middle);return(array(seen,Middle))}\nMiddle:\n I{return(copy(Middle))}\n",
+    "input": "x",
+    "expected": [[], {"key": "P"}],
+    "expected_cursor": 0
+  },
+  {
+    "name": "share_undeclared_mutation",
+    "source": "Top::\n I{out=[];seen=call(Middle);return(array(seen,out))}\nMiddle:\n I{push(out,\"C\");return(copy(out))}\n",
+    "input": "x",
+    "expected": [["C"], []],
+    "julia_compatibility_expected": [["C"], ["C"]],
+    "compatibility_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2.1",
+    "expected_cursor": 0
+  }
+]

@@ -4901,6 +4901,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Julia48.4.1 adds blind_parent_push_test.jl with one runtests include,13 exact source controls104 assertions. Qualified coordinator3 runtime qualification moves to actual invocation-array owner48.4.2; original parent-LX remains unqualified. Exact canonical selection must include repaired normals before admission/push.
 
+  Julia48.4.2 adds rule_invocation_accumulators_test.jl with one runtests include,3 original plus4 binding-scope controls56 assertions. Preserve explicit implicit-tail39.8.1 and undeclared-write48.4.2.1 qualifications; no portable credit until canonical authority/repair.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -8035,6 +8037,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Authority selection after20.1 and before full39/23.4/admission/push; no default per-feature full gate.
   Planned claim verification: none: Finite authored authority/counterexample intake, no population measurement.
 
+  Julia48.4.2 independent scope-only follow-up: implicit_parent_no_tail and qualified blind_no_regex/marked_blind_target/markerless_blind change[[x],[x]] ->[[x],[]] at1 after fresh conventional arrays; direct_twice becomes portable[[x],[]], explicit reset unchanged. Julia existing ordinary_blind source/ORDINARY expectation is byte-identical to Dart counterpart. Keep ordinary count/IT/progress/LX behavior unchanged in scope feature, qualify backend extra empty iteration and add Julia to this canonical policy intake after20.1 before admission. No unconditional cutoff experiment or inferred phase repair is authorized by this observation; preserve previous evidence. Retain actual source/compiler/SDK/fresh/normal inputs in julia-rule-accumulator-intake.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.39.1.4`
   Status: `completed` / bounded default iteration and implicit collection targeted-checked
   Goal: Reconcile and repair confirmed repeated/default blind implicit-result differences.
@@ -9696,14 +9700,37 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1 - preserve Julia blind fluent parent push calls`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2`
-  Status: `pending` / P1 immediately after48.4.1 before48.5/45/admission/push
+  Status: `completed` / P1 immediately after48.4.1 before48.5/45/admission/push
   Goal: Make Julia conventional rule arrays fresh per invocation through the existing scoped typed binding owner; independently qualify coordinator progress outcomes.
   Reproduce / impact:48.4.1 after-push native/restored/plan qualified blind_no_regex, marked_blind_target, markerless_blind now return[[x],[x]] at cursor1 versus qualified reference[[x]]. Same fixture/compiler/source preserved; actual missing-context error is repaired. Existing rule entry pushes an empty snapshot map but implicit same-name array mutation does not snapshot/reset it; only explicit aggregate initializer/reset currently enters rule-local scope. Inspect current public toolbox/trace and frozen3 rule_invocation_accumulators before changes to isolate direct repeated calls from ordinary coordinator iteration policy; no Dart-derived failure assumption.
   Acceptance: Own original3 source SDK/restored/plan/fresh baseline, direct twice and explicit-reset controls, typed binding identity/snapshot restore and undeclared mutation neighbors. Scope only invoked rule conventional array, restoring full caller kind/binding identity via existing owner. Do not reset unrelated variables or change minimum/count/IT/progress/LX policy to force reference output. If fresh arrays expose an ordinary-phase discrepancy, log precise Julia source/reference/compatibility authority under canonical39.8.1 or linked owner before admission; keep explicit runtime qualification. Normal/direct dependents/same modules/healthy metadata/errors/book/docs/proof/commit, then safe Lua48.5.
-  Planned verification tier: focused
-  Planned focused checks: Own3 typed source targets and qualified runtime7, same old modules/native/restored/plan/fresh, invocation reset/undeclared mutation and blind/progress direct neighbors; no routine full gate.
-  Planned canonical trigger: Full23.4/final clean push after exact selection23.4.1, pressure20.1, ordinary policy39.8.1 and lifecycle/Phase0 prerequisites.
-  Planned claim verification: none: Finite authored invocation/scoping functional assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks: Original3 own SDK/restored/plan/fresh/same3 modules:1 portable directRED->GREEN,1 healthy explicit reset exact,1 implicit empty-tail qualification. Four caller-kind/undeclared-write controls with current public Perl reference and fresh modules. New56/referenced180/push104/postcall274/progress234/uniform61 pass909 assertions; fresh/focused stderr empty.36 artifact/diagnostic rows exact33runtime unchanged. Normal registration/book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full23.4/final clean push after safe Lua48.5/45, pressure20.1/ordinary39.8.1/cross-rule lifetime48.4.2.1/selection23.4.1/lifecycle and other prerequisites. No scope-authority normalization or public schema/infrastructure movement.
+  Claim verification: none: Finite authored invocation/reset/typed caller/diagnostic controls, no population measurement.
+
+  Activation: clean `4f4e620e50fef367cb3426a24f92f56676df7d27`; push repair committed/brief0/no jobs. Existing first-reset full-kind+binding-ID snapshot and finally restore owner recovered. Independently baseline frozen3 and normal before edits, distinguish same-name conventional array reset from undeclared variable and ordinary-phase policy; preserve initializer snapshots and parent binding restoration.
+
+
+  - [x] **REPRODUCE / ISSUE**: Own3 before edits native/restored/plan/fresh has2 duplicate-array results1 healthy explicit reset. Original normal6failed18passed. Scope-only original oracle has3failed21passed, independently exposing ordinary empty-tail qualification rather than portable completion.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Rule entry created an empty rule_local_binding_scopes map; same-name implicit array mutations reused parse-wide storage until explicit initializer/reset recorded a snapshot. Existing _record_runtime_rule_local_binding! captures full scalar/Array/Hash values plus binding identity and finally restores it. Ordinary collection policy and unrelated implicit working variables are separate owners.
+  - [x] **FIX**: At accepted invocation entry, snapshot own rule name, remove scalar/hash representations, install empty Array and fresh binding ID using existing owners. Existing finally and explicit reset first-snapshot behavior restore caller. No general working-variable reset, progress/count/IT/LX/lifecycle policy, matcher/compiler/emitter/schema/family change. Values copied as before; no object-reference identity claim.
+  - [x] **ADDRESSED (verified)**: Direct twice1portable actualRED->GREEN; explicit reset exact; implicit tail is fresh empty but remains qualified under39.8.1. Same3 original modules/full artifact/metadata exact. Four additional post-change controls:3 portable caller scalar/Array/Hash restorations pass4routes and one current Julia shared-write compatibility is explicit under48.4.2.1. Public Perl native/emitted and emitted local declarations qualify actual mismatch; no invented peer defects or cross-rule parity credit.
+  - [x] **NO REGRESSION**: New56/referenced180/push104/postcall274/progress234/uniform61 pass909 assertions, final fresh/focused stderr empty.36 existing source/artifact/diagnostic rows exact33 runtime unchanged;3 coordinators now[[x],[]] with compiler coverage/39.8.1 runtime exclusions. Ordinary sentinel source/expected matches Dart and remains ORDINARY, no cutoff experiment. New hash control initial bare key was dynamic per known authority; quoted correction/refinement retained without product RED. Initial reader premature before reference completion is instrument error, no product credit.
+  - [x] **LOCKSTEP**: julia-rule-accumulator-intake.json.gz retains actual producer/source/fixture/normal epochs/reference/public emitted source/modules/results/receipts. One normal include; exact canonical selection23.4.1 and39.8.1/48.4.2.1 authority before admission. Book/cards/map/roadmap/task/live/resume/history align; safe Lua48.5 next then warning/45 owners, focused authorized commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2 - scope Julia conventional arrays per rule invocation`.
+
+  Engineering-notes rollover: archived only63 lines from clean activation HEAD as docs/history/development-notes/segment-4942-54013b269526.md. Exact source commit/blob/LF suffix/hash/byte count/old manifest rows/kept prefix verified; no cap increase/history loss. Same-leaf chronology containment, independent20.1 pressure repair remains.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2.1`
+  Status: `pending` / P1 canonical after20.1 before23.4/admission/push; eligible bounded feature frontier remains48.5
+  Goal: Reconcile and repair cross-rule undeclared working-variable lifetime against the reference and preserved interpreted-backend scope authority.
+  Reproduce / impact:rule_invocation_binding_scope share_undeclared_mutation source Top I out=[];seen=call(Middle);return(array(seen,out)), Middle I push(out,"C");return(copy(out)). Current public Perl native/emitted returns[[C],[]] at0; current Julia native/restored/plan/fresh returns[[C],[C]] at0. Public emitted source independently declares my $out in Top and Middle (retained lines52/82), with push_value on Middle-local scalar. Julia uses shared parse context stores; current initializer snapshot/reset owner intentionally preserves undeclared child mutation visibility per established Julia/Dart facts. No same-assertion portable parity credit.
+  Acceptance: Own source/runtime/emitted/lowering baseline, exact canonical variable/rule/frame authority and existing interpreted compatibility tests; distinguish parent initialized targets, undeclared child local writes, explicit initializer shadowing, same-name conventional accumulators, scalar/Array/Hash/falsey kinds, closures/parameters/user functions and callbacks. Establish the intended portable lifetime and implement the sole binding owner repair per affected backend, preserving established explicit scope/identity/mutation guards or explicitly superseding them with canonical evidence. Public Perl handler declarations are actual source evidence, not an inference from result. Independently assess Rust/Dart/Lua; no peer defect inference. Focused child repairs/normal/new authority/book and receipt-bound canonical reconciliation before admission; do not silently change behavior in fresh-array48.4.2.
+  Planned verification tier: canonical
+  Planned focused checks: Exact per-rule public source/lowering/full typed result/cursor/frame/identity controls, current backend compatibility and generated/fresh routes before each repair.
+  Planned canonical trigger: Scope authority reconciliation after document-pressure20.1, before full23.4/admission/push; preserve current explicit compatibility until qualified repair.
+  Planned claim verification: none: Finite authored rule-frame/lifetime behavior and exact emitted declarations, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.48.5`
   Status: `pending` / P1 after49 before45/wider features/full23.4/push
@@ -9713,6 +9740,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Exact public compile/descriptor/action-blind/direct-call/slot/source/error/native/fresh controls and direct compiler/blind/catalog neighbors, no routine full gate.
   Planned canonical trigger: Full23.4/final clean push after48/45/selection23.4.1 and other prerequisites.
   Planned claim verification: none: Finite authored compile/ownership/control assertions, no population measurement.
+
+  Added target scope: Include pure_blind_targets8 and strict negatives4 alongside original/qualified12. Independent safe-host compiler/runtime/fresh baseline, no peer inference. Conventional arrays/parent push assessed only on actual evidence;39.8.1 ordinary and48.4.2.1 cross-rule lifetime authority remain canonical after20.1, not implicit feature permission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
@@ -10141,7 +10170,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2` | `pending` | Scope Julia conventional rule arrays per invocation. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.48.5` | `pending` | Independently assess safe Lua referenced and pure-code blind targets. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

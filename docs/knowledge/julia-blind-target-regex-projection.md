@@ -8,7 +8,7 @@ answers:
   - does a Julia pure-code blind call create an entry slot
   - which Julia referenced blind push runtime cases remain open
 date: 2026-10-29
-status: bounded compiler48.4 and parent-push48.4.1 repaired; invocation arrays48.4.2 next
+status: bounded compiler48.4/parent-push48.4.1/invocation arrays48.4.2 repaired; canonical policies open
 tags: [julia, compiler, validation, blind, regex, dependency, entry-slot]
 evidence: "julia-referenced-intake.json.gz retains36 source roles,17 compiler RED to22 valid builds/14 exact rejects,10 healthy runtime controls and3 separately owned push failures,22 fresh modules and575 selected assertions."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error julia/test/referenced_blind_targets_test.jl"
@@ -62,3 +62,11 @@ native/restored/plan/fresh with the same original modules. Qualified3 errors now
 become[[x],[x]], independently exposing conventional-array invocation reuse;
 P1 owner48.4.2 is immediately next. These3 remain runtime-qualified rather than
 credited as portable success. See [[julia-blind-fluent-parent-push]].
+
+## Invocation follow-up48.4.2
+
+Conventional same-name arrays are now fresh at invocation entry. Direct twice
+is repaired; qualified3 coordinators now[[x],[]] and remain under ordinary
+progress authority39.8.1. Separate undeclared-variable scope control exposes
+Perl child-local versus Julia shared state under canonical48.4.2.1. No broader
+portable runtime parity follows. See [[julia-rule-invocation-accumulator-scope]].

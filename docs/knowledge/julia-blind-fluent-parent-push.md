@@ -8,7 +8,7 @@ answers:
   - do Julia blind parent push modules need regeneration
   - why do Julia referenced coordinators duplicate their arrays after push repair
 date: 2026-10-29
-status: bounded48.4.1 repaired; conventional arrays48.4.2 next
+status: bounded48.4.1 and48.4.2 repaired; canonical progress/lifetime before admission
 tags: [julia, blind, fluent, push, parent-call, runtime, typed, invocation]
 evidence: "julia-blind-parent-push-intake.json.gz retains13 sources2healthy11actualRED to13 pass4routes using same13 modules, exact metadata and853 selected assertions."
 reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error julia/test/blind_parent_push_test.jl"
@@ -55,3 +55,11 @@ P1 `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2` immediately owns an independent3-source
 direct/implicit/explicit-reset baseline and repair. Three runtime qualifications
 remain explicit. Do not infer a progress policy or other backend failure from
 this array leak; canonical39.8.1/lifecycle/selection/admission remain separate.
+
+## Invocation follow-up48.4.2
+
+Conventional same-name arrays are now fresh at invocation entry. Direct twice
+is repaired; qualified3 coordinators now[[x],[]] and remain under ordinary
+progress authority39.8.1. Separate undeclared-variable scope control exposes
+Perl child-local versus Julia shared state under canonical48.4.2.1. No broader
+portable runtime parity follows. See [[julia-rule-invocation-accumulator-scope]].

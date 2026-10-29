@@ -73,7 +73,7 @@ end
                 cases = file == "pure_blind_targets.json" ? [fixture] :
                     get(fixture, "cases", Any[])
                 # Original sources retain compiler coverage. Original parent LX
-                # is unqualified (48.2.2.1); qualified rule-array lifetime is owned by 48.4.2.
+                # is unqualified (48.2.2.1); qualified ordinary progress is owned by 39.8.1.
                 if file == "referenced_blind_intermediate.json" ||
                         fixture["name"] in ("blind_no_regex", "marked_blind_target", "markerless_blind")
                     continue

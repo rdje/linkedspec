@@ -65,8 +65,9 @@ restored, plan and emitted routes preserve `entry_slot()` as null, call both
 children in the mixed sequence and retain only real regexes in the dependency
 map. Referenced AND literal-return and direct-call examples pass too. Blind
 fluent `.push` now calls its enclosing parent on the recorded13 Julia routes.
-Three coordinator examples still reuse a conventional rule array; that
-invocation-scope repair remains open. This compiler support does not establish
+Conventional rule arrays are now fresh per Julia invocation. Three
+coordinator examples still collect a final empty nonconsuming iteration;
+ordinary progress and lifecycle authority remains under review. This compiler support does not establish
 complete repeated coordinator or lifecycle parity.
 
 Blind fluent `.push` calls the enclosing parent after its child. For example,
@@ -651,7 +652,7 @@ Replacing Top's body with `I { return(call(Middle)) }` returns `["x"]` directly.
 `Middle.return("OK")` in that AND parent has the same blind ownership. Use a real expression or a bound
 value in return examples; the name `child_result` is not an automatic binding.
 
-Dart creates a fresh conventional Array for each invoked rule and restores
+Dart and Julia create a fresh conventional Array for each invoked rule and restores
 the caller binding on exit. Calling the same rule twice does not reuse its
 first result:
 
@@ -668,8 +669,12 @@ Value:
 
 On `x`, the result is `[["x"],[]]`: the first call consumes the input and the
 second starts with an empty `Middle` array. Explicit initializers remain local
-to each call. Mutations to other undeclared working arrays remain visible to
-the caller; this does not reset every working variable.
+to each call. In Dart and Julia, mutations to other undeclared working arrays remain visible
+to the caller. Current Perl keeps an undeclared child working variable local to
+its handler; this cross-rule scope difference is under explicit authority
+review before admission. Avoid relying on implicit cross-rule working-variable
+sharing in portable sources. The conventional-array repair does not reset every
+working variable.
 
 Portable blind-parent `LX` behavior remains under authority review. Rust, Dart and Julia now preserve blind `.push` parent-call effects on the checked single-pass and repeated routes. The example above uses implicit collection; use an attached `.push` when the parent call is intended.
 

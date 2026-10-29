@@ -1986,6 +1986,13 @@ function _execute_runtime_rule!(
 
     push!(context.active_rule_entries, recursion_key)
     push!(context.rule_local_binding_scopes, Dict{String,_RuntimeRuleLocalBinding}())
+    # The conventional rule array belongs to this invocation. The existing
+    # scope restores every caller binding kind and its identity on exit.
+    _record_runtime_rule_local_binding!(context, label)
+    delete!(context.variables, label)
+    delete!(context.hashes, label)
+    context.arrays[label] = Any[]
+    _bind_runtime_fresh_identity!(context, label)
     saved_registers = context.registers
     context.registers = enter_child(saved_registers)
     _enter_runtime_recognition_invocation!(
