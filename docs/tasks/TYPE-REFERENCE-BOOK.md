@@ -8987,6 +8987,26 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push must be green after all owned defects and selection prerequisites.
   Planned claim verification: none: Finite authored existing regression failures and exact selected baseline/candidate distinctions, no population measurement.
 
+  Recovery after daily cleanup46: completed37 primary-run log/stderr raw duplicates are now local .gz files and remain exact inputs in the unchanged Perl37 packet. Restore those raw names and verify hashes before replay_boundary_phase0_selected.py; no diagnostic or producer was discarded.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
+  Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
+  Activation: clean `c39cfd18a23ed9ddb1d1bc977a84da322289a524`; prior proof jobs terminal.
+  Goal: Compress only exact completed37 primary-run diagnostic duplicates already retained in its committed packet, refresh latest cleanup record, then resume Perl40.1.
+  Verification tier: `focused`
+  Focused checks: Exact committed-packet identities, all-claim input exclusion, same-volume/non-symlink/nested-repository guards, exclusive gzip/decompressed byte/hash equality, unchanged raw metadata before unlink, final absence/recovery and Rust target .bin/.log metadata census; book/history/manual continuity.
+  Canonical trigger: Full admission/final clean push; no storage policy, infrastructure or cache migration.
+  Claim verification: none: Exact named artifact identity/recovery controls, no population or disk-space measurement.
+
+
+  - [x] **REPRODUCE / ISSUE**: Latest cleanup2026-10-28T12:07:27Z is older than24h; two exact completed37 primary diagnostics are recoverable in its unchanged committed packet and not claim raw inputs.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Completed project-local raw captures duplicate retained evidence. Select only exact closed-leaf inputs; no inference that caches or build outputs are unused.
+  - [x] **FIX**: Verify committed packet and every raw byte/hash, claim exclusion and same-volume/symlink/repository guards; create gzip exclusively, verify decompression and unchanged raw identity, unlink only each duplicate and verify absence/recovery.
+  - [x] **ADDRESSED (verified)**: Both raw paths absent and retained gzip copies recover exact original bytes/hashes. Original37 packet unchanged; Rust target .bin/.log metadata census retained without deletions. Latest cleanup record refreshed at 2026-10-29T12:14:38.245462+00:00.
+  - [x] **NO REGRESSION**: Complete actual producer/receipt/compressed bytes retained; historical producers restore raw inputs before replay. No production/build cache/submodule/other-repository/shared artifact touched, no broad cleanup or disk-space claim. Phase0 failures remain P1 owner45; deferred24 unchanged.
+  - [x] **LOCKSTEP**: docs/ARTIFACT_CLEANUP.md latest record, daily-safe-cleanup-46.json.gz, dev book/live/task/resume/history align; no Knowledge fact change. Immediate Perl40.1 feature repair resumes from clean commit; authorized focused checks/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.46 - compress retained primary diagnostics at the daily boundary`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40`
   Status: `in_progress` / P1 after bounded33/35/34 and39/38/37, before full23.4/push
   Goal: Freeze anonymous capture end/absence behavior before a local match, remove unsafe reference arithmetic, and align confirmed producer/diagnostic outliers.
