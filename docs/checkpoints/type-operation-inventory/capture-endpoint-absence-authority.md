@@ -103,3 +103,17 @@ are exact base bytes. Full results/Unicode cursor/trace/inputs/generated/metadat
 retained in julia-capture-endpoint-intake.json.gz. No generation/dependency/schema/
 policy change, isolated package, named/peer or full admission claim. Lua40.5 and
 41/47/45/canonical selection/other admission prerequisites remain independently owned.
+
+## Safe Lua compatibility40.5 (2026-10-29)
+
+Independent current16-source native/restored/plan/separate-process emitted modules
+all pass on installed PUC5.5/LuaJIT2.1.1788460057. Existing missing end_byte/span
+guard returns json.null before take mutation; cursor/rest/real zero stay distinct.
+No runtime/compiler/emitter/shared fixture/generation change. Registered normal112/
+Number155/aliases638/qualified-null506 pass1411 assertions per host; existing2
+blind-LE phase inputs remain39.4.5.2.2-owned. Wrong empty-text oracle fails exactly3
+value routes per host,109 pass; no product RED. Source/normal/runtime/module/build
+wrapper/trace/results/metadata/logs/receipts retained in lua-capture-endpoint-intake.json.gz.
+Bounded40.0-.5 are focused-verified on recorded routes/hosts; canonical selection/
+full23.4 and declared5.4/unsafe formatter/phase/other admission prerequisites remain
+separate. No named/peer or full parity credit; next41 then47/45 before wider features.

@@ -7,7 +7,7 @@ answers:
   - "why does generated Perl capture_slice_len warn about uninitialized LSPOS"
   - "which task owns capture endpoint absence policy before matching"
 date: 2026-10-29
-status: target40.0 and Perl/Rust/Dart repairs plus independent Julia40.4 compatibility verified; Lua40.5/named47/full admission pending
+status: bounded40.0-.5 target/repairs/independent compatibility verified on recorded routes/hosts; named47/selection/full admission separate
 tags: [capture, absence, endpoint, perl, dart, julia, lua, source, diagnostics]
 evidence: "TYPE40.0 capture-endpoint-absence-authority-intake.json.gz retains actual16-source native/fresh clean+seeded controls and accepted source/presence inputs; original33.4 diagnostics remain in capture-boundary-number-julia-intake.json.gz."
 reverify: "Recover probe_capture_endpoint_authority.pl and read_capture_endpoint_authority.py from capture-endpoint-absence-authority-intake.json.gz; use project-routed Perl/Python. Dated intake is diagnostic, not backend repair admission."
@@ -94,3 +94,12 @@ normal112 plus Number75/alias141/null390 assertions pass718 with depwarn=error;
 rival empty-text oracle fails3 value routes/109pass/0error, not product RED. See
 [[julia-capture-endpoint-absence-compatibility]]. Lua40.5/named47/full admission
 remain separate; no generation or shared fixture change.
+
+2026-10-29 Lua40.5 independently passes all16 native/restored/plan/separate-process
+emitted controls per safe installed PUC5.5/LuaJIT host, no runtime edits. Existing
+missing endpoint/span guard preserves unavailable versus real zero and failed takes.
+Registered normal112/Number155/aliases638/qualified-null506 pass1411 per host with
+existing2 blind-LE inputs deferred39.4.5.2.2. Wrong empty-text oracle fails3 value
+checks per host, not product RED. [[lua-capture-endpoint-absence-compatibility]]
+retains closure. Bounded40 complete on recorded routes/hosts; declared5.4/named47/
+canonical selection/full admission and other prerequisites remain separate.
