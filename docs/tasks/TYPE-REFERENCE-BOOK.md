@@ -9224,6 +9224,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Packet perl-nested-error-repair-intake.json.gz retains actual producers/normal RED/current/runtime patches/before+after/source/inputs/modules/channels/receipts. Book/cards/map/target/roadmap/task/live/resume/history align; canonical selection23.4.1 includes new normal before admission. Bounded41 complete, named47 then48/45; readiness31.6.4.4/SESSION17/other prerequisites remain independently owned. Authorized focused commit/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.41.1 - preserve actual Perl child handler failures through defined parents`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.41.1.1`
+  Status: `completed` / P1 immediately after41.1 before47
+  Goal: Remove the named-mark chapter's stale current-native-error-loss sentence after generic repair41.1.
+  Activation: clean `0efce14fba9ab7ec8a156fc319e710f6ceaeaeb0`;41.1 committed, brief empty, jobs terminal. Current diagnostics chapter/41.1 original-object/context/healthy evidence is authoritative; named-mark overview still describes the fixed collecting-parent loss.
+  Verification tier: `focused`
+  Focused checks: Exact old sentence occurs once before edit and nowhere after; named-mark paragraph states existing native failure channel/valid-null distinction, public book renders and chronology/memory/cadence/staged whitespace checks pass. No runtime/test execution warranted for this prose-only cross-reference.
+  Canonical trigger: Final23.4/clean push with existing47/48/45/selection/pressure prerequisites; no behavior/schema/toolchain change.
+  Claim verification: none: Documentation-only alignment to already verified41.1, no new measured claim or structural fact.
+
+  Verification: Exact stale/current sentence checks and mdBook render exit0; named-mark flow now agrees with compiler diagnostics and41.1 native failure/valid-null authority. No code/test/helper/argument/endpoint changes.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.41.1.1 - align named-mark error guidance with native repair`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.42`
   Status: `in_progress` / P1 after bounded34 before39/full23.4/push
   Goal: Reconcile ordinary Perl mark-name argument authority and prevent false-ready output for name forms the native lowerer does not execute.
