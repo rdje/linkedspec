@@ -850,6 +850,8 @@ return([raw.length().trim(), raw.matches(/^a/).lowercase()]);
 
 The first chain consumes the length result; it does not return to `raw`. The second renders the predicate result through `lowercase`. Existing helper input and result rules still apply. Incompatible collection tails retain their helper-specific policy, as described under [Hash helpers](value-container-flow-helper-reference.md#hash-helpers); there is no general rule that every invalid tail returns null.
 
+A receiver `.with()` passes its block result to the next method: `" x ".with() {return(cat(value,"!"))}.trim()` yields `"x !"`. Putting trim before the block changes the value it receives: `" x ".trim().with() {return(cat(value,"!"))}.uppercase()` yields `"X!"`. An Array result can continue too: `" a-b ".trim().with() {return(value.split("-"))}.count()` yields `2`. The block's scoped `value` is restored afterward; these chains retain the same ordinary eager-block and compatible-result rules.
+
 ### Flattening bound and computed values
 
 `flat(container)` opens one array or harray into its surrounding constructor. The argument can be a working binding, function parameter, nested read, or container-valued expression such as `copy(items)`. It is evaluated once. Arrays contribute their elements; harrays contribute key/value pairs. An empty container contributes nothing.

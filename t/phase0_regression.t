@@ -48622,14 +48622,14 @@ subtest 'spec_format_terse_14_4_perl_receiver_trailing_block_arguments' => sub {
         'terminal receiver .with() lowering has no unsupported-helper sentinel');
 
     my $continuing_lowered = $L->('return(" x ".with() { return(cat(value,"!")) }.trim())');
-    like($continuing_lowered, qr/my \$__ls_trim = do \{ my \$__ls_with_value = " x ";/,
-        'continuing receiver .with() feeds the block result into the next string method');
+    is(evaluate_lowered_json($continuing_lowered, q{}), q#{"value":"x !","warnings":[]}#,
+        'continuing receiver .with() feeds the captured block result into trim');
     unlike($continuing_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
         'continuing receiver .with() lowering has no unsupported-helper sentinel');
 
     my $mid_lowered = $L->('return(" x ".trim().with() { return(cat(value,"!")) }.uppercase())');
-    like($mid_lowered, qr/my \$__ls_upper = do \{ my \$__ls_with_value = do \{ my \$__ls_trim = " x ";/,
-        'mid-chain receiver .with() consumes the previous receiver result');
+    is(evaluate_lowered_json($mid_lowered, q{}), q#{"value":"X!","warnings":[]}#,
+        'mid-chain receiver .with() consumes trimmed text and continues with uppercase');
     unlike($mid_lowered, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/,
         'mid-chain receiver .with() lowering has no unsupported-helper sentinel');
 

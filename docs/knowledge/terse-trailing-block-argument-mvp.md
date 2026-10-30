@@ -15,11 +15,11 @@ answers:
   - "why is bare with block deferred"
   - "is SPEC-FORMAT-TERSE.14 closed"
   - "what closed the trailing block argument no-drift sweep"
-date: 2026-07-07
-status: current
+date: 2026-10-30
+status: historical MVP implementation; current scoped with follows the generic contract
 tags: [spec-format-terse, block-arguments, code-blocks, closures, task-tree]
 evidence: "docs/tasks/SPEC-FORMAT-TERSE.md .14/.14.1/.14.2/.14.3/.14.4/.14.5; ROADMAP_V2.md; perl/LinkedSpec/ActionIR/AST/Parser.pm; perl/LinkedSpec/ActionIR/MethodLowering.pm; t/actionir_ast_parser.t; t/phase0_regression.t spec_format_terse_14_2_perl_helper_trailing_block_arguments and spec_format_terse_14_4_perl_receiver_trailing_block_arguments; rust/linkedspec-core/src/expr.rs; rust/linkedspec-runtime/src/engine.rs; rust/linkedspec-runtime/tests/integration_test.rs terse_14_3_* and terse_14_4_*; rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block; rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block; docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md; docs/linkedspec-book/src/appendix/helper-contract-catalog.md"
-reverify: "rg -n 'SPEC-FORMAT-TERSE\\.14\\.5|receiver_trailing_block_arg|spec_format_terse_14_4|terse_14_4|\\.with\\(\\) \\{' docs/tasks/SPEC-FORMAT-TERSE.md ROADMAP_V2.md perl/LinkedSpec/ActionIR/AST/Parser.pm perl/LinkedSpec/ActionIR/MethodLowering.pm t/actionir_ast_parser.t t/phase0_regression.t rust/linkedspec-core/src/expr.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/integration_test.rs docs/linkedspec-book/src && rg -n '\"case_count\" : 99|terse_14_4_receiver_with_trailing_block' rust/linkedspec-runtime/tests/corpus/manifest.json"
+reverify: "Recover current-only selector/names and public producer from perl-phase0-receiver-blocks-oracle-intake.json.gz; run bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_phase0_current_selected.pl .linkedspec-data/verification/phase0-receiver-blocks-oracle-names.json .linkedspec-data/verification/receiver-block-current-seen.json. Use the existing generic contract/result records for broader contexts; historical corpus counts are not current gates."
 ---
 
 `SPEC-FORMAT-TERSE.14` owns the original trailing code blocks as final helper-function or receiver-method arguments.
@@ -30,8 +30,8 @@ receiver-method form `.with() { ... }` on Perl and Rust plus the 95th oracle fix
 and `.14.5` closed the mdBook/Knowledge Map/oracle/no-drift sweep for the
 shipped `.14` surface.
 
-This card remains the factual record of the currently implemented MVP, but its abstraction is superseded for
-future design by [[generic-trailing-codeblock-argument-correction]]. Director clarification on 2026-07-10 defines
+This card records the original MVP. Its scoped `with` behavior remains supported, while the implemented
+generic contract supersedes the original parser architecture; see [[generic-trailing-codeblock-argument-correction]]. Director clarification on 2026-07-10 defines
 codeblock as the fourth object/value kind and requires attached `call(args) { block }` to be equivalent to
 parenthesized `call(args, { block })` for any callable signature accepting a final codeblock, on every backend.
 ADR 0031 and completed `FUTURE-PARITY-BACKLOG.11.1` now select `{|args| body }` callable literals, dynamic caller
@@ -50,12 +50,12 @@ context: captures, `retv`, cursor state, helper/function visibility, and ordinar
 working-variable side effects are shared with the call site. Only the working
 binding `value` is portable as the scoped block parameter in the MVP; mutations
 to other variable names persist.
-The AST parser flags helper-function form trailing-block calls with `trailing_block_arg`;
-MethodLowering accepts that flag only for `with`, and unknown trailing-block
-callees emit an unsupported-helper diagnostic instead of raw fallback. The Rust
-parser appends a trailing `BlockValue` only for helper-function form `with(...) { ... }`;
-the runtime evaluates `with` lazily, binds scoped `value`, restores the prior
-same-name stores afterward, and uses existing expression-valued block return
+At the original MVP boundary, the AST parser flagged helper-function trailing blocks with `trailing_block_arg`;
+MethodLowering accepted that flag only for `with`, and unknown trailing-block
+callees emitted an unsupported-helper diagnostic instead of raw fallback. The Rust
+parser then appended a trailing `BlockValue` only for helper-function `with(...) { ... }`.
+The scoped runtime evaluated that body lazily, bound `value`, and restored the prior
+same-name stores afterward, and used existing expression-valued block return
 semantics.
 
 Receiver `.with() { ... }` is also current on Perl, Rust, Dart, Julia, and Lua. It evaluates the
@@ -68,7 +68,16 @@ or an array result flowing into `.count()`. Explicit receiver
 itself as the only block input.
 
 Bare `with { ... }` remains deferred because word-plus-brace is already a rule-body
-lifecycle/code-block shape. `SPEC-FORMAT-TERSE.14` is closed after `.14.5`; future
-expansions such as bare `with { ... }`, explicit receiver `.with(value) { ... }`,
-closures, delayed callbacks, or arbitrary non-`with` trailing blocks need a new
-owned leaf before implementation.
+lifecycle/code-block shape. `SPEC-FORMAT-TERSE.14` is closed after `.14.5`. Bare
+`with { ... }` and explicit receiver `.with(value) { ... }` keep their boundaries.
+Explicit callable values and metadata-governed generic final codeblocks follow the
+implemented generic contract, rather than the original MVP exclusions. Closures
+remain outside that no-capture callable model.
+
+TYPE45.22 reconciles only two old selected-result source envelopes/16 healthy
+assertions ->18 GREEN. Original four runtime sources and all healthy controls
+remain exact; public native/fresh eight cases preserve String/Array results,
+scope restoration and metadata/error fences without production changes. Helper
+initialization controls and original action-edge sources keep their distinct
+contexts. See [[ordinary-with-hash-result-continuation]] for broader result and
+callback qualifications; no new peer/context/deferred admission is inferred.

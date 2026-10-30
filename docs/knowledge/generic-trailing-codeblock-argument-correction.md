@@ -9,7 +9,7 @@ answers:
   - "should the with trailing block MVP be removed"
   - "what supersedes the narrow SPEC-FORMAT-TERSE 14 trailing block MVP"
   - "which task owns generic trailing codeblock argument parity"
-date: 2026-07-10
+date: 2026-10-30
 status: current
 tags: [spec-format-terse, codeblock, trailing-block, values, parity, future-parity-backlog]
 evidence: "Director clarification 2026-07-10; FUTURE-PARITY-BACKLOG.11/.11.0/.11.1; docs/tasks/SPEC-FORMAT-TERSE.md .14; LinkedSpec::call_spec_handler_subst probes; perl/LinkedSpec/ActionIR/AST/Parser.pm; perl/LinkedSpec/ActionIR/MethodLowering.pm; rust/linkedspec-core/src/expr.rs; dart/lib/src/action/action_parser.dart; dart/lib/src/runtime/interpreter.dart; julia/src/action/ActionParser.jl; julia/src/runtime/Interpreter.jl; current focused tests and mdBook helper contract"
@@ -44,8 +44,9 @@ Perl `.11.3`, Rust `.11.4`, Dart `.11.5`, Julia `.11.6`, and Lua `.11.8.1-.3` no
 Metadata-governed helper, typed-user-function, receiver, and tree forms normalize to zero-positional contextual
 codeblocks, while explicit literals retain their authored signatures. All enter each backend's ordinary dynamic
 codeblock evaluator across its native/reconstructed/generated/emitted routes. `with` remains an ordinary helper,
-not parser authority. The existing recurring public gate still admits four backends; Lua replacement admission is
-separately owned by `.11.8.4`.
+not parser authority. At the recorded `.11.8.4` boundary, the recurring five-backend/public projection is
+current on both Lua ABIs, as recorded in the accepted update above. Later bounded
+result/context qualifications retain their own task owners.
 
 Related facts: [[terse-trailing-block-argument-mvp]],
 [[dart-runtime-value-control-tree-helpers]],

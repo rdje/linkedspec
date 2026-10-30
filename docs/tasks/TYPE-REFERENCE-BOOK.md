@@ -9565,13 +9565,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.21 - reconcile typed mutation checks with captured key values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.22`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile the final retained Perl receiver trailing-block group against current eager argument/scoped-value/actual-result contracts. Public original/native/fresh/diagnostic proof before classifying any failure; repair actual outliers first.
   Schedule: P1 next; the other two retained mutation groups close together under21 as one shared key-ABI slice. Unique diagnostic prefix receiver-blocks-oracle. One frozen28 current-only reassessment follows bounded repair.
+  Verification tier: `focused`
+  Focused checks: Exact trailing-block group, public original/receiver/helper/scoped source and effect/result controls; direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named block/value distinctions, no population measurement.
+
+  Activation: clean `0d11ba71d16716f8eec195822bbfaf2d30f508f0`; proof jobs terminal and brief empty; exact group `spec_format_terse_14_4_perl_receiver_trailing_block_arguments`.
+  Confirmed current boundary: Exactly two printed-source assertions fail (continuing and mid-chain selected-result envelopes); all four original runtime assertions and other16 controls pass. Ordinary with result dispatch31.1/scalar normalization19 explains the added actual-value wrappers; no runtime defect is established by these two failures. Public original/native/fresh/diagnostic source proof precedes oracle changes.
+  Adjacent retrieval drift owned here: The trailing-block MVP card still presents obsolete parser architecture/reverify case-count detail as current, and the generic correction card's body still says Lua admission is pending despite its own accepted11.8.4 update. Qualify historical implementation details and align current pointers with the existing generic contract; preserve current with scope/arity boundaries and do not infer new peer proof.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Result: Exact receiver-block group reproduces2 selected-result source-oracle RED/16 healthy, then18 GREEN. All four original runtime cases already pass; only continuing/mid-chain source envelopes become actual x !/X! value checks. Original lowering inputs/runtime sources/other16 assertions, including scope/arity/readiness fences, stay exact. Eight public native/fresh controls preserve String/Array continuation and scoped value restoration with raw/fallback/unresolved0/ready1 and no build/load/run warning/diagnostic/error. Original action-edge and helper initialization contexts stay distinct. Production unchanged;528 other prior input hashes exact. Historical MVP architecture/reverify and stale Lua admission prose are qualified from existing accepted records without new peer proof. Syntax/book/map/history/manual checks pass; actual source/RED-GREEN/eight and initial-seven producers/before-fact inputs retained in perl-phase0-receiver-blocks-oracle-intake.json.gz. All retained failures have scoped repair evidence at their recorded boundaries; one fresh current-only frozen28 reassessment45.23 is next. No combined28/full-suite/context/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.22 - reconcile receiver block checks with actual result dispatch`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.23`
+  Status: `pending`
+  Goal: Reassess the exact original frozen28 failure names through the current-only selector and unchanged current source. Retain producer/universe/diagnostic/input identities and actual nested plans/exits. Schedule any current failures before admission; never infer whole Phase0 from this subset.
+  Schedule: P1 immediately after all bounded22 repairs. Diagnostic receipt only; parent45/full23.4 admission remains open. Unique prefix phase0-after-repairs. Historical snapshot-swapping producer is forbidden on current source.
   Planned verification tier: focused.
-  Planned focused checks: Exact trailing-block group, public original/receiver/helper/scoped source and effect/result controls; direct consumer when warranted.
-  Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named block/value distinctions, no population measurement.
+  Planned focused checks: One exact selected28 replay, original frozen-universe/raw diagnostic hash gates, actual nested plan/name validation and before-after tracked input hashes; syntax/book/map/history/manual continuity.
+  Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites; this diagnostic leaf does not promote or close parent admission.
+  Planned claim verification: none: Finite exact named regression-plan outcomes and byte identities, no whole-project or population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10734,7 +10756,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.22` | `pending` | Assess the remaining receiver trailing-block group through current public contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.23` | `pending` | Reassess exact frozen28 through current-only selection; no whole-suite inference. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -170,3 +170,10 @@ sources/healthy controls and production. Public native/fresh4 sources/six runs
 pass. Only receiver trailing-block group remains from the last-selected failure
 set;45.22 owns it. A fresh frozen28 reassessment follows bounded repairs; no
 combined28/full-suite status is inferred yet.
+
+TYPE45.22 reconciles the final retained receiver-block2 source envelopes/16
+healthy ->18 GREEN with public native/fresh8 and unchanged production. All four
+original runtime cases and scope/arity/readiness controls stay exact. Every
+retained failure now has scoped repair evidence at its recorded boundary; a
+fresh combined current-only frozen28 replay is owned45.23. No current combined
+28/full-suite status or broader context/peer admission is inferred yet.
