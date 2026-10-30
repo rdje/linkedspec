@@ -10833,7 +10833,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1 - preserve the invoking rule namespace in Rust callable bodies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50`
-  Status: `in_progress` / Perl50.1 repaired/targeted-checked; independent peers pending
+  Status: `in_progress` / Perl50.1 repaired/Rust50.2 compatible and targeted-checked; remaining peers pending
   Goal: Existing readonly anonymous String getters and compatibility source compose through ordinary compatible methods without mandatory temporary bindings.
   Authority: docs/checkpoints/type-operation-inventory/capture-boundary-text-results.md and prospective capture_boundary_text_values.spec/json. Preserve getter/tag/coordinate/absence/function/deferred/callback/root/shape and generated-format boundaries; full23.4 remains separate.
 
@@ -10859,14 +10859,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.1 - compose readonly capture String results through ordinary methods`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete Rust ordinary readonly capture String method composition under frozen50.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.1; capture-boundary-text-results.md and shared prospective fixture.
   Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
-  Planned verification tier: focused.
-  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
-  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
-  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+  Verification tier: `focused`
+  Focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+  Activation: clean `076fc66977ecb029c1d23a1f3870e805c4a2db01`; prior jobs terminal/brief0. Rust README/public APIs/nearest Number/reset contracts and target50 read. No backend failure inferred from Perl; own new finite Rust normal and only established source/result repairs.
+  - [x] **REPRODUCE / ISSUE**: Independent Rust frozen target and exact existing policy evidence.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent Rust frozen target and exact existing policy evidence.
+  - [x] **FIX**: Independent Rust frozen target and exact existing policy evidence.
+  - [x] **ADDRESSED (verified)**: Independent Rust frozen target and exact existing policy evidence.
+  - [x] **NO REGRESSION**: Independent Rust frozen target and exact existing policy evidence.
+  - [x] **LOCKSTEP**: Independent Rust frozen target and exact existing policy evidence.
+
+  Result: Rust independently already supports the frozen readonly capture String target: new6 tests pass native/restored CompiledSpec/generated-plan routes without runtime changes or invented semantic RED. Shared9/source/default/String-Array-signed-Number/empty/snapshot/normalized-skip, four native readers/alias, initial missing/reversed/String0 and specific function errors pass. Rust direct first-consumer take[]/T and withOK retain actual prior policies; literal callbacks read caller context while invocation inside apply retains the function-state fence. Nearest Number6/reset3 pass; owned-package rustfmt passes. 498 existing bound inputs remain exact. One new-test assertion is wrapped only; initial six-test semantic evidence remains valid without repetition. Initial virtual-workspace fmt has no targets and receives no semantic failure credit. Raw documented-build dependency warnings remain upstream-owned opaque output. Actual normal/source/output/initial formatting/input hashes/producers retained in capture-boundary-text-rust-intake.json.gz; book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. No runtime/build/schema/callback-vocabulary or full-suite/independent-emitted/portable admission claim. Dart50.3 independently next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.2 - preserve Rust readonly capture String method compatibility`.
+
+  Same-slice required CHANGES rollover: clean activation suffix 115-181 is retained exactly in docs/history/changes/segment-4943-5f6675f6c7f8.md; independent source blob/line/byte/SHA/old-manifest/kept-prefix checks pass. No old history row/segment or cap changed.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.3`
   Status: `pending`
@@ -10904,7 +10917,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.2` | `pending` | Independently assess Rust readonly capture String composition against frozen50. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` | `pending` | Independently assess Dart readonly capture String composition against frozen50. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

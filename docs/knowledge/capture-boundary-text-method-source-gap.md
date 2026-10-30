@@ -7,7 +7,7 @@ answers:
   - "which task owns readonly capture String result composition"
   - "is capture_from_rule_start an accepted compatibility alias"
 date: 2026-10-30
-status: bounded Perl50.1 repaired/targeted-checked; independent peers pending
+status: bounded Perl50.1 repaired/Rust50.2 compatible; remaining peers pending
 tags: [perl, capture, string, fluent, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.11; capture-boundary-text-selection-intake.json.gz retains ten actual source/readiness/result controls, bound/direct nine-coordinate twins and initial transport epoch."
 reverify: "Recover probe_capture_string_assessment.pl and finite case inputs from capture-boundary-text-selection-intake.json.gz; run through tools/project_data_run.sh. Writes only the explicitly supplied project-local diagnostic output; no historical source swaps."
@@ -44,3 +44,8 @@ host coalesce after repair; regenerate affected modules. No callback/deferred or
 portable/full-suite admission. Actual source/normal/before-after/old artifact
 producer inputs are retained in capture-boundary-text-perl-intake.json.gz; Rust
 50.2 independently assesses next, normal canonical registration23.4.1 stays open.
+
+Rust50.2 independently already supports frozen50 on native/restored CompiledSpec/
+generated-plan routes. New6/Number6/reset3 pass without runtime change. Existing
+legacy take[]/T, withOK and callback caller/function policies remain distinct.
+See [[capture-boundary-text-rust-compatibility]]; independent Dart50.3 follows.

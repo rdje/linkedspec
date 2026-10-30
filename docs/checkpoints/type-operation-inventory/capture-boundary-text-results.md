@@ -1,7 +1,7 @@
 # Readonly anonymous capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.11; implementation family23.3.50.
-Status: Perl50.1 repaired/targeted-checked; independent peers pending. No backend admission.
+Status: Perl50.1 repaired/Rust50.2 compatible and targeted-checked; remaining peers pending. No backend admission.
 
 ## Existing authority and actual gap
 
@@ -79,3 +79,18 @@ format change. A retained old emitted module still fails after the compiler fix:
 regenerate affected modules. Exact actual inputs/results are retained in
 capture-boundary-text-perl-intake.json.gz. New normal registration23.4.1, broader
 context/portable admission and independent Rust50.2 remain separate.
+
+## Bounded Rust50.2
+
+Rust already supports the unchanged shared target. New6 tests pass native,
+restored CompiledSpec and generated-plan routes with no runtime change; adjacent
+Number6/reset3 and explicit owned-package rustfmt pass. Missing/empty/reversed/
+String0, all four native/default spellings, source snapshots and normalized
+guards hold. Direct take[] evaluates T in Rust; with-returned Array continues to
+OK. Literal callback reads its caller input; callback invoked inside apply keeps
+the pure-function parser-state error. These are existing Rust policies, not Perl
+normalization or full callback admission. Only an assertion wrap follows the
+initial semantic run; no repeated coverage credit. Build warnings remain opaque
+upstream-owned diagnostics. Exact source/outputs/producer/input bindings are in
+capture-boundary-text-rust-intake.json.gz. Independently compiled emitted source
+and full source/context/portable23.4 are not claimed; Dart50.3 follows.

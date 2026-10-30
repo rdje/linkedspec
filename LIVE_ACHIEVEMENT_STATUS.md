@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
+Rust capture String6/Number6/reset3 pass without runtime change; independent Dart50.3 next.
 
 ## Latest Completed Slice
 
-Perl readonly capture String normal reproduces8 RED/4 healthy, then12 GREEN without changing its oracles or the frozen shared fixture. Four original native getter bodies remain byte-identical, including capture_from_rule_start operation identity. A sole Contracts text factory feeds existing late callbacks and narrow early MethodLowering after the existing parser-state function fence; no producer/arity/coordinate/first-consumer or vocabulary change. Native/fresh shared9 values/default/String/Array/signed/Number flows, empty fallback suppression, missing/reversed spans, String0, normalized bad-operand skip, snapshot-before-reset, legacy take[]/with result and four pure-function restrictions pass with working ordinary readiness and no warnings. Nearest Number7 and selected reset2 pass; both production modules compile. 532 other selection inputs stay exact. A retained pre-fix emitted module still fails its host coalesce after the compiler repair; regenerate affected modules. Actual normal/RED-GREEN/native bodies/producer/before source/old artifact inputs retained in capture-boundary-text-perl-intake.json.gz. Book/target/card/map/task/roadmap/live/resume/history/manual checks pass. New normal remains explicitly queued23.4.1; no full suite/combined28/portable or deferred-context admission. Independent Rust50.2 next.
+Rust independently already supports the frozen readonly capture String target: new6 tests pass native/restored CompiledSpec/generated-plan routes without runtime changes or invented semantic RED. Shared9/source/default/String-Array-signed-Number/empty/snapshot/normalized-skip, four native readers/alias, initial missing/reversed/String0 and specific function errors pass. Rust direct first-consumer take[]/T and withOK retain actual prior policies; literal callbacks read caller context while invocation inside apply retains the function-state fence. Nearest Number6/reset3 pass; owned-package rustfmt passes. 498 existing bound inputs remain exact. One new-test assertion is wrapped only; initial six-test semantic evidence remains valid without repetition. Initial virtual-workspace fmt has no targets and receives no semantic failure credit. Raw documented-build dependency warnings remain upstream-owned opaque output. Actual normal/source/output/initial formatting/input hashes/producers retained in capture-boundary-text-rust-intake.json.gz; book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. No runtime/build/schema/callback-vocabulary or full-suite/independent-emitted/portable admission claim. Dart50.3 independently next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.2 independently from clean Perl50.1. Read frozen capture-boundary-text-results.md/shared fixture and actual prior policies; assess Rust native/restored/generated-plan source/bound/direct/empty/absence/snapshot/shape/function/legacy controls before production. Repair only established ordinary text composition gaps and retain healthy behavior. Compile/quick focused native/generated/direct Number/reset compatibility checks/docs/commit; Dart50.3 follows. No inference from Perl, full matrix or routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.3 independently from clean Rust50.2. Read frozen capture-boundary-text-results.md/shared fixture, current Dart getter/result/classifier/shape/function policies and nearest Number/reset tests. Establish native/restored Spec/generated-plan baseline before any implementation; repair only actual ordinary readonly String result gaps, retain healthy producer/empty/snapshot/root/callback behavior. Compile/fatal analyze/format/quick targeted checks/docs/commit, then Julia50.4. No inherited failure or routine full suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.50.2` — Rust capture String6/Number6/reset3 pass without runtime change; independent Dart50.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.1` — Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.11` — Readonly capture String family50 frozen from actual public gaps; Perl50.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.25` — Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.2 independently from clean Perl50.1. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.15` — set_key4/public2/direct3 pass with staged operand authority; rename_key next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.14` — Hash-snapshot4/public5 pass; source/value policies retained; set_key checks next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.13` — has_key4/public3/direct6 pass; null/false fields stay present; Hash snapshot next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` — Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
 
 ## History
 
