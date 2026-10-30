@@ -9398,13 +9398,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.13 - reconcile has_key checks with existing value contracts`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.14`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile only retained Hash-snapshot helper group against approved copy-value/source/assignment contracts; public source/native/fresh proof before obsolete owner-shape changes. Repair actual outliers first.
   Schedule: P1 next; other9 last-selected failed groups remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact Hash-snapshot group, public copy/typed assignment/source/default/scalar-kind controls and direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named copy/value distinctions, no population measurement.
+
+  Activation: clean `4ea2930a1c3b5375fe6362c8e532ee594fb6ab26`; proof jobs terminal and brief empty.
+  Adjacent documentation defect owned here: The Boolean-helper paragraph still says Rust rejects logical-scalar copying although its canonical copy section and ADR0138 rollout record all bounded backend implementations. Replace only that obsolete qualification with a link to the current copy contract; no new peer/context admission or runtime proof.
+  - [x] **REPRODUCE / ISSUE**: Freeze exact current Hash snapshot group and distinguish private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Compare printed copy-owner/assignment expectation with ADR0138 current value producer; require actual source/value evidence.
+  - [x] **FIX**: Repair real outliers or only obsolete owner spellings, retaining healthy runtime/pattern controls.
+  - [x] **ADDRESSED (verified)**: Exact group and independent public typed copy assignment/source cases pass.
+  - [x] **NO REGRESSION**: No inferred deep-copy/alias/selector policy; preserve scalar/null kinds and source once with bounded direct-dependency proof.
+  - [x] **LOCKSTEP**: Book/fact/task/producers/evidence/current docs/resume align with next retained failure owned.
+
+  Result: Exact Hash-snapshot group reproduces1 source-oracle RED/3 healthy after explicit local private-owner loading, then4 GREEN. Original assignment DSL now checks projected destination value and preserved legacy source Hash; other3 assertions stay exact. Five public native/fresh controls retain original typed copy assignment, later outer assignment/source preservation, primitive/null values, once-only source and explicit Hash fallback. No new depth/alias/strict-selector-kind evidence is inferred from JSON. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass. Cold no-tests255 is setup-only; actual source/RED-GREEN/public producers/ADR0138 inputs retained in perl-phase0-hash-snapshot-intake.json.gz. Book copy example and obsolete Rust scalar-copy qualification align with the existing bounded rollout, without new peer proof. Task/fact/roadmaps/live/resume align; nine last-selected groups remain, set_key45.15 next. No full-suite/portable admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.14 - verify Hash copy assignment values beyond helper spelling`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.15`
+  Status: `pending`
+  Goal: Reconcile retained set_key helper checks under current pure/statement mutation and staged key/value contracts; independently public-probe source/key/value order before changing exact source assertions. Repair real outliers first.
+  Schedule: P1 next; other8 last-selected failures remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact Hash-snapshot group, public copy/typed assignment/source/default/scalar-kind controls and direct consumer when warranted.
+  Planned focused checks: Exact set_key group, public native/fresh pure/statement/key-block/snapshot/source controls and direct consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named copy/value distinctions, no population measurement.
+  Planned claim verification: none: Finite named Hash/key/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10567,7 +10588,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.14` | `pending` | Assess retained Hash-snapshot checks against approved copy/value contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.15` | `pending` | Assess retained set_key helper checks against staged key/value and mutation authority. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

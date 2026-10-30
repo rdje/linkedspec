@@ -123,3 +123,9 @@ TYPE45.13 reconciles only has_key2 source assertions/2 healthy ->4 GREEN, with
 public native/fresh3/direct producer6 and unchanged production. Retained45.4
 independently records those same two failures. Ten last-selected groups remain
 owned; Hash snapshot45.14 follows. No combined28/full-suite status is inferred.
+
+TYPE45.14 subsequently reconciles Hash-snapshot1 old owner regex/3 healthy ->
+4 GREEN, retaining original assignment DSL/other3 assertions and production.
+Public native/fresh5 verify values/source/once-only/default behavior; no new
+copy-depth or alias inference. Nine last-selected groups remain owned; set_key
+45.15 follows. No combined28/full-suite status is inferred.

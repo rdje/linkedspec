@@ -37442,6 +37442,7 @@ SPEC
 };
 subtest 'emit_context_lowers_hash_snapshot_value_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     like(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('copy(meta)'),
@@ -37460,10 +37461,14 @@ subtest 'emit_context_lowers_hash_snapshot_value_helpers' => sub {
         q#{"value":{"kind":"token","source":"fixture","stage":"normalized"},"warnings":[]}#,
         'copy(...) lowers inside general return payloads'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(meta_out, copy(pick_keys(merge_hash(meta, hash("stage", "normalized")), "kind", "source", "stage")))'),
-        qr/^\$meta_out = .*__ls_hash_snapshot.*__ls_pick_source/s,
-        'copy(...) lowers inside hash assignment sources'
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(meta_out, copy(pick_keys(merge_hash(meta, hash("stage", "normalized")), "kind", "source", "stage")))')
+                . '; return [$meta_out, {%meta}];',
+            q{my %meta = (kind => "token", source => "fixture"); my $meta_out;},
+        ),
+        q#{"value":[{"kind":"token","source":"fixture","stage":"normalized"},{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'copy assignment stores the projected Hash value and preserves its source'
     );
 };
 subtest 'method_like_fluent_and_structured_action_hash_snapshot_value_helpers_lower_equivalently' => sub {

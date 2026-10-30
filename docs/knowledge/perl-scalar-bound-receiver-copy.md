@@ -102,3 +102,11 @@ assertion becomes an initialized typed Hash value check, other12 assertions stay
 exact and all14 pass. No new copy-depth/alias/host-isolation or peer admission
 is inferred from JSON. Actual producers/source/results are retained in
 perl-phase0-hash-copy-intake.json.gz; other frozen failures remain owned45.
+
+TYPE45.14 reconciles one old copy-owner assignment regex/3 healthy ->4 GREEN.
+Original assignment DSL is evaluated for its projected destination and preserved
+source; other3 assertions stay exact. Five public native/fresh assignment/value/
+source/once-only/default cases pass without production changes. JSON/source
+preservation does not add copy-depth/alias-identity/strict-selector-kind proof;
+earlier accepted identity proofs above retain their own input boundaries.
+Actual source/RED-GREEN/producers retained in perl-phase0-hash-snapshot-intake.json.gz.

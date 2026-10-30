@@ -453,6 +453,20 @@ The copy creates a new outer container. Nested array and hash references remain 
 
 For a null binding `u`, `u.copy().count_keys()` returns null: the copied result is still null and cannot supply a Hash-only continuation. Direct `count_keys(u)` retains its existing zero result. An explicit Hash fallback, `u.copy().coalesce({}).count_keys()`, returns zero. Empty and filled Hash copies continue normally; copying a missing value does not manufacture an empty Hash.
 
+A projected copy can be stored directly. On Perl, this returns the normalized three-field snapshot followed by the unchanged source:
+
+```text
+meta = {"kind":"token","source":"fixture","debug":1};
+set(snapshot, copy(pick_keys(merge_hash(meta, hash("stage","normalized")), "kind","source","stage")));
+return([snapshot,meta]);
+```
+
+```json
+[{"kind":"token","source":"fixture","stage":"normalized"},{"kind":"token","source":"fixture","debug":1}]
+```
+
+The source expression runs once. Assigning another outer field in the snapshot leaves the source fields intact; nested-copy depth still follows the backend-specific rule above.
+
 Examples:
 
 ```text
@@ -1464,7 +1478,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 
 ## Boolean composition
 
-Boolean helpers make branch conditions portable and analyzable. Perl, Rust, Dart, Julia and safe Lua hosts (PUC5.5.1/LuaJIT) support `value.and(rhs,...)` and `value.or(rhs,...)` with at least one RHS, plus `value.not()` with none, using the same eager typed truth and real Boolean results: `false.or(true).not().coalesce("late").cat("!")` gives `"0!"`. Full method/domain/context admission and declared Lua5.4 proof remain separate; the free helper forms below retain their existing contracts. Current scalar-copy domains differ: Dart, Julia and Lua preserve Boolean value copies, while Rust rejects copying a logical scalar result; the approved scalar/null value-preserving target is being implemented with existing container-copy depths retained.
+Boolean helpers make branch conditions portable and analyzable. Perl, Rust, Dart, Julia and safe Lua hosts (PUC5.5.1/LuaJIT) support `value.and(rhs,...)` and `value.or(rhs,...)` with at least one RHS, plus `value.not()` with none, using the same eager typed truth and real Boolean results: `false.or(true).not().coalesce("late").cat("!")` gives `"0!"`. Full method/domain/context admission and declared Lua5.4 proof remain separate; the free helper forms below retain their existing contracts. Ordinary scalar/null copying now preserves the actual value on those bounded routes; see [Copying values](#copying-a-container-stored-in-a-scalar-on-perl). Existing container-copy depths and separate full-admission qualifications remain.
 
 | Helper | Meaning |
 | --- | --- |

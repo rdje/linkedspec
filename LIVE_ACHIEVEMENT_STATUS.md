@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-has_key4/public3/direct6 pass; null/false fields stay present; Hash snapshot next.
+Hash-snapshot4/public5 pass; source/value policies retained; set_key checks next.
 
 ## Latest Completed Slice
 
-Exact has_key group reproduces2 source-oracle RED/2 healthy after explicit local private-owner loading; retained45.4 independently has the same two failures. Reconcile only old host-hash printed spellings to initialized value/flow presence checks; original helper expressions/two healthy fallback/Hash assertions stay exact, all4 GREEN. Three public native/fresh cases distinguish present false/null from missing, original fallback payload and empty Hash/false-result consumers. Direct producer6 retains literal/variable/helper/block keys, once-only K/SK/source-before-key snapshots and unmutated source. Syntax/book/map/history/manual checks pass; production unchanged,528 other prior input hashes exact. Cold no-tests255 is setup-only. Actual source/RED-GREEN/producers/authority inputs retained in perl-phase0-has-key-intake.json.gz. No new namespace/domain/Boolean/default policy or whole-host/peer/full-suite/admission/push claim. Book/fact/task/roadmaps/live/resume align; ten last-selected groups remain, Hash snapshot45.14 next.
+Exact Hash-snapshot group reproduces1 source-oracle RED/3 healthy after explicit local private-owner loading, then4 GREEN. Original assignment DSL now checks projected destination value and preserved legacy source Hash; other3 assertions stay exact. Five public native/fresh controls retain original typed copy assignment, later outer assignment/source preservation, primitive/null values, once-only source and explicit Hash fallback. No new depth/alias/strict-selector-kind evidence is inferred from JSON. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass. Cold no-tests255 is setup-only; actual source/RED-GREEN/public producers/ADR0138 inputs retained in perl-phase0-hash-snapshot-intake.json.gz. Book copy example and obsolete Rust scalar-copy qualification align with the existing bounded rollout, without new peer proof. Task/fact/roadmaps/live/resume align; nine last-selected groups remain, set_key45.15 next. No full-suite/portable admission/push claim.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.14 from clean has_key reconciliation. Assess only emit_context_lowers_hash_snapshot_value_helpers under approved value-preserving copy and existing snapshot/assignment contracts. Distinguish copied contents/source preservation and typed assignment from obsolete owner spelling; public native/fresh controls before change, repair real outliers if any. Other9 last-selected failed names remain parent45-owned. Focused check/commit; canonical prerequisites stay before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.15 from clean Hash-snapshot reconciliation. Assess only emit_context_lowers_set_key_value_helpers against pure-value versus statement mutation, staged key/value snapshots and current key-block authority. Public native/fresh controls before obsolete source changes; repair actual outliers if found. Other8 selected failures stay parent45-owned. Focused check/commit; canonical prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.14` — Hash-snapshot4/public5 pass; source/value policies retained; set_key checks next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.13` — has_key4/public3/direct6 pass; null/false fields stay present; Hash snapshot next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` — Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` — String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.14 from clean has_key reconciliation. A
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.2` — Endpoint source expectations match accepted guards;90 source assertions/46 runtime groups pass; exact map45.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.1` — Lazy-owner fixture supplies required value callback; unchanged40 assertions/public6 pass; helper-substitution45.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.0` — Exact current frozen28 replay retained without source swaps; lazy-owner callback child45.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2` — Perl blind scalar masks removed with nested scopes/diagnostics preserved; exact Phase0 owner45 next.
 
 ## History
 
