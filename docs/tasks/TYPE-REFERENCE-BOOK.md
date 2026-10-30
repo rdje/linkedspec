@@ -9307,10 +9307,12 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.10 - reconcile Hash chain checks with approved null copy`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11`
-  Status: `in_progress`
+  Status: `completed`
   Activation: clean `c813d59d9d4d1eaa2d8714aa64ababcc4a7f4458`; no proof jobs and brief empty.
   Qualified extra boundary under45.11.1: Six public native/fresh cases preserve original String/continuation values, paired fluent/nested raw scalar flags and SC source order. The initial extra incompatible-tail candidate null/null is retained but corrected to[]/null under the frozen Length target's helper-specific invalid-domain policy. Independently seeded controls expose and then falsify scalar host-Hash dependence; empty-state[] alone was insufficient. This does not impose universal null or portable kind policy. Original18 oracle reconciliation remains45.11.2.
   Confirmed root / bounded producer now repaired under45.11.1: Empty-state[] is not isolation proof. Fresh public modules for fluent length, nested length and direct numeric3 sorted_values return [HOST_MAIN] when controlled main::3 is seeded; package-qualified3 alone has no effect. Copied-length and scalar-String guards remain null. Generated source permits symbolic Hash dereference of a computed scalar, and legacy numeric3 is mistaken for a Hash symbol. TYPE45.11.1 repairs this bounded producer with15 seeded cases/Hash14/String6 and old-module regeneration evidence;45.11.2 next reconciles the original18 assertions. Broader absent/legacy collection host-slot work remains SESSION17/.17.2; its current owner node was read, no broad closeout or other-tree edit.
+
+  Closeout:45.11.1 fixes the actual scalar host-Hash leak;45.11.2 reconciles original18 under existing result authority. Both bounded children verified and committed separately; full parent45/portable admission remains open.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1`
   Status: `completed`
@@ -9333,15 +9335,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1 - isolate sorted_values scalar inputs from host hashes`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2`
-  Status: `pending`
+  Status: `completed`
   Schedule: Immediately after the seeded sorted_values producer repair; remaining12 failed groups stay parent45-owned.
   Goal: Reconcile the exact spec_format_terse_2_3_5_3_string_receiver_value_chains group with implemented scalar/predicate/length continuations and current String result-kind authority; repair actual outliers before any oracle change.
   Reproduction: TYPE45.4 retains failures among18 assertions: a literal substr/uppercase source check and old terminal-method rejection expectations; actual length/trim and predicate/coalesce/trim results differ from old [null,null]. Establish exact output kinds/source/effects through public native/fresh and accepted continuation contracts, not an assumption that every result is String.
   Impact / schedule: P1 immediately after45.10 before remaining source-only helper repairs/full23.4/push; other12 last-selected failed names remain owned45.4 receipt/parent45, including emptiness/other helpers and with blocks.
+  Verification tier: `focused`
+  Focused checks: Exact18 assertions, public original/literal/Number-length/predicate/default/trim-kind and incompatible-tail controls; current result-family contracts and direct focused consumer as warranted.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored returned-type continuation distinctions, no population measurement.
+
+  Activation: clean `b1517920474f12cc95919ec45f022bed80587df1`; prior producer repair committed, all proof jobs terminal and brief empty.
+  Adjacent documentation defect owned/fixed here: The collection overview still calls numeric comparisons terminal, although its canonical Numeric-comparisons reference, frozen23.2.15/16 and current number-chain fact already establish compatible result flow. Correct that one stale sentence while explaining the same actual-result rule for String/Length; no new numeric policy or peer runtime proof.
+  - [x] **REPRODUCE / ISSUE**: Freeze exact18 group after the scalar-host producer repair; inspect actual3 failures and15 healthy controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Old literal-source spelling and terminal/null expectations conflict with accepted length/predicate/scalar continuation authority.
+  - [x] **FIX**: Change only obsolete literal/length assertions and runtime expected kinds; preserve original two DSL sources and other15 assertions.
+  - [x] **ADDRESSED (verified)**: Exact18 passes with accepted values, paired fluent/nested kind and source-order controls.
+  - [x] **NO REGRESSION**: No production changes; retained qualified String6/native-fresh producers still match original source inputs after oracle edits.
+  - [x] **LOCKSTEP**: Book/current docs/fact/task/evidence/resume match the precise focused boundary; remaining12 groups have next owner.
+
+  Result: Exact String group reproduces3 RED/15 healthy after the producer repair, then18 GREEN. Reconcile literal substring/uppercase source spelling to actual BCD, obsolete length/trim stop to initialized result3, and old runtime null/null to[3,"1"] under accepted Length/predicate/scalar result contracts. Original two runtime DSL sources/other15 assertions stay exact; all Perl production remains byte-identical to activation. Child1 qualified public native/fresh String6 evidence is reused with unchanged source/producer inputs, not rerun or promoted. Length/trim paired flags remain dual IOK/POK on Perl5.34.1; no new strict selector-kind or universal null policy. Actual test/RED-GREEN/producers/contracts/prior public source evidence retained in perl-phase0-string-continuation-intake.json.gz. Book example and adjacent stale numeric-terminal overview align with existing authority. Syntax/book/map/history/manual checks pass;528 other prior input hashes unchanged. Parent45.11 bounded producer/oracle work closes; twelve last-selected groups remain owned, emptiness45.12 next. No full-suite/peer/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2 - align String receiver checks with implemented result flow`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.12`
+  Status: `pending`
+  Goal: Reconcile the retained value-layer emptiness group with current helper input/result/actual-kind contracts; public-probe native/fresh independent cases and exact source expectations first. Repair any actual outlier before oracle movement.
+  Schedule: P1 immediately next; other11 last-selected failed groups remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact18 assertions, public original/literal/Number-length/predicate/default/trim-kind and incompatible-tail controls; current result-family contracts and direct focused consumer as warranted.
-  Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored returned-type continuation distinctions, no population measurement.
+  Planned focused checks: Exact emptiness group, public original/empty/nonempty/scalar/container/default controls and direct current consumer when warranted.
+  Planned canonical trigger: Full23.4/final clean push after repairs/registration/20.1 and other prerequisites.
+  Planned claim verification: none: Finite named helper/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10504,7 +10527,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` | `pending` | Reconcile original String18 after committed seeded sorted_values producer repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` | `pending` | Assess retained emptiness helper failures under existing value/result authority. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

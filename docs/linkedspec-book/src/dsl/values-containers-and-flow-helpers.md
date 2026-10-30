@@ -840,7 +840,16 @@ split_tagged_records(identifier_list, /\s*,\s*/o, "?node:", type_name)
 
 This keeps the action code declarative. A reader can tell whether you are copying, flattening, joining, or shaping repeated tagged rows without unpacking raw Perl syntax.
 
-Receiver-dot value chains are pure helper composition. Ordinary Perl/Rust/Dart/Julia/Lua joined Strings can continue too: `tokens.join_values(",").uppercase()` consumes the joined text, while `.split(":").last().uppercase()` after a colon join returns a selected String. Array receivers can flow through array helpers, hash receivers can flow through hash helpers and then array helpers through `sorted_keys()` / `sorted_values()`, string receivers can flow through scalar string helpers, and number receivers can flow through numeric helpers. `split(delim)` is the explicit string-to-array bridge: after `raw.trim().split("-")`, the chain continues with array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or `join_values(delim)`. Numeric comparisons such as `count(parts).gt(0)` are terminal values; they do not continue into later number methods. Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the selected helper family consumes the yielded value.
+Receiver-dot value chains are pure helper composition. Ordinary Perl/Rust/Dart/Julia/Lua joined Strings can continue too: `tokens.join_values(",").uppercase()` consumes the joined text, while `.split(":").last().uppercase()` after a colon join returns a selected String. Array receivers can flow through array helpers, hash receivers can flow through hash helpers and then array helpers through `sorted_keys()` / `sorted_values()`, string receivers can flow through scalar string helpers, and number receivers can flow through numeric helpers. `split(delim)` is the explicit string-to-array bridge: after `raw.trim().split("-")`, the chain continues with array helpers such as `trim_each()`, `filter_nonempty()`, `lowercase_each()`, `count()`, or `join_values(delim)`. Numeric comparisons such as `count(parts).gt(0)` yield values that can feed compatible consumers; see [Numeric comparisons](value-container-flow-helper-reference.md#numeric-comparisons). Expression-valued block receivers do not add a separate dispatch rule: the block evaluates first, then the selected helper family consumes the yielded value.
+Length and String predicates also yield values for compatible methods. On Perl, this action returns `[3,"1"]`:
+
+```text
+raw = "abc";
+return([raw.length().trim(), raw.matches(/^a/).lowercase()]);
+```
+
+The first chain consumes the length result; it does not return to `raw`. The second renders the predicate result through `lowercase`. Existing helper input and result rules still apply. Incompatible collection tails retain their helper-specific policy, as described under [Hash helpers](value-container-flow-helper-reference.md#hash-helpers); there is no general rule that every invalid tail returns null.
+
 ### Flattening bound and computed values
 
 `flat(container)` opens one array or harray into its surrounding constructor. The argument can be a working binding, function parameter, nested read, or container-valued expression such as `copy(items)`. It is evaluated once. Arrays contribute their elements; harrays contribute key/value pairs. An empty container contributes nothing.

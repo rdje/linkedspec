@@ -105,3 +105,10 @@ controls distinguishing copied null from direct count0/empty Hash/default recove
 Original runtime source/other12 assertions/production unchanged; no new depth or
 isolation claim. Other13 last-selected failures remain owned; String returned-type
 continuation45.11 next.
+
+TYPE45.11.1 fixes actual scalar-host sorted_values reads (8RED/7healthy ->15GREEN,
+Hash14/String6/old-new5); affected old modules require regeneration. TYPE45.11.2
+then reconciles only original String3/18 assertions under implemented result
+authority, retaining15 healthy assertions/two original sources;18 now pass.
+Twelve last-selected groups remain owned; emptiness45.12 follows. No new combined
+frozen28/full-suite status is inferred.

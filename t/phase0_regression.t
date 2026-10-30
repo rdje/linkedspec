@@ -47143,8 +47143,8 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
 subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
     # SPEC-FORMAT-TERSE.2.3.5.3: string/scalar receiver-dot value chains feed
     # the receiver into pure string helper contracts. split(...) is the explicit
-    # bridge into the already-owned array receiver family; scalar terminals end
-    # the chain.
+    # bridge into the already-owned array receiver family. Length and predicate
+    # results feed compatible scalar methods under their actual result contracts.
     plan tests => 18;
     require JSON::PP;
     my $J = JSON::PP->new->canonical(1)->allow_nonref(1);
@@ -47172,14 +47172,16 @@ subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
     like($L->('return(name.trim().split("-").trim_each().join_values("|"))'),
         qr/__ls_split_value.*__ls_array_pipeline_source.*join\("\|", \@\{\$__ls_join_values\}\)/s,
         'split receiver chains bridge into array receiver helper composition');
-    like($L->('return("abcdef".substr(1,3).uppercase())'), qr/__ls_substr_value = "abcdef".*LinkedSpec::UnicodeCaseMapping::uppercase\(\$__ls_upper\)/s,
-        'string-literal receiver chains lower through substr and uppercase helpers');
+    is(evaluate_lowered_json($L->('return("abcdef".substr(1,3).uppercase())'), q{}),
+        q#{"value":"BCD","warnings":[]}#,
+        'string-literal receiver chains compose substring and uppercase values');
     like($L->('return(split("a-b","-"))'), qr/__ls_split_value = "a-b".*split /s,
         'value-form split(...) lowers as a portable helper payload');
     like($L->('return(substr("abcdef",1,3))'), qr/__ls_substr_value = "abcdef".*substr\(\$__ls_substr_value/s,
         'value-form substr(...) lowers as a portable helper payload');
-    is($L->('return(raw.length().trim())'), 'return undef',
-        'terminal string methods cannot continue through later receiver-dot calls');
+    is(evaluate_lowered_json($L->('raw="abc"; return(raw.length().trim())'), q{my $raw;}),
+        q#{"value":3,"warnings":[]}#,
+        'length results feed compatible trim without reviving the original String');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(raw, \" Node-Name_end \"); return(array(raw.trim().lowercase().replace_substr(\"-\", \"_\").rm_prefix(\"node_\").rm_suffix(\"_end\").cat(\"!\"), raw.trim().length(), raw.trim().starts_with(\"Node\"), raw.trim().lowercase().matches(/^node/), raw.trim().contains_substr(\"-\"), raw.trim().ends_with(\"_end\"), raw.trim().split(\"-\").trim_each().lowercase_each().join_values(\"|\"), \" a-b \".trim().split(\"-\").count(), \"abcdef\".substr(1, 3).uppercase(), raw.coalesce_nonempty(\"fallback\").trim())) }\n"
@@ -47196,8 +47198,8 @@ subtest 'spec_format_terse_2_3_5_3_string_receiver_value_chains' => sub {
     my $terminal_parser = eval { LinkedSpec::Get(\$terminal_spec) };
     ok(ref($terminal_parser) eq 'CODE', 'terminal-continuation string receiver spec compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($terminal_parser, 'xhello'), '[null,null]',
-        'terminal string methods followed by later calls return undef instead of generated host residue');
+    is($run->($terminal_parser, 'xhello'), '[3,"1"]',
+        'length and predicate results continue through trim and lowercase with existing scalar kinds');
 
     my $src = $gen->($spec);
     is((() = ($src =~ /my \$raw\b/g)), 1,

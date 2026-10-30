@@ -97,3 +97,13 @@ plan/fresh eight-group/shared/direct-default/source checks pass both hosts.
 Details: [[lua-string-helper-parity-closeout]]. Width-omitted/Bool0 conventions
 join20; all five bounded String implementations are targeted-checked, with
 input-domain20 frozen from existing Perl-reference authority before portable admission. See [[substring-optional-arguments]]; Dart20.1/Julia20.2/safe Lua20.3 now pass their concrete local repair checks, with full admission separate.
+
+TYPE45.11.2 reconciles the original String18 after the bounded sorted_values
+producer repair45.11.1:3 obsolete assertions/15 healthy ->18 GREEN. Literal
+substring/case yields BCD; initialized Length/trim yields3 and original paired
+Length/trim + matches/lowercase runtime yields[3,"1"]. Original runtime sources
+and other15 assertions stay exact; production unchanged in this oracle slice.
+Prior child1 native/fresh six-case evidence is reused with exact input/producer
+identities, not rerun. On Perl5.34.1, paired Length/trim values remain dual IOK/POK;
+JSON3 is not a new strict selector-kind promise. Incompatible-tail policies
+remain helper-specific; see [[perl-sorted-values-scalar-host-isolation]].
