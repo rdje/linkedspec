@@ -1,7 +1,7 @@
 # Ordinary gap and incoming-slot record field selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.16; family23.3.55.
-Status: bounded Perl/Rust/Dart/Julia records and Dart arity55.0 targeted-checked; safe Lua pending.
+Status: all bounded55 children and Dart arity55.0 targeted-checked on recorded hosts/routes; full23.4 separate.
 
 ## Established source authority
 
@@ -113,3 +113,12 @@ owns unchanged94healthy/4RED to98GREEN, computed25/static-call35/strict compile,
 18 observations/exact runner and source bindings. Existing arity/context/function
 restrictions stay intact. gap-slot-record-julia-intake.json.gz retains actual
 inputs/producers/results; safe Lua55.5 independently follows.
+
+
+Safe Lua55.5 independently repairs its selected-kind gap on both installed hosts.
+[[lua-gap-slot-record-selection-guard]] owns unchanged122healthy/4RED to126GREEN
+per host, static-call43/existing computed controls/loadfile/strict diagnostics,
+exact runner/source bindings and no interpreter chunk locals. Actual inputs/
+producers/results retained in gap-slot-record-lua-intake.json.gz. All bounded55
+children/arity prerequisite have focused outcomes; next selection23.1.17 follows.
+Full23.4/context/portable/declared5.4/registration remain separately owned.

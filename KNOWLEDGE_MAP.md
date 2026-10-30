@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1520** facts · **11383** question keys.
+> **1521** facts · **11386** question keys.
 
 ## Questions → fact
 
@@ -3667,6 +3667,7 @@
 - "does the Lua corpus runner CLI execute fixtures" -> [lua-controlled-corpus-execution](docs/knowledge/lua-controlled-corpus-execution.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh`
 - "does the Lua corpus runner CLI execute parsers yet" -> [lua-corpus-manifest-io](docs/knowledge/lua-corpus-manifest-io.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does the Lua cursor generated source consumer execute a fresh child process" -> [lua-cursor-completion-package-prefix-reading](docs/knowledge/lua-cursor-completion-package-prefix-reading.md) · 2026-09-13 · reverify: `Run LUA_CURSOR_PACKAGE_READING_37 and the managed commands below; the package selection contains only the first five complete groups through line450.`
+- "does the Lua gap slot field guard add interpreter chunk locals" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
 - "does the Lua generated observation suite pass on installed PUC 5.5" -> [lua-query-generated-observation-consumer-reading](docs/knowledge/lua-query-generated-observation-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_QUERY_OBSERVATION_READING_45 and the managed commands below. Preserve generated PUC exit 1 and its exact diagnostic; evidence verification success does not make that suite pass. Native selection is unchanged lines 1-226 only.`
 - "does the Lua generated plan change for capture_gaps" -> [inter-match-gap-lua-implementation-plan](docs/knowledge/inter-match-gap-lua-implementation-plan.md) · 2026-08-16 · reverify: `bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh`
 - "does the Lua local gate run all 61 CLI cases" -> [lua-primary-cli-recurring-admission](docs/knowledge/lua-primary-cli-recurring-admission.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && bash tools/run_primary_cli_matrix.sh`
@@ -8990,6 +8991,7 @@
 - "which Lua nullable source is phase-authority qualified" -> [lua-null-return-and-pure-observation-gaps](docs/knowledge/lua-null-return-and-pure-observation-gaps.md) · 2026-10-29 · reverify: `Recover actual Lua nullable probes/readers/qualification from retained packet, run SDK and separate fresh process per installed host before --fresh. Preserve phase exclusion and exact fixture-derived row census.`
 - "which Lua observation and root public closeout statements still need qualification" -> [lua-recursive-repeated-root-consumer-reading](docs/knowledge/lua-recursive-repeated-root-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_RECURSIVE_REPEATED_ROOT_READING_35 and the managed commands below; root-core proof is limited to source lines 1-134.`
 - "which Lua offsets 40 through 98 fail" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
+- "which Lua owner classifies selected entry_slot fields" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
 - "which Lua owner guards static rule-call result selections" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
 - "which Lua owner implements explicit callable codeblocks" -> [lua-explicit-callable-codeblock-gap](docs/knowledge/lua-explicit-callable-codeblock-gap.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'block_value|codeblock_argument|active_codeblocks|callable_codeblock\\.execute|runtime_scoped_binding|spec_ast\\.to_json|spec_ast\\.from_json' lua/src/linkedspec/action_ast.lua lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/source_emitter.lua && bash tools/run_lua_local.sh`
 - "which Lua package group is excluded because of the known native regex formatter defect" -> [lua-package-generated-runtime-cursor-reading](docs/knowledge/lua-package-generated-runtime-cursor-reading.md) · 2026-09-13 · reverify: `Run LUA_PACKAGE_RUNTIME_READING_41 and the managed commands below; the selector omits the entire known native-error group 5193-5215 and the partial boundary group 6312 onward.`
@@ -10642,6 +10644,7 @@
 - "why does Lua encode 9007199254740993 as 9007199254740992" -> [lua-json-matching-reading-and-integer-encoding-gap](docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md) · 2026-09-12 · reverify: [5 entries](#lua-json-matching-reading-and-integer-encoding-gap)
 - "why does Lua full pipeline trace remain in 5.3" -> [lua-runtime-diagnostics-trace-split](docs/knowledge/lua-runtime-diagnostics-trace-split.md) · 2026-07-15 · reverify: `rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md`
 - "why does Lua gap execution use internal module methods instead of more local functions" -> [inter-match-gap-lua-implementation-plan](docs/knowledge/inter-match-gap-lua-implementation-plan.md) · 2026-08-16 · reverify: `bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh`
+- "why does Lua gap_span selected String execute incompatible Array operands" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
 - "why does Lua implicit pure-null observation fail" -> [lua-null-return-and-pure-observation-gaps](docs/knowledge/lua-null-return-and-pure-observation-gaps.md) · 2026-10-29 · reverify: `Recover actual Lua nullable probes/readers/qualification from retained packet, run SDK and separate fresh process per installed host before --fresh. Preserve phase exclusion and exact fixture-derived row census.`
 - "why does Lua input_slice return null for a maximum integer width" -> [lua-emitter-source-location-reading-and-boundary-gaps](docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: [7 entries](#lua-emitter-source-location-reading-and-boundary-gaps)
 - "why does Lua matches currently fail" -> [lua-helper-regex-split-mutation-preflight](docs/knowledge/lua-helper-regex-split-mutation-preflight.md) · 2026-07-12 · reverify: `rg -n 'kind == \"regex\"|compile_runtime_regex_alternation|execute_block|evaluate_expr|regex_subst|split' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/matching.lua docs/tasks/LUA-BACKEND-PARITY.md`
@@ -13948,7 +13951,7 @@ _Capture-enabled LS observes selected end while gap-boundary commit and authored
 ### gap-slot-record-selection-source-gap
 _Gap and incoming-slot record helpers need governed ordinary computed read roles_
 - **answers:** can gap_span fields be selected directly before Number methods | can entry_slot slot_id feed a direct bracket and String method | why does Perl gap_span bracket indexing fail compilation | why does a bound named gap record String take return an empty Array | which task owns gap and slot record computed selection
-- **date:** 2026-10-30 · **status:** bounded Perl/Rust/Dart/Julia records and Dart arity55.0 targeted-checked; safe Lua pending
+- **date:** 2026-10-30 · **status:** all bounded55 children and Dart arity55.0 targeted-checked on recorded hosts/routes; full23.4 separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.16; gap-slot-record-selection-intake.json.gz retains four healthy/two failed public controls, actual legacy first-consumer substitution and healthy existing computed-record carrier/direct twin.`
 - **reverify:** `Recover probe_gap_record_result_assessment.pl/finite cases from gap-slot-record-selection-intake.json.gz; project Perl wrapper with explicit local output. No historical source swaps.`
 - **source:** [`docs/knowledge/gap-slot-record-selection-source-gap.md`](docs/knowledge/gap-slot-record-selection-source-gap.md)
@@ -16152,6 +16155,14 @@ _Lua gap logical and map-leaves consumers retain their exact execution boundarie
 - **evidence:** `LUA-STARTUP-READING.1.32 activates from 9109e20ab1255a85d879bfdcbd32da846a14eb0b. Ten complete windows read 1500 fragments /61938 bytes. Both installed hosts pass gap392, logical359 and map530: 2562 fresh assertions. Fresh neutral logical8/0/26 and mutation167+592 pass; previous neutral gap evidence remains dated and input-identical. No new repair or production change.`
 - **reverify:** `Run LUA_GAP_LOGICAL_MAP_READING_32 and the managed commands below; emitted routes and prior governance are qualified separately.`
 - **source:** [`docs/knowledge/lua-gap-logical-map-consumer-reading.md`](docs/knowledge/lua-gap-logical-map-consumer-reading.md)
+
+### lua-gap-slot-record-selection-guard
+_Safe Lua selected gap and slot fields reuse actual-kind operand guards_
+- **answers:** why does Lua gap_span selected String execute incompatible Array operands | which Lua owner classifies selected entry_slot fields | does the Lua gap slot field guard add interpreter chunk locals
+- **date:** 2026-10-30 · **status:** bounded installed PUC5.5.1/LuaJIT55.5 repaired/targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.55.5; gap-slot-record-lua-intake.json.gz retains same126checks122healthy/4RED to126GREEN per host plus static-call43/existing computed controls/loadfile and actual source/producers/inputs.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/gap_slot_record_selection_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/gap_slot_record_selection_test.lua`
+- **source:** [`docs/knowledge/lua-gap-slot-record-selection-guard.md`](docs/knowledge/lua-gap-slot-record-selection-guard.md)
 
 ### lua-generated-mcp-first-byte-range-reading
 _Lua generated MCP first byte range and canonical binding reconciliation_

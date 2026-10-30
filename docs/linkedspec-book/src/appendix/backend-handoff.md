@@ -2979,3 +2979,8 @@ Julia also applies its existing selected-value operand guard to ordinary
 zero-argument gap/slot field reads across native/reconstructed/generated-plan/
 fresh same-process Module. Gap-context failures and function-state restrictions
 remain; no full context or portable admission follows.
+
+Installed PUC Lua 5.5.1/LuaJIT likewise guard ordinary zero-argument gap/slot field
+reads across native/restored/plan/fresh loaded modules. Typed unavailable context,
+function-state restrictions and strict reader arity remain, with no added chunk
+locals. Declared Lua 5.4 and full context/portable admission stay separate.

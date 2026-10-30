@@ -3510,6 +3510,10 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
     -- Static owners preserve legacy unknown bound-call result policies.
     if engine.compiled_spec.function_registry:has_name(receiver.name) then return true end
     local name = action_contracts.canonical_action_helper_name(receiver.name)
+    if name == "entry_slot" or name == "gap_span" then
+      return receiver.name == name and (receiver.source_method or receiver.name) == name and
+        not receiver.trailing_block_arg and #(receiver.args or {}) == 0
+    end
     -- Static child returns use the existing selected-value operand guard.
     -- Locals stay inside this function, preserving the interpreter chunk budget.
     if name == "call" then
