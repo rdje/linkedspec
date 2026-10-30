@@ -6304,6 +6304,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $method_call = $parse_method_function_expr->($trimmed);
  return _actionir_ast_unsupported_helper_expr($method_call->{method})
   if $method_call && _parser_state_helper_is_forbidden_in_function($method_call->{method}, $deps);
+ # Read the existing capture String before compatible outer links, rather
+ # than inserting its native do-block after fluent lowering has finished.
+ if ($method_call && $trimmed =~ /\A(?:capture_slice(?:_until_cursor)?|capture_rest|capture_from_rule_start)\s*\(\s*\)\z/o) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_capture_boundary_text_value_expr',
+   $method_call->{method},
+  );
+ }
  if ($method_call && $trimmed =~ /\A(?:entry|match)_(?:len|line|col|start_(?:pos|line|col)|end_(?:pos|line|col))\s*\(\s*\)\z/o) {
   return LinkedSpec::OwnerDispatch::dispatch_owner_call(
    __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_readonly_entry_match_number_value_expr',

@@ -801,6 +801,20 @@ sub _anonymous_local_match_capture_value_expr {
  );
 }
 
+# Readonly anonymous text projections share their native body with ordinary
+# method-value lowering. Keep each endpoint, presence guard and operation tag.
+sub _readonly_capture_boundary_text_value_expr {
+ my ($method) = @_;
+ return undef unless defined $method;
+ state $expressions = {
+  capture_slice => _anonymous_local_match_capture_value_expr('capture_slice'),
+  capture_from_rule_start => _anonymous_local_match_capture_value_expr('capture_from_rule_start'),
+  capture_slice_until_cursor => q{do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_cursor, "capture_slice_until_cursor") : undef }},
+  capture_rest => q{do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest"), "capture_rest") }},
+ };
+ return $expressions->{$method}
+}
+
 # Readonly anonymous capture Number getters have one emitted body for native
 # contracts and ordinary method-value composition. Preserve each operation tag.
 sub _readonly_capture_boundary_number_value_expr {
@@ -1154,10 +1168,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_slice\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_slice\s*\(\s*\)
-    }{
-     _anonymous_local_match_capture_value_expr('capture_slice')
+    $code =~ s{\bcapture_slice\s*\(\s*\)}{
+     _readonly_capture_boundary_text_value_expr('capture_slice')
     }gex;
     return $code
    },
@@ -1182,10 +1194,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_slice_until_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_slice_until_cursor\s*\(\s*\)
-    }{
-     'do { my $__ls_cursor = pos $$STRING; (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_cursor, "capture_slice_until_cursor") : undef }'
+    $code =~ s{\bcapture_slice_until_cursor\s*\(\s*\)}{
+     _readonly_capture_boundary_text_value_expr('capture_slice_until_cursor')
     }gex;
     return $code
    },
@@ -1361,10 +1371,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_rest\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_rest\s*\(\s*\)
-    }{
-     'do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_rest"), "capture_rest") }'
+    $code =~ s{\bcapture_rest\s*\(\s*\)}{
+     _readonly_capture_boundary_text_value_expr('capture_rest')
     }gex;
     return $code
    },
@@ -1464,10 +1472,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_from_rule_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_from_rule_start\s*\(\s*\)
-    }{
-     _anonymous_local_match_capture_value_expr('capture_from_rule_start')
+    $code =~ s{\bcapture_from_rule_start\s*\(\s*\)}{
+     _readonly_capture_boundary_text_value_expr('capture_from_rule_start')
     }gex;
     return $code
    },

@@ -1,7 +1,7 @@
 # Readonly anonymous capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.11; implementation family23.3.50.
-Status: bounded target frozen; independent implementations pending. No backend admission.
+Status: Perl50.1 repaired/targeted-checked; independent peers pending. No backend admission.
 
 ## Existing authority and actual gap
 
@@ -66,3 +66,16 @@ The helper catalog's retired labels for five source-boundary compatibility alias
 contradicted the typed contract/current reference and accepted33/35 records.
 Only that stale prose and the spelling inventory's missing capture_from_rule_start
 row are corrected. No new alias or peer execution proof is inferred.
+
+## Bounded Perl50.1
+
+The original four native bodies now share a Contracts text factory with narrow
+early method-value lowering after the existing function ban. Their emitted bytes
+and operation tags remain exact. New12 groups pass after8 RED/4 healthy, with
+unchanged shared target/oracles. Native/fresh flows, empty/absence/reversed/zero,
+source-before-reset snapshots, normalized guards/direct legacy/with and function
+fences hold; Number7/selected reset2 pass. No parser/getter/callback/deferred or
+format change. A retained old emitted module still fails after the compiler fix:
+regenerate affected modules. Exact actual inputs/results are retained in
+capture-boundary-text-perl-intake.json.gz. New normal registration23.4.1, broader
+context/portable admission and independent Rust50.2 remain separate.

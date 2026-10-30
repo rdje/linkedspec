@@ -11674,7 +11674,7 @@ _Capture and mark Number sources need early method-value lowering_
 ### capture-boundary-text-method-source-gap
 _Readonly anonymous capture String defaults need early value lowering_
 - **answers:** can capture_rest compose with coalesce and String methods directly | why does capture_slice coalesce call an undefined host function | which task owns readonly capture String result composition | is capture_from_rule_start an accepted compatibility alias
-- **date:** 2026-10-30 · **status:** bounded target50 frozen; independent implementations pending
+- **date:** 2026-10-30 · **status:** bounded Perl50.1 repaired/targeted-checked; independent peers pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.11; capture-boundary-text-selection-intake.json.gz retains ten actual source/readiness/result controls, bound/direct nine-coordinate twins and initial transport epoch.`
 - **reverify:** `Recover probe_capture_string_assessment.pl and finite case inputs from capture-boundary-text-selection-intake.json.gz; run through tools/project_data_run.sh. Writes only the explicitly supplied project-local diagnostic output; no historical source swaps.`
 - **source:** [`docs/knowledge/capture-boundary-text-method-source-gap.md`](docs/knowledge/capture-boundary-text-method-source-gap.md)

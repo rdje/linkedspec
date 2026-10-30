@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Readonly capture String family50 frozen from actual public gaps; Perl50.1 implementation next.
+Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
 
 ## Latest Completed Slice
 
-Readonly capture String selection records6 failing/4 healthy public native/fresh cases on six decoded characters. Each of capture_slice/capture_slice_until_cursor/capture_rest/capture_from_rule_start leaves coalesce as a host call despite raw0/fallback0/unresolved0/ready1; the empty lazy-block case fails compilation. Primitive/bound/named and direct legacy take[]/with controls are healthy. Independent bound9-coordinate target passes exact values/order/normalized operand skips/snapshot-before-reset/defined empty; its direct twin fails compilation. 534 current diagnostic inputs are unchanged. Freeze ordinary readonly String family50 and independent50.1-.5 before production; prospective fixture is not implementation credit. Preserve original getter/tag/coordinate/absence/name/function/callback/deferred/first-consumer policies. Correct five stale catalog alias labels and one missing source-compatibility spelling from existing typed contract/current reference/accepted33/35 authority, without new alias/peer proof. Initial UTF-8-octet/metadata-field/context calibration is retained without Unicode or extra feature credit. Actual producer/inputs/native/emitted/substitution/metadata/diagnostics/target twins retained in capture-boundary-text-selection-intake.json.gz; syntax/JSON/book/map/history/manual checks pass. No production/full-suite or portable admission; Perl50.1 next.
+Perl readonly capture String normal reproduces8 RED/4 healthy, then12 GREEN without changing its oracles or the frozen shared fixture. Four original native getter bodies remain byte-identical, including capture_from_rule_start operation identity. A sole Contracts text factory feeds existing late callbacks and narrow early MethodLowering after the existing parser-state function fence; no producer/arity/coordinate/first-consumer or vocabulary change. Native/fresh shared9 values/default/String/Array/signed/Number flows, empty fallback suppression, missing/reversed spans, String0, normalized bad-operand skip, snapshot-before-reset, legacy take[]/with result and four pure-function restrictions pass with working ordinary readiness and no warnings. Nearest Number7 and selected reset2 pass; both production modules compile. 532 other selection inputs stay exact. A retained pre-fix emitted module still fails its host coalesce after the compiler repair; regenerate affected modules. Actual normal/RED-GREEN/native bodies/producer/before source/old artifact inputs retained in capture-boundary-text-perl-intake.json.gz. Book/target/card/map/task/roadmap/live/resume/history/manual checks pass. New normal remains explicitly queued23.4.1; no full suite/combined28/portable or deferred-context admission. Independent Rust50.2 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.1 from this clean target freeze. Read capture-boundary-text-results.md, prospective fixture, accepted getter/first-consumer/function boundaries and actual retained baseline. Add focused normal, reproduce exact direct gaps, then share unchanged native anonymous String getter bodies with narrow early value lowering through existing owners/function fences. Preserve healthy behavior and original source bodies. Compile/quick native-fresh and direct Number/reset compatibility checks, update docs/registration owner, commit; independent Rust50.2 follows. No full suite/matrix.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.2 independently from clean Perl50.1. Read frozen capture-boundary-text-results.md/shared fixture and actual prior policies; assess Rust native/restored/generated-plan source/bound/direct/empty/absence/snapshot/shape/function/legacy controls before production. Repair only established ordinary text composition gaps and retain healthy behavior. Compile/quick focused native/generated/direct Number/reset compatibility checks/docs/commit; Dart50.3 follows. No inference from Perl, full matrix or routine full suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.50.1` — Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.11` — Readonly capture String family50 frozen from actual public gaps; Perl50.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.25` — Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.24` — Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.1 from this clean target freeze. Read c
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.14` — Hash-snapshot4/public5 pass; source/value policies retained; set_key checks next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.13` — has_key4/public3/direct6 pass; null/false fields stay present; Hash snapshot next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` — Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` — String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
 
 ## History
 

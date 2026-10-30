@@ -92,7 +92,7 @@ Anonymous capture readers can be returned directly. For example, `return(capture
 stored character position is needed. Current Perl lowering still exposes its internal assignment-expression result;
 portable `.spec` files must not depend on that implementation leak while `FUTURE-PARITY-BACKLOG.5` removes it.
 
-Direct text-capture chains with a default still have a Perl composition gap. For now, bind the result first: `tail=capture_rest(); return(tail.coalesce("").split(":")[-1].uppercase())`. On the recorded `αβ:cat` carrier, a boundary at `2` gives `"CAT"`; defined empty text skips the default. The readonly String composition work is scoped to the existing getters and their accepted alias. Their native span and parser-state rules still apply.
+Perl now supports ordinary direct String chains from `capture_slice()`, `capture_slice_until_cursor()`, `capture_rest()` and the existing `capture_from_rule_start()` alias. At boundary `2` on `αβ:cat`, `capture_slice().coalesce("missing").cat("!")` gives `":!"`; `capture_rest().coalesce("").split(":")[-1].uppercase()` gives `"CAT"`; and `capture_slice_until_cursor().coalesce("").length().add(1)` gives `5`. Defined empty text skips fallback effects, missing or reversed spans use the existing null rules, and selected `"0"` stays a String. The source is read before later consumer effects: a reset inside a subsequent `cat` operand cannot change the completed text snapshot. These remain readonly parser-state helpers with their existing function and deferred-context restrictions. Regenerate older Perl modules affected by the direct-chain compiler gap. Other backends are assessed independently; these focused Perl checks do not grant portable admission.
 
 Compatibility aliases:
 

@@ -7,7 +7,7 @@ answers:
   - "which task owns readonly capture String result composition"
   - "is capture_from_rule_start an accepted compatibility alias"
 date: 2026-10-30
-status: bounded target50 frozen; independent implementations pending
+status: bounded Perl50.1 repaired/targeted-checked; independent peers pending
 tags: [perl, capture, string, fluent, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.11; capture-boundary-text-selection-intake.json.gz retains ten actual source/readiness/result controls, bound/direct nine-coordinate twins and initial transport epoch."
 reverify: "Recover probe_capture_string_assessment.pl and finite case inputs from capture-boundary-text-selection-intake.json.gz; run through tools/project_data_run.sh. Writes only the explicitly supplied project-local diagnostic output; no historical source swaps."
@@ -34,3 +34,13 @@ Stale helper-catalog retirement labels and one missing spelling row are correcte
 from that existing authority; no new alias or peer proof. The initial UTF-8-octet
 probe is retained without coordinate credit; the refined instrument validates six
 decoded input characters and the leading Greek codepoint before execution.
+
+Perl50.1 now shares the four original native bodies with early method-value
+lowering after the existing function fence. New normal8 RED/4 healthy ->12 GREEN;
+all original getter bodies are byte-identical. Number7/selected reset2 pass.
+Native/fresh ordinary values/kinds, empty/missing/reversed, snapshots/guards and
+pure-function exclusions hold. A retained old emitted module still fails its
+host coalesce after repair; regenerate affected modules. No callback/deferred or
+portable/full-suite admission. Actual source/normal/before-after/old artifact
+producer inputs are retained in capture-boundary-text-perl-intake.json.gz; Rust
+50.2 independently assesses next, normal canonical registration23.4.1 stays open.
