@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart reader arity4RED/5healthy to9GREEN; record6/computed7/analysis/format pass; Julia55.4 next.
+Julia gap/slot guard94healthy/4RED to98GREEN; computed25/static-call35/strict compile pass; safe Lua55.5 next.
 
 ## Latest Completed Slice
 
-Existing four-reader zero-arity defect repaired at Dart _evaluateCall after registered-function resolution and before reader context/operand evaluation, reusing helper_arity_mismatch diagnostics. Same nine groups4RED/5healthy to9GREEN observe all four readers with positional/keyword/two-argument/trap/outside-context/field-default cases on native/restored/generated-plan (72 retained invalid-call route observations). Valid full records/text/kinds/null slot, typed zero-argument context failures, pure-function state-before-arity priority, ordinary function values/own arity and existing trailing-codeblock compile rejection remain healthy. Trailing forms still reject through callable_contract_rejected; no parser/final-body admission or universal invalid-program phase rule. New9/record-selection6/computed7 give22 actual nonhidden/no-skip successful JSON completions; stderr empty, new-test fatal analysis/format pass. Only one call plus scoped validator are added; all remaining interpreter bytes and 200 other bound inputs/fixtures stay exact. Earlier intake prose called the dispatch _callHelper; actual owner _evaluateCall is corrected explicitly without changing original probes/packets. Actual source/normal/shape probe/producers/inputs/RED-GREEN results retained in gap-reader-arity-dart-intake.json.gz. Book/cards/target/map/task/roadmap/live/resume/history align; Julia55.4 resumes. No new helper/state/field/schema/format/accepted callback/function policy/isolated emitted/full shape/context or portable admission.
+Julia independently exposes a selected-kind gap: unchanged normal94healthy/4RED out of98 captures all four shared target routes returning[] and executing BAD. Four lines in _runtime_is_ordinary_computed_read admit only canonical zero-argument entry_slot/gap_span to the existing actual-kind operand guard; all remaining interpreter/helper/context/state/ABI/schema bytes stay exact. Same strict new98/computed25/static-call35 pass under depwarn=error. Eighteen new observations retain native/reconstructed SpecFile/generated-plan/fresh same-process Module values and typed function/context/arity errors. Full records/named provenance/zero/default skips/null slot/missing-to-Array/signed recovery/Bool kinds/order/cursor and explicit function records remain. Existing four-reader positional/keyword arity restrictions stay unchanged. Exact one-line runner include registers the normal; 168 other activation inputs/shared fixture exact. Stderr contains only successful package precompilation progress if present. Actual old owner/normal/producers/inputs/RED-GREEN retained in gap-slot-record-julia-intake.json.gz. Book/card/target/map/task/roadmap/live/resume/history align. No isolated package/new gap state/field/helper/arity/source facade/function/deferred policy/full context or portable admission; safe Lua55.5 independently follows.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.55.4 from clean P1 Dart55.0. Read frozen gap-slot-record-selection.md/shared fixture, Julia existing detached helper ABI, ordinary computed-read source-role guard/function/context-error/arity/deferred fences and nearest tests/book. Independently reproduce native/reconstructed/generated-plan/fresh-loaded-module target before production; preserve healthy peers and source/context policies. Implement only a confirmed bounded source/guard gap; compile/quick new and nearest checks, book/docs/commit, then safe Lua55.5. No full suite or broad cleanup per feature; own unexpected findings before widening scope.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.55.5 independently from clean Julia55.4. Read frozen gap-slot-record-selection.md/shared fixture, installed safe Lua helper ABI and computed-read/function/context/arity contracts/nearest normals/runner. Establish native/restored/plan/fresh loaded-module baseline on PUC/LuaJIT with safe authored fixtures before production; preserve healthy peers, fix only confirmed zero-argument record source-role gaps. No unsafe full runner/formatter/declared5.4/new chunk locals. Focused new-nearest checks/docs/book/history/commit, then next roadmap-aligned feature selection. No routine full CI or cleanup.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.55.4` — Julia gap/slot guard94healthy/4RED to98GREEN; computed25/static-call35/strict compile pass; safe Lua55.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.0` — Dart reader arity4RED/5healthy to9GREEN; record6/computed7/analysis/format pass; Julia55.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.3` — Dart record guard5healthy/1RED to6GREEN; computed7/analysis/format pass; P1 arity55.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.2` — Rust gap/slot guards7groups6healthy/1RED to7GREEN; computed6/gap-unit3/fmt pass; Dart55.3 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.55.4 from clean P1 Dart55.0. Read frozen g
 - `TYPE-REFERENCE-BOOK.1.2.23.1.15` — Rule-call result target54 frozen; six healthy controls/shared13 fluent carrier; P1 closed-selector54.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.5` — Safe Lua boundary81/Number97/reset102 pass per host; all bounded53 checked; next selection15.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.4` — Julia boundary65/advancing Number65/reset70 pass, runtime unchanged; safe Lua53.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.53.3` — Dart boundary6/advancing Number6/reset3 pass, runtime unchanged; Julia53.4 independently next.
 
 ## History
 

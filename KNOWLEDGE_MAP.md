@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1519** facts · **11380** question keys.
+> **1520** facts · **11383** question keys.
 
 ## Questions → fact
 
@@ -1003,6 +1003,7 @@
 - "do Julia private gap helpers widen the supported ActionIR call inventory" -> [inter-match-gap-julia-implementation-plan](docs/knowledge/inter-match-gap-julia-implementation-plan.md) · 2026-08-16 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'include(\"julia/test/inter_match_gap_capture_contract_test.jl\")' && bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_julia_local.sh`
 - "do Julia progressive top rule and fingerprint patterns use complete matching" -> [julia-progressive-authority-boundary-gaps](docs/knowledge/julia-progressive-authority-boundary-gaps.md) · 2026-09-11 · reverify: `Run the native and neutral managed blocks below; these assert pre-repair observations, not desired acceptance.`
 - "do Julia rule labels change function helper lifecycle mark regex or mode identifiers" -> [julia-unicode-rule-label-preflight](docs/knowledge/julia-unicode-rule-label-preflight.md) · 2026-07-22 · reverify: `bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; bash tools/run_julia_project_data.sh --project=julia -e 'using Test; using LinkedSpecJulia; using JSON3; const REPO_ROOT = pwd(); include(\"julia/test/unicode_rule_label_classifier_test.jl\"); include(\"julia/test/unicode_rule_label_routes_test.jl\"); include(\"julia/test/unicode_rule_label_identity_routes_test.jl\"); include(\"julia/test/unicode_rule_label_negative_isolation_test.jl\")'`
+- "do Julia selected gap fields retain context errors and zero reader arity" -> [julia-gap-slot-record-selection-guard](docs/knowledge/julia-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/gap_slot_record_selection_test.jl`
 - "do Julia spec and input files preserve exact contents" -> [julia-primary-cli-arguments-resolution-loading](docs/knowledge/julia-primary-cli-arguments-resolution-loading.md) · 2026-07-10 · reverify: `bash tools/run_julia_local.sh && rg -n '_parse_primary_cli_args|_prepare_primary_cli_request|_resolve_named_spec_path|unexpected positional|primary_status_code' julia/src/cli/LinkedSpecJuliaCli.jl julia/test/runtests.jl tools/run_julia_local.sh`
 - "do Julia standalone split_each filter_match and uniq update arrays" -> [julia-runtime-array-helpers](docs/knowledge/julia-runtime-array-helpers.md) · 2026-10-27 · reverify: [2 entries](#julia-runtime-array-helpers)
 - "do Julia static rule-call selections preserve emitted Module behavior" -> [julia-rule-call-selection-guard](docs/knowledge/julia-rule-call-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/rule_call_result_selection_test.jl`
@@ -8870,6 +8871,7 @@
 - "which Julia nodes represent recognition transactions" -> [julia-recognition-transaction-integration](docs/knowledge/julia-recognition-transaction-integration.md) · 2026-08-11 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using LinkedSpecJulia, JSON3, Test; include(\"julia/test/recognition_transaction_contract_test.jl\")' && test \"$(rg -c '^include\\(\"recognition_transaction_contract_test[.]jl\"\\)$' julia/test/runtests.jl)\" = 1 && rg -n 'julia/test/recognition_transaction_contract_test[.]jl' tools/run_ci_local.sh`
 - "which Julia nullable observation failure belongs to return provenance" -> [julia-null-return-and-pure-observation-gaps](docs/knowledge/julia-null-return-and-pure-observation-gaps.md) · 2026-10-29 · reverify: `Recover retained probes; bash tools/run_julia_project_data.sh --project=julia .linkedspec-data/verification/probe_julia_null_context.jl and probe_julia_null_context_fresh.jl; read_julia_null_context.py --fresh only after both exit.`
 - "which Julia observation route test requires the shared query digest helper" -> [julia-source-value-authority-reading](docs/knowledge/julia-source-value-authority-reading.md) · 2026-09-11 · reverify: `Run the focused managed recipe below and the exact coverage recipe in julia-startup-reading-coverage.`
+- "which Julia owner classifies selected entry_slot fields" -> [julia-gap-slot-record-selection-guard](docs/knowledge/julia-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/gap_slot_record_selection_test.jl`
 - "which Julia owner guards indexed static rule-call results" -> [julia-rule-call-selection-guard](docs/knowledge/julia-rule-call-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/rule_call_result_selection_test.jl`
 - "which Julia package and README bytes have been read at startup" -> [julia-package-readme-reading](docs/knowledge/julia-package-readme-reading.md) · 2026-09-11 · reverify: [3 entries](#julia-package-readme-reading)
 - "which Julia parse_job forms fail static validation" -> [julia-staged-ast-enrichment-marker-provenance](docs/knowledge/julia-staged-ast-enrichment-marker-provenance.md) · 2026-08-27 · reverify: [3 entries](#julia-staged-ast-enrichment-marker-provenance)
@@ -10587,6 +10589,7 @@
 - "why does Julia ebnf_logging_annotation still fail after capture helpers" -> [julia-anonymous-capture-boundary-helpers](docs/knowledge/julia-anonymous-capture-boundary-helpers.md) · 2026-07-10 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using Pkg; Pkg.test()' && bash tools/run_julia_project_data.sh --project=julia julia/bin/corpus_runner.jl --corpus rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31`
 - "why does Julia fail root rule selection parity" -> [julia-root-rule-selection-preflight](docs/knowledge/julia-root-rule-selection-preflight.md) · 2026-07-18 · reverify: `bash tools/run_julia_project_data.sh --project=julia -e 'using LinkedSpecJulia; source=\"Earlier:\\n /x/\\n\\nMarked::\\n /x/\\n\"; compiled=compile_spec(parse_spec(source)); println(runtime_parse(LinkedSpecRuntimeEngine(compiled), \"x\"; top_rule=\"Earlier\").matched)' && bash tools/check_julia_primary_cli.sh`
 - "why does Julia fail the shared 61 case CLI suite" -> [julia-global-cli-61-audit](docs/knowledge/julia-global-cli-61-audit.md) · 2026-07-15 · reverify: `bash tools/check_julia_primary_cli.sh`
+- "why does Julia gap_span selected String execute incompatible Array operands" -> [julia-gap-slot-record-selection-guard](docs/knowledge/julia-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/gap_slot_record_selection_test.jl`
 - "why does Julia implicit Default blind return null after accepted children" -> [julia-implicit-blind-iteration-collections](docs/knowledge/julia-implicit-blind-iteration-collections.md) · 2026-10-28 · reverify: `bash tools/run_julia_project_data.sh --project=julia julia/test/blind_repetition_collection_test.jl`
 - "why does Julia keep a generated v1 compatibility engine" -> [julia-rule-local-cursor-execution](docs/knowledge/julia-rule-local-cursor-execution.md) · 2026-07-18 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py`
 - "why does Julia match_runtime_regex_slot ignore an invalid mode" -> [julia-selected-slot-mode-validation-gap](docs/knowledge/julia-selected-slot-mode-validation-gap.md) · 2026-09-11 · reverify: `Run the managed direct-matcher assertion fence below; it pins pre-repair behavior.`
@@ -13945,7 +13948,7 @@ _Capture-enabled LS observes selected end while gap-boundary commit and authored
 ### gap-slot-record-selection-source-gap
 _Gap and incoming-slot record helpers need governed ordinary computed read roles_
 - **answers:** can gap_span fields be selected directly before Number methods | can entry_slot slot_id feed a direct bracket and String method | why does Perl gap_span bracket indexing fail compilation | why does a bound named gap record String take return an empty Array | which task owns gap and slot record computed selection
-- **date:** 2026-10-30 · **status:** bounded Perl/Rust/Dart records and Dart arity55.0 targeted-checked; Julia/safe Lua pending
+- **date:** 2026-10-30 · **status:** bounded Perl/Rust/Dart/Julia records and Dart arity55.0 targeted-checked; safe Lua pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.16; gap-slot-record-selection-intake.json.gz retains four healthy/two failed public controls, actual legacy first-consumer substitution and healthy existing computed-record carrier/direct twin.`
 - **reverify:** `Recover probe_gap_record_result_assessment.pl/finite cases from gap-slot-record-selection-intake.json.gz; project Perl wrapper with explicit local output. No historical source swaps.`
 - **source:** [`docs/knowledge/gap-slot-record-selection-source-gap.md`](docs/knowledge/gap-slot-record-selection-source-gap.md)
@@ -14573,6 +14576,14 @@ _Julia capture-enabled LS observes selected end and preserves explicit cursor re
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.36.3 public Hcat four-route probe and exact Perl oracle source; active-edge-body-julia-intake.json.gz.`
 - **reverify:** `Recover probe_active_edge_julia_gap_ls_cursor.jl from active-edge-body-julia-intake.json.gz; run through tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error.`
 - **source:** [`docs/knowledge/julia-gap-early-ls-return-cursor-drift.md`](docs/knowledge/julia-gap-early-ls-return-cursor-drift.md)
+
+### julia-gap-slot-record-selection-guard
+_Julia selected gap and slot record fields reuse actual-kind operand guards_
+- **answers:** why does Julia gap_span selected String execute incompatible Array operands | which Julia owner classifies selected entry_slot fields | do Julia selected gap fields retain context errors and zero reader arity
+- **date:** 2026-10-30 · **status:** bounded Julia55.4 repaired/targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.55.4; gap-slot-record-julia-intake.json.gz retains unchanged94healthy/4RED to98GREEN plus computed25/static-call35 and actual source/producers/inputs.`
+- **reverify:** `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/gap_slot_record_selection_test.jl`
+- **source:** [`docs/knowledge/julia-gap-slot-record-selection-guard.md`](docs/knowledge/julia-gap-slot-record-selection-guard.md)
 
 ### julia-generated-source-family-plan
 _Julia generated-source v2 has exact ten-family authoritative cursor and structural dispatch_

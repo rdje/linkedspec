@@ -813,7 +813,7 @@ signatures. `gap_span(1)` and `entry_slot(extra:1)` raise the existing
 arguments. A trailing codeblock retains its compiler callable-contract rejection.
 Pure functions retain the earlier parser-state helper restriction.
 
-Perl, Rust and Dart support those fields directly:
+Perl, Rust, Dart and Julia support those fields directly:
 `gap_span()["start"].add(1)` gives the same `1`/`2` offsets and
 `entry_slot()["slot_id"].uppercase()` gives `"WORD"`. A selected zero stays
 defined: `entry_slot()["regex_index"].coalesce(99).add(1)` gives `1` for slot zero.
@@ -827,7 +827,7 @@ gap phases still raise their typed context error before a field default; they
 are not null gaps. Pure functions retain parser-context restrictions and should
 receive the record as an explicit argument. Rust and Dart preserve these values
 and guards across native, restored and generated-plan execution. Rebuild Rust
-applications with the updated runtime. Other backends are assessed independently. This adds no segmentation state, metadata field or format.
+applications with the updated runtime. Julia also preserves the target across native, reconstructed, generated-plan and same-process freshly loaded emitted Module execution. Safe Lua is assessed independently. This adds no segmentation state, metadata field or format.
 
 
 Migration is intentionally non-aliasing:

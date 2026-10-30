@@ -1,7 +1,7 @@
 # Ordinary gap and incoming-slot record field selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.16; family23.3.55.
-Status: bounded Perl/Rust/Dart records and Dart arity55.0 targeted-checked; Julia/safe Lua pending.
+Status: bounded Perl/Rust/Dart/Julia records and Dart arity55.0 targeted-checked; safe Lua pending.
 
 ## Established source authority
 
@@ -105,3 +105,11 @@ Dart already parses direct record fields, but the shared target returns[] and ex
 ## Dart zero-arity prerequisite55.0 repaired
 
 The four existing Dart gap/slot readers now reject surplus positional/keyword arguments through existing helper_arity_mismatch diagnostics before reading context or evaluating rejected operands. Registered-function resolution and function-state priority remain; trailing codeblocks retain their earlier callable_contract_rejected compile failure. Same9groups4RED/5healthy to9GREEN plus record-selection6/computed7 produce22 complete nonhidden/no-skip results, empty stderr and new-test fatal analysis/format. Full valid records/text/kinds/null slot/context failures remain. Only the validator/call are added, with all other interpreter/state/schema bytes exact. Earlier dispatcher-name prose is corrected to _evaluateCall; original packets/probes stay fixed. Actual inputs/results/producers retained in gap-reader-arity-dart-intake.json.gz. Independently assess Julia55.4 next; no full shape/context/portable admission.
+
+
+Julia55.4 independently repairs the four-route selected-kind gap with only the
+canonical zero-argument source role. [[julia-gap-slot-record-selection-guard]]
+owns unchanged94healthy/4RED to98GREEN, computed25/static-call35/strict compile,
+18 observations/exact runner and source bindings. Existing arity/context/function
+restrictions stay intact. gap-slot-record-julia-intake.json.gz retains actual
+inputs/producers/results; safe Lua55.5 independently follows.

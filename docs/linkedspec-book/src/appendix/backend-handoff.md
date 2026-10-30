@@ -2974,3 +2974,8 @@ function-state priority and trailing-body compiler rejection remain. An establis
 supplies the computed-read oracle; legacy named first-consumer policy stays
 qualified. Independent backend work preserves gap owner/phase/lifecycle/metadata/
 typed errors/function/deferred and generated-format authority.
+
+Julia also applies its existing selected-value operand guard to ordinary
+zero-argument gap/slot field reads across native/reconstructed/generated-plan/
+fresh same-process Module. Gap-context failures and function-state restrictions
+remain; no full context or portable admission follows.
