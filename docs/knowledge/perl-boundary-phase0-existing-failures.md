@@ -140,3 +140,8 @@ TYPE45.16 reconciles rename_key1 nested-presence source assertion/3 healthy ->
 production unchanged. Existing Perl collision stays backend-qualified under
 FUTURE5, not portable parity. Seven last-selected groups remain owned; drop_keys
 45.17 follows. No combined28/full-suite status is inferred.
+
+TYPE45.17 reconciles drop_keys1 nested-presence source assertion/5 healthy ->
+6 GREEN, retaining the embedded permanent18 and original expression/controls.
+Public native/fresh2 and unchanged production hold. Six last-selected groups
+remain owned; pick_keys45.18 follows. No combined28/full-suite status is inferred.

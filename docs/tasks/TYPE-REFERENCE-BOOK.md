@@ -9460,11 +9460,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.16 - reconcile rename_key flow checks with preserved Hash values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.17`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile retained drop_keys helper group under existing pure copy, scalar/spliced key and evaluation-order contracts; independently public-probe before source-oracle movement. Repair real outliers first.
   Schedule: P1 next; other6 last-selected failures remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact drop_keys group, public native/fresh pure/spliced/missing/source/key-order controls and direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named Hash/key distinctions, no population measurement.
+
+  Activation: clean `c27cb39afce0ee4c86ca057269c240a91d4bb438`; proof jobs terminal and brief empty; exact group `emit_context_lowers_drop_keys_value_helpers`.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Result: Exact drop_keys group reproduces1 nested-presence source-oracle RED/5 healthy, then6 GREEN. Known private owner is loaded locally; original nested helper expression now checks projected presence and preserved source. Other5 assertions remain exact, including the embedded permanent18 native/generated/FATAL-warning key/splice/order regression. Two public native/fresh cases retain missing-key behavior, false/null fields and source contents. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass. Actual source/RED-GREEN/public/direct producers and canonical inputs retained in perl-phase0-drop-keys-intake.json.gz; duplicate standalone18 gets no additional coverage credit. Book/fact/task/roadmaps/live/resume align; six last-selected groups remain, pick_keys45.18 next. No new key/domain/mutation/depth/host or peer/full-suite/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.17 - reconcile drop_keys flow checks with source preservation`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.18`
+  Status: `pending`
+  Goal: Reconcile retained pick_keys helper group against current per-key isolation/source snapshot/existence contracts; independently public-probe before source-oracle movement. Repair actual outliers first.
+  Schedule: P1 next; other5 last-selected failures remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact drop_keys group, public native/fresh pure/spliced/missing/source/key-order controls and direct consumer when warranted.
+  Planned focused checks: Exact pick_keys group, public native/fresh pure/missing/null/per-key/source controls and direct per-key normal when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
   Planned claim verification: none: Finite named Hash/key distinctions, no population measurement.
 
@@ -10629,7 +10649,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.17` | `pending` | Assess retained drop_keys checks against existing pure/spliced-key contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.18` | `pending` | Assess retained pick_keys checks against per-key isolation and source contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

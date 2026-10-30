@@ -909,6 +909,8 @@ other = {|| drop_key = "stage"; return("debug") };
 cleaned = drop_keys(meta,drop_key,other());
 return([cleaned,drop_key]);
 ```
+Presence tests can consume the projected Hash directly: `has_key(drop_keys(meta,"debug"),"kind")` checks `kind` after removal and leaves `meta` unchanged. Removing a missing key keeps the result contents unchanged. Unselected false and null fields retain their values: with `meta={"off":false,"nil":undef}`, `drop_keys(meta,"off")` returns `{"nil":null}` while the original still contains both fields.
+
 ## Flow helpers
 
 LinkedSpec supports structured control-flow helpers so rules do not have to fall back to raw Perl for common branching.

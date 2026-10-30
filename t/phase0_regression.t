@@ -37798,6 +37798,7 @@ SPEC
 };
 subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
     plan tests => 6;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('drop_keys(meta, "debug", "span")'),
@@ -37805,9 +37806,12 @@ subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
         'drop_keys(...) lowers working hashes into a pure filtered hashref expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(drop_keys(meta, "debug"), "kind")'),
-        'do { my $__ls_has_key = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = (do { my @__ls_evaluated_values = ("debug"); @__ls_evaluated_values }); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
-        'drop_keys(...) composes inside flow expressions through other hash/object helpers'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(drop_keys(meta, "debug"), "kind")') . ', {%meta}];',
+            q{my %meta = (kind => "token", debug => 1);},
+        ),
+        q#{"value":[1,{"debug":1,"kind":"token"}],"warnings":[]}#,
+        'drop_keys composes with flow presence and preserves its source'
     );
     is(
         evaluate_lowered_json(

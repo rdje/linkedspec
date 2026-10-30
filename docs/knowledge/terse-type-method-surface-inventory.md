@@ -85,3 +85,10 @@ Book proof reuse: a historical renderer prepended its own directory and caused
 document to resolve to its older module. Literal22 retains the pre-epoch setup
 failure without product RED credit; preload local context and restore sys.path
 in finally when importing only pure render helpers.
+
+TYPE45.17 reconciles drop_keys1 nested-presence source oracle/5 healthy ->
+6 GREEN. Original expression/healthy assertions and embedded permanent18
+invocation remain exact; public native/fresh2 preserve missing keys, false/null
+fields and source contents. Known private-owner require is local. Production
+unchanged; no new key/splice/snapshot/domain/depth or general host policy.
+Actual inputs/producers retained in perl-phase0-drop-keys-intake.json.gz.
