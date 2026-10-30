@@ -9358,13 +9358,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2 - align String receiver checks with implemented result flow`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.12`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile the retained value-layer emptiness group with current helper input/result/actual-kind contracts; public-probe native/fresh independent cases and exact source expectations first. Repair any actual outlier before oracle movement.
   Schedule: P1 immediately next; other11 last-selected failed groups remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact emptiness group, public original/empty/nonempty/scalar/container/default controls and direct current consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after repairs/registration/20.1 and other prerequisites.
+  Claim verification: none: Finite named helper/value distinctions, no population measurement.
+
+  Activation: clean `57297c16dddb8991ab46c636bac86b9a2fbd8de3`; no proof jobs and brief empty.
+  - [x] **REPRODUCE / ISSUE**: Freeze actual isolated group outcomes, distinguish private-owner cold setup from semantic source/value failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use current typed emptiness/source/value contracts and precise helper producers, not old printed-source shape.
+  - [x] **FIX**: Repair any actual producer outlier or bounded stale oracle only after independent public probes.
+  - [x] **ADDRESSED (verified)**: Original expressions and semantic flag/source controls pass; preserve healthy Hash return assertion.
+  - [x] **NO REGRESSION**: Run direct expression consumer and public native/fresh empty/nonempty/inverse/data/snapshot controls; no production movement for oracle-only repair.
+  - [x] **LOCKSTEP**: Actual source/evidence/task/book/current docs/resume agree; broader FlowExpr/host isolation stays SESSION16/17.
+
+  Result: Exact emptiness group reproduces3 source-oracle RED/1 healthy assertion after explicit local private-owner loading, then4 GREEN. Original3 lowered expressions now check projected empty/nonempty and flow truth flags plus source preservation; original healthy Hash payload assertion stays exact. Five independent public native/fresh cases preserve filled/absent-key projections, empty kinds/inverses, String0/Number0/false data and once-only1!/SA snapshot before later mutation. Direct expression11/syntax/book/map/history/manual checks pass; all production unchanged and528 other prior input hashes exact. Cold no-tests255 is retained with no semantic RED credit. Actual sources/RED-GREEN/producers/authority inputs retained in perl-phase0-emptiness-intake.json.gz. No new producer/domain/Boolean/FlowExpr/host-isolation policy or peer/full-suite/admission/push claim. Broader SESSION16/17 remain open. Book/fact/task/roadmaps/live/resume align; eleven last-selected failed groups remain, has_key45.13 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.12 - reconcile emptiness helper checks with actual values`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.13`
+  Status: `pending`
+  Goal: Reconcile only retained has_key helper group under current String-key existence and actual-kind contracts; independently public-probe filled/missing/null-valued fields, projections and sources before oracle or producer movement.
+  Schedule: P1 next; other10 last-selected failures remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact emptiness group, public original/empty/nonempty/scalar/container/default controls and direct current consumer when warranted.
-  Planned canonical trigger: Full23.4/final clean push after repairs/registration/20.1 and other prerequisites.
-  Planned claim verification: none: Finite named helper/value distinctions, no population measurement.
+  Planned focused checks: Exact has_key assertions, public native/fresh existence/value/kind/source controls and direct consumer when warranted.
+  Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Planned claim verification: none: Finite named existence/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10527,7 +10547,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` | `pending` | Assess retained emptiness helper failures under existing value/result authority. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.13` | `pending` | Assess retained has_key helper failures under current key-existence authority. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

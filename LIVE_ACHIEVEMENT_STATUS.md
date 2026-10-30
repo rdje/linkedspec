@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
+Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
 
 ## Latest Completed Slice
 
-Exact String group reproduces3 RED/15 healthy after the producer repair, then18 GREEN. Reconcile literal substring/uppercase source spelling to actual BCD, obsolete length/trim stop to initialized result3, and old runtime null/null to[3,"1"] under accepted Length/predicate/scalar result contracts. Original two runtime DSL sources/other15 assertions stay exact; all Perl production remains byte-identical to activation. Child1 qualified public native/fresh String6 evidence is reused with unchanged source/producer inputs, not rerun or promoted. Length/trim paired flags remain dual IOK/POK on Perl5.34.1; no new strict selector-kind or universal null policy. Actual test/RED-GREEN/producers/contracts/prior public source evidence retained in perl-phase0-string-continuation-intake.json.gz. Book example and adjacent stale numeric-terminal overview align with existing authority. Syntax/book/map/history/manual checks pass;528 other prior input hashes unchanged. Parent45.11 bounded producer/oracle work closes; twelve last-selected groups remain owned, emptiness45.12 next. No full-suite/peer/admission/push claim.
+Exact emptiness group reproduces3 source-oracle RED/1 healthy assertion after explicit local private-owner loading, then4 GREEN. Original3 lowered expressions now check projected empty/nonempty and flow truth flags plus source preservation; original healthy Hash payload assertion stays exact. Five independent public native/fresh cases preserve filled/absent-key projections, empty kinds/inverses, String0/Number0/false data and once-only1!/SA snapshot before later mutation. Direct expression11/syntax/book/map/history/manual checks pass; all production unchanged and528 other prior input hashes exact. Cold no-tests255 is retained with no semantic RED credit. Actual sources/RED-GREEN/producers/authority inputs retained in perl-phase0-emptiness-intake.json.gz. No new producer/domain/Boolean/FlowExpr/host-isolation policy or peer/full-suite/admission/push claim. Broader SESSION16/17 remain open. Book/fact/task/roadmaps/live/resume align; eleven last-selected failed groups remain, has_key45.13 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.12 from clean String18 reconciliation. Assess only emit_context_lowers_value_layer_emptiness_helpers against current emptiness result/input authority, actual native/fresh inputs and exact RED assertions; fix producer outliers before obsolete source checks. Other11 last-selected groups remain parent45-owned. Focused check/commit each slice;20.1/registration23.4.1 and other canonical prerequisites remain before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.13 from clean emptiness reconciliation. Assess only emit_context_lowers_has_key_value_helpers under existing key-existence/actual-kind contracts with public source/native/fresh distinctions, including null-valued fields versus missing keys. Resolve actual outliers before obsolete source assertions; other10 current failed names stay parent45-owned. Focused check/commit; no routine full Phase0, canonical prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` — Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` — String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1` — sorted_values scalar host leak repaired;15 seeded cases/Hash14/String6; original String18 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.10` — Hash chain14/six native-fresh controls align with approved null copy; String returned-type45.11 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.12 from clean String18 reconciliation. 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.0` — Exact current frozen28 replay retained without source swaps; lazy-owner callback child45.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2` — Perl blind scalar masks removed with nested scopes/diagnostics preserved; exact Phase0 owner45 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1` — Perl OR action loading masks removed; both declaration normals now strict, empty-blind scalar owner next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1` — Perl single-action AND loading masks removed; independently owned OR loading masks next before scalar/Phase0 owners.
 
 ## History
 

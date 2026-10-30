@@ -1332,6 +1332,8 @@ has_items = is_nonempty(items);
 no_public_meta = is_empty(pick_keys(meta, "kind", "source"));
 ```
 
+Emptiness tests consume the yielded value: `is_empty(sorted_values(pick_keys(meta,"kind")))` is true when the projection has no values. Both projection and test leave `meta` unchanged. Empty text, Arrays and Hashes are empty; numeric `0`, String `"0"` and `false` are data. On the recorded Perl native/fresh routes, `return([is_empty([]),is_nonempty({}),is_empty("0"),is_nonempty(false)])` yields `[1,0,0,1]`. A computed source runs once, and its predicate result is captured before a later consumer changes that source. These value rules do not add a new normalization policy for unrelated condition paths.
+
 Rationale:
 
 - `coalesce(...)` keeps `0`, `""`, empty arrays, and empty hashes because they are defined.

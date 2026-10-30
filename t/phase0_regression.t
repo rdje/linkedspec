@@ -36854,21 +36854,28 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
 };
 subtest 'emit_context_lowers_value_layer_emptiness_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_empty(sorted_values(pick_keys(meta, "kind", "source")))'),
-        'do { my $__ls_is_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_is_empty_array) || !@{$__ls_is_empty_array}) ? 1 : 0 }',
-        'is_empty(...) lowers projected array expressions into value-layer emptiness flags'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_empty(sorted_values(pick_keys(meta, "kind", "source")))') . ', {%meta}];'
+        ),
+        q#{"value":[0,{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'projected Array emptiness consumes values and preserves source Hash'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_nonempty(pick_keys(drop_keys(meta, "debug"), "kind", "source"))'),
-        'do { my $__ls_is_nonempty_empty = do { my $__ls_is_empty_hash = do { my $__ls_pick_source = do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = (do { my @__ls_evaluated_values = ("debug"); @__ls_evaluated_values }); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_is_empty_hash) || !scalar(keys %{$__ls_is_empty_hash})) ? 1 : 0 }; $__ls_is_nonempty_empty ? 0 : 1 }',
-        'is_nonempty(...) lowers projected hash expressions into value-layer nonempty flags'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('is_nonempty(pick_keys(drop_keys(meta, "debug"), "kind", "source"))') . ', {%meta}];'
+        ),
+        q#{"value":[1,{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'projected Hash nonemptiness consumes values and preserves source Hash'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(sorted_values(pick_keys(meta, "kind", "source")))'),
-        'do { my $__ls_empty_array = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; (!defined($__ls_empty_array) || !@{$__ls_empty_array}) }',
-        'existing flow lowering for is_empty(...) remains stable while value-layer support is added'
+        evaluate_lowered_json(
+            'return [(' . LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(sorted_values(pick_keys(meta, "kind", "source")))') . ') ? 1 : 0, {%meta}];'
+        ),
+        q#{"value":[0,{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'flow emptiness retains projected truth and preserves source Hash'
     );
     is(
         evaluate_lowered_json(
