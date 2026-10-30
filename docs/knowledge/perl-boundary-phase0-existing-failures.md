@@ -9,7 +9,7 @@ date: 2026-10-30
 status: current selected failures owned by TYPE-REFERENCE-BOOK.1.2.23.3.45
 tags: [perl, phase0, regression, ownership]
 evidence: "TYPE37 perl-emitted-boundary-catalog-intake.json.gz retains full primary run, exact selected28 names, actual baseline/candidate TAP/stderr, canonical snapshots, producer and comparison receipt."
-reverify: "Recover replay_phase0_after_pick.py and probe_phase0_current_selected.pl from perl-phase0-after-pick-intake.json.gz; run bash tools/run_python_project_data.sh .linkedspec-data/verification/replay_phase0_after_pick.py. Never run the historical TYPE37 source-swap replay or --restore against current source."
+reverify: "Recover replay_phase0_after_repairs.py and probe_phase0_current_selected.pl plus their exact inputs from perl-phase0-after-repairs-intake.json.gz at the recorded activation boundary. For a newer current replay, own a new activation and unused output prefix; never install historical production snapshots or run the TYPE37 source-swap replay/--restore."
 ---
 
 The historical TYPE37 additional standard Phase0 run fails28/1035 groups. The exact28 failing groups
@@ -177,3 +177,15 @@ original runtime cases and scope/arity/readiness controls stay exact. Every
 retained failure now has scoped repair evidence at its recorded boundary; a
 fresh combined current-only frozen28 replay is owned45.23. No current combined
 28/full-suite status or broader context/peer admission is inferred yet.
+
+TYPE45.23 current-only reassessment at eb834a3de0807ae633f3fb92a7f4406ccc05e90f
+completes frozen28 with27PASS/1FAIL, exit1, complete29-result TAP and538 input
+hashes/HEAD unchanged. Original universe/compressed primary diagnostic identities
+and actual selected direct plans are checked; direct slots are not a primitive
+assertion population. The remaining method-contract group has slot71 RED/78
+healthy: its exact source expects the old defined-only sorted_values guard,
+while45.11.1 emits the reference check. Immediate45.24 owns independent public
+value/inverse controls and only the established dependent oracle repair. No
+runtime defect, full Phase0 state, parent45 closeout or portable admission is
+inferred. Actual producer/inputs/TAP/stderr are retained in
+perl-phase0-after-repairs-intake.json.gz.
