@@ -11650,7 +11650,7 @@ _Capability exclusion freshness is schema-v2 governed and public-closed_
 ### capture-advance-text-method-source-gap
 _Advancing anonymous capture String sources need early ordinary value lowering_
 - **answers:** can capture_take compose directly with coalesce and String methods | why does capture_take_rest coalesce call an undefined host function | does capture_take_rest move the live cursor or only the capture origin | which task owns advancing capture String result composition
-- **date:** 2026-10-30 · **status:** bounded51 target frozen; independent implementations pending
+- **date:** 2026-10-30 · **status:** bounded Perl51.1 repaired/targeted-checked; independent peers pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.12; capture-advance-text-selection-intake.json.gz retains nine source distinctions, six healthy/three direct failures and independent bound/direct effect target twins.`
 - **reverify:** `Recover probe_capture_advance_assessment.pl and finite cases from capture-advance-text-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps.`
 - **source:** [`docs/knowledge/capture-advance-text-method-source-gap.md`](docs/knowledge/capture-advance-text-method-source-gap.md)

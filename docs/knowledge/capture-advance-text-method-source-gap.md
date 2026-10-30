@@ -7,7 +7,7 @@ answers:
   - "does capture_take_rest move the live cursor or only the capture origin"
   - "which task owns advancing capture String result composition"
 date: 2026-10-30
-status: bounded51 target frozen; independent implementations pending
+status: bounded Perl51.1 repaired/targeted-checked; independent peers pending
 tags: [perl, capture, string, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.12; capture-advance-text-selection-intake.json.gz retains nine source distinctions, six healthy/three direct failures and independent bound/direct effect target twins."
 reverify: "Recover probe_capture_advance_assessment.pl and finite cases from capture-advance-text-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps."
@@ -27,3 +27,13 @@ and current origin/live-cursor separation; its direct twin fails compilation.
 Keep native tags/absence/advance/name-overload/function/callback/preflight/root
 policies. No new helper/alias/coordinate or global scalar/deferred/schema grant.
 Advancing Number counterparts and complete23.4 admission remain separate.
+
+Perl51.1 now shares original three native guarded bodies with early ordinary
+value lowering after the function fence. Three zero-argument and named overload
+printed bodies stay exact. Initial13 has7 RED/6 healthy; separate added Number
+bridge1 RED, then final14 GREEN. Native/fresh effects/once/empty/missing/String0/
+normalized guards/named overload/function fences and readonly12/reset2 hold.
+Old emitted module still fails host coalesce: regenerate affected modules. Actual
+source/test epochs/producers/inputs are retained in
+capture-advance-text-perl-intake.json.gz. No full context/domain/portable or
+vocabulary grant; Rust51.2 independently follows and registration23.4.1 stays open.

@@ -6318,6 +6318,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $method_call->{method},
   );
  }
+ # Materialize an advancing String once before compatible outer links.
+ # Named mark overloads retain their separate argument/effect owner.
+ if ($method_call && $trimmed =~ /\A(?:capture_take(?:_until_cursor|_rest)?)\s*\(\s*\)\z/o) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_advancing_capture_boundary_text_value_expr',
+   $method_call->{method},
+  );
+ }
  # Preserve current capture coordinates, absence rules and operation tags;
  # expose the existing readonly Number before outer fluent operands are lowered.
  if ($method_call && $trimmed =~ /\A(?:capture_slice_(?:len|pos|line|col|until_cursor_len|length)|capture_len_from_rule_start|capture_rest_(?:len|length))\s*\(\s*\)\z/o) {

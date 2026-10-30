@@ -1,7 +1,7 @@
 # Anonymous advancing capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.12; implementation family23.3.51.
-Status: bounded target frozen; independent implementations pending.
+Status: Perl51.1 repaired/targeted-checked; independent peers pending.
 
 ## Accepted sources and actual distinction
 
@@ -62,3 +62,18 @@ separate; focused compile/quick checks/docs/commit per leaf continue.
 Exact source/producer/native/fresh/substitution/metadata/diagnostics and bound/
 direct target twins are retained in capture-advance-text-selection-intake.json.gz.
 No production moves in this selection leaf.
+
+## Bounded Perl51.1
+
+Three original zero-argument native bodies now share one advancing-text factory
+with narrow early value lowering after the existing function fence. All three
+and the named capture_take(begin) printed bodies remain byte-identical. Initial
+normal13 has7 RED/6 healthy; one additional Number bridge is separately RED, then
+final14 pass with unchanged oracles/fixture. Native/fresh effects, distinct origin
+and live cursor, empty/missing/once/snapshot/normalized-skip/String0/named/function
+controls hold; readonly12/selected reset2 and module syntax pass. An old emitted
+module still fails after the compiler repair: regenerate affected modules. Exact
+inputs/actual producer/source epochs/results are retained in
+capture-advance-text-perl-intake.json.gz. No new vocabulary/effect/preflight/
+format policy or full23.4 claim. Normal registration23.4.1 and independent
+Rust51.2 remain separate.
