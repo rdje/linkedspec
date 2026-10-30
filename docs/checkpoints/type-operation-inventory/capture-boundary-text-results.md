@@ -1,7 +1,7 @@
 # Readonly anonymous capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.11; implementation family23.3.50.
-Status: Perl50.1 repaired/Rust50.2 and Dart50.3 compatible and targeted-checked; Julia/safe Lua pending. No backend admission.
+Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending. No backend admission.
 
 ## Existing authority and actual gap
 
@@ -106,3 +106,16 @@ retains source-specific typed function-state errors. Actual JSON reporter checks
 every nonhidden test result/identity/no-skip plus final completion. Exact source/
 input/producer/output are retained in capture-boundary-text-dart-intake.json.gz.
 No isolated emitted/complete context/portable admission; Julia50.4 follows.
+
+## Bounded Julia50.4
+
+Julia independently already supports the unchanged target. Strict new60 plus
+Number75/reset70 assertions pass native/reconstructed SpecFile/generated-plan/
+fresh emitted Module under --depwarn=error with empty stderr and no runtime edit.
+All four native/default sources, empty/missing/reversed/String0, snapshots and
+normalized guards hold. Direct take[] evaluates T; with returns Array/OK. Literal
+callback reads caller state and function/registered callback errors stay specific.
+One exact runner include registers the normal, preserving every other runner
+byte. Actual twelve observations and complete summaries/input bindings are in
+capture-boundary-text-julia-intake.json.gz. Same-process fresh Module is not
+isolated package proof; full23.4 and safe Lua50.5 remain independent.

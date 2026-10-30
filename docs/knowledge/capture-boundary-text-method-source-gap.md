@@ -7,7 +7,7 @@ answers:
   - "which task owns readonly capture String result composition"
   - "is capture_from_rule_start an accepted compatibility alias"
 date: 2026-10-30
-status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending
+status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
 tags: [perl, capture, string, fluent, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.11; capture-boundary-text-selection-intake.json.gz retains ten actual source/readiness/result controls, bound/direct nine-coordinate twins and initial transport epoch."
 reverify: "Recover probe_capture_string_assessment.pl and finite case inputs from capture-boundary-text-selection-intake.json.gz; run through tools/project_data_run.sh. Writes only the explicitly supplied project-local diagnostic output; no historical source swaps."
@@ -54,3 +54,8 @@ Dart50.3 independently already supports frozen50: new6/Number6/reset3 pass
 native/restored SpecFile/generated-plan, with fatal analysis/format and unchanged
 runtime. [[capture-boundary-text-dart-compatibility]] retains exact proof limits;
 independent Julia50.4 follows.
+
+Julia50.4 independently already supports frozen50: strict new60/Number75/reset70
+pass native/reconstructed/plan/fresh Module with runtime unchanged and normal
+registered. [[capture-boundary-text-julia-compatibility]] retains exact contexts
+and limits; safe installed Lua50.5 independently follows.

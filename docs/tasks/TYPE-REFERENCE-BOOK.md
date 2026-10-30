@@ -10833,7 +10833,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1 - preserve the invoking rule namespace in Rust callable bodies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50`
-  Status: `in_progress` / bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending
+  Status: `in_progress` / bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
   Goal: Existing readonly anonymous String getters and compatibility source compose through ordinary compatible methods without mandatory temporary bindings.
   Authority: docs/checkpoints/type-operation-inventory/capture-boundary-text-results.md and prospective capture_boundary_text_values.spec/json. Preserve getter/tag/coordinate/absence/function/deferred/callback/root/shape and generated-format boundaries; full23.4 remains separate.
 
@@ -10903,14 +10903,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.3 - preserve Dart readonly capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete Julia ordinary readonly capture String method composition under frozen50.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.3; capture-boundary-text-results.md and shared prospective fixture.
   Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
-  Planned verification tier: focused.
-  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
-  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
-  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+  Verification tier: `focused`
+  Focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+  Activation: clean `f702efa565d851e9890b216893a9453480f16d96`; prior jobs terminal/brief0. Julia public route/strict-kind/runner/Number/reset interfaces and frozen50 read. Own new self-contained normal/registration and only confirmed ordinary text gaps; no inference from peers or full runner.
+  - [x] **REPRODUCE / ISSUE**: Independent Julia strict source/value/context evidence under frozen50.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent Julia strict source/value/context evidence under frozen50.
+  - [x] **FIX**: Independent Julia strict source/value/context evidence under frozen50.
+  - [x] **ADDRESSED (verified)**: Independent Julia strict source/value/context evidence under frozen50.
+  - [x] **NO REGRESSION**: Independent Julia strict source/value/context evidence under frozen50.
+  - [x] **LOCKSTEP**: Independent Julia strict source/value/context evidence under frozen50.
+
+  Result: Julia independently already supports frozen readonly capture String50: strict new60/nearest Number75/reset70 assertions pass native/reconstructed SpecFile/generated-plan/fresh emitted Module with runtime unchanged and no invented RED. Shared9/native four/default/String-Array-signed-Number/empty/missing/reversed/String0, snapshot-before-reset and normalized suppression retain kinds and values. Existing direct take[]/T and withOK, literal callback caller state and specific pure-function/registered callback errors remain Julia policies. Strict --depwarn=error execution completes with empty stderr. New self-contained normal is registered by one exact include; all other runner bytes and 164 bound inputs stay exact. Actual twelve source observations/seven success/five fence controls and complete test summaries are retained with producers/inputs in capture-boundary-text-julia-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. Fresh Module is same-process source loading, not isolated package proof; no full runner/context/domain/portable admission or vocabulary change. Safe Lua50.5 independently next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.4 - preserve Julia readonly capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.5`
   Status: `pending`
@@ -10928,7 +10939,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` | `pending` | Independently assess Julia readonly capture String composition against frozen50. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.5` | `pending` | Independently assess readonly capture String composition on installed safe Lua hosts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

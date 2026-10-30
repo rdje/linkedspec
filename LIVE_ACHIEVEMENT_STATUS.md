@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart capture String6/Number6/reset3 pass without runtime change; independent Julia50.4 next.
+Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
 
 ## Latest Completed Slice
 
-Dart independently already supports frozen capture String50: focused15 tests pass, comprising new6/nearest Number6/reset3, on native/restored SpecFile/generated-plan routes. Shared9 and four native/default sources, String-Array-signed-Number transitions, empty/missing/reversed/String0, snapshot-before-reset and normalized operand suppression pass without runtime changes or invented RED. Existing direct take[]/T, withOK and literal callback caller context remain Dart policies; invocation inside a function retains source-specific RuntimeInterpreterException/GeneratedSourceException fences. Fatal new-test analysis and nonwriting format check pass. 192 existing bound input hashes stay exact. Actual JSON reporter validates complete nonhidden/no-skip test identities/results rather than trusting only the final success flag; producer/test/inputs/output retained in capture-boundary-text-dart-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. No SDK/format debt repair, isolated emitted/full-suite/portable admission or vocabulary change; independent Julia50.4 follows.
+Julia independently already supports frozen readonly capture String50: strict new60/nearest Number75/reset70 assertions pass native/reconstructed SpecFile/generated-plan/fresh emitted Module with runtime unchanged and no invented RED. Shared9/native four/default/String-Array-signed-Number/empty/missing/reversed/String0, snapshot-before-reset and normalized suppression retain kinds and values. Existing direct take[]/T and withOK, literal callback caller state and specific pure-function/registered callback errors remain Julia policies. Strict --depwarn=error execution completes with empty stderr. New self-contained normal is registered by one exact include; all other runner bytes and 164 bound inputs stay exact. Actual twelve source observations/seven success/five fence controls and complete test summaries are retained with producers/inputs in capture-boundary-text-julia-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. Fresh Module is same-process source loading, not isolated package proof; no full runner/context/domain/portable admission or vocabulary change. Safe Lua50.5 independently next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.4 independently from clean Dart50.3. Read frozen capture-boundary-text-results.md/shared fixture and Julia Number/reset/getter/function/root policies. Assess native/reconstructed/generated-plan/fresh module baselines before production; repair only actual ordinary readonly capture String gaps and preserve healthy source/empty/snapshot/callback/error/shape behavior. Run strict compilation and quick targeted checks, register normal in Julia runner, update docs/commit, then safe Lua50.5. No inference from Perl/peers or routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.5 independently from clean Julia50.4. Read frozen capture-boundary-text-results.md/shared fixture, safe PUC5.5.1/LuaJIT wrapper/normal/runner and existing getter/result/function/first-consumer/callback policies. Use only safe authored literal fixtures/loadfile; establish native/plan/fresh baselines on each installed host before production. Repair actual ordinary text gaps only; keep healthy host distinctions. Focused strict JSON/kind/compile checks/docs/registration/commit; then next useful fluent feature selection. No unsafe full runner, declared5.4 or exhaustive matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` — Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` — Dart capture String6/Number6/reset3 pass without runtime change; independent Julia50.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.2` — Rust capture String6/Number6/reset3 pass without runtime change; independent Dart50.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.1` — Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.4 independently from clean Dart50.3. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.17` — drop_keys6 with embedded18/public2 pass; original keys/source contracts retained; pick_keys next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.16` — rename_key4/public3 preserve values/source and qualified collision; drop_keys next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.15` — set_key4/public2/direct3 pass with staged operand authority; rename_key next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.14` — Hash-snapshot4/public5 pass; source/value policies retained; set_key checks next.
 
 ## History
 
