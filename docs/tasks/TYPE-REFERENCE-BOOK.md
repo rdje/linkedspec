@@ -9480,13 +9480,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.17 - reconcile drop_keys flow checks with source preservation`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.18`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile retained pick_keys helper group against current per-key isolation/source snapshot/existence contracts; independently public-probe before source-oracle movement. Repair actual outliers first.
   Schedule: P1 next; other5 last-selected failures remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact pick_keys group, public native/fresh pure/missing/null/per-key/source controls and direct per-key normal when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named Hash/key distinctions, no population measurement.
+
+  Activation: clean `11eeb07a45cda9340d8a80dc12d02d0ddbd2c021`; proof jobs terminal and brief empty; exact group `emit_context_lowers_pick_keys_value_helpers`.
+  Diagnostic producer defect owned immediately: Reusing slug pick-keys overwrote three local preparation outputs from45.3 while the selector requested pick-keys-oracle and exited2 for a missing names file. Committed45.3 evidence remains intact. Move the new18 preparation inputs to the unique oracle prefix, restore any exact old entries from the verified committed packet, retain initial setup diagnostics without semantic RED credit, and guard the generic activation producer against existing outputs before further writes. No production source changed; this repair is mandatory before continuing/closing18.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Diagnostic repair verified: All three earlier inputs restored to their retained hashes; archive unchanged. Three occupied-output fixtures preserve every original file with the current guard while the actual prior producer overwrites the sentinel. Project-local temporary fixtures/Git status-HEAD simulation only. Setup2 is retained separately; producer guard/repair is part of this leaf, not a deferred complaint.
+  Result: Exact pick_keys group reproduces1 nested-presence source-oracle RED/3 healthy, then4 GREEN. Original expression now checks projected presence/source preservation; other3 assertions remain exact. Public native/fresh2 and direct per-key8 pass, retaining distinct/missing keys, false/null fields, source and operand isolation. Production unchanged;528 other prior input hashes exact. An activation-prefix collision is repaired: three local old inputs restored byte-exact from unchanged committed45.3 archive, new18 inputs uniquely named, and the actual producer now rejects occupied outputs before writes. Three isolated fixtures distinguish blocked/current from actual historical overwrite behavior; only Git status/HEAD are simulated, no nested repository or source swap. Initial missing-name selector2 gets no semantic RED credit. Syntax/book/map/history/manual checks pass; actual producer/source/RED-GREEN/restore/guard/archive inputs retained in perl-phase0-pick-keys-oracle-intake.json.gz. Book/fact/task/roadmaps/live/resume align; five last-selected groups remain, split_tagged_records45.19 next. No new key/domain/depth/host or peer/full-suite/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.18 - reconcile pick_keys flow checks and protect diagnostic inputs`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.19`
+  Status: `pending`
+  Goal: Reconcile retained split_tagged_records helper group under existing tagged-row/parser contracts; public source/native/fresh examples before source-oracle movement. Repair actual outliers first.
+  Schedule: P1 next; other4 last-selected failures remain parent45/45.4 receipt-owned. Unique diagnostic prefix split-tagged-oracle required; actual activation guard prevents reuse.
   Planned verification tier: focused.
-  Planned focused checks: Exact pick_keys group, public native/fresh pure/missing/null/per-key/source controls and direct per-key normal when warranted.
+  Planned focused checks: Exact tagged-record helper group and public native/fresh row/value/source controls; direct dependent check when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named Hash/key distinctions, no population measurement.
+  Planned claim verification: none: Finite named parser/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10649,7 +10671,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.18` | `pending` | Assess retained pick_keys checks against per-key isolation and source contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.19` | `pending` | Assess retained tagged-record helper checks against current public value contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-drop_keys6 with embedded18/public2 pass; original keys/source contracts retained; pick_keys next.
+pick_keys4/public2/per-key8 and three diagnostic guard controls pass; split_tagged_records next.
 
 ## Latest Completed Slice
 
-Exact drop_keys group reproduces1 nested-presence source-oracle RED/5 healthy, then6 GREEN. Known private owner is loaded locally; original nested helper expression now checks projected presence and preserved source. Other5 assertions remain exact, including the embedded permanent18 native/generated/FATAL-warning key/splice/order regression. Two public native/fresh cases retain missing-key behavior, false/null fields and source contents. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass. Actual source/RED-GREEN/public/direct producers and canonical inputs retained in perl-phase0-drop-keys-intake.json.gz; duplicate standalone18 gets no additional coverage credit. Book/fact/task/roadmaps/live/resume align; six last-selected groups remain, pick_keys45.18 next. No new key/domain/mutation/depth/host or peer/full-suite/admission/push claim.
+Exact pick_keys group reproduces1 nested-presence source-oracle RED/3 healthy, then4 GREEN. Original expression now checks projected presence/source preservation; other3 assertions remain exact. Public native/fresh2 and direct per-key8 pass, retaining distinct/missing keys, false/null fields, source and operand isolation. Production unchanged;528 other prior input hashes exact. An activation-prefix collision is repaired: three local old inputs restored byte-exact from unchanged committed45.3 archive, new18 inputs uniquely named, and the actual producer now rejects occupied outputs before writes. Three isolated fixtures distinguish blocked/current from actual historical overwrite behavior; only Git status/HEAD are simulated, no nested repository or source swap. Initial missing-name selector2 gets no semantic RED credit. Syntax/book/map/history/manual checks pass; actual producer/source/RED-GREEN/restore/guard/archive inputs retained in perl-phase0-pick-keys-oracle-intake.json.gz. Book/fact/task/roadmaps/live/resume align; five last-selected groups remain, split_tagged_records45.19 next. No new key/domain/depth/host or peer/full-suite/admission/push claim.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.18 from clean drop_keys reconciliation. Assess only emit_context_lowers_pick_keys_value_helpers against current per-key isolation, pure source snapshots, missing/present-null field and key-order contracts. Public native/fresh controls before obsolete source changes; direct per-key normal when warranted. Other5 last-selected groups stay parent45-owned. Known private owner loaded locally; focused check/commit; canonical prerequisites remain before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.19 from clean pick_keys reconciliation. Use a unique split-tagged-oracle diagnostic prefix; preparation now guards occupied outputs. Assess only emit_context_lowers_split_tagged_records_helper against existing parser/tagged-row contracts with public native/fresh values before obsolete source changes. Other4 selected failures remain parent45-owned. Focused compile/quick checks/commit; canonical prerequisites stay before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.18` — pick_keys4/public2/per-key8 and three diagnostic guard controls pass; split_tagged_records next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.17` — drop_keys6 with embedded18/public2 pass; original keys/source contracts retained; pick_keys next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.16` — rename_key4/public3 preserve values/source and qualified collision; drop_keys next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.15` — set_key4/public2/direct3 pass with staged operand authority; rename_key next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.18 from clean drop_keys reconciliation.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.6` — Collection pipeline26/direct6 pass with stronger source checks; no product change; nonempty-default45.7 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.5` — Nested Array oracle reconciled with six native/fresh controls;22 assertions pass; collection pipeline45.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.4` — Frozen28 now8PASS/20FAIL with530 inputs unchanged; exact nested Array result45.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.3` — Perl pick_keys operand reuse repaired;51 normal groups/original map5 pass; frozen28 reassessment45.4 next.
 
 ## History
 

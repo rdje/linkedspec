@@ -145,3 +145,9 @@ TYPE45.17 reconciles drop_keys1 nested-presence source assertion/5 healthy ->
 6 GREEN, retaining the embedded permanent18 and original expression/controls.
 Public native/fresh2 and unchanged production hold. Six last-selected groups
 remain owned; pick_keys45.18 follows. No combined28/full-suite status is inferred.
+
+TYPE45.18 reconciles pick_keys1 nested-presence source assertion/3 healthy ->
+4 GREEN, with public native/fresh2/per-key8 and production unchanged. Diagnostic
+prefix repair restores earlier local inputs and verifies three no-overwrite
+controls. Five last-selected groups remain owned; tagged-record helper45.19
+follows. No combined28/full-suite status is inferred.

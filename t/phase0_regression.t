@@ -37923,6 +37923,7 @@ SPEC
 };
 subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('pick_keys(meta, "kind", "source")'),
@@ -37930,9 +37931,11 @@ subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
         'pick_keys(...) lowers working hashes into a pure projected hashref expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(pick_keys(meta, "kind"), "kind")'),
-        'do { my $__ls_has_key = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"kind"}) ? 1 : 0) : 0 }',
-        'pick_keys(...) composes inside flow expressions through other hash/object helpers'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(pick_keys(meta, "kind"), "kind")') . ', {%meta}];'
+        ),
+        q#{"value":[1,{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'pick_keys composes with flow presence and preserves its source'
     );
     is(
         evaluate_lowered_json(

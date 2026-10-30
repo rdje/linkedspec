@@ -1201,6 +1201,8 @@ Each `pick_keys` key belongs to that call and is evaluated in argument order. A 
 
 On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Array fallback: `sorted_values(3)`, `sorted_values("3")` and `sorted_values(length("abc"))` return `[]`, independently of unrelated host hashes. The source is evaluated once. Actual Hash values still project values by sorted keys: `sorted_values({"b":"B","a":"A"})` returns `["A","B"]`. Producer-specific guards retain their own policy: `"abc".length().copy().sorted_values()` returns null. This does not define a universal wrong-kind policy or resolve absent/legacy binding behavior in other collection helpers. Regenerate Perl parsers emitted before the scalar-isolation repair; older modules can still consult symbolic host hashes. Generated metadata and format v2 are unchanged.
 
+`pick_keys` uses field existence, so requested false and null fields are retained while missing fields are omitted. For example, with `meta={"off":false,"nil":undef,"other":1}`, `pick_keys(meta,"off","nil","missing")` returns `{"off":false,"nil":null}` and leaves `meta` unchanged. `has_key(pick_keys(meta,"nil"),"nil")` remains true even though that stored value is null.
+
 Examples:
 
 ```text

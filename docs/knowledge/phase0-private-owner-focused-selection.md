@@ -25,3 +25,12 @@ Do not globally preload owners in the generic selector, because groups testing
 cold startup or lazy loading must keep their intended initial conditions. Resolve
 only a selected group's real dependencies, preserving its original fixture and
 contract. No broad independence audit or universal test-setup repair is implied.
+
+TYPE45.18 additionally guards the project-local activation producer against
+existing diagnostic prefixes before writes. A reused pick-keys prefix overwrote
+three local old preparation inputs; committed evidence remained intact and all
+three were restored from its verified archive. New oracle inputs use a distinct
+prefix. Three isolated project-local fixtures retain actual historical overwrite
+RED and current no-write rejection, with only Git status/HEAD simulated. See
+perl-phase0-pick-keys-oracle-intake.json.gz; initial missing-name selector2 is not
+a semantic product failure.

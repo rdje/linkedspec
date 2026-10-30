@@ -39,3 +39,10 @@ Old emitted-source replay still has the original values; regenerate affected Per
 modules. Runtime refresh alone cannot replace their already lowered keys. Other
 frozen Phase0 failures remain owned45 and require fresh selected assessment after
 this shared producer repair; this card establishes no full-suite or peer status.
+
+TYPE45.18 reconciles only the old helper-group nested-presence source oracle:
+1RED/3healthy ->4 GREEN, preserving original expression/other3 assertions and
+production. Public native/fresh2/direct per-key8 retain actual key/source values
+and present false/null versus missing fields. Actual inputs/producers retained
+in perl-phase0-pick-keys-oracle-intake.json.gz; this does not replace45.3 producer
+repair or broaden copy/host/portable admission.
