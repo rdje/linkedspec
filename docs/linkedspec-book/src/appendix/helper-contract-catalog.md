@@ -552,8 +552,8 @@ dispatch rule.
 
 A completed append snapshot can be read on Perl with an explicit value binding:
 `saved = push(items, "tail"); saved.coalesce(undef)[-1].uppercase()` yields `"TAIL"`.
-Perl supports the direct result reads described below. Direct free-`push` fluent
-continuations and other-backend reads are being completed independently.
+Perl supports direct result reads and fluent continuations from these append
+snapshots. Other backends are assessed independently in the backend handoff.
 Perl also accepts direct Hash and nested Array/Hash
 payloads in value positions, for example `saved = push(items, {"name":"tail"})`.
 Payload value blocks keep local returns scoped, and later updates preserve the
@@ -578,13 +578,28 @@ updated snapshot. Further selectors retain each selected value's actual kind:
 `push(items, false)[-1].not()` returns true, and
 `push(items, {0})[-1].add(1)` returns `1`.
 
-For this direct-read form, the target is a bare working name and the call has
+For direct result composition, the target is a bare working name and the call has
 exactly two arguments. Use an explicit value block for a variable or numeric
 operand, for example `push(items, {payload})[-1]` or `push(items, {0})[-1]`.
 The all-bare and numeric-literal spellings retain their child-push disambiguation.
 Signed and nested reads, missing-path nulls and compatible continuations follow
 the ordinary read rules. Empty strings skip defined-only defaults. A source
 mutation error propagates before a default can replace a missing selection.
+
+Perl can also continue directly through compatible value methods:
+
+```text
+push(items, "tail").last().uppercase()          # "TAIL"
+push(items, "tail").copy().last().uppercase()   # "TAIL"
+push(items, [3,1]).last().sorted().last().add(4) # 7
+```
+
+Each call appends once. The chain receives the resulting snapshot before later
+consumer operands run. A selected Hash or Array uses its own method family;
+`with` bodies can return another kind for further reads or methods. For example,
+`push(items, "tail").with(){return(false)}.coalesce(true)` retains false.
+Copy, logical operations, defaults, local returns and function-local bindings keep
+their ordinary contracts. Source mutation failures propagate before consumers.
 
 ### `items += value`
 - **Signature**: `target += value: expr`

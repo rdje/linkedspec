@@ -4899,6 +4899,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
   if ($kind eq 'call') {
    my $push_value = _lower_aggregate_push_value_call($node, $deps);
    return $push_value if defined($push_value) && length($push_value);
+   # Typed prefixes also feed the existing logical/copy folding paths.
+   $push_value = _lower_push_statement($node->{source}, $deps)
+    if _ordinary_explicit_push_result_source($node);
+   return $push_value if defined($push_value) && length($push_value);
    my $logical_call = $lower_ast_logical_call_node->($node);
    return $logical_call if defined($logical_call) && length($logical_call);
    my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $node->{name});
@@ -5705,6 +5709,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $receiver_is_with_trailing_block
    || ($receiver->{kind} // '') eq 'value_access'
    || _ordinary_input_cursor_result_source($receiver)
+   || _ordinary_explicit_push_result_source($receiver)
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver

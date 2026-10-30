@@ -3044,8 +3044,10 @@ is now repaired through the complete existing typed push owner, retaining local
 returns, snapshots, kinds and function-local scope. Regenerate affected emitted
 Perl parsers. Bounded Perl direct reads58.1.1 now use the guarded explicit-value
 source role and current typed reads, preserving the ten-output subset and eight
-excluded AST/error forms. Direct fluent58.1.2 remains next: the original
-last/uppercase chain is ready yet invokes host uppercase. Qualified completed
-snapshots already yield the twelve target results. Each peer is assessed
+excluded AST/error forms. Fluent58.1.2 now initializes the same guarded snapshots
+through current value dispatch; full twelve-result native/fresh execution passes.
+Previously healthy copy/logical/with/transitions remain, with source-once/local
+returns/function scope preserved. Regenerate affected emitted Perl parsers.
+Independent Rust58.2 is next; each peer is assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.

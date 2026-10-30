@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: P1 Perl producer58.0 and bounded Perl reads58.1.1 targeted-checked; fluent and independent peers pending.
+Status: Bounded Perl58 producer/read/fluent children targeted-checked; independent peers/full admission pending.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -99,3 +99,22 @@ Final comment move only preserves all other runtime-tested bytes, final syntax0.
 Actual producers/source/fixtures/results in push-read-perl-intake.json.gz;
 canonical registration queued23.4.1. Regenerate affected emitted Perl. Full target
 and fluent58.1.2/independent peers/full23.4 remain separate.
+
+## Bounded Perl fluent initialization58.1.2
+
+Same10groups7healthy/3RED to10GREEN native/fresh/metadata. Full unchanged12
+executes. Earlier plain last/uppercase was ready/raw0 yet called host uppercase;
+eager local-return/source and function-local variants compile-failed. Existing
+copy/logical/with/Array-Hash-Number/shape/error paths were healthy. Six healthy
+value observations/original error row remain byte-equal.
+
+Two additions initialize semantic prefixes through the existing unambiguous
+source predicate/complete push ABI and admit that source to current emitted-
+result/default-result dispatch. Original logical/copy folding, source predicate,
+push/aggregate/read/selected/parser/arity/child/deferred/copy/mutation/schema and
+remaining owner bytes exact. SC/once-only source before consumer rebinding/local
+returns/function caller scope/full12/kinds/skips/error/shape pass. Closest read6
+retains eight AST/error exclusions; syntax passes. Actual producers/source/
+normal/results in push-fluent-perl-intake.json.gz. New canonical registration
+queued23.4.1; regenerate affected emitted Perl. Bounded Perl58 outcomes recorded,
+independent Rust58.2 next; full23.4 remains separate.

@@ -8,7 +8,7 @@ answers:
   - "why are bare and numeric push result sources excluded"
   - "does push read composition grant computed writes or deferred execution"
 date: 2026-10-31
-status: bounded Perl58.1.1 read role targeted-checked; fluent and peers separate
+status: bounded Perl58.1.1 reads and58.1.2 fluent targeted-checked; peers separate
 tags: [perl, push, array, selection, fluent, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.58.1.1; push-read-perl-intake.json.gz retains unchanged6groups4RED/2healthy to6GREEN, callable5/deferred22 TAP items/syntax, five runtime sources/eight AST-error controls and actual producers/inputs."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -v -Iperl t/push_result_selection.t t/computed_selection_callable_compat.t t/computed_selection_deferred_boundary.t"
@@ -38,3 +38,5 @@ and final syntax proof retained. No redundant runtime rerun for that comment.
 Full12 fixture remains unchanged; subset removes only fluent init/call/two fields.
 Regenerate affected emitted Perl parsers; canonical new normal/fixtures remain
 queued23.4.1. Fluent58.1.2 and independent peers/full23.4 remain separate.
+
+Bounded Perl fluent58.1.2 is now targeted-checked; [[perl-explicit-push-result-fluent]] owns initialization and preserved healthy paths. Independent peers and full23.4 remain separate.

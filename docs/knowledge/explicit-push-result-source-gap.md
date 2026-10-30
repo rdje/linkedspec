@@ -8,7 +8,7 @@ answers:
   - "which task owns explicit push result composition"
   - "do push_back and pop_back result reads already work"
 date: 2026-10-30
-status: P1 producer58.0 and Perl read58.1.1 repaired; fluent and peers pending
+status: bounded Perl58 producer/read/fluent repaired; independent peers pending
 tags: [perl, push, mutation, array, fluent, selection, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.19; push-result-selection-intake.json.gz retains28 finite public sources and three actual AST/statement-emitter diagnostic counterfactuals, metadata/substitutions/generated modules/trace/producers/inputs."
 reverify: "Recover finite mutation-result-assessment cases/observer from push-result-selection-intake.json.gz with project-local output; run public Perl wrapper. Historical activate/finish/retain producers are one-shot, never replay."
@@ -42,3 +42,5 @@ full23.4 admission is inferred.
 P1 producer58.0 is now repaired on recorded Perl routes; [[perl-push-aggregate-value-abi]] owns the current mechanism and source-projector limitation. Original selection failures above remain dated intake, not current producer claims. Direct read/fluent58.1.1/.2 remain separate.
 
 Perl bounded read role58.1.1 is now repaired; [[perl-explicit-push-result-reads]] owns its actual source guard/ABI/ten-output subset and exclusions. Fluent58.1.2/full target and independent peers remain separate.
+
+Bounded Perl fluent58.1.2 is now targeted-checked; [[perl-explicit-push-result-fluent]] owns initialization and preserved healthy paths. Independent peers and full23.4 remain separate.
