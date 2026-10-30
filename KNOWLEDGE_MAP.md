@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1508** facts · **11341** question keys.
+> **1509** facts · **11344** question keys.
 
 ## Questions → fact
 
@@ -2093,6 +2093,7 @@
 - "does Lua capture_take with a name preserve the anonymous capture boundary" -> [lua-named-capture-endpoint-origin-compatibility](docs/knowledge/lua-named-capture-endpoint-origin-compatibility.md) · 2026-10-29 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/named_capture_endpoint_absence_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/named_capture_endpoint_absence_test.lua`
 - "does Lua capture_take_rest support direct String and Number methods" -> [capture-advance-text-lua-compatibility](docs/knowledge/capture-advance-text-lua-compatibility.md) · 2026-10-30 · reverify: [2 entries](#capture-advance-text-lua-compatibility)
 - "does Lua capture_take_rest_len support direct Number and String methods" -> [capture-advance-number-lua-compatibility](docs/knowledge/capture-advance-number-lua-compatibility.md) · 2026-10-30 · reverify: [2 entries](#capture-advance-number-lua-compatibility)
+- "does Lua capture_until_boundary support direct String and Number methods" -> [boundary-capture-string-lua-compatibility](docs/knowledge/boundary-capture-string-lua-compatibility.md) · 2026-10-30 · reverify: [2 entries](#boundary-capture-string-lua-compatibility)
 - "does Lua child 26 change Unicode casing or close earlier repairs" -> [lua-unicode-lower-completion-reading](docs/knowledge/lua-unicode-lower-completion-reading.md) · 2026-09-13 · reverify: `Run LUA_UNICODE_LOWER_READING_26 and the managed commands below; exact coverage remains independently owned by lua-startup-reading-coverage.`
 - "does Lua claim full trace parity after diagnostics trace closeout" -> [lua-diagnostics-trace-boundary](docs/knowledge/lua-diagnostics-trace-boundary.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'runtime-trace-events|LUA-BACKEND-PARITY\\.4\\.4\\.4|lua_runtime:(rule|regex_match|child_dispatch|lifecycle_block|recursion_guard|cursor_control|source_boundary|mark_capture)' lua/src lua/test lua/README.md README.md ROADMAP.md ROADMAP_V2.md docs/TASK_TREE.md docs/tasks/LUA-BACKEND-PARITY.md docs/linkedspec-book/src docs/knowledge`
 - "does Lua classify compact pipe as OR" -> [lua-rule-local-cursor-preflight](docs/knowledge/lua-rule-local-cursor-preflight.md) · 2026-07-19 · reverify: `bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n 'Pipe|parse_mode|GENERATED_SOURCE_CONTRACT|GENERATED_SOURCE_FORMAT|classify_generated_rule_family|lua_runtime:rule' lua/src/linkedspec/{spec_ast.lua,interpreter.lua,compiled_spec.lua,source_emitter.lua,spec_loader.lua,corpus.lua,primary_cli.lua}`
@@ -2387,6 +2388,7 @@
 - "does Lua stitch body_ast" -> [lua-staged-function-body-registry](docs/knowledge/lua-staged-function-body-registry.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'ACTION_IR_BODY_|execute_staged_parse_jobs|dispatch_function_body_parse_jobs|body_ast' lua/src/linkedspec/staged_parser_registry.lua lua/src/linkedspec/init.lua lua/test/run.lua`
 - "does Lua strict unused count the selected entry rule" -> [lua-root-rule-selection-core](docs/knowledge/lua-root-rule-selection-core.md) · 2026-07-18 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py`
 - "does Lua string receiver split mutate its source" -> [lua-pure-split-bridge](docs/knowledge/lua-pure-split-bridge.md) · 2026-07-12 · reverify: `bash tools/run_lua_local.sh`
+- "does Lua structural boundary capture move the live cursor or capture origin" -> [boundary-capture-string-lua-compatibility](docs/knowledge/boundary-capture-string-lua-compatibility.md) · 2026-10-30 · reverify: [2 entries](#boundary-capture-string-lua-compatibility)
 - "does Lua structured diagnostics change successful parse output" -> [lua-runtime-structured-diagnostics](docs/knowledge/lua-runtime-structured-diagnostics.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua`
 - "does Lua support action and blind child dispatch" -> [lua-runtime-rule-interpreter](docs/knowledge/lua-runtime-rule-interpreter.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua support array flat flat_array and concat_arrays" -> [lua-runtime-array-construction](docs/knowledge/lua-runtime-array-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'ARRAY_SPLICE_HELPERS|append_array_value|runtime copied array construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
@@ -9010,6 +9012,7 @@
 - "which Lua staged AST rollout rows are complete" -> [lua-staged-ast-enrichment-carriers-admission](docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md) · 2026-08-27 · reverify: [7 entries](#lua-staged-ast-enrichment-carriers-admission)
 - "which Lua staged function features are implemented" -> [lua-staged-function-runtime-closeout](docs/knowledge/lua-staged-function-runtime-closeout.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`
 - "which Lua state already exists for capture helpers" -> [lua-capture-cursor-runtime-audit](docs/knowledge/lua-capture-cursor-runtime-audit.md) · 2026-09-21 · reverify: `Historical full-suite recipe (not rerun by .8.6): bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py && perl tools/check_language_capability_coverage.pl --report && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && rg -n 'CAPTURE_MARK_HELPERS|INPUT_HELPERS|RUNTIME_HELPERS|INPUT_CURSOR_HELPERS|CURSOR_CONTROL_HELPERS|ANONYMOUS_CAPTURE_HELPERS|NAMED_MARK_HELPERS|capture_until_boundary' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
+- "which Lua structural boundary fluent hosts and contexts have focused proof" -> [boundary-capture-string-lua-compatibility](docs/knowledge/boundary-capture-string-lua-compatibility.md) · 2026-10-30 · reverify: [2 entries](#boundary-capture-string-lua-compatibility)
 - "which Lua task implements named regex slots and capture_gaps" -> [inter-match-gap-lua-implementation-plan](docs/knowledge/inter-match-gap-lua-implementation-plan.md) · 2026-08-16 · reverify: `bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh`
 - "which Lua task implements the compiled static graph" -> [lua-semantic-static-projection-plan](docs/knowledge/lua-semantic-static-projection-plan.md) · 2026-07-27 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh`
 - "which Lua task owns arrays and harrays" -> [lua-runtime-helper-family-split](docs/knowledge/lua-runtime-helper-family-split.md) · 2026-07-11 · reverify: `bash scripts/check_task_tree_metadata.sh && bash scripts/check_doctrines.sh`
@@ -11623,10 +11626,18 @@ _Julia structural boundary capture results already compose through ordinary meth
 - **reverify:** `bash tools/run_julia_project_data.sh --project=julia --depwarn=error julia/test/boundary_capture_fluent_results_test.jl`
 - **source:** [`docs/knowledge/boundary-capture-string-julia-compatibility.md`](docs/knowledge/boundary-capture-string-julia-compatibility.md)
 
+### boundary-capture-string-lua-compatibility
+_Safe Lua structural boundary captures retain ordinary result methods and native effects_
+- **answers:** does Lua capture_until_boundary support direct String and Number methods | does Lua structural boundary capture move the live cursor or capture origin | which Lua structural boundary fluent hosts and contexts have focused proof
+- **date:** 2026-10-30 · **status:** bounded installed PUC5.5.1/LuaJIT compatibility checked; declared5.4/full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.53.5; boundary-capture-string-lua-intake.json.gz retains both host identities/new81/Number97/reset102, thirteen observations each, producers and input hashes.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/boundary_capture_fluent_results_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/boundary_capture_fluent_results_test.lua`
+- **source:** [`docs/knowledge/boundary-capture-string-lua-compatibility.md`](docs/knowledge/boundary-capture-string-lua-compatibility.md)
+
 ### boundary-capture-string-method-source-gap
 _Structural boundary capture needs early ordinary String result lowering_
 - **answers:** can capture_until_boundary compose directly with coalesce and String methods | why does a boundary capture method chain call undefined host coalesce | does capture_until_boundary advance the capture origin or the live cursor | which task owns structural boundary capture fluent results
-- **date:** 2026-10-30 · **status:** bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
+- **date:** 2026-10-30 · **status:** all bounded53 children targeted-checked on recorded routes/hosts; full23.4 remains
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.14; boundary-capture-fluent-selection-intake.json.gz retains two failed direct/two healthy source controls, independent bound11/direct twins, compatible named String intake and inventory correction history.`
 - **reverify:** `Recover probe_boundary_capture_fluent_assessment.pl and finite cases from boundary-capture-fluent-selection-intake.json.gz; run through tools/project_data_run.sh with explicit project-local output. No historical source swaps.`
 - **source:** [`docs/knowledge/boundary-capture-string-method-source-gap.md`](docs/knowledge/boundary-capture-string-method-source-gap.md)

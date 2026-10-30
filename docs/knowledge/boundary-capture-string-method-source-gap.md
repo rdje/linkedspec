@@ -7,7 +7,7 @@ answers:
   - "does capture_until_boundary advance the capture origin or the live cursor"
   - "which task owns structural boundary capture fluent results"
 date: 2026-10-30
-status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
+status: all bounded53 children targeted-checked on recorded routes/hosts; full23.4 remains
 tags: [perl, capture, boundary, cursor, string, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.14; boundary-capture-fluent-selection-intake.json.gz retains two failed direct/two healthy source controls, independent bound11/direct twins, compatible named String intake and inventory correction history."
 reverify: "Recover probe_boundary_capture_fluent_assessment.pl and finite cases from boundary-capture-fluent-selection-intake.json.gz; run through tools/project_data_run.sh with explicit project-local output. No historical source swaps."
@@ -55,3 +55,9 @@ Julia53.4 independently already supports frozen53: strict new65/advancing Number
 reset70 pass native/reconstructed/plan/fresh Module with empty stderr, runtime
 unchanged/normal registered. [[boundary-capture-string-julia-compatibility]]
 retains exact label/cursor/context limits; safe Lua53.5 independently follows.
+
+Safe Lua53.5 independently already supports frozen53 on both installed hosts:
+new81/Number97/reset102 pass per host, runtime unchanged/normal registered.
+[[boundary-capture-string-lua-compatibility]] retains exact host/effect/context
+limits. All bounded53 children have focused outcomes; next selection23.1.15
+follows, full23.4/declared5.4/Perl registration stay separate.

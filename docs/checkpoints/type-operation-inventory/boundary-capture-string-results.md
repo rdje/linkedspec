@@ -1,7 +1,7 @@
 # Structural boundary capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.14; implementation family23.3.53.
-Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending.
+Status: all five bounded children targeted-checked on recorded routes/hosts; full admission separate.
 
 ## Established producer authority
 
@@ -116,3 +116,18 @@ actual observations/complete summaries/producers/input bindings retained in
 boundary-capture-string-julia-intake.json.gz. Same-process fresh Module is not
 isolated package proof; no full name-escape/malformed-phase/context/portable
 admission. Safe Lua53.5 independently follows.
+
+## Bounded safe Lua53.5
+
+Installed PUC5.5.1/LuaJIT2.1.1788460057 already support the unchanged target.
+Strict new81/advancing Number97/reset102 pass per host across native/restored/
+generated-plan/fresh loaded module with empty stderr, runtime unchanged.
+Shared11/bound/direct/Number controls preserve cursor-origin separation/once/
+snapshots/guards, empty/missing/EOF, quoted comma atom/earliest boundary and
+existing caller callback/typed function fences. One exact three-line runner
+block/loadfile guards register the normal; fixed JSON is validated before
+creation. Thirteen actual observations per host/complete summaries/producers/
+input bindings retained in boundary-capture-string-lua-intake.json.gz. All
+bounded53 children have focused outcomes; next useful selection23.1.15 follows.
+No unsafe runner/formatter/new interpreter locals/declared5.4/isolated-package/
+full name-escape/malformed-phase/context/domain/portable23.4 admission.
