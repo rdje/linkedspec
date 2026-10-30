@@ -4816,15 +4816,20 @@ function _evaluate_runtime_call!(
     elseif helper_name == "rewind_match_start"
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
+        position_result = nothing
         if context.registers.local_match !== nothing
             target = context.registers.local_match.codeunit_start
-            if _typed_position_from_codeunit(
+            position = _typed_position_from_codeunit(
                     context,
                     target,
                     rule_label,
                     helper_name,
-                ) !== nothing
+                )
+            if position !== nothing
                 _set_runtime_cursor!(context, target)
+                if isempty(call.args)
+                    position_result = SourceLocation.position_offset(position)
+                end
             end
         end
         _trace_runtime_cursor_control!(
@@ -4834,19 +4839,24 @@ function _evaluate_runtime_call!(
             cursor_before,
             stack_before,
         )
-        return nothing
+        return position_result
     elseif helper_name == "rewind_entry_start"
         cursor_before = context.cursor_codeunit
         stack_before = length(context.cursor_stack)
+        position_result = nothing
         if context.registers.entry_match !== nothing
             target = context.registers.entry_match.codeunit_start
-            if _typed_position_from_codeunit(
+            position = _typed_position_from_codeunit(
                     context,
                     target,
                     rule_label,
                     helper_name,
-                ) !== nothing
+                )
+            if position !== nothing
                 _set_runtime_cursor!(context, target)
+                if isempty(call.args)
+                    position_result = SourceLocation.position_offset(position)
+                end
             end
         end
         _trace_runtime_cursor_control!(
@@ -4856,7 +4866,7 @@ function _evaluate_runtime_call!(
             cursor_before,
             stack_before,
         )
-        return nothing
+        return position_result
     elseif helper_name == "call"
         if isempty(args)
             return nothing
@@ -6352,6 +6362,7 @@ function _runtime_is_input_cursor_value_source(expression)
     return isempty(expression.args) && expression.name in (
         "input_text", "input_len", "input_end_pos", "input_end_line", "input_end_col",
         "cursor_pos", "cursor_line", "cursor_col", "cursor_rest", "cursor_rest_len",
+        "rewind_entry_start", "rewind_match_start",
     )
 end
 
@@ -6362,7 +6373,7 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         # Static ownership preserves unknown bound-call result policies.
         has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
         helper = canonical_action_helper_name(receiver.name)
-        if helper in ("entry_slot", "gap_span")
+        if helper in ("entry_slot", "gap_span", "rewind_entry_start", "rewind_match_start")
             return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
                 !receiver.trailing_block_arg && isempty(receiver.args)
         end

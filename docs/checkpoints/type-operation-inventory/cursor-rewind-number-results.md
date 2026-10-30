@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 repaired/targeted-checked; Julia/safe Lua pending.
+Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 repaired/targeted-checked; Julia56.4 canonical-zero result targeted-checked; arity56.4.0 next before safe Lua.
 
 ## Existing authority
 
@@ -155,3 +155,17 @@ and inputs. Parent's final legacy acceptance assertion is replaced in this new
 epoch, retaining original evidence and preceding nine positive groups. Earlier
 Dart accepted-malformed notes are historical only. Rebuild runtime/apps; Julia56.4
 is next. No new state/schema or full admission.
+
+## Julia56.4 bounded result implementation
+
+Original cursor branches now cache their validated Position and expose its
+character offset after the original write, only on zero calls. Original tracing/
+anchors/absence/null save-restore stay. Two canonical source/selected-read roles
+reuse current guards. Unchanged75 assertions55PASS/20RED now pass75, nearest
+gap98/computed25 pass strict depwarn/retained successful precompile progress and exact runner registration.
+Original55 includes20 known malformed-preservation assertions and5 route-key
+scaffolding in failing groups, not55 healthy-positive value proofs. All13 actual
+results/two function fences retain native/restoredSpec/plan/fresh Module. Four
+surplus rewind forms remain null/moving until immediate P1 child56.4.0. Actual
+producers/inputs/results in cursor-rewind-result-julia-intake.json.gz. Rebuild
+runtime/apps; no isolated package/full admission; safe Lua56.5 after arity repair.
