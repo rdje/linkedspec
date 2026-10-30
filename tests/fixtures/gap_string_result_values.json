@@ -1,0 +1,26 @@
+[
+  [
+    [
+      "!",
+      "PREFIX",
+      null,
+      null,
+      "TAIL",
+      "TAIL",
+      "a"
+    ],
+    [
+      ",!",
+      "INTERSTITIAL",
+      null,
+      null,
+      "TAIL",
+      "TAIL",
+      "b"
+    ]
+  ],
+  ";!",
+  "TAIL",
+  "",
+  3
+]

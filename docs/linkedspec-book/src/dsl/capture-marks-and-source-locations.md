@@ -1229,6 +1229,19 @@ The current shared accessors are deliberately small:
 - `gap_text()` → exact decoded text materialized from that span;
 - `gap_kind()` → `prefix`, `interstitial`, or `tail`.
 
+Basic String methods also work directly, for example `gap_kind().uppercase()`
+and `gap_text().coalesce("fallback").cat("!")`. An empty gap remains an empty
+String, so the latter produces `"!"` and skips the fallback. Pass these values
+explicitly when using pure functions.
+
+Guarded direct noncontainer reads and recovery from these two gap readers are
+being completed independently across backends. The existing Perl completed-value
+route works now: bind `text = gap_text()`, then
+`text.cat("")[0].coalesce(["a","tail"])[-1].uppercase()` returns `"TAIL"`. The
+String read yields null; the explicit fallback supplies the Array. This does not
+index the String itself. Raw named first-consumer fallback policies remain as
+previously documented.
+
 Empty prefix, interstitial, and tail spans are observable; none are trimmed or suppressed. A successful
 zero-match/zero-min rule sees the whole input as tail. A failed minimum sees no tail. Tail access never consumes
 input and no gap is appended to an AST or result automatically.

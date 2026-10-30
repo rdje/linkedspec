@@ -3019,3 +3019,10 @@ The Knowledge Map remains derivable from committed fact cards. Its generator
 currently writes the live file directly; wait for generation to finish before
 reading or staging it. Atomic publication is owned by the scheduled document
 maintenance repair before admission.
+
+The next bounded gap String addition preserves working gap_text/gap_kind
+String methods and adds actual-kind direct guards and read/recovery roles.
+A native/fresh completed-String twin passes prefix/interstitial/tail behavior;
+direct guards retain legacy fallbacks and direct recovery fails compilation.
+Each backend is assessed independently before implementation. Existing gap
+state, contexts, errors, function restrictions and raw named policies stay.
