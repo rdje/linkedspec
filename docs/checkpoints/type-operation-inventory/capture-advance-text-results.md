@@ -1,7 +1,7 @@
 # Anonymous advancing capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.12; implementation family23.3.51.
-Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending.
+Status: all five bounded children targeted-checked on recorded routes/hosts; full admission remains separate.
 
 ## Accepted sources and actual distinction
 
@@ -116,3 +116,19 @@ directly observed terminal0 and identical fourteen route observations. Actual
 producers/inputs/outputs are retained in capture-advance-text-julia-intake.json.gz.
 Same-process fresh Module is not isolated package proof. Full23.4 and safe Lua
 remain independent.
+
+## Bounded safe Lua51.5
+
+Installed PUC5.5.1/LuaJIT2.1.1788460057 already support the unchanged target.
+Strict new102/readonly100/reset102 checks pass per host across native/restored/
+generated-plan/fresh loaded module, runtime unchanged. Three bound endpoints/
+shared9 retain origin6/6/10 versus live6, once/snapshots/normalized skips, empty/
+missing/String0/Number9, named overload, caller callback and source-specific
+function fences. One exact three-line runner block registers the normal with
+loadfile guards. New host-oracle tags and three JSON literal delimiters are
+corrected without DSL source/expected-value/runtime changes; both failed epochs
+remain retained without semantic RED credit. Actual hosts/fourteen observations
+each/complete summaries/producers/inputs are in capture-advance-text-lua-intake.json.gz.
+All five bounded51 children have focused outcomes; next useful selection23.1.13
+follows. No unsafe runner/formatter/new interpreter locals, declared5.4/isolated-
+package/full23.4 admission.
