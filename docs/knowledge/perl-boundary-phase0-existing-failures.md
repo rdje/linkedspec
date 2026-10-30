@@ -157,3 +157,9 @@ TYPE45.19 reconciles tagged-record1 obsolete map/split source assertion/6 health
 fresh2/direct producer36 pass with production unchanged. Four last-selected
 groups remain owned; aggregate bare-read45.20 follows. No combined28/full-suite
 status is inferred.
+
+TYPE45.20 reconciles only bare copy1 old[] expectation/16 healthy ->17 GREEN
+under ADR0138 null preservation. Original source/declarations/native accumulator
+reset controls remain exact; public native/fresh5 and production identity hold.
+Three last-selected groups remain owned; mutation-slot45.21 follows. No new
+combined28/full-suite or broad host-isolation status is inferred.

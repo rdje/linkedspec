@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Tagged-record7/public2/direct36 align with existing eager producer; bare aggregate reads next.
+Bare copy17/public5 preserve null versus explicit containers; native accumulators retained; mutation slots next.
 
 ## Latest Completed Slice
 
-Exact tagged-record group reproduces1 old map/split source-oracle RED/6 healthy, then7 GREEN. Original helper expression now checks initialized row values; original declaration heredoc/all6 healthy metadata assertions stay exact. Two public native/fresh cases execute that exact initializer and preserve carried String1/source bindings. Direct producer36 retains once-only eager arguments, empty-source field evaluation, trailing items, SDTF/earlier snapshots, regex/dynamic literal controls and existing carried kinds/DSL copy bounds. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass; actual source/RED-GREEN/producers/frozen eager authority retained in perl-phase0-split-tagged-oracle-intake.json.gz. No new global split/empty/zero-width/depth/context or peer/portable admission; SESSION33 remains open. Book/fact/task/roadmaps/live/resume align; four last-selected groups remain, aggregate bare-read45.20 next. No combined28/full-suite/push claim.
+Exact aggregate bare-read group reproduces1 obsolete empty-container expectation/16 healthy assertions, then17 GREEN. ADR0138 requires uninitialized ordinary working values to copy as null, without creating an Array. Only that expected value/label changes; original source/declaration checks and native same-parser Array/Hash reset controls stay exact. Five public native/fresh controls execute original items/meta sources and distinguish null from explicit empty Array/Hash and explicit Array-default recovery; paired cursors agree without a new cursor policy. Production unchanged;528 other prior input hashes exact. Historical Channel2 card now qualifies its old storage/reverify and points current retrieval to typed/null authority; old bytes retained. Syntax/book/map/history/manual checks pass; actual source/RED-GREEN/public producers/ADR0138/before-fact inputs retained in perl-phase0-aggregate-bare-oracle-intake.json.gz. Book/fact/task/roadmaps/live/resume align; three last-selected groups remain, mutation-slot45.21 next. No new storage/depth/host or peer/full-suite/admission/push claim.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.20 from clean tagged-record reconciliation. Assess only spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist against current bare typed-value and legitimate implicit rule-aggregate contracts. Public source/native/fresh distinctions before source-oracle movement; repair actual outliers, keep unrelated host-isolation SESSION17 separate. Other3 last-selected failures stay parent45-owned. Focused compile/quick checks/commit; canonical prerequisites remain before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.21 from clean bare-copy/null reconciliation. Assess only spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist against current scalar key/RHS reads and staged key-before-value typed mutation contracts. Retain healthy source/declaration/runtime/reset controls; public native/fresh evidence before old exact-source changes, fix real outliers. Other2 selected failures stay parent45-owned. Use unique mutation-slots-oracle prefix; focused compile/quick checks/commit; canonical prerequisites stay before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.20` — Bare copy17/public5 preserve null versus explicit containers; native accumulators retained; mutation slots next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.19` — Tagged-record7/public2/direct36 align with existing eager producer; bare aggregate reads next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.18` — pick_keys4/public2/per-key8 and three diagnostic guard controls pass; split_tagged_records next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.17` — drop_keys6 with embedded18/public2 pass; original keys/source contracts retained; pick_keys next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.20 from clean tagged-record reconciliat
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.8` — Scalar boundary6/direct String7 pass with source/literal checks and explicit focused dependency; cat45.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.7` — Nonempty-default3/direct6 pass with normalized value/source checks; scalar boundary-transform45.8 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.6` — Collection pipeline26/direct6 pass with stronger source checks; no product change; nonempty-default45.7 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.5` — Nested Array oracle reconciled with six native/fresh controls;22 assertions pass; collection pipeline45.6 next.
 
 ## History
 

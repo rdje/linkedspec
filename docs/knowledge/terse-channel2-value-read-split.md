@@ -15,14 +15,33 @@ answers:
   - "what is the next leaf after SPEC-FORMAT-TERSE.1.2.3.3.2"
   - "what is the next leaf after SPEC-FORMAT-TERSE.1.2.3.3.3"
   - "what is the next leaf after SPEC-FORMAT-TERSE.1.2.3.4"
-date: 2026-06-29
-status: confirmed
+date: 2026-10-30
+status: historical split; current Perl bare-copy qualification under ADR0138
 tags: [dsl, variables, type-inference, channel-2, spec-format-terse, SPEC-FORMAT-TERSE, actionir, rust, parser]
 evidence: "SPEC-FORMAT-TERSE.1.2.3 split on 2026-06-29 after KM retrieval, TOOLBOX probes, dump_parser_source checks, and code-read. Split-time Perl aggregate bare value reads already lowered (`return(array_copy(items))` -> `return [@items]`, `return(hash_copy(meta))` -> `return {%meta}`, `return(copy(items))` -> `return [@items]`) but generated-source dumps showed no `my @items` / `my %meta`. SPEC-FORMAT-TERSE.1.2.3.1 then landed the Perl fix: `_collect_auto_working_var_decls` records `array_copy(NAME)` and array-first `copy(NAME)` as `my @NAME`, and `hash_copy(NAME)` as `my %NAME`, with focused source/runtime probe PASS and phase0 PASS (984 tests). SPEC-FORMAT-TERSE.1.2.3.2 landed Rust parity: `array_copy(NAME)`, `hash_copy(NAME)`, array-first `copy(NAME)`, and `copy(hash(NAME))` now match the Perl reference via aggregate target resolvers, with 4 integration locks and 4 oracle fixtures. SPEC-FORMAT-TERSE.1.2.3.3 then split Perl scalar bare reads by lowering seam; SPEC-FORMAT-TERSE.1.2.3.3.1 landed return/assignment source slots (`return(count)` -> `return $count`, `set(out,count)` -> `$out = $count`, `name = value` -> `$name = $value`) with auto-`my` and phase0 985 green; SPEC-FORMAT-TERSE.1.2.3.3.2 landed mutation key/RHS slots (`items += value` -> `push @items, $value`, `set_key(meta,key,value)` -> `$meta{$key} = $value`, `meta[key] = value` -> `$meta{$key} = $value`) with auto-`my` and phase0 986 green; SPEC-FORMAT-TERSE.1.2.3.3.3 landed direct-access bare path atoms (`foo[\"a\"][z]` -> `$foo->{\"a\"}->[$z]`) with auto-`my` and phase0 987 green. SPEC-FORMAT-TERSE.1.2.3.4 then landed Rust scalar parity by removing parser reservations while keeping the existing `Expr::Variable` -> `ctx.get_scalar(name)` runtime path, with parser/runtime locks and a 28-fixture oracle corpus. The next leaf is `.1.2.3.5` for RHS-shape/type-inference split before code."
-reverify: "perl -Iperl -MLinkedSpec -e 'my @cases=([q{top:: -> w { return(copy(array(items))) }\\n\\nw : /x/\\n}, qr/my \\@items\\b/], [q{top:: -> w { return(copy(hash(meta))) }\\n\\nw : /x/\\n}, qr/my \\%meta\\b/], [q{top:: -> w { return(copy(items)) }\\n\\nw : /x/\\n}, qr/my \\@items\\b/]); for my $c (@cases) { my ($s,$r)=@$c; $s =~ s/\\\\n/\\n/g; my $src=\"\"; LinkedSpec::Get(\\$s, generate_only=>1, dump_parser_source=>1, parser_source_ref=>\\$src); my $n=()=($src =~ /$r/g); die \"expected one preamble, got $n\\n\" unless $n == 1; } for my $stmt (q{return(count)}, q{set(out,count)}, q{items += value}, q{meta[key] = value}, q{return(foo[\"a\"][z])}) { my $out=LinkedSpec::call_spec_handler_subst(\"Top\",$stmt); $out =~ s/\\n/\\\\n/g; print \"$stmt => $out\\n\" }' && cargo test --quiet --manifest-path rust/linkedspec-runtime/Cargo.toml terse_1_2_3_4 && cargo test --quiet --manifest-path rust/linkedspec-core/Cargo.toml parse_direct_nested_access_accepts_bare_segments"
+reverify: "Recover current-only selector/names from perl-phase0-aggregate-bare-oracle-intake.json.gz; run bash tools/project_data_run.sh env PERL5LIB= perl -Iperl .linkedspec-data/verification/probe_phase0_current_selected.pl .linkedspec-data/verification/phase0-aggregate-bare-oracle-names.json .linkedspec-data/verification/aggregate-bare-current-seen.json. Do not replay the historical retired aggregate selectors as current authoring."
 ---
 
 # Channel 2 Value-Read Split
+
+## Current Perl qualification — October30
+
+The split below is the June29 historical record. Current ordinary `copy(name)`
+reads one scalar-held typed binding; it does not choose a host Array/Hash namespace.
+ADR0138 preserves null for an uninitialized ordinary working value. Explicit
+`items=[]` and `meta={}` remain empty containers; copying does not create them.
+Existing mutation accumulators still establish their own containers and reset per
+invocation on the native controls. See [[perl-scalar-bound-receiver-copy]].
+
+TYPE45.20 reconciles only one obsolete[] expectation in the exact17 aggregate
+bare-read group:1RED/16healthy ->17 GREEN, with five public native/fresh controls.
+Original source/declarations/other16 assertions and production remain unchanged.
+This does not establish general host-slot isolation, new implicit rule-storage
+policy, current Rust parity or new copy-depth behavior. Retired selector commands
+from the prior fact remain in Git/the retained pre-edit input; current reverify
+uses the current-only selector above.
+
+## Historical June29 split
 
 `SPEC-FORMAT-TERSE.1.2.3` is a container, not one implementation leaf.
 

@@ -9522,13 +9522,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.19 - reconcile tagged record checks with eager value construction`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.20`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile retained aggregate bare-value-read group against current typed binding and legitimate implicit rule-aggregate contracts; public source/native/fresh distinctions before any source-oracle change. Repair real outliers first without broad host policy normalization.
   Schedule: P1 next; other3 last-selected failures remain parent45/45.4 receipt-owned. Use a unique aggregate-bare-oracle prefix.
+  Verification tier: `focused`
+  Focused checks: Exact aggregate-read group, public typed/implicit aggregate/source controls and direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named binding/value distinctions, no population measurement.
+
+  Activation: clean `4254ee20f84013d0a7c778cdec66fb234614e9a2`; proof jobs terminal and brief empty; exact group `spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist`.
+  Current fact-card drift owned here: The June29 Channel2 card still labels old host aggregate declarations/retired selector repro as confirmed and supplies that historical command as reverify. Qualify the old split explicitly, preserve it in Git/retained pre-edit input, and replace current retrieval/reverify with typed-binding/null-copy authority and this exact retained group. No replay of retired syntax or new Rust/backend admission.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Result: Exact aggregate bare-read group reproduces1 obsolete empty-container expectation/16 healthy assertions, then17 GREEN. ADR0138 requires uninitialized ordinary working values to copy as null, without creating an Array. Only that expected value/label changes; original source/declaration checks and native same-parser Array/Hash reset controls stay exact. Five public native/fresh controls execute original items/meta sources and distinguish null from explicit empty Array/Hash and explicit Array-default recovery; paired cursors agree without a new cursor policy. Production unchanged;528 other prior input hashes exact. Historical Channel2 card now qualifies its old storage/reverify and points current retrieval to typed/null authority; old bytes retained. Syntax/book/map/history/manual checks pass; actual source/RED-GREEN/public producers/ADR0138/before-fact inputs retained in perl-phase0-aggregate-bare-oracle-intake.json.gz. Book/fact/task/roadmaps/live/resume align; three last-selected groups remain, mutation-slot45.21 next. No new storage/depth/host or peer/full-suite/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.20 - align bare copy reads with approved null preservation`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.21`
+  Status: `pending`
+  Goal: Reconcile retained mutation-slot bare-read group under current scalar key/RHS and key-before-value typed mutation contracts; public source/native/fresh distinctions before source-oracle movement. Repair real outliers first.
+  Schedule: P1 next; other2 last-selected failures remain parent45/45.4 receipt-owned. Unique diagnostic prefix mutation-slots-oracle.
   Planned verification tier: focused.
-  Planned focused checks: Exact aggregate-read group, public typed/implicit aggregate/source controls and direct consumer when warranted.
+  Planned focused checks: Exact mutation-slot group, public key/value/source/order controls and direct consumer when warranted; preserve healthy declaration/reset tests.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named binding/value distinctions, no population measurement.
+  Planned claim verification: none: Finite named binding/mutation distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10691,7 +10712,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.20` | `pending` | Assess retained aggregate bare-value reads against typed/implicit binding contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.21` | `pending` | Assess retained mutation-slot reads against scalar operands/staged mutation authority. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

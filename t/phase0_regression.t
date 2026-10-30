@@ -45535,7 +45535,7 @@ subtest 'spec_format_terse_1_2_3_1_aggregate_bare_value_reads_auto_exist' => sub
     my $n_hash_dedup = () = ($hash_dedup_src =~ /my \$meta\b/g);
     is($n_hash_dedup, 1, 'bare set_key target plus bare hash snapshot read dedup to one typed binding');
 
-    is($run->($array_spec, 'x'), '[]', 'bare copy(items) runtime smoke returns an empty array snapshot');
+    is($run->($array_spec, 'x'), 'null', 'bare copy(items) preserves an uninitialized value without creating a container');
 
     my $array_accum_spec = "top:: /(\\w+)\\s*/ -> top[0] { push(items, match_group(0)) }\n"
                          . "LX {return(copy(items))}\n";
