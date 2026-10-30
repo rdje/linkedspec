@@ -7,7 +7,7 @@ answers:
   - "does capture_until_boundary advance the capture origin or the live cursor"
   - "which task owns structural boundary capture fluent results"
 date: 2026-10-30
-status: bounded Perl53.1 repaired/targeted-checked; independent peers pending
+status: bounded Perl/Rust outcomes targeted-checked; Dart/Julia/safe Lua pending
 tags: [perl, capture, boundary, cursor, string, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.14; boundary-capture-fluent-selection-intake.json.gz retains two failed direct/two healthy source controls, independent bound11/direct twins, compatible named String intake and inventory correction history."
 reverify: "Recover probe_boundary_capture_fluent_assessment.pl and finite cases from boundary-capture-fluent-selection-intake.json.gz; run through tools/project_data_run.sh with explicit project-local output. No historical source swaps."
@@ -40,3 +40,8 @@ three-slot phase/substitution preservation. [[perl-boundary-fluent-grammar-prese
 retains source/origin/control distinctions; no final11 combined run or broader
 context grant. Regenerate affected old modules; Rust53.2/registration23.4.1
 remain separate. Actual inputs: boundary-capture-string-perl-intake.json.gz.
+
+Rust53.2 independently already supports frozen53: new6/advancing Number6/reset3
+pass native/restored/plan, runtime unchanged/owned formatting clean.
+[[boundary-capture-string-rust-compatibility]] retains exact cursor/label/context
+limits and public-family plan construction; Dart53.3 independently follows.

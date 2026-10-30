@@ -1,7 +1,7 @@
 # Structural boundary capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.14; implementation family23.3.53.
-Status: Perl53.1 repaired/targeted-checked; independent peers pending.
+Status: bounded Perl/Rust outcomes targeted-checked; Dart/Julia/safe Lua pending.
 
 ## Established producer authority
 
@@ -78,3 +78,16 @@ missing/EOF/snapshot/reset/guards/function metadata hold; initial Number2/reset2
 pass. Older emitted direct-chain modules still fail: regenerate affected ones.
 No new arity/escape/callback/schema/portable grant. Registration23.4.1 and
 independent Rust53.2 remain separate.
+
+## Bounded Rust53.2
+
+Rust already supports the unchanged target. New6/advancing Number6/reset3 pass
+native/restored CompiledSpec/generated-plan, runtime unchanged/owned formatting
+clean. Shared11/primitive/bound/direct/Number controls preserve cursor-origin
+separation/once/snapshots, empty/missing/EOF, normalized guards, quoted comma atom,
+earliest boundary and existing caller callback/function policies. Plan rows use
+the public compiled-rule family classifier. Existing inputs stay exact; actual
+normal/producer/outputs retained in boundary-capture-string-rust-intake.json.gz.
+Dependency warnings remain opaque/upstream-owned. No isolated emitted/full
+name-escape/malformed-phase/context/portable admission. Dart53.3 independently
+follows.

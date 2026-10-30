@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl boundary source methods and grammar preservation checked; final feature3/quoted28 pass; independent Rust53.2 next.
+Rust boundary6/advancing Number6/reset3 pass, runtime unchanged; Dart53.3 independently next.
 
 ## Latest Completed Slice
 
-Perl structural-boundary normal11 has8 RED/3 healthy, then initial candidate11 GREEN with normal/frozen fixture unchanged. Narrow early ordinary value lowering reuses governed lexical/AST label agreement, shared decoded-label quoting and the sole unchanged boundary engine; six printed native bodies including quoted/order/empty/zero forms stay byte-identical. Candidate quoted normal exposes3 actual grammar regressions among28: generic assignment serialization drops missing argument slots and new early source lowering admits normalized calls. Private per-RHS source guard retains exact activation canonical raw fallback before a bound callback can lose the guard, restoring all3 eval failures and byte-identical substitutions; pure serializer/oracles remain unchanged. Initial unconsulted @INC and incorrect GV-origin instruments receive no baseline credit. Final fresh-process read-only original two-module replay binds Git bytes/actual CV code origins before-after Get, healthy primitive and distinguishing old direct coalesce failure. Final selected feature3/quoted28 pass; initial Number2/reset2 pass, no final11 combined rerun claimed. Shared11 preserves once-only cursor effects, empty/missing/EOF, source snapshot/reset-origin separation, normalized BAD/lazy F skips and typed function metadata warning-free. 541 other old inputs exact. Retained old emitted module still fails: regenerate affected modules. Actual epochs/producers/outputs/origin/grammar controls retained in boundary-capture-string-perl-intake.json.gz; book/cards/map/task/roadmap/live/resume/history/manual checks align. Explicit normal registration23.4.1/full23.4 remain separate. No arity/escape/callback/schema/portable grant. Independent Rust53.2 next.
+Rust independently already supports frozen structural-boundary String53: new6/advancing Number6/reset3 pass native/restored CompiledSpec/generated-plan with runtime unchanged/no invented RED. Shared11 and primitive/bound/direct/Number controls preserve once-only live cursor effects versus anonymous origin, source snapshots/reset, defined-empty/lazy suppression, unresolved null/no-op, valid-no-later EOF and normalized operand skips. Quoted comma stays one atom; multiple boundaries select earliest rather than argument order. Literal callback moves caller cursor3/origin0; pure-function/registered callback source-specific errors hold. Plan rows use public compiled-rule family classifier for actual authored modes. Owned formatting passes; 501 existing inputs stay exact. Actual normal/builder/source/results/input bindings retained in boundary-capture-string-rust-intake.json.gz; dependency warnings remain opaque/upstream-owned. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. Parent23 stale next29.2 status now points to authoritative Current Frontier without capability promotion. No runtime/schema/shape/vocabulary change, isolated emitted/full suite/name-escape/malformed-phase/context/domain/portable admission or inferred peer failure. Independent Dart53.3 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.2 independently from clean Perl53.1. Read boundary-capture-string-results.md/shared11 fixture and current Rust boundary rule-label/seek/earliest/EOF/unresolved/cursor-versus-origin/once/function/callback/preflight policies. Establish native/restored CompiledSpec/generated-plan baseline before runtime edits; preserve healthy behavior and repair actual ordinary boundary-result gaps only. Quick compile/format/new and nearest boundary/Number/reset controls/docs/commit, then Dart53.3. Preserve malformed-call/label/zero-argument authority independently; no inference from Perl or routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.3 independently from clean Rust53.2. Read frozen boundary-capture-string-results.md/shared11 and current Dart boundary labels/earliest/seek/EOF/unresolved/cursor-origin/once/function/callback/preflight policies. Establish native/restored SpecFile/generated-plan baseline before runtime changes; preserve healthy behavior and repair actual ordinary result gaps only. Fatal new-test analysis/format, quick new and nearest Number/reset checks/docs/commit, then Julia53.4. Existing zero-argument/name/escape/error-phase/deferred authorities remain separate; no routine full suite or peer-policy inference.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.53.2` — Rust boundary6/advancing Number6/reset3 pass, runtime unchanged; Dart53.3 independently next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.1` — Perl boundary source methods and grammar preservation checked; final feature3/quoted28 pass; independent Rust53.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.14` — Structural-boundary String53 frozen from actual direct gaps/healthy effects; named String compatible; Perl53.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.5` — Safe Lua Number97/String102/readonly Number155/reset102 pass per host; all bounded52 checked; next selection14.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.2 independently from clean Perl53.1. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.2` — Rust advancing String6/readonly6/reset3 pass without runtime change; Dart51.3 independently next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.1` — Perl advancing String14/readonly12/reset2 pass; original bodies/effects retained; independent Rust51.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.12` — Advancing capture String51 frozen from actual direct gaps and healthy effect controls; Perl51.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.50.5` — Safe Lua100/Number155/reset102 pass per host; all bounded50 children checked; next feature selection23.1.12.
 
 ## History
 
