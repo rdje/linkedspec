@@ -1234,7 +1234,8 @@ and `gap_text().coalesce("fallback").cat("!")`. An empty gap remains an empty
 String, so the latter produces `"!"` and skips the fallback. Pass these values
 explicitly when using pure functions.
 
-Perl, Rust, Dart and Julia support guarded direct reads and recovery from both gap String readers.
+Perl, Rust, Dart, Julia and the installed Lua hosts support guarded direct reads
+and recovery from both gap String readers.
 For example, `gap_text()[0].coalesce(["a","tail"])[-1].uppercase()` returns
 `"TAIL"`: the noncontainer read yields null and the explicit fallback supplies
 the Array. `gap_kind()["missing"].coalesce(false)` preserves the Bool fallback.
@@ -1243,12 +1244,14 @@ Incompatible consumers such as `gap_text().take(...)` and
 bodies may return Arrays or Hashes for further reads and methods. Regenerate
 affected previously emitted Perl parsers with the updated builder. Rebuild Rust
 applications with the updated runtime. Rebuild Dart and Julia applications with
-their updated runtimes as well.
+their updated runtimes as well. Rebuild Lua applications with the updated runtime;
+the focused Lua checks cover installed PUC Lua 5.5.1 and LuaJIT, with declared
+Lua 5.4 verification still separately owned.
 
 The completed-value form remains supported: bind `text = gap_text()`, then use
 `text.cat("")[0].coalesce(["a","tail"])[-1].uppercase()`. Raw named first-consumer
 policies stay as documented. These reads give no String-indexing or computed-write
-rights. Other backends are assessed independently.
+rights. The complete domain and context assessment remains separate.
 
 Empty prefix, interstitial, and tail spans are observable; none are trimmed or suppressed. A successful
 zero-match/zero-min rule sees the whole input as tail. A failed minimum sees no tail. Tail access never consumes

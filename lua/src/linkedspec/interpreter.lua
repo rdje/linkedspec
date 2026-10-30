@@ -3503,7 +3503,9 @@ end
 function typed_source.receiver_mutation.is_input_cursor_value_source(expr)
   if expr == nil or expr.kind ~= "call" or expr.trailing_block_arg or
     (expr.source_method or expr.name) ~= expr.name or
-    (not INPUT_CURSOR_HELPERS[expr.name] and expr.name ~= "rewind_entry_start" and expr.name ~= "rewind_match_start") then
+    (not INPUT_CURSOR_HELPERS[expr.name] and
+      expr.name ~= "rewind_entry_start" and expr.name ~= "rewind_match_start" and
+      expr.name ~= "gap_text" and expr.name ~= "gap_kind") then
     return false
   end
   return #(expr.args or {}) == (expr.name == "input_slice" and 2 or 0)
@@ -3516,7 +3518,7 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
     -- Static owners preserve legacy unknown bound-call result policies.
     if engine.compiled_spec.function_registry:has_name(receiver.name) then return true end
     local name = action_contracts.canonical_action_helper_name(receiver.name)
-    if name == "entry_slot" or name == "gap_span" or
+    if name == "entry_slot" or name == "gap_span" or name == "gap_text" or name == "gap_kind" or
       name == "rewind_entry_start" or name == "rewind_match_start" then
       return receiver.name == name and (receiver.source_method or receiver.name) == name and
         not receiver.trailing_block_arg and #(receiver.args or {}) == 0

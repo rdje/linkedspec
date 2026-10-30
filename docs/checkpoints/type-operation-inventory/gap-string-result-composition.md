@@ -1,7 +1,7 @@
 # Guarded gap String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.18; implementation family23.3.57.
-Status: Bounded Perl57.1/Rust57.2/Dart57.3/Julia57.4 targeted-checked; independent safe Lua pending.
+Status: Recorded bounded57 implementations are targeted-checked on their named routes/hosts; full domain/context/portable admission remains23.4.
 
 ## Existing authority and preserved behavior
 
@@ -100,3 +100,18 @@ byte-equal. New100/record98/computed25 strict depwarn pass with retained success
 package-precompile progress. Actual source/producers/inputs/results in
 gap-string-result-julia-intake.json.gz. Rebuild runtime/apps; no isolated
 package/new state/schema/full admission. Safe Lua57.5 next.
+
+## Safe installed Lua57.5 implementation
+
+Two existing canonical-zero source guard conditions now admit gap_text/gap_kind;
+original getter/helper bodies/parser/diagnostics/function/arity/state/schema and
+remaining interpreter bytes exact. Runner gains three lines, no new interpreter
+chunk locals/functions. Same148 checks140PASS/8RED to148PASS per installed
+PUC5.5.1/LuaJIT2.1.1788460057; original140 includes2 compile scaffolds in failing
+groups. Existing compatible Strings/recovery/with kinds/Unicode/errors/functions
+already healthy. Eight values/12 error-source observations retain four routes,
+six healthy values/all errors byte-equal. Record126/six computed programs/loadfile/
+version pass per host; focused stderr empty. Actual producers/source/inputs/results
+in gap-string-result-lua-intake.json.gz. Rebuild runtime/apps; no isolated package/
+declared5.4/unsafe full runner/formatter/new state/schema/full admission. Recorded
+bounded57 outcomes are complete; next remaining-feature selection23.1.19.

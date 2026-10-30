@@ -3030,6 +3030,10 @@ arity behavior; rebuild runtime/apps. Dart also now uses these gap String guards
 on native/restoredSpec/plan while preserving its already-working recovery/kinds/
 Unicode/errors; rebuild its runtime/apps. Julia now applies the same bounded
 guards across native/restoredSpec/plan/fresh Module, preserving already-working
-kinds/recovery/errors; rebuild runtime/apps. Safe Lua follows independently. Existing gap
+kinds/recovery/errors; rebuild runtime/apps. Installed PUC Lua5.5.1/LuaJIT now
+also apply the two canonical-zero source guards across native/restoredSpec/plan/
+fresh module, preserving working kinds/recovery/errors without new interpreter
+chunk locals. Rebuild Lua runtime/apps; declared5.4/full admission remain separate.
+Bounded57 outcomes are recorded; remaining-feature selection23.1.19 follows. Existing gap
 state, contexts, errors, function restrictions and raw named policies stay; full
 admission remains separate.

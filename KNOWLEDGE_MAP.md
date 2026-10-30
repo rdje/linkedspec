@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1533** facts · **11433** question keys.
+> **1534** facts · **11437** question keys.
 
 ## Questions → fact
 
@@ -2194,6 +2194,8 @@
 - "does Lua function invocation preserve every nested tagged array member" -> [lua-invocation-and-callable-consumer-reading](docs/knowledge/lua-invocation-and-callable-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_INVOCATION_READING_30 and the managed commands below; malformed acceptances are intake evidence, not passing repair criteria.`
 - "does Lua function payload copying reject non finite numbers" -> [lua-spec-ast-loader-reading-and-validation-gaps](docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md) · 2026-09-13 · reverify: [7 entries](#lua-spec-ast-loader-reading-and-validation-gaps)
 - "does Lua function projection verify payload versions against the contract" -> [lua-function-projection-reading-and-boundary-gaps](docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: `Run LUA_FUNCTION_PROJECTION_READING_29 and its managed commands below. This is focused diagnostic reproduction, not a full gate or repair closure.`
+- "does Lua gap String composition add interpreter chunk locals" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
+- "does Lua gap String recovery already work" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
 - "does Lua gap capture widen detached recognition frame state" -> [inter-match-gap-lua-implementation-plan](docs/knowledge/inter-match-gap-lua-implementation-plan.md) · 2026-08-16 · reverify: `bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh`
 - "does Lua generated execution reject false options" -> [lua-emitter-source-location-reading-and-boundary-gaps](docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: [7 entries](#lua-emitter-source-location-reading-and-boundary-gaps)
 - "does Lua generated observation change emitted source format" -> [lua-semantic-runtime-observation-generated-routes](docs/knowledge/lua-semantic-runtime-observation-generated-routes.md) · 2026-07-28 · reverify: [3 entries](#lua-semantic-runtime-observation-generated-routes)
@@ -9015,6 +9017,7 @@
 - "which Lua observation and root public closeout statements still need qualification" -> [lua-recursive-repeated-root-consumer-reading](docs/knowledge/lua-recursive-repeated-root-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_RECURSIVE_REPEATED_ROOT_READING_35 and the managed commands below; root-core proof is limited to source lines 1-134.`
 - "which Lua offsets 40 through 98 fail" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
 - "which Lua owner classifies selected entry_slot fields" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
+- "which Lua owner guards gap_kind result methods" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
 - "which Lua owner guards static rule-call result selections" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
 - "which Lua owner implements explicit callable codeblocks" -> [lua-explicit-callable-codeblock-gap](docs/knowledge/lua-explicit-callable-codeblock-gap.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'block_value|codeblock_argument|active_codeblocks|callable_codeblock\\.execute|runtime_scoped_binding|spec_ast\\.to_json|spec_ast\\.from_json' lua/src/linkedspec/action_ast.lua lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/source_emitter.lua && bash tools/run_lua_local.sh`
 - "which Lua owner returns rewind Number results" -> [lua-cursor-rewind-number-results](docs/knowledge/lua-cursor-rewind-number-results.md) · 2026-10-30 · reverify: [2 entries](#lua-cursor-rewind-number-results)
@@ -10685,6 +10688,7 @@
 - "why does Lua full pipeline trace remain in 5.3" -> [lua-runtime-diagnostics-trace-split](docs/knowledge/lua-runtime-diagnostics-trace-split.md) · 2026-07-15 · reverify: `rg -n 'LUA-BACKEND-PARITY\\.4\\.4|LUA-BACKEND-PARITY\\.5\\.3' docs/tasks/LUA-BACKEND-PARITY.md && rg -n 'DART-BACKEND-PARITY\\.4\\.5|JULIA-BACKEND-PARITY\\.4\\.5' docs/tasks/{DART,JULIA}-BACKEND-PARITY.md`
 - "why does Lua gap execution use internal module methods instead of more local functions" -> [inter-match-gap-lua-implementation-plan](docs/knowledge/inter-match-gap-lua-implementation-plan.md) · 2026-08-16 · reverify: `bash tools/run_lua_local.sh && bash tools/check_inter_match_gap_capture_six_runtime.sh && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_python_project_data.sh tools/check_duplicate_regex_slot_identity_contract.py && perl tools/check_generated_source_contract.pl && bash tools/test_lua_project_data_storage.sh`
 - "why does Lua gap_span selected String execute incompatible Array operands" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
+- "why does Lua gap_text take execute incompatible operands" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
 - "why does Lua implicit pure-null observation fail" -> [lua-null-return-and-pure-observation-gaps](docs/knowledge/lua-null-return-and-pure-observation-gaps.md) · 2026-10-29 · reverify: `Recover actual Lua nullable probes/readers/qualification from retained packet, run SDK and separate fresh process per installed host before --fresh. Preserve phase exclusion and exact fixture-derived row census.`
 - "why does Lua input_slice return null for a maximum integer width" -> [lua-emitter-source-location-reading-and-boundary-gaps](docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: [7 entries](#lua-emitter-source-location-reading-and-boundary-gaps)
 - "why does Lua matches currently fail" -> [lua-helper-regex-split-mutation-preflight](docs/knowledge/lua-helper-regex-split-mutation-preflight.md) · 2026-07-12 · reverify: `rg -n 'kind == \"regex\"|compile_runtime_regex_alternation|execute_block|evaluate_expr|regex_subst|split' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/matching.lua docs/tasks/LUA-BACKEND-PARITY.md`
@@ -16290,6 +16294,14 @@ _Safe Lua selected gap and slot fields reuse actual-kind operand guards_
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.55.5; gap-slot-record-lua-intake.json.gz retains same126checks122healthy/4RED to126GREEN per host plus static-call43/existing computed controls/loadfile and actual source/producers/inputs.`
 - **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/gap_slot_record_selection_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/gap_slot_record_selection_test.lua`
 - **source:** [`docs/knowledge/lua-gap-slot-record-selection-guard.md`](docs/knowledge/lua-gap-slot-record-selection-guard.md)
+
+### lua-gap-string-result-guards
+_Safe Lua gap String results reuse canonical actual-kind operand guards_
+- **answers:** why does Lua gap_text take execute incompatible operands | which Lua owner guards gap_kind result methods | does Lua gap String recovery already work | does Lua gap String composition add interpreter chunk locals
+- **date:** 2026-10-30 · **status:** installed PUC5.5.1/LuaJIT57.5 repaired/targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.57.5; gap-string-result-lua-intake.json.gz retains unchanged148 checks140PASS/8RED to148PASS per host, record126/six computed programs/loadfile/version and actual source/producers/inputs. Original140 includes2 compile scaffolds in failing groups.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/gap_string_result_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/gap_string_result_test.lua`
+- **source:** [`docs/knowledge/lua-gap-string-result-guards.md`](docs/knowledge/lua-gap-string-result-guards.md)
 
 ### lua-generated-mcp-first-byte-range-reading
 _Lua generated MCP first byte range and canonical binding reconciliation_
