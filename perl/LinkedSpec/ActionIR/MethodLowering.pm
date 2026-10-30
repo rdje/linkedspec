@@ -7626,7 +7626,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    my $key_expr = $trim_action_ir_value->($arg);
    return undef unless defined($key_expr) && length($key_expr);
    my $key_node = _parse_method_value_ast_expr($key_expr, $deps);
-   my $key_lowered = _lower_block_value_expr($key_expr, $deps)
+   my $key_lowered;
+   $key_lowered = _lower_block_value_expr($key_expr, $deps)
     if ref($key_node) eq 'HASH' && ($key_node->{kind} // '') eq 'block_value';
    $key_lowered = $lower_scalar_access_key_expr->($key_expr)
     unless defined($key_lowered) && length($key_lowered);

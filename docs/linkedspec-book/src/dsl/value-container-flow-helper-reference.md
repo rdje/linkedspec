@@ -1159,6 +1159,8 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
 | `binding_name.map_leaves!() { block }` | updated hash/array value | All five backends: atomically replace leaves and rebind one bare named receiver. |
 
+Each `pick_keys` key belongs to that call and is evaluated in argument order. A later call can select different keys from the same snapshot; it does not inherit an earlier key. For example, `meta={"first":"b","rest":"ar"}; return([meta.pick_keys("first"),meta.pick_keys("rest"),pick_keys(meta,"first","rest")])` returns `[{"first":"b"},{"rest":"ar"},{"first":"b","rest":"ar"}]`. A computed key block runs once for its operand: `pick_keys(meta,{seen=num_add(seen,1);"first"},"rest")` increments `seen` once and retains both existing keys. The source Hash stays unchanged. Regenerate affected Perl parsers emitted before the per-key lowering repair; their generated source may contain repeated earlier keys.
+
 Examples:
 
 ```text

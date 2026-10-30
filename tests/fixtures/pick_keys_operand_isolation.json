@@ -1,0 +1,109 @@
+[
+  {
+    "name": "variadic literals and detached source",
+    "source": "Top:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};selected=pick_keys(meta,\"a\",\"b\",\"c\");selected[\"a\"]=\"changed\";return([selected,meta])}",
+    "expected": [
+      {
+        "a": "changed",
+        "b": "B",
+        "c": "C"
+      },
+      {
+        "a": "A",
+        "b": "B",
+        "c": "C"
+      }
+    ],
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "consecutive receiver calls",
+    "source": "Top:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};return([meta.pick_keys(\"a\"),meta.pick_keys(\"b\"),meta.pick_keys(\"c\")])}",
+    "expected": [
+      {
+        "a": "A"
+      },
+      {
+        "b": "B"
+      },
+      {
+        "c": "C"
+      }
+    ],
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "dynamic variable keys",
+    "source": "Top:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};left=\"a\";right=\"b\";return(pick_keys(meta,left,right))}",
+    "expected": {
+      "a": "A",
+      "b": "B"
+    },
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "block followed by literal",
+    "source": "Top:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};order=\"\";selected=pick_keys(meta,{order=cat(order,\"A\");\"a\"},\"b\");return([selected,order])}",
+    "expected": [
+      {
+        "a": "A",
+        "b": "B"
+      },
+      "A"
+    ],
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "literal block literal order",
+    "source": "Top:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};order=\"\";selected=pick_keys(meta,\"a\",{order=cat(order,\"B\");\"b\"},\"c\");return([selected,order])}",
+    "expected": [
+      {
+        "a": "A",
+        "b": "B",
+        "c": "C"
+      },
+      "B"
+    ],
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "nested projections",
+    "source": "Top:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};return(pick_keys(pick_keys(meta,\"a\",\"b\"),\"b\"))}",
+    "expected": {
+      "b": "B"
+    },
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "zero empty and missing keys",
+    "source": "Top:: I {meta={\"0\":\"Z\",\"\":\"E\"};return(pick_keys(meta,\"0\",\"\",\"absent\"))}",
+    "expected": {
+      "0": "Z",
+      "": "E"
+    },
+    "input": "x",
+    "expected_cursor": 0
+  },
+  {
+    "name": "registered function calls",
+    "source": "fn choose(data,left,right) {return(pick_keys(data,left,right))}\nTop:: I {meta={\"a\":\"A\",\"b\":\"B\",\"c\":\"C\"};return([choose(meta,\"a\",\"b\"),choose(meta,\"b\",\"c\")])}",
+    "expected": [
+      {
+        "a": "A",
+        "b": "B"
+      },
+      {
+        "b": "B",
+        "c": "C"
+      }
+    ],
+    "input": "x",
+    "expected_cursor": 0
+  }
+]

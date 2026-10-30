@@ -53,3 +53,11 @@ substitution group against accepted40/47/49 presence/order/write contracts.
 All90 assertions and46 direct endpoint runtime groups pass; production and
 fixture values are unchanged. Other26 frozen groups remain owned, with the
 immediate/local named-map group45.3 next; no blanket source-oracle conclusion.
+
+TYPE45.3 repairs an actual shared producer defect: pick_keys retained an earlier
+lowered key under conditional local initialization. The original map expectation
+is unchanged and its five assertions now pass; raw capture maps were already
+correct. New8/capture30/original-default13 normal groups pass51. See
+[[perl-pick-keys-conditional-local-reuse]]. Current-only frozen28 assessment45.4
+next establishes remaining failures after that shared change; no old count is
+carried forward as current and no blanket stale-expectation classification follows.

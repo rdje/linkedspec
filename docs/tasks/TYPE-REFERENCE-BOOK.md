@@ -4809,6 +4809,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Canonical fixture addition from33.1: Register t/capture_boundary_number_results.t alongside the other bounded Perl feature fixtures before full23.4/admission/push.
 
+  Canonical fixture addition from45.3: Register t/pick_keys_operand_isolation.t and its retained fixture alongside direct capture/default consumers; current ordinary focused success does not establish canonical inclusion.
+
   Latest-child blind binding39.2.5.1 adds t/blind_child_retv.t; explicit canonical syntax/execution registration is required before admission/push, alongside all existing named bounded fixtures.
 
   Falsey blind iteration39.9.1 adds t/repeated_blind_falsey_group.t; explicit canonical syntax/execution registration is required before admission/push.
@@ -9136,14 +9138,37 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.2 - align endpoint lowering assertions with presence contracts`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.3`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `0b29c139b6e0fd9f2c0c962f9367863f6f1960bf`; brief empty and no pending jobs.
   Goal: Resolve the exact entry_and_match_map_helpers_snapshot_immediate_and_local_named_capture_hashes group using accepted immediate/local capture snapshot authority and public execution/source evidence.
   Reproduction: TYPE45.0 retains this group's failing runtime expectations; its precise mechanism is unclassified. Do not accept null or changed map values merely because source-shape failures elsewhere were obsolete.
+  Current public diagnosis: Exact original native/fresh results lose four selected values while raw snapshots retain prefix=foo, first=b/rest=ar and close=). A bracket-only control returns the unchanged expected array. A separate literal Hash source maps all four distinct pick calls to first; subsequent public pick_keys(meta,"kind","source","stage") emits first three times. MethodLowering pick_keys declares/initializes key_lowered under a statement modifier only for block keys, retaining a previous ordinary key across loop/subroutine uses. This is an owned product defect, not a capture or expected-value defect.
+  Owned repair scope: Initialize that per-key temporary unconditionally; preserve key lowering/order/effects, helper/result semantics, existing fixture/Phase0 oracle, generated format and other production paths. Add bounded native/fresh variadic, consecutive, dynamic, mixed block, nested, missing/empty/zero, function and detached-source controls before the patch. Retain actual before/after public source and results; reassess remaining frozen failures only after the bounded repair commit.
+  Relevant history audit: git blame and the exact production diff identify 1ad4335927d71adb22e331d61ebe7df2fd578046 (TYPE18.1 defined-only default receivers) as the introduction of this conditional key-local declaration while adding block-key support. Its bounded result claims remain historical; this follow-up owns the newly distinguished ordinary-key regression and retains the origin patch. Include the original defined_default_receiver_contract.t as a direct dependent; no whole-history audit or peer inference.
   Impact / schedule: P1 immediately after45.2 before other bounded45 repairs/full23.4/push. Other25 unaddressed frozen groups remain owned45.
+  Verification tier: `focused`
+  Focused checks: Exact five-assertion immediate/local named-map group; public original/raw-map/bracket/literal source controls; eight new key-isolation native/fresh cases; capture_collection_selection.t and original defined_default_receiver_contract.t; old emitted replay, syntax, exact patch/input identities and manual continuity.
+  Canonical trigger: Full23.4/final clean push after normal registration23.4.1 and other prerequisites.
+  Claim verification: none: Exact authored snapshot/key controls and byte identities, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Exact map group fails its preserved value oracle; seven of eight new key-isolation cases fail native/fresh values.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public raw-map/bracket controls preserve captures; pick_keys emits repeated prior keys. Conditional lexical initialization in MethodLowering's pick_keys loop retains an old lowered expression; relevant18.1 origin retained.
+  - [x] **FIX**: Declare the per-key temporary unconditionally, keeping conditional block lowering and scalar fallback unchanged. No capture/cursor/fixture/Phase0 expectation change.
+  - [x] **ADDRESSED (verified)**: Eight new cases, original unchanged five assertions and public corrected projections pass; block/literal effects, dynamic/function/nested keys, empty/zero/missing and detached source retain exact oracles.
+  - [x] **NO REGRESSION**: Direct capture and defined-default normals pass; raw-map/bracket source/results unchanged, old emitted outcomes retained and regeneration documented. Only the intended production declaration changes.
+  - [x] **LOCKSTEP**: Public examples, new fact/map, task/roadmaps/live/resume align; exact normal registration stays23.4.1 and remaining frozen assessment45.4 follows from clean commit.
+
+  Result: Public raw-map/bracket controls prove captures correct; original projections lose values because pick_keys emits an earlier key repeatedly, even across calls/compilations. Relevant origin1ad4335927 TYPE18.1 introduced conditional lexical initialization during block-key support. Declare the per-key temporary unconditionally; retain existing conditional block lowerer/scalar fallback. New8 native/fresh cases7 value RED/1healthy ->all8pass, covering variadic/consecutive/dynamic/mixed block/nested/missing-empty-zero/function/detached results. Original Phase0 map expectation unchanged and its5 assertions pass. Capture selection30/defined-default13 plusnew8 pass51 normal groups; syntax/empty final stderr. Public2healthy source/results exact,2repaired; old4 emitted source replays exact baseline outcomes and requires regeneration. Exact one production declaration patch, Phase0 unchanged and526 other prior hashed inputs unchanged; new normal/fixture owned here and canonical registration23.4.1 pending. Actual producers/source epochs/RED-GREEN/history/old artifacts retained in perl-phase0-pick-keys-intake.json.gz. Book examples/new fact/map/task/roadmaps/live/resume align; current-only frozen28 assessment45.4 next, no full suite/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.3 - isolate Perl pick_keys lowering for every operand`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.4`
+  Status: `pending`
+  Goal: Reverify the frozen28 selected groups after the shared pick_keys producer repair and select the next remaining bounded cause from actual diagnostics.
+  Reproduction / schedule: TYPE45.0 at d30 records28 failing groups;45.1/.2/.3 fix distinct bounded causes. Shared key lowering participates in other retained groups, so do not carry forward their old failures as current or assume their resolution. P1 immediately after45.3, before wider features/full23.4/push.
+  Scope: Existing current-only selector, exact28-name identity, current-input nonmutation, actual complete TAP/stderr/exit, bounded child ownership. No historical source swap, full-suite inference, expectation refresh or product edits in this assessment.
   Planned verification tier: focused.
-  Planned focused checks: Exact immediate/local named-map group, capture source/descriptor/runtime context probes, direct capture collection and source-location consumers.
-  Planned canonical trigger: Full23.4/final clean push.
-  Planned claim verification: none: Exact authored snapshot regression and distinguishing scope controls, no population measurement.
+  Planned focused checks: Current-only frozen28 replay and exact failing-set comparison at the new clean boundary; no repeated full primary suite.
+  Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Planned claim verification: none: Finite named regression groups and exact identities, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10306,7 +10331,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.3` | `pending` | Resolve the exact immediate/local named-map group, then continue the other25 owned45 groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.4` | `pending` | Reverify frozen28 after the shared key producer repair, then select the next actual bounded cause. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

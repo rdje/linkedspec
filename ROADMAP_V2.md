@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-October30 current Perl regression frontier: TYPE-REFERENCE-BOOK.1.2.23.3.45.0 recovers the exact retained28 failures against current source without historical snapshot swaps. All28 selected groups still fail; no full-suite status is inferred. Lazy-owner fixture45.1 is repaired/targeted-checked; endpoint helper assertions45.2 are aligned/targeted-checked; immediate/local maps45.3 follow before the other owned45 failures before admission/push.
+October30 current Perl regression frontier: TYPE-REFERENCE-BOOK.1.2.23.3.45.0 recovers the exact retained28 failures against current source without historical snapshot swaps. All28 selected groups still fail; no full-suite status is inferred. Lazy-owner fixture45.1 is repaired/targeted-checked; endpoint helper assertions45.2 are aligned/targeted-checked; shared pick_keys45.3 is repaired/targeted-checked; frozen28 reassessment45.4 selects the next actual cause before admission/push.
 
 October25 current PNT boundary: Deferred with16 now executes metadata-approved helper/receiver forms with scoped value/presence and caller restoration. Syntax and a small ordinary/deferred/native/fresh regression pass; grouped assignment19 is next. Signed backend implementations and deferred last14 are in. Director policy remains implement, compile, quick targeted check, commit, continue toward100% feature coverage; broad suites/exhaustive proof/global registry scans and maintenance remain deferred.
 
