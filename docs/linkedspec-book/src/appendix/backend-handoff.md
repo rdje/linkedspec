@@ -2966,7 +2966,10 @@ field reader and unchanged readonly helper ABI; native/fresh field/default/guard
 context-error/function/deferred controls pass. Rust also applies the existing
 selected-kind guard to these two zero-argument record sources; native/restored/
 generated-plan field/default/guard/context/function/arity controls pass. Rebuild
-Rust applications with the updated runtime. An established completed fluent-record source
+Rust applications with the updated runtime. Dart also guards the existing canonical
+zero-argument record sources across native/restored/generated-plan; its field,
+default, context-error and function controls pass. A separate P1 repair55.0 owns
+Dart surplus-argument rejection before broader shape admission. An established completed fluent-record source
 supplies the computed-read oracle; legacy named first-consumer policy stays
 qualified. Independent backend work preserves gap owner/phase/lifecycle/metadata/
 typed errors/function/deferred and generated-format authority.

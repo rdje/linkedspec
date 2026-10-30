@@ -1,7 +1,7 @@
 # Ordinary gap and incoming-slot record field selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.16; family23.3.55.
-Status: bounded Perl55.1/Rust55.2 repaired/targeted-checked; Dart/Julia/safe Lua pending.
+Status: bounded Perl/Rust/Dart record selection targeted-checked; P1 Dart arity55.0 then Julia/safe Lua pending.
 
 ## Established source authority
 
@@ -97,3 +97,7 @@ remains separate.
 ## Bounded Rust55.2 implemented
 
 Rust already parses these records and fields. The shared target exposes an actual-kind guard gap: selected String container consumers return[] and execute BAD on all three native/restored/generated-plan routes. A four-line role admits only existing zero-argument entry_slot/gap_span to the existing guard. Remaining engine/helper/runtime/parser/state/ABI/schema bytes stay exact. Calibrated unchanged7groups6healthy/1RED to7GREEN, nearest computed6/gap-unit3/owned fmt pass. Values/zero/missing/signed recovery/null slot/typed unavailable gap errors/function restrictions/explicit arguments and extra-arity failures hold. Initial helper-name-in-message assumption is superseded before production; existing Display emits only the error code, and initial epochs remain without defect credit. Actual sources/normal/producers/inputs/results are retained in gap-slot-record-rust-intake.json.gz. Rebuild applications with the updated Rust runtime; independently assess Dart55.3 next. No full context or portable admission.
+
+## Bounded Dart55.3 implemented
+
+Dart already parses direct record fields, but the shared target returns[] and executes BAD on selected String Array consumers across native/restored/generated-plan. Seven-line canonical zero-argument source classification reuses current actual-kind guards; all remaining interpreter/ABI/state/metadata bytes stay exact. Same new6groups5healthy/1RED to6GREEN, computed7/fatal new-test analysis/format pass;13 actual nonhidden/no-skip completions and all value/context/function observations are retained. Typed unavailable context stays an error before field defaults and functions still accept explicit records without parser state. Separate eight-form/24-route probe confirms surplus-argument acceptance by all four zero-argument readers; probe bytes stay unchanged by this guarded source role. This is a defect, not supported shape or healthy arity proof. P1 owner55.0 fixes it immediately next, then Julia55.4. Actual producers/source/normal/probes/inputs/results retained in gap-slot-record-dart-intake.json.gz. No full shape/context/portable admission.

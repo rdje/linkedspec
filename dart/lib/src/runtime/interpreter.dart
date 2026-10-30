@@ -5444,6 +5444,13 @@ final class LinkedSpecRuntimeEngine {
         return true;
       }
       final helper = canonicalActionHelperName(receiver.name);
+      // Only existing canonical zero-argument record sources join this guard.
+      if (helper == 'entry_slot' || helper == 'gap_span') {
+        return receiver.name == helper &&
+            (receiver.sourceMethod ?? receiver.name) == helper &&
+            !receiver.trailingBlockArg &&
+            receiver.args.isEmpty;
+      }
       // Static child returns use the existing selected-value operand guard.
       // Quoted/dynamic calls and legacy bound-call policies stay separate.
       if (helper == 'call') {

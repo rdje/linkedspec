@@ -807,7 +807,7 @@ and `2` for the comma gap on `a,b`. In the `Item[word]` target,
 `slot=entry_slot(); word_id=slot["slot_id"].uppercase()` produces `"WORD"`.
 The record fields and context rules stay the same.
 
-Perl and Rust also support those fields directly:
+Perl, Rust and Dart support those fields directly:
 `gap_span()["start"].add(1)` gives the same `1`/`2` offsets and
 `entry_slot()["slot_id"].uppercase()` gives `"WORD"`. A selected zero stays
 defined: `entry_slot()["regex_index"].coalesce(99).add(1)` gives `1` for slot zero.
@@ -819,9 +819,9 @@ their operands. Existing named/context first-consumer policies stay qualified.
 Direct entry-slot absence remains null, so a field read may default. Unavailable
 gap phases still raise their typed context error before a field default; they
 are not null gaps. Pure functions retain parser-context restrictions and should
-receive the record as an explicit argument. Rust preserves these values and
-guards across native, restored and generated-plan execution; rebuild applications
-with the updated runtime. Other backends are assessed independently. This adds no segmentation state, metadata field or format.
+receive the record as an explicit argument. Rust and Dart preserve these values
+and guards across native, restored and generated-plan execution. Rebuild Rust
+applications with the updated runtime. Other backends are assessed independently. This adds no segmentation state, metadata field or format.
 
 
 Migration is intentionally non-aliasing:

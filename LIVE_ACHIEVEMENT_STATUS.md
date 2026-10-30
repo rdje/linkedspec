@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust gap/slot guards7groups6healthy/1RED to7GREEN; computed6/gap-unit3/fmt pass; Dart55.3 next.
+Dart record guard5healthy/1RED to6GREEN; computed7/analysis/format pass; P1 arity55.0 next.
 
 ## Latest Completed Slice
 
-Rust gap/slot records already parse and retain fields; calibrated unchanged seven groups expose six healthy/one RED. Shared target observes incompatible selected String Array consumers returning[]/executing BAD on native/restored/generated-plan. Four-line zero-argument entry_slot/gap_span source classification reuses existing actual-kind guards; all other engine bytes and 503 bound inputs/shared fixture stay exact. New7/computed6/gap-unit3/owned fmt pass. Primitive full records/named provenance/bound methods/defined zero/missing-to-Array/signed reads/Bool false/null slot/defaults/normalized operand skips/order/cursor and pure-function restrictions/explicit record arguments/extra-arity failures hold. Unavailable gap source errors precede defaults on all three routes; native full typed message/diagnostic matches the primitive control. Initial7 has five healthy/two failures; one was an invalid helper-name-in-error-message assumption, corrected before production with original epoch retained and no defect credit. Existing InterMatchGapError Display emits only its code; private record retains context. Accepted normal bytes remain unchanged across actual six-healthy/one-RED to seven-GREEN proof. Original source/producers/epochs/inputs/results retained in gap-slot-record-rust-intake.json.gz. Dependency warnings remain opaque/upstream-owned. Book/target/cards/map/task/roadmap/live/resume/history align; independent Dart55.3 next. No gap state/helper ABI/lifecycle/parser/function/arity/source identity/schema/format/new fields/isolated emitted/full portable admission.
+Dart already reads detached gap/slot record fields; unchanged new6 independently exposes5healthy/1RED. All three native/restored SpecFile/generated-plan shared observations return[]/execute BAD after incompatible selected String consumers. Seven-line canonical zero-argument record-source classification reuses the existing actual-kind guard; all remaining interpreter/helper/parser/gap state/ABI/schema bytes and 197 other bound inputs/shared fixture stay exact. New6/computed7 pass with13 actual nonhidden/no-skip JSON completions, six value/two context/two function observations, stderr empty. New-test fatal analysis/format pass. Fields/named provenance/zero/default skips/null slot/missing-to-Array/signed recovery/false/operand/order/cursor and typed source errors/function restrictions/explicit record arguments hold. Separate eight-form/24-route public probe confirms a preexisting defect: all four documented zero-argument gap/slot readers silently accept surplus positional1. Actual _callHelper dispatch ignores the argument nodes without gap arity validation. Probe bytes remain unchanged by this zero-argument-only source-role fix; no healthy arity credit or new supported form. P1 owner55.0 repairs this immediately after this commit before Julia55.4. Actual source/normal/producers/probes/inputs/results retained in gap-slot-record-dart-intake.json.gz. Book/cards/target/map/task/roadmap/live/resume/history align. No new gap state/fields/format/helper ABI/function/deferred policy/isolated emitted/full context or portable admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.55.3 from clean Rust55.2. Read frozen gap-slot-record-selection.md/shared fixture, Dart existing detached gap/slot helper ABI, ordinary computed-read classification, source-error/function/arity/deferred fences and nearest gap/selection tests/book. Independently reproduce native/restored/generated-plan target before production, preserving healthy peers and context/typed errors. Implement only a confirmed bounded guard/source gap; compile/quick focused checks/docs/book/commit, then Julia55.4. No full suite or broad cleanup per feature.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.55.0 from clean Dart55.3. Read dart-gap-reader-surplus-arguments and actual before/after eight-form public probes, existing zero-argument helper and helper_arity_mismatch authority, Dart call helper function-resolution/state-fence ordering and diagnostic interfaces. Add strict malformed-call normal RED before production, repair the four gap/slot builtin arity checks through existing typed diagnostics without evaluating rejected operands or moving valid helpers/context. Include named/trailing/function/error/default controls; quick new plus gap-record/computed dependents, new-test analysis/format/docs/book/commit, then Julia55.4. No full suite or universal malformed-program normalization; split conflicting authority before edits.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.55.3` — Dart record guard5healthy/1RED to6GREEN; computed7/analysis/format pass; P1 arity55.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.2` — Rust gap/slot guards7groups6healthy/1RED to7GREEN; computed6/gap-unit3/fmt pass; Dart55.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46.2` — Requested obsolete-object cleanup verified; current Rust6 and retained/residue controls pass. Rust55.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.1` — Perl gap/slot10groups5RED/5healthy→10GREEN; live gap2/deferred22 pass; requested cleanup46.2 then Rust55.2.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.55.3 from clean Rust55.2. Read frozen gap-
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.4` — Julia boundary65/advancing Number65/reset70 pass, runtime unchanged; safe Lua53.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.3` — Dart boundary6/advancing Number6/reset3 pass, runtime unchanged; Julia53.4 independently next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.2` — Rust boundary6/advancing Number6/reset3 pass, runtime unchanged; Dart53.3 independently next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.53.1` — Perl boundary source methods and grammar preservation checked; final feature3/quoted28 pass; independent Rust53.2 next.
 
 ## History
 
