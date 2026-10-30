@@ -58,6 +58,8 @@ The original hygiene body below is dated evidence. Its readonly publication comm
 
 # Repo Generated Artifact Cleanup Boundary
 
+October30 explicitly requested cleanup46.2 prunes only old single-link non-executable compiler objects from the saved pre-adoption target, preserving every other entry and the adjacent Git repository. Current caches/source/evidence remain available. [[project-data-obsolete-rust-objects]] owns the exact dated metadata, quarantine/current-use proof and complete retained/residue review. This does not authorize routine cache purges or claim physical volume reclamation.
+
 `rust/target` and `docs/linkedspec-book/book` are ignored, untracked, rebuildable generated outputs in the parent
 checkout. Dart's ignored/untracked `dart/.dart_tool` is the same class of rebuildable package/build metadata. That
 classification permits an explicitly owned cleanup when one is genuinely needed; it is not a standing instruction

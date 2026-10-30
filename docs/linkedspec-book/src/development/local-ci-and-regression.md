@@ -1175,6 +1175,8 @@ routinely delete `rust/target`, the repository-local Julia depot, Dart packages,
 specific disposable per-run scratch directory may be removed only after proving that no process uses it and that
 it contains no retained diagnostic evidence.
 
+An explicitly requested October30 cleanup removes obsolete compiler object files from the old pre-adoption Cargo target. It selects only old, regular, non-executable, single-link `.rcgu.o` entries after permitted liveness checks and a reversible quarantine. The current offline Rust check passes with that old directory unavailable. Exact identity and residue checks preserve historical executables, hardlinked outputs, all other entries, source/evidence, package stores and current caches. The adjacent retained dependency repository is untouched. The dated claim records file metadata rather than physical free-space causality; this is not a recurring purge policy.
+
 Existing project-owned data outside the repository filesystem is migration input, not a supported cache location.
 Move it by copy/verify/use/delete: identify exact ownership, copy retained bytes into a root-derived SSD location,
 verify counts/sizes/hashes where material, exercise the workflow there, and delete only the exact old source.

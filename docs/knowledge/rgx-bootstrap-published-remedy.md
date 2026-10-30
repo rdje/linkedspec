@@ -55,3 +55,7 @@ unauthorized; [[external-repositories-read-only]] records the binding boundary a
 [[consumer-report-fix-commits]] separates the technical fixes from that incident.
 ARCHOGEN alone owns its repository disposition and downstream verification. Final
 LinkedSpec-only parent closeout is .1.3.2, after the committed ownership correction8b5b5ffd8; its exact canonical proof is required before landing.
+
+## October30 object-cache disposal
+
+The target-preservation statement above describes the September adoption. Owned cleanup46.2 later removes only verified obsolete single-link non-executable compiler .rcgu.o files from its old debug/deps directory. Historical executables, hardlinked outputs and every other entry remain; the adjacent retained RGX checkout is untouched. Current supported builds continue through rust/target. See [[project-data-obsolete-rust-objects]] for exact dated proof and limits.

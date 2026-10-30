@@ -1,0 +1,119 @@
+{
+  "claims": [
+    {
+      "durability": {
+        "inputs": [
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/cleanup.py",
+            "role": "producer",
+            "sha256": "5391d54e768b2dc19811069449611f220a61764582983eb86d1139573d0745ae"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/controls.py",
+            "role": "producer",
+            "sha256": "f57d7311321b0f5154c91018290aae6374d7fd19359371c79fb1060c3fe99147"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/current-test-001.part",
+            "role": "input",
+            "sha256": "c5391ec758889404bed52bbee3459040602c03509ff210f92979121d453595a2"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/current_build.py",
+            "role": "producer",
+            "sha256": "d7b176a938cd2dba6d366fc4a8383b78b63f09a95e93c50d5e68d28b4f69f8c2"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-001.part",
+            "role": "input",
+            "sha256": "63f7c5bbbdc75c3143db2ddd412878f67aa506f80faad6cee3d44152a7b1df52"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-002.part",
+            "role": "input",
+            "sha256": "37f0d904dd627b45860511b474ccb05b743f5d4698f051ea97ad54b72d4449b9"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-003.part",
+            "role": "input",
+            "sha256": "089b295ea2a7076ebebb3c873e75852fade3352a89010dae45ccbbd004a7c0b6"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-004.part",
+            "role": "input",
+            "sha256": "4e21774b1f951102c4e0c6306cd43896c5893dcde734924a3857ca824c996bde"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-005.part",
+            "role": "input",
+            "sha256": "c581249409be156c628627e122cd26eb0d7f8962680de2d0dbd155fd35ffde05"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-006.part",
+            "role": "input",
+            "sha256": "c92f9a2f527ddd6080c3463da268e3fa693838ae1663f6afe9e08d786b163a7b"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-007.part",
+            "role": "input",
+            "sha256": "487542c6e3122895634c1ad4209b6cabe350b272716fd19183a5908b49deb010"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-008.part",
+            "role": "input",
+            "sha256": "10218bf130c023a70d2c9cf1d8694d36f1dccabf125228b97d93514d2597a041"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/entries-009.part",
+            "role": "input",
+            "sha256": "83dc3a019a905af4b670edb3899556e3b916f45dcad9315d97a7cda5bc8e92b8"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/finish.py",
+            "role": "producer",
+            "sha256": "48e765ed1bbafa442ffbee2030993e30e374165fc84a8483c01d06c26da94c8a"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/intake.json.gz",
+            "role": "input",
+            "sha256": "17aba9d2118439d2747d4c73fdac9f33fc5b026b61ed3c81b384ac6e01d73351"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/retain.py",
+            "role": "producer",
+            "sha256": "09f8bd760e5b62846606f4bc2fa4e55d71c2bd7ec8ff68d7b71456dea01619ff"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/retained-review.json",
+            "role": "input",
+            "sha256": "045354af162fa4e4cc587e77e49399bc1d792deee13745c93f073ad5f80a0c15"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/review.py",
+            "role": "producer",
+            "sha256": "79fec43f1374af454886d269d63f45d65941c3ddd7395ab52792490666e7fd4c"
+          }
+        ],
+        "mode": "live",
+        "status": "checked"
+      },
+      "falsify": {
+        "hypothesis": "A filename-only deletion or incomplete liveness/retention check could discard executables/shared artifacts, miss a live owner, admit paths outside scope or report a proposal as completed cleanup.",
+        "oracle": "Actual live inventory-owner refusal versus later successful idle inspection; real quarantine/current Rust6; actual fixture quarantine/dispose/review with executable/hardlink/symlink/recent/other-suffix preservation, retained-size/count/false-removal denials, nested/symbolic/outside-root controls, and distinguishing nested claim-schema sentinel.",
+        "red_control": "Actual live-owner inspection exits1. Initial prototype admits an owned existing sibling through ..; final guard rejects it. Three metadata/disposal mutations and symbolic/nested/path denials reject. Initial ad-hoc top-level schema lookup misses the bound sentinel; corrected lookup detects it before deletion. Original epochs and producers retained.",
+        "status": "checked"
+      },
+      "name": "dated-obsolete-object-disposal",
+      "rederive": {
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/type-operation-inventory/project-data-cleanup46-2/review.py",
+        "granularity": "Every saved direct-entry metadata row and selected predicate/count/size/allocation; every retained part/input; actual successful current test executable/source inputs; actual full post-disposal entry/absence review.",
+        "result": "Readonly retained re-derivation matches the actual plan/disposal/full source review; six current offline tests pass and actual executable bytes are recoverable.",
+        "status": "checked"
+      },
+      "scope": "Named old pre-adoption debug/deps snapshot and finite disposal/preservation controls only. Per-file metadata, not physical volume reclamation or old-build byte reproduction. Hardlinks/executables/source/evidence/package/current caches and protected repositories are preserved. Same-user successful liveness at the boundary, no concurrent-adversary/other-user guarantee. No full suite, cold package bootstrap, dependency implementation audit or all-history claim-check audit.",
+      "statement": "Exactly 330165 selected obsolete single-link non-executable object files are removed; all 4215917 other direct entries preserve their observed identities. Selected metadata sums to 49600550824 logical/50270818304 allocated bytes. Current public offline rule-call6 passes with old deps unavailable."
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.46.2",
+  "version": 1
+}
