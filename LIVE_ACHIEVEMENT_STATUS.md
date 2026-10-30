@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
+Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
 
 ## Latest Completed Slice
 
-Exact method-contract group reproduces1 obsolete source assertion RED/78 healthy, then79 GREEN. Only slot71 becomes an initialized value check; the original last(sorted_values(pick_keys(meta,"kind","source"))) expression and78 healthy assertions stay exact. Four independent public native/fresh controls preserve selected fixture, sorted-key order/source contents, empty projection null and stored-null last value; all channels/cursors agree. Existing seeded scalar-host isolation15 passes. Production and537 other replay inputs stay unchanged. Initial invalid unquoted-key/no-edge probe and an accidentally repeated unchanged selected run are retained without semantic/GREEN credit; no expectation changed before the refused reader. Syntax/book/map/history/manual checks pass; actual sources/producers/RED-GREEN/controls and epochs retained in perl-phase0-method-projection-oracle-intake.json.gz. One current-only frozen28 reassessment45.25 follows, then meaningful feature selection. No universal kind/null policy, context/peer/full-suite or parent admission claim.
+Current-only replay of the original frozen28 failure names passes all28 groups, exit0, complete29-result top plan including shared discovery. Each selected group has its actual positive direct nested plan/contiguous IDs and no skipped/todo direct slots; deeper subtest accountability remains Test::More, with no primitive-assertion population claim. Original universe/compressed primary diagnostics match the unchanged TYPE37 packet;538 bound current input hashes and HEAD are identical around execution. All raw TAP/stderr/seen names/actual producer/artifact inputs are retained in perl-phase0-after-projection-intake.json.gz. No canonical source or expectation changes in this diagnostic leaf. This is focused evidence for the retained subset; parent45/full Phase0/portable/context admission remain open until canonical prerequisites. Next23.1.11 selects the next useful capture-result fluent transition from canonical source/signature/book authorities, with bounded public distinctions only. Book/map/history/manual continuity checks pass; no full suite, exhaustive matrix or push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.25 from this clean dependent-oracle repair. Reassess the exact original frozen28 once with current-only source-preserving selection and actual nested plans/terminal exits; own any new current failures, otherwise resume next useful fluent feature selection23.1.11. Never run the historical snapshot-swapping producer. Full23.4/20.1/registration and remaining owned prerequisites stay separate; no routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.1.11 from clean selected28 GREEN. Read canonical helper/source/signature inventory and current family exclusions; assess readonly capture String and related source-result composition using a few native/fresh producer/bound/direct controls with a proven action carrier. Freeze the next useful bounded target and independent backend/prerequisite owners before production. Reconcile encountered capture-alias catalog drift against current authority in that same selection scope. Preserve existing coordinates/name roles/context/callback/function/copy/mutation/shape policies; no comprehensive or portable admission claim. Implement next feature with compile/quick targeted checks and per-leaf commits.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.25` — Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.24` — Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.23` — Frozen28 current-only replay27PASS/1FAIL; one dependent sorted_values source oracle owned45.24.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.22` — Receiver blocks18/public8 pass with unchanged production; one current-only frozen28 reassessment next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.25 from this clean dependent-oracle rep
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` — Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` — String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1` — sorted_values scalar host leak repaired;15 seeded cases/Hash14/String6; original String18 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.10` — Hash chain14/six native-fresh controls align with approved null copy; String returned-type45.11 next.
 
 ## History
 

@@ -6,10 +6,10 @@ answers:
   - "did the Perl boundary catalog change introduce the current Phase0 failures"
   - "who owns the 28 Phase0 failures retained with TYPE37"
 date: 2026-10-30
-status: current selected failures owned by TYPE-REFERENCE-BOOK.1.2.23.3.45
+status: original selected28 GREEN at TYPE45.25; full-suite/canonical admission remains open
 tags: [perl, phase0, regression, ownership]
 evidence: "TYPE37 perl-emitted-boundary-catalog-intake.json.gz retains full primary run, exact selected28 names, actual baseline/candidate TAP/stderr, canonical snapshots, producer and comparison receipt."
-reverify: "Recover replay_phase0_after_repairs.py and probe_phase0_current_selected.pl plus their exact inputs from perl-phase0-after-repairs-intake.json.gz at the recorded activation boundary. For a newer current replay, own a new activation and unused output prefix; never install historical production snapshots or run the TYPE37 source-swap replay/--restore."
+reverify: "Recover replay_phase0_after_projection.py and probe_phase0_current_selected.pl plus their exact inputs from perl-phase0-after-projection-intake.json.gz at the recorded activation boundary. For a newer current replay, own a new activation and unused output prefix; never install historical production snapshots or run the TYPE37 source-swap replay/--restore."
 ---
 
 The historical TYPE37 additional standard Phase0 run fails28/1035 groups. The exact28 failing groups
@@ -196,3 +196,13 @@ controls/production stay exact; public native/fresh4 and seeded isolation15 pass
 The initial invalid carrier/key probe and duplicate unchanged selected run are
 retained without semantic/GREEN credit. Combined frozen28 reassessment45.25 is
 next; no full-suite/parent admission or new kind/null policy is inferred.
+
+TYPE45.25 current-only reassessment at e4a7410b4ddf4aa59f12662e66fb2afa91c9798a
+passes every original frozen28 group, exit0, complete29-result TAP including
+shared discovery, with positive direct nested plans/no selected skipped/todo
+slots and538 input hashes/HEAD unchanged. Original frozen universe/compressed
+primary diagnostics still match TYPE37. Actual producer/artifact inputs/results
+are retained in perl-phase0-after-projection-intake.json.gz. This closes the
+current diagnostic loop for that exact subset; parent45/full Phase0/canonical
+source-context/portable admission remain open. Next feature selection23.1.11
+resumes; no exhaustive suite is run for this checkpoint.
