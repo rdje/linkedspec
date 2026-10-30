@@ -129,3 +129,8 @@ TYPE45.14 subsequently reconciles Hash-snapshot1 old owner regex/3 healthy ->
 Public native/fresh5 verify values/source/once-only/default behavior; no new
 copy-depth or alias inference. Nine last-selected groups remain owned; set_key
 45.15 follows. No combined28/full-suite status is inferred.
+
+TYPE45.15 reconciles set_key2 old source assertions/2 healthy ->4 GREEN with
+public native/fresh2/direct eager-key3, original expressions/healthy checks and
+production unchanged. Eight last-selected groups remain owned; rename_key45.16
+follows. No new combined28/full-suite status is inferred.

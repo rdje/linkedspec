@@ -9419,13 +9419,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.14 - verify Hash copy assignment values beyond helper spelling`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.15`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile retained set_key helper checks under current pure/statement mutation and staged key/value contracts; independently public-probe source/key/value order before changing exact source assertions. Repair real outliers first.
   Schedule: P1 next; other8 last-selected failures remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact set_key group, public native/fresh pure/statement/key-block/snapshot/source controls and direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named Hash/key/value distinctions, no population measurement.
+
+  Activation: clean `e619fdb93741e7f4f9a50542bc4a8354a2bace66`; proof jobs terminal and brief empty; exact group `emit_context_lowers_set_key_value_helpers`.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Result: Exact set_key group reproduces2 source-oracle RED/2 healthy after explicit local owner loading, then4 GREEN. Original pure-update and nested presence expressions now check values/source preservation, retaining both healthy return/assignment controls. Two public native/fresh cases distinguish pure copy from statement mutation and capture key=before despite the value rebinding it toafter. Direct eager-key3 retains local returns/KVKVKVKV, source/key snapshots, String-key writes, existing scalar fallbacks and normalized-result null guards. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass; cold no-tests255 gets no semantic RED credit. Actual source/RED-GREEN/producers/current28.1 authority retained in perl-phase0-set-key-intake.json.gz. Book/fact/task/roadmaps/live/resume align; eight last-selected groups remain, rename_key45.16 next. No new mutation/domain/fallback/depth or peer/full-suite/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.15 - align set_key checks with staged operand values`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.16`
+  Status: `pending`
+  Goal: Reconcile retained rename_key helper group under existing pure copy/source/key/missing/collision contracts; independently public-probe before source-oracle movement. Repair real outliers first.
+  Schedule: P1 next; other7 last-selected failures remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact set_key group, public native/fresh pure/statement/key-block/snapshot/source controls and direct consumer when warranted.
+  Planned focused checks: Exact rename_key group, public native/fresh pure/missing/collision/source controls and direct consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named Hash/key/value distinctions, no population measurement.
+  Planned claim verification: none: Finite named Hash/key distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10588,7 +10608,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.15` | `pending` | Assess retained set_key helper checks against staged key/value and mutation authority. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.16` | `pending` | Assess retained rename_key checks under existing pure Hash/key contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

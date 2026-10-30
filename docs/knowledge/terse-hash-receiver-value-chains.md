@@ -61,3 +61,10 @@ once-only key/source K/SK snapshots. All production unchanged; no new namespace
 or host-isolation policy. Cold private-owner setup is separately repaired locally
 and gets no semantic RED credit. Actual inputs/producers/RED-GREEN retained in
 perl-phase0-has-key-intake.json.gz; general isolation remains SESSION17.
+
+TYPE45.15 reconciles only set_key2 source oracles/2 healthy ->4 GREEN. Original
+helper expressions/healthy return and assignment assertions stay exact; actual
+values and source preservation replace old unstaged-key spelling. Public native/
+fresh2/direct eager-key3 pass with key-before-value, KVKVKVKV/local returns and
+existing root fallback distinctions. Production unchanged; no new mutation/key/
+copy policy. Inputs/producers retained in perl-phase0-set-key-intake.json.gz.

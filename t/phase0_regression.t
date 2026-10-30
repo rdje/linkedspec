@@ -37561,16 +37561,21 @@ SPEC
 };
 subtest 'emit_context_lowers_set_key_value_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('set_key(meta, "stage", "normalized")'),
-        'do { my $__ls_set_key_source = \%meta; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }',
-        'set_key(...) lowers working hashes into a pure single-key update hashref expression'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('set_key(meta, "stage", "normalized")') . ', {%meta}];'
+        ),
+        q#{"value":[{"kind":"token","source":"fixture","stage":"normalized"},{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'pure set_key yields an updated Hash and preserves the source'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(set_key(meta, "stage", "normalized"), "stage")'),
-        'do { my $__ls_has_key = do { my $__ls_set_key_source = \%meta; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); $__ls_set_key{"stage"} = "normalized"; \%__ls_set_key }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"stage"}) ? 1 : 0) : 0 }',
-        'set_key(...) composes inside flow expressions through other hash/object helpers'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(set_key(meta, "stage", "normalized"), "stage")') . ', {%meta}];'
+        ),
+        q#{"value":[1,{"kind":"token","source":"fixture"}],"warnings":[]}#,
+        'set_key composes with flow presence without source mutation'
     );
     is(
         evaluate_lowered_json(

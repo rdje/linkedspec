@@ -1157,6 +1157,18 @@ On Perl, `drop_keys(meta, "debug")` and `meta.drop_keys("debug")` leave `meta` u
 
 Ordinary Perl `set_key` accepts eager String key blocks in value, receiver and statement forms: `meta.set_key({return("kind")},{return("node")})` produces a copy with `"kind":"node"`. Block returns stay local. Pure source, key and value evaluate once in that order; the source copy and selected key survive later operand effects. With `meta={"old":1}; key="before"`, `changed=set_key(meta,key,{key="after";2})` yields `{"old":1,"before":2}`, leaves `meta` as `{"old":1}` and leaves `key` as `"after"`. Statement `set_key(meta,key,...)` and String-key `meta[key]=...` also capture the key before their value.
 
+The pure and mutating forms can be used together. This Perl action returns `[{"old":1,"before":2},{"old":1,"stored":7},"after"]`:
+
+```text
+meta = {"old":1};
+key = "before";
+out = set_key(meta, key, {key="after";2});
+set_key(meta, "stored", 7);
+return([out,meta,key]);
+```
+
+The pure result keeps the earlier key and original source fields. The statement adds `stored` to the working Hash after that result has been captured.
+
 Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)` produces `{"k":1}`. A scalar-producing prefix has its own guarded result boundary: `n.add(0).set_key("k",1)` yields undef. This compatibility rule does not change helper arities, copy depth, mutation target kinds or deferred callable permissions.
 
 | Helper | Result | Use it when |
