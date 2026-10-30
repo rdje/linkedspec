@@ -36824,6 +36824,7 @@ subtest 'emit_context_lowers_scalar_boundary_transform_value_helpers' => sub {
 };
 subtest 'emit_context_lowers_concat_value_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(lowercase(trim(raw_name)), "_", stage)'),
@@ -36831,9 +36832,12 @@ subtest 'emit_context_lowers_concat_value_helpers' => sub {
         'cat(...) lowers normalized scalar fragments into one guarded pure scalar expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))'),
-        q{do { my @__ls_cat_parts = (do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "word" } }, "::", do { my $__ls_upper = do { my $__ls_trim = $kind; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_upper) ? LinkedSpec::UnicodeCaseMapping::uppercase($__ls_upper) : $__ls_upper }); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = "$__ls_cat_part"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\A-0(?:\.0+)?\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }},
-        'cat(...) lowers composed fallback and normalization fragments into one guarded scalar value'
+        evaluate_lowered_json(
+            '[' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('cat(coalesce_nonempty(trim(retv["type"]), entry_text(), "word"), "::", uppercase(trim(kind)))') . ', $retv->{type}, $kind]',
+            q{my $retv={type=>"  "}; my $kind=" token "; my $IMATCH; my $IPOS=0; my $text=""; my $STRING=\$text; my $info={};},
+        ),
+        q#{"value":["word::TOKEN","  "," token "],"warnings":[]}#,
+        'cat composes nonempty fallback and normalization without source mutation'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(cat(lowercase(trim(raw_name)), "_", stage), "node_init")'),

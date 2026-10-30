@@ -9263,14 +9263,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.8 - reconcile scalar boundary regression value checks`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.9`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `f7f549073743a86574718d04085e30cb877c9c62`; no proof jobs and brief empty.
   Goal: Reconcile the exact emit_context_lowers_concat_value_helpers group with current strict scalar text normalization, source evaluation and comparison authority; repair only established assertion/product causes.
-  Reproduction: TYPE45.4 retains three exact-source mismatches among this group's4 assertions, with a semantic Hash projection healthy. Direct private-owner dependency must be explicit for an isolated group (see45.8); retain actual setup and semantic results separately.
+  Reproduction: TYPE45.4 retains one exact-source mismatch among this group's4 assertions, with the other three assertions healthy. Direct private-owner dependency must be explicit for an isolated group (see45.8); retain actual setup and semantic results separately.
   Impact / schedule: P1 immediately after45.8 before other remaining failures/full23.4/push. Other14 current failed names remain owned45.4 receipt/parent45.
+  Verification tier: `focused`
+  Focused checks: Exact4 assertions with explicit private-owner dependency, original cat/helper/flow expressions and exact values/source preservation; small scalar_text_contract.t neutral String/null/container/Boolean/Number controls, syntax and exact scoped/input identities. Prior unchanged String native/fresh proof is not rerun or promoted.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored scalar text distinctions, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: One old exact emitted-text assertion fails while the other three assertions stay healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing scalar normalization/default/comparison guards differ from old text; establish exact strict scalar-text contract and original expression/source values.
+  - [x] **FIX**: Replace only the obsolete composed-fallback source check with exact value/source checks and explicit private-owner require; preserve its original expression, all three healthy assertions and production.
+  - [x] **ADDRESSED (verified)**: Exact4 and neutral scalar-text consumer pass; source values preserved.
+  - [x] **NO REGRESSION**: Neutral String/Boolean/finite-number/null/Array/Hash contract and retired concat diagnostic unchanged; no new portable or codeblock-syntax admission.
+  - [x] **LOCKSTEP**: Neutral scalar-text home/fact/map/book/current task/roadmaps/live/resume and next bounded child agree.
+
+  Evidence correction before landing: actual isolated and retained45.4 cat diagnostics each have1 failed/3 healthy assertions, not the initially assumed3/1. Independent verifier rejects the bad count before document completion. Restore first/third healthy assertions byte-exact; only the second assertion is reconciled. Original count-assumption verifier and overbroad transient candidate remain retained without product RED credit.
+
+  Result: Exact cat group reproduces1 obsolete composed-fallback emitted-text failure/3 healthy assertions after explicit private-owner load. Preserve its original expression and assert word::TOKEN plus unchanged source bindings; other3 assertions remain byte-exact. All4 and neutral scalar_text_contract.t7 pass, syntax/empty final stderr. Neutral String/Bool/finite-number/null/Array/Hash and retired concat contract unchanged,529 other hashed inputs unchanged and no production changes; prior native/fresh String proof is not rerun/promoted. Independent verifier rejects initial3/1 count assumption: both isolated/retained runs are1/3; overbroad first/third replacements restored before landing and all epochs retained without false RED credit. Actual source/RED-GREEN/producers/neutral inputs in perl-phase0-cat-intake.json.gz. New contract-home fact/map/book/task/roadmaps/live/resume align; Hash-chain missing/null copy45.10 next before more printed-source repairs, other13 current failed names owned45. No silent null acceptance/full suite/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.9 - reconcile strict scalar cat regression value checks`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.10`
+  Status: `pending`
+  Goal: Reconcile the exact spec_format_terse_2_3_5_2_hash_receiver_value_chains group with approved scalar/null copy, actual-kind continuation and pure Hash snapshot authority; fix an actual defect if that contract demands it.
+  Reproduction: TYPE45.4 retains2 failures among14 assertions: old copy/flat_hash source regex expects __ls_hash_snapshot and the final missing.copy().count_keys() value is null versus expected0. Do not silently accept null; distinguish approved null-preserving copy/guarded continuation from legacy direct count and healthy Hash copy.
+  Impact / schedule: P1 immediately after45.9, prioritizing the retained runtime-valued mismatch before more printed-source oracle repairs. Other13 last-selected failed names, including pending emptiness/other helper groups, remain owned45.4 receipt/parent45.
   Planned verification tier: focused.
-  Planned focused checks: Exact4 assertions, original cat/helper/comparison expressions with strict scalar/null/container/falsey/literal controls and the small direct scalar-text consumer; reuse unchanged producer scope rather than repeat full String regression.
+  Planned focused checks: Exact14 assertions, public original source/native/fresh/descriptor and absent/null/empty Hash/direct-count/copy-depth/snapshot controls; direct copy receiver consumer and accepted ADR0138/actual-kind boundaries.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored scalar text distinctions, no population measurement.
+  Planned claim verification: none: Exact authored copy/continuation distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10433,7 +10455,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.9` | `pending` | Reconcile the exact cat group, then continue the other14 current failed groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.10` | `pending` | Reconcile the retained Hash-chain null/copy mismatch against approved authority, then continue the other13 owned failures. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

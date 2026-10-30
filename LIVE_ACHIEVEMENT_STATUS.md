@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Scalar boundary6/direct String7 pass with source/literal checks and explicit focused dependency; cat45.9 next.
+cat4/neutral scalar-text7 pass with source checks; retained Hash-chain null/copy distinction45.10 next.
 
 ## Latest Completed Slice
 
-Isolated boundary group first exits255/no-tests because its private EmitContext owner was only loaded by earlier groups; add local require and retain setup separately without semantic RED credit. Actual source run has4 old exact-source failures/2 healthy Hash projections. Preserve all4 original helper/flow expressions, assert normalized values/source preservation/literal-dot match-miss semantics; final2 assertions stay byte-exact. All6/direct native-fresh scalar String7 pass, syntax/empty final stderr,529 other hashed inputs unchanged and no production changes. Existing inspect-a-copy/kind/Unicode/null/affix authority preserved. Actual cold/source RED-GREEN/producer/consumer inputs retained in perl-phase0-scalar-boundary-intake.json.gz; canonical String/new focused-selection facts/map/book/task/roadmaps/live/resume align. Exact cat45.9 next, other14 current failed names owned45; no broad source refresh/full suite/push.
+Exact cat group reproduces1 obsolete composed-fallback emitted-text failure/3 healthy assertions after explicit private-owner load. Preserve its original expression and assert word::TOKEN plus unchanged source bindings; other3 assertions remain byte-exact. All4 and neutral scalar_text_contract.t7 pass, syntax/empty final stderr. Neutral String/Bool/finite-number/null/Array/Hash and retired concat contract unchanged,529 other hashed inputs unchanged and no production changes; prior native/fresh String proof is not rerun/promoted. Independent verifier rejects initial3/1 count assumption: both isolated/retained runs are1/3; overbroad first/third replacements restored before landing and all epochs retained without false RED credit. Actual source/RED-GREEN/producers/neutral inputs in perl-phase0-cat-intake.json.gz. New contract-home fact/map/book/task/roadmaps/live/resume align; Hash-chain missing/null copy45.10 next before more printed-source repairs, other13 current failed names owned45. No silent null acceptance/full suite/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.9 from clean scalar boundary oracle repair. Reconcile the exact4-assertion cat group with strict scalar-text/source-evaluation/comparison authority; explicitly load its private dependency when isolating it and keep setup failure distinct from semantic RED. Preserve original expressions and healthy Hash projection, add exact value/source/kind controls and run the small direct scalar-text consumer. Other14 current failures remain in45.4 receipt/parent45; no repeated full String/full Phase0 suite. Canonical prerequisites remain before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.10 from clean cat oracle repair. Reconcile the exact14-assertion Hash receiver-chain group through approved scalar/null copy ADR0138 and actual-kind continuation/snapshot authority. Publicly distinguish missing/null copy followed by count_keys from direct count and healthy empty/filled Hash copy before altering expected null/0 or emitted-source assertions; fix any established product defect. Other13 last-selected failures remain in45.4 receipt/parent45, including source-only helper groups. No global refresh/full Phase0 per repair; canonical prerequisites remain before admission/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.9` — cat4/neutral scalar-text7 pass with source checks; retained Hash-chain null/copy distinction45.10 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.8` — Scalar boundary6/direct String7 pass with source/literal checks and explicit focused dependency; cat45.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.7` — Nonempty-default3/direct6 pass with normalized value/source checks; scalar boundary-transform45.8 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.6` — Collection pipeline26/direct6 pass with stronger source checks; no product change; nonempty-default45.7 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.9 from clean scalar boundary oracle rep
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.5` — Safe dual-host Lua blind compiler repaired; Perl warning owners40.1.1/.2 next before45.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2` — Julia fresh conventional arrays targeted-checked; safe Lua intake next, ordinary/cross-rule scope authority owned before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1` — Julia typed blind parent-push repaired on13 routes; actual rule-array scope48.4.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.48.4` — Julia blind declaration and dependency-regex compiler repair targeted-checked; parent-push runtime48.4.1 next.
 
 ## History
 

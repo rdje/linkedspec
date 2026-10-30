@@ -91,3 +91,10 @@ then6GREEN, final2 semantic assertions unchanged, direct native/fresh String7
 passes. Initial cold private-owner failure runs no assertions and is separately
 retained/fixed by local require. All production unchanged. Other15 last-selected
 failures remain owned; exact cat45.9 next.
+
+TYPE45.9 subsequently reconciles one cat composed-fallback source assertion:
+1RED/3healthy then4GREEN, other3 assertions byte-exact; neutral scalar-text
+consumer7 passes, production/neutral contract unchanged. Initial3/1 count
+assumption is rejected; both actual diagnostic epochs are1/3 and overbroad
+transient changes are restored. Other14 last-selected failures stay owned;45.10
+next prioritizes the runtime Hash-chain null/copy distinction against authority.
