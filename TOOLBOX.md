@@ -1912,11 +1912,12 @@ ahead of `PERL5LIB`); confirm with
 ## Protocol A — a phase0 subtest fails
 1. **Dump the engine's actual output** for that subtest's exact spec+input via §1.1 / §2.1 / §1.3 —
    never transcribe from the triage note.
-2. **Route by the got-value:** a scalar/`1` where a tagged array was expected ⇒ **STALE** (re-bless to
-   the dumped value); `undef` ⇒ handler compile-fail ⇒ **REAL codegen** (§2.2); `[]` ⇒ compiled but
-   dropped payload ⇒ **REAL codegen** (§2.2).
-3. **Fix** (re-bless to the *dumped* value, or engine fix iff objectively broken AND authorized), then
-   **prove** with §5.1 + §6.1: cleared = exactly your set, new = empty.
+2. **Establish the contract and mechanism:** compare the observed value, cursor, error and emitted source
+   with the accepted authority and a distinguishing control. Result shape alone does not establish a stale
+   expectation or codegen defect: scalar, `undef` and empty Array can each be valid outcomes.
+3. **Fix the owned cause:** repair the implementation or a demonstrably obsolete assertion, preserving the
+   historical evidence. Run the exact affected groups and direct dependents; use §6.1 for their failing-set
+   comparison. Reserve the full §5.1 gate for the designated admission or push boundary.
 
 ## Protocol B — a parse rejects valid input / returns the wrong shape
 1. Minimal-reproduce with §1.1 (confirm the ≥2-rule / no-regex-on-top idiom).

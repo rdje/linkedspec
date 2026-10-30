@@ -9062,7 +9062,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.33.3.1 - keep Dart zero regression independent of unsettled match endpoints`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45`
-  Status: `pending` / P1 after40/41/47/49/48, before wider feature expansion/full23.4/push
+  Status: `in_progress` / P1 after40/41/47/49/48, before wider feature expansion/full23.4/push
   Goal: Resolve every exact retained current Phase0 failure without blessing invalid runtime behavior or rewriting historical proof.
   Reproduction: TYPE37 standard prove -q -Iperl t/phase0_regression.t fails28/1035 groups; raw TAP/stderr and exact selected names retained in perl-emitted-boundary-catalog-intake.json.gz. Canonical committed-baseline versus candidate Compiler/Contracts selected28-group TAP/diagnostics are byte-identical. All other production and Phase0 source bytes remain HEAD. This proves existing failures for this patch boundary, not blanket stale tests or a full baseline run.
   Impact / ownership: Full primary regression gate is not green. Own all28 named groups, including lazy owner loading, immediate/local maps, container/value helper lowering, hash mutations/value calls and fluent receiver results. Some diagnostics are old source-shape expectations; some assert wrong runtime values. Classify only after public source/context/debug probes and accepted contracts. Cross-link existing receiver/deferred readiness/diagnostic owners rather than duplicate repairs.
@@ -9073,7 +9073,37 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned canonical trigger: Full23.4/final clean push must be green after all owned defects and selection prerequisites.
   Planned claim verification: none: Finite authored existing regression failures and exact selected baseline/candidate distinctions, no population measurement.
 
-  Recovery after daily cleanup46: completed37 primary-run log/stderr raw duplicates are now local .gz files and remain exact inputs in the unchanged Perl37 packet. Restore those raw names and verify hashes before replay_boundary_phase0_selected.py; no diagnostic or producer was discarded.
+  Recovery after daily cleanup46: completed37 primary-run log/stderr raw duplicates are local .gz files and remain exact inputs in the unchanged Perl37 packet. Verify decompressed identities against that packet. Historical replay_boundary_phase0_selected.py swaps old production snapshots and is only a historical comparison producer: never run it or its --restore option against current source. Current-only replay_phase0_current_selected.py selects the frozen groups without installing old sources; no diagnostic or producer was discarded.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.0`
+  Status: `completed`
+  Activation: clean `d30a2f9cd37bd211b1e7c1c9faecc15c9579da8d`; no pending proof jobs.
+  Goal: Recover the frozen28 identities and reverify only those groups against current source without historical source swaps; retain actual current diagnostics and schedule bounded repairs.
+  Ownership: Current-only selector/producers, recovered evidence, canonical Phase0 fact, Toolbox diagnosis guidance and current task/live/book handoff. No product or existing expectation changes in this intake.
+  Reproduction / issue: Historical replay_boundary_phase0_selected.py deliberately swaps Compiler/Contracts and MEMORY to TYPE37 snapshots; running it against current HEAD would undo later fixes. MEMORY/card recovery directions omit that historical boundary. Toolbox Protocol A also infers stale expectations from scalar result shape, conflicting with this owner's contract-led classification rule.
+  Verification tier: `focused`
+  Focused checks: Exact frozen JSON/primary diagnostics/committed packet identities; unchanged current production/test hashes around a current-only selected replay; exact top-level selection/completion; retained diagnostics and bounded repair ownership; map/book/history/manual continuity checks.
+  Canonical trigger: Full23.4/final clean push after repair and registration prerequisites; no full-suite status from selected groups.
+  Claim verification: none: Finite named authored regression groups and byte identities, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Recover exact historical failures and expose current selected results.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Classify only after public probes and accepted contracts; historical swap is not a current-source verification producer.
+  - [x] **FIX**: Add safe current-only replay and correct recovery/diagnosis guidance; schedule actual bounded children before product edits.
+  - [x] **ADDRESSED (verified)**: Retain current selected TAP/stderr/exit and exact selected names with production/test nonmutation.
+  - [x] **NO REGRESSION**: No production/test expectation changes, no historical evidence rewrite or full-suite claim.
+  - [x] **LOCKSTEP**: Current fact/book/task/roadmap/live/resume describe exact bounded state and next repair.
+
+  Result: Current-only Phase0 recovery verifies frozen28 names and compressed primary diagnostics against the unchanged TYPE37 packet. All28 selected groups still fail at d30a2f9cd; complete nested assertions/shared discovery and29-result TAP retained, exit28,528 input hashes unchanged. No source snapshot installed, production or expectation edit, stale-value classification or full-suite state inferred. Initial lexical-local selector error stops before tests and is retained without result credit. Historical replay is explicitly historical; its old-source/--restore commands are removed from current recovery guidance. Toolbox now requires contract/mechanism evidence instead of classifying by result shape. First bounded lazy-owner callback child45.1 follows; remaining27 named groups stay owned45. Actual producers/inputs/TAP/diagnostics retained in perl-phase0-current-intake.json.gz. Book/card/map/task/roadmap/live/resume agree; focused authorized commit, no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.0 - recover current Perl regression failures without source swaps`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.1`
+  Status: `pending`
+  Goal: Reconcile the exact actionir_dep_builders_lazy_load_callback_owner_packages failure with the current published dependency seam; repair only its established cause.
+  Reproduction: Current45.0 selected replay fails three ArrayPipeline assertions because Synthetic::ActionIRLazy::Owner2 lacks _lower_method_value_expr. Other owner cases and the actual lazy require assertion pass. Do not infer whether the production seam or the synthetic fixture is wrong without reading its contract and direct public consumer.
+  Impact / schedule: P1 immediately after45.0, before other bounded45 repairs and full23.4/push. Current source/test hashes and failed TAP retained by45.0.
+  Planned verification tier: focused.
+  Planned focused checks: Exact lazy-owner group, public callback invocation/source probe and direct ArrayPipeline dependents; preserve load/error/callability inverse controls.
+  Planned canonical trigger: Full23.4/final clean push.
+  Planned claim verification: none: Exact authored lazy-owner assertions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10236,7 +10266,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45` | `pending` | Recover exact retained Phase0 failures and own bounded repairs. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.1` | `pending` | Reconcile the exact lazy-owner callback failure, then continue the remaining27 owned45 groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
