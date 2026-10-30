@@ -14,7 +14,7 @@ answers:
   - "why does a set_key eager key block generate invalid Perl"
   - "why does a set_key value operand change an earlier key"
   - "how does Perl preserve set_key helper reference results while staging keys"
-date: 2026-10-27
+date: 2026-10-30
 status: bounded has_key rollout and Perl eager set_key operands checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, hash, rust-parity, mdbook]
 evidence: "Hash2.3.5.2/Lua copy6.2.2; prior details at Git617eb85069719f32d36779e521a438ae595df088 for this path. Has_key23.2.7 public native/fresh distinctions."
@@ -50,3 +50,14 @@ String-key operator and legacy roots. First-consumer []/Hash fallback is explici
 preserved by the aggregate snapshot authority; normalized scalar prefixes retain
 null guards. Broader host-slot isolation remains SESSION17/17.1. Capture-name29.1
 follows; full admission stays23.4.
+
+TYPE45.13 reconciles the old value-layer has_key group:2 source-oracle RED/
+2 healthy ->4 GREEN. Both original helper expressions and healthy fallback/
+Hash assertions stay exact. Private emission now reads the initialized Hash
+value; old exact `%meta` spelling is not the public value contract. Three public
+native/fresh controls preserve false/null-valued presence, missing/empty false,
+original fallback and compatible result consumers. Direct producer6 retains
+once-only key/source K/SK snapshots. All production unchanged; no new namespace
+or host-isolation policy. Cold private-owner setup is separately repaired locally
+and gets no semantic RED credit. Actual inputs/producers/RED-GREEN retained in
+perl-phase0-has-key-intake.json.gz; general isolation remains SESSION17.

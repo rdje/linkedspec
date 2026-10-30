@@ -37207,11 +37207,12 @@ SPEC
 };
 subtest 'emit_context_lowers_has_key_value_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(meta, "kind")'),
-        '((exists $meta{"kind"}) ? 1 : 0)',
-        'has_key(name, key) lowers working hashes into an exists(...) boolean-like expression'
+        evaluate_lowered_json(LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('has_key(meta, "kind")')),
+        q#{"value":1,"warnings":[]}#,
+        'has_key(name, key) reads the initialized Hash value'
     );
     is(
         evaluate_lowered_json(
@@ -37221,9 +37222,9 @@ subtest 'emit_context_lowers_has_key_value_helpers' => sub {
         'has_key(...) lowers hash-valued fallback expressions into guarded key-existence checks'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(meta, "kind")'),
-        '((exists $meta{"kind"}) ? 1 : 0)',
-        'has_key(...) composes directly inside flow conditions'
+        evaluate_lowered_json(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(meta, "kind")')),
+        q#{"value":1,"warnings":[]}#,
+        'has_key(...) preserves key presence in flow conditions'
     );
     is(
         evaluate_lowered_json(

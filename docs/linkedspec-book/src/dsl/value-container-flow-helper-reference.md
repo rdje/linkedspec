@@ -1195,6 +1195,15 @@ leaf_count = tree.reduce_leaves(0) {
 
 Use `has_key(...)` when the question is "does this field exist?" Use `is_defined(meta.pick_keys("kind").sorted_values().first())` or `is_defined(retv["kind"])` when the question is "is the value defined?" Those are different questions.
 
+Stored null and false values still have keys. On Perl, this returns `[1,1,0]`:
+
+```text
+meta = {"off":false,"nil":undef};
+return([meta.has_key("off"),meta.has_key("nil"),meta.has_key("missing")]);
+```
+
+A missing-key result remains numeric zero for compatible text consumers: `meta.has_key("missing").coalesce_nonempty("late").cat("!")` yields `"0!"`. The fallback keeps zero because zero is data. Existence checks leave the Hash unchanged.
+
 `set_key(...)` has two deliberate forms. As a statement with a named target, `set_key(meta, "stage", "normalized")` mutates the working hash `meta`. As a value expression, `set_key(meta, "stage", "normalized")` returns a new hash value and leaves `meta` unchanged unless you store the result with `set(meta, ...)`.
 
 Hash receiver-dot value chains are accepted for the same pure hash helpers. The receiver is the first helper

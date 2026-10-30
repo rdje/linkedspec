@@ -9378,13 +9378,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.12 - reconcile emptiness helper checks with actual values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.13`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile only retained has_key helper group under current String-key existence and actual-kind contracts; independently public-probe filled/missing/null-valued fields, projections and sources before oracle or producer movement.
   Schedule: P1 next; other10 last-selected failures remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact has_key assertions, public native/fresh existence/value/kind/source controls and direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named existence/value distinctions, no population measurement.
+
+  Activation: clean `82a4b7bb68555c80101be358e110fea51a8c4f3d`; no proof jobs/brief empty.
+  - [x] **REPRODUCE / ISSUE**: Observe actual current focused outcome; distinguish cold setup from any source/runtime failure and retained45.4 context.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use exact public current source/value and retained diagnostic mechanism; no assumption that all printed expectations fail.
+  - [x] **FIX**: Repair only reproduced producer/fixture/oracle mismatch with key-presence authority and healthy controls retained.
+  - [x] **ADDRESSED (verified)**: Exact has_key group passes without stale key/null expectations.
+  - [x] **NO REGRESSION**: Preserve String-key presence for false/null, source snapshots, and existing scope/kind/host-storage boundaries.
+  - [x] **LOCKSTEP**: Task/evidence/current docs/book/resume align, next retained group owned before activation.
+
+  Result: Exact has_key group reproduces2 source-oracle RED/2 healthy after explicit local private-owner loading; retained45.4 independently has the same two failures. Reconcile only old host-hash printed spellings to initialized value/flow presence checks; original helper expressions/two healthy fallback/Hash assertions stay exact, all4 GREEN. Three public native/fresh cases distinguish present false/null from missing, original fallback payload and empty Hash/false-result consumers. Direct producer6 retains literal/variable/helper/block keys, once-only K/SK/source-before-key snapshots and unmutated source. Syntax/book/map/history/manual checks pass; production unchanged,528 other prior input hashes exact. Cold no-tests255 is setup-only. Actual source/RED-GREEN/producers/authority inputs retained in perl-phase0-has-key-intake.json.gz. No new namespace/domain/Boolean/default policy or whole-host/peer/full-suite/admission/push claim. Book/fact/task/roadmaps/live/resume align; ten last-selected groups remain, Hash snapshot45.14 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.13 - reconcile has_key checks with existing value contracts`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.14`
+  Status: `pending`
+  Goal: Reconcile only retained Hash-snapshot helper group against approved copy-value/source/assignment contracts; public source/native/fresh proof before obsolete owner-shape changes. Repair actual outliers first.
+  Schedule: P1 next; other9 last-selected failed groups remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact has_key assertions, public native/fresh existence/value/kind/source controls and direct consumer when warranted.
+  Planned focused checks: Exact Hash-snapshot group, public copy/typed assignment/source/default/scalar-kind controls and direct consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named existence/value distinctions, no population measurement.
+  Planned claim verification: none: Finite named copy/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10547,7 +10567,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.13` | `pending` | Assess retained has_key helper failures under current key-existence authority. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.14` | `pending` | Assess retained Hash-snapshot checks against approved copy/value contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

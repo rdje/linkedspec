@@ -118,3 +118,8 @@ expectations/1 healthy ->4 GREEN, retaining original expressions/healthy Hash
 payload and unchanged production. Public native/fresh5/direct expression11
 pass. Eleven last-selected groups remain owned; has_key45.13 next. No new
 combined frozen28/full-suite result is inferred.
+
+TYPE45.13 reconciles only has_key2 source assertions/2 healthy ->4 GREEN, with
+public native/fresh3/direct producer6 and unchanged production. Retained45.4
+independently records those same two failures. Ten last-selected groups remain
+owned; Hash snapshot45.14 follows. No combined28/full-suite status is inferred.
