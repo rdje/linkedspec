@@ -1,0 +1,109 @@
+[
+  {
+    "name": "nested Length Number",
+    "source": "Top:: I {return(sorted_values(length(\"abc\")))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "fluent Length Number",
+    "source": "Top:: I {return(\"abc\".length().sorted_values())}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "numeric literal",
+    "source": "Top:: I {return(sorted_values(3))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "quoted numeric String",
+    "source": "Top:: I {return(sorted_values(\"3\"))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "typed Number binding",
+    "source": "Top:: I {n=3;return(sorted_values(n))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "computed String",
+    "source": "Top:: I {return(sorted_values(cat(\"probe\",\"_name\")))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "typed String binding",
+    "source": "Top:: I {n=\"probe_name\";return(sorted_values(n))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "Hash literal ordering",
+    "source": "Top:: I {return(sorted_values({\"b\":\"B\",\"a\":\"A\"}))}",
+    "input": "x",
+    "expected": [
+      "A",
+      "B"
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "typed Hash binding",
+    "source": "Top:: I {meta={\"b\":\"B\",\"a\":\"A\"};return(sorted_values(meta))}",
+    "input": "x",
+    "expected": [
+      "A",
+      "B"
+    ],
+    "expected_cursor": 0
+  },
+  {
+    "name": "empty Hash",
+    "source": "Top:: I {return(sorted_values({}))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "undefined source",
+    "source": "Top:: I {return(sorted_values(undef))}",
+    "input": "x",
+    "expected": [],
+    "expected_cursor": 0
+  },
+  {
+    "name": "copied Length guard",
+    "source": "Top:: I {return(\"abc\".length().copy().sorted_values())}",
+    "input": "x",
+    "expected": null,
+    "expected_cursor": 0
+  },
+  {
+    "name": "scalar String guard",
+    "source": "Top:: I {return(\"a\".uppercase().sorted_values())}",
+    "input": "x",
+    "expected": null,
+    "expected_cursor": 0
+  },
+  {
+    "name": "source executes once",
+    "source": "Top:: I {calls=0;out=sorted_values({calls=num_add(calls,1);3});return([out,calls])}",
+    "input": "x",
+    "expected": [
+      [],
+      1
+    ],
+    "expected_cursor": 0
+  }
+]

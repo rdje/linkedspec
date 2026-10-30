@@ -154,3 +154,10 @@ for my $case (
 done_testing();
 ABSENT_HASH_HOST_SLOT
 ```
+
+## Bounded sorted_values repair — October30
+
+TYPE45.11.1 repairs scalar/numeric `sorted_values` symbolic Hash reads; see
+[the precise source/seed/regeneration boundary](docs/knowledge/perl-sorted-values-scalar-host-isolation.md).
+The existing absent/legacy and other-helper findings above remain SESSION17-owned.
+This bounded fix does not close general collection host-slot isolation.

@@ -7451,14 +7451,18 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
   if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
-   return '[map { $'.$hash_symbol.'{$_} } sort keys %'.$hash_symbol.']';
+   # Numeric literals are values, even when the legacy symbol matcher accepts them.
+   my $target_node = _parse_method_value_ast_expr($target_expr, $deps);
+   unless (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'number') {
+    return '[map { $'.$hash_symbol.'{$_} } sort keys %'.$hash_symbol.']';
+   }
   }
 
   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_sorted_values = '.$lowered_target.'; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }';
+  return 'do { my $__ls_sorted_values = '.$lowered_target.'; defined($__ls_sorted_values) && ref($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }';
  }
  if ($method_call && $method_call->{method} eq 'has_key') {
   my $has_key_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);

@@ -4913,6 +4913,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl40.1.2 adds t/perl_blind_scalar_declarations.t24 source groups+1 context guard; exact canonical selection must cover nested scalar ownership/nonmutating diagnostic JSON and keep existing AND/OR declaration normals strict.
 
+  New focused normal awaiting explicit canonical selection: `t/sorted_values_scalar_isolation.t` / `tests/fixtures/sorted_values_scalar_isolation.json`, producer repair45.11.1; native/fresh seeded scalar/Hash controls. Required before full23.4/push, alongside prior pick_keys normal.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9305,7 +9307,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.10 - reconcile Hash chain checks with approved null copy`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11`
+  Status: `in_progress`
+  Activation: clean `c813d59d9d4d1eaa2d8714aa64ababcc4a7f4458`; no proof jobs and brief empty.
+  Qualified extra boundary under45.11.1: Six public native/fresh cases preserve original String/continuation values, paired fluent/nested raw scalar flags and SC source order. The initial extra incompatible-tail candidate null/null is retained but corrected to[]/null under the frozen Length target's helper-specific invalid-domain policy. Independently seeded controls expose and then falsify scalar host-Hash dependence; empty-state[] alone was insufficient. This does not impose universal null or portable kind policy. Original18 oracle reconciliation remains45.11.2.
+  Confirmed root / bounded producer now repaired under45.11.1: Empty-state[] is not isolation proof. Fresh public modules for fluent length, nested length and direct numeric3 sorted_values return [HOST_MAIN] when controlled main::3 is seeded; package-qualified3 alone has no effect. Copied-length and scalar-String guards remain null. Generated source permits symbolic Hash dereference of a computed scalar, and legacy numeric3 is mistaken for a Hash symbol. TYPE45.11.1 repairs this bounded producer with15 seeded cases/Hash14/String6 and old-module regeneration evidence;45.11.2 next reconciles the original18 assertions. Broader absent/legacy collection host-slot work remains SESSION17/.17.2; its current owner node was read, no broad closeout or other-tree edit.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1`
+  Status: `completed`
+  Activation: base `c813d59d9d4d1eaa2d8714aa64ababcc4a7f4458`; only this task-tree's intake metadata changed, production/tests clean and all probes terminal.
+  Goal: Prevent ordinary sorted_values scalar inputs from reading symbolic Perl host hashes while preserving actual Hash inputs, legacy legitimate Hash storage and current empty fallback/reference-error policies.
+  Reproduction / impact: Public emitted fluent/nested length and numeric3 forms return[] with empty host state but [HOST_MAIN] after seeding main::3. Numeric unqualified Hash names resolve in main even in independently named generated packages; seeding only each module's3 produced no distinguishing RED. Computed scalar dereference lacks a reference check; numeric literal3 also enters the legacy \w+ Hash-symbol branch. This can return unrelated host data instead of a Hash view.
+  Scope / contract: Numeric AST literals are values, not legacy Hash bindings. After evaluating a computed source once, a non-reference must not select a host Hash. Preserve current[] empty-state fallback and undefined behavior, actual Hash order/values, legitimate legacy Hash storage, existing reference-input failure behavior and copied/predicate actual-kind guards. No universal new wrong-kind/null policy, new helper/schema/frame or broad SESSION17 closure.
+  Verification tier: `focused`
+  Focused checks: Seeded native/fresh scalar versus Hash15, direct Hash receiver14, original/qualified String6, actual Array-reference before/after and five old/new module replay/metadata controls; source once, original Phase0 and528 other input identities; syntax/book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after original18 reconciliation45.11.2, registration23.4.1,20.1 and broader SESSION17/other prerequisites.
+  Claim verification: none: Finite named scalar/Hash/host-seed cases and byte identities, no population or whole-host isolation measurement.
+  - [x] **REPRODUCE / ISSUE**: Actual main::3 seed changes public emitted results in three discovered forms; freeze expanded bounded controls before production.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: MethodLowering sorted_values treats numeric literals as legacy symbols and uses defined-only computed Hash dereference under generated no-strict refs.
+  - [x] **FIX**: Exclude typed numeric literals from legacy Hash-symbol routing and prevent scalar symbolic dereferences without changing existing reference-input paths.
+  - [x] **ADDRESSED (verified)**: Seeded scalar reads stop consulting host storage; actual Hash views/guarded copy/String controls preserve accepted values and source order.
+  - [x] **NO REGRESSION**: Preserve legacy positive Hash binding, reference errors/current fallback, valid source/metadata/plan and direct consumers. Existing emitted modules require independent replay/regeneration assessment; no unsupported whole-host claim.
+  - [x] **LOCKSTEP**: New normal/fixture/evidence, book/fact/map/task/live/resume align; original18 parent assertions remain owned45.11.2 after this code repair.
+
+  Result: Seeded sorted_values normal reproduces8 RED/7 healthy then15 GREEN across native/fresh routes. Numeric AST values no longer enter legacy Hash-symbol routing; computed sources evaluate once and require a reference before Hash dereference, preserving existing scalar/undefined[] fallback and actual-reference paths. Hash14, qualified String6 and five old/new emitted-source controls pass; Array-reference native failure/fresh thrown reference behavior remains. Old modules still leak main::3 and require regeneration; complete metadata v2 agrees for the five sources. Original Phase0 source remains unchanged at activation;528 other prior input hashes unchanged. Finite normal/fixture, producer/RED-GREEN/replay/authority inputs are retained in perl-sorted-values-scalar-isolation-intake.json.gz. No universal null policy, whole-host isolation, peer/full-suite/admission or push claim. Broader absent/legacy collection isolation remains SESSION17; registration23.4.1 and20.1 stay mandatory. Book/fact/map/task/roadmaps/live/resume align; original String18 reconciliation45.11.2 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1 - isolate sorted_values scalar inputs from host hashes`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2`
   Status: `pending`
+  Schedule: Immediately after the seeded sorted_values producer repair; remaining12 failed groups stay parent45-owned.
   Goal: Reconcile the exact spec_format_terse_2_3_5_3_string_receiver_value_chains group with implemented scalar/predicate/length continuations and current String result-kind authority; repair actual outliers before any oracle change.
   Reproduction: TYPE45.4 retains failures among18 assertions: a literal substr/uppercase source check and old terminal-method rejection expectations; actual length/trim and predicate/coalesce/trim results differ from old [null,null]. Establish exact output kinds/source/effects through public native/fresh and accepted continuation contracts, not an assumption that every result is String.
   Impact / schedule: P1 immediately after45.10 before remaining source-only helper repairs/full23.4/push; other12 last-selected failed names remain owned45.4 receipt/parent45, including emptiness/other helpers and with blocks.
@@ -10475,7 +10504,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.11` | `pending` | Reconcile retained String result continuations/kinds, then continue the other12 owned failures. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` | `pending` | Reconcile original String18 after committed seeded sorted_values producer repair. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
