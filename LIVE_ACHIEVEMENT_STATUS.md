@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart boundary6/advancing Number6/reset3 pass, runtime unchanged; Julia53.4 independently next.
+Julia boundary65/advancing Number65/reset70 pass, runtime unchanged; safe Lua53.5 next.
 
 ## Latest Completed Slice
 
-Dart independently already supports frozen structural-boundary String53:15 focused tests comprise new6/advancing Number6/reset3 and pass native/restored SpecFile/generated-plan with runtime unchanged/no invented RED. Shared11/primitive/bound/direct/Number controls preserve once-only live cursor effects versus anonymous origin, snapshots/reset, defined-empty/lazy suppression, unresolved null/no-op, valid-no-later EOF and normalized skips. Quoted comma stays one atom; multiple rules choose earliest boundary. Literal callback moves caller cursor3/origin0; source-specific typed pure-function/registered callback errors hold. Fatal new-test analysis/format pass; 195 existing inputs stay exact. JSON reporter binds every nonhidden/no-skip completion identity and terminal success. Actual formatted normal/builder/source/results/input bindings retained in boundary-capture-string-dart-intake.json.gz; book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No isolated emitted/full suite/name-escape/malformed-phase/context/domain/portable or SDK/debt/vocabulary/shape/schema movement. Independent Julia53.4 next.
+Julia independently already supports frozen structural-boundary String53: strict new65/advancing Number65/reset70 pass native/reconstructed SpecFile/generated-plan/fresh emitted Module with empty stderr, runtime unchanged/no invented RED. Shared11/primitive/bound/direct/Number controls preserve once-only live cursor effects versus anonymous origin, snapshots/reset, defined-empty lazy suppression, unresolved null/no-op, valid-no-later EOF and normalized skips. Quoted comma stays one atom; multiple rules choose earliest. Literal callback moves caller cursor3/origin0; source-specific typed pure-function/registered callback errors hold. One exact runner include registers the normal; 167 other bound input hashes stay exact. Thirteen actual source observations/complete summaries/producers/input bindings retained in boundary-capture-string-julia-intake.json.gz; book/target/cards/map/task/roadmap/live/resume/history/manual checks align. Fresh Module is same-process loading, not isolated-package proof; no full runner/name-escape/malformed-phase/context/domain/portable or vocabulary/shape/schema movement. Independent safe Lua53.5 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.4 independently from clean Dart53.3. Read frozen boundary-capture-string-results.md/shared11 and current Julia label/earliest/seek/EOF/unresolved/cursor-origin/once/function/callback/preflight/runner policies. Establish native/reconstructed SpecFile/generated-plan/fresh Module baseline before runtime edits; retain healthy behavior and repair actual ordinary result gaps only. Strict compilation/quick new and nearest Number/reset checks, exact runner include/docs/commit; safe Lua53.5 next. No routine full runner, peer-policy inference or expanded label/escape/arity/context grant.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.5 independently from clean Julia53.4. Read frozen boundary-capture-string-results.md/shared11 and safe installed PUC/LuaJIT boundary label/earliest/seek/EOF/unresolved/cursor-origin/once/function/callback/preflight/runner policies. Establish own native/restored/generated-plan/fresh-module baselines using safe authored literal fixtures/loadfile before production. Preserve healthy outcomes and fix actual ordinary result gaps only. New normal/exact three-line runner registration/quick nearest Number/reset checks/docs/commit; then next useful fluent selection. No unsafe full runner/formatter/declared5.4, peer-policy inference or expanded label/escape/arity/context grant.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.53.4` — Julia boundary65/advancing Number65/reset70 pass, runtime unchanged; safe Lua53.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.3` — Dart boundary6/advancing Number6/reset3 pass, runtime unchanged; Julia53.4 independently next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.2` — Rust boundary6/advancing Number6/reset3 pass, runtime unchanged; Dart53.3 independently next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.1` — Perl boundary source methods and grammar preservation checked; final feature3/quoted28 pass; independent Rust53.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.4 independently from clean Dart53.3. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.4` — Julia advancing String70/readonly60/reset70 pass without runtime change; safe Lua51.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.3` — Dart advancing String6/readonly6/reset3 pass without runtime change; independent Julia51.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.2` — Rust advancing String6/readonly6/reset3 pass without runtime change; Dart51.3 independently next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.51.1` — Perl advancing String14/readonly12/reset2 pass; original bodies/effects retained; independent Rust51.2 next.
 
 ## History
 
