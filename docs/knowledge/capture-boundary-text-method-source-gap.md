@@ -68,3 +68,11 @@ new100/Number155/reset102 pass per host, runtime unchanged/normal registered.
 five bounded50 children now have focused outcomes; full source/context/domain/
 portable23.4/declared5.4/Perl registration remain separate. Selection23.1.12
 chooses useful remaining features next.
+
+Inventory correction23.1.14: The23.1.11 claim of adding a missing helpers.md
+capture_from_rule_start row was mistaken. Exact path history has the row already
+in122da1d88, with234fb0be7 adding a duplicate. Remove only the duplicate; all
+seven current rows now match the typed contract once. Alias semantics/proofs
+are unchanged; original historical packets remain immutable. The retained
+boundary-capture-fluent-selection-intake.json.gz carries exact before/history/diff
+and canonical-list checks, without new alias/backend admission credit.

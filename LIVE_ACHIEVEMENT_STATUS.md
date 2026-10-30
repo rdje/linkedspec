@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe Lua Number97/String102/readonly Number155/reset102 pass per host; all bounded52 checked; next selection14.
+Structural-boundary String53 frozen from actual direct gaps/healthy effects; named String compatible; Perl53.1 next.
 
 ## Latest Completed Slice
 
-Both installed PUC5.5.1/LuaJIT2.1.1788460057 already support frozen advancing Number52: strict new97/advancing String102/readonly Number155/reset102 pass per host across native/restored/generated-plan/fresh loaded modules, runtime unchanged/no invented RED. Shared11/three bound widths preserve1/4/8 and origin6/6/10 versus live6, once/snapshots/normalized BAD skip, defined-zero lazy suppression, missing/reversed/no-advance and Number-String-Array-signed flow. Named width source updates its separate mark; literal callback returns Number4/origin3/live0, with authored-helper typed pure-function/registered callback restrictions preserved. Exact three-line runner registration/loadfile guards preserve other bytes and 169 input hashes. Strict fixed JSON is validated before test creation; no new test-instrument repair required. Actual thirteen source observations per host/complete summaries/producers/input bindings retained in capture-advance-number-lua-intake.json.gz. All five bounded52 children have focused outcomes; full23.4/Perl registration/declared5.4 and remaining prerequisites stay separate. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No unsafe runner/formatter/new interpreter locals/isolated-package/full admission. Next useful fluent selection23.1.14 follows.
+Selection14 establishes actual structural-boundary direct default/String and Number2 failures against2 healthy primitive/bound controls: capture_until_boundary(End) returns αβ:/live3/origin0 and bound αβ:! on ten decoded characters, while direct coalesce fails native/fresh despite raw0/fallback0/unresolved0/ready1. Public substitution locates late native body after method lowering; reuse existing sole boundary factory/governed label serializer under frozen53. Independent bound11 target passes once/snapshot/reset/live-versus-origin/empty/missing/EOF/normalized BAD and lazy F distinctions; direct twin fails compilation. 543 diagnostic inputs remain exact. Earlier named String six controls/both11 twins already pass; existing early named-value dispatcher explains compatibility. Initial reader incorrectly expected prior-family failure; actual refusal/corrected reader retained without semantic RED, and inert builder branch cleanup changes no cases. Exact history shows122da1d88 already had capture_from_rule_start alias row;234fb0be7 added duplicate under a mistaken missing-row claim. Remove only duplicate, match all seven aliases once to typed contract and explicitly supersede earlier claim; immutable packets/semantics unchanged. Freeze53/independent53.1-.5 before production; actual all producers/inputs/history/outputs retained in boundary-capture-fluent-selection-intake.json.gz. Book/cards/map/task/roadmap/live/resume/history/manual checks align. No production/new vocabulary/arity/escape/schema/full suite/context/portable admission. Perl53.1 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.1.14 from clean bounded advancing Number52 coverage. Reconcile current helper/signature/result-role inventory and already implemented families; use Knowledge Map/canonical records before deriving facts. Begin remaining named capture String/advancing-result and computed/effect-returning source transitions, distinguishing actual gaps from already compatible forms with a few public primitive/bound/direct/effect controls on proven carriers. Choose one useful bounded feature and own independent backend/prerequisite tasks before production. Preserve native effects/endpoints/null/zero/shape/function/callback/first-consumer/copy/format authority. Focused compile/quick check/docs/commit cadence continues; no exhaustive admission or maintenance pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.53.1 from clean frozen boundary String53. Read boundary-capture-string-results.md/shared11 fixture, original _capture_until_boundary_value_expr and governed AST boundary-label serialization/quoted-label producer contracts. Add normal/reproduce direct gaps before production; reuse existing boundary engine in narrow early ordinary value lowering with exact native body/decoded-label sequences and function/preflight fences preserved. Preserve once-only live cursor effects, separate anonymous origin, empty/missing/EOF/catalog/flag behavior and existing argument/zero-arity/callback/root/format policy. Compile/quick native-fresh and nearest quoted-label/Number/reset checks/docs/commit, then independent Rust53.2. No routine full suite, dependency inspection or broad maintenance pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.14` — Structural-boundary String53 frozen from actual direct gaps/healthy effects; named String compatible; Perl53.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.5` — Safe Lua Number97/String102/readonly Number155/reset102 pass per host; all bounded52 checked; next selection14.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.4` — Julia advancing Number65/String70/readonly Number75/reset70 pass, runtime unchanged; safe Lua52.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.3` — Dart advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Julia52.4 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.1.14 from clean bounded advancing Number52 c
 - `TYPE-REFERENCE-BOOK.1.2.23.1.12` — Advancing capture String51 frozen from actual direct gaps and healthy effect controls; Perl51.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.5` — Safe Lua100/Number155/reset102 pass per host; all bounded50 children checked; next feature selection23.1.12.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` — Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` — Dart capture String6/Number6/reset3 pass without runtime change; independent Julia50.4 next.
 
 ## History
 

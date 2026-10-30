@@ -342,6 +342,8 @@ The parent still reads `shared == 6`. All positions are character offsets: the m
 as one. `clear_mark(name)` removes only the current rule's mark; afterwards `mark_exists(name)` is `0`, while
 `mark_pos(name)`, `mark_line(name)`, and `mark_col(name)` return `undef`.
 
+On the recorded Perl native/generated routes, the existing readonly named String helpers already support ordinary chains: `capture_until_cursor_from(begin).coalesce("").split(":")[-1].uppercase()` returns `"CAT"` when `begin` is at `2` and the live cursor is at `6` on `αβ:catTAIL`. `capture_from(begin)` stops at the local-match start, `capture_until_cursor_from(begin)` at the live cursor, and `capture_between(begin,finish)` at the stored finish mark. These observations preserve existing name/rule scopes and do not establish full cross-backend method admission.
+
 ### Example: two explicit marks
 
 ```text
@@ -646,6 +648,8 @@ leave the cursor ready for the normal rule path. If the named boundary rules are
 valid but no later boundary is found, it captures through end-of-input and moves
 the cursor to end-of-input. If none of the requested boundary rules can be
 resolved, it returns `undef` and leaves the cursor unchanged.
+
+Perl currently requires a temporary binding before methods on a structural boundary capture: `body=capture_until_boundary(End); return(body.coalesce("missing").cat("!"))`. With an `End` rule matching `END`, input `αβ:ENDTAIL` produces `"αβ:!"` and leaves the live cursor at `3`; `END` stays unconsumed and the anonymous capture origin stays at `0`. A subsequent boundary read at that cursor returns defined empty text and skips a lazy defined-only fallback. Direct fluent source support is being repaired while preserving these existing boundary and cursor effects.
 
 In Perl, a quoted argument is one boundary label even when it contains commas.
 Quotation does not make an unknown label usable. This example defines only `b`

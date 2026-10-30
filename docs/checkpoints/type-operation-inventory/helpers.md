@@ -76,7 +76,6 @@ These belong to a separate compatibility set, not new primary portable helpers o
 | Compatibility spelling | Canonical target |
 | --- | --- |
 | `capture_from_rule_start` | `capture_slice` |
-| `capture_from_rule_start` | `capture_slice` |
 | `capture_len_from_rule_start` | `capture_slice_len` |
 | `capture_rest_length` | `capture_rest_len` |
 | `capture_slice_here` | `start_capture_slice` |
