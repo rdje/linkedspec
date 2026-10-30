@@ -203,21 +203,26 @@ Invoke child rules and handle results:
 - `call(RuleName)` — call a child rule and capture its return value
 - Combined with `retv = call(Child)` to store child results
 
-The returned value can already feed compatible methods. For example,
-`call(Child).last().uppercase()` produces `"TAIL"` when `Child` explicitly returns
-`["red","tail"]`. To select an arbitrary Array entry or Hash field on Perl,
-currently bind the returned value first:
+Perl supports compatible methods and typed Array/Hash brackets directly on an
+ordinary static rule call. A child Array result can feed
+`call(Child)[-1].uppercase()`; nested results compose in the same way:
 
 ```text
-Top:: I { value=call(Child); return(value[-1].uppercase()) }
-Child: I { return(["red","tail"]) }
+Top:: I { return(call(Child)["items"][-1].uppercase()) }
+Child: I { return(hash("items",["red","tail"])) }
 ```
 
-Direct brackets such as `call(Child)[-1].uppercase()` are the next additive
-composition target. They currently fail Perl compilation; other backends are
-assessed independently. Existing child invocation, parser-state restrictions and
-the returned value's typed read rules still apply. This does not add String
-character indexing or dynamic rule names.
+This returns `"TAIL"`. The child runs once before selectors, followed by the
+selected value's compatible consumers. Negative Array positions count from the
+end. Missing entries, out-of-range positions and noncontainer results produce
+null; `call(Text)[-1].coalesce("missing")` yields `"missing"` when `Text` returns
+a String. Split that String first when an Array of fields is wanted. Selected
+false, zero, String `"0"`, null and nested containers retain their own kinds.
+
+This adds bracket composition for the existing bare rule-name form. Child
+invocation and parser-state restrictions remain: pure functions cannot call
+parser rules. Deferred callback bodies retain their existing read grammar.
+Other backends and full source/context/portable admission are assessed independently.
 
 Named-array selectors can assign working variables while producing an index:
 

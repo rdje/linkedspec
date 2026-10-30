@@ -1,7 +1,7 @@
 # Rule-call result bracket selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.15; family23.3.54.
-Status: closed named-read prerequisite54.0 repaired/targeted-checked; Perl54.1 pending.
+Status: prerequisite54.0 and Perl54.1 repaired/targeted-checked; independent peers pending.
 
 ## Existing authority and actual gap
 
@@ -91,3 +91,21 @@ subtests, with parser syntax clean. Actual normal/producers/old parser/input has
 RED-GREEN/selected write results retained in closed-named-selector-intake.json.gz.
 No new selector/call/deferred/schema or full grammar admission. Direct rule-call
 result selectors54.1 remain pending; the original frozen target is unchanged.
+
+## Bounded Perl54.1 implemented
+
+A guarded existing single bare static-label call now has a computed source role.
+It reuses value_access/actual-kind guards and the original early child-handler ABI;
+no parser/deferred fence or remaining lowering bytes change. Same new6groups
+4RED/2healthy→6GREEN native/fresh covers shared13/every kind/null and wrong-kind
+reads/healthy bound-method forms/function-state restriction. Ordinary descriptors
+are raw0/fallback0/unresolved0/ready1 with actual execution; function call stays
+unready/unresolved call/null. Deferred literal/final contextual body remains raw.
+Five rejected/unknown call source shapes keep exact AST/source/spans; original
+callable4 values1/2/0/0/raw1 plus discovery5 and deferred22 pass, syntax clean.
+ASCII-only diagnostic serialization then passes shared target/deferred grammar2 with
+identical values/metadata, eliminating a Test2 formatter warning without oracle
+change; original epochs retained. Actual old owner/normal/producers/inputs/epochs/results retained in
+rule-call-result-perl-intake.json.gz. No dynamic/quoted/extra-argument call source,
+selector coercion/computed write/child frame-error-policy/schema/context/portable
+grant. Register the normal under23.4.1; independent Rust54.2 follows.

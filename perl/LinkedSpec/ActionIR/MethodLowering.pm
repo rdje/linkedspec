@@ -1704,6 +1704,20 @@ sub _user_function_registry_by_name {
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
  my ($name, $registry, $call) = @_;
+ # A child return is one source value. Admit only the existing bare static
+ # rule-label spelling; Parser's deferred-body fence remains first. Invocation
+ # itself still uses the ordinary call value owner and original child handler.
+ if (defined($name) && $name eq 'call') {
+  return undef unless ref($call) eq 'HASH'
+   && ($call->{kind} // '') eq 'call' && ($call->{name} // '') eq 'call'
+   && ($call->{source_method} // 'call') eq 'call'
+   && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 1;
+  my $label = $call->{args}[0];
+  return undef unless ref($label) eq 'HASH' && ($label->{kind} // '') eq 'variable'
+   && defined($label->{name}) && $label->{name} =~ /\A\w+\z/o
+   && defined($label->{source}) && $label->{source} eq $label->{name};
+  return 'call';
+ }
  # Immediate contextual with has its own metadata-approved source role. Keep
  # explicit callable values and the global known-name/function lookup unchanged.
  if (defined($name) && $name eq 'with' && ref($call) eq 'HASH'
