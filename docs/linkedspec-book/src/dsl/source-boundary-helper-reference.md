@@ -62,6 +62,8 @@ Helpers containing `take` read a span and then advance the relevant boundary.
 
 If the rule only needs to inspect text or width, use the stable form. If the rule is splitting a sequence into consecutive segments, use the advancing form so the next segment starts at the new boundary.
 
+Perl direct default-method chains on the anonymous advancing String helpers still require a temporary binding. For example, `piece=capture_take_rest(); return(piece.coalesce("").split(":")[-1].uppercase())` uses the captured text through String, Array and selected-String methods. At origin `2` and cursor `6` on `αβ:catTAIL`, it returns `"CATTAIL"`, advances the anonymous origin to `10`, and leaves the live cursor at `6`. By comparison, `capture_take()` returns `":"` and `capture_take_until_cursor()` returns `":cat"`; both advance the origin to `6`. A failed span keeps the original origin, and defined empty text skips a defined-only fallback. Direct fluent composition is being repaired while preserving these existing effects.
+
 ## Anonymous capture-boundary helpers
 
 The anonymous capture boundary is the simplest stateful capture tool: one rolling left edge per rule context.
