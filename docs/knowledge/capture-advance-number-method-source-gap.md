@@ -7,7 +7,7 @@ answers:
   - "does capture_take_until_cursor_len move the live cursor"
   - "which task owns advancing capture Number result composition"
 date: 2026-10-30
-status: bounded52 target frozen; independent implementations pending
+status: bounded Perl52.1 repaired/targeted-checked; independent peers pending
 tags: [perl, capture, number, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.13; capture-advance-number-selection-intake.json.gz retains nine public controls, six healthy/three direct failures and independent eleven-coordinate bound/direct target twins."
 reverify: "Recover probe_capture_advance_number_assessment.pl and finite cases from capture-advance-number-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps."
@@ -26,3 +26,12 @@ normalized bad-operand/lazy-zero skips, missing fallback and source snapshot
 before later reset; the direct twin fails compilation. Keep first-consumer,
 named-source/function/callback/preflight/copy/schema boundaries. No primitive
 producer defect, new API or peer failure/full23.4 admission is inferred.
+
+Perl52.1 shares original guarded native Number bodies with narrow early ordinary
+value lowering after function fences. Three primitive/named-source printed
+bodies stay exact. Initial13 has6 RED/7 healthy, then13 GREEN with unchanged
+normal/fixture; standalone snapshot was already healthy. Selected String2/
+readonly Number2/reset2 and syntax pass. Retained old module still fails host
+coalesce: regenerate affected modules. Actual source/test epochs/producers/
+inputs are in capture-advance-number-perl-intake.json.gz. No broad context/
+vocabulary/portable grant; Rust52.2 and registration23.4.1 remain independent.

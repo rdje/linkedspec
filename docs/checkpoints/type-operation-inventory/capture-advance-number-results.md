@@ -1,7 +1,7 @@
 # Anonymous advancing capture Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.13; implementation family23.3.52.
-Status: bounded target frozen; independent implementations pending.
+Status: Perl52.1 repaired/targeted-checked; independent peers pending.
 
 ## Existing authority and actual gap
 
@@ -65,3 +65,18 @@ without invented RED. Exact public producer/inputs/native/fresh/metadata/
 substitution/target twins are retained in capture-advance-number-selection-intake.json.gz.
 No production change in selection. Full source/domain/context/portable23.4,
 pressure20.1, Perl canonical registration and declared Lua5.4 remain separate.
+
+## Bounded Perl52.1
+
+One advancing-Number factory now shares three original guarded native bodies
+with exact-zero-argument early ordinary value lowering after the function fence.
+Three primitives and named capture_take_len_from(begin) printed bodies stay
+byte-identical. Initial13 has6 RED/7 healthy, then13 GREEN with unchanged normal/
+fixture. The standalone snapshot already worked and remains a healthy control.
+Native/fresh shared11/direct/bound/zero/missing/effects/normalized guards/
+snapshots/named-source/function checks are warning-free; selected String2/
+readonly Number2/reset2 and both module syntax checks pass. Old emitted Number
+module still fails host coalesce after repair: regenerate affected modules.
+Actual epochs/producers/results/inputs retained in capture-advance-number-perl-intake.json.gz.
+No effect/preflight/format/vocabulary or full23.4 movement. Explicit normal
+registration23.4.1 and independent Rust52.2 remain separate.

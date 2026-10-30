@@ -11666,7 +11666,7 @@ _Capability exclusion freshness is schema-v2 governed and public-closed_
 ### capture-advance-number-method-source-gap
 _Advancing anonymous capture Number sources need early ordinary value lowering_
 - **answers:** can capture_take_len compose directly with coalesce and Number methods | why does capture_take_rest_len coalesce call an undefined host function | does capture_take_until_cursor_len move the live cursor | which task owns advancing capture Number result composition
-- **date:** 2026-10-30 · **status:** bounded52 target frozen; independent implementations pending
+- **date:** 2026-10-30 · **status:** bounded Perl52.1 repaired/targeted-checked; independent peers pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.13; capture-advance-number-selection-intake.json.gz retains nine public controls, six healthy/three direct failures and independent eleven-coordinate bound/direct target twins.`
 - **reverify:** `Recover probe_capture_advance_number_assessment.pl and finite cases from capture-advance-number-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps.`
 - **source:** [`docs/knowledge/capture-advance-number-method-source-gap.md`](docs/knowledge/capture-advance-number-method-source-gap.md)

@@ -801,6 +801,19 @@ sub _anonymous_local_match_capture_value_expr {
  );
 }
 
+# Advancing anonymous Number sources share their original guarded read/write
+# body with ordinary value lowering. Do not move the parser's live cursor.
+sub _advancing_capture_boundary_number_value_expr {
+ my ($method) = @_;
+ return undef unless defined $method;
+ state $expressions = {
+  capture_take_len => _anonymous_local_match_capture_value_expr('capture_take_len'),
+  capture_take_until_cursor_len => q{do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_cursor, "capture_take_until_cursor_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_cursor, "capture_take_until_cursor_len"); $__ls_capture_len } else { undef } }},
+  capture_take_rest_len => q{do { my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_len"); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_rest_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_end, "capture_take_rest_len"); $__ls_capture_len } else { undef } }},
+ };
+ return $expressions->{$method}
+}
+
 # Advancing anonymous String sources share their original guarded read/write
 # body with ordinary value lowering. Do not move the parser's live cursor.
 sub _advancing_capture_boundary_text_value_expr {
@@ -1268,10 +1281,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_take_until_cursor_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_take_until_cursor_len\s*\(\s*\)
-    }{
-     'do { my $__ls_cursor = pos $$STRING; if (defined($__ls_cursor) && defined($IPOS) && $__ls_cursor >= $IPOS) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_cursor, "capture_take_until_cursor_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_cursor, "capture_take_until_cursor_len"); $__ls_capture_len } else { undef } }'
+    $code =~ s{\bcapture_take_until_cursor_len\s*\(\s*\)}{
+     _advancing_capture_boundary_number_value_expr('capture_take_until_cursor_len')
     }gex;
     return $code
    },
@@ -1435,10 +1446,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_take_rest_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_take_rest_len\s*\(\s*\)
-    }{
-     'do { my $__ls_end = LinkedSpec::SourceLocation::Runtime::source_length($info, $STRING, "capture_take_rest_len"); if (defined($IPOS) && $__ls_end >= $IPOS) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_rest_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, $__ls_end, "capture_take_rest_len"); $__ls_capture_len } else { undef } }'
+    $code =~ s{\bcapture_take_rest_len\s*\(\s*\)}{
+     _advancing_capture_boundary_number_value_expr('capture_take_rest_len')
     }gex;
     return $code
    },
@@ -1463,10 +1472,8 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bcapture_take_len\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s{
-     \bcapture_take_len\s*\(\s*\)
-    }{
-     _anonymous_local_match_capture_value_expr('capture_take_len')
+    $code =~ s{\bcapture_take_len\s*\(\s*\)}{
+     _advancing_capture_boundary_number_value_expr('capture_take_len')
     }gex;
     return $code
    },

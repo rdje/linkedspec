@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Due exact diagnostic cleanup complete; resume Perl advancing Number52.1 feature implementation.
+Perl advancing Number13 plus selected String2/readonly Number2/reset2 pass; independent Rust52.2 next.
 
 ## Latest Completed Slice
 
-Due daily cleanup at clean Number52 selection boundary losslessly compresses only eight exact completed Lua51.5 instrument log/stderr duplicates, already byte-identical in its unchanged committed packet and absent from all claim durability inputs. Exclusive same-volume/non-symlink/nested-repository guards, decompressed byte/hash equality and unchanged raw inode/metadata/content precede unlink; all raw names are absent and local gzip/committed packet recover exact originals. Rust release/incremental/deps .bin/.log metadata census retained, all caches/build artifacts retained. Latest-only cleanup record refreshed at 2026-10-30T12:16:34.128426+00:00. Actual guarded producers/receipt/compressed bytes retained in daily-safe-cleanup-46-1.json.gz. Current normal test execution reads none of these logs; historical one-shot finishers first restore exact raw inputs. No production/storage-policy/infrastructure/cache migration/broad deletion/disk-space/population claim or other-repository/off-volume write. Book/live/task/resume/history/manual checks align; immediately resume Perl52.1 feature implementation with focused compile/quick check/commit. Deferred24/full23.4/canonical push prerequisites unchanged; no push.
+Perl advancing Number normal has6 RED/7 healthy before repair, then all13 GREEN with normal/frozen fixture byte-identical. Standalone Number snapshot already works and remains healthy. A sole Contracts advancing-Number factory shares all three original guarded native read/write bodies with narrow exact-zero-argument MethodLowering after existing function fences. Three primitive and capture_take_len_from(begin) printed bodies stay byte-identical. Native/fresh shared11/direct/bound/arithmetic/Number-String-Array-signed flow preserve widths1/4/8, origin6/6/10 versus live6, once-only effects, zero/lazy suppression, missing/reversed/no-advance, normalized BAD skip, snapshot-before-reset, named-source separation and pure-function fences warning-free. Selected advancing String2/readonly Number2/reset2 and both production-module syntax checks pass; 538 other prior diagnostic inputs stay exact. Retained old emitted Number module still fails host coalesce after compiler repair: regenerate affected modules. Actual normal/source epochs/RED-GREEN/native bodies/old module/producers/inputs retained in capture-advance-number-perl-intake.json.gz. Book/target/card/map/task/roadmap/live/resume/history/manual checks align; normal queued23.4.1. No full suite/current combined28/context/portable or mutable-policy expansion. Independent Rust52.2 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.1 from clean due-cleanup commit. Read frozen capture-advance-number-results.md/shared fixture and retained nine public distinctions/bound11 target. Add permanent focused normal/reproduce actual direct Number-chain failures; share original three guarded native Number bodies with narrow early method-value lowering after existing function/shape fences. Preserve body bytes/tags/Unicode endpoints/once/origin-versus-live/zero/missing/preflight/named-source/callback/root/copy/schema behavior. Quick native/fresh and nearest String51/readonly Number33/reset35 checks/docs/commit, then independent Rust52.2. No routine full suite or broad maintenance pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.2 independently from clean Perl52.1. Read frozen capture-advance-number-results.md/shared11 fixture and existing Rust producer/endpoints/origin-live/once/zero/preflight/named-source/function/callback policies. Establish native/restored CompiledSpec/generated-plan baseline before runtime changes; preserve healthy behavior and repair actual ordinary advancing Number continuation gaps only. Quick compile/format/new and nearest advancing String/readonly Number/reset checks/docs/commit; then Dart52.3. No inference from Perl or routine full suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.52.1` — Perl advancing Number13 plus selected String2/readonly Number2/reset2 pass; independent Rust52.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46.1` — Due exact diagnostic cleanup complete; resume Perl advancing Number52.1 feature implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.13` — Advancing capture Number52 frozen from actual direct gaps/healthy native effects; Perl52.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.5` — Safe Lua advancing102/readonly100/reset102 pass per host; all bounded51 checked; next selection23.1.13.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.1 from clean due-cleanup commit. Read f
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.1` — Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.11` — Readonly capture String family50 frozen from actual public gaps; Perl50.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.25` — Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.24` — Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
 
 ## History
 
