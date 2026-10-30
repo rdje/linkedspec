@@ -8,7 +8,7 @@ answers:
   - "which task owns gap String result guards and recovery"
   - "why can a forbidden Perl gap helper coalesce return M with unready metadata"
 date: 2026-10-30
-status: bounded Perl57.1 repaired/targeted-checked; independent peers pending
+status: bounded Perl57.1 repaired; independent backend outcomes in canonical gap String target
 tags: [perl, gap, string, fluent, selection, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.18; gap-string-result-selection-intake.json.gz retains8 initial/8 target observations, exact completed-bound/direct target twins, metadata/substitutions/generated sources and producers."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/gap_string_result.t"
@@ -52,3 +52,5 @@ fresh. Gap10 groups/deferred22 flat assertions/syntax pass. Actual source/normal
 producers/setup/epochs/results retained in gap-string-result-perl-intake.json.gz.
 Regenerate affected emitted Perl parsers; independent Rust57.2 next. No new
 getter/state/arity/error phase/function/deferred/schema/full admission.
+
+Independent Rust57.2 source-guard outcomes are in [[rust-gap-string-result-guards]]; current family status belongs to gap-string-result-composition.md. No peer failure or full admission is inferred.

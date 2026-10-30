@@ -1,7 +1,7 @@
 # Guarded gap String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.18; implementation family23.3.57.
-Status: Bounded Perl57.1 repaired/targeted-checked; independent Rust/Dart/Julia/safe Lua pending.
+Status: Bounded Perl57.1/Rust57.2 targeted-checked; independent Dart/Julia/safe Lua pending.
 
 ## Existing authority and preserved behavior
 
@@ -62,3 +62,16 @@ recovery/skips/cursor/named legacy behavior pass native/fresh. Actual source/
 normal/producers/epochs/results in gap-string-result-perl-intake.json.gz.
 New15 queued23.4.1, regenerate affected emitted Perl parsers. Rust57.2 next;
 no full23.4 or new state/arity/function/deferred/schema authority.
+
+## Rust57.2 implementation
+
+Direct recovery/compatible String/with actual kinds/Unicode/context/function/
+arity already work. Shared target/operand guards fail; unchanged9groups7healthy/
+2RED to9GREEN after adding two canonical-zero names to existing source/selected
+classifiers. Getter/runtime/parser/state/schema bytes exact. Eight actual values/
+10 error batches retain three routes; six healthy values/all errors byte-equal.
+New9/record7/computed6/owned fmt pass. Initial fmt1 and exact whitespace-only
+correction retained, final fmt0; no runtime proof change or repeat. Actual
+source/producers/inputs/epochs/results in gap-string-result-rust-intake.json.gz.
+Rebuild runtime/apps; no isolated emitted/dependency warning-free/full admission;
+Dart57.3 next.

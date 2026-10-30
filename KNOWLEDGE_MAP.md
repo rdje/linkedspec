@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1530** facts · **11421** question keys.
+> **1531** facts · **11425** question keys.
 
 ## Questions → fact
 
@@ -2683,6 +2683,8 @@
 - "does Rust expose generated_source_error" -> [rust-generated-source-contract-v1-gap](docs/knowledge/rust-generated-source-contract-v1-gap.md) · 2026-07-11 · reverify: `rg -n 'emit_rust_source|LINKEDSPEC_GENERATED_SOURCE_FORMAT|source_identity|generated_source_error|generated_plan_unknown_family|generated_rule_enter|generated_family_decision|generated_rule_exit|rust_runtime:generated_plan' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/source_emitter.rs && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`
 - "does Rust expose structured runtime diagnostics" -> [backend-capability-census](docs/knowledge/backend-capability-census.md) · 2026-07-13 · reverify: `perl tools/check_capability_conformance.pl && perl tools/check_generated_source_contract.pl`
 - "does Rust expose the backend neutral compiled descriptor" -> [backend-capability-census](docs/knowledge/backend-capability-census.md) · 2026-07-13 · reverify: `perl tools/check_capability_conformance.pl && perl tools/check_generated_source_contract.pl`
+- "does Rust gap String composition change getter or context state" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
+- "does Rust gap String recovery already work" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
 - "does Rust gap admission change recognition 137 246 58" -> [inter-match-gap-rust-implementation-plan](docs/knowledge/inter-match-gap-rust-implementation-plan.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh`
 - "does Rust gap capture add a second invocation stack" -> [inter-match-gap-rust-implementation-plan](docs/knowledge/inter-match-gap-rust-implementation-plan.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh`
 - "does Rust gap capture change generated plan v2" -> [inter-match-gap-rust-implementation-plan](docs/knowledge/inter-match-gap-rust-implementation-plan.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh`
@@ -9157,6 +9159,7 @@
 - "which Rust nesting carriers preserve values and Unicode spans" -> [nested-tree-rust-carrier-readiness](docs/knowledge/nested-tree-rust-carrier-readiness.md) · 2026-09-27 · reverify: `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test nested_tree_readiness --test leading_input_trivia --test sexpr_document_v1`
 - "which Rust nodes represent recognition transactions" -> [rust-recognition-transaction-integration](docs/knowledge/rust-recognition-transaction-integration.md) · 2026-09-08 · reverify: `bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test recognition_transaction_contract && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && ! rg -n 'linkedspec_recognition_transaction' rust/linkedspec-core rust/linkedspec-runtime`
 - "which Rust owner guards call Child indexed results" -> [rust-rule-call-selection-guard](docs/knowledge/rust-rule-call-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test rule_call_result_selection`
+- "which Rust owner guards gap_kind result methods" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
 - "which Rust owner returns rewind Number values" -> [rust-cursor-rewind-number-results](docs/knowledge/rust-cursor-rewind-number-results.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test cursor_control_arity --test cursor_rewind_result`
 - "which Rust parent and child carriers verify lossless readiness" -> [rust-lossless-child-carrier-readiness](docs/knowledge/rust-lossless-child-carrier-readiness.md) · 2026-09-27 · reverify: [2 entries](#rust-lossless-child-carrier-readiness)
 - "which Rust parse_job options must be literal" -> [rust-staged-ast-enrichment-marker-provenance](docs/knowledge/rust-staged-ast-enrichment-marker-provenance.md) · 2026-09-07 · reverify: [3 entries](#rust-staged-ast-enrichment-marker-provenance)
@@ -10742,6 +10745,7 @@
 - "why does Rust evaluate a reduction initial for a scalar or null root" -> [array-tree-traversal-contract](docs/knowledge/array-tree-traversal-contract.md) · 2026-10-27 · reverify: [5 entries](#array-tree-traversal-contract)
 - "why does Rust fixed lookbehind fail at a nonzero cursor" -> [rust-regex-input-context-drift](docs/knowledge/rust-regex-input-context-drift.md) · 2026-09-24 · reverify: [4 entries](#rust-regex-input-context-drift)
 - "why does Rust flat_hash of a scalar name return an empty Hash" -> [aggregate-operand-snapshots-and-null-keys](docs/knowledge/aggregate-operand-snapshots-and-null-keys.md) · 2026-10-26 · reverify: [2 entries](#aggregate-operand-snapshots-and-null-keys)
+- "why does Rust gap_text take execute incompatible operands" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
 - "why does Rust generated compatibility return an array" -> [logical-helper-generated-primary-projection](docs/knowledge/logical-helper-generated-primary-projection.md) · 2026-07-18 · reverify: `prove -lv t/logical_helper_perl_contract.t && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test logical_helper_contract && (cd dart && bash ../tools/run_dart_project_data.sh test test/logical_helper_contract_test.dart) && bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --compiled-modules=no julia/test/logical_helper_contract_test.jl && bash tools/run_primary_cli_matrix.sh --case success_logical_helpers_eager`
 - "why does Rust has_key see a rebound Hash" -> [aggregate-operand-snapshots-and-null-keys](docs/knowledge/aggregate-operand-snapshots-and-null-keys.md) · 2026-10-26 · reverify: [2 entries](#aggregate-operand-snapshots-and-null-keys)
 - "why does Rust have two ActionIR block parse modes" -> [rust-generic-final-codeblock-normalization](docs/knowledge/rust-generic-final-codeblock-normalization.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-core --lib && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract`
@@ -14026,7 +14030,7 @@ _Gap and incoming-slot record helpers need governed ordinary computed read roles
 ### gap-string-result-source-guard-gap
 _Perl gap String readers compose guarded results and direct read recovery_
 - **answers:** can gap_text and gap_kind compose String methods directly | why does direct gap_kind set_key execute incompatible operands | why does gap_text bracket default recovery fail compilation | which task owns gap String result guards and recovery | why can a forbidden Perl gap helper coalesce return M with unready metadata
-- **date:** 2026-10-30 · **status:** bounded Perl57.1 repaired/targeted-checked; independent peers pending
+- **date:** 2026-10-30 · **status:** bounded Perl57.1 repaired; independent backend outcomes in canonical gap String target
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.18; gap-string-result-selection-intake.json.gz retains8 initial/8 target observations, exact completed-bound/direct target twins, metadata/substitutions/generated sources and producers.`
 - **reverify:** `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/gap_string_result.t`
 - **source:** [`docs/knowledge/gap-string-result-source-guard-gap.md`](docs/knowledge/gap-string-result-source-guard-gap.md)
@@ -21051,6 +21055,14 @@ _Rust gap and slot record fields reuse the ordinary selected-kind guard_
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.55.2; gap-slot-record-rust-intake.json.gz retains calibrated unchanged7groups6healthy/1RED to7GREEN, computed6/gap-unit3/owned fmt and actual sources/producers/epochs/inputs.`
 - **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_slot_record_selection --test computed_selection`
 - **source:** [`docs/knowledge/rust-gap-slot-record-selection-guard.md`](docs/knowledge/rust-gap-slot-record-selection-guard.md)
+
+### rust-gap-string-result-guards
+_Rust gap String results use the existing actual-kind operand guards_
+- **answers:** why does Rust gap_text take execute incompatible operands | which Rust owner guards gap_kind result methods | does Rust gap String recovery already work | does Rust gap String composition change getter or context state
+- **date:** 2026-10-30 · **status:** bounded Rust57.2 repaired/targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.57.2; gap-string-result-rust-intake.json.gz retains unchanged9groups7healthy/2RED to9GREEN, record7/computed6/owned fmt and actual source/producers/inputs.`
+- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
+- **source:** [`docs/knowledge/rust-gap-string-result-guards.md`](docs/knowledge/rust-gap-string-result-guards.md)
 
 ### rust-generated-and-acode-direct
 _Rust generated source directly executes AND acode families_

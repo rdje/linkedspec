@@ -8164,7 +8164,7 @@ impl Engine {
         Ok(current)
     }
 
-    // Only ordinary input/cursor result signatures enable guards. Malformed
+    // Only ordinary parser-reader result signatures enable guards. Malformed
     // free calls retain their own producer and legacy continuation policies.
     fn is_input_cursor_value_source(expr: &Expr) -> bool {
         let Expr::Call { name, args } = expr else {
@@ -8186,6 +8186,8 @@ impl Engine {
                     | "cursor_col"
                     | "cursor_rest"
                     | "cursor_rest_len"
+                    | "gap_text"
+                    | "gap_kind"
                     | "rewind_entry_start"
                     | "rewind_match_start"
             )
@@ -8205,8 +8207,11 @@ impl Engine {
                 if matches!(name.as_str(), "rewind_entry_start" | "rewind_match_start") {
                     return args.is_empty();
                 }
-                // Readonly gap/slot records share ordinary selected-value guards.
-                if matches!(name.as_str(), "entry_slot" | "gap_span") {
+                // Readonly gap/slot values share ordinary selected-value guards.
+                if matches!(
+                    name.as_str(),
+                    "entry_slot" | "gap_span" | "gap_text" | "gap_kind"
+                ) {
                     return args.is_empty();
                 }
                 // Static child returns use ordinary selected-value guards.

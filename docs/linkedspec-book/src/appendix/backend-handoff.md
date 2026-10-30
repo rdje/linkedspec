@@ -3024,5 +3024,8 @@ The bounded gap String addition now works in Perl: gap_text/gap_kind preserve
 String methods and use actual-kind direct guards and read/recovery roles.
 Native/fresh shared/empty/tail/Unicode/operand skips/with Array-Hash-Bool and
 function/context/legacy controls pass. Regenerate affected emitted Perl parsers.
-Rust follows independently. Existing gap state, contexts, errors, function
-restrictions and raw named policies stay; full admission remains separate.
+Rust now also applies the existing gap String operand guards on native/restored/
+plan, preserving already-working recovery/Unicode/with kinds/context/function/
+arity behavior; rebuild runtime/apps. Dart follows independently. Existing gap
+state, contexts, errors, function restrictions and raw named policies stay; full
+admission remains separate.
