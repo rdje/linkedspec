@@ -9,7 +9,7 @@ answers:
   - "does push(A,B) remain a child call during mutation-slot bare-read work"
   - "what is the next leaf after SPEC-FORMAT-TERSE.1.2.3.3.2"
   - "does Rust support mutation-slot bare scalar reads after SPEC-FORMAT-TERSE.1.2.3.4"
-date: 2026-06-29
+date: 2026-10-30
 status: historical scalar-slot intake; current storage follows uniform binding
 tags: [dsl, variables, type-inference, channel-2, spec-format-terse, SPEC-FORMAT-TERSE, actionir, perl]
 evidence: "SPEC-FORMAT-TERSE.1.2.3.3.2 landed on 2026-06-29. MethodLowering now routes statement mutation value slots through `_lower_mutation_slot_value_expr`, so `items += value` lowers to `push @items, $value`, `set_key(meta,key,value)` lowers to `$meta{$key} = $value`, and `meta[key] = value` lowers to `$meta{$key} = $value`. Primitive literals stay typed values, reserved engine locals such as `CAPTURE` are not claimed as mutation values, and all-bare `push(A,B)` / `push(items,value)` keep child-call precedence. `_collect_auto_working_var_decls` records the scalar key/RHS reads plus array/hash mutation targets and dedups with explicit declarations/wrappers. This leaf did not itself claim direct-access bare path atoms; SPEC-FORMAT-TERSE.1.2.3.3.3 later landed `return(foo[\"a\"][z])` as `return $foo->{\"a\"}->[$z]`. SPEC-FORMAT-TERSE.1.2.3.4 then landed Rust parity for mutation-slot bare scalar reads by accepting bare variables in `AssignArrayAppend` and `AssignHashIndex` parser slots. Phase0 passed with 986 tests for `.1.2.3.3.2` and 987 tests after the later direct-access leaf."
@@ -35,3 +35,12 @@ This original leaf did not change generic helper arguments or direct-access bare
 as `[z]`; the next scalar leaf `.1.2.3.3.3` and Rust parity `.1.2.3.4` are completed history.
 Current all-bare `push(A,B)` first selects a registered rule handler for A; when none exists,
 it appends the value of B to binding A. See the uniform-binding record for that precedence.
+
+TYPE45.21 reconciles exact mutation-slot29 plus directly dependent statement10
+under current28.1 staged-key authority:3 old source ABI assertions/36 healthy
+->39 GREEN. Original calls/runtime sources/other36 assertions and production
+remain exact. Four public native/fresh sources/six run cases retain original
+Array/Hash mutation resets, pure nested update and key-before-value when the
+value changes the key. Earlier direct28.1 matrices are not rerun/promoted.
+Inputs/producers retained in perl-phase0-mutation-slots-oracle-intake.json.gz;
+no new domain/arity/storage/host/copy policy or peer admission.

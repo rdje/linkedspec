@@ -45672,10 +45672,16 @@ subtest 'spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist' => sub
         'array append primitive literals remain typed values');
     is($L->('items += CAPTURE'), 'items += CAPTURE',
         'reserved engine locals are not claimed as mutation-slot scalar reads');
-    like($L->('set_key(meta,key,value)'), qr/BindingRuntime::index_set\(\$meta, "meta", \$key, \$value\)/,
-        'set_key(meta, key, value) lowers bare key and value as scalar reads');
-    like($L->('set_key(meta,"stage",value)'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", \$value\)/,
-        'set_key(meta, "stage", value) lowers a bare value as a scalar read');
+    is(evaluate_lowered_json(
+            $L->('set_key(meta,key,value)') . '; return [$meta,$key,$value];',
+            q{my $meta={}; my $key="stage"; my $value="stored";},
+        ), q#{"value":[{"stage":"stored"},"stage","stored"],"warnings":[]}#,
+        'set_key reads the bare key and value from initialized typed bindings');
+    is(evaluate_lowered_json(
+            $L->('set_key(meta,"stage",value)') . '; return [$meta,$value];',
+            q{my $meta={}; my $value="stored";},
+        ), q#{"value":[{"stage":"stored"},"stored"],"warnings":[]}#,
+        'set_key captures a literal key and reads the bare value binding');
     like($L->('meta[key] = value'), qr/\$__ls_path_segment_0 = \$key;.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*"meta"/s,
         'one-segment nested write lowers bare key and value as typed expressions');
     like($L->('meta["stage"] = value'), qr/\$__ls_path_segment_0 = "stage";.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta, .*kind_hint => "string"/s,
@@ -45930,8 +45936,11 @@ subtest 'spec_format_terse_1_3_3_set_key_statement_mutates_hash' => sub {
         return $src;
     };
 
-    like($L->('set_key(meta, "stage", cat("a", "b"))'), qr/BindingRuntime::index_set\(\$meta, "meta", "stage", do \{ my \@__ls_cat_parts/,
-        'top-level set_key(meta,...) lowers to a uniform typed-binding update');
+    is(evaluate_lowered_json(
+            $L->('set_key(meta, "stage", cat("a", "b"))') . '; return $meta;',
+            q{my $meta={};},
+        ), q#{"value":{"stage":"ab"},"warnings":[]}#,
+        'top-level set_key stores the computed value in the typed binding');
     like($L->('return(set_key(meta, "stage", "v"))'), qr/^return do \{ my \$__ls_set_key_source = (?:\$meta|\\%meta|do \{ my \$__ls_hash_value = \$meta)/,
         'nested set_key(meta,...) remains the pure hash-copy value helper');
 

@@ -1159,6 +1159,8 @@ On Perl, `drop_keys(meta, "debug")` and `meta.drop_keys("debug")` leave `meta` u
 
 Ordinary Perl `set_key` accepts eager String key blocks in value, receiver and statement forms: `meta.set_key({return("kind")},{return("node")})` produces a copy with `"kind":"node"`. Block returns stay local. Pure source, key and value evaluate once in that order; the source copy and selected key survive later operand effects. With `meta={"old":1}; key="before"`, `changed=set_key(meta,key,{key="after";2})` yields `{"old":1,"before":2}`, leaves `meta` as `{"old":1}` and leaves `key` as `"after"`. Statement `set_key(meta,key,...)` and String-key `meta[key]=...` also capture the key before their value.
 
+Bare key and value operands read their working bindings. `key="stage"; value="stored"; meta={}; set_key(meta,key,value); return(meta)` returns `{"stage":"stored"}`. A literal key is explicit: `set_key(meta,"stage",value)` reads the same value binding. The key is captured before the value expression runs.
+
 The pure and mutating forms can be used together. This Perl action returns `[{"old":1,"before":2},{"old":1,"stored":7},"after"]`:
 
 ```text

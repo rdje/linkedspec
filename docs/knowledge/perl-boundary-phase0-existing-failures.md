@@ -163,3 +163,10 @@ under ADR0138 null preservation. Original source/declarations/native accumulator
 reset controls remain exact; public native/fresh5 and production identity hold.
 Three last-selected groups remain owned; mutation-slot45.21 follows. No new
 combined28/full-suite or broad host-isolation status is inferred.
+
+TYPE45.21 reconciles two directly related typed-mutation groups29+10:3 old
+key-call ABI assertions/36 healthy ->39 GREEN, preserving original calls/runtime
+sources/healthy controls and production. Public native/fresh4 sources/six runs
+pass. Only receiver trailing-block group remains from the last-selected failure
+set;45.22 owns it. A fresh frozen28 reassessment follows bounded repairs; no
+combined28/full-suite status is inferred yet.

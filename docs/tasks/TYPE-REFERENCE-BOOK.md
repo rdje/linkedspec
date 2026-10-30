@@ -9543,13 +9543,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.20 - align bare copy reads with approved null preservation`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.21`
-  Status: `pending`
-  Goal: Reconcile retained mutation-slot bare-read group under current scalar key/RHS and key-before-value typed mutation contracts; public source/native/fresh distinctions before source-oracle movement. Repair real outliers first.
+  Status: `completed`
+  Goal: Reconcile exact mutation-slot29 and directly dependent statement set_key10 under the same scalar key/RHS and key-before-value typed mutation ABI; preserve original runtime/source/declaration/reset controls.
   Schedule: P1 next; other2 last-selected failures remain parent45/45.4 receipt-owned. Unique diagnostic prefix mutation-slots-oracle.
+  Verification tier: `focused`
+  Focused checks: Exact mutation-slot29 plus directly dependent statement10; public original/native/fresh repeat/reset/pure and key-before-value controls; preserve healthy declaration/runtime tests, no duplicate broad direct matrix.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named binding/mutation distinctions, no population measurement.
+
+  Activation: clean `f0b8ff975d613447dc1f1e8239a9cba9c385ab9a`; proof jobs terminal and brief empty; exact group `spec_format_terse_1_2_3_3_2_mutation_slot_bare_reads_auto_exist`.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Bounded scope refinement from clean activation: Include the directly dependent10-assertion statement set_key group alongside mutation-slot29. Both retained failures assert the same pre28.1 index_set key ABI and are reconciled under one typed-mutation seam; three stale assertions total are candidates, not assumed until current replay. Preserve all healthy declaration/runtime/reset/pure controls. This leaf owns both exact names; only receiver trailing blocks remain outside this slice. No new feature/domain/producer scope.
+
+  Result: One typed-mutation seam owns exact mutation-slot29 and directly dependent statement10:3 old key-ABI source-oracle RED/36 healthy ->39 GREEN. Only three original helper calls now check mutated values; original runtime sources/other36 declaration/metadata/reset/pure assertions stay exact. Four public native/fresh sources/six run cases retain original mutation/statement resets, original pure source preservation and key-before-value when the value rebinds key. Production unchanged;528 other prior input hashes exact. No duplicate direct28.1 matrix or new cursor/domain/arity/depth/storage/host/peer policy. Syntax/book/map/history/manual checks pass; actual source/RED-GREEN/public producers/current mutation authority retained in perl-phase0-mutation-slots-oracle-intake.json.gz. Book status now reports current behavior and remaining owner, with detailed history in tasks/Git. Fact/task/roadmaps/live/resume align; only receiver trailing-block45.22 remains from the last-selected set. No combined28/full-suite/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.21 - reconcile typed mutation checks with captured key values`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.22`
+  Status: `pending`
+  Goal: Reconcile the final retained Perl receiver trailing-block group against current eager argument/scoped-value/actual-result contracts. Public original/native/fresh/diagnostic proof before classifying any failure; repair actual outliers first.
+  Schedule: P1 next; the other two retained mutation groups close together under21 as one shared key-ABI slice. Unique diagnostic prefix receiver-blocks-oracle. One frozen28 current-only reassessment follows bounded repair.
   Planned verification tier: focused.
-  Planned focused checks: Exact mutation-slot group, public key/value/source/order controls and direct consumer when warranted; preserve healthy declaration/reset tests.
+  Planned focused checks: Exact trailing-block group, public original/receiver/helper/scoped source and effect/result controls; direct consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named binding/mutation distinctions, no population measurement.
+  Planned claim verification: none: Finite named block/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10712,7 +10734,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.21` | `pending` | Assess retained mutation-slot reads against scalar operands/staged mutation authority. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.22` | `pending` | Assess the remaining receiver trailing-block group through current public contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
