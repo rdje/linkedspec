@@ -632,6 +632,29 @@ Keep these semantics separate. `save_cursor()` / `restore_cursor()` are an
 explicit stack. `rewind_match_start()` / `rewind_entry_start()` are direct
 lifecycle-anchor rewinds and do not use hidden stack state.
 
+In Perl, the two rewind helpers return their validated position while moving the
+cursor. A bound result can already compose with Number/text methods:
+
+```text
+position = rewind_entry_start();
+formatted = position.add(1).cat("!");
+```
+
+Direct forms such as `rewind_entry_start().add(1)` are the next bounded addition;
+they currently leave a failing helper call in Perl. `save_cursor()` and
+`restore_cursor()` return null in Perl and should remain statement controls.
+Other backends are assessed independently. Keep cursor effects in ordinary parser
+actions for now: an existing Perl eager `with` body containing `restore_cursor()`
+can let a local return escape the enclosing handler; that prerequisite is owned
+before the direct-result addition.
+
+A parent default loop must also advance or terminate after a child rewind. An
+existing Perl loop can reselect the same child indefinitely after it rewinds to
+the iteration origin. For a one-child result wrapper, an explicit action
+`-> Value { return(call(Value)) }` returns directly. The general progress/count/
+lifecycle repair is tracked separately from Number result composition.
+
+
 The previous `BACKTRACK()` / `IBACKTRACK()` and lowercase `backtrack(label)` /
 `ibacktrack(label)` spellings are not current portable API. Use the explicit
 helpers above in new specs.

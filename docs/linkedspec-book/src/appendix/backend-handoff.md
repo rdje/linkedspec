@@ -2984,3 +2984,14 @@ Installed PUC Lua 5.5.1/LuaJIT likewise guard ordinary zero-argument gap/slot fi
 reads across native/restored/plan/fresh loaded modules. Typed unavailable context,
 function-state restrictions and strict reader arity remain, with no added chunk
 locals. Declared Lua 5.4 and full context/portable admission stay separate.
+
+### Cursor rewind result composition
+
+The next bounded addition composes the existing Number result of the two zero-
+argument rewind helpers. A descriptor-qualified explicit action-edge bound twin
+preserves entry/local anchors, source-before-consuming-operand values, defaults,
+guards and signed Array recovery on native/fresh Perl; direct forms fail. An
+ordinary eager cursor-statement local-return prerequisite precedes the feature.
+A separately owned default-parent rewind cycle requires ordinary progress
+authority before admission. No anchor/absence/stack/transaction/callback/schema
+or portable admission changes follow from this selection.

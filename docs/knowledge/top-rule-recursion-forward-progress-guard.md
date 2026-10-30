@@ -1,6 +1,6 @@
 ---
 id: top-rule-recursion-forward-progress-guard
-title: "Engine mechanics (TOP-RULE-AS-NORMAL): recursion re-enters through the SpecEntry runtime-handler closure (`&{$descr->{spec}{$rule}{handler}}(...)`), NOT the dump_parser_source artifact. The per-handler while(1)+LinkedRE::or /gc matching is already forward-progress-safe; the only engine-level hang is an unconditional NO-CONSUME self-recursion. A precise (rule,pos) non-progress cutoff terminates such cycles. RESOLVED: a recursive rule used AS the top/entry rule parses correctly with an LX accumulator-return; TOP vs BODY differ by arity, not an engine defect. Rust now mirrors termination and recursive value parity: declare(type, name) resolves bare type tokens literally and declared working vars are scoped per rule invocation."
+title: "Perl recursive re-entry protection is separate from ordinary loop progress"
 answers:
   - "where does cross-rule call / recursion actually re-enter at runtime"
   - "is dump_parser_source the real runtime handler code"
@@ -151,3 +151,11 @@ Final13 groups5 fresh timeout RED/all13pass, nearest sparse15 and syntax2;
 actual12 source pairs differ only by registration/metadata unchanged. See
 [[perl-emitted-ordinary-recursion-guard-gap]] for current focused proof and
 regeneration requirement. This does not refresh the historical broad gates.
+
+## October30 qualification
+
+The June finite recursion/zero-width observations remain historical evidence,
+but their broad ONLY-hang/per-handler-safe wording is superseded by
+[[cursor-rewind-default-loop-progress-gap]]. A completed child rewind can cycle
+in an ordinary default parent; P1 TYPE-REFERENCE-BOOK.1.2.23.3.39.8.2 owns repair
+after39.8.1 ordinary progress authority and before full admission.
