@@ -1,7 +1,7 @@
 # Anonymous advancing capture Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.13; implementation family23.3.52.
-Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending.
+Status: all five bounded children targeted-checked on recorded routes/hosts; full admission separate.
 
 ## Existing authority and actual gap
 
@@ -114,3 +114,16 @@ registers the normal. Thirteen actual observations/complete summaries/producers/
 input bindings retained in capture-advance-number-julia-intake.json.gz. Same-
 process fresh Module is not isolated package proof; no full23.4 admission. Safe
 Lua52.5 independently follows.
+
+## Bounded safe Lua52.5
+
+Installed PUC5.5.1/LuaJIT2.1.1788460057 already support the unchanged target.
+Strict new97/String102/readonly Number155/reset102 pass per host across native/
+restored/generated-plan/fresh loaded module, runtime unchanged. Shared11/widths/
+endpoints/once/snapshots/normalized guards/zero/missing/reversed/named-source and
+caller callback/function fences hold. One exact three-line runner block registers
+the normal/loadfile guards; fixed expected JSON is validated before creation.
+Thirteen actual observations per host/complete summaries/producers/input bindings
+retained in capture-advance-number-lua-intake.json.gz. All bounded52 children have
+focused outcomes; next useful selection23.1.14 follows. No unsafe runner/
+formatter/new interpreter locals/declared5.4/isolated-package/full23.4 admission.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia advancing Number65/String70/readonly Number75/reset70 pass, runtime unchanged; safe Lua52.5 next.
+Safe Lua Number97/String102/readonly Number155/reset102 pass per host; all bounded52 checked; next selection14.
 
 ## Latest Completed Slice
 
-Julia independently already supports frozen advancing Number52: strict new65/advancing String70/readonly Number75/reset70 pass native/reconstructed SpecFile/generated-plan/fresh emitted Module with empty stderr, runtime unchanged/no invented RED. Shared11/three bound sources preserve widths1/4/8 and origin6/6/10 versus live6, once/snapshots/normalized BAD skip, defined-zero lazy suppression, missing/reversed/no-advance and Number-String-Array-signed flow. Named width source updates its separate mark; literal callback returns Number4/origin3/live0 and all three pure-function/registered callback source-specific typed errors hold. One exact runner include registers the normal; 166 other bound input hashes stay exact. Actual thirteen source observations/complete summaries/producers/input bindings retained in capture-advance-number-julia-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. Fresh Module is same-process loading, not isolated-package proof; no full runner/context/domain/portable or vocabulary/shape/schema movement. Independent safe Lua52.5 next.
+Both installed PUC5.5.1/LuaJIT2.1.1788460057 already support frozen advancing Number52: strict new97/advancing String102/readonly Number155/reset102 pass per host across native/restored/generated-plan/fresh loaded modules, runtime unchanged/no invented RED. Shared11/three bound widths preserve1/4/8 and origin6/6/10 versus live6, once/snapshots/normalized BAD skip, defined-zero lazy suppression, missing/reversed/no-advance and Number-String-Array-signed flow. Named width source updates its separate mark; literal callback returns Number4/origin3/live0, with authored-helper typed pure-function/registered callback restrictions preserved. Exact three-line runner registration/loadfile guards preserve other bytes and 169 input hashes. Strict fixed JSON is validated before test creation; no new test-instrument repair required. Actual thirteen source observations per host/complete summaries/producers/input bindings retained in capture-advance-number-lua-intake.json.gz. All five bounded52 children have focused outcomes; full23.4/Perl registration/declared5.4 and remaining prerequisites stay separate. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No unsafe runner/formatter/new interpreter locals/isolated-package/full admission. Next useful fluent selection23.1.14 follows.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.5 independently from clean Julia52.4. Read frozen Number52/shared11 and safe installed PUC/LuaJIT Number/effect/endpoint/zero/named-source/function/callback/preflight/runner policies. Establish native/restored/generated-plan/fresh-module baselines on safe authored fixtures/loadfile only before production. Preserve compatible behavior; fix actual ordinary Number gaps only. New normal/exact three-line runner registration/quick nearest String/readonly Number/reset checks/docs/commit, then next useful fluent selection. No unsafe full runner/formatter/declared5.4 or exhaustive matrix.
+Activate TYPE-REFERENCE-BOOK.1.2.23.1.14 from clean bounded advancing Number52 coverage. Reconcile current helper/signature/result-role inventory and already implemented families; use Knowledge Map/canonical records before deriving facts. Begin remaining named capture String/advancing-result and computed/effect-returning source transitions, distinguishing actual gaps from already compatible forms with a few public primitive/bound/direct/effect controls on proven carriers. Choose one useful bounded feature and own independent backend/prerequisite tasks before production. Preserve native effects/endpoints/null/zero/shape/function/callback/first-consumer/copy/format authority. Focused compile/quick check/docs/commit cadence continues; no exhaustive admission or maintenance pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.52.5` — Safe Lua Number97/String102/readonly Number155/reset102 pass per host; all bounded52 checked; next selection14.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.4` — Julia advancing Number65/String70/readonly Number75/reset70 pass, runtime unchanged; safe Lua52.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.3` — Dart advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Julia52.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.2` — Rust advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Dart52.3 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.5 independently from clean Julia52.4. R
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.5` — Safe Lua100/Number155/reset102 pass per host; all bounded50 children checked; next feature selection23.1.12.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` — Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` — Dart capture String6/Number6/reset3 pass without runtime change; independent Julia50.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.50.2` — Rust capture String6/Number6/reset3 pass without runtime change; independent Dart50.3 next.
 
 ## History
 
