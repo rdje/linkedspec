@@ -9502,13 +9502,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.18 - reconcile pick_keys flow checks and protect diagnostic inputs`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.19`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile retained split_tagged_records helper group under existing tagged-row/parser contracts; public source/native/fresh examples before source-oracle movement. Repair actual outliers first.
   Schedule: P1 next; other4 last-selected failures remain parent45/45.4 receipt-owned. Unique diagnostic prefix split-tagged-oracle required; actual activation guard prevents reuse.
+  Verification tier: `focused`
+  Focused checks: Exact tagged-record helper group and public native/fresh row/value/source controls; direct dependent check when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named parser/value distinctions, no population measurement.
+
+  Activation: clean `d8b32c1ee82e840c795a93fb405973723b3d2e3d`; proof jobs terminal and brief empty; exact group `emit_context_lowers_split_tagged_records_helper`.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Result: Exact tagged-record group reproduces1 old map/split source-oracle RED/6 healthy, then7 GREEN. Original helper expression now checks initialized row values; original declaration heredoc/all6 healthy metadata assertions stay exact. Two public native/fresh cases execute that exact initializer and preserve carried String1/source bindings. Direct producer36 retains once-only eager arguments, empty-source field evaluation, trailing items, SDTF/earlier snapshots, regex/dynamic literal controls and existing carried kinds/DSL copy bounds. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks pass; actual source/RED-GREEN/producers/frozen eager authority retained in perl-phase0-split-tagged-oracle-intake.json.gz. No new global split/empty/zero-width/depth/context or peer/portable admission; SESSION33 remains open. Book/fact/task/roadmaps/live/resume align; four last-selected groups remain, aggregate bare-read45.20 next. No combined28/full-suite/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.19 - reconcile tagged record checks with eager value construction`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.20`
+  Status: `pending`
+  Goal: Reconcile retained aggregate bare-value-read group against current typed binding and legitimate implicit rule-aggregate contracts; public source/native/fresh distinctions before any source-oracle change. Repair real outliers first without broad host policy normalization.
+  Schedule: P1 next; other3 last-selected failures remain parent45/45.4 receipt-owned. Use a unique aggregate-bare-oracle prefix.
   Planned verification tier: focused.
-  Planned focused checks: Exact tagged-record helper group and public native/fresh row/value/source controls; direct dependent check when warranted.
+  Planned focused checks: Exact aggregate-read group, public typed/implicit aggregate/source controls and direct consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
-  Planned claim verification: none: Finite named parser/value distinctions, no population measurement.
+  Planned claim verification: none: Finite named binding/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10671,7 +10691,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.19` | `pending` | Assess retained tagged-record helper checks against current public value contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.20` | `pending` | Assess retained aggregate bare-value reads against typed/implicit binding contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

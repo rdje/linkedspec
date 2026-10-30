@@ -151,3 +151,9 @@ TYPE45.18 reconciles pick_keys1 nested-presence source assertion/3 healthy ->
 prefix repair restores earlier local inputs and verifies three no-overwrite
 controls. Five last-selected groups remain owned; tagged-record helper45.19
 follows. No combined28/full-suite status is inferred.
+
+TYPE45.19 reconciles tagged-record1 obsolete map/split source assertion/6 healthy
+->7 GREEN, retaining original helper/initializer/metadata controls. Public native/
+fresh2/direct producer36 pass with production unchanged. Four last-selected
+groups remain owned; aggregate bare-read45.20 follows. No combined28/full-suite
+status is inferred.

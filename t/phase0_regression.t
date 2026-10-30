@@ -39388,9 +39388,12 @@ subtest 'emit_context_lowers_split_tagged_records_helper' => sub {
     plan tests => 7;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr))'),
-        'return [map { ["?row:", $_, $kind, $expr] } split /\s*,\s*/o, $identifier_list]',
-        'split_tagged_records helper lowers comma-list records into the legacy VHDL map/split shape'
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'return(split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr))'),
+            q{my $identifier_list = "A,B"; my $kind = "wire"; my $expr = "1";},
+        ),
+        q#{"value":[["?row:","A","wire","1"],["?row:","B","wire","1"]],"warnings":[]}#,
+        'split_tagged_records builds records from the initialized source and carried values'
     );
 
     my $spec_content = <<'SPEC';

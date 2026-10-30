@@ -12,7 +12,7 @@ answers:
   - "do Perl and Lua split agree on an empty source"
   - "why does Rust split with an empty delimiter add an initial empty item"
   - "does Rust pure split match Perl on empty sources and zero-width delimiters"
-date: 2026-10-27
+date: 2026-10-30
 status: all five bounded tagged-record producer/receiver implementations targeted-checked; full split-domain admission remains owned
 tags: [startup-reading, perl, rust, lua, tagged-records, split, parity]
 evidence: "TYPE22.1.1 repairs the Perl eager producer with native/fresh regression; receiver22.1.2 is also repaired; Rust22.2 adds the missing producer/bridge; SESSION33 broad admission remains. Historical SESSION-STARTUP-READING.3.2.28 compares public Perl Get and the PUC Lua primary CLI for a,b, and empty sources. Perl evaluates the carried increment per emitted row and uses split without a trailing-empty limit. PUC Lua evaluates arguments once and reuses pure split. SESSION-STARTUP-READING.33.1 owns authority/impact review; .33.2 owns the reviewed repair."
@@ -237,3 +237,12 @@ and conversion domains, and does not close SESSION33's full six-runtime/empty/
 zero-width/variable-regex/context admission. Current primary teaching is qualified
 until repair, not silently declared portable. New retained probe:
 `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl docs/checkpoints/type-operation-inventory/probe_tagged_record_results.pl`.
+
+TYPE45.19 reconciles the old Phase0 map/split source assertion against existing
+22.1 eager staging/pure-split reuse:1RED/6healthy ->7 GREEN. Original helper
+expression/declaration heredoc/other6 assertions remain exact. Public native/
+fresh2 execute the original initializer and preserve carried String1/source;
+direct producer36 retains SDTF/once-only/empty/trailing/kinds/DSL copy bounds.
+Production unchanged. Actual inputs/producers/RED-GREEN retained in
+perl-phase0-split-tagged-oracle-intake.json.gz; broader SESSION33 boundaries above
+remain separately owned, with no new global split/depth/peer admission.

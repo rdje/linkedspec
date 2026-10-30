@@ -1495,6 +1495,16 @@ For `identifier_list = "a, b"`, `subtype_indication = "integer"`, `signal_kind =
 ]
 ```
 
+The helper can initialize a working Array directly. This Perl action returns `[["?row:","A","wire","1"],["?row:","B","wire","1"]]`; the carried `"1"` stays text:
+
+```text
+identifier_list = "A,B";
+kind = "wire";
+expr = "1";
+rows = split_tagged_records(identifier_list, /\s*,\s*/o, "?row:", kind, expr);
+return(copy(rows));
+```
+
 The outer array holds all records; each inner array is one record, with no extra wrapper. Ordinary helper arguments (source, delimiter, tag and carried fields) evaluate once left-to-right before record construction, even if no records result; earlier values survive later rebinding.
 The scalar receiver equivalent is `"a,b".split_tagged_records(",", "?item:").count()` → `2`, with text as input and an Array result that can feed selection and other Array methods. For carried Arrays, `"a,b".split_tagged_records(",","row",["x","y"]).last().last().last().uppercase()` returns `"Y"`.
 Perl, Rust, Dart, Julia and Lua support the scalar bridge and retain their pure splitters’ trailing items: `" a,b ".trim().split_tagged_records(",","row").last().last().uppercase()` gives `"B"`. Carried Number/Bool/null/Array/Hash values retain their kinds and can feed compatible selected-value methods; malformed receiver calls with fewer than delimiter/tag reject before effects.
