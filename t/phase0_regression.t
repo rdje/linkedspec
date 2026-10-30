@@ -16338,9 +16338,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'assign helper accepts first(projected-array-expression) source lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(last(sorted_values(pick_keys(meta, "kind", "source"))))}),
-        q{return do { my $__ls_last = do { my $__ls_sorted_values = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; defined($__ls_last) && @{$__ls_last} ? $__ls_last->[-1] : undef }},
-        'return(payload) accepts last(projected-array-expression) lowering'
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(last(sorted_values(pick_keys(meta, "kind", "source"))))})
+        ),
+        q#{"value":"fixture","warnings":[]}#,
+        'return(payload) evaluates last(projected-array-expression) with the reference guard'
     );
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(first(sorted_keys(meta)), "kind")}),

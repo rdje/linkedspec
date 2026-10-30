@@ -852,6 +852,8 @@ The first chain consumes the length result; it does not return to `raw`. The sec
 
 A receiver `.with()` passes its block result to the next method: `" x ".with() {return(cat(value,"!"))}.trim()` yields `"x !"`. Putting trim before the block changes the value it receives: `" x ".trim().with() {return(cat(value,"!"))}.uppercase()` yields `"X!"`. An Array result can continue too: `" a-b ".trim().with() {return(value.split("-"))}.count()` yields `2`. The block's scoped `value` is restored afterward; these chains retain the same ordinary eager-block and compatible-result rules.
 
+Projection and selection compose: with `meta = {"source":"fixture","kind":"token","other":"kept"}`, `last(sorted_values(pick_keys(meta,"kind","source")))` yields `"fixture"`, because `sorted_values` follows sorted key order. The source Hash keeps all three fields. Selecting from an empty projection yields null; if the last selected field stores null, the result is also null.
+
 ### Flattening bound and computed values
 
 `flat(container)` opens one array or harray into its surrounding constructor. The argument can be a working binding, function parameter, nested read, or container-valued expression such as `copy(items)`. It is evaluated once. Arrays contribute their elements; harrays contribute key/value pairs. An empty container contributes nothing.

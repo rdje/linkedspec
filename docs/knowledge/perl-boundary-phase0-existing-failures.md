@@ -189,3 +189,10 @@ value/inverse controls and only the established dependent oracle repair. No
 runtime defect, full Phase0 state, parent45 closeout or portable admission is
 inferred. Actual producer/inputs/TAP/stderr are retained in
 perl-phase0-after-repairs-intake.json.gz.
+
+TYPE45.24 reconciles only projected-last slot71 under the45.11.1 reference
+guard:1 obsolete source RED/78 healthy ->79 GREEN. Original expression/healthy
+controls/production stay exact; public native/fresh4 and seeded isolation15 pass.
+The initial invalid carrier/key probe and duplicate unchanged selected run are
+retained without semantic/GREEN credit. Combined frozen28 reassessment45.25 is
+next; no full-suite/parent admission or new kind/null policy is inferred.

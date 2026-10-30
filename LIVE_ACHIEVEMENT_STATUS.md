@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Frozen28 current-only replay27PASS/1FAIL; one dependent sorted_values source oracle owned45.24.
+Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
 
 ## Latest Completed Slice
 
-Current-only frozen28 replay completes29 top-level results with27 selected groups passing/1 failing, exit1. The remaining method-contract group has79 direct assertion slots: only71 is RED,78 healthy. Actual output differs from its old exact-source expectation by the sorted_values reference guard introduced by45.11.1; no runtime defect is established by that mismatch. Original universe/compressed primary diagnostics are byte-verified against the TYPE37 packet;538 bound input hashes and HEAD stay unchanged. Direct nested plans/names/selection/no-skip controls and actual producer/TAP/stderr are retained in perl-phase0-after-repairs-intake.json.gz. Immediate P1 repair45.24 owns this one dependent oracle with independent native/fresh projected-value and empty-inverse controls before any expectation edit. Stale current task-index/header/frontier pointers are corrected within this diagnostic handoff; immutable history and unrelated owners remain exact. Book/map/history/manual continuity checks pass. No production/test change, whole-Phase0 status, parent45 closeout, portable/context admission or push.
+Exact method-contract group reproduces1 obsolete source assertion RED/78 healthy, then79 GREEN. Only slot71 becomes an initialized value check; the original last(sorted_values(pick_keys(meta,"kind","source"))) expression and78 healthy assertions stay exact. Four independent public native/fresh controls preserve selected fixture, sorted-key order/source contents, empty projection null and stored-null last value; all channels/cursors agree. Existing seeded scalar-host isolation15 passes. Production and537 other replay inputs stay unchanged. Initial invalid unquoted-key/no-edge probe and an accidentally repeated unchanged selected run are retained without semantic/GREEN credit; no expectation changed before the refused reader. Syntax/book/map/history/manual checks pass; actual sources/producers/RED-GREEN/controls and epochs retained in perl-phase0-method-projection-oracle-intake.json.gz. One current-only frozen28 reassessment45.25 follows, then meaningful feature selection. No universal kind/null policy, context/peer/full-suite or parent admission claim.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.24 from the clean diagnostic checkpoint. Reproduce only the exact method-contract79 group; investigate original last(sorted_values(pick_keys(meta,"kind","source"))) through public native/fresh projected-value, empty/null inverse and source-preservation controls. Preserve the original expression and78 healthy assertions; repair only the established stale source oracle under45.11.1 guard authority, then focused checks/commit. Reassess frozen28 once after that repair. Full23.4/20.1/registration prerequisites remain; no routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.25 from this clean dependent-oracle repair. Reassess the exact original frozen28 once with current-only source-preserving selection and actual nested plans/terminal exits; own any new current failures, otherwise resume next useful fluent feature selection23.1.11. Never run the historical snapshot-swapping producer. Full23.4/20.1/registration and remaining owned prerequisites stay separate; no routine full suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.24` — Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.23` — Frozen28 current-only replay27PASS/1FAIL; one dependent sorted_values source oracle owned45.24.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.22` — Receiver blocks18/public8 pass with unchanged production; one current-only frozen28 reassessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.21` — Typed mutation39/public4 sources pass; only retained receiver trailing-block group remains.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.24 from the clean diagnostic checkpoint
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` — String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1` — sorted_values scalar host leak repaired;15 seeded cases/Hash14/String6; original String18 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.10` — Hash chain14/six native-fresh controls align with approved null copy; String returned-type45.11 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.9` — cat4/neutral scalar-text7 pass with source checks; retained Hash-chain null/copy distinction45.10 next.
 
 ## History
 
