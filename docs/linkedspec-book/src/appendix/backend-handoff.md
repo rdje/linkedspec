@@ -2957,3 +2957,12 @@ fresh loaded modules, retaining caller/function policies and interpreter chunk
 limits. Declared Lua 5.4 remains separately owned. The closed named-read prerequisite
 also preserves frozen write AST/diagnostics. Independent backend work preserves invocation/cursor/error/callable
 authority; no peer or portable admission follows from the Perl intake.
+
+### Gap and incoming-slot record field composition
+
+The next bounded target lets existing zero-argument gap/slot record helpers feed
+ordinary Hash brackets directly. Perl primitive/bound controls pass, while direct
+field forms fail compilation. An established completed fluent-record source
+supplies the computed-read oracle; legacy named first-consumer policy stays
+qualified. Independent backend work preserves gap owner/phase/lifecycle/metadata/
+typed errors/function/deferred and generated-format authority.

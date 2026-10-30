@@ -801,6 +801,20 @@ or ineligible `@capture_gaps`, and conflicts with anonymous legacy markers. Read
 candidate or terminal phase raises `gap_capture_context_unavailable` with rule, source, invocation, phase, and
 accessor context. A backwards child exit raises the existing source-location cursor-regression diagnostic. Ordinary Perl, Rust, Dart, Julia and Lua (available PUC5.5.1/LuaJIT) reject the four public gap/slot readers in pure function bodies, including a slot read from inside a child function: Perl reports unsupported/unready metadata, and Rust/Dart/Julia/Lua raise an unsupported parser-state helper error at runtime. Pass values explicitly from the ordinary parser action, for example `selected(gap_text(), gap_kind(), gap_span())` with `fn selected(text,kind,span){return([text.uppercase(),kind,span])}`; ordinary `entry_slot()` values and detached `gap_span()` records can likewise be arguments.
 
+These records also support ordinary bound Hash reads. In an active gap action,
+`span=gap_span(); next_start=span["start"].add(1)` gives `1` for the empty prefix
+and `2` for the comma gap on `a,b`. In the `Item[word]` target,
+`slot=entry_slot(); word_id=slot["slot_id"].uppercase()` produces `"WORD"`.
+The record fields and context rules stay the same.
+
+Perl currently needs that binding before field brackets. Direct forms such as
+`gap_span()["start"].add(1)` and `entry_slot()["slot_id"].uppercase()` are the next
+bounded composition target; they currently fail Perl compilation. Other backends
+are assessed independently. Missing fields may use ordinary defaults once a
+record is available; an unavailable gap phase still raises its typed context
+error. This adds no new segmentation state or metadata field.
+
+
 Migration is intentionally non-aliasing:
 
 | Existing surface | Current relationship |
