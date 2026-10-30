@@ -6366,6 +6366,7 @@ function _runtime_is_input_cursor_value_source(expression)
     return isempty(expression.args) && expression.name in (
         "input_text", "input_len", "input_end_pos", "input_end_line", "input_end_col",
         "cursor_pos", "cursor_line", "cursor_col", "cursor_rest", "cursor_rest_len",
+        "gap_text", "gap_kind",
         "rewind_entry_start", "rewind_match_start",
     )
 end
@@ -6377,7 +6378,10 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         # Static ownership preserves unknown bound-call result policies.
         has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
         helper = canonical_action_helper_name(receiver.name)
-        if helper in ("entry_slot", "gap_span", "rewind_entry_start", "rewind_match_start")
+        if helper in (
+            "entry_slot", "gap_span", "gap_text", "gap_kind",
+            "rewind_entry_start", "rewind_match_start",
+        )
             return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
                 !receiver.trailing_block_arg && isempty(receiver.args)
         end

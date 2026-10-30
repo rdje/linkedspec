@@ -1,7 +1,7 @@
 # Guarded gap String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.18; implementation family23.3.57.
-Status: Bounded Perl57.1/Rust57.2/Dart57.3 targeted-checked; independent Julia/safe Lua pending.
+Status: Bounded Perl57.1/Rust57.2/Dart57.3/Julia57.4 targeted-checked; independent safe Lua pending.
 
 ## Existing authority and preserved behavior
 
@@ -87,3 +87,16 @@ byte-equal. New9/gap-record6/computed7 yield22 non-skipped completions, changed-
 owner/new-normal fatal analysis/new-normal fmt pass. Actual source/producers/
 inputs/results in gap-string-result-dart-intake.json.gz. Rebuild runtime/apps;
 no whole-file SDK-format/isolated emitted/full admission. Julia57.4 next.
+
+## Julia57.4 implementation
+
+Two existing source guard sets admit canonical-zero gap Strings; getter/helper
+bodies/parser/state/diagnostics/arity/function/schema and remaining Interpreter
+bytes exact, one runner include added. Same100 assertions92PASS/8RED to100PASS
+(original92 includes2 scaffolds in failing groups). Existing compatible Strings/
+recovery/with kinds/Unicode/errors/functions already healthy. Eight values/12
+error-source observations retain four routes, six healthy values/all errors
+byte-equal. New100/record98/computed25 strict depwarn pass with retained successful
+package-precompile progress. Actual source/producers/inputs/results in
+gap-string-result-julia-intake.json.gz. Rebuild runtime/apps; no isolated
+package/new state/schema/full admission. Safe Lua57.5 next.

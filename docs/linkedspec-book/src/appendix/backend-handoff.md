@@ -3028,6 +3028,8 @@ Rust now also applies the existing gap String operand guards on native/restored/
 plan, preserving already-working recovery/Unicode/with kinds/context/function/
 arity behavior; rebuild runtime/apps. Dart also now uses these gap String guards
 on native/restoredSpec/plan while preserving its already-working recovery/kinds/
-Unicode/errors; rebuild its runtime/apps. Julia follows independently. Existing gap
+Unicode/errors; rebuild its runtime/apps. Julia now applies the same bounded
+guards across native/restoredSpec/plan/fresh Module, preserving already-working
+kinds/recovery/errors; rebuild runtime/apps. Safe Lua follows independently. Existing gap
 state, contexts, errors, function restrictions and raw named policies stay; full
 admission remains separate.
