@@ -1,7 +1,7 @@
 # Guarded gap String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.18; implementation family23.3.57.
-Status: Bounded Perl57.1/Rust57.2 targeted-checked; independent Dart/Julia/safe Lua pending.
+Status: Bounded Perl57.1/Rust57.2/Dart57.3 targeted-checked; independent Julia/safe Lua pending.
 
 ## Existing authority and preserved behavior
 
@@ -75,3 +75,15 @@ correction retained, final fmt0; no runtime proof change or repeat. Actual
 source/producers/inputs/epochs/results in gap-string-result-rust-intake.json.gz.
 Rebuild runtime/apps; no isolated emitted/dependency warning-free/full admission;
 Dart57.3 next.
+
+## Dart57.3 implementation
+
+Same9groups7healthy/2RED to9GREEN after four lines extend two canonical-zero
+source guard sets. Existing recovery/compatible String/with kinds/Unicode/error/
+function/arity healthy; direct take previously[] and set_key retained String with
+AKV, no imported Perl Hash-result assumption. Eight value/four function/four
+context/four arity observations retain3routes; six healthy values and all errors
+byte-equal. New9/gap-record6/computed7 yield22 non-skipped completions, changed-
+owner/new-normal fatal analysis/new-normal fmt pass. Actual source/producers/
+inputs/results in gap-string-result-dart-intake.json.gz. Rebuild runtime/apps;
+no whole-file SDK-format/isolated emitted/full admission. Julia57.4 next.

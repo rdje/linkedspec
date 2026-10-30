@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust gap String operand guards repaired: new9/record7/computed6/owned fmt pass; Dart57.3 next.
+Dart gap String operand guards repaired: new9/gap-record6/computed7/analysis/new-normal fmt pass; Julia57.4 next.
 
 ## Latest Completed Slice
 
-Rust57.2 independently isolates missing gap String consumer guards: same9groups7healthy/2RED to9GREEN. Existing direct recovery/compatible String/with returned Array-Hash-Bool/outer scope/Unicode character length/context/function/arity are already healthy; only shared target and incompatible-consumer operand skips need repair. Two original Engine zero-argument source classifiers admit gap_text/gap_kind; getters/runtime/parser/CompiledSpec/error/function/arity/state and other owner bytes exact. Eight value observations and10 error batches retain native/restored/generated-plan; six healthy value observations and all error rows byte-equal before/after. New9/record7/computed6 and owned fmt pass; native primitive/default diagnostic equality retained in test. Initial fmt1 retained, exact condition whitespace correction has equal tokens and final fmt0; runtime proof unchanged, no test repeat. 506 other activation inputs exact; actual source/normal/producers/RED-GREEN/format epochs/results in gap-string-result-rust-intake.json.gz. Book/cards/target/map/task/roadmap/live/resume/history align. Rebuild runtime/apps; no isolated emitted, raw named-value census, dependency warning-free/new getter/state/schema/error phase/full23.4 claim. Independent Dart57.3 next.
+Dart57.3 independently isolates missing gap String operand guards: same9groups7healthy/2RED to9GREEN. Existing recovery/compatible String/with Array-Hash-Bool/outer scope/Unicode character length/context/function/arity already work. Before direct take yields[] and set_key retains String while executing AKV, not the Perl Hash fallback. Four lines extend existing canonical-zero input/computed-source guard sets for gap_text/gap_kind; getter/parser/runtime/state/function/arity/error/codec and remaining interpreter bytes exact. Eight value observations/four function fences/four context and four arity programs retain native/restoredSpec/plan; six healthy values/all function/error rows byte-equal. New9/gap-record6/computed7 yield22 non-skipped JSON completions; changed-owner/new-normal fatal analysis and new-normal format pass. 201 other activation inputs exact; actual source/normal/producers/RED-GREEN/diagnostics/results in gap-string-result-dart-intake.json.gz. Book/card/target/map/task/roadmap/live/resume/history align; rebuild runtime/apps. No isolated emitted/raw named-value census/whole-file SDK-format/new getter/state/schema/error-phase/full23.4 claim. Independent Julia57.4 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.57.3 from clean Rust57.2/frozen57. Read shared target/current Perl and Rust cards plus Dart gap/input/computed source guard/zero arity/function/context and nearest normals/book. Independently baseline finite primitive/bound/direct/default-empty/tail/Unicode/kind/with/read recovery/skip/context/function/shape cases on native/restoredSpec/plan before production, preserving healthy behavior. Complete only existing two canonical-zero gap String source/read guards where needed, no getter/runtime/state/schema/arity/error-phase/alias/deferred change. Quick new-nearest/changed-owner analysis/new-normal format/book/docs/commit, then Julia57.4. No routine full suite or full57/23.4 admission; keep20.1/registration/progress/declared-host owners separate.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.57.4 from clean Dart57.3/frozen57. Read shared target/current gap String cards and Julia input/computed-read guard/context/helper producer/function/arity contracts and nearest normals/book. Independently baseline finite primitive/bound/direct/default-empty/tail/Unicode/kind/with/recovery/skip/context/function/shape on native/restoredSpec/plan/fresh Module before production; preserve healthy cases. Complete only two canonical-zero gap String source/read guards as needed, no getter/state/schema/error-phase/deferred changes. Strict depwarn compile/quick new-nearest/exact runner/book/docs/commit, then safe Lua57.5. No full suite/portable admission/progress-policy change; other owners remain scheduled and map generation precedes dependent reads.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.57.3` — Dart gap String operand guards repaired: new9/gap-record6/computed7/analysis/new-normal fmt pass; Julia57.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.57.2` — Rust gap String operand guards repaired: new9/record7/computed6/owned fmt pass; Dart57.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.57.1` — Perl guarded gap String source/read recovery repaired: original13/final15/gap10/deferred22/syntax pass; Rust57.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.18` — Selection18 freezes guarded gap String result57; existing compatible methods healthy, direct guards/read recovery need completion; Perl57.1 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.57.3 from clean Rust57.2/frozen57. Read sh
 - `TYPE-REFERENCE-BOOK.1.2.23.1.17` — Rewind Number result56 frozen from qualified explicit-edge bound/direct twin; P1 eager statement56.0 next; loop progress39.8.2 owned.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.5` — Safe Lua gap/slot guard122healthy/4RED to126GREEN per host; static-call43/computed/loadfile pass; all bounded55 checked; next selection17.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.4` — Julia gap/slot guard94healthy/4RED to98GREEN; computed25/static-call35/strict compile pass; safe Lua55.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.55.0` — Dart reader arity4RED/5healthy to9GREEN; record6/computed7/analysis/format pass; Julia55.4 next.
 
 ## History
 

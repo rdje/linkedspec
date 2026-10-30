@@ -1234,7 +1234,7 @@ and `gap_text().coalesce("fallback").cat("!")`. An empty gap remains an empty
 String, so the latter produces `"!"` and skips the fallback. Pass these values
 explicitly when using pure functions.
 
-Perl and Rust support guarded direct reads and recovery from both gap String readers.
+Perl, Rust and Dart support guarded direct reads and recovery from both gap String readers.
 For example, `gap_text()[0].coalesce(["a","tail"])[-1].uppercase()` returns
 `"TAIL"`: the noncontainer read yields null and the explicit fallback supplies
 the Array. `gap_kind()["missing"].coalesce(false)` preserves the Bool fallback.
@@ -1242,7 +1242,8 @@ Incompatible consumers such as `gap_text().take(...)` and
 `gap_kind().set_key(...)` yield null and skip their operands. Compatible `with`
 bodies may return Arrays or Hashes for further reads and methods. Regenerate
 affected previously emitted Perl parsers with the updated builder. Rebuild Rust
-applications with the updated runtime.
+applications with the updated runtime. Rebuild Dart applications with the
+updated runtime as well.
 
 The completed-value form remains supported: bind `text = gap_text()`, then use
 `text.cat("")[0].coalesce(["a","tail"])[-1].uppercase()`. Raw named first-consumer

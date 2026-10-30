@@ -5431,6 +5431,8 @@ final class LinkedSpecRuntimeEngine {
           'cursor_col',
           'cursor_rest',
           'cursor_rest_len',
+          'gap_text',
+          'gap_kind',
           'rewind_entry_start',
           'rewind_match_start',
         }.contains(expression.name);
@@ -5450,6 +5452,8 @@ final class LinkedSpecRuntimeEngine {
       // Only existing canonical zero-argument sources join this guard.
       if (helper == 'entry_slot' ||
           helper == 'gap_span' ||
+          helper == 'gap_text' ||
+          helper == 'gap_kind' ||
           helper == 'rewind_entry_start' ||
           helper == 'rewind_match_start') {
         return receiver.name == helper &&

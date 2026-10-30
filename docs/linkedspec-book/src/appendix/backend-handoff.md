@@ -3026,6 +3026,8 @@ Native/fresh shared/empty/tail/Unicode/operand skips/with Array-Hash-Bool and
 function/context/legacy controls pass. Regenerate affected emitted Perl parsers.
 Rust now also applies the existing gap String operand guards on native/restored/
 plan, preserving already-working recovery/Unicode/with kinds/context/function/
-arity behavior; rebuild runtime/apps. Dart follows independently. Existing gap
+arity behavior; rebuild runtime/apps. Dart also now uses these gap String guards
+on native/restoredSpec/plan while preserving its already-working recovery/kinds/
+Unicode/errors; rebuild its runtime/apps. Julia follows independently. Existing gap
 state, contexts, errors, function restrictions and raw named policies stay; full
 admission remains separate.
