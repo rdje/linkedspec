@@ -85,3 +85,9 @@ TYPE45.7 subsequently reconciles two obsolete nonempty-default source assertions
 with exact normalized first-value/source and fallback comparison checks. Original
 Hash assertion unchanged; all3/direct native-fresh6 pass, production unchanged.
 Other16 last-selected failures remain owned; scalar boundary-transform45.8 next.
+
+TYPE45.8 subsequently reconciles scalar boundary source assertions: actual4RED
+then6GREEN, final2 semantic assertions unchanged, direct native/fresh String7
+passes. Initial cold private-owner failure runs no assertions and is separately
+retained/fixed by local require. All production unchanged. Other15 last-selected
+failures remain owned; exact cat45.9 next.

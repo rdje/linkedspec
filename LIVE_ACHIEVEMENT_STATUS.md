@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Nonempty-default3/direct6 pass with normalized value/source checks; scalar boundary-transform45.8 next.
+Scalar boundary6/direct String7 pass with source/literal checks and explicit focused dependency; cat45.9 next.
 
 ## Latest Completed Slice
 
-Exact nonempty-default group reproduces2 old emitted-text mismatches/1 healthy general Hash fallback. Preserve both original helper expressions and assert normalized first selection/source preservation plus nonempty fallback in canonical comparison, retaining the third assertion byte-exact. All3 pass; default_literal_operand_contract.t passes6 native/fresh assertions for null/empty/zero/false/container selection and lazy effects, empty stderr/syntax. Only this group changes and529 other hashed inputs remain unchanged; no production or default/String/kind policy change. Actual RED/GREEN/source/producer/normal inputs retained in perl-phase0-nonempty-default-intake.json.gz. Canonical default fact/map/current book/task/roadmaps/live/resume align; exact scalar boundary-transform45.8 follows, other15 current failed names stay owned45. No blanket source refresh/full suite/push.
+Isolated boundary group first exits255/no-tests because its private EmitContext owner was only loaded by earlier groups; add local require and retain setup separately without semantic RED credit. Actual source run has4 old exact-source failures/2 healthy Hash projections. Preserve all4 original helper/flow expressions, assert normalized values/source preservation/literal-dot match-miss semantics; final2 assertions stay byte-exact. All6/direct native-fresh scalar String7 pass, syntax/empty final stderr,529 other hashed inputs unchanged and no production changes. Existing inspect-a-copy/kind/Unicode/null/affix authority preserved. Actual cold/source RED-GREEN/producer/consumer inputs retained in perl-phase0-scalar-boundary-intake.json.gz; canonical String/new focused-selection facts/map/book/task/roadmaps/live/resume align. Exact cat45.9 next, other14 current failed names owned45; no broad source refresh/full suite/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.8 from clean nonempty-default oracle repair. Reconcile the exact scalar boundary-transform group with current scalar normalization/literal prefix-suffix authority and public source/value/flow controls, preserving null/falsey/container and metacharacter boundaries. Repair only the established cause, focused proof/commit, then continue other15 current failures from45.4 receipt. No broad source refresh/full Phase0 per repair; registration23.4.1/20.1 and other canonical prerequisites remain before admission/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.9 from clean scalar boundary oracle repair. Reconcile the exact4-assertion cat group with strict scalar-text/source-evaluation/comparison authority; explicitly load its private dependency when isolating it and keep setup failure distinct from semantic RED. Preserve original expressions and healthy Hash projection, add exact value/source/kind controls and run the small direct scalar-text consumer. Other14 current failures remain in45.4 receipt/parent45; no repeated full String/full Phase0 suite. Canonical prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.8` — Scalar boundary6/direct String7 pass with source/literal checks and explicit focused dependency; cat45.9 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.7` — Nonempty-default3/direct6 pass with normalized value/source checks; scalar boundary-transform45.8 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.6` — Collection pipeline26/direct6 pass with stronger source checks; no product change; nonempty-default45.7 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.5` — Nested Array oracle reconciled with six native/fresh controls;22 assertions pass; collection pipeline45.6 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.8 from clean nonempty-default oracle re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.2` — Julia fresh conventional arrays targeted-checked; safe Lua intake next, ordinary/cross-rule scope authority owned before admission.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.4.1` — Julia typed blind parent-push repaired on13 routes; actual rule-array scope48.4.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.4` — Julia blind declaration and dependency-regex compiler repair targeted-checked; parent-push runtime48.4.1 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3` — Dart pure-code blind targets compile/execute on recorded routes; Julia48.4 next.
 
 ## History
 

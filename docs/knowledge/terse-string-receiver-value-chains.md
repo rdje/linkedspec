@@ -13,7 +13,7 @@ answers:
   - "can string terminal methods continue"
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.3"
   - "are block-valued receiver chains task-tree owned"
-date: 2026-10-27
+date: 2026-10-30
 status: five bounded scalar String19 and predicate backends targeted-checked; bounded argument20 repairs targeted-checked; full admission open
 tags: [spec-format-terse, method-chaining, receiver-dot, string, rust-parity, mdbook]
 evidence: "String2.3.5.3 historical detail/commands at Gite19f3ce83543d8befff3abc381d85a6b6285da15 for this path; Length23.3.3 and predicate23.2.9 public native/fresh distinctions."
@@ -24,6 +24,17 @@ reverify:
 ---
 
 String chains compose trim/case/replace/substr/cat and split-to-Array helpers; Length23.3.3 feeds scalar/number methods. Current bare bindings/cat supersede historical scalar()/concat. Original details and historical next2.3.5.4/block2.3.5.5 ownership remain at the Git pointer above.
+
+TYPE45.8 (2026-10-30) reconciles four old exact-source assertions with the
+existing String normalization/inspect-a-copy affix authority. Original helper
+and flow expressions now check normalized values, preserved sources and literal
+dot affixes with matching/nonmatching controls. The two semantic Hash projections
+stay exact; all6 and the direct native/fresh String consumer7 pass. No production,
+kind/Unicode/null/affix or matching contract changes. The group's private owner
+is explicitly required for isolated selection; its initial cold no-tests failure
+receives no semantic RED credit. See [[phase0-private-owner-focused-selection]];
+actual source/RED-GREEN/producer inputs are retained in
+perl-phase0-scalar-boundary-intake.json.gz. Other frozen failures remain owned45.
 
 TYPE23.2.9 public native/fresh producer/boundary/SOC controls work, but fluent predicates stopped at null because MethodLowering labeled them terminal. Perl23.3.10.1 now uses scalar_result/one-operand preflight for starts_with/ends_with/contains_substr/matches. Native/fresh result/direct checks pass after RED; source families, false retention/generic/bridges/scalar guards, no malformed effects and SOC/SC snapshots remain correct. Bodies/kinds/regex/source/copy unchanged.
 

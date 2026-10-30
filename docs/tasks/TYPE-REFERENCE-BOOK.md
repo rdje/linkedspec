@@ -9242,14 +9242,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.7 - reconcile normalized nonempty-default regression checks`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.8`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `6f66bfb54991e8e575e45562f644e69a3d0bb5fd`; no proof jobs and brief empty.
+  Cold-group dependency owned here: Initial exact standalone selection exits255 before its first assertion because the group directly calls RuleIR::EmitContext without requiring it; the full retained28 run had loaded it earlier. Retain that no-tests setup failure without four-assertion RED credit, add the group's explicit require, then establish actual source RED. No production lazy-loading behavior is changed.
   Goal: Reconcile the exact emit_context_lowers_scalar_boundary_transform_value_helpers group with current scalar String normalization and literal prefix/suffix semantics; repair only established assertion or product defects.
   Reproduction: TYPE45.4 retains rm_prefix/rm_suffix and flow-comparison source mismatches in this group. Diagnose actual current source and values; do not globally replace source expectations or erase undefined/Boolean/container boundaries.
   Impact / schedule: P1 immediately after45.7 before other remaining failures/full23.4/push. Other15 current failed names remain owned45.4 receipt/parent45.
+  Verification tier: `focused`
+  Focused checks: Exact6 assertions with four original helper/flow expressions, normalized values/source preservation and literal metacharacter controls; scalar_string_result_receiver_contract.t native/fresh kinds/falsey/null/Unicode/effects/shape consumer; syntax, exact scoped test edit and production nonmutation; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored scalar transform distinctions, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Four exact emitted-text expectations fail; two semantic Hash projections stay healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Existing String normalization and inspect-a-copy affix authority produces richer source guards than old text. Qualify through original expressions/flows and exact values, never through observed shape alone.
+  - [x] **FIX**: Replace only four obsolete source assertions with value/source/literal-boundary checks; preserve original expressions and final two assertions byte-exact, all production unchanged.
+  - [x] **ADDRESSED (verified)**: Exact6 pass; literal dot affixes are data and original source values survive transforms/comparisons.
+  - [x] **NO REGRESSION**: Direct native/fresh scalar String consumer retains actual kinds, null/falsey/Unicode/bounds/effects and strict authored syntax; no helper/contract change or broad source refresh.
+  - [x] **LOCKSTEP**: Canonical String fact/map/current book/task/roadmaps/live/resume and next bounded child agree.
+
+  Result: Isolated boundary group first exits255/no-tests because its private EmitContext owner was only loaded by earlier groups; add local require and retain setup separately without semantic RED credit. Actual source run has4 old exact-source failures/2 healthy Hash projections. Preserve all4 original helper/flow expressions, assert normalized values/source preservation/literal-dot match-miss semantics; final2 assertions stay byte-exact. All6/direct native-fresh scalar String7 pass, syntax/empty final stderr,529 other hashed inputs unchanged and no production changes. Existing inspect-a-copy/kind/Unicode/null/affix authority preserved. Actual cold/source RED-GREEN/producer/consumer inputs retained in perl-phase0-scalar-boundary-intake.json.gz; canonical String/new focused-selection facts/map/book/task/roadmaps/live/resume align. Exact cat45.9 next, other14 current failed names owned45; no broad source refresh/full suite/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.8 - reconcile scalar boundary regression value checks`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.9`
+  Status: `pending`
+  Goal: Reconcile the exact emit_context_lowers_concat_value_helpers group with current strict scalar text normalization, source evaluation and comparison authority; repair only established assertion/product causes.
+  Reproduction: TYPE45.4 retains three exact-source mismatches among this group's4 assertions, with a semantic Hash projection healthy. Direct private-owner dependency must be explicit for an isolated group (see45.8); retain actual setup and semantic results separately.
+  Impact / schedule: P1 immediately after45.8 before other remaining failures/full23.4/push. Other14 current failed names remain owned45.4 receipt/parent45.
   Planned verification tier: focused.
-  Planned focused checks: Exact authored group, public boundary-transform source/value/falsey/null/metacharacter controls, existing direct scalar String consumer as warranted.
+  Planned focused checks: Exact4 assertions, original cat/helper/comparison expressions with strict scalar/null/container/falsey/literal controls and the small direct scalar-text consumer; reuse unchanged producer scope rather than repeat full String regression.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored scalar transform distinctions, no population measurement.
+  Planned claim verification: none: Exact authored scalar text distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10412,7 +10433,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.8` | `pending` | Reconcile the exact scalar boundary-transform group, then continue the other15 current failed groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.9` | `pending` | Reconcile the exact cat group, then continue the other14 current failed groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

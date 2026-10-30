@@ -36773,26 +36773,39 @@ subtest 'emit_context_lowers_replace_substr_value_helpers' => sub {
 };
 subtest 'emit_context_lowers_scalar_boundary_transform_value_helpers' => sub {
     plan tests => 6;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_prefix(lowercase(trim(raw_name)), "node_")'),
-        'do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }',
-        'rm_prefix(normalized-scalar, prefix) lowers into a pure literal prefix-trim expression'
+        evaluate_lowered_json(
+            '[' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_prefix(lowercase(trim(raw_name)), "node_")') . ', $raw_name, ' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_prefix("a.b","a.")') . ', ' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_prefix("ab","a.")') . ']',
+            q{my $raw_name=" Node_Item_End ";},
+        ),
+        q#{"value":["item_end"," Node_Item_End ","b","ab"],"warnings":[]}#,
+        'rm_prefix preserves its source and treats prefix metacharacters literally'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")'),
-        'do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }',
-        'rm_suffix(...) lowers composed fallback expressions into guarded literal suffix trims'
+        evaluate_lowered_json(
+            '[' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end")') . ', $raw_name, ' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_suffix("a.b",".b")') . ', ' . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rm_suffix("ab",".b")') . ']',
+            q{my $raw_name=" Node Item End ";},
+        ),
+        q#{"value":["node_item"," Node Item End ","a","ab"],"warnings":[]}#,
+        'rm_suffix preserves its source and treats suffix metacharacters literally'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_prefix(lowercase(trim(raw_name)), "node_"), "item_end")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_prefix_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_rm_prefix_prefix = "node_"; if (defined($__ls_rm_prefix_value) && defined($__ls_rm_prefix_prefix)) { length($__ls_rm_prefix_prefix) ? ((index($__ls_rm_prefix_value, $__ls_rm_prefix_prefix) == 0) ? substr($__ls_rm_prefix_value, length($__ls_rm_prefix_prefix)) : $__ls_rm_prefix_value) : $__ls_rm_prefix_value } else { undef } }; my $__ls_str_cmp_rhs = "item_end"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
-        'rm_prefix(...) composes inside flow comparisons over normalized scalar expressions'
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_prefix(lowercase(trim(raw_name)), "node_"), "item_end")'),
+            q{my $raw_name=" Node_Item_End ";},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'rm_prefix normalized result composes inside canonical flow comparisons'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end"), "node_item")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_rm_suffix_value = do { my $__ls_replace_substr_value = do { my $__ls_lower = do { my $__ls_trim = $raw_name; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; defined($__ls_lower) ? LinkedSpec::UnicodeCaseMapping::lowercase($__ls_lower) : $__ls_lower }; my $__ls_replace_substr_needle = " "; my $__ls_replace_substr_replacement = "_"; if (defined($__ls_replace_substr_value) && defined($__ls_replace_substr_needle) && defined($__ls_replace_substr_replacement)) { length($__ls_replace_substr_needle) ? join($__ls_replace_substr_replacement, split(/\Q$__ls_replace_substr_needle\E/, $__ls_replace_substr_value, -1)) : $__ls_replace_substr_value } else { undef } }; my $__ls_rm_suffix_suffix = "_end"; if (defined($__ls_rm_suffix_value) && defined($__ls_rm_suffix_suffix)) { if (length($__ls_rm_suffix_suffix) == 0) { $__ls_rm_suffix_value } elsif (length($__ls_rm_suffix_value) >= length($__ls_rm_suffix_suffix) && substr($__ls_rm_suffix_value, -length($__ls_rm_suffix_suffix)) eq $__ls_rm_suffix_suffix) { substr($__ls_rm_suffix_value, 0, length($__ls_rm_suffix_value) - length($__ls_rm_suffix_suffix)) } else { $__ls_rm_suffix_value } } else { undef } }; my $__ls_str_cmp_rhs = "node_item"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
-        'rm_suffix(...) composes inside flow comparisons over normalized scalar expressions'
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(rm_suffix(replace_substr(lowercase(trim(raw_name)), " ", "_"), "_end"), "node_item")'),
+            q{my $raw_name=" Node Item End ";},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'rm_suffix normalized result composes inside canonical flow comparisons'
     );
     is(
         evaluate_lowered_json(
