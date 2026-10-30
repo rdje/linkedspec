@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1 repaired/targeted-checked; Rust/Dart/Julia/safe Lua pending.
+Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 next before Dart/Julia/safe Lua.
 
 ## Existing authority
 
@@ -100,3 +100,18 @@ explicit Number arguments work. Sixteen public rewrites/other inputs/Contracts/
 runtime/parser/state/schema stay exact. Regenerate affected emitted Perl parsers.
 Actual proof retained in cursor-rewind-result-perl-intake.json.gz. Independent
 Rust56.2 follows; no peer/full context/portable/deferred/iteration admission.
+
+## Bounded Rust56.2 implemented
+
+Original Rust setters already moved correctly but helper dispatch discarded their
+result. Canonical-zero successful rewinds now reuse the existing character offset
+projection and source/computed-read actual-kind guards. Same9tests5RED/3healthy-
+positive/1legacy-preservation now pass, plus computed6/five selected cursor units
+(190 other units filtered)/owned fmt. Shared12, ASCII/Unicode anchors, zero/default
+skips, source-before-consuming-operand and Array/signed text flows retain all
+three native/restored/generated-plan routes. Runtime setters/parser/state/schema
+and other inputs stay exact. Four malformed positional/keyword calls remain
+accepted/null/moving in the explicitly preserved group: no healthy arity credit.
+Immediate P1 child56.2.0 fixes this next before Dart56.3. Actual inputs/producers/
+results retained in cursor-rewind-result-rust-intake.json.gz. Rebuild runtime/apps;
+no generated-format change or independent emitted-module/full admission follows.

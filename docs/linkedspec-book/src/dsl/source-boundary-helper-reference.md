@@ -656,6 +656,13 @@ receive the resulting Number explicitly from the ordinary parser action.
 `save_cursor()` and `restore_cursor()` return null in Perl and remain statement
 controls. Regenerate affected previously emitted Perl parsers with the updated
 builder to use the direct rewind-result forms.
+Rust also returns and composes the character-based position from these documented
+zero-argument rewind calls across native, reconstructed and generated-plan
+execution. Rebuild applications with the updated Rust runtime. The original
+physical cursor setters and generated format stay the same. Current Rust limit:
+surplus positional/keyword arguments are still accepted and can move the cursor;
+use the documented zero-argument forms while the owned validation repair follows.
+
 Other backends are assessed independently. Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns
 local. For example:

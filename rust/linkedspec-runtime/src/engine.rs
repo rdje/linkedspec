@@ -8155,7 +8155,7 @@ impl Engine {
         Ok(current)
     }
 
-    // Only ordinary reader signatures enable result guards. Existing malformed
+    // Only ordinary input/cursor result signatures enable guards. Malformed
     // free calls retain their own producer and legacy continuation policies.
     fn is_input_cursor_value_source(expr: &Expr) -> bool {
         let Expr::Call { name, args } = expr else {
@@ -8177,6 +8177,8 @@ impl Engine {
                     | "cursor_col"
                     | "cursor_rest"
                     | "cursor_rest_len"
+                    | "rewind_entry_start"
+                    | "rewind_match_start"
             )
     }
 
@@ -8190,6 +8192,9 @@ impl Engine {
             Expr::Call { name, args } => {
                 if self.spec.find_function(name).is_some() {
                     return true;
+                }
+                if matches!(name.as_str(), "rewind_entry_start" | "rewind_match_start") {
+                    return args.is_empty();
                 }
                 // Readonly gap/slot records share ordinary selected-value guards.
                 if matches!(name.as_str(), "entry_slot" | "gap_span") {
@@ -11297,13 +11302,21 @@ impl Engine {
                 ctx.typed_restore_cursor(rule_label, name);
                 Ok(RuntimeValue::Undef)
             }
-            "rewind_match_start" => {
-                ctx.typed_rewind_match_start(rule_label, name);
-                Ok(RuntimeValue::Undef)
-            }
-            "rewind_entry_start" => {
-                ctx.typed_rewind_entry_start(rule_label, name);
-                Ok(RuntimeValue::Undef)
+            "rewind_match_start" | "rewind_entry_start" => {
+                let rewound = if name == "rewind_match_start" {
+                    ctx.typed_rewind_match_start(rule_label, name)
+                } else {
+                    ctx.typed_rewind_entry_start(rule_label, name)
+                };
+                // Only canonical zero-argument calls gain position results.
+                // Legacy malformed calls retain their result until56.2.0 arity repair.
+                Ok(if rewound && raw_args.is_empty() {
+                    ctx.typed_position_offset_from_byte(ctx.pos, rule_label, name)
+                        .map(|offset| RuntimeValue::Number(offset as f64))
+                        .unwrap_or(RuntimeValue::Undef)
+                } else {
+                    RuntimeValue::Undef
+                })
             }
             // ── Conditional flow: if/elseif/else/endif ──
             "if" => {
