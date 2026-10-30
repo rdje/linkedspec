@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust selected-call guard5healthy/1RED→6GREEN; computed6/boundary6/fmt pass; independent Dart54.3 next.
+Dart selected-call guard5healthy/1RED→6GREEN; computed7/boundary6/analysis/format pass; independent Julia54.4 next.
 
 ## Latest Completed Slice
 
-Rust independently exposes one selected-call guard gap: new5healthy/1RED, shared13 first native result has [] and ICJBAD instead of null/ICJ; no pre-repair later-route claim. Existing is_ordinary_computed_read excludes rule calls, so the selected String follows legacy direct-consumer policy. Admit only call with one bare variable-shaped static label to the existing guard; parser/invocation/reader and all remaining engine bytes stay exact. Same new6/computed6/boundary6 pass native/restored CompiledSpec/generated-plan. Shared13/kinds/once/live-origin/effect order/null/missing/normalized skips and static label lookup/function fence/explicit arguments hold; original bound callable count0 policy remains. Public classifier builds actual fixture plan families. Initial rustfmt line-wrap request corrected with identical code tokens; owned package fmt passes. 501 other input hashes/shared fixture exact. Actual source/normal/producers/RED-GREEN/format/inputs retained in rule-call-result-rust-intake.json.gz, dependency warnings opaque/upstream-owned. Book/card/target/task/roadmap/live/resume/history align. No new dynamic/quoted/call arity/frame/error/deferred/schema/isolated-source/full admission; Dart54.3 independently follows.
+Dart independently exposes selected-call guard gap: new5healthy/1RED, shared13 native/restored/plan all return [] and ICJBAD instead of null/ICJ. _isOrdinaryComputedRead excludes call; admit only original bare static positional call to existing actual-kind guard, preserving all remaining interpreter/invocation/parser/reader bytes. Same new6/computed7/boundary6 pass across native/restored SpecFile/generated-plan; JSON reporter binds all19 nonhidden/no-skip identities and terminal success, stderr empty. Shared13/kinds/once/live-origin/order/empty/null/missing/normalized skips, static lookup, typed function fence/explicit arguments and original bound callable counts hold. New test fatal analysis/format pass; 195 other input hashes/shared fixture exact. Actual old interpreter/normal/producers/input hashes/JSON results retained in rule-call-result-dart-intake.json.gz. Initial builder delimiter refusal precedes source creation and earns no product RED. Book/card/target/task/roadmap/live/resume/history align. No dynamic/quoted/extra-argument source, child/frame/error/deferred/schema/isolated-source/full admission; Julia54.4 independently follows.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.3 independently from clean Rust54.2. Read rule-call-result-selection.md/shared13, Dart static child-call value/read/source-kind guard, existing child frame/cursor/retv/error/function/callback/deferred/preflight and nearest computed/callable controls. New normal and own native/restored SpecFile/generated-plan baseline before production; preserve healthy behavior and repair only actual static rule-call result gaps. Preserve source once/ordered selectors/actual selected kinds/missing/normalized skips, current call labels/arity/copy/error/schema contracts. Fatal new-test analysis/format plus quick new/nearest checks/docs/book/commit, then Julia54.4. No peer-policy inference or routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.4 independently from clean Dart54.3. Read rule-call-result-selection.md/shared13, Julia computed-read static source/child-call/selected-kind guard and child frame/cursor/retv/error/function/deferred contracts plus nearest normals/runner. New strict normal and own native/reconstructed SpecFile/generated-plan/fresh same-process Module baseline before production; preserve healthy outcomes and fix actual static selected-result gaps only. Shared source once/ordered selectors/actual kinds/missing/normalized skips and current invocation/label/arity/error/copy/schema bounds. Exact one-line runner include/strict compile/quick new-nearest checks/docs/book/commit, then safe Lua54.5. No full runner/peer-policy inference/isolated-package/portable admission.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.54.3` — Dart selected-call guard5healthy/1RED→6GREEN; computed7/boundary6/analysis/format pass; independent Julia54.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.2` — Rust selected-call guard5healthy/1RED→6GREEN; computed6/boundary6/fmt pass; independent Dart54.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.1` — Perl child-result bracket6groups4RED/2healthy→6GREEN; callable5/deferred22 pass; independent Rust54.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.0` — Closed selector3RED→3GREEN; write AST73/diagnostics42/syntax pass; rule-call result54.1 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.3 independently from clean Rust54.2. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.3` — Dart advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Julia52.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.2` — Rust advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Dart52.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.1` — Perl advancing Number13 plus selected String2/readonly Number2/reset2 pass; independent Rust52.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.46.1` — Due exact diagnostic cleanup complete; resume Perl advancing Number52.1 feature implementation.
 
 ## History
 

@@ -7,7 +7,7 @@ answers:
   - "why does an assignment in a closed named array selector report a nested write error"
   - "which task owns rule-call result selection and closed selector recovery"
 date: 2026-10-30
-status: prerequisite54.0 and bounded Perl/Rust repaired/targeted-checked; Dart/Julia/safe Lua pending
+status: prerequisite54.0 and bounded Perl/Rust/Dart repaired/targeted-checked; Julia/safe Lua pending
 tags: [perl, actionir, selection, rule-call, parser, fluent, effects]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.15; rule-call-result-selection-intake.json.gz retains six healthy controls, two direct Array/Hash failures, scalar null policy, minimal closed-read distinction, healthy shared13 fluent carrier and actual instrument epochs/inputs."
 reverify: "Recover probe_rule_call_result_assessment.pl/finite cases from rule-call-result-selection-intake.json.gz; run project Perl wrapper with explicit local outputs. No historical source swaps."
@@ -57,3 +57,9 @@ work, but static call is excluded by is_ordinary_computed_read and a selected
 String container consumer executes BAD. [[rust-rule-call-selection-guard]] records
 the actual native RED and reused guard; new6/computed6/boundary6/owned fmt pass.
 Child invocation/parser/remaining engine bytes stay exact; no peer inference.
+
+Dart54.3 independently captures the same selected-kind guard omission in its own
+source classifier: all three initial shared13 observations execute BAD/return [].
+[[dart-rule-call-selection-guard]] records ten-line static role/reused guard,
+new6/computed7/boundary6/fatal new-test analysis/format and exact input bounds.
+All remaining interpreter/invocation/schema bytes stay exact; Julia independent.

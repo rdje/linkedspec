@@ -1,7 +1,7 @@
 # Rule-call result bracket selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.15; family23.3.54.
-Status: prerequisite54.0 and bounded Perl/Rust children repaired/targeted-checked; Dart/Julia/safe Lua pending.
+Status: prerequisite54.0 and bounded Perl/Rust/Dart children repaired/targeted-checked; Julia/safe Lua pending.
 
 ## Existing authority and actual gap
 
@@ -126,3 +126,19 @@ rule-call-result-rust-intake.json.gz. Dependency warnings opaque/upstream-owned.
 No dynamic/quoted/extra-argument source or child/error/deferred/schema/isolated-
 source/full context/portable grant. Rebuild Rust applications with the updated
 runtime; independently assess Dart54.3 next.
+
+## Bounded Dart54.3 repaired
+
+Independent new5healthy/1RED captures all three routes executing BAD/returning []
+instead of null after a selected String. The existing static computed-read source
+classifier excludes call. A single bare static positional label now joins its
+actual-kind operand guard; remaining interpreter/invocation/parser/reader bytes
+stay exact. Same new6/computed7/boundary6 pass native/restored SpecFile/generated-
+plan, with all19 nonhidden/no-skip completions bound by the JSON reporter and
+empty stderr. New test fatal analysis/format pass. Shared13/kinds/once/order/
+live-origin/missing/normalized skips/static lookup/typed function errors and
+original bound callable counts hold. Actual old owner/normal/producers/inputs/
+JSON results retained in rule-call-result-dart-intake.json.gz. Initial builder
+delimiter refusal creates no source/product RED. No quoted/dynamic/extra-argument
+source, child/error/deferred/schema/isolated emitted/full admission grant.
+Independent Julia54.4 follows.

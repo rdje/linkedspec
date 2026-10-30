@@ -5444,6 +5444,16 @@ final class LinkedSpecRuntimeEngine {
         return true;
       }
       final helper = canonicalActionHelperName(receiver.name);
+      // Static child returns use the existing selected-value operand guard.
+      // Quoted/dynamic calls and legacy bound-call policies stay separate.
+      if (helper == 'call') {
+        return receiver.name == helper &&
+            (receiver.sourceMethod ?? receiver.name) == helper &&
+            !receiver.trailingBlockArg &&
+            receiver.args.length == 1 &&
+            receiver.args.single is ActionPositionalArgument &&
+            receiver.args.single.value is ActionVariableExpr;
+      }
       if (helper == 'if' || helper == 'switch') {
         return receiver.name == helper &&
             (receiver.sourceMethod ?? receiver.name) == helper &&
