@@ -6362,6 +6362,14 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         # Static ownership preserves unknown bound-call result policies.
         has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
         helper = canonical_action_helper_name(receiver.name)
+        # Static child returns use the existing selected-value operand guard.
+        # Quoted/dynamic calls and legacy bound-call policies stay separate.
+        if helper == "call"
+            return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
+                !receiver.trailing_block_arg && length(receiver.args) == 1 &&
+                first(receiver.args) isa ActionPositionalArgument &&
+                first(receiver.args).value isa ActionVariableExpr
+        end
         if helper in ("if", "switch")
             return receiver.name == helper && something(receiver.source_method, receiver.name) == helper &&
                 !receiver.trailing_block_arg && length(receiver.args) >= 2

@@ -2949,6 +2949,8 @@ and unchanged child-handler ABI. Rust now also applies its existing selected-kin
 guard to bare static call results, preserving child invocation and bound callable
 counts. Perl native/fresh and Rust native/restored/plan focused controls pass. Dart also
 preserves the static-call selected-kind guard across native/restored/plan, with
-original bound callable counts and typed function fences. The closed named-read prerequisite
+original bound callable counts and typed function fences. Julia also preserves
+the target across native/reconstructed/plan/fresh same-process Module with its
+existing child invocation and typed function boundary. The closed named-read prerequisite
 also preserves frozen write AST/diagnostics. Independent backend work preserves invocation/cursor/error/callable
 authority; no peer or portable admission follows from the Perl intake.

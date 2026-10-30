@@ -1,7 +1,7 @@
 # Rule-call result bracket selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.15; family23.3.54.
-Status: prerequisite54.0 and bounded Perl/Rust/Dart children repaired/targeted-checked; Julia/safe Lua pending.
+Status: prerequisite54.0 and bounded Perl/Rust/Dart/Julia children repaired/targeted-checked; safe Lua pending.
 
 ## Existing authority and actual gap
 
@@ -142,3 +142,20 @@ JSON results retained in rule-call-result-dart-intake.json.gz. Initial builder
 delimiter refusal creates no source/product RED. No quoted/dynamic/extra-argument
 source, child/error/deferred/schema/isolated emitted/full admission grant.
 Independent Julia54.4 follows.
+
+## Bounded Julia54.4 repaired
+
+Independent unchanged new normal31healthy/4RED captures all four shared13 routes
+executing BAD/returning[] instead of null. A single bare static positional call
+now joins the existing computed-read actual-kind operand guard; all remaining
+interpreter/invocation/parser/reader bytes stay exact. Strict new35/computed25/
+boundary65 pass under depwarn=error. New sources use native/reconstructed SpecFile/
+generated-plan/fresh same-process Module; nearest computed uses its own native/
+plan/fresh routes. Seven new observations retain shared13/kinds/once/order/live-
+origin/missing/normalized skips/static lookup/typed function fences/explicit
+arguments and bound callable counts. Exact single runner include registers the
+normal. Stderr contains only successful package precompilation progress. Actual
+old owner/normal/producers/inputs/RED-GREEN retained in
+rule-call-result-julia-intake.json.gz. No isolated package/full runner/quoted-
+dynamic-extra-argument source/child-error-deferred/schema/full admission grant.
+Safe Lua54.5 independently follows.
