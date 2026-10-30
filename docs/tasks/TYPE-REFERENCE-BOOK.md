@@ -10969,7 +10969,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.5 - preserve safe Lua readonly capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.51`
-  Status: `in_progress` / Perl51.1 repaired/targeted-checked; independent peers pending
+  Status: `in_progress` / Perl51.1 repaired/Rust51.2 compatible and targeted-checked; remaining peers pending
   Goal: Existing anonymous advancing String helper results compose through ordinary compatible methods with native effect and endpoint authority unchanged.
   Authority: capture-advance-text-results.md/prospective fixture; no named overload, Number counterpart, callback/deferred, preflight/coordinate/schema or full23.4 grant.
 
@@ -10995,14 +10995,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.51.1 - compose advancing capture String results through ordinary methods`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.51.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete Rust anonymous advancing capture String method composition under frozen51.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.51.1; capture-advance-text-results.md/shared prospective fixture.
   Acceptance: Preserve original three zero-argument producer bodies/tags/coordinate/endpoint/null/advance/once-order behavior; support compatible default/String/Array/signed selected-String/Number flow. Distinguish anonymous origin from live cursor; empty/missing and normalized operand skips preserve source effects. Keep named capture_take(name), existing direct first-consumer/preflight/function/callback/deferred/copy/format policies. Reproduce own baseline before production and retain healthy controls. Safe Lua named installed hosts/fixtures/loadfile only; no unsafe full runner/formatter or declared5.4 claim.
-  Planned verification tier: focused.
-  Planned focused checks: Shared/finite native-generated/restored/fresh routes as supported; original bodies/effects, empty/missing/once/snapshot/overload/function/shape controls, direct readonly/reset compatibility and local compile/format/book/history/manual continuity. No full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
-  Planned claim verification: none: Finite authored feature/preservation controls, no population or comprehensive-context measurement.
+  Verification tier: `focused`
+  Focused checks: Shared/finite native-generated/restored/fresh routes as supported; original bodies/effects, empty/missing/once/snapshot/overload/function/shape controls, direct readonly/reset compatibility and local compile/format/book/history/manual continuity. No full suite/matrix.
+  Canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no population or comprehensive-context measurement.
+
+  Activation: clean `2775502cf252dd5f3cff378820caa7741cea18b4`; prior jobs terminal/brief0. Frozen51/current Rust routes/getter effects/overload/function/callback and readonly/reset normal interfaces read. Independent baseline first; no inferred failure/runtime write/full gate.
+  - [x] **REPRODUCE / ISSUE**: Independent Rust advancing-result/effect evidence under frozen51.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent Rust advancing-result/effect evidence under frozen51.
+  - [x] **FIX**: Independent Rust advancing-result/effect evidence under frozen51.
+  - [x] **ADDRESSED (verified)**: Independent Rust advancing-result/effect evidence under frozen51.
+  - [x] **NO REGRESSION**: Independent Rust advancing-result/effect evidence under frozen51.
+  - [x] **LOCKSTEP**: Independent Rust advancing-result/effect evidence under frozen51.
+
+  Result: Rust independently already supports frozen advancing String51: new6/readonly6/reset3 tests pass native/restored CompiledSpec/generated-plan routes without runtime edits or invented RED. Shared9 and three bound/native sources retain origin6/6/10 versus live6, once-only snapshots, normalized bad-operand skips, empty/missing/no-advance/String0 and String-to-Number9. Named capture_take(begin) updates its mark while anonymous origin stays2. Literal callback advances caller origin3 while live cursor0 remains; invocation inside apply keeps source-specific function-state error, as do all three pure-function sources. Owned-package formatting passes and 499 existing input hashes stay exact. Actual formatted normal/builder/source/output/input bindings are retained in capture-advance-text-rust-intake.json.gz; dependency build warnings remain opaque upstream-owned evidence. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No source/schema/shape/vocabulary change, isolated emitted/full-suite/context/domain/portable admission or peer failure inference. Dart51.3 independently next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.51.2 - preserve Rust advancing capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.51.3`
   Status: `pending`
@@ -11040,7 +11051,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.51.2` | `pending` | Independently assess Rust advancing capture String composition under frozen51. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.51.3` | `pending` | Independently assess Dart advancing capture String composition under frozen51. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

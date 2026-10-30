@@ -1,7 +1,7 @@
 # Anonymous advancing capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.12; implementation family23.3.51.
-Status: Perl51.1 repaired/targeted-checked; independent peers pending.
+Status: Perl51.1 repaired/Rust51.2 compatible and targeted-checked; remaining peers pending.
 
 ## Accepted sources and actual distinction
 
@@ -77,3 +77,15 @@ inputs/actual producer/source epochs/results are retained in
 capture-advance-text-perl-intake.json.gz. No new vocabulary/effect/preflight/
 format policy or full23.4 claim. Normal registration23.4.1 and independent
 Rust51.2 remain separate.
+
+## Bounded Rust51.2
+
+Rust already supports the unchanged target. New6/readonly6/reset3 pass native/
+restored CompiledSpec/generated-plan routes, runtime unchanged/owned formatting
+clean. Sources keep origin6/6/10 and live6, once/snapshots, normalized guards,
+empty/missing/String0 and Number9. Named overload updates only its mark; literal
+callback advances caller origin3 while live0 stays, and function/registered
+callback source-specific errors hold. Existing input bytes remain exact. Actual
+source/producer/outputs are retained in capture-advance-text-rust-intake.json.gz;
+opaque dependency warnings remain upstream-owned. No independently compiled
+emitted/full-context/portable admission. Dart51.3 independently follows.

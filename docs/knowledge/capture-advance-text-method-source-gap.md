@@ -7,7 +7,7 @@ answers:
   - "does capture_take_rest move the live cursor or only the capture origin"
   - "which task owns advancing capture String result composition"
 date: 2026-10-30
-status: bounded Perl51.1 repaired/targeted-checked; independent peers pending
+status: bounded Perl51.1 repaired/Rust51.2 compatible; remaining peers pending
 tags: [perl, capture, string, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.12; capture-advance-text-selection-intake.json.gz retains nine source distinctions, six healthy/three direct failures and independent bound/direct effect target twins."
 reverify: "Recover probe_capture_advance_assessment.pl and finite cases from capture-advance-text-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps."
@@ -37,3 +37,9 @@ Old emitted module still fails host coalesce: regenerate affected modules. Actua
 source/test epochs/producers/inputs are retained in
 capture-advance-text-perl-intake.json.gz. No full context/domain/portable or
 vocabulary grant; Rust51.2 independently follows and registration23.4.1 stays open.
+
+Rust51.2 independently already supports frozen51: new6/readonly6/reset3 pass
+native/restored/plan, runtime unchanged. Native effects, named overload and caller
+callback origin updates remain distinct from live cursor movement; function
+fences stay specific. [[capture-advance-text-rust-compatibility]] retains exact
+proof limits; Dart51.3 independently follows.
