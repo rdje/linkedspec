@@ -10833,7 +10833,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1 - preserve the invoking rule namespace in Rust callable bodies`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50`
-  Status: `in_progress` / Perl50.1 repaired/Rust50.2 compatible and targeted-checked; remaining peers pending
+  Status: `in_progress` / bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending
   Goal: Existing readonly anonymous String getters and compatibility source compose through ordinary compatible methods without mandatory temporary bindings.
   Authority: docs/checkpoints/type-operation-inventory/capture-boundary-text-results.md and prospective capture_boundary_text_values.spec/json. Preserve getter/tag/coordinate/absence/function/deferred/callback/root/shape and generated-format boundaries; full23.4 remains separate.
 
@@ -10882,14 +10882,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Same-slice required CHANGES rollover: clean activation suffix 115-181 is retained exactly in docs/history/changes/segment-4943-5f6675f6c7f8.md; independent source blob/line/byte/SHA/old-manifest/kept-prefix checks pass. No old history row/segment or cap changed.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete Dart ordinary readonly capture String method composition under frozen50.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.2; capture-boundary-text-results.md and shared prospective fixture.
   Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
-  Planned verification tier: focused.
-  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
-  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
-  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+  Verification tier: `focused`
+  Focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+  Activation: clean `d9afca6d3e3b9ed8b097da66e78e34cdccc580a9`; prior jobs terminal/brief0. Dart standard commands/wrapper, public route APIs, current Number/reset/function policy and frozen50 read. Own new finite normal and only actual Dart implementation gaps; no inferred failure or full gate.
+  - [x] **REPRODUCE / ISSUE**: Independent Dart source/value/context evidence under frozen50.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent Dart source/value/context evidence under frozen50.
+  - [x] **FIX**: Independent Dart source/value/context evidence under frozen50.
+  - [x] **ADDRESSED (verified)**: Independent Dart source/value/context evidence under frozen50.
+  - [x] **NO REGRESSION**: Independent Dart source/value/context evidence under frozen50.
+  - [x] **LOCKSTEP**: Independent Dart source/value/context evidence under frozen50.
+
+  Result: Dart independently already supports frozen capture String50: focused15 tests pass, comprising new6/nearest Number6/reset3, on native/restored SpecFile/generated-plan routes. Shared9 and four native/default sources, String-Array-signed-Number transitions, empty/missing/reversed/String0, snapshot-before-reset and normalized operand suppression pass without runtime changes or invented RED. Existing direct take[]/T, withOK and literal callback caller context remain Dart policies; invocation inside a function retains source-specific RuntimeInterpreterException/GeneratedSourceException fences. Fatal new-test analysis and nonwriting format check pass. 192 existing bound input hashes stay exact. Actual JSON reporter validates complete nonhidden/no-skip test identities/results rather than trusting only the final success flag; producer/test/inputs/output retained in capture-boundary-text-dart-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. No SDK/format debt repair, isolated emitted/full-suite/portable admission or vocabulary change; independent Julia50.4 follows.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.3 - preserve Dart readonly capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.4`
   Status: `pending`
@@ -10917,7 +10928,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` | `pending` | Independently assess Dart readonly capture String composition against frozen50. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` | `pending` | Independently assess Julia readonly capture String composition against frozen50. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

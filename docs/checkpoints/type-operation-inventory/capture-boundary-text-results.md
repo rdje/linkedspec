@@ -1,7 +1,7 @@
 # Readonly anonymous capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.11; implementation family23.3.50.
-Status: Perl50.1 repaired/Rust50.2 compatible and targeted-checked; remaining peers pending. No backend admission.
+Status: Perl50.1 repaired/Rust50.2 and Dart50.3 compatible and targeted-checked; Julia/safe Lua pending. No backend admission.
 
 ## Existing authority and actual gap
 
@@ -94,3 +94,15 @@ initial semantic run; no repeated coverage credit. Build warnings remain opaque
 upstream-owned diagnostics. Exact source/outputs/producer/input bindings are in
 capture-boundary-text-rust-intake.json.gz. Independently compiled emitted source
 and full source/context/portable23.4 are not claimed; Dart50.3 follows.
+
+## Bounded Dart50.3
+
+Dart independently already supports the unchanged target. New6/Number6/reset3
+pass native/restored SpecFile/generated-plan routes, fatal analysis and format
+with runtime unchanged. Empty/missing/reversed/String0, source snapshots and
+normalized guards hold. Direct take[] evaluates T; with yields Array/OK. Literal
+callback reads caller context while registered callback invocation inside apply
+retains source-specific typed function-state errors. Actual JSON reporter checks
+every nonhidden test result/identity/no-skip plus final completion. Exact source/
+input/producer/output are retained in capture-boundary-text-dart-intake.json.gz.
+No isolated emitted/complete context/portable admission; Julia50.4 follows.
