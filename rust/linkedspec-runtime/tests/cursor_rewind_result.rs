@@ -173,15 +173,32 @@ fn existing_with_and_missing_read_array_bridges_stay_healthy() {
     );
 }
 #[test]
-fn legacy_extra_argument_forms_do_not_gain_zero_argument_number_results() {
-    // Preserve observed legacy malformed forms; this is no arity/error-phase admission.
-    for (helper, position) in [("rewind_entry_start", 2), ("rewind_match_start", 4)] {
-        for argument in ["1", "extra:1"] {
-            check(
-                &format!("legacy_{helper}_{argument}"),
-                &carrier(&format!("return([{helper}({argument}),cursor_pos()])"), ""),
-                "zzab:cd",
-                json!([null, position]),
+fn surplus_rewind_arguments_reject_before_source_result_dispatch() {
+    // Original accepted-null observations remain in the56.2 result intake.
+    let rows: Vec<_> = ["rewind_entry_start", "rewind_match_start"]
+        .into_iter()
+        .flat_map(|helper| {
+            ["1", "extra:1"]
+                .into_iter()
+                .map(move |argument| (helper, argument))
+        })
+        .map(|(helper, argument)| {
+            let source = carrier(&format!("return([{helper}({argument}),cursor_pos()])"), "");
+            (helper, argument, routes(&source, "zzab:cd"))
+        })
+        .collect();
+    eprintln!(
+        "CURSOR_REWIND_ARITY {}",
+        serde_json::to_string(&rows).unwrap()
+    );
+    for (helper, _, actual) in rows {
+        for value in actual {
+            let error = value.expect_err("surplus rewind arguments must reject");
+            assert!(
+                error.contains("helper_arity_mismatch")
+                    && error.contains(helper)
+                    && error.contains("actual_arity=1"),
+                "{error}"
             );
         }
     }

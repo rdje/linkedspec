@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 next before Dart/Julia/safe Lua.
+Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart/Julia/safe Lua pending.
 
 ## Existing authority
 
@@ -115,3 +115,16 @@ accepted/null/moving in the explicitly preserved group: no healthy arity credit.
 Immediate P1 child56.2.0 fixes this next before Dart56.3. Actual inputs/producers/
 results retained in cursor-rewind-result-rust-intake.json.gz. Rebuild runtime/apps;
 no generated-format change or independent emitted-module/full admission follows.
+
+## Rust cursor arity56.2.0 repaired
+
+The four cursor controls now share the existing eager zero-argument validator.
+Invalid positional/keyword/two-argument calls reject with helper_arity_mismatch
+before operands or physical dispatch. The pure-function parser-state fence still
+precedes arity; trailing bodies still fail during compilation. New8 groups
+4healthy/4RED now pass, plus parent9/gap7/owned fmt. Parent's last malformed-call
+acceptance assertion is explicitly replaced in this epoch, retaining original
+source/evidence; eight positive groups stay exact. All60 invalid route outputs,
+function/valid0/Unicode/logical/trailing preservation and actual producers are in
+cursor-control-arity-rust-intake.json.gz. Earlier56.2 acceptance notes are historical;
+they grant no supported invalid form. Rebuild runtime/apps; Dart56.3 is next.

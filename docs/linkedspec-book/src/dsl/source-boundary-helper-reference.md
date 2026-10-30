@@ -659,9 +659,12 @@ builder to use the direct rewind-result forms.
 Rust also returns and composes the character-based position from these documented
 zero-argument rewind calls across native, reconstructed and generated-plan
 execution. Rebuild applications with the updated Rust runtime. The original
-physical cursor setters and generated format stay the same. Current Rust limit:
-surplus positional/keyword arguments are still accepted and can move the cursor;
-use the documented zero-argument forms while the owned validation repair follows.
+physical cursor setters and generated format stay the same. All four Rust cursor
+controls require zero arguments. For example, `rewind_entry_start(1)` and
+`restore_cursor(extra:1)` fail with `helper_arity_mismatch` before evaluating
+arguments or running the helper. Adding a trailing codeblock fails during
+compilation. The existing parser-state restriction in pure functions takes
+priority over argument validation.
 
 Other backends are assessed independently. Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns

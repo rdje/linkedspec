@@ -335,8 +335,17 @@ fn validate_eager_helper_arity(
 ) -> Result<(), String> {
     validate_diagnostic_output_arity(name, raw_args, actual_arity, ctx, rule_label)?;
     validate_logical_helper_arity(name, raw_args, actual_arity, ctx, rule_label)?;
-    if matches!(name, "entry_slot" | "gap_span" | "gap_text" | "gap_kind")
-        && (!raw_args.is_empty() || actual_arity != 0)
+    if matches!(
+        name,
+        "entry_slot"
+            | "gap_span"
+            | "gap_text"
+            | "gap_kind"
+            | "save_cursor"
+            | "restore_cursor"
+            | "rewind_entry_start"
+            | "rewind_match_start"
+    ) && (!raw_args.is_empty() || actual_arity != 0)
     {
         ctx.capture_helper_arity_failure(
             name,
@@ -11308,8 +11317,7 @@ impl Engine {
                 } else {
                     ctx.typed_rewind_entry_start(rule_label, name)
                 };
-                // Only canonical zero-argument calls gain position results.
-                // Legacy malformed calls retain their result until56.2.0 arity repair.
+                // Successful zero-argument rewinds expose the validated position.
                 Ok(if rewound && raw_args.is_empty() {
                     ctx.typed_position_offset_from_byte(ctx.pos, rule_label, name)
                         .map(|offset| RuntimeValue::Number(offset as f64))

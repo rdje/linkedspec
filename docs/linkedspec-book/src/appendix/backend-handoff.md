@@ -2997,8 +2997,9 @@ rewind Number value-source roles are now also implemented/targeted-checked in
 Perl across native/fresh with original cursor ABI and pure-function restrictions.
 Direct Number/default/guard/Array recovery flows pass. Rust also now returns
 character-based rewind Numbers and applies the existing result guards across
-native/restored/plan; rebuild its runtime/apps. Its separately owned surplus-
-argument validation defect is repaired immediately next before Dart.
+native/restored/plan; rebuild its runtime/apps. All four Rust cursor controls now
+reject surplus arguments before argument evaluation, retaining pure-function
+priority and the compiler rejection of trailing bodies. Dart is assessed next.
 A separately owned default-parent rewind cycle requires ordinary progress
 authority before admission. No anchor/absence/stack/transaction/callback/schema
 or portable admission changes follow from this selection.
