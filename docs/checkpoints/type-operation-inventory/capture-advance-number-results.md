@@ -1,7 +1,7 @@
 # Anonymous advancing capture Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.13; implementation family23.3.52.
-Status: bounded Perl/Rust outcomes targeted-checked; Dart/Julia/safe Lua pending.
+Status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending.
 
 ## Existing authority and actual gap
 
@@ -91,3 +91,14 @@ source and existing caller callback/function fences. Existing input bytes stay
 exact. Actual normal/producer/outputs retained in capture-advance-number-rust-intake.json.gz;
 dependency warnings remain opaque/upstream-owned. No independently compiled
 emitted/full context/domain/portable admission; Dart52.3 independently follows.
+
+## Bounded Dart52.3
+
+Dart already supports the unchanged target. New6/advancing String6/readonly
+Number6/reset3 pass native/restored SpecFile/generated-plan, fatal analysis/
+format, runtime unchanged. Shared11/widths/endpoints, once/snapshots/normalized
+guards, zero/missing/reversed, named source and caller callback/function fences
+hold. JSON reporter accounts for every nonhidden/no-skip identity and completion.
+Actual source/producer/output/input bindings retained in capture-advance-number-dart-intake.json.gz.
+No isolated emitted/full suite/context/domain/portable admission. Julia52.4
+independently follows.
