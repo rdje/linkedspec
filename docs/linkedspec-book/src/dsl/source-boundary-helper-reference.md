@@ -680,8 +680,13 @@ and Array recovery; absent anchors remain null. Rebuild Julia runtime/apps.
 All four Julia cursor controls reject surplus arguments with
 `helper_arity_mismatch` before helper effects. For example,
 `rewind_match_start(extra:1)` fails without rewinding. Pure-function restrictions
-still take priority; trailing codeblocks still fail at compilation. Lua is
-assessed independently.
+still take priority; trailing codeblocks still fail at compilation.
+
+The installed PUC Lua 5.5.1 and LuaJIT runtimes also return and compose these
+character-based rewind Numbers, preserving zero, missing-anchor null and
+`save_cursor()`/`restore_cursor()` null results. Existing zero-argument checks
+remain in force. Rebuild applications with the updated Lua runtime. This
+focused implementation does not establish support on the declared Lua 5.4 host.
 
 Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns

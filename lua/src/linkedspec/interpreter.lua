@@ -2925,6 +2925,7 @@ local function evaluate_cursor_control(name, expr, ctx)
   if #expr.args ~= 0 then invalid_helper_arity(name, "exactly 0 positional arguments", #expr.args) end
   local cursor_before = ctx.cursor_byte
   local stack_before = #ctx.cursor_stack
+  local result = json.null
   if name == "save_cursor" then
     if typed_source.position_is_valid(ctx, ctx.cursor_byte, name) then
       ctx.cursor_stack[#ctx.cursor_stack + 1] = ctx.cursor_byte
@@ -2937,11 +2938,15 @@ local function evaluate_cursor_control(name, expr, ctx)
     end
   elseif name == "rewind_match_start" then
     if ctx.registers.local_match then
-      set_live_cursor(ctx, ctx.registers.local_match.byte_start, name)
+      if set_live_cursor(ctx, ctx.registers.local_match.byte_start, name) then
+        result = typed_source.position_offset(ctx, ctx.cursor_byte, name) or json.null
+      end
     end
   elseif name == "rewind_entry_start" then
     if ctx.registers.entry_match then
-      set_live_cursor(ctx, ctx.registers.entry_match.byte_start, name)
+      if set_live_cursor(ctx, ctx.registers.entry_match.byte_start, name) then
+        result = typed_source.position_offset(ctx, ctx.cursor_byte, name) or json.null
+      end
     end
   end
   runtime_trace_event(
@@ -2953,7 +2958,7 @@ local function evaluate_cursor_control(name, expr, ctx)
       " stack_before=" .. tostring(stack_before) .. " stack_after=" .. tostring(#ctx.cursor_stack),
     trace.TRACE_DEBUG
   )
-  return json.null
+  return result
 end
 
 function callable_codeblock.raise_failure(engine, ctx, name, detail, fields)
@@ -3497,7 +3502,8 @@ end
 
 function typed_source.receiver_mutation.is_input_cursor_value_source(expr)
   if expr == nil or expr.kind ~= "call" or expr.trailing_block_arg or
-    (expr.source_method or expr.name) ~= expr.name or not INPUT_CURSOR_HELPERS[expr.name] then
+    (expr.source_method or expr.name) ~= expr.name or
+    (not INPUT_CURSOR_HELPERS[expr.name] and expr.name ~= "rewind_entry_start" and expr.name ~= "rewind_match_start") then
     return false
   end
   return #(expr.args or {}) == (expr.name == "input_slice" and 2 or 0)
@@ -3510,7 +3516,8 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
     -- Static owners preserve legacy unknown bound-call result policies.
     if engine.compiled_spec.function_registry:has_name(receiver.name) then return true end
     local name = action_contracts.canonical_action_helper_name(receiver.name)
-    if name == "entry_slot" or name == "gap_span" then
+    if name == "entry_slot" or name == "gap_span" or
+      name == "rewind_entry_start" or name == "rewind_match_start" then
       return receiver.name == name and (receiver.source_method or receiver.name) == name and
         not receiver.trailing_block_arg and #(receiver.args or {}) == 0
     end

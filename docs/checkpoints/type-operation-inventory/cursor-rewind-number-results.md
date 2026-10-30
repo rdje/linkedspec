@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 repaired/targeted-checked; Julia56.4 canonical-zero result targeted-checked; arity56.4.0 repaired/targeted-checked; safe Lua pending.
+Status: Recorded bounded56 implementations/prerequisites are targeted-checked on their named routes/hosts; full domain/context/portable admission remains23.4.
 
 ## Existing authority
 
@@ -182,3 +182,19 @@ Original93 includes24 scaffold checks, no inflated healthy-value count. Actual
 producer/source/inputs/results in cursor-control-arity-julia-intake.json.gz.
 Earlier accepted-malformed notes are historical only. Rebuild runtime/apps;
 safe Lua56.5 next. No isolated package/new state/schema/full admission.
+
+## Safe installed Lua56.5 result implementation
+
+Original successful physical setters now yield the existing character Number;
+save/restore null/arity/trace and original setters remain exact. Two canonical
+zero source/selected roles reuse guards with no new interpreter chunk locals.
+Same calibrated183checks20RED to183PASS per PUC5.5.1/LuaJIT2.1.1788460057,
+gap126/six computed programs/loadfile/version pass, stderr empty. Nine actual
+values/two function fences/16 invalid-arity programs retain four routes and
+exact arity/function observations. Initial96 borrowed diagnostic expectations
+per host are retained calibration only; original native top-level code/count/
+expected with runtime_execution diagnostic and generated helper message stay.
+Actual source/producers/setup/RED-GREEN/inputs in cursor-rewind-result-lua-intake.json.gz.
+Rebuild runtime/apps. Recorded bounded56 outcomes are complete; no isolated
+package/declared5.4/unsafe full runner/formatter/full23.4 admission. Next23.1.18
+selects the next useful bounded feature from current inventory.

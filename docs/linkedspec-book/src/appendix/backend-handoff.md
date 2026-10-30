@@ -3007,7 +3007,10 @@ rejection. Rebuild Dart runtime/apps. Julia now also composes validated
 character rewind Numbers across native/restoredSpec/plan/fresh Module with null
 absent anchors; rebuild its runtime/apps. Its four cursor controls now reject
 surplus arguments before effects, retaining function priority and trailing
-compiler rejection. Safe Lua follows independently.
+compiler rejection. Installed PUC Lua5.5.1/LuaJIT also now return and compose
+validated character rewind Numbers, retaining existing arity/errors/null controls.
+Rebuild Lua runtime/apps. These recorded bounded outcomes retain host/context
+limits; declared Lua5.4 and full admission remain separate.
 A separately owned default-parent rewind cycle requires ordinary progress
 authority before admission. No anchor/absence/stack/transaction/callback/schema
 or portable admission changes follow from this selection.

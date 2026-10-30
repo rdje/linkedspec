@@ -8,7 +8,7 @@ answers:
   - "how are live entry and local rewind result anchors qualified"
   - "which Perl owners compose cursor rewind Number results"
 date: 2026-10-30
-status: prerequisite56.0 and bounded Perl56.1 repaired/targeted-checked; peers pending
+status: prerequisite56.0/Perl56.1 repaired; independent recorded peer outcomes in canonical rewind target
 tags: [perl, cursor, rewind, number, fluent, source-role, effects]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.56.1; cursor-rewind-result-perl-intake.json.gz retains actual4healthy/5RED to9GREEN, eager10/deferred22/syntax/16 exact rewrites and exact three-insertion scope. Original selection intake remains cursor-effect-result-selection-intake.json.gz."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cursor_rewind_result.t"
@@ -56,3 +56,5 @@ _actionir_ast_computed_data_call_method owns the typed read source role;
 _ordinary_input_cursor_result_source propagates the actual-kind guard origin;
 _lower_method_value_expr emits the existing physical value through the shared
 Contracts::_cursor_compatibility_value_expr factory.
+
+Independent bounded peer outcomes now live in [[rust-cursor-rewind-number-results]], [[dart-cursor-rewind-number-results]], [[julia-cursor-rewind-number-results]] and [[lua-cursor-rewind-number-results]]. Their recorded routes/host/error epochs remain separate; full23.4 is not promoted.

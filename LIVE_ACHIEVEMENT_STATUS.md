@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia four-control zero arity repaired: new189/parent75/gap98 strict depwarn pass; safe Lua56.5 next.
+Safe installed Lua rewind Numbers repaired: new183/gap126/six computed/loadfile/version pass per host; next feature selection23.1.18.
 
 ## Latest Completed Slice
 
-Julia cursor-control arity56.4.0 repaired. Four controls join original eager zero-arity validator after function-state/registry priority and before physical dispatch; existing gap summary remains exact, new cursor summary is accurate. Same189 assertions93PASS/96RED now pass189; original93 includes24 route-key scaffolding in failing groups. All24 invalid programs/96 native/restoredSpec/plan/fresh Module observations reject typed helper_arity_mismatch/helper/count/expected0. Julia previously ignored malformed operands; no prior trapping-evaluation claim. Function fences/valid0/Unicode/absence/stack/prefix/logical outputs and four compile-phase trailing errors are byte-equal before/after. Parent final legacy acceptance replaced in retained epoch; preceding nine positive groups exact. New189/parent75/gap98 strict depwarn pass, successful package-precompile stderr retained, exact runner include and 170 other activation inputs unchanged. Actual source/normal/producers/RED-GREEN/observations/inputs in cursor-control-arity-julia-intake.json.gz. Book/card/target/map/task/roadmap/live/resume/history align; rebuild runtime/apps. No post-error position telemetry, isolated package/new state/schema/iteration/phase normalization/full admission. Independent safe Lua56.5 next.
+Safe Lua56.5 independently exposes discarded rewind results and missing typed source guards on installed PUC5.5.1/LuaJIT2.1.1788460057. Same calibrated183 checks20RED now pass183 per host, nearest gap126/six existing computed programs/loadfile/version pass with empty stderr. Nine actual value observations/two function fences/16 invalid-arity programs retain native/restoredSpec/plan/fresh routes; arity/function outputs byte-equal before/after. Initial96 borrowed arity-diagnostic failures per host are calibration only; actual original native top-level code/count/expected with runtime_execution diagnostic and generated helper message remain, no normalization. Existing physical bool setter now projects character Number after success for two zero rewinds, original save/restore null/arity/trace unchanged. Source/selected guard roles admit only two canonical zero names; no new chunk locals. Shared12/Unicode1/3/zero/operand skips/source2 before consuming7/sum9/Array-signed-String/absence pass. Exact three-line runner block, 172 other activation inputs exact; actual producer/source/setup/RED-GREEN/outputs in cursor-rewind-result-lua-intake.json.gz. Book/cards/target/map/task/roadmap/live/resume/history align; recorded bounded56 outcomes complete, full23.4 separate. Rebuild runtime/apps; no isolated package/declared5.4/unsafe full runner/formatter/schema/state/progress-policy/full admission. Next remaining feature selection23.1.18.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.5 from clean Julia result/arity56.4/.0. Read frozen56/shared explicit-edge carrier, existing Lua cursor/input/computed cards, current canonical-zero rewind producer/guards/typed character projection/function/arity contracts and nearest safe normals. Independently baseline finite primitive/bound/direct/zero/order/snapshot/kind/absence/function/shape on native/restored/plan/fresh routes for installed PUC5.5.1/LuaJIT hosts before production. Preserve healthy routes; implement only existing two zero rewind Number source roles/guards as needed. Safe authored literals/loadfile/strict focused nearest and exact runner registration/book/docs/commit. No unsafe full runner/formatter/declared5.4/new chunk locals, full CI/schema/state/progress-policy change; await map generation before reads.
+Activate TYPE-REFERENCE-BOOK.1.2.23.1.18 after clean bounded56 completion. Read current helpers/signatures/type-method and result-role gap inventory, canonical contracts/Knowledge Map/book and recorded implementations through56. Reconcile remaining useful per-type/inter-type method families without assuming all helper results imply methods or claiming complete coverage. Use finite public source/bound/direct controls where facts are missing; preserve effects/mutation/identity/shape/error/function/deferred/state authority. Freeze one next safe additive target and prerequisite/backend leaves before production, or name a concrete authority blocker with ownership. Focused source/fixture/book/map/history/manual checks/docs/commit, then implementation. No broad verification, cleanup/infrastructure pivot or full23.4 promotion; keep pressure20.1/atomic map20.1.1/registration/progress/declared5.4 owners scheduled.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.56.5` — Safe installed Lua rewind Numbers repaired: new183/gap126/six computed/loadfile/version pass per host; next feature selection23.1.18.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.4.0` — Julia four-control zero arity repaired: new189/parent75/gap98 strict depwarn pass; safe Lua56.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.4` — Julia canonical-zero rewind Numbers repaired: new75/gap98/computed25 strict depwarn pass; immediate arity56.4.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0` — Dart four-control zero arity repaired: new8/parent10/gap-arity9/analysis/new-parent fmt pass; Julia56.4 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.5 from clean Julia result/arity56.4/.0.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.3` — Dart record guard5healthy/1RED to6GREEN; computed7/analysis/format pass; P1 arity55.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.2` — Rust gap/slot guards7groups6healthy/1RED to7GREEN; computed6/gap-unit3/fmt pass; Dart55.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46.2` — Requested obsolete-object cleanup verified; current Rust6 and retained/residue controls pass. Rust55.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.55.1` — Perl gap/slot10groups5RED/5healthy→10GREEN; live gap2/deferred22 pass; requested cleanup46.2 then Rust55.2.
 
 ## History
 
