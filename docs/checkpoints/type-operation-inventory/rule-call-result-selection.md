@@ -1,7 +1,7 @@
 # Rule-call result bracket selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.15; family23.3.54.
-Status: prerequisite54.0 and Perl54.1 repaired/targeted-checked; independent peers pending.
+Status: prerequisite54.0 and bounded Perl/Rust children repaired/targeted-checked; Dart/Julia/safe Lua pending.
 
 ## Existing authority and actual gap
 
@@ -109,3 +109,20 @@ change; original epochs retained. Actual old owner/normal/producers/inputs/epoch
 rule-call-result-perl-intake.json.gz. No dynamic/quoted/extra-argument call source,
 selector coercion/computed write/child frame-error-policy/schema/context/portable
 grant. Register the normal under23.4.1; independent Rust54.2 follows.
+
+## Bounded Rust54.2 repaired
+
+Independent new5healthy/1RED identifies selected-call String take executing BAD
+and returning [] rather than guarded null; that failing native test stops before
+its later routes. The existing ordinary computed-read source classifier excludes
+call. A single bare static-label call now joins its current actual-kind guard;
+all remaining engine/invocation/parser/reader/schema bytes stay exact. Same new6,
+computed6/boundary6 pass native/restored CompiledSpec/generated-plan, including
+shared13/kinds/once/order/missing/normalized skips, static label lookup/function
+restrictions and original bound callable counts. Public classifier builds plans.
+Owned formatting passes after a token-identical line wrap. Actual old engine/
+normal/producers/input hashes/RED-GREEN/format results retained in
+rule-call-result-rust-intake.json.gz. Dependency warnings opaque/upstream-owned.
+No dynamic/quoted/extra-argument source or child/error/deferred/schema/isolated-
+source/full context/portable grant. Rebuild Rust applications with the updated
+runtime; independently assess Dart54.3 next.

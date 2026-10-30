@@ -203,7 +203,7 @@ Invoke child rules and handle results:
 - `call(RuleName)` — call a child rule and capture its return value
 - Combined with `retv = call(Child)` to store child results
 
-Perl supports compatible methods and typed Array/Hash brackets directly on an
+Perl and Rust support compatible methods and typed Array/Hash brackets directly on an
 ordinary static rule call. A child Array result can feed
 `call(Child)[-1].uppercase()`; nested results compose in the same way:
 
@@ -222,7 +222,7 @@ false, zero, String `"0"`, null and nested containers retain their own kinds.
 This adds bracket composition for the existing bare rule-name form. Child
 invocation and parser-state restrictions remain: pure functions cannot call
 parser rules. Deferred callback bodies retain their existing read grammar.
-Other backends and full source/context/portable admission are assessed independently.
+Rust preserves these guards across native, restored and generated-plan execution. Rebuild Rust applications with the updated runtime. Other backends and full source/context/portable admission are assessed independently.
 
 Named-array selectors can assign working variables while producing an index:
 

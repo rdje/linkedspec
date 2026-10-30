@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl child-result bracket6groups4RED/2healthy→6GREEN; callable5/deferred22 pass; independent Rust54.2 next.
+Rust selected-call guard5healthy/1RED→6GREEN; computed6/boundary6/fmt pass; independent Dart54.3 next.
 
 ## Latest Completed Slice
 
-Perl static rule-call returned Array/Hash brackets implemented through a fourteen-line guarded source role in the existing computed-call predicate, reusing typed value_access and unchanged early child-handler ABI. Original unchanged normal6groups4RED/2healthy→6GREEN native/fresh: shared13 once/live-origin/ordered selectors/empty/false/zero/String0/null recovery/nested signed reads/missing-path selector/normalized skips, every selected kind, wrong scalar/null/empty/missing, healthy bound/method controls and existing function-call restriction. Ordinary descriptors raw0/fallback0/unresolved0/ready1 accompany execution; pure function remains unready/unresolved call and returns null. Deferred literal/final contextual grammar stays raw. Original callable4 values1/2/0/0/raw1 plus discovery5 and deferred22 all pass; five rejected/unknown source shapes keep exact AST/source/spans while bare static call becomes value_access. Syntax passes; 547 other inputs and shared fixture stay exact. Test-only ASCII JSON display then removes a Test2 wide-character formatter warning; selected shared target/deferred grammar2 pass with identical values/metadata and no warning, original epochs retained. Actual producer/old owner/normal/RED-GREEN/shape/neighbor outputs retained in rule-call-result-perl-intake.json.gz. Book/card/target/task/roadmap/live/resume/history align. Initial authored-before-activation refusal recovered from exact owned local bytes, no product credit. No new call arity/lookup/frame/error/deferred/schema or full admission; registration23.4.1 and independent Rust54.2 remain.
+Rust independently exposes one selected-call guard gap: new5healthy/1RED, shared13 first native result has [] and ICJBAD instead of null/ICJ; no pre-repair later-route claim. Existing is_ordinary_computed_read excludes rule calls, so the selected String follows legacy direct-consumer policy. Admit only call with one bare variable-shaped static label to the existing guard; parser/invocation/reader and all remaining engine bytes stay exact. Same new6/computed6/boundary6 pass native/restored CompiledSpec/generated-plan. Shared13/kinds/once/live-origin/effect order/null/missing/normalized skips and static label lookup/function fence/explicit arguments hold; original bound callable count0 policy remains. Public classifier builds actual fixture plan families. Initial rustfmt line-wrap request corrected with identical code tokens; owned package fmt passes. 501 other input hashes/shared fixture exact. Actual source/normal/producers/RED-GREEN/format/inputs retained in rule-call-result-rust-intake.json.gz, dependency warnings opaque/upstream-owned. Book/card/target/task/roadmap/live/resume/history align. No new dynamic/quoted/call arity/frame/error/deferred/schema/isolated-source/full admission; Dart54.3 independently follows.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.2 independently from clean Perl54.1. Read rule-call-result-selection.md/shared13, Rust public rule-call/static-label/value_access source role, child invocation/cursor/retv/frame/error, existing callable reader/deferred/function/preflight guards and nearest computed/call tests. New normal and own native/restored CompiledSpec/generated-plan baseline before production; preserve healthy routes, fix bounded direct static rule-call Array/Hash selection only if actually absent. Preserve actual selected kinds/once/order/missing/normalized skips and shared fixture, use public compiled-rule classifier for plans. Offline owned compilation/format plus quick nearest checks/docs/book/commit, then independent Dart54.3. No dependency internals/new schema/isolated-source/full context-portable admission.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.3 independently from clean Rust54.2. Read rule-call-result-selection.md/shared13, Dart static child-call value/read/source-kind guard, existing child frame/cursor/retv/error/function/callback/deferred/preflight and nearest computed/callable controls. New normal and own native/restored SpecFile/generated-plan baseline before production; preserve healthy behavior and repair only actual static rule-call result gaps. Preserve source once/ordered selectors/actual selected kinds/missing/normalized skips, current call labels/arity/copy/error/schema contracts. Fatal new-test analysis/format plus quick new/nearest checks/docs/book/commit, then Julia54.4. No peer-policy inference or routine full suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.54.2` — Rust selected-call guard5healthy/1RED→6GREEN; computed6/boundary6/fmt pass; independent Dart54.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.1` — Perl child-result bracket6groups4RED/2healthy→6GREEN; callable5/deferred22 pass; independent Rust54.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.0` — Closed selector3RED→3GREEN; write AST73/diagnostics42/syntax pass; rule-call result54.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.15` — Rule-call result target54 frozen; six healthy controls/shared13 fluent carrier; P1 closed-selector54.0 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.2 independently from clean Perl54.1. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.2` — Rust advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Dart52.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.1` — Perl advancing Number13 plus selected String2/readonly Number2/reset2 pass; independent Rust52.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46.1` — Due exact diagnostic cleanup complete; resume Perl advancing Number52.1 feature implementation.
-- `TYPE-REFERENCE-BOOK.1.2.23.1.13` — Advancing capture Number52 frozen from actual direct gaps/healthy native effects; Perl52.1 next.
 
 ## History
 

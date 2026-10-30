@@ -8191,6 +8191,16 @@ impl Engine {
                 if self.spec.find_function(name).is_some() {
                     return true;
                 }
+                // Static child returns use ordinary selected-value guards.
+                // Preserve quoted/dynamic calls and legacy bound-call policies.
+                if name == "call" {
+                    return matches!(
+                        args.as_slice(),
+                        [linkedspec_core::expr::Arg::Positional(
+                            Expr::Variable { .. }
+                        )]
+                    );
+                }
                 // Inline value calls have payload operands; one-operand
                 // statement headers retain their legacy result policies.
                 if matches!(name.as_str(), "if" | "switch") {

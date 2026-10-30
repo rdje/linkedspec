@@ -2944,8 +2944,9 @@ Before starting a new backend, verify:
 
 Existing rule calls already return values usable by compatible methods. The
 next bounded target adds direct Array/Hash brackets after ordinary static calls.
-Perl now supports direct static rule-call brackets through its existing typed
-reader and unchanged child-handler ABI. Native/fresh selected-kind/effect controls
-and original callable/deferred boundaries pass. The closed named-read prerequisite
+Perl supports direct static rule-call brackets through its existing typed reader
+and unchanged child-handler ABI. Rust now also applies its existing selected-kind
+guard to bare static call results, preserving child invocation and bound callable
+counts. Perl native/fresh and Rust native/restored/plan focused controls pass. The closed named-read prerequisite
 also preserves frozen write AST/diagnostics. Independent backend work preserves invocation/cursor/error/callable
 authority; no peer or portable admission follows from the Perl intake.
