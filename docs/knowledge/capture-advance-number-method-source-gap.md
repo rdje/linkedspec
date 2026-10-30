@@ -7,7 +7,7 @@ answers:
   - "does capture_take_until_cursor_len move the live cursor"
   - "which task owns advancing capture Number result composition"
 date: 2026-10-30
-status: bounded Perl52.1 repaired/targeted-checked; independent peers pending
+status: bounded Perl/Rust outcomes targeted-checked; Dart/Julia/safe Lua pending
 tags: [perl, capture, number, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.13; capture-advance-number-selection-intake.json.gz retains nine public controls, six healthy/three direct failures and independent eleven-coordinate bound/direct target twins."
 reverify: "Recover probe_capture_advance_number_assessment.pl and finite cases from capture-advance-number-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps."
@@ -35,3 +35,8 @@ readonly Number2/reset2 and syntax pass. Retained old module still fails host
 coalesce: regenerate affected modules. Actual source/test epochs/producers/
 inputs are in capture-advance-number-perl-intake.json.gz. No broad context/
 vocabulary/portable grant; Rust52.2 and registration23.4.1 remain independent.
+
+Rust52.2 independently already supports frozen52: new6/String6/readonly Number6/
+reset3 pass native/restored/plan, runtime unchanged/owned formatting clean.
+[[capture-advance-number-rust-compatibility]] retains exact route/effect/context
+limits; Dart52.3 independently follows.

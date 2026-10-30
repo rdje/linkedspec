@@ -1,7 +1,7 @@
 # Anonymous advancing capture Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.13; implementation family23.3.52.
-Status: Perl52.1 repaired/targeted-checked; independent peers pending.
+Status: bounded Perl/Rust outcomes targeted-checked; Dart/Julia/safe Lua pending.
 
 ## Existing authority and actual gap
 
@@ -80,3 +80,14 @@ module still fails host coalesce after repair: regenerate affected modules.
 Actual epochs/producers/results/inputs retained in capture-advance-number-perl-intake.json.gz.
 No effect/preflight/format/vocabulary or full23.4 movement. Explicit normal
 registration23.4.1 and independent Rust52.2 remain separate.
+
+## Bounded Rust52.2
+
+Rust already supports the unchanged target. New6/advancing String6/readonly
+Number6/reset3 pass native/restored CompiledSpec/generated-plan, runtime
+unchanged/owned formatting clean. Shared11/three widths preserve origin versus
+live cursor, once/snapshots, normalized guards, zero/missing/reversed, named
+source and existing caller callback/function fences. Existing input bytes stay
+exact. Actual normal/producer/outputs retained in capture-advance-number-rust-intake.json.gz;
+dependency warnings remain opaque/upstream-owned. No independently compiled
+emitted/full context/domain/portable admission; Dart52.3 independently follows.
