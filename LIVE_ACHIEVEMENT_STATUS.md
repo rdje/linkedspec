@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rule-call result target54 frozen; six healthy controls/shared13 fluent carrier; P1 closed-selector54.0 next.
+Closed selector3RED→3GREEN; write AST73/diagnostics42/syntax pass; rule-call result54.1 next.
 
 ## Latest Completed Slice
 
-Selection15 freezes existing child-return Array/Hash bracket composition54: six primitive/bound/method controls already pass native/fresh, while direct Array/Hash selectors fail compilation with raw1/unready. Existing early call ABI is healthy; governed computed-call source role excludes call. Shared13 prospective target fails directly but passes through existing bound/fluent carrier, preserving once/order/live-origin/empty/false/zero/String0/null recovery/nested signed reads/missing selector/normalized skips. P1 named closed-selector defect is separately reproduced: source[{assignment;-1}] is mistaken for unclosed nested write; identical fluent carrier passes. Own prerequisite54.0 before Perl54.1 and independent54.2-.5. All546 activation inputs bound, no production change. Actual instrument epochs retained: substitution exception then blessed diagnostic serialization refusal, guarded final producer, two calibration binding spelling fixes and unsupported character-index expectation superseded before freeze; no false RED/admission credit. Target/fixture/card/book/roadmap/task/live/resume/history align, actual producers/inputs/results retained in rule-call-result-selection-intake.json.gz. No new call arity/lookup/scope/selector coercion/callable/deferred/schema or portable grant.
+Perl closed named-read selector-assignment defect repaired: unchanged new normal3RED→3GREEN covers typed read/source-span preservation, once-ordered ICJK effects including a selector after missing path, quoted bracket/equals payload, nested signed read, unchanged source and function-local assignment. Native/fresh agree without warnings/cursor movement. _find_nested_write_assignment_eq now uses existing full scanner and permits recovery only with an unmatched bracket; actual top-level assignment path/all remaining parser bytes exact. Existing frozen write AST73/exact invalid-diagnostic42 pass in two explicitly selected subtests; parser syntax passes and 546 other activation inputs remain exact. Actual producer/normal/old-parser/hash/RED-GREEN/write-selection/outputs retained in closed-named-selector-intake.json.gz. Book/card/target/task/roadmap/live/resume/history align. No direct-call selector/source-domain/deferred/callable/schema or full admission grant. Explicit normal registration remains23.4.1; Perl54.1 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.0 from clean selection15. Read rule-call-result-selection.md P1 closed-selector prerequisite and retained minimal source/native/fresh/substitution/structured diagnostic. Reproduce a normal before production; fix only _find_nested_write_assignment_eq recovery treating a properly closed named-read selector assignment as an unclosed write delimiter. Preserve actual nested writes/unclosed/root diagnostics, named lookup/effects/source spans, ordinary/deferred/function grammar and existing read guards. Focused new RED/GREEN and nearest write/parser checks/docs/book/commit, then Perl54.1 governed rule-call result selectors. Do not alter shared13 oracle or call/frame/format authority; no routine full suite/maintenance pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.1 independently from clean closed-selector54.0. Read rule-call-result-selection.md/shared13, computed-value source-role/callable compatibility/deferred fences, existing early call ABI and pure-function restriction. Add ordinary rule-call Array/Hash selected-result normal and reproduce direct native/fresh gaps before production; admit only existing governed static call source through current value_access, preserving source once/ordered selectors/actual-kind guards, child frame/cursor/retv/error, invalid call shapes and original four callable readers/raw status. Compile/quick new/nearest computed-callable/deferred checks/docs/book/commit, then independent Rust54.2. No new call syntax/selector coercion/schema or routine full suite.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.54.0` — Closed selector3RED→3GREEN; write AST73/diagnostics42/syntax pass; rule-call result54.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.15` — Rule-call result target54 frozen; six healthy controls/shared13 fluent carrier; P1 closed-selector54.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.5` — Safe Lua boundary81/Number97/reset102 pass per host; all bounded53 checked; next selection15.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.4` — Julia boundary65/advancing Number65/reset70 pass, runtime unchanged; safe Lua53.5 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.0 from clean selection15. Read rule-cal
 - `TYPE-REFERENCE-BOOK.1.2.23.3.46.1` — Due exact diagnostic cleanup complete; resume Perl advancing Number52.1 feature implementation.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.13` — Advancing capture Number52 frozen from actual direct gaps/healthy native effects; Perl52.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.5` — Safe Lua advancing102/readonly100/reset102 pass per host; all bounded51 checked; next selection23.1.13.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.51.4` — Julia advancing String70/readonly60/reset70 pass without runtime change; safe Lua51.5 next.
 
 ## History
 

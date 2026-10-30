@@ -7,7 +7,7 @@ answers:
   - "why does an assignment in a closed named array selector report a nested write error"
   - "which task owns rule-call result selection and closed selector recovery"
 date: 2026-10-30
-status: target54 frozen; P1 closed-read prerequisite54.0 before Perl54.1; peers independent
+status: closed-read prerequisite54.0 repaired; direct rule-call target54.1/peers pending
 tags: [perl, actionir, selection, rule-call, parser, fluent, effects]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.15; rule-call-result-selection-intake.json.gz retains six healthy controls, two direct Array/Hash failures, scalar null policy, minimal closed-read distinction, healthy shared13 fluent carrier and actual instrument epochs/inputs."
 reverify: "Recover probe_rule_call_result_assessment.pl/finite cases from rule-call-result-selection-intake.json.gz; run project Perl wrapper with explicit local outputs. No historical source swaps."
@@ -31,3 +31,11 @@ write/diagnostic preservation before54.1. This does not grant computed writes.
 Original String-character expectation and probe/calibration faults are disclosed
 in the target and packet; only valid Array/Hash gaps/closed-read RED get product
 credit. No production or peer/portable/isolated package/full admission here.
+
+Prerequisite54.0 now requires an unmatched bracket before using recovery; the
+existing full scanner ignores quoted payloads and retains actual write ownership.
+Same normal3RED→3GREEN native/fresh/source-span/ordered effects/function-local;
+frozen write AST73/exact diagnostic42 and syntax pass, all other parser bytes
+exact. closed-named-selector-intake.json.gz retains actual producer/old parser/
+normal/hashes/RED-GREEN/selected write proof. This closes the named-read defect,
+not direct-call selector54.1, new grammar/deferred or full backend admission.

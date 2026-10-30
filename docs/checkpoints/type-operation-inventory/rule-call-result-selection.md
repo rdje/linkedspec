@@ -1,7 +1,7 @@
 # Rule-call result bracket selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.15; family23.3.54.
-Status: bounded target frozen; closed named-read prerequisite54.0 precedes Perl54.1.
+Status: closed named-read prerequisite54.0 repaired/targeted-checked; Perl54.1 pending.
 
 ## Existing authority and actual gap
 
@@ -78,3 +78,16 @@ Actual producers/epochs/inputs/results retained in rule-call-result-selection-in
 54.0 closes the existing named-read defect;54.1 Perl/54.2 Rust/54.3 Dart/54.4 Julia/
 54.5 safe Lua independently assess this target. No production change in selection.
 Full23.4, pressure20.1, canonical Perl registration and declared Lua5.4 stay separate.
+
+## Closed named-read prerequisite54.0 repaired
+
+The unchanged new normal moves3RED→3GREEN native/fresh, covering source/typed AST/
+Unicode-scalar span retention, ordered effects/missing-path selectors, nested signed
+reads, quoted brackets/equals, unchanged input arrays and function-local assignments.
+Recovery now tracks the existing full scan state and requires an unmatched bracket;
+the actual top-level assignment path and all other parser bytes stay exact. Frozen
+write AST73/exact invalid-diagnostic42 pass through two explicitly selected existing
+subtests, with parser syntax clean. Actual normal/producers/old parser/input hashes/
+RED-GREEN/selected write results retained in closed-named-selector-intake.json.gz.
+No new selector/call/deferred/schema or full grammar admission. Direct rule-call
+result selectors54.1 remain pending; the original frozen target is unchanged.

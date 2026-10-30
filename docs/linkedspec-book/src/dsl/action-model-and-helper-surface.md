@@ -219,12 +219,18 @@ assessed independently. Existing child invocation, parser-state restrictions and
 the returned value's typed read rules still apply. This does not add String
 character indexing or dynamic rule names.
 
-A separate parser defect currently affects a bare named-array read when its
-selector assigns a working variable. An existing value prefix avoids that defect:
-`source.coalesce(undef)[{order=cat(order,"I");-1}].uppercase()` returns `"TAIL"`
-for `source=["old","tail"]` and appends `I` to `order`. The closed named-read
-repair is tracked before direct rule-call result reads; actual nested-write
-syntax and diagnostics retain their existing contract.
+Named-array selectors can assign working variables while producing an index:
+
+```text
+items=["old","tail"];order="";
+out=items[{order=cat(order,"I");-1}].uppercase().cat({order=cat(order,"C");"!"});
+return([out,order]);  # ["TAIL!","IC"]
+```
+
+The selector runs before consumer operands. Later selectors still run after a
+missing path; assignments inside a user function stay local to that invocation.
+Perl now distinguishes these properly closed reads from unclosed nested writes,
+whose syntax diagnostics retain their existing codes, messages and source spans.
 
 
 ## How helpers reach emitted code

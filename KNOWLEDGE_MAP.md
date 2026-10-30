@@ -20510,7 +20510,7 @@ _The phase0 hang is a catastrophic regex in the Perl-only legacy VHDL subsystem 
 ### rule-call-computed-result-selection-gap
 _Rule-call direct bracket reads lack a governed source role and named selector writes hit recovery_
 - **answers:** can call Child results be indexed directly before String methods | why does call Child bracket selection fail Perl compilation | why does an assignment in a closed named array selector report a nested write error | which task owns rule-call result selection and closed selector recovery
-- **date:** 2026-10-30 · **status:** target54 frozen; P1 closed-read prerequisite54.0 before Perl54.1; peers independent
+- **date:** 2026-10-30 · **status:** closed-read prerequisite54.0 repaired; direct rule-call target54.1/peers pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.15; rule-call-result-selection-intake.json.gz retains six healthy controls, two direct Array/Hash failures, scalar null policy, minimal closed-read distinction, healthy shared13 fluent carrier and actual instrument epochs/inputs.`
 - **reverify:** `Recover probe_rule_call_result_assessment.pl/finite cases from rule-call-result-selection-intake.json.gz; run project Perl wrapper with explicit local outputs. No historical source swaps.`
 - **source:** [`docs/knowledge/rule-call-computed-result-selection-gap.md`](docs/knowledge/rule-call-computed-result-selection-gap.md)

@@ -2945,6 +2945,6 @@ Before starting a new backend, verify:
 Existing rule calls already return values usable by compatible methods. The
 next bounded target adds direct Array/Hash brackets after ordinary static calls.
 Perl primitive/bound/method controls pass, while direct brackets fail compilation.
-A separate closed named-read selector-assignment parser defect is owned as a P1
-prerequisite. Independent backend work preserves invocation/cursor/error/callable
+The closed named-read selector-assignment prerequisite is repaired on Perl;
+native/fresh read effects/function-local controls and frozen write AST/diagnostics pass. Independent backend work preserves invocation/cursor/error/callable
 authority; no peer or portable admission follows from the Perl intake.

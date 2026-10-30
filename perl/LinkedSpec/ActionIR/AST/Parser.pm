@@ -1220,7 +1220,7 @@ sub _find_nested_write_assignment_eq {
  my $candidate;
  for (my $idx = 0; $idx < $len; ++$idx) {
   my $ch = substr($text, $idx, 1);
-  next if _consume_quote_only_scan_char($state, $text, $idx, $ch);
+  next if _consume_scan_char($state, $text, $idx, $ch);
   next unless $ch eq '=';
   my $prev = $idx > 0 ? substr($text, $idx - 1, 1) : '';
   my $next = $idx + 1 < $len ? substr($text, $idx + 1, 1) : '';
@@ -1228,7 +1228,9 @@ sub _find_nested_write_assignment_eq {
   next if $prev eq '<' || $prev eq '>' || $prev eq '!' || $prev eq '=' || $prev eq ':';
   $candidate = $idx;
  }
- return $candidate
+ # A closed read may contain assignment expressions in its selectors. Only
+ # an unmatched bracket authorizes this unclosed-write diagnostic recovery.
+ return $state->{bracket_depth} > 0 ? $candidate : undef
 }
 
 sub _parse_nested_write_assignment_expr {
