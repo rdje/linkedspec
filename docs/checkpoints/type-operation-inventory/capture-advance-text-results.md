@@ -1,7 +1,7 @@
 # Anonymous advancing capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.12; implementation family23.3.51.
-Status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending.
+Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending.
 
 ## Accepted sources and actual distinction
 
@@ -101,3 +101,18 @@ Actual JSON reporter accounts for every nonhidden/no-skip test and completion.
 Exact source/producer/output/input bindings are in
 capture-advance-text-dart-intake.json.gz. No isolated emitted/full-context/
 portable admission. Julia51.4 independently follows.
+
+## Bounded Julia51.4
+
+Julia already supports the unchanged target. Strict new70/readonly60/reset70
+pass native/reconstructed SpecFile/generated-plan/fresh emitted Module, runtime
+unchanged. All three sources preserve origin6/6/10 versus live6, once/snapshots,
+normalized guards, empty/missing/String0 and Number9. Named overload and caller
+callback origin updates remain distinct from live cursor movement; function
+fences stay source-specific. One exact runner include registers the normal.
+The initial wrapper exit identity was lost at context compaction; its complete
+three passing summaries/empty stderr remain, with only new70 confirmed at
+directly observed terminal0 and identical fourteen route observations. Actual
+producers/inputs/outputs are retained in capture-advance-text-julia-intake.json.gz.
+Same-process fresh Module is not isolated package proof. Full23.4 and safe Lua
+remain independent.

@@ -7,7 +7,7 @@ answers:
   - "does capture_take_rest move the live cursor or only the capture origin"
   - "which task owns advancing capture String result composition"
 date: 2026-10-30
-status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending
+status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
 tags: [perl, capture, string, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.12; capture-advance-text-selection-intake.json.gz retains nine source distinctions, six healthy/three direct failures and independent bound/direct effect target twins."
 reverify: "Recover probe_capture_advance_assessment.pl and finite cases from capture-advance-text-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps."
@@ -48,3 +48,8 @@ Dart51.3 independently already supports frozen51: new6/readonly6/reset3 pass
 native/restored/plan with fatal analysis/format and runtime unchanged. Existing
 effects/overloads/caller callbacks/function fences hold;
 [[capture-advance-text-dart-compatibility]] retains exact limits. Julia51.4 follows.
+
+Julia51.4 independently already supports frozen51: strict new70/readonly60/reset70
+pass native/reconstructed/plan/fresh Module, runtime unchanged/normal registered.
+[[capture-advance-text-julia-compatibility]] retains exact route/effect limits and
+initial exit-provenance distinction. Safe Lua51.5 independently follows.
