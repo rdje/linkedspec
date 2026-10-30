@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Exact current frozen28 replay retained without source swaps; lazy-owner callback child45.1 next.
+Lazy-owner fixture supplies required value callback; unchanged40 assertions/public6 pass; helper-substitution45.2 next.
 
 ## Latest Completed Slice
 
-Current-only Phase0 recovery verifies frozen28 names and compressed primary diagnostics against the unchanged TYPE37 packet. All28 selected groups still fail at d30a2f9cd; complete nested assertions/shared discovery and29-result TAP retained, exit28,528 input hashes unchanged. No source snapshot installed, production or expectation edit, stale-value classification or full-suite state inferred. Initial lexical-local selector error stops before tests and is retained without result credit. Historical replay is explicitly historical; its old-source/--restore commands are removed from current recovery guidance. Toolbox now requires contract/mechanism evidence instead of classifying by result shape. First bounded lazy-owner callback child45.1 follows; remaining27 named groups stay owned45. Actual producers/inputs/TAP/diagnostics retained in perl-phase0-current-intake.json.gz. Book/card/map/task/roadmap/live/resume agree; focused authorized commit, no full gate/push.
+Exact lazy-owner Phase0 group reproduced3 ArrayPipeline failures: its synthetic package loaded but omitted lower_method_value_expr now required by dynamic split_each. Add only that callback to the fixture; unchanged40 owner-load/dependency/callability assertions pass with empty stderr. Public native/fresh array_pipeline_value_contract.t passes6 assertions, syntax passes,527 other hashed production/test/fixture inputs unchanged; the entire Phase0 diff is that one callback token. Production callback validation remains strict. Actual RED/GREEN/source/producer and consumer inputs retained in perl-phase0-lazy-owner-intake.json.gz. Canonical owner fact/book/task/roadmaps/live/resume align. Remaining27 retained groups stay owned45, with endpoint helper-substitution45.2 next; no full-suite or blanket stale-test claim, full gate/push remains deferred.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.1 from clean recovery checkpoint. Reconcile the exact lazy-owner ArrayPipeline synthetic callback failure with current dependency contract/public consumer, repair only the established cause and run its selected group/direct dependents before commit. Continue the other27 frozen failures through bounded45 children; no blanket oracle refresh, full Phase0 per repair or old snapshot replay. Canonical20.1/39.8.1/48.4.2.1/23.4.1/lifecycle/host prerequisites remain before admission/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.2 from clean lazy-owner fixture repair. Read canonical anonymous/named endpoint authority and public lowering for the exact90-assertion emit_context_pipeline_helper_substitutions group. Repair only demonstrated obsolete assertions or actual causes, retain RED/GREEN and direct endpoint normals, commit, then continue the other26 retained45 groups. No broad oracle refresh or full Phase0 per repair; canonical prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.1` — Lazy-owner fixture supplies required value callback; unchanged40 assertions/public6 pass; helper-substitution45.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.0` — Exact current frozen28 replay retained without source swaps; lazy-owner callback child45.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2` — Perl blind scalar masks removed with nested scopes/diagnostics preserved; exact Phase0 owner45 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1` — Perl OR action loading masks removed; both declaration normals now strict, empty-blind scalar owner next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.1 from clean recovery checkpoint. Recon
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1` — Perl static Unicode recognition/observation operands repaired; Dart48.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6` — Pinned Unicode rule guards repaired; static recognition operandsTYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1 next before Dart48.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5` — Rust repeated blind18/27four-route PASS/15 selected tests; Perl Unicode48.2.6 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.4` — Rust parent push8four-route PASS/8 selected tests; repeated-return48.2.5 next.
 
 ## History
 

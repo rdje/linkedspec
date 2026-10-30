@@ -13215,7 +13215,7 @@ subtest 'actionir_dep_builders_lazy_load_callback_owner_packages' => sub {
         {
             label       => 'ArrayPipeline',
             module      => 'LinkedSpec::ActionIR::ArrayPipeline',
-            callbacks   => [qw(_trim_action_ir_value _strip_literal_delimiters _extract_array_symbol_name _parse_method_function_expr _is_bare_method_scope_token _extract_scalar_symbol_name)],
+            callbacks   => [qw(_trim_action_ir_value _strip_literal_delimiters _extract_array_symbol_name _parse_method_function_expr _is_bare_method_scope_token _extract_scalar_symbol_name _lower_method_value_expr)],
             sample_key  => 'strip_literal_delimiters',
             sample_name => '_strip_literal_delimiters',
         },

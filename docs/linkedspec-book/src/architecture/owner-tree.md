@@ -165,6 +165,8 @@ It centralizes repeated owner-wrapper behavior:
 
 This matters because many LinkedSpec owners are thin wrappers around deeper implementation packages. If each wrapper hand-rolls lazy loading and callback lookup, the project accumulates small inconsistencies. `OwnerDispatch` keeps that boilerplate in one place.
 
+A dependency bundle requires every named callback from its owner. Loading the package succeeds independently of callback validation: a loaded package that omits a required callback still fails explicitly. Synthetic owners used to test lazy loading must provide the current complete bundle, including value lowering for dynamic array-pipeline delimiters.
+
 Delegated owner calls go through that same callback-loader route too: `dispatch_owner_call(...)` resolves its target through `require_pkg_cb(...)` before invoking the coderef. That keeps lazy loading, callback validation, list-context return preservation, and successful `$@` preservation on one shared path.
 
 `OwnerDispatch` now also makes that lazy-load path `chdir(...)`-safe by seeding the repo `perl` root into `@INC` as an absolute path at module load time. That matters for file-oriented parser flows such as `get_parser(...)`, which may resolve deeper owners only after tests or callers have moved into a temp directory.

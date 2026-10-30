@@ -9096,14 +9096,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.0 - recover current Perl regression failures without source swaps`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.1`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `f27aefd51688c3e6b01f20afe19dfc661df85464`; brief empty and no proof jobs.
   Goal: Reconcile the exact actionir_dep_builders_lazy_load_callback_owner_packages failure with the current published dependency seam; repair only its established cause.
   Reproduction: Current45.0 selected replay fails three ArrayPipeline assertions because Synthetic::ActionIRLazy::Owner2 lacks _lower_method_value_expr. Other owner cases and the actual lazy require assertion pass. Do not infer whether the production seam or the synthetic fixture is wrong without reading its contract and direct public consumer.
   Impact / schedule: P1 immediately after45.0, before other bounded45 repairs and full23.4/push. Current source/test hashes and failed TAP retained by45.0.
+  Verification tier: `focused`
+  Focused checks: Exact lazy-owner group and native/fresh array_pipeline_value_contract.t dynamic-delimiter/direct pipeline consumer; retain old three failed assertions and verify all unchanged owner load/callability controls.
+  Canonical trigger: Full23.4/final clean push.
+  Claim verification: none: Exact authored lazy-owner assertions, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Three ArrayPipeline assertions fail in the exact frozen group.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Current ArrayPipeline default_deps_for_package requires lower_method_value_expr for dynamic delimiters; the synthetic owner omits it. OwnerDispatch correctly loads the package and rejects its absent callback; the fixture no longer meets the dependency contract.
+  - [x] **FIX**: Supply the missing callback in this synthetic owner only; preserve production dependency validation and all existing assertion meanings.
+  - [x] **ADDRESSED (verified)**: Exact selected lazy-owner group passes its unchanged40 assertions.
+  - [x] **NO REGRESSION**: Public native/fresh dynamic delimiter pipeline contract passes; other owner loading/callability assertions remain unchanged.
+  - [x] **LOCKSTEP**: Canonical owner fact/book/current task/live/roadmaps align; remaining27 selected failures stay owned45 without blanket classification.
+
+  Result: Exact lazy-owner Phase0 group reproduced3 ArrayPipeline failures: its synthetic package loaded but omitted lower_method_value_expr now required by dynamic split_each. Add only that callback to the fixture; unchanged40 owner-load/dependency/callability assertions pass with empty stderr. Public native/fresh array_pipeline_value_contract.t passes6 assertions, syntax passes,527 other hashed production/test/fixture inputs unchanged; the entire Phase0 diff is that one callback token. Production callback validation remains strict. Actual RED/GREEN/source/producer and consumer inputs retained in perl-phase0-lazy-owner-intake.json.gz. Canonical owner fact/book/task/roadmaps/live/resume align. Remaining27 retained groups stay owned45, with endpoint helper-substitution45.2 next; no full-suite or blanket stale-test claim, full gate/push remains deferred.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.1 - supply the required lazy-owner value callback`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.2`
+  Status: `pending`
+  Goal: Reconcile the exact emit_context_pipeline_helper_substitutions group with accepted anonymous/named endpoint contracts and current public lowering; repair only demonstrated obsolete assertions or actual defects.
+  Reproduction: TYPE45.0 retains this group's90 assertions and capture-boundary source mismatches after40/47 endpoint repairs. Observed current source guards missing/reversed boundaries; classification still requires the canonical endpoint facts/public probes before any expectation edit.
+  Impact / schedule: P1 immediately after45.1 before other bounded45 repairs/full23.4/push. Other26 retained unaddressed groups remain owned45; no source-shape refresh outside this group.
   Planned verification tier: focused.
-  Planned focused checks: Exact lazy-owner group, public callback invocation/source probe and direct ArrayPipeline dependents; preserve load/error/callability inverse controls.
+  Planned focused checks: Exact90-assertion group, public source and endpoint value/error/side-effect controls plus direct anonymous/named endpoint normals.
   Planned canonical trigger: Full23.4/final clean push.
-  Planned claim verification: none: Exact authored lazy-owner assertions, no population measurement.
+  Planned claim verification: none: Exact authored regression group and named contract controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10266,7 +10286,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.1` | `pending` | Reconcile the exact lazy-owner callback failure, then continue the remaining27 owned45 groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.2` | `pending` | Reconcile the exact helper-substitution group with endpoint contracts, then continue the other26 owned45 groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

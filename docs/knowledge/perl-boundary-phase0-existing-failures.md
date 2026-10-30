@@ -41,3 +41,9 @@ The replacement selector never installs those snapshots. Its initial lexical-loc
 setup error stops before tests; corrected producer evidence receives the result credit.
 First bounded child45.1 owns the observed missing synthetic callback in the lazy-load
 group; the remaining27 named groups stay with45 for contract-led children.
+
+TYPE45.1 subsequently repairs only the lazy-owner synthetic callback fixture: its
+unchanged40 assertions pass, alongside the native/fresh pipeline consumer6.
+The other27 retained groups remain owned and are not rerun in that slice;45.2
+next reconciles the helper-substitution endpoint assertions. No new full-suite
+state or blanket stale-expectation conclusion follows.

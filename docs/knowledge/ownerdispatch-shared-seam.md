@@ -34,3 +34,13 @@ Spent by: `LinkedSpec.pm`, `Trace`, `Runtime`, `ParserFactory`, `BootstrapSpec`,
 and all 12 `ActionIR::*` owners.
 
 Related: [[linkedspec-pm-is-thin-facade]], [[compilerstate-internal-model]].
+
+TYPE45.1 (2026-10-30): a synthetic callback owner must provide the complete
+current bundle, including ArrayPipeline's `lower_method_value_expr` used for
+dynamic `split_each` delimiters. The retained Phase0 fixture omitted that callback:
+the package did load, then the shared seam correctly rejected its missing member.
+Adding only that fixture callback clears its three failures without changing the
+unchanged40 lazy-owner assertions or weakening production validation. The public
+native/fresh pipeline consumer retains dynamic-delimiter behavior. Evidence is
+`docs/checkpoints/type-operation-inventory/perl-phase0-lazy-owner-intake.json.gz`;
+the separate TYPE45.0 snapshot preserves the earlier whole selected28 failure set.
