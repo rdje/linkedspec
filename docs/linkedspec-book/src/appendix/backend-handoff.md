@@ -3042,7 +3042,9 @@ The next bounded feature58 composes existing unambiguous explicit-value push
 snapshots through reads and compatible methods. Perl's Hash payload producer58.0
 is now repaired through the complete existing typed push owner, retaining local
 returns, snapshots, kinds and function-local scope. Regenerate affected emitted
-Perl parsers. Direct free-push reads still fail compilation, and a
+Perl parsers. Bounded Perl direct reads58.1.1 now use the guarded explicit-value
+source role and current typed reads, preserving the ten-output subset and eight
+excluded AST/error forms. Direct fluent58.1.2 remains next: the original
 last/uppercase chain is ready yet invokes host uppercase. Qualified completed
 snapshots already yield the twelve target results. Each peer is assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,

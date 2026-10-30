@@ -552,13 +552,39 @@ dispatch rule.
 
 A completed append snapshot can be read on Perl with an explicit value binding:
 `saved = push(items, "tail"); saved.coalesce(undef)[-1].uppercase()` yields `"TAIL"`.
-Direct free-`push` result reads and fluent continuations are being completed
-independently across backends. Perl also accepts direct Hash and nested Array/Hash
+Perl supports the direct result reads described below. Direct free-`push` fluent
+continuations and other-backend reads are being completed independently.
+Perl also accepts direct Hash and nested Array/Hash
 payloads in value positions, for example `saved = push(items, {"name":"tail"})`.
 Payload value blocks keep local returns scoped, and later updates preserve the
 saved snapshot. Regenerate affected previously emitted Perl parsers with the
 updated builder. Existing Array end-mutation methods and child-push forms retain
 their contracts.
+
+Perl direct reads use an unambiguous explicit value call:
+
+```text
+Value::
+ I {
+   items = [];
+   out = push(items, " a ")[-1].trim().uppercase();
+   return([out, items]);
+ }
+```
+
+This returns `["A", [" a "]]`. The target updates once and the read consumes its
+updated snapshot. Further selectors retain each selected value's actual kind:
+`push(items, {"k":["head","tail"]})[-1]["k"][-1].uppercase()` returns `"TAIL"`.
+`push(items, false)[-1].not()` returns true, and
+`push(items, {0})[-1].add(1)` returns `1`.
+
+For this direct-read form, the target is a bare working name and the call has
+exactly two arguments. Use an explicit value block for a variable or numeric
+operand, for example `push(items, {payload})[-1]` or `push(items, {0})[-1]`.
+The all-bare and numeric-literal spellings retain their child-push disambiguation.
+Signed and nested reads, missing-path nulls and compatible continuations follow
+the ordinary read rules. Empty strings skip defined-only defaults. A source
+mutation error propagates before a default can replace a missing selection.
 
 ### `items += value`
 - **Signature**: `target += value: expr`

@@ -1727,12 +1727,30 @@ sub _user_function_registry_by_name {
  return ref($registry->{by_name}) eq 'HASH' ? $registry->{by_name} : undef
 }
 
+# Only unambiguous explicit values join the read source role. Bare and numeric
+# operands retain static-child/indexed-child precedence and their result policy.
+sub _ordinary_explicit_push_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') eq 'push' && ($call->{source_method} // 'push') eq 'push'
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 2;
+ my ($target, $value) = @{$call->{args}};
+ return 0 unless ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable'
+  && defined($target->{name}) && $target->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+  && ($target->{source} // '') eq $target->{name} && ref($value) eq 'HASH';
+ return ($value->{kind} // '') =~ /\A(?:string|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o ? 1 : 0
+}
+
 # Static data-helper ownership for ordinary computed reads. Reuse the same
 # known-name resolver that reserves helpers against registered functions, and
 # the semantic value families; trace labels are not a grammar contract. Registered
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
  my ($name, $registry, $call) = @_;
+ return _ordinary_explicit_push_result_source($call) ? 'push' : undef
+  if defined($name) && $name eq 'push';
  # Physical rewind effects stay in the existing ABI; expose one boxed Number.
  if (defined($name) && $name =~ /\Arewind_(?:entry|match)_start\z/o) {
   return undef unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
@@ -4823,7 +4841,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $lower_ast_direct_access_node->($node)
    if $kind eq 'indexed_var' || $kind eq 'nested_access';
   if ($kind eq 'value_access') {
-   my $receiver = $lower_ast_value_node->($node->{receiver}, { bare_scalar_read => 1 });
+   my $receiver = _ordinary_explicit_push_result_source($node->{receiver})
+    ? _lower_push_statement($node->{receiver}{source}, $deps)
+    : $lower_ast_value_node->($node->{receiver}, { bare_scalar_read => 1 });
    return undef unless defined($receiver) && length($receiver);
    my @segments;
    foreach my $segment (@{$node->{segments} || []}) {

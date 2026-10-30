@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: P1 Perl producer58.0 repaired/targeted-checked; bounded direct-read/fluent and independent peer implementations pending.
+Status: P1 Perl producer58.0 and bounded Perl reads58.1.1 targeted-checked; fluent and independent peers pending.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -78,3 +78,24 @@ proof follows. Actual sources/producers/candidates/trace/outputs are retained in
 push-payload-perl-intake.json.gz; canonical new-normal registration queued23.4.1.
 Regenerate affected emitted Perl parsers. New direct reads58.1.1/fluent58.1.2 and
 independent peers remain pending; full23.4 remains separate.
+
+## Bounded Perl read role58.1.1
+
+Canonical two-argument/plain-target/no-trailing push with recognized unambiguous
+value ASTs now feeds existing computed reads. Bare/numeric literal second args,
+invalid raw values and child/arity/temporary/deferred/computed-write rights stay
+excluded. Complete original push ABI materializes the source before current
+typed read/selected dispatch. No producer/read/parser/state/schema changes.
+
+Same6groups4RED/2healthy to6GREEN native/fresh/metadata; five runtime sources plus
+eight syntax-only AST/error controls. Read-only fixture is exactly full12 minus
+fluent target init/call/two returned fields; full12 source/JSON remain unchanged.
+Ten outputs preserve selected kinds/signed/nested/missing paths/order/snapshots.
+Skips/empty defaults/String noncontainer recovery/function locals/unmasked source
+error and existing bound observation pass; eight excluded AST/error results stay.
+Initial freezer255 is expected computed-write rejection setup, guarded resume
+captures that error before baseline. Callable5/deferred22 TAP items/syntax pass.
+Final comment move only preserves all other runtime-tested bytes, final syntax0.
+Actual producers/source/fixtures/results in push-read-perl-intake.json.gz;
+canonical registration queued23.4.1. Regenerate affected emitted Perl. Full target
+and fluent58.1.2/independent peers/full23.4 remain separate.
