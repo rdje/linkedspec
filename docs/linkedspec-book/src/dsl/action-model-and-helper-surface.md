@@ -203,6 +203,30 @@ Invoke child rules and handle results:
 - `call(RuleName)` — call a child rule and capture its return value
 - Combined with `retv = call(Child)` to store child results
 
+The returned value can already feed compatible methods. For example,
+`call(Child).last().uppercase()` produces `"TAIL"` when `Child` explicitly returns
+`["red","tail"]`. To select an arbitrary Array entry or Hash field on Perl,
+currently bind the returned value first:
+
+```text
+Top:: I { value=call(Child); return(value[-1].uppercase()) }
+Child: I { return(["red","tail"]) }
+```
+
+Direct brackets such as `call(Child)[-1].uppercase()` are the next additive
+composition target. They currently fail Perl compilation; other backends are
+assessed independently. Existing child invocation, parser-state restrictions and
+the returned value's typed read rules still apply. This does not add String
+character indexing or dynamic rule names.
+
+A separate parser defect currently affects a bare named-array read when its
+selector assigns a working variable. An existing value prefix avoids that defect:
+`source.coalesce(undef)[{order=cat(order,"I");-1}].uppercase()` returns `"TAIL"`
+for `source=["old","tail"]` and appends `I` to `order`. The closed named-read
+repair is tracked before direct rule-call result reads; actual nested-write
+syntax and diagnostics retain their existing contract.
+
+
 ## How helpers reach emitted code
 
 Every helper call passes through the ActionIR lowering pipeline (see [ActionIR Lowering Mental Model](actionir-lowering-mental-model.md)):

@@ -2939,3 +2939,12 @@ Before starting a new backend, verify:
 - [ ] You've studied the test corpus format and know how compliance is measured.
 - [ ] You understand that `.spec` files are the universal contract — no
       per-backend dialects.
+
+### Rule-call result read composition
+
+Existing rule calls already return values usable by compatible methods. The
+next bounded target adds direct Array/Hash brackets after ordinary static calls.
+Perl primitive/bound/method controls pass, while direct brackets fail compilation.
+A separate closed named-read selector-assignment parser defect is owned as a P1
+prerequisite. Independent backend work preserves invocation/cursor/error/callable
+authority; no peer or portable admission follows from the Perl intake.

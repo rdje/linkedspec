@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe Lua boundary81/Number97/reset102 pass per host; all bounded53 checked; next selection15.
+Rule-call result target54 frozen; six healthy controls/shared13 fluent carrier; P1 closed-selector54.0 next.
 
 ## Latest Completed Slice
 
-Both installed PUC5.5.1/LuaJIT2.1.1788460057 already support frozen structural-boundary String53: strict new81/advancing Number97/reset102 pass per host across native/restored/generated-plan/fresh loaded modules, empty stderr/runtime unchanged/no invented RED. Shared11/primitive/bound/direct/Number controls preserve once-only live cursor effects versus anonymous origin, snapshots/reset, defined-empty lazy suppression, unresolved null/no-op, valid-no-later EOF and normalized skips. Quoted comma stays one atom; multiple rules choose earliest. Literal callback moves caller cursor3/origin0; specific typed pure-function/registered callback errors hold. Exact three-line runner registration/loadfile guards preserve other bytes and 170 input hashes. Fixed JSON is validated before creation. Thirteen actual source observations per host/complete summaries/producers/input bindings retained in boundary-capture-string-lua-intake.json.gz. All five bounded53 children have focused outcomes; full23.4/Perl registration/declared5.4 and remaining prerequisites stay separate. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No unsafe runner/formatter/new interpreter locals/isolated-package/full admission. Next useful fluent selection23.1.15 follows.
+Selection15 freezes existing child-return Array/Hash bracket composition54: six primitive/bound/method controls already pass native/fresh, while direct Array/Hash selectors fail compilation with raw1/unready. Existing early call ABI is healthy; governed computed-call source role excludes call. Shared13 prospective target fails directly but passes through existing bound/fluent carrier, preserving once/order/live-origin/empty/false/zero/String0/null recovery/nested signed reads/missing selector/normalized skips. P1 named closed-selector defect is separately reproduced: source[{assignment;-1}] is mistaken for unclosed nested write; identical fluent carrier passes. Own prerequisite54.0 before Perl54.1 and independent54.2-.5. All546 activation inputs bound, no production change. Actual instrument epochs retained: substitution exception then blessed diagnostic serialization refusal, guarded final producer, two calibration binding spelling fixes and unsupported character-index expectation superseded before freeze; no false RED/admission credit. Target/fixture/card/book/roadmap/task/live/resume/history align, actual producers/inputs/results retained in rule-call-result-selection-intake.json.gz. No new call arity/lookup/scope/selector coercion/callable/deferred/schema or portable grant.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.1.15 from clean bounded structural-boundary53 coverage. Reconcile current helper/signature/result-role inventory and implemented families using Knowledge Map/canonical records first. Assess remaining rule-call result and other helper/effect-returning source continuations with finite public primitive/bound/direct/effect controls on proven carriers, preserving child invocation/frame/cursor/error/function/context authority; named capture sources already have early value ownership. Distinguish actual gaps from healthy forms, freeze one useful safe target and independent backend/prerequisite owners before production. Focused compile/quick check/docs/commit cadence, no full admission or maintenance pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.0 from clean selection15. Read rule-call-result-selection.md P1 closed-selector prerequisite and retained minimal source/native/fresh/substitution/structured diagnostic. Reproduce a normal before production; fix only _find_nested_write_assignment_eq recovery treating a properly closed named-read selector assignment as an unclosed write delimiter. Preserve actual nested writes/unclosed/root diagnostics, named lookup/effects/source spans, ordinary/deferred/function grammar and existing read guards. Focused new RED/GREEN and nearest write/parser checks/docs/book/commit, then Perl54.1 governed rule-call result selectors. Do not alter shared13 oracle or call/frame/format authority; no routine full suite/maintenance pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.15` — Rule-call result target54 frozen; six healthy controls/shared13 fluent carrier; P1 closed-selector54.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.5` — Safe Lua boundary81/Number97/reset102 pass per host; all bounded53 checked; next selection15.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.4` — Julia boundary65/advancing Number65/reset70 pass, runtime unchanged; safe Lua53.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.53.3` — Dart boundary6/advancing Number6/reset3 pass, runtime unchanged; Julia53.4 independently next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.1.15 from clean bounded structural-boundary5
 - `TYPE-REFERENCE-BOOK.1.2.23.1.13` — Advancing capture Number52 frozen from actual direct gaps/healthy native effects; Perl52.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.5` — Safe Lua advancing102/readonly100/reset102 pass per host; all bounded51 checked; next selection23.1.13.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.4` — Julia advancing String70/readonly60/reset70 pass without runtime change; safe Lua51.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.51.3` — Dart advancing String6/readonly6/reset3 pass without runtime change; independent Julia51.4 next.
 
 ## History
 
