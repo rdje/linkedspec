@@ -2963,7 +2963,10 @@ authority; no peer or portable admission follows from the Perl intake.
 The next bounded target lets existing zero-argument gap/slot record helpers feed
 ordinary Hash brackets directly. Perl now admits the two existing zero-argument record sources through its typed
 field reader and unchanged readonly helper ABI; native/fresh field/default/guard/
-context-error/function/deferred controls pass. An established completed fluent-record source
+context-error/function/deferred controls pass. Rust also applies the existing
+selected-kind guard to these two zero-argument record sources; native/restored/
+generated-plan field/default/guard/context/function/arity controls pass. Rebuild
+Rust applications with the updated runtime. An established completed fluent-record source
 supplies the computed-read oracle; legacy named first-consumer policy stays
 qualified. Independent backend work preserves gap owner/phase/lifecycle/metadata/
 typed errors/function/deferred and generated-format authority.

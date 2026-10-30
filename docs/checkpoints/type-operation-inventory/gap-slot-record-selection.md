@@ -1,7 +1,7 @@
 # Ordinary gap and incoming-slot record field selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.16; family23.3.55.
-Status: bounded Perl55.1 repaired/targeted-checked; independent peers pending.
+Status: bounded Perl55.1/Rust55.2 repaired/targeted-checked; Dart/Julia/safe Lua pending.
 
 ## Established source authority
 
@@ -93,3 +93,7 @@ Actual source/normal/producers/epochs/inputs/results retained in
 gap-slot-record-perl-intake.json.gz. No new gap/context/schema or full admission.
 Requested safe cleanup46.2 precedes independent Rust55.2; normal registration23.4.1
 remains separate.
+
+## Bounded Rust55.2 implemented
+
+Rust already parses these records and fields. The shared target exposes an actual-kind guard gap: selected String container consumers return[] and execute BAD on all three native/restored/generated-plan routes. A four-line role admits only existing zero-argument entry_slot/gap_span to the existing guard. Remaining engine/helper/runtime/parser/state/ABI/schema bytes stay exact. Calibrated unchanged7groups6healthy/1RED to7GREEN, nearest computed6/gap-unit3/owned fmt pass. Values/zero/missing/signed recovery/null slot/typed unavailable gap errors/function restrictions/explicit arguments and extra-arity failures hold. Initial helper-name-in-message assumption is superseded before production; existing Display emits only the error code, and initial epochs remain without defect credit. Actual sources/normal/producers/inputs/results are retained in gap-slot-record-rust-intake.json.gz. Rebuild applications with the updated Rust runtime; independently assess Dart55.3 next. No full context or portable admission.

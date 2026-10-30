@@ -8,7 +8,7 @@ answers:
   - "why does a bound named gap record String take return an empty Array"
   - "which task owns gap and slot record computed selection"
 date: 2026-10-30
-status: bounded Perl55.1 repaired/targeted-checked; independent peers pending
+status: bounded Perl55.1/Rust55.2 repaired/targeted-checked; Dart/Julia/safe Lua pending
 tags: [perl, gap, slot, records, selection, fluent, source-role, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.16; gap-slot-record-selection-intake.json.gz retains four healthy/two failed public controls, actual legacy first-consumer substitution and healthy existing computed-record carrier/direct twin."
 reverify: "Recover probe_gap_record_result_assessment.pl/finite cases from gap-slot-record-selection-intake.json.gz; project Perl wrapper with explicit local output. No historical source swaps."
@@ -44,3 +44,5 @@ falsely ready function field syntax now has correct forbidden-helper metadata.
 gap-slot-record-perl-intake.json.gz retains all original/final epochs/producers/
 inputs. Remaining lowering/gap runtime/parser/state/fields/schema bytes exact.
 Requested cleanup46.2 then independent Rust55.2; no peer/full admission follows.
+
+Rust55.2 independently repairs the existing selected-kind guard rather than parsing. Direct fields work; incompatible selected String consumers return[] and execute BAD on all three routes. [[rust-gap-slot-record-selection-guard]] owns the four-line zero-argument role and unchanged7groups6healthy/1RED to7GREEN proof, with computed6/gap-unit3/fmt. No other runtime or peer repair is inferred.

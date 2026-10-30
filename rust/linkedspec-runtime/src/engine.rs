@@ -8191,6 +8191,10 @@ impl Engine {
                 if self.spec.find_function(name).is_some() {
                     return true;
                 }
+                // Readonly gap/slot records share ordinary selected-value guards.
+                if matches!(name.as_str(), "entry_slot" | "gap_span") {
+                    return args.is_empty();
+                }
                 // Static child returns use ordinary selected-value guards.
                 // Preserve quoted/dynamic calls and legacy bound-call policies.
                 if name == "call" {
