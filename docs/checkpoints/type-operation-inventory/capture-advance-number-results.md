@@ -1,7 +1,7 @@
 # Anonymous advancing capture Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.13; implementation family23.3.52.
-Status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending.
+Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending.
 
 ## Existing authority and actual gap
 
@@ -102,3 +102,15 @@ hold. JSON reporter accounts for every nonhidden/no-skip identity and completion
 Actual source/producer/output/input bindings retained in capture-advance-number-dart-intake.json.gz.
 No isolated emitted/full suite/context/domain/portable admission. Julia52.4
 independently follows.
+
+## Bounded Julia52.4
+
+Julia already supports the unchanged target. Strict new65/advancing String70/
+readonly Number75/reset70 pass native/reconstructed SpecFile/generated-plan/
+fresh emitted Module under --depwarn=error with empty stderr, runtime unchanged.
+Shared11/widths/endpoints, once/snapshots/normalized guards, zero/missing/reversed,
+named source and caller callback/function fences hold. One exact runner include
+registers the normal. Thirteen actual observations/complete summaries/producers/
+input bindings retained in capture-advance-number-julia-intake.json.gz. Same-
+process fresh Module is not isolated package proof; no full23.4 admission. Safe
+Lua52.5 independently follows.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Julia52.4 next.
+Julia advancing Number65/String70/readonly Number75/reset70 pass, runtime unchanged; safe Lua52.5 next.
 
 ## Latest Completed Slice
 
-Dart independently already supports frozen advancing Number52:21 focused tests comprise new6/advancing String6/readonly Number6/reset3 and pass native/restored SpecFile/generated-plan, runtime unchanged/no invented RED. Shared11/three bound sources preserve widths1/4/8 and origin6/6/10 versus live6, once/snapshots/normalized BAD skip, defined-zero lazy suppression, missing/reversed/no-advance and Number-String-Array-signed flow. Named width source updates its separate mark; literal callback gives Number4/origin3/live0, with source-specific typed pure-function/registered callback restrictions. Fatal new-test analysis/format pass; 194 existing input hashes stay exact. Actual JSON reporter accounts for every nonhidden/no-skip identity and terminal success; formatted normal/builder/source/results/input bindings retained in capture-advance-number-dart-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No isolated emitted/full suite/context/domain/portable or vocabulary/shape/schema/SDK debt movement. Independent Julia52.4 next.
+Julia independently already supports frozen advancing Number52: strict new65/advancing String70/readonly Number75/reset70 pass native/reconstructed SpecFile/generated-plan/fresh emitted Module with empty stderr, runtime unchanged/no invented RED. Shared11/three bound sources preserve widths1/4/8 and origin6/6/10 versus live6, once/snapshots/normalized BAD skip, defined-zero lazy suppression, missing/reversed/no-advance and Number-String-Array-signed flow. Named width source updates its separate mark; literal callback returns Number4/origin3/live0 and all three pure-function/registered callback source-specific typed errors hold. One exact runner include registers the normal; 166 other bound input hashes stay exact. Actual thirteen source observations/complete summaries/producers/input bindings retained in capture-advance-number-julia-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. Fresh Module is same-process loading, not isolated-package proof; no full runner/context/domain/portable or vocabulary/shape/schema movement. Independent safe Lua52.5 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.4 independently from clean Dart52.3. Read frozen advancing Number52/shared11 fixture and current Julia Number/endpoints/origin-live/once/zero/named-source/function/callback/preflight/runner policies. Establish native/reconstructed SpecFile/generated-plan/fresh Module baseline before runtime edits; preserve healthy behavior and repair actual ordinary continuation gaps only. Strict compilation/quick new and nearest String/readonly Number/reset checks, exact runner registration/docs/commit, then safe Lua52.5. No routine full runner or inferred peer failure.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.5 independently from clean Julia52.4. Read frozen Number52/shared11 and safe installed PUC/LuaJIT Number/effect/endpoint/zero/named-source/function/callback/preflight/runner policies. Establish native/restored/generated-plan/fresh-module baselines on safe authored fixtures/loadfile only before production. Preserve compatible behavior; fix actual ordinary Number gaps only. New normal/exact three-line runner registration/quick nearest String/readonly Number/reset checks/docs/commit, then next useful fluent selection. No unsafe full runner/formatter/declared5.4 or exhaustive matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.52.4` — Julia advancing Number65/String70/readonly Number75/reset70 pass, runtime unchanged; safe Lua52.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.3` — Dart advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Julia52.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.2` — Rust advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Dart52.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.1` — Perl advancing Number13 plus selected String2/readonly Number2/reset2 pass; independent Rust52.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.52.4 independently from clean Dart52.3. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` — Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` — Dart capture String6/Number6/reset3 pass without runtime change; independent Julia50.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.2` — Rust capture String6/Number6/reset3 pass without runtime change; independent Dart50.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.50.1` — Perl capture String12/Number7/reset2 pass; original native bodies exact; independent Rust50.2 next.
 
 ## History
 

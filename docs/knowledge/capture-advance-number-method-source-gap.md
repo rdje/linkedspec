@@ -7,7 +7,7 @@ answers:
   - "does capture_take_until_cursor_len move the live cursor"
   - "which task owns advancing capture Number result composition"
 date: 2026-10-30
-status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending
+status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
 tags: [perl, capture, number, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.13; capture-advance-number-selection-intake.json.gz retains nine public controls, six healthy/three direct failures and independent eleven-coordinate bound/direct target twins."
 reverify: "Recover probe_capture_advance_number_assessment.pl and finite cases from capture-advance-number-selection-intake.json.gz; use the project Perl wrapper with explicit project-local diagnostic output. No historical source swaps."
@@ -45,3 +45,8 @@ Dart52.3 independently already supports frozen52: new6/String6/readonly Number6/
 reset3 pass native/restored/plan, fatal analysis/format and runtime unchanged.
 [[capture-advance-number-dart-compatibility]] retains exact contexts/effects and
 JSON-reporter identity proof; Julia52.4 independently follows.
+
+Julia52.4 independently already supports frozen52: strict new65/String70/readonly
+Number75/reset70 pass native/reconstructed/plan/fresh Module with empty stderr,
+runtime unchanged/normal registered. [[capture-advance-number-julia-compatibility]]
+retains exact contexts/effects/limits; safe Lua52.5 independently follows.
