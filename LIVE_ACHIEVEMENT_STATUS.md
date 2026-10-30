@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust advancing String6/readonly6/reset3 pass without runtime change; Dart51.3 independently next.
+Dart advancing String6/readonly6/reset3 pass without runtime change; independent Julia51.4 next.
 
 ## Latest Completed Slice
 
-Rust independently already supports frozen advancing String51: new6/readonly6/reset3 tests pass native/restored CompiledSpec/generated-plan routes without runtime edits or invented RED. Shared9 and three bound/native sources retain origin6/6/10 versus live6, once-only snapshots, normalized bad-operand skips, empty/missing/no-advance/String0 and String-to-Number9. Named capture_take(begin) updates its mark while anonymous origin stays2. Literal callback advances caller origin3 while live cursor0 remains; invocation inside apply keeps source-specific function-state error, as do all three pure-function sources. Owned-package formatting passes and 499 existing input hashes stay exact. Actual formatted normal/builder/source/output/input bindings are retained in capture-advance-text-rust-intake.json.gz; dependency build warnings remain opaque upstream-owned evidence. Book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No source/schema/shape/vocabulary change, isolated emitted/full-suite/context/domain/portable admission or peer failure inference. Dart51.3 independently next.
+Dart independently already supports frozen advancing String51: focused15 tests comprise new6/readonly6/reset3 and pass native/restored SpecFile/generated-plan routes without runtime changes or invented RED. Shared9/three bound sources preserve origin6/6/10 versus live6, once-only snapshots/effects, normalized skips, empty/missing/no-advance/String0 and Number9. Named capture_take(begin) preserves separate mark versus anonymous origin. Literal callback advances caller origin3 while live0 stays; all three pure-function sources and callback invocation inside apply retain source-specific typed runtime/generated errors. Fatal new-test analysis and format pass; 193 existing bound input hashes remain exact. Actual JSON reporter validates every nonhidden/no-skip completion identity plus final success. Formatted normal/builder/source/results/input bindings retained in capture-advance-text-dart-intake.json.gz; book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No isolated emitted/full suite/context/domain/portable admission or vocabulary/shape/schema/SDK debt movement. Independent Julia51.4 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.51.3 independently from clean Rust51.2. Read frozen advancing String51 fixture and current Dart producer/effect/origin-live/once/overload/function/callback/preflight policies; establish native/restored SpecFile/generated-plan baseline before production. Repair actual continuation gaps only, preserving healthy state and existing contexts. Run fatal analysis/format/quick target plus readonly/reset checks/docs/commit; Julia51.4 follows. No routine full suite.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.51.4 independently from clean Dart51.3. Read frozen advancing String51/shared fixture and Julia producer/endpoints/origin-live/once/preflight/overload/function/callback policies; establish native/reconstructed SpecFile/generated-plan/fresh Module baseline before production. Repair actual continuation gaps only, retaining healthy behavior. Run strict compilation/quick new plus readonly/reset controls, register normal/update docs/commit, then safe Lua51.5. No routine full runner or peer-policy inference.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.51.3` — Dart advancing String6/readonly6/reset3 pass without runtime change; independent Julia51.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.2` — Rust advancing String6/readonly6/reset3 pass without runtime change; Dart51.3 independently next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.51.1` — Perl advancing String14/readonly12/reset2 pass; original bodies/effects retained; independent Rust51.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.12` — Advancing capture String51 frozen from actual direct gaps and healthy effect controls; Perl51.1 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.51.3 independently from clean Rust51.2. Re
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.22` — Receiver blocks18/public8 pass with unchanged production; one current-only frozen28 reassessment next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.21` — Typed mutation39/public4 sources pass; only retained receiver trailing-block group remains.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.20` — Bare copy17/public5 preserve null versus explicit containers; native accumulators retained; mutation slots next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.19` — Tagged-record7/public2/direct36 align with existing eager producer; bare aggregate reads next.
 
 ## History
 

@@ -1,7 +1,7 @@
 # Anonymous advancing capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.12; implementation family23.3.51.
-Status: Perl51.1 repaired/Rust51.2 compatible and targeted-checked; remaining peers pending.
+Status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending.
 
 ## Accepted sources and actual distinction
 
@@ -89,3 +89,15 @@ callback source-specific errors hold. Existing input bytes remain exact. Actual
 source/producer/outputs are retained in capture-advance-text-rust-intake.json.gz;
 opaque dependency warnings remain upstream-owned. No independently compiled
 emitted/full-context/portable admission. Dart51.3 independently follows.
+
+## Bounded Dart51.3
+
+Dart already supports the unchanged target. New6/readonly6/reset3 pass native/
+restored SpecFile/generated-plan, fatal analysis/format, with runtime unchanged.
+Effects/once/snapshots, separate origin and cursor, empty/missing/String0/Number9,
+normalized guards and named overload hold. Literal callback updates caller
+origin3/live0; pure-function/registered callback typed errors stay specific.
+Actual JSON reporter accounts for every nonhidden/no-skip test and completion.
+Exact source/producer/output/input bindings are in
+capture-advance-text-dart-intake.json.gz. No isolated emitted/full-context/
+portable admission. Julia51.4 independently follows.

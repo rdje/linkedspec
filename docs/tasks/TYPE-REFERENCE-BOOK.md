@@ -10969,7 +10969,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.50.5 - preserve safe Lua readonly capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.51`
-  Status: `in_progress` / Perl51.1 repaired/Rust51.2 compatible and targeted-checked; remaining peers pending
+  Status: `in_progress` / bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending
   Goal: Existing anonymous advancing String helper results compose through ordinary compatible methods with native effect and endpoint authority unchanged.
   Authority: capture-advance-text-results.md/prospective fixture; no named overload, Number counterpart, callback/deferred, preflight/coordinate/schema or full23.4 grant.
 
@@ -11016,14 +11016,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.51.2 - preserve Rust advancing capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.51.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete Dart anonymous advancing capture String method composition under frozen51.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.51.2; capture-advance-text-results.md/shared prospective fixture.
   Acceptance: Preserve original three zero-argument producer bodies/tags/coordinate/endpoint/null/advance/once-order behavior; support compatible default/String/Array/signed selected-String/Number flow. Distinguish anonymous origin from live cursor; empty/missing and normalized operand skips preserve source effects. Keep named capture_take(name), existing direct first-consumer/preflight/function/callback/deferred/copy/format policies. Reproduce own baseline before production and retain healthy controls. Safe Lua named installed hosts/fixtures/loadfile only; no unsafe full runner/formatter or declared5.4 claim.
-  Planned verification tier: focused.
-  Planned focused checks: Shared/finite native-generated/restored/fresh routes as supported; original bodies/effects, empty/missing/once/snapshot/overload/function/shape controls, direct readonly/reset compatibility and local compile/format/book/history/manual continuity. No full suite/matrix.
-  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
-  Planned claim verification: none: Finite authored feature/preservation controls, no population or comprehensive-context measurement.
+  Verification tier: `focused`
+  Focused checks: Shared/finite native-generated/restored/fresh routes as supported; original bodies/effects, empty/missing/once/snapshot/overload/function/shape controls, direct readonly/reset compatibility and local compile/format/book/history/manual continuity. No full suite/matrix.
+  Canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no population or comprehensive-context measurement.
+
+  Activation: clean `b8953a64aff66e2eb8c419f6a2258a1ce939ace3`; prior jobs terminal/brief0. Frozen51/current Dart public routes/effect/overload/shape/function/callback policies and readonly/reset normals read. Independent baseline first, no inferred failure/runtime write/full gate.
+  - [x] **REPRODUCE / ISSUE**: Independent Dart advancing-result/effect evidence under frozen51.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Independent Dart advancing-result/effect evidence under frozen51.
+  - [x] **FIX**: Independent Dart advancing-result/effect evidence under frozen51.
+  - [x] **ADDRESSED (verified)**: Independent Dart advancing-result/effect evidence under frozen51.
+  - [x] **NO REGRESSION**: Independent Dart advancing-result/effect evidence under frozen51.
+  - [x] **LOCKSTEP**: Independent Dart advancing-result/effect evidence under frozen51.
+
+  Result: Dart independently already supports frozen advancing String51: focused15 tests comprise new6/readonly6/reset3 and pass native/restored SpecFile/generated-plan routes without runtime changes or invented RED. Shared9/three bound sources preserve origin6/6/10 versus live6, once-only snapshots/effects, normalized skips, empty/missing/no-advance/String0 and Number9. Named capture_take(begin) preserves separate mark versus anonymous origin. Literal callback advances caller origin3 while live0 stays; all three pure-function sources and callback invocation inside apply retain source-specific typed runtime/generated errors. Fatal new-test analysis and format pass; 193 existing bound input hashes remain exact. Actual JSON reporter validates every nonhidden/no-skip completion identity plus final success. Formatted normal/builder/source/results/input bindings retained in capture-advance-text-dart-intake.json.gz; book/target/cards/map/task/roadmap/live/resume/history/manual checks align. No isolated emitted/full suite/context/domain/portable admission or vocabulary/shape/schema/SDK debt movement. Independent Julia51.4 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.51.3 - preserve Dart advancing capture String method compatibility`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.51.4`
   Status: `pending`
@@ -11051,7 +11062,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.51.3` | `pending` | Independently assess Dart advancing capture String composition under frozen51. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.51.4` | `pending` | Independently assess Julia advancing capture String composition under frozen51. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
