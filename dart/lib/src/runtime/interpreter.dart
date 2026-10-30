@@ -4922,7 +4922,7 @@ final class LinkedSpecRuntimeEngine {
       case 'rewind_match_start':
         final before = context.cursorCodeUnit;
         final stackBefore = context.cursorStack.length;
-        context.rewindToLocalMatchStart(ruleLabel, helperName);
+        final position = context.rewindToLocalMatchStart(ruleLabel, helperName);
         _traceCursorControl(
           context,
           ruleLabel,
@@ -4930,11 +4930,11 @@ final class LinkedSpecRuntimeEngine {
           before: before,
           stackBefore: stackBefore,
         );
-        return null;
+        return positionalArgs.isEmpty ? position : null;
       case 'rewind_entry_start':
         final before = context.cursorCodeUnit;
         final stackBefore = context.cursorStack.length;
-        context.rewindToEntryMatchStart(ruleLabel, helperName);
+        final position = context.rewindToEntryMatchStart(ruleLabel, helperName);
         _traceCursorControl(
           context,
           ruleLabel,
@@ -4942,7 +4942,7 @@ final class LinkedSpecRuntimeEngine {
           before: before,
           stackBefore: stackBefore,
         );
-        return null;
+        return positionalArgs.isEmpty ? position : null;
       case 'call':
         if (positionalArgs.isEmpty) {
           return null;
@@ -5431,6 +5431,8 @@ final class LinkedSpecRuntimeEngine {
           'cursor_col',
           'cursor_rest',
           'cursor_rest_len',
+          'rewind_entry_start',
+          'rewind_match_start',
         }.contains(expression.name);
   }
 
@@ -5445,8 +5447,11 @@ final class LinkedSpecRuntimeEngine {
         return true;
       }
       final helper = canonicalActionHelperName(receiver.name);
-      // Only existing canonical zero-argument record sources join this guard.
-      if (helper == 'entry_slot' || helper == 'gap_span') {
+      // Only existing canonical zero-argument sources join this guard.
+      if (helper == 'entry_slot' ||
+          helper == 'gap_span' ||
+          helper == 'rewind_entry_start' ||
+          helper == 'rewind_match_start') {
         return receiver.name == helper &&
             (receiver.sourceMethod ?? receiver.name) == helper &&
             !receiver.trailingBlockArg &&
@@ -9667,22 +9672,30 @@ final class _RuntimeExecutionContext {
     }
   }
 
-  void rewindToLocalMatchStart(String ruleLabel, String projection) {
+  int? rewindToLocalMatchStart(String ruleLabel, String projection) {
     final target = registers.localMatch?.codeUnitStart;
-    if (target == null ||
-        typedPositionFromCodeUnit(target, ruleLabel, projection) == null) {
-      return;
+    if (target == null) {
+      return null;
+    }
+    final position = typedPositionFromCodeUnit(target, ruleLabel, projection);
+    if (position == null) {
+      return null;
     }
     _setCursorCodeUnit(target);
+    return position.offset;
   }
 
-  void rewindToEntryMatchStart(String ruleLabel, String projection) {
+  int? rewindToEntryMatchStart(String ruleLabel, String projection) {
     final target = registers.entryMatch?.codeUnitStart;
-    if (target == null ||
-        typedPositionFromCodeUnit(target, ruleLabel, projection) == null) {
-      return;
+    if (target == null) {
+      return null;
+    }
+    final position = typedPositionFromCodeUnit(target, ruleLabel, projection);
+    if (position == null) {
+      return null;
     }
     _setCursorCodeUnit(target);
+    return position.offset;
   }
 
   void _setCursorCodeUnit(int codeUnitCursor) {

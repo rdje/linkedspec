@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust four-control zero arity repaired: new8/parent9/gap7/fmt pass; Dart56.3 next.
+Dart canonical-zero rewind Number result repaired: new10/gap6/computed7/analysis/normal fmt pass; immediate arity56.3.0 next.
 
 ## Latest Completed Slice
 
-Rust cursor-control arity56.2.0 is repaired: save_cursor, restore_cursor, rewind_entry_start and rewind_match_start reuse the existing eager zero-argument validator before operands/helper dispatch, after the original pure-function parser-state fence. Phase-locked new8groups4healthy/4RED now pass; all20 invalid programs retain60 native/restored/generated-plan observations with typed helper_arity_mismatch, actual counts and native/restored diagnostic fields. Trapping operands previously enter entry_text and now reject at the outer helper. Eight function-fence programs, four valid ASCII/Unicode/empty-stack/prefix controls, unrelated logical arity and four exact compiler trailing-body rejections remain byte-equal observations. Parent rewind9 and gap7 pass; parent final legacy acceptance test explicitly replaced by four-form rejection in a retained epoch, eight positive groups unchanged. Owned fmt0; 504 other activation inputs exact, only validator names/obsolete comment and parent final test changed. Actual source/producers/setup calibrations/phase-locked RED/GREEN/results retained in cursor-control-arity-rust-intake.json.gz. Book/card/target/map/task/roadmap/live/resume/history align. Rebuild Rust runtime/apps. No public cursor-after-error telemetry, isolated emitted, dependency warning-free, schema/stack/anchor/iteration/peer/full admission claim. Independent Dart56.3 next.
+Dart56.3 independently exposes discarded rewind results and missing typed source roles. Same10groups5RED/4healthy-positive/1legacy-malformed-preservation now pass; nine positive groups plus the explicitly separated legacy group. Original private setters retain target/validation/physical movement and return the cached character position Number; helper tracing stays, canonical zero dispatch/source/selected-read guards expose it. Shared12/ASCII/Unicode positions1/3/zero laziness/incompatible operand skips/source2 before consuming7/sum9/with Array/signed text/absent-anchor null and function fences pass native/restoredSpec/generated-plan. Thirteen actual result observations and two function fences retained; initial unreached function observer calibrated before production with no RED credit. New10/gap6/computed7 yields23 non-skipped JSON completions; changed-owner/new-normal fatal analysis and new-normal format0. 199 other activation inputs exact; actual source/producers/normal/setup/RED-GREEN/results retained in cursor-rewind-result-dart-intake.json.gz. Four surplus rewind calls still null/move, no supported-shape credit; P1 child56.3.0 repairs all four cursor controls next before Julia56.4. Book/card/target/map/task/roadmap/live/resume/history align; rebuild runtime/apps. No isolated emitted/full shape/error-phase/context/portable/schema/iteration/deferred or whole-file SDK-format admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.3 from clean Rust result56.2/arity56.2.0. Read frozen rewind Number target/shared fixture and Perl/Rust result cards plus Dart canonical cursor/computed-read owner and nearest normals. Independently baseline finite primitive/bound/direct/zero/order/effect/snapshot/kind/function/shape controls on native/restored/plan/emitted routes before production; preserve healthy behavior. Implement only existing two canonical-zero rewind Number source roles/guards if needed, with original physical/stack/anchor/error/function authority. Compile/quick targeted/analysis/format/book/docs/commit, then Julia56.4. No full CI, new schema/state or ordinary progress policy.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0 after clean Dart56.3. Read new Dart rewind card/retained four accepted malformed forms, current shared gap zero-arity validator/function priority/trailing compiler contract and all four cursor controls. New finite normal independently baseline positional/keyword/two/trapping/selected/function/valid0/phase before production. Reuse existing helper_arity_mismatch diagnostics before physical effects; preserve function resolution/state priority and trailing compile phase. Replace parent legacy final test in retained new epoch, preserve nine positive groups. Compile/quick new/nearest/analysis/new-format/book/docs/commit, then Julia56.4. No routine full CI or state/schema/progress-policy change.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.56.3` — Dart canonical-zero rewind Number result repaired: new10/gap6/computed7/analysis/normal fmt pass; immediate arity56.3.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.2.0` — Rust four-control zero arity repaired: new8/parent9/gap7/fmt pass; Dart56.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.2` — Rust canonical-zero result repair: eight positive/one malformed-preservation groups, computed6/cursor5/fmt pass; immediate arity56.2.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.1` — Perl rewind result4healthy/5RED to9GREEN; eager10/deferred22/syntax/16 identical rewrites pass; independent Rust56.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.3 from clean Rust result56.2/arity56.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.16` — Gap/slot record55 frozen; four healthy/two direct failures, computed carrier passes; Perl55.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.5` — Safe Lua selected-call guard39healthy/4RED→43GREEN per host; boundary81/computed pass; all bounded54 checked; next selection16.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.4` — Julia selected-call guard31healthy/4RED→35GREEN; computed25/boundary65/strict compile pass; safe Lua54.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.54.3` — Dart selected-call guard5healthy/1RED→6GREEN; computed7/boundary6/analysis/format pass; independent Julia54.4 next.
 
 ## History
 

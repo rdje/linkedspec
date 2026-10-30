@@ -666,7 +666,11 @@ arguments or running the helper. Adding a trailing codeblock fails during
 compilation. The existing parser-state restriction in pure functions takes
 priority over argument validation.
 
-Other backends are assessed independently. Ordinary Perl eager blocks and `with`
+Dart now also returns character-based Numbers from successful zero-argument
+rewinds and supports the same guarded continuations and Array recovery. Missing
+anchors still yield null. Rebuild applications with the updated Dart runtime.
+Dart surplus-argument validation is the next owned repair; use zero-argument
+forms. Julia and Lua are assessed independently. Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns
 local. For example:
 

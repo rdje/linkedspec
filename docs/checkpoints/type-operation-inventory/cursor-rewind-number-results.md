@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart/Julia/safe Lua pending.
+Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 next before Julia/safe Lua.
 
 ## Existing authority
 
@@ -128,3 +128,17 @@ source/evidence; eight positive groups stay exact. All60 invalid route outputs,
 function/valid0/Unicode/logical/trailing preservation and actual producers are in
 cursor-control-arity-rust-intake.json.gz. Earlier56.2 acceptance notes are historical;
 they grant no supported invalid form. Rebuild runtime/apps; Dart56.3 is next.
+
+## Dart56.3 bounded result implementation
+
+Original setters already moved correctly but returned void; dispatch discarded
+Number results. They now return the cached validated character offset after the
+original physical write, with original tracing. Canonical-zero direct/selected
+source roles use existing kind guards. Same10groups5RED/4positive-healthy/1legacy
+malformed preservation pass; new10/gap6/computed7, focused fatal analysis/new-
+normal format pass. All13 result observations/two function fences on native/
+restoredSpec/plan, shared12/Unicode/zero/order/snapshot/absence survive. Four
+surplus rewind forms remain null/moving only until immediate P1 child56.3.0;
+no healthy arity credit. Actual producers/setup/RED-GREEN/inputs retained in
+cursor-rewind-result-dart-intake.json.gz. Rebuild runtime/apps. No whole-file
+SDK-format/isolated emitted/full admission; Julia56.4 follows the arity repair.
