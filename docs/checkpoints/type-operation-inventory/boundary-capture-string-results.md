@@ -1,7 +1,7 @@
 # Structural boundary capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.14; implementation family23.3.53.
-Status: bounded target frozen; independent implementations pending.
+Status: Perl53.1 repaired/targeted-checked; independent peers pending.
 
 ## Established producer authority
 
@@ -61,3 +61,20 @@ earlier compatible named-String intake are retained together in
 boundary-capture-fluent-selection-intake.json.gz. No production change here.
 Full source/domain/context/portable23.4, pressure20.1, Perl registration and
 declared Lua5.4 remain separate under focused per-leaf feature cadence.
+
+## Bounded Perl53.1
+
+Early value lowering reuses the unchanged native boundary engine and governed
+label-source agreement/shared quoting. Six original printed bodies stay exact.
+Initial11 has8 RED/3 healthy then11 GREEN; candidate grammar regression in3 of
+quoted28 is repaired with final selected feature3/quoted28 passing. No final11
+combined rerun is claimed. Missing slots keep exact activation canonical raw
+fallback/eval phase and pure serializer/oracles unchanged. Final fresh-process
+read-only original-module control validates Git bytes/actual code-object origins
+before-after Get, primitive success and old direct failure; unconsulted @INC/
+incorrect GV-origin attempts are excluded. Actual epochs/controls/producers/inputs
+retained in boundary-capture-string-perl-intake.json.gz. Shared11 effects/empty/
+missing/EOF/snapshot/reset/guards/function metadata hold; initial Number2/reset2
+pass. Older emitted direct-chain modules still fail: regenerate affected ones.
+No new arity/escape/callback/schema/portable grant. Registration23.4.1 and
+independent Rust53.2 remain separate.

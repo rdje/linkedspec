@@ -739,6 +739,22 @@ sub _static_named_capture_value_expr {
 
 # Native rules carry regex metadata; generated rules retain CODE handlers and
 # read their full regex arrays from the descriptor's private catalog.
+# Native contracts and early ordinary values quote the same decoded label
+# atoms before invoking the sole boundary engine. Empty labels remain omitted.
+sub _capture_until_boundary_labels_value_expr {
+ my ($labels) = @_;
+ return undef unless ref($labels) eq 'ARRAY';
+ my @boundary_labels;
+ for my $label (@$labels) {
+  return undef unless defined($label) && !ref($label);
+  my $boundary = $label;
+  $boundary =~ s/\\/\\\\/g;
+  $boundary =~ s/'/\\'/g;
+  push @boundary_labels, "'$boundary'" if length($boundary);
+ }
+ return _capture_until_boundary_value_expr(join(', ', @boundary_labels))
+}
+
 sub _capture_until_boundary_value_expr {
  my ($labels) = @_;
  return join(' ',
@@ -1249,14 +1265,7 @@ sub _build_capture_and_cursor_contracts {
     $code =~ s{
      \bcapture_until_boundary\s*\(\s*(?<boundaries>(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+)(?:\s*,\s*(?:"(?:\\.|[^"])*"|'(?:\\.|[^'])*'|\w+))*)\s*\)
     }{
-     my @boundary_labels;
-     for my $boundary (@{LinkedSpec::ActionIR::BoundaryLabels::_decode_recognized_labels($+{boundaries})}) {
-      $boundary =~ s/\\/\\\\/g;
-      $boundary =~ s/'/\\'/g;
-      push @boundary_labels, "'$boundary'" if length($boundary);
-     }
-     my $labels = join(', ', @boundary_labels);
-     _capture_until_boundary_value_expr($labels)
+     _capture_until_boundary_labels_value_expr(LinkedSpec::ActionIR::BoundaryLabels::_decode_recognized_labels($+{boundaries}))
     }gex;
     return $code
    },

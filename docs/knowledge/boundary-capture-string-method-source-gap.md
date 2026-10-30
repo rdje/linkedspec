@@ -7,7 +7,7 @@ answers:
   - "does capture_until_boundary advance the capture origin or the live cursor"
   - "which task owns structural boundary capture fluent results"
 date: 2026-10-30
-status: bounded53 target frozen; independent implementations pending
+status: bounded Perl53.1 repaired/targeted-checked; independent peers pending
 tags: [perl, capture, boundary, cursor, string, fluent, effects, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.14; boundary-capture-fluent-selection-intake.json.gz retains two failed direct/two healthy source controls, independent bound11/direct twins, compatible named String intake and inventory correction history."
 reverify: "Recover probe_boundary_capture_fluent_assessment.pl and finite cases from boundary-capture-fluent-selection-intake.json.gz; run through tools/project_data_run.sh with explicit project-local output. No historical source swaps."
@@ -31,3 +31,12 @@ and both shared11 twins pass via the existing governed early named-value owner.
 [[named-capture-value-source-compatibility]] records that independent conclusion;
 the initial reader's contrary failure expectation is retained as an instrument
 error without product-RED credit. Inventory duplicate removal changes no alias.
+
+Perl53.1 reuses the original boundary engine/shared decoded-label quoting with
+narrow early source lowering. Six native bodies stay exact. Initial11 goes
+8RED/3healthy→11GREEN; candidate malformed-slot admission is separately repaired
+with final feature3/quoted28, unchanged normal/oracles, and exact activation
+three-slot phase/substitution preservation. [[perl-boundary-fluent-grammar-preservation]]
+retains source/origin/control distinctions; no final11 combined run or broader
+context grant. Regenerate affected old modules; Rust53.2/registration23.4.1
+remain separate. Actual inputs: boundary-capture-string-perl-intake.json.gz.

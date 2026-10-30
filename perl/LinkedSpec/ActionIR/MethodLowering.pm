@@ -293,6 +293,9 @@ sub _lower_value_binding_source_expr {
 
  my $trimmed = $trim_action_ir_value->($expr);
  return undef unless defined($trimmed) && length($trimmed);
+ # Retain the prior canonical raw fallback for malformed boundary RHS values.
+ # Re-entering the bound assignment callback would lose the source guard.
+ return $trimmed if ref($deps) eq 'HASH' && $deps->{__actionir_boundary_source_fallback};
 
  my $bare_scalar_read = _lower_source_slot_bare_scalar_read_expr($trimmed, $deps);
  return $bare_scalar_read if defined($bare_scalar_read) && length($bare_scalar_read);
@@ -1099,6 +1102,31 @@ sub _actionir_ast_boundary_call_source {
   return undef unless $label eq $labels->[$index];
  }
  return $node->{source}
+}
+
+# Recognize malformed boundary syntax before generic serialization discards
+# empty argument slots. Those RHS values keep their existing execution fallback;
+# serialization itself retains its programmatic AST contract.
+sub _actionir_ast_has_unrecognized_boundary_call {
+ my ($node) = @_;
+ if (ref($node) eq 'ARRAY') {
+  for my $item (@$node) {
+   return 1 if _actionir_ast_has_unrecognized_boundary_call($item);
+  }
+  return 0;
+ }
+ return 0 unless ref($node) eq 'HASH';
+ if (($node->{kind} // '') eq 'call'
+   && ($node->{source_method} // $node->{name} // '') eq 'capture_until_boundary'
+   && defined($node->{source})
+   && $node->{source} =~ /\A\s*capture_until_boundary\s*\(/o
+   && !defined(LinkedSpec::ActionIR::BoundaryLabels::_recognized_call_label_atoms($node->{source}))) {
+  return 1;
+ }
+ for my $value (values %$node) {
+  return 1 if ref($value) && _actionir_ast_has_unrecognized_boundary_call($value);
+ }
+ return 0
 }
 
 sub _actionir_ast_value_source_expr {
@@ -2849,6 +2877,13 @@ sub _lower_ast_assignment_operator_statement {
  return undef unless ref($node) eq 'HASH';
  my $kind = $node->{kind} // '';
  return undef unless defined($expected_kind) && $kind eq $expected_kind;
+ # Canonical source may omit malformed slots. Keep that RHS on its original
+ # fallback rather than granting the new early boundary-value owner to it.
+ if (_actionir_ast_has_unrecognized_boundary_call($node->{value})) {
+  $deps = ref($deps) eq 'HASH'
+   ? { %$deps, __actionir_boundary_source_fallback => 1 }
+   : { __actionir_boundary_source_fallback => 1 };
+ }
  _trace_method_decision(
   phase => 'lower_ast_assignment_operator_statement',
   label => 'assignment',
@@ -6304,6 +6339,22 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $method_call = $parse_method_function_expr->($trimmed);
  return _actionir_ast_unsupported_helper_expr($method_call->{method})
   if $method_call && _parser_state_helper_is_forbidden_in_function($method_call->{method}, $deps);
+ # Reuse boundary-label source agreement and the native cursor engine before
+ # outer consumers. The existing nonempty label grammar excludes zero arguments.
+ if ($method_call && $method_call->{method} eq 'capture_until_boundary'
+   && @{$method_call->{args} || []}
+   && !(ref($deps) eq 'HASH' && $deps->{__actionir_boundary_source_fallback})) {
+  my $boundary_call = _parse_method_value_ast_expr($trimmed, $deps);
+  my $boundary_source = ref($boundary_call) eq 'HASH'
+   && ($boundary_call->{kind} // '') eq 'call'
+   ? _actionir_ast_boundary_call_source($boundary_call) : undef;
+  if (defined($boundary_source)) {
+   my $labels = LinkedSpec::ActionIR::BoundaryLabels::_recognized_call_label_atoms($boundary_source);
+   return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+    __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_capture_until_boundary_labels_value_expr', $labels,
+   ) if defined($labels);
+  }
+ }
  # Read the existing capture String before compatible outer links, rather
  # than inserting its native do-block after fluent lowering has finished.
  if ($method_call && $trimmed =~ /\A(?:capture_slice(?:_until_cursor)?|capture_rest|capture_from_rule_start)\s*\(\s*\)\z/o) {
