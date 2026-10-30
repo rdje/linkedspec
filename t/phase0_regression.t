@@ -16729,28 +16729,34 @@ SPEC
 subtest 'method_like_collection_value_pipeline_forms_lower_equivalently' => sub {
     plan tests => 12;
 
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(items, filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))'),
-        qr/^\$items = \[\@IMATCH_LIST = grep .*UnicodeCaseMapping::uppercase/s,
-        'set(name, pipeline(...)) lowers nested array-pipeline initializer'
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(items, filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))') . '; return([$items,[@IMATCH_LIST]])',
+            q{my @IMATCH_LIST = qw(alpha beta alpha apple); my $items;},
+        ),
+        q#{"value":[["ALPHA","APPLE"],["alpha","beta","alpha","apple"]],"warnings":[]}#,
+        'set(name, pipeline(...)) produces its value without rebinding the capture source'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(parts, filter_match(uniq(uppercase_each(items)), /^B/))'),
-        qr/^\$parts = do \{ require LinkedSpec::BindingRuntime;.*array_transform\(\$items, "items", "uppercase_each"\).*array_transform\(\$items, "items", "uniq"\).*array_transform\(\$items, "items", "filter_match"/s,
-        'set(name, pipeline(...)) lowers the nested typed-binding pipeline source'
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(items,array("alpha","beta","beta")); set(parts, filter_match(uniq(uppercase_each(items)), /^B/))') . '; return([$parts,$items])',
+            q{my $items; my $parts;},
+        ),
+        q#{"value":[["BETA"],["alpha","beta","beta"]],"warnings":[]}#,
+        'set(name, pipeline(...)) preserves its initialized typed-binding source'
     );
     is(
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
         ),
-        q#{"value":{"items":["ALPHA","APPLE"]},"warnings":[]}#,
+        q#{"value":{"items":[["ALPHA","APPLE"]]},"warnings":[]}#,
         'nested hash payload values accept array-wrapped array-pipeline composition'
     );
     is(
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(array("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
         ),
-        q#{"value":["items",["ALPHA","APPLE"]],"warnings":[]}#,
+        q#{"value":["items",[["ALPHA","APPLE"]]],"warnings":[]}#,
         'nested array payload values accept array-wrapped array-pipeline composition'
     );
 
@@ -16789,12 +16795,12 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'set(by_name, hash("A", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);my $by_name;},
         ),
-        q#{"value":{"A":["ALPHA","APPLE"]},"warnings":[]}#,
+        q#{"value":{"A":[["ALPHA","APPLE"]]},"warnings":[]}#,
         'set(name, hash(... array(pipeline(...)))) lowers nested collection-valued hash initializer'
     );
     is(
         evaluate_lowered_json(
-            LinkedSpec::call_spec_handler_subst('Top', 'set(by_name, hash("A", filter_match(uniq(uppercase_each(items)), /^B/)))'), q{my $by_name; my $items = [qw(alpha beta beta)];},
+            LinkedSpec::call_spec_handler_subst('Top', 'set(items,array("alpha","beta","beta")); set(by_name, hash("A", filter_match(uniq(uppercase_each(items)), /^B/)))'), q{my $by_name; my $items;},
         ),
         q#{"value":{"A":["BETA"]},"warnings":[]}#,
         'set(name, hash(... pipeline(...))) preserves the nested array typed value'
@@ -16803,14 +16809,14 @@ subtest 'method_like_collection_hash_pipeline_forms_lower_equivalently' => sub {
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'push(events, hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);my $events = [];},
         ),
-        q#{"value":[{"items":["ALPHA","APPLE"]}],"warnings":[]}#,
+        q#{"value":[{"items":[["ALPHA","APPLE"]]}],"warnings":[]}#,
         'push accepts hash payloads with nested collection-valued array-pipeline composition'
     );
     is(
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(array("semantic_annotation", hash("items", array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/)))))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
         ),
-        q#{"value":["semantic_annotation",{"items":["ALPHA","APPLE"]}],"warnings":[]}#,
+        q#{"value":["semantic_annotation",{"items":[["ALPHA","APPLE"]]}],"warnings":[]}#,
         'return(array(...)) accepts hash payloads with nested collection-valued array-pipeline composition'
     );
 

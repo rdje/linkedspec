@@ -9202,14 +9202,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.5 - preserve nested Array constructor expectations`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.6`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `412a127863ee40b6d1f9735cf1eed59eb04953cf`; no proof jobs and brief empty.
   Goal: Reconcile the two exact collection value/hash pipeline equivalence groups with pure value pipelines, nested constructors and current typed binding authority, preserving any actual defects as product owners.
   Reproduction: TYPE45.4 retains method_like_collection_value_pipeline_forms_lower_equivalently (12 assertions) and method_like_collection_hash_pipeline_forms_lower_equivalently (14 assertions) among20 failures. Source-shape expectations assert old mutating pipeline bodies; nested constructor expectations may share45.5's authority, but each actual diagnostic still needs public source/value proof.
   Impact / schedule: P1 immediately after45.5 before other remaining failures/full23.4/push. Other17 current failed names remain owned45.4's retained receipt/parent45; no blanket pipeline or constructor refresh.
+  Verification tier: `focused`
+  Focused checks: Exact26 assertions; six public native/fresh pure/statement/source-preservation/nested controls; helper-only legacy versus initialized typed-source projection probe; current array_pipeline_value_contract.t direct consumer, syntax and exact edit/input identities.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored source/value distinctions, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Retain exact eight failures across the26 assertions.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Distinguish obsolete mutating value-pipeline expectations, ordinary constructor nesting and missing typed context in the helper-only harness through public probes/canonical pure-pipeline authority.
+  - [x] **FIX**: Reconcile only demonstrated assertion/instrument defects; preserve production and actual native typed behavior, retain legacy/typed separation and stronger source-preservation checks.
+  - [x] **ADDRESSED (verified)**: Exact26 assertions and independent public controls pass without weakening mutation/nesting boundaries.
+  - [x] **NO REGRESSION**: Canonical pure/statement pipeline direct consumer passes; unrelated assertions/production unchanged, no broad host-isolation claim.
+  - [x] **LOCKSTEP**: Public pure/statement/nesting explanation, canonical fact/map/task/roadmap/live/resume and next bounded child agree.
+
+  Result: Two collection value/hash groups reproduce8 failures/18 healthy assertions. Existing pure-pipeline/constructor authority and six native/fresh controls distinguish value-source preservation, standalone rebinding and nested containers; three public harness controls distinguish legacy host Arrays from DSL-initialized typed sources. Replace2 obsolete mutating-source regexes with exact value-and-source assertions, correct5 nesting expectations and give1 typed fixture its DSL initializer. All26 assertions/direct6 pass with empty stderr;18 healthy assertions retained,529 other hashed inputs unchanged and no production changes. The compatibility helper derives type memory from supplied DSL and cannot infer a separate host lexical fixture; wider SESSION17 isolation remains owned. Initial guarded patch mismatch writes nothing; unmodified repeat retained and no duplicate RED credit. Actual source/RED-GREEN/native-fresh/harness/normal inputs/producers retained in perl-phase0-collection-pipeline-intake.json.gz. Public examples/canonical fact/map/task/roadmaps/live/resume align; exact nonempty-default45.7 next, other16 current failed names owned45. No full suite/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.6 - reconcile pure collection pipeline regression oracles`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.7`
+  Status: `pending`
+  Goal: Reconcile the exact emit_context_lowers_coalesce_nonempty_value_helpers group with current scalar normalization, lazy fallback and comparison authority, repairing only established assertion or product defects.
+  Reproduction: TYPE45.4 retains two source mismatches among this group's3 assertions; its semantic Hash fallback assertion passes. Do not refresh emitted text from observation alone or alter nonempty versus defined-only default semantics.
+  Impact / schedule: P1 immediately after45.6 before other remaining failures/full23.4/push. Other16 current failed names remain owned45.4 receipt/parent45; bounded scope here is the nonempty-default group only.
   Planned verification tier: focused.
-  Planned focused checks: Exact26 assertions, public native/fresh pure/statement pipeline, binding/source preservation and nested hash/Array controls; current canonical pipeline consumer when warranted.
+  Planned focused checks: Exact3 assertions, public native/fresh scalar/null/empty/Boolean/container fallback/skip controls and direct default/String predicate consumers as warranted.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored source/value distinctions, no population measurement.
+  Planned claim verification: none: Exact authored helper/normalization distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10372,7 +10392,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.6` | `pending` | Reconcile the two exact collection pipeline groups, then continue the other17 current failed groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.7` | `pending` | Reconcile the exact nonempty-default group, then continue the other16 current failed groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

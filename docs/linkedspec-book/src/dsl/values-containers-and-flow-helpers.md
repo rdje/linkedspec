@@ -64,6 +64,8 @@ Top: /x/
 
 The same rule covers `array(...)`, `hash(...)`, dynamic hash keys, eager blocks and assignment expressions. Explicit `flat`, `flat_array` and `flat_hash` splices keep their list behavior; ordinary container values stay nested.
 
+A pipeline in a value position preserves its source. With `items=["alpha","beta","beta"]`, `parts=filter_match(uniq(uppercase_each(items)),/^B/)` sets `parts` to `["BETA"]` and leaves `items` unchanged. Standalone `uppercase_each(items); uniq(items); filter_match(items,/^B/)` instead rebinds `items` to `["BETA"]`.
+
 For `values=["alpha","beta","alpha","apple"]`, `return(array(filter_match(uniq(uppercase_each(values)), /^A/)))` returns `[["ALPHA","APPLE"]]`: the pipeline supplies one Array operand. Returning the pipeline directly gives `["ALPHA","APPLE"]`. To splice it into a constructor, use `return(array(flat(filter_match(uniq(uppercase_each(values)), /^A/))))`. The empty case also preserves the distinction: `array(filter_match(values,/^Z/))` gives `[[]]`, while `array(flat(filter_match(values,/^Z/)))` gives `[]`.
 
 Array mutation creates an updated binding. For `items = ["old"]` and a callback that runs `push(items,"new")`, `[items, change(), items]` retains `["old"]` first and the updated `["old","new"]` last. A separately saved earlier binding also stays old. This follows the existing mutation contract; the evaluation boundary does not add recursive copying of arbitrary host objects.

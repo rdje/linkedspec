@@ -18,7 +18,9 @@ answers:
   - does callable matches skip pattern effects for an undefined subject
   - how are literal regex flags handled by callable matches
   - which task owns function position filter_match on Perl
-date: 2026-10-26
+  - why does a helper-only pipeline use a host array instead of a scalar fixture
+  - how does call_spec_handler_subst infer a typed pipeline source
+date: 2026-10-30
 status: ordinary pure pipelines implemented; broad recurrence deferred; audit observations historical
 tags: [regex, actionir, runtime-values, perl, rust, dart, julia, lua]
 evidence: "Historical type audit .86.4.2.4 at7c318569; callable matches .87.2; ordinary filters .87.1."
@@ -28,6 +30,23 @@ reverify:
 ---
 
 October26:87.1 added ordinary filter values;5.4.1 routes other pipeline values to pure lowering. Typed bare/emitted function slots supply values; standalone calls still rebind. The old value path emitted source assignments.
+
+TYPE45.6 (2026-10-30) reconciles two old Phase0 collection-pipeline groups with
+this authority. Value assignments preserve the capture/input Array; standalone
+pipeline statements still rebind their target. Ordinary `array(pipeline)` remains
+nested, including inside a Hash or pushed value. Six public native/fresh controls
+distinguish these behaviors without production changes.
+
+The compatibility helper `call_spec_handler_subst(label, code)` builds its own
+bare-type memory from the supplied DSL code. It cannot infer a typed binding from
+a separate host-only test setup such as `my $items=[...]`. A cold bare collection
+source may therefore follow its legacy `@items` path. Supply the DSL initializer
+in that same helper call to test a typed binding; retain a host Array setup only
+when testing the legacy route. Public typed-prefix and legacy controls keep the
+same expected pipeline values and preserve their sources. This does not repair or
+admit broader absent-host-slot isolation (SESSION17). Actual diagnostics, exact
+fixtures and native/fresh/harness controls are retained in
+perl-phase0-collection-pipeline-intake.json.gz.
 
 Copied predicate operands preserve numeric selectors in pure5.4.1 and standalone BindingRuntime::array_transform5.4.4. Uniqueness, regex matching and length compare temporary scalars while retaining the original entry. Null/empty-text distinction and numeric/string equality retain existing semantics. Native/fresh tests cover nested/function/computed/receiver/statement values and source effects. Broader5.4.2 remains open; no deferred-helper or regex-type admission.
 

@@ -74,3 +74,9 @@ existing evaluated-value authority, distinguished by six native/fresh nested/dir
 explicit-flat/empty controls. Original12 and adjacent10 assertions pass22; all
 production remains unchanged. Other19 last-selected failures remain owned;45.6
 next assesses two collection pipeline groups, with no blanket expected-value refresh.
+
+TYPE45.6 subsequently reconciles two collection-pipeline groups:8 obsolete
+source/value/instrument assertions are corrected under existing pure/nested
+authority and supplied DSL type context. All26 assertions and direct6 pass, with
+six native/fresh and three compatibility-harness controls, no production change.
+Other17 last-selected failures remain owned; nonempty-default45.7 is next.
