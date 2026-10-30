@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: Bounded Perl58 producer/read/fluent children targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl58/Rust58.2 targeted-checked; Dart/Julia/safe Lua/full admission pending.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -118,3 +118,20 @@ retains eight AST/error exclusions; syntax passes. Actual producers/source/
 normal/results in push-fluent-perl-intake.json.gz. New canonical registration
 queued23.4.1; regenerate affected emitted Perl. Bounded Perl58 outcomes recorded,
 independent Rust58.2 next; full23.4 remains separate.
+
+## Independent Rust58.2 guards
+
+Full12 and snapshot/order/function/copy/logical/with/error/absence/static-child
+controls already work. Direct incompatible Hash methods retain the Array and
+evaluate KV; selected Bool take yields [] and evaluates A. Independent split9
+tests7healthy/2RED to9GREEN across native/restored CompiledSpec/generated-plan.
+Initial8 skipped the selected row after its first failed assertion; original and
+split baselines retained. Eight healthy values/two inherited errors stay exact.
+
+One explicit two-positional/plain-target/unambiguous-value source predicate feeds
+existing direct/trailing-chain/computed-read guards. Static rule names retain
+child priority; bare/numeric/contextual-trailing source shapes remain excluded.
+Original push/child ABI/parser/consumers/copy/schema and remaining owner unchanged.
+Nearest computed6/owned fmt pass; initial fmt1 and formatting-only correction
+retained. Actual producers/inputs/source/results in push-snapshot-rust-intake.json.gz.
+Rebuild runtime/apps; no isolated emitted/package/full admission. Dart58.3 next.

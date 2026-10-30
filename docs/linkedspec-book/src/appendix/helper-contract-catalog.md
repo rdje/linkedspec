@@ -552,7 +552,7 @@ dispatch rule.
 
 A completed append snapshot can be read on Perl with an explicit value binding:
 `saved = push(items, "tail"); saved.coalesce(undef)[-1].uppercase()` yields `"TAIL"`.
-Perl supports direct result reads and fluent continuations from these append
+Perl and Rust support direct result reads and fluent continuations from these append
 snapshots. Other backends are assessed independently in the backend handoff.
 Perl also accepts direct Hash and nested Array/Hash
 payloads in value positions, for example `saved = push(items, {"name":"tail"})`.
@@ -561,7 +561,7 @@ saved snapshot. Regenerate affected previously emitted Perl parsers with the
 updated builder. Existing Array end-mutation methods and child-push forms retain
 their contracts.
 
-Perl direct reads use an unambiguous explicit value call:
+Perl and Rust direct reads use an unambiguous explicit value call:
 
 ```text
 Value::
@@ -586,7 +586,7 @@ Signed and nested reads, missing-path nulls and compatible continuations follow
 the ordinary read rules. Empty strings skip defined-only defaults. A source
 mutation error propagates before a default can replace a missing selection.
 
-Perl can also continue directly through compatible value methods:
+Perl and Rust can also continue directly through compatible value methods:
 
 ```text
 push(items, "tail").last().uppercase()          # "TAIL"
@@ -600,6 +600,12 @@ consumer operands run. A selected Hash or Array uses its own method family;
 `push(items, "tail").with(){return(false)}.coalesce(true)` retains false.
 Copy, logical operations, defaults, local returns and function-local bindings keep
 their ordinary contracts. Source mutation failures propagate before consumers.
+
+An incompatible container method returns null before its operands run:
+`push(items, "tail").set_key("k", 1)` is null because the snapshot is an Array;
+`push(items, false)[-1].take(1)` is null because the selected value is a Bool.
+The append still happens once. Existing static rule names keep child-push
+precedence. Rebuild Rust applications with the updated runtime.
 
 ### `items += value`
 - **Signature**: `target += value: expr`

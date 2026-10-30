@@ -6524,6 +6524,7 @@ impl Engine {
                         .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
                 }
                 if self.is_ordinary_computed_read(receiver)
+                    || self.is_explicit_push_result_source(receiver)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7144,6 +7145,7 @@ impl Engine {
         let mut reduced_value = false;
         let mut logical_prefix = false;
         let mut kind_guarded_value = self.is_ordinary_computed_read(receiver)
+            || self.is_explicit_push_result_source(receiver)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8193,6 +8195,45 @@ impl Engine {
             )
     }
 
+    // Only unambiguous explicit-value push snapshots gain ordinary result guards.
+    // Static child rules retain priority even when a local binding shares their name.
+    fn is_explicit_push_result_source(&self, expr: &Expr) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let Expr::Call { name, args } = expr else {
+            return false;
+        };
+        let [
+            Arg::Positional(Expr::Variable { name: target }),
+            Arg::Positional(value),
+        ] = args.as_slice()
+        else {
+            return false;
+        };
+        name == "push"
+            && self.spec.find(target).is_none()
+            && matches!(
+                value,
+                Expr::StringLiteral { .. }
+                    | Expr::BooleanLiteral { .. }
+                    | Expr::Undef
+                    | Expr::ArrayLiteral { .. }
+                    | Expr::HashLiteral { .. }
+                    | Expr::BlockValue { .. }
+                    | Expr::Call { .. }
+                    | Expr::FluentChain { .. }
+                    | Expr::ReceiverMutationChain { .. }
+                    | Expr::IndexedVar { .. }
+                    | Expr::NestedAccess { .. }
+                    | Expr::ValueAccess { .. }
+                    | Expr::AssignScalar { .. }
+                    | Expr::AssignArrayAppend { .. }
+                    | Expr::AssignHashIndex { .. }
+                    | Expr::AssignNestedAccess { .. }
+                    | Expr::CodeblockLiteral(_)
+            )
+    }
+
     // Static source ownership keeps legacy bound-call result guards intact.
     // Do not infer callable ownership from the returned value or a binding.
     fn is_ordinary_computed_read(&self, expr: &Expr) -> bool {
@@ -8203,6 +8244,9 @@ impl Engine {
             Expr::Call { name, args } => {
                 if self.spec.find_function(name).is_some() {
                     return true;
+                }
+                if name == "push" {
+                    return self.is_explicit_push_result_source(receiver);
                 }
                 if matches!(name.as_str(), "rewind_entry_start" | "rewind_match_start") {
                     return args.is_empty();

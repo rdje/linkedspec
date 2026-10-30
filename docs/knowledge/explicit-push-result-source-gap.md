@@ -44,3 +44,5 @@ P1 producer58.0 is now repaired on recorded Perl routes; [[perl-push-aggregate-v
 Perl bounded read role58.1.1 is now repaired; [[perl-explicit-push-result-reads]] owns its actual source guard/ABI/ten-output subset and exclusions. Fluent58.1.2/full target and independent peers remain separate.
 
 Bounded Perl fluent58.1.2 is now targeted-checked; [[perl-explicit-push-result-fluent]] owns initialization and preserved healthy paths. Independent peers and full23.4 remain separate.
+
+Independent Rust58.2 guard outcomes: [[rust-push-snapshot-result-guards]]. Current family status belongs to push-result-composition.md; no peer defect is inferred.

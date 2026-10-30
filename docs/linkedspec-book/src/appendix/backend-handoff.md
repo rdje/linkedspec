@@ -3048,6 +3048,9 @@ excluded AST/error forms. Fluent58.1.2 now initializes the same guarded snapshot
 through current value dispatch; full twelve-result native/fresh execution passes.
 Previously healthy copy/logical/with/transitions remain, with source-once/local
 returns/function scope preserved. Regenerate affected emitted Perl parsers.
-Independent Rust58.2 is next; each peer is assessed
+Rust now guards direct and selected explicit push snapshot consumers on native/
+restored CompiledSpec/plan, preserving already-working full target/scope/order/
+copy/logical/with/source-error behavior. Rebuild Rust runtime/apps. Independent
+Dart58.3 is next; each peer is assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.

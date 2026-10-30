@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl push fluent58.1.2 repaired: new10/read6/syntax pass; bounded Perl58 outcomes recorded, independent Rust58.2 next.
+Rust push snapshot guards repaired: new9/computed6/owned fmt pass; Dart58.3 next.
 
 ## Latest Completed Slice
 
-Perl58.1.2 completes guarded explicit push fluent initialization: unchanged10groups7healthy/3RED to10GREEN native/fresh/metadata. Full unchanged12 target now executes; before it reported ready/raw0 yet called undefined host uppercase, while eager source/consumer local-return and function-local programs failed compilation. Existing six healthy value observations and original source-error row byte-equal; copy/logical/with/Array-Hash-Number/shape/error paths already worked and stay. Two additions reuse current guarded source predicate/complete push ABI for semantic prefixes (including original logical/copy folding) and current emitted-result/default-result dispatch. No new method table/source predicate/push/aggregate/read/selected/parser/arity/child/deferred/copy/mutation/schema body changes, remaining owner bytes exact. Source once/SC before rebinding/local returns/function caller scope/full12/kinds/skips and inherited source errors pass; nearest read6/eight excluded AST-error controls/syntax0. 565 other activation inputs exact; actual producers/source/normal/RED-GREEN/outputs in push-fluent-perl-intake.json.gz. Book/cards/map/target/task/roadmap/live/resume/history align; canonical new10 queued23.4.1, required chronology rollover preserves exact clean source if triggered. Regenerate affected emitted Perl. All bounded Perl58 prerequisites/children now recorded, independent Rust58.2 next; no peer/full23.4 admission.
+Rust58.2 adds bounded push snapshot source guards. Accepted9 tests independently7healthy/2RED to9GREEN on native/restored CompiledSpec/generated-plan; nearest computed6 and owned fmt0. Direct Array-to-Hash consumer previously retained Array/evaluated KV; selected Bool-to-Array consumer yielded []/evaluated A. Both now return null and skip operands. Eight healthy value observations/two source-error rows byte-equal; full12, snapshots/order/local returns/functions/copy/logical/with/static-child/absent targets were already healthy. One explicit two-positional/plain-target/unambiguous-value source predicate feeds existing three guard roles, excluding static rule target names/bare-numeric/trailing shapes. Push/child ABI/parser/consumers/copy/schema and remaining engine bytes exact; 507 other activation inputs exact. Initial8 skipped selected case; independent split9 baseline retained, no skipped-case credit. Initial fmt1 corrected only requested pattern layout/trailing comma, final0 without redundant runtime rerun. Actual producers/source/RED-GREEN/results retained in push-snapshot-rust-intake.json.gz; book/card/target/map/task/roadmap/live/resume/history align. Rebuild runtime/apps. Independent Dart58.3 next; no isolated emitted/full admission claim.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.2 from clean bounded Perl58/frozen58. Read current push-result-composition.md/full12 fixture, Perl cards/actual producer-read-fluent outcomes, public Rust push binding/ActionIR call/receiver/read/with/function/error/arity contracts and nearest tests/book. Independently baseline finite primitive/bound/direct/full source/kind/with/snapshot/order/function/shape/error controls on native/restored/generated-plan before production; preserve healthy routes and qualified existing outside-subset policies. Complete only demonstrated target gaps with original push ABI/current typed source dispatch; no child/all-bare/numeric/implicit result/arity/deferred/schema or submodule implementation assumptions. Focused new-nearest/owned fmt/book/map/history/manual docs/commit, then Dart58.3. Keep full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host owners separate; no broad verification/cleanup pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.3 from clean bounded Rust58.2/frozen58. Read push-result-composition.md/full12 fixture/current Perl-Rust cards and Dart public push binding/child/typed read/fluent/with/function/error/arity contracts and nearest tests/book. Independently baseline finite primitive/bound/full/direct/selected guards/order/snapshot/with/function/error/static-child programs on native/restoredSpec/generated-plan before production. Preserve healthy behavior and qualified outside-subset policies; reuse existing ABI/actual-kind guards only for demonstrated gaps. Quick new-nearest/changed-owner analysis/new-normal format/book/map/history/manual docs/commit, then Julia58.4. Keep full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host owners separate; no broad verification or cleanup pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.58.2` — Rust push snapshot guards repaired: new9/computed6/owned fmt pass; Dart58.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.1.2` — Perl push fluent58.1.2 repaired: new10/read6/syntax pass; bounded Perl58 outcomes recorded, independent Rust58.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.1.1` — Guarded Perl push reads58.1.1 repaired: new6 groups/callable5/deferred22/syntax pass; fluent58.1.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.0` — P1 aggregate push producer58.0 repaired: new8 groups/uniform13 TAP items/syntax pass; Perl read58.1.1 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.2 from clean bounded Perl58/frozen58. R
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.4` — Julia canonical-zero rewind Numbers repaired: new75/gap98/computed25 strict depwarn pass; immediate arity56.4.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0` — Dart four-control zero arity repaired: new8/parent10/gap-arity9/analysis/new-parent fmt pass; Julia56.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.3` — Dart canonical-zero rewind Number result repaired: new10/gap6/computed7/analysis/normal fmt pass; immediate arity56.3.0 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.56.2.0` — Rust four-control zero arity repaired: new8/parent9/gap7/fmt pass; Dart56.3 next.
 
 ## History
 
