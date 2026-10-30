@@ -1530,19 +1530,19 @@ new start for `right`, and the closing-bracket action records the final right ed
 - **Signature**: `start_capture_slice()`
 - **Returns**: void
 - **Behavior**: Moves the anonymous capture cursor to the current scan position.
-- **Compatibility**: `capture_slice_here()` is a retired alias.
+- **Compatibility**: `capture_slice_here()` is a supported compatibility alias.
 
 ### `capture_slice()`
 - **Signature**: `capture_slice()`
 - **Returns**: scalar or undef
 - **Behavior**: Returns the text from the anonymous capture cursor to the start of the current match.
-- **Compatibility**: `capture_from_rule_start()` is a retired alias.
+- **Compatibility**: `capture_from_rule_start()` is a supported compatibility alias.
 
 ### `capture_slice_len()`
 - **Signature**: `capture_slice_len()`
 - **Returns**: int or undef
 - **Behavior**: Character length of `capture_slice()`. Preferred over raw position arithmetic.
-- **Compatibility**: `capture_slice_length()` and `capture_len_from_rule_start()` are retired aliases.
+- **Compatibility**: `capture_slice_length()` and `capture_len_from_rule_start()` are supported compatibility aliases.
 
 ### `capture_slice_until_cursor()`
 - **Signature**: `capture_slice_until_cursor()`
@@ -1605,7 +1605,7 @@ new start for `right`, and the closing-bracket action records the final right ed
 - **Signature**: `capture_rest_len()`
 - **Returns**: int or undef
 - **Behavior**: Character length of `capture_rest()`.
-- **Compatibility**: `capture_rest_length()` is a retired alias.
+- **Compatibility**: `capture_rest_length()` is a supported compatibility alias.
 
 ### `capture_take_rest()`
 - **Signature**: `capture_take_rest()`

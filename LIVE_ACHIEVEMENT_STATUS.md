@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
+Readonly capture String family50 frozen from actual public gaps; Perl50.1 implementation next.
 
 ## Latest Completed Slice
 
-Current-only replay of the original frozen28 failure names passes all28 groups, exit0, complete29-result top plan including shared discovery. Each selected group has its actual positive direct nested plan/contiguous IDs and no skipped/todo direct slots; deeper subtest accountability remains Test::More, with no primitive-assertion population claim. Original universe/compressed primary diagnostics match the unchanged TYPE37 packet;538 bound current input hashes and HEAD are identical around execution. All raw TAP/stderr/seen names/actual producer/artifact inputs are retained in perl-phase0-after-projection-intake.json.gz. No canonical source or expectation changes in this diagnostic leaf. This is focused evidence for the retained subset; parent45/full Phase0/portable/context admission remain open until canonical prerequisites. Next23.1.11 selects the next useful capture-result fluent transition from canonical source/signature/book authorities, with bounded public distinctions only. Book/map/history/manual continuity checks pass; no full suite, exhaustive matrix or push.
+Readonly capture String selection records6 failing/4 healthy public native/fresh cases on six decoded characters. Each of capture_slice/capture_slice_until_cursor/capture_rest/capture_from_rule_start leaves coalesce as a host call despite raw0/fallback0/unresolved0/ready1; the empty lazy-block case fails compilation. Primitive/bound/named and direct legacy take[]/with controls are healthy. Independent bound9-coordinate target passes exact values/order/normalized operand skips/snapshot-before-reset/defined empty; its direct twin fails compilation. 534 current diagnostic inputs are unchanged. Freeze ordinary readonly String family50 and independent50.1-.5 before production; prospective fixture is not implementation credit. Preserve original getter/tag/coordinate/absence/name/function/callback/deferred/first-consumer policies. Correct five stale catalog alias labels and one missing source-compatibility spelling from existing typed contract/current reference/accepted33/35 authority, without new alias/peer proof. Initial UTF-8-octet/metadata-field/context calibration is retained without Unicode or extra feature credit. Actual producer/inputs/native/emitted/substitution/metadata/diagnostics/target twins retained in capture-boundary-text-selection-intake.json.gz; syntax/JSON/book/map/history/manual checks pass. No production/full-suite or portable admission; Perl50.1 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.1.11 from clean selected28 GREEN. Read canonical helper/source/signature inventory and current family exclusions; assess readonly capture String and related source-result composition using a few native/fresh producer/bound/direct controls with a proven action carrier. Freeze the next useful bounded target and independent backend/prerequisite owners before production. Reconcile encountered capture-alias catalog drift against current authority in that same selection scope. Preserve existing coordinates/name roles/context/callback/function/copy/mutation/shape policies; no comprehensive or portable admission claim. Implement next feature with compile/quick targeted checks and per-leaf commits.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.1 from this clean target freeze. Read capture-boundary-text-results.md, prospective fixture, accepted getter/first-consumer/function boundaries and actual retained baseline. Add focused normal, reproduce exact direct gaps, then share unchanged native anonymous String getter bodies with narrow early value lowering through existing owners/function fences. Preserve healthy behavior and original source bodies. Compile/quick native-fresh and direct Number/reset compatibility checks, update docs/registration owner, commit; independent Rust50.2 follows. No full suite/matrix.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.11` — Readonly capture String family50 frozen from actual public gaps; Perl50.1 implementation next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.25` — Original frozen28 all PASS with source unchanged; next useful fluent feature selection23.1.11.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.24` — Projected-last79/public4/seeded isolation15 pass; current-only frozen28 reassessment25 then feature selection.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.23` — Frozen28 current-only replay27PASS/1FAIL; one dependent sorted_values source oracle owned45.24.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.1.11 from clean selected28 GREEN. Read canon
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.13` — has_key4/public3/direct6 pass; null/false fields stay present; Hash snapshot next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.12` — Emptiness4/public5/direct11 pass with existing value policy; has_key group next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2` — String18 aligned; parent45.11 producer/oracle work closed; retained emptiness group next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.1` — sorted_values scalar host leak repaired;15 seeded cases/Hash14/String6; original String18 next.
 
 ## History
 

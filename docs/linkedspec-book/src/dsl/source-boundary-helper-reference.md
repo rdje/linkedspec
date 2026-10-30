@@ -92,6 +92,8 @@ Anonymous capture readers can be returned directly. For example, `return(capture
 stored character position is needed. Current Perl lowering still exposes its internal assignment-expression result;
 portable `.spec` files must not depend on that implementation leak while `FUTURE-PARITY-BACKLOG.5` removes it.
 
+Direct text-capture chains with a default still have a Perl composition gap. For now, bind the result first: `tail=capture_rest(); return(tail.coalesce("").split(":")[-1].uppercase())`. On the recorded `αβ:cat` carrier, a boundary at `2` gives `"CAT"`; defined empty text skips the default. The readonly String composition work is scoped to the existing getters and their accepted alias. Their native span and parser-state rules still apply.
+
 Compatibility aliases:
 
 | Compatibility helper | Preferred helper |

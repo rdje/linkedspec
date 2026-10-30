@@ -1362,15 +1362,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Same-slice required CHANGES rollover: registered tool archives clean4f91e544b CHANGES lines109-199,91 lines/27091 bytes as immutable segment4952. Independent clean Git blob/source suffix/ordered previous-manifest/line/byte/SHA checks pass: blobd84578e1f3d0f25a27b1c3b7a86ec423a093686b; SHA256a953972329c344aef370a177b61e635c7828d1a6fd3d3cfd354719115fcd9b5d. Only header segment_count/new immutable row/suffix move; no old segment or budget changes. Hot-shard checks rerun before staging.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.11`
-  Status: `pending`
+  Status: `completed`
   Goal: Select and freeze the next useful ordinary fluent result transition after the retained Perl regression subset is GREEN. Start with readonly capture String producers and related result-kind guards; distinguish already-supported behavior from an actual gap before choosing implementation.
   Dependencies: Canonical helper/source/signature inventory, source-boundary contract, existing33/34/35/42/47/49 targets, current book and Knowledge Map. Full23.4/pressure20.1/Perl registration/declared Lua host and broader deferred-context owners stay separate.
   Acceptance: Read relevant accepted roles/result/value/error/absence/alias authority; use a few public native/fresh producer/bound/direct controls with a proven action carrier and actual action-bearing metadata/source. Preserve coordinates/zero/empty/missing/snapshots/operand order, first-consumer and context/function/callback/mutation/copy boundaries. Freeze one safe additive target and independent bounded backend/prerequisite leaves before any production edit. No blanket helper allowlist, count-based completeness or broad matrix.
   Owned documentation discrepancy: The helper catalog capture section calls capture_slice_here/capture_slice_length/capture_rest_length/capture_len_from_rule_start retired, while the current source reference/inventory and accepted33/35 records preserve these aliases. Adjudicate exact current spellings/contracts and correct only established stale compatibility prose before reusing it as target authority; do not revive truly retired forms or infer peer parity.
-  Planned verification tier: focused.
-  Planned focused checks: Relevant inventory/contracts/book, finite public distinguishing producer/direct/bound cases and actual source/readiness, prospective fixture syntax/JSON plus book/map/history/manual continuity. No full suite/matrix.
-  Planned canonical trigger: Full source/domain/context/portable23.4/final clean push after feature coverage and owned prerequisites; actual public contract/generated-format movement separately owned.
-  Planned claim verification: none: Finite authored feature selection/diagnostic controls, no population or comprehensive-method measurement.
+  Verification tier: `focused`
+  Focused checks: Relevant inventory/contracts/book, finite public distinguishing producer/direct/bound cases and actual source/readiness, prospective fixture syntax/JSON plus book/map/history/manual continuity. No full suite/matrix.
+  Canonical trigger: Full source/domain/context/portable23.4/final clean push after feature coverage and owned prerequisites; actual public contract/generated-format movement separately owned.
+  Claim verification: none: Finite authored feature selection/diagnostic controls, no population or comprehensive-method measurement.
+
+  Activation: clean `b6f7e2b7a624dd2980d4c007c36b043f7b3027ca`; prior proof jobs terminal, brief0. Selection only; production changes require a newly frozen implementation leaf.
+  - [x] **REPRODUCE / ISSUE**: Relevant canonical authority, exact finite public distinctions and bounded next-feature ownership.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Relevant canonical authority, exact finite public distinctions and bounded next-feature ownership.
+  - [x] **FIX**: Relevant canonical authority, exact finite public distinctions and bounded next-feature ownership.
+  - [x] **ADDRESSED (verified)**: Relevant canonical authority, exact finite public distinctions and bounded next-feature ownership.
+  - [x] **NO REGRESSION**: Relevant canonical authority, exact finite public distinctions and bounded next-feature ownership.
+  - [x] **LOCKSTEP**: Relevant canonical authority, exact finite public distinctions and bounded next-feature ownership.
+
+  Instrument calibration: Initial ASCII-expecting JSON::PP input received raw UTF-8 JSON octets, so the Greek prefix became four characters and cursor8. Retain exact first producer/input/output/hash epoch; encode Unicode as JSON escapes and require six decoded input characters/first codepoint before current proof. Initial values expose coalesce host-call/empty-block failures but receive no Unicode-coordinate credit. Existing first-consumer take[]/withOK is a healthy legacy policy, not a null target; correct only the authored diagnostic expectation, with no production movement. Record actual canonical_action_ir_fallback_count rather than an absent metadata key, and separate fresh errors from the native context field.
+
+  Result: Readonly capture String selection records6 failing/4 healthy public native/fresh cases on six decoded characters. Each of capture_slice/capture_slice_until_cursor/capture_rest/capture_from_rule_start leaves coalesce as a host call despite raw0/fallback0/unresolved0/ready1; the empty lazy-block case fails compilation. Primitive/bound/named and direct legacy take[]/with controls are healthy. Independent bound9-coordinate target passes exact values/order/normalized operand skips/snapshot-before-reset/defined empty; its direct twin fails compilation. 534 current diagnostic inputs are unchanged. Freeze ordinary readonly String family50 and independent50.1-.5 before production; prospective fixture is not implementation credit. Preserve original getter/tag/coordinate/absence/name/function/callback/deferred/first-consumer policies. Correct five stale catalog alias labels and one missing source-compatibility spelling from existing typed contract/current reference/accepted33/35 authority, without new alias/peer proof. Initial UTF-8-octet/metadata-field/context calibration is retained without Unicode or extra feature credit. Actual producer/inputs/native/emitted/substitution/metadata/diagnostics/target twins retained in capture-boundary-text-selection-intake.json.gz; syntax/JSON/book/map/history/manual checks pass. No production/full-suite or portable admission; Perl50.1 next.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.11 - select readonly capture String result composition`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
@@ -4925,6 +4938,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Perl40.1.2 adds t/perl_blind_scalar_declarations.t24 source groups+1 context guard; exact canonical selection must cover nested scalar ownership/nonmutating diagnostic JSON and keep existing AND/OR declaration normals strict.
 
   New focused normal awaiting explicit canonical selection: `t/sorted_values_scalar_isolation.t` / `tests/fixtures/sorted_values_scalar_isolation.json`, producer repair45.11.1; native/fresh seeded scalar/Hash controls. Required before full23.4/push, alongside prior pick_keys normal.
+
+  Queued normal from50: Register forthcoming t/capture_boundary_text_results.t and shared fixture before full23.4/push; direct focused execution does not establish canonical inclusion.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
@@ -10817,13 +10832,68 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: Exact before/refinement/after source and outputs, target/current canonical cards/map/book plus task/live/resume/roadmap/history align; bounded43 repair complete. Dart34.3 resumes independently. Full23.4/pressure/registration/declared-host and remaining owned defects stay scheduled, with authorized focused commits/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.43.1 - preserve the invoking rule namespace in Rust callable bodies`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50`
+  Status: `pending` / bounded target frozen by23.1.11
+  Goal: Existing readonly anonymous String getters and compatibility source compose through ordinary compatible methods without mandatory temporary bindings.
+  Authority: docs/checkpoints/type-operation-inventory/capture-boundary-text-results.md and prospective capture_boundary_text_values.spec/json. Preserve getter/tag/coordinate/absence/function/deferred/callback/root/shape and generated-format boundaries; full23.4 remains separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.1`
+  Status: `pending`
+  Goal: Independently assess and complete Perl ordinary readonly capture String method composition under frozen50.
+  Dependencies: selection23.1.11; capture-boundary-text-results.md and shared prospective fixture.
+  Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
+  Planned verification tier: focused.
+  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.2`
+  Status: `pending`
+  Goal: Independently assess and complete Rust ordinary readonly capture String method composition under frozen50.
+  Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.1; capture-boundary-text-results.md and shared prospective fixture.
+  Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
+  Planned verification tier: focused.
+  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.3`
+  Status: `pending`
+  Goal: Independently assess and complete Dart ordinary readonly capture String method composition under frozen50.
+  Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.2; capture-boundary-text-results.md and shared prospective fixture.
+  Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
+  Planned verification tier: focused.
+  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.4`
+  Status: `pending`
+  Goal: Independently assess and complete Julia ordinary readonly capture String method composition under frozen50.
+  Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.3; capture-boundary-text-results.md and shared prospective fixture.
+  Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
+  Planned verification tier: focused.
+  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.50.5`
+  Status: `pending`
+  Goal: Independently assess and complete safe available Lua ordinary readonly capture String method composition under frozen50.
+  Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.50.4; capture-boundary-text-results.md and shared prospective fixture.
+  Acceptance: Preserve four existing zero-argument source values/kinds/tags/coordinates/absence; support compatible lazy defaults, String/Array/signed selected String/Number continuation, empty fallback suppression and once-only source snapshot before later reset. Keep current first-consumer root/normalized bad-operand/function/callback/deferred/name/arity/copy policies. Reproduce own baseline before any production, preserve healthy cases; safe Lua named installed hosts only, no unsafe full runner or declared5.4 claim.
+  Planned verification tier: focused.
+  Planned focused checks: Shared/finite native-generated or restored routes and actual metadata/errors; source-body and shape/empty/missing/snapshot/function/root controls; nearest Number/reset checks and local compile/format/book/history/manual continuity. No exhaustive matrix/full suite.
+  Planned canonical trigger: Full23.4/final clean push after20.1/Perl registration and remaining owned prerequisites; actual contract/schema movement separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, no population or complete-context measurement.
+
 ## Current Frontier
 
 Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptiness/predicate/definedness/lexical-comparison/contains implementations and documented direct repairs are targeted-checked on recorded hosts. Aggregate-null/snapshot14, numeric comparison15, scalar arithmetic16 and logical Boolean17 bounded backend children are targeted-checked, including Perl17.1.1 rejected-source-effect repair. Complete domain/context/portable admission remains23.4. Defined-only coalesce assessment18 is frozen separately from the older nonempty-default exclusion; All five bounded defined-only default implementations18.1-.5 are targeted-checked. Scalar String-helper assessment19 is frozen; All five bounded scalar String implementations19.1-.5 and recorded producer/slice repairs are targeted-checked. Optional substring argument20 is frozen from existing ADR0006/0023 reference behavior; Dart20.1/Julia20.2/safe Lua20.3 are repaired/targeted-checked; remaining feature selection23.1.1 freezes reduction accumulator continuations21; All five bounded reduction implementations21.1-.5 are targeted-checked on recorded routes/hosts. Remaining selection23.1.2 freezes tagged-record String bridge22 and its Perl eager producer prerequisite; Perl22.1.1/.1.2 are repaired/targeted-checked; Rust22.2 producer/receiver are implemented/targeted-checked; Dart22.3 receiver roles/pattern/minimum shape repaired/targeted-checked; Julia22.4 receiver roles/minimum shape repaired/targeted-checked; Safe Lua22.5 receiver roles/minimum shape are repaired/targeted-checked; all five bounded22 children complete; selection23.1.3 freezes ordinary eager logical counterparts23; Perl23.1 methods are implemented/targeted-checked; Rust23.2 methods are implemented/targeted-checked; Dart23.3 methods are implemented/targeted-checked; Julia23.4 methods/shapes and safe Lua23.5 methods/shapes are targeted-checked; all five bounded23 children complete; scalar/null copy authority4.2.1 is complete; the director approved scalar/null value copying; ADR0138/target adoption4.2.2.0 is complete after explicit deferred-body repair24.1.2.0; Perl producer4.2.2.1.1 is implemented/targeted-checked; ordinary receiver1.2 is implemented/targeted-checked; existing interpreted context1.3 is preserved without runtime edits; bounded Perl parent complete; all bounded Perl/Rust/Dart/Julia/safe Lua copy children are complete/targeted-checked; data-helper computed selection24.1.2.1 is implemented/targeted-checked; registered-function24.1.2.2 is implemented/targeted-checked; all five bounded computed-selection24 children complete; selection23.1.5 freezes readonly capture collections25 and P1 contextual vocabulary prerequisite25.0 is repaired; all five bounded capture25 children are implemented/targeted-checked on recorded hosts; selection23.1.6 freezes conditional26; P1 eager condition26.0 is repaired; all five bounded conditional26 children and prerequisite26.0 are implemented/targeted-checked; selection23.1.7 freezes readonly input/cursor27; all five bounded input/cursor27 children are implemented/targeted-checked; owned scalar-root compiler/policy28.1 is repaired; capture-name29.1 is repaired; bounded function-state repairs29.2 are implemented; selection23.1.8 freezes Number reader30 and independently owned with-Hash31; all bounded30-35/38-43/47-49 children have recorded focused outcomes with their stated qualifications; current frozen28 replay45.25 passes28/28 after dependent source-oracle45.24 repair and next feature selection23.1.11 follows, while remaining example/context/admission owners stay separate; independent selection23.1.4 freezes computed bracket reads24; Perl24.1.1 noncall sources are implemented/targeted-checked; direct-call24.1.2 preserves legacy callable boundaries; full source/context/portable admission remains23.4; error-phase parity1.2.1.4.1, document pressure1.2.20.1 and full admission remain separate. Explicit new Perl fixture registration23.4.1 and Lua declared5.4 proof remain prerequisites for later admission. Broad matrices/full verification stay deferred under the director feature-first cadence; family nodes retain exact evidence and open owners.
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.1.11` | `pending` | Select next useful capture-result fluent composition from current canonical authorities and finite public controls. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.50.1` | `pending` | Implement frozen readonly capture String composition with focused preservation checks. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
