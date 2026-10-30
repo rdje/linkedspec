@@ -9116,14 +9116,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.1 - supply the required lazy-owner value callback`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.2`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `c2cecc75e08fe63e871801dae824464de11f94d7`; no pending proof jobs, brief empty.
   Goal: Reconcile the exact emit_context_pipeline_helper_substitutions group with accepted anonymous/named endpoint contracts and current public lowering; repair only demonstrated obsolete assertions or actual defects.
   Reproduction: TYPE45.0 retains this group's90 assertions and capture-boundary source mismatches after40/47 endpoint repairs. Observed current source guards missing/reversed boundaries; classification still requires the canonical endpoint facts/public probes before any expectation edit.
   Impact / schedule: P1 immediately after45.1 before other bounded45 repairs/full23.4/push. Other26 retained unaddressed groups remain owned45; no source-shape refresh outside this group.
+  Verification tier: `focused`
+  Focused checks: Exact90-assertion group and direct anonymous/named/writer endpoint normals; public lowering guards match40/47/49 accepted presence/ordered-span/success-only mutation authority. Preserve healthy source assertions and actual runtime empty/zero/name-effect controls.
+  Canonical trigger: Full23.4/final clean push.
+  Claim verification: none: Exact authored regression group and named contract controls, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Retain current exact helper-substitution group failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Compare public substitution output against canonical40/47/49 endpoint authority before qualifying any assertion as obsolete.
+  - [x] **FIX**: Repair only established assertions/causes in this group, preserving unrelated lowering contracts.
+  - [x] **ADDRESSED (verified)**: Exact helper-substitution group passes with distinguishing endpoint controls.
+  - [x] **NO REGRESSION**: Direct anonymous/named/writer endpoint normals preserve unavailable/empty/zero/reversed/name-effect semantics.
+  - [x] **LOCKSTEP**: Source/contract/fact/book/current task/live/roadmaps agree; other26 frozen groups remain owned45.
+
+  Result: Exact90-assertion helper-substitution group has13 source-text REDs/77 healthy assertions. Public substitution and canonical40/47/49 endpoint contracts establish obsolete pre-guard expectations: missing/reversed endpoints stay undefined; failed takes/writers preserve targets and name effects. Author13 guarded source expectations inside this group only; all90 pass,77 prior healthy assertion lines unchanged,527 other hashed inputs unchanged. Direct anonymous16/named15/writer15 native/emitted runtime groups pass46 with empty stderr; syntax passes. Production, values/fixtures, assertion counts and unrelated source bodies unchanged. Actual RED/GREEN/public substitutions/authored guard expectations/producers/inputs retained in perl-phase0-endpoint-oracle-intake.json.gz. Initial probe prefix matched two zero-arg aliases and supplied unintended arguments; corrected exact-name instrument retained without false defect credit. Book/fact/map/task/roadmaps/live/resume align. Next45.3 owns exact immediate/local named-map group; other26 frozen groups stay owned45, no blanket refresh/full-suite state or repeated full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.2 - align endpoint lowering assertions with presence contracts`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.3`
+  Status: `pending`
+  Goal: Resolve the exact entry_and_match_map_helpers_snapshot_immediate_and_local_named_capture_hashes group using accepted immediate/local capture snapshot authority and public execution/source evidence.
+  Reproduction: TYPE45.0 retains this group's failing runtime expectations; its precise mechanism is unclassified. Do not accept null or changed map values merely because source-shape failures elsewhere were obsolete.
+  Impact / schedule: P1 immediately after45.2 before other bounded45 repairs/full23.4/push. Other25 unaddressed frozen groups remain owned45.
   Planned verification tier: focused.
-  Planned focused checks: Exact90-assertion group, public source and endpoint value/error/side-effect controls plus direct anonymous/named endpoint normals.
+  Planned focused checks: Exact immediate/local named-map group, capture source/descriptor/runtime context probes, direct capture collection and source-location consumers.
   Planned canonical trigger: Full23.4/final clean push.
-  Planned claim verification: none: Exact authored regression group and named contract controls, no population measurement.
+  Planned claim verification: none: Exact authored snapshot regression and distinguishing scope controls, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10286,7 +10306,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.2` | `pending` | Reconcile the exact helper-substitution group with endpoint contracts, then continue the other26 owned45 groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.3` | `pending` | Resolve the exact immediate/local named-map group, then continue the other25 owned45 groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

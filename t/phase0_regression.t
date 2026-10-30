@@ -13337,12 +13337,12 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice") }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_slice");  $__ls_capture } else { undef } }#,
         'capture_slice() helper rewrite preserves explicit capture-boundary slice semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice_len()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_len") }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_slice_len");  $__ls_capture } else { undef } }#,
         'capture_slice_len() helper rewrite preserves explicit capture-slice length semantics'
     );
     is(
@@ -13372,7 +13372,7 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_slice_length()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_length") }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_slice_length");  $__ls_capture } else { undef } }#,
         'capture_slice_length() compatibility alias rewrites to the same explicit capture-slice length semantics'
     );
     is(
@@ -13417,42 +13417,42 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take()'),
-        q#do { my $__ls_end = $LSPOS - length($LMATCH); my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_take"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take"); $__ls_capture }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_take"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take"); $__ls_capture } else { undef } }#,
         'capture_take() helper rewrite preserves explicit anonymous-boundary advancing capture semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take_len()'),
-        q#do { my $__ls_end = $LSPOS - length($LMATCH); my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take_len"); $__ls_capture_len }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_take_len"); $IPOS = LinkedSpec::SourceLocation::Runtime::capture_boundary_write_position($info, $STRING, pos $$STRING, "capture_take_len"); $__ls_capture } else { undef } }#,
         'capture_take_len() helper rewrite preserves explicit anonymous-boundary advancing width semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_from_rule_start()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_from_rule_start") }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS, $__ls_end, "capture_from_rule_start");  $__ls_capture } else { undef } }#,
         'capture_from_rule_start() compatibility alias rewrites to the same explicit capture-slice semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_len_from_rule_start()'),
-        q#do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_len_from_rule_start") }#,
+        q#do { my $__ls_end = defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef; if (defined($IPOS) && defined($__ls_end) && $__ls_end >= $IPOS) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $__ls_end, "capture_len_from_rule_start");  $__ls_capture } else { undef } }#,
         'capture_len_from_rule_start() compatibility alias rewrites to the same explicit capture-slice length semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_from(body_start)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_from") : undef }#,
+        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_from"); my $__ls_end = defined($__ls_mark) ? (defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef) : undef; (defined($__ls_mark) && defined($__ls_end) && $__ls_end >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_end, "capture_from") : undef }#,
         'capture_from(name) helper rewrite preserved'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_len_from(body_start)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_len_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_len_from") : undef }#,
+        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_len_from"); my $__ls_end = defined($__ls_mark) ? (defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef) : undef; (defined($__ls_mark) && defined($__ls_end) && $__ls_end >= $__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_end, "capture_len_from") : undef }#,
         'capture_len_from(name) helper rewrite preserves explicit current-edge length-read semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take(body_start)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_take"); if (defined($__ls_mark)) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'body_start', pos $$STRING, "capture_take"); _trace_runtime_mark_event(operation => 'capture_take', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_new_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_capture } else { undef } }#,
+        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_take"); my $__ls_end = defined($__ls_mark) ? (defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef) : undef; if (defined($__ls_mark) && defined($__ls_end) && $__ls_end >= $__ls_mark) { my $__ls_capture = LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $__ls_end, "capture_take"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'body_start', pos $$STRING, "capture_take"); _trace_runtime_mark_event(operation => 'capture_take', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_new_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_capture } else { undef } }#,
         'capture_take(name) helper rewrite preserves rule-local named-mark rolling capture semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'capture_take_len_from(body_start)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_take_len_from"); if (defined($__ls_mark)) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_take_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'body_start', pos $$STRING, "capture_take_len_from"); _trace_runtime_mark_event(operation => 'capture_take_len_from', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_new_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_capture_len } else { undef } }#,
+        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'Top', 'body_start', "capture_take_len_from"); my $__ls_end = defined($__ls_mark) ? (defined($LMATCH) && defined($LSPOS) ? $LSPOS - length($LMATCH) : undef) : undef; if (defined($__ls_mark) && defined($__ls_end) && $__ls_end >= $__ls_mark) { my $__ls_capture_len = LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $__ls_mark, $__ls_end, "capture_take_len_from"); my $__ls_new_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'body_start', pos $$STRING, "capture_take_len_from"); _trace_runtime_mark_event(operation => 'capture_take_len_from', rule_label => 'Top', mark_name => 'body_start', string_ref => $STRING, mark_pos => $__ls_new_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_capture_len } else { undef } }#,
         'capture_take_len_from(name) helper rewrite preserves rule-local named-mark rolling width semantics'
     );
     is(
@@ -13542,12 +13542,12 @@ subtest 'emit_context_pipeline_helper_substitutions' => sub {
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_match_start(end_mark)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'end_mark', $LSPOS - length($LMATCH), "mark_match_start"); _trace_runtime_mark_event(operation => 'mark_match_start', rule_label => 'Top', mark_name => 'end_mark', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark }#,
+        q#do { if (defined($LMATCH) && defined($LSPOS)) { do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'end_mark', $LSPOS - length($LMATCH), "mark_match_start"); _trace_runtime_mark_event(operation => 'mark_match_start', rule_label => 'Top', mark_name => 'end_mark', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark } } else { undef } }#,
         'mark_match_start(name) helper rewrite preserves explicit current-match left-edge semantics'
     );
     is(
         LinkedSpec::call_spec_handler_subst($label, 'mark_match_end(body_end)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'body_end', $LSPOS, "mark_match_end"); _trace_runtime_mark_event(operation => 'mark_match_end', rule_label => 'Top', mark_name => 'body_end', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark }#,
+        q#do { if (defined($LMATCH) && defined($LSPOS)) { do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_write_position($info, $STRING, 'Top', 'body_end', $LSPOS, "mark_match_end"); _trace_runtime_mark_event(operation => 'mark_match_end', rule_label => 'Top', mark_name => 'body_end', string_ref => $STRING, mark_pos => $__ls_mark, left_edge => (defined($LSPOS) && defined($LMATCH) ? $LSPOS - length $LMATCH : pos $$STRING), parser_pos => pos $$STRING); $__ls_mark } } else { undef } }#,
         'mark_match_end(name) helper rewrite preserves explicit current-match right-edge semantics'
     );
     is(

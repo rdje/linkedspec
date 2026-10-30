@@ -47,3 +47,9 @@ unchanged40 assertions pass, alongside the native/fresh pipeline consumer6.
 The other27 retained groups remain owned and are not rerun in that slice;45.2
 next reconciles the helper-substitution endpoint assertions. No new full-suite
 state or blanket stale-expectation conclusion follows.
+
+TYPE45.2 subsequently reconciles13 exact source expectations in the helper-
+substitution group against accepted40/47/49 presence/order/write contracts.
+All90 assertions and46 direct endpoint runtime groups pass; production and
+fixture values are unchanged. Other26 frozen groups remain owned, with the
+immediate/local named-map group45.3 next; no blanket source-oracle conclusion.
