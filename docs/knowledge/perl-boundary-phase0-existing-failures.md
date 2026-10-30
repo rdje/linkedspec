@@ -134,3 +134,9 @@ TYPE45.15 reconciles set_key2 old source assertions/2 healthy ->4 GREEN with
 public native/fresh2/direct eager-key3, original expressions/healthy checks and
 production unchanged. Eight last-selected groups remain owned; rename_key45.16
 follows. No new combined28/full-suite status is inferred.
+
+TYPE45.16 reconciles rename_key1 nested-presence source assertion/3 healthy ->
+4 GREEN with public native/fresh3, original expression/healthy controls and
+production unchanged. Existing Perl collision stays backend-qualified under
+FUTURE5, not portable parity. Seven last-selected groups remain owned; drop_keys
+45.17 follows. No combined28/full-suite status is inferred.

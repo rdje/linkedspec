@@ -37680,6 +37680,7 @@ SPEC
 };
 subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
     plan tests => 4;
+    require LinkedSpec::RuleIR::EmitContext;
 
     is(
         LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rename_key(meta, "old_stage", "stage")'),
@@ -37687,9 +37688,12 @@ subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
         'rename_key(...) lowers working hashes into a pure single-key rename hashref expression'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(rename_key(meta, "old_stage", "stage"), "stage")'),
-        'do { my $__ls_has_key = do { my $__ls_rename_key_source = \%meta; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }; defined($__ls_has_key) ? ((exists $__ls_has_key->{"stage"}) ? 1 : 0) : 0 }',
-        'rename_key(...) composes inside flow expressions through other hash/object helpers'
+        evaluate_lowered_json(
+            'return [' . LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('has_key(rename_key(meta, "old_stage", "stage"), "stage")') . ', {%meta}];',
+            q{my %meta = (kind => "token", old_stage => "draft");},
+        ),
+        q#{"value":[1,{"kind":"token","old_stage":"draft"}],"warnings":[]}#,
+        'rename_key composes with flow presence and preserves its source'
     );
     is(
         evaluate_lowered_json(

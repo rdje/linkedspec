@@ -1187,6 +1187,16 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
 | `binding_name.map_leaves!() { block }` | updated hash/array value | All five backends: atomically replace leaves and rebind one bare named receiver. |
 
+`rename_key` preserves a field's value while returning a new Hash. On Perl, this returns `[{"stage":"draft"},{"old_stage":"draft"}]`:
+
+```text
+meta = {"old_stage":"draft"};
+out = rename_key(meta, "old_stage", "stage");
+return([out,meta]);
+```
+
+A missing old key leaves the result contents unchanged; false and null field values remain false and null. For portable code, keep the destination key absent: [the helper catalog](../appendix/helper-contract-catalog.md#rename_keyh-old-new) records the existing backend-specific collision boundary.
+
 Each `pick_keys` key belongs to that call and is evaluated in argument order. A later call can select different keys from the same snapshot; it does not inherit an earlier key. For example, `meta={"first":"b","rest":"ar"}; return([meta.pick_keys("first"),meta.pick_keys("rest"),pick_keys(meta,"first","rest")])` returns `[{"first":"b"},{"rest":"ar"},{"first":"b","rest":"ar"}]`. A computed key block runs once for its operand: `pick_keys(meta,{seen=num_add(seen,1);"first"},"rest")` increments `seen` once and retains both existing keys. The source Hash stays unchanged. Regenerate affected Perl parsers emitted before the per-key lowering repair; their generated source may contain repeated earlier keys.
 
 On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Array fallback: `sorted_values(3)`, `sorted_values("3")` and `sorted_values(length("abc"))` return `[]`, independently of unrelated host hashes. The source is evaluated once. Actual Hash values still project values by sorted keys: `sorted_values({"b":"B","a":"A"})` returns `["A","B"]`. Producer-specific guards retain their own policy: `"abc".length().copy().sorted_values()` returns null. This does not define a universal wrong-kind policy or resolve absent/legacy binding behavior in other collection helpers. Regenerate Perl parsers emitted before the scalar-isolation repair; older modules can still consult symbolic host hashes. Generated metadata and format v2 are unchanged.

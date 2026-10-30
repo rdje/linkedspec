@@ -9439,11 +9439,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.15 - align set_key checks with staged operand values`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.16`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile retained rename_key helper group under existing pure copy/source/key/missing/collision contracts; independently public-probe before source-oracle movement. Repair real outliers first.
   Schedule: P1 next; other7 last-selected failures remain parent45/45.4 receipt-owned.
+  Verification tier: `focused`
+  Focused checks: Exact rename_key group, public native/fresh pure/missing/collision/source controls and direct consumer when warranted.
+  Canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
+  Claim verification: none: Finite named Hash/key distinctions, no population measurement.
+
+  Activation: clean `4261243e83e59c2ffdb5c90864d49e2280f14971`; proof jobs terminal and brief empty; exact group `emit_context_lowers_rename_key_value_helpers`.
+  - [x] **REPRODUCE / ISSUE**: Record actual isolated outcomes, separating cold private-owner setup from semantic failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Use Toolbox/public mechanisms and current canonical authority; classify only exact observed mismatches.
+  - [x] **FIX**: Repair real producer outliers or bounded obsolete oracles after independent public controls.
+  - [x] **ADDRESSED (verified)**: Exact changed-surface and direct public dependent controls pass with accepted values and effects.
+  - [x] **NO REGRESSION**: Keep healthy assertions/source/production contracts exact and disclose unassessed routes.
+  - [x] **LOCKSTEP**: Retain actual producer/artifact inputs and align task/book/fact/live/resume with the next owned leaf.
+
+  Chronology containment owned here: Prepend this engineering record then roll only a complete clean-activation suffix into the existing immutable store; independently verify source blob/commit, exact archived bytes/hash, old manifest rows and kept prefix. No budget/configuration change or history loss.
+  Result: Exact rename_key group reproduces1 nested-presence source-oracle RED/3 healthy, then4 GREEN. Known private-owner dependency is loaded locally before semantic replay. Original expression now checks successful renamed-key presence and source preservation; other3 assertions stay exact. Three public native/fresh cases retain renamed values, missing-key behavior, false/null fields, source contents and existing Perl destination-collision behavior. Portable collision normalization stays FUTURE5; no new peer/depth/alias/host-isolation policy. Production unchanged;528 other prior input hashes exact. Syntax/book/map/history/manual checks and independent lossless engineering-notes rollover verification pass. Actual source/RED-GREEN/producers/authority and rollover inputs retained in perl-phase0-rename-key-intake.json.gz. Book/new canonical fact/task/roadmaps/live/resume align; seven last-selected groups remain, drop_keys45.17 next. No full-suite/admission/push claim.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.16 - reconcile rename_key flow checks with preserved Hash values`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.17`
+  Status: `pending`
+  Goal: Reconcile retained drop_keys helper group under existing pure copy, scalar/spliced key and evaluation-order contracts; independently public-probe before source-oracle movement. Repair real outliers first.
+  Schedule: P1 next; other6 last-selected failures remain parent45/45.4 receipt-owned.
   Planned verification tier: focused.
-  Planned focused checks: Exact rename_key group, public native/fresh pure/missing/collision/source controls and direct consumer when warranted.
+  Planned focused checks: Exact drop_keys group, public native/fresh pure/spliced/missing/source/key-order controls and direct consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after20.1/registration and other prerequisites.
   Planned claim verification: none: Finite named Hash/key distinctions, no population measurement.
 
@@ -10608,7 +10629,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.16` | `pending` | Assess retained rename_key checks under existing pure Hash/key contracts. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.17` | `pending` | Assess retained drop_keys checks against existing pure/spliced-key contracts. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
