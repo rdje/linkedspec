@@ -1,7 +1,7 @@
 # Readonly anonymous capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.11; implementation family23.3.50.
-Status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending. No backend admission.
+Status: all five bounded children targeted-checked on recorded routes/hosts; full admission remains separate.
 
 ## Existing authority and actual gap
 
@@ -119,3 +119,19 @@ One exact runner include registers the normal, preserving every other runner
 byte. Actual twelve observations and complete summaries/input bindings are in
 capture-boundary-text-julia-intake.json.gz. Same-process fresh Module is not
 isolated package proof; full23.4 and safe Lua50.5 remain independent.
+
+## Bounded safe Lua50.5
+
+Installed PUC5.5.1/LuaJIT2.1.1788460057 independently already support the target.
+Strict new100/Number155/reset102 checks pass per host on native/restored/plan/
+fresh loaded module, with runtime unchanged. Four native/default sources, empty/
+missing/reversed/String0, snapshots and normalized guards hold. Direct take[]
+evaluates T; with returns Array/OK. Literal callbacks retain caller context;
+function/registered callback errors preserve authored helper fields and typed
+runtime/generated envelopes. One three-line runner block registers the normal
+with loadfile guards. Initial final-node activation-boundary setup stops before
+tracked writes and is corrected by a guarded resume. Actual hosts/observations/
+inputs are retained in capture-boundary-text-lua-intake.json.gz. No unsafe full
+runner/formatter, new interpreter chunk local or declared5.4/isolated-package/
+full23.4 proof. All bounded50 children have focused outcomes; selection23.1.12
+next selects useful remaining features without promoting full admission.

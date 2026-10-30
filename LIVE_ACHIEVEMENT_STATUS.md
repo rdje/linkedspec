@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
+Safe Lua100/Number155/reset102 pass per host; all bounded50 children checked; next feature selection23.1.12.
 
 ## Latest Completed Slice
 
-Julia independently already supports frozen readonly capture String50: strict new60/nearest Number75/reset70 assertions pass native/reconstructed SpecFile/generated-plan/fresh emitted Module with runtime unchanged and no invented RED. Shared9/native four/default/String-Array-signed-Number/empty/missing/reversed/String0, snapshot-before-reset and normalized suppression retain kinds and values. Existing direct take[]/T and withOK, literal callback caller state and specific pure-function/registered callback errors remain Julia policies. Strict --depwarn=error execution completes with empty stderr. New self-contained normal is registered by one exact include; all other runner bytes and 164 bound inputs stay exact. Actual twelve source observations/seven success/five fence controls and complete test summaries are retained with producers/inputs in capture-boundary-text-julia-intake.json.gz. Book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. Fresh Module is same-process source loading, not isolated package proof; no full runner/context/domain/portable admission or vocabulary change. Safe Lua50.5 independently next.
+Both installed PUC5.5.1/LuaJIT2.1.1788460057 independently already support frozen readonly capture String50: strict new100/nearest Number155/reset102 checks pass per host across native/restored/generated-plan/fresh loaded modules, with runtime unchanged and no invented RED. Shared9/four sources/default/String-Array-signed-Number/empty/missing/reversed/String0/snapshot/normalized-skip values hold. Existing take[]/T, withOK, literal caller context and authored-helper typed pure-function/registered callback errors stay qualified. New normal registers through one exact three-line runner block; loadfile guards compile runner/interpreter and 167 other bound inputs stay exact. Initial final-node activation writer stops before tracked writes and guarded resume fixes its boundary assumption, with no product credit. Actual two-host identities/twelve observations each/counters/producer/input epochs retained in capture-boundary-text-lua-intake.json.gz. All five bounded50 children now have focused outcomes on recorded routes/hosts; full23.4/declared5.4/Perl canonical registration and other prerequisites remain. Book/target/cards/map/task/roadmap/live/resume/history/manual checks pass. No unsafe full runner/formatter, isolated-package/context/portable or current combined28 admission. Next useful feature selection23.1.12 follows.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.5 independently from clean Julia50.4. Read frozen capture-boundary-text-results.md/shared fixture, safe PUC5.5.1/LuaJIT wrapper/normal/runner and existing getter/result/function/first-consumer/callback policies. Use only safe authored literal fixtures/loadfile; establish native/plan/fresh baselines on each installed host before production. Repair actual ordinary text gaps only; keep healthy host distinctions. Focused strict JSON/kind/compile checks/docs/registration/commit; then next useful fluent feature selection. No unsafe full runner, declared5.4 or exhaustive matrix.
+Activate TYPE-REFERENCE-BOOK.1.2.23.1.12 from clean bounded capture String50 coverage. Reconcile current helper/source/signature inventory and remaining fluent/result roles; start with existing advancing capture String/Number sources and related mutation/result transitions, distinguishing already-supported behavior from actual gaps through a few public producer/bound/direct/effect controls with a proven carrier. Freeze the next safe bounded target/independent owners before production. Preserve current endpoint/advance/null/once-order/shape/function/callback/first-consumer/copy/format authority; no comprehensive/portable admission or broad maintenance pivot. Compile/quick focused check/docs/commit cadence continues.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.50.5` — Safe Lua100/Number155/reset102 pass per host; all bounded50 children checked; next feature selection23.1.12.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.4` — Julia capture String60/Number75/reset70 pass without runtime change; safe Lua50.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.3` — Dart capture String6/Number6/reset3 pass without runtime change; independent Julia50.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.50.2` — Rust capture String6/Number6/reset3 pass without runtime change; independent Dart50.3 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.50.5 independently from clean Julia50.4. R
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.18` — pick_keys4/public2/per-key8 and three diagnostic guard controls pass; split_tagged_records next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.17` — drop_keys6 with embedded18/public2 pass; original keys/source contracts retained; pick_keys next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.16` — rename_key4/public3 preserve values/source and qualified collision; drop_keys next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.45.15` — set_key4/public2/direct3 pass with staged operand authority; rename_key next.
 
 ## History
 

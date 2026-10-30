@@ -7,19 +7,21 @@ answers:
   - "which task owns readonly capture String result composition"
   - "is capture_from_rule_start an accepted compatibility alias"
 date: 2026-10-30
-status: bounded Perl/Rust/Dart/Julia outcomes targeted-checked; safe Lua pending
+status: all bounded50 children targeted-checked on recorded routes/hosts; full23.4 remains
 tags: [perl, capture, string, fluent, lowering]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.11; capture-boundary-text-selection-intake.json.gz retains ten actual source/readiness/result controls, bound/direct nine-coordinate twins and initial transport epoch."
 reverify: "Recover probe_capture_string_assessment.pl and finite case inputs from capture-boundary-text-selection-intake.json.gz; run through tools/project_data_run.sh. Writes only the explicitly supplied project-local diagnostic output; no historical source swaps."
 ---
 
-Three readonly anonymous text getters and capture_from_rule_start return correct
-String values, but their direct coalesce/cat chains fail on Perl despite ready1.
-Native context retains handler errors and fresh emitted execution fails undefined
-coalesce; the empty-source/block case fails compilation. A primitive do-block
-inserted by late Contracts substitution still has authored method syntax after it.
-The early MethodLowering capture source hook only handles Number getters. Existing
-native text producers, bound continuations and named text reader controls work.
+At selection23.1.11, three readonly anonymous text getters and
+capture_from_rule_start returned correct String values, but their direct
+coalesce/cat chains failed on Perl despite ready1.
+Native context retained handler errors and fresh emitted execution failed with
+undefined coalesce; the empty-source/block case failed compilation. A primitive
+do-block inserted by late Contracts substitution still had authored method syntax
+after it. At that activation the early MethodLowering capture source hook only
+handled Number getters. Native text producers, bound continuations and named text
+reader controls already worked.
 
 TYPE23.3.50 freezes ordinary compatible String/default/Array/selected-String flow
 through those existing zero-argument sources. The bound nine-coordinate twin
@@ -59,3 +61,10 @@ Julia50.4 independently already supports frozen50: strict new60/Number75/reset70
 pass native/reconstructed/plan/fresh Module with runtime unchanged and normal
 registered. [[capture-boundary-text-julia-compatibility]] retains exact contexts
 and limits; safe installed Lua50.5 independently follows.
+
+Safe Lua50.5 independently already supports frozen50 on both installed hosts:
+new100/Number155/reset102 pass per host, runtime unchanged/normal registered.
+[[capture-boundary-text-lua-compatibility]] retains exact contexts/versions. All
+five bounded50 children now have focused outcomes; full source/context/domain/
+portable23.4/declared5.4/Perl registration remain separate. Selection23.1.12
+chooses useful remaining features next.
