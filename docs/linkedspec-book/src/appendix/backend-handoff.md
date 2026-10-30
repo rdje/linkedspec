@@ -2951,6 +2951,9 @@ counts. Perl native/fresh and Rust native/restored/plan focused controls pass. D
 preserves the static-call selected-kind guard across native/restored/plan, with
 original bound callable counts and typed function fences. Julia also preserves
 the target across native/reconstructed/plan/fresh same-process Module with its
-existing child invocation and typed function boundary. The closed named-read prerequisite
+existing child invocation and typed function boundary. Installed PUC Lua 5.5.1/
+LuaJIT also preserve static-call selected-kind guards across native/restored/plan/
+fresh loaded modules, retaining caller/function policies and interpreter chunk
+limits. Declared Lua 5.4 remains separately owned. The closed named-read prerequisite
 also preserves frozen write AST/diagnostics. Independent backend work preserves invocation/cursor/error/callable
 authority; no peer or portable admission follows from the Perl intake.

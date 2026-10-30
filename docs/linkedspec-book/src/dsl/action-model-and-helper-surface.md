@@ -203,7 +203,7 @@ Invoke child rules and handle results:
 - `call(RuleName)` — call a child rule and capture its return value
 - Combined with `retv = call(Child)` to store child results
 
-Perl, Rust, Dart and Julia support compatible methods and typed Array/Hash brackets directly on an
+Perl, Rust, Dart, Julia and the checked PUC Lua/LuaJIT hosts support compatible methods and typed Array/Hash brackets directly on an
 ordinary static rule call. A child Array result can feed
 `call(Child)[-1].uppercase()`; nested results compose in the same way:
 
@@ -222,7 +222,7 @@ false, zero, String `"0"`, null and nested containers retain their own kinds.
 This adds bracket composition for the existing bare rule-name form. Child
 invocation and parser-state restrictions remain: pure functions cannot call
 parser rules. Deferred callback bodies retain their existing read grammar.
-Rust preserves these guards across native, restored and generated-plan execution. Rebuild compiled Rust and Dart applications with their updated runtime packages. Dart also preserves the selected-kind operand guards across native, restored and generated-plan execution, including its typed function errors and existing callable counts. Julia also preserves the target across native, reconstructed, generated-plan and same-process freshly loaded emitted Module execution with its updated runtime. Safe Lua and full source/context/portable admission are assessed independently.
+Rust preserves these guards across native, restored and generated-plan execution. Rebuild compiled Rust and Dart applications with their updated runtime packages. Dart also preserves the selected-kind operand guards across native, restored and generated-plan execution, including its typed function errors and existing callable counts. Julia also preserves the target across native, reconstructed, generated-plan and same-process freshly loaded emitted Module execution with its updated runtime. PUC Lua 5.5.1 and LuaJIT also preserve the static-call selected-kind guards across native, restored, generated-plan and freshly loaded modules. These are bounded checks on recorded routes and hosts; declared Lua 5.4 and full source/context/portable admission stay separate.
 
 Named-array selectors can assign working variables while producing an index:
 

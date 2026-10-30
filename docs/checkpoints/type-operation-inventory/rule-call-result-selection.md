@@ -1,7 +1,7 @@
 # Rule-call result bracket selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.15; family23.3.54.
-Status: prerequisite54.0 and bounded Perl/Rust/Dart/Julia children repaired/targeted-checked; safe Lua pending.
+Status: prerequisite54.0 and all five bounded children repaired/targeted-checked on recorded routes/hosts; full admission separate.
 
 ## Existing authority and actual gap
 
@@ -159,3 +159,22 @@ old owner/normal/producers/inputs/RED-GREEN retained in
 rule-call-result-julia-intake.json.gz. No isolated package/full runner/quoted-
 dynamic-extra-argument source/child-error-deferred/schema/full admission grant.
 Safe Lua54.5 independently follows.
+
+## Bounded safe Lua54.5 repaired
+
+Both installed PUC5.5.1/LuaJIT2.1.1788460057 independently capture39healthy/4RED
+out of43; all four shared13 routes execute BAD/return[] instead of null. Existing
+single bare static positional calls now join the current actual-kind guard.
+Only nine lines inside its existing function change; body locals add no module
+chunk locals/functions, and all remaining interpreter/invocation/parser/reader
+bytes stay exact. New43/boundary81 plus existing six computed-control programs
+pass per host with empty stderr. New normal uses native/restored/plan/fresh loaded
+modules; existing computed normal uses its own native/plan/fresh routes. Shared13/
+kinds/once/order/live-origin/missing/normalized skips/static lookup/typed function
+errors/explicit arguments and bound callable counts hold. Exact three-line runner
+block/loadfile guards register the normal; fixed JSON validated before creation.
+Actual host/source/normal/producers/RED-GREEN/inputs retained in
+rule-call-result-lua-intake.json.gz. All bounded54 children/prerequisite54.0 have
+focused outcomes; next useful selection23.1.16 follows. No unsafe runner/formatter/
+declared5.4/isolated package/quoted-dynamic-extra-argument source/child-error-
+deferred/schema/full admission grant.

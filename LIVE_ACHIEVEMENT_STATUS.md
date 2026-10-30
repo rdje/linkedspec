@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia selected-call guard31healthy/4RED→35GREEN; computed25/boundary65/strict compile pass; safe Lua54.5 next.
+Safe Lua selected-call guard39healthy/4RED→43GREEN per host; boundary81/computed pass; all bounded54 checked; next selection16.
 
 ## Latest Completed Slice
 
-Julia independently exposes selected-call guard gap: unchanged normal31healthy/4RED out of35, shared13 all four routes capture []/ICJBAD instead of null/ICJ. _runtime_is_ordinary_computed_read excludes call; admit only original bare static positional call to existing actual-kind guard, preserving all remaining interpreter/invocation/parser/reader bytes. Strict new35/computed25/boundary65 pass under depwarn=error; seven new source observations retain native/reconstructed SpecFile/generated-plan/fresh same-process Module values and typed function errors. Nearest computed normal retains its own native/plan/fresh routes. Shared13/kinds/once/live-origin/order/empty/null/missing/normalized skips/static lookup/function fence/explicit arguments and bound callable counts hold. One exact runner include registers new normal; 167 other input hashes/shared fixture exact. Stderr is only successful package precompilation progress, no runtime warning/error. Actual old owner/normal/producers/inputs/RED-GREEN retained in rule-call-result-julia-intake.json.gz. Book/card/target/task/roadmap/live/resume/history align. No isolated package/new call arity/quoted-dynamic source/child-error-deferred/schema/full admission; safe Lua54.5 independently follows.
+Both installed PUC5.5.1/LuaJIT2.1.1788460057 independently expose guard gap: unchanged normal39healthy/4RED out of43 per host, shared13 all four routes execute BAD/return[] instead of null/ICJ. Admit only existing bare static positional call to current actual-kind guard; nine lines/body locals only, no new interpreter chunk local/function and all remaining interpreter/invocation/parser/reader bytes exact. New43/boundary81 plus six existing computed programs/native-plan-fresh controls pass per host, stderr empty; new sources retain native/restored/generated-plan/fresh loaded modules. Shared13/kinds/once/live-origin/order/empty/null/missing/normalized skips/static lookup/typed function fence/explicit arguments and bound callable counts hold. Exact three-line runner block/loadfile guards and 170 other input hashes/shared fixture preserved; fixed expected JSON validated before creation. Actual hosts/source/normal/producers/RED-GREEN/inputs retained in rule-call-result-lua-intake.json.gz. All bounded54 children and prerequisite54.0 targeted-checked; full23.4/registration/declared5.4 remain separate. Book/cards/target/task/roadmap/live/resume/history align; next useful selection23.1.16 follows. No unsafe runner/formatter/isolated package/new call arity/error/deferred/schema/full admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.5 independently from clean Julia54.4. Read rule-call-result-selection.md/shared13, safe Lua static call/computed-read selected-kind guard and existing invocation/frame/cursor/retv/error/function/deferred contracts plus runner/nearest normals. Establish own native/restored/generated-plan/fresh loaded-module baseline on installed PUC/LuaJIT with safe authored fixtures/loadfile before runtime changes; preserve healthy behavior, fix actual static selected-result gaps only. Preserve source once/ordered selectors/kinds/missing/normalized skips and current call labels/arity/copy/error/schema. Exact three-line runner block, no new interpreter chunk locals, quick new-nearest checks/docs/book/history/commit; then next useful selection. No unsafe full runner/formatter/declared5.4/peer-policy inference or full admission.
+Activate TYPE-REFERENCE-BOOK.1.2.23.1.16 from clean bounded static rule-call result54 coverage. Reconcile current helper/signature/source/result-role inventory and completed families via Knowledge Map/canonical records first. Begin remaining inter-match gap/slot boxed-record result reads and cursor effect-returning Number sources, without assuming a gap. Use finite public primitive/bound/direct/effect controls on a proven documented carrier to distinguish missing composition from healthy forms; choose one useful safe target and own independent backend/prerequisite tasks before production. Preserve existing capture-gap/entry metadata/span/policy, label/arity/invocation/function/callback/deferred/copy/shape/error/schema authorities. Focused compile/quick check/docs/commit cadence continues; no maintenance/full admission pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.54.5` — Safe Lua selected-call guard39healthy/4RED→43GREEN per host; boundary81/computed pass; all bounded54 checked; next selection16.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.4` — Julia selected-call guard31healthy/4RED→35GREEN; computed25/boundary65/strict compile pass; safe Lua54.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.3` — Dart selected-call guard5healthy/1RED→6GREEN; computed7/boundary6/analysis/format pass; independent Julia54.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.2` — Rust selected-call guard5healthy/1RED→6GREEN; computed6/boundary6/fmt pass; independent Dart54.3 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.54.5 independently from clean Julia54.4. R
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.5` — Safe Lua Number97/String102/readonly Number155/reset102 pass per host; all bounded52 checked; next selection14.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.4` — Julia advancing Number65/String70/readonly Number75/reset70 pass, runtime unchanged; safe Lua52.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.52.3` — Dart advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Julia52.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.52.2` — Rust advancing Number6/String6/readonly Number6/reset3 pass, runtime unchanged; Dart52.3 next.
 
 ## History
 

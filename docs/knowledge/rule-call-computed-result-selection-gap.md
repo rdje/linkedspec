@@ -7,7 +7,7 @@ answers:
   - "why does an assignment in a closed named array selector report a nested write error"
   - "which task owns rule-call result selection and closed selector recovery"
 date: 2026-10-30
-status: prerequisite54.0 and bounded Perl/Rust/Dart/Julia repaired/targeted-checked; safe Lua pending
+status: prerequisite54.0 and all bounded54 children repaired/targeted-checked on recorded routes/hosts; full23.4 remains
 tags: [perl, actionir, selection, rule-call, parser, fluent, effects]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.15; rule-call-result-selection-intake.json.gz retains six healthy controls, two direct Array/Hash failures, scalar null policy, minimal closed-read distinction, healthy shared13 fluent carrier and actual instrument epochs/inputs."
 reverify: "Recover probe_rule_call_result_assessment.pl/finite cases from rule-call-result-selection-intake.json.gz; run project Perl wrapper with explicit local outputs. No historical source swaps."
@@ -69,3 +69,9 @@ its existing actual-kind guard for single bare static call sources.
 [[julia-rule-call-selection-guard]] records unchanged35/nearest25+65/strict
 compiler/four new routes/exact runner include and actual source/input limits.
 All remaining interpreter/invocation/schema bytes stay exact; safe Lua independent.
+
+Safe Lua54.5 independently fixes static source-role omission on both installed
+hosts. [[lua-rule-call-selection-guard]] records39healthy/4RED→43GREEN per host,
+boundary81/existing computed controls/loadfile/exact runner block and no new
+interpreter chunk locals. All bounded54 children/prerequisite54.0 now have focused
+outcomes; selection23.1.16 follows, full23.4/declared5.4/registration separate.
