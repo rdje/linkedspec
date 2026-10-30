@@ -47101,8 +47101,10 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
         'unknown receiver-dot hash method is not lowered as a supported hash method');
     like($L->('return(meta.rename_key("a","aa").drop_keys("b").set_key("z",4).count_keys())'), qr/__ls_rename_key.*__ls_drop.*__ls_count_keys/s,
         'explicit hash receiver chains hash-returning helpers into count_keys');
-    like($L->('return(meta.copy().flat_hash().count_keys())'), qr/__ls_hash_snapshot.*__ls_count_keys/s,
-        'copy/flat_hash receiver chain lowers as a hash-valued snapshot');
+    is(evaluate_lowered_json(
+            $L->('meta={"a":1,"b":2}; return(meta.copy().flat_hash().count_keys())'), q{my $meta;},
+        ), q#{"value":2,"warnings":[]}#,
+        'copy/flat_hash receiver chain counts keys from an initialized copied Hash value');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set_key(meta,\"b\",2); set_key(meta,\"a\",1); set_key(extra,\"a\",9); set_key(extra,\"c\",3); set_key(layered,\"a\",extra.pick_keys(\"a\").sorted_values().first()); return(array(meta.set_key(\"c\",3).sorted_keys().join_values(\",\"), layered.pick_keys(\"a\").sorted_values().first(), meta.rename_key(\"a\",\"aa\").drop_keys(\"b\").set_key(\"z\",4).count_keys(), meta.pick_keys(\"a\",\"missing\").has_key(\"a\"), meta.pick_keys(\"missing\").count_keys(), meta.sorted_values().drop_front(1).first(), meta.copy().flat_hash().count_keys(), missing.copy().count_keys())) }\n"
@@ -47110,7 +47112,7 @@ subtest 'spec_format_terse_2_3_5_2_hash_receiver_value_chains' => sub {
     my $parser = eval { LinkedSpec::Get(\$spec) };
     ok(ref($parser) eq 'CODE', 'hash receiver value-chain spec compiles to a parser')
         or diag(normalize_error($@));
-    is($run->($parser, 'xhello'), '["a,b,c",9,2,1,0,2,2,0]',
+    is($run->($parser, 'xhello'), '["a,b,c",9,2,1,0,2,2,null]',
         'hash receiver value chains return hash/array/scalar/number/boolean terminal values');
 
     my $statement_spec = "Top::\n"

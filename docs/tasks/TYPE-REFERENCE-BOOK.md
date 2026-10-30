@@ -9285,14 +9285,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.9 - reconcile strict scalar cat regression value checks`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.10`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `dee7842c791bf117510b2781b2c5ad716e024f1d`; no proof jobs and brief empty.
   Goal: Reconcile the exact spec_format_terse_2_3_5_2_hash_receiver_value_chains group with approved scalar/null copy, actual-kind continuation and pure Hash snapshot authority; fix an actual defect if that contract demands it.
   Reproduction: TYPE45.4 retains2 failures among14 assertions: old copy/flat_hash source regex expects __ls_hash_snapshot and the final missing.copy().count_keys() value is null versus expected0. Do not silently accept null; distinguish approved null-preserving copy/guarded continuation from legacy direct count and healthy Hash copy.
   Impact / schedule: P1 immediately after45.9, prioritizing the retained runtime-valued mismatch before more printed-source oracle repairs. Other13 last-selected failed names, including pending emptiness/other helper groups, remain owned45.4 receipt/parent45.
+  Verification tier: `focused`
+  Focused checks: Exact14 assertions and original source/descriptor proof; six public native/fresh original/missing/bound-null/direct-count/empty-filled Hash/default recovery/outer-value snapshot/incompatible operand controls under ADR0138; exact two-assertion edit/production nonmutation and syntax. Prior copy depth/receiver normal evidence is not rerun/promoted; no new alias-depth inference from JSON.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored copy/continuation distinctions, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Exact14 group reproduces2 failures/12 healthy assertions; current native/fresh original result ends in null.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: ADR0138 preserves missing/null copies and guards later container-only consumers by actual kind. Six independent controls distinguish copied null from direct count0, empty Hash count0, filled Hash count2 and explicit default recovery; source/value/operand controls pass.
+  - [x] **FIX**: Reconcile only obsolete printed copy-owner assertion with an initialized typed Hash value check, and final missing-copy expected value with approved null. Preserve original runtime DSL and other12 assertions; production unchanged.
+  - [x] **ADDRESSED (verified)**: Exact14 and six native/fresh controls pass with unchanged original source, values/cursors/errors/warnings matching independent targets.
+  - [x] **NO REGRESSION**: Direct-count versus copied-result distinction, Hash values/outer source preservation/guard effects remain; no copy-depth/container-kind/host-isolation policy movement or silent null acceptance.
+  - [x] **LOCKSTEP**: Approved copy authority, book examples, canonical fact/map/task/roadmaps/live/resume and next bounded child agree.
+
+  Result: Exact Hash chain14 reproduces2 failures/12 healthy assertions. ADR0138 preserves missing/null copies and dispatches continuations by actual kind. Six independent public native/fresh controls verify original null result, copied missing/bound-null versus direct count0, empty/filled Hash0/2, explicit Hash-default recovery, outer source/value preservation and skipped incompatible operands. Reconcile only old missing-copy0 to approved null and printed copy-owner regex to initialized typed Hash value check; original runtime DSL/other12 assertions byte-exact, all14 pass. Syntax/empty final stderr,529 other hashed inputs unchanged and no production changes. No new nested alias/depth/host-isolation or peer/full-suite credit; prior receiver normals not rerun/promoted. Actual source/RED-GREEN/native-fresh/authority inputs/producers retained in perl-phase0-hash-copy-intake.json.gz. Book distinction/canonical fact/map/task/roadmaps/live/resume align; String returned-type45.11 next, other12 current failed names owned45. No silent null acceptance/full suite/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.10 - reconcile Hash chain checks with approved null copy`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.11`
+  Status: `pending`
+  Goal: Reconcile the exact spec_format_terse_2_3_5_3_string_receiver_value_chains group with implemented scalar/predicate/length continuations and current String result-kind authority; repair actual outliers before any oracle change.
+  Reproduction: TYPE45.4 retains failures among18 assertions: a literal substr/uppercase source check and old terminal-method rejection expectations; actual length/trim and predicate/coalesce/trim results differ from old [null,null]. Establish exact output kinds/source/effects through public native/fresh and accepted continuation contracts, not an assumption that every result is String.
+  Impact / schedule: P1 immediately after45.10 before remaining source-only helper repairs/full23.4/push; other12 last-selected failed names remain owned45.4 receipt/parent45, including emptiness/other helpers and with blocks.
   Planned verification tier: focused.
-  Planned focused checks: Exact14 assertions, public original source/native/fresh/descriptor and absent/null/empty Hash/direct-count/copy-depth/snapshot controls; direct copy receiver consumer and accepted ADR0138/actual-kind boundaries.
+  Planned focused checks: Exact18 assertions, public original/literal/Number-length/predicate/default/trim-kind and incompatible-tail controls; current result-family contracts and direct focused consumer as warranted.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored copy/continuation distinctions, no population measurement.
+  Planned claim verification: none: Exact authored returned-type continuation distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10455,7 +10475,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.10` | `pending` | Reconcile the retained Hash-chain null/copy mismatch against approved authority, then continue the other13 owned failures. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.11` | `pending` | Reconcile retained String result continuations/kinds, then continue the other12 owned failures. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

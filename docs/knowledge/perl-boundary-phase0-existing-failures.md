@@ -98,3 +98,10 @@ consumer7 passes, production/neutral contract unchanged. Initial3/1 count
 assumption is rejected; both actual diagnostic epochs are1/3 and overbroad
 transient changes are restored. Other14 last-selected failures stay owned;45.10
 next prioritizes the runtime Hash-chain null/copy distinction against authority.
+
+TYPE45.10 subsequently reconciles two Hash-chain assertions under explicit
+ADR0138 null-copy authority:2RED/12healthy ->14GREEN, with six public native/fresh
+controls distinguishing copied null from direct count0/empty Hash/default recovery.
+Original runtime source/other12 assertions/production unchanged; no new depth or
+isolation claim. Other13 last-selected failures remain owned; String returned-type
+continuation45.11 next.

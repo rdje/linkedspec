@@ -11,7 +11,8 @@ answers:
   - "does ordinary Perl function copy preserve primitive values and selector kinds"
   - "does deferred Perl copy support primitive values or receiver methods"
   - "does ordinary Perl shallow copy describe interpreted copy depth"
-date: 2026-10-10
+  - "why does copied null count_keys return null while direct count_keys returns zero"
+date: 2026-10-30
 status: accepted public repair at770cffcc; original proof requires its accepted Git input state
 tags: [perl, actionir, ast, copy, containers, receivers]
 evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0 retains identical50 assertions: original9 semantic REDs/41 controls/all50 current GREEN. Live Get and retained standalone source each execute14 cases; typed AST poisoning is independent. Three syntax-valid faults fail9/4/8 named assertions. Supplied61 suites/184 files, evidence5/original307 restoration and complete book89/three controls pass. Native probe/regression/channels remain unchanged; canonical admission is separate."
@@ -89,3 +90,15 @@ used to infer producer depth because invocation/container boundaries also copy.
 The separate computed deferred raw/readiness boundary remains covered. Perl's
 bounded producer/receiver/context children are complete; independent backends
 and full source/context/portable/canonical admission remain open.
+
+TYPE45.10 (2026-10-30) reconciles the old Hash-chain regression under ADR0138,
+without production changes. Missing/bound-null copies followed by count_keys
+return null through actual-kind guards; direct count_keys on the same missing/
+null values keeps0. Empty/filled Hash copies count0/2, and an explicit Hash
+coalesce fallback restores counting. Six native/fresh controls include the exact
+original chain, outer value/source preservation and skipped incompatible Hash
+operands. They justify the one old0->null expectation; the printed copy-owner
+assertion becomes an initialized typed Hash value check, other12 assertions stay
+exact and all14 pass. No new copy-depth/alias/host-isolation or peer admission
+is inferred from JSON. Actual producers/source/results are retained in
+perl-phase0-hash-copy-intake.json.gz; other frozen failures remain owned45.
