@@ -16668,7 +16668,7 @@ subtest 'emit_context_lowers_general_return_payloads_with_nested_structures' => 
         evaluate_lowered_json(
             LinkedSpec::call_spec_handler_subst('Top', 'return(array(filter_match(uniq(uppercase_each(IMATCH_LIST)), /^A/)))'), q{my @IMATCH_LIST = qw(alpha beta alpha apple);},
         ),
-        q#{"value":["ALPHA","APPLE"],"warnings":[]}#,
+        q#{"value":[["ALPHA","APPLE"]],"warnings":[]}#,
         'general return(payload) lowers nested array-pipeline composition inside array(...) payloads'
     );
     is(

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Frozen28 now8PASS/20FAIL with530 inputs unchanged; exact nested Array result45.5 next.
+Nested Array oracle reconciled with six native/fresh controls;22 assertions pass; collection pipeline45.6 next.
 
 ## Latest Completed Slice
 
-Current-only frozen28 replay at clean e88294537 completes all selected/nested assertions and29-result TAP:8 groups pass,20 fail, exit20,530 current input hashes unchanged. The cleared set includes the repaired lazy-owner/substitution/map groups plus canonical containers, capture/structured return lowering, flat lists, user functions and bare binding memory. Exact20 current names/TAP/stderr/producers/inputs retained in perl-phase0-after-pick-intake.json.gz, with prior28-failure boundary immutable in earlier packets. No production/test/expectation change or old-source swap, no full-suite state inferred. First remaining group has one of12 assertions differing on nested Array shape; child45.5 must reconcile current constructor identity authority before any repair, other19 remain owned45. Book/fact/map/task/roadmaps/live/resume align; focused authorized checkpoint, no full gate/push.
+Exact nested-return group has1 value RED among12 assertions; adjacent fluent/structured return10 stay healthy. Existing evaluated-value constructor authority keeps ordinary Array operands nested, explicit flat splices open them. Six independent public native/fresh controls verify computed/literal nesting, direct pipeline, explicit splice and nested/spliced empty results with no warnings/errors. Change exactly one expected JSON nesting level; original12/adjacent10 all22 assertions pass and529 other hashed inputs remain unchanged. No production or helper/wrapper/copy/flat contract change; no shape-only blanket refresh. Actual RED/GREEN/source/emission/results/producers retained in perl-phase0-array-nesting-intake.json.gz. Current book examples and canonical shape fact/map/task/roadmaps/live/resume align; two collection pipeline groups45.6 follow, other17 current failed names stay owned45. Prior20-failure snapshot remains dated; no full suite/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.5 from clean selected replay checkpoint. Reconcile the exact12-assertion nested-return group with current Array constructor/aggregate identity authority and public substitution/native/fresh controls; repair only the established cause, preserving wrapper/flat/copy boundaries. The other19 current failed names are in the45.4 packet receipt and remain owned45. No blanket value refresh, historical source swaps or full Phase0 per repair; registration23.4.1/20.1 and other canonical prerequisites remain before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.6 from clean single nested-constructor oracle repair. Inspect the exact collection value/hash equivalence26 assertions using current pure-value/statement pipeline and constructor authority plus public source/native/fresh controls. Reconcile each actual mismatch without blanket source/result refresh; preserve actual defects as product owners. Other17 current failed names remain in45.4 packet/parent45. Canonical registration23.4.1/20.1 and other prerequisites remain before full23.4/push; no full Phase0 per repair.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.5` — Nested Array oracle reconciled with six native/fresh controls;22 assertions pass; collection pipeline45.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.4` — Frozen28 now8PASS/20FAIL with530 inputs unchanged; exact nested Array result45.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.3` — Perl pick_keys operand reuse repaired;51 normal groups/original map5 pass; frozen28 reassessment45.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.2` — Endpoint source expectations match accepted guards;90 source assertions/46 runtime groups pass; exact map45.3 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.5 from clean selected replay checkpoint
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.3` — Dart pure-code blind targets compile/execute on recorded routes; Julia48.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2` — Dart own arrays are fresh per invocation; pure-code compiler48.3.3 next, ordinary policy39.8.1 separate.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1` — Dart blind parent-push13 controls repaired; invocation accumulator48.3.2 immediately next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.48.3` — Dart blind target declaration validation repaired; parent-push runtime48.3.1 immediately next.
 
 ## History
 

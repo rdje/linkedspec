@@ -68,3 +68,9 @@ unchanged. Exact names and actual producer/TAP/diagnostics are retained in
 perl-phase0-after-pick-intake.json.gz. The first remaining nested Array result
 has child45.5; other19 exact names remain owned45. Prior boundaries remain dated;
 this selected replay establishes no full-suite state or common cause for all20.
+
+TYPE45.5 subsequently corrects one nested Array constructor expectation under
+existing evaluated-value authority, distinguished by six native/fresh nested/direct/
+explicit-flat/empty controls. Original12 and adjacent10 assertions pass22; all
+production remains unchanged. Other19 last-selected failures remain owned;45.6
+next assesses two collection pipeline groups, with no blanket expected-value refresh.

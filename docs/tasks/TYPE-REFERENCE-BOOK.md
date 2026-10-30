@@ -9181,14 +9181,35 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.4 - retain current selected failures after the shared key repair`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.5`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `6260409b16237727c24f21c9eaa53068b6030f86`; no proof jobs and brief empty.
   Goal: Reconcile the exact emit_context_lowers_general_return_payloads_with_nested_structures group's nested Array result with current constructor/aggregate identity authority; repair the established cause only.
   Reproduction: Current45.4 at e882 has one failure in this group's12 assertions: nested array-pipeline composition inside array(...) returns [["ALPHA","APPLE"]] versus expected ["ALPHA","APPLE"]. Do not classify nested/flat solely by observed shape or normalize null/nesting globally.
   Impact / schedule: P1 immediately after45.4 before other remaining failures/full23.4/push. The exact other19 current failed names stay owned45.4's retained receipt and parent45, with bounded children selected after this repair.
+  Verification tier: `focused`
+  Focused checks: Exact12-assertion group and adjacent10-assertion fluent/structured-return equivalence; six public native/fresh ordinary nested/direct/spliced/empty constructor controls, exact one expectation edit and production nonmutation; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored constructor/result distinction, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Exact general-return group has one nested Array value failure among12 assertions.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public probes distinguish ordinary nested container operands from explicit flat splices under current evaluated-value constructor authority; no shape-only classification.
+  - [x] **FIX**: Repair only the obsolete expectation if the contract/probes agree; preserve all implementation/other assertion bytes.
+  - [x] **ADDRESSED (verified)**: Original group and adjacent structured-return equivalence pass; direct/nested/flat/empty controls retain independent expected values.
+  - [x] **NO REGRESSION**: No production or constructor/flat/copy contract change, no blanket result refresh.
+  - [x] **LOCKSTEP**: Current public nesting examples, canonical fact/map/task/roadmap/live/resume and next bounded child agree.
+
+  Result: Exact nested-return group has1 value RED among12 assertions; adjacent fluent/structured return10 stay healthy. Existing evaluated-value constructor authority keeps ordinary Array operands nested, explicit flat splices open them. Six independent public native/fresh controls verify computed/literal nesting, direct pipeline, explicit splice and nested/spliced empty results with no warnings/errors. Change exactly one expected JSON nesting level; original12/adjacent10 all22 assertions pass and529 other hashed inputs remain unchanged. No production or helper/wrapper/copy/flat contract change; no shape-only blanket refresh. Actual RED/GREEN/source/emission/results/producers retained in perl-phase0-array-nesting-intake.json.gz. Current book examples and canonical shape fact/map/task/roadmaps/live/resume align; two collection pipeline groups45.6 follow, other17 current failed names stay owned45. Prior20-failure snapshot remains dated; no full suite/push.
+  Routine containment: Changelog threshold requires rollover of67 committed suffix lines into segment-4944-ccf392d91a0d.md. Independent source-blob/LF suffix/count/hash, unchanged old manifest rows and retained current preamble/records verification pass. Initial verifier incorrectly included the preamble in its suffix comparison; inspection confirms only the intended trailing blank normalization, and corrected checks pass. No archived record or budget is changed.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.5 - preserve nested Array constructor expectations`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.6`
+  Status: `pending`
+  Goal: Reconcile the two exact collection value/hash pipeline equivalence groups with pure value pipelines, nested constructors and current typed binding authority, preserving any actual defects as product owners.
+  Reproduction: TYPE45.4 retains method_like_collection_value_pipeline_forms_lower_equivalently (12 assertions) and method_like_collection_hash_pipeline_forms_lower_equivalently (14 assertions) among20 failures. Source-shape expectations assert old mutating pipeline bodies; nested constructor expectations may share45.5's authority, but each actual diagnostic still needs public source/value proof.
+  Impact / schedule: P1 immediately after45.5 before other remaining failures/full23.4/push. Other17 current failed names remain owned45.4's retained receipt/parent45; no blanket pipeline or constructor refresh.
   Planned verification tier: focused.
-  Planned focused checks: Exact12-assertion group, public substitutions/evaluation/native/fresh and independent Array constructor/wrapper/flat/typed aggregate controls; preserve accepted copy/depth/actual-kind transitions.
+  Planned focused checks: Exact26 assertions, public native/fresh pure/statement pipeline, binding/source preservation and nested hash/Array controls; current canonical pipeline consumer when warranted.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored constructor/result distinction, no population measurement.
+  Planned claim verification: none: Exact authored source/value distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10351,7 +10372,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.5` | `pending` | Reconcile the exact nested Array constructor result, then continue the other19 current failed groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.6` | `pending` | Reconcile the two exact collection pipeline groups, then continue the other17 current failed groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
