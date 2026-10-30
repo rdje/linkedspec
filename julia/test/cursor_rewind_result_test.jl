@@ -107,11 +107,17 @@ const primitive_body="save_cursor();p0=cursor_pos();v0=rewind_entry_start();p1=c
     @testset "Absent anchors retain null without movement" begin
         check("absent","Top:: I {return([rewind_entry_start(),rewind_match_start(),cursor_pos(),restore_cursor(),cursor_pos()])}","x",Any[nothing,nothing,0,nothing,0])
     end
-    @testset "Legacy malformed rewind preservation pending arity repair" begin
-        # Known defect preservation, no healthy arity or supported-shape credit.
-        for (helper,position) in (("rewind_entry_start",2),("rewind_match_start",4))
-            for argument in ("1","extra:1")
-                check("legacy_$(helper)_$argument",carrier("return([$helper($argument),cursor_pos()])"),"zzab:cd",Any[nothing,position])
+    @testset "Malformed rewinds reject before result selection" begin
+        # Original accepted-null epoch remains in the56.4 result intake.
+        rows=Any[Dict("helper"=>helper,"argument"=>argument,
+            "routes"=>observe(carrier("return([$helper($argument),cursor_pos()])"),"zzab:cd"))
+            for helper in ("rewind_entry_start","rewind_match_start") for argument in ("1","extra:1")]
+        println("CURSOR_REWIND_ARITY ",JSON3.write(rows))
+        for item in rows
+            @test Set(keys(item["routes"]))==Set(["native","restored","plan","fresh"])
+            for row in values(item["routes"])
+                @test all(occursin(part,get(row,"error","")) for part in
+                    ("helper_arity_mismatch","helper_name=$(item["helper"])","actual_arity=1"))
             end
         end
     end

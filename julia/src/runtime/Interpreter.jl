@@ -4372,7 +4372,10 @@ function _evaluate_runtime_call!(
             rule_label,
         )
     end
-    if helper_name in ("entry_slot", "gap_span", "gap_text", "gap_kind")
+    if helper_name in (
+        "entry_slot", "gap_span", "gap_text", "gap_kind",
+        "save_cursor", "restore_cursor", "rewind_entry_start", "rewind_match_start",
+    )
         actual_arity = length(args) + keyword_arg_count
         if actual_arity != 0
             expected_arity = "exactly 0 arguments"
@@ -4385,7 +4388,8 @@ function _evaluate_runtime_call!(
                     engine,
                     context;
                     stage = "helper_arity_mismatch",
-                    summary = "Julia inter-match gap helper arity failed",
+                    summary = helper_name in ("save_cursor", "restore_cursor", "rewind_entry_start", "rewind_match_start") ?
+                        "Julia cursor control helper arity failed" : "Julia inter-match gap helper arity failed",
                     detail,
                     rule_label,
                     code = "helper_arity_mismatch",

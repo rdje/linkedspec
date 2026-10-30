@@ -677,8 +677,11 @@ and the compiler rejection of trailing codeblocks. For example,
 Julia now also returns validated character-based Numbers
 from the two successful zero-argument rewinds, including direct guarded methods
 and Array recovery; absent anchors remain null. Rebuild Julia runtime/apps.
-Julia surplus-argument validation is the next owned repair; use zero-argument
-forms. Lua is assessed independently.
+All four Julia cursor controls reject surplus arguments with
+`helper_arity_mismatch` before helper effects. For example,
+`rewind_match_start(extra:1)` fails without rewinding. Pure-function restrictions
+still take priority; trailing codeblocks still fail at compilation. Lua is
+assessed independently.
 
 Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns

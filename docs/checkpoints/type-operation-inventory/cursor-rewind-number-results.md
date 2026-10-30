@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 repaired/targeted-checked; Julia56.4 canonical-zero result targeted-checked; arity56.4.0 next before safe Lua.
+Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 repaired/targeted-checked; Julia56.4 canonical-zero result targeted-checked; arity56.4.0 repaired/targeted-checked; safe Lua pending.
 
 ## Existing authority
 
@@ -169,3 +169,16 @@ results/two function fences retain native/restoredSpec/plan/fresh Module. Four
 surplus rewind forms remain null/moving until immediate P1 child56.4.0. Actual
 producers/inputs/results in cursor-rewind-result-julia-intake.json.gz. Rebuild
 runtime/apps; no isolated package/full admission; safe Lua56.5 after arity repair.
+
+## Julia cursor arity56.4.0 repaired
+
+All four controls share original eager zero-arity validation with accurate
+cursor-only summary and unchanged gap diagnostics. Same189assertions93PASS/96RED
+now pass189, parent75/gap98 strict depwarn pass.24 invalid programs/96 four-route
+outputs reject with helper/count/expected0; function/valid0/Unicode/absence/stack/
+logical/prefix/trailing compiler observations stay exact. Parent's final legacy
+acceptance group is replaced in a retained epoch, nine positive groups exact.
+Original93 includes24 scaffold checks, no inflated healthy-value count. Actual
+producer/source/inputs/results in cursor-control-arity-julia-intake.json.gz.
+Earlier accepted-malformed notes are historical only. Rebuild runtime/apps;
+safe Lua56.5 next. No isolated package/new state/schema/full admission.

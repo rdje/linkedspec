@@ -3005,8 +3005,9 @@ null absent anchors. Its four cursor controls now reject surplus arguments
 before physical effects, preserving function priority and trailing compile
 rejection. Rebuild Dart runtime/apps. Julia now also composes validated
 character rewind Numbers across native/restoredSpec/plan/fresh Module with null
-absent anchors; rebuild its runtime/apps. Its surplus-argument repair follows
-immediately before safe Lua.
+absent anchors; rebuild its runtime/apps. Its four cursor controls now reject
+surplus arguments before effects, retaining function priority and trailing
+compiler rejection. Safe Lua follows independently.
 A separately owned default-parent rewind cycle requires ordinary progress
 authority before admission. No anchor/absence/stack/transaction/callback/schema
 or portable admission changes follow from this selection.
