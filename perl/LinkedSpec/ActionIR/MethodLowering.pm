@@ -791,6 +791,14 @@ sub _lower_ast_block_side_effect_statement {
  my $kind = $node->{kind} // '';
  return _actionir_ast_unsupported_helper_expr($node->{name})
   if $kind eq 'call' && _parser_state_helper_is_forbidden_in_function($node->{name}, $deps);
+ if ($kind eq 'call' && ($node->{name} // '') =~ /\A(?:save_cursor|restore_cursor|rewind_entry_start|rewind_match_start)\z/o) {
+  return undef unless ($node->{source_method} // $node->{name}) eq $node->{name}
+   && !$node->{trailing_block_arg} && ref($node->{args}) eq 'ARRAY' && !@{$node->{args}};
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_cursor_compatibility_value_expr',
+   $node->{name},
+  );
+ }
  my $input_mark = _lower_named_mark_write_statement($node->{source}, $deps);
  return $input_mark if defined($input_mark);
  if ($kind eq 'call' && ($node->{name} // '') =~ /\A(?:start_capture_slice|capture_slice_here)\z/o

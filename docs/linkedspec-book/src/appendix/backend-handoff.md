@@ -2990,8 +2990,10 @@ locals. Declared Lua 5.4 and full context/portable admission stay separate.
 The next bounded addition composes the existing Number result of the two zero-
 argument rewind helpers. A descriptor-qualified explicit action-edge bound twin
 preserves entry/local anchors, source-before-consuming-operand values, defaults,
-guards and signed Array recovery on native/fresh Perl; direct forms fail. An
-ordinary eager cursor-statement local-return prerequisite precedes the feature.
+guards and signed Array recovery on native/fresh Perl; direct forms fail. The
+ordinary eager cursor-statement local-return prerequisite is now repaired and
+targeted-checked on native/fresh Perl; regenerate affected emitted parsers. The
+rewind Number value-source roles remain the next independent implementation.
 A separately owned default-parent rewind cycle requires ordinary progress
 authority before admission. No anchor/absence/stack/transaction/callback/schema
 or portable admission changes follow from this selection.

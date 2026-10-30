@@ -726,6 +726,20 @@ sub _readonly_input_cursor_value_expr {
  return $values{$method}
 }
 
+# Existing zero-argument cursor compatibility bodies have one emission owner.
+# Runtime retains state, validation, anchors and null versus Number results.
+sub _cursor_compatibility_value_expr {
+ my ($method) = @_;
+ return undef unless defined $method;
+ my %values = (
+  save_cursor => q{do { LinkedSpec::SourceLocation::Runtime::cursor_checkpoint_compatibility($info, $STRING, pos($$STRING), "save_cursor") }},
+  restore_cursor => q{do { my $__ls_cursor_stack = ref($$info{cursor_stack}) eq 'ARRAY' ? $$info{cursor_stack} : undef; if ($__ls_cursor_stack && @{$__ls_cursor_stack}) { my $__ls_saved_cursor = pop @{$__ls_cursor_stack}; LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $__ls_saved_cursor, "restore_cursor") if defined($__ls_saved_cursor); } undef }},
+  rewind_entry_start => q{LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $IPOS - length($IMATCH // ""), "rewind_entry_start")},
+  rewind_match_start => q{LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility($info, $STRING, $LSPOS - length($LMATCH), "rewind_match_start")},
+ );
+ return $values{$method}
+}
+
 sub _static_named_capture_value_expr {
  my ($method, $key_expr) = @_;
  return undef unless defined($method) && $method =~ /\A(entry|match)_(named|has)\z/o;
@@ -2463,7 +2477,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\bsave_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\bsave_cursor\s*\(\s*\)/do { LinkedSpec::SourceLocation::Runtime::cursor_checkpoint_compatibility(\$info, \$STRING, pos(\$\$STRING), "save_cursor") }/g;
+    $code =~ s/\bsave_cursor\s*\(\s*\)/_cursor_compatibility_value_expr('save_cursor')/ge;
     return $code
    },
   },
@@ -2474,7 +2488,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brestore_cursor\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brestore_cursor\s*\(\s*\)/do { my \$__ls_cursor_stack = ref(\$\$info{cursor_stack}) eq 'ARRAY' ? \$\$info{cursor_stack} : undef; if (\$__ls_cursor_stack && \@{\$__ls_cursor_stack}) { my \$__ls_saved_cursor = pop \@{\$__ls_cursor_stack}; LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$__ls_saved_cursor, "restore_cursor") if defined(\$__ls_saved_cursor); } undef }/g;
+    $code =~ s/\brestore_cursor\s*\(\s*\)/_cursor_compatibility_value_expr('restore_cursor')/ge;
     return $code
    },
   },
@@ -2485,7 +2499,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brewind_entry_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brewind_entry_start\s*\(\s*\)/LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$IPOS - length(\$IMATCH \/\/ ""), "rewind_entry_start")/g;
+    $code =~ s/\brewind_entry_start\s*\(\s*\)/_cursor_compatibility_value_expr('rewind_entry_start')/ge;
     return $code
    },
   },
@@ -2496,7 +2510,7 @@ sub _build_capture_and_cursor_contracts {
    unresolved_pattern => qr/\brewind_match_start\s*\(\s*\)/o,
    lower              => sub {
     my ($code) = @_;
-    $code =~ s/\brewind_match_start\s*\(\s*\)/LinkedSpec::SourceLocation::Runtime::cursor_state_write_compatibility(\$info, \$STRING, \$LSPOS - length(\$LMATCH), "rewind_match_start")/g;
+    $code =~ s/\brewind_match_start\s*\(\s*\)/_cursor_compatibility_value_expr('rewind_match_start')/ge;
     return $code
    },
   },

@@ -6,10 +6,10 @@ answers:
   - "which task owns cursor statement eager block return scope"
   - "is cursor eager with return escape a deferred helper vocabulary grant"
 date: 2026-10-30
-status: P1 owned56.0 immediately after selection17 before rewind result56.1
+status: bounded56.0 repaired/targeted-checked; rewind Number result56.1 separate
 tags: [perl, cursor, eager-block, with, return, scope, lowering]
-evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.17 and56.0; cursor-effect-result-selection-intake.json.gz retains advanced and bound-target native/fresh scalar2/cursor4 with ready1, exact substitution/actual owner and prior healthy simple with/primitive controls."
-reverify: "Recover finite eager-scope probes from retained intake using project Perl wrapper; build quiet with cold bootstrap allowance. Original target with restore in with is a failing calibration, not a healthy oracle."
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.56.0; cursor-statement-scope-perl-intake.json.gz retains actual3healthy/7RED to10GREEN, nearest14,16 exact rewrites and original/new owner/producers/normal/ABI. Original selection intake remains cursor-effect-result-selection-intake.json.gz."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cursor_statement_scope.t t/input_mark_value_block_statements.t t/user_function_parser_state_boundary.t"
 ---
 
 The bound-target candidate already uses a supported completed fluent source, yet
@@ -32,3 +32,15 @@ An attempted Reset control did not advance and its expected6 was withdrawn.
 An initial named carrier used bare blocks (lifecycle I) and missed a bound snapshot
 insertion; no calibration credit. The final descriptor-qualified explicit self
 action edges and consuming Advance child supply the independent healthy twin.
+
+## Verified bounded repair
+
+56.0 shares the original four emitted bodies in Contracts::_cursor_compatibility_value_expr and adds only the canonical zero-argument eager statement role after
+the pure-function fence. Existing block-local return lowering now stays typed.
+Same10groups3healthy/7RED to10GREEN, nearest input-mark/block10 and function4 plus
+syntax pass. Nine value/cursor/ready observations and four descriptor-only
+function fences retain actual proof. Sixteen zero/surplus/keyword/trailing public
+rewrites are byte-identical; this is not invalid-program execution/phase proof.
+No runtime/state/anchor/stack/arity/deferred/source-value/schema changes. Actual
+inputs/producers/normal/ABI/results retained in cursor-statement-scope-perl-intake.json.gz.
+Regenerate previously emitted affected Perl parsers;56.1 source-result role next.

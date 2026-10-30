@@ -643,10 +643,19 @@ formatted = position.add(1).cat("!");
 Direct forms such as `rewind_entry_start().add(1)` are the next bounded addition;
 they currently leave a failing helper call in Perl. `save_cursor()` and
 `restore_cursor()` return null in Perl and should remain statement controls.
-Other backends are assessed independently. Keep cursor effects in ordinary parser
-actions for now: an existing Perl eager `with` body containing `restore_cursor()`
-can let a local return escape the enclosing handler; that prerequisite is owned
-before the direct-result addition.
+Other backends are assessed independently. Ordinary Perl eager blocks and `with`
+bodies also support these four cursor statements while keeping block returns
+local. For example:
+
+```text
+save_cursor();
+text = "kept".with() { rewind_entry_start(); return(value) }.uppercase();
+restore_cursor();
+```
+
+The body rewinds and returns its local value; `.uppercase()` still runs, then the
+outer action restores its saved cursor. Previously emitted Perl parsers affected
+by the earlier eager-body return escape must be regenerated.
 
 A parent default loop must also advance or terminate after a child rewind. An
 existing Perl loop can reselect the same child indefinitely after it rewinds to

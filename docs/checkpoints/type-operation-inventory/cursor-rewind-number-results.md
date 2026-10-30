@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: bounded target frozen; eager-statement prerequisite56.0 next, then independent children.
+Status: eager-statement prerequisite56.0 repaired/targeted-checked; independent Number result children pending.
 
 ## Existing authority
 
@@ -51,10 +51,10 @@ one acode/default loop, two slots and one resolved local edge before freezing.
 
 ## Prerequisites and calibration limits
 
-56.0 owns an actual ordinary eager-body bug: restore_cursor();return(value)
-inside with leaves a host return and escapes the entire handler as scalar2.
-It must preserve local return/continuation with the original statement ABI before
-rewind result56.1. This is not deferred CodeblockRuntime vocabulary authority.
+56.0 repairs the ordinary eager-body bug in which restore_cursor();return(value)
+inside with left a host return and escaped the entire handler as scalar2.
+Local return/continuation now uses the original statement ABI before rewind
+result56.1. This is not deferred CodeblockRuntime vocabulary authority.
 
 39.8.2 owns a separate native ordinary default-loop cycle after a successful
 child rewinds to the same origin. Runtime trace locates the missing iteration
@@ -75,3 +75,14 @@ Actual inputs/producers/observations/source/lowering/diagnostic trace are retain
 in cursor-effect-result-selection-intake.json.gz. Independent56.1 Perl/56.2 Rust/
 56.3 Dart/56.4 Julia/56.5 safe Lua follow56.0. Preserve healthy peers. No production,
 peer/full context-domain/portable/declared5.4/deep-copy or new state/format admission.
+
+## Eager statement prerequisite56.0 repaired
+
+Original four cursor compatibility bodies now have one private Contracts emission
+owner reused by ordinary eager statements after the existing function fence.
+Same10groups3healthy/7RED to10GREEN native/fresh/metadata, nearest block10/function4
+and syntax pass. All16 public rewrite forms and remaining runtime/owner bytes
+stay exact. Local returns resume outer continuations without new cursor/deferred/
+function/arity rights. Original rewind value-source gaps remain56.1. Regenerate
+affected previously emitted Perl parsers. Actual source/producers/normal/ABI/
+RED-GREEN retained in cursor-statement-scope-perl-intake.json.gz.
