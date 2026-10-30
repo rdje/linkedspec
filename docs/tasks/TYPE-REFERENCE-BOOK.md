@@ -4909,6 +4909,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Perl40.1.1.1 adds t/perl_or_match_local_declarations.t10 groups, closes prior AND normal OR warning allowance, and requires both normals in exact canonical selection. All new OR/AND generated loading checks now require0 warnings.
 
+  Perl40.1.2 adds t/perl_blind_scalar_declarations.t24 source groups+1 context guard; exact canonical selection must cover nested scalar ownership/nonmutating diagnostic JSON and keep existing AND/OR declaration normals strict.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.20`
   Status: `active` / all bounded repairs targeted-checked; full admission separate
   Goal: Align three backend ordinary slice paths with existing Perl-reference optional/null/Boolean argument behavior.
@@ -9817,15 +9819,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1 - preserve unavailable Perl capture endpoints without ambient match state`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2`
-  Status: `pending` / P2 after40.1.1 before45/admission
+  Status: `completed` / P2 after40.1.1 before45/admission
   Goal: Repair emitted Perl empty blind fluent return duplicate scalar declaration without changing current array result or return/scoped-name semantics.
   Reproduction/impact:48.2.1 public native/emitted Top::AND =>Child.return() with Child I{return("CHILD")} returns[]/cursor0 on both; fresh loading warns my variable $Top masks earlier declaration. Full emitted source and warning channel retained in rust-blind-fluent-return-intake.json.gz; inspect exact two declarations before selecting repair. This differs from40.1.1 local-match variables. No runtime failure inferred.
-  Planned verification tier: focused
-  Planned focused checks: Own public warning RED/source root, empty/general/scoped return and nearest declaration normals; preserve values and metadata, book/docs/commit.
-  Planned canonical trigger: Full23.4/final clean push after repair and existing prerequisites.
-  Planned claim verification: none: Finite functional source/warning assertions, no population measurement.
+  Verification tier: `focused`
+  Focused checks:24 source controls7 warning RED/17 healthy ->all24 new loads empty;1 outer declaration removed each/17 full emissions/all metadata/results/cursors/3 nested bodies exact. New25/AND9 pass34 groups; nonempty diagnostic JSON/IR context guard/syntax/empty stderr. Book/map/history/manual continuity/claim-input/diff.
+  Canonical trigger: Full23.4/final clean push after45/20.1/39.8.1/48.4.2.1/23.4.1/lifecycle/host prerequisites. No public schema/IR/frame/phase policy movement.
+  Claim verification: none: Finite authored declaration/typed-return/source/diagnostic controls, no population measurement.
 
   Recurrence48.2.4: Explicit-target parent push also exposes duplicate parent scalar, while every Value AND source reproduces known40.1.1 local-match masks. Initial combined warning arrays do not isolate stages; refined public producer adds per-phase capture and exact original empty-return source to qualify the previously inferred load attribution before repair. No suppression or runtime-value defect inferred from warning alone.
+
+  Activation: clean `5fdf1531110c9c0440591402b1f5c48b321db9a5`; OR repair committed/brief0/no jobs. Known empty-return/explicit-target push scalar masks recovered, independent five-phase public source/runtime baseline follows before owner selection. All17 existing general/scoped return controls plus two parent push recurrence controls and original pure-child witness; preserve matching register repairs and typed/null/Array/return phases.
+
+
+  - [x] **REPRODUCE / ISSUE**: Public24 sources17 healthy7 scalar masks at emitted load only; build/emission/run channels empty, normal fails only7 warning assertions. Existing17 typed/general/scoped returns and push recurrence verified before edits, standalone old modules reproduce.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: EmitContext auto-declares parent scalar before I-code; four blind stems redeclare it. Nested repetition coderefs own separate locals. HandlerIR preamble was not receiving physical declaration prefix; private source rendering context avoids diagnostic changes.
+  - [x] **FIX**: Perl-only source_preamble context overlays a copy of render IR. Prefix-only _rule_scalar_declaration skips an existing leading scalar declaration; four stems use it and nested render copies clear outer context. No arbitrary literal scan/new serialized fields/global state/suppression/frame policy.
+  - [x] **ADDRESSED (verified)**: Seven emissions lose only1 redundant outer declaration; first declaration/3 nested bodies retained.17 healthy full emissions/all metadata/values/cursors/errors exact, all24 new loads empty. Nonempty JSON family/label and caller IR remain unchanged. Old modules need regeneration for cleanup, same v2 format.
+  - [x] **NO REGRESSION**: New25 including context guard/AND9 pass34 groups, empty focused/probe/fresh stderr and source syntax clean. Initial unwired and shared-IR prototypes retained; final private context has identical Perl output and protects diagnostics. No false completion credit or broad variable/phase/admission claim.
+  - [x] **LOCKSTEP**: perl-blind-scalar-intake.json.gz retains sources/producers/frozen oracles/normals/failed-prototype-final epochs/modules/warnings/results/receipts. Exact canonical selection23.4.1 required. Book/card/map/roadmap/task/live/resume/history align;45 selected failures next, focused commit/no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2 - reuse Perl blind handler scalar declarations`.
+
+  Final context boundary: Built-in Perl rendering uses transient _source_preamble; descriptive IR preamble metadata alone retains its previous standalone declaration. An observed metadata-only prototype regression is fixed; nonempty metadata/diagnostic JSON/caller IR guard passes. No public/serialized IR field added. Other fixed-table backend callbacks receive original IR and one argument. A test incorrectly assumed a runtime register_backend_emitter API; actual dispatch uses a fixed lexical table, and the nonexistent-API harness failure is retained/corrected without product credit.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1`
   Status: `completed` / P1 after48.5 before45/wider features/full23.4/push
@@ -10221,7 +10236,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2` | `pending` | Remove duplicate Perl empty-blind return scalar declarations. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45` | `pending` | Recover exact retained Phase0 failures and own bounded repairs. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

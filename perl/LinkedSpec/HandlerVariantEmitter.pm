@@ -573,6 +573,18 @@ sub _build_lmatch_extraction {
    );';
 }
 
+# The leading preamble declaration block is emitted before I-code. Inspect only
+# that block, so text inside authored strings or nested code is never a declaration.
+sub _rule_scalar_declaration {
+    my ($ir) = @_;
+    my $declaration = 'my $' . $ir->{label} . ';';
+    my $preamble = $ir->{_source_preamble} // '';
+    while ($preamble =~ /\G(my [\$\@\%][^\s;]+;)\n/g) {
+        return '' if $1 eq $declaration;
+    }
+    return $declaration;
+}
+
 sub _recognition_miss_statement {
     my ($label) = @_;
     return 'LinkedSpec::RecognitionTransactionRuntime::note_miss($descr, $STRING, '
@@ -654,6 +666,11 @@ sub _emit_handler {
     my $backend = $opts{backend} // 'perl';
     my $emitter = $BACKEND_EMITTERS{$backend};
     return undef unless defined $emitter;
+    # Only the built-in Perl renderer consumes physical declaration context.
+    # Other backends keep their existing single-argument IR contract.
+    if ($emitter == \&_emit_handler_perl) {
+        return $emitter->($ir, source_preamble => $opts{source_preamble});
+    }
     return $emitter->($ir);
 }
 
@@ -661,7 +678,7 @@ sub _emit_handler {
 # _emit_handler_perl — dispatch handler IR to the matching Perl code template
 #===========================================================================
 sub _emit_handler_perl {
-    my ($ir) = @_;
+    my ($ir, %opts) = @_;
     return undef unless ref($ir) eq 'HASH';
     my $kind = $ir->{kind} // '';
     my %emit = (
@@ -678,7 +695,10 @@ sub _emit_handler_perl {
     );
     my $emitter = $emit{$kind};
     return undef unless defined $emitter;
-    return $emitter->($ir);
+    return $emitter->({
+        %$ir,
+        _source_preamble => $opts{source_preamble} // '',
+    });
 }
 
 #------------------------------------------------------------------------------
@@ -886,7 +906,7 @@ sub _emit_and_bcode_handler {
 
     return '
 
-  my $' . $label . ';
+  ' . _rule_scalar_declaration($ir) . '
   my @' . $label . '_collect;
  ' . $match_section . '
   foreach my $call (qw(' . $bcalls . ')) {
@@ -1180,7 +1200,7 @@ sub _emit_or_bcode_handler {
     );
     return '
 
-  my $' . $label . ';
+  ' . _rule_scalar_declaration($ir) . '
   foreach my $call (qw(' . $bcalls . ')) {
    my $current_call = $call;
 
@@ -1368,6 +1388,8 @@ sub _emit_rep_bcode_handler {
     # Build inner OR_BCODE as a coderef
     my $or_body = _emit_or_bcode_handler({
         %$ir,
+        # The outer preamble is not replayed inside this coderef.
+        _source_preamble => '',
         kind   => 'or_bcode',
         ecode  => 'return undef',
         lxcode => $ir->{lxcode} || 'return $' . $label,
@@ -1378,7 +1400,7 @@ sub _emit_rep_bcode_handler {
     return '
    my $min=' . $min . ';
    my $max=' . $max . ';
-   my $' . $label . ';
+   ' . _rule_scalar_declaration($ir) . '
    my @' . $label . '_collect;
 
    my $ccount = 0;
@@ -1528,6 +1550,8 @@ sub _emit_rep_and_bcode_handler {
     # Build inner AND_BCODE as a coderef
     my $and_body = _emit_and_bcode_handler({
         %$ir,
+        # The outer preamble is not replayed inside this coderef.
+        _source_preamble => '',
         kind  => 'and_bcode',
         ecode => 'return \@' . $label . '_collect',
         trace_generated_handler_branches => 0,
@@ -1537,7 +1561,7 @@ sub _emit_rep_and_bcode_handler {
     return '
    my $min=' . $min . ';
    my $max=' . $max . ';
-   my $' . $label . ';
+   ' . _rule_scalar_declaration($ir) . '
    my @' . $label . '_collect;
 
    my $ccount = 0;

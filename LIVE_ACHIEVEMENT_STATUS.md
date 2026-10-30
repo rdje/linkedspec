@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl OR action loading masks removed; both declaration normals now strict, empty-blind scalar owner next.
+Perl blind scalar masks removed with nested scopes/diagnostics preserved; exact Phase0 owner45 next.
 
 ## Latest Completed Slice
 
-Perl OR action emitter now opts into existing preamble-local match extraction, removing its five duplicate my declarations without warning suppression. Independent10-source public baseline has7 OR load-warning RED and3 warning-free Default/repeated/fixed-AND controls, all behavior/metadata already healthy. Corrected source changes only _emit_or_acode_handler; Default and fixed AND functions exactly match activation HEAD. Entire emitted source differs only by five my tokens for7 OR sources;3 healthy controls remain byte-identical and all full metadata/results/cursors/errors unchanged. All10 regenerated modules load warning-free in independent processes; old modules retain original warnings and behavior, so regeneration installs the source fix with unchanged v2 format. Remove prior entry/local OR-mask allowance from the first normal and fixture; both suites now require completely empty load warnings. Single/multiple/miss/zero-width/Unicode/callback argument/entry-local controls pass. New OR10/AND9/anonymous endpoint16 pass35 groups, empty focused/probe/fresh stderr, syntax clean. An initial patch hit Default instead of OR; diff inspection and failing normals rejected it, wrong source/output preserved, then exact function-bounded correction restores Default and selects OR. No product RED credit from that mistake; no other emitter scope/phase/helper/variable policy or schema change. Packet perl-or-match-locals-intake.json.gz retains actual producer/fixture/baseline/normal/wrong-attempt/correction/source/modules/warning phases/fresh receipts. Book/card/map/roadmap/task/live/resume/history align; scalar40.1.2 next then Phase0 owner45, focused authorized commit/no full gate/push.
+Perl blind handlers reuse an existing scalar in the leading auto-variable preamble. Private Perl-render context leaves caller IR/diagnostic JSON unchanged; no new serialized IR fields/public interfaces/global frame. Prefix inspection stops before authored I-code literals; nested repetition render copies keep independent locals. Own24 sources7 scalar-warning RED ->all24 new loads empty/17 healthy whole emissions exact; only1 redundant outer declaration removed per affected source, first declaration and3 nested coderef bodies retained. Full metadata/all values/cursors/errors exact, including17 general/scoped/falsey/null returns, explicit targets, pure empty, repetitions, authored scalar and literal controls. Old source remains executable but requires regeneration for warning cleanup; v2 unchanged. New25 including context guard/prior AND9 pass34 groups, syntax/empty stderr; independent nonempty JSON family/label and input-IR checks pass. Initial unwired helper retained7 warnings; shared-preamble prototype passes Perl, final private context protects diagnostic backend. All epochs retained in perl-blind-scalar-intake.json.gz without false completion credit. Book/card/map/roadmap/task/live/resume/history align; exact Phase0 owner45 next, focused authorized commit/no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2 from clean Perl OR match-local repair. Recover exact empty blind .return() duplicate parent scalar warning and explicit-target parent-push witness from KM and current public source/producers. Independently isolate build/emission/native/fresh-load/fresh-run channels and actual scalar declaration ownership before edits. Preserve explicit return/typed value/null/parent call/array and frame/progress/phase behavior; do not weaken warnings or conflate repaired LMATCH masks with parent scalar. Focused normal RED/GREEN/exact source-metadata-behavior/fresh proof and direct neighbors/book/docs/commit, then exact Phase0 failing-group owner45 without rerunning full Phase0. Pressure20.1/39.8.1/cross-rule lifetime48.4.2.1/selection23.4.1/lifecycle/host and other canonical prerequisites remain before full23.4/push.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45 from clean scalar warning repair. Recover TYPE37 frozen28 failed names/raw TAP/diagnostics via KM/retained packet; restore completed37 local gzip raw names and verify hashes before replay_boundary_phase0_selected.py. Reverify exact selected set at current HEAD because implementation has changed since37; do not assume all28 persist or infer full-suite status. Use public source/context/trace first, reconcile accepted authority and create bounded repair/oracle children before edits, committing each. No global expected-value refresh/silent null acceptance/repeated full Phase0/full CI.20.1/39.8.1/48.4.2.1/23.4.1/lifecycle/host and other canonical prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2` — Perl blind scalar masks removed with nested scopes/diagnostics preserved; exact Phase0 owner45 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1.1` — Perl OR action loading masks removed; both declaration normals now strict, empty-blind scalar owner next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.40.1.1` — Perl single-action AND loading masks removed; independently owned OR loading masks next before scalar/Phase0 owners.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.5` — Safe dual-host Lua blind compiler repaired; Perl warning owners40.1.1/.2 next before45.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.40.1.2 from clean Perl OR match-local repa
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.5` — Rust repeated blind18/27four-route PASS/15 selected tests; Perl Unicode48.2.6 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.4` — Rust parent push8four-route PASS/8 selected tests; repeated-return48.2.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.3` — Qualified Rust12/7runtime four-route PASS; parent-push48.2.4 next, phase authority open.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2` — Rust invocation arrays3four-route PASS/13 selected tests; qualified closure48.2.3 next.
 
 ## History
 

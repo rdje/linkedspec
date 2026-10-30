@@ -4,10 +4,12 @@ title: Empty Perl blind fluent return duplicates the parent scalar declaration i
 answers:
   - "why does Perl empty blind return warn my Top masks earlier declaration"
   - "which task repairs the empty blind return duplicate scalar warning"
+  - "how do Perl blind scalar declarations retain nested repetition scope"
+  - "does the blind scalar warning repair change diagnostic JSON"
 date: 2026-10-29
-status: confirmed warning defect; P2 repair40.1.2 after40.1.1 before45/admission
+status: repaired40.1.2 with bounded declaration/source proof;45 exact failures next
 evidence: "rust-blind-fluent-return-intake.json.gz retains public source, emitted Top declarations52/55, fresh-load warning and correct native/fresh empty array/cursor0."
-reverify: "Restore probe_reference_blind_fluent_return.pl and candidate inputs; run project-routed Perl -Iperl under repair40.1.2, retaining warning channels."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/perl_blind_scalar_declarations.t t/perl_match_local_declarations.t"
 ---
 
 Top::AND =>Child.return() with Child I{return("CHILD")} returns[]/cursor0
@@ -37,3 +39,37 @@ not isolate.40.1.1 owns LMATCH masks,40.1.2 parent scalar masks. Kind-strict
 current8/prior17 emitted-result artifact checks pass; no runtime rerun claim.
 Packet rust-blind-parent-push-intake.json.gz retains actual initial/refined
 inputs/producers/source/errors/warning phases/RED+GREEN/modules/patch/receipts.
+
+## Repair40.1.2 (2026-10-30)
+
+SpecEntry supplies its leading auto-variable declaration/I-code prefix through
+private source_preamble context. HandlerVariantEmitter overlays a copied Perl
+render IR; diagnostic backends and caller IR are unchanged. Prefix-only
+_rule_scalar_declaration stops before authored I-code, so quoted declaration
+text is not treated as a declaration. Four blind stems reuse only existing
+scalars; nested OR/AND repetition copies clear outer context and keep locals.
+No new serialized IR fields, public interfaces, global frame or runtime phase/variable policy.
+
+Own24 sources7 warning RED17healthy ->all24 new modules load warning-free;
+1 redundant outer declaration removed per affected source, first declaration
+and3 nested bodies exact.17 healthy emissions/all metadata/values/cursors/errors
+unchanged, including17 typed/general/scoped returns and explicit-target push.
+New25 including context guard plus prior AND9 pass34 groups, empty stderr and
+syntax clean. Independent nonempty JSON family/label and caller IR checks pass.
+Old modules still execute but require regeneration to remove masks; samev2.
+
+The first helper had no physical prefix context and retained7 masks. A shared
+preamble prototype passed Perl; final private context protects diagnostic JSON.
+All attempts/producers/normals/modules/results are retained in perl-blind-scalar-
+intake.json.gz, without false completion credit. Exact canonical selection23.4.1,
+full admission and ordinary/lifecycle/cross-rule authority remain separate;
+45 exact selected failures is next.
+
+Physical context is explicit: the built-in Perl renderer places source_preamble
+in transient _source_preamble on its private render copy. Descriptive preamble
+metadata alone does not suppress a declaration. The metadata-only compatibility
+control exposed an uncommitted prototype regression, now fixed; diagnostic JSON
+and original IR with nonempty metadata remain exact. Backend dispatch is a fixed
+lexical table, not a runtime registration API. An incorrect registration test
+assumption is retained and corrected; no nonexistent API or public IR addition
+is claimed. Nested copies clear only the transient physical context.

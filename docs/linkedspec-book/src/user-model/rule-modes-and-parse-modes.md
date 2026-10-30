@@ -102,7 +102,22 @@ Unicode matches, per-regex initializers and callback arguments. Regenerate older
 emitted modules to remove those loading warnings; their behavior, public metadata
 and generated-source format remain valid. The entry/local composition control
 also loads without warnings after the OR action repair. Default and repeated
-control emissions remain unchanged.
+regex-control emissions remain unchanged.
+
+Blind Perl scalar declarations also have one owner. For example:
+
+~~~text
+Top::AND
+ => Child.return()
+Child:
+ I { return("CHILD") }
+~~~
+
+On x, this returns an empty Array at cursor0. Regenerated standalone source
+now loads without the duplicate parent-scalar warning. General and scoped
+return values keep their existing kinds and meanings; explicit-target push
+is preserved too. Nested repeated blind calls retain their own scalar locals.
+Public metadata, diagnostic JSON and source format remain unchanged.
 
 ## Current rule-label surface
 

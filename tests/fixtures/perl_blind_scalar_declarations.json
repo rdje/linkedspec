@@ -1,0 +1,856 @@
+[
+  {
+    "expected": "OK",
+    "input": "x",
+    "name": "quoted",
+    "source": "Top::AND\n => Child.return(\"OK\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": "α",
+    "input": "x",
+    "name": "unicode",
+    "source": "Top::AND\n => Child.return(\"α\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": 42,
+    "input": "x",
+    "name": "number",
+    "source": "Top::AND\n => Child.return(42)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": 0,
+    "input": "x",
+    "name": "zero",
+    "source": "Top::AND\n => Child.return(0)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      "?Top:",
+      true
+    ],
+    "input": "x",
+    "name": "true",
+    "source": "Top::AND\n => Child.return(true)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      "?Top:",
+      false
+    ],
+    "input": "x",
+    "name": "false",
+    "source": "Top::AND\n => Child.return(false)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      "?Top:",
+      null
+    ],
+    "input": "x",
+    "name": "undef",
+    "source": "Top::AND\n => Child.return(undef)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      1,
+      "x"
+    ],
+    "input": "x",
+    "name": "array",
+    "source": "Top::AND\n => Child.return(array(1,\"x\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": {
+      "key": "value"
+    },
+    "input": "x",
+    "name": "hash",
+    "source": "Top::AND\n => Child.return(hash(\"key\",\"value\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": "OK",
+    "input": "x",
+    "name": "computed",
+    "source": "Top::AND\n => Child.return(cat(\"O\",\"K\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      "?Top:",
+      "CHILD"
+    ],
+    "input": "x",
+    "name": "retv",
+    "source": "Top::AND\n => Child.return(retv)\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": "F",
+    "input": "x",
+    "name": "fallback",
+    "source": "Top::AND\n => Child.return(coalesce(undef,\"F\"))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      "OK",
+      [
+        "once"
+      ]
+    ],
+    "input": "x",
+    "name": "effect_order",
+    "source": "Top::AND\n => Child.return(array({push(audit,\"once\");\"OK\"},copy(audit)))\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": "first",
+    "input": "x",
+    "name": "first_return",
+    "source": "Top::AND\n => Child.return(\"first\").return(\"later\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [
+      "?Top:",
+      null
+    ],
+    "input": "x",
+    "name": "null_return",
+    "source": "Top::AND\n => Child.return(undef).return(\"later\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": null,
+    "input": "x",
+    "name": "return_undef",
+    "source": "Top::AND\n => Child.return_undef.return(\"later\")\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  },
+  {
+    "expected": [],
+    "input": "x",
+    "name": "empty",
+    "source": "Top::AND\n => Child.return()\nChild:\n /x/\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "expected": [
+      "TAIL"
+    ],
+    "input": "x",
+    "name": "pipe_push_explicit_target",
+    "source": "Top::|\n I{if(gt(cursor_pos(),0)){return(\"TAIL\");}}\n => Value.push(out).return(copy(out))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Value"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "or_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Value"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "expected": [
+      [
+        "TAIL"
+      ]
+    ],
+    "input": "x",
+    "name": "repeated_push_explicit_target",
+    "source": "Top::\n I{if(gt(cursor_pos(),0)){return(\"TAIL\");}}\n => Value.push(out).return(copy(out))\nValue:AND\n /x/ -> Value[0] {return(\"X\")}\n",
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Value"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "rep_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Value"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "expected": [],
+    "input": "x",
+    "name": "original_empty",
+    "source": "Top::AND\n => Child.return()\nChild:\n I{return(\"CHILD\")}\n",
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "input": "x",
+    "name": "repeated_and_empty",
+    "source": "Top::AND{1}\n => Child.return()\nChild:AND\n /x/ -> Child[0] {return(\"C\")}\n",
+    "expected": [
+      []
+    ],
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "rep_and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "input": "x",
+    "name": "repeated_or_empty",
+    "source": "Top::OR{1}\n => Child.return()\nChild:AND\n /x/ -> Child[0] {return(\"C\")}\n",
+    "expected": [
+      []
+    ],
+    "expected_cursor": 1,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "rep_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "and_single_acode",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "input": "x",
+    "name": "authored_parent_scalar",
+    "source": "Top::AND\n I{Top=\"I\"}\n => Child.return(Top)\nChild:\n I{return(\"CHILD\")}\n",
+    "expected": [
+      "?Top:",
+      "CHILD"
+    ],
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": true
+  },
+  {
+    "input": "x",
+    "name": "preamble_literal_control",
+    "source": "Top::AND\n I{sentinel='my $Top;'}\n => Child.return(42)\nChild:\n I{return(\"CHILD\")}\n",
+    "expected": 42,
+    "expected_cursor": 0,
+    "expected_metadata": {
+      "contract_id": "linkedspec-generated-source-v2",
+      "entry_rule_contract": "linkedspec-root-rule-selection-v1",
+      "entry_rules": [
+        {
+          "is_top": 1,
+          "label": "Top"
+        },
+        {
+          "is_top": 0,
+          "label": "Child"
+        }
+      ],
+      "format_version": 2,
+      "plan": [
+        {
+          "family": "and_bcode",
+          "label": "Top"
+        },
+        {
+          "family": "default",
+          "label": "Child"
+        }
+      ],
+      "source_identity": "blind-scalar.spec"
+    },
+    "repair": false
+  }
+]

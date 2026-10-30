@@ -173,7 +173,10 @@ sub _build_handler_variants {
 	 my $emit_handler = sub {
 	  my ($ir) = @_;
 	  return undef unless defined $ir;
-	  return LinkedSpec::HandlerVariantEmitter::_emit_handler($ir, defined($backend) ? (backend => $backend) : ());
+	  my %emit_options = defined($backend) ? (backend => $backend) : ();
+	  $emit_options{source_preamble} = $args{source_preamble}
+	   if defined($args{source_preamble});
+	  return LinkedSpec::HandlerVariantEmitter::_emit_handler($ir, %emit_options);
 	 };
  my $ir = LinkedSpec::HandlerVariantEmitter::_build_default_handler_variant(
   %ir_args, acodes_ref => $acodes_ref,
@@ -521,6 +524,7 @@ sub compile_spec_entry {
    dependency_refs => \@dependency_refs,
    regex_count    => $rule_meta->{regex_count},
    and_icode      => $and_icode,
+   source_preamble => $actual_icode,
    actual_lxcode  => $actual_lxcode,
    actual_lscode  => $actual_lscode,
    actual_lecode  => $actual_lecode,
