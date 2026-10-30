@@ -3040,8 +3040,9 @@ admission remains separate.
 
 The next bounded feature58 composes existing unambiguous explicit-value push
 snapshots through reads and compatible methods. Perl's Hash payload producer58.0
-is repaired first: public AST and direct statement emitter work, while the saved
-value path leaves raw DSL. Direct free-push reads also fail compilation, and a
+is now repaired through the complete existing typed push owner, retaining local
+returns, snapshots, kinds and function-local scope. Regenerate affected emitted
+Perl parsers. Direct free-push reads still fail compilation, and a
 last/uppercase chain is ready yet invokes host uppercase. Qualified completed
 snapshots already yield the twelve target results. Each peer is assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,

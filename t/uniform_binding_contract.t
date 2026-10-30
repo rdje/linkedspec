@@ -109,8 +109,8 @@ SPEC
  my ($result, $ctx) = run_spec($spec, 'xx', 'bare collection mutation fixture');
  is_deeply(
   $result,
-  [['a', '', 'b'], ['a', 'b'], ['a', 'b']],
-  'collection transforms return independent values and leave the binding at the latest update',
+  [['a', '', 'b'], [' a ', 'b'], [' a ', '', 'b']],
+  'assigned collection transforms return pure values and preserve the source binding',
  );
  ok(!exists($ctx->{last_error}), 'bare collection mutation leaves structured runtime error clear');
 };

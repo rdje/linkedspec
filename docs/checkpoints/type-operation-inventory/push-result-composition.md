@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: Frozen additive target; P1 Perl producer58.0 precedes bounded implementations.
+Status: P1 Perl producer58.0 repaired/targeted-checked; bounded direct-read/fluent and independent peer implementations pending.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -55,3 +55,26 @@ Actual sources/metadata/emitted modules/trace/producers/inputs are retained in
 push-result-selection-intake.json.gz. Producer58.0 then Perl read58.1.1/fluent
 58.1.2 and independent Rust/Dart/Julia/safe Lua58.2-.5 follow. No peer failure or
 complete method/domain/context/portable/full23.4 admission is inferred.
+
+## P1 Perl producer58.0 repaired
+
+One shared canonical two-argument/plain-target/no-trailing aggregate-literal
+guard reuses the complete original push-statement emitter from semantic and
+compatibility value paths. The partial argument projector has no block_value
+case; using only its AST statement route still leaves Hash value blocks raw.
+Existing full statement fallback preserves those blocks and local return scope.
+No original statement/runtime/parser/copy/mutation/schema/remaining owner change.
+
+Same calibrated8groups4RED/4healthy to8GREEN native/fresh/metadata. Initial child
+cursor1 expectation corrected to observed0 before production; original source/
+5-group failure retained, no product RED credit for that calibration. Three
+healthy value observations/original error observation byte-equal. Nearest uniform
+13 TAP items and owner/new-normal syntax pass. One pre-existing uniform assigned-
+transform expectation was corrected only after exact activation-owner replay
+and independent public native/fresh no-push fixture proved pure result behavior.
+The first original-owner replay had FindBin fixture-root setup2; corrected setup
+then reproduced actual1 with owner SHA/failing Hash falsifier. No whole-checkout
+proof follows. Actual sources/producers/candidates/trace/outputs are retained in
+push-payload-perl-intake.json.gz; canonical new-normal registration queued23.4.1.
+Regenerate affected emitted Perl parsers. New direct reads58.1.1/fluent58.1.2 and
+independent peers remain pending; full23.4 remains separate.

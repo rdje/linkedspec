@@ -1638,6 +1638,27 @@ sub _actionir_ast_call_arg_sources {
  return \@args
 }
 
+# Aggregate literals are unambiguous explicit values. Reuse the existing typed
+# mutation emitter in both semantic value lowering and its compatibility bridge.
+# Other push shapes retain their child-dispatch, arity and target owners.
+sub _lower_aggregate_push_value_call {
+ my ($call, $deps) = @_;
+ return undef unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') eq 'push' && ($call->{source_method} // 'push') eq 'push'
+  && !$call->{trailing_block_arg}
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 2;
+ my ($target, $payload) = @{$call->{args}};
+ return undef unless ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable'
+  && defined($target->{name}) && $target->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+  && ($target->{source} // '') eq $target->{name}
+  && ref($payload) eq 'HASH'
+  && ($payload->{kind} // '') =~ /\A(?:array_literal|hash_literal)\z/o;
+ # The statement owner also preserves value blocks that the partial source
+ # projector cannot reconstruct; do not route them through raw DSL fallback.
+ return undef unless defined($call->{source}) && length($call->{source});
+ return _lower_push_statement($call->{source}, $deps)
+}
+
 sub _actionir_ast_expected_statement_method {
  my ($method, $expected) = @_;
  return 1 unless defined($expected);
@@ -4856,6 +4877,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   return $lower_ast_receiver_mutation_chain_node->($node)
    if $kind eq 'receiver_mutation_chain';
   if ($kind eq 'call') {
+   my $push_value = _lower_aggregate_push_value_call($node, $deps);
+   return $push_value if defined($push_value) && length($push_value);
    my $logical_call = $lower_ast_logical_call_node->($node);
    return $logical_call if defined($logical_call) && length($logical_call);
    my $normalized = _normalize_contextual_codeblock_call_node($deps, 'helper', $node, $node->{name});
@@ -6380,6 +6403,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
  my $method_call = $parse_method_function_expr->($trimmed);
  return _actionir_ast_unsupported_helper_expr($method_call->{method})
   if $method_call && _parser_state_helper_is_forbidden_in_function($method_call->{method}, $deps);
+ if ($method_call && $method_call->{method} eq 'push') {
+  my $push_value = _lower_aggregate_push_value_call(
+   _parse_method_value_ast_expr($trimmed, $deps), $deps,
+  );
+  return $push_value if defined($push_value) && length($push_value);
+ }
  # Reuse boundary-label source agreement and the native cursor engine before
  # outer consumers. The existing nonempty label grammar excludes zero arguments.
  if ($method_call && $method_call->{method} eq 'capture_until_boundary'

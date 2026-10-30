@@ -553,9 +553,12 @@ dispatch rule.
 A completed append snapshot can be read on Perl with an explicit value binding:
 `saved = push(items, "tail"); saved.coalesce(undef)[-1].uppercase()` yields `"TAIL"`.
 Direct free-`push` result reads and fluent continuations are being completed
-independently across backends. Perl currently needs a named or eager-block Hash
-payload in value positions; direct Hash payload lowering is under repair. These
-limits do not change the existing Array end-mutation methods or child-push forms.
+independently across backends. Perl also accepts direct Hash and nested Array/Hash
+payloads in value positions, for example `saved = push(items, {"name":"tail"})`.
+Payload value blocks keep local returns scoped, and later updates preserve the
+saved snapshot. Regenerate affected previously emitted Perl parsers with the
+updated builder. Existing Array end-mutation methods and child-push forms retain
+their contracts.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
