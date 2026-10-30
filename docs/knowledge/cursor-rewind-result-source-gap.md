@@ -6,11 +6,12 @@ answers:
   - "can a cursor rewind result feed Number text and Array recovery methods"
   - "which task owns cursor rewind result composition"
   - "how are live entry and local rewind result anchors qualified"
+  - "which Perl owners compose cursor rewind Number results"
 date: 2026-10-30
-status: eager-statement prerequisite56.0 repaired/targeted-checked; rewind Number result56.1 pending
+status: prerequisite56.0 and bounded Perl56.1 repaired/targeted-checked; peers pending
 tags: [perl, cursor, rewind, number, fluent, source-role, effects]
-evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.17; cursor-effect-result-selection-intake.json.gz retains primitive/bound/direct controls, qualified healthy bound/failing direct target, actual descriptors/lowering and all rejected calibration epochs."
-reverify: "Recover final qualified explicit-edge probe/cases from retained intake; project Perl wrapper with cold bootstrap allowance and bounded execution. Never run the original unbounded default-parent probe."
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.56.1; cursor-rewind-result-perl-intake.json.gz retains actual4healthy/5RED to9GREEN, eager10/deferred22/syntax/16 exact rewrites and exact three-insertion scope. Original selection intake remains cursor-effect-result-selection-intake.json.gz."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/cursor_rewind_result.t"
 ---
 
 At2bf54bceb, standalone/bound rewinds return validated Numbers. Direct numeric
@@ -36,3 +37,22 @@ null save/restore return, loop/lifecycle, schema or portable admission changes.
 local-return scope, as [[cursor-compatibility-eager-block-return-escape]] records.
 The two rewind Number value-source roles remain56.1; no value-source admission
 follows from the statement-only prerequisite.
+
+## Bounded Perl source repair
+
+56.1 adds three narrow MethodLowering insertions: canonical zero-argument boxed
+computed-call read role, cursor-result guard propagation and early value emission
+through existing Contracts::_cursor_compatibility_value_expr. Remaining owner/
+Contracts/runtime/parser/state/ABI/schema bytes stay exact. Same9groups4healthy/
+5RED to9GREEN native/fresh/ready, closest eager10 groups/deferred22 assertions/
+syntax pass. Eight value observations/two descriptor-only specific function
+fences and16 identical public rewrites retain actual proof. Wrong-kind reads
+remain null then may recover Array[-1]/String; no Number indexing right. Actual
+source/normal/producers/inputs/results retained in cursor-rewind-result-perl-intake.json.gz. Rebuild/regenerate affected emitted Perl parsers; independently
+assess Rust56.2. No peer/full context-domain/portable or new state/arity follows.
+
+In perl/LinkedSpec/ActionIR/MethodLowering.pm,
+_actionir_ast_computed_data_call_method owns the typed read source role;
+_ordinary_input_cursor_result_source propagates the actual-kind guard origin;
+_lower_method_value_expr emits the existing physical value through the shared
+Contracts::_cursor_compatibility_value_expr factory.

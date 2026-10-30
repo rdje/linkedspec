@@ -640,9 +640,22 @@ position = rewind_entry_start();
 formatted = position.add(1).cat("!");
 ```
 
-Direct forms such as `rewind_entry_start().add(1)` are the next bounded addition;
-they currently leave a failing helper call in Perl. `save_cursor()` and
-`restore_cursor()` return null in Perl and should remain statement controls.
+Perl also supports the direct form `rewind_entry_start().add(1).cat("!")`.
+The physical rewind happens before its consumers, and the position value is
+captured before later operand effects. Defined zero skips lazy defaults.
+Incompatible Array/Hash consumers return null without evaluating their operands;
+the rewind itself still happens.
+
+A noncontainer read may recover another type:
+`rewind_match_start()[0].coalesce(["a","tail"])[-1].uppercase()` returns `"TAIL"`
+after rewinding. The Number is not indexed as an Array: that read is null, then
+the explicit default supplies an Array. Compatible `with` bodies can likewise
+return Arrays for signed selection and String methods. Pure functions should
+receive the resulting Number explicitly from the ordinary parser action.
+
+`save_cursor()` and `restore_cursor()` return null in Perl and remain statement
+controls. Regenerate affected previously emitted Perl parsers with the updated
+builder to use the direct rewind-result forms.
 Other backends are assessed independently. Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns
 local. For example:

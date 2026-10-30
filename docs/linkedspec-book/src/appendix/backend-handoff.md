@@ -2993,7 +2993,9 @@ preserves entry/local anchors, source-before-consuming-operand values, defaults,
 guards and signed Array recovery on native/fresh Perl; direct forms fail. The
 ordinary eager cursor-statement local-return prerequisite is now repaired and
 targeted-checked on native/fresh Perl; regenerate affected emitted parsers. The
-rewind Number value-source roles remain the next independent implementation.
+rewind Number value-source roles are now also implemented/targeted-checked in
+Perl across native/fresh with original cursor ABI and pure-function restrictions.
+Direct Number/default/guard/Array recovery flows pass; independent Rust follows.
 A separately owned default-parent rewind cycle requires ordinary progress
 authority before admission. No anchor/absence/stack/transaction/callback/schema
 or portable admission changes follow from this selection.

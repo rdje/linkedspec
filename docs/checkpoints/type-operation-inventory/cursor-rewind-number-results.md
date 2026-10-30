@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: eager-statement prerequisite56.0 repaired/targeted-checked; independent Number result children pending.
+Status: prerequisite56.0 and bounded Perl56.1 repaired/targeted-checked; Rust/Dart/Julia/safe Lua pending.
 
 ## Existing authority
 
@@ -86,3 +86,17 @@ stay exact. Local returns resume outer continuations without new cursor/deferred
 function/arity rights. Original rewind value-source gaps remain56.1. Regenerate
 affected previously emitted Perl parsers. Actual source/producers/normal/ABI/
 RED-GREEN retained in cursor-statement-scope-perl-intake.json.gz.
+
+## Bounded Perl56.1 implemented
+
+Three MethodLowering insertions admit only the canonical current zero-argument
+rewind sources to early values/computed reads/result-kind guards, reusing the
+existing physical ABI. Same9groups4healthy/5RED to9GREEN native/fresh/metadata;
+closest eager10 groups/deferred22 assertions and syntax pass. Shared qualified12
+retains live entry2/local4, source2 before consuming operand7/sum9, zero/default
+laziness, normalized skips, with Array/signed text and noncontainer-null recovery.
+Eight value observations/two descriptor-only function fences remain exact;
+explicit Number arguments work. Sixteen public rewrites/other inputs/Contracts/
+runtime/parser/state/schema stay exact. Regenerate affected emitted Perl parsers.
+Actual proof retained in cursor-rewind-result-perl-intake.json.gz. Independent
+Rust56.2 follows; no peer/full context/portable/deferred/iteration admission.

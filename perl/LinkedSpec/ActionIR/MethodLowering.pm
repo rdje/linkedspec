@@ -1712,6 +1712,13 @@ sub _user_function_registry_by_name {
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
  my ($name, $registry, $call) = @_;
+ # Physical rewind effects stay in the existing ABI; expose one boxed Number.
+ if (defined($name) && $name =~ /\Arewind_(?:entry|match)_start\z/o) {
+  return undef unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+   && ($call->{name} // '') eq $name && ($call->{source_method} // $name) eq $name
+   && !$call->{trailing_block_arg} && ref($call->{args}) eq 'ARRAY' && !@{$call->{args}};
+  return $name;
+ }
  # These readonly context helpers already return detached ordinary harrays.
  # Reuse their value ABI only for the existing zero-argument source form;
  # Parser's deferred fence and the lowering function-state fence remain first.
@@ -1790,6 +1797,9 @@ sub _ordinary_input_cursor_result_source {
  return _ordinary_input_cursor_result_source($call->{args}[0])
   if $name eq 'with' && $call->{trailing_block_arg} && @{$call->{args}} == 2;
  return 0 if $call->{trailing_block_arg};
+ if ($name =~ /\Arewind_(?:entry|match)_start\z/o) {
+  return !@{$call->{args}} && ($call->{source_method} // $name) eq $name;
+ }
  return @{$call->{args}} == 2 if $name eq 'input_slice';
  return @{$call->{args}} == 0 && $name =~ /\A(?:input_(?:text|len|end_pos|end_line|end_col)|cursor_(?:pos|line|col|rest|rest_len))\z/o;
 }
@@ -6385,6 +6395,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
     __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_capture_until_boundary_labels_value_expr', $labels,
    ) if defined($labels);
   }
+ }
+ # Snapshot the existing physical rewind Number before consumer evaluation.
+ if ($method_call && $trimmed =~ /\Arewind_(?:entry|match)_start\s*\(\s*\)\z/o) {
+  return LinkedSpec::OwnerDispatch::dispatch_owner_call(
+   __PACKAGE__, 'LinkedSpec::ActionIR::Contracts', '_cursor_compatibility_value_expr',
+   $method_call->{method},
+  );
  }
  # Read the existing capture String before compatible outer links, rather
  # than inserting its native do-block after fluent lowering has finished.
