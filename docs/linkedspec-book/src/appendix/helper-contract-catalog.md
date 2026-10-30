@@ -550,6 +550,13 @@ dispatch rule.
   precedence. Otherwise `A` is the array binding and `B` is the appended working value. `items += value` is the
   unambiguous operator spelling when the author wants to emphasize mutation.
 
+A completed append snapshot can be read on Perl with an explicit value binding:
+`saved = push(items, "tail"); saved.coalesce(undef)[-1].uppercase()` yields `"TAIL"`.
+Direct free-`push` result reads and fluent continuations are being completed
+independently across backends. Perl currently needs a named or eager-block Hash
+payload in value positions; direct Hash payload lowering is under repair. These
+limits do not change the existing Array end-mutation methods or child-push forms.
+
 ### `items += value`
 - **Signature**: `target += value: expr`
 - **Returns**: updated array snapshot in value positions; side-effect-only behavior when used as a statement.

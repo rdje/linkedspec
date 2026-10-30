@@ -3037,3 +3037,12 @@ chunk locals. Rebuild Lua runtime/apps; declared5.4/full admission remain separa
 Bounded57 outcomes are recorded; remaining-feature selection23.1.19 follows. Existing gap
 state, contexts, errors, function restrictions and raw named policies stay; full
 admission remains separate.
+
+The next bounded feature58 composes existing unambiguous explicit-value push
+snapshots through reads and compatible methods. Perl's Hash payload producer58.0
+is repaired first: public AST and direct statement emitter work, while the saved
+value path leaves raw DSL. Direct free-push reads also fail compilation, and a
+last/uppercase chain is ready yet invokes host uppercase. Qualified completed
+snapshots already yield the twelve target results. Each peer is assessed
+independently; child-push/all-bare/numeric source ambiguities and implicit results,
+grouping/deferred/schema/full admission stay separately owned.
