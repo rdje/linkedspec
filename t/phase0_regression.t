@@ -35994,14 +35994,20 @@ subtest 'emit_context_lowers_coalesce_nonempty_value_helpers' => sub {
     plan tests => 3;
 
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'set(name, coalesce_nonempty(trim(retv["content"]), entry_text(), "UNKNOWN"))'),
-        q#$name = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "content"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = do { defined($IMATCH) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $IPOS - length($IMATCH), $IPOS, "entry_text") : undef }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "UNKNOWN" } }#,
-        'coalesce_nonempty(...) lowers scalar fallback chains into nested first-defined-nonempty value expressions'
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', 'set(name, coalesce_nonempty(trim(retv["content"]), entry_text(), "UNKNOWN"))') . '; return([$name,$retv->{content}])',
+            q{my $retv={content=>" node "}; my $name; my $IMATCH; my $IPOS=0; my $text="entry"; my $STRING=\$text; my $info={};},
+        ),
+        q#{"value":["node"," node "],"warnings":[]}#,
+        'coalesce_nonempty(...) selects the normalized first value without changing its source'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")'),
-        q{do { my $__ls_str_cmp_lhs = do { my $__ls_coalesce_nonempty = do { my $__ls_trim = do { my $__ls_read_value = $retv; my $__ls_read_index; $__ls_read_index = "type"; $__ls_read_value = ref($__ls_read_value) eq "HASH" ? $__ls_read_value->{$__ls_read_index} : undef; $__ls_read_value }; if (defined($__ls_trim)) { $__ls_trim =~ s/^\s+|\s+$//g; } $__ls_trim }; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : do { my $__ls_coalesce_nonempty = $kind; (defined($__ls_coalesce_nonempty) && $__ls_coalesce_nonempty ne '') ? $__ls_coalesce_nonempty : "WORD" } }; my $__ls_str_cmp_rhs = "WORD"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }},
-        'coalesce_nonempty(...) composes inside canonical flow comparisons'
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('str_eq(coalesce_nonempty(trim(retv["type"]), kind, "WORD"), "WORD")'),
+            q{my $retv={type=>" "}; my $kind="WORD";},
+        ),
+        q#{"value":1,"warnings":[]}#,
+        'coalesce_nonempty(...) uses the nonempty fallback inside canonical flow comparisons'
     );
     is(
         evaluate_lowered_json(

@@ -16,7 +16,8 @@ answers:
   - "why do Perl and Rust coalesce disagree on empty aggregates"
   - "why does a Hash default sorted_values first uppercase return null"
   - "how do Array successors consume emitted default guard expressions"
-date: 2026-10-27
+  - "why do old Perl nonempty-default source assertions differ after scalar normalization"
+date: 2026-10-30
 status: bounded defined-only defaults targeted-checked on five recorded backends
 tags: [rust, perl, dart, julia, lua, helpers, defaults, projection, evaluation, startup-reading]
 evidence: "Defaults62/TYPE23.3.6/16.1; TYPE23.3.18.1-.5 retained public producer/shared/selected/kind/effect native/generated controls; defined-default-results.md."
@@ -35,6 +36,16 @@ TYPE23.3.6 binds default results once and guards container consumers by actual
 kind. Typed complete operands avoid reparsing emitted fat arrows; authored
 retired Hash syntax still rejects. Broader62.3/.62.4/domain admission stays open.
 [[action-regex-operands-and-runtime-kinds]] retains shared value boundaries.
+
+TYPE45.7 (2026-10-30) reconciles two obsolete exact emitted-text assertions in
+the nonempty-default Phase0 group. The unchanged helper expressions now assert
+normalized first-value selection without source mutation and fallback selection
+inside canonical comparison; the existing general Hash fallback stays exact.
+All three pass, alongside the native/fresh default-literal controls for null,
+empty text, zero, false, containers and lazy effects. No production, nonempty
+versus defined-only default, kind or evaluation-order policy changes. Actual
+RED/GREEN/source/producer inputs are retained in
+perl-phase0-nonempty-default-intake.json.gz; other frozen failures remain owned45.
 
 TYPE23.3.16.1 exposes a pre-existing Hash default->sorted_values->first->uppercase
 bug: numeric-root, canonical-call-root and direct undef default all return null/

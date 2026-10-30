@@ -80,3 +80,8 @@ source/value/instrument assertions are corrected under existing pure/nested
 authority and supplied DSL type context. All26 assertions and direct6 pass, with
 six native/fresh and three compatibility-harness controls, no production change.
 Other17 last-selected failures remain owned; nonempty-default45.7 is next.
+
+TYPE45.7 subsequently reconciles two obsolete nonempty-default source assertions
+with exact normalized first-value/source and fallback comparison checks. Original
+Hash assertion unchanged; all3/direct native-fresh6 pass, production unchanged.
+Other16 last-selected failures remain owned; scalar boundary-transform45.8 next.

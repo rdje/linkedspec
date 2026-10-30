@@ -9222,14 +9222,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.6 - reconcile pure collection pipeline regression oracles`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.7`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `be91022fc455c4c242f0aad6d954d0d4110027b0`; no proof jobs and brief empty.
   Goal: Reconcile the exact emit_context_lowers_coalesce_nonempty_value_helpers group with current scalar normalization, lazy fallback and comparison authority, repairing only established assertion or product defects.
   Reproduction: TYPE45.4 retains two source mismatches among this group's3 assertions; its semantic Hash fallback assertion passes. Do not refresh emitted text from observation alone or alter nonempty versus defined-only default semantics.
   Impact / schedule: P1 immediately after45.6 before other remaining failures/full23.4/push. Other16 current failed names remain owned45.4 receipt/parent45; bounded scope here is the nonempty-default group only.
+  Verification tier: `focused`
+  Focused checks: Exact3 assertions with public substitution/value evaluation and existing default_literal_operand_contract.t native/fresh null/empty/zero/Boolean/container/lazy-effect controls; syntax, exact scoped test edit and production nonmutation; book/map/history/manual continuity.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Exact authored helper/normalization distinctions, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Two exact source expectations fail while the general Hash fallback assertion stays healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Current scalar normalization/default comparison lowering has richer guards than old literal text; distinguish current fallback values/kinds/order under accepted authority before replacing source assertions.
+  - [x] **FIX**: Assert exact normalized first-result/source preservation and fallback comparison values, preserving the original helper expressions and existing Hash assertion; no product or lazy/default contract changes.
+  - [x] **ADDRESSED (verified)**: Exact3 assertions pass; direct native/fresh default literal controls retain null/empty/zero/Boolean/container selection and lazy effects.
+  - [x] **NO REGRESSION**: Existing positive assertion and all production/other tests unchanged; no nonempty versus defined-only default conflation or broad source refresh.
+  - [x] **LOCKSTEP**: Canonical default fact/map, current book/task/roadmaps/live/resume and next bounded child agree.
+
+  Result: Exact nonempty-default group reproduces2 old emitted-text mismatches/1 healthy general Hash fallback. Preserve both original helper expressions and assert normalized first selection/source preservation plus nonempty fallback in canonical comparison, retaining the third assertion byte-exact. All3 pass; default_literal_operand_contract.t passes6 native/fresh assertions for null/empty/zero/false/container selection and lazy effects, empty stderr/syntax. Only this group changes and529 other hashed inputs remain unchanged; no production or default/String/kind policy change. Actual RED/GREEN/source/producer/normal inputs retained in perl-phase0-nonempty-default-intake.json.gz. Canonical default fact/map/current book/task/roadmaps/live/resume align; exact scalar boundary-transform45.8 follows, other15 current failed names stay owned45. No blanket source refresh/full suite/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.7 - reconcile normalized nonempty-default regression checks`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.8`
+  Status: `pending`
+  Goal: Reconcile the exact emit_context_lowers_scalar_boundary_transform_value_helpers group with current scalar String normalization and literal prefix/suffix semantics; repair only established assertion or product defects.
+  Reproduction: TYPE45.4 retains rm_prefix/rm_suffix and flow-comparison source mismatches in this group. Diagnose actual current source and values; do not globally replace source expectations or erase undefined/Boolean/container boundaries.
+  Impact / schedule: P1 immediately after45.7 before other remaining failures/full23.4/push. Other15 current failed names remain owned45.4 receipt/parent45.
   Planned verification tier: focused.
-  Planned focused checks: Exact3 assertions, public native/fresh scalar/null/empty/Boolean/container fallback/skip controls and direct default/String predicate consumers as warranted.
+  Planned focused checks: Exact authored group, public boundary-transform source/value/falsey/null/metacharacter controls, existing direct scalar String consumer as warranted.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Exact authored helper/normalization distinctions, no population measurement.
+  Planned claim verification: none: Exact authored scalar transform distinctions, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10392,7 +10412,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.7` | `pending` | Reconcile the exact nonempty-default group, then continue the other16 current failed groups. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.8` | `pending` | Reconcile the exact scalar boundary-transform group, then continue the other15 current failed groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
