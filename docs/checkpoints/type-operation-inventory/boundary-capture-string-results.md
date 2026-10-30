@@ -1,7 +1,7 @@
 # Structural boundary capture String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.14; implementation family23.3.53.
-Status: bounded Perl/Rust outcomes targeted-checked; Dart/Julia/safe Lua pending.
+Status: bounded Perl/Rust/Dart outcomes targeted-checked; Julia/safe Lua pending.
 
 ## Established producer authority
 
@@ -90,4 +90,16 @@ the public compiled-rule family classifier. Existing inputs stay exact; actual
 normal/producer/outputs retained in boundary-capture-string-rust-intake.json.gz.
 Dependency warnings remain opaque/upstream-owned. No isolated emitted/full
 name-escape/malformed-phase/context/portable admission. Dart53.3 independently
+follows.
+
+## Bounded Dart53.3
+
+Dart already supports the unchanged target. New6/advancing Number6/reset3 pass
+native/restored SpecFile/generated-plan, fatal analysis/format, runtime unchanged.
+Shared11/primitive/bound/direct/Number controls preserve cursor-origin separation,
+once/snapshots/guards, empty/missing/EOF, quoted comma atom/earliest boundary and
+existing caller callback/typed function fences. JSON reporter binds every
+nonhidden/no-skip identity and completion. Actual source/producer/outputs/inputs
+retained in boundary-capture-string-dart-intake.json.gz. No isolated emitted/full
+name-escape/malformed-phase/context/portable admission. Julia53.4 independently
 follows.
