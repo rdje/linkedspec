@@ -4411,6 +4411,7 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     _validateLogicalHelperArity(call, helperName, context, ruleLabel);
+    _validateGapReaderArity(call, helperName, context, ruleLabel);
     switch (helperName) {
       case 'return':
         final value = positionalArgs.isEmpty
@@ -6052,6 +6053,39 @@ final class LinkedSpecRuntimeEngine {
         summary: 'Dart runtime helper arity mismatch',
         detail: message,
         ruleLabel: ruleLabel,
+      ),
+    );
+  }
+
+  void _validateGapReaderArity(
+    ActionCallExpr call,
+    String helperName,
+    _RuntimeExecutionContext context,
+    String ruleLabel,
+  ) {
+    const readers = {'entry_slot', 'gap_span', 'gap_text', 'gap_kind'};
+    if (!readers.contains(helperName) ||
+        (call.args.isEmpty && !call.trailingBlockArg)) {
+      return;
+    }
+
+    const expected = 'exactly 0 positional arguments';
+    final message =
+        'helper_arity_mismatch helper_name=$helperName '
+        'actual_arity=${call.args.length} expected_arity="$expected" '
+        'rule_label=$ruleLabel';
+    throw RuntimeInterpreterException(
+      message,
+      diagnostic: context.diagnostic(
+        stage: 'helper_arity_mismatch',
+        summary: 'Dart runtime helper arity mismatch',
+        detail: message,
+        code: 'helper_arity_mismatch',
+        helperName: helperName,
+        actualArity: call.args.length,
+        expectedArity: expected,
+        ruleLabel: ruleLabel,
+        handlerSourceLabel: 'dart_runtime:helper:$helperName',
       ),
     );
   }

@@ -807,6 +807,12 @@ and `2` for the comma gap on `a,b`. In the `Item[word]` target,
 `slot=entry_slot(); word_id=slot["slot_id"].uppercase()` produces `"WORD"`.
 The record fields and context rules stay the same.
 
+In ordinary Dart actions, all four gap/slot readers enforce their zero-argument
+signatures. `gap_span(1)` and `entry_slot(extra:1)` raise the existing
+`helper_arity_mismatch` before reading context or evaluating the rejected
+arguments. A trailing codeblock retains its compiler callable-contract rejection.
+Pure functions retain the earlier parser-state helper restriction.
+
 Perl, Rust and Dart support those fields directly:
 `gap_span()["start"].add(1)` gives the same `1`/`2` offsets and
 `entry_slot()["slot_id"].uppercase()` gives `"WORD"`. A selected zero stays

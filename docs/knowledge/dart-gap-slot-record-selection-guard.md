@@ -6,7 +6,7 @@ answers:
   - "which Dart source role guards gap_span and entry_slot field reads"
   - "does Dart record composition change its gap runtime or source errors"
 date: 2026-10-30
-status: bounded Dart55.3 repaired/targeted-checked; separate P1 arity55.0 next
+status: bounded Dart55.3 and strict reader arity55.0 targeted-checked; full admission separate
 tags: [dart, gap, slot, records, selection, fluent, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.55.3; gap-slot-record-dart-intake.json.gz retains unchanged6groups5healthy/1RED to6GREEN, computed7/fatal new-test analysis/format, actual source/producers/probes/inputs/results."
 reverify: "From dart/: bash ../tools/run_dart_project_data.sh test test/gap_slot_record_selection_test.dart test/computed_selection_test.dart"
@@ -32,5 +32,7 @@ shape/context/portable admission follows.
 The independent surplus-argument probe confirms a separate existing defect,
 not a healthy control: all four documented zero-argument readers accept extra1
 on all three routes. Its bytes remain unchanged through this zero-argument-only
-guard. [[dart-gap-reader-surplus-arguments]] owns immediate P1 repair55.0 before
-Julia55.4. No unsupported call form is promoted by this feature.
+guard. [[dart-gap-reader-surplus-arguments]] records the subsequent verified55.0
+repair: surplus positional/keyword calls now reject through existing typed arity
+diagnostics; the compiler trailing-codeblock fence remains. No unsupported call
+form is promoted by either feature. Julia55.4 resumes.

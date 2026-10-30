@@ -8,7 +8,7 @@ answers:
   - "why does a bound named gap record String take return an empty Array"
   - "which task owns gap and slot record computed selection"
 date: 2026-10-30
-status: bounded Perl/Rust/Dart record selection targeted-checked; P1 Dart arity55.0 then Julia/safe Lua pending
+status: bounded Perl/Rust/Dart records and Dart arity55.0 targeted-checked; Julia/safe Lua pending
 tags: [perl, gap, slot, records, selection, fluent, source-role, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.16; gap-slot-record-selection-intake.json.gz retains four healthy/two failed public controls, actual legacy first-consumer substitution and healthy existing computed-record carrier/direct twin."
 reverify: "Recover probe_gap_record_result_assessment.pl/finite cases from gap-slot-record-selection-intake.json.gz; project Perl wrapper with explicit local output. No historical source swaps."
@@ -48,3 +48,5 @@ Requested cleanup46.2 then independent Rust55.2; no peer/full admission follows.
 Rust55.2 independently repairs the existing selected-kind guard rather than parsing. Direct fields work; incompatible selected String consumers return[] and execute BAD on all three routes. [[rust-gap-slot-record-selection-guard]] owns the four-line zero-argument role and unchanged7groups6healthy/1RED to7GREEN proof, with computed6/gap-unit3/fmt. No other runtime or peer repair is inferred.
 
 Dart55.3 independently repairs the canonical zero-argument source-kind guard, with same6groups5healthy/1RED to6GREEN, computed7/analysis/format and13 complete JSON test results. [[dart-gap-slot-record-selection-guard]] owns the exact proof. [[dart-gap-reader-surplus-arguments]] separately owns the actual malformed-call acceptance defect under immediate P1 owner55.0; no new arity support or full shape admission is claimed.
+
+Dart55.0 now repairs the separately owned surplus-argument defect with existing typed arity diagnostics, preserving function/state priority and trailing-codeblock compile rejection. [[dart-gap-reader-surplus-arguments]] owns same9groups4RED/5healthy to9GREEN plus record6/computed7/analysis/format. No gap state/helper ABI or broader phase policy moves; Julia55.4 is next.
