@@ -71,7 +71,7 @@ lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STAB
 
 ADR `0066` defines bounded views over verified stores for live status, task evidence and the two author histories.
 
-A storage migration must first preserve its content consumers. Completed diagnostic duplicates may be compressed only after exact retained-input and claim-consumer checks; decompression/hash verification precedes raw removal, and reusable build caches stay available. Restore raw diagnostics from retained gzip or evidence packets before replaying historical producers. Current assertions read governed records or
+A storage migration must first preserve its content consumers. Completed diagnostic duplicates may be compressed only after exact retained-input and claim-consumer checks; decompression/hash verification precedes raw removal, and reusable build caches stay available. Restore raw diagnostics from retained gzip or evidence packets before replaying historical producers. Completed failed-instrument logs follow the same exact-byte recovery guards after their owning slice is committed. Current assertions read governed records or
 semantic owners; the FUTURE checker rejects old-monolith coupling in all eleven transferred scopes.
 The complete consumer census and migration evidence live in `docs/knowledge/bounded-live-document-store-contract.md`.
 

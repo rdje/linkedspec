@@ -9741,6 +9741,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP**: docs/ARTIFACT_CLEANUP.md latest record, daily-safe-cleanup-46.json.gz, dev book/live/task/resume/history align; no Knowledge fact change. Immediate Perl40.1 feature repair resumes from clean commit; authorized focused checks/no push.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.46 - compress retained primary diagnostics at the daily boundary`.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46.1`
+  Status: `completed` / due daily safe diagnostic cleanup at clean52 selection boundary
+  Activation: clean `79ba062776d503ae7ae70546c319f3a0990775d9`; prior jobs terminal/brief0.
+  Goal: Losslessly compress only completed Lua51.5 failed-instrument raw diagnostic duplicates already retained in its committed packet, refresh daily record, then immediately resume Perl52.1.
+  Verification tier: `focused`
+  Focused checks: Exact committed packet/raw identities, all-claim exclusion, on-volume/non-symlink/nested-repository guards, exclusive gzip/decompression/hash before unlink, raw inode/metadata/content recheck, absence/recovery and Rust release/incremental/deps .bin/.log metadata census; book/history/manual continuity.
+  Canonical trigger: Full admission/final clean push; no storage policy, infrastructure or cache migration.
+  Claim verification: none: Exact named duplicate/recovery controls only, no population/disk-space measurement.
+  - [x] **REPRODUCE / ISSUE**: Due daily boundary; exact closed-leaf recoverable diagnostic duplicates only.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Due daily boundary; exact closed-leaf recoverable diagnostic duplicates only.
+  - [x] **FIX**: Due daily boundary; exact closed-leaf recoverable diagnostic duplicates only.
+  - [x] **ADDRESSED (verified)**: Due daily boundary; exact closed-leaf recoverable diagnostic duplicates only.
+  - [x] **NO REGRESSION**: Due daily boundary; exact closed-leaf recoverable diagnostic duplicates only.
+  - [x] **LOCKSTEP**: Due daily boundary; exact closed-leaf recoverable diagnostic duplicates only.
+
+  Result: Due daily cleanup at clean Number52 selection boundary losslessly compresses only eight exact completed Lua51.5 instrument log/stderr duplicates, already byte-identical in its unchanged committed packet and absent from all claim durability inputs. Exclusive same-volume/non-symlink/nested-repository guards, decompressed byte/hash equality and unchanged raw inode/metadata/content precede unlink; all raw names are absent and local gzip/committed packet recover exact originals. Rust release/incremental/deps .bin/.log metadata census retained, all caches/build artifacts retained. Latest-only cleanup record refreshed at 2026-10-30T12:16:34.128426+00:00. Actual guarded producers/receipt/compressed bytes retained in daily-safe-cleanup-46-1.json.gz. Current normal test execution reads none of these logs; historical one-shot finishers first restore exact raw inputs. No production/storage-policy/infrastructure/cache migration/broad deletion/disk-space/population claim or other-repository/off-volume write. Book/live/task/resume/history/manual checks align; immediately resume Perl52.1 feature implementation with focused compile/quick check/commit. Deferred24/full23.4/canonical push prerequisites unchanged; no push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.46.1 - compress retained Lua diagnostics at the daily boundary`.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.47`
   Status: `in_progress` / P1 after40/41, before45/wider feature expansion/full23.4/push
   Goal: Resolve named match-start capture absence and successful-only named-take movement through independently verified backend targets.
