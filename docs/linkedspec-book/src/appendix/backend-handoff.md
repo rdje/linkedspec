@@ -3001,8 +3001,14 @@ native/restored/plan; rebuild its runtime/apps. All four Rust cursor controls no
 reject surplus arguments before argument evaluation, retaining pure-function
 priority and the compiler rejection of trailing bodies. Dart now returns and
 composes validated character Number results on native/restoredSpec/plan with
-null absent anchors. Its owned surplus-argument repair comes next before Julia;
-rebuild Dart runtime/apps.
+null absent anchors. Its four cursor controls now reject surplus arguments
+before physical effects, preserving function priority and trailing compile
+rejection. Rebuild Dart runtime/apps; Julia follows independently.
 A separately owned default-parent rewind cycle requires ordinary progress
 authority before admission. No anchor/absence/stack/transaction/callback/schema
 or portable admission changes follow from this selection.
+
+The Knowledge Map remains derivable from committed fact cards. Its generator
+currently writes the live file directly; wait for generation to finish before
+reading or staging it. Atomic publication is owned by the scheduled document
+maintenance repair before admission.

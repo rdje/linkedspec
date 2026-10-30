@@ -180,18 +180,39 @@ rewind_match_start()[0].coalesce(["a","tail"])[-1].uppercase(),cursor_pos()]);
       [null, null, 0, null, 0],
     );
   });
-  test('legacy malformed rewinds retain null pending separate arity repair', () {
-    // No healthy arity credit; preserve the old producer until its owned repair.
-    for (final entry in {
-      'rewind_entry_start': 2,
-      'rewind_match_start': 4,
-    }.entries) {
+  test('malformed rewind arguments reject before result selection', () {
+    // Original accepted-null epoch is retained in the56.3 feature intake.
+    final observed = <Map<String, Object?>>[];
+    for (final helper in ['rewind_entry_start', 'rewind_match_start']) {
       for (final argument in ['1', 'extra:1']) {
-        check(
-          'legacy_${entry.key}_$argument',
-          carrier('return([${entry.key}($argument),cursor_pos()])'),
+        final values = <String, Object?>{};
+        for (final route in routes(
+          carrier('return([$helper($argument),cursor_pos()])'),
           'zzab:cd',
-          [null, entry.value],
+        ).entries) {
+          try {
+            values[route.key] = {'value': route.value()};
+          } catch (error) {
+            values[route.key] = {'error': error.toString()};
+          }
+        }
+        observed.add({
+          'helper': helper,
+          'argument': argument,
+          'routes': values,
+        });
+      }
+    }
+    print('CURSOR_REWIND_ARITY ${jsonEncode(observed)}');
+    for (final item in observed) {
+      for (final row in (item['routes']! as Map).values) {
+        expect(
+          (row as Map)['error'],
+          allOf(
+            contains('helper_arity_mismatch'),
+            contains('helper_name=${item['helper']}'),
+            contains('actual_arity=1'),
+          ),
         );
       }
     }

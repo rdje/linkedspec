@@ -669,8 +669,11 @@ priority over argument validation.
 Dart now also returns character-based Numbers from successful zero-argument
 rewinds and supports the same guarded continuations and Array recovery. Missing
 anchors still yield null. Rebuild applications with the updated Dart runtime.
-Dart surplus-argument validation is the next owned repair; use zero-argument
-forms. Julia and Lua are assessed independently. Ordinary Perl eager blocks and `with`
+All four Dart cursor controls now reject surplus arguments with
+`helper_arity_mismatch` before helper effects, retaining pure-function priority
+and the compiler rejection of trailing codeblocks. For example,
+`save_cursor(1)` fails before adding a cursor checkpoint. Julia and Lua are
+assessed independently. Ordinary Perl eager blocks and `with`
 bodies also support these four cursor statements while keeping block returns
 local. For example:
 

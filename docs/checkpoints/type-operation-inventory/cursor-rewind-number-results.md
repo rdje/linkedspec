@@ -1,7 +1,7 @@
 # Cursor rewind Number result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.17; family23.3.56.
-Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 next before Julia/safe Lua.
+Status: prerequisite56.0 and bounded Perl56.1/Rust56.2 targeted-checked; Rust arity56.2.0 repaired/targeted-checked; Dart56.3 canonical-zero result targeted-checked; arity56.3.0 repaired/targeted-checked; Julia/safe Lua pending.
 
 ## Existing authority
 
@@ -142,3 +142,16 @@ surplus rewind forms remain null/moving only until immediate P1 child56.3.0;
 no healthy arity credit. Actual producers/setup/RED-GREEN/inputs retained in
 cursor-rewind-result-dart-intake.json.gz. Rebuild runtime/apps. No whole-file
 SDK-format/isolated emitted/full admission; Julia56.4 follows the arity repair.
+
+## Dart cursor arity56.3.0 repaired
+
+All four controls now share the existing renamed zero-argument helper validator.
+Invalid forms reject before physical dispatch; original function priority and
+trailing compiler phase stay. Same8groups4healthy/4RED now pass, plus parent10/
+gap-arity9/fatal analysis/new-parent format. All24 invalid programs/72 route
+outputs and exact preserved valid0/Unicode/absence/stack/function/phase/logical
+observations are in cursor-control-arity-dart-intake.json.gz with actual producers
+and inputs. Parent's final legacy acceptance assertion is replaced in this new
+epoch, retaining original evidence and preceding nine positive groups. Earlier
+Dart accepted-malformed notes are historical only. Rebuild runtime/apps; Julia56.4
+is next. No new state/schema or full admission.

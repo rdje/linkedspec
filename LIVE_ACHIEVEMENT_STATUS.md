@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart canonical-zero rewind Number result repaired: new10/gap6/computed7/analysis/normal fmt pass; immediate arity56.3.0 next.
+Dart four-control zero arity repaired: new8/parent10/gap-arity9/analysis/new-parent fmt pass; Julia56.4 next.
 
 ## Latest Completed Slice
 
-Dart56.3 independently exposes discarded rewind results and missing typed source roles. Same10groups5RED/4healthy-positive/1legacy-malformed-preservation now pass; nine positive groups plus the explicitly separated legacy group. Original private setters retain target/validation/physical movement and return the cached character position Number; helper tracing stays, canonical zero dispatch/source/selected-read guards expose it. Shared12/ASCII/Unicode positions1/3/zero laziness/incompatible operand skips/source2 before consuming7/sum9/with Array/signed text/absent-anchor null and function fences pass native/restoredSpec/generated-plan. Thirteen actual result observations and two function fences retained; initial unreached function observer calibrated before production with no RED credit. New10/gap6/computed7 yields23 non-skipped JSON completions; changed-owner/new-normal fatal analysis and new-normal format0. 199 other activation inputs exact; actual source/producers/normal/setup/RED-GREEN/results retained in cursor-rewind-result-dart-intake.json.gz. Four surplus rewind calls still null/move, no supported-shape credit; P1 child56.3.0 repairs all four cursor controls next before Julia56.4. Book/card/target/map/task/roadmap/live/resume/history align; rebuild runtime/apps. No isolated emitted/full shape/error-phase/context/portable/schema/iteration/deferred or whole-file SDK-format admission.
+Dart cursor-control arity56.3.0 repaired. All four controls join the original gap-reader zero-argument validator, renamed _validateZeroArgumentHelperArity; original function-state/resolution priority and typed diagnostic path stay. Same8groups4healthy/4RED now pass; all24 invalid programs/72 native/restoredSpec/generated-plan observations reject helper_arity_mismatch with helper/count/expected0. Malformed operands were previously ignored, not evaluated; the existing validation point now rejects before helper switch/physical dispatch. Function fences/valid0/Unicode/absence/null/stack/prefix/logical outputs and four trailing compilation errors are byte-equal before/after. Parent final legacy acceptance is replaced in explicit retained new epoch; nine positive groups exact. New8/parent10/gap-arity9 yield27 non-skipped JSON completions; changed-owner/new-parent fatal analysis and new-parent format0. 199 other activation inputs exact; result methods/tracing/guards/physical setter/schema unchanged. Partial one-shot parent marker failure and guarded parent-only recovery retained. Actual source/producers/RED-GREEN/observations/inputs in cursor-control-arity-dart-intake.json.gz. Book/card/target/map/task/roadmap/live/resume/history align; rebuild runtime/apps. No post-error cursor telemetry, isolated emitted/full shape/phase/portable/SDK-format admission. Independent Julia56.4 next.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0 after clean Dart56.3. Read new Dart rewind card/retained four accepted malformed forms, current shared gap zero-arity validator/function priority/trailing compiler contract and all four cursor controls. New finite normal independently baseline positional/keyword/two/trapping/selected/function/valid0/phase before production. Reuse existing helper_arity_mismatch diagnostics before physical effects; preserve function resolution/state priority and trailing compile phase. Replace parent legacy final test in retained new epoch, preserve nine positive groups. Compile/quick new/nearest/analysis/new-format/book/docs/commit, then Julia56.4. No routine full CI or state/schema/progress-policy change.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.4 from clean Dart result/arity56.3/.0. Read frozen56/shared explicit-edge carrier and relevant Julia computed/input/cursor cards, original runtime rewind producer/guard/typed coordinates/function/arity contract and nearest normals. Independently baseline finite primitive/bound/direct/zero/order/snapshot/kind/absence/function controls on native/plan/fresh Module before production; preserve healthy cases. Implement canonical-zero existing rewind Number result/source roles only where missing. Strict depwarn compile/quick new and nearest/runner registration/book/docs/commit, then safe Lua56.5. No full suite, new state/schema or progress policy.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0` — Dart four-control zero arity repaired: new8/parent10/gap-arity9/analysis/new-parent fmt pass; Julia56.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.3` — Dart canonical-zero rewind Number result repaired: new10/gap6/computed7/analysis/normal fmt pass; immediate arity56.3.0 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.2.0` — Rust four-control zero arity repaired: new8/parent9/gap7/fmt pass; Dart56.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.2` — Rust canonical-zero result repair: eight positive/one malformed-preservation groups, computed6/cursor5/fmt pass; immediate arity56.2.0 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0 after clean Dart56.3. Read new Dart
 - `TYPE-REFERENCE-BOOK.1.2.23.3.55.1` — Perl gap/slot10groups5RED/5healthy→10GREEN; live gap2/deferred22 pass; requested cleanup46.2 then Rust55.2.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.16` — Gap/slot record55 frozen; four healthy/two direct failures, computed carrier passes; Perl55.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.54.5` — Safe Lua selected-call guard39healthy/4RED→43GREEN per host; boundary81/computed pass; all bounded54 checked; next selection16.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.54.4` — Julia selected-call guard31healthy/4RED→35GREEN; computed25/boundary65/strict compile pass; safe Lua54.5 next.
 
 ## History
 

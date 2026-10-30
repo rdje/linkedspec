@@ -4411,7 +4411,7 @@ final class LinkedSpecRuntimeEngine {
       );
     }
     _validateLogicalHelperArity(call, helperName, context, ruleLabel);
-    _validateGapReaderArity(call, helperName, context, ruleLabel);
+    _validateZeroArgumentHelperArity(call, helperName, context, ruleLabel);
     switch (helperName) {
       case 'return':
         final value = positionalArgs.isEmpty
@@ -6062,14 +6062,23 @@ final class LinkedSpecRuntimeEngine {
     );
   }
 
-  void _validateGapReaderArity(
+  void _validateZeroArgumentHelperArity(
     ActionCallExpr call,
     String helperName,
     _RuntimeExecutionContext context,
     String ruleLabel,
   ) {
-    const readers = {'entry_slot', 'gap_span', 'gap_text', 'gap_kind'};
-    if (!readers.contains(helperName) ||
+    const helpers = {
+      'entry_slot',
+      'gap_span',
+      'gap_text',
+      'gap_kind',
+      'save_cursor',
+      'restore_cursor',
+      'rewind_entry_start',
+      'rewind_match_start',
+    };
+    if (!helpers.contains(helperName) ||
         (call.args.isEmpty && !call.trailingBlockArg)) {
       return;
     }
