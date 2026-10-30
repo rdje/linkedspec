@@ -1,7 +1,7 @@
 # Ordinary gap and incoming-slot record field selection
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.16; family23.3.55.
-Status: bounded target frozen; independent implementations pending.
+Status: bounded Perl55.1 repaired/targeted-checked; independent peers pending.
 
 ## Established source authority
 
@@ -76,3 +76,20 @@ in gap-slot-record-selection-intake.json.gz.55.1 Perl/55.2 Rust/55.3 Dart/55.4
 Julia/55.5 safe Lua independently assess before production, retaining healthy
 peers. No peer support, complete source/domain/context/error-phase/portable23.4,
 canonical registration, typed-source facade or declared Lua5.4 admission here.
+
+## Bounded Perl55.1 implemented
+
+A guarded existing zero-argument source role now admits both detached harray
+readers through value_access and the original readonly helper ABI. Remaining
+lowering/parser/gap runtime/state/metadata/schema bytes stay exact. Calibrated
+same10groups5RED/5healthy→10GREEN native/fresh covers shared target/record fields/
+named provenance/null slot/defaults/legacy named first-consumer policy/typed
+unavailable context/deferred and extra-arity bounds. Forbidden helper defaults
+may yield M while their metadata stays unready; primitive controls independently
+confirm this existing Perl policy. Initial null assumption/8-group epoch retained,
+not product RED. Previously falsely ready function field syntax now records its
+forbidden helper correctly. Existing live gap2 groups/deferred22/syntax pass.
+Actual source/normal/producers/epochs/inputs/results retained in
+gap-slot-record-perl-intake.json.gz. No new gap/context/schema or full admission.
+Requested safe cleanup46.2 precedes independent Rust55.2; normal registration23.4.1
+remains separate.

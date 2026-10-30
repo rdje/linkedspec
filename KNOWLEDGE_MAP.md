@@ -13914,7 +13914,7 @@ _Capture-enabled LS observes selected end while gap-boundary commit and authored
 ### gap-slot-record-selection-source-gap
 _Gap and incoming-slot record helpers need governed ordinary computed read roles_
 - **answers:** can gap_span fields be selected directly before Number methods | can entry_slot slot_id feed a direct bracket and String method | why does Perl gap_span bracket indexing fail compilation | why does a bound named gap record String take return an empty Array | which task owns gap and slot record computed selection
-- **date:** 2026-10-30 · **status:** bounded55 target frozen; independent implementations pending
+- **date:** 2026-10-30 · **status:** bounded Perl55.1 repaired/targeted-checked; independent peers pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.16; gap-slot-record-selection-intake.json.gz retains four healthy/two failed public controls, actual legacy first-consumer substitution and healthy existing computed-record carrier/direct twin.`
 - **reverify:** `Recover probe_gap_record_result_assessment.pl/finite cases from gap-slot-record-selection-intake.json.gz; project Perl wrapper with explicit local output. No historical source swaps.`
 - **source:** [`docs/knowledge/gap-slot-record-selection-source-gap.md`](docs/knowledge/gap-slot-record-selection-source-gap.md)

@@ -1704,6 +1704,15 @@ sub _user_function_registry_by_name {
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
  my ($name, $registry, $call) = @_;
+ # These readonly context helpers already return detached ordinary harrays.
+ # Reuse their value ABI only for the existing zero-argument source form;
+ # Parser's deferred fence and the lowering function-state fence remain first.
+ if (defined($name) && $name =~ /\A(?:entry_slot|gap_span)\z/o) {
+  return undef unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+   && ($call->{name} // '') eq $name && ($call->{source_method} // $name) eq $name
+   && !$call->{trailing_block_arg} && ref($call->{args}) eq 'ARRAY' && !@{$call->{args}};
+  return $name;
+ }
  # A child return is one source value. Admit only the existing bare static
  # rule-label spelling; Parser's deferred-body fence remains first. Invocation
  # itself still uses the ordinary call value owner and original child handler.

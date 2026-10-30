@@ -807,12 +807,20 @@ and `2` for the comma gap on `a,b`. In the `Item[word]` target,
 `slot=entry_slot(); word_id=slot["slot_id"].uppercase()` produces `"WORD"`.
 The record fields and context rules stay the same.
 
-Perl currently needs that binding before field brackets. Direct forms such as
-`gap_span()["start"].add(1)` and `entry_slot()["slot_id"].uppercase()` are the next
-bounded composition target; they currently fail Perl compilation. Other backends
-are assessed independently. Missing fields may use ordinary defaults once a
-record is available; an unavailable gap phase still raises its typed context
-error. This adds no new segmentation state or metadata field.
+Perl also supports those fields directly:
+`gap_span()["start"].add(1)` gives the same `1`/`2` offsets and
+`entry_slot()["slot_id"].uppercase()` gives `"WORD"`. A selected zero stays
+defined: `entry_slot()["regex_index"].coalesce(99).add(1)` gives `1` for slot zero.
+Missing fields may recover another type, as in
+`gap_span()["missing"].coalesce(["a","tail"])[-1].uppercase()`, which gives
+`"TAIL"` in an active gap action. Incompatible computed-result consumers skip
+their operands. Existing named/context first-consumer policies stay qualified.
+
+Direct entry-slot absence remains null, so a field read may default. Unavailable
+gap phases still raise their typed context error before a field default; they
+are not null gaps. Pure functions retain parser-context restrictions and should
+receive the record as an explicit argument. Other backends are assessed
+independently. This adds no segmentation state, metadata field or format.
 
 
 Migration is intentionally non-aliasing:

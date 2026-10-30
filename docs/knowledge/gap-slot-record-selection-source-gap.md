@@ -8,7 +8,7 @@ answers:
   - "why does a bound named gap record String take return an empty Array"
   - "which task owns gap and slot record computed selection"
 date: 2026-10-30
-status: bounded55 target frozen; independent implementations pending
+status: bounded Perl55.1 repaired/targeted-checked; independent peers pending
 tags: [perl, gap, slot, records, selection, fluent, source-role, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.16; gap-slot-record-selection-intake.json.gz retains four healthy/two failed public controls, actual legacy first-consumer substitution and healthy existing computed-record carrier/direct twin."
 reverify: "Recover probe_gap_record_result_assessment.pl/finite cases from gap-slot-record-selection-intake.json.gz; project Perl wrapper with explicit local output. No historical source swaps."
@@ -34,3 +34,13 @@ Gap records remain detached ordinary harrays. Direct entry_slot absence is null;
 unavailable gap context is a typed error, not defaultable null. Function/callback/
 deferred, ownership/phase/rollback/metadata/arity/schema authorities stay intact.
 No production/peer/portable or deep-copy proof is claimed by this selection.
+
+Perl55.1 adds only the guarded zero-argument record source role through the
+existing reader and ABI. Calibrated same10groups5RED/5healthy→10GREEN, live gap2/
+deferred22/syntax pass; typed unavailable context stays an error before defaults.
+Primitive forbidden-helper/default controls establish M/unready; the initial
+post-default null assumption is superseded without field-source changes. Initial
+falsely ready function field syntax now has correct forbidden-helper metadata.
+gap-slot-record-perl-intake.json.gz retains all original/final epochs/producers/
+inputs. Remaining lowering/gap runtime/parser/state/fields/schema bytes exact.
+Requested cleanup46.2 then independent Rust55.2; no peer/full admission follows.
