@@ -9161,14 +9161,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.3 - isolate Perl pick_keys lowering for every operand`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.4`
-  Status: `pending`
+  Status: `completed`
+  Activation: clean `e882945373fef4ea5b7fe390c1c72b2f5d609c7a`; no proof jobs and brief empty.
   Goal: Reverify the frozen28 selected groups after the shared pick_keys producer repair and select the next remaining bounded cause from actual diagnostics.
   Reproduction / schedule: TYPE45.0 at d30 records28 failing groups;45.1/.2/.3 fix distinct bounded causes. Shared key lowering participates in other retained groups, so do not carry forward their old failures as current or assume their resolution. P1 immediately after45.3, before wider features/full23.4/push.
   Scope: Existing current-only selector, exact28-name identity, current-input nonmutation, actual complete TAP/stderr/exit, bounded child ownership. No historical source swap, full-suite inference, expectation refresh or product edits in this assessment.
+  Verification tier: `focused`
+  Focused checks: Current-only frozen28 replay and exact failing-set comparison at the new clean boundary; exact input/selected-plan identities and bounded next owner; no full primary suite.
+  Canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
+  Claim verification: none: Finite named regression groups and exact identities, no population measurement.
+  - [x] **REPRODUCE / ISSUE**: Reassess the frozen28 after shared producer repair.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Derive actual remaining diagnostics without carrying forward old classifications/counts.
+  - [x] **FIX**: Update bounded current status and own the next exact cause; no source/expectation changes in this assessment.
+  - [x] **ADDRESSED (verified)**: Complete selected TAP/stderr/exit and exact current-input nonmutation retained.
+  - [x] **NO REGRESSION**: All frozen names selected once with nested assertions; no historical proof rewrite or full-suite inference.
+  - [x] **LOCKSTEP**: Current fact/book/task/roadmap/live/resume and next bounded child agree.
+
+  Result: Current-only frozen28 replay at clean e88294537 completes all selected/nested assertions and29-result TAP:8 groups pass,20 fail, exit20,530 current input hashes unchanged. The cleared set includes the repaired lazy-owner/substitution/map groups plus canonical containers, capture/structured return lowering, flat lists, user functions and bare binding memory. Exact20 current names/TAP/stderr/producers/inputs retained in perl-phase0-after-pick-intake.json.gz, with prior28-failure boundary immutable in earlier packets. No production/test/expectation change or old-source swap, no full-suite state inferred. First remaining group has one of12 assertions differing on nested Array shape; child45.5 must reconcile current constructor identity authority before any repair, other19 remain owned45. Book/fact/map/task/roadmaps/live/resume align; focused authorized checkpoint, no full gate/push.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.45.4 - retain current selected failures after the shared key repair`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.45.5`
+  Status: `pending`
+  Goal: Reconcile the exact emit_context_lowers_general_return_payloads_with_nested_structures group's nested Array result with current constructor/aggregate identity authority; repair the established cause only.
+  Reproduction: Current45.4 at e882 has one failure in this group's12 assertions: nested array-pipeline composition inside array(...) returns [["ALPHA","APPLE"]] versus expected ["ALPHA","APPLE"]. Do not classify nested/flat solely by observed shape or normalize null/nesting globally.
+  Impact / schedule: P1 immediately after45.4 before other remaining failures/full23.4/push. The exact other19 current failed names stay owned45.4's retained receipt and parent45, with bounded children selected after this repair.
   Planned verification tier: focused.
-  Planned focused checks: Current-only frozen28 replay and exact failing-set comparison at the new clean boundary; no repeated full primary suite.
+  Planned focused checks: Exact12-assertion group, public substitutions/evaluation/native/fresh and independent Array constructor/wrapper/flat/typed aggregate controls; preserve accepted copy/depth/actual-kind transitions.
   Planned canonical trigger: Full23.4/final clean push after all repairs/registration/canonical prerequisites.
-  Planned claim verification: none: Finite named regression groups and exact identities, no population measurement.
+  Planned claim verification: none: Exact authored constructor/result distinction, no population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.46`
   Status: `completed` / due daily safe diagnostic cleanup at clean40.0 boundary
@@ -10331,7 +10351,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.4` | `pending` | Reverify frozen28 after the shared key producer repair, then select the next actual bounded cause. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.45.5` | `pending` | Reconcile the exact nested Array constructor result, then continue the other19 current failed groups. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

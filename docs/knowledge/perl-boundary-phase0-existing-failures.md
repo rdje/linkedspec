@@ -9,7 +9,7 @@ date: 2026-10-30
 status: current selected failures owned by TYPE-REFERENCE-BOOK.1.2.23.3.45
 tags: [perl, phase0, regression, ownership]
 evidence: "TYPE37 perl-emitted-boundary-catalog-intake.json.gz retains full primary run, exact selected28 names, actual baseline/candidate TAP/stderr, canonical snapshots, producer and comparison receipt."
-reverify: "Recover replay_phase0_current_selected.py and probe_phase0_current_selected.pl from perl-phase0-current-intake.json.gz and run bash tools/run_python_project_data.sh .linkedspec-data/verification/replay_phase0_current_selected.py. Historical replay_boundary_phase0_selected.py installs old production snapshots: never run it or --restore against current source."
+reverify: "Recover replay_phase0_after_pick.py and probe_phase0_current_selected.pl from perl-phase0-after-pick-intake.json.gz; run bash tools/run_python_project_data.sh .linkedspec-data/verification/replay_phase0_after_pick.py. Never run the historical TYPE37 source-swap replay or --restore against current source."
 ---
 
 The historical TYPE37 additional standard Phase0 run fails28/1035 groups. The exact28 failing groups
@@ -61,3 +61,10 @@ correct. New8/capture30/original-default13 normal groups pass51. See
 [[perl-pick-keys-conditional-local-reuse]]. Current-only frozen28 assessment45.4
 next establishes remaining failures after that shared change; no old count is
 carried forward as current and no blanket stale-expectation classification follows.
+
+TYPE45.4 current-only reassessment at e882945373fef4ea5b7fe390c1c72b2f5d609c7a
+completes frozen28 with8 passing/20 failing groups, exit20 and530 input hashes
+unchanged. Exact names and actual producer/TAP/diagnostics are retained in
+perl-phase0-after-pick-intake.json.gz. The first remaining nested Array result
+has child45.5; other19 exact names remain owned45. Prior boundaries remain dated;
+this selected replay establishes no full-suite state or common cause for all20.

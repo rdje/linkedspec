@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl pick_keys operand reuse repaired;51 normal groups/original map5 pass; frozen28 reassessment45.4 next.
+Frozen28 now8PASS/20FAIL with530 inputs unchanged; exact nested Array result45.5 next.
 
 ## Latest Completed Slice
 
-Public raw-map/bracket controls prove captures correct; original projections lose values because pick_keys emits an earlier key repeatedly, even across calls/compilations. Relevant origin1ad4335927 TYPE18.1 introduced conditional lexical initialization during block-key support. Declare the per-key temporary unconditionally; retain existing conditional block lowerer/scalar fallback. New8 native/fresh cases7 value RED/1healthy ->all8pass, covering variadic/consecutive/dynamic/mixed block/nested/missing-empty-zero/function/detached results. Original Phase0 map expectation unchanged and its5 assertions pass. Capture selection30/defined-default13 plusnew8 pass51 normal groups; syntax/empty final stderr. Public2healthy source/results exact,2repaired; old4 emitted source replays exact baseline outcomes and requires regeneration. Exact one production declaration patch, Phase0 unchanged and526 other prior hashed inputs unchanged; new normal/fixture owned here and canonical registration23.4.1 pending. Actual producers/source epochs/RED-GREEN/history/old artifacts retained in perl-phase0-pick-keys-intake.json.gz. Book examples/new fact/map/task/roadmaps/live/resume align; current-only frozen28 assessment45.4 next, no full suite/push.
+Current-only frozen28 replay at clean e88294537 completes all selected/nested assertions and29-result TAP:8 groups pass,20 fail, exit20,530 current input hashes unchanged. The cleared set includes the repaired lazy-owner/substitution/map groups plus canonical containers, capture/structured return lowering, flat lists, user functions and bare binding memory. Exact20 current names/TAP/stderr/producers/inputs retained in perl-phase0-after-pick-intake.json.gz, with prior28-failure boundary immutable in earlier packets. No production/test/expectation change or old-source swap, no full-suite state inferred. First remaining group has one of12 assertions differing on nested Array shape; child45.5 must reconcile current constructor identity authority before any repair, other19 remain owned45. Book/fact/map/task/roadmaps/live/resume align; focused authorized checkpoint, no full gate/push.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.4 from clean pick_keys repair. Run the retained current-only frozen28 selector against current source with exact name/input nonmutation checks; this shared producer changed several consumers, so derive the actual remaining failing set before selecting the next bounded child. Never run historical source-swap replay, refresh expectations globally or infer full-suite status. Preserve earlier packet boundaries; full23.4/push require registration23.4.1,20.1 and other canonical prerequisites.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.5 from clean selected replay checkpoint. Reconcile the exact12-assertion nested-return group with current Array constructor/aggregate identity authority and public substitution/native/fresh controls; repair only the established cause, preserving wrapper/flat/copy boundaries. The other19 current failed names are in the45.4 packet receipt and remain owned45. No blanket value refresh, historical source swaps or full Phase0 per repair; registration23.4.1/20.1 and other canonical prerequisites remain before full23.4/push.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.45.4` — Frozen28 now8PASS/20FAIL with530 inputs unchanged; exact nested Array result45.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.3` — Perl pick_keys operand reuse repaired;51 normal groups/original map5 pass; frozen28 reassessment45.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.2` — Endpoint source expectations match accepted guards;90 source assertions/46 runtime groups pass; exact map45.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.45.1` — Lazy-owner fixture supplies required value callback; unchanged40 assertions/public6 pass; helper-substitution45.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.45.4 from clean pick_keys repair. Run the 
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.2` — Dart own arrays are fresh per invocation; pure-code compiler48.3.3 next, ordinary policy39.8.1 separate.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.3.1` — Dart blind parent-push13 controls repaired; invocation accumulator48.3.2 immediately next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.48.3` — Dart blind target declaration validation repaired; parent-push runtime48.3.1 immediately next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.48.2.6.1` — Perl static Unicode recognition/observation operands repaired; Dart48.3 next.
 
 ## History
 
