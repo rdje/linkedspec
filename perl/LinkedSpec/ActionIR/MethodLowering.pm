@@ -1719,10 +1719,10 @@ sub _actionir_ast_computed_data_call_method {
    && !$call->{trailing_block_arg} && ref($call->{args}) eq 'ARRAY' && !@{$call->{args}};
   return $name;
  }
- # These readonly context helpers already return detached ordinary harrays.
+ # These readonly context helpers already return boxed records or Strings.
  # Reuse their value ABI only for the existing zero-argument source form;
  # Parser's deferred fence and the lowering function-state fence remain first.
- if (defined($name) && $name =~ /\A(?:entry_slot|gap_span)\z/o) {
+ if (defined($name) && $name =~ /\A(?:entry_slot|gap_span|gap_text|gap_kind)\z/o) {
   return undef unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
    && ($call->{name} // '') eq $name && ($call->{source_method} // $name) eq $name
    && !$call->{trailing_block_arg} && ref($call->{args}) eq 'ARRAY' && !@{$call->{args}};
@@ -1797,7 +1797,7 @@ sub _ordinary_input_cursor_result_source {
  return _ordinary_input_cursor_result_source($call->{args}[0])
   if $name eq 'with' && $call->{trailing_block_arg} && @{$call->{args}} == 2;
  return 0 if $call->{trailing_block_arg};
- if ($name =~ /\Arewind_(?:entry|match)_start\z/o) {
+ if ($name =~ /\A(?:rewind_(?:entry|match)_start|gap_(?:text|kind))\z/o) {
   return !@{$call->{args}} && ($call->{source_method} // $name) eq $name;
  }
  return @{$call->{args}} == 2 if $name eq 'input_slice';

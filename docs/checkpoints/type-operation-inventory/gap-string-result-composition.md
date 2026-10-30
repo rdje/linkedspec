@@ -1,7 +1,7 @@
 # Guarded gap String result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.18; implementation family23.3.57.
-Status: Frozen target only; independent backend57.1-.5 pending.
+Status: Bounded Perl57.1 repaired/targeted-checked; independent Rust/Dart/Julia/safe Lua pending.
 
 ## Existing authority and preserved behavior
 
@@ -47,3 +47,18 @@ String arguments are the positive function control. Actual16 observations,
 source/metadata/substitution/generated-source and producers are retained in
 gap-string-result-selection-intake.json.gz. No peer/full matrix/domain/context/
 portable23.4, pressure/registration/progress/declared5.4 promotion.
+
+## Perl57.1 implementation
+
+Two MethodLowering source-role regex extensions reuse the original zero-argument
+gap String ABI and actual-kind guards. Getter/runtime/Contracts/Parser/fence/state
+bytes remain exact. Same13groups3RED/10healthy to13GREEN, gap10 groups/deferred22
+flat assertions/owner and original-normal syntax pass. Added2 computed-read pure
+function controls in an explicit new epoch; final15 passes, no historical RED
+credit for added2. All four unsupported function cases may coalesce M with
+unready/helper-specific metadata; no successful parser-state read. Four
+unavailable source/default errors exact. Shared/empty/tail/Unicode/kind/with/
+recovery/skips/cursor/named legacy behavior pass native/fresh. Actual source/
+normal/producers/epochs/results in gap-string-result-perl-intake.json.gz.
+New15 queued23.4.1, regenerate affected emitted Perl parsers. Rust57.2 next;
+no full23.4 or new state/arity/function/deferred/schema authority.

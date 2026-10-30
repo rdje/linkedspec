@@ -3020,9 +3020,9 @@ currently writes the live file directly; wait for generation to finish before
 reading or staging it. Atomic publication is owned by the scheduled document
 maintenance repair before admission.
 
-The next bounded gap String addition preserves working gap_text/gap_kind
-String methods and adds actual-kind direct guards and read/recovery roles.
-A native/fresh completed-String twin passes prefix/interstitial/tail behavior;
-direct guards retain legacy fallbacks and direct recovery fails compilation.
-Each backend is assessed independently before implementation. Existing gap
-state, contexts, errors, function restrictions and raw named policies stay.
+The bounded gap String addition now works in Perl: gap_text/gap_kind preserve
+String methods and use actual-kind direct guards and read/recovery roles.
+Native/fresh shared/empty/tail/Unicode/operand skips/with Array-Hash-Bool and
+function/context/legacy controls pass. Regenerate affected emitted Perl parsers.
+Rust follows independently. Existing gap state, contexts, errors, function
+restrictions and raw named policies stay; full admission remains separate.
