@@ -172,7 +172,7 @@ dispatch rule.
 A completed `set` value can feed current reads, for example
 `saved = set(items, ["head","tail"]); saved.coalesce(undef)[-1].uppercase()` yields
 `"TAIL"`. Compatible direct methods also work on Perl, such as
-`set(text, " tail ").trim().uppercase()`. Perl, Rust and Dart support direct reads and
+`set(text, " tail ").trim().uppercase()`. Perl, Rust, Dart and Julia support direct reads and
 guards incompatible consumers before their operands run:
 
 ```text
@@ -190,8 +190,8 @@ bindings, `with` returned kinds and RHS errors keep their ordinary contracts.
 First-class codeblocks remain values with existing invocation rules:
 `saved = set(thunk, {|| return("tail")}); saved()` yields `"tail"`. Assignment
 copy and alias rules stay unchanged. Regenerate affected emitted Perl parsers.
-Rebuild Rust and Dart applications with the updated runtime. Other backends are
-assessed independently in the backend handoff.
+Rebuild Rust, Dart and Julia applications with the updated runtime. Other
+backends are assessed independently in the backend handoff.
 
 - **Worked example**:
   ```text

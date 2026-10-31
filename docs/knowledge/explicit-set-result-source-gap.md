@@ -34,3 +34,5 @@ Bounded repair and preservation evidence: [[perl-canonical-set-result-compositio
 Independent bounded Rust59.2: [[rust-canonical-set-result-guards]]. The separately exposed completed named-default guard is repaired/targeted-checked in59.6; current family status belongs to set-result-composition.md.
 
 Independent bounded Dart59.3: [[dart-canonical-set-result-guards]]. Current family status belongs to set-result-composition.md; no peer or wider default-domain claim follows.
+
+Independent bounded Julia59.4: [[julia-canonical-set-result-guards]]. Current family status belongs to set-result-composition.md; no peer or wider default-domain claim follows.

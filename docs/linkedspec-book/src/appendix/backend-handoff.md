@@ -3076,6 +3076,9 @@ unbridged bound-call behavior stay. Free-helper result guards remain owned by
 selection21 after59.5 with separate domain assessment. Dart now also guards
 canonical set sources on native/restoredSpec/plan, preserving already-working
 Bool/full target/order/scope/codeblock/error/alias behavior; rebuild runtime/apps.
-Julia59.4 is next; remaining peer assessments stay independent.
+Julia now also guards canonical set sources on native/restoredSpec/plan/fresh
+Module, preserving already-working Bool/full target/order/scope/codeblock/error/
+alias behavior; rebuild runtime/apps. Safe installed Lua59.5 is next; its
+assessment remains independent.
 Ordinary assignment copy/alias rules, operators/grouping/aliases/deferred/schema
 authority and full admission remain separate.

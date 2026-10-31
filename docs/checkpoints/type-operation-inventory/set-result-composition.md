@@ -1,7 +1,7 @@
 # Canonical set stored-result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.20; family23.3.59.
-Status: Bounded Perl59.1/Rust59.2/default59.6/Dart59.3 targeted-checked; Julia/safe Lua/full admission pending.
+Status: Bounded Perl59.1/Rust59.2/default59.6/Dart59.3/Julia59.4 targeted-checked; safe Lua/full admission pending.
 
 Uniform binding already defines set(name,value) as assignment yielding the stored
 typed value. Preserve ordinary assignment copy/alias semantics; this is not a
@@ -98,3 +98,17 @@ fatal analysis/new-normal format pass. Actual producers/inputs/results in
 set-result-dart-intake.json.gz. Completed read control keeps qualified policies;
 no imported peer named-default fix. Rebuild apps/runtime; Julia59.4 next, free-
 source selection21 after59.5/full admission separate, no whole-file SDK-format claim.
+
+## Independent Julia59.4 canonical source guards
+
+Same calibrated61 assertions53PASS/8RED to61PASS native/restoredSpec/plan/fresh
+Module;53 includes two route scaffolds in failing groups. Direct Array/selected
+String Hash consumers null/skip KV. Nine healthy values/error/eight public shapes
+canonically exact, selected Bool/full12/read/order/function/with/codeblock paths
+already healthy. One canonical typed source predicate/two guards and one runner
+line; setter/default/push/copy/alias/function/arity/parser/schema unchanged.
+Nearest push65/strict depwarn pass, standard precompile output retained. Original
+host literal syntax setup ran no tests; original source/hash and transport-only
+correction retained, no setup RED credit. Actual producers/inputs/results in
+set-result-julia-intake.json.gz. Rebuild apps/runtime; safe Lua59.5 next, free-source
+selection21 after59.5/full admission separate; no isolated package/domain promotion.

@@ -6288,6 +6288,7 @@ function _evaluate_runtime_fluent_chain!(
     reduction_result = false
     kind_guarded_result = _runtime_is_ordinary_computed_read(engine, chain.receiver) ||
         _runtime_is_explicit_push_result_source(engine, chain.receiver) ||
+        _runtime_is_canonical_set_result_source(chain.receiver) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6394,6 +6395,28 @@ function _runtime_is_explicit_push_result_source(engine, expression)
     }
 end
 
+# Canonical assignments retain the original stored-value and copy/alias ABI.
+function _runtime_is_canonical_set_result_source(expression)
+    expression isa ActionCallExpr || return false
+    expression.name == "set" || return false
+    something(expression.source_method, expression.name) == "set" || return false
+    expression.trailing_block_arg && return false
+    length(expression.args) == 2 || return false
+    all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
+    target = first(expression.args).value
+    target isa ActionVariableExpr || return false
+    target.source == target.name || return false
+    return last(expression.args).value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }
+end
+
 function _runtime_is_ordinary_computed_read(engine, expression)
     expression isa ActionValueAccessExpr || return false
     receiver = expression.receiver
@@ -6402,6 +6425,7 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
         helper = canonical_action_helper_name(receiver.name)
         helper == "push" && return _runtime_is_explicit_push_result_source(engine, receiver)
+        helper == "set" && return _runtime_is_canonical_set_result_source(receiver)
         if helper in (
             "entry_slot", "gap_span", "gap_text", "gap_kind",
             "rewind_entry_start", "rewind_match_start",
