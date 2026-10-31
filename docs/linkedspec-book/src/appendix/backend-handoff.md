@@ -3116,6 +3116,10 @@ snapshots, function scope and original bare/literal key policy. Perl's separate
 comparator-scope defect is repaired: sorting remains correct with legal working/function names `a` and `b`,
 preserving their values, input arrays and scalar kinds. Native and freshly emitted
 parsers pass focused scope/kind/order checks.
-Regenerate emitted Perl parsers. Independent Rust61.2 is next, followed by peers.
+Regenerate emitted Perl parsers. Rust now also guards retained ordinary constructor
+results through native/restored compiled specs/in-process plans, preserving source
+effects, intermediate actual kinds and valid empty/null with. Computed keys/order/
+snapshots/functions already work; its producers remain unchanged. Rebuild Rust
+applications/runtime. Independent Dart61.3 is next, followed by peers.
 No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.

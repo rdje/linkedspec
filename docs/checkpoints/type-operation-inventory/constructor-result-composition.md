@@ -1,7 +1,7 @@
 # Retained constructor result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.22; family23.3.61.
-Status: Bounded Perl61.1 and P1 comparator61.0 targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl61.1/Rust61.2 and P1 comparator61.0 targeted-checked; remaining peers/full admission pending.
 
 Uniform binding retains array(), array("literal"), multi-expression Array calls,
 hash() and paired ordinary key/value Hash calls. Exact one-bare-identifier
@@ -67,3 +67,18 @@ reader errors are disqualified setup observations. Known SESSION7 wrapper EPERM
 recurrence supplies no lifecycle claim. Regenerate emitted Perl. New25/shared15/
 excluded8 canonical registration remains23.4.1-owned; Rust61.2 next, full admission
 separate. Comparator61.0 preserves original expected7.
+
+## Bounded Rust61.2 guards
+
+Same24 tests19healthy5RED to24PASS native/restored CompiledSpec/in-process plan.
+21 values/16 healthy observations/two needed errors/eight syntax shapes exact.
+Canonical retained Array/paired Hash source admission reuses current direct/
+trailing guards; invalid operands/later with skip, source once and valid null/
+empty with stay. Computed keys/order/snapshots/functions already healthy; original
+producers/readers/signatures/arity/with/copy/alias/function/parser/schema remain.
+Final nearest free-default18/uniform-binding16/owned fmt pass. A memory-only writer
+assertion failed before source writes; premature nominal accepted/nearest/fmt ran
+unchanged baseline, retained/disqualified. Corrected writer and distinct final
+phases establish acceptance; no setup RED credit. Actual inputs/producers/epochs:
+constructor-rust-intake.json.gz. Rebuild apps/runtime. Dart61.3 next, no isolated
+emitted package/exhaustive excluded-runtime/domain/full admission inference.

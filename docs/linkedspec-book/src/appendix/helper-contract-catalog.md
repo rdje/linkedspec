@@ -783,7 +783,7 @@ sorted([2,"10",1])               # [1,"10",2] (lexicographic)
   See the [executed function example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).
 
 Retained ordinary constructor values support direct reads and guarded methods on
-current Perl. Incompatible container consumers return null before their arguments
+current Perl and Rust. Incompatible container consumers return null before their arguments
 or later `with` bodies run. Legitimate empty/null results still enter `with`:
 
 ```text
@@ -797,7 +797,7 @@ array("tail").with(){return(undef)}.with(){return("recovered")} # "recovered"
 
 Source and needed constructor arguments run once before consumers. Compatible
 intermediate links retain actual-kind guards; rejection skips subsequent bodies.
-Regenerate affected emitted Perl parsers. Other backends are assessed independently;
+Regenerate affected emitted Perl parsers and rebuild Rust applications/runtime. Other backends are assessed independently;
 element/pair/list-splice, bare-key and selector retirement rules remain in force.
 
 

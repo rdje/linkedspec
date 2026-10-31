@@ -6527,6 +6527,7 @@ impl Engine {
                     || self.is_explicit_push_result_source(receiver)
                     || Self::is_explicit_set_result_source(receiver)
                     || Self::is_free_default_result_source(receiver)
+                    || Self::is_constructor_result_source(receiver)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7150,6 +7151,7 @@ impl Engine {
             || self.is_explicit_push_result_source(receiver)
             || Self::is_explicit_set_result_source(receiver)
             || Self::is_free_default_result_source(receiver)
+            || Self::is_constructor_result_source(receiver)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8223,6 +8225,55 @@ impl Engine {
         matches!(name.as_str(), "coalesce" | "coalesce_nonempty")
             && args.len() >= 2
             && args.iter().all(|arg| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            })
+    }
+
+    // Keep constructor payload/pair/splice policy on its original producer.
+    // Only retained ordinary boxed forms join the existing result guards.
+    fn is_constructor_result_source(expr: &Expr) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let Expr::Call { name, args } = expr else {
+            return false;
+        };
+        matches!(name.as_str(), "array" | "hash")
+            && (name != "hash" || args.len() % 2 == 0)
+            && !matches!(args.as_slice(), [Arg::Positional(Expr::Variable { .. })])
+            && args.iter().all(|arg| {
+                if Self::is_list_context_splice_arg(arg) {
+                    return false;
+                }
+                if let Arg::Positional(Expr::FluentChain { calls, .. }) = arg
+                    && calls.last().is_some_and(|call| {
+                        matches!(call.method.as_str(), "flat" | "flat_array" | "flat_hash")
+                    })
+                {
+                    return false;
+                }
                 matches!(
                     arg,
                     Arg::Positional(
