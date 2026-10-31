@@ -1263,6 +1263,14 @@ Needed key errors propagate before a consumer runs. Regenerate emitted Perl pars
 - **Returns**: boolean
 - **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust/Dart/Julia/Lua accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Rust free `has_key(meta,key_expr)` also uses its captured named source, even when the key operand rebinds `meta`. Perl also evaluates a key once when its source is null: with `meta=undef` and `calls=0`, `has_key(meta,{calls=num_add(calls,1);"a"})` returns `0` and leaves `calls` as `1`. The source is captured before key effects, so creating or replacing the working Hash inside the key does not change the current presence result. Focused Perl native/fresh, Rust/Dart native/restored/generated-plan and Julia/Lua native/plan/fresh-emitted checks cover selected, function and default sources too; Lua uses available PUC5.5.1/LuaJIT, with declared5.4/full admission separate.
 
+A bounded Perl source-guard gap remains after these ordinary result repairs:
+`has_key({},"k").take(1)` can return an empty Array, rejected prefixes can still
+enter a later `with`, and a receiver Array bridge can be unready despite returning
+null. Feature69 owns those guards. The free `cat`/`split` bridge already works.
+Presence flags, source/key snapshots, null-source key evaluation, copies/defaults,
+numeric and valid false/null/empty `with` remain preservation controls; peer
+backends are assessed independently. This adds no key/coercion/domain policy.
+
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`
 - **Returns**: int
