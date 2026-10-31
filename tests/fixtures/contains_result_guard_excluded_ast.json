@@ -1,0 +1,2112 @@
+[
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 17,
+                "start": 16
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 18,
+            "start": 11
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 37,
+                  "start": 26
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 36,
+                            "start": 33
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 37,
+                        "start": 26
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 37,
+                      "start": 26
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 38,
+                "start": 25
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 38,
+            "start": 19
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 38,
+            "start": 25
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains()",
+        "source_method": "contains",
+        "source_span": {
+          "end": 10,
+          "start": 0
+        }
+      },
+      "source": "contains().take(1).with(){return(\"x\")}",
+      "source_span": {
+        "end": 38,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_with_value = do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; my $value = $__ls_with_value; do { \"x\" } }",
+    "source": "contains().take(1).with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 22,
+                "start": 21
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 23,
+            "start": 16
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "items": [
+              {
+                "kind": "string",
+                "quote": "\"",
+                "source": "\"a\"",
+                "source_span": {
+                  "end": 13,
+                  "start": 10
+                },
+                "value": "a"
+              }
+            ],
+            "kind": "array_literal",
+            "source": "[\"a\"]",
+            "source_span": {
+              "end": 14,
+              "start": 9
+            }
+          }
+        ],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains([\"a\"])",
+        "source_method": "contains",
+        "source_span": {
+          "end": 15,
+          "start": 0
+        }
+      },
+      "source": "contains([\"a\"]).take(1)",
+      "source_span": {
+        "end": 23,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+    "source": "contains([\"a\"]).take(1)",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 30,
+                "start": 29
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 31,
+            "start": 24
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "items": [
+              {
+                "kind": "string",
+                "quote": "\"",
+                "source": "\"a\"",
+                "source_span": {
+                  "end": 13,
+                  "start": 10
+                },
+                "value": "a"
+              }
+            ],
+            "kind": "array_literal",
+            "source": "[\"a\"]",
+            "source_span": {
+              "end": 14,
+              "start": 9
+            }
+          },
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 18,
+              "start": 15
+            },
+            "value": "a"
+          },
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"x\"",
+            "source_span": {
+              "end": 22,
+              "start": 19
+            },
+            "value": "x"
+          }
+        ],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains([\"a\"],\"a\",\"x\")",
+        "source_method": "contains",
+        "source_span": {
+          "end": 23,
+          "start": 0
+        }
+      },
+      "source": "contains([\"a\"],\"a\",\"x\").take(1)",
+      "source_span": {
+        "end": 31,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+    "source": "contains([\"a\"],\"a\",\"x\").take(1)",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 40,
+                "start": 39
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 41,
+            "start": 34
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "kind": "raw_perl",
+            "reason": "unsupported_expression",
+            "source": "source:[\"a\"]",
+            "source_span": {
+              "end": 21,
+              "start": 9
+            }
+          },
+          {
+            "kind": "raw_perl",
+            "reason": "unsupported_expression",
+            "source": "needle:\"a\"",
+            "source_span": {
+              "end": 32,
+              "start": 22
+            }
+          }
+        ],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains(source:[\"a\"],needle:\"a\")",
+        "source_method": "contains",
+        "source_span": {
+          "end": 33,
+          "start": 0
+        }
+      },
+      "source": "contains(source:[\"a\"],needle:\"a\").take(1)",
+      "source_span": {
+        "end": 41,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+    "source": "contains(source:[\"a\"],needle:\"a\").take(1)",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [],
+          "method": "contains",
+          "source": "contains()",
+          "source_method": "contains",
+          "source_span": {
+            "end": 16,
+            "start": 6
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 35,
+                  "start": 24
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 34,
+                            "start": 31
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 35,
+                        "start": 24
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 35,
+                      "start": 24
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 36,
+                "start": 23
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 36,
+            "start": 17
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 36,
+            "start": 23
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "items": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 4,
+              "start": 1
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "array_literal",
+        "source": "[\"a\"]",
+        "source_span": {
+          "end": 5,
+          "start": 0
+        }
+      },
+      "source": "[\"a\"].contains().with(){return(\"x\")}",
+      "source_span": {
+        "end": 36,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return undef",
+    "source": "[\"a\"].contains().with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "string",
+              "quote": "\"",
+              "source": "\"a\"",
+              "source_span": {
+                "end": 18,
+                "start": 15
+              },
+              "value": "a"
+            },
+            {
+              "kind": "string",
+              "quote": "\"",
+              "source": "\"x\"",
+              "source_span": {
+                "end": 22,
+                "start": 19
+              },
+              "value": "x"
+            }
+          ],
+          "method": "contains",
+          "source": "contains(\"a\",\"x\")",
+          "source_method": "contains",
+          "source_span": {
+            "end": 23,
+            "start": 6
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 42,
+                  "start": 31
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 41,
+                            "start": 38
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 42,
+                        "start": 31
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 42,
+                      "start": 31
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 43,
+                "start": 30
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 43,
+            "start": 24
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 43,
+            "start": 30
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "items": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 4,
+              "start": 1
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "array_literal",
+        "source": "[\"a\"]",
+        "source_span": {
+          "end": 5,
+          "start": 0
+        }
+      },
+      "source": "[\"a\"].contains(\"a\",\"x\").with(){return(\"x\")}",
+      "source_span": {
+        "end": 43,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return undef",
+    "source": "[\"a\"].contains(\"a\",\"x\").with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "raw_perl",
+              "reason": "unsupported_expression",
+              "source": "needle:\"a\"",
+              "source_span": {
+                "end": 25,
+                "start": 15
+              }
+            }
+          ],
+          "method": "contains",
+          "source": "contains(needle:\"a\")",
+          "source_method": "contains",
+          "source_span": {
+            "end": 26,
+            "start": 6
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 45,
+                  "start": 34
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 44,
+                            "start": 41
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 45,
+                        "start": 34
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 45,
+                      "start": 34
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 46,
+                "start": 33
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 46,
+            "start": 27
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 46,
+            "start": 33
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "items": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 4,
+              "start": 1
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "array_literal",
+        "source": "[\"a\"]",
+        "source_span": {
+          "end": 5,
+          "start": 0
+        }
+      },
+      "source": "[\"a\"].contains(needle:\"a\").with(){return(\"x\")}",
+      "source_span": {
+        "end": 46,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_with_value = do { my $__ls_contains_array = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }]; my $__ls_contains_needle = needle:\"a\"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }; my $value = $__ls_with_value; do { \"x\" } }",
+    "source": "[\"a\"].contains(needle:\"a\").with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 33,
+                "start": 32
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 34,
+            "start": 27
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "items": [
+              {
+                "kind": "string",
+                "quote": "\"",
+                "source": "\"a\"",
+                "source_span": {
+                  "end": 13,
+                  "start": 10
+                },
+                "value": "a"
+              }
+            ],
+            "kind": "array_literal",
+            "source": "[\"a\"]",
+            "source_span": {
+              "end": 14,
+              "start": 9
+            }
+          },
+          {
+            "kind": "raw_perl",
+            "reason": "unsupported_expression",
+            "source": "needle:\"a\"",
+            "source_span": {
+              "end": 25,
+              "start": 15
+            }
+          }
+        ],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains([\"a\"],needle:\"a\")",
+        "source_method": "contains",
+        "source_span": {
+          "end": 26,
+          "start": 0
+        }
+      },
+      "source": "contains([\"a\"],needle:\"a\").take(1)",
+      "source_span": {
+        "end": 34,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+    "source": "contains([\"a\"],needle:\"a\").take(1)",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "args": [
+        {
+          "items": [
+            {
+              "kind": "string",
+              "quote": "\"",
+              "source": "\"a\"",
+              "source_span": {
+                "end": 13,
+                "start": 10
+              },
+              "value": "a"
+            }
+          ],
+          "kind": "array_literal",
+          "source": "[\"a\"]",
+          "source_span": {
+            "end": 14,
+            "start": 9
+          }
+        },
+        {
+          "kind": "string",
+          "quote": "\"",
+          "source": "\"a\"",
+          "source_span": {
+            "end": 18,
+            "start": 15
+          },
+          "value": "a"
+        },
+        {
+          "block": {
+            "kind": "action_block",
+            "source": "return(\"x\")",
+            "source_span": {
+              "end": 31,
+              "start": 20
+            },
+            "statements": [
+              {
+                "drops_value": 1,
+                "expr": {
+                  "args": [
+                    {
+                      "kind": "string",
+                      "quote": "\"",
+                      "source": "\"x\"",
+                      "source_span": {
+                        "end": 30,
+                        "start": 27
+                      },
+                      "value": "x"
+                    }
+                  ],
+                  "kind": "call",
+                  "name": "return",
+                  "source": "return(\"x\")",
+                  "source_method": "return",
+                  "source_span": {
+                    "end": 31,
+                    "start": 20
+                  }
+                },
+                "kind": "action_stmt",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 31,
+                  "start": 20
+                }
+              }
+            ]
+          },
+          "kind": "block_value",
+          "source": "{return(\"x\")}",
+          "source_span": {
+            "end": 32,
+            "start": 19
+          }
+        }
+      ],
+      "kind": "call",
+      "name": "contains",
+      "source": "contains([\"a\"],\"a\"){return(\"x\")}",
+      "source_method": "contains",
+      "source_span": {
+        "end": 32,
+        "start": 0
+      },
+      "trailing_block_arg": 1,
+      "trailing_block_source_span": {
+        "end": 32,
+        "start": 19
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }",
+    "source": "contains([\"a\"],\"a\"){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "string",
+              "quote": "\"",
+              "source": "\"a\"",
+              "source_span": {
+                "end": 18,
+                "start": 15
+              },
+              "value": "a"
+            },
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 31,
+                  "start": 20
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 30,
+                            "start": 27
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 31,
+                        "start": 20
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 31,
+                      "start": 20
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 32,
+                "start": 19
+              }
+            }
+          ],
+          "method": "contains",
+          "receiver_trailing_block_arg": 1,
+          "source": "contains(\"a\"){return(\"x\")}",
+          "source_method": "contains",
+          "source_span": {
+            "end": 32,
+            "start": 6
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 32,
+            "start": 19
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "items": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 4,
+              "start": 1
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "array_literal",
+        "source": "[\"a\"]",
+        "source_span": {
+          "end": 5,
+          "start": 0
+        }
+      },
+      "source": "[\"a\"].contains(\"a\"){return(\"x\")}",
+      "source_span": {
+        "end": 32,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:contains\"; undef }",
+    "source": "[\"a\"].contains(\"a\"){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(value)",
+                "source_span": {
+                  "end": 46,
+                  "start": 33
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "variable",
+                          "name": "value",
+                          "source": "value",
+                          "source_span": {
+                            "end": 45,
+                            "start": 40
+                          }
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(value)",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 46,
+                        "start": 33
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(value)",
+                    "source_span": {
+                      "end": 46,
+                      "start": 33
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(value)}",
+              "source_span": {
+                "end": 47,
+                "start": 32
+              }
+            }
+          ],
+          "method": "map_leaves",
+          "receiver_trailing_block_arg": 1,
+          "source": "map_leaves(){return(value)}",
+          "source_method": "map_leaves",
+          "source_span": {
+            "end": 47,
+            "start": 20
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 47,
+            "start": 32
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "items": [
+              {
+                "kind": "string",
+                "quote": "\"",
+                "source": "\"a\"",
+                "source_span": {
+                  "end": 13,
+                  "start": 10
+                },
+                "value": "a"
+              }
+            ],
+            "kind": "array_literal",
+            "source": "[\"a\"]",
+            "source_span": {
+              "end": 14,
+              "start": 9
+            }
+          },
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 18,
+              "start": 15
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains([\"a\"],\"a\")",
+        "source_method": "contains",
+        "source_span": {
+          "end": 19,
+          "start": 0
+        }
+      },
+      "source": "contains([\"a\"],\"a\").map_leaves(){return(value)}",
+      "source_span": {
+        "end": 47,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_tree_source = do { my $__ls_contains_array = [do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values }]; my $__ls_contains_needle = \"a\"; defined($__ls_contains_array) ? ((defined($__ls_contains_needle) ? scalar(grep { defined($_) && $_ eq $__ls_contains_needle } @{$__ls_contains_array}) : scalar(grep { !defined($_) } @{$__ls_contains_array})) ? 1 : 0) : 0 }; if (defined($__ls_tree_source) && ref($__ls_tree_source) eq 'HASH') { do { my $__ls_hash_tree_source = $__ls_tree_source; my $__ls_hash_tree_map; $__ls_hash_tree_map = sub { my ($__ls_hash_tree_node, $__ls_hash_tree_path) = @_; my %__ls_hash_tree_out; foreach my $__ls_hash_tree_leaf_key (sort keys %{$__ls_hash_tree_node}) { my $__ls_hash_tree_leaf_value = $__ls_hash_tree_node->{$__ls_hash_tree_leaf_key}; my @__ls_hash_tree_next_path = (@{$__ls_hash_tree_path}, $__ls_hash_tree_leaf_key); if (defined($__ls_hash_tree_leaf_value) && ref($__ls_hash_tree_leaf_value) eq 'HASH') { $__ls_hash_tree_out{$__ls_hash_tree_leaf_key} = $__ls_hash_tree_map->($__ls_hash_tree_leaf_value, \\@__ls_hash_tree_next_path); } else { my $__ls_hash_tree_leaf_path = \\@__ls_hash_tree_next_path; $__ls_hash_tree_out{$__ls_hash_tree_leaf_key} = do { my $value = $__ls_hash_tree_leaf_value; my @value = (defined($value) && ref($value) eq 'ARRAY') ? @{$value} : (); my %value = (defined($value) && ref($value) eq 'HASH') ? %{$value} : (); my $key = $__ls_hash_tree_leaf_key; my $path = [@{$__ls_hash_tree_leaf_path}]; my @path = @{$path}; my $depth = scalar(@{$__ls_hash_tree_leaf_path}); do { $value } }; } } return \\%__ls_hash_tree_out }; $__ls_hash_tree_map->($__ls_hash_tree_source, []) } } elsif (defined($__ls_tree_source) && ref($__ls_tree_source) eq 'ARRAY') { do { my $__ls_array_tree_source = $__ls_tree_source; my $__ls_array_tree_map; $__ls_array_tree_map = sub { my ($__ls_array_tree_node, $__ls_array_tree_path) = @_; my @__ls_array_tree_out; for (my $__ls_array_tree_leaf_index = 0; $__ls_array_tree_leaf_index < @{$__ls_array_tree_node}; ++$__ls_array_tree_leaf_index) { my $__ls_array_tree_leaf_value = $__ls_array_tree_node->[$__ls_array_tree_leaf_index]; my @__ls_array_tree_next_path = (@{$__ls_array_tree_path}, $__ls_array_tree_leaf_index); if (defined($__ls_array_tree_leaf_value) && ref($__ls_array_tree_leaf_value) eq 'ARRAY') { push @__ls_array_tree_out, $__ls_array_tree_map->($__ls_array_tree_leaf_value, \\@__ls_array_tree_next_path); } else { my $__ls_array_tree_leaf_path = \\@__ls_array_tree_next_path; push @__ls_array_tree_out, do { my $value = $__ls_array_tree_leaf_value; my @value = (defined($value) && ref($value) eq 'ARRAY') ? @{$value} : (); my %value = (defined($value) && ref($value) eq 'HASH') ? %{$value} : (); my $index = $__ls_array_tree_leaf_index; my $path = [@{$__ls_array_tree_leaf_path}]; my @path = @{$path}; my $depth = scalar(@{$__ls_array_tree_leaf_path}); do { $value } }; } } return \\@__ls_array_tree_out }; $__ls_array_tree_map->($__ls_array_tree_source, []) } } else { undef } }",
+    "source": "contains([\"a\"],\"a\").map_leaves(){return(value)}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "string",
+              "quote": "\"",
+              "source": "\"a\"",
+              "source_span": {
+                "end": 18,
+                "start": 15
+              },
+              "value": "a"
+            }
+          ],
+          "method": "contains",
+          "source": "contains(\"a\")",
+          "source_method": "contains",
+          "source_span": {
+            "end": 19,
+            "start": 6
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(value)",
+                "source_span": {
+                  "end": 46,
+                  "start": 33
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "variable",
+                          "name": "value",
+                          "source": "value",
+                          "source_span": {
+                            "end": 45,
+                            "start": 40
+                          }
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(value)",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 46,
+                        "start": 33
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(value)",
+                    "source_span": {
+                      "end": 46,
+                      "start": 33
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(value)}",
+              "source_span": {
+                "end": 47,
+                "start": 32
+              }
+            }
+          ],
+          "method": "map_leaves",
+          "receiver_trailing_block_arg": 1,
+          "source": "map_leaves(){return(value)}",
+          "source_method": "map_leaves",
+          "source_span": {
+            "end": 47,
+            "start": 20
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 47,
+            "start": 32
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "items": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 4,
+              "start": 1
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "array_literal",
+        "source": "[\"a\"]",
+        "source_span": {
+          "end": 5,
+          "start": 0
+        }
+      },
+      "source": "[\"a\"].contains(\"a\").map_leaves(){return(value)}",
+      "source_span": {
+        "end": 47,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return undef",
+    "source": "[\"a\"].contains(\"a\").map_leaves(){return(value)}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "body_ast": {
+        "kind": "action_block",
+        "source": " return(contains([\"a\"],\"a\").take(1).with(){return(\"x\")}) ",
+        "source_span": {
+          "end": 60,
+          "start": 3
+        },
+        "statements": [
+          {
+            "drops_value": 1,
+            "expr": {
+              "args": [
+                {
+                  "calls": [
+                    {
+                      "args": [
+                        {
+                          "kind": "number",
+                          "source": 1,
+                          "source_span": {
+                            "end": 37,
+                            "start": 36
+                          },
+                          "value": 1
+                        }
+                      ],
+                      "method": "take",
+                      "source": "take(1)",
+                      "source_method": "take",
+                      "source_span": {
+                        "end": 38,
+                        "start": 31
+                      }
+                    },
+                    {
+                      "args": [
+                        {
+                          "block": {
+                            "kind": "action_block",
+                            "source": "return(\"x\")",
+                            "source_span": {
+                              "end": 57,
+                              "start": 46
+                            },
+                            "statements": [
+                              {
+                                "drops_value": 1,
+                                "expr": {
+                                  "args": [
+                                    {
+                                      "kind": "string",
+                                      "quote": "\"",
+                                      "source": "\"x\"",
+                                      "source_span": {
+                                        "end": 56,
+                                        "start": 53
+                                      },
+                                      "value": "x"
+                                    }
+                                  ],
+                                  "kind": "call",
+                                  "name": "return",
+                                  "source": "return(\"x\")",
+                                  "source_method": "return",
+                                  "source_span": {
+                                    "end": 57,
+                                    "start": 46
+                                  }
+                                },
+                                "kind": "action_stmt",
+                                "source": "return(\"x\")",
+                                "source_span": {
+                                  "end": 57,
+                                  "start": 46
+                                }
+                              }
+                            ]
+                          },
+                          "kind": "block_value",
+                          "source": "{return(\"x\")}",
+                          "source_span": {
+                            "end": 58,
+                            "start": 45
+                          }
+                        }
+                      ],
+                      "method": "with",
+                      "receiver_trailing_block_arg": 1,
+                      "source": "with(){return(\"x\")}",
+                      "source_method": "with",
+                      "source_span": {
+                        "end": 58,
+                        "start": 39
+                      },
+                      "trailing_block_arg": 1,
+                      "trailing_block_source_span": {
+                        "end": 58,
+                        "start": 45
+                      }
+                    }
+                  ],
+                  "kind": "fluent_chain",
+                  "receiver": {
+                    "args": [
+                      {
+                        "items": [
+                          {
+                            "kind": "string",
+                            "quote": "\"",
+                            "source": "\"a\"",
+                            "source_span": {
+                              "end": 24,
+                              "start": 21
+                            },
+                            "value": "a"
+                          }
+                        ],
+                        "kind": "array_literal",
+                        "source": "[\"a\"]",
+                        "source_span": {
+                          "end": 25,
+                          "start": 20
+                        }
+                      },
+                      {
+                        "kind": "string",
+                        "quote": "\"",
+                        "source": "\"a\"",
+                        "source_span": {
+                          "end": 29,
+                          "start": 26
+                        },
+                        "value": "a"
+                      }
+                    ],
+                    "kind": "call",
+                    "name": "contains",
+                    "source": "contains([\"a\"],\"a\")",
+                    "source_method": "contains",
+                    "source_span": {
+                      "end": 30,
+                      "start": 11
+                    }
+                  },
+                  "source": "contains([\"a\"],\"a\").take(1).with(){return(\"x\")}",
+                  "source_span": {
+                    "end": 58,
+                    "start": 11
+                  }
+                }
+              ],
+              "kind": "call",
+              "name": "return",
+              "source": "return(contains([\"a\"],\"a\").take(1).with(){return(\"x\")})",
+              "source_method": "return",
+              "source_span": {
+                "end": 59,
+                "start": 4
+              }
+            },
+            "kind": "action_stmt",
+            "source": "return(contains([\"a\"],\"a\").take(1).with(){return(\"x\")})",
+            "source_span": {
+              "end": 59,
+              "start": 4
+            }
+          }
+        ]
+      },
+      "body_source": " return(contains([\"a\"],\"a\").take(1).with(){return(\"x\")}) ",
+      "body_span": {
+        "end": 60,
+        "start": 3
+      },
+      "kind": "codeblock_literal",
+      "signature": {
+        "kind": "callable_signature",
+        "max_arity": 0,
+        "min_arity": 0,
+        "positional_params": [],
+        "rest_param": null,
+        "version": 1
+      },
+      "source_span": {
+        "end": 61,
+        "start": 0
+      },
+      "source_text": "{|| return(contains([\"a\"],\"a\").take(1).with(){return(\"x\")}) }",
+      "version": 1
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack(\"H*\", \"7b22626f64795f617374223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a222072657475726e28636f6e7461696e73285b5c22615c225d2c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d2920222c22736f757263655f7370616e223a7b22656e64223a36302c227374617274223a337d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b2263616c6c73223a5b7b2261726773223a5b7b226b696e64223a226e756d626572222c22736f75726365223a312c22736f757263655f7370616e223a7b22656e64223a33372c227374617274223a33367d2c2276616c7565223a317d5d2c226d6574686f64223a2274616b65222c22736f75726365223a2274616b65283129222c22736f757263655f6d6574686f64223a2274616b65222c22736f757263655f7370616e223a7b22656e64223a33382c227374617274223a33317d7d2c7b2261726773223a5b7b22626c6f636b223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a35372c227374617274223a34367d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22785c22222c22736f757263655f7370616e223a7b22656e64223a35362c227374617274223a35337d2c2276616c7565223a2278227d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a35372c227374617274223a34367d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a35372c227374617274223a34367d7d5d7d2c226b696e64223a22626c6f636b5f76616c7565222c22736f75726365223a227b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a35382c227374617274223a34357d7d5d2c226d6574686f64223a2277697468222c2272656365697665725f747261696c696e675f626c6f636b5f617267223a312c22736f75726365223a227769746828297b72657475726e285c22785c22297d222c22736f757263655f6d6574686f64223a2277697468222c22736f757263655f7370616e223a7b22656e64223a35382c227374617274223a33397d2c22747261696c696e675f626c6f636b5f617267223a312c22747261696c696e675f626c6f636b5f736f757263655f7370616e223a7b22656e64223a35382c227374617274223a34357d7d5d2c226b696e64223a22666c75656e745f636861696e222c227265636569766572223a7b2261726773223a5b7b226974656d73223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22615c22222c22736f757263655f7370616e223a7b22656e64223a32342c227374617274223a32317d2c2276616c7565223a2261227d5d2c226b696e64223a2261727261795f6c69746572616c222c22736f75726365223a225b5c22615c225d222c22736f757263655f7370616e223a7b22656e64223a32352c227374617274223a32307d7d2c7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22615c22222c22736f757263655f7370616e223a7b22656e64223a32392c227374617274223a32367d2c2276616c7565223a2261227d5d2c226b696e64223a2263616c6c222c226e616d65223a22636f6e7461696e73222c22736f75726365223a22636f6e7461696e73285b5c22615c225d2c5c22615c2229222c22736f757263655f6d6574686f64223a22636f6e7461696e73222c22736f757263655f7370616e223a7b22656e64223a33302c227374617274223a31317d7d2c22736f75726365223a22636f6e7461696e73285b5c22615c225d2c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a35382c227374617274223a31317d7d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e28636f6e7461696e73285b5c22615c225d2c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a35392c227374617274223a347d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e28636f6e7461696e73285b5c22615c225d2c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f7370616e223a7b22656e64223a35392c227374617274223a347d7d5d7d2c22626f64795f736f75726365223a222072657475726e28636f6e7461696e73285b5c22615c225d2c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d2920222c22626f64795f7370616e223a7b22656e64223a36302c227374617274223a337d2c226b696e64223a22636f6465626c6f636b5f6c69746572616c222c227369676e6174757265223a7b226b696e64223a2263616c6c61626c655f7369676e6174757265222c226d61785f6172697479223a302c226d696e5f6172697479223a302c22706f736974696f6e616c5f706172616d73223a5b5d2c22726573745f706172616d223a6e756c6c2c2276657273696f6e223a317d2c22736f757263655f7370616e223a7b22656e64223a36312c227374617274223a307d2c22736f757263655f74657874223a227b7c7c2072657475726e28636f6e7461696e73285b5c22615c225d2c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d29207d222c2276657273696f6e223a317d\")) }",
+    "source": "{|| return(contains([\"a\"],\"a\").take(1).with(){return(\"x\")}) }",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [],
+          "method": "custom_contains",
+          "source": "custom_contains()",
+          "source_method": "custom_contains",
+          "source_span": {
+            "end": 37,
+            "start": 20
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 56,
+                  "start": 45
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 55,
+                            "start": 52
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 56,
+                        "start": 45
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 56,
+                      "start": 45
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 57,
+                "start": 44
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 57,
+            "start": 38
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 57,
+            "start": 44
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "items": [
+              {
+                "kind": "string",
+                "quote": "\"",
+                "source": "\"a\"",
+                "source_span": {
+                  "end": 13,
+                  "start": 10
+                },
+                "value": "a"
+              }
+            ],
+            "kind": "array_literal",
+            "source": "[\"a\"]",
+            "source_span": {
+              "end": 14,
+              "start": 9
+            }
+          },
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 18,
+              "start": 15
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "call",
+        "name": "contains",
+        "source": "contains([\"a\"],\"a\")",
+        "source_method": "contains",
+        "source_span": {
+          "end": 19,
+          "start": 0
+        }
+      },
+      "source": "contains([\"a\"],\"a\").custom_contains().with(){return(\"x\")}",
+      "source_span": {
+        "end": 57,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_contains\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+    "source": "contains([\"a\"],\"a\").custom_contains().with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "string",
+              "quote": "\"",
+              "source": "\"a\"",
+              "source_span": {
+                "end": 18,
+                "start": 15
+              },
+              "value": "a"
+            }
+          ],
+          "method": "contains",
+          "source": "contains(\"a\")",
+          "source_method": "contains",
+          "source_span": {
+            "end": 19,
+            "start": 6
+          }
+        },
+        {
+          "args": [],
+          "method": "custom_contains",
+          "source": "custom_contains()",
+          "source_method": "custom_contains",
+          "source_span": {
+            "end": 37,
+            "start": 20
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 56,
+                  "start": 45
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 55,
+                            "start": 52
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 56,
+                        "start": 45
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 56,
+                      "start": 45
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 57,
+                "start": 44
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 57,
+            "start": 38
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 57,
+            "start": 44
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "items": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 4,
+              "start": 1
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "array_literal",
+        "source": "[\"a\"]",
+        "source_span": {
+          "end": 5,
+          "start": 0
+        }
+      },
+      "source": "[\"a\"].contains(\"a\").custom_contains().with(){return(\"x\")}",
+      "source_span": {
+        "end": 57,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_contains\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+    "source": "[\"a\"].contains(\"a\").custom_contains().with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 22,
+                "start": 21
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 23,
+            "start": 16
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 42,
+                  "start": 31
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 41,
+                            "start": 38
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 42,
+                        "start": 31
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 42,
+                      "start": 31
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 43,
+                "start": 30
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 43,
+            "start": 24
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 43,
+            "start": 30
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "entries": [],
+            "kind": "hash_literal",
+            "source": "{}",
+            "source_span": {
+              "end": 10,
+              "start": 8
+            }
+          },
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"k\"",
+            "source_span": {
+              "end": 14,
+              "start": 11
+            },
+            "value": "k"
+          }
+        ],
+        "kind": "call",
+        "name": "has_key",
+        "source": "has_key({},\"k\")",
+        "source_method": "has_key",
+        "source_span": {
+          "end": 15,
+          "start": 0
+        }
+      },
+      "source": "has_key({},\"k\").take(1).with(){return(\"x\")}",
+      "source_span": {
+        "end": 43,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_free_default_rejected = 0; my $__ls_free_default_value = do { my $__ls_scalar_source = do { my $__ls_has_key = {}; my $__ls_has_key_key = \"k\"; defined($__ls_has_key) ? ((exists $__ls_has_key->{$__ls_has_key_key}) ? 1 : 0) : 0 }; $__ls_scalar_source }; $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_selected_default = $__ls_free_default_value; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_take = $__ls_selected_default; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }) : do { $__ls_free_default_rejected = 1; undef } }); $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_with_value = $__ls_free_default_value; my $value = $__ls_with_value; do { \"x\" } }); $__ls_free_default_value }",
+    "source": "has_key({},\"k\").take(1).with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 19,
+                "start": 18
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 20,
+            "start": 13
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 39,
+                  "start": 28
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 38,
+                            "start": 35
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 39,
+                        "start": 28
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 39,
+                      "start": 28
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 40,
+                "start": 27
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 40,
+            "start": 21
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 40,
+            "start": 27
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "items": [],
+            "kind": "array_literal",
+            "source": "[]",
+            "source_span": {
+              "end": 11,
+              "start": 9
+            }
+          }
+        ],
+        "kind": "call",
+        "name": "is_empty",
+        "source": "is_empty([])",
+        "source_method": "is_empty",
+        "source_span": {
+          "end": 12,
+          "start": 0
+        }
+      },
+      "source": "is_empty([]).take(1).with(){return(\"x\")}",
+      "source_span": {
+        "end": 40,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_free_default_rejected = 0; my $__ls_free_default_value = do { my $__ls_scalar_source = do { my $__ls_is_empty_value = []; (!defined($__ls_is_empty_value) || (ref($__ls_is_empty_value) eq 'ARRAY' && !@{$__ls_is_empty_value}) || (ref($__ls_is_empty_value) eq 'HASH' && !scalar(keys %{$__ls_is_empty_value})) || (!ref($__ls_is_empty_value) && $__ls_is_empty_value eq '')) ? 1 : 0 }; $__ls_scalar_source }; $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_selected_default = $__ls_free_default_value; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_take = $__ls_selected_default; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }) : do { $__ls_free_default_rejected = 1; undef } }); $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_with_value = $__ls_free_default_value; my $value = $__ls_with_value; do { \"x\" } }); $__ls_free_default_value }",
+    "source": "is_empty([]).take(1).with(){return(\"x\")}",
+    "warnings": []
+  },
+  {
+    "ast": {
+      "calls": [
+        {
+          "args": [
+            {
+              "kind": "number",
+              "source": 1,
+              "source_span": {
+                "end": 29,
+                "start": 28
+              },
+              "value": 1
+            }
+          ],
+          "method": "take",
+          "source": "take(1)",
+          "source_method": "take",
+          "source_span": {
+            "end": 30,
+            "start": 23
+          }
+        },
+        {
+          "args": [
+            {
+              "block": {
+                "kind": "action_block",
+                "source": "return(\"x\")",
+                "source_span": {
+                  "end": 49,
+                  "start": 38
+                },
+                "statements": [
+                  {
+                    "drops_value": 1,
+                    "expr": {
+                      "args": [
+                        {
+                          "kind": "string",
+                          "quote": "\"",
+                          "source": "\"x\"",
+                          "source_span": {
+                            "end": 48,
+                            "start": 45
+                          },
+                          "value": "x"
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return",
+                      "source": "return(\"x\")",
+                      "source_method": "return",
+                      "source_span": {
+                        "end": 49,
+                        "start": 38
+                      }
+                    },
+                    "kind": "action_stmt",
+                    "source": "return(\"x\")",
+                    "source_span": {
+                      "end": 49,
+                      "start": 38
+                    }
+                  }
+                ]
+              },
+              "kind": "block_value",
+              "source": "{return(\"x\")}",
+              "source_span": {
+                "end": 50,
+                "start": 37
+              }
+            }
+          ],
+          "method": "with",
+          "receiver_trailing_block_arg": 1,
+          "source": "with(){return(\"x\")}",
+          "source_method": "with",
+          "source_span": {
+            "end": 50,
+            "start": 31
+          },
+          "trailing_block_arg": 1,
+          "trailing_block_source_span": {
+            "end": 50,
+            "start": 37
+          }
+        }
+      ],
+      "kind": "fluent_chain",
+      "receiver": {
+        "args": [
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"abc\"",
+            "source_span": {
+              "end": 17,
+              "start": 12
+            },
+            "value": "abc"
+          },
+          {
+            "kind": "string",
+            "quote": "\"",
+            "source": "\"a\"",
+            "source_span": {
+              "end": 21,
+              "start": 18
+            },
+            "value": "a"
+          }
+        ],
+        "kind": "call",
+        "name": "starts_with",
+        "source": "starts_with(\"abc\",\"a\")",
+        "source_method": "starts_with",
+        "source_span": {
+          "end": 22,
+          "start": 0
+        }
+      },
+      "source": "starts_with(\"abc\",\"a\").take(1).with(){return(\"x\")}",
+      "source_span": {
+        "end": 50,
+        "start": 0
+      }
+    },
+    "ast_error": null,
+    "lower_error": null,
+    "lowered": "return do { my $__ls_free_default_rejected = 0; my $__ls_free_default_value = do { my $__ls_scalar_source = do { my $__ls_starts_with_value = \"abc\"; my $__ls_starts_with_prefix = \"a\"; (defined($__ls_starts_with_value) && defined($__ls_starts_with_prefix) && index($__ls_starts_with_value, $__ls_starts_with_prefix) == 0) ? 1 : 0 }; $__ls_scalar_source }; $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_selected_default = $__ls_free_default_value; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_take = $__ls_selected_default; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }) : do { $__ls_free_default_rejected = 1; undef } }); $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_with_value = $__ls_free_default_value; my $value = $__ls_with_value; do { \"x\" } }); $__ls_free_default_value }",
+    "source": "starts_with(\"abc\",\"a\").take(1).with(){return(\"x\")}",
+    "warnings": []
+  }
+]

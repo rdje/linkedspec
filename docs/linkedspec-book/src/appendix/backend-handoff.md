@@ -3328,3 +3328,13 @@ presence116/loadfile/version checks pass with empty accepted-nearest-version std
 Existing flags/regex/SOC/copy/default/numeric/valid with remain; incompatible operands
 and later bodies skip. Rebuild Lua applications/runtime. All bounded70 outcomes are
 recorded; declared5.4/general isolation/full admission remain separate.
+
+
+Contains source/prefix guards71 are frozen after bounded String-predicate70.
+Reference intake distinguishes healthy numeric/equality/snapshot results from
+free/with/bridge guard gaps, inconsistent null prefixes and copied rejection.
+Perl producer71.0 first preserves typed block operands: a mutation-yielding block
+currently becomes raw braces, causing compilation/Array-reference errors despite
+ready metadata. Independent guards71.1-.5 follow, then mandatory copied-null/
+rejection assessment71.6 before unrelated selection. No peer failure, new equality/
+copy policy or full domain/context/portable admission follows from the reference.

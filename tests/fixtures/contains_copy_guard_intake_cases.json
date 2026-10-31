@@ -1,0 +1,49 @@
+[
+  {
+    "id": "copy_null_forms",
+    "body": "order=\"\";out=[{undef}.copy().contains({order=cat(order,\"A\");\"a\"}),copy({undef}).contains({order=cat(order,\"B\");\"a\"}),contains(copy({undef}),{order=cat(order,\"C\");\"a\"}),contains([\"a\"],\"z\").take(1).copy().contains({order=cat(order,\"D\");\"a\"})];return([out,order])",
+    "source": "Value:: I {order=\"\";out=[{undef}.copy().contains({order=cat(order,\"A\");\"a\"}),copy({undef}).contains({order=cat(order,\"B\");\"a\"}),contains(copy({undef}),{order=cat(order,\"C\");\"a\"}),contains([\"a\"],\"z\").take(1).copy().contains({order=cat(order,\"D\");\"a\"})];return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      [
+        0,
+        0,
+        0,
+        null
+      ],
+      "ABC"
+    ],
+    "component": "copy_diagnostic"
+  },
+  {
+    "id": "valid_null_with_copy",
+    "body": "order=\"\";out=contains([\"a\"],\"z\").add(\"bad\").with(){order=cat(order,\"S\");return(undef)}.copy().contains({order=cat(order,\"K\");\"a\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=contains([\"a\"],\"z\").add(\"bad\").with(){order=cat(order,\"S\");return(undef)}.copy().contains({order=cat(order,\"K\");\"a\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "SK"
+    ],
+    "component": "copy_diagnostic"
+  },
+  {
+    "id": "rejected_copy_with",
+    "body": "order=\"\";out=contains([\"a\"],\"z\").take({order=cat(order,\"A\");1}).copy().contains({order=cat(order,\"K\");\"a\"}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=contains([\"a\"],\"z\").take({order=cat(order,\"A\");1}).copy().contains({order=cat(order,\"K\");\"a\"}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      ""
+    ],
+    "component": "copy_diagnostic"
+  }
+]

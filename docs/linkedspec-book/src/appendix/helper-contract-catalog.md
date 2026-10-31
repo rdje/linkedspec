@@ -1019,6 +1019,23 @@ element/pair/list-splice, bare-key and selector retirement rules remain in force
 - **Behavior**: Returns true if the array contains the needle value. Works on direct arrays and projected expressions (`sorted_keys(...)`, `sorted_values(...)`).
 - **Edge cases**: Returns false for non-array or undef input.
 
+The bounded Perl source-guard follow-up71 remains open. A free
+`contains(["a"],"z").take(1)` can yield an empty Array, rejected prefixes can
+still enter `with`, and a receiver Array bridge can be unready. The corresponding
+free `cat`/`split` bridge already works. Source/needle effects and numeric flags
+remain preservation controls; each native peer is assessed independently.
+
+Perl also mishandles a valid block operand ending in `push`: the public AST is a
+value block, but emission can treat its braces as a Hash. A block raising a
+binding error can consequently fail compilation before runtime;71.0 owns this
+producer prerequisite. Existing bound/direct push and explicit last-variable
+forms work. Selected-null membership gives numeric0 and evaluates the needle;
+literal/block-null and copied-null prefixes have inconsistent paths. Earlier
+rejection can also be lost across copy, allowing later operands/bodies. P1 71.6
+owns bounded copy/rejection closure after primary guards and before the next
+unrelated feature. These repairs retain existing equality, null/empty distinction,
+copy depth and source snapshots; full domain/context/portable admission stays open.
+
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`
 - **Returns**: int or undef. Ordinary Perl/Rust/Dart/Julia/Lua compatible scalar/number continuations are targeted-checked (Lua: available PUC5.5.1/LuaJIT; declared5.4/full admission open): `["a","b"].index_of("b").add(1)` returns `2`, while `.index_of("b").cat("!")` returns `"1!"`. The receiver requires one needle; missing/extra shapes return undef before source/operand effects. Declared5.4/full continuation admission remains separate.
