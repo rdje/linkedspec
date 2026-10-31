@@ -4080,7 +4080,7 @@ final class LinkedSpecRuntimeEngine {
               _isConstructorResultSource(receiver) ||
               _isFreeStringResultSource(receiver) ||
               _isOrdinaryStringReceiverPrefix(calls) ||
-              _isOrdinaryArithmeticResultChain(receiver, calls) ||
+              _isOrdinaryNumericResultChain(receiver, calls) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5609,9 +5609,9 @@ final class LinkedSpecRuntimeEngine {
     );
   }
 
-  // Preserve arithmetic producers and preflight; retain kind guards for
+  // Preserve numeric producers and preflight; retain kind guards for
   // canonical scalar calls and ordinary short Number prefixes.
-  bool _isOrdinaryArithmeticResultChain(
+  bool _isOrdinaryNumericResultChain(
     ActionExpr receiver,
     List<ActionFluentCall> calls,
   ) {
@@ -5663,7 +5663,15 @@ final class LinkedSpecRuntimeEngine {
         'num_floor' ||
         'num_ceil' ||
         'num_round' => receiver.args.length == 1,
-        'num_sub' || 'num_div' || 'num_mod' => receiver.args.length == 2,
+        'num_sub' ||
+        'num_div' ||
+        'num_mod' ||
+        'num_eq' ||
+        'num_ne' ||
+        'num_gt' ||
+        'num_ge' ||
+        'num_lt' ||
+        'num_le' => receiver.args.length == 2,
         'num_clamp' => receiver.args.length == 3,
         'num_add' ||
         'num_mul' ||
@@ -5689,6 +5697,12 @@ final class LinkedSpecRuntimeEngine {
       'clamp',
       'min',
       'max',
+      'eq',
+      'ne',
+      'gt',
+      'ge',
+      'lt',
+      'le',
     };
     return methods.contains(first.method) &&
         (first.sourceMethod ?? first.method) == first.method &&
