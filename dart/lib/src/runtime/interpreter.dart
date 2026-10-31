@@ -6451,7 +6451,6 @@ final class LinkedSpecRuntimeEngine {
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
-    var firstCall = true;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
@@ -6466,10 +6465,9 @@ final class LinkedSpecRuntimeEngine {
           value == null &&
           helper == 'contains' &&
           _isOrdinaryContainsResultChain(null, [call]);
-      // A leading null index source keeps its existing needle evaluation.
-      // Later container consumers still reject; copy-state closure is separate.
+      // Copy preserves legitimate null; earlier rejection has already
+      // returned before this canonical index consumer.
       final nullableIndex =
-          firstCall &&
           value == null &&
           helper == 'index_of' &&
           _isOrdinaryIndexResultChain(null, [call]);
@@ -6493,6 +6491,7 @@ final class LinkedSpecRuntimeEngine {
       if (scalarResult &&
           !nullablePresence &&
           !nullableMembership &&
+          !nullableIndex &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
           (_arrayOnlyReceiverHelpers.contains(helper) ||
@@ -6547,7 +6546,6 @@ final class LinkedSpecRuntimeEngine {
           ((scalarResult || mayProduceScalar) &&
               value is! List &&
               value is! Map);
-      firstCall = false;
     }
     return value;
   }

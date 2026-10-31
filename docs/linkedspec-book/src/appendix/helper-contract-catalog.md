@@ -1111,18 +1111,18 @@ Numeric0/null/no-match, equality, source snapshots, needed errors, compatible
 defaults, String-to-Array and `with`-returned Array bridges remain. Lua checks use
 installed PUC5.5.1/LuaJIT; declared5.4 remains separate.
 
-Copied-null index composition has a bounded known gap on Dart/Julia/installed
+Copied-null index composition has a bounded known gap on Julia/installed
 Lua: `{undef}.copy().index_of(needle)` skips the needle, including needed errors,
 while free-copy/free-index forms evaluate it. Repeated copies and copied valid
 null results share this gap; peer repairs remain queued before unrelated selection.
-Perl/Rust canonical index/copy chains retain prior rejection with and without
+Perl/Rust/Dart canonical index/copy chains retain prior rejection with and without
 `with`, while legitimate null evaluates its needle. Regenerate emitted Perl and
-rebuild Rust apps/runtime. These examples are targeted-checked on Perl/Rust; they
-remain Dart/Julia/installed Lua repair targets:
+rebuild Rust/Dart apps/runtime. These examples are targeted-checked on Perl/Rust/Dart;
+they remain Julia/installed Lua repair targets:
 
 ```text
 order=""; out={undef}.copy().index_of({order=cat(order,"N");"a"})
-# Perl/Rust: out=undef, order="N"; remaining peer target
+# Perl/Rust/Dart: out=undef, order="N"; remaining peer target
 index_of(["a"],"a").take(1).copy().index_of(needle)
 # undef; needle skipped after rejected take
 ```

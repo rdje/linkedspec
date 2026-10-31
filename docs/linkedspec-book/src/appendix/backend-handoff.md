@@ -3475,3 +3475,10 @@ including repeated and valid-null-result copies. Earlier incompatible consumers
 still exit before later effects. Same14/nearest index-contains-copy-null-with39/
 owned formatting pass; rebuild Rust apps/runtime. Separate Dart/Julia/safe Lua
 nullable index repairs precede unrelated selection; general admission open.
+
+
+Dart72.6.3 restores copied-null index needles/errors through common/scalar guards
+and removes obsolete index-only firstCall state. Source/scalarResult assignment/
+with/preflight stay; same14/nearest37/fatal analysis/new-normal/one-owned-member
+formatting pass with empty stderr. Rebuild Dart apps/runtime. Separate Julia/safe
+Lua nullable index repairs precede unrelated selection; full admission remains open.
