@@ -1381,7 +1381,8 @@ num_eq(2,3).with(){return(value.add(2))}      # 2; valid zero enters the body
 ```
 
 Source and operands evaluate once in order; later consumers use the computed
-result. Perl, Rust, Dart and Julia also retain kind guards through canonical free comparison calls
+result. Perl, Rust, Dart, Julia and tested Lua also retain kind guards through
+canonical free comparison calls
 and ordinary short comparison prefixes, including intermediate Array bridges:
 
 ```text
@@ -1393,12 +1394,13 @@ num_eq("bad",2).coalesce([]).with(){return(value.count())} # 0
 
 Incompatible consumer operands and later bodies stay skipped; legitimate
 zero/one/null/empty values still enter `with`. These Perl paths execute with
-ready ActionIR metadata; Rust, Dart and Julia pass their native, restored
-compiled-spec/SpecFile and generated-plan controls, with Julia also checked through
-fresh emitted modules. Numeric kinds, source effects, snapshots and needed errors
-are preserved. Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia apps/
-runtime. Remaining hosts are
-assessed independently; numeric domains/arity/aliases stay unchanged.
+ready ActionIR metadata; Rust, Dart, Julia and tested Lua pass their native,
+restored compiled-spec/SpecFile and generated-plan controls, with Julia/Lua also
+checked through fresh emitted modules. Lua checks use installed PUC5.5.1/LuaJIT;
+declared5.4/full source-domain-context admission remain separate. Numeric kinds,
+source effects, snapshots and needed errors are preserved. Regenerate emitted
+Perl parsers and rebuild native apps/runtime; numeric domains/arity/aliases stay
+unchanged.
 
 ### `num_add(a, b)`
 - **Signature**: `num_add(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands)

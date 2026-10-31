@@ -3170,12 +3170,12 @@ emitted Perl and rebuild native apps/runtime. Remaining feature selection follow
 
 
 Feature64 guards canonical free numeric comparison and short-prefix results in
-Perl, Rust, Dart and Julia, including Array bridges and rejection before later
-with bodies. Eighteen value programs and original healthy/error controls stay
-exact on recorded routes, including valid Number0/1 with. Direct comparison-with
-rejection already worked on Dart/Julia and remains intact. Perl metadata is ready;
-Rust/Dart/Julia pass native/restored compiled-spec/SpecFile/plan controls, with
-Julia also checking fresh emitted modules. The six-helper reference lists existing
-signatures and true/false examples. Regenerate emitted Perl and rebuild native
-apps/runtime. Safe installed Lua is next; original producer/domain/arity/alias/
-full admission remains separate.
+all five backends on recorded routes/hosts, including Array bridges and rejection
+before later with bodies. Eighteen value programs/original healthy-error controls
+stay exact, including valid Number0/1 with. Direct comparison-with rejection
+already worked on Dart/Julia/Lua and remains intact. Perl metadata is ready;
+native/restored compiled-spec/SpecFile/plan controls pass, with Julia/Lua also
+checking fresh emitted modules. Lua uses installed PUC5.5.1/LuaJIT; declared5.4/
+full source-domain-context admission remain separate. The six-helper reference
+lists existing signatures and true/false examples. Regenerate emitted Perl and
+rebuild native apps/runtime. Remaining feature selection follows.

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1583** facts · **11644** question keys.
+> **1584** facts · **11648** question keys.
 
 ## Questions → fact
 
@@ -913,6 +913,7 @@
 - "did Julia need a runtime repair for anonymous endpoint absence" -> [julia-capture-endpoint-absence-compatibility](docs/knowledge/julia-capture-endpoint-absence-compatibility.md) · 2026-10-29 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error julia/test/capture_endpoint_absence_test.jl`
 - "did Julia remove the generated v1 compatibility engine" -> [julia-rule-local-cursor-execution](docs/knowledge/julia-rule-local-cursor-execution.md) · 2026-07-18 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no -e 'using Test, JSON3, LinkedSpecJulia; const REPO_ROOT=pwd(); include(\"julia/test/rule_local_cursor_execution_test.jl\")' && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py`
 - "did Lua direct Number take with already reject correctly" -> [lua-arithmetic-result-source-guards](docs/knowledge/lua-arithmetic-result-source-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-arithmetic-result-source-guards)
+- "did Lua direct comparison take with already reject correctly" -> [lua-numeric-comparison-source-guards](docs/knowledge/lua-numeric-comparison-source-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-numeric-comparison-source-guards)
 - "did Lua direct trim take with already reject correctly" -> [lua-receiver-string-bridge-guards](docs/knowledge/lua-receiver-string-bridge-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-receiver-string-bridge-guards)
 - "did Lua local-match writer absence need a runtime repair" -> [lua-local-match-writer-presence-compatibility](docs/knowledge/lua-local-match-writer-presence-compatibility.md) · 2026-10-29 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/named_writer_endpoint_absence_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/named_writer_endpoint_absence_test.lua`
 - "did Lua named capture endpoint absence need a runtime repair" -> [lua-named-capture-endpoint-origin-compatibility](docs/knowledge/lua-named-capture-endpoint-origin-compatibility.md) · 2026-10-29 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/named_capture_endpoint_absence_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/named_capture_endpoint_absence_test.lua`
@@ -2176,6 +2177,7 @@
 - "does Lua classify compact pipe as OR" -> [lua-rule-local-cursor-preflight](docs/knowledge/lua-rule-local-cursor-preflight.md) · 2026-07-19 · reverify: `bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n 'Pipe|parse_mode|GENERATED_SOURCE_CONTRACT|GENERATED_SOURCE_FORMAT|classify_generated_rule_family|lua_runtime:rule' lua/src/linkedspec/{spec_ast.lua,interpreter.lua,compiled_spec.lua,source_emitter.lua,spec_loader.lua,corpus.lua,primary_cli.lua}`
 - "does Lua codeblock function projection mutate caller supplied nodes" -> [lua-function-projection-reading-and-boundary-gaps](docs/knowledge/lua-function-projection-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: `Run LUA_FUNCTION_PROJECTION_READING_29 and its managed commands below. This is focused diagnostic reproduction, not a full gate or repair closure.`
 - "does Lua compare interpreter values before emitting source" -> [lua-generated-source-accepted-subset](docs/knowledge/lua-generated-source-accepted-subset.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; rg -n 'LUA_GENERATED_SOURCE_ACCEPTED_SUBSET_COUNT|contract.corpus_proof.accepted_subset|generated Lua source matches the contract accepted manifest subset|lua_accepted_subset_test' lua/test/run.lua tools/check_generated_source_contract.pl capability_conformance/generated_source_contract.json`
+- "does Lua comparison source guard repair add interpreter chunk locals" -> [lua-numeric-comparison-source-guards](docs/knowledge/lua-numeric-comparison-source-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-numeric-comparison-source-guards)
 - "does Lua compile user_function_definition.spec once" -> [lua-spec-defined-function-parser](docs/knowledge/lua-spec-defined-function-parser.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua compiled definition order include function shells" -> [lua-semantic-introspection-authority-map](docs/knowledge/lua-semantic-introspection-authority-map.md) · 2026-07-28 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test`
 - "does Lua compiled state carry ActionIR payloads" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
@@ -2332,6 +2334,8 @@
 - "does Lua now implement the private semantic graph projection" -> [lua-semantic-static-projection-plan](docs/knowledge/lua-semantic-static-projection-plan.md) · 2026-07-27 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh`
 - "does Lua null lifecycle return force a match" -> [lua-null-return-and-pure-observation-gaps](docs/knowledge/lua-null-return-and-pure-observation-gaps.md) · 2026-10-29 · reverify: `Recover actual Lua nullable probes/readers/qualification from retained packet, run SDK and separate fresh process per installed host before --fresh. Preserve phase exclusion and exact fixture-derived row census.`
 - "does Lua num_add take skip incompatible operands" -> [lua-arithmetic-result-source-guards](docs/knowledge/lua-arithmetic-result-source-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-arithmetic-result-source-guards)
+- "does Lua num_eq take skip incompatible operands" -> [lua-numeric-comparison-source-guards](docs/knowledge/lua-numeric-comparison-source-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-numeric-comparison-source-guards)
+- "does Lua numeric comparison bridge retain with rejection state" -> [lua-numeric-comparison-source-guards](docs/knowledge/lua-numeric-comparison-source-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-numeric-comparison-source-guards)
 - "does Lua observed-index derivation mutate the base index" -> [lua-semantic-runtime-observation-derivation](docs/knowledge/lua-semantic-runtime-observation-derivation.md) · 2026-07-28 · reverify: [3 entries](#lua-semantic-runtime-observation-derivation)
 - "does Lua observed-index derivation work on PUC Lua and LuaJIT" -> [lua-semantic-runtime-observation-derivation](docs/knowledge/lua-semantic-runtime-observation-derivation.md) · 2026-07-28 · reverify: [3 entries](#lua-semantic-runtime-observation-derivation)
 - "does Lua omit semantic rule calls when no function is defined" -> [lua-static-completion-sha-emitter-reading-and-conditional-gaps](docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md) · 2026-09-13 · reverify: [4 entries](#lua-static-completion-sha-emitter-reading-and-conditional-gaps)
@@ -17046,6 +17050,14 @@ _Lua numeric calls and number receivers share one strict evaluator_
 - **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/scalar_arithmetic_results_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/scalar_arithmetic_results_test.lua`
 - **source:** [`docs/knowledge/lua-numeric-call-receiver-runtime.md`](docs/knowledge/lua-numeric-call-receiver-runtime.md)
 
+### lua-numeric-comparison-source-guards
+_Safe Lua numeric comparison sources and short prefixes retain Array bridge guards_
+- **answers:** does Lua num_eq take skip incompatible operands | does Lua numeric comparison bridge retain with rejection state | did Lua direct comparison take with already reject correctly | does Lua comparison source guard repair add interpreter chunk locals
+- **date:** 2026-10-31 · **status:** bounded installed PUC5.5.1/LuaJIT64.5 targeted-checked; next selection23.1.26/full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.64.5; free-numeric-comparison-lua-intake.json.gz retains same96 72PASS24RED to96PASS per host, nearest86/three comparison programs/loadfile/version and all producers/inputs.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/free_numeric_comparison_result_composition_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/free_numeric_comparison_result_composition_test.lua`
+- **source:** [`docs/knowledge/lua-numeric-comparison-source-guards.md`](docs/knowledge/lua-numeric-comparison-source-guards.md)
+
 ### lua-numeric-helper-preflight
 _Lua numeric helpers require separate scalar, receiver, aggregate, and closeout mechanisms_
 - **answers:** how is Lua numeric helper parity split | does Lua already canonicalize numeric aliases and symbol callees | where should Lua number receiver chains be implemented | which Lua leaf owns numeric aggregate reducers | what is next after Lua string helper parity
@@ -18528,7 +18540,7 @@ _Non-current helper spelling purge is split across Perl source, Rust source, tes
 ### numeric-comparison-result-source-guards
 _Canonical numeric comparison source roles and later with rejection state_
 - **answers:** why does num_eq take return an empty Array instead of null | why does a numeric comparison chain run with after rejected take | which task owns canonical numeric comparison source guards | does a valid zero numeric comparison result enter with | where are all six canonical numeric comparison helper signatures documented | are Perl numeric comparison source guards fixed
-- **date:** 2026-10-31 · **status:** bounded Perl64.1/Rust64.2/Dart64.3/Julia64.4 targeted-checked; safe Lua64.5/full admission separate
+- **date:** 2026-10-31 · **status:** all bounded64 backend outcomes recorded; next selection23.1.26/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.25; free-numeric-comparison-selection-intake.json.gz retains initial18 plus valid Number0/1-with public controls/native/fresh/descriptor/substitution/emitted modules and original Perl inputs.`
 - **reverify:** `Recover exact shared19/public observer and original Perl from free-numeric-comparison-selection-intake.json.gz into new project-local outputs. Historical activation/create/run/freeze writers one-shot, never replay. Implementation owners64.1-.5.`
 - **source:** [`docs/knowledge/numeric-comparison-result-source-guards.md`](docs/knowledge/numeric-comparison-result-source-guards.md)

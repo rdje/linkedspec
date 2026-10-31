@@ -9,7 +9,7 @@ answers:
   - "where are all six canonical numeric comparison helper signatures documented"
   - "are Perl numeric comparison source guards fixed"
 date: 2026-10-31
-status: bounded Perl64.1/Rust64.2/Dart64.3/Julia64.4 targeted-checked; safe Lua64.5/full admission separate
+status: all bounded64 backend outcomes recorded; next selection23.1.26/full admission separate
 tags: [numeric, comparison, perl, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.25; free-numeric-comparison-selection-intake.json.gz retains initial18 plus valid Number0/1-with public controls/native/fresh/descriptor/substitution/emitted modules and original Perl inputs."
 reverify: "Recover exact shared19/public observer and original Perl from free-numeric-comparison-selection-intake.json.gz into new project-local outputs. Historical activation/create/run/freeze writers one-shot, never replay. Implementation owners64.1-.5."
@@ -24,3 +24,5 @@ Independent Rust result guard extension/private predicate generalization: [[rust
 Independent Dart guard extension and twelve preserved healthy value observations: [[dart-numeric-comparison-source-guards]].
 
 Independent Julia four-route proof/scaffold qualification/private predicate extension: [[julia-numeric-comparison-source-guards]].
+
+Installed Lua guard extension and exact host limits: [[lua-numeric-comparison-source-guards]]. All bounded64 outcomes recorded; canonical closeout remains separate.

@@ -3626,9 +3626,9 @@ function typed_source.receiver_mutation.is_ordinary_string_receiver_prefix(calls
   return true
 end
 
--- Preserve arithmetic producers/preflight; retain actual-kind guards for
+-- Preserve numeric producers/preflight; retain actual-kind guards for
 -- canonical scalar calls and ordinary short Number receiver prefixes.
-function typed_source.receiver_mutation.is_ordinary_arithmetic_result_chain(expr, calls)
+function typed_source.receiver_mutation.is_ordinary_numeric_result_chain(expr, calls)
   local first = calls and calls[1]
   if first == nil then return false end
   for _, call in ipairs(calls) do
@@ -3660,7 +3660,9 @@ function typed_source.receiver_mutation.is_ordinary_arithmetic_result_chain(expr
     local args = expr.args or {}
     local count, name = #args, expr.name
     local valid_arity = ((name == "num_abs" or name == "num_floor" or name == "num_ceil" or name == "num_round") and count == 1) or
-      ((name == "num_sub" or name == "num_div" or name == "num_mod") and count == 2) or
+      ((name == "num_sub" or name == "num_div" or name == "num_mod" or
+        name == "num_eq" or name == "num_ne" or name == "num_gt" or
+        name == "num_ge" or name == "num_lt" or name == "num_le") and count == 2) or
       (name == "num_clamp" and count == 3) or
       ((name == "num_add" or name == "num_mul" or name == "num_min" or name == "num_max") and count >= 2)
     if valid_arity and ordinary_args(args) then return true end
@@ -3669,7 +3671,8 @@ function typed_source.receiver_mutation.is_ordinary_arithmetic_result_chain(expr
   if (first.source_method or name) ~= name then return false end
   if not (name == "abs" or name == "floor" or name == "ceil" or name == "round" or
     name == "add" or name == "sub" or name == "mul" or name == "div" or name == "mod" or
-    name == "clamp" or name == "min" or name == "max") then
+    name == "clamp" or name == "min" or name == "max" or
+    name == "eq" or name == "ne" or name == "gt" or name == "ge" or name == "lt" or name == "le") then
     return false
   end
   local args = first.args or {}
@@ -3815,7 +3818,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     typed_source.receiver_mutation.is_constructor_result_source(target_receiver) or
     typed_source.receiver_mutation.is_free_string_result_source(target_receiver) or
     typed_source.receiver_mutation.is_ordinary_string_receiver_prefix(calls) or
-    typed_source.receiver_mutation.is_ordinary_arithmetic_result_chain(target_receiver, calls) or
+    typed_source.receiver_mutation.is_ordinary_numeric_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or
