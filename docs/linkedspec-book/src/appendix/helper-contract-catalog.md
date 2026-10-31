@@ -325,7 +325,7 @@ and required fallback blocks run once before consumers. Empty containers are
 values; `coalesce_nonempty` rejects empty Scalar text rather than testing container
 emptiness or truthiness. Rebuild Rust applications with the updated runtime.
 Direct free-helper selections preserve primitive kinds and compatible methods.
-On Perl, canonical ordinary calls with two-or-more positional operands guard
+On Perl and Rust, canonical ordinary calls with two-or-more positional operands guard
 incompatible consumers before their arguments or later `with` bodies run:
 
 ```text
@@ -338,9 +338,10 @@ coalesce(undef,["head","tail"])[-1].uppercase() # TAIL (existing compatibility)
 Rejection differs from a valid null selection: `coalesce(undef,undef).with(){
 return("recovered")}` returns `"recovered"`. An empty Array produced by a compatible
 consumer also remains a valid `with` input. Source and needed defaults run once;
-unused runtime errors remain skipped. Regenerate affected emitted Perl parsers.
-Rust's direct free-result guards remain owned; its completed-value bridge works:
-`saved=coalesce(undef,"tail"); saved.coalesce(undef).set_key("k",1)` returns null.
+unused runtime errors remain skipped. Regenerate affected emitted Perl parsers
+and rebuild Rust applications with the updated runtime. A completed-value bridge
+also works: `saved=coalesce(undef,"tail"); saved.coalesce(undef).set_key("k",1)`
+returns null.
 Published Scalar operand domains, qualified aggregate compatibility, legacy
 arities and complete admission remain separate. See the backend handoff.
 

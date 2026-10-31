@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl free-default/with guards repaired: new18/quick7/nearest set11/syntax pass; Rust60.2 next.
+Rust free-default guards repaired: new18/named-default13/owned fmt pass; independent Dart60.3 next.
 
 ## Latest Completed Slice
 
-Perl60.1 repairs canonical free-default result guards. Initial14 groups10healthy/4RED; predicate candidate13PASS/1RED isolates later with rejection loss. Four added distinguishing controls establish unchanged18 baseline16PASS/2RED to18PASS native/fresh/metadata. Original eight and expanded fourteen healthy value observations/inherited needed-runtime-error row exact canonical JSON; sixteen values/eight excluded AST-error fences pass. Incompatible Scalar/qualified container consumers now null/skip operands and later with; valid null/empty-container with still runs, source effects once/outer value preserved. One minimum-two positional source predicate/current guard admission; only canonical free/immediate-with/non-traversal chains retain explicit rejection state and once-bound stages through the existing typed with-body lowerer. Original lazy producer/read/signatures/method tables/arity/copy/alias/function/parser/runtime/schema and remaining owner exact; 429 other inputs exact. Unrouted-state and Array-prefix routing candidate failures/actual public AST/lowering/source epochs retained, no candidate RED credit. Quick with7/new18/nearest set11/owner-normal syntax pass on final source; strict selection JSON kinds recertified. Actual producers/inputs/results in free-default-perl-intake.json.gz. Canonical18/shared12/excluded AST registration queued23.4.1; regenerate emitted Perl. Book/card/map/target/task/roadmap/live/resume/history align. Independent Rust60.2 next; no portable aggregate-domain/exhaustive excluded-shape/full admission.
+Rust60.2 guards canonical free-default results: unchanged18 tests13healthy/5RED to18GREEN native/restored CompiledSpec/in-process plan. Sixteen values/eleven healthy observations/needed-runtime-error row/eight public source shapes canonically exact. Incompatible published Scalar/qualified aggregate operands and later with bodies skip; legitimate null/empty with runs/source effects once/outer value stays. One canonical minimum-two positional/recognized-value predicate feeds existing direct/trailing-body guards; original lazy producer/computed reader/receiver defaults/with/signatures/method tables/arity/copy/alias/function/parser/schema and remaining engine exact; 509 other inputs exact. Nearest named-default13/owned fmt pass, retaining unknown bound-call/empty/zero-fallback distinctions. Actual producers/inputs/source/RED-GREEN/results in free-default-rust-intake.json.gz; dependency warnings opaque/retained. Book/card/map/target/task/roadmap/live/resume/history align; rebuild apps/runtime. Independent Dart60.3 next; no isolated emitted Rust/exhaustive excluded-runtime/portable aggregate-domain/full23.4 admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.60.2 from clean Perl60.1/frozen60. Read free-default-result-composition.md/shared12/current cards, published Scalar free signatures/qualified aggregate compatibility/min-two positional role and Rust lazy producer/direct/trailing/computed guards/with/function/errors/arity/nearest normals/book. Independently baseline finite unchanged new normal before production; include valid-null/empty with and rejected-consumer/source-once distinctions rather than treating all nulls as rejection. Preserve healthy primitive/compatible/selected/completed/lazy/snapshot/function/errors and original producer/signatures/domains/copy/alias/parser/schema/unknown bound-call policy. Quick new-nearest/owned fmt/book/map/history/manual docs/commit then independent Dart60.3. Full23.4/pressure20.1/atomic map20.1.1/Perl registration/progress/declared-host stay separate; no broad verification/cleanup pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.60.3 from clean Rust60.2/frozen60. Read free-default-result-composition.md/shared12/current cards and valid-null/empty/rejected with controls, Dart published Scalar free signatures/qualified aggregate compatibility/min-two positional role, original lazy producer/source/fluent/computed/with/function/error/arity and nearest normals/book. Independently baseline finite unchanged new normal on native/restoredSpec/plan before production; preserve healthy and qualified backend policies, no imported peer defect. Reuse existing actual-kind guards for demonstrated gaps, leaving producer/signatures/domains/copy/alias/function/parser/schema/unknown bound-call authority. Quick new-nearest/changed-owner-new-normal fatal analysis/new-normal format/book/map/history/manual docs/commit then Julia60.4. Full23.4/pressure20.1/atomic map20.1.1/Perl registration/progress/declared-host remain separate; no broad verification/cleanup pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.60.2` — Rust free-default guards repaired: new18/named-default13/owned fmt pass; independent Dart60.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.60.1` — Perl free-default/with guards repaired: new18/quick7/nearest set11/syntax pass; Rust60.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.21` — Selection21 freezes free-default result guards60: independent12/eight healthy/four gaps Perl/Rust; P1 Perl60.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.59.5` — Safe Lua canonical set guards repaired: new61/push65/loadfile/version pass per host; free-source selection21 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.60.2 from clean Perl60.1/frozen60. Read fr
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.2` — Rust push snapshot guards repaired: new9/computed6/owned fmt pass; Dart58.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.1.2` — Perl push fluent58.1.2 repaired: new10/read6/syntax pass; bounded Perl58 outcomes recorded, independent Rust58.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.1.1` — Guarded Perl push reads58.1.1 repaired: new6 groups/callable5/deferred22/syntax pass; fluent58.1.2 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.58.0` — P1 aggregate push producer58.0 repaired: new8 groups/uniform13 TAP items/syntax pass; Perl read58.1.1 next.
 
 ## History
 

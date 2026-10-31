@@ -6526,6 +6526,7 @@ impl Engine {
                 if self.is_ordinary_computed_read(receiver)
                     || self.is_explicit_push_result_source(receiver)
                     || Self::is_explicit_set_result_source(receiver)
+                    || Self::is_free_default_result_source(receiver)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7148,6 +7149,7 @@ impl Engine {
         let mut kind_guarded_value = self.is_ordinary_computed_read(receiver)
             || self.is_explicit_push_result_source(receiver)
             || Self::is_explicit_set_result_source(receiver)
+            || Self::is_free_default_result_source(receiver)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8209,6 +8211,43 @@ impl Engine {
                     | "rewind_entry_start"
                     | "rewind_match_start"
             )
+    }
+
+    // Preserve the lazy producer and legacy arities; guard ordinary free results.
+    fn is_free_default_result_source(expr: &Expr) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let Expr::Call { name, args } = expr else {
+            return false;
+        };
+        matches!(name.as_str(), "coalesce" | "coalesce_nonempty")
+            && args.len() >= 2
+            && args.iter().all(|arg| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            })
     }
 
     // Assignment keeps its existing stored-value ABI; only canonical calls gain

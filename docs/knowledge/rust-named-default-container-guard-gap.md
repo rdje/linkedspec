@@ -8,7 +8,7 @@ answers:
   - "does Rust coalesce_nonempty retain empty containers"
   - "are Rust coalesce and nonempty zero-fallback receivers currently identical"
 date: 2026-10-31
-status: bounded receiver-default59.6 repaired/targeted-checked; free-helper selection21/full admission separate
+status: bounded receiver-default59.6/free-source60.2 repaired/targeted-checked; full admission separate
 tags: [rust, defaults, array, hash, guards, scope]
 evidence: "Rust59.2 initial13 baseline9PASS4RED at1cf8949de; actual source/three-route output in set-result-rust-named-default-gap.json, retained by current set-result-rust intake."
 reverify: "Recover exact named-gap source/public observer from set-result-rust intake and use offline project Cargo wrapper with new output names; current owner is59.6."
@@ -55,3 +55,5 @@ helper aggregate domains. Actual custody: named-default-rust-intake.json.gz.
 Rebuild apps/runtime; Dart59.3 follows, full admission separate.
 
 Selection21 independently confirms published Scalar and qualified container free-source guard defects on Perl/Rust; frozen60/P1 Perl60.1 then Rust60.2 own repairs: [[free-default-result-source-guards]]. Receiver59.6 stays bounded complete.
+
+Free-helper source guard60.2 now repaired/targeted-checked independently: [[rust-free-default-result-guards]]. Receiver59.6/legacy arities and published Scalar domains stay bounded; no wider admission claim.

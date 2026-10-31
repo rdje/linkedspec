@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1551** facts · **11509** question keys.
+> **1552** facts · **11513** question keys.
 
 ## Questions → fact
 
@@ -2709,6 +2709,8 @@
 - "does Rust expose generated_source_error" -> [rust-generated-source-contract-v1-gap](docs/knowledge/rust-generated-source-contract-v1-gap.md) · 2026-07-11 · reverify: `rg -n 'emit_rust_source|LINKEDSPEC_GENERATED_SOURCE_FORMAT|source_identity|generated_source_error|generated_plan_unknown_family|generated_rule_enter|generated_family_decision|generated_rule_exit|rust_runtime:generated_plan' rust/linkedspec-runtime/src/source_emitter.rs rust/linkedspec-runtime/src/engine.rs rust/linkedspec-runtime/tests/source_emitter.rs && cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`
 - "does Rust expose structured runtime diagnostics" -> [backend-capability-census](docs/knowledge/backend-capability-census.md) · 2026-07-13 · reverify: `perl tools/check_capability_conformance.pl && perl tools/check_generated_source_contract.pl`
 - "does Rust expose the backend neutral compiled descriptor" -> [backend-capability-census](docs/knowledge/backend-capability-census.md) · 2026-07-13 · reverify: `perl tools/check_capability_conformance.pl && perl tools/check_generated_source_contract.pl`
+- "does Rust free default composition change lazy selection" -> [rust-free-default-result-guards](docs/knowledge/rust-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test free_default_result_composition --test named_default_container_guards`
+- "does Rust free default rejection skip later with bodies" -> [rust-free-default-result-guards](docs/knowledge/rust-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test free_default_result_composition --test named_default_container_guards`
 - "does Rust gap String composition change getter or context state" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
 - "does Rust gap String recovery already work" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
 - "does Rust gap admission change recognition 137 246 58" -> [inter-match-gap-rust-implementation-plan](docs/knowledge/inter-match-gap-rust-implementation-plan.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_inter_match_gap_capture_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test inter_match_gap_capture_contract contract_declared_rust_roles_execute_once_and_only_once -- --exact && bash tools/check_inter_match_gap_capture_six_runtime.sh`
@@ -2941,6 +2943,7 @@
 - "does a helper or function shadow a same named Rust codeblock" -> [rust-callable-codeblock-dynamic-invocation](docs/knowledge/rust-callable-codeblock-dynamic-invocation.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --locked --offline --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract`
 - "does a helper shadow a same named codeblock variable" -> [perl-callable-codeblock-dynamic-invocation](docs/knowledge/perl-callable-codeblock-dynamic-invocation.md) · 2026-09-06 · reverify: `PERL5LIB= prove -v -Iperl t/callable_codeblock_literal_contract.t && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`
 - "does a history filename bypass the current task id census" -> [current-task-id-uniqueness](docs/knowledge/current-task-id-uniqueness.md) · 2026-09-24 · reverify: `perl scripts/check_task_tree_current_ids.pl`
+- "does a legitimate Rust null free default still enter with" -> [rust-free-default-result-guards](docs/knowledge/rust-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test free_default_result_composition --test named_default_container_guards`
 - "does a legitimate null free default still enter with" -> [perl-free-default-result-guards](docs/knowledge/perl-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/free_default_result_composition.t t/set_result_composition.t`
 - "does a missing Rust local-match writer preserve a mark written by its name expression" -> [rust-local-match-writer-presence-repair](docs/knowledge/rust-local-match-writer-presence-repair.md) · 2026-10-29 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test named_writer_endpoint_absence --test named_capture_endpoint_absence --test complete_named_mark_contract -- --test-threads=1`
 - "does a missing decision Status reject a routing increase" -> [routing-decision-accepted-state-gap](docs/knowledge/routing-decision-accepted-state-gap.md) · 2026-10-08 · reverify: `At the owning committed boundary, run bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3-review.py and its semantic-controls.py producer. Retain original before and instrument-error channels; do not replay one-shot activation/error/publication writers or refresh historical inputs.`
@@ -9220,6 +9223,7 @@
 - "which Rust owner guards call Child indexed results" -> [rust-rule-call-selection-guard](docs/knowledge/rust-rule-call-selection-guard.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test rule_call_result_selection`
 - "which Rust owner guards canonical set result methods" -> [rust-canonical-set-result-guards](docs/knowledge/rust-canonical-set-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test set_result_composition --test push_result_composition`
 - "which Rust owner guards explicit push snapshot methods" -> [rust-push-snapshot-result-guards](docs/knowledge/rust-push-snapshot-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test push_result_composition --test computed_selection`
+- "which Rust owner guards free coalesce result methods" -> [rust-free-default-result-guards](docs/knowledge/rust-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test free_default_result_composition --test named_default_container_guards`
 - "which Rust owner guards gap_kind result methods" -> [rust-gap-string-result-guards](docs/knowledge/rust-gap-string-result-guards.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test gap_string_result`
 - "which Rust owner returns rewind Number values" -> [rust-cursor-rewind-number-results](docs/knowledge/rust-cursor-rewind-number-results.md) · 2026-10-30 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test cursor_control_arity --test cursor_rewind_result`
 - "which Rust parent and child carriers verify lossless readiness" -> [rust-lossless-child-carrier-readiness](docs/knowledge/rust-lossless-child-carrier-readiness.md) · 2026-09-27 · reverify: [2 entries](#rust-lossless-child-carrier-readiness)
@@ -14090,7 +14094,7 @@ _Finite readiness gaps distinguish defects and authoring work from unassessed re
 ### free-default-result-source-guards
 _Canonical free defaults need actual-kind result source guards_
 - **answers:** why does free coalesce set_key execute incompatible operands | does the free default result guard gap affect published scalar operands | do ready coalesce descriptors prove Perl runtime success | does free default composition promote portable aggregate operand domains
-- **date:** 2026-10-31 · **status:** bounded Perl60.1 targeted-checked; Rust60.2 then independent peers
+- **date:** 2026-10-31 · **status:** bounded Perl60.1/Rust60.2 targeted-checked; Dart60.3 then independent peers
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.21; free-default-selection-intake.json.gz retains12 authored public programs/actual Perl native-fresh metadata-emitted source and Rust native-restored-plan outputs; calibrated eight healthy/four guard failures each.`
 - **reverify:** `Recover exact cases/public observers from free-default-selection-intake.json.gz into new project-local paths; historical activation/create/run/finish/retain one-shot, never replay.`
 - **source:** [`docs/knowledge/free-default-result-source-guards.md`](docs/knowledge/free-default-result-source-guards.md)
@@ -21276,6 +21280,14 @@ _Rust formatting must explicitly select LinkedSpec packages to respect the depen
 - **reverify:** `bash tools/run_cargo_local.sh fmt --verbose --manifest-path rust/Cargo.toml -p linkedspec-core -p linkedspec-runtime -- --check`
 - **source:** [`docs/knowledge/rust-format-owned-packages.md`](docs/knowledge/rust-format-owned-packages.md)
 
+### rust-free-default-result-guards
+_Rust canonical free defaults use existing direct and trailing kind guards_
+- **answers:** which Rust owner guards free coalesce result methods | does Rust free default composition change lazy selection | does Rust free default rejection skip later with bodies | does a legitimate Rust null free default still enter with
+- **date:** 2026-10-31 · **status:** bounded Rust60.2 targeted-checked; Dart60.3/peers/full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.60.2; free-default-rust-intake.json.gz retains same18 tests13healthy5RED to18GREEN, nearest named-default13/owned fmt0 and actual producers/inputs/results.`
+- **reverify:** `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test free_default_result_composition --test named_default_container_guards`
+- **source:** [`docs/knowledge/rust-free-default-result-guards.md`](docs/knowledge/rust-free-default-result-guards.md)
+
 ### rust-gap-slot-record-selection-guard
 _Rust gap and slot record fields reuse the ordinary selected-kind guard_
 - **answers:** why does Rust a gap or slot selected String execute incompatible Array operands | which Rust source role guards gap_span and entry_slot fields | why does the Rust gap error message omit the accessor name | does Rust gap record composition change lifecycle or source state
@@ -21583,7 +21595,7 @@ _Rust named capture helpers require match presence and named text take preserves
 ### rust-named-default-container-guard-gap
 _Rust completed default containers retain their actual consumer guards_
 - **answers:** why does a Rust named Array coalesce set_key evaluate operands | is the Rust completed named default guard gap part of set source classification | which task owns Rust named default container result guards | does Rust coalesce_nonempty retain empty containers | are Rust coalesce and nonempty zero-fallback receivers currently identical
-- **date:** 2026-10-31 · **status:** bounded receiver-default59.6 repaired/targeted-checked; free-helper selection21/full admission separate
+- **date:** 2026-10-31 · **status:** bounded receiver-default59.6/free-source60.2 repaired/targeted-checked; full admission separate
 - **evidence:** `Rust59.2 initial13 baseline9PASS4RED at1cf8949de; actual source/three-route output in set-result-rust-named-default-gap.json, retained by current set-result-rust intake.`
 - **reverify:** `Recover exact named-gap source/public observer from set-result-rust intake and use offline project Cargo wrapper with new output names; current owner is59.6.`
 - **source:** [`docs/knowledge/rust-named-default-container-guard-gap.md`](docs/knowledge/rust-named-default-container-guard-gap.md)

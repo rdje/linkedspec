@@ -7,7 +7,7 @@ answers:
   - "do ready coalesce descriptors prove Perl runtime success"
   - "does free default composition promote portable aggregate operand domains"
 date: 2026-10-31
-status: bounded Perl60.1 targeted-checked; Rust60.2 then independent peers
+status: bounded Perl60.1/Rust60.2 targeted-checked; Dart60.3 then independent peers
 tags: [perl, rust, defaults, source, fluent, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.21; free-default-selection-intake.json.gz retains12 authored public programs/actual Perl native-fresh metadata-emitted source and Rust native-restored-plan outputs; calibrated eight healthy/four guard failures each."
 reverify: "Recover exact cases/public observers from free-default-selection-intake.json.gz into new project-local paths; historical activation/create/run/finish/retain one-shot, never replay."
@@ -31,3 +31,5 @@ P1 Perl60.1 owns runtime failures next, Rust60.2 then independent peers; target
 free-default-result-composition.md owns current status, full admission separate.
 
 Perl60.1 result/with guards repaired: [[perl-free-default-result-guards]]. Current family status belongs to free-default-result-composition.md; no peer/domain admission inferred.
+
+Rust60.2 source guards repaired: [[rust-free-default-result-guards]]. Current family status belongs to free-default-result-composition.md; no peer/domain admission inferred.

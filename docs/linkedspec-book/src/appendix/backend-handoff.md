@@ -3093,6 +3093,8 @@ some Perl guards previously runtime-failed despite ready metadata. Perl now guar
 canonical ordinary free-default results through native/fresh execution. Incompatible
 operands/later with bodies skip, while valid null/empty-container with inputs run;
 healthy kinds/laziness/order/snapshots/functions/errors stay. Regenerate emitted Perl.
-Rust60.2 is next, then independently assessed peers60.3-.5. Completed-value guarded
-receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
+Rust now also guards these canonical free results on native/restored CompiledSpec/
+in-process plan, preserving valid null/empty with inputs, source order and unknown
+bound-call policies. Rebuild Rust apps/runtime. Dart60.3 is next, then independently
+assessed Julia/safe Lua. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
 context/portable admission remain separate.

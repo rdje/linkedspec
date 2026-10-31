@@ -1,7 +1,7 @@
 # Canonical free-default result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.21; implementation family23.3.60.
-Status: Bounded Perl60.1 targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl60.1/Rust60.2 targeted-checked; independent peers/full admission pending.
 
 Existing catalog publishes coalesce(values: scalar...) and
 coalesce_nonempty(values: scalar...). First defined versus first defined/nonempty
@@ -74,3 +74,18 @@ set11/owner-normal syntax pass; strict initial selection JSON kinds recertified.
 Actual producers/inputs/results: free-default-perl-intake.json.gz. New18/shared12/
 excluded AST registration queued23.4.1; regenerate emitted Perl. Independent Rust60.2
 next; no portable aggregate-domain/exhaustive excluded-shape/full admission claim.
+
+## Independent Rust60.2 source guards
+
+Same18 tests13healthy/5RED to18GREEN native/restored CompiledSpec/in-process plan.
+Sixteen values/eleven healthy observations/needed-runtime-error row/eight public
+source shapes canonically exact. Incompatible Scalar/qualified aggregate operands
+and later with skip; valid null/empty with runs/source once/outer value stays.
+One canonical minimum-two positional/recognized-value predicate feeds existing
+direct/trailing-body guards; lazy producer/computed reader/receiver defaults/with/
+signatures/method tables/arity/copy/alias/function/parser/schema unchanged.
+Nearest named-default13/owned fmt pass, including unknown bound-call/empty/zero-
+fallback distinctions; dependency warnings retained/opaque. Actual producers/
+inputs/results: free-default-rust-intake.json.gz. Rebuild apps/runtime. Independent
+Dart60.3 next; no isolated emitted Rust/exhaustive excluded-runtime/portable
+aggregate-domain/full admission claim.
