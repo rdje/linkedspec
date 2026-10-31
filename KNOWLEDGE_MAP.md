@@ -21052,7 +21052,7 @@ _PPlugin and PluginBridge are transition/removal machinery, not the target archi
 ### presence-result-source-guards
 _Has_key result source roles and later with guards_
 - **answers:** why does has_key take return an empty Array instead of null | why does rejected has_key still run with | why does has_key receiver bridge report unsupported with | which task owns has_key source and prefix guards | does the free has_key cat split bridge already retain guards | why does a has_key is_undefined chain render empty text on Perl
-- **date:** 2026-10-31 · **status:** frozen69; independent backend implementations pending
+- **date:** 2026-10-31 · **status:** bounded Perl69.1 targeted-checked; independent Rust69.2/peers/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.30; presence-guard-selection-intake.json.gz retains actual public13/public22 observers, original/adjudicated oracles, all declared input bytes and original results.`
 - **reverify:** `Recover retained public observers/shared22/original source into new project-local outputs; historical writers one-shot never replay. Owners69.1-.5 independently baseline with expected_nonperl override where present.`
 - **source:** [`docs/knowledge/presence-result-source-guards.md`](docs/knowledge/presence-result-source-guards.md)

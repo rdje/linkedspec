@@ -116,3 +116,5 @@ presence, String keys/source families, false retention, explicit bridges/scalar
 nulls, no malformed effects and K/SK/SKA snapshots. Bounded rollout is targeted-
 checked on recorded hosts; declared5.4/full admission separate. Next assessment
 is is_empty/is_nonempty result continuation23.2.8.
+
+Canonical free-two/ordinary one-key presence source guards are repaired by Perl69.1: [[presence-result-source-guards]]. Leading null sources still evaluate keys once and produce0; later incompatible consumers retain guards. Producer/source-key/default/copy policy unchanged; independent peer baselines/full23.4 remain separate.

@@ -1263,13 +1263,34 @@ Needed key errors propagate before a consumer runs. Regenerate emitted Perl pars
 - **Returns**: boolean
 - **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust/Dart/Julia/Lua accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Rust free `has_key(meta,key_expr)` also uses its captured named source, even when the key operand rebinds `meta`. Perl also evaluates a key once when its source is null: with `meta=undef` and `calls=0`, `has_key(meta,{calls=num_add(calls,1);"a"})` returns `0` and leaves `calls` as `1`. The source is captured before key effects, so creating or replacing the working Hash inside the key does not change the current presence result. Focused Perl native/fresh, Rust/Dart native/restored/generated-plan and Julia/Lua native/plan/fresh-emitted checks cover selected, function and default sources too; Lua uses available PUC5.5.1/LuaJIT, with declared5.4/full admission separate.
 
-A bounded Perl source-guard gap remains after these ordinary result repairs:
-`has_key({},"k").take(1)` can return an empty Array, rejected prefixes can still
-enter a later `with`, and a receiver Array bridge can be unready despite returning
-null. Feature69 owns those guards. The free `cat`/`split` bridge already works.
-Presence flags, source/key snapshots, null-source key evaluation, copies/defaults,
-numeric and valid false/null/empty `with` remain preservation controls; peer
-backends are assessed independently. This adds no key/coercion/domain policy.
+Perl keeps actual-kind and rejection guards through canonical two-value free
+`has_key` calls and ordinary one-key prefixes:
+
+```text
+has_key({},"k").take(1)                           # undef
+{}.has_key("k").take(1).with(){return("ran")}       # undef; body skipped
+{}.has_key("k").cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
+has_key({},"k").with(){return([value,value.copy()])} # [0,0]
+has_key({},"k").add("bad").with(){return("null")}   # "null"; body runs
+```
+
+Incompatible consumer operands and later bodies stay skipped. A valid null source
+still evaluates its key exactly once before producing the numeric false flag:
+
+```text
+source=undef; order=""; calls=0;
+out={order=cat(order,"S");source}.has_key({
+  calls=num_add(calls,1);order=cat(order,"K");source={"k":1};"k"
+}).cat({order=cat(order,"C");"!"});
+# out="0!", order="SKC", calls=1, source={"k":1}
+```
+
+The key checks the captured null source even though its expression creates a new
+working Hash. Legitimate false/null/empty results enter `with`; an Array returned
+by the body accepts Array methods. Focused native/fresh Perl paths have ready
+ActionIR metadata. Regenerate emitted Perl parsers. Other backends independently
+assess the guards, preserving their existing presence flags, key domains and
+source/key/copy/default behavior.
 
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`

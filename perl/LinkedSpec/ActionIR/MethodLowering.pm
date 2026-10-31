@@ -1844,6 +1844,23 @@ sub _ordinary_free_emptiness_result_source {
  return 1
 }
 
+# Presence flags keep their numeric producer and source/key domains.
+# Only canonical ordinary two-value calls join result-kind guards.
+sub _ordinary_free_has_key_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') eq 'has_key'
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 2;
+ foreach my $value (@{$call->{args}}) {
+  return 0 unless ref($value) eq 'HASH'
+   && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+ }
+ return 1
+}
+
 # Retained constructors keep their typed payload and list-context producer.
 # Only ordinary boxed forms join result guards; selectors and splices stay out.
 sub _ordinary_constructor_result_source {
@@ -5563,11 +5580,23 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Presence sources and one-key prefixes retain rejection across kind
+  # transitions while preserving source-before-key evaluation and snapshots.
+  my $ordinary_has_key_result_chain = (_ordinary_free_has_key_result_source($receiver)
+    || (($calls->[0]{method} // '') eq 'has_key'
+     && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'has_key'
+     && ref($calls->[0]{args}) eq 'ARRAY' && @{$calls->[0]{args}} == 1
+     && !(grep { ref($_) ne 'HASH'
+       || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
     || $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
     || $free_numeric_result_source || $ordinary_number_receiver_prefix
     || $ordinary_logical_result_source || $ordinary_lexical_result_chain
-    || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain)
+    || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
+    || $ordinary_has_key_result_chain)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -5757,7 +5786,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
      my $kind = $array_method ? 'ARRAY' : 'HASH';
      my $rejected = defined($rejection_flag)
       ? 'do { '.$rejection_flag.' = 1; undef }' : 'undef';
-     $expression = "ref($value_expr) eq '$kind' ? ($expression) : $rejected";
+     my $kind_matches = "ref($value_expr) eq '$kind'";
+     # A leading presence receiver accepts null and still evaluates its key.
+     # Later incompatible consumers keep the existing rejection guard.
+     if ($ordinary_has_key_result_chain && $method eq 'has_key'
+         && $call == $calls->[0] && !_ordinary_free_has_key_result_source($receiver)) {
+      $kind_matches = "(!defined($value_expr) || $kind_matches)";
+     }
+     $expression = "$kind_matches ? ($expression) : $rejected";
     } elsif ($method ne 'copy' && $method ne 'coalesce_nonempty') {
      $family = 'scalar_result' if $family eq 'selected';
     }
@@ -5965,6 +6001,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $free_string_result_source
    || $free_numeric_result_source || $ordinary_number_receiver_prefix
    || $ordinary_lexical_result_chain || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
+   || $ordinary_has_key_result_chain
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
@@ -5992,7 +6029,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
      if $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
       || $free_numeric_result_source || $ordinary_number_receiver_prefix
       || $ordinary_logical_result_source || $ordinary_lexical_result_chain
-      || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain;
+      || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
+      || $ordinary_has_key_result_chain;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')
