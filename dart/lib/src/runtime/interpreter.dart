@@ -4084,6 +4084,7 @@ final class LinkedSpecRuntimeEngine {
               _isOrdinaryLexicalResultChain(receiver, calls) ||
               _isOrdinaryDefinednessResultChain(receiver, calls) ||
               _isOrdinaryEmptinessResultChain(receiver, calls) ||
+              _isOrdinaryStringPredicateResultChain(receiver, calls) ||
               _isOrdinaryHasKeyResultChain(receiver, calls) ||
               _isOrdinaryLogicalResultChain(receiver, calls) ||
               _isInputCursorValueSource(receiver) ||
@@ -6051,6 +6052,90 @@ final class LinkedSpecRuntimeEngine {
         (first.sourceMethod ?? first.method) == first.method &&
         first.args.length == 1 &&
         ordinaryArgs(first.args);
+  }
+
+  // Retain numeric text flags, Bool matches and existing regex operand policy.
+  // Canonical free-two calls and one-operand prefixes keep actual-kind guards.
+  bool _isOrdinaryStringPredicateResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.isEmpty ||
+        calls.any(
+          (call) =>
+              traversal.contains(canonicalActionHelperName(call.method)) ||
+              ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+                  canonicalActionHelperName(call.method) != 'with'),
+        )) {
+      return false;
+    }
+    bool ordinaryArgs(String method, List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      for (var index = 0; index < arguments.length; index++) {
+        final value = arguments[index].value;
+        if (value is ActionRegexLiteralExpr) {
+          if (method != 'matches' || index + 1 != arguments.length) {
+            return false;
+          }
+          continue;
+        }
+        final ordinary = switch (value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        };
+        if (!ordinary) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    if (receiver is ActionCallExpr &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg) {
+      final validArity = switch (receiver.name) {
+        'starts_with' ||
+        'ends_with' ||
+        'contains_substr' ||
+        'matches' => receiver.args.length == 2,
+        _ => false,
+      };
+      if (validArity && ordinaryArgs(receiver.name, receiver.args)) {
+        return true;
+      }
+    }
+    final first = calls.first;
+    final validArity = switch (first.method) {
+      'starts_with' ||
+      'ends_with' ||
+      'contains_substr' ||
+      'matches' => first.args.length == 1,
+      _ => false,
+    };
+    return validArity &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        ordinaryArgs(first.method, first.args);
   }
 
   // Preserve constructor payload/pair/splice policy; guard retained boxed forms.

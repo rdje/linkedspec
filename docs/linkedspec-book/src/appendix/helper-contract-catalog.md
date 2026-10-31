@@ -529,9 +529,12 @@ Literal regex operands retain their existing representation and flags. Regenerat
 emitted Perl parsers. Rust now retains the same bounded source/prefix guards on
 native, restored-spec and generated-plan routes. Its text-predicate flags remain
 numeric and regex results Boolean. Existing literal regex operands and modes stay
-on the current producer; rebuild Rust applications/runtime. Dart, Julia and Lua
-guard behavior is assessed independently. Complete text/regex domains, contextual
-use and portable admission remain separate.
+on the current producer; rebuild Rust applications/runtime. Dart likewise retains
+these bounded source/prefix guards on native, restored-spec and generated-plan
+routes, preserving numeric text flags, Boolean regex results and existing literal
+regex operands/modes. Rebuild Dart applications/runtime. Julia and Lua guard
+behavior is assessed independently. Complete text/regex domains, contextual use
+and portable admission remain separate.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`

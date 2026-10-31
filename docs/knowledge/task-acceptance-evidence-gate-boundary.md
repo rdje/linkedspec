@@ -10,8 +10,10 @@ answers:
   - "what should I do if TASK-ACCEPTANCE fires unexpectedly"
   - "what are the known limits of the task acceptance evidence gate"
   - "why does a completed checklist containing Result CodeBlock fail acceptance"
-date: 2026-10-04
-status: current
+  - "does TASK-ACCEPTANCE enforce Dart Julia Lua and shared fixture changes"
+  - "which task owns task-evidence backend-path coverage extension"
+date: 2026-10-31
+status: current limited path scope; P1 extension TYPE-REFERENCE-BOOK.1.2.23.4.3 before admission/push
 tags: [doctrine-enforcement, task-trees, evidence, tooling]
 evidence: "scripts/check_diagnosis_evidence.sh; scripts/check_doctrines.sh; DOCTRINE_ENFORCEMENT.md §10; TOOLBOX.md; docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
 reverify: "bash scripts/check_diagnosis_evidence.sh && bash scripts/check_doctrines.sh && rg -n 'TASK-ACCEPTANCE|check_diagnosis_evidence|Acceptance Checklist' scripts/check_doctrines.sh DOCTRINE_ENFORCEMENT.md TOOLBOX.md docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
@@ -58,3 +60,15 @@ other work described as separately owned, passes the unchanged staged checker.
 The compiler/runtime proof is unaffected; this is a checklist-format constraint.
 
 October4 private splitter frames repeat this documented constraint: two checked lines qualifying separate future production/hooks work use the forbidden literal. The hook rejects TASK-ACCEPTANCE while the other nine doctrines pass. Completed evidence uses separately owned wording; future leaf statuses and the checker remain unchanged.
+
+October31 Dart70.3 confirms that the explicit path list above omits `dart/`,
+`julia/`, `lua/` and `tests/`. The actual staged Dart interpreter/test candidate
+returns exit0 with the no-governed-changes message; that result enforces no
+checklist for the candidate. Its completed six-label leaf and focused results are
+manually reviewed. The retained task-acceptance-backend-scope-intake.json.gz binds
+the gate/instrument/source inputs and actual unchanged candidate/output. This is
+the existing documented coverage limit, not evidence that the listed-path
+implementation failed. P1 TYPE-REFERENCE-BOOK.1.2.23.4.3 owns path inventory and
+real alternate-index missing/complete-evidence controls after ordinary feature
+coverage/pressure20.1, before admission/push. No broader omission population or
+full shape-gate correctness is inferred from this one candidate.

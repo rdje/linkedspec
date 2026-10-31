@@ -3289,4 +3289,20 @@ Boolean matches. Source-operand SOC snapshots/copy/default/strict arithmetic and
 valid with results remain; incompatible operands/later bodies skip. Focused23
 tests pass on native/restored-spec/generated-plan routes, with eighteen unchanged
 public syntax observations, selected nearest checks and owned formatting. Rebuild
-Rust applications/runtime. Dart70.3/other peers and full admission remain separate.
+Rust applications/runtime. Remaining peers and full admission remain separate.
+
+
+Dart70.3 retains canonical String-predicate source/prefix guards through bridges
+and immediate with. The common kind guard skips incompatible operands/later
+bodies while preserving numeric text flags, Boolean matches, existing literal
+regex/modes, SOC snapshots and valid with results. Focused23 tests pass across
+native/restored-spec/generated-plan routes with fifteen original healthy values,
+one source error and eighteen unchanged public syntax observations. Selected
+nearest checks, fatal owner/test analysis and scoped formatting pass. Rebuild
+Dart applications/runtime. Julia70.4/safe Lua and full admission remain separate.
+
+Admission prerequisite: the task-evidence shape gate currently governs its listed
+Perl/Rust paths; Dart/Julia/Lua and shared fixtures require manual checklist review.
+Feature70.3 includes that review. P1 task23.4.3 owns the backend-path extension and
+missing-evidence rejection controls before full admission/push. Focused feature
+test results do not imply that broader mechanical enforcement is already present.
