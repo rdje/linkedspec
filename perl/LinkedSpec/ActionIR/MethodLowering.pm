@@ -7571,8 +7571,9 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   my $sorted_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);
   return undef unless $sorted_args;
 
+  # Bind this package's sort inputs, not same-named DSL lexicals.
   # Compare scalar copies: cmp must not add string flags to stored elements.
-  my $sort_comparison = 'my ($__ls_sort_left, $__ls_sort_right) = ($a, $b); '
+  my $sort_comparison = 'our ($a, $b); my ($__ls_sort_left, $__ls_sort_right) = ($a, $b); '
    . '(defined($__ls_sort_left) ? $__ls_sort_left : "") cmp '
    . '(defined($__ls_sort_right) ? $__ls_sort_right : "")';
 

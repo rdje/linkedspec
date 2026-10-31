@@ -20,3 +20,20 @@ minimal repair. No caller-name reservation/renaming or new sort-domain/arity/
 deferred/schema authority. Shared7/falsifiers/full source/outputs/actual producers
 are retained in constructor-result-selection-intake.json.gz. No production fix
 claimed at freeze; next61.0 owns a verified repair before any constructor work.
+
+## Bounded repair61.0
+
+The shared comparator now declares package sort inputs inside its own block,
+preventing capture of same-named DSL lexicals while retaining scalar-copy cmp.
+Both direct bare-array and computed paths use it; no package name is hardcoded.
+Same11 groups5healthy/6RED to11PASS on native/fresh packages/metadata. Ten values,
+four healthy observations and original needed-error row are canonically exact.
+Expected7 stays. Named/literal/helper/receiver/constructor/function/completed
+forms, caller values/source once/local return/empty/single/nonmutation/kinds and
+numeric indexes stay. Eight selected existing sort-kind cases and15 sorted_values
+isolation groups pass;24 TAP groups includes a selection-count scaffold. Owner/
+normal syntax0. Added smoke cursor oracle corrected1-to0 because entry I returns
+precede matching; original fixture values unchanged, failed producer retained,
+no engine RED credit. Actual producer/all inputs/epochs: perl-sort-scope-intake.json.gz.
+Regenerate emitted Perl. Canonical new11/shared7 registration stays23.4.1-owned;
+constructor61.1 follows, no sort-domain/arity/deferred/schema/peer/full admission.

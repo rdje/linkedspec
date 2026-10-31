@@ -753,9 +753,17 @@ precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runt
 - **Signature**: `sorted(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a new array sorted in ascending (string/lexicographic) order. Does not mutate the input.
-- **Current Perl caveat**: Working variables or function parameters named `a` and `b` can shadow emitted
-  comparator inputs and leave values unsorted. Other names restore the expected order. This comparator
-  repair is next in the backend handoff; it does not make those valid names reserved.
+- **Perl scope and kinds**: Working variables and function parameters named `a` and `b` remain ordinary
+  legal names. Sorting isolates its comparator inputs and preserves Number/String/Bool/null kinds;
+  comparison does not convert stored numbers to strings. Regenerate older emitted Perl parsers.
+
+```text
+a="same"; b="same";
+items=[3,1]; out=items.sorted();
+return([out,items,a,b]);          # [[1,3],[3,1],"same","same"]
+array(3,1).sorted().last().add(4)  # 7
+sorted([2,"10",1])               # [1,"10",2] (lexicographic)
+```
 
 
 ### `reversed(arr)`
