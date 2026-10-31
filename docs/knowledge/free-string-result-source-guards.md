@@ -8,7 +8,7 @@ answers:
   - "which task owns canonical free String result guards"
   - "does free String source repair change legacy named empty fallback"
 date: 2026-10-31
-status: bounded Perl62.1/Rust62.2/Dart62.3/Julia62.4 targeted-checked; safe Lua/P1 context62.6/full admission separate
+status: all bounded free-source62.1-.5 outcomes recorded; P1 context62.6 immediately next/full admission separate
 tags: [perl, string, source, guards, host, isolation, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.23; free-string-selection-intake.json.gz retains16 public native/fresh/descriptor/substitution/emitted programs, ready/unready qualification and exact fresh package empty/seeded host Hash oracle."
 reverify: "Recover authored cases/public observer/seed producer from free-string-selection-intake.json.gz into new repository-local outputs. Historical activate/create/run/inspect/freeze/finish/retain writers one-shot, never replay. Repair owner62.1 next."
@@ -42,3 +42,5 @@ Rust62.2 ordinary free-source guards repaired: [[rust-free-string-result-guards]
 Dart62.3 ordinary free-source guards repaired: [[dart-free-string-result-guards]]. Receiver-only [ran,KVW] independently confirmed/owned62.6 after62.5/before23.4. Julia62.4 next.
 
 Julia62.4 ordinary free-source guards repaired: [[julia-free-string-result-guards]]. Receiver-only [ran,KVW] independently confirmed/owned62.6 after62.5/before23.4; safe Lua62.5 next.
+
+Safe Lua62.5 ordinary free-source guards repaired: [[lua-free-string-result-guards]]. Both installed hosts independently confirm receiver-only [ran,KVW], P1 context62.6 immediately next/before23.4.

@@ -3561,6 +3561,37 @@ function typed_source.receiver_mutation.is_free_default_result_source(expr)
   return true
 end
 
+-- String helpers keep their original producers/domains; guard canonical ordinary calls.
+function typed_source.receiver_mutation.is_free_string_result_source(expr)
+  if expr == nil or expr.kind ~= "call" or
+    (expr.source_method or expr.name) ~= expr.name or expr.trailing_block_arg then
+    return false
+  end
+  local args = expr.args or {}
+  local count = #args
+  local name = expr.name
+  local valid_arity = ((name == "trim" or name == "lowercase" or name == "uppercase") and count == 1) or
+    (name == "replace_substr" and count == 3) or
+    ((name == "rm_prefix" or name == "rm_suffix") and count == 2) or
+    (name == "substr" and (count == 2 or count == 3)) or
+    (name == "cat" and count >= 2)
+  if not valid_arity then return false end
+  for _, argument in ipairs(args) do
+    if argument.argument_kind ~= "positional" then return false end
+    local value = argument_expr(argument)
+    local kind = value and value.kind
+    if not (kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+      kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+      kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+      kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+      kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+      kind == "assign_nested_access" or kind == "codeblock_literal") then
+      return false
+    end
+  end
+  return true
+end
+
 -- Retained boxed constructors keep their original payload/pair/splice producer.
 function typed_source.receiver_mutation.is_constructor_result_source(expr)
   if expr == nil or expr.kind ~= "call" or
@@ -3696,6 +3727,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     typed_source.receiver_mutation.is_canonical_set_result_source(target_receiver) or
     typed_source.receiver_mutation.is_free_default_result_source(target_receiver) or
     typed_source.receiver_mutation.is_constructor_result_source(target_receiver) or
+    typed_source.receiver_mutation.is_free_string_result_source(target_receiver) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or

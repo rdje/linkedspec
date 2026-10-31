@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1567** facts · **11576** question keys.
+> **1568** facts · **11580** question keys.
 
 ## Questions → fact
 
@@ -1042,6 +1042,7 @@
 - "do Lua execution failures emit semantic result events" -> [lua-semantic-runtime-observation-direct-capture](docs/knowledge/lua-semantic-runtime-observation-direct-capture.md) · 2026-07-28 · reverify: [5 entries](#lua-semantic-runtime-observation-direct-capture)
 - "do Lua expression valued blocks execute" -> [lua-runtime-eager-block-values](docs/knowledge/lua-runtime-eager-block-values.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && perl -Iperl -MLinkedSpec -e 'print LinkedSpec::call_spec_handler_subst(q{Top}, q{set(callback, { return(\"later\") })}), qq{\\n}'`
 - "do Lua flat hash results alias their sources" -> [lua-runtime-harray-construction](docs/knowledge/lua-runtime-harray-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'HASH_SPLICE_HELPERS|sorted_harray_keys|evaluate_hash_helper|runtime copied harray construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
+- "do Lua free String guards preserve null and empty with" -> [lua-free-string-result-guards](docs/knowledge/lua-free-string-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-string-result-guards)
 - "do Lua generated parsers accept a global cursor override" -> [lua-global-cursor-option-removal](docs/knowledge/lua-global-cursor-option-removal.md) · 2026-07-19 · reverify: `tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py`
 - "do Lua generated parsers support markerless default selection" -> [lua-root-rule-selection-routes](docs/knowledge/lua-root-rule-selection-routes.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_root_rule_selection_contract.py`
 - "do Lua generated source workspaces and traces stay on the SSD" -> [lua-project-data-ssd-storage](docs/knowledge/lua-project-data-ssd-storage.md) · 2026-09-20 · reverify: `bash tools/test_lua_project_data_storage.sh && bash tools/run_lua_local.sh`
@@ -3244,6 +3245,7 @@
 - "does foo[\"a\"][9][\"b\"][z] work as direct nested access" -> [terse-direct-access-explicit-segments](docs/knowledge/terse-direct-access-explicit-segments.md) · 2026-09-24 · reverify: `env PERL5LIB= bash tools/project_data_run.sh prove -v -Iperl t/generated_source_contract.t t/trace_actionir_compact_lowerers.t t/phase0_regression.t`
 - "does foo[\"a\"][z] lower as scalar-index on Perl" -> [terse-direct-access-bare-path-atoms](docs/knowledge/terse-direct-access-bare-path-atoms.md) · 2026-10-23 · reverify: `Dated source-bound intake: bash tools/run_python_project_data.sh docs/checkpoints/signed-array-selectors/review.py. No current signed-policy admission.`
 - "does foo[\"a\"][z] lower as scalar-index on Perl" -> [terse-scalar-bare-read-seams](docs/knowledge/terse-scalar-bare-read-seams.md) · 2026-06-29 · reverify: `bash tools/project_data_run.sh env PERL5LIB= perl -Iperl -MLinkedSpec -e 'for(q{return(count)},q{items += value},q{meta[key]=value},q{push(Child,items)}){print LinkedSpec::call_spec_handler_subst(q{Top},$_),chr(10)}'`
+- "does free String guard repair add Lua interpreter chunk locals" -> [lua-free-string-result-guards](docs/knowledge/lua-free-string-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-string-result-guards)
 - "does free String guard repair preserve null and empty with inputs" -> [perl-free-string-result-guards](docs/knowledge/perl-free-string-result-guards.md) · 2026-10-31 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/free_string_result_composition.t t/free_string_source_fences.t t/scalar_string_result_receiver_contract.t t/constructor_result_composition.t`
 - "does free String repair promote receiver-only invalid bridge contexts" -> [perl-free-string-result-guards](docs/knowledge/perl-free-string-result-guards.md) · 2026-10-31 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/free_string_result_composition.t t/free_string_source_fences.t t/scalar_string_result_receiver_contract.t t/constructor_result_composition.t`
 - "does free String source repair change legacy named empty fallback" -> [free-string-result-source-guards](docs/knowledge/free-string-result-source-guards.md) · 2026-10-31 · reverify: `Recover authored cases/public observer/seed producer from free-string-selection-intake.json.gz into new repository-local outputs. Historical activate/create/run/inspect/freeze/finish/retain writers one-shot, never replay. Repair owner62.1 next.`
@@ -9107,6 +9109,7 @@
 - "which Lua owner guards canonical set result methods" -> [lua-canonical-set-result-guards](docs/knowledge/lua-canonical-set-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-canonical-set-result-guards)
 - "which Lua owner guards explicit push snapshot methods" -> [lua-push-snapshot-result-guards](docs/knowledge/lua-push-snapshot-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-push-snapshot-result-guards)
 - "which Lua owner guards free coalesce result methods" -> [lua-free-default-result-guards](docs/knowledge/lua-free-default-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-default-result-guards)
+- "which Lua owner guards free trim and uppercase result consumers" -> [lua-free-string-result-guards](docs/knowledge/lua-free-string-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-string-result-guards)
 - "which Lua owner guards gap_kind result methods" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
 - "which Lua owner guards retained Array and Hash constructor result methods" -> [lua-constructor-result-guards](docs/knowledge/lua-constructor-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-constructor-result-guards)
 - "which Lua owner guards static rule-call result selections" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
@@ -10933,6 +10936,7 @@
 - "why does a Dart semantic callback expose RuntimeSemanticObservationSinkFailure" -> [dart-semantic-observer-action-failure-wrapping](docs/knowledge/dart-semantic-observer-action-failure-wrapping.md) · 2026-09-09 · reverify: `Run DART_OBSERVER_ACTION, the managed Dart invocation and DART_OBSERVER_ACTION_VERIFY below; assertions describe pre-repair output.`
 - "why does a Hash default sorted_values first uppercase return null" -> [rust-coalesce-evaluation-drift](docs/knowledge/rust-coalesce-evaluation-drift.md) · 2026-10-30 · reverify: [5 entries](#rust-coalesce-evaluation-drift)
 - "why does a Julia receiver-only trim split set_key with chain run KVW" -> [julia-free-string-result-guards](docs/knowledge/julia-free-string-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; const REPO_ROOT=pwd(); include(ARGS[1]); include(ARGS[2]); include(ARGS[3])' julia/test/free_string_result_composition_test.jl julia/test/scalar_string_results_test.jl julia/test/constructor_result_composition_test.jl`
+- "why does a Lua receiver-only trim split set_key with chain run KVW" -> [lua-free-string-result-guards](docs/knowledge/lua-free-string-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-string-result-guards)
 - "why does a Perl CLI failure write trace to stdout" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "why does a Perl callback failure return null without last_error in a collecting parent" -> [perl-collecting-parent-runtime-error-loss](docs/knowledge/perl-collecting-parent-runtime-error-loss.md) · 2026-10-28 · reverify: `Recover probe_capture_reset_native_error.pl; use tools/project_data_run.sh env PERL5LIB= perl -Iperl. It enables debug only after Get compilation; inspect rule_handler_eval:Value and invoke_top_rule:Top context.`
 - "why does a Perl codeblock return 1 instead of true" -> [perl-codeblock-boolean-literal-kind-drift](docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md) · 2026-10-24 · reverify: `bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-kinds/publish.py; current: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t t/scalar_numeric_contract.t`
@@ -14197,7 +14201,7 @@ _Canonical free defaults need actual-kind result source guards_
 ### free-string-result-source-guards
 _Canonical free String-helper results lack guarded source roles and can read host Hashes_
 - **answers:** why does trim tail take return an empty Array instead of null | why does uppercase tail set_key read a host package Hash | can a correct null value hide unsupported with lowering | which task owns canonical free String result guards | does free String source repair change legacy named empty fallback
-- **date:** 2026-10-31 · **status:** bounded Perl62.1/Rust62.2/Dart62.3/Julia62.4 targeted-checked; safe Lua/P1 context62.6/full admission separate
+- **date:** 2026-10-31 · **status:** all bounded free-source62.1-.5 outcomes recorded; P1 context62.6 immediately next/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.23; free-string-selection-intake.json.gz retains16 public native/fresh/descriptor/substitution/emitted programs, ready/unready qualification and exact fresh package empty/seeded host Hash oracle.`
 - **reverify:** `Recover authored cases/public observer/seed producer from free-string-selection-intake.json.gz into new repository-local outputs. Historical activate/create/run/inspect/freeze/finish/retain writers one-shot, never replay. Repair owner62.1 next.`
 - **source:** [`docs/knowledge/free-string-result-source-guards.md`](docs/knowledge/free-string-result-source-guards.md)
@@ -16513,6 +16517,14 @@ _Safe Lua free and receiver defaults retain actual-kind result guards_
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.60.5; free-default-lua-intake.json.gz retains same91 checks63PASS28RED to91PASS per host, six nearest programs/loadfile/version and actual producers/inputs/results;63 includes seven compile scaffolds.`
 - **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/free_default_result_composition_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/free_default_result_composition_test.lua`
 - **source:** [`docs/knowledge/lua-free-default-result-guards.md`](docs/knowledge/lua-free-default-result-guards.md)
+
+### lua-free-string-result-guards
+_Safe Lua canonical free String calls reuse namespace and common kind guards_
+- **answers:** which Lua owner guards free trim and uppercase result consumers | do Lua free String guards preserve null and empty with | why does a Lua receiver-only trim split set_key with chain run KVW | does free String guard repair add Lua interpreter chunk locals
+- **date:** 2026-10-31 · **status:** bounded installed PUC5.5.1/LuaJIT62.5 targeted-checked; P1 context62.6 immediately next/before23.4
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.62.5; free-string-lua-intake.json.gz retains same86 66PASS20RED to86PASS per host, independent context/nearest/loadfile/version and all actual producers/inputs.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/free_string_result_composition_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/free_string_result_composition_test.lua`
+- **source:** [`docs/knowledge/lua-free-string-result-guards.md`](docs/knowledge/lua-free-string-result-guards.md)
 
 ### lua-frontend-ast-json-contract
 _Lua source AST nodes round-trip the neutral provenance and body-variant contract_

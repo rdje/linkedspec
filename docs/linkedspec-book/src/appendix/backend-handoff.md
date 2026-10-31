@@ -3136,20 +3136,17 @@ No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.
 
 
-Feature62 targets canonical free String-helper source guards. Perl now guards
-ordinary canonical calls across native/fresh execution, preserving source effects,
-actual scalar kinds, compatible/Array bridges and valid null/empty with inputs.
-Incompatible consumers skip arguments/later bodies. The confirmed fresh-package
-symbolic host Hash case now returns null with both empty and seeded host data.
-Regenerate emitted Perl parsers. Rust now guards ordinary canonical free String
-results on native/restored compiled specs/in-process plans; rebuild Rust apps/runtime.
-Its receiver-only invalid String-Array-Hash with tail remains a separate owned
-repair before admission. Dart now also guards ordinary canonical free String
-results on native/restored specs/in-process plans; rebuild Dart apps/runtime. Its
-receiver-only incompatible bridge is independently confirmed and scheduled with
-Rust before admission. Julia also guards ordinary canonical free String results
-across native/restored specs/plans/fresh Modules; rebuild Julia apps/runtime. Its
-receiver-only incompatible bridge is independently confirmed and scheduled with
-Rust/Dart before admission. Safe installed Lua62.5 is next;
-no general host isolation, native-seeded, domain/context or full admission follows.
-The Perl receiver-only invalid bridge remains an explicit unready fence.
+Feature62 guards canonical ordinary free String-helper results on Perl, Rust,
+Dart, Julia and installed PUC5.5.1/LuaJIT2.1.1788460057. Incompatible Array/Hash
+consumers skip their arguments and later immediate `with` bodies. Source effects,
+actual scalar kinds, compatible methods, split/select bridges and legitimate
+null/empty `with` inputs remain intact. Perl's confirmed fresh-package symbolic
+host Hash case returns null with both empty and seeded host data; this does not
+establish general host isolation. Regenerate emitted Perl and rebuild backend
+applications/runtime. Recorded native/restored/plan/fresh routes remain qualified
+by backend; declared Lua5.4, complete domains and full portable admission remain open.
+
+A separate receiver-only String-to-Array-to-incompatible-Hash chain ending in
+`with` still runs rejected operands/body on Rust, Dart, Julia and both tested Lua
+hosts. That P1 repair is immediately next, before admission. The Perl counterpart
+remains an explicit unready fence, requiring its own admission assessment.

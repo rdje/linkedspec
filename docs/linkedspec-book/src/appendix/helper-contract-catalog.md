@@ -385,7 +385,8 @@ arities and complete admission remain separate. See the backend handoff.
   ```
   Input `[  hello  ]` → `["hello"]` (capture group `0` is the bracketed, padded text).
 
-Perl, Rust, Dart and Julia canonical ordinary free calls also retain actual-kind guards through
+Perl, Rust, Dart, Julia and the tested Lua hosts retain actual-kind guards through
+canonical ordinary free calls,
 compatible methods and explicit Array bridges:
 
 ```text
@@ -398,9 +399,10 @@ trim(undef).with(){return("recovered")}        # recovered
 Incompatible consumer arguments and later immediate `with` bodies stay skipped;
 legitimate empty Arrays and null values still enter `with`. Scalar identities
 remain Number/Boolean where the original producer preserves them. Regenerate
-emitted Perl parsers and rebuild Rust/Dart/Julia applications/runtime to pick up these guards.
-Other backends are assessed independently; legacy named aggregate fallback, malformed/alias/regex mutation
-forms and broader unsupported receiver contexts remain separate. Rust, Dart and Julia receiver-only
+emitted Perl parsers and rebuild Rust/Dart/Julia/Lua applications/runtime to pick up
+these guards. Lua coverage is PUC5.5.1 and LuaJIT2.1.1788460057.
+Legacy named aggregate fallback, malformed/alias/regex mutation forms and broader
+unsupported receiver contexts remain separate. Rust, Dart, Julia and tested Lua receiver-only
 String-to-Array-to-incompatible-Hash chains ending in `with` still run rejected
 arguments/body; that separate repair is scheduled before admission.
 
