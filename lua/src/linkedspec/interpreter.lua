@@ -4187,9 +4187,9 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     -- Earlier incompatible consumers return before this step.
     local nullable_membership = value == json.null and canonical_name == "contains" and
       typed_source.receiver_mutation.is_ordinary_contains_result_chain(nil, {call})
-    -- A leading null index source keeps its existing needle evaluation.
-    -- Later container consumers reject; copy-state closure remains separate.
-    local nullable_index = index == 1 and value == json.null and canonical_name == "index_of" and
+    -- Copy preserves legitimate null; earlier rejection has already
+    -- returned before this canonical index consumer.
+    local nullable_index = value == json.null and canonical_name == "index_of" and
       typed_source.receiver_mutation.is_ordinary_index_result_chain(nil, {call})
     -- Copied, computed and reduced values keep actual kinds through bridges.
     -- Check container-only consumers before evaluating their operands.
@@ -4202,7 +4202,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     end
     -- Reducers yield scalars; array/hash-only consumers remain invalid until
     -- a compatible helper produces a container. Case maps live with string helpers.
-    if scalar_result and not nullable_presence and not nullable_membership and (array_only or PURE_HASH_HELPERS[canonical_name]) then
+    if scalar_result and not nullable_presence and not nullable_membership and not nullable_index and (array_only or PURE_HASH_HELPERS[canonical_name]) then
       return json.null
     end
     if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then

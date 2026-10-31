@@ -1,0 +1,17 @@
+---
+id: lua-copied-null-index
+title: Lua nullable index crosses both guards while rejection exits early
+answers:
+  - "does Lua copied null index_of evaluate its needle and propagate errors"
+  - "which Lua guards need the nullable index exception"
+  - "why does Lua retain index after nullable index changes"
+date: 2026-10-31
+status: bounded installed-host72.6.5 targeted-checked; declared5.4/full admission separate
+tags: [lua, index_of, copy, null, rejection, runtime]
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.72.6.5; copied-null-index-lua-intake.json.gz retains unchanged70/raw phases/eight actual files/four consumers/two inline diagnostics/strict numeric checks/actual versions and phase identities."
+reverify: "Run lua/test/copied_null_index_composition_test.lua and selected index/contains-copy/value-copy nearest tests with tools/run_lua_project_data.sh for puc and luajit. Recover historical selector into new project-local outputs; writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference."
+---
+
+Safe Lua72.6.5 restores canonical copied-null index needles on installed PUC5.5.1/LuaJIT2.1.1788460057: independent unchanged seventy strict JSON-kind checks42PASS28RED become70PASS per host on native/restoredSpec/plan/fresh module. Baseline42 includes seven failed-group compile scaffolds. Shared12 plus two source-exact original diagnostics retain thirteen values/one needed needle error; seven healthy rejection/wrong-kind/Array snapshot/index/direct-null observations stay exact and accepted host values agree. Copied-null/free-copy/free-index forms agree at null/ABC; miss!/SNC/calls1/source snapshots, repeated copy, valid null with/numeric copy and binding_kind_mismatch needle error are restored. Existing namespace canonical one-needle nullable_index crosses common/scalar guards; remove only leading-step restriction. Earlier incompatible consumers still return before later effects. Retain loop index for separate Array mutation target gate. Three runner lines/no new interpreter chunk locals; source/scalar_result assignment/producer/with/preflight/equality/index0-null/null-empty/copy depth/snapshots/excluded traversal/deferred/function/parser/schema stay. Per-host nearest index106/contains-copy55/value-copy four programs/twelve route observations/loadfile/actual versions pass, accepted-nearest-version stderr empty. Eight actual literal/stem files/four consumers/two inline original diagnostics/per-phase identities and203 other activation inputs exact at behavioral epochs, not complete transitive generation closure. Actual source/producers/templates/inputs/commands/raw phases/deltas retained in copied-null-index-lua-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; rebuild Lua apps/runtime. All bounded primary72/copied-null72.6 outcomes recorded; remaining method selection23.1.34 next. Manual checklist under23.4.3 scope limit; general isolation/full23.4/pressure/registration/input-custody/task-evidence/declared5.4 admission remain separate. No unsafe full runner/formatter/isolated package/full suite or push.
+
+Existing namespace nullable_index qualification applies to current json.null at common and scalar guards. Earlier rejection already returns. The loop index still restricts Array mutation targets to the leading step. No new interpreter chunk locals; source/scalar_result assignment and with evaluation stay unchanged.

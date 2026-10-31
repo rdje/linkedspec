@@ -1111,24 +1111,35 @@ Numeric0/null/no-match, equality, source snapshots, needed errors, compatible
 defaults, String-to-Array and `with`-returned Array bridges remain. Lua checks use
 installed PUC5.5.1/LuaJIT; declared5.4 remains separate.
 
-Copied-null index composition has a bounded known gap on installed
-Lua: `{undef}.copy().index_of(needle)` skips the needle, including needed errors,
-while free-copy/free-index forms evaluate it. Repeated copies and copied valid
-null results share this gap; peer repairs remain queued before unrelated selection.
-Perl/Rust/Dart/Julia canonical index/copy chains retain prior rejection with and
-without `with`, while legitimate null evaluates its needle. Regenerate emitted Perl
-and rebuild Rust/Dart/Julia apps/runtime. These examples are targeted-checked on
-Perl/Rust/Dart/Julia; they remain installed Lua repair targets:
+Ordinary Perl/Rust/Dart/Julia/installed Lua preserve nullable index calls after copy.
+These forms evaluate a needed needle once and return undef for legitimate null:
+
+```text
+{undef}.copy().index_of(needle)
+copy({undef}).index_of(needle)
+index_of(copy({undef}),needle)
+{undef}.copy().copy().index_of(needle)
+```
+
+Copied legitimate null results from numeric methods or `with` retain this behavior,
+including needed needle errors. Earlier rejected consumers stop the chain before
+later copy, needle, default or `with` effects:
 
 ```text
 order=""; out={undef}.copy().index_of({order=cat(order,"N");"a"})
-# Perl/Rust/Dart/Julia: out=undef, order="N"; remaining Lua target
+# out=undef, order="N"
+index_of(["a"],"a").add("bad").with(){return(undef)}.copy().index_of(needle)
+# undef; needle runs once after the legitimate null result
 index_of(["a"],"a").take(1).copy().index_of(needle)
 # undef; needle skipped after rejected take
+["a"].copy().index_of("a")           # numeric0
+[undef,""].copy().index_of("")      # numeric1; null differs from empty
 ```
 
-Equality, index0/null identity, copy depth and snapshots stay; this grants no
-general nullable Array, domain/context or portable-admission policy.
+Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia/Lua apps/runtime. Lua
+checks use installed PUC5.5.1/LuaJIT; declared5.4 remains open. Equality, index0/null
+identity, copy depth and snapshots stay; these bounded controls grant no general
+nullable Array, domain/context or portable-admission policy.
 
 Canonical Perl `index_of` accepts computed source and needle value blocks:
 

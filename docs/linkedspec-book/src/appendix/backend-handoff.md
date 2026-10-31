@@ -3489,3 +3489,12 @@ Separate Array-end call_index restriction and source/scalar_result assignment/wi
 preflight stay. Same70 strict-kind assertions/nearest173/strict depwarn pass with
 qualified precompile/cache-lock notices and injected-warning rejection. Rebuild
 Julia apps/runtime. Safe Lua remains before unrelated selection; admission separate.
+
+
+Safe Lua72.6.5 restores copied-null index through both guards in the existing
+namespace, retaining separate loop-index mutation restriction and source/scalar
+assignment/with behavior. Installed PUC5.5.1/LuaJIT2.1.1788460057 pass70 strict
+checks per host/four routes, nearest index106/contains-copy55/value-copy four
+programs/twelve route observations/loadfile/versions with empty accepted stderr.
+Rebuild Lua apps/runtime. All bounded72/72.6 outcomes recorded; remaining method
+selection follows. Declared5.4/general isolation/full admission remain separate.

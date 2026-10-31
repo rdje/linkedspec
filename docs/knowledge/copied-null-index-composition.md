@@ -7,7 +7,7 @@ answers:
   - "which task owns copied-null index errors and effects"
   - "are fluent and free copied-null index calls equivalent"
 date: 2026-10-31
-status: Perl72.6.1/Rust72.6.2/Dart72.6.3/Julia72.6.4 targeted-checked; independent installed Lua nullable index next
+status: all bounded72.6 backend outcomes targeted-checked on recorded routes/hosts; full admission separate
 tags: [copy, null, index_of, rejection, source, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.72.6.0; copied-null-index-assessment-intake.json.gz retains actual fourteen controls/four peer shapes/declared inputs/actual Cargo consumer/raw channels/public lowering/setup qualification."
 reverify: "Recover observers/shared12 into new project-local outputs with project-data wrappers; qualify Perl native context errors and bind actual Cargo-consumed source before/after. Historical activation/freeze writers are one-shot."
@@ -24,3 +24,5 @@ Independent Rust nullable index/needle effects and retained rejection: [[rust-co
 Independent Dart common/scalar nullable index and needed needle effects: [[dart-copied-null-index]]. Historical assessment observations above retain their epoch.
 
 Independent strict Julia common/scalar nullable index and needed needle effects: [[julia-copied-null-index]]. Historical assessment observations above retain their epoch.
+
+Independent installed-host nullable index across both guards: [[lua-copied-null-index]]. All bounded72.6 outcomes recorded; historical assessment failures retain their epoch. General isolation/full admission remain separate.
