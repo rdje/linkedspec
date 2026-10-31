@@ -4,7 +4,7 @@ Owner: TYPE-REFERENCE-BOOK.1.2.23.1.23; family23.3.62. Existing authority:
 scalar-string-results.md19, scalar-text/numeric/uniform binding contracts and
 current catalog. This extends the ordinary canonical free-call source role,
 without changing existing String producers or input/signature policies.
-Status: Bounded Perl62.1/Rust62.2/Dart62.3 targeted-checked; Julia/Lua/separate receiver-context/full admission pending.
+Status: Bounded Perl62.1/Rust62.2/Dart62.3/Julia62.4 targeted-checked; safe Lua/separate receiver-context/full admission pending.
 
 Retain trim/lowercase/uppercase(one positional), replace_substr(three),
 rm_prefix/rm_suffix(two), character substr(two or three), cat(two-or-more).
@@ -125,3 +125,7 @@ unready classification. trim marks scalarResult; split returns List and clears
 it, while literal-root kindGuardedResult stays false. Hash arguments and later
 with run. P1 context62.6 after62.5/before23.4 owns Dart alongside Rust. No fresh
 isolated/exhaustive excluded-runtime/general isolation/full admission claim.
+
+## Bounded Julia62.4 free-source guards
+
+Julia62.4 repairs canonical ordinary free String result guards: same86 assertions66PASS20RED to86PASS native/restoredSpec/in-process plan/fresh Module;66 includes five partial-group route-key scaffolds and the observed defective receiver context, not66 healthy value assertions. Fifteen values/ten original healthy observations/qualified needed error/nine public syntax shapes/independent receiver context canonically exact. Canonical eight-helper ordinary positional arity/recognized-value predicate/current common guard and one runner include only; original String producers/Unicode/Number0-Boolfalse identities/null/eager snapshots/signatures/domains/with/function/copy/alias/deferred/parser/schema/remaining interpreter unchanged; 178 other inputs exact. Invalid arguments/later with skip; source once/order/local returns/split-select bridges/legitimate null-empty with preserved. Nearest scalar String54/constructor116 and strict depwarn pass, standalone Main imports/derived REPO_ROOT supplied; standard precompile retained. Receiver-only invalid Array-to-Hash with independently returns[ran,KVW] on all four routes before/after; P1 context62.6 after62.5/before23.4 owns Julia alongside Rust/Dart, no healthy credit or imported Perl unready policy. Actual producers/all inputs/results in free-string-julia-intake.json.gz. Book/cards/map/target/task/roadmap/live/resume/history align; rebuild Julia apps/runtime. Safe Lua62.5 next; no isolated package/exhaustive excluded-runtime/general isolation/full admission claim.

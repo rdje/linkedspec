@@ -6291,6 +6291,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_canonical_set_result_source(chain.receiver) ||
         _runtime_is_free_default_result_source(chain.receiver) ||
         _runtime_is_constructor_result_source(chain.receiver) ||
+        _runtime_is_free_string_result_source(chain.receiver) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6406,6 +6407,38 @@ function _runtime_is_free_default_result_source(expression)
     something(expression.source_method, expression.name) == expression.name || return false
     expression.trailing_block_arg && return false
     length(expression.args) >= 2 || return false
+    all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
+    return all(arg -> arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, expression.args)
+end
+
+# String helpers keep their original producers/domains; guard canonical ordinary calls.
+function _runtime_is_free_string_result_source(expression)
+    expression isa ActionCallExpr || return false
+    something(expression.source_method, expression.name) == expression.name || return false
+    expression.trailing_block_arg && return false
+    count = length(expression.args)
+    valid_arity = if expression.name in ("trim", "lowercase", "uppercase")
+        count == 1
+    elseif expression.name == "replace_substr"
+        count == 3
+    elseif expression.name in ("rm_prefix", "rm_suffix")
+        count == 2
+    elseif expression.name == "substr"
+        count in (2, 3)
+    elseif expression.name == "cat"
+        count >= 2
+    else
+        false
+    end
+    valid_arity || return false
     all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
     return all(arg -> arg.value isa Union{
         ActionVariableExpr, ActionNumberLiteralExpr,

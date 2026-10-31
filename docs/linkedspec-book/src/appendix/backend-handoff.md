@@ -3147,6 +3147,9 @@ Its receiver-only invalid String-Array-Hash with tail remains a separate owned
 repair before admission. Dart now also guards ordinary canonical free String
 results on native/restored specs/in-process plans; rebuild Dart apps/runtime. Its
 receiver-only incompatible bridge is independently confirmed and scheduled with
-Rust before admission. Independent Julia62.4 is next, then Lua;
+Rust before admission. Julia also guards ordinary canonical free String results
+across native/restored specs/plans/fresh Modules; rebuild Julia apps/runtime. Its
+receiver-only incompatible bridge is independently confirmed and scheduled with
+Rust/Dart before admission. Safe installed Lua62.5 is next;
 no general host isolation, native-seeded, domain/context or full admission follows.
 The Perl receiver-only invalid bridge remains an explicit unready fence.
