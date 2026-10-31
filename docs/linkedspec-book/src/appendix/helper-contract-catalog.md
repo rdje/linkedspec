@@ -388,14 +388,23 @@ These are existing Perl compatibility controls; peer Boolean results keep their
 existing arithmetic rules. This does not establish a portable scalar-kind or
 host-cache rule.
 
-The next bounded guard repair covers canonical one-value free definedness calls
-and ordinary zero-operand predicate prefixes. Current Perl can turn an incompatible
-`is_defined(undef).take(1)` into an empty Array, or execute a later `with` body
-after rejection; a receiver Array bridge can return null with unsupported `with`
-metadata. Feature67 owns these guard/readiness cases. The free `cat`/`split`
-bridge already guards correctly. Compatible scalar chains, source snapshots,
-numeric compatibility and valid false/null/empty `with` remain preservation
-controls. Peer backends are assessed independently with their existing Bool kinds.
+Perl retains actual-kind and rejection guards through canonical one-value free
+definedness calls and ordinary zero-operand predicate prefixes:
+
+```text
+is_defined(undef).take(1)                         # undef
+undef.is_defined().take(1).with(){return("ran")}   # undef; body skipped
+undef.is_defined().cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
+is_defined(undef).with(){return([value,value.copy()])} # ["",""]
+is_defined(undef).add("bad").with(){return("null")}   # "null"; body runs
+```
+
+Incompatible consumer operands and later bodies stay skipped; source expressions
+still run once in order. Valid false/null/empty results enter `with`, and an Array
+returned by a valid body can continue with Array methods. These native/fresh Perl
+paths have ready ActionIR metadata. Regenerate emitted Perl parsers. Peer backends
+are assessed independently with existing Bool results; predicate domains and
+Perl numeric compatibility remain unchanged.
 
 ### `trim(s)`
 - **Signature**: `trim(value: scalar)`

@@ -110,3 +110,5 @@ producer, all retained inputs, observed classifier RED and current regression.
 Only a provisional authored expected value was corrected, in a separate epoch;
 no runtime repair or product RED is claimed. Source-guard composition remains
 parent28's next bounded feature, with independent backend assessment.
+
+Canonical free-one and ordinary zero-RHS definedness source/prefix guard composition is repaired by Perl67.1: [[definedness-result-source-guards]]. Existing predicate/numeric/copy/default compatibility unchanged; peer baselines/full23.4 remain separate.

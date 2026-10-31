@@ -14104,7 +14104,7 @@ _Dart preserves v1 fixed functions and executes v2 variadic functions natively a
 ### definedness-result-source-guards
 _Definedness result source roles and later with guards_
 - **answers:** why does is_defined take return an empty Array instead of null | why does a rejected definedness result still run with | why does a definedness receiver Array bridge report unsupported with | which task owns definedness source and prefix guards | does the free definedness cat split bridge already retain guards
-- **date:** 2026-10-31 · **status:** frozen67; independent backend implementations pending
+- **date:** 2026-10-31 · **status:** bounded Perl67.1 targeted-checked; independent Rust67.2/peers/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.28; definedness-guard-selection-intake.json.gz retains original21/calibrated21/public observer/all inputs; compatibility calibration28.0 retained separately.`
 - **reverify:** `Recover original source/public observer/shared21 from retained intake into new project-local outputs. Historical activation/run/freeze writers one-shot never replay. Owners67.1-.5 independently baseline, peers select expected_nonperl where present.`
 - **source:** [`docs/knowledge/definedness-result-source-guards.md`](docs/knowledge/definedness-result-source-guards.md)

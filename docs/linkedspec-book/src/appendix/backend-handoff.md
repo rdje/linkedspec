@@ -3201,3 +3201,11 @@ and rebuild Rust/Dart/Julia/Lua apps/runtime. Focused native/restored/plan/error
 and recorded fresh Perl/Julia/Lua routes pass with original source errors preserved.
 Lua uses installed PUC5.5.1/LuaJIT; declared5.4, existing null/Unicode qualifications
 and canonical full source/domain/context admission remain separate.
+
+
+Perl feature67 retains definedness source/ordinary zero-operand prefix guards
+through Array bridges and later immediate with. Rejected consumers skip operands/
+bodies; native numeric-slot/text/copy/default compatibility and legitimate false/
+null/empty with stay. Regenerate emitted Perl parsers. Focused native/fresh/
+readiness/error and nearest compatibility controls pass; independent Rust/peer
+Bool baselines and full source/domain/context admission remain separate.
