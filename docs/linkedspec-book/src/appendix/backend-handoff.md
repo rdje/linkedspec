@@ -3454,3 +3454,10 @@ locals and separate mutation restriction stay; rebuild Lua apps/runtime. All
 bounded primary72 outcomes are recorded. Mandatory copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.
+
+
+Copied-null index assessment72.6.0 independently finds Perl rejection loss through
+copy and peer nullable-needle/error suppression after receiver copy. Reference
+rejection-state repair72.6.1 precedes Rust/Dart/Julia/safe Lua nullable index fixes.
+Shared12 and two unchanged original null diagnostics distinguish those states,
+strict index0/null values and source snapshots. Full admission remains separate.

@@ -1109,9 +1109,25 @@ index_of(["a"],"z").with(){return("missing")} # "missing"; legitimate null
 
 Numeric0/null/no-match, equality, source snapshots, needed errors, compatible
 defaults, String-to-Array and `with`-returned Array bridges remain. Lua checks use
-installed PUC5.5.1/LuaJIT; declared5.4 remains separate. Copied-null needle effects and rejection still have
-a mandatory follow-up under existing copy/null authority; this bounded repair
-grants no general nullable Array, domain/context or portable-admission policy.
+installed PUC5.5.1/LuaJIT; declared5.4 remains separate.
+
+Copied-null index composition has a bounded known gap on Rust/Dart/Julia/installed
+Lua: `{undef}.copy().index_of(needle)` skips the needle, including needed errors,
+while free-copy/free-index forms evaluate it. Repeated copies and copied valid
+null results share this gap. Perl handles legitimate copied nulls but can revive
+an earlier rejected index chain through `copy()`, allowing later needles,
+defaults or `with` bodies to run. Separate reference and peer repairs are queued
+before unrelated feature selection. The target keeps null distinct from rejection:
+
+```text
+order=""; out={undef}.copy().index_of({order=cat(order,"N");"a"})
+# target: out=undef, order="N"
+index_of(["a"],"a").take(1).copy().index_of(needle)
+# target: undef; needle skipped after rejected take
+```
+
+Equality, index0/null identity, copy depth and snapshots stay; this grants no
+general nullable Array, domain/context or portable-admission policy.
 
 Canonical Perl `index_of` accepts computed source and needle value blocks:
 
