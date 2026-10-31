@@ -5358,6 +5358,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
      args => \@pipeline_args,
     });
    }
+   if (!(defined($arg_expr) && length($arg_expr))
+       && $method eq 'contains'
+       && ref($arg) eq 'HASH'
+       && ($arg->{kind} // '') eq 'block_value') {
+    # Keep block statements on their typed owner. Reconstructing their source
+    # can turn a mutation-yielding value block into a Perl Hash or invalid code.
+    $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 });
+   }
    if (!(defined($arg_expr) && length($arg_expr)) && $method eq 'array' && @$args != 1) {
     $arg_expr = $lower_ast_value_node->($arg, { bare_scalar_read => 1 })
      if ref($arg) eq 'HASH';

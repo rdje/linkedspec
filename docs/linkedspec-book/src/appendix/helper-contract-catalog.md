@@ -1025,16 +1025,28 @@ still enter `with`, and a receiver Array bridge can be unready. The correspondin
 free `cat`/`split` bridge already works. Source/needle effects and numeric flags
 remain preservation controls; each native peer is assessed independently.
 
-Perl also mishandles a valid block operand ending in `push`: the public AST is a
-value block, but emission can treat its braces as a Hash. A block raising a
-binding error can consequently fail compilation before runtime;71.0 owns this
-producer prerequisite. Existing bound/direct push and explicit last-variable
-forms work. Selected-null membership gives numeric0 and evaluates the needle;
-literal/block-null and copied-null prefixes have inconsistent paths. Earlier
-rejection can also be lost across copy, allowing later operands/bodies. P1 71.6
-owns bounded copy/rejection closure after primary guards and before the next
-unrelated feature. These repairs retain existing equality, null/empty distinction,
-copy depth and source snapshots; full domain/context/portable admission stays open.
+Perl accepts computed value blocks as canonical `contains` operands, including a
+block whose last operation is `push`:
+
+```text
+items=[]
+contains({push(items,"a")},"a")  # 1; items is ["a"], pushed once
+contains({push(items,"a");items},"a") # 1; explicit last-variable form also works
+contains(["a"],{cat("","a")})    # 1; computed needle
+contains({items="text";push(items,"x")},"a").coalesce("masked")
+# binding_kind_mismatch at execution; the default cannot mask the source error
+```
+
+The source completes before the needle. A source error stops needle evaluation;
+needle errors also propagate before later defaults or `with` bodies. Native and
+freshly emitted Perl follow these rules; regenerate existing emitted parsers.
+
+Selected-null membership gives numeric0 and evaluates the needle; literal/block-
+null and copied-null prefixes still have inconsistent paths. Earlier rejection
+can also be lost across copy, allowing later operands/bodies. Source guards71 and
+P1 copy/rejection71.6 own these follow-ups before the next unrelated feature.
+Equality, null/empty distinction, copy depth and source snapshots stay; full
+domain/context/portable admission remains open.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`

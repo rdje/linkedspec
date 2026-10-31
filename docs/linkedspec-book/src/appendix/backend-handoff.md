@@ -3333,8 +3333,9 @@ recorded; declared5.4/general isolation/full admission remain separate.
 Contains source/prefix guards71 are frozen after bounded String-predicate70.
 Reference intake distinguishes healthy numeric/equality/snapshot results from
 free/with/bridge guard gaps, inconsistent null prefixes and copied rejection.
-Perl producer71.0 first preserves typed block operands: a mutation-yielding block
-currently becomes raw braces, causing compilation/Array-reference errors despite
-ready metadata. Independent guards71.1-.5 follow, then mandatory copied-null/
+Perl producer71.0 now preserves typed block operands: mutation-yielding blocks
+return their values, and source/needle binding errors reach execution. Focused
+native/fresh13/nearest/source-fence/syntax checks pass; regenerate emitted Perl.
+Independent guards71.1-.5 follow, then mandatory copied-null/
 rejection assessment71.6 before unrelated selection. No peer failure, new equality/
 copy policy or full domain/context/portable admission follows from the reference.
