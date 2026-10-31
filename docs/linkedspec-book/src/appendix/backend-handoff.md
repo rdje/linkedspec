@@ -3159,10 +3159,11 @@ source/domain/context/portable admission remains separate.
 
 
 Feature63 guards canonical free arithmetic and short Number-prefix results in
-Perl, Rust and Dart, including intermediate Array bridges and rejection before
-later with bodies. Sixteen value observations and the original healthy/error
-controls stay exact on their recorded routes. Dart's direct Number-before-with
-rejection already worked and remains intact. Source effects, kinds, valid
-null/empty with, numeric domains/arity and min/max reducer overloads remain.
-Regenerate emitted Perl and rebuild Rust/Dart apps/runtime. Independent Julia
-assessment is next, then safe Lua; full source/domain/context admission separate.
+Perl, Rust, Dart and Julia, including intermediate Array bridges and rejection
+before later with bodies. Sixteen value observations and the original healthy/
+error controls stay exact on their recorded routes; Julia also checks fresh
+emitted modules. Direct Number-before-with rejection already worked on Dart/
+Julia and remains intact. Source effects, kinds, valid null/empty with, numeric
+domains/arity and min/max reducer overloads remain. Regenerate emitted Perl and
+rebuild Rust/Dart/Julia apps/runtime. Safe installed Lua is next; full source/
+domain/context admission remains separate.

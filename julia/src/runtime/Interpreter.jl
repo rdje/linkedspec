@@ -6293,6 +6293,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_constructor_result_source(chain.receiver) ||
         _runtime_is_free_string_result_source(chain.receiver) ||
         _runtime_is_ordinary_string_receiver_prefix(chain.calls) ||
+        _runtime_is_ordinary_arithmetic_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6472,6 +6473,47 @@ function _runtime_is_ordinary_string_receiver_prefix(calls)
         ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
         ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
     }, prefix.args)
+end
+
+# Preserve arithmetic producers/preflight; retain actual-kind guards for
+# canonical scalar calls and ordinary short Number receiver prefixes.
+function _runtime_is_ordinary_arithmetic_result_chain(receiver, calls)
+    isempty(calls) && return false
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg
+        count = length(receiver.args)
+        valid_arity = if receiver.name in ("num_abs", "num_floor", "num_ceil", "num_round")
+            count == 1
+        elseif receiver.name in ("num_sub", "num_div", "num_mod")
+            count == 2
+        elseif receiver.name == "num_clamp"
+            count == 3
+        elseif receiver.name in ("num_add", "num_mul", "num_min", "num_max")
+            count >= 2
+        else
+            false
+        end
+        valid_arity && ordinary_args(receiver.args) && return true
+    end
+    first_call = first(calls)
+    first_call.method in ("abs", "floor", "ceil", "round", "add", "sub", "mul", "div", "mod", "clamp", "min", "max") || return false
+    something(first_call.source_method, first_call.method) == first_call.method || return false
+    # Zero-extra min/max keeps the Array reducer's existing route.
+    first_call.method in ("min", "max") && isempty(first_call.args) && return false
+    return ordinary_args(first_call.args)
 end
 
 # Retained boxed constructors keep their original payload/pair/splice producer.
