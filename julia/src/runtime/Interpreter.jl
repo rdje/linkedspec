@@ -6297,6 +6297,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_lexical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_definedness_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_emptiness_result_chain(chain.receiver, chain.calls) ||
+        _runtime_is_ordinary_string_predicate_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_has_key_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
@@ -6668,6 +6669,46 @@ function _runtime_is_ordinary_has_key_result_chain(receiver, calls)
     something(first_call.source_method, first_call.method) == first_call.method || return false
     return first_call.method == "has_key" && length(first_call.args) == 1 &&
         ordinary_args(first_call.args)
+end
+
+# String predicates retain numeric text flags, Bool matches and regex policy.
+# Canonical free-two calls and one-operand prefixes keep actual-kind guards.
+function _runtime_is_ordinary_string_predicate_result_chain(receiver, calls)
+    isempty(calls) && return false
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    function ordinary_args(method, args)
+        for (index, arg) in enumerate(args)
+            arg isa ActionPositionalArgument || return false
+            if arg.value isa ActionRegexLiteralExpr
+                method == "matches" && index == length(args) || return false
+            elseif !(arg.value isa Union{
+                ActionVariableExpr, ActionNumberLiteralExpr,
+                ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+                ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+                ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+                ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+                ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+                ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+            })
+                return false
+            end
+        end
+        return true
+    end
+    if receiver isa ActionCallExpr &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg
+        valid_arity = receiver.name in ("starts_with", "ends_with", "contains_substr", "matches") &&
+            length(receiver.args) == 2
+        valid_arity && ordinary_args(receiver.name, receiver.args) && return true
+    end
+    first_call = first(calls)
+    something(first_call.source_method, first_call.method) == first_call.method || return false
+    valid_arity = first_call.method in ("starts_with", "ends_with", "contains_substr", "matches") &&
+        length(first_call.args) == 1
+    return valid_arity && ordinary_args(first_call.method, first_call.args)
 end
 
 # Retained boxed constructors keep their original payload/pair/splice producer.

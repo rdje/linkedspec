@@ -3299,10 +3299,21 @@ regex/modes, SOC snapshots and valid with results. Focused23 tests pass across
 native/restored-spec/generated-plan routes with fifteen original healthy values,
 one source error and eighteen unchanged public syntax observations. Selected
 nearest checks, fatal owner/test analysis and scoped formatting pass. Rebuild
-Dart applications/runtime. Julia70.4/safe Lua and full admission remain separate.
+Dart applications/runtime. Safe Lua and full admission remain separate.
 
 Admission prerequisite: the task-evidence shape gate currently governs its listed
 Perl/Rust paths; Dart/Julia/Lua and shared fixtures require manual checklist review.
 Feature70.3 includes that review. P1 task23.4.3 owns the backend-path extension and
 missing-evidence rejection controls before full admission/push. Focused feature
 test results do not imply that broader mechanical enforcement is already present.
+
+
+Julia70.4 retains canonical String-predicate source/prefix guards through bridges
+and immediate with. Existing literal regex operands/modes, numeric text flags and
+Boolean matches remain; source-operand SOC snapshots and valid with results stay.
+Incompatible operands/later bodies skip. Focused111 strict Number-versus-Bool
+assertions pass on native/restored-spec/generated-plan/fresh-module routes, with
+fifteen original healthy values, one source error and eighteen unchanged public
+syntax observations. Nearest271/strict depwarn and anchored precompile-only stderr
+checks pass. Rebuild Julia applications/runtime. Safe Lua70.5/full admission remain
+separate; checklist review uses the documented current manual path.
