@@ -1,0 +1,321 @@
+[
+  {
+    "body": "return([[num_eq(2,2),num_ne(2,3),num_gt(3,2),num_ge(2,2),num_lt(2,3),num_le(2,2),num_eq(2,3),num_ne(2,2),num_gt(2,3),num_ge(2,3),num_lt(3,2),num_le(3,2)],[2.eq(2),2.ne(3),3.gt(2),2.ge(2),2.lt(3),2.le(2),2.eq(3),2.ne(2),2.gt(3),2.ge(3),3.lt(2),3.le(2)]])",
+    "expected": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "id": "primitive_comparisons",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([[num_eq(2,2),num_ne(2,3),num_gt(3,2),num_ge(2,2),num_lt(2,3),num_le(2,2),num_eq(2,3),num_ne(2,2),num_gt(2,3),num_ge(2,3),num_lt(3,2),num_le(3,2)],[2.eq(2),2.ne(3),3.gt(2),2.ge(2),2.lt(3),2.le(2),2.eq(3),2.ne(2),2.gt(3),2.ge(3),3.lt(2),3.le(2)]])}"
+  },
+  {
+    "body": "return([num_eq(\"02\",2),num_lt(\"-.5\",0),num_eq(false,0),num_eq(undef,0),num_eq([],0),num_eq({},0),num_eq(\" 2\",2),\"02\".eq(2),false.eq(0),\"bad\".eq(0)])",
+    "expected": [
+      1,
+      1,
+      null,
+      null,
+      null,
+      null,
+      null,
+      1,
+      null,
+      null
+    ],
+    "id": "strict_numeric_domains",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([num_eq(\"02\",2),num_lt(\"-.5\",0),num_eq(false,0),num_eq(undef,0),num_eq([],0),num_eq({},0),num_eq(\" 2\",2),\"02\".eq(2),false.eq(0),\"bad\".eq(0)])}"
+  },
+  {
+    "body": "return([num_eq(2,2).cat(\"!\"),num_eq(2,3).coalesce_nonempty(9).cat(\"!\"),num_lt(2,3).cat(\",tail\").split(\",\").last().uppercase(),2.eq(3).add(2)])",
+    "expected": [
+      "1!",
+      "0!",
+      "TAIL",
+      2
+    ],
+    "id": "compatible_values",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([num_eq(2,2).cat(\"!\"),num_eq(2,3).coalesce_nonempty(9).cat(\"!\"),num_lt(2,3).cat(\",tail\").split(\",\").last().uppercase(),2.eq(3).add(2)])}"
+  },
+  {
+    "body": "order=\"\";left=num_eq(2,3).take({order=cat(order,\"A\");1});right=num_gt(3,2).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "free_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=num_eq(2,3).take({order=cat(order,\"A\");1});right=num_gt(3,2).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";left=2.eq(3).take({order=cat(order,\"A\");1});right=3.gt(2).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "receiver_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=2.eq(3).take({order=cat(order,\"A\");1});right=3.gt(2).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";out=num_eq({order=cat(order,\"S\");return(2)},2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "S"
+    ],
+    "id": "free_guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=num_eq({order=cat(order,\"S\");return(2)},2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out={order=cat(order,\"S\");return(2)}.eq(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "S"
+    ],
+    "id": "receiver_guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");return(2)}.eq(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=num_eq(2,3).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "free_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=num_eq(2,3).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=2.eq(3).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "receiver_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=2.eq(3).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "return([num_eq(2,2).split(\",\").first().cat(\"!\"),2.eq(3).split(\",\").first().cat(\"!\")])",
+    "expected": [
+      "1!",
+      "0!"
+    ],
+    "id": "valid_array_bridges",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([num_eq(2,2).split(\",\").first().cat(\"!\"),2.eq(3).split(\",\").first().cat(\"!\")])}"
+  },
+  {
+    "body": "value=2;order=\"\";out=num_eq({order=cat(order,\"S\");return(value)},{value=99;order=cat(order,\"O\");return(2)}).cat({order=cat(order,\"C\");\"!\"});return([out,value,order])",
+    "expected": [
+      "1!",
+      99,
+      "SOC"
+    ],
+    "id": "source_operand_snapshot",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {value=2;order=\"\";out=num_eq({order=cat(order,\"S\");return(value)},{value=99;order=cat(order,\"O\");return(2)}).cat({order=cat(order,\"C\");\"!\"});return([out,value,order])}"
+  },
+  {
+    "body": "slots=[\"old\"];index=num_eq(2,3).copy();slots[index]=\"free\";other=2.eq(3).copy();slots[other]=\"receiver\";return([index,other,slots])",
+    "expected": [
+      0,
+      0,
+      [
+        "receiver"
+      ]
+    ],
+    "id": "zero_typed_indices",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {slots=[\"old\"];index=num_eq(2,3).copy();slots[index]=\"free\";other=2.eq(3).copy();slots[other]=\"receiver\";return([index,other,slots])}"
+  },
+  {
+    "body": "order=\"\";left=num_eq(\"bad\",2).with(){order=cat(order,\"F\");return(\"free\")};right=\"bad\".eq(2).with(){order=cat(order,\"R\");return(\"receiver\")};return([left,right,order])",
+    "expected": [
+      "free",
+      "receiver",
+      "FR"
+    ],
+    "id": "valid_null_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=num_eq(\"bad\",2).with(){order=cat(order,\"F\");return(\"free\")};right=\"bad\".eq(2).with(){order=cat(order,\"R\");return(\"receiver\")};return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";out=num_eq(\"bad\",2).coalesce([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "expected": [
+      0,
+      "W"
+    ],
+    "id": "valid_empty_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=num_eq(\"bad\",2).coalesce([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=[num_eq(2,2).take({order=cat(order,\"A\");1}),num_ne(2,3).take({order=cat(order,\"A\");1}),num_gt(3,2).take({order=cat(order,\"A\");1}),num_ge(2,2).take({order=cat(order,\"A\");1}),num_lt(2,3).take({order=cat(order,\"A\");1}),num_le(2,2).take({order=cat(order,\"A\");1}),num_eq(2,3).take({order=cat(order,\"A\");1}),num_ne(2,2).take({order=cat(order,\"A\");1}),num_gt(2,3).take({order=cat(order,\"A\");1}),num_ge(2,3).take({order=cat(order,\"A\");1}),num_lt(3,2).take({order=cat(order,\"A\");1}),num_le(3,2).take({order=cat(order,\"A\");1})];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_canonical_free_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[num_eq(2,2).take({order=cat(order,\"A\");1}),num_ne(2,3).take({order=cat(order,\"A\");1}),num_gt(3,2).take({order=cat(order,\"A\");1}),num_ge(2,2).take({order=cat(order,\"A\");1}),num_lt(2,3).take({order=cat(order,\"A\");1}),num_le(2,2).take({order=cat(order,\"A\");1}),num_eq(2,3).take({order=cat(order,\"A\");1}),num_ne(2,2).take({order=cat(order,\"A\");1}),num_gt(2,3).take({order=cat(order,\"A\");1}),num_ge(2,3).take({order=cat(order,\"A\");1}),num_lt(3,2).take({order=cat(order,\"A\");1}),num_le(3,2).take({order=cat(order,\"A\");1})];return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=[2.eq(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ne(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},3.gt(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ge(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.lt(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.le(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.eq(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ne(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.gt(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ge(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},3.lt(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},3.le(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_short_receiver_with_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[2.eq(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ne(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},3.gt(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ge(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.lt(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.le(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.eq(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ne(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.gt(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},2.ge(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},3.lt(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},3.le(2).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])}"
+  },
+  {
+    "body": "value=\"caller\";return([build(),value])",
+    "expected": [
+      [
+        null,
+        null,
+        ""
+      ],
+      "caller"
+    ],
+    "id": "function_scope",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "fn build(){order=\"\";left=num_eq(2,3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};right=2.eq(3).take({order=cat(order,\"B\");1}).with(){order=cat(order,\"X\");return(\"ran\")};return([left,right,order])}\nValue:: I {value=\"caller\";return([build(),value])}"
+  },
+  {
+    "body": "return(num_eq({items=\"text\";push(items,\"x\")},2).coalesce(\"masked\"))",
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "id": "needed_source_error",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return(num_eq({items=\"text\";push(items,\"x\")},2).coalesce(\"masked\"))}"
+  },
+  {
+    "body": "order=\"\";zero=num_eq(2,3).with(){order=cat(order,\"F\");return(value.add(2))};one=2.eq(2).with(){order=cat(order,\"R\");return(value.add(2))};return([zero,one,order])",
+    "expected": [
+      2,
+      3,
+      "FR"
+    ],
+    "id": "valid_zero_and_one_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";zero=num_eq(2,3).with(){order=cat(order,\"F\");return(value.add(2))};one=2.eq(2).with(){order=cat(order,\"R\");return(value.add(2))};return([zero,one,order])}"
+  }
+]

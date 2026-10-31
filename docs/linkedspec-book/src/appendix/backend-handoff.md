@@ -3167,3 +3167,10 @@ and remains intact. Source effects, kinds, valid null/empty with, numeric domain
 arity and min/max reducer overloads remain. Lua uses installed PUC5.5.1/LuaJIT;
 declared5.4/full source/domain/context admission remains separate. Regenerate
 emitted Perl and rebuild native apps/runtime. Remaining feature selection follows.
+
+
+Feature64 targets canonical free numeric comparison and short-prefix result
+guards. Perl public19 qualifies ten healthy values/six wrong values/two unready
+bridge contexts/one needed error; valid Number0/1 with remains present. The six
+helper reference now lists existing signatures and true/false examples. Perl64.1
+first, independent peers next; producer/domain/arity/alias/full admission separate.

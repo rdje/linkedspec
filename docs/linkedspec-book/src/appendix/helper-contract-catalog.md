@@ -1354,6 +1354,41 @@ parsers and rebuild native applications/runtime. Scalar/Array min/max overloads
 and numeric domains stay unchanged. Matching values alone do not establish
 support in an unready context.
 
+### Numeric comparisons: `num_eq`, `num_ne`, `num_gt`, `num_ge`, `num_lt`, `num_le`
+
+Each function takes exactly two numeric operands. Its short receiver method takes
+exactly one right-hand operand. Valid results are Number `1` or `0`; invalid
+numeric inputs return null. Finite Numbers and the contracted untrimmed decimal
+Strings are accepted; Bool, null, containers and malformed numeric Strings are
+rejected. Use the separate `str_*` family for lexical comparisons.
+
+| Function signature | Receiver form | True example → `1` | False example → `0` |
+| --- | --- | --- | --- |
+| `num_eq(a, b)` | `a.eq(b)` | `num_eq(2,2)` | `num_eq(2,3)` |
+| `num_ne(a, b)` | `a.ne(b)` | `num_ne(2,3)` | `num_ne(2,2)` |
+| `num_gt(a, b)` | `a.gt(b)` | `num_gt(3,2)` | `num_gt(2,3)` |
+| `num_ge(a, b)` | `a.ge(b)` | `num_ge(2,2)` | `num_ge(2,3)` |
+| `num_lt(a, b)` | `a.lt(b)` | `num_lt(2,3)` | `num_lt(3,2)` |
+| `num_le(a, b)` | `a.le(b)` | `num_le(2,2)` | `num_le(3,2)` |
+
+```text
+num_eq("02",2)                              # 1; strict decimal conversion
+num_lt("-.5",0)                             # 1
+num_eq(false,0)                             # null; Bool is not numeric
+num_eq(2,3).coalesce_nonempty(9).cat("!")      # "0!"; zero stays present
+num_eq(2,3).split(",").first().cat("!")       # "0!"
+num_eq(2,3).with(){return(value.add(2))}      # 2; valid zero enters the body
+```
+
+Source and operands evaluate once in order; later consumers use the computed
+result. A current Perl source-role gap affects incompatible container consumers:
+`num_eq(2,3).take(1)` returns an empty Array, and a rejected comparison prefix may
+still enter a later `with` body. Some bridge tails return null while their
+descriptor reports unsupported `with`; matching output alone is not readiness.
+Feature64 owns these repairs. The original producers, compatible chains, typed
+zero indices and legitimate zero/one/null/empty `with` controls already work.
+Other backends are assessed independently; numeric domains/arity/aliases stay.
+
 ### `num_add(a, b)`
 - **Signature**: `num_add(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands)
 - **Returns**: numeric
