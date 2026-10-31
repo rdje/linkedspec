@@ -3158,8 +3158,10 @@ All bounded free-source and receiver-prefix outcomes are recorded; complete
 source/domain/context/portable admission remains separate.
 
 
-Feature63 owns canonical free arithmetic and short Number-prefix result guards.
-Perl intake finds six wrong values and two unsupported-with contexts alongside
-eight healthy values and one needed error. Preserve original producers, numeric
-domains/arity/min-max reducer overloads and legitimate null/empty with. Perl63.1
-first, independent Rust/Dart/Julia/safe Lua owners next; full admission separate.
+Feature63 guards canonical free arithmetic and short Number-prefix results in
+Perl, including intermediate Array bridges and rejection before later with bodies.
+Its sixteen value observations now execute with ready metadata; eight original
+healthy observations and the needed error stay exact. Source effects, kinds,
+valid null/empty with, numeric domains/arity and min/max reducer overloads remain.
+Regenerate emitted Perl. Independent Rust assessment is next, then Dart/Julia/
+safe Lua; full source/domain/context admission remains separate.

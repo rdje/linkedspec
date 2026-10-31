@@ -59,3 +59,5 @@ this short-method scope.
 Two stale comparison-terminal overview paragraphs were corrected at16 freeze.
 Block/user-function values dispatch on actual returned kind. Historical next
 2.3.5.5 described block-yielded receiver work; current work follows MEMORY.md.
+
+Canonical free arithmetic and short Number-prefix rejection state through later immediate with are separately repaired by Perl63.1: [[free-numeric-result-source-guards]]. Independent peers/full admission remain open; original16 producer/domain/min-max overload authority is unchanged.

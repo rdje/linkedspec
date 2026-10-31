@@ -1769,6 +1769,30 @@ sub _ordinary_free_string_result_source {
  return 1
 }
 
+# Scalar arithmetic calls keep their numeric producer and strict input domains.
+# The one-Array min/max reducer is a separate source role.
+sub _ordinary_free_numeric_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') =~ /\Anum_(?:abs|floor|ceil|round|add|sub|mul|div|mod|clamp|min|max)\z/o
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY';
+ my $name = $call->{name};
+ my $count = @{$call->{args}};
+ my $valid_arity = $name =~ /\Anum_(?:add|mul|min|max)\z/o ? $count >= 2
+  : $name eq 'num_clamp' ? $count == 3
+  : $name =~ /\Anum_(?:sub|div|mod)\z/o ? $count == 2
+  : $count == 1;
+ return 0 unless $valid_arity;
+ foreach my $value (@{$call->{args}}) {
+  return 0 unless ref($value) eq 'HASH'
+   && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+ }
+ return 1
+}
+
 # Retained constructors keep their typed payload and list-context producer.
 # Only ordinary boxed forms join result guards; selectors and splices stay out.
 sub _ordinary_constructor_result_source {
@@ -5430,14 +5454,28 @@ my $lower_numeric_array_reducer_source_expr = sub {
   # so a rejected consumer cannot be normalized into an ordinary null.
   my $constructor_result_source = _ordinary_constructor_result_source($receiver);
   my $free_string_result_source = _ordinary_free_string_result_source($receiver);
+  my $free_numeric_result_source = _ordinary_free_numeric_result_source($receiver)
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   # Existing canonical String receiver prefixes retain their result guards
   # after explicit Array bridges. Dedicated traversal/overload routes stay separate.
   my $ordinary_string_receiver_prefix = _is_scalar_string_receiver_value_chain_method($calls->[0]{method})
    && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
+  # Arithmetic prefixes retain rejection state through later immediate with.
+  # Zero-extra min/max remains the Array reducer's existing route.
+  my $ordinary_number_receiver_prefix = ($calls->[0]{method} // '') =~ /\A(?:abs|floor|ceil|round|add|sub|mul|div|mod|clamp|min|max)\z/o
+   && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
+   && ref($calls->[0]{args}) eq 'ARRAY'
+   && (($calls->[0]{method} // '') !~ /\A(?:min|max)\z/o || @{$calls->[0]{args}})
+   && !(grep { ref($_) ne 'HASH'
+     || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
-    || $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix)
+    || $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
+    || $free_numeric_result_source || $ordinary_number_receiver_prefix)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -5833,6 +5871,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || _ordinary_free_default_result_source($receiver)
    || $constructor_result_source
    || $free_string_result_source
+   || $free_numeric_result_source || $ordinary_number_receiver_prefix
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
@@ -5854,10 +5893,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $current_expr = '$__ls_free_default_value';
    }
    foreach my $call (@$calls) {
-    # Retained result sources and String prefixes may cross kinds at any link.
+    # Retained result sources and scalar prefixes may cross kinds at any link.
     # Reuse actual-kind dispatch after intermediate results as well as at the source.
     $current_family = 'default_result'
-     if $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix;
+     if $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
+      || $free_numeric_result_source || $ordinary_number_receiver_prefix;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')

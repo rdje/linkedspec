@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1575** facts · **11609** question keys.
+> **1575** facts · **11610** question keys.
 
 ## Questions → fact
 
@@ -159,6 +159,7 @@
 - "are PUC Lua recognition transactions admitted" -> [lua-recognition-transaction-admission](docs/knowledge/lua-recognition-transaction-admission.md) · 2026-08-11 · reverify: `bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && bash tools/run_lua_project_data.sh puc lua/test/recognition_transaction_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/recognition_transaction_contract_test.lua`
 - "are Perl CLI long options case sensitive" -> [perl-primary-cli-conformance-audit](docs/knowledge/perl-primary-cli-conformance-audit.md) · 2026-07-10 · reverify: `PERL5LIB= prove -v -Iperl t/trace_cli.t; sed -n '1,260p' bin/linkedspec; rg -n 'DUMP_NONE|sub log_output|sub trace_decision' perl/LinkedSpec/Trace.pm perl/LinkedSpec/Validation.pm perl/LinkedSpec/Compiler.pm; rg -n 'FUTURE-PARITY-BACKLOG\.1\.5\.1' docs/tasks/FUTURE-PARITY-BACKLOG.md`
 - "are Perl CLI options case sensitive now" -> [perl-primary-cli-strict-arguments](docs/knowledge/perl-primary-cli-strict-arguments.md) · 2026-07-10 · reverify: `perl -c bin/linkedspec && PERL5LIB= perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec && PERL5LIB= POSIXLY_CORRECT=1 perl tools/run_cli_conformance.pl --display-command 'perl bin/linkedspec' -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec`
+- "are Perl arithmetic source and Number prefix guards fixed" -> [free-numeric-result-source-guards](docs/knowledge/free-numeric-result-source-guards.md) · 2026-10-31 · reverify: `Recover shared17/public observer from free-numeric-selection-intake.json.gz into new repository-local outputs. Historical activation/freeze/finish/retain writers are one-shot, never replay. Implementation owners63.1-.5.`
 - "are Perl assignment statements lowered from AST" -> [perl-actionir-ast-statement-operator-lowering](docs/knowledge/perl-actionir-ast-statement-operator-lowering.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
 - "are Perl block side effects still awaiting statement AST migration" -> [perl-actionir-ast-value-lowering-dispatcher](docs/knowledge/perl-actionir-ast-value-lowering-dispatcher.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
 - "are Perl codeblock parameters independent scalar references" -> [perl-codeblock-push-composition](docs/knowledge/perl-codeblock-push-composition.md) · 2026-10-02 · reverify: [3 entries](#perl-codeblock-push-composition)
@@ -14237,8 +14238,8 @@ _Canonical free defaults need actual-kind result source guards_
 
 ### free-numeric-result-source-guards
 _Arithmetic source roles and later with rejection state_
-- **answers:** why does num_add take return an empty Array instead of null | why does a Number method chain run with after rejecting take | which task owns canonical free numeric result guards | do matching null arithmetic bridge outputs establish readiness | does the numeric package 3 Hash seed demonstrate contamination
-- **date:** 2026-10-31 · **status:** frozen63; Perl63.1 first and independent peers pending
+- **answers:** why does num_add take return an empty Array instead of null | why does a Number method chain run with after rejecting take | which task owns canonical free numeric result guards | do matching null arithmetic bridge outputs establish readiness | does the numeric package 3 Hash seed demonstrate contamination | are Perl arithmetic source and Number prefix guards fixed
+- **date:** 2026-10-31 · **status:** bounded Perl63.1 repaired/targeted-checked; independent Rust63.2/peers/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.24; free-numeric-selection-intake.json.gz retains17 exact public native/fresh/descriptor/substitution/emitted programs and synthetic host seed.`
 - **reverify:** `Recover shared17/public observer from free-numeric-selection-intake.json.gz into new repository-local outputs. Historical activation/freeze/finish/retain writers are one-shot, never replay. Implementation owners63.1-.5.`
 - **source:** [`docs/knowledge/free-numeric-result-source-guards.md`](docs/knowledge/free-numeric-result-source-guards.md)
