@@ -3159,9 +3159,9 @@ source/domain/context/portable admission remains separate.
 
 
 Feature63 guards canonical free arithmetic and short Number-prefix results in
-Perl, including intermediate Array bridges and rejection before later with bodies.
-Its sixteen value observations now execute with ready metadata; eight original
-healthy observations and the needed error stay exact. Source effects, kinds,
+Perl and Rust, including intermediate Array bridges and rejection before later
+with bodies. Sixteen value observations/eight original healthy observations and
+the needed error stay exact on their recorded routes. Source effects, kinds,
 valid null/empty with, numeric domains/arity and min/max reducer overloads remain.
-Regenerate emitted Perl. Independent Rust assessment is next, then Dart/Julia/
-safe Lua; full source/domain/context admission remains separate.
+Regenerate emitted Perl and rebuild Rust apps/runtime. Independent Dart assessment
+is next, then Julia/safe Lua; full source/domain/context admission stays separate.
