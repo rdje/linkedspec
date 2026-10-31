@@ -1,0 +1,124 @@
+{
+  "claims": [
+    {
+      "durability": {
+        "inputs": [
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/INVESTIGATION.md",
+            "role": "input",
+            "sha256": "fe94a1e66a41a84e8bc1d47176bf385f0456d2b0aa33f63b3dfb2082930b8c46"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/capture.py",
+            "role": "producer",
+            "sha256": "c91440f246b7c5440fc65c488140e04f1e26a8d57aa35d631071383dde3247b5"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/current-test-001.part",
+            "role": "input",
+            "sha256": "badc0ee371b8149ea401346ad07712e9e23792a9a3ee2b7b153625ce7bbac129"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-001.part",
+            "role": "input",
+            "sha256": "fbbeccc2100f0e49e0d9933c0d2a7d319a5d4649967b6ae3d7953d77cf738ef1"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-002.part",
+            "role": "input",
+            "sha256": "85e12e9176fd9953591399253ef0c3c0574b25e6f7406f2af9eb29958796758f"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-003.part",
+            "role": "input",
+            "sha256": "6c30922d85cf2ced84a043d0cab60dd306f2a3a802f3b38669a8b47ae81df698"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-004.part",
+            "role": "input",
+            "sha256": "32a57af572effe9ce53659c9db0d9706ee8c0533bc3b7584c0d5c9c86b3a65f8"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-005.part",
+            "role": "input",
+            "sha256": "83e992549622f50f10b8af2939ec920f2021167142efc31274d03a6decaf9bc9"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-006.part",
+            "role": "input",
+            "sha256": "0f30cfc12f957110b031ef7d2c1422561dff54f3ceb362985c273058c60952d5"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-007.part",
+            "role": "input",
+            "sha256": "2ace8146df637fd0667f8a79a0a517691a2060b70f6439d4354730790f141255"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-008.part",
+            "role": "input",
+            "sha256": "1c1088f272aba6e24eb29908df6f780f812722747cdad12f6189c2a9e72a1eff"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/entries-009.part",
+            "role": "input",
+            "sha256": "14ab0e7aeb5528d0a75d7aca997f45d654968e8f2f17957fdfde21181fe4eb1b"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/finish.py",
+            "role": "producer",
+            "sha256": "c6bc724d3e27e142df313c8c8e8386dd208113c83b07cbc0cf507ca5db09e382"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/inode-analysis-001.part",
+            "role": "input",
+            "sha256": "ea45f33b6424a72b1b3daefae5b58cbac5edd36e6d3ad761241a081411ddbe65"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/intake.json.gz",
+            "role": "input",
+            "sha256": "c4a3c505a2ffd72fc8c5897342a62a46a4c9145bea9ed9f681b32673d9b1f429"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/nodes-001.part",
+            "role": "input",
+            "sha256": "15b57b68f77ee4528946e1b8d58019908659405510465155caefd892a31d0d4e"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/retained-review.json",
+            "role": "input",
+            "sha256": "782b4e709e8781b27314ffc476f3945d71a4716fff4ea20b3d84c46f3e4650e0"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/review.py",
+            "role": "producer",
+            "sha256": "d36bc785bf8f2ed708d89e745785d615da97981a711ad7810b8dfcaf67e89e83"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/claim-input-qualification.json.gz",
+            "role": "input",
+            "sha256": "0b813b5f9363101102dbf5b617701ce2d93193c7c0da25fcf753d935798e40a8"
+          }
+        ],
+        "mode": "live",
+        "status": "checked"
+      },
+      "falsify": {
+        "hypothesis": "Path sums, name/mode-only classification, incomplete alias/link/schema checks or unperformed disposal could falsely report safe cleanup.",
+        "oracle": "Independent public compiler/executable artifacts, actual private outside-group link and same-size valid-header content alteration, nested historical binding and confined path controls, actual live inventory/alias-open refusal versus idle, real whole-target quarantine/current Rust6/full post-disposal residue.",
+        "red_control": "Four actually executed unsafe link/format/content/schema models exit1; actual alias-open inspection exits2 and inventory owner is refused. Seventeen guards plus real link transitions/partial-resume hash/outside alias refusal/keeper identity pass. No prototype refusal is misreported as real disposal.",
+        "status": "checked"
+      },
+      "name": "dated-complete-compiler-group-disposal",
+      "rederive": {
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/type-operation-inventory/project-data-cleanup46-3/review.py",
+        "granularity": "Every original metadata row/selected alias and unique inode, scoped name/header/closure predicate, count/logical/allocated sum, retained part/input, claim namespace Git blob, actual current executable/source and observed disposal/retained/residue outcome.",
+        "result": "Independent read-only retained review matches actual final plan/disposal/full source review and verifies actual current six-test executable/source custody.",
+        "status": "checked"
+      },
+      "scope": "Dated named old-target population and actual finite safety controls only. Per-inode metadata, not physical/APFS reclamation. Retained files exact; directories mode/device/inode exact, final links agree with observed child counts, and links/times/sizes may reflect child removal. No original disposable bytes/exact old build, other-user/future/concurrent-adversary liveness, dependency implementation/transitive closure/cold bootstrap/full suite claim.",
+      "statement": "Exactly 4227308 obsolete compiler-output names/330999 unique inodes removed; 21851 retained namespace entries verified. Selected unique metadata totals 59351908165 logical/60023246848 allocated bytes. Current public offline Rust6 passes with the whole old target unavailable."
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.46.3",
+  "version": 1
+}

@@ -56,3 +56,7 @@ stores, incremental data and the current warmed target remain available.
 ## Dated completion
 
 Exactly 330165 selected objects are absent; all 4215917 other direct entries retain their captured identities. The selected metadata sums to 49600550824 logical and 50270818304 allocated bytes. The current offline rule-call target passes six tests with old deps quarantined. Original deps is restored with no quarantine residue. Complete metadata, actual producers, guard epochs and the actual successful test executable are retained in the owning checkpoint.
+
+## Later requested pass
+
+The46.2 retained-entry outcome above is dated. Requested October31 cleanup46.3 subsequently disposes of separately verified obsolete complete internal hardlink groups and recognized archive/metadata/incremental outputs. Executables/runtime libraries/source/evidence/current caches/external or proof-bound links remain. [[project-data-closed-hardlink-cleanup]] owns the new independent plan/controls/current-use/disposal and retained proof; the older checkpoint remains unchanged.
