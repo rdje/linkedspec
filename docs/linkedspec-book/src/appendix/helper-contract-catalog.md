@@ -168,6 +168,16 @@ dispatch rule.
 - **Behavior**: Sets the working variable `name` to the evaluated RHS value. If the variable was not previously declared, the reference auto-creates it as a per-invocation working variable (see the note at the top of this section); otherwise it reassigns the existing variable. Later assignments may replace a scalar with an array/hash value, or replace an array/hash value with a scalar.
 - **Edge cases**: `name = [value]`, `set(name, [value])`, and `=(name, [value])` bind an array value to `name`; `name = { key : value }` binds a hash value. In scalar assignment source slots, a bare source name reads the current typed working value: `out = value`.
 - **Terse spelling**: `name = value` is the preferred operator spelling, and `set(name, value)` remains the helper spelling. In value positions, assignments store and yield the stored typed value. See [Terse Helper Renames](#terse-helper-renames-canonical-going-forward).
+
+A completed `set` value can feed current reads, for example
+`saved = set(items, ["head","tail"]); saved.coalesce(undef)[-1].uppercase()` yields
+`"TAIL"`. Compatible direct methods also work on Perl, such as
+`set(text, " tail ").trim().uppercase()`. Direct bracket reads from the `set` call
+and incompatible direct container consumers have an owned Perl source-dispatch
+gap; use the completed value and existing guarded bridge above until repaired.
+This preserves ordinary assignment copy and alias rules. Other backends are
+assessed independently in the backend handoff.
+
 - **Worked example**:
   ```text
   demo::

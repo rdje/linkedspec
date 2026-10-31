@@ -3062,3 +3062,12 @@ chunk locals; rebuild runtime/apps. Bounded58 outcomes are recorded; remaining
 feature selection23.1.20 follows, with declared5.4/full admission separate. Each peer was assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.
+
+The next bounded feature59 composes existing canonical `set(name,value)` stored
+typed results through direct reads and guarded consumers. Perl primitive values
+and compatible methods already work; direct Array/Hash reads emit invalid source,
+and an incompatible Hash consumer runtime-fails despite readiness metadata. A
+completed-value twin preserves the twelve-result target and operand guards.
+Perl59.1 owns this repair next; peer59.2-.5 assessments follow independently.
+Ordinary assignment copy/alias rules, operators/grouping/aliases/deferred/schema
+authority and full admission remain separate.
