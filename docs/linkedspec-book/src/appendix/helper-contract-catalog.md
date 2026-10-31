@@ -1260,10 +1260,10 @@ Needed key errors propagate before a consumer runs. Regenerate emitted Perl pars
 
 ### `has_key(h, key)`
 - **Signature**: `has_key(h: hash, key: string)`
-- **Returns**: presence flag; the checked Perl/Rust/Dart/Julia routes retain numeric `1`/`0`.
+- **Returns**: presence flag; the checked Perl/Rust/Dart/Julia/Lua routes retain numeric `1`/`0`.
 - **Behavior**: Returns true if the hash contains the named key, including a stored false/null value. Perl/Rust/Dart/Julia/Lua accept literal, variable, helper-produced and block String keys: `meta.has_key({calls=num_add(calls,1);"a"})` evaluates the key once, after capturing the source. Its result now continues through compatible scalar/text methods: `{"a":false}.has_key("a").cat("!")` → `"1!"`; `{}.has_key("a").cat("!")` → `"0!"`; `{}.has_key("a").coalesce_nonempty("late").cat("!")` → `"0!"`. `meta.copy().has_key("a").cat(",x").split(",").last().uppercase()` → `"X"` for a present key; `meta.has_key("a").sorted_values()` → undef. A key added during key evaluation stays absent from the captured source. Receiver form requires one key before effects. Rust free `has_key(meta,key_expr)` also uses its captured named source, even when the key operand rebinds `meta`. Perl also evaluates a key once when its source is null: with `meta=undef` and `calls=0`, `has_key(meta,{calls=num_add(calls,1);"a"})` returns `0` and leaves `calls` as `1`. The source is captured before key effects, so creating or replacing the working Hash inside the key does not change the current presence result. Focused Perl native/fresh, Rust/Dart native/restored/generated-plan and Julia/Lua native/plan/fresh-emitted checks cover selected, function and default sources too; Lua uses available PUC5.5.1/LuaJIT, with declared5.4/full admission separate.
 
-Perl, Rust, Dart and Julia keep actual-kind and rejection guards through canonical two-value free
+Perl, Rust, Dart, Julia and installed Lua keep actual-kind and rejection guards through canonical two-value free
 `has_key` calls and ordinary one-key prefixes:
 
 ```text
@@ -1288,11 +1288,11 @@ out={order=cat(order,"S");source}.has_key({
 The key checks the captured null source even though its expression creates a new
 working Hash. Legitimate false/null/empty results enter `with`; an Array returned
 by the body accepts Array methods. Focused native/fresh Perl paths have ready
-ActionIR metadata; Rust/Dart/Julia pass native/restored CompiledSpec/SpecFile/generated-plan
-controls, plus fresh Julia modules, including the unchanged null-source/key snapshot
-fixture. Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia apps/runtime.
-Lua independently assesses the guards. These checks preserve presence flags, key
-domains and the selected source/key/copy/default controls. A separate known Dart
+ActionIR metadata; Rust/Dart/Julia/Lua pass native/restored CompiledSpec/SpecFile/generated-plan
+controls, plus fresh Julia/Lua modules, including the unchanged null-source/key
+snapshot fixture. Lua uses installed PUC5.5.1/LuaJIT; declared5.4 remains separate.
+Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia/Lua apps/runtime. These
+checks preserve presence flags, key domains and selected source/key/copy/default controls. A separate known Dart
 composition gap remains: `{undef}.copy().has_key(key)` skips the key and returns
 null, while `copy({undef}).has_key(key)` evaluates the key and returns numeric0.
 The owned copied-null repair preserves rejected-consumer isolation; complete

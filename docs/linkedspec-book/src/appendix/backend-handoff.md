@@ -3233,14 +3233,15 @@ uses installed PUC5.5.1/LuaJIT with no new interpreter chunk locals. Declared5.4
 broader SESSION16 and full admission remain separate.
 
 
-Perl, Rust, Dart and Julia feature69 retain has_key free-source/ordinary one-key prefix guards
+Perl, Rust, Dart, Julia and installed Lua feature69 retain has_key free-source/ordinary one-key prefix guards
 through Array bridges and immediate with. Rejected operands/bodies skip; source/key
 SKC snapshots, null-source key evaluation, numeric0-1/copy/default/repeated predicates
 and legitimate false/null/empty with stay. Regenerate emitted Perl parsers and
-rebuild Rust/Dart/Julia apps/runtime. Focused Perl native/fresh/readiness/error and
-Rust/Dart/Julia native/restored/plan/null-source/nearest checks pass, plus fresh Julia
-modules/strict numeric identity/depwarn and selected Rust/Dart format-analysis.
-Safe Lua baselines, full source/key domains and portable admission remain separate.
+rebuild Rust/Dart/Julia/Lua apps/runtime. Focused Perl native/fresh/readiness/error and
+Rust/Dart/Julia/Lua native/restored/plan/null-source/nearest checks pass, plus fresh
+Julia/Lua modules, strict numeric identity/Julia depwarn and selected Rust/Dart
+format-analysis. Lua uses installed PUC5.5.1/LuaJIT with no new interpreter chunk
+locals. Declared5.4, full source/key domains and portable admission remain separate.
 The Dart fluent copied-null presence gap is owned after that baseline: it currently
 skips the key unlike equivalent free-copy sources. Its repair must keep rejected
 container consumers from running later key effects.

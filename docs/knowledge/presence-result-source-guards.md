@@ -9,7 +9,7 @@ answers:
   - "does the free has_key cat split bridge already retain guards"
   - "why does a has_key is_undefined chain render empty text on Perl"
 date: 2026-10-31
-status: bounded Perl69.1/Rust69.2/Dart69.3/Julia69.4 targeted-checked; safe Lua/copied-null follow-up/full admission separate
+status: all five bounded69 backend outcomes targeted-checked; copied-null follow-up/full admission separate
 tags: [presence, hash, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.30; presence-guard-selection-intake.json.gz retains actual public13/public22 observers, original/adjudicated oracles, all declared input bytes and original results."
 reverify: "Recover retained public observers/shared22/original source into new project-local outputs; historical writers one-shot never replay. Owners69.1-.5 independently baseline with expected_nonperl override where present."
@@ -28,3 +28,5 @@ Independent Rust source guards and null-key preservation: [[rust-presence-result
 Independent Dart free-source/Array-bridge guards and null-key preservation: [[dart-presence-result-source-guards]].
 
 Independent Julia strict-numeric presence/source guards: [[julia-presence-result-source-guards]]. Copied-null expression mismatch and owned repair: [[copied-null-presence-composition]].
+
+Independent installed-host Lua strict-numeric presence/source guards: [[lua-presence-result-source-guards]]. All bounded69 backend outcomes recorded; copied-null69.6/canonical parent/full23.4 remain separate.
