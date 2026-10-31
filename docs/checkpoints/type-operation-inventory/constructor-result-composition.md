@@ -1,7 +1,7 @@
 # Retained constructor result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.22; family23.3.61.
-Status: Bounded Perl61.1/Rust61.2/Dart61.3/Julia61.4 and comparator61.0 targeted-checked; safe Lua/full admission pending.
+Status: Recorded bounded61 implementations and comparator61.0 targeted-checked on named routes/hosts; full domain/context/portable admission remains23.4.
 
 Uniform binding retains array(), array("literal"), multi-expression Array calls,
 hash() and paired ordinary key/value Hash calls. Exact one-bare-identifier
@@ -114,3 +114,19 @@ uniform-binding61/strict depwarn pass; standalone Main imports/derived REPO_ROOT
 supplied, standard precompile retained. Actual inputs/producers/epochs:
 constructor-julia-intake.json.gz. Rebuild apps/runtime. Safe Lua61.5 next;
 no isolated package/exhaustive excluded-runtime/domain/full admission inference.
+
+## Safe installed Lua61.5 guards
+
+Same116 checks96PASS20RED to116PASS per PUC5.5.1/LuaJIT2.1.1788460057;96 includes
+five passing compile scaffolds in failed groups.21 values/16 healthy observations/
+two errors/eight syntax shapes canonically exact on native/restoredSpec/plan/fresh
+module, accepted hosts match. Canonical Array/paired Hash namespace predicate/
+current common guard/three-line runner entry; no new interpreter chunk locals.
+Rejected operands/later with skip, source once/intermediate kinds/empty-null with
+stay. Computed keys/order/snapshots/functions already healthy; original producer/
+read/default retention/with/signature/arity/copy/alias/function/parser/schema stay.
+Per-host nearest free-default91/six default programs/loadfile/version pass, focused
+stderr empty. Actual inputs/producers/results: constructor-lua-intake.json.gz.
+Rebuild apps/runtime. Bounded61 outcomes recorded, next owned selection23.1.23.
+No declared5.4/unsafe runner/formatter/isolated package/exhaustive excluded-runtime/
+domain/full admission inference.

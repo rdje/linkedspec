@@ -3561,6 +3561,47 @@ function typed_source.receiver_mutation.is_free_default_result_source(expr)
   return true
 end
 
+-- Retained boxed constructors keep their original payload/pair/splice producer.
+function typed_source.receiver_mutation.is_constructor_result_source(expr)
+  if expr == nil or expr.kind ~= "call" or
+    (expr.name ~= "array" and expr.name ~= "hash") or
+    (expr.source_method or expr.name) ~= expr.name or expr.trailing_block_arg then
+    return false
+  end
+  local args = expr.args or {}
+  if expr.name == "hash" and #args % 2 ~= 0 then return false end
+  local first = #args == 1 and argument_expr(args[1]) or nil
+  if first and first.kind == "variable" then return false end
+  for _, argument in ipairs(args) do
+    if argument.argument_kind ~= "positional" then return false end
+    local value = argument_expr(argument)
+    local kind = value and value.kind
+    local splice_method
+    if kind == "call" then
+      splice_method = value.name
+    elseif kind == "fluent_chain" then
+      local calls = value.calls or {}
+      local terminal = calls[#calls]
+      splice_method = terminal and terminal.method
+    end
+    if splice_method then
+      splice_method = action_contracts.canonical_action_helper_name(splice_method)
+      if splice_method == "flat" or splice_method == "flat_array" or splice_method == "flat_hash" then
+        return false
+      end
+    end
+    if not (kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+      kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+      kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+      kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+      kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+      kind == "assign_nested_access" or kind == "codeblock_literal") then
+      return false
+    end
+  end
+  return true
+end
+
 -- Canonical assignment results retain the existing actual-kind guards.
 function typed_source.receiver_mutation.is_canonical_set_result_source(expr)
   if expr == nil or expr.kind ~= "call" or expr.name ~= "set" or
@@ -3654,6 +3695,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     typed_source.receiver_mutation.is_explicit_push_result_source(engine, target_receiver) or
     typed_source.receiver_mutation.is_canonical_set_result_source(target_receiver) or
     typed_source.receiver_mutation.is_free_default_result_source(target_receiver) or
+    typed_source.receiver_mutation.is_constructor_result_source(target_receiver) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or

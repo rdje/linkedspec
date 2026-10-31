@@ -783,8 +783,9 @@ sorted([2,"10",1])               # [1,"10",2] (lexicographic)
   See the [executed function example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).
 
 Retained ordinary constructor values support direct reads and guarded methods on
-current Perl, Rust, Dart and Julia. Incompatible container consumers return null before their arguments
-or later `with` bodies run. Legitimate empty/null results still enter `with`:
+Perl, Rust, Dart, Julia and installed PUC Lua/LuaJIT. Incompatible container
+consumers return null before their arguments or later `with` bodies run. Legitimate
+empty/null results still enter `with`:
 
 ```text
 array("head","tail")[-1].uppercase()       # "TAIL"
@@ -797,7 +798,8 @@ array("tail").with(){return(undef)}.with(){return("recovered")} # "recovered"
 
 Source and needed constructor arguments run once before consumers. Compatible
 intermediate links retain actual-kind guards; rejection skips subsequent bodies.
-Regenerate affected emitted Perl parsers and rebuild Rust/Dart/Julia applications/runtime. Lua is assessed independently;
+Regenerate affected emitted Perl parsers and rebuild Rust/Dart/Julia/Lua applications/runtime.
+Lua checks use PUC5.5.1/LuaJIT; declared5.4 and full admission remain open. Existing
 element/pair/list-splice, bare-key and selector retirement rules remain in force.
 
 

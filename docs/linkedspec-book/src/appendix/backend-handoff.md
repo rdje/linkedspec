@@ -3126,7 +3126,11 @@ legitimate empty/null with and already-working computed keys stay. Rebuild Dart
 applications/runtime. Julia also guards retained ordinary constructors across
 native/restored specs/plans/fresh modules, preserving source effects, intermediate
 kinds, valid empty/null with and already-working computed keys/order/scope.
-Rebuild Julia applications/runtime. Installed PUC Lua/LuaJIT are next; declared
-Lua5.4 and full admission remain separate.
+Rebuild Julia applications/runtime. Installed PUC Lua5.5.1/LuaJIT also guard
+retained constructors on native/restored specs/plans/fresh modules, with source
+effects, intermediate kinds, empty/null with and computed keys/order/scope intact.
+No new interpreter chunk locals; rebuild Lua applications/runtime. Bounded61
+outcomes are recorded; next feature selection23.1.23. Declared Lua5.4 and full
+admission remain separate.
 No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1561** facts · **11550** question keys.
+> **1562** facts · **11554** question keys.
 
 ## Questions → fact
 
@@ -1032,6 +1032,7 @@
 - "do Lua array transform value forms mutate their source" -> [lua-runtime-array-transform-pipelines](docs/knowledge/lua-runtime-array-transform-pipelines.md) · 2026-10-26 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/definedness_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/definedness_result_receivers_test.lua`
 - "do Lua callbacks preserve caller marks and different-rule isolation" -> [named-mark-number-lua-compatibility](docs/knowledge/named-mark-number-lua-compatibility.md) · 2026-10-28 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/named_mark_number_results_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/named_mark_number_results_test.lua`
 - "do Lua codeblock arguments evaluate left to right" -> [lua-callable-codeblock-dynamic-invocation](docs/knowledge/lua-callable-codeblock-dynamic-invocation.md) · 2026-08-01 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/callable_codeblock_literal_contract_test.lua && bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py`
+- "do Lua computed Hash keys need Perl producer fixes" -> [lua-constructor-result-guards](docs/knowledge/lua-constructor-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-constructor-result-guards)
 - "do Lua dropped array transform calls rebind" -> [lua-runtime-array-transform-pipelines](docs/knowledge/lua-runtime-array-transform-pipelines.md) · 2026-10-26 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/definedness_result_receivers_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/definedness_result_receivers_test.lua`
 - "do Lua emitted parsers preserve nested write path expressions" -> [write-vivification-lua-runtime](docs/knowledge/write-vivification-lua-runtime.md) · 2026-10-25 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/signed_array_selector_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/signed_array_selector_test.lua`
 - "do Lua execution failures emit semantic result events" -> [lua-semantic-runtime-observation-direct-capture](docs/knowledge/lua-semantic-runtime-observation-direct-capture.md) · 2026-07-28 · reverify: [5 entries](#lua-semantic-runtime-observation-direct-capture)
@@ -2148,6 +2149,7 @@
 - "does Lua compile user_function_definition.spec once" -> [lua-spec-defined-function-parser](docs/knowledge/lua-spec-defined-function-parser.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua compiled definition order include function shells" -> [lua-semantic-introspection-authority-map](docs/knowledge/lua-semantic-introspection-authority-map.md) · 2026-07-28 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test`
 - "does Lua compiled state carry ActionIR payloads" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
+- "does Lua constructor rejection skip operands and later with" -> [lua-constructor-result-guards](docs/knowledge/lua-constructor-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-constructor-result-guards)
 - "does Lua consume the shared native resolution fixture directly" -> [lua-native-spec-resolution](docs/knowledge/lua-native-spec-resolution.md) · 2026-07-15 · reverify: `perl tools/check_native_spec_resolution_contract.pl && bash tools/run_lua_local.sh`
 - "does Lua copy runtime aggregates and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-10-25 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua copy support harray array string and scalar continuations" -> [lua-receiver-copy-value-preservation](docs/knowledge/lua-receiver-copy-value-preservation.md) · 2026-10-27 · reverify: [2 entries](#lua-receiver-copy-value-preservation)
@@ -3151,6 +3153,7 @@
 - "does constructing a Perl codeblock execute its body" -> [perl-callable-codeblock-literal-record](docs/knowledge/perl-callable-codeblock-literal-record.md) · 2026-07-12 · reverify: `prove -v -Iperl t/callable_codeblock_literal_contract.t && prove -q -Iperl t/actionir_ast_parser.t`
 - "does constructing a Rust codeblock execute its body" -> [rust-callable-codeblock-literal-state](docs/knowledge/rust-callable-codeblock-literal-state.md) · 2026-09-07 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test callable_codeblock_literal_contract`
 - "does constructor result composition restore aggregate selectors" -> [constructor-result-source-gap](docs/knowledge/constructor-result-source-gap.md) · 2026-10-31 · reverify: `Recover exact authored cases/public observer from constructor-result-selection-intake.json.gz into new project-local outputs; historical activation/create/run/inspect/finish/retain writers one-shot, never replay.`
+- "does constructor result guard repair add interpreter chunk locals" -> [lua-constructor-result-guards](docs/knowledge/lua-constructor-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-constructor-result-guards)
 - "does contains distinguish null from empty text" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: [5 entries](#array-contains-result-handoff)
 - "does contains return a Boolean or numeric flag" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: [5 entries](#array-contains-result-handoff)
 - "does contains snapshot its source before needle effects" -> [array-contains-result-handoff](docs/knowledge/array-contains-result-handoff.md) · 2026-10-26 · reverify: [5 entries](#array-contains-result-handoff)
@@ -9092,6 +9095,7 @@
 - "which Lua owner guards explicit push snapshot methods" -> [lua-push-snapshot-result-guards](docs/knowledge/lua-push-snapshot-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-push-snapshot-result-guards)
 - "which Lua owner guards free coalesce result methods" -> [lua-free-default-result-guards](docs/knowledge/lua-free-default-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-default-result-guards)
 - "which Lua owner guards gap_kind result methods" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
+- "which Lua owner guards retained Array and Hash constructor result methods" -> [lua-constructor-result-guards](docs/knowledge/lua-constructor-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-constructor-result-guards)
 - "which Lua owner guards static rule-call result selections" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
 - "which Lua owner implements explicit callable codeblocks" -> [lua-explicit-callable-codeblock-gap](docs/knowledge/lua-explicit-callable-codeblock-gap.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'block_value|codeblock_argument|active_codeblocks|callable_codeblock\\.execute|runtime_scoped_binding|spec_ast\\.to_json|spec_ast\\.from_json' lua/src/linkedspec/action_ast.lua lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/source_emitter.lua && bash tools/run_lua_local.sh`
 - "which Lua owner returns rewind Number results" -> [lua-cursor-rewind-number-results](docs/knowledge/lua-cursor-rewind-number-results.md) · 2026-10-30 · reverify: [2 entries](#lua-cursor-rewind-number-results)
@@ -12379,7 +12383,7 @@ _Complete neutral write contracts and CLI guide with exact fixture reading_
 ### constructor-result-source-gap
 _Retained constructors have working producers and missing guarded consumer sources_
 - **answers:** why does array constructor set_key runtime fail in Perl | why does hash constructor take with a block fail Perl compilation | do retained constructors already support direct bracket reads | does constructor result composition restore aggregate selectors
-- **date:** 2026-10-31 · **status:** bounded Perl61.1/Rust61.2/Dart61.3/Julia61.4/sort61.0 targeted-checked; safe Lua/full admission separate
+- **date:** 2026-10-31 · **status:** recorded bounded61 backends and sort61.0 targeted-checked; full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.22; constructor-result-selection-intake.json.gz retains21 public native/fresh/source programs, shared constructor15/sort7 and unchanged production custody.`
 - **reverify:** `Recover exact authored cases/public observer from constructor-result-selection-intake.json.gz into new project-local outputs; historical activation/create/run/inspect/finish/retain writers one-shot, never replay.`
 - **source:** [`docs/knowledge/constructor-result-source-gap.md`](docs/knowledge/constructor-result-source-gap.md)
@@ -16255,6 +16259,14 @@ _Lua executes the complete seven-helper named-mark contract on PUC Lua and LuaJI
 - **evidence:** `FUTURE-PARITY-BACKLOG.17.4 adds one parse-scoped rule-label/name/UTF-8-byte-offset store and exact seven-name family view. lua/test/run.lua proves the unchanged linkedspec-complete-named-mark-v1 value through native and serialized SpecFile reconstruction. FUTURE-PARITY-BACKLOG.17.5 admits the names into the shared 246-name inventory. tools/run_lua_local.sh passes 119/119 on PUC Lua and LuaJIT plus syntax, CLI scaffold, and 105 manifest checks.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/check_complete_named_mark_contract.py && bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl --report`
 - **source:** [`docs/knowledge/lua-complete-named-mark-parity.md`](docs/knowledge/lua-complete-named-mark-parity.md)
+
+### lua-constructor-result-guards
+_Safe Lua retained constructors reuse existing namespace and common kind guards_
+- **answers:** which Lua owner guards retained Array and Hash constructor result methods | does Lua constructor rejection skip operands and later with | does constructor result guard repair add interpreter chunk locals | do Lua computed Hash keys need Perl producer fixes
+- **date:** 2026-10-31 · **status:** installed PUC5.5.1/LuaJIT61.5 targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.61.5; constructor-lua-intake.json.gz retains same116 96PASS20RED to116PASS per host, nearest default91/six programs/loadfile/version and actual producers/inputs/results.96 includes five compile scaffolds.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/constructor_result_composition_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/constructor_result_composition_test.lua`
+- **source:** [`docs/knowledge/lua-constructor-result-guards.md`](docs/knowledge/lua-constructor-result-guards.md)
 
 ### lua-contextual-user-function-codeblock-runtime
 _Lua invokes contextual final blocks in the current isolated user-function frame_

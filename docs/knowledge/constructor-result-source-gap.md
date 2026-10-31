@@ -7,7 +7,7 @@ answers:
   - "do retained constructors already support direct bracket reads"
   - "does constructor result composition restore aggregate selectors"
 date: 2026-10-31
-status: bounded Perl61.1/Rust61.2/Dart61.3/Julia61.4/sort61.0 targeted-checked; safe Lua/full admission separate
+status: recorded bounded61 backends and sort61.0 targeted-checked; full admission separate
 tags: [perl, constructors, array, hash, source, fluent, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.22; constructor-result-selection-intake.json.gz retains21 public native/fresh/source programs, shared constructor15/sort7 and unchanged production custody."
 reverify: "Recover exact authored cases/public observer from constructor-result-selection-intake.json.gz into new project-local outputs; historical activation/create/run/inspect/finish/retain writers one-shot, never replay."
@@ -31,3 +31,5 @@ Rust61.2 guards repaired without producer/key changes: [[rust-constructor-result
 Dart61.3 common source guards repaired without producer/key changes: [[dart-constructor-result-guards]]. Independent Julia61.4 next.
 
 Julia61.4 common source guards repaired without producer/key changes: [[julia-constructor-result-guards]]. Safe Lua61.5 next.
+
+Installed Lua61.5 namespace/common guards repaired: [[lua-constructor-result-guards]]. All bounded61 outcomes recorded; next selection23.1.23, full admission stays23.4.
