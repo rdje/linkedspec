@@ -3169,8 +3169,10 @@ declared5.4/full source/domain/context admission remains separate. Regenerate
 emitted Perl and rebuild native apps/runtime. Remaining feature selection follows.
 
 
-Feature64 targets canonical free numeric comparison and short-prefix result
-guards. Perl public19 qualifies ten healthy values/six wrong values/two unready
-bridge contexts/one needed error; valid Number0/1 with remains present. The six
-helper reference now lists existing signatures and true/false examples. Perl64.1
-first, independent peers next; producer/domain/arity/alias/full admission separate.
+Feature64 guards canonical free numeric comparison and short-prefix results in
+Perl, including Array bridges and rejection before later with bodies. Eighteen
+value programs execute with ready metadata; ten original healthy observations
+and the needed error stay exact, including valid Number0/1 with. The six-helper
+reference lists existing signatures and true/false examples. Regenerate emitted
+Perl; independent Rust assessment is next, then Dart/Julia/safe Lua. Original
+producer/domain/arity/alias and full admission remain separate.

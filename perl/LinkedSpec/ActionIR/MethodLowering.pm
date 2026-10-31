@@ -1769,12 +1769,12 @@ sub _ordinary_free_string_result_source {
  return 1
 }
 
-# Scalar arithmetic calls keep their numeric producer and strict input domains.
+# Scalar numeric calls keep their numeric producer and strict input domains.
 # The one-Array min/max reducer is a separate source role.
 sub _ordinary_free_numeric_result_source {
  my ($call) = @_;
  return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
-  && ($call->{name} // '') =~ /\Anum_(?:abs|floor|ceil|round|add|sub|mul|div|mod|clamp|min|max)\z/o
+  && ($call->{name} // '') =~ /\Anum_(?:abs|floor|ceil|round|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le)\z/o
   && ($call->{source_method} // $call->{name}) eq $call->{name}
   && !$call->{trailing_block_arg}
   && defined($call->{source}) && length($call->{source})
@@ -1783,7 +1783,7 @@ sub _ordinary_free_numeric_result_source {
  my $count = @{$call->{args}};
  my $valid_arity = $name =~ /\Anum_(?:add|mul|min|max)\z/o ? $count >= 2
   : $name eq 'num_clamp' ? $count == 3
-  : $name =~ /\Anum_(?:sub|div|mod)\z/o ? $count == 2
+  : $name =~ /\Anum_(?:sub|div|mod|eq|ne|gt|ge|lt|le)\z/o ? $count == 2
   : $count == 1;
  return 0 unless $valid_arity;
  foreach my $value (@{$call->{args}}) {
@@ -5463,9 +5463,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
-  # Arithmetic prefixes retain rejection state through later immediate with.
+  # Numeric prefixes retain rejection state through later immediate with.
   # Zero-extra min/max remains the Array reducer's existing route.
-  my $ordinary_number_receiver_prefix = ($calls->[0]{method} // '') =~ /\A(?:abs|floor|ceil|round|add|sub|mul|div|mod|clamp|min|max)\z/o
+  my $ordinary_number_receiver_prefix = ($calls->[0]{method} // '') =~ /\A(?:abs|floor|ceil|round|add|sub|mul|div|mod|clamp|min|max|eq|ne|gt|ge|lt|le)\z/o
    && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
    && ref($calls->[0]{args}) eq 'ARRAY'
    && (($calls->[0]{method} // '') !~ /\A(?:min|max)\z/o || @{$calls->[0]{args}})

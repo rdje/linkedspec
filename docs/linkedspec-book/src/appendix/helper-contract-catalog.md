@@ -1381,13 +1381,21 @@ num_eq(2,3).with(){return(value.add(2))}      # 2; valid zero enters the body
 ```
 
 Source and operands evaluate once in order; later consumers use the computed
-result. A current Perl source-role gap affects incompatible container consumers:
-`num_eq(2,3).take(1)` returns an empty Array, and a rejected comparison prefix may
-still enter a later `with` body. Some bridge tails return null while their
-descriptor reports unsupported `with`; matching output alone is not readiness.
-Feature64 owns these repairs. The original producers, compatible chains, typed
-zero indices and legitimate zero/one/null/empty `with` controls already work.
-Other backends are assessed independently; numeric domains/arity/aliases stay.
+result. Perl also retains kind guards through canonical free comparison calls
+and ordinary short comparison prefixes, including intermediate Array bridges:
+
+```text
+num_eq(2,3).take(1)                         # null
+2.eq(3).take(1).with(){return("ran")}       # null; body skipped
+num_lt(2,3).split(",").set_key("k",1)        # null
+num_eq("bad",2).coalesce([]).with(){return(value.count())} # 0
+```
+
+Incompatible consumer operands and later bodies stay skipped; legitimate
+zero/one/null/empty values still enter `with`. These Perl paths execute with
+ready ActionIR metadata. Numeric kinds, source effects, snapshots and needed
+errors are preserved. Regenerate emitted Perl parsers. Other backends are
+assessed independently; numeric domains/arity/aliases stay unchanged.
 
 ### `num_add(a, b)`
 - **Signature**: `num_add(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands)

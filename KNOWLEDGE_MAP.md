@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1580** facts · **11631** question keys.
+> **1580** facts · **11632** question keys.
 
 ## Questions → fact
 
@@ -169,6 +169,7 @@
 - "are Perl helper-call statements lowered from AST" -> [perl-actionir-ast-statement-call-lowering](docs/knowledge/perl-actionir-ast-statement-call-lowering.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
 - "are Perl if statements lowered from AST" -> [perl-actionir-ast-if-control-lowering](docs/knowledge/perl-actionir-ast-if-control-lowering.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t && prove -q -Iperl t/phase0_regression.t`
 - "are Perl if-family controls lowered from AST" -> [perl-actionir-ast-parser-seam](docs/knowledge/perl-actionir-ast-parser-seam.md) · 2026-07-01 · reverify: `prove -Iperl t/actionir_ast_parser.t t/punctuation_light_zero_arg_contract.t && perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`
+- "are Perl numeric comparison source guards fixed" -> [numeric-comparison-result-source-guards](docs/knowledge/numeric-comparison-result-source-guards.md) · 2026-10-31 · reverify: `Recover exact shared19/public observer and original Perl from free-numeric-comparison-selection-intake.json.gz into new project-local outputs. Historical activation/create/run/freeze writers one-shot, never replay. Implementation owners64.1-.5.`
 - "are Perl one segment and multi segment writes one ActionIR node" -> [write-vivification-perl-reference](docs/knowledge/write-vivification-perl-reference.md) · 2026-10-24 · reverify: `bash tools/run_python_project_data.sh docs/checkpoints/signed-array-perl/publish.py; current: bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/signed_array_selector_perl_contract.t; literal-kind repair: bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-kinds/publish.py. Perl scope only.`
 - "are Perl recognition transactions admitted or public" -> [perl-recognition-transaction-integration](docs/knowledge/perl-recognition-transaction-integration.md) · 2026-08-10 · reverify: `perl -Iperl -c perl/LinkedSpec/RecognitionTransactionPolicy.pm && perl -Iperl -c perl/LinkedSpec/RecognitionTransactionRuntime.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm && prove -Iperl t/recognition_transaction_perl_authority.t t/recognition_transaction_perl_contract.t t/generated_source_contract.t && bash tools/run_python_project_data.sh tools/check_recognition_transaction_contract.py && test \"$(rg -c 'require_tracked_file t/recognition_transaction_perl_contract[.]t|perl -c -Iperl t/recognition_transaction_perl_contract[.]t|PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract[.]t' tools/run_ci_local.sh)\" = 3`
 - "are Perl rest arrays fresh per invocation" -> [perl-variadic-user-functions](docs/knowledge/perl-variadic-user-functions.md) · 2026-07-12 · reverify: `PERL5LIB= prove -Iperl t/variadic_user_function_contract.t && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py`
@@ -18498,8 +18499,8 @@ _Non-current helper spelling purge is split across Perl source, Rust source, tes
 
 ### numeric-comparison-result-source-guards
 _Canonical numeric comparison source roles and later with rejection state_
-- **answers:** why does num_eq take return an empty Array instead of null | why does a numeric comparison chain run with after rejected take | which task owns canonical numeric comparison source guards | does a valid zero numeric comparison result enter with | where are all six canonical numeric comparison helper signatures documented
-- **date:** 2026-10-31 · **status:** frozen64; Perl64.1 first and independent peers/full admission pending
+- **answers:** why does num_eq take return an empty Array instead of null | why does a numeric comparison chain run with after rejected take | which task owns canonical numeric comparison source guards | does a valid zero numeric comparison result enter with | where are all six canonical numeric comparison helper signatures documented | are Perl numeric comparison source guards fixed
+- **date:** 2026-10-31 · **status:** bounded Perl64.1 targeted-checked; independent Rust64.2/peers/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.25; free-numeric-comparison-selection-intake.json.gz retains initial18 plus valid Number0/1-with public controls/native/fresh/descriptor/substitution/emitted modules and original Perl inputs.`
 - **reverify:** `Recover exact shared19/public observer and original Perl from free-numeric-comparison-selection-intake.json.gz into new project-local outputs. Historical activation/create/run/freeze writers one-shot, never replay. Implementation owners64.1-.5.`
 - **source:** [`docs/knowledge/numeric-comparison-result-source-guards.md`](docs/knowledge/numeric-comparison-result-source-guards.md)
