@@ -385,7 +385,7 @@ arities and complete admission remain separate. See the backend handoff.
   ```
   Input `[  hello  ]` → `["hello"]` (capture group `0` is the bracketed, padded text).
 
-Perl and Rust canonical ordinary free calls also retain actual-kind guards through
+Perl, Rust and Dart canonical ordinary free calls also retain actual-kind guards through
 compatible methods and explicit Array bridges:
 
 ```text
@@ -398,9 +398,9 @@ trim(undef).with(){return("recovered")}        # recovered
 Incompatible consumer arguments and later immediate `with` bodies stay skipped;
 legitimate empty Arrays and null values still enter `with`. Scalar identities
 remain Number/Boolean where the original producer preserves them. Regenerate
-emitted Perl parsers and rebuild Rust applications/runtime to pick up these guards.
+emitted Perl parsers and rebuild Rust/Dart applications/runtime to pick up these guards.
 Other backends are assessed independently; legacy named aggregate fallback, malformed/alias/regex mutation
-forms and broader unsupported receiver contexts remain separate. Rust receiver-only
+forms and broader unsupported receiver contexts remain separate. Rust and Dart receiver-only
 String-to-Array-to-incompatible-Hash chains ending in `with` still run rejected
 arguments/body; that separate repair is scheduled before admission.
 

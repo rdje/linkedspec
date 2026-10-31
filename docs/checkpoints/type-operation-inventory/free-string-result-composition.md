@@ -4,7 +4,7 @@ Owner: TYPE-REFERENCE-BOOK.1.2.23.1.23; family23.3.62. Existing authority:
 scalar-string-results.md19, scalar-text/numeric/uniform binding contracts and
 current catalog. This extends the ordinary canonical free-call source role,
 without changing existing String producers or input/signature policies.
-Status: Bounded Perl62.1/Rust62.2 targeted-checked; remaining peers/separate receiver-context/full admission pending.
+Status: Bounded Perl62.1/Rust62.2/Dart62.3 targeted-checked; Julia/Lua/separate receiver-context/full admission pending.
 
 Retain trim/lowercase/uppercase(one positional), replace_substr(three),
 rm_prefix/rm_suffix(two), character substr(two or three), cat(two-or-more).
@@ -103,3 +103,25 @@ false for the literal root through trim/split; dynamic dispatch runs incompatibl
 Hash arguments and later with. P1 repair62.6 scheduled after62.5/before23.4, with
 independent peer assessments and dedicated RED/GREEN. No synthetic host seed/
 general isolation/exhaustive excluded-runtime/isolated emitted package/full admission.
+
+## Bounded Dart62.3 free-source guards
+
+Same18 tests13PASS5RED to18PASS native/restoredSpec/in-process plan;13 includes
+ten healthy values/error/shape scaffold/observed legacy context.15 values/ten
+healthy observations/error/nine public syntax shapes/context exact. Canonical
+eight-helper ordinary positional arity/value predicate feeds current common
+actual-kind guard; original producers/signatures/domains/Unicode/kinds/eager
+snapshots/with/function/copy/alias/deferred/parser/schema stay. Invalid arguments/
+later body skip, source once/order/Number0 typed index/Boolfalse/null-empty with
+hold. Nearest String7/constructor24/fatal analysis/new-normal format pass. Only
+new helper isolated format: whitespace/two optional argument commas. Strict token
+assertion caught second comma before production write; guarded recovery reuses
+wrapper without replay. Activation quote syntax/prefix guard also prewrite;
+originals/corrections retained, no setup RED credit. Actual producers/inputs:
+free-string-dart-intake.json.gz. Rebuild Dart apps/runtime; Julia62.4 next.
+
+Dart independently confirms receiver-only [ran,KVW] before/after, no imported Perl
+unready classification. trim marks scalarResult; split returns List and clears
+it, while literal-root kindGuardedResult stays false. Hash arguments and later
+with run. P1 context62.6 after62.5/before23.4 owns Dart alongside Rust. No fresh
+isolated/exhaustive excluded-runtime/general isolation/full admission claim.

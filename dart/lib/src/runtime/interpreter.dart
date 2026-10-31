@@ -4078,6 +4078,7 @@ final class LinkedSpecRuntimeEngine {
               _isCanonicalSetResultSource(receiver) ||
               _isFreeDefaultResultSource(receiver) ||
               _isConstructorResultSource(receiver) ||
+              _isFreeStringResultSource(receiver) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5512,6 +5513,53 @@ final class LinkedSpecRuntimeEngine {
       ActionCodeblockLiteralExpr() => true,
       _ => false,
     });
+  }
+
+  // Preserve String producers and domains; guard canonical ordinary calls.
+  bool _isFreeStringResultSource(ActionExpr expression) {
+    if (expression is! ActionCallExpr ||
+        (expression.sourceMethod ?? expression.name) != expression.name ||
+        expression.trailingBlockArg ||
+        expression.args.any(
+          (argument) => argument is! ActionPositionalArgument,
+        )) {
+      return false;
+    }
+    final validArity = switch (expression.name) {
+      'trim' || 'lowercase' || 'uppercase' => expression.args.length == 1,
+      'replace_substr' => expression.args.length == 3,
+      'rm_prefix' || 'rm_suffix' => expression.args.length == 2,
+      'substr' => expression.args.length == 2 || expression.args.length == 3,
+      'cat' => expression.args.length >= 2,
+      _ => false,
+    };
+    if (!validArity) {
+      return false;
+    }
+    return expression.args.every(
+      (argument) => switch (argument.value) {
+        ActionVariableExpr() ||
+        ActionNumberLiteralExpr() ||
+        ActionStringLiteralExpr() ||
+        ActionBooleanLiteralExpr() ||
+        ActionUndefExpr() ||
+        ActionArrayLiteralExpr() ||
+        ActionHashLiteralExpr() ||
+        ActionBlockValueExpr() ||
+        ActionCallExpr() ||
+        ActionFluentChainExpr() ||
+        ActionReceiverMutationChainExpr() ||
+        ActionIndexedVarExpr() ||
+        ActionNestedAccessExpr() ||
+        ActionValueAccessExpr() ||
+        ActionAssignScalarExpr() ||
+        ActionAssignArrayAppendExpr() ||
+        ActionAssignHashIndexExpr() ||
+        ActionAssignNestedAccessExpr() ||
+        ActionCodeblockLiteralExpr() => true,
+        _ => false,
+      },
+    );
   }
 
   // Preserve constructor payload/pair/splice policy; guard retained boxed forms.
