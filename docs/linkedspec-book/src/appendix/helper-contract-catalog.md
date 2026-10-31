@@ -1059,12 +1059,12 @@ return numeric `0` and still evaluate the needle. For example, with `order=""`,
 still searches the captured null value. This membership rule grants no other
 Array method a nullable receiver.
 
-Copied-null composition has a bounded known gap on the installed Lua hosts:
-`{undef}.copy().contains(needle)` currently skips the needle and returns null,
-while `copy({undef}).contains(needle)` and free `contains` evaluate it and return
-numeric0. Repeated copies and copied valid null results also suppress needed
-needle effects/errors. That repair remains scheduled. Perl/Rust/Dart/Julia ordinary
-canonical membership/copy chains now retain rejection with and without `with`:
+Ordinary Perl/Rust/Dart/Julia/installed Lua preserve nullable membership after copy.
+`{undef}.copy().contains(needle)`, `copy({undef}).contains(needle)` and
+`contains(copy({undef}),needle)` evaluate the needle once and return numeric0.
+Repeated copies and copied legitimate null results from `with` or numeric methods
+retain this behavior, including needed needle errors. These checked canonical
+membership/copy chains retain rejection with and without `with`:
 
 ```text
 order="";
@@ -1079,9 +1079,10 @@ out=contains(["a"],"z").add("bad").copy()
 # out=0, order="N"; legitimate copied null still evaluates its needle
 ```
 
-Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia apps/runtime. Equality,
-numeric flags, null/empty distinction, copy depth and snapshots stay; full source/
-context/portable admission remains open.
+Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia/Lua apps/runtime. Lua
+checks use installed PUC5.5.1/LuaJIT; declared5.4 remains open. Equality, numeric
+flags, null/empty distinction, copy depth and snapshots stay; full source/context/
+portable admission remains open.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`

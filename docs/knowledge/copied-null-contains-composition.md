@@ -7,7 +7,7 @@ answers:
   - "which task owns copied-null contains errors and effects"
   - "are fluent and free copied-null membership calls equivalent"
 date: 2026-10-31
-status: Perl71.6.1/Rust71.6.2/Dart71.6.3/Julia71.6.4 targeted-checked; independent installed Lua next
+status: all bounded71.6 backend outcomes targeted-checked on recorded routes/hosts; full admission separate
 tags: [copy, null, contains, rejection, source, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.71.6.0; copied-null-contains-assessment-intake.json.gz retains actual11 controls/four peer syntax projections/instruments/declared inputs/raw channels/actual Cargo source and public diagnosis."
 reverify: "Recover observers/shared11 into new project-local outputs with project-data wrappers; qualify Perl native context errors and bind the actual Cargo-consumed example before/after. Historical activation/closeout writers are one-shot."
@@ -24,3 +24,5 @@ Independent Rust nullable membership/needle effects and retained rejection: [[ru
 Independent Dart nullable membership across both guards: [[dart-copied-null-contains]]. Historical six-failure observations above retain their assessment epoch.
 
 Independent Julia strict-numeric nullable membership across both guards: [[julia-copied-null-contains]]. Historical six-failure observations above retain their assessment epoch.
+
+Independent installed-host Lua nullable membership across both guards: [[lua-copied-null-contains]]. All bounded71.6 outcomes recorded; historical assessment failures retain their epoch. General rejection isolation/full admission remain separate.

@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1634** facts · **11852** question keys.
+> **1635** facts · **11855** question keys.
 
 ## Questions → fact
 
@@ -2237,6 +2237,7 @@
 - "does Lua compiled state carry ActionIR payloads" -> [lua-compiled-spec-state](docs/knowledge/lua-compiled-spec-state.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua constructor rejection skip operands and later with" -> [lua-constructor-result-guards](docs/knowledge/lua-constructor-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-constructor-result-guards)
 - "does Lua consume the shared native resolution fixture directly" -> [lua-native-spec-resolution](docs/knowledge/lua-native-spec-resolution.md) · 2026-07-15 · reverify: `perl tools/check_native_spec_resolution_contract.pl && bash tools/run_lua_local.sh`
+- "does Lua copied null contains evaluate its needle and propagate errors" -> [lua-copied-null-contains](docs/knowledge/lua-copied-null-contains.md) · 2026-10-31 · reverify: `Run lua/test/copied_null_contains_composition_test.lua and selected contains/presence-copy/value-copy nearest tests with tools/run_lua_project_data.sh for puc and luajit. Recover historical selector into new project-local outputs; writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
 - "does Lua copied null has_key evaluate its key and propagate errors" -> [lua-copied-null-presence](docs/knowledge/lua-copied-null-presence.md) · 2026-10-31 · reverify: `Recover retained targeted nearest selector into a new project-local path; run new normal/selected nearest with tools/run_lua_project_data.sh for puc and luajit. Historical writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
 - "does Lua copied-null presence add interpreter chunk locals" -> [lua-copied-null-presence](docs/knowledge/lua-copied-null-presence.md) · 2026-10-31 · reverify: `Recover retained targeted nearest selector into a new project-local path; run new normal/selected nearest with tools/run_lua_project_data.sh for puc and luajit. Historical writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
 - "does Lua copy runtime aggregates and codeblocks" -> [lua-runtime-core-value-capture-helpers](docs/knowledge/lua-runtime-core-value-capture-helpers.md) · 2026-10-25 · reverify: `bash tools/run_lua_local.sh`
@@ -9261,6 +9262,7 @@
 - "which Lua generated plan owns semantic provenance" -> [lua-semantic-introspection-authority-map](docs/knowledge/lua-semantic-introspection-authority-map.md) · 2026-07-28 · reverify: `bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py; bash tools/run_lua_local.sh; rg -n 'semantic_(index|query|observation)|Semantic(Index|Query|Observation)|regex_slot_selected|diagnostic_sink|spec_path|sha256' lua/src lua/test`
 - "which Lua generated semantic observation routes work on PUC Lua and LuaJIT" -> [lua-semantic-runtime-observation-generated-routes](docs/knowledge/lua-semantic-runtime-observation-generated-routes.md) · 2026-07-28 · reverify: [3 entries](#lua-semantic-runtime-observation-generated-routes)
 - "which Lua generated v1 APIs were removed" -> [lua-generated-source-v2-rule-local-cursor](docs/knowledge/lua-generated-source-v2-rule-local-cursor.md) · 2026-07-19 · reverify: `bash tools/run_lua_local.sh; perl tools/check_generated_source_contract.pl; bash tools/run_python_project_data.sh tools/check_rule_local_cursor_contract.py; rg -n 'linkedspec-generated-source-v2|validate_generated_source_contract_v2|generated_family_execution_policy|emit_lua_source_v2' lua/src/linkedspec lua/test/rule_local_cursor_generated_source_test.lua`
+- "which Lua guards need the nullable membership exception" -> [lua-copied-null-contains](docs/knowledge/lua-copied-null-contains.md) · 2026-10-31 · reverify: `Run lua/test/copied_null_contains_composition_test.lua and selected contains/presence-copy/value-copy nearest tests with tools/run_lua_project_data.sh for puc and luajit. Recover historical selector into new project-local outputs; writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
 - "which Lua guards need the nullable presence exception" -> [lua-copied-null-presence](docs/knowledge/lua-copied-null-presence.md) · 2026-10-31 · reverify: `Recover retained targeted nearest selector into a new project-local path; run new normal/selected nearest with tools/run_lua_project_data.sh for puc and luajit. Historical writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
 - "which Lua harray helpers remain after closeout" -> [lua-runtime-harray-helper-closeout](docs/knowledge/lua-runtime-harray-helper-closeout.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py && bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py && perl tools/check_capability_conformance.pl && rg -n 'local HASH_HELPERS|local PURE_HASH_HELPERS|evaluate_hash_helper|execute_hash_set_key_statement' lua/src/linkedspec/action_contracts.lua lua/src/linkedspec/interpreter.lua`
 - "which Lua harray transform helpers execute" -> [lua-runtime-harray-transforms](docs/knowledge/lua-runtime-harray-transforms.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh`
@@ -11060,6 +11062,7 @@
 - "why does Lua repeated AND return only the first group" -> [lua-repeated-and-group-outcomes](docs/knowledge/lua-repeated-and-group-outcomes.md) · 2026-10-29 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/repeated_and_group_results_test.lua and the same luajit route; explicit new-test registration23.4.1 before admission.`
 - "why does Lua repeated AND return only the first group" -> [lua-sparse-and-independent-intake](docs/knowledge/lua-sparse-and-independent-intake.md) · 2026-10-29 · reverify: `Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh.`
 - "why does Lua repeated blind post-call return only first child" -> [lua-blind-postcall-return-scope-gap](docs/knowledge/lua-blind-postcall-return-scope-gap.md) · 2026-10-29 · reverify: `Recover retained probe_lua_blind_postcall.lua/fresh.lua then run with both project-data Lua wrappers, followed by read_lua_blind_postcall.py red --fresh only after completion; no product edits in intake.`
+- "why does Lua retain index after nullable membership changes" -> [lua-copied-null-contains](docs/knowledge/lua-copied-null-contains.md) · 2026-10-31 · reverify: `Run lua/test/copied_null_contains_composition_test.lua and selected contains/presence-copy/value-copy nearest tests with tools/run_lua_project_data.sh for puc and luajit. Recover historical selector into new project-local outputs; writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
 - "why does Lua rewind_entry_start return null after moving the cursor" -> [lua-cursor-rewind-number-results](docs/knowledge/lua-cursor-rewind-number-results.md) · 2026-10-30 · reverify: [2 entries](#lua-cursor-rewind-number-results)
 - "why does Lua selected call Child String execute incompatible Array operands" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
 - "why does Lua semantic array or literal binding source become null" -> [lua-static-completion-sha-emitter-reading-and-conditional-gaps](docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md) · 2026-09-13 · reverify: [4 entries](#lua-static-completion-sha-emitter-reading-and-conditional-gaps)
@@ -12761,7 +12764,7 @@ _Rust preserves bounded closing-name context through six typed carriers_
 ### copied-null-contains-composition
 _Copied-null membership needs nullable dispatch and retained rejection_
 - **answers:** why does copied null contains skip its needle | why does Perl copy revive a rejected contains chain | which task owns copied-null contains errors and effects | are fluent and free copied-null membership calls equivalent
-- **date:** 2026-10-31 · **status:** Perl71.6.1/Rust71.6.2/Dart71.6.3/Julia71.6.4 targeted-checked; independent installed Lua next
+- **date:** 2026-10-31 · **status:** all bounded71.6 backend outcomes targeted-checked on recorded routes/hosts; full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.71.6.0; copied-null-contains-assessment-intake.json.gz retains actual11 controls/four peer syntax projections/instruments/declared inputs/raw channels/actual Cargo source and public diagnosis.`
 - **reverify:** `Recover observers/shared11 into new project-local outputs with project-data wrappers; qualify Perl native context errors and bind the actual Cargo-consumed example before/after. Historical activation/closeout writers are one-shot.`
 - **source:** [`docs/knowledge/copied-null-contains-composition.md`](docs/knowledge/copied-null-contains-composition.md)
@@ -16901,6 +16904,14 @@ _Lua corpus execution is a reusable non-aborting library pipeline with typed pro
 - **evidence:** `LUA-BACKEND-PARITY.6.1.2 adds execute_corpus_fixtures and typed result/query APIs. Controlled scalar, aggregate, dispatch, lifecycle, function, boundary, selection, and failure/continuation proof passes 160/160 on PUC Lua and LuaJIT.`
 - **reverify:** `bash tools/run_lua_local.sh`
 - **source:** [`docs/knowledge/lua-controlled-corpus-execution.md`](docs/knowledge/lua-controlled-corpus-execution.md)
+
+### lua-copied-null-contains
+_Lua nullable membership crosses both guards while rejection exits early_
+- **answers:** does Lua copied null contains evaluate its needle and propagate errors | which Lua guards need the nullable membership exception | why does Lua retain index after nullable membership changes
+- **date:** 2026-10-31 · **status:** bounded installed-host71.6.5 targeted-checked; declared5.4/full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.71.6.5; copied-null-contains-lua-intake.json.gz retains actual unchanged55 before/after, eight runtime fixtures/four consumers, sources/instruments/strict numeric/raw phases.`
+- **reverify:** `Run lua/test/copied_null_contains_composition_test.lua and selected contains/presence-copy/value-copy nearest tests with tools/run_lua_project_data.sh for puc and luajit. Recover historical selector into new project-local outputs; writers one-shot never replay. No unsafe full runner/formatter or declared5.4 inference.`
+- **source:** [`docs/knowledge/lua-copied-null-contains.md`](docs/knowledge/lua-copied-null-contains.md)
 
 ### lua-copied-null-presence
 _Lua nullable presence crosses both guards while rejection exits early_

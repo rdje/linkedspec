@@ -3370,8 +3370,8 @@ Julia71.4 preserves contains source/prefix actual-kind guards on native/restored
 plan/fresh Module routes. Shared23/null-prefix3/null-plus-with2/source scaffold141
 and nearest membership12/null-key36/String-predicate111 pass with strict numeric
 kinds and depwarn checking. Existing SOC/null effects/error/public shapes stay;
-incompatible operands/later bodies skip. Rebuild Julia apps/runtime. Safe Lua71.5
-follows independently; P1 copy71.6/general isolation/full admission remain.
+incompatible operands/later bodies skip. Rebuild Julia apps/runtime. The installed
+Lua and copied-null outcomes follow below; general isolation/full admission remain.
 
 
 Safe Lua71.5 preserves contains source/prefix guards on installed PUC5.5.1/LuaJIT
@@ -3379,48 +3379,52 @@ native/restoredSpec/plan/fresh module routes. Shared23/null-prefix3/null-plus-wi
 source scaffold141 pass per host; nearest membership/null-key/String-predicate111/
 loadfile/version checks pass with empty stderr. Existing namespace/no new chunk
 locals; numeric flags/SOC/null effects/error/public shapes stay. Rebuild Lua apps/
-runtime. All primary71 outcomes are recorded; mandatory P1 copy71.6.0 assessment
-follows on every backend before unrelated selection. Declared5.4/general isolation/
+runtime. All primary71 outcomes are recorded; the copied-null assessment and
+bounded repairs below are also recorded. Declared5.4/general isolation/
 domain/context/full admission remain separate.
 
 
-Copied-null contains assessment71.6.0 independently finds Perl rejection loss
-through copy and peer nullable-needle/error suppression after receiver copy.
-Reference rejection-state repair71.6.1 precedes Rust/Dart/Julia/safe Lua repairs.
-The shared11 controls preserve numeric membership, source snapshots, copy depth
-and healthy rejected peer chains. Actual consumed Cargo source custody is bound
-on the initial run; generic route-template captions retain their presence origin.
-These bounded repairs precede unrelated selection; full admission remains separate.
+The shared11 copied-null contains controls distinguish legitimate null from
+rejection, source snapshots, copy depth and needed needle errors. The bounded
+repairs below address Perl rejection loss through copy and peer nullable-needle
+suppression. Each backend independently baselined the controls before its change.
+Full source/domain/context/portable admission remains separate.
 
 
 Perl71.6.1 now retains canonical contains/copy rejection before later needles and
 with bodies, including no-with chains. Legitimate copied-null needle effects and
 required errors stay. Unchanged11/nearest contains-presence-copy60/source18/syntax
 and three input-bound public lowerings pass; regenerate emitted Perl parsers.
-Independent Rust71.6.2 then Dart/Julia/safe Lua nullable membership repairs remain
-before unrelated selection; general isolation/full admission stays separate.
+The independent peer outcomes follow; general isolation/full admission stay separate.
 
 
 Rust71.6.2 restores copied-null contains after copies/valid null results on native/
 restoredSpec/in-process plan, including needed needle errors. Earlier incompatible
 consumers still exit before later effects. Unchanged11/nearest contains-presence-
-copy-null-with46/owned formatting pass; rebuild Rust apps/runtime. Separate Dart/
-Julia/safe Lua nullable membership repairs remain before unrelated selection;
-general isolation/full admission stays open.
+copy-null-with46/owned formatting pass; rebuild Rust apps/runtime. General
+isolation/full admission stay open.
 
 
 Dart71.6.3 restores copied-null contains through common/scalar guards on native/
 restoredSpec/plan, including needed needle errors; earlier incompatible consumers
 still exit before later effects. Unchanged11/nearest contains-presence-copy44/fatal
 analysis/new-normal and verbatim changed-member formatting pass. Rebuild Dart
-apps/runtime. Julia/safe Lua nullable membership repairs remain before unrelated
-selection; whole-SDK formatting/general isolation/full admission stays separate.
+apps/runtime. Whole-SDK formatting/general isolation/full admission stay separate.
 
 
 Julia71.6.4 restores copied-null contains through common/scalar guards on native/
 restoredSpec/plan/fresh Module with strict Number-versus-Bool identity. Earlier
 rejected consumers still exit, and the separate call-index mutation restriction
 stays. Unchanged55/nearest contains-presence-copy208/strict depwarn checks pass
-with qualified package-precompile notices only. Rebuild Julia apps/runtime; safe
-Lua nullable membership repairs remain before unrelated selection, with general
-isolation/full admission separate.
+with qualified package-precompile notices only. Rebuild Julia apps/runtime;
+general isolation/full admission remain separate.
+
+
+Safe Lua71.6.5 restores copied-null contains through common/scalar guards using
+the existing namespace, with no new interpreter chunk locals. The separate
+index mutation restriction and earlier rejection exits stay. Both installed
+PUC5.5.1/LuaJIT pass55 strict JSON-kind checks on native/restoredSpec/plan/fresh
+module, nearest contains141/presence-copy55/copy four programs twelve route
+observations/loadfile/versions with empty accepted-nearest-version stderr.
+Rebuild Lua apps/runtime. All bounded71/71.6 outcomes are recorded; declared5.4,
+general isolation and full admission remain open.
