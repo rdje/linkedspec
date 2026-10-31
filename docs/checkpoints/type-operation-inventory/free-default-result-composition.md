@@ -1,7 +1,7 @@
 # Canonical free-default result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.21; implementation family23.3.60.
-Status: Bounded Perl60.1/Rust60.2/Dart60.3 targeted-checked; Julia/safe Lua/full admission pending.
+Status: Bounded Perl60.1/Rust60.2/Dart60.3/Julia60.4 targeted-checked; safe Lua/full admission pending.
 
 Existing catalog publishes coalesce(values: scalar...) and
 coalesce_nonempty(values: scalar...). First defined versus first defined/nonempty
@@ -107,3 +107,20 @@ failed load before tests, matcher-only correction/no setup RED credit. Actual
 producers/inputs/results: free-default-dart-intake.json.gz. Rebuild apps/runtime;
 independent Julia60.4 next, no whole-SDK format/fresh isolated/portable aggregate-
 domain/full admission claim.
+
+Julia60.4 independently baselines the same named/completed defined/nonempty guard prerequisite before production, owned within60.4 under6/18. Same91 has63PASS/28RED (seven passing route-key scaffolds in failing groups); no peer healthy credit imported. Preserve original lazy producer while retaining guard state after both default methods.
+
+## Independent Julia60.4 source and receiver guards
+
+Same91 assertions63PASS/28RED to91PASS native/restoredSpec/plan/fresh Module;
+63 includes seven route-key scaffolds. Seventeen values/ten healthy observations/
+needed error/eight public shapes canonically exact. Free source admission and
+two-name default guard retention fix direct and independently reproduced named/
+completed controls under6/18. Incompatible operands/with skip; legitimate null/
+empty with/source once/outer value stay. Lazy producer/computed reader/with/
+signatures/method tables/arity/copy/alias/function/parser/schema remain. One runner
+include; nearest45/strict depwarn pass, standard successful precompile retained.
+Host quoting preserves intended computed-write source without setup failure.
+Actual producers/inputs/results: free-default-julia-intake.json.gz. Rebuild apps/
+runtime; safe Lua60.5 next, no isolated package/portable aggregate-domain/
+exhaustive excluded-runtime/full admission claim.

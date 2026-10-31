@@ -3098,5 +3098,7 @@ in-process plan, preserving valid null/empty with inputs, source order and unkno
 bound-call policies. Rebuild Rust apps/runtime. Dart now also guards canonical free
 results on native/restoredSpec/plan and retains actual-kind guards after receiver
 defaults select containers. Valid null/empty with inputs, laziness/order/scope stay;
-rebuild Dart apps/runtime. Julia60.4 is next, then independently assessed safe Lua. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
+rebuild Dart apps/runtime. Julia now also guards free and receiver-default results
+across native/restoredSpec/plan/fresh Module, preserving legitimate null/empty with,
+order/scope/errors. Rebuild Julia apps/runtime. Safe installed Lua60.5 is next. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
 context/portable admission remain separate.

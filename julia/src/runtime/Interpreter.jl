@@ -6289,6 +6289,7 @@ function _evaluate_runtime_fluent_chain!(
     kind_guarded_result = _runtime_is_ordinary_computed_read(engine, chain.receiver) ||
         _runtime_is_explicit_push_result_source(engine, chain.receiver) ||
         _runtime_is_canonical_set_result_source(chain.receiver) ||
+        _runtime_is_free_default_result_source(chain.receiver) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6353,7 +6354,9 @@ function _evaluate_runtime_fluent_chain!(
             current_edge,
         )
         reduction_result = reduction_result || helper_name == "reduce_leaves"
-        kind_guarded_result = kind_guarded_result || helper_name in ("copy", "with")
+        kind_guarded_result = kind_guarded_result || helper_name in (
+            "copy", "with", "coalesce", "coalesce_nonempty",
+        )
         scalar_result = value isa Bool || ((scalar_result || may_produce_scalar) &&
             !(value isa AbstractVector || value isa AbstractDict))
     end
@@ -6393,6 +6396,25 @@ function _runtime_is_explicit_push_result_source(engine, expression)
         ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
         ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
     }
+end
+
+# Free selectors keep their lazy producer and published operand domains.
+function _runtime_is_free_default_result_source(expression)
+    expression isa ActionCallExpr || return false
+    expression.name in ("coalesce", "coalesce_nonempty") || return false
+    something(expression.source_method, expression.name) == expression.name || return false
+    expression.trailing_block_arg && return false
+    length(expression.args) >= 2 || return false
+    all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
+    return all(arg -> arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, expression.args)
 end
 
 # Canonical assignments retain the original stored-value and copy/alias ABI.

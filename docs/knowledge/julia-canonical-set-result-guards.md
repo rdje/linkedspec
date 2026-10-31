@@ -29,3 +29,5 @@ output retained. First host triple-quote setup parse error ran no tests; origina
 source/hash/error and transport-only correction keep intended DSL input exact.
 No setup RED credit or peer wider default policy import. Rebuild apps/runtime;
 safe Lua59.5 next, no isolated package/exhaustive excluded-shape/domain/full admission.
+
+Later independently found completed default-container guard prerequisite is fixed in60.4 under6/18: [[julia-free-default-result-guards]]. Canonical set59.4 scope stays unchanged.
