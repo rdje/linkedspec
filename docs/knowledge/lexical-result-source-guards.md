@@ -8,7 +8,7 @@ answers:
   - "which task owns lexical comparison source and prefix guards"
   - "do lexical comparison result guard fixtures preserve backend Boolean kinds"
 date: 2026-10-31
-status: bounded Perl66.1/Rust66.2 targeted-checked; independent Dart66.3/peers/full admission separate
+status: bounded Perl66.1/Rust66.2/Dart66.3 targeted-checked; independent Julia66.4/safe Lua/full admission separate
 tags: [lexical, comparison, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.27; lexical-guard-selection-intake.json.gz retains actual public20 producer/all inputs/results and three explicit non-Perl kind profiles."
 reverify: "Recover public20/shared20/original Perl from lexical-guard-selection-intake.json.gz into new project-local outputs. Historical activation/run/freeze writers one-shot never replay. Owners66.1-.5; peers use expected_nonperl override where present."
@@ -19,3 +19,5 @@ Selection27 freezes canonical lexical comparison source/prefix guard composition
 Current Perl implementation: Perl66.1 repairs canonical lexical comparison source/ordinary prefix guards: unchanged20 groups11PASS9RED to20PASS native/fresh/metadata; eleven means ten healthy values/one needed source error, nine RED means seven wrong values/two unsupported-with contexts. All nineteen values ready/raw0/fallback0/unresolved0/warning-free; ten healthy observations/error exact. Free guards now null with skipped operands; rejected direct/Array-bridge/function continuations skip later bodies and preserve source SO. All twelve true-false free/receiver variants, numeric1-0 flags/copies/arithmetic, false presence, snapshots/compatible split-select/valid zero-one-null-empty with/returned Array stay. A canonical free-two lexical source predicate and ordinary one-RHS prefix role join existing emitted-result/scoped-with/intermediate actual-kind guards. Unknown/traversal/trailing/named/malformed paths retain eighteen exact AST/lowering/warning snapshots. Original comparison producer/null/warning/Unicode/alias/deferred/copy/function/parser/schema and remaining owner unchanged; 453 other inputs exact. Nearest String comparison6/logical guard22=28/fences18/owner-normal syntax pass. Actual producers/all inputs/results in lexical-guard-perl-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; new20/fence18/shared20/AST18 canonical registration23.4.1-owned. Regenerate emitted Perl; independent Rust66.2 uses expected_nonperl kind overrides. No peer fix/portable flag-null normalization/exhaustive excluded-runtime/general isolation/full23.4 admission.
 
 Independent Rust guard repair/Bool profile preservation: [[rust-lexical-result-source-guards]].
+
+Independent Dart lexical Array-bridge repair and healthy Bool/null controls: [[dart-lexical-result-source-guards]].

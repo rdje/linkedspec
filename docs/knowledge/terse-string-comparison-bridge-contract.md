@@ -33,3 +33,5 @@ Lua native/plan/fresh/direct checks pass on available PUC5.5.1/LuaJIT; declared5
 Canonical free/ordinary prefix lexical guard composition through Array bridges/later immediate with is separately repaired by Perl66.1: [[lexical-result-source-guards]]. Original numeric1-0/copy/null/warning/Unicode/alias qualifications unchanged; peers independently use existing Boolean profiles/full23.4 separate.
 
 Rust66.2 independently repairs canonical free/ordinary prefix source guards through bridges/later with while preserving Bool and existing null/Unicode qualifications: [[rust-lexical-result-source-guards]].
+
+Dart66.3 independently repairs lexical source/ordinary prefix guards after Array bridges while preserving Bool/null propagation/Unicode qualifications: [[dart-lexical-result-source-guards]]. Direct rejection already works, not newly repaired.
