@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Dart push snapshot guards repaired: new12/computed7/analysis/new-normal fmt pass; Julia58.4 next.
+Julia push snapshot guards repaired: new65/computed25 strict depwarn pass; safe Lua58.5 next.
 
 ## Latest Completed Slice
 
-Dart58.3 guards direct and selected explicit push snapshots: accepted12 tests10healthy/2RED to12GREEN on native/restoredSpec/plan; computed7 gives19 non-skipped completions, changed-owner/new-normal fatal analysis/new-normal format0. Direct Array and selected String Hash consumers previously retained their value/evaluated KV; now null/skipped. Selected Bool already worked. Nine healthy values/two inherited errors exact, including full12/order/snapshots/functions/copy/logical/with/absence/static-child in original Dart action-edge context. Initial11 and pre-production added String control retained, no imported Rust I-only child policy. One exact-two-positional/plain-target/canonical-unambiguous-value predicate feeds two existing guard roles; original push/child ABI/parser/with/methods/copy/functions/arity/schema and remaining owner exact; 203 other inputs exact. Actual producers/source/RED-GREEN/results in push-snapshot-dart-intake.json.gz; book/card/map/target/task/roadmap/live/resume/history align. Rebuild apps/runtime. Independent Julia58.4 next; no whole-file SDK-format/isolated emitted/full admission claim.
+Julia58.4 guards direct Array/selected String push results: unchanged65 assertions57PASS/8RED to65PASS across native/restoredSpec/plan/fresh Module. Original57 includes two route-key scaffolds; nine healthy values/two errors exact. Full12/selected Bool/order/snapshots/functions/copy/logical/with/absence/static-child already work. One exact-two-positional/plain-target/canonical-unambiguous-value typed source predicate feeds two existing guards, plus exact one-line runner include. Original push/child ABI/parser/consumers/copy/functions/arity/schema and remaining owner exact; 172 other inputs exact. Combined after process1 is nearest-driver setup only after new65 pass: missing Main Test imports. Corrected nearest-only driver imports existing runner dependencies and passes computed25 under strict depwarn; no repeated new normal. Standard successful precompile output retained. Actual producers/inputs/source/RED-GREEN/setup/correction/results in push-snapshot-julia-intake.json.gz; book/card/map/target/task/roadmap/live/resume/history align. Rebuild apps/runtime; safe Lua58.5 next, no isolated package/full admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.4 from clean bounded Dart58.3/frozen58. Read push-result-composition.md/full12 fixture/current cards and Julia public push binding/static-child/typed read/fluent/with/function/error/arity contracts and nearest normals/book. Independently baseline finite primitive/bound/full/direct/selected guards/order/snapshot/with/function/error/static-child cases on native/restoredSpec/plan/fresh Module before production; preserve healthy behavior and qualified outside-subset policies. Reuse original ABI/current kind guards only for demonstrated gaps. Strict depwarn/quick new-nearest/exact runner/book/map/history/manual docs/commit, then safe Lua58.5. Keep full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host owners separate; no broad verification/cleanup pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.5 from clean bounded Julia58.4/frozen58. Read push-result-composition.md/full12/current cards and Lua public push binding/static-child/typed read/fluent/with/function/error/arity contracts and nearest normals/book. Independently baseline finite primitive/bound/full/direct/selected guards/order/snapshot/with/function/error/static-child on installed PUC5.5.1/LuaJIT native/restoredSpec/plan/fresh module before production; preserve healthy behavior. Complete demonstrated gaps through existing source/actual-kind guards only; no new interpreter chunk locals, unsafe full runner/formatter or declared5.4 claim. Quick authored/loadfile/version/new-nearest/exact runner/book/map/history/manual docs/commit, then next remaining-feature selection. Keep full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host owners separate.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.58.4` — Julia push snapshot guards repaired: new65/computed25 strict depwarn pass; safe Lua58.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.3` — Dart push snapshot guards repaired: new12/computed7/analysis/new-normal fmt pass; Julia58.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.2` — Rust push snapshot guards repaired: new9/computed6/owned fmt pass; Dart58.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.1.2` — Perl push fluent58.1.2 repaired: new10/read6/syntax pass; bounded Perl58 outcomes recorded, independent Rust58.2 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.4 from clean bounded Dart58.3/frozen58.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.5` — Safe installed Lua rewind Numbers repaired: new183/gap126/six computed/loadfile/version pass per host; next feature selection23.1.18.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.4.0` — Julia four-control zero arity repaired: new189/parent75/gap98 strict depwarn pass; safe Lua56.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.4` — Julia canonical-zero rewind Numbers repaired: new75/gap98/computed25 strict depwarn pass; immediate arity56.4.0 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.56.3.0` — Dart four-control zero arity repaired: new8/parent10/gap-arity9/analysis/new-parent fmt pass; Julia56.4 next.
 
 ## History
 

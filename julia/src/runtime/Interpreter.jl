@@ -6287,6 +6287,7 @@ function _evaluate_runtime_fluent_chain!(
     scalar_result = value isa Bool
     reduction_result = false
     kind_guarded_result = _runtime_is_ordinary_computed_read(engine, chain.receiver) ||
+        _runtime_is_explicit_push_result_source(engine, chain.receiver) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6371,6 +6372,28 @@ function _runtime_is_input_cursor_value_source(expression)
     )
 end
 
+# Only unambiguous explicit-value snapshots gain ordinary result guards.
+function _runtime_is_explicit_push_result_source(engine, expression)
+    expression isa ActionCallExpr || return false
+    expression.name == "push" || return false
+    something(expression.source_method, expression.name) == "push" || return false
+    expression.trailing_block_arg && return false
+    length(expression.args) == 2 || return false
+    all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
+    target = first(expression.args).value
+    target isa ActionVariableExpr || return false
+    target.source == target.name || return false
+    compiled_rule(engine.compiled_spec, target.name) === nothing || return false
+    return last(expression.args).value isa Union{
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }
+end
+
 function _runtime_is_ordinary_computed_read(engine, expression)
     expression isa ActionValueAccessExpr || return false
     receiver = expression.receiver
@@ -6378,6 +6401,7 @@ function _runtime_is_ordinary_computed_read(engine, expression)
         # Static ownership preserves unknown bound-call result policies.
         has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return true
         helper = canonical_action_helper_name(receiver.name)
+        helper == "push" && return _runtime_is_explicit_push_result_source(engine, receiver)
         if helper in (
             "entry_slot", "gap_span", "gap_text", "gap_kind",
             "rewind_entry_start", "rewind_match_start",

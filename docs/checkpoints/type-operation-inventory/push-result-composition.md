@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: Bounded Perl58/Rust58.2/Dart58.3 targeted-checked; Julia/safe Lua/full admission pending.
+Status: Bounded Perl58/Rust58.2/Dart58.3/Julia58.4 targeted-checked; safe Lua/full admission pending.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -152,3 +152,19 @@ and remaining owner unchanged. Computed7/changed-owner/new-normal fatal analysis
 new-normal format pass. Actual producers/inputs/epochs/results retained in
 push-snapshot-dart-intake.json.gz. Rebuild apps/runtime; no whole-file SDK-format/
 isolated emitted/full admission. Julia58.4 next.
+
+## Independent Julia58.4 guards
+
+Unchanged65 assertions57PASS/8RED to65PASS on native/restoredSpec/plan/fresh
+Module. Original57 includes two route-key scaffolds. Direct Array/selected String
+Hash consumers now null/skip KV. Selected Bool/full12/order/snapshots/functions/
+copy/logical/with/errors/absence/static-child already healthy. Nine healthy values/
+two errors exact. One canonical typed source predicate feeds existing two guards;
+one runner include, no push/child ABI/parser/copy/arity/function/schema change.
+
+New65 pass before combined after driver exits1 on nearest missing Main Test
+imports. Corrected nearest-only driver imports existing runner dependencies and
+passes computed25, strict depwarn; original failure/actual producers/precompile
+output retained, no repeated new65. Source/inputs/results in
+push-snapshot-julia-intake.json.gz. Rebuild apps/runtime; safe Lua58.5 next,
+no isolated package/full admission.

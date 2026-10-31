@@ -3054,6 +3054,8 @@ copy/logical/with/source-error behavior. Rebuild Rust runtime/apps.
 Dart now also guards direct Array/selected String push results on native/restored
 SpecFile/plan, preserving its already-working Bool/full target/order/scope/with
 behavior and original action-edge child dispatch. Rebuild Dart runtime/apps.
-Julia58.4 is next; each peer is assessed
+Julia now also uses the bounded guards on native/restoredSpec/plan/fresh Module,
+preserving its already-working Bool/full target/order/scope/with behavior.
+Rebuild Julia runtime/apps. Safe installed Lua58.5 is next; each peer is assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.

@@ -48,3 +48,5 @@ Bounded Perl fluent58.1.2 is now targeted-checked; [[perl-explicit-push-result-f
 Independent Rust58.2 guard outcomes: [[rust-push-snapshot-result-guards]]. Current family status belongs to push-result-composition.md; no peer defect is inferred.
 
 Independent Dart58.3 guard outcomes: [[dart-push-snapshot-result-guards]]. Current family status belongs to push-result-composition.md; no peer defect is inferred.
+
+Independent Julia58.4 guard outcomes: [[julia-push-snapshot-result-guards]]. Current family status belongs to push-result-composition.md; no peer defect is inferred.
