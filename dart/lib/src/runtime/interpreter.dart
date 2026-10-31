@@ -4084,11 +4084,16 @@ final class LinkedSpecRuntimeEngine {
               _isOrdinaryLexicalResultChain(receiver, calls) ||
               _isOrdinaryDefinednessResultChain(receiver, calls) ||
               _isOrdinaryEmptinessResultChain(receiver, calls) ||
+              _isOrdinaryHasKeyResultChain(receiver, calls) ||
               _isOrdinaryLogicalResultChain(receiver, calls) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
                       canonicalActionHelperName(receiver.name) == 'with')),
+          allowNullInitialHasKey:
+              _isOrdinaryHasKeyResultChain(receiver, calls) &&
+              calls.first.method == 'has_key' &&
+              !(receiver is ActionCallExpr && receiver.name == 'has_key'),
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -5988,6 +5993,70 @@ final class LinkedSpecRuntimeEngine {
         first.args.isEmpty;
   }
 
+  // Preserve numeric presence flags, key domains and one-key preflight.
+  // Source guards survive kind transitions after explicit Array bridges.
+  bool _isOrdinaryHasKeyResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.isEmpty ||
+        calls.any(
+          (call) =>
+              traversal.contains(canonicalActionHelperName(call.method)) ||
+              ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+                  canonicalActionHelperName(call.method) != 'with'),
+        )) {
+      return false;
+    }
+    bool ordinaryArgs(List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      return arguments.every(
+        (argument) => switch (argument.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        },
+      );
+    }
+
+    if (receiver is ActionCallExpr &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg) {
+      final validArity = switch (receiver.name) {
+        'has_key' => receiver.args.length == 2,
+        _ => false,
+      };
+      if (validArity && ordinaryArgs(receiver.args)) {
+        return true;
+      }
+    }
+    final first = calls.first;
+    return first.method == 'has_key' &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        first.args.length == 1 &&
+        ordinaryArgs(first.args);
+  }
+
   // Preserve constructor payload/pair/splice policy; guard retained boxed forms.
   bool _isConstructorResultSource(ActionExpr expression) {
     if (expression is! ActionCallExpr ||
@@ -6168,11 +6237,20 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
     bool kindGuardedResult = false,
+    bool allowNullInitialHasKey = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
+    var initialPresenceStep = true;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
+      // Preserve eager key evaluation for a leading null presence receiver.
+      final leadingNullPresence =
+          initialPresenceStep &&
+          allowNullInitialHasKey &&
+          helper == 'has_key' &&
+          value == null;
+      initialPresenceStep = false;
       // Reduced, copied, scoped and computed values retain their actual kinds.
       // Validate container-only consumers before evaluating their operands.
       if ((reductionResult || kindGuardedResult) &&
@@ -6180,7 +6258,9 @@ final class LinkedSpecRuntimeEngine {
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
           ((_arrayOnlyReceiverHelpers.contains(helper) && value is! List) ||
-              (_hashOnlyReceiverHelpers.contains(helper) && value is! Map))) {
+              (_hashOnlyReceiverHelpers.contains(helper) &&
+                  value is! Map &&
+                  !leadingNullPresence))) {
         return null;
       }
       // Scalar results retain this boundary; generic emptiness predicates
