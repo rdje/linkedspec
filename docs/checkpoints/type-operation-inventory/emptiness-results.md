@@ -123,3 +123,5 @@ producer/domains/source/copy, copied Array/Hash bindings, repeated predicates,
 false retention/bridges/scalar nulls and1!/SA/once-only snapshots. Bounded rollout
 is targeted-checked on recorded hosts; declared5.4/full admission separate.
 Next is String predicate result assessment23.2.9.
+
+Canonical free-one/ordinary zero-RHS emptiness source guards are repaired by Perl68.1: [[emptiness-result-source-guards]]. Existing numeric1-0/empty-value producer/domains remain unchanged; broader SESSION16 and independent peer baselines/full23.4 remain separate.

@@ -3220,3 +3220,11 @@ companion and six fresh passing focused cases with before/after identities. The
 original observations remain unchanged, and missing original runtime-time hashes
 are not retroactively claimed. Perl68.1 may resume. Broader earlier-capture input
 review23.4.2 remains required before admission; runtime behavior is unchanged.
+
+
+Perl feature68 now keeps emptiness source/ordinary zero-operand prefix guards
+through Array bridges and immediate with. Incompatible operands/bodies skip;
+legitimate false/null/empty with, repeated predicates, numeric1-0/copy/default
+and source snapshots stay. Regenerate emitted Perl parsers. Focused native/fresh/
+readiness/error, nearest compatibility and excluded syntax checks pass; independent
+Rust/peer Bool baselines, broader SESSION16 and full admission remain separate.

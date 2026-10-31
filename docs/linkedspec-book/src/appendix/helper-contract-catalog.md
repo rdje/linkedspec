@@ -1005,15 +1005,25 @@ element/pair/list-splice, bare-key and selector retirement rules remain in force
 - **Returns**: predicate result; Perl retains numeric `1`/`0`, while Rust/Dart/Julia/Lua retain Boolean results.
 - **Behavior**: Logical inverse of `is_empty`. On Perl/Rust/Dart/Julia/Lua, `["a"].is_nonempty().cat("!")` → `"1!"`, and `{}.is_nonempty().coalesce_nonempty("late").cat("!")` → `"0!"` because false remains present data. `["a"].is_empty().cat(",x").split(",").last().uppercase()` → `"X"`; the explicit split produces an Array for later methods. Generic predicate results may themselves use `.is_nonempty()`. Ordinary free-helper `is_nonempty("0")` agrees with a binding holding `"0"` and returns1. The Lua declared-version/full-admission and broader Perl conditional qualifications above still apply.
 
-A current Perl guard gap affects canonical one-value free emptiness calls and
-ordinary zero-operand predicate prefixes: `is_empty([1]).take(1)` can return an
-empty Array, and a rejected predicate prefix can still enter a later `with` body.
-A receiver Array bridge can return null with unsupported `with` metadata.
-Feature68 owns these guard/readiness cases. Compatible chains, the free `cat`/
-`split` bridge, repeated predicates, numeric flags/copies/defaults/snapshots and
-valid false/null/empty `with` already work. Peer backends are assessed independently;
-existing empty/null versus zero/false/String0 data rules and broader Perl
-FlowExpr/host-slot qualifications remain unchanged.
+Perl keeps actual-kind and rejection guards through canonical one-value free
+emptiness calls and ordinary zero-operand predicate prefixes:
+
+```text
+is_empty([1]).take(1)                            # undef
+[1].is_empty().take(1).with(){return("ran")}       # undef; body skipped
+[1].is_empty().cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
+is_empty([1]).with(){return([value,value.copy()])} # [0,0]
+is_empty([1]).add("bad").with(){return("null")}     # "null"; body runs
+is_empty([1]).is_nonempty().cat("!")              # "1!"
+```
+
+Incompatible consumer operands and later bodies stay skipped; source expressions
+run once before compatible operands. Valid false/null/empty results still enter
+`with`, and an Array returned by its body accepts Array methods. These focused
+native/fresh Perl paths have ready ActionIR metadata. Regenerate emitted parsers.
+Peer backends independently assess these guards with their existing Bool results;
+empty/null versus zero/false/String0 domains and broader Perl FlowExpr/host-slot
+qualifications remain unchanged.
 
 ### `join_values(delim, arr)`
 - **Signature**: `join_values(delim: scalar, arr: array)`
