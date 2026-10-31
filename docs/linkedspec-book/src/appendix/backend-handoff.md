@@ -3265,9 +3265,18 @@ Declared5.4, general isolation and full admission remain open.
 
 
 String-predicate source/prefix guards70 are frozen separately from existing scalar
-result handoff. Public Perl free calls/with normalization/receiver bridge readiness
-have bounded gaps; compatible values, source-operand SOC snapshots and producer
+result handoff. The initial Perl assessment exposed bounded free-call/with normalization/receiver
+bridge readiness gaps; compatible values, source-operand SOC snapshots and producer
 domains remain healthy. Independent all-backend producer controls retain numeric
 text flags and Perl numeric versus native Boolean matches, strict arithmetic/null/
 empty/i behavior. Each backend independently baselines guards before implementation;
 no producer/regex-domain/context/schema or complete portable admission is implied.
+
+
+Perl70.1 now preserves String-predicate source/prefix guards through bridges and
+immediate with. Rejected consumer operands/bodies skip while source-operand effects,
+numeric flags, copies/defaults/strict arithmetic and valid with results remain.
+The existing regex producer and literal flags are unchanged. Focused native/fresh
+22-case/readiness/error checks, selected nearest checks and18 excluded syntax
+fences pass. Regenerate emitted Perl. Rust70.2/other backend guard baselines and
+full domain/context/portable admission remain separate.

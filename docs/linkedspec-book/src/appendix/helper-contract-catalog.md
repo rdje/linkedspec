@@ -509,13 +509,25 @@ such as `matches("abc",/^z/).copy().add(1)` yields `1` on Perl and null on the n
 peers, whose Boolean result is outside the strict numeric domain. Compatible
 `cat("!")` renders false flags as `"0!"` on all checked backends.
 
-A bounded Perl source-guard gap remains: `starts_with("abc","z").take(1)` can yield
-an empty Array, incompatible Hash consumers can run their operands, and rejected
-prefixes can still enter a later `with`. A receiver `cat`/`split` bridge followed
-by an incompatible Hash consumer can remain unready; the corresponding free bridge
-already works. Feature70 owns these guards. Source/operand SOC snapshots, numeric/
-Boolean flags, text/null/empty and regex policies stay; native peer guard behavior
-is assessed independently. Existing returned-value examples above remain valid.
+Perl retains actual-kind and rejection guards through canonical two-operand free
+predicate calls and ordinary one-operand prefixes:
+
+```text
+starts_with("abc","z").take(1)                    # undef
+"abc".ends_with("z").take(1).with(){return("ran")} # undef; body skipped
+"abc".matches(/^z/).cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
+starts_with("abc","z").cat(",x").split(",").last().uppercase() # X
+contains_substr("abc","z").with(){return([value,value.copy()])} # [0,0]
+starts_with("abc","z").add("bad").with(){return("null")} # "null"; body runs
+```
+
+Incompatible consumer operands and later bodies stay skipped; completed source
+and predicate-operand effects remain. The source is captured before the operand,
+and the flag before subsequent consumer operands. Legitimate false, null and empty
+results still enter `with`, and an Array returned by the body accepts Array methods.
+Literal regex operands retain their existing representation and flags. Regenerate
+emitted Perl parsers. Native peer guard behavior is assessed independently;
+complete text/regex domains, contextual use and portable admission remain separate.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`

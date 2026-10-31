@@ -1769,6 +1769,26 @@ sub _ordinary_free_string_result_source {
  return 1
 }
 
+# String predicates keep their flag producers and text/regex operand domains.
+# Only canonical ordinary two-value calls join result-kind guards. Regex nodes
+# retain the existing matches operand representation, never a new source role.
+sub _ordinary_free_string_predicate_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') =~ /\A(?:starts_with|ends_with|contains_substr|matches)\z/o
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 2;
+ for my $index (0, 1) {
+  my $value = $call->{args}[$index];
+  return 0 unless ref($value) eq 'HASH';
+  next if $index == 1 && $call->{name} eq 'matches' && ($value->{kind} // '') eq 'regex';
+  return 0 unless ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+ }
+ return 1
+}
+
 # Scalar numeric calls keep their numeric producer and strict input domains.
 # The one-Array min/max reducer is a separate source role.
 sub _ordinary_free_numeric_result_source {
@@ -5598,12 +5618,24 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Ordinary String-predicate prefixes preserve their flag kinds and
+  # source/operand snapshots while retaining rejection across kind transitions.
+  my $ordinary_string_predicate_result_chain = (_ordinary_free_string_predicate_result_source($receiver)
+    || (($calls->[0]{method} // '') =~ /\A(?:starts_with|ends_with|contains_substr|matches)\z/o
+     && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
+     && ref($calls->[0]{args}) eq 'ARRAY' && @{$calls->[0]{args}} == 1
+     && !(grep { ref($_) ne 'HASH'
+       || (!(($calls->[0]{method} // '') eq 'matches' && ($_->{kind} // '') eq 'regex')
+        && ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o) } @{$calls->[0]{args}})))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
     || $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
     || $free_numeric_result_source || $ordinary_number_receiver_prefix
     || $ordinary_logical_result_source || $ordinary_lexical_result_chain
     || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
-    || $ordinary_has_key_result_chain)
+    || $ordinary_has_key_result_chain || $ordinary_string_predicate_result_chain)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -6009,7 +6041,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $free_string_result_source
    || $free_numeric_result_source || $ordinary_number_receiver_prefix
    || $ordinary_lexical_result_chain || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
-   || $ordinary_has_key_result_chain
+   || $ordinary_has_key_result_chain || $ordinary_string_predicate_result_chain
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
@@ -6039,7 +6071,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
       || $free_numeric_result_source || $ordinary_number_receiver_prefix
       || $ordinary_logical_result_source || $ordinary_lexical_result_chain
       || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
-      || $ordinary_has_key_result_chain;
+      || $ordinary_has_key_result_chain || $ordinary_string_predicate_result_chain;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')

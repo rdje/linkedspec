@@ -108,4 +108,4 @@ identities, not rerun. On Perl5.34.1, paired Length/trim values remain dual IOK/
 JSON3 is not a new strict selector-kind promise. Incompatible-tail policies
 remain helper-specific; see [[perl-sorted-values-scalar-host-isolation]].
 
-Selection31 separately freezes four String-predicate source/prefix guards70: [[string-predicate-result-source-guards]]. Current compatible result handoff remains; public reference gaps are free fallback, with normalization and receiver bridge readiness. Producer kinds/regex/source-operand SOC snapshots stay; independent backend guards/full admission remain separate.
+Selection31 separately freezes four String-predicate source/prefix guards70: [[string-predicate-result-source-guards]]. Current compatible result handoff remains; Perl70.1 repairs the bounded free fallback, with normalization and receiver bridge readiness gaps through dedicated predicate roles. Producer kinds/regex/source-operand SOC snapshots stay; independent backend guards/full admission remain separate.
