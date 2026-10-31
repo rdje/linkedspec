@@ -8,7 +8,7 @@ answers:
   - "why does literal null contains differ from selected null"
   - "which task owns copied-null contains and rejected-copy revival"
 date: 2026-10-31
-status: Perl producer71.0/guards71.1, Rust71.2, Dart71.3 and Julia71.4 targeted-checked; safe Lua/P1 copy71.6 remain
+status: all bounded primary71 outcomes targeted-checked on recorded routes/hosts; mandatory P1 copy71.6.0 assessment next
 tags: [array, contains, predicates, source, guards, copy, null]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.32; contains-guard-selection-intake.json.gz retains original26/additional boundary10/producer5/block AST4/canonical4/excluded18 public observations, actual instruments and declared inputs."
 reverify: "Recover retained public observers into new project-local outputs at declared source boundary. Historical activation/freeze writers one-shot. Owners71.0/71.1-.5 and mandatory71.6 independently qualify behavior; transport0/ready1 do not establish feature execution."
@@ -35,3 +35,5 @@ Rust71.2 now preserves source/prefix guards while retaining its already healthy 
 Dart71.3 now preserves contains source/prefix guards through its common kind guard and retains already healthy leading null/with effects. Native/restoredSpec/plan29/nearest28/analysis/scoped formatting pass; mechanism/limits: [[dart-contains-source-guards]]. Julia71.4 independently next; copy71.6 remains mandatory after primary peers.
 
 Julia71.4 now preserves contains source/prefix guards through common kind dispatch while retaining leading null/with effects. Four-route141/nearest159/strict depwarn pass; mechanism/limits: [[julia-contains-source-guards]]. Safe Lua71.5 independently next; P1 copy71.6 remains mandatory after primary peers.
+
+Safe Lua71.5 now preserves contains source/prefix guards and leading null/with effects in the existing namespace. Both installed hosts pass141/nearest/loadfile/version checks; mechanism/limits: [[lua-contains-source-guards]]. All primary71 outcomes are recorded; mandatory P1 copy71.6.0 independently reassesses every backend before any unrelated selection.

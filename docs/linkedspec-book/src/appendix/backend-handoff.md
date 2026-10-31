@@ -3372,3 +3372,13 @@ and nearest membership12/null-key36/String-predicate111 pass with strict numeric
 kinds and depwarn checking. Existing SOC/null effects/error/public shapes stay;
 incompatible operands/later bodies skip. Rebuild Julia apps/runtime. Safe Lua71.5
 follows independently; P1 copy71.6/general isolation/full admission remain.
+
+
+Safe Lua71.5 preserves contains source/prefix guards on installed PUC5.5.1/LuaJIT
+native/restoredSpec/plan/fresh module routes. Shared23/null-prefix3/null-plus-with2/
+source scaffold141 pass per host; nearest membership/null-key/String-predicate111/
+loadfile/version checks pass with empty stderr. Existing namespace/no new chunk
+locals; numeric flags/SOC/null effects/error/public shapes stay. Rebuild Lua apps/
+runtime. All primary71 outcomes are recorded; mandatory P1 copy71.6.0 assessment
+follows on every backend before unrelated selection. Declared5.4/general isolation/
+domain/context/full admission remain separate.
