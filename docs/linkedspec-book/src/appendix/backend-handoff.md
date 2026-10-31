@@ -3203,10 +3203,10 @@ Lua uses installed PUC5.5.1/LuaJIT; declared5.4, existing null/Unicode qualifica
 and canonical full source/domain/context admission remain separate.
 
 
-Perl and Rust feature67 retain definedness source/ordinary zero-operand prefix
+Perl, Rust and Dart feature67 retain definedness source/ordinary zero-operand prefix
 guards through Array bridges and later immediate with. Rejected consumers skip
-operands/bodies; Perl native numeric-slot/text versus Rust Bool/copy/default
+operands/bodies; Perl native numeric-slot/text versus Rust/Dart Bool/copy/default
 compatibility and legitimate false/null/empty with stay. Regenerate emitted Perl
-parsers and rebuild Rust apps/runtime. Focused native/fresh Perl readiness/error
-and Rust native/restored/plan/nearest/owned-format controls pass; other backend
+parsers and rebuild Rust/Dart apps/runtime. Focused native/fresh Perl readiness/error
+and Rust/Dart native/restored/plan/nearest/format-analysis controls pass; other backend
 baselines and full source/domain/context admission remain separate.

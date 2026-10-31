@@ -8,7 +8,7 @@ answers:
   - "which task owns definedness source and prefix guards"
   - "does the free definedness cat split bridge already retain guards"
 date: 2026-10-31
-status: bounded Perl67.1/Rust67.2 targeted-checked; independent peers/full admission separate
+status: bounded Perl67.1/Rust67.2/Dart67.3 targeted-checked; independent Julia67.4/safe Lua/full admission separate
 tags: [definedness, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.28; definedness-guard-selection-intake.json.gz retains original21/calibrated21/public observer/all inputs; compatibility calibration28.0 retained separately."
 reverify: "Recover original source/public observer/shared21 from retained intake into new project-local outputs. Historical activation/run/freeze writers one-shot never replay. Owners67.1-.5 independently baseline, peers select expected_nonperl where present."
@@ -21,3 +21,5 @@ Perl native scalar detail: [[perl-definedness-native-numeric-slots]].
 Current Perl implementation: Perl67.1 repairs definedness source/ordinary prefix guard composition: unchanged21 groups13PASS8RED to21PASS native/fresh/metadata. Thirteen means twelve healthy values/one qualified source error; eight RED means seven wrong values/one unsupported-with context, excluding the separately resolved provisional numeric expectation. All twenty values ready/raw0/fallback0/unresolved0/warning-free; twelve healthy observations/error exact. Canonical one-value is_defined/is_undefined source predicate and ordinary zero-RHS prefix role join existing emitted-result/scoped-with/intermediate actual-kind guards. Incompatible consumer operands/later bodies skip; source S and once-order/snapshots/defaults/copies/native numeric slots/false presence/valid false-true-null-empty with/returned Array remain. Free cat/split bridge was already healthy and remains exact; receiver bridge readiness repaired. Eighteen excluded AST/lowering/warning snapshots unchanged. Original predicate/numeric producers/arity/aliases/traversal/deferred/context/copy/function/parser/schema and remaining owner unchanged; 456 other inputs exact. Nearest definedness6/native-numeric2/lexical guards20=28, fences18 and owner-normal syntax pass. Actual producers/all inputs/results retained in definedness-guard-perl-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; new21/fence18/shared21/AST18 registration23.4.1-owned. Regenerate emitted Perl; independent Rust67.2 uses five expected_nonperl profiles. No peer fix/portable scalar normalization/exhaustive excluded-runtime/general isolation/full23.4 admission.
 
 Independent Rust Bool/source guard proof: [[rust-definedness-result-source-guards]].
+
+Independent Dart receiver Array-bridge repair and healthy Bool/domain controls: [[dart-definedness-result-source-guards]].
