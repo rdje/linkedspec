@@ -4077,6 +4077,7 @@ final class LinkedSpecRuntimeEngine {
               _isExplicitPushResultSource(receiver) ||
               _isCanonicalSetResultSource(receiver) ||
               _isFreeDefaultResultSource(receiver) ||
+              _isConstructorResultSource(receiver) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5510,6 +5511,58 @@ final class LinkedSpecRuntimeEngine {
       ActionAssignNestedAccessExpr() ||
       ActionCodeblockLiteralExpr() => true,
       _ => false,
+    });
+  }
+
+  // Preserve constructor payload/pair/splice policy; guard retained boxed forms.
+  bool _isConstructorResultSource(ActionExpr expression) {
+    if (expression is! ActionCallExpr ||
+        (expression.name != 'array' && expression.name != 'hash') ||
+        (expression.sourceMethod ?? expression.name) != expression.name ||
+        expression.trailingBlockArg ||
+        (expression.name == 'hash' && expression.args.length.isOdd) ||
+        expression.args.any(
+          (argument) => argument is! ActionPositionalArgument,
+        )) {
+      return false;
+    }
+    if (expression.args.length == 1 &&
+        expression.args.first.value is ActionVariableExpr) {
+      return false;
+    }
+    return expression.args.every((argument) {
+      final value = argument.value;
+      const splices = {'flat', 'flat_array', 'flat_hash'};
+      if (value is ActionCallExpr && splices.contains(value.name)) {
+        return false;
+      }
+      if (value is ActionFluentChainExpr &&
+          value.calls.isNotEmpty &&
+          splices.contains(value.calls.last.method)) {
+        return false;
+      }
+      return switch (value) {
+        ActionVariableExpr() ||
+        ActionNumberLiteralExpr() ||
+        ActionStringLiteralExpr() ||
+        ActionBooleanLiteralExpr() ||
+        ActionUndefExpr() ||
+        ActionArrayLiteralExpr() ||
+        ActionHashLiteralExpr() ||
+        ActionBlockValueExpr() ||
+        ActionCallExpr() ||
+        ActionFluentChainExpr() ||
+        ActionReceiverMutationChainExpr() ||
+        ActionIndexedVarExpr() ||
+        ActionNestedAccessExpr() ||
+        ActionValueAccessExpr() ||
+        ActionAssignScalarExpr() ||
+        ActionAssignArrayAppendExpr() ||
+        ActionAssignHashIndexExpr() ||
+        ActionAssignNestedAccessExpr() ||
+        ActionCodeblockLiteralExpr() => true,
+        _ => false,
+      };
     });
   }
 

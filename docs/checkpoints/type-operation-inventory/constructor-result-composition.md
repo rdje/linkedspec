@@ -1,7 +1,7 @@
 # Retained constructor result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.22; family23.3.61.
-Status: Bounded Perl61.1/Rust61.2 and P1 comparator61.0 targeted-checked; remaining peers/full admission pending.
+Status: Bounded Perl61.1/Rust61.2/Dart61.3 and comparator61.0 targeted-checked; Julia/safe Lua/full admission pending.
 
 Uniform binding retains array(), array("literal"), multi-expression Array calls,
 hash() and paired ordinary key/value Hash calls. Exact one-bare-identifier
@@ -82,3 +82,20 @@ unchanged baseline, retained/disqualified. Corrected writer and distinct final
 phases establish acceptance; no setup RED credit. Actual inputs/producers/epochs:
 constructor-rust-intake.json.gz. Rebuild apps/runtime. Dart61.3 next, no isolated
 emitted package/exhaustive excluded-runtime/domain/full admission inference.
+
+## Bounded Dart61.3 guards
+
+Same24 tests19healthy5RED to24PASS native/restoredSpec/in-process plan;21 values/
+16 healthy observations/two needed errors/eight public syntax shapes exact.
+Canonical retained Array/paired Hash source admission feeds current common
+guard; invalid operands/later with skip, source once/intermediate kinds/valid
+null-empty with stay. Computed keys/order/snapshots/functions already healthy,
+original producer/read/default retention/with/signature/arity/copy/alias/function/
+parser/schema stay. Final nearest35/fatal owner-normal analysis/new-normal format0.
+New helper formatting is isolated: indentation/one optional trailing argument
+comma, remaining token text/surrounding source exact. Initial strict token
+assertion caught comma before write; retained/corrected/no test RED credit.
+Final-source runtime/nearest/analysis pass; whole-SDK format debt stays2.25-owned.
+Actual producers/inputs/epochs: constructor-dart-intake.json.gz. Rebuild apps/
+runtime; Julia61.4 next, no fresh isolated/exhaustive excluded-runtime/domain/full
+admission inference.

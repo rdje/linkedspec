@@ -3120,6 +3120,9 @@ Regenerate emitted Perl parsers. Rust now also guards retained ordinary construc
 results through native/restored compiled specs/in-process plans, preserving source
 effects, intermediate actual kinds and valid empty/null with. Computed keys/order/
 snapshots/functions already work; its producers remain unchanged. Rebuild Rust
-applications/runtime. Independent Dart61.3 is next, followed by peers.
+applications/runtime. Dart also guards retained ordinary constructors through
+native/restored specs/in-process plans; source effects, intermediate kinds,
+legitimate empty/null with and already-working computed keys stay. Rebuild Dart
+applications/runtime. Independent Julia61.4 is next, followed by safe Lua.
 No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.
