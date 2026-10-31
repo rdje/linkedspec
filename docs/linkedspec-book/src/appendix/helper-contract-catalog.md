@@ -1293,11 +1293,11 @@ controls, plus fresh Julia/Lua modules, including the unchanged null-source/key
 snapshot fixture. Lua uses installed PUC5.5.1/LuaJIT; declared5.4 remains separate.
 Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia/Lua apps/runtime. These
 checks preserve presence flags, key domains and selected source/key/copy/default controls. A separate known
-composition gap remains on Julia/installed Lua:
+composition gap remains on installed Lua:
 `{undef}.copy().has_key(key)` skips the key and returns null, while
 `copy({undef}).has_key(key)` evaluates the key and returns numeric0. Repeated
 copies and copied legitimate null results have the same gap, including suppressed
-needed key errors. Those peer repairs remain scheduled. Perl/Rust/Dart ordinary presence/copy
+needed key errors. The Lua repair remains scheduled. Perl/Rust/Dart/Julia ordinary presence/copy
 chains now keep legitimate null distinct from rejection, with and without `with`:
 
 ```text
@@ -1313,7 +1313,7 @@ out=has_key({},"k").add("bad").copy()
 # out=0, order="K"; legitimate null still evaluates the key
 ```
 
-Regenerate emitted Perl parsers and rebuild Rust/Dart apps/runtime. Complete
+Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia apps/runtime. Complete
 source/context/portable admission remains open.
 
 ### `count_keys(h)`

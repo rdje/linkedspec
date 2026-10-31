@@ -6303,11 +6303,10 @@ function _evaluate_runtime_fluent_chain!(
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
-        # A leading null presence source still evaluates its key once. Rejected
-        # later consumers return before this exception can admit another link.
-        leading_null_presence = call_index == 1 && helper_name == "has_key" &&
-            value === nothing && _runtime_is_ordinary_has_key_result_chain(chain.receiver, chain.calls) &&
-            !(chain.receiver isa ActionCallExpr && chain.receiver.name == "has_key")
+        # A legitimate null source keeps canonical has_key's key evaluation.
+        # Earlier incompatible consumers return before this step.
+        nullable_presence = value === nothing &&
+            _runtime_is_ordinary_has_key_result_chain(nothing, (call,))
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
         if (reduction_result || kind_guarded_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
@@ -6315,13 +6314,13 @@ function _evaluate_runtime_fluent_chain!(
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
                 helper_name in ("num_sum", "num_avg", "num_median", "num_range")
             )) ||
-            (!(value isa AbstractDict) && helper_name in _RUNTIME_HASH_HELPER_NAMES && !leading_null_presence)
+            (!(value isa AbstractDict) && helper_name in _RUNTIME_HASH_HELPER_NAMES && !nullable_presence)
         )
             return nothing
         end
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
-        if scalar_result && !(helper_name in ("is_empty", "is_nonempty")) && (
+        if scalar_result && !nullable_presence && !(helper_name in ("is_empty", "is_nonempty")) && (
             helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
             helper_name in _RUNTIME_HASH_HELPER_NAMES ||
             helper_name in ("num_sum", "num_avg", "num_median", "num_range")

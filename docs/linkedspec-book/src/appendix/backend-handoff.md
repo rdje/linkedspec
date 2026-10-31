@@ -3253,5 +3253,8 @@ incompatible consumers still exit immediately. Native/restored/plan11, nearest
 presence24/copy6 and owned formatting pass; rebuild Rust apps/runtime. Dart69.6.3
 also admits canonical nullable presence through its common/scalar guards and removes
 the obsolete first-step flag. Native/restoredSpec/plan11, nearest presence24/copy4,
-fatal analysis and owned formatting pass; rebuild Dart apps/runtime. Julia/safe Lua
+fatal analysis and owned formatting pass; rebuild Dart apps/runtime. Julia69.6.4
+also admits canonical nullable presence through both guards. Native/restoredSpec/plan/
+fresh-module55 strict-kind assertions and nearest presence116/copy12 pass under strict
+depwarn with qualified precompile-only notices; rebuild Julia apps/runtime. Safe Lua
 repairs precede the next method selection; general isolation/full admission remain open.

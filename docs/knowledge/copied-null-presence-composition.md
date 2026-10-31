@@ -8,7 +8,7 @@ answers:
   - "why does Perl copy revive a rejected has_key chain"
   - "which peers skip needed copied-null key errors"
 date: 2026-10-31
-status: Perl69.6.1/Rust69.6.2/Dart69.6.3 targeted-checked; independent Julia-Lua69.6.4-.5 before next selection and23.4
+status: Perl69.6.1/Rust69.6.2/Dart69.6.3/Julia69.6.4 targeted-checked; independent Lua69.6.5 before next selection and23.4
 tags: [dart, copy, null, presence, composition]
 evidence: "Independent69.6.0 observers/producers/raw channels/declared source inputs and qualifications in copied-null-presence-assessment-intake.json.gz. Earlier Dart-only RED remains in presence-guard-julia-intake.json.gz, unchanged Dart source in presence-guard-dart-intake.json.gz."
 reverify: "Recover public observers/shared10 into new project-local outputs using backend project-data wrappers; qualify Perl native errors through runtime_ctx_ref.last_error. Bind the actual Cargo-consumed Rust example. Historical activation/closeout writers are one-shot."
@@ -34,3 +34,5 @@ Current reference repair: [[perl-copied-null-presence-rejection]]. Perl ordinary
 Independent Rust nullable dispatch and retained rejection: [[rust-copied-null-presence]]. Historical six-failure observations above retain their assessment epoch.
 
 Independent Dart nullable consumption through both guards: [[dart-copied-null-presence]]. Historical six-failure observations above retain their assessment epoch.
+
+Independent strict-numeric Julia nullable consumption through both guards: [[julia-copied-null-presence]]. Historical six-failure observations above retain their assessment epoch.
