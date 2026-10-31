@@ -1,0 +1,228 @@
+[
+  {
+    "body": "return(array(\"tail\",0,false,undef,[\"nested\"],{\"k\":1}))",
+    "expected": [
+      "tail",
+      0,
+      false,
+      null,
+      [
+        "nested"
+      ],
+      {
+        "k": 1
+      }
+    ],
+    "id": "primitive_array",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {return(array(\"tail\",0,false,undef,[\"nested\"],{\"k\":1}))}\n"
+  },
+  {
+    "body": "return(hash(\"k\",[\"head\",\"tail\"],\"flag\",false,\"zero\",0,\"missing\",undef))",
+    "expected": {
+      "flag": false,
+      "k": [
+        "head",
+        "tail"
+      ],
+      "missing": null,
+      "zero": 0
+    },
+    "id": "primitive_hash",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {return(hash(\"k\",[\"head\",\"tail\"],\"flag\",false,\"zero\",0,\"missing\",undef))}\n"
+  },
+  {
+    "body": "a=array(3,1).sorted().last().add(4);b=hash(\"k\",\"tail\").sorted_keys().last().uppercase();return([array().count(),hash().count_keys(),a,b])",
+    "expected": [
+      0,
+      0,
+      7,
+      "K"
+    ],
+    "id": "empty_and_compatible",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {a=array(3,1).sorted().last().add(4);b=hash(\"k\",\"tail\").sorted_keys().last().uppercase();return([array().count(),hash().count_keys(),a,b])}\n"
+  },
+  {
+    "body": "a=array(\"head\",\"tail\")[-1].uppercase();b=hash(\"k\",[\"head\",\"tail\"])[\"k\"][-1].uppercase();return([a,b])",
+    "expected": [
+      "TAIL",
+      "TAIL"
+    ],
+    "id": "direct_reads",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {a=array(\"head\",\"tail\")[-1].uppercase();b=hash(\"k\",[\"head\",\"tail\"])[\"k\"][-1].uppercase();return([a,b])}\n"
+  },
+  {
+    "body": "order=\"\";out=array(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "array_hash_guard",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";out=array(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+  },
+  {
+    "body": "order=\"\";out=hash(\"k\",\"tail\").take({order=cat(order,\"A\");1});return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "hash_array_guard",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";out=hash(\"k\",\"tail\").take({order=cat(order,\"A\");1});return([out,order])}\n"
+  },
+  {
+    "body": "order=\"\";a=array(false,\"tail\")[0].take({order=cat(order,\"A\");1});b=hash(\"k\",\"tail\")[\"k\"].set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "selected_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";a=array(false,\"tail\")[0].take({order=cat(order,\"A\");1});b=hash(\"k\",\"tail\")[\"k\"].set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])}\n"
+  },
+  {
+    "body": "order=\"\";items=array(\"tail\");meta=hash(\"k\",\"tail\");a=items.coalesce(undef).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=meta.coalesce(undef).take({order=cat(order,\"A\");1});return([a,b,items,meta,order])",
+    "expected": [
+      null,
+      null,
+      [
+        "tail"
+      ],
+      {
+        "k": "tail"
+      },
+      ""
+    ],
+    "id": "completed_bound_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";items=array(\"tail\");meta=hash(\"k\",\"tail\");a=items.coalesce(undef).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=meta.coalesce(undef).take({order=cat(order,\"A\");1});return([a,b,items,meta,order])}\n"
+  },
+  {
+    "body": "order=\"\";items=[\"head\",\"tail\"];out=array({order=cat(order,\"S\");return(items)},[\"old\"])[{items=[\"new\"];order=cat(order,\"I\");0}][{order=cat(order,\"J\");-1}].cat({order=cat(order,\"C\");\"!\"}).uppercase();return([out,items,order])",
+    "expected": [
+      "TAIL!",
+      [
+        "new"
+      ],
+      "SIJC"
+    ],
+    "id": "source_order_snapshot",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";items=[\"head\",\"tail\"];out=array({order=cat(order,\"S\");return(items)},[\"old\"])[{items=[\"new\"];order=cat(order,\"I\");0}][{order=cat(order,\"J\");-1}].cat({order=cat(order,\"C\");\"!\"}).uppercase();return([out,items,order])}\n"
+  },
+  {
+    "body": "value=\"outer\";order=\"\";a=array(\"head\",\"tail\").with(){return(hash(\"k\",[value,\"tail\"]))}[\"k\"][-1].uppercase();bad=hash(\"k\",\"tail\").with(){return(false)}.take({order=cat(order,\"A\");1});return([a,bad,value,order])",
+    "expected": [
+      "TAIL",
+      null,
+      "outer",
+      ""
+    ],
+    "id": "with_kinds",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {value=\"outer\";order=\"\";a=array(\"head\",\"tail\").with(){return(hash(\"k\",[value,\"tail\"]))}[\"k\"][-1].uppercase();bad=hash(\"k\",\"tail\").with(){return(false)}.take({order=cat(order,\"A\");1});return([a,bad,value,order])}\n"
+  },
+  {
+    "body": "items=[\"caller\"];return([pick(),items])",
+    "expected": [
+      "TAIL",
+      [
+        "caller"
+      ]
+    ],
+    "id": "function_scope",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "fn pick(){items=[\"tail\"];return(array(items,\"other\")[0][-1].uppercase())}\nValue::\n I {items=[\"caller\"];return([pick(),items])}\n"
+  },
+  {
+    "body": "order=\"\";out=array({order=cat(order,\"A\");\"first\"},{order=cat(order,\"B\");\"tail\"}).last().uppercase();return([out,order])",
+    "expected": [
+      "TAIL",
+      "AB"
+    ],
+    "id": "array_payload_order",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";out=array({order=cat(order,\"A\");\"first\"},{order=cat(order,\"B\");\"tail\"}).last().uppercase();return([out,order])}\n"
+  },
+  {
+    "body": "order=\"\";out=array(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";out=array(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  {
+    "body": "order=\"\";out=hash().with(){order=cat(order,\"W\");return([value.count_keys(),\"tail\"])};return([out,order])",
+    "expected": [
+      [
+        0,
+        "tail"
+      ],
+      "W"
+    ],
+    "id": "valid_empty_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {order=\"\";out=hash().with(){order=cat(order,\"W\");return([value.count_keys(),\"tail\"])};return([out,order])}\n"
+  },
+  {
+    "body": "return(array({items=\"text\";push(items,\"x\")},\"tail\").last().coalesce(\"masked\"))",
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "id": "needed_argument_failure",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value::\n I {return(array({items=\"text\";push(items,\"x\")},\"tail\").last().coalesce(\"masked\"))}\n"
+  }
+]

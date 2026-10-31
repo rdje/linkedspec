@@ -3105,3 +3105,12 @@ guard these free and receiver-default results across native/restoredSpec/plan/fr
 module, without new interpreter chunk locals. Rebuild Lua apps/runtime. Bounded60
 outcomes are recorded; next feature selection22, declared5.4/full admission separate. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
 context/portable admission remain separate.
+
+Feature61 targets retained Array/Hash constructor result composition. Perl already
+preserves primitive values, direct reads, selected/completed guards, order/function/
+with and needed-error controls. Direct incompatible consumers runtime-fail or emit
+invalid source despite ready metadata. A separate P1 comparator-scope defect lets
+legal working/function names `a` and `b` shadow Perl sort inputs; exact renaming
+restores order. Comparator61.0 is next, then constructor61.1 and independent peers.
+No constructor producer/selector/pair-splice/copy/signature/schema expansion or
+complete portable admission follows.

@@ -753,6 +753,10 @@ precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runt
 - **Signature**: `sorted(arr: array)`
 - **Returns**: array
 - **Behavior**: Returns a new array sorted in ascending (string/lexicographic) order. Does not mutate the input.
+- **Current Perl caveat**: Working variables or function parameters named `a` and `b` can shadow emitted
+  comparator inputs and leave values unsorted. Other names restore the expected order. This comparator
+  repair is next in the backend handoff; it does not make those valid names reserved.
+
 
 ### `reversed(arr)`
 - **Signature**: `reversed(arr: array)`
@@ -769,6 +773,17 @@ precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runt
   removed shape before execution.
 - **Function values**: Multi-argument `array(value, value)` reads parameter/local values just like `[value, value]`.
   See the [executed function example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).
+
+Retained constructor values support direct reads on current Perl:
+`array("head","tail")[-1].uppercase()` and
+`hash("k",["head","tail"])["k"][-1].uppercase()` both yield `"TAIL"`.
+Direct incompatible container consumers have an owned source-dispatch gap:
+`array("tail").set_key("k",1)` runtime-fails, and Hash-to-Array argument blocks
+can emit invalid source. A completed value and existing guarded bridge work:
+`items=array("tail"); items.coalesce(undef).set_key("k",1)` returns null.
+Other backends are assessed independently; element/pair/list-splice and selector
+retirement rules above stay in force.
+
 
 ### Array receiver-dot value chains
 - **Signature**: `array_expr.method(args...).next(args...)`
