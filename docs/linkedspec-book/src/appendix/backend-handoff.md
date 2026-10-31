@@ -3192,9 +3192,10 @@ original source errors preserved. Lua uses installed PUC5.5.1/LuaJIT; declared5.
 and canonical full source/domain/context admission remain separate.
 
 
-Perl feature66 retains lexical comparison source/ordinary prefix guards through
-Array bridges and later immediate with bodies. Rejected consumers skip operands/
-bodies; numeric1-0 flags/copies and legitimate zero/null/empty with stay. Regenerate
-emitted Perl parsers. Native/fresh/readiness/error controls pass; Rust and peers
-are assessed independently with existing Boolean profiles/null/Unicode limits.
+Perl and Rust feature66 retain lexical comparison source/ordinary prefix guards
+through Array bridges and later immediate with bodies. Rejected consumers skip
+operands/bodies; Perl numeric1-0 versus Rust Bool flags/copies and legitimate
+zero/false/null/empty with stay. Regenerate emitted Perl and rebuild Rust apps/runtime.
+Focused Perl native/fresh/readiness and Rust native/restored/plan/error controls
+pass; Dart/Julia/safe Lua remain independent with existing null/Unicode limits.
 Canonical full source/domain/context admission remains separate.

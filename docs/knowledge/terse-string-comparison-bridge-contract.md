@@ -31,3 +31,5 @@ Native/fresh Perl and native/restored/plan Rust/Dart/Julia/Lua shared plus direc
 Lua native/plan/fresh/direct checks pass on available PUC5.5.1/LuaJIT; declared5.4 remains LUA2.2. Baseline fence suppressed consumer C (SO/sourcezzz), not a proved source snapshot defect.
 
 Canonical free/ordinary prefix lexical guard composition through Array bridges/later immediate with is separately repaired by Perl66.1: [[lexical-result-source-guards]]. Original numeric1-0/copy/null/warning/Unicode/alias qualifications unchanged; peers independently use existing Boolean profiles/full23.4 separate.
+
+Rust66.2 independently repairs canonical free/ordinary prefix source guards through bridges/later with while preserving Bool and existing null/Unicode qualifications: [[rust-lexical-result-source-guards]].
