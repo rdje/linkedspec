@@ -4052,23 +4052,22 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       PURE_ARRAY_HELPERS[canonical_name] or
       canonical_name == "lowercase_each" or canonical_name == "uppercase_each" or
       (scalar_numeric.supports_reducer(canonical_name) and not scalar_numeric.supports(canonical_name)))
+    -- A legitimate null source keeps canonical has_key's key evaluation.
+    -- Earlier incompatible consumers return before this step.
+    local nullable_presence = value == json.null and canonical_name == "has_key" and
+      typed_source.receiver_mutation.is_ordinary_has_key_result_chain(nil, {call})
     -- Copied, computed and reduced values keep actual kinds through bridges.
     -- Check container-only consumers before evaluating their operands.
     if reduction_result or kind_guarded_result then
       local kind = json.kind(value)
-      -- A leading null presence source still evaluates its key once. Later
-      -- incompatible consumers return before another link can run.
-      local leading_null_presence = index == 1 and canonical_name == "has_key" and
-        value == json.null and typed_source.receiver_mutation.is_ordinary_has_key_result_chain(target_receiver, calls) and
-        not (target_receiver ~= nil and target_receiver.kind == "call" and target_receiver.name == "has_key")
       if (array_only and kind ~= "array") or
-        (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray" and not leading_null_presence) then
+        (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray" and not nullable_presence) then
         return json.null
       end
     end
     -- Reducers yield scalars; array/hash-only consumers remain invalid until
     -- a compatible helper produces a container. Case maps live with string helpers.
-    if scalar_result and (array_only or PURE_HASH_HELPERS[canonical_name]) then
+    if scalar_result and not nullable_presence and (array_only or PURE_HASH_HELPERS[canonical_name]) then
       return json.null
     end
     if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then

@@ -3242,8 +3242,8 @@ Rust/Dart/Julia/Lua native/restored/plan/null-source/nearest checks pass, plus f
 Julia/Lua modules, strict numeric identity/Julia depwarn and selected Rust/Dart
 format-analysis. Lua uses installed PUC5.5.1/LuaJIT with no new interpreter chunk
 locals. Declared5.4, full source/key domains and portable admission remain separate.
-Independent copied-null assessment now finds the same key/error suppression on
-Rust/Dart/Julia/installed Lua. Perl69.6.1 now retains rejection across canonical
+Independent copied-null assessment found key/error suppression on
+Rust/Dart/Julia/installed Lua; the bounded repairs below address those observations. Perl69.6.1 now retains rejection across canonical
 ordinary presence/copy chains, skipping later keys/bodies with or without a
 trailing with while preserving legitimate nullable key effects and numeric flags.
 Focused11/nearest presence-null-copy/source18/syntax and bound public lowering
@@ -3256,5 +3256,9 @@ the obsolete first-step flag. Native/restoredSpec/plan11, nearest presence24/cop
 fatal analysis and owned formatting pass; rebuild Dart apps/runtime. Julia69.6.4
 also admits canonical nullable presence through both guards. Native/restoredSpec/plan/
 fresh-module55 strict-kind assertions and nearest presence116/copy12 pass under strict
-depwarn with qualified precompile-only notices; rebuild Julia apps/runtime. Safe Lua
-repairs precede the next method selection; general isolation/full admission remain open.
+depwarn with qualified precompile-only notices; rebuild Julia apps/runtime. Safe Lua69.6.5
+also admits canonical nullable presence through both guards, with no new interpreter
+chunk locals. Both installed PUC5.5.1/LuaJIT pass55 strict JSON-kind checks on four
+routes, nearest presence116/copy four programs/twelve route observations/loadfile and
+version checks; rebuild Lua apps/runtime. All bounded69/69.6 outcomes are recorded.
+Declared5.4, general isolation and full admission remain open.
