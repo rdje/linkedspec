@@ -388,6 +388,15 @@ These are existing Perl compatibility controls; peer Boolean results keep their
 existing arithmetic rules. This does not establish a portable scalar-kind or
 host-cache rule.
 
+The next bounded guard repair covers canonical one-value free definedness calls
+and ordinary zero-operand predicate prefixes. Current Perl can turn an incompatible
+`is_defined(undef).take(1)` into an empty Array, or execute a later `with` body
+after rejection; a receiver Array bridge can return null with unsupported `with`
+metadata. Feature67 owns these guard/readiness cases. The free `cat`/`split`
+bridge already guards correctly. Compatible scalar chains, source snapshots,
+numeric compatibility and valid false/null/empty `with` remain preservation
+controls. Peer backends are assessed independently with their existing Bool kinds.
+
 ### `trim(s)`
 - **Signature**: `trim(value: scalar)`
 - **Returns**: scalar

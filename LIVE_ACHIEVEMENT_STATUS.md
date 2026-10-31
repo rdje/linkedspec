@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Definedness28.0 compatibility calibrated; parent28 guard freeze next.
+Definedness source guards67 frozen/calibrated21; independent Perl67.1 next.
 
 ## Latest Completed Slice
 
-Perl28.0 calibrates existing definedness false compatibility before guard freeze: fifteen public programs/thirty native-fresh observations on Perl5.34.1 retain public numeric and string slots for native false/copies, versus only string for literal empty text and references for typed Bool. Existing Numeric::scalar_number accepts numeric slots before decimal text, rejecting references. Nested/free/fluent/copy and inverse controls give1 for native false plus1; literal empty/typed false remain null; Number0/String0 controls give1. Snapshot remains [empty text,empty text,1,!]. No production edit. Correct only provisional value_kinds.expected[2] null to1 in a new calibrated epoch; original cases/observations and peer profiles retained, no product RED credit. New native/fresh/readiness regression2 passes before production. Readonly retained capture review0 and deliberately false JSON-kind hypothesis review1/observed_red have empty stderr;147 actual producer/instrument/source/wrapper/result inputs retained with verified sizes/hashes. Claim record, card/map/book/target/task/live/resume/history align. Parent28 remains active; freeze definedness guard67 next. Total/private flags are diagnostics, not portable/cache invariants; no other-host/version/type normalization/general isolation/full admission claim. Canonical registration23.4.1/full23.4/push remain separate.
+Selection28 freezes existing definedness source/prefix guard composition67 after committed calibration28.0. Original public21 native/fresh/descriptor/substitution/emission epoch remains unchanged; only calibrated value_kinds.expected[2] null to1 preserves proven native Perl numeric slots. Calibrated21 gives twelve ready healthy/seven ready wrong/one matching null actually unsupported-with unready/one qualified source error, raw0/fallback0. Free guards yield[]/Hash{k:1}/KV; rejected free-with runs SW, receiver-with drops S and runs W, all four canonical/free and short receiver variants enter later bodies, function continuations run WX. Free cat/split bridge already healthy/ready through existing String admission; receiver bridge alone is unsupported-with. Existing source/scoped with/intermediate actual-kind predicates omit definedness despite scalar-result registration. Preserve twelve healthy controls and needed error, false/zero/empty-defined domains, once-order/snapshots/copies/defaults/numeric-native-slot compatibility/valid false-true-null-empty with/returned Array. Shared21 keeps five expected_nonperl profiles from existing definedness11 authority; independent peer baselines required, no inferred peer failure. Freeze canonical positional is_defined/is_undefined one-value free calls and ordinary zero-RHS prefixes/current guard machinery only. No producer/truth/emptiness/portable type normalization, alias/malformed/traversal/deferred/context/copy/function/parser/schema/named fallback expansion. All five67 owners precede production; actual producers/all inputs/original and calibrated epochs retained. Book/card/map/target/shared/task/roadmap/live/resume/history align; Perl67.1 next. Full23.4/canonical registration/general isolation remain separate.
 
 ## Next Action
 
-Continue active TYPE-REFERENCE-BOOK.1.2.23.1.28: freeze definedness guard family67 from calibrated21 expectations and existing authority; retain original provisional epoch, create independent backend owners before production, then implement focused new-nearest/docs/commit per backend. No numeric producer/type normalization or full suite pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.67.1 from clean selection28/frozen definedness-result-guard-composition.md/shared21/definedness11/calibration28.0. Establish unchanged native/fresh/readiness/error normal and excluded public AST-lowering snapshots before production. Repair canonical free-one is_defined/is_undefined and ordinary zero-RHS prefix guard admission/intermediate actual-kind state only; preserve native numeric slots/peer Bool/copies/defaults/source order/snapshots/valid false-null-empty with/error/excluded roles. Focused new-nearest numeric compatibility2/lexical guards/syntax/book/map/history/manual docs/commit, then independent Rust67.2 with expected_nonperl overrides. Full23.4/pressure/registration/general isolation separate; no full suite or cleanup pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.28` — Definedness source guards67 frozen/calibrated21; independent Perl67.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.28.0` — Definedness28.0 compatibility calibrated; parent28 guard freeze next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.66.5` — Safe Lua lexical bridge guards repaired/per-host101/nearest/loadfile/version pass; all bounded66 outcomes recorded, selection23.1.28 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.66.4` — Julia lexical bridge guards repaired: same101/nearest137/strict depwarn pass; independent safe Lua66.5 next.
@@ -29,7 +30,6 @@ Continue active TYPE-REFERENCE-BOOK.1.2.23.1.28: freeze definedness guard family
 - `TYPE-REFERENCE-BOOK.1.2.23.1.26` — Logical Boolean source guards65 frozen/public22; Perl65.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.64.5` — Safe Lua comparison guards repaired: per-host96/nearest86/three comparison programs/loadfile/version pass; all bounded64 outcomes recorded, selection23.1.26 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.64.4` — Julia comparison source guards repaired: same96/nearest113/strict depwarn pass; safe Lua64.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.64.3` — Dart comparison source guards repaired: same20/nearest21/fatal analysis/format pass; Julia64.4 next.
 
 ## History
 
