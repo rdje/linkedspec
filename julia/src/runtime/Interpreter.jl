@@ -6293,7 +6293,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_constructor_result_source(chain.receiver) ||
         _runtime_is_free_string_result_source(chain.receiver) ||
         _runtime_is_ordinary_string_receiver_prefix(chain.calls) ||
-        _runtime_is_ordinary_arithmetic_result_chain(chain.receiver, chain.calls) ||
+        _runtime_is_ordinary_numeric_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6475,9 +6475,9 @@ function _runtime_is_ordinary_string_receiver_prefix(calls)
     }, prefix.args)
 end
 
-# Preserve arithmetic producers/preflight; retain actual-kind guards for
+# Preserve numeric producers/preflight; retain actual-kind guards for
 # canonical scalar calls and ordinary short Number receiver prefixes.
-function _runtime_is_ordinary_arithmetic_result_chain(receiver, calls)
+function _runtime_is_ordinary_numeric_result_chain(receiver, calls)
     isempty(calls) && return false
     any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
         ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
@@ -6497,7 +6497,7 @@ function _runtime_is_ordinary_arithmetic_result_chain(receiver, calls)
         count = length(receiver.args)
         valid_arity = if receiver.name in ("num_abs", "num_floor", "num_ceil", "num_round")
             count == 1
-        elseif receiver.name in ("num_sub", "num_div", "num_mod")
+        elseif receiver.name in ("num_sub", "num_div", "num_mod", "num_eq", "num_ne", "num_gt", "num_ge", "num_lt", "num_le")
             count == 2
         elseif receiver.name == "num_clamp"
             count == 3
@@ -6509,7 +6509,7 @@ function _runtime_is_ordinary_arithmetic_result_chain(receiver, calls)
         valid_arity && ordinary_args(receiver.args) && return true
     end
     first_call = first(calls)
-    first_call.method in ("abs", "floor", "ceil", "round", "add", "sub", "mul", "div", "mod", "clamp", "min", "max") || return false
+    first_call.method in ("abs", "floor", "ceil", "round", "add", "sub", "mul", "div", "mod", "clamp", "min", "max", "eq", "ne", "gt", "ge", "lt", "le") || return false
     something(first_call.source_method, first_call.method) == first_call.method || return false
     # Zero-extra min/max keeps the Array reducer's existing route.
     first_call.method in ("min", "max") && isempty(first_call.args) && return false

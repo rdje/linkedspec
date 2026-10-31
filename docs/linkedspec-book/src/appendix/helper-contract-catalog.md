@@ -1381,7 +1381,7 @@ num_eq(2,3).with(){return(value.add(2))}      # 2; valid zero enters the body
 ```
 
 Source and operands evaluate once in order; later consumers use the computed
-result. Perl, Rust and Dart also retain kind guards through canonical free comparison calls
+result. Perl, Rust, Dart and Julia also retain kind guards through canonical free comparison calls
 and ordinary short comparison prefixes, including intermediate Array bridges:
 
 ```text
@@ -1393,10 +1393,11 @@ num_eq("bad",2).coalesce([]).with(){return(value.count())} # 0
 
 Incompatible consumer operands and later bodies stay skipped; legitimate
 zero/one/null/empty values still enter `with`. These Perl paths execute with
-ready ActionIR metadata; Rust and Dart pass their native, restored compiled-spec/
-SpecFile and generated-plan controls. Numeric kinds, source effects, snapshots and
-needed errors are preserved. Regenerate emitted Perl parsers and rebuild Rust/Dart
-apps/runtime. Other backends are
+ready ActionIR metadata; Rust, Dart and Julia pass their native, restored
+compiled-spec/SpecFile and generated-plan controls, with Julia also checked through
+fresh emitted modules. Numeric kinds, source effects, snapshots and needed errors
+are preserved. Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia apps/
+runtime. Remaining hosts are
 assessed independently; numeric domains/arity/aliases stay unchanged.
 
 ### `num_add(a, b)`
