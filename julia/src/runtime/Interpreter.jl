@@ -6299,6 +6299,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_emptiness_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_string_predicate_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_contains_result_chain(chain.receiver, chain.calls) ||
+        _runtime_is_ordinary_index_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_has_key_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
@@ -6313,10 +6314,14 @@ function _evaluate_runtime_fluent_chain!(
         # returned before this canonical membership consumer.
         nullable_membership = value === nothing &&
             _runtime_is_ordinary_contains_result_chain(nothing, (call,))
+        # A leading null index source keeps its existing needle evaluation.
+        # Later container consumers reject; copy-state closure remains separate.
+        nullable_index = call_index == 1 && value === nothing &&
+            _runtime_is_ordinary_index_result_chain(nothing, (call,))
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
         if (reduction_result || kind_guarded_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
-            (!(value isa AbstractVector) && !nullable_membership && (
+            (!(value isa AbstractVector) && !nullable_membership && !nullable_index && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
                 helper_name in ("num_sum", "num_avg", "num_median", "num_range")
             )) ||
@@ -6743,6 +6748,35 @@ function _runtime_is_ordinary_contains_result_chain(receiver, calls)
     first_call = first(calls)
     something(first_call.source_method, first_call.method) == first_call.method || return false
     return first_call.method == "contains" && length(first_call.args) == 1 &&
+        ordinary_args(first_call.args)
+end
+
+# Canonical index sources retain numeric zero, null and source snapshots.
+# Positional free-two calls and ordinary one-needle prefixes qualify.
+function _runtime_is_ordinary_index_result_chain(receiver, calls)
+    isempty(calls) && return false
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg
+        valid_arity = receiver.name == "index_of" &&
+            length(receiver.args) == 2
+        valid_arity && ordinary_args(receiver.args) && return true
+    end
+    first_call = first(calls)
+    something(first_call.source_method, first_call.method) == first_call.method || return false
+    return first_call.method == "index_of" && length(first_call.args) == 1 &&
         ordinary_args(first_call.args)
 end
 

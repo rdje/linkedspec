@@ -3444,7 +3444,9 @@ with controls pass original/repaired epochs, nearest31/final owned fmt pass.
 Rebuild Rust apps/runtime. Dart72.3 now passes22 native/restoredSpec/plan tests,
 including null-prefix/with preservation, nearest34/fatal analysis/scoped formatting
 with empty stderr; common kind guards retain rejection and leading nullable
-index effects. Rebuild Dart apps/runtime. Julia/installed Lua guards72.4-.5 await
-independent assessment; copied-null/rejection assessment
+index effects. Rebuild Dart apps/runtime. Julia72.4 now passes106 strict assertions
+on native/restoredSpec/plan/fresh Module, nearest183/strict depwarn with qualified
+precompile notices only; its separate mutation-index restriction stays. Rebuild
+Julia apps/runtime. Installed Lua72.5 awaits independent assessment; copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.
