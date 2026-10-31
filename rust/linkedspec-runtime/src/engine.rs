@@ -7234,10 +7234,9 @@ impl Engine {
                         &Expr::Undef,
                         std::slice::from_ref(call),
                     );
-                // Preserve the existing needle effects of a leading null
-                // index source; copy-state closure remains separately owned.
-                let nullable_index = index == 0
-                    && matches!(current, RuntimeValue::Undef)
+                // Copy preserves legitimate null; earlier rejection has
+                // already returned before this canonical index consumer.
+                let nullable_index = matches!(current, RuntimeValue::Undef)
                     && Self::is_ordinary_index_result_chain(
                         &Expr::Undef,
                         std::slice::from_ref(call),
@@ -9175,10 +9174,9 @@ impl Engine {
                         &Expr::Undef,
                         std::slice::from_ref(call),
                     );
-                // Preserve the existing needle effects of a leading null
-                // index source; copy-state closure remains separately owned.
-                let nullable_index = index == 0
-                    && matches!(current, RuntimeValue::Undef)
+                // Copy preserves legitimate null; earlier rejection has
+                // already returned before this canonical index consumer.
+                let nullable_index = matches!(current, RuntimeValue::Undef)
                     && Self::is_ordinary_index_result_chain(
                         &Expr::Undef,
                         std::slice::from_ref(call),

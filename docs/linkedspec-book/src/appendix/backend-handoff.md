@@ -3468,3 +3468,10 @@ and with bodies, including no-with chains. Legitimate copied-null needle effects
 and required errors remain. Same14/nearest53/source18/syntax/public3 pass;
 regenerate emitted Perl. Independent Rust72.6.2 then Dart/Julia/safe Lua nullable
 index repairs precede unrelated selection; general isolation/admission separate.
+
+
+Rust72.6.2 restores copied-null index needles/errors on native/restoredSpec/plan,
+including repeated and valid-null-result copies. Earlier incompatible consumers
+still exit before later effects. Same14/nearest index-contains-copy-null-with39/
+owned formatting pass; rebuild Rust apps/runtime. Separate Dart/Julia/safe Lua
+nullable index repairs precede unrelated selection; general admission open.

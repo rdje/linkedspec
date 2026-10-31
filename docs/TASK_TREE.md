@@ -2,7 +2,7 @@
 
 October 3 nested raw-readiness diagnosis: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 retains16 sources/48 native-fresh pairs,16 actual traces and42 top-level TAP tests; twelve evidence corruptions reject. Seven sources/21 pairs conceal unsupported raw descendants behind ready1/raw0/fallback0. Shared condition aliases and distinct repeated spans establish source-occurrence policy.138 claim inputs bind15 producers and four rendered exact examples. Compiler/runtime remain activation-exact. Repair .7.1, quoted false blockers .7.2 and source-comment classification .7.3 precede dispatcher/full execution.
 
-Latest PNT slice: TYPE-REFERENCE-BOOK.1.2.23.3.72.6.1 — Perl index/copy rejection retained; same14/nearest53/source18/syntax/public3 pass. Independent Rust72.6.2 next.
+Latest PNT slice: TYPE-REFERENCE-BOOK.1.2.23.3.72.6.2 — Rust copied-null index/needle effects restored; same14/nearest39/owned fmt pass. Independent Dart72.6.3 next.
 
 September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Artifact census .93 is complete with zero deletions; startup .92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
 

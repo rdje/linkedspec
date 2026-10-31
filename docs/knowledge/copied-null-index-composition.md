@@ -7,7 +7,7 @@ answers:
   - "which task owns copied-null index errors and effects"
   - "are fluent and free copied-null index calls equivalent"
 date: 2026-10-31
-status: Perl72.6.1 targeted-checked; independent Rust72.6.2 and peer nullable index next
+status: Perl72.6.1/Rust72.6.2 targeted-checked; independent Dart-Julia-Lua nullable index next
 tags: [copy, null, index_of, rejection, source, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.72.6.0; copied-null-index-assessment-intake.json.gz retains actual fourteen controls/four peer shapes/declared inputs/actual Cargo consumer/raw channels/public lowering/setup qualification."
 reverify: "Recover observers/shared12 into new project-local outputs with project-data wrappers; qualify Perl native context errors and bind actual Cargo-consumed source before/after. Historical activation/freeze writers are one-shot."
@@ -18,3 +18,5 @@ Assessment72.6.0 freezes twelve copied-null index value/effect/error/rejection c
 Perl generic copy folding excludes index from guarded_copy_chain. Rust direct/trailing loops require index0 for nullable_index. Dart firstCall, Julia call_index==1 and Lua index==1 restrict nullable index to the leading step; their scalar guards also omit nullable index. Repairs must preserve earlier rejection and the separate Julia/Lua Array-end mutation index gates. General SESSION17 isolation remains separate.
 
 Current reference repair: [[perl-copied-null-index-rejection]]. Perl canonical index/copy chains retain rejection with/no-with while legitimate nullable needles/errors stay. Historical assessment observations above keep their original epoch.
+
+Independent Rust nullable index/needle effects and retained rejection: [[rust-copied-null-index]]. Historical assessment observations above keep their epoch.
