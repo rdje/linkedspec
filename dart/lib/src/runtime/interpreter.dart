@@ -4081,6 +4081,7 @@ final class LinkedSpecRuntimeEngine {
               _isFreeStringResultSource(receiver) ||
               _isOrdinaryStringReceiverPrefix(calls) ||
               _isOrdinaryNumericResultChain(receiver, calls) ||
+              _isOrdinaryLogicalResultChain(receiver, calls) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5709,6 +5710,75 @@ final class LinkedSpecRuntimeEngine {
         // Zero-extra min/max retains the Array reducer route.
         !((first.method == 'min' || first.method == 'max') &&
             first.args.isEmpty) &&
+        ordinaryArgs(first.args);
+  }
+
+  // Keep eager Boolean producers and method preflight unchanged. Logical
+  // sources retain actual-kind guards across explicit Array bridges.
+  bool _isOrdinaryLogicalResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.isEmpty ||
+        calls.any(
+          (call) =>
+              traversal.contains(canonicalActionHelperName(call.method)) ||
+              ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+                  canonicalActionHelperName(call.method) != 'with'),
+        )) {
+      return false;
+    }
+    bool ordinaryArgs(List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      return arguments.every(
+        (argument) => switch (argument.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        },
+      );
+    }
+
+    if (receiver is ActionCallExpr &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg) {
+      final validArity = switch (receiver.name) {
+        'and' || 'or' => receiver.args.isNotEmpty,
+        'not' => receiver.args.length == 1,
+        _ => false,
+      };
+      if (validArity && ordinaryArgs(receiver.args)) {
+        return true;
+      }
+    }
+    final first = calls.first;
+    final validArity = switch (first.method) {
+      'and' || 'or' => first.args.isNotEmpty,
+      'not' => first.args.isEmpty,
+      _ => false,
+    };
+    return validArity &&
+        (first.sourceMethod ?? first.method) == first.method &&
         ordinaryArgs(first.args);
   }
 

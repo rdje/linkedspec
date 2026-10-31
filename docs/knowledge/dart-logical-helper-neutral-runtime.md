@@ -65,3 +65,5 @@ and necessary repairs after family23, before full method/portable admission.
 ADR0138 and4.2.2.3 retain these healthy primitive producers/copies and add only
 actual copied-result container guards; see [[dart-runtime-array-helpers]].
 No standalone emitted/context/deferred/callback/serialized-model expansion.
+
+Logical free-source/ordinary-prefix guards after Array bridges are separately repaired by Dart65.3: [[dart-logical-result-source-guards]]. Direct rejection/valid false-null-empty with already work; eager producer/typed Bool/truth/arity/scalarResult remain unchanged. Independent peers/full23.4 separate.

@@ -7,7 +7,7 @@ answers:
   - "which task owns logical source and prefix guard composition"
   - "does valid Boolean false or numeric domain null still enter with"
 date: 2026-10-31
-status: bounded Perl65.1/Rust65.2 targeted-checked; independent Dart65.3/peers/full admission pending
+status: bounded Perl65.1/Rust65.2/Dart65.3 targeted-checked; independent Julia65.4/safe Lua/full admission pending
 tags: [logical, boolean, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.26; logical-guard-selection-intake.json.gz retains actual public22 producer/all inputs/results."
 reverify: "Recover public observer/shared22/original Perl from logical-guard-selection-intake.json.gz into new project-local outputs. Historical activation/recovery/run/freeze writers one-shot, never replay. Owners65.1-.5."
@@ -18,3 +18,5 @@ Selection26 freezes logical Boolean source/prefix guard composition65. Public22 
 Current Perl implementation: Perl65.1 repairs eager logical source/folded ordinary prefix guard composition: unchanged22 groups15PASS7RED to22PASS native/fresh/metadata; fifteen includes thirteen healthy values/two qualified needed errors. Seven failures comprise five wrong values/two unsupported-with contexts, not seven wrong value programs. All twenty values ready/raw0/fallback0/unresolved0/warning-free; thirteen healthy observations/two source errors exact. Rejected direct/Array-bridge/function continuations skip operands/later with bodies while source SO/eager order persists; all six true-false free and short method variants protected. Original real Bool/truth/false presence/copies/once-order/snapshots/compatible split-select/valid false-true-null-empty with/with-returned Array and typed not arity-before-operands stay. Existing eager producer and method folding unchanged; a narrow logical source predicate joins current scoped rejection state and intermediate actual-kind reset. Initial candidate22 passed but excluded snapshots caught two unknown-tail lowering differences; admission narrowed with existing unknown-call classifier, unchanged final22/fences16 pass. Traversal/non-with trailing/named/deferred/unknown/error/copy/function/parser/schema roles stay; 447 other inputs exact. Nearest logical-result12/logical-method20/numeric-source19=51 and owner-normal syntax pass. Actual producers/all inputs/results in logical-guard-perl-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; explicit new22/fence16/shared22/AST16 canonical registration23.4.1-owned. Regenerate emitted Perl; independent Rust65.2 next. No peer defect/fix/exhaustive excluded-runtime/Boolean numeric-index authority/general isolation/full23.4 admission.
 
 Independent Rust free-source repair/healthy receiver-prefix distinction: [[rust-logical-result-source-guards]].
+
+Independent Dart Array-bridge guard repair/eighteen healthy values preserved: [[dart-logical-result-source-guards]].
