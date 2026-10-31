@@ -38,3 +38,5 @@ Independent strict Julia canonical index role/leading nullable preservation now 
 Independent installed-host Lua canonical index role/leading nullable preservation now targeted-checked: [[lua-index-source-guards]]. All primary72 outcomes recorded; historical reference observations keep their epoch. P1 copied-null/rejection72.6 and general isolation/admission remain separate.
 
 Current mandatory follow-up: [[copied-null-index-composition]]. Independent assessment72.6.0 freezes copied-null effects/errors and retained rejection repairs before unrelated selection. Historical selection33 observations keep their epoch.
+
+Canonical index/copy rejection retained by bounded Perl72.6.1: [[perl-copied-null-index-rejection]]. Peer nullable index repairs remain independently owned.

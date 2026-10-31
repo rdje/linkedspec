@@ -1114,16 +1114,16 @@ installed PUC5.5.1/LuaJIT; declared5.4 remains separate.
 Copied-null index composition has a bounded known gap on Rust/Dart/Julia/installed
 Lua: `{undef}.copy().index_of(needle)` skips the needle, including needed errors,
 while free-copy/free-index forms evaluate it. Repeated copies and copied valid
-null results share this gap. Perl handles legitimate copied nulls but can revive
-an earlier rejected index chain through `copy()`, allowing later needles,
-defaults or `with` bodies to run. Separate reference and peer repairs are queued
-before unrelated feature selection. The target keeps null distinct from rejection:
+null results share this gap; peer repairs remain queued before unrelated selection.
+Perl canonical index/copy chains now retain prior rejection with and without
+`with`, while legitimate null still evaluates its needle. Regenerate emitted Perl.
+The following examples are targeted-checked on Perl; they remain peer repair targets:
 
 ```text
 order=""; out={undef}.copy().index_of({order=cat(order,"N");"a"})
-# target: out=undef, order="N"
+# Perl: out=undef, order="N"; peer target
 index_of(["a"],"a").take(1).copy().index_of(needle)
-# target: undef; needle skipped after rejected take
+# undef; needle skipped after rejected take
 ```
 
 Equality, index0/null identity, copy depth and snapshots stay; this grants no

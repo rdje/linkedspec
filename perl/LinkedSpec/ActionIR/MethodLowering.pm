@@ -5515,9 +5515,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Keep ordinary presence/membership copy steps in one emitted chain so
+  # Keep ordinary presence/membership/index copy steps in one emitted chain so
   # rejection survives copy. Logical producer folding keeps its existing route.
-  my $guarded_copy_chain = ($ordinary_has_key_result_chain || $ordinary_contains_result_chain)
+  my $guarded_copy_chain = ($ordinary_has_key_result_chain || $ordinary_contains_result_chain
+    || $ordinary_index_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
    && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 
@@ -5904,10 +5905,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
              || ($call == $calls->[0] && !_ordinary_free_contains_result_source($receiver)))) {
       $kind_matches = "(!defined($value_expr) || $kind_matches)";
      }
-     # An ordinary leading null index source retains its existing needle effects.
-     # Later container consumers still reject; copy-state closure is separate.
+     # A legitimate null index source still evaluates its needle. A retained
+     # copy chain carries separate state for an earlier rejection.
      if ($ordinary_index_result_chain && $method eq 'index_of'
-         && $call == $calls->[0] && !_ordinary_free_index_result_source($receiver)) {
+         && ($guarded_copy_chain
+             || ($call == $calls->[0] && !_ordinary_free_index_result_source($receiver)))) {
       $kind_matches = "(!defined($value_expr) || $kind_matches)";
      }
      $expression = "$kind_matches ? ($expression) : $rejected";

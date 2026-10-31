@@ -3461,3 +3461,10 @@ copy and peer nullable-needle/error suppression after receiver copy. Reference
 rejection-state repair72.6.1 precedes Rust/Dart/Julia/safe Lua nullable index fixes.
 Shared12 and two unchanged original null diagnostics distinguish those states,
 strict index0/null values and source snapshots. Full admission remains separate.
+
+
+Perl72.6.1 retains canonical index/copy rejection before later needles/defaults
+and with bodies, including no-with chains. Legitimate copied-null needle effects
+and required errors remain. Same14/nearest53/source18/syntax/public3 pass;
+regenerate emitted Perl. Independent Rust72.6.2 then Dart/Julia/safe Lua nullable
+index repairs precede unrelated selection; general isolation/admission separate.
