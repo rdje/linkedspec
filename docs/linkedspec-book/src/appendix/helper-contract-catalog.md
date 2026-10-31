@@ -1059,11 +1059,11 @@ return numeric `0` and still evaluate the needle. For example, with `order=""`,
 still searches the captured null value. This membership rule grants no other
 Array method a nullable receiver.
 
-Copied-null composition has a bounded known gap on Rust/Dart/Julia/installed Lua:
+Copied-null composition has a bounded known gap on Dart/Julia/installed Lua:
 `{undef}.copy().contains(needle)` currently skips the needle and returns null,
 while `copy({undef}).contains(needle)` and free `contains` evaluate it and return
 numeric0. Repeated copies and copied valid null results also suppress needed
-needle effects/errors. Those peer repairs remain scheduled. Perl ordinary
+needle effects/errors. Those peer repairs remain scheduled. Perl/Rust ordinary
 canonical membership/copy chains now retain rejection with and without `with`:
 
 ```text
@@ -1079,8 +1079,9 @@ out=contains(["a"],"z").add("bad").copy()
 # out=0, order="N"; legitimate copied null still evaluates its needle
 ```
 
-Regenerate emitted Perl parsers. Equality, numeric flags, null/empty distinction,
-copy depth and snapshots stay; full source/context/portable admission remains open.
+Regenerate emitted Perl parsers and rebuild Rust apps/runtime. Equality, numeric
+flags, null/empty distinction, copy depth and snapshots stay; full source/context/
+portable admission remains open.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`

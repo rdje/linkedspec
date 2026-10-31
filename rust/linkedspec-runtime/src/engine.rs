@@ -7225,10 +7225,9 @@ impl Engine {
                         &Expr::Undef,
                         std::slice::from_ref(call),
                     );
-                // A leading ordinary contains keeps its existing null domain
-                // and needle effects. Later container links keep strict guards.
-                let nullable_membership = index == 0
-                    && matches!(current, RuntimeValue::Undef)
+                // Copy preserves legitimate null; earlier rejection has
+                // already returned before this canonical membership consumer.
+                let nullable_membership = matches!(current, RuntimeValue::Undef)
                     && Self::is_ordinary_contains_result_chain(
                         &Expr::Undef,
                         std::slice::from_ref(call),
@@ -9106,10 +9105,9 @@ impl Engine {
                         &Expr::Undef,
                         std::slice::from_ref(call),
                     );
-                // A leading ordinary contains keeps its existing null domain
-                // and needle effects. Later container links keep strict guards.
-                let nullable_membership = index == 0
-                    && matches!(current, RuntimeValue::Undef)
+                // Copy preserves legitimate null; earlier rejection has
+                // already returned before this canonical membership consumer.
+                let nullable_membership = matches!(current, RuntimeValue::Undef)
                     && Self::is_ordinary_contains_result_chain(
                         &Expr::Undef,
                         std::slice::from_ref(call),

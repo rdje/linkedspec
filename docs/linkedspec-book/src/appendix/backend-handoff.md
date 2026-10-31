@@ -3399,3 +3399,11 @@ required errors stay. Unchanged11/nearest contains-presence-copy60/source18/synt
 and three input-bound public lowerings pass; regenerate emitted Perl parsers.
 Independent Rust71.6.2 then Dart/Julia/safe Lua nullable membership repairs remain
 before unrelated selection; general isolation/full admission stays separate.
+
+
+Rust71.6.2 restores copied-null contains after copies/valid null results on native/
+restoredSpec/in-process plan, including needed needle errors. Earlier incompatible
+consumers still exit before later effects. Unchanged11/nearest contains-presence-
+copy-null-with46/owned formatting pass; rebuild Rust apps/runtime. Separate Dart/
+Julia/safe Lua nullable membership repairs remain before unrelated selection;
+general isolation/full admission stays open.

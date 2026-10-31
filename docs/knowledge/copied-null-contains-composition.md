@@ -7,7 +7,7 @@ answers:
   - "which task owns copied-null contains errors and effects"
   - "are fluent and free copied-null membership calls equivalent"
 date: 2026-10-31
-status: Perl71.6.1 targeted-checked; independent Rust71.6.2 and peer nullable membership next
+status: Perl71.6.1/Rust71.6.2 targeted-checked; independent Dart-Julia-Lua nullable membership next
 tags: [copy, null, contains, rejection, source, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.71.6.0; copied-null-contains-assessment-intake.json.gz retains actual11 controls/four peer syntax projections/instruments/declared inputs/raw channels/actual Cargo source and public diagnosis."
 reverify: "Recover observers/shared11 into new project-local outputs with project-data wrappers; qualify Perl native context errors and bind the actual Cargo-consumed example before/after. Historical activation/closeout writers are one-shot."
@@ -18,3 +18,5 @@ Assessment71.6.0 freezes11 authored copied-null contains/effect/error/rejection 
 Perl MethodLowering generic copy folding nests rejected prefixes before the later membership guard. Existing presence-only preservation is the bounded model for a membership-specific retained chain. Rust engine direct/trailing loops use index0 nullable membership; Dart/Julia/Lua common guards use first-step checks and scalar guards only bypass nullable has_key. Public AST flattens receiver copy and contains, making contains later even when the copied value is legitimate null. Canonical membership rights and early rejection stay distinct; general SESSION17 isolation remains separate.
 
 Current reference repair: [[perl-copied-null-contains-rejection]]. Perl canonical membership/copy chains now retain rejection with and without with while legitimate nullable needles/errors stay. Historical assessment outcomes above retain their original epoch.
+
+Independent Rust nullable membership/needle effects and retained rejection: [[rust-copied-null-contains]]. Historical six-failure observations above retain their assessment epoch.
