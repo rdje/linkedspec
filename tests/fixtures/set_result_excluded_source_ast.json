@@ -1,0 +1,180 @@
+[
+   {
+      "ast" : {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "=(items,[\"tail\"])[-1]",
+         "source_span" : {
+            "end" : 21,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "assignment_alias",
+      "mode" : "expr",
+      "source" : "=(items,[\"tail\"])[-1]"
+   },
+   {
+      "ast" : {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "set()[-1]",
+         "source_span" : {
+            "end" : 9,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "missing_arguments",
+      "mode" : "expr",
+      "source" : "set()[-1]"
+   },
+   {
+      "ast" : {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "set(items)[-1]",
+         "source_span" : {
+            "end" : 14,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "one_argument",
+      "mode" : "expr",
+      "source" : "set(items)[-1]"
+   },
+   {
+      "ast" : {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "set(items,[\"tail\"],99)[-1]",
+         "source_span" : {
+            "end" : 26,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "surplus_arguments",
+      "mode" : "expr",
+      "source" : "set(items,[\"tail\"],99)[-1]"
+   },
+   {
+      "ast" : {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "set([\"items\"],\"tail\")[-1]",
+         "source_span" : {
+            "end" : 25,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "temporary_target",
+      "mode" : "expr",
+      "source" : "set([\"items\"],\"tail\")[-1]"
+   },
+   {
+      "ast" : {
+         "kind" : "raw_perl",
+         "reason" : "unsupported_expression",
+         "source" : "set(items,\"tail\"){return(\"x\")}[0]",
+         "source_span" : {
+            "end" : 33,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "trailing_block",
+      "mode" : "expr",
+      "source" : "set(items,\"tail\"){return(\"x\")}[0]"
+   },
+   {
+      "ast" : null,
+      "error" : {
+         "class" : "LinkedSpec::ActionIR::AST::Parser::Diagnostic",
+         "value" : {
+            "code" : "nested_write_root_not_addressable",
+            "message" : "nested write root must remain a bare identifier",
+            "source_span" : {
+               "end" : 10,
+               "provenance" : "authored",
+               "start" : 0,
+               "unit" : "unicode_scalar"
+            },
+            "stage" : "action_parse"
+         }
+      },
+      "label" : "computed_write",
+      "mode" : "statement",
+      "source" : "set(items,[\"tail\"])[-1]=\"x\""
+   },
+   {
+      "ast" : {
+         "body_ast" : {
+            "kind" : "action_block",
+            "source" : " return(set(items,[\"tail\"])[-1]) ",
+            "source_span" : {
+               "end" : 36,
+               "start" : 3
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "args" : [
+                        {
+                           "kind" : "raw_perl",
+                           "reason" : "unsupported_expression",
+                           "source" : "set(items,[\"tail\"])[-1]",
+                           "source_span" : {
+                              "end" : 34,
+                              "start" : 11
+                           }
+                        }
+                     ],
+                     "kind" : "call",
+                     "name" : "return",
+                     "source" : "return(set(items,[\"tail\"])[-1])",
+                     "source_method" : "return",
+                     "source_span" : {
+                        "end" : 35,
+                        "start" : 4
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "return(set(items,[\"tail\"])[-1])",
+                  "source_span" : {
+                     "end" : 35,
+                     "start" : 4
+                  }
+               }
+            ]
+         },
+         "body_source" : " return(set(items,[\"tail\"])[-1]) ",
+         "body_span" : {
+            "end" : 36,
+            "start" : 3
+         },
+         "kind" : "codeblock_literal",
+         "signature" : {
+            "kind" : "callable_signature",
+            "max_arity" : 0,
+            "min_arity" : 0,
+            "positional_params" : [],
+            "rest_param" : null,
+            "version" : 1
+         },
+         "source_span" : {
+            "end" : 37,
+            "start" : 0
+         },
+         "source_text" : "{|| return(set(items,[\"tail\"])[-1]) }",
+         "version" : 1
+      },
+      "error" : null,
+      "label" : "deferred_body",
+      "mode" : "expr",
+      "source" : "{|| return(set(items,[\"tail\"])[-1]) }"
+   }
+]

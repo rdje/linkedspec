@@ -1,7 +1,7 @@
 # Canonical set stored-result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.20; family23.3.59.
-Status: Frozen finite target; implementation/backends/full admission pending.
+Status: Bounded Perl59.1 targeted-checked; independent peers/full admission pending.
 
 Uniform binding already defines set(name,value) as assignment yielding the stored
 typed value. Preserve ordinary assignment copy/alias semantics; this is not a
@@ -39,3 +39,17 @@ ABI and current guards; no primitive producer or missing method-table inference.
 Actual producers/inputs/results in set-result-selection-intake.json.gz. Perl59.1
 owns both P1 failures immediately, followed by independent peers59.2-.5. No peer
 failure or complete method/domain/context/portable/full23.4 admission inferred.
+
+## Bounded Perl59.1 source role
+
+Same11 groups7healthy/4RED to11GREEN native/fresh/metadata. Full12 now executes;
+incompatible Hash consumer null/skips, direct selected/function reads compile.
+Five healthy value observations/inherited RHS error exact; original compatible
+methods/scalars/default/with/source-once/codeblock values remain. Eight excluded
+AST/error fences unchanged. One canonical exact-two/plain-target/recognized-RHS
+predicate feeds existing computed-call/emitted-result roles. Original assignment
+ABI/read/method/consumer/copy/parser/function/runtime/schema bodies unchanged.
+Nearest push-fluent10/owner-normal syntax pass; final push comment move only,
+tested owner/final syntax retained without runtime repeat. Actual producers/
+inputs/results in set-result-perl-intake.json.gz. New11/full/exclusion registration
+queued23.4.1; regenerate emitted Perl. Independent Rust59.2 next/full admission separate.

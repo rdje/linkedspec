@@ -1727,6 +1727,22 @@ sub _user_function_registry_by_name {
  return ref($registry->{by_name}) eq 'HASH' ? $registry->{by_name} : undef
 }
 
+# Assignment results keep their original value ABI and alias/copy semantics.
+# Only the canonical plain-target call gains computed/result source guards.
+sub _ordinary_set_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') eq 'set' && ($call->{source_method} // 'set') eq 'set'
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 2;
+ my ($target, $value) = @{$call->{args}};
+ return 0 unless ref($target) eq 'HASH' && ($target->{kind} // '') eq 'variable'
+  && defined($target->{name}) && $target->{name} =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o
+  && ($target->{source} // '') eq $target->{name} && ref($value) eq 'HASH';
+ return ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o ? 1 : 0
+}
+
 # Only unambiguous explicit values join the read source role. Bare and numeric
 # operands retain static-child/indexed-child precedence and their result policy.
 sub _ordinary_explicit_push_result_source {
@@ -1749,6 +1765,8 @@ sub _ordinary_explicit_push_result_source {
 # functions use only the explicit current compilation registry, never a value kind.
 sub _actionir_ast_computed_data_call_method {
  my ($name, $registry, $call) = @_;
+ return _ordinary_set_result_source($call) ? 'set' : undef
+  if defined($name) && $name eq 'set';
  return _ordinary_explicit_push_result_source($call) ? 'push' : undef
   if defined($name) && $name eq 'push';
  # Physical rewind effects stay in the existing ABI; expose one boxed Number.
@@ -5710,6 +5728,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || ($receiver->{kind} // '') eq 'value_access'
    || _ordinary_input_cursor_result_source($receiver)
    || _ordinary_explicit_push_result_source($receiver)
+   || _ordinary_set_result_source($receiver)
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver

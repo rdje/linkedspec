@@ -3034,11 +3034,11 @@ kinds/recovery/errors; rebuild runtime/apps. Installed PUC Lua5.5.1/LuaJIT now
 also apply the two canonical-zero source guards across native/restoredSpec/plan/
 fresh module, preserving working kinds/recovery/errors without new interpreter
 chunk locals. Rebuild Lua runtime/apps; declared5.4/full admission remain separate.
-Bounded57 outcomes are recorded; remaining-feature selection23.1.19 follows. Existing gap
+Bounded57 outcomes are recorded. Existing gap
 state, contexts, errors, function restrictions and raw named policies stay; full
 admission remains separate.
 
-The next bounded feature58 composes existing unambiguous explicit-value push
+The bounded feature58 composes existing unambiguous explicit-value push
 snapshots through reads and compatible methods. Perl's Hash payload producer58.0
 is now repaired through the complete existing typed push owner, retaining local
 returns, snapshots, kinds and function-local scope. Regenerate affected emitted
@@ -3058,16 +3058,16 @@ Julia now also uses the bounded guards on native/restoredSpec/plan/fresh Module,
 preserving its already-working Bool/full target/order/scope/with behavior.
 Rebuild Julia runtime/apps. Installed PUC Lua5.5.1/LuaJIT now also guard these
 results across native/restoredSpec/plan/fresh module with no new interpreter
-chunk locals; rebuild runtime/apps. Bounded58 outcomes are recorded; remaining
-feature selection23.1.20 follows, with declared5.4/full admission separate. Each peer was assessed
+chunk locals; rebuild runtime/apps. Bounded58 outcomes are recorded, with
+declared5.4/full admission separate. Each peer was assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.
 
-The next bounded feature59 composes existing canonical `set(name,value)` stored
-typed results through direct reads and guarded consumers. Perl primitive values
-and compatible methods already work; direct Array/Hash reads emit invalid source,
-and an incompatible Hash consumer runtime-fails despite readiness metadata. A
-completed-value twin preserves the twelve-result target and operand guards.
-Perl59.1 owns this repair next; peer59.2-.5 assessments follow independently.
+The bounded feature59 composes existing canonical `set(name,value)` stored
+typed results through direct reads and guarded consumers.
+Perl now materializes canonical set results through current reads/kind guards:
+full12/native/fresh, operand skips/order/functions/codeblock values/RHS errors
+pass. Regenerate affected emitted Perl parsers. Rust59.2 is next; remaining peer
+assessments follow independently.
 Ordinary assignment copy/alias rules, operators/grouping/aliases/deferred/schema
 authority and full admission remain separate.

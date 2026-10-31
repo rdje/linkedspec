@@ -172,11 +172,23 @@ dispatch rule.
 A completed `set` value can feed current reads, for example
 `saved = set(items, ["head","tail"]); saved.coalesce(undef)[-1].uppercase()` yields
 `"TAIL"`. Compatible direct methods also work on Perl, such as
-`set(text, " tail ").trim().uppercase()`. Direct bracket reads from the `set` call
-and incompatible direct container consumers have an owned Perl source-dispatch
-gap; use the completed value and existing guarded bridge above until repaired.
-This preserves ordinary assignment copy and alias rules. Other backends are
-assessed independently in the backend handoff.
+`set(text, " tail ").trim().uppercase()`. Perl also supports direct reads and
+guards incompatible consumers before their operands run:
+
+```text
+set(items, ["head","tail"])[-1].uppercase()          # "TAIL"
+set(meta, {"k":["head","tail"]})["k"][-1].uppercase() # "TAIL"
+set(flag, false).not()                              # true
+set(number, 0).add(1)                               # 1
+set(items, ["tail"]).set_key("k", 1)                 # null
+```
+
+Each call assigns once. Its result is captured before later selectors or consumer
+operands rebind the target. Missing paths, empty values, local returns, function
+bindings, `with` returned kinds and RHS errors keep their ordinary contracts.
+First-class codeblocks remain values with existing invocation rules. Assignment
+copy and alias rules stay unchanged. Regenerate affected emitted Perl parsers.
+Other backends are assessed independently in the backend handoff.
 
 - **Worked example**:
   ```text

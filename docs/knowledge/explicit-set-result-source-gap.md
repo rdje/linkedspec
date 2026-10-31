@@ -7,7 +7,7 @@ answers:
   - "does canonical set already return the assigned typed value"
   - "does set result composition add a new copy or alias guarantee"
 date: 2026-10-31
-status: P1 direct read and incompatible-consumer defects owned59.1 immediately after selection20
+status: bounded Perl59.1 repaired/targeted-checked; independent peers/full admission pending
 tags: [perl, set, assignment, fluent, selection, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.20; set-result-selection-intake.json.gz retains actual15 public source programs/native-fresh metadata/substitutions/emitted modules and unchanged Perl source custody."
 reverify: "Recover finite assignment-result-assessment authored cases/observer from set-result-selection-intake.json.gz with project-local output and use public Perl wrapper. Historical activate/create/probe-target/finish/retain are one-shot, never replay."
@@ -28,3 +28,5 @@ native/fresh; direct raw5/unready/compile-fails, bound guard null/skips KV.
 Perl59.1 owns P1 read/runtime repair next; peers independent. Preserve ordinary
 assignment alias/copy semantics, no new updated-copy guarantee, operator/alias/
 grouping/target/arity/deferred/context/schema rights. Full admission separate.
+
+Bounded repair and preservation evidence: [[perl-canonical-set-result-composition]]. Historical selection observations above remain the original activation boundary; current status belongs to set-result-composition.md.
