@@ -3214,7 +3214,9 @@ PUC5.5.1/LuaJIT, with no new interpreter chunk locals. Declared5.4 and full
 source/domain/context admission remain separate.
 
 
-The recorded family67 nearest checks passed, but their original retained packets
-omit direct fixture data. Immediate repair67.6 supplements historical inputs and
-fresh focused proof before68.1 implementation. The original observations stay
-immutable; this is an evidence-custody repair, with no runtime behavior change.
+The family67 recorded nearest checks passed; their original packets omitted named
+direct fixture data. Completed repair67.6 supplies an immutable historical-input
+companion and six fresh passing focused cases with before/after identities. The
+original observations remain unchanged, and missing original runtime-time hashes
+are not retroactively claimed. Perl68.1 may resume. Broader earlier-capture input
+review23.4.2 remains required before admission; runtime behavior is unchanged.

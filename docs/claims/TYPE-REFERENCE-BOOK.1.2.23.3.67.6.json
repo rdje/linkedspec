@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.67.6",
+  "claims": [
+    {
+      "name": "Bounded named direct-fixture custody restored with separate historical and fresh epochs",
+      "statement": "The five immutable original definedness67 captures plus the companion resolve all thirteen specified direct consumer/fixture edges and five unique file payloads from their historical Git bases. Six fresh selected nearest cases pass with exact before/after declared source/input identities; original captures/producers/results remain unchanged.",
+      "scope": "Only the named edges in original-audit.json and six current_cases in recovery.json.gz at activation7f765d2886ea095e62f59da76a6897a868c6045e. Historical Git-base recovery is not a retroactive original runtime-time hash. Current accepted source bytes resolve through immutable original packets; no future-production invariance, full transitive/toolchain/producer census, other earlier-capture repair, runtime/schema/type/domain change or full admission claim. Broader direct-input review23.4.2 remains open.",
+      "rederive": {
+        "status": "checked",
+        "command": "Actual six one-shot run_fresh_checks.py cases perl/rust/dart/julia/lua-puc/lua-luajit are retained in companion.json.gz; repeatable bash tools/run_python_project_data.sh docs/checkpoints/definedness-nearest-fixture-custody/review.py; actual run_companion_review.py capture records exit0/full output.",
+        "granularity": "Each of thirteen specified historical fixture/consumer edges, five unique Git byte payloads, every declared input/source reference and each actual fresh case command/raw channel/producer/exit/before-after fingerprint.",
+        "result": "Companion reviewer actual exit0/empty stderr; historical13/five files and six passing fresh cases verified. Perl28/Rust23/Dart23/Julia110 and both Lua definedness programs/lexical101/loadfile pass. Declared per-case verified inputs451/523/215/187/190/190, source/input fingerprints equal before-after. Original five packet SHA256 identities unchanged."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Self-consistent retained payload size and SHA256 alone establish historical fixture provenance.",
+        "oracle": "Independent git show/rev-parse at each recorded cohort source epoch, retained consumer/path-loader identities, immutable original capture references and reconstructed fresh input fingerprints. A payload with recomputed local size/SHA must still equal its independently named Git bytes.",
+        "red_control": "Actual review.py --falsify-historical-provenance exits1/empty stderr after a self-consistent payload mutant is rejected specifically as historical_provenance_mismatch; provenance-negative.json retains command/output. Original missing-input audit remains RED1; combined companion closure is GREEN0. Neither is a product runtime RED."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/review.py",
+            "sha256": "f66d61888d9c96fb6e0ccea45703ccfcb01b69df21700acce53f1aa5fdf90f25",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/run_fresh_checks.py",
+            "sha256": "ffd12a20adc0a939f03b4c9b104ea9790aae38431fda25053e9e25ea204a69ec",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/nearest.lua",
+            "sha256": "679790197336177da9f015fb072e685ad146484ace7c6328208be21290a12117",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/run_provenance_control.py",
+            "sha256": "eed509c5da011454c3a0b09d868b269d0524263cc3a2d832f120f831bdfd5a3c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/run_companion_review.py",
+            "sha256": "1d5884cbb76aedb126cb60ac963bbe528c922bfa6bfdda740cfcb0bc74051dfe",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/recovery.json.gz",
+            "sha256": "811cec7b4c51b16f360e64e5a571f2bdd5ccf682363506ed4e64a5485a9a26d0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/companion.json.gz",
+            "sha256": "5192f1c96a2136589283051f949ceba47a3374dd0b3f5957015948ec4caa70d7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/provenance-negative.json",
+            "sha256": "536b14801f31d0dcfa1e14ff661fa4a709016edee558255490e76b583505ce69",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/companion-review.json",
+            "sha256": "2eb7a856d985d75b111ab24323038ad224b60b3873a5a2ea95af43da6a105041",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/original-audit.json",
+            "sha256": "10db8df45e9a590851e5af1041eab2520693555fc9f84c5db23b3c81dc24ce3a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-dart-intake.json.gz",
+            "sha256": "94bd1d2df27f2ba20dd46c5ae541578e9b409f487ab017d829f2b9ad0ed0879e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-julia-intake.json.gz",
+            "sha256": "a9f5d58988a3d675dc5be12da8020190e04a21e73cc05c1fa17a2d175b02971d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-lua-intake.json.gz",
+            "sha256": "6192b7c94f0fef85a5d04f78a0ca87c57d999163c4561623fe8e61dafe245789",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-perl-intake.json.gz",
+            "sha256": "fa13199b152e71cf97ef5e47d0b8323992be7ca45acb30c06a4cf3c9e8d6fbfc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-rust-intake.json.gz",
+            "sha256": "7b6bb8ed2ed9ec76cd8c3d405c8f44bfe7b0d544046c0093fa86e03cc8b3a907",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

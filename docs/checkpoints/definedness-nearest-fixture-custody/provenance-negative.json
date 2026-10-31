@@ -1,0 +1,19 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/definedness-nearest-fixture-custody/review.py",
+    "--falsify-historical-provenance"
+  ],
+  "exit": 1,
+  "stdout": "{\"fixture\": \"tests/fixtures/definedness_result_receiver_values.spec\", \"hypothesis\": \"Self-consistent retained size and SHA256 suffice for historical input identity\", \"observed_red\": true, \"rejected_by\": \"independent historical Git byte oracle\", \"runtime_red\": false, \"self_consistent_payload\": true}\n",
+  "stderr": "",
+  "report": {
+    "fixture": "tests/fixtures/definedness_result_receiver_values.spec",
+    "hypothesis": "Self-consistent retained size and SHA256 suffice for historical input identity",
+    "observed_red": true,
+    "rejected_by": "independent historical Git byte oracle",
+    "runtime_red": false,
+    "self_consistent_payload": true
+  }
+}

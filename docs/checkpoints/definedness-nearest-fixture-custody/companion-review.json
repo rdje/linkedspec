@@ -1,0 +1,48 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/definedness-nearest-fixture-custody/review.py"
+  ],
+  "exit": 0,
+  "stdout": "{\"fresh_cases\": {\"dart\": {\"before_after_identity_exact\": true, \"exit\": 0, \"verified_inputs\": 215}, \"julia\": {\"before_after_identity_exact\": true, \"exit\": 0, \"verified_inputs\": 187}, \"lua-luajit\": {\"before_after_identity_exact\": true, \"exit\": 0, \"verified_inputs\": 190}, \"lua-puc\": {\"before_after_identity_exact\": true, \"exit\": 0, \"verified_inputs\": 190}, \"perl\": {\"before_after_identity_exact\": true, \"exit\": 0, \"verified_inputs\": 451}, \"rust\": {\"before_after_identity_exact\": true, \"exit\": 0, \"verified_inputs\": 523}}, \"historical_edges\": 13, \"original_captures_unchanged\": true, \"scope\": \"Named direct fixture custody is restored by original captures plus this companion. Historical Git bytes and fresh execution identities have distinct epochs; no retroactive runtime-time hashes, transitive producer census or runtime change.\", \"unique_named_fixtures\": 5}\n",
+  "stderr": "",
+  "report": {
+    "fresh_cases": {
+      "dart": {
+        "before_after_identity_exact": true,
+        "exit": 0,
+        "verified_inputs": 215
+      },
+      "julia": {
+        "before_after_identity_exact": true,
+        "exit": 0,
+        "verified_inputs": 187
+      },
+      "lua-luajit": {
+        "before_after_identity_exact": true,
+        "exit": 0,
+        "verified_inputs": 190
+      },
+      "lua-puc": {
+        "before_after_identity_exact": true,
+        "exit": 0,
+        "verified_inputs": 190
+      },
+      "perl": {
+        "before_after_identity_exact": true,
+        "exit": 0,
+        "verified_inputs": 451
+      },
+      "rust": {
+        "before_after_identity_exact": true,
+        "exit": 0,
+        "verified_inputs": 523
+      }
+    },
+    "historical_edges": 13,
+    "original_captures_unchanged": true,
+    "scope": "Named direct fixture custody is restored by original captures plus this companion. Historical Git bytes and fresh execution identities have distinct epochs; no retroactive runtime-time hashes, transitive producer census or runtime change.",
+    "unique_named_fixtures": 5
+  }
+}
