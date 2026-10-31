@@ -1331,7 +1331,7 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 > capture groups (`array(entry_group(0), entry_group(1), …)`) or numeric literals. An
 > `undef` result (e.g. divide-by-zero) surfaces as a `null` element.
 
-Perl and Rust preserve actual result kinds through canonical free arithmetic calls and
+Perl, Rust and Dart preserve actual result kinds through canonical free arithmetic calls and
 ordinary short Number prefixes, including later immediate `with`:
 
 ```text
@@ -1345,9 +1345,9 @@ num_div(1,0).with(){return("recovered")}  # "recovered"
 Rejected container operations skip their operands and later bodies; a legitimate
 null or empty value still enters `with`. Source and operands run once in order,
 snapshots and zero-valued indices keep their kinds, and source errors remain visible.
-The Perl paths have ready ActionIR metadata; Rust passes the native, restored
-compiled-spec and generated-plan controls. Regenerate emitted Perl parsers and
-rebuild Rust applications/runtime. Other backends are
+The Perl paths have ready ActionIR metadata; Rust and Dart pass their native,
+restored compiled-spec/SpecFile and generated-plan controls. Regenerate emitted
+Perl parsers and rebuild Rust/Dart applications/runtime. Other backends are
 assessed independently; scalar/Array min/max overloads and numeric domains stay
 unchanged. Matching values alone do not establish support in an unready context.
 

@@ -4080,6 +4080,7 @@ final class LinkedSpecRuntimeEngine {
               _isConstructorResultSource(receiver) ||
               _isFreeStringResultSource(receiver) ||
               _isOrdinaryStringReceiverPrefix(calls) ||
+              _isOrdinaryArithmeticResultChain(receiver, calls) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5606,6 +5607,95 @@ final class LinkedSpecRuntimeEngine {
         _ => false,
       },
     );
+  }
+
+  // Preserve arithmetic producers and preflight; retain kind guards for
+  // canonical scalar calls and ordinary short Number prefixes.
+  bool _isOrdinaryArithmeticResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.isEmpty ||
+        calls.any(
+          (call) =>
+              traversal.contains(canonicalActionHelperName(call.method)) ||
+              ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+                  canonicalActionHelperName(call.method) != 'with'),
+        )) {
+      return false;
+    }
+    bool ordinaryArgs(List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      return arguments.every(
+        (argument) => switch (argument.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        },
+      );
+    }
+
+    if (receiver is ActionCallExpr &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg) {
+      final validArity = switch (receiver.name) {
+        'num_abs' ||
+        'num_floor' ||
+        'num_ceil' ||
+        'num_round' => receiver.args.length == 1,
+        'num_sub' || 'num_div' || 'num_mod' => receiver.args.length == 2,
+        'num_clamp' => receiver.args.length == 3,
+        'num_add' ||
+        'num_mul' ||
+        'num_min' ||
+        'num_max' => receiver.args.length >= 2,
+        _ => false,
+      };
+      if (validArity && ordinaryArgs(receiver.args)) {
+        return true;
+      }
+    }
+    final first = calls.first;
+    const methods = {
+      'abs',
+      'floor',
+      'ceil',
+      'round',
+      'add',
+      'sub',
+      'mul',
+      'div',
+      'mod',
+      'clamp',
+      'min',
+      'max',
+    };
+    return methods.contains(first.method) &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        // Zero-extra min/max retains the Array reducer route.
+        !((first.method == 'min' || first.method == 'max') &&
+            first.args.isEmpty) &&
+        ordinaryArgs(first.args);
   }
 
   // Preserve constructor payload/pair/splice policy; guard retained boxed forms.
