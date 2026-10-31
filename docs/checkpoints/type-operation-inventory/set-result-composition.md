@@ -1,7 +1,7 @@
 # Canonical set stored-result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.20; family23.3.59.
-Status: Bounded Perl59.1 targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl59.1/Rust59.2 targeted-checked; P2 named-default59.6 then peers/full admission pending.
 
 Uniform binding already defines set(name,value) as assignment yielding the stored
 typed value. Preserve ordinary assignment copy/alias semantics; this is not a
@@ -53,3 +53,20 @@ Nearest push-fluent10/owner-normal syntax pass; final push comment move only,
 tested owner/final syntax retained without runtime repeat. Actual producers/
 inputs/results in set-result-perl-intake.json.gz. New11/full/exclusion registration
 queued23.4.1; regenerate emitted Perl. Independent Rust59.2 next/full admission separate.
+
+## Independent Rust59.2 canonical source guards
+
+Accepted13 tests10healthy/3RED to13GREEN native/restored CompiledSpec/plan. Direct
+Array-to-Hash and selected Bool-to-Array/String-to-Hash now null/skip operands.
+Eight healthy values/error row/alias plus seven syntax results exact; full12/
+read/order/function/with/codeblock values already healthy. One canonical typed
+source predicate feeds existing direct/trailing-chain/computed guards; original
+setter/default bridge/parser/method/copy/function/arity/schema unchanged. Push9/
+owned fmt pass; actual producers/inputs/epochs/results in set-result-rust-intake.json.gz.
+
+Initial13 additionally finds a real completed named Array/coalesce-to-Hash gap:
+value retained/KV effects. This is outside canonical set source role, owned P2
+59.6 immediately next/before59.3. Original source/output retained; canonical
+normal isolates its healthy completed read and rebaselines before production,
+not a weakened null expectation or imported Perl healthy claim. Rebuild apps/
+runtime; no isolated emitted/package/full admission. Named-default59.6 then Dart59.3.

@@ -6525,6 +6525,7 @@ impl Engine {
                 }
                 if self.is_ordinary_computed_read(receiver)
                     || self.is_explicit_push_result_source(receiver)
+                    || Self::is_explicit_set_result_source(receiver)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7146,6 +7147,7 @@ impl Engine {
         let mut logical_prefix = false;
         let mut kind_guarded_value = self.is_ordinary_computed_read(receiver)
             || self.is_explicit_push_result_source(receiver)
+            || Self::is_explicit_set_result_source(receiver)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8195,6 +8197,46 @@ impl Engine {
             )
     }
 
+    // Assignment keeps its existing stored-value ABI; only canonical calls gain
+    // result guards. Operator aliases and malformed target/argument shapes stay separate.
+    fn is_explicit_set_result_source(expr: &Expr) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let Expr::Call { name, args } = expr else {
+            return false;
+        };
+        let [
+            Arg::Positional(Expr::Variable { .. }),
+            Arg::Positional(value),
+        ] = args.as_slice()
+        else {
+            return false;
+        };
+        name == "set"
+            && matches!(
+                value,
+                Expr::Variable { .. }
+                    | Expr::NumberLiteral { .. }
+                    | Expr::StringLiteral { .. }
+                    | Expr::BooleanLiteral { .. }
+                    | Expr::Undef
+                    | Expr::ArrayLiteral { .. }
+                    | Expr::HashLiteral { .. }
+                    | Expr::BlockValue { .. }
+                    | Expr::Call { .. }
+                    | Expr::FluentChain { .. }
+                    | Expr::ReceiverMutationChain { .. }
+                    | Expr::IndexedVar { .. }
+                    | Expr::NestedAccess { .. }
+                    | Expr::ValueAccess { .. }
+                    | Expr::AssignScalar { .. }
+                    | Expr::AssignArrayAppend { .. }
+                    | Expr::AssignHashIndex { .. }
+                    | Expr::AssignNestedAccess { .. }
+                    | Expr::CodeblockLiteral(_)
+            )
+    }
+
     // Only unambiguous explicit-value push snapshots gain ordinary result guards.
     // Static child rules retain priority even when a local binding shares their name.
     fn is_explicit_push_result_source(&self, expr: &Expr) -> bool {
@@ -8247,6 +8289,9 @@ impl Engine {
                 }
                 if name == "push" {
                     return self.is_explicit_push_result_source(receiver);
+                }
+                if name == "set" {
+                    return Self::is_explicit_set_result_source(receiver);
                 }
                 if matches!(name.as_str(), "rewind_entry_start" | "rewind_match_start") {
                     return args.is_empty();
