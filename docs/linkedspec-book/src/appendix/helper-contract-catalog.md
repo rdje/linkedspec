@@ -810,6 +810,19 @@ precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runt
 - **Returns**: int
 - **Behavior**: Returns the number of elements in the array. Returns `0` for non-array or undef input. Ordinary Perl/Rust/Dart/Julia/Lua chains preserve the numeric result for compatible scalar/number methods: `[1,2].count().add(3)` → `5`, `[].count().add(1)` → `1`, and `[1,2].count().cat(" items").uppercase()` → `"2 ITEMS"`. These count/length/key-count receiver methods take zero extra operands; Perl/Rust/Dart/Julia/Lua reject invalid shapes before source/operand effects.
 
+
+Count source/prefix campaign73 is scheduled for canonical free-one and ordinary
+zero-operand receiver chains. Reference probes show that incompatible container
+consumers can run Hash-key/value effects and a later `with` body after Count's
+numeric result. Some mutation-yielding source blocks also emit invalid Perl
+despite ready metadata; a typed-source repair precedes the guard rollout.
+Numeric0, compatible scalar/default/Array bridges, source snapshots and valid
+zero/null/Array-returning `with` controls already work in the selected examples.
+Peers are assessed independently; copy/source-domain/rejection combinations have
+a mandatory follow-up under existing Count/copy authority. No source-domain,
+copy-depth, signature/context or portable-admission expansion follows from this
+frozen target.
+
 ### `first(arr)`
 - **Signature**: `first(arr: array)`
 - **Returns**: scalar

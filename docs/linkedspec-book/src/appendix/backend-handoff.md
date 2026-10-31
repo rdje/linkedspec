@@ -3498,3 +3498,10 @@ checks per host/four routes, nearest index106/contains-copy55/value-copy four
 programs/twelve route observations/loadfile/versions with empty accepted stderr.
 Rebuild Lua apps/runtime. All bounded72/72.6 outcomes recorded; remaining method
 selection follows. Declared5.4/general isolation/full admission remain separate.
+
+
+Count source/prefix campaign73 is frozen after bounded72/72.6. Reference probes
+separate healthy numeric/snapshot/bridge controls from rejection/with gaps and
+ready-but-uncompilable block sources. Perl typed-source73.0 precedes independent
+backend guards73.1-.5; copy/source/rejection assessment73.6 follows before unrelated
+selection. No peer failure, domain normalization or full admission is inferred.
