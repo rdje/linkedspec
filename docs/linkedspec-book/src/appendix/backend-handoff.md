@@ -3170,9 +3170,10 @@ emitted Perl and rebuild native apps/runtime. Remaining feature selection follow
 
 
 Feature64 guards canonical free numeric comparison and short-prefix results in
-Perl, including Array bridges and rejection before later with bodies. Eighteen
-value programs execute with ready metadata; ten original healthy observations
-and the needed error stay exact, including valid Number0/1 with. The six-helper
+Perl and Rust, including Array bridges and rejection before later with bodies.
+Eighteen value programs/ten original healthy observations and the needed error
+stay exact on recorded routes, including valid Number0/1 with. Perl metadata is
+ready; Rust passes native/restored compiled-spec/plan controls. The six-helper
 reference lists existing signatures and true/false examples. Regenerate emitted
-Perl; independent Rust assessment is next, then Dart/Julia/safe Lua. Original
-producer/domain/arity/alias and full admission remain separate.
+Perl and rebuild Rust apps/runtime. Independent Dart assessment is next, then
+Julia/safe Lua; original producer/domain/arity/alias/full admission separate.

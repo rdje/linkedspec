@@ -6530,7 +6530,7 @@ impl Engine {
                     || Self::is_constructor_result_source(receiver)
                     || Self::is_free_string_result_source(receiver)
                     || Self::is_ordinary_string_receiver_prefix(calls)
-                    || Self::is_ordinary_arithmetic_result_chain(receiver, calls)
+                    || Self::is_ordinary_numeric_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7157,7 +7157,7 @@ impl Engine {
             || Self::is_constructor_result_source(receiver)
             || Self::is_free_string_result_source(receiver)
             || Self::is_ordinary_string_receiver_prefix(calls)
-            || Self::is_ordinary_arithmetic_result_chain(receiver, calls)
+            || Self::is_ordinary_numeric_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8354,9 +8354,9 @@ impl Engine {
         })
     }
 
-    // Arithmetic producers and arity preflight stay unchanged. Retain kind
+    // Numeric producers and arity preflight stay unchanged. Retain kind
     // guards for canonical scalar calls and ordinary short Number prefixes.
-    fn is_ordinary_arithmetic_result_chain(
+    fn is_ordinary_numeric_result_chain(
         receiver: &Expr,
         calls: &[linkedspec_core::expr::FluentCall],
     ) -> bool {
@@ -8399,7 +8399,8 @@ impl Engine {
         if let Expr::Call { name, args } = receiver {
             let valid_arity = match name.as_str() {
                 "num_abs" | "num_floor" | "num_ceil" | "num_round" => args.len() == 1,
-                "num_sub" | "num_div" | "num_mod" => args.len() == 2,
+                "num_sub" | "num_div" | "num_mod" | "num_eq" | "num_ne" | "num_gt" | "num_ge"
+                | "num_lt" | "num_le" => args.len() == 2,
                 "num_clamp" => args.len() == 3,
                 "num_add" | "num_mul" | "num_min" | "num_max" => args.len() >= 2,
                 _ => false,
@@ -8413,7 +8414,7 @@ impl Engine {
         };
         matches!(first.method.as_str(),
             "abs" | "floor" | "ceil" | "round" | "add" | "sub" |
-            "mul" | "div" | "mod" | "clamp" | "min" | "max")
+            "mul" | "div" | "mod" | "clamp" | "min" | "max" | "eq" | "ne" | "gt" | "ge" | "lt" | "le")
             // Zero-extra min/max belongs to the existing Array reducer.
             && !(matches!(first.method.as_str(), "min" | "max") && first.args.is_empty())
             && ordinary_args(&first.args)
