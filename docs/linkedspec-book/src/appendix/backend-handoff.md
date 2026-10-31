@@ -3146,18 +3146,13 @@ establish general host isolation. Regenerate emitted Perl and rebuild backend
 applications/runtime. Recorded native/restored/plan/fresh routes remain qualified
 by backend; declared Lua5.4, complete domains and full portable admission remain open.
 
-A separate receiver-only String-to-Array-to-incompatible-Hash chain ending in
-`with` still runs rejected operands/body on both tested Lua
-hosts. Perl now guards the bounded canonical receiver String-prefix paths,
-including no-with compilation and rejection before later with bodies. Its prior
-unsupported bridge is explicitly ready, with source effects, valid null/empty
-with inputs and original signatures/producers/malformed forms intact. Regenerate
-emitted Perl. Rust also guards canonical receiver prefixes across native/restored
-compiled specs/in-process plans, preserving source effects/valid null-empty with
-and original producers/preflight/with evaluator; rebuild Rust apps/runtime.
-Dart also guards these canonical receiver prefixes on native/restored specs/plans;
-rebuild Dart apps/runtime. Its already-correct direct String rejection-before-with
-path remains intact. Julia also guards the canonical prefixes across native/
-restored specs/plans/fresh Modules, keeping its already-correct direct rejection
-path; rebuild Julia apps/runtime. Safe installed Lua repair is next;
-this does not establish complete source/domain/context admission.
+Canonical receiver String prefixes retain the same guards on Perl, Rust, Dart,
+Julia and both tested Lua hosts. String-to-Array-to-incompatible-Hash paths now
+skip rejected operands and later immediate `with` bodies, including the form
+without a with tail. Perl's former unsupported bridge is explicitly ready and
+its no-with form compiles. Source effects, actual kinds, valid selected-entry
+methods and legitimate null/empty with inputs remain intact. Original producers,
+signatures, domains, malformed forms and unrelated contexts stay with their
+existing contracts. Regenerate emitted Perl and rebuild backend applications.
+All bounded free-source and receiver-prefix outcomes are recorded; complete
+source/domain/context/portable admission remains separate.

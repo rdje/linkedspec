@@ -3592,6 +3592,40 @@ function typed_source.receiver_mutation.is_free_string_result_source(expr)
   return true
 end
 
+-- Existing arity preflight owns malformed calls. Keep actual-kind guards
+-- through canonical String receiver prefixes and their intermediate results.
+function typed_source.receiver_mutation.is_ordinary_string_receiver_prefix(calls)
+  local first = calls and calls[1]
+  if first == nil or (first.source_method or first.method) ~= first.method then return false end
+  local name = first.method
+  if not (name == "trim" or name == "lowercase" or name == "uppercase" or name == "replace_substr" or
+    name == "rm_prefix" or name == "rm_suffix" or name == "substr" or name == "cat") then
+    return false
+  end
+  for _, call in ipairs(calls) do
+    local method = action_contracts.canonical_action_helper_name(call.method)
+    if method == "walk_leaves" or method == "map_leaves" or method == "reduce_leaves" or
+      ((call.trailing_block_arg or call.receiver_trailing_block_arg) and method ~= "with") then
+      return false
+    end
+  end
+  local args = first.args or {}
+  for _, argument in ipairs(args) do
+    if argument.argument_kind ~= "positional" then return false end
+    local value = argument_expr(argument)
+    local kind = value and value.kind
+    if not (kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+      kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+      kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+      kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+      kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+      kind == "assign_nested_access" or kind == "codeblock_literal") then
+      return false
+    end
+  end
+  return true
+end
+
 -- Retained boxed constructors keep their original payload/pair/splice producer.
 function typed_source.receiver_mutation.is_constructor_result_source(expr)
   if expr == nil or expr.kind ~= "call" or
@@ -3728,6 +3762,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     typed_source.receiver_mutation.is_free_default_result_source(target_receiver) or
     typed_source.receiver_mutation.is_constructor_result_source(target_receiver) or
     typed_source.receiver_mutation.is_free_string_result_source(target_receiver) or
+    typed_source.receiver_mutation.is_ordinary_string_receiver_prefix(calls) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or
