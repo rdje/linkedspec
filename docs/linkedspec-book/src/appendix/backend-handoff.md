@@ -3348,3 +3348,11 @@ Leading literal/block null now retains numeric0 and needle effects, matching
 selected/free null; later Array consumers stay guarded. Focused nearest/fences/
 syntax pass. Regenerate emitted Perl. Rust71.2/other peers independently follow;
 P1 copy71.6 and general isolation/domain/context/full admission remain separate.
+
+
+Rust71.2 preserves contains source/prefix actual-kind guards on native/restored
+CompiledSpec/in-process plan routes. Shared23/null-prefix3/source scaffold27 and
+nearest membership/null-key/String-predicate checks plus owned fmt pass. Existing
+numeric flags/SOC/null-prefix effects/error/public shapes remain exact; later
+incompatible operands/bodies skip. Rebuild Rust apps/runtime. Dart71.3 follows
+independently; P1 copy71.6/general isolation/domain/context/full admission remain.

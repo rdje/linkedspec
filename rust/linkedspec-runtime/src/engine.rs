@@ -6535,6 +6535,7 @@ impl Engine {
                     || Self::is_ordinary_definedness_result_chain(receiver, calls)
                     || Self::is_ordinary_emptiness_result_chain(receiver, calls)
                     || Self::is_ordinary_string_predicate_result_chain(receiver, calls)
+                    || Self::is_ordinary_contains_result_chain(receiver, calls)
                     || Self::is_ordinary_has_key_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
@@ -7188,6 +7189,7 @@ impl Engine {
             || Self::is_ordinary_definedness_result_chain(receiver, calls)
             || Self::is_ordinary_emptiness_result_chain(receiver, calls)
             || Self::is_ordinary_string_predicate_result_chain(receiver, calls)
+            || Self::is_ordinary_contains_result_chain(receiver, calls)
             || Self::is_ordinary_has_key_result_chain(receiver, calls)
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
@@ -7223,7 +7225,17 @@ impl Engine {
                         &Expr::Undef,
                         std::slice::from_ref(call),
                     );
-                if (array_only && !matches!(current, RuntimeValue::Array(_)))
+                // A leading ordinary contains keeps its existing null domain
+                // and needle effects. Later container links keep strict guards.
+                let nullable_membership = index == 0
+                    && matches!(current, RuntimeValue::Undef)
+                    && Self::is_ordinary_contains_result_chain(
+                        &Expr::Undef,
+                        std::slice::from_ref(call),
+                    );
+                if (array_only
+                    && !matches!(current, RuntimeValue::Array(_))
+                    && !nullable_membership)
                     || (hash_only
                         && !matches!(current, RuntimeValue::Hash(_))
                         && !nullable_presence)
@@ -8798,6 +8810,58 @@ impl Engine {
             && ordinary_args(&first.method, &first.args)
     }
 
+    // Membership retains numeric flags, equality and nullable-source behavior.
+    // Canonical free-two calls and one-needle prefixes join result-kind guards.
+    fn is_ordinary_contains_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        let ordinary_args = |args: &[Arg]| {
+            args.iter().all(|arg| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            })
+        };
+        if let Expr::Call { name, args } = receiver {
+            if name == "contains" && args.len() == 2 && ordinary_args(args) {
+                return true;
+            }
+        }
+        calls.first().is_some_and(|first| {
+            first.method == "contains" && first.args.len() == 1 && ordinary_args(&first.args)
+        })
+    }
+
     // Keep constructor payload/pair/splice policy on its original producer.
     // Only retained ordinary boxed forms join the existing result guards.
     fn is_constructor_result_source(expr: &Expr) -> bool {
@@ -9042,7 +9106,17 @@ impl Engine {
                         &Expr::Undef,
                         std::slice::from_ref(call),
                     );
-                if (array_only && !matches!(current, RuntimeValue::Array(_)))
+                // A leading ordinary contains keeps its existing null domain
+                // and needle effects. Later container links keep strict guards.
+                let nullable_membership = index == 0
+                    && matches!(current, RuntimeValue::Undef)
+                    && Self::is_ordinary_contains_result_chain(
+                        &Expr::Undef,
+                        std::slice::from_ref(call),
+                    );
+                if (array_only
+                    && !matches!(current, RuntimeValue::Array(_))
+                    && !nullable_membership)
                     || (hash_only
                         && !matches!(current, RuntimeValue::Hash(_))
                         && !nullable_presence)
