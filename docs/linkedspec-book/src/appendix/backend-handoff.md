@@ -3233,9 +3233,10 @@ uses installed PUC5.5.1/LuaJIT with no new interpreter chunk locals. Declared5.4
 broader SESSION16 and full admission remain separate.
 
 
-Perl feature69 retains has_key free-source/ordinary one-key prefix guards through
-Array bridges and immediate with. Rejected operands/bodies skip; source/key SKC
-snapshots, null-source key evaluation, numeric0-1/copy/default/repeated predicates
-and legitimate false/null/empty with stay. Regenerate emitted Perl parsers.
-Focused native/fresh/readiness/error/nearest/excluded syntax checks pass. Other
-backend baselines, full source/key domains and portable admission remain separate.
+Perl and Rust feature69 retain has_key free-source/ordinary one-key prefix guards
+through Array bridges and immediate with. Rejected operands/bodies skip; source/key
+SKC snapshots, null-source key evaluation, numeric0-1/copy/default/repeated predicates
+and legitimate false/null/empty with stay. Regenerate emitted Perl parsers and
+rebuild Rust apps/runtime. Focused Perl native/fresh/readiness/error and Rust
+native/restored/plan/null-source/nearest/owned-format checks pass. Other backend
+baselines, full source/key domains and portable admission remain separate.

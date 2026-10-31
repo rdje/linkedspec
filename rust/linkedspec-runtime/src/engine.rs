@@ -6534,12 +6534,34 @@ impl Engine {
                     || Self::is_ordinary_lexical_result_chain(receiver, calls)
                     || Self::is_ordinary_definedness_result_chain(receiver, calls)
                     || Self::is_ordinary_emptiness_result_chain(receiver, calls)
+                    || Self::is_ordinary_has_key_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
-                    let current = self.eval_expr(receiver, ctx, rule_label)?;
-                    return self
-                        .eval_kind_guarded_receiver_value_chain(current, calls, ctx, rule_label);
+                    let mut current = self.eval_expr(receiver, ctx, rule_label)?;
+                    let mut remaining = calls.as_slice();
+                    // A leading presence receiver accepts null and evaluates its key.
+                    // Its numeric result then enters the persistent kind guard.
+                    if Self::is_ordinary_has_key_result_chain(receiver, calls)
+                        && calls
+                            .first()
+                            .is_some_and(|first| first.method == "has_key" && first.args.len() == 1)
+                    {
+                        if !matches!(current, RuntimeValue::Hash(_) | RuntimeValue::Undef) {
+                            return Ok(RuntimeValue::Undef);
+                        }
+                        current = self.eval_receiver_dynamic_value_chain_call(
+                            current,
+                            &calls[0],
+                            calls.len() == 1,
+                            ctx,
+                            rule_label,
+                        )?;
+                        remaining = &calls[1..];
+                    }
+                    return self.eval_kind_guarded_receiver_value_chain(
+                        current, remaining, ctx, rule_label,
+                    );
                 }
                 if calls
                     .first()
@@ -7164,6 +7186,7 @@ impl Engine {
             || Self::is_ordinary_lexical_result_chain(receiver, calls)
             || Self::is_ordinary_definedness_result_chain(receiver, calls)
             || Self::is_ordinary_emptiness_result_chain(receiver, calls)
+            || Self::is_ordinary_has_key_result_chain(receiver, calls)
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
@@ -7191,8 +7214,15 @@ impl Engine {
                     && !Self::is_string_receiver_value_chain_method(method)
                     && !(matches!(method, "min" | "max") && !call.args.is_empty());
                 let hash_only = Self::is_hash_receiver_value_chain_method(method);
+                let leading_null_presence = index == 0
+                    && method == "has_key"
+                    && call.args.len() == 1
+                    && Self::is_ordinary_has_key_result_chain(receiver, calls)
+                    && matches!(current, RuntimeValue::Undef);
                 if (array_only && !matches!(current, RuntimeValue::Array(_)))
-                    || (hash_only && !matches!(current, RuntimeValue::Hash(_)))
+                    || (hash_only
+                        && !matches!(current, RuntimeValue::Hash(_))
+                        && !leading_null_presence)
                 {
                     return Ok(RuntimeValue::Undef);
                 }
@@ -8646,6 +8676,58 @@ impl Engine {
         }
         calls.first().is_some_and(|first| {
             matches!(first.method.as_str(), "is_empty" | "is_nonempty") && first.args.is_empty()
+        })
+    }
+
+    // Presence flags keep their numeric producer and existing source/key domains.
+    // Canonical free calls and one-key prefixes retain result-kind guards.
+    fn is_ordinary_has_key_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        let ordinary_args = |args: &[Arg]| {
+            args.iter().all(|arg| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            })
+        };
+        if let Expr::Call { name, args } = receiver {
+            if name == "has_key" && args.len() == 2 && ordinary_args(args) {
+                return true;
+            }
+        }
+        calls.first().is_some_and(|first| {
+            first.method == "has_key" && first.args.len() == 1 && ordinary_args(&first.args)
         })
     }
 
