@@ -1,7 +1,7 @@
 # Canonical set stored-result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.20; family23.3.59.
-Status: Bounded Perl59.1/Rust59.2/default59.6 targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl59.1/Rust59.2/default59.6/Dart59.3 targeted-checked; Julia/safe Lua/full admission pending.
 
 Uniform binding already defines set(name,value) as assignment yielding the stored
 typed value. Preserve ordinary assignment copy/alias semantics; this is not a
@@ -85,3 +85,16 @@ guard gap is owned P2 selection21 after59.5/before admission with separate scala
 domain/source authority assessment. Actual producers/inputs/results retained in
 named-default-rust-intake.json.gz; rebuild apps/runtime. Dart59.3 next, no portable
 aggregate-domain/free-helper/isolated emitted/full admission claim.
+
+## Independent Dart59.3 canonical source guards
+
+Same13 tests11healthy/2RED to13GREEN native/restoredSpec/plan; direct Array and
+selected String Hash consumers null/skip KV. Selected Bool/full12/read/order/
+function/with/codeblock/error/alias behavior already healthy. Nine healthy values/
+error/eight public shapes byte-equal. One canonical typed set source predicate
+feeds two existing guards; original setter/default/push/copy/alias/function/arity/
+parser/schema and remaining owner unchanged. Push12/changed-owner/new-normal
+fatal analysis/new-normal format pass. Actual producers/inputs/results in
+set-result-dart-intake.json.gz. Completed read control keeps qualified policies;
+no imported peer named-default fix. Rebuild apps/runtime; Julia59.4 next, free-
+source selection21 after59.5/full admission separate, no whole-file SDK-format claim.
