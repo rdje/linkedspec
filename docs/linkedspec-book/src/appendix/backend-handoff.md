@@ -3247,5 +3247,9 @@ Rust/Dart/Julia/installed Lua. Perl69.6.1 now retains rejection across canonical
 ordinary presence/copy chains, skipping later keys/bodies with or without a
 trailing with while preserving legitimate nullable key effects and numeric flags.
 Focused11/nearest presence-null-copy/source18/syntax and bound public lowering
-checks pass; regenerate emitted Perl parsers. Separate peer nullable presence
-repairs precede the next method selection; general isolation/full admission remain open.
+checks pass; regenerate emitted Perl parsers. Rust69.6.2 also restores nullable
+has_key after copies/legitimate null results, including key errors, while earlier
+incompatible consumers still exit immediately. Native/restored/plan11, nearest
+presence24/copy6 and owned formatting pass; rebuild Rust apps/runtime. Separate
+Dart/Julia/safe Lua repairs precede the next method selection; general isolation/full
+admission remain open.

@@ -7214,15 +7214,17 @@ impl Engine {
                     && !Self::is_string_receiver_value_chain_method(method)
                     && !(matches!(method, "min" | "max") && !call.args.is_empty());
                 let hash_only = Self::is_hash_receiver_value_chain_method(method);
-                let leading_null_presence = index == 0
-                    && method == "has_key"
-                    && call.args.len() == 1
-                    && Self::is_ordinary_has_key_result_chain(receiver, calls)
-                    && matches!(current, RuntimeValue::Undef);
+                // A valid null source keeps has_key's eager key evaluation.
+                // Earlier incompatible consumers have already returned.
+                let nullable_presence = matches!(current, RuntimeValue::Undef)
+                    && Self::is_ordinary_has_key_result_chain(
+                        &Expr::Undef,
+                        std::slice::from_ref(call),
+                    );
                 if (array_only && !matches!(current, RuntimeValue::Array(_)))
                     || (hash_only
                         && !matches!(current, RuntimeValue::Hash(_))
-                        && !leading_null_presence)
+                        && !nullable_presence)
                 {
                     return Ok(RuntimeValue::Undef);
                 }
@@ -8969,8 +8971,16 @@ impl Engine {
                     && !Self::is_string_receiver_value_chain_method(method)
                     && !(matches!(method, "min" | "max") && !call.args.is_empty());
                 let hash_only = Self::is_hash_receiver_value_chain_method(method);
+                // Copy preserves legitimate null; rejection exits this loop.
+                let nullable_presence = matches!(current, RuntimeValue::Undef)
+                    && Self::is_ordinary_has_key_result_chain(
+                        &Expr::Undef,
+                        std::slice::from_ref(call),
+                    );
                 if (array_only && !matches!(current, RuntimeValue::Array(_)))
-                    || (hash_only && !matches!(current, RuntimeValue::Hash(_)))
+                    || (hash_only
+                        && !matches!(current, RuntimeValue::Hash(_))
+                        && !nullable_presence)
                 {
                     return Ok(RuntimeValue::Undef);
                 }
