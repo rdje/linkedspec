@@ -6314,9 +6314,9 @@ function _evaluate_runtime_fluent_chain!(
         # returned before this canonical membership consumer.
         nullable_membership = value === nothing &&
             _runtime_is_ordinary_contains_result_chain(nothing, (call,))
-        # A leading null index source keeps its existing needle evaluation.
-        # Later container consumers reject; copy-state closure remains separate.
-        nullable_index = call_index == 1 && value === nothing &&
+        # Copy preserves legitimate null; earlier rejection has already
+        # returned before this canonical index consumer.
+        nullable_index = value === nothing &&
             _runtime_is_ordinary_index_result_chain(nothing, (call,))
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
@@ -6331,7 +6331,7 @@ function _evaluate_runtime_fluent_chain!(
         end
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
-        if scalar_result && !nullable_presence && !nullable_membership &&
+        if scalar_result && !nullable_presence && !nullable_membership && !nullable_index &&
             !(helper_name in ("is_empty", "is_nonempty")) && (
             helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
             helper_name in _RUNTIME_HASH_HELPER_NAMES ||

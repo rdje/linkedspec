@@ -3482,3 +3482,10 @@ and removes obsolete index-only firstCall state. Source/scalarResult assignment/
 with/preflight stay; same14/nearest37/fatal analysis/new-normal/one-owned-member
 formatting pass with empty stderr. Rebuild Dart apps/runtime. Separate Julia/safe
 Lua nullable index repairs precede unrelated selection; full admission remains open.
+
+
+Julia72.6.4 restores copied-null index needles/errors through common/scalar guards.
+Separate Array-end call_index restriction and source/scalar_result assignment/with/
+preflight stay. Same70 strict-kind assertions/nearest173/strict depwarn pass with
+qualified precompile/cache-lock notices and injected-warning rejection. Rebuild
+Julia apps/runtime. Safe Lua remains before unrelated selection; admission separate.

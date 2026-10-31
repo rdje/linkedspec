@@ -1,0 +1,17 @@
+---
+id: julia-copied-null-index
+title: Julia nullable index crosses both guards while rejection exits early
+answers:
+  - "does Julia copied null index_of evaluate its needle and propagate errors"
+  - "which Julia guards need the nullable index exception"
+  - "why does Julia retain call_index after nullable index changes"
+date: 2026-10-31
+status: bounded72.6.4 targeted-checked; independent installed Lua/full admission separate
+tags: [julia, index_of, copy, null, rejection, runtime]
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.72.6.4; copied-null-index-julia-intake.json.gz retains unchanged70/raw phases/eight actual files/four consumers/two inline diagnostics/strict numeric checks/notice classifier and phase identities."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; const REPO_ROOT=pwd(); include(ARGS[1]); include(ARGS[2]); include(ARGS[3]); include(ARGS[4])' julia/test/copied_null_index_composition_test.jl julia/test/index_result_guard_composition_test.jl julia/test/copied_null_contains_composition_test.jl julia/test/value_copy_test.jl"
+---
+
+Julia72.6.4 restores canonical copied-null index needles: independent unchanged seventy assertions42PASS28RED become70PASS native/restoredSpec/plan/fresh Module with strict Number-versus-Bool identity. Baseline42 includes seven failed-group route-key scaffolds. Shared12 plus two source-exact original null diagnostics retain thirteen values/one needed needle error; seven healthy rejection/wrong-kind/Array snapshot/index/direct-null observations stay exact. Copied-null/free-copy/free-index forms agree at null/ABC; source-needle snapshot miss!/SNC/calls1/working Array, repeated copy, valid null with/numeric copy and binding_kind_mismatch needle error are restored. Existing pure canonical one-needle nullable_index now crosses common-container and scalar-result guards; remove its leading-step restriction. Earlier incompatible consumers still return before later effects. Retain enumerate/call_index and separate Array-end mutation restriction; one exact runner include. Source/scalar_result assignment/producer/with/preflight/equality/index0-null/null-empty/copy depth/snapshots/excluded traversal/deferred/function/parser/schema stay. Nearest index106/contains-copy55/value-copy12=173 and strict depwarn pass. Accepted-nearest stderr is empty or only anchored precompile/cache-lock notices; injected unclassified warning rejected. Eight actual joined literal files/four consumers/two inline original diagnostics/per-phase identities and199 other activation inputs exact, not complete transitive generation closure. Actual sources/producers/templates/inputs/commands/raw phases/deltas/notice classifier retained in copied-null-index-julia-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; rebuild Julia apps/runtime. Independent safe Lua72.6.5 next before unrelated selection. Manual checklist under23.4.3 scope limit; general isolation/full23.4/pressure/registration/input-custody/task-evidence/declared-host admission separate. No isolated package/full suite or push.
+
+Nullable index qualification now inspects current nothing at both guards, using the existing canonical one-needle role. Earlier rejection already returns. The loop still needs enumerate/call_index for the independent Array-end mutation restriction; scalar_result assignment and with/source evaluation stay unchanged.
