@@ -1,0 +1,18 @@
+---
+id: index-result-source-guards
+title: Index result composition needs typed operands and canonical rejection guards
+answers:
+  - "why does index_of run with after an incompatible consumer"
+  - "why does a block-valued index_of source or needle fail compilation"
+  - "why does index_of report ready when its emitted Perl fails to load"
+  - "which task owns copied-null index_of needle effects and rejection"
+date: 2026-10-31
+status: frozen72; Perl producer72.0 before independent guards and copy assessment
+tags: [index_of, array, numeric, null, guards, source, copy, composition]
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.33; index-guard-selection-intake.json.gz retains actual public20, four canonical/eighteen excluded/four operand AST-lowering observations and setup/orchestration qualifications."
+reverify: "Recover actual public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors and fresh load failures/readiness separately. Historical activation/freeze writers one-shot never replay."
+---
+
+Selection33 freezes canonical index_of source/prefix guards72 from public20 Get/descriptor/substitution/full emission/native-fresh controls. Primary16 has ten matching value/error observations, including one explicitly unready receiver bridge with unresolved with, and six gaps: free container guards, free/receiver rejected-with, two compile-failing required operand errors and function scope. Existing index0/null/no-match/null-empty distinction/equality, compatible scalar/default/Array bridges, source-needle snapshot0!/SNC and valid null/empty/Array with controls stay. The extra rejected-copy control runs ran/W; the push-yielding source also fails compilation. These three compilation controls report ready1 despite fresh-load0/warnings, never credited as executable success. Public operand AST4 retains block_value source/needle; actual lowering reconstructs raw braces. MethodLowering aggregate argument block handling is contains-only; legacy index_of target/needle fallback repeats the seam. Missing canonical index source/with role loses early rejection and source effects; existing receiver-only scalar checks already protect the direct no-with case. Null-source direct/free/selected controls return allnull with FRS while copied-null forms keep onlyC. ADR0138/null-source authority requires independent P1 copy/null/rejection assessment72.6 after primary guards before unrelated selection, not a generic nullable Array policy. Four canonical/eighteen excluded public syntax snapshots preserve shape/context/unknown/deferred/traversal boundaries; numeric index/equality/source snapshots/copy depth/free signatures/parser/schema stay. All declared source/authority/producer/case identities exact at public/syntax/operand epochs, production unchanged; no peer guard failure or complete coverage inference. Freeze shared16/excluded18 and detailed72: Perl typed-block producer72.0 first, independent guards72.1-.5, mandatory copy assessment72.6.0. Actual instruments/templates/inputs/raw errors/warnings/compile output and two setup/orchestration qualifications retained in index-guard-selection-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align. Full23.4/pressure/registration/input-custody/task-evidence/general isolation remain separate; no full suite or push.
+
+MethodLowering aggregate argument block handling is contains-only, while index_of legacy target/needle lowering rebuilds block source. Existing typed block owner is the bounded producer repair model. Canonical index source/with/copy roles remain absent from the currently retained rejection branches; the existing direct receiver scalar check already rejects the healthy no-with case.

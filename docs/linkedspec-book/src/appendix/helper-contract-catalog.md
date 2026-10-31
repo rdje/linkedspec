@@ -1089,6 +1089,19 @@ portable admission remains open.
 - **Returns**: int or undef. Ordinary Perl/Rust/Dart/Julia/Lua compatible scalar/number continuations are targeted-checked (Lua: available PUC5.5.1/LuaJIT; declared5.4/full admission open): `["a","b"].index_of("b").add(1)` returns `2`, while `.index_of("b").cat("!")` returns `"1!"`. The receiver requires one needle; missing/extra shapes return undef before source/operand effects. Declared5.4/full continuation admission remains separate.
 - **Behavior**: Returns the 0-based index of the first match. Returns `0` when the match is at the first position. Returns `undef` for missing, non-array, or no-match cases. The five current backends keep null distinct from empty: `index_of([undef,""],"")` is `1`, and `index_of([""],undef)` is undef. Rust free `index_of(items, needle_expr)` also captures named `items` before needle effects: with `items=["a"]`, `index_of(items,{items=["z"];"a"})` returns `0` and leaves `items` as `["z"]`.
 
+
+Source/prefix guard campaign72 is scheduled for canonical free-two and ordinary
+one-needle `index_of` chains. Current Perl reference observations show that a
+free index followed by an incompatible container consumer can produce an empty
+Array/Hash, and a later `with` can run after rejection. Direct receiver no-with
+guards, numeric0/null/no-match, compatible defaults, source snapshots and valid
+null/Array-returning `with` controls already work in the selected examples.
+Some supported block-valued source/needle operands also emit invalid Perl despite
+ready metadata; the typed-operand repair precedes guards. Peer behavior is assessed
+independently. Copied-null needle effects and rejection remain a mandatory follow-up
+under existing copy/null authority. No equality, copy-depth, domain/context or
+portable-admission change follows from this frozen target.
+
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
 - **Returns**: predicate result; Perl retains numeric `1`/`0`, while Rust/Dart/Julia/Lua retain Boolean results.

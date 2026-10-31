@@ -3428,3 +3428,11 @@ module, nearest contains141/presence-copy55/copy four programs twelve route
 observations/loadfile/versions with empty accepted-nearest-version stderr.
 Rebuild Lua apps/runtime. All bounded71/71.6 outcomes are recorded; declared5.4,
 general isolation and full admission remain open.
+
+
+Index source/prefix campaign72 is frozen after bounded71/71.6. Reference probes
+distinguish correct numeric/null/snapshot/bridge controls from rejection/with
+gaps and ready-but-uncompilable block operands. Perl typed-operand producer72.0
+precedes independently baselined guards72.1-.5; copied-null/rejection assessment
+72.6 follows before unrelated selection. No peer failure or complete admission
+is inferred from reference observations.
