@@ -6529,6 +6529,7 @@ impl Engine {
                     || Self::is_free_default_result_source(receiver)
                     || Self::is_constructor_result_source(receiver)
                     || Self::is_free_string_result_source(receiver)
+                    || Self::is_ordinary_string_receiver_prefix(calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7154,6 +7155,7 @@ impl Engine {
             || Self::is_free_default_result_source(receiver)
             || Self::is_constructor_result_source(receiver)
             || Self::is_free_string_result_source(receiver)
+            || Self::is_ordinary_string_receiver_prefix(calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8296,6 +8298,58 @@ impl Engine {
                     )
                 )
             })
+    }
+
+    // Existing arity preflight owns malformed calls; retain kind guards for
+    // canonical String receiver prefixes through their intermediate results.
+    fn is_ordinary_string_receiver_prefix(calls: &[linkedspec_core::expr::FluentCall]) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let Some(first) = calls.first() else {
+            return false;
+        };
+        if !matches!(
+            first.method.as_str(),
+            "trim"
+                | "lowercase"
+                | "uppercase"
+                | "replace_substr"
+                | "rm_prefix"
+                | "rm_suffix"
+                | "substr"
+                | "cat"
+        ) || calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        first.args.iter().all(|arg| {
+            matches!(
+                arg,
+                Arg::Positional(
+                    Expr::Variable { .. }
+                        | Expr::NumberLiteral { .. }
+                        | Expr::StringLiteral { .. }
+                        | Expr::BooleanLiteral { .. }
+                        | Expr::Undef
+                        | Expr::ArrayLiteral { .. }
+                        | Expr::HashLiteral { .. }
+                        | Expr::BlockValue { .. }
+                        | Expr::Call { .. }
+                        | Expr::FluentChain { .. }
+                        | Expr::ReceiverMutationChain { .. }
+                        | Expr::IndexedVar { .. }
+                        | Expr::NestedAccess { .. }
+                        | Expr::ValueAccess { .. }
+                        | Expr::AssignScalar { .. }
+                        | Expr::AssignArrayAppend { .. }
+                        | Expr::AssignHashIndex { .. }
+                        | Expr::AssignNestedAccess { .. }
+                        | Expr::CodeblockLiteral(_)
+                )
+            )
+        })
     }
 
     // Keep constructor payload/pair/splice policy on its original producer.

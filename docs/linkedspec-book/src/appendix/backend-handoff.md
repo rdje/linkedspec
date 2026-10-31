@@ -3147,10 +3147,13 @@ applications/runtime. Recorded native/restored/plan/fresh routes remain qualifie
 by backend; declared Lua5.4, complete domains and full portable admission remain open.
 
 A separate receiver-only String-to-Array-to-incompatible-Hash chain ending in
-`with` still runs rejected operands/body on Rust, Dart, Julia and both tested Lua
+`with` still runs rejected operands/body on Dart, Julia and both tested Lua
 hosts. Perl now guards the bounded canonical receiver String-prefix paths,
 including no-with compilation and rejection before later with bodies. Its prior
 unsupported bridge is explicitly ready, with source effects, valid null/empty
 with inputs and original signatures/producers/malformed forms intact. Regenerate
-emitted Perl. Independent Rust repair is next, followed by the remaining peers;
+emitted Perl. Rust also guards canonical receiver prefixes across native/restored
+compiled specs/in-process plans, preserving source effects/valid null-empty with
+and original producers/preflight/with evaluator; rebuild Rust apps/runtime.
+Independent Dart repair is next, followed by Julia/safe Lua;
 this does not establish complete source/domain/context admission.
