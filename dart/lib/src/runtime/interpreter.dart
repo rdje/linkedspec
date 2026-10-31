@@ -4074,6 +4074,7 @@ final class LinkedSpecRuntimeEngine {
           currentEdge: currentEdge,
           kindGuardedResult:
               _isOrdinaryComputedRead(receiver) ||
+              _isExplicitPushResultSource(receiver) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5438,6 +5439,44 @@ final class LinkedSpecRuntimeEngine {
         }.contains(expression.name);
   }
 
+  // Explicit snapshots use result guards; ambiguous child forms keep their ABI.
+  bool _isExplicitPushResultSource(ActionExpr expression) {
+    if (expression is! ActionCallExpr ||
+        expression.name != 'push' ||
+        (expression.sourceMethod ?? expression.name) != 'push' ||
+        expression.trailingBlockArg ||
+        expression.args.length != 2 ||
+        expression.args.any((arg) => arg is! ActionPositionalArgument)) {
+      return false;
+    }
+    final target = expression.args.first.value;
+    if (target is! ActionVariableExpr ||
+        target.source != target.name ||
+        compiledSpec.rule(target.name) != null) {
+      return false;
+    }
+    return switch (expression.args.last.value) {
+      ActionStringLiteralExpr() ||
+      ActionBooleanLiteralExpr() ||
+      ActionUndefExpr() ||
+      ActionArrayLiteralExpr() ||
+      ActionHashLiteralExpr() ||
+      ActionBlockValueExpr() ||
+      ActionCallExpr() ||
+      ActionFluentChainExpr() ||
+      ActionReceiverMutationChainExpr() ||
+      ActionIndexedVarExpr() ||
+      ActionNestedAccessExpr() ||
+      ActionValueAccessExpr() ||
+      ActionAssignScalarExpr() ||
+      ActionAssignArrayAppendExpr() ||
+      ActionAssignHashIndexExpr() ||
+      ActionAssignNestedAccessExpr() ||
+      ActionCodeblockLiteralExpr() => true,
+      _ => false,
+    };
+  }
+
   bool _isOrdinaryComputedRead(ActionExpr expression) {
     // Static owners preserve legacy unknown bound-call result policies.
     if (expression is! ActionValueAccessExpr) {
@@ -5449,6 +5488,9 @@ final class LinkedSpecRuntimeEngine {
         return true;
       }
       final helper = canonicalActionHelperName(receiver.name);
+      if (helper == 'push') {
+        return _isExplicitPushResultSource(receiver);
+      }
       // Only existing canonical zero-argument sources join this guard.
       if (helper == 'entry_slot' ||
           helper == 'gap_span' ||

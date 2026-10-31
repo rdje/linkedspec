@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: Bounded Perl58/Rust58.2 targeted-checked; Dart/Julia/safe Lua/full admission pending.
+Status: Bounded Perl58/Rust58.2/Dart58.3 targeted-checked; Julia/safe Lua/full admission pending.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -135,3 +135,20 @@ Original push/child ABI/parser/consumers/copy/schema and remaining owner unchang
 Nearest computed6/owned fmt pass; initial fmt1 and formatting-only correction
 retained. Actual producers/inputs/source/results in push-snapshot-rust-intake.json.gz.
 Rebuild runtime/apps; no isolated emitted/package/full admission. Dart58.3 next.
+
+## Independent Dart58.3 guards
+
+Accepted12 tests10healthy/2RED to12GREEN on native/restored SpecFile/generated-plan.
+Direct Array and selected String Hash consumers retained values/evaluated KV;
+now null/skipped. Selected Bool and full12/order/snapshot/function/copy/logical/
+with/error/absence/static-child already healthy. Nine healthy values/two source
+errors byte-equal. Initial11 and pre-production added String control retained;
+static-child fixture preserves Dart's published action-edge context.
+
+One exact-two-positional/plain-target/canonical/unambiguous-value typed predicate
+feeds existing direct/computed guards. Static rule names/bare-numeric/trailing
+forms excluded; original push/child/with/parser/method/copy/function/arity/schema
+and remaining owner unchanged. Computed7/changed-owner/new-normal fatal analysis/
+new-normal format pass. Actual producers/inputs/epochs/results retained in
+push-snapshot-dart-intake.json.gz. Rebuild apps/runtime; no whole-file SDK-format/
+isolated emitted/full admission. Julia58.4 next.

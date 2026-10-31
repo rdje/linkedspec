@@ -3050,7 +3050,10 @@ Previously healthy copy/logical/with/transitions remain, with source-once/local
 returns/function scope preserved. Regenerate affected emitted Perl parsers.
 Rust now guards direct and selected explicit push snapshot consumers on native/
 restored CompiledSpec/plan, preserving already-working full target/scope/order/
-copy/logical/with/source-error behavior. Rebuild Rust runtime/apps. Independent
-Dart58.3 is next; each peer is assessed
+copy/logical/with/source-error behavior. Rebuild Rust runtime/apps.
+Dart now also guards direct Array/selected String push results on native/restored
+SpecFile/plan, preserving its already-working Bool/full target/order/scope/with
+behavior and original action-edge child dispatch. Rebuild Dart runtime/apps.
+Julia58.4 is next; each peer is assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.
