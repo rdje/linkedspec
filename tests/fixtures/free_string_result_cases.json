@@ -1,0 +1,237 @@
+[
+  {
+    "body": "return([trim(\" tail \"),lowercase(\"TAIL\"),uppercase(\"tail\"),replace_substr(\"a-b\",\"-\",\",\"),rm_prefix(0,\"x\"),rm_suffix(false,\"x\"),substr(\"head\",1,2),cat(\"a\",\"b\")])",
+    "expected": [
+      "tail",
+      "tail",
+      "TAIL",
+      "a,b",
+      0,
+      false,
+      "ea",
+      "ab"
+    ],
+    "id": "primitive_values",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([trim(\" tail \"),lowercase(\"TAIL\"),uppercase(\"tail\"),replace_substr(\"a-b\",\"-\",\",\"),rm_prefix(0,\"x\"),rm_suffix(false,\"x\"),substr(\"head\",1,2),cat(\"a\",\"b\")])}"
+  },
+  {
+    "body": "return([trim(\" tail \").uppercase(),replace_substr(\"a-b\",\"-\",\",\").split(\",\").last().uppercase(),rm_prefix(0,\"x\").add(1),rm_suffix(false,\"x\").cat(\"!\")])",
+    "expected": [
+      "TAIL",
+      "B",
+      1,
+      "0!"
+    ],
+    "id": "compatible_values",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([trim(\" tail \").uppercase(),replace_substr(\"a-b\",\"-\",\",\").split(\",\").last().uppercase(),rm_prefix(0,\"x\").add(1),rm_suffix(false,\"x\").cat(\"!\")])}"
+  },
+  {
+    "body": "order=\"\";left=trim(\"tail\").take({order=cat(order,\"A\");1});right=uppercase(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "free_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=trim(\"tail\").take({order=cat(order,\"A\");1});right=uppercase(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";left=\"tail\".trim().take({order=cat(order,\"A\");1});right=\"tail\".uppercase().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "receiver_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=\"tail\".trim().take({order=cat(order,\"A\");1});right=\"tail\".uppercase().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";saved=trim(\"tail\");out=saved.coalesce(undef).take({order=cat(order,\"A\");1});return([out,saved,order])",
+    "expected": [
+      null,
+      "tail",
+      ""
+    ],
+    "id": "bound_guarded_bridge",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";saved=trim(\"tail\");out=saved.coalesce(undef).take({order=cat(order,\"A\");1});return([out,saved,order])}"
+  },
+  {
+    "body": "order=\"\";out=trim(undef).with(){order=cat(order,\"W\");return(\"recovered\")};return([out,order])",
+    "expected": [
+      "recovered",
+      "W"
+    ],
+    "id": "valid_null_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim(undef).with(){order=cat(order,\"W\");return(\"recovered\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=trim({order=cat(order,\"S\");return(\"tail\")}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "S"
+    ],
+    "id": "guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim({order=cat(order,\"S\");return(\"tail\")}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "value=\" tail \";order=\"\";out=replace_substr({order=cat(order,\"S\");return(value)},{value=\"other\";order=cat(order,\"O\");\" \"},{order=cat(order,\"N\");\"_\"}).cat({order=cat(order,\"C\");\"!\"});return([out,value,order])",
+    "expected": [
+      "_tail_!",
+      "other",
+      "SONC"
+    ],
+    "id": "source_order_snapshot",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {value=\" tail \";order=\"\";out=replace_substr({order=cat(order,\"S\");return(value)},{value=\"other\";order=cat(order,\"O\");\" \"},{order=cat(order,\"N\");\"_\"}).cat({order=cat(order,\"C\");\"!\"});return([out,value,order])}"
+  },
+  {
+    "body": "order=\"\";out=[trim(\"tail\").take({order=cat(order,\"A\");1}),lowercase(\"TAIL\").take({order=cat(order,\"A\");1}),uppercase(\"tail\").take({order=cat(order,\"A\");1}),replace_substr(\"a-b\",\"-\",\",\").take({order=cat(order,\"A\");1}),rm_prefix(0,\"x\").take({order=cat(order,\"A\");1}),rm_suffix(false,\"x\").take({order=cat(order,\"A\");1}),substr(\"tail\",0,1).take({order=cat(order,\"A\");1}),cat(\"t\",\"ail\").take({order=cat(order,\"A\");1})];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_free_guard_sources",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[trim(\"tail\").take({order=cat(order,\"A\");1}),lowercase(\"TAIL\").take({order=cat(order,\"A\");1}),uppercase(\"tail\").take({order=cat(order,\"A\");1}),replace_substr(\"a-b\",\"-\",\",\").take({order=cat(order,\"A\");1}),rm_prefix(0,\"x\").take({order=cat(order,\"A\");1}),rm_suffix(false,\"x\").take({order=cat(order,\"A\");1}),substr(\"tail\",0,1).take({order=cat(order,\"A\");1}),cat(\"t\",\"ail\").take({order=cat(order,\"A\");1})];return([out,order])}"
+  },
+  {
+    "body": "value=\"caller\";return([build(),value])",
+    "expected": [
+      [
+        null,
+        ""
+      ],
+      "caller"
+    ],
+    "id": "function_scope",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "fn build(){order=\"\";out=trim(\"tail\").take({order=cat(order,\"A\");1});return([out,order])}\nValue:: I {value=\"caller\";return([build(),value])}"
+  },
+  {
+    "body": "return(trim({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))",
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "id": "needed_source_error",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return(trim({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))}"
+  },
+  {
+    "body": "order=\"\";out=trim(\" a,b \").split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "free_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim(\" a,b \").split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=\" a,b \".trim().split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "receiver_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "perl_legacy_unready": true,
+    "qualification": "Perl receiver-only invalid Array-to-Hash with tail: preserve existing unresolved-with/unready context, not a positive source-admission claim or portable peer expectation.",
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=\" a,b \".trim().split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=trim(\" a,b \").split(\",\").take(0).with(){order=cat(order,\"W\");return([value.count(),\"tail\"])};return([out,order])",
+    "expected": [
+      [
+        0,
+        "tail"
+      ],
+      "W"
+    ],
+    "id": "valid_empty_bridge_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim(\" a,b \").split(\",\").take(0).with(){order=cat(order,\"W\");return([value.count(),\"tail\"])};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=trim(\"\").split(\",\").take(0).first().with(){order=cat(order,\"W\");return(\"recovered\")};return([out,order])",
+    "expected": [
+      "recovered",
+      "W"
+    ],
+    "id": "valid_null_after_bridge_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim(\"\").split(\",\").take(0).first().with(){order=cat(order,\"W\");return(\"recovered\")};return([out,order])}"
+  },
+  {
+    "body": "items=\"text\";return([take(items,1),sorted_values(items)])",
+    "expected": [
+      [],
+      []
+    ],
+    "id": "legacy_named_empty_fallback",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {items=\"text\";return([take(items,1),sorted_values(items)])}"
+  }
+]

@@ -3134,3 +3134,14 @@ outcomes are recorded; next feature selection23.1.23. Declared Lua5.4 and full
 admission remain separate.
 No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.
+
+
+Feature62 targets canonical free String-helper source guards. Perl's original
+eight producers, kinds and compatible receiver/read paths work; direct free-call
+container consumers can retain legacy empty/wrong-container results and enter
+later with bodies. A public fresh-package seed also proves same-named host Hash
+data can enter an incompatible Hash result. P1 Perl62.1 is first, then independent
+Rust/Dart/Julia/Lua assessments. Valid null/empty with and producer effects stay;
+no signature/domain/alias/mutation/deferred/context/copy/schema expansion or full
+admission follows. Correct values from an unsupported context do not establish
+support; the receiver-only invalid bridge remains an explicit unready fence.

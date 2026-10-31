@@ -375,7 +375,7 @@ arities and complete admission remain separate. See the backend handoff.
 - **Signature**: `trim(value: scalar)`
 - **Returns**: scalar
 - **Behavior**: Removes leading and trailing whitespace. Returns undef if input is undef.
-- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`. Ordinary Perl/Rust/Dart/Julia/Lua scalar String-helper results now feed compatible scalar/generic/numeric methods; `" a,b ".trim().split(",").last().uppercase()` gives `"B"`, while a scalar result followed by a container-only consumer returns undef without evaluating that consumer's operands. Malformed ordinary shapes reject before source effects; source/prefix effects before a valid incompatible tail remain. Lua checks use available PUC5.5.1/LuaJIT; declared5.4 and complete domain/context/portable admission remain separate.
+- **Edge cases**: A string of only whitespace becomes `""`. Null propagation also applies in receiver form: `[].first().trim()` returns undef. The same source-null rule applies to `length`, `lowercase`, `uppercase`, `replace_substr`, `rm_prefix` and `rm_suffix`. Ordinary Perl/Rust/Dart/Julia/Lua scalar String-helper results now feed compatible scalar/generic/numeric methods; `" a,b ".trim().split(",").last().uppercase()` gives `"B"`. In the checked receiver forms, a scalar result followed by a container-only consumer returns undef without evaluating that consumer's operands. Malformed receiver shapes reject before source effects; source/prefix effects before a valid incompatible tail remain. Lua checks use available PUC5.5.1/LuaJIT; declared5.4 and complete domain/context/portable admission remain separate.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -384,6 +384,15 @@ arities and complete admission remain separate. See the backend handoff.
   value : /\[([^\]]*)\]/  I.return( trim(entry_group(0)) )
   ```
   Input `[  hello  ]` → `["hello"]` (capture group `0` is the bracketed, padded text).
+
+Canonical free calls retain a current Perl source-dispatch gap: `trim("tail").take(1)`
+returns an empty Array, and `uppercase("tail").set_key("k",1)` can read a same-named
+host package Hash before adding the key. A rejected free-call consumer followed
+by `with` may still enter its body. These are owned P1 repairs; the original String
+producers and ordinary receiver guards work. Use the existing completed-value
+guarded bridge while the repair is pending: `saved=trim("tail");
+saved.coalesce(undef).take(1)` returns null. Other backends are assessed independently;
+legacy named aggregate fallback and broader unsupported contexts remain separate.
 
 ### `lowercase(s)`
 - **Signature**: `lowercase(value: scalar)`
