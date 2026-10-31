@@ -3447,6 +3447,10 @@ with empty stderr; common kind guards retain rejection and leading nullable
 index effects. Rebuild Dart apps/runtime. Julia72.4 now passes106 strict assertions
 on native/restoredSpec/plan/fresh Module, nearest183/strict depwarn with qualified
 precompile notices only; its separate mutation-index restriction stays. Rebuild
-Julia apps/runtime. Installed Lua72.5 awaits independent assessment; copied-null/rejection assessment
+Julia apps/runtime. Lua72.5 passes106 strict checks per installed PUC5.5.1 and
+LuaJIT2.1.1788460057 host on native/restoredSpec/plan/fresh module. Nearest index/
+null-key programs, contains141/loadfile/version checks pass with empty stderr. Existing namespace/no new chunk
+locals and separate mutation restriction stay; rebuild Lua apps/runtime. All
+bounded primary72 outcomes are recorded. Mandatory copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.
