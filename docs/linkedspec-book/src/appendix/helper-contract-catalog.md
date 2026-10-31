@@ -1019,8 +1019,8 @@ element/pair/list-splice, bare-key and selector retirement rules remain in force
 - **Behavior**: Returns true if the array contains the needle value. Works on direct arrays and projected expressions (`sorted_keys(...)`, `sorted_values(...)`).
 - **Edge cases**: Returns false for non-array or undef input.
 
-Perl, Rust and Dart retain actual-kind and rejection guards through canonical
-two-operand free membership calls and ordinary one-needle receiver prefixes:
+Perl, Rust, Dart and Julia retain actual-kind and rejection guards through
+canonical two-operand free membership calls and ordinary one-needle prefixes:
 
 ```text
 contains(["a"],"z").take(1)                       # undef
@@ -1052,8 +1052,8 @@ The source completes before the needle. A source error stops needle evaluation;
 needle errors also propagate before later defaults or `with` bodies. Native and
 freshly emitted Perl follow these rules; regenerate existing emitted parsers.
 
-Perl, Rust and Dart selected, free, literal and block null sources return numeric
-`0` and still evaluate the needle. For example, with `order=""`,
+Perl, Rust, Dart and Julia selected, free, literal and block null sources return
+numeric `0` and still evaluate the needle. For example, with `order=""`,
 `{undef}.contains({order=cat(order,"O");"a"}).cat("!")` returns `"0!"` and leaves
 `order` as `"O"`. Capturing a null source before a needle that creates an Array
 still searches the captured null value. This membership rule grants no other

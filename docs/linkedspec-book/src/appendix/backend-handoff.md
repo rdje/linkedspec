@@ -3364,3 +3364,11 @@ nearest membership/null-key/String-predicate28 pass, plus fatal owner/new-test
 analysis and scoped formatting. Numeric flags/SOC/null effects/error/public shapes
 stay exact; incompatible operands/later bodies skip. Rebuild Dart apps/runtime.
 Julia71.4 follows independently; P1 copy71.6/general isolation/full admission remain.
+
+
+Julia71.4 preserves contains source/prefix actual-kind guards on native/restoredSpec/
+plan/fresh Module routes. Shared23/null-prefix3/null-plus-with2/source scaffold141
+and nearest membership12/null-key36/String-predicate111 pass with strict numeric
+kinds and depwarn checking. Existing SOC/null effects/error/public shapes stay;
+incompatible operands/later bodies skip. Rebuild Julia apps/runtime. Safe Lua71.5
+follows independently; P1 copy71.6/general isolation/full admission remain.
