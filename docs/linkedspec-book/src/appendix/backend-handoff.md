@@ -3432,7 +3432,10 @@ general isolation and full admission remain open.
 
 Index source/prefix campaign72 is frozen after bounded71/71.6. Reference probes
 distinguish correct numeric/null/snapshot/bridge controls from rejection/with
-gaps and ready-but-uncompilable block operands. Perl typed-operand producer72.0
-precedes independently baselined guards72.1-.5; copied-null/rejection assessment
+gaps and formerly uncompilable block operands. Perl typed-operand producer72.0
+now passes15 native/fresh controls/nearest index-contains-push26/source18/syntax;
+block operands yield values and required errors reach execution with actual
+warning-free fresh loading. Regenerate emitted Perl. Independently baselined
+guards72.1-.5 remain; copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.

@@ -5376,7 +5376,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     });
    }
    if (!(defined($arg_expr) && length($arg_expr))
-       && $method eq 'contains'
+       && ($method eq 'contains' || $method eq 'index_of')
        && ref($arg) eq 'HASH'
        && ($arg->{kind} // '') eq 'block_value') {
     # Keep block statements on their typed owner. Reconstructing their source

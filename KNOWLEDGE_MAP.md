@@ -14912,7 +14912,7 @@ _Portable if-statement aliases use i/elif markers and attached when/otherwise_
 ### index-result-source-guards
 _Index result composition needs typed operands and canonical rejection guards_
 - **answers:** why does index_of run with after an incompatible consumer | why does a block-valued index_of source or needle fail compilation | why does index_of report ready when its emitted Perl fails to load | which task owns copied-null index_of needle effects and rejection
-- **date:** 2026-10-31 · **status:** frozen72; Perl producer72.0 before independent guards and copy assessment
+- **date:** 2026-10-31 · **status:** Perl producer72.0 targeted-checked; independent guards72.1-.5 and P1 copy72.6 remain
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.33; index-guard-selection-intake.json.gz retains actual public20, four canonical/eighteen excluded/four operand AST-lowering observations and setup/orchestration qualifications.`
 - **reverify:** `Recover actual public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors and fresh load failures/readiness separately. Historical activation/freeze writers one-shot never replay.`
 - **source:** [`docs/knowledge/index-result-source-guards.md`](docs/knowledge/index-result-source-guards.md)

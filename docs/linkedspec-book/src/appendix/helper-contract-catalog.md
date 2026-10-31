@@ -1096,11 +1096,26 @@ free index followed by an incompatible container consumer can produce an empty
 Array/Hash, and a later `with` can run after rejection. Direct receiver no-with
 guards, numeric0/null/no-match, compatible defaults, source snapshots and valid
 null/Array-returning `with` controls already work in the selected examples.
-Some supported block-valued source/needle operands also emit invalid Perl despite
-ready metadata; the typed-operand repair precedes guards. Peer behavior is assessed
-independently. Copied-null needle effects and rejection remain a mandatory follow-up
+Perl now lowers supported block-valued source/needle operands through the existing
+typed value handler. Peer guard behavior is assessed independently. Copied-null needle effects and rejection remain a mandatory follow-up
 under existing copy/null authority. No equality, copy-depth, domain/context or
 portable-admission change follows from this frozen target.
+
+
+Canonical Perl `index_of` accepts computed source and needle value blocks:
+
+```text
+items=[]
+index_of({push(items,"a")},"a")       # 0; items is ["a"], pushed once
+index_of(["a"],{cat("","a")})         # 0; computed needle
+index_of({items="text";push(items,"x")},"a").coalesce("masked")
+# binding_kind_mismatch at execution; the default cannot mask the source error
+```
+
+The source completes before the needle. Source errors stop needle evaluation;
+needed needle errors propagate before later defaults or `with` bodies. Native
+and freshly emitted Perl agree; regenerate existing emitted parsers. Numeric
+indices, no-match/null results, equality, snapshots and copy depth are unchanged.
 
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
