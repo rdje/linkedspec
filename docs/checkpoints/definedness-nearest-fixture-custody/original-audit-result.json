@@ -1,0 +1,12 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/definedness-nearest-fixture-custody/audit_original.py"
+  ],
+  "exit": 1,
+  "stderr": "",
+  "stdout_file": "docs/checkpoints/definedness-nearest-fixture-custody/original-audit.json",
+  "stdout_sha256": "10db8df45e9a590851e5af1041eab2520693555fc9f84c5db23b3c81dc24ce3a",
+  "scope": "Named direct fixture dependencies identified by retained literal paths or explicit stem/extension loaders; no full transitive input census or runtime RED."
+}

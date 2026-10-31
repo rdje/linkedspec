@@ -996,14 +996,24 @@ element/pair/list-splice, bare-key and selector retirement rules remain in force
 
 ### `is_empty(arr)`
 - **Signature**: `is_empty(value: array|hash|expr)`
-- **Returns**: boolean
+- **Returns**: predicate result; Perl retains numeric `1`/`0`, while Rust/Dart/Julia/Lua retain Boolean results.
 - **Behavior**: Returns true for an actual empty Array/Hash/String or undef; String `"0"`, numeric0 and false remain data. Perl/Rust/Dart/Julia/Lua ordinary values and receivers inspect that yielded kind once: `[].is_empty().cat("!")` → `"1!"`; `{"a":1}.is_empty().cat("!")` → `"0!"`; `cat(is_empty({[]}),"!")` → `"1!"`. Selected, function, default and copied dynamic Array/Hash sources also work. The predicate runs before consumer operands: `parts=[]; text=parts.is_empty().cat({parts+="x";"!"})` keeps `text="1!"` and leaves `parts=["x"]`. Receiver form takes no operands before effects; `.is_empty().sorted()` returns undef. Rust/Dart/Julia/Lua retain Boolean producer values; scalar-text chains render truth as0/1. Lua checks use available PUC5.5.1/LuaJIT; declared5.4/full admission and broader Perl FlowExpr conditional/literal-slot repairs remain tracked.
 - **Edge cases**: Returns true for undef (treated as empty).
 
 ### `is_nonempty(arr)`
 - **Signature**: `is_nonempty(value: array|hash|expr)`
-- **Returns**: boolean
+- **Returns**: predicate result; Perl retains numeric `1`/`0`, while Rust/Dart/Julia/Lua retain Boolean results.
 - **Behavior**: Logical inverse of `is_empty`. On Perl/Rust/Dart/Julia/Lua, `["a"].is_nonempty().cat("!")` → `"1!"`, and `{}.is_nonempty().coalesce_nonempty("late").cat("!")` → `"0!"` because false remains present data. `["a"].is_empty().cat(",x").split(",").last().uppercase()` → `"X"`; the explicit split produces an Array for later methods. Generic predicate results may themselves use `.is_nonempty()`. Ordinary free-helper `is_nonempty("0")` agrees with a binding holding `"0"` and returns1. The Lua declared-version/full-admission and broader Perl conditional qualifications above still apply.
+
+A current Perl guard gap affects canonical one-value free emptiness calls and
+ordinary zero-operand predicate prefixes: `is_empty([1]).take(1)` can return an
+empty Array, and a rejected predicate prefix can still enter a later `with` body.
+A receiver Array bridge can return null with unsupported `with` metadata.
+Feature68 owns these guard/readiness cases. Compatible chains, the free `cat`/
+`split` bridge, repeated predicates, numeric flags/copies/defaults/snapshots and
+valid false/null/empty `with` already work. Peer backends are assessed independently;
+existing empty/null versus zero/false/String0 data rules and broader Perl
+FlowExpr/host-slot qualifications remain unchanged.
 
 ### `join_values(delim, arr)`
 - **Signature**: `join_values(delim: scalar, arr: array)`

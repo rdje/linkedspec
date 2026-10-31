@@ -1,0 +1,128 @@
+{
+  "dart": {
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-dart-intake.json.gz",
+    "capture_sha256": "94bd1d2df27f2ba20dd46c5ae541578e9b409f487ab017d829f2b9ad0ed0879e",
+    "dependencies": [
+      {
+        "consumer_sha256": "dcdcb108869dc48afa8cf1f7e0e009a72208c9970633ba353c3097ecf4a6f53c",
+        "dependency_oracle": "explicit stem/extension call and retained loader",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.spec",
+        "missing_from_original_capture": true,
+        "retained_consumer": "dart/test/definedness_result_receivers_test.dart"
+      },
+      {
+        "consumer_sha256": "dcdcb108869dc48afa8cf1f7e0e009a72208c9970633ba353c3097ecf4a6f53c",
+        "dependency_oracle": "explicit stem/extension call and retained loader",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "dart/test/definedness_result_receivers_test.dart"
+      }
+    ],
+    "source_epoch": "a903afff53ea09e064b5c5cd59cf1441ff608ffd"
+  },
+  "julia": {
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-julia-intake.json.gz",
+    "capture_sha256": "a9f5d58988a3d675dc5be12da8020190e04a21e73cc05c1fa17a2d175b02971d",
+    "dependencies": [
+      {
+        "consumer_sha256": "437e9b7561338da396db3dafd1e812eb50a4eae222425f55fc5fcb7115d7d80d",
+        "dependency_oracle": "explicit stem/extension call and retained loader",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.spec",
+        "missing_from_original_capture": true,
+        "retained_consumer": "julia/test/definedness_result_receivers_test.jl"
+      },
+      {
+        "consumer_sha256": "437e9b7561338da396db3dafd1e812eb50a4eae222425f55fc5fcb7115d7d80d",
+        "dependency_oracle": "explicit stem/extension call and retained loader",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "julia/test/definedness_result_receivers_test.jl"
+      }
+    ],
+    "source_epoch": "e62802096eba43349f357dada9a4fb78f57f7668"
+  },
+  "lua": {
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-lua-intake.json.gz",
+    "capture_sha256": "6192b7c94f0fef85a5d04f78a0ca87c57d999163c4561623fe8e61dafe245789",
+    "dependencies": [
+      {
+        "consumer_sha256": "d246339c4b8cad83912f8eca4d908551612afc5a7ace4b8ebb5702e37259515d",
+        "dependency_oracle": "explicit stem/extension call and retained loader",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.spec",
+        "missing_from_original_capture": true,
+        "retained_consumer": "lua/test/definedness_result_receivers_test.lua"
+      },
+      {
+        "consumer_sha256": "d246339c4b8cad83912f8eca4d908551612afc5a7ace4b8ebb5702e37259515d",
+        "dependency_oracle": "explicit stem/extension call and retained loader",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "lua/test/definedness_result_receivers_test.lua"
+      }
+    ],
+    "source_epoch": "6a3fd8dc8b826dea7bfc89774cab1f304e741ebc"
+  },
+  "perl": {
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-perl-intake.json.gz",
+    "capture_sha256": "fa13199b152e71cf97ef5e47d0b8323992be7ca45acb30c06a4cf3c9e8d6fbfc",
+    "dependencies": [
+      {
+        "consumer_sha256": "e5247c8e0ca7b873abc1b42f702e67d0956d4769ee285b5eb9e5d87cd0b1dd33",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.spec",
+        "missing_from_original_capture": true,
+        "retained_consumer": "t/definedness_result_receiver_contract.t"
+      },
+      {
+        "consumer_sha256": "e5247c8e0ca7b873abc1b42f702e67d0956d4769ee285b5eb9e5d87cd0b1dd33",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.perl.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "t/definedness_result_receiver_contract.t"
+      },
+      {
+        "consumer_sha256": "0e0e5d8687c1b859df98054cd49c1abd059fb17b1edab942541fdc5fd2212bda",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/lexical_result_guard_cases.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "t/lexical_result_guard_composition.t"
+      }
+    ],
+    "source_epoch": "128c3d854170b7a3df3d9ac2699a1f1f6f45c75c"
+  },
+  "rust": {
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-rust-intake.json.gz",
+    "capture_sha256": "7b6bb8ed2ed9ec76cd8c3d405c8f44bfe7b0d544046c0093fa86e03cc8b3a907",
+    "dependencies": [
+      {
+        "consumer_sha256": "1aa88269b1f58e3f3b024bbe1f681c3ab356f6c4af106ce7be83ae14290e921e",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.spec",
+        "missing_from_original_capture": true,
+        "retained_consumer": "rust/linkedspec-runtime/tests/definedness_result_receivers.rs"
+      },
+      {
+        "consumer_sha256": "1aa88269b1f58e3f3b024bbe1f681c3ab356f6c4af106ce7be83ae14290e921e",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/definedness_result_receiver_values.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "rust/linkedspec-runtime/tests/definedness_result_receivers.rs"
+      },
+      {
+        "consumer_sha256": "ddcc45e63a544a589e7b58ec74711c737aa35f91ad96eb2fd23f5dbf34d2cb08",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/lexical_result_guard_cases.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "rust/linkedspec-runtime/tests/lexical_result_guard_composition.rs"
+      },
+      {
+        "consumer_sha256": "ddcc45e63a544a589e7b58ec74711c737aa35f91ad96eb2fd23f5dbf34d2cb08",
+        "dependency_oracle": "literal fixture path",
+        "fixture": "tests/fixtures/lexical_result_guard_excluded_ast.json",
+        "missing_from_original_capture": true,
+        "retained_consumer": "rust/linkedspec-runtime/tests/lexical_result_guard_composition.rs"
+      }
+    ],
+    "source_epoch": "a7969c0c3857208ecc4469075e58c5883e10ff5e"
+  }
+}

@@ -27,3 +27,5 @@ Independent Dart receiver Array-bridge repair and healthy Bool/domain controls: 
 Independent Julia receiver Array-bridge repair/strict Bool/four-route proof: [[julia-definedness-result-source-guards]].
 
 Independent installed-host Lua receiver bridge repair/no new chunk locals: [[lua-definedness-result-source-guards]]. All bounded67 outcomes recorded; canonical parent closeout separate.
+
+Qualification2026-10-31: Original67 nearest-suite packet manifests omit named direct fixture data despite the recorded passing executions. Original producer/results remain immutable; immediate67.6 owns historical input recovery and fresh focused custody proof before68.1. See [[definedness-nearest-fixture-custody-gap]]. This qualifies the earlier all-input-retention wording; no runtime failure is claimed.

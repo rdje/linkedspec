@@ -3212,3 +3212,9 @@ readiness/error and Rust/Dart/Julia/Lua native/restored/plan/nearest controls pa
 with fresh Julia/Lua modules and strict Julia Bool/depwarn. Lua proof uses available
 PUC5.5.1/LuaJIT, with no new interpreter chunk locals. Declared5.4 and full
 source/domain/context admission remain separate.
+
+
+The recorded family67 nearest checks passed, but their original retained packets
+omit direct fixture data. Immediate repair67.6 supplements historical inputs and
+fresh focused proof before68.1 implementation. The original observations stay
+immutable; this is an evidence-custody repair, with no runtime behavior change.

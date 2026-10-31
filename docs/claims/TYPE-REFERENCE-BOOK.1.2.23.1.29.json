@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.1.29",
+  "claims": [
+    {
+      "name": "Named direct nearest-fixture omissions in original definedness67 packets",
+      "statement": "The specified direct fixture dependencies of the selected nearest-suite consumers are absent from each of the five original definedness67 packet manifests, while those consumers and their fixture loaders are retained. Inherited activation lists retained String-comparison globs after nearest selectors changed.",
+      "scope": "Exactly the thirteen consumer/fixture edges and five unique fixture paths explicitly listed in original-audit.json across the five named immutable packet SHA256 identities and their recorded source epochs. Runtime/nearest checks passed. No runtime regression, original runtime-time hash freshness, complete transitive input/producer census, other packet population or full admission claim. Repair67.6 supplements the originals in a separate epoch.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/definedness-nearest-fixture-custody/run_original_audit.py (actual one-shot retained command; readonly audit_original.py is the repeatable audit)",
+        "granularity": "Each explicitly named fixture/retained-consumer edge in five original packets; validate retained consumer bytes, literal paths or explicit stem/extension calls plus loaders, and manifest membership.",
+        "result": "Qualified original audit actual exit1, empty stderr, all thirteen named edges missing across five original packets. Root-cause capture verifies all five inherited String-comparison globs and changed nearest selectors; original packet bytes unchanged. Actual complete report/command/exit/stdout hash and setup limits retained."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The original five packet manifests already retain the direct root fixture files required by their selected nearest consumers.",
+        "oracle": "Independent retained consumer code names the fixtures via literal paths or explicit calls plus loaders. Valid retained consumer hashes are positive decode controls; manifest membership distinguishes required data from unrelated String-comparison fixtures. Retained activation/selector bytes establish the inherited-glob mechanism.",
+        "red_control": "Actual audit_original.py exit1 with empty stderr and missing_from_original_capture:true for each named edge, retained in original-audit.json/original-audit-result.json. Initial literal-name instrument assertion has no custody RED credit. This is input-custody RED, not a product runtime RED."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/audit_original.py",
+            "sha256": "cc5b8935196e2507ed781e372dd141474f4a87eaf262bd5464100cb2ca405b1c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/run_original_audit.py",
+            "sha256": "581992f6282614a4e0c45c34da2455cf4986c14bd2cc132cd7d193cdd6287329",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/retain_intake_context.py",
+            "sha256": "81e818925f1f66f3cbd52b5cb8319ccdc9824dc647ef6b08d1af22c07b058f2e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/original-audit.json",
+            "sha256": "10db8df45e9a590851e5af1041eab2520693555fc9f84c5db23b3c81dc24ce3a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/original-audit-result.json",
+            "sha256": "b8c7dceffbcd5f461b1d7c7b7a61e8ace4c36d65ebaa0b61cc7d17547c474e19",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/root-cause.json",
+            "sha256": "3a7e5dac307554e2d79858f067c7290f46c7805bb64e3080346d6587663bd4b4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-nearest-fixture-custody/intake-context.json.gz",
+            "sha256": "50d789304904abfc7a46bf035dc7f4d7a98dfaea31b59fc6a6c01ed29e604f54",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-dart-intake.json.gz",
+            "sha256": "94bd1d2df27f2ba20dd46c5ae541578e9b409f487ab017d829f2b9ad0ed0879e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-julia-intake.json.gz",
+            "sha256": "a9f5d58988a3d675dc5be12da8020190e04a21e73cc05c1fa17a2d175b02971d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-lua-intake.json.gz",
+            "sha256": "6192b7c94f0fef85a5d04f78a0ca87c57d999163c4561623fe8e61dafe245789",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-perl-intake.json.gz",
+            "sha256": "fa13199b152e71cf97ef5e47d0b8323992be7ca45acb30c06a4cf3c9e8d6fbfc",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/type-operation-inventory/definedness-guard-rust-intake.json.gz",
+            "sha256": "7b6bb8ed2ed9ec76cd8c3d405c8f44bfe7b0d544046c0093fa86e03cc8b3a907",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

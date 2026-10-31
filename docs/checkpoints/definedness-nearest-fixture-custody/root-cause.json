@@ -1,0 +1,57 @@
+{
+  "dart": {
+    "activation": ".linkedspec-data/verification/activate_definedness_guard_dart.py",
+    "activation_sha256": "0785aa1c03df98021213cc1f85aa7b3d0a7ae33a85435e1ee3e0c783ebc976a8",
+    "all_named_dependencies_missing": true,
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-dart-intake.json.gz",
+    "inherited_glob": "string_comparison_result_receiver_values.*",
+    "named_direct_dependencies": 2,
+    "nearest_selector": ".linkedspec-data/verification/run_definedness_guard_dart.py",
+    "nearest_selector_sha256": "283a1cd5bc8ebd3b7ad395857fd9cefcaae375c9a727644cf2169650250bf371",
+    "source_epoch": "a903afff53ea09e064b5c5cd59cf1441ff608ffd"
+  },
+  "julia": {
+    "activation": ".linkedspec-data/verification/activate_definedness_guard_julia.py",
+    "activation_sha256": "aca985b824cb4fd5dcca5911fce3e8df0942929e1aeadfea7c57e7f2ddcb8da7",
+    "all_named_dependencies_missing": true,
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-julia-intake.json.gz",
+    "inherited_glob": "string_comparison_result_receiver_values.*",
+    "named_direct_dependencies": 2,
+    "nearest_selector": ".linkedspec-data/verification/run_definedness_guard_julia.py",
+    "nearest_selector_sha256": "4a6516e8bfddb6c4a05b04b1e31c7a9a74adbcb146aaafaf89f34ac223a4a64f",
+    "source_epoch": "e62802096eba43349f357dada9a4fb78f57f7668"
+  },
+  "lua": {
+    "activation": ".linkedspec-data/verification/activate_definedness_guard_lua.py",
+    "activation_sha256": "a6a236d4775e3359fd1ef789f5df7236675746efc7937d581c41e1f5997cc310",
+    "all_named_dependencies_missing": true,
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-lua-intake.json.gz",
+    "inherited_glob": "string_comparison_result_receiver_values.*",
+    "named_direct_dependencies": 2,
+    "nearest_selector": ".linkedspec-data/verification/run_definedness_guard_lua_nearest.lua",
+    "nearest_selector_sha256": "679790197336177da9f015fb072e685ad146484ace7c6328208be21290a12117",
+    "source_epoch": "6a3fd8dc8b826dea7bfc89774cab1f304e741ebc"
+  },
+  "perl": {
+    "activation": ".linkedspec-data/verification/activate_definedness_guard_perl.py",
+    "activation_sha256": "98913b8c72510bd49d667b644edee728339c9b8eb5c062ccf348fc37dfb04c76",
+    "all_named_dependencies_missing": true,
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-perl-intake.json.gz",
+    "inherited_glob": "string_comparison_result_receiver_values.*",
+    "named_direct_dependencies": 3,
+    "nearest_selector": ".linkedspec-data/verification/run_definedness_guard_perl.py",
+    "nearest_selector_sha256": "5ed6307e08c35160e057c82191044fc621339f9d9b3184560945011c3c0c2b33",
+    "source_epoch": "128c3d854170b7a3df3d9ac2699a1f1f6f45c75c"
+  },
+  "rust": {
+    "activation": ".linkedspec-data/verification/activate_definedness_guard_rust.py",
+    "activation_sha256": "76b81a0e66e57d89d99def4b58f7b78aa7b3d3f8f872874633de57ab9d3834ce",
+    "all_named_dependencies_missing": true,
+    "capture": "docs/checkpoints/type-operation-inventory/definedness-guard-rust-intake.json.gz",
+    "inherited_glob": "string_comparison_result_receiver_values.*",
+    "named_direct_dependencies": 4,
+    "nearest_selector": ".linkedspec-data/verification/run_definedness_guard_rust.py",
+    "nearest_selector_sha256": "6bb69299884d2ae2ec330caa8439f412fc6aa63ea4f6ea0bbea429fff53eb260",
+    "source_epoch": "a7969c0c3857208ecc4469075e58c5883e10ff5e"
+  }
+}
