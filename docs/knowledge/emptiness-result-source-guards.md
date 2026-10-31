@@ -8,7 +8,7 @@ answers:
   - "which task owns emptiness source and prefix guards"
   - "does the free emptiness cat split bridge already retain guards"
 date: 2026-10-31
-status: bounded Perl68.1/Rust68.2/Dart68.3/Julia68.4 targeted-checked; safe Lua/full admission separate
+status: all bounded68 backend outcomes targeted-checked on recorded routes/hosts; full admission separate
 tags: [emptiness, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.29; emptiness-guard-selection-intake.json.gz retains actual public22 producer/all inputs/results/four existing peer profiles."
 reverify: "Recover public22/shared22/original source from retained intake into new project-local outputs; historical activation/run/freeze writers one-shot never replay. Owners68.1-.5 independently baseline; peers use expected_nonperl override where present."
@@ -25,3 +25,5 @@ Independent Rust Bool/source guard proof: [[rust-emptiness-result-source-guards]
 Independent Dart Array-bridge/source guard proof: [[dart-emptiness-result-source-guards]].
 
 Independent Julia strict-Bool Array-bridge/source guard proof: [[julia-emptiness-result-source-guards]].
+
+Independent installed-host Lua Array-bridge/source guard proof: [[lua-emptiness-result-source-guards]]. All bounded68 outcomes recorded; selection23.1.30/canonical parent/full23.4 remain separate.

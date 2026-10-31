@@ -3222,11 +3222,12 @@ are not retroactively claimed. Perl68.1 may resume. Broader earlier-capture inpu
 review23.4.2 remains required before admission; runtime behavior is unchanged.
 
 
-Perl, Rust, Dart and Julia feature68 keep emptiness source/ordinary zero-operand prefix guards
+Perl, Rust, Dart, Julia and installed Lua feature68 keep emptiness source/ordinary zero-operand prefix guards
 through Array bridges and immediate with. Incompatible operands/bodies skip;
-legitimate false/null/empty with, repeated predicates, Perl numeric1-0 versus Rust/Dart/Julia
+legitimate false/null/empty with, repeated predicates, Perl numeric1-0 versus Rust/Dart/Julia/Lua
 Bool/copy/default and source snapshots stay. Regenerate emitted Perl parsers and
-rebuild Rust/Dart/Julia apps/runtime. Focused native/fresh Perl readiness/error and
-Rust/Dart/Julia native/restored/plan/nearest/format-analysis checks pass, plus fresh
-Julia modules/strict Bool/depwarn. Safe Lua baselines,
+rebuild Rust/Dart/Julia/Lua apps/runtime. Focused native/fresh Perl readiness/error and
+Rust/Dart/Julia/Lua native/restored/plan/nearest checks pass, plus fresh Julia/Lua
+modules, owned Rust formatting/Dart analysis and strict Julia Bool/depwarn. Lua
+uses installed PUC5.5.1/LuaJIT with no new interpreter chunk locals. Declared5.4,
 broader SESSION16 and full admission remain separate.
