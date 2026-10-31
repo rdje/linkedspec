@@ -3382,3 +3382,12 @@ locals; numeric flags/SOC/null effects/error/public shapes stay. Rebuild Lua app
 runtime. All primary71 outcomes are recorded; mandatory P1 copy71.6.0 assessment
 follows on every backend before unrelated selection. Declared5.4/general isolation/
 domain/context/full admission remain separate.
+
+
+Copied-null contains assessment71.6.0 independently finds Perl rejection loss
+through copy and peer nullable-needle/error suppression after receiver copy.
+Reference rejection-state repair71.6.1 precedes Rust/Dart/Julia/safe Lua repairs.
+The shared11 controls preserve numeric membership, source snapshots, copy depth
+and healthy rejected peer chains. Actual consumed Cargo source custody is bound
+on the initial run; generic route-template captions retain their presence origin.
+These bounded repairs precede unrelated selection; full admission remains separate.

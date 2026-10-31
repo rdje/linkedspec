@@ -1,0 +1,159 @@
+[
+  {
+    "id": "copy_null_forms",
+    "body": "order=\"\";out=[{undef}.copy().contains({order=cat(order,\"A\");\"a\"}),copy({undef}).contains({order=cat(order,\"B\");\"a\"}),contains(copy({undef}),{order=cat(order,\"C\");\"a\"}),contains([\"a\"],\"z\").take(1).copy().contains({order=cat(order,\"D\");\"a\"})];return([out,order])",
+    "source": "Value:: I {order=\"\";out=[{undef}.copy().contains({order=cat(order,\"A\");\"a\"}),copy({undef}).contains({order=cat(order,\"B\");\"a\"}),contains(copy({undef}),{order=cat(order,\"C\");\"a\"}),contains([\"a\"],\"z\").take(1).copy().contains({order=cat(order,\"D\");\"a\"})];return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      [
+        0,
+        0,
+        0,
+        null
+      ],
+      "ABC"
+    ],
+    "component": "copy_diagnostic"
+  },
+  {
+    "id": "valid_null_with_copy",
+    "body": "order=\"\";out=contains([\"a\"],\"z\").add(\"bad\").with(){order=cat(order,\"S\");return(undef)}.copy().contains({order=cat(order,\"K\");\"a\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=contains([\"a\"],\"z\").add(\"bad\").with(){order=cat(order,\"S\");return(undef)}.copy().contains({order=cat(order,\"K\");\"a\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "SK"
+    ],
+    "component": "copy_diagnostic"
+  },
+  {
+    "id": "rejected_copy_with",
+    "body": "order=\"\";out=contains([\"a\"],\"z\").take({order=cat(order,\"A\");1}).copy().contains({order=cat(order,\"K\");\"a\"}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=contains([\"a\"],\"z\").take({order=cat(order,\"A\");1}).copy().contains({order=cat(order,\"K\");\"a\"}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      ""
+    ],
+    "component": "copy_diagnostic"
+  },
+  {
+    "id": "null_source_needle_snapshot",
+    "body": "source=undef;order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().contains({calls=num_add(calls,1);order=cat(order,\"N\");source=[\"a\"];\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])",
+    "source": "Top:: I {source=undef;order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().contains({calls=num_add(calls,1);order=cat(order,\"N\");source=[\"a\"];\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "0!",
+      "SNC",
+      1,
+      [
+        "a"
+      ]
+    ]
+  },
+  {
+    "id": "repeated_copy",
+    "body": "order=\"\";out={undef}.copy().copy().contains({order=cat(order,\"N\");\"a\"});return([out,order])",
+    "source": "Top:: I {order=\"\";out={undef}.copy().copy().contains({order=cat(order,\"N\");\"a\"});return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "N"
+    ]
+  },
+  {
+    "id": "valid_null_numeric_copy",
+    "body": "order=\"\";out=contains([\"a\"],\"z\").add(\"bad\").copy().contains({order=cat(order,\"N\");\"a\"});return([out,order])",
+    "source": "Top:: I {order=\"\";out=contains([\"a\"],\"z\").add(\"bad\").copy().contains({order=cat(order,\"N\");\"a\"});return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "N"
+    ]
+  },
+  {
+    "id": "copied_wrong_kinds",
+    "body": "order=\"\";a=false.copy().contains({order=cat(order,\"A\");\"a\"});b=0.copy().contains({order=cat(order,\"B\");\"a\"});c=\"\".copy().contains({order=cat(order,\"C\");\"a\"});return([a,b,c,order])",
+    "source": "Top:: I {order=\"\";a=false.copy().contains({order=cat(order,\"A\");\"a\"});b=0.copy().contains({order=cat(order,\"B\");\"a\"});c=\"\".copy().contains({order=cat(order,\"C\");\"a\"});return([a,b,c,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "rejected_copy_without_with",
+    "body": "order=\"\";out=contains([\"a\"],\"z\").take({order=cat(order,\"A\");1}).copy().contains({order=cat(order,\"N\");\"a\"});return([out,order])",
+    "source": "Top:: I {order=\"\";out=contains([\"a\"],\"z\").take({order=cat(order,\"A\");1}).copy().contains({order=cat(order,\"N\");\"a\"});return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_needle_error",
+    "body": "return({undef}.copy().contains({items=\"text\";push(items,\"x\")}))",
+    "source": "Top:: I {return({undef}.copy().contains({items=\"text\";push(items,\"x\")}))}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "array_source_needle_snapshot",
+    "body": "source=[false,\"a\"];order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().contains({calls=num_add(calls,1);order=cat(order,\"N\");source=[];\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])",
+    "source": "Top:: I {source=[false,\"a\"];order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().contains({calls=num_add(calls,1);order=cat(order,\"N\");source=[];\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "1!",
+      "SNC",
+      1,
+      []
+    ]
+  },
+  {
+    "id": "copied_array_flags",
+    "body": "return([[\"a\"].copy().contains(\"a\"),[].copy().contains(\"a\")])",
+    "source": "Top:: I {return([[\"a\"].copy().contains(\"a\"),[].copy().contains(\"a\")])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      1,
+      0
+    ]
+  }
+]

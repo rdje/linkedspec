@@ -8,7 +8,7 @@ answers:
   - "why does literal null contains differ from selected null"
   - "which task owns copied-null contains and rejected-copy revival"
 date: 2026-10-31
-status: all bounded primary71 outcomes targeted-checked on recorded routes/hosts; mandatory P1 copy71.6.0 assessment next
+status: all bounded primary71 outcomes recorded; copied-null assessment71.6.0 frozen, P1 repairs next
 tags: [array, contains, predicates, source, guards, copy, null]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.32; contains-guard-selection-intake.json.gz retains original26/additional boundary10/producer5/block AST4/canonical4/excluded18 public observations, actual instruments and declared inputs."
 reverify: "Recover retained public observers into new project-local outputs at declared source boundary. Historical activation/freeze writers one-shot. Owners71.0/71.1-.5 and mandatory71.6 independently qualify behavior; transport0/ready1 do not establish feature execution."
@@ -37,3 +37,5 @@ Dart71.3 now preserves contains source/prefix guards through its common kind gua
 Julia71.4 now preserves contains source/prefix guards through common kind dispatch while retaining leading null/with effects. Four-route141/nearest159/strict depwarn pass; mechanism/limits: [[julia-contains-source-guards]]. Safe Lua71.5 independently next; P1 copy71.6 remains mandatory after primary peers.
 
 Safe Lua71.5 now preserves contains source/prefix guards and leading null/with effects in the existing namespace. Both installed hosts pass141/nearest/loadfile/version checks; mechanism/limits: [[lua-contains-source-guards]]. All primary71 outcomes are recorded; mandatory P1 copy71.6.0 independently reassesses every backend before any unrelated selection.
+
+Current mandatory follow-up: [[copied-null-contains-composition]]. Independent assessment71.6.0 freezes11 controls; reference rejection71.6.1 then separate peer nullable-membership repairs precede unrelated selection. Earlier copy observations above remain historical.

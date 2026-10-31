@@ -1059,10 +1059,16 @@ return numeric `0` and still evaluate the needle. For example, with `order=""`,
 still searches the captured null value. This membership rule grants no other
 Array method a nullable receiver.
 
-Copied-null and rejection-across-copy combinations retain a mandatory bounded
-assessment under P1 71.6 after the primary backend guards. Equality, null/empty
-distinction, copy depth and source snapshots stay; full domain/context/portable
-admission remains open.
+Copied-null composition has a bounded known gap on Rust/Dart/Julia/installed Lua:
+`{undef}.copy().contains(needle)` currently skips the needle and returns null,
+while `copy({undef}).contains(needle)` and free `contains` evaluate it and return
+numeric0. Repeated copies and copied valid null results also suppress needed
+needle effects/errors. Perl handles those legitimate nulls but can lose rejection
+through copy: `contains(["a"],"z").take(1).copy().contains(needle).with(){...}`
+can run the needle/body after the rejected `take`. Separate reference and peer
+repairs are scheduled before unrelated feature selection. The target preserves
+legitimate-null membership and rejection as distinct states; equality, numeric
+flags, null/empty distinction, copy depth, snapshots and full admission rights stay.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`
