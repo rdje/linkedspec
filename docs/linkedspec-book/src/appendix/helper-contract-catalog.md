@@ -1591,7 +1591,7 @@ table because its runtime behavior is to terminate the parser process.
 Boolean results also cross explicit type bridges: `and(false).split(",").first()`
 is the String `"0"`, while `and(false).with(){return(value)}` keeps Bool false.
 A numeric method still rejects Bool: `and(false).add(1)` yields null, which may
-legitimately enter a subsequent `with` body. Perl, Rust and Dart preserve rejection state
+legitimately enter a subsequent `with` body. Perl, Rust, Dart and Julia preserve rejection state
 through canonical logical free calls and ordinary `.and`/`.or`/`.not` prefixes:
 
 ```text
@@ -1603,10 +1603,11 @@ and(false).add(1).with(){return("null")}                  # "null"; body runs
 ```
 
 Incompatible operands and later bodies stay skipped, while source operands
-still run eagerly once in order. Perl reports ready ActionIR metadata; Rust and
-Dart pass their native, restored compiled-spec/SpecFile and generated-plan controls.
-Valid false/null/empty values remain distinct from rejected consumers. Regenerate
-emitted Perl parsers and rebuild Rust/Dart apps/runtime. Other backends are assessed independently;
+still run eagerly once in order. Perl reports ready ActionIR metadata; Rust, Dart
+and Julia pass native, restored compiled-spec/SpecFile and generated-plan controls,
+with a fresh emitted Module on Julia. Valid false/null/empty values remain distinct
+from rejected consumers. Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia
+apps/runtime. Safe Lua is assessed independently;
 typed truth, Boolean kinds and arity errors remain unchanged.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`

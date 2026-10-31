@@ -75,3 +75,5 @@ ADR0138 copy rollout4.2.2.4 preserves these healthy Bool-copy producers and
 adds only copied-result actual-kind guards. Native/plan/fresh copy/logical/selected
 checks pass with no old oracle changes; [[julia-runtime-array-helpers]] owns the
 bounded mechanism. Full context/portable admission remains separate.
+
+Logical free-source/ordinary-prefix guards after Array bridges are separately repaired by Julia65.4: [[julia-logical-result-source-guards]]. Direct rejection/valid false-null-empty with already work; eager producer/typed Bool/truth/arity/scalar_result remain unchanged. Safe Lua/full23.4 separate.

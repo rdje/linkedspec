@@ -6294,6 +6294,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_free_string_result_source(chain.receiver) ||
         _runtime_is_ordinary_string_receiver_prefix(chain.calls) ||
         _runtime_is_ordinary_numeric_result_chain(chain.receiver, chain.calls) ||
+        _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6514,6 +6515,36 @@ function _runtime_is_ordinary_numeric_result_chain(receiver, calls)
     # Zero-extra min/max keeps the Array reducer's existing route.
     first_call.method in ("min", "max") && isempty(first_call.args) && return false
     return ordinary_args(first_call.args)
+end
+
+# Logical sources keep eager Bool producers and ordinary method preflight.
+# Retain actual-kind guards after explicit Array bridges.
+function _runtime_is_ordinary_logical_result_chain(receiver, calls)
+    isempty(calls) && return false
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg
+        valid_arity = receiver.name in ("and", "or") ? !isempty(receiver.args) :
+            receiver.name == "not" && length(receiver.args) == 1
+        valid_arity && ordinary_args(receiver.args) && return true
+    end
+    first_call = first(calls)
+    something(first_call.source_method, first_call.method) == first_call.method || return false
+    valid_arity = first_call.method in ("and", "or") ? !isempty(first_call.args) :
+        first_call.method == "not" && isempty(first_call.args)
+    return valid_arity && ordinary_args(first_call.args)
 end
 
 # Retained boxed constructors keep their original payload/pair/splice producer.

@@ -3181,10 +3181,11 @@ lists existing signatures and true/false examples. Regenerate emitted Perl and
 rebuild native apps/runtime. Remaining feature selection follows.
 
 
-Perl, Rust and Dart feature65 retain eager Boolean source and ordinary logical-
-prefix guards through Array bridges and later immediate with bodies. Rust receiver
-prefixes/direct guards and Dart direct guards already worked; Dart now also guards
-Array bridges. Rejected consumers skip operands/bodies; valid false/null/empty
-with and returned Arrays stay. Regenerate emitted Perl parsers and rebuild
-Rust/Dart apps/runtime. Focused Perl native/fresh/readiness and Rust/Dart native/
-restored/plan/error controls pass; Julia/safe Lua remain independent, full admission separate.
+Perl, Rust, Dart and Julia feature65 retain eager Boolean source and ordinary
+logical prefix guards through Array bridges and later immediate with bodies.
+Rust receiver prefixes/direct guards and Dart/Julia direct guards already worked;
+Dart/Julia now also guard Array bridges. Rejected consumers skip operands/bodies;
+valid false/null/empty with and returned Arrays stay. Regenerate emitted Perl
+parsers and rebuild Rust/Dart/Julia apps/runtime. Focused Perl native/fresh/readiness,
+Rust/Dart/Julia native/restored/plan/error and fresh Julia Module controls pass;
+safe Lua remains independent, full admission separate.
