@@ -9,7 +9,7 @@ answers:
   - "does the numeric package 3 Hash seed demonstrate contamination"
   - "are Perl arithmetic source and Number prefix guards fixed"
 date: 2026-10-31
-status: bounded Perl63.1/Rust63.2/Dart63.3/Julia63.4 targeted-checked; safe Lua63.5/full admission separate
+status: all bounded63 backend outcomes recorded; next selection23.1.25/full admission separate
 tags: [perl, numeric, arithmetic, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.24; free-numeric-selection-intake.json.gz retains17 exact public native/fresh/descriptor/substitution/emitted programs and synthetic host seed."
 reverify: "Recover shared17/public observer from free-numeric-selection-intake.json.gz into new repository-local outputs. Historical activation/freeze/finish/retain writers are one-shot, never replay. Implementation owners63.1-.5."
@@ -41,3 +41,5 @@ Independent Rust repair and route-specific observations: [[rust-arithmetic-resul
 Independent Dart source guards and already-healthy direct Number controls: [[dart-arithmetic-result-source-guards]].
 
 Independent Julia four-route/source guard proof and scaffold qualification: [[julia-arithmetic-result-source-guards]].
+
+Installed Lua guard proof and exact host limits: [[lua-arithmetic-result-source-guards]]. All bounded63 outcomes recorded; canonical closeout remains separate.

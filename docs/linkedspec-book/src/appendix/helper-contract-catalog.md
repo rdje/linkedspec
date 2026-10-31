@@ -1331,7 +1331,8 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 > capture groups (`array(entry_group(0), entry_group(1), …)`) or numeric literals. An
 > `undef` result (e.g. divide-by-zero) surfaces as a `null` element.
 
-Perl, Rust, Dart and Julia preserve actual result kinds through canonical free arithmetic calls and
+Perl, Rust, Dart, Julia and the tested Lua hosts preserve actual result kinds
+through canonical free arithmetic calls and
 ordinary short Number prefixes, including later immediate `with`:
 
 ```text
@@ -1345,12 +1346,13 @@ num_div(1,0).with(){return("recovered")}  # "recovered"
 Rejected container operations skip their operands and later bodies; a legitimate
 null or empty value still enters `with`. Source and operands run once in order,
 snapshots and zero-valued indices keep their kinds, and source errors remain visible.
-The Perl paths have ready ActionIR metadata; Rust, Dart and Julia pass their
-native, restored compiled-spec/SpecFile and generated-plan controls, with Julia
-also checked through fresh emitted modules. Regenerate emitted Perl parsers and
-rebuild Rust/Dart/Julia applications/runtime. Remaining hosts are
-assessed independently; scalar/Array min/max overloads and numeric domains stay
-unchanged. Matching values alone do not establish support in an unready context.
+The Perl paths have ready ActionIR metadata; Rust, Dart, Julia and tested Lua
+pass their native, restored compiled-spec/SpecFile and generated-plan controls,
+with Julia/Lua also checked through fresh emitted modules. Lua checks use installed
+PUC5.5.1/LuaJIT; declared5.4/full admission remain separate. Regenerate emitted Perl
+parsers and rebuild native applications/runtime. Scalar/Array min/max overloads
+and numeric domains stay unchanged. Matching values alone do not establish
+support in an unready context.
 
 ### `num_add(a, b)`
 - **Signature**: `num_add(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands)
