@@ -5393,7 +5393,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     });
    }
    if (!(defined($arg_expr) && length($arg_expr))
-       && ($method eq 'contains' || $method eq 'index_of')
+       && ($method eq 'contains' || $method eq 'index_of' || $method eq 'count')
        && ref($arg) eq 'HASH'
        && ($arg->{kind} // '') eq 'block_value') {
     # Keep block statements on their typed owner. Reconstructing their source
@@ -5481,6 +5481,23 @@ my $lower_numeric_array_reducer_source_expr = sub {
    next if ($method eq 'min' || $method eq 'max') && !@$args;
    my $helper = _number_receiver_method_helper_name($method);
    return 'undef' unless defined($ast_value_only_call_method->($helper, 1 + @$args));
+  }
+
+  # A terminal Count on a value block uses the same typed argument owner as
+  # its free form, rather than rebuilding the block through the legacy bridge.
+  my $terminal_count_call = @$calls == 1 ? $calls->[0] : undef;
+  if (($receiver->{kind} // '') eq 'block_value'
+      && ref($terminal_count_call) eq 'HASH'
+      && ($terminal_count_call->{method} // '') eq 'count'
+      && ($terminal_count_call->{source_method} // 'count') eq 'count'
+      && ref($terminal_count_call->{args}) eq 'ARRAY'
+      && !@{$terminal_count_call->{args}}
+      && !$terminal_count_call->{trailing_block_arg}
+      && !$terminal_count_call->{receiver_trailing_block_arg}) {
+   return $lower_ast_value_node->({
+    kind => 'call', name => 'count', source_method => 'count',
+    args => [$receiver], source_span => $node->{source_span},
+   }, { bare_scalar_read => 1 });
   }
 
   # Presence sources and one-key prefixes retain rejection across kind

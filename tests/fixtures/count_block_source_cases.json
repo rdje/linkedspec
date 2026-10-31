@@ -1,0 +1,214 @@
+[
+  {
+    "id": "error_fluent_default",
+    "body": "return(count({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))",
+    "source": "Value:: I {return(count({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_direct",
+    "body": "return(count({items=\"text\";push(items,\"x\")}))",
+    "source": "Value:: I {return(count({items=\"text\";push(items,\"x\")}))}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_nested_default",
+    "body": "return(coalesce(count({items=\"text\";push(items,\"x\")}),\"masked\"))",
+    "source": "Value:: I {return(coalesce(count({items=\"text\";push(items,\"x\")}),\"masked\"))}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_bound_default",
+    "body": "out=count({items=\"text\";push(items,\"x\")});return(out.coalesce(\"masked\"))",
+    "source": "Value:: I {out=count({items=\"text\";push(items,\"x\")});return(out.coalesce(\"masked\"))}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_immediate_with",
+    "body": "return(count({items=\"text\";push(items,\"x\")}).with(){return(\"masked\")})",
+    "source": "Value:: I {return(count({items=\"text\";push(items,\"x\")}).with(){return(\"masked\")})}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_receiver_source",
+    "body": "return({items=\"text\";push(items,\"x\")}.count())",
+    "source": "Value:: I {return({items=\"text\";push(items,\"x\")}.count())}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_receiver_default",
+    "body": "return({items=\"text\";push(items,\"x\")}.count().coalesce(\"masked\"))",
+    "source": "Value:: I {return({items=\"text\";push(items,\"x\")}.count().coalesce(\"masked\"))}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "push_direct_source",
+    "body": "items=[];out=count({push(items,\"a\")});return([out,items])",
+    "source": "Value:: I {items=[];out=count({push(items,\"a\")});return([out,items])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      1,
+      [
+        "a"
+      ]
+    ]
+  },
+  {
+    "id": "push_receiver_source",
+    "body": "items=[];out={push(items,\"a\")}.count();return([out,items])",
+    "source": "Value:: I {items=[];out={push(items,\"a\")}.count();return([out,items])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      1,
+      [
+        "a"
+      ]
+    ]
+  },
+  {
+    "id": "push_explicit_last_variable",
+    "body": "items=[];out=count({push(items,\"a\");items});return([out,items])",
+    "source": "Value:: I {items=[];out=count({push(items,\"a\");items});return([out,items])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      1,
+      [
+        "a"
+      ]
+    ]
+  },
+  {
+    "id": "source_snapshot",
+    "body": "source=[\"a\"];calls=0;order=\"\";out=count({calls=num_add(calls,1);order=cat(order,\"S\");source}).add({order=cat(order,\"A\");source=[\"z\",\"tail\"];1});return([out,calls,order,source])",
+    "source": "Value:: I {source=[\"a\"];calls=0;order=\"\";out=count({calls=num_add(calls,1);order=cat(order,\"S\");source}).add({order=cat(order,\"A\");source=[\"z\",\"tail\"];1});return([out,calls,order,source])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      2,
+      1,
+      "SA",
+      [
+        "z",
+        "tail"
+      ]
+    ]
+  },
+  {
+    "id": "bound_source",
+    "body": "source=[\"a\"];out=count({source});return([out,source])",
+    "source": "Value:: I {source=[\"a\"];out=count({source});return([out,source])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      1,
+      [
+        "a"
+      ]
+    ]
+  },
+  {
+    "id": "primitive_source_domains",
+    "body": "return([count([]),count([\"a\"]),count(undef),count(\"a\"),count({}),{undef}.count(),\"text\".count(),{}.count()])",
+    "source": "Value:: I {return([count([]),count([\"a\"]),count(undef),count(\"a\"),count({}),{undef}.count(),\"text\".count(),{}.count()])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "function_block_source",
+    "body": "return(build([\"a\",\"b\"]))",
+    "source": "fn build(values){return(count({values}))}\nValue:: I {return(build([\"a\",\"b\"]))}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": 2
+  }
+]

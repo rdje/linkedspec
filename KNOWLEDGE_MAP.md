@@ -12833,7 +12833,7 @@ _Copied-null presence needs nullable dispatch and retained rejection state_
 ### count-result-source-guards
 _Count source composition needs typed blocks and canonical rejection guards_
 - **answers:** why does count run with after an incompatible consumer | why does a block-valued count source fail generated Perl compilation | why does count report ready when its emitted Perl fails to load | which task owns Count copy source-domain and rejection effects | where is the existing count length normal and its expected fixture
-- **date:** 2026-10-31 · **status:** frozen73; Perl typed-source73.0 before independent guards and copy assessment
+- **date:** 2026-10-31 · **status:** Perl typed-source73.0 targeted-checked; independent guards/copy assessment next
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.34; count-guard-selection-intake.json.gz retains actual public19, canonical4/excluded18/typed-source3 AST-lowerings, exact source owner mechanisms and setup qualification.`
 - **reverify:** `Recover public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors/readiness/fresh loading separately. Historical activation/freeze writers one-shot never replay.`
 - **source:** [`docs/knowledge/count-result-source-guards.md`](docs/knowledge/count-result-source-guards.md)

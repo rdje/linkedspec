@@ -3505,3 +3505,11 @@ separate healthy numeric/snapshot/bridge controls from rejection/with gaps and
 ready-but-uncompilable block sources. Perl typed-source73.0 precedes independent
 backend guards73.1-.5; copy/source/rejection assessment73.6 follows before unrelated
 selection. No peer failure, domain normalization or full admission is inferred.
+
+
+Perl73.0 repairs Count block sources through the existing typed argument owner
+and delegates direct terminal block receivers to that same producer. The legacy
+emitter stays; fourteen native/fresh groups, nearest28/source18/syntax and three
+public typed lowerings pass. An intermediate12PASS2RED receiver bypass is retained
+and resolved. Regenerate emitted Perl. Count source guards73.1 then peers and
+P1 copy/source assessment73.6 remain before unrelated selection/admission.

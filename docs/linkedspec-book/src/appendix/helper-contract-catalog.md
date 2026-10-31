@@ -814,14 +814,29 @@ precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runt
 Count source/prefix campaign73 is scheduled for canonical free-one and ordinary
 zero-operand receiver chains. Reference probes show that incompatible container
 consumers can run Hash-key/value effects and a later `with` body after Count's
-numeric result. Some mutation-yielding source blocks also emit invalid Perl
-despite ready metadata; a typed-source repair precedes the guard rollout.
+numeric result. The Perl typed-source prerequisite is repaired; Count source
+blocks now use their existing value owner on free and direct receiver paths.
 Numeric0, compatible scalar/default/Array bridges, source snapshots and valid
 zero/null/Array-returning `with` controls already work in the selected examples.
 Peers are assessed independently; copy/source-domain/rejection combinations have
 a mandatory follow-up under existing Count/copy authority. No source-domain,
 copy-depth, signature/context or portable-admission expansion follows from this
 frozen target.
+
+
+Canonical Perl Count accepts mutation-yielding and computed source blocks:
+
+```text
+items=[]; count({push(items,"a")})       # 1; items is ["a"], pushed once
+items=[]; {push(items,"a")}.count()     # same direct receiver result
+count({items="text";push(items,"x")}).coalesce("masked")
+# binding_kind_mismatch at execution; the default cannot mask the source error
+```
+
+The source runs once before later consumers. Needed source errors propagate on
+native and freshly emitted Perl paths; numeric0, existing non-array Count zero
+fallback, function/binding scope and snapshots stay. Regenerate emitted Perl.
+This producer repair leaves the scheduled source/prefix guard campaign separate.
 
 ### `first(arr)`
 - **Signature**: `first(arr: array)`
