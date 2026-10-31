@@ -3438,7 +3438,10 @@ block operands yield values and required errors reach execution with actual
 warning-free fresh loading. Perl canonical source/prefix guards72.1 now pass19
 native/fresh controls, including leading nullable needle/default effects and
 ready receiver bridges; nearest/source18/syntax/public lowering checks pass.
-Regenerate emitted Perl. Rust/Dart/Julia/installed Lua guards72.2-.5 remain
-independently assessed; copied-null/rejection assessment
+Regenerate emitted Perl. Rust72.2 now passes20 native/restoredSpec/in-process-plan
+tests with numeric0/null identity and retained rejection; two added null-prefix/
+with controls pass original/repaired epochs, nearest31/final owned fmt pass.
+Rebuild Rust apps/runtime. Dart/Julia/installed Lua guards72.3-.5 await independent
+assessment; copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.

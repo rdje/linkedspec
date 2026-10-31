@@ -1090,7 +1090,7 @@ portable admission remains open.
 - **Behavior**: Returns the 0-based index of the first match. Returns `0` when the match is at the first position. Returns `undef` for missing, non-array, or no-match cases. The five current backends keep null distinct from empty: `index_of([undef,""],"")` is `1`, and `index_of([""],undef)` is undef. Rust free `index_of(items, needle_expr)` also captures named `items` before needle effects: with `items=["a"]`, `index_of(items,{items=["z"];"a"})` returns `0` and leaves `items` as `["z"]`.
 
 
-Ordinary canonical Perl `index_of` calls and one-needle receiver prefixes now
+Ordinary canonical Perl and Rust `index_of` calls and one-needle receiver prefixes now
 retain actual result kinds and rejection through compatible continuations.
 Incompatible container consumers return undef before their operands or later
 `with` bodies run, keeping already completed source/needle effects:
@@ -1107,8 +1107,8 @@ index_of(["a"],"z").with(){return("missing")} # "missing"; legitimate null
 ```
 
 Numeric0/null/no-match, equality, source snapshots, needed errors, compatible
-defaults, String-to-Array and `with`-returned Array bridges remain. Peer guards
-are assessed independently. Copied-null needle effects and rejection still have
+defaults, String-to-Array and `with`-returned Array bridges remain. Dart/Julia/Lua
+guards are assessed independently. Copied-null needle effects and rejection still have
 a mandatory follow-up under existing copy/null authority; this bounded repair
 grants no general nullable Array, domain/context or portable-admission policy.
 
