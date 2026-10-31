@@ -1588,6 +1588,15 @@ table because its runtime behavior is to terminate the parser process.
   8 complete / 0 pending. Run `bash tools/check_logical_helper_five_backend.sh` for the recurring all-toolchain
   behavior proof; the offline checker also rejects public document, marker, stale-claim, and admission drift.
 
+Boolean results also cross explicit type bridges: `and(false).split(",").first()`
+is the String `"0"`, while `and(false).with(){return(value)}` keeps Bool false.
+A numeric method still rejects Bool: `and(false).add(1)` yields null, which may
+legitimately enter a subsequent `with` body. A current Perl guard gap permits a
+later body after rejected `and(false).take(1)`; some rejected bridge tails instead
+report unsupported `with`. Feature65 owns this bounded guard/readiness repair
+without changing eager evaluation, typed truth or arity errors. Other backends
+are assessed independently.
+
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.
 - **Returns**: value of the selected branch in supported value positions. Ordinary Perl/Rust/Dart/Julia/Lua (available PUC5.5.1/LuaJIT) inline results support direct reads and compatible methods: `if(true,["a","b"],[])[-1].uppercase()` returns `"B"`; missing/no-fallback selections yield undef. Conditions/payloads retain their lazy order and kinds.

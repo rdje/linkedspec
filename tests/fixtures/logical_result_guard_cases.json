@@ -1,0 +1,340 @@
+[
+  {
+    "body": "return([[and(true),and(false),or(true),or(false),not(false),not(true)],[true.and(true),true.and(false),false.or(true),false.or(false),false.not(),true.not()]])",
+    "expected": [
+      [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ],
+      [
+        true,
+        false,
+        true,
+        false,
+        true,
+        false
+      ]
+    ],
+    "id": "primitive_logical",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([[and(true),and(false),or(true),or(false),not(false),not(true)],[true.and(true),true.and(false),false.or(true),false.or(false),false.not(),true.not()]])}"
+  },
+  {
+    "body": "return([and(\"0\"),and(\"false\"),and(\"\"),and(0),and(undef),and([]),and({}),and([false]),and({\"k\":false})])",
+    "expected": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true
+    ],
+    "id": "typed_truth_domains",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([and(\"0\"),and(\"false\"),and(\"\"),and(0),and(undef),and([]),and({}),and([false]),and({\"k\":false})])}"
+  },
+  {
+    "body": "return([and(false).coalesce_nonempty(9).cat(\"!\"),not(false).cat(\"!\"),or(false).add(1).coalesce_nonempty([\"a\",\"b\"]).last().uppercase(),false.not().and(true).cat(\"!\")])",
+    "expected": [
+      "0!",
+      "1!",
+      "B",
+      "1!"
+    ],
+    "id": "compatible_values",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([and(false).coalesce_nonempty(9).cat(\"!\"),not(false).cat(\"!\"),or(false).add(1).coalesce_nonempty([\"a\",\"b\"]).last().uppercase(),false.not().and(true).cat(\"!\")])}"
+  },
+  {
+    "body": "order=\"\";left=and(false).take({order=cat(order,\"A\");1});right=not(false).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "free_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=and(false).take({order=cat(order,\"A\");1});right=not(false).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";left=true.and(false).take({order=cat(order,\"A\");1});right=false.not().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "receiver_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=true.and(false).take({order=cat(order,\"A\");1});right=false.not().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";out=and({order=cat(order,\"S\");return(false)},{order=cat(order,\"O\");return(true)}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "SO"
+    ],
+    "id": "free_guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=and({order=cat(order,\"S\");return(false)},{order=cat(order,\"O\");return(true)}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out={order=cat(order,\"S\");return(false)}.and({order=cat(order,\"O\");return(true)}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "SO"
+    ],
+    "id": "receiver_guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");return(false)}.and({order=cat(order,\"O\");return(true)}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=and(false).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "free_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=and(false).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=false.and(true).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "receiver_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=false.and(true).split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "return([and(false).split(\",\").first().cat(\"!\"),false.or(true).split(\",\").first().cat(\"!\")])",
+    "expected": [
+      "0!",
+      "1!"
+    ],
+    "id": "valid_array_bridges",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([and(false).split(\",\").first().cat(\"!\"),false.or(true).split(\",\").first().cat(\"!\")])}"
+  },
+  {
+    "body": "value=false;order=\"\";out=and({order=cat(order,\"S\");return(value)},{value=true;order=cat(order,\"O\");return(true)}).cat({order=cat(order,\"C\");\"!\"});return([out,value,order])",
+    "expected": [
+      "0!",
+      true,
+      "SOC"
+    ],
+    "id": "source_operand_snapshot",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {value=false;order=\"\";out=and({order=cat(order,\"S\");return(value)},{value=true;order=cat(order,\"O\");return(true)}).cat({order=cat(order,\"C\");\"!\"});return([out,value,order])}"
+  },
+  {
+    "body": "return([and(false).copy(),false.and(true).copy(),copy(false)])",
+    "expected": [
+      false,
+      false,
+      false
+    ],
+    "id": "bool_value_copies",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([and(false).copy(),false.and(true).copy(),copy(false)])}"
+  },
+  {
+    "body": "order=\"\";left=and(false).with(){order=cat(order,\"F\");return([value,value.copy()])};right=true.or(false).with(){order=cat(order,\"R\");return(value)};return([left,right,order])",
+    "expected": [
+      [
+        false,
+        false
+      ],
+      true,
+      "FR"
+    ],
+    "id": "valid_false_and_true_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=and(false).with(){order=cat(order,\"F\");return([value,value.copy()])};right=true.or(false).with(){order=cat(order,\"R\");return(value)};return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";left=and(false).add(1).with(){order=cat(order,\"F\");return(\"free\")};right=false.and(true).add(1).with(){order=cat(order,\"R\");return(\"receiver\")};return([left,right,order])",
+    "expected": [
+      "free",
+      "receiver",
+      "FR"
+    ],
+    "id": "valid_null_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=and(false).add(1).with(){order=cat(order,\"F\");return(\"free\")};right=false.and(true).add(1).with(){order=cat(order,\"R\");return(\"receiver\")};return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";out=and(false).add(1).coalesce([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "expected": [
+      0,
+      "W"
+    ],
+    "id": "valid_empty_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=and(false).add(1).coalesce([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=and(false).with(){order=cat(order,\"W\");return([\"ok\"])}.first().uppercase();return([out,order])",
+    "expected": [
+      "OK",
+      "W"
+    ],
+    "id": "with_result_array",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=and(false).with(){order=cat(order,\"W\");return([\"ok\"])}.first().uppercase();return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=[and(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},and(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},or(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},or(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},not(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},not(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_canonical_free_with_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[and(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},and(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},or(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},or(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},not(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},not(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=[true.and(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},true.and(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},false.or(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},false.or(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},false.not().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},true.not().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_short_receiver_with_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[true.and(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},true.and(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},false.or(true).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},false.or(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},false.not().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},true.not().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])}"
+  },
+  {
+    "body": "value=\"caller\";return([build(),value])",
+    "expected": [
+      [
+        null,
+        null,
+        ""
+      ],
+      "caller"
+    ],
+    "id": "function_scope",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "fn build(){order=\"\";left=and(false).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};right=false.and(true).take({order=cat(order,\"B\");1}).with(){order=cat(order,\"X\");return(\"ran\")};return([left,right,order])}\nValue:: I {value=\"caller\";return([build(),value])}"
+  },
+  {
+    "body": "return(and({items=\"text\";push(items,\"x\")},true).coalesce(\"masked\"))",
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "id": "needed_source_error",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return(and({items=\"text\";push(items,\"x\")},true).coalesce(\"masked\"))}"
+  },
+  {
+    "body": "return(not({fail(\"must-not-run\")},false).cat(\"!\"))",
+    "expected": null,
+    "expected_diagnostic": {
+      "actual_arity": 2,
+      "arguments_evaluated": 0,
+      "helper_name": "not"
+    },
+    "expected_error": "helper_arity_mismatch",
+    "id": "typed_arity_source_error",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return(not({fail(\"must-not-run\")},false).cat(\"!\"))}"
+  },
+  {
+    "body": "order=\"\";left=and({order=cat(order,\"L\");return(false)},{order=cat(order,\"R\");return(true)}).cat({order=cat(order,\"C\");\"!\"});right=or({order=cat(order,\"A\");return(true)},{order=cat(order,\"B\");return(false)}).cat({order=cat(order,\"D\");\"!\"});return([left,right,order])",
+    "expected": [
+      "0!",
+      "1!",
+      "LRCABD"
+    ],
+    "id": "decisive_eager_args",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=and({order=cat(order,\"L\");return(false)},{order=cat(order,\"R\");return(true)}).cat({order=cat(order,\"C\");\"!\"});right=or({order=cat(order,\"A\");return(true)},{order=cat(order,\"B\");return(false)}).cat({order=cat(order,\"D\");\"!\"});return([left,right,order])}"
+  }
+]
