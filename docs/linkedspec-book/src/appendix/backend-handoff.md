@@ -3123,6 +3123,10 @@ snapshots/functions already work; its producers remain unchanged. Rebuild Rust
 applications/runtime. Dart also guards retained ordinary constructors through
 native/restored specs/in-process plans; source effects, intermediate kinds,
 legitimate empty/null with and already-working computed keys stay. Rebuild Dart
-applications/runtime. Independent Julia61.4 is next, followed by safe Lua.
+applications/runtime. Julia also guards retained ordinary constructors across
+native/restored specs/plans/fresh modules, preserving source effects, intermediate
+kinds, valid empty/null with and already-working computed keys/order/scope.
+Rebuild Julia applications/runtime. Installed PUC Lua/LuaJIT are next; declared
+Lua5.4 and full admission remain separate.
 No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.

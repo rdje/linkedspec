@@ -1,7 +1,7 @@
 # Retained constructor result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.22; family23.3.61.
-Status: Bounded Perl61.1/Rust61.2/Dart61.3 and comparator61.0 targeted-checked; Julia/safe Lua/full admission pending.
+Status: Bounded Perl61.1/Rust61.2/Dart61.3/Julia61.4 and comparator61.0 targeted-checked; safe Lua/full admission pending.
 
 Uniform binding retains array(), array("literal"), multi-expression Array calls,
 hash() and paired ordinary key/value Hash calls. Exact one-bare-identifier
@@ -99,3 +99,18 @@ Final-source runtime/nearest/analysis pass; whole-SDK format debt stays2.25-owne
 Actual producers/inputs/epochs: constructor-dart-intake.json.gz. Rebuild apps/
 runtime; Julia61.4 next, no fresh isolated/exhaustive excluded-runtime/domain/full
 admission inference.
+
+## Bounded Julia61.4 guards
+
+Same116 assertions96PASS20RED to116PASS native/restoredSpec/plan/fresh Module;
+96 includes five passing route-key scaffolds in failed groups.21 values/16 healthy
+observations/two needed errors/eight syntax shapes exact. Canonical ordinary
+Array/paired Hash source predicate/current common guard and one runner include;
+existing splice classifier reused. Invalid operands/later with skip; source
+once/intermediate kinds/null-empty with stay. Computed keys/order/snapshots/
+functions already healthy, original producer/read/default retention/with/arity/
+signatures/copy/alias/function/parser/schema remain. Nearest free-default91/
+uniform-binding61/strict depwarn pass; standalone Main imports/derived REPO_ROOT
+supplied, standard precompile retained. Actual inputs/producers/epochs:
+constructor-julia-intake.json.gz. Rebuild apps/runtime. Safe Lua61.5 next;
+no isolated package/exhaustive excluded-runtime/domain/full admission inference.

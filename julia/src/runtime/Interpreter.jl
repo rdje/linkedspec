@@ -6290,6 +6290,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_explicit_push_result_source(engine, chain.receiver) ||
         _runtime_is_canonical_set_result_source(chain.receiver) ||
         _runtime_is_free_default_result_source(chain.receiver) ||
+        _runtime_is_constructor_result_source(chain.receiver) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6406,6 +6407,27 @@ function _runtime_is_free_default_result_source(expression)
     expression.trailing_block_arg && return false
     length(expression.args) >= 2 || return false
     all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
+    return all(arg -> arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, expression.args)
+end
+
+# Retained boxed constructors keep their original payload/pair/splice producer.
+function _runtime_is_constructor_result_source(expression)
+    expression isa ActionCallExpr || return false
+    expression.name in ("array", "hash") || return false
+    something(expression.source_method, expression.name) == expression.name || return false
+    expression.trailing_block_arg && return false
+    expression.name == "hash" && isodd(length(expression.args)) && return false
+    all(arg -> arg isa ActionPositionalArgument, expression.args) || return false
+    length(expression.args) == 1 && first(expression.args).value isa ActionVariableExpr && return false
+    all(arg -> !_runtime_is_array_splice_argument(arg.value), expression.args) || return false
     return all(arg -> arg.value isa Union{
         ActionVariableExpr, ActionNumberLiteralExpr,
         ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
