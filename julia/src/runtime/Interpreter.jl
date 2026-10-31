@@ -6292,6 +6292,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_free_default_result_source(chain.receiver) ||
         _runtime_is_constructor_result_source(chain.receiver) ||
         _runtime_is_free_string_result_source(chain.receiver) ||
+        _runtime_is_ordinary_string_receiver_prefix(chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
     for (call_index, call) in enumerate(chain.calls)
@@ -6449,6 +6450,28 @@ function _runtime_is_free_string_result_source(expression)
         ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
         ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
     }, expression.args)
+end
+
+# Existing receiver arity preflight stays separate; retain actual-kind guards
+# through canonical String receiver prefixes and intermediate results.
+function _runtime_is_ordinary_string_receiver_prefix(calls)
+    isempty(calls) && return false
+    prefix = first(calls)
+    prefix.method in ("trim", "lowercase", "uppercase", "replace_substr", "rm_prefix", "rm_suffix", "substr", "cat") || return false
+    something(prefix.source_method, prefix.method) == prefix.method || return false
+    all(arg -> arg isa ActionPositionalArgument, prefix.args) || return false
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    return all(arg -> arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, prefix.args)
 end
 
 # Retained boxed constructors keep their original payload/pair/splice producer.
