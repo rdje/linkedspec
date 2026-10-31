@@ -7,7 +7,7 @@ answers:
   - "why does index_of report ready when its emitted Perl fails to load"
   - "which task owns copied-null index_of needle effects and rejection"
 date: 2026-10-31
-status: Perl producer72.0/guards72.1 and Rust72.2 targeted-checked; independent Dart-Julia-Lua and P1 copy72.6 remain
+status: Perl producer72.0/guards72.1/Rust72.2/Dart72.3 targeted-checked; independent Julia-Lua and P1 copy72.6 remain
 tags: [index_of, array, numeric, null, guards, source, copy, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.33; index-guard-selection-intake.json.gz retains actual public20, four canonical/eighteen excluded/four operand AST-lowering observations and setup/orchestration qualifications."
 reverify: "Recover actual public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors and fresh load failures/readiness separately. Historical activation/freeze writers one-shot never replay."
@@ -30,3 +30,5 @@ Perl72.1 preserves canonical index_of source/prefix guards. Independent unchange
 _ordinary_free_index_result_source and ordinary_index_result_chain qualify canonical arities/positional values. Existing guarded-with/emitted dispatch preserves a separate rejection flag and resets the current kind after each link. Only an ordinary leading nullable index consumer bypasses its Array guard, preserving needle effects; earlier rejection still suppresses later work. Copy folding/closure remains72.6. Historical assessment facts above retain their original epoch.
 
 Independent Rust canonical index roles/nullable preservation now targeted-checked: [[rust-index-source-guards]]. Historical reference observations above retain their epoch; peer/copy/general-isolation/admission owners remain separate.
+
+Independent Dart canonical index role/leading nullable preservation now targeted-checked: [[dart-index-source-guards]]. Historical observations retain their epoch; copied-null/general isolation/admission owners remain separate.

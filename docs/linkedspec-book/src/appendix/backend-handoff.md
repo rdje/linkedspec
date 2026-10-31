@@ -3441,7 +3441,10 @@ ready receiver bridges; nearest/source18/syntax/public lowering checks pass.
 Regenerate emitted Perl. Rust72.2 now passes20 native/restoredSpec/in-process-plan
 tests with numeric0/null identity and retained rejection; two added null-prefix/
 with controls pass original/repaired epochs, nearest31/final owned fmt pass.
-Rebuild Rust apps/runtime. Dart/Julia/installed Lua guards72.3-.5 await independent
-assessment; copied-null/rejection assessment
+Rebuild Rust apps/runtime. Dart72.3 now passes22 native/restoredSpec/plan tests,
+including null-prefix/with preservation, nearest34/fatal analysis/scoped formatting
+with empty stderr; common kind guards retain rejection and leading nullable
+index effects. Rebuild Dart apps/runtime. Julia/installed Lua guards72.4-.5 await
+independent assessment; copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.
