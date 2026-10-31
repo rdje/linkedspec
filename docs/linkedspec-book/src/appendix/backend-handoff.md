@@ -3222,9 +3222,10 @@ are not retroactively claimed. Perl68.1 may resume. Broader earlier-capture inpu
 review23.4.2 remains required before admission; runtime behavior is unchanged.
 
 
-Perl feature68 now keeps emptiness source/ordinary zero-operand prefix guards
+Perl and Rust feature68 keep emptiness source/ordinary zero-operand prefix guards
 through Array bridges and immediate with. Incompatible operands/bodies skip;
-legitimate false/null/empty with, repeated predicates, numeric1-0/copy/default
-and source snapshots stay. Regenerate emitted Perl parsers. Focused native/fresh/
-readiness/error, nearest compatibility and excluded syntax checks pass; independent
-Rust/peer Bool baselines, broader SESSION16 and full admission remain separate.
+legitimate false/null/empty with, repeated predicates, Perl numeric1-0 versus Rust
+Bool/copy/default and source snapshots stay. Regenerate emitted Perl parsers and
+rebuild Rust apps/runtime. Focused native/fresh Perl readiness/error and Rust
+native/restored/plan/nearest/owned-format checks pass; other peer baselines,
+broader SESSION16 and full admission remain separate.

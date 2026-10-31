@@ -6533,6 +6533,7 @@ impl Engine {
                     || Self::is_ordinary_numeric_result_chain(receiver, calls)
                     || Self::is_ordinary_lexical_result_chain(receiver, calls)
                     || Self::is_ordinary_definedness_result_chain(receiver, calls)
+                    || Self::is_ordinary_emptiness_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7162,6 +7163,7 @@ impl Engine {
             || Self::is_ordinary_numeric_result_chain(receiver, calls)
             || Self::is_ordinary_lexical_result_chain(receiver, calls)
             || Self::is_ordinary_definedness_result_chain(receiver, calls)
+            || Self::is_ordinary_emptiness_result_chain(receiver, calls)
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
@@ -8590,6 +8592,60 @@ impl Engine {
         }
         calls.first().is_some_and(|first| {
             matches!(first.method.as_str(), "is_defined" | "is_undefined") && first.args.is_empty()
+        })
+    }
+
+    // Emptiness keeps Bool identity and the existing empty-value domain.
+    // Canonical free calls and zero-operand prefixes retain result-kind guards.
+    fn is_ordinary_emptiness_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        let ordinary_args = |args: &[Arg]| {
+            args.iter().all(|arg| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            })
+        };
+        if let Expr::Call { name, args } = receiver {
+            let valid_arity =
+                matches!(name.as_str(), "is_empty" | "is_nonempty") && args.len() == 1;
+            if valid_arity && ordinary_args(args) {
+                return true;
+            }
+        }
+        calls.first().is_some_and(|first| {
+            matches!(first.method.as_str(), "is_empty" | "is_nonempty") && first.args.is_empty()
         })
     }
 
