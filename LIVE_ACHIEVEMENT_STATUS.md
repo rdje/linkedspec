@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Perl typed contains block operands repaired; same13/nearest/fences18/syntax pass. Source guards71.1 next.
+Perl contains source/prefix guards repaired; same26/nearest25/fences18/syntax pass. Rust71.2 next.
 
 ## Latest Completed Slice
 
-Perl71.0 preserves typed block-valued contains operands through the existing value-block owner. Unchanged13 native/fresh producer groups5PASS8RED become13PASS: five values/eight structured execution errors, including source-before-needle error order; five previously healthy observations exact. Push-ending blocks yield the Array instead of a Hash; direct/nested/bound/default/with and needle binding errors reach execution without warnings or invalid generated source. All13 ready/raw0/fallback0/unresolved0; readiness accompanies actual fresh loading. Only canonical contains block_value arguments change; membership flags/equality/null-empty/signatures/source order/other helpers stay. Nearest contains/push 14 and excluded18 source fences/owner-normal syntax pass. Four actual primary/nearest fixture edges, inline push programs and declared per-phase identities retained; 460 other activation inputs exact, not complete transitive closure. Actual producers/templates/inputs/raw results retained in contains-block-operand-perl-intake.json.gz. Book/map/target/task/roadmap/live/history align; regenerate emitted Perl. Source guards71.1 independently next, peers71.2-.5 and P1 copy71.6 remain; no general isolation/domain/context/full23.4 admission.
+Perl71.1 preserves canonical contains source/prefix guards through inter-type continuations. Unchanged shared23 plus retained null-prefix3 groups15PASS11RED become26PASS native/fresh; fifteen healthy observations, including the needed source error, exact. All25 values ready/raw0/fallback0/unresolved0/warning-free. Dedicated free-two/ordinary one-needle roles join existing emitted/scoped-with/intermediate guards; incompatible operands/later bodies skip while source/needle SOC snapshots, numeric flags/equality/null-empty/copy/default/strict arithmetic/generic/valid false-null-empty with/returned Array/function caller state remain. Only leading ordinary contains admits legitimate null and evaluates its needle; selected/free/block/literal null agree without a general nullable-Array policy. Producer71.0 and exclusion rights stay. Nearest contains/null-key/block producer 25/excluded18/owner-normal syntax pass. Eight actual primary/nearest fixtures and declared phase identities retained; 466 other inputs exact, not complete transitive closure. Actual instruments/templates/inputs/raw results/four before-after substitutions retained in contains-guard-perl-intake.json.gz. Book/card/map/target/task/roadmap/live/history align; regenerate emitted Perl. Rust71.2 independently next; mandatory P1 copy71.6 reassessment, general isolation and full23.4 admission stay separate.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.71.1 from clean Perl producer71.0/frozen71/shared23/one existing profile/excluded18/current contains13/null14/source-needle/copy authority/book/cards. Derive actual primary/selected-nearest fixture edges and independently baseline native/fresh guards before production. Repair canonical free-two/ordinary one-needle source/scoped-with/intermediate roles and qualified null-source behavior only; preserve flags/equality/null-empty/SOC/snapshots/arity/copy/default/strict arithmetic/generic/valid with/Array/errors/function state/excluded roles. Focused new-nearest/syntax/book/map/history/manual commit then Rust71.2. P1 copied-null/rejection71.6 remains before unrelated selection; full23.4/pressure/registration/input-custody/task-evidence/general isolation separate. No full suite/global registry/cleanup pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.71.2 from clean Perl71.1/frozen71/shared23/one existing profile/excluded18/current contains/null/source-needle/copy authority/book/cards. Derive actual primary/selected-nearest fixture edges; independently baseline native/restored CompiledSpec/plan before production, preserving numeric flags and existing null/empty/equality/source order. Repair only demonstrated canonical free-two/ordinary one-needle source/scoped-with/intermediate guards and qualified nullable membership; retain arity/copy/default/strict arithmetic/generic/valid with/Array/errors/function state/excluded roles. Focused new-nearest/owned fmt/book/map/history/manual commit then Dart71.3. Mandatory P1 copy71.6 reassessment after primary peers before unrelated selection; full23.4/pressure/registration/input-custody/task-evidence/general isolation separate. No full suite/global registry/cleanup pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.71.1` — Perl contains source/prefix guards repaired; same26/nearest25/fences18/syntax pass. Rust71.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.71.0` — Perl typed contains block operands repaired; same13/nearest/fences18/syntax pass. Source guards71.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.32` — Contains71 frozen: Perl typed-block producer71.0 first, independent guards next, P1 copy71.6 before unrelated selection.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.70.5` — Installed Lua String-predicate source/prefix guards repaired:111 per host/nearest/loadfile/versions pass; remaining feature selection23.1.32 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.71.1 from clean Perl producer71.0/frozen71
 - `TYPE-REFERENCE-BOOK.1.2.23.3.69.6.1` — Perl presence/copy rejection retained with and without with:11/nearest/source18/syntax pass; independent Rust69.6.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.69.6.0` — Copied-null assessment frozen; P1 reference rejection-state repair69.6.1 then independent peer nullable presence repairs.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.69.5` — Installed Lua has_key guards/null-source preservation repaired: same116 per host/nearest/loadfile/versions pass; owned copied-null69.6 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.69.4` — Julia has_key guards/null-source preservation repaired: same116/nearest114/strict depwarn pass; safe Lua69.5 then owned69.6 next.
 
 ## History
 

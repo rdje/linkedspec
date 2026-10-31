@@ -1019,11 +1019,22 @@ element/pair/list-splice, bare-key and selector retirement rules remain in force
 - **Behavior**: Returns true if the array contains the needle value. Works on direct arrays and projected expressions (`sorted_keys(...)`, `sorted_values(...)`).
 - **Edge cases**: Returns false for non-array or undef input.
 
-The bounded Perl source-guard follow-up71 remains open. A free
-`contains(["a"],"z").take(1)` can yield an empty Array, rejected prefixes can
-still enter `with`, and a receiver Array bridge can be unready. The corresponding
-free `cat`/`split` bridge already works. Source/needle effects and numeric flags
-remain preservation controls; each native peer is assessed independently.
+Perl retains actual-kind and rejection guards through canonical two-operand free
+membership calls and ordinary one-needle receiver prefixes:
+
+```text
+contains(["a"],"z").take(1)                       # undef
+["a"].contains("z").take(1).with(){return("ran")}  # undef; body skipped
+["a"].contains("z").cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
+contains(["a"],"z").cat(",x").split(",").last().uppercase() # X
+contains(["a"],"z").with(){return([value,value.copy()])} # [0,0]
+contains(["a"],"z").add("bad").with(){return("null")} # "null"; valid null enters with
+```
+
+Completed source and needle effects remain; incompatible consumer operands and
+later bodies are skipped. Legitimate false, null and empty results still enter
+`with`, and an Array returned by its body accepts Array methods. Each native peer
+is assessed independently.
 
 Perl accepts computed value blocks as canonical `contains` operands, including a
 block whose last operation is `push`:
@@ -1041,12 +1052,17 @@ The source completes before the needle. A source error stops needle evaluation;
 needle errors also propagate before later defaults or `with` bodies. Native and
 freshly emitted Perl follow these rules; regenerate existing emitted parsers.
 
-Selected-null membership gives numeric0 and evaluates the needle; literal/block-
-null and copied-null prefixes still have inconsistent paths. Earlier rejection
-can also be lost across copy, allowing later operands/bodies. Source guards71 and
-P1 copy/rejection71.6 own these follow-ups before the next unrelated feature.
-Equality, null/empty distinction, copy depth and source snapshots stay; full
-domain/context/portable admission remains open.
+Perl selected, free, literal and block null sources return numeric `0` and still
+evaluate the needle. For example, with `order=""`,
+`{undef}.contains({order=cat(order,"O");"a"}).cat("!")` returns `"0!"` and leaves
+`order` as `"O"`. Capturing a null source before a needle that creates an Array
+still searches the captured null value. This membership rule grants no other
+Array method a nullable receiver.
+
+Copied-null and rejection-across-copy combinations retain a mandatory bounded
+assessment under P1 71.6 after the primary backend guards. Equality, null/empty
+distinction, copy depth and source snapshots stay; full domain/context/portable
+admission remains open.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "selected_null_operand",
+    "body": "order=\"\";out=[].first().contains({order=cat(order,\"O\");\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=[].first().contains({order=cat(order,\"O\");\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "0!",
+      "OC"
+    ]
+  },
+  {
+    "id": "block_null_operand",
+    "body": "order=\"\";out={undef}.contains({order=cat(order,\"O\");\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out={undef}.contains({order=cat(order,\"O\");\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "0!",
+      "OC"
+    ]
+  },
+  {
+    "id": "literal_null_operand",
+    "body": "order=\"\";out=undef.contains({order=cat(order,\"O\");\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.contains({order=cat(order,\"O\");\"a\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "0!",
+      "OC"
+    ]
+  }
+]

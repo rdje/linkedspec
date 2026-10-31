@@ -3339,3 +3339,12 @@ native/fresh13/nearest/source-fence/syntax checks pass; regenerate emitted Perl.
 Independent guards71.1-.5 follow, then mandatory copied-null/
 rejection assessment71.6 before unrelated selection. No peer failure, new equality/
 copy policy or full domain/context/portable admission follows from the reference.
+
+
+Perl71.1 now preserves contains source/prefix actual-kind guards through immediate
+with and Array bridges. Shared23 plus three retained null-prefix controls pass
+native/fresh, with numeric flags/source-needle SOC snapshots/healthy errors exact.
+Leading literal/block null now retains numeric0 and needle effects, matching
+selected/free null; later Array consumers stay guarded. Focused nearest/fences/
+syntax pass. Regenerate emitted Perl. Rust71.2/other peers independently follow;
+P1 copy71.6 and general isolation/domain/context/full admission remain separate.

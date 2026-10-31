@@ -12660,7 +12660,7 @@ _Consumer report remedies and the older bootstrap fix have distinct commit histo
 ### contains-result-source-guards
 _Contains source guards need typed block operands and retained null/copy rejection_
 - **answers:** why does free contains take return an empty Array | why does contains with run after rejection | why does contains on a push-yielding block fail compilation or Array dereference | why does literal null contains differ from selected null | which task owns copied-null contains and rejected-copy revival
-- **date:** 2026-10-31 · **status:** Perl producer71.0 targeted-checked; independent guards71.1-.5 and P1 copy71.6 remain
+- **date:** 2026-10-31 · **status:** Perl producer71.0/guards71.1 targeted-checked; independent peers71.2-.5 and P1 copy71.6 remain
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.32; contains-guard-selection-intake.json.gz retains original26/additional boundary10/producer5/block AST4/canonical4/excluded18 public observations, actual instruments and declared inputs.`
 - **reverify:** `Recover retained public observers into new project-local outputs at declared source boundary. Historical activation/freeze writers one-shot. Owners71.0/71.1-.5 and mandatory71.6 independently qualify behavior; transport0/ready1 do not establish feature execution.`
 - **source:** [`docs/knowledge/contains-result-source-guards.md`](docs/knowledge/contains-result-source-guards.md)
