@@ -3056,6 +3056,9 @@ SpecFile/plan, preserving its already-working Bool/full target/order/scope/with
 behavior and original action-edge child dispatch. Rebuild Dart runtime/apps.
 Julia now also uses the bounded guards on native/restoredSpec/plan/fresh Module,
 preserving its already-working Bool/full target/order/scope/with behavior.
-Rebuild Julia runtime/apps. Safe installed Lua58.5 is next; each peer is assessed
+Rebuild Julia runtime/apps. Installed PUC Lua5.5.1/LuaJIT now also guard these
+results across native/restoredSpec/plan/fresh module with no new interpreter
+chunk locals; rebuild runtime/apps. Bounded58 outcomes are recorded; remaining
+feature selection23.1.20 follows, with declared5.4/full admission separate. Each peer was assessed
 independently; child-push/all-bare/numeric source ambiguities and implicit results,
 grouping/deferred/schema/full admission stay separately owned.

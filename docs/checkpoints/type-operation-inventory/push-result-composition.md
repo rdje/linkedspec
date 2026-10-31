@@ -1,7 +1,7 @@
 # Explicit-value push snapshot composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.19; family23.3.58.
-Status: Bounded Perl58/Rust58.2/Dart58.3/Julia58.4 targeted-checked; safe Lua/full admission pending.
+Status: Recorded bounded58 implementations are targeted-checked on named routes/hosts; full domain/context/portable admission remains23.4.
 
 Uniform binding already defines push(named_target, value) as a mutation yielding
 an independent updated Array snapshot. End-mutator direct reads/last/String and
@@ -168,3 +168,17 @@ passes computed25, strict depwarn; original failure/actual producers/precompile
 output retained, no repeated new65. Source/inputs/results in
 push-snapshot-julia-intake.json.gz. Rebuild apps/runtime; safe Lua58.5 next,
 no isolated package/full admission.
+
+## Safe installed Lua58.5 guards
+
+Same65 checks57PASS/8RED to65PASS per PUC5.5.1/LuaJIT2.1.1788460057;57 includes
+two compile scaffolds. Direct Array/selected String Hash consumers now null/skip
+KV. Selected Bool/full12/order/snapshot/function/copy/logical/with/error/absence/
+static-child already healthy. Eleven values/two errors retain four routes; nine
+healthy values/all errors exact. One canonical typed source predicate in existing
+namespace feeds two guards, one three-line runner block; no new chunk locals or
+push/child ABI/parser/method/with/copy/function/arity/schema/remaining owner change.
+Six computed programs/18 observations/loadfile/version pass per host, focused
+stderr empty. Actual producers/inputs/results in push-snapshot-lua-intake.json.gz.
+Rebuild runtime/apps; no declared5.4/unsafe full runner/formatter/isolated package/
+full admission. All bounded58 outcomes recorded; next feature selection23.1.20.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia push snapshot guards repaired: new65/computed25 strict depwarn pass; safe Lua58.5 next.
+Safe Lua push snapshot guards repaired: new65/six computed/loadfile/version pass per host; next selection23.1.20.
 
 ## Latest Completed Slice
 
-Julia58.4 guards direct Array/selected String push results: unchanged65 assertions57PASS/8RED to65PASS across native/restoredSpec/plan/fresh Module. Original57 includes two route-key scaffolds; nine healthy values/two errors exact. Full12/selected Bool/order/snapshots/functions/copy/logical/with/absence/static-child already work. One exact-two-positional/plain-target/canonical-unambiguous-value typed source predicate feeds two existing guards, plus exact one-line runner include. Original push/child ABI/parser/consumers/copy/functions/arity/schema and remaining owner exact; 172 other inputs exact. Combined after process1 is nearest-driver setup only after new65 pass: missing Main Test imports. Corrected nearest-only driver imports existing runner dependencies and passes computed25 under strict depwarn; no repeated new normal. Standard successful precompile output retained. Actual producers/inputs/source/RED-GREEN/setup/correction/results in push-snapshot-julia-intake.json.gz; book/card/map/target/task/roadmap/live/resume/history align. Rebuild apps/runtime; safe Lua58.5 next, no isolated package/full admission.
+Safe Lua58.5 guards direct Array/selected String push results on installed PUC5.5.1/LuaJIT2.1.1788460057: unchanged65 checks57PASS/8RED to65PASS per host;57 includes two compile scaffolds. Eleven values/two errors retain native/restoredSpec/plan/fresh module; nine healthy values/all errors exact. Selected Bool/full12/order/snapshots/functions/copy/logical/with/absence/static-child already work. One canonical exact-two-positional/plain-target/unambiguous-value source predicate in existing namespace feeds two existing guards; exact three-line runner block, no new interpreter chunk locals. Original push/child ABI/parser/methods/with/copy/functions/arity/schema and remaining interpreter exact; 174 other inputs exact. Six computed programs/18 route observations/loadfile/version pass per host, focused stderr empty. Actual producers/inputs/source/RED-GREEN/results in push-snapshot-lua-intake.json.gz; book/card/map/target/task/roadmap/live/resume/history align. Rebuild runtime/apps. All bounded58 backend outcomes recorded; next selection23.1.20, no isolated package/declared5.4/unsafe runner/formatter/full23.4 admission.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.5 from clean bounded Julia58.4/frozen58. Read push-result-composition.md/full12/current cards and Lua public push binding/static-child/typed read/fluent/with/function/error/arity contracts and nearest normals/book. Independently baseline finite primitive/bound/full/direct/selected guards/order/snapshot/with/function/error/static-child on installed PUC5.5.1/LuaJIT native/restoredSpec/plan/fresh module before production; preserve healthy behavior. Complete demonstrated gaps through existing source/actual-kind guards only; no new interpreter chunk locals, unsafe full runner/formatter or declared5.4 claim. Quick authored/loadfile/version/new-nearest/exact runner/book/map/history/manual docs/commit, then next remaining-feature selection. Keep full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host owners separate.
+Activate TYPE-REFERENCE-BOOK.1.2.23.1.20 from clean recorded bounded58 backend outcomes. Read canonical helper/signature/source/result-role inventory and per-type gap records/current targets through58 plus contracts/Knowledge Map/book. Select the next useful bounded fluent or inter-type result-source feature from real use cases, using finite public primitive/bound/direct controls only where the source boundary is unknown. Preserve existing mutation/copy/function/deferred/callback/context/arity/error/schema authority and split prerequisites before production. Freeze exact target/shared fixture/backend owners, book/map/history/manual docs/commit, then first eligible implementation. Full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host/exhaustive owners stay separately scheduled; no broad verification/cleanup pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.58.5` — Safe Lua push snapshot guards repaired: new65/six computed/loadfile/version pass per host; next selection23.1.20.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.4` — Julia push snapshot guards repaired: new65/computed25 strict depwarn pass; safe Lua58.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.3` — Dart push snapshot guards repaired: new12/computed7/analysis/new-normal fmt pass; Julia58.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.58.2` — Rust push snapshot guards repaired: new9/computed6/owned fmt pass; Dart58.3 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.58.5 from clean bounded Julia58.4/frozen58
 - `TYPE-REFERENCE-BOOK.1.2.23.1.18` — Selection18 freezes guarded gap String result57; existing compatible methods healthy, direct guards/read recovery need completion; Perl57.1 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.5` — Safe installed Lua rewind Numbers repaired: new183/gap126/six computed/loadfile/version pass per host; next feature selection23.1.18.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.56.4.0` — Julia four-control zero arity repaired: new189/parent75/gap98 strict depwarn pass; safe Lua56.5 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.56.4` — Julia canonical-zero rewind Numbers repaired: new75/gap98/computed25 strict depwarn pass; immediate arity56.4.0 next.
 
 ## History
 

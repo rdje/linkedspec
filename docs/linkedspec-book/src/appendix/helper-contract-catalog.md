@@ -553,7 +553,8 @@ dispatch rule.
 A completed append snapshot can be read on Perl with an explicit value binding:
 `saved = push(items, "tail"); saved.coalesce(undef)[-1].uppercase()` yields `"TAIL"`.
 Perl, Rust, Dart and Julia support direct result reads and fluent continuations from these append
-snapshots. Other backends are assessed independently in the backend handoff.
+snapshots. Installed PUC Lua5.5.1 and LuaJIT also support these direct reads and
+fluent forms; declared Lua5.4 admission remains separate in the backend handoff.
 Perl also accepts direct Hash and nested Array/Hash
 payloads in value positions, for example `saved = push(items, {"name":"tail"})`.
 Payload value blocks keep local returns scoped, and later updates preserve the
@@ -605,7 +606,7 @@ An incompatible container method returns null before its operands run:
 `push(items, "tail").set_key("k", 1)` is null because the snapshot is an Array;
 `push(items, false)[-1].take(1)` is null because the selected value is a Bool.
 The append still happens once. Existing static rule names keep child-push
-precedence. Rebuild Rust, Dart and Julia applications with the updated runtime.
+precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runtime.
 
 ### `items += value`
 - **Signature**: `target += value: expr`
