@@ -3415,3 +3415,12 @@ still exit before later effects. Unchanged11/nearest contains-presence-copy44/fa
 analysis/new-normal and verbatim changed-member formatting pass. Rebuild Dart
 apps/runtime. Julia/safe Lua nullable membership repairs remain before unrelated
 selection; whole-SDK formatting/general isolation/full admission stays separate.
+
+
+Julia71.6.4 restores copied-null contains through common/scalar guards on native/
+restoredSpec/plan/fresh Module with strict Number-versus-Bool identity. Earlier
+rejected consumers still exit, and the separate call-index mutation restriction
+stays. Unchanged55/nearest contains-presence-copy208/strict depwarn checks pass
+with qualified package-precompile notices only. Rebuild Julia apps/runtime; safe
+Lua nullable membership repairs remain before unrelated selection, with general
+isolation/full admission separate.

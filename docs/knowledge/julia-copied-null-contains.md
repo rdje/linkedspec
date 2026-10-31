@@ -1,0 +1,17 @@
+---
+id: julia-copied-null-contains
+title: Julia nullable membership crosses both guards while rejection exits early
+answers:
+  - "does Julia copied null contains evaluate its needle and propagate errors"
+  - "which Julia guards need the nullable membership exception"
+  - "why does Julia retain call_index after nullable membership changes"
+date: 2026-10-31
+status: bounded71.6.4 targeted-checked; independent installed Lua/full admission separate
+tags: [julia, contains, copy, null, rejection, runtime]
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.71.6.4; copied-null-contains-julia-intake.json.gz retains actual unchanged55 before/after, eight runtime fixtures/four consumers, sources/instruments/strict numeric/raw phases and stderr qualification."
+reverify: "bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia,JSON3,Test; const REPO_ROOT=pwd(); include(ARGS[1]); include(ARGS[2]); include(ARGS[3]); include(ARGS[4])' julia/test/copied_null_contains_composition_test.jl julia/test/contains_result_guard_composition_test.jl julia/test/copied_null_presence_composition_test.jl julia/test/value_copy_test.jl"
+---
+
+Julia71.6.4 restores canonical copied-null membership: independent unchanged55 assertions31PASS24RED become55PASS native/restoredSpec/plan/fresh Module with strict Number-versus-Bool identity. Baseline31 includes six failed-group route-key scaffolds; five healthy value observations remain exact. All ten values/one needed needle error satisfy frozen shared11. Copied-null/free-copy/free contains agree at numeric0/ABC; null source-needle snapshot0!/SNC/calls1/working Array, repeated copy, valid null with/numeric copy and binding_kind_mismatch needle error are restored. Existing pure canonical one-needle membership role inspects the nullable current consumer at both common-container and scalar-result guards. Remove only leading-step restriction; retain call_index for its separate Array-end mutation gate. Earlier incompatible consumers still return before later copy/needle/body effects. One exact normal-runner include; producer/scalar_result assignment/with/equality/numeric flags/null-empty/copy depth/source snapshots/preflight/unknown/traversal/deferred/function/parser/schema remain. Nearest contains141/presence-copy55/value-copy12=208/strict depwarn pass. Accepted stderr contains only anchored package-precompile notices; nearest stderr empty, injected unclassified warning rejected. Eight actual joined-file fixtures derive from four consumers; inline programs/per-phase identities and196 other activation inputs stay exact, not complete transitive generation closure. Actual sources/instruments/templates/inputs/raw epochs retained in copied-null-contains-julia-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; rebuild Julia apps/runtime. Current checklist manually reviewed under23.4.3 path limit. Independent safe Lua71.6.5 next. No isolated package/peer fix/general nullable-Array policy/general rejection-isolation/exhaustive excluded-runtime/full23.4 admission; no full suite or push.
+
+_evaluate_runtime_fluent_chain! recognizes the existing canonical nullable_membership at both guards. Copy retains legitimate nothing; rejection already returns from the loop. call_index remains necessary for the separate non-leading Array-end mutation restriction, so its enumeration is preserved. No other Array consumer gains a nullable source.

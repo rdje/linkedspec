@@ -6309,9 +6309,9 @@ function _evaluate_runtime_fluent_chain!(
         # Earlier incompatible consumers return before this step.
         nullable_presence = value === nothing &&
             _runtime_is_ordinary_has_key_result_chain(nothing, (call,))
-        # Leading nullable membership keeps its existing needle effects.
-        # Later container consumers retain their strict kind guards.
-        nullable_membership = call_index == 1 && value === nothing &&
+        # Copy preserves legitimate null; earlier rejection has already
+        # returned before this canonical membership consumer.
+        nullable_membership = value === nothing &&
             _runtime_is_ordinary_contains_result_chain(nothing, (call,))
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
@@ -6326,7 +6326,8 @@ function _evaluate_runtime_fluent_chain!(
         end
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
-        if scalar_result && !nullable_presence && !(helper_name in ("is_empty", "is_nonempty")) && (
+        if scalar_result && !nullable_presence && !nullable_membership &&
+            !(helper_name in ("is_empty", "is_nonempty")) && (
             helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
             helper_name in _RUNTIME_HASH_HELPER_NAMES ||
             helper_name in ("num_sum", "num_avg", "num_median", "num_range")
