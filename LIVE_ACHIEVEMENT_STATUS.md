@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust canonical set guards repaired: new13/push9/owned fmt pass; owned P2 named-default59.6 next, then Dart59.3.
+Rust receiver-default container guards repaired: new13/set13/computed6/owned fmt pass; Dart59.3 next.
 
 ## Latest Completed Slice
 
-Rust59.2 guards canonical set results: accepted13 tests10healthy/3RED to13GREEN native/restored CompiledSpec/plan; nearest push9/owned fmt0. Direct Array-to-Hash and selected Bool-to-Array/String-to-Hash now null/skip operands. Eight healthy values/source-error row/public alias and seven syntax results exact; full12/reads/order/functions/with/codeblock values already work. Initial13 additionally exposes real completed named Array/coalesce guard gap (Array/KV); source/output retained/owned P2 59.6 immediately next, canonical control isolates healthy completed read and independently rebaselines before production. No imported Perl healthy credit or masked defect. One canonical exact-two-positional/plain-target/recognized-RHS predicate feeds three existing source guard roles; original assignment ABI/default bridge/parser/method/copy/arity/function/schema and remaining engine exact; 508 other inputs exact. Actual producers/epochs/source/RED-GREEN/outputs in set-result-rust-intake.json.gz; book/cards/map/target/task/roadmap/live/resume/history align. Rebuild apps/runtime. P2 named-default59.6 then Dart59.3; no isolated emitted/full admission claim.
+Rust59.6 repairs completed default container guards: unchanged scoped13 tests7healthy/6RED to13GREEN native/restored CompiledSpec/plan, set13/computed6/owned fmt0. Named Array/Hash, fallback containers, selected-prefix defaults and pre-with guards null/skip incompatible operands; six healthy values/error row exact. Empty containers stay values, Scalar/zero/false/laziness/order/with kinds/error/preflight/unbridged bound-call count0 stay. Three guard handoffs only; original producer/scalar path/source classifiers/parser/arity/copy/function/schema/remaining engine exact; 509 other inputs exact. Original14/calibration/setup/resume epochs retained: empty-container oracle corrected, nonempty zero-fallback policy preserved, free-helper source gap owned P2 selection21 after59.5/before admission. No setup/unknown-domain RED credit. Actual producers/inputs/source/results in named-default-rust-intake.json.gz; book/card/map/task/roadmap/live/resume/history align. Rebuild apps/runtime. Dart59.3 next; no free-helper/portable-domain/isolated emitted/full admission claim.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.3.59.6 from clean Rust59.2. Read named-default guard gap card/original exact source and existing defined-default18/typed result contracts; independently baseline finite Array-to-Hash/Hash-to-Array/valid containers/scalars/empties/lazy operand skips/order/copy and nearest unknown unbridged bound-call controls before production. Repair valid default-result actual-kind guards through existing receiver dispatch after selection, preserving original default ABI/laziness/preflight/unknown bound-call missing counts and all parser/source/schema/arity/callback rules. Quick new-nearest set13/computed6/owned fmt/book/map/history/manual docs/commit, then resume Dart59.3. Canonical set59 scope remains bounded. Full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host remain separate; no broad verification/cleanup pivot.
+Activate TYPE-REFERENCE-BOOK.1.2.23.3.59.3 from clean Rust59.2/default59.6 and frozen59. Read set-result-composition.md/shared full12/current cards, Dart assignment stored-value/copy-alias/source/read/fluent/with/function/error/arity contracts and nearest normals/book. Independently baseline finite primitive/bound/full/direct/selected guards/order/target rebinding/with/function/error/codeblock/source-shape cases on native/restored SpecFile/plan before production; preserve healthy behavior and qualified existing default/arity/domain policies. Canonical exact-two-positional/plain-target set only, bare/numeric RHS already valid; reuse original assignment ABI/current kind guards for demonstrated gaps. Quick new-nearest/changed-owner/new-normal fatal analysis/new-normal format/book/map/history/manual docs/commit, then Julia59.4. P2 free-helper guard selection21 follows59.5/before admission; full23.4/pressure20.1/atomic map20.1.1/registration/progress/declared-host remain separate, no broad verification/cleanup pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.3.59.6` — Rust receiver-default container guards repaired: new13/set13/computed6/owned fmt pass; Dart59.3 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.59.2` — Rust canonical set guards repaired: new13/push9/owned fmt pass; owned P2 named-default59.6 next, then Dart59.3.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.59.1` — Canonical Perl set result composition repaired: new11/push-fluent10/syntax pass; independent Rust59.2 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.1.20` — Selection20 freezes canonical set stored-result composition59; public15/qualified full12 retained, P1 Perl59.1 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.3.59.6 from clean Rust59.2. Read named-defau
 - `TYPE-REFERENCE-BOOK.1.2.23.3.57.4` — Julia gap String operand guards repaired: new100/record98/computed25 strict depwarn pass; safe Lua57.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.57.3` — Dart gap String operand guards repaired: new9/gap-record6/computed7/analysis/new-normal fmt pass; Julia57.4 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.57.2` — Rust gap String operand guards repaired: new9/record7/computed6/owned fmt pass; Dart57.3 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.57.1` — Perl guarded gap String source/read recovery repaired: original13/final15/gap10/deferred22/syntax pass; Rust57.2 next.
 
 ## History
 

@@ -1,7 +1,7 @@
 # Canonical set stored-result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.20; family23.3.59.
-Status: Bounded Perl59.1/Rust59.2 targeted-checked; P2 named-default59.6 then peers/full admission pending.
+Status: Bounded Perl59.1/Rust59.2/default59.6 targeted-checked; independent peers/full admission pending.
 
 Uniform binding already defines set(name,value) as assignment yielding the stored
 typed value. Preserve ordinary assignment copy/alias semantics; this is not a
@@ -70,3 +70,18 @@ value retained/KV effects. This is outside canonical set source role, owned P2
 normal isolates its healthy completed read and rebaselines before production,
 not a weakened null expectation or imported Perl healthy claim. Rebuild apps/
 runtime; no isolated emitted/package/full admission. Named-default59.6 then Dart59.3.
+
+## Adjacent receiver-default repair59.6
+
+Scoped13 tests7healthy/6RED to13GREEN native/restored CompiledSpec/plan, set13/
+computed6/owned fmt pass. String/selected default container results now use current
+kind guards, and trailing-body chains retain the default guard. Scalar route/
+producer/laziness/preflight/source/parser/arity/copy/schema unchanged. Six healthy
+values/error row exact, including empty-container counts0, zero/false, original
+defined/nonempty zero-fallback distinction and unknown unbridged bound-call count0.
+Original14/scope/setup/resume epochs retained; incorrect empty-container fallback
+oracle corrected before production, no calibration RED credit. Free-helper result
+guard gap is owned P2 selection21 after59.5/before admission with separate scalar/
+domain/source authority assessment. Actual producers/inputs/results retained in
+named-default-rust-intake.json.gz; rebuild apps/runtime. Dart59.3 next, no portable
+aggregate-domain/free-helper/isolated emitted/full admission claim.

@@ -7189,7 +7189,10 @@ impl Engine {
                 rule_label,
             )?;
             logical_prefix |= matches!(call.method.as_str(), "and" | "or" | "not");
-            kind_guarded_value |= call.method == "copy";
+            kind_guarded_value |= matches!(
+                call.method.as_str(),
+                "copy" | "coalesce" | "coalesce_nonempty"
+            );
         }
 
         Ok(current)
@@ -8162,6 +8165,17 @@ impl Engine {
                 ctx,
                 rule_label,
             )?;
+            // Default selection gives a container its actual consumer family.
+            if matches!(call.method.as_str(), "coalesce" | "coalesce_nonempty")
+                && matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_))
+            {
+                return self.eval_kind_guarded_receiver_value_chain(
+                    current,
+                    &calls[index + 1..],
+                    ctx,
+                    rule_label,
+                );
+            }
             scalar_result = (scalar_result || Self::is_scalar_result_receiver_method(&call.method))
                 && !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
         }
@@ -8676,6 +8690,14 @@ impl Engine {
                 )?;
                 let scalar_result =
                     !matches!(current, RuntimeValue::Array(_) | RuntimeValue::Hash(_));
+                if !scalar_result {
+                    return self.eval_kind_guarded_receiver_value_chain(
+                        current,
+                        &calls[index + 1..],
+                        ctx,
+                        rule_label,
+                    );
+                }
                 return self.eval_selected_receiver_value_chain(
                     current,
                     &calls[index + 1..],

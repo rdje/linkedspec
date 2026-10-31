@@ -3069,9 +3069,11 @@ Perl now materializes canonical set results through current reads/kind guards:
 full12/native/fresh, operand skips/order/functions/codeblock values/RHS errors
 pass. Regenerate affected emitted Perl parsers. Rust now also guards canonical
 set results on native/restored CompiledSpec/plan, preserving already-working
-full target/read/order/scope/codeblock behavior; rebuild runtime/apps. A separate
-completed named Array/default-to-Hash guard gap is owned59.6 immediately next:
-that path still retains the Array/evaluates incompatible operands. Dart59.3 follows
-the repair; remaining peer assessments stay independent.
+full target/read/order/scope/codeblock behavior; rebuild runtime/apps. Rust now
+also retains actual container guards after ordinary receiver defaults, including
+selected prefixes and pre-with guards. Scalar/empty/lazy/preflight and unknown
+unbridged bound-call behavior stay. Free-helper result guards remain owned by
+selection21 after59.5 with separate domain assessment. Dart59.3 is next; remaining
+peer assessments stay independent.
 Ordinary assignment copy/alias rules, operators/grouping/aliases/deferred/schema
 authority and full admission remain separate.

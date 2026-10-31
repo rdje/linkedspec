@@ -31,4 +31,4 @@ grouping/target/arity/deferred/context/schema rights. Full admission separate.
 
 Bounded repair and preservation evidence: [[perl-canonical-set-result-composition]]. Historical selection observations above remain the original activation boundary; current status belongs to set-result-composition.md.
 
-Independent bounded Rust59.2: [[rust-canonical-set-result-guards]]. Separately exposed P2 completed named-default guard is owned59.6 immediately next; current family status belongs to set-result-composition.md.
+Independent bounded Rust59.2: [[rust-canonical-set-result-guards]]. The separately exposed completed named-default guard is repaired/targeted-checked in59.6; current family status belongs to set-result-composition.md.
