@@ -1,0 +1,35 @@
+[
+  {
+    "id": "literal_null_index",
+    "body": "order=\"\";out=undef.index_of({order=cat(order,\"O\");\"a\"}).coalesce({order=cat(order,\"C\");\"fallback\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.index_of({order=cat(order,\"O\");\"a\"}).coalesce({order=cat(order,\"C\");\"fallback\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      "fallback",
+      "OC"
+    ]
+  },
+  {
+    "id": "block_null_index",
+    "body": "order=\"\";out={undef}.index_of({order=cat(order,\"O\");\"a\"}).coalesce({order=cat(order,\"C\");\"fallback\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out={undef}.index_of({order=cat(order,\"O\");\"a\"}).coalesce({order=cat(order,\"C\");\"fallback\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      "fallback",
+      "OC"
+    ]
+  },
+  {
+    "id": "selected_null_index",
+    "body": "order=\"\";out=[].first().index_of({order=cat(order,\"O\");\"a\"}).coalesce({order=cat(order,\"C\");\"fallback\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=[].first().index_of({order=cat(order,\"O\");\"a\"}).coalesce({order=cat(order,\"C\");\"fallback\"});return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      "fallback",
+      "OC"
+    ]
+  }
+]

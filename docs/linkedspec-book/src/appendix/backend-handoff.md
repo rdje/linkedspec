@@ -3435,7 +3435,10 @@ distinguish correct numeric/null/snapshot/bridge controls from rejection/with
 gaps and formerly uncompilable block operands. Perl typed-operand producer72.0
 now passes15 native/fresh controls/nearest index-contains-push26/source18/syntax;
 block operands yield values and required errors reach execution with actual
-warning-free fresh loading. Regenerate emitted Perl. Independently baselined
-guards72.1-.5 remain; copied-null/rejection assessment
+warning-free fresh loading. Perl canonical source/prefix guards72.1 now pass19
+native/fresh controls, including leading nullable needle/default effects and
+ready receiver bridges; nearest/source18/syntax/public lowering checks pass.
+Regenerate emitted Perl. Rust/Dart/Julia/installed Lua guards72.2-.5 remain
+independently assessed; copied-null/rejection assessment
 72.6 follows before unrelated selection. No peer failure or complete admission
 is inferred from reference observations.
