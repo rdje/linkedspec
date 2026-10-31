@@ -3203,9 +3203,10 @@ Lua uses installed PUC5.5.1/LuaJIT; declared5.4, existing null/Unicode qualifica
 and canonical full source/domain/context admission remain separate.
 
 
-Perl feature67 retains definedness source/ordinary zero-operand prefix guards
-through Array bridges and later immediate with. Rejected consumers skip operands/
-bodies; native numeric-slot/text/copy/default compatibility and legitimate false/
-null/empty with stay. Regenerate emitted Perl parsers. Focused native/fresh/
-readiness/error and nearest compatibility controls pass; independent Rust/peer
-Bool baselines and full source/domain/context admission remain separate.
+Perl and Rust feature67 retain definedness source/ordinary zero-operand prefix
+guards through Array bridges and later immediate with. Rejected consumers skip
+operands/bodies; Perl native numeric-slot/text versus Rust Bool/copy/default
+compatibility and legitimate false/null/empty with stay. Regenerate emitted Perl
+parsers and rebuild Rust apps/runtime. Focused native/fresh Perl readiness/error
+and Rust native/restored/plan/nearest/owned-format controls pass; other backend
+baselines and full source/domain/context admission remain separate.
