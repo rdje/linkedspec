@@ -3181,8 +3181,10 @@ lists existing signatures and true/false examples. Regenerate emitted Perl and
 rebuild native apps/runtime. Remaining feature selection follows.
 
 
-Perl feature65 retains eager Boolean source and ordinary logical-prefix guards
-through Array bridges and later immediate with bodies. Rejected consumers skip
-operands/bodies; valid false/null/empty with and returned Arrays stay. Regenerate
-emitted Perl parsers. Focused native/fresh/readiness/error controls pass; Rust
-and other backends are assessed independently, full admission remains separate.
+Perl and Rust feature65 retain eager Boolean source and ordinary logical-prefix
+guards through Array bridges and later immediate with bodies. Rust receiver
+prefixes/direct guards already worked; its free-source with admission is repaired.
+Rejected consumers skip operands/bodies; valid false/null/empty with and returned
+Arrays stay. Regenerate emitted Perl parsers and rebuild Rust apps/runtime.
+Focused Perl native/fresh/readiness and Rust native/restored/plan/error controls
+pass; Dart/Julia/safe Lua are assessed independently, full admission separate.

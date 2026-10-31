@@ -71,3 +71,5 @@ stays unchanged. Seven new native/restored/in-process-plan plus four direct resu
 tests pass with offline compilation/rustfmt and exact generated source-error tokens.
 No new callable/deferred/context/serialized model or standalone emitted proof.
 Full method/domain/context/portable admission/canonical selection remains23.4.
+
+Free logical source guard composition before later with is separately repaired by Rust65.2: [[rust-logical-result-source-guards]]. Receiver prefixes/direct guards already work; eager producer/Bool/truth/arity unchanged. Valid false/null/empty with and returned Array remain; independent peers/full23.4 separate.
