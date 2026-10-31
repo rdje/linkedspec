@@ -1,7 +1,7 @@
 # Canonical free-default result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.21; implementation family23.3.60.
-Status: Bounded Perl60.1/Rust60.2/Dart60.3/Julia60.4 targeted-checked; safe Lua/full admission pending.
+Status: Recorded bounded60 implementations targeted-checked on named routes/hosts; full domain/context/portable admission remains23.4.
 
 Existing catalog publishes coalesce(values: scalar...) and
 coalesce_nonempty(values: scalar...). First defined versus first defined/nonempty
@@ -124,3 +124,20 @@ Host quoting preserves intended computed-write source without setup failure.
 Actual producers/inputs/results: free-default-julia-intake.json.gz. Rebuild apps/
 runtime; safe Lua60.5 next, no isolated package/portable aggregate-domain/
 exhaustive excluded-runtime/full admission claim.
+
+Safe Lua60.5 independently reproduces the named/completed defined/nonempty guard prerequisite on both installed hosts before production, owned within60.5 under6/18. Same91 checks63PASS/28RED,63 includes seven compile scaffolds; no peer credit imported. Retain guard state after both default methods without changing their original lazy producer.
+
+## Safe installed Lua60.5 source and receiver guards
+
+Same91 checks63PASS/28RED to91PASS per PUC5.5.1/LuaJIT2.1.1788460057;63 includes
+seven compile scaffolds. Seventeen values/ten healthy observations/needed error/
+eight public shapes canonically exact on four routes. Free source admission and
+two-name default guard retention fix independently qualified direct/named controls
+under6/18. Incompatible operands/with skip; legitimate null/empty with/source once/
+outer value stay. Namespace predicate/current guard role/three-line runner entry,
+no new interpreter chunk locals or lazy producer/computed read/with/signatures/
+method tables/arity/copy/alias/function/parser/schema change. Six nearest default
+programs/loadfile/version pass per host, focused stderr empty. Actual producers/
+inputs/results: free-default-lua-intake.json.gz. Rebuild apps/runtime; bounded60
+outcomes recorded, next selection22. No declared5.4/unsafe runner/formatter/
+isolated package/portable aggregate-domain/exhaustive excluded-runtime/full admission.

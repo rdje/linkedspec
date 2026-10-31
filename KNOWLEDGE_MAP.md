@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1554** facts · **11521** question keys.
+> **1555** facts · **11525** question keys.
 
 ## Questions → fact
 
@@ -2204,6 +2204,7 @@
 - "does Lua expose variadic function descriptors yet" -> [lua-variadic-v2-signature-state](docs/knowledge/lua-variadic-v2-signature-state.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && bash tools/run_python_project_data.sh tools/check_callable_signature_contract.py`
 - "does Lua fall through to global functions" -> [lua-actionir-contract-resolver](docs/knowledge/lua-actionir-contract-resolver.md) · 2026-07-11 · reverify: `bash tools/run_lua_local.sh && perl tools/check_language_capability_coverage.pl`
 - "does Lua flat preserve harray identity" -> [lua-runtime-harray-construction](docs/knowledge/lua-runtime-harray-construction.md) · 2026-07-13 · reverify: `bash tools/run_lua_local.sh && rg -n 'HASH_SPLICE_HELPERS|sorted_harray_keys|evaluate_hash_helper|runtime copied harray construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
+- "does Lua free default composition add interpreter chunk locals" -> [lua-free-default-result-guards](docs/knowledge/lua-free-default-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-default-result-guards)
 - "does Lua full corpus execution pass through both library and developer runner" -> [lua-package-pipeline-corpus-frontend-reading](docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md) · 2026-09-13 · reverify: `Run LUA_PACKAGE_PIPELINE_READING_38 and the managed commands below; exact selected groups451-1939 use original preamble1-199.`
 - "does Lua full pipeline tracing change results or errors" -> [lua-native-full-pipeline-trace](docs/knowledge/lua-native-full-pipeline-trace.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'lua_(io|frontend|compiler|staged|runtime):|options\.trace|trace = emitter' lua/src/linkedspec lua/test/run.lua lua/README.md docs/linkedspec-book/src/public-api/{trace-api,native-spec-loading}.md`
 - "does Lua fully support the Unicode rule-label contract" -> [lua-unicode-rule-label-preflight](docs/knowledge/lua-unicode-rule-label-preflight.md) · 2026-07-25 · reverify: `bash tools/run_python_project_data.sh tools/check_unicode_rule_label_contract.py; rg -n 'is_word_byte|read_word|check_at_least_one_rule|check_duplicate_rule_labels|check_edge_targets' lua/src/linkedspec/spec_parser.lua lua/src/linkedspec/spec_validator.lua; bash tools/run_lua_local.sh`
@@ -2947,6 +2948,7 @@
 - "does a history filename bypass the current task id census" -> [current-task-id-uniqueness](docs/knowledge/current-task-id-uniqueness.md) · 2026-09-24 · reverify: `perl scripts/check_task_tree_current_ids.pl`
 - "does a legitimate Dart null free default still enter with" -> [dart-free-default-result-guards](docs/knowledge/dart-free-default-result-guards.md) · 2026-10-31 · reverify: `From dart/: bash ../tools/run_dart_project_data.sh test test/free_default_result_composition_test.dart test/defined_default_receivers_test.dart test/default_selected_receivers_test.dart`
 - "does a legitimate Julia null free default still enter with" -> [julia-free-default-result-guards](docs/knowledge/julia-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_julia_project_data.sh --project=julia --startup-file=no --history-file=no --depwarn=error -e 'using LinkedSpecJulia, JSON3, Test; include(ARGS[1]); include(ARGS[2]); include(ARGS[3])' julia/test/free_default_result_composition_test.jl julia/test/defined_default_receivers_test.jl julia/test/default_selected_receivers_test.jl`
+- "does a legitimate Lua null free default still enter with" -> [lua-free-default-result-guards](docs/knowledge/lua-free-default-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-default-result-guards)
 - "does a legitimate Rust null free default still enter with" -> [rust-free-default-result-guards](docs/knowledge/rust-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test free_default_result_composition --test named_default_container_guards`
 - "does a legitimate null free default still enter with" -> [perl-free-default-result-guards](docs/knowledge/perl-free-default-result-guards.md) · 2026-10-31 · reverify: `bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/free_default_result_composition.t t/set_result_composition.t`
 - "does a missing Rust local-match writer preserve a mark written by its name expression" -> [rust-local-match-writer-presence-repair](docs/knowledge/rust-local-match-writer-presence-repair.md) · 2026-10-29 · reverify: `bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -p linkedspec-runtime --test named_writer_endpoint_absence --test named_capture_endpoint_absence --test complete_named_mark_contract -- --test-threads=1`
@@ -9072,6 +9074,7 @@
 - "which Lua owner classifies selected entry_slot fields" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
 - "which Lua owner guards canonical set result methods" -> [lua-canonical-set-result-guards](docs/knowledge/lua-canonical-set-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-canonical-set-result-guards)
 - "which Lua owner guards explicit push snapshot methods" -> [lua-push-snapshot-result-guards](docs/knowledge/lua-push-snapshot-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-push-snapshot-result-guards)
+- "which Lua owner guards free coalesce result methods" -> [lua-free-default-result-guards](docs/knowledge/lua-free-default-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-default-result-guards)
 - "which Lua owner guards gap_kind result methods" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
 - "which Lua owner guards static rule-call result selections" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
 - "which Lua owner implements explicit callable codeblocks" -> [lua-explicit-callable-codeblock-gap](docs/knowledge/lua-explicit-callable-codeblock-gap.md) · 2026-08-01 · reverify: `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && rg -n 'block_value|codeblock_argument|active_codeblocks|callable_codeblock\\.execute|runtime_scoped_binding|spec_ast\\.to_json|spec_ast\\.from_json' lua/src/linkedspec/action_ast.lua lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/runtime_scoped_binding.lua lua/src/linkedspec/source_emitter.lua && bash tools/run_lua_local.sh`
@@ -10767,6 +10770,7 @@
 - "why does Lua input_slice return null for a maximum integer width" -> [lua-emitter-source-location-reading-and-boundary-gaps](docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md) · 2026-09-13 · reverify: [7 entries](#lua-emitter-source-location-reading-and-boundary-gaps)
 - "why does Lua matches currently fail" -> [lua-helper-regex-split-mutation-preflight](docs/knowledge/lua-helper-regex-split-mutation-preflight.md) · 2026-07-12 · reverify: `rg -n 'kind == \"regex\"|compile_runtime_regex_alternation|execute_block|evaluate_expr|regex_subst|split' lua/src/linkedspec/action_parser.lua lua/src/linkedspec/interpreter.lua lua/src/linkedspec/matching.lua docs/tasks/LUA-BACKEND-PARITY.md`
 - "why does Lua meta copy flat hash count return zero" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
+- "why does Lua named Array coalesce set_key run KV" -> [lua-free-default-result-guards](docs/knowledge/lua-free-default-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-free-default-result-guards)
 - "why does Lua ordinary repetition minimum miss throw" -> [lua-ordinary-repetition-minimum-misses](docs/knowledge/lua-ordinary-repetition-minimum-misses.md) · 2026-10-29 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/minimum_miss_routes_test.lua and the same luajit route; explicit new-test registration23.4.1 before admission.`
 - "why does Lua pplugin empty return a table address key" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
 - "why does Lua push Child append null instead of false" -> [lua-interpreter-callable-reading-and-child-false-gap](docs/knowledge/lua-interpreter-callable-reading-and-child-false-gap.md) · 2026-09-12 · reverify: [6 entries](#lua-interpreter-callable-reading-and-child-false-gap)
@@ -14110,7 +14114,7 @@ _Finite readiness gaps distinguish defects and authoring work from unassessed re
 ### free-default-result-source-guards
 _Canonical free defaults need actual-kind result source guards_
 - **answers:** why does free coalesce set_key execute incompatible operands | does the free default result guard gap affect published scalar operands | do ready coalesce descriptors prove Perl runtime success | does free default composition promote portable aggregate operand domains
-- **date:** 2026-10-31 · **status:** bounded Perl60.1/Rust60.2/Dart60.3/Julia60.4 targeted-checked; safe Lua pending
+- **date:** 2026-10-31 · **status:** recorded bounded60 backends targeted-checked; full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.21; free-default-selection-intake.json.gz retains12 authored public programs/actual Perl native-fresh metadata-emitted source and Rust native-restored-plan outputs; calibrated eight healthy/four guard failures each.`
 - **reverify:** `Recover exact cases/public observers from free-default-selection-intake.json.gz into new project-local paths; historical activation/create/run/finish/retain one-shot, never replay.`
 - **source:** [`docs/knowledge/free-default-result-source-guards.md`](docs/knowledge/free-default-result-source-guards.md)
@@ -16394,6 +16398,14 @@ _Lua hash construction splices explicit flat-array results as copied key/value t
 - **evidence:** `LUA-BACKEND-PARITY.6.2.3 adds canonical flat_array to HASH_SPLICE_HELPERS. The existing expression-shape classifier covers direct calls and fluent chains whose terminal method is flat_array, and the existing append_array_value path copies each array member into alternating hash key/value tokens. Focused dual-ABI proof covers direct, receiver, empty, positioned, harray alias, nested isolation, and ordinary unwrapped-array boundaries. PUC Lua and LuaJIT pass 164/164; unchanged pplugin_empty returns [{}] at endpoint 0 and exact offsets 40-98 reach 58/59 on both ABIs.`
 - **reverify:** `bash tools/run_lua_local.sh && rg -n 'HASH_SPLICE_HELPERS|append_array_value|runtime copied harray construction' lua/src/linkedspec/interpreter.lua lua/test/run.lua`
 - **source:** [`docs/knowledge/lua-flat-array-hash-splicing.md`](docs/knowledge/lua-flat-array-hash-splicing.md)
+
+### lua-free-default-result-guards
+_Safe Lua free and receiver defaults retain actual-kind result guards_
+- **answers:** which Lua owner guards free coalesce result methods | why does Lua named Array coalesce set_key run KV | does Lua free default composition add interpreter chunk locals | does a legitimate Lua null free default still enter with
+- **date:** 2026-10-31 · **status:** installed PUC5.5.1/LuaJIT60.5 targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.60.5; free-default-lua-intake.json.gz retains same91 checks63PASS28RED to91PASS per host, six nearest programs/loadfile/version and actual producers/inputs/results;63 includes seven compile scaffolds.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/free_default_result_composition_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/free_default_result_composition_test.lua`
+- **source:** [`docs/knowledge/lua-free-default-result-guards.md`](docs/knowledge/lua-free-default-result-guards.md)
 
 ### lua-frontend-ast-json-contract
 _Lua source AST nodes round-trip the neutral provenance and body-variant contract_

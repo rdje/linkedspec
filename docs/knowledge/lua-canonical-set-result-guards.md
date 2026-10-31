@@ -33,3 +33,5 @@ clean-tree assertion rejected prepared normal before activation writes; exact
 guarded resume, no runtime execution or RED credit. Rebuild runtime/apps;
 owned free-source selection21 next, no declared5.4/unsafe runner/formatter/
 isolated package/peer wider default-domain/full admission claim.
+
+Later independently found completed default-container guard prerequisite is fixed in60.5 under6/18: [[lua-free-default-result-guards]]. Canonical set59.5 scope stays unchanged.

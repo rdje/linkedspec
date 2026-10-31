@@ -3100,5 +3100,8 @@ results on native/restoredSpec/plan and retains actual-kind guards after receive
 defaults select containers. Valid null/empty with inputs, laziness/order/scope stay;
 rebuild Dart apps/runtime. Julia now also guards free and receiver-default results
 across native/restoredSpec/plan/fresh Module, preserving legitimate null/empty with,
-order/scope/errors. Rebuild Julia apps/runtime. Safe installed Lua60.5 is next. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
+order/scope/errors. Rebuild Julia apps/runtime. Installed PUC Lua5.5.1/LuaJIT also
+guard these free and receiver-default results across native/restoredSpec/plan/fresh
+module, without new interpreter chunk locals. Rebuild Lua apps/runtime. Bounded60
+outcomes are recorded; next feature selection22, declared5.4/full admission separate. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
 context/portable admission remain separate.
