@@ -3278,5 +3278,15 @@ immediate with. Rejected consumer operands/bodies skip while source-operand effe
 numeric flags, copies/defaults/strict arithmetic and valid with results remain.
 The existing regex producer and literal flags are unchanged. Focused native/fresh
 22-case/readiness/error checks, selected nearest checks and18 excluded syntax
-fences pass. Regenerate emitted Perl. Rust70.2/other backend guard baselines and
+fences pass. Regenerate emitted Perl. Remaining backend guard baselines and
 full domain/context/portable admission remain separate.
+
+
+Rust70.2 retains canonical String-predicate free-source/ordinary one-operand guards
+through bridges and immediate with. The existing matches regex-literal operand is
+recognized in its pattern position, preserving flags, numeric text predicates and
+Boolean matches. Source-operand SOC snapshots/copy/default/strict arithmetic and
+valid with results remain; incompatible operands/later bodies skip. Focused23
+tests pass on native/restored-spec/generated-plan routes, with eighteen unchanged
+public syntax observations, selected nearest checks and owned formatting. Rebuild
+Rust applications/runtime. Dart70.3/other peers and full admission remain separate.

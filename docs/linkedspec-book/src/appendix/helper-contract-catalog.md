@@ -526,8 +526,12 @@ and predicate-operand effects remain. The source is captured before the operand,
 and the flag before subsequent consumer operands. Legitimate false, null and empty
 results still enter `with`, and an Array returned by the body accepts Array methods.
 Literal regex operands retain their existing representation and flags. Regenerate
-emitted Perl parsers. Native peer guard behavior is assessed independently;
-complete text/regex domains, contextual use and portable admission remain separate.
+emitted Perl parsers. Rust now retains the same bounded source/prefix guards on
+native, restored-spec and generated-plan routes. Its text-predicate flags remain
+numeric and regex results Boolean. Existing literal regex operands and modes stay
+on the current producer; rebuild Rust applications/runtime. Dart, Julia and Lua
+guard behavior is assessed independently. Complete text/regex domains, contextual
+use and portable admission remain separate.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`

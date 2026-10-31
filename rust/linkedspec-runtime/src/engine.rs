@@ -6534,6 +6534,7 @@ impl Engine {
                     || Self::is_ordinary_lexical_result_chain(receiver, calls)
                     || Self::is_ordinary_definedness_result_chain(receiver, calls)
                     || Self::is_ordinary_emptiness_result_chain(receiver, calls)
+                    || Self::is_ordinary_string_predicate_result_chain(receiver, calls)
                     || Self::is_ordinary_has_key_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
@@ -7186,6 +7187,7 @@ impl Engine {
             || Self::is_ordinary_lexical_result_chain(receiver, calls)
             || Self::is_ordinary_definedness_result_chain(receiver, calls)
             || Self::is_ordinary_emptiness_result_chain(receiver, calls)
+            || Self::is_ordinary_string_predicate_result_chain(receiver, calls)
             || Self::is_ordinary_has_key_result_chain(receiver, calls)
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
@@ -8731,6 +8733,69 @@ impl Engine {
         calls.first().is_some_and(|first| {
             first.method == "has_key" && first.args.len() == 1 && ordinary_args(&first.args)
         })
+    }
+
+    // String predicates retain numeric text flags, Bool matches and regex policy.
+    // Canonical free-two calls and one-operand prefixes join existing kind guards.
+    fn is_ordinary_string_predicate_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        let ordinary_args = |method: &str, args: &[Arg]| {
+            args.iter().enumerate().all(|(index, arg)| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                ) || (method == "matches"
+                    && index + 1 == args.len()
+                    && matches!(arg, Arg::Positional(Expr::RegexLiteral { .. })))
+            })
+        };
+        if let Expr::Call { name, args } = receiver {
+            let valid_arity = matches!(
+                name.as_str(),
+                "starts_with" | "ends_with" | "contains_substr" | "matches"
+            ) && args.len() == 2;
+            if valid_arity && ordinary_args(name, args) {
+                return true;
+            }
+        }
+        let Some(first) = calls.first() else {
+            return false;
+        };
+        matches!(
+            first.method.as_str(),
+            "starts_with" | "ends_with" | "contains_substr" | "matches"
+        ) && first.args.len() == 1
+            && ordinary_args(&first.method, &first.args)
     }
 
     // Keep constructor payload/pair/splice policy on its original producer.
