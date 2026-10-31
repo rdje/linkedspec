@@ -3190,3 +3190,11 @@ emitted Perl parsers and rebuild Rust/Dart/Julia/Lua apps/runtime. Focused nativ
 restored, generated-plan and the recorded fresh Perl/Julia/Lua routes pass with
 original source errors preserved. Lua uses installed PUC5.5.1/LuaJIT; declared5.4
 and canonical full source/domain/context admission remain separate.
+
+
+Perl feature66 retains lexical comparison source/ordinary prefix guards through
+Array bridges and later immediate with bodies. Rejected consumers skip operands/
+bodies; numeric1-0 flags/copies and legitimate zero/null/empty with stay. Regenerate
+emitted Perl parsers. Native/fresh/readiness/error controls pass; Rust and peers
+are assessed independently with existing Boolean profiles/null/Unicode limits.
+Canonical full source/domain/context admission remains separate.

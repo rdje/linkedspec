@@ -16206,7 +16206,7 @@ _SPEC-FORMAT-TERSE.8 inventory: Perl and Rust legacy helper spellings are hard-r
 ### lexical-result-source-guards
 _Lexical comparison result source roles and later with guards_
 - **answers:** why does str_eq take return an empty Array instead of null | why does a lexical comparison chain run with after rejected take | why does a lexical Array bridge report unsupported with | which task owns lexical comparison source and prefix guards | do lexical comparison result guard fixtures preserve backend Boolean kinds
-- **date:** 2026-10-31 · **status:** frozen66; independent backend implementations pending
+- **date:** 2026-10-31 · **status:** bounded Perl66.1 targeted-checked; independent Rust66.2/peers/full admission separate
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.27; lexical-guard-selection-intake.json.gz retains actual public20 producer/all inputs/results and three explicit non-Perl kind profiles.`
 - **reverify:** `Recover public20/shared20/original Perl from lexical-guard-selection-intake.json.gz into new project-local outputs. Historical activation/run/freeze writers one-shot never replay. Owners66.1-.5; peers use expected_nonperl override where present.`
 - **source:** [`docs/knowledge/lexical-result-source-guards.md`](docs/knowledge/lexical-result-source-guards.md)

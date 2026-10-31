@@ -1,0 +1,1987 @@
+[
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 15,
+                        "start" : 14
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 16,
+                  "start" : 9
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 35,
+                           "start" : 24
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 34,
+                                          "start" : 31
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 35,
+                                    "start" : 24
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 35,
+                                 "start" : 24
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 36,
+                        "start" : 23
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 36,
+                  "start" : 17
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 36,
+                  "start" : 23
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "kind" : "call",
+            "name" : "str_eq",
+            "source" : "str_eq()",
+            "source_method" : "str_eq",
+            "source_span" : {
+               "end" : 8,
+               "start" : 0
+            }
+         },
+         "source" : "str_eq().take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 36,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:str_eq\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "str_eq().take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 17
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 19,
+                  "start" : 12
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 38,
+                           "start" : 27
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 37,
+                                          "start" : 34
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 38,
+                                    "start" : 27
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 38,
+                                 "start" : 27
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 39,
+                        "start" : 26
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 39,
+                  "start" : 20
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 39,
+                  "start" : 26
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "a"
+               }
+            ],
+            "kind" : "call",
+            "name" : "str_eq",
+            "source" : "str_eq(\"a\")",
+            "source_method" : "str_eq",
+            "source_span" : {
+               "end" : 11,
+               "start" : 0
+            }
+         },
+         "source" : "str_eq(\"a\").take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 39,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:str_eq\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "str_eq(\"a\").take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 26,
+                        "start" : 25
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 27,
+                  "start" : 20
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "a"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 14,
+                     "start" : 11
+                  },
+                  "value" : "a"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 18,
+                     "start" : 15
+                  },
+                  "value" : "a"
+               }
+            ],
+            "kind" : "call",
+            "name" : "str_eq",
+            "source" : "str_eq(\"a\",\"a\",\"a\")",
+            "source_method" : "str_eq",
+            "source_span" : {
+               "end" : 19,
+               "start" : 0
+            }
+         },
+         "source" : "str_eq(\"a\",\"a\",\"a\").take(1)",
+         "source_span" : {
+            "end" : 27,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:str_eq\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "str_eq(\"a\",\"a\",\"a\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 33,
+                        "start" : 32
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 34,
+                  "start" : 27
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "raw_perl",
+                  "reason" : "unsupported_expression",
+                  "source" : "left:\"a\"",
+                  "source_span" : {
+                     "end" : 15,
+                     "start" : 7
+                  }
+               },
+               {
+                  "kind" : "raw_perl",
+                  "reason" : "unsupported_expression",
+                  "source" : "right:\"a\"",
+                  "source_span" : {
+                     "end" : 25,
+                     "start" : 16
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "str_eq",
+            "source" : "str_eq(left:\"a\",right:\"a\")",
+            "source_method" : "str_eq",
+            "source_span" : {
+               "end" : 26,
+               "start" : 0
+            }
+         },
+         "source" : "str_eq(left:\"a\",right:\"a\").take(1)",
+         "source_span" : {
+            "end" : 34,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:str_eq\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "str_eq(left:\"a\",right:\"a\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 17
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 19,
+                  "start" : 12
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 6,
+                     "start" : 3
+                  },
+                  "value" : "a"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "a"
+               }
+            ],
+            "kind" : "call",
+            "name" : "eq",
+            "source" : "eq(\"a\",\"a\")",
+            "source_method" : "eq",
+            "source_span" : {
+               "end" : 11,
+               "start" : 0
+            }
+         },
+         "source" : "eq(\"a\",\"a\").take(1)",
+         "source_span" : {
+            "end" : 19,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_num_cmp_lhs = \"a\"; my $__ls_num_cmp_rhs = \"a\"; LinkedSpec::Numeric::evaluate('num_eq', $__ls_num_cmp_lhs, $__ls_num_cmp_rhs) }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "eq(\"a\",\"a\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 17
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 19,
+                  "start" : 12
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 6,
+                     "start" : 3
+                  },
+                  "value" : "a"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "a"
+               }
+            ],
+            "kind" : "call",
+            "name" : "==",
+            "source" : "==(\"a\",\"a\")",
+            "source_method" : "==",
+            "source_span" : {
+               "end" : 11,
+               "start" : 0
+            }
+         },
+         "source" : "==(\"a\",\"a\").take(1)",
+         "source_span" : {
+            "end" : 19,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_num_cmp_lhs = \"a\"; my $__ls_num_cmp_rhs = \"a\"; LinkedSpec::Numeric::evaluate('num_eq', $__ls_num_cmp_lhs, $__ls_num_cmp_rhs) }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "==(\"a\",\"a\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 17
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 19,
+                  "start" : 12
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 38,
+                           "start" : 27
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 37,
+                                          "start" : 34
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 38,
+                                    "start" : 27
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 38,
+                                 "start" : 27
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 39,
+                        "start" : 26
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 39,
+                  "start" : 20
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 39,
+                  "start" : 26
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "number",
+                  "source" : 1,
+                  "source_span" : {
+                     "end" : 8,
+                     "start" : 7
+                  },
+                  "value" : 1
+               },
+               {
+                  "kind" : "number",
+                  "source" : 1,
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 9
+                  },
+                  "value" : 1
+               }
+            ],
+            "kind" : "call",
+            "name" : "num_eq",
+            "source" : "num_eq(1,1)",
+            "source_method" : "num_eq",
+            "source_span" : {
+               "end" : 11,
+               "start" : 0
+            }
+         },
+         "source" : "num_eq(1,1).take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 39,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_free_default_rejected = 0; my $__ls_free_default_value = do { my $__ls_scalar_source = do { my $__ls_num_cmp_lhs = 1; my $__ls_num_cmp_rhs = 1; LinkedSpec::Numeric::evaluate('num_eq', $__ls_num_cmp_lhs, $__ls_num_cmp_rhs) }; $__ls_scalar_source }; $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_selected_default = $__ls_free_default_value; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_take = $__ls_selected_default; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }) : do { $__ls_free_default_rejected = 1; undef } }); $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_with_value = $__ls_free_default_value; my $value = $__ls_with_value; do { \"x\" } }); $__ls_free_default_value }",
+      "source" : "num_eq(1,1).take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 17,
+                        "start" : 16
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 18,
+                  "start" : 11
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 37,
+                           "start" : 26
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 36,
+                                          "start" : 33
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 37,
+                                    "start" : 26
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 37,
+                                 "start" : 26
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 38,
+                        "start" : 25
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 38,
+                  "start" : 19
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 38,
+                  "start" : 25
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "boolean",
+                  "source" : "false",
+                  "source_span" : {
+                     "end" : 9,
+                     "start" : 4
+                  },
+                  "value" : 0
+               }
+            ],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : null,
+            "minimum_arity" : 1,
+            "name" : "and",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "and(false)",
+            "source_method" : "and",
+            "source_span" : {
+               "end" : 10,
+               "start" : 0
+            }
+         },
+         "source" : "and(false).take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 38,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_free_default_rejected = 0; my $__ls_free_default_value = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { require JSON::PP; JSON::PP::false }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_selected_default = $__ls_free_default_value; ref($__ls_selected_default) eq 'ARRAY' ? (do { my $__ls_take = $__ls_selected_default; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }) : do { $__ls_free_default_rejected = 1; undef } }); $__ls_free_default_value = $__ls_free_default_rejected ? undef : (do { my $__ls_with_value = $__ls_free_default_value; my $value = $__ls_with_value; do { \"x\" } }); $__ls_free_default_value }",
+      "source" : "and(false).take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "str_eq",
+               "source" : "str_eq()",
+               "source_method" : "str_eq",
+               "source_span" : {
+                  "end" : 12,
+                  "start" : 4
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 31,
+                           "start" : 20
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 30,
+                                          "start" : 27
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 31,
+                                    "start" : 20
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 31,
+                                 "start" : 20
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 32,
+                        "start" : 19
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 32,
+                  "start" : 13
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 32,
+                  "start" : 19
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"a\"",
+            "source_span" : {
+               "end" : 3,
+               "start" : 0
+            },
+            "value" : "a"
+         },
+         "source" : "\"a\".str_eq().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 32,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"a\".str_eq().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"a\"",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 11
+                     },
+                     "value" : "a"
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"a\"",
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 15
+                     },
+                     "value" : "a"
+                  }
+               ],
+               "method" : "str_eq",
+               "source" : "str_eq(\"a\",\"a\")",
+               "source_method" : "str_eq",
+               "source_span" : {
+                  "end" : 19,
+                  "start" : 4
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 38,
+                           "start" : 27
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 37,
+                                          "start" : 34
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 38,
+                                    "start" : 27
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 38,
+                                 "start" : 27
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 39,
+                        "start" : 26
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 39,
+                  "start" : 20
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 39,
+                  "start" : 26
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"a\"",
+            "source_span" : {
+               "end" : 3,
+               "start" : 0
+            },
+            "value" : "a"
+         },
+         "source" : "\"a\".str_eq(\"a\",\"a\").with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 39,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"a\".str_eq(\"a\",\"a\").with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "raw_perl",
+                     "reason" : "unsupported_expression",
+                     "source" : "right:\"a\"",
+                     "source_span" : {
+                        "end" : 20,
+                        "start" : 11
+                     }
+                  }
+               ],
+               "method" : "str_eq",
+               "source" : "str_eq(right:\"a\")",
+               "source_method" : "str_eq",
+               "source_span" : {
+                  "end" : 21,
+                  "start" : 4
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 40,
+                           "start" : 29
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 39,
+                                          "start" : 36
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 40,
+                                    "start" : 29
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 40,
+                                 "start" : 29
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 41,
+                        "start" : 28
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 41,
+                  "start" : 22
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 41,
+                  "start" : 28
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"a\"",
+            "source_span" : {
+               "end" : 3,
+               "start" : 0
+            },
+            "value" : "a"
+         },
+         "source" : "\"a\".str_eq(right:\"a\").with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 41,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_str_cmp_lhs = \"a\"; my $__ls_str_cmp_rhs = right:\"a\"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "\"a\".str_eq(right:\"a\").with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"a\"",
+               "source_span" : {
+                  "end" : 10,
+                  "start" : 7
+               },
+               "value" : "a"
+            },
+            {
+               "kind" : "string",
+               "quote" : "\"",
+               "source" : "\"a\"",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 11
+               },
+               "value" : "a"
+            },
+            {
+               "block" : {
+                  "kind" : "action_block",
+                  "source" : "return(\"x\")",
+                  "source_span" : {
+                     "end" : 27,
+                     "start" : 16
+                  },
+                  "statements" : [
+                     {
+                        "drops_value" : 1,
+                        "expr" : {
+                           "args" : [
+                              {
+                                 "kind" : "string",
+                                 "quote" : "\"",
+                                 "source" : "\"x\"",
+                                 "source_span" : {
+                                    "end" : 26,
+                                    "start" : 23
+                                 },
+                                 "value" : "x"
+                              }
+                           ],
+                           "kind" : "call",
+                           "name" : "return",
+                           "source" : "return(\"x\")",
+                           "source_method" : "return",
+                           "source_span" : {
+                              "end" : 27,
+                              "start" : 16
+                           }
+                        },
+                        "kind" : "action_stmt",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 27,
+                           "start" : 16
+                        }
+                     }
+                  ]
+               },
+               "kind" : "block_value",
+               "source" : "{return(\"x\")}",
+               "source_span" : {
+                  "end" : 28,
+                  "start" : 15
+               }
+            }
+         ],
+         "kind" : "call",
+         "name" : "str_eq",
+         "source" : "str_eq(\"a\",\"a\"){return(\"x\")}",
+         "source_method" : "str_eq",
+         "source_span" : {
+            "end" : 28,
+            "start" : 0
+         },
+         "trailing_block_arg" : 1,
+         "trailing_block_source_span" : {
+            "end" : 28,
+            "start" : 15
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:str_eq\"; undef }",
+      "source" : "str_eq(\"a\",\"a\"){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"a\"",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 11
+                     },
+                     "value" : "a"
+                  },
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 27,
+                           "start" : 16
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 26,
+                                          "start" : 23
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 27,
+                                    "start" : 16
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 27,
+                                 "start" : 16
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 28,
+                        "start" : 15
+                     }
+                  }
+               ],
+               "method" : "str_eq",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "str_eq(\"a\"){return(\"x\")}",
+               "source_method" : "str_eq",
+               "source_span" : {
+                  "end" : 28,
+                  "start" : 4
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 28,
+                  "start" : 15
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"a\"",
+            "source_span" : {
+               "end" : 3,
+               "start" : 0
+            },
+            "value" : "a"
+         },
+         "source" : "\"a\".str_eq(\"a\"){return(\"x\")}",
+         "source_span" : {
+            "end" : 28,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:str_eq\"; undef }",
+      "source" : "\"a\".str_eq(\"a\"){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(value)",
+                        "source_span" : {
+                           "end" : 42,
+                           "start" : 29
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "variable",
+                                       "name" : "value",
+                                       "source" : "value",
+                                       "source_span" : {
+                                          "end" : 41,
+                                          "start" : 36
+                                       }
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(value)",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 42,
+                                    "start" : 29
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(value)",
+                              "source_span" : {
+                                 "end" : 42,
+                                 "start" : 29
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(value)}",
+                     "source_span" : {
+                        "end" : 43,
+                        "start" : 28
+                     }
+                  }
+               ],
+               "method" : "map_leaves",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "map_leaves(){return(value)}",
+               "source_method" : "map_leaves",
+               "source_span" : {
+                  "end" : 43,
+                  "start" : 16
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 43,
+                  "start" : 28
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "a"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 14,
+                     "start" : 11
+                  },
+                  "value" : "a"
+               }
+            ],
+            "kind" : "call",
+            "name" : "str_eq",
+            "source" : "str_eq(\"a\",\"a\")",
+            "source_method" : "str_eq",
+            "source_span" : {
+               "end" : 15,
+               "start" : 0
+            }
+         },
+         "source" : "str_eq(\"a\",\"a\").map_leaves(){return(value)}",
+         "source_span" : {
+            "end" : 43,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_tree_source = do { my $__ls_str_cmp_lhs = \"a\"; my $__ls_str_cmp_rhs = \"a\"; ($__ls_str_cmp_lhs eq $__ls_str_cmp_rhs) ? 1 : 0 }; if (defined($__ls_tree_source) && ref($__ls_tree_source) eq 'HASH') { do { my $__ls_hash_tree_source = $__ls_tree_source; my $__ls_hash_tree_map; $__ls_hash_tree_map = sub { my ($__ls_hash_tree_node, $__ls_hash_tree_path) = @_; my %__ls_hash_tree_out; foreach my $__ls_hash_tree_leaf_key (sort keys %{$__ls_hash_tree_node}) { my $__ls_hash_tree_leaf_value = $__ls_hash_tree_node->{$__ls_hash_tree_leaf_key}; my @__ls_hash_tree_next_path = (@{$__ls_hash_tree_path}, $__ls_hash_tree_leaf_key); if (defined($__ls_hash_tree_leaf_value) && ref($__ls_hash_tree_leaf_value) eq 'HASH') { $__ls_hash_tree_out{$__ls_hash_tree_leaf_key} = $__ls_hash_tree_map->($__ls_hash_tree_leaf_value, \\@__ls_hash_tree_next_path); } else { my $__ls_hash_tree_leaf_path = \\@__ls_hash_tree_next_path; $__ls_hash_tree_out{$__ls_hash_tree_leaf_key} = do { my $value = $__ls_hash_tree_leaf_value; my @value = (defined($value) && ref($value) eq 'ARRAY') ? @{$value} : (); my %value = (defined($value) && ref($value) eq 'HASH') ? %{$value} : (); my $key = $__ls_hash_tree_leaf_key; my $path = [@{$__ls_hash_tree_leaf_path}]; my @path = @{$path}; my $depth = scalar(@{$__ls_hash_tree_leaf_path}); do { $value } }; } } return \\%__ls_hash_tree_out }; $__ls_hash_tree_map->($__ls_hash_tree_source, []) } } elsif (defined($__ls_tree_source) && ref($__ls_tree_source) eq 'ARRAY') { do { my $__ls_array_tree_source = $__ls_tree_source; my $__ls_array_tree_map; $__ls_array_tree_map = sub { my ($__ls_array_tree_node, $__ls_array_tree_path) = @_; my @__ls_array_tree_out; for (my $__ls_array_tree_leaf_index = 0; $__ls_array_tree_leaf_index < @{$__ls_array_tree_node}; ++$__ls_array_tree_leaf_index) { my $__ls_array_tree_leaf_value = $__ls_array_tree_node->[$__ls_array_tree_leaf_index]; my @__ls_array_tree_next_path = (@{$__ls_array_tree_path}, $__ls_array_tree_leaf_index); if (defined($__ls_array_tree_leaf_value) && ref($__ls_array_tree_leaf_value) eq 'ARRAY') { push @__ls_array_tree_out, $__ls_array_tree_map->($__ls_array_tree_leaf_value, \\@__ls_array_tree_next_path); } else { my $__ls_array_tree_leaf_path = \\@__ls_array_tree_next_path; push @__ls_array_tree_out, do { my $value = $__ls_array_tree_leaf_value; my @value = (defined($value) && ref($value) eq 'ARRAY') ? @{$value} : (); my %value = (defined($value) && ref($value) eq 'HASH') ? %{$value} : (); my $index = $__ls_array_tree_leaf_index; my $path = [@{$__ls_array_tree_leaf_path}]; my @path = @{$path}; my $depth = scalar(@{$__ls_array_tree_leaf_path}); do { $value } }; } } return \\@__ls_array_tree_out }; $__ls_array_tree_map->($__ls_array_tree_source, []) } } else { undef } }",
+      "source" : "str_eq(\"a\",\"a\").map_leaves(){return(value)}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"a\"",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 11
+                     },
+                     "value" : "a"
+                  }
+               ],
+               "method" : "str_eq",
+               "source" : "str_eq(\"a\")",
+               "source_method" : "str_eq",
+               "source_span" : {
+                  "end" : 15,
+                  "start" : 4
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(value)",
+                        "source_span" : {
+                           "end" : 42,
+                           "start" : 29
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "variable",
+                                       "name" : "value",
+                                       "source" : "value",
+                                       "source_span" : {
+                                          "end" : 41,
+                                          "start" : 36
+                                       }
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(value)",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 42,
+                                    "start" : 29
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(value)",
+                              "source_span" : {
+                                 "end" : 42,
+                                 "start" : 29
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(value)}",
+                     "source_span" : {
+                        "end" : 43,
+                        "start" : 28
+                     }
+                  }
+               ],
+               "method" : "map_leaves",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "map_leaves(){return(value)}",
+               "source_method" : "map_leaves",
+               "source_span" : {
+                  "end" : 43,
+                  "start" : 16
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 43,
+                  "start" : 28
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"a\"",
+            "source_span" : {
+               "end" : 3,
+               "start" : 0
+            },
+            "value" : "a"
+         },
+         "source" : "\"a\".str_eq(\"a\").map_leaves(){return(value)}",
+         "source_span" : {
+            "end" : 43,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"a\".str_eq(\"a\").map_leaves(){return(value)}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "body_ast" : {
+            "kind" : "action_block",
+            "source" : " return(str_eq(\"a\",\"a\").take(1).with(){return(\"x\")}) ",
+            "source_span" : {
+               "end" : 56,
+               "start" : 3
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "args" : [
+                        {
+                           "calls" : [
+                              {
+                                 "args" : [
+                                    {
+                                       "kind" : "number",
+                                       "source" : 1,
+                                       "source_span" : {
+                                          "end" : 33,
+                                          "start" : 32
+                                       },
+                                       "value" : 1
+                                    }
+                                 ],
+                                 "method" : "take",
+                                 "source" : "take(1)",
+                                 "source_method" : "take",
+                                 "source_span" : {
+                                    "end" : 34,
+                                    "start" : 27
+                                 }
+                              },
+                              {
+                                 "args" : [
+                                    {
+                                       "block" : {
+                                          "kind" : "action_block",
+                                          "source" : "return(\"x\")",
+                                          "source_span" : {
+                                             "end" : 53,
+                                             "start" : 42
+                                          },
+                                          "statements" : [
+                                             {
+                                                "drops_value" : 1,
+                                                "expr" : {
+                                                   "args" : [
+                                                      {
+                                                         "kind" : "string",
+                                                         "quote" : "\"",
+                                                         "source" : "\"x\"",
+                                                         "source_span" : {
+                                                            "end" : 52,
+                                                            "start" : 49
+                                                         },
+                                                         "value" : "x"
+                                                      }
+                                                   ],
+                                                   "kind" : "call",
+                                                   "name" : "return",
+                                                   "source" : "return(\"x\")",
+                                                   "source_method" : "return",
+                                                   "source_span" : {
+                                                      "end" : 53,
+                                                      "start" : 42
+                                                   }
+                                                },
+                                                "kind" : "action_stmt",
+                                                "source" : "return(\"x\")",
+                                                "source_span" : {
+                                                   "end" : 53,
+                                                   "start" : 42
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       "kind" : "block_value",
+                                       "source" : "{return(\"x\")}",
+                                       "source_span" : {
+                                          "end" : 54,
+                                          "start" : 41
+                                       }
+                                    }
+                                 ],
+                                 "method" : "with",
+                                 "receiver_trailing_block_arg" : 1,
+                                 "source" : "with(){return(\"x\")}",
+                                 "source_method" : "with",
+                                 "source_span" : {
+                                    "end" : 54,
+                                    "start" : 35
+                                 },
+                                 "trailing_block_arg" : 1,
+                                 "trailing_block_source_span" : {
+                                    "end" : 54,
+                                    "start" : 41
+                                 }
+                              }
+                           ],
+                           "kind" : "fluent_chain",
+                           "receiver" : {
+                              "args" : [
+                                 {
+                                    "kind" : "string",
+                                    "quote" : "\"",
+                                    "source" : "\"a\"",
+                                    "source_span" : {
+                                       "end" : 21,
+                                       "start" : 18
+                                    },
+                                    "value" : "a"
+                                 },
+                                 {
+                                    "kind" : "string",
+                                    "quote" : "\"",
+                                    "source" : "\"a\"",
+                                    "source_span" : {
+                                       "end" : 25,
+                                       "start" : 22
+                                    },
+                                    "value" : "a"
+                                 }
+                              ],
+                              "kind" : "call",
+                              "name" : "str_eq",
+                              "source" : "str_eq(\"a\",\"a\")",
+                              "source_method" : "str_eq",
+                              "source_span" : {
+                                 "end" : 26,
+                                 "start" : 11
+                              }
+                           },
+                           "source" : "str_eq(\"a\",\"a\").take(1).with(){return(\"x\")}",
+                           "source_span" : {
+                              "end" : 54,
+                              "start" : 11
+                           }
+                        }
+                     ],
+                     "kind" : "call",
+                     "name" : "return",
+                     "source" : "return(str_eq(\"a\",\"a\").take(1).with(){return(\"x\")})",
+                     "source_method" : "return",
+                     "source_span" : {
+                        "end" : 55,
+                        "start" : 4
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "return(str_eq(\"a\",\"a\").take(1).with(){return(\"x\")})",
+                  "source_span" : {
+                     "end" : 55,
+                     "start" : 4
+                  }
+               }
+            ]
+         },
+         "body_source" : " return(str_eq(\"a\",\"a\").take(1).with(){return(\"x\")}) ",
+         "body_span" : {
+            "end" : 56,
+            "start" : 3
+         },
+         "kind" : "codeblock_literal",
+         "signature" : {
+            "kind" : "callable_signature",
+            "max_arity" : 0,
+            "min_arity" : 0,
+            "positional_params" : [],
+            "rest_param" : null,
+            "version" : 1
+         },
+         "source_span" : {
+            "end" : 57,
+            "start" : 0
+         },
+         "source_text" : "{|| return(str_eq(\"a\",\"a\").take(1).with(){return(\"x\")}) }",
+         "version" : 1
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack(\"H*\", \"7b22626f64795f617374223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a222072657475726e287374725f6571285c22615c222c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d2920222c22736f757263655f7370616e223a7b22656e64223a35362c227374617274223a337d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b2263616c6c73223a5b7b2261726773223a5b7b226b696e64223a226e756d626572222c22736f75726365223a312c22736f757263655f7370616e223a7b22656e64223a33332c227374617274223a33327d2c2276616c7565223a317d5d2c226d6574686f64223a2274616b65222c22736f75726365223a2274616b65283129222c22736f757263655f6d6574686f64223a2274616b65222c22736f757263655f7370616e223a7b22656e64223a33342c227374617274223a32377d7d2c7b2261726773223a5b7b22626c6f636b223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a35332c227374617274223a34327d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22785c22222c22736f757263655f7370616e223a7b22656e64223a35322c227374617274223a34397d2c2276616c7565223a2278227d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a35332c227374617274223a34327d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a35332c227374617274223a34327d7d5d7d2c226b696e64223a22626c6f636b5f76616c7565222c22736f75726365223a227b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a35342c227374617274223a34317d7d5d2c226d6574686f64223a2277697468222c2272656365697665725f747261696c696e675f626c6f636b5f617267223a312c22736f75726365223a227769746828297b72657475726e285c22785c22297d222c22736f757263655f6d6574686f64223a2277697468222c22736f757263655f7370616e223a7b22656e64223a35342c227374617274223a33357d2c22747261696c696e675f626c6f636b5f617267223a312c22747261696c696e675f626c6f636b5f736f757263655f7370616e223a7b22656e64223a35342c227374617274223a34317d7d5d2c226b696e64223a22666c75656e745f636861696e222c227265636569766572223a7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22615c22222c22736f757263655f7370616e223a7b22656e64223a32312c227374617274223a31387d2c2276616c7565223a2261227d2c7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22615c22222c22736f757263655f7370616e223a7b22656e64223a32352c227374617274223a32327d2c2276616c7565223a2261227d5d2c226b696e64223a2263616c6c222c226e616d65223a227374725f6571222c22736f75726365223a227374725f6571285c22615c222c5c22615c2229222c22736f757263655f6d6574686f64223a227374725f6571222c22736f757263655f7370616e223a7b22656e64223a32362c227374617274223a31317d7d2c22736f75726365223a227374725f6571285c22615c222c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a35342c227374617274223a31317d7d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e287374725f6571285c22615c222c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a35352c227374617274223a347d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e287374725f6571285c22615c222c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f7370616e223a7b22656e64223a35352c227374617274223a347d7d5d7d2c22626f64795f736f75726365223a222072657475726e287374725f6571285c22615c222c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d2920222c22626f64795f7370616e223a7b22656e64223a35362c227374617274223a337d2c226b696e64223a22636f6465626c6f636b5f6c69746572616c222c227369676e6174757265223a7b226b696e64223a2263616c6c61626c655f7369676e6174757265222c226d61785f6172697479223a302c226d696e5f6172697479223a302c22706f736974696f6e616c5f706172616d73223a5b5d2c22726573745f706172616d223a6e756c6c2c2276657273696f6e223a317d2c22736f757263655f7370616e223a7b22656e64223a35372c227374617274223a307d2c22736f757263655f74657874223a227b7c7c2072657475726e287374725f6571285c22615c222c5c22615c22292e74616b652831292e7769746828297b72657475726e285c22785c22297d29207d222c2276657273696f6e223a317d\")) }",
+      "source" : "{|| return(str_eq(\"a\",\"a\").take(1).with(){return(\"x\")}) }",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "custom_compare",
+               "source" : "custom_compare()",
+               "source_method" : "custom_compare",
+               "source_span" : {
+                  "end" : 32,
+                  "start" : 16
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 51,
+                           "start" : 40
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 50,
+                                          "start" : 47
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 51,
+                                    "start" : 40
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 51,
+                                 "start" : 40
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 52,
+                        "start" : 39
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 52,
+                  "start" : 33
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 52,
+                  "start" : 39
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 7
+                  },
+                  "value" : "a"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"a\"",
+                  "source_span" : {
+                     "end" : 14,
+                     "start" : 11
+                  },
+                  "value" : "a"
+               }
+            ],
+            "kind" : "call",
+            "name" : "str_eq",
+            "source" : "str_eq(\"a\",\"a\")",
+            "source_method" : "str_eq",
+            "source_span" : {
+               "end" : 15,
+               "start" : 0
+            }
+         },
+         "source" : "str_eq(\"a\",\"a\").custom_compare().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 52,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_compare\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "str_eq(\"a\",\"a\").custom_compare().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"a\"",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 11
+                     },
+                     "value" : "a"
+                  }
+               ],
+               "method" : "str_eq",
+               "source" : "str_eq(\"a\")",
+               "source_method" : "str_eq",
+               "source_span" : {
+                  "end" : 15,
+                  "start" : 4
+               }
+            },
+            {
+               "args" : [],
+               "method" : "custom_compare",
+               "source" : "custom_compare()",
+               "source_method" : "custom_compare",
+               "source_span" : {
+                  "end" : 32,
+                  "start" : 16
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 51,
+                           "start" : 40
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 50,
+                                          "start" : 47
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 51,
+                                    "start" : 40
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 51,
+                                 "start" : 40
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 52,
+                        "start" : 39
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 52,
+                  "start" : 33
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 52,
+                  "start" : 39
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"a\"",
+            "source_span" : {
+               "end" : 3,
+               "start" : 0
+            },
+            "value" : "a"
+         },
+         "source" : "\"a\".str_eq(\"a\").custom_compare().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 52,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_compare\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "\"a\".str_eq(\"a\").custom_compare().with(){return(\"x\")}",
+      "warnings" : []
+   }
+]

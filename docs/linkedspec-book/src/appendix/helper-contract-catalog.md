@@ -1324,14 +1324,23 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 
 
 The [six-method reference](../dsl/value-container-flow-helper-reference.md#scalar-predicates-and-string-comparisons)
-shows lexical true/false examples. A current Perl source-guard gap affects later
-container/with continuations: `str_eq("a","b").take(1)` returns an empty Array,
-and a rejected comparison prefix can still enter a later `with` body. Some Array
-bridge tails return null with unsupported `with` metadata. Feature66 owns this
-guard/readiness repair; compatible chains, numeric flag identity/copies, snapshots,
-legitimate zero/null/empty `with` and needed source errors already work. Peer
+shows lexical true/false examples. Perl retains actual-kind and rejection guards
+through canonical free comparisons and ordinary comparison prefixes:
+
+```text
+str_eq("a","b").take(1)                         # null
+"a".str_eq("b").take(1).with(){return("ran")}     # null; body skipped
+str_lt("a","b").split(",").set_key("k",1).with(){return("ran")} # null
+str_eq("a","b").with(){return([value,value.copy()])}           # [0,0]
+str_eq("a","a").add("bad").with(){return("null")}              # "null"
+```
+
+Incompatible consumer operands and later bodies stay skipped; source operands
+still run once in order. Legitimate zero/null/empty results enter `with`, and
+an Array returned by a valid body may continue with Array methods. These Perl
+paths have ready ActionIR metadata. Regenerate emitted Perl parsers. Other
 backends are assessed independently with their existing Boolean result kinds;
-the null/Unicode qualifications above remain unchanged.
+the producer/null/Unicode qualifications above remain unchanged.
 
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads
