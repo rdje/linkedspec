@@ -4,7 +4,7 @@ Owner: TYPE-REFERENCE-BOOK.1.2.23.1.23; family23.3.62. Existing authority:
 scalar-string-results.md19, scalar-text/numeric/uniform binding contracts and
 current catalog. This extends the ordinary canonical free-call source role,
 without changing existing String producers or input/signature policies.
-Status: Bounded Perl62.1 targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl62.1/Rust62.2 targeted-checked; remaining peers/separate receiver-context/full admission pending.
 
 Retain trim/lowercase/uppercase(one positional), replace_substr(three),
 rm_prefix/rm_suffix(two), character substr(two or three), cat(two-or-more).
@@ -83,3 +83,23 @@ escape-warning source retained/raw-string producer correction not replayed.
 Actual inputs/producers/epochs: free-string-perl-intake.json.gz. Canonical18/
 fences9 registration stays23.4.1-owned. Regenerate emitted Perl; Rust62.2 next,
 no native seeded/general SESSION17/exhaustive excluded-runtime/full admission.
+
+## Bounded Rust62.2 free-source guards and separate P1 receiver context
+
+Same18 tests13PASS5RED to18PASS native/restored CompiledSpec/in-process plan.
+Ten original healthy values/error/nine syntax shapes stay exact; the other passing
+baseline controls are scaffold/context, not additional healthy values. Fifteen
+values now pass; exact ordinary source arities/recognized values feed current
+direct/trailing kind guards. Original producers/signatures/domains/Unicode/kinds/
+with/function/copy/alias/deferred/parser/schema stay. Source once/order/snapshots/
+Number0 index/Boolfalse/null-empty with hold; rejected operands/later body skip.
+Nearest String4/constructor24/owned fmt pass. Actual inputs/producers/epochs:
+free-string-rust-intake.json.gz. Rebuild Rust applications/runtime; Dart62.3 next.
+
+Receiver-only invalid bridge is independently defective in Rust: literal.trim.
+split.set_key.with returns [ran,KVW] on all three routes before/after. It is not
+Perl-unready authority or healthy behavior. Trailing kind_guarded_value remains
+false for the literal root through trim/split; dynamic dispatch runs incompatible
+Hash arguments and later with. P1 repair62.6 scheduled after62.5/before23.4, with
+independent peer assessments and dedicated RED/GREEN. No synthetic host seed/
+general isolation/exhaustive excluded-runtime/isolated emitted package/full admission.

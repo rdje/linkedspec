@@ -3141,6 +3141,9 @@ ordinary canonical calls across native/fresh execution, preserving source effect
 actual scalar kinds, compatible/Array bridges and valid null/empty with inputs.
 Incompatible consumers skip arguments/later bodies. The confirmed fresh-package
 symbolic host Hash case now returns null with both empty and seeded host data.
-Regenerate emitted Perl parsers. Independent Rust62.2 is next, then Dart/Julia/Lua;
+Regenerate emitted Perl parsers. Rust now guards ordinary canonical free String
+results on native/restored compiled specs/in-process plans; rebuild Rust apps/runtime.
+Its receiver-only invalid String-Array-Hash with tail remains a separate owned
+repair before admission. Independent Dart62.3 is next, then Julia/Lua;
 no general host isolation, native-seeded, domain/context or full admission follows.
-The receiver-only invalid bridge remains an explicit unready fence.
+The Perl receiver-only invalid bridge remains an explicit unready fence.

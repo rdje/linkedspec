@@ -6528,6 +6528,7 @@ impl Engine {
                     || Self::is_explicit_set_result_source(receiver)
                     || Self::is_free_default_result_source(receiver)
                     || Self::is_constructor_result_source(receiver)
+                    || Self::is_free_string_result_source(receiver)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
                 {
@@ -7152,6 +7153,7 @@ impl Engine {
             || Self::is_explicit_set_result_source(receiver)
             || Self::is_free_default_result_source(receiver)
             || Self::is_constructor_result_source(receiver)
+            || Self::is_free_string_result_source(receiver)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
 
@@ -8224,6 +8226,50 @@ impl Engine {
         };
         matches!(name.as_str(), "coalesce" | "coalesce_nonempty")
             && args.len() >= 2
+            && args.iter().all(|arg| {
+                matches!(
+                    arg,
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            })
+    }
+
+    // Preserve String producers and domains; only canonical ordinary calls gain guards.
+    fn is_free_string_result_source(expr: &Expr) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let Expr::Call { name, args } = expr else {
+            return false;
+        };
+        let valid_arity = match name.as_str() {
+            "trim" | "lowercase" | "uppercase" => args.len() == 1,
+            "replace_substr" => args.len() == 3,
+            "rm_prefix" | "rm_suffix" => args.len() == 2,
+            "substr" => matches!(args.len(), 2 | 3),
+            "cat" => args.len() >= 2,
+            _ => false,
+        };
+        valid_arity
             && args.iter().all(|arg| {
                 matches!(
                     arg,
