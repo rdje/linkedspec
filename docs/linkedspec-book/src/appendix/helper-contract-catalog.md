@@ -1005,14 +1005,14 @@ element/pair/list-splice, bare-key and selector retirement rules remain in force
 - **Returns**: predicate result; Perl retains numeric `1`/`0`, while Rust/Dart/Julia/Lua retain Boolean results.
 - **Behavior**: Logical inverse of `is_empty`. On Perl/Rust/Dart/Julia/Lua, `["a"].is_nonempty().cat("!")` → `"1!"`, and `{}.is_nonempty().coalesce_nonempty("late").cat("!")` → `"0!"` because false remains present data. `["a"].is_empty().cat(",x").split(",").last().uppercase()` → `"X"`; the explicit split produces an Array for later methods. Generic predicate results may themselves use `.is_nonempty()`. Ordinary free-helper `is_nonempty("0")` agrees with a binding holding `"0"` and returns1. The Lua declared-version/full-admission and broader Perl conditional qualifications above still apply.
 
-Perl, Rust and Dart keep actual-kind and rejection guards through canonical one-value free
+Perl, Rust, Dart and Julia keep actual-kind and rejection guards through canonical one-value free
 emptiness calls and ordinary zero-operand predicate prefixes:
 
 ```text
 is_empty([1]).take(1)                            # undef
 [1].is_empty().take(1).with(){return("ran")}       # undef; body skipped
 [1].is_empty().cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
-is_empty([1]).with(){return([value,value.copy()])} # Perl [0,0]; Rust/Dart [false,false]
+is_empty([1]).with(){return([value,value.copy()])} # Perl [0,0]; Rust/Dart/Julia [false,false]
 is_empty([1]).add("bad").with(){return("null")}     # "null"; body runs
 is_empty([1]).is_nonempty().cat("!")              # "1!"
 ```
@@ -1020,10 +1020,11 @@ is_empty([1]).is_nonempty().cat("!")              # "1!"
 Incompatible consumer operands and later bodies stay skipped; source expressions
 run once before compatible operands. Valid false/null/empty results still enter
 `with`, and an Array returned by its body accepts Array methods. Focused Perl
-native/fresh paths have ready ActionIR metadata; Rust/Dart pass native/restored
-CompiledSpec/SpecFile/generated-plan checks with strict Bool/text/default/numeric profiles.
-Regenerate emitted Perl parsers and rebuild Rust/Dart apps/runtime. Other backends
-independently assess these guards; empty/null versus zero/false/String0 domains
+native/fresh paths have ready ActionIR metadata; Rust/Dart/Julia pass native/restored
+CompiledSpec/SpecFile/generated-plan checks with strict Bool/text/default/numeric profiles,
+plus fresh Julia modules. Regenerate emitted Perl parsers and rebuild Rust/Dart/Julia
+apps/runtime. Lua independently assesses its guards;
+empty/null versus zero/false/String0 domains
 and broader Perl FlowExpr/host-slot qualifications remain unchanged.
 
 ### `join_values(delim, arr)`
