@@ -1,0 +1,141 @@
+[
+  {
+    "id": "copy_forms",
+    "body": "order=\"\";left={undef}.copy().has_key({order=cat(order,\"A\");\"k\"});right=copy({undef}).has_key({order=cat(order,\"B\");\"k\"});free=has_key(copy({undef}),{order=cat(order,\"C\");\"k\"});rejected=has_key({},\"k\").take(1).has_key({order=cat(order,\"D\");\"k\"});return([left,right,free,rejected,order])",
+    "source": "Top:: I {order=\"\";left={undef}.copy().has_key({order=cat(order,\"A\");\"k\"});right=copy({undef}).has_key({order=cat(order,\"B\");\"k\"});free=has_key(copy({undef}),{order=cat(order,\"C\");\"k\"});rejected=has_key({},\"k\").take(1).has_key({order=cat(order,\"D\");\"k\"});return([left,right,free,rejected,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      0,
+      0,
+      null,
+      "ABC"
+    ]
+  },
+  {
+    "id": "null_source_key_snapshot",
+    "body": "source=undef;order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().has_key({calls=num_add(calls,1);order=cat(order,\"K\");source={\"k\":1};\"k\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])",
+    "source": "Top:: I {source=undef;order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().has_key({calls=num_add(calls,1);order=cat(order,\"K\");source={\"k\":1};\"k\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "0!",
+      "SKC",
+      1,
+      {
+        "k": 1
+      }
+    ]
+  },
+  {
+    "id": "repeated_copy",
+    "body": "order=\"\";out={undef}.copy().copy().has_key({order=cat(order,\"K\");\"k\"});return([out,order])",
+    "source": "Top:: I {order=\"\";out={undef}.copy().copy().has_key({order=cat(order,\"K\");\"k\"});return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "K"
+    ]
+  },
+  {
+    "id": "valid_null_with_copy",
+    "body": "order=\"\";out=has_key({},\"k\").with(){order=cat(order,\"S\");return(undef)}.copy().has_key({order=cat(order,\"K\");\"k\"});return([out,order])",
+    "source": "Top:: I {order=\"\";out=has_key({},\"k\").with(){order=cat(order,\"S\");return(undef)}.copy().has_key({order=cat(order,\"K\");\"k\"});return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "SK"
+    ]
+  },
+  {
+    "id": "valid_null_numeric_copy",
+    "body": "order=\"\";out=has_key({},\"k\").add(\"bad\").copy().has_key({order=cat(order,\"K\");\"k\"});return([out,order])",
+    "source": "Top:: I {order=\"\";out=has_key({},\"k\").add(\"bad\").copy().has_key({order=cat(order,\"K\");\"k\"});return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      0,
+      "K"
+    ]
+  },
+  {
+    "id": "copied_wrong_kinds",
+    "body": "order=\"\";a=false.copy().has_key({order=cat(order,\"A\");\"k\"});b=0.copy().has_key({order=cat(order,\"B\");\"k\"});c=\"\".copy().has_key({order=cat(order,\"C\");\"k\"});return([a,b,c,order])",
+    "source": "Top:: I {order=\"\";a=false.copy().has_key({order=cat(order,\"A\");\"k\"});b=0.copy().has_key({order=cat(order,\"B\");\"k\"});c=\"\".copy().has_key({order=cat(order,\"C\");\"k\"});return([a,b,c,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "rejected_copy",
+    "body": "order=\"\";out=has_key({},\"k\").take({order=cat(order,\"A\");1}).copy().has_key({order=cat(order,\"K\");\"k\"}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Top:: I {order=\"\";out=has_key({},\"k\").take({order=cat(order,\"A\");1}).copy().has_key({order=cat(order,\"K\");\"k\"}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_key_error",
+    "body": "return({undef}.copy().has_key({items=\"text\";push(items,\"x\")}))",
+    "source": "Top:: I {return({undef}.copy().has_key({items=\"text\";push(items,\"x\")}))}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": null,
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "hash_source_key_snapshot",
+    "body": "source={\"k\":false};order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().has_key({calls=num_add(calls,1);order=cat(order,\"K\");source={};\"k\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])",
+    "source": "Top:: I {source={\"k\":false};order=\"\";calls=0;out={order=cat(order,\"S\");source}.copy().has_key({calls=num_add(calls,1);order=cat(order,\"K\");source={};\"k\"}).cat({order=cat(order,\"C\");\"!\"});return([out,order,calls,source])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "1!",
+      "SKC",
+      1,
+      {}
+    ]
+  },
+  {
+    "id": "present_null_copy",
+    "body": "return([{\"k\":undef}.copy().has_key(\"k\"),{}.copy().has_key(\"k\")])",
+    "source": "Top:: I {return([{\"k\":undef}.copy().has_key(\"k\"),{}.copy().has_key(\"k\")])}",
+    "rule": "Top",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      1,
+      0
+    ]
+  }
+]

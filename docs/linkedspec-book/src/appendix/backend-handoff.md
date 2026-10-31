@@ -3242,6 +3242,8 @@ Rust/Dart/Julia/Lua native/restored/plan/null-source/nearest checks pass, plus f
 Julia/Lua modules, strict numeric identity/Julia depwarn and selected Rust/Dart
 format-analysis. Lua uses installed PUC5.5.1/LuaJIT with no new interpreter chunk
 locals. Declared5.4, full source/key domains and portable admission remain separate.
-The Dart fluent copied-null presence gap is owned after that baseline: it currently
-skips the key unlike equivalent free-copy sources. Its repair must keep rejected
-container consumers from running later key effects.
+Independent copied-null assessment now finds the same key/error suppression on
+Rust/Dart/Julia/installed Lua. Perl handles legitimate copied null but can lose
+rejection through copy and run a later presence key/with body. The scheduled
+reference repair preserves rejection first, followed by separate peer nullable
+presence repairs. These existing-authority fixes precede the next method selection.
