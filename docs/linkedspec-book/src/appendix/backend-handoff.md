@@ -3407,3 +3407,11 @@ consumers still exit before later effects. Unchanged11/nearest contains-presence
 copy-null-with46/owned formatting pass; rebuild Rust apps/runtime. Separate Dart/
 Julia/safe Lua nullable membership repairs remain before unrelated selection;
 general isolation/full admission stays open.
+
+
+Dart71.6.3 restores copied-null contains through common/scalar guards on native/
+restoredSpec/plan, including needed needle errors; earlier incompatible consumers
+still exit before later effects. Unchanged11/nearest contains-presence-copy44/fatal
+analysis/new-normal and verbatim changed-member formatting pass. Rebuild Dart
+apps/runtime. Julia/safe Lua nullable membership repairs remain before unrelated
+selection; whole-SDK formatting/general isolation/full admission stays separate.

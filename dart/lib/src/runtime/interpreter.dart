@@ -6386,7 +6386,6 @@ final class LinkedSpecRuntimeEngine {
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
-    var firstCall = true;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
@@ -6395,10 +6394,9 @@ final class LinkedSpecRuntimeEngine {
           value == null &&
           helper == 'has_key' &&
           _isOrdinaryHasKeyResultChain(null, [call]);
-      // Leading nullable membership keeps its existing needle effects.
-      // Later container consumers retain their strict kind guards.
+      // Copy preserves legitimate null; earlier rejection has already
+      // returned before this canonical membership consumer.
       final nullableMembership =
-          firstCall &&
           value == null &&
           helper == 'contains' &&
           _isOrdinaryContainsResultChain(null, [call]);
@@ -6420,6 +6418,7 @@ final class LinkedSpecRuntimeEngine {
       // accept every value kind.
       if (scalarResult &&
           !nullablePresence &&
+          !nullableMembership &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
           (_arrayOnlyReceiverHelpers.contains(helper) ||
@@ -6474,7 +6473,6 @@ final class LinkedSpecRuntimeEngine {
           ((scalarResult || mayProduceScalar) &&
               value is! List &&
               value is! Map);
-      firstCall = false;
     }
     return value;
   }
