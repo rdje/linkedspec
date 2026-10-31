@@ -39,3 +39,5 @@ Julia71.4 now preserves contains source/prefix guards through common kind dispat
 Safe Lua71.5 now preserves contains source/prefix guards and leading null/with effects in the existing namespace. Both installed hosts pass141/nearest/loadfile/version checks; mechanism/limits: [[lua-contains-source-guards]]. All primary71 outcomes are recorded; mandatory P1 copy71.6.0 independently reassesses every backend before any unrelated selection.
 
 Current mandatory follow-up: [[copied-null-contains-composition]]. Independent assessment71.6.0 freezes11 controls; reference rejection71.6.1 then separate peer nullable-membership repairs precede unrelated selection. Earlier copy observations above remain historical.
+
+Canonical membership/copy rejection is retained by bounded Perl71.6.1: [[perl-copied-null-contains-rejection]]. Peer nullable membership remains independently owned.

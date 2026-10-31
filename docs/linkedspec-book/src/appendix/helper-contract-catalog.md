@@ -1063,12 +1063,24 @@ Copied-null composition has a bounded known gap on Rust/Dart/Julia/installed Lua
 `{undef}.copy().contains(needle)` currently skips the needle and returns null,
 while `copy({undef}).contains(needle)` and free `contains` evaluate it and return
 numeric0. Repeated copies and copied valid null results also suppress needed
-needle effects/errors. Perl handles those legitimate nulls but can lose rejection
-through copy: `contains(["a"],"z").take(1).copy().contains(needle).with(){...}`
-can run the needle/body after the rejected `take`. Separate reference and peer
-repairs are scheduled before unrelated feature selection. The target preserves
-legitimate-null membership and rejection as distinct states; equality, numeric
-flags, null/empty distinction, copy depth, snapshots and full admission rights stay.
+needle effects/errors. Those peer repairs remain scheduled. Perl ordinary
+canonical membership/copy chains now retain rejection with and without `with`:
+
+```text
+order="";
+out=contains(["a"],"z").take({order=cat(order,"A");1}).copy()
+  .contains({order=cat(order,"N");"a"})
+  .with(){order=cat(order,"W");return("ran")};
+# out=undef, order=""; rejected take/needle/body effects stay skipped
+
+order="";
+out=contains(["a"],"z").add("bad").copy()
+  .contains({order=cat(order,"N");"a"});
+# out=0, order="N"; legitimate copied null still evaluates its needle
+```
+
+Regenerate emitted Perl parsers. Equality, numeric flags, null/empty distinction,
+copy depth and snapshots stay; full source/context/portable admission remains open.
 
 ### `index_of(arr, needle)`
 - **Signature**: `index_of(arr: array, needle: scalar)`

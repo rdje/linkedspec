@@ -3391,3 +3391,11 @@ The shared11 controls preserve numeric membership, source snapshots, copy depth
 and healthy rejected peer chains. Actual consumed Cargo source custody is bound
 on the initial run; generic route-template captions retain their presence origin.
 These bounded repairs precede unrelated selection; full admission remains separate.
+
+
+Perl71.6.1 now retains canonical contains/copy rejection before later needles and
+with bodies, including no-with chains. Legitimate copied-null needle effects and
+required errors stay. Unchanged11/nearest contains-presence-copy60/source18/syntax
+and three input-bound public lowerings pass; regenerate emitted Perl parsers.
+Independent Rust71.6.2 then Dart/Julia/safe Lua nullable membership repairs remain
+before unrelated selection; general isolation/full admission stays separate.

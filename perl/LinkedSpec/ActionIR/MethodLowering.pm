@@ -5477,16 +5477,27 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Keep ordinary presence/copy steps in one emitted chain so its rejection
-  # state survives copy. Logical producer folding keeps its existing route.
-  my $presence_copy_chain = $ordinary_has_key_result_chain
+  # Canonical membership prefixes retain source/needle effects and snapshots,
+  # then dispatch every continuation using the actual result kind.
+  my $ordinary_contains_result_chain = (_ordinary_free_contains_result_source($receiver)
+    || (($calls->[0]{method} // '') eq 'contains'
+     && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'contains'
+     && ref($calls->[0]{args}) eq 'ARRAY' && @{$calls->[0]{args}} == 1
+     && !(grep { ref($_) ne 'HASH'
+       || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Keep ordinary presence/membership copy steps in one emitted chain so
+  # rejection survives copy. Logical producer folding keeps its existing route.
+  my $guarded_copy_chain = ($ordinary_has_key_result_chain || $ordinary_contains_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
    && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 
   # Logical and copy receivers consume generic typed values. Fold prefixes
   # into the same typed function producers so primitive kinds, source snapshots
   # and actual-result continuations do not depend on a guessed receiver family.
-  if (!$presence_copy_chain
+  if (!$guarded_copy_chain
       && (grep { ($_->{method} // '') =~ /\A(?:and|or|not|copy)\z/ } @$calls)) {
    my $value_node = $receiver;
    my @prefix_calls;
@@ -5652,17 +5663,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
      && !(grep { ref($_) ne 'HASH'
        || (!(($calls->[0]{method} // '') eq 'matches' && ($_->{kind} // '') eq 'regex')
         && ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o) } @{$calls->[0]{args}})))
-   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
-   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
-     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Canonical membership prefixes retain source/needle effects and snapshots,
-  # then dispatch every continuation using the actual result kind.
-  my $ordinary_contains_result_chain = (_ordinary_free_contains_result_source($receiver)
-    || (($calls->[0]{method} // '') eq 'contains'
-     && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'contains'
-     && ref($calls->[0]{args}) eq 'ARRAY' && @{$calls->[0]{args}} == 1
-     && !(grep { ref($_) ne 'HASH'
-       || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})))
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
@@ -5866,14 +5866,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
      # A legitimate null presence source still evaluates its key. A retained
      # presence/copy chain carries a separate flag for earlier rejection.
      if ($ordinary_has_key_result_chain && $method eq 'has_key'
-         && ($presence_copy_chain
+         && ($guarded_copy_chain
              || ($call == $calls->[0] && !_ordinary_free_has_key_result_source($receiver)))) {
       $kind_matches = "(!defined($value_expr) || $kind_matches)";
      }
-     # Leading nullable membership still evaluates the needle and returns 0.
-     # Later consumers retain strict Array guards and any earlier rejection.
+     # A legitimate null membership source still evaluates its needle. A
+     # retained copy chain carries separate state for an earlier rejection.
      if ($ordinary_contains_result_chain && $method eq 'contains'
-         && $call == $calls->[0] && !_ordinary_free_contains_result_source($receiver)) {
+         && ($guarded_copy_chain
+             || ($call == $calls->[0] && !_ordinary_free_contains_result_source($receiver)))) {
       $kind_matches = "(!defined($value_expr) || $kind_matches)";
      }
      $expression = "$kind_matches ? ($expression) : $rejected";
@@ -6099,7 +6100,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $current_family = $logical_receiver ? 'scalar_result' : 'default_result';
    # A rejected consumer must not become an ordinary null input to a later
    # immediate with. Keep valid null selections and empty containers distinct.
-   my $rejection_flag = ($guarded_result_with_chain || $presence_copy_chain)
+   my $rejection_flag = ($guarded_result_with_chain || $guarded_copy_chain)
     ? '$__ls_free_default_rejected' : undef;
    my @guarded_steps;
    if (defined($rejection_flag)) {
