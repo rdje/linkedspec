@@ -3262,3 +3262,12 @@ chunk locals. Both installed PUC5.5.1/LuaJIT pass55 strict JSON-kind checks on f
 routes, nearest presence116/copy four programs/twelve route observations/loadfile and
 version checks; rebuild Lua apps/runtime. All bounded69/69.6 outcomes are recorded.
 Declared5.4, general isolation and full admission remain open.
+
+
+String-predicate source/prefix guards70 are frozen separately from existing scalar
+result handoff. Public Perl free calls/with normalization/receiver bridge readiness
+have bounded gaps; compatible values, source-operand SOC snapshots and producer
+domains remain healthy. Independent all-backend producer controls retain numeric
+text flags and Perl numeric versus native Boolean matches, strict arithmetic/null/
+empty/i behavior. Each backend independently baselines guards before implementation;
+no producer/regex-domain/context/schema or complete portable admission is implied.

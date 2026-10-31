@@ -478,7 +478,7 @@ or null values still enter `with`. Regenerate emitted Perl and rebuild Rust/Dart
 
 ### `matches(s, /pattern/)`
 - **Signature**: `matches(value: scalar, pattern: regex)`
-- **Returns**: boolean
+- **Returns**: predicate flag; Perl retains numeric `1`/`0`, while the checked native peers retain Boolean results.
 - **Behavior**: Returns true if the value matches the regex pattern. The pattern is a literal `/regex/` — no variable interpolation. Perl/Rust/Dart/Julia/Lua now support `"abc".matches(/^a/).cat("!")` → `"1!"`, and `"abc".matches(/^z/).coalesce_nonempty("late").cat("!")` → `"0!"`. `"abc".matches(/^a/).cat(",x").split(",").last().uppercase()` → `"X"`; the split explicitly produces an Array. `.matches(/^a/).sorted()` returns undef. One pattern is required before effects; regex/producer policies stay unchanged. Lua checks use PUC5.5.1/LuaJIT; declared5.4/full regex admission remain separate. Dart retains literal i/m/s and processes suffix x before its existing bridge: `matches("ab",/^ a b $/x)` is true, while `/^ a b $/` misses; `matches("a b",/^ a [ ] b $/x)` is true because class spaces remain literal. Extended mode ignores ASCII whitespace and # line comments outside classes; escaped spaces/hash remain literal. `g/o` remain no-ops; unknown suffixes and invalid compiled patterns return false, so `"abc".matches(/a**/).cat("!")` is `"0!"`. Complete grouped dotted action regexes such as /(?s)^a.b$/ retain their literal boundaries; `matches("abc",/(/)` and its receiver form return false because the helper receives the invalid pattern. Symbolic `/(8,2)` remains numeric division and returns4. Inline x and broad scoped-mode semantics are not admitted. Broader grouped-brace action scanning/validation remains a tracked limitation. Rust now retains literal `i/m/s/x` modes in compiled action regex patterns; `g/o` remain no-ops and unknown flags fail closed. Regenerate older compiled/emitted Rust artifacts from source to pick up modes that the previous parser discarded; Rust retains its contextual pattern-string representation and existing serialized fields.
 - **Regex flags**: `i`, `m`, `s`, and `x` affect compilation. Operation-only `g` and Perl compile-once `o` are
   accepted compile-time no-ops. Unknown flags or invalid patterns return false.
@@ -487,21 +487,35 @@ or null values still enter `with`. Regenerate emitted Perl and rebuild Rust/Dart
 
 ### `starts_with(s, prefix)`
 - **Signature**: `starts_with(value: scalar, prefix: scalar)`
-- **Returns**: boolean
-- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text. Perl/Rust/Dart/Julia/Lua support `"abc".starts_with("a").cat("!")` → `"1!"` and the equivalent nested form. These predicate results feed compatible scalar/text methods, retaining false and source/operand/result snapshots; one operand is required before effects. Other backends/full admission remain separate.
+- **Returns**: numeric flag `1` or `0` on the checked backends.
+- **Behavior**: Returns true if the value starts with the exact prefix string. Undefined value or prefix returns false; an empty prefix matches every defined value, including empty text. Perl/Rust/Dart/Julia/Lua support `"abc".starts_with("a").cat("!")` → `"1!"` and the equivalent nested form. These predicate results feed compatible scalar/text methods, retaining false and source/operand/result snapshots; one operand is required before effects. Complete domain/context/portable admission remains separate.
 - **Example**: over `/(\S+)/`, `starts_with(entry_group(0), "foo")` on `foobar` → `[1]`.
 
 ### `ends_with(s, suffix)`
 - **Signature**: `ends_with(value: scalar, suffix: scalar)`
-- **Returns**: boolean
+- **Returns**: numeric flag `1` or `0` on the checked backends.
 - **Behavior**: Returns true if the value ends with the exact suffix string. Undefined value or suffix returns false; an empty suffix matches every defined value, including empty text. On Perl/Rust/Dart/Julia/Lua, `"abc".ends_with("c").cat("!")` → `"1!"` and `"abc".ends_with("z").cat("!")` → `"0!"`; this predicate family also has targeted selected/pipeline/function/default String coverage.
 - **Example**: over `/(\S+)/`, `ends_with(entry_group(0), "bar")` on `foobar` → `[1]`.
 
 ### `contains_substr(s, needle)`
 - **Signature**: `contains_substr(value: scalar, needle: scalar)`
-- **Returns**: boolean
+- **Returns**: numeric flag `1` or `0` on the checked backends.
 - **Behavior**: Returns true if the value contains the needle as a substring. Undefined value or needle returns false; an empty needle matches every defined value, including empty text. On Perl/Rust/Dart/Julia/Lua, `"abc".contains_substr("b").cat("!")` → `"1!"` and `"abc".contains_substr("z").coalesce_nonempty("late").cat("!")` → `"0!"`: false remains present data. The source is captured before its operand, and the predicate before later consumer operands, so their mutations do not recompute the result.
 - **Example**: over `/(\S+)/`, `contains_substr(entry_group(0), "oob")` on `foobar` → `[1]`.
+
+The predicate kinds above matter for numeric continuations. A false text predicate
+such as `starts_with("abc","z").copy().add(1)` yields `1`. A false regex result
+such as `matches("abc",/^z/).copy().add(1)` yields `1` on Perl and null on the native
+peers, whose Boolean result is outside the strict numeric domain. Compatible
+`cat("!")` renders false flags as `"0!"` on all checked backends.
+
+A bounded Perl source-guard gap remains: `starts_with("abc","z").take(1)` can yield
+an empty Array, incompatible Hash consumers can run their operands, and rejected
+prefixes can still enter a later `with`. A receiver `cat`/`split` bridge followed
+by an incompatible Hash consumer can remain unready; the corresponding free bridge
+already works. Feature70 owns these guards. Source/operand SOC snapshots, numeric/
+Boolean flags, text/null/empty and regex policies stay; native peer guard behavior
+is assessed independently. Existing returned-value examples above remain valid.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`
