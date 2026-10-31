@@ -3,7 +3,7 @@
 > **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.
 > Source of truth = YAML front-matter in: `docs/knowledge docs/decisions`. Edit the fact files, never this map.
 > A fact is any `.md` whose front-matter has a non-empty `answers:` list.
-> **1548** facts · **11497** question keys.
+> **1549** facts · **11501** question keys.
 
 ## Questions → fact
 
@@ -2111,6 +2111,8 @@
 - "does Lua call an unrelated named rule normally inside an action edge" -> [lua-action-edge-child-call-reuse](docs/knowledge/lua-action-edge-child-call-reuse.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh`
 - "does Lua call child reuse the current action edge result" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
 - "does Lua call core proof filter staged and generated semantic records" -> [lua-package-completion-semantic-foundation-reading](docs/knowledge/lua-package-completion-semantic-foundation-reading.md) · 2026-09-13 · reverify: `Run LUA_SEMANTIC_FOUNDATION_READING_44 and the managed commands below. Package selection retains only seven final groups; query selection stops at line 154 and tests only its SHA helper. All earlier native-error exclusions remain.`
+- "does Lua canonical set already support direct bracket reads" -> [lua-canonical-set-result-guards](docs/knowledge/lua-canonical-set-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-canonical-set-result-guards)
+- "does Lua canonical set composition add interpreter chunk locals" -> [lua-canonical-set-result-guards](docs/knowledge/lua-canonical-set-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-canonical-set-result-guards)
 - "does Lua capture_from_rule_start match capture_slice" -> [lua-typed-source-compatibility-alias-gap](docs/knowledge/lua-typed-source-compatibility-alias-gap.md) · 2026-08-07 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/source_boundary_compatibility_aliases_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/source_boundary_compatibility_aliases_test.lua && perl tools/check_language_capability_coverage.pl`
 - "does Lua capture_len_from_rule_start match capture_slice_len" -> [lua-typed-source-compatibility-alias-gap](docs/knowledge/lua-typed-source-compatibility-alias-gap.md) · 2026-08-07 · reverify: `bash tools/run_lua_project_data.sh puc lua/test/source_boundary_compatibility_aliases_test.lua && bash tools/run_lua_project_data.sh luajit lua/test/source_boundary_compatibility_aliases_test.lua && perl tools/check_language_capability_coverage.pl`
 - "does Lua capture_rest support direct coalesce and String methods" -> [capture-boundary-text-lua-compatibility](docs/knowledge/capture-boundary-text-lua-compatibility.md) · 2026-10-30 · reverify: [2 entries](#capture-boundary-text-lua-compatibility)
@@ -2378,6 +2380,7 @@
 - "does Lua runtime_parse reject a false options table" -> [lua-interpreter-json-reading-and-option-table-gap](docs/knowledge/lua-interpreter-json-reading-and-option-table-gap.md) · 2026-09-12 · reverify: [8 entries](#lua-interpreter-json-reading-and-option-table-gap)
 - "does Lua selected null action preserve matched status" -> [lua-sparse-and-independent-intake](docs/knowledge/lua-sparse-and-independent-intake.md) · 2026-10-29 · reverify: `Recover retained probes; bash tools/run_lua_project_data.sh puc lua/test/sparse_and_structural_sequence_test.lua and the same luajit route. Full intake producers/reader require both SDK and separate fresh process completion before --fresh.`
 - "does Lua selected pushed Bool take already skip operands" -> [lua-push-snapshot-result-guards](docs/knowledge/lua-push-snapshot-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-push-snapshot-result-guards)
+- "does Lua selected set Bool already skip incompatible operands" -> [lua-canonical-set-result-guards](docs/knowledge/lua-canonical-set-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-canonical-set-result-guards)
 - "does Lua selected-call guard repair add interpreter chunk locals" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
 - "does Lua semantic admission run a fresh emitted child and all twenty query hashes" -> [lua-semantic-admission-source-alias-consumer-reading](docs/knowledge/lua-semantic-admission-source-alias-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_SEMANTIC_ALIAS_READING_47 and the managed commands below. The staged selection copies only complete helpers 1-222; no later staged behavior or full 890 count is claimed. Existing PUC nil-error failures and .2.34 fixture coverage remain open.`
 - "does Lua semantic construction execute target code" -> [lua-semantic-compilation-foundation](docs/knowledge/lua-semantic-compilation-foundation.md) · 2026-07-25 · reverify: `LINKEDSPEC_LUA_TEST_RUNTIME=lua lua lua/test/semantic_index_compilation_foundation_test.lua; LINKEDSPEC_LUA_TEST_RUNTIME=luajit luajit lua/test/semantic_index_compilation_foundation_test.lua; bash tools/run_lua_local.sh; bash tools/run_python_project_data.sh tools/check_semantic_introspection_contract.py`
@@ -9053,6 +9056,7 @@
 - "which Lua observation and root public closeout statements still need qualification" -> [lua-recursive-repeated-root-consumer-reading](docs/knowledge/lua-recursive-repeated-root-consumer-reading.md) · 2026-09-13 · reverify: `Run LUA_RECURSIVE_REPEATED_ROOT_READING_35 and the managed commands below; root-core proof is limited to source lines 1-134.`
 - "which Lua offsets 40 through 98 fail" -> [lua-advanced-corpus-residual-split](docs/knowledge/lua-advanced-corpus-residual-split.md) · 2026-07-15 · reverify: `bash tools/run_lua_local.sh && rg -n 'dispatch_edge_child|elseif name == \"call\"|HASH_SPLICE_HELPERS|kind == \"fluent_chain\"|runtime_parse' lua/src/linkedspec/interpreter.lua`
 - "which Lua owner classifies selected entry_slot fields" -> [lua-gap-slot-record-selection-guard](docs/knowledge/lua-gap-slot-record-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-slot-record-selection-guard)
+- "which Lua owner guards canonical set result methods" -> [lua-canonical-set-result-guards](docs/knowledge/lua-canonical-set-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-canonical-set-result-guards)
 - "which Lua owner guards explicit push snapshot methods" -> [lua-push-snapshot-result-guards](docs/knowledge/lua-push-snapshot-result-guards.md) · 2026-10-31 · reverify: [2 entries](#lua-push-snapshot-result-guards)
 - "which Lua owner guards gap_kind result methods" -> [lua-gap-string-result-guards](docs/knowledge/lua-gap-string-result-guards.md) · 2026-10-30 · reverify: [2 entries](#lua-gap-string-result-guards)
 - "which Lua owner guards static rule-call result selections" -> [lua-rule-call-selection-guard](docs/knowledge/lua-rule-call-selection-guard.md) · 2026-10-30 · reverify: [2 entries](#lua-rule-call-selection-guard)
@@ -16106,6 +16110,14 @@ _Lua callable-codeblock parity has four dependency-ordered implementation seams_
 - **evidence:** `FUTURE-PARITY-BACKLOG.11.8.0 runs identical typed ActionIR/runtime probes on PUC Lua and LuaJIT, retrieves the neutral contract and four completed backend consumers, maps every Lua owner, and freezes one focused consumer plus .11.8.1-.4 construction/invocation/route/admission boundaries without production behavior changes.`
 - **reverify:** `bash tools/run_python_project_data.sh tools/check_callable_codeblock_contract.py && bash tools/run_lua_local.sh && rg -n 'codeblock_literal|codeblock_argument|runtime_scoped_binding|value_access|keyword_argument|active_codeblocks|callable_codeblock\.execute' lua/src/linkedspec lua/test tools`
 - **source:** [`docs/knowledge/lua-callable-codeblock-typed-audit.md`](docs/knowledge/lua-callable-codeblock-typed-audit.md)
+
+### lua-canonical-set-result-guards
+_Safe Lua canonical set results use existing actual-kind source guards_
+- **answers:** which Lua owner guards canonical set result methods | does Lua canonical set already support direct bracket reads | does Lua selected set Bool already skip incompatible operands | does Lua canonical set composition add interpreter chunk locals
+- **date:** 2026-10-31 · **status:** installed PUC5.5.1/LuaJIT59.5 targeted-checked; full admission separate
+- **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.3.59.5; set-result-lua-intake.json.gz retains actual producers/inputs/same61 checks53PASS8RED to61PASS and push65/loadfile/version per host;53 includes two compile scaffolds.`
+- **reverify:** `bash tools/run_lua_project_data.sh puc lua/test/set_result_composition_test.lua` · `bash tools/run_lua_project_data.sh luajit lua/test/set_result_composition_test.lua`
+- **source:** [`docs/knowledge/lua-canonical-set-result-guards.md`](docs/knowledge/lua-canonical-set-result-guards.md)
 
 ### lua-capture-cursor-runtime-audit
 _Lua capture and cursor parity is six runtime mechanisms plus one documented-mark inventory gap_

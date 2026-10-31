@@ -1,7 +1,7 @@
 # Canonical set stored-result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.20; family23.3.59.
-Status: Bounded Perl59.1/Rust59.2/default59.6/Dart59.3/Julia59.4 targeted-checked; safe Lua/full admission pending.
+Status: Recorded bounded59 implementations are targeted-checked on named routes/hosts; full domain/context/portable admission remains23.4.
 
 Uniform binding already defines set(name,value) as assignment yielding the stored
 typed value. Preserve ordinary assignment copy/alias semantics; this is not a
@@ -112,3 +112,19 @@ host literal syntax setup ran no tests; original source/hash and transport-only
 correction retained, no setup RED credit. Actual producers/inputs/results in
 set-result-julia-intake.json.gz. Rebuild apps/runtime; safe Lua59.5 next, free-source
 selection21 after59.5/full admission separate; no isolated package/domain promotion.
+
+## Safe installed Lua59.5 canonical source guards
+
+Same61 checks53PASS/8RED to61PASS per PUC5.5.1/LuaJIT2.1.1788460057;53 includes
+two compile scaffolds. Direct Array/selected String Hash consumers now null/skip
+KV. Selected Bool/full12/read/order/functions/with/codeblock/errors/alias already
+healthy. Eleven values/error/eight public source shapes retain four routes; nine
+healthy values/all errors/shapes exact. One pure canonical typed source predicate
+in existing namespace feeds two original guards, three-line runner block; no new
+chunk locals or setter/default/push/copy/alias/function/arity/parser/schema change.
+Nearest push65/loadfile/version pass per host, focused stderr empty. Initial
+activation assertion rejected prepared normal before activation writes; guarded
+resume, no runtime execution or RED credit. Actual producers/inputs/results in
+set-result-lua-intake.json.gz. Rebuild runtime/apps. Bounded59 outcomes recorded;
+owned P2 free-source selection21 next, no declared5.4/unsafe runner/formatter/
+isolated package/peer wider default-domain/full admission claim.

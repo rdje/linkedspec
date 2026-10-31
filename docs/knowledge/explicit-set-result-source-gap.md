@@ -36,3 +36,5 @@ Independent bounded Rust59.2: [[rust-canonical-set-result-guards]]. The separate
 Independent bounded Dart59.3: [[dart-canonical-set-result-guards]]. Current family status belongs to set-result-composition.md; no peer or wider default-domain claim follows.
 
 Independent bounded Julia59.4: [[julia-canonical-set-result-guards]]. Current family status belongs to set-result-composition.md; no peer or wider default-domain claim follows.
+
+Independent installed Lua59.5: [[lua-canonical-set-result-guards]]. Current family status belongs to set-result-composition.md; bounded59 outcomes recorded, free-source selection21 next/full admission separate.

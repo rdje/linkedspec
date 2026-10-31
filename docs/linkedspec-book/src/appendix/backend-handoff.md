@@ -3078,7 +3078,9 @@ canonical set sources on native/restoredSpec/plan, preserving already-working
 Bool/full target/order/scope/codeblock/error/alias behavior; rebuild runtime/apps.
 Julia now also guards canonical set sources on native/restoredSpec/plan/fresh
 Module, preserving already-working Bool/full target/order/scope/codeblock/error/
-alias behavior; rebuild runtime/apps. Safe installed Lua59.5 is next; its
-assessment remains independent.
+alias behavior; rebuild runtime/apps. Installed PUC Lua5.5.1/LuaJIT now also
+guard these results on native/restoredSpec/plan/fresh module, with no new
+interpreter chunk locals. Rebuild runtime/apps. Bounded59 outcomes are recorded;
+owned free-source selection21 follows, with declared5.4/full admission separate.
 Ordinary assignment copy/alias rules, operators/grouping/aliases/deferred/schema
 authority and full admission remain separate.

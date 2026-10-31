@@ -3536,6 +3536,30 @@ function typed_source.receiver_mutation.is_explicit_push_result_source(engine, e
     kind == "assign_nested_access" or kind == "codeblock_literal"
 end
 
+-- Canonical assignment results retain the existing actual-kind guards.
+function typed_source.receiver_mutation.is_canonical_set_result_source(expr)
+  if expr == nil or expr.kind ~= "call" or expr.name ~= "set" or
+    (expr.source_method or expr.name) ~= "set" or expr.trailing_block_arg then
+    return false
+  end
+  local args = expr.args or {}
+  if #args ~= 2 or args[1].argument_kind ~= "positional" or args[2].argument_kind ~= "positional" then
+    return false
+  end
+  local target = argument_expr(args[1])
+  if target == nil or target.kind ~= "variable" or target.source ~= target.name then
+    return false
+  end
+  local value = argument_expr(args[2])
+  local kind = value and value.kind
+  return kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+    kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+    kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+    kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+    kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+    kind == "assign_nested_access" or kind == "codeblock_literal"
+end
+
 function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
   if expr == nil or expr.kind ~= "value_access" then return false end
   local receiver = expr.receiver
@@ -3545,6 +3569,9 @@ function typed_source.receiver_mutation.is_ordinary_computed_read(engine, expr)
     local name = action_contracts.canonical_action_helper_name(receiver.name)
     if name == "push" then
       return typed_source.receiver_mutation.is_explicit_push_result_source(engine, receiver)
+    end
+    if name == "set" then
+      return typed_source.receiver_mutation.is_canonical_set_result_source(receiver)
     end
     if name == "entry_slot" or name == "gap_span" or name == "gap_text" or name == "gap_kind" or
       name == "rewind_entry_start" or name == "rewind_match_start" then
@@ -3600,6 +3627,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
   local reduction_result = false
   local kind_guarded_result = typed_source.receiver_mutation.is_ordinary_computed_read(engine, target_receiver) or
     typed_source.receiver_mutation.is_explicit_push_result_source(engine, target_receiver) or
+    typed_source.receiver_mutation.is_canonical_set_result_source(target_receiver) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or
