@@ -8,7 +8,7 @@ answers:
   - "which task owns definedness source and prefix guards"
   - "does the free definedness cat split bridge already retain guards"
 date: 2026-10-31
-status: bounded Perl67.1/Rust67.2/Dart67.3 targeted-checked; independent Julia67.4/safe Lua/full admission separate
+status: bounded Perl67.1/Rust67.2/Dart67.3/Julia67.4 targeted-checked; safe Lua/full admission separate
 tags: [definedness, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.28; definedness-guard-selection-intake.json.gz retains original21/calibrated21/public observer/all inputs; compatibility calibration28.0 retained separately."
 reverify: "Recover original source/public observer/shared21 from retained intake into new project-local outputs. Historical activation/run/freeze writers one-shot never replay. Owners67.1-.5 independently baseline, peers select expected_nonperl where present."
@@ -23,3 +23,5 @@ Current Perl implementation: Perl67.1 repairs definedness source/ordinary prefix
 Independent Rust Bool/source guard proof: [[rust-definedness-result-source-guards]].
 
 Independent Dart receiver Array-bridge repair and healthy Bool/domain controls: [[dart-definedness-result-source-guards]].
+
+Independent Julia receiver Array-bridge repair/strict Bool/four-route proof: [[julia-definedness-result-source-guards]].

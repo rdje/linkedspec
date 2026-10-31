@@ -6295,6 +6295,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_string_receiver_prefix(chain.calls) ||
         _runtime_is_ordinary_numeric_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_lexical_result_chain(chain.receiver, chain.calls) ||
+        _runtime_is_ordinary_definedness_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
@@ -6576,6 +6577,34 @@ function _runtime_is_ordinary_lexical_result_chain(receiver, calls)
     valid_arity = first_call.method in ("str_eq", "str_ne", "str_gt", "str_ge", "str_lt", "str_le") &&
         length(first_call.args) == 1
     return valid_arity && ordinary_args(first_call.args)
+end
+
+# Definedness keeps its Bool producer, null-versus-defined domain and preflight.
+# Retain actual-kind guards after explicit Array bridges.
+function _runtime_is_ordinary_definedness_result_chain(receiver, calls)
+    isempty(calls) && return false
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg
+        valid_arity = receiver.name in ("is_defined", "is_undefined") &&
+            length(receiver.args) == 1
+        valid_arity && ordinary_args(receiver.args) && return true
+    end
+    first_call = first(calls)
+    something(first_call.source_method, first_call.method) == first_call.method || return false
+    return first_call.method in ("is_defined", "is_undefined") && isempty(first_call.args)
 end
 
 # Retained boxed constructors keep their original payload/pair/splice producer.

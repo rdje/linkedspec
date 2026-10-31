@@ -388,23 +388,24 @@ These are existing Perl compatibility controls; peer Boolean results keep their
 existing arithmetic rules. This does not establish a portable scalar-kind or
 host-cache rule.
 
-Perl, Rust and Dart retain actual-kind and rejection guards through canonical one-value free
+Perl, Rust, Dart and Julia retain actual-kind and rejection guards through canonical one-value free
 definedness calls and ordinary zero-operand predicate prefixes:
 
 ```text
 is_defined(undef).take(1)                         # undef
 undef.is_defined().take(1).with(){return("ran")}   # undef; body skipped
 undef.is_defined().cat("x").split(",").set_key("k",1).with(){return("ran")} # undef
-is_defined(undef).with(){return([value,value.copy()])} # Perl ["",""]; Rust/Dart [false,false]
+is_defined(undef).with(){return([value,value.copy()])} # Perl ["",""]; Rust/Dart/Julia [false,false]
 is_defined(undef).add("bad").with(){return("null")}   # "null"; body runs
 ```
 
 Incompatible consumer operands and later bodies stay skipped; source expressions
 still run once in order. Valid false/null/empty results enter `with`, and an Array
 returned by a valid body can continue with Array methods. Perl native/fresh paths
-have ready ActionIR metadata; Rust/Dart pass native/restored CompiledSpec/SpecFile/
-generated-plan controls with strict Bool/text/default/numeric profiles. Regenerate
-emitted Perl parsers and rebuild Rust/Dart apps/runtime. Other backends are assessed independently;
+have ready ActionIR metadata; Rust/Dart/Julia pass native/restored CompiledSpec/SpecFile/
+generated-plan controls, with a fresh emitted Module on Julia and strict
+Bool/text/default/numeric profiles. Regenerate emitted Perl parsers and rebuild
+Rust/Dart/Julia apps/runtime. Other backends are assessed independently;
 predicate domains, Perl numeric compatibility and peer Bool kinds remain unchanged.
 
 ### `trim(s)`
