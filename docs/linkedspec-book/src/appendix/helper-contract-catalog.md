@@ -316,16 +316,16 @@ Declared Lua5.4 and complete admission remain separate in the backend handoff.
 - **Edge cases**: Returns `undef` only if all arguments are undef or `""`. `coalesce_nonempty("", 0, "late")` → numeric `0`; `coalesce_nonempty(undef, false, "late")` → `false`. A selected numeric value retains its kind: `index=coalesce_nonempty(0,7)` remains numeric index zero for a later `values[index]` write.
 - **Examples**: over `/(\w+)/`, `coalesce_nonempty("", entry_group(0))` on `value` → `["value"]`. With `audit="unset"`, `"first".coalesce_nonempty({ audit="late"; "fallback" })` returns `"first"` without changing `audit` or evaluating later failures. `"".coalesce_nonempty(" fallback ").trim().uppercase()` → `"FALLBACK"`; helper and documented receiver forms on Perl/Rust preserve this lazy rule, and `"".coalesce_nonempty(undef, "")` returns undef. Ordinary Perl/Rust/Dart/Julia/Lua selected Array/named-Harray continuations are targeted-checked (Lua: available PUC5.5.1/LuaJIT; declared5.4/full admission open): `[].join_values(",").coalesce_nonempty(["a","b"]).join_values("-").uppercase()` gives `"A-B"`; with `meta={"b":"y","a":"x"}`, `"".coalesce_nonempty(meta).sorted_values().join_values(":").uppercase()` gives `"X:Y"`. A retained String followed by Array-only methods stays null; selection and consumer effects remain lazy/once-only. Direct Hash literal defaults and nested typed values are also preserved on Perl: `coalesce_nonempty("",{"items":[7,{"n":7}],"flag":false})` selects those fields unchanged. Later operands stay skipped after selection. These are bounded native/fresh checks; no portable aggregate-domain claim follows.
 
-On Rust, an ordinary receiver default also keeps a selected container's actual
+On Rust and Dart, an ordinary receiver default also keeps a selected container's actual
 kind before subsequent consumers. For example, with `items=["tail"]`,
 `items.coalesce(undef).set_key("k", 1)` returns null; with `meta={"k":"tail"}`,
 `meta.coalesce_nonempty(undef).take(1)` returns null. Incompatible operands and
 later `with` bodies stay skipped. Compatible Array and Hash methods still work,
 and required fallback blocks run once before consumers. Empty containers are
 values; `coalesce_nonempty` rejects empty Scalar text rather than testing container
-emptiness or truthiness. Rebuild Rust applications with the updated runtime.
+emptiness or truthiness. Rebuild Rust and Dart applications with the updated runtime.
 Direct free-helper selections preserve primitive kinds and compatible methods.
-On Perl and Rust, canonical ordinary calls with two-or-more positional operands guard
+On Perl, Rust and Dart, canonical ordinary calls with two-or-more positional operands guard
 incompatible consumers before their arguments or later `with` bodies run:
 
 ```text
@@ -339,7 +339,7 @@ Rejection differs from a valid null selection: `coalesce(undef,undef).with(){
 return("recovered")}` returns `"recovered"`. An empty Array produced by a compatible
 consumer also remains a valid `with` input. Source and needed defaults run once;
 unused runtime errors remain skipped. Regenerate affected emitted Perl parsers
-and rebuild Rust applications with the updated runtime. A completed-value bridge
+and rebuild Rust and Dart applications with the updated runtime. A completed-value bridge
 also works: `saved=coalesce(undef,"tail"); saved.coalesce(undef).set_key("k",1)`
 returns null.
 Published Scalar operand domains, qualified aggregate compatibility, legacy

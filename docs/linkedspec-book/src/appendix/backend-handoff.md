@@ -3095,6 +3095,8 @@ operands/later with bodies skip, while valid null/empty-container with inputs ru
 healthy kinds/laziness/order/snapshots/functions/errors stay. Regenerate emitted Perl.
 Rust now also guards these canonical free results on native/restored CompiledSpec/
 in-process plan, preserving valid null/empty with inputs, source order and unknown
-bound-call policies. Rebuild Rust apps/runtime. Dart60.3 is next, then independently
-assessed Julia/safe Lua. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
+bound-call policies. Rebuild Rust apps/runtime. Dart now also guards canonical free
+results on native/restoredSpec/plan and retains actual-kind guards after receiver
+defaults select containers. Valid null/empty with inputs, laziness/order/scope stay;
+rebuild Dart apps/runtime. Julia60.4 is next, then independently assessed safe Lua. Completed-value guarded receiver bridges work. Free signatures, qualified aggregate compatibility and full domain/
 context/portable admission remain separate.

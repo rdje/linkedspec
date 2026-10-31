@@ -28,3 +28,5 @@ healthy values/all errors/shapes exact. Completed read control does not import
 Perl/Rust named-default guard policy; wider defaults/free-source scope stays
 owned separately. Rebuild apps/runtime; Julia59.4 next, no whole-file SDK-format/
 isolated emitted/package/exhaustive excluded-shape/portable-domain/full admission.
+
+Later independently found completed named default-container guard prerequisite is fixed in60.3 under existing6/18 authority: [[dart-free-default-result-guards]]. Canonical set59.3 scope remains unchanged.

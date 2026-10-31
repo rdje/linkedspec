@@ -4076,6 +4076,7 @@ final class LinkedSpecRuntimeEngine {
               _isOrdinaryComputedRead(receiver) ||
               _isExplicitPushResultSource(receiver) ||
               _isCanonicalSetResultSource(receiver) ||
+              _isFreeDefaultResultSource(receiver) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5478,6 +5479,40 @@ final class LinkedSpecRuntimeEngine {
     };
   }
 
+  // Preserve lazy free selectors and legacy arities; guard ordinary results.
+  bool _isFreeDefaultResultSource(ActionExpr expression) {
+    if (expression is! ActionCallExpr ||
+        (expression.name != 'coalesce' && expression.name != 'coalesce_nonempty') ||
+        (expression.sourceMethod ?? expression.name) != expression.name ||
+        expression.trailingBlockArg ||
+        expression.args.length < 2 ||
+        expression.args.any((argument) => argument is! ActionPositionalArgument)) {
+      return false;
+    }
+    return expression.args.every((argument) => switch (argument.value) {
+      ActionVariableExpr() ||
+      ActionNumberLiteralExpr() ||
+      ActionStringLiteralExpr() ||
+      ActionBooleanLiteralExpr() ||
+      ActionUndefExpr() ||
+      ActionArrayLiteralExpr() ||
+      ActionHashLiteralExpr() ||
+      ActionBlockValueExpr() ||
+      ActionCallExpr() ||
+      ActionFluentChainExpr() ||
+      ActionReceiverMutationChainExpr() ||
+      ActionIndexedVarExpr() ||
+      ActionNestedAccessExpr() ||
+      ActionValueAccessExpr() ||
+      ActionAssignScalarExpr() ||
+      ActionAssignArrayAppendExpr() ||
+      ActionAssignHashIndexExpr() ||
+      ActionAssignNestedAccessExpr() ||
+      ActionCodeblockLiteralExpr() => true,
+      _ => false,
+    });
+  }
+
   // Canonical assignments retain their stored-value ABI and copy/alias rules.
   bool _isCanonicalSetResultSource(ActionExpr expression) {
     if (expression is! ActionCallExpr ||
@@ -5668,7 +5703,11 @@ final class LinkedSpecRuntimeEngine {
       );
       reductionResult = reductionResult || helper == 'reduce_leaves';
       kindGuardedResult =
-          kindGuardedResult || helper == 'copy' || helper == 'with';
+          kindGuardedResult ||
+          helper == 'copy' ||
+          helper == 'with' ||
+          helper == 'coalesce' ||
+          helper == 'coalesce_nonempty';
       scalarResult =
           value is bool ||
           ((scalarResult || mayProduceScalar) &&

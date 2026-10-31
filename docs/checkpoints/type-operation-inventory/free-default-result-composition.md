@@ -1,7 +1,7 @@
 # Canonical free-default result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.21; implementation family23.3.60.
-Status: Bounded Perl60.1/Rust60.2 targeted-checked; independent peers/full admission pending.
+Status: Bounded Perl60.1/Rust60.2/Dart60.3 targeted-checked; Julia/safe Lua/full admission pending.
 
 Existing catalog publishes coalesce(values: scalar...) and
 coalesce_nonempty(values: scalar...). First defined versus first defined/nonempty
@@ -89,3 +89,21 @@ fallback distinctions; dependency warnings retained/opaque. Actual producers/
 inputs/results: free-default-rust-intake.json.gz. Rebuild apps/runtime. Independent
 Dart60.3 next; no isolated emitted Rust/exhaustive excluded-runtime/portable
 aggregate-domain/full admission claim.
+
+Dart60.3 intake independently finds the completed named coalesce guard control also fails, unlike Perl/Rust after their repairs. Existing default6/18 authority owns this small common-loop prerequisite within60.3, before Julia: retain actual-kind guard state after both defaults, alongside free-source admission. Original18 and expanded named-nonempty19 baseline epochs retained; no imported healthy credit or new domain authority.
+
+## Independent Dart60.3 source and receiver guards
+
+Same scoped19 tests12healthy/7RED to19GREEN native/restoredSpec/in-process plan;
+nearest defaults6/fatal owner-normal analysis/new-normal format pass. Seventeen
+values/ten healthy observations/error/eight public shapes canonically exact.
+Canonical free-source admission and common-loop guard retention after both
+defaults fix direct consumers plus the independently found named-container
+prerequisite under existing6/18 authority. Incompatible operands/with skip; valid
+null/empty with/source once/outer value stay. Original lazy producer/computed
+read/with/signatures/method tables/arity/copy/alias/function/parser/schema stay.
+Corrected18/expanded19 pre-production epochs retained; initial host matcher typo
+failed load before tests, matcher-only correction/no setup RED credit. Actual
+producers/inputs/results: free-default-dart-intake.json.gz. Rebuild apps/runtime;
+independent Julia60.4 next, no whole-SDK format/fresh isolated/portable aggregate-
+domain/full admission claim.
