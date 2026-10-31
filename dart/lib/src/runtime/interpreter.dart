@@ -4090,10 +4090,6 @@ final class LinkedSpecRuntimeEngine {
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
                       canonicalActionHelperName(receiver.name) == 'with')),
-          allowNullInitialHasKey:
-              _isOrdinaryHasKeyResultChain(receiver, calls) &&
-              calls.first.method == 'has_key' &&
-              !(receiver is ActionCallExpr && receiver.name == 'has_key'),
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -5996,7 +5992,7 @@ final class LinkedSpecRuntimeEngine {
   // Preserve numeric presence flags, key domains and one-key preflight.
   // Source guards survive kind transitions after explicit Array bridges.
   bool _isOrdinaryHasKeyResultChain(
-    ActionExpr receiver,
+    ActionExpr? receiver,
     List<ActionFluentCall> calls,
   ) {
     const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
@@ -6237,20 +6233,17 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
     bool kindGuardedResult = false,
-    bool allowNullInitialHasKey = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
-    var initialPresenceStep = true;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
-      // Preserve eager key evaluation for a leading null presence receiver.
-      final leadingNullPresence =
-          initialPresenceStep &&
-          allowNullInitialHasKey &&
+      // A legitimate null source keeps canonical has_key's key evaluation.
+      // Earlier incompatible consumers return before this step.
+      final nullablePresence =
+          value == null &&
           helper == 'has_key' &&
-          value == null;
-      initialPresenceStep = false;
+          _isOrdinaryHasKeyResultChain(null, [call]);
       // Reduced, copied, scoped and computed values retain their actual kinds.
       // Validate container-only consumers before evaluating their operands.
       if ((reductionResult || kindGuardedResult) &&
@@ -6260,12 +6253,13 @@ final class LinkedSpecRuntimeEngine {
           ((_arrayOnlyReceiverHelpers.contains(helper) && value is! List) ||
               (_hashOnlyReceiverHelpers.contains(helper) &&
                   value is! Map &&
-                  !leadingNullPresence))) {
+                  !nullablePresence))) {
         return null;
       }
       // Scalar results retain this boundary; generic emptiness predicates
       // accept every value kind.
       if (scalarResult &&
+          !nullablePresence &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
           (_arrayOnlyReceiverHelpers.contains(helper) ||

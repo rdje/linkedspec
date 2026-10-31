@@ -3250,6 +3250,8 @@ Focused11/nearest presence-null-copy/source18/syntax and bound public lowering
 checks pass; regenerate emitted Perl parsers. Rust69.6.2 also restores nullable
 has_key after copies/legitimate null results, including key errors, while earlier
 incompatible consumers still exit immediately. Native/restored/plan11, nearest
-presence24/copy6 and owned formatting pass; rebuild Rust apps/runtime. Separate
-Dart/Julia/safe Lua repairs precede the next method selection; general isolation/full
-admission remain open.
+presence24/copy6 and owned formatting pass; rebuild Rust apps/runtime. Dart69.6.3
+also admits canonical nullable presence through its common/scalar guards and removes
+the obsolete first-step flag. Native/restoredSpec/plan11, nearest presence24/copy4,
+fatal analysis and owned formatting pass; rebuild Dart apps/runtime. Julia/safe Lua
+repairs precede the next method selection; general isolation/full admission remain open.
