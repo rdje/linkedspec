@@ -1,0 +1,1742 @@
+[
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 12,
+                        "start" : 11
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 13,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 32,
+                           "start" : 21
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 31,
+                                          "start" : 28
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 32,
+                                    "start" : 21
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 32,
+                                 "start" : 21
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 33,
+                        "start" : 20
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 33,
+                  "start" : 14
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 33,
+                  "start" : 20
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : null,
+            "minimum_arity" : 1,
+            "name" : "and",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "and()",
+            "source_method" : "and",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            }
+         },
+         "source" : "and().take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 33,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require LinkedSpec::RuntimeDiagnosticOutput; LinkedSpec::RuntimeDiagnosticOutput::helper_arity_mismatch($descr, 'Value', 'and', 0, 'at least 1 positional argument') }",
+      "source" : "and().take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 11,
+                        "start" : 10
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 12,
+                  "start" : 5
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 31,
+                           "start" : 20
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 30,
+                                          "start" : 27
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 31,
+                                    "start" : 20
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 31,
+                                 "start" : 20
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 32,
+                        "start" : 19
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 32,
+                  "start" : 13
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 32,
+                  "start" : 19
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : null,
+            "minimum_arity" : 1,
+            "name" : "or",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "or()",
+            "source_method" : "or",
+            "source_span" : {
+               "end" : 4,
+               "start" : 0
+            }
+         },
+         "source" : "or().take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 32,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require LinkedSpec::RuntimeDiagnosticOutput; LinkedSpec::RuntimeDiagnosticOutput::helper_arity_mismatch($descr, 'Value', 'or', 0, 'at least 1 positional argument') }",
+      "source" : "or().take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 12,
+                        "start" : 11
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 13,
+                  "start" : 6
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : 1,
+            "minimum_arity" : 1,
+            "name" : "not",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "not()",
+            "source_method" : "not",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            }
+         },
+         "source" : "not().take(1)",
+         "source_span" : {
+            "end" : 13,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require LinkedSpec::RuntimeDiagnosticOutput; LinkedSpec::RuntimeDiagnosticOutput::helper_arity_mismatch($descr, 'Value', 'not', 0, 'exactly 1 positional argument') }",
+      "source" : "not().take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 22,
+                        "start" : 21
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 23,
+                  "start" : 16
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "boolean",
+                  "source" : "true",
+                  "source_span" : {
+                     "end" : 8,
+                     "start" : 4
+                  },
+                  "value" : 1
+               },
+               {
+                  "kind" : "boolean",
+                  "source" : "false",
+                  "source_span" : {
+                     "end" : 14,
+                     "start" : 9
+                  },
+                  "value" : 0
+               }
+            ],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : 1,
+            "minimum_arity" : 1,
+            "name" : "not",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "not(true,false)",
+            "source_method" : "not",
+            "source_span" : {
+               "end" : 15,
+               "start" : 0
+            }
+         },
+         "source" : "not(true,false).take(1)",
+         "source_span" : {
+            "end" : 23,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require LinkedSpec::RuntimeDiagnosticOutput; LinkedSpec::RuntimeDiagnosticOutput::helper_arity_mismatch($descr, 'Value', 'not', 2, 'exactly 1 positional argument') }",
+      "source" : "not(true,false).take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 22,
+                        "start" : 21
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 23,
+                  "start" : 16
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 42,
+                           "start" : 31
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 41,
+                                          "start" : 38
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 42,
+                                    "start" : 31
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 42,
+                                 "start" : 31
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 43,
+                        "start" : 30
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 43,
+                  "start" : 24
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 43,
+                  "start" : 30
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "raw_perl",
+                  "reason" : "unsupported_expression",
+                  "source" : "value:true",
+                  "source_span" : {
+                     "end" : 14,
+                     "start" : 4
+                  }
+               }
+            ],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : null,
+            "minimum_arity" : 1,
+            "name" : "and",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "and(value:true)",
+            "source_method" : "and",
+            "source_span" : {
+               "end" : 15,
+               "start" : 0
+            }
+         },
+         "source" : "and(value:true).take(1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 43,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_rejected_result = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(value:true); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "and(value:true).take(1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "and",
+               "source" : "and()",
+               "source_method" : "and",
+               "source_span" : {
+                  "end" : 11,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 30,
+                           "start" : 19
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 29,
+                                          "start" : 26
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 30,
+                                    "start" : 19
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 30,
+                                 "start" : 19
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 31,
+                        "start" : 18
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 31,
+                  "start" : 12
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 31,
+                  "start" : 18
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.and().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 31,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "false.and().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "or",
+               "source" : "or()",
+               "source_method" : "or",
+               "source_span" : {
+                  "end" : 10,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 29,
+                           "start" : 18
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 28,
+                                          "start" : 25
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 29,
+                                    "start" : 18
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 29,
+                                 "start" : 18
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 30,
+                        "start" : 17
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 30,
+                  "start" : 11
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 30,
+                  "start" : 17
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.or().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 30,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "false.or().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "boolean",
+                     "source" : "true",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 10
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "not",
+               "source" : "not(true)",
+               "source_method" : "not",
+               "source_span" : {
+                  "end" : 15,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 34,
+                           "start" : 23
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 33,
+                                          "start" : 30
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 34,
+                                    "start" : 23
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 34,
+                                 "start" : 23
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 35,
+                        "start" : 22
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 35,
+                  "start" : 16
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 35,
+                  "start" : 22
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.not(true).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 35,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "false.not(true).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "raw_perl",
+                     "reason" : "unsupported_expression",
+                     "source" : "right:true",
+                     "source_span" : {
+                        "end" : 20,
+                        "start" : 10
+                     }
+                  }
+               ],
+               "method" : "and",
+               "source" : "and(right:true)",
+               "source_method" : "and",
+               "source_span" : {
+                  "end" : 21,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 40,
+                           "start" : 29
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 39,
+                                          "start" : 36
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 40,
+                                    "start" : 29
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 40,
+                                 "start" : 29
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 41,
+                        "start" : 28
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 41,
+                  "start" : 22
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 41,
+                  "start" : 28
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.and(right:true).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 41,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { require JSON::PP; JSON::PP::false }); push @{$__ls_logical_values}, scalar(right:true); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "false.and(right:true).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "args" : [
+            {
+               "kind" : "boolean",
+               "source" : "true",
+               "source_span" : {
+                  "end" : 8,
+                  "start" : 4
+               },
+               "value" : 1
+            },
+            {
+               "block" : {
+                  "kind" : "action_block",
+                  "source" : "return(\"x\")",
+                  "source_span" : {
+                     "end" : 21,
+                     "start" : 10
+                  },
+                  "statements" : [
+                     {
+                        "drops_value" : 1,
+                        "expr" : {
+                           "args" : [
+                              {
+                                 "kind" : "string",
+                                 "quote" : "\"",
+                                 "source" : "\"x\"",
+                                 "source_span" : {
+                                    "end" : 20,
+                                    "start" : 17
+                                 },
+                                 "value" : "x"
+                              }
+                           ],
+                           "kind" : "call",
+                           "name" : "return",
+                           "source" : "return(\"x\")",
+                           "source_method" : "return",
+                           "source_span" : {
+                              "end" : 21,
+                              "start" : 10
+                           }
+                        },
+                        "kind" : "action_stmt",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 21,
+                           "start" : 10
+                        }
+                     }
+                  ]
+               },
+               "kind" : "block_value",
+               "source" : "{return(\"x\")}",
+               "source_span" : {
+                  "end" : 22,
+                  "start" : 9
+               }
+            }
+         ],
+         "evaluation_policy" : "eager_left_to_right",
+         "kind" : "call",
+         "maximum_arity" : null,
+         "minimum_arity" : 1,
+         "name" : "and",
+         "result_kind" : "boolean",
+         "semantic_family" : "logical",
+         "source" : "and(true){return(\"x\")}",
+         "source_method" : "and",
+         "source_span" : {
+            "end" : 22,
+            "start" : 0
+         },
+         "trailing_block_arg" : 1,
+         "trailing_block_source_span" : {
+            "end" : 22,
+            "start" : 9
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { require JSON::PP; JSON::PP::true }); push @{$__ls_logical_values}, scalar(do { \"x\" }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }",
+      "source" : "and(true){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "boolean",
+                     "source" : "true",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 10
+                     },
+                     "value" : 1
+                  },
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 27,
+                           "start" : 16
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 26,
+                                          "start" : 23
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 27,
+                                    "start" : 16
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 27,
+                                 "start" : 16
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 28,
+                        "start" : 15
+                     }
+                  }
+               ],
+               "method" : "and",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "and(true){return(\"x\")}",
+               "source_method" : "and",
+               "source_span" : {
+                  "end" : 28,
+                  "start" : 6
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 28,
+                  "start" : 15
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.and(true){return(\"x\")}",
+         "source_span" : {
+            "end" : 28,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:and\"; undef }",
+      "source" : "false.and(true){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(value)",
+                        "source_span" : {
+                           "end" : 36,
+                           "start" : 23
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "variable",
+                                       "name" : "value",
+                                       "source" : "value",
+                                       "source_span" : {
+                                          "end" : 35,
+                                          "start" : 30
+                                       }
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(value)",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 36,
+                                    "start" : 23
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(value)",
+                              "source_span" : {
+                                 "end" : 36,
+                                 "start" : 23
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(value)}",
+                     "source_span" : {
+                        "end" : 37,
+                        "start" : 22
+                     }
+                  }
+               ],
+               "method" : "map_leaves",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "map_leaves(){return(value)}",
+               "source_method" : "map_leaves",
+               "source_span" : {
+                  "end" : 37,
+                  "start" : 10
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 37,
+                  "start" : 22
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "boolean",
+                  "source" : "true",
+                  "source_span" : {
+                     "end" : 8,
+                     "start" : 4
+                  },
+                  "value" : 1
+               }
+            ],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : null,
+            "minimum_arity" : 1,
+            "name" : "and",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "and(true)",
+            "source_method" : "and",
+            "source_span" : {
+               "end" : 9,
+               "start" : 0
+            }
+         },
+         "source" : "and(true).map_leaves(){return(value)}",
+         "source_span" : {
+            "end" : 37,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_rejected_result = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { require JSON::PP; JSON::PP::true }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; undef }",
+      "source" : "and(true).map_leaves(){return(value)}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "boolean",
+                     "source" : "true",
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 10
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "and",
+               "source" : "and(true)",
+               "source_method" : "and",
+               "source_span" : {
+                  "end" : 15,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(value)",
+                        "source_span" : {
+                           "end" : 42,
+                           "start" : 29
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "variable",
+                                       "name" : "value",
+                                       "source" : "value",
+                                       "source_span" : {
+                                          "end" : 41,
+                                          "start" : 36
+                                       }
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(value)",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 42,
+                                    "start" : 29
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(value)",
+                              "source_span" : {
+                                 "end" : 42,
+                                 "start" : 29
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(value)}",
+                     "source_span" : {
+                        "end" : 43,
+                        "start" : 28
+                     }
+                  }
+               ],
+               "method" : "map_leaves",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "map_leaves(){return(value)}",
+               "source_method" : "map_leaves",
+               "source_span" : {
+                  "end" : 43,
+                  "start" : 16
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 43,
+                  "start" : 28
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.and(true).map_leaves(){return(value)}",
+         "source_span" : {
+            "end" : 43,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_rejected_result = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { require JSON::PP; JSON::PP::false }); push @{$__ls_logical_values}, scalar(do { require JSON::PP; JSON::PP::true }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; undef }",
+      "source" : "false.and(true).map_leaves(){return(value)}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "body_ast" : {
+            "kind" : "action_block",
+            "source" : " return(and(false).take(1).with(){return(\"x\")}) ",
+            "source_span" : {
+               "end" : 51,
+               "start" : 3
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "args" : [
+                        {
+                           "calls" : [
+                              {
+                                 "args" : [
+                                    {
+                                       "kind" : "number",
+                                       "source" : 1,
+                                       "source_span" : {
+                                          "end" : 28,
+                                          "start" : 27
+                                       },
+                                       "value" : 1
+                                    }
+                                 ],
+                                 "method" : "take",
+                                 "source" : "take(1)",
+                                 "source_method" : "take",
+                                 "source_span" : {
+                                    "end" : 29,
+                                    "start" : 22
+                                 }
+                              },
+                              {
+                                 "args" : [
+                                    {
+                                       "block" : {
+                                          "kind" : "action_block",
+                                          "source" : "return(\"x\")",
+                                          "source_span" : {
+                                             "end" : 48,
+                                             "start" : 37
+                                          },
+                                          "statements" : [
+                                             {
+                                                "drops_value" : 1,
+                                                "expr" : {
+                                                   "args" : [
+                                                      {
+                                                         "kind" : "string",
+                                                         "quote" : "\"",
+                                                         "source" : "\"x\"",
+                                                         "source_span" : {
+                                                            "end" : 47,
+                                                            "start" : 44
+                                                         },
+                                                         "value" : "x"
+                                                      }
+                                                   ],
+                                                   "kind" : "call",
+                                                   "name" : "return",
+                                                   "source" : "return(\"x\")",
+                                                   "source_method" : "return",
+                                                   "source_span" : {
+                                                      "end" : 48,
+                                                      "start" : 37
+                                                   }
+                                                },
+                                                "kind" : "action_stmt",
+                                                "source" : "return(\"x\")",
+                                                "source_span" : {
+                                                   "end" : 48,
+                                                   "start" : 37
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       "kind" : "block_value",
+                                       "source" : "{return(\"x\")}",
+                                       "source_span" : {
+                                          "end" : 49,
+                                          "start" : 36
+                                       }
+                                    }
+                                 ],
+                                 "method" : "with",
+                                 "receiver_trailing_block_arg" : 1,
+                                 "source" : "with(){return(\"x\")}",
+                                 "source_method" : "with",
+                                 "source_span" : {
+                                    "end" : 49,
+                                    "start" : 30
+                                 },
+                                 "trailing_block_arg" : 1,
+                                 "trailing_block_source_span" : {
+                                    "end" : 49,
+                                    "start" : 36
+                                 }
+                              }
+                           ],
+                           "kind" : "fluent_chain",
+                           "receiver" : {
+                              "args" : [
+                                 {
+                                    "kind" : "boolean",
+                                    "source" : "false",
+                                    "source_span" : {
+                                       "end" : 20,
+                                       "start" : 15
+                                    },
+                                    "value" : 0
+                                 }
+                              ],
+                              "evaluation_policy" : "eager_left_to_right",
+                              "kind" : "call",
+                              "maximum_arity" : null,
+                              "minimum_arity" : 1,
+                              "name" : "and",
+                              "result_kind" : "boolean",
+                              "semantic_family" : "logical",
+                              "source" : "and(false)",
+                              "source_method" : "and",
+                              "source_span" : {
+                                 "end" : 21,
+                                 "start" : 11
+                              }
+                           },
+                           "source" : "and(false).take(1).with(){return(\"x\")}",
+                           "source_span" : {
+                              "end" : 49,
+                              "start" : 11
+                           }
+                        }
+                     ],
+                     "kind" : "call",
+                     "name" : "return",
+                     "source" : "return(and(false).take(1).with(){return(\"x\")})",
+                     "source_method" : "return",
+                     "source_span" : {
+                        "end" : 50,
+                        "start" : 4
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "return(and(false).take(1).with(){return(\"x\")})",
+                  "source_span" : {
+                     "end" : 50,
+                     "start" : 4
+                  }
+               }
+            ]
+         },
+         "body_source" : " return(and(false).take(1).with(){return(\"x\")}) ",
+         "body_span" : {
+            "end" : 51,
+            "start" : 3
+         },
+         "kind" : "codeblock_literal",
+         "signature" : {
+            "kind" : "callable_signature",
+            "max_arity" : 0,
+            "min_arity" : 0,
+            "positional_params" : [],
+            "rest_param" : null,
+            "version" : 1
+         },
+         "source_span" : {
+            "end" : 52,
+            "start" : 0
+         },
+         "source_text" : "{|| return(and(false).take(1).with(){return(\"x\")}) }",
+         "version" : 1
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack(\"H*\", \"7b22626f64795f617374223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a222072657475726e28616e642866616c7365292e74616b652831292e7769746828297b72657475726e285c22785c22297d2920222c22736f757263655f7370616e223a7b22656e64223a35312c227374617274223a337d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b2263616c6c73223a5b7b2261726773223a5b7b226b696e64223a226e756d626572222c22736f75726365223a312c22736f757263655f7370616e223a7b22656e64223a32382c227374617274223a32377d2c2276616c7565223a317d5d2c226d6574686f64223a2274616b65222c22736f75726365223a2274616b65283129222c22736f757263655f6d6574686f64223a2274616b65222c22736f757263655f7370616e223a7b22656e64223a32392c227374617274223a32327d7d2c7b2261726773223a5b7b22626c6f636b223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a34382c227374617274223a33377d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22785c22222c22736f757263655f7370616e223a7b22656e64223a34372c227374617274223a34347d2c2276616c7565223a2278227d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a34382c227374617274223a33377d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a34382c227374617274223a33377d7d5d7d2c226b696e64223a22626c6f636b5f76616c7565222c22736f75726365223a227b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a34392c227374617274223a33367d7d5d2c226d6574686f64223a2277697468222c2272656365697665725f747261696c696e675f626c6f636b5f617267223a312c22736f75726365223a227769746828297b72657475726e285c22785c22297d222c22736f757263655f6d6574686f64223a2277697468222c22736f757263655f7370616e223a7b22656e64223a34392c227374617274223a33307d2c22747261696c696e675f626c6f636b5f617267223a312c22747261696c696e675f626c6f636b5f736f757263655f7370616e223a7b22656e64223a34392c227374617274223a33367d7d5d2c226b696e64223a22666c75656e745f636861696e222c227265636569766572223a7b2261726773223a5b7b226b696e64223a22626f6f6c65616e222c22736f75726365223a2266616c7365222c22736f757263655f7370616e223a7b22656e64223a32302c227374617274223a31357d2c2276616c7565223a307d5d2c226576616c756174696f6e5f706f6c696379223a2265616765725f6c6566745f746f5f7269676874222c226b696e64223a2263616c6c222c226d6178696d756d5f6172697479223a6e756c6c2c226d696e696d756d5f6172697479223a312c226e616d65223a22616e64222c22726573756c745f6b696e64223a22626f6f6c65616e222c2273656d616e7469635f66616d696c79223a226c6f676963616c222c22736f75726365223a22616e642866616c736529222c22736f757263655f6d6574686f64223a22616e64222c22736f757263655f7370616e223a7b22656e64223a32312c227374617274223a31317d7d2c22736f75726365223a22616e642866616c7365292e74616b652831292e7769746828297b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a34392c227374617274223a31317d7d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e28616e642866616c7365292e74616b652831292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a35302c227374617274223a347d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e28616e642866616c7365292e74616b652831292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f7370616e223a7b22656e64223a35302c227374617274223a347d7d5d7d2c22626f64795f736f75726365223a222072657475726e28616e642866616c7365292e74616b652831292e7769746828297b72657475726e285c22785c22297d2920222c22626f64795f7370616e223a7b22656e64223a35312c227374617274223a337d2c226b696e64223a22636f6465626c6f636b5f6c69746572616c222c227369676e6174757265223a7b226b696e64223a2263616c6c61626c655f7369676e6174757265222c226d61785f6172697479223a302c226d696e5f6172697479223a302c22706f736974696f6e616c5f706172616d73223a5b5d2c22726573745f706172616d223a6e756c6c2c2276657273696f6e223a317d2c22736f757263655f7370616e223a7b22656e64223a35322c227374617274223a307d2c22736f757263655f74657874223a227b7c7c2072657475726e28616e642866616c7365292e74616b652831292e7769746828297b72657475726e285c22785c22297d29207d222c2276657273696f6e223a317d\")) }",
+      "source" : "{|| return(and(false).take(1).with(){return(\"x\")}) }",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "custom_logical",
+               "source" : "custom_logical()",
+               "source_method" : "custom_logical",
+               "source_span" : {
+                  "end" : 27,
+                  "start" : 11
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 46,
+                           "start" : 35
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 45,
+                                          "start" : 42
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 46,
+                                    "start" : 35
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 46,
+                                 "start" : 35
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 47,
+                        "start" : 34
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 47,
+                  "start" : 28
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 47,
+                  "start" : 34
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "boolean",
+                  "source" : "false",
+                  "source_span" : {
+                     "end" : 9,
+                     "start" : 4
+                  },
+                  "value" : 0
+               }
+            ],
+            "evaluation_policy" : "eager_left_to_right",
+            "kind" : "call",
+            "maximum_arity" : null,
+            "minimum_arity" : 1,
+            "name" : "and",
+            "result_kind" : "boolean",
+            "semantic_family" : "logical",
+            "source" : "and(false)",
+            "source_method" : "and",
+            "source_span" : {
+               "end" : 10,
+               "start" : 0
+            }
+         },
+         "source" : "and(false).custom_logical().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 47,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_logical\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "and(false).custom_logical().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "not",
+               "source" : "not()",
+               "source_method" : "not",
+               "source_span" : {
+                  "end" : 11,
+                  "start" : 6
+               }
+            },
+            {
+               "args" : [],
+               "method" : "custom_logical",
+               "source" : "custom_logical()",
+               "source_method" : "custom_logical",
+               "source_span" : {
+                  "end" : 28,
+                  "start" : 12
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 47,
+                           "start" : 36
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 46,
+                                          "start" : 43
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 47,
+                                    "start" : 36
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 47,
+                                 "start" : 36
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 48,
+                        "start" : 35
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 48,
+                  "start" : 29
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 48,
+                  "start" : 35
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "boolean",
+            "source" : "false",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            },
+            "value" : 0
+         },
+         "source" : "false.not().custom_logical().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 48,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_logical\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "false.not().custom_logical().with(){return(\"x\")}",
+      "warnings" : []
+   }
+]

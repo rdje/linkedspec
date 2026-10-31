@@ -3179,3 +3179,10 @@ checking fresh emitted modules. Lua uses installed PUC5.5.1/LuaJIT; declared5.4/
 full source-domain-context admission remain separate. The six-helper reference
 lists existing signatures and true/false examples. Regenerate emitted Perl and
 rebuild native apps/runtime. Remaining feature selection follows.
+
+
+Perl feature65 retains eager Boolean source and ordinary logical-prefix guards
+through Array bridges and later immediate with bodies. Rejected consumers skip
+operands/bodies; valid false/null/empty with and returned Arrays stay. Regenerate
+emitted Perl parsers. Focused native/fresh/readiness/error controls pass; Rust
+and other backends are assessed independently, full admission remains separate.

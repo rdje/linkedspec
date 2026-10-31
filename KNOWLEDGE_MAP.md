@@ -16233,7 +16233,7 @@ _One omission-checked driver owns recurring logical-helper conformance_
 ### logical-result-source-guards
 _Eager Boolean chains retain rejection state before with_
 - **answers:** why does and false take with still run the body | why does a logical Array bridge report unsupported with | which task owns logical source and prefix guard composition | does valid Boolean false or numeric domain null still enter with
-- **date:** 2026-10-31 · **status:** frozen65; independent backend implementations pending
+- **date:** 2026-10-31 · **status:** bounded Perl65.1 targeted-checked; independent peers/full admission pending
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.1.26; logical-guard-selection-intake.json.gz retains actual public22 producer/all inputs/results.`
 - **reverify:** `Recover public observer/shared22/original Perl from logical-guard-selection-intake.json.gz into new project-local outputs. Historical activation/recovery/run/freeze writers one-shot, never replay. Owners65.1-.5.`
 - **source:** [`docs/knowledge/logical-result-source-guards.md`](docs/knowledge/logical-result-source-guards.md)

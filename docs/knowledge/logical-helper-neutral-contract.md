@@ -166,3 +166,5 @@ two source-error cases pass native/plan/fresh on PUC5.5.1/LuaJIT, plus direct
 logical-result/load checks. Free truth/errors and scalar copies remain. All five
 bounded method implementations are targeted-checked; copy-domain1.2.1.4.2 follows
 before coverage/admission closure. Declared5.4/full method admission remain open.
+
+Canonical logical source/ordinary method prefix guard composition through Array bridges/later immediate with is separately repaired by Perl65.1: [[logical-result-source-guards]]. Eager producer/truth/signatures unchanged; valid Boolean false/numeric-domain null/empty with and typed source arity remain. Independent peers/full23.4 separate.

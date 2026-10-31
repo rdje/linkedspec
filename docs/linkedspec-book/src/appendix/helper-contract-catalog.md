@@ -1591,11 +1591,22 @@ table because its runtime behavior is to terminate the parser process.
 Boolean results also cross explicit type bridges: `and(false).split(",").first()`
 is the String `"0"`, while `and(false).with(){return(value)}` keeps Bool false.
 A numeric method still rejects Bool: `and(false).add(1)` yields null, which may
-legitimately enter a subsequent `with` body. A current Perl guard gap permits a
-later body after rejected `and(false).take(1)`; some rejected bridge tails instead
-report unsupported `with`. Feature65 owns this bounded guard/readiness repair
-without changing eager evaluation, typed truth or arity errors. Other backends
-are assessed independently.
+legitimately enter a subsequent `with` body. Perl preserves rejection state
+through canonical logical free calls and ordinary `.and`/`.or`/`.not` prefixes:
+
+```text
+and(false).take(1).with(){return("ran")}      # null; body skipped
+false.and(true).take(1).with(){return("ran")} # null; body skipped
+not(false).split(",").set_key("k",1).with(){return("ran")} # null; body skipped
+and(false).with(){return(["ok"])}.first().uppercase()     # "OK"
+and(false).add(1).with(){return("null")}                  # "null"; body runs
+```
+
+Incompatible operands and later bodies stay skipped, while source operands
+still run eagerly once in order. These paths have ready ActionIR metadata;
+valid false/null/empty values remain distinct from rejected consumers.
+Regenerate emitted Perl parsers. Other backends are assessed independently;
+typed truth, Boolean kinds and arity errors remain unchanged.
 
 ### `if(cond, then, elseif(cond2, then2), else(default))`
 - **Signature**: Inline composite value form.

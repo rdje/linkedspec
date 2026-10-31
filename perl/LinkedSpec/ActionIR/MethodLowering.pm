@@ -5473,9 +5473,20 @@ my $lower_numeric_array_reducer_source_expr = sub {
      || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Ordinary logical methods already fold into typed eager call producers.
+  # Their Boolean results need the same persistent guard as other scalar sources.
+  my $ordinary_logical_result_source = $logical_receiver
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && ($receiver->{source_method} // $receiver->{name}) eq $receiver->{name}
+   && !$receiver->{trailing_block_arg}
+   && !(grep { ref($_) ne 'HASH'
+     || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$receiver->{args} || []})
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
     || $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
-    || $free_numeric_result_source || $ordinary_number_receiver_prefix)
+    || $free_numeric_result_source || $ordinary_number_receiver_prefix
+    || $ordinary_logical_result_source)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -5897,7 +5908,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
     # Reuse actual-kind dispatch after intermediate results as well as at the source.
     $current_family = 'default_result'
      if $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix
-      || $free_numeric_result_source || $ordinary_number_receiver_prefix;
+      || $free_numeric_result_source || $ordinary_number_receiver_prefix
+      || $ordinary_logical_result_source;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')
