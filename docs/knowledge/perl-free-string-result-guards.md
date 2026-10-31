@@ -8,7 +8,7 @@ answers:
   - "does free String repair promote receiver-only invalid bridge contexts"
   - "are free String Perl tests selected by canonical CI"
 date: 2026-10-31
-status: bounded Perl62.1 targeted-checked; Rust62.2/peers/full admission separate
+status: bounded free-source62 outcomes recorded; Perl receiver62.6.1 ready; remaining context/full admission separate
 tags: [perl, string, source, guards, host, isolation, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.62.1; free-string-perl-intake.json.gz retains same sealed18 12PASS6RED to18PASS, empty/seeded fresh Hash oracle, nearest32/fences9/syntax and actual producers/all inputs/epochs."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/free_string_result_composition.t t/free_string_source_fences.t t/scalar_string_result_receiver_contract.t t/constructor_result_composition.t"
@@ -31,3 +31,5 @@ explicit eval-error capture rebaselined before production; original producer
 escape warning epoch retained/corrected without replay, no setup RED credit.
 Canonical18/fences9 registration remains23.4.1-owned. Regenerate emitted Perl;
 no native seeded/global SESSION17/receiver context/full admission closure.
+
+The historical receiver-only unready boundary above is explicitly repaired by62.6.1: [[perl-receiver-string-bridge-guards]]. Current18 normal now requires readiness, preserving all sixteen sources/values; original evidence remains in the62.1 capsule.

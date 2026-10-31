@@ -1,0 +1,1087 @@
+[
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"extra\"",
+                     "source_span" : {
+                        "end" : 19,
+                        "start" : 12
+                     },
+                     "value" : "extra"
+                  }
+               ],
+               "method" : "trim",
+               "source" : "trim(\"extra\")",
+               "source_method" : "trim",
+               "source_span" : {
+                  "end" : 20,
+                  "start" : 7
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\",\"",
+                     "source_span" : {
+                        "end" : 30,
+                        "start" : 27
+                     },
+                     "value" : ","
+                  }
+               ],
+               "method" : "split",
+               "source" : "split(\",\")",
+               "source_method" : "split",
+               "source_span" : {
+                  "end" : 31,
+                  "start" : 21
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"k\"",
+                     "source_span" : {
+                        "end" : 43,
+                        "start" : 40
+                     },
+                     "value" : "k"
+                  },
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 45,
+                        "start" : 44
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "set_key",
+               "source" : "set_key(\"k\",1)",
+               "source_method" : "set_key",
+               "source_span" : {
+                  "end" : 46,
+                  "start" : 32
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 65,
+                           "start" : 54
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 64,
+                                          "start" : 61
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 65,
+                                    "start" : 54
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 65,
+                                 "start" : 54
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 66,
+                        "start" : 53
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 66,
+                  "start" : 47
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 66,
+                  "start" : 53
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".trim(\"extra\").split(\",\").set_key(\"k\",1).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 66,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"tail\".trim(\"extra\").split(\",\").set_key(\"k\",1).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "cat",
+               "source" : "cat()",
+               "source_method" : "cat",
+               "source_span" : {
+                  "end" : 12,
+                  "start" : 7
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 31,
+                           "start" : 20
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 30,
+                                          "start" : 27
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 31,
+                                    "start" : 20
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 31,
+                                 "start" : 20
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 32,
+                        "start" : 19
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 32,
+                  "start" : 13
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 32,
+                  "start" : 19
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".cat().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 32,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"tail\".cat().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 0,
+                     "source_span" : {
+                        "end" : 15,
+                        "start" : 14
+                     },
+                     "value" : 0
+                  },
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 17,
+                        "start" : 16
+                     },
+                     "value" : 1
+                  },
+                  {
+                     "kind" : "number",
+                     "source" : 2,
+                     "source_span" : {
+                        "end" : 19,
+                        "start" : 18
+                     },
+                     "value" : 2
+                  }
+               ],
+               "method" : "substr",
+               "source" : "substr(0,1,2)",
+               "source_method" : "substr",
+               "source_span" : {
+                  "end" : 20,
+                  "start" : 7
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 39,
+                           "start" : 28
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 38,
+                                          "start" : 35
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 39,
+                                    "start" : 28
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 39,
+                                 "start" : 28
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 40,
+                        "start" : 27
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 40,
+                  "start" : 21
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 40,
+                  "start" : 27
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".substr(0,1,2).with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 40,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"tail\".substr(0,1,2).with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "raw_perl",
+                     "reason" : "unsupported_expression",
+                     "source" : "first:\"extra\"",
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 12
+                     }
+                  }
+               ],
+               "method" : "trim",
+               "source" : "trim(first:\"extra\")",
+               "source_method" : "trim",
+               "source_span" : {
+                  "end" : 26,
+                  "start" : 7
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 45,
+                           "start" : 34
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 44,
+                                          "start" : 41
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 45,
+                                    "start" : 34
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 45,
+                                 "start" : 34
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 46,
+                        "start" : 33
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 46,
+                  "start" : 27
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 46,
+                  "start" : 33
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".trim(first:\"extra\").with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 46,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"tail\".trim(first:\"extra\").with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "custom_string",
+               "source" : "custom_string()",
+               "source_method" : "custom_string",
+               "source_span" : {
+                  "end" : 22,
+                  "start" : 7
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 41,
+                           "start" : 30
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 40,
+                                          "start" : 37
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 41,
+                                    "start" : 30
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 41,
+                                 "start" : 30
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 42,
+                        "start" : 29
+                     }
+                  }
+               ],
+               "method" : "with",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "with(){return(\"x\")}",
+               "source_method" : "with",
+               "source_span" : {
+                  "end" : 42,
+                  "start" : 23
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 42,
+                  "start" : 29
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".custom_string().with(){return(\"x\")}",
+         "source_span" : {
+            "end" : 42,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_string\"; undef }; my $value = $__ls_with_value; do { \"x\" } }",
+      "source" : "\"tail\".custom_string().with(){return(\"x\")}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [],
+               "method" : "trim",
+               "source" : "trim()",
+               "source_method" : "trim",
+               "source_span" : {
+                  "end" : 13,
+                  "start" : 7
+               }
+            },
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(value)",
+                        "source_span" : {
+                           "end" : 40,
+                           "start" : 27
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "variable",
+                                       "name" : "value",
+                                       "source" : "value",
+                                       "source_span" : {
+                                          "end" : 39,
+                                          "start" : 34
+                                       }
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(value)",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 40,
+                                    "start" : 27
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(value)",
+                              "source_span" : {
+                                 "end" : 40,
+                                 "start" : 27
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(value)}",
+                     "source_span" : {
+                        "end" : 41,
+                        "start" : 26
+                     }
+                  }
+               ],
+               "method" : "map_leaves",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "map_leaves(){return(value)}",
+               "source_method" : "map_leaves",
+               "source_span" : {
+                  "end" : 41,
+                  "start" : 14
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 41,
+                  "start" : 26
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".trim().map_leaves(){return(value)}",
+         "source_span" : {
+            "end" : 41,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"tail\".trim().map_leaves(){return(value)}",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "body_ast" : {
+            "kind" : "action_block",
+            "source" : " return(\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")}) ",
+            "source_span" : {
+               "end" : 72,
+               "start" : 3
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "args" : [
+                        {
+                           "calls" : [
+                              {
+                                 "args" : [],
+                                 "method" : "trim",
+                                 "source" : "trim()",
+                                 "source_method" : "trim",
+                                 "source_span" : {
+                                    "end" : 24,
+                                    "start" : 18
+                                 }
+                              },
+                              {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\",\"",
+                                       "source_span" : {
+                                          "end" : 34,
+                                          "start" : 31
+                                       },
+                                       "value" : ","
+                                    }
+                                 ],
+                                 "method" : "split",
+                                 "source" : "split(\",\")",
+                                 "source_method" : "split",
+                                 "source_span" : {
+                                    "end" : 35,
+                                    "start" : 25
+                                 }
+                              },
+                              {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"k\"",
+                                       "source_span" : {
+                                          "end" : 47,
+                                          "start" : 44
+                                       },
+                                       "value" : "k"
+                                    },
+                                    {
+                                       "kind" : "number",
+                                       "source" : 1,
+                                       "source_span" : {
+                                          "end" : 49,
+                                          "start" : 48
+                                       },
+                                       "value" : 1
+                                    }
+                                 ],
+                                 "method" : "set_key",
+                                 "source" : "set_key(\"k\",1)",
+                                 "source_method" : "set_key",
+                                 "source_span" : {
+                                    "end" : 50,
+                                    "start" : 36
+                                 }
+                              },
+                              {
+                                 "args" : [
+                                    {
+                                       "block" : {
+                                          "kind" : "action_block",
+                                          "source" : "return(\"x\")",
+                                          "source_span" : {
+                                             "end" : 69,
+                                             "start" : 58
+                                          },
+                                          "statements" : [
+                                             {
+                                                "drops_value" : 1,
+                                                "expr" : {
+                                                   "args" : [
+                                                      {
+                                                         "kind" : "string",
+                                                         "quote" : "\"",
+                                                         "source" : "\"x\"",
+                                                         "source_span" : {
+                                                            "end" : 68,
+                                                            "start" : 65
+                                                         },
+                                                         "value" : "x"
+                                                      }
+                                                   ],
+                                                   "kind" : "call",
+                                                   "name" : "return",
+                                                   "source" : "return(\"x\")",
+                                                   "source_method" : "return",
+                                                   "source_span" : {
+                                                      "end" : 69,
+                                                      "start" : 58
+                                                   }
+                                                },
+                                                "kind" : "action_stmt",
+                                                "source" : "return(\"x\")",
+                                                "source_span" : {
+                                                   "end" : 69,
+                                                   "start" : 58
+                                                }
+                                             }
+                                          ]
+                                       },
+                                       "kind" : "block_value",
+                                       "source" : "{return(\"x\")}",
+                                       "source_span" : {
+                                          "end" : 70,
+                                          "start" : 57
+                                       }
+                                    }
+                                 ],
+                                 "method" : "with",
+                                 "receiver_trailing_block_arg" : 1,
+                                 "source" : "with(){return(\"x\")}",
+                                 "source_method" : "with",
+                                 "source_span" : {
+                                    "end" : 70,
+                                    "start" : 51
+                                 },
+                                 "trailing_block_arg" : 1,
+                                 "trailing_block_source_span" : {
+                                    "end" : 70,
+                                    "start" : 57
+                                 }
+                              }
+                           ],
+                           "kind" : "fluent_chain",
+                           "receiver" : {
+                              "kind" : "string",
+                              "quote" : "\"",
+                              "source" : "\"tail\"",
+                              "source_span" : {
+                                 "end" : 17,
+                                 "start" : 11
+                              },
+                              "value" : "tail"
+                           },
+                           "source" : "\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")}",
+                           "source_span" : {
+                              "end" : 70,
+                              "start" : 11
+                           }
+                        }
+                     ],
+                     "kind" : "call",
+                     "name" : "return",
+                     "source" : "return(\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")})",
+                     "source_method" : "return",
+                     "source_span" : {
+                        "end" : 71,
+                        "start" : 4
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "return(\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")})",
+                  "source_span" : {
+                     "end" : 71,
+                     "start" : 4
+                  }
+               }
+            ]
+         },
+         "body_source" : " return(\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")}) ",
+         "body_span" : {
+            "end" : 72,
+            "start" : 3
+         },
+         "kind" : "codeblock_literal",
+         "signature" : {
+            "kind" : "callable_signature",
+            "max_arity" : 0,
+            "min_arity" : 0,
+            "positional_params" : [],
+            "rest_param" : null,
+            "version" : 1
+         },
+         "source_span" : {
+            "end" : 73,
+            "start" : 0
+         },
+         "source_text" : "{|| return(\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")}) }",
+         "version" : 1
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack(\"H*\", \"7b22626f64795f617374223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a222072657475726e285c227461696c5c222e7472696d28292e73706c6974285c222c5c22292e7365745f6b6579285c226b5c222c31292e7769746828297b72657475726e285c22785c22297d2920222c22736f757263655f7370616e223a7b22656e64223a37322c227374617274223a337d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b2263616c6c73223a5b7b2261726773223a5b5d2c226d6574686f64223a227472696d222c22736f75726365223a227472696d2829222c22736f757263655f6d6574686f64223a227472696d222c22736f757263655f7370616e223a7b22656e64223a32342c227374617274223a31387d7d2c7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c222c5c22222c22736f757263655f7370616e223a7b22656e64223a33342c227374617274223a33317d2c2276616c7565223a222c227d5d2c226d6574686f64223a2273706c6974222c22736f75726365223a2273706c6974285c222c5c2229222c22736f757263655f6d6574686f64223a2273706c6974222c22736f757263655f7370616e223a7b22656e64223a33352c227374617274223a32357d7d2c7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c226b5c22222c22736f757263655f7370616e223a7b22656e64223a34372c227374617274223a34347d2c2276616c7565223a226b227d2c7b226b696e64223a226e756d626572222c22736f75726365223a312c22736f757263655f7370616e223a7b22656e64223a34392c227374617274223a34387d2c2276616c7565223a317d5d2c226d6574686f64223a227365745f6b6579222c22736f75726365223a227365745f6b6579285c226b5c222c3129222c22736f757263655f6d6574686f64223a227365745f6b6579222c22736f757263655f7370616e223a7b22656e64223a35302c227374617274223a33367d7d2c7b2261726773223a5b7b22626c6f636b223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a36392c227374617274223a35387d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c22785c22222c22736f757263655f7370616e223a7b22656e64223a36382c227374617274223a36357d2c2276616c7565223a2278227d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a36392c227374617274223a35387d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e285c22785c2229222c22736f757263655f7370616e223a7b22656e64223a36392c227374617274223a35387d7d5d7d2c226b696e64223a22626c6f636b5f76616c7565222c22736f75726365223a227b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a37302c227374617274223a35377d7d5d2c226d6574686f64223a2277697468222c2272656365697665725f747261696c696e675f626c6f636b5f617267223a312c22736f75726365223a227769746828297b72657475726e285c22785c22297d222c22736f757263655f6d6574686f64223a2277697468222c22736f757263655f7370616e223a7b22656e64223a37302c227374617274223a35317d2c22747261696c696e675f626c6f636b5f617267223a312c22747261696c696e675f626c6f636b5f736f757263655f7370616e223a7b22656e64223a37302c227374617274223a35377d7d5d2c226b696e64223a22666c75656e745f636861696e222c227265636569766572223a7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c227461696c5c22222c22736f757263655f7370616e223a7b22656e64223a31372c227374617274223a31317d2c2276616c7565223a227461696c227d2c22736f75726365223a225c227461696c5c222e7472696d28292e73706c6974285c222c5c22292e7365745f6b6579285c226b5c222c31292e7769746828297b72657475726e285c22785c22297d222c22736f757263655f7370616e223a7b22656e64223a37302c227374617274223a31317d7d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e285c227461696c5c222e7472696d28292e73706c6974285c222c5c22292e7365745f6b6579285c226b5c222c31292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a37312c227374617274223a347d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e285c227461696c5c222e7472696d28292e73706c6974285c222c5c22292e7365745f6b6579285c226b5c222c31292e7769746828297b72657475726e285c22785c22297d29222c22736f757263655f7370616e223a7b22656e64223a37312c227374617274223a347d7d5d7d2c22626f64795f736f75726365223a222072657475726e285c227461696c5c222e7472696d28292e73706c6974285c222c5c22292e7365745f6b6579285c226b5c222c31292e7769746828297b72657475726e285c22785c22297d2920222c22626f64795f7370616e223a7b22656e64223a37322c227374617274223a337d2c226b696e64223a22636f6465626c6f636b5f6c69746572616c222c227369676e6174757265223a7b226b696e64223a2263616c6c61626c655f7369676e6174757265222c226d61785f6172697479223a302c226d696e5f6172697479223a302c22706f736974696f6e616c5f706172616d73223a5b5d2c22726573745f706172616d223a6e756c6c2c2276657273696f6e223a317d2c22736f757263655f7370616e223a7b22656e64223a37332c227374617274223a307d2c22736f757263655f74657874223a227b7c7c2072657475726e285c227461696c5c222e7472696d28292e73706c6974285c222c5c22292e7365745f6b6579285c226b5c222c31292e7769746828297b72657475726e285c22785c22297d29207d222c2276657273696f6e223a317d\")) }",
+      "source" : "{|| return(\"tail\".trim().split(\",\").set_key(\"k\",1).with(){return(\"x\")}) }",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "flags" : "",
+                     "kind" : "regex",
+                     "pattern" : "a",
+                     "source" : "/a/",
+                     "source_span" : {
+                        "end" : 17,
+                        "start" : 14
+                     }
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"x\"",
+                     "source_span" : {
+                        "end" : 21,
+                        "start" : 18
+                     },
+                     "value" : "x"
+                  },
+                  {
+                     "kind" : "string",
+                     "quote" : "\"",
+                     "source" : "\"g\"",
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 22
+                     },
+                     "value" : "g"
+                  }
+               ],
+               "method" : "substr",
+               "source" : "substr(/a/,\"x\",\"g\")",
+               "source_method" : "substr",
+               "source_span" : {
+                  "end" : 26,
+                  "start" : 7
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".substr(/a/,\"x\",\"g\")",
+         "source_span" : {
+            "end" : 26,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return undef",
+      "source" : "\"tail\".substr(/a/,\"x\",\"g\")",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "block" : {
+                        "kind" : "action_block",
+                        "source" : "return(\"x\")",
+                        "source_span" : {
+                           "end" : 25,
+                           "start" : 14
+                        },
+                        "statements" : [
+                           {
+                              "drops_value" : 1,
+                              "expr" : {
+                                 "args" : [
+                                    {
+                                       "kind" : "string",
+                                       "quote" : "\"",
+                                       "source" : "\"x\"",
+                                       "source_span" : {
+                                          "end" : 24,
+                                          "start" : 21
+                                       },
+                                       "value" : "x"
+                                    }
+                                 ],
+                                 "kind" : "call",
+                                 "name" : "return",
+                                 "source" : "return(\"x\")",
+                                 "source_method" : "return",
+                                 "source_span" : {
+                                    "end" : 25,
+                                    "start" : 14
+                                 }
+                              },
+                              "kind" : "action_stmt",
+                              "source" : "return(\"x\")",
+                              "source_span" : {
+                                 "end" : 25,
+                                 "start" : 14
+                              }
+                           }
+                        ]
+                     },
+                     "kind" : "block_value",
+                     "source" : "{return(\"x\")}",
+                     "source_span" : {
+                        "end" : 26,
+                        "start" : 13
+                     }
+                  }
+               ],
+               "method" : "trim",
+               "receiver_trailing_block_arg" : 1,
+               "source" : "trim(){return(\"x\")}",
+               "source_method" : "trim",
+               "source_span" : {
+                  "end" : 26,
+                  "start" : 7
+               },
+               "trailing_block_arg" : 1,
+               "trailing_block_source_span" : {
+                  "end" : 26,
+                  "start" : 13
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "string",
+            "quote" : "\"",
+            "source" : "\"tail\"",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            },
+            "value" : "tail"
+         },
+         "source" : "\"tail\".trim(){return(\"x\")}",
+         "source_span" : {
+            "end" : 26,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:trim\"; undef }",
+      "source" : "\"tail\".trim(){return(\"x\")}",
+      "warnings" : []
+   }
+]

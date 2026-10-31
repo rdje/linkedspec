@@ -3148,8 +3148,9 @@ by backend; declared Lua5.4, complete domains and full portable admission remain
 
 A separate receiver-only String-to-Array-to-incompatible-Hash chain ending in
 `with` still runs rejected operands/body on Rust, Dart, Julia and both tested Lua
-hosts. The bounded receiver-prefix repair is frozen and Perl is first. The Perl
-with-bridge counterpart remains unready; its no-with form can report ready while
-failing generated-code compilation, and direct String rejection can still enter
-a later with body. The repair will explicitly establish readiness while keeping
-existing signatures, producers, malformed forms and unrelated contexts intact.
+hosts. Perl now guards the bounded canonical receiver String-prefix paths,
+including no-with compilation and rejection before later with bodies. Its prior
+unsupported bridge is explicitly ready, with source effects, valid null/empty
+with inputs and original signatures/producers/malformed forms intact. Regenerate
+emitted Perl. Independent Rust repair is next, followed by the remaining peers;
+this does not establish complete source/domain/context admission.

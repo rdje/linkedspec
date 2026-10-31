@@ -5430,8 +5430,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
   # so a rejected consumer cannot be normalized into an ordinary null.
   my $constructor_result_source = _ordinary_constructor_result_source($receiver);
   my $free_string_result_source = _ordinary_free_string_result_source($receiver);
+  # Existing canonical String receiver prefixes retain their result guards
+  # after explicit Array bridges. Dedicated traversal/overload routes stay separate.
+  my $ordinary_string_receiver_prefix = _is_scalar_string_receiver_value_chain_method($calls->[0]{method})
+   && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
-    || $constructor_result_source || $free_string_result_source)
+    || $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -5848,9 +5854,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $current_expr = '$__ls_free_default_value';
    }
    foreach my $call (@$calls) {
-    # A constructor continuation may cross kinds at any link. Reuse actual-kind
-    # dispatch after intermediate results as well as at the original source.
-    $current_family = 'default_result' if $constructor_result_source || $free_string_result_source;
+    # Retained result sources and String prefixes may cross kinds at any link.
+    # Reuse actual-kind dispatch after intermediate results as well as at the source.
+    $current_family = 'default_result'
+     if $constructor_result_source || $free_string_result_source || $ordinary_string_receiver_prefix;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')

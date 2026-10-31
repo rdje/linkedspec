@@ -45,4 +45,4 @@ Julia62.4 ordinary free-source guards repaired: [[julia-free-string-result-guard
 
 Safe Lua62.5 ordinary free-source guards repaired: [[lua-free-string-result-guards]]. Both installed hosts independently confirm receiver-only [ran,KVW], P1 context62.6 immediately next/before23.4.
 
-Receiver-only repair target frozen: [[receiver-string-bridge-guard-gap]]; P1 Perl62.6.1 immediately next.
+Receiver-only repair target frozen: [[receiver-string-bridge-guard-gap]]; Perl62.6.1 repaired/readiness established; Rust62.6.2 immediately next.

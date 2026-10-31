@@ -99,8 +99,8 @@ sub check_source {
 # TYPE-REFERENCE-BOOK.1.2.23.3.62.1 — canonical free String sources and P1 isolation.
 for my $row (@{$json->decode(read_file('tests/fixtures/free_string_result_cases.json'))}) {
     next if $row->{expected_error};
-    check_source($row->{id},$row->{source},$row->{input},$row->{expected},0,'Value',
-        $row->{perl_legacy_unready} ? ['with'] : []);
+    # TYPE-REFERENCE-BOOK.1.2.23.3.62.6.1 explicitly admits the receiver-only bridge.
+    check_source($row->{id},$row->{source},$row->{input},$row->{expected},0,'Value');
 }
 check_source('numeric_identity_remains_an_array_index',q|Value:: I {slots=["old"];index=rm_prefix(0,"x").copy();slots[index]="updated";return([index,slots,rm_suffix(false,"x").copy()])}|,'x',$json->decode(q|[0,["updated"],false]|),0,'Value');
 subtest 'needed String source error precedes recovery' => sub {

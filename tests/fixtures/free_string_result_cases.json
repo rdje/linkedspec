@@ -187,8 +187,6 @@
     "input": "x",
     "input_characters": 1,
     "leading_codepoint": 120,
-    "perl_legacy_unready": true,
-    "qualification": "Perl receiver-only invalid Array-to-Hash with tail: preserve existing unresolved-with/unready context, not a positive source-admission claim or portable peer expectation.",
     "rule": "Value",
     "source": "Value:: I {order=\"\";out=\" a,b \".trim().split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
   },

@@ -406,6 +406,19 @@ unsupported receiver contexts remain separate. Rust, Dart, Julia and tested Lua 
 String-to-Array-to-incompatible-Hash chains ending in `with` still run rejected
 arguments/body; that separate repair is scheduled before admission.
 
+Perl also retains the guard through canonical receiver String prefixes:
+
+```text
+" a,b ".trim().split(",").set_key("k",1)       # null
+"tail".trim().take(1).with(){return("ran")}    # null; body skipped
+"".trim().split(",").take(0).first().with(){return("recovered")} # recovered
+```
+
+These paths compile and have ready ActionIR metadata. Source effects run once,
+rejected consumer arguments and later bodies stay skipped, and legitimate empty
+or null values still enter `with`. Regenerate emitted Perl parsers.
+
+
 ### `lowercase(s)`
 - **Signature**: `lowercase(value: scalar)`
 - **Returns**: scalar
