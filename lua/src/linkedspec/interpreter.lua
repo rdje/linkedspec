@@ -3891,6 +3891,50 @@ function typed_source.receiver_mutation.is_ordinary_has_key_result_chain(expr, c
     name == "has_key" and #(first.args or {}) == 1 and ordinary_args(first.args or {})
 end
 
+-- String predicates retain numeric text flags, Bool matches and regex policy.
+-- Canonical source/prefix guards use the existing namespace, no new chunk locals.
+function typed_source.receiver_mutation.is_ordinary_string_predicate_result_chain(expr, calls)
+  local first = calls and calls[1]
+  if first == nil then return false end
+  for _, call in ipairs(calls) do
+    local method = action_contracts.canonical_action_helper_name(call.method)
+    if method == "walk_leaves" or method == "map_leaves" or method == "reduce_leaves" or
+      ((call.trailing_block_arg or call.receiver_trailing_block_arg) and method ~= "with") then
+      return false
+    end
+  end
+  local function ordinary_args(method, args)
+    for index, argument in ipairs(args) do
+      if argument.argument_kind ~= "positional" then return false end
+      local value = argument_expr(argument)
+      local kind = value and value.kind
+      if not (kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+        kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+        kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+        kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+        kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+        kind == "assign_nested_access" or kind == "codeblock_literal" or
+        (kind == "regex" and method == "matches" and index == #args)) then
+        return false
+      end
+    end
+    return true
+  end
+
+  if expr ~= nil and expr.kind == "call" and
+    (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg then
+    local args = expr.args or {}
+    local count, name = #args, expr.name
+    local valid_arity = (name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches") and count == 2
+    if valid_arity and ordinary_args(name, args) then return true end
+  end
+  local name = first.method
+  if (first.source_method or name) ~= name then return false end
+  local args = first.args or {}
+  local valid_arity = (name == "starts_with" or name == "ends_with" or name == "contains_substr" or name == "matches") and #args == 1
+  return valid_arity and ordinary_args(name, args)
+end
+
 -- Retained boxed constructors keep their original payload/pair/splice producer.
 function typed_source.receiver_mutation.is_constructor_result_source(expr)
   if expr == nil or expr.kind ~= "call" or
@@ -4032,6 +4076,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     typed_source.receiver_mutation.is_ordinary_lexical_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_ordinary_definedness_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_ordinary_emptiness_result_chain(target_receiver, calls) or
+    typed_source.receiver_mutation.is_ordinary_string_predicate_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_ordinary_has_key_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_ordinary_logical_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or

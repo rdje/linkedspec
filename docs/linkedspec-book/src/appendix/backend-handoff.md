@@ -3315,5 +3315,16 @@ Incompatible operands/later bodies skip. Focused111 strict Number-versus-Bool
 assertions pass on native/restored-spec/generated-plan/fresh-module routes, with
 fifteen original healthy values, one source error and eighteen unchanged public
 syntax observations. Nearest271/strict depwarn and anchored precompile-only stderr
-checks pass. Rebuild Julia applications/runtime. Safe Lua70.5/full admission remain
-separate; checklist review uses the documented current manual path.
+checks pass. Rebuild Julia applications/runtime. Declared Lua5.4/full admission
+remain separate; checklist review uses the documented current manual path.
+
+
+Safe Lua70.5 retains canonical String-predicate source/prefix guards through bridges
+and immediate with, inside the existing receiver namespace without new interpreter
+chunk locals. Both installed PUC5.5.1/LuaJIT2.1.1788460057 pass111 strict JSON-kind
+checks on four routes; fifteen healthy values, the needed source error and eighteen
+public syntax observations stay exact. Nearest predicate fixture/free86/bridge66/
+presence116/loadfile/version checks pass with empty accepted-nearest-version stderr.
+Existing flags/regex/SOC/copy/default/numeric/valid with remain; incompatible operands
+and later bodies skip. Rebuild Lua applications/runtime. All bounded70 outcomes are
+recorded; declared5.4/general isolation/full admission remain separate.

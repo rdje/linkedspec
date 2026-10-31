@@ -509,8 +509,8 @@ such as `matches("abc",/^z/).copy().add(1)` yields `1` on Perl and null on the n
 peers, whose Boolean result is outside the strict numeric domain. Compatible
 `cat("!")` renders false flags as `"0!"` on all checked backends.
 
-Perl retains actual-kind and rejection guards through canonical two-operand free
-predicate calls and ordinary one-operand prefixes:
+Perl, Rust, Dart, Julia and the checked Lua hosts retain actual-kind and rejection
+guards through canonical two-operand free predicates and ordinary one-operand prefixes:
 
 ```text
 starts_with("abc","z").take(1)                    # undef
@@ -525,19 +525,13 @@ Incompatible consumer operands and later bodies stay skipped; completed source
 and predicate-operand effects remain. The source is captured before the operand,
 and the flag before subsequent consumer operands. Legitimate false, null and empty
 results still enter `with`, and an Array returned by the body accepts Array methods.
-Literal regex operands retain their existing representation and flags. Regenerate
-emitted Perl parsers. Rust now retains the same bounded source/prefix guards on
-native, restored-spec and generated-plan routes. Its text-predicate flags remain
-numeric and regex results Boolean. Existing literal regex operands and modes stay
-on the current producer; rebuild Rust applications/runtime. Dart likewise retains
-these bounded source/prefix guards on native, restored-spec and generated-plan
-routes, preserving numeric text flags, Boolean regex results and existing literal
-regex operands/modes. Rebuild Dart applications/runtime. Julia retains these
-bounded guards on native, restored-spec, generated-plan and freshly emitted module
-routes, preserving numeric text flags, Boolean regex results and existing literal
-operands/modes. Rebuild Julia applications/runtime. Lua guard behavior is assessed
-independently. Complete text/regex domains, contextual use and portable admission
-remain separate.
+Literal regex operands retain their existing representation and flags, including
+numeric Perl versus Boolean native regex results. Focused guard checks cover
+Perl native/fresh emission, Rust/Dart native/restored-spec/generated-plan,
+and Julia/Lua native/restored-spec/generated-plan/fresh-module routes. Regenerate
+emitted Perl parsers and rebuild applications with the current runtimes. Lua checks
+use installed PUC5.5.1/LuaJIT2.1.1788460057; declared5.4 remains separately owned.
+Complete text/regex domains, contextual use and portable admission remain separate.
 
 ### `replace_substr(s, old, new)`
 - **Signature**: `replace_substr(value: scalar, old: scalar, new: scalar)`
