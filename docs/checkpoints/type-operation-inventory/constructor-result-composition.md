@@ -1,7 +1,7 @@
 # Retained constructor result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.22; family23.3.61.
-Status: Frozen finite target; P1 Perl sort61.0 precedes constructor61.1/peers.
+Status: Bounded Perl61.1 and P1 comparator61.0 targeted-checked; independent peers/full admission pending.
 
 Uniform binding retains array(), array("literal"), multi-expression Array calls,
 hash() and paired ordinary key/value Hash calls. Exact one-bare-identifier
@@ -44,3 +44,26 @@ Sort-scope shared7 retains all discriminating programs. Own production/activatio
 inputs unchanged before book update; actual producers/inputs/modules/results in
 constructor-result-selection-intake.json.gz. P1 sort61.0 then constructor61.1 and
 independent peers61.2-.5, no peer/domain/portable/full23.4 admission inferred.
+
+## Bounded Perl61.1 outcome
+
+Retained ordinary constructor results reuse current actual-kind guards through
+intermediate links and scoped immediate-with rejection state. Invalid consumers
+skip arguments/later bodies; legitimate empty/null with inputs still run. Original
+typed payload/pair/splice/odd/malformed/selector/signature policies remain. Public
+tools separately prove computed Hash keys passed raw DSL to tag normalization;
+they now reuse typed value lowering, preserving bare/literal key policy, local
+returns, ordered key/value snapshots, function scope and original needed errors.
+
+Same19 baseline14healthy5RED to guard candidate18PASS1RED. Expanded23 baseline
+18PASS5RED plus selected4 baseline2PASS2RED precede key edit; final unchanged25
+PASS native/fresh/metadata. No full25 RED baseline claimed.23 values/original13/
+candidate17/expanded17 healthy observations/inherited argument error exact;
+eight excluded AST/lowerings unchanged. Nearest free-default/uniform-binding and
+syntax pass. Actual source/producers/all inputs/epochs/setup corrections retained
+in constructor-perl-intake.json.gz. Only explicitly preloaded/source-verified
+overlay establishes original behavior; earlier overridden -I/diagnostic-prefix
+reader errors are disqualified setup observations. Known SESSION7 wrapper EPERM
+recurrence supplies no lifecycle claim. Regenerate emitted Perl. New25/shared15/
+excluded8 canonical registration remains23.4.1-owned; Rust61.2 next, full admission
+separate. Comparator61.0 preserves original expected7.

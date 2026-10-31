@@ -3108,11 +3108,14 @@ context/portable admission remain separate.
 
 Feature61 targets retained Array/Hash constructor result composition. Perl already
 preserves primitive values, direct reads, selected/completed guards, order/function/
-with and needed-error controls. Direct incompatible consumers runtime-fail or emit
-invalid source despite ready metadata. Perl's separate comparator-scope defect is
-repaired: sorting remains correct with legal working/function names `a` and `b`,
+with and needed-error controls. Retained ordinary constructor results now guard
+incompatible consumers through native/fresh execution, skipping their arguments
+and later with bodies while retaining legitimate empty/null inputs. Computed Hash
+keys now use typed value lowering, preserving key/value order, local returns,
+snapshots, function scope and original bare/literal key policy. Perl's separate
+comparator-scope defect is repaired: sorting remains correct with legal working/function names `a` and `b`,
 preserving their values, input arrays and scalar kinds. Native and freshly emitted
-parsers pass focused scope/kind/order checks; regenerate older emitted Perl parsers.
-Constructor61.1 is next, followed by independently assessed peers.
+parsers pass focused scope/kind/order checks.
+Regenerate emitted Perl parsers. Independent Rust61.2 is next, followed by peers.
 No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.

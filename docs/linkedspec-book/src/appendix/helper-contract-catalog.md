@@ -782,15 +782,23 @@ sorted([2,"10",1])               # [1,"10",2] (lexicographic)
 - **Function values**: Multi-argument `array(value, value)` reads parameter/local values just like `[value, value]`.
   See the [executed function example](../dsl/value-container-flow-helper-reference.md#array-constructors-inside-functions).
 
-Retained constructor values support direct reads on current Perl:
-`array("head","tail")[-1].uppercase()` and
-`hash("k",["head","tail"])["k"][-1].uppercase()` both yield `"TAIL"`.
-Direct incompatible container consumers have an owned source-dispatch gap:
-`array("tail").set_key("k",1)` runtime-fails, and Hash-to-Array argument blocks
-can emit invalid source. A completed value and existing guarded bridge work:
-`items=array("tail"); items.coalesce(undef).set_key("k",1)` returns null.
-Other backends are assessed independently; element/pair/list-splice and selector
-retirement rules above stay in force.
+Retained ordinary constructor values support direct reads and guarded methods on
+current Perl. Incompatible container consumers return null before their arguments
+or later `with` bodies run. Legitimate empty/null results still enter `with`:
+
+```text
+array("head","tail")[-1].uppercase()       # "TAIL"
+hash("k",["head","tail"])["k"][-1].uppercase() # "TAIL"
+array("tail").set_key("k",1)                # null
+hash("k","tail").take(1)                   # null
+array("tail").take(0).with(){return(value.count())} # 0
+array("tail").with(){return(undef)}.with(){return("recovered")} # "recovered"
+```
+
+Source and needed constructor arguments run once before consumers. Compatible
+intermediate links retain actual-kind guards; rejection skips subsequent bodies.
+Regenerate affected emitted Perl parsers. Other backends are assessed independently;
+element/pair/list-splice, bare-key and selector retirement rules remain in force.
 
 
 ### Array receiver-dot value chains
@@ -1073,6 +1081,19 @@ retirement rules above stay in force.
   the removed selector before execution.
 - **Edge cases**: Duplicate keys: last value wins. Direct multi-argument constructor calls should pass paired
   key/value arguments; use an explicit `undef` value for a null-valued trailing key.
+
+On Perl, computed key expressions use the same typed evaluation as values,
+including helper calls, indexed reads and action blocks with local returns:
+
+```text
+hash(cat("k","x"),false)        # {"kx":false}
+hash({return("k")},[0,"tail"]) # {"k":[0,"tail"]}
+```
+
+Keys evaluate before their associated values and retain their evaluated snapshot
+if a later value rebinds a working variable. Bare tag keys retain their existing
+spelling; use a block or another computed expression for a dynamic binding value.
+Needed key errors propagate before a consumer runs. Regenerate emitted Perl parsers.
 
 ### `flat_hash(h)`
 - **Signature**: `flat_hash(h: hash)`
