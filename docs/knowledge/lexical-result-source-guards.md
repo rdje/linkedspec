@@ -8,7 +8,7 @@ answers:
   - "which task owns lexical comparison source and prefix guards"
   - "do lexical comparison result guard fixtures preserve backend Boolean kinds"
 date: 2026-10-31
-status: bounded Perl66.1/Rust66.2/Dart66.3 targeted-checked; independent Julia66.4/safe Lua/full admission separate
+status: bounded Perl66.1/Rust66.2/Dart66.3/Julia66.4 targeted-checked; safe Lua/full admission separate
 tags: [lexical, comparison, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.27; lexical-guard-selection-intake.json.gz retains actual public20 producer/all inputs/results and three explicit non-Perl kind profiles."
 reverify: "Recover public20/shared20/original Perl from lexical-guard-selection-intake.json.gz into new project-local outputs. Historical activation/run/freeze writers one-shot never replay. Owners66.1-.5; peers use expected_nonperl override where present."
@@ -21,3 +21,5 @@ Current Perl implementation: Perl66.1 repairs canonical lexical comparison sourc
 Independent Rust guard repair/Bool profile preservation: [[rust-lexical-result-source-guards]].
 
 Independent Dart lexical Array-bridge repair and healthy Bool/null controls: [[dart-lexical-result-source-guards]].
+
+Independent Julia lexical Array-bridge repair/strict Bool/healthy controls: [[julia-lexical-result-source-guards]].

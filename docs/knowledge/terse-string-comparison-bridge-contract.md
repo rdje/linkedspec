@@ -35,3 +35,5 @@ Canonical free/ordinary prefix lexical guard composition through Array bridges/l
 Rust66.2 independently repairs canonical free/ordinary prefix source guards through bridges/later with while preserving Bool and existing null/Unicode qualifications: [[rust-lexical-result-source-guards]].
 
 Dart66.3 independently repairs lexical source/ordinary prefix guards after Array bridges while preserving Bool/null propagation/Unicode qualifications: [[dart-lexical-result-source-guards]]. Direct rejection already works, not newly repaired.
+
+Julia66.4 independently repairs lexical source/ordinary prefix guards after Array bridges while preserving Bool/null propagation/Unicode qualifications: [[julia-lexical-result-source-guards]]. Direct rejection already works.

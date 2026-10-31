@@ -3192,11 +3192,11 @@ original source errors preserved. Lua uses installed PUC5.5.1/LuaJIT; declared5.
 and canonical full source/domain/context admission remain separate.
 
 
-Perl, Rust and Dart feature66 retain lexical comparison source/ordinary prefix
-guards through Array bridges and later immediate with bodies. Dart direct guards
-already worked; its Array bridges now retain the boundary. Rejected consumers
-skip operands/bodies; Perl numeric1-0 versus Rust/Dart Bool flags/copies and
-legitimate zero/false/null/empty with stay. Regenerate emitted Perl and rebuild
-Rust/Dart apps/runtime. Focused recorded native/restored/plan/error controls and
-Perl fresh/readiness pass; Julia/safe Lua remain independent with existing null/
-Unicode limits. Canonical full source/domain/context admission remains separate.
+Perl, Rust, Dart and Julia feature66 retain lexical comparison source/ordinary
+prefix guards through Array bridges and later immediate with bodies. Dart/Julia
+direct guards already worked; their Array bridges now retain the boundary.
+Rejected consumers skip operands/bodies; Perl numeric1-0 versus peer Bool flags/
+copies and legitimate zero/false/null/empty with stay. Regenerate emitted Perl
+and rebuild Rust/Dart/Julia apps/runtime. Focused native/restored/plan/error and
+fresh Perl/Julia routes pass with Perl readiness/strict Julia Bool checks. Safe
+Lua remains independent; existing null/Unicode limits/full admission stay separate.

@@ -1324,23 +1324,23 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 
 
 The [six-method reference](../dsl/value-container-flow-helper-reference.md#scalar-predicates-and-string-comparisons)
-shows lexical true/false examples. Perl, Rust and Dart retain actual-kind and rejection guards
+shows lexical true/false examples. Perl, Rust, Dart and Julia retain actual-kind and rejection guards
 through canonical free comparisons and ordinary comparison prefixes:
 
 ```text
 str_eq("a","b").take(1)                         # null
 "a".str_eq("b").take(1).with(){return("ran")}     # null; body skipped
 str_lt("a","b").split(",").set_key("k",1).with(){return("ran")} # null
-str_eq("a","b").with(){return([value,value.copy()])}           # Perl [0,0], Rust/Dart [false,false]
+str_eq("a","b").with(){return([value,value.copy()])}           # Perl [0,0], Rust/Dart/Julia [false,false]
 str_eq("a","a").add("bad").with(){return("null")}              # "null"
 ```
 
 Incompatible consumer operands and later bodies stay skipped; source operands
 still run once in order. Legitimate zero/null/empty results enter `with`, and
 an Array returned by a valid body may continue with Array methods. Perl reports
-ready ActionIR metadata; Rust/Dart pass native/restored compiled-spec/SpecFile/
-generated-plan controls. Regenerate emitted Perl parsers and rebuild Rust/Dart
-apps/runtime. Other
+ready ActionIR metadata; Rust/Dart/Julia pass native/restored compiled-spec/SpecFile/
+generated-plan controls, with a fresh emitted Module on Julia. Regenerate emitted
+Perl parsers and rebuild Rust/Dart/Julia apps/runtime. Other
 backends are assessed independently with their existing Boolean result kinds;
 the producer/null/Unicode qualifications above remain unchanged.
 
