@@ -3356,3 +3356,11 @@ nearest membership/null-key/String-predicate checks plus owned fmt pass. Existin
 numeric flags/SOC/null-prefix effects/error/public shapes remain exact; later
 incompatible operands/bodies skip. Rebuild Rust apps/runtime. Dart71.3 follows
 independently; P1 copy71.6/general isolation/domain/context/full admission remain.
+
+
+Dart71.3 preserves contains source/prefix actual-kind guards on native/restoredSpec/
+in-process plan routes. Shared23/null-prefix3/null-plus-with2/source scaffold29 and
+nearest membership/null-key/String-predicate28 pass, plus fatal owner/new-test
+analysis and scoped formatting. Numeric flags/SOC/null effects/error/public shapes
+stay exact; incompatible operands/later bodies skip. Rebuild Dart apps/runtime.
+Julia71.4 follows independently; P1 copy71.6/general isolation/full admission remain.

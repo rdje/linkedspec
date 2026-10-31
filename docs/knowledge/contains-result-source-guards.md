@@ -8,7 +8,7 @@ answers:
   - "why does literal null contains differ from selected null"
   - "which task owns copied-null contains and rejected-copy revival"
 date: 2026-10-31
-status: Perl producer71.0/guards71.1 and Rust71.2 targeted-checked; independent Dart/Julia/Lua and P1 copy71.6 remain
+status: Perl producer71.0/guards71.1, Rust71.2 and Dart71.3 targeted-checked; Julia/Lua/P1 copy71.6 remain
 tags: [array, contains, predicates, source, guards, copy, null]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.32; contains-guard-selection-intake.json.gz retains original26/additional boundary10/producer5/block AST4/canonical4/excluded18 public observations, actual instruments and declared inputs."
 reverify: "Recover retained public observers into new project-local outputs at declared source boundary. Historical activation/freeze writers one-shot. Owners71.0/71.1-.5 and mandatory71.6 independently qualify behavior; transport0/ready1 do not establish feature execution."
@@ -31,3 +31,5 @@ Perl71.1 preserves canonical contains source/prefix guards through inter-type co
 `_ordinary_free_contains_result_source` and the ordinary one-needle prefix role in `perl/LinkedSpec/ActionIR/MethodLowering.pm` join existing emitted, scoped-with and intermediate guards. The leading nullable-membership exception preserves producer effects; it does not admit later Array consumers or implement general rejection-state/copy closure. Historical selection gaps above remain historical; mandatory copy71.6 independently reassesses after primary peer outcomes.
 
 Rust71.2 now preserves source/prefix guards while retaining its already healthy leading nullable membership. Native/restoredSpec/plan27/nearest/owned fmt and unchanged public shapes pass; mechanism and limits: [[rust-contains-source-guards]]. Dart71.3 independently next; P1 copy71.6 remains mandatory after primary peers.
+
+Dart71.3 now preserves contains source/prefix guards through its common kind guard and retains already healthy leading null/with effects. Native/restoredSpec/plan29/nearest28/analysis/scoped formatting pass; mechanism/limits: [[dart-contains-source-guards]]. Julia71.4 independently next; copy71.6 remains mandatory after primary peers.

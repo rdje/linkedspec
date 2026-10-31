@@ -1,0 +1,24 @@
+[
+  {
+    "id": "block_null_with",
+    "body": "order=\"\";out={order=cat(order,\"S\");undef}.contains({order=cat(order,\"O\");\"a\"}).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");undef}.contains({order=cat(order,\"O\");\"a\"}).with(){order=cat(order,\"W\");return(value)};return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      0,
+      "SOW"
+    ]
+  },
+  {
+    "id": "literal_null_with",
+    "body": "order=\"\";out=undef.contains({order=cat(order,\"O\");\"a\"}).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.contains({order=cat(order,\"O\");\"a\"}).with(){order=cat(order,\"W\");return(value)};return([out,order])}",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      0,
+      "OW"
+    ]
+  }
+]

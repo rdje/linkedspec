@@ -4085,6 +4085,7 @@ final class LinkedSpecRuntimeEngine {
               _isOrdinaryDefinednessResultChain(receiver, calls) ||
               _isOrdinaryEmptinessResultChain(receiver, calls) ||
               _isOrdinaryStringPredicateResultChain(receiver, calls) ||
+              _isOrdinaryContainsResultChain(receiver, calls) ||
               _isOrdinaryHasKeyResultChain(receiver, calls) ||
               _isOrdinaryLogicalResultChain(receiver, calls) ||
               _isInputCursorValueSource(receiver) ||
@@ -6138,6 +6139,70 @@ final class LinkedSpecRuntimeEngine {
         ordinaryArgs(first.method, first.args);
   }
 
+  // Retain numeric membership flags and existing equality/null domains.
+  // Canonical free-two calls and one-needle prefixes keep actual-kind guards.
+  bool _isOrdinaryContainsResultChain(
+    ActionExpr? receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.isEmpty ||
+        calls.any(
+          (call) =>
+              traversal.contains(canonicalActionHelperName(call.method)) ||
+              ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+                  canonicalActionHelperName(call.method) != 'with'),
+        )) {
+      return false;
+    }
+    bool ordinaryArgs(List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      return arguments.every(
+        (argument) => switch (argument.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        },
+      );
+    }
+
+    if (receiver is ActionCallExpr &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg) {
+      final validArity = switch (receiver.name) {
+        'contains' => receiver.args.length == 2,
+        _ => false,
+      };
+      if (validArity && ordinaryArgs(receiver.args)) {
+        return true;
+      }
+    }
+    final first = calls.first;
+    return first.method == 'contains' &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        first.args.length == 1 &&
+        ordinaryArgs(first.args);
+  }
+
   // Preserve constructor payload/pair/splice policy; guard retained boxed forms.
   bool _isConstructorResultSource(ActionExpr expression) {
     if (expression is! ActionCallExpr ||
@@ -6321,6 +6386,7 @@ final class LinkedSpecRuntimeEngine {
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
+    var firstCall = true;
     for (final call in calls) {
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
@@ -6329,13 +6395,22 @@ final class LinkedSpecRuntimeEngine {
           value == null &&
           helper == 'has_key' &&
           _isOrdinaryHasKeyResultChain(null, [call]);
+      // Leading nullable membership keeps its existing needle effects.
+      // Later container consumers retain their strict kind guards.
+      final nullableMembership =
+          firstCall &&
+          value == null &&
+          helper == 'contains' &&
+          _isOrdinaryContainsResultChain(null, [call]);
       // Reduced, copied, scoped and computed values retain their actual kinds.
       // Validate container-only consumers before evaluating their operands.
       if ((reductionResult || kindGuardedResult) &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&
-          ((_arrayOnlyReceiverHelpers.contains(helper) && value is! List) ||
+          ((_arrayOnlyReceiverHelpers.contains(helper) &&
+                  value is! List &&
+                  !nullableMembership) ||
               (_hashOnlyReceiverHelpers.contains(helper) &&
                   value is! Map &&
                   !nullablePresence))) {
@@ -6399,6 +6474,7 @@ final class LinkedSpecRuntimeEngine {
           ((scalarResult || mayProduceScalar) &&
               value is! List &&
               value is! Map);
+      firstCall = false;
     }
     return value;
   }
