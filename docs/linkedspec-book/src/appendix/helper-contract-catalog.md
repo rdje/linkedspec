@@ -324,7 +324,15 @@ later `with` bodies stay skipped. Compatible Array and Hash methods still work,
 and required fallback blocks run once before consumers. Empty containers are
 values; `coalesce_nonempty` rejects empty Scalar text rather than testing container
 emptiness or truthiness. Rebuild Rust applications with the updated runtime.
-Free-helper result-source coverage and complete operand domains remain separate.
+Direct free-helper selections preserve primitive kinds and compatible methods.
+Their incompatible container consumers have an owned source-dispatch gap on Perl
+and Rust, including published Scalar inputs. For example,
+`coalesce(undef,"tail").set_key("k",1)` must return null, but can currently run
+unchecked; readiness metadata does not prove successful execution. Until repaired,
+bind the selected value and use its existing guarded receiver bridge:
+`saved=coalesce(undef,"tail"); saved.coalesce(undef).set_key("k",1)` returns null.
+This is result composition work; published free-helper Scalar domains and complete
+operand admission stay separate. See the backend handoff for repair status.
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`

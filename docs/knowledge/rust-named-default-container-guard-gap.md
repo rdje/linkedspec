@@ -53,3 +53,5 @@ are retained, no calibration RED credit. Free-helper result guards remain owned
 P2 selection21 after59.5/before admission; current repair does not promote free
 helper aggregate domains. Actual custody: named-default-rust-intake.json.gz.
 Rebuild apps/runtime; Dart59.3 follows, full admission separate.
+
+Selection21 independently confirms published Scalar and qualified container free-source guard defects on Perl/Rust; frozen60/P1 Perl60.1 then Rust60.2 own repairs: [[free-default-result-source-guards]]. Receiver59.6 stays bounded complete.

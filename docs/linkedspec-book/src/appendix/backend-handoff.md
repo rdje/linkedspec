@@ -3084,3 +3084,12 @@ interpreter chunk locals. Rebuild runtime/apps. Bounded59 outcomes are recorded;
 owned free-source selection21 follows, with declared5.4/full admission separate.
 Ordinary assignment copy/alias rules, operators/grouping/aliases/deferred/schema
 authority and full admission remain separate.
+
+Feature60 owns canonical free `coalesce`/`coalesce_nonempty` result guards. Public
+Perl/Rust primitive values, compatible methods, selected reads, lazy skipping,
+snapshot order and function scope already work. Direct incompatible consumers
+also expose gaps with published Scalar inputs: operands/with bodies run, and
+some Perl guards runtime-fail despite ready metadata. P1 Perl60.1 is next, then
+Rust60.2 and independently assessed peers60.3-.5. Completed-value guarded receiver
+bridges work. Free signatures, qualified aggregate compatibility and full domain/
+context/portable admission remain separate.

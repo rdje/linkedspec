@@ -1,0 +1,193 @@
+[
+  {
+    "id": "scalar_primitives",
+    "rule": "Value",
+    "body": "return([coalesce(undef,\"tail\"),coalesce(\"\",\"late\"),coalesce(0,7),coalesce(false,true),coalesce(undef,undef),coalesce_nonempty(\"\",0,\"late\"),coalesce_nonempty(undef,false,\"late\"),coalesce_nonempty(undef,\"\")])",
+    "source": "Value::\n I {return([coalesce(undef,\"tail\"),coalesce(\"\",\"late\"),coalesce(0,7),coalesce(false,true),coalesce(undef,undef),coalesce_nonempty(\"\",0,\"late\"),coalesce_nonempty(undef,false,\"late\"),coalesce_nonempty(undef,\"\")])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "tail",
+      "",
+      0,
+      false,
+      null,
+      0,
+      false,
+      null
+    ]
+  },
+  {
+    "id": "scalar_compatible",
+    "rule": "Value",
+    "body": "return([coalesce(undef,\" tail \").trim().uppercase(),coalesce_nonempty(\"\",0).add(1),coalesce(false,true).not(),coalesce_nonempty(undef,\"tail\").cat(\"!\")])",
+    "source": "Value::\n I {return([coalesce(undef,\" tail \").trim().uppercase(),coalesce_nonempty(\"\",0).add(1),coalesce(false,true).not(),coalesce_nonempty(undef,\"tail\").cat(\"!\")])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "TAIL",
+      1,
+      true,
+      "tail!"
+    ]
+  },
+  {
+    "id": "scalar_string_guards",
+    "rule": "Value",
+    "body": "order=\"\";a=coalesce(undef,\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=coalesce_nonempty(\"\",\"tail\").take({order=cat(order,\"A\");1});return([a,b,order])",
+    "source": "Value::\n I {order=\"\";a=coalesce(undef,\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=coalesce_nonempty(\"\",\"tail\").take({order=cat(order,\"A\");1});return([a,b,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "scalar_number_bool_guards",
+    "rule": "Value",
+    "body": "order=\"\";a=coalesce(undef,0).take({order=cat(order,\"A\");1});b=coalesce_nonempty(undef,false).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])",
+    "source": "Value::\n I {order=\"\";a=coalesce(undef,0).take({order=cat(order,\"A\");1});b=coalesce_nonempty(undef,false).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "container_compatible",
+    "rule": "Value",
+    "body": "return([coalesce(undef,[\"head\",\"tail\"])[-1].uppercase(),coalesce_nonempty(undef,{\"k\":\"tail\"}).sorted_keys().last().uppercase(),coalesce([],\"late\").count(),coalesce_nonempty({},\"late\").count_keys()])",
+    "source": "Value::\n I {return([coalesce(undef,[\"head\",\"tail\"])[-1].uppercase(),coalesce_nonempty(undef,{\"k\":\"tail\"}).sorted_keys().last().uppercase(),coalesce([],\"late\").count(),coalesce_nonempty({},\"late\").count_keys()])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "TAIL",
+      "K",
+      0,
+      0
+    ]
+  },
+  {
+    "id": "container_guards",
+    "rule": "Value",
+    "body": "order=\"\";a=coalesce([\"tail\"],undef).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=coalesce_nonempty({\"k\":\"tail\"},undef).take({order=cat(order,\"A\");1});return([a,b,order])",
+    "source": "Value::\n I {order=\"\";a=coalesce([\"tail\"],undef).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=coalesce_nonempty({\"k\":\"tail\"},undef).take({order=cat(order,\"A\");1});return([a,b,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "completed_bound_guards",
+    "rule": "Value",
+    "body": "order=\"\";saved=coalesce(undef,[\"tail\"]);meta=coalesce_nonempty(\"\",{\"k\":\"tail\"});a=saved.coalesce(undef).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=meta.coalesce(undef).take({order=cat(order,\"A\");1});return([a,b,saved,meta,order])",
+    "source": "Value::\n I {order=\"\";saved=coalesce(undef,[\"tail\"]);meta=coalesce_nonempty(\"\",{\"k\":\"tail\"});a=saved.coalesce(undef).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});b=meta.coalesce(undef).take({order=cat(order,\"A\");1});return([a,b,saved,meta,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      null,
+      [
+        "tail"
+      ],
+      {
+        "k": "tail"
+      },
+      ""
+    ]
+  },
+  {
+    "id": "selected_guard",
+    "rule": "Value",
+    "body": "order=\"\";a=coalesce(undef,[\"tail\"])[0].set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,order])",
+    "source": "Value::\n I {order=\"\";a=coalesce(undef,[\"tail\"])[0].set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "lazy_order_and_snapshot",
+    "rule": "Value",
+    "body": "order=\"\";items=[\"head\",\"tail\"];out=coalesce({order=cat(order,\"S\");undef},{order=cat(order,\"D\");items},{order=cat(order,\"L\");\"late\"})[{items=[\"new\"];order=cat(order,\"I\");-1}].cat({order=cat(order,\"C\");\"!\"}).uppercase();return([out,items,order])",
+    "source": "Value::\n I {order=\"\";items=[\"head\",\"tail\"];out=coalesce({order=cat(order,\"S\");undef},{order=cat(order,\"D\");items},{order=cat(order,\"L\");\"late\"})[{items=[\"new\"];order=cat(order,\"I\");-1}].cat({order=cat(order,\"C\");\"!\"}).uppercase();return([out,items,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "TAIL!",
+      [
+        "new"
+      ],
+      "SDIC"
+    ]
+  },
+  {
+    "id": "skip_unused_failure",
+    "rule": "Value",
+    "body": "order=\"\";a=coalesce(\"\",{items=\"text\";push(items,\"x\")}).cat(\"!\");b=coalesce_nonempty(0,{items=\"text\";push(items,\"x\")}).add(1);return([a,b,order])",
+    "source": "Value::\n I {order=\"\";a=coalesce(\"\",{items=\"text\";push(items,\"x\")}).cat(\"!\");b=coalesce_nonempty(0,{items=\"text\";push(items,\"x\")}).add(1);return([a,b,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "!",
+      1,
+      ""
+    ]
+  },
+  {
+    "id": "with_kinds_and_outer_scope",
+    "rule": "Value",
+    "body": "value=\"outer\";order=\"\";a=coalesce(undef,\"tail\").with(){return({\"k\":[value,\"tail\"]})}[\"k\"][-1].uppercase();bad=coalesce_nonempty(\"\",\"tail\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([a,bad,value,order])",
+    "source": "Value::\n I {value=\"outer\";order=\"\";a=coalesce(undef,\"tail\").with(){return({\"k\":[value,\"tail\"]})}[\"k\"][-1].uppercase();bad=coalesce_nonempty(\"\",\"tail\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([a,bad,value,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      "TAIL",
+      null,
+      "outer",
+      ""
+    ]
+  },
+  {
+    "id": "function_scope",
+    "rule": "Value",
+    "body": "items=[\"caller\"];order=\"outer\";return([pick(),items,order])",
+    "source": "fn pick(){order=\"\";items=[\"head\",\"tail\"];out=coalesce({order=cat(order,\"S\");undef},{order=cat(order,\"D\");items},{order=cat(order,\"L\");\"late\"})[{items=[\"new\"];order=cat(order,\"I\");-1}].cat({order=cat(order,\"C\");\"!\"}).uppercase();return([out,items,order])}\nValue::\n I {items=[\"caller\"];order=\"outer\";return([pick(),items,order])}\n",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "expected": [
+      [
+        "TAIL!",
+        [
+          "new"
+        ],
+        "SDIC"
+      ],
+      [
+        "caller"
+      ],
+      "outer"
+    ]
+  }
+]
