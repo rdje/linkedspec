@@ -3203,11 +3203,12 @@ Lua uses installed PUC5.5.1/LuaJIT; declared5.4, existing null/Unicode qualifica
 and canonical full source/domain/context admission remain separate.
 
 
-Perl, Rust, Dart and Julia feature67 retain definedness source/ordinary zero-operand prefix
+Perl, Rust, Dart, Julia and installed Lua feature67 retain definedness source/ordinary zero-operand prefix
 guards through Array bridges and later immediate with. Rejected consumers skip
 operands/bodies; Perl native numeric-slot/text versus peer Bool/copy/default
 compatibility and legitimate false/null/empty with stay. Regenerate emitted Perl
-parsers and rebuild Rust/Dart/Julia apps/runtime. Focused native/fresh Perl readiness/error
-and Rust/Dart/Julia native/restored/plan/nearest controls pass, with a fresh emitted
-Julia Module/strict Bool/depwarn. Safe Lua is assessed independently; full
-source/domain/context admission remains separate.
+parsers and rebuild Rust/Dart/Julia/Lua apps/runtime. Focused native/fresh Perl
+readiness/error and Rust/Dart/Julia/Lua native/restored/plan/nearest controls pass,
+with fresh Julia/Lua modules and strict Julia Bool/depwarn. Lua proof uses available
+PUC5.5.1/LuaJIT, with no new interpreter chunk locals. Declared5.4 and full
+source/domain/context admission remain separate.
