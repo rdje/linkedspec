@@ -8,7 +8,7 @@ answers:
   - "which task owns emptiness source and prefix guards"
   - "does the free emptiness cat split bridge already retain guards"
 date: 2026-10-31
-status: bounded Perl68.1/Rust68.2 targeted-checked; independent peers/full admission separate
+status: bounded Perl68.1/Rust68.2/Dart68.3 targeted-checked; independent Julia68.4/safe Lua/full admission separate
 tags: [emptiness, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.29; emptiness-guard-selection-intake.json.gz retains actual public22 producer/all inputs/results/four existing peer profiles."
 reverify: "Recover public22/shared22/original source from retained intake into new project-local outputs; historical activation/run/freeze writers one-shot never replay. Owners68.1-.5 independently baseline; peers use expected_nonperl override where present."
@@ -21,3 +21,5 @@ Broader Perl conditional/host-slot boundaries: [[perl-emptiness-expression-and-h
 Current Perl implementation: Perl68.1 retains actual-kind and rejection guards for canonical one-value is_empty/is_nonempty sources and ordinary zero-operand prefixes. Unchanged22 groups14PASS8RED become22PASS on native/fresh routes: thirteen healthy values and one needed source error stay exact; seven wrong groups and one unsupported-with context are repaired. All21 values are ready/raw0/fallback0/unresolved0/warning-free. Incompatible operands and later immediate with bodies skip; source S, once-order, snapshots, numeric1-0/copy/default/repeated predicates and legitimate false/null/empty with/returned Array remain. The free cat/split bridge was already healthy. Existing producer/domains and broader SESSION16 FlowExpr/host-slot ownership stay unchanged. Nearest emptiness receiver6/value-expression11/definedness guard21=38, excluded public AST/lowering18 and owner/normal syntax pass. Every phase has exact before/after declared source/fixture identities, and four direct fixture files are derived from actual consumers; this is not a complete transitive census. 453 other activation inputs stay exact. Actual instruments/template prerequisites/inputs/raw results are retained in emptiness-guard-perl-intake.json.gz. New22/fences18/shared22/AST18 canonical registration remains23.4.1-owned. Regenerate emitted Perl; Rust68.2 independently baselines with four expected_nonperl profiles. No peer fix, predicate/domain normalization, excluded-runtime expansion, general isolation or full23.4 admission claim.
 
 Independent Rust Bool/source guard proof: [[rust-emptiness-result-source-guards]].
+
+Independent Dart Array-bridge/source guard proof: [[dart-emptiness-result-source-guards]].
