@@ -3681,6 +3681,51 @@ function typed_source.receiver_mutation.is_ordinary_numeric_result_chain(expr, c
   return ordinary_args(args)
 end
 
+-- Logical producers keep eager Bool values and ordinary method preflight.
+-- Retain actual-kind guards after explicit Array bridges, without chunk locals.
+function typed_source.receiver_mutation.is_ordinary_logical_result_chain(expr, calls)
+  local first = calls and calls[1]
+  if first == nil then return false end
+  for _, call in ipairs(calls) do
+    local method = action_contracts.canonical_action_helper_name(call.method)
+    if method == "walk_leaves" or method == "map_leaves" or method == "reduce_leaves" or
+      ((call.trailing_block_arg or call.receiver_trailing_block_arg) and method ~= "with") then
+      return false
+    end
+  end
+  local function ordinary_args(args)
+    for _, argument in ipairs(args) do
+      if argument.argument_kind ~= "positional" then return false end
+      local value = argument_expr(argument)
+      local kind = value and value.kind
+      if not (kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+        kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+        kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+        kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+        kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+        kind == "assign_nested_access" or kind == "codeblock_literal") then
+        return false
+      end
+    end
+    return true
+  end
+
+  if expr ~= nil and expr.kind == "call" and
+    (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg then
+    local args = expr.args or {}
+    local count, name = #args, expr.name
+    local valid_arity = ((name == "and" or name == "or") and count >= 1) or
+      (name == "not" and count == 1)
+    if valid_arity and ordinary_args(args) then return true end
+  end
+  local name = first.method
+  if (first.source_method or name) ~= name then return false end
+  local args = first.args or {}
+  local valid_arity = ((name == "and" or name == "or") and #args >= 1) or
+    (name == "not" and #args == 0)
+  return valid_arity and ordinary_args(args)
+end
+
 -- Retained boxed constructors keep their original payload/pair/splice producer.
 function typed_source.receiver_mutation.is_constructor_result_source(expr)
   if expr == nil or expr.kind ~= "call" or
@@ -3819,6 +3864,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     typed_source.receiver_mutation.is_free_string_result_source(target_receiver) or
     typed_source.receiver_mutation.is_ordinary_string_receiver_prefix(calls) or
     typed_source.receiver_mutation.is_ordinary_numeric_result_chain(target_receiver, calls) or
+    typed_source.receiver_mutation.is_ordinary_logical_result_chain(target_receiver, calls) or
     typed_source.receiver_mutation.is_input_cursor_value_source(target_receiver) or
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or

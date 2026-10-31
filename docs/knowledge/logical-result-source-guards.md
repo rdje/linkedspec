@@ -7,7 +7,7 @@ answers:
   - "which task owns logical source and prefix guard composition"
   - "does valid Boolean false or numeric domain null still enter with"
 date: 2026-10-31
-status: bounded Perl65.1/Rust65.2/Dart65.3/Julia65.4 targeted-checked; safe Lua/full admission pending
+status: all five bounded65 outcomes recorded on stated hosts/routes; full23.4 admission separate
 tags: [logical, boolean, source, guards, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.26; logical-guard-selection-intake.json.gz retains actual public22 producer/all inputs/results."
 reverify: "Recover public observer/shared22/original Perl from logical-guard-selection-intake.json.gz into new project-local outputs. Historical activation/recovery/run/freeze writers one-shot, never replay. Owners65.1-.5."
@@ -22,3 +22,5 @@ Independent Rust free-source repair/healthy receiver-prefix distinction: [[rust-
 Independent Dart Array-bridge guard repair/eighteen healthy values preserved: [[dart-logical-result-source-guards]].
 
 Independent Julia Array-bridge guard repair/strict Bool/healthy controls: [[julia-logical-result-source-guards]].
+
+Independent installed-host Lua Array-bridge guard repair/no new chunk locals: [[lua-logical-result-source-guards]]. All bounded65 outcomes recorded, canonical parent closeout separate.

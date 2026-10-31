@@ -61,3 +61,5 @@ strict JSON groups and two source-error cases pass all three routes on both safe
 hosts; direct result and loadfile checks pass. Actual Bool guards/scopes and
 value-preserving scalar copy remain. Full method/portable/declared5.4 admission
 stays separate; scalar-copy domain reconciliation is TYPE1.2.1.4.2 next.
+
+Logical free-source/ordinary-prefix guards after Array bridges are separately repaired by safe Lua65.5: [[lua-logical-result-source-guards]]. Direct rejection/valid false-null-empty with already work; eager producer/typed Bool/truth/arity/scalar_result remain unchanged. No new interpreter chunk locals. Declared5.4/full23.4 separate.
