@@ -3156,3 +3156,10 @@ signatures, domains, malformed forms and unrelated contexts stay with their
 existing contracts. Regenerate emitted Perl and rebuild backend applications.
 All bounded free-source and receiver-prefix outcomes are recorded; complete
 source/domain/context/portable admission remains separate.
+
+
+Feature63 owns canonical free arithmetic and short Number-prefix result guards.
+Perl intake finds six wrong values and two unsupported-with contexts alongside
+eight healthy values and one needed error. Preserve original producers, numeric
+domains/arity/min-max reducer overloads and legitimate null/empty with. Perl63.1
+first, independent Rust/Dart/Julia/safe Lua owners next; full admission separate.

@@ -1331,10 +1331,19 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 > capture groups (`array(entry_group(0), entry_group(1), …)`) or numeric literals. An
 > `undef` result (e.g. divide-by-zero) surfaces as a `null` element.
 
+Canonical free arithmetic calls and short Number prefixes have an owned
+Perl result-guard gap: `num_add(1,2).take(1)` returns an empty Array, and
+`1.add(2).take(1).with(){return("ran")}` may run the later body. Some bridge
+tails return null while their descriptor still reports unsupported `with`;
+matching values alone do not establish support. Feature63 repairs these source
+roles. Original arithmetic, compatible text chains, zero-valued indices and
+legitimate null/empty `with` controls already work. Other backends are assessed
+independently; scalar/Array min/max overloads and numeric domains stay unchanged.
+
 ### `num_add(a, b)`
-- **Signature**: `num_add(a: numeric, b: numeric)`
+- **Signature**: `num_add(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands)
 - **Returns**: numeric
-- **Behavior**: Adds two numbers. Returns `undef` if either operand is non-numeric.
+- **Behavior**: Adds all operands. Every operand must be numeric; `num_add(1, 2, 3)` uses all three.
 - **Example**:
   ```text
   demo::  -> value  .push
@@ -1351,9 +1360,9 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**: over `/(\d+)-(\d+)/`, `num_sub(entry_group(0), entry_group(1))` on `10-4` → `[6]`.
 
 ### `num_mul(a, b)`
-- **Signature**: `num_mul(a: numeric, b: numeric)`
+- **Signature**: `num_mul(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands)
 - **Returns**: numeric
-- **Behavior**: Multiplies two numbers.
+- **Behavior**: Multiplies all operands. Every operand must be numeric; `num_mul(1, 2, 3)` uses all three.
 - **Example**: over `/(\d+)x(\d+)/`, `num_mul(entry_group(0), entry_group(1))` on `6x7` → `[42]`.
 
 ### `num_div(a, b)`
@@ -1393,15 +1402,15 @@ The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 - **Example**: over `/([\d.]+)/`, `num_round(entry_group(0))` on `3.5` → `[4]`.
 
 ### `num_min(a, b)` / `num_min(arr)`
-- **Signature**: `num_min(a: numeric, b: numeric)` or `num_min(arr: array)`
+- **Signature**: `num_min(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands) or `num_min(arr: array)`
 - **Returns**: numeric
-- **Behavior**: Two-argument form: returns the smaller of two numbers. Array form: returns the minimum element. Returns `undef` for empty array, non-array, or non-numeric elements.
+- **Behavior**: Returns the smallest scalar operand. Every operand must be numeric; `num_min(1, 2, 3)` uses all three. Array form: returns the minimum element. Returns `undef` for empty array, non-array, or non-numeric elements.
 - **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_min(entry_group(0), entry_group(1))` on `8,3` → `[3]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_min(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[1]` on the current Perl/JSON route (internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].min().add(1)` → `3`; `[2,4].sum().min(3).add(1)` → `4` keeps the scalar overload.
 
 ### `num_max(a, b)` / `num_max(arr)`
-- **Signature**: `num_max(a: numeric, b: numeric)` or `num_max(arr: array)`
+- **Signature**: `num_max(a: numeric, b: numeric, ...: numeric)` (two or more scalar operands) or `num_max(arr: array)`
 - **Returns**: numeric
-- **Behavior**: Two-argument form: returns the larger. Array form: returns the maximum element.
+- **Behavior**: Returns the largest scalar operand. Every operand must be numeric; `num_max(1, 2, 3)` uses all three. Array form: returns the maximum element.
 - **Example**: 2-arg — over `/(\d+),(\d+)/`, `num_max(entry_group(0), entry_group(1))` on `8,3` → `[8]`. Array — over `/(\d+),(\d+),(\d+),(\d+)/`, `num_max(array(entry_group(0), entry_group(1), entry_group(2), entry_group(3)))` on `8,3,5,1` → `[8]` on the current Perl/JSON route (internal selected-kind limitation below). Ordinary Perl/Rust/Dart/Julia/Lua result chaining: `[2,4,6].max().add(1)` → `7`.
 
 ### `num_clamp(x, lo, hi)`
