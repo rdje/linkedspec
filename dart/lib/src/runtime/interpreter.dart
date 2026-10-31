@@ -4079,6 +4079,7 @@ final class LinkedSpecRuntimeEngine {
               _isFreeDefaultResultSource(receiver) ||
               _isConstructorResultSource(receiver) ||
               _isFreeStringResultSource(receiver) ||
+              _isOrdinaryStringReceiverPrefix(calls) ||
               _isInputCursorValueSource(receiver) ||
               (receiver is ActionCallExpr &&
                   (canonicalActionHelperName(receiver.name) == 'copy' ||
@@ -5537,6 +5538,51 @@ final class LinkedSpecRuntimeEngine {
       return false;
     }
     return expression.args.every(
+      (argument) => switch (argument.value) {
+        ActionVariableExpr() ||
+        ActionNumberLiteralExpr() ||
+        ActionStringLiteralExpr() ||
+        ActionBooleanLiteralExpr() ||
+        ActionUndefExpr() ||
+        ActionArrayLiteralExpr() ||
+        ActionHashLiteralExpr() ||
+        ActionBlockValueExpr() ||
+        ActionCallExpr() ||
+        ActionFluentChainExpr() ||
+        ActionReceiverMutationChainExpr() ||
+        ActionIndexedVarExpr() ||
+        ActionNestedAccessExpr() ||
+        ActionValueAccessExpr() ||
+        ActionAssignScalarExpr() ||
+        ActionAssignArrayAppendExpr() ||
+        ActionAssignHashIndexExpr() ||
+        ActionAssignNestedAccessExpr() ||
+        ActionCodeblockLiteralExpr() => true,
+        _ => false,
+      },
+    );
+  }
+
+  // Existing arity preflight owns malformed calls; retain actual-kind guards
+  // through canonical String receiver prefixes and their intermediate results.
+  bool _isOrdinaryStringReceiverPrefix(List<ActionFluentCall> calls) {
+    if (calls.isEmpty) {
+      return false;
+    }
+    final first = calls.first;
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (!_scalarStringResultHelperNames.contains(first.method) ||
+        (first.sourceMethod ?? first.method) != first.method ||
+        first.args.any((argument) => argument is! ActionPositionalArgument) ||
+        calls.any(
+          (call) =>
+              traversal.contains(canonicalActionHelperName(call.method)) ||
+              ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+                  canonicalActionHelperName(call.method) != 'with'),
+        )) {
+      return false;
+    }
+    return first.args.every(
       (argument) => switch (argument.value) {
         ActionVariableExpr() ||
         ActionNumberLiteralExpr() ||

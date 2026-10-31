@@ -402,11 +402,11 @@ remain Number/Boolean where the original producer preserves them. Regenerate
 emitted Perl parsers and rebuild Rust/Dart/Julia/Lua applications/runtime to pick up
 these guards. Lua coverage is PUC5.5.1 and LuaJIT2.1.1788460057.
 Legacy named aggregate fallback, malformed/alias/regex mutation forms and broader
-unsupported receiver contexts remain separate. Dart, Julia and tested Lua receiver-only
+unsupported receiver contexts remain separate. Julia and tested Lua receiver-only
 String-to-Array-to-incompatible-Hash chains ending in `with` still run rejected
 arguments/body; that separate repair is scheduled before admission.
 
-Perl and Rust also retain the guard through canonical receiver String prefixes:
+Perl, Rust and Dart also retain the guard through canonical receiver String prefixes:
 
 ```text
 " a,b ".trim().split(",").set_key("k",1)       # null
@@ -416,7 +416,7 @@ Perl and Rust also retain the guard through canonical receiver String prefixes:
 
 These paths compile; Perl also has ready ActionIR metadata. Source effects run once,
 rejected consumer arguments and later bodies stay skipped, and legitimate empty
-or null values still enter `with`. Regenerate emitted Perl and rebuild Rust applications/runtime.
+or null values still enter `with`. Regenerate emitted Perl and rebuild Rust/Dart applications/runtime.
 
 
 ### `lowercase(s)`
