@@ -1727,6 +1727,23 @@ sub _user_function_registry_by_name {
  return ref($registry->{by_name}) eq 'HASH' ? $registry->{by_name} : undef
 }
 
+# Free defaults keep their lazy producer and published operand domains.
+# Only ordinary positional calls join the existing actual-kind result guard.
+sub _ordinary_free_default_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') =~ /\Acoalesce(?:_nonempty)?\z/o
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} >= 2;
+ foreach my $value (@{$call->{args}}) {
+  return 0 unless ref($value) eq 'HASH'
+   && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+ }
+ return 1
+}
+
 # Assignment results keep their original value ABI and alias/copy semantics.
 # Only the canonical plain-target call gains computed/result source guards.
 sub _ordinary_set_result_source {
@@ -5353,7 +5370,14 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $receiver_expr = $inner_expr if defined($inner_expr) && length($inner_expr);
   }
 
-  if (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} && !_is_tree_traversal_receiver_method($_->{method} // '') } @$calls) {
+  # Keep canonical free-default prefixes together with their immediate with
+  # bodies so a rejected consumer cannot be normalized into an ordinary null.
+  my $guarded_free_with_chain = _ordinary_free_default_result_source($receiver)
+   && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
+  if (!$guarded_free_with_chain
+      && (grep { ref($_) eq 'HASH' && $_->{receiver_trailing_block_arg} && !_is_tree_traversal_receiver_method($_->{method} // '') } @$calls)) {
    # Keep normalized with bodies and their returned values in the typed path.
    # Rebuilding source loses result ownership before Hash continuations lower.
    if (!(grep { $_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with' } @$calls)) {
@@ -5500,10 +5524,20 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $lower_tree_receiver_block_call;
   my $append_selected_value_chain_call;
   $append_selected_value_chain_call = sub {
-   my ($current_expr, $call, $receiver_family) = @_;
+   my ($current_expr, $call, $receiver_family, $rejection_flag) = @_;
    my $method = $call->{method} // '';
    my $source_args = $call->{args} || [];
    return undef unless ref($source_args) eq 'ARRAY';
+   if (defined($rejection_flag) && $method eq 'with') {
+    return undef unless $call->{receiver_trailing_block_arg} && @$source_args == 1;
+    my $expression = $lower_ast_with_trailing_block_call_node->({
+     kind => 'call', name => 'with', source_method => 'with',
+     args => [{kind => 'raw_perl', source => $current_expr}, @$source_args],
+     trailing_block_arg => 1, source_span => $call->{source_span},
+    });
+    return undef unless defined($expression) && length($expression);
+    return [$expression, 'default_result'];
+   }
    # Defaults and reductions may return either a scalar or a container.
    # Bind the result once, then guard consumers by its actual kind.
    if (($receiver_family // '') eq 'default_result') {
@@ -5511,7 +5545,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
      return $lower_tree_receiver_block_call->($method, $current_expr, $call, 'default_result');
     }
     my $value_expr = '$__ls_selected_default';
-    my $applied = $append_selected_value_chain_call->($value_expr, $call, 'selected');
+    my $applied = $append_selected_value_chain_call->($value_expr, $call, 'selected', $rejection_flag);
     return undef unless ref($applied) eq 'ARRAY';
     my ($expression, $family) = @$applied;
     # Finish DSL lowering before enclosing helpers in host guards/do blocks.
@@ -5526,7 +5560,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
      && !_is_tree_traversal_receiver_method($method);
     if ($method ne 'copy' && ($array_method || $hash_method)) {
      my $kind = $array_method ? 'ARRAY' : 'HASH';
-     $expression = "ref($value_expr) eq '$kind' ? ($expression) : undef";
+     my $rejected = defined($rejection_flag)
+      ? 'do { '.$rejection_flag.' = 1; undef }' : 'undef';
+     $expression = "ref($value_expr) eq '$kind' ? ($expression) : $rejected";
     } elsif ($method ne 'copy' && $method ne 'coalesce_nonempty') {
      $family = 'scalar_result' if $family eq 'selected';
     }
@@ -5729,6 +5765,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || _ordinary_input_cursor_result_source($receiver)
    || _ordinary_explicit_push_result_source($receiver)
    || _ordinary_set_result_source($receiver)
+   || _ordinary_free_default_result_source($receiver)
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
@@ -5740,20 +5777,37 @@ my $lower_numeric_array_reducer_source_expr = sub {
    $current_expr = 'do { my $__ls_scalar_source = '.$current_expr.'; $__ls_scalar_source }'
     if $emitted_result_chain && !$logical_receiver;
    my $current_family = $logical_receiver ? 'scalar_result' : 'default_result';
+   # A rejected consumer must not become an ordinary null input to a later
+   # immediate with. Keep valid null selections and empty containers distinct.
+   my $rejection_flag = $guarded_free_with_chain ? '$__ls_free_default_rejected' : undef;
+   my @guarded_steps;
+   if (defined($rejection_flag)) {
+    push @guarded_steps, 'my '.$rejection_flag.' = 0',
+     'my $__ls_free_default_value = '.$current_expr;
+    $current_expr = '$__ls_free_default_value';
+   }
    foreach my $call (@$calls) {
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
+      && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')
      ? $append_array_chain_call->($current_expr, $call)
-     : $append_selected_value_chain_call->($current_expr, $call, $current_family);
+     : $append_selected_value_chain_call->($current_expr, $call, $current_family, $rejection_flag);
     return undef unless ref($applied) eq 'ARRAY';
     ($current_expr, $current_family) = @$applied;
-    return 'do { my $__ls_rejected_result = '.$source_expr.'; undef }'
-     if $current_family eq 'terminal';
+    if ($current_family eq 'terminal') {
+     return 'do { '.join('; ', @guarded_steps).'; undef }' if defined($rejection_flag);
+     return 'do { my $__ls_rejected_result = '.$source_expr.'; undef }';
+    }
     # These sources are emitted host values. Finish each composed helper
     # through its existing bridge before another link consumes that result.
     $current_expr = $legacy_method_value_expr->($current_expr);
     return undef unless defined($current_expr) && length($current_expr);
+    if (defined($rejection_flag)) {
+     push @guarded_steps, '$__ls_free_default_value = '.$rejection_flag.' ? undef : ('.$current_expr.')';
+     $current_expr = '$__ls_free_default_value';
+    }
    }
+   return 'do { '.join('; ', @guarded_steps).'; '.$current_expr.' }' if defined($rejection_flag);
    return $current_expr;
   }
 

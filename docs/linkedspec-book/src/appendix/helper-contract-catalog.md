@@ -325,14 +325,24 @@ and required fallback blocks run once before consumers. Empty containers are
 values; `coalesce_nonempty` rejects empty Scalar text rather than testing container
 emptiness or truthiness. Rebuild Rust applications with the updated runtime.
 Direct free-helper selections preserve primitive kinds and compatible methods.
-Their incompatible container consumers have an owned source-dispatch gap on Perl
-and Rust, including published Scalar inputs. For example,
-`coalesce(undef,"tail").set_key("k",1)` must return null, but can currently run
-unchecked; readiness metadata does not prove successful execution. Until repaired,
-bind the selected value and use its existing guarded receiver bridge:
+On Perl, canonical ordinary calls with two-or-more positional operands guard
+incompatible consumers before their arguments or later `with` bodies run:
+
+```text
+coalesce(undef,"tail").set_key("k",1)   # null
+coalesce_nonempty("",0).take(1)         # null
+coalesce(false,true).not()               # true
+coalesce(undef,["head","tail"])[-1].uppercase() # TAIL (existing compatibility)
+```
+
+Rejection differs from a valid null selection: `coalesce(undef,undef).with(){
+return("recovered")}` returns `"recovered"`. An empty Array produced by a compatible
+consumer also remains a valid `with` input. Source and needed defaults run once;
+unused runtime errors remain skipped. Regenerate affected emitted Perl parsers.
+Rust's direct free-result guards remain owned; its completed-value bridge works:
 `saved=coalesce(undef,"tail"); saved.coalesce(undef).set_key("k",1)` returns null.
-This is result composition work; published free-helper Scalar domains and complete
-operand admission stay separate. See the backend handoff for repair status.
+Published Scalar operand domains, qualified aggregate compatibility, legacy
+arities and complete admission remain separate. See the backend handoff.
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`

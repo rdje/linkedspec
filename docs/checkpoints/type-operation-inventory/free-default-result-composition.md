@@ -1,7 +1,7 @@
 # Canonical free-default result composition
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.21; implementation family23.3.60.
-Status: Frozen finite target; backend implementation/full admission pending.
+Status: Bounded Perl60.1 targeted-checked; independent peers/full admission pending.
 
 Existing catalog publishes coalesce(values: scalar...) and
 coalesce_nonempty(values: scalar...). First defined versus first defined/nonempty
@@ -55,3 +55,22 @@ guards. Actual producers/inputs/full emitted source/metadata/results retained in
 free-default-selection-intake.json.gz. P1 Perl60.1 immediately next, Rust60.2 then
 independent peers60.3-.5. No peer defect/full method-domain-context/portable
 aggregate/full23.4 admission inferred.
+
+## Bounded Perl60.1 result guards
+
+Initial14 groups10healthy/4RED; source predicate candidate13PASS/1RED isolates
+with rejection loss. Four added controls establish unchanged18 baseline16PASS/
+2RED to18PASS native/fresh/metadata. Original eight and expanded fourteen healthy
+values/inherited needed-runtime-error row canonically exact, sixteen values/eight
+excluded AST-error fences pass. Incompatible operands/later with bodies skip;
+legitimate null/empty-container with still runs and source effects remain once.
+Canonical min-two positional source admission reuses current guards. Only canonical
+free/immediate-with/non-traversal chains retain rejection state/once-bound stages
+and use the existing typed with-body lowerer. Lazy producer/read/signatures/method
+tables/arity/copy/alias/function/parser/runtime/schema stay. Unrouted and Array-
+prefix routing candidate failures/public AST/lowering/source epochs are retained;
+no temporary regression or candidate RED credit. Final quick with7/new18/nearest
+set11/owner-normal syntax pass; strict initial selection JSON kinds recertified.
+Actual producers/inputs/results: free-default-perl-intake.json.gz. New18/shared12/
+excluded AST registration queued23.4.1; regenerate emitted Perl. Independent Rust60.2
+next; no portable aggregate-domain/exhaustive excluded-shape/full admission claim.

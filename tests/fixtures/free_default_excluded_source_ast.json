@@ -1,0 +1,526 @@
+[
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 17,
+                        "start" : 16
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 18,
+                  "start" : 11
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "kind" : "call",
+            "name" : "coalesce",
+            "source" : "coalesce()",
+            "source_method" : "coalesce",
+            "source_span" : {
+               "end" : 10,
+               "start" : 0
+            }
+         },
+         "source" : "coalesce().take(1)",
+         "source_span" : {
+            "end" : 18,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "zero_arguments",
+      "mode" : "expr",
+      "source" : "coalesce().take(1)"
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 23,
+                        "start" : 22
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 24,
+                  "start" : 17
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 15,
+                     "start" : 9
+                  },
+                  "value" : "tail"
+               }
+            ],
+            "kind" : "call",
+            "name" : "coalesce",
+            "source" : "coalesce(\"tail\")",
+            "source_method" : "coalesce",
+            "source_span" : {
+               "end" : 16,
+               "start" : 0
+            }
+         },
+         "source" : "coalesce(\"tail\").take(1)",
+         "source_span" : {
+            "end" : 24,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "one_argument",
+      "mode" : "expr",
+      "source" : "coalesce(\"tail\").take(1)"
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 42,
+                        "start" : 41
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 43,
+                  "start" : 36
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "raw_perl",
+                  "reason" : "unsupported_expression",
+                  "source" : "first:\"tail\"",
+                  "source_span" : {
+                     "end" : 21,
+                     "start" : 9
+                  }
+               },
+               {
+                  "kind" : "raw_perl",
+                  "reason" : "unsupported_expression",
+                  "source" : "second:undef",
+                  "source_span" : {
+                     "end" : 34,
+                     "start" : 22
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "coalesce",
+            "source" : "coalesce(first:\"tail\",second:undef)",
+            "source_method" : "coalesce",
+            "source_span" : {
+               "end" : 35,
+               "start" : 0
+            }
+         },
+         "source" : "coalesce(first:\"tail\",second:undef).take(1)",
+         "source_span" : {
+            "end" : 43,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "keyword_arguments",
+      "mode" : "expr",
+      "source" : "coalesce(first:\"tail\",second:undef).take(1)"
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 48,
+                        "start" : 47
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 49,
+                  "start" : 42
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"\"",
+                  "source_span" : {
+                     "end" : 20,
+                     "start" : 18
+                  },
+                  "value" : ""
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 27,
+                     "start" : 21
+                  },
+                  "value" : "tail"
+               },
+               {
+                  "block" : {
+                     "kind" : "action_block",
+                     "source" : "return(\"x\")",
+                     "source_span" : {
+                        "end" : 40,
+                        "start" : 29
+                     },
+                     "statements" : [
+                        {
+                           "drops_value" : 1,
+                           "expr" : {
+                              "args" : [
+                                 {
+                                    "kind" : "string",
+                                    "quote" : "\"",
+                                    "source" : "\"x\"",
+                                    "source_span" : {
+                                       "end" : 39,
+                                       "start" : 36
+                                    },
+                                    "value" : "x"
+                                 }
+                              ],
+                              "kind" : "call",
+                              "name" : "return",
+                              "source" : "return(\"x\")",
+                              "source_method" : "return",
+                              "source_span" : {
+                                 "end" : 40,
+                                 "start" : 29
+                              }
+                           },
+                           "kind" : "action_stmt",
+                           "source" : "return(\"x\")",
+                           "source_span" : {
+                              "end" : 40,
+                              "start" : 29
+                           }
+                        }
+                     ]
+                  },
+                  "kind" : "block_value",
+                  "source" : "{return(\"x\")}",
+                  "source_span" : {
+                     "end" : 41,
+                     "start" : 28
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "coalesce_nonempty",
+            "source" : "coalesce_nonempty(\"\",\"tail\"){return(\"x\")}",
+            "source_method" : "coalesce_nonempty",
+            "source_span" : {
+               "end" : 41,
+               "start" : 0
+            },
+            "trailing_block_arg" : 1,
+            "trailing_block_source_span" : {
+               "end" : 41,
+               "start" : 28
+            }
+         },
+         "source" : "coalesce_nonempty(\"\",\"tail\"){return(\"x\")}.take(1)",
+         "source_span" : {
+            "end" : 49,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "trailing_block",
+      "mode" : "expr",
+      "source" : "coalesce_nonempty(\"\",\"tail\"){return(\"x\")}.take(1)"
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 31,
+                        "start" : 30
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 32,
+                  "start" : 25
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "kind" : "raw_perl",
+            "reason" : "unsupported_expression",
+            "source" : "(coalesce(undef,\"tail\"))",
+            "source_span" : {
+               "end" : 24,
+               "start" : 0
+            }
+         },
+         "source" : "(coalesce(undef,\"tail\")).take(1)",
+         "source_span" : {
+            "end" : 32,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "grouped_source",
+      "mode" : "expr",
+      "source" : "(coalesce(undef,\"tail\")).take(1)"
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 14,
+                        "start" : 13
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 15,
+                  "start" : 8
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "kind" : "call",
+            "name" : "thunk",
+            "source" : "thunk()",
+            "source_method" : "thunk",
+            "source_span" : {
+               "end" : 7,
+               "start" : 0
+            }
+         },
+         "source" : "thunk().take(1)",
+         "source_span" : {
+            "end" : 15,
+            "start" : 0
+         }
+      },
+      "error" : null,
+      "label" : "bound_call_source",
+      "mode" : "expr",
+      "source" : "thunk().take(1)"
+   },
+   {
+      "ast" : null,
+      "error" : {
+         "class" : "LinkedSpec::ActionIR::AST::Parser::Diagnostic",
+         "value" : {
+            "code" : "nested_write_root_not_addressable",
+            "message" : "nested write root must remain a bare identifier",
+            "source_span" : {
+               "end" : 15,
+               "provenance" : "authored",
+               "start" : 0,
+               "unit" : "unicode_scalar"
+            },
+            "stage" : "action_parse"
+         }
+      },
+      "label" : "computed_write",
+      "mode" : "statement",
+      "source" : "coalesce(undef,[\"tail\"])[-1]=\"x\""
+   },
+   {
+      "ast" : {
+         "body_ast" : {
+            "kind" : "action_block",
+            "source" : " return(coalesce(undef,\"tail\").take(1)) ",
+            "source_span" : {
+               "end" : 43,
+               "start" : 3
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "args" : [
+                        {
+                           "calls" : [
+                              {
+                                 "args" : [
+                                    {
+                                       "kind" : "number",
+                                       "source" : 1,
+                                       "source_span" : {
+                                          "end" : 40,
+                                          "start" : 39
+                                       },
+                                       "value" : 1
+                                    }
+                                 ],
+                                 "method" : "take",
+                                 "source" : "take(1)",
+                                 "source_method" : "take",
+                                 "source_span" : {
+                                    "end" : 41,
+                                    "start" : 34
+                                 }
+                              }
+                           ],
+                           "kind" : "fluent_chain",
+                           "receiver" : {
+                              "args" : [
+                                 {
+                                    "kind" : "undef",
+                                    "source" : "undef",
+                                    "source_span" : {
+                                       "end" : 25,
+                                       "start" : 20
+                                    }
+                                 },
+                                 {
+                                    "kind" : "string",
+                                    "quote" : "\"",
+                                    "source" : "\"tail\"",
+                                    "source_span" : {
+                                       "end" : 32,
+                                       "start" : 26
+                                    },
+                                    "value" : "tail"
+                                 }
+                              ],
+                              "kind" : "call",
+                              "name" : "coalesce",
+                              "source" : "coalesce(undef,\"tail\")",
+                              "source_method" : "coalesce",
+                              "source_span" : {
+                                 "end" : 33,
+                                 "start" : 11
+                              }
+                           },
+                           "source" : "coalesce(undef,\"tail\").take(1)",
+                           "source_span" : {
+                              "end" : 41,
+                              "start" : 11
+                           }
+                        }
+                     ],
+                     "kind" : "call",
+                     "name" : "return",
+                     "source" : "return(coalesce(undef,\"tail\").take(1))",
+                     "source_method" : "return",
+                     "source_span" : {
+                        "end" : 42,
+                        "start" : 4
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "return(coalesce(undef,\"tail\").take(1))",
+                  "source_span" : {
+                     "end" : 42,
+                     "start" : 4
+                  }
+               }
+            ]
+         },
+         "body_source" : " return(coalesce(undef,\"tail\").take(1)) ",
+         "body_span" : {
+            "end" : 43,
+            "start" : 3
+         },
+         "kind" : "codeblock_literal",
+         "signature" : {
+            "kind" : "callable_signature",
+            "max_arity" : 0,
+            "min_arity" : 0,
+            "positional_params" : [],
+            "rest_param" : null,
+            "version" : 1
+         },
+         "source_span" : {
+            "end" : 44,
+            "start" : 0
+         },
+         "source_text" : "{|| return(coalesce(undef,\"tail\").take(1)) }",
+         "version" : 1
+      },
+      "error" : null,
+      "label" : "deferred_body",
+      "mode" : "expr",
+      "source" : "{|| return(coalesce(undef,\"tail\").take(1)) }"
+   }
+]
