@@ -1322,6 +1322,17 @@ accepted as numeric aliases too: `==(a, b)`, `!=(a, b)`, `>(a, b)`, `>=(a, b)`,
 The shipped explicit string bridge names are `str_eq`, `str_ne`, `str_gt`,
 `str_ge`, `str_lt`, and `str_le`; use them for lexical string comparisons. Current Perl free/nested forms work: `cat(str_eq("a","a"),"!")` returns `"1!"`; false results are numeric0 and render `"0!"`. Rust/Dart/Julia/Lua preserve Boolean producers; false also renders `"0!"` and remains selected by `coalesce_nonempty`. Ordinary Perl/Rust/Dart/Julia/Lua counterparts now work for all six names: `"a".str_eq("a").cat("!")` returns `"1!"`, `"a".str_eq("b").coalesce_nonempty("late").cat("!")` returns `"0!"`, and `"a".str_eq("a").cat(",x").split(",").last().uppercase()` returns `"X"`. One operand is required before effects; results reject container-only consumers until an explicit bridge yields a container. Source/operand/result snapshots and numeric aliases stay unchanged; other-backend/full admission stays separate. Existing Perl lexical compatibility compares undef as empty text with legacy uninitialized warnings when enabled, so `str_eq(undef,"")` returns1; Rust also retains the measured undef-as-empty compatibility; Dart/Julia/Lua instead propagate null from either comparison operand; Dart’s known UTF-16 lexical-order limitation remains tracked. Lua comparison checks use available PUC5.5.1/LuaJIT; declared5.4/full admission remain open. No portable null-domain claim follows.
 
+
+The [six-method reference](../dsl/value-container-flow-helper-reference.md#scalar-predicates-and-string-comparisons)
+shows lexical true/false examples. A current Perl source-guard gap affects later
+container/with continuations: `str_eq("a","b").take(1)` returns an empty Array,
+and a rejected comparison prefix can still enter a later `with` body. Some Array
+bridge tails return null with unsupported `with` metadata. Feature66 owns this
+guard/readiness repair; compatible chains, numeric flag identity/copies, snapshots,
+legitimate zero/null/empty `with` and needed source errors already work. Peer
+backends are assessed independently with their existing Boolean result kinds;
+the null/Unicode qualifications above remain unchanged.
+
 > **Worked examples** use the same runnable two-rule shape as §2 (a top `::` entry rule
 > — no regex — dispatching to a `value` rule that carries the regex and reads
 > `entry_group(N)`; output = the parser's one-element accumulator array). The array-form

@@ -1,0 +1,385 @@
+[
+  {
+    "body": "return([[str_eq(\"a\",\"a\"),str_ne(\"a\",\"b\"),str_gt(\"b\",\"a\"),str_ge(\"a\",\"a\"),str_lt(\"a\",\"b\"),str_le(\"a\",\"a\"),str_eq(\"a\",\"b\"),str_ne(\"a\",\"a\"),str_gt(\"a\",\"b\"),str_ge(\"a\",\"b\"),str_lt(\"b\",\"a\"),str_le(\"b\",\"a\")],[\"a\".str_eq(\"a\"),\"a\".str_ne(\"b\"),\"b\".str_gt(\"a\"),\"a\".str_ge(\"a\"),\"a\".str_lt(\"b\"),\"a\".str_le(\"a\"),\"a\".str_eq(\"b\"),\"a\".str_ne(\"a\"),\"a\".str_gt(\"b\"),\"a\".str_ge(\"b\"),\"b\".str_lt(\"a\"),\"b\".str_le(\"a\")]])",
+    "expected": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "expected_nonperl": [
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ]
+    ],
+    "id": "primitive_comparisons",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([[str_eq(\"a\",\"a\"),str_ne(\"a\",\"b\"),str_gt(\"b\",\"a\"),str_ge(\"a\",\"a\"),str_lt(\"a\",\"b\"),str_le(\"a\",\"a\"),str_eq(\"a\",\"b\"),str_ne(\"a\",\"a\"),str_gt(\"a\",\"b\"),str_ge(\"a\",\"b\"),str_lt(\"b\",\"a\"),str_le(\"b\",\"a\")],[\"a\".str_eq(\"a\"),\"a\".str_ne(\"b\"),\"b\".str_gt(\"a\"),\"a\".str_ge(\"a\"),\"a\".str_lt(\"b\"),\"a\".str_le(\"a\"),\"a\".str_eq(\"b\"),\"a\".str_ne(\"a\"),\"a\".str_gt(\"b\"),\"a\".str_ge(\"b\"),\"b\".str_lt(\"a\"),\"b\".str_le(\"a\")]])}"
+  },
+  {
+    "body": "return([str_eq(\"a\",\"a\").cat(\"!\"),str_eq(\"a\",\"b\").coalesce_nonempty(9).cat(\"!\"),str_lt(\"a\",\"b\").cat(\",tail\").split(\",\").last().uppercase(),\"a\".str_eq(\"b\").cat(\"!\")])",
+    "expected": [
+      "1!",
+      "0!",
+      "TAIL",
+      "0!"
+    ],
+    "id": "compatible_values",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([str_eq(\"a\",\"a\").cat(\"!\"),str_eq(\"a\",\"b\").coalesce_nonempty(9).cat(\"!\"),str_lt(\"a\",\"b\").cat(\",tail\").split(\",\").last().uppercase(),\"a\".str_eq(\"b\").cat(\"!\")])}"
+  },
+  {
+    "body": "return([str_eq(\"a\",\"b\").copy(),\"a\".str_eq(\"b\").copy(),str_eq(\"a\",\"b\").add(1),\"a\".str_eq(\"a\").add(1)])",
+    "expected": [
+      0,
+      0,
+      1,
+      2
+    ],
+    "expected_nonperl": [
+      false,
+      false,
+      null,
+      null
+    ],
+    "id": "value_kinds",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([str_eq(\"a\",\"b\").copy(),\"a\".str_eq(\"b\").copy(),str_eq(\"a\",\"b\").add(1),\"a\".str_eq(\"a\").add(1)])}"
+  },
+  {
+    "body": "order=\"\";left=str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1});right=str_gt(\"b\",\"a\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "free_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1});right=str_gt(\"b\",\"a\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";left=\"a\".str_eq(\"b\").take({order=cat(order,\"A\");1});right=\"b\".str_gt(\"a\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ],
+    "id": "receiver_container_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=\"a\".str_eq(\"b\").take({order=cat(order,\"A\");1});right=\"b\".str_gt(\"a\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";out=str_eq({order=cat(order,\"S\");return(\"a\")},{order=cat(order,\"O\");return(\"b\")}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "SO"
+    ],
+    "id": "free_guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=str_eq({order=cat(order,\"S\");return(\"a\")},{order=cat(order,\"O\");return(\"b\")}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out={order=cat(order,\"S\");return(\"a\")}.str_eq({order=cat(order,\"O\");return(\"b\")}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      "SO"
+    ],
+    "id": "receiver_guard_before_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");return(\"a\")}.str_eq({order=cat(order,\"O\");return(\"b\")}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=str_eq(\"a\",\"b\").split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "free_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=str_eq(\"a\",\"b\").split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=\"a\".str_eq(\"b\").split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ],
+    "id": "receiver_bridge_rejection",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=\"a\".str_eq(\"b\").split(\",\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  {
+    "body": "return([str_eq(\"a\",\"b\").split(\",\").first().cat(\"!\"),\"a\".str_eq(\"a\").split(\",\").first().cat(\"!\")])",
+    "expected": [
+      "0!",
+      "1!"
+    ],
+    "id": "valid_array_bridges",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return([str_eq(\"a\",\"b\").split(\",\").first().cat(\"!\"),\"a\".str_eq(\"a\").split(\",\").first().cat(\"!\")])}"
+  },
+  {
+    "body": "word=\"a\";order=\"\";out=str_eq({order=cat(order,\"S\");return(word)},{word=\"zzz\";order=cat(order,\"O\");return(\"b\")}).cat({order=cat(order,\"C\");\"!\"});return([out,word,order])",
+    "expected": [
+      "0!",
+      "zzz",
+      "SOC"
+    ],
+    "id": "source_operand_snapshot",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {word=\"a\";order=\"\";out=str_eq({order=cat(order,\"S\");return(word)},{word=\"zzz\";order=cat(order,\"O\");return(\"b\")}).cat({order=cat(order,\"C\");\"!\"});return([out,word,order])}"
+  },
+  {
+    "body": "order=\"\";left=str_eq(\"a\",\"b\").with(){order=cat(order,\"F\");return([value,value.copy()])};right=\"a\".str_eq(\"a\").with(){order=cat(order,\"R\");return(value)};return([left,right,order])",
+    "expected": [
+      [
+        0,
+        0
+      ],
+      1,
+      "FR"
+    ],
+    "expected_nonperl": [
+      [
+        false,
+        false
+      ],
+      true,
+      "FR"
+    ],
+    "id": "valid_false_and_true_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=str_eq(\"a\",\"b\").with(){order=cat(order,\"F\");return([value,value.copy()])};right=\"a\".str_eq(\"a\").with(){order=cat(order,\"R\");return(value)};return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";left=str_eq(\"a\",\"a\").add(\"bad\").with(){order=cat(order,\"F\");return(\"free\")};right=\"a\".str_eq(\"a\").add(\"bad\").with(){order=cat(order,\"R\");return(\"receiver\")};return([left,right,order])",
+    "expected": [
+      "free",
+      "receiver",
+      "FR"
+    ],
+    "id": "valid_null_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";left=str_eq(\"a\",\"a\").add(\"bad\").with(){order=cat(order,\"F\");return(\"free\")};right=\"a\".str_eq(\"a\").add(\"bad\").with(){order=cat(order,\"R\");return(\"receiver\")};return([left,right,order])}"
+  },
+  {
+    "body": "order=\"\";out=str_eq(\"a\",\"b\").add(\"bad\").coalesce([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "expected": [
+      0,
+      "W"
+    ],
+    "id": "valid_empty_with",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=str_eq(\"a\",\"b\").add(\"bad\").coalesce([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=str_eq(\"a\",\"b\").with(){order=cat(order,\"W\");return([\"ok\"])}.first().uppercase();return([out,order])",
+    "expected": [
+      "OK",
+      "W"
+    ],
+    "id": "with_result_array",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=str_eq(\"a\",\"b\").with(){order=cat(order,\"W\");return([\"ok\"])}.first().uppercase();return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=[str_eq(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ne(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_gt(\"b\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ge(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_lt(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_le(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ne(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_gt(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ge(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_lt(\"b\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_le(\"b\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_canonical_free_with_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[str_eq(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ne(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_gt(\"b\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ge(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_lt(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_le(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ne(\"a\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_gt(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_ge(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_lt(\"b\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},str_le(\"b\",\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])}"
+  },
+  {
+    "body": "order=\"\";out=[\"a\".str_eq(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ne(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"b\".str_gt(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ge(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_lt(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_le(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_eq(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ne(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_gt(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ge(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"b\".str_lt(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"b\".str_le(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_short_receiver_with_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[\"a\".str_eq(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ne(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"b\".str_gt(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ge(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_lt(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_le(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_eq(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ne(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_gt(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"a\".str_ge(\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"b\".str_lt(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")},\"b\".str_le(\"a\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")}];return([out,order])}"
+  },
+  {
+    "body": "value=\"caller\";return([build(),value])",
+    "expected": [
+      [
+        null,
+        null,
+        ""
+      ],
+      "caller"
+    ],
+    "id": "function_scope",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "fn build(){order=\"\";left=str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};right=\"a\".str_eq(\"a\").take({order=cat(order,\"B\");1}).with(){order=cat(order,\"X\");return(\"ran\")};return([left,right,order])}\nValue:: I {value=\"caller\";return([build(),value])}"
+  },
+  {
+    "body": "return(str_eq({items=\"text\";push(items,\"x\")},\"a\").coalesce(\"masked\"))",
+    "expected": null,
+    "expected_error": "binding_kind_mismatch",
+    "id": "needed_source_error",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {return(str_eq({items=\"text\";push(items,\"x\")},\"a\").coalesce(\"masked\"))}"
+  },
+  {
+    "body": "order=\"\";out=[str_eq(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_ne(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_gt(\"b\",\"a\").take({order=cat(order,\"A\");1}),str_ge(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_lt(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_le(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_ne(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_gt(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_ge(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_lt(\"b\",\"a\").take({order=cat(order,\"A\");1}),str_le(\"b\",\"a\").take({order=cat(order,\"A\");1})];return([out,order])",
+    "expected": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      ""
+    ],
+    "id": "all_canonical_free_guards",
+    "input": "x",
+    "input_characters": 1,
+    "leading_codepoint": 120,
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[str_eq(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_ne(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_gt(\"b\",\"a\").take({order=cat(order,\"A\");1}),str_ge(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_lt(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_le(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_eq(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_ne(\"a\",\"a\").take({order=cat(order,\"A\");1}),str_gt(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_ge(\"a\",\"b\").take({order=cat(order,\"A\");1}),str_lt(\"b\",\"a\").take({order=cat(order,\"A\");1}),str_le(\"b\",\"a\").take({order=cat(order,\"A\");1})];return([out,order])}"
+  }
+]
