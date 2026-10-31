@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.1.28.0",
+  "claims": [
+    {
+      "name": "Dated native definedness false numeric slots",
+      "statement": "At the retained Perl5.34.1 source epoch, native definedness false and copied false retain numeric slots despite empty-text JSON, yielding1 when added to1; literal empty text and actual DSL false instead yield null. Both helpers and nested/free/fluent/copy controls distinguish the values while preserving text snapshots.",
+      "scope": "Fifteen exact public programs/thirty native-fresh observations at d0174bb475fa6eabc02096713247e6605a1e1765, retained immutable inputs. Two current regression groups pass before production. No other-version/host/exhaustive-domain/general-isolation/portable-normalization claim; total/private flags diagnostic only. Live durability watches retained evidence bytes, not a claim that future runtime sources remain at this epoch.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/definedness-numeric-calibration/review.py; original actual public probe commands and all source/wrapper inputs are retained in intake.json.gz; bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/definedness_native_numeric_contract.t",
+        "granularity": "Each of fifteen exact public source programs on native/fresh routes, pre-serialization public slots with host-derived masks; literal empty/typed Bool/Number0/String0/inverse/copy/numeric/snapshot controls.",
+        "result": "Capture review actual exit0; all147 inputs hash/size verified, fifteen programs/thirty observations ready/warning-free. Native false adds to1 versus literal empty/typed false null. Normal2 PASS before production; review-results.json retains actual outputs."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Equal serialized empty text implies equal numeric classification.",
+        "oracle": "Same empty-text JSON for native predicate false and literal empty String, distinguished by pre-serialization public slots and independent arithmetic results1 versus null; actual typed Bool reference and Number/String0 controls, both inverse helpers and nested/free/fluent/copy routes.",
+        "red_control": "bash tools/run_python_project_data.sh docs/checkpoints/definedness-numeric-calibration/review.py --falsify-json-kind actually exits1 with observed_red:true, native_add:1 and literal_add:null, empty stderr (retained review-results.json). This is a false classifier hypothesis RED, not a product runtime RED. Capture failures separately exit2."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/definedness-numeric-calibration/probe.pl",
+            "sha256": "3f4795292cbe751f8e9bd76e945758fff525190896e514181f571c886be5d035",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-numeric-calibration/review.py",
+            "sha256": "9bfbc1a3f7ff1aac814d03f2acc3b75ad9141c8c83230e0f4dd9b66250c8b60a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/definedness-numeric-calibration/intake.json.gz",
+            "sha256": "52cc88071fad292bcbf58c4f2e1fa5f4c8bb0299f1a0f0f94f54337fd9fa5113",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/definedness-numeric-calibration/review-results.json",
+            "sha256": "8160c345022995ff56da69a9f207c57349be57cd14b5cfd191bcab8eed4c47ec",
+            "role": "input"
+          },
+          {
+            "path": "t/definedness_native_numeric_contract.t",
+            "sha256": "8d0b18ee166d319573c5c29df4f1f63dea4932b322406b7323e332a5b775bf9f",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

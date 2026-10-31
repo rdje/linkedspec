@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Safe Lua lexical bridge guards repaired/per-host101/nearest/loadfile/version pass; all bounded66 outcomes recorded, selection23.1.28 next.
+Definedness28.0 compatibility calibrated; parent28 guard freeze next.
 
 ## Latest Completed Slice
 
-Safe Lua66.5 repairs lexical comparison source/ordinary prefix guards after Array bridges on installed PUC5.5.1/LuaJIT2.1.1788460057: unchanged101 checks93PASS8RED to101PASS per host;93 includes two failed-group compile scaffolds, not93 healthy value checks. All nineteen values/seventeen healthy observations/one source error/eighteen public syntax observations exact on native/restoredSpec/plan/fresh module; accepted host values match. Three expected_nonperl profiles retain Bool/copy/strict numeric behavior. Direct guards/source SO/all twelve variants/functions/valid false-true-null-empty with already work; only two split Array bridges run KVW. Actual Array releases scalar_result without persistent lexical source admission. Pure canonical free-two/ordinary prefix-one positional/source-spelling namespace predicate joins common guard with traversal/non-with trailing filters and three-line runner entry; no new chunk locals. Original producer/Bool/null propagation/Unicode/alias/preflight/scalar_result/with/logical/numeric/deferred/copy/function/parser/schema/remaining interpreter unchanged; 195 other inputs exact. Rejected operands/bodies now skip; once-order/snapshots/false presence/returned Array/error stay. Per-host nearest String comparison programs/logical guard125/loadfile/version pass, focused stderr empty. Actual producers/all inputs/results in lexical-guard-lua-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; rebuild Lua apps/runtime. All bounded66 backend outcomes recorded; next selection23.1.28, canonical parent/full23.4 closeout separate. No declared5.4/unsafe runner/formatter/isolated package/peer fix/portable flag-null normalization/exhaustive excluded-runtime/general isolation/full admission.
+Perl28.0 calibrates existing definedness false compatibility before guard freeze: fifteen public programs/thirty native-fresh observations on Perl5.34.1 retain public numeric and string slots for native false/copies, versus only string for literal empty text and references for typed Bool. Existing Numeric::scalar_number accepts numeric slots before decimal text, rejecting references. Nested/free/fluent/copy and inverse controls give1 for native false plus1; literal empty/typed false remain null; Number0/String0 controls give1. Snapshot remains [empty text,empty text,1,!]. No production edit. Correct only provisional value_kinds.expected[2] null to1 in a new calibrated epoch; original cases/observations and peer profiles retained, no product RED credit. New native/fresh/readiness regression2 passes before production. Readonly retained capture review0 and deliberately false JSON-kind hypothesis review1/observed_red have empty stderr;147 actual producer/instrument/source/wrapper/result inputs retained with verified sizes/hashes. Claim record, card/map/book/target/task/live/resume/history align. Parent28 remains active; freeze definedness guard67 next. Total/private flags are diagnostics, not portable/cache invariants; no other-host/version/type normalization/general isolation/full admission claim. Canonical registration23.4.1/full23.4/push remain separate.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.1.28 from clean safe Lua66.5. Read current operation/source-role inventory, roadmap23, helper catalog/type/result contracts, Knowledge Map current cards and prior bounded outcomes. Reconcile remaining ordinary free-helper/receiver/type/source/method gaps; choose next safe feature autonomously, using public probes for missing distinctions only, freeze existing authority and create owners before production. Preserve unknown/deferred/context/alias/domain/copy/parser/schema and prior defect schedules; no registered-name coverage inference or whole-repository/history/full-matrix audit. Feature-first focused new-nearest/docs/commit per leaf. Full23.4/pressure20.1/mapatomic20.1.1/registration/progress/declared-host/general isolation separate; no full suite/cleanup pivot.
+Continue active TYPE-REFERENCE-BOOK.1.2.23.1.28: freeze definedness guard family67 from calibrated21 expectations and existing authority; retain original provisional epoch, create independent backend owners before production, then implement focused new-nearest/docs/commit per backend. No numeric producer/type normalization or full suite pivot.
 
 ## Recent Completions
 
+- `TYPE-REFERENCE-BOOK.1.2.23.1.28.0` — Definedness28.0 compatibility calibrated; parent28 guard freeze next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.66.5` — Safe Lua lexical bridge guards repaired/per-host101/nearest/loadfile/version pass; all bounded66 outcomes recorded, selection23.1.28 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.66.4` — Julia lexical bridge guards repaired: same101/nearest137/strict depwarn pass; independent safe Lua66.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.66.3` — Dart lexical bridge guards repaired: same21/nearest25/fatal analysis/format pass; independent Julia66.4 next.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.1.28 from clean safe Lua66.5. Read current o
 - `TYPE-REFERENCE-BOOK.1.2.23.3.64.5` — Safe Lua comparison guards repaired: per-host96/nearest86/three comparison programs/loadfile/version pass; all bounded64 outcomes recorded, selection23.1.26 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.64.4` — Julia comparison source guards repaired: same96/nearest113/strict depwarn pass; safe Lua64.5 next.
 - `TYPE-REFERENCE-BOOK.1.2.23.3.64.3` — Dart comparison source guards repaired: same20/nearest21/fatal analysis/format pass; Julia64.4 next.
-- `TYPE-REFERENCE-BOOK.1.2.23.3.64.2` — Rust comparison source guards repaired: same20/nearest21/owned fmt pass; Dart64.3 next.
 
 ## History
 

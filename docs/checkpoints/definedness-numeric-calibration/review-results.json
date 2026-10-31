@@ -1,0 +1,23 @@
+{
+  "capture-review": {
+    "command": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "docs/checkpoints/definedness-numeric-calibration/review.py"
+    ],
+    "exit": 0,
+    "stderr": "",
+    "stdout": "{\"inverse_numeric_routes\": [1, 1, 1, 1], \"limits\": \"Dated finite Perl5.34.1 capture; total/private flags are retained diagnostics, not portable/cache invariants. No production change or cross-backend kind normalization.\", \"literal_empty_has_only_public_string\": true, \"native_false_public_slots\": [\"SVf_IOK\", \"SVf_NOK\", \"SVf_POK\"], \"native_fresh_observations\": 30, \"nested_fluent_copy_numeric_routes\": [1, 1, 1, 1, null, null, null, null, 1, 1, 1, 1, 2, 2], \"perl_version\": \"v5.34.1\", \"programs\": 15, \"snapshot\": [\"\", \"\", 1, \"!\"], \"source_epoch\": \"d0174bb475fa6eabc02096713247e6605a1e1765\", \"typed_booleans_remain_references\": true, \"verified_retained_inputs\": 147}\n"
+  },
+  "json-kind-red": {
+    "command": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "docs/checkpoints/definedness-numeric-calibration/review.py",
+      "--falsify-json-kind"
+    ],
+    "exit": 1,
+    "stderr": "",
+    "stdout": "{\"hypothesis\": \"equal serialized empty text implies equal numeric classification\", \"literal_add\": null, \"native_add\": 1, \"observed_red\": true}\n"
+  }
+}

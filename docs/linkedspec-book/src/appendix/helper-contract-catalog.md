@@ -350,7 +350,7 @@ arities and complete admission remain separate. See the backend handoff.
 
 ### `is_defined(expr)`
 - **Signature**: `is_defined(value: expr)`
-- **Returns**: boolean
+- **Returns**: predicate result; Perl retains native `1`/empty-text false, while Rust/Dart/Julia/Lua retain Boolean results.
 - **Behavior**: Returns true if the value is not undef. Accepts any expression type.
 - **Edge cases**: Empty string, `0`, and empty arrays are defined.
 - **Usage**: Supports condition, returned and nested expression forms on current Perl; `cat(is_defined("abc"),"!")` returns `"1!"`.
@@ -366,10 +366,27 @@ arities and complete admission remain separate. See the backend handoff.
 
 ### `is_undefined(expr)`
 - **Signature**: `is_undefined(value: expr)`
-- **Returns**: boolean
+- **Returns**: predicate result; Perl retains native `1`/empty-text false, while Rust/Dart/Julia/Lua retain Boolean results.
 - **Behavior**: Returns true if the value is undef. Logical inverse of `is_defined`.
 - **Usage**: Condition, returned and nested expression forms work on current Perl: `cat(is_undefined(undef),"!")` returns `"1!"`. Ordinary Perl receivers now work: `[].first().is_undefined().cat("!")` → `"1!"` and `"abc".is_undefined().cat("!")` → `"!"`; named/literal/selected/default/function/copy sources retain existing kinds and once-only source/result snapshots. Rust/Dart/Julia/Lua support the same bounded family: `false.is_defined()` and `undef.is_undefined()` return true; `"abc".is_undefined().cat("!")` returns `"0!"`. Full domain/context/portable admission remains separate. Preserve actual truth/text kinds; other-backend/domain admission is assessed separately.
 - **Example**: over `/(\w+)/`, `if (is_undefined(array(entry_group(0))[9])) { return("missing") } else { return("present") }` on `hi` → `["missing"]` (index 9 is out of range, so the read is undef).
+
+On the checked Perl5.34.1 host, native definedness false also retains numeric
+slots. Its empty-text rendering alone does not make it a literal String:
+
+```text
+is_defined(undef).cat("!")        # "!"
+is_defined(undef).add(1)          # 1
+num_add(is_undefined(0),1)        # 1
+copy(is_defined(undef)).add(1)    # 1
+"".add(1)                       # undef
+false.add(1)                    # undef (actual DSL Boolean)
+```
+
+Numeric inspection preserves the original predicate snapshot and text rendering.
+These are existing Perl compatibility controls; peer Boolean results keep their
+existing arithmetic rules. This does not establish a portable scalar-kind or
+host-cache rule.
 
 ### `trim(s)`
 - **Signature**: `trim(value: scalar)`

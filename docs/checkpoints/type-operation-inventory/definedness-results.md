@@ -94,3 +94,19 @@ null/S/four-effect RED, preserving Bool false0!/default retention, actual source
 copy kinds and1!/SC/one-call/final-null snapshots. Register the named fixture;
 String comparisons stay separate. Declared5.4/native malformed regex2.3/full
 admission stay open. Next bounded assessment: six existing str_* helpers23.2.11.
+
+## Native Perl numeric compatibility calibration28.0
+
+The dated Perl5.34.1 capture at source epoch d0174bb retains native predicate
+false as empty-text rendering with valid numeric slots. Therefore
+`is_defined(undef).add(1)` and `num_add(is_undefined(0),1)` return `1`, including
+copied forms. Literal `""` and typed DSL `false` remain nonnumeric/null in the
+same arithmetic controls. Numeric inspection preserves the original empty-text
+snapshot and `"!"` concatenation. This preserves the existing producer and
+numeric contract; it does not normalize result kinds across backends.
+See [[perl-definedness-native-numeric-slots]] and
+`docs/checkpoints/definedness-numeric-calibration/README.md` for the actual public
+producer, all retained inputs, observed classifier RED and current regression.
+Only a provisional authored expected value was corrected, in a separate epoch;
+no runtime repair or product RED is claimed. Source-guard composition remains
+parent28's next bounded feature, with independent backend assessment.
