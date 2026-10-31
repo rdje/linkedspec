@@ -385,14 +385,22 @@ arities and complete admission remain separate. See the backend handoff.
   ```
   Input `[  hello  ]` → `["hello"]` (capture group `0` is the bracketed, padded text).
 
-Canonical free calls retain a current Perl source-dispatch gap: `trim("tail").take(1)`
-returns an empty Array, and `uppercase("tail").set_key("k",1)` can read a same-named
-host package Hash before adding the key. A rejected free-call consumer followed
-by `with` may still enter its body. These are owned P1 repairs; the original String
-producers and ordinary receiver guards work. Use the existing completed-value
-guarded bridge while the repair is pending: `saved=trim("tail");
-saved.coalesce(undef).take(1)` returns null. Other backends are assessed independently;
-legacy named aggregate fallback and broader unsupported contexts remain separate.
+Perl canonical ordinary free calls also retain actual-kind guards through
+compatible methods and explicit Array bridges:
+
+```text
+trim("tail").take(1)                         # null
+uppercase("tail").set_key("k",1)              # null
+trim(" a,b ").split(",").last().uppercase()  # B
+trim(undef).with(){return("recovered")}        # recovered
+```
+
+Incompatible consumer arguments and later immediate `with` bodies stay skipped;
+legitimate empty Arrays and null values still enter `with`. Scalar identities
+remain Number/Boolean where the original producer preserves them. Regenerate
+emitted Perl parsers to pick up these guards. Other backends are assessed
+independently; legacy named aggregate fallback, malformed/alias/regex mutation
+forms and broader unsupported receiver contexts remain separate.
 
 ### `lowercase(s)`
 - **Signature**: `lowercase(value: scalar)`

@@ -4,6 +4,7 @@ Owner: TYPE-REFERENCE-BOOK.1.2.23.1.23; family23.3.62. Existing authority:
 scalar-string-results.md19, scalar-text/numeric/uniform binding contracts and
 current catalog. This extends the ordinary canonical free-call source role,
 without changing existing String producers or input/signature policies.
+Status: Bounded Perl62.1 targeted-checked; independent peers/full admission pending.
 
 Retain trim/lowercase/uppercase(one positional), replace_substr(three),
 rm_prefix/rm_suffix(two), character substr(two or three), cat(two-or-more).
@@ -63,3 +64,22 @@ is Perl-specific, not portable unready authority. Actual producers/inputs/seeded
 modules/results: free-string-selection-intake.json.gz. P1 Perl62.1 first, then
 Rust62.2/Dart62.3/Julia62.4/safe Lua62.5; full23.4/pressure/registration/progress/
 declared-host/exhaustive owners remain separate.
+
+## Bounded Perl62.1 source and fresh-package isolation repair
+
+Same sealed18 groups12PASS6RED to18PASS;12 includes ten ready healthy values,
+one legacy unready fence/one qualified error.15 ready values/legacy context/two
+fresh host seed controls pass. Ten ready healthy values/legacy row/error exact;
+free-call bridge now ready while receiver-only invalid bridge stays unready.
+Both empty/seeded host Hash cases now null/error-free/warning-free with host data
+unchanged. Exact ordinary canonical source predicate/current guard/scoped with
+state/free-source intermediate actual-kind dispatch only; producers/Unicode/
+domains/arity/aliases/copy/function/deferred/parser/schema stay. Source effects/
+snapshots/Number0 index/Boolfalse/legitimate null-empty with preserved. Final
+nearest String7/constructor25/fences9/owner-normal syntax pass; excluded nine AST/
+lowering/warning rows exact. Initial/sealed18 epochs differ only explicit eval
+error capture, intended DSL/oracles/count unchanged; executed one-shot sealer
+escape-warning source retained/raw-string producer correction not replayed.
+Actual inputs/producers/epochs: free-string-perl-intake.json.gz. Canonical18/
+fences9 registration stays23.4.1-owned. Regenerate emitted Perl; Rust62.2 next,
+no native seeded/general SESSION17/exhaustive excluded-runtime/full admission.

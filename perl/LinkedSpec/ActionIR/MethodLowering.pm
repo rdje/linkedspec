@@ -1744,6 +1744,31 @@ sub _ordinary_free_default_result_source {
  return 1
 }
 
+# Free String helpers retain their Scalar/null producer and existing domains.
+# Only canonical ordinary value arities join the actual-kind result guard.
+sub _ordinary_free_string_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') =~ /\A(?:trim|lowercase|uppercase|replace_substr|rm_prefix|rm_suffix|substr|cat)\z/o
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY';
+ my $name = $call->{name};
+ my $count = @{$call->{args}};
+ my $valid_arity = $name eq 'cat' ? $count >= 2
+  : $name eq 'substr' ? ($count == 2 || $count == 3)
+  : $name eq 'replace_substr' ? $count == 3
+  : $name =~ /\Arm_(?:prefix|suffix)\z/o ? $count == 2
+  : $count == 1;
+ return 0 unless $valid_arity;
+ foreach my $value (@{$call->{args}}) {
+  return 0 unless ref($value) eq 'HASH'
+   && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+ }
+ return 1
+}
+
 # Retained constructors keep their typed payload and list-context producer.
 # Only ordinary boxed forms join result guards; selectors and splices stay out.
 sub _ordinary_constructor_result_source {
@@ -5404,8 +5429,9 @@ my $lower_numeric_array_reducer_source_expr = sub {
   # Keep guarded source prefixes together with their immediate with bodies
   # so a rejected consumer cannot be normalized into an ordinary null.
   my $constructor_result_source = _ordinary_constructor_result_source($receiver);
+  my $free_string_result_source = _ordinary_free_string_result_source($receiver);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
-    || $constructor_result_source)
+    || $constructor_result_source || $free_string_result_source)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -5800,6 +5826,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || _ordinary_set_result_source($receiver)
    || _ordinary_free_default_result_source($receiver)
    || $constructor_result_source
+   || $free_string_result_source
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   if ($logical_receiver || $emitted_result_chain) {
    my $current_expr = $logical_receiver
@@ -5823,7 +5850,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    foreach my $call (@$calls) {
     # A constructor continuation may cross kinds at any link. Reuse actual-kind
     # dispatch after intermediate results as well as at the original source.
-    $current_family = 'default_result' if $constructor_result_source;
+    $current_family = 'default_result' if $constructor_result_source || $free_string_result_source;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')

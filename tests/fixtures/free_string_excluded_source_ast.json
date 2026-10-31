@@ -1,0 +1,655 @@
+[
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 13,
+                        "start" : 12
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 14,
+                  "start" : 7
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "kind" : "call",
+            "name" : "trim",
+            "source" : "trim()",
+            "source_method" : "trim",
+            "source_span" : {
+               "end" : 6,
+               "start" : 0
+            }
+         },
+         "source" : "trim().take(1)",
+         "source_span" : {
+            "end" : 14,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:trim\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "trim().take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 27,
+                        "start" : 26
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 28,
+                  "start" : 21
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 11,
+                     "start" : 5
+                  },
+                  "value" : "tail"
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"extra\"",
+                  "source_span" : {
+                     "end" : 19,
+                     "start" : 12
+                  },
+                  "value" : "extra"
+               }
+            ],
+            "kind" : "call",
+            "name" : "trim",
+            "source" : "trim(\"tail\",\"extra\")",
+            "source_method" : "trim",
+            "source_span" : {
+               "end" : 20,
+               "start" : 0
+            }
+         },
+         "source" : "trim(\"tail\",\"extra\").take(1)",
+         "source_span" : {
+            "end" : 28,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:trim\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "trim(\"tail\",\"extra\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 18,
+                        "start" : 17
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 19,
+                  "start" : 12
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 10,
+                     "start" : 4
+                  },
+                  "value" : "tail"
+               }
+            ],
+            "kind" : "call",
+            "name" : "cat",
+            "source" : "cat(\"tail\")",
+            "source_method" : "cat",
+            "source_span" : {
+               "end" : 11,
+               "start" : 0
+            }
+         },
+         "source" : "cat(\"tail\").take(1)",
+         "source_span" : {
+            "end" : 19,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:cat\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "cat(\"tail\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 12,
+                        "start" : 11
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 13,
+                  "start" : 6
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [],
+            "kind" : "call",
+            "name" : "cat",
+            "source" : "cat()",
+            "source_method" : "cat",
+            "source_span" : {
+               "end" : 5,
+               "start" : 0
+            }
+         },
+         "source" : "cat().take(1)",
+         "source_span" : {
+            "end" : 13,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:cat\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "cat().take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 29,
+                        "start" : 28
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 30,
+                  "start" : 23
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 13,
+                     "start" : 7
+                  },
+                  "value" : "tail"
+               },
+               {
+                  "kind" : "number",
+                  "source" : 0,
+                  "source_span" : {
+                     "end" : 15,
+                     "start" : 14
+                  },
+                  "value" : 0
+               },
+               {
+                  "kind" : "number",
+                  "source" : 1,
+                  "source_span" : {
+                     "end" : 17,
+                     "start" : 16
+                  },
+                  "value" : 1
+               },
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"g\"",
+                  "source_span" : {
+                     "end" : 21,
+                     "start" : 18
+                  },
+                  "value" : "g"
+               }
+            ],
+            "kind" : "call",
+            "name" : "substr",
+            "source" : "substr(\"tail\",0,1,\"g\")",
+            "source_method" : "substr",
+            "source_span" : {
+               "end" : 22,
+               "start" : 0
+            }
+         },
+         "source" : "substr(\"tail\",0,1,\"g\").take(1)",
+         "source_span" : {
+            "end" : 30,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:substr\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "substr(\"tail\",0,1,\"g\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 25,
+                        "start" : 24
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 26,
+                  "start" : 19
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "raw_perl",
+                  "reason" : "unsupported_expression",
+                  "source" : "first:\"tail\"",
+                  "source_span" : {
+                     "end" : 17,
+                     "start" : 5
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "trim",
+            "source" : "trim(first:\"tail\")",
+            "source_method" : "trim",
+            "source_span" : {
+               "end" : 18,
+               "start" : 0
+            }
+         },
+         "source" : "trim(first:\"tail\").take(1)",
+         "source_span" : {
+            "end" : 26,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:trim\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "trim(first:\"tail\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 32,
+                        "start" : 31
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 33,
+                  "start" : 26
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 11,
+                     "start" : 5
+                  },
+                  "value" : "tail"
+               },
+               {
+                  "block" : {
+                     "kind" : "action_block",
+                     "source" : "return(\"x\")",
+                     "source_span" : {
+                        "end" : 24,
+                        "start" : 13
+                     },
+                     "statements" : [
+                        {
+                           "drops_value" : 1,
+                           "expr" : {
+                              "args" : [
+                                 {
+                                    "kind" : "string",
+                                    "quote" : "\"",
+                                    "source" : "\"x\"",
+                                    "source_span" : {
+                                       "end" : 23,
+                                       "start" : 20
+                                    },
+                                    "value" : "x"
+                                 }
+                              ],
+                              "kind" : "call",
+                              "name" : "return",
+                              "source" : "return(\"x\")",
+                              "source_method" : "return",
+                              "source_span" : {
+                                 "end" : 24,
+                                 "start" : 13
+                              }
+                           },
+                           "kind" : "action_stmt",
+                           "source" : "return(\"x\")",
+                           "source_span" : {
+                              "end" : 24,
+                              "start" : 13
+                           }
+                        }
+                     ]
+                  },
+                  "kind" : "block_value",
+                  "source" : "{return(\"x\")}",
+                  "source_span" : {
+                     "end" : 25,
+                     "start" : 12
+                  }
+               }
+            ],
+            "kind" : "call",
+            "name" : "trim",
+            "source" : "trim(\"tail\"){return(\"x\")}",
+            "source_method" : "trim",
+            "source_span" : {
+               "end" : 25,
+               "start" : 0
+            },
+            "trailing_block_arg" : 1,
+            "trailing_block_source_span" : {
+               "end" : 25,
+               "start" : 12
+            }
+         },
+         "source" : "trim(\"tail\"){return(\"x\")}.take(1)",
+         "source_span" : {
+            "end" : 33,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:trim\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }",
+      "source" : "trim(\"tail\"){return(\"x\")}.take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "calls" : [
+            {
+               "args" : [
+                  {
+                     "kind" : "number",
+                     "source" : 1,
+                     "source_span" : {
+                        "end" : 28,
+                        "start" : 27
+                     },
+                     "value" : 1
+                  }
+               ],
+               "method" : "take",
+               "source" : "take(1)",
+               "source_method" : "take",
+               "source_span" : {
+                  "end" : 29,
+                  "start" : 22
+               }
+            }
+         ],
+         "kind" : "fluent_chain",
+         "receiver" : {
+            "args" : [
+               {
+                  "kind" : "string",
+                  "quote" : "\"",
+                  "source" : "\"tail\"",
+                  "source_span" : {
+                     "end" : 20,
+                     "start" : 14
+                  },
+                  "value" : "tail"
+               }
+            ],
+            "kind" : "call",
+            "name" : "custom_string",
+            "source" : "custom_string(\"tail\")",
+            "source_method" : "custom_string",
+            "source_span" : {
+               "end" : 21,
+               "start" : 0
+            }
+         },
+         "source" : "custom_string(\"tail\").take(1)",
+         "source_span" : {
+            "end" : 29,
+            "start" : 0
+         }
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:custom_string\"; undef }",
+      "source" : "custom_string(\"tail\").take(1)",
+      "warnings" : []
+   },
+   {
+      "ast" : {
+         "body_ast" : {
+            "kind" : "action_block",
+            "source" : " return(trim(\"tail\").take(1)) ",
+            "source_span" : {
+               "end" : 33,
+               "start" : 3
+            },
+            "statements" : [
+               {
+                  "drops_value" : 1,
+                  "expr" : {
+                     "args" : [
+                        {
+                           "calls" : [
+                              {
+                                 "args" : [
+                                    {
+                                       "kind" : "number",
+                                       "source" : 1,
+                                       "source_span" : {
+                                          "end" : 30,
+                                          "start" : 29
+                                       },
+                                       "value" : 1
+                                    }
+                                 ],
+                                 "method" : "take",
+                                 "source" : "take(1)",
+                                 "source_method" : "take",
+                                 "source_span" : {
+                                    "end" : 31,
+                                    "start" : 24
+                                 }
+                              }
+                           ],
+                           "kind" : "fluent_chain",
+                           "receiver" : {
+                              "args" : [
+                                 {
+                                    "kind" : "string",
+                                    "quote" : "\"",
+                                    "source" : "\"tail\"",
+                                    "source_span" : {
+                                       "end" : 22,
+                                       "start" : 16
+                                    },
+                                    "value" : "tail"
+                                 }
+                              ],
+                              "kind" : "call",
+                              "name" : "trim",
+                              "source" : "trim(\"tail\")",
+                              "source_method" : "trim",
+                              "source_span" : {
+                                 "end" : 23,
+                                 "start" : 11
+                              }
+                           },
+                           "source" : "trim(\"tail\").take(1)",
+                           "source_span" : {
+                              "end" : 31,
+                              "start" : 11
+                           }
+                        }
+                     ],
+                     "kind" : "call",
+                     "name" : "return",
+                     "source" : "return(trim(\"tail\").take(1))",
+                     "source_method" : "return",
+                     "source_span" : {
+                        "end" : 32,
+                        "start" : 4
+                     }
+                  },
+                  "kind" : "action_stmt",
+                  "source" : "return(trim(\"tail\").take(1))",
+                  "source_span" : {
+                     "end" : 32,
+                     "start" : 4
+                  }
+               }
+            ]
+         },
+         "body_source" : " return(trim(\"tail\").take(1)) ",
+         "body_span" : {
+            "end" : 33,
+            "start" : 3
+         },
+         "kind" : "codeblock_literal",
+         "signature" : {
+            "kind" : "callable_signature",
+            "max_arity" : 0,
+            "min_arity" : 0,
+            "positional_params" : [],
+            "rest_param" : null,
+            "version" : 1
+         },
+         "source_span" : {
+            "end" : 34,
+            "start" : 0
+         },
+         "source_text" : "{|| return(trim(\"tail\").take(1)) }",
+         "version" : 1
+      },
+      "ast_error" : null,
+      "lower_error" : null,
+      "lowered" : "return do { require JSON::PP; JSON::PP->new->utf8(1)->decode(pack(\"H*\", \"7b22626f64795f617374223a7b226b696e64223a22616374696f6e5f626c6f636b222c22736f75726365223a222072657475726e287472696d285c227461696c5c22292e74616b652831292920222c22736f757263655f7370616e223a7b22656e64223a33332c227374617274223a337d2c2273746174656d656e7473223a5b7b2264726f70735f76616c7565223a312c2265787072223a7b2261726773223a5b7b2263616c6c73223a5b7b2261726773223a5b7b226b696e64223a226e756d626572222c22736f75726365223a312c22736f757263655f7370616e223a7b22656e64223a33302c227374617274223a32397d2c2276616c7565223a317d5d2c226d6574686f64223a2274616b65222c22736f75726365223a2274616b65283129222c22736f757263655f6d6574686f64223a2274616b65222c22736f757263655f7370616e223a7b22656e64223a33312c227374617274223a32347d7d5d2c226b696e64223a22666c75656e745f636861696e222c227265636569766572223a7b2261726773223a5b7b226b696e64223a22737472696e67222c2271756f7465223a225c22222c22736f75726365223a225c227461696c5c22222c22736f757263655f7370616e223a7b22656e64223a32322c227374617274223a31367d2c2276616c7565223a227461696c227d5d2c226b696e64223a2263616c6c222c226e616d65223a227472696d222c22736f75726365223a227472696d285c227461696c5c2229222c22736f757263655f6d6574686f64223a227472696d222c22736f757263655f7370616e223a7b22656e64223a32332c227374617274223a31317d7d2c22736f75726365223a227472696d285c227461696c5c22292e74616b65283129222c22736f757263655f7370616e223a7b22656e64223a33312c227374617274223a31317d7d5d2c226b696e64223a2263616c6c222c226e616d65223a2272657475726e222c22736f75726365223a2272657475726e287472696d285c227461696c5c22292e74616b6528312929222c22736f757263655f6d6574686f64223a2272657475726e222c22736f757263655f7370616e223a7b22656e64223a33322c227374617274223a347d7d2c226b696e64223a22616374696f6e5f73746d74222c22736f75726365223a2272657475726e287472696d285c227461696c5c22292e74616b6528312929222c22736f757263655f7370616e223a7b22656e64223a33322c227374617274223a347d7d5d7d2c22626f64795f736f75726365223a222072657475726e287472696d285c227461696c5c22292e74616b652831292920222c22626f64795f7370616e223a7b22656e64223a33332c227374617274223a337d2c226b696e64223a22636f6465626c6f636b5f6c69746572616c222c227369676e6174757265223a7b226b696e64223a2263616c6c61626c655f7369676e6174757265222c226d61785f6172697479223a302c226d696e5f6172697479223a302c22706f736974696f6e616c5f706172616d73223a5b5d2c22726573745f706172616d223a6e756c6c2c2276657273696f6e223a317d2c22736f757263655f7370616e223a7b22656e64223a33342c227374617274223a307d2c22736f757263655f74657874223a227b7c7c2072657475726e287472696d285c227461696c5c22292e74616b6528312929207d222c2276657273696f6e223a317d\")) }",
+      "source" : "{|| return(trim(\"tail\").take(1)) }",
+      "warnings" : []
+   }
+]

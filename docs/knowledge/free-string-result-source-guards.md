@@ -8,7 +8,7 @@ answers:
   - "which task owns canonical free String result guards"
   - "does free String source repair change legacy named empty fallback"
 date: 2026-10-31
-status: frozen62; P1 Perl62.1 first then independent peers/full admission separate
+status: bounded Perl62.1 guards/fresh isolation targeted-checked; independent peers/full admission separate
 tags: [perl, string, source, guards, host, isolation, with, readiness]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.23; free-string-selection-intake.json.gz retains16 public native/fresh/descriptor/substitution/emitted programs, ready/unready qualification and exact fresh package empty/seeded host Hash oracle."
 reverify: "Recover authored cases/public observer/seed producer from free-string-selection-intake.json.gz into new repository-local outputs. Historical activate/create/run/inspect/freeze/finish/retain writers one-shot, never replay. Repair owner62.1 next."
@@ -34,3 +34,5 @@ peer policy. Legacy named aggregate empty fallback remains unchanged. Shared16/
 target and all five backend owners frozen before production; exact ordinary
 arities/current String producer/domain/alias/mutation/deferred/context/copy/
 function/parser/schema policies stay. Full23.4 remains separate.
+
+Perl62.1 current source/with/intermediate-kind and synthetic fresh Hash isolation repair: [[perl-free-string-result-guards]]. Rust62.2 next; general SESSION17 remains open.

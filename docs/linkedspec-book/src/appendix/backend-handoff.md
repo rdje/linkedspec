@@ -3136,12 +3136,11 @@ No constructor producer/selector/pair-splice/copy/signature/schema expansion or
 complete portable admission follows.
 
 
-Feature62 targets canonical free String-helper source guards. Perl's original
-eight producers, kinds and compatible receiver/read paths work; direct free-call
-container consumers can retain legacy empty/wrong-container results and enter
-later with bodies. A public fresh-package seed also proves same-named host Hash
-data can enter an incompatible Hash result. P1 Perl62.1 is first, then independent
-Rust/Dart/Julia/Lua assessments. Valid null/empty with and producer effects stay;
-no signature/domain/alias/mutation/deferred/context/copy/schema expansion or full
-admission follows. Correct values from an unsupported context do not establish
-support; the receiver-only invalid bridge remains an explicit unready fence.
+Feature62 targets canonical free String-helper source guards. Perl now guards
+ordinary canonical calls across native/fresh execution, preserving source effects,
+actual scalar kinds, compatible/Array bridges and valid null/empty with inputs.
+Incompatible consumers skip arguments/later bodies. The confirmed fresh-package
+symbolic host Hash case now returns null with both empty and seeded host data.
+Regenerate emitted Perl parsers. Independent Rust62.2 is next, then Dart/Julia/Lua;
+no general host isolation, native-seeded, domain/context or full admission follows.
+The receiver-only invalid bridge remains an explicit unready fence.
