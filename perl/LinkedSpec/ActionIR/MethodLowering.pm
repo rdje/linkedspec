@@ -5421,10 +5421,28 @@ my $lower_numeric_array_reducer_source_expr = sub {
    return 'undef' unless defined($ast_value_only_call_method->($helper, 1 + @$args));
   }
 
+  # Presence sources and one-key prefixes retain rejection across kind
+  # transitions while preserving source-before-key evaluation and snapshots.
+  my $ordinary_has_key_result_chain = (_ordinary_free_has_key_result_source($receiver)
+    || (($calls->[0]{method} // '') eq 'has_key'
+     && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'has_key'
+     && ref($calls->[0]{args}) eq 'ARRAY' && @{$calls->[0]{args}} == 1
+     && !(grep { ref($_) ne 'HASH'
+       || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Keep ordinary presence/copy steps in one emitted chain so its rejection
+  # state survives copy. Logical producer folding keeps its existing route.
+  my $presence_copy_chain = $ordinary_has_key_result_chain
+   && (grep { ($_->{method} // '') eq 'copy' } @$calls)
+   && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
+
   # Logical and copy receivers consume generic typed values. Fold prefixes
   # into the same typed function producers so primitive kinds, source snapshots
   # and actual-result continuations do not depend on a guessed receiver family.
-  if (grep { ($_->{method} // '') =~ /\A(?:and|or|not|copy)\z/ } @$calls) {
+  if (!$presence_copy_chain
+      && (grep { ($_->{method} // '') =~ /\A(?:and|or|not|copy)\z/ } @$calls)) {
    my $value_node = $receiver;
    my @prefix_calls;
    foreach my $call (@$calls) {
@@ -5577,17 +5595,6 @@ my $lower_numeric_array_reducer_source_expr = sub {
     || (($calls->[0]{method} // '') =~ /\Ais_(?:empty|nonempty)\z/o
      && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
      && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}}))
-   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
-   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
-     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Presence sources and one-key prefixes retain rejection across kind
-  # transitions while preserving source-before-key evaluation and snapshots.
-  my $ordinary_has_key_result_chain = (_ordinary_free_has_key_result_source($receiver)
-    || (($calls->[0]{method} // '') eq 'has_key'
-     && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'has_key'
-     && ref($calls->[0]{args}) eq 'ARRAY' && @{$calls->[0]{args}} == 1
-     && !(grep { ref($_) ne 'HASH'
-       || ($_->{kind} // '') !~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o } @{$calls->[0]{args}})))
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
@@ -5787,10 +5794,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
      my $rejected = defined($rejection_flag)
       ? 'do { '.$rejection_flag.' = 1; undef }' : 'undef';
      my $kind_matches = "ref($value_expr) eq '$kind'";
-     # A leading presence receiver accepts null and still evaluates its key.
-     # Later incompatible consumers keep the existing rejection guard.
+     # A legitimate null presence source still evaluates its key. A retained
+     # presence/copy chain carries a separate flag for earlier rejection.
      if ($ordinary_has_key_result_chain && $method eq 'has_key'
-         && $call == $calls->[0] && !_ordinary_free_has_key_result_source($receiver)) {
+         && ($presence_copy_chain
+             || ($call == $calls->[0] && !_ordinary_free_has_key_result_source($receiver)))) {
       $kind_matches = "(!defined($value_expr) || $kind_matches)";
      }
      $expression = "$kind_matches ? ($expression) : $rejected";
@@ -6015,7 +6023,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $current_family = $logical_receiver ? 'scalar_result' : 'default_result';
    # A rejected consumer must not become an ordinary null input to a later
    # immediate with. Keep valid null selections and empty containers distinct.
-   my $rejection_flag = $guarded_result_with_chain ? '$__ls_free_default_rejected' : undef;
+   my $rejection_flag = ($guarded_result_with_chain || $presence_copy_chain)
+    ? '$__ls_free_default_rejected' : undef;
    my @guarded_steps;
    if (defined($rejection_flag)) {
     push @guarded_steps, 'my '.$rejection_flag.' = 0',

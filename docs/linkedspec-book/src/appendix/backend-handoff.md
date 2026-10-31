@@ -3243,7 +3243,9 @@ Julia/Lua modules, strict numeric identity/Julia depwarn and selected Rust/Dart
 format-analysis. Lua uses installed PUC5.5.1/LuaJIT with no new interpreter chunk
 locals. Declared5.4, full source/key domains and portable admission remain separate.
 Independent copied-null assessment now finds the same key/error suppression on
-Rust/Dart/Julia/installed Lua. Perl handles legitimate copied null but can lose
-rejection through copy and run a later presence key/with body. The scheduled
-reference repair preserves rejection first, followed by separate peer nullable
-presence repairs. These existing-authority fixes precede the next method selection.
+Rust/Dart/Julia/installed Lua. Perl69.6.1 now retains rejection across canonical
+ordinary presence/copy chains, skipping later keys/bodies with or without a
+trailing with while preserving legitimate nullable key effects and numeric flags.
+Focused11/nearest presence-null-copy/source18/syntax and bound public lowering
+checks pass; regenerate emitted Perl parsers. Separate peer nullable presence
+repairs precede the next method selection; general isolation/full admission remain open.

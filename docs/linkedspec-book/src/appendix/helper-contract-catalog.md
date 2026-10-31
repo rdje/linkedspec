@@ -1297,11 +1297,23 @@ composition gap remains on Rust/Dart/Julia/installed Lua:
 `{undef}.copy().has_key(key)` skips the key and returns null, while
 `copy({undef}).has_key(key)` evaluates the key and returns numeric0. Repeated
 copies and copied legitimate null results have the same gap, including suppressed
-needed key errors. Perl handles those null sources but currently loses rejection
-across copy: `has_key({},"k").take(1).copy().has_key(key).with(){...}` can run the
-key/body after the incompatible `take`. Both defects have scheduled backend
-repairs. The intended result distinguishes legitimate null from rejection;
-complete source/context/portable admission remains open.
+needed key errors. Those peer repairs remain scheduled. Perl ordinary presence/copy
+chains now keep legitimate null distinct from rejection, with and without `with`:
+
+```text
+order="";
+out=has_key({},"k").take({order=cat(order,"A");1}).copy()
+  .has_key({order=cat(order,"K");"k"})
+  .with(){order=cat(order,"W");return("ran")};
+# out=undef, order=""; incompatible take/key/body effects stay skipped
+
+order="";
+out=has_key({},"k").add("bad").copy()
+  .has_key({order=cat(order,"K");"k"});
+# out=0, order="K"; legitimate null still evaluates the key
+```
+
+Regenerate emitted Perl parsers. Complete source/context/portable admission remains open.
 
 ### `count_keys(h)`
 - **Signature**: `count_keys(h: hash)`

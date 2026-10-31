@@ -1,0 +1,15 @@
+---
+id: perl-copied-null-presence-rejection
+title: Perl ordinary presence copy chains retain explicit rejection state
+answers:
+  - "which Perl lowering keeps presence rejection across copy"
+  - "does a Perl rejected copy need trailing with to skip keys"
+  - "how does Perl copied null preserve keys without reviving rejection"
+date: 2026-10-31
+status: bounded69.6.1 targeted-checked; independent peer repairs and full admission separate
+tags: [perl, presence, copy, null, rejection, lowering]
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.69.6.1; copied-null-presence-perl-intake.json.gz retains actual instruments/source/raw epochs/five fixtures/bound public lowering; original10 and extended11/source identity qualifications explicit."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -q -Iperl t/copied_null_presence_composition.t t/has_key_result_guard_composition.t t/has_key_null_source_operand_contract.t t/value_copy_receiver.t t/has_key_result_guard_source_fences.t"
+---
+
+Perl69.6.1 preserves rejection across ordinary presence/copy chains. Initial shared10 normal9PASS1RED plus unchanged source fences18PASS; add one explicit no-with control before production and retain the original normal/consumer/runner epochs. Unchanged11 groups9PASS2RED become11PASS native/fresh, repairing rejected-copy with and without trailing with while preserving eight healthy value observations/needed key error exactly. All ten value groups ready/raw0/fallback0/unresolved0/warning-free, cursor0. Public substitution locates generic copy folding nesting an earlier rejected prefix and losing rejection before nullable has_key/body. Move the existing pure presence-role calculation before folding; keep only canonical ordinary presence/copy chains without logical producers in one emitted chain. Reuse existing rejection flag even without with and allow legitimate null at later has_key only within that retained state. Original logical folding/producer/key domains/copy depth/preflight/traversal/deferred/function/schema remain. Two input-bound public lowerings show rejected take sets state before copy while legitimate numeric-null/copy still evaluates key. Nearest presence22/null-source6/copy receiver checks total51/source fences18/owner-normal syntax pass; 105 other declared activation inputs exact. All phase declared source/fixture identities exact, with five actual runtime fixtures and inline copy normal, not complete transitive closure. A pre-edit instrument guard confused TAP failure count2 with prove exit1 and stopped before writes; accidentally launched unchanged-production observer is retained as pre-edit-check, not acceptance or additional runtime RED. Actual failed/corrected writers/commands/raw epochs retained in copied-null-presence-perl-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; new11/shared10 registration23.4.1-owned. Regenerate emitted Perl parsers. Independent Rust69.6.2 next, followed by Dart/Julia/safe Lua. No peer fix/general rejection-isolation or nullable Hash policy/exhaustive excluded-runtime/full23.4 admission.

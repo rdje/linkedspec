@@ -30,3 +30,5 @@ Independent Dart free-source/Array-bridge guards and null-key preservation: [[da
 Independent Julia strict-numeric presence/source guards: [[julia-presence-result-source-guards]]. Copied-null expression mismatch and owned repair: [[copied-null-presence-composition]].
 
 Independent installed-host Lua strict-numeric presence/source guards: [[lua-presence-result-source-guards]]. All bounded69 backend outcomes recorded; copied-null69.6/canonical parent/full23.4 remain separate.
+
+Presence/copy rejection state is retained by bounded Perl69.6.1: [[perl-copied-null-presence-rejection]]. Peer copied-null dispatch remains independently owned.
