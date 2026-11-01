@@ -1,5 +1,7 @@
 # Repo-Local Task Tree Workflow
 
+November1 director steering: Restore normal hooks before continuing Count/runtime features. E2BIG23.4.5 implementation passes actual path/storage scans and focused controls; canonical closure remains pending document-pressure20.1, the immediate next owner. No cap increase, history loss or completed full-CI claim.
+
 October 3 nested raw-readiness diagnosis: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 retains16 sources/48 native-fresh pairs,16 actual traces and42 top-level TAP tests; twelve evidence corruptions reject. Seven sources/21 pairs conceal unsupported raw descendants behind ready1/raw0/fallback0. Shared condition aliases and distinct repeated spans establish source-occurrence policy.138 claim inputs bind15 producers and four rendered exact examples. Compiler/runtime remain activation-exact. Repair .7.1, quoted false blockers .7.2 and source-comment classification .7.3 precede dispatcher/full execution.
 
 Latest PNT slice: TYPE-REFERENCE-BOOK.1.2.23.3.73.1 — Perl Count guards pass primary16/diagnostic/source18/nearest11/public3. Rust73.2 next. Direct director approval covers focused no-verify commits until scheduled pressure/gate repairs; pressure20.1 and argv-limit23.4.5 remain mandatory before admission/push.

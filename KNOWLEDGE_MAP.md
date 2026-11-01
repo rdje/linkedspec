@@ -14455,7 +14455,7 @@ _Portable diagnostic output is a quiet caller-owned typed event channel_
 ### doctrine-tracked-path-argv-limit
 _Two doctrine checkers exceed the process-launch argv limit_
 - **answers:** why do path portability and project storage checks fail Argument list too long | which task owns E2BIG in the pre-commit doctrine checks | does an Argument list too long failure mean the path policy scan ran
-- **date:** 2026-11-01 · **status:** reproduced; P1 repair pending before admission and push
+- **date:** 2026-11-01 · **status:** implemented with focused checks; canonical closure pending pressure repair
 - **evidence:** `TYPE-REFERENCE-BOOK.1.2.23.4.5; gate-argv-limit-intake.json.gz retains actual filename vector and checker bytes with distinguishing launch controls.`
 - **reverify:** `Use the retained NUL vector as argv to perl -e 'print qq{started\n};'; the original launch fails E2BIG while a README.md-only argument succeeds. Current checkout growth may alter the vector; no exact portable threshold is claimed.`
 - **source:** [`docs/knowledge/doctrine-tracked-path-argv-limit.md`](docs/knowledge/doctrine-tracked-path-argv-limit.md)

@@ -2,15 +2,17 @@
 
 ## Current Activity
 
-Perl Count source/prefix guards repaired with focused checks; independent Rust73.2 next. Director directly approved focused no-verify commits until scheduled pressure/gate repairs.
+Normal-hook restoration is director-prioritized before more runtime features. E2BIG launch repair passes focused checks; document pressure20.1 and canonical closure remain.
 
 ## Latest Completed Slice
 
-Perl Count continuations now use the existing actual-kind and rejection guards. Incompatible Array/Hash consumers skip operands and later with bodies while retaining valid source effects, numeric zero, scalar/default/Array bridges, legitimate null, source-once snapshots and function isolation. The initial Count non-array-zero fallback applies only outside existing emitted-result owners, preserving copied-null behavior and copy folding. Primary16 baseline10PASS6RED becomes16PASS; an intermediate16PASS/diagnosticRED is retained, and the corrected separate six-zero/one-null diagnostic passes. Three public lowerings confirm guards/rejection state; source18, Count/length5, selected producer5 and copied-null index1 pass. Runtime source errors stay structured at execution. Regenerate emitted Perl. Rust73.2 next; independent P1 copy/source/rejection73.6, registration23.4.1, document pressure20.1 and full admission remain open. No complete family/portable/full-CI claim or push.
+Last fully completed feature: Perl73.1 at79301cb16. Bounded infrastructure implementation23.4.5 is committed with canonical closure explicitly pending pressure20.1:
+
+Repaired the two E2BIG process launches in path-portability/storage-locality doctrine checks. Filenames stream from Git to Perl as NUL-delimited stdin while source arrives independently on descriptor3; process argv stays bounded. Both actual tracked-tree scans pass, including existing classifier/primary-anchor checks. Actual-checker controls distinguish oversized argv E2BIG from successful streamed input and preserve spaces/newlines, binary/symlink handling, policy rejection, truncated-record rejection and Git exit23 propagation. Canonical CI now includes that regression. This establishes focused process repair, not restored normal hooks or canonical admission: pressure20.1 is the immediate director-prioritized next task;23.4.5 stays implemented until canonical closure. Rust73.2 waits for normal-hook restoration. No caps, policy predicates, dependency implementation or external repository changed.
 
 ## Next Action
 
-Independently baseline Rust73.2 on shared16/source18 and its separate source-domain diagnostic before production. Preserve Count source-kind/zero/signature policies and copy folding; mandatory73.6 follows primary backends before unrelated selection. The director directly approved no-verify focused commits until scheduled pressure/gate repairs. Pressure20.1/E2BIG23.4.5, registration and full CI remain mandatory before admission/push.
+Activate pressure20.1 from the clean process-repair commit. Preserve exact history, stable task identities, current facts/questions and public reference semantics while reducing current duplication and containing durable stores under existing controls. Own bounded repair leaves and verify each migration; restore normal hooks and canonical proof before Rust73.2 or push. Include pending atomic map publication20.1.1 and claim-throughput20.1.2 where they block reliable verification.
 
 ## Recent Completions
 

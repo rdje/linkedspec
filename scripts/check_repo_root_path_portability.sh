@@ -9,9 +9,9 @@ source "$ROOT/tools/project_data_env.sh"
 linkedspec_project_data_enter_run "$ROOT/scripts/check_repo_root_path_portability.sh" "$@"
 cd "$ROOT"
 
-mapfile -d '' tracked_files < <(git ls-files -z -- . ':(exclude)rgx')
-
-PORTABILITY_ROOT="$ROOT" perl - "${tracked_files[@]}" <<'PERL'
+# Keep filenames on stdin, independently of the Perl source on descriptor 3.
+# pipefail propagates git failures; no process argv grows with the checkout.
+git ls-files -z -- . ':(exclude)rgx' | PORTABILITY_ROOT="$ROOT" perl /dev/fd/3 3<<'PERL'
 use strict;
 use warnings;
 
@@ -76,7 +76,8 @@ expect_accepted('neutral Windows fixture', 't/example.t', 'C:/Demo/input.spec');
 expect_accepted('path-denial needle', 't/example.t', '/Users/');
 
 my @violations;
-for my $path (@ARGV) {
+while (defined(my $path = do { local $/ = "\0"; <STDIN> })) {
+    die "tracked-path stream is not NUL-terminated\n" if chop($path) ne "\0";
     next if -l $path;
     next unless -f $path;
     open my $fh, '<:raw', $path

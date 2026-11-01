@@ -235,6 +235,10 @@ require_command julia
 log "running the general doctrine enforcer (DOCTRINE_ENFORCEMENT.md §5/§7 — E4 backstop): the registry driver runs every registered check (memory-architecture, Knowledge Map, ...)"
 bash "$REPO_ROOT/scripts/check_doctrines.sh"
 
+log "checking bounded NUL-delimited path transport in the path/storage doctrines"
+require_tracked_file tools/test_doctrine_path_streaming.py
+bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_doctrine_path_streaming.py
+
 log "checking Knowledge header list association through the public generator/checker"
 require_tracked_file t/knowledge_map_header_lists.t
 PERL5LIB= prove t/knowledge_map_header_lists.t

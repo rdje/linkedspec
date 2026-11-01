@@ -30,6 +30,7 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   task file to carry the checklist below with LinkedSpec-tool evidence signatures. `REPO-ROOT-PATHS`
   ([`scripts/check_repo_root_path_portability.sh`](scripts/check_repo_root_path_portability.sh)) independently
   scans tracked parent-repository text and locks all five primary-command runtime root anchors on every run.
+  Both path/storage checkers stream NUL-delimited filenames instead of expanding argv; exercise actual large-list, pathname, rejection and Git-failure controls with `bash tools/run_python_project_data.sh tools/test_doctrine_path_streaming.py`.
   `README-STABILITY` ([`scripts/check_readme_stability.sh`](scripts/check_readme_stability.sh)) keeps the root
   landing page within the reviewed `README_POLICY.md` line/byte caps and unconditionally invokes
   [`scripts/check_readme_routing_pressure.pl`](scripts/check_readme_routing_pressure.pl). The data registry at

@@ -1340,7 +1340,7 @@ private volume/session roots, and compile-time Rust primary discovery while pres
 `/usr`/`/opt` tools, caller `/tmp`, and neutral `C:/Demo`/path-denial fixtures. It also requires the five primary
 commands to retain their runtime anchors: Perl `FindBin`, Rust executable-then-cwd marker discovery, Dart cwd plus
 script ascent, Julia `@__DIR__`, and Lua `debug.getinfo`. The normal doctrine driver runs this checker from both
-pre-commit and canonical local CI.
+pre-commit and canonical local CI. Both path and storage checkers stream NUL-delimited Git paths to Perl independently of its source, avoiding process argument limits. Canonical CI runs `bash tools/run_python_project_data.sh tools/test_doctrine_path_streaming.py` to check large inputs, spaces/newlines, binary/symbolic files, policy rejection, truncated records and Git-failure propagation.
 
 Ignored build/package caches may contain tool-generated absolute metadata and should be regenerated after a move.
 Compiled debug information may also record source locations, so searching binary strings is not a relocation
