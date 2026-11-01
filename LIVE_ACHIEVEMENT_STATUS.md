@@ -6,13 +6,11 @@ Normal-hook restoration is director-prioritized before more runtime features. E2
 
 ## Latest Completed Slice
 
-Last fully completed feature: Perl73.1 at79301cb16. Bounded infrastructure implementation23.4.5 is committed with canonical closure explicitly pending pressure20.1:
-
-Repaired the two E2BIG process launches in path-portability/storage-locality doctrine checks. Filenames stream from Git to Perl as NUL-delimited stdin while source arrives independently on descriptor3; process argv stays bounded. Both actual tracked-tree scans pass, including existing classifier/primary-anchor checks. Actual-checker controls distinguish oversized argv E2BIG from successful streamed input and preserve spaces/newlines, binary/symlink handling, policy rejection, truncated-record rejection and Git exit23 propagation. Canonical CI now includes that regression. This establishes focused process repair, not restored normal hooks or canonical admission: pressure20.1 is the immediate director-prioritized next task;23.4.5 stays implemented until canonical closure. Rust73.2 waits for normal-hook restoration. No caps, policy predicates, dependency implementation or external repository changed.
+Frozen a concrete lossless normal-hook restoration proposal under20.1.3. The original pressure contracts are unchanged. The proposal distinguishes exact sealed archives, current task graphs, maintained facts/ADRs/manuals and generated projections; it names paths, retained per-file bounds, source/retrieval/corruption checks and separate migration owners. Proposed replacement of lifetime aggregate caps for archives/maintained references requires an explicit lifecycle/browsing decision under the supplied guide; it is not an implicit cap increase or admitted repair. E2BIG23.4.5 actual scans/focused controls pass, but canonical closure remains pending pressure. Independent atomic-map20.1.1 and claim-throughput20.1.2 proceed while dependent migrations wait. No runtime feature work or push before normal-hook restoration.
 
 ## Next Action
 
-Activate pressure20.1 from the clean process-repair commit. Preserve exact history, stable task identities, current facts/questions and public reference semantics while reducing current duplication and containing durable stores under existing controls. Own bounded repair leaves and verify each migration; restore normal hooks and canonical proof before Rust73.2 or push. Include pending atomic map publication20.1.1 and claim-throughput20.1.2 where they block reliable verification.
+Independent atomic/compact Knowledge projection20.1.1, then claim-throughput20.1.2. The director must choose the explicit archive/reference contract proposal before dependent migrations: docs/checkpoints/document-pressure-restoration/PLAN.md. No lifecycle/limit/content migration is authorized by merely writing the plan. Normal hooks and canonical closure precede runtime feature work/push.
 
 ## Recent Completions
 

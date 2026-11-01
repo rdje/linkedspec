@@ -2047,3 +2047,8 @@ The [registered-function bridge chapter](../architecture/structured-format-progr
 contains the complete root-relative recovery recipe. Its tracked checkpoint retains producer source
 bodies, hashes, baseline identities and ordered replay commands. Recovery validates all identities and
 destinations before writing; later compiler changes remain distinct from the dated evidence boundary.
+
+
+### Current document-pressure restoration
+
+The path/storage E2BIG launch defect is repaired with focused checks. Normal hooks still fail document-pressure controls; full canonical closure is pending. A lossless restoration proposal at `docs/checkpoints/document-pressure-restoration/PLAN.md` awaits the archive/reference lifecycle decision. Existing limits and browsing contracts remain in force. Independent Knowledge publication and claim-verifier repairs proceed before more runtime features; no full-gate success is claimed.

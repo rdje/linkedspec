@@ -807,8 +807,9 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: Policy intake and queue only; the implementation comparison and adoption evidence belong to this future leaf.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20.1`
-  Status: `pending` / P1 mandatory document-pressure repair before admission or push
-  Goal: Own the actual resulting-tree pressure/freshness failures exposed during Julia21.4, through verified containment repair.
+  Status: `active` / director-prioritized normal-hook restoration
+  Goal: Repair resulting-tree pressure/freshness failures and restore normal hooks before further runtime features.
+  Children: Existing atomic map20.1.1 and claim-throughput20.1.2; reviewable retention-contract design20.1.3; bounded migrations and canonical closure split after the design decision.
   Discovered by: Focused optional document-pressure gate during valid reduction implementation21.4; runtime43 strict checks/book render pass independently. This intake does not activate a containment migration while the current feature tree is dirty.
   Reproduction: bash tools/project_data_run.sh bash scripts/check_readme_stability.sh with the preserved staged-index epoch at base0b9046522682d308b26d7935e09b0a279a7ab291. docs/checkpoints/type-operation-inventory/document-pressure-intake.md, metadata, exact staged binary patch and raw stdout retain the failed command/source context.
   Impact / ownership: Full admission/push is blocked by change_history/engineering_notes archive file/member controls, engineering aggregate controls, knowledge card count/bytes and task collection bytes. Document-history freshness additionally rejects non-dated current CHANGES headings, propagating to live status; task collection overflow propagates to task-index freshness. Ordinary focused runtime feature proof is not a full-doctrine receipt.
@@ -845,6 +846,70 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Existing claim validator/staged-candidate tests plus distinguishing repeated-read/snapshot/owner-drift controls; unchanged semantic results for all registered records at the designated boundary.
   Planned canonical trigger: Claim-verifier infrastructure change, before admission/push.
   Planned claim verification: none: This node owns observed workflow delay and a source-confirmed repeated-read path; no measured speedup or complete bottleneck census. Repair declares its actual proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.3`
+  Status: `completed` / proposal frozen; director lifecycle/browsing decision pending
+  Goal: Freeze the exact current constraints, lossless repair design and browse/retention decision before changing governing lifecycles.
+  Dependencies: clean E2BIG implementation7ec45b810;20.1 owns pressure; canonical closure23.4.5 remains pending.
+  Acceptance: Reconcile local README routing contracts and the supplied containment guide; retain actual pressure diagnostics, name concrete changed paths/verifiers/migration order, distinguish existing bounds from proposed policy replacements, and request direction where lifecycle changes affect direct browsing. No limit/registry/retention/content migration occurs in this design slice. Independent atomic-map and verifier-throughput repairs may proceed while the decision is pending.
+  Verification tier: `focused`
+  Focused checks: Targeted current routing pressure and schema/contract/source review, proposal consistency, both history checks, memory/map/book/diff.
+  Canonical trigger: Every later infrastructure/migration and final normal-hook restoration needs canonical proof after prerequisites; proposal does not authorize policy by itself.
+  Claim verification: none: First-time diagnostic and design classification of finite existing failures; no accepted migration/capacity, repair census or performance measurement.
+  Activation: clean7ec45b810a5ef6c853e8068a04d55167671dbbb2; process repair committed, post-hook0/brief0/tree clean. Director prioritizes proper pressure repair now. Preserve all unique information and exact promised retrieval; no silent cap increase or unrelated feature work.
+  Result: docs/checkpoints/document-pressure-restoration/PLAN.md freezes concrete representations, exact retained controls, replacement aggregate-admission contracts, stable reader APIs, preservation checks and ordered repair owners. Actual gate diagnostics/source policy inputs are retained in pressure-before-intake.json.gz. No registry/limit/lifecycle/content migration is implemented. The supplied guide requires direction when direct browsing or task-owner boundaries change; explicit choice is requested before dependent migrations. Atomic-map20.1.1 and claim-throughput20.1.2 can proceed independently while the choice is pending.
+  Verification: Local contracts and supplied guide reconciled; gate reports actual independent file/member/aggregate/freshness failures; proposal preserves current README/MEMORY and per-file bounds and explicitly labels all proposed aggregate-contract replacements. No numeric cap increase, deletion or claimed normal-hook restoration. Book/history/memory/diff and owning tier fields checked.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.20.1.3 - freeze lossless normal-hook restoration proposal`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.4`
+  Status: `pending` / director-prioritized pressure repair lane
+  Goal: Lossless ledger catalog and archive containment.
+  Dependencies: retention/lifecycle decision20.1.3 and the preceding applicable repair lanes; split bounded atomic children before implementation.
+  Acceptance: Preserve exact original segments/IDs and ordered retrieval; implement the selected archive contract under separately committed chronology-family children, with strict corruption and reconstruction controls.
+  Planned verification tier: canonical
+  Planned focused checks: Changed-surface preservation, query/index/source identity and distinguishing corruption controls; memory/map/history/book/diff as relevant.
+  Planned canonical trigger: Infrastructure/migration acceptance and final normal-hook restoration; no portable/full-gate credit from focused controls alone.
+  Planned claim verification: none: Unactivated repair lane; actual migration declares its source-bound preservation/measurement evidence before publishing claims.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.5`
+  Status: `pending` / director-prioritized pressure repair lane
+  Goal: Completed task narrative containment.
+  Dependencies: retention/lifecycle decision20.1.3 and the preceding applicable repair lanes; split bounded atomic children before implementation.
+  Acceptance: Preserve every current node ID/status/goal/acceptance/frontier and full historical details; extract only classified closed narrative with predecessor/range identity and exact query proof, one task owner per atomic child.
+  Planned verification tier: canonical
+  Planned focused checks: Changed-surface preservation, query/index/source identity and distinguishing corruption controls; memory/map/history/book/diff as relevant.
+  Planned canonical trigger: Infrastructure/migration acceptance and final normal-hook restoration; no portable/full-gate credit from focused controls alone.
+  Planned claim verification: none: Unactivated repair lane; actual migration declares its source-bound preservation/measurement evidence before publishing claims.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.6`
+  Status: `pending` / director-prioritized pressure repair lane
+  Goal: Knowledge and ADR scope containment.
+  Dependencies: retention/lifecycle decision20.1.3 and the preceding applicable repair lanes; split bounded atomic children before implementation.
+  Acceptance: Apply the explicitly selected maintained-reference or consolidation policy; preserve every question, canonical fact and indexed decision, retaining per-file limits, complete source ownership and fail-closed admission.
+  Planned verification tier: canonical
+  Planned focused checks: Changed-surface preservation, query/index/source identity and distinguishing corruption controls; memory/map/history/book/diff as relevant.
+  Planned canonical trigger: Infrastructure/migration acceptance and final normal-hook restoration; no portable/full-gate credit from focused controls alone.
+  Planned claim verification: none: Unactivated repair lane; actual migration declares its source-bound preservation/measurement evidence before publishing claims.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.7`
+  Status: `pending` / director-prioritized pressure repair lane
+  Goal: Maintained manual pressure repair.
+  Dependencies: retention/lifecycle decision20.1.3 and the preceding applicable repair lanes; split bounded atomic children before implementation.
+  Acceptance: Preserve product semantics/examples/anchors and direct mdBook browsing; reflow or remove only proved duplicates, render and verify the actual changed pages.
+  Planned verification tier: canonical
+  Planned focused checks: Changed-surface preservation, query/index/source identity and distinguishing corruption controls; memory/map/history/book/diff as relevant.
+  Planned canonical trigger: Infrastructure/migration acceptance and final normal-hook restoration; no portable/full-gate credit from focused controls alone.
+  Planned claim verification: none: Unactivated repair lane; actual migration declares its source-bound preservation/measurement evidence before publishing claims.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.8`
+  Status: `pending` / director-prioritized pressure repair lane
+  Goal: Normal-hook and canonical restoration closeout.
+  Dependencies: retention/lifecycle decision20.1.3 and the preceding applicable repair lanes; split bounded atomic children before implementation.
+  Acceptance: All mandatory doctrines pass on the actual candidate, then exact staged canonical CI passes. Close20.1 and23.4.5 only with retained acceptance evidence; restore normal commits before runtime features/push.
+  Planned verification tier: canonical
+  Planned focused checks: Changed-surface preservation, query/index/source identity and distinguishing corruption controls; memory/map/history/book/diff as relevant.
+  Planned canonical trigger: Infrastructure/migration acceptance and final normal-hook restoration; no portable/full-gate credit from focused controls alone.
+  Planned claim verification: none: Unactivated repair lane; actual migration declares its source-bound preservation/measurement evidence before publishing claims.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `active` / bounded operation inventory children
@@ -15284,7 +15349,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.20.1` | `pending` | Director-prioritized pressure repair; E2BIG implementation passes focused checks, canonical closure remains before Rust73.2. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.20.1.1` | `pending` | Independent atomic/compact Knowledge projection repair while the explicit archive/reference decision is pending. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
