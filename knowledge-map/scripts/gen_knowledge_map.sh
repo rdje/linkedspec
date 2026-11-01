@@ -159,6 +159,17 @@ validate_output "$KM_OUTPUT"
 output_dir=$(dirname "$KM_OUTPUT")
 mkdir -p "$output_dir"
 validate_output "$output_dir"
+# Render beside the destination and publish only after successful validation.
+# The live projection remains complete during rendering and on ordinary failure.
+km_stage=$(mktemp "$KM_OUTPUT.render.XXXXXXXX")
+trap 'rm -f -- "$km_stage"' EXIT
+trap 'exit 129' HUP
+trap 'exit 130' INT
+trap 'exit 143' TERM
+validate_output "$km_stage"
+if [ -f "$KM_OUTPUT" ]; then
+  cp -p "$KM_OUTPUT" "$km_stage"
+fi
 {
   printf '# %s\n\n' "$KM_TITLE"
   printf '> **AUTO-GENERATED — DO NOT EDIT.** Regenerate with `knowledge-map/scripts/gen_knowledge_map.sh`.\n'
@@ -186,8 +197,11 @@ validate_output "$output_dir"
     if ($8!="") printf "- **reverify:** %s\n", $8
     printf "- **source:** [`%s`](%s)\n", $9, $9
   }'
-} > "$KM_OUTPUT"
+} > "$km_stage"
 
+validate_output "$km_stage"
 validate_output "$KM_OUTPUT"
+mv -f -- "$km_stage" "$KM_OUTPUT"
+trap - EXIT HUP INT TERM
 
 printf 'knowledge-map: wrote %s (%s facts, %s question keys)\n' "$KM_OUTPUT" "$nfacts" "$nq" >&2

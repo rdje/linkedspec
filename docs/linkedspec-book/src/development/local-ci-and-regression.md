@@ -2052,3 +2052,6 @@ destinations before writing; later compiler changes remain distinct from the dat
 ### Current document-pressure restoration
 
 The path/storage E2BIG launch defect is repaired with focused checks. Normal hooks still fail document-pressure controls; full canonical closure is pending. A lossless restoration proposal at `docs/checkpoints/document-pressure-restoration/PLAN.md` awaits the archive/reference lifecycle decision. Existing limits and browsing contracts remain in force. Independent Knowledge publication and claim-verifier repairs proceed before more runtime features; no full-gate success is claimed.
+
+
+Knowledge generation now renders to a validated sibling and atomically replaces its destination. Readers observe complete old/new maps; rendering errors, handled termination and rejected output preserve the prior complete file. First publication remains absent until success. The canonical regression is `bash tools/run_python_project_data.sh tools/test_knowledge_map_atomic_output.py`; existing metadata/header controls remain. This implementation preserves renderer bytes and is independent of the pending archive/reference policy choice.

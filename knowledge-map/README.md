@@ -57,3 +57,22 @@ fact or run its `reverify` command. 4. Only investigate if the fact genuinely is
 then write a card so it never has to be investigated again.
 
 > Read `KNOWLEDGE_MAP_ARCHITECTURE.md` and `FAQ.md` before authoring facts.
+
+## Atomic publication
+
+The generator renders to a unique sibling of its destination, validates that
+staged output and the destination path, then publishes with an atomic rename.
+Concurrent readers see a complete old or new projection. Rendering failures,
+handled termination and rejected completed output preserve the old destination;
+failed first publication leaves it absent. Existing destination permissions are
+retained. Renderer content and metadata extraction are unchanged by this repair.
+
+Run the controlled public-generator regression through the project wrapper:
+
+```sh
+bash tools/run_python_project_data.sh tools/test_knowledge_map_atomic_output.py
+```
+
+It exercises replacement, first publication, renderer failure, handled termination,
+completed-output rejection and symlink protection using isolated repository-local
+outputs. Canonical CI runs it alongside the header/list metadata regression.

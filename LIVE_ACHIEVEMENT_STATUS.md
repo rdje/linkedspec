@@ -6,11 +6,11 @@ Normal-hook restoration is director-prioritized before more runtime features. E2
 
 ## Latest Completed Slice
 
-Frozen a concrete lossless normal-hook restoration proposal under20.1.3. The original pressure contracts are unchanged. The proposal distinguishes exact sealed archives, current task graphs, maintained facts/ADRs/manuals and generated projections; it names paths, retained per-file bounds, source/retrieval/corruption checks and separate migration owners. Proposed replacement of lifetime aggregate caps for archives/maintained references requires an explicit lifecycle/browsing decision under the supplied guide; it is not an implicit cap increase or admitted repair. E2BIG23.4.5 actual scans/focused controls pass, but canonical closure remains pending pressure. Independent atomic-map20.1.1 and claim-throughput20.1.2 proceed while dependent migrations wait. No runtime feature work or push before normal-hook restoration.
+Knowledge generation now publishes atomically through a validated unique sibling and rename, preserving prior complete output on renderer failure, handled termination and completed-output rejection. Replacement and first-publication readers observe only complete versions; symlink rejection remains intact. The unchanged six-case public-generator control is baseline5RED1PASS and repaired6PASS; the existing header/list regression176 passes. With unchanged canonical inputs, the entire current projection is byte-identical to committed318da8b8a. Renderer/extraction semantics and current caps are unchanged; compact projection is separate20.1.9. Canonical CI registers the new control. This establishes focused implementation, with canonical closure still pending pressure20.1.8. Archive/reference policy choice remains pending; normal-hook restoration and runtime features/push remain separate.
 
 ## Next Action
 
-Independent atomic/compact Knowledge projection20.1.1, then claim-throughput20.1.2. The director must choose the explicit archive/reference contract proposal before dependent migrations: docs/checkpoints/document-pressure-restoration/PLAN.md. No lifecycle/limit/content migration is authorized by merely writing the plan. Normal hooks and canonical closure precede runtime feature work/push.
+Independent compact projection20.1.9, then claim-throughput20.1.2. Archive/reference policy remains proposed until the explicit decision arrives. Existing contracts remain. Normal-hook/canonical closure20.1.8 precedes runtime features or push.
 
 ## Recent Completions
 

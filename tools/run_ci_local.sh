@@ -243,6 +243,10 @@ log "checking Knowledge header list association through the public generator/che
 require_tracked_file t/knowledge_map_header_lists.t
 PERL5LIB= prove t/knowledge_map_header_lists.t
 
+log "checking atomic Knowledge Map publication and failure preservation"
+require_tracked_file tools/test_knowledge_map_atomic_output.py
+bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_knowledge_map_atomic_output.py
+
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml
 require_tracked_file tools/run_ci_local.sh

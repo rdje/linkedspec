@@ -821,7 +821,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: none: first-time deterministic gate-failure intake and source/index provenance, not an accepted population/capacity measurement. Actual repair must declare any measured admission claim and retain its producer/inputs/observed RED-GREEN.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20.1.1`
-  Status: `pending` / P2 atomic Knowledge Map publication, owned under20.1 before admission/push
+  Status: `implemented` / focused publication proof passes; canonical closure pending20.1.8
   Goal: Publish generated Knowledge Map content atomically so readers and interruption cannot observe or retain a truncated live map.
   Discovered by: Dart56.3.0 documentation finalization. Generator session58884 was still running when an independently launched git diff read KNOWLEDGE_MAP.md and reported nearly the entire file deleted. After actual generator exit0, the same diff contains only intended reverify/status edits and the complete map is intact. No final-map loss occurred.
   Root cause: knowledge-map/scripts/gen_knowledge_map.sh redirects its rendering block directly to KM_OUTPUT (currently line189). Redirection truncates the public file before rendering completes; final validate_output runs afterward. Current concurrent-read observation is transient, not accepted deletion or a runtime feature regression.
@@ -829,10 +829,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Impact: Concurrent readers can observe partial data; interruption can leave the derived lookup truncated until regeneration. Agent mitigation now: await actual terminal generator success before reading/staging/building dependent content. The map remains derivable from committed cards.
   Schedule: With20.1 maintenance after ordinary feature coverage, before23.4/admission/push; do not pivot dirty feature work or change infra under a focused feature receipt.
   Acceptance: Use validated same-directory repository-local staging and atomic replacement with cleanup on failure; preserve output-path/symlink/locality/portable-shell contracts and exact deterministic map bytes. Add focused interruption/reader/invalid-output controls and run designated infrastructure/canonical proof. Keep all other repositories read-only.
-  Planned verification tier: canonical.
-  Planned focused checks: Existing map regeneration/validator controls plus isolated output interruption and full-reader old-or-new invariants.
-  Planned canonical trigger: Generator infrastructure publication changes, before admission/push.
-  Planned claim verification: none: This node records a finite observed race and direct source mechanism, no population or capacity measurement; repair declares its actual proof.
+  Verification tier: `canonical`
+  Focused checks: Existing map regeneration/validator controls plus isolated output interruption and full-reader old-or-new invariants.
+  Canonical trigger: Generator infrastructure publication changes, before admission/push.
+  Claim verification: none: This node records a finite observed race and direct source mechanism, no population or capacity measurement; repair declares its actual proof.
+
+  Activation: clean318da8b8a3298bd59c4d72c937d9187907178c39; proposal3 committed/post-hook0/brief0. Independent of pending archive/reference choice. Preserve exact renderer bytes in this slice; compact projection is separately owned20.1.9. Controlled isolated public generator probes must show reader/failure/TERM/validator behavior before production; never interrupt the maintained map.
+
+  - [x] **REPRODUCE / ISSUE**: Unchanged public-generator control on retained original source fails replacement/first-publication readers, render failure, TERM and completed-output rejection; existing symlink rejection stays healthy. Only isolated repository-local destinations are interrupted.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: The source renderer block redirects directly to KM_OUTPUT before its final awk runs; a deterministic renderer barrier observes incomplete live bytes. Post-render validation happens after corruption. Retained original renderer/source and actual output phases establish this mechanism.
+  - [x] **FIX**: Render to a unique validated sibling, preserve existing file permissions, validate completed staged output/destination, then atomically rename. EXIT and handled-signal cleanup remove only the owned temporary path. No renderer or metadata extraction change.
+  - [x] **ADDRESSED (verified)**: Same six cases become6PASS from baseline5RED1PASS. Existing output survives failed rendering, TERM and rejected completed output; successful replacement/first publication exposes complete output and leaves no staging residue.
+  - [x] **NO REGRESSION**: Existing header/list176 passes. Full current projection is byte-identical to318da8b8a with unchanged source cards. Bash syntax and source controls pass; canonical CI includes the new test. No complete canonical receipt is claimed while independent pressure fails.
+  - [x] **LOCKSTEP**: Bundle README/book/fact/derived map/task/history/live/resume and actual producer/input/output capture agree. Original/repaired control inputs retain dynamic fixture/shim/validator bytes. Compact20.1.9 and independent claim-throughput20.1.2 retain their next-action ownership; the policy choice and canonical closure retain their separate owners.
+  Result: Knowledge generation now publishes atomically through a validated unique sibling and rename, preserving prior complete output on renderer failure, handled termination and completed-output rejection. Replacement and first-publication readers observe only complete versions; symlink rejection remains intact. The unchanged six-case public-generator control is baseline5RED1PASS and repaired6PASS; the existing header/list regression176 passes. With unchanged canonical inputs, the entire current projection is byte-identical to committed318da8b8a. Renderer/extraction semantics and current caps are unchanged; compact projection is separate20.1.9. Canonical CI registers the new control. This establishes focused implementation, with canonical closure still pending pressure20.1.8. Archive/reference policy choice remains pending; normal-hook restoration and runtime features/push remain separate.
+  Verification: bash tools/run_python_project_data.sh tools/test_knowledge_map_atomic_output.py --generator .linkedspec-data/knowledge-atomic/original/gen_knowledge_map.sh --evidence .linkedspec-data/knowledge-atomic/before.json (expected RED); same current generator after.json GREEN; bash tools/project_data_run.sh env PERL5LIB= prove t/knowledge_map_header_lists.t (176); full projection exact-byte comparison before adding the new fact; Bash syntax/book/map/history/memory/diagnosis/changed claim-input/diff. Actual evidence: docs/checkpoints/document-pressure-restoration/knowledge-map-atomic-intake.json.gz. Canonical closeout remains20.1.8; this node is not closed.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.20.1.1 - publish Knowledge Map output atomically`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20.1.2`
   Status: `pending` / P2 claim-verifier throughput repair before admission/push
@@ -910,6 +922,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Changed-surface preservation, query/index/source identity and distinguishing corruption controls; memory/map/history/book/diff as relevant.
   Planned canonical trigger: Infrastructure/migration acceptance and final normal-hook restoration; no portable/full-gate credit from focused controls alone.
   Planned claim verification: none: Unactivated repair lane; actual migration declares its source-bound preservation/measurement evidence before publishing claims.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.20.1.9`
+  Status: `pending` / independent bounded generated projection
+  Goal: Remove duplicated projection metadata without removing any question route or unique fact metadata.
+  Dependencies: atomic publication20.1.1; independent of pending archive/reference lifecycle choice.
+  Acceptance: Keep current generated-map line/byte caps. Prove every question/home, fact ID/title/date/status/evidence/reverify/source value and anchor survives the compact rendering; parser and canonical card files remain unchanged. Retain exact original/repaired projection inputs and distinguishing lost-field/question controls. No direct canonical-home or browsing lifecycle migration.
+  Planned verification tier: canonical
+  Planned focused checks: Public generator/header-list regression, complete projection semantic equivalence and field/question loss negatives, actual line/byte pressure proof, map/book/history/memory/diff.
+  Planned canonical trigger: Generator infrastructure and final normal-hook restoration; complete acceptance remains20.1.8.
+  Planned claim verification: none: Unactivated deterministic projection repair; actual preservation/pressure proof declared before publishing measurements.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1`
   Status: `active` / bounded operation inventory children
@@ -15349,7 +15371,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.20.1.1` | `pending` | Independent atomic/compact Knowledge projection repair while the explicit archive/reference decision is pending. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.20.1.9` | `pending` | Compact derived projection with complete semantic preservation; atomic implementation passes focused checks. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
