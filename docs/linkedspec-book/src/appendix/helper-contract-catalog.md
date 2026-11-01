@@ -812,10 +812,11 @@ precedence. Rebuild Rust, Dart, Julia and Lua applications with the updated runt
 
 
 Count source/prefix campaign73 is scheduled for canonical free-one and ordinary
-zero-operand receiver chains. Reference probes show that incompatible container
-consumers can run Hash-key/value effects and a later `with` body after Count's
-numeric result. The Perl typed-source prerequisite is repaired; Count source
-blocks now use their existing value owner on free and direct receiver paths.
+zero-operand receiver chains. Baseline reference probes exposed incompatible
+container consumers running Hash-key/value effects and later `with` bodies after
+Count's numeric result. Perl source blocks now use their existing value owner on
+free and direct receiver paths. Canonical Count continuations guard each consumer
+by its actual kind.
 Numeric0, compatible scalar/default/Array bridges, source snapshots and valid
 zero/null/Array-returning `with` controls already work in the selected examples.
 Peers are assessed independently; copy/source-domain/rejection combinations have
@@ -836,7 +837,25 @@ count({items="text";push(items,"x")}).coalesce("masked")
 The source runs once before later consumers. Needed source errors propagate on
 native and freshly emitted Perl paths; numeric0, existing non-array Count zero
 fallback, function/binding scope and snapshots stay. Regenerate emitted Perl.
-This producer repair leaves the scheduled source/prefix guard campaign separate.
+Canonical Perl Count chains reject incompatible consumers before evaluating their
+operands. Rejection also skips later immediate `with` bodies; a valid null result
+still enters `with`.
+
+```text
+order="";
+out=count({order=cat(order,"S");["a"]}).take({order=cat(order,"A");1}).with(){order=cat(order,"W");return("ran")}
+# out is undef; order is "S": source runs, rejected operands/body do not
+
+count([]).with(){return(value.add(1))}              # 1: zero is valid data
+count([]).add("bad").with(){return("null")}       # "null": valid null enters
+count([]).cat(",x").split(",").last().uppercase() # "X": explicit Array bridge
+```
+
+The same guards apply to ordinary zero-operand `.count()` prefixes. Count's
+existing non-array zero source policy and existing guarded copied-null behavior
+remain separate; this repair does not normalize them. Copy/rejection combinations
+and other backends have independent assessment owners. Regenerate affected Perl
+parsers to obtain the repaired continuation lowering.
 
 ### `first(arr)`
 - **Signature**: `first(arr: array)`

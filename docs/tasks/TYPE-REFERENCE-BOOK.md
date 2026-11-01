@@ -5115,6 +5115,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.19.5 - preserve Lua scalar String kinds and slice bounds`.
 
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.5`
+  Status: `pending` / P1 mandatory doctrine process-launch repair before admission/push
+  Goal: Remove the all-tracked-path argv limit from the path-portability and storage-locality doctrine checks.
+  Reproduction: Normal pre-commit during73.1 reports scripts/check_repo_root_path_portability.sh:14 and scripts/check_project_data_storage_locality.sh:13 /usr/bin/perl: Argument list too long. Both consume git ls-files -z into a Bash array and pass all filenames to one Perl launch. A minimal Perl command using the retained actual vector fails OSError errno7 (E2BIG); a single-path launch succeeds. This proves the process-launch defect without rerunning policy scans or changing their rules.
+  Evidence: docs/checkpoints/type-operation-inventory/gate-argv-limit-intake.json.gz retains the actual NUL filename vector, checker/input bytes, diagnostic, RED/GREEN commands/results and environment qualification. No portable exact threshold or complete environment/census claim.
+  Impact: Two mandatory integrity gates fail before their Perl checks execute, independently of the existing document-pressure failures. Feature behavior is unaffected by this diagnosis.
+  Priority/schedule: P1 after ordinary feature coverage in the existing infrastructure window after pressure20.1, before full23.4 and any push. LinkedSpec owns repair through verified closure; no dirty-feature pivot or cap increase.
+  Acceptance: Stream NUL-delimited tracked paths through stdin or a repository-local manifest while preserving exact pathname handling, tracked parent-repository scope and both existing policy scans. Add distinguishing small/large-list launch controls, inspect direct consumers, and complete canonical infrastructure proof before closing. Do not mistake a process launch failure for a policy scan result.
+  Planned verification tier: canonical
+  Planned focused checks: Existing path/storage self-controls plus retained large filename-vector launch RED/GREEN, safe input-path cases and directly affected doctrine checks.
+  Planned canonical trigger: Infrastructure/checker changes require canonical proof after pressure prerequisites and before admission/push.
+  Planned claim verification: none: Finite input-bound process-launch diagnosis and planned repair; no repaired gate, portable threshold or population-completeness claim.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.4`
   Status: `pending` / P2 owned backend-guide drift repair before admission
   Goal: Reconcile stale Lua guide continuation descriptions with current canonical method contracts.
@@ -15173,14 +15186,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.73.0 - lower Perl Count block sources through typed ownership`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.1`
-  Status: `pending` / owned before unrelated selection
+  Status: `completed` / bounded Perl guards and readiness targeted-checked
   Goal: Perl count source/prefix guard composition and readiness.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.73.0; frozen73/shared16/excluded18/current count3/source snapshots/copy authority.
   Acceptance: Independently baseline unchanged new normal on available native/restored/generated/fresh routes before production; never infer peer failures from Perl. Repair only demonstrated canonical free-one/ordinary zero-extra Count source/with/intermediate guards/required typed-source errors/unresolved-with readiness. Preserve numeric0, source-consumer once/order/snapshots, existing Count source/non-array fallback and free signatures, copy/default/strict arithmetic/valid zero-null-empty-Array with/function/arity/preflight/excluded source/context/parser/schema. Freeze actual source-domain diagnostic behavior before edits; do not normalize it silently. Both Rust direct/trailing-with loops and peer common/scalar guards as needed; retain separate Julia/Lua loop-index mutation gates. Lua existing namespace/no new chunk locals/no unsafe runner/formatter/declared5.4 inference. Split unsafe expansion; P1 copy73.6 mandatory before unrelated selection.
-  Planned verification tier: focused
-  Planned focused checks: Shared16 RED/GREEN/source18 on Perl/nearest count3 and index-copy controls/backend compile-analysis-scoped format-runner as appropriate/book/map/history/manual continuity. No full suite/global registry recurrence.
-  Planned canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
-  Planned claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+  Verification tier: `focused`
+  Focused checks: Shared16 RED/GREEN/source18 on Perl/nearest count3 and index-copy controls/backend compile-analysis-scoped format-runner as appropriate/book/map/history/manual continuity. No full suite/global registry recurrence.
+  Canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
+  Claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+
+  Activation: clean52ae2438a277bac442cdb0aae9fed7900616c469; README/bootstrap/memory/frontier/frozen73/shared16/source18/current Count/index-copy/ADR0138/book reviewed. Baseline unchanged new native/fresh normal and separate source-domain diagnostic before edits; preserve actual source-once and Count non-array-zero behavior. No peer inference or broad gate.
+
+  - [x] **REPRODUCE / ISSUE**: New unchanged primary16 native/fresh baseline10PASS6RED; separate source-domain diagnostic passes six numeric zeros/one null. Actual values, errors, cursor, warnings and readiness retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)**: Public call_spec_handler_subst on three frozen bodies shows no actual-kind guards/rejection flag before; MethodLowering canonical source/with/emitted-result/per-link roles omit Count. Receiver bridge has unresolved with despite executable rejection. Intermediate16PASS/diagnosticRED exposed initial Count bypass of existing copied-null guard.
+  - [x] **FIX**: Admit only canonical free-one/ordinary zero-extra Count source roles to existing actual-kind, with and per-link paths. The initial Count zero fallback applies only outside pre-existing emitted-result owners. Existing copy folding and legacy Count producer stay unchanged; copy/rejection authority73.6 remains mandatory.
+  - [x] **ADDRESSED (verified)**: Same primary16 plus separate diagnostic pass native/fresh, ready/raw0/fallback0/unresolved0/warning-free. Runtime binding error stages stay rule_handler_eval/execute_generated. Three public lowerings gain appropriate kind/rejection guards; no source reparsing or schema change.
+  - [x] **NO REGRESSION**: Count/length5, selected Count producer5 (receiver error/direct and receiver push/snapshot/function), selected copied-null index1, original source18 and syntax pass. Intermediate copied-null zero is retained as rejected candidate; final preserves original null. Focused proof only, no Phase0/full suite/global registry.
+  - [x] **LOCKSTEP**: Book/fact card/derived map/frozen target/task/roadmap/live/resume/history updated. Actual observers/inputs/raw phases/owner bytes retained in count-guard-perl-intake.json.gz. New normal registration23.4.1-owned; regenerate Perl. Rust73.2 next; mandatory73.6 before unrelated selection; pressure/full admission separate.
+  Result: Canonical Perl Count chains reject incompatible Array/Hash consumers before operands and later with bodies, retaining valid prefix effects, numeric zero, scalar/default/Array bridges, legitimate null and function isolation. Initial Count non-array-zero and existing copied-null null observations remain unchanged. Baseline primary10PASS6RED; intermediate primary16PASS but diagnosticRED; corrected primary16PASS/diagnosticPASS. Public lowering confirms actual-kind and rejection-state mechanism. Selected direct-dependent checks pass; external policy digests match the already recorded October23 intake, no policy update. No peer failure, copy/domain policy normalization, complete generation closure, full admission or push inferred.
+  Verification: perl -Iperl t/count_result_guard_composition.t (17 groups); perl -Iperl t/count_result_guard_source_fences.t (18); perl -Iperl t/count_length_receiver_contract.t (5); perl -Iperl t/count_block_source_composition.t error_receiver_source push_direct_source push_receiver_source source_snapshot function_block_source (5); perl -Iperl t/copied_null_index_composition.t copy_null_forms (1); public source probe3; syntax/book/map/memory/cadence/diagnosis/history/claim-input/diff checks. Exact raw evidence and qualified instrument recovery retained.
+  Landing authority: Initial automatic review rejected the repository-memory bypass authorization. Normal hooks then reported pressure20.1 and reproduced E2BIG23.4.5; the broad claim checker was deliberately terminated after those failures, so no complete claim-registry result is claimed. The director directly answered “Yes—approve focused commits with --no-verify” to the explicit question authorizing this verified73.1 slice and subsequent focused feature commits until scheduled document-pressure/gate repairs. Focused checks remain required; repairs and full CI remain required before any push. This current-session authorization resolves the landing blocker without changing those repair owners.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.73.1 - guard Perl Count continuations by actual result kind`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.2`
   Status: `pending` / owned before unrelated selection
@@ -15246,7 +15272,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.73.1` | `pending` | Independently repair Perl Count source/prefix guards and readiness. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.73.2` | `pending` | Independently baseline and repair Rust Count source/prefix guards. |
 | 2 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
