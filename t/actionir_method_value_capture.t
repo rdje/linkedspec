@@ -64,6 +64,20 @@ sub setup {
   input => exists($options->{input}) ? $options->{input} : $inputs{$which}, trace => [], helpers => [], eligible => [], calls => 0,
   args => [], items => ['LIT'], statements => ['RETURN'], span => {start => 3, end => 8},
   node => node($which eq 'key' ? 'key' : $options->{hash} ? 'hash' : 'array')};
+ # Emptiness now delegates to the generic value owner. Exercise statement
+ # splitting through the still-active flat/block classification path instead.
+ if ($role eq 'split_action_ir_statements' || $options->{statement_path}) {
+  $state->{input} = '[FLAT_BLOCK]';
+  $state->{items} = ['FLAT_BLOCK'];
+ }
+ $state->{input} = 'FILTER' if $role eq 'strip_literal_delimiters';
+ # Bare scalar reads no longer call the legacy extractor. Its active AST
+ # declaration fallback still selects the actual required callback.
+ if ($role eq 'extract_scalar_symbol_name') {
+  $state->{input} = 'AST_SCALAR';
+  $state->{node} = {kind => 'call', name => 'set', source => 'AST_SCALAR', args => [
+   {kind => 'raw_perl', source => 'value'}, {kind => 'array_literal', items => [], source => '[]'}]};
+ }
  my $fatal = bless {}, 'MethodValueFatal';
  my %deps;
  my $ordinary = sub {
@@ -74,7 +88,9 @@ sub setup {
    my %calls = (ENTRY => ['entry_text', []], COUNT => ['count', ['items']], KEYS => ['count_keys', ['meta']],
     EMPTY => ['is_empty', ['value']], RECORDS => ['split_tagged_records', ['LIT', 'sep', 'TAG']],
     BLOCK_EMPTY => ['is_empty', ['{BLOCK}']], RETURN => ['return', ['array(items)']],
-    HAS => ['has_key', ['meta', 'key']]);
+    HAS => ['has_key', ['meta', 'BAD_KEY']], BAD_KEY => ['count', []],
+    FLAT_BLOCK => ['flat', ['{BLOCK}']],
+    FILTER => ['filter_match', ['LIT', '"needle"']]);
    $calls{PROFILE} = [$options->{method}, $options->{args}] if $options->{method};
    return undef unless exists $calls{$args[0] // ''};
    my ($method, $values) = @{$calls{$args[0]}};
@@ -143,6 +159,7 @@ sub setup {
  }
  $deps{actionir_source_span} = $state->{span};
  $deps{__actionir_ast_value_lowering_compat_bridge} = 1 unless $which eq 'key' || $which eq 'initializer';
+ delete $deps{__actionir_ast_value_lowering_compat_bridge} if $role eq 'extract_scalar_symbol_name';
  $state->{actual} = $deps{$role};
  $state->{node} = $options->{node} if exists $options->{node};
  return (\%deps, $state, $fatal);
@@ -160,7 +177,8 @@ sub owner {
  };
  local *LinkedSpec::ActionIR::MethodLowering::_parse_method_value_ast_expr = sub {
   $helper->('ast', @_);
-  return $state->{node} if $state->{scenario} eq 'key' || $state->{scenario} eq 'initializer';
+  return $state->{node} if $state->{scenario} eq 'key' || $state->{scenario} eq 'initializer'
+   || $state->{role} eq 'extract_scalar_symbol_name';
   return undef;
  };
  local *LinkedSpec::ActionIR::MethodLowering::_normalize_hash_receiver_value_chain_expr = sub {$helper->('hash_receiver', @_)};
@@ -211,7 +229,7 @@ sub branch_cases {
   ['trim-parser-slot', 'trim_action_ir_value', {scenario => 'array'}],
   ['trim-csv-slot', 'trim_action_ir_value', {scenario => 'shape'}],
   ['trim-constructor-slot', 'trim_action_ir_value', {scenario => 'plain', input => 'array(LIT)'}],
-  ['trim-statement-slot', 'trim_action_ir_value', {scenario => 'block'}],
+  ['trim-statement-slot', 'trim_action_ir_value', {scenario => 'block', statement_path => 1}],
   ['initializer-hash', 'lower_declare_initializer_expr', {hash => 1}],
   ['key-reacquired', 'lower_scalar_access_key_expr', {replace_key => 'new'}],
   ['key-lazy-invalid', 'lower_scalar_access_key_expr', {replace_key => 'bad'}],

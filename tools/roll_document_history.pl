@@ -6,6 +6,8 @@ use Digest::SHA qw(sha256_hex);
 use FindBin qw($RealBin);
 use Getopt::Long qw(GetOptions);
 use JSON::PP ();
+use lib "$RealBin/lib";
+use LinkedSpec::DocumentHistoryCatalog qw(read_catalog write_catalog);
 
 my $ROOT = "$RealBin/..";
 my $MAX_LINES = 512;
@@ -154,14 +156,12 @@ my $new_record = segment_record(
     $surface, $config, $segment_id, $target, $digest, $source_commit, $source_blob,
     $source_start, $source_end, $archive_lines, length($archived));
 $metadata->{segment_count} = @$manifest_records + 1;
-my $manifest = join('', map { $JSON->encode($_) . "\n" }
-    ($metadata, $new_record, @$manifest_records));
 
 # The root is the only copy whose removal changes the current author view, so replace it last. If the process
 # stops after creating the segment or publishing the manifest, a rerun either completes the same content-addressed
 # generation or recognizes that exact pending manifest record and installs the already-computed retained root.
 write_atomic($target, $archived) if !-e $target;
-write_atomic($config->{manifest}, $manifest);
+write_catalog($config->{manifest}, $metadata, [$new_record, @$manifest_records]);
 write_atomic($config->{current}, $retained);
 print "document-history rollover: $surface archived $archive_lines line(s) as $segment_id; current is "
     . line_count($retained) . "/$MAX_LINES lines and " . length($retained) . "/$MAX_BYTES bytes\n";
@@ -247,22 +247,7 @@ sub line_count {
 
 sub read_manifest {
     my ($path) = @_;
-    my $bytes = read_bytes($path);
-    my @lines = split /\n/, $bytes, -1;
-    pop @lines if @lines && $lines[-1] eq '';
-    die "empty manifest: $path\n" if !@lines;
-    my @records;
-    for my $number (1 .. @lines) {
-        die "blank manifest record at $path:$number\n" if $lines[$number - 1] eq '';
-        my $record = eval { JSON::PP->new->utf8(1)->decode($lines[$number - 1]) };
-        die "invalid manifest record at $path:$number\n"
-            if !$record || $@ || ref($record) ne 'HASH';
-        die "non-canonical manifest record at $path:$number\n"
-            if $JSON->encode($record) ne $lines[$number - 1];
-        push @records, $record;
-    }
-    my $metadata = shift @records;
-    return ($metadata, \@records);
+    return read_catalog($path);
 }
 
 sub read_bytes {

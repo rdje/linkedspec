@@ -17,6 +17,40 @@ sub public_rows {
  return [map {+{%$_, value => return_value($_->{value})}} @$rows];
 }
 
+# Controlled native set_key fixtures use KEY/VALUE operands. Observe their
+# order and snapshot behavior; the later value operand changes the key binding.
+sub hash_write {
+ my ($source) = @_;
+ my ($key, $value) = ('first', 'payload');
+ my (%meta, %zero_target, @effects);
+ $source =~ s/\$0\{/\$zero_target\{/g;
+ $source =~ s/\bKEY\b/do { push \@effects, 'K'; \$key }/g;
+ $source =~ s/\bVALUE\b/do { push \@effects, 'V'; \$key = 'later'; \$value }/g;
+ my $execute = eval 'sub { ' . $source . ' }';
+ return {error => "compile: $@"} unless ref($execute) eq 'CODE';
+ my $ok = eval {$execute->(); 1};
+ return {error => "execute: $@"} unless $ok;
+ return {meta => \%meta, zero_target => \%zero_target, effects => \@effects, key => $key};
+}
+
+sub hash_write_golden {
+ my ($source) = @_;
+ return undef unless defined $source;
+ my %goldens = (
+  '$meta{KEY} = VALUE' => {meta => {first => 'payload'}, zero_target => {}, effects => ['K', 'V'], key => 'later'},
+  '$0{KEY} = VALUE' => {meta => {}, zero_target => {first => 'payload'}, effects => ['K', 'V'], key => 'later'},
+  '$meta{0} = VALUE' => {meta => {0 => 'payload'}, zero_target => {}, effects => ['V'], key => 'later'},
+  '$meta{KEY} = 0' => {meta => {first => 0}, zero_target => {}, effects => ['K'], key => 'first'},
+ );
+ return $goldens{$source};
+}
+
+sub compare_hash_write {
+ my ($actual, $original) = @_;
+ my $golden = hash_write_golden($original);
+ return $golden ? [hash_write($actual), $golden] : [$actual, $original];
+}
+
 # This secondary consumer observes the emitted invocation ABI, not runtime dispatch.
 sub invocation {
  my ($source) = @_;

@@ -154,6 +154,18 @@ result = cb("a", "b")
 fn apply(value, callback: codeblock) { return(callback()) }
 ```
 
+On Perl, recursion diagnostics identify the active callable origin. For example:
+
+```text
+fn apply(callback: codeblock) { return(callback()) }
+Top:: I { cb={|| return(apply(cb)) }; return(cb()) }
+```
+
+This rejects with `codeblock_recursion_unsupported` and cycle `["cb","cb"]`.
+Passing or copying `cb` under another name retains that origin, so the cycle closes
+with the active name. Equal independent literals remain distinct callables; direct
+and mutual cycles preserve their ordered active names.
+
 The `{|` opener is exact. A final `...rest` is allowed. `{}` and `{ key : value }` remain harrays; nonempty
 `{ statements }` remains an immediately evaluated block expression. Literal construction captures no environment.
 `cb(args)` executes later in dynamic caller context with temporary copied parameter/rest bindings and block-local
@@ -720,10 +732,14 @@ The versioned source of truth is
 `rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs`; Dart consumes it through
 `dart/test/punctuation_light_zero_arg_contract_test.dart`; Julia consumes it through
 `julia/test/punctuation_light_zero_arg_contract_test.jl`; Lua consumes it inside `lua/test/run.lua` on both ABIs.
-Rust, Dart, Julia, and Lua's pre-existing zero-argument `.contains()` outcomes are separately owned by helper-
-normalization backlog `.5`. Lua proves public SpecFile JSON reconstruction rather than nonexistent generated
-source; `LUA-BACKEND-PARITY.8.1-.8.4` owns its future emitter. The current syntax is admitted by `.16.7`; the
-recurring five-backend/two-Lua-ABI proof is `bash tools/check_punctuation_light_five_backend.sh`.
+With no authored needle, `.contains` and `.contains()` both return null before receiver effects under the
+ordinary required needle contract. Supplying a needle still uses normal membership semantics. The bounded
+backend implementations are targeted-checked under `TYPE-REFERENCE-BOOK.1.2.23.3.13`; broader feature admission
+remains `.23.4`. Perl's recurring alias consumer checks native and freshly emitted source, including a valid
+needle control. Lua's original alias proof used public SpecFile JSON reconstruction; accepted generated source
+subsequently landed under `LUA-BACKEND-PARITY.8.4`, so the earlier absence of an emitter is historical. The current
+syntax is admitted by `.16.7`; the recurring five-backend/two-Lua-ABI proof is
+`bash tools/check_punctuation_light_five_backend.sh`.
 
 ### 3.8 Conditional Markers
 
@@ -988,6 +1004,35 @@ lowercase_each(arr)     — lowercase each element
 uppercase_each(arr)     — uppercase each element
 print_each(arr, prefix[, suffix]) — emit one caller-owned diagnostic event per element
 ```
+
+Perl also preserves the existing callable-result indexed Count form. For example:
+
+```text
+Top: /x/
+ I { pick={|| return([[10],[20,30]]) }; return(pick()[-1].count()) }
+```
+
+With input `x`, native and independently emitted Perl return `2`. Selecting `[0]`
+instead returns `1`; the existing result-path reader treats `[-1.0]` and `["-1"]`
+as noninteger selectors, so their Count result is `0`. The compiler retains the
+callable-result path it already lowered before applying Count. This compatibility
+form does not establish general raw-expression readiness or change copy behavior.
+
+Existing ordinary Perl result transitions include:
+
+| Expression | Result |
+| --- | --- |
+| `3.gt(1).add(2)` | `3` |
+| `[3,1,8].sum().abs()` | `12` |
+| `[2,10,1].count().abs()` | `3` |
+| `[2,10,1].first().cat("!")` | `"2!"` |
+| `[[2,10,1]].first().sorted()` | `[1,10,2]` |
+| `[2,10,1].sorted().take(2).sum().abs()` | `11` |
+
+Each compatible consumer receives the actual preceding result. Sources and
+needed operands run once in order. Sorting remains lexicographic, which explains
+the last two results. Deferred-method and invalid-shape boundaries follow their
+separate contracts.
 
 ### 7.4 Hash Helpers
 ```

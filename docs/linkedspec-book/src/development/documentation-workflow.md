@@ -20,7 +20,7 @@ bash scripts/check_readme_stability.sh
 ```
 
 Routing-pressure revision `.4.0` audited the next boundary before changing that checker. Implementation `.4.1`
-adds `doctrine/readme_stability/routes.jsonl` and an unconditional core-Perl resulting-tree check. It classifies
+introduced `doctrine/readme_stability/routes.jsonl` and an unconditional core-Perl resulting-tree check. The current routing checker also invokes project-managed Python standard-library scope admission under ADR `0139`. It classifies
 reader navigation separately from author-overflow destinations, follows routes transitively, assigns
 lifecycle-specific controls, and records legacy high-water marks as debt rather than healthy targets. Every focused run now
 proves 62 exact routes over 20 surfaces and all 40 mutation classes before the README doctrine can pass.
@@ -40,7 +40,9 @@ commit `5c570719` and reruns the full proof without a replacement implementation
 primary CLI 66/66 twice and Phase 0 1,031/1,031 in 673 seconds, closing routing-pressure revision `.4` unchanged.
 `LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0-.4` then preserve exact live/change/note history, partition future task
 evidence by stable ID, install bounded current views and complete-record rollover, and independently recompose
-the four current routes unchanged. That documentation-sustainability program is composition-closed.
+the four current routes unchanged. That documentation-sustainability program is composition-closed. Historical admission counts and lifetime limits in the dated examples below remain provenance, not current growth allowances.
+
+Accepted ADR `0139` adopts exact query archives for the two author histories and task-owned maintained scope for decisions, Knowledge cards and public references. It retains all canonical browsing paths and original per-file/hot-root/segment limits. Catalog pages and source-bound closed narratives preserve exact retrieval; current task collection ceilings stay unchanged. TYPE now joins FUTURE and STARTUP as a partitioned tree. Update a changed maintained reference's ledger before staging with `bash tools/run_python_project_data.sh tools/update_reference_scope.py --owner <leaf-id>`; the routing doctrine rejects stale, unknown, symbolic or unowned members. The integrated restoration requires normal hooks and an exact staged canonical receipt; no temporary waiver or cap refresh is used.
 
 The public book explains LinkedSpec to the outside world. The continuity docs help the project survive crashes, handoffs, and long refactoring sessions.
 
@@ -484,8 +486,10 @@ archive or normalizing historical bytes:
 bash tools/project_data_run.sh python3 - <<'HISTORY_SOURCE'
 from pathlib import Path
 import json, subprocess
-rows = Path('docs/history/changes/manifest.jsonl').read_text().splitlines()
-row = json.loads(rows[1])
+rows = json.loads(subprocess.check_output([
+    'perl', 'tools/read_document_history.pl', '--surface', 'change_history', '--catalog-json'
+]))
+row = rows[1]
 source = subprocess.check_output(['git', 'show', row['source_commit'] + ':' + row['source_path']])
 archive = Path(row['target_path']).read_bytes()
 assert source.endswith(archive)
@@ -503,6 +507,21 @@ The quoted-boundary decoder import and loop replacement recover the original
 `Contracts.pm` bytes when reversed. Removing the exact committed nested-boundary
 subtest recovers the earlier Phase0 source before its existing compatibility checks.
 Missing, duplicated or changed additions and unrelated edits fail the audit.
+
+Current source-image admission is separate from historical execution. The closed table at
+`tests/language-readiness/current-source-images.json.gz` binds 18 exact committed images at `0db5e9e87` to
+owner `TYPE-REFERENCE-BOOK.1.2.20.1.11`. Each entry preserves the historical boundary and last admitted predecessor. Git path, regular-file
+mode, commit and bytes are checked; any later byte change rejects until a new reviewed owner admits it.
+The report's `source_image_evolutions` names actual current images. Older inverse/falsifier rows explicitly
+name their preserved predecessor `source_stage`; those original controls and all original results remain.
+
+For example, the historical ZIP can still recover every selected input while a later Compiler edit causes
+`unreviewed current source image: perl/LinkedSpec/Compiler.pm`. Restoring the admitted current image passes;
+refreshing an old historical hash is never the repair. The new path-wise current-image mutations exercise that
+rejection, while original-log reads and tracked writes remain denied. Source identity admission does not
+re-execute old runtime producers or promote feature/objective compatibility; that verification remains deferred
+under its existing owners.
+
 
 Run the isolated recovery proof to check the archived inputs and current audit:
 
@@ -820,3 +839,17 @@ byte count and original mode. Copy and verify first, use the retained reader in 
 explicit original source context, then remove only the verified duplicate originals.
 Keep rejected attempts distinct. Record the physical input migration while preserving
 every original logical identity; an uncommitted draft has no historical Git revision.
+
+### Canonical execution prerequisites on macOS
+
+Run canonical CI in approved host execution so its process-locality oracle can install its own kernel sandbox.
+The read-only initialization control is:
+
+```sh
+/usr/bin/sandbox-exec -p '(version 1) (allow default)' /usr/bin/true
+```
+
+CI runs this control before doctrines. If initialization is denied, rerun the complete staged candidate
+in approved host execution with `bash tools/run_ci_local.sh`. Preserve the oracle's containment profile and
+negative checks. An early failure supplies no canonical receipt; a focused host pass does not replace the
+complete run. The execution requirement is canonical in `docs/knowledge/project-data-process-locality-proof.md`.

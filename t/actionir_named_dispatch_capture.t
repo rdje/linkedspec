@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/MethodLocations.pm';
 use Test::More;
 use JSON::PP ();
 use MIME::Base64 qw(decode_base64);
@@ -39,7 +40,7 @@ for my $index (0, 1) {
  my $run = command('perl', '-Iperl', './t/actionir_named_dispatch_probe.pl', $surface);
  is($run->{status}, 0, "$surface diagnostic command succeeds");
  is($run->{stderr}, '', "$surface diagnostic channel stays empty");
- my $actual = $json->decode($run->{stdout});
+ my $actual = LinkedSpecTest::MethodLocations::original_coordinates($json->decode($run->{stdout}));
  $current{$surface} = $actual;
  my $native = $json->decode(decode_base64($before->{rows}[$index]{stdout_base64}));
  is($actual->{loaded_before}, 0, "$surface starts without the private channel");

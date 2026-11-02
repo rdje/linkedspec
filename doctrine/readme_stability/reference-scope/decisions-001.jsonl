@@ -1,0 +1,13 @@
+{"member_count":12,"schema_version":1,"surface":"decisions","type":"reference_scope_page"}
+{"bytes":4339,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0129-producer-residual-change-history-capacity.md","sha256":"10b565e36721fccc4498dca27b338217549bf0763c860096a4a9d0f56651e5cf","type":"member"}
+{"bytes":3063,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0130-finite-engineering-notes-aggregate.md","sha256":"e09b66b9a278977b67bf0edc1bc80368ae1603ae8c191285a57cf206644552b2","type":"member"}
+{"bytes":4425,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0131-finite-engineering-notes-member.md","sha256":"91a1dd4978d406dc8df9b64daa7514becda0e9209f138da12f7727a440775829","type":"member"}
+{"bytes":4396,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0132-finite-change-history-member.md","sha256":"2ef3e64e98670ab797ac182b4c1e1d457cfff63a8b3eba3321445c2f00738064","type":"member"}
+{"bytes":4430,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0133-finite-engineering-notes-member.md","sha256":"e17e8861e83a4b9b6edb843a0e4a7293a23ef71594b34c25a3d6609ddbef6409","type":"member"}
+{"bytes":4277,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0134-finite-change-history-member.md","sha256":"dadaf2ae0ca62987cfb1424d7951d486a0f238103593db51a4fb5280537f02b2","type":"member"}
+{"bytes":4459,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0135-finite-engineering-notes-member.md","sha256":"3e46a57979f73d968049cb69aa9414a3ea4ef8f5d6a314d4c38d2b0089ac205c","type":"member"}
+{"bytes":4970,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0136-finite-continuity-capacity.md","sha256":"8e92fb1a5df3f95e1a3492f55d18c2413f6b9365751676e41bea8d50a04a6a63","type":"member"}
+{"bytes":4950,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0137-finite-selection-history-members.md","sha256":"44f3c5f2b19109be753c5530bdec1bd80f3f9e29d0485a1493eb2ff210078084","type":"member"}
+{"bytes":3048,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0138-scalar-null-value-copy.md","sha256":"91f0303b2a51a2d97dbe68e6bab1c4c8f824509b400cddc3e2a86876ef93364d","type":"member"}
+{"bytes":13619,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/0139-approved-archive-reference-contracts.md","sha256":"de203c5e9ebe39d823b73d0a35b261a56d12a6e6f80293e282998684a13c4798","type":"member"}
+{"bytes":39243,"lines":182,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/decisions/INDEX.md","sha256":"a464f02fe6516967ef6ab17d5960284a72ae29be1ccdb309eaff9a4124cd305b","type":"member"}

@@ -86,3 +86,10 @@ above remain historical, not refreshed measurements. Current source-bound proof 
 [[routing-decision-accepted-state-gap]].
 
 Related: [[repository-root-path-portability]] and [[project-data-workflow-routing]].
+
+## Current archive/reference revision
+
+Accepted ADR `0139` adopts exact author-history catalogs, task-owned maintained reference scope and source-bound
+closed task narrative while preserving the landing-page and current per-file/task/map ceilings. The dated
+adoption/recomposition counts above remain historical. Current mechanics and verification are owned by
+[[normal-hook-archive-reference-contracts]] and TYPE20.1.10; no policy decision remains pending for that choice.

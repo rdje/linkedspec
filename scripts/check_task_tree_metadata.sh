@@ -18,6 +18,7 @@ cd "$ROOT"
 
 perl scripts/check_task_tree_partitions.pl
 perl scripts/check_startup_task_partitions.pl
+bash tools/run_python_project_data.sh tools/check_task_narrative.py
 perl scripts/check_task_tree_current_ids.pl
 
 perl - <<'PERL' docs/tasks/*.md

@@ -189,13 +189,12 @@ fi
   fi
   printf '\n## Facts (by id)\n'
   printf '%s\n' "$rows" | awk -F'\t' '$1=="F"' | LC_ALL=C sort -t"$TAB" -k2,2 | awk -F'\t' '{
-    printf "\n### %s\n", $2
+    printf "### %s\n", $2
     if ($3!="") printf "_%s_\n", $3
     printf "- **answers:** %s\n", $4
-    printf "- **date:** %s · **status:** %s\n", ($5!=""?$5:"—"), ($6!=""?$6:"current")
+    printf "- **date:** %s · **status:** %s · **source:** [`%s`](%s)\n", ($5!=""?$5:"—"), ($6!=""?$6:"current"), $9, $9
     if ($7!="") printf "- **evidence:** %s\n", $7
     if ($8!="") printf "- **reverify:** %s\n", $8
-    printf "- **source:** [`%s`](%s)\n", $9, $9
   }'
 } > "$km_stage"
 

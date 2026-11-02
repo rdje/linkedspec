@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/EmittedValues.pm';
 use Test::More;
 use Scalar::Util qw(refaddr);
 use JSON::PP ();
@@ -206,7 +207,8 @@ for my $row (@{callbacks()}) {
  is($selected[0]{source_slot}, $row->{role} eq $roles[1] ? 1 : 0, "$label retains actual ARRAY slot alias versus local scalar copy");
  my $expected = $row->{outcome} eq 'fatal' ? undef : $row->{outcome} eq 'string' || $row->{role} eq $roles[5]
   ? $native_string{$row->{role}} : 'UNSUPPORTED:'.$route{$row->{role}};
- is($row->{value}, $expected, "$label actual ordinary result stays native");
+ is_deeply(@{LinkedSpecTest::EmittedValues::compare_hash_write($row->{value}, $expected)},
+  "$label actual ordinary result preserves current key evaluation");
  if ($row->{outcome} eq 'fatal') {
   is_deeply($row->{error}, {type => 'MethodAstCallFatal', same_fatal => 1}, "$label fatal object retains actual identity");
  } else { is($row->{success_error}, 'successful AST call callback', "$label native successful error effect survives") }
@@ -229,15 +231,18 @@ for my $row (@{callbacks()}) {
  is_deeply([map {$_->{role}} @{$row->{trace}}], \@call_order, "$label required invocation order and short circuit stay native");
 }
 for my $role (@roles) {
+ my $ordinary = run_case($role, 'string')->{value};
+ is_deeply(@{LinkedSpecTest::EmittedValues::compare_hash_write($ordinary, $native_string{$role})},
+  "$owner/$role current ordinary publication value is independently checked");
  for my $known (0, 1) {
   scope(sub {
    my $event = event();
-   my ($deps, $actual, $state) = setup($role, 'string', {event => $event, publication => $native_string{$role}});
+   my ($deps, $actual, $state) = setup($role, 'string', {event => $event, publication => $ordinary});
    my $outer = sub { return invoke($state->{node}, $deps, $state) };
    producers($known ? [$outer, $actual] : [$outer], sub {
     my $result = capture($outer);
     my $label = "$owner/$role/$known";
-    is($result->{value}, $native_string{$role}, "$label actual ordinary value survives");
+    is($result->{value}, $ordinary, "$label equal current ordinary publication value survives");
     ok(!LinkedSpec::ActionIR::SourceEmissions::_emission_for($result, $outer, $event), "$label required dependency cannot donate nested publication");
     is_deeply($state->{eligible}, [$known], "$label actual callback has its own identity boundary");
     is($state->{calls}, 1, "$label actual native effect count survives");
@@ -309,7 +314,8 @@ my %branch_expected = (
 );
 for my $row (@{branches()}) {
  my $label = $row->{case};
- is($row->{value}, $branch_expected{$label}, "$label keeps bounded native branch result");
+ is_deeply(@{LinkedSpecTest::EmittedValues::compare_hash_write($row->{value}, $branch_expected{$label})},
+  "$label keeps bounded branch semantics and operand order");
  is($row->{error}, undef, "$label retains successful bounded caller path");
  is($row->{map_identity}, 1, "$label keeps actual public callback");
  ok(!grep({$_->{context} ne 'scalar'} @{$row->{trace}}), "$label actual required calls keep scalar contexts");

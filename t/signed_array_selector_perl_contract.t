@@ -246,11 +246,15 @@ subtest 'authored public programs agree through native and independently emitted
                 } or $native_exception = $@;
             }
             ok(!defined($native_exception), 'native compilation/invocation boundary completes');
+            unless ($case->{error}) {
+                ok(!defined($context{last_error}), 'native execution has clear error state');
+                is($json->encode($native), $json->encode($case->{expected}), 'native values and JSON kinds');
+            }
             my $emitted = eval { LinkedSpec::emit_generated_source(\$source, source_identity => 'signed-array-perl.spec') };
             ok(defined($emitted) && length($emitted), 'independent source emits');
             my $package = 'SignedArrayPublic' . $serial++;
             my $loaded = defined($emitted) && eval "package $package; $emitted; 1";
-            ok($loaded, 'independent source loads');
+            ok($loaded, 'independent source loads') or diag($@);
             return unless $loaded;
             my ($generated, $exception);
             eval { no strict 'refs'; my $input = $case->{input} // 'x';
@@ -271,9 +275,7 @@ subtest 'authored public programs agree through native and independently emitted
                         $expected->{$field}, "emitted $field");
                 }
             } else {
-                ok(!defined($context{last_error}), 'native execution has clear error state');
                 ok(!defined($exception), 'emitted execution has clear error state');
-                is($json->encode($native), $json->encode($case->{expected}), 'native values and JSON kinds');
                 is($json->encode($generated), $json->encode($case->{expected}), 'emitted values and JSON kinds');
             }
         };

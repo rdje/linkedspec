@@ -19,7 +19,7 @@ answers:
   - how does the process oracle reject false host temporary authority
   - why does sandbox_apply fail inside a restricted agent harness
   - how should canonical CI run when nested macOS sandbox initialization is denied
-date: 2026-07-27
+date: 2026-11-02
 status: current
 tags: [architecture, storage, filesystem, process, sandbox, relocation, dart, lua, toolchain, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.4.2 adds tools/test_project_data_process_locality.sh and registers it in canonical local CI. On macOS it creates a collision-safe checkout view below managed repository scratch, starts from an outside-filesystem cwd with hostile TMPDIR/TMP/TEMP/Cargo/Dart/Julia/Python cache roots, and uses sandbox-exec to deny all writes outside the relocated checkout plus /dev/null and to deny data reads from developer HOME and both OS temporary roots except one exact read-only caller input. Real Perl, Rust, Dart, Julia, Lua, and Python-tool probes create nonempty traces or bytecode beneath the relocated root; the probe-set guard requires all six families. Deterministic mutations reject an old-volume write, a shared Cargo-cache read, a symlink escape, and a missing tool probe. fs_usage and dtruss require root on this host; sandbox-exec supplies non-root kernel containment in a normal local terminal. The first contained run exposed Dart's pre-command HOME telemetry read and Apple's cc shim xcrun_db temporary write. tools/run_dart_project_data.sh now gives only Dart a same-device repository-local HOME, all maintained Dart command surfaces use it, and the Lua builder invokes the active Apple clang plus SDK directly instead of the stateful cc shim. Correction PROJECT-DATA-SSD-ROOTING.6 proves post-routing getconf DARWIN_USER_TEMP_DIR can echo routed project TMPDIR, preserves inherited TMPDIR before routing, and makes the oracle reject missing or repository-device host authority. Complete canonical local CI then passes through process containment and Phase 0 1,031/1,031."
@@ -99,3 +99,13 @@ Canonical CI must therefore be launched with approved host execution from the
 start. This is the existing execution prerequisite, not a new permission to
 weaken the test or skip its profile. Separate newer-OS pre-main samples are
 bounded in [[macos-rust-first-launch-validation-latency]].
+
+## Early canonical prerequisite — November2 restoration
+
+Component `TYPE-REFERENCE-BOOK.1.2.20.1.20` owns a recurrence of that same execution mistake.
+Canonical86500 passed the repaired storage inventories, then the unchanged process oracle failed71 before
+its contained driver could start. The documented no-op again returns71 in the restricted harness and0 in
+approved host execution; the unchanged six-family process oracle passes in host execution. This is no new
+backend I/O defect or profile relaxation. `tools/run_ci_local.sh` now runs that exact read-only initialization
+control after required-command checks and before doctrines. A denied launch names this card and stops before
+the expensive suites. Whole exact staged CI still has to run in approved host execution for a valid receipt.

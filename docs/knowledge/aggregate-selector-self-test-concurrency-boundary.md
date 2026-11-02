@@ -9,11 +9,15 @@ answers:
   - "what scope must the aggregate selector scanner lock cover"
   - "why are private array-end callback probes classified by exact path and hash"
   - "did array-end required capture admit retired selectors as public syntax"
-date: 2026-10-20
+  - "why does the executable selector scan flag array false"
+  - "how are maintained negative selector fixtures classified"
+date: 2026-11-02
 status: current
 tags: [ci, concurrency, aggregate-selectors, untracked-files, dart, scanner]
 evidence: docs/tasks/FUTURE-PARITY-BACKLOG.md leaf .10.5.2.3.0; tools/check_executable_aggregate_selector_sources.py; tools/check_public_aggregate_selector_surface.py; tools/run_dart_local.sh
-reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Original .7 proof requires accepted557a7d9e533710c6aae211f905ca2f231a8aedae inputs."
+reverify:
+  - "bash tools/run_python_project_data.sh tools/check_executable_aggregate_selector_sources.py --concurrency-self-test"
+  - "bash tools/run_python_project_data.sh tools/check_public_aggregate_selector_surface.py"
 ---
 
 The executable aggregate-selector scanner creates a positive untracked Dart source to prove that its
@@ -55,3 +59,23 @@ fixture classification; fresh composed public admission and exact canonical CI
 separately govern landing. Neither failed canonical attempt proves full CI.
 
 Current fixture revisions keep historical registrations and add exact owner/prior/current identities. Three fixtures retain their selector occurrences;28 denials and actual source faults9/6/3 distinguish edited or foreign admissions. See docs/checkpoints/type-values-selector/.
+
+## Literal arguments and maintained diagnostic sites
+
+Restoration `TYPE-REFERENCE-BOOK.1.2.20.1.13` restores the explicit uniform-binding supersession note in the
+Dart array card; its updated-array behavior paragraph was already correct. Direct selector admission then
+reproduces20 executable sites: eight legitimate literal constructors and twelve negative/AST-observation
+sites in eight exact files. Public AST and native probes confirm that `true`, `false` and `undef` are literal
+arguments; `null`, `nothing` and case variants remain binding names. The public documentation regex had the
+same literal false positive, reproduced before the two exact pattern repairs.
+
+Components13.1/.2 preserve original fixtures and runtime code. Executable diagnostics require an exact owned
+path, whole-file SHA and diagnostic-line SHA; copied paths, edited files/lines, foreign owners, missing entries
+and added positives reject. Literal/binding/mixed-line controls,84 finite denial controls, actual untracked
+discovery and staggered concurrency pass. Public inline/fenced literal controls preserve the existing70-file,
+40-reference inventory and all eleven migration mutations. Historical audit reverses only the two exact regex
+edits, retains its original selector denials and adds six distinguishing edit denials; no fresh runtime admission
+is inferred. Exact pre-repair inputs and producer sources are recoverable from
+`docs/checkpoints/document-pressure-restoration/selector-source-population.json.gz` and its verified primary
+artifact references; the original compressed population reconstructs byte-for-byte. Current focused proof and
+rendered book guidance are retained separately. Exact staged canonical CI and normal hooks govern landing.

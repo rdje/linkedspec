@@ -56,50 +56,10 @@ assert_local_real_path "$LINKEDSPEC_RUN_DIR"
 assert_local_real_path "$TMPDIR"
 assert_local_real_path "$PYTHONPYCACHEPREFIX"
 
-mapfile -t python_temp_owners < <(
- rg -l 'tempfile[.](NamedTemporaryFile|TemporaryDirectory)' "$REPO_ROOT"/tools/*.py |
-  sed "s|^$REPO_ROOT/||" | sort
-)
-expected_python_temp_owners=(
- tools/check_executable_aggregate_selector_sources.py
- tools/check_unicode_case_contract.py
- tools/check_unicode_rule_label_contract.py
- tools/test_claim_verification_staged.py
-)
-[[ "${python_temp_owners[*]}" == "${expected_python_temp_owners[*]}" ]] ||
- fail "Python temporary-owner inventory drifted: ${python_temp_owners[*]}"
-
-mapfile -t python_tool_entrypoints < <(
- rg -l '^#!/usr/bin/env python3$' "$REPO_ROOT"/tools/*.py | sed "s|^$REPO_ROOT/||" | sort
-)
-(( ${#python_tool_entrypoints[@]} == 43 )) ||
- fail "Python tool entrypoint inventory drifted from 43 to ${#python_tool_entrypoints[@]}"
-
-allocator_name='mk''temp'
-mapfile -t shell_temp_owners < <(
- rg -l "\\$\\($allocator_name\\b" "$REPO_ROOT"/tools/*.sh "$REPO_ROOT"/knowledge-map/scripts/*.sh |
-  sed "s|^$REPO_ROOT/||" | sort
-)
-expected_shell_temp_owners=(
- knowledge-map/scripts/check_knowledge_map.sh
- tools/check_diagnostic_output_five_backend.sh
- tools/check_duplicate_regex_slot_identity_five_backend.sh
- tools/check_julia_primary_cli.sh
- tools/check_logical_helper_five_backend.sh
- tools/check_mcp_six_runtime.sh
- tools/check_repeated_action_result_five_backend.sh
- tools/check_root_rule_selection_five_backend.sh
- tools/check_rule_local_cursor_five_backend.sh
- tools/check_semantic_introspection_six_runtime.sh
- tools/check_standalone_lifecycle_block_five_backend.sh
- tools/project_data_run.sh
- tools/run_lua_local.sh
- tools/run_lua_project_data.sh
- tools/run_primary_cli_matrix.sh
-)
-[[ "${shell_temp_owners[*]}" == "${expected_shell_temp_owners[*]}" ]] ||
- fail "shell temporary-owner inventory drifted: ${shell_temp_owners[*]}"
-
+for inventory_kind in python_temporary_owners python_entrypoints shell_temporary_owners; do
+ perl "$REPO_ROOT/tools/check_project_storage_inventory.pl" --kind "$inventory_kind" ||
+  fail "reviewed tool inventory changed: $inventory_kind"
+done
 rg -q 'dir=managed_temp_root[(][)]' "$REPO_ROOT/tools/check_unicode_case_contract.py" ||
  fail 'Unicode case regeneration no longer selects verified managed scratch'
 rg -q 'dir=managed_temp_root[(][)]' "$REPO_ROOT/tools/check_unicode_rule_label_contract.py" ||

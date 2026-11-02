@@ -106,8 +106,44 @@ subtest 'zero-argument method resolution delegates unchanged' => sub {
   if ($case->{expected_resolution} eq 'accepted') {
    unlike($bare, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, "$case->{id} is accepted by the existing contract");
   } else {
-   like($bare, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, "$case->{id} keeps the existing zero-argument rejection");
+   unlike($bare, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER/, "$case->{id} uses the canonical null rejection rather than an unresolved helper");
   }
+ }
+};
+
+subtest 'required-needle aliases reject before receiver effects' => sub {
+ my $spec = <<'SPEC';
+Top:: I {
+ values=["a"]; order="";
+ bare={order=cat(order,"B");values}.contains;
+ parens={order=cat(order,"P");values}.contains();
+ valid=values.contains("a");
+ return([bare,parens,order,valid]);
+}
+SPEC
+ my %ctx;
+ my $parser = LinkedSpec::Get(\$spec, runtime_ctx_ref => \%ctx);
+ ok(ref($parser) eq 'CODE', 'required-needle alias probe builds');
+ return unless ref($parser) eq 'CODE';
+ my $input = 'x';
+ my $value = eval { $parser->(\$input) };
+ is("$@", '', 'native required-needle probe does not throw');
+ is($ctx{last_error}, undef, 'native required-needle probe has no handler error');
+ is_deeply($value, [undef, undef, '', 1], 'both missing aliases return null before effects; a valid needle still matches');
+ my $descriptor = LinkedSpec::Get(\$spec, return_descriptor => 1);
+ my $meta = $descriptor->{spec}{Top}{meta}{action_rewriter};
+ for my $field (qw(canonical_action_ir_fallback_count raw_perl_dependency_count unresolved_helper_count)) {
+  is($meta->{$field}, 0, "required-needle aliases keep $field zero");
+ }
+ my $source = LinkedSpec::emit_generated_source(\$spec,
+  source_identity => 'punctuation-required-needle.spec');
+ my $loaded = eval "package LinkedSpec::PunctuationRequiredNeedleGenerated; $source; 1";
+ ok($loaded, 'required-needle alias source independently loads') or diag($@);
+ if ($loaded) {
+  my $fresh_input = 'x';
+  my $fresh = eval { LinkedSpec::PunctuationRequiredNeedleGenerated::Execute(\$fresh_input) };
+  is("$@", '', 'fresh required-needle probe does not throw');
+  is_deeply($fresh, [undef, undef, '', 1], 'fresh source preserves null rejection, skipped effects and valid membership');
  }
 };
 

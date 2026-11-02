@@ -10,7 +10,7 @@ answers:
   - "are backend READMEs checked for removed aggregate selector examples"
   - "does the aggregate selector source scanner inspect untracked files"
   - "why did the pre-staging aggregate selector scan miss a new test"
-date: 2026-09-27
+date: 2026-11-02
 status: current
 tags: [language, bindings, retirement, no-drift, perl, rust, dart, julia, lua]
 evidence: "FUTURE-PARITY-BACKLOG.12.1.8.6 adds tools/check_aggregate_selector_retirement.py. It requires Perl, Rust, Dart, Julia, and Lua focused suites to consume all six invalid_selector_cases and portable code/surface/identifier/replacement fields from linkedspec-uniform-binding-v1; requires each backend's compiled-state validation boundaries and eight retained constructor/literal classes; forbids known selector-only runtime symbols/patterns; and composes the executable-source scanner. On 2026-07-12 it reported five backends, six invalid selectors, eight retained classes, zero runtime compatibility, zero executable positives, and 19 classified rejection occurrences. Final admission .12.1.9 composes this under tools/check_public_aggregate_selector_surface.py and removes the capability future exclusion. Follow-up .12.1.10 removes 14 missed Rust/Dart/Julia/Lua README positives and expands public proof to 56 root/component/mdBook files, 31 classified references, and zero current examples."
@@ -119,3 +119,11 @@ the selector preflight also rejects expected69/observed70. Comparing the complet
 regression/fuzz/fallback guidance and no mutation or retired-selector example. Both expected file counts advance
 by exactly one; classifiers, frozen authorities, mutation14/11/10/50 and selector36/0/5/11 controls remain intact.
 Current census prose moves with registration. The failed partial canonical run is not acceptance evidence.
+
+## Current literal-token classification
+
+The word-shaped literal tokens `true`, `false` and `undef` do not designate bindings in constructor arguments.
+The executable and public-documentation scanners preserve that distinction while still rejecting other bare
+names and case variants. Exact maintained diagnostic sites require owned file/line identities. Current controls
+and retained source epochs are documented in [[aggregate-selector-self-test-concurrency-boundary]]; these gate
+repairs do not change runtime grammar or promote fresh feature compatibility.

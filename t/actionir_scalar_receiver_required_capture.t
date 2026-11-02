@@ -46,6 +46,9 @@ for my $index (0..$#$cases) {
  }
 }
 my $branches=ScalarReceiverRequiredProbe::branch_cases();
+my %guarded_continuations = map {$_ => 1} qw(number-numeric-chain number-comparison
+ number-terminal-chain number-shared-returned-call string-string-chain
+ string-terminal-chain string-shared-returned-call);
 is(scalar(@{$native->{branches}}),scalar(@$branches),'complete authored branch population');
 for my $index (0..$#$branches) {
  my $case=$branches->[$index];
@@ -58,6 +61,13 @@ for my $index (0..$#$branches) {
     && !defined($expected->{value}) && !defined($expected->{error});
   # A recognized invalid shape is a complete null expression, not unhandled.
   $expected = {%$expected, value => 'undef'};
+ }
+ if ($guarded_continuations{$case->{name}}) {
+  die 'guarded continuation requires the exact original authored source and healthy error channel'
+   unless $expected->{caller_after} eq $case->{input} && !defined($expected->{error});
+  # A text-only adapter cannot decide the actual kind of an intermediate scalar.
+  # It declines; the independently executed public AST rows below own continuation.
+  $expected = {%$expected, value => undef};
  }
  if ($case->{missing} || $case->{noncode}) {
   $row={%$row};
@@ -102,8 +112,13 @@ die 'numeric public admission requires original source and metadata'
 my $numeric_golden = {value => $numeric_contract->{scalar_public}{expected}};
 is_deeply(LinkedSpecTest::EmittedValues::return_value($native_public->[$numeric_index]{value}),
  $numeric_golden, 'frozen numeric Toolbox source executes the independent value golden');
-$current_public->[$numeric_index]{value} = LinkedSpecTest::EmittedValues::return_value($current_public->[$numeric_index]{value});
-$native_public->[$numeric_index]{value} = $numeric_golden;
+my @public_goldens = ($numeric_golden, {value => 1}, {value => 'a'}, {value => 'a-b'});
+for my $index (0 .. $#public_goldens) {
+ is_deeply(LinkedSpecTest::EmittedValues::return_value($native_public->[$index]{value}), $public_goldens[$index],
+  "public $native_public->[$index]{name} frozen source executes the independent value golden");
+ $current_public->[$index]{value} = LinkedSpecTest::EmittedValues::return_value($current_public->[$index]{value});
+ $native_public->[$index]{value} = $public_goldens[$index];
+}
 is_deeply($current_public,$native_public,'four public Toolbox controls retain complete metadata and contractual results');
 for my $row (@{$current->{public}}) {
  ok(defined($row->{value}) && length($row->{value}),"public $row->{name} has generated source");
@@ -124,6 +139,6 @@ is_deeply($branch{'string-shared-returned-call'}{parsed_same},[[1,1],[1,1]],
 is_deeply($branch{'string-shared-returned-call'}{parsed_after},
  [(map {{method=>'trim',args=>[],__source_expr=>'lowercase()'}} 1..2)],
  'shared returned call receives final source annotation');
-is($branch{'string-shared-returned-call'}{value},'trim(trim(raw))','shared call actual result');
-is($branch{'number-shared-returned-call'}{value},'num_abs(num_abs(score))','number shared call actual result');
+is($branch{'string-shared-returned-call'}{value},undef,'shared String call defers dynamic continuation to typed lowering');
+is($branch{'number-shared-returned-call'}{value},undef,'shared Number call defers dynamic continuation to typed lowering');
 done_testing();

@@ -2,6 +2,8 @@
 """Read-only claim evidence/identity check. Never execute recorded commands."""
 import argparse
 import copy
+from collections import OrderedDict
+from functools import lru_cache
 import hashlib
 import json
 import re
@@ -131,40 +133,77 @@ def index_files():
     return result
 
 
-def run_check():
-    files = index_files()
+class InputSnapshot:
+    """Reuse immutable blobs and current owner identities within one index view."""
 
-    def read_input(source, revision=None):
+    def __init__(self, files, git_reader=None, cache_bytes=32 * 1024 * 1024):
+        self.files = dict(files)
+        self.git = git_reader or git
+        self.cache_bytes = cache_bytes
+        self.blobs = OrderedDict()
+        self.blob_bytes = 0
+        self.owners = None
+        self.resolve = lru_cache(maxsize=4096)(self._resolve)
+
+    def _resolve(self, source, revision):
         path(source)
         if revision is None:
-            require(source in files, f'untracked input: {source}')
-            mode, blob = files[source]
+            require(source in self.files, f'untracked input: {source}')
+            mode, blob = self.files[source]
         else:
-            rows = git('ls-tree', '-z', revision, '--', source).split(b'\0')
+            rows = self.git('ls-tree', '-z', revision, '--', source).split(b'\0')
             require(len(rows) == 2 and rows[0], f'missing historical input: {source}')
             header, name = rows[0].split(b'\t', 1)
             mode, kind, blob = header.decode('ascii').split()
             require(kind == 'blob' and name.decode('utf-8') == source, 'historical input is not a file')
         require(mode in ('100644', '100755'), f'input is not a tracked regular file: {source}')
-        return git('cat-file', 'blob', blob)
+        return blob
 
-    def check_owner(owner):
+    def read(self, source, revision=None):
+        blob = self.resolve(source, revision)
+        if blob in self.blobs:
+            self.blobs.move_to_end(blob)
+            return self.blobs[blob]
+        raw = self.git('cat-file', 'blob', blob)
+        if len(raw) <= self.cache_bytes:
+            while self.blobs and self.blob_bytes + len(raw) > self.cache_bytes:
+                _, removed = self.blobs.popitem(last=False)
+                self.blob_bytes -= len(removed)
+            self.blobs[blob] = raw
+            self.blob_bytes += len(raw)
+        return raw
+
+    def check_owner(self, owner):
         require(isinstance(owner, str) and ID.fullmatch(owner), 'invalid gap repair owner')
+        if self.owners is None:
+            self.owners = self._current_owners()
+        matches = self.owners.get(owner, [])
+        require(len(matches) == 1 and matches[0], f'gap repair owner is not open: {owner}')
+
+    def _current_owners(self):
         # Current task identity excludes only index-registered immutable parts.
         immutable = set()
-        for source in files:
+        for source in self.files:
             if source.startswith('docs/tasks/') and source.endswith('.index.jsonl'):
-                for line in read_input(source).splitlines():
+                for line in self.read(source).splitlines():
                     part = json.loads(line)
                     if part.get('type') == 'task_tree_part' and part.get('mutable') is False:
                         immutable.add(part['path'])
-        nodes = []
-        for source in files:
+        owners = {}
+        for source in self.files:
             if source.startswith('docs/tasks/') and source.endswith('.md') and source not in immutable:
-                raw = read_input(source).decode('utf-8')
-                nodes.extend(re.findall(r'^- ID: `' + re.escape(owner) + r'`\n(.*?)(?=^- ID:|^## |\Z)', raw, re.M | re.S))
-        require(len(nodes) == 1 and re.search(r'^  Status: `(pending|active|blocked)`', nodes[0], re.M),
-                f'gap repair owner is not open: {owner}')
+                raw = self.read(source).decode('utf-8')
+                for node in re.finditer(r'^- ID: `([^`\n]+)`\n(.*?)(?=^- ID:|^## |\Z)', raw, re.M | re.S):
+                    owners.setdefault(node[1], []).append(bool(re.search(
+                        r'^  Status: `(pending|active|blocked)`', node[2], re.M)))
+        return owners
+
+
+def run_check():
+    files = index_files()
+    snapshot = InputSnapshot(files)
+    read_input = snapshot.read
+    check_owner = snapshot.check_owner
 
     policy = read_input('DOCTRINE_ENFORCEMENT.md').decode('utf-8')
     review = read_input('COMMIT.md').decode('utf-8')
@@ -201,6 +240,7 @@ def run_check():
             require(match is not None, 'Claim verification must name a record or none: reason')
             source = match[1]
             require(source in records and records[source]['owner'] == owner, 'owning claim record is missing')
+    require(index_files() == files, 'index changed during claim verification; finish staging before checking')
     print(f'claim-verification: PASS {len(records)} records / {claims} claims / {gaps} disclosed leg gaps')
 
 

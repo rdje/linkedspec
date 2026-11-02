@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+require './t/lib/LinkedSpecTest/EmittedValues.pm';
 use Test::More;
 use Scalar::Util qw(refaddr);
 use LinkedSpec::ActionIR::MethodLowering ();
@@ -22,8 +23,9 @@ for my $case (['return_undef', [], 'return undef'], ['return', ['LABEL','payload
  local *LinkedSpec::ActionIR::MethodLowering::_lower_mutation_slot_value_expr = sub { return 'VALUE' };
  local *LinkedSpec::ActionIR::MethodLowering::_lower_method_value_expr = sub { return 'VALUE' };
  local *LinkedSpec::ActionIR::MethodLowering::_uniform_binding_target_symbol = sub { return undef };
- is(LinkedSpec::ActionIR::MethodLowering::_lower_ast_call_statement({kind => 'call', name => $method}, undef, \%deps),
-  $expected, "cold $method path keeps controlled native value");
+ my $actual_value = LinkedSpec::ActionIR::MethodLowering::_lower_ast_call_statement({kind => 'call', name => $method}, undef, \%deps);
+ is_deeply(@{LinkedSpecTest::EmittedValues::compare_hash_write($actual_value, $expected)},
+  "cold $method path keeps controlled current value and operand order");
 }
 for my $role (@roles) { is(refaddr($deps{$role}), refaddr($actual{$role}), "cold $role keeps actual public callback") }
 ok(!$INC{'LinkedSpec/ActionIR/SourceEmissions.pm'}, 'cold AST calls keep SourceEmissions unloaded');

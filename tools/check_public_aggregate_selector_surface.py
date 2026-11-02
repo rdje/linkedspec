@@ -40,13 +40,13 @@ EXPECTED_MIGRATION_CONTRASTS = (
     ),
 )
 EXACT_SELECTOR = re.compile(
-    r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
+    r"(?<![A-Za-z0-9_])(?:array|hash)\([ \t]*(?!(?:true|false|undef)[ \t]*\))[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
 )
 MIGRATION_CONTRAST = re.compile(
     r"`([^`\n]+)`[ \t]+becomes(?:[ \t]+|[ \t]*\n>[ \t]*)`([^`\n]+)`"
 )
 CODE_SELECTOR = re.compile(
-    r"(?<![A-Za-z0-9_])(?:array|hash)[ \t]*\([ \t]*[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
+    r"(?<![A-Za-z0-9_])(?:array|hash)[ \t]*\([ \t]*(?!(?:true|false|undef)[ \t]*\))[A-Za-z_][A-Za-z0-9_]*[ \t]*\)"
 )
 NEGATIVE_CONTEXT = re.compile(
     r"\b(?:former|historical|invalid|migrat\w*|must\s+not|"

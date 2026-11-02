@@ -11,6 +11,7 @@ my $JSON = JSON::PP->new->utf8(1);
 my @INDEX_REGISTRY = (
     'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl',
     'docs/tasks/SESSION-STARTUP-READING.index.jsonl',
+    'docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl',
 );
 
 chdir $ROOT or die "cannot enter repository root: $!\n";
@@ -250,9 +251,10 @@ sub run_self_tests {
                 && !safe_task_path('docs/tasks/FUTURE.md');
         }],
         ['index_registry_is_closed', sub {
-            return @INDEX_REGISTRY == 2
+            return @INDEX_REGISTRY == 3
                 && $INDEX_REGISTRY[0] eq 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl'
-                && $INDEX_REGISTRY[1] eq 'docs/tasks/SESSION-STARTUP-READING.index.jsonl';
+                && $INDEX_REGISTRY[1] eq 'docs/tasks/SESSION-STARTUP-READING.index.jsonl'
+                && $INDEX_REGISTRY[2] eq 'docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl';
         }],
     );
 

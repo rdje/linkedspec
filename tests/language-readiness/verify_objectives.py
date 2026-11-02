@@ -5,8 +5,10 @@ latest audited milestone or an exact owner-bound source evolution. Historical
 hashes and executions stay fixed; current runtime proof is separately owned.
 """
 
+import base64
 import gzip
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import subprocess
@@ -83,6 +85,32 @@ RUST_NUMERIC_SUPPORT = {
     'rust/linkedspec-runtime/src/spec_parser.rs': 'd25de1bfd0a36de1979049072431e14c3319cf9297899b9f0be56c321a165560',
     'rust/linkedspec-runtime/src/staged_parser_registry.rs': '8fdd3a75fbb411a1783d19201678b4c5df66f9f7198b8b469c475366770b1a89',
 }
+CURRENT_IMAGE_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.11'
+CURRENT_IMAGE_TABLE = 'tests/language-readiness/current-source-images.json.gz'
+CURRENT_IMAGE_TABLE_SHA256 = '1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310'
+CURRENT_IMAGE_HELPER = 'tools/historical_objective_images.py'
+IMAGE_EVOLUTION_INPUTS = (CURRENT_IMAGE_TABLE, CURRENT_IMAGE_HELPER)
+STORAGE_INVENTORY_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.19'
+STORAGE_INVENTORY_TABLE = 'tests/language-readiness/perl-storage-inventory-evolution.json.gz'
+STORAGE_INVENTORY_TABLE_SHA256 = '99e0726f0a51a06d4e2d86e030ee9385ba83bac85f03c0656396f266f4dbe164'
+PHASE0_FIXTURE_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.21'
+PHASE0_FIXTURE = 't/phase0_regression.t'
+PHASE0_FIXTURE_TABLE = 'tests/language-readiness/phase0-fixture-calibration.json.gz'
+PHASE0_FIXTURE_SHA256 = '4d16bd8b938d30f5f5fa7885931242ea195ed8316be60e36d54d282b452ef45e'
+_IMAGE_MODULE = None
+
+
+def current_image_admissions(read):
+    global _IMAGE_MODULE
+    if _IMAGE_MODULE is None:
+        spec = importlib.util.spec_from_file_location('historical_objective_images', ROOT / CURRENT_IMAGE_HELPER)
+        _IMAGE_MODULE = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_IMAGE_MODULE)
+    images = _IMAGE_MODULE.ImageAdmissions(read(CURRENT_IMAGE_TABLE), CURRENT_IMAGE_TABLE_SHA256, git)
+    require(images.data['owner'] == CURRENT_IMAGE_OWNER, 'current image admission owner mismatch')
+    return images
+
+
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
 COMPILER_SCAN_AFTER = b"    local *LinkedSpec::ActionIR::Scanner::_scan_executable_contract_ir_events = sub {\n"
 BOUNDARY_IMPORT = b"use LinkedSpec::ActionIR::BoundaryLabels ();\n"
@@ -108,6 +136,40 @@ OCCURRENCE_INSERTION = (
 )
 # Only these reviewed CI insertions and Perl inventory replacements may evolve
 # historical executable inputs. Normalization must recover every original byte.
+RESTORATION_CI_INSERTIONS = (
+    (b'require_command julia\n\n',
+     b'if [[ "$(uname -s)" == Darwin ]]; then\n'
+     b' log "checking macOS sandbox initialization required by process locality"\n'
+     b" /usr/bin/sandbox-exec -p '(version 1) (allow default)' /usr/bin/true ||\n"
+     b'  fail "macOS sandbox initialization denied; rerun this complete staged candidate in approved host execution (docs/knowledge/project-data-process-locality-proof.md)"\n'
+     b'fi\n\n'),
+    (b'bash "$REPO_ROOT/scripts/check_doctrines.sh"\n\n',
+     b'log "checking bounded NUL-delimited path transport in the path/storage doctrines"\n'
+     b'require_tracked_file tools/test_doctrine_path_streaming.py\n'
+     b'bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_doctrine_path_streaming.py\n'
+     b'\n'
+    ),
+    (b'PERL5LIB= prove t/knowledge_map_header_lists.t\n',
+     b'\n'
+     b'log "checking atomic Knowledge Map publication and failure preservation"\n'
+     b'require_tracked_file tools/test_knowledge_map_atomic_output.py\n'
+     b'bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_knowledge_map_atomic_output.py\n'
+     b'\n'
+     b'log "checking compact Knowledge metadata, immutable claim reuse and maintained scope controls"\n'
+     b'for fixture in tools/test_knowledge_map_projection.py tools/test_claim_verification_cache.py tools/test_reference_scope.py tools/test_task_narrative.py tools/test_historical_objective_images.py \\\n'
+     b'    docs/checkpoints/document-pressure-restoration/review.py \\\n'
+     b'    docs/checkpoints/document-pressure-restoration/book_review.py; do\n'
+     b'  require_tracked_file "$fixture"\n'
+     b'  bash "$REPO_ROOT/tools/run_python_project_data.sh" "$fixture"\n'
+     b'done\n'
+     b'require_tracked_file tools/historical_objective_images.py\n'
+     b'require_tracked_file tests/language-readiness/current-source-images.json.gz\n'
+     b'log "checking paged exact document-history catalogs"\n'
+     b'require_tracked_file t/document_history_catalog.t\n'
+     b'PERL5LIB= prove t/document_history_catalog.t\n'
+    ),
+)
+
 CI_INSERTIONS = (
     (b"require_tracked_file tools/check_typed_source_location_contract.py\n",
      b"require_tracked_file tools/check_language_closure_contract.py\n"
@@ -559,7 +621,8 @@ def verify_governance_evolution(source, contents, historical_hash):
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
     insertions = (
-        SIGNED_ARRAY_SELECTOR_CI_INSERTIONS
+        RESTORATION_CI_INSERTIONS
+        + SIGNED_ARRAY_SELECTOR_CI_INSERTIONS
         + PRIVATE_FACTORY_FIXTURE_CI_INSERTIONS
         + KNOWLEDGE_HEADER_GATE_CI_INSERTIONS
         + SCALAR_RECEIVER_COPY_CI_INSERTIONS
@@ -587,12 +650,27 @@ def verify_governance_evolution(source, contents, historical_hash):
             "knowledge_header_gate_owner": KNOWLEDGE_HEADER_GATE_OWNER,
             "private_factory_fixture_owner": PRIVATE_FACTORY_FIXTURE_OWNER,
             "signed_array_selector_owner": SIGNED_ARRAY_SELECTOR_OWNER,
+            "restoration_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.10",
+            "execution_preflight_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.20",
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
+
+
+SELECTOR_LITERAL_PATTERN_UPDATES = (
+    (b'r"(?<![A-Za-z0-9_])(?:array|hash)\\([ \\t]*[A-Za-z_][A-Za-z0-9_]*[ \\t]*\\)"',
+     b'r"(?<![A-Za-z0-9_])(?:array|hash)\\([ \\t]*(?!(?:true|false|undef)[ \\t]*\\))[A-Za-z_][A-Za-z0-9_]*[ \\t]*\\)"'),
+    (b'r"(?<![A-Za-z0-9_])(?:array|hash)[ \\t]*\\([ \\t]*[A-Za-z_][A-Za-z0-9_]*[ \\t]*\\)"',
+     b'r"(?<![A-Za-z0-9_])(?:array|hash)[ \\t]*\\([ \\t]*(?!(?:true|false|undef)[ \\t]*\\))[A-Za-z_][A-Za-z0-9_]*[ \\t]*\\)"'),
+)
 
 
 def verify_selector_governance_evolution(source, contents, historical_hash):
     require(source == "tools/check_public_aggregate_selector_surface.py",
             f"unapproved selector governance source: {source}")
+    current_image = digest(contents)
+    for original_pattern, literal_pattern in SELECTOR_LITERAL_PATTERN_UPDATES:
+        require(contents.count(literal_pattern) == 1,
+                f"selector governance registration mismatch: {source}")
+        contents = contents.replace(literal_pattern, original_pattern, 1)
     before = b"EXPECTED_CLASSIFIED_REFERENCE_COUNT = 36\n"
     after = b"EXPECTED_CLASSIFIED_REFERENCE_COUNT = 40\n"
     require(contents.count(after) == 1,
@@ -601,8 +679,9 @@ def verify_selector_governance_evolution(source, contents, historical_hash):
     require(digest(normalized) == historical_hash,
             f"unreviewed selector governance drift: {source}")
     return {"path": source, "historical": historical_hash,
-            "current": digest(contents), "owner": SCALAR_RECEIVER_COPY_OWNER,
-            "scope": "exact public census inverse; every original checker byte preserved"}
+            "current": current_image, "owner": SCALAR_RECEIVER_COPY_OWNER,
+            "literal_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.13.2",
+            "scope": "exact public census and literal-token inverses; every original checker byte preserved"}
 
 
 def signature_subtest(contents):
@@ -862,7 +941,40 @@ def verify_signature_regression_evolution(source, contents, historical_hash):
             "scope": "exact count/first guard-golden inverse followed by owner-bound evaluated-value test inverse, committed compiler-scanner mock-entry replacement, nested-boundary insertion, fourteen metadata assertion replacements, occurrence regression insertion and committed signature subtest/plan replacement; original Phase0 bytes recovered"}
 
 
-def verify_perl_storage_evolution(source, contents, historical_hash):
+def restore_perl_storage_inventory(source, contents, read=None):
+    read = read_relative if read is None else read
+    raw = read(STORAGE_INVENTORY_TABLE)
+    require(digest(raw) == STORAGE_INVENTORY_TABLE_SHA256,
+            'unreviewed Perl storage inventory table')
+    table = json.loads(gzip.decompress(raw))
+    require(table['schema_version'] == 1 and table['owner'] == STORAGE_INVENTORY_OWNER
+            and source == table['path'] == 'tools/test_perl_project_data_storage.sh',
+            'unreviewed Perl storage inventory owner')
+
+    def decode(row):
+        raw = base64.b64decode(row['base64'], validate=True)
+        require(digest(raw) == row['sha256'], 'unreviewed Perl storage inventory packet')
+        return raw
+
+    require(contents == decode(table['after']), 'unreviewed Perl storage inventory source')
+    require(set(table['support']) == {'tools/check_project_storage_inventory.pl',
+                                    'doctrine/project_data_storage/perl_temporary_owners.json'},
+            'unreviewed Perl storage inventory support population')
+    for name, row in table['support'].items():
+        require(read(name) == decode(row), 'unreviewed Perl storage inventory support: ' + name)
+    return decode(table['before'])
+
+
+def verify_perl_storage_evolution(source, contents, historical_hash, read=None):
+    prior = restore_perl_storage_inventory(source, contents, read)
+    result = verify_perl_storage_census_evolution(source, prior, historical_hash)
+    result.update(current=digest(contents), inventory_owner=STORAGE_INVENTORY_OWNER,
+                  inventory_table_sha256=STORAGE_INVENTORY_TABLE_SHA256,
+                  scope='exact reviewed manifest/source stage, then original 27-to-29 census inverse; runtime proof separate')
+    return result
+
+
+def verify_perl_storage_census_evolution(source, contents, historical_hash):
     require(source == "tools/test_perl_project_data_storage.sh",
             f"unapproved Perl storage source: {source}")
     normalized = contents
@@ -977,6 +1089,90 @@ def verify_rust_numeric_evolution(source, contents, historical_hash, read=None):
             "scope": "exact numeric source image; original historical and signed-selector results unchanged; fresh runtime/readiness compatibility is separately retained"}
 
 
+def phase0_fixture_reader(read, images, expected_table=PHASE0_FIXTURE_SHA256):
+    """Restore only the owned six-assertion fixture edit, before image admission.
+
+    The returned view is an explicit committed activation stage. Actual current
+    bytes and table are observed first and have separate reported provenance.
+    """
+    raw = read(PHASE0_FIXTURE_TABLE)
+    require(digest(raw) == expected_table, 'unreviewed Phase0 fixture table')
+    require(len(raw) <= 32768, 'Phase0 fixture table bound')
+    data = _IMAGE_MODULE.strict_json(gzip.decompress(raw))
+    require(isinstance(data, dict) and set(data) == {
+        'schema_version', 'owner', 'path', 'activation_commit',
+        'before_sha256', 'after_sha256', 'hunks'}, 'Phase0 fixture table schema')
+    require(type(data['schema_version']) is int and data['schema_version'] == 1,
+            'Phase0 fixture table version')
+    require(data['owner'] == PHASE0_FIXTURE_OWNER and data['path'] == PHASE0_FIXTURE,
+            'Phase0 fixture owner or path')
+    row = images.rows[PHASE0_FIXTURE]
+    require(data['activation_commit'] == images.data['activation_commit'] and
+            data['before_sha256'] == row['current_sha256'], 'Phase0 fixture committed boundary')
+    committed = images.image(data['activation_commit'], PHASE0_FIXTURE, data['before_sha256'])
+    actual = read(PHASE0_FIXTURE)
+    require(digest(actual) == data['after_sha256'], 'unreviewed current Phase0 fixture')
+    hunks = data['hunks']
+    require(isinstance(hunks, list) and len(hunks) == 6, 'Phase0 fixture hunk population')
+    restored = actual
+    for hunk in hunks:
+        require(isinstance(hunk, dict) and set(hunk) == {'before', 'after'} and
+                all(isinstance(hunk[k], str) and hunk[k] for k in hunk) and
+                hunk['before'] != hunk['after'], 'Phase0 fixture hunk schema')
+        old, new = hunk['before'].encode(), hunk['after'].encode()
+        require(restored.count(new) == 1 and committed.count(old) == 1,
+                'Phase0 fixture hunk anchor')
+        restored = restored.replace(new, old, 1)
+    require(restored == committed, 'Phase0 fixture inverse mismatch')
+    def committed_stage(name):
+        return restored if name == PHASE0_FIXTURE else read(name)
+    return committed_stage, dict(owner=PHASE0_FIXTURE_OWNER, path=PHASE0_FIXTURE,
+        activation_commit=data['activation_commit'], preserved_committed_sha256=digest(committed),
+        actual_current_sha256=digest(actual), table_sha256=digest(raw), exact_assertion_edits=6,
+        source_stage='actual current fixture; exact inverse precedes preserved committed image admission',
+        scope='Fixture calibration only; historical runtime results unchanged; no fresh objective admission')
+
+
+def falsify_phase0_fixture(images):
+    raw = read_relative(PHASE0_FIXTURE_TABLE)
+    data = _IMAGE_MODULE.strict_json(gzip.decompress(raw))
+    rejected = []
+    def reject(label, reader, expected, table_sha=PHASE0_FIXTURE_SHA256):
+        try:
+            phase0_fixture_reader(reader, images, table_sha)
+        except ValueError as error:
+            require(str(error) == expected, 'unrelated Phase0 fixture rejection: ' + label)
+            rejected.append(label)
+        else:
+            raise ValueError('Phase0 fixture corruption admitted: ' + label)
+    for label, value in (('source-appended', read_relative(PHASE0_FIXTURE) + b'# unreviewed\n'),
+                         ('source-missing', b''),
+                         ('prior-committed-stage', images.image(data['activation_commit'],
+                            PHASE0_FIXTURE, data['before_sha256']))):
+        reject(label, lambda name: value if name == PHASE0_FIXTURE else read_relative(name),
+               'unreviewed current Phase0 fixture')
+    reject('table-bytes', lambda name: raw + b' ' if name == PHASE0_FIXTURE_TABLE else read_relative(name),
+           'unreviewed Phase0 fixture table')
+    for label, field, value, expected in (
+            ('owner', 'owner', 'TYPE-REFERENCE-BOOK.1.2.20.1.11', 'Phase0 fixture owner or path'),
+            ('path', 'path', '../outside', 'Phase0 fixture owner or path'),
+            ('revision', 'activation_commit', '0' * 40, 'Phase0 fixture committed boundary'),
+            ('before-hash', 'before_sha256', '0' * 64, 'Phase0 fixture committed boundary'),
+            ('after-hash', 'after_sha256', '0' * 64, 'unreviewed current Phase0 fixture'),
+            ('hunk-omission', 'hunks', data['hunks'][:-1], 'Phase0 fixture hunk population')):
+        changed = dict(data)
+        changed[field] = value
+        candidate = gzip.compress(json.dumps(changed, sort_keys=True).encode(), mtime=0)
+        reject(label, lambda name: candidate if name == PHASE0_FIXTURE_TABLE else read_relative(name),
+               expected, digest(candidate))
+    changed = json.loads(json.dumps(data))
+    changed['hunks'][0]['before'] += '# unreviewed'
+    candidate = gzip.compress(json.dumps(changed, sort_keys=True).encode(), mtime=0)
+    reject('hunk-rebinding', lambda name: candidate if name == PHASE0_FIXTURE_TABLE else read_relative(name),
+           'Phase0 fixture hunk anchor', digest(candidate))
+    return rejected
+
+
 def audit_evidence(read=read_relative):
     checkpoints, sources, logs, milestones = {}, {}, {}, {}
     references = 0
@@ -1032,46 +1228,58 @@ def audit_evidence(read=read_relative):
                 require(logs[log] == expected, f"conflicting log digest: {log}")
             logs[log] = expected
 
+    images = current_image_admissions(read)
+    fixture_read, fixture_evolution = phase0_fixture_reader(read, images)
+    source_image_evolutions = images.verify(sources, fixture_read)
+    for evolution in source_image_evolutions:
+        if evolution['path'] == PHASE0_FIXTURE:
+            evolution['source_stage'] = 'preserved committed activation image before owner21 fixture calibration'
     documentation_updates, governance_updates, runtime_source_updates = [], [], []
     for source, row in sources.items():
-        current = digest(read(source))
+        observed = fixture_read(source)
+        admitted = images.predecessor(source, observed)
+        current = digest(admitted)
         if current != row["sha256"]:
             if source == DART_SIGNED_SOURCE:
                 runtime_source_updates.append(verify_dart_signed_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"]))
                 continue
             if source in RUST_NUMERIC_IMAGES:
                 runtime_source_updates.append(verify_rust_numeric_evolution(
-                    source, read(source), row["sha256"], read=read))
+                    source, admitted, row["sha256"], read=read))
                 continue
             if source == RUST_SIGNED_SOURCE:
                 runtime_source_updates.append(verify_rust_signed_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"]))
                 continue
             if source == "tools/run_ci_local.sh":
                 governance_updates.append(verify_governance_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"]))
                 continue
             if source == "tools/test_perl_project_data_storage.sh":
                 governance_updates.append(verify_perl_storage_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"], read=read))
                 continue
             if source == "t/phase0_regression.t":
                 governance_updates.append(verify_signature_regression_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"]))
                 continue
             if source == "perl/LinkedSpec/ActionIR/Contracts.pm":
                 governance_updates.append(verify_boundary_contract_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"]))
                 continue
             if source == "tools/check_public_aggregate_selector_surface.py":
                 governance_updates.append(verify_selector_governance_evolution(
-                    source, read(source), row["sha256"]))
+                    source, admitted, row["sha256"]))
                 continue
             require(source.startswith("docs/") and source.endswith(".md"),
                     f"current executable evidence drift: {source}")
             documentation_updates.append({"path": source, "historical": row["sha256"],
                                           "current": current, "milestone": row["milestone"]})
+
+    for update in governance_updates + runtime_source_updates:
+        if update['path'] in images.rows:
+            update['source_stage'] = 'preserved admitted predecessor; current image reported separately'
 
     # Read the original independent oracle, rather than deriving expected case
     # counts or coordinates from a runtime checker or this summary's prose.
@@ -1138,6 +1346,8 @@ def audit_evidence(read=read_relative):
             "documentation_updates": documentation_updates,
             "governance_updates": governance_updates, "corpora": corpora,
             "runtime_source_updates": runtime_source_updates,
+            "source_image_evolutions": source_image_evolutions,
+            "fixture_source_evolutions": [fixture_evolution],
             "matrices": matrices,
             "limits": "Evidence integrity and independent scalar slicing; runtime execution is historical per-leaf proof. No new capability or objective promotion."}
 
@@ -1161,11 +1371,48 @@ def falsify(report):
         except ValueError:
             continue
         raise ValueError(f"outside-path control did not reject: {target}")
+    images = current_image_admissions(read_relative)
+    fixture_read, _ = phase0_fixture_reader(read_relative, images)
+    images.verify(report['latest_source_inputs'], fixture_read)
+    def evolution_source(path):
+        return images.read_predecessor(path, fixture_read)
     governance_controls = 0
     controls_by_source = {}
+    storage_controls = []
+    storage_row = next(row for row in report['governance_updates']
+                       if row['path'] == 'tools/test_perl_project_data_storage.sh')
+    storage_source = storage_row['path']
+    storage_current = evolution_source(storage_source)
+    for label, candidate in (
+            ('source-appended', storage_current + b'# unreviewed\n'),
+            ('source-missing', b''), ('source-duplicated', storage_current * 2),
+            ('prior-stage', restore_perl_storage_inventory(storage_source, storage_current))):
+        try:
+            verify_perl_storage_evolution(storage_source, candidate, storage_row['historical'])
+        except ValueError as error:
+            require(str(error) == 'unreviewed Perl storage inventory source',
+                    'unrelated storage source rejection')
+            storage_controls.append(label)
+        else:
+            raise ValueError('storage source corruption control did not reject')
+    for name in (STORAGE_INVENTORY_TABLE, 'tools/check_project_storage_inventory.pl',
+                 'doctrine/project_data_storage/perl_temporary_owners.json'):
+        def corrupt_storage(path):
+            raw = read_relative(path)
+            return raw + b' ' if path == name else raw
+        try:
+            verify_perl_storage_evolution(storage_source, storage_current, storage_row['historical'],
+                                          read=corrupt_storage)
+        except ValueError as error:
+            expected = ('unreviewed Perl storage inventory table' if name == STORAGE_INVENTORY_TABLE
+                        else 'unreviewed Perl storage inventory support: ' + name)
+            require(str(error) == expected, 'unrelated storage input rejection')
+            storage_controls.append(name)
+        else:
+            raise ValueError('storage input corruption control did not reject')
     for row in report["governance_updates"]:
         source = row["path"]
-        current = read_relative(source)
+        current = evolution_source(source)
         if source == "tools/run_ci_local.sh":
             altered = (
                 current + b"# unreviewed edit\n",
@@ -1261,9 +1508,16 @@ def falsify(report):
                 current.replace(b"require_tracked_file tests/numeric-codeblocks/signed-array-selectors.json\n",
                                 b"require_tracked_file tests/numeric-codeblocks/missing-signed-array-selectors.json\n", 1),
             )
+            altered += tuple(current.replace(insertion, b"", 1) for _, insertion in RESTORATION_CI_INSERTIONS)
+            altered += tuple(current.replace(insertion, insertion * 2, 1) for _, insertion in RESTORATION_CI_INSERTIONS)
+            altered += (current.replace(RESTORATION_CI_INSERTIONS[0][1],
+                                        RESTORATION_CI_INSERTIONS[0][1].replace(b'== Darwin', b'== Linux'), 1),)
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
         elif source == "tools/test_perl_project_data_storage.sh":
+            # Keep every original reason-sensitive falsifier on its actual old
+            # 29-owner stage. New source/data denials are independent above.
+            current = restore_perl_storage_inventory(source, current)
             altered = (current + b"# unreviewed edit\n",) + tuple(
                 current.replace(replacement, historical, 1)
                 for historical, replacement in PERL_STORAGE_REPLACEMENTS
@@ -1273,7 +1527,7 @@ def falsify(report):
                  current.replace(b" t/knowledge_map_header_lists.t; do\n",
                                  b" t/other_header_lists.t; do\n", 1),
                  current.replace(b"== 29 ))", b"== 28 ))", 1))
-            verify = verify_perl_storage_evolution
+            verify = verify_perl_storage_census_evolution
             reasons = ("Perl storage registration mismatch:", "unreviewed Perl storage drift:")
         elif source == "t/phase0_regression.t":
             count_first_current = current
@@ -1390,6 +1644,12 @@ def falsify(report):
                 current.replace(b"reference_count = check_exact_references(paths)", b"reference_count = 0", 1),
                 current.replace(b"EXPECTED_PUBLIC_FILE_COUNT = 70", b"EXPECTED_PUBLIC_FILE_COUNT = 69", 1),
             )
+            altered += tuple(current.replace(fragment, b"", 1)
+                             for _, fragment in SELECTOR_LITERAL_PATTERN_UPDATES)
+            altered += tuple(current.replace(fragment, fragment * 2, 1)
+                             for _, fragment in SELECTOR_LITERAL_PATTERN_UPDATES)
+            altered += tuple(current.replace(fragment, fragment.replace(b"false", b"False", 1), 1)
+                             for _, fragment in SELECTOR_LITERAL_PATTERN_UPDATES)
             verify = verify_selector_governance_evolution
             reasons = ("selector governance registration mismatch:", "unreviewed selector governance drift:")
         else:
@@ -1410,7 +1670,7 @@ def falsify(report):
     runtime_controls = {}
     for row in report.get("runtime_source_updates", []):
         source = row["path"]
-        current = read_relative(source)
+        current = evolution_source(source)
         verifier = {RUST_NUMERIC_OWNER: verify_rust_numeric_evolution,
                     RUST_SIGNED_OWNER: verify_rust_signed_evolution,
                     DART_SIGNED_OWNER: verify_dart_signed_evolution}[row["owner"]]
@@ -1454,12 +1714,12 @@ def falsify(report):
                     if row["owner"] == RUST_NUMERIC_OWNER), None)
     if numeric:
         for support in RUST_NUMERIC_SUPPORT:
-            contents = read_relative(support)
+            contents = evolution_source(support)
             changed = contents + b"\n// unreviewed numeric support edit\n"
             def support_reader(path):
-                return changed if path == support else read_relative(path)
+                return changed if path == support else evolution_source(path)
             try:
-                verify_rust_numeric_evolution(numeric["path"], read_relative(numeric["path"]),
+                verify_rust_numeric_evolution(numeric["path"], evolution_source(numeric["path"]),
                                               numeric["historical"], read=support_reader)
             except ValueError as error:
                 require(str(error) == f"unreviewed Rust numeric support drift: {support}",
@@ -1472,7 +1732,10 @@ def falsify(report):
             "governance_mutations_by_source": controls_by_source,
             "runtime_source_mutations_rejected": sum(runtime_controls.values()),
             "runtime_source_mutations_by_source": runtime_controls,
-            "numeric_support_mutations_rejected": support_controls}
+            "numeric_support_mutations_rejected": support_controls,
+            "storage_inventory_mutations_rejected": storage_controls,
+            "current_image_mutations_rejected": images.falsify(report["latest_source_inputs"], fixture_read),
+            "phase0_fixture_mutations_rejected": falsify_phase0_fixture(images)}
 
 
 def verify_summary(report, text):

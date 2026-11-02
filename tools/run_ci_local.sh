@@ -232,6 +232,12 @@ require_command python3
 require_command dart
 require_command julia
 
+if [[ "$(uname -s)" == Darwin ]]; then
+ log "checking macOS sandbox initialization required by process locality"
+ /usr/bin/sandbox-exec -p '(version 1) (allow default)' /usr/bin/true ||
+  fail "macOS sandbox initialization denied; rerun this complete staged candidate in approved host execution (docs/knowledge/project-data-process-locality-proof.md)"
+fi
+
 log "running the general doctrine enforcer (DOCTRINE_ENFORCEMENT.md §5/§7 — E4 backstop): the registry driver runs every registered check (memory-architecture, Knowledge Map, ...)"
 bash "$REPO_ROOT/scripts/check_doctrines.sh"
 
@@ -246,6 +252,19 @@ PERL5LIB= prove t/knowledge_map_header_lists.t
 log "checking atomic Knowledge Map publication and failure preservation"
 require_tracked_file tools/test_knowledge_map_atomic_output.py
 bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_knowledge_map_atomic_output.py
+
+log "checking compact Knowledge metadata, immutable claim reuse and maintained scope controls"
+for fixture in tools/test_knowledge_map_projection.py tools/test_claim_verification_cache.py tools/test_reference_scope.py tools/test_task_narrative.py tools/test_historical_objective_images.py \
+    docs/checkpoints/document-pressure-restoration/review.py \
+    docs/checkpoints/document-pressure-restoration/book_review.py; do
+  require_tracked_file "$fixture"
+  bash "$REPO_ROOT/tools/run_python_project_data.sh" "$fixture"
+done
+require_tracked_file tools/historical_objective_images.py
+require_tracked_file tests/language-readiness/current-source-images.json.gz
+log "checking paged exact document-history catalogs"
+require_tracked_file t/document_history_catalog.t
+PERL5LIB= prove t/document_history_catalog.t
 
 log "auditing git-tracked CI inputs"
 require_tracked_file .github/workflows/ci.yml

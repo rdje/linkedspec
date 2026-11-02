@@ -92,6 +92,11 @@ HISTORICAL_DIAGNOSTIC_INPUTS = {
 # Exact owned revisions of maintained diagnostic consumers. Historical registrations
 # remain unchanged; edited bytes, copied paths and foreign owners do not qualify.
 REVIEWED_DIAGNOSTIC_EVOLUTIONS = {
+    't/actionir_method_value_capture.t': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.18.2',
+        '9e9e1d9ab525d387ae3d1689a1c1465dab08f39ecccb78868ad62cee6ed50269',
+        'b968a347baf6ba5939a9b8149951609a66f3f20c202db2b643af1409cdd90335',
+    ),
     't/actionir_method_general_return_capture.t': (
         'TYPE-REFERENCE-BOOK.1.2.3',
         '79e1a62864441c368e76e393aac9a29907b82e1a28600e5429ec3c0ba99fb4bf',
@@ -106,6 +111,71 @@ REVIEWED_DIAGNOSTIC_EVOLUTIONS = {
         'TYPE-REFERENCE-BOOK.1.2.3',
         'cff593511e74933836c2dd0af2917e14a33bb3ab6421853a72d6de1182b1f872',
         'e02ae230fe639a79491943a1184640bb56c3f053dc9db5cafce31baf36feed69',
+    ),
+}
+# Maintained negative/AST-observation fixtures reviewed under the restoration.
+# Both the complete file and the exact diagnostic line must retain their bytes;
+# this does not admit a copied path, an edited fixture or a new selector site.
+REVIEWED_NEGATIVE_INPUTS = {
+    'dart/test/constructor_result_composition_test.dart': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        '88fe64897cb96d5ec32a512acc287764fbec520778fc09818b485d86356cd693',
+        (
+            '42b296d2664d3132c61cd5a171da3505a096838d2ff3df8c09775441f6896205',
+            '03d1cbea6c1479cd7d8866a485f0f7b0431921f833d6afef0c593393681c460a',
+        ),
+    ),
+    'docs/checkpoints/type-operation-inventory/probe_value_copy_producer.pl': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        '86df8d70f03916688db46f2754e76097a7730deb39c6fb4cf611fe876ea372dd',
+        (
+            '99d5447d2a6cde20901eca1d2fb2e189103bac4f80b83f5c24ff2dfd551a7355',
+        ),
+    ),
+    'julia/test/constructor_result_composition_test.jl': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        '9788b1299da2664851cac8774a2b8ec171a52b0fab3a57c547906e40da0dcc38',
+        (
+            'db79f7f1b26c4b40cae019a1b0a67b4a36ee58d507597cd5470b962e3279569c',
+            'aaadb7f3619764a9de3b2cdbad5cb4adf647114c5bd6eb2dd839c7c5f72fcf31',
+        ),
+    ),
+    'lua/test/constructor_result_composition_test.lua': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        'a48bf7e8501772c1816f679968f669c7c648aff7383aec5422501208ad8bf6a6',
+        (
+            'f16293a8bb237f65d09dde0c9349eb92f463ca7dde7dfa8e266bedcac961ad7e',
+            '46867f99cf11a0d84c1453f7ffafcabb75a06e3fb371ae7e62bd2574a3629175',
+        ),
+    ),
+    'rust/linkedspec-runtime/tests/constructor_result_composition.rs': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        '45c58804c9c63415e8cb7fbfcfc7cc6da25f1ae337c916098ff3ea55aab05c6f',
+        (
+            '3baa984a93f09e8955d8d5e86e83d34785c74d1b9927028dfd4e885fd3bf5930',
+            '03255df661f05b42ee3eb51db6e6da335ab7519225553bfcf83b636ef1516507',
+        ),
+    ),
+    't/actionir_method_set_key_required_capture.t': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        '30b3b8fe1cfb12c3bf4329d5a73004387afdb103937c4fa91360f034f37bf570',
+        (
+            '0fbea751ea16662638e0d43e52d02e2e152aab9dc2be3a5d56ed401b6f41163c',
+        ),
+    ),
+    't/computed_selection_functions.t': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        'a635adc7641e141b192c1415c7d44b980df408c1975746a4cb6549936c157421',
+        (
+            '1d556ac74a74b77f9e043f496448e79dc9902a0a4760acbdb420b9d8c1fda828',
+        ),
+    ),
+    't/value_copy_function.t': (
+        'TYPE-REFERENCE-BOOK.1.2.20.1.13.1',
+        '51311b59dab115ac1e4b9b8f2e0a9fead9535dd8b4a57166a26b2354231595f0',
+        (
+            'be06521346e874e33eebddb9654d3f608609ae8389afa31f696f5fbbb08ba4a6',
+        ),
     ),
 }
 SELECTOR = re.compile(
@@ -158,18 +228,45 @@ def candidate_files() -> list[str]:
     return [item.decode("utf-8") for item in result.stdout.split(b"\0") if item]
 
 
-def classified_compatibility(path: str, line: str) -> bool:
+def has_retired_selector(line: str) -> bool:
+    # These exact, case-sensitive tokens are literal AST nodes, not bindings.
+    # Other names, including null/nothing and case variants, remain candidates.
+    return any(match.group(0).rpartition("(")[2].rstrip(")").strip()
+               not in {"true", "false", "undef"}
+               for match in SELECTOR.finditer(line))
+
+
+def reviewed_negative_line(path: str, line: str, contents: bytes,
+                           registrations=None) -> bool:
+    entries = REVIEWED_NEGATIVE_INPUTS if registrations is None else registrations
+    entry = entries.get(path)
+    if not isinstance(entry, tuple) or len(entry) != 3:
+        return False
+    owner, source_hash, line_hashes = entry
+    return (owner == "TYPE-REFERENCE-BOOK.1.2.20.1.13.1"
+            and hashlib.sha256(contents).hexdigest() == source_hash
+            and hashlib.sha256(line.encode("utf-8")).hexdigest() in line_hashes)
+
+
+def classified_compatibility(path: str, line: str, source_bytes=None) -> bool:
     stripped = line.lstrip()
     if stripped.startswith(("#", "//", "/*", "*")):
         return True
+    if path in REVIEWED_NEGATIVE_INPUTS:
+        data = (ROOT / path).read_bytes() if source_bytes is None else source_bytes
+        if reviewed_negative_line(path, line, data):
+            return True
     historical_digest = HISTORICAL_DIAGNOSTIC_INPUTS.get(path)
     if historical_digest is not None:
-        digest = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+        data = (ROOT / path).read_bytes() if source_bytes is None else source_bytes
+        digest = hashlib.sha256(data).hexdigest()
         if digest == historical_digest:
             return True
         evolved = REVIEWED_DIAGNOSTIC_EVOLUTIONS.get(path)
         return (evolved is not None
-                and evolved[0] == 'TYPE-REFERENCE-BOOK.1.2.3'
+                and evolved[0] == ('TYPE-REFERENCE-BOOK.1.2.20.1.18.2'
+                                   if path == 't/actionir_method_value_capture.t'
+                                   else 'TYPE-REFERENCE-BOOK.1.2.3')
                 and evolved[1] == historical_digest
                 and evolved[2] == digest)
     if "must be" in line and path in {
@@ -208,25 +305,78 @@ def classified_compatibility(path: str, line: str) -> bool:
     return False
 
 
-def scan_files(relative_paths: list[str]) -> tuple[list[str], int]:
+def scan_files(relative_paths: list[str], source_root: Path | None = None) -> tuple[list[str], int]:
     positive: list[str] = []
     classified = 0
+    source_root = ROOT if source_root is None else source_root
     for relative in relative_paths:
         path = Path(relative)
         if path.suffix in EXCLUDED_SUFFIXES:
             continue
         try:
-            lines = (ROOT / path).read_text(encoding="utf-8").splitlines()
+            contents = (source_root / path).read_bytes()
+            lines = contents.decode("utf-8").splitlines()
         except (UnicodeDecodeError, OSError):
             continue
         for number, line in enumerate(lines, start=1):
-            if not SELECTOR.search(line):
+            if not has_retired_selector(line):
                 continue
-            if classified_compatibility(relative, line):
+            if classified_compatibility(relative, line, contents):
                 classified += 1
             else:
                 positive.append(f"{relative}:{number}:{line.strip()}")
     return positive, classified
+
+
+def self_test_classification() -> tuple[int, int]:
+    denied = 0
+    with tempfile.TemporaryDirectory(prefix="selector-classification-", dir=os.environ["TMPDIR"]) as temporary:
+        fixture = Path(temporary)
+        literal_tokens = ("true", "false", "undef", "null", "nothing", "True", "FALSE", "items")
+        lines = ["array" + "(" + token + ");" for token in literal_tokens]
+        lines.append("array" + "(false); hash" + "(items);")
+        (fixture / "literal.dart").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        positives, _ = scan_files(["literal.dart"], fixture)
+        observed = [int(row.split(":", 2)[1]) for row in positives]
+        if observed != [4, 5, 6, 7, 8, 9]:
+            raise RuntimeError("literal/binding selector classification drift")
+        for relative, entry in REVIEWED_NEGATIVE_INPUTS.items():
+            contents = (ROOT / relative).read_bytes()
+            target = fixture / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(contents)
+            source_lines = contents.decode("utf-8").splitlines()
+            for line_hash in entry[2]:
+                matches = [line for line in source_lines
+                           if hashlib.sha256(line.encode("utf-8")).hexdigest() == line_hash]
+                if len(matches) != 1 or not reviewed_negative_line(relative, matches[0], contents):
+                    raise RuntimeError("reviewed negative fixture changed: " + relative)
+                line = matches[0]
+                variants = (
+                    (relative, line, contents + b"\n", None),
+                    ("copied/" + relative, line, contents, None),
+                    (relative, line + " ", contents, None),
+                    (relative, line, contents, {}),
+                    (relative, line, contents, {relative: ("FOREIGN.1", entry[1], entry[2])}),
+                    (relative, line, contents, {relative: (entry[0], "0" * 64, entry[2])}),
+                    (relative, line, contents, {relative: (entry[0], entry[1], ("0" * 64,))}),
+                )
+                for path, candidate_line, candidate_bytes, registrations in variants:
+                    if reviewed_negative_line(path, candidate_line, candidate_bytes, registrations):
+                        raise RuntimeError("unreviewed negative fixture admission: " + relative)
+                    denied += 1
+            positives, _ = scan_files([relative], fixture)
+            if positives:
+                raise RuntimeError("reviewed fixture integration drift: " + relative)
+            copied = fixture / "copied" / relative
+            copied.parent.mkdir(parents=True, exist_ok=True)
+            copied.write_bytes(contents)
+            if not scan_files(["copied/" + relative], fixture)[0]:
+                raise RuntimeError("copied negative fixture was silently admitted")
+            target.write_bytes(contents + b"\narray" + b"(unregistered_name);\n")
+            if not scan_files([relative], fixture)[0]:
+                raise RuntimeError("appended positive selector was silently admitted")
+    return len(REVIEWED_NEGATIVE_INPUTS), denied
 
 
 def self_test_untracked_discovery() -> None:
@@ -269,6 +419,7 @@ def self_test_untracked_discovery() -> None:
 def run_scan() -> int:
     with serialized_scan():
         try:
+            fixtures, denials = self_test_classification()
             self_test_untracked_discovery()
         except (OSError, RuntimeError, subprocess.SubprocessError, ValueError) as error:
             print(
@@ -277,6 +428,8 @@ def run_scan() -> int:
             )
             return 1
 
+        print("executable-aggregate-selector-classification: OK "
+              f"(literal/binding/mixed-line controls; {fixtures} exact fixtures; {denials} denials)")
         positive, classified = scan_files(candidate_files())
 
         if positive:

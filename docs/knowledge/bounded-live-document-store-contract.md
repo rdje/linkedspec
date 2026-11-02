@@ -14,8 +14,8 @@ answers:
   - what are the future parity semantic partitions
   - how are stable task ids retrieved after partitioning
   - what are the live document migration and rollback order
-date: 2026-08-09
-status: accepted and implemented; all four stores independently recomposed and composition-closed
+date: 2026-11-01
+status: current archive/reference revision accepted; original recomposition evidence historical
 tags: [documentation, history, task-tree, retrieval, pressure, continuity, doctrine]
 evidence: "From clean 0bcb5a36, LIVE is 14,844 lines/1,269,091 bytes, CHANGES 44,193/3,097,056, notes 21,220/2,282,687, and FUTURE 26,979/2,720,175 with SHA-256 c13abe..., c19ba6..., 2735b5..., and 48de44.... Seven capability JSON/checker families require LIVE closeout markers. Definitive executable census finds nine checkers plus two JSON contracts consuming the exact FUTURE path; the initial audit found only four plus two and canonical E4 exposed the omission. FUTURE top-level intervals show .10 at 8,327 lines; splitting it at .10.0-.6/.10.7-.10 yields 4,188/4,139 and lets seven semantic parts plus one immutable history part stay below 5,000 lines. ADR 0066 freezes schemas, topology, mutation classes, migration order, and rollback without moving content."
 evidence_update_2026_08_09_live_status: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1 transfers all six JSON and seven checker references from live chronology to indexed ADR 0067 without changing their document counts. Four immutable segments reconstruct dc8dd896:LIVE_ACHIEVEMENT_STATUS.md exactly at 14,872 lines / 1,271,326 bytes, Git blob 221159c6..., SHA-256 683ef70d.... The stable root is a five-section 36-line current view. tools/read_document_history.pl provides --grep/--segment/--all; the eighth registered doctrine validates 20 mutation classes plus real schema/path/order/count/hash/blob/source/immutability/current-view oracles."
@@ -24,7 +24,7 @@ evidence_update_2026_08_10_change_notes: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3 p
 evidence_update_2026_08_10_recomposition: "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4 independently recomposes the committed migrations without changing route or executable owners. Document history passes 34/34 over three surfaces and 21 segments; task metadata passes 26/26 over seven semantic parts, one immutable history part, and 510 IDs; rollover recovery passes 12/12; all eleven transferred task consumers pass. Outside-CWD queries reproduce SHA-256 683ef70d..., c8ba1b7c..., and ca9ad5c3..., resolve all three literals plus FUTURE-PARITY-BACKLOG.14.3.1.1, and both hot roots remain OK. The route report remains 20 surfaces / 62 routes / 32/32 with all four stores current and empty debt metadata."
 evidence_update_2026_08_18_future_capacity: "FUTURE-PARITY-PARTITION-CAPACITY.1 adds the eighth bounded semantic member at .14.6.5 without changing the schema-v1 record shape, stable IDs, immutable history, or any pressure ceiling. The strict index now has ten records and preserves 547 IDs; metadata passes 27/27 mutations, capability exclusion reads all eight semantic parts, and ADRs 0084/0085 authorize the exact topology and route transition."
 evidence_update_2026_08_24_future_capacity_recomposition: "FUTURE-PARITY-PARTITION-CAPACITY.2 independently recomposes the committed eighth-member topology: index refresh is byte-idempotent, clean-source records agree 10/10, immutable history is byte-identical, old/new/outside-CWD lookup is exact, .14.9 remains unowned, metadata passes 27/27 over 547 IDs, routing stays 20/62/32, and capability stays 80/0/0."
-last_verified: 2026-08-24
+last_verified: 2026-11-01
 reverify:
   - "wc -l -c LIVE_ACHIEVEMENT_STATUS.md CHANGES.md DEVELOPMENT_NOTES.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
   - "shasum -a 256 LIVE_ACHIEVEMENT_STATUS.md CHANGES.md DEVELOPMENT_NOTES.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
@@ -40,7 +40,25 @@ reverify:
   - "perl tools/roll_document_history.pl --surface engineering_notes --check"
 ---
 
-# Bounded live documents are consumer migrations
+# Current bounded-view and archive contract
+
+Accepted ADR `0139` keeps live status and author hot roots bounded, preserves every original segment/source
+identity, and replaces lifetime author-history aggregates with exact query archives and bounded paged catalogs.
+`perl tools/read_document_history.pl --surface change_history --catalog-json` supplies complete normalized
+logical records without depending on the physical root format; `--all` returns exact archive bytes only.
+
+Current FUTURE has eight mutable semantic parts; STARTUP has three; TYPE has four. Each tree has a bounded
+root and stable-ID retrieval through `tools/read_task_tree.pl`. TYPE's closed narrative and the migrated SPEC
+families have separate immutable source pages under `docs/history/task-narrative/`, exact predecessor queries,
+and retained current obligations. Current task collection/per-part ceilings are unchanged. Maintained canonical
+references retain direct browsing and per-file ceilings with exact task-bound ledger admission.
+[[normal-hook-archive-reference-contracts]] owns current mechanics; source/history/current-ID corruption gates
+and normal canonical acceptance govern the migration. No historic admission below grants future aggregate growth.
+
+# Historical bounded-live-document adoption
+
+The original source populations, consumer counts and initial topology below are dated adoption evidence.
+Later accepted topology and archive/reference revisions above define current structure.
 
 The four pressure debts have different semantics. Live achievement status is a current view contaminated by
 chronology; changes and engineering notes are ordered histories; the task collection is already partitioned but

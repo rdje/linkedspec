@@ -14,11 +14,13 @@ answers:
   - "why does the historical objective audit reject the quoted boundary decoder"
   - "how does the historical audit admit the nested boundary recurrence"
   - "how does count first preserve historical Phase0 evidence"
-date: 2026-10-25
+  - "why did historical artifact recovery reject the changed Compiler image"
+  - "how are current source images separated from historical objective falsifiers"
+date: 2026-11-02
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
 evidence: "Historical probes retain evidence, authoring costs and open defects; no completeness claim follows."
-reverify: "bash tools/run_python_project_data.sh tests/language-readiness/verify_objectives.py; consult each ledger for runtime reruns and run tools/run_ci_local.sh at canonical boundaries."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py"
 ---
 
 The canonical comparison is `docs/language-readiness/objective-reconciliation.md`.
@@ -73,13 +75,54 @@ Phase0's committed18-line nested-boundary subtest is removed before applying the
 existing raw-readiness, occurrence and signature inverses. Six new recurrence
 controls preserve the original source hashes and all earlier denials.
 
-The isolated recovery producer observes22 recovery controls and56 evolution
+The October6 isolated recovery producer observed22 recovery controls and56 evolution
 denials (Contracts6, Phase017, CI27, storage6), with134 original inputs and zero
-healthy forbidden read/write attempts. These are current historical-integrity
-checks, not fresh executions of the old runtime producers. The rollover leaf
-owns complete failed-candidate capture and fresh guarded proof; broader Legacy
+healthy forbidden read/write attempts. Those dated observations are historical-integrity
+checks, not fresh executions of the old runtime producers. The rollover leaf then
+owned complete failed-candidate capture and fresh guarded proof; broader Legacy
 family acceptance remains .1.4.7-owned.
 
 Count/first10 reverses ten guard literals through its separately hash-gated table
 before older inverses. Prior controls retain their source stages. The table is an
 explicit audit input; type-array-count-first/ retains the proof. No runtime replay.
+
+## Exact current images and preserved predecessor stages
+
+TYPE20.1.10's canonical run reproduces an unadmitted Compiler image. The source-bound intake classifies
+22 raw hash differences: three are already admitted, one needs exact CI insertion reversal, and 18 require
+new image admissions. Component `TYPE-REFERENCE-BOOK.1.2.20.1.11` preserves their original historical and last admitted predecessor
+images, and binds current bytes to committed `0db5e9e87` through a closed, hash-gated table at
+`tests/language-readiness/current-source-images.json.gz`. Parent-repository Git modes, exact path/revision,
+historical boundary and all current bytes are checked; no wildcard or refreshed old hash is allowed.
+
+The report separates `source_image_evolutions` (actual committed current images) from old evolution rows
+marked `source_stage` as preserved admitted predecessors. Every existing specific inverse/falsifier still
+runs at its exact admitted stage. New current-image mutations reject for every admitted path. Actual
+original-log/tracked-write denial and deterministic recovery of 134 inputs remain intact. This admits source
+identities; runtime executions remain the dated per-leaf evidence. Fresh feature/objective compatibility
+is separately owned by23.4 and is not inferred from historical recovery or a new image hash.
+
+Run the isolated recovery command from the canonical recovery card. If a later Compiler edit changes its
+bytes, the current-image guard rejects `unreviewed current source image: perl/LinkedSpec/Compiler.pm`;
+a new reviewed evolution owner is required. Keep the old checkpoint/log/source hashes unchanged.
+
+The November2 selector-literal repair13.2 adds exact reversal of two public regex edits and six distinguishing
+denials while preserving the earlier controls. Its current isolated proof retains22 recovery controls,700
+governance denials (the prior694 plus6),9 runtime-source denials,5 numeric-support denials and18 committed
+current-image denials. Actual reader tracing closes185 observed artifact inputs within196 declarations.
+All134 original inputs, old hashes/results and source stages remain intact; no old runtime execution or broad
+compatibility is promoted. The source-bound epoch is retained in
+`docs/checkpoints/document-pressure-restoration/objective-recovery-selector-literals.json.gz`.
+
+Component20.1.19 retains that epoch and adds an exact source/data inverse for the Perl storage manifest check.
+The new stage restores the29-owner script before exercising its original nine falsifiers; all700 governance
+denials remain effective at their previous stages. Seven independent new source/table/support denials pass.
+The isolated producer now observes188 artifact inputs within199 declarations; its fifth complete recovery
+epoch is `docs/checkpoints/document-pressure-restoration/objective-recovery-storage-inventory.json.gz`.
+This retains original134 inputs/results and18 current-image denials without new runtime admission.
+
+Component20's early macOS execution preflight adds three exact CI insertion denials, retaining all earlier700
+governance controls and all seven storage-source/data denials. The sixth isolated recovery epoch still closes
+188 observed/199 declared inputs; per-source control comparison preserves every older population. Its source
+is `docs/checkpoints/document-pressure-restoration/objective-recovery-execution-preflight.json.gz`. This is
+historical integrity, not fresh runtime or broad compatibility admission.

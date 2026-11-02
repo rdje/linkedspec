@@ -14,11 +14,12 @@ answers:
   - "are Perl while controls lowered from AST"
   - "does Perl ActionIR accept bare next as a standalone statement"
   - "can a final Perl receiver method omit parentheses"
+  - "why do AST lowering tests observe behavior instead of temporary variables"
 date: 2026-07-01
 status: current
 tags: [actionir, ast, perl-reference, parser, migration]
 evidence: "PERL-ACTIONIR-AST-MIGRATION.2 added LinkedSpec::ActionIR::AST and LinkedSpec::ActionIR::AST::Parser plus t/actionir_ast_parser.t. The parser covers action blocks/statements, calls, literals, variables, direct access, shape literals, block values, assignments, and receiver-dot chains with source spans. PERL-ACTIONIR-AST-MIGRATION.3.1 switched MethodLowering non-call value nodes to consume this AST; .3.2.1 switched value-only helper-call composition to consume AST call nodes; .3.2.2 switched deprecated wrappers plus aggregate/collection/reducer/hash helper calls to slot-aware AST call lowering; .3.2.3 added unresolved-helper diagnostics for unsupported covered helper calls; .3.3 switched receiver-dot fluent_chain value chains to AST traversal; .3.4 switched typed return payloads to AST traversal before raw fallback; .4.1 switched assignment/mutation operator statements to AST field lowering; .4.2 switched helper-call statements, returns, and array end-mutation receiver statements to AST call/fluent-chain lowering; .4.3 switched block-value side effects, block-local returns, and final expressions to AST block/statement fields; .4.4.1 added typed control_if/control_else/control_while/control_switch/control_case/default/end marker parser nodes; .4.4.2 switched if/i/when, elseif/elif, else/otherwise, and endif lowering to typed condition/body control nodes; .4.4.3 switched switch/case/default/endcase/endswitch lowering to typed source/match/body/default/end control nodes; .4.4.4 switched attached while lowering to typed condition/body control nodes while preserving the existing safety guard. FUTURE-PARITY-BACKLOG.16.2.1 adds exact standalone bare-next normalization to the call AST and accepts an identifier-only receiver segment only when it is terminal; the parenthesized forms remain identical, bare next in value position stays a variable, and intermediate bare receiver segments stay invalid."
-last_verified: 2026-09-06
+last_verified: 2026-11-02
 reverify: "prove -Iperl t/actionir_ast_parser.t t/punctuation_light_zero_arg_contract.t && perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm && perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm"
 ---
 
@@ -69,3 +70,15 @@ also consumes typed control nodes. Switch-family structured control lowering
 body, default, and end-marker nodes too. Attached `while(cond) { ... }` structured
 control lowering consumes typed condition/body nodes while preserving the existing safety
 guard.
+
+TYPE-REFERENCE-BOOK.1.2.20.1.17 rechecks three older generated-layout assertions against
+current behavior. Count of an append result consumes the updated array once and preserves
+the original value; set_key snapshots its evaluated key before a later operand changes
+that binding. The narrow capture_slice compatibility payload calls typed span_text only
+for defined, ordered bounds: a genuine empty span stays empty, while missing registers or
+reversed bounds return undef without calling that API. The AST fixture observes these
+values/effects and retains poisoned AST source, unknown-helper sentinel and parser-entry
+checks. It does not admit broader raw fallback. Complete AST24/capture-endpoint16 focused
+checks pass; exact canonical CI/normal hooks govern integrated restoration. The retained
+probe, failed gate, source epochs and isolated wrong-key/unguarded-bound controls live in
+docs/checkpoints/document-pressure-restoration/ast-calibration-evidence.json.gz.

@@ -28,6 +28,10 @@ This replaces the original paragraph0 blanket full-reading prerequisite; prior r
 coverage remains honest and incomplete where recorded. Quality, focused verification,
 commit hygiene, project-data locality and dependency black-box boundaries still apply.
 
+Before canonical CI on macOS, read `docs/knowledge/project-data-process-locality-proof.md` and use approved host
+execution from the start. The early sandbox-initialization preflight rejects restricted harnesses before doctrines;
+do not weaken or skip the process oracle, and rerun the complete exact candidate after an execution failure.
+
 Before editing root `README.md`, read `README_POLICY.md`; changing detail routes to its canonical owner and the
 registered `README-STABILITY` doctrine enforces the reviewed line/byte budgets and cap-increase decision rule.
 
@@ -41,12 +45,13 @@ prepending complete current records, run the matching `perl tools/roll_document_
 --check`; if it requires rollover, use `--apply`, inspect the atomic archive/manifest/root update, and recheck.
 Never edit an immutable history segment.
 
-`docs/tasks/FUTURE-PARITY-BACKLOG.md` and `docs/tasks/SESSION-STARTUP-READING.md` are bounded current indexes.
+`docs/tasks/FUTURE-PARITY-BACKLOG.md`, `docs/tasks/SESSION-STARTUP-READING.md` and
+`docs/tasks/TYPE-REFERENCE-BOOK.md` are bounded current indexes.
 Resolve a stable leaf with `perl tools/read_task_tree.pl --tree <tree> --id <stable-id>`; for example,
 `perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP-READING.89`.
 After editing the returned mutable semantic part, refresh its same-commit snapshot with
 `perl tools/update_task_tree_index.pl --tree <tree>`. Never append new evidence to an immutable history part.
-`scripts/check_task_tree_metadata.sh` enforces both registered partition contracts and current-ID uniqueness.
+`scripts/check_task_tree_metadata.sh` enforces the registered partition contracts, source-bound narrative preservation and current-ID uniqueness.
 
 Analyze `LinkedSpec.pm` or its import paths only as needed for the selected task.
 

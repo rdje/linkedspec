@@ -138,23 +138,8 @@ cli_residue=("$TMPDIR"/linkedspec-cli-project_data_workspace-*)
 shopt -u nullglob
 (( ${#cli_residue[@]} == 0 )) || fail 'CLI runner retained a completed focused workspace'
 
-mapfile -t perl_temp_owners < <(
- while IFS= read -r relative; do
-  if rg -q 'File::Temp|tempdir\(|tempfile\(' "$REPO_ROOT/$relative"; then
-   printf '%s\n' "$relative"
-  fi
- done < <(git -C "$REPO_ROOT" ls-files 't/*.t' 't/**/*.pm' 'tools/*.pl' 'perl/**/*.pm')
-)
-(( ${#perl_temp_owners[@]} == 29 )) ||
- fail "tracked Perl temporary-allocation inventory drifted from 29 to ${#perl_temp_owners[@]}"
-for owner in t/legacy_pathsearch_fallback.t t/nested_tree_readiness.t t/lua_legacy_temp_residue.t t/codeblock_push_composition_perl.t t/knowledge_map_header_lists.t; do
- printf '%s\n' "${perl_temp_owners[@]}" | rg -Fqx "$owner" ||
-  fail "registered regression allocator is absent: $owner"
-done
-printf '%s\n' "${perl_temp_owners[@]}" | rg -qx 'tools/run_cli_conformance\.pl' ||
- fail 'CLI workspace owner is absent from the Perl allocation inventory'
-printf '%s\n' "${perl_temp_owners[@]}" | rg -qx 'tools/gen_oracle_corpus\.pl' ||
- fail 'oracle subprocess owner is absent from the Perl allocation inventory'
+perl "$REPO_ROOT/tools/check_project_storage_inventory.pl" --kind perl_temporary_owners ||
+ fail 'reviewed Perl allocation inventory changed'
 rg -q 'TMPDIR[[:space:]]*=>[[:space:]]*1' "$REPO_ROOT/tools/run_cli_conformance.pl" ||
  fail 'CLI workspace no longer selects the initialized temporary root'
 [[ "$(rg -c 'TMPDIR[[:space:]]*=>[[:space:]]*1' "$REPO_ROOT/tools/gen_oracle_corpus.pl")" == 2 ]] ||
@@ -166,4 +151,4 @@ rg -q "logical_name.*'/tmp/leak\.spec'" "$REPO_ROOT/t/semantic_index_perl_founda
  fail 'inert private-path leak fixture was unexpectedly rewritten'
 
 printf '%s\n' \
- '[perl-project-data-test] PASS: 29 Perl allocators, traces, and CLI workspaces stay on repository storage'
+ '[perl-project-data-test] PASS: reviewed Perl allocators, traces, and CLI workspaces stay on repository storage'

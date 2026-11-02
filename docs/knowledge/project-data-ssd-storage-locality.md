@@ -40,7 +40,7 @@ answers:
   - is project data storage locality structurally enforced
   - is project data storage locality proved at process level
   - is the complete SSD project data migration closed
-date: 2026-07-28
+date: 2026-11-02
 status: current
 tags: [architecture, storage, filesystem, ssd, cache, temporary-data, portability, PROJECT-DATA-SSD-ROOTING]
 evidence: "PROJECT-DATA-SSD-ROOTING.0 proves the repository and current OS temporary root are on different filesystems. It finds 65 retained CLI workspaces plus two Julia depots totalling 135,756 KiB, two Dart active-root records identifying current/former checkouts, and one LinkedSpec stanza in a shared Julia usage log. Its tracked scan reported 100 temporary-allocation files and Rust 16; .2.2 corrects the missed imported env::temp_dir spelling to Rust 17 and the initial unique total to 101. Perl .2.1 migrates/verifies/uses/deletes the 65 old CLI directories. Rust .2.2 populates a repo-local 195-package Cargo cache, proves locked offline use plus all 17 owners/relocation on repository storage, and finds zero exact old Rust temp residue. Dart .2.3 atomically moves the complete 47-package cache into its canonical root, proves all 18 owners plus generated/traced use, and deletes the two exact shared active-root records after use. Julia .2.4 supplies a complete five-package source-bearing depot, proves all 17 temporary owners plus generated/trace use, migrates and deletes both exact old depots, deletes the exact former-checkout shared-log stanza, and moves 88 existing current reverify cards onto managed wrappers. Lua .2.5 proves all 13 allocation owners, both ABI-specific native module pairs, generated v2 output, and traces stay on repository storage; it rejects cross-volume native output before creation and finds zero exact old Lua workspace residue. Tool .2.6 completes Python/shell/map/book/TAP/oracle storage. Reconciliation .3.1.1 confirms all frozen off-repository records absent, deletes one missed exact same-SSD target-era root after canonical Cargo identity/use proof, and reruns all six storage oracles. Remediation .3.1.2 closes the discovered marker-v1 descendant gap with marker-v2 process-group authority, group-drain cleanup/signals, conservative automated recovery, and focused normal/orphan proofs. Final proof .3.2 independently finds zero old-root or bounded shared-metadata match before and after all six oracles, deletes zero external paths, and reconfirms the retained Perl/Julia copies. Structural .4.1 registers PROJECT-DATA-STORAGE across current tracked storage/command surfaces. Process proof .4.2 brings it to 28 classifier cases, adds the historical 38-boundary routing inventory, and kernel-contains relocated Perl/Rust/Dart/Julia/Lua/tool probes. The contained REDs reject external writes, shared-cache reads, symlink escapes, and incomplete probe sets; hidden Dart HOME and Apple cc-shim writes are removed. Closeout .5 passes every backend gate, primary 660/660, Unicode 10/10, all maintained focused parity matrices, scalar numeric 55/55, canonical Phase 0 1,031/1,031, and a fresh zero-residue post-proof census. REPO-ROOT-PATH-PORTABILITY.2.2 subsequently registers its SSD-routed relocation oracle as entrypoint 39. ADR 0053 requires repo-filesystem project state, necessary-only external reads, and copy/verify/use/delete migration; its implementation is complete."
@@ -69,7 +69,7 @@ one imported `env::temp_dir()` spelling that the original fully-qualified patter
 unique total was 101 and the Rust count is 17. `FUTURE-PARITY-BACKLOG.10.7.6.1` later adds one routed Lua test,
 and `FUTURE-PARITY-BACKLOG.11.5.2` later adds one emitted-Dart workspace owner. Subsequent Lua MCP routes add two
 owners, Julia callable construction adds one emitted-module owner, and Lua callable emitted-route proof adds one
-owner, so the current unique total is 107 and family counts are Perl 24, Dart 19, Julia 18, Lua 17,
+owner, so that migration-era unique total was107 and family counts were Perl24, Dart19, Julia18, Lua17,
 Python three, and shell 12; multi-language harnesses overlap. Twenty-four
 executable files contain explicit off-repository storage defaults. The initial audit found 97 fact cards with 107
 durable old temporary/home-depot command lines; `.2.4` migrates all 88 existing current Julia cards onto supported managed
@@ -92,8 +92,13 @@ group, and denies automated deletion for live/reused/legacy/mismatched/indetermi
 
 Perl now has an ongoing executable guard, not only migration history. `tools/test_perl_project_data_storage.sh`
 enters managed scratch, exercises default and explicit `File::Temp`, a real LinkedSpec trace file, and the neutral
-CLI runner's child cwd, checks repository device identity, requires completed workspace cleanup, inventories all 24
-tracked Perl owners, and preserves inert `/tmp` privacy fixtures. The standalone primary matrix is routed too.
+CLI runner's child cwd, checks repository device identity, requires completed workspace cleanup, compares the
+tracked Perl owner population with `doctrine/project_data_storage/perl_temporary_owners.json`, and preserves
+inert `/tmp` privacy fixtures. Component20.1.19's November2 retained census has30 owners; the added history
+catalog test explicitly selects managed `TMPDIR`. Exact membership replaces a29-file count, retains the seven
+previously pinned owners and rejects same-count substitutions. Python/shell/tool inventories are canonical in
+[[tool-project-data-ssd-storage]]; the migration-era cross-family totals above are not a refreshed current census.
+The standalone primary matrix is routed too.
 
 Rust now has the same ongoing protection. `tools/run_cargo_local.sh` is the self-rooted targeted Cargo boundary,
 and `tools/test_rust_project_data_storage.sh` locks all 17 tracked temporary owners, repository-device Cargo/temp/

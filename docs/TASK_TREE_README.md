@@ -190,12 +190,14 @@ Remove project-specific sections that do not apply to the new project.
 
 ## Registered Partitioned Trees
 
-`FUTURE-PARITY-BACKLOG` and `SESSION-STARTUP-READING` use bounded current roots plus
-mutable semantic parts and registered immutable history. Resolve an exact existing
+`FUTURE-PARITY-BACKLOG`, `SESSION-STARTUP-READING` and `TYPE-REFERENCE-BOOK` use bounded current roots and
+mutable semantic parts. FUTURE and STARTUP retain index-registered immutable history parts; TYPE retains exact
+closed predecessor narrative separately under `docs/history/task-narrative/`, with current contracts in four
+semantic parts. The current-ID census excludes only explicitly registered immutable task parts. Resolve an exact existing
 child with `perl tools/read_task_tree.pl --tree <tree> --id <stable-id>`; a numeric
 range does not create missing tasks. After editing its owning part, run
 `perl tools/update_task_tree_index.pl --tree <tree>` in the same slice. Keep current
-frontiers in the root and historical source identities unchanged in the strict index.
+frontiers in the root and historical source identities unchanged in their registered index or source-archive manifest.
 
 The verification-cadence gate compares declarations by task ID and exact value across
 HEAD and the index. Moving unchanged historical nodes adds no new slice. A slice

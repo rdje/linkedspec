@@ -20,6 +20,12 @@ evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1 retains paired695 complete asser
 reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
+Current recurring-consumer scope:20.1.18 reconciles typed condition dispatch,
+dynamic scalar adapter refusal, active callback paths, exact function-scope
+reads and emitted key order. Its nine-fixture proof is separate from the dated
+native preservation epochs below; originals are unchanged. See
+[[perl-receiver-copy-canonical-selection]] for the current boundaries and evidence.
+
 Only the required resolver return in _lower_ast_call_statement changes. The
 public dependency map retains each actual CODE reference. Six roles are invoked
 across the selected paths: normalize_method_args_with_optional_scope,

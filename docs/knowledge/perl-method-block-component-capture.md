@@ -21,6 +21,12 @@ evidence: "PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1 retains complete paired223 TAP:1
 reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
+Current recurring-consumer scope:20.1.18 reconciles typed condition dispatch,
+dynamic scalar adapter refusal, active callback paths, exact function-scope
+reads and emitted key order. Its nine-fixture proof is separate from the dated
+native preservation epochs below; originals are unchanged. See
+[[perl-receiver-copy-canonical-selection]] for the current boundaries and evidence.
+
 MethodLowering required resolution now uses private lexical native-context bindings
 in _lower_block_value_component_expr and _lower_block_side_effect_statement. The
 component invokes trim, primitive-literal lowering and direct-access lowering.

@@ -8,7 +8,7 @@ answers:
   - "which task owns the 134 objective audit artifact inputs"
   - "why did normalization mode proof need an ignored audit report"
   - "what is the exact historical audit artifact population and recovery format"
-date: 2026-10-06
+date: 2026-11-02
 status: Selected134-log recovery committed under0075a5b; bridge reconciliation preserves the historical capture
 tags: [claims, durability, artifacts, historical-audit, input-coverage]
 evidence: "The .0.4.1 author review follows verify_objectives.py's actual read(log) hash loop. Its134 local artifact inputs total84,613,241 bytes; the selected24 checkpoints total214,367 bytes. Concrete context-lua-storage.log is501 bytes, has no Git path history and its actual TAP timing line is absent from those selected checkpoints. The new audit capture records hashes without complete byte recovery. This is a new-claim coverage gap, not blanket classification of all earlier proof. The normalization-only public review consumes no legacy log and writes no tracked file. .0.4.2 must verify selected recovery before bridge parent closure."
@@ -86,14 +86,30 @@ the historical runtime producers.
 
 October6 current compatibility follows [[three-objective-language-readiness]]:
 only the committed Contracts decoder import/loop and Phase0 nested-boundary
-insertion are normalized in addition to earlier admitted evolution. The current
-producer observes22 recovery controls,56 evolution denials and the same134
+insertion are normalized in addition to earlier admitted evolution. That October6
+producer observed22 recovery controls,56 evolution denials and the same134
 inputs/84,613,241 bytes. Original milestone captures and all source/log hashes
 remain unchanged. Complete earlier counts above retain their dated boundary.
 
 October7 compiler-membership acceptance reconciles the already committed
-one-line Phase0 scanner mock through a whole-file Git-bound inverse. Its current
-isolated proof retains22 recovery controls and60 evolution denials over the
+one-line Phase0 scanner mock through a whole-file Git-bound inverse. Its dated
+isolated proof retained22 recovery controls and60 evolution denials over the
 same134 inputs; prior dated measurements remain unchanged. The original canonical
 rejection, source controls and exact repair are canonical in
 [[phase0-compiler-scanner-mock-historical-inverse]].
+
+November1 TYPE20.1.11 separates exact committed current-image admission from preserved predecessor-stage
+falsifiers after the canonical gate catches an unadmitted Compiler image. The selected original 134 inputs,
+all original hashes/results and recovery denials remain unchanged. The actual new source bindings and their
+limits are canonical in [[three-objective-language-readiness]]; source identity is not fresh runtime proof.
+
+The November2 source/regex repair and latest producer/input closure are qualified in the current section of
+[[three-objective-language-readiness]]. Earlier56/60-control observations above keep their original dates.
+
+The later November2 storage-inventory stage has a separate exact source/data inverse and seven new denials.
+All earlier700 governance controls still execute at their original stages. Its188-observed/199-declared input
+closure and fifth retained epoch are canonical in [[three-objective-language-readiness]].
+
+The subsequent execution-preflight stage preserves those controls and adds three CI insertion denials
+(703 governance total). Its sixth complete epoch retains188/199 input closure; see
+[[three-objective-language-readiness]]. Earlier dated recovery results remain unchanged.

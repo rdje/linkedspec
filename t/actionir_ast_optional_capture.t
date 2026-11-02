@@ -51,6 +51,10 @@ for my $index (0, 1) {
    "$surface/$group complete ordered member population");
   for my $row (0 .. $#{$native->{$group}}) {
    my $expected = $json->decode($json->encode($native->{$group}[$row]));
+   # The function-body guard precedes optional pipeline selection. Preserve the
+   # complete old read sequence and add only this current, inactive-stack read.
+   unshift @{$expected->{fetches}}, '__user_function_call_stack'
+    if $expected->{id} =~ m{^pipeline/} && @{$expected->{fetches} || []};
    if ($group eq 'authority') {
     my $known_code = $expected->{id} =~ m{/(?:tied-)?code/known-1$} ? 1 : 0;
     $expected->{eligible} = [$known_code] if @{$expected->{eligible}};
@@ -74,8 +78,8 @@ for my $owner (qw(pipeline assign)) {
   ['selected', 'replacement'], "$owner replacement is selected only by the next owner call");
  is($branches{$owner.'/zero'}{value}, '0', "$owner accepts a nonempty zero result");
 }
-is_deeply($branches{'pipeline/tied'}{fetches}, ['lower_array_pipeline_expr'],
- 'pipeline fetches the selected value once before its CODE guard');
+is_deeply($branches{'pipeline/tied'}{fetches}, ['__user_function_call_stack', 'lower_array_pipeline_expr'],
+ 'pipeline checks function scope, then fetches the selected value once before its CODE guard');
 is_deeply($branches{'assign/tied'}{fetches},
  [qw(normalize_method_args_with_optional_scope trim_action_ir_value lower_assign_statement lower_assign_statement)],
  'assignment retains required acquisition and both optional map reads');

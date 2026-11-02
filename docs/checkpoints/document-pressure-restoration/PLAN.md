@@ -1,7 +1,7 @@
-# Normal-hook restoration: proposed containment contracts
+# Normal-hook restoration: approved containment contracts
 
 Owner: `TYPE-REFERENCE-BOOK.1.2.20.1.3`; implementation parent: `TYPE-REFERENCE-BOOK.1.2.20.1`.
-Status: **proposed; the lifecycle/browsing decision is pending**. This file changes no governing contract.
+Status: **approved by the director’s explicit archive/reference choice**. Implementation is owned by20.1.10; this plan alone does not claim migrated data or passing gates.
 Source boundary: `7ec45b810a5ef6c853e8068a04d55167671dbbb2`, after the E2BIG implementation.
 
 ## Established boundary
@@ -43,3 +43,7 @@ Keep all current aggregate/file-count caps and use only semantic consolidation a
 8. `.20.1.8`: require all normal hook doctrines to pass, then canonical CI for the exact staged candidate; close pressure20.1 and E2BIG23.4.5 only after verified acceptance. Restore ordinary hook-enabled commits before resuming Rust73.2.
 
 Each migration is separately owned, preserves exact source inputs/results, updates its readers and mechanical checks together, and commits before another family begins. Runtime features, other repositories and dependency internals remain outside these slices. No migration, numerical limit change, accepted ADR or normal-hook restoration is claimed by this proposal.
+
+## Accepted execution boundary
+
+The director explicitly selected “Adopt the proposed archive/reference contracts (recommended)”. The original feature-only no-verify permission is not an infrastructure exception. Because existing independent gate failures block partial infrastructure commits,20.1.10 integrates the interdependent contract/readers/checkers/data changes into one restoration candidate. Component evidence and preservation boundaries remain separate. Normal hooks and exact staged canonical CI must pass before its commit; no bypass, temporary pressure waiver or healthy-baseline relabeling is used. Subsequent work returns to ordinary per-slice commits.

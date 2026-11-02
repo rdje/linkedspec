@@ -178,3 +178,5 @@ changed* lives in git (layer D), not here.
 3. Link it from the task-tree(s) it relates to.
 4. To change a fact, add a new record (or mark the old one `superseded by 00NN`) — do
    not rewrite history.
+
+- [0139 — Approved archive/reference contracts](0139-approved-archive-reference-contracts.md) — accepted; exact archive retrieval, maintained scope and bounded current tasks.

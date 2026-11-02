@@ -90,12 +90,18 @@ Controls follow lifecycle:
 | Destination class | Required pressure control |
 | --- | --- |
 | Hot/live file | Independent line and byte ceilings plus overwrite, review, or staleness semantics |
-| Partitioned manual/task collection | Bounded membership plus per-part, file-count, and aggregate ceilings |
+| Current task collection | Bounded membership plus per-part, file-count, and aggregate ceilings |
+| Maintained canonical reference | Bounded paged admission ledger binding each path/hash to its task owner; existing per-file ceilings |
 | Generated index | Size ceilings plus a reproducible freshness verifier against canonical sources |
-| Append-only or rolling history | Query-first access plus a separately owned shard, rotation, or archival threshold |
+| Exact query archive | Bounded hot roots, immutable source segments and paged catalogs; exact reconstruction and retained-page identity |
 | External service | Named authority, lifecycle owner, and stable HTTPS query/link contract |
 | Frozen legacy record | Content identity or an equivalent write prohibition; never an author-overflow destination |
 | Repository or command path | Exact existence, non-symlink, and executable controls where applicable |
+
+Accepted ADR `0139` distinguishes maintained scope and retained history from finite current work.
+Maintained references retain their canonical paths and per-file ceilings; new or changed bytes require
+exact ledger admission under the selected task owner. No lifetime aggregate cap is raised. Archive
+segments, catalog pages and hot roots remain independently bounded and exact retrieval is mandatory.
 
 Legacy destinations already above a healthy size are debt, not reusable ideals. Their dated baseline is immutable;
 further growth is rejected unless an exact finite transition owner is active and the change remains within both its
@@ -123,7 +129,7 @@ The initial README admission markers remain:
 
 ## Enforcement
 
-The project-local check is deterministic, non-mutating, dependency-free beyond core Perl and Git, and rooted from
+The project-local check is deterministic, non-mutating, dependent only on core Perl, Python standard library and Git, and rooted from
 its own location. On every invocation it validates the resulting tree—never only a README changed-path subset—and:
 
 - enforces the README and routed-surface limits;
@@ -131,7 +137,7 @@ its own location. On every invocation it validates the resulting tree—never on
 - validates strict registry schema, exact route coverage, lifecycle/control compatibility, terminal existence,
   transitive acyclic closure, freshness, external authority, frozen identity, and debt transitions;
 - rejects controlled staged/worktree disagreement and unauthorized cap, limit, lifecycle, or baseline changes; and
-- runs the ratified 32-class in-memory mutation corpus, including a valid reviewed-increase acceptance case.
+- runs the ratified 40-class in-memory mutation corpus, including a valid reviewed-increase acceptance case.
 
 Doctrine `README-STABILITY` remains one registry entry in `scripts/check_doctrines.sh`. The pre-commit hook and
 canonical local gate run the same doctrine registry. Hosted GitHub Actions remain disabled, so local CI is the

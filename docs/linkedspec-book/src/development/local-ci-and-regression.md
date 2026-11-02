@@ -20,8 +20,7 @@ bash tools/run_ci_local.sh
 This is the canonical regression gate for local development. For snippet-level lowering evidence, see [Inspecting `.spec` Code Generation](codegen-inspector.md).
 ## Verification tiers
 
-During the director’s feature-completion phase, compile and run a quick targeted check, commit, then implement the next feature.
-Broad suites, exhaustive proof and global registry scans are deferred until feature coverage is complete. The current document-pressure/freshness failures are retained under `TYPE-REFERENCE-BOOK.1.2.20.1` and must be repaired before canonical admission or push; focused feature checks are not a full-doctrine receipt. The baseline automated tiers remain:
+During the director’s feature-completion phase, compile and run a quick targeted check, commit, then implement the next feature. Broad suites, exhaustive proof and global registry scans are deferred until feature coverage is complete. The current document-pressure/freshness failures are retained under `TYPE-REFERENCE-BOOK.1.2.20.1` and must be repaired before canonical admission or push; focused feature checks are not a full-doctrine receipt. The baseline automated tiers remain:
 
 - A **focused commit** runs the tests for the changed behavior, its direct dependents, the relevant backend or
   component gate, all repository doctrines, documentation-history pressure checks, and diff hygiene. Book changes
@@ -30,89 +29,38 @@ Broad suites, exhaustive proof and global registry scans are deferred until feat
   milestone/parent closeout, public or cross-backend contract movement, dependency/toolchain changes, CI/hook/
   gate changes, storage/path/doctrine infrastructure, and the final clean push boundary.
 
-The staged task-tree delta changes verification declarations for exactly one stable leaf ID.
-That leaf has one `Verification tier`, one `Focused checks` selection and one `Canonical trigger`.
-Keep future leaves' verification plans in prose until activation from clean HEAD; declaring their
-exact fields alongside the current leaf creates a second owner and blocks the commit. Relocating
-unchanged historical declarations creates no new owner.
+The staged task-tree delta changes verification declarations for exactly one stable leaf ID. That leaf has one `Verification tier`, one `Focused checks` selection and one `Canonical trigger`. Keep future leaves' verification plans in prose until activation from clean HEAD; declaring their exact fields alongside the current leaf creates a second owner and blocks the commit. Relocating unchanged historical declarations creates no new owner.
 
-Each task-tree leaf records its tier and exact focused checks. For canonical work, first stage the exact candidate
-and leave no unstaged tracked or untracked non-ignored files. The gate binds success to base `HEAD` and a read-only
-SHA-256 of Git's full-index binary staged diff in repository-local project data. The pre-commit doctrine rejects a missing or stale canonical
-receipt. After commit, an exact receipt can be promoted to committed `HEAD`; the pre-push hook reuses it only when
-it matches, otherwise it runs the complete gate once.
+Each task-tree leaf records its tier and exact focused checks. For canonical work, first stage the exact candidate and leave no unstaged tracked or untracked non-ignored files. The gate binds success to base `HEAD` and a read-only SHA-256 of Git's full-index binary staged diff in repository-local project data. The pre-commit doctrine rejects a missing or stale canonical receipt. After commit, an exact receipt can be promoted to committed `HEAD`; the pre-push hook reuses it only when it matches, otherwise it runs the complete gate once.
 
-This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks
-remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a
-claim of literal impossibility.
+This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a claim of literal impossibility.
 ### README and routed-document pressure
 
-The registered `README-STABILITY` doctrine runs on every doctrine invocation, regardless of which paths changed.
-Its Bash entry point checks the stable landing-page headings and 128-line / 6,144-byte ceilings, then invokes the
-core-Perl routing check over the resulting Git tree:
+The registered `README-STABILITY` doctrine runs on every doctrine invocation, regardless of which paths changed. Its Bash entry point checks the stable landing-page headings and 128-line / 6,144-byte ceilings, then invokes the core-Perl routing check over the resulting Git tree:
 
 ```bash
 bash scripts/check_readme_stability.sh
 perl scripts/check_readme_routing_pressure.pl --report
 ```
 
-The data-only registry declares 62 routes over 20 surfaces. The checker independently extracts 39 README reader
-routes, five policy/enforcement reader routes, 18 policy author-overflow routes, and the actual failure hints; it
-rejects any mismatch, missing or symlinked local target, route cycle, incompatible lifecycle/control, stale
-generated owner, unowned debt growth, staged/worktree split, or unreviewed threshold increase. Its in-memory
-mutation oracle must report 40/40. At adoption, live status, task evidence, change history, and engineering notes
-were immutable measured debt. All four are now current bounded collections: live status under ADR `0067`, task
-evidence under ADR `0068`, and change history plus engineering notes under ADR `0069`. Their former debt ceilings
-remain historical facts rather than reusable growth allowances.
+The data-only registry declares 62 routes over 20 surfaces. The checker independently extracts 39 README reader routes, five policy/enforcement reader routes, 18 policy author-overflow routes, and the actual failure hints; it rejects any mismatch, missing or symlinked local target, route cycle, incompatible lifecycle/control, stale generated owner, unowned debt growth, staged/worktree split, or unreviewed threshold increase. Its in-memory mutation oracle must report 40/40. At adoption, live status, task evidence, change history, and engineering notes were immutable measured debt. Live status remains a bounded current view under ADR `0067`, and current task evidence retains its collection ceilings. Accepted ADR `0139` classifies changes and engineering notes as exact query archives with bounded hot roots, segments and paged catalogs; it admits maintained decisions, facts and public references through a task-bound scope ledger with their existing per-file ceilings. Former debt and lifetime aggregate limits remain historical facts, with exact old/new contracts in the accepted ADR.
 
-Historical admission and unchanged-closeout evidence, including exact commits and runtime results,
-lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STABILITY-POLICY.md`. See [accepted decision authority](documentation-workflow.md#accepted-decision-authority) for the Status rule and examples.
+Historical admission and unchanged-closeout evidence, including exact commits and runtime results, lives in `docs/knowledge/readme-stability-policy.md` and `docs/tasks/README-STABILITY-POLICY.md`. See [accepted decision authority](documentation-workflow.md#accepted-decision-authority) for the Status rule and examples.
 #### Bounded views over exact history
 
 ADR `0066` defines bounded views over verified stores for live status, task evidence and the two author histories.
 
-A storage migration must first preserve its content consumers. Completed diagnostic duplicates may be compressed only after exact retained-input and claim-consumer checks; decompression/hash verification precedes raw removal, and reusable build caches stay available. Restore raw diagnostics from retained gzip or evidence packets before replaying historical producers. Completed failed-instrument logs follow the same exact-byte recovery guards after their owning slice is committed. Current assertions read governed records or
-semantic owners; the FUTURE checker rejects old-monolith coupling in all eleven transferred scopes.
-The complete consumer census and migration evidence live in `docs/knowledge/bounded-live-document-store-contract.md`.
+A storage migration must first preserve its content consumers. Completed diagnostic duplicates may be compressed only after exact retained-input and claim-consumer checks; decompression/hash verification precedes raw removal, and reusable build caches stay available. Restore raw diagnostics from retained gzip or evidence packets before replaying historical producers. Completed failed-instrument logs follow the same exact-byte recovery guards after their owning slice is committed. Current assertions read governed records or semantic owners; the FUTURE checker rejects old-monolith coupling in all eleven transferred scopes. The complete consumer census and migration evidence live in `docs/knowledge/bounded-live-document-store-contract.md`.
 
-The chronology protocol uses a tracked JSONL manifest per family. Every immutable segment records its
-repository-relative path, clean source commit and Git blob, exact source line range, line/byte counts, SHA-256,
-current replacement, and root-derived retrieval command. The checker must concatenate segments and reproduce
-`git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` is a five-section overwrite view
-capped at 256 lines / 32 KiB. `CHANGES.md` and `DEVELOPMENT_NOTES.md` are bounded hot shards capped at
-512 lines / 64 KiB. Original snapshot counts, source identities and independent reconstruction results
-remain in the canonical bounded-store record and ADR `0069`.
+The chronology protocol uses a tracked JSONL catalog root per family. Change and note roots point to bounded content-addressed index/segment pages; the reader also accepts the original flat representation. `--catalog-json` returns the normalized metadata and complete ordered logical segment records, independent of physical paging. Every immutable segment records its repository-relative path, clean source commit and Git blob, exact source line range, line/byte counts, SHA-256, current replacement, and root-derived retrieval command. The checker must concatenate segments and reproduce `git show <commit>:<path>` byte-for-byte. `LIVE_ACHIEVEMENT_STATUS.md` is a five-section overwrite view capped at 256 lines / 32 KiB. `CHANGES.md` and `DEVELOPMENT_NOTES.md` are bounded hot shards capped at 512 lines / 64 KiB. Original snapshot counts, source identities and independent reconstruction results remain in the canonical bounded-store record and ADR `0069`.
 
-Two task trees use stable semantic partitions. `FUTURE-PARITY-BACKLOG` has eight mutable
-parts and one immutable history part, described by a ten-record schema-v1 index. Its
-later `.14.6.5` split preserves existing IDs; the current root supplies navigation.
+Three task trees use stable semantic partitions. Their current roots provide navigation, while stable IDs resolve to the owning mutable part. `FUTURE-PARITY-BACKLOG` has eight mutable parts and one immutable history part, described by a ten-record schema-v1 index. Its later `.14.6.5` split preserves existing IDs; the current root supplies navigation.
 
-`SESSION-STARTUP-READING` has three mutable owners (`.1–.3`, `.4–.49`, `.50–.99`) and one
-immutable historical part. Its five-record index preserves the original 7,994 lines /
-960,362 bytes, including all 395 child definitions and the historical root. ID-scoped
-reading evidence stays with its semantic owner. The new current root is capped at
-256 lines / 32 KiB; each part at 5,000 lines / 768 KiB. Existing collection ceilings stay
-unchanged. A reserved numeric range does not imply that every ID exists.
+`SESSION-STARTUP-READING` has three mutable owners (`.1–.3`, `.4–.49`, `.50–.99`) and one immutable historical part. Its five-record index preserves the original 7,994 lines / 960,362 bytes, including all 395 child definitions and the historical root. ID-scoped reading evidence stays with its semantic owner. The new current root is capped at 256 lines / 32 KiB; each part at 5,000 lines / 768 KiB. Existing collection ceilings stay unchanged. A reserved numeric range does not imply that every ID exists.
 
-Both strict indexes bind clean Git source identities/ranges and same-commit current
-counts/digests. The task metadata doctrine rejects missing, duplicate or misplaced nodes,
-stale snapshots, changed immutable history, broken root/frontier references and pressure
-overflow. Preserved historical instructions do not supersede current startup or dependency
-boundaries. Verification declarations move with their stable task IDs: relocation alone
-adds no new slice, while each new slice still requires exactly one complete owning-leaf
-triplet and its selected verification tier.
+The FUTURE and STARTUP indexes bind their original clean Git source identities/ranges and same-commit current counts/digests. TYPE has four mutable parts (overview, helper families 01–39, 40–59 and 60+), each capped at 5,000 lines/768 KiB. Its five-record index gates current digests/routing; separate immutable predecessor pages retain exact closed narratives for TYPE and the two migrated completed-narrative families. Every current ID/status/goal/acceptance and verification declaration remains, and open bodies are preserved by the migration oracle. The task metadata doctrine rejects missing, duplicate or misplaced nodes, stale snapshots, changed immutable history, broken root/frontier references and pressure overflow. Preserved historical instructions do not supersede current startup or dependency boundaries. Verification declarations move with their stable task IDs: relocation alone adds no new slice, while each new slice still requires exactly one complete owning-leaf triplet and its selected verification tier.
 
-Change and note authors prepend complete records to the bounded roots. The rollover tool warns at 80% of either
-root limit, requires action at 90%, and archives the oldest complete clean-HEAD records until at most 50% remains.
-It refuses to archive uncommitted records or rewritten/reordered HEAD content. Change boundaries are `## `
-headings; engineering-note boundaries are dated entries or `## ` headings. New content-addressed segments use IDs
-below the initial `5000` reserve, so manifest order remains newest-to-oldest without renaming immutable files.
-Current collection ceilings are in `doctrine/readme_stability/routes.jsonl`; earlier capacity steps,
-including engineering-notes segment 4992, remain recorded in ADRs `0081` and `0083`.
-Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment
-or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both
-pressure checks on every accepted slice. See [history rollover and byte reconstruction](documentation-workflow.md#history-rollover-and-byte-reconstruction) for EOF and generation recovery. Historical unchanged registry recomposition passed 20 surfaces / 62 routes / 32/32
-with all four stores current and empty debt metadata; every migration starts and lands at a clean Git boundary.
+Change and note authors prepend complete records to the bounded roots. The rollover tool warns at 80% of either root limit, requires action at 90%, and archives the oldest complete clean-HEAD records until at most 50% remains. It refuses to archive uncommitted records or rewritten/reordered HEAD content. Change boundaries are `## ` headings; engineering-note boundaries are dated entries or `## ` headings. New content-addressed segments use IDs below the initial `5000` reserve, so manifest order remains newest-to-oldest without renaming immutable files. Current collection ceilings are in `doctrine/readme_stability/routes.jsonl`; earlier capacity steps, including engineering-notes segment 4992, remain recorded in ADRs `0081` and `0083`. Publication is recoverable: segment first, manifest second, bounded root last; rerun reuses an exact orphan segment or completes an exact pending manifest generation, while any conflict fails closed. `COMMIT.md` requires both pressure checks on every accepted slice. See [history rollover and byte reconstruction](documentation-workflow.md#history-rollover-and-byte-reconstruction) for EOF and generation recovery. Historical unchanged registry recomposition passed 20 surfaces / 62 routes / 32/32 with all four stores current and empty debt metadata; every migration starts and lands at a clean Git boundary.
 
 Use the bounded query that matches the question:
 
@@ -130,18 +78,10 @@ perl tools/read_task_tree.pl --tree SESSION-STARTUP-READING --id SESSION-STARTUP
 perl tools/update_task_tree_index.pl --tree SESSION-STARTUP-READING
 ```
 
-The first form is the normal historical lookup, the second returns one raw immutable segment, and the third
-reconstructs every pre-migration byte. The next four commands query the two author histories and check their
-rollover pressure. The task commands resolve one stable task ID to its bounded owner and refresh its current index
-snapshot after an edit. `scripts/check_document_history.sh` is the fixed chronology verifier; the existing task
-metadata doctrine composes both registered partition validators and the repository-wide current-ID census.
-The tools derive the repository root from their script location, so their behavior is independent of the
-caller's working directory. Archives and task history are positive historical evidence, never current-state
-denials or append targets.
+The first form is the normal historical lookup, the second returns one raw immutable segment, and the third reconstructs every pre-migration byte. The next four commands query the two author histories and check their rollover pressure. The task commands resolve one stable task ID to its bounded owner and refresh its current index snapshot after an edit. `scripts/check_document_history.sh` is the fixed chronology verifier; the task metadata doctrine composes the registered partition validators, source-bound narrative checker and repository-wide current-ID census. The tools derive the repository root from their script location, so their behavior is independent of the caller's working directory. Archives and task history are positive historical evidence, never current-state denials or append targets.
 ### Neutral typed source-location contract
 
-The default gate requires and runs the backend-neutral typed source-location checker through repository-managed
-Python storage:
+The default gate requires and runs the backend-neutral typed source-location checker through repository-managed Python storage:
 
 ```bash
 bash tools/run_python_project_data.sh tools/check_typed_source_location_contract.py
@@ -1258,7 +1198,7 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - audits selected core paths for machine-specific absolute paths,
 - runs Perl syntax checks for the library, primary CLI, neutral runner, and focused tests,
 - validates the machine-readable capability census, backend evidence paths, and task ownership,
-- runs the focused runner/trace suites and all 61 primary CLI cases under default and POSIX option environments,
+- runs the focused runner/trace suites and all 66 primary CLI cases under default and POSIX option environments,
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify layer integrity, activation freshness, bounded shape, and task-status-consistent clean handoffs with active/clean twins plus destructive mutations,
 - runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
@@ -2051,7 +1991,42 @@ destinations before writing; later compiler changes remain distinct from the dat
 
 ### Current document-pressure restoration
 
-The path/storage E2BIG launch defect is repaired with focused checks. Normal hooks still fail document-pressure controls; full canonical closure is pending. A lossless restoration proposal at `docs/checkpoints/document-pressure-restoration/PLAN.md` awaits the archive/reference lifecycle decision. Existing limits and browsing contracts remain in force. Independent Knowledge publication and claim-verifier repairs proceed before more runtime features; no full-gate success is claimed.
+The path/storage checkers stream NUL-delimited paths, preventing the reproduced E2BIG launches. Normal-hook restoration uses the archive/reference controls below; its acceptance requires the exact staged canonical receipt and the ordinary commit hooks. The director approved `docs/checkpoints/document-pressure-restoration/PLAN.md` and accepted ADR `0139`. The integrated restoration retains exact archive queries, current task obligations and canonical reference browsing. Normal hooks and exact staged canonical CI must pass before its commit; no hook bypass or full-gate success is claimed. Historical objective recovery also requires exact current-source image admissions with all predecessor falsifiers retained; these source identities do not promote fresh runtime or feature compatibility.
 
 
-Knowledge generation now renders to a validated sibling and atomically replaces its destination. Readers observe complete old/new maps; rendering errors, handled termination and rejected output preserve the prior complete file. First publication remains absent until success. The canonical regression is `bash tools/run_python_project_data.sh tools/test_knowledge_map_atomic_output.py`; existing metadata/header controls remain. This implementation preserves renderer bytes and is independent of the pending archive/reference policy choice.
+Knowledge generation now renders to a validated sibling and atomically replaces its destination. Readers observe complete old/new maps; rendering errors, handled termination and rejected output preserve the prior complete file. First publication remains absent until success. The canonical regression is `bash tools/run_python_project_data.sh tools/test_knowledge_map_atomic_output.py`; existing metadata/header controls remain. Publication safety remains independent of compact rendering, which preserves every question and metadata field within the original map ceilings.
+
+Archive catalogs retain old segments and content-addressed pages. `perl tools/read_document_history.pl --surface change_history --all` reconstructs exact ordered history; `--segment 4932` selects a retained segment. The hot files and individual pages/segments keep their limits. Lifetime history totals no longer pretend to bound a current working set.
+
+Closed task narrative is read with `python3 tools/read_task_narrative.py --tree TYPE-REFERENCE-BOOK --id TYPE-REFERENCE-BOOK.1.1`, or `--all` for the exact named predecessor. Current goals, acceptance and verification declarations stay in the live graph. `perl tools/read_task_tree.pl --tree TYPE-REFERENCE-BOOK --id TYPE-REFERENCE-BOOK.1.2.20.1.10` resolves the current semantic part; refresh its digest with `perl tools/update_task_tree_index.pl --tree TYPE-REFERENCE-BOOK` after edits.
+
+Canonical decisions, Knowledge cards and public references stay directly browsable. Before staging a changed reference, run `bash tools/run_python_project_data.sh tools/update_reference_scope.py --owner <owning-leaf-id>`. The bounded ledger records exact paths, bytes and hashes under that task; unindexed, missing, stale, symbolic or unowned content fails. Existing per-file ceilings remain. Run `bash tools/run_python_project_data.sh tools/check_reference_scope.py` to verify admission; the routing doctrine runs it automatically.
+
+Executable and public selector checks distinguish literal tokens from binding names. For example, `array(false)`
+is a retained literal constructor, while `true`, `false` and `undef` are literal arguments rather than names.
+Other names and case variants still pass through the removed-selector checks. Reviewed negative or AST-only
+diagnostic sites require their exact path, complete file bytes and line bytes under their owning review; edits,
+copies and added positive sites fail. The recurring scanner checks these denials and keeps its untracked probes
+and concurrent scans within the same serialized transaction. This classification does not admit retired syntax.
+
+AST lowering tests observe results and effects when temporary-variable layout is incidental.
+For example, Count of an append result counts the updated array once; set_key retains its
+evaluated key even if a later operand changes that binding. The narrow capture compatibility
+payload accepts an empty span but rejects missing or reversed bounds before calling the typed
+span API. These checks retain poisoned AST source and unknown-helper rejection controls;
+passing behavior does not authorize a broader raw-source fallback.
+
+Text-only scalar adapters may decline dynamic intermediate results; typed AST lowering owns
+their guarded continuations. Current factory tests execute generated values, preserve exact
+callback identity/aliases and test the active dependency sites. Inline conditions use typed
+value lowering; the former flow callback is not invoked by that owner. Function-scope reads
+are checked in order, including the scope guard before optional pipeline selection.
+Frozen native records remain unchanged. Diagnostic line coordinates map only unchanged
+statements in the same named routine. Revised diagnostic fixtures require an exact owned
+file evolution; copied, edited or foreign-owner versions stay rejected.
+
+Storage checks compare exact reviewed file populations in `doctrine/project_data_storage/`.
+Run `bash tools/test_perl_project_data_storage.sh` and `bash tools/test_tool_project_data_storage.sh`
+after adding a relevant allocator or Python entrypoint. Review each added storage root before updating
+its manifest; a matching count alone cannot detect a substituted file. Allocation/device, trace,
+workspace cleanup and hostile-path probes remain required alongside membership checks.

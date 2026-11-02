@@ -13,7 +13,8 @@ answers:
   - "which task follows SPEC-FORMAT-TERSE.2.3.5.4"
   - "can scalar arithmetic results feed text methods"
   - "which task owns ordinary numeric arithmetic result flow"
-date: 2026-10-26
+  - "why do scalar numeric fixtures still expect terminal nulls"
+date: 2026-11-02
 status: comparison checked; arithmetic result extensions targeted-checked on all current backends implemented
 tags: [number, numeric, receiver, scalar, result, spec-format-terse]
 evidence: "scalar_numeric_contract.json; TYPE23.2.15/16 retained public Get/native/fresh/substitution and numeric-comparison-results.md/scalar-arithmetic-results.md."
@@ -63,3 +64,14 @@ Block/user-function values dispatch on actual returned kind. Historical next
 Canonical free arithmetic and short Number-prefix rejection state through later immediate with are separately repaired by Perl63.1: [[free-numeric-result-source-guards]]. Independent peers/full admission remain open; original16 producer/domain/min-max overload authority is unchanged.
 
 Canonical free numeric comparison and ordinary short-prefix guard/readiness breadth is separately repaired by Perl64.1: [[numeric-comparison-result-source-guards]]. Ten healthy observations including valid Number0/1 with stay exact; independent peer64 roles/full admission remain open.
+
+Canonical restoration20.1.16 finds twenty obsolete terminal-null expectations
+in five current numeric-codeblock fixture files. Current ordinary comparison,
+reducer, Count/Length and first-value contracts already admit those compatible
+successors. Each authored fluent case agrees with its independently written
+nested-helper equivalent on native and emitted Perl, including once-only source
+and operand traces. The fixture changes only those expected values; all1,008
+case IDs, sources, other fields and every other expectation remain intact.
+Existing sorted is lexicographic: sorting[2,10,1] gives[1,10,2], so taking two and
+summing gives11. This calibration adds no runtime or deferred-method surface;
+older deferred and invalid-shape controls retain their existing expectations.

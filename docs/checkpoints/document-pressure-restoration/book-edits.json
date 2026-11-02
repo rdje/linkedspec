@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "books": {
+    "docs/linkedspec-book/src/development/local-ci-and-regression.md": [
+      {
+        "reason": "archive/reference roles",
+        "before": "All four are now current bounded collections: live status under ADR `0067`, task evidence under ADR `0068`, and change history plus engineering notes under ADR `0069`. Their former debt ceilings remain historical facts rather than reusable growth allowances.",
+        "after": "Live status remains a bounded current view under ADR `0067`, and current task evidence retains its collection ceilings. Accepted ADR `0139` classifies changes and engineering notes as exact query archives with bounded hot roots, segments and paged catalogs; it admits maintained decisions, facts and public references through a task-bound scope ledger with their existing per-file ceilings. Former debt and lifetime aggregate limits remain historical facts, with exact old/new contracts in the accepted ADR."
+      },
+      {
+        "reason": "normalized catalog interface",
+        "before": "The chronology protocol uses a tracked JSONL manifest per family.",
+        "after": "The chronology protocol uses a tracked JSONL catalog root per family. Change and note roots point to bounded content-addressed index/segment pages; the reader also accepts the original flat representation. `--catalog-json` returns the normalized metadata and complete ordered logical segment records, independent of physical paging."
+      },
+      {
+        "reason": "TYPE current topology",
+        "before": "Two task trees use stable semantic partitions.",
+        "after": "Three task trees use stable semantic partitions. Their current roots provide navigation, while stable IDs resolve to the owning mutable part."
+      },
+      {
+        "reason": "source/current partition distinction",
+        "before": "Both strict indexes bind clean Git source identities/ranges and same-commit current counts/digests.",
+        "after": "The FUTURE and STARTUP indexes bind their original clean Git source identities/ranges and same-commit current counts/digests. TYPE has four mutable parts (overview, helper families 01–39, 40–59 and 60+), each capped at 5,000 lines/768 KiB. Its five-record index gates current digests/routing; separate immutable predecessor pages retain exact closed narratives for TYPE and the two migrated completed-narrative families. Every current ID/status/goal/acceptance and verification declaration remains, and open bodies are preserved by the migration oracle."
+      },
+      {
+        "reason": "composed metadata checks",
+        "before": "the existing task metadata doctrine composes both registered partition validators and the repository-wide current-ID census.",
+        "after": "the task metadata doctrine composes the registered partition validators, source-bound narrative checker and repository-wide current-ID census."
+      }
+    ],
+    "docs/linkedspec-book/src/development/documentation-workflow.md": [
+      {
+        "reason": "current verifier dependencies",
+        "before": "adds `doctrine/readme_stability/routes.jsonl` and an unconditional core-Perl resulting-tree check.",
+        "after": "introduced `doctrine/readme_stability/routes.jsonl` and an unconditional core-Perl resulting-tree check. The current routing checker also invokes project-managed Python standard-library scope admission under ADR `0139`."
+      },
+      {
+        "reason": "accepted lifecycle revision",
+        "before": "That documentation-sustainability program is composition-closed.",
+        "after": "That documentation-sustainability program is composition-closed. Historical admission counts and lifetime limits in the dated examples below remain provenance, not current growth allowances. Accepted ADR `0139` adopts exact query archives for the two author histories and task-owned maintained scope for decisions, Knowledge cards and public references. It retains all canonical browsing paths and original per-file/hot-root/segment limits. Catalog pages and source-bound closed narratives preserve exact retrieval; current task collection ceilings stay unchanged. TYPE now joins FUTURE and STARTUP as a partitioned tree. Update a changed maintained reference's ledger before staging with `bash tools/run_python_project_data.sh tools/update_reference_scope.py --owner <leaf-id>`; the routing doctrine rejects stale, unknown, symbolic or unowned members. The integrated restoration requires normal hooks and an exact staged canonical receipt; no temporary waiver or cap refresh is used."
+      },
+      {
+        "reason": "public normalized reconstruction example",
+        "before": "rows = Path('docs/history/changes/manifest.jsonl').read_text().splitlines() row = json.loads(rows[1])",
+        "after": "rows = json.loads(subprocess.check_output([ 'perl', 'tools/read_document_history.pl', '--surface', 'change_history', '--catalog-json' ])) row = rows[1]"
+      },
+      {
+        "reason": "historical/current image stages",
+        "before": "Missing, duplicated or changed additions and unrelated edits fail the audit.",
+        "after": "Missing, duplicated or changed additions and unrelated edits fail the audit. Current source-image admission is separate from historical execution. The closed table at `tests/language-readiness/current-source-images.json.gz` binds 18 exact committed images at `0db5e9e87` to owner `TYPE-REFERENCE-BOOK.1.2.20.1.11`. Each entry preserves the historical boundary and last admitted predecessor. Git path, regular-file mode, commit and bytes are checked; any later byte change rejects until a new reviewed owner admits it. The report's `source_image_evolutions` names actual current images. Older inverse/falsifier rows explicitly name their preserved predecessor `source_stage`; those original controls and all original results remain. For example, the historical ZIP can still recover every selected input while a later Compiler edit causes `unreviewed current source image: perl/LinkedSpec/Compiler.pm`. Restoring the admitted current image passes; refreshing an old historical hash is never the repair. The new path-wise current-image mutations exercise that rejection, while original-log reads and tracked writes remain denied. Source identity admission does not re-execute old runtime producers or promote feature/objective compatibility; that verification remains deferred under its existing owners."
+      }
+    ]
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "authorities": [
+    "docs/checkpoints/type-operation-inventory/numeric-comparison-results.md",
+    "docs/checkpoints/type-operation-inventory/aggregate-numeric-results.md",
+    "docs/checkpoints/type-operation-inventory/count-length-results.md",
+    "docs/checkpoints/type-operation-inventory/selected-values.md",
+    "docs/linkedspec-book/src/appendix/helper-contract-catalog.md",
+    "capability_conformance/scalar_numeric_contract.json",
+    "t/scalar_numeric_contract.t"
+  ],
+  "cases": [
+    {
+      "expected": 3,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "outside/effect/comparison-terminal",
+      "nested_body": "score=3; out=num_add(num_gt(score,1),2); return(out)",
+      "original": {
+        "body": "score = 3; out = score.gt(1).add(2); return(out)",
+        "expected": null,
+        "id": "outside/effect/comparison-terminal"
+      }
+    },
+    {
+      "expected": 12,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "aggregate7/ordinary/sum/terminal",
+      "nested_body": "items=[3,1,8]; return(num_abs(sum(items)))",
+      "original": {
+        "body": "items = [3,1,8]; return(items.sum().abs())",
+        "expected": null,
+        "functions": "",
+        "id": "aggregate7/ordinary/sum/terminal"
+      }
+    },
+    {
+      "expected": 4,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "aggregate7/ordinary/avg/terminal",
+      "nested_body": "items=[3,1,8]; return(num_abs(avg(items)))",
+      "original": {
+        "body": "items = [3,1,8]; return(items.avg().abs())",
+        "expected": null,
+        "functions": "",
+        "id": "aggregate7/ordinary/avg/terminal"
+      }
+    },
+    {
+      "expected": 3,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "aggregate7/ordinary/median/terminal",
+      "nested_body": "items=[3,1,8]; return(num_abs(median(items)))",
+      "original": {
+        "body": "items = [3,1,8]; return(items.median().abs())",
+        "expected": null,
+        "functions": "",
+        "id": "aggregate7/ordinary/median/terminal"
+      }
+    },
+    {
+      "expected": 7,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "aggregate7/ordinary/range/terminal",
+      "nested_body": "items=[3,1,8]; return(num_abs(range(items)))",
+      "original": {
+        "body": "items = [3,1,8]; return(items.range().abs())",
+        "expected": null,
+        "functions": "",
+        "id": "aggregate7/ordinary/range/terminal"
+      }
+    },
+    {
+      "expected": 1,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "aggregate7/ordinary/min/terminal",
+      "nested_body": "items=[3,1,8]; return(num_abs(min(items)))",
+      "original": {
+        "body": "items = [3,1,8]; return(items.min().abs())",
+        "expected": null,
+        "functions": "",
+        "id": "aggregate7/ordinary/min/terminal"
+      }
+    },
+    {
+      "expected": 8,
+      "fixture": "tests/numeric-codeblocks/cases.json",
+      "id": "aggregate7/ordinary/max/terminal",
+      "nested_body": "items=[3,1,8]; return(num_abs(max(items)))",
+      "original": {
+        "body": "items = [3,1,8]; return(items.max().abs())",
+        "expected": null,
+        "functions": "",
+        "id": "aggregate7/ordinary/max/terminal"
+      }
+    },
+    {
+      "expected": [
+        3,
+        "r"
+      ],
+      "fixture": "tests/numeric-codeblocks/stability.json",
+      "id": "outside/stability/terminal-skips-receiver",
+      "nested_body": "trace=\"\"; read={|| trace=cat(trace,\"r\"); return(3) }; out=num_add(num_gt(read(),1),2); return([out,trace])",
+      "original": {
+        "body": "trace = \"\"; read = {|| trace = cat(trace,\"r\"); return(3) }; out = read().gt(1).add(2); return([out,trace])",
+        "expected": [
+          null,
+          ""
+        ],
+        "id": "outside/stability/terminal-skips-receiver"
+      }
+    },
+    {
+      "expected": 11,
+      "fixture": "tests/numeric-codeblocks/pipelines.json",
+      "id": "ordinary/chain/terminal",
+      "nested_body": "items=[2,10,1]; return(num_abs(sum(take(sorted(items),2))))",
+      "original": {
+        "body": "items = [2,10,1]; return(items.sorted().take(2).sum().abs())",
+        "expected": null,
+        "id": "ordinary/chain/terminal"
+      }
+    },
+    {
+      "expected": [
+        11,
+        "sn"
+      ],
+      "fixture": "tests/numeric-codeblocks/pipelines.json",
+      "id": "ordinary/effect/terminal",
+      "nested_body": "trace=\"\"; source={|| trace=cat(trace,\"s\"); return([2,10,1]) }; limit={|| trace=cat(trace,\"n\"); return(2) }; out=num_abs(sum(take(sorted(source()),limit()))); return([out,trace])",
+      "original": {
+        "body": "trace = \"\"; source = {|| trace = cat(trace,\"s\"); return([2,10,1]) }; limit = {|| trace = cat(trace,\"n\"); return(2) }; out = source().sorted().take(limit()).sum().abs(); return([out,trace])",
+        "expected": [
+          null,
+          ""
+        ],
+        "functions": "",
+        "id": "ordinary/effect/terminal"
+      }
+    },
+    {
+      "expected": 3,
+      "fixture": "tests/numeric-codeblocks/count-first.json",
+      "id": "ordinary/count/receiver/abs",
+      "nested_body": "items=[2,10,1]; return(num_abs(count(items)))",
+      "original": {
+        "body": "items = [2,10,1]; return(items.count().abs());",
+        "expected": null,
+        "id": "ordinary/count/receiver/abs"
+      }
+    },
+    {
+      "expected": 1,
+      "fixture": "tests/numeric-codeblocks/count-first.json",
+      "id": "ordinary/count/receiver/comparison",
+      "nested_body": "items=[2,10,1]; return(num_gt(count(items),0))",
+      "original": {
+        "body": "items = [2,10,1]; return(items.count().gt(0));",
+        "expected": null,
+        "id": "ordinary/count/receiver/comparison"
+      }
+    },
+    {
+      "expected": "2!",
+      "fixture": "tests/numeric-codeblocks/count-first.json",
+      "id": "ordinary/first/receiver/cat",
+      "nested_body": "items=[2,10,1]; return(cat(first(items),\"!\"))",
+      "original": {
+        "body": "items = [2,10,1]; return(items.first().cat(\"!\"));",
+        "expected": null,
+        "id": "ordinary/first/receiver/cat"
+      }
+    },
+    {
+      "expected": [
+        1,
+        10,
+        2
+      ],
+      "fixture": "tests/numeric-codeblocks/count-first.json",
+      "id": "ordinary/first/receiver/array-continuation",
+      "nested_body": "items=[[2,10,1],[]]; return(sorted(first(items)))",
+      "original": {
+        "body": "items = [[2,10,1],[]]; return(items.first().sorted());",
+        "expected": null,
+        "id": "ordinary/first/receiver/array-continuation"
+      }
+    },
+    {
+      "expected": [
+        3,
+        "r"
+      ],
+      "fixture": "tests/numeric-codeblocks/count-first.json",
+      "id": "ordinary/count/effects/receiver/continuation",
+      "nested_body": "seen=\"\"; items=[2,10,1]; tap={|tag,value| seen=cat(seen,tag); return(value) }; return([num_abs(count(tap(\"r\",items))),seen])",
+      "original": {
+        "body": "seen = \"\"; items = [2,10,1]; tap = {|tag,value| seen = cat(seen,tag); return(value) }; return([tap(\"r\",items).count().abs(),seen]);",
+        "expected": [
+          null,
+          ""
+        ],
+        "id": "ordinary/count/effects/receiver/continuation"
+      }
+    },
+    {
+      "expected": [
+        2,
+        "r"
+      ],
+      "fixture": "tests/numeric-codeblocks/count-first.json",
+      "id": "ordinary/first/effects/receiver/continuation",
+      "nested_body": "seen=\"\"; items=[2,10,1]; tap={|tag,value| seen=cat(seen,tag); return(value) }; return([num_abs(first(tap(\"r\",items))),seen])",
+      "original": {
+        "body": "seen = \"\"; items = [2,10,1]; tap = {|tag,value| seen = cat(seen,tag); return(value) }; return([tap(\"r\",items).first().abs(),seen]);",
+        "expected": [
+          null,
+          ""
+        ],
+        "id": "ordinary/first/effects/receiver/continuation"
+      }
+    },
+    {
+      "expected": 3,
+      "fixture": "tests/numeric-codeblocks/registered-pipelines.json",
+      "id": "ordinary/function/terminal",
+      "nested_body": "return(select_items([2,10,1]))",
+      "nested_functions": "fn select_items(items) { return(num_abs(length(sorted(items)))) }\n",
+      "original": {
+        "body": "return(select_items([2,10,1]))",
+        "expected": null,
+        "functions": "fn select_items(items) { return(items.sorted().length().abs()) }\n",
+        "id": "ordinary/function/terminal"
+      }
+    },
+    {
+      "expected": 3,
+      "fixture": "tests/numeric-codeblocks/registered-pipelines.json",
+      "id": "deferred/function/terminal",
+      "nested_body": "cb={|| return(select_items([2,10,1])) }; return(cb())",
+      "nested_functions": "fn select_items(items) { return(num_abs(length(sorted(items)))) }\n",
+      "original": {
+        "body": "cb = {|| return(select_items([2,10,1])) }; return(cb())",
+        "expected": null,
+        "functions": "fn select_items(items) { return(items.sorted().length().abs()) }\n",
+        "id": "deferred/function/terminal"
+      }
+    },
+    {
+      "expected": [
+        2,
+        "sn"
+      ],
+      "fixture": "tests/numeric-codeblocks/registered-pipelines.json",
+      "id": "ordinary/effect/length-terminal",
+      "nested_body": "seen=\"\"; source={|| seen=cat(seen,\"s\"); return([2,10,1]) }; limit={|| seen=cat(seen,\"n\"); return(2) }; out=num_abs(length(take(sorted(source()),limit()))); return([out,seen])",
+      "original": {
+        "body": "seen = \"\"; source = {|| seen = cat(seen,\"s\"); return([2,10,1]) }; limit = {|| seen = cat(seen,\"n\"); return(2) }; out = source().sorted().take(limit()).length().abs(); return([out,seen])",
+        "expected": [
+          null,
+          ""
+        ],
+        "functions": "",
+        "id": "ordinary/effect/length-terminal"
+      }
+    },
+    {
+      "expected": [
+        3,
+        "s"
+      ],
+      "fixture": "tests/numeric-codeblocks/registered-pipelines.json",
+      "id": "ordinary/effect/direct-terminal",
+      "nested_body": "seen=\"\"; source={|| seen=cat(seen,\"s\"); return([2,10,1]) }; limit={|| seen=cat(seen,\"n\"); return(2) }; out=num_abs(length(source())); return([out,seen])",
+      "original": {
+        "body": "seen = \"\"; source = {|| seen = cat(seen,\"s\"); return([2,10,1]) }; limit = {|| seen = cat(seen,\"n\"); return(2) }; out = source().length().abs(); return([out,seen])",
+        "expected": [
+          null,
+          ""
+        ],
+        "functions": "",
+        "id": "ordinary/effect/direct-terminal"
+      }
+    }
+  ],
+  "limits": "Only these twenty current ordinary-result expectations; deferred receiver boundaries and every other case/source stay unchanged. Existing sorted is lexicographic, so sorted([2,10,1]) begins[1,10], whose sum is11.",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.16"
+}

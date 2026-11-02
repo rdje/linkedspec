@@ -13,11 +13,11 @@ answers:
   - what implements README route closure
   - "does the Knowledge directory README count toward its file limit"
   - "does Knowledge Map generation use stderr on success"
-date: 2026-10-27
-status: original revision closed; October27 baseline pressure repair owned before admission
+date: 2026-11-01
+status: original revision historical; current archive/reference contract adopted under ADR0139
 tags: [readme, documentation, routing, pressure, lifecycle, doctrine, containment, debt]
 evidence: "README-STABILITY-POLICY.4.0 reads the supplied 185-line policy revision and freezes 62 routes over 20 surfaces plus 32 mutation classes. Implementation .4.1 adds the 83-line strict JSONL registry and a core-Perl resulting-tree checker; focused report passes 44 reader + 18 author routes, all 20 measured/classified surfaces, and 32/32 mutations. README remains 105 lines and shrinks 5,072->5,057 bytes after removing only stale test_input/. Clean 7c2ff407 debt baselines remain immutable; finite README .4 or LIVE-DOCUMENT-PRESSURE-CONTAINMENT owners alone may grow them. Implementation signoff exits 0 through CLI 66x2 and Phase 0 1,031/1,031 in 694 seconds. Unchanged .4.2 proves seven owner hashes from clean 5c570719 and independently passes CLI 66x2 plus Phase 0 1,031/1,031 in 673 seconds, closing .4."
-last_verified: 2026-08-09
+last_verified: 2026-11-01
 reverify:
   - "wc -l -c README.md README_POLICY.md LIVE_ACHIEVEMENT_STATUS.md CHANGES.md DEVELOPMENT_NOTES.md docs/tasks/FUTURE-PARITY-BACKLOG.md"
   - "rg --files docs/tasks -g '*.md' | sort | xargs wc -lc"
@@ -26,7 +26,21 @@ reverify:
   - "bash knowledge-map/scripts/gen_knowledge_map.sh"
 ---
 
-# README routing-pressure closure plan
+# Current routing-pressure contract
+
+Accepted ADR `0139` implements the director-approved archive/reference choice. The two author histories are
+exact query archives with bounded hot roots, immutable segments and paged catalogs. Decisions, Knowledge cards
+(including their README) and public references retain canonical browsing and original per-file limits;
+a bounded paged ledger admits every member/content hash under its selected unique task owner. There is no
+lifetime Knowledge file-count allowance to refresh. Current task collection and generated-map ceilings remain.
+`bash scripts/check_readme_stability.sh` and `bash tools/run_python_project_data.sh tools/check_reference_scope.py`
+verify the current contract. TYPE20.1.10 owns normal-hook/canonical acceptance;20.2 owns subsequent task-budget
+headroom. [[normal-hook-archive-reference-contracts]] is the current mechanism pointer.
+
+# Historical README routing-pressure closure plan
+
+The original implementation and October27 failing baseline below are dated provenance, not the current
+archive/reference lifecycle or an outstanding director decision.
 
 A bounded landing page is not sufficient when its routing advice can grow an unchecked neighboring document.
 LinkedSpec's revision classifies direct reader navigation separately from author-overflow guidance, declares every

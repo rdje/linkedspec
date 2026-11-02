@@ -9,10 +9,11 @@ use JSON::PP ();
 
 my $ROOT = "$RealBin/..";
 my %INDEX = (
+    'TYPE-REFERENCE-BOOK' => 'docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl',
     'FUTURE-PARITY-BACKLOG' => 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl',
     'SESSION-STARTUP-READING' => 'docs/tasks/SESSION-STARTUP-READING.index.jsonl',
 );
-my %RECORD_COUNT = ('FUTURE-PARITY-BACKLOG' => 10, 'SESSION-STARTUP-READING' => 5);
+my %RECORD_COUNT = ('TYPE-REFERENCE-BOOK' => 5, 'FUTURE-PARITY-BACKLOG' => 10, 'SESSION-STARTUP-READING' => 5);
 my ($tree, $id);
 GetOptions('tree=s' => \$tree, 'id=s' => \$id) or die usage();
 die usage() if !defined($tree) || !exists($INDEX{$tree}) || !defined($id);
@@ -47,6 +48,14 @@ sub owns_id {
     my @numbers = map { 0 + $_ } split /\./, $suffix;
     my $top = $numbers[0];
     my $partition = $record->{partition_id} // '';
+    if ($tree eq 'TYPE-REFERENCE-BOOK') {
+        my ($family) = $id =~ /^TYPE-REFERENCE-BOOK\.1\.2\.23\.3\.([0-9]+)(?:\.|$)/;
+        return !defined($family) if $partition eq 'overview';
+        return defined($family) && $family < 40 if $partition eq 'helpers-01-39';
+        return defined($family) && $family >= 40 && $family < 60 if $partition eq 'helpers-40-59';
+        return defined($family) && $family >= 60 if $partition eq 'helpers-60plus';
+        return 0;
+    }
     if ($tree eq 'SESSION-STARTUP-READING') {
         return $top >= 1 && $top <= 3 if $partition eq '01-03';
         return $top >= 4 && $top <= 49 if $partition eq '04-49';

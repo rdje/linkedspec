@@ -71,6 +71,7 @@ for my $index (0, 1) {
    "$surface/$group complete ordered member population");
   for my $row (0 .. $#{$native->{$group}}) {
    my $expected = $json->decode($json->encode($native->{$group}[$row]));
+   current_scope_reads($expected);
    if ($group eq 'authority') {
     $expected->{eligible} = [0] if $expected->{id} =~ /known-0$/;
     $expected->{parent_packet} = 0;
@@ -105,6 +106,7 @@ is_deeply([map {$_->{id}} @{$actual_authority->{rows}}], [map {$_->{id}} @{$auth
  'supplemental authority complete ordered member population');
 for my $index (0 .. $#{$authority->{rows}}) {
  my $expected = $json->decode($json->encode($authority->{rows}[$index]));
+ current_scope_reads($expected);
  my $known_code = $expected->{id} =~ m{/code/known-1$} ? 1 : 0;
  $expected->{eligible} = [$known_code] if @{$expected->{eligible}};
  $expected->{parent_packet} = 0;
@@ -123,3 +125,11 @@ is_deeply([grep {$_->{role} eq 'kind'} @{$branches{'outer/function-present'}{tra
 is(scalar(grep {$_->{role} eq 'kind'} @{$branches{'inner/function-present'}{trace}}), 1,
  'inner assignment keeps its independent kind decision');
 done_testing;
+
+sub current_scope_reads {
+ my ($row) = @_;
+ return unless $row->{id} =~ m{^outer/} && @{$row->{fetches} || []};
+ my @positions = grep {$row->{fetches}[$_] eq '__user_function_scalar_value_names'} 0 .. $#{$row->{fetches}};
+ die 'duplicate original function-name lookup' if @positions > 1;
+ splice @{$row->{fetches}}, $positions[0], 0, '__user_function_call_stack' if @positions;
+}

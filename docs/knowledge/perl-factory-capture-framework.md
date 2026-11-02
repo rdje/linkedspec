@@ -36,6 +36,12 @@ evidence: "Leaf .6 preserves whole603/full115985 at64b66167c, original native96 
 reverify: "Readonly: bash tools/run_python_project_data.sh docs/checkpoints/type-evaluated-values/publish.py. Prior:1a8b20201."
 ---
 
+Current recurring-consumer scope:20.1.18 reconciles typed condition dispatch,
+dynamic scalar adapter refusal, active callback paths, exact function-scope
+reads and emitted key order. Its nine-fixture proof is separate from the dated
+native preservation epochs below; originals are unchanged. See
+[[perl-receiver-copy-canonical-selection]] for the current boundaries and evidence.
+
 Actual callbacks, inputs and publications have separate private authority.
 `_register_emission_producer` retains an actual CODE reference only in the current
 SourceOrigins token and producer registry, and returns that same reference.

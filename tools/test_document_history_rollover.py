@@ -90,7 +90,10 @@ def main():
         ["git", "show", producer_revision + ":tools/roll_document_history.pl"], cwd=ROOT
     )
     tool = original_tool if args.original else (ROOT / "tools/roll_document_history.pl").read_bytes()
-    reader = source("tools/read_document_history.pl")
+    reader = (source("tools/read_document_history.pl") if args.original
+              else (ROOT / "tools/read_document_history.pl").read_bytes())
+    catalog_helper = (None if args.original else
+                      (ROOT / "tools/lib/LinkedSpec/DocumentHistoryCatalog.pm").read_bytes())
     scratch = ROOT / ".linkedspec-data/scratch/history-rollover-eof"
     scratch.mkdir(parents=True, exist_ok=True)
     run_tree = Path(tempfile.mkdtemp(prefix="original-" if args.original else "repaired-", dir=scratch))
@@ -182,12 +185,16 @@ os.execv(os.environ['LINKEDSPEC_HISTORY_FIXTURE_GIT'], ['git', *args])
         candidate = preamble + fresh + b"".join(records)
         assert 58_983 <= len(candidate) and len(preamble + fresh) <= 32_768
 
-        def view(name, root=candidate, manifest=old_manifest):
+        def view(name, root=candidate, manifest=old_manifest, catalogs=None):
             tree = run_tree / (surface + "-" + name)
             write(tree, current, root)
             write(tree, manifest_path, manifest)
             write(tree, "tools/roll_document_history.pl", tool)
             write(tree, "tools/read_document_history.pl", reader)
+            if catalog_helper is not None:
+                write(tree, "tools/lib/LinkedSpec/DocumentHistoryCatalog.pm", catalog_helper)
+            for path, raw in (catalogs or {}).items():
+                write(tree, path, raw)
             for path, raw in archives.items():
                 write(tree, path, raw)
             return tree
@@ -203,7 +210,15 @@ os.execv(os.environ['LINKEDSPEC_HISTORY_FIXTURE_GIT'], ['git', *args])
         assert applied.returncode == 0 and applied.stderr == b"", "successful actual initial rollover"
         final_root = (tree / current).read_bytes()
         manifest = (tree / manifest_path).read_bytes()
-        lines = manifest.splitlines(keepends=True)
+        catalogs = {p.relative_to(tree).as_posix(): p.read_bytes()
+                    for p in (tree / f"docs/history/{family}/catalog").glob("*.jsonl")}
+        if args.original:
+            lines = manifest.splitlines(keepends=True)
+        else:
+            expanded = run(tree, ["perl", "tools/read_document_history.pl", "--surface", surface,
+                                  "--catalog-json"])
+            assert expanded.returncode == 0, expanded.stderr
+            lines = [canonical(value) for value in json.loads(expanded.stdout)]
         row = json.loads(lines[1])
         target = row["target_path"]
         part = (tree / target).read_bytes()
@@ -250,7 +265,8 @@ os.execv(os.environ['LINKEDSPEC_HISTORY_FIXTURE_GIT'], ['git', *args])
             "below-pressure apply changes no file"))
 
         for state in ("orphan", "pending"):
-            recovered_tree = view(state, manifest=manifest if state == "pending" else old_manifest)
+            recovered_tree = view(state, manifest=manifest if state == "pending" else old_manifest,
+                                  catalogs=catalogs if state == "pending" else None)
             write(recovered_tree, target, part)
             recovered = run(recovered_tree, apply)
             check(surface + ": " + state + " recovery", lambda: require(
@@ -263,7 +279,8 @@ os.execv(os.environ['LINKEDSPEC_HISTORY_FIXTURE_GIT'], ['git', *args])
                 if state == "orphan" and corruption == "missing":
                     continue  # An absent orphan is the normal fresh-publication case.
                 bad_tree = view(state + "-" + corruption,
-                                manifest=manifest if state == "pending" else old_manifest)
+                                manifest=manifest if state == "pending" else old_manifest,
+                                catalogs=catalogs if state == "pending" else None)
                 if corruption == "corrupt":
                     write(bad_tree, target, part + b"changed\n")
                 elif corruption == "symbolic":
@@ -340,6 +357,8 @@ os.execv(os.environ['LINKEDSPEC_HISTORY_FIXTURE_GIT'], ['git', *args])
         "complete": True, "revision": revision, "producer_revision": producer_revision,
         "original": args.original, "git_shim": envelope(shim.read_bytes()),
         "producer": envelope(tool), "instrument_sha256": sha(Path(__file__).read_bytes()),
+        "reader": envelope(reader),
+        "catalog_helper": None if catalog_helper is None else envelope(catalog_helper),
         "source_inputs": [{"path": path, **envelope(raw)}
                           for path, raw in sorted(inputs.items())],
         "results": results, "commands": commands, "observations": observations,

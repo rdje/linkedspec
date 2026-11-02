@@ -18,7 +18,7 @@ answers:
   - how many Python checker entrypoints exist
   - where do TAP and oracle capture artifacts go
   - what old tool data was deleted from private tmp
-date: 2026-10-24
+date: 2026-11-02
 status: current
 tags: [storage, ssd, python, bytecode, knowledge-map, mdbook, tap, oracle, temporary-data, portability]
 evidence: "PROJECT-DATA-SSD-ROOTING.2.6 adds tools/run_python_project_data.sh and tools/test_tool_project_data_storage.sh; exports retained PYTHONPYCACHEPREFIX from tools/project_data_env.sh; gives both Unicode generators explicit validated scratch; configures generic KM_OUTPUT_VALIDATOR in .knowledge_map.conf; validates Knowledge Map output before/after generation and mdBook output before/after build; routes canonical/current checker commands; and deletes the exact unreferenced 88-line /private/tmp/linkedspec-julia-reverify-cards.txt after classification. MDBOOK-DESTINATION-ROOT-ALIGNMENT.1 runs mdBook from BOOK_ROOT as build ., and its argument-aware fake proves split, equals, compact, environment, and absolute destinations plus pre-launch hostile/symlink rejection. Real default and relative builds each produce 79 files / 14,120 KiB on the repository volume."
@@ -51,8 +51,16 @@ the book root, rejects another-filesystem or symlink output before launch, then 
 same root and verifies created output. Relative split, equals, and compact CLI forms therefore execute the exact
 path that validation approved, independently of the caller's current working directory.
 
-`tools/test_tool_project_data_storage.sh` freezes the actual Python temporary-owner, shell allocator and
-Python-entrypoint inventories. It proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
+`tools/test_tool_project_data_storage.sh` compares the actual Python temporary-owner, shell allocator and
+Python-entrypoint inventories with the reviewed manifests under `doctrine/project_data_storage/`, through
+`tools/check_project_storage_inventory.pl`. November2 component20.1.19 replaces count-only entrypoint checks
+and stale allocator lists with exact membership: ten Python import owners,47 Python entrypoints and16 shell
+allocator files. Python scope includes `import tempfile` and `from tempfile import`, including `mkdtemp` users;
+it is an import census of tracked top-level tools, not a transitive allocator analysis. Earlier dated numbers
+above retain their historical boundaries. Missing, unexpected and same-count replacement files reject;
+duplicate, truncated and empty NUL records and nonzero Git producers reject too. Frozen count-only logic
+accepts an observed same-count substitution that the exact validator rejects.
+The checker proves real bytecode, map, HTML, CLI workspace, TAP, and oracle capture paths
 use the repository device and hostile external destinations remain absent. Its deliberate cross-volume reads are
 limited to device and exact-path absence checks required for that rejection proof.
 

@@ -18,11 +18,12 @@ answers:
   - does Dart runtime support push_back statement only
   - does Dart runtime support split_tagged_records
   - does Dart runtime read bare array working variables in receiver chains
-date: 2026-10-27
+date: 2026-11-02
 status: scalar/default/index/predicate guards; ordering/slice/admission open
 tags: [dart, runtime, helpers, array, receiver-chains, DART-BACKEND-PARITY]
 evidence: "TYPE22.3 repairs tagged-record String-input/Array-output guards, receiver regex/minimum shape with native/restored/plan checks. Array4.3.3/end12.1.4/transform5.3.2; selected/copy/count/aggregate/join23.3 focused fixtures."
 reverify:
+  - "bash tools/run_python_project_data.sh tools/check_uniform_binding_mutation_result_surface.py"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/emptiness_result_receivers_test.dart test/has_key_result_receivers_test.dart test/tagged_record_receivers_test.dart"
   - "cd dart && bash ../tools/run_dart_project_data.sh test test/value_copy_test.dart test/receiver_copy_arity_test.dart test/logical_receiver_methods_test.dart test/selected_value_receivers_test.dart"
 ---
@@ -55,6 +56,7 @@ Regex delimiters and regex filters use Dart `RegExp` over the stored regex
 literal pattern. Adjacent delimiters preserve empty fields; `filter_nonempty`
 remains the explicit cleanup step.
 
+Uniform binding supersedes the earlier statement-only array end-mutation result boundary.
 `items.push_back(value)`, `items.push_front(value)`, `items.pop_back()`, and `items.pop_front()` mutate named
 working arrays and return independent updated array snapshots. Pop discards the removed element. A compatible
 continuation such as `.count()` consumes the updated array; an unused result is silently dropped.

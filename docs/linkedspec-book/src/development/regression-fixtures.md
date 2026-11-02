@@ -73,3 +73,30 @@ identity. This preserves the rejected experiment and its historical description.
 An edited artifact, copied source or added selector remains a positive candidate;
 the existing untracked-discovery and concurrent-scan checks still run. This
 classification grants no authoring compatibility or executable admission.
+
+## Behavior checks across lowering changes
+
+Compiler output can add materialized receiver values or endpoint guards without
+changing the language contract. Keep source checks for public structure and
+readiness, and execute the emitted expression when checking its result:
+
+- `capture_from(name)` reads the rule-local mark; an absent or reversed local
+  endpoint returns no value, while a valid empty span remains an empty string.
+- `capture_slice_len()` distinguishes an unavailable boundary from a valid zero.
+- `3.5.floor().add(0.75)` returns `3.75`. This fractional addition distinguishes
+  floor-before-add from a reversed chain, which would return `4`.
+- `(items += value).count()` appends once, returns the new count, and leaves an
+  earlier aggregate snapshot unchanged. A block receiver's effects also run once.
+
+The six Phase0 calibrations owned by `TYPE-REFERENCE-BOOK.1.2.20.1.21` retain every
+other assertion, all top-level test identities and the descriptor readiness
+checks. Their retained probes compare native execution with freshly emitted
+programs and show the new assertions rejecting lost guards, wrong values,
+reversed numeric order and a count result that skips the mutation.
+
+Historical evidence keeps the committed activation fixture separately. A pinned
+table restores exactly those six assertion edits before the original committed
+image and predecessor checks. It reports the actual current fixture hash as a
+separate source stage; it does not refresh old hashes or claim a new runtime
+admission from historical results. Complete canonical CI and normal commit hooks
+remain the landing requirements.

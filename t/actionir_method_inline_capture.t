@@ -110,31 +110,33 @@ if (@ARGV && $ARGV[0] eq 'observe') {
 for my $row (@{observations()}) {
  my $label = join '/', @{$row}{qw(owner key outcome)};
  my $is_if = $row->{owner} eq '_lower_inline_if_value_expr';
+ my $unused_flow = $row->{key} eq 'lower_flow_composite_expr';
  is_deeply($row->{map_identity}, [(1) x ($is_if ? 3 : 2)], "$label actual public callback references stay exact");
- is_deeply($row->{input}{args}, $is_if ? ['COND!','THEN','elseif','else']
+ is_deeply($row->{input}{args}, $is_if ? ['COND','THEN','elseif','else']
   : ['SUBJECT','case!', $row->{outcome} eq 'string' ? 'default!' : 'default'],
   "$label native copied and shared caller scalar arguments stay exact");
  ok(@{$row->{trace}} && !grep({$_->{context} ne 'scalar'} @{$row->{trace}}), "$label actual required calls retain scalar context");
  is($row->{trace}[0]{error}, 'incoming inline error', "$label native incoming error survives");
- is($row->{calls}{$row->{key}}, $row->{outcome} eq 'string' ? 2 : 1,
-  "$label target callback keeps native invocation count");
- if ($row->{outcome} eq 'fatal') {
+ is($row->{calls}{$row->{key}} // 0, $unused_flow ? 0 : $row->{outcome} eq 'string' ? 2 : 1,
+  "$label current target invocation count is explicit");
+ if ($row->{outcome} eq 'fatal' && !$unused_flow) {
   is_deeply($row->{error}, {type => 'MethodInlineFatal', same_fatal => 1}, "$label fatal object retains actual identity");
  } else {
   ok(defined($row->{success_error}) && $row->{success_error} =~ /^successful /, "$label native successful error effect survives");
  }
- is($row->{value}, $row->{outcome} eq 'string' ? expected($row->{owner}) : undef,
-  "$label actual caller ordinary result stays native");
+ is($row->{value}, $unused_flow || $row->{outcome} eq 'string' ? expected($row->{owner}) : undef,
+  "$label current caller result survives without invoking the former flow role");
  if ($row->{key} eq 'normalize_method_args_with_optional_scope') {
   my @traces = grep {$_->{key} eq $row->{key}} @{$row->{trace}};
   is_deeply([map {$_->{actual_args}} @traces], [(1) x @traces], "$label normalizer receives actual parser-returned arrays");
-  my $first = $is_if ? [$row->{outcome} eq 'string' ? 'COND2!' : 'COND2','THEN2','effect'] : ['CASE','CASE_BODY','effect'];
+  my $first = $is_if ? ['COND2','THEN2','effect'] : ['CASE','CASE_BODY','effect'];
   is_deeply($row->{branch_args}, [$first, $row->{outcome} eq 'string' ? ['FALLBACK','effect'] : ['FALLBACK']],
    "$label normalizer mutates actual shared branch arrays");
  }
 }
 for my $role (@roles) {
  my ($name, $key, $keys) = @$role;
+ my $unused_flow = $key eq 'lower_flow_composite_expr';
  for my $known (0, 1) {
   scope(sub {
    my $event = event();
@@ -145,8 +147,8 @@ for my $role (@roles) {
     is($result->{value}, expected($name), "$name/$key/$known actual ordinary value survives");
     ok(!LinkedSpec::ActionIR::SourceEmissions::_emission_for($result, $outer, $event),
      "$name/$key/$known required dependency cannot donate nested publication");
-    is_deeply($state->{eligible}, [($known) x 2], "$name/$key/$known actual callback has its own identity boundary");
-    is($state->{calls}{$key}, 2, "$name/$key/$known actual native effect count survives");
+    is_deeply($state->{eligible}, $unused_flow ? [] : [($known) x 2], "$name/$key/$known current invocation authority stays exact");
+    is($state->{calls}{$key} // 0, $unused_flow ? 0 : 2, "$name/$key/$known current effect count survives");
     is_deeply([map {refaddr($deps->{$_})} @$keys], [map {refaddr($actual->{$_})} @$keys],
      "$name/$key/$known original public map keeps all actual callbacks");
    });
@@ -154,9 +156,14 @@ for my $role (@roles) {
  }
  for my $bad (undef, 'not code') {
   my ($deps, $actual, $state) = setup($role, 'string'); $deps->{$key} = $bad;
-  my $error; eval { owner($name, $state->{input}, $deps); 1 } or $error = $@;
-  like($error, qr/^\(LinkedSpec::ActionIR::MethodLowering::_require_dep\) -E- missing dependency callback '\Q$key\E'/,
-   "$name/$key required dependency diagnostic remains exact");
+  my ($error, $value); eval { $value = owner($name, $state->{input}, $deps); 1 } or $error = $@;
+  if ($unused_flow) {
+   is($error, undef, "$name no longer validates the former flow dependency");
+   is($value, expected($name), "$name uses typed condition/payload lowering without the former flow dependency");
+  } else {
+   like($error, qr/^\(LinkedSpec::ActionIR::MethodLowering::_require_dep\) -E- missing dependency callback '\Q$key\E'/,
+    "$name/$key required dependency diagnostic remains exact");
+  }
  }
 }
 done_testing;

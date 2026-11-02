@@ -6178,9 +6178,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !_ordinary_free_count_result_source($receiver);
   $emitted_result_chain ||= $ordinary_count_result_chain;
   if ($logical_receiver || $emitted_result_chain) {
+   # The compatibility callable-result path was already lowered above.
+   # Re-reading its raw AST source would emit invalid Perl such as pick()[0].
    my $current_expr = $logical_receiver
     ? $lower_ast_logical_call_node->($receiver)
-    : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 });
+    : (($receiver->{kind} // '') eq 'raw_perl' && $ordinary_count_result_chain
+      ? $receiver_expr
+      : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 }));
    return undef unless defined($current_expr) && length($current_expr);
    # Keep an already lowered Hash literal inside the emitted-host bridge.
    # Its fat arrows are host syntax, not retired authored Hash syntax.

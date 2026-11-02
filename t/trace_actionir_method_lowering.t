@@ -106,10 +106,10 @@ subtest 'MethodLowering traces receiver-chain family transitions' => sub {
   q{name.trim().split(",").count()},
  );
 
- is($string_chain, q{count(split(trim(name), ","))}, 'string receiver chain normalization uses bare reads');
+ is($string_chain, undef, 'text-only string normalization defers a dynamic scalar continuation to typed AST lowering');
  like($string_trace, qr/DECISION actionir:method_lowering:normalize_string_receiver_value_chain_expr:receiver_chain:string_receiver_chain => TAKEN/, 'trace reports string receiver chain');
  like($string_trace, qr/DECISION actionir:method_lowering:normalize_string_receiver_value_chain_expr:receiver_chain:string_chain_step => TAKEN/, 'trace reports string chain step');
- is($number_chain, q{num_gt(num_add(count, 1), 5)}, 'number receiver chain normalization uses bare reads');
+ is($number_chain, undef, 'text-only number normalization defers a dynamic scalar continuation to typed AST lowering');
  like($number_trace, qr/DECISION actionir:method_lowering:normalize_number_receiver_value_chain_expr:receiver_chain:number_receiver_chain => TAKEN/, 'trace reports number receiver chain');
  like($number_trace, qr/DECISION actionir:method_lowering:normalize_number_receiver_value_chain_expr:receiver_chain:number_chain_step => TAKEN/, 'trace reports number chain step');
  is($hash_chain, q{join_values(",", sorted_keys(meta))}, 'hash receiver chain normalization keeps the bare typed binding');
@@ -118,8 +118,15 @@ subtest 'MethodLowering traces receiver-chain family transitions' => sub {
  is($array_chain, q{join_values(",", sorted(items))}, 'array receiver chain normalization is unchanged');
  like($array_trace, qr/DECISION actionir:method_lowering:normalize_array_receiver_value_chain_expr:receiver_chain:array_receiver_chain => TAKEN/, 'trace reports array receiver chain');
  like($array_trace, qr/DECISION actionir:method_lowering:normalize_array_receiver_value_chain_expr:receiver_chain:array_chain_step => TAKEN/, 'trace reports array chain step');
- like($fluent, qr/\Ado \{ my \$__ls_count = do \{ my \$__ls_split_value = do \{ my \$__ls_trim = \$name;/, 'AST fluent receiver chain lowering is unchanged');
- like($fluent_trace, qr/DECISION actionir:method_lowering:lower_ast_fluent_chain_node:fluent_chain:ast_string_receiver_chain => TAKEN/, 'trace reports AST string receiver-chain lowering');
+ my $name = ' a,b ';
+ my $execute = eval 'sub { return ' . $fluent . ' }';
+ my $error = "$@";
+ my $value = $execute ? eval {$execute->()} : undef;
+ $error ||= "$@";
+ is_deeply({value => $value, error => $error}, {value => 2, error => ''},
+  'AST fluent receiver chain executes the current guarded result');
+ is_deeply({map {$_ => $fluent_trace =~ /helper_family_\Q$_\E => TAKEN/ ? 1 : 0} qw(string array)},
+  {string => 1, array => 1}, 'trace reports the String and Array helper families used by guarded Count');
  like($fluent_trace, qr/DECISION actionir:method_lowering:lower_method_value_expr:expr:ast_value_lowered => TAKEN/, 'trace reports lowered AST fluent-chain value');
 };
 

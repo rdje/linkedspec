@@ -8,7 +8,8 @@ answers:
   - "can deferred push mutate an active map leaves receiver through an alias"
   - "does a failed Perl codeblock restore caller parameter reference identity"
   - "which repair remains after the Perl composed push fix"
-date: 2026-10-02
+  - "why do copied callbacks in the deferred push fixture close cb to cb"
+date: 2026-11-02
 status: current bounded implementation; full normalization and runtime admission pending
 tags: [perl, codeblock, mutation, caller-identity, language-readiness]
 evidence: "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1 owns CodeblockRuntime/MethodLowering, seventeen native/fresh emitted cases,147 top-level tests with23 nested actual-reference assertions, recurring CI and owner-bound historical audit evolution. Exact canonical result belongs to its commit/receipt."
@@ -57,3 +58,17 @@ zero raw/fallback/unresolved counts, no result and no diagnostic events. Registe
 function child `.1.3.3.0.2` remains next. Startup19 assignment guards,32 caller-function
 shadowing,35 boolean literals and87.2/.3 matches/numeric dispatch retain their owners.
 No complete neutral execution, other backend parity, new primitive or admission follows.
+
+## Current recursion-label calibration
+
+Canonical restoration20.1.15 reaches four older bridge expectations that predate
+TYPE31.6.4.2's origin-matched label repair. Passing `cb` as `callback`, copying it
+to `fresh`, transporting it through an Array, or copying it through a compiled
+function retains the active callable origin. All four actual native and emitted
+errors therefore close `cb` to `cb`, preserving the complete typed diagnostic.
+The old expectations closed with the incoming alias spelling. Correct those four
+expectations; do not change runtime identity or weaken the error comparison.
+The independent callback-identity fixture checks direct/mutual order, copied
+origin equality and successful execution of an equal independent literal while
+the original is active. The current push605 and identity8 checks pass together.
+Original October counts and behavior above remain dated milestone observations.

@@ -631,6 +631,9 @@ primary adapter. See [[inter-match-gap-lua-implementation-plan]].
   unstaged/untracked inputs, then run `bash tools/run_ci_local.sh`. The gate self-roots, initializes repository-
   filesystem project data, and writes the receipt only after every check passes. Ordinary focused commits do not
   run this complete gate; `.githooks/pre-push` requires or runs it for exact clean `HEAD`.
+  On macOS, launch canonical CI in approved host execution from the start; see
+  `docs/knowledge/project-data-process-locality-proof.md`. Its early read-only sandbox initialization preflight
+  rejects restricted harnesses before doctrines; keep the later containment profile and every denial intact.
 
 ### 4.4.1 `tools/project_data_env.sh` — repo-filesystem project state
 

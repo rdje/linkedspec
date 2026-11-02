@@ -150,6 +150,7 @@ def main():
            "symlink destination rejected")
 
     original_reader = audit.read_relative
+    observed_inputs = {}
 
     def reader(name):
         if name in recovered:
@@ -159,7 +160,12 @@ def main():
             except FileNotFoundError:
                 raise ValueError("restored log unavailable: " + name) from None
         recovery.require(not name.startswith(".linkedspec-data/"), "unowned local input rejected")
-        return original_reader(name)
+        data = original_reader(name)
+        fingerprint = recovery.digest(data)
+        recovery.require(name not in observed_inputs or observed_inputs[name] == fingerprint,
+                         "artifact input changed during proof: " + name)
+        observed_inputs[name] = fingerprint
+        return data
 
     audit.read_relative = reader
     original_paths = {(ROOT / name).resolve() for name in recovered}
@@ -201,13 +207,17 @@ def main():
                    "docs/language-readiness/objective-reconciliation.md",
                    audit.EVALUATED_VALUES_TABLE, audit.SCALAR_NUMERIC_TABLE, audit.DROP_GENERATED_TABLE,
                    audit.COUNT_FIRST_TABLE))
+    inputs.update(audit.IMAGE_EVOLUTION_INPUTS)
+    inputs.update(audit.RUST_NUMERIC_SUPPORT)
+    inputs.update(observed_inputs)
+    inputs.update(("tools/project_data_env.sh", "tools/project_data_run.sh", "tools/run_python_project_data.sh"))
     retained_inputs = {name: recovery.digest(recovery.read_input(name)) for name in sorted(inputs)}
     print(json.dumps({"version": 1, "owner": recovery.OWNER, "restored_inputs": len(recovered),
         "restored_bytes": sum(map(len, recovered.values())), "restored_hashes": restored_hashes,
         "archive": manifest["archive"], "controls": controls, "audit_controls": audit_controls,
         "isolated_deterministic_capture": True,
         "healthy_audit_guard": healthy_guard, "audit_report": report,
-        "tracked_inputs": retained_inputs,
+        "tracked_inputs": retained_inputs, "observed_artifact_inputs": observed_inputs,
         "limits": "Exact selected artifact recovery and historical evidence integrity; runtime executions remain their dated per-leaf proof. No bridge/dispatcher, complete D/P, other backend or format admission."},
         indent=2, sort_keys=True))
 

@@ -339,6 +339,7 @@ sub compatible_control {
         append_only       => { debt_bounded => 1 },
         rolling_history   => { debt_bounded => 1 },
         bounded_reference => { bounded_collection => 1 },
+        maintained_reference => { scoped_reference => 1 },
         query_archive     => { query_terminal => 1 },
         external          => { external_contract => 1 },
         repository_paths  => { path_existence => 1 },
@@ -358,13 +359,18 @@ sub validate_surface_contracts {
         my %verifier = map { $_ => 1 } qw(
             internal:executable internal:exists internal:indexed internal:landing internal:measure
             internal:overwrite internal:policy internal:query_first task_tree_metadata knowledge_map
-            document_history external:https git:log
+            document_history maintained_scope external:https git:log
         );
         push @contract_errors, "surface $id has an undeclared verifier: $surface->{verifier}"
             if !$verifier{$surface->{verifier}};
         if ($surface->{control} eq 'generated_projection') {
             push @contract_errors, "generated surface $id requires an executable freshness verifier"
                 if $surface->{verifier} !~ /\A(?:task_tree_metadata|knowledge_map)\z/;
+        }
+        if ($surface->{control} eq 'scoped_reference') {
+            push @contract_errors, "maintained surface $id requires maintained_scope and exact per-file limits"
+                if $surface->{verifier} ne 'maintained_scope'
+                || join(',', sort keys %{$surface->{limits}}) ne 'max_bytes_per_file,max_lines_per_file';
         }
         if ($surface->{state} eq 'debt') {
             push @contract_errors, "debt surface $id requires baseline and transition owner/deltas"
@@ -690,15 +696,18 @@ sub validate_debt {
     return @debt_errors;
 }
 
+my %verified_fixed;
 sub run_fixed_verifier {
     my ($surface) = @_;
     my %commands = (
         task_tree_metadata => ['bash', 'scripts/check_task_tree_metadata.sh'],
         knowledge_map      => ['bash', 'knowledge-map/scripts/check_knowledge_map.sh'],
         document_history   => ['bash', 'scripts/check_document_history.sh'],
+        maintained_scope   => ['bash', 'tools/run_python_project_data.sh', 'tools/check_reference_scope.py'],
     );
     return 1 if $surface->{verifier} =~ /\Ainternal:/;
     return 1 if $surface->{verifier} =~ /\A(?:external|git):/;
+    return 1 if $verified_fixed{$surface->{verifier}};
     my $command = $commands{$surface->{verifier}} or return 0;
     my $err = gensym;
     my $pid = open3(undef, my $out, $err, @$command);
@@ -710,6 +719,7 @@ sub run_fixed_verifier {
         problem("surface $surface->{id} freshness verifier failed ($surface->{verifier}): $stdout$stderr");
         return 0;
     }
+    $verified_fixed{$surface->{verifier}} = 1;
     return 1;
 }
 

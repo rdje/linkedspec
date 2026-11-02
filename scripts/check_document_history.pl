@@ -6,6 +6,8 @@ use Digest::SHA qw(sha256_hex);
 use FindBin qw($RealBin);
 use Getopt::Long qw(GetOptions);
 use JSON::PP ();
+use lib "$RealBin/../tools/lib";
+use LinkedSpec::DocumentHistoryCatalog qw(read_catalog check_catalog_store);
 
 my $ROOT = "$RealBin/..";
 my $AUTHORITY = 'docs/decisions/0066-bounded-live-document-store.md';
@@ -58,6 +60,28 @@ for my $surface (sort keys %CONFIG) {
     my ($records, $lines) = decode_manifest($config->{manifest}, \@errors);
     next if !@$records;
     my $metadata = shift @$records;
+    eval { check_catalog_store($config->{manifest}, $records); 1 }
+        or push @errors, "$surface catalog store: $@";
+    if ($HEAD_PATH{$config->{manifest}}) {
+        my ($old_meta, $old_records);
+        my $ok = eval {
+            ($old_meta, $old_records) = read_catalog($config->{manifest}, sub {
+                my ($path) = @_;
+                my $raw = git_optional('show', "HEAD:$path");
+                die "historical catalog is missing: $path\n" unless defined $raw;
+                return $raw;
+            });
+            1;
+        };
+        if (!$ok) { push @errors, "$surface HEAD catalog: $@" }
+        else {
+            my %current = map { $_->{segment_id} => $JSON->encode($_) } @$records;
+            for my $old (@$old_records) {
+                push @errors, "$surface removed or rewrote retained segment $old->{segment_id}"
+                    if !exists($current{$old->{segment_id}}) || $current{$old->{segment_id}} ne $JSON->encode($old);
+            }
+        }
+    }
     push @errors, "$surface metadata keys are not exact"
         if !exact_keys($metadata, \@METADATA_KEYS);
     push @errors, "$surface metadata is not canonical JSON"
@@ -212,6 +236,16 @@ for my $surface (sort keys %CONFIG) {
     push @errors, "$surface normative --all query differs from manifest order"
         if $queried ne $archive;
     validate_current_view($surface, $config->{current}, \@errors);
+    my %expected_targets = map { $_->{target_path} => 1 } @$records;
+    for my $target (glob("docs/history/$config->{family}/segment-*.md")) {
+        push @errors, "$surface has an undeclared history segment: $target" unless $expected_targets{$target};
+    }
+    for my $path (grep { m{\Adocs/history/\Q$config->{family}\E/catalog/} } keys %HEAD_PATH) {
+        my $old = git_optional('show', "HEAD:$path");
+        my $now = read_bytes($path, \@errors);
+        push @errors, "$surface immutable catalog page changed or disappeared: $path"
+            if !-f $path || !defined($old) || $old ne $now;
+    }
 }
 
 push @errors, 'no document-history manifest is installed' if !$surface_count;
@@ -285,23 +319,11 @@ sub read_bytes {
 
 sub decode_manifest {
     my ($path, $errors) = @_;
-    my $bytes = read_bytes($path, $errors);
-    my (@records, @canonical_lines);
-    my @lines = split /\n/, $bytes, -1;
-    pop @lines if @lines && $lines[-1] eq '';
-    my $number = 0;
-    for my $line (@lines) {
-        ++$number;
-        if ($line eq '') { push @$errors, "$path:$number is blank"; next }
-        my $record = eval { JSON::PP->new->utf8(1)->decode($line) };
-        if (!$record || $@ || ref($record) ne 'HASH') {
-            push @$errors, "$path:$number is not one JSON object";
-            next;
-        }
-        push @records, $record;
-        push @canonical_lines, $line;
-    }
-    return (\@records, \@canonical_lines);
+    my ($metadata, $segments);
+    my $ok = eval { ($metadata, $segments) = read_catalog($path); 1 };
+    if (!$ok) { push @$errors, "$path: $@"; return ([], []); }
+    my @records = ($metadata, @$segments);
+    return (\@records, [map { $JSON->encode($_) } @records]);
 }
 
 sub git_capture {

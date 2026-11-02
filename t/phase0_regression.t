@@ -7114,9 +7114,14 @@ SPEC
     );
 
     is(
-        LinkedSpec::call_spec_handler_subst('MoveTop', 'capture_from(body_start)'),
-        q#do { my $__ls_mark = LinkedSpec::SourceLocation::Runtime::mark_read_offset($info, $STRING, 'MoveTop', 'body_start', "capture_from"); defined($__ls_mark) ? LinkedSpec::SourceLocation::Runtime::span_text($info, $STRING, $__ls_mark, $LSPOS - length($LMATCH), "capture_from") : undef }#,
-        'capture_from(name) helper rewrite stays aligned with rule-local named-mark storage',
+        evaluate_lowered_json(
+            'my $read = sub { ' . LinkedSpec::call_spec_handler_subst('MoveTop', 'capture_from(body_start)')
+                . ' }; my @values = ($read->()); $LSPOS = undef; push @values, $read->(); '
+                . '$LSPOS = 2; push @values, $read->(); $LSPOS = 3; push @values, $read->(); return \@values;',
+            q{my $text="abcdef"; my $STRING=\$text; my $info={}; my $LSPOS=5; my $LMATCH="ef";
+              LinkedSpec::SourceLocation::Runtime::mark_write_position($info,$STRING,"MoveTop","body_start",1,"fixture");}),
+        q#{"value":["bc",null,null,""],"warnings":[]}#,
+        'capture_from(name) uses its rule-local mark and guards absent or reversed local endpoints',
     );
     is_deeply($rule_ir->{REs}, [qr/foo/, qr/bar/], 'MoveTop rule preserves the anchor regex list used around the named mark');
 };
@@ -40986,9 +40991,15 @@ SPEC
     ok(grep { $_ eq 'RETURN' } @{$fluent_meta->{canonical_action_ir_nodes}}, 'fluent direct capture_slice_len() return contributes RETURN action-IR node');
     is_deeply($fluent_meta->{canonical_action_ir_nodes}, $block_meta->{canonical_action_ir_nodes}, 'fluent and structured direct capture_slice_len() returns produce identical canonical action-IR node coverage');
     is(
-        LinkedSpec::call_spec_handler_subst('Top', 'return(capture_slice_len())'),
-        q#return do { LinkedSpec::SourceLocation::Runtime::span_length($info, $STRING, $IPOS, $LSPOS - length($LMATCH), "capture_slice_len") }#,
-        'direct capture_slice_len() return lowers to the anonymous capture-boundary width expression'
+        evaluate_lowered_json(
+            'my $read = sub { ' . LinkedSpec::call_spec_handler_subst('Top', 'return(capture_slice_len())')
+                . ' }; my @values = ($read->()); $IPOS = 3; push @values, $read->(); '
+                . '$IPOS = 4; push @values, $read->(); $IPOS = undef; push @values, $read->(); '
+                . '$IPOS = 0; $LSPOS = undef; push @values, $read->(); '
+                . '$LSPOS = 5; $LMATCH = undef; push @values, $read->(); return \@values;',
+            q{my $text="abcdef"; my $STRING=\$text; my $info={}; my $IPOS=0; my $LSPOS=5; my $LMATCH="ef";}),
+        q#{"value":[3,0,null,null,null,null],"warnings":[]}#,
+        'direct capture_slice_len() returns present width or zero and guards every unavailable or reversed boundary'
     );
 };
 subtest 'emit_context_named_mark_read_helpers_lower_without_raw_fallback' => sub {
@@ -47285,8 +47296,9 @@ subtest 'spec_format_terse_2_3_5_4_number_receiver_value_chains' => sub {
     like($L->('return(score.abs().ceil().add(2,3).mul(2).sub(1).div(2).clamp(0,20).max(5).min(12))'),
         qr/__ls_num_abs.*__ls_num_ceil.*__ls_num_add.*__ls_num_mul.*__ls_num_sub.*__ls_num_div.*__ls_num_clamp.*__ls_num_max.*__ls_num_min/s,
         'number receiver chain lowers through unary, arithmetic, clamp, min, and max num_* helper contracts');
-    like($L->('return(3.5.floor().add(1))'), qr/__ls_num_floor_value = 3\.5.*__ls_num_add/s,
-        'decimal numeric literal receiver chains skip the decimal dot and lower through floor/add');
+    is(evaluate_lowered_json($L->('return(3.5.floor().add(1))'), ''),
+        q#{"value":4,"warnings":[]}#,
+        'decimal numeric literal receiver chains execute floor/add without warnings');
     like($L->('return(score.abs().gt(3))'), qr/__ls_num_abs.*LinkedSpec::Numeric::evaluate\('num_gt', \$__ls_num_cmp_lhs, \$__ls_num_cmp_rhs\)/s,
         'number comparisons lower as scalar numeric flags');
     like($L->('return(5.gt(3).add(1))'), qr/(?=.*'num_gt')(?=.*__ls_num_add)/s,
@@ -47422,9 +47434,9 @@ subtest 'spec_format_terse_2_3_5_5_block_valued_receiver_chains' => sub {
     like($L->('return({ { "b" : 2, "a" : 1 } }.sorted_keys().join_values(","))'),
         qr/__ls_sorted_keys.*__ls_join_values/s,
         'hash-yielding block receivers continue through sorted_keys into array helper chains');
-    like($L->('return({ 3.5 }.floor().add(2))'),
-        qr/__ls_num_floor_value = do \{ 3\.5 \}.*__ls_num_add/s,
-        'number-yielding block receivers continue through numeric helper chains');
+    is(evaluate_lowered_json($L->('return({ 3.5 }.floor().add(2))'), ''),
+        q#{"value":5,"warnings":[]}#,
+        'number-yielding block receivers execute their numeric chain without warnings');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { return(array({ [3, 1, 2] }.sorted().join_values(\",\"), { return([\"x\", \"y\"]); [\"bad\"] }.join_values(\"|\"), { set(raw, \" a-b \"); raw }.trim().split(\"-\").count(), { { \"b\" : 2, \"a\" : 1 } }.sorted_keys().join_values(\",\"), { 3.5 }.floor().add(2))) }\n"
@@ -47482,9 +47494,9 @@ subtest 'spec_format_terse_3_2_1_numeric_word_aliases' => sub {
         'numeric word aliases compose inside flow-value lowering');
     is(LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('gt(10, 2)'), '(10 > 2)',
         'bare comparison word gt(...) lowers as a numeric comparison alias');
-    like($L->('return(3.5.floor().add(1))'),
-        qr/__ls_num_add.*__ls_num_floor/s,
-        'function-form numeric aliases do not disturb existing number receiver-dot chains');
+    is(evaluate_lowered_json($L->('return(3.5.floor().add(0.75))'), ''),
+        q#{"value":3.75,"warnings":[]}#,
+        'numeric aliases preserve receiver-dot floor-before-add evaluation order');
 
     my $spec = "Top::\n"
              . " /x/ -> Done { return(array(add(2,3,4), sub(10,3), mul(2,3,4), div(9,2), mod(17,5), abs(-7), floor(3.7), ceil(3.2), round(3.5), min(8,3,5), max(8,3,5), clamp(add(2,5),0,6), sum(array(1,2,3)), avg(array(2,4,6)), median(array(1,5,3)), range(array(1,5,3)))) }\n"
@@ -47946,9 +47958,12 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
     like($L->('return(meta[key] = value)'),
         qr/^return do \{.*\$__ls_path_value = \$value;.*BindingRuntime::nested_write\(\$meta,/s,
         'nested-write assignment expression returns the updated typed binding');
-    like($L->('return((items += value).count())'),
-        qr/^return do \{ my \$__ls_count = do \{.*BindingRuntime::push_value/s,
-        'array append expression can feed an array receiver chain');
+    is(evaluate_lowered_json(
+            'my $before=$items; my $result=(sub { ' . $L->('return((items += value).count())')
+                . ' })->(); return [$result,$items,$before];',
+            q{my $items=[1,2]; my $value=3;}),
+        q#{"value":[3,[1,2,3],[1,2]],"warnings":[]}#,
+        'array append feeds Count once, updates its working binding and preserves the earlier snapshot');
     like($L->('return((meta[key] = value).count_keys())'),
         qr/^return do \{ my \$__ls_count_keys = do \{.*BindingRuntime::nested_write/s,
         'nested-write assignment expression can feed a hash receiver chain');

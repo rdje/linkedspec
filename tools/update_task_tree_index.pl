@@ -9,10 +9,11 @@ use JSON::PP ();
 
 my $ROOT = "$RealBin/..";
 my %INDEX = (
+    'TYPE-REFERENCE-BOOK' => 'docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl',
     'FUTURE-PARITY-BACKLOG' => 'docs/tasks/FUTURE-PARITY-BACKLOG.index.jsonl',
     'SESSION-STARTUP-READING' => 'docs/tasks/SESSION-STARTUP-READING.index.jsonl',
 );
-my %RECORD_COUNT = ('FUTURE-PARITY-BACKLOG' => 10, 'SESSION-STARTUP-READING' => 5);
+my %RECORD_COUNT = ('TYPE-REFERENCE-BOOK' => 5, 'FUTURE-PARITY-BACKLOG' => 10, 'SESSION-STARTUP-READING' => 5);
 my $JSON = JSON::PP->new->canonical(1)->utf8(1);
 my $tree;
 GetOptions('tree=s' => \$tree) or die usage();

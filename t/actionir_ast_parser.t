@@ -5,6 +5,7 @@ use JSON::PP ();
 
 use LinkedSpec ();
 use LinkedSpec::ActionIR::AST ();
+use LinkedSpec::SourceLocation ();
 
 sub parse_expr {
     my ($expr) = @_;
@@ -790,11 +791,19 @@ subtest 'assignment expression lowering consumes AST nodes' => sub {
         qr/^return do \{ my \$__ls_path_segment_0 = \$key; .*LinkedSpec::BindingRuntime::nested_write\(\$meta, .*kind_hint => "dynamic".*\); \$meta = \$__ls_path_updated; .*\$__ls_path_result \}$/,
         'one-segment assignment expression returns the detached unified nested-write result'
     );
-    is(
-        LinkedSpec::call_spec_handler_subst('Top', q{return((items += value).count())}),
-        q{return do { my $__ls_count = do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, "items", $value) }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }},
-        'array append expression can feed an aggregate receiver chain'
-    );
+    my $append_count = LinkedSpec::call_spec_handler_subst('Top', q{return((items += value).count())});
+    $append_count =~ s/\$value\b/do { ++\$i; \$value }/g;
+    for my $initial ([], ['seed']) {
+        my @before = @$initial;
+        is_deeply(
+            lowered_observation('my $__count = (sub { ' . $append_count
+                . ' })->(); return([$__count, $items, $i])',
+                {items => $initial, value => 'tail', i => 0}),
+            {value => [scalar(@before) + 1, [@before, 'tail'], 1]},
+            'append-result Count observes one evaluated append and its updated binding'
+        );
+        is_deeply($initial, \@before, 'append-result Count preserves the original array value');
+    }
 };
 
 subtest 'statement helper-call lowering consumes AST call nodes' => sub {
@@ -852,10 +861,19 @@ subtest 'statement helper-call lowering consumes AST call nodes' => sub {
         );
 
         my $set_key = LinkedSpec::call_spec_handler_subst('Top', q{set_key(meta, poison_key, poison_value)});
-        is(
-            $set_key,
-            'do { require LinkedSpec::BindingRuntime; $meta = LinkedSpec::BindingRuntime::index_set($meta, "meta", $key, $value) }',
-            'set_key statement lowers target/key/value into the uniform binding update'
+        is_deeply(
+            lowered_observation($set_key . '; return($meta)',
+                {meta => {seed => 'kept'}, key => 'field', value => 'payload'}),
+            {value => {seed => 'kept', field => 'payload'}},
+            'set_key statement executes the typed target/key/value binding update'
+        );
+        my $key_snapshot = $set_key;
+        $key_snapshot =~ s/\$value\b/do { \$key = "later"; \$value }/g;
+        is_deeply(
+            lowered_observation($key_snapshot . '; return([$meta, $key])',
+                {meta => {}, key => 'first', value => 'payload'}),
+            {value => [{first => 'payload'}, 'later']},
+            'set_key retains the evaluated key before a later operand changes its binding'
         );
 
         my $return = LinkedSpec::call_spec_handler_subst('Top', q{return([poison])});
@@ -1411,9 +1429,40 @@ subtest 'return-payload lowering consumes AST nodes before raw fallback' => sub 
     my $raw_fallback = LinkedSpec::call_spec_handler_subst('Top', q{return(\(my $capt = capture_slice()))});
     like(
         $raw_fallback,
-        qr/return \\\(my \$capt = do \{ LinkedSpec::SourceLocation::Runtime::span_text\(\$info, \$STRING, \$IPOS, \$LSPOS - length\(\$LMATCH\), "capture_slice"\) \}\)/,
+        qr/LinkedSpec::SourceLocation::Runtime::span_text\([^;]+"capture_slice"\)/,
         'raw compatibility return payloads keep the narrow typed helper fallback',
     );
+    unlike($raw_fallback, qr/\bcapture_slice\s*\(/, 'raw compatibility payload does not leak a host capture_slice call');
+    for my $case (
+        ['available', 0, 3, 'c', 'ab', [{start => 0, end => 2}]],
+        ['empty', 0, 0, '', '', [{start => 0, end => 0}]],
+        ['missing boundary', undef, 3, 'c', undef, []],
+        ['missing position', 0, undef, 'c', undef, []],
+        ['missing match', 0, 3, undef, undef, []],
+        ['reversed bounds', 3, 2, 'x', undef, []],
+    ) {
+        my ($IPOS, $LSPOS, $LMATCH) = @$case[1 .. 3];
+        my $text = 'abc'; my $STRING = \$text; my $info = {};
+        my (@calls, @warnings, $result, $error);
+        {
+            no warnings 'redefine';
+            local *LinkedSpec::SourceLocation::Runtime::span_text = sub {
+                push @calls, {start => $_[2], end => $_[3]};
+                return substr(${$_[1]}, $_[2], $_[3] - $_[2]);
+            };
+            local $SIG{__WARN__} = sub {push @warnings, @_};
+            my $execute = eval 'sub { ' . $raw_fallback . ' }';
+            $error = "$@";
+            $result = $execute ? eval {$execute->()} : undef;
+            $error ||= "$@";
+        }
+        is_deeply(
+            {kind => ref($result), value => ref($result) eq 'SCALAR' ? $$result : undef,
+                calls => \@calls, warnings => \@warnings, error => $error},
+            {kind => 'SCALAR', value => $case->[4], calls => $case->[5], warnings => [], error => ''},
+            "typed compatibility capture handles $case->[0] without widening raw fallback"
+        );
+    }
     ok($parse_calls >= 2, 'return payloads entered through the AST parser');
 };
 
