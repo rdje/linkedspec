@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.7",
+  "claims": [
+    {
+      "name": "dated-publication-and-logical-object-custody",
+      "statement": "All23 measured data uploads succeeded before main advanced to d3a26a94f5c2 and the owned temporary ref was removed. Original instruments, runtime records and complete logical published object identities are retained; sixteen altered-record/model controls reject.",
+      "scope": "Dated actual command/outcome/log/receipt observations and109230 logical Git objects reachable from the fixed published root, including remote common objects and potential thin bases. Capture retrieved every opaque body, recomputing Git content address and SHA256; default replay checks retained sources, sets, metadata and controls rather than repeating full body reads. Fresh read-only remote state was observed only at capture time. Initial counts/pack estimates retain their original encoding epoch; full closure36876491520 bytes is not outgoing or wire size. No physical pack layout, transitive Git/SSH/CI/OS/toolchain implementation closure, exact wire bytes, server disk usage, concurrent/future remote state, oversize server rejection, new push, runtime feature admission or other-repository implementation is claimed. The first failed capture and independent actual overlap diagnosis survive; the corrected coverage model permits repeated/common inputs. Historical final-plan grouping fields stay exact and separate from Git-derived runtime834/last34 counts. Original claim3 statements, scope, results and all other fields stay exact; only its two disclosed legs change.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/source_capture.py; bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/review.py; bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/close_claim.py. capture_runtime.py is the completed one-shot body-hashing capture; review.py --verify-objects optionally repeats full body retrieval.",
+        "granularity": "Each exact original selected call/output record; each actual ordered ref update, estimate, complete log and receipt; every range object-list entry and published Git body; original-versus-runtime range counts; every original predecessor claim field except the two replaced legs.",
+        "result": "{\"batch_input_coverage\": {\"initial\": {\"input_rows\": 35008, \"repeated_occurrences\": 1, \"unique_objects\": 35007}, \"runtime\": {\"input_rows\": 35105, \"repeated_occurrences\": 1, \"unique_objects\": 35104}}, \"fresh_full_body_verification\": false, \"historical_wrong_raw_bytes\": 1173808, \"initial_non_thin_bytes_reported\": 9308545338, \"initial_thin_bytes_reported\": 9304184386, \"last_original_group_commits\": 33, \"last_runtime_range_commits\": 34, \"logical_published_bytes\": 36876491520, \"logical_published_objects\": 109230, \"original_objects\": 35007, \"original_raw_bytes\": 19032710823, \"published_head\": \"d3a26a94f5c2efba736806ac13911155e3739995\", \"rejected_controls\": 16, \"runtime_commits\": 834, \"verified_data_batches\": 23}; close_claim readonly preservation PASS;24 selected original records/five primary calls;16 rejected controls plus actual original equal-budget acceptance/current strict rejection."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An incorrect raw/packed equivalence, wrong/equal/Boolean budget, broken/incomplete chain, missing/wrong/forced ref event, stale receipt, missing/altered object, raw grouping-as-runtime or disjoint-batch model can pass review.",
+        "oracle": "Actual original failed/corrected counter outputs versus opaque object sizes; immutable first-parent sequence and independent Git counts; actual recorded server readbacks and normal-hook logs; independent overlap capture from raw Git range lists and historical/tip membership. No server rejection is invented.",
+        "red_control": "{\"Git_derived_runtime_metadata\": {\"commits\": 834, \"head\": \"d3a26a94f5c2efba736806ac13911155e3739995\", \"last_commits\": 34}, \"legacy_final_metadata_model\": {\"commits\": 833, \"head\": \"cd3b6adc3e58fb64283ae4ae4a5a37823eabd891\", \"last_commits\": 33}, \"original_equality_red\": {\"actual_network_operation\": false, \"current_validator_rejected\": true, \"legacy_accepted_equal_budget\": true, \"original_stdout\": \"{\\\"base\\\": \\\"controlled-base\\\", \\\"target\\\": \\\"controlled-target\\\", \\\"commits\\\": 1, \\\"pack_bytes\\\": 1610612736}\\n\"}, \"rejected\": [\"wrong-budget\", \"equal-budget\", \"bool-size\", \"broken-chain\", \"wrong-group-count\", \"missing-tail\", \"missing-event\", \"wrong-tip\", \"force-main\", \"over-budget-event\", \"temporary-ref-remains\", \"wrong-receipt-head\", \"missing-object\", \"wrong-object-size\", \"raw-final-as-runtime\", \"disjoint-batch-model\"]}; capture-failure-01.json.gz preserves the actual first reviewer rejection before correction. Independent diagnosis shows35008 rows/35007 unique original objects and one historical blob in batches12/20; corrected positive coverage has no missing required new object."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/capture-failure-01.json.gz",
+            "sha256": "dac3bb825c32c2530058932e8eda2c0ca5b07d392bc0a2b761fbbe539ffe39ca",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/capture-success.log.gz",
+            "sha256": "6513f273059c876c1c340944cf3979e70775edf6094b8fecc10230fe077a1e44",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/capture_runtime.py",
+            "sha256": "067fdfb0615b63fbb6e38aa6ce9cd17690cc6ddeb8cb30197f96d5f976c28985",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/close_claim.py",
+            "sha256": "6fc026a159e7394ee21e74ee752062c4389753d3485dec81a17b44156bc04d6f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/diagnose_overlap.py",
+            "sha256": "5991cedbca1601345639716dc0a4b2e9118316e33e9985e14344e92f8216075e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/model.py",
+            "sha256": "2ca75ef4473d1d7c726ccdec297c31679602cb1aa851562a7c6f42c85985df04",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/object-overlap-diagnosis.json.gz",
+            "sha256": "4e0ad8c53ac92d0d583d6ecffddcebacbaddf12cd0c6522409e54c7ab9e13173",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/original-planner.py.txt",
+            "sha256": "91ffde614b5b4edbc8394c42e37b2f721d40bf11b6da9d7e9f6da2196dac7be6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/original-planner.sh.txt",
+            "sha256": "c19b31f052deb793c4fd5dd80b5f8faad1a9faab89cd1a003cbfa3d42a1c3fee",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/original-source-records.json.gz",
+            "sha256": "89b3cb60657b39d242a0d6a1b1872aa1a45b5f8d5d1f6ff66fc3ac02ba4049d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/preceding-claim.json.gz",
+            "sha256": "e3370f519b85a06cb2a5a718339af002764d71078d4bed042786ebd6df7c8fdd",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/preserve_failure.py",
+            "sha256": "111a5860c55c741ff100d53f63f607911b54f96cee88bd19369c4b003a5dd268",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/publication.json.gz",
+            "sha256": "e5c150c68b92f8be9835a40cda8f09a7e2ac5e92754e8622b76c5e2dbc85b85e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/result.json",
+            "sha256": "6b3439f568ae9635d234c159df6975ce8dd5e3457ed3ce16cc3f2b1cb43a8a6f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/review.py",
+            "sha256": "ecb4f43495a2522dcbdcaec530d3339a2314f2d2daaa4af57070c4ae8ec7e84a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/source_capture.py",
+            "sha256": "85fc546696ce095db47daedc5440fc36b55e5739b02e0bc57b22a10b9ad2ea10",
+            "role": "producer"
+          },
+          {
+            "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+            "sha256": "7ce6081f0987ad44729d11a14939491ad61f8dcb63d4a4edac5e8bb3e5668154",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bounded-own-narrative-retention",
+      "statement": "The rejected task collection exceeds its fixed byte cap; shortening this new leaf narrative and retaining its full source brings the same collection below the unchanged limit with projected node contracts intact.",
+      "scope": "Dated complete registry-selected task-file/index populations only. Per-file node Status/Goal/Acceptance/Dependencies line projections include historical members and are not a unique current-ID census or complete semantic obligation audit. The full original/new bytes remain retained. No cap change, immutable edit, transitive hook/toolchain closure, broad future headroom or completed canonical/feature admission is claimed. The first attempt was interrupted143 only after an actual recorded cap rejection; remaining checks from that candidate receive no passing credit. The earlier helper allowlist setup failure wrote no observation and is qualified separately.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/narrative_boundary.py; --capture-before/--capture-after are completed one-shot captures.",
+        "granularity": "Every byte of every registry-selected task member, exact retained registry/producer/index list/log, and each per-file node contract projection.",
+        "result": "{\"after_bytes\": 12581970, \"before_bytes\": 12584656, \"current_node_contracts\": 4046, \"limit_bytes\": 12582912, \"rejected_controls\": [\"missing-input\", \"lost-acceptance\"], \"remaining_bytes\": 942}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The original candidate already fits the unchanged cap, or a missing input/lost Acceptance can silently pass the preservation check.",
+        "oracle": "Actual mandatory cap refusal versus independently summed byte lengths of the complete retained input population. Original/current per-file node projections and exact archived bodies are independent of the shortening prose.",
+        "red_control": "Original hook records12584656/12582912 rejection. Repaired12581970 bytes passes that byte boundary with942 bytes remaining; effective missing-input and lost-acceptance mutations reject specifically. Broader normal hooks still govern final landing."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/narrative_boundary.py",
+            "sha256": "4afe5eabdd24ce9835ff2ce9ca0c5694b72446c3035aaf9db6cb7e2d71c61aee",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/narrative-before.json.gz",
+            "sha256": "963e8ef0af7fcdee92a911461699fd4daf58037488a55ae49b67ae375d32e53f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/narrative-after.json.gz",
+            "sha256": "6ccc95909073443752a772c0ea07c852e8dee75827b80e73cbfc759c041e400d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/narrative-result.json",
+            "sha256": "4fbc404633f9139a1dae0f6672b2b1d7297c6c8cb7cbf22ad652bf6777fefd58",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/narrative-boundary-setup.py.gz",
+            "sha256": "b4ec352f96acef868c7e2b4c4c6b8cc3c9cfb270649c1a121347e45cd56d3a1b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/narrative-setup-failure.json",
+            "sha256": "aaeb31bf66ae77589a455988182b738275937d2ddf065164f02ff26084afe2b6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/model.py",
+            "sha256": "2ca75ef4473d1d7c726ccdec297c31679602cb1aa851562a7c6f42c85985df04",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/capture_runtime.py",
+            "sha256": "067fdfb0615b63fbb6e38aa6ce9cd17690cc6ddeb8cb30197f96d5f976c28985",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/source_capture.py",
+            "sha256": "85fc546696ce095db47daedc5440fc36b55e5739b02e0bc57b22a10b9ad2ea10",
+            "role": "producer"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248",
+            "role": "input"
+          },
+          {
+            "path": "scripts/check_readme_routing_pressure.pl",
+            "sha256": "fd520f23545803ea57304abfd10f127f1a7480eb0e5d08a4e4bbb21cccb8d144",
+            "role": "producer"
+          },
+          {
+            "path": "scripts/check_readme_stability.sh",
+            "sha256": "0c1b9183fd8a4ad9acddc6ac58d2d76c55d054817783429a0992c1116c8bf6ed",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

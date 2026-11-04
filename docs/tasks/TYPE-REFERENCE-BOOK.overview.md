@@ -1929,11 +1929,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20.2`
   Status: `pending`
-  Priority: P2; before any append would exceed the existing current-task collection budget.
+  Priority: P1; next after23.4.7 clean landing, before further feature growth.
   Goal: Renew current task collection headroom through another source-bound closed-narrative extraction while retaining every current obligation and all existing ceilings.
   Dependencies: Accepted20.1.10; preserve the selected Count73 feature sequence unless the actual gate would reject further task growth.
-  Reproduction/impact: The restored current collection passes its existing aggregate byte cap with less than one percent headroom. Additional evidence can consume this margin, so normal-hook restoration is not a lifetime task-growth allowance. This is a prospective capacity concern, not a current failing gate or arbitrary cap-increase request.
-  Schedule: Reassess after bounded Count73; activate earlier if a proposed append would cross the cap. Use the current capacity checker, classify closed narrative in the next suitable owner, retain exact predecessor/retrieval and independent obligation/open-body proof; do not remove current nodes or edit immutable partitions.
+  Reproduction/impact: The restored current collection passes its existing aggregate byte cap with less than one percent headroom. Additional evidence can consume this margin, so normal-hook restoration is not a lifetime task-growth allowance. Publication-custody7 now records actual normal-hook rejection at12584656/12582912 bytes; activate this owner before further growth. No numerical ceiling increase is authorized.
+  Schedule: Actual rejection activates this owner immediately after23.4.7, before Rust Count73.2. Use the current capacity checker, classify closed narrative in the next suitable owner, retain exact predecessor/retrieval and independent obligation/open-body proof; do not remove current nodes or edit immutable partitions.
   Acceptance: Meaningful renewed headroom within the original aggregate/file/per-part limits, exact source reconstruction, complete current contracts, negative loss/corruption controls, book/continuity updates and normal canonical acceptance for infrastructure.
   Planned verification tier: canonical
   Planned focused checks: Selected owner/source census, exact narrative/current-contract preservation and direct reader/index controls; no unrelated historical audit.
@@ -2153,13 +2153,20 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Commit: TYPE-REFERENCE-BOOK.1.2.23.4.6 — retain artifacts after bounded daily review
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.7`
-  Status: `pending` / publication custody closeout
+  Status: `completed` / bounded publication custody reviewed
   Goal: Retain the actual size-safe publication outcomes and close disclosed initial planning/evidence gaps after the authorized immediate push.
   Acceptance: Preserve actual publisher source, exact initial/final plans, per-batch commands/exits/log bytes, final local/remote identity and canonical receipt. Recover the initial inline measurement instrument or explicitly retain its historical limitation; add non-mutating wrong-budget/chain controls and a reproducible Git-object input identity/retrieval representation before claiming complete measured pack custody. Preserve all published Git IDs. No oversized upload or history rewrite is required.
   Priority/schedule: After the immediate normal-hook publication and due cleanup23.4.6, before unrelated runtime selection. Own until verified closure; the director-authorized early safe push is not blocked on converting the initial diagnostic into a broader measurement claim.
-  Planned verification tier: focused; retain publication artifacts and readonly identity/custody controls only.
-  Planned canonical trigger: Any mechanical hook/storage change needs a separate canonical leaf; final clean publication follows the current receipt policy.
-  Planned claim verification: Explicitly close the two disclosed legs in the publication-transport-plan claim, with actual retained inputs and scoped RED controls.
+  Verification tier: `focused`
+  Focused checks: Actual retained publication records and final identities; immutable Git-object identity/retrieval proof; non-mutating wrong-budget/chain controls and scoped claim validation. No full CI or new push for this evidence-only leaf.
+  Canonical trigger: Any mechanical hook/storage change needs a separate canonical leaf; final clean publication follows the current receipt policy.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.7.json`
+
+  Activation: Clean1888c1bbfce2; published boundary d3a26a94f5c2. Full rejected-candidate narrative/source survives in narrative-before.json.gz; detailed original-source acquisition, findings, contracts and results are canonical in docs/checkpoints/publication-custody-2026-11-04/README.md and its source-bound capsules.
+  Result: Original24 records/five primary calls, all23 uploads/normal hooks/receipt/main/leased cleanup, raw streams and109230 opaque-body address/SHA256 checks retained. Readonly replay/16 denials and predecessor preservation pass; only two disclosed claim legs change. Initial equality accepts while current strict guard rejects; raw original group33 differs from actual final34/runtime834; one historical blob repeats across ranges, whose unique required-object coverage passes. No physical pack/transitive toolchain closure, exact wire/server disk/concurrent-state or full feature admission claim.
+  Landing blocker/ownership: Actual normal-hook task collection12584656 exceeds unchanged12582912 cap. Attempt stopped143 after recorded rejection; remaining checks get no passing credit. Preserve all rejected input bytes, shorten only this new narrative with acceptance fields intact, and verify the unchanged cap. Earlier diagnostic setup used an unlisted readonly helper operation; rejected source retained and direct Git fixes setup. Existing20.2 explicitly activates before further growth on this trigger; it now precedes Rust73.2, peers/copy73.6 and growth8. No cap increase, dropped obligation or immutable edit.
+  Verification: Corrected custody/source review, original-claim preservation, scoped claims, task contracts/history/map/memory/book and complete normal hooks govern landing. narrative_boundary.py retains rejected/current collections and rejects missing-input/lost-acceptance controls. Detailed first failed object reviewer and actual overlap diagnosis remain retained. No new push/full CI for this evidence-only leaf; later maintenance stays local until a future canonical push.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.4.7 — preserve publication source and logical object custody
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.8`
   Status: `pending` / P1 repository-growth review

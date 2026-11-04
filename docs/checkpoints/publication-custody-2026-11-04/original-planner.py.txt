@@ -1,0 +1,27 @@
+import json,subprocess
+from pathlib import Path
+base=subprocess.check_output(['git','rev-parse','origin/main'],text=True).strip()
+head=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+commits=subprocess.check_output(['git','rev-list','--first-parent','--reverse',base+'..'+head],text=True).splitlines()
+limit=1536*1024*1024
+plan=[]
+def measure(previous,target):
+ a=subprocess.Popen(['git','rev-list','--objects',previous+'..'+target],stdout=subprocess.PIPE)
+ b=subprocess.Popen(['git','pack-objects','--stdout'],stdin=a.stdout,stdout=subprocess.PIPE)
+ a.stdout.close();size=0
+ while raw:=b.stdout.read(1024*1024):size+=len(raw)
+ assert b.wait()==0 and a.wait()==0
+ return size
+def split(previous,group):
+ size=measure(previous,group[-1])
+ if size>limit:
+  if len(group)==1:raise RuntimeError('single commit exceeds conservative push budget: '+group[-1]+' '+str(size))
+  mid=len(group)//2
+  split(previous,group[:mid]);split(group[mid-1],group[mid:]);return
+ row=dict(base=previous,target=group[-1],commits=len(group),pack_bytes=size)
+ plan.append(row);print(json.dumps(row),flush=True)
+previous=base
+for at in range(0,len(commits),50):
+ group=commits[at:at+50];split(previous,group);previous=group[-1]
+Path('.linkedspec-data/logs/push-plan.json').write_text(json.dumps(dict(remote_base=base,head=head,limit_bytes=limit,batches=plan),indent=2)+'\n')
+print('push-plan: ready',len(plan),'fast-forward batches',flush=True)

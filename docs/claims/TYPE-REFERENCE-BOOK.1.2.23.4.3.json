@@ -349,14 +349,96 @@
         "result": "Initial observed non-thin byte count9308545338 and833 commits; push-plan.json retains23 smaller fast-forward ranges below its conservative budget."
       },
       "falsify": {
-        "status": "gap",
-        "reason": "No oversized server upload was attempted and the initial inline planner has no independently retained wrong-budget/chain RED instrument yet. Actual safe publication and non-mutating controls are separately owned.",
-        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.7"
+        "status": "checked",
+        "hypothesis": "Raw object bytes equal packed transfer estimates, or a wrong/equal budget or broken range chain is silently admissible.",
+        "oracle": "Actual original counter/flat/thin call-output records versus current opaque Git object lengths; immutable first-parent endpoints independently validate range coverage. Isolated original split-function equality acceptance distinguishes the corrected strict predicate. Actual remote outcomes are separately retained dated observations.",
+        "red_control": "Publication-custody7 retains wrong-budget, equal-budget, Boolean-size, broken-chain, wrong-count and missing-tail refusals, plus actual original equality acceptance/current strict rejection. The recovered wrong raw counter is1173808; corrected actual count is19032710823. Initial pack estimates remain9308545338 non-thin and9304184386 thin, distinct from raw bytes and exact wire size. No oversized server upload was attempted."
       },
       "durability": {
-        "status": "gap",
-        "reason": "Tracked plan, publisher and immutable Git endpoints survive; the initial inline planning instrument and complete Git-pack object input representation still need their bounded custody/retrieval record. This gap is not an assertion that committed Git history is missing.",
-        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.7"
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/capture-failure-01.json.gz",
+            "sha256": "dac3bb825c32c2530058932e8eda2c0ca5b07d392bc0a2b761fbbe539ffe39ca",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/capture_runtime.py",
+            "sha256": "067fdfb0615b63fbb6e38aa6ce9cd17690cc6ddeb8cb30197f96d5f976c28985",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/close_claim.py",
+            "sha256": "6fc026a159e7394ee21e74ee752062c4389753d3485dec81a17b44156bc04d6f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/diagnose_overlap.py",
+            "sha256": "5991cedbca1601345639716dc0a4b2e9118316e33e9985e14344e92f8216075e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/model.py",
+            "sha256": "2ca75ef4473d1d7c726ccdec297c31679602cb1aa851562a7c6f42c85985df04",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/object-overlap-diagnosis.json.gz",
+            "sha256": "4e0ad8c53ac92d0d583d6ecffddcebacbaddf12cd0c6522409e54c7ab9e13173",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/original-planner.py.txt",
+            "sha256": "91ffde614b5b4edbc8394c42e37b2f721d40bf11b6da9d7e9f6da2196dac7be6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/original-planner.sh.txt",
+            "sha256": "c19b31f052deb793c4fd5dd80b5f8faad1a9faab89cd1a003cbfa3d42a1c3fee",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/original-source-records.json.gz",
+            "sha256": "89b3cb60657b39d242a0d6a1b1872aa1a45b5f8d5d1f6ff66fc3ac02ba4049d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/preserve_failure.py",
+            "sha256": "111a5860c55c741ff100d53f63f607911b54f96cee88bd19369c4b003a5dd268",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/publication.json.gz",
+            "sha256": "e5c150c68b92f8be9835a40cda8f09a7e2ac5e92754e8622b76c5e2dbc85b85e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/review.py",
+            "sha256": "ecb4f43495a2522dcbdcaec530d3339a2314f2d2daaa4af57070c4ae8ec7e84a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/publication-custody-2026-11-04/source_capture.py",
+            "sha256": "85fc546696ce095db47daedc5440fc36b55e5739b02e0bc57b22a10b9ad2ea10",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
       }
     },
     {

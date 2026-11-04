@@ -1,0 +1,7 @@
+{
+  "command": "narrative_boundary.py --capture-before",
+  "observed_exit": 1,
+  "observed_reason": "non-readonly Git command",
+  "cause": "The frozen model helper does not admit ls-files. No before capsule was written; call public Git ls-files directly without changing the frozen model.",
+  "scope": "Setup diagnostic metadata, not a completed narrative observation or full raw traceback."
+}

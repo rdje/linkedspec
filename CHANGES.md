@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-04 — TYPE-REFERENCE-BOOK.1.2.23.4.7 — preserve publication source and logical object custody
+
+Original call/output records and inline planner, actual23 bounded uploads and full reachable logical object identities are retained. Capture recomputes every109230 opaque body address/hash; readonly review and16 altered-record/model denials pass. Equality, stale raw grouping metadata and repeated batch inputs are distinguished with the failed first reviewer preserved. Only two preceding disclosed claim legs change. Public workflow/Knowledge/task/live/resume pointers align. Actual task-cap rejection preserves the failed candidate; shorten only this new narrative with all contracts intact. Existing20.2 activates before Rust. No new push or canonical run is implied.
+
 ## 2026-11-04 — TYPE-REFERENCE-BOOK.1.2.23.4.6 — retain artifacts after bounded daily review
 
 The canonical non-following scanner and independent metadata walk agree on926 rows in eight named scopes; five altered-evidence controls reject. No artifact was removed. Refresh the latest cleanup record, preserve exact publisher messages, correct the compressed evidence pointer and schedule repository-growth8. All23 backlog ranges, main update and leased temporary-ref removal completed at d3a26a94f5c2 after canonical CI/normal hooks; initial pack-custody gaps remain7. Focused readonly review and book/mandatory integrity checks govern this maintenance commit.

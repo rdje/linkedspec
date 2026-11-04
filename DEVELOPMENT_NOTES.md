@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-04 — Git input coverage permits repeated historical objects
+
+The first custody reader rejected one shared blob in successive range lists. Independent actual lists show35008 rows/35007 unique original objects, with the blob reachable through later negative history but absent from its tip tree. Required-new-object set coverage is the contract; disjoint lists and summed newly transferred counts are not. Preserve the rejected source/log and actual diagnosis. The historical publisher also retains initial grouping fields after extending the last target; authoritative runtime metadata is separately derived from immutable Git and session. Original source and every prior claim field except two disclosed legs stay exact; full logical object custody does not claim physical encoding, transitive toolchain closure or exact wire bytes. The first landing attempt exceeds the fixed task collection cap. Retain full rejected/repaired populations and shorten this new narrative without changing projected contracts. Existing20.2 activates immediately under its prior cap trigger; no ceiling changes.
+
 ## 2026-11-04 — bounded retention is a valid daily cleanup disposition
 
 Reuse the accepted scanner on explicit locations instead of a whole-project walk. Root-level files are deliberately one level; six root/crate Rust locations and the retained log directory are separate. Independent scandir/lstat metadata and source-packet controls validate a dated snapshot, not content ownership or permission to purge. The review preserves every cache/proof artifact and keeps byte-exact publication/warning messages. Advisory repository growth is separately scheduled after current Count/copy coverage; historical IDs/evidence remain protected.
