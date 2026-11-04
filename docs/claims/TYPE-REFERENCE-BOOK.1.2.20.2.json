@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.20.2",
+  "claims": [
+    {
+      "name": "source-bound-later-narrative-epoch",
+      "statement": "The later source epoch renews380979 current-task bytes while retaining83 IDs, all CORE fields and11 complete open/unselected bodies; actual focused reader/preservation checks pass and22 named corruption cases reject.",
+      "scope": "The fixed659f19d748dd PERL-PRIVATE-FACTORY-CAPTURE source and the retained final direct-artifact/producer observation. Metadata date refresh does not alter node bodies. Complete accepted source is retained as a Git blob under an ancestor commit; current text capacity is distinct from Git disk or transfer size. Legacy three-archive API/preservation controls remain. Explicit later epochs currently cover unpartitioned trees only. Final collection observation12204983/12582912 is dated before later continuity edits; exact canonical/normal-hook gates independently enforce the resulting candidate. The changed-committed-manifest control explicitly models a prior Git manifest boundary in a local fixture, not an invented prior commit. Preparatory capacity selection leaves five legacy inline-header files unclassified; no global optimality, complete historical audit, temporary scheduling, concurrent-adversarial guarantee, transitive OS/Python/Git/CI producer closure or runtime feature admission is claimed. Writer boundary refusals use physical repository-local symlinks and explicitly modeled nested-repository, device and ancestor metadata; no other repository is initialized or touched. The original one-time mode refuses an existing archive before candidate creation.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-budget-renewal-2026-11-04/review.py; bash tools/run_python_project_data.sh tools/test_task_narrative.py. review.py --record is completed one-shot capture; default reviews retained dated data without migration.",
+        "granularity": "Every selected source/current node ID, complete multiline CORE field and open/unselected body; exact full Git source and actual public CLI node/full/legacy queries; every declared direct repository artifact input and actual focused command channel.",
+        "result": "{\"IDs\": 83, \"closed_narratives\": 72, \"collection_limit\": 12582912, \"dated_collection_bytes\": 12204983, \"dated_remaining_bytes\": 377929, \"renewed_bytes\": 380979, \"result\": \"PASS\", \"specific_denials\": [\"source-hash\", \"source-blob\", \"source-type\", \"source-path\", \"empty-selection\", \"duplicate-selection\", \"unknown-ID\", \"open-node\", \"current-goal\", \"duplicate-current-core\", \"missing-pointer\", \"missing-manifest\", \"rogue-member\", \"symbolic-manifest\", \"writer-source-symlink\", \"writer-output-symlink\", \"writer-nested-repository\", \"writer-other-volume\", \"writer-unretained-ancestor\", \"legacy-writer-repeated\", \"changed-committed-manifest\", \"duplicate-core\"], \"unchanged_open_or_unselected\": 11}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The old CLI already admits the new epoch, or source/selection/current-contract/pointer/manifest corruption can pass while losing source or open obligations.",
+        "oracle": "Actual initial CLI exit2 versus later byte-exact source slice; independent line-state complete-field projection and actual immutable Git source, separately from renderer regex. Local fixture corruptions require their exact diagnostic; modeled committed-manifest bytes independently supply that boundary.",
+        "red_control": "reader-before.json.gz retains actual old CLI rejection and producer bytes; reader-after.json.gz retains first successful source-matched node at its own producer phase. Final evidence.json.gz retains actual22 named denials and exact current producers/inputs, source reconstruction,83-ID/core equality and11 untouched bodies. Original archive controls and public legacy query pass. Intermediate logs remain preparatory chronology, without complete-input admission credit. Public-writer pre-write controls reject source/output symlinks, a modeled nested repository, a modeled other device and unretained ancestry without creating a destination. Original repeated migration refuses before scratch-candidate creation. Prior16/21 phases retain their original producers/inputs and receive no refreshed-source credit."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/cli_probe.py",
+            "sha256": "3aa459ab117c925c1de9080c6254aa0509303f8915d368b7fe57326604fa98ea",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/evidence-before-legacy-refusal.json.gz",
+            "sha256": "1ae81428f8bd08367837c1b3fd281fc17ab3cfdc08c4b316370b599a3b301383",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/evidence-before-path-guards.json.gz",
+            "sha256": "88051611ab4ca241bea8272b02de94ac16eae49733b3ebdab5cac391a2549f25",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/evidence.json.gz",
+            "sha256": "b487d88fd0288b042322effa17f69d87b939db4f9cc7ea0d08cfe2a441d8a2ed",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/focused-initial-test.py.gz",
+            "sha256": "0ef8451ed8bf9384b3c8f0a59d4fa29f90d774d5bd0cd88bc95ab715cf6f9be2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/focused-initial.log.gz",
+            "sha256": "38970184041a94bd6fdccd72ee8ba7e69c02d5368b690bd02deb8da2665dde81",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/intake.json",
+            "sha256": "55f0f8eaf6200a099a8693473a559ed65c5c480cde0918f25ddab24e012be538",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/intake.py",
+            "sha256": "6b0911503b64c25f170a910e03cf70452a56f35dcd39dcef6cb138f228344fbe",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/population-setup.log.gz",
+            "sha256": "869cc12172549f8bbfb73e95a364efaed4d58177d4416a53ec91f195aff798eb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/population-setup.py.gz",
+            "sha256": "c4fd345f1b3a0583bd31f3a2e1c32c90c3235564501a9338121fcbb55826a55a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/population.json",
+            "sha256": "08c85c0f5c22fc3f27f7e13e8bac21f5fa0ba3e4ffb08587e56f1ad77142ec20",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/population.py",
+            "sha256": "131a7372c39ad73d8d8b8295cf204b9adb420ad2c185b30f8667b5819d175dc9",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/reader-after.json.gz",
+            "sha256": "29f944dca389561a984fe0c9271ee092d9bcf6a4290b10a5d8e5f95c2b55ac19",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/reader-before.json.gz",
+            "sha256": "61f17eaf554299bbe44d953c03ba857606f7145130a3ed1fc2b84e41cdd8e100",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/result-before-path-guards.json",
+            "sha256": "0b3f79b3ce6d6502e00bb93801da372ff628d4951f99cd83b5a5e8cb1cde4dd5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/result.json",
+            "sha256": "ffee5339d53285b0515f53932865f3afb9154d648d6060a066e7132b51f29f56",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-budget-renewal-2026-11-04/review.py",
+            "sha256": "34dec168fc807f901cc7a486b81d5550d59a115d6aaca7eaa6c756dcb4c91ea5",
+            "role": "producer"
+          },
+          {
+            "path": "tools/task_narrative.py",
+            "sha256": "4e5e7d88f1d3a6eed8dbd69aeb39feab8268ede07f3aa509cc92644d6ea42ce5",
+            "role": "producer"
+          },
+          {
+            "path": "tools/migrate_task_narrative.py",
+            "sha256": "16c355f4ca32ecd32cb8061f2c1ecb0d63db64bd9eaa73d73d173aa702684d31",
+            "role": "producer"
+          },
+          {
+            "path": "tools/read_task_narrative.py",
+            "sha256": "7c4db09cfa3928e030b3e77c15f7d28fab797c036be9b2d6d6309c955e278bf9",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_task_narrative.py",
+            "sha256": "6848d629648bb508d3d2506ad934b304a1703f44a87591ed00b79b0116ce4767",
+            "role": "producer"
+          },
+          {
+            "path": "tools/check_task_narrative.py",
+            "sha256": "97666e831efb378d1a96fc75a7384c8b7d1998586b67e2e5ffd9e6413ca0494a",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          },
+          {
+            "path": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.20.2.json",
+            "sha256": "9dcdf2a24c1c1bb3334583b0803f9b50c21dd0dcabdd3f0a7904f07f2a9ce37a",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/readme_stability/routes.jsonl",
+            "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

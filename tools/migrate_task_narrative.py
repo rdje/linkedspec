@@ -3,20 +3,25 @@
 import gzip
 from pathlib import Path
 import re
+import subprocess
 from task_narrative import (ROOT, TREES, PARTS, BASE, CORE, archive, canonical, compact, current,
-                            digest, fields, git, nodes, partition, require)
+                            compact_epoch, digest, epoch_local_file, epoch_path, fields, git, nodes, partition, require,
+                            verify_epochs)
 
 
 def migrate():
     for tree in TREES:
         target = ROOT / f'docs/tasks/{tree}.md'
+        epoch_local_file(str(target.relative_to(ROOT)))
         original = target.read_bytes()
         evidence = ROOT / '.linkedspec-data/normal-hook-restoration' / (tree + '-candidate-before.md')
+        epoch_local_file(str(evidence.relative_to(ROOT)), allow_missing=True)
         require(not evidence.exists(), 'migration already attempted; inspect its retained input first')
+        directory = ROOT / f'docs/history/task-narrative/{tree}'
+        epoch_local_file(str((directory / 'manifest.jsonl').relative_to(ROOT)), allow_missing=True)
+        require(not directory.exists(), 'archive already exists')
         evidence.write_bytes(original)
         source = git('show', f'{BASE}:docs/tasks/{tree}.md')
-        directory = ROOT / f'docs/history/task-narrative/{tree}'
-        require(not directory.exists(), 'archive already exists')
         directory.mkdir(parents=True)
         pages, content, start = [], b'', 0
         def flush():
@@ -93,9 +98,70 @@ After editing a mutable part run `perl tools/update_task_tree_index.pl --tree {t
         capsule.write_bytes(gzip.compress(original,mtime=0))
         print(tree, 'retained',len(before),'IDs; archive',len(source),'bytes; current',sum(map(len,after.values())),'bytes')
 
+
+def migrate_epoch(epoch, tree, revision):
+    require(re.fullmatch(r'[A-Z][A-Z0-9-]*', tree), 'invalid epoch tree')
+    require(re.fullmatch(r'[0-9a-f]{40}', revision), 'epoch requires an exact source commit')
+    target = ROOT / f'docs/tasks/{tree}.md'
+    epoch_local_file(str(target.relative_to(ROOT)))
+    manifest = ROOT / epoch_path(epoch)
+    epoch_local_file(str(manifest.relative_to(ROOT)), allow_missing=True)
+    require(not (ROOT / f'docs/tasks/{tree}.index.jsonl').exists(), 'epoch migration requires an unpartitioned tree')
+    source_commit = git('rev-parse', '--verify', revision + '^{commit}').decode().strip()
+    try:
+        git('merge-base', '--is-ancestor', source_commit, 'HEAD')
+    except subprocess.CalledProcessError as error:
+        raise ValueError('epoch source is not retained committed history') from error
+    source_path = str(target.relative_to(ROOT))
+    source = git('show', source_commit + ':' + source_path)
+    require(target.read_bytes() == source, 'epoch source differs from current tree')
+    prefix, before = nodes(source)
+    section = re.split(rb'(?=^## Current Frontier\n)', source, maxsplit=1, flags=re.M)
+    require(prefix + b''.join(before.values()) == section[0], 'epoch source parser reconstruction')
+    selected, rendered = [], {}
+    for key, node in before.items():
+        values = fields(node)
+        closed = re.match(rb'  Status: `(done|completed|closed|superseded)`', values.get('Status', b''))
+        if closed and b'  Narrative:' not in node and b'  Narrative epoch:' not in node:
+            candidate = compact_epoch(node, tree, key, epoch)
+            if len(candidate) < len(node):
+                selected.append(key)
+                rendered[key] = candidate
+                continue
+        rendered[key] = node
+    require(selected, 'no closed narrative capacity')
+    result = prefix + b''.join(rendered.values()) + (section[1] if len(section) == 2 else b'')
+    after = nodes(result)[1]
+    require(set(before) == set(after), 'epoch current IDs changed')
+    for key, node in before.items():
+        require(all(fields(node).get(label) == fields(after[key]).get(label) for label in CORE),
+                'epoch current contract changed')
+        require(key in selected or after[key] == node, 'epoch unselected body changed')
+    require(not manifest.exists(), 'epoch already exists')
+    row = dict(version=1, epoch=epoch, tree=tree, source_commit=source_commit, source_path=source_path,
+               source_blob=git('rev-parse', source_commit + ':' + source_path).decode().strip(),
+               sha256=digest(source), bytes=len(source), lines=source.count(b'\n'), selected=sorted(selected))
+    raw = canonical(row)
+    require(len(raw) <= 65536, 'epoch manifest bound')
+    manifest.parent.mkdir(parents=True, exist_ok=True)
+    manifest.write_bytes(raw)
+    target.write_bytes(result)
+    require(verify_epochs() >= len(selected), 'epoch verification failed')
+    print(tree, 'retained', len(before), 'IDs;', len(selected), 'closed narratives;',
+          len(source) - len(result), 'bytes renewed; source', source_commit)
+
+
 if __name__=='__main__':
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--apply', action='store_true', required=True)
-    parser.parse_args()
-    migrate()
+    parser.add_argument('--epoch')
+    parser.add_argument('--tree')
+    parser.add_argument('--source-commit')
+    args = parser.parse_args()
+    if args.epoch:
+        require(args.tree and args.source_commit, 'epoch requires tree and explicit source commit')
+        migrate_epoch(args.epoch, args.tree, args.source_commit)
+    else:
+        require(not args.tree and not args.source_commit, 'original migration takes no epoch arguments')
+        migrate()

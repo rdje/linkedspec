@@ -1,0 +1,323 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.20.2",
+  "activation_commit": "659f19d748ddc9ddd6bc1c40c2c7b2d63107b138",
+  "producer_source": "\"\"\"Read-only closed-narrative capacity intake from the clean activation source.\"\"\"\nimport argparse\nimport hashlib\nimport json\nfrom pathlib import Path\nimport re\nimport subprocess\nimport sys\n\nROOT = Path(__file__).resolve().parents[3]\nHERE = Path(__file__).parent\nBASE = '659f19d748ddc9ddd6bc1c40c2c7b2d63107b138'\nsys.path.insert(0, str(ROOT / 'tools'))\nimport task_narrative as subject\n\n\ndef git(*args):\n    return subprocess.check_output(['git', *args], cwd=ROOT)\n\n\ndef observe():\n    assert not (HERE / 'intake.json').exists(), 'intake is one-shot'\n    files = [f'docs/tasks/TYPE-REFERENCE-BOOK.{kind}.md' for kind in subject.PARTS]\n    files += ['tools/task_narrative.py', 'tools/migrate_task_narrative.py',\n              'tools/read_task_narrative.py', 'tools/test_task_narrative.py',\n              'doctrine/readme_stability/routes.jsonl']\n    inputs, parts = {}, []\n    for name in files:\n        blob = git('rev-parse', BASE + ':' + name).decode().strip()\n        raw = git('cat-file', 'blob', blob)\n        inputs[name] = {'blob': blob, 'sha256': hashlib.sha256(raw).hexdigest(),\n                        'bytes': len(raw), 'retrieval': ['git', 'cat-file', 'blob', blob]}\n        if name.startswith('tools/'):\n            assert (ROOT / name).read_bytes() == raw, 'baseline producer already changed'\n        if not name.startswith('docs/tasks/'):\n            continue\n        _, nodes = subject.nodes(raw)\n        candidates = []\n        for key, node in nodes.items():\n            status = subject.fields(node).get('Status', b'')\n            if not re.match(rb'  Status: `(done|completed|closed|superseded)`', status):\n                continue\n            if b'  Narrative: exact predecessor via ' in node:\n                continue\n            rendered = subject.compact(node, 'TYPE-REFERENCE-BOOK', key)\n            if len(rendered) < len(node):\n                candidates.append({'id': key, 'source_bytes': len(node),\n                                   'legacy_render_bytes': len(rendered),\n                                   'structural_saving': len(node) - len(rendered)})\n        parts.append({'path': name, 'source_bytes': len(raw), 'nodes': len(nodes),\n                      'candidate_count': len(candidates),\n                      'structural_saving': sum(row['structural_saving'] for row in candidates),\n                      'candidates': candidates})\n    source = Path(__file__).read_bytes()\n    report = {'owner': 'TYPE-REFERENCE-BOOK.1.2.20.2', 'activation_commit': BASE,\n              'producer_source': source.decode(), 'producer_sha256': hashlib.sha256(source).hexdigest(),\n              'inputs': inputs, 'parts': parts,\n              'limits': 'Structural selection from the fixed clean Git source only. Existing compact '\n                        'rendering is used to estimate available closed narrative, not to authorize its '\n                        'old predecessor pointers for new nodes. No implementation, current file, '\n                        'archive, numerical ceiling or dependency source is changed.'}\n    (HERE / 'intake.json').write_text(json.dumps(report, indent=2) + '\\n')\n    print(json.dumps([{key: value for key, value in part.items() if key != 'candidates'}\n                      for part in parts], sort_keys=True))\n\n\nif __name__ == '__main__':\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument('--capture', action='store_true', required=True)\n    parser.parse_args()\n    observe()\n",
+  "producer_sha256": "6b0911503b64c25f170a910e03cf70452a56f35dcd39dcef6cb138f228344fbe",
+  "inputs": {
+    "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+      "blob": "c39a444a38e15deb73244e0aa7e49ce590cf9190",
+      "sha256": "ffd56adfb1cdc49a605d803e36b1411d39daa0b5887630cf27886e25ebaa0ed9",
+      "bytes": 329762,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "c39a444a38e15deb73244e0aa7e49ce590cf9190"
+      ]
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.helpers-01-39.md": {
+      "blob": "99feff564f9d96d4aa96330ede69d7fd886eb15f",
+      "sha256": "da6c1e3d97b9b97c5266870d59f54c9f9dd3d1bca9049aa882a503d43f4f1217",
+      "bytes": 538670,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "99feff564f9d96d4aa96330ede69d7fd886eb15f"
+      ]
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.helpers-40-59.md": {
+      "blob": "bf64bbfe9d0a614342bc4b39104fc0ade8e195ae",
+      "sha256": "38a479b0fb6bf449193966883bd2a4f528c38e345f8cd369b5006760007d86dd",
+      "bytes": 254337,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "bf64bbfe9d0a614342bc4b39104fc0ade8e195ae"
+      ]
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+      "blob": "42ceed702d780cc4c919f83047732b8803f797c3",
+      "sha256": "ff4cb6b023510295d73c98833c9adc5b695653fe15efa932cc90388d09008839",
+      "bytes": 187404,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "42ceed702d780cc4c919f83047732b8803f797c3"
+      ]
+    },
+    "tools/task_narrative.py": {
+      "blob": "6564cb2fcf6733bf563a4691944461808d27118f",
+      "sha256": "66476368059b938d3ad96c4d9fb9e34f98c5258a41cefbd848ffb76d5affae0a",
+      "bytes": 8939,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "6564cb2fcf6733bf563a4691944461808d27118f"
+      ]
+    },
+    "tools/migrate_task_narrative.py": {
+      "blob": "d63dff311e1aaba040c365b5a6e1df1119a29d8b",
+      "sha256": "e05f98193d302351154355a82818e8e9e83f46b11a1a889609f4528e78ff2ff8",
+      "bytes": 5913,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "d63dff311e1aaba040c365b5a6e1df1119a29d8b"
+      ]
+    },
+    "tools/read_task_narrative.py": {
+      "blob": "030829d5c00582c746166edca64e33eb2af018b6",
+      "sha256": "f63a2312fca483e48f71a6a50a82492f37bb64e11f273e1b9df3de0e9496f682",
+      "bytes": 796,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "030829d5c00582c746166edca64e33eb2af018b6"
+      ]
+    },
+    "tools/test_task_narrative.py": {
+      "blob": "abd647b38f5d351826f314669b2c67a3d3f4fc03",
+      "sha256": "47fb6cc1e383e575e575da5c811ed1f04e93129e513872f6b4b2e64ea7c09222",
+      "bytes": 5504,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "abd647b38f5d351826f314669b2c67a3d3f4fc03"
+      ]
+    },
+    "doctrine/readme_stability/routes.jsonl": {
+      "blob": "d4aabf5d3f0d97d92763ccdf8cf2e1ecec3c55b6",
+      "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248",
+      "bytes": 25053,
+      "retrieval": [
+        "git",
+        "cat-file",
+        "blob",
+        "d4aabf5d3f0d97d92763ccdf8cf2e1ecec3c55b6"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "path": "docs/tasks/TYPE-REFERENCE-BOOK.overview.md",
+      "source_bytes": 329762,
+      "nodes": 156,
+      "candidate_count": 30,
+      "structural_saving": 58360,
+      "candidates": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1",
+          "source_bytes": 4490,
+          "legacy_render_bytes": 1424,
+          "structural_saving": 3066
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.1",
+          "source_bytes": 6761,
+          "legacy_render_bytes": 1293,
+          "structural_saving": 5468
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.2",
+          "source_bytes": 3214,
+          "legacy_render_bytes": 1508,
+          "structural_saving": 1706
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.4",
+          "source_bytes": 1420,
+          "legacy_render_bytes": 1235,
+          "structural_saving": 185
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.5",
+          "source_bytes": 1423,
+          "legacy_render_bytes": 1238,
+          "structural_saving": 185
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.6",
+          "source_bytes": 1419,
+          "legacy_render_bytes": 1234,
+          "structural_saving": 185
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.7",
+          "source_bytes": 1356,
+          "legacy_render_bytes": 1171,
+          "structural_saving": 185
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.8",
+          "source_bytes": 1418,
+          "legacy_render_bytes": 1233,
+          "structural_saving": 185
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.9",
+          "source_bytes": 1592,
+          "legacy_render_bytes": 1407,
+          "structural_saving": 185
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.10",
+          "source_bytes": 9159,
+          "legacy_render_bytes": 1585,
+          "structural_saving": 7574
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.5",
+          "source_bytes": 5751,
+          "legacy_render_bytes": 1386,
+          "structural_saving": 4365
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.3",
+          "source_bytes": 9433,
+          "legacy_render_bytes": 1777,
+          "structural_saving": 7656
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+          "source_bytes": 2756,
+          "legacy_render_bytes": 1529,
+          "structural_saving": 1227
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.12",
+          "source_bytes": 2497,
+          "legacy_render_bytes": 1287,
+          "structural_saving": 1210
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.13",
+          "source_bytes": 1399,
+          "legacy_render_bytes": 1266,
+          "structural_saving": 133
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.14",
+          "source_bytes": 3563,
+          "legacy_render_bytes": 1320,
+          "structural_saving": 2243
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.15",
+          "source_bytes": 2464,
+          "legacy_render_bytes": 1386,
+          "structural_saving": 1078
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.16",
+          "source_bytes": 2920,
+          "legacy_render_bytes": 1287,
+          "structural_saving": 1633
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.17",
+          "source_bytes": 2364,
+          "legacy_render_bytes": 1289,
+          "structural_saving": 1075
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.18",
+          "source_bytes": 3468,
+          "legacy_render_bytes": 1784,
+          "structural_saving": 1684
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.18.1",
+          "source_bytes": 2573,
+          "legacy_render_bytes": 1406,
+          "structural_saving": 1167
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.18.2",
+          "source_bytes": 2661,
+          "legacy_render_bytes": 1378,
+          "structural_saving": 1283
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.19",
+          "source_bytes": 4112,
+          "legacy_render_bytes": 1721,
+          "structural_saving": 2391
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.20",
+          "source_bytes": 3684,
+          "legacy_render_bytes": 1828,
+          "structural_saving": 1856
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.21",
+          "source_bytes": 5404,
+          "legacy_render_bytes": 2066,
+          "structural_saving": 3338
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.13.1",
+          "source_bytes": 1629,
+          "legacy_render_bytes": 1382,
+          "structural_saving": 247
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.13.2",
+          "source_bytes": 2687,
+          "legacy_render_bytes": 1223,
+          "structural_saving": 1464
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.20.1.22",
+          "source_bytes": 2547,
+          "legacy_render_bytes": 1587,
+          "structural_saving": 960
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.6",
+          "source_bytes": 3501,
+          "legacy_render_bytes": 1238,
+          "structural_saving": 2263
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.7",
+          "source_bytes": 3651,
+          "legacy_render_bytes": 1488,
+          "structural_saving": 2163
+        }
+      ]
+    },
+    {
+      "path": "docs/tasks/TYPE-REFERENCE-BOOK.helpers-01-39.md",
+      "source_bytes": 538670,
+      "nodes": 336,
+      "candidate_count": 0,
+      "structural_saving": 0,
+      "candidates": []
+    },
+    {
+      "path": "docs/tasks/TYPE-REFERENCE-BOOK.helpers-40-59.md",
+      "source_bytes": 254337,
+      "nodes": 166,
+      "candidate_count": 0,
+      "structural_saving": 0,
+      "candidates": []
+    },
+    {
+      "path": "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md",
+      "source_bytes": 187404,
+      "nodes": 119,
+      "candidate_count": 0,
+      "structural_saving": 0,
+      "candidates": []
+    }
+  ],
+  "limits": "Structural selection from the fixed clean Git source only. Existing compact rendering is used to estimate available closed narrative, not to authorize its old predecessor pointers for new nodes. No implementation, current file, archive, numerical ceiling or dependency source is changed."
+}

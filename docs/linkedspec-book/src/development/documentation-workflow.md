@@ -371,6 +371,38 @@ list values. Double-quoted evidence/reverify inline items can protect commas and
 escaped quotes; block lists keep complex commands readable. Questions containing
 commas continue to use the existing block-list form.
 
+## Later task-narrative epochs
+
+Closed task evidence can grow after an earlier archive snapshot. Keep every
+current ID, contract field and open task body visible, then name a new extraction
+epoch explicitly. Existing queries without an epoch keep their original source.
+
+For example, this reads the complete accepted historical body of one closed node:
+
+```bash
+bash tools/run_python_project_data.sh tools/read_task_narrative.py \
+  --tree PERL-PRIVATE-FACTORY-CAPTURE --epoch TYPE-REFERENCE-BOOK.1.2.20.2 \
+  --id PERL-PRIVATE-FACTORY-CAPTURE.1
+```
+
+Replace `--id ...` with `--all` to read that epoch's whole source file. The current
+graph remains in `docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md`; the query returns the
+explicit historical snapshot, including its original dates and statuses.
+
+The bounded immutable manifest under `docs/history/task-narrative-epochs/` names
+the accepted commit, source path, Git blob, SHA-256 and selected IDs. Git retains
+the complete body through that ancestor commit. A full-history clone supplies
+the source; the reader verifies its identity and ancestry before returning it.
+The task metadata gate rejects lost contracts, wrong or missing pointers,
+corrupted source identities and changed committed manifests. Open bodies stay
+complete. The one-shot migration requires its own task owner and explicit source
+commit. It checks repository/volume boundaries and retained ancestry before writing,
+rejects symlink and nonregular targets, and refuses repeated original migration
+before creating a candidate. Focused preservation checks and canonical acceptance follow.
+
+This renews the bounded current document collection. The full Git history remains
+retained, and the text reduction supplies no disk-reclamation or upload-size claim.
+
 ## Public book
 
 This book is for:

@@ -13,6 +13,7 @@ CORE = ('Status', 'Goal', 'Acceptance', 'Dependencies', 'Children', 'Parent', 'V
         'Planned claim verification', 'Superseded by')
 PARTS = ('overview', 'helpers-01-39', 'helpers-40-59', 'helpers-60plus')
 BASE = '0db5e9e87b7c1cfaf09936b9629974787038f5e3'
+EPOCH_DIRECTORY = 'docs/history/task-narrative-epochs'
 
 
 def require(ok, message):
@@ -165,6 +166,155 @@ def current(tree):
     return result
 
 
+def epoch_path(epoch):
+    require(isinstance(epoch, str) and re.fullmatch(r'[A-Z][A-Z0-9-]*(?:\.[0-9]+)+', epoch),
+            'invalid narrative epoch')
+    return f'{EPOCH_DIRECTORY}/{epoch}.json'
+
+
+def epoch_local_file(name, allow_missing=False):
+    """Check the repository write/read boundary without following a link."""
+    require(isinstance(name, str) and re.fullmatch(r'[A-Za-z0-9_.\-/]+', name)
+            and not name.startswith('/') and all(part not in ('', '.', '..') for part in name.split('/')),
+            'unsafe epoch local path')
+    cursor = ROOT
+    volume = ROOT.stat().st_dev
+    parts = Path(name).parts
+    for number, part in enumerate(parts):
+        cursor /= part
+        require(not cursor.is_symlink(), 'symbolic epoch path')
+        if not cursor.exists():
+            require(allow_missing, 'epoch input is missing')
+            return ROOT / name
+        require(cursor.stat().st_dev == volume, 'epoch path is on another volume')
+        if cursor.is_dir():
+            marker = cursor / '.git'
+            require(not marker.is_symlink() and not marker.exists(), 'nested repository epoch path')
+        if number == len(parts) - 1:
+            require(cursor.is_file(), 'nonregular epoch file')
+    return cursor
+
+
+def epoch_pointer(tree, key, epoch):
+    return (f'  Narrative epoch: `{epoch}`; exact accepted source via '
+            f'`bash tools/run_python_project_data.sh tools/read_task_narrative.py '
+            f'--tree {tree} --epoch {epoch} --id {key}`.\n\n').encode()
+
+
+def compact_epoch(node, tree, key, epoch):
+    epoch_path(epoch)
+    require(isinstance(tree, str) and re.fullmatch(r'[A-Z][A-Z0-9-]*', tree)
+            and isinstance(key, str) and re.fullmatch(re.escape(tree) + r'(?:\.[0-9]+)*', key),
+            'invalid epoch task identity')
+    labels = re.findall(rb'^  ([A-Za-z][A-Za-z /()-]*):', node, re.M)
+    require(all(labels.count(name.encode()) <= 1 for name in CORE), 'duplicate epoch core field')
+    values = fields(node)
+    require(re.match(rb'  Status: `(done|completed|closed|superseded)`', values.get('Status', b'')),
+            'only closed narrative may be extracted')
+    require(b'  Narrative:' not in node and b'  Narrative epoch:' not in node,
+            'narrative already extracted')
+    raw = node.splitlines(keepends=True)[0]
+    raw += b''.join(value for name, value in values.items() if name in CORE)
+    raw += epoch_pointer(tree, key, epoch)
+    require(all(fields(raw).get(name) == values.get(name) for name in CORE), 'epoch core contract loss')
+    return raw
+
+
+def epoch_source(epoch):
+    """Read an immutable manifest and its complete committed Git source body.
+
+    Epochs cover unpartitioned current trees. The three original archives and
+    their readers retain their original source and storage contracts.
+    """
+    name = epoch_path(epoch)
+    epoch_local_file(name)
+    manifest = read(name)
+    require(len(manifest) <= 65536, 'epoch manifest bound')
+    row = json.loads(manifest, object_pairs_hook=strict_pairs)
+    require(canonical(row) == manifest, 'noncanonical epoch manifest')
+    require(isinstance(row, dict) and set(row) == {'version', 'epoch', 'tree', 'source_commit', 'source_path', 'source_blob',
+                         'sha256', 'bytes', 'lines', 'selected'}, 'epoch manifest schema')
+    require(type(row['version']) is int and row['version'] == 1 and row['epoch'] == epoch,
+            'epoch identity')
+    tree = row['tree']
+    require(isinstance(tree, str) and re.fullmatch(r'[A-Z][A-Z0-9-]*', tree), 'epoch tree name')
+    require(row['source_path'] == f'docs/tasks/{tree}.md', 'epoch source path')
+    require(all(isinstance(row[key], str) and re.fullmatch(r'[0-9a-f]{' + str(size) + '}', row[key])
+                for key, size in (('source_commit', 40), ('source_blob', 40), ('sha256', 64))),
+            'epoch source identities')
+    require(type(row['bytes']) is int and 0 < row['bytes'] <= 1048576
+            and type(row['lines']) is int and 0 < row['lines'] <= 8000, 'epoch source bounds')
+    selected = row['selected']
+    require(isinstance(selected, list) and selected and all(isinstance(key, str) for key in selected)
+            and selected == sorted(set(selected)), 'epoch selected population')
+    try:
+        git('merge-base', '--is-ancestor', row['source_commit'], 'HEAD')
+        blob = git('rev-parse', f'{row["source_commit"]}:{row["source_path"]}').decode().strip()
+        source = git('cat-file', 'blob', blob)
+    except subprocess.CalledProcessError as error:
+        raise ValueError('epoch source is not retained committed history') from error
+    require(blob == row['source_blob'] and digest(source) == row['sha256']
+            and len(source) == row['bytes'] and source.count(b'\n') == row['lines'], 'epoch source identity')
+    prior = nodes(source)[1]
+    require(all(key in prior and re.fullmatch(re.escape(tree) + r'(?:\.[0-9]+)*', key)
+                for key in selected), 'epoch selected IDs')
+    for key in selected:
+        compact_epoch(prior[key], tree, key, epoch)
+    retained = git('ls-tree', '--name-only', 'HEAD', '--', name).decode().splitlines()
+    require(not retained or retained == [name] and git('show', 'HEAD:' + name) == manifest,
+            'retained epoch manifest changed')
+    return row, source
+
+
+def verify_epochs():
+    directory = ROOT / EPOCH_DIRECTORY
+    if not directory.exists():
+        require(not directory.is_symlink(), 'unsafe epoch directory')
+        require(not git('ls-tree', '-r', '--name-only', 'HEAD', '--', EPOCH_DIRECTORY).strip(),
+                'retained epoch directory missing')
+        paths = []
+    else:
+        require(not directory.is_symlink() and directory.is_dir(), 'unsafe epoch directory')
+        paths = sorted(directory.iterdir())
+    expected, selections, sources = set(), set(), set()
+    for path in paths:
+        require(path.is_file() and not path.is_symlink() and path.suffix == '.json', 'unknown epoch member')
+        epoch = path.stem
+        name = epoch_path(epoch)
+        expected.add(name)
+        row, source = epoch_source(epoch)
+        tree = row['tree']
+        prior, now = nodes(source)[1], current(tree)
+        sources.add(row['source_path'])
+        for key in row['selected']:
+            require((tree, key) not in selections, 'duplicate epoch selection')
+            selections.add((tree, key))
+            pointer = epoch_pointer(tree, key, epoch).splitlines(keepends=True)[0]
+            require(key in now and fields(now[key]).get('Narrative epoch') == pointer
+                    and now[key].count(pointer) == 1, 'current epoch pointer missing or wrong')
+            labels = re.findall(rb'^  ([A-Za-z][A-Za-z /()-]*):', now[key], re.M)
+            require(all(labels.count(label.encode()) <= 1 for label in CORE),
+                    'duplicate epoch current core field')
+            before, after = fields(prior[key]), fields(now[key])
+            require(re.match(rb'  Status: `(done|completed|closed|superseded)`', after.get('Status', b'')),
+                    'epoch current node is not closed')
+            for label in CORE:
+                if label not in ('Status', 'Commit', 'Commit subject'):
+                    require(before.get(label) == after.get(label), 'epoch current contract changed: ' + key + '/' + label)
+    retained = git('ls-tree', '-r', '--name-only', 'HEAD', '--', EPOCH_DIRECTORY).decode().splitlines()
+    require(set(retained) <= expected, 'retained epoch member missing')
+    # A new pointer cannot silently lose its manifest or name an unregistered ID.
+    for path in (ROOT / 'docs/tasks').glob('*.md'):
+        raw = read(str(path.relative_to(ROOT)))
+        if b'  Narrative epoch:' not in raw:
+            continue
+        require(str(path.relative_to(ROOT)) in sources, 'unregistered epoch pointer source')
+        for key, node in nodes(raw)[1].items():
+            if b'  Narrative epoch:' in node:
+                require((key.split('.', 1)[0], key) in selections, 'unregistered epoch pointer ID')
+    return len(selections)
+
+
 def verify():
     total = 0
     for tree in TREES:
@@ -180,4 +330,5 @@ def verify():
                         require(before.get(label) == after.get(label), 'closed task contract changed: ' + key + '/' + label)
                 require(f'--tree {tree} --id {key}`'.encode() in now[key], 'closed narrative pointer is wrong')
         total += len(prior)
+    verify_epochs()
     return total

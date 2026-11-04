@@ -7,10 +7,10 @@ answers:
   - "where is the TYPE reference task tree after narrative containment"
   - "how can closed task narratives be reconstructed exactly"
   - "does claim caching preserve staged snapshot checks"
-date: 2026-11-01
+date: 2026-11-04
 status: accepted
 tags: [doctrine, history, tasks, knowledge-map, claim-verification]
-evidence: "Accepted ADR0139, catalog/source corruption controls, independent task precursor oracle, full Knowledge projection comparison and claim snapshot/owner controls. Canonical acceptance remains separately required by20.1.10."
+evidence: "Accepted ADR0139, catalog/source corruption controls, independent task precursor oracle, full Knowledge projection comparison and claim snapshot/owner controls. 20.1.10 was canonically accepted at cd3b6adc. Later epoch20.2 retains focused source/CLI/contract proof; exact canonical acceptance separately governs its infrastructure landing."
 reverify: "bash scripts/check_task_tree_metadata.sh; bash tools/run_python_project_data.sh tools/check_reference_scope.py; bash tools/run_python_project_data.sh tools/test_claim_verification_cache.py"
 ---
 
@@ -32,6 +32,15 @@ The current TYPE graph lives in four semantic parts. Resolve the current owner w
 remain current; exact predecessor narrative is available through
 `python3 tools/read_task_narrative.py --tree TYPE-REFERENCE-BOOK --id <stable-id>` or `--all`.
 The archive explicitly names its historical source; it does not replace the current graph.
+
+Later unpartitioned-tree extraction uses an explicit `--epoch` without changing those original queries.
+The bounded immutable manifest under `docs/history/task-narrative-epochs/` binds a retained ancestor commit,
+source path, Git blob/SHA-256 and selected IDs. Full-history Git supplies the complete original body.
+The current graph retains every CORE field and complete open/unselected bodies. The task metadata gate
+checks source identity, ancestry, current contracts/pointers and committed-manifest immutability.
+The actual83-ID/72-closed/11-open extraction and22 specific denials are retained under
+`docs/checkpoints/task-budget-renewal-2026-11-04/`; default review is read-only. Its dated collection count
+precedes continuity edits; exact canonical acceptance and normal hooks separately gate the final candidate.
 
 Knowledge compaction combines date/status/source display and removes redundant separators. It retains
 authored question order and multiplicity, route rows, titles and all evidence/reverify values.

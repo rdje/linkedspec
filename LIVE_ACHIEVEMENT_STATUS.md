@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Publication-custody23.4.7 is complete with focused proof. Cap-triggered task-budget20.2 is next; Rust Count73.2/peers and P1 copy73.6 follow; advisory growth8 follows before unrelated selection. Full admission remains separate.
+Task-budget20.2 renews current capacity with exact source retention. After canonical landing and the normal clean push, resume Rust Count73.2/peers and P1 copy73.6; advisory growth8 follows before unrelated selection. Full admission remains separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.7 retains the actual original planner/call records, all23 successful upload outcomes and complete published logical Git-object identities. Capture hashed every109230 opaque body;16 altered-record/model controls reject. Original equality, final grouping/runtime metadata and actual overlapping range lists are distinguished, with the first failed reviewer preserved. Only the two disclosed preceding claim legs change. Publication remains d3a26a94f5c2; later focused maintenance is local until a future canonical push.
+TYPE-REFERENCE-BOOK.1.2.20.2 retains83 IDs, all CORE fields and11 complete open/unselected bodies while moving72 closed narratives behind explicit Git source epochs.380979 current bytes are renewed; independent preservation, actual source/legacy CLI and22 specific denials pass. The bounded manifest/source/ancestry guard preserves all old archives and ceilings. Complete actual focused producer/input data is retained. Exact canonical receipt and normal hooks govern this infrastructure landing.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.20.2 to renew unchanged-cap task headroom after actual rejection, then independently activate Rust Count73.2 guards, then peers and P1 copy/source73.6. Growth8 precedes unrelated selection. Admission23.4, feature-registration23.4.1, fixture-custody23.4.2 and budget headroom20.2 remain independently owned.
+Publish the next exact verified clean HEAD using normal hooks, then independently activate Rust Count73.2 guards, peers and P1 copy/source73.6. Growth8 precedes unrelated selection. Admission23.4, feature-registration23.4.1 and fixture-custody23.4.2 remain independently owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.20.2 — later immutable source epochs renew capacity with all current contracts/open bodies retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.7 — original source/actual publication/logical Git custody and focused controls reviewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.6 — bounded retention-only artifact review; independent metadata/five evidence controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.4.3 — backend/shared-fixture task-evidence routing; legacy/new-contract RED/repaired actual-index controls retained.

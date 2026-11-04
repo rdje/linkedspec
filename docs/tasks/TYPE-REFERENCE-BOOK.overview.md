@@ -1928,17 +1928,38 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Narrative: exact predecessor via `python3 tools/read_task_narrative.py --tree TYPE-REFERENCE-BOOK --id TYPE-REFERENCE-BOOK.1.2.23.1.34`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20.2`
-  Status: `pending`
+  Status: `completed` / source-bound epoch capacity renewed
   Priority: P1; next after23.4.7 clean landing, before further feature growth.
   Goal: Renew current task collection headroom through another source-bound closed-narrative extraction while retaining every current obligation and all existing ceilings.
   Dependencies: Accepted20.1.10; preserve the selected Count73 feature sequence unless the actual gate would reject further task growth.
   Reproduction/impact: The restored current collection passes its existing aggregate byte cap with less than one percent headroom. Additional evidence can consume this margin, so normal-hook restoration is not a lifetime task-growth allowance. Publication-custody7 now records actual normal-hook rejection at12584656/12582912 bytes; activate this owner before further growth. No numerical ceiling increase is authorized.
   Schedule: Actual rejection activates this owner immediately after23.4.7, before Rust Count73.2. Use the current capacity checker, classify closed narrative in the next suitable owner, retain exact predecessor/retrieval and independent obligation/open-body proof; do not remove current nodes or edit immutable partitions.
   Acceptance: Meaningful renewed headroom within the original aggregate/file/per-part limits, exact source reconstruction, complete current contracts, negative loss/corruption controls, book/continuity updates and normal canonical acceptance for infrastructure.
-  Planned verification tier: canonical
-  Planned focused checks: Selected owner/source census, exact narrative/current-contract preservation and direct reader/index controls; no unrelated historical audit.
-  Planned canonical trigger: Infrastructure acceptance and exact clean push boundary.
-  Planned claim verification: none: Prospective capacity owner; actual extraction declares its source-bound proof before acceptance.
+  Verification tier: `canonical`
+  Focused checks: Selected owner/source census, exact narrative/current-contract preservation and direct reader/index controls; no unrelated historical audit.
+  Canonical trigger: Infrastructure acceptance and exact clean push boundary.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.20.2.json`
+
+  Activation: Clean659f19d748dd after custody7 normal-hook landing; brief0 and tree clean. Preserve all current IDs/contracts/open bodies and immutable sources. Scope closed narrative renewal only; no ceiling increase or dependency implementation access.
+
+  Selected source: Clean659f19d7 PERL-PRIVATE-FACTORY-CAPTURE.md has72 eligible closed nodes with388827 legacy-render structural bytes available. New epochs retain the full committed source through Git content identity and guarded ancestry, preserving every CORE field and open body; no duplicate payload archive or old-source pointer is invented. Current3-tree retrieval stays unchanged. Population setup assumed multiline headers for five legacy inline-root files; rejected source/log are retained, those files explicitly unclassified and untouched. No selected source/tool has a live claim intersection.
+
+  Result: New unpartitioned source epochs preserve the complete accepted Git body by ancestor commit/path/blob/SHA256 and keep old three-archive queries unchanged. PERL private task source retains83 IDs/all CORE fields/11 open or unselected bodies;72 closed narratives renew380979 bytes. The current maintenance date is refreshed. Dated final focused capture12204983/12582912 leaves377929 bytes before later continuity edits; final gates enforce current pressure. Immutable partitions, existing source archives and all numerical ceilings stay unchanged.
+  Verification: Independent line-state contract projection, actual public node/full/legacy CLI routes, old archive controls and22 exact source/selection/contract/pointer/manifest denials pass. The committed-manifest case explicitly models the prior boundary. Original reader RED and initial/corrected/final producer epochs survive; complete final direct artifact inputs are retained or Git-retrievable. Canonical receipt and normal hooks govern infrastructure landing; no complete runtime/portable admission follows. Existing Python entrypoint/temporary-owner membership covers the changed test file; no inventory allowance changes.
+  Documentation: Book/setup guide/Knowledge/current task and roadmap/live/resume pointers align; no live claim intersects changed source/tools/book/card paths. Publish the next exact verified clean HEAD under normal hooks, then resume Rust Count73.2/peers, P1 copy73.6 and advisory growth8.
+  Commit: TYPE-REFERENCE-BOOK.1.2.20.2 — retain later task narratives through immutable source epochs
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — source-bound custody7 cap rejection and actual new-epoch CLI exit2 retained; `rg -n`/task capacity records identify the owning surface.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — tool-backed original reader restricts three one-time snapshots; tools/task_narrative.py and tools/read_task_narrative.py need explicit later source identity, not a new numerical ceiling.
+  - [x] **FIX** — bounded immutable epoch manifest, ancestor/Git body hashes, exact current contracts/open bodies and stable-ID query; preserve original archive contracts.
+  - [x] **ADDRESSED (verified)** — actual reader REJECT->PASS; independent83-ID/core/11-body proof and22 specific denials PASS with exact retained source/input epochs.
+  - [x] **NO REGRESSION** — original archive preservation/corruptions and actual legacy CLI PASS; `git diff --check`; exact `bash tools/run_ci_local.sh` and normal hooks govern this canonical landing.
+  - [x] **LOCKSTEP** — mdBook/setup/Knowledge/map/history/roadmap/task/live/MEMORY synchronized; source snapshots remain historical and complete feature admission separate.
+
+  Owned writer boundary defect: Path.read_bytes/write_bytes can follow a symlink or a nested Git boundary before post-write verification. Add explicit repository-volume/regular-file/symlink/nested-repository checks before any new-epoch source read or destination creation. Preserve the prior16-denial source/input capsule unchanged; add actual public-writer refusal controls with no outside write.
+
+  Boundary resolution: All writer modes validate local regular-file/symlink/repository/volume boundaries before writes; new epochs require retained ancestry before mutation. Physical symlink and explicitly modeled repository/device/ancestor controls refuse with no destination creation. Repeated original migration refuses before candidate creation. Final22-denial producer/input capture and replay PASS; prior16/21 phases stay exact. No outside write or other repository creation occurred.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.20.1.11`
   Status: `completed` / component accepted only through integrated20.1.10 normal hooks and exact canonical receipt

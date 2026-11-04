@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-04 — TYPE-REFERENCE-BOOK.1.2.20.2 — retain later task narratives through immutable source epochs
+
+Explicit later unpartitioned epochs bind an ancestor commit/path/blob/SHA256 and preserve original three-archive queries. The selected private-factory tree retains83 IDs/all CORE fields/11 complete open or unselected bodies;72 closed narratives renew380979 bytes. Independent contracts, actual node/full/legacy queries and22 exact corruptions pass with full direct evidence. No source deletion, immutable edit, numerical cap change or runtime movement occurs. Public/setup/Knowledge/continuity align; exact canonical receipt and normal hooks govern infrastructure landing.
+
 ## 2026-11-04 — TYPE-REFERENCE-BOOK.1.2.23.4.7 — preserve publication source and logical object custody
 
 Original call/output records and inline planner, actual23 bounded uploads and full reachable logical object identities are retained. Capture recomputes every109230 opaque body address/hash; readonly review and16 altered-record/model denials pass. Equality, stale raw grouping metadata and repeated batch inputs are distinguished with the failed first reviewer preserved. Only two preceding disclosed claim legs change. Public workflow/Knowledge/task/live/resume pointers align. Actual task-cap rejection preserves the failed candidate; shorten only this new narrative with all contracts intact. Existing20.2 activates before Rust. No new push or canonical run is implied.

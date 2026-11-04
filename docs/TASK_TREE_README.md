@@ -199,6 +199,14 @@ range does not create missing tasks. After editing its owning part, run
 `perl tools/update_task_tree_index.pl --tree <tree>` in the same slice. Keep current
 frontiers in the root and historical source identities unchanged in their registered index or source-archive manifest.
 
+Later closed narratives in an unpartitioned tree can use an explicit source epoch:
+`bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-PRIVATE-FACTORY-CAPTURE --epoch TYPE-REFERENCE-BOOK.1.2.20.2 --id PERL-PRIVATE-FACTORY-CAPTURE.1`.
+Use `--all` instead of `--id` for the complete named source. Queries without an epoch retain the original
+three-archive contract. Epoch manifests are immutable and bounded; their source is a hash-checked Git blob
+under a retained ancestor commit. Keep every CORE field and all open bodies current. Run the one-shot writer
+only under a new owning leaf, then independent preservation/corruption proof and exact canonical acceptance.
+The current collection ceilings and registered immutable partitions do not change.
+
 The verification-cadence gate compares declarations by task ID and exact value across
 HEAD and the index. Moving unchanged historical nodes adds no new slice. A slice
 still has exactly one changed owning leaf with one tier, focused selection and
