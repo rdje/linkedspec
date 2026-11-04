@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6015,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-normalization.md","sha256":"91d74b974fbcf60e6f9a568cfd95b5eab95e497ab5889f204ee0c440451ede71","type":"member"}
 {"bytes":7814,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-preflight.md","sha256":"d9be574bcf31ebc5eb433772f99db85ed69a619bf018ddbbc951da238bed9cdd","type":"member"}
 {"bytes":6679,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-slot-marker-execution.md","sha256":"b00428f07bed815677aefb3cabe82df46ca7377424d9226cd01dd34cc9a129a5","type":"member"}
 {"bytes":3037,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-anonymous-capture-helpers.md","sha256":"be126ad1e2728e1a277412825256e20d5c7a42d1944f2328923f7b0b2ffb87c4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4943,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-method-source-gap.md","sha256":"acdec7ca6ddf1a063df3adbe6a69625ec06ccd566902be8af43b51f0b4d8bb9c","type":"member"}
 {"bytes":3123,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-rust-ordinary-compatibility.md","sha256":"4cba6710af7a8a0d472255f54b3a01b43a2e4ca484b213b47fc6df7935e6af47","type":"member"}
 {"bytes":7339,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-writer-endpoint-presence-authority.md","sha256":"f801517a2bdc7f4b454d4aa94488d0edcb236a2170189a53484270e6657ffbf1","type":"member"}
-{"bytes":5806,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-in-memory-backend-contract.md","sha256":"5ce7f918ceb294a04c6769de63627555f14a8cce92805f859f41d3dfcbe6dd31","type":"member"}

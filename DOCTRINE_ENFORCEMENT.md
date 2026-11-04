@@ -254,6 +254,12 @@ invariant, `docs/decisions/0002`) re-executes the real engine, so cited results 
 re-verified. `TASK-ACCEPTANCE` is intentionally a staged evidence-shape check, not a hook-time
 executor for arbitrary Markdown commands.
 
+Its governed directory scope is `.github/workflows/`, `.githooks/`, `bin/`, `perl/`, `rust/`,
+`dart/`, `julia/`, `lua/`, `specs/`, `t/`, `tests/`, `tools/` and `scripts/`. Directory scope includes
+backend guides/manifests; root and `docs/` documentation alone remain outside it. The recurring
+`tools/test_diagnosis_evidence.py` calls the actual gate with repository-local alternate indexes,
+checking missing/complete/incomplete evidence, deletions and documentation-only compatibility.
+
 If `TASK-ACCEPTANCE` fires unexpectedly, inspect the exact staged set with
 `git diff --cached --name-only`. The valid exits are to unstage unrelated governed files,
 stage/update the owning task-tree checklist, or split the work into a leaf that can carry honest

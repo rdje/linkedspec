@@ -13,11 +13,12 @@ answers:
   - which supplied private factory helper scripts receive syntax checks
   - "does canonical CI select the new pipeline scope fixture"
   - "why do current factory tests differ from their frozen native observations"
+  - "why does task evidence CI registration need an exact historical inverse"
 date: 2026-10-19
 status: canonical .7 receipt retained; pipeline fixture extends the selected framework suite
 tags: [perl, ci, regression, copy, verification]
 evidence: "Leaf .7 inventories91 suites/363 exact supplied inputs and46 test helpers. Original direct selection omits86 suites and132/131 tracked/syntax paths. Actual selected Bash population and historical inverse pass with effective faults; complete originals and failed instruments remain retained. Exact staged CI governs admission."
-last_verified: 2026-11-02
+last_verified: 2026-11-04
 reverify: "Current recurring consumers: bash tools/run_python_project_data.sh docs/checkpoints/document-pressure-restoration/factory_evidence.py. Dated type-evaluated-values/publish.py requires its original accepted logical inputs; capture writers are not replayed."
 ---
 
@@ -54,3 +55,13 @@ are distinct; the latter skips operands. Instrument setup failures are retained
 without product RED credit. Nine native/fresh cases and scope/key controls have
 separate retained sources; canonical CI and normal hooks still govern closure.
 Evidence/reviewer: docs/checkpoints/document-pressure-restoration/factory_evidence.py.
+
+Backend task-evidence23.4.3 registers three scripts immediately after doctrines.
+The historical auditor must reverse this exact later block before older anchored
+insertions; every original runner byte remains required. The actual canonical
+registration failure and corrected isolated recovery are retained under
+docs/checkpoints/task-acceptance-backend-scope. capture_registration.py checks
+eleven independently constructed missing/duplicate/presence/disabled/substituted
+command variants. Full recovery retains200 direct input images and rejects714
+governance mutations; these are historical evidence-integrity controls, not
+fresh runtime execution. Exact staged canonical CI remains the landing gate.

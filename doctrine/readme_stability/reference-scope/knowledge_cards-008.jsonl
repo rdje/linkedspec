@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-constructor-nested-values.md","sha256":"b79a3d50a19aef95ce5eb5bfe69329e610b23eaa569a13c8bcfcdc71a6b4864f","type":"member"}
 {"bytes":4488,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-tree-traversal-callback-frame.md","sha256":"4cf5e96a02aa2474e07667adfa8a80e2b55741b4dd74312aa475a3e2ad26a5a4","type":"member"}
 {"bytes":3365,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-helper-scan-occurrence-provenance.md","sha256":"55bc426a73c268350d39cc45a62b828becb6b214529428ec975f9d8c4a698006","type":"member"}
 {"bytes":4214,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-helper-source-provenance-channel.md","sha256":"4c32b77f319f2106899bc00694e32ed7e1c1603a0cfd319092f727b9f72d353d","type":"member"}
@@ -93,7 +94,7 @@
 {"bytes":2091,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-primitive-rewrite-event-drift.md","sha256":"1f765957c9459a1aa5cef4289fc64b2af9de8c55b9e1c6f5b2de8a41dbb3a3a5","type":"member"}
 {"bytes":11431,"lines":158,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-raw-readiness-source-unit-provenance.md","sha256":"5ef3d0b864887c47f2f1767f3bf7e61ca3bec5825799e3754bae45fcf21e588a","type":"member"}
 {"bytes":5020,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-receiver-copy-book-prerequisite.md","sha256":"5ddcedb2b4c44b902eb2751d11c0a662aec986d51a83ad160ea1e7f7e144026f","type":"member"}
-{"bytes":5458,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-receiver-copy-canonical-selection.md","sha256":"9518b1d47077b9947e4fd0276dd779485f9107166028158305b8d2ae59d4e5b5","type":"member"}
+{"bytes":6240,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/perl-receiver-copy-canonical-selection.md","sha256":"785a6cbbb0c4c2ae5d2914dc01e4252559d66613d04228c99b1961e87acd7139","type":"member"}
 {"bytes":2852,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-receiver-string-bridge-guards.md","sha256":"5bdc5c177a45f7b27df2daa1d167359eb4903b2ef77ac007cb4cd920e85f77a6","type":"member"}
 {"bytes":5237,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-annotation-statement-origins.md","sha256":"7fd9517f356552827599db0e266a7f64525cbfc1d123fa1f5e8e850de6cd7694","type":"member"}
 {"bytes":3127,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-commit-boolean-kind-drift.md","sha256":"6b81991c66eaca18b08f150d928651db3c6ccb918b4e7d64b989546b7cd178f2","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4908,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-call-copy-observation-gap.md","sha256":"494f02a2f4b5c2144e22a7068eaec6ea38e19447fff25785ec331e6d963d06cf","type":"member"}
 {"bytes":5877,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-call-staged-projection.md","sha256":"272b53413b82f1e638e0c283f011ee56deec6783c296b40af4a5810fc408255e","type":"member"}
 {"bytes":6083,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-compile-failure-diagnostic-drift.md","sha256":"90f284d2c3348055538771b009955d51051df1a2f175805118ea9910421f302a","type":"member"}
-{"bytes":3315,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-index-source-foundation.md","sha256":"c96b84c75970daebb2abc3cfe00a357a6660a04fbef0eb16e98364d6e18d7509","type":"member"}

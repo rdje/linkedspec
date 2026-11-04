@@ -19,7 +19,7 @@ fail() {
 
 is_governed_path() {
   case "$1" in
-    .github/workflows/*|.githooks/*|bin/*|perl/*|rust/*|specs/*|t/*|tools/*|scripts/*)
+    .github/workflows/*|.githooks/*|bin/*|perl/*|rust/*|dart/*|julia/*|lua/*|specs/*|t/*|tests/*|tools/*|scripts/*)
       return 0
       ;;
     *)

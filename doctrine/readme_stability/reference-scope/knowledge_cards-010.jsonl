@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2766,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-bare-variable-newline-consumption.md","sha256":"8da50da82b131e5f7e8e400d1db5ef9e58538b57f2d1501c1bbe9d32500fa38c","type":"member"}
 {"bytes":3658,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-blind-fluent-parent-push.md","sha256":"16f20cc09aa660ca21fb4f6b216599f3a774ab47cd67e11f0d9e3660638067ee","type":"member"}
 {"bytes":5034,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-blind-fluent-return-values.md","sha256":"d25b8a6d36da97af4bd90d142f9b18ee072fef29bdf1a89ae8725b487f0fc9e7","type":"member"}
 {"bytes":2478,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-blind-postcall-iteration-outcomes.md","sha256":"75756a3c53ecb2b411d9df34110f73fb7da2fc9443ed61b5337765d9e47a6d34","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8155,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-runtime-observation.md","sha256":"832a7a23abec87287b1e135b4a02f1aeb320ce54a45c0245024072a9e68fc986","type":"member"}
 {"bytes":6833,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-static-projection.md","sha256":"444711d26669f79decf49aed2b1067539fc7e6badd2b186595dea7b67ebbcf7c","type":"member"}
 {"bytes":8187,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-simple-spec-structural-owners.md","sha256":"2ab56ad83f7d27c985ea7e580c327af9896ec83ff2b55daf21474db234bea220","type":"member"}
-{"bytes":3569,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-single-index-read-bypasses-typed-binding.md","sha256":"165ee61113c72f339b4541d17ce39dd1eacb5702ad33c1b0ef54252959f3d7e6","type":"member"}

@@ -38,6 +38,12 @@ def validate_source(before, after):
     assert after.index(BLOCK) < after.index(b'log "running the general doctrine enforcer'), 'late prerequisite'
 
 
+def validate_live_prerequisite(source=None):
+    source = (ROOT / SOURCE).read_bytes() if source is None else source
+    assert source.count(BLOCK) == 1, 'current execution prerequisite changed'
+    assert source.index(BLOCK) < source.index(b'log "running the general doctrine enforcer'), 'late current prerequisite'
+
+
 def validate_observations(saved):
     assert type(saved['restricted_noop']['exit']) is int and saved['restricted_noop']['exit'] == 71
     assert b'sandbox_apply: Operation not permitted' in decode(saved['restricted_noop']['stderr'])
@@ -91,12 +97,14 @@ def capture():
 
 
 def review():
+    from book_count import capture_read
+    validate_live_prerequisite()
     intake_raw = (HERE / 'execution-intake.json.gz').read_bytes()
     intake = json.loads(gzip.decompress(intake_raw))
     saved = json.loads(gzip.decompress((HERE / 'execution-evidence.json.gz').read_bytes()))
     assert hashlib.sha256(intake_raw).hexdigest() == saved['intake_sha256']
     for name, row in saved['inputs'].items():
-        observed, retained = (ROOT / name).read_bytes(), decode(row)
+        observed, retained = capture_read(name), decode(row)
         if name == 'tests/language-readiness/verify_objectives.py' and observed != retained:
             from phase0_evidence import validate_auditor_evolution
             validate_auditor_evolution(retained, observed)

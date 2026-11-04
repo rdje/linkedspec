@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3315,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-index-source-foundation.md","sha256":"c96b84c75970daebb2abc3cfe00a357a6660a04fbef0eb16e98364d6e18d7509","type":"member"}
 {"bytes":4771,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-inline-header-lifecycle-loss.md","sha256":"46cdb870a09399b904b3ee30a068fae1556d33b4911bf4b936535aa4b72a505e","type":"member"}
 {"bytes":3723,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-introspection-admission.md","sha256":"0164bedac024e3112816c8d8290e529373f66cccbde41a0e70330ba552910c93","type":"member"}
 {"bytes":3563,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-introspection-authority-map.md","sha256":"725b9417c9efaa3224b160acf6355c25bf0ddbf731f2fd226942a5f1a461115f","type":"member"}
@@ -47,7 +48,7 @@
 {"bytes":2976,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-descriptor-ready-legacy-runtime-boundary.md","sha256":"cdaa04e9f1555d1f357817a0b40ec8c048851901642c27d1de0b73ec6be42d8b","type":"member"}
 {"bytes":6731,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-pluginbridge-transition-machinery.md","sha256":"12c408f5d68c9c4c6c30571d902c7aaae4e2fedc2215e088dc4f005719e3c24b","type":"member"}
 {"bytes":6081,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/presence-result-source-guards.md","sha256":"78af1e3e6ab12099cae98d4916b05a833a6f6ff38fb819a90243a30eaebaf4cd","type":"member"}
-{"bytes":2126,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-current-count-book-correction.md","sha256":"865aef6b76fcf45b27799dc7d04ddbe286df2656f378a8de3d39f5d8e4b4e11e","type":"member"}
+{"bytes":3742,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/primary-cli-current-count-book-correction.md","sha256":"d5ece1ffe640149747ff49cc7ae657ed92fa0fe35917b90863f972a5df494480","type":"member"}
 {"bytes":3545,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-four-backend-matrix.md","sha256":"fbbbd0acb2dbad4c2021c8cb281e91092858927162c319c0d997e83ce4bb767a","type":"member"}
 {"bytes":4094,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-strict-utf8-text-contract.md","sha256":"e9fdbc61164c3ffc9ee7214e69abb9d3adab4ff0e826772d3cdfe75b5dd21639","type":"member"}
 {"bytes":2552,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-utf8-process-boundary-gap.md","sha256":"65589f6e29405edb95d371d44f7fbb02352a11886dc6a9ab6b66967941d4bb61","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2999,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-arithmetic-result-source-guards.md","sha256":"55972cb0ffa572610f74f2b43c9b50f61fe5b8905b8b70e23a5c258b8050c6a1","type":"member"}
 {"bytes":4637,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-slice-boundary-panics.md","sha256":"70b8fabb8813bc998107ee42927ae75f33b6e0f5684fea12b2e9d321e758c59e","type":"member"}
 {"bytes":4018,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-tree-traversal-receiver-blocks.md","sha256":"d41a1ad187dcc25e90bf46dfd9cf3db45b6243aaa05dab0c214472edc7d9c9bf","type":"member"}
-{"bytes":2766,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-bare-variable-newline-consumption.md","sha256":"8da50da82b131e5f7e8e400d1db5ef9e58538b57f2d1501c1bbe9d32500fa38c","type":"member"}

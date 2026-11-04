@@ -7,6 +7,7 @@
     "tools/check_unicode_case_contract.py",
     "tools/check_unicode_rule_label_contract.py",
     "tools/test_claim_verification_staged.py",
+    "tools/test_diagnosis_evidence.py",
     "tools/test_doctrine_path_streaming.py",
     "tools/test_document_history_rollover.py",
     "tools/test_knowledge_map_atomic_output.py",

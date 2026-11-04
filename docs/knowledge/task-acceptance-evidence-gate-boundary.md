@@ -12,8 +12,8 @@ answers:
   - "why does a completed checklist containing Result CodeBlock fail acceptance"
   - "does TASK-ACCEPTANCE enforce Dart Julia Lua and shared fixture changes"
   - "which task owns task-evidence backend-path coverage extension"
-date: 2026-10-31
-status: current limited path scope; P1 extension TYPE-REFERENCE-BOOK.1.2.23.4.3 before admission/push
+date: 2026-11-03
+status: current extended backend/shared-fixture directory scope; historical pre-extension observations retained
 tags: [doctrine-enforcement, task-trees, evidence, tooling]
 evidence: "scripts/check_diagnosis_evidence.sh; scripts/check_doctrines.sh; DOCTRINE_ENFORCEMENT.md §10; TOOLBOX.md; docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
 reverify: "bash scripts/check_diagnosis_evidence.sh && bash scripts/check_doctrines.sh && rg -n 'TASK-ACCEPTANCE|check_diagnosis_evidence|Acceptance Checklist' scripts/check_doctrines.sh DOCTRINE_ENFORCEMENT.md TOOLBOX.md docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md"
@@ -23,7 +23,8 @@ reverify: "bash scripts/check_diagnosis_evidence.sh && bash scripts/check_doctri
 `scripts/check_diagnosis_evidence.sh` inspects only the staged set. It passes
 with no staged governed paths. It fires for staged code/spec/test/tooling paths
 under `.github/workflows/`, `.githooks/`, `bin/`, `perl/`, `rust/`, `specs/`,
-`t/`, `tools/`, or `scripts/`.
+`dart/`, `julia/`, `lua/`, `t/`, `tests/`, `tools/`, or `scripts/`. Directory scope
+includes backend guides/manifests; root and `docs/` prose alone do not trigger it.
 
 When it fires, one staged `docs/tasks/*.md` file must carry the `TOOLBOX.md`
 acceptance checklist with all six checked labels: reproduce/issue, root cause
@@ -61,7 +62,7 @@ The compiler/runtime proof is unaffected; this is a checklist-format constraint.
 
 October4 private splitter frames repeat this documented constraint: two checked lines qualifying separate future production/hooks work use the forbidden literal. The hook rejects TASK-ACCEPTANCE while the other nine doctrines pass. Completed evidence uses separately owned wording; future leaf statuses and the checker remain unchanged.
 
-October31 Dart70.3 confirms that the explicit path list above omits `dart/`,
+October31 Dart70.3 confirmed that the then-current explicit path list omitted `dart/`,
 `julia/`, `lua/` and `tests/`. The actual staged Dart interpreter/test candidate
 returns exit0 with the no-governed-changes message; that result enforces no
 checklist for the candidate. Its completed six-label leaf and focused results are
@@ -72,3 +73,15 @@ implementation failed. P1 TYPE-REFERENCE-BOOK.1.2.23.4.3 owns path inventory and
 real alternate-index missing/complete-evidence controls after ordinary feature
 coverage/pressure20.1, before admission/push. No broader omission population or
 full shape-gate correctness is inferred from this one candidate.
+
+November3 task23.4.3 repairs that directory list. The actual gate is exercised by
+`tools/test_diagnosis_evidence.py` through repository-local alternate indexes, without
+changing the working index. Retained before/after records cover one actual tracked
+path from each declared code/test/native/shared directory and each previously
+governed directory: missing evidence, complete evidence, incomplete evidence and
+deletions, plus root/docs prose controls. The new contract first fails on the
+unchanged Dart gate's no-op, then passes after the list extension. Canonical CI
+requires and runs the same producer. Full source/input bodies, path inventory,
+commands' channels and the observed RED are retained under
+`docs/checkpoints/task-acceptance-backend-scope/`. This is finite directory-routing
+and checklist compatibility proof, not exhaustive evidence truth or runtime admission.

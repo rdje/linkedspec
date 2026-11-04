@@ -3301,11 +3301,12 @@ one source error and eighteen unchanged public syntax observations. Selected
 nearest checks, fatal owner/test analysis and scoped formatting pass. Rebuild
 Dart applications/runtime. Safe Lua and full admission remain separate.
 
-Admission prerequisite: the task-evidence shape gate currently governs its listed
-Perl/Rust paths; Dart/Julia/Lua and shared fixtures require manual checklist review.
-Feature70.3 includes that review. P1 task23.4.3 owns the backend-path extension and
-missing-evidence rejection controls before full admission/push. Focused feature
-test results do not imply that broader mechanical enforcement is already present.
+At the original feature70.3 boundary, Dart/Julia/Lua and shared fixtures required
+manual checklist review. Task23.4.3 extends the task-evidence shape gate to all
+owned backend directories and `tests/`, with recurring isolated-index rejection
+and complete-evidence controls. See [task-evidence coverage](../development/local-ci-and-regression.md#task-evidence-coverage).
+This checks staged evidence shape; focused feature results retain their original
+scope and do not establish full runtime admission.
 
 
 Julia70.4 retains canonical String-predicate source/prefix guards through bridges
@@ -3316,7 +3317,7 @@ assertions pass on native/restored-spec/generated-plan/fresh-module routes, with
 fifteen original healthy values, one source error and eighteen unchanged public
 syntax observations. Nearest271/strict depwarn and anchored precompile-only stderr
 checks pass. Rebuild Julia applications/runtime. Declared Lua5.4/full admission
-remain separate; checklist review uses the documented current manual path.
+remain separate; the original checklist review preceded the task23.4.3 gate extension.
 
 
 Safe Lua70.5 retains canonical String-predicate source/prefix guards through bridges

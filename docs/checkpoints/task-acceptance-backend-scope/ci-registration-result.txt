@@ -1,0 +1,1 @@
+{"governance_denials": 714, "registration_controls": 11, "result": "PASS", "retained_inputs": 200}

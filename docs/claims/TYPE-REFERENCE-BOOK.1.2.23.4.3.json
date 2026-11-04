@@ -1,0 +1,494 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.3",
+  "claims": [
+    {
+      "name": "backend-task-evidence-path-scope",
+      "statement": "The task-evidence gate now governs Dart, Julia, Lua and shared tests directory changes; the retained finite alternate-index controls pass after the exact omitted-path RED.",
+      "scope": "Directory routing and checklist evidence shape only. One tracked representative per declared code/test/native/shared prefix and existing governed prefix; missing/complete/incomplete/deletion controls and root/docs prose controls. Not an exhaustive path-name, evidence-truth, historical-checklist, or runtime admission claim. The baseline Git tree identifies the path population. Full direct instrument/helper and gate source bodies are retained in each report. Standard Python, Bash, Git and OS/toolchain implementation closure is not independently captured; no transitive producer/toolchain closure claim. The initial restricted execution failed to create Git objects and supplied no behavior proof; actual captures use approved host execution. Historical producers within before.json remain exact; after.json binds the current producer. Canonical CI is separately receipt-bound. Two preceding restoration claims are preserved at their exact cd3b6adc committed boundary; only durability mode/revision change. Their original statements, other fields and every input hash remain exact. The later canonical snapshot-boundary repair and its supplemental storage validation are separate from the initial routing capture; original before/after routing producer bytes remain unchanged.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh tools/test_diagnosis_evidence.py --record docs/checkpoints/task-acceptance-backend-scope/after.json (one-shot capture; omit --record for readonly evidence replay against current gate); bash tools/run_python_project_data.sh docs/checkpoints/task-acceptance-backend-scope/preserve_claim.py (readonly preservation review)",
+        "granularity": "Each retained actual gate invocation, staged path operation, checklist variant, stdout, stderr and exit code; the real index identity is checked before and after.",
+        "result": "70 actual gate calls pass in repaired mode. Legacy capture passes its 70 baseline expectations; the new contract fails before repair on Dart source missing-evidence exit0/no-governed-changes. The same new contract passes after repair. Predecessor preservation verifies unchanged original claim fields and 248 original Git input identities; only mode/revision change."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The existing directory list already rejects a Dart source change lacking task evidence, or the repaired gate silently accepts missing/incomplete evidence.",
+        "oracle": "An independently specified expected rejection is checked against the actual shell gate and real Git alternate indexes, separately from the predicate being changed; existing-path and no-op positive controls distinguish blanket rejection.",
+        "red_control": "red-final.log.gz retains the pre-repair new-contract failure on dart/lib/linkedspec_dart.dart/missing/modify with actual exit0 and no-governed-changes. before.json retains all legacy calls; after.json retains per-call repaired rejects/accepts. Initial traceback capture is preserved losslessly in red-initial.log.gz."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "scripts/check_diagnosis_evidence.sh",
+            "sha256": "62c8c93deedad85559ee1bc0c65417c71eb4a6837a133affc54e43bae7be90b3",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_diagnosis_evidence.py",
+            "sha256": "88b66a99e9967664181c3aca06fab20a782e072fcc06508d841440cf7e81cca2",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/after.json",
+            "sha256": "8b203455ecdb65c83f17bc81c869d9d72cd38a6278759e158c2aba6230dd12d7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/before.json",
+            "sha256": "c54f93b9b2f607e41ae77c76cf1b736ada39108088bfd8574b92bd85e2012474",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/red-final.log.gz",
+            "sha256": "5f1735163de3bd2aaaa053331cbeff226555bff6fac1a846003edb173a2cfb0e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/red-initial.log.gz",
+            "sha256": "c2b481508480fe0b7c47fe54026567bf641a18ef41c1770761b3bf48ea8aaa27",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/preserve_claim.py",
+            "sha256": "6de848067fe56e7fb0f646d941a569006c7c08f7d85d6532b71594d10314934e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/claim-preservation.txt",
+            "sha256": "ac7ae8092d6f68f56204e9068b468c6200f75fafea5f2f031f8f6f92a3d39495",
+            "role": "input"
+          },
+          {
+            "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+            "sha256": "6eb68abf9c754f6b2d9ea00f4dd49d5b9a1561862d6fb959884a6c6de4673d97",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/book-cap-preparation.json.gz",
+            "sha256": "4dd80f12f9adbe9836e0211c7fae603be02ef01afe45b77ac0277fa16d68ea28",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_ci_local.sh",
+            "sha256": "daadcf4af84c6da1f0ab55232e821dcaac83f5ea893bfd54bd8c02b46f792f3a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/book_count.py",
+            "sha256": "b65b55b8558978889cd6ad47211391e20ae94aa025c774e9d19651426fc72a96",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/storage_inventory.py",
+            "sha256": "bc15ab0b8bcf28832053b3c41d9ddda1c80091a62eb08c8acfd35e761795130f",
+            "role": "producer"
+          },
+          {
+            "path": "doctrine/project_data_storage/python_entrypoints.json",
+            "sha256": "df58bb5d981a41f75216d1b9e0941f5b7a5527a2be4c25500186f8e51a8a4898",
+            "role": "input"
+          },
+          {
+            "path": "doctrine/project_data_storage/python_temporary_owners.json",
+            "sha256": "df4fd9296801d8345de44a87af4b22d94728c0f7a6d4eb2b2d881c8bd704e5d7",
+            "role": "input"
+          }
+        ]
+      }
+    },
+    {
+      "name": "historical-restoration-and-live-count-boundaries",
+      "statement": "Historical restoration readers replay their accepted Git inputs while separate live count/prerequisite predicates admit ordinary authored changes. Original capture controls remain; ten new live-count, revision and prerequisite denials reject.",
+      "scope": "Bounded book-count/execution/Phase0 reader replay at accepted cd3b6adc, with current source summary and prerequisite predicates. boundary-after.json.gz retains136 actual historical byte images and all observed current file inputs. The original before-fixture Git bytes are also retained in the source-bound intake capsule and checked against its explicit revision. The synthetic next count and CI comment are predicate fixtures, not new CLI cases, runtime reexecution or a new host-containment observation. Supplemental storage controls exercise current manifest/tool behavior; no transitive canonical/toolchain producer closure is claimed.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-acceptance-backend-scope/test_restoration_boundary.py; --record is a one-shot writer.",
+        "granularity": "All observed current file reads and historical image bytes in the bounded replay; existing capture corruptions and each of the ten current count/revision/prerequisite denials; authored prose and synthetic next-count positives.",
+        "result": "{\"authored_prose_and_synthetic_future_count\": \"PASS\", \"historical_inputs\": 136, \"new_rejected\": [\"stale-live-count\", \"wrong-live-count\", \"missing-live-summary\", \"duplicate-live-summary\", \"duplicate-case-id\", \"wrong-capture-revision\", \"missing-live-prerequisite\", \"duplicate-live-prerequisite\", \"wrong-live-platform\", \"late-live-prerequisite\"], \"original_capture_reds\": 5} The complete current restoration reader also returns PASS in the retained focused run."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Any later prose must change the historical capture, or accepting prose allows stale counts and corrupted capture provenance.",
+        "oracle": "Accepted Git image plus original retained source capsules, and an independently changed current/synthetic manifest-summary pair; actual pre-repair canonical failure.",
+        "red_control": "restoration-boundary-before.json.gz retains the exact unreviewed-current-book failure and actual indexed producer/input sources. Original five capture corruption denials remain; stale/wrong/missing/duplicate live summaries, duplicate case IDs and wrong capture revision all reject. Execution source/TOOLBOX and dependent Phase0 reader freezes each have observed RED logs; corrected readers pass with old corruption controls retained. Missing/duplicate/wrong-platform/late current prerequisites reject."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "cli_conformance/manifest.json",
+            "sha256": "4c764e19c00a78d42da093571cda6d3610f5c3dabb8cfe4703b47dfab317de2c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/book-count-evidence.json.gz",
+            "sha256": "e587e72324c2e08b0c7bdaa69e841eda49b6143d8029fcd4553eee031f6afe1e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/book-count-intake.json.gz",
+            "sha256": "51a1301f530188e02272df26bee00de5f0accaa64c2e248614f7f55e99c05518",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/book_count.py",
+            "sha256": "b65b55b8558978889cd6ad47211391e20ae94aa025c774e9d19651426fc72a96",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/execution-evidence.json.gz",
+            "sha256": "79162d67df14a249896a579bd3f16e8d0c55010a1361fec4543546c3aad93c02",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/execution-intake.json.gz",
+            "sha256": "917456057e4b8a88fa98f40a05aed28588a269af59471a34bb4b34a8dfc4978f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/execution_evidence.py",
+            "sha256": "b9b954a6fe9c401d63dd79ef37c700990069df07429e86f63e3a7fa423dbbc84",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/objective-recovery-phase0-calibration.json.gz",
+            "sha256": "6517821788d0caa47e41369f37791e19ad9919b902d40f5804d78a9470fcdf47",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/objective-recovery-phase0-stable-inputs.json.gz",
+            "sha256": "ce18b9971bc628dc6e3cf6484969650bbf4d324ce741eb32f3afc0ee59a23e65",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-composed-reader-rejection.log.gz",
+            "sha256": "b2fc9e3e0be02a77b8d224aa4a24c63b41eb00f5596a5bcab72219bd39a8feac",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-evidence-accepted.json.gz",
+            "sha256": "b9de5b81c3db2d0e1863b644ddd93e3b78940defdcc8db1628dfdd607f601f4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-evidence-final.json.gz",
+            "sha256": "29cd0f3e0e80f48285576cfe3d991e729bb56548e28a7e63170012a13557b8ef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-evidence-reader-initial.py.gz",
+            "sha256": "c37344853aac78bb900b34be72a710b392de0b4d35347af9f895ca09d6884fa5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-evidence.json.gz",
+            "sha256": "1ae35cb2b60138cdfab576754da393b5e3388b34412db99514fb108b5faef9fa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-execution-reader-before.py.gz",
+            "sha256": "8c793f2cc825af8d92c7fc75d7ebe2ce60529539bae76d702899dc4fdc3bd129",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-intake.json.gz",
+            "sha256": "1ff8614521c3f4312775eff60adaadf86fe03bce2756664136bd8989cee1acea",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0-reader-evolution.json.gz",
+            "sha256": "018773723565ae2902501ff0aaf46ba45599f2ea8e5f4abfbf24ebffb5ce080b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/phase0_evidence.py",
+            "sha256": "13015b39b3ff3c1ac455911a0f6c56f7d5dbb1fb8ed82f12a4b88f0a2dab488f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-after.json.book-only.gz",
+            "sha256": "1699f6678f8946f15214f63715bf1d7cceee668f592875b5c6f6232bf51b3836",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-after.json.gz",
+            "sha256": "832e99b11c54d297c28d0625a5233b0ef45054941eec1a3492ef1581b87c7835",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-after.json.initial.gz",
+            "sha256": "3a89e1a0e286d63a4182e8e2183ea43714ee625e2890d8d93e25778371057490",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-after.json.pre-registration.gz",
+            "sha256": "ac4702bb1d88eebdc58142defd1a6674c35a73de6bed5c9942580b72bfe44948",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-result.txt",
+            "sha256": "c18e7167728094cd6002811524492fcd8effde7fa1cfc642bf3800b579123698",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-result.txt.book-only.gz",
+            "sha256": "ecfaa459f343f60e1447e45a805ebc324bf812bc7f46e6bc8d95a9493d2900bf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-result.txt.initial.gz",
+            "sha256": "ecfaa459f343f60e1447e45a805ebc324bf812bc7f46e6bc8d95a9493d2900bf",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/boundary-result.txt.pre-registration.gz",
+            "sha256": "40a73637ed6349ab3ee6f19ff486d92a7e12015a8f9396796cc0831392d175f1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/execution-boundary-green.log.gz",
+            "sha256": "fa99e05758e3218d58a168b03715ebb95b6b9d1253016d9bc6d70409ae61f19c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/execution-boundary-red.log.gz",
+            "sha256": "898a74220b7e300991fcb81046c1a3ed7cedf39eddb7425c0b375884e8e99067",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/phase0-boundary-green.log.gz",
+            "sha256": "0bed7eadaa100ebc00e81cdd0f036a599447a3295421824f489da71adafb2abb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/phase0-reader-red.log.gz",
+            "sha256": "71724780ef17fa29ddfad569d914454676ca08655a0a0a7cf39542a517e65aea",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/restoration-boundary-before.json.gz",
+            "sha256": "6ebfb71402b767426c75b93d26bd35843e213890a009fd479a83097397ea7226",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/restoration-focused.log.gz",
+            "sha256": "477f1655e0387c565f8225bbc0b802a9e15598a8f9dd7b3fcd851d1a4c435976",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/test_restoration_boundary.py",
+            "sha256": "9599e03187e9d150d92ffbe356ee3b8f0b5fbf8a409a33705db510f65e41e77b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+            "sha256": "6eb68abf9c754f6b2d9ea00f4dd49d5b9a1561862d6fb959884a6c6de4673d97",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "3d0078c804fb3b31a420c4cbcb44a0b7eb8ff347ead8e64d5a4e073ec50a3779",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/phase0-fixture-calibration.json.gz",
+            "sha256": "4d16bd8b938d30f5f5fa7885931242ea195ed8316be60e36d54d282b452ef45e",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_ci_local.sh",
+            "sha256": "daadcf4af84c6da1f0ab55232e821dcaac83f5ea893bfd54bd8c02b46f792f3a",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "publication-transport-plan",
+      "statement": "The measured packed backlog exceeds the conservative upload budget. A smaller forward-range plan and temporary-branch publisher are prepared; actual publication is pending.",
+      "scope": "Initial local planning diagnostic through cd3b6adc, not an observed GitHub rejection, exact network pack size, completed publication or complete pack-object custody proof. Runtime publisher uses the finally verified clean HEAD and normal hooks. The later thin-pack estimate against all advertised refs is9304184386 bytes; the uncompressed total19032710823 is a different quantity. Both exceed the operational budget; individual fresh conservative estimates govern each data upload.",
+      "rederive": {
+        "status": "checked",
+        "command": "git rev-list --objects origin/main..HEAD | git pack-objects --stdout | wc -c; initial inline planner measures successive git rev-list/pack-objects streams. Fixed immutable range: 2ac834913d85c32f532be9b0aab63644838a577a..cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+        "granularity": "Initial complete outgoing estimate and each retained planned base/target pair.",
+        "result": "Initial observed non-thin byte count9308545338 and833 commits; push-plan.json retains23 smaller fast-forward ranges below its conservative budget."
+      },
+      "falsify": {
+        "status": "gap",
+        "reason": "No oversized server upload was attempted and the initial inline planner has no independently retained wrong-budget/chain RED instrument yet. Actual safe publication and non-mutating controls are separately owned.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.7"
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "Tracked plan, publisher and immutable Git endpoints survive; the initial inline planning instrument and complete Git-pack object input representation still need their bounded custody/retrieval record. This gap is not an assertion that committed Git history is missing.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.7"
+      }
+    },
+    {
+      "name": "temporary-branch-publication-protocol",
+      "statement": "Synthetic operator controls complete or resume an upload before moving main and reject an oversized data batch, unexpected main tip and preexisting temporary branch.",
+      "scope": "Five fixed synthetic operator fixtures only. Git, receipt and network operations are mocked; this does not claim a real push, real receipt, server acceptance, exact wire size or initial planner custody closure. Cleanup lease arguments and main-after-upload ordering are asserted by the fixture. Actual publication remains pending.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-acceptance-backend-scope/test_publish.py",
+        "granularity": "Each of the five synthetic protocol states and its ordered mock ref updates.",
+        "result": "{\"synthetic_protocol_controls\": [\"healthy\", \"resume\", \"oversize\", \"wrong-main\", \"collision\"], \"limits\": \"Synthetic operator control flow only; no real network push, receipt or GitHub size admission is claimed.\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The publisher moves main early, repeats completed batches on resume, sends an over-budget batch, or takes an unrelated ref.",
+        "oracle": "Independent fixture ref state and allowed command/label sequence around the actual main function; rejected fixture assertions remain separate from successful progress.",
+        "red_control": "Actual oversize, wrong-main and collision fixtures reject with no data batch/main update. Healthy/resume reach the exact mock head and clean only their own mock ref using its expected lease."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/publish.py",
+            "sha256": "8a951c30eef9413be2c89db3796e0d477512ced12ef6b262002140abcf0049ca",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/test_publish.py",
+            "sha256": "28b63cfc496a566ccd6733142f5f2e673d6c1c80417158360054c6a4c80b9108",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/push-plan.json",
+            "sha256": "ebacf3179eea6e8ca564deaf145944156f3fc05889de1c39860787fa5e148383",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/publisher-controls.txt",
+            "sha256": "4f4877d302bd7628a04d16d005df6ca1ee6064e1f53316e4c273b37ed342517f",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "task-evidence-ci-historical-inverse",
+      "statement": "The historical auditor admits only the exact new three-script CI registration before reversing its older insertions; every original runner byte remains required, and eleven independently constructed registration faults reject.",
+      "scope": "Exact current CI source inverse and eleven registration-corruption controls. The full isolated historical recovery result is retained with200 actual input images; its714 governance denials are historical evidence-integrity checks, not fresh runtime executions, new runtime admission, or transitive OS/toolchain closure.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py; bash tools/run_python_project_data.sh docs/checkpoints/task-acceptance-backend-scope/capture_registration.py (--record is the one-shot retention mode)",
+        "granularity": "Each of the three exact presence/execution pairs, missing/duplicate block, original historical runner hash, actual isolated recovery guard and all retained direct artifact inputs.",
+        "result": "{\"governance_denials\": 714, \"registration_controls\": 11, \"result\": \"PASS\", \"retained_inputs\": 200}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Registering the new scripts breaks historical anchors, or an unrestricted normalization silently admits missing, disabled, substituted or duplicated checks.",
+        "oracle": "Actual pre-repair full canonical rejection; original historical runner SHA-256 and independently constructed command-line mutations around the repaired verifier.",
+        "red_control": "ci-registration-before.json.gz retains the full failed canonical log and actual indexed auditor/runner/proof. Eleven effective missing/duplicate/presence/disabled/substituted-command variants all reject specifically as governance registration mismatches; the unchanged repaired source returns the original historical hash. Complete isolated proof passes with original controls retained and eleven additional denials."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py",
+            "sha256": "f8a6baacd0786fc8e6e7d655ff413b794ddb24d7201ef0dde62eae5e349e460b",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/capture_registration.py",
+            "sha256": "6b0270ab424873067f8f55f198da40c9950537bb89c754d1673232296185081f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/ci-registration-after.json.gz",
+            "sha256": "2e9811603d30354af8c3c35b6be43414d625aeec898cdb7446fc244fd57da23b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/ci-registration-before.json.gz",
+            "sha256": "bc1d5aa5137503d38761908b5afac86c4362e1b4a6fb9b59394a425f6622a225",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-acceptance-backend-scope/ci-registration-result.txt",
+            "sha256": "be945109876ed0fc8342bd4bfcfbc5c78e3f4fde5ecc051fe84553ce369a1ce7",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/verify_objectives.py",
+            "sha256": "0510f04541419d255fa92633cd46ea412e93a88421c8f8e1067ff79abcdd0a94",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_ci_local.sh",
+            "sha256": "daadcf4af84c6da1f0ab55232e821dcaac83f5ea893bfd54bd8c02b46f792f3a",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

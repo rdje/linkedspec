@@ -1,0 +1,1 @@
+storage inventory: four exact populations; missing/unexpected/same-count/duplicate/truncated/empty controls PASS; frozen predicate accepts replacement, exact predicate rejects; Git failure rejects

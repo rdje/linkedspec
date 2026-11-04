@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3808,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hlink-scalarref-oracle-gap.md","sha256":"707ab66f1f39951b8cca2dd1b60508585c22172f7062bab3ed10482b899f79d5","type":"member"}
 {"bytes":1544,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hosted-ci-disabled-run-local-gate.md","sha256":"beb23bbc37e7b1cd2a8fe8ea6359252b213ab0c93dd62d79cc133a221fdd50f9","type":"member"}
 {"bytes":2231,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/if-statement-alias-shape-portability.md","sha256":"182aaeae8906d46c2e66a8dd46b43841759e0c0b30f380ab56411dc38fc401bc","type":"member"}
 {"bytes":9611,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/index-result-source-guards.md","sha256":"0c6ec2556c6eb54481cdd347970064e23e2e34a70889a41ae192d2173dcd1bbb","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2696,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-receiver-string-bridge-guards.md","sha256":"54af89bd1109850431a30f4e98f9a6dc713301c0563d90280eedfaa8863b1247","type":"member"}
 {"bytes":6280,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-attempt-preflight-gap.md","sha256":"9cd2aada414deb35b55022a886cc24380f124f6787a6da6dd26804d9dc6f0f9b","type":"member"}
 {"bytes":12341,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-effect-integration-gap.md","sha256":"6b9aa2442e2c23c945b935a817a1cb45aa7fd36c81cc7ab4c5fc6163db4fd6c9","type":"member"}
-{"bytes":5574,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-admission.md","sha256":"92a996dbb4ebd7d3d0ada412af6a62971ae518850983f1d383dcf7199f6ddab7","type":"member"}

@@ -101,9 +101,9 @@ def controls():
 
 
 def review():
-    # Owner22 validates actual current book/reader bytes before exposing the exact
-    # predecessor view expected by the unchanged component19 evidence capsule.
-    from book_count import storage_read
+    # Historical evidence uses its accepted capture. Actual census/control calls
+    # below still exercise today's tool, manifests and owned source population.
+    from book_count import storage_read, capture_read
     intake = json.loads(gzip.decompress((HERE / 'storage-intake.json.gz').read_bytes()))
     current = {n: decode(row) for n, row in intake['current'].items()}
     previous = {n: decode(row) for n, row in intake['previous'].items()}
@@ -121,7 +121,7 @@ def review():
         marker = b'HTML book written to' if name == 'book-storage-build.log' else b'PASS'
         assert marker in raw and b'ERROR' not in raw, name
     for name in MANIFESTS:
-        manifest = json.loads((ROOT / name).read_bytes())
+        manifest = json.loads(capture_read(name))
         assert manifest['owners'] == intake['populations']['current'][manifest['kind']]
     class Visible(HTMLParser):
         def __init__(self):

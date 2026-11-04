@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5574,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-admission.md","sha256":"92a996dbb4ebd7d3d0ada412af6a62971ae518850983f1d383dcf7199f6ddab7","type":"member"}
 {"bytes":3553,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-dormant-red.md","sha256":"36b405b1c4c6492cdcdc2a22b1aae069ef443f884652d3b8cba8cad3980c4f39","type":"member"}
 {"bytes":6011,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-integration.md","sha256":"26f89f3fbdb09e8c89747b937753779eff654c704fc18745b875777423fb9d74","type":"member"}
 {"bytes":6143,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-private-authority.md","sha256":"be82c676770228c0bae6d64034450eb66dcacf1b23034a776622c2de80b5329b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3389,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contextual-user-function-codeblock-runtime.md","sha256":"25d0c0393f8620cae0c026e84e286d46822ce43d66e650c6811f0c5acd16306a","type":"member"}
 {"bytes":15150,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md","sha256":"0d0f80b7b43e7ff10844647f0150f15f30e59bd6f863a575b25addf886688921","type":"member"}
 {"bytes":5443,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-controlled-corpus-admission-split.md","sha256":"5d002cde913267ee410980aef07a88c2fd34e9828c82da5fbec695e04965f57b","type":"member"}
-{"bytes":3892,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-controlled-corpus-execution.md","sha256":"58a5f76ff080db90504e7421db719ba8ba0f57fd0884f632694f3e10b38aa1e9","type":"member"}

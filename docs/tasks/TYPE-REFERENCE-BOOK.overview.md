@@ -6,7 +6,7 @@
 - Status: `active` / remaining fluent-family and inter-type feature selection; full reference/admission open
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-11-02`
+- Last updated: `2026-11-04`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -1551,16 +1551,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Two observed documentary contradictions, no exhaustive population measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.3`
-  Status: `pending` / P1 mandatory task-evidence backend-path coverage extension
+  Status: `done` / backend/shared-fixture gate extension; exact canonical receipt required for landing
   Goal: Extend the documented TASK-ACCEPTANCE path scope to owned Dart/Julia/Lua code/tests and shared fixtures before admission/push.
   Trigger: Dart70.3 stages interpreter/test changes but scripts/check_diagnosis_evidence.sh exits0 with the no-governed-changes message. Its explicit case list and canonical task-acceptance-evidence-gate-boundary card cover Perl/Rust but omit Dart/Julia/Lua/tests. This is an existing documented enforcement limitation; the current Dart feature checklist is manually reviewed, not mechanically enforced by that no-op.
   Evidence: docs/checkpoints/type-operation-inventory/task-acceptance-backend-scope-intake.json.gz retains the actual unchanged staged Dart candidate, gate source/instrument/dependencies and fresh stdout/stderr/exit0. No exhaustive omitted-path census or runtime feature failure is claimed.
   Priority/schedule: P1 after ordinary feature coverage, in the existing infrastructure/admission-prerequisite window after document-pressure20.1, before full23.4 and any push. Own through verified closure; do not pivot dirty feature work into a doctrine rewrite. Director repeatedly requests the earliest safe push; therefore this existing before-any-push prerequisite is the next clean activation immediately after integrated restoration20.1.10, ahead of Rust Count73.2. Latest push authorization does not waive this explicit repository requirement.
   Acceptance: Inventory the actual owned backend/shared-fixture paths and policy/registry consumers, preserving read-only dependency boundaries. Update the gate and canonical scope documentation together. Exercise real gate calls with isolated project-local alternate indexes: missing task evidence must reject each newly governed backend code/test/shared-fixture path, complete evidence must pass, existing Perl/Rust behavior and documentation-only no-op controls must remain. Retain distinguishing pre-repair negatives and repaired positives, actual producer/input identities and exact staged canonical proof; do not infer broader evidence truth or historical completeness from this shape gate.
-  Planned verification tier: canonical.
-  Planned focused checks: Actual staged-path gate controls across all owned backends/shared fixtures, missing/complete checklist and documentation-only compatibility, source/registry/docs/history/memory/map synchronization.
-  Planned canonical trigger: Mandatory doctrine infrastructure admission prerequisite before23.4/final push.
-  Planned claim verification: none: This node schedules repair of the documented path-scope limitation demonstrated by one current Dart candidate; no exhaustive coverage or measured repair is published.
+  Verification tier: `canonical`
+  Focused checks: Shell syntax; actual legacy/new-contract RED/repaired70 gate controls; bounded historical/live-count/prerequisite replay; four current storage population controls; complete restoration reader; synthetic temporary-publication protocol controls; mandatory doctrine/history/memory/map and mdBook checks.
+  Canonical trigger: Doctrine gate/CI infrastructure; exact staged tools/run_ci_local.sh receipt and normal hooks required before commit or push.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json`
+  Evidence/result: docs/checkpoints/task-acceptance-backend-scope/before.json and after.json retain actual producer/helper/gate bodies, tracked path populations and every stdout/stderr/exit. Eight new code/test/native/shared prefixes and nine prior directory prefixes each exercise missing/complete/incomplete/deletion evidence; root/docs prose controls stay no-ops. The new contract first fails on unchanged Dart missing-evidence exit0; repaired70 calls pass. Real index bytes are unchanged. Exact canonical success is represented by the receipt required at landing, not inferred from focused controls.
+  Scope/consumers: scripts/check_diagnosis_evidence.sh remains an evidence-shape check, not a Markdown command executor. tools/run_ci_local.sh now requires/runs the same actual-index producer. Registry identity stays TASK-ACCEPTANCE; TOOLBOX, doctrine, canonical fact and book explain full directory scope, including backend guides/manifests. Root/docs-only prose and black-box dependencies retain their boundaries. Feature admission/fixture custody/canonical feature registration remain separately owned.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.4.3 — enforce task evidence across owned backend paths
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — bash scripts/check_diagnosis_evidence.sh returns exit0/no governed changes for a real alternate-index Dart source delta with no task; retained new-contract RED rejects that behavior.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — scripts/check_diagnosis_evidence.sh is_governed_path explicitly omitted dart/julia/lua/tests; retained source and actual staged set show the mechanism.
+  - [x] **FIX** — Add exactly those four directory prefixes and register the actual-index producer in canonical CI; evidence signatures and checklist semantics remain.
+  - [x] **ADDRESSED (verified)** — 70 repaired actual gate calls pass with per-call exits/channels, including newly enforced missing/incomplete/deletion rejects and complete evidence passes.
+  - [x] **NO REGRESSION** — Existing Perl/Rust/spec/test/tool/bin/hook/workflow and root/docs controls pass; bash syntax and git diff --check pass. Full canonical proof is the required exact receipt at landing.
+  - [x] **LOCKSTEP** — Canonical scope card/map, TOOLBOX, doctrine, mdBook, task/roadmap, history/live/resume and source-bound claim agree; original baseline/manual-review history is retained.
+  Predecessor evidence preservation: Two live restoration claims intersect TOOLBOX/runner edits. preserve_claim.py verifies all248 original input identities against committed cd3b6adc and every original claim field before changing only durability mode/revision to historical. claim-preservation.txt retains actual PASS. Both interrupted preparation attempts supply no canonical receipt; the complete corrected candidate is required.
+  Canonical preparation: The newly added book subsection exceeds the unchanged chapter line cap. Reflow only its prose with exact token equality; retain original source/full failure log in book-cap-preparation.json.gz. No cap, content, runtime or historical observation changes. Complete corrected canonical CI remains required.
+  Reached canonical blocker and repair: The accepted owner22 book-count reader still freezes the mutable book/reader bytes after its capture. Retain complete failed canonical output and actual indexed sources in restoration-boundary-before.json.gz. book_count.capture_read now validates the explicitly historical restoration record and reads its exact cd3b6adc source image; original five corruption controls remain. validate_live_count independently derives the maintained summary from the current manifest. Authored prose and a synthetic next-count pair pass; six live-count/revision denials reject. The current storage reader preserves its captured populations while replaying actual current census controls. Add tools/test_diagnosis_evidence.py to both exact Python inventories; all four storage populations/controls pass. Historical artifacts/results/hashes remain unchanged. Focused sources and actual current/historical bytes are retained in boundary-after.json; no new CLI case is admitted.
+  Publication steering: The director requests the earliest safe push. The conservative initial outgoing non-thin estimate is over the GitHub per-push limit; tracked push-plan.json and publish.py prepare smaller fast-forward ranges without rewriting history. Publish immediately after this exact canonical/normal-hook commit, before maintenance or another feature. The original inline-planning and full object-input disclosure gaps remain explicitly owned by23.4.7; no oversized server rejection is claimed.
+  Additional fixed-snapshot dependencies: Direct execution proof reproduces TOOLBOX source drift, and changing that reader reproduces its Phase0 exact-reader freeze. Those historical reads now use the same accepted Git boundary; current early-execution block/order remains separately checked. The retained bounded replay binds136 historical images and observed current inputs, retains every original mutation control and rejects ten current count/revision/prerequisite variants. Complete restoration review returns PASS; source/failure/result logs remain immutable.
+  Compressed transfer check: Raw objects total19032710823 bytes (about17.7 GiB); a thin pack against all advertised remote refs measures9304184386 bytes. The tracked publisher now uploads only to its own temporary branch in freshly bounded ranges, advances main once at the verified runtime HEAD and deletes its temporary ref with an expected-tip lease. Five synthetic protocol controls pass; no real publication or server rejection is claimed yet.
+  Exact CI registration repair: The next actual canonical run reaches the historical recovery auditor and rejects the newly interposed runner block. ci-registration-before.json.gz retains the whole failure and indexed inputs. Reverse only this exact owner-bound three-script block before all older inverses; every original runner byte/hash remains required. Existing corruption controls remain and eleven new effective missing/duplicate/presence/disabled/substituted-command denials reject. Complete isolated recovery passes714 governance denials with200 actual input byte images and no original-log read/tracked-write escapes; capture_registration.py independently rechecks eleven new faults. ci-registration-after.json.gz retains the actual report, producers and all declared/observed artifact inputs. This is historical evidence integrity, not fresh runtime admission. Whole staged canonical proof is still mandatory at landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.2`
   Status: `pending` / P2 mandatory direct-fixture capture-closure audit before admission/push
@@ -2113,3 +2131,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Component proof belongs to integrated10.
 
   Component22 result: Current summary changes exactly one61->66 token; all other bytes and historical61-case observations remain. Actual manifest/default-leg66 inventory, five stale/wrong/lost/source corruptions and rendered summary pass. Prior storage reader/book bytes are retained and independently normalized only after exact current transitions validate; actual storage population/control results are unchanged and pass. Interrupted38905 exits143 without a receipt. Explicit23.4.3 before-any-push prerequisite is next after clean restoration landing, ahead of Rust Count73.2.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.6`
+  Status: `pending` / due daily artifact review
+  Goal: Review safe disposable artifacts after the November1 cleanup boundary and refresh the bounded cleanup record.
+  Acceptance: Inspect only LinkedSpec-owned paths using the canonical cleanup tools; preserve dependency stores, active jobs and every proof input. Remove only exact proven disposable artifacts after preserving required evidence, or record that no deletion is safe. Commit the latest timestamp/summary and retained review evidence before continuing PNT.
+  Priority/schedule: Next clean activation after23.4.3; daily cleanup is over24h old. No cross-repository writes or dependency implementation reads.
+  Planned verification tier: focused; no storage infrastructure change.
+  Planned focused checks: Canonical retained-artifact boundary and narrow live census, named deletion/retrieval controls only if removal is selected, memory/history/task integrity.
+  Planned canonical trigger: Final clean push; any mechanical storage change needs its own canonical leaf.
+  Planned claim verification: Declare dated per-file observation and exact evidence at activation; no reclamation or deletion claim is made here.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.7`
+  Status: `pending` / publication custody closeout
+  Goal: Retain the actual size-safe publication outcomes and close disclosed initial planning/evidence gaps after the authorized immediate push.
+  Acceptance: Preserve actual publisher source, exact initial/final plans, per-batch commands/exits/log bytes, final local/remote identity and canonical receipt. Recover the initial inline measurement instrument or explicitly retain its historical limitation; add non-mutating wrong-budget/chain controls and a reproducible Git-object input identity/retrieval representation before claiming complete measured pack custody. Preserve all published Git IDs. No oversized upload or history rewrite is required.
+  Priority/schedule: After the immediate normal-hook publication and due cleanup23.4.6, before unrelated runtime selection. Own until verified closure; the director-authorized early safe push is not blocked on converting the initial diagnostic into a broader measurement claim.
+  Planned verification tier: focused; retain publication artifacts and readonly identity/custody controls only.
+  Planned canonical trigger: Any mechanical hook/storage change needs a separate canonical leaf; final clean publication follows the current receipt policy.
+  Planned claim verification: Explicitly close the two disclosed legs in the publication-transport-plan claim, with actual retained inputs and scoped RED controls.

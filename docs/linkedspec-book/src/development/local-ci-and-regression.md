@@ -34,6 +34,19 @@ The staged task-tree delta changes verification declarations for exactly one sta
 Each task-tree leaf records its tier and exact focused checks. For canonical work, first stage the exact candidate and leave no unstaged tracked or untracked non-ignored files. The gate binds success to base `HEAD` and a read-only SHA-256 of Git's full-index binary staged diff in repository-local project data. The pre-commit doctrine rejects a missing or stale canonical receipt. After commit, an exact receipt can be promoted to committed `HEAD`; the pre-push hook reuses it only when it matches, otherwise it runs the complete gate once.
 
 This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a claim of literal impossibility.
+
+### Task-evidence coverage
+
+The TASK-ACCEPTANCE gate requires a staged task file with the completed TOOLBOX acceptance checklist for changes under `.github/workflows/`, `.githooks/`, `bin/`, `perl/`, `rust/`, `dart/`, `julia/`, `lua/`, `specs/`, `t/`, `tests/`, `tools/` and `scripts/`. This includes backend guides and manifests within those directories. Changes confined to root or `docs/` prose do not trigger this particular gate.
+
+For example, staging `dart/lib/src/runtime/interpreter.dart` or a shared `tests/` fixture without a task update rejects the commit. Stage the owning task's completed checklist with its actual focused results to satisfy the evidence-shape check. Checklist presence does not prove those results are true or execute commands from Markdown. Canonical CI also runs the real gate against isolated indexes:
+
+```sh
+bash tools/run_python_project_data.sh tools/test_diagnosis_evidence.py
+```
+
+The controls check missing, complete and incomplete evidence, deletions, existing directory coverage and documentation-only compatibility while preserving the working index.
+
 ### README and routed-document pressure
 
 The registered `README-STABILITY` doctrine runs on every doctrine invocation, regardless of which paths changed. Its Bash entry point checks the stable landing-page headings and 128-line / 6,144-byte ceilings, then invokes the core-Perl routing check over the resulting Git tree:

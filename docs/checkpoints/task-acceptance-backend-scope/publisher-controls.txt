@@ -1,0 +1,1 @@
+{"synthetic_protocol_controls": ["healthy", "resume", "oversize", "wrong-main", "collision"], "limits": "Synthetic operator control flow only; no real network push, receipt or GitHub size admission is claimed."}

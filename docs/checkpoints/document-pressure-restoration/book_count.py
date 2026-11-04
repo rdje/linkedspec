@@ -7,12 +7,14 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).parent
 OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.22'
 BOOK = 'docs/linkedspec-book/src/development/local-ci-and-regression.md'
 READER = 'docs/checkpoints/document-pressure-restoration/storage_inventory.py'
+CAPTURE_REVISION = 'cd3b6adc3e58fb64283ae4ae4a5a37823eabd891'
 OLD = 'runs the focused runner/trace suites and all 61 primary CLI cases under default and POSIX option environments'
 NEW = 'runs the focused runner/trace suites and all 66 primary CLI cases under default and POSIX option environments'
 READER_EDITS = [
@@ -56,23 +58,47 @@ def changed_reader(before):
     return source.encode()
 
 
+def capture_read(name):
+    """Read the accepted restoration, independently of later authored changes."""
+    assert not Path(name).is_absolute() and '..' not in Path(name).parts
+    claim = json.loads((ROOT / 'docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json').read_bytes())
+    matches = [row['durability'] for row in claim['claims']
+               if row['name'] == 'historical-objective-current-source-integrity']
+    assert len(matches) == 1
+    boundary = matches[0]
+    assert boundary['status'] == 'checked' and boundary['mode'] == 'historical'
+    assert boundary['revision'] == CAPTURE_REVISION, 'restoration capture revision differs'
+    return subprocess.check_output(['git', 'show', CAPTURE_REVISION + ':' + name], cwd=ROOT)
+
+
+def validate_live_count(book=None, manifest=None):
+    """The maintained summary follows today's manifest, not a frozen book image."""
+    book = (ROOT / BOOK).read_bytes() if book is None else book
+    manifest = json.loads((ROOT / 'cli_conformance/manifest.json').read_bytes()) if manifest is None else manifest
+    cases = manifest['cases']
+    assert cases and len({row['id'] for row in cases}) == len(cases)
+    marker = NEW.replace('all 66 primary', 'all ' + str(len(cases)) + ' primary').encode()
+    assert book.count(marker) == 1, 'current CLI-count summary differs from manifest'
+
+
 def validate_current(book=None, reader=None):
+    """Validate owner22's capture; explicit arguments exercise its original REDs."""
     saved = intake()
     before_book, before_reader = (decode(saved['inputs'][name]) for name in (BOOK, READER))
     assert before_book.decode().count(OLD) == 1
-    book = (ROOT / BOOK).read_bytes() if book is None else book
-    reader = (ROOT / READER).read_bytes() if reader is None else reader
-    assert book == before_book.decode().replace(OLD, NEW, 1).encode(), 'unreviewed current CLI-count book change'
+    book = capture_read(BOOK) if book is None else book
+    reader = capture_read(READER) if reader is None else reader
+    assert book == before_book.decode().replace(OLD, NEW, 1).encode(), 'unreviewed captured CLI-count book change'
     assert reader == changed_reader(before_reader), 'unreviewed storage reader evolution'
     return saved
 
 
 def storage_read(name):
-    """Only two exact, independently verified source transitions have a legacy view."""
+    """The component19 predecessor view is derived from the accepted capture."""
     saved = validate_current()
     if name in (BOOK, READER):
         return decode(saved['inputs'][name])
-    return (ROOT / name).read_bytes()
+    return capture_read(name)
 
 
 def capture_intake():
@@ -120,11 +146,12 @@ def capture():
 
 
 def review():
+    validate_live_count()
     prior = validate_current()
     saved = json.loads(gzip.decompress((HERE / 'book-count-evidence.json.gz').read_bytes()))
     assert saved['owner'] == OWNER and saved['intake_sha256'] == sha((HERE / 'book-count-intake.json.gz').read_bytes())
     for name, row in saved['inputs'].items():
-        assert (ROOT / name).read_bytes() == decode(row), 'CLI-count input drift: ' + name
+        assert capture_read(name) == decode(row), 'CLI-count captured input drift: ' + name
     manifest = json.loads(decode(saved['inputs']['cli_conformance/manifest.json']))
     assert manifest['suite'] == 'linkedspec-primary-cli' and len(manifest['cases']) == 66
     assert len({r['id'] for r in manifest['cases']}) == 66
@@ -134,7 +161,7 @@ def review():
     assert len(re.findall(rb'^\[cli-conformance\] PASS ', first_leg, re.M)) == 66
     assert b'local CI gate passed' not in run, 'interrupted run promoted'
     before_book, before_reader = (decode(prior['inputs'][name]) for name in (BOOK, READER))
-    book, reader = (ROOT / BOOK).read_bytes(), (ROOT / READER).read_bytes()
+    book, reader = capture_read(BOOK), capture_read(READER)
     for label, bad_book, bad_reader in (
         ('stale-count', before_book, reader), ('book-loss', book + b'\nunreviewed\n', reader),
         ('wrong-count', book.replace(NEW.encode(), NEW.replace('66', '67').encode(), 1), reader),

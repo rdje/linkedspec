@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3569,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-single-index-read-bypasses-typed-binding.md","sha256":"165ee61113c72f339b4541d17ce39dd1eacb5702ad33c1b0ef54252959f3d7e6","type":"member"}
 {"bytes":6255,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-source-emitter-lane-split.md","sha256":"1c31c99c309543076c993001119b92297ba404db0223038794df30b2a6b0b8c9","type":"member"}
 {"bytes":7901,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-sparse-and-required-step-gaps.md","sha256":"154ff9612d619b957237d1377ab9987120437f0a14fc5c4bc5b50d40935a43a9","type":"member"}
 {"bytes":11275,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-ast-enrichment-carriers-admission.md","sha256":"28b26e7d472c932f50027f668d9b1f6c8b65ac0aeabd7699eb77c4f0fd01f8cb","type":"member"}
@@ -107,7 +108,7 @@
 {"bytes":28330,"lines":490,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-source-reading-coverage.md","sha256":"57fbfd04494ac6bf694f72fd4ca7d441e78cd17e723700bf3272891706241252","type":"member"}
 {"bytes":16773,"lines":248,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tagged-record-evaluation-and-split-drift.md","sha256":"ea09869c5ee30d8159918951ea3446ce6df39e240dcb772b998a2c0bcbb6f1bd","type":"member"}
 {"bytes":3651,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/targeted-session-startup.md","sha256":"fdfcadf09c6d5ce25f14bc10f8d7f2202f8142eec1b43137ab11515164e1b388","type":"member"}
-{"bytes":5168,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"18433c9900eb5b23e91eda82eb77d3e5e35561158ca69b32345f2eb039dcc08b","type":"member"}
+{"bytes":6203,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"ca8601711769ac7fc7dd6ec9e339c13d8971bc7aa22ffc698442a9a05d0b98cc","type":"member"}
 {"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
 {"bytes":21168,"lines":363,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-partition-capacity-registry-drift.md","sha256":"6dfc8e83cd9569dc27c0fa7adb4ab0b541d91d7a4dffc1cab42c359e08290001","type":"member"}
 {"bytes":3731,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-capability-markers-not-frontier.md","sha256":"6e5dd80e47733c7fb17aea828641d19fd209c753630cdfbffd47af8e7b187c9c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3092,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-block-valued-receiver-chains.md","sha256":"f8ee49d1e08797e987b1db74edce217566328e26331b2c1d2848ae7de471e38c","type":"member"}
 {"bytes":2710,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-call-spacing-contract.md","sha256":"f1102c714c520cfb6233abd6e50cb0e5d37b2536b006b13a9606708761897b2d","type":"member"}
 {"bytes":6422,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-channel2-value-read-split.md","sha256":"f1a9b5b866490e4d578e1ec5dbbab12697625c5f4f10c8303bd24d116db50d8b","type":"member"}
-{"bytes":2822,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-colon-scalar-slot-removal-audit.md","sha256":"c75a9ff543975ac23d06637f75c65d5c87de91f069b163b610cc5f90eb549925","type":"member"}

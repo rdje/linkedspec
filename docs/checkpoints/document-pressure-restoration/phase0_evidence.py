@@ -133,16 +133,17 @@ def capture():
 
 
 def review():
+    from book_count import capture_read
     raw = (HERE / 'phase0-intake.json.gz').read_bytes()
     intake = json.loads(gzip.decompress(raw))
     saved = json.loads(gzip.decompress((HERE / 'phase0-evidence-final.json.gz').read_bytes()))
     assert saved['owner'] == intake['owner'] == OWNER and sha(raw) == saved['intake_sha256']
     for name, row in saved['inputs'].items():
-        assert (ROOT / name).read_bytes() == decode(row), 'Phase0 input drift: ' + name
+        assert capture_read(name) == decode(row), 'Phase0 captured input drift: ' + name
     for name, row in intake['inputs'].items():
         old = decode(row)
         if name.startswith(('perl/', 't/lib/')):
-            assert (ROOT / name).read_bytes() == old, 'component21 production/support drift: ' + name
+            assert capture_read(name) == old, 'component21 captured production/support drift: ' + name
     baseline = decode(intake['failure'])
     assert b'Tests=1035' in baseline and b'Failed 6/1035 subtests' in baseline
     original = decode(intake['inputs'][FIXTURE])
@@ -166,7 +167,7 @@ def review():
         else:
             raise AssertionError('unreviewed reader mutation admitted')
     old_reader = gzip.decompress((HERE / 'phase0-execution-reader-before.py.gz').read_bytes())
-    current_reader = (HERE / 'execution_evidence.py').read_bytes()
+    current_reader = capture_read('docs/checkpoints/document-pressure-restoration/execution_evidence.py')
     validate_execution_reader_evolution(old_reader, current_reader)
     for candidate in (old_reader, current_reader + b'# unreviewed\n',
                       current_reader.replace(b'elif name == str', b'elif False and name == str', 1)):

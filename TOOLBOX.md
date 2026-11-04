@@ -31,6 +31,11 @@ supporting techniques** that complement them. (Always run with `perl -Iperl …`
   ([`scripts/check_repo_root_path_portability.sh`](scripts/check_repo_root_path_portability.sh)) independently
   scans tracked parent-repository text and locks all five primary-command runtime root anchors on every run.
   Both path/storage checkers stream NUL-delimited filenames instead of expanding argv; exercise actual large-list, pathname, rejection and Git-failure controls with `bash tools/run_python_project_data.sh tools/test_doctrine_path_streaming.py`.
+  TASK-ACCEPTANCE governs `.github/workflows/`, `.githooks/`, `bin/`, `perl/`, `rust/`, `dart/`,
+  `julia/`, `lua/`, `specs/`, `t/`, `tests/`, `tools/` and `scripts/`, including backend guides and
+  manifests within those directories. Root and `docs/` prose alone do not trigger it. Run
+  `bash tools/run_python_project_data.sh tools/test_diagnosis_evidence.py` for isolated-index missing,
+  complete, incomplete and deletion controls; canonical CI runs that producer too.
   `README-STABILITY` ([`scripts/check_readme_stability.sh`](scripts/check_readme_stability.sh)) keeps the root
   landing page within the reviewed `README_POLICY.md` line/byte caps and unconditionally invokes
   [`scripts/check_readme_routing_pressure.pl`](scripts/check_readme_routing_pressure.pl). The data registry at

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3892,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-controlled-corpus-execution.md","sha256":"58a5f76ff080db90504e7421db719ba8ba0f57fd0884f632694f3e10b38aa1e9","type":"member"}
 {"bytes":3324,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-copied-null-contains.md","sha256":"163ed8a650c4e20817c4c8e386ea83aedf0904232c89a8a937e7fbba80ed00a9","type":"member"}
 {"bytes":3419,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-copied-null-index.md","sha256":"6e71145201e0a5c2e3f04357d3e34895e1f95fc084de5533a2afb34aff8c56e6","type":"member"}
 {"bytes":2856,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-copied-null-presence.md","sha256":"6a41d68a5044a10e09325832375331d157264c49682222e5db10a01799d08fff","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3257,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-admission.md","sha256":"694a1ecfce83dcfa23264eb3ca8efc4de27d07317b8c7dd3acb1167a9f706e2a","type":"member"}
 {"bytes":4879,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-descriptor.md","sha256":"3e2f8dba9305869c43160e3786e64610a937eacf04463f556ef350f6ba6e14ae","type":"member"}
 {"bytes":4568,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-execution.md","sha256":"4cda308074f0d7512c07912bd2ecd5ebaa08e014699b3659dbef37da3596114f","type":"member"}
-{"bytes":6015,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-normalization.md","sha256":"91d74b974fbcf60e6f9a568cfd95b5eab95e497ab5889f204ee0c440451ede71","type":"member"}

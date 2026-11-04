@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5806,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-in-memory-backend-contract.md","sha256":"5ce7f918ceb294a04c6769de63627555f14a8cce92805f859f41d3dfcbe6dd31","type":"member"}
 {"bytes":4758,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-spec-resolution-contract.md","sha256":"53f370104a9a9426b5109a6f91407ffcc650c68ebf9c225b1178dec63fd5ab36","type":"member"}
 {"bytes":4394,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-spec-resolution-policy-drift.md","sha256":"ca3022a5a297d460d1b9dc231c1a8512a97822979b14ccbfe44174432d005de1","type":"member"}
 {"bytes":2710,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/nested-tree-dart-carrier-readiness.md","sha256":"c29a1bde32722c94b966ea4bfd4881fb6b4467e34e80e7a5299012db3733f588","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7417,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-get-mode-result-validation-precedence-drift.md","sha256":"72d57659cdf7823793dff714b68881797d12a930b0f733ce432524354e85adb3","type":"member"}
 {"bytes":9975,"lines":146,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-grouped-regex-operand-boundaries.md","sha256":"86b373ad23f1b677dabce451b93cfa488c9b268cc454fc8a29760b147af3b4c5","type":"member"}
 {"bytes":3547,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-handler-error-provenance-target.md","sha256":"2b20bbbe3bf0ad0e7bcf080615f61ff70c885495d3e2de450b002c7157c7084f","type":"member"}
-{"bytes":4453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-constructor-nested-values.md","sha256":"b79a3d50a19aef95ce5eb5bfe69329e610b23eaa569a13c8bcfcdc71a6b4864f","type":"member"}

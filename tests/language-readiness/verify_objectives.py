@@ -136,6 +136,22 @@ OCCURRENCE_INSERTION = (
 )
 # Only these reviewed CI insertions and Perl inventory replacements may evolve
 # historical executable inputs. Normalization must recover every original byte.
+TASK_EVIDENCE_CI_OWNER = 'TYPE-REFERENCE-BOOK.1.2.23.4.3'
+TASK_EVIDENCE_CI_PATHS = (
+    'tools/test_diagnosis_evidence.py',
+    'docs/checkpoints/task-acceptance-backend-scope/test_restoration_boundary.py',
+    'docs/checkpoints/task-acceptance-backend-scope/test_publish.py',
+)
+TASK_EVIDENCE_CI_INSERTIONS = (
+    (b'bash "$REPO_ROOT/scripts/check_doctrines.sh"\n\n',
+     b'log "checking task-evidence path coverage through isolated indexes"\n'
+     b'require_tracked_file tools/test_diagnosis_evidence.py\n'
+     b'bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_diagnosis_evidence.py\n'
+     b'require_tracked_file docs/checkpoints/task-acceptance-backend-scope/test_restoration_boundary.py\n'
+     b'bash "$REPO_ROOT/tools/run_python_project_data.sh" docs/checkpoints/task-acceptance-backend-scope/test_restoration_boundary.py\n'
+     b'require_tracked_file docs/checkpoints/task-acceptance-backend-scope/test_publish.py\n'
+     b'bash "$REPO_ROOT/tools/run_python_project_data.sh" docs/checkpoints/task-acceptance-backend-scope/test_publish.py\n\n'),
+)
 RESTORATION_CI_INSERTIONS = (
     (b'require_command julia\n\n',
      b'if [[ "$(uname -s)" == Darwin ]]; then\n'
@@ -621,7 +637,8 @@ def verify_governance_evolution(source, contents, historical_hash):
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
     insertions = (
-        RESTORATION_CI_INSERTIONS
+        TASK_EVIDENCE_CI_INSERTIONS
+        + RESTORATION_CI_INSERTIONS
         + SIGNED_ARRAY_SELECTOR_CI_INSERTIONS
         + PRIVATE_FACTORY_FIXTURE_CI_INSERTIONS
         + KNOWLEDGE_HEADER_GATE_CI_INSERTIONS
@@ -652,6 +669,7 @@ def verify_governance_evolution(source, contents, historical_hash):
             "signed_array_selector_owner": SIGNED_ARRAY_SELECTOR_OWNER,
             "restoration_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.10",
             "execution_preflight_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.20",
+            "task_evidence_owner": TASK_EVIDENCE_CI_OWNER,
             "scope": "exact anchored checker/input registration; original CI bytes preserved"}
 
 
@@ -1512,6 +1530,16 @@ def falsify(report):
             altered += tuple(current.replace(insertion, insertion * 2, 1) for _, insertion in RESTORATION_CI_INSERTIONS)
             altered += (current.replace(RESTORATION_CI_INSERTIONS[0][1],
                                         RESTORATION_CI_INSERTIONS[0][1].replace(b'== Darwin', b'== Linux'), 1),)
+            altered += tuple(current.replace(insertion, b"", 1) for _, insertion in TASK_EVIDENCE_CI_INSERTIONS)
+            altered += tuple(current.replace(insertion, insertion * 2, 1) for _, insertion in TASK_EVIDENCE_CI_INSERTIONS)
+            for path in TASK_EVIDENCE_CI_PATHS:
+                presence = b'require_tracked_file ' + path.encode() + b'\n'
+                execution = b'bash "$REPO_ROOT/tools/run_python_project_data.sh" ' + path.encode() + b'\n'
+                require(current.count(presence) == current.count(execution) == 1,
+                        'task-evidence selector is not unique')
+                altered += (current.replace(presence, b'', 1),
+                            current.replace(execution, b'true\n', 1),
+                            current.replace(execution, execution.replace(path.encode(), b'tools/unreviewed.py'), 1))
             verify = verify_governance_evolution
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
         elif source == "tools/test_perl_project_data_storage.sh":
