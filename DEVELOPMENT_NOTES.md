@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-04 — bounded retention is a valid daily cleanup disposition
+
+Reuse the accepted scanner on explicit locations instead of a whole-project walk. Root-level files are deliberately one level; six root/crate Rust locations and the retained log directory are separate. Independent scandir/lstat metadata and source-packet controls validate a dated snapshot, not content ownership or permission to purge. The review preserves every cache/proof artifact and keeps byte-exact publication/warning messages. Advisory repository growth is separately scheduled after current Count/copy coverage; historical IDs/evidence remain protected.
+
 ## 2026-11-03 — backend task-evidence directory scope
 
 The explicit path predicate was the entire demonstrated omission mechanism. Extend four directory prefixes while preserving checklist/signature behavior. Backend README/manifests are deliberately included by directory, matching existing Rust semantics; root/docs prose alone stays outside the gate. tools/test_diagnosis_evidence.py uses real alternate indexes below managed project storage; it never mutates the working index. before/after capture full direct source bodies and all calls; red-final records the distinguishing old no-op. Canonical CI now requires and runs this producer. Standard Git/Bash/Python/toolchain closure is not claimed. The three supplied policy hashes match the prior startup/ADR0126 review; no source policy update is required. Due artifact review is separately owned by23.4.6.

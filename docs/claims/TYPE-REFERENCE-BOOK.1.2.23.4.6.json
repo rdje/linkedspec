@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.6",
+  "claims": [
+    {
+      "name": "dated-bounded-artifact-retention-review",
+      "statement": "The926 retained named-scope artifact rows agree with an independent path/byte metadata walk; all artifacts remain retained and five altered-evidence controls reject.",
+      "scope": "Dated 2026-11-04T04:26:54.625313+00:00 root-level strays, six explicit root/crate Rust release/incremental/deps locations and retained log directory only. Includes canonical .log/.bin/.DS_Store suffixes. Not a whole-project inventory, content ownership, disposability, liveness, volume-reclamation, cold bootstrap or concurrent-adversarial claim. Retained Dart/Julia directory presence and Lua wrapper reference grant no purge permission. Publication messages are retained observations; initial transport/Git-object custody stays with23.4.7.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-04/review.py; --capture is the completed one-shot dated observation writer.",
+        "granularity": "Each primary path/suffix/byte row compared with independently collected scandir/lstat rows in each of the eight named scopes; all direct source bodies and raw Git-index input retained.",
+        "result": "{\"date\": \"2026-11-04T04:26:54.625313+00:00\", \"rejected_controls\": [\"missing-row\", \"wrong-size\", \"duplicate-row\", \"outside-path\", \"producer-byte\"], \"removed\": 0, \"result\": \"PASS\", \"scoped_rows\": 926}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A missing, altered, duplicated or outside-path row, or corrupted producer identity, can silently pass the retained metadata review.",
+        "oracle": "Separate scandir/lstat collection rather than the canonical os.walk scanner; retained original observation remains the distinguishing dated oracle.",
+        "red_control": "Five actual effective altered-report calls reject: missing-row, wrong-size, duplicate-row, outside-path and producer-byte. Healthy capture/default replay pass. No deletion or liveness model is inferred from these controls."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-census.py",
+            "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/census.py",
+            "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.22/census.py",
+            "sha256": "08faab18b51d343a794543e7a0c3cb8a372d83c341226c807f6fd4f50bea1461",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-04/observation.json.gz",
+            "sha256": "64cfba7330228417e54f035e881667a896fd30d1c169d9290c508e484d7498ba",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-04/result.json",
+            "sha256": "3762fb7ca77b968647890a90d743be2630a814e99972919e86d3447d925c41c4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-04/review.py",
+            "sha256": "8f9bead36d7b6ce759000d70ed1099ac2c75f768364e0ca6b2151229385a6f30",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_lua_project_data.sh",
+            "sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}

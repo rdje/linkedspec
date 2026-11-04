@@ -6,10 +6,10 @@ answers:
   - "is the uncompressed Git object total the actual upload size"
   - "why use a temporary upload branch before updating main"
 date: 2026-11-04
-status: prepared; actual publication and initial measurement custody closeout remain owned
+status: backlog published at d3a26a94f5c2; initial measurement custody closeout remains owned
 tags: [git, publication, pack, github, continuity]
-evidence: "GitHub 2 GiB push guidance; Git pack-objects and push documentation; docs/checkpoints/task-acceptance-backend-scope/publication-intake.json and push-plan.json; synthetic publisher controls. Initial planning custody/falsification gaps are explicitly owned by TYPE-REFERENCE-BOOK.1.2.23.4.7."
-reverify: "Read the source URLs below and inspect the tracked immutable endpoints/plan; repeat read-only pack measurements at those endpoints. Actual publication is a separately authorized operation."
+evidence: "GitHub 2 GiB push guidance; Git pack-objects and push documentation; docs/checkpoints/task-acceptance-backend-scope/publication-intake.json and push-plan.json; synthetic publisher controls. Actual publisher messages are retained in docs/checkpoints/artifact-review-2026-11-04/observation.json.gz. Initial planning custody/falsification gaps are explicitly owned by TYPE-REFERENCE-BOOK.1.2.23.4.7."
+reverify: "Read source URLs and immutable plan; bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-04/review.py reviews dated metadata and retained messages. Repeat only read-only pack measurements at the recorded endpoints; publish.py is a write operation."
 ---
 
 GitHub documents a maximum 2 GiB single push and successive smaller pushes as the
@@ -35,4 +35,12 @@ lease. Existing-ref collisions and unexpected main changes reject.
 
 Synthetic healthy/resume/oversize/wrong-main/collision controls exercise operator
 logic without a real push or receipt. The real operation requires a clean tree,
-the exact canonical receipt and normal hooks. Actual outcomes belong to23.4.7.
+the exact canonical receipt and normal hooks. The actual operation completed23
+batches, advanced main to d3a26a94f5c2 and removed its temporary branch. A fresh
+remote check matched local/origin main and found no temporary ref. Byte-exact
+publisher messages survive in the November4 artifact-review capsule; complete
+transport custody and the initial planning proof gaps still belong to23.4.7.
+
+GitHub emitted an accepted50.86MB artifact warning in batch10. Follow-up23.4.8
+owns future repository growth against primary host guidance; pack size is not
+server on-disk storage, and no historical deletion or rewrite is authorized.

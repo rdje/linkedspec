@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-04 — TYPE-REFERENCE-BOOK.1.2.23.4.6 — retain artifacts after bounded daily review
+
+The canonical non-following scanner and independent metadata walk agree on926 rows in eight named scopes; five altered-evidence controls reject. No artifact was removed. Refresh the latest cleanup record, preserve exact publisher messages, correct the compressed evidence pointer and schedule repository-growth8. All23 backlog ranges, main update and leased temporary-ref removal completed at d3a26a94f5c2 after canonical CI/normal hooks; initial pack-custody gaps remain7. Focused readonly review and book/mandatory integrity checks govern this maintenance commit.
+
 ## 2026-11-03 — TYPE-REFERENCE-BOOK.1.2.23.4.3 — govern task evidence across owned backends
 
 The task-evidence gate now governs Dart, Julia, Lua and shared tests directory changes; the retained finite alternate-index controls pass after the exact omitted-path RED. The real shell gate now includes dart/julia/lua/tests. The registered canonical runner exercises isolated-index missing/complete/incomplete/deletion and documentation-only controls. Retained baseline/new-contract RED and repaired70 calls preserve exact source/input/output identities; working index unchanged. Scope docs/book and task-bound maintained references are synchronized. Exact staged canonical receipt remains required for landing; no runtime admission is inferred.

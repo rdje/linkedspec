@@ -445,6 +445,8 @@ alone does not authorize deletion. A handoff finishes the current slice, clears
 `git_message_brief.txt`, and verifies clean Git state and no required background job
 before leaving the next task in `MEMORY.md`.
 
+A daily review can retain every candidate. The November4 bounded review compares named artifact scopes with an independent metadata walk and removes nothing: cache usefulness and unresolved proof obligations take precedence over filename, age or size. Its dated snapshot and readonly reader live under `docs/checkpoints/artifact-review-2026-11-04/`; the latest-only record remains `docs/ARTIFACT_CLEANUP.md`. Publication messages are preserved there while the separate transport-custody owner closes its initial diagnostic gaps. GitHub's accepted large-file warning has a scheduled repository-growth review; it does not authorize deleting historical evidence.
+
 Continuity docs answer different questions:
 
 - What changed in this slice?

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Backend task-evidence scope repaired under23.4.3; complete due artifact review23.4.6 at the next clean boundary, then resume Rust Count73.2. Full admission and its other prerequisites remain separate.
+Bounded daily artifact review23.4.6 is complete with all candidates retained. Publication-custody23.4.7 is next; Rust Count73.2/peers and P1 copy73.6 follow. Growth8 is scheduled after that selected coverage. Full admission stays separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.3 adds Dart/Julia/Lua/shared tests to TASK-ACCEPTANCE and recurring real alternate-index coverage to canonical CI. Retained baseline70 calls, distinguishing pre-repair new-contract RED and repaired70 calls preserve direct source/input/output evidence and the working index. Book/card/toolbox/doctrine agree on directory scope and evidence-shape limits. Historical fixed-snapshot readers are separated from live count/prerequisite checks; bounded and full restoration replay pass. Temporary-branch publication is prepared after the verified commit, with initial planning gaps owned by23.4.7. Exact staged canonical receipt and normal hooks govern landing.
+TYPE-REFERENCE-BOOK.1.2.23.4.6 retains926 dated rows across eight named artifact scopes, matching an independent metadata walk. Five altered-evidence controls reject and readonly review/book build pass. No artifact/cache/proof deletion occurred. Cleanup/book/fact/continuity and the compressed-artifact pointer align. Exact publisher/warning messages survive; growth8 owns the accepted GitHub warning and host guidance. Earlier3 passed canonical CI/normal hooks and all23 uploads/main update/temporary-ref cleanup completed at d3a26a94f5c2.
 
 ## Next Action
 
-Publish immediately using the tracked temporary-branch protocol and exact committed receipt, then resolve TYPE-REFERENCE-BOOK.1.2.23.4.6 for safe artifact review and23.4.7 for publication evidence custody. Continue Rust Count73.2 afterward. Canonical feature-registration23.4.1, fixture-custody23.4.2 and full23.4 remain independently owned before their admission/publication boundaries.
+Close TYPE-REFERENCE-BOOK.1.2.23.4.7 initial planning custody/control gaps using actual retained publication data, then resume Rust Count73.2, peers and P1 copy/source73.6. Growth8 precedes unrelated selection. Admission23.4, feature-registration23.4.1, fixture-custody23.4.2 and budget headroom20.2 remain independently owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.6 — bounded retention-only artifact review; independent metadata/five evidence controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.4.3 — backend/shared-fixture task-evidence routing; legacy/new-contract RED/repaired actual-index controls retained.
 - TYPE-REFERENCE-BOOK.1.2.20.1.10 — accepted ADR0139 archive/reference restoration committed at cd3b6adc with normal canonical receipt/hooks.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.1 — Perl Count source/actual-kind guards targeted-checked; Rust73.2 follows due maintenance.
