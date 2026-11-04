@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-04 — separate a clean pause from successful publication
+
+A committed clean workspace can preserve an idle handoff even when publication is externally blocked. GitHub commit_refs rejection and a subsequent SSH publickey error are separate observed channels; the contemporaneous official Git Operations incident is consistent with them but does not prove the repository-specific cause. Keep the actual outcomes, exact verified commit and remote boundary, schedule recovery before feature activation, and require fresh exact-HEAD canonical proof after this focused pause commit. The director pause survives a fresh session through MEMORY and the task tree.
+
 ## 2026-11-04 — explicit task epochs retain full committed source without duplicating payload
 
 The original archive interface intentionally names three one-time snapshots. Later closed narratives need their own explicit source epoch. A bounded immutable manifest binds a retained ancestor commit and complete Git body; current IDs/CORE fields and open bodies remain. Actual initial CLI rejection, first successful phase and final focused direct-input capture remain distinct. Independent line-state parsing rejects contract loss separately from the renderer; immutable-manifest refusal uses a labeled prior-Git-boundary model. A broader preparatory census disclosed five unsupported legacy inline-root files after retaining its failed source/trace; those files stay untouched. Current text capacity renewal supplies no Git disk/transfer reclamation claim. The metadata gate already invokes narrative verification, and existing Python owner membership covers the added fixture. Canonical infrastructure acceptance remains required.

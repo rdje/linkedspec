@@ -2196,3 +2196,34 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Priority/schedule: P1 after already selected Rust Count73.2, peers and copy73.6, before unrelated selection. This advisory review does not retroactively invalidate the accepted publication.
   Acceptance: Use committed Git/public host contracts to separate future artifact growth, original pack estimates, actual object sizes and unknown server storage. Prepare bounded lossless prevention options and their producer/reader/claim implications, with a concrete recommendation. Preserve exact historical blobs/IDs, package stores and proof; no blanket cleanup, force push, history rewrite, other-repository write or off-volume migration. Obtain a director decision only for a concrete change that needs authority outside the existing contract. Own any demonstrated defect through verified repair.
   Planned verification: Read-only source-bound assessment first; focused controls for an agreed bounded repair; canonical only if infrastructure or publication contracts change.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.9`
+  Status: `completed` / director-requested clean pause
+  Goal: Finish the current verified unit and save a committed, idle handoff at the director's next-checkpoint pause request.
+  Acceptance: Preserve completed canonical/normal-hook outcomes and the actual publication rejection; record exact local and remote boundaries, a scheduled recovery owner and an explicit-resume requirement. Update task/roadmap/live/MEMORY and the book handoff explanation. Commit through normal focused hooks, clear the brief, confirm clean Git and no required job, then stop before Rust Count73.2.
+  Verification tier: `focused`
+  Focused checks: Exact Git/receipt and retained operational log pointers; task/index, memory/handoff, history pressure, reference scope, mdBook rendering, diff and all mandatory doctrines.
+  Canonical trigger: No new infrastructure or runtime change; any later push requires canonical proof for its exact HEAD.
+  Claim verification: none: Director steering and operational event bookkeeping only; no new population, performance or feature-correctness measurement.
+  Activation: Clean5801970b4d311e97b5764d16a2573a4094144e49 after canonical PASS and all normal hooks; brief empty. The normal push reused its exact receipt but GitHub rejected main with fatal error in commit_refs. Independent API read-back remains at d3a26a94f5c2efba736806ac13911155e3739995. GitHub reports an active Git Operations incident; this is consistent with the rejection, not a demonstrated exact server root cause. A subsequent SSH read also returned publickey denial while authenticated API reads succeeded. Preserve both observations without inferring a size rejection or changing authentication/configuration.
+  Recovery: New23.4.10 owns publication recovery on explicit resume, before Rust73.2. Do not wait indefinitely on the host incident or start another feature during this pause handoff.
+  Evidence: docs/checkpoints/pause-handoff-2026-11-04/ retains actual successful commit log, exact5801970b canonical receipt, rejected push log, acquisition source and raw host/ref/workflow responses. The manual workflow is registered active but remains push-disabled/job-guarded under ADR0004; no automatic hosted proof is inferred.
+  Handoff: MEMORY is idle and explicitly paused;4.10 is first only on explicit resume. The later focused pause commit has no inherited exact-HEAD canonical receipt. Normal hooks/brief clearing/clean Git finish this unit; no background verification or automatic retry remains required for this pause.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.4.9 — record director pause and publication recovery
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — retain actual normal push rejection and independent unchanged API main ref; director requests a clean pause.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — GitHub reports a contemporaneous Git Operations incident; exact server cause and separate SSH denial remain explicitly unconfirmed and4.10-owned.
+  - [x] **FIX** — commit idle pause steering and operational custody, schedule recovery before feature selection; no speculative code/authentication repair.
+  - [x] **ADDRESSED (verified)** — focused pointer/task/index/history/scope checks and mdBook rendering validate the handoff; normal hooks govern landing.
+  - [x] **NO REGRESSION** — runtime, infrastructure, historical evidence and dependency boundaries are unchanged; publication still requires exact current canonical proof.
+  - [x] **LOCKSTEP** — task/root/index, roadmap, live/MEMORY, change/engineering notes and book agree on explicit-resume-only steering.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.10`
+  Status: `pending` / publication recovery after explicit resume
+  Priority/schedule: P1 first on explicit director resume, before Rust Count73.2, peers/P1 copy73.6 and growth8.
+  Goal: Publish the committed post-backlog work after the GitHub rejection without rewriting history or bypassing verification.
+  Reproduction/impact: Normal exact-receipt main push from5801970b4 failed with remote fatal error in commit_refs; GitHub API still names d3a26a94f5c2. A later SSH read returned publickey denial. The host status incident smtdswd1h2w4 affects Git Operations; repository-specific cause remains unconfirmed. Completed maintenance/infrastructure work is safely committed locally but not yet published.
+  Acceptance: Read retained23.4.9 operational records and fresh host/ref state. Resolve SSH access if it remains unavailable; use only authorized published authentication paths. Run canonical CI for the exact final clean HEAD, push with normal hooks and no force/submodule recursion, confirm fresh local/origin/API identities and hosted status. Retain any repeated error and investigate its actual cause; do not assume a pack-size problem or change repository policy from the generic error. Stop for specific missing authority/access only when necessary.
+  Planned tier: `canonical`; exact clean publication is the trigger. No runtime feature activation during the current director pause.
+  Claim verification: none: Pending operational recovery; declare any new measured assessment separately at activation.

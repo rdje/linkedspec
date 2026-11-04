@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Task-budget20.2 renews current capacity with exact source retention. After canonical landing and the normal clean push, resume Rust Count73.2/peers and P1 copy73.6; advisory growth8 follows before unrelated selection. Full admission remains separate.
+Paused at the director's next-checkpoint request. The verified task-budget20.2 commit is complete locally; the normal GitHub push was rejected. Publication recovery23.4.10 is scheduled first on explicit resume; no Rust Count feature is active.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.20.2 retains83 IDs, all CORE fields and11 complete open/unselected bodies while moving72 closed narratives behind explicit Git source epochs.380979 current bytes are renewed; independent preservation, actual source/legacy CLI and22 specific denials pass. The bounded manifest/source/ancestry guard preserves all old archives and ceilings. Complete actual focused producer/input data is retained. Exact canonical receipt and normal hooks govern this infrastructure landing.
+TYPE-REFERENCE-BOOK.1.2.23.4.9 records the clean idle handoff, retained commit/receipt/push/host observations and publication-recovery owner. Task-budget20.2 at5801970b passed its exact canonical gate and normal hooks. Pause documentation uses focused proof; no later HEAD inherits the earlier receipt.
 
 ## Next Action
 
-Publish the next exact verified clean HEAD using normal hooks, then independently activate Rust Count73.2 guards, peers and P1 copy/source73.6. Growth8 precedes unrelated selection. Admission23.4, feature-registration23.4.1 and fixture-custody23.4.2 remain independently owned.
+Wait for explicit director resume. Then activate publication-recovery23.4.10: recheck host incident/SSH/API refs, obtain canonical proof for exact final clean HEAD, publish with normal hooks and confirm remote identity. Rust Count73.2, peers/P1 copy73.6 and advisory growth8 follow afterward.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.9 — director pause recorded; publication recovery owns the host rejection on explicit resume.
 - TYPE-REFERENCE-BOOK.1.2.20.2 — later immutable source epochs renew capacity with all current contracts/open bodies retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.7 — original source/actual publication/logical Git custody and focused controls reviewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.6 — bounded retention-only artifact review; independent metadata/five evidence controls pass.

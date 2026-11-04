@@ -1,0 +1,40 @@
+[memory-pointer] ok: pre-commit activation_commit 659f19d748ddc9ddd6bc1c40c2c7b2d63107b138 resolves to current HEAD 659f19d7
+knowledge-map: wrote KNOWLEDGE_MAP.md (1654 facts, 11939 question keys)
+
+================ DOCTRINE ENFORCEMENT REPORT ================
+  PASS  MEMORY-ARCH — durable 4-layer memory, activation-boundary, and clean-handoff invariants (MEMORY_ARCHITECTURE.md §9)
+  PASS  KNOWLEDGE-MAP — the derived Knowledge Map is in sync with its fact sources
+  PASS  TASK-TREE-METADATA — task metadata, partitions, and stable closed-capability anchors stay consistent
+  PASS  TASK-ACCEPTANCE — staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence
+  PASS  REPO-ROOT-PATHS — tracked repository paths and all five primary-command roots are relocation-safe
+  PASS  PROJECT-DATA-STORAGE — tracked project-storage defaults and documented outputs stay repository-filesystem rooted
+  PASS  DOCUMENT-HISTORY — bounded current documentation views preserve exact repository-local queryable history
+  PASS  README-STABILITY — README and every routed destination retain reviewed resulting-tree pressure controls
+  PASS  CLAIM-VERIFICATION — new claim declarations disclose three legs and records bind tracked producer/input identities
+  PASS  VERIFICATION-CADENCE — ordinary commits declare focused proof while canonical boundaries carry exact staged-tree receipts
+============================================================
+doctrines: ALL 10 enforced doctrines PASS.
+[memory-pointer] ok: post-commit activation_commit 659f19d748ddc9ddd6bc1c40c2c7b2d63107b138 resolves to first parent HEAD^1 659f19d7
+verification-receipt: promoted canonical receipt to committed HEAD 5801970b4d311e97b5764d16a2573a4094144e49
+[main 5801970b4] TYPE-REFERENCE-BOOK.1.2.20.2 — retain later task narratives through immutable source epochs
+ 41 files changed, 13272 insertions(+), 1022 deletions(-)
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/README.md
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/cli_probe.py
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/evidence-before-legacy-refusal.json.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/evidence-before-path-guards.json.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/evidence.json.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/focused-initial-test.py.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/focused-initial.log.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/intake.json
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/intake.py
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/population-setup.log.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/population-setup.py.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/population.json
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/population.py
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/reader-after.json.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/reader-before.json.gz
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/result-before-path-guards.json
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/result.json
+ create mode 100644 docs/checkpoints/task-budget-renewal-2026-11-04/review.py
+ create mode 100644 docs/claims/TYPE-REFERENCE-BOOK.1.2.20.2.json
+ create mode 100644 docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.20.2.json
