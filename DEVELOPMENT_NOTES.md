@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — recover external access before retrying publication
+
+Restricted-harness reads failed DNS/network initialization while approved-host SSH/API reads succeeded. That environment distinction is not a repository authentication defect. Fresh official host state is operational; it does not establish the prior commit_refs cause. Preserve acquired events, commit resume steering and only then run the exact clean publication gate in host execution. A later outcome-record commit does not inherit the pushed HEAD receipt. No policy-source update or feature admission is claimed.
+
 ## 2026-11-04 — separate a clean pause from successful publication
 
 A committed clean workspace can preserve an idle handoff even when publication is externally blocked. GitHub commit_refs rejection and a subsequent SSH publickey error are separate observed channels; the contemporaneous official Git Operations incident is consistent with them but does not prove the repository-specific cause. Keep the actual outcomes, exact verified commit and remote boundary, schedule recovery before feature activation, and require fresh exact-HEAD canonical proof after this focused pause commit. The director pause survives a fresh session through MEMORY and the task tree.

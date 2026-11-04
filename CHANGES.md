@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — resume publication recovery
+
+Explicit director PNT resume supersedes the prior pause. Fresh approved-host SSH and authenticated API reads agree on main d3a26a94; official Git Operations status is operational. Retain actual dated responses and acquisition source without changing authentication or attributing the earlier rejection. The three supplied policy hashes match their prior review. Task/index, roadmap, live/resume and book explain the checkpoint-before-publication sequence. Focused integrity checks and normal hooks govern this record; exact clean canonical publication10.2 remains next.
+
 ## 2026-11-04 — TYPE-REFERENCE-BOOK.1.2.23.4.9 — preserve the requested clean pause
 
 The director requested the next handoff-ready checkpoint. Task-budget20.2 passed canonical CI and normal hooks at5801970b; the normal exact-receipt push then received GitHub fatal error in commit_refs. Retain actual commit/receipt/push logs and independent API/host incident responses. Recovery23.4.10 is first on explicit resume, before Rust Count73.2. Task/index, roadmap, live/resume and book pointers reflect the pause; focused continuity checks and normal hooks validate this documentation-only handoff. No size-limit diagnosis or later-HEAD canonical claim follows.

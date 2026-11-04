@@ -2220,10 +2220,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP** — task/root/index, roadmap, live/MEMORY, change/engineering notes and book agree on explicit-resume-only steering.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.10`
-  Status: `pending` / publication recovery after explicit resume
+  Status: `active` / explicit director PNT resume; bounded recovery children
   Priority/schedule: P1 first on explicit director resume, before Rust Count73.2, peers/P1 copy73.6 and growth8.
   Goal: Publish the committed post-backlog work after the GitHub rejection without rewriting history or bypassing verification.
   Reproduction/impact: Normal exact-receipt main push from5801970b4 failed with remote fatal error in commit_refs; GitHub API still names d3a26a94f5c2. A later SSH read returned publickey denial. The host status incident smtdswd1h2w4 affects Git Operations; repository-specific cause remains unconfirmed. Completed maintenance/infrastructure work is safely committed locally but not yet published.
   Acceptance: Read retained23.4.9 operational records and fresh host/ref state. Resolve SSH access if it remains unavailable; use only authorized published authentication paths. Run canonical CI for the exact final clean HEAD, push with normal hooks and no force/submodule recursion, confirm fresh local/origin/API identities and hosted status. Retain any repeated error and investigate its actual cause; do not assume a pack-size problem or change repository policy from the generic error. Stop for specific missing authority/access only when necessary.
-  Planned tier: `canonical`; exact clean publication is the trigger. No runtime feature activation during the current director pause.
-  Claim verification: none: Pending operational recovery; declare any new measured assessment separately at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.10.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.10.2`.
+  Planned tier: Ordinary operational records use focused proof; exact clean publication requires canonical CI and normal pre-push hooks. Runtime feature work follows successful recovery.
+  Claim verification: none: Parent operational tracking; child records preserve dated external events without a population or runtime-admission claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.10.1`
+  Status: `completed` / recovered access checkpoint; publication follows
+  Goal: Record the explicit PNT resume and fresh host/SSH/API access before exact clean publication.
+  Acceptance: Preserve fresh acquisition commands and dated responses; compare independent SSH/API main identities, retain previous failures, update the paused pointers and commit this bounded checkpoint. Do not change authentication/configuration or infer the earlier server root cause from recovery.
+  Verification tier: `focused`
+  Focused checks: Read retained pause events, fresh official host/SSH/API responses, policy hash comparisons, task/index and memory/handoff checks, history pressure, reference scope, mdBook build and normal doctrines/hooks.
+  Canonical trigger: This documentation-only checkpoint makes no infrastructure or runtime change; the following clean publication operation requires exact committed HEAD canonical proof.
+  Claim verification: none: Director steering and dated external operational events only; no measured population, performance or feature-correctness claim.
+  Activation: Clean4df2a8cfe468c46fe269e957193765a53603a16f; director explicitly resumes full PNT. Last cleanup remains within24h. All three supplied policy hashes match recorded startup/ADR0126 review.
+  Result: Fresh official Git Operations status is operational; approved-host SSH/API main both name d3a26a94f5c2. Restricted reads failed DNS/network access, not a demonstrated authentication regression. No key/remote/config change. Source and responses: docs/checkpoints/publication-recovery-2026-11-05/. Earlier rejection remains retained and unattributed. Focused task/index, memory, history, book/reference scope and normal doctrines govern landing; exact clean publication10.2 remains required.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — resume and checkpoint recovered publication access
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.10.2`
+  Status: `pending`
+  Goal: Publish the recovered clean checkpoint with exact canonical proof, normal hooks and independent remote read-back; retain the actual outcome before Rust Count73.2.
+  Acceptance: Run canonical CI in approved host execution for the exact clean committed HEAD; push fast-forward main without force, tags or submodule recursion. Confirm local/origin/API main identities and hosted workflow status. Commit the operational outcome with focused integrity checks; that later record has no inherited exact-HEAD receipt and is published at the next normal canonical boundary. Repeated errors require retained diagnosis and explicit unblock ownership before feature work.
+  Planned tier: Focused operational record after actual publication; canonical CI is mandatory for the exact clean HEAD being pushed.
+  Claim verification: none: Pending publication event bookkeeping; no feature admission or aggregate measurement.

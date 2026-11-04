@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Paused at the director's next-checkpoint request. The verified task-budget20.2 commit is complete locally; the normal GitHub push was rejected. Publication recovery23.4.10 is scheduled first on explicit resume; no Rust Count feature is active.
+Director explicitly resumed PNT. Publication recovery23.4.10 is active before Rust Count73.2. Fresh host/SSH/API access succeeds without authentication changes.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.9 records the clean idle handoff, retained commit/receipt/push/host observations and publication-recovery owner. Task-budget20.2 at5801970b passed its exact canonical gate and normal hooks. Pause documentation uses focused proof; no later HEAD inherits the earlier receipt.
+TYPE-REFERENCE-BOOK.1.2.23.4.10.1 retains the dated official host status and independent SSH/API main responses, updates paused pointers and commits the recovered-access checkpoint. This focused documentation record supplies no exact-HEAD canonical receipt.
 
 ## Next Action
 
-Wait for explicit director resume. Then activate publication-recovery23.4.10: recheck host incident/SSH/API refs, obtain canonical proof for exact final clean HEAD, publish with normal hooks and confirm remote identity. Rust Count73.2, peers/P1 copy73.6 and advisory growth8 follow afterward.
+Run exact clean HEAD canonical CI in approved host execution, push with normal hooks, confirm SSH/API main identities and hosted workflow status, then commit the actual recovery outcome under23.4.10.2. Rust Count73.2, peers/P1 copy73.6 and advisory growth8 follow successful recovery.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — explicit PNT resume; fresh recovered access and publication prerequisite checkpoint.
 - TYPE-REFERENCE-BOOK.1.2.23.4.9 — director pause recorded; publication recovery owns the host rejection on explicit resume.
 - TYPE-REFERENCE-BOOK.1.2.20.2 — later immutable source epochs renew capacity with all current contracts/open bodies retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.7 — original source/actual publication/logical Git custody and focused controls reviewed.
