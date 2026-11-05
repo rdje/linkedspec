@@ -1586,18 +1586,32 @@
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74`
-  Status: `pending` / finite ordinary Length guard family
+  Status: `in_progress` / Perl74.1 focused-checked; independent peers remain
   Goal: Preserve Length numeric/null producers and actual-kind continuation guards through copy/logical/with.
   Dependencies: Selection23.1.35; length-result-guard-composition.md/shared16; existing count/length3 and copy/eager-logical authority.
   Acceptance: Independently assess each backend; preserve domains/signatures/source once/snapshots/needed errors/preflight/copy depths/valid null-zero/explicit bridges/functions/parser/schema. Fix demonstrated incompatible operands/later effects and Perl main::4 leak. No new language authority or full admission. P1 key-count75.0 follows74.5 before unrelated selection.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.1`
-  Status: `pending`
+  Status: `completed` / ordinary Perl Length guards focused-checked
   Goal: Independently assess and repair Perl ordinary Length source/continuation guards.
   Dependencies: Completed23.1.35; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
-  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
-  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+  Verification tier: `focused`
+  Focused checks: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored Length guard/rejection and host-seed controls; no broad population/performance/full-custody measurement.
+  Activation: Clean b4a8ed9f8c4d0f42af5675f53f84550ce2f4b3fe after selection23.1.35/all ten normal doctrines/post-pointer/brief0. Frozen74/shared16, public missing-source roles and actual main::4 seed mechanism, current Count copy/logical dispatcher and original producer/source domains recovered. Own unchanged new-normal baseline before production; no peer failure inferred. Observe host RAM trend under latest director guidance.
+  Diagnosis/result: Public selection shows legacy Length values work while canonical source admission is absent; Count([])/compatible Length prefixes distinguish the path. Add exact free-one/zero-extra receiver Length roles to existing actual-kind/with dispatch and preserve rejection through current copy/eager-logical state. Rename shared Count/Length logical role for clarity. Legacy Length producer/Count zero fallback remain unchanged; no domain/signature/copy-depth/deferred/traversal/function/parser/schema expansion.
+  Verification: Unchanged t/length_result_guard_composition.t/shared16 plus three localized empty/outer/main::4 host controls9PASS10RED become19PASS. Nine original healthy observations are exact; actual native/fresh values/kinds/effects/cursors/readiness/warnings and needed structured source errors stay. Host controls now null/error-free/warning-free with both host Hashes unchanged. Direct Count-length5/Count guard17/logical14=36 groups and owner/normal/LinkedSpec/phase0 syntax pass; book render/Knowledge/history/memory/diff and normal hooks govern landing. No broad suite.
+  Evidence/limits: docs/checkpoints/length-guard-perl-2026-11-06/REVIEW.md; actual299 declared own inputs before each phase, actual19 primary modules before eval, raw original/final/direct phases and readonly recovery/four effective corruptions. Only compiler owner differs before/after; normal/fixtures and legacy Length producer exact. Native/transitive custody4.2, general isolation, canonical normal registration4.1/full23.4 and all peer assessments remain open. Regenerate emitted Perl; Rust74.2 next.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — guard Perl Length continuations and persistent rejection.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — actual public selection and unchanged native/fresh normal expose seven result/effect gaps plus three host-Hash seed groups;9PASS10RED retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — public substitution/full emitted sources and Count/compatible-prefix contrasts identify missing MethodLowering Length source-role/actual-kind/with/copy/logical dispatch admission; numeric producer works.
+  - [x] **FIX** — narrowly admit canonical ordinary free-one/zero-extra receiver Length to current guards and persistent rejection state; share existing Count logical producer without changing domains or fallback.
+  - [x] **ADDRESSED (verified)** — unchanged19 groups now pass, including empty/outer/main::4 null rejection with unchanged host data and actual module bytes retained before eval.
+  - [x] **NO REGRESSION** — nine original healthy observations exact; direct36 Count/length/logical groups and source/error/preflight/null-zero/snapshot/bridge/function controls preserve current contracts; legacy Length producer byte-identical.
+  - [x] **LOCKSTEP** — book examples/current status, Knowledge/map, frozen target/roadmap, task/index/live/resume/history align; focused proof and mandatory normal hooks govern landing; independent Rust74.2 next.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.2`
   Status: `pending`

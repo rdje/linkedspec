@@ -2,7 +2,7 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.35; implementation family23.3.74.
 Existing count-length-results.md3, catalog Length and typed result/copy/eager-logical
-contracts retain authority. Status: frozen finite target; backend implementation pending.
+contracts retain authority. Status: Perl74.1 implemented with focused checks; independent peers74.2-.5 pending.
 
 Canonical ordinary length(value), one positional recognized value, and receiver.length()
 with zero extra operands keep current Number/null results. Length of a scalar is its
@@ -44,3 +44,18 @@ Initial key-count source guard defects are owned P1 family75 assessment75.0 afte
 before unrelated selection/full admission. Length does not silently absorb count_keys.
 Actual observations, source snapshots, recovery qualifications and seed root cause:
 docs/checkpoints/length-selection-2026-11-05/REVIEW.md. No complete-family/admission claim.
+
+## Bounded Perl74.1 repair
+
+The unchanged new normal has19 groups: nine original healthy programs and ten failing
+groups (seven authored target gaps/three explicit host seeds). All19 now pass native/fresh;
+the nine healthy observations remain exact. Canonical free-one/zero-extra receiver Length
+sources join current emitted actual-kind/with dispatch. Ordinary copy and eager logical
+links retain the existing rejection flag; rename the shared Count/Length logical role for
+clarity. Existing Length producer, Count fallback, domains/signatures/copy depths and
+function/parser/schema policies stay. Empty/outer/main::4 seeds all reject with null,
+no warning/error and unchanged host Hashes. Actual normal modules persist before fresh eval.
+Direct Count/length/source/logical preservation and syntax pass; original/source/normal/
+fixture identities, modules, raw phases and readonly corruptions survive under
+length-guard-perl-2026-11-06. Regenerate emitted Perl. Rust74.2 independently next; no peer,
+complete native/transitive custody, general isolation, registration or full admission claim.

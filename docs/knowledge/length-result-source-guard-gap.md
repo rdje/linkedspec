@@ -8,10 +8,10 @@ answers:
   - "where are the count_keys source guard gaps owned"
   - "how is the Length selection summary recovered after Trace stdout"
 date: 2026-11-06
-status: finite Length74 target frozen; Perl74.1 first; key-count75 P1 separately owned
+status: Perl74.1 focused-checked; independent Rust74.2 next; key-count75 P1 separately owned
 tags: [length, count_keys, source, guards, perl, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.35; declared own inputs/raw public observations and actual supplemental emitted modules in docs/checkpoints/length-selection-2026-11-05; shared16 frozen before production."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/length-selection-2026-11-05/review.py; historical acquire_supplement.py is one-shot, never replay."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/length_result_guard_composition.t; readonly retained RED/GREEN: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-perl-2026-11-06/review.py. Historical selection writers are one-shot, never replay."
 ---
 
 Public Get/descriptor/substitution/emission/native/fresh diagnostics show Length
@@ -44,3 +44,14 @@ independent-process isolation remain open. See checkpoint REVIEW.md for limits.
 Two independently observed Perl key-count guard gaps are owned P1 family75/75.0
 immediately after Length74.5, before unrelated selection/full admission. Original
 free/receiver probes and healthy compatible control survive; no peer failure inferred.
+
+Perl74.1 now admits only canonical ordinary free-one/zero-extra receiver Length
+sources to existing actual-kind/with guards and persistent copy/eager-logical
+rejection dispatch. Legacy Length producer stays byte-identical; Count fallback
+and existing source policies stay. Unchanged normal19 groups9PASS10RED become19PASS;
+nine original healthy observations are exact. Three localized empty/outer/main::4
+fresh seeds now return null with no host changes/errors/warnings. Regenerate Perl
+emitted modules. Declared own inputs and actual new-normal modules before eval,
+raw before/after/direct preservation phases and four corruption controls survive
+in length-guard-perl-2026-11-06. Independent Rust74.2 is next; no peer/full admission,
+complete native/transitive custody or general isolation inference.

@@ -3668,11 +3668,11 @@ The owned artifact-growth review23.4.8 precedes unrelated feature selection;
 full admission remains separate.
 
 
-## Length continuations: next bounded repair
+## Length continuations: Perl guards and remaining peers
 
 The next target is ordinary `length(value)` and `value.length()` result guards.
-The existing producer keeps its Number/null values: `length("tail").add(1)` is5,
-`length("").coalesce(7).add(1)` is1, and
+The existing producer keeps its Number/null values: `length("tail").add(1)` is `5`,
+`length("").coalesce(7).add(1)` is `1`, and
 `length(undef).with(){return("recovered")}` returns `recovered`.
 A valid null result remains available to `with`, copy and eager logical methods.
 
@@ -3680,18 +3680,36 @@ An incompatible consumer should reject before evaluating its operands and skip
 later continuation bodies. For example:
 
 ```text
-length("tail").take(1).copy().with(){return("ran")} # target: null
-length("tail").set_key("k",1)                     # target: null
+length("tail").take(1).copy().with(){return("ran")} # Perl: null
+length("tail").set_key("k",1)                     # Perl: null
 length("tail").cat(",tail").split(",").last()     # tail, explicit bridge
 ```
 
-The first two examples still expose Perl defects at this selection boundary:
-wrong-kind fallbacks lose rejection, and the Hash consumer can read host `main::4`.
-The corrected empty/outer/main seed test proves the concrete leak and explains why
-an outer-package-only seed missed it. These are pending repairs under family74,
-starting with Perl74.1. Rust, Dart, Julia and installed Lua each need independent
-assessment; their producer domains are preserved rather than inferred from Perl.
-No new method, signature, conversion policy or schema is introduced.
+Perl74.1 now implements those guards. The first two examples return null and
+skip rejected operands and later bodies, including across copy and eager logical
+links. The old Hash fallback could read host `main::4`; empty/outer/main seed
+controls now all reject without changing host data. Regenerate previously emitted
+Perl modules to obtain this fix. The Number/null producer and its conversion
+rules are unchanged.
+
+```text
+order="";
+result=length("tail").take({order=cat(order,"A");1})
+  .copy().and({order=cat(order,"D");true})
+  .with(){order=cat(order,"W");return("ran")};
+return([result,order]); # Perl: [null, ""]
+```
+
+Valid null and zero continue through ordinary eager logical and with semantics:
+`length(undef).copy().and(true)` and `length("").copy().and(true)` both return
+Boolean `false`; their operands and later with bodies still run. This distinguishes
+actual null/zero data from an earlier rejected consumer.
+
+The unchanged Perl normal passes nineteen groups after ten original failures;
+nine original healthy programs remain exact. Direct Count/length/logical
+preservation checks pass. Rust74.2, Dart74.3, Julia74.4 and installed Lua74.5 each
+need independent assessment; preserve their current producer domains. No new
+method, signature, conversion policy or schema is introduced.
 
 Sixteen finite programs retain compatible Number/null flow, effects/snapshots,
 source errors, malformed receiver preflight, functions, copy/logical state and

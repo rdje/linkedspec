@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — Length uses existing rejection ownership without producer normalization
+
+A canonical Length source must join actual-kind dispatch at every continuation and remain in one dispatcher through copy/eager logical links. Reusing the existing rejection flag distinguishes a rejected consumer from legitimate null/zero and avoids host symbolic Hash access. The Count/Length logical role shares the current eager producer; existing Count fallback and Length producer are unchanged. Original/final normal identities and nine healthy observations stay exact; actual primary modules precede eval. Four readonly corruptions catch row omission, Bool-to-Number substitution, host leakage and changed module bytes. Native/transitive closure and general isolation remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.35 — Length source admission differs from a valid numeric producer
 
 Count([]) and compatible Length numeric/String prefixes already guard the same consumer path that direct Length mishandles. Existing source roles/rejection state, rather than producer normalization, are the bounded repair direction. Numeric4 symbolic Hash dereference observes main::4 in both actual public carrier and retained emitted module; outer-package-only seeding is ineffective. Retain that negative result and its cause. Expected-error Trace stdout requires complete identity-checked frame recovery, preserving raw diagnostics. Capture qualifications and peer-domain baselines remain explicit in the selection REVIEW.md.

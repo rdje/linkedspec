@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: length-result-guard-composition.md74 freezes ordinary Length source/consumer/copy/logical guards without producer-domain changes. Perl74.1 then independent peers; separately observed key-count gaps have P1 family75 assessment75.0 after74.5 before unrelated selection.
+Current finite frontier: length-result-guard-composition.md74 freezes ordinary Length source/consumer/copy/logical guards without producer-domain changes. Perl74.1 focused-checked, independent Rust74.2 then remaining peers; separately observed key-count gaps have P1 family75 assessment75.0 after74.5 before unrelated selection.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

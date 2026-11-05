@@ -1,0 +1,13 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "LINKEDSPEC_LENGTH_MODULE_DIR=docs/checkpoints/length-guard-perl-2026-11-06/nearest/modules",
+  "prove",
+  "-v",
+  "-Iperl",
+  "t/count_length_receiver_contract.t",
+  "t/count_result_guard_composition.t",
+  "t/count_logical_source_composition.t"
+]

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — guard Perl Length continuations and rejection
+
+Canonical ordinary Length source roles now reuse actual-kind/with guards and persistent copy/eager-logical rejection state. Unchanged19 groups9PASS10RED become19PASS, including localized empty/outer/main::4 host controls; all nine original healthy observations are exact. Direct36 Count/length/logical preservation groups pass. Legacy Length producer/Count fallback/domains/signatures/copy depth remain unchanged. Actual input archives/pre-load primary modules/raw phases and four readonly corruptions retained. Regenerate emitted Perl; independently assess Rust74.2 next. No broad suite/full admission claim.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.35 — freeze Length source guards and own key-count gaps
 
 Freeze shared16 and bounded family74 backend children after actual Perl public diagnostics. Preserve nine healthy controls/seven target gaps, producer domains and source/copy/logical/with semantics. Corrected main::4 public carrier/full-module seeds expose a concrete host leak; key-count75 is P1 after74.5. Readonly recovery retains raw expected-error Trace output, actual supplemental modules and physical provenance without rerunning behavior; three corruptions reject. No production change, peer failure inference or full custody/admission claim.

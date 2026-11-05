@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT continues with Length source/result guards74. Selection23.1.35 is frozen and focused-checked; Perl74.1 is next. Other backends require independent assessment. Key-count75 is an owned P1 immediately afterward.
+PNT continues through ordinary Length source/result guards74. Perl74.1 is implemented with focused checks; independent Rust74.2 is next, then Dart/Julia/installed Lua. Key-count75 remains an owned P1 immediately afterward.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.1.35 retains finite public Length/key-count observations, actual supplemental emitted modules and shared16. Nine Length controls match/seven expose guard/effect gaps; public Count/compatible-prefix contrasts localize source-role omission. Corrected main::4 seed proves a concrete emitted leak and explains the ineffective outer seed. Original raw summary failure is recovered read-only with three corruptions; no production repair or complete custody/isolation claim.
+TYPE-REFERENCE-BOOK.1.2.23.3.74.1 admits canonical Length sources to existing actual-kind/with/copy/eager-logical rejection dispatch. Unchanged19 groups9PASS10RED become19PASS; nine healthy observations remain exact. Empty/outer/main::4 host controls now reject with null and leave host data untouched. Direct36 Count/length/logical preservation groups and syntax pass; actual primary modules precede eval. Legacy Length producer/Count fallback and current source policies stay. No peer/full-custody/isolation/admission claim.
 
 ## Next Action
 
-Activate Perl74.1 from clean Git; baseline the unchanged normal and preserve actual inputs before production. Retain Length producer domains/null-zero/source once/errors/preflight/copy/logical/with semantics. Then independently assess74.2-.5; P1 key-count75.0 before unrelated selection/full admission.
+Activate independent Rust74.2 from clean Git; retain actual baseline inputs and freeze current source-domain observations before production. Preserve both direct/trailing-with guards and Count behavior. Then74.3-.5 and P1 key-count75.0 before unrelated selection/full admission; new normal registration stays4.1-owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — Perl Length guards/rejection19PASS; direct36 preserved; independent Rust74.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.35 — finite Length74 frozen; Perl first; key-count75 P1 scheduled; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.8 — bounded growth/outgoing-scope assessment; prospective reuse4.12 separate; selection23.1.35 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — two Dart predicate layouts focused-checked; PNT resumed to advisory artifact growth23.4.8.
@@ -29,7 +30,6 @@ Activate Perl74.1 from clean Git; baseline the unchanged normal and preserve act
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — Julia Count guards focused-checked; source/domain/observed errors and mutation boundaries retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.11 — bounded daily metadata review; all artifacts retained, independent controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — Dart Count actual-kind guards focused-checked; direct emitted host inputs retained.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — Rust Count actual-kind guards focused-checked; domain/custody qualifications owned.
 
 ## History
 
