@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3883,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-julia-compatibility.md","sha256":"1060eaa57e2c33c7b0251453c2562703e4d88611b1f85a228e3d1cc77b69dcdb","type":"member"}
 {"bytes":3424,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-lua-compatibility.md","sha256":"fd46be9dae0b38119c2129e3df8465a574bfa4b24bfaf1a7e7a32b9f44001600","type":"member"}
 {"bytes":4943,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-method-source-gap.md","sha256":"acdec7ca6ddf1a063df3adbe6a69625ec06ccd566902be8af43b51f0b4d8bb9c","type":"member"}
 {"bytes":3123,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-rust-ordinary-compatibility.md","sha256":"4cba6710af7a8a0d472255f54b3a01b43a2e4ca484b213b47fc6df7935e6af47","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3511,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-array-constructor-bare-values.md","sha256":"85da9cb3aa0aee014cc23248463b2c36c7501f5e7a65d20a49398901e77e497d","type":"member"}
 {"bytes":4814,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-codeblock-caller-scope-leak.md","sha256":"52e33d04a52dccc3764b4bbe1b916e00bd77a90aef72c0babf4d3d6fe3bbb042","type":"member"}
 {"bytes":4914,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-capture-not-standalone.md","sha256":"26f496d6f6d57031d8f8218ff097ebe77e9e4cbc3a420757801169615b7c6d35","type":"member"}
-{"bytes":3422,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-cold-trace-dependency.md","sha256":"c81708e49d94b5a664b55fa894f28ee9ace479e8dd9fb36db7e8df1d3d9af2c6","type":"member"}

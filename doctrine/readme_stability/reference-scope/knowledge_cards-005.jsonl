@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3500,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contains-source-guards.md","sha256":"0e4213f89727795c0ccc1908326a1845d818d5ddad45528893e68bff10b55dc1","type":"member"}
 {"bytes":3389,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contextual-user-function-codeblock-runtime.md","sha256":"25d0c0393f8620cae0c026e84e286d46822ce43d66e650c6811f0c5acd16306a","type":"member"}
 {"bytes":15150,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md","sha256":"0d0f80b7b43e7ff10844647f0150f15f30e59bd6f863a575b25addf886688921","type":"member"}
 {"bytes":5443,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-controlled-corpus-admission-split.md","sha256":"5d002cde913267ee410980aef07a88c2fd34e9828c82da5fbec695e04965f57b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4586,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-admission.md","sha256":"c2dc4ab99c7b54b82ee71403678691c70afd674125e4823db251ba7380313760","type":"member"}
 {"bytes":4979,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-core.md","sha256":"50d3725a6a20e6984c85b852ff8b0c6aac51dfdcd48fe553cceeeda3b5218b58","type":"member"}
 {"bytes":6283,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-preflight.md","sha256":"b5f77f81792563ed7ab83880fbaf71ebd869933ff8d3c09b052a07f834759be8","type":"member"}
-{"bytes":5778,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-routes.md","sha256":"105008bc485647280027fe63afb86c2f2fe83b80b78f678de52beca1f6680bb2","type":"member"}

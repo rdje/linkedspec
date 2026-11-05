@@ -1,0 +1,15 @@
+{
+  "normalized_display_argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/length-selection-2026-11-05/probe.pl",
+    "docs/checkpoints/length-selection-2026-11-05/supplement.json",
+    "docs/checkpoints/length-selection-2026-11-05/supplement/modules"
+  ],
+  "actual_argv_capsule": "docs/checkpoints/length-selection-2026-11-05/supplement/command.raw.json.gz",
+  "historical_writer_retired": true
+}

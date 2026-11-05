@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3045,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-routes.md","sha256":"5d469af97c131d5db43d98efdc6a37b50c523f64c6e0a7223b137528c7f62602","type":"member"}
 {"bytes":7551,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rule-local-cursor-rollout-boundaries.md","sha256":"761e45a802f463288265d4ce6afdfbd5d7b992209bd686889163888ab0e954b9","type":"member"}
 {"bytes":10959,"lines":150,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rust-unicode-17-case-mapping.md","sha256":"38608af6dbe85076916ea8d2454d0d2d86a3b06cba8599784f3553999d49a6aa","type":"member"}
 {"bytes":7711,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-same-line-regex-slot-metadata.md","sha256":"0ac5ce81f9c376ca03cf87349ed2d0d1853b52421bf4c72ea6858a44a20331c9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3105,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-ownership-decision.md","sha256":"95f9f9c1eced9004d6255f494766388fbe6190e40b3c60e2702fda89e77aa109","type":"member"}
 {"bytes":5831,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-public-no-drift.md","sha256":"c5fd8ae0dc1b9fa540e3d11db0d6f8c09a08d6194546dbc477375878daa1abd8","type":"member"}
 {"bytes":3288,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-starts-open-block-validation.md","sha256":"c02590d348e15532e2779f5ce32454901346bda6c27440b953ff7b20dbc997d1","type":"member"}
-{"bytes":3712,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtime-input-boundary-validation-regression.md","sha256":"638596cdbf4d2b9d8537c2e59058d1a077a6974d3e77317039725fc9263becff","type":"member"}

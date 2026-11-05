@@ -1,0 +1,13 @@
+{
+  "activation": "f6295bc8fc76e7c6049f28397049f527fe8133d7",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/length-selection-2026-11-05/probe.pl"
+  ],
+  "limits": "Declared own-source inputs only, before public Get/native/fresh execution. Native/transitive closure remains4.2-owned; no peer assessment or timing claim."
+}

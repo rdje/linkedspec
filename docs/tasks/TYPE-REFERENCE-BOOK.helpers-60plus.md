@@ -1583,3 +1583,65 @@
   - [x] **ADDRESSED (verified)** — full-owner format exits0/zero changes, fatal targeted analysis clean and selected existing4 controls PASS on all three routes.
   - [x] **NO REGRESSION** — selected default/set kind rejection, skipped operands, lazy ordering, snapshots/local returns preserve authored outputs; direct inputs archived before proof match afterward.
   - [x] **LOCKSTEP** — book render, Knowledge/task/index/live/history and scripts/check_memory_architecture.sh plus git diff --check pass; normal hooks govern landing.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74`
+  Status: `pending` / finite ordinary Length guard family
+  Goal: Preserve Length numeric/null producers and actual-kind continuation guards through copy/logical/with.
+  Dependencies: Selection23.1.35; length-result-guard-composition.md/shared16; existing count/length3 and copy/eager-logical authority.
+  Acceptance: Independently assess each backend; preserve domains/signatures/source once/snapshots/needed errors/preflight/copy depths/valid null-zero/explicit bridges/functions/parser/schema. Fix demonstrated incompatible operands/later effects and Perl main::4 leak. No new language authority or full admission. P1 key-count75.0 follows74.5 before unrelated selection.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.1`
+  Status: `pending`
+  Goal: Independently assess and repair Perl ordinary Length source/continuation guards.
+  Dependencies: Completed23.1.35; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
+  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.2`
+  Status: `pending`
+  Goal: Independently assess and repair Rust ordinary Length source/continuation guards.
+  Dependencies: Completed23.3.74.1; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
+  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.3`
+  Status: `pending`
+  Goal: Independently assess and repair Dart ordinary Length source/continuation guards.
+  Dependencies: Completed23.3.74.2; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
+  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.4`
+  Status: `pending`
+  Goal: Independently assess and repair Julia ordinary Length source/continuation guards.
+  Dependencies: Completed23.3.74.3; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
+  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.5`
+  Status: `pending`
+  Goal: Independently assess and repair safe installed Lua ordinary Length source/continuation guards.
+  Dependencies: Completed23.3.74.4; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
+  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75`
+  Status: `pending` / owned P1 key-count source-guard defect
+  Goal: Resolve independently reproduced Perl count_keys continuation gaps and assess peers without inference.
+  Reproduction/impact: Selection23.1.35 initial key_count_free_guard returns [[],{k:1},KV] instead of [null,null,empty]; key_count_receiver_guard returns [ran,SW] instead of [null,S], native/fresh ready/raw0. Compatible numeric [2,2,0] is healthy. Actual public probe/observations survive in length-selection-2026-11-05.
+  Priority/schedule: P1 assessment75.0 immediately after74.5, before unrelated selection/full23.4; own to verified resolution.
+  Acceptance: Freeze a bounded key-count target and independent producer/domain/source/copy/logical/error controls; create concrete backend repair leaves before changes. Preserve count_keys Hash/non-Hash policy, source evaluation and zero; no silent normalization or peer defect inference.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75.0`
+  Status: `pending`
+  Goal: Freeze the key-count guard target and independently assess necessary backend repair slices.
+  Dependencies: Completed74.5 and original23.1.35 key-count public observations/current count-length3 authority.
+  Acceptance: Recover initial originals; distinguish current source-role guards with minimum public diagnostics, preserve source domain/zero/needed error/preflight/copy/logical/with and create concrete backend children. Resolve small blockers under this owner; no unowned finding or unrelated selection.
+  Planned verification: Minimum authored public native/fresh/descriptor controls and existing contract comparisons; book/Knowledge/history/memory/normal hooks, no broad campaign.
+  Planned claim verification: none: Finite authored assessment; no backend population or complete custody claim.

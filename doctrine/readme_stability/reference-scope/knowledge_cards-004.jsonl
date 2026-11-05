@@ -88,6 +88,7 @@
 {"bytes":4819,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-closure-scoped-policy-freeze.md","sha256":"49a3e075e18c5e696bb762c6c35f22cbc30e25079c4d580bc92e660313de1fea","type":"member"}
 {"bytes":19021,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-configuration-source-contracts.md","sha256":"1c0f0b7598896e951688f2750c022b1143b868322130692882cd0131fa826daf","type":"member"}
 {"bytes":3894,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-helper-retirement-split-inventory.md","sha256":"9aa9894fa1f4dd749d9ee052743f773ee4ad7fd5fe0309bf03a146bf5b36e90b","type":"member"}
+{"bytes":3086,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.35","path":"docs/knowledge/length-result-source-guard-gap.md","sha256":"6e262290db07ffc42b51756961085a2a1ddf9db85e08457e38206293dcb11c67","type":"member"}
 {"bytes":5024,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lexical-result-source-guards.md","sha256":"62a0640ccc503da74ac67a0d316cfd15e755ec23f182f8e4c9206dd84b9a46dd","type":"member"}
 {"bytes":1468,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/linkedspec-pm-is-thin-facade.md","sha256":"751b9afd0a6182e38192313d9a443c31309f61464fc0b380c6314cebbedb413e","type":"member"}
 {"bytes":5018,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lispish-corpus-catastrophic-backtracking.md","sha256":"a15bd170d332f0165bf21f076439b95ec7ef179ec2b94241c54838323fb1caa7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2874,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-compiled-spec-state.md","sha256":"6ea452adc6fd6d8a6084e801d5fdb10f2d7e0645cf660a28f4c1055acd5b3df2","type":"member"}
 {"bytes":3033,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-complete-named-mark-parity.md","sha256":"71992a27fcfb16666241de547a7da847f59095f6621ee22e3ad201e6dd480d91","type":"member"}
 {"bytes":2054,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-constructor-result-guards.md","sha256":"9755424f9a0cdedbad9043efafa6d4904b6a26f4ef5913e7da500154ea8708de","type":"member"}
-{"bytes":3500,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contains-source-guards.md","sha256":"0e4213f89727795c0ccc1908326a1845d818d5ddad45528893e68bff10b55dc1","type":"member"}

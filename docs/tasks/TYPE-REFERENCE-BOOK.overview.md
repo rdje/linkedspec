@@ -2219,12 +2219,21 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Unactivated producer admission; declare actual recovery/savings scope and retained inputs on activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.35`
-  Status: `pending` / next bounded feature selection after Count prerequisites and growth review
+  Status: `completed` / finite Length74 frozen; key-count75 P1 owned
   Goal: Select and freeze one next roadmap-required fluent source/consumer family from the current inventory and remaining gap matrix.
   Dependencies: Completed Count73/P1 source-copy repairs/P2 compiler/P3 formatting and advisory4.8; existing23.1 inventory, source roles and current contracts.
   Acceptance: Recover the next actually open capability before defining a finite target; distinguish existing supported behavior from new authority, signatures, kinds, effects, errors, copy/alias and excluded contexts. Independently assess each backend through public diagnostics before attributing a defect; preserve existing ready/raw/domain controls and actual first-execution inputs. Create bounded backend children before implementation. No broad suite/admission, invented population count, unsupported context promotion, dependency internals or change of language authority.
-  Planned verification: Focused public source/contract/finite authored controls; declare actual tier and claim scope on activation.
-  Planned claim verification: none: Unactivated family selection, no new capability/population measurement yet.
+  Verification tier: `focused`
+  Focused checks: Minimum authored public Get/descriptor/substitution/emission/native-fresh controls for ordinary Length/key-count sources, existing contract and preservation distinctions; freeze only an observed next gap. No broad suite/matrix. Book/Knowledge/history/memory/diff and normal hooks govern landing.
+  Canonical trigger: Full source/domain/context/portable admission23.4 and final clean push after scheduled prerequisites; no new public authority in this selection.
+  Claim verification: none: Finite authored selection and preservation controls; no method/backend/population, performance or full-custody measurement.
+  Activation: Cleanf6295bc8fc76e7c6049f28397049f527fe8133d7 after4.8 all10 doctrines/post-pointer, brief0 and clean Git. Existing count/length3, scalar String19/free62 exclusions, helper inventory/catalog and terse-array fact recover current compatible Number/null flow before probes. Candidate Length and key-count source guards must be independently observed, not inferred from Count73. Director allows stable high-80s host RAM; watch trend and intervene toward90% ceiling, only own jobs. First acquisition retains declared own-source inputs; native/transitive custody4.2 remains separate.
+
+
+  Result: Public Length native/fresh diagnostics freeze shared16: nine healthy preservation programs/seven target gaps, all ready/raw0/fallback0/unresolved0/warning-free. Wrong consumers and later with/copy/logical effects expose missing source-role guards, not numeric producer failure. Exact Count/compatible-prefix contrasts localize MethodLowering source admission. Corrected main::4 seed exposes actual emitted host contamination; original outer seed was ineffective and its cause is verified through retained public substitution/actual module. Key-count has two independent Perl gaps and healthy compatible control, owned P1 family75 after74.5 before unrelated selection. No peer failure inferred.
+  Evidence/limits: docs/checkpoints/length-selection-2026-11-05/REVIEW.md and readonly review.py retain original raw channels, source snapshots and actual supplemental modules before fresh load. Expected-error Trace stdout defeated outer JSON-only summary after capture; recovery and three corruptions pass without rerunning behavior. Physical historical argv/headers remain opaque compressed provenance; reader maps logical relative paths. No native/transitive closure, independent isolation, population or full admission claim. Frozen target: length-result-guard-composition.md; tests/fixtures/length_result_guard_cases.json. No production change.
+  Verification: Readonly exact19-row recovery, three effective corruptions, public substitution/full-module empty/outer/main seed distinctions, observer syntax and book render; Knowledge/history/memory/diff and normal hooks govern landing. Next Perl74.1 before peers/key-count75.0.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.1.35 — freeze Length source guards and own key-count gaps.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.9`
   Status: `completed` / director-requested clean pause

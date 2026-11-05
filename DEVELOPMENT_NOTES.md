@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.35 — Length source admission differs from a valid numeric producer
+
+Count([]) and compatible Length numeric/String prefixes already guard the same consumer path that direct Length mishandles. Existing source roles/rejection state, rather than producer normalization, are the bounded repair direction. Numeric4 symbolic Hash dereference observes main::4 in both actual public carrier and retained emitted module; outer-package-only seeding is ineffective. Retain that negative result and its cause. Expected-error Trace stdout requires complete identity-checked frame recovery, preserving raw diagnostics. Capture qualifications and peer-domain baselines remain explicit in the selection REVIEW.md.
+
 ## 2026-11-05 — Chunk limits and lifetime proof growth have different scopes
 
 A doc-pointer edit also requires preserving the dependent claim-record edge, not just the direct chapter edge. Original4.3 and dependent4.7 selected records now use the clean pre-edit Git boundary; current bounded predicate/capsule readers remain healthy. Preserve original statements/input hashes and change only durability mode/revision. The publication helper setup namespace failure is separately retained without product RED credit. Latest RAM guidance follows the trend through stable high80s, with90 as the ceiling.

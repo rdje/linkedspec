@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.35 — freeze Length source guards and own key-count gaps
+
+Freeze shared16 and bounded family74 backend children after actual Perl public diagnostics. Preserve nine healthy controls/seven target gaps, producer domains and source/copy/logical/with semantics. Corrected main::4 public carrier/full-module seeds expose a concrete host leak; key-count75 is P1 after74.5. Readonly recovery retains raw expected-error Trace output, actual supplemental modules and physical provenance without rerunning behavior; three corruptions reject. No production change, peer failure inference or full custody/admission claim.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.8 — assess retained artifact growth
 
 The final hook exposes the chapter-bound4.3 claim and dependent4.7 custody claim. Preserve their original40/20 input rows and all fields with only mode/revision changes at eda3c81; five corruption controls per record and both current bounded readers pass. No historical observation is refreshed. Latest director RAM guidance permits stable high-80s usage with trend monitoring and a90% ceiling.

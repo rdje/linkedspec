@@ -1,2 +1,3 @@
-{"member_count":1,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":2,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":11193,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-receiver-mutation-direction.md","sha256":"4b48b13adb327f891717bf44b27c093d21da00f8010e162f9c5830e5229e9eb7","type":"member"}
 {"bytes":10257,"lines":126,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-rust-runtime.md","sha256":"999bb4812e2c35536d34e4b2dc7d22909db213fec82c64e1569f891b7e552bde","type":"member"}

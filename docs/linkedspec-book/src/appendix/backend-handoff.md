@@ -3666,3 +3666,38 @@ lazy-order and snapshot controls pass on native, restored and generated-plan
 routes. This layout repair preserves the predicates and all other runtime bytes.
 The owned artifact-growth review23.4.8 precedes unrelated feature selection;
 full admission remains separate.
+
+
+## Length continuations: next bounded repair
+
+The next target is ordinary `length(value)` and `value.length()` result guards.
+The existing producer keeps its Number/null values: `length("tail").add(1)` is5,
+`length("").coalesce(7).add(1)` is1, and
+`length(undef).with(){return("recovered")}` returns `recovered`.
+A valid null result remains available to `with`, copy and eager logical methods.
+
+An incompatible consumer should reject before evaluating its operands and skip
+later continuation bodies. For example:
+
+```text
+length("tail").take(1).copy().with(){return("ran")} # target: null
+length("tail").set_key("k",1)                     # target: null
+length("tail").cat(",tail").split(",").last()     # tail, explicit bridge
+```
+
+The first two examples still expose Perl defects at this selection boundary:
+wrong-kind fallbacks lose rejection, and the Hash consumer can read host `main::4`.
+The corrected empty/outer/main seed test proves the concrete leak and explains why
+an outer-package-only seed missed it. These are pending repairs under family74,
+starting with Perl74.1. Rust, Dart, Julia and installed Lua each need independent
+assessment; their producer domains are preserved rather than inferred from Perl.
+No new method, signature, conversion policy or schema is introduced.
+
+Sixteen finite programs retain compatible Number/null flow, effects/snapshots,
+source errors, malformed receiver preflight, functions, copy/logical state and
+bridges. Actual public observations and supplemental modules survive in
+`docs/checkpoints/length-selection-2026-11-05/`; the readonly recovery reader also
+checks three corruptions. Initial and supplemental capture boundaries differ;
+this is not complete native/transitive custody or independent-process isolation.
+Two independently observed Perl `count_keys` guard gaps are owned P1 family75
+immediately after74, before unrelated selection. Full admission stays pending.

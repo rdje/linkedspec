@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `eda3c81fe6ca9264f0ba96f3f90525d96d79626c` — clean growth4.8 activation; derive HEAD from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.4.8` — assess retained artifact growth and preserve evidence.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.4.8` (completed handoff); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.overview.md; next frontier23.1.35.
-- next_action: Activate bounded remaining-feature selection23.1.35 from clean Git; recover current inventory/gap matrix and freeze one next actually open family before backend children.
+- activation_commit: `f6295bc8fc76e7c6049f28397049f527fe8133d7` — clean selection23.1.35 activation; derive HEAD from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.1.35` — freeze Length source guards and own key-count gaps.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.1.35` (completed handoff); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.overview.md; next frontier23.3.74.1 in helpers-60plus.
+- next_action: Activate Perl74.1 from clean Git; recover frozen length-result-guard-composition.md/shared16 and selection REVIEW.md, retain unchanged baseline/actual compiled inputs before the source-role/rejection repair. Then independent Rust/Dart/Julia/safe Lua74.2-.5; P1 key-count75.0 before unrelated selection.
 - in_flight_uncommitted: none — intended clean post-landing handoff.
-- blockers: none; director authorized RAM-window retry and host preflight has headroom. Earlier interrupted verification earns no passing credit; chapter-bound4.3 and dependent4.7 claims are preserved mode/revision-only after the actual stale-input rejection.
-- evidence: docs/checkpoints/artifact-growth-2026-11-05/PLAN.md owns dated blob/warning/whole-local-store scopes and the director correction. The fixed pre-landing range4683555e..eda3c81 contains15 commits; approximate11.5MB outgoing is director-reported. The warned blob is already at both tips. Metadata replay/three corruptions and original focused proof pass; no pack generation or current oversized-push inference. Prospective reuse4.12 remains separately owned.
-- publication: Exact canonical4683555e is published; later local commits need fresh proof at their next normal publication boundary.
-- verification_policy: Full23.4/registration4.1/native-transitive custody4.2/general isolation/declared Lua5.4 stay separate. Same-volume data; other repositories/submodule implementation read-only. One intensive job; director allows stable high-80s use. Watch the trend and reduce/stop only own jobs if usage keeps rising toward90%;90 remains the ceiling.
+- blockers: none. No production change in selection. Original outer Hash4 seed was ineffective; actual public carrier/full module prove main::4 leak. Summary-parser/argv-index setup failures are retained/qualified, not product RED credit.
+- evidence: docs/checkpoints/length-selection-2026-11-05/REVIEW.md and readonly review.py own finite19 observations, shared16, raw channels, input snapshots, actual supplemental modules, three corruptions and seed distinctions. Nine Length controls healthy/seven target gaps; peers/domain profiles require independent baseline. Initial emitted strings stored post-run; supplemental modules precede fresh load. Full custody/isolation remain separate.
+- publication: Exact canonical4683555e is published; later local commits need fresh proof at their next normal publication boundary. Growth4.8 distinguishes whole-store history from fixed15-commit/director11.5MB outgoing scope; reuse4.12 scheduled after feature coverage.
+- verification_policy: Small focused checks per slice; full23.4/registration4.1/native-transitive custody4.2/general isolation/declared Lua5.4 stay separate. Same-volume data and read-only other repositories/submodules. Observe RAM trend quietly; stable high80s allowed; intervene if usage crosses90% and keeps rising, only own jobs.

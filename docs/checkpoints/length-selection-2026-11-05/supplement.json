@@ -1,0 +1,112 @@
+[
+  {
+    "id": "zero_null_with",
+    "body": "return([length(\"\").coalesce(7).add(1),length(undef).with(){return(\"recovered\")},length(\"\").with(){return(value.add(1))}])",
+    "expected": [
+      1,
+      "recovered",
+      1
+    ]
+  },
+  {
+    "id": "explicit_bridges",
+    "body": "return([length(\"tail\").cat(\",tail\").split(\",\").last().uppercase(),length(\"tail\").with(){return([\"head\",\"tail\"])}[-1].uppercase()])",
+    "expected": [
+      "TAIL",
+      "TAIL"
+    ]
+  },
+  {
+    "id": "source_once_snapshot",
+    "body": "source=\"tail\";order=\"\";out=length({order=cat(order,\"S\");source}).add({source=\"x\";order=cat(order,\"A\");1});return([out,source,order])",
+    "expected": [
+      5,
+      "x",
+      "SA"
+    ]
+  },
+  {
+    "id": "function_guard",
+    "body": "order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn size(){order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])} Value:: I {return(size())}",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_source_error",
+    "body": "return(length({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "malformed_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");\"tail\"}.length({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_guard",
+    "body": "order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_guard",
+    "body": "order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_valid_null_zero",
+    "body": "order=\"\";a=length(undef).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};b=length(\"\").copy().and({order=cat(order,\"E\");true}).with(){order=cat(order,\"F\");return(value)};return([a,b,order])",
+    "expected": [
+      false,
+      false,
+      "DWEF"
+    ]
+  },
+  {
+    "id": "seeded_hash",
+    "body": "return(length(\"tail\").set_key(\"k\",1))",
+    "seed_hash": true,
+    "expected": null
+  },
+  {
+    "id": "count_contrast",
+    "body": "order=\"\";a=length([]).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};length_order=order;order=\"\";b=count([]).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([a,length_order,b,order])",
+    "expected": [
+      null,
+      "",
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "compatible_prefix_guard",
+    "body": "order=\"\";a=length(\"tail\").add(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};b=length(\"tail\").uppercase().take({order=cat(order,\"A\");1});return([a,b,order])",
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "scalar_array_sources",
+    "body": "return([length(0),length(false),false.length(),length([1,2]),[1,2].length(),undef.length()])",
+    "expected": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      null
+    ]
+  }
+]
