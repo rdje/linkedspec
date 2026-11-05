@@ -1563,12 +1563,23 @@
   - [x] **LOCKSTEP** — book/Knowledge/task/index/live docs align on Count-specific closure and P3 next; git diff --check and normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.8`
-  Status: `pending` / P3 owned pre-existing Dart member formatting drift
+  Status: `completed` / two owned Dart member layout changes focused-checked
   Goal: Format only the free-default and canonical-set source predicate members under the current Dart formatter.
   Reproduction/impact: At baselinebc33c84b, whole runtime dart format --output=none --set-exit-if-changed reports layout changes in _isFreeDefaultResultSource and _isCanonicalSetResultSource. The Count fluent loop/new normal/probe are already formatted; no behavior failure is attributed to these two members. The actual full-format delta is retained under count-source-dart-2026-11-05/whole-format-probe.diff.gz. Unrelated probe changes were restored before Count landing.
   Priority/schedule: After Count P1 Boolean3/4/5 and P2 compiler73.7, before full23.4; do not pivot while current leaf is dirty. Own until verified closure.
   Acceptance: Apply only the two demonstrated member layout changes, preserve source tokens/conditions and all runtime policies. Current full-owner formatter and fatal targeted analysis pass, with minimal direct free-default/canonical-set preservation checks. Retain actual formatter inputs/delta and first-execution inputs where compiled proof is used. No source/signature/dependency/semantic/infrastructure expansion or broad suite.
-  Planned verification tier: focused
-  Planned focused checks: Exact two-member format/analysis and finite default/set controls, owning docs/Knowledge/history/normal hooks; no broad campaign.
-  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Deterministic owned layout repair and authored compatibility controls, no performance/population claim.
+  Verification tier: `focused`
+  Focused checks: Full-owner formatter, fatal targeted analysis and four selected existing free-default/set native/restored/plan controls; exact outside-member and predicate-token preservation, book/Knowledge/history/memory/normal hooks. No broad campaign.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Deterministic owned layout repair and authored compatibility controls, no performance/population claim.
+  Activation: Clean8bd46990b72979cb3a83857139987e5b84abe341; explicit full PNT resumes the prior pause. Reviewed retained formatter delta, current predicate owners, existing default/set contracts/tests and backend-handoff book. Supplied three policy source hashes match their canonical record; daily cleanup remains current.
+  Result: Dart3.13.3 applies only the two retained predicate layouts. Everything outside those members is byte-identical; predicate tokens match after excluding whitespace and formatter-owned optional trailing commas. Full-owner format now exits0/zero changes; fatal targeted owner/normal analysis and four existing free-default/set preservation controls pass on native/restored/plan routes. Actual before/after/delta, commands/channels and direct source/package-config/manifest/lock/test inputs before compiled proof survive in docs/checkpoints/dart-member-format-2026-11-05/. Archive bodies still equal executed inputs afterward. Complete transitive/native custody stays23.4.2-owned; no new behavior or full admission claim. Advisory growth23.4.8 is next under resumed PNT.
+  Landing correction: The first normal hook invocation rejects the stale maintained-reference ledger for the edited Knowledge card. Stop that already-rejected invocation during its remaining claim check, unstage the session-owned candidate, regenerate the existing reference scope under73.8, and rerun all normal hooks on the corrected snapshot. No verification credit is taken for the interrupted check and no hook is bypassed.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — format Dart free-default and set source predicates
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — retained full-owner formatter exits1 before the edit; actual delta matches the two scheduled member layouts.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — tool-backed formatter points to _isFreeDefaultResultSource and _isCanonicalSetResultSource in dart/lib/src/runtime/interpreter.dart; retained byte comparison isolates their layout drift.
+  - [x] **FIX** — apply only those two formatter-owned layouts; compare all outside bytes and predicate tokens with only optional trailing commas excluded.
+  - [x] **ADDRESSED (verified)** — full-owner format exits0/zero changes, fatal targeted analysis clean and selected existing4 controls PASS on all three routes.
+  - [x] **NO REGRESSION** — selected default/set kind rejection, skipped operands, lazy ordering, snapshots/local returns preserve authored outputs; direct inputs archived before proof match afterward.
+  - [x] **LOCKSTEP** — book render, Knowledge/task/index/live/history and scripts/check_memory_architecture.sh plus git diff --check pass; normal hooks govern landing.

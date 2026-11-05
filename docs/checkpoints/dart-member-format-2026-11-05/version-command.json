@@ -1,0 +1,9 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "--version"
+  ],
+  "exit": 0
+}

@@ -1,0 +1,14 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "analyze",
+    "--fatal-infos",
+    "--fatal-warnings",
+    "lib/src/runtime/interpreter.dart",
+    "test/free_default_result_composition_test.dart",
+    "test/set_result_composition_test.dart"
+  ],
+  "exit": 0
+}

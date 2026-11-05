@@ -3659,7 +3659,10 @@ this leaf adds no production compiler change. Short cold-start stops are not
 source-scaling evidence. General compiler performance and full custody/admission
 remain unassessed. P3 Dart formatting73.8 is next before full23.4.
 
-The director requested a clean pause after this compiler checkpoint. P3 Dart
-formatting73.8 resumes only on explicit instruction; the owned artifact-growth
-review23.4.8 then precedes unrelated feature selection. No full admission is
-inferred from the pause or this bounded compiler-path result.
+PNT has resumed. Dart formatting73.8 now aligns the free-default and canonical-set
+source predicates with the current formatter. The complete runtime owner formats
+with zero changes; fatal targeted analysis and existing default/set rejection,
+lazy-order and snapshot controls pass on native, restored and generated-plan
+routes. This layout repair preserves the predicates and all other runtime bytes.
+The owned artifact-growth review23.4.8 precedes unrelated feature selection;
+full admission remains separate.

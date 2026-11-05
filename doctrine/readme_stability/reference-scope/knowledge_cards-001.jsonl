@@ -35,7 +35,7 @@
 {"bytes":3182,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-copied-null-index.md","sha256":"77375acdf7f46ecab7c7ad2421fcaf782469bf0d02bd2b98e86a896b7b23c0c2","type":"member"}
 {"bytes":2672,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-copied-null-presence.md","sha256":"dd75a8ca8d6294c9813e626149bd2a19ba386fe53f9e2fad3c67c6cf521d9f3f","type":"member"}
 {"bytes":5114,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-core-spec-parser.md","sha256":"05e4f0a636b7d303edf1aeda7401cbe15b5cbd32fdbdff317905afa6b2212ebc","type":"member"}
-{"bytes":4812,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/dart-count-result-source-guards.md","sha256":"a12077a319b3410ed45e35f628a4b31dba26894bf4f2fa1964ae4d5cc1f91271","type":"member"}
+{"bytes":5258,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.8","path":"docs/knowledge/dart-count-result-source-guards.md","sha256":"da3ddb1332f32fab07d4a9250f482ae2ea8475a33e7c0a12d0e771295e783e93","type":"member"}
 {"bytes":3279,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-cursor-rewind-number-results.md","sha256":"1adf7010ba6f24e67d8ce232e4f974d3153c507c8b9ac7e2e04e0a2bba5ac349","type":"member"}
 {"bytes":3562,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-definedness-result-source-guards.md","sha256":"7609b73971bafac712cfa6a8cdb081cf5852b79511cfbaf7d58176b0ad50cce4","type":"member"}
 {"bytes":5678,"lines":85,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-diagnostic-output-events.md","sha256":"ab3270b1dedc460bc2947232b90000bc62e46d76cb24a2bb9f1910a402bd8c85","type":"member"}

@@ -5502,35 +5502,40 @@ final class LinkedSpecRuntimeEngine {
   // Preserve lazy free selectors and legacy arities; guard ordinary results.
   bool _isFreeDefaultResultSource(ActionExpr expression) {
     if (expression is! ActionCallExpr ||
-        (expression.name != 'coalesce' && expression.name != 'coalesce_nonempty') ||
+        (expression.name != 'coalesce' &&
+            expression.name != 'coalesce_nonempty') ||
         (expression.sourceMethod ?? expression.name) != expression.name ||
         expression.trailingBlockArg ||
         expression.args.length < 2 ||
-        expression.args.any((argument) => argument is! ActionPositionalArgument)) {
+        expression.args.any(
+          (argument) => argument is! ActionPositionalArgument,
+        )) {
       return false;
     }
-    return expression.args.every((argument) => switch (argument.value) {
-      ActionVariableExpr() ||
-      ActionNumberLiteralExpr() ||
-      ActionStringLiteralExpr() ||
-      ActionBooleanLiteralExpr() ||
-      ActionUndefExpr() ||
-      ActionArrayLiteralExpr() ||
-      ActionHashLiteralExpr() ||
-      ActionBlockValueExpr() ||
-      ActionCallExpr() ||
-      ActionFluentChainExpr() ||
-      ActionReceiverMutationChainExpr() ||
-      ActionIndexedVarExpr() ||
-      ActionNestedAccessExpr() ||
-      ActionValueAccessExpr() ||
-      ActionAssignScalarExpr() ||
-      ActionAssignArrayAppendExpr() ||
-      ActionAssignHashIndexExpr() ||
-      ActionAssignNestedAccessExpr() ||
-      ActionCodeblockLiteralExpr() => true,
-      _ => false,
-    });
+    return expression.args.every(
+      (argument) => switch (argument.value) {
+        ActionVariableExpr() ||
+        ActionNumberLiteralExpr() ||
+        ActionStringLiteralExpr() ||
+        ActionBooleanLiteralExpr() ||
+        ActionUndefExpr() ||
+        ActionArrayLiteralExpr() ||
+        ActionHashLiteralExpr() ||
+        ActionBlockValueExpr() ||
+        ActionCallExpr() ||
+        ActionFluentChainExpr() ||
+        ActionReceiverMutationChainExpr() ||
+        ActionIndexedVarExpr() ||
+        ActionNestedAccessExpr() ||
+        ActionValueAccessExpr() ||
+        ActionAssignScalarExpr() ||
+        ActionAssignArrayAppendExpr() ||
+        ActionAssignHashIndexExpr() ||
+        ActionAssignNestedAccessExpr() ||
+        ActionCodeblockLiteralExpr() => true,
+        _ => false,
+      },
+    );
   }
 
   // Preserve String producers and domains; guard canonical ordinary calls.
@@ -6402,8 +6407,7 @@ final class LinkedSpecRuntimeEngine {
       return false;
     }
     final target = expression.args.first.value;
-    if (target is! ActionVariableExpr ||
-        target.source != target.name) {
+    if (target is! ActionVariableExpr || target.source != target.name) {
       return false;
     }
     return switch (expression.args.last.value) {

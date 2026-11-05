@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — Close the two isolated Dart member layout debts
+
+The current formatter delta is confined to _isFreeDefaultResultSource and _isCanonicalSetResultSource. Outside-member byte identity and predicate normalization distinguish this layout repair from behavioral edits; the formatter adds only optional trailing commas beyond whitespace. Existing default/set rejection and order/snapshot controls pass on three routes. The direct input archive precedes analysis/test compilation and still matches afterward; complete native/transitive custody remains23.4.2-owned. Supplied policy hashes match their canonical historical record. Advisory artifact growth23.4.8 follows under resumed PNT.
+
 ## 2026-11-05 — Count copy dispatch also avoids generated-source compatibility re-entry
 
 The old long receiver concern is resolved by the existing guarded_copy_chain Count admission. Removing only that condition sends the two long forms through generic copy-prefix folding and generated do/copy Perl back through legacy_method_value_expr at activation line4017, reaching the bounded stop; no-copy/minimal controls complete. Warmed public stages and the restored original native/fresh regression pass without a new compiler edit. Initial short cold stops are separately qualified against minimal controls, not misreported as scaling proof. BSD tar metadata is retained and magic/paired-entry validated separately from actual source bytes after the first review rejection. Full transitive/native custody and general compiler performance remain outside this finite causal closure.

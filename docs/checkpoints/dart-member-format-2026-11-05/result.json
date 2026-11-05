@@ -1,0 +1,7 @@
+{
+  "scope": "two formatter-owned members; four authored preservation controls",
+  "outside_members_identical": true,
+  "member_tokens_preserved_except_optional_trailing_commas": true,
+  "direct_inputs_unchanged_after_proof": true,
+  "limits": "No emitted-host execution, complete transitive/native custody, performance or full admission claim."
+}

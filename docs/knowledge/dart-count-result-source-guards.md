@@ -8,6 +8,7 @@ answers:
   - "where are Dart Count generated host modules and resolution inputs retained"
   - "why do initial Boolean Count sources return zero while copied Booleans reject"
   - "why is Dart Count formatting scoped to the fluent loop"
+  - "are Dart free-default and set source predicates fully formatted"
 date: 2026-11-05
 status: primary guards and initial Boolean source73.6.3 focused-checked; full admission remains open
 tags: [dart, count, guards, source, copy, null, composition]
@@ -59,9 +60,15 @@ observed needed-error message/class stays exact. Direct declared pub/source/lock
 module/config inputs precede executions, without complete package/native closure
 or general isolation. Evidence: docs/checkpoints/count-source-dart-2026-11-05/.
 
-Owned loop formatting uses the established class-wrapper probe. Whole-owner
-formatting still finds pre-existing _isFreeDefaultResultSource and
-_isCanonicalSetResultSource layout drift, scheduled under P3 owner73.8 after
-the P1s/P2 and before full23.4. Unrelated probe changes were restored from the
-exact tested runtime archive; scoped proof confirms the owner stays byte-identical.
-Rebuild Dart runtime/apps. Julia4/Lua5 and full admission remain separate.
+At73.6.3, owned loop formatting used the established class-wrapper probe.
+Whole-owner formatting found pre-existing _isFreeDefaultResultSource and
+_isCanonicalSetResultSource layout drift, scheduled under P3 owner73.8.
+Those probe changes were restored from the exact tested runtime archive.
+
+Current73.8 applies those two layouts with Dart3.13.3. Full-owner formatting
+now passes with zero changes; fatal targeted analysis and four existing
+default/set guard/order/snapshot controls pass on native/restored/plan routes.
+Outside-member bytes are identical; predicate tokens differ only in optional
+formatter trailing commas. Actual inputs/delta/channels and declared direct
+inputs before compiled proof survive in docs/checkpoints/dart-member-format-2026-11-05/.
+Complete transitive/native custody and full admission remain separate.

@@ -1,0 +1,10 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "format",
+    "lib/src/runtime/interpreter.dart"
+  ],
+  "exit": 0
+}

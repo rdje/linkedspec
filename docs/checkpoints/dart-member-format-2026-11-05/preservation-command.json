@@ -1,0 +1,16 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "test",
+    "--reporter",
+    "expanded",
+    "--concurrency=1",
+    "test/free_default_result_composition_test.dart",
+    "test/set_result_composition_test.dart",
+    "--name",
+    "^(container_guards|lazy_order_and_snapshot|direct_incompatible_consumers_skip_operands|source_once_before_consumer_rebinding_and_local_returns)$"
+  ],
+  "exit": 0
+}

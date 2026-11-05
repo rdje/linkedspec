@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — format Dart source predicates
+
+Apply only the two scheduled free-default/set predicate layouts with Dart3.13.3. Full-owner formatting has zero changes, fatal targeted analysis is clean, and four existing guard/order/snapshot controls pass on native/restored/plan routes. All outside-member bytes and predicate tokens except optional formatter commas stay exact. Actual formatter inputs/delta and direct inputs before compiled proof are retained. PNT resumes to advisory growth23.4.8; full admission remains separate.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.7 — restore long Count receiver regression
 
 The earlier Count copy dispatcher73.6.1 already resolves the exact original long source. Warmed public stages complete; one private Count-dispatch omission restores bounded stops and generated-Perl compatibility re-entry. Cold short limits also stop minimal Get controls and receive no source-scaling credit. Add the unchanged original as a twentieth fixture; four selected native/fresh copy/null/error/long groups pass with readiness/cursors/warnings intact, and first19 objects stay unchanged. Production Perl remains unchanged. Actual archives, path observations, pre-load modules, setup/AppleDouble and custody qualifications survive. P3 Dart formatting73.8 is next; general performance, registration/custody/isolation/full admission remain separate. The director requests pause after this checkpoint; P3 requires explicit resume.
