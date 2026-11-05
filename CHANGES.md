@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — guard Dart Count continuations
+
+Canonical Count joins actual-kind guards, preserving initial source consumption and scalar-result state. Original native/restored/plan and compiled-emitted RED becomes GREEN for authored guard/source-owner controls. Frozen source/domain fences, selected Count-length/copied-null index and fatal targeted analysis pass. Direct generated host inputs are captured before execution; full transitive custody/admission remain separate. Book/Knowledge/task/live pointers advance to independent Julia73.4 before mandatory P1 Count/copy assessment. No full suite or push.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — guard Rust Count continuations
 
 Canonical free-one/zero-extra Count joins direct and trailing-block actual-kind guards. Incompatible operands and later with bodies stop; initial source behavior and prior result/copy guards remain. Independent original RED and final native/restored/plan/compiled-emitted/trace controls, frozen AST/domain fences, Perl source-owner oracle and selected Count-length/copied-null index checks pass. Rust Count("text")/"text".count() returning4 versus Perl0 is P1 assessment73.6.0-owned. First generated host-project input capture remains incomplete under23.4.2; no full admission or push. Book/Knowledge/task/live pointers advance to independent Dart73.3.

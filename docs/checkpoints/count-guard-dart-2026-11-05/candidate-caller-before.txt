@@ -1,0 +1,49 @@
+class Probe {
+  Object? probe() {
+    switch (0) {
+      case 0:
+        var value = _evaluateFluentReceiver(
+          receiver,
+          canonicalActionHelperName(calls.first.method),
+          context,
+          ruleLabel,
+          currentEdge,
+        );
+        final kindGuardedSource =
+            _isOrdinaryComputedRead(receiver) ||
+            _isExplicitPushResultSource(receiver) ||
+            _isCanonicalSetResultSource(receiver) ||
+            _isFreeDefaultResultSource(receiver) ||
+            _isConstructorResultSource(receiver) ||
+            _isFreeStringResultSource(receiver) ||
+            _isOrdinaryStringReceiverPrefix(calls) ||
+            _isOrdinaryNumericResultChain(receiver, calls) ||
+            _isOrdinaryLexicalResultChain(receiver, calls) ||
+            _isOrdinaryDefinednessResultChain(receiver, calls) ||
+            _isOrdinaryEmptinessResultChain(receiver, calls) ||
+            _isOrdinaryStringPredicateResultChain(receiver, calls) ||
+            _isOrdinaryContainsResultChain(receiver, calls) ||
+            _isOrdinaryIndexResultChain(receiver, calls) ||
+            _isOrdinaryHasKeyResultChain(receiver, calls) ||
+            _isOrdinaryLogicalResultChain(receiver, calls) ||
+            _isInputCursorValueSource(receiver) ||
+            (receiver is ActionCallExpr &&
+                (canonicalActionHelperName(receiver.name) == 'copy' ||
+                    canonicalActionHelperName(receiver.name) == 'with'));
+        final countChain = _isOrdinaryCountResultChain(receiver, calls);
+        return _evaluateFluentCallsWithValue(
+          value,
+          calls,
+          context,
+          ruleLabel,
+          currentEdge: currentEdge,
+          kindGuardedResult: kindGuardedSource || countChain,
+          preserveInitialCountSource:
+              countChain &&
+              !kindGuardedSource &&
+              !_isOrdinaryCountResultChain(receiver, const []) &&
+              calls.first.method == 'count' && calls.first.args.isEmpty,
+        );
+    }
+  }
+}

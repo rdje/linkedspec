@@ -1312,14 +1312,28 @@
   - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and worked book examples agree on focused Rust completion, independent Dart next and mandatory source-domain/custody owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.3`
-  Status: `pending` / owned before unrelated selection
+  Status: `completed` / bounded Dart Count guards implemented and focused-checked
   Goal: Dart count source/prefix guard composition and readiness.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.73.2; frozen73/shared16/excluded18/current count3/source snapshots/copy authority.
   Acceptance: Independently baseline unchanged new normal on available native/restored/generated/fresh routes before production; never infer peer failures from Perl. Repair only demonstrated canonical free-one/ordinary zero-extra Count source/with/intermediate guards/required typed-source errors/unresolved-with readiness. Preserve numeric0, source-consumer once/order/snapshots, existing Count source/non-array fallback and free signatures, copy/default/strict arithmetic/valid zero-null-empty-Array with/function/arity/preflight/excluded source/context/parser/schema. Freeze actual source-domain diagnostic behavior before edits; do not normalize it silently. Both Rust direct/trailing-with loops and peer common/scalar guards as needed; retain separate Julia/Lua loop-index mutation gates. Lua existing namespace/no new chunk locals/no unsafe runner/formatter/declared5.4 inference. Split unsafe expansion; P1 copy73.6 mandatory before unrelated selection.
-  Planned verification tier: focused
-  Planned focused checks: Shared16 RED/GREEN/source18 on Perl/nearest count3 and index-copy controls/backend compile-analysis-scoped format-runner as appropriate/book/map/history/manual continuity. No full suite/global registry recurrence.
-  Planned canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
-  Planned claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+  Verification tier: `focused`
+  Focused checks: Frozen Count value/error/effect/source-owner cases on Dart native/restored/generated-plan and focused compiled emitted package; freeze actual source-domain and excluded ASTs before production; direct Count-length/copied-null-index compatibility, fatal targeted analysis, scoped formatting, book/Knowledge/history/memory and mandatory hooks. No full suite/global registry recurrence.
+  Canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites; split before infrastructure/public-contract expansion.
+  Claim verification: none: Finite authored value/error/effect/source controls and dated test events, not a complete family/population or performance measurement.
+  Activation: Clean70314722db3963238fe6a6b381d179358392982e after Rust73.2 normal hooks and brief0. Frozen73/source18, Count book/copy authority, existing Dart Count/length, index/copied-null guard and storage/emission guidance read. Supported Dart wrapper only; reuse the existing source-emitter temporary owner and retain generated host metadata before execution. Production remains unchanged until independent baseline and domain observations are retained.
+
+  Result: Independent unchanged native/restored/generated-plan and compiled emitted source reproduce incompatible operand/later-with effects and repeated Count-result fallback. Canonical free-one/zero-extra Count now joins existing actual-kind guards. Only initial Count without a prior result owner skips the common container guard once; scalarResult guard/assignments remain intact. Final authored value/error/source-owner controls, frozen source-domain/excluded ASTs, direct Count-length/copied-null-index consumers and fatal targeted analysis pass. Source producer/domain/parser/signatures/dependencies stay; rebuild Dart apps/runtime. Julia73.4 next, then safe Lua and mandatory P1 assessment73.6 before unrelated selection.
+  Evidence/limits: docs/checkpoints/count-guard-dart-2026-11-05/ retains baseline/candidate/final direct inputs and complete raw channels. Null AST bootstrap failure is separately qualified; actual diagnostic six-zero/one-null and eighteen source shapes freeze before production. Emitted host modules/manifest/runner and resolved lock/package-config bodies are captured before execution; no complete transitive generation/toolchain closure claimed. Candidate/final differ only in separator whitespace from scoped formatting; original candidate formatter retained. Registration23.4.1/input-custody23.4.2/general isolation/full23.4 remain open. No full suite or push.
+  Verification: From dart/, supported wrapper test count_result_guard_composition_test.dart and source_emitter_test.dart with exact Count source-guard filter; direct count_length_receivers_test.dart/copied_null_index_composition_test.dart pass. Fatal analysis individually covers runtime/new normal/emitter test; changed runtime scopes/new observer formatting, book/Knowledge/history/memory and mandatory hooks govern landing.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — guard Dart Count continuations by actual kind
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — public Dart parse/compile/Engine native/restored/plan and independently compiled emission expose operand/body effects and repeated Count-result fallback; actual baseline retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — interpreter FluentChain dispatch omits Count from kindGuardedResult; common loop needs a bounded initial-source exception distinct from already-produced Count values.
+  - [x] **FIX** — canonical Count role joins existing guards; consume initial-source permission once in the common guard only. Scalar-result/null/copy and source producer policies stay intact.
+  - [x] **ADDRESSED (verified)** — original producer RED becomes final native/restored/plan/emitted GREEN; pre-edit source/domain freezes and needed source errors remain covered.
+  - [x] **NO REGRESSION** — selected Count/length/copied-null index consumers pass with fatal targeted analysis and scoped formatting; no full-matrix or input-closure admission inferred.
+  - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and worked book examples agree on focused Dart completion, independent Julia next and mandatory assessment/custody owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.4`
   Status: `pending` / owned before unrelated selection

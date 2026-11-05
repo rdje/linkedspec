@@ -8,7 +8,7 @@ answers:
   - "which task owns Count copy source-domain and rejection effects"
   - "where is the existing count length normal and its expected fixture"
 date: 2026-11-05
-status: Perl typed-source/guards and Rust guards targeted-checked; independent Dart next, copy/source assessment remains mandatory
+status: Perl typed-source/guards and Rust/Dart guards targeted-checked; independent Julia next, copy/source assessment remains mandatory
 tags: [count, array, numeric, guards, source, copy, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.34; count-guard-selection-intake.json.gz retains actual public19, canonical4/excluded18/typed-source3 AST-lowerings, exact source owner mechanisms and setup qualification."
 reverify: "Recover public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors/readiness/fresh loading separately. Historical activation/freeze writers one-shot never replay."
@@ -23,7 +23,12 @@ native/restored/generated-plan and compiled emitted proof. Initial source behavi
 remains frozen, including Rust's `count("text")` and `"text".count()` returning4
 against Perl's0. Mandatory73.6.0 owns that source-domain discrepancy before unrelated
 selection; full generation-input custody/registration/admission remain separate.
-Mechanism and reverify routes: [[rust-count-result-source-guards]]. Dart73.3 is next.
+Mechanism and reverify routes: [[rust-count-result-source-guards]].
+Dart73.3 now passes native/restored/plan and independently compiled emitted
+controls, preserving the initial-source policy and scalar-result guards. Its
+source-domain diagnostic matches the reference; direct generated host inputs
+are retained before execution, without a complete transitive-closure claim.
+Mechanism and reverify routes: [[dart-count-result-source-guards]]. Julia73.4 is next.
 
 ## Current Perl typed-source repair
 

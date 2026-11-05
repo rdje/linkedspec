@@ -3526,6 +3526,16 @@ Rust's unchanged diagnostic returns4 for both `count("text")` and
 `"text".count()`, against the Perl reference's0; mandatory P1 assessment73.6 owns
 resolution before unrelated selection. The Rust capsule retains direct inputs
 and actual outputs but not the first host crates' generated manifest/lock/module
-bodies; admission input-custody23.4.2 owns that qualification. Independent Dart73.3
-is next. Registration, general isolation, source/context and full23.4 admission
-remain open.
+bodies; admission input-custody23.4.2 owns that qualification.
+
+Dart73.3 now passes native/restored/generated-plan and independently compiled
+emission controls. Canonical Count results join actual-kind guards; only initial
+Count source consumption without a prior result owner keeps its common-guard
+exception. Scalar-result state/guards and copied-null index behavior stay intact.
+The frozen diagnostic matches the reference's six zeros and copied-null null.
+Direct generated host modules, manifest, runner, resolved lock and package config
+are retained before host execution; complete transitive generation closure is
+not inferred. Selected Count/length/copied-null index, fatal targeted analysis
+and scoped formatting pass. Rebuild Dart applications/runtime for the repair.
+Independent Julia73.4 follows, then safe Lua and P1 assessment73.6. Registration,
+general isolation, source/context and full23.4 admission remain open.

@@ -4066,33 +4066,41 @@ final class LinkedSpecRuntimeEngine {
           ruleLabel,
           currentEdge,
         );
+        final kindGuardedSource =
+            _isOrdinaryComputedRead(receiver) ||
+            _isExplicitPushResultSource(receiver) ||
+            _isCanonicalSetResultSource(receiver) ||
+            _isFreeDefaultResultSource(receiver) ||
+            _isConstructorResultSource(receiver) ||
+            _isFreeStringResultSource(receiver) ||
+            _isOrdinaryStringReceiverPrefix(calls) ||
+            _isOrdinaryNumericResultChain(receiver, calls) ||
+            _isOrdinaryLexicalResultChain(receiver, calls) ||
+            _isOrdinaryDefinednessResultChain(receiver, calls) ||
+            _isOrdinaryEmptinessResultChain(receiver, calls) ||
+            _isOrdinaryStringPredicateResultChain(receiver, calls) ||
+            _isOrdinaryContainsResultChain(receiver, calls) ||
+            _isOrdinaryIndexResultChain(receiver, calls) ||
+            _isOrdinaryHasKeyResultChain(receiver, calls) ||
+            _isOrdinaryLogicalResultChain(receiver, calls) ||
+            _isInputCursorValueSource(receiver) ||
+            (receiver is ActionCallExpr &&
+                (canonicalActionHelperName(receiver.name) == 'copy' ||
+                    canonicalActionHelperName(receiver.name) == 'with'));
+        final countChain = _isOrdinaryCountResultChain(receiver, calls);
         return _evaluateFluentCallsWithValue(
           value,
           calls,
           context,
           ruleLabel,
           currentEdge: currentEdge,
-          kindGuardedResult:
-              _isOrdinaryComputedRead(receiver) ||
-              _isExplicitPushResultSource(receiver) ||
-              _isCanonicalSetResultSource(receiver) ||
-              _isFreeDefaultResultSource(receiver) ||
-              _isConstructorResultSource(receiver) ||
-              _isFreeStringResultSource(receiver) ||
-              _isOrdinaryStringReceiverPrefix(calls) ||
-              _isOrdinaryNumericResultChain(receiver, calls) ||
-              _isOrdinaryLexicalResultChain(receiver, calls) ||
-              _isOrdinaryDefinednessResultChain(receiver, calls) ||
-              _isOrdinaryEmptinessResultChain(receiver, calls) ||
-              _isOrdinaryStringPredicateResultChain(receiver, calls) ||
-              _isOrdinaryContainsResultChain(receiver, calls) ||
-              _isOrdinaryIndexResultChain(receiver, calls) ||
-              _isOrdinaryHasKeyResultChain(receiver, calls) ||
-              _isOrdinaryLogicalResultChain(receiver, calls) ||
-              _isInputCursorValueSource(receiver) ||
-              (receiver is ActionCallExpr &&
-                  (canonicalActionHelperName(receiver.name) == 'copy' ||
-                      canonicalActionHelperName(receiver.name) == 'with')),
+          kindGuardedResult: kindGuardedSource || countChain,
+          preserveInitialCountSource:
+              countChain &&
+              !kindGuardedSource &&
+              !_isOrdinaryCountResultChain(receiver, const []) &&
+              calls.first.method == 'count' &&
+              calls.first.args.isEmpty,
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -6204,6 +6212,69 @@ final class LinkedSpecRuntimeEngine {
         ordinaryArgs(first.args);
   }
 
+  // Count's numeric result joins kind guards without changing its source policy.
+  bool _isOrdinaryCountResultChain(
+    ActionExpr? receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.any(
+      (call) =>
+          traversal.contains(canonicalActionHelperName(call.method)) ||
+          ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+              canonicalActionHelperName(call.method) != 'with'),
+    )) {
+      return false;
+    }
+    bool ordinaryArgs(List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      return arguments.every(
+        (argument) => switch (argument.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        },
+      );
+    }
+
+    if (receiver is ActionCallExpr &&
+        receiver.name == 'count' &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg &&
+        receiver.args.length == 1 &&
+        ordinaryArgs(receiver.args)) {
+      return true;
+    }
+    if (calls.isEmpty) {
+      return false;
+    }
+    final first = calls.first;
+    return first.method == 'count' &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        !first.trailingBlockArg &&
+        !first.receiverTrailingBlockArg &&
+        first.args.isEmpty;
+  }
+
   // Canonical index sources retain numeric zero, null and source snapshots.
   // Only positional free-two calls and ordinary one-needle prefixes qualify.
   bool _isOrdinaryIndexResultChain(
@@ -6448,10 +6519,14 @@ final class LinkedSpecRuntimeEngine {
     String ruleLabel, {
     required _CurrentActionEdge? currentEdge,
     bool kindGuardedResult = false,
+    bool preserveInitialCountSource = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
+    var countSourcePending = preserveInitialCountSource;
     for (final call in calls) {
+      final initialCountSource = countSourcePending;
+      countSourcePending = false;
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
       // Earlier incompatible consumers return before this step.
@@ -6474,6 +6549,7 @@ final class LinkedSpecRuntimeEngine {
       // Reduced, copied, scoped and computed values retain their actual kinds.
       // Validate container-only consumers before evaluating their operands.
       if ((reductionResult || kindGuardedResult) &&
+          !initialCountSource &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&

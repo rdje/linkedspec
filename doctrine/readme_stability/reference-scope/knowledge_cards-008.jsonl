@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3547,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-handler-error-provenance-target.md","sha256":"2b20bbbe3bf0ad0e7bcf080615f61ff70c885495d3e2de450b002c7157c7084f","type":"member"}
 {"bytes":4453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-constructor-nested-values.md","sha256":"b79a3d50a19aef95ce5eb5bfe69329e610b23eaa569a13c8bcfcdc71a6b4864f","type":"member"}
 {"bytes":4488,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-tree-traversal-callback-frame.md","sha256":"4cf5e96a02aa2474e07667adfa8a80e2b55741b4dd74312aa475a3e2ad26a5a4","type":"member"}
 {"bytes":3365,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-helper-scan-occurrence-provenance.md","sha256":"55bc426a73c268350d39cc45a62b828becb6b214529428ec975f9d8c4a698006","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8513,"lines":112,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-scalar-bound-receiver-copy.md","sha256":"2123b6fd98e6fc8b06673d15e6d3206cd828d8d759757a4e22f780546e38557f","type":"member"}
 {"bytes":4908,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-call-copy-observation-gap.md","sha256":"494f02a2f4b5c2144e22a7068eaec6ea38e19447fff25785ec331e6d963d06cf","type":"member"}
 {"bytes":5877,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-call-staged-projection.md","sha256":"272b53413b82f1e638e0c283f011ee56deec6783c296b40af4a5810fc408255e","type":"member"}
-{"bytes":6083,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-compile-failure-diagnostic-drift.md","sha256":"90f284d2c3348055538771b009955d51051df1a2f175805118ea9910421f302a","type":"member"}

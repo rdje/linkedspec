@@ -1,0 +1,47 @@
+{
+  "after": "17b02d1fe7a3b6ec0a8e9d62263d89644f4f44a08ab88c834435c5910f4a37c1",
+  "before": "b255a6a72787abc087d29d36bea180c48350219b5a40fb97c352b5fd5a1b3dda",
+  "probes": {
+    "caller": {
+      "after": "79710f68225fccca0714ba17e768bf1c139b98eb82037d9347bd88aa50062159",
+      "before": "79710f68225fccca0714ba17e768bf1c139b98eb82037d9347bd88aa50062159",
+      "command": [
+        "bash",
+        "../tools/run_dart_project_data.sh",
+        "format",
+        "--output=show",
+        "--summary=none",
+        "--stdin-name",
+        "lib/src/runtime/interpreter.dart"
+      ]
+    },
+    "loop": {
+      "after": "1920d78ccab5a062cf33e5f48f082b516485c381b95c28f3d18c30767ac450e8",
+      "before": "1920d78ccab5a062cf33e5f48f082b516485c381b95c28f3d18c30767ac450e8",
+      "command": [
+        "bash",
+        "../tools/run_dart_project_data.sh",
+        "format",
+        "--output=show",
+        "--summary=none",
+        "--stdin-name",
+        "lib/src/runtime/interpreter.dart"
+      ]
+    },
+    "role": {
+      "after": "2fa04dd8ce83979d366bdc7c535837093ece744a5fcd7c330f0b5830884eee4d",
+      "before": "2fa04dd8ce83979d366bdc7c535837093ece744a5fcd7c330f0b5830884eee4d",
+      "command": [
+        "bash",
+        "../tools/run_dart_project_data.sh",
+        "format",
+        "--output=show",
+        "--summary=none",
+        "--stdin-name",
+        "lib/src/runtime/interpreter.dart"
+      ]
+    }
+  },
+  "producer": "e53bcd55bfb5378f6e2ed60f5a12c62392ddd3b7f15e6c40291eef8dfbb60429",
+  "source": "dart/lib/src/runtime/interpreter.dart"
+}

@@ -34,6 +34,7 @@
 {"bytes":3182,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-copied-null-index.md","sha256":"77375acdf7f46ecab7c7ad2421fcaf782469bf0d02bd2b98e86a896b7b23c0c2","type":"member"}
 {"bytes":2672,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-copied-null-presence.md","sha256":"dd75a8ca8d6294c9813e626149bd2a19ba386fe53f9e2fad3c67c6cf521d9f3f","type":"member"}
 {"bytes":5114,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-core-spec-parser.md","sha256":"05e4f0a636b7d303edf1aeda7401cbe15b5cbd32fdbdff317905afa6b2212ebc","type":"member"}
+{"bytes":2986,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.3","path":"docs/knowledge/dart-count-result-source-guards.md","sha256":"aaced73e784c5c904ca5754ed195c88a4ffbf206f5bda976f8eb8bad0335edb2","type":"member"}
 {"bytes":3279,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-cursor-rewind-number-results.md","sha256":"1adf7010ba6f24e67d8ce232e4f974d3153c507c8b9ac7e2e04e0a2bba5ac349","type":"member"}
 {"bytes":3562,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-definedness-result-source-guards.md","sha256":"7609b73971bafac712cfa6a8cdb081cf5852b79511cfbaf7d58176b0ad50cce4","type":"member"}
 {"bytes":5678,"lines":85,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-diagnostic-output-events.md","sha256":"ab3270b1dedc460bc2947232b90000bc62e46d76cb24a2bb9f1910a402bd8c85","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3790,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-dialect-bridge.md","sha256":"49c857fe360d965fb653b2af6db3cac7b1ab61daee39db72039b27ee8d529b64","type":"member"}
 {"bytes":8772,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-quantifier-literal-corruption.md","sha256":"ce09f6f67763afb04b087250b2f5f277f16b6cc36995ce480c2408afb36976a6","type":"member"}
 {"bytes":3280,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-repeated-and-group-outcomes.md","sha256":"f6b82904c9f20aa681ccc706641c0541b81f4e74346bd7356a668bc2e1043502","type":"member"}
-{"bytes":5369,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-residual-parser-smoke-split.md","sha256":"a27ac21face73e9e1ba8cca3b92be1afa463c2e5901ca058bc039201f4a4c3bc","type":"member"}

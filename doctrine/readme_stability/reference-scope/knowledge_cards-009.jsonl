@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6083,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-compile-failure-diagnostic-drift.md","sha256":"90f284d2c3348055538771b009955d51051df1a2f175805118ea9910421f302a","type":"member"}
 {"bytes":3315,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-index-source-foundation.md","sha256":"c96b84c75970daebb2abc3cfe00a357a6660a04fbef0eb16e98364d6e18d7509","type":"member"}
 {"bytes":4771,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-inline-header-lifecycle-loss.md","sha256":"46cdb870a09399b904b3ee30a068fae1556d33b4911bf4b936535aa4b72a505e","type":"member"}
 {"bytes":3723,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-introspection-admission.md","sha256":"0164bedac024e3112816c8d8290e529373f66cccbde41a0e70330ba552910c93","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8016,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-anonymous-capture-slice-family.md","sha256":"4aa55f8c7b698c7df694290d66b92d8aeabbbeaaf63500c004bbb3184fd3a496","type":"member"}
 {"bytes":2999,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-arithmetic-result-source-guards.md","sha256":"55972cb0ffa572610f74f2b43c9b50f61fe5b8905b8b70e23a5c258b8050c6a1","type":"member"}
 {"bytes":4637,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-slice-boundary-panics.md","sha256":"70b8fabb8813bc998107ee42927ae75f33b6e0f5684fea12b2e9d321e758c59e","type":"member"}
-{"bytes":4018,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-tree-traversal-receiver-blocks.md","sha256":"d41a1ad187dcc25e90bf46dfd9cf3db45b6243aaa05dab0c214472edc7d9c9bf","type":"member"}

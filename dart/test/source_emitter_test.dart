@@ -7,6 +7,7 @@ import 'package:test/test.dart';
 const dartGeneratedSourceAcceptedSubsetCount = 8;
 
 void main() {
+  _countGuardSourceTests();
   test('v2 metadata and structured emission failure are exact', () {
     const identity = 'generated-source/dart-unicode-λ.spec';
     const metadata = GeneratedSourceMetadata(sourceIdentity: identity);
@@ -863,4 +864,100 @@ Future<ProcessResult> _expectProcessSuccess(
         'stderr:\n${result.stderr}',
   );
   return result;
+}
+
+void _countGuardSourceTests() {
+  test('Count source guards in compiled emission', () async {
+    final root = Directory.current.parent.uri;
+    final cases = <Map<String, dynamic>>[];
+    for (final path in [
+      'tests/fixtures/count_result_guard_cases.json',
+      'tests/fixtures/count_result_guard_source_owner_cases.json',
+    ]) {
+      cases.addAll(
+        (jsonDecode(File.fromUri(root.resolve(path)).readAsStringSync())
+                as List)
+            .cast<Map<String, dynamic>>(),
+      );
+    }
+    final scratch = Directory.systemTemp.createTempSync(
+      'linkedspec-count-guard-',
+    );
+    final pubCache = Directory('${scratch.path}/pub-cache')..createSync();
+    final packageRoot = Directory.current.absolute;
+    try {
+      Directory('${scratch.path}/lib').createSync();
+      Directory('${scratch.path}/bin').createSync();
+      final manifest = File('${scratch.path}/pubspec.yaml')
+        ..writeAsStringSync('''
+name: linkedspec_count_guard
+publish_to: none
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+dependencies:
+  linkedspec_dart:
+    path: ${jsonEncode(packageRoot.path)}
+''');
+      final modules = <String, String>{};
+      final imports = StringBuffer("import 'dart:convert';\n");
+      final body = StringBuffer(
+        'void main() {\nfinal observed = <String, Object?>{};\n',
+      );
+      for (var index = 0; index < cases.length; index++) {
+        final row = cases[index];
+        final id = row['id'] as String;
+        final compiled = compileSpec(
+          parseSpecWithStagedUserFunctionDefinitions(row['source'] as String),
+        );
+        final module = emitDartSourceV2(compiled, 'count-guard/$id.spec');
+        modules['case_$index.dart'] = module;
+        File('${scratch.path}/lib/case_$index.dart').writeAsStringSync(module);
+        imports.writeln(
+          "import 'package:linkedspec_count_guard/case_$index.dart' as case_$index;",
+        );
+        body.writeln(
+          'try { observed[${jsonEncode(id)}] = {"ok": case_$index.execute(${jsonEncode(row['input'])})}; } catch (error) { observed[${jsonEncode(id)}] = {"error": error.toString()}; }',
+        );
+      }
+      body.writeln('print(jsonEncode(observed));\n}');
+      final runner = File('${scratch.path}/bin/main.dart')
+        ..writeAsStringSync('$imports\n$body');
+      print(
+        'COUNT_GUARD_DART_HOST_SOURCES ${jsonEncode({'pubspec.yaml': manifest.readAsStringSync(), 'bin/main.dart': runner.readAsStringSync(), 'modules': modules})}',
+      );
+      final environment = {...Platform.environment, 'PUB_CACHE': pubCache.path};
+      await _expectProcessSuccess(scratch, environment, const [
+        'pub',
+        'get',
+        '--offline',
+      ]);
+      print(
+        'COUNT_GUARD_DART_HOST_RESOLUTION ${jsonEncode({'pubspec.lock': File('${scratch.path}/pubspec.lock').readAsStringSync(), 'package_config.json': File('${scratch.path}/.dart_tool/package_config.json').readAsStringSync()})}',
+      );
+      await _expectProcessSuccess(scratch, environment, const [
+        'analyze',
+        '--fatal-infos',
+        '--fatal-warnings',
+      ]);
+      final run = await _expectProcessSuccess(scratch, environment, const [
+        'run',
+        'bin/main.dart',
+      ]);
+      final actual = (jsonDecode((run.stdout as String).trim()) as Map)
+          .cast<String, dynamic>();
+      print('COUNT_GUARD_DART_FRESH ${jsonEncode(actual)}');
+      expect(actual.keys.toSet(), cases.map((row) => row['id']).toSet());
+      for (final row in cases) {
+        final id = row['id'] as String;
+        final error = row['expected_error'] as String?;
+        if (error == null) {
+          expect(actual[id], {'ok': row['expected']}, reason: id);
+        } else {
+          expect((actual[id] as Map)['error'], contains(error), reason: id);
+        }
+      }
+    } finally {
+      scratch.deleteSync(recursive: true);
+    }
+  }, timeout: const Timeout(Duration(minutes: 3)));
 }

@@ -1,0 +1,26 @@
+{
+  "baseline_head": "70314722db3963238fe6a6b381d179358392982e",
+  "domain": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+  ],
+  "inputs": {
+    "docs/checkpoints/count-guard-dart-2026-11-05/baseline-head.txt": "ce1df9f5bb653de144f7721e231b98049eea183f8090e4ce4c7ec86647e5cd46",
+    "docs/checkpoints/count-guard-dart-2026-11-05/baseline-inputs.tar.gz": "f434bccf7b9d65660d919531e48872b8eb7cb930cc315554450c71b463a13147",
+    "docs/checkpoints/count-guard-dart-2026-11-05/baseline-native.log": "f782ba24ab30aae3b162d0b0e4a865838199b6293fe83226fc66372b129c2f2d",
+    "docs/checkpoints/count-guard-dart-2026-11-05/freeze.sh": "f45a5a7c726d5835a2c82359603dc84b0691df653fa6e8b7363f96ee2575ede5"
+  },
+  "interpreter_blob": "ffdaccfeacd84508571694608c76347e5bab54d6",
+  "new_emitter_member_unchanged_sha256": "1c9f5784c56e597eca617bff45773368dafab9fdfaef066ed49ba36cb470c073",
+  "original_emitter_blob": "89f2127e01ee671741a7d9a23b6d24694fed558e",
+  "outputs": {
+    "dart/test/source_emitter_test.dart": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb",
+    "tests/fixtures/count_result_guard_dart_ast.json": "1890d4b9264da6db03ea24077c4410e38593f21c5f27af54676c1a6eaf3def8c",
+    "tests/fixtures/count_result_guard_dart_domain.json": "f3685ee8ad711c2b2af1ef0f6e739e7c94ad5c1e0e018d27612b9a6946829cdb"
+  }
+}

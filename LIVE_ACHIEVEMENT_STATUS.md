@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Rust Count73.2 is implemented with focused checks passing. Independent Dart73.3 is next, then peers and mandatory P1 Count/copy source-domain assessment73.6 before unrelated selection.
+Dart Count73.3 is implemented with focused checks passing. Independent Julia73.4 follows, then safe Lua and mandatory P1 Count/copy source-domain assessment73.6 before unrelated selection.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.2 adds Count to Rust's existing direct/trailing-block actual-kind guards. Native/restored/generated-plan, compiled emitted, trace and selected compatibility controls pass with source/domain fences frozen before production. The legacy Rust String Count4 versus Perl0 is explicitly73.6.0-owned; complete generation-input custody23.4.2 and full23.4 remain open.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.3 adds canonical Count to Dart actual-kind guards while preserving initial source/scalar-result rules. Native/restored/plan and independently compiled emission pass after original RED; frozen AST/domain, selected compatibility and fatal targeted analysis pass. Direct generated host inputs are retained; complete transitive custody/full23.4 remain separate. Rust String Count4 versus Perl0 stays explicitly73.6.0-owned.
 
 ## Next Action
 
-Activate Dart Count73.3 from clean Git and baseline independently before repairing demonstrated guards. Keep focused per-leaf verification; full admission/registration/input custody follow feature coverage. Exact canonical4683555e is published; later local commits need fresh proof at the next normal publication boundary.
+Activate Julia Count73.4 from clean Git and baseline independently before repairing demonstrated guards. Keep focused per-leaf verification; full admission/registration/input custody follow feature coverage. Exact canonical4683555e is published; later local commits need fresh proof at the next normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — Dart Count actual-kind guards focused-checked; direct emitted host inputs retained.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — Rust Count actual-kind guards focused-checked; domain/custody qualifications owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.2 — exact canonical checkpoint published; fresh local/origin/SSH/API read-back agrees.
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — explicit PNT resume; fresh recovered access and publication prerequisite checkpoint.
