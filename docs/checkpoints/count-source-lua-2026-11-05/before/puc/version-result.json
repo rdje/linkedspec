@@ -1,0 +1,9 @@
+{
+  "command": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "puc",
+    "-v"
+  ],
+  "exit": 0
+}

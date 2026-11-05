@@ -1,11 +1,11 @@
 # MEMORY
 
-- activation_commit: `f3488961665621cec5c3df4263c5664beb36ca42` — clean Julia73.6.4 activation; derive HEAD from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4` — preserve Julia initial Boolean Count source fallback.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4` (completed handoff); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md; next frontier73.6.5.
-- next_action: Wait for the director to explicitly resume; then from clean Git activate installed Lua73.6.5; independently baseline Boolean source/copy controls and preserve the initial-source exception at its scalar guard without adding chunk locals or changing loop-index mutation rights. Commit before P2 compiler73.7/P3 formatting73.8.
+- activation_commit: `ab199db13b5e04b4eafb1d639056568e4baeba5f` — clean Lua73.6.5 activation; derive HEAD from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5` — preserve installed Lua initial Boolean Count source fallback.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5` (completed handoff); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md; next frontier73.7.
+- next_action: From clean Git activate P2 compiler-scaling73.7; recover its retained long Count/copy source and use bounded public compiler-stage probes plus distinguishing controls to locate the exact cause, then repair in a safe owned slice before P3 Dart formatting73.8/full23.4.
 - in_flight_uncommitted: none — intended clean post-landing handoff.
-- blockers: Director requested pause at the next handoff-ready checkpoint; PNT is paused after Julia4. No automatic Lua activation or background job. Explicit resume required.
-- evidence: docs/checkpoints/count-source-julia-2026-11-05/ retains25 groups/four routes21PASS4RED to25PASS,125 final assertions, strict depwarn, nearest Count/length/index and actual declared input archives/emitted modules before load. Same-process fresh Modules; no independent process isolation or complete transitive/native custody claim.
+- blockers: none; director explicitly resumed PNT. All six concrete P1 Count repairs are focused-checked; no broad admission is inferred.
+- evidence: docs/checkpoints/count-source-lua-2026-11-05/ retains unchanged25 groups/four routes per installed host,21PASS4RED to25PASS,125 assertions each, actual declared input archives/pre-load modules and direct Count/length/copied-null index controls. Same-process modules; full transitive/native custody remains open.
 - publication: Exact canonical4683555e is published; later feature commits need fresh proof at their next normal publication boundary.
 - verification_policy: Focused checks/normal hooks per slice; full23.4/registration23.4.1/transitive-native custody23.4.2/general isolation/declared Lua5.4 remain open. Same-volume storage; other repositories/submodule implementation read-only. One intensive job, monitor RAM86/90 ceilings.

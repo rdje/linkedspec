@@ -1495,16 +1495,30 @@
   - [x] **LOCKSTEP** — Count guide/backend handoff, Knowledge, task/index and bounded live docs updated; normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5`
-  Status: `pending` / P1 installed Lua initial Boolean Count source fallback
+  Status: `completed` / installed Lua Boolean Count focused-checked
   Goal: Restore existing initial Count non-array-zero source behavior for Booleans while preserving produced/copied-result guards.
   Reproduction/impact: Assessment73.6.0 independent native/restored/plan/fresh observations return null for initial false/true block receiver Count where Perl returns Number0; free Boolean Count already returns0 and copied Boolean Count correctly rejects. Both installed PUC5.5.1/LuaJIT2.1.1788460057 agree; declared5.4 remains separate.
   Priority/schedule: After assessment73.6.0 and preceding Count repairs, before unrelated selection; own until verified.
   Dependencies: Committed73.6.0, canonical Count source policy and ADR0138.
   Acceptance: Publicly locate source rejection in common/scalar guards; preserve only initial-source permission without prior result ownership at the necessary guard. Keep scalar_result assignments/state, copied/produced Boolean rejection, Count Number0 and legitimate null, source effects/errors/snapshots/function scope and the separate loop-index mutation restriction. Use the existing namespace, no added interpreter chunk locals or unsafe full runner/formatter. No generic nullable Array or signature/context expansion.
-  Planned verification tier: focused
-  Planned focused checks: Exact Boolean-source RED/GREEN and Count/copy/source controls plus nearest Count/index-copy, actual versions/loadfile and three-line normal registration, book/Knowledge/history/memory/normal hooks; no broad suite.
-  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Finite authored source/guard and preservation controls, no complete family/population claim.
+  Verification tier: `focused`
+  Focused checks: Exact Boolean-source RED/GREEN and Count/copy/source controls plus nearest Count/index-copy, actual versions/loadfile and three-line normal registration, book/Knowledge/history/memory/normal hooks; no broad suite.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored source/guard and preservation controls, no complete family/population claim.
+
+  Activation: Clean ab199db13b5e04b4eafb1d639056568e4baeba5f; director's November5 startup explicitly resumes PNT after the Julia handoff. Source-policy/ADR0138, Lua73.5 and independent assessment73.6.0 recovered. Only the initial-source scalar guard is owned; installed hosts are checked separately, no new chunk locals or unsafe full runner. External claim/containment reference hashes still match their reviewed local records; cleanup04:49UTC is under24h old.
+
+  Verification: Both installed PUC5.5.1/LuaJIT2.1.1788460057 independently run unchanged25 shared groups/four routes before21PASS4RED and after25PASS (125 assertions each). Existing one-step initial-source permission now applies at the Boolean scalar guard; scalar assignments, copied/produced rejection and loop-index mutation restriction stay unchanged, with no new chunk local. Actual declared Lua/native-C/test/wrapper inputs and pre-load emitted module/AST bodies are retained in docs/checkpoints/count-source-lua-2026-11-05/. Readonly review verifies archive bodies/hashes, identical controls, strict scalar kinds, exact observed source errors and nearest Count/length2/copied-null index70 per host. Final/direct stderr empty; loadfile and three-line registration pass. Book/Knowledge/history/reference-scope/memory and normal hooks govern focused landing. Full native/transitive custody23.4.2, registration23.4.1, independent isolation, declared5.4 and full23.4 remain open. No broad suite or push; P2 compiler73.7 then P3 Dart formatting73.8 next.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 — preserve installed Lua initial Boolean Count source fallback
+
+  Commit-integrity qualification: The first Git write is denied by the harness before hooks, then authorized staging succeeds. Normal hooks reject the unquoted focused tier field; the already-failed hook group is stopped during later claim scanning, without landing or bypass. Correct the field and retain the exact rejection log before a complete normal-hook retry. Runtime/test inputs stay identical to passing proof.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — public parse/compile/runtime/emission baseline independently reproduces four failing source groups on both installed hosts and all four routes.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — public AST/pre-load modules and interpreter scalar_result guard locate rejection before Count's zero-fallback producer; common guard already has preserve_initial_count_source.
+  - [x] **FIX** — reuse the existing first-step exception at the scalar guard with no scalar-state, producer, signature or loop-index mutation-right changes.
+  - [x] **ADDRESSED (verified)** — unchanged25 groups pass125 assertions per host; readonly review preserves strict kinds, exact error fields and original RED groups.
+  - [x] **NO REGRESSION** — nearest Count/length and copied-null index controls pass with empty stderr; loadfile compiles the complete runner/interpreter.
+  - [x] **LOCKSTEP** — book render, Knowledge/task/index and bounded live docs updated; scripts/check_memory_architecture.sh and git diff --check pass, normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6`
   Status: `completed` / bounded Count logical rejection focused-checked

@@ -21,7 +21,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.11` | `completed` | November5 bounded daily metadata and corruption controls pass; all artifacts/caches/proof retained. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5` | `pending` | Director-requested pause after Julia4 focused landing; explicit resume required before installed Lua5. P2 compiler73.7/P3 formatting73.8 follow P1s before full23.4. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.73.7` | `pending` | All six concrete Count P1s are focused-checked. PNT resumed; bounded compiler-scaling diagnosis/repair follows before P3 Dart formatting73.8/full23.4. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

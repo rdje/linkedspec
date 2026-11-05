@@ -3615,9 +3615,9 @@ intact. Actual declared source/project/normal inputs and emitted modules before
 loading are retained. Strict deprecation handling and nearest Count/length and
 copied-null index checks pass. Fresh modules share the current Julia process;
 full transitive/native custody and independent isolation remain separately owned.
-Rebuild Julia applications/runtime. Work is paused at the director's request;
-installed Lua5 resumes only on explicit instruction, before P2 scaling73.7
-and P3 formatting73.8; full admission remains open.
+Rebuild Julia applications/runtime. The director has resumed PNT; installed Lua5
+is now focused-checked as described below, before P2 scaling73.7 and
+P3 formatting73.8; full admission remains open.
 
 Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
 selection. Valid null/zero and copied-kind controls distinguish these gaps from
@@ -3627,3 +3627,23 @@ The readonly finite review rejects route/kind/input/archive corruptions. These
 are assessed repair obligations, not completed fixes or full portable admission;
 transitive/native custody, general isolation, registration and declared5.4 stay
 with their existing owners.
+
+
+Installed Lua73.6.5 now applies that initial-source exception at its Boolean
+scalar guard too. Both installed hosts independently pass25 shared groups on
+native/restored/plan/fresh-module routes after four original failing groups.
+For example, `{false}.count().add(1)` returns Number1 and
+`{true}.count().with(){return(value.add(1))}` returns Number1, while
+`copy(false).count()` and `and(false).count()` still reject with null.
+The exception belongs only to the initial Count step without prior result
+ownership; it does not grant Array operations to arbitrary Boolean values.
+
+Scalar state and the separate loop-index mutation restriction remain intact;
+no interpreter chunk local is added. Count/length and copied-null index controls,
+loadfile and the three-line normal registration pass with empty final stderr.
+Actual declared source/fixture/wrapper inputs and pre-load emitted modules are
+retained. Fresh modules share each host process; full native/transitive custody,
+independent isolation, registration, declared Lua5.4 and full admission remain
+open. Rebuild Lua applications/runtime. All six concrete P1 Count repairs are
+implemented with focused checks; P2 compiler73.7 then P3 Dart formatting73.8
+follow before full23.4.

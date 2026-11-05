@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Count repair73.6: Julia initial Boolean source4 is focused-checked after Perl/Rust/Dart repairs. Installed Lua5 follows before P2 compiler73.7/P3 formatting73.8 and full23.4. Director-requested pause after this completed Julia checkpoint; explicit resume required.
+All six concrete P1 Count copy/logical/source repairs73.6 are implemented with focused checks. PNT is resumed; P2 compiler-scaling73.7 follows before P3 Dart formatting73.8/full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 reuses the existing initial-source exception at Julia's scalar guard, preserving scalar state and the separate Array-end loop-index mutation gate. Unchanged25 groups/four routes move21PASS4RED to25PASS (125 assertions). Strict depwarn, Count/length and copied-null index pass; actual declared first-run inputs and emitted modules before load are retained. Full custody/registration/isolation/admission remain open.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 reuses the existing initial-source permission at installed Lua's Boolean scalar guard. Both hosts independently move unchanged25 groups/four routes from21PASS4RED to25PASS (125 assertions each). Scalar state, produced/copied guards and the separate loop-index mutation gate stay. Actual declared inputs/pre-load modules, exact observed errors and nearest Count/length/copied-null index checks pass. Full custody/registration/isolation/declared5.4/admission remain open.
 
 ## Next Action
 
-Wait for explicit director resume, then activate installed Lua73.6.5 from clean Git and independently preserve initial Boolean Count sources at its scalar guard, within the existing namespace and loop-index mutation rights. Commit before P2 compiler73.7/P3 formatting73.8. Later local commits need fresh canonical proof at the normal publication boundary.
+Activate P2 compiler-scaling73.7 from clean Git. Recover the retained long source and use bounded public stage/trace probes to distinguish the exact algorithmic cause before a safe repair. Commit each slice before P3 formatting73.8/full23.4; no unrelated selection first. Fresh canonical proof belongs to the normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 — installed Lua initial Boolean Count focused-checked; all concrete P1s done, P2 compiler73.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 — Julia initial Boolean Count focused-checked; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — Dart Boolean Count source focused-checked; clean fresh-context Julia4/Lua5 handoff.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — Rust Count source fallback focused-checked; Dart Boolean source3 next.
@@ -29,7 +30,6 @@ Wait for explicit director resume, then activate installed Lua73.6.5 from clean 
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — explicit PNT resume; fresh recovered access and publication prerequisite checkpoint.
 - TYPE-REFERENCE-BOOK.1.2.23.4.9 — director pause recorded; publication recovery owns the host rejection on explicit resume.
 - TYPE-REFERENCE-BOOK.1.2.20.2 — later immutable source epochs renew capacity with all current contracts/open bodies retained.
-- TYPE-REFERENCE-BOOK.1.2.23.4.7 — original source/actual publication/logical Git custody and focused controls reviewed.
 
 ## History
 

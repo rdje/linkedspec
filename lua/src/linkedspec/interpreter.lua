@@ -4248,7 +4248,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     end
     -- Reducers yield scalars; array/hash-only consumers remain invalid until
     -- a compatible helper produces a container. Case maps live with string helpers.
-    if scalar_result and not nullable_presence and not nullable_membership and not nullable_index and (array_only or PURE_HASH_HELPERS[canonical_name]) then
+    if scalar_result and not (preserve_initial_count_source and index == 1) and
+      not nullable_presence and not nullable_membership and not nullable_index and (array_only or PURE_HASH_HELPERS[canonical_name]) then
       return json.null
     end
     if action_contracts.builtin_final_codeblock_contract("receiver", canonical_name) ~= nil then

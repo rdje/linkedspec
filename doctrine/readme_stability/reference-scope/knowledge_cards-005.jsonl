@@ -8,7 +8,7 @@
 {"bytes":2856,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-copied-null-presence.md","sha256":"6a41d68a5044a10e09325832375331d157264c49682222e5db10a01799d08fff","type":"member"}
 {"bytes":2863,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-core-spec-parser.md","sha256":"46e3998c318237a52b5133fafeda6abf32a0a6f7c7f46e4556a61f9c96b0b6db","type":"member"}
 {"bytes":2768,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-corpus-manifest-io.md","sha256":"84fcb3fd20d82655d4d4c7ac5e76d994b2713b3d9627975f86e36c000abae53e","type":"member"}
-{"bytes":2881,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.5","path":"docs/knowledge/lua-count-result-source-guards.md","sha256":"910aab806c699aee289ad06b577e943e35764d37052b11b70f5fa2f6bbc93995","type":"member"}
+{"bytes":3996,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5","path":"docs/knowledge/lua-count-result-source-guards.md","sha256":"2efb85c56e9637418eb090180984c2be9290d46fc3a44b672535321c6346adfd","type":"member"}
 {"bytes":16355,"lines":191,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-cursor-completion-package-prefix-reading.md","sha256":"d81bc5671d370c2e3fef4a12fa8dbbfa01109c79aa0c8cfa938387c573d6f013","type":"member"}
 {"bytes":2523,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-cursor-rewind-number-results.md","sha256":"c63744e39d58ae2b61378c36b2728cc5331b5cabf75d2e8017d4834652ccd019","type":"member"}
 {"bytes":31280,"lines":236,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-declaration-trace-reading-and-validation-gaps.md","sha256":"9ed7572ce365252dbfbbe9006231cda021d9d5e796aaa090ca5626d47f7a68e9","type":"member"}

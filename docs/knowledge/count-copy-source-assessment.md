@@ -10,7 +10,7 @@ answers:
   - "where are actual Cargo-consumed Count assessment source and lock inputs"
   - "why did the Count input packager reject a dot-underscore Cargo member"
 date: 2026-11-05
-status: finite assessment frozen; Perl/Rust/Dart/Julia repairs focused-checked; installed Lua P1 source repair remains
+status: finite assessment frozen; all six concrete P1 repairs focused-checked; full admission remains open
 tags: [count, copy, rejection, source, boolean, perl, rust, dart, julia, lua, custody]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0; docs/checkpoints/count-copy-source-assessment-2026-11-05/ retains independent SDK/Get/emitted observations, actual first-run input archives, explicit targets and readonly controlled review."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/count-copy-source-assessment-2026-11-05/review.py; capture/packaging writers are historical one-shot producers, never replay over original outputs."
@@ -63,6 +63,7 @@ Current repair state: Perl copy73.6.1, logical73.6.6, Rust source73.6.2 and Dart
 focused-checked. Perl retains rejection through copy/logical links while valid
 null/zero still continue; Rust restores Array-only Count source fallback. See
 [[perl-count-copy-rejection]], [[perl-count-logical-rejection]] and
-[[rust-count-result-source-guards]] and [[dart-count-result-source-guards]]. Julia/Lua Boolean source4/5 remain mandatory before unrelated selection. Original
+[[rust-count-result-source-guards]] and [[dart-count-result-source-guards]]. Julia Boolean4 and installed Lua5 are now independently focused-checked; see
+[[julia-count-result-source-guards]] and [[lua-count-result-source-guards]]. Original
 assessment outputs and custody qualifications stay historical; P2 compiler
 scaling73.7 is separately owned after these P1s and before full23.4.

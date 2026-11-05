@@ -1,0 +1,10 @@
+{
+  "command": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "luajit",
+    "-e",
+    "dofile(\"lua/test/count_length_receivers_test.lua\"); dofile(\"lua/test/copied_null_index_composition_test.lua\")"
+  ],
+  "exit": 0
+}
