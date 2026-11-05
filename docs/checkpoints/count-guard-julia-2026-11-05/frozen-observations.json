@@ -1,0 +1,21 @@
+{
+  "activation_commit": "bad6e251d94a22163517efc79353b217b596fc65",
+  "inputs": {
+    "docs/checkpoints/count-guard-julia-2026-11-05/baseline-head.txt": "89eaa0712a735b502dd27d81ce71d11bba5a3cd4951c7b9774aea07e4feec134",
+    "docs/checkpoints/count-guard-julia-2026-11-05/baseline-inputs.tar.gz": "70cb35b156d77ea5706d8fa7a27b5d110363d549c7a7db2f8bb067e213940acd",
+    "docs/checkpoints/count-guard-julia-2026-11-05/baseline-stderr.log": "a73a7a96396b88498592abc8eef389941690d7391e6a1ff6a64387b1b6977873",
+    "docs/checkpoints/count-guard-julia-2026-11-05/baseline-stdout.log": "487a7136a76c9edeb8e170beaea73a214f5c4e243c89585db86440dd72f88092",
+    "docs/checkpoints/count-guard-julia-2026-11-05/freeze.sh": "db726b55bb1c7effba8bf84d877b3b466fd9a62ea2a26b4e5aba9cb688b00085"
+  },
+  "outputs": {
+    "julia/test/count_result_guard_composition_test.jl": "0f52f68310db90c640dac7fe8cbce4f02c50b72d2096117a72b0c45d04e9ad57",
+    "tests/fixtures/count_result_guard_julia_ast.json": "4c21a27794fbc26b91359648639779f14119f8c3cb95142511648ad9d849044e",
+    "tests/fixtures/count_result_guard_julia_domain.json": "cb8b1fddc7da1f66c67b3cf6347eafea15e1ef7c5cab061b321e383618edef11",
+    "tests/fixtures/count_result_guard_julia_errors.json": "f770b9b15fe18038cd72d10f9302a35ec6ecc7b5a68a22c59a0cffc624631622"
+  },
+  "production_blobs": {
+    "julia/src/runtime/Interpreter.jl": "6a917a1e3e3a4c6319a9fe3a303514d057dccac7",
+    "julia/src/source/SourceEmitter.jl": "ff501557ba19f8b706593bd458ea5d9624c15a84"
+  },
+  "qualification": "Uniform error class/code expectations and a nonmatching trace label were observer setup assumptions. Native/restored use RuntimeInterpreterException with optional generic diagnostic; plan/fresh preserve existing GeneratedSourceException execution wrappers. Domain/AST placeholders are bootstrap only. No production change or product RED credit for these assumptions."
+}

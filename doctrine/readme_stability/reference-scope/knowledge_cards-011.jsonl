@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8155,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-runtime-observation.md","sha256":"832a7a23abec87287b1e135b4a02f1aeb320ce54a45c0245024072a9e68fc986","type":"member"}
 {"bytes":6833,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-static-projection.md","sha256":"444711d26669f79decf49aed2b1067539fc7e6badd2b186595dea7b67ebbcf7c","type":"member"}
 {"bytes":8187,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-simple-spec-structural-owners.md","sha256":"2ab56ad83f7d27c985ea7e580c327af9896ec83ff2b55daf21474db234bea220","type":"member"}
 {"bytes":3569,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-single-index-read-bypasses-typed-binding.md","sha256":"165ee61113c72f339b4541d17ce39dd1eacb5702ad33c1b0ef54252959f3d7e6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2495,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-bare-direct-access-channel2-merge.md","sha256":"5ac81e2778bb4f076ab6520085fa39f6ec87eac6c2b4b310134f6df3fac9f86b","type":"member"}
 {"bytes":8381,"lines":114,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-bare-read-value-position-gap.md","sha256":"bc4106f64807fa7f10236dfa549aa474cb75d1811be26bb8d3ba285d5d6175c0","type":"member"}
 {"bytes":13601,"lines":140,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-bare-working-vars-engine-gaps.md","sha256":"63e1291705261d1fd68893894ebe2057413a20a5b937ce4b1de5666e3bf533ff","type":"member"}
-{"bytes":3092,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-block-valued-receiver-chains.md","sha256":"f8ee49d1e08797e987b1db74edce217566328e26331b2c1d2848ae7de471e38c","type":"member"}

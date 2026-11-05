@@ -3537,5 +3537,14 @@ Direct generated host modules, manifest, runner, resolved lock and package confi
 are retained before host execution; complete transitive generation closure is
 not inferred. Selected Count/length/copied-null index, fatal targeted analysis
 and scoped formatting pass. Rebuild Dart applications/runtime for the repair.
-Independent Julia73.4 follows, then safe Lua and P1 assessment73.6. Registration,
-general isolation, source/context and full23.4 admission remain open.
+Julia73.4 now passes native/restored/generated-plan/fresh Module controls and
+selected Count/length/copied-null index checks with strict numeric-kind equality
+and deprecation handling. Its canonical Count guard preserves initial-source and
+scalar-result rules plus the separate Array-end mutation restriction. Source
+shapes, the reference-matching diagnostic and observed route-specific error
+message/class/selected fields freeze before production. Existing native generic
+diagnostics and generated execution wrappers stay distinct. Fresh Modules share
+a process/runtime; no independent package-isolation claim follows. Rebuild Julia
+applications/runtime for the fix. Safe installed Lua73.5 is next, then P1
+assessment73.6. Registration, complete input custody, general isolation,
+source/context and full23.4 admission remain open.

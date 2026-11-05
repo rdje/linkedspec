@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4879,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-descriptor.md","sha256":"3e2f8dba9305869c43160e3786e64610a937eacf04463f556ef350f6ba6e14ae","type":"member"}
 {"bytes":4568,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-execution.md","sha256":"4cda308074f0d7512c07912bd2ecd5ebaa08e014699b3659dbef37da3596114f","type":"member"}
 {"bytes":6015,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-normalization.md","sha256":"91d74b974fbcf60e6f9a568cfd95b5eab95e497ab5889f204ee0c440451ede71","type":"member"}
 {"bytes":7814,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-preflight.md","sha256":"d9be574bcf31ebc5eb433772f99db85ed69a619bf018ddbbc951da238bed9cdd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3883,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-julia-compatibility.md","sha256":"1060eaa57e2c33c7b0251453c2562703e4d88611b1f85a228e3d1cc77b69dcdb","type":"member"}
 {"bytes":3424,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-lua-compatibility.md","sha256":"fd46be9dae0b38119c2129e3df8465a574bfa4b24bfaf1a7e7a32b9f44001600","type":"member"}
 {"bytes":4943,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-method-source-gap.md","sha256":"acdec7ca6ddf1a063df3adbe6a69625ec06ccd566902be8af43b51f0b4d8bb9c","type":"member"}
-{"bytes":3123,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-rust-ordinary-compatibility.md","sha256":"4cba6710af7a8a0d472255f54b3a01b43a2e4ca484b213b47fc6df7935e6af47","type":"member"}

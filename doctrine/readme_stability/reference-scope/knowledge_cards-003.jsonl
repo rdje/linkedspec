@@ -51,6 +51,7 @@
 {"bytes":4312,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-core-spec-parser.md","sha256":"0781803ff33c5151e6a6bab52fcd74ffc6166ef8173de1b2dd1f5957d32f8ab3","type":"member"}
 {"bytes":3556,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-corpus-manifest-io.md","sha256":"b1a37e31c52ab44faef77c52e02b018d6665225350ca6019fe98fc4a42163453","type":"member"}
 {"bytes":3599,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-corpus-selection-reporting.md","sha256":"cd435004af3e3bffc9a8644efba271adaf6ba98b1e70759189330bcb5241d6fb","type":"member"}
+{"bytes":3105,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.4","path":"docs/knowledge/julia-count-result-source-guards.md","sha256":"6eb24328aa6eb0f5967ac5b38cf1c66542199ceca0bfc19d7f80f10ff657bec8","type":"member"}
 {"bytes":3388,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-cursor-rewind-number-results.md","sha256":"4cdffd3a71a136164321d77b1d8e36cd1610601b73ddfead0947dd878a1cece8","type":"member"}
 {"bytes":3702,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-definedness-result-source-guards.md","sha256":"b71722c47ca13ee0398d5f55728b3e81ed678dfee26ec14df4dce2bc99cc6981","type":"member"}
 {"bytes":3696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-depot-layering-after-cache-cleanup.md","sha256":"33492da80a7648e4c00660422b1190de4c95807d0355684448cdca1a49435310","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":20954,"lines":351,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-reading-history-capacity-admission.md","sha256":"7560fd849edf15f05f887b7317d526eb8d9aa404f3d70f72a081c6c94a000862","type":"member"}
 {"bytes":17495,"lines":264,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-reading-history-capacity-proposal.md","sha256":"e1ba0fe806d8ea5b3b4279c5f20f51fcfd9a189fe93edc7268ad14c9ed3ca418","type":"member"}
 {"bytes":2696,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-receiver-string-bridge-guards.md","sha256":"54af89bd1109850431a30f4e98f9a6dc713301c0563d90280eedfaa8863b1247","type":"member"}
-{"bytes":6280,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-attempt-preflight-gap.md","sha256":"9cd2aada414deb35b55022a886cc24380f124f6787a6da6dd26804d9dc6f0f9b","type":"member"}

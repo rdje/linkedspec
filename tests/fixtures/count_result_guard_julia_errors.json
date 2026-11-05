@@ -1,0 +1,34 @@
+{
+  "needed_source_error": {
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "actual_arity": null,
+        "code": null,
+        "expected_arity": null,
+        "helper_name": null,
+        "stage": "runtime_execution"
+      },
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "actual_arity": null,
+        "code": null,
+        "expected_arity": null,
+        "helper_name": null,
+        "stage": "runtime_execution"
+      },
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    }
+  }
+}

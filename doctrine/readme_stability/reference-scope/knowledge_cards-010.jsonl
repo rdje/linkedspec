@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4637,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-slice-boundary-panics.md","sha256":"70b8fabb8813bc998107ee42927ae75f33b6e0f5684fea12b2e9d321e758c59e","type":"member"}
 {"bytes":4018,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-tree-traversal-receiver-blocks.md","sha256":"d41a1ad187dcc25e90bf46dfd9cf3db45b6243aaa05dab0c214472edc7d9c9bf","type":"member"}
 {"bytes":2766,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-bare-variable-newline-consumption.md","sha256":"8da50da82b131e5f7e8e400d1db5ef9e58538b57f2d1501c1bbe9d32500fa38c","type":"member"}
 {"bytes":3658,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-blind-fluent-parent-push.md","sha256":"16f20cc09aa660ca21fb4f6b216599f3a774ab47cd67e11f0d9e3660638067ee","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":9043,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-introspection-authority-map.md","sha256":"bc2f319dd0cf4e2eca78866a553adee25264104e1db6a0550eb2f56e4894ade0","type":"member"}
 {"bytes":6475,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-query-evaluator.md","sha256":"100f04900699bbc1e24dcdf9bb094821a8aec4ac8091abe072d56b6816138a1e","type":"member"}
 {"bytes":4771,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-repeated-binding-identity-gap.md","sha256":"7e147fe259d6d42c2d2f3f86cfddc91132fbe5e0bb9bba22eadcda2a4ccd44a4","type":"member"}
-{"bytes":8155,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-runtime-observation.md","sha256":"832a7a23abec87287b1e135b4a02f1aeb320ce54a45c0245024072a9e68fc986","type":"member"}

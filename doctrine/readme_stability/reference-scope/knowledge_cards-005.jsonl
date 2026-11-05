@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":15150,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md","sha256":"0d0f80b7b43e7ff10844647f0150f15f30e59bd6f863a575b25addf886688921","type":"member"}
 {"bytes":5443,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-controlled-corpus-admission-split.md","sha256":"5d002cde913267ee410980aef07a88c2fd34e9828c82da5fbec695e04965f57b","type":"member"}
 {"bytes":3892,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-controlled-corpus-execution.md","sha256":"58a5f76ff080db90504e7421db719ba8ba0f57fd0884f632694f3e10b38aa1e9","type":"member"}
 {"bytes":3324,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-copied-null-contains.md","sha256":"163ed8a650c4e20817c4c8e386ea83aedf0904232c89a8a937e7fbba80ed00a9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5778,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-routes.md","sha256":"105008bc485647280027fe63afb86c2f2fe83b80b78f678de52beca1f6680bb2","type":"member"}
 {"bytes":1982,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-call-selection-guard.md","sha256":"145b71a45888b9b829525a5858189e5e962e9e1429cbd45dbe9442c9ae3f4b0c","type":"member"}
 {"bytes":3257,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-admission.md","sha256":"694a1ecfce83dcfa23264eb3ca8efc4de27d07317b8c7dd3acb1167a9f706e2a","type":"member"}
-{"bytes":4879,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-descriptor.md","sha256":"3e2f8dba9305869c43160e3786e64610a937eacf04463f556ef350f6ba6e14ae","type":"member"}

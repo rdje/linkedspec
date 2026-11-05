@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6280,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-attempt-preflight-gap.md","sha256":"9cd2aada414deb35b55022a886cc24380f124f6787a6da6dd26804d9dc6f0f9b","type":"member"}
 {"bytes":12341,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-effect-integration-gap.md","sha256":"6b9aa2442e2c23c945b935a817a1cb45aa7fd36c81cc7ab4c5fc6163db4fd6c9","type":"member"}
 {"bytes":5574,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-admission.md","sha256":"92a996dbb4ebd7d3d0ada412af6a62971ae518850983f1d383dcf7199f6ddab7","type":"member"}
 {"bytes":3553,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-dormant-red.md","sha256":"36b405b1c4c6492cdcdc2a22b1aae069ef443f884652d3b8cba8cad3980c4f39","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2054,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-constructor-result-guards.md","sha256":"9755424f9a0cdedbad9043efafa6d4904b6a26f4ef5913e7da500154ea8708de","type":"member"}
 {"bytes":3500,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contains-source-guards.md","sha256":"0e4213f89727795c0ccc1908326a1845d818d5ddad45528893e68bff10b55dc1","type":"member"}
 {"bytes":3389,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contextual-user-function-codeblock-runtime.md","sha256":"25d0c0393f8620cae0c026e84e286d46822ce43d66e650c6811f0c5acd16306a","type":"member"}
-{"bytes":15150,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contract-parser-reading-and-string-boundary-gap.md","sha256":"0d0f80b7b43e7ff10844647f0150f15f30e59bd6f863a575b25addf886688921","type":"member"}

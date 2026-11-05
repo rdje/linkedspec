@@ -6304,8 +6304,14 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
+    count_chain = _runtime_is_ordinary_count_result_chain(chain.receiver, chain.calls)
+    preserve_initial_count_source = count_chain && !kind_guarded_result &&
+        !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
+        first(chain.calls).method == "count" && isempty(first(chain.calls).args)
+    kind_guarded_result = kind_guarded_result || count_chain
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
+        initial_count_source = preserve_initial_count_source && call_index == 1
         # A legitimate null source keeps canonical has_key's key evaluation.
         # Earlier incompatible consumers return before this step.
         nullable_presence = value === nothing &&
@@ -6320,7 +6326,8 @@ function _evaluate_runtime_fluent_chain!(
             _runtime_is_ordinary_index_result_chain(nothing, (call,))
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
-        if (reduction_result || kind_guarded_result) && !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
+        if (reduction_result || kind_guarded_result) && !initial_count_source &&
+            !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && !nullable_membership && !nullable_index && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
                 helper_name in ("num_sum", "num_avg", "num_median", "num_range")
@@ -6749,6 +6756,34 @@ function _runtime_is_ordinary_contains_result_chain(receiver, calls)
     something(first_call.source_method, first_call.method) == first_call.method || return false
     return first_call.method == "contains" && length(first_call.args) == 1 &&
         ordinary_args(first_call.args)
+end
+
+# Count results join kind guards without changing initial source fallback.
+function _runtime_is_ordinary_count_result_chain(receiver, calls)
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr && receiver.name == "count" &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg && length(receiver.args) == 1 &&
+        ordinary_args(receiver.args)
+        return true
+    end
+    isempty(calls) && return false
+    first_call = first(calls)
+    return first_call.method == "count" &&
+        something(first_call.source_method, first_call.method) == first_call.method &&
+        !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
+        isempty(first_call.args)
 end
 
 # Canonical index sources retain numeric zero, null and source snapshots.

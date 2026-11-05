@@ -1336,14 +1336,29 @@
   - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and worked book examples agree on focused Dart completion, independent Julia next and mandatory assessment/custody owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.4`
-  Status: `pending` / owned before unrelated selection
+  Status: `completed` / bounded Julia Count guards implemented and focused-checked
   Goal: Julia count source/prefix guard composition and readiness.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.73.3; frozen73/shared16/excluded18/current count3/source snapshots/copy authority.
   Acceptance: Independently baseline unchanged new normal on available native/restored/generated/fresh routes before production; never infer peer failures from Perl. Repair only demonstrated canonical free-one/ordinary zero-extra Count source/with/intermediate guards/required typed-source errors/unresolved-with readiness. Preserve numeric0, source-consumer once/order/snapshots, existing Count source/non-array fallback and free signatures, copy/default/strict arithmetic/valid zero-null-empty-Array with/function/arity/preflight/excluded source/context/parser/schema. Freeze actual source-domain diagnostic behavior before edits; do not normalize it silently. Both Rust direct/trailing-with loops and peer common/scalar guards as needed; retain separate Julia/Lua loop-index mutation gates. Lua existing namespace/no new chunk locals/no unsafe runner/formatter/declared5.4 inference. Split unsafe expansion; P1 copy73.6 mandatory before unrelated selection.
-  Planned verification tier: focused
-  Planned focused checks: Shared16 RED/GREEN/source18 on Perl/nearest count3 and index-copy controls/backend compile-analysis-scoped format-runner as appropriate/book/map/history/manual continuity. No full suite/global registry recurrence.
-  Planned canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
-  Planned claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+  Verification tier: `focused`
+  Focused checks: Frozen Count value/error/effect/source-owner cases on native/restored/generated-plan/fresh Module with strict numeric-kind equality; freeze actual source-domain/excluded ASTs before production. Selected Count-length/copied-null-index compatibility, strict depwarn, one exact runner include, book/Knowledge/history/memory and mandatory hooks. No full suite/global registry recurrence.
+  Canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
+  Claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+
+  Activation: Cleanbad6e251d94a22163517efc79353b217b596fc65 after Dart73.3 and due artifact review11, both normal hooks/post-pointer pass and brief0. Frozen73/source18, Count book/copy authority and Julia index/copied-null/trace/storage guidance read. Supported Julia wrapper; preserve independent Array-end call_index mutation restriction. Production remains unchanged until public baseline and source/domain observations are retained.
+
+  Result: Independent original/qualified native/restored/generated-plan/fresh Module baselines reproduce incompatible operand/later-with effects and repeated Count-result fallback. Canonical free-one/zero-extra Count now joins the common actual-kind guard. Only initial Count without a prior result owner skips the common guard once; scalar_result guard/assignments and the separate call_index Array-end mutation restriction remain intact. Final strict controls, pre-edit source/domain/error fences and selected Count-length/copied-null-index consumers pass with strict depwarn. Count source producer/domain/parser/signatures/copy/emitted format stay; rebuild Julia apps/runtime. Safe installed Lua73.5 next, then mandatory P1 assessment73.6 before unrelated selection.
+  Evidence/limits: docs/checkpoints/count-guard-julia-2026-11-05/ retains phase direct inputs, actual public AST/emitted module bodies before load, qualified native debug trace and raw outcomes. Original null AST/domain placeholders, uniform error class/code assumptions and a nonmatching trace label are observer bootstrap qualifications; only guard failures remain in the unchanged qualified baseline. Native/restored generic diagnostic and generated execution wrappers stay frozen at observed message/class/selected-field granularity, not a full diagnostic-contract admission. Fresh Modules share one Julia process/runtime; independent package isolation and full transitive generation custody23.4.2 remain open. No broad suite, registration23.4.1/full23.4 admission or push.
+  Verification: Supported wrapper with --project=julia --depwarn=error runs the new normal and separately the actual two direct consumers; strict Number-versus-Bool assertions, source18, six-zero/one-null domain and route-specific error fences pass. Final stderr contains only package-precompile notices; compatibility stderr is empty. One exact runner include, scoped readable source, book/Knowledge/history/memory and normal mandatory hooks govern landing.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — guard Julia Count continuations by actual kind
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — public parse/compile/Engine native/restored/plan and fresh Module source reproduce operands/later-with and repeated Count-result fallback. Original and qualified baseline channels remain separate.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — retained public AST/emission preserves Count/take/with; Interpreter.jl common fluent kind_guarded_result omits Count. Existing Count producer keeps array-only zero fallback; generated-source wrapper distinctions are existing execution policy.
+  - [x] **FIX** — canonical Count role joins current guards, with one initial-source exception in the common guard. Scalar_result and independent call_index mutation gate remain unchanged.
+  - [x] **ADDRESSED (verified)** — final native/restored/plan/fresh strict assertions pass after qualified product RED; source/domain and observed error fields freeze before production, with setup assumptions explicitly qualified.
+  - [x] **NO REGRESSION** — direct Count/length/copied-null index checks and strict depwarn pass; no package isolation, full diagnostic schema, transitive closure or broad admission inferred.
+  - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and book agree on focused Julia completion, independent safe Lua next and mandatory assessment/custody owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.5`
   Status: `pending` / owned before unrelated selection
