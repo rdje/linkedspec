@@ -1,0 +1,15 @@
+{
+  "rust/Cargo.lock": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+  "rust/Cargo.toml": "412b4ca6561744edee837a4096961a305de9be391cfbc3e06184ee106d9df7f8",
+  "rust/linkedspec-core/Cargo.toml": "4e1b8f9d81bc30eaee3c2243bf5142fb3b26a51f60f9c99e91fd5e10dda709ed",
+  "rust/linkedspec-runtime/Cargo.toml": "84f14febdd52e5f482f99e8c8724025f09e544e586e44a9f27c4afc62ae04c35",
+  "rust/linkedspec-runtime/src/engine.rs": "afd648cd2a0883759f28086f9b01a48986a424aa62b5f6f31f508766c0d44572",
+  "rust/linkedspec-runtime/tests/count_length_receivers.rs": "773324b6d19bbbd72794b787eb7cbc815462083e0aefcb0a0d0bc9de93be8fa1",
+  "rust/linkedspec-runtime/tests/count_result_guard_composition.rs": "43b601ca80a2a458b5f9f4b8385eeec0d1768b4e1f8a5f37ee23b044cc2cfa32",
+  "rust/linkedspec-runtime/tests/count_source_fallback.rs": "26769d225818c66f2abd871c9cbb33c66a68db1dcd3fdb02191d291031745b51",
+  "tests/fixtures/count_result_guard_cases.json": "0a41b080e30cc990322d98c82bbfbcfb5db88ff61ba9d4a27bb0f07f27296b93",
+  "tests/fixtures/count_result_guard_excluded_ast.json": "32a3a4177712c71ce887e437346b1d4e0a79016ee6995374021bac39764d2e0e",
+  "tests/fixtures/count_result_guard_rust_ast.json": "6b82a6356d8ec992549ea6afb34d2d7ee91fadc1a6ae8779e9ead6ec8362239e",
+  "tests/fixtures/count_result_guard_source_owner_cases.json": "63a085f734fb34738ace168c8d36c6a9b086def53b1c87b4214639725f0a93dc",
+  "tests/fixtures/count_source_fallback_cases.json": "65bdee1e2592dff11a63aec90858d16f1b9bd938b3654b31c77925eb6e356659"
+}

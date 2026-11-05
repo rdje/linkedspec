@@ -486,6 +486,23 @@ For a valid logical call, every operand still runs eagerly once from left to rig
 even when Count is zero or an earlier numeric operation returned null. Operand
 errors propagate. Malformed receiver shapes still reject before source effects.
 
+Rust's ordinary Count source producer now follows the reference Array-only rule:
+Arrays return their element count; accepted null, String, Hash, Number and Boolean
+initial sources return Number0. Source expressions still run once and propagate
+their errors. A copied or earlier produced receiver keeps its result-kind guard:
+
+```text
+count("text")                 # 0
+"text".count()                # 0: initial source fallback
+count(copy("text"))           # 0: explicit free Count source
+copy("text").count()          # null: copied String cannot supply Array Count
+count([]).count()             # null: prior Count result is Number
+length("text")                # 4: general length still measures text
+```
+
+Regenerate/rebuild Rust applications using the runtime. These focused source and
+copy checks keep full source/context/portable admission separate.
+
 A projected copy can be stored directly. On Perl, this returns the normalized three-field snapshot followed by the unchanged source:
 
 ```text

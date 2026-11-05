@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT remains active. Perl Count copy73.6.1/logical73.6.6 are focused-checked; Rust2 and peer Boolean3/4/5 precede unrelated selection. P2 compiler-scaling73.7 follows the P1s before full23.4.
+PNT remains active. Perl copy73.6.1/logical73.6.6 and Rust source73.6.2 are focused-checked; peer Boolean3/4/5 precede unrelated selection. P2 compiler-scaling73.7 follows the P1s before full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 keeps canonical Count logical/copy links inside the persistent rejection dispatcher, reusing the typed eager producer. Unchanged14 native/fresh groups move7PASS7RED to14PASS; direct plain-copy3/logical-method20/source-fence16 pass. Valid null/zero/real Bool/eagerness/errors/snapshots/function/shape policies stay. Original/final owners, inputs, actual emitted modules, public lowering and raw channels survive in the leaf capsule. Full custody/registration/isolation/admission and P2 scaling remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 restores Array-only Count source fallback while retaining produced/copied receiver guards and general length. Qualified20 source/copy/length controls move17PASS3RED to20PASS across root/native/restored/plan and compiled emission; current Count diagnostic1/length1 and final test-import cleanup20 pass. Actual first Cargo source/manifests/resolved locks/modules and raw channels survive. Initial absolute-archive setup failure is qualified without standalone behavioral credit. Earlier gaps/full custody/registration/isolation/admission and P2 scaling remain separate.
 
 ## Next Action
 
-Activate Rust73.6.2 from clean Git, check host RAM and restore Count Array-only source fallback without weakening copied/produced receiver guards. Capture actual Cargo-consumed source/manifest/lock and emitted module bodies before first execution; commit before peer Boolean3/4/5. Later local commits need fresh canonical proof at their normal publication boundary.
+Activate Dart73.6.3 from clean Git; preserve only initial Boolean Count permission at its scalar guard, with scalar-result state/copied-produced guards intact. Independently baseline route/input/error controls and commit before Julia4/Lua5. Later local commits need fresh canonical proof at their normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — Rust Count source fallback focused-checked; Dart Boolean source3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — Perl Count logical rejection focused-checked; Rust source2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — Perl Count copy-state focused-checked; logical producer next; P2 compiler scaling owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — finite Count/copy/source assessment frozen; six concrete P1 repairs and exact next action retained.
@@ -29,7 +30,6 @@ Activate Rust73.6.2 from clean Git, check host RAM and restore Count Array-only 
 - TYPE-REFERENCE-BOOK.1.2.23.4.7 — original source/actual publication/logical Git custody and focused controls reviewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.6 — bounded retention-only artifact review; independent metadata/five evidence controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.4.3 — backend/shared-fixture task-evidence routing; legacy/new-contract RED/repaired actual-index controls retained.
-- TYPE-REFERENCE-BOOK.1.2.20.1.10 — accepted ADR0139 archive/reference restoration committed at cd3b6adc with normal canonical receipt/hooks.
 
 ## History
 

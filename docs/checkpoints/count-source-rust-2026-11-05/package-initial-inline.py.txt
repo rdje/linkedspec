@@ -1,0 +1,15 @@
+from pathlib import Path
+import hashlib,json,shutil,tarfile
+base=Path('docs/checkpoints/count-source-rust-2026-11-05/before')
+files={p.as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for d in (base/'native',base/'fresh') for p in d.rglob('*') if p.is_file()}
+archive_path=base/'initial-project-inputs.tar.gz'
+with tarfile.open(archive_path,'w:gz') as a:
+    for name in files:
+        p=Path(name);assert not p.is_symlink();a.add(p,arcname=name,recursive=False)
+with tarfile.open(archive_path) as a:
+    observed={m.name:hashlib.sha256(a.extractfile(m).read()).hexdigest() for m in a.getmembers() if m.isfile()}
+assert observed==files
+(base/'initial-project-custody.json').write_text(json.dumps(files,indent=2,sort_keys=True)+'\n')
+for name in ('native','fresh'):
+    directory=base/name;assert directory.is_dir() and not directory.is_symlink();shutil.rmtree(directory)
+(base/'initial-acquisition-failure.txt').write_text('Initial acquisition uses an absolute BASE derived from __file__. The root normal completes20 cases (17PASS3RED) and its relative-path first-input archive is valid. Native lock generation succeeds, then freeze(native) rejects its archive membership because tar strips leading slash from absolute arcnames. No standalone native or emitted execution occurs. Actual initial producer, root inputs/results, failed native archive and verified relative project-input packaging remain. First raw process traceback was visible in the tool result but not separately redirected; this is a transcribed setup summary, not raw stderr or product RED. Corrected before-qualified acquisition must complete before production.\n')

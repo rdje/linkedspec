@@ -120,14 +120,11 @@ fn source_domain_diagnostic() {
         "COUNT_GUARD_DOMAIN {}",
         serde_json::to_string(&actual).unwrap()
     );
-    // Freeze the independently observed Rust source-domain behavior before any
-    // production edit. Copy/source-domain policy remains separately owned by73.6.
-    let frozen: Value = serde_json::from_str(include_str!(
-        "../../../tests/fixtures/count_result_guard_rust_domain.json"
-    ))
-    .unwrap();
+    // 73.6.2 restores the reference non-array-zero fallback. The original Rust
+    // divergence remains in count_result_guard_rust_domain.json and its capsule.
+    let expected = json!([0, 0, 0, 0, 0, 0, null]);
     for result in actual {
-        assert_eq!(result.unwrap(), frozen);
+        assert_eq!(result.unwrap(), expected);
     }
 }
 

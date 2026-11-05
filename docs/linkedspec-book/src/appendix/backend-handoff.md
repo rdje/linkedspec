@@ -3522,9 +3522,9 @@ null-with behavior while rejecting incompatible consumers before operands and
 later bodies. Prior Count results retain their kind guards; initial Count source
 fallbacks stay. Rebuild Rust applications/runtime for the repair.
 
-Rust's unchanged diagnostic returns4 for both `count("text")` and
-`"text".count()`, against the Perl reference's0; mandatory P1 assessment73.6 owns
-resolution before unrelated selection. The Rust capsule retains direct inputs
+At73.2, Rust's frozen diagnostic returned4 for both `count("text")` and
+`"text".count()`, against the Perl reference's0; mandatory P1 assessment73.6 was
+assigned resolution before unrelated selection. The Rust capsule retains direct inputs
 and actual outputs but not the first host crates' generated manifest/lock/module
 bodies; admission input-custody23.4.2 owns that qualification.
 
@@ -3586,6 +3586,16 @@ null/zero, real Bool results, eager operands/errors, source snapshots, function
 scope and malformed-shape preflight. Regenerate emitted Perl. Rust73.6.2 and
 peer Boolean source73.6.3/.4/.5 are next; full admission and P2 scaling73.7 remain
 separate.
+
+Rust73.6.2 now restores Count's Array-only source fallback: accepted non-array
+initial/free sources return Number0 while copied/produced receiver guards remain.
+General length behavior is preserved. Twenty native/restored/plan and independently
+compiled emitted controls, the current Count diagnostic and Count/length pass.
+Actual first Cargo source/manifest/resolved-lock/module inputs are retained;
+the initial archive-path setup failure gets no extra behavioral credit. Rebuild
+Rust applications/runtime. Dart/Julia/installed Lua initial Boolean source3/4/5
+remain next. Earlier custody gaps, full transitive/native closure, registration,
+general isolation, P2 scaling73.7 and full23.4 remain separate.
 
 Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
 selection. Valid null/zero and copied-kind controls distinguish these gaps from

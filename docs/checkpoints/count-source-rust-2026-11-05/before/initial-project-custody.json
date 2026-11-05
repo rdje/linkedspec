@@ -1,0 +1,6 @@
+{
+  "docs/checkpoints/count-source-rust-2026-11-05/before/fresh/Cargo.toml": "12e2e0ac9881f986c0d09f046181b57218a444000bc6c7a2c9b298f3eeeb6511",
+  "docs/checkpoints/count-source-rust-2026-11-05/before/native/Cargo.lock": "bafacea532d5dee2b66d7be0d8535e78a4e69b6501e4bc10c4c5838543a70054",
+  "docs/checkpoints/count-source-rust-2026-11-05/before/native/Cargo.toml": "449a831cf1c8a69e0020de0b775906264fc27b09a19a5c84fef8d9e9c3ea11b6",
+  "docs/checkpoints/count-source-rust-2026-11-05/before/native/src/main.rs": "59088a702a7c246eed21ca174e75133b89682ae85bec7846d5afbdee5f4632aa"
+}

@@ -8,7 +8,7 @@ answers:
   - "which task owns Count copy source-domain and rejection effects"
   - "where is the existing count length normal and its expected fixture"
 date: 2026-11-05
-status: primary/Perl copy/logical guards focused-checked; four P1 source repairs remain
+status: primary/Perl copy/logical/Rust source guards focused-checked; three peer P1 source repairs remain
 tags: [count, array, numeric, guards, source, copy, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.34; count-guard-selection-intake.json.gz retains actual public19, canonical4/excluded18/typed-source3 AST-lowerings, exact source owner mechanisms and setup qualification."
 reverify: "Recover public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors/readiness/fresh loading separately. Historical activation/freeze writers one-shot never replay."
@@ -18,7 +18,7 @@ Selection34 freezes canonical count source/prefix guards73 from nineteen public 
 
 The actual existing normal is t/count_length_receiver_contract.t; its source and expected JSON are inline, so do not invent a companion fixture filename. Aggregate typed block handling currently covers contains/index_of. Legacy Count reconstructs raw target text, while public AST retains block_value; use the existing typed owner before Count guard rollout. Current source-domain diagnostics remain historical and the independent73.6 owner must resolve copy distinctions without silent policy changes.
 
-Current Rust73.2 adds Count to direct/trailing-block actual-kind guards with focused
+Historical primary rollout: Rust73.2 added Count to direct/trailing-block actual-kind guards with focused
 native/restored/generated-plan and compiled emitted proof. Initial source behavior
 remains frozen, including Rust's `count("text")` and `"text".count()` returning4
 against Perl's0. Mandatory73.6.0 owns that source-domain discrepancy before unrelated
@@ -48,8 +48,8 @@ selection. Current diagnosis, actual first-run input custody and readonly review
 
 Current Count follow-up: Perl copy73.6.1 and logical73.6.6 retain rejection
 through copy and eager logical consumers with legitimate null/zero preserved.
-Their finite native/fresh proof is independent of the still-open Rust source2
-and peer Boolean source3/4/5 repairs. See [[perl-count-copy-rejection]] and
+Their finite native/fresh proof is independent of Rust source2, now separately
+focused-checked, and the still-open peer Boolean source3/4/5 repairs. See [[perl-count-copy-rejection]] and
 [[perl-count-logical-rejection]]. Full admission and P2 compiler scaling remain
 separate; the original selection/assessment records below stay historical.
 

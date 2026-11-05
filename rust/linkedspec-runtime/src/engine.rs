@@ -10349,8 +10349,8 @@ impl Engine {
                 Ok(RuntimeValue::Undef)
             }
             "count" => {
-                if let Some(arg) = args.first() {
-                    Ok(RuntimeValue::Number(arg.len() as f64))
+                if let Some(RuntimeValue::Array(array)) = args.first() {
+                    Ok(RuntimeValue::Number(array.len() as f64))
                 } else {
                     Ok(RuntimeValue::Number(0.0))
                 }
