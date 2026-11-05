@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2696,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-receiver-string-bridge-guards.md","sha256":"54af89bd1109850431a30f4e98f9a6dc713301c0563d90280eedfaa8863b1247","type":"member"}
 {"bytes":6280,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-attempt-preflight-gap.md","sha256":"9cd2aada414deb35b55022a886cc24380f124f6787a6da6dd26804d9dc6f0f9b","type":"member"}
 {"bytes":12341,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-effect-integration-gap.md","sha256":"6b9aa2442e2c23c945b935a817a1cb45aa7fd36c81cc7ab4c5fc6163db4fd6c9","type":"member"}
 {"bytes":5574,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-transaction-admission.md","sha256":"92a996dbb4ebd7d3d0ada412af6a62971ae518850983f1d383dcf7199f6ddab7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3033,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-complete-named-mark-parity.md","sha256":"71992a27fcfb16666241de547a7da847f59095f6621ee22e3ad201e6dd480d91","type":"member"}
 {"bytes":2054,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-constructor-result-guards.md","sha256":"9755424f9a0cdedbad9043efafa6d4904b6a26f4ef5913e7da500154ea8708de","type":"member"}
 {"bytes":3500,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contains-source-guards.md","sha256":"0e4213f89727795c0ccc1908326a1845d818d5ddad45528893e68bff10b55dc1","type":"member"}
-{"bytes":3389,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contextual-user-function-codeblock-runtime.md","sha256":"25d0c0393f8620cae0c026e84e286d46822ce43d66e650c6811f0c5acd16306a","type":"member"}

@@ -1386,19 +1386,99 @@
   - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and book agree on bounded primary73 outcomes and mandatory P1 assessment73.6.0 before unrelated selection/admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6`
-  Status: `pending` / P1 copy/source-domain/rejection prerequisite before unrelated selection
-  Children: `.73.6.0` independent assessment; concrete repair owners for demonstrated defects before production.
+  Status: `in_progress` / P1 assessment and concrete source/copy repairs before unrelated selection
+  Children: `.73.6.0` assessment; `.73.6.1` Perl rejected-copy state; `.73.6.6` Perl logical-producer rejection; `.73.6.2` Rust source fallback; `.73.6.3` Dart, `.73.6.4` Julia and `.73.6.5` installed Lua initial Boolean source guards. Further causal gaps receive owners before production.
   Goal: Preserve legitimate Count zero-fallback/source effects and rejected chains across copy under existing Count/ADR0138 authority.
   Reproduction: Selection34 direct/free null-String-Hash Count sources return six zeros; copied-null receiver Count returns null. Rejected count.take.copy.coalesce.first.with runs ran/W. Exact original diagnostics retained; no peer failure inferred.
   Acceptance: After primary73.5, independently assess all backends for copy/null/non-array Count source policies, once-only source/error/snapshots/repeated copy/valid null-with/wrong-kind/rejected with-no-with/Array controls. Resolve against existing Count zero fallback/copy/source-kind authority without silent domain normalization or generic nullable Array policy. Create bounded repair owners and fix demonstrated defects before unrelated selection; general SESSION17 isolation remains separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0`
-  Status: `pending` / P1 independent assessment after73.5
+  Status: `completed` / finite independent assessment frozen; concrete P1 repairs remain
   Goal: Freeze Count copy/source-domain/effect/error/rejection obligations independently on every backend.
   Dependencies:73.5 committed; selection34 original diagnostics/current count73/Count source policies/ADR0138.
   Owned intake from73.2: Unchanged Rust native/restored/generated-plan domain diagnostic returns [0,4,0,0,4,0,null] for free/direct null-String-Hash and copied-null Count sources; the Perl frozen diagnostic is [0,0,0,0,0,0,null]. Count's free Rust helper delegates to RuntimeValue.len rather than an Array-only gate. Preserve this actual named-instance behavior in the bounded guard repair; resolve the demonstrated String source-domain discrepancy here, after primary peers and before unrelated selection. Actual baseline/frozen producers and output: docs/checkpoints/count-guard-rust-2026-11-05/.
   Acceptance: Observe available native/restored/generated/fresh routes with strict numeric/null identity, source effects/order/errors/snapshots and with-no-with/repeated copy/valid null/wrong-kind/Array controls. Preserve original diagnostics/healthy observations, retain actual producers/direct/generation inputs/raw channels including actual Cargo-consumed source before-after first run; distinguish setup/readiness/load/transport from behavior. Resolve only from existing authority and create detailed repair owners before production/unrelated selection; flag a genuine authority conflict if one remains. No whole-repository/full matrix/peer inference.
+  Verification tier: `focused`
+  Focused checks: Minimum independent all-backend public Count/copy/source/rejection observations and public lowering/AST diagnosis; ordinary continuity.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored cross-backend diagnostics, no exhaustive family/context measurement.
+  Activation: Cleanf469ef370ee5a27a52e97b6dbd0c341c738c269a after installed Lua73.5 all ten doctrines/post-pointer and brief0. All bounded primary73 outcomes are recorded. Read frozen Count target, Count book/current source cards, ADR0138 and existing emitted-host harness. Assessment uses public SDK/Get/emission routes with retained actual inputs, not dependency internals. New diagnostic producers belong to this leaf; concrete repair children must precede production edits.
+  Observed Perl intake: Current native Get/fresh emitted rejection_through_copy returns ["ran","SDW"] where frozen73/ADR0138 require [null,"S"]. Repeated Count/count/copy/with also runs its final body. Fifteen authored reference programs build/load ready with no fallback/raw/unresolved/warnings; legitimate null-through-copy still enters with. Actual source and channels: docs/checkpoints/count-copy-source-assessment-2026-11-05/. This confirms the already-owned P1 rejection/copy obligation; concrete repair73.6.1 is mandatory after the assessment and before unrelated selection.
+
+  Result: Primary and causal logical controls are independently observed through every declared native/restored/plan/fresh route on Perl/Rust/Dart/Julia/installed PUC5.5.1/LuaJIT2.1.1788460057. The frozen readonly review identifies only component-owned gaps: Perl copy1/logical6, Rust non-array source2 and peer initial Boolean source3/4/5. Distinguishing legitimate-null/zero/copied-kind/source-error/snapshot/missing/function controls retain their targets. Perl sources build/load ready with no raw/fallback/unresolved/warnings; generated Dart projects pass fatal analysis. No production edit. Repair order:1,6,2,3,4,5 before unrelated selection.
+  Evidence/limits: docs/checkpoints/count-copy-source-assessment-2026-11-05/ retains actual SDK/Get/emitted observations, source-bound Perl lowerings, authored targets and producer sources. Actual Cargo-consumed native/emitted source/manifest/lock bodies precede first execution and compare exactly afterward. Verified archives retain file bodies of the six owned acquisition workspaces before redundant live copies are removed. Julia/Lua Modules share a host/runtime; full native/toolchain/transitive closure, general isolation, registration, declared5.4 and full23.4 remain open. Original primary custody gaps are not retroactively repaired.
+  Setup qualifications: The first packager treated retained exporter metadata as a physical input; the first input catalog included its changing redirected progress output. Both stopped/rejected without product RED credit. Original producer/catalog and transcribed summaries remain; first raw stderr was not separately redirected. Corrected packaging/catalog and final readonly replay pass. No full ACL/xattr/liveness/reclamation claim.
+  Verification: review.py rederives the retained finite observations/owner component paths; strict Bool/Number, missing-case, missing-fresh-route and unowned-kind denials reject. Dropped archive records, wrong hashes and changed evidence identities reject. Input catalog binds direct evidence and historical SDK Git identity. Book/Knowledge/history/memory/task/ref-scope and normal hooks govern this focused landing. No broad suite or publication. Session health requires a fresh context at this clean checkpoint before production73.6.1; PNT remains the director's active objective.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — freeze Count copy and source repair assessment
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1`
+  Status: `pending` / P1 Count rejection propagation through Perl copy
+  Goal: Preserve rejected Count continuation state across copy/default/select/with without suppressing legitimate null.
+  Reproduction/impact: Assessment73.6.0 current Get/fresh source count(...).take(...).copy().coalesce(...).first().with runs default/body effects SDW after the source S, despite skipping rejected take operand A. Count/count/copy/with runs its final body too. Legitimate count.add-invalid.copy.with must still run, and copied Count zero remains Number. Ready1/raw0/fallback0/unresolved0 and actual warning-free fresh execution distinguish production from setup.
+  Priority/schedule: Immediately after assessment73.6.0, before other Count repair children and unrelated selection; own until verified closure.
+  Dependencies: Committed73.6.0, frozen73, ADR0138 and current Perl copied-result/rejection authority.
+  Acceptance: Use retained emitted source/public substitution to locate the exact lost-state mechanism, freeze original RED and distinguishing legitimate-null/zero/copy controls, then make the smallest producer/guard repair. Preserve source-once effects/errors/snapshots, existing source/free-signature and copy-depth rules, function scope, invalid shape/context/parser/schema boundaries. Create no generic null-is-rejection policy.
   Planned verification tier: focused
-  Planned focused checks: Minimum independent all-backend public Count/copy/source/rejection observations and public lowering/AST diagnosis; ordinary continuity.
+  Planned focused checks: Exact Count/copy rejection RED/GREEN, valid-null/zero/source controls and nearest Count/copied-result normal plus owner syntax/book/Knowledge/history/memory/normal hooks; no broad suite.
   Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Finite authored cross-backend diagnostics, no exhaustive family/context measurement.
+  Planned claim verification: none: Finite authored rejection/effect and preservation controls, no whole-family/population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2`
+  Status: `pending` / P1 Rust non-array Count source fallback
+  Goal: Restore existing Array-only Count source semantics for canonical free and initial receiver sources.
+  Reproduction/impact: Current native/restored/plan assessment free_source_domains and receiver_source_domains return4 for text and1 for nonempty Hash, Numbers and Booleans where reference returns0. Free Count of copied non-array values has the same source fallback discrepancy. Already-copied receiver values correctly reject and must retain that distinction. Actual consumed native source/manifest/lock and emitted bodies are retained before first host run.
+  Priority/schedule: After assessment73.6.0 and Perl73.6.1/73.6.6, before unrelated selection; own until verified.
+  Dependencies: Committed73.6.0 and canonical Count source policy; original73.2 diagnostic remains historical.
+  Acceptance: Publicly reproduce source-kind distinctions and exact producer path, then repair only Count's non-array-zero fallback through existing authority. Preserve Array counts, Count Number0 identity, source-once/error/snapshot/function behavior, existing signatures and produced/copied-result guards. Retain before/after actual Cargo-consumed source/manifest/lock/module inputs. Do not alter general length semantics, schemas, dependency procedures or pins.
+  Planned verification tier: focused
+  Planned focused checks: Exact new source-domain/Count-copy controls on native/restored/plan/compiled emission, selected Count-length/copy guards and owned formatting/compilation/book/Knowledge/history/memory/normal hooks; no full suite.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Finite authored source-kind and preservation controls, no whole-family/population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3`
+  Status: `pending` / P1 Dart initial Boolean Count source fallback
+  Goal: Preserve canonical initial Count non-array-zero behavior for Boolean sources while retaining produced/copied-result guards.
+  Reproduction/impact: Current native/restored/plan receiver_source_domains returns null for {false}.count()/{true}.count(); reference returns Number0. Free Boolean Count already returns0; copied Boolean receiver Count correctly rejects. The independent fresh Dart package confirms this in assessment73.6.0 with fatal analysis passing.
+  Priority/schedule: After assessment73.6.0 and preceding concrete Count repairs, before unrelated selection; own until verified.
+  Dependencies: Committed73.6.0, Count source policy and ADR0138.
+  Acceptance: Use public AST/emission and current scalar/common guards to locate the exact source rejection. Admit only initial Count source permission without prior result ownership at the necessary guard; preserve scalar-result state/assignments, copied/produced Boolean rejection, legitimate null, Count Number0, source effects/errors/snapshots and all unrelated dispatch. No generic nullable policy or source/signature expansion.
+  Planned verification tier: focused
+  Planned focused checks: Exact Boolean source RED/GREEN plus Count-copy/source and nearest Count/index-copy controls, fatal targeted analysis/scoped format/book/Knowledge/history/memory/normal hooks; no broad suite.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Finite authored source/guard and preservation controls, no complete population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4`
+  Status: `pending` / P1 Julia initial Boolean Count source fallback
+  Goal: Restore existing initial Count non-array-zero source behavior for Booleans while preserving produced/copied-result guards.
+  Reproduction/impact: Assessment73.6.0 independent native/restored/plan/fresh observations return null for initial false/true block receiver Count where Perl returns Number0; free Boolean Count already returns0 and copied Boolean Count correctly rejects. Fresh Modules share one process/runtime; no isolated-package claim.
+  Priority/schedule: After assessment73.6.0 and preceding Count repairs, before unrelated selection; own until verified.
+  Dependencies: Committed73.6.0, canonical Count source policy and ADR0138.
+  Acceptance: Publicly locate source rejection in common/scalar guards; preserve only initial-source permission without prior result ownership at the necessary guard. Keep scalar_result assignments/state, copied/produced Boolean rejection, Count Number0 and legitimate null, source effects/errors/snapshots/function scope and the separate loop-index mutation restriction. Keep enumerate/call_index for Array-end mutation rights. No generic nullable Array or signature/context expansion.
+  Planned verification tier: focused
+  Planned focused checks: Exact Boolean-source RED/GREEN and Count/copy/source controls plus nearest Count/index-copy, strict depwarn and one exact normal include, book/Knowledge/history/memory/normal hooks; no broad suite.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Finite authored source/guard and preservation controls, no complete family/population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5`
+  Status: `pending` / P1 installed Lua initial Boolean Count source fallback
+  Goal: Restore existing initial Count non-array-zero source behavior for Booleans while preserving produced/copied-result guards.
+  Reproduction/impact: Assessment73.6.0 independent native/restored/plan/fresh observations return null for initial false/true block receiver Count where Perl returns Number0; free Boolean Count already returns0 and copied Boolean Count correctly rejects. Both installed PUC5.5.1/LuaJIT2.1.1788460057 agree; declared5.4 remains separate.
+  Priority/schedule: After assessment73.6.0 and preceding Count repairs, before unrelated selection; own until verified.
+  Dependencies: Committed73.6.0, canonical Count source policy and ADR0138.
+  Acceptance: Publicly locate source rejection in common/scalar guards; preserve only initial-source permission without prior result ownership at the necessary guard. Keep scalar_result assignments/state, copied/produced Boolean rejection, Count Number0 and legitimate null, source effects/errors/snapshots/function scope and the separate loop-index mutation restriction. Use the existing namespace, no added interpreter chunk locals or unsafe full runner/formatter. No generic nullable Array or signature/context expansion.
+  Planned verification tier: focused
+  Planned focused checks: Exact Boolean-source RED/GREEN and Count/copy/source controls plus nearest Count/index-copy, actual versions/loadfile and three-line normal registration, book/Knowledge/history/memory/normal hooks; no broad suite.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Finite authored source/guard and preservation controls, no complete family/population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6`
+  Status: `pending` / P1 Perl Count rejection through logical producer folding
+  Goal: Preserve Count prefix rejection through canonical logical consumers with and without copy.
+  Reproduction/impact: Source-bound supplemental current Get/fresh controls count(...).take(...).copy().and(...).with and the no-copy twin both run SDW rather than retaining only valid source S. Source/operand/body markers distinguish skipped rejected take A from incorrectly evaluated logical D and body W. Legitimate null-copy-and and zero-copy-and controls correctly run DW. All four compile/load ready with no raw/fallback/unresolved/warnings. Existing generic logical/copy producer folding has a distinct route from the plain guarded-copy path, so do not infer closure from73.6.1.
+  Priority/schedule: After committed assessment73.6.0 and plain-copy73.6.1, before Rust73.6.2 and unrelated selection; own until verified.
+  Dependencies: Frozen73, ADR0138, current eager logical authority and source-bound public substitution/actual emitted-source diagnosis.
+  Acceptance: Locate exact rejection-state loss before canonical logical producer evaluation; reuse existing guarded dispatch/state without changing legitimate null/zero/truth/domain/eagerness. Preserve initial source fallback, copy depth and rights, source-once/error/snapshot/function behavior and malformed/context/deferred/parser/schema boundaries. Include with/no-with and copy/no-copy distinctions; separate unsafe scope before production.
+  Planned verification tier: focused
+  Planned focused checks: Exact rejected/valid logical Count prefix RED/GREEN, plain Count-copy and nearest eager logical/source controls plus syntax/book/Knowledge/history/memory/normal hooks; no broad suite.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Finite authored causal logical/rejection controls, no whole-family/population claim.

@@ -1,0 +1,1070 @@
+{
+  "known_gap_routes": [
+    {
+      "backend": "perl",
+      "case": "rejection_through_copy",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            0
+          ]
+        },
+        {
+          "actual": "SDW",
+          "expected": "S",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1",
+      "route": "native"
+    },
+    {
+      "backend": "perl",
+      "case": "rejection_through_copy",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            0
+          ]
+        },
+        {
+          "actual": "SDW",
+          "expected": "S",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1",
+      "route": "fresh"
+    },
+    {
+      "backend": "perl",
+      "case": "repeated_count_after_copy",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            2
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1",
+      "route": "native"
+    },
+    {
+      "backend": "perl",
+      "case": "repeated_count_after_copy",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            2
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1",
+      "route": "fresh"
+    },
+    {
+      "backend": "perl",
+      "case": "rejected_copy_logical",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            0
+          ]
+        },
+        {
+          "actual": "SDW",
+          "expected": "S",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6",
+      "route": "native"
+    },
+    {
+      "backend": "perl",
+      "case": "rejected_copy_logical",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            0
+          ]
+        },
+        {
+          "actual": "SDW",
+          "expected": "S",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6",
+      "route": "fresh"
+    },
+    {
+      "backend": "perl",
+      "case": "rejected_logical",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            0
+          ]
+        },
+        {
+          "actual": "SDW",
+          "expected": "S",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6",
+      "route": "native"
+    },
+    {
+      "backend": "perl",
+      "case": "rejected_logical",
+      "differences": [
+        {
+          "actual": "ran",
+          "expected": null,
+          "path": [
+            0
+          ]
+        },
+        {
+          "actual": "SDW",
+          "expected": "S",
+          "path": [
+            1
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6",
+      "route": "fresh"
+    },
+    {
+      "backend": "rust",
+      "case": "free_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "native"
+    },
+    {
+      "backend": "rust",
+      "case": "free_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "plan"
+    },
+    {
+      "backend": "rust",
+      "case": "free_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "restored"
+    },
+    {
+      "backend": "rust",
+      "case": "free_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "fresh"
+    },
+    {
+      "backend": "rust",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "native"
+    },
+    {
+      "backend": "rust",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "plan"
+    },
+    {
+      "backend": "rust",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "restored"
+    },
+    {
+      "backend": "rust",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            5
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            6
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "fresh"
+    },
+    {
+      "backend": "rust",
+      "case": "free_copied_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            1
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            3
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "native"
+    },
+    {
+      "backend": "rust",
+      "case": "free_copied_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            1
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            3
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "plan"
+    },
+    {
+      "backend": "rust",
+      "case": "free_copied_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            1
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            3
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "restored"
+    },
+    {
+      "backend": "rust",
+      "case": "free_copied_domains",
+      "differences": [
+        {
+          "actual": 4,
+          "expected": 0,
+          "path": [
+            1
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            2
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            3
+          ]
+        },
+        {
+          "actual": 1,
+          "expected": 0,
+          "path": [
+            4
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2",
+      "route": "fresh"
+    },
+    {
+      "backend": "dart",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3",
+      "route": "native"
+    },
+    {
+      "backend": "dart",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3",
+      "route": "restored"
+    },
+    {
+      "backend": "dart",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3",
+      "route": "plan"
+    },
+    {
+      "backend": "dart",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3",
+      "route": "fresh"
+    },
+    {
+      "backend": "julia",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4",
+      "route": "fresh"
+    },
+    {
+      "backend": "julia",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4",
+      "route": "native"
+    },
+    {
+      "backend": "julia",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4",
+      "route": "restored"
+    },
+    {
+      "backend": "julia",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4",
+      "route": "plan"
+    },
+    {
+      "backend": "lua_puc",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "fresh"
+    },
+    {
+      "backend": "lua_puc",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "native"
+    },
+    {
+      "backend": "lua_puc",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "plan"
+    },
+    {
+      "backend": "lua_puc",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "restored"
+    },
+    {
+      "backend": "lua_luajit",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "fresh"
+    },
+    {
+      "backend": "lua_luajit",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "native"
+    },
+    {
+      "backend": "lua_luajit",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "plan"
+    },
+    {
+      "backend": "lua_luajit",
+      "case": "receiver_source_domains",
+      "differences": [
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            7
+          ]
+        },
+        {
+          "actual": null,
+          "expected": 0,
+          "path": [
+            8
+          ]
+        }
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5",
+      "route": "restored"
+    }
+  ],
+  "matched_authored_routes": 382,
+  "rejected_controls": [
+    "bool-number-distinction",
+    "missing-case",
+    "missing-fresh-route",
+    "unowned-kind-change"
+  ],
+  "scope": "Dated finite authored observations only; no complete family, context, isolation or portable admission."
+}

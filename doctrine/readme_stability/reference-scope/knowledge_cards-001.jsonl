@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3280,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-compatibility-eager-block-return-escape.md","sha256":"197f989ee37b7fcb9c3021f05e17eca0d4b0c19ab7bc97c4ba4a41ce24812cee","type":"member"}
 {"bytes":2424,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-rewind-default-loop-progress-gap.md","sha256":"934c3fc3ae63dc129a3d0594fca193f44d57f923d9ea49483314f6c3009a1ae1","type":"member"}
 {"bytes":4111,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-rewind-result-source-gap.md","sha256":"7f8306477ca04fd017f44c9a304a548d2b86a4e9018a0b859dee12b971e2026f","type":"member"}
 {"bytes":6757,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-transaction-authored-contract.md","sha256":"60e8ff8ad9d697dc535fe46657d94309d7aa52d6fc79cad39f8b5aa828003e93","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5618,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-brace-scanner-defects.md","sha256":"d53c4461a9966e212a731743406969a1ea45cc9e16fe9f0b79b4e3abd169aa58","type":"member"}
 {"bytes":3790,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-dialect-bridge.md","sha256":"49c857fe360d965fb653b2af6db3cac7b1ab61daee39db72039b27ee8d529b64","type":"member"}
 {"bytes":8772,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-quantifier-literal-corruption.md","sha256":"ce09f6f67763afb04b087250b2f5f277f16b6cc36995ce480c2408afb36976a6","type":"member"}
-{"bytes":3280,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-repeated-and-group-outcomes.md","sha256":"f6b82904c9f20aa681ccc706641c0541b81f4e74346bd7356a668bc2e1043502","type":"member"}

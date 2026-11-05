@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded primary Count73 backend guards have focused checks passing on recorded routes/hosts. Mandatory P1 Count/copy/source assessment73.6.0 follows before unrelated selection, including the explicitly owned Rust String Count4 versus Perl0 discrepancy.
+PNT remains active. Count/copy/source assessment73.6.0 is frozen; concrete P1 repair order1,6,2,3,4,5 must finish before unrelated selection. Session health requires a fresh context before production73.6.1.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.5 repairs installed Lua Count guards through the existing namespace while preserving initial source/scalar-result rules and the mutation gate. Independent PUC5.5.1/LuaJIT2.1.1788460057 native/restored/plan/fresh and selected compatibility checks pass after qualified RED. Actual source/domain/observed errors freeze before production; final/compatibility stderr are empty. Declared-host/full custody/isolation/admission remain open.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 independently records finite native/restored/plan/fresh observations and owns Perl copy/logical rejection, Rust non-array Count and peer initial Boolean Count source repairs. Readonly route/kind/input/custody denials pass. Actual first Cargo inputs and verified acquisition archives survive; setup qualifications and transitive/isolation/admission limits remain explicit. No production change or broad suite.
 
 ## Next Action
 
-Activate P1 assessment73.6.0 from clean Git; independently freeze Count/copy/source/effect/rejection obligations on every backend and create concrete repair owners before production or unrelated selection. Keep focused per-leaf checks. Exact canonical4683555e is published; later local commits need fresh proof at their next normal publication boundary.
+In a fresh context, activate73.6.1 from clean Git and repair Perl plain-copy rejection using retained public lowering and distinguishing legitimate-null/zero controls. Commit it before logical6, Rust2 and peer Boolean3/4/5. Exact canonical4683555e is published; later local records need fresh proof at their next normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — finite Count/copy/source assessment frozen; six concrete P1 repairs and exact next action retained.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — installed Lua Count guards focused-checked; primary73 leads to mandatory P1 source/copy assessment.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — Julia Count guards focused-checked; source/domain/observed errors and mutation boundaries retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.11 — bounded daily metadata review; all artifacts retained, independent controls pass.

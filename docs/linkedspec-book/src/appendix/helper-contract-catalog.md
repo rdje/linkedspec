@@ -851,6 +851,16 @@ count([]).add("bad").with(){return("null")}       # "null": valid null enters
 count([]).cat(",x").split(",").last().uppercase() # "X": explicit Array bridge
 ```
 
+The bounded follow-up assessment has identified remaining defects. Perl currently
+loses Count rejection across copy/default/with and its separate logical-producer
+folding route, including a no-copy logical continuation. Rust currently counts
+non-array Strings/Numbers/Booleans/nonempty Hashes instead of applying the source
+zero fallback. Dart/Julia/installed Lua currently return null for initial Boolean
+receiver Count where the reference returns Number0. These have concrete P1 repair
+owners before unrelated selection; the primary guard checks do not close them.
+Legitimate null must still enter with, and copied/produced Boolean values keep
+their existing Array-only rejection. Full family/portable admission remains open.
+
 An initial Count keeps its existing source policy. A value already produced by
 Count keeps its actual Number kind: `count(["a"]).count()` and
 `["a"].count().count()` reject the second Array-only consumer. Rejection skips

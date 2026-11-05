@@ -1,0 +1,78 @@
+[
+  {
+    "id": "free_source_domains",
+    "source": "Value:: I {return([count(undef),count(\"\"),count(\"text\"),count({}),count({\"k\":1}),count(0),count(7),count(false),count(true),count([]),count([undef,\"\",false,0])])}",
+    "input": "x"
+  },
+  {
+    "id": "receiver_source_domains",
+    "source": "Value:: I {return([{undef}.count(),{\"\"}.count(),{\"text\"}.count(),{}.count(),{items={\"k\":1};items}.count(),{0}.count(),{7}.count(),{false}.count(),{true}.count(),[].count(),[undef,\"\",false,0].count()])}",
+    "input": "x"
+  },
+  {
+    "id": "free_copied_domains",
+    "source": "Value:: I {return([count(copy(undef)),count(copy(\"text\")),count(copy({\"k\":1})),count(copy(false)),count(copy(7)),count(copy([\"a\",\"b\"]))])}",
+    "input": "x"
+  },
+  {
+    "id": "copied_receiver_domains",
+    "source": "Value:: I {return([copy(undef).count(),copy(\"text\").count(),copy({\"k\":1}).count(),copy(false).count(),copy(7).count(),copy([\"a\",\"b\"]).count()])}",
+    "input": "x"
+  },
+  {
+    "id": "copied_value_kinds",
+    "source": "Value:: I {return([copy(false),copy(0),copy(\"0\"),copy(undef),{false}.copy(),{0}.copy(),{\"0\"}.copy(),{undef}.copy()])}",
+    "input": "x"
+  },
+  {
+    "id": "count_copy_zero",
+    "source": "Value:: I {order=\"\";out=[copy(count([])).coalesce({order=cat(order,\"F\");7}).add(1),count([]).copy().coalesce({order=cat(order,\"R\");7}).add(1)];return([out,order])}",
+    "input": "x"
+  },
+  {
+    "id": "count_copy_with",
+    "source": "Value:: I {return([count([]).copy().with(){return(value.add(1))},copy(count([])).with(){return(value.add(1))}])}",
+    "input": "x"
+  },
+  {
+    "id": "rejection_through_copy",
+    "source": "Value:: I {order=\"\";out=count({order=cat(order,\"S\");[\"a\"]}).take({order=cat(order,\"A\");1}).copy().coalesce({order=cat(order,\"D\");[\"fallback\"]}).first().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x"
+  },
+  {
+    "id": "legitimate_null_through_copy",
+    "source": "Value:: I {order=\"\";out=count([]).add(\"bad\").copy().with(){order=cat(order,\"W\");return(\"valid-null\")};return([out,order])}",
+    "input": "x"
+  },
+  {
+    "id": "copied_wrong_source_rejection",
+    "source": "Value:: I {order=\"\";out=copy(\"text\").count().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x"
+  },
+  {
+    "id": "count_copy_snapshot",
+    "source": "Value:: I {order=\"\";items=[\"a\",\"b\"];calls=0;out=copy(count({calls=num_add(calls,1);order=cat(order,\"S\");items})).add({order=cat(order,\"A\");items=[];1});return([out,order,calls,items])}",
+    "input": "x"
+  },
+  {
+    "id": "count_copy_needed_source_error",
+    "source": "Value:: I {items=[];return(copy(count({items=\"text\";push(items,\"a\")})).coalesce(\"masked\"))}",
+    "input": "x",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "noncreating_missing_source",
+    "source": "Value:: I {box={};out=[count(copy(box[\"missing\"])),copy(box[\"missing\"]).count()];return([out,count_keys(box)])}",
+    "input": "x"
+  },
+  {
+    "id": "repeated_count_after_copy",
+    "source": "Value:: I {return([count([\"a\"]).copy().count(),copy(count([\"a\"])).count(),count([]).count().copy().with(){return(\"ran\")}])}",
+    "input": "x"
+  },
+  {
+    "id": "function_copy_scope",
+    "source": "fn measure(items) {return(copy(count(items)).add(1))}\nValue:: I {items=\"caller\";return([measure([\"a\"]),items])}",
+    "input": "x"
+  }
+]

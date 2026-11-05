@@ -1,0 +1,154 @@
+{
+  "free_source_domains": {
+    "value": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4
+    ]
+  },
+  "receiver_source_domains": {
+    "value": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4
+    ]
+  },
+  "free_copied_domains": {
+    "value": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+    ]
+  },
+  "copied_receiver_domains": {
+    "value": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      2
+    ]
+  },
+  "copied_value_kinds": {
+    "value": [
+      false,
+      0,
+      "0",
+      null,
+      false,
+      0,
+      "0",
+      null
+    ]
+  },
+  "count_copy_zero": {
+    "value": [
+      [
+        1,
+        1
+      ],
+      ""
+    ]
+  },
+  "count_copy_with": {
+    "value": [
+      1,
+      1
+    ]
+  },
+  "rejection_through_copy": {
+    "value": [
+      null,
+      "S"
+    ]
+  },
+  "legitimate_null_through_copy": {
+    "value": [
+      "valid-null",
+      "W"
+    ]
+  },
+  "copied_wrong_source_rejection": {
+    "value": [
+      null,
+      ""
+    ]
+  },
+  "count_copy_snapshot": {
+    "value": [
+      3,
+      "SA",
+      1,
+      []
+    ]
+  },
+  "count_copy_needed_source_error": {
+    "error_contains": "binding_kind_mismatch"
+  },
+  "noncreating_missing_source": {
+    "value": [
+      [
+        0,
+        null
+      ],
+      0
+    ]
+  },
+  "repeated_count_after_copy": {
+    "value": [
+      null,
+      null,
+      null
+    ]
+  },
+  "function_copy_scope": {
+    "value": [
+      2,
+      "caller"
+    ]
+  },
+  "rejected_copy_logical": {
+    "value": [
+      null,
+      "S"
+    ]
+  },
+  "rejected_logical": {
+    "value": [
+      null,
+      "S"
+    ]
+  },
+  "valid_null_copy_logical": {
+    "value": [
+      "valid",
+      "DW"
+    ]
+  },
+  "valid_zero_copy_logical": {
+    "value": [
+      "valid",
+      "DW"
+    ]
+  }
+}

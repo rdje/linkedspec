@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8513,"lines":112,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-scalar-bound-receiver-copy.md","sha256":"2123b6fd98e6fc8b06673d15e6d3206cd828d8d759757a4e22f780546e38557f","type":"member"}
 {"bytes":4908,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-call-copy-observation-gap.md","sha256":"494f02a2f4b5c2144e22a7068eaec6ea38e19447fff25785ec331e6d963d06cf","type":"member"}
 {"bytes":5877,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-call-staged-projection.md","sha256":"272b53413b82f1e638e0c283f011ee56deec6783c296b40af4a5810fc408255e","type":"member"}
 {"bytes":6083,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-semantic-compile-failure-diagnostic-drift.md","sha256":"90f284d2c3348055538771b009955d51051df1a2f175805118ea9910421f302a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4756,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-action-edge-child-return-dispatch.md","sha256":"ed2a995cb674dcc05c325b3abca38edf360d765246bbd7245c9a977afaa96dc8","type":"member"}
 {"bytes":22850,"lines":230,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-action-parser-boundary-defects.md","sha256":"526026c797676c6b6eed055e491ee6710af201a56453f88cadcc3702a8a260da","type":"member"}
 {"bytes":3484,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-aggregate-selector-compile-rejection.md","sha256":"9968e38e2b2fef176f429f19445938d139e7c0abaf83299ff1d5b5f188275f93","type":"member"}
-{"bytes":8016,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-anonymous-capture-slice-family.md","sha256":"4aa55f8c7b698c7df694290d66b92d8aeabbbeaaf63500c004bbb3184fd3a496","type":"member"}

@@ -1,0 +1,7 @@
+Transcribed setup-failure summary; raw process stderr was not separately redirected.
+The initial producer stopped before workspace removal. This is not product RED evidence.
+
+Traceback (most recent call last):
+  File "docs/checkpoints/count-copy-source-assessment-2026-11-05/package_workspaces.py", line 35, in <module>
+    assert current.is_file() and current.read_bytes() == actual, relative
+AssertionError: docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/._Cargo.toml

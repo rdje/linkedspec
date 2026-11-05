@@ -1,0 +1,6 @@
+Transcribed setup summary; original process stderr was not separately redirected.
+The first catalog included its still-empty redirected progress output freeze-inputs-result.txt.
+The readonly review rejected that identity after the publisher printed progress.
+Initial publisher source and input-index.initial.json remain retained.
+The corrected publisher excludes its reports/catalog/progress outputs; SDK observations are unchanged.
+This is a publisher setup failure, not product RED.

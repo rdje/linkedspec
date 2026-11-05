@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3424,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-lua-compatibility.md","sha256":"fd46be9dae0b38119c2129e3df8465a574bfa4b24bfaf1a7e7a32b9f44001600","type":"member"}
 {"bytes":4943,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-method-source-gap.md","sha256":"acdec7ca6ddf1a063df3adbe6a69625ec06ccd566902be8af43b51f0b4d8bb9c","type":"member"}
 {"bytes":3123,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-rust-ordinary-compatibility.md","sha256":"4cba6710af7a8a0d472255f54b3a01b43a2e4ca484b213b47fc6df7935e6af47","type":"member"}
 {"bytes":7339,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-writer-endpoint-presence-authority.md","sha256":"f801517a2bdc7f4b454d4aa94488d0edcb236a2170189a53484270e6657ffbf1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3348,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-contract-v1.md","sha256":"5ac7c5180ae239c33052a2f3f690fa70a0b28dbcde6b28319c5c4faf2db0bbb5","type":"member"}
 {"bytes":4132,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-contract-v2.md","sha256":"df8608c0942b2fe5b918af01d6d3f45ab3e6ef5c27354008014ac461babd9664","type":"member"}
 {"bytes":4762,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-final-codeblock-normalization.md","sha256":"a7ac84fcdacd0dd0912293a93e155d705a601dfa18daa58531ce30113f1f515f","type":"member"}
-{"bytes":4504,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-flat-runtime-values.md","sha256":"97739e712c3fcfaa2e6af4a89c5f93f3763b1b220084792a695295818cdeaceb","type":"member"}

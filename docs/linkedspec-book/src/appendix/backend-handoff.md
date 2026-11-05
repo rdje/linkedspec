@@ -3560,3 +3560,22 @@ fix. All bounded primary73 outcomes are recorded; mandatory P1 assessment73.6.0,
 including Rust's owned String discrepancy, is next before unrelated selection.
 Declared5.4, registration, complete input custody, general isolation, source/context
 and full23.4 admission remain open.
+
+
+Count/copy/source assessment73.6.0 now freezes finite independent observations
+across the recorded routes/hosts. The remaining P1 repairs are explicit: Perl
+copy folding loses rejection before defaults/with; its distinct logical-producer
+route also loses Count rejection with or without copy. Rust's len delegation
+counts non-array Strings/Numbers/Booleans/nonempty Hashes where Count's source
+policy returns zero. Dart/Julia/installed Lua instead reject initial Boolean
+receiver Count at their scalar guard where the reference returns Number0.
+Produced/copied Boolean rejection already works and must remain.
+
+Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
+selection. Valid null/zero and copied-kind controls distinguish these gaps from
+blanket null suppression. Actual Rust native/emitted Cargo source, manifest and
+lock inputs precede first runs; verified input archives preserve them afterward.
+The readonly finite review rejects route/kind/input/archive corruptions. These
+are assessed repair obligations, not completed fixes or full portable admission;
+transitive/native custody, general isolation, registration and declared5.4 stay
+with their existing owners.

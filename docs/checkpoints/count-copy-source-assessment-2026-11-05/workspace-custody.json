@@ -1,0 +1,1054 @@
+{
+  "first_run_input_equality": [
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/Cargo.toml",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/Cargo.toml",
+      "sha256": "7e47b2c7a313d22a11ef53b049186256cb20efa1b1e1c560820aca5837512579"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/Cargo.lock",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/Cargo.lock",
+      "sha256": "bafacea532d5dee2b66d7be0d8535e78a4e69b6501e4bc10c4c5838543a70054"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/main.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/main.rs",
+      "sha256": "59088a702a7c246eed21ca174e75133b89682ae85bec7846d5afbdee5f4632aa"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "sha256": "8caa4f90ba7de4d7820eb12eba5144df9a2eddd8b5d74b341bea9b9d1f0e9644"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "tools/run_cargo_local.sh",
+      "path": "tools/run_cargo_local.sh",
+      "sha256": "d96a53c04e84a1af85652844b2d42caeac542c52a392a7f8b95ca35620485011"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "tools/project_data_env.sh",
+      "path": "tools/project_data_env.sh",
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "tools/project_data_run.sh",
+      "path": "tools/project_data_run.sh",
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/Cargo.toml",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/Cargo.toml",
+      "sha256": "98290addba85351a8f337521d578534ce836761448ad598fbac0900e0efd81ea"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/Cargo.lock",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/Cargo.lock",
+      "sha256": "2908d5a7a72d28c8e05bd58bf9c3e67da9072e753f8d7c8dbce18442696bf9a4"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/lib.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/lib.rs",
+      "sha256": "b1d55ccf593874a699c4086e3e083d1cce8291188259703906ee6f8d3df7156e"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/main.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/main.rs",
+      "sha256": "43d759409b9e78abbf0fbfc15bf857edc06654730808bc228856994d895d1953"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_wrong_source_rejection.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_wrong_source_rejection.rs",
+      "sha256": "95c4cb6df03177f873b0035b20aff7935a94c36bcf7f7bcd5b55079ff9ff3129"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/function_copy_scope.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/function_copy_scope.rs",
+      "sha256": "004d30004dbce3ec1288ace2c31f0d5888df1472c0defe04101148e127c1de4e"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_with.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_with.rs",
+      "sha256": "31d1b9095196eff829cb11414775cdf1a4b030cbaf0f4ba682c00f86dd9d90a1"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_snapshot.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_snapshot.rs",
+      "sha256": "9aba5bac4e884d58a4206ef28245054ea3ba135a67044f111bf421266a8c89a9"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_zero.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_zero.rs",
+      "sha256": "0fda0c0f23ff79f18f25cf96dbc69e5e9e7d9a7d096ea9804a0b6065638262af"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/free_source_domains.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/free_source_domains.rs",
+      "sha256": "fbe3ccd6cac35b23abe618dcc23fe530b451b1b1f90da3656963e16fb8f400cd"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/legitimate_null_through_copy.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/legitimate_null_through_copy.rs",
+      "sha256": "e828cbcd18ec0b03c71ae0e9b4987c3b613642a0addbf44ceed7f6aca5a22867"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_needed_source_error.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_needed_source_error.rs",
+      "sha256": "1610fa7ff4c5115c2ff0658d4c50f1d313aa505311eaf1906a63b9de90f31cbe"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/free_copied_domains.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/free_copied_domains.rs",
+      "sha256": "33544455f57d6769e26e5b7a45294208d8263fb7b121e2b674abc4825195f4c3"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/repeated_count_after_copy.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/repeated_count_after_copy.rs",
+      "sha256": "e7f4ce4dbebcced7bf178763c0ada1046739b7adb5b6005818cc8b83027c0deb"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_receiver_domains.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_receiver_domains.rs",
+      "sha256": "e4a22c1a543e28b26700255069e88692ac9751b5e3ec84ca3f161799b6b4c30a"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_value_kinds.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_value_kinds.rs",
+      "sha256": "c80308658cdbc42c389c1ce43cf079fad0e1c5e494741c7dfd342202934838da"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/receiver_source_domains.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/receiver_source_domains.rs",
+      "sha256": "e6237534066dea9fd117cc3ae26a0d9a174a2d5224c0b1ae9772a5aff4ebc09e"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/noncreating_missing_source.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/noncreating_missing_source.rs",
+      "sha256": "83b387962e1b0a49d15d51f765764f52b0d80a838d0f881a8aae391797ba6795"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/rejection_through_copy.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/rejection_through_copy.rs",
+      "sha256": "a93807e304b5b8c1561994183eb727a1e592f39aa97b40c7d6f11a7c6b056af4"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/main.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/main.rs",
+      "sha256": "59088a702a7c246eed21ca174e75133b89682ae85bec7846d5afbdee5f4632aa"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "sha256": "8caa4f90ba7de4d7820eb12eba5144df9a2eddd8b5d74b341bea9b9d1f0e9644"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "tools/run_cargo_local.sh",
+      "path": "tools/run_cargo_local.sh",
+      "sha256": "d96a53c04e84a1af85652844b2d42caeac542c52a392a7f8b95ca35620485011"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "tools/project_data_run.sh",
+      "path": "tools/project_data_run.sh",
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "tools/project_data_env.sh",
+      "path": "tools/project_data_env.sh",
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart.dart",
+      "sha256": "91fee1023d5b297edd81a95d12cfa2ce7e073a0e34a15657aa6c8f202f286c8d"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "sha256": "8caa4f90ba7de4d7820eb12eba5144df9a2eddd8b5d74b341bea9b9d1f0e9644"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "dart/pubspec.yaml",
+      "path": "dart/pubspec.yaml",
+      "sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "dart/pubspec.lock",
+      "path": "dart/pubspec.lock",
+      "sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "dart/.dart_tool/package_config.json",
+      "path": "dart/.dart_tool/package_config.json",
+      "sha256": "c29dbc1818523c70cdc790512a7c319b3bb42a96560e3e9eb2732c6cddb0a769"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "tools/run_dart_project_data.sh",
+      "path": "tools/run_dart_project_data.sh",
+      "sha256": "9841d085e05949a052b40ee535057365a7d6caa1e21a9fa0f1850cbf5866372b"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "tools/project_data_run.sh",
+      "path": "tools/project_data_run.sh",
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "tools/project_data_env.sh",
+      "path": "tools/project_data_env.sh",
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "pubspec.yaml",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/pubspec.yaml",
+      "sha256": "1e331952bccb891cef86fe31560b2cb480d447ff7de3158cf03dd9df91ea4485"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "pubspec.lock",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/pubspec.lock",
+      "sha256": "33321f72865786135398ae47ecdf51995295adbc139f179bf699e36f295aef75"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": ".dart_tool/package_config.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/.dart_tool/package_config.json",
+      "sha256": "32351a3d663eaecfa290520d8885cb3fe7c795dddd201ecc6bce40f34bfb1060"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_7.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_7.dart",
+      "sha256": "7fe60630e376a98c9eb557d23e9e50a032353516f0e9cf0f9e90439d99ff555f"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_6.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_6.dart",
+      "sha256": "a41dfec4665a2e7af4e89a0016593ee5b07e7d98802770162d90d7005180a268"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_10.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_10.dart",
+      "sha256": "7571bea4244f0aebf582518e0020931101ebbbc2973c5ae1a25ccbbfd7b5473f"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_1.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_1.dart",
+      "sha256": "7013228f075d573ff271e2118b41234a4fe20d76cb1e164908b37dc3d2fd37ea"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_0.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_0.dart",
+      "sha256": "a9dac5bc4d710522c36e52b81ec429c2ef3f6e1392a092a220f88e690a4d6a7c"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_11.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_11.dart",
+      "sha256": "8322d755d9b987104f8746bd2c82a29db871afc5b9bbc1120d146797cddff8ee"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_3.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_3.dart",
+      "sha256": "f91516b97253bc821290cb5f64396682d442962086f676ee1d6988831eca4267"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_12.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_12.dart",
+      "sha256": "3b6abbcefdde2c9e3bf14fc89301a82485980679291f1095e40b5df6af874540"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_13.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_13.dart",
+      "sha256": "b33274d8b5812c75a4fcaa1a34dee53698fd550fae9a9f9b985644bce2852044"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_2.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_2.dart",
+      "sha256": "f84e452fa104dd63a45f38efe815e27bcd10198e4f8063e1db4a8f89e89f7bf3"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_9.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_9.dart",
+      "sha256": "c572018ce377cbb49f9c2d6894022c1c6b6823e180049b056359f7be734a7faa"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_5.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_5.dart",
+      "sha256": "b883e54eb4b64dccb65de7eb7eab560a2c1278dbf8475572db9f134c8f325163"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_14.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_14.dart",
+      "sha256": "7d9af8d38de3249ad7eeede46aa0214955d70163c00fe3ec91d9a34cd9c2424d"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_4.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_4.dart",
+      "sha256": "01e0652b36a80b28b51bc808f8b3d6dd2a4b54418ef6258e16ac7f383677b087"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/case_8.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_8.dart",
+      "sha256": "72fe61c1490ff3dd738f8dd8058bf677bc3f579942cc34c164667abb61b6ddb1"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "bin/main.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/bin/main.dart",
+      "sha256": "db9622935ede98d64ae24d4d03f066bf40d9bb8e74111061467a46ad8ce6bbee"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "../dart.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart.dart",
+      "sha256": "91fee1023d5b297edd81a95d12cfa2ce7e073a0e34a15657aa6c8f202f286c8d"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "../cases.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/cases.json",
+      "sha256": "8caa4f90ba7de4d7820eb12eba5144df9a2eddd8b5d74b341bea9b9d1f0e9644"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/Cargo.toml",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/Cargo.toml",
+      "sha256": "411f2eae216c16c7c28d683fbb9268e86e13214286ac1676f46a8020f76ead69"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/Cargo.lock",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/Cargo.lock",
+      "sha256": "3d55d845454950fa8eceed0fbfb5ff328883e86a95b17ca0f71da41f6ce7753c"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/src/main.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/src/main.rs",
+      "sha256": "dcb6a31cdbdf8c59a6b877e24bb0556b381861128c362cf0dd4cc7af90df143b"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/cases.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/cases.json",
+      "sha256": "e247efde97fc5c1fcb6bdf4d6b4538a163bb13872f05762a270ed057a2997e45"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/Cargo.toml",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/Cargo.toml",
+      "sha256": "0a4746e5548258701bcf682075ce1e80b9e94ae4da960c62b643c93a89582d06"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/Cargo.lock",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/Cargo.lock",
+      "sha256": "0f5c633ca3efbb00a256c45b1c31f544f38357ab336bee4b0314da936cdff616"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/lib.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/lib.rs",
+      "sha256": "878f1200915833b2d329eebc36e2a55559f33a8da45b2372c132ac7ec0745a7d"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/main.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/main.rs",
+      "sha256": "ee0635d7901eddc85af2bee4a0000d4957c800022cb0529d5dccab16805b2c07"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/valid_zero_copy_logical.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/valid_zero_copy_logical.rs",
+      "sha256": "84988b926f9eae58f3f0fe3be236c94b8841f84cc804c6bd93c7d0b5544fd65e"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/valid_null_copy_logical.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/valid_null_copy_logical.rs",
+      "sha256": "ce29fefdb7ae35b554f754ad2dc5363b06a16ada10bac0317229bd0d778965fd"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/rejected_copy_logical.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/rejected_copy_logical.rs",
+      "sha256": "69f4848b42b8f134b388bdbf214959af8f0664d4975147c58ba5bc525b0e568d"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/rejected_logical.rs",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/rejected_logical.rs",
+      "sha256": "459942f7e90028c907bff17ab4315545f8cfa7a4884b44c3c277ac135a213833"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart.dart",
+      "sha256": "73b2ca345fb167b82b4207d5f828922c93ce432d552acf8911cd6fec17414524"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/cases.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/cases.json",
+      "sha256": "e247efde97fc5c1fcb6bdf4d6b4538a163bb13872f05762a270ed057a2997e45"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/pubspec.yaml",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/pubspec.yaml",
+      "sha256": "927f7543633bd2d3248c93af9bd594d16737f6401431294f9b308434235718f0"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/pubspec.lock",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/pubspec.lock",
+      "sha256": "cc95d949d08368f06a9f5e116d06f2cdd44137d56acf5fcb890baa6a8690d99c"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/.dart_tool/package_config.json",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/.dart_tool/package_config.json",
+      "sha256": "d099e2a4daddcc359b3da456b3d75358b179de87dbcd88cba08d32a47867f59b"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_1.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_1.dart",
+      "sha256": "153f8337c4faf262f6f0dfa044cdafca16fbff7fb39c94e7b504a2eb7950210a"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_0.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_0.dart",
+      "sha256": "121d954241a6c37cd1b9dada17933c14c754ea2f3ba92f30e2a55c4ac907f5ac"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_3.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_3.dart",
+      "sha256": "40a660cfd8436974bb82be881ae42d9e70612e48f2aac6938e904dd8d3bc712f"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_2.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_2.dart",
+      "sha256": "b994a43b0d7b89fb48a3afae5663f955b1157433c96c676b39f9a870f93ab224"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/bin/main.dart",
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/bin/main.dart",
+      "sha256": "1b6c5ccb5fedc693dc0bb45edd5d114fcc77e3f35ffff93712d2af54f48ea196"
+    }
+  ],
+  "retained_exported_metadata": [
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/._Cargo.toml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/._Cargo.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/._main.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/._cases.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "tools/._run_cargo_local.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "tools/._project_data_env.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-before-first-run.tar.gz",
+      "member": "tools/._project_data_run.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/._Cargo.toml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/._Cargo.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/._src",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/._generated",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/._lib.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/._main.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._copied_wrong_source_rejection.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._function_copy_scope.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._count_copy_with.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._count_copy_snapshot.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._count_copy_zero.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._free_source_domains.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._legitimate_null_through_copy.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._count_copy_needed_source_error.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._free_copied_domains.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._repeated_count_after_copy.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._copied_receiver_domains.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._copied_value_kinds.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._receiver_source_domains.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._noncreating_missing_source.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/._rejection_through_copy.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/._main.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/._cases.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "tools/._run_cargo_local.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "tools/._project_data_run.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-before-first-run.tar.gz",
+      "member": "tools/._project_data_env.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/._dart.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/._cases.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "dart/._pubspec.yaml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "dart/._pubspec.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "dart/.dart_tool/._package_config.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "tools/._run_dart_project_data.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "tools/._project_data_run.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-native-before-first-run.tar.gz",
+      "member": "tools/._project_data_env.sh",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "._pubspec.yaml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "._pubspec.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": ".dart_tool/._package_config.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "._lib",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_7.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_6.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_10.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_1.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_0.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_11.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_3.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_12.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_13.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_2.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_9.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_5.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_14.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_4.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "lib/._case_8.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "._bin",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "bin/._main.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "../._dart.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-before-first-run.tar.gz",
+      "member": "../._cases.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/._Cargo.toml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/._Cargo.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/src/._main.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/._cases.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/._Cargo.toml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/._Cargo.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/._src",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/._generated",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/._lib.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/._main.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/._valid_zero_copy_logical.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/._valid_null_copy_logical.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/._rejected_copy_logical.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/._rejected_logical.rs",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/._dart.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-native-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/._cases.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/._pubspec.yaml",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/._pubspec.lock",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/.dart_tool/._package_config.json",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/._lib",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/._case_1.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/._case_0.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/._case_3.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/._case_2.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/._bin",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-before-first-run.tar.gz",
+      "member": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/bin/._main.dart",
+      "sha256": "fa60966ee13034949586d41b0a999ad2a9f5f41a347b4b9bc6a9f14bc63c4a13"
+    }
+  ],
+  "sealed_workspaces": [
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native-workspace.tar.gz",
+      "files": {
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/Cargo.lock": "bafacea532d5dee2b66d7be0d8535e78a4e69b6501e4bc10c4c5838543a70054",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/Cargo.toml": "7e47b2c7a313d22a11ef53b049186256cb20efa1b1e1c560820aca5837512579",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native/src/main.rs": "59088a702a7c246eed21ca174e75133b89682ae85bec7846d5afbdee5f4632aa"
+      },
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-native",
+      "residue": false
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh-workspace.tar.gz",
+      "files": {
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/Cargo.lock": "2908d5a7a72d28c8e05bd58bf9c3e67da9072e753f8d7c8dbce18442696bf9a4",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/Cargo.toml": "98290addba85351a8f337521d578534ce836761448ad598fbac0900e0efd81ea",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_receiver_domains.rs": "e4a22c1a543e28b26700255069e88692ac9751b5e3ec84ca3f161799b6b4c30a",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_value_kinds.rs": "c80308658cdbc42c389c1ce43cf079fad0e1c5e494741c7dfd342202934838da",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/copied_wrong_source_rejection.rs": "95c4cb6df03177f873b0035b20aff7935a94c36bcf7f7bcd5b55079ff9ff3129",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_needed_source_error.rs": "1610fa7ff4c5115c2ff0658d4c50f1d313aa505311eaf1906a63b9de90f31cbe",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_snapshot.rs": "9aba5bac4e884d58a4206ef28245054ea3ba135a67044f111bf421266a8c89a9",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_with.rs": "31d1b9095196eff829cb11414775cdf1a4b030cbaf0f4ba682c00f86dd9d90a1",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/count_copy_zero.rs": "0fda0c0f23ff79f18f25cf96dbc69e5e9e7d9a7d096ea9804a0b6065638262af",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/free_copied_domains.rs": "33544455f57d6769e26e5b7a45294208d8263fb7b121e2b674abc4825195f4c3",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/free_source_domains.rs": "fbe3ccd6cac35b23abe618dcc23fe530b451b1b1f90da3656963e16fb8f400cd",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/function_copy_scope.rs": "004d30004dbce3ec1288ace2c31f0d5888df1472c0defe04101148e127c1de4e",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/legitimate_null_through_copy.rs": "e828cbcd18ec0b03c71ae0e9b4987c3b613642a0addbf44ceed7f6aca5a22867",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/noncreating_missing_source.rs": "83b387962e1b0a49d15d51f765764f52b0d80a838d0f881a8aae391797ba6795",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/receiver_source_domains.rs": "e6237534066dea9fd117cc3ae26a0d9a174a2d5224c0b1ae9772a5aff4ebc09e",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/rejection_through_copy.rs": "a93807e304b5b8c1561994183eb727a1e592f39aa97b40c7d6f11a7c6b056af4",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/generated/repeated_count_after_copy.rs": "e7f4ce4dbebcced7bf178763c0ada1046739b7adb5b6005818cc8b83027c0deb",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/lib.rs": "b1d55ccf593874a699c4086e3e083d1cce8291188259703906ee6f8d3df7156e",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh/src/main.rs": "43d759409b9e78abbf0fbfc15bf857edc06654730808bc228856994d895d1953"
+      },
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/rust-fresh",
+      "residue": false
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh-workspace.tar.gz",
+      "files": {
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/.dart_tool/package_config.json": "32351a3d663eaecfa290520d8885cb3fe7c795dddd201ecc6bce40f34bfb1060",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/.dart_tool/package_graph.json": "41c7e4c63231fd0e7c52ca945f997ee14a3db422eda1e197537bee77412a81c1",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/bin/main.dart": "db9622935ede98d64ae24d4d03f066bf40d9bb8e74111061467a46ad8ce6bbee",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_0.dart": "a9dac5bc4d710522c36e52b81ec429c2ef3f6e1392a092a220f88e690a4d6a7c",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_1.dart": "7013228f075d573ff271e2118b41234a4fe20d76cb1e164908b37dc3d2fd37ea",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_10.dart": "7571bea4244f0aebf582518e0020931101ebbbc2973c5ae1a25ccbbfd7b5473f",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_11.dart": "8322d755d9b987104f8746bd2c82a29db871afc5b9bbc1120d146797cddff8ee",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_12.dart": "3b6abbcefdde2c9e3bf14fc89301a82485980679291f1095e40b5df6af874540",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_13.dart": "b33274d8b5812c75a4fcaa1a34dee53698fd550fae9a9f9b985644bce2852044",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_14.dart": "7d9af8d38de3249ad7eeede46aa0214955d70163c00fe3ec91d9a34cd9c2424d",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_2.dart": "f84e452fa104dd63a45f38efe815e27bcd10198e4f8063e1db4a8f89e89f7bf3",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_3.dart": "f91516b97253bc821290cb5f64396682d442962086f676ee1d6988831eca4267",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_4.dart": "01e0652b36a80b28b51bc808f8b3d6dd2a4b54418ef6258e16ac7f383677b087",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_5.dart": "b883e54eb4b64dccb65de7eb7eab560a2c1278dbf8475572db9f134c8f325163",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_6.dart": "a41dfec4665a2e7af4e89a0016593ee5b07e7d98802770162d90d7005180a268",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_7.dart": "7fe60630e376a98c9eb557d23e9e50a032353516f0e9cf0f9e90439d99ff555f",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_8.dart": "72fe61c1490ff3dd738f8dd8058bf677bc3f579942cc34c164667abb61b6ddb1",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/lib/case_9.dart": "c572018ce377cbb49f9c2d6894022c1c6b6823e180049b056359f7be734a7faa",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/pubspec.lock": "33321f72865786135398ae47ecdf51995295adbc139f179bf699e36f295aef75",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh/pubspec.yaml": "1e331952bccb891cef86fe31560b2cb480d447ff7de3158cf03dd9df91ea4485"
+      },
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/dart-fresh",
+      "residue": false
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native-workspace.tar.gz",
+      "files": {
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/Cargo.lock": "3d55d845454950fa8eceed0fbfb5ff328883e86a95b17ca0f71da41f6ce7753c",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/Cargo.toml": "411f2eae216c16c7c28d683fbb9268e86e13214286ac1676f46a8020f76ead69",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native/src/main.rs": "dcb6a31cdbdf8c59a6b877e24bb0556b381861128c362cf0dd4cc7af90df143b"
+      },
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-native",
+      "residue": false
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh-workspace.tar.gz",
+      "files": {
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/Cargo.lock": "0f5c633ca3efbb00a256c45b1c31f544f38357ab336bee4b0314da936cdff616",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/Cargo.toml": "0a4746e5548258701bcf682075ce1e80b9e94ae4da960c62b643c93a89582d06",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/rejected_copy_logical.rs": "69f4848b42b8f134b388bdbf214959af8f0664d4975147c58ba5bc525b0e568d",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/rejected_logical.rs": "459942f7e90028c907bff17ab4315545f8cfa7a4884b44c3c277ac135a213833",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/valid_null_copy_logical.rs": "ce29fefdb7ae35b554f754ad2dc5363b06a16ada10bac0317229bd0d778965fd",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/generated/valid_zero_copy_logical.rs": "84988b926f9eae58f3f0fe3be236c94b8841f84cc804c6bd93c7d0b5544fd65e",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/lib.rs": "878f1200915833b2d329eebc36e2a55559f33a8da45b2372c132ac7ec0745a7d",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh/src/main.rs": "ee0635d7901eddc85af2bee4a0000d4957c800022cb0529d5dccab16805b2c07"
+      },
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/rust-fresh",
+      "residue": false
+    },
+    {
+      "archive": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh-workspace.tar.gz",
+      "files": {
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/.dart_tool/package_config.json": "d099e2a4daddcc359b3da456b3d75358b179de87dbcd88cba08d32a47867f59b",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/.dart_tool/package_graph.json": "05a6dcd0c80995c577814d1d2234b50247b672de0e43aabdfd6842718f455a97",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/bin/main.dart": "1b6c5ccb5fedc693dc0bb45edd5d114fcc77e3f35ffff93712d2af54f48ea196",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_0.dart": "121d954241a6c37cd1b9dada17933c14c754ea2f3ba92f30e2a55c4ac907f5ac",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_1.dart": "153f8337c4faf262f6f0dfa044cdafca16fbff7fb39c94e7b504a2eb7950210a",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_2.dart": "b994a43b0d7b89fb48a3afae5663f955b1157433c96c676b39f9a870f93ab224",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/lib/case_3.dart": "40a660cfd8436974bb82be881ae42d9e70612e48f2aac6938e904dd8d3bc712f",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/pubspec.lock": "cc95d949d08368f06a9f5e116d06f2cdd44137d56acf5fcb890baa6a8690d99c",
+        "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh/pubspec.yaml": "927f7543633bd2d3248c93af9bd594d16737f6401431294f9b308434235718f0"
+      },
+      "path": "docs/checkpoints/count-copy-source-assessment-2026-11-05/logical/dart-fresh",
+      "residue": false
+    }
+  ]
+}

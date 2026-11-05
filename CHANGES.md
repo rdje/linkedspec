@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — freeze Count copy/source assessment
+
+Independent finite SDK/Get/emitted observations own six concrete repairs: Perl plain-copy/logical rejection, Rust non-array source fallback and peer initial Boolean source guards. Valid-null/zero/kind/source/snapshot controls stay distinct. Actual Cargo-consumed inputs precede first runs; verified archives retain acquisition workspaces. Readonly route/kind/input/custody controls pass with setup qualifications preserved. Book/Knowledge/task/live align on repair order1,6,2,3,4,5; fresh context is needed before production1. No fixes, broad admission or publication are claimed by this assessment.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — guard installed Lua Count continuations
 
 Canonical Count joins common actual-kind guards through the existing namespace, preserving initial source/scalar-result rules and the mutation gate. Independent PUC5.5.1/LuaJIT2.1.1788460057 qualified RED becomes four-route GREEN. Frozen source/domain/observed errors, selected Count-length/copied-null index, loadfile and actual versions pass with empty final/compatibility stderr. Three runner lines register the normal. Book/Knowledge/task/live advance to mandatory P1 assessment73.6.0. Declared-host/full custody/isolation/admission remain separate; no broad suite or push.

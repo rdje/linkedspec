@@ -8,7 +8,7 @@ answers:
   - "which task owns Count copy source-domain and rejection effects"
   - "where is the existing count length normal and its expected fixture"
 date: 2026-11-05
-status: all bounded primary backend guards focused-checked on recorded routes/hosts; P1 Count/copy/source assessment next
+status: primary guards focused-checked; finite P1 assessment frozen and six concrete repairs remain
 tags: [count, array, numeric, guards, source, copy, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.34; count-guard-selection-intake.json.gz retains actual public19, canonical4/excluded18/typed-source3 AST-lowerings, exact source owner mechanisms and setup qualification."
 reverify: "Recover public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors/readiness/fresh loading separately. Historical activation/freeze writers one-shot never replay."
@@ -39,7 +39,10 @@ PUC5.5.1/LuaJIT2.1.1788460057 native/restored/plan/fresh controls with frozen
 source/domain/observed error fields and selected direct consumers. Existing
 namespace/scalar-result/mutation restrictions stay. Mechanism/reverify:
 [[lua-count-result-source-guards]]. All bounded primary73 outcomes are recorded;
-mandatory P1 assessment73.6.0 follows before unrelated selection.
+P1 assessment73.6.0 is now frozen. It owns Perl plain-copy1/logical6,
+Rust non-array source2 and peer Boolean source3/4/5 repairs before unrelated
+selection. Current diagnosis, actual first-run input custody and readonly review:
+[[count-copy-source-assessment]].
 
 ## Current Perl typed-source repair
 
@@ -49,4 +52,4 @@ The historical raw Count source failure is repaired for ordinary canonical free 
 
 ## Perl source/prefix repair record
 
-Perl Count continuations now use the existing actual-kind and rejection guards. Incompatible Array/Hash consumers skip operands and later with bodies while retaining valid source effects, numeric zero, scalar/default/Array bridges, legitimate null, source-once snapshots and function isolation. The initial Count non-array-zero fallback applies only outside existing emitted-result owners, preserving copied-null behavior and copy folding. Primary16 baseline10PASS6RED becomes16PASS; an intermediate16PASS/diagnosticRED is retained, and the corrected separate six-zero/one-null diagnostic passes. Three public lowerings confirm guards/rejection state; source18, Count/length5, selected producer5 and copied-null index1 pass. Runtime source errors stay structured at execution. Regenerate emitted Perl. The independent backend outcomes above now advance to mandatory P1 assessment73.6.0; P1 copy/source/rejection73.6, registration23.4.1, document pressure20.1 and full admission remain open. No complete family/portable/full-CI claim or push.
+Perl Count continuations now use the existing actual-kind and rejection guards. Incompatible Array/Hash consumers skip operands and later with bodies while retaining valid source effects, numeric zero, scalar/default/Array bridges, legitimate null, source-once snapshots and function isolation. The initial Count non-array-zero fallback applies only outside existing emitted-result owners, preserving copied-null behavior and copy folding. Primary16 baseline10PASS6RED becomes16PASS; an intermediate16PASS/diagnosticRED is retained, and the corrected separate six-zero/one-null diagnostic passes. Three public lowerings confirm guards/rejection state; source18, Count/length5, selected producer5 and copied-null index1 pass. Runtime source errors stay structured at execution. Regenerate emitted Perl. The independent backend outcomes above now advance to the concrete P1 repair order1,6,2,3,4,5 from assessment73.6.0; P1 copy/source/rejection73.6, registration23.4.1, document pressure20.1 and full admission remain open. No complete family/portable/full-CI claim or push.
