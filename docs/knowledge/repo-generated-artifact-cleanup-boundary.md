@@ -46,6 +46,7 @@ evidence_update_2026_10_11: "REPO-HYGIENE.16 retains the October11 parent/Rust m
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/REPO-HYGIENE.23/review.py"
 evidence_update_2026_10_24: "Hygiene22 retains the dated parent/Rust review with zero removals; independent population/lstat and five metadata denials pass. Metadata grants no disposal authority."
 evidence_update_2026_10_25: "Hygiene23 removes112969338880 allocated Rust bytes after fresh offline build/four examples, and119213043712 history-fixture bytes after complete deduplicated custody/restored readers. Archive55259061 bytes remains. Nested repos/caches/unresolved evidence stay protected; volume delta is not causal reclaim."
+evidence_update_2026_11_05: "TYPE-REFERENCE-BOOK.1.2.23.4.11 retains the dated named-scope review and actual direct producers/index input. Independent per-file metadata and five altered-evidence controls pass; zero removals. Readonly replay: bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-05/review.py. This metadata grants no disposal/liveness authority; caches/proof/other repositories remain protected."
 ---
 
 # Shared publication inputs and historical provenance

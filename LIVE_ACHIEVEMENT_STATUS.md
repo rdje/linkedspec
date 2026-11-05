@@ -6,7 +6,7 @@ Dart Count73.3 is implemented with focused checks passing. Independent Julia73.4
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.3 adds canonical Count to Dart actual-kind guards while preserving initial source/scalar-result rules. Native/restored/plan and independently compiled emission pass after original RED; frozen AST/domain, selected compatibility and fatal targeted analysis pass. Direct generated host inputs are retained; complete transitive custody/full23.4 remain separate. Rust String Count4 versus Perl0 stays explicitly73.6.0-owned.
+TYPE-REFERENCE-BOOK.1.2.23.4.11 completes the due bounded retention-only artifact review. Independent per-file metadata, five corruption controls and readonly replay pass; all artifacts/caches/proof stay retained. The latest-only cleanup date and dated evidence are committed before Julia73.4. Dart Count73.3 is implemented with focused checks passing; full admission remains separate.
 
 ## Next Action
 
@@ -14,6 +14,7 @@ Activate Julia Count73.4 from clean Git and baseline independently before repair
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.11 — bounded daily metadata review; all artifacts retained, independent controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — Dart Count actual-kind guards focused-checked; direct emitted host inputs retained.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — Rust Count actual-kind guards focused-checked; domain/custody qualifications owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.2 — exact canonical checkpoint published; fresh local/origin/SSH/API read-back agrees.

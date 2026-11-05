@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.11 — retain artifacts after daily review
+
+The due bounded artifact review retains every candidate. Independent path/byte metadata and five altered-evidence controls pass; source/index/snapshot and acquisition/readonly results are retained with a three-leg claim. Latest-only cleanup record, book and continuity point to the dated review. No disposal/liveness/reclamation, broad runtime or publication inference follows; Julia Count73.4 resumes next.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — guard Dart Count continuations
 
 Canonical Count joins actual-kind guards, preserving initial source consumption and scalar-result state. Original native/restored/plan and compiled-emitted RED becomes GREEN for authored guard/source-owner controls. Frozen source/domain fences, selected Count-length/copied-null index and fatal targeted analysis pass. Direct generated host inputs are captured before execution; full transitive custody/admission remain separate. Book/Knowledge/task/live pointers advance to independent Julia73.4 before mandatory P1 Count/copy assessment. No full suite or push.

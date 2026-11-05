@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — daily metadata review preserves useful artifacts
+
+The next clean boundary after Dart73.3 is over24h after the previous review. Reuse the accepted non-following scanner and independent scandir/lstat collector on named scopes; preserve every candidate because metadata does not prove disposability or liveness. The new one-shot producer omits earlier publication-message acquisition and retains its own complete direct input bodies/index alongside dated results. Historical observations remain immutable. Five report corruptions reject and separate readonly replay passes; no runtime verification campaign or cache purge follows.
+
 ## 2026-11-05 — keep Dart Count source permission separate from scalar guards
 
 Dart FluentChain admission omitted Count. A canonical Count role now joins kindGuardedResult; a one-use initial-source permission bypasses only the common container guard when no prior result owner applies. Keep scalarResult initialization/assignments and its guard unchanged, preserving existing source and copied-null rules. The frozen six-zero/one-null diagnostic and eighteen excluded ASTs precede production. Reuse the existing source-emitter temporary owner, capturing every module/manifest/runner plus resolved lock/config before execution. Independent emitted/native failures agree; final controls and selected compatibility pass. Candidate formatter separator changes are corrected and both actual epochs retained. No full transitive generation-input closure or broad admission follows.

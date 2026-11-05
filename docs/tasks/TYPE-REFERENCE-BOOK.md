@@ -20,7 +20,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.6` | `completed` | Bounded dated metadata and corruption controls pass; all artifacts/caches/proof retained. Publication custody7 is complete. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.11` | `completed` | November5 bounded daily metadata and corruption controls pass; all artifacts/caches/proof retained. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.73.4` | `pending` | Dart73.3 focused checks pass; independently baseline Julia Count guards before production. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
