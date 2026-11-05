@@ -472,6 +472,20 @@ remain. Source errors propagate, and copying preserves the captured Count result
 operand effects. These ordinary checks do not extend deferred callback syntax or establish full
 portable admission.
 
+Ordinary Perl also keeps that Count rejection through eager `.and(rhs,...)`,
+`.or(rhs,...)` and `.not()` links, with or without copy or a final `with`:
+
+```text
+count([]).take(1).and(true).with(){return("ran")}     # null: logical operand/body skipped
+count([]).take(1).copy().or(true)                     # null: copy does not restart rejection
+count([]).add("bad").and(true).not()                 # true: legitimate null is false
+count([]).and(true)                                  # false, a real Boolean
+```
+
+For a valid logical call, every operand still runs eagerly once from left to right,
+even when Count is zero or an earlier numeric operation returned null. Operand
+errors propagate. Malformed receiver shapes still reject before source effects.
+
 A projected copy can be stored directly. On Perl, this returns the normalized three-field snapshot followed by the unchanged source:
 
 ```text

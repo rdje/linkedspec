@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":22850,"lines":230,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-action-parser-boundary-defects.md","sha256":"526026c797676c6b6eed055e491ee6710af201a56453f88cadcc3702a8a260da","type":"member"}
 {"bytes":3484,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-aggregate-selector-compile-rejection.md","sha256":"9968e38e2b2fef176f429f19445938d139e7c0abaf83299ff1d5b5f188275f93","type":"member"}
 {"bytes":8016,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-anonymous-capture-slice-family.md","sha256":"4aa55f8c7b698c7df694290d66b92d8aeabbbeaaf63500c004bbb3184fd3a496","type":"member"}
 {"bytes":2999,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-arithmetic-result-source-guards.md","sha256":"55972cb0ffa572610f74f2b43c9b50f61fe5b8905b8b70e23a5c258b8050c6a1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3230,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalaref-legacy-path-parity.md","sha256":"a11180b1c03bf3f69de2a6ec85a8f1492e0da04b9db0aaabe488c179e5fd573d","type":"member"}
 {"bytes":6581,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-call-staged-projection.md","sha256":"8c084ae592a535de383337fab4aa10bf206d8d5142b78505baa9e3c060740dcf","type":"member"}
 {"bytes":5401,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-index-source-foundation.md","sha256":"e7086ed6843bc1f53f1f45275d20017b4db67214aeebf8ad6c0f3e8c526e31e1","type":"member"}
-{"bytes":4069,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-introspection-admission.md","sha256":"f79dde9e075aa40bc89dbb66d5731435a1842c22a65adaf4c298e43d3913dbe2","type":"member"}

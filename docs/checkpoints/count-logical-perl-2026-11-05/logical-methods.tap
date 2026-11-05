@@ -1,0 +1,51 @@
+ok 1 - logical receiver methods native has no thrown error
+ok 2 - logical receiver methods native has no handler error
+ok 3 - logical receiver methods native values/kinds/effects
+ok 4 - logical receiver methods fresh parser compiles
+ok 5 - logical receiver methods fresh has no thrown error
+ok 6 - logical receiver methods fresh values/kinds/effects
+ok 7 - ordinary method shapes before effects native has no thrown error
+ok 8 - ordinary method shapes before effects native has no handler error
+ok 9 - ordinary method shapes before effects native values/kinds/effects
+ok 10 - ordinary method shapes before effects fresh parser compiles
+ok 11 - ordinary method shapes before effects fresh has no thrown error
+ok 12 - ordinary method shapes before effects fresh values/kinds/effects
+ok 13 - valid prefix survives incompatible consumers native has no thrown error
+ok 14 - valid prefix survives incompatible consumers native has no handler error
+ok 15 - valid prefix survives incompatible consumers native values/kinds/effects
+ok 16 - valid prefix survives incompatible consumers fresh parser compiles
+ok 17 - valid prefix survives incompatible consumers fresh has no thrown error
+ok 18 - valid prefix survives incompatible consumers fresh values/kinds/effects
+# Subtest: and invalid source retains typed error through new methods
+    ok 1 - source-error fresh parser compiles
+    ok 2 - native rejects original helper arity
+    ok 3 - An object of class 'LinkedSpec::RuntimeDiagnosticOutput::Error' isa 'LinkedSpec::RuntimeDiagnosticOutput::Error'
+    ok 4 - typed helper error unchanged
+    ok 5 - original helper identified
+    ok 6 - original argument count identified
+    ok 7 - invalid source operands do not run
+    ok 8 - fresh rejects original helper arity
+    ok 9 - An object of class 'LinkedSpec::RuntimeDiagnosticOutput::Error' isa 'LinkedSpec::RuntimeDiagnosticOutput::Error'
+    ok 10 - typed helper error unchanged
+    ok 11 - original helper identified
+    ok 12 - original argument count identified
+    ok 13 - invalid source operands do not run
+    1..13
+ok 19 - and invalid source retains typed error through new methods
+# Subtest: not invalid source retains typed error through new methods
+    ok 1 - source-error fresh parser compiles
+    ok 2 - native rejects original helper arity
+    ok 3 - An object of class 'LinkedSpec::RuntimeDiagnosticOutput::Error' isa 'LinkedSpec::RuntimeDiagnosticOutput::Error'
+    ok 4 - typed helper error unchanged
+    ok 5 - original helper identified
+    ok 6 - original argument count identified
+    ok 7 - invalid source operands do not run
+    ok 8 - fresh rejects original helper arity
+    ok 9 - An object of class 'LinkedSpec::RuntimeDiagnosticOutput::Error' isa 'LinkedSpec::RuntimeDiagnosticOutput::Error'
+    ok 10 - typed helper error unchanged
+    ok 11 - original helper identified
+    ok 12 - original argument count identified
+    ok 13 - invalid source operands do not run
+    1..13
+ok 20 - not invalid source retains typed error through new methods
+1..20

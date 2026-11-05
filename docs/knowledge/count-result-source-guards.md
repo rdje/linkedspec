@@ -8,7 +8,7 @@ answers:
   - "which task owns Count copy source-domain and rejection effects"
   - "where is the existing count length normal and its expected fixture"
 date: 2026-11-05
-status: primary guards focused-checked; finite P1 assessment frozen and six concrete repairs remain
+status: primary/Perl copy/logical guards focused-checked; four P1 source repairs remain
 tags: [count, array, numeric, guards, source, copy, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.34; count-guard-selection-intake.json.gz retains actual public19, canonical4/excluded18/typed-source3 AST-lowerings, exact source owner mechanisms and setup qualification."
 reverify: "Recover public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors/readiness/fresh loading separately. Historical activation/freeze writers one-shot never replay."
@@ -45,6 +45,13 @@ selection. Current diagnosis, actual first-run input custody and readonly review
 [[count-copy-source-assessment]].
 
 ## Current Perl typed-source repair
+
+Current Count follow-up: Perl copy73.6.1 and logical73.6.6 retain rejection
+through copy and eager logical consumers with legitimate null/zero preserved.
+Their finite native/fresh proof is independent of the still-open Rust source2
+and peer Boolean source3/4/5 repairs. See [[perl-count-copy-rejection]] and
+[[perl-count-logical-rejection]]. Full admission and P2 compiler scaling remain
+separate; the original selection/assessment records below stay historical.
 
 Perl73.0 preserves canonical Count block sources through existing typed value ownership. Independent unchanged fourteen native/fresh groups6PASS8RED become14PASS, with a retained12PASS2RED intermediate exposing direct terminal receiver bypass. Seven values/seven structured needed-source errors now satisfy target; five healthy value observations and the already working receiver/default error remain exact. All fourteen ready/raw0/fallback0/unresolved0/warning-free and actually fresh-loaded; required errors occur at rule_handler_eval/execute_generated, not compilation. Add count to the existing contains/index_of typed block-argument branch. Canonical zero-extra/non-trailing terminal count on block_value delegates to the same typed free Count call, preserving the original receiver/source span. Legacy emitter, source-kind/non-array-zero/free-signature/copy/other-helper/context/parser/schema policies stay. Mutation-yielding Array sources count1; source-once snapshots and bound/function sources stay. Three final input-bound public lowerings retain identical original AST/source and eliminate raw-brace Count targets without warnings. Intermediate public transport0 still contained one raw receiver and its semantic assertion failed, explicitly retained without all-pass credit. Original/intermediate/final owner bytes/deltas and phase hashes are distinct. Nearest count-length5/index-producer15/push8=28, original eighteen source fences before/intermediate/final and owner-normal syntax pass. Three actual runtime fixture inputs/inline count-length-push programs/104 other activation inputs/phase identities exact, not complete transitive generation closure. Actual producers/templates/inputs/raw phases and intermediate qualification retained in count-block-source-perl-intake.json.gz. Book/card/map/target/task/roadmap/live/resume/history align; new normal14/source18/shared14 registration remains23.4.1-owned. Regenerate emitted Perl. Independent Perl source guards73.1 next, then peer guards and mandatory P1 copy/source73.6. General isolation/full23.4/pressure/input-custody/task-evidence separate; no full suite or push.
 

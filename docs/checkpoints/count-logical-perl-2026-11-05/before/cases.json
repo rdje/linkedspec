@@ -1,0 +1,140 @@
+[
+  {
+    "id": "rejected_copy_logical",
+    "source": "Value:: I {order=\"\";out=count({order=cat(order,\"S\");[\"a\"]}).take({order=cat(order,\"A\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "rejected_logical",
+    "source": "Value:: I {order=\"\";out=count({order=cat(order,\"S\");[\"a\"]}).take({order=cat(order,\"A\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "valid_null_copy_logical",
+    "source": "Value:: I {order=\"\";out=count([]).add(\"bad\").copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"valid\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "valid",
+      "DW"
+    ]
+  },
+  {
+    "id": "valid_zero_copy_logical",
+    "source": "Value:: I {order=\"\";out=count([]).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"valid\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "valid",
+      "DW"
+    ]
+  },
+  {
+    "id": "rejected_logical_without_with",
+    "source": "Value:: I {order=\"\";out=count({order=cat(order,\"S\");[]}).take({order=cat(order,\"A\");1}).or({order=cat(order,\"D\");true}).coalesce(\"fallback\");return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "rejected_not_with",
+    "source": "Value:: I {order=\"\";out=count({order=cat(order,\"S\");[]}).take({order=cat(order,\"A\");1}).not().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "valid_null_eager_logic",
+    "source": "Value:: I {order=\"\";out=count([]).add(\"bad\").and({order=cat(order,\"A\");true}).or({order=cat(order,\"B\");false}).not().with(){order=cat(order,\"W\");return(value)};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      true,
+      "ABW"
+    ]
+  },
+  {
+    "id": "logical_count_snapshot",
+    "source": "Value:: I {order=\"\";calls=0;items=[\"a\",\"b\"];out=count({calls=num_add(calls,1);order=cat(order,\"S\");items}).and({order=cat(order,\"R\");items=[];true},{order=cat(order,\"T\");true}).with(){order=cat(order,\"W\");return(value)};return([out,order,calls,items])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      true,
+      "SRTW",
+      1,
+      []
+    ]
+  },
+  {
+    "id": "copied_wrong_count_logical",
+    "source": "Value:: I {order=\"\";out=copy(\"text\").count().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_shape_preflight",
+    "source": "Value:: I {order=\"\";a=count({order=cat(order,\"S\");[]}).and().with(){order=cat(order,\"W\");return(\"ran\")};b=count({order=cat(order,\"T\");[]}).or();c=count({order=cat(order,\"U\");[]}).not({order=cat(order,\"A\");true});return([a,b,c,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_result_rejected_copy",
+    "source": "Value:: I {order=\"\";out=count([]).and({order=cat(order,\"D\");true}).take({order=cat(order,\"A\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "D"
+    ]
+  },
+  {
+    "id": "function_logical_scope",
+    "source": "fn measure(items) {return(count(items).take(1).and(true).with(){return(\"ran\")})}\nValue:: I {items=\"caller\";return([measure([\"a\"]),items])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "caller"
+    ]
+  },
+  {
+    "id": "needed_count_source_error",
+    "source": "Value:: I {items=[];return(count({items=\"text\";push(items,\"a\")}).and(true))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "needed_eager_logical_operand",
+    "source": "Value:: I {items=[];return(count([]).and({items=\"text\";push(items,\"a\")}))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  }
+]

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — preserve Count rejection through Perl logical producers
+
+Canonical Count chains with logical links retain the existing rejection flag instead of folding a rejected prefix into ordinary null. Each logical step reuses the typed eager producer; copy/no-copy and with/no-with retain source effects while skipping later rejected operands/bodies. Unchanged14 native/fresh groups move7PASS7RED to14PASS. Valid null/zero/real Bool/eager errors/source snapshots/function scope/malformed shapes stay; direct plain-copy3/logical-method20/source-fence16 and syntax/book checks pass. Exact phase owners/normal/fixture, actual pre-load emitted modules, public lowering and raw channels are retained locally. Rust/peer source repairs, registration/full custody/isolation/admission and P2 compiler-scaling73.7 remain separate. Regenerate emitted Perl.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — preserve Count rejection through Perl copy
 
 Canonical Count copy chains now use the existing rejection flag instead of generic copy folding. Rejected consumers skip later defaults/selectors/with; legitimate numeric-domain null and Number0 retain their behavior. New normal19 native/fresh groups, source fences18, Count/length5 and selected index-copy2 pass with syntax/book checks. First15 baseline has13PASS2RED; original longer added16 is interrupted, not a passing baseline. Its source/sample/public phase trace own P2 compiler-scaling73.7 after the six P1 Count repairs, before full23.4. Exact phase owner/normal/fixture/emitted modules/raw channels are retained locally; transitive/native custody, registration, logical folding/peers and full admission remain separate. Regenerate emitted Perl.

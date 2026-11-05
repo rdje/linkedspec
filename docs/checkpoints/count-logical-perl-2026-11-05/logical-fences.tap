@@ -1,0 +1,17 @@
+ok 1 - original source AST, lowering and diagnostics: and().take(1).with(){return("x")}
+ok 2 - original source AST, lowering and diagnostics: or().take(1).with(){return("x")}
+ok 3 - original source AST, lowering and diagnostics: not().take(1)
+ok 4 - original source AST, lowering and diagnostics: not(true,false).take(1)
+ok 5 - original source AST, lowering and diagnostics: and(value:true).take(1).with(){return("x")}
+ok 6 - original source AST, lowering and diagnostics: false.and().with(){return("x")}
+ok 7 - original source AST, lowering and diagnostics: false.or().with(){return("x")}
+ok 8 - original source AST, lowering and diagnostics: false.not(true).with(){return("x")}
+ok 9 - original source AST, lowering and diagnostics: false.and(right:true).with(){return("x")}
+ok 10 - original source AST, lowering and diagnostics: and(true){return("x")}
+ok 11 - original source AST, lowering and diagnostics: false.and(true){return("x")}
+ok 12 - original source AST, lowering and diagnostics: and(true).map_leaves(){return(value)}
+ok 13 - original source AST, lowering and diagnostics: false.and(true).map_leaves(){return(value)}
+ok 14 - original source AST, lowering and diagnostics: {|| return(and(false).take(1).with(){return("x")}) }
+ok 15 - original source AST, lowering and diagnostics: and(false).custom_logical().with(){return("x")}
+ok 16 - original source AST, lowering and diagnostics: false.not().custom_logical().with(){return("x")}
+1..16

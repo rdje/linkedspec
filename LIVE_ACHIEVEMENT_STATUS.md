@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT remains active. Perl Count copy-state73.6.1 is focused-checked; logical6, Rust2 and peer Boolean3/4/5 precede unrelated selection. P2 compiler-scaling73.7 follows the P1s before full23.4.
+PNT remains active. Perl Count copy73.6.1/logical73.6.6 are focused-checked; Rust2 and peer Boolean3/4/5 precede unrelated selection. P2 compiler-scaling73.7 follows the P1s before full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 preserves canonical Count rejection through ordinary copy/repeated copy using the existing flag. Nineteen native/fresh controls, source fences18, Count/length5 and selected index-copy2 pass. Valid null/zero/source/error/snapshot/function policies stay. Partial baseline first15 has two expected value failures; the longer added control16 was interrupted and replaced with a smaller control. Original source/trace/sample remain with P2 owner73.7; no result is inferred for interrupted16-19. Full custody/registration/isolation/admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 keeps canonical Count logical/copy links inside the persistent rejection dispatcher, reusing the typed eager producer. Unchanged14 native/fresh groups move7PASS7RED to14PASS; direct plain-copy3/logical-method20/source-fence16 pass. Valid null/zero/real Bool/eagerness/errors/snapshots/function/shape policies stay. Original/final owners, inputs, actual emitted modules, public lowering and raw channels survive in the leaf capsule. Full custody/registration/isolation/admission and P2 scaling remain separate.
 
 ## Next Action
 
-Activate73.6.6 from clean Git and repair logical producer rejection with and without copy; commit before Rust2 and peer Boolean3/4/5. Exact canonical4683555e is published; later local records need fresh proof at their normal publication boundary.
+Activate Rust73.6.2 from clean Git, check host RAM and restore Count Array-only source fallback without weakening copied/produced receiver guards. Capture actual Cargo-consumed source/manifest/lock and emitted module bodies before first execution; commit before peer Boolean3/4/5. Later local commits need fresh canonical proof at their normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — Perl Count logical rejection focused-checked; Rust source2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — Perl Count copy-state focused-checked; logical producer next; P2 compiler scaling owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — finite Count/copy/source assessment frozen; six concrete P1 repairs and exact next action retained.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — installed Lua Count guards focused-checked; primary73 leads to mandatory P1 source/copy assessment.
@@ -29,7 +30,6 @@ Activate73.6.6 from clean Git and repair logical producer rejection with and wit
 - TYPE-REFERENCE-BOOK.1.2.23.4.6 — bounded retention-only artifact review; independent metadata/five evidence controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.4.3 — backend/shared-fixture task-evidence routing; legacy/new-contract RED/repaired actual-index controls retained.
 - TYPE-REFERENCE-BOOK.1.2.20.1.10 — accepted ADR0139 archive/reference restoration committed at cd3b6adc with normal canonical receipt/hooks.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.1 — Perl Count source/actual-kind guards targeted-checked; Rust73.2 follows due maintenance.
 
 ## History
 

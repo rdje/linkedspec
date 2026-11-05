@@ -3580,6 +3580,13 @@ receiver/copy program exposed pre-execution compilation work; P2 owner73.7
 retains its original interrupted evidence and schedules bounded diagnosis/repair
 after the six P1 Count repairs, before full23.4.
 
+Perl73.6.6 now retains canonical Count rejection through eager logical producers
+with and without copy/with. Fourteen native/fresh groups pass, preserving valid
+null/zero, real Bool results, eager operands/errors, source snapshots, function
+scope and malformed-shape preflight. Regenerate emitted Perl. Rust73.6.2 and
+peer Boolean source73.6.3/.4/.5 are next; full admission and P2 scaling73.7 remain
+separate.
+
 Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
 selection. Valid null/zero and copied-kind controls distinguish these gaps from
 blanket null suppression. Actual Rust native/emitted Cargo source, manifest and

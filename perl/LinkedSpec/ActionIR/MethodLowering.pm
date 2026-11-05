@@ -5564,11 +5564,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
     || $ordinary_index_result_chain || $ordinary_count_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
    && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
+  # A logical producer must not turn a rejected Count prefix into valid null.
+  # Keep these canonical chains together, including any ordinary copy links.
+  my $guarded_count_logical_chain = $ordinary_count_result_chain
+   && (grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 
   # Logical and copy receivers consume generic typed values. Fold prefixes
   # into the same typed function producers so primitive kinds, source snapshots
   # and actual-result continuations do not depend on a guessed receiver family.
-  if (!$guarded_copy_chain
+  if (!$guarded_copy_chain && !$guarded_count_logical_chain
       && (grep { ($_->{method} // '') =~ /\A(?:and|or|not|copy)\z/ } @$calls)) {
    my $value_node = $receiver;
    my @prefix_calls;
@@ -5900,6 +5904,17 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $method = $call->{method} // '';
    my $source_args = $call->{args} || [];
    return undef unless ref($source_args) eq 'ARRAY';
+   if ($guarded_count_logical_chain && $method =~ /\A(?:and|or|not)\z/o) {
+    # Receiver shapes were checked before source effects. Reuse typed eager
+    # evaluation here; the surrounding chain alone owns rejection state.
+    my $expression = $lower_ast_logical_call_node->({
+     kind => 'call', name => $method, source_method => $method,
+     args => [{kind => 'raw_perl', source => $current_expr}, @$source_args],
+     source_span => $call->{source_span},
+    });
+    return undef unless defined($expression) && length($expression);
+    return [$expression, 'default_result'];
+   }
    if (defined($rejection_flag) && $method eq 'with') {
     return undef unless $call->{receiver_trailing_block_arg} && @$source_args == 1;
     my $expression = $lower_ast_with_trailing_block_call_node->({
@@ -6193,7 +6208,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $current_family = $logical_receiver ? 'scalar_result' : 'default_result';
    # A rejected consumer must not become an ordinary null input to a later
    # immediate with. Keep valid null selections and empty containers distinct.
-   my $rejection_flag = ($guarded_result_with_chain || $guarded_copy_chain)
+   my $rejection_flag = ($guarded_result_with_chain || $guarded_copy_chain || $guarded_count_logical_chain)
     ? '$__ls_free_default_rejected' : undef;
    my @guarded_steps;
    if (defined($rejection_flag)) {

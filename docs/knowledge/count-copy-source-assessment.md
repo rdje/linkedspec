@@ -10,7 +10,7 @@ answers:
   - "where are actual Cargo-consumed Count assessment source and lock inputs"
   - "why did the Count input packager reject a dot-underscore Cargo member"
 date: 2026-11-05
-status: finite independent assessment frozen; six concrete P1 repairs precede unrelated selection
+status: finite assessment frozen; Perl copy/logical focused-checked; four P1 source repairs remain
 tags: [count, copy, rejection, source, boolean, perl, rust, dart, julia, lua, custody]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0; docs/checkpoints/count-copy-source-assessment-2026-11-05/ retains independent SDK/Get/emitted observations, actual first-run input archives, explicit targets and readonly controlled review."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/count-copy-source-assessment-2026-11-05/review.py; capture/packaging writers are historical one-shot producers, never replay over original outputs."
@@ -22,7 +22,7 @@ source fallback73.6.2, and Dart/Julia/installed Lua initial Boolean source guard
 73.6.3/.4/.5. They are mandatory before unrelated selection; primary guard checks
 do not close them.
 
-Perl's canonical Count role is computed before folding, but guarded_copy_chain
+At the frozen assessment activation, Perl's canonical Count role is computed before folding, but guarded_copy_chain
 lists presence/membership/index only. Generic copy folding turns an earlier
 rejected prefix into an ordinary null value; defaults and with can then run.
 The separate logical/copy folding route also loses rejection before an eager and
@@ -58,3 +58,11 @@ actual input-file bodies; the initial packager failure is setup, not Count RED.
 Complete transitive/native input closure, general isolation and registration stay
 with their existing admission owners. Historical observations and original gaps
 remain unchanged by this assessment.
+
+Current repair state: Perl copy73.6.1 and logical73.6.6 are independently
+focused-checked. They retain the existing rejection flag through ordinary copy
+and eager logical links while legitimate null/zero still continue. See
+[[perl-count-copy-rejection]] and [[perl-count-logical-rejection]]. Rust source2
+and peer Boolean source3/4/5 remain mandatory before unrelated selection. Original
+assessment outputs and custody qualifications stay historical; P2 compiler
+scaling73.7 is separately owned after these P1s and before full23.4.

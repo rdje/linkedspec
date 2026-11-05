@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4069,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-introspection-admission.md","sha256":"f79dde9e075aa40bc89dbb66d5731435a1842c22a65adaf4c298e43d3913dbe2","type":"member"}
 {"bytes":9043,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-introspection-authority-map.md","sha256":"bc2f319dd0cf4e2eca78866a553adee25264104e1db6a0550eb2f56e4894ade0","type":"member"}
 {"bytes":6475,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-query-evaluator.md","sha256":"100f04900699bbc1e24dcdf9bb094821a8aec4ac8091abe072d56b6816138a1e","type":"member"}
 {"bytes":4771,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-repeated-binding-identity-gap.md","sha256":"7e147fe259d6d42c2d2f3f86cfddc91132fbe5e0bb9bba22eadcda2a4ccd44a4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8738,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-receiver-value-chains.md","sha256":"8fb03b10a6004b696a9278e82b1ec147c74df5fc90bfbf9dec23d814ad5b3836","type":"member"}
 {"bytes":3224,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-assignment-expression-closure.md","sha256":"54371372bc5a2ccf9cca43e9b558dd243a4d71068d915198b79c87c62f8b2a68","type":"member"}
 {"bytes":3852,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-attached-switch-split-ground-truth.md","sha256":"706f6ba7256cdae6ee1816615019c8a80cad11f551fd0437c9adb3e1d17f77e2","type":"member"}
-{"bytes":3765,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-attached-while-split-ground-truth.md","sha256":"1b68c6d609dc7334998c8f19d264caaaf4d201ee99e5fb85089950c48f61a8c8","type":"member"}

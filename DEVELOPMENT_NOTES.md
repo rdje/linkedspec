@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — Run Count logical links inside persistent rejection dispatch
+
+Generic and/or/not/copy folding materializes a rejected Count prefix as ordinary null before the logical producer, losing its rejection flag. A canonical Count/logical predicate now bypasses that folding and carries the existing flag with or without with. Each logical link reuses typed eager lowering over the captured current value and authored operands; malformed receiver preflight remains before effects. Numeric-domain null and Number0 remain valid logical inputs, so needed RHS errors still occur after false sources. New source, copied-kind, intermediate-Boolean, snapshot/function and seven RED controls pass on native/fresh. This extends neither truthiness nor free/method arity, contexts or copy depth. The original slower receiver/repeated-copy program remains separately owned by73.7; no scaling closure is inferred.
+
 ## 2026-11-05 — Count copy must carry rejection state separately from null
 
 The Count role already exists before generic logical/copy folding. Add it only to the existing guarded-copy predicate for chains without logical links; the actual-kind dispatcher then carries the per-chain flag across copy/default/select/with. Numeric-domain null leaves that flag clear and remains eligible for defaults/with. No null sentinel, copy-depth or initial-source policy changes. Native/fresh controls distinguish these paths. The oversized added receiver/repeated-copy source reveals costly pre-execution work: public parse_only/substitution reach bounded stops and a trace repeatedly enters MethodLowering/ValueExpr compatibility lowering. Exact algorithmic cause is unproven and P2 owner73.7 schedules diagnosis/repair; smaller final controls do not close it. Interrupted baseline16-19 receive no success credit. Logical producer73.6.6 remains separate.
