@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT publication recovery23.4.10 is complete through published4683555e. Rust Count73.2 is next; no runtime change was made during recovery.
+Rust Count73.2 is implemented with focused checks passing. Independent Dart73.3 is next, then peers and mandatory P1 Count/copy source-domain assessment73.6 before unrelated selection.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.10.2 retains exact default canonical success, the committed receipt, normal successful push and independent local/origin/SSH/API main agreement at4683555e. Hosted runs are empty under ADR0004. This later outcome record uses focused integrity checks and has no inherited exact-HEAD receipt.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.2 adds Count to Rust's existing direct/trailing-block actual-kind guards. Native/restored/generated-plan, compiled emitted, trace and selected compatibility controls pass with source/domain fences frozen before production. The legacy Rust String Count4 versus Perl0 is explicitly73.6.0-owned; complete generation-input custody23.4.2 and full23.4 remain open.
 
 ## Next Action
 
-Activate Rust Count73.2 from clean Git and independently baseline frozen controls before repairing demonstrated guards. Peers/P1 copy73.6 and advisory growth8 follow. Full23.4 and its independent prerequisites remain open; this outcome record is published at the next normal exact canonical boundary.
+Activate Dart Count73.3 from clean Git and baseline independently before repairing demonstrated guards. Keep focused per-leaf verification; full admission/registration/input custody follow feature coverage. Exact canonical4683555e is published; later local commits need fresh proof at the next normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — Rust Count actual-kind guards focused-checked; domain/custody qualifications owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.2 — exact canonical checkpoint published; fresh local/origin/SSH/API read-back agrees.
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — explicit PNT resume; fresh recovered access and publication prerequisite checkpoint.
 - TYPE-REFERENCE-BOOK.1.2.23.4.9 — director pause recorded; publication recovery owns the host rejection on explicit resume.

@@ -1,0 +1,947 @@
+[
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count().take(1).with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "a"
+                      }
+                    ],
+                    "kind": "array_literal"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "x"
+                  }
+                ],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count([\"a\"],\"x\").take(1)"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "name": "source",
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "string",
+                          "value": "a"
+                        }
+                      ],
+                      "kind": "array_literal"
+                    }
+                  }
+                ],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count(source:[\"a\"]).take(1)"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "name": "source",
+                    "value": {
+                      "items": [
+                        {
+                          "kind": "string",
+                          "value": "a"
+                        }
+                      ],
+                      "kind": "array_literal"
+                    }
+                  },
+                  {
+                    "name": "extra",
+                    "value": {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  }
+                ],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count(source:[\"a\"],extra:1).take(1)"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "count"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "items": [
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "array_literal"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "[\"a\"].count(1).with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    },
+                    {
+                      "kind": "number",
+                      "value": 2.0
+                    }
+                  ],
+                  "method": "count"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "items": [
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "array_literal"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "[\"a\"].count(1,2).with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "name": "value",
+                      "value": {
+                        "kind": "number",
+                        "value": 1.0
+                      }
+                    }
+                  ],
+                  "method": "count"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "items": [
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "array_literal"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "[\"a\"].count(value:1).with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "a"
+                      }
+                    ],
+                    "kind": "array_literal"
+                  },
+                  {
+                    "name": "extra",
+                    "value": {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  }
+                ],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count([\"a\"],extra:1).take(1)"
+  },
+  {
+    "ast": {
+      "Err": "expected ';' or newline between statements at byte 12"
+    },
+    "source": "count([\"a\"]){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Err": "expected ';' or newline between statements at byte 13"
+    },
+    "source": "[\"a\"].count(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "variable",
+                                  "name": "value"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "map_leaves"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "a"
+                      }
+                    ],
+                    "kind": "array_literal"
+                  }
+                ],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count([\"a\"]).map_leaves(){return(value)}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [],
+                  "method": "count"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "variable",
+                                  "name": "value"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "map_leaves"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "items": [
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "array_literal"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "[\"a\"].count().map_leaves(){return(value)}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "body_ast": {
+                "kind": "action_block",
+                "source": " return(count([\"a\"]).take(1).with(){return(\"x\")}) ",
+                "statements": [
+                  {
+                    "expr": {
+                      "args": [
+                        {
+                          "calls": [
+                            {
+                              "args": [
+                                {
+                                  "kind": "number",
+                                  "value": 1.0
+                                }
+                              ],
+                              "method": "take"
+                            },
+                            {
+                              "args": [
+                                {
+                                  "block": {
+                                    "statements": [
+                                      {
+                                        "expr": {
+                                          "args": [
+                                            {
+                                              "kind": "string",
+                                              "value": "x"
+                                            }
+                                          ],
+                                          "kind": "call",
+                                          "name": "return"
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "kind": "block_value"
+                                }
+                              ],
+                              "method": "with"
+                            }
+                          ],
+                          "kind": "fluent_chain",
+                          "receiver": {
+                            "args": [
+                              {
+                                "items": [
+                                  {
+                                    "kind": "string",
+                                    "value": "a"
+                                  }
+                                ],
+                                "kind": "array_literal"
+                              }
+                            ],
+                            "kind": "call",
+                            "name": "count"
+                          }
+                        }
+                      ],
+                      "kind": "call",
+                      "name": "return"
+                    }
+                  }
+                ]
+              },
+              "body_source": " return(count([\"a\"]).take(1).with(){return(\"x\")}) ",
+              "body_span": {
+                "end": 53,
+                "start": 3
+              },
+              "kind": "codeblock_literal",
+              "signature": {
+                "kind": "callable_signature",
+                "max_arity": 0,
+                "min_arity": 0,
+                "positional_params": [],
+                "rest_param": null,
+                "version": 1
+              },
+              "source_span": {
+                "end": 54,
+                "start": 0
+              },
+              "source_text": "{|| return(count([\"a\"]).take(1).with(){return(\"x\")}) }",
+              "version": 1
+            }
+          }
+        ]
+      }
+    },
+    "source": "{|| return(count([\"a\"]).take(1).with(){return(\"x\")}) }"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [],
+                  "method": "custom_count"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "a"
+                      }
+                    ],
+                    "kind": "array_literal"
+                  }
+                ],
+                "kind": "call",
+                "name": "count"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "count([\"a\"]).custom_count().with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [],
+                  "method": "count"
+                },
+                {
+                  "args": [],
+                  "method": "custom_count"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "items": [
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "array_literal"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "[\"a\"].count().custom_count().with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "items": [
+                      {
+                        "kind": "string",
+                        "value": "a"
+                      }
+                    ],
+                    "kind": "array_literal"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "call",
+                "name": "index_of"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "index_of([\"a\"],\"a\").take(1).with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "items": [],
+                    "kind": "array_literal"
+                  }
+                ],
+                "kind": "call",
+                "name": "is_empty"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "is_empty([]).take(1).with(){return(\"x\")}"
+  },
+  {
+    "ast": {
+      "Ok": {
+        "statements": [
+          {
+            "expr": {
+              "calls": [
+                {
+                  "args": [
+                    {
+                      "kind": "number",
+                      "value": 1.0
+                    }
+                  ],
+                  "method": "take"
+                },
+                {
+                  "args": [
+                    {
+                      "block": {
+                        "statements": [
+                          {
+                            "expr": {
+                              "args": [
+                                {
+                                  "kind": "string",
+                                  "value": "x"
+                                }
+                              ],
+                              "kind": "call",
+                              "name": "return"
+                            }
+                          }
+                        ]
+                      },
+                      "kind": "block_value"
+                    }
+                  ],
+                  "method": "with"
+                }
+              ],
+              "kind": "fluent_chain",
+              "receiver": {
+                "args": [
+                  {
+                    "kind": "string",
+                    "value": "abc"
+                  },
+                  {
+                    "kind": "string",
+                    "value": "a"
+                  }
+                ],
+                "kind": "call",
+                "name": "starts_with"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source": "starts_with(\"abc\",\"a\").take(1).with(){return(\"x\")}"
+  }
+]

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — guard Rust Count continuations
+
+Canonical free-one/zero-extra Count joins direct and trailing-block actual-kind guards. Incompatible operands and later with bodies stop; initial source behavior and prior result/copy guards remain. Independent original RED and final native/restored/plan/compiled-emitted/trace controls, frozen AST/domain fences, Perl source-owner oracle and selected Count-length/copied-null index checks pass. Rust Count("text")/"text".count() returning4 versus Perl0 is P1 assessment73.6.0-owned. First generated host-project input capture remains incomplete under23.4.2; no full admission or push. Book/Knowledge/task/live pointers advance to independent Dart73.3.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.10.2 — record verified publication recovery
 
 Exact clean4683555e passed default canonical CI and normal pre-push hooks; the successful fast-forward advanced main fromd3a26a94. Fresh local/origin/SSH/API identities agree; official Git Operations is operational and hosted runs are empty under ADR0004. Retain byte-exact compressed gate/push logs, receipt, acquisition source and dated read-back. Focused task/memory/history/Knowledge/book checks govern this later outcome record; it needs fresh proof at its own publication boundary. Rust Count73.2 resumes next; full23.4 remains open.

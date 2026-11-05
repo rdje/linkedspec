@@ -6,7 +6,7 @@
 - Status: `active` / remaining fluent-family and inter-type feature selection; full reference/admission open
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-11-04`
+- Last updated: `2026-11-05`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -1584,6 +1584,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `pending` / P2 mandatory direct-fixture capture-closure audit before admission/push
   Goal: Audit and repair declared direct fixture-input closure in earlier feature intake captures using their actual retained selected consumers and producers.
   Trigger: Custody67.6 confirms an inherited fixture-glob/changed-nearest-selector mismatch in five named67 packets. Its bounded companion closes only the thirteen specified edges. Reused earlier templates require an explicit review; no additional omission population or runtime regression is inferred without tools.
+  Count73.2 intake: Its focused host harness retains direct source/fixture inputs and actual native/fresh results but does not separately retain the standalone generated Cargo manifest/lock/module bodies from the first runs. Preserve that original scope qualification. Coordinate a complete new generation-input capture and broader dependency/toolchain closure with SESSION-STARTUP-READING.5 before full admission; do not present a later replay as recovered original inputs. Runtime guard implementation remains focused-checked; no global audit pivot during feature coverage.
   Priority/schedule: After ordinary feature coverage, with admission prerequisites and in coordination with SESSION-STARTUP-READING.5 claim/producer audit, before23.4 admission/final push. This owner remains accountable until any explicit transfer; no dirty-feature global audit pivot.
   Acceptance: Inventory actual selected direct consumers and literal/constructed fixture loaders for the earlier captures, beginning source-role families63–66 and expanding through their real dependencies. Compare against retained byte identities, not filename lists or summary receipts alone. Own and repair each demonstrated omission with immutable companions/historical recovery and explicit original-observation limits; re-run focused behavior only where missing freshness or changed evidence requires it. Use distinguishing missing-input/provenance controls, retain actual producers/all direct artifact inputs and verify retrieval. Preserve original captures/results/history, black-box dependency boundaries and existing backend policies. Coordinate broader transitive/toolchain/producer census with its canonical owner; do not claim it from a direct-input inventory. Close only after verified repair and designated canonical proof.
   Planned verification tier: canonical.

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — distinguish initial Count fallback from guarded Count results
+
+Both Rust guard admissions omitted Count despite preserved typed Count/take/with IR. Admit the canonical role, then consume an initial Count through its existing source policy only when no prior result owner already supplies kind guards. Repeated Count-result consumption remains Array-kind checked. Native trace and independently compiled emission distinguish operand/body rejection from legitimate null-with behavior. Freeze the observed Rust domain before production: String text yields4 where the reference yields0; mandatory73.6.0 owns that discrepancy. Initial null AST and Perl-domain expectations were observer bootstrap qualifications, not product failures. Direct inputs and actual outputs survive in per-phase archives and lossless compressed logs; first generated Cargo manifest/lock/module bodies were not separately captured and23.4.2 coordinates full custody before admission. No verification campaign or full gate is added to this focused slice.
+
 ## 2026-11-05 — bind publication proof to the actual pushed checkpoint
 
 Recovery publishes4683555e with exact default canonical proof and normal hooks, then records the external event in a focused unit. The outcome record does not inherit that receipt. The receipt command checks committed HEAD/tree identity; pre-push separately enforces clean worktree/index/untracked state. Phase0 uses prove directly with inherited output; inspect execution state and wait for the complete result rather than treating quiet output as failure. An early query before finalization rejected the old receipt; the completed gate and fresh check passed before the successful push. Prior server/publickey causes remain unconfirmed; no authentication change or feature admission follows.

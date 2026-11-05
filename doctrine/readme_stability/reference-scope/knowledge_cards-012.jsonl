@@ -1,4 +1,5 @@
-{"member_count":119,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":120,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6422,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-channel2-value-read-split.md","sha256":"f1a9b5b866490e4d578e1ec5dbbab12697625c5f4f10c8303bd24d116db50d8b","type":"member"}
 {"bytes":2822,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-colon-scalar-slot-removal-audit.md","sha256":"c75a9ff543975ac23d06637f75c65d5c87de91f069b163b610cc5f90eb549925","type":"member"}
 {"bytes":4162,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-comparison-call-surface-split.md","sha256":"ad6c00053d1514b50edd767b4d54b3a941006b0da96a09fbebd6b38a2f08105e","type":"member"}
 {"bytes":3967,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-composability-audit-boundaries.md","sha256":"42c1b57f5a4b3394bf5a19b2145195675ecc7687bfafbaa1d97f6e5b2c6cb6d1","type":"member"}

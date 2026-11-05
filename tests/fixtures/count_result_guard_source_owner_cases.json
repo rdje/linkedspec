@@ -1,0 +1,8 @@
+[
+  {
+    "id": "count_results_keep_prior_kind_guard",
+    "source": "Value:: I {return([count([\"a\"]).count(),[\"a\"].count().count(),count([]).count().with(){return(\"ran\")},{undef}.count(),{undef}.copy().count()])}",
+    "input": "x",
+    "expected": [null, null, null, 0, null]
+  }
+]

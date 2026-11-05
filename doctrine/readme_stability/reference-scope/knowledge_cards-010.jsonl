@@ -21,6 +21,7 @@
 {"bytes":3138,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-index.md","sha256":"5b879a32fe7c5217f240b3a26889b2125143667a4cfac56dc9a067fd868fb761","type":"member"}
 {"bytes":2634,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-presence.md","sha256":"33a696e32b7f5a8e8f01834d8d30c8e93878ffc042e2bb6cfebc240cd47d843d","type":"member"}
 {"bytes":7160,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-core-compilation-boundaries.md","sha256":"d99270bb4a408ffce1197d76be3b1347d057f90844d0c733fdbb242b40416ff4","type":"member"}
+{"bytes":3099,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.2","path":"docs/knowledge/rust-count-result-source-guards.md","sha256":"ab58c210bce4bd905a5c6d47fc2a0080c986bde13f6eabcb6d48dec56c02dba4","type":"member"}
 {"bytes":4403,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-cursor-rewind-number-results.md","sha256":"3de30a20d870138f10d2c57cf2ad33f0e1ca698a538abe44182ba1000e594561","type":"member"}
 {"bytes":5825,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-declare-type-token-rule-scope.md","sha256":"2bc1d9e902563c149be9374d049cd5d2520780ca345a09f09cf80a0be3ce8377","type":"member"}
 {"bytes":3626,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-definedness-result-source-guards.md","sha256":"c6e59a5d93ca05f4bfac6d1d0ec9105204c47f2706c559f9e952e4d2e80a1ebb","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4771,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-repeated-binding-identity-gap.md","sha256":"7e147fe259d6d42c2d2f3f86cfddc91132fbe5e0bb9bba22eadcda2a4ccd44a4","type":"member"}
 {"bytes":8155,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-runtime-observation.md","sha256":"832a7a23abec87287b1e135b4a02f1aeb320ce54a45c0245024072a9e68fc986","type":"member"}
 {"bytes":6833,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-static-projection.md","sha256":"444711d26669f79decf49aed2b1067539fc7e6badd2b186595dea7b67ebbcf7c","type":"member"}
-{"bytes":8187,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-simple-spec-structural-owners.md","sha256":"2ab56ad83f7d27c985ea7e580c327af9896ec83ff2b55daf21474db234bea220","type":"member"}

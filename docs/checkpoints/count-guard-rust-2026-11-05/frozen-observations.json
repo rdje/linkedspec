@@ -1,0 +1,23 @@
+{
+  "baseline_head": "c64c74bb1e908da89ab7ef37a2e616e9299b5b33",
+  "domain": [
+    0,
+    4,
+    0,
+    0,
+    4,
+    0,
+    null
+  ],
+  "engine_blob": "008d6f1c064904ed30bd635c521dbfcb9d806657",
+  "inputs": {
+    "docs/checkpoints/count-guard-rust-2026-11-05/baseline-head.txt": "88700e24c70fc9f430fbeb73cbc6db1c9813bc401b00722142c1648eaabe5b43",
+    "docs/checkpoints/count-guard-rust-2026-11-05/baseline-native.log": "4bafc5db150f8caf60780b2dcc1a243f36668964d017c07f0bc57fd066f878fd",
+    "docs/checkpoints/count-guard-rust-2026-11-05/freeze.sh": "f22d199f97364c2aff1c8e95f79e1c7b42e754468f5ab15e70a7d38e2e6a4ba8"
+  },
+  "outputs": {
+    "tests/fixtures/count_result_guard_rust_ast.json": "6b82a6356d8ec992549ea6afb34d2d7ee91fadc1a6ae8779e9ead6ec8362239e",
+    "tests/fixtures/count_result_guard_rust_domain.json": "835680865f4761234cc65f71ac1ec3211643cfb8ec3c82b616da23e04400a286"
+  },
+  "source_fence": "tests/fixtures/count_result_guard_rust_ast.json"
+}

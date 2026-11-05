@@ -3514,3 +3514,18 @@ emitter stays; fourteen native/fresh groups, nearest28/source18/syntax and three
 public typed lowerings pass. An intermediate12PASS2RED receiver bypass is retained
 and resolved. Regenerate emitted Perl. Count source guards73.1 then peers and
 P1 copy/source assessment73.6 remain before unrelated selection/admission.
+
+Perl73.1 and Rust73.2 Count source/prefix guards are implemented with focused
+checks. Rust native/restored/generated-plan and independently compiled emitted
+controls preserve source snapshots/errors, zero, compatible bridges and legitimate
+null-with behavior while rejecting incompatible consumers before operands and
+later bodies. Prior Count results retain their kind guards; initial Count source
+fallbacks stay. Rebuild Rust applications/runtime for the repair.
+
+Rust's unchanged diagnostic returns4 for both `count("text")` and
+`"text".count()`, against the Perl reference's0; mandatory P1 assessment73.6 owns
+resolution before unrelated selection. The Rust capsule retains direct inputs
+and actual outputs but not the first host crates' generated manifest/lock/module
+bodies; admission input-custody23.4.2 owns that qualification. Independent Dart73.3
+is next. Registration, general isolation, source/context and full23.4 admission
+remain open.

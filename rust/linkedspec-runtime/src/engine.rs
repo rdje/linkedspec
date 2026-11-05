@@ -6523,7 +6523,7 @@ impl Engine {
                     return self
                         .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
                 }
-                if self.is_ordinary_computed_read(receiver)
+                let kind_guarded_source = self.is_ordinary_computed_read(receiver)
                     || self.is_explicit_push_result_source(receiver)
                     || Self::is_explicit_set_result_source(receiver)
                     || Self::is_free_default_result_source(receiver)
@@ -6539,10 +6539,29 @@ impl Engine {
                     || Self::is_ordinary_index_result_chain(receiver, calls)
                     || Self::is_ordinary_has_key_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
-                    || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"))
-                {
+                    || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"));
+                let count_chain = Self::is_ordinary_count_result_chain(receiver, calls);
+                if kind_guarded_source || count_chain {
                     let mut current = self.eval_expr(receiver, ctx, rule_label)?;
                     let mut remaining = calls.as_slice();
+                    // An initial Count retains its existing source-domain fallback.
+                    // Already produced/selected/copied results keep their kind guard.
+                    if count_chain
+                        && !kind_guarded_source
+                        && !Self::is_ordinary_count_result_chain(receiver, &[])
+                        && calls
+                            .first()
+                            .is_some_and(|first| first.method == "count" && first.args.is_empty())
+                    {
+                        current = self.eval_receiver_dynamic_value_chain_call(
+                            current,
+                            &calls[0],
+                            calls.len() == 1,
+                            ctx,
+                            rule_label,
+                        )?;
+                        remaining = &calls[1..];
+                    }
                     // A leading presence receiver accepts null and evaluates its key.
                     // Its numeric result then enters the persistent kind guard.
                     if Self::is_ordinary_has_key_result_chain(receiver, calls)
@@ -7196,6 +7215,14 @@ impl Engine {
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
+        let count_chain = Self::is_ordinary_count_result_chain(receiver, calls);
+        let count_source_prefix = count_chain
+            && !kind_guarded_value
+            && !Self::is_ordinary_count_result_chain(receiver, &[])
+            && calls
+                .first()
+                .is_some_and(|first| first.method == "count" && first.args.is_empty());
+        kind_guarded_value |= count_chain;
 
         for (index, call) in calls.iter().enumerate() {
             if Self::is_receiver_with_trailing_block_call(call)
@@ -7212,6 +7239,7 @@ impl Engine {
             // Guard actual selected/copied kinds and scalar producers before
             // incompatible container operands, preserving the completed prefix.
             if (reduced_value || logical_prefix || kind_guarded_value)
+                && !(index == 0 && count_source_prefix)
                 && call.method != "copy"
                 && !Self::is_generic_receiver_value_method(&call.method)
             {
@@ -8817,6 +8845,55 @@ impl Engine {
             "starts_with" | "ends_with" | "contains_substr" | "matches"
         ) && first.args.len() == 1
             && ordinary_args(&first.method, &first.args)
+    }
+
+    // Count retains its source domain while its numeric result joins kind guards.
+    // Only canonical free-one calls and zero-operand prefixes qualify.
+    fn is_ordinary_count_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        if let Expr::Call { name, args } = receiver
+            && name == "count"
+            && args.len() == 1
+            && matches!(
+                &args[0],
+                Arg::Positional(
+                    Expr::Variable { .. }
+                        | Expr::NumberLiteral { .. }
+                        | Expr::StringLiteral { .. }
+                        | Expr::BooleanLiteral { .. }
+                        | Expr::Undef
+                        | Expr::ArrayLiteral { .. }
+                        | Expr::HashLiteral { .. }
+                        | Expr::BlockValue { .. }
+                        | Expr::Call { .. }
+                        | Expr::FluentChain { .. }
+                        | Expr::ReceiverMutationChain { .. }
+                        | Expr::IndexedVar { .. }
+                        | Expr::NestedAccess { .. }
+                        | Expr::ValueAccess { .. }
+                        | Expr::AssignScalar { .. }
+                        | Expr::AssignArrayAppend { .. }
+                        | Expr::AssignHashIndex { .. }
+                        | Expr::AssignNestedAccess { .. }
+                        | Expr::CodeblockLiteral(_)
+                )
+            )
+        {
+            return true;
+        }
+        calls
+            .first()
+            .is_some_and(|first| first.method == "count" && first.args.is_empty())
     }
 
     // Membership retains numeric flags, equality and nullable-source behavior.

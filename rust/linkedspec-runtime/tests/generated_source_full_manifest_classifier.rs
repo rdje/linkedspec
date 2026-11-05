@@ -356,3 +356,98 @@ fn classify_all_generated_source_manifest_cases() {
         failures.len()
     );
 }
+
+// TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — focused fresh Count proof, independent of
+// the full-manifest classifier above. Reuse its managed temporary-project owner.
+#[test]
+fn count_result_guards_in_independently_compiled_emitted_source() {
+    let mut cases: Vec<Value> = serde_json::from_str(include_str!(
+        "../../../tests/fixtures/count_result_guard_cases.json"
+    ))
+    .unwrap();
+    let source_owners: Vec<Value> = serde_json::from_str(include_str!(
+        "../../../tests/fixtures/count_result_guard_source_owner_cases.json"
+    ))
+    .unwrap();
+    cases.extend(source_owners);
+    let project = TempProject::new();
+    let generated_dir = project.root.join("src/generated");
+    fs::create_dir_all(&generated_dir).unwrap();
+    let mut library = String::new();
+
+    for row in &cases {
+        let name = row["id"].as_str().unwrap();
+        assert!(name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_'));
+        let parsed = parse_spec_with_user_functions(row["source"].as_str().unwrap()).unwrap();
+        validate(&parsed).unwrap();
+        let compiled = compile(&parsed).unwrap();
+        let generated =
+            emit_rust_source_v2(&compiled, &format!("count-guard/{name}.spec")).unwrap();
+        let input = serde_json::to_string(row["input"].as_str().unwrap()).unwrap();
+        let assertion = if let Some(error) = row["expected_error"].as_str() {
+            let error = serde_json::to_string(error).unwrap();
+            format!(
+                "let error = actual.expect_err(\"required Count source error\");\nassert!(error.to_string().contains({error}), \"{{error}}\");"
+            )
+        } else {
+            let expected =
+                serde_json::to_string(&serde_json::to_string(&row["expected"]).unwrap()).unwrap();
+            format!(
+                "let expected: serde_json::Value = serde_json::from_str({expected}).unwrap();\nassert_eq!(actual.unwrap(), expected);"
+            )
+        };
+        let module = format!(
+            "{generated}\n#[cfg(test)] mod count_guard {{\n#[test] fn expected_result() {{\nlet actual = super::execute({input});\nprintln!(\"COUNT_GUARD_FRESH {name} {{:?}}\", actual);\n{assertion}\n}}\n}}\n"
+        );
+        fs::write(generated_dir.join(format!("{name}.rs")), module).unwrap();
+        library.push_str(&format!(
+            "#[path = \"generated/{name}.rs\"] pub mod guard_{name};\n"
+        ));
+    }
+    fs::write(project.root.join("src/lib.rs"), library).unwrap();
+    let output = project
+        .cargo(&["test", "--lib", "--", "--nocapture", "--test-threads=1"])
+        .expect("run focused independently compiled Count modules");
+    eprintln!("COUNT_GUARD_FRESH_OUTPUT {}", cargo_failure_detail(&output));
+    assert!(
+        output.status.success(),
+        "fresh emitted Count controls failed"
+    );
+}
+
+#[test]
+fn count_result_guard_native_trace() {
+    use linkedspec_core::trace::{TraceConfig, TraceLevel};
+
+    let cases: Vec<Value> = serde_json::from_str(include_str!(
+        "../../../tests/fixtures/count_result_guard_cases.json"
+    ))
+    .unwrap();
+    let project = TempProject::new();
+    let mut observations = Vec::new();
+    for name in ["free_guard_before_with", "receiver_guard_before_with"] {
+        let row = cases.iter().find(|row| row["id"] == name).unwrap();
+        let parsed = parse_spec_with_user_functions(row["source"].as_str().unwrap()).unwrap();
+        validate(&parsed).unwrap();
+        let compiled = compile(&parsed).unwrap();
+        eprintln!(
+            "COUNT_GUARD_COMPILED {name} {}",
+            serde_json::to_string(&compiled).unwrap()
+        );
+        let path = project.root.join(format!("{name}.trace"));
+        let actual = Engine::new(compiled)
+            .execute_with_trace(
+                row["input"].as_str().unwrap(),
+                TraceConfig::enabled(TraceLevel::DEBUG).with_trace_file(path.clone()),
+            )
+            .unwrap();
+        eprintln!(
+            "COUNT_GUARD_TRACE {name}\n{}",
+            fs::read_to_string(path).unwrap()
+        );
+        observations.push((name, actual, json!([row["expected"].clone()])));
+    }
+    for (name, actual, expected) in observations {
+        assert_eq!(actual, expected, "traced Count {name}");
+    }
+}
