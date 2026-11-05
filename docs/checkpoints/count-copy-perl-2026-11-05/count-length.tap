@@ -1,0 +1,6 @@
+ok 1 - count and length continuations have no runtime error
+ok 2 - native numeric results, kinds, order and scope
+ok 3 - fresh count/length parser compiles
+ok 4 - fresh count/length execution has no thrown error
+ok 5 - fresh numeric results, kinds, order and scope
+1..5

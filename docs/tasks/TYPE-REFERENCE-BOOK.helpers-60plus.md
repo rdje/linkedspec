@@ -1412,16 +1412,24 @@
   Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — freeze Count copy and source repair assessment
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1`
-  Status: `pending` / P1 Count rejection propagation through Perl copy
+  Status: `completed` / bounded Count copy rejection focused-checked
   Goal: Preserve rejected Count continuation state across copy/default/select/with without suppressing legitimate null.
   Reproduction/impact: Assessment73.6.0 current Get/fresh source count(...).take(...).copy().coalesce(...).first().with runs default/body effects SDW after the source S, despite skipping rejected take operand A. Count/count/copy/with runs its final body too. Legitimate count.add-invalid.copy.with must still run, and copied Count zero remains Number. Ready1/raw0/fallback0/unresolved0 and actual warning-free fresh execution distinguish production from setup.
   Priority/schedule: Immediately after assessment73.6.0, before other Count repair children and unrelated selection; own until verified closure.
   Dependencies: Committed73.6.0, frozen73, ADR0138 and current Perl copied-result/rejection authority.
   Acceptance: Use retained emitted source/public substitution to locate the exact lost-state mechanism, freeze original RED and distinguishing legitimate-null/zero/copy controls, then make the smallest producer/guard repair. Preserve source-once effects/errors/snapshots, existing source/free-signature and copy-depth rules, function scope, invalid shape/context/parser/schema boundaries. Create no generic null-is-rejection policy.
-  Planned verification tier: focused
-  Planned focused checks: Exact Count/copy rejection RED/GREEN, valid-null/zero/source controls and nearest Count/copied-result normal plus owner syntax/book/Knowledge/history/memory/normal hooks; no broad suite.
-  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Finite authored rejection/effect and preservation controls, no whole-family/population claim.
+  Verification tier: `focused`
+  Focused checks: Exact Count/copy rejection RED/GREEN, valid-null/zero/source controls and nearest Count/copied-result normal plus owner syntax/book/Knowledge/history/memory/normal hooks; no broad suite.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored rejection/effect and preservation controls, no whole-family/population claim.
+  Activation: Clean c7c3a466f571efc97e3597412167b1a189d74a24; targeted recovery read frozen assessment, ADR0138, Count source/guard contract, current normal and public book. Retained public substitution/emitted source identifies generic copy folding before the Count rejection flag. External README/claim/containment source digests match the previously reviewed sources; cleanup remains current. No dependency or other-repository writes.
+  Baseline qualification: First fifteen authored source/copy controls complete; rejection_through_copy and repeated_count_after_copy fail expected native/fresh values, while the other thirteen pass. Added long receiver/repeated-copy control16 remains compiling before its first assertion; own process stopped with143. No result is inferred for16-19. Original normal/fixture/owner, partial TAP/stderr, actual modules and a bounded host stack sample remain under docs/checkpoints/count-copy-perl-2026-11-05/before/. Public parse_only and substitution both reach bounded stops; debug substitution trace identifies repeated MethodLowering/ValueExpr compatibility lowering, not a demonstrated runtime hang. Smaller repeated-copy control replaces only that added source; full compiler scaling diagnosis/repair is scheduled73.7.
+
+
+  Result: Add the existing canonical Count role to guarded_copy_chain. Ordinary Count chains with copy and no logical producer now retain the existing per-chain rejection flag, so incompatible consumers skip later defaults/selectors/with while valid numeric-domain null still continues. Number0, source fallback/copied-kind distinctions, source-once/snapshots/needed errors/non-creating reads/function scope and copy-depth policies remain. No generic null-is-rejection rule or logical-folding/peer repair is claimed.
+  Verification: t/count_copy_source_composition.t completes19 native/fresh groups with strict JSON kinds, separate native context/fresh load/execution errors, ready1/raw0/fallback0/unresolved0 and no warnings. The first fifteen assessment inputs and normal remain phase-identical; original partial baseline has13PASS2RED, while the final completes19PASS. Only the oversized added control16 was simplified; interrupted16-19 are not baseline successes. Source fences18, Count/length5 and selected copied-null index2 pass; owner/normal/phase0 syntax and book render pass. Exact raw channels, original/final owner/fixture/normal, public substitution and actual pre-load emitted module bodies are retained under docs/checkpoints/count-copy-perl-2026-11-05/. The new normal's recurring registration stays23.4.1-owned; full transitive/native custody23.4.2, general isolation and full23.4 remain open.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — preserve Perl Count rejection through copy
+  Commit-integrity qualification: The first hook invocation correctly rejects stale maintained-reference scope because this leaf omitted the required derived-ledger refresh. Cancelled that already-failed invocation during the subsequent claim check; no commit or bypass occurred. Refresh with tools/update_reference_scope.py --owner TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 before restaging, then rerun all normal hooks. Initial rejection log is retained in the leaf capsule; raw interpreter output is losslessly compressed rather than whitespace-normalized.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2`
   Status: `pending` / P1 Rust non-array Count source fallback
@@ -1482,3 +1490,15 @@
   Planned focused checks: Exact rejected/valid logical Count prefix RED/GREEN, plain Count-copy and nearest eager logical/source controls plus syntax/book/Knowledge/history/memory/normal hooks; no broad suite.
   Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
   Planned claim verification: none: Finite authored causal logical/rejection controls, no whole-family/population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.7`
+  Status: `pending` / P2 owned long Count/copy receiver compilation scaling
+  Goal: Locate and repair the excessive compilation work exposed by the retained longer receiver/repeated-copy source.
+  Reproduction/impact: Source receiver_repeated_copy_rejection in docs/checkpoints/count-copy-perl-2026-11-05/before/cases.json keeps native Get compiling before its first assertion; stopped after the preceding fifteen complete controls. Sample records active Perl operations rather than a blocked process; public parse_only and call_spec_handler_subst both reach a bounded stop. Trace reaches MethodLowering lower_method_value_expr/ValueExpr direct-access/compatibility bridges repeatedly. Exact amplification root cause remains unproven; do not classify this as a runtime parser hang or claim a timing regression from the sample.
+  Priority/schedule: After the six concrete P1 Count73.6 repairs and before full23.4; no unrelated feature selection first. Own until independently verified repair.
+  Dependencies: Committed73.6.1 and remaining P1 Count repairs; original slow source/trace/sample/probe retained locally, dependency implementations remain black boxes.
+  Acceptance: Use bounded public Get parse_only/descriptor/substitution/emission plus scoped trace to locate the exact compiler stage and source owner. Distinguish receiver/free and one/repeated-copy controls without accepting incomplete TAP. Repair the demonstrated algorithmic cause in a safe separate slice; preserve values/rejection/metadata/source/error/copy/signature behavior and retain a bounded reproducer. A faster single run or smaller replacement normal alone cannot close this owner.
+  Planned verification tier: focused
+  Planned focused checks: Minimal compiler-stage distinguishing RED/GREEN and direct Count/copy/source regressions, owner syntax/book/Knowledge/history/normal hooks; no broad suite.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Bounded compiler diagnosis and authored regression, no population/performance benchmark claim.

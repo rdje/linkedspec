@@ -5558,10 +5558,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Keep ordinary presence/membership/index copy steps in one emitted chain so
+  # Keep ordinary presence/membership/index/Count copy steps in one emitted chain so
   # rejection survives copy. Logical producer folding keeps its existing route.
   my $guarded_copy_chain = ($ordinary_has_key_result_chain || $ordinary_contains_result_chain
-    || $ordinary_index_result_chain)
+    || $ordinary_index_result_chain || $ordinary_count_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
    && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 

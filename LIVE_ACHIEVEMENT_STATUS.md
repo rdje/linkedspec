@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT remains active. Count/copy/source assessment73.6.0 is frozen; concrete P1 repair order1,6,2,3,4,5 must finish before unrelated selection. Session health requires a fresh context before production73.6.1.
+PNT remains active. Perl Count copy-state73.6.1 is focused-checked; logical6, Rust2 and peer Boolean3/4/5 precede unrelated selection. P2 compiler-scaling73.7 follows the P1s before full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 independently records finite native/restored/plan/fresh observations and owns Perl copy/logical rejection, Rust non-array Count and peer initial Boolean Count source repairs. Readonly route/kind/input/custody denials pass. Actual first Cargo inputs and verified acquisition archives survive; setup qualifications and transitive/isolation/admission limits remain explicit. No production change or broad suite.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 preserves canonical Count rejection through ordinary copy/repeated copy using the existing flag. Nineteen native/fresh controls, source fences18, Count/length5 and selected index-copy2 pass. Valid null/zero/source/error/snapshot/function policies stay. Partial baseline first15 has two expected value failures; the longer added control16 was interrupted and replaced with a smaller control. Original source/trace/sample remain with P2 owner73.7; no result is inferred for interrupted16-19. Full custody/registration/isolation/admission remain separate.
 
 ## Next Action
 
-In a fresh context, activate73.6.1 from clean Git and repair Perl plain-copy rejection using retained public lowering and distinguishing legitimate-null/zero controls. Commit it before logical6, Rust2 and peer Boolean3/4/5. Exact canonical4683555e is published; later local records need fresh proof at their next normal publication boundary.
+Activate73.6.6 from clean Git and repair logical producer rejection with and without copy; commit before Rust2 and peer Boolean3/4/5. Exact canonical4683555e is published; later local records need fresh proof at their normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — Perl Count copy-state focused-checked; logical producer next; P2 compiler scaling owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — finite Count/copy/source assessment frozen; six concrete P1 repairs and exact next action retained.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — installed Lua Count guards focused-checked; primary73 leads to mandatory P1 source/copy assessment.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — Julia Count guards focused-checked; source/domain/observed errors and mutation boundaries retained.

@@ -1,0 +1,33 @@
+# Subtest: rejected_copy_with
+    ok 1 - native executes without handler error
+    ok 2 - native exact values and kinds
+    ok 3 - native cursor preserved
+    ok 4 - fresh source loads
+    ok 5 - fresh execution succeeds
+    ok 6 - fresh exact values and kinds
+    ok 7 - fresh cursor preserved
+    ok 8 - descriptor resolves
+    ok 9 - build/load/run stay warning-free
+    ok 10 - no raw dependency
+    ok 11 - no fallback executor
+    ok 12 - ordinary sources resolve
+    ok 13 - readiness accompanies actual execution
+    1..13
+ok 1 - rejected_copy_with
+# Subtest: valid_null_numeric_copy
+    ok 1 - native executes without handler error
+    ok 2 - native exact values and kinds
+    ok 3 - native cursor preserved
+    ok 4 - fresh source loads
+    ok 5 - fresh execution succeeds
+    ok 6 - fresh exact values and kinds
+    ok 7 - fresh cursor preserved
+    ok 8 - descriptor resolves
+    ok 9 - build/load/run stay warning-free
+    ok 10 - no raw dependency
+    ok 11 - no fallback executor
+    ok 12 - ordinary sources resolve
+    ok 13 - readiness accompanies actual execution
+    1..13
+ok 2 - valid_null_numeric_copy
+1..2

@@ -7,6 +7,7 @@ answers:
   - "where is the TYPE reference task tree after narrative containment"
   - "how can closed task narratives be reconstructed exactly"
   - "does claim caching preserve staged snapshot checks"
+  - "why does reference scope update reject a finished leaf when memory names the next leaf"
 date: 2026-11-04
 status: accepted
 tags: [doctrine, history, tasks, knowledge-map, claim-verification]
@@ -51,3 +52,12 @@ current owner/status table once. Cache entries do not cross snapshots; historica
 remain part of resolution, memory is bounded, and a changed index rejects the complete check.
 The original and repaired complete checks passed the same retained index. Their dated timing is an
 observation of those runs, not a portable performance or complete bottleneck claim.
+
+2026-11-05 workflow clarification: before staging, reference-scope owner selection
+reads `MEMORY.md` active_work_unit, whereas the staged verifier derives the changed
+leaf. Keep the completed owning leaf in active_work_unit for its clean handoff,
+with next_action naming the next frontier; refresh scope for that completed owner
+before staging. A completed active leaf is supported by the memory contract when
+it retains no in-flight work and does not schedule its own landing again. Merely
+passing `--owner` cannot override a different worktree active_work_unit. Source:
+`tools/reference_scope.py` Snapshot.selected_owner/build.

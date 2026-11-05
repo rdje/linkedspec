@@ -1,0 +1,19 @@
+ok 1 - original source AST, lowering and diagnostics: count().take(1).with(){return("x")}
+ok 2 - original source AST, lowering and diagnostics: count(["a"],"x").take(1)
+ok 3 - original source AST, lowering and diagnostics: count(source:["a"]).take(1)
+ok 4 - original source AST, lowering and diagnostics: count(source:["a"],extra:1).take(1)
+ok 5 - original source AST, lowering and diagnostics: ["a"].count(1).with(){return("x")}
+ok 6 - original source AST, lowering and diagnostics: ["a"].count(1,2).with(){return("x")}
+ok 7 - original source AST, lowering and diagnostics: ["a"].count(value:1).with(){return("x")}
+ok 8 - original source AST, lowering and diagnostics: count(["a"],extra:1).take(1)
+ok 9 - original source AST, lowering and diagnostics: count(["a"]){return("x")}
+ok 10 - original source AST, lowering and diagnostics: ["a"].count(){return("x")}
+ok 11 - original source AST, lowering and diagnostics: count(["a"]).map_leaves(){return(value)}
+ok 12 - original source AST, lowering and diagnostics: ["a"].count().map_leaves(){return(value)}
+ok 13 - original source AST, lowering and diagnostics: {|| return(count(["a"]).take(1).with(){return("x")}) }
+ok 14 - original source AST, lowering and diagnostics: count(["a"]).custom_count().with(){return("x")}
+ok 15 - original source AST, lowering and diagnostics: ["a"].count().custom_count().with(){return("x")}
+ok 16 - original source AST, lowering and diagnostics: index_of(["a"],"a").take(1).with(){return("x")}
+ok 17 - original source AST, lowering and diagnostics: is_empty([]).take(1).with(){return("x")}
+ok 18 - original source AST, lowering and diagnostics: starts_with("abc","a").take(1).with(){return("x")}
+1..18

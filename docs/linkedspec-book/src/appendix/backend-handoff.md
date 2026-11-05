@@ -3571,6 +3571,15 @@ policy returns zero. Dart/Julia/installed Lua instead reject initial Boolean
 receiver Count at their scalar guard where the reference returns Number0.
 Produced/copied Boolean rejection already works and must remain.
 
+Perl73.6.1 now preserves canonical Count rejection through ordinary copy and
+repeated copies using the existing rejection flag. Nineteen focused native/fresh
+controls pass, including legitimate null/default/with, Number0, source errors,
+snapshots and function state. Regenerate emitted Perl. The separate logical
+producer repair73.6.6 is next; it is not closed by the copy fix. A longer added
+receiver/copy program exposed pre-execution compilation work; P2 owner73.7
+retains its original interrupted evidence and schedules bounded diagnosis/repair
+after the six P1 Count repairs, before full23.4.
+
 Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
 selection. Valid null/zero and copied-kind controls distinguish these gaps from
 blanket null suppression. Actual Rust native/emitted Cargo source, manifest and

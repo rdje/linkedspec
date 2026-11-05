@@ -455,6 +455,23 @@ Reading an uninitialized ordinary working value supplies null: `copy(items)` pre
 
 For a null binding `u`, `u.copy().count_keys()` returns null: the copied result is still null and cannot supply a Hash-only continuation. Direct `count_keys(u)` retains its existing zero result. An explicit Hash fallback, `u.copy().coalesce({}).count_keys()`, returns zero. Empty and filled Hash copies continue normally; copying a missing value does not manufacture an empty Hash.
 
+On ordinary Perl, a canonical Count chain also keeps an earlier incompatible-consumer rejection
+through `.copy()` and repeated copies. Copying cannot restart that chain through a default or
+an immediate `with` block. A legitimate null result still permits both operations:
+
+```text
+count([]).copy().add(1)                                      # 1: zero stays Number
+count([]).take(1).copy().coalesce([7]).first()                 # null: take rejects Number
+count([]).count().copy().with(){return("ran")}                # null: body skipped
+count([]).add("bad").copy().coalesce([7]).first()              # 7: valid numeric-domain null
+count([]).add("bad").copy().with(){return("valid-null")}      # "valid-null"
+```
+
+The rejected consumer skips its operands and later defaults/bodies; completed source effects
+remain. Source errors propagate, and copying preserves the captured Count result before later
+operand effects. These ordinary checks do not extend deferred callback syntax or establish full
+portable admission.
+
 A projected copy can be stored directly. On Perl, this returns the normalized three-field snapshot followed by the unchanged source:
 
 ```text

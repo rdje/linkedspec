@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4762,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-final-codeblock-normalization.md","sha256":"a7ac84fcdacd0dd0912293a93e155d705a601dfa18daa58531ce30113f1f515f","type":"member"}
 {"bytes":4504,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-flat-runtime-values.md","sha256":"97739e712c3fcfaa2e6af4a89c5f93f3763b1b220084792a695295818cdeaceb","type":"member"}
 {"bytes":7417,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-get-mode-result-validation-precedence-drift.md","sha256":"72d57659cdf7823793dff714b68881797d12a930b0f733ce432524354e85adb3","type":"member"}
 {"bytes":9975,"lines":146,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-grouped-regex-operand-boundaries.md","sha256":"86b373ad23f1b677dabce451b93cfa488c9b268cc454fc8a29760b147af3b4c5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3045,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-routes.md","sha256":"5d469af97c131d5db43d98efdc6a37b50c523f64c6e0a7223b137528c7f62602","type":"member"}
 {"bytes":7551,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rule-local-cursor-rollout-boundaries.md","sha256":"761e45a802f463288265d4ce6afdfbd5d7b992209bd686889163888ab0e954b9","type":"member"}
 {"bytes":10959,"lines":150,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rust-unicode-17-case-mapping.md","sha256":"38608af6dbe85076916ea8d2454d0d2d86a3b06cba8599784f3553999d49a6aa","type":"member"}
-{"bytes":7711,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-same-line-regex-slot-metadata.md","sha256":"0ac5ce81f9c376ca03cf87349ed2d0d1853b52421bf4c72ea6858a44a20331c9","type":"member"}

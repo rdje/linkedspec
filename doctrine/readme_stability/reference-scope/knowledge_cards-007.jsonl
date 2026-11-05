@@ -15,7 +15,7 @@
 {"bytes":6091,"lines":103,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/neutral-cli-fixture-runner.md","sha256":"93d1165949725d5190e865a488c3fcbb64ab881a24341c3dde5bf61b5944fee7","type":"member"}
 {"bytes":1774,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/non-codegen-capability-parity-closed.md","sha256":"42943d77c6686847f64b4cfe4d4d3191b1c4ab7f9a99ca8e6a4d9cd93f915bfb","type":"member"}
 {"bytes":6361,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/noncurrent-helper-code-purge-inventory.md","sha256":"766208f46523611e8d62082bee29dca9a3ec6c6c4b13357bab1d840318343819","type":"member"}
-{"bytes":4241,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.2","path":"docs/knowledge/normal-hook-archive-reference-contracts.md","sha256":"43ff91de5fc5f1e35f29fd617c5ed120bdcb289c58dd618b646c558f3f60bebe","type":"member"}
+{"bytes":4965,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1","path":"docs/knowledge/normal-hook-archive-reference-contracts.md","sha256":"8ce32e18843d806f815ffe1f2412f391d5df178e191f16d86a4f7e1f0628a611","type":"member"}
 {"bytes":5025,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/numeric-comparison-result-source-guards.md","sha256":"56e18a249441d2e53f58c2cb57cbc55f34e4c67871ac34c4f7e17efc1ce95518","type":"member"}
 {"bytes":3843,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/optional-native-parser-acceleration.md","sha256":"5d2959e255c45036e7930fc857fcdb503afc9159801245b0e0147bd5a962822d","type":"member"}
 {"bytes":9180,"lines":133,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ordinary-with-hash-result-continuation.md","sha256":"b3a058a6a1f153f9cc2de17b8aa527236474bfada2bdb61becd6396fba6e4706","type":"member"}
@@ -91,6 +91,7 @@
 {"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}
 {"bytes":3150,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-index-rejection.md","sha256":"2434156c325d4b3bca374079a494c9d33f24c27b914422b64611fbbbbd5473a6","type":"member"}
 {"bytes":3088,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-presence-rejection.md","sha256":"18e7d7b67c3089d746a0c5987fc59f1047dbad3ba51f17eba5a7f3601dbd1e87","type":"member"}
+{"bytes":2783,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1","path":"docs/knowledge/perl-count-copy-rejection.md","sha256":"2f90442507c5daef64d83a837ab560057ba1c170fbe74ec4f0bccaa6cbdbab42","type":"member"}
 {"bytes":3352,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-count-result-source-guards.md","sha256":"9376842e42f98f17453878268b9903c71e58c01279226dae7921933f22db79ba","type":"member"}
 {"bytes":5360,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-family-source-acceptance.md","sha256":"be227aced36e67445a65bd97f1391b1d532d1ebc39d0bf31ac4f4bf9660adc99","type":"member"}
 {"bytes":5142,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-producer-source-diagnosis.md","sha256":"4627df3cb92a47d44fe28e84ba89b7df2790fc7dedf67cfe9e1bbe7a49ecce08","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3422,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-cold-trace-dependency.md","sha256":"c81708e49d94b5a664b55fa894f28ee9ace479e8dd9fb36db7e8df1d3d9af2c6","type":"member"}
 {"bytes":3348,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-contract-v1.md","sha256":"5ac7c5180ae239c33052a2f3f690fa70a0b28dbcde6b28319c5c4faf2db0bbb5","type":"member"}
 {"bytes":4132,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-contract-v2.md","sha256":"df8608c0942b2fe5b918af01d6d3f45ab3e6ef5c27354008014ac461babd9664","type":"member"}
-{"bytes":4762,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-final-codeblock-normalization.md","sha256":"a7ac84fcdacd0dd0912293a93e155d705a601dfa18daa58531ce30113f1f515f","type":"member"}
