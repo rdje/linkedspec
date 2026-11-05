@@ -3975,6 +3975,47 @@ function typed_source.receiver_mutation.is_ordinary_contains_result_chain(expr, 
     name == "contains" and #(first.args or {}) == 1 and ordinary_args(first.args or {})
 end
 
+-- Count results join guards without changing initial source fallback.
+-- Keep the existing namespace and interpreter chunk-local count.
+function typed_source.receiver_mutation.is_ordinary_count_result_chain(expr, calls)
+  local first = calls and calls[1]
+  for _, call in ipairs(calls or {}) do
+    local method = action_contracts.canonical_action_helper_name(call.method)
+    if method == "walk_leaves" or method == "map_leaves" or method == "reduce_leaves" or
+      ((call.trailing_block_arg or call.receiver_trailing_block_arg) and method ~= "with") then
+      return false
+    end
+  end
+  local function ordinary_args(args)
+    for _, argument in ipairs(args) do
+      if argument.argument_kind ~= "positional" then return false end
+      local value = argument_expr(argument)
+      local kind = value and value.kind
+      if not (kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+        kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+        kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+        kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+        kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+        kind == "assign_nested_access" or kind == "codeblock_literal") then
+        return false
+      end
+    end
+    return true
+  end
+
+  if expr ~= nil and expr.kind == "call" and
+    (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg then
+    local args = expr.args or {}
+    local valid_arity = expr.name == "count" and #args == 1
+    if valid_arity and ordinary_args(args) then return true end
+  end
+  if first == nil then return false end
+  local name = first.method
+  return (first.source_method or name) == name and
+    name == "count" and not first.trailing_block_arg and not first.receiver_trailing_block_arg and
+    #(first.args or {}) == 0
+end
+
 -- Canonical index sources retain numeric zero, null and source snapshots.
 -- Use the existing namespace; no additional interpreter chunk locals.
 function typed_source.receiver_mutation.is_ordinary_index_result_chain(expr, calls)
@@ -4165,6 +4206,11 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or
         action_contracts.canonical_action_helper_name(target_receiver.name) == "with"))
+  local count_chain = typed_source.receiver_mutation.is_ordinary_count_result_chain(target_receiver, calls)
+  local preserve_initial_count_source = count_chain and not kind_guarded_result and
+    not typed_source.receiver_mutation.is_ordinary_count_result_chain(target_receiver, {}) and
+    calls[1].method == "count" and #(calls[1].args or {}) == 0
+  kind_guarded_result = kind_guarded_result or count_chain
   for index, call in ipairs(calls) do
     local call_expr = {
       kind = "call",
@@ -4193,7 +4239,7 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
       typed_source.receiver_mutation.is_ordinary_index_result_chain(nil, {call})
     -- Copied, computed and reduced values keep actual kinds through bridges.
     -- Check container-only consumers before evaluating their operands.
-    if reduction_result or kind_guarded_result then
+    if (reduction_result or kind_guarded_result) and not (preserve_initial_count_source and index == 1) then
       local kind = json.kind(value)
       if (array_only and kind ~= "array" and not nullable_membership and not nullable_index) or
         (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray" and not nullable_presence) then

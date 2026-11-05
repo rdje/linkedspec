@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — Lua Count role stays inside the existing namespace
+
+Both installed hosts independently omit Count from common result-guard admission. A pure namespace role admits canonical free-one/zero-extra prefixes; preserve initial Count source consumption only without a prior result owner. Scalar_result state/guard and the separate loop-index Array mutation target restriction stay unchanged, with no added interpreter chunk local. Actual AST/domain/observed error fields agree before selecting shared fences; null placeholders are bootstrap only. Both final four-route and selected direct consumers pass. Captured emitted modules share the current host/runtime; transient native binaries are not separately retained, so complete input custody remains23.4.2-owned. All bounded primary73 outcomes now lead to mandatory Count/copy/source assessment before unrelated selection.
+
 ## 2026-11-05 — Julia Count admission preserves source and mutation distinctions
 
 The common fluent loop omits Count from actual-kind admission. Add canonical free-one/zero-extra roles and preserve only initial receiver Count without a prior result owner at the common guard. Keep scalar_result state/guard and enumerate/call_index for the separate Array-end mutation restriction. Original observer uniform class/code assertions conflict with existing native generic diagnostics and generated execution wrappers; freeze observed message/class/selected fields without normalizing policy. Null AST/domain expectations and a mismatched trace label are bootstrap qualifications. Qualified unchanged source/domain/error fences pass with guard REDs; final strict four-route and selected compatibility controls pass. ASTs/emitted modules precede loading, with shared-process Module limits explicit. No full transitive custody or broad admission follows.

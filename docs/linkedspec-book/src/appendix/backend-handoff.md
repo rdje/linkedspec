@@ -3545,6 +3545,18 @@ shapes, the reference-matching diagnostic and observed route-specific error
 message/class/selected fields freeze before production. Existing native generic
 diagnostics and generated execution wrappers stay distinct. Fresh Modules share
 a process/runtime; no independent package-isolation claim follows. Rebuild Julia
-applications/runtime for the fix. Safe installed Lua73.5 is next, then P1
-assessment73.6. Registration, complete input custody, general isolation,
-source/context and full23.4 admission remain open.
+applications/runtime for the fix.
+
+Installed Lua73.5 now passes independent PUC5.5.1/LuaJIT2.1.1788460057 native,
+restored, plan and fresh-module Count controls plus selected Count/length and
+copied-null index checks. The existing namespace admits canonical Count without
+new interpreter chunk locals. Initial source/scalar-result rules and the separate
+loop-index mutation gate stay. Actual source/domain/observed error fields freeze
+on both hosts before shared expectations are selected. Final and compatibility
+stderr are empty; loadfile and three runner registration lines pass. Modules
+share a host process/runtime and transient native module bodies are not retained;
+complete input custody remains separate. Rebuild Lua applications/runtime for the
+fix. All bounded primary73 outcomes are recorded; mandatory P1 assessment73.6.0,
+including Rust's owned String discrepancy, is next before unrelated selection.
+Declared5.4, registration, complete input custody, general isolation, source/context
+and full23.4 admission remain open.

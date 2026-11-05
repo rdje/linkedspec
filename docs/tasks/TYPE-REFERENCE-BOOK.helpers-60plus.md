@@ -1258,7 +1258,7 @@
   Narrative: exact predecessor via `python3 tools/read_task_narrative.py --tree TYPE-REFERENCE-BOOK --id TYPE-REFERENCE-BOOK.1.2.23.3.72.6.5`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73`
-  Status: `pending` / P1 typed-source then bounded count source/prefix/copy repairs
+  Status: `in_progress` / bounded primary Count backends recorded; mandatory P1 copy/source assessment remains
   Children: `.73.0` Perl typed-source producer, `.73.1` Perl guards/readiness, `.73.2` Rust, `.73.3` Dart, `.73.4` Julia, `.73.5` safe Lua, `.73.6` independent copy/source/rejection assessment and repairs.
   Goal: Retain Count numeric results, source/consumer snapshots and rejection through ordinary continuations.
   Dependencies: selection34/frozen count-result-guard-composition.md/shared16/excluded18/current count3/ADR0138 authority.
@@ -1361,14 +1361,29 @@
   - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and book agree on focused Julia completion, independent safe Lua next and mandatory assessment/custody owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.5`
-  Status: `pending` / owned before unrelated selection
+  Status: `completed` / bounded installed-host Count guards focused-checked
   Goal: safe installed Lua count source/prefix guard composition and readiness.
   Dependencies: TYPE-REFERENCE-BOOK.1.2.23.3.73.4; frozen73/shared16/excluded18/current count3/source snapshots/copy authority.
   Acceptance: Independently baseline unchanged new normal on available native/restored/generated/fresh routes before production; never infer peer failures from Perl. Repair only demonstrated canonical free-one/ordinary zero-extra Count source/with/intermediate guards/required typed-source errors/unresolved-with readiness. Preserve numeric0, source-consumer once/order/snapshots, existing Count source/non-array fallback and free signatures, copy/default/strict arithmetic/valid zero-null-empty-Array with/function/arity/preflight/excluded source/context/parser/schema. Freeze actual source-domain diagnostic behavior before edits; do not normalize it silently. Both Rust direct/trailing-with loops and peer common/scalar guards as needed; retain separate Julia/Lua loop-index mutation gates. Lua existing namespace/no new chunk locals/no unsafe runner/formatter/declared5.4 inference. Split unsafe expansion; P1 copy73.6 mandatory before unrelated selection.
-  Planned verification tier: focused
-  Planned focused checks: Shared16 RED/GREEN/source18 on Perl/nearest count3 and index-copy controls/backend compile-analysis-scoped format-runner as appropriate/book/map/history/manual continuity. No full suite/global registry recurrence.
-  Planned canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
-  Planned claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+  Verification tier: `focused`
+  Focused checks: Authored Count value/error/effect/source-owner controls on installed PUC/LuaJIT native/restored/plan/fresh routes; freeze actual per-host source/domain/observed errors before production. Selected Count-length/copied-null-index consumers, loadfile/actual versions, no new interpreter chunk locals, exact runner registration, book/Knowledge/history/memory and normal hooks. No unsafe full runner/formatter or declared5.4 inference.
+  Canonical trigger: Full23.4/final clean push after pressure/registration/input-custody/task-evidence/declared-host prerequisites.
+  Claim verification: none: Finite authored value/error/effect/source controls, no complete family/population measurement.
+
+  Activation: Clean24407ad730900db239588cb3c0c949d59092e276 after Julia73.4 all ten doctrines/post-pointer and brief0. Frozen73/source18, Count book/copy authority and safe Lua index/copied-null/storage wrapper guidance read. Use existing namespace and preserve separate loop-index Array mutation gate. Production remains unchanged until both independent host baselines and actual source/domain observations are retained.
+
+  Result: PUC5.5.1 and LuaJIT2.1.1788460057 independently reproduce wrong-kind operands/later-with and repeated Count-result fallback. Canonical free-one/zero-extra Count now joins common guards through the existing namespace. Only initial Count without a prior result owner skips the common guard once; scalar_result guard/state and the separate loop-index Array mutation restriction stay. Both final four-route strict JSON-kind controls and selected Count-length/copied-null index consumers pass with empty final/compatibility stderr. No interpreter chunk local, producer/domain/parser/signature/copy/dependency/format change. Rebuild Lua apps/runtime; all bounded primary73 outcomes recorded, mandatory P1 assessment73.6.0 next before unrelated selection.
+  Evidence/limits: docs/checkpoints/count-guard-lua-2026-11-05/ retains per-host original/qualified/final direct inputs, emitted modules/public ASTs before load, actual version channels and raw outcomes. Both actual host source18/domain/observed error fields agree before selecting shared fences. Null AST/domain placeholders are bootstrap only; qualified baselines retain actual guard REDs. Modules share a process/runtime; transient native module bodies are not separately retained, and complete native/generation/toolchain custody remains23.4.2-owned. Declared5.4/general isolation/registration23.4.1/full23.4 remain open; no unsafe full runner/formatter, broad suite or push.
+  Verification: Supported wrapper runs new normal and the two actual direct consumers separately per host. Loadfile compiles interpreter/runner; three runner lines register the normal. Existing mutation gate and scalar-result state stay verbatim; book/Knowledge/history/memory and normal mandatory hooks govern landing.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — guard installed Lua Count continuations by actual kind
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — each actual host's public parse/compile/runtime/restored/plan/fresh module routes reproduce operand/body and repeated Count-result fallback; native and emitted inputs/results retained independently.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — typed Count/source/consumer AST and emitted source remain; interpreter.lua common kind_guarded_result omits Count. Existing Array-only producer/source fallback remains intact.
+  - [x] **FIX** — canonical namespace role joins actual-kind guards with one initial-source exception; preserve scalar_result, loop-index mutation gate and chunk-local boundary.
+  - [x] **ADDRESSED (verified)** — both hosts' final strict controls pass after qualified guard RED; actual source/domain/observed errors freeze before production, independently compared before shared selection.
+  - [x] **NO REGRESSION** — selected Count/length/copied-null index, loadfile and actual versions pass with empty final/compatibility stderr; exact installed-host and input-custody limits retained.
+  - [x] **LOCKSTEP** — task/index, roadmap, live/MEMORY, Knowledge and book agree on bounded primary73 outcomes and mandatory P1 assessment73.6.0 before unrelated selection/admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6`
   Status: `pending` / P1 copy/source-domain/rejection prerequisite before unrelated selection

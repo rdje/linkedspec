@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Julia Count73.4 is implemented with focused checks passing. Safe installed Lua73.5 follows, then mandatory P1 Count/copy source-domain assessment73.6 before unrelated selection.
+All bounded primary Count73 backend guards have focused checks passing on recorded routes/hosts. Mandatory P1 Count/copy/source assessment73.6.0 follows before unrelated selection, including the explicitly owned Rust String Count4 versus Perl0 discrepancy.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.4 adds canonical Count to Julia actual-kind guards while preserving initial source/scalar-result rules and the separate Array-end mutation gate. Strict native/restored/plan/fresh Module and selected compatibility checks pass after qualified guard RED. Source/domain/observed error fields freeze before production; setup assumptions are separately retained. Full custody/admission and general isolation remain open.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.5 repairs installed Lua Count guards through the existing namespace while preserving initial source/scalar-result rules and the mutation gate. Independent PUC5.5.1/LuaJIT2.1.1788460057 native/restored/plan/fresh and selected compatibility checks pass after qualified RED. Actual source/domain/observed errors freeze before production; final/compatibility stderr are empty. Declared-host/full custody/isolation/admission remain open.
 
 ## Next Action
 
-Activate safe installed Lua Count73.5 from clean Git and baseline independently before repairing demonstrated guards. Keep focused per-leaf verification; full admission/registration/input custody follow feature coverage. Exact canonical4683555e is published; later local commits need fresh proof at their next normal publication boundary. Rust String Count4 versus Perl0 remains73.6.0-owned.
+Activate P1 assessment73.6.0 from clean Git; independently freeze Count/copy/source/effect/rejection obligations on every backend and create concrete repair owners before production or unrelated selection. Keep focused per-leaf checks. Exact canonical4683555e is published; later local commits need fresh proof at their next normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — installed Lua Count guards focused-checked; primary73 leads to mandatory P1 source/copy assessment.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — Julia Count guards focused-checked; source/domain/observed errors and mutation boundaries retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.11 — bounded daily metadata review; all artifacts retained, independent controls pass.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — Dart Count actual-kind guards focused-checked; direct emitted host inputs retained.

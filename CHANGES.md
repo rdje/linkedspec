@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — guard installed Lua Count continuations
+
+Canonical Count joins common actual-kind guards through the existing namespace, preserving initial source/scalar-result rules and the mutation gate. Independent PUC5.5.1/LuaJIT2.1.1788460057 qualified RED becomes four-route GREEN. Frozen source/domain/observed errors, selected Count-length/copied-null index, loadfile and actual versions pass with empty final/compatibility stderr. Three runner lines register the normal. Book/Knowledge/task/live advance to mandatory P1 assessment73.6.0. Declared-host/full custody/isolation/admission remain separate; no broad suite or push.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — guard Julia Count continuations
 
 Canonical Count joins common actual-kind guards, preserving initial source/scalar-result rules and the separate Array-end mutation gate. Independent qualified guard RED becomes native/restored/plan/fresh Module GREEN. Pre-edit source/domain/observed error fences, selected Count-length/copied-null index and strict depwarn pass. Observer bootstrap assumptions are retained separately; existing error wrappers stay. Book/Knowledge/task/live pointers advance to safe installed Lua73.5 before mandatory P1 assessment73.6. Full custody/admission and general isolation remain separate; no broad suite or push.

@@ -815,11 +815,11 @@ Count source/prefix campaign73 covers canonical free-one and ordinary
 zero-operand receiver chains. Baseline reference probes exposed incompatible
 container consumers running Hash-key/value effects and later `with` bodies after
 Count's numeric result. Perl source blocks now use their existing value owner on
-free and direct receiver paths. Bounded Perl, Rust, Dart and Julia Count continuations guard each consumer
+free and direct receiver paths. Bounded Perl, Rust, Dart, Julia and installed Lua Count continuations guard each consumer
 by its actual kind.
 Numeric0, compatible scalar/default/Array bridges, source snapshots and valid
 zero/null/Array-returning `with` controls already work in the selected examples.
-Safe installed Lua is assessed independently; copy/source-domain/rejection combinations have
+The primary backend repairs have focused checks on their recorded routes/hosts; copy/source-domain/rejection combinations have
 a mandatory follow-up under existing Count/copy authority. No source-domain,
 copy-depth, signature/context or portable-admission expansion follows from this
 frozen target.
@@ -837,7 +837,7 @@ count({items="text";push(items,"x")}).coalesce("masked")
 The source runs once before later consumers. Needed source errors propagate on
 native and freshly emitted Perl paths; numeric0, existing non-array Count zero
 fallback, function/binding scope and snapshots stay. Regenerate emitted Perl.
-Canonical Perl, Rust, Dart and Julia Count chains reject incompatible consumers before evaluating their
+Canonical Perl, Rust, Dart, Julia and installed Lua Count chains reject incompatible consumers before evaluating their
 operands. Rejection also skips later immediate `with` bodies; a valid null result
 still enters `with`.
 
@@ -855,7 +855,7 @@ An initial Count keeps its existing source policy. A value already produced by
 Count keeps its actual Number kind: `count(["a"]).count()` and
 `["a"].count().count()` reject the second Array-only consumer. Rejection skips
 later `with` bodies; copying a legitimate null retains the existing null guard.
-These distinctions are checked on native and emitted Perl/Rust/Dart routes and fresh Julia modules.
+These distinctions are checked on native and emitted Perl/Rust/Dart routes and fresh Julia/Lua modules on the recorded installed hosts.
 
 Rust currently returns `4` for both `count("text")` and `"text".count()`, while
 the Perl reference returns zero. The guard repair preserves that observed source

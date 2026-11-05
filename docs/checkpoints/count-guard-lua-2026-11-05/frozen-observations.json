@@ -1,0 +1,24 @@
+{
+  "activation_commit": "24407ad730900db239588cb3c0c949d59092e276",
+  "inputs": {
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-head.txt": "a7e05359fc95a826985af2af838bf3194402478d8bb8dc519fb434018eb055cd",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-inputs.tar.gz": "76949f9e8f98e293783217d718c6fdf161eae6efb994825fd2937a8e69caba26",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-luajit-stderr.log": "5f7a53db74bb21f271adaf86db313232a6e06431118e49858708c3a3da165f35",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-luajit-stdout.log": "dcbe247c1c6c253d8e1b8557b5ea6bf5cf1d1ca654ebeea861bdeb483056e93a",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-luajit-version-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-luajit-version-stdout.log": "f1d7f1ad71b1a124913210cdb78a9310db26351293be54f218a1d8ea0a3a5c3c",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-puc-stderr.log": "a38cf1304d4a693231b5035c113643f0f7c5834a0722fe7b9cb6b53e28d43c6f",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-puc-stdout.log": "8b5e0571a2c246102d6664b1238687110d2048a500f54d6cf86647cee32895f7",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-puc-version-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/checkpoints/count-guard-lua-2026-11-05/baseline-puc-version-stdout.log": "1f8b153a53486375e1d963502928fd809356f8cddd8102220918918644c65ffd",
+    "docs/checkpoints/count-guard-lua-2026-11-05/freeze.sh": "16798b0c2f50687c658413b1fc72812fcae4e0e470c22bafa14e6899a5326100"
+  },
+  "outputs": {
+    "lua/test/count_result_guard_composition_test.lua": "5f5fb67d8c2d8f2712e027291115938464bcd8099593d0181e276bbccd2d5722",
+    "tests/fixtures/count_result_guard_lua_ast.json": "767e00210a2b503cf458ce24206c42aa0f4a6f1f78f5115b87e1e2f0eed1a49c",
+    "tests/fixtures/count_result_guard_lua_domain.json": "cb8b1fddc7da1f66c67b3cf6347eafea15e1ef7c5cab061b321e383618edef11",
+    "tests/fixtures/count_result_guard_lua_errors.json": "533a839bd5071e8455d709d7f6e9ba1fdb34f20ca9c7cfd2936801af632ef73e"
+  },
+  "production_blob": "671a4dea9b6aac7488965a4cc31fdf1e70c24093",
+  "qualification": "Null AST/domain placeholders are observer bootstrap only. Both hosts were independently observed before selecting shared fences; message/flags/codes/selected diagnostic fields are preserved, not a full diagnostic schema or declared5.4 admission."
+}
