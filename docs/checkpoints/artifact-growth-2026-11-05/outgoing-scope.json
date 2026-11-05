@@ -1,0 +1,41 @@
+{
+  "at_utc": "2026-11-05T21:31:51.759679+00:00",
+  "git": {
+    "base": "4683555ec51f04b8977812ce4e984c5cc6e6f42c",
+    "head": "eda3c81fe6ca9264f0ba96f3f90525d96d79626c",
+    "count": 15,
+    "left_right": "0\t15",
+    "commits": [
+      "eda3c81fe6ca9264f0ba96f3f90525d96d79626c",
+      "8bd46990b72979cb3a83857139987e5b84abe341",
+      "e7b9197ae006e85ea5a306573f257d7933c04c12",
+      "ab199db13b5e04b4eafb1d639056568e4baeba5f",
+      "f3488961665621cec5c3df4263c5664beb36ca42",
+      "bc33c84b656da4557c7f7bb1b0fb83a5ee1c5444",
+      "0d054e8ab800f7245cd329741d0a94e72b10b21c",
+      "deaf32ab1df4521bfc4efaa3269b21ed8b699212",
+      "c7c3a466f571efc97e3597412167b1a189d74a24",
+      "f469ef370ee5a27a52e97b6dbd0c341c738c269a",
+      "24407ad730900db239588cb3c0c949d59092e276",
+      "bad6e251d94a22163517efc79353b217b596fc65",
+      "553f9d1889f29eeae9f068359b6cba6848f8f7c5",
+      "70314722db3963238fe6a6b381d179358392982e",
+      "c64c74bb1e908da89ab7ef37a2e616e9299b5b33"
+    ],
+    "warned_blob_at_base": "f2b0327502052d10766db016ea3425fbc80612de",
+    "warned_blob_at_head": "f2b0327502052d10766db016ea3425fbc80612de"
+  },
+  "warned_blob_new_to_range": false,
+  "director_pack_estimate": {
+    "text": "11.5MB",
+    "source": "director correction in this session",
+    "independent_pack_measurement": false
+  },
+  "whole_local_store_is_outgoing_pack": false,
+  "limits": "Fixed locally recorded refs and one named blob, not fresh remote state, exact pack/wire bytes, server size or current future ahead count.",
+  "rejected_controls": [
+    "wrong-ahead-count",
+    "published-blob-as-new",
+    "whole-store-as-outgoing"
+  ]
+}

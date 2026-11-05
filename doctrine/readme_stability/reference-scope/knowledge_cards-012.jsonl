@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8738,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-receiver-value-chains.md","sha256":"8fb03b10a6004b696a9278e82b1ec147c74df5fc90bfbf9dec23d814ad5b3836","type":"member"}
 {"bytes":3224,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-assignment-expression-closure.md","sha256":"54371372bc5a2ccf9cca43e9b558dd243a4d71068d915198b79c87c62f8b2a68","type":"member"}
 {"bytes":3852,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-attached-switch-split-ground-truth.md","sha256":"706f6ba7256cdae6ee1816615019c8a80cad11f551fd0437c9adb3e1d17f77e2","type":"member"}
 {"bytes":3765,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-attached-while-split-ground-truth.md","sha256":"1b68c6d609dc7334998c8f19d264caaaf4d201ee99e5fb85089950c48f61a8c8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":10654,"lines":127,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-neutral-contract.md","sha256":"57f967190e12b71f734185132de076709724b6e796df089a8e41683f43c914c0","type":"member"}
 {"bytes":7772,"lines":116,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-perl-reference.md","sha256":"eeeeefacf5ec795eee3160c4f9984f5ebc22726a87912fa7dbc1ecf9ff641880","type":"member"}
 {"bytes":11193,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-receiver-mutation-direction.md","sha256":"4b48b13adb327f891717bf44b27c093d21da00f8010e162f9c5830e5229e9eb7","type":"member"}
-{"bytes":10257,"lines":126,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-rust-runtime.md","sha256":"999bb4812e2c35536d34e4b2dc7d22909db213fec82c64e1569f891b7e552bde","type":"member"}

@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-05T19:45:09.702607+00:00",
+  "anchor": "eda3c81fe6ca9264f0ba96f3f90525d96d79626c",
+  "git_version": "git version 2.54.0 (Apple Git-157)",
+  "object": {
+    "oid": "f2b0327502052d10766db016ea3425fbc80612de",
+    "bytes": 53325495,
+    "body_bytes": 53325495,
+    "sha256": "63788c131e8c3ced21e7177031b78aea63ee2a68460bbc3ac946a613474f83b6"
+  },
+  "warning": {
+    "source": "docs/checkpoints/artifact-review-2026-11-04/observation.json.gz",
+    "packet_sha256": "6f5190e00cfaecd0662cddfe70b392021c08cbcfa7f9d8187c75f08b1dd5d03b",
+    "line": "remote: warning: File docs/checkpoints/signed-array-contract-admission/import-epoch-before.json.gz is 50.86 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        "
+  },
+  "local": {
+    "raw": "count: 0\nsize: 0\nin-pack: 113902\npacks: 5\nsize-pack: 10630033\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0",
+    "repeat_raw": "count: 0\nsize: 0\nin-pack: 113902\npacks: 5\nsize-pack: 10630033\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0",
+    "fields": {
+      "count": 0,
+      "size": 0,
+      "in-pack": 113902,
+      "packs": 5,
+      "size-pack": 10630033,
+      "prune-packable": 0,
+      "garbage": 0,
+      "size-garbage": 0
+    },
+    "pack_unit": "KiB",
+    "scope": "local",
+    "pack_bytes_from_KiB": 10885153792
+  },
+  "classification": {
+    "blob_above_50_MiB": true,
+    "blob_below_100_MiB": true,
+    "local_scope": "root local object database only",
+    "server_disk_bytes": null,
+    "wire_bytes": null,
+    "historical_thin_pack_is_server_size": false,
+    "splitting_payload_bounds_lifetime_history": false
+  },
+  "limits": "One named blob and a dated local metadata observation. No whole-object census, physical pack reconstruction, remote size/supportability, wire bytes, new publication, custody completion or payload deletion.",
+  "rejected_controls": [
+    "wrong-object-size",
+    "warning-rewrite",
+    "server-conflation",
+    "decimal-pack-unit",
+    "split-history-bound"
+  ]
+}

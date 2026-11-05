@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.8 — assess retained artifact growth
+
+The final hook exposes the chapter-bound4.3 claim and dependent4.7 custody claim. Preserve their original40/20 input rows and all fields with only mode/revision changes at eda3c81; five corruption controls per record and both current bounded readers pass. No historical observation is refreshed. Latest director RAM guidance permits stable high-80s usage with trend monitoring and a90% ceiling.
+
+Director correction: distinguish the whole historical local store from the fixed15-commit outgoing range; the approximate11.5MB outgoing pack is director-reported. The warned blob already exists at the locally recorded origin base. The added metadata replay rejects three count/blob/scope corruptions; no new pack is generated. Mandatory normal verification still awaits the confirmed RAM window.
+
+Close the bounded read-only assessment with an exact named-blob/header/body/warning comparison, dated local pack metadata, primary host contracts and five effective corruption controls. Preserve distinctions between blob/local pack/transfer/server scopes and every historical object/claim/cache. Recommend prospective exact Git-input reuse plus the admitted payload/chunk profile; own first adoption12 after feature coverage and before new large-payload publication. No savings, server-size/supportability or new storage contract is claimed. Remaining-feature selection23.1.35 follows.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — format Dart source predicates
 
 Apply only the two scheduled free-default/set predicate layouts with Dart3.13.3. Full-owner formatting has zero changes, fatal targeted analysis is clean, and four existing guard/order/snapshot controls pass on native/restored/plan routes. All outside-member bytes and predicate tokens except optional formatter commas stay exact. Actual formatter inputs/delta and direct inputs before compiled proof are retained. PNT resumes to advisory growth23.4.8; full admission remains separate.

@@ -11,7 +11,7 @@ date: 2026-11-04
 status: backlog published at d3a26a94f5c2; bounded logical input custody reviewed
 tags: [git, publication, pack, github, continuity]
 evidence: "Primary Git/GitHub contracts; original records, raw/normalized plans, actual publication logs/receipt and complete logical Git-object manifest in docs/checkpoints/publication-custody-2026-11-04/; scoped claim TYPE-REFERENCE-BOOK.1.2.23.4.7."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/review.py; optional --verify-objects repeats full opaque body hashes. close_claim.py verifies that only the two original disclosed legs change. Archived planners and publisher are historical writers; never rerun them for review."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/review.py; optional --verify-objects repeats full opaque body hashes. Historical close_claim.py requires accepted eda3c81 Git inputs. Current mode-only preservation: bash tools/run_python_project_data.sh docs/checkpoints/artifact-growth-2026-11-05/preserve_publication_claim.py. Archived planners/publisher remain retired."
 ---
 
 GitHub documents a maximum 2 GiB single push and successive smaller pushes as the
@@ -62,5 +62,14 @@ The normalized report independently derives actual runtime head d3a26a94f5c2,
 The one-off publisher is retired as historical evidence for new publication use.
 
 GitHub emitted an accepted50.86MB artifact warning in batch10. Follow-up23.4.8
-owns future repository growth against primary host guidance; pack size is not
-server on-disk storage, and no historical deletion or rewrite is authorized.
+now closes the bounded growth assessment; its actual observation and prevention
+choices live in docs/checkpoints/artifact-growth-2026-11-05/PLAN.md.
+Prospective producer/reader adoption23.4.12 remains separately scheduled.
+Pack size is not server on-disk storage; historical deletion/rewrite stays excluded.
+The later outgoing-range correction in that PLAN distinguishes the whole local
+store from unpublished commits and confirms the warned blob already exists at
+the locally recorded origin base. It establishes no current oversized push.
+The later book edit preserves the dated custody claim at `eda3c81`; all original
+fields and20 original input rows remain exact, with only mode/revision changed.
+The original closeout reader remains historical; the current preservation reader
+checks this separate transition without refreshing its publication observations.

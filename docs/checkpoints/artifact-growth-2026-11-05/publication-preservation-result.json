@@ -1,0 +1,142 @@
+{
+  "revision": "eda3c81fe6ca9264f0ba96f3f90525d96d79626c",
+  "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.7.json",
+  "selected_claim": "dated-publication-and-logical-object-custody",
+  "verified_inputs": [
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/capture-failure-01.json.gz",
+      "oid": "31426fe68cc206706a1e03c0605254518a34df21",
+      "bytes": 71184,
+      "sha256": "dac3bb825c32c2530058932e8eda2c0ca5b07d392bc0a2b761fbbe539ffe39ca"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/capture-success.log.gz",
+      "oid": "6b576083fdcd5dcb73fadb762d02b49d3bb703f1",
+      "bytes": 483,
+      "sha256": "6513f273059c876c1c340944cf3979e70775edf6094b8fecc10230fe077a1e44"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/capture_runtime.py",
+      "oid": "138c2e3939aa8f2df6fb916b2b4ce0c39aa97377",
+      "bytes": 8938,
+      "sha256": "067fdfb0615b63fbb6e38aa6ce9cd17690cc6ddeb8cb30197f96d5f976c28985"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/close_claim.py",
+      "oid": "8daa1aea9c432a73ccbdc56dc5a5b8a43290ad17",
+      "bytes": 3830,
+      "sha256": "6fc026a159e7394ee21e74ee752062c4389753d3485dec81a17b44156bc04d6f"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/diagnose_overlap.py",
+      "oid": "21dd8444c28f50cca8ac6f13554a18fe9a943a90",
+      "bytes": 4339,
+      "sha256": "5991cedbca1601345639716dc0a4b2e9118316e33e9985e14344e92f8216075e"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/model.py",
+      "oid": "fad9799c3a1415f6c3cc46b2a91da9903084a6aa",
+      "bytes": 8164,
+      "sha256": "2ca75ef4473d1d7c726ccdec297c31679602cb1aa851562a7c6f42c85985df04"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/object-overlap-diagnosis.json.gz",
+      "oid": "c62f9f33aad39c5b3355a4c681f178fa25082e16",
+      "bytes": 13654645,
+      "sha256": "4e0ad8c53ac92d0d583d6ecffddcebacbaddf12cd0c6522409e54c7ab9e13173"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/original-planner.py.txt",
+      "oid": "00afee2f10bb7aaeb8627633e5d26b7f35292ac6",
+      "bytes": 1439,
+      "sha256": "91ffde614b5b4edbc8394c42e37b2f721d40bf11b6da9d7e9f6da2196dac7be6"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/original-planner.sh.txt",
+      "oid": "2958cafb66687896398c4507239151de7dda2f7d",
+      "bytes": 1485,
+      "sha256": "c19b31f052deb793c4fd5dd80b5f8faad1a9faab89cd1a003cbfa3d42a1c3fee"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/original-source-records.json.gz",
+      "oid": "261b94a04660d94d51ca0bc35f8a067c22f00632",
+      "bytes": 25606,
+      "sha256": "89b3cb60657b39d242a0d6a1b1872aa1a45b5f8d5d1f6ff66fc3ac02ba4049d8"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/preceding-claim.json.gz",
+      "oid": "e55fdaec77fbae1a60a713307f5bef14a3acbccf",
+      "bytes": 8117,
+      "sha256": "e3370f519b85a06cb2a5a718339af002764d71078d4bed042786ebd6df7c8fdd"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/preserve_failure.py",
+      "oid": "9387dfceafae144f873867952a0373b79f93c18c",
+      "bytes": 2420,
+      "sha256": "111a5860c55c741ff100d53f63f607911b54f96cee88bd19369c4b003a5dd268"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/publication.json.gz",
+      "oid": "b09742853de06a8287482d97f3ae401029adfb82",
+      "bytes": 22062737,
+      "sha256": "e5c150c68b92f8be9835a40cda8f09a7e2ac5e92754e8622b76c5e2dbc85b85e"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/result.json",
+      "oid": "f6bcaec7007b0d97b32f95cb83d0b5f2ed32de54",
+      "bytes": 715,
+      "sha256": "6b3439f568ae9635d234c159df6975ce8dd5e3457ed3ce16cc3f2b1cb43a8a6f"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/review.py",
+      "oid": "db7e4e3a58fb2bc4339ceb3d4624ad3306eb8552",
+      "bytes": 17566,
+      "sha256": "ecb4f43495a2522dcbdcaec530d3339a2314f2d2daaa4af57070c4ae8ec7e84a"
+    },
+    {
+      "path": "docs/checkpoints/publication-custody-2026-11-04/source_capture.py",
+      "oid": "0ea915f6f3dea63e0b41d7630536b48485c54d7c",
+      "bytes": 8010,
+      "sha256": "85fc546696ce095db47daedc5440fc36b55e5739b02e0bc57b22a10b9ad2ea10"
+    },
+    {
+      "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+      "oid": "651d1b7276431fecd85a6ad052a63f82106fa16d",
+      "bytes": 34055,
+      "sha256": "7ce6081f0987ad44729d11a14939491ad61f8dcb63d4a4edac5e8bb3e5668154"
+    },
+    {
+      "path": "tools/project_data_env.sh",
+      "oid": "a805db245e12350fcf44f46541d452b468888905",
+      "bytes": 9311,
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+    },
+    {
+      "path": "tools/project_data_run.sh",
+      "oid": "ce07a49d326a5cd78c4000e0936b8991a35f39fb",
+      "bytes": 11043,
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+    },
+    {
+      "path": "tools/run_python_project_data.sh",
+      "oid": "ea064936ca070ebc51ad3013cc4c2bcf281df248",
+      "bytes": 1486,
+      "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+    }
+  ],
+  "unchanged_original_input_count": 20,
+  "changed_fields": [
+    "durability.mode",
+    "durability.revision"
+  ],
+  "original_dependency_sha256": "7ce6081f0987ad44729d11a14939491ad61f8dcb63d4a4edac5e8bb3e5668154",
+  "edited_dependency_sha256": "5328303f77423545c035886fa7d490cbed6445b6f5612e9fa51a4f5859c0e3a2",
+  "original_live_dependency_binding_rejects_edit": true,
+  "rejected_controls": [
+    "original-statement",
+    "original-input-hash",
+    "wrong-revision",
+    "omitted-input",
+    "unselected-claim"
+  ]
+}

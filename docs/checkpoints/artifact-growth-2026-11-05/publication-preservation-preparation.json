@@ -1,0 +1,7 @@
+{
+  "scope": "helper setup only; no claim target was opened for writing",
+  "error": "Git path TYPE-REFERENCE-DEPENDENCY.1.2.23.4.7.json does not exist at the fixed revision",
+  "cause": "An unbounded symbol replacement also changed the task ID namespace.",
+  "correction": "Restore the exact TYPE-REFERENCE-BOOK literal in both fixed record paths; retain failed producer bytes.",
+  "product_red_credit": false
+}

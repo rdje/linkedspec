@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — Chunk limits and lifetime proof growth have different scopes
+
+A doc-pointer edit also requires preserving the dependent claim-record edge, not just the direct chapter edge. Original4.3 and dependent4.7 selected records now use the clean pre-edit Git boundary; current bounded predicate/capsule readers remain healthy. Preserve original statements/input hashes and change only durability mode/revision. The publication helper setup namespace failure is separately retained without product RED credit. Latest RAM guidance follows the trend through stable high80s, with90 as the ceiling.
+
+A summary about outgoing work must lead with its actual range rather than a whole-store total. The fixed range contains15 commits and the named warned blob is already at its base. Preserve the original whole-store observation as historical context, label the director11.5MB estimate accurately, and test the distinction with a separate low-memory metadata replay. No large outgoing-push inference follows.
+
+A retained accepted warning is checked against one fixed Git blob via independent full-body count and recomputed address/SHA256. Local count-objects metadata has KiB units and can change after repacking; it cannot establish server storage or historical wire size. Scope/unit/object/warning/history-bound mutations distinguish those claims. Existing Git-backed retained roots and admitted per-file payload/chunk semantics provide prospective prevention options without changing old claims. The first actual producer/reader adoption remains12-owned; no measured saving is inferred from a proposed topology. Source contracts, observation, producer and repair schedule live in the bounded PLAN.md.
+
 ## 2026-11-05 — Close the two isolated Dart member layout debts
 
 The current formatter delta is confined to _isFreeDefaultResultSource and _isCanonicalSetResultSource. Outside-member byte identity and predicate normalization distinguish this layout repair from behavioral edits; the formatter adds only optional trailing commas beyond whitespace. Existing default/set rejection and order/snapshot controls pass on three routes. The direct input archive precedes analysis/test compilation and still matches afterward; complete native/transitive custody remains23.4.2-owned. Supplied policy hashes match their canonical historical record. Advisory artifact growth23.4.8 follows under resumed PNT.

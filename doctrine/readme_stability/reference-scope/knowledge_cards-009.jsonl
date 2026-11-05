@@ -109,6 +109,7 @@
 {"bytes":49088,"lines":410,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.11","path":"docs/knowledge/repo-generated-artifact-cleanup-boundary.md","sha256":"fa4ec888545ca89ca1a2f9401bcc789812fe37a9cbe2139fae65b65eca6fd61e","type":"member"}
 {"bytes":9957,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-path-portability.md","sha256":"25b84c329fe3e95fea307cce05638ffc6926f864f9c32d59366f03454e1a4f6b","type":"member"}
 {"bytes":5029,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-relocation-process-proof.md","sha256":"01a50226185352ff47d312072c38914ed46b4c0dcf85f8fe50772138d84f0954","type":"member"}
+{"bytes":2703,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.8","path":"docs/knowledge/retained-artifact-growth.md","sha256":"6415ac645e75a0c54e47e99e2fea0ef596426b191f741a09190abc032a9a624f","type":"member"}
 {"bytes":4751,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/retired-return-helpers-canonical-rewrite.md","sha256":"5b8ea4cfc84eea03aa03a1628cb0fc8869cf1a64037ec6bea659ea7e8591aa49","type":"member"}
 {"bytes":4653,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rgx-bootstrap-published-remedy.md","sha256":"0756574be7dfe0cba746597878fd0c0e1b9a49aa22e697a95931ba506d1eb476","type":"member"}
 {"bytes":2721,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/roadmap-progressive-summary-projection-drift.md","sha256":"7c63b058dacbae5e8e34767345a086c186d6e3dcde36239560e478ce9a9aaaa8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5831,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-public-no-drift.md","sha256":"c5fd8ae0dc1b9fa540e3d11db0d6f8c09a08d6194546dbc477375878daa1abd8","type":"member"}
 {"bytes":3288,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-starts-open-block-validation.md","sha256":"c02590d348e15532e2779f5ce32454901346bda6c27440b953ff7b20dbc997d1","type":"member"}
 {"bytes":3712,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtime-input-boundary-validation-regression.md","sha256":"638596cdbf4d2b9d8537c2e59058d1a077a6974d3e77317039725fc9263becff","type":"member"}
-{"bytes":2127,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtimecontext-boundary.md","sha256":"3559e06549bd2a71c9d654d3e14e86804127ebb4f9179efa1c4ac6727c5173f5","type":"member"}

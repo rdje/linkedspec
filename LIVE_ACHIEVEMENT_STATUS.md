@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT resumed. Count P1 repairs73.6, Count-specific compiler73.7 and Dart member formatting73.8 are focused-checked. Advisory artifact-growth review23.4.8 is next.
+PNT continues after the director-authorized RAM retry. Count prerequisites and bounded growth assessment/outgoing correction4.8 are focused-checked; normal hooks govern landing. Remaining-feature selection23.1.35 is next.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.8 applies the two retained free-default/set predicate layouts. Full-owner format/fatal targeted analysis/four existing three-route controls pass. All outside-member bytes and predicate tokens except optional formatter commas stay exact; formatter inputs/delta and direct inputs before compiled proof survive.
+TYPE-REFERENCE-BOOK.1.2.23.4.8 retains the named blob/body/warning, dated whole-local-store field and prevention choices. Director correction verifies the fixed15-commit range and shows the warned blob already exists at the origin base; approximate11.5MB outgoing is director-reported. Original five and added three corruptions pass; no new pack, current oversized-push or savings claim. The chapter-bound4.3 claim and dependent4.7 claim preserve original40/20 inputs mode/revision-only; current bounded readers and five preservation corruptions per record pass. Director permits stable high-80s RAM with trend monitoring and a90% ceiling.
 
 ## Next Action
 
-Activate advisory artifact-growth review23.4.8 from clean Git and assess committed Git/public-host contracts before unrelated selection. Preserve evidence/history; complete custody, registration, isolation, declared-host and full23.4 admission remain separate.
+From clean landed4.8, activate selection23.1.35 and freeze one actually open family through current contracts/public diagnostics. Prospective input reuse4.12, full custody, registration, isolation and declared-host admission remain separate.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.8 — bounded growth/outgoing-scope assessment; prospective reuse4.12 separate; selection23.1.35 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — two Dart predicate layouts focused-checked; PNT resumed to advisory artifact growth23.4.8.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.7 — original long Count source causally resolved by earlier copy dispatcher; regression restored; director-requested pause before P3 formatting.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 — installed Lua initial Boolean Count focused-checked; all concrete P1s done, P2 compiler73.7 next.
@@ -29,7 +30,6 @@ Activate advisory artifact-growth review23.4.8 from clean Git and assess committ
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — Dart Count actual-kind guards focused-checked; direct emitted host inputs retained.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.2 — Rust Count actual-kind guards focused-checked; domain/custody qualifications owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.10.2 — exact canonical checkpoint published; fresh local/origin/SSH/API read-back agrees.
-- TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — explicit PNT resume; fresh recovered access and publication prerequisite checkpoint.
 
 ## History
 

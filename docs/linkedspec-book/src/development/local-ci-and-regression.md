@@ -1138,6 +1138,9 @@ verify counts/sizes/hashes where material, exercise the workflow there, and dele
 Never blanket-delete an operating-system temporary directory or a shared developer cache; they may contain agent
 state, application IPC, or another project's data.
 
+Retained history and pending pushes have different scopes: the whole local Git store includes already-published data. See
+`docs/checkpoints/artifact-growth-2026-11-05/PLAN.md` for dated outgoing-range evidence, preserved-history policy and the separately owned input-reuse plan.
+
 The bounded command `--execute --offset 68 --limit 31` now passes 31/31. Anonymous capture, logical/output helper,
 recursive top-rule, structural child-push, statement mutation, and public-parser leading-trivia leaves closed each
 independent mechanism. `.6.2.4.6` now permanently runs that full window and locks its counts, endpoints, zero

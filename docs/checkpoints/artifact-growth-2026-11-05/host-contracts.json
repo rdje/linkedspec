@@ -1,0 +1,30 @@
+{
+  "read_date": "2026-11-05",
+  "sources": [
+    {
+      "url": "https://docs.github.com/en/repositories/creating-and-managing-repositories/repository-limits",
+      "excerpts": ["On-disk size: 10 GB", "This limit is enforced at 2GB.", "This is enforced at 100 MB."],
+      "scope": "Repository size is guidance about compressed .git storage; push and object restrictions have separate scopes. The page recommends generated files outside Git."
+    },
+    {
+      "url": "https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github",
+      "excerpts": ["larger than 50 MiB", "GitHub blocks files larger than 100 MiB."],
+      "scope": "The first threshold emits a warning; the second blocks a regular Git file. This page also recommends smaller repositories and offers LFS/releases."
+    },
+    {
+      "url": "https://docs.github.com/en/get-started/using-git/troubleshooting-the-2-gb-push-limit",
+      "excerpts": ["maximum 2 GiB limit for a single push"],
+      "scope": "Successive smaller existing commit tips are the documented transfer workaround; that does not bound retained history. Preserve each page's unit spelling."
+    },
+    {
+      "url": "https://git-scm.com/docs/git-count-objects",
+      "excerpts": ["size-pack: disk space consumed by the packs, in KiB (unless -H is specified)"],
+      "scope": "Local pack storage is not remote storage, total logical object bytes or wire bytes."
+    },
+    {
+      "url": "https://git-scm.com/docs/git-cat-file",
+      "excerpts": ["If -s is specified, the size of the <object> in bytes."],
+      "scope": "Compare the named object's size metadata with its complete streamed body; no submodule recursion."
+    }
+  ]
+}

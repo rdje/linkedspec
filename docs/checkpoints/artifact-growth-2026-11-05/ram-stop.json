@@ -1,0 +1,8 @@
+{
+  "at_utc": "2026-11-05T20:07:08.134973+00:00",
+  "vm_stat": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    10061.\nPages active:                                 372728.\nPages inactive:                               370696.\nPages speculative:                               473.\nPages throttled:                                   0.\nPages wired down:                             253882.\nPages purgeable:                                4433.\n\"Translation faults\":                   291432112614.\nPages copy-on-write:                     39921450019.\nPages zero filled:                       88400798412.\nPages reactivated:                        7424684583.\nPages purged:                              237293660.\nFile-backed pages:                            190021.\nAnonymous pages:                              553876.\nPages stored in compressor:                  1148058.\nPages occupied by compressor:                 531225.\nDecompressions:                           6715955344.\nCompressions:                             7785508098.\nPageins:                                  3217296161.\nPageouts:                                    1039274.\nSwapins:                                    69250292.\nSwapouts:                                   97171415.\n",
+  "host_bytes": 25769803776,
+  "action": "Stopped only own unfinished commit/check tree under RAM policy; interrupted checks receive no passing credit.",
+  "process_count": 7,
+  "restart": "Only after a confirmed quiet window and a fresh stable <=80% host check."
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2127,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtimecontext-boundary.md","sha256":"3559e06549bd2a71c9d654d3e14e86804127ebb4f9179efa1c4ac6727c5173f5","type":"member"}
 {"bytes":4756,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-action-edge-child-return-dispatch.md","sha256":"ed2a995cb674dcc05c325b3abca38edf360d765246bbd7245c9a977afaa96dc8","type":"member"}
 {"bytes":22850,"lines":230,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-action-parser-boundary-defects.md","sha256":"526026c797676c6b6eed055e491ee6710af201a56453f88cadcc3702a8a260da","type":"member"}
 {"bytes":3484,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-aggregate-selector-compile-rejection.md","sha256":"9968e38e2b2fef176f429f19445938d139e7c0abaf83299ff1d5b5f188275f93","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4155,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-structured-diagnostics.md","sha256":"2332a9bb056478f2c50b6cc670de1b3d839defd68dc402e58556b8a4e4edf104","type":"member"}
 {"bytes":9272,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalar-helper-null-and-empty-drift.md","sha256":"ef01c668f4dbca2ade9ec7b4ee388083801c3cb58a40c5c9678e6c974b11fb05","type":"member"}
 {"bytes":3230,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalaref-legacy-path-parity.md","sha256":"a11180b1c03bf3f69de2a6ec85a8f1492e0da04b9db0aaabe488c179e5fd573d","type":"member"}
-{"bytes":6581,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-call-staged-projection.md","sha256":"8c084ae592a535de383337fab4aa10bf206d8d5142b78505baa9e3c060740dcf","type":"member"}
