@@ -1259,7 +1259,7 @@
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73`
   Status: `in_progress` / bounded primary Count backends recorded; mandatory P1 copy/source assessment remains
-  Children: `.73.0` Perl typed-source producer, `.73.1` Perl guards/readiness, `.73.2` Rust, `.73.3` Dart, `.73.4` Julia, `.73.5` safe Lua, `.73.6` independent copy/source/rejection assessment and repairs.
+  Children: `.73.0` Perl typed-source producer, `.73.1` Perl guards/readiness, `.73.2` Rust, `.73.3` Dart, `.73.4` Julia, `.73.5` safe Lua, `.73.6` independent copy/source/rejection assessment and repairs; `.73.7` owned compiler-scaling diagnosis and `.73.8` pre-existing Dart member formatting debt follow the P1 repairs.
   Goal: Retain Count numeric results, source/consumer snapshots and rejection through ordinary continuations.
   Dependencies: selection34/frozen count-result-guard-composition.md/shared16/excluded18/current count3/ADR0138 authority.
   Acceptance: Canonical free-one/ordinary zero-extra count source/with/intermediate guards reject incompatible operands/later bodies while retaining numeric0, source evaluation once/snapshots/scalar/default/Array bridges/valid zero-null-empty-Array with/needed errors/function state. Preserve existing Count source-kind/non-array zero fallback/free signatures and all other helper/context/parser/schema policies; no generic nullable Array or complete admission. P1 copy/source/rejection73.6 follows primary73.5 before unrelated selection.
@@ -1450,16 +1450,22 @@
   Final test hygiene: The original new-normal phases contain two unused test imports (CodeBlock/json). Remove only those imports and rerun the exact20-case target; cleanup capture retains the final actual normal/Cargo inputs and20PASS with no owned test warnings. Earlier warning-bearing phases and upstream build diagnostics remain unchanged. Host check after final runtime work reports58%; no Cargo job remains active before commit preparation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3`
-  Status: `pending` / P1 Dart initial Boolean Count source fallback
+  Status: `completed` / bounded Dart initial Boolean Count source focused-checked
   Goal: Preserve canonical initial Count non-array-zero behavior for Boolean sources while retaining produced/copied-result guards.
   Reproduction/impact: Current native/restored/plan receiver_source_domains returns null for {false}.count()/{true}.count(); reference returns Number0. Free Boolean Count already returns0; copied Boolean receiver Count correctly rejects. The independent fresh Dart package confirms this in assessment73.6.0 with fatal analysis passing.
   Priority/schedule: After assessment73.6.0 and preceding concrete Count repairs, before unrelated selection; own until verified.
   Dependencies: Committed73.6.0, Count source policy and ADR0138.
   Acceptance: Use public AST/emission and current scalar/common guards to locate the exact source rejection. Admit only initial Count source permission without prior result ownership at the necessary guard; preserve scalar-result state/assignments, copied/produced Boolean rejection, legitimate null, Count Number0, source effects/errors/snapshots and all unrelated dispatch. No generic nullable policy or source/signature expansion.
-  Planned verification tier: focused
-  Planned focused checks: Exact Boolean source RED/GREEN plus Count-copy/source and nearest Count/index-copy controls, fatal targeted analysis/scoped format/book/Knowledge/history/memory/normal hooks; no broad suite.
-  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Finite authored source/guard and preservation controls, no complete population claim.
+  Verification tier: `focused`
+  Focused checks: Exact Boolean source RED/GREEN plus Count-copy/source and nearest Count/index-copy controls, fatal targeted analysis/scoped format/book/Knowledge/history/memory/normal hooks; no broad suite.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored source/guard and preservation controls, no complete population claim.
+  Activation: Clean bc33c84b656da4557c7f7bb1b0fb83a5ee1c5444 after Rust source2 normal hooks/post-pointer/brief0. Frozen independent Dart assessment/public AST/emission, Count source/copy policy, current initial-source/common/scalar guard ownership and relevant book recovered. Existing preserveInitialCountSource is passed only for an unowned initial zero-extra Count; the loop consumes it once at the common guard but omits it at the Boolean scalar guard. Independently rebaseline25 authored source/copy/length and explicit Boolean continuation/source-once/function/produced-guard controls and actual emitted inputs before production. Host check52%; one memory-intensive job with86% admission and active monitoring. Source/scalar state assignments and unrelated dispatch remain unchanged.
+  Baseline/result: Independent25-case normal/public SDK/native/restored/plan and compiled emitted execution expose three source/continuation/source-once failing groups and twenty-two healthy groups, including already-correct Boolean parameter/function and produced/copied receiver guards. Both root and emitted package fatal analysis pass before production. Add only !initialCountSource at the existing scalar-result guard; leave initialization/assignments and the already-consumed one-step flag unchanged. All25 final route observations match, with observed needed-error message/class preserved and initial Boolean Count yielding Number0 before compatible continuation. No generic Bool-to-Array/nullable/source/signature policy change.
+  Formatting qualification: Whole-runtime format checking exposes existing layout drift in _isFreeDefaultResultSource and _isCanonicalSetResultSource. A full format probe temporarily changes those unrelated members; restore the runtime byte-for-byte from its already-tested final input archive, then verify only the owned fluent loop with the established class-wrapper formatter. That member is already canonical and the complete runtime owner remains byte-unchanged during scoped proof. New normal/probe full formatting passes. Whole-format diff is retained in docs/checkpoints/count-source-dart-2026-11-05/whole-format-probe.diff.gz; separate P3 owner73.8 schedules the two-member repair after P1s/P2 and before full23.4. No extra runtime repeat is inferred necessary from restored identical tested bytes.
+  Verification: Unchanged count_boolean_source_cases25/native normal/probe produce22PASS3RED before and25PASS after across native/restored/plan and independently compiled emitted execution. Fatal targeted root/fresh analysis passes both phases. Actual declared direct source/test/probe/fixture/pub manifest/resolved-lock/config/module bodies precede executions and compare afterward; no complete generated metadata/cache/native/transitive closure is claimed (23.4.2 owner). Root/native/fresh raw channels, public ASTs, first-input archives, strict scalar-kind/error-message-class review and scoped formatter source identity are retained under docs/checkpoints/count-source-dart-2026-11-05/. Count/length2 and selected copied-null index1 pass with their own first-input archive. Registration/full23.4/general isolation/declared-host and earlier gaps remain open; no broad suite or publication. Session focus has degraded after avoidable acquisition/formatting bookkeeping errors, all corrected; finish this clean commit, then require fresh context before Julia4/Lua5 production. PNT remains active, with P2 compiler73.7/P3 formatting73.8 scheduled after the P1s.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — preserve Dart initial Boolean Count source fallback
+  Review setup: wrapper-blank-line comparison was corrected at the owned-member boundary; the capsule preserves the initial reviewer/negative replay/diff.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4`
   Status: `pending` / P1 Julia initial Boolean Count source fallback
@@ -1512,3 +1518,14 @@
   Planned focused checks: Minimal compiler-stage distinguishing RED/GREEN and direct Count/copy/source regressions, owner syntax/book/Knowledge/history/normal hooks; no broad suite.
   Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
   Planned claim verification: none: Bounded compiler diagnosis and authored regression, no population/performance benchmark claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.8`
+  Status: `pending` / P3 owned pre-existing Dart member formatting drift
+  Goal: Format only the free-default and canonical-set source predicate members under the current Dart formatter.
+  Reproduction/impact: At baselinebc33c84b, whole runtime dart format --output=none --set-exit-if-changed reports layout changes in _isFreeDefaultResultSource and _isCanonicalSetResultSource. The Count fluent loop/new normal/probe are already formatted; no behavior failure is attributed to these two members. The actual full-format delta is retained under count-source-dart-2026-11-05/whole-format-probe.diff.gz. Unrelated probe changes were restored before Count landing.
+  Priority/schedule: After Count P1 Boolean3/4/5 and P2 compiler73.7, before full23.4; do not pivot while current leaf is dirty. Own until verified closure.
+  Acceptance: Apply only the two demonstrated member layout changes, preserve source tokens/conditions and all runtime policies. Current full-owner formatter and fatal targeted analysis pass, with minimal direct free-default/canonical-set preservation checks. Retain actual formatter inputs/delta and first-execution inputs where compiled proof is used. No source/signature/dependency/semantic/infrastructure expansion or broad suite.
+  Planned verification tier: focused
+  Planned focused checks: Exact two-member format/analysis and finite default/set controls, owning docs/Knowledge/history/normal hooks; no broad campaign.
+  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Planned claim verification: none: Deterministic owned layout repair and authored compatibility controls, no performance/population claim.

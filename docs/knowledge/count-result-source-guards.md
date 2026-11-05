@@ -8,7 +8,7 @@ answers:
   - "which task owns Count copy source-domain and rejection effects"
   - "where is the existing count length normal and its expected fixture"
 date: 2026-11-05
-status: primary/Perl copy/logical/Rust source guards focused-checked; three peer P1 source repairs remain
+status: primary/Perl copy/logical/Rust/Dart source guards focused-checked; Julia/Lua P1 repairs remain
 tags: [count, array, numeric, guards, source, copy, composition]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.34; count-guard-selection-intake.json.gz retains actual public19, canonical4/excluded18/typed-source3 AST-lowerings, exact source owner mechanisms and setup qualification."
 reverify: "Recover public observers/cases into new project-local outputs with project-data wrappers; qualify native context errors/readiness/fresh loading separately. Historical activation/freeze writers one-shot never replay."
@@ -49,7 +49,7 @@ selection. Current diagnosis, actual first-run input custody and readonly review
 Current Count follow-up: Perl copy73.6.1 and logical73.6.6 retain rejection
 through copy and eager logical consumers with legitimate null/zero preserved.
 Their finite native/fresh proof is independent of Rust source2, now separately
-focused-checked, and the still-open peer Boolean source3/4/5 repairs. See [[perl-count-copy-rejection]] and
+focused-checked, and peer Boolean sources: Dart3 is now focused-checked; Julia4/Lua5 remain open. See [[perl-count-copy-rejection]] and
 [[perl-count-logical-rejection]]. Full admission and P2 compiler scaling remain
 separate; the original selection/assessment records below stay historical.
 

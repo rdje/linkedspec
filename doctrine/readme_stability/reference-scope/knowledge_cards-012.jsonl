@@ -1,4 +1,5 @@
-{"member_count":126,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":127,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3852,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-attached-switch-split-ground-truth.md","sha256":"706f6ba7256cdae6ee1816615019c8a80cad11f551fd0437c9adb3e1d17f77e2","type":"member"}
 {"bytes":3765,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-attached-while-split-ground-truth.md","sha256":"1b68c6d609dc7334998c8f19d264caaaf4d201ee99e5fb85089950c48f61a8c8","type":"member"}
 {"bytes":2495,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-bare-direct-access-channel2-merge.md","sha256":"5ac81e2778bb4f076ab6520085fa39f6ec87eac6c2b4b310134f6df3fac9f86b","type":"member"}
 {"bytes":8381,"lines":114,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-bare-read-value-position-gap.md","sha256":"bc4106f64807fa7f10236dfa549aa474cb75d1811be26bb8d3ba285d5d6175c0","type":"member"}

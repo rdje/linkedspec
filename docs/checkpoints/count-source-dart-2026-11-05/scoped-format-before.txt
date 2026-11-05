@@ -1,0 +1,117 @@
+class Probe {
+  Object? _evaluateFluentCallsWithValue(
+    Object? value,
+    Iterable<ActionFluentCall> calls,
+    _RuntimeExecutionContext context,
+    String ruleLabel, {
+    required _CurrentActionEdge? currentEdge,
+    bool kindGuardedResult = false,
+    bool preserveInitialCountSource = false,
+  }) {
+    var scalarResult = value is bool;
+    var reductionResult = false;
+    var countSourcePending = preserveInitialCountSource;
+    for (final call in calls) {
+      final initialCountSource = countSourcePending;
+      countSourcePending = false;
+      final helper = canonicalActionHelperName(call.method);
+      // A legitimate null source keeps canonical has_key's key evaluation.
+      // Earlier incompatible consumers return before this step.
+      final nullablePresence =
+          value == null &&
+          helper == 'has_key' &&
+          _isOrdinaryHasKeyResultChain(null, [call]);
+      // Copy preserves legitimate null; earlier rejection has already
+      // returned before this canonical membership consumer.
+      final nullableMembership =
+          value == null &&
+          helper == 'contains' &&
+          _isOrdinaryContainsResultChain(null, [call]);
+      // Copy preserves legitimate null; earlier rejection has already
+      // returned before this canonical index consumer.
+      final nullableIndex =
+          value == null &&
+          helper == 'index_of' &&
+          _isOrdinaryIndexResultChain(null, [call]);
+      // Reduced, copied, scoped and computed values retain their actual kinds.
+      // Validate container-only consumers before evaluating their operands.
+      if ((reductionResult || kindGuardedResult) &&
+          !initialCountSource &&
+          helper != 'copy' &&
+          helper != 'is_empty' &&
+          helper != 'is_nonempty' &&
+          ((_arrayOnlyReceiverHelpers.contains(helper) &&
+                  value is! List &&
+                  !nullableMembership &&
+                  !nullableIndex) ||
+              (_hashOnlyReceiverHelpers.contains(helper) &&
+                  value is! Map &&
+                  !nullablePresence))) {
+        return null;
+      }
+      // Scalar results retain this boundary; generic emptiness predicates
+      // accept every value kind.
+      if (scalarResult &&
+          !initialCountSource &&
+          !nullablePresence &&
+          !nullableMembership &&
+          !nullableIndex &&
+          helper != 'is_empty' &&
+          helper != 'is_nonempty' &&
+          (_arrayOnlyReceiverHelpers.contains(helper) ||
+              _hashOnlyReceiverHelpers.contains(helper))) {
+        return null;
+      }
+      // Scalar producers and defaults retain this boundary until an actual
+      // container output permits later array/hash-only consumers.
+      final mayProduceScalar =
+          _scalarStringResultHelperNames.contains(helper) ||
+          helper == 'reduce_leaves' ||
+          helper == 'coalesce' ||
+          helper == 'coalesce_nonempty' ||
+          helper == 'contains' ||
+          helper == 'index_of' ||
+          helper == 'has_key' ||
+          helper == 'starts_with' ||
+          helper == 'ends_with' ||
+          helper == 'contains_substr' ||
+          helper == 'matches' ||
+          helper == 'str_eq' ||
+          helper == 'str_ne' ||
+          helper == 'str_gt' ||
+          helper == 'str_ge' ||
+          helper == 'str_lt' ||
+          helper == 'str_le' ||
+          _numericComparisonHelperNames.contains(helper) ||
+          _numericArithmeticHelperNames.contains(helper) ||
+          helper == 'is_empty' ||
+          helper == 'is_nonempty' ||
+          helper == 'is_defined' ||
+          helper == 'is_undefined' ||
+          (value is List &&
+              (_numericAggregateHelperNames.contains(helper) ||
+                  helper == 'join_values'));
+      value = _evaluateFluentCall(
+        value,
+        call,
+        context,
+        ruleLabel,
+        currentEdge: currentEdge,
+      );
+      reductionResult = reductionResult || helper == 'reduce_leaves';
+      kindGuardedResult =
+          kindGuardedResult ||
+          helper == 'copy' ||
+          helper == 'with' ||
+          helper == 'coalesce' ||
+          helper == 'coalesce_nonempty';
+      scalarResult =
+          value is bool ||
+          ((scalarResult || mayProduceScalar) &&
+              value is! List &&
+              value is! Map);
+    }
+    return value;
+  }
+
+}

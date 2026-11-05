@@ -6565,6 +6565,7 @@ final class LinkedSpecRuntimeEngine {
       // Scalar results retain this boundary; generic emptiness predicates
       // accept every value kind.
       if (scalarResult &&
+          !initialCountSource &&
           !nullablePresence &&
           !nullableMembership &&
           !nullableIndex &&

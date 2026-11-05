@@ -3597,6 +3597,16 @@ Rust applications/runtime. Dart/Julia/installed Lua initial Boolean source3/4/5
 remain next. Earlier custody gaps, full transitive/native closure, registration,
 general isolation, P2 scaling73.7 and full23.4 remain separate.
 
+Dart73.6.3 now admits only initial Boolean Count sources at the scalar guard,
+reusing the existing one-step permission while preserving state assignments.
+Twenty-five native/restored/plan/compiled-emitted controls move22PASS3RED to25PASS;
+produced/copied Boolean and unowned Array rejection, source-once/zero/error/function
+controls stay. Fatal targeted root/fresh analysis, Count/length2, index-copy1 and
+owned loop/new-file formatting pass. Actual direct inputs are retained; complete
+native/transitive closure stays separately owned. Rebuild Dart runtime/apps.
+Julia4/Lua5 remain next. P3 formatting73.8 owns the two unrelated free-default/set
+member layout changes after the P1s/P2, before full23.4.
+
 Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
 selection. Valid null/zero and copied-kind controls distinguish these gaps from
 blanket null suppression. Actual Rust native/emitted Cargo source, manifest and

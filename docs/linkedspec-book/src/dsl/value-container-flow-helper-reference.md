@@ -503,6 +503,21 @@ length("text")                # 4: general length still measures text
 Regenerate/rebuild Rust applications using the runtime. These focused source and
 copy checks keep full source/context/portable admission separate.
 
+Dart's initial Boolean Count sources also reach the same Number0 fallback. A
+copied or previously produced Boolean retains its result guard:
+
+```text
+{false}.count().copy().add(1)                # 1
+{true}.count().with(){return(value.add(1))}  # 1
+copy(false).count()                         # null
+and(false).count()                          # null
+```
+
+The initial source executes once, zero skips an unnecessary coalesce default,
+and later incompatible consumers still skip their operands. Scalar-result state
+and needed source errors are preserved. Rebuild Dart runtime/apps; full admission
+remains separate.
+
 A projected copy can be stored directly. On Perl, this returns the normalized three-field snapshot followed by the unchanged source:
 
 ```text

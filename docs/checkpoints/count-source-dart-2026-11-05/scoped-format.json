@@ -1,0 +1,17 @@
+{
+  "command": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "format",
+    "--output=show",
+    "--summary=none",
+    "--stdin-name",
+    "lib/src/runtime/interpreter.dart"
+  ],
+  "cwd": "dart",
+  "formatted_member_equal": true,
+  "member": "_evaluateFluentCallsWithValue",
+  "sha256": "e9f8774b8df47e39b3c1a1e4988f63d3f538f25e395a086b8f3da1529548d973",
+  "source": "dart/lib/src/runtime/interpreter.dart",
+  "source_unchanged": true
+}

@@ -1,0 +1,160 @@
+[
+  {
+    "archive": "docs/checkpoints/count-source-dart-2026-11-05/after/root-before-first-run.tar.gz",
+    "files": {
+      "dart/.dart_tool/package_config.json": {
+        "bytes": 11261,
+        "sha256": "c29dbc1818523c70cdc790512a7c319b3bb42a96560e3e9eb2732c6cddb0a769"
+      },
+      "dart/analysis_options.yaml": {
+        "bytes": 145,
+        "sha256": "93bd00bd9a5ed869de0436634f5a6f5a9c6a3eb12107f9f9a24b62b94804dba3"
+      },
+      "dart/lib/src/runtime/interpreter.dart": {
+        "bytes": 362298,
+        "sha256": "e9f8774b8df47e39b3c1a1e4988f63d3f538f25e395a086b8f3da1529548d973"
+      },
+      "dart/pubspec.lock": {
+        "bytes": 10958,
+        "sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0"
+      },
+      "dart/pubspec.yaml": {
+        "bytes": 190,
+        "sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6"
+      },
+      "dart/test/count_source_fallback_test.dart": {
+        "bytes": 3111,
+        "sha256": "10d6c43429f09cd804a0d7d663e599c3127dea7b5e4cdbd683e435ea9f6cd76b"
+      },
+      "dart/tool/probe_count_source_fallback.dart": {
+        "bytes": 3094,
+        "sha256": "a9d1071320f4d4db868cb56a9a42f97fe4324b11a9a7ce2af01f3cd2c94b95cc"
+      },
+      "tests/fixtures/count_boolean_source_cases.json": {
+        "bytes": 7961,
+        "sha256": "17399d6601da61b23c3c800ef396edea35f3cd5fbf8d1df8326c597292430f7e"
+      }
+    }
+  },
+  {
+    "archive": "docs/checkpoints/count-source-dart-2026-11-05/after/fresh-before-first-run.tar.gz",
+    "files": {
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/.dart_tool/package_config.json": {
+        "bytes": 486,
+        "sha256": "9f1c5c0d787c59b18ef87f71ebc2c649215efbe7efc0d2ca3365e0120027349b"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/bin/main.dart": {
+        "bytes": 9053,
+        "sha256": "40dbd04f858fc446183840e9ffd1c0b42bed7944eec573a714dccf8f627dcf8d"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_0.dart": {
+        "bytes": 4568,
+        "sha256": "a9dac5bc4d710522c36e52b81ec429c2ef3f6e1392a092a220f88e690a4d6a7c"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_1.dart": {
+        "bytes": 4732,
+        "sha256": "7013228f075d573ff271e2118b41234a4fe20d76cb1e164908b37dc3d2fd37ea"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_10.dart": {
+        "bytes": 4664,
+        "sha256": "7571bea4244f0aebf582518e0020931101ebbbc2973c5ae1a25ccbbfd7b5473f"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_11.dart": {
+        "bytes": 4299,
+        "sha256": "8322d755d9b987104f8746bd2c82a29db871afc5b9bbc1120d146797cddff8ee"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_12.dart": {
+        "bytes": 4363,
+        "sha256": "3b6abbcefdde2c9e3bf14fc89301a82485980679291f1095e40b5df6af874540"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_13.dart": {
+        "bytes": 4418,
+        "sha256": "b33274d8b5812c75a4fcaa1a34dee53698fd550fae9a9f9b985644bce2852044"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_14.dart": {
+        "bytes": 7232,
+        "sha256": "7d9af8d38de3249ad7eeede46aa0214955d70163c00fe3ec91d9a34cd9c2424d"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_15.dart": {
+        "bytes": 4521,
+        "sha256": "3ee0e33ca9a66b098f7bc37a9abfa038fd1b0de7aca5835a9e4889ac02fc8df7"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_16.dart": {
+        "bytes": 4619,
+        "sha256": "56c53a9b19d744dc7e51748fea65a9040d00104f52b5ef147ecd84e248678c0b"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_17.dart": {
+        "bytes": 4640,
+        "sha256": "f8a1899fc55b58d3093a34782b0ec69fa63bb66563670c2e4deef73894da4b4f"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_18.dart": {
+        "bytes": 9765,
+        "sha256": "f4ca7b9f0af4811e3a5fd854b3bcccfd2daef16ac9018ccb09e1a46789e7b7e4"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_19.dart": {
+        "bytes": 4236,
+        "sha256": "84f4748fcbff11c0c4ded97ec395971143d8582b086dc90032bc13d7233cc2ca"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_2.dart": {
+        "bytes": 4472,
+        "sha256": "f84e452fa104dd63a45f38efe815e27bcd10198e4f8063e1db4a8f89e89f7bf3"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_20.dart": {
+        "bytes": 4609,
+        "sha256": "efb06cc22e93ccbc67371633ad4ade10a9ad38e38508a8d05be09150f75ffe4b"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_21.dart": {
+        "bytes": 4400,
+        "sha256": "a5a29558ce19bf9088c47742156e9752a7be0a40dbef200ec253075ea0e93906"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_22.dart": {
+        "bytes": 4532,
+        "sha256": "a1902f62c2c638a0be04796a8a789bbfda03cd02eedb5d31a387fc01d3e8d9c3"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_23.dart": {
+        "bytes": 4666,
+        "sha256": "40d0936a4d37365266d4b6601bbdd8b1731a1a50e1a0aa650491379a7a9061f8"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_24.dart": {
+        "bytes": 7037,
+        "sha256": "ca3adebf8d6334b82ea88a284630b8f34c784f768004b333c344f65a63ab2365"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_3.dart": {
+        "bytes": 4504,
+        "sha256": "f91516b97253bc821290cb5f64396682d442962086f676ee1d6988831eca4267"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_4.dart": {
+        "bytes": 4367,
+        "sha256": "01e0652b36a80b28b51bc808f8b3d6dd2a4b54418ef6258e16ac7f383677b087"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_5.dart": {
+        "bytes": 4552,
+        "sha256": "b883e54eb4b64dccb65de7eb7eab560a2c1278dbf8475572db9f134c8f325163"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_6.dart": {
+        "bytes": 4324,
+        "sha256": "a41dfec4665a2e7af4e89a0016593ee5b07e7d98802770162d90d7005180a268"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_7.dart": {
+        "bytes": 4819,
+        "sha256": "7fe60630e376a98c9eb557d23e9e50a032353516f0e9cf0f9e90439d99ff555f"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_8.dart": {
+        "bytes": 4429,
+        "sha256": "72fe61c1490ff3dd738f8dd8058bf677bc3f579942cc34c164667abb61b6ddb1"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/lib/case_9.dart": {
+        "bytes": 4374,
+        "sha256": "c572018ce377cbb49f9c2d6894022c1c6b6823e180049b056359f7be734a7faa"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/pubspec.lock": {
+        "bytes": 270,
+        "sha256": "cc95d949d08368f06a9f5e116d06f2cdd44137d56acf5fcb890baa6a8690d99c"
+      },
+      "docs/checkpoints/count-source-dart-2026-11-05/after/fresh/pubspec.yaml": {
+        "bytes": 152,
+        "sha256": "6efc50ec75c057e1603a38471b8248ee24fa3b34dd00311228e5385bf7e440e9"
+      }
+    }
+  }
+]

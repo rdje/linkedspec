@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT remains active. Perl copy73.6.1/logical73.6.6 and Rust source73.6.2 are focused-checked; peer Boolean3/4/5 precede unrelated selection. P2 compiler-scaling73.7 follows the P1s before full23.4.
+PNT remains active. Four concrete P1 repairs are focused-checked: Perl copy1/logical6, Rust source2 and Dart Boolean3. Fresh context is required before Julia4/Lua5 production signoff. P2 compiler73.7/P3 formatting73.8 follow the P1s before full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 restores Array-only Count source fallback while retaining produced/copied receiver guards and general length. Qualified20 source/copy/length controls move17PASS3RED to20PASS across root/native/restored/plan and compiled emission; current Count diagnostic1/length1 and final test-import cleanup20 pass. Actual first Cargo source/manifests/resolved locks/modules and raw channels survive. Initial absolute-archive setup failure is qualified without standalone behavioral credit. Earlier gaps/full custody/registration/isolation/admission and P2 scaling remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 admits only initial Boolean Count sources at the scalar guard, preserving its state assignments and one-step source ownership. Unchanged25 root/native/restored/plan/compiled-emitted controls move22PASS3RED to25PASS; fatal root/fresh analysis and Count/length2/index1 pass. Actual declared inputs/error fields/source identity remain retained. Whole-format probes exposed unrelated default/set layout debt; those changes were restored from the exact tested owner and scoped/new-file formatting passes. P3 owner73.8 retains that debt. Full closure/registration/isolation/admission and P2 compiler concerns remain open.
 
 ## Next Action
 
-Activate Dart73.6.3 from clean Git; preserve only initial Boolean Count permission at its scalar guard, with scalar-result state/copied-produced guards intact. Independently baseline route/input/error controls and commit before Julia4/Lua5. Later local commits need fresh canonical proof at their normal publication boundary.
+In a fresh context, activate Julia73.6.4 from clean Git and independently preserve initial Boolean Count permission without changing scalar state or Array-end loop-index mutation rights; commit before installed Lua5. Avoidable bookkeeping errors are corrected, but this session's focus has degraded. PNT remains active. Later local commits need fresh canonical proof at their normal publication boundary.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — Dart Boolean Count source focused-checked; clean fresh-context Julia4/Lua5 handoff.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — Rust Count source fallback focused-checked; Dart Boolean source3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — Perl Count logical rejection focused-checked; Rust source2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — Perl Count copy-state focused-checked; logical producer next; P2 compiler scaling owned.
@@ -29,7 +30,6 @@ Activate Dart73.6.3 from clean Git; preserve only initial Boolean Count permissi
 - TYPE-REFERENCE-BOOK.1.2.20.2 — later immutable source epochs renew capacity with all current contracts/open bodies retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.7 — original source/actual publication/logical Git custody and focused controls reviewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.6 — bounded retention-only artifact review; independent metadata/five evidence controls pass.
-- TYPE-REFERENCE-BOOK.1.2.23.4.3 — backend/shared-fixture task-evidence routing; legacy/new-contract RED/repaired actual-index controls retained.
 
 ## History
 
