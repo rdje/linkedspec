@@ -10,7 +10,7 @@ answers:
   - "where are actual Cargo-consumed Count assessment source and lock inputs"
   - "why did the Count input packager reject a dot-underscore Cargo member"
 date: 2026-11-05
-status: finite assessment frozen; Perl/Rust/Dart repairs focused-checked; Julia/Lua P1 source repairs remain
+status: finite assessment frozen; Perl/Rust/Dart/Julia repairs focused-checked; installed Lua P1 source repair remains
 tags: [count, copy, rejection, source, boolean, perl, rust, dart, julia, lua, custody]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0; docs/checkpoints/count-copy-source-assessment-2026-11-05/ retains independent SDK/Get/emitted observations, actual first-run input archives, explicit targets and readonly controlled review."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/count-copy-source-assessment-2026-11-05/review.py; capture/packaging writers are historical one-shot producers, never replay over original outputs."

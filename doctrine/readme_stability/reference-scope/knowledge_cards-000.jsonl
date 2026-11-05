@@ -115,7 +115,7 @@
 {"bytes":5227,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-contains-composition.md","sha256":"1531e58ffb4d443d011ffb06fde9cad3827d84423560077569da5ae69bfcf500","type":"member"}
 {"bytes":5223,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-index-composition.md","sha256":"53a385b003e46017fec974c36d784453f9009cc048584defdcab0c6faa442cb3","type":"member"}
 {"bytes":5331,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-presence-composition.md","sha256":"84e8bd4f6019a57f7f463796768ac38bf786858d77d1b80a75a594c7d460fff1","type":"member"}
-{"bytes":4762,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"af8eff01e3a9793660e846c417e081120e8e87c0ff451740214ddb79adcc24fc","type":"member"}
+{"bytes":4772,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"d43f8d3fe8b5be7399ec3a9af3204bca277710fdfcbb7b79a3be0948e40572cd","type":"member"}
 {"bytes":10362,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/count-result-source-guards.md","sha256":"185f6e16045b16d645daca4be1529eafe0bd235efde4b34616a39469607da7e4","type":"member"}
 {"bytes":2648,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-attached-while-boundary-drift.md","sha256":"360f0b3b7a20c3ba1d1a1709c053444734ccb49312e31dfb81854e662d3cb861","type":"member"}
 {"bytes":4850,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-cli-contract-gap.md","sha256":"5ad46f6cb251ff1fa3f529a64522f05cda3d20e8008ed259ab4f6f43b19a4bf4","type":"member"}

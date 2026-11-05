@@ -1,0 +1,10 @@
+{
+  "command": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=julia",
+    "--depwarn=error",
+    "julia/test/count_source_fallback_test.jl"
+  ],
+  "exit": 0
+}

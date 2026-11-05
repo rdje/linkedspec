@@ -3607,6 +3607,18 @@ native/transitive closure stays separately owned. Rebuild Dart runtime/apps.
 Julia4/Lua5 remain next. P3 formatting73.8 owns the two unrelated free-default/set
 member layout changes after the P1s/P2, before full23.4.
 
+Julia73.6.4 now applies the same existing initial-source permission at its
+Boolean scalar guard. Twenty-five native/restored/plan/fresh-module groups pass
+after four independent baseline failures, including Boolean function parameters.
+Scalar-result state and the separate Array-end loop-index mutation gate stay
+intact. Actual declared source/project/normal inputs and emitted modules before
+loading are retained. Strict deprecation handling and nearest Count/length and
+copied-null index checks pass. Fresh modules share the current Julia process;
+full transitive/native custody and independent isolation remain separately owned.
+Rebuild Julia applications/runtime. Work is paused at the director's request;
+installed Lua5 resumes only on explicit instruction, before P2 scaling73.7
+and P3 formatting73.8; full admission remains open.
+
 Repair order is73.6.1,73.6.6,73.6.2,73.6.3,73.6.4,73.6.5 before unrelated
 selection. Valid null/zero and copied-kind controls distinguish these gaps from
 blanket null suppression. Actual Rust native/emitted Cargo source, manifest and

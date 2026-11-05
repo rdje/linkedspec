@@ -1,12 +1,11 @@
 # MEMORY
 
-- activation_commit: `bc33c84b656da4557c7f7bb1b0fb83a5ee1c5444` — clean activation for completed Dart Count source73.6.3; derive current HEAD from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3` — preserve Dart initial Boolean Count source fallback.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3` (completed handoff); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md; next frontier73.6.4.
-- next_action: Fresh context required for signoff quality. From clean Git activate Julia73.6.4; independently baseline Boolean Count source/copy/error/role controls, then preserve initial-source permission only at the scalar guard while keeping scalar state and the separate Array-end loop-index mutation gate. Commit before installed Lua5; no unrelated selection first.
-- in_flight_uncommitted: none — intended clean post-landing handoff; no task or job remains mid-execution.
-- blockers: session-health context reset before next production. Avoidable acquisition/formatting bookkeeping errors are corrected; the long session has degraded focus. PNT remains active, with Julia4/Lua5 then P2 compiler73.7/P3 formatting73.8 still owned.
-- evidence: docs/checkpoints/count-source-dart-2026-11-05/ retains25-case22PASS3RED/25PASS on root/native/restored/plan/compiled emission, fatal analyses, actual declared first-run inputs and direct Count/length2/index1. Whole-format probe changes were restored from the exact tested runtime archive; owned loop/new files are formatted. P3 formatting73.8 owns only the free-default/canonical-set members. Complete metadata/cache/native/transitive custody remains23.4.2-owned.
-- publication: Exact default canonical4683555e is published. Later local feature/outcome commits need fresh proof at their next normal publication boundary.
-- verification_policy: Focused ordinary slices and mandatory normal hooks. Full23.4/registration23.4.1/transitive-native custody23.4.2/general isolation/declared Lua5.4 remain open. Same-volume data and other-repository/dependency read-only boundaries remain mandatory. One memory-intensive job; check RAM/headroom, defer at86%, hard ceiling90%.
-- steering: Director resumed full PNT. Commit/clean Git before selecting the next leaf. Refresh maintained-reference scope for the completed owning leaf before staging. Preserve Julia/Lua loop-index mutation rights and existing Lua namespace/no-new-chunk-locals boundary.
+- activation_commit: `f3488961665621cec5c3df4263c5664beb36ca42` — clean Julia73.6.4 activation; derive HEAD from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4` — preserve Julia initial Boolean Count source fallback.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4` (completed handoff); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md; next frontier73.6.5.
+- next_action: Wait for the director to explicitly resume; then from clean Git activate installed Lua73.6.5; independently baseline Boolean source/copy controls and preserve the initial-source exception at its scalar guard without adding chunk locals or changing loop-index mutation rights. Commit before P2 compiler73.7/P3 formatting73.8.
+- in_flight_uncommitted: none — intended clean post-landing handoff.
+- blockers: Director requested pause at the next handoff-ready checkpoint; PNT is paused after Julia4. No automatic Lua activation or background job. Explicit resume required.
+- evidence: docs/checkpoints/count-source-julia-2026-11-05/ retains25 groups/four routes21PASS4RED to25PASS,125 final assertions, strict depwarn, nearest Count/length/index and actual declared input archives/emitted modules before load. Same-process fresh Modules; no independent process isolation or complete transitive/native custody claim.
+- publication: Exact canonical4683555e is published; later feature commits need fresh proof at their next normal publication boundary.
+- verification_policy: Focused checks/normal hooks per slice; full23.4/registration23.4.1/transitive-native custody23.4.2/general isolation/declared Lua5.4 remain open. Same-volume storage; other repositories/submodule implementation read-only. One intensive job, monitor RAM86/90 ceilings.

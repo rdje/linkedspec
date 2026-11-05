@@ -52,7 +52,7 @@
 {"bytes":4312,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-core-spec-parser.md","sha256":"0781803ff33c5151e6a6bab52fcd74ffc6166ef8173de1b2dd1f5957d32f8ab3","type":"member"}
 {"bytes":3556,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-corpus-manifest-io.md","sha256":"b1a37e31c52ab44faef77c52e02b018d6665225350ca6019fe98fc4a42163453","type":"member"}
 {"bytes":3599,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-corpus-selection-reporting.md","sha256":"cd435004af3e3bffc9a8644efba271adaf6ba98b1e70759189330bcb5241d6fb","type":"member"}
-{"bytes":3105,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.4","path":"docs/knowledge/julia-count-result-source-guards.md","sha256":"6eb24328aa6eb0f5967ac5b38cf1c66542199ceca0bfc19d7f80f10ff657bec8","type":"member"}
+{"bytes":4129,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4","path":"docs/knowledge/julia-count-result-source-guards.md","sha256":"1c0318e83de6b991c1ca5d521fc1c030b15a7fa0752292e5d42ae64538c3dae0","type":"member"}
 {"bytes":3388,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-cursor-rewind-number-results.md","sha256":"4cdffd3a71a136164321d77b1d8e36cd1610601b73ddfead0947dd878a1cece8","type":"member"}
 {"bytes":3702,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-definedness-result-source-guards.md","sha256":"b71722c47ca13ee0398d5f55728b3e81ed678dfee26ec14df4dce2bc99cc6981","type":"member"}
 {"bytes":3696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-depot-layering-after-cache-cleanup.md","sha256":"33492da80a7648e4c00660422b1190de4c95807d0355684448cdca1a49435310","type":"member"}

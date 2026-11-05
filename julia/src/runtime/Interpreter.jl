@@ -6338,7 +6338,8 @@ function _evaluate_runtime_fluent_chain!(
         end
         # Scalar producer results cannot feed array/hash-only consumers. An actual
         # container result from a compatible helper releases this boundary.
-        if scalar_result && !nullable_presence && !nullable_membership && !nullable_index &&
+        if scalar_result && !initial_count_source &&
+            !nullable_presence && !nullable_membership && !nullable_index &&
             !(helper_name in ("is_empty", "is_nonempty")) && (
             helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
             helper_name in _RUNTIME_HASH_HELPER_NAMES ||

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=julia",
+    "--depwarn=error",
+    "-e",
+    "using LinkedSpecJulia,JSON3,Test;include(ARGS[1]);include(ARGS[2])",
+    "julia/test/count_length_receivers_test.jl",
+    "julia/test/copied_null_index_composition_test.jl"
+  ],
+  "exit": 0
+}

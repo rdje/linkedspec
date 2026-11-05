@@ -1468,16 +1468,31 @@
   Review setup: wrapper-blank-line comparison was corrected at the owned-member boundary; the capsule preserves the initial reviewer/negative replay/diff.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4`
-  Status: `pending` / P1 Julia initial Boolean Count source fallback
+  Status: `completed` / bounded Julia initial Boolean Count fallback
   Goal: Restore existing initial Count non-array-zero source behavior for Booleans while preserving produced/copied-result guards.
   Reproduction/impact: Assessment73.6.0 independent native/restored/plan/fresh observations return null for initial false/true block receiver Count where Perl returns Number0; free Boolean Count already returns0 and copied Boolean Count correctly rejects. Fresh Modules share one process/runtime; no isolated-package claim.
   Priority/schedule: After assessment73.6.0 and preceding Count repairs, before unrelated selection; own until verified.
   Dependencies: Committed73.6.0, canonical Count source policy and ADR0138.
   Acceptance: Publicly locate source rejection in common/scalar guards; preserve only initial-source permission without prior result ownership at the necessary guard. Keep scalar_result assignments/state, copied/produced Boolean rejection, Count Number0 and legitimate null, source effects/errors/snapshots/function scope and the separate loop-index mutation restriction. Keep enumerate/call_index for Array-end mutation rights. No generic nullable Array or signature/context expansion.
-  Planned verification tier: focused
-  Planned focused checks: Exact Boolean-source RED/GREEN and Count/copy/source controls plus nearest Count/index-copy, strict depwarn and one exact normal include, book/Knowledge/history/memory/normal hooks; no broad suite.
-  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Finite authored source/guard and preservation controls, no complete family/population claim.
+  Verification tier: `focused`
+  Focused checks: Exact Boolean-source RED/GREEN and Count/copy/source controls plus nearest Count/index-copy, strict depwarn and one exact normal include, book/Knowledge/history/memory/normal hooks; no broad suite.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored source/guard and preservation controls, no complete family/population claim.
+
+  Activation: Clean f3488961665621cec5c3df4263c5664beb36ca42; Julia scalar guard independently assessed with shared Boolean/source/copy fixture and public parse/compile/emission routes. Same-process fresh modules only; full custody23.4.2/isolation/registration/admission remain separate. Supplied three policy hashes match their canonical startup record; artifact cleanup remains under24h.
+
+  Result: The common initial Count exception already bypasses its kind guard, but the separate scalar_result guard rejects Bool first. Reuse !initial_count_source only in that guard; preserve scalar initialization/assignments, enumerate/call_index and the separate Array-end mutation restriction. Copied/produced Booleans and unowned Array consumers still reject; Count Number0, legitimate null, eager needed errors, source-once/snapshot/function and copy behavior remain.
+  Verification: Unchanged25 source/copy groups move21PASS4RED to25PASS across native/restored/plan/fresh Module, with125 final assertions and strict Bool/Number/String/null identity. Julia function Boolean parameters independently fail at baseline unlike Dart, then pass. Actual declared direct source/manifests/normal/fixture inputs are archived before invocation, and actual generated AST/module bodies precede load. Route-specific source error message/class remains identical. Strict depwarn plus direct Count/length and copied-null index consumers pass. Capsule docs/checkpoints/count-source-julia-2026-11-05/ retains full channels and readonly archive/route review; normal include is registered. Fresh Modules share the current process/runtime; complete transitive/native custody23.4.2/general isolation/registration23.4.1/declared5.4/full23.4 remain separate. No broad suite or push.
+  Handoff: Director requests pause at the next clean checkpoint while normal hooks run. Preserve this completed Julia unit and stop before Lua5; explicit resume required. The first stage/commit is denied by the harness .git sandbox before hooks, then authorized Git retries normally. First hooks reject raw book/Git logs containing current checkout paths; exact gzip bytes replace only those raw evidence members before a complete normal-hook retry. The required live-status title is also restored after its exact-shape check rejects changed casing. The already-failed initial hook group is stopped during its later claim scan; complete corrected normal hooks are required afresh, with no bypass. Final handoff review also corrects the separate bounded root summary/frontier from pending Julia4 to explicit-resume-only Lua5. The in-progress retry is superseded and stopped before the complete final normal-hook run. No runtime or test changes follow the passing proof.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 — preserve Julia initial Boolean Count source fallback
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — public parse_spec_with_staged_user_function_definitions/compile_spec/runtime_execute/emit_julia_source_v2 baseline retains four failing groups on all four routes, including actual fresh module loads.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — retained public AST/emitted inputs and interpreter scalar_result guard show rejection before Count's existing non-array0 producer; the common guard already has initial_count_source.
+  - [x] **FIX** — reuse only that one-step exception at the scalar guard; no state, producer, signature or mutation-right changes.
+  - [x] **ADDRESSED (verified)** — unchanged finite25 controls pass125 assertions after the exact baseline21PASS4RED; readonly review checks strict kinds and observed error fields.
+  - [x] **NO REGRESSION** — direct Count/length and copied-null index controls pass with strict depwarn; no full Phase0/backend suite under focused cadence.
+  - [x] **LOCKSTEP** — Count guide/backend handoff, Knowledge, task/index and bounded live docs updated; normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5`
   Status: `pending` / P1 installed Lua initial Boolean Count source fallback
