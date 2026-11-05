@@ -1,0 +1,18 @@
+[
+   {
+      "id" : "original_receiver",
+      "source" : "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"a\"]}.count().take({order=cat(order,\"A\");1}).copy().copy().coalesce({order=cat(order,\"D\");[\"fallback\"]}).first().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+   },
+   {
+      "id" : "free_twin",
+      "source" : "Value:: I {order=\"\";out=count({order=cat(order,\"S\");[\"a\"]}).take({order=cat(order,\"A\");1}).copy().copy().coalesce({order=cat(order,\"D\");[\"fallback\"]}).first().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+   },
+   {
+      "id" : "receiver_no_copy",
+      "source" : "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"a\"]}.count().take({order=cat(order,\"A\");1}).coalesce({order=cat(order,\"D\");[\"fallback\"]}).first().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+   },
+   {
+      "id" : "minimal_block_receiver",
+      "source" : "Value:: I {return({[\"a\"]}.count().copy().copy().add(1))}"
+   }
+]

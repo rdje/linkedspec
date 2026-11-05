@@ -42,3 +42,12 @@ reaches MethodLowering/ValueExpr compatibility lowering. This establishes a
 pre-execution concern, not an exact amplification root cause or runtime hang.
 P2 owner73.7 schedules diagnosis/repair after the six P1 Count repairs. The
 smaller maintained repeated-copy control does not close that owner.
+
+Count-specific compiler73.7 now qualifies cold startup and completes the exact
+original long source after warmup. A single-condition omission of Count from
+this dispatcher restores the bounded long-form stops and generated-Perl
+compatibility re-entry. The existing73.6.1 repair already avoids that route;
+no new compiler production edit is required. The original source is now an
+additional maintained regression, with native/fresh values/readiness preserved.
+See [[perl-count-receiver-compilation]] for actual controls and custody limits;
+no general compiler-performance or full-admission claim follows.

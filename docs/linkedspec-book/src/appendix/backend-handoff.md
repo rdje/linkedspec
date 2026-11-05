@@ -3647,3 +3647,19 @@ independent isolation, registration, declared Lua5.4 and full admission remain
 open. Rebuild Lua applications/runtime. All six concrete P1 Count repairs are
 implemented with focused checks; P2 compiler73.7 then P3 Dart formatting73.8
 follow before full23.4.
+
+
+Count-specific compiler diagnosis73.7 now restores the exact original long
+receiver/repeated-copy source as a maintained regression. Its native/fresh result
+is `[null,"S"]`, with later rejected operands/defaults/with skipped and readiness,
+cursors and warnings preserved. Public compiler stages complete after a separately
+qualified bootstrap warmup. A private single-condition control identifies the
+legacy generated-source round trip avoided by the earlier Count copy repair;
+this leaf adds no production compiler change. Short cold-start stops are not
+source-scaling evidence. General compiler performance and full custody/admission
+remain unassessed. P3 Dart formatting73.8 is next before full23.4.
+
+The director requested a clean pause after this compiler checkpoint. P3 Dart
+formatting73.8 resumes only on explicit instruction; the owned artifact-growth
+review23.4.8 then precedes unrelated feature selection. No full admission is
+inferred from the pause or this bounded compiler-path result.

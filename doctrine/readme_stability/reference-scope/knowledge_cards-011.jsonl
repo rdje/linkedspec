@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5401,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-index-source-foundation.md","sha256":"e7086ed6843bc1f53f1f45275d20017b4db67214aeebf8ad6c0f3e8c526e31e1","type":"member"}
 {"bytes":4069,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-introspection-admission.md","sha256":"f79dde9e075aa40bc89dbb66d5731435a1842c22a65adaf4c298e43d3913dbe2","type":"member"}
 {"bytes":9043,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-introspection-authority-map.md","sha256":"bc2f319dd0cf4e2eca78866a553adee25264104e1db6a0550eb2f56e4894ade0","type":"member"}
 {"bytes":6475,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-semantic-query-evaluator.md","sha256":"100f04900699bbc1e24dcdf9bb094821a8aec4ac8091abe072d56b6816138a1e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3466,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-end-mutation-methods.md","sha256":"5dc70600359b0252f53a54dfb612c14b76aab46153ace0f33d859640d9beaf71","type":"member"}
 {"bytes":3805,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-numeric-reducer-receiver-methods.md","sha256":"3f9ac5646c143e412612dc46c4a3d3e1446c0bb4b15cccaaf83cf0ed6d251328","type":"member"}
 {"bytes":8738,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-receiver-value-chains.md","sha256":"8fb03b10a6004b696a9278e82b1ec147c74df5fc90bfbf9dec23d814ad5b3836","type":"member"}
-{"bytes":3224,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-assignment-expression-closure.md","sha256":"54371372bc5a2ccf9cca43e9b558dd243a4d71068d915198b79c87c62f8b2a68","type":"member"}

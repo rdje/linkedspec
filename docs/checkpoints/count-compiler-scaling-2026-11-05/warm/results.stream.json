@@ -1,0 +1,75 @@
+WARM_BEGIN
+WARM_READY
+{
+   "completed" : 1,
+   "id" : "original_receiver-parse_only",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "original_receiver-substitution",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "original_receiver-native",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "free_twin-parse_only",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "free_twin-substitution",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "free_twin-native",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "receiver_no_copy-parse_only",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "receiver_no_copy-substitution",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "receiver_no_copy-native",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "minimal_block_receiver-parse_only",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "minimal_block_receiver-substitution",
+   "status" : 0
+}
+
+{
+   "completed" : 1,
+   "id" : "minimal_block_receiver-native",
+   "status" : 0
+}
+
+WORKER_STATUS 0

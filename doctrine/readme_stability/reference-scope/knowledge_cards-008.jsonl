@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3348,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-contract-v1.md","sha256":"5ac7c5180ae239c33052a2f3f690fa70a0b28dbcde6b28319c5c4faf2db0bbb5","type":"member"}
 {"bytes":4132,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-contract-v2.md","sha256":"df8608c0942b2fe5b918af01d6d3f45ab3e6ef5c27354008014ac461babd9664","type":"member"}
 {"bytes":4762,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-final-codeblock-normalization.md","sha256":"a7ac84fcdacd0dd0912293a93e155d705a601dfa18daa58531ce30113f1f515f","type":"member"}
 {"bytes":4504,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generic-flat-runtime-values.md","sha256":"97739e712c3fcfaa2e6af4a89c5f93f3763b1b220084792a695295818cdeaceb","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3844,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-core.md","sha256":"c749c26a9796f7d57e0b2eb9eb769d3f7e2c3167083650b7416b76835cd1dedd","type":"member"}
 {"bytes":6787,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-preflight.md","sha256":"85d11f271e9898e74935228525aae057229fa1c00680d4598571a252e4d313a7","type":"member"}
 {"bytes":3045,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-routes.md","sha256":"5d469af97c131d5db43d98efdc6a37b50c523f64c6e0a7223b137528c7f62602","type":"member"}
-{"bytes":7551,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rule-local-cursor-rollout-boundaries.md","sha256":"761e45a802f463288265d4ce6afdfbd5d7b992209bd686889163888ab0e954b9","type":"member"}

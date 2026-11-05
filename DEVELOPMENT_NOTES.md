@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — Count copy dispatch also avoids generated-source compatibility re-entry
+
+The old long receiver concern is resolved by the existing guarded_copy_chain Count admission. Removing only that condition sends the two long forms through generic copy-prefix folding and generated do/copy Perl back through legacy_method_value_expr at activation line4017, reaching the bounded stop; no-copy/minimal controls complete. Warmed public stages and the restored original native/fresh regression pass without a new compiler edit. Initial short cold stops are separately qualified against minimal controls, not misreported as scaling proof. BSD tar metadata is retained and magic/paired-entry validated separately from actual source bytes after the first review rejection. Full transitive/native custody and general compiler performance remain outside this finite causal closure.
+
 ## 2026-11-05 — Initial Lua Count sources share the same two-guard exception
 
 The common Count guard already permits an initial receiver without prior result ownership. Its separate unconditional Boolean scalar guard still returns before Count can apply the non-array Number0 source fallback. Reuse the same first-step predicate there; leave scalar_result initialization/assignments and the loop-index mutation gate intact. Independent PUC/LuaJIT baselines distinguish four failing source/function groups from healthy copied/produced Bool rejection and null/zero continuations. The same25 controls pass on four routes after the bounded repair, with exact observed errors and direct consumers preserved. Actual archived direct inputs/pre-load modules survive; full native/transitive closure and process isolation remain separately owned. P2 long-source compiler diagnosis73.7 is next.

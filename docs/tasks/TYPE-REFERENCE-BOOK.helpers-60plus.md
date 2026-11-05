@@ -1537,16 +1537,30 @@
   Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — preserve Perl Count rejection through logical producers
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.7`
-  Status: `pending` / P2 owned long Count/copy receiver compilation scaling
+  Status: `completed` / Count-specific causal diagnosis and original long-source regression
   Goal: Locate and repair the excessive compilation work exposed by the retained longer receiver/repeated-copy source.
   Reproduction/impact: Source receiver_repeated_copy_rejection in docs/checkpoints/count-copy-perl-2026-11-05/before/cases.json keeps native Get compiling before its first assertion; stopped after the preceding fifteen complete controls. Sample records active Perl operations rather than a blocked process; public parse_only and call_spec_handler_subst both reach a bounded stop. Trace reaches MethodLowering lower_method_value_expr/ValueExpr direct-access/compatibility bridges repeatedly. Exact amplification root cause remains unproven; do not classify this as a runtime parser hang or claim a timing regression from the sample.
   Priority/schedule: After the six concrete P1 Count73.6 repairs and before full23.4; no unrelated feature selection first. Own until independently verified repair.
   Dependencies: Committed73.6.1 and remaining P1 Count repairs; original slow source/trace/sample/probe retained locally, dependency implementations remain black boxes.
   Acceptance: Use bounded public Get parse_only/descriptor/substitution/emission plus scoped trace to locate the exact compiler stage and source owner. Distinguish receiver/free and one/repeated-copy controls without accepting incomplete TAP. Repair the demonstrated algorithmic cause in a safe separate slice; preserve values/rejection/metadata/source/error/copy/signature behavior and retain a bounded reproducer. A faster single run or smaller replacement normal alone cannot close this owner.
-  Planned verification tier: focused
-  Planned focused checks: Minimal compiler-stage distinguishing RED/GREEN and direct Count/copy/source regressions, owner syntax/book/Knowledge/history/normal hooks; no broad suite.
-  Planned canonical trigger: Full23.4/final clean push after scheduled prerequisites.
-  Planned claim verification: none: Bounded compiler diagnosis and authored regression, no population/performance benchmark claim.
+  Verification tier: `focused`
+  Focused checks: Minimal compiler-stage distinguishing RED/GREEN and direct Count/copy/source regressions, owner syntax/book/Knowledge/history/normal hooks; no broad suite.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Bounded compiler diagnosis and authored regression, no population/performance benchmark claim.
+
+  Activation: Clean e7b9197ae006e85ea5a306573f257d7933c04c12 after installed Lua73.6.5 with all ten doctrines, committed pointer check, brief0 and clean Git. Recovered original interrupted source, public phase probe, debug trace and Knowledge perl-count-copy-rejection. First distinguish current public compilation from its shorter/free controls with hard child limits; no production diagnosis is assumed from the historical interruption or prior fixes.
+
+  Result: The earlier Count copy dispatcher73.6.1 already resolves this exact source. Initial cold six-second Get/parse_only stops also affect minimal controls and are not source-scaling proof; warmed public parse_only/substitution/native stages all complete on original/free/no-copy/minimal sources. A private single-condition omission of Count from guarded_copy_chain restores bounded stops for the two long forms while no-copy/minimal complete. Entry capture observes generated Perl do/copy values re-entering the authored-value compatibility lowerer via legacy_method_value_expr at activation line4017, after generic prefix folding. Keeping Count in the existing dispatcher avoids that path and preserves rejection. No production compiler change or general/asymptotic/timing guarantee is claimed.
+  Verification: Original long source is restored unchanged as a new twentieth fixture; first19 objects and normal remain unchanged. Four selected native/fresh groups (rejected copy, legitimate null, needed source error, original long receiver) pass with exact kinds/effects/cursors/readiness/errors/warnings; actual pre-load modules survive. Owner/normal syntax and book render pass. Capsule docs/checkpoints/count-compiler-scaling-2026-11-05/ retains cold qualification, bounded warmed stages, counterfactual module, initial/current entry-profile producers, actual declared archives and readonly review. Initial archive review rejects BSD tar AppleDouble pseudo-source entries; retained metadata is subsequently magic/paired-entry validated separately from source bytes. Original archives and first rejection survive. First cold/initial-profile capture boundaries and full custody23.4.2 remain qualified, not silently upgraded. Registration/general isolation/full23.4 remain separate. P3 Dart formatting73.8 next; no broad suite or push.
+  Handoff: Director requests stopping at the next handoff-ready checkpoint while normal hooks run. Supersede the still-running candidate to include an explicit durable pause after this completed compiler leaf, then rerun complete normal hooks. Preserve the superseded log without claiming it passed. No runtime/test inputs change; P3 remains pending until explicit resume. Clear the brief and verify clean Git/no required jobs before stopping.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.73.7 — restore long Count receiver regression and close causal diagnosis
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — exact original source and free/no-copy/minimal controls use public LinkedSpec::Get parse_only/native and call_spec_handler_subst with hard fork limits; cold startup is qualified independently.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — single-condition counterfactual identifies generic copy-prefix folding and generated-source compatibility re-entry through MethodLowering line4017; earlier guarded_copy_chain Count admission avoids the path.
+  - [x] **FIX** — existing73.6.1 production repair is retained; add the exact original long regression without replacing healthy shorter controls or changing compiler/signature policies.
+  - [x] **ADDRESSED (verified)** — warmed original public stages and actual native/fresh regression pass; negative omission restores bounded stops independently of cold startup.
+  - [x] **NO REGRESSION** — selected rejected-copy/valid-null/needed-error controls, first19 fixture identities and owner/normal syntax pass; no global performance or full-suite inference.
+  - [x] **LOCKSTEP** — book/Knowledge/task/index/live docs align on Count-specific closure and P3 next; git diff --check and normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73.8`
   Status: `pending` / P3 owned pre-existing Dart member formatting drift
