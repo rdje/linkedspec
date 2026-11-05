@@ -29,3 +29,44 @@ inherit the pushed commit's receipt. No runtime feature is admitted by these eve
 External access is the authorized repository/public service read with existing credentials;
 all project-owned outputs stay in this repository. Other repositories and dependencies
 remain read-only. Hosted push CI remains disabled under ADR `0004`.
+
+## Successful publication outcome
+
+Owner: `TYPE-REFERENCE-BOOK.1.2.23.4.10.2`. The default canonical gate completed
+successfully in approved host execution for clean
+`4683555ec51f04b8977812ce4e984c5cc6e6f42c`. The final exact committed receipt is
+`canonical-4683555e.receipt`; byte-exact complete gate output is compressed in
+`canonical-4683555e.log.gz`. Default optional expanded matrices stayed disabled;
+this is exact default canonical proof, not independent full reference admission.
+
+The actual command was:
+
+```bash
+git -c push.followTags=false push --porcelain --recurse-submodules=no origin HEAD:refs/heads/main
+```
+
+It exited successfully. `push-4683555e.log.gz` retains normal pre-push receipt reuse,
+the verified canonical boundary and the accepted `d3a26a94f..4683555ec` main update.
+No force, authentication/configuration change, tag publication or submodule recursion
+was used. The earlier host rejection and separate publickey error remain unattributed.
+
+`capture-outcome.sh` is the actual one-shot read-back and log/receipt acquisition;
+`published-at.txt` preserves its UTC timestamp. `local-origin-refs.txt`,
+`published-ssh-main.txt` and `published-main-ref.json` independently agree on
+`4683555ec51f04b8977812ce4e984c5cc6e6f42c`. The fresh official Git Operations component
+is operational. `published-head-runs.json` reports no hosted runs for that head,
+consistent with ADR `0004`. These are dated observations, not future ref guarantees.
+The retained compressed logs were decompressed and compared byte-for-byte with the
+actual project-local execution logs before this record.
+
+An early receipt check ran while the gate was still finalizing and rejected the
+old receipt. The gate then exited successfully, wrote the exact committed receipt,
+and a fresh check passed before publication. That intermediate query is not a gate
+failure or authority to publish. The driver invokes Phase0 through `prove` directly;
+its quiet output was checked against the active process and the retained prior run,
+without restarting or weakening verification.
+
+This later focused outcome-record commit has no inherited exact-HEAD receipt.
+Its own publication occurs at the next normal canonical boundary. Recovery of the
+prior committed work is complete; Rust Count73.2 is next, followed by peers/P1
+copy/source73.6 and advisory growth8. No runtime or portable admission is inferred.

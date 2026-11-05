@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.10.2 — record verified publication recovery
+
+Exact clean4683555e passed default canonical CI and normal pre-push hooks; the successful fast-forward advanced main fromd3a26a94. Fresh local/origin/SSH/API identities agree; official Git Operations is operational and hosted runs are empty under ADR0004. Retain byte-exact compressed gate/push logs, receipt, acquisition source and dated read-back. Focused task/memory/history/Knowledge/book checks govern this later outcome record; it needs fresh proof at its own publication boundary. Rust Count73.2 resumes next; full23.4 remains open.
+
 ## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.10.1 — resume publication recovery
 
 Explicit director PNT resume supersedes the prior pause. Fresh approved-host SSH and authenticated API reads agree on main d3a26a94; official Git Operations status is operational. Retain actual dated responses and acquisition source without changing authentication or attributing the earlier rejection. The three supplied policy hashes match their prior review. Task/index, roadmap, live/resume and book explain the checkpoint-before-publication sequence. Focused integrity checks and normal hooks govern this record; exact clean canonical publication10.2 remains next.

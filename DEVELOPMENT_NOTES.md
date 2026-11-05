@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-05 — bind publication proof to the actual pushed checkpoint
+
+Recovery publishes4683555e with exact default canonical proof and normal hooks, then records the external event in a focused unit. The outcome record does not inherit that receipt. The receipt command checks committed HEAD/tree identity; pre-push separately enforces clean worktree/index/untracked state. Phase0 uses prove directly with inherited output; inspect execution state and wait for the complete result rather than treating quiet output as failure. An early query before finalization rejected the old receipt; the completed gate and fresh check passed before the successful push. Prior server/publickey causes remain unconfirmed; no authentication change or feature admission follows.
+
 ## 2026-11-05 — recover external access before retrying publication
 
 Restricted-harness reads failed DNS/network initialization while approved-host SSH/API reads succeeded. That environment distinction is not a repository authentication defect. Fresh official host state is operational; it does not establish the prior commit_refs cause. Preserve acquired events, commit resume steering and only then run the exact clean publication gate in host execution. A later outcome-record commit does not inherit the pushed HEAD receipt. No policy-source update or feature admission is claimed.
