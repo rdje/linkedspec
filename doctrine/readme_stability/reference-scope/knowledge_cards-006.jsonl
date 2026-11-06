@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":20902,"lines":224,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-cursor-consumer-reading.md","sha256":"0a737ca590f61c8b592f518dc42875fbe7d9c2189ffc6c4caf7854bf6b441498","type":"member"}
 {"bytes":4586,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-admission.md","sha256":"c2dc4ab99c7b54b82ee71403678691c70afd674125e4823db251ba7380313760","type":"member"}
 {"bytes":4979,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-core.md","sha256":"50d3725a6a20e6984c85b852ff8b0c6aac51dfdcd48fe553cceeeda3b5218b58","type":"member"}
 {"bytes":6283,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-preflight.md","sha256":"b5f77f81792563ed7ab83880fbaf71ebd869933ff8d3c09b052a07f834759be8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2073,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/method-like-dsl-migration-status.md","sha256":"6c8e11172488eb12df2645d71b652ec77c7ed026ba7069a1af3014ebcf1f8bbe","type":"member"}
 {"bytes":4504,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-capability-admission.md","sha256":"0d6d478070b70b328b3fe7c1aa51dacafefef2e3f051eeaf7cc3cd95b2cccdb9","type":"member"}
 {"bytes":7248,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-public-surface-no-drift.md","sha256":"27351880391689a009228dad866f0383ed2bf1fd234afd50042efede1df41c06","type":"member"}
-{"bytes":4049,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-recurring-six-runtime-gate.md","sha256":"58453da6ed18e5fa4dca615f34c3ca25789fca82a8eccd32db6b974d10f70664","type":"member"}

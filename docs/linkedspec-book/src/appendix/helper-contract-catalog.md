@@ -1554,6 +1554,8 @@ admission remain open.
 - **Returns**: int
 - **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input. On Perl/Rust/Dart/Julia/Lua, `{"a":1,"b":2}.count_keys().mul(2)` → `4` and `{}.count_keys().add(1)` → `1`; the result feeds existing compatible scalar/number methods just like `num_add(count_keys(meta),3)`. Source evaluation and the count precede later operands, so their mutations do not recompute that count.
 
+- **Current Perl limitations (November6)**: Boolean/Array sources can raise `Not a HASH reference`, and a mutating value-block source can fail generated-handler compilation. Numeric `count_keys(4)` can also count host `main::4`; empty-host zero conceals that source-classification bug. These violate the intended zero/source-error behavior and are owned by P1 repairs75.0.1/.2. Compatible Hash counts and missing-input zero pass the retained controls. CountKeys result guards75.1 remain pending; incompatible consumers can return the wrong value or run later bodies. The backend handoff appendix records the exact scope and repair order. Other backends require independent assessment.
+
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`
 - **Returns**: array

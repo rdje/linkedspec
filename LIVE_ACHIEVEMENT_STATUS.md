@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT completes bounded Length74 implementations across Perl/Rust/Dart/Julia/installed Lua with focused checks. Full admission remains pending. P1 key-count75.0 assessment is next before unrelated selection.
+PNT moves from focused-checked bounded Length74 to P1 key-count75.0's frozen22 target. Newly isolated Perl typed-source75.0.1 and domain75.0.2 prerequisites precede Perl75.1/independent peers75.2-.5 before unrelated selection/full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.74.5 adds canonical Length role before installed Lua Count source permission, preserving namespace/chunk-local count/scalar state/loop-index mutation rights/producers/schema. PUC5.5.1/LuaJIT independently move authored24 programs12PASS12RED to24PASS/four routes; new122 checks/48 failures become122/zero per host. Twelve healthy observations/domain/error fields and24 emitted/parsed bodies exact. Final nearest Count92/Count-length/version/loadfile/five corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Lua apps/runtime. Full custody/isolation/discovery/declared5.4/admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.0 retains actual primary21/isolated20/preservation1/seed6 controls. Initial runtime-clean19 has seven healthy/twelve guard gaps; one needed-source compile/fresh-load failure and one aborted domain profile are separate P1 prerequisites, not valid guard/domain oracles. CountKeys omits typed mutating-block lowering, checks definedness rather than Hash kind, and lacks Count/Length result ownership. Exact carriers read host main::2 through the result consumer and main::4 through numeric producer input, with unchanged host data; domain75.0.2 owns both non-Hash references and numeric-literal classification. Frozen22/actual declared first inputs/modules/full raw channels and readonly recovery/six corruptions pass. No production change, peer verdict or full admission.
 
 ## Next Action
 
-Activate P1 key-count75.0 from clean Git. Recover retained original count_keys observations/current Count-length3 authority; freeze bounded producer/source/domain/zero/copy/logical/with/error/preflight target with minimum public diagnostics. Create concrete backend repair leaves before production; resolve key-count before unrelated selection/full23.4.
+Activate P1 typed-source75.0.1 from clean Git. Establish unchanged focused needed-error/valid Hash/source-order controls, repair only the demonstrated mutating CountKeys block lowering and commit. Then domain75.0.2 before Perl75.1 guards/independent peers. Retain all original assessment epochs and capture a valid Perl domain profile only after producer repair.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — Dart Length/source-owner24PASS; twelve healthy exact/final45; Julia74.4 next.
@@ -29,7 +30,6 @@ Activate P1 key-count75.0 from clean Git. Recover retained original count_keys o
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — Dart Boolean Count source focused-checked; clean fresh-context Julia4/Lua5 handoff.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — Rust Count source fallback focused-checked; Dart Boolean source3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — Perl Count logical rejection focused-checked; Rust source2 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — Perl Count copy-state focused-checked; logical producer next; P2 compiler scaling owned.
 
 ## History
 

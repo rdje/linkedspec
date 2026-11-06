@@ -1,0 +1,122 @@
+[
+  {
+    "id": "free_missing",
+    "body": "return(count_keys(undef))",
+    "source": "Value:: I {return(count_keys(undef))}",
+    "expected": 0
+  },
+  {
+    "id": "receiver_missing",
+    "body": "return(undef.count_keys())",
+    "source": "Value:: I {return(undef.count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_number",
+    "body": "return(count_keys(4))",
+    "source": "Value:: I {return(count_keys(4))}",
+    "expected": 0
+  },
+  {
+    "id": "receiver_number",
+    "body": "return(4.count_keys())",
+    "source": "Value:: I {return(4.count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_false",
+    "body": "return(count_keys(false))",
+    "source": "Value:: I {return(count_keys(false))}",
+    "expected": 0
+  },
+  {
+    "id": "receiver_false",
+    "body": "return(false.count_keys())",
+    "source": "Value:: I {return(false.count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_text",
+    "body": "return(count_keys(\"text\"))",
+    "source": "Value:: I {return(count_keys(\"text\"))}",
+    "expected": 0
+  },
+  {
+    "id": "receiver_text",
+    "body": "return(\"text\".count_keys())",
+    "source": "Value:: I {return(\"text\".count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_array",
+    "body": "return(count_keys([]))",
+    "source": "Value:: I {return(count_keys([]))}",
+    "expected": 0
+  },
+  {
+    "id": "receiver_array",
+    "body": "return([].count_keys())",
+    "source": "Value:: I {return([].count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_empty_hash",
+    "body": "return(count_keys({}))",
+    "source": "Value:: I {return(count_keys({}))}",
+    "expected": 0
+  },
+  {
+    "id": "receiver_empty_hash",
+    "body": "return({}.count_keys())",
+    "source": "Value:: I {return({}.count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_hash",
+    "body": "return(count_keys({\"a\":1,\"b\":2}))",
+    "source": "Value:: I {return(count_keys({\"a\":1,\"b\":2}))}",
+    "expected": 2
+  },
+  {
+    "id": "receiver_hash",
+    "body": "return({\"a\":1,\"b\":2}.count_keys())",
+    "source": "Value:: I {return({\"a\":1,\"b\":2}.count_keys())}",
+    "domain_note": "Independent current receiver admission observation; not imported from free-helper zero policy."
+  },
+  {
+    "id": "free_true",
+    "body": "return(count_keys(true))",
+    "source": "Value:: I {return(count_keys(true))}",
+    "expected": 0
+  },
+  {
+    "id": "free_nonempty_array",
+    "body": "return(count_keys([1]))",
+    "source": "Value:: I {return(count_keys([1]))}",
+    "expected": 0
+  },
+  {
+    "id": "count_source_error_control",
+    "body": "return(count({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))",
+    "source": "Value:: I {return(count({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))}",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "keys_pure_value_block",
+    "body": "return(count_keys({{\"k\":1}}))",
+    "source": "Value:: I {return(count_keys({{\"k\":1}}))}",
+    "expected": 1
+  },
+  {
+    "id": "keys_declared_value_block",
+    "body": "return(count_keys({meta={\"k\":1};meta}))",
+    "source": "Value:: I {return(count_keys({meta={\"k\":1};meta}))}",
+    "expected": 1
+  },
+  {
+    "id": "keys_constructor_control",
+    "body": "return(count_keys(hash(\"k\",1)))",
+    "source": "Value:: I {return(count_keys(hash(\"k\",1)))}",
+    "expected": 1
+  }
+]

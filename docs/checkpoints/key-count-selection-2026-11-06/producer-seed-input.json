@@ -1,0 +1,6 @@
+{
+  "namespace": "4",
+  "lowered": "return scalar(keys %4)",
+  "module": "docs/checkpoints/key-count-selection-2026-11-06/diagnostics/modules/free_number.pm.gz",
+  "source": "Value:: I {return(count_keys(4))}"
+}

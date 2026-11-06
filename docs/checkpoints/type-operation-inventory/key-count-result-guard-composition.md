@@ -1,0 +1,64 @@
+# Ordinary key-count result guards
+
+Owner: TYPE-REFERENCE-BOOK.1.2.23.3.75.0; implementation family75. Existing
+count-length-results.md3, helper catalog CountKeys and actual-kind/copy/eager-logical
+contracts retain authority. Assessment only: no production repair or peer verdict.
+
+Canonical count_keys(value), one positional recognized source, and receiver.count_keys()
+with zero extra operands yield Number counts. Preserve Hash counts, documented
+missing/non-Hash producer zero, once-only source evaluation and snapshots. Do not
+add names/signatures/aliases/contexts or change copy depth/parser/schema. Keep
+initial producer input distinct from consuming already-produced Number/zero.
+Existing zero still flows through copy/eager logical/with and compatible scalar/
+numeric methods; explicit String/Array/Hash bridges retain actual kinds.
+
+Wrong-kind Array/Hash consumers must reject with null before operands/later
+copy/logical/with, and produced CountKeys must not regain Count or CountKeys initial
+fallback. Compatible prefixes and existing Count contrast identify missing result
+ownership. Malformed zero-extra receiver preflight skips source/operand/body;
+needed source errors execute and cannot be masked by coalesce.
+
+```text
+count_keys({"k":1}).add(1)                        # 2, healthy
+count_keys({}).with(){return("recovered")}         # recovered, healthy zero
+count_keys({"k":1}).take(1).with(){return("ran")} # target null/body skipped
+count_keys({"k":1}).count()                       # target null, produced Number
+count_keys({}).with(){return([1,2])}.count()       # 2, explicit Array bridge
+```
+
+Frozen tests/fixtures/key_count_result_guard_cases.json has22 authored programs:
+initial21 plus one actual initial-source continuation preservation control. At
+f5e2350ba, nineteen initial programs execute cleanly (seven healthy/twelve wrong
+results/effects), one needed-source program fails compilation and the domain
+aggregate aborts. The additional preservation program is healthy. Do not call all
+22 runtime-ready or freeze the aborted domain output. Each peer must establish
+its own current producer/receiver/domain/error observations before attribution.
+
+P1 prerequisites precede Perl guards:75.0.1 admits the demonstrated mutating
+value-block argument to the existing typed lowerer;75.0.2 repairs demonstrated
+Boolean/Array Hash dereference errors under the documented zero policy. Existing
+Count same-body source-error and CountKeys pure/declared Hash block/constructor
+controls distinguish these causes. Legacy bare/absent host-slot scope remains
+SESSION17-owned. No general all-block/readiness/host isolation claim.
+
+Perl75.1 must retain exact localized empty/outer/main::2 public/full-module controls:
+computed CountKeys Number2 currently reads main::2 through wrong set_key. Expected
+null, skipped operands/later bodies and unchanged host data. Source admission must
+precede Count fallback, persist through copy/logical links and preserve healthy
+initial CountKeys zero. Regenerate emitted Perl after fixes. Remaining backends
+75.2-.5 assess independently; preserve both Rust loops and Julia/Lua loop-index
+mutation restrictions. Lua uses the existing namespace/no new chunk locals/no
+unsafe runner/formatter/declared5.4 inference.
+
+Actual sources/producers/input archives/raw channels/modules/root causes/six
+corruption controls and acquisition qualifications:
+docs/checkpoints/key-count-selection-2026-11-06/REVIEW.md. Full native/transitive
+custody4.2/general isolation/canonical discovery4.1/full23.4 remain separately owned.
+
+Numeric-source distinction: `count_keys(4)` emits `scalar(keys %4)`, bypassing the
+reference branch. Six exact public/full-module localized empty/outer/main::4
+controls produce0/0/1 with unchanged host data and no warning/error. An empty-host
+zero is therefore not proof of rejecting numeric data. P1 domain75.0.2 also owns
+this literal-data/Hash-symbol boundary, preserving valid named Hash sources and
+leaving broader bare/absent SESSION17 scope separate. Actual producer-seed inputs,
+carrier/module and raw channels are retained; no native seeded/general isolation.

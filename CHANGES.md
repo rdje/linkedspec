@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — freeze key-count guards and own producer prerequisites
+
+Freeze shared22 after actual Perl Get/descriptor/substitution/emission/native/fresh intake. Retain seven healthy/twelve guard gaps from nineteen runtime-clean initial programs, plus one additional initial-source preservation control. Own mutating-block compile failure75.0.1 and Boolean/Array dereference errors75.0.2 before Perl75.1/independent peers. Exact public/full-module seeds expose main::2 read. Numeric-source seeds also expose main::4 lookup under the producer, explicitly owned by domain75.0.2. Actual first inputs/modules/full raw channels and six replay corruptions pass; no production change or peer/full-admission claim. Book/catalog caveats and task/Knowledge/live records align.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — guard installed Lua Length results and produced-source ownership
 
 Canonical Length namespace member/admission precedes Count permission; no new chunk locals or scalar/Count/mutation-right/producer/schema changes. PUC5.5.1/LuaJIT independently move authored24 programs12PASS12RED to24PASS/all four routes. New122/48-failure normal becomes122/zero per host; twelve healthy observations/domain/error fields and24 emitted/parsed bodies exact. Final nearest Count92/Count-length/version/loadfile and five corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Lua apps/runtime. Bounded Length implementations complete, full admission separate; P1 key-count75.0 next.

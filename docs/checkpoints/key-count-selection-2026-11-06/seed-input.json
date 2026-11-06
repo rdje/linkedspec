@@ -1,0 +1,6 @@
+{
+  "namespace": "2",
+  "lowered": "return do { my $__ls_set_key_source = do { my $__ls_count_keys = {do { my @__ls_evaluated_values = (\"a\"); @__ls_evaluated_values } => do { my @__ls_evaluated_values = (1); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (\"b\"); @__ls_evaluated_values } => do { my @__ls_evaluated_values = (2); @__ls_evaluated_values }}; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); my $__ls_set_key_key = \"k\"; my $__ls_set_key_value = 1; $__ls_set_key{$__ls_set_key_key} = $__ls_set_key_value; \\%__ls_set_key }",
+  "module": "docs/checkpoints/key-count-selection-2026-11-06/initial/modules/seeded_hash.pm.gz",
+  "source": "Value:: I {return(count_keys({\"a\":1,\"b\":2}).set_key(\"k\",1))}"
+}

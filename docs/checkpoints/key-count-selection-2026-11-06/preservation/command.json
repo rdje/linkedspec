@@ -1,0 +1,11 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "perl",
+  "-Iperl",
+  "docs/checkpoints/key-count-selection-2026-11-06/probe.pl",
+  "docs/checkpoints/key-count-selection-2026-11-06/continuation-cases.json",
+  "docs/checkpoints/key-count-selection-2026-11-06/preservation/modules"
+]

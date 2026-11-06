@@ -1,0 +1,187 @@
+[
+  {
+    "id": "key_count_compatible",
+    "body": "return([count_keys({\"k\":1}).add(1),{\"k\":1}.count_keys().add(1),count_keys(undef)])",
+    "source": "Value:: I {return([count_keys({\"k\":1}).add(1),{\"k\":1}.count_keys().add(1),count_keys(undef)])}",
+    "expected": [
+      2,
+      2,
+      0
+    ]
+  },
+  {
+    "id": "key_count_free_guard",
+    "body": "order=\"\";a=count_keys({\"k\":1}).take({order=cat(order,\"A\");1});b=count_keys({\"k\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])",
+    "source": "Value:: I {order=\"\";a=count_keys({\"k\":1}).take({order=cat(order,\"A\");1});b=count_keys({\"k\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])}",
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "key_count_receiver_guard",
+    "body": "order=\"\";out={order=cat(order,\"S\");{\"k\":1}}.count_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"k\":1}}.count_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "zero_with",
+    "body": "return([count_keys({}).coalesce(7).add(1),count_keys(undef).with(){return(\"recovered\")}])",
+    "source": "Value:: I {return([count_keys({}).coalesce(7).add(1),count_keys(undef).with(){return(\"recovered\")}])}",
+    "expected": [
+      1,
+      "recovered"
+    ]
+  },
+  {
+    "id": "explicit_bridges",
+    "body": "return([count_keys({\"a\":1,\"b\":2}).cat(\",tail\").split(\",\").last().uppercase(),{\"a\":1,\"b\":2}.count_keys().cat(\",tail\").split(\",\").last().uppercase(),count_keys({}).with(){return([1,2])}.count(),count_keys({}).with(){return({\"x\":1})}.count_keys()])",
+    "source": "Value:: I {return([count_keys({\"a\":1,\"b\":2}).cat(\",tail\").split(\",\").last().uppercase(),{\"a\":1,\"b\":2}.count_keys().cat(\",tail\").split(\",\").last().uppercase(),count_keys({}).with(){return([1,2])}.count(),count_keys({}).with(){return({\"x\":1})}.count_keys()])}",
+    "expected": [
+      "TAIL",
+      "TAIL",
+      2,
+      1
+    ]
+  },
+  {
+    "id": "source_once_snapshot",
+    "body": "meta={\"x\":1};order=\"\";out={order=cat(order,\"S\");meta}.count_keys().add({order=cat(order,\"A\");meta[\"y\"]=2;3});return([out,count_keys(meta),order])",
+    "source": "Value:: I {meta={\"x\":1};order=\"\";out={order=cat(order,\"S\");meta}.count_keys().add({order=cat(order,\"A\");meta[\"y\"]=2;3});return([out,count_keys(meta),order])}",
+    "expected": [
+      4,
+      2,
+      "SA"
+    ]
+  },
+  {
+    "id": "function_guard",
+    "body": "return(size())",
+    "source": "fn size(){order=\"\";out=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])} Value:: I {return(size())}",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_source_error",
+    "body": "return(count_keys({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))",
+    "source": "Value:: I {return(count_keys({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))}",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "malformed_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");{\"k\":1}}.count_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"k\":1}}.count_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_guard",
+    "body": "order=\"\";out=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_guard",
+    "body": "order=\"\";out=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_valid_zero",
+    "body": "order=\"\";a=count_keys({}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};b=count_keys(undef).copy().and({order=cat(order,\"E\");true}).with(){order=cat(order,\"F\");return(value)};return([a,b,order])",
+    "source": "Value:: I {order=\"\";a=count_keys({}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};b=count_keys(undef).copy().and({order=cat(order,\"E\");true}).with(){order=cat(order,\"F\");return(value)};return([a,b,order])}",
+    "expected": [
+      false,
+      false,
+      "DWEF"
+    ]
+  },
+  {
+    "id": "seeded_hash",
+    "body": "return(count_keys({\"a\":1,\"b\":2}).set_key(\"k\",1))",
+    "source": "Value:: I {return(count_keys({\"a\":1,\"b\":2}).set_key(\"k\",1))}",
+    "expected": null
+  },
+  {
+    "id": "count_contrast",
+    "body": "order=\"\";a=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};first=order;order=\"\";b=count([1]).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([a,first,b,order])",
+    "source": "Value:: I {order=\"\";a=count_keys({\"k\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};first=order;order=\"\";b=count([1]).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([a,first,b,order])}",
+    "expected": [
+      null,
+      "",
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "compatible_prefix_guard",
+    "body": "order=\"\";a=count_keys({\"k\":1}).add(0).take({order=cat(order,\"A\");1});b=count_keys({\"k\":1}).uppercase().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])",
+    "source": "Value:: I {order=\"\";a=count_keys({\"k\":1}).add(0).take({order=cat(order,\"A\");1});b=count_keys({\"k\":1}).uppercase().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])}",
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "source_domain",
+    "body": "return([count_keys(undef),count_keys(4),count_keys(false),count_keys(\"text\"),count_keys([]),count_keys({}),count_keys({\"a\":1,\"b\":2}),undef.count_keys(),4.count_keys(),false.count_keys(),\"text\".count_keys(),[].count_keys(),{}.count_keys(),{\"a\":1,\"b\":2}.count_keys()])",
+    "source": "Value:: I {return([count_keys(undef),count_keys(4),count_keys(false),count_keys(\"text\"),count_keys([]),count_keys({}),count_keys({\"a\":1,\"b\":2}),undef.count_keys(),4.count_keys(),false.count_keys(),\"text\".count_keys(),[].count_keys(),{}.count_keys(),{\"a\":1,\"b\":2}.count_keys()])}",
+    "domain_note": "Freeze each backend current initial free/receiver source policy independently before repair; do not import this observation or change legacy absent/host-slot policy."
+  },
+  {
+    "id": "free_keys_count",
+    "body": "return(count_keys({\"k\":1}).count())",
+    "source": "Value:: I {return(count_keys({\"k\":1}).count())}",
+    "expected": null
+  },
+  {
+    "id": "receiver_keys_count",
+    "body": "return({\"k\":1}.count_keys().count())",
+    "source": "Value:: I {return({\"k\":1}.count_keys().count())}",
+    "expected": null
+  },
+  {
+    "id": "keys_count_with",
+    "body": "order=\"\";out={order=cat(order,\"S\");{\"k\":1}}.count_keys().count().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"k\":1}}.count_keys().count().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "keys_count_copy_logical",
+    "body": "order=\"\";out=count_keys({\"k\":1}).count().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=count_keys({\"k\":1}).count().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "produced_zero_keys",
+    "body": "return([count_keys({}).count_keys(),{}.count_keys().count_keys(),count_keys(undef).copy().count_keys(),count_keys({}).count()])",
+    "source": "Value:: I {return([count_keys({}).count_keys(),{}.count_keys().count_keys(),count_keys(undef).copy().count_keys(),count_keys({}).count()])}",
+    "expected": [
+      null,
+      null,
+      null,
+      null
+    ]
+  }
+]

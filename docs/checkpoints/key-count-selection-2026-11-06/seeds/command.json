@@ -1,0 +1,9 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "perl",
+  "-Iperl",
+  "docs/checkpoints/key-count-selection-2026-11-06/seed_probe.pl"
+]

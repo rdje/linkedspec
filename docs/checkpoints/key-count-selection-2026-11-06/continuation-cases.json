@@ -1,0 +1,13 @@
+[
+  {
+    "id": "initial_source_fallback",
+    "body": "return([undef.count_keys().add(1),4.count_keys().add(1),\"text\".count_keys().add(1),{}.count_keys().add(1)])",
+    "source": "Value:: I {return([undef.count_keys().add(1),4.count_keys().add(1),\"text\".count_keys().add(1),{}.count_keys().add(1)])}",
+    "expected": [
+      1,
+      1,
+      1,
+      1
+    ]
+  }
+]

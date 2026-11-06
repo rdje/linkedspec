@@ -3808,3 +3808,49 @@ All five backends now have bounded Length implementations with focused checks.
 Full admission, native/transitive custody, canonical discovery and independent
 isolation remain pending; the installed-host result does not verify declared
 Lua5.4. The next owned defect is key-count (`count_keys`) continuation guards.
+
+
+## Key-count guards and current Perl prerequisites
+
+The next owned target is `count_keys(value)` and `value.count_keys()` result flow.
+Hash counts already feed scalar methods: `count_keys({"k":1}).add(1)` returns `2`.
+A legitimate zero still enters `with`:
+`count_keys({}).with(){return("recovered")}` returns `recovered`. Explicit Array/
+Hash/String bridges retain their existing behavior and source snapshots.
+
+A produced count is Number data. The target for
+`count_keys({"k":1}).take(1).with(){return("ran")}` is null with the body skipped;
+current Perl runs the body. `count_keys({"k":1}).count()` should also reject the
+Array-only consumer, but currently returns zero. Initial CountKeys source policy
+and already-produced result consumption must remain distinct.
+
+The assessment retains twenty-two finite programs. Seven original preservation
+programs and an additional initial-source continuation control are healthy;
+twelve programs expose guard gaps. Two producer prerequisites must be fixed
+first: mutating value-block sources can emit invalid Perl, and Boolean/Array
+sources can raise `Not a HASH reference` where zero is documented. These are
+owned by75.0.1 and75.0.2 before ordinary Perl guards75.1. The aborted domain probe
+is not treated as a valid profile. Independent Count/source/Hash controls identify
+the exact causes without changing production code during the assessment.
+
+A wrong `set_key` continuation on computed CountKeys Number2 also reads host
+`main::2`. Exact public-substitution and emitted-module controls reproduce that
+read with unchanged localized host data. Perl75.1 owns null/skipped-effect seed
+regressions; this finding is limited to those carriers and that numeric namespace.
+Actual inputs, full raw outputs, modules and readonly recovery are retained under
+`docs/checkpoints/key-count-selection-2026-11-06/`.
+
+After the two producer repairs, implement Perl75.1 and independently assess
+Rust75.2, Dart75.3, Julia75.4 and installed Lua75.5. Preserve their own producer/
+source domains, signatures, copy depths and mutation restrictions. Full native/
+transitive custody, general isolation, canonical discovery and admission remain
+pending; no peer failure or declared Lua5.4 support is inferred.
+
+A separate producer check distinguishes numeric input from a Hash binding name:
+`count_keys(4)` currently emits a host Hash lookup and returns `1` when seeded
+`main::4` has one key. Empty and outer-only seeds return `0`. Both exact public
+and emitted-module carriers reproduce this, with host data unchanged. Domain
+repair75.0.2 therefore includes numeric-literal classification as well as the
+Boolean/Array dereference errors. The empty-process zero observation alone does
+not establish the documented numeric-input policy. Broader bare/absent binding
+isolation remains separately owned.

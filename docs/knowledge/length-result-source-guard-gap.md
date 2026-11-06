@@ -8,7 +8,7 @@ answers:
   - "where are the count_keys source guard gaps owned"
   - "how is the Length selection summary recovered after Trace stdout"
 date: 2026-11-06
-status: all bounded Perl/Rust/Dart/Julia/installed Lua Length implementations focused-checked; P1 key-count75.0 next
+status: all bounded Perl/Rust/Dart/Julia/installed Lua Length implementations focused-checked; P1 key-count75.0 assessment frozen; typed/domain prerequisites next
 tags: [length, count_keys, source, guards, perl, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.35; declared own inputs/raw public observations and actual supplemental emitted modules in docs/checkpoints/length-selection-2026-11-05; shared16 frozen before production."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/length_result_guard_composition.t t/length_count_source_ownership.t; readonly retained RED/GREEN: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-perl-2026-11-06/review.py. Historical selection writers are one-shot, never replay."
@@ -79,3 +79,5 @@ Dart74.3 independently repairs the same bounded source/consumer/Count-owner targ
 Julia74.4 independently repairs Length admission before Count permission, retaining enumerate/call_index mutation restrictions: [[julia-length-result-guards]]. Installed Lua74.5 is next; no peer verdict inferred.
 
 Installed Lua74.5 independently repairs the bounded target on PUC5.5.1/LuaJIT with preserved scalar/Count/mutation rights: [[lua-length-result-guards]]. Length74 implementation coverage is complete; full admission remains separate. P1 key-count75.0 follows before unrelated selection.
+
+Key-count75.0 now independently retains the actual source/guard/host findings and schedules typed75.0.1/domain75.0.2 before Perl75.1/peers: [[key-count-source-and-guard-gaps]]. No producer repair is implied by the assessment.
