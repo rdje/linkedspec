@@ -1,0 +1,22 @@
+{
+  "dart/test/key_count_callable_result_guard_composition_test.dart": {
+    "bytes": 3427,
+    "mode": 420,
+    "sha256": "7e627113798bd816eeb078fc17527ee9290f61ee5204cee4baac1ff2fe72e75e"
+  },
+  "dart/tool/probe_key_count_callable_results.dart": {
+    "bytes": 4120,
+    "mode": 420,
+    "sha256": "61935889c60309c1e60f1e60265577dc208aa7e7075772cf7b2fb627ffefe41b"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/capture_format.py": {
+    "bytes": 2297,
+    "mode": 420,
+    "sha256": "b60e4d80b03a46c6a385dc440023236c512441c2dc453ef9719567be57cc5625"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  }
+}

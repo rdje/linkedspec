@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6738,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recursive-observation-admission.md","sha256":"caf9a27fc368b37797c26ae3c72472d193de22ea245fefb93e1e4955f41afb84","type":"member"}
 {"bytes":2926,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-referenced-blind-intermediate-compile-gap.md","sha256":"b9b35bb3ab51ac6655a157c16bea06f835bcfe2899aa31bbd31fec7731a3a164","type":"member"}
 {"bytes":1616,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-referenced-intermediate-compatibility.md","sha256":"52a77cba0463f2861c42ff31951ede761aa6d25b76c7efcbdfe23b7ba13d53ac","type":"member"}
 {"bytes":2136,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rename-key-copy-and-collision.md","sha256":"c3dbdccf9d9413ac303e73ff00afe53cf343caf719113f1d590cd57bfabc0549","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2421,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/restricted-macos-ram-host-size-fallback.md","sha256":"02042261ba20e7da92b91f1f959c2ecde176c98e34058fe4f94eacad95ae5a92","type":"member"}
 {"bytes":2703,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.8","path":"docs/knowledge/retained-artifact-growth.md","sha256":"6415ac645e75a0c54e47e99e2fea0ef596426b191f741a09190abc032a9a624f","type":"member"}
 {"bytes":4751,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/retired-return-helpers-canonical-rewrite.md","sha256":"5b8ea4cfc84eea03aa03a1628cb0fc8869cf1a64037ec6bea659ea7e8591aa49","type":"member"}
-{"bytes":4653,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rgx-bootstrap-published-remedy.md","sha256":"0756574be7dfe0cba746597878fd0c0e1b9a49aa22e697a95931ba506d1eb476","type":"member"}

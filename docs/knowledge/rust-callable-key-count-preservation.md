@@ -43,3 +43,11 @@ No full native/transitive/toolchain custody or process/package isolation claim.
 Independent Dart75.6.3, Julia75.6.4 and installed Lua75.6.5 still need their own
 source/error/function-result assessments. Full context/discovery/custody/isolation/
 legacy boundaries and full23.4 admission retain their separate owners.
+
+Dart75.6.3.1 acquisition review identifies one specific remaining build-input
+limit: Rust spec_parser.rs embeds specs/user_function_definition.spec through
+include_str!, but this packet declares rust/ and fixtures without that asset.
+The recorded behavior/source identities remain actual; original embedded asset
+and warm native-producer provenance are not closed. Direct asset audit4.2 and
+native/cache producer audit SESSION-STARTUP-READING.5 own prospective repair
+before admission; do not retrospectively label the original build fully captured.

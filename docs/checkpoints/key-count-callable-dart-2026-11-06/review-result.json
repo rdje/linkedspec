@@ -1,0 +1,25 @@
+{
+  "actual_module_and_parsed_bodies_unchanged": 16,
+  "compatible_targets": 12,
+  "direct_pass": 29,
+  "independent_profiles": 4,
+  "normal_pass": 16,
+  "original_semantics_preserved": 16,
+  "qualified_groups": 16,
+  "recovery_corruptions": [
+    "compatible numeric regression",
+    "Boolean peer normalization",
+    "needed source error masked",
+    "missing fresh member",
+    "grammar string drift",
+    "actual module drift"
+  ],
+  "routes": [
+    "native",
+    "restored",
+    "plan",
+    "fresh"
+  ],
+  "runtime_changes": 0,
+  "scope": "original epochs remain partial for direct grammar custody; qualified epochs bind actual grammar before SDK use; full native/transitive/historical custody4.2 and peers/admission remain separate"
+}

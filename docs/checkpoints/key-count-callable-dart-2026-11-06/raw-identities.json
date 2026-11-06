@@ -1,0 +1,374 @@
+{
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/normal-stdout.log": {
+    "bytes": 7085,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/normal-stdout.log.gz",
+    "capsule_sha256": "bbfc04cf2973edccb7cc646de996505c9c14963061317e5ea9829d9d3bf1a5f8",
+    "sha256": "a202b924cbb4a0aadcc757bdc03c227993817357f712e7b73f067afc0d5fd293"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct-qualified/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/normal-stdout.log": {
+    "bytes": 7085,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/normal-stdout.log.gz",
+    "capsule_sha256": "bbfc04cf2973edccb7cc646de996505c9c14963061317e5ea9829d9d3bf1a5f8",
+    "sha256": "a202b924cbb4a0aadcc757bdc03c227993817357f712e7b73f067afc0d5fd293"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/direct/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/format/empty-phase-stderr.log": {
+    "bytes": 394,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/format/empty-phase-stderr.log.gz",
+    "capsule_sha256": "801a0d9d8648c4c973785cb7b9dc55e7d14457e28d8bce41ac9d172d8b1ecf34",
+    "sha256": "98a3367449afb7ac962ef82c839c8d376240543a20871bdd677b4b86394ebfb5"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/format/empty-phase-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/format/empty-phase-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/format/format-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/format/format-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/format/format-stdout.log": {
+    "bytes": 47,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/format/format-stdout.log.gz",
+    "capsule_sha256": "318b4704bd03520abb2b2dde9cdfa22877e32faf83d9f81c6b1e36fdca25b798",
+    "sha256": "43a0060b01f8d00290502db016cbde393b149f5a0971989771a4fe3fddc181e7"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/format/probe-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/format/probe-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/format/probe-analysis-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/format/probe-analysis-stdout.log.gz",
+    "capsule_sha256": "641e49df785ca4ed2c8af7cae825d13252857390278b4ef8edf06be467d8019d",
+    "sha256": "5aac21bac59437389af6facffe86944240b741b726ce7a1c3f2a976e5a67681e"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-analysis-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-analysis-stdout.log.gz",
+    "capsule_sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b",
+    "sha256": "ac6cec2b1916a297ced1907519949d3cae92e5795ee669ee33c50ae78f8b584f"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-resolution-stdout.log": {
+    "bytes": 126,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-resolution-stdout.log.gz",
+    "capsule_sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30",
+    "sha256": "7feb60272d91a9575face539b5795e5761fd26c89cac32035e8d7356412996aa"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-stdout.log": {
+    "bytes": 1301,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/fresh-stdout.log.gz",
+    "capsule_sha256": "3777667e31b2c5cb36db172109712f8a65c77d0cb525db9de7779fcad9f8094a",
+    "sha256": "2098b9a6b867c28e5cda6fbe34c3d85ca1d9a589a9ac53fc1c59e1523d98386d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/native-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/native-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/native-stdout.log": {
+    "bytes": 58459,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/native-stdout.log.gz",
+    "capsule_sha256": "2b9e7226698e0e5272f989193b7c836bec411f2c42b934e1f38f7d16ef028bf3",
+    "sha256": "eefc3d22cfe6f3fb902947c33ff588226c12c7ff7216f4d7060df2c184251604"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-analysis-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-analysis-stdout.log.gz",
+    "capsule_sha256": "641e49df785ca4ed2c8af7cae825d13252857390278b4ef8edf06be467d8019d",
+    "sha256": "5aac21bac59437389af6facffe86944240b741b726ce7a1c3f2a976e5a67681e"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake-qualified/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-analysis-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-analysis-stdout.log.gz",
+    "capsule_sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b",
+    "sha256": "ac6cec2b1916a297ced1907519949d3cae92e5795ee669ee33c50ae78f8b584f"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-resolution-stdout.log": {
+    "bytes": 126,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-resolution-stdout.log.gz",
+    "capsule_sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30",
+    "sha256": "7feb60272d91a9575face539b5795e5761fd26c89cac32035e8d7356412996aa"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-stdout.log": {
+    "bytes": 1301,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/fresh-stdout.log.gz",
+    "capsule_sha256": "3777667e31b2c5cb36db172109712f8a65c77d0cb525db9de7779fcad9f8094a",
+    "sha256": "2098b9a6b867c28e5cda6fbe34c3d85ca1d9a589a9ac53fc1c59e1523d98386d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/native-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/native-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/native-stdout.log": {
+    "bytes": 44547,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/native-stdout.log.gz",
+    "capsule_sha256": "25c1f4c3dca6b5482d013a830e33713e0f09f23ca7c72ffea2e205b02b5ad4e9",
+    "sha256": "59d8e8eafee47c6012129e9fb7640c44a70eb718b9fb694e2531c2858975aa94"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-analysis-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-analysis-stdout.log.gz",
+    "capsule_sha256": "641e49df785ca4ed2c8af7cae825d13252857390278b4ef8edf06be467d8019d",
+    "sha256": "5aac21bac59437389af6facffe86944240b741b726ce7a1c3f2a976e5a67681e"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/intake/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/normal-stdout.log": {
+    "bytes": 17892,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/normal-stdout.log.gz",
+    "capsule_sha256": "8538632d324ddd3b74529fd25a574e0c62344c174da4b2004a5235ddfcb67237",
+    "sha256": "e0596963c1d9aaae86719b1fd66543b6fa608867fb8f6f54fb9d972a4bc436a6"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-analysis-stdout.log": {
+    "bytes": 141,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-analysis-stdout.log.gz",
+    "capsule_sha256": "0e329ba9664648856ffe1e6049c4c735e594632c12958837d05c12c22f0dfbd8",
+    "sha256": "4702f54995adedcf8831e240889c4ebc74cdedb55d5bc234195876c8fbafeda1"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal-qualified/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/normal-stdout.log": {
+    "bytes": 3973,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/normal-stdout.log.gz",
+    "capsule_sha256": "cecad5a082095327a8aafbfee8af0976519d9ff33056bf05da905fc49a85a443",
+    "sha256": "839b39b82a282ac94613c902cdc811b08bb7594e1fde2bf0eee84c7a31a36da1"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-analysis-stdout.log": {
+    "bytes": 141,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-analysis-stdout.log.gz",
+    "capsule_sha256": "0e329ba9664648856ffe1e6049c4c735e594632c12958837d05c12c22f0dfbd8",
+    "sha256": "4702f54995adedcf8831e240889c4ebc74cdedb55d5bc234195876c8fbafeda1"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-callable-dart-2026-11-06/normal/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  }
+}

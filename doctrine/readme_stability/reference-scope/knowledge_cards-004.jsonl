@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4892,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-recomposition.md","sha256":"089ed1089c2b4706380f7ef82b0e246499fa2059e4cc338c5bdf3766ba3567ab","type":"member"}
 {"bytes":7321,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-project-data-ssd-storage.md","sha256":"9f45017af2d4be63899833f90011e39cf49b7c7cb1de05d7424c84295e47dda2","type":"member"}
 {"bytes":2346,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-push-snapshot-result-guards.md","sha256":"2f096ae9ea6bfb4ce4ad01063576c976a61aff0af354317e870bc6f7af1d8489","type":"member"}
 {"bytes":14267,"lines":228,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-reading-commit-closeout-audit.md","sha256":"c7fc3ee3700d4e39bb40025a1e4f94619390a348ba5ff754594a64c5413e1b8a","type":"member"}
@@ -86,7 +87,7 @@
 {"bytes":4448,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-registry.md","sha256":"a183dc4a2b519aa5a94a4be6bc75d837470dfb0ac8d09f0ad1645a6556126f7c","type":"member"}
 {"bytes":3843,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-runtime-execution.md","sha256":"effa3c61986406f90b2c2aed0059f8193063dc3ec3a2a395353b53c29b7be51e","type":"member"}
 {"bytes":4216,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-variadic-user-functions.md","sha256":"60e5c3385f01f3bc05eeddcdb90dbbc0cf42c61795f23e77bd5fbd1f06023834","type":"member"}
-{"bytes":6588,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"25c63386c3a2622bee23b8a140c23d0d990d2fbbc32f6c66abda4dfb056cc980","type":"member"}
+{"bytes":6960,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"b734fb87270a31d793b6050803a7f9aaaa0139a0cb01a4dbfacf9187fd61d1c2","type":"member"}
 {"bytes":2060,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-atomic-publication.md","sha256":"149954a325a06801c9ee84c520269322694f864a9bbc298c51806bf2b68d041b","type":"member"}
 {"bytes":1872,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-nonatomic-publication.md","sha256":"b13a018b828a88ace208e3bb446dd96b039558071315a0d83cf392297b5c87f1","type":"member"}
 {"bytes":6626,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-agnostic-backend-vision.md","sha256":"c3bf8200047285bc1e323e9baa04e03c6c21aeb7544aae2f3d6090cdfa49fd6c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8173,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-emitted-route-identity.md","sha256":"27b73fdbac11e5e05db242900a910eb571ea904b9e29a765011727213b486748","type":"member"}
 {"bytes":4537,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-literal-state.md","sha256":"fdf714656d594dc667ec7b024f87cef3d04b38846c433cdd3b91dd7c9b3f4e17","type":"member"}
 {"bytes":6967,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"1579b754c28016675926185e4bf44f7a2eaa1e13b5a46276a47708adf8ca28f3","type":"member"}
-{"bytes":2435,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-canonical-set-result-guards.md","sha256":"b7a0e154a5fec4c44105228b257656952dbe87cca4d0b8df955a49a3e0211a42","type":"member"}

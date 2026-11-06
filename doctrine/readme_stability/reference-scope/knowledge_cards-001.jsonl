@@ -23,6 +23,7 @@
 {"bytes":7725,"lines":140,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-body-suffix-omission.md","sha256":"25f5317644667529bd85597c1b79d89ec9f5aeff3d963fdd9a38660a8793f915","type":"member"}
 {"bytes":5157,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-callable-codeblock-dynamic-invocation.md","sha256":"5556e6d7d99a3cd27d74e40b02ada510ea8f7c873802fe3abeb60e3bc1769175","type":"member"}
 {"bytes":4668,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-callable-codeblock-literal-state.md","sha256":"4a60999d34b474a49ebbacb2be548435009c8e59b94d68e2607410e9ffa14c41","type":"member"}
+{"bytes":3525,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/dart-callable-key-count-preservation.md","sha256":"bf42aa249d77a86b41e25275da98c7fde33031d6416c83cdb9133b0c92ecdacd","type":"member"}
 {"bytes":10452,"lines":142,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-callback-helper-recursion-identity-gap.md","sha256":"39bfd839fb30d5d19301eebcb8e2fd17768d74ddb6564d26d64b3a413f6609f4","type":"member"}
 {"bytes":4150,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-canonical-primary-cli-trace.md","sha256":"08a0b1ff48edbee22a8e2d06a38ec46255994dc75b90d93ae7fa279a8fee9aef","type":"member"}
 {"bytes":2164,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-canonical-set-result-guards.md","sha256":"291fbd45208106c28f9d996fc374b25385d4c8d91df6a1b234d319570bfee75c","type":"member"}
@@ -69,7 +70,7 @@
 {"bytes":4098,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-index-source-guards.md","sha256":"cb2e53a48bcb42b164e631eab1203450bdf2bee6e6e067970267e05c81e5c71a","type":"member"}
 {"bytes":9554,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-input-slice-boundary-gaps.md","sha256":"1cfbc5f9851d58692056537e519a7dd2085df81eb24213ea131b9a7a4a894aa5","type":"member"}
 {"bytes":8056,"lines":130,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-julia-unicode-17-case-mapping.md","sha256":"d26cc11c1dc3bedf1ca940d859ed65dcb8c6a6177b9688030102e8cf51c5a448","type":"member"}
-{"bytes":3021,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.3","path":"docs/knowledge/dart-key-count-result-guards.md","sha256":"dead228def78d2fc16906cacfd06b7c08547ef7a6a4892d83a64a5504b6d9be3","type":"member"}
+{"bytes":3671,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/dart-key-count-result-guards.md","sha256":"0cc99aff3481db586cea61d578f8a9f71fa3d5d3afa5f29f66c01c7d39979216","type":"member"}
 {"bytes":9091,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-large-number-helper-corruption.md","sha256":"7afc8ad9d3710e5272e3c62dc25261aac7f7f87dcf4b5b3b29a56b68b9ac3426","type":"member"}
 {"bytes":3927,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-legacy-structural-accumulator-parity.md","sha256":"b2e604bd2ca7ee5ea97a38880f89feaefcd0738f3ec83bb86b4dc5233bf71f00","type":"member"}
 {"bytes":3245,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.3","path":"docs/knowledge/dart-length-result-guards.md","sha256":"ac83fca2549629d118739e2f5cf5f3e090b454a236504ccfa5b9e7e79408cc96","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8526,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-effect-integration-gap.md","sha256":"6c550d60366c2e9abcd71396f62daa7e27fb345a03bdc318b95ea94bb8242196","type":"member"}
 {"bytes":8247,"lines":112,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-transaction-dormant-red.md","sha256":"217dff2ad4ac4301d77cc9e6c783ea0dccc6ee24f6099a65f806a8f2af540c0a","type":"member"}
 {"bytes":3263,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-dispatch-rule-local-scope.md","sha256":"80be721fa2902cdcc4252869e6994f1225cf5719ea6c7cc254254459819ee73d","type":"member"}
-{"bytes":7624,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-observation-admission.md","sha256":"0cff0553e4a2a234f90c8496df4c2e90d40426faaf644b7313871d78d0160c50","type":"member"}

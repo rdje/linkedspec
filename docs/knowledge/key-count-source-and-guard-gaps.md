@@ -11,7 +11,7 @@ answers:
   - "may an aborted key-count domain profile be frozen"
   - "why does count_keys(4) count host main::4"
 date: 2026-11-06
-status: ordinary five-backend and Perl/Rust callable75.6.1-.2 focused-checked; independent Dart/Julia/installed Lua75.6.3-.5 next
+status: ordinary five-backend and Perl/Rust/Dart callable75.6.1-.3 focused-checked; independent Julia/installed Lua75.6.4-.5 next
 tags: [perl, count_keys, guards, source, domain, copy, logical, host]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict at that assessment boundary."
 reverify:
@@ -98,3 +98,9 @@ Rust callable75.6.2 independently confirms all16 programs on four routes with no
 runtime edit; [[rust-callable-key-count-preservation]] owns the preserved
 source/error profiles and focused normal16/direct29. Remaining peer callable
 coverage stays independent.
+
+Dart75.6.3/child3.1 independently preserves12 compatible/four own profiles,
+including Boolean-function null/null. [[dart-callable-key-count-preservation]]
+retains original partial and prospective grammar-bound qualified epochs. Direct
+asset closure4.2/native-cache audit SESSION5 remain distinct from these behavior
+checks; Julia/installed Lua callable coverage is next.

@@ -1,0 +1,8 @@
+{
+  "qualified_groups": 16,
+  "original_native_restored_plan_equal": true,
+  "original_fresh_equal": true,
+  "original_parsed_inputs_equal": true,
+  "actual_grammar_frame_matches_declared_input": true,
+  "original_missing_grammar_epoch": "retained partial; not retroactively closed"
+}

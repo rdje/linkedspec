@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: ordinary five-backend guards, Perl callable75.6.1 and independent Rust75.6.2 are focused-checked. Dart/Julia/installed Lua callable75.6.3-.5 precede parent/full23.4 admission; full verification remains deferred until agreed feature coverage.
+PNT key-count75: ordinary five-backend guards and Perl/Rust/Dart callable behavior are focused-checked. Dart parent3 closes through acquisition child3.1 with qualified direct grammar input; Julia/installed Lua4-.5 remain. Full23.4/source-context/custody admission stays deferred until coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 confirms existing Rust callable CountKeys16PASS/four routes, without runtime edits. New normal16/native-restored-plan, direct CountKeys25/function context4, scoped format and six recovery corruptions pass. Independent Boolean0/1, arity and required-error profiles and actual Cargo/input/module/serialized/raw epochs are retained. Resource4.14 owns the denied-sysctl fallback/stale policy card; current independent monitoring has no pressure blocker. Dart75.6.3 next.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 captures/supplies Dart function grammar before SDK use. Compatible12/four own profiles complete16 PASS/four routes; current normal16/direct29/fatal analysis/format/safe path denial/six recovery corruptions pass. Boolean-function receiver null/null and errors remain exact; no runtime edit. Original partial epochs stay unchanged and qualified observations/module/parsed bodies stay exact. Specific historical/default and Rust embedded-asset/native-cache legs remain4.2/SESSION5-owned before admission.
 
 ## Next Action
 
-Activate independent Dart75.6.3 from clean Git. Read callable/CountKeys source/error contracts and retain actual native/restored/plan/fresh baseline before production. Shared16 source programs are candidates, not a Boolean/domain/error profile oracle; freeze Dart terminal/composed Boolean, malformed arity and needed-error profiles independently. Small direct checks/docs/commit, then Julia/installed Lua. Resource4.14 remains before memory-guarded full verification.
+Activate independent Julia75.6.4 from clean Git. Read actual SDK function-grammar loading/build contract first; declare its real grammar asset before first use/build and use a published explicit source option if available. Retain compatible targets and independent Boolean terminal/composed, malformed-arity and needed-error profiles before any repair. Small direct checks/docs/commit, then installed Lua. No broad audit/CI pivot; resource4.14 remains before memory-guarded full verification.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Dart16PASS/four routes; qualified grammar/normal16/direct29; runtime unchanged; Julia4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Rust already16PASS/four routes; new16/direct29; runtime unchanged; Dart75.6.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Perl callable16PASS/direct43; Boolean continuation corrected; independent Rust75.6.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — installed Lua25PASS/four routes;13 healthy/Count/scalar/index exact; callable75.6 next.
@@ -29,7 +30,6 @@ Activate independent Dart75.6.3 from clean Git. Read callable/CountKeys source/e
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — Dart Length/source-owner24PASS; twelve healthy exact/final45; Julia74.4 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — Rust Length/source-owner24PASS; twelve healthy exact/final44; independent Dart74.3 next.
 
 ## History
 

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":10797,"lines":174,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-partition-plan.md","sha256":"80e74171947f5ee4eed9176f827cdf7904054944c8a0618b452bef6a7c34e7b0","type":"member"}
 {"bytes":4733,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/static-named-capture-lowering-and-function-fence.md","sha256":"11c348472b5ead1e2f64e3804ac52af8ccac3be57720c3c4c58fa83a5efa679f","type":"member"}
 {"bytes":11346,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/string-predicate-result-source-guards.md","sha256":"5d08d43b8e3dd72fdbe5f08030cfab9a9909850b484f5f0bf0d1a4ed88b08a53","type":"member"}
 {"bytes":5690,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/structural-progressive-staged-authoring-doctrine.md","sha256":"65a9dcdcf76e8ef17a3a009ece7c259ffc4fd69b5dbedbeba6717ec9d93d8059","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4155,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-17-case-contract-data.md","sha256":"96f5d3b71b0b43af5acb76fe451c3a242ba3ded475512565945c817cc5ff8924","type":"member"}
 {"bytes":5200,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-case-mapping-cross-backend-gap.md","sha256":"c44d76aa0e888f1747096fe7133ab6c8afc512fe40b597ae8fdddaed4b58ab04","type":"member"}
 {"bytes":19479,"lines":266,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-rule-label-contract.md","sha256":"d82181eb5843766ac5b7f60b3ad7cffad73ebde539f321d2d7a056926918538e","type":"member"}
-{"bytes":3763,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-binding-array-end-result-supersession.md","sha256":"d0723bf4eef9984506ec141a6ce7e3f25260b7f37a86640f12613447e41bc92c","type":"member"}

@@ -3917,7 +3917,7 @@ At this historical75.1 boundary, registered-function prefixes retained their old
 route and one Boolean-function continuation stayed null/unready/count_keys.
 Callable75.6.1 below independently resolves that observation as a continuation
 defect: the terminal Boolean-function count already returns0/ready. Ordinary
-peer repairs below remain focused-checked; independent Dart/Julia/installed Lua callable75.6.3-.5
+peer repairs below remain focused-checked; independent Julia/installed Lua callable75.6.4-.5
 and full source/context/native-transitive custody, general isolation, legacy
 bare/absent bindings, discovery, declared Lua5.4 and full23.4 remain separate.
 
@@ -3946,7 +3946,7 @@ channels live under `docs/checkpoints/key-count-guard-rust-2026-11-06/`.
 
 The older Length reader remains source-bound to its accepted historical commit;
 current Length checks are separate. Dart75.3 and Julia75.4 are focused-checked
-below; installed Lua75.5 is also focused-checked and independent Dart/Julia/installed Lua callable75.6.3-.5 remain pending. Full source/context/native-
+below; installed Lua75.5 is also focused-checked and independent Julia/installed Lua callable75.6.4-.5 remain pending. Full source/context/native-
 transitive custody, general isolation, canonical discovery and full23.4 admission
 remain separate; no host-seeding or declared Lua5.4 claim follows.
 
@@ -3976,7 +3976,7 @@ direct inputs and complete raw channels are retained under
 
 The original Length reader remains bound to its accepted historical source;
 current Length tests remain separate. Julia75.4 and installed Lua75.5 are focused-
-checked below, with loop-index rights preserved; independent Dart/Julia/installed Lua callable75.6.3-.5 remain next. Full source/context/native-transitive
+checked below, with loop-index rights preserved; independent Julia/installed Lua callable75.6.4-.5 remain next. Full source/context/native-transitive
 custody, general isolation, canonical discovery/callable75.6 and full23.4 admission
 remain separate; no Boolean policy normalization or Dart host-seeding is claimed.
 
@@ -4009,7 +4009,7 @@ six original and four additional effective corruption controls.
 The original Length reader remains bound to its acceptedfbe625974 source;
 current Length testing remains separate. Fresh Modules share process/runtime.
 Rust/Dart Count ownership75.7 and installed Lua75.5 are focused-checked below;
-independent Dart/Julia/installed Lua callable75.6.3-.5 are next before admission.
+independent Julia/installed Lua callable75.6.4-.5 are next before admission.
 Full source/context/native-transitive custody, general isolation, canonical
 discovery/declared Lua5.4 and full23.4 remain separate; no host-seeding claim.
 
@@ -4041,7 +4041,7 @@ source/manifest/lock/config/writer inputs and complete raw channels recover unde
 reject. Emitted execution in this review covers new3. Full native/transitive
 custody, general isolation/source-context discovery/callable/full23.4 remain
 separate. Installed Lua75.5 below retains scalar/Count/index mutation rights and
-the explicit Count-owned-source controls; independent Dart/Julia/installed Lua callable75.6.3-.5 are next, with no declared5.4 inference.
+the explicit Count-owned-source controls; independent Julia/installed Lua callable75.6.4-.5 are next, with no declared5.4 inference.
 
 
 ## Ordinary installed Lua key-count guards
@@ -4075,7 +4075,7 @@ seven effective corruption controls reject. The older Length reader remains boun
 to acceptedf5e2350ba, with original proof untouched and current tests separate.
 Fresh modules share process/runtime; full native/transitive/toolchain custody,
 general isolation/source-context discovery/callable/full23.4 stay separate.
-Ordinary guards are focused-checked across five backends; independent Dart/Julia/installed Lua callable75.6.3-.5 are next
+Ordinary guards are focused-checked across five backends; independent Julia/installed Lua callable75.6.4-.5 are next
 before parent/full admission, preserving named exclusions until assessed.
 
 
@@ -4097,7 +4097,7 @@ to16PASS on native/freshly emitted Perl; all seven healthy semantic observations
 stay exact. The original inline-two-definition setup failure, corrected15 intake,
 terminal discriminator, exact normal epochs and source/module/handler inputs are
 retained under `docs/checkpoints/key-count-callable-perl-2026-11-06/`.
-Regenerate emitted Perl. Independent Rust75.6.2 is checked below; Dart75.6.3 is next. Peers/full admission,
+Regenerate emitted Perl. Independent Rust75.6.2 is checked below; Dart75.6.3 is checked below; Julia75.6.4 is next. Peers/full admission,
 transitive custody and general isolation stay with their existing owners.
 
 
@@ -4120,6 +4120,38 @@ serialized inputs/full channels are retained under
 is byte-identical to the clean activation. This is healthy preservation, not a
 product RED/GREEN or a new Rust implementation claim.
 
-Dart75.6.3 is next with its own function-result/source/error profiles. Full
+Dart75.6.3 is checked below; Julia75.6.4 is next with its own function-result/source/error profiles. Full
 source/context/native-transitive custody, general isolation, discovery and full
 23.4 admission remain separately owned.
+
+
+## Dart function-result CountKeys preservation and source qualification
+
+Callable75.6.3, completed through acquisition child75.6.3.1, independently
+confirms 12 compatible targets and four Dart profiles over 16 source programs on
+native, reconstructed SpecFile, generated-plan and fresh emitted execution.
+No runtime, parser, signature or generated-format repair is needed. Hash-function
+counts preserve source-once snapshots, actual-kind/copy/logical/with guards and
+explicit bridges. Boolean-function terminal/composed receivers remain null/null;
+free CountKeys(Boolean-function).add(1) remains1. Native/restored required errors
+retain full RuntimeInterpreterException diagnostics; plan/fresh retain the
+GeneratedSourceException wrapper. Malformed arity skips all effects.
+
+The first capture declared Dart/pub/config inputs but missed the direct grammar
+read by the default function loader. Original intake/normal/direct epochs remain
+partial and unchanged. Qualified companions capture
+`specs/user_function_definition.spec` before use and pass its exact immutable
+string through the published parserSpecSource argument, recording the actual
+string before SDK calls. All 16 observations and module/parsed bodies remain
+exactly equal to the original; the current qualified normal16/direct29 and fatal
+analysis/scoped format pass. Six source/profile/module recovery corruptions reject.
+The new private probe also rejects an empty phase path before filesystem effects.
+Details/actual inputs are in
+`docs/checkpoints/key-count-callable-dart-2026-11-06/`.
+
+The same review names Rust's compile-time include_str! grammar asset as missing
+from its saved declaration; observed Rust behavior remains valid, with that build
+input/native-cache leg explicitly open. Direct asset closure4.2 and broader
+native/transitive/cache provenance under SESSION5 remain before admission.
+These limits do not imply a runtime failure or a recovered original first input.
+Julia75.6.4 is next, then installed Lua75.6.5; full23.4 remains separate.

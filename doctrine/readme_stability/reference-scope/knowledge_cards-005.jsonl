@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2435,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-canonical-set-result-guards.md","sha256":"b7a0e154a5fec4c44105228b257656952dbe87cca4d0b8df955a49a3e0211a42","type":"member"}
 {"bytes":9038,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-capture-cursor-runtime-audit.md","sha256":"9be6cbaa77554c3cd451bc9ed2d76e2f14e48241499b9dbff6b6b27298e777fa","type":"member"}
 {"bytes":2529,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-capture-endpoint-absence-compatibility.md","sha256":"98cf18971e8bf0c0835d3b87453c5ed6e157215e42b9fe43e39a568961e78d35","type":"member"}
 {"bytes":14306,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-compiled-corpus-facade-reading.md","sha256":"fe5b4488d5ade024797dcd9842055cee2b8948d95c7373c938b7fb713a5f17e2","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":27204,"lines":239,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md","sha256":"bce8e81bfe891ada9dac88da199afb8f8cae0bbeef7b4e1e6f1add4109c9432d","type":"member"}
 {"bytes":4531,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-admission.md","sha256":"c81df69433dbb4ab504cb25d597c3a1870504cac39e9c289a78614d116a32e6f","type":"member"}
 {"bytes":4625,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-dormant-red.md","sha256":"77a602fd9b317792c8ee1a2d590af736e03608e193b7ae13e451d2b95cac8740","type":"member"}
-{"bytes":4681,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-integration.md","sha256":"abf470a2cecd09f35e06fbe9dc1634b1bc50afe4ea47aa3d477e85094f591187","type":"member"}

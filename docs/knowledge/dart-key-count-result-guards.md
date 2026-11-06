@@ -8,7 +8,7 @@ answers:
   - "which guard can initial Dart CountKeys skip"
   - "must Dart CountKeys emitted modules be regenerated"
 date: 2026-11-06
-status: bounded Dart75.3 implemented with focused checks; peers/callable/admission pending
+status: ordinary Dart75.3 and callable75.6.3/qualification3.1 focused-checked; remaining peers/admission pending
 tags: [dart, count_keys, count, guards, source, scalar, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.3; docs/checkpoints/key-count-guard-dart-2026-11-06/REVIEW.md retains actual direct input/module/raw epochs. Unchanged22 groups10PASS12RED to22PASS/four routes, ten healthy exact,22 modules/parsed inputs unchanged; final67/fatal analysis/scoped format/six recovery corruptions pass."
 reverify:
@@ -43,3 +43,12 @@ seeding/isolation claim follows from the seeded_hash fixture label. Historical
 recovery is not latest-code proof. Full native/transitive custody4.2/source-
 context discovery4.1/general isolation/callable75.6/full23.4 remain separate.
 Current frontier belongs to MEMORY.md.
+
+Current [[dart-callable-key-count-preservation]] independently confirms12
+compatible targets/four Dart profiles across16 source programs, with null/null
+Boolean-function receiver behavior preserved. Its qualified acquisition captures
+and explicitly supplies the actual function-definition grammar before SDK use.
+This older75.3 capture declared Dart/fixtures but omitted that default-loaded
+grammar asset for its function source; historical direct-asset closure remains
+4.2-owned, with native/cache provenance coordinated under SESSION5. The saved
+old observations/declared artifacts are not rewritten or retroactively closed.

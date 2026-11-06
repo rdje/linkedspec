@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":9910,"lines":116,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-transaction-integration.md","sha256":"f2413ba9a974c15ed4876ecc0b0778b4cab208ba37c2110cee6aba9dee2157fe","type":"member"}
 {"bytes":7589,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recursive-observation-admission.md","sha256":"2bf13ad2f6086d2e98a1788d927737ddd048aafc29205c7497fb2f50a98dc8b4","type":"member"}
 {"bytes":8240,"lines":122,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-referenced-intermediate-runtime-outliers.md","sha256":"4598da5d7b382aa3eb299e9144c05824a99bdeff94ee78e1716504b41a5812d0","type":"member"}
 {"bytes":7928,"lines":139,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-regex-input-context-drift.md","sha256":"21565aa6009ce8c3f2d4568205eaaf7d5642bf45dc29cbefd88bbff9542113b4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":17960,"lines":292,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-codebase-reading-inventory.md","sha256":"28c9a78315e9d20747b0de1e2b84618b060f40f2a17911f01201cacf6701b4ae","type":"member"}
 {"bytes":12467,"lines":139,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-public-teaching-checker-blind-spots.md","sha256":"485e63211e64a49e71db9422fc9888a557fd07b14db2c9dc71e2d78ae9ab057f","type":"member"}
 {"bytes":26389,"lines":395,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-chronology-compaction.md","sha256":"18f6e8bf14bb10760962851d21406f8e986bbe617ab58d0318c919d20432b4de","type":"member"}
-{"bytes":10797,"lines":174,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-partition-plan.md","sha256":"80e74171947f5ee4eed9176f827cdf7904054944c8a0618b452bef6a7c34e7b0","type":"member"}
