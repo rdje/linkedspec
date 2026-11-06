@@ -1,0 +1,24 @@
+{
+  "actual_modules_and_parsed_inputs_unchanged": 33,
+  "after_PASS": 33,
+  "direct_PASS": 62,
+  "final_format_and_analysis_PASS": true,
+  "independent_profiles": 19,
+  "original_RED": 7,
+  "original_controls": 33,
+  "original_format_RED": 1,
+  "original_healthy": 26,
+  "original_reader_format_token_assumption_RED": 1,
+  "qualified_reader_partial_phase_path_RED": 1,
+  "recovery_corruptions": [
+    "compatible result drift",
+    "initial source permission lost",
+    "free arity peer normalization",
+    "needed error masked",
+    "missing fresh member",
+    "grammar string drift",
+    "actual module drift",
+    "original RED already green"
+  ],
+  "scope": "finite actual direct grammar/source/module recovery; full native/cache/transitive custody4.2/SESSION5, contexts, isolation, registration and23.4 remain separate"
+}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-view76: Perl copy76.0/views76.1+76.6 and Rust76.2 have focused proof. Perl76.6 repairs eight initial-source regressions and bounded numeric source reads. Independent Dart76.3 is next; full verification stays deferred until feature coverage.
+PNT Hash-view76: Perl copy76.0/views76.1+76.6, Rust76.2 and Dart76.3 have focused proof. Independent Julia76.4 is next; full verification stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.76.6 restores all13 original Perl source policies after eight76.1 regressions, while retaining view result guards. Four localized numeric-source programs expose real main::3 reads; Number-AST/ref guards now keep numeric data[] with host values unchanged and valid Hash[a,b]. Original Array errors/null-with0W/prior produced owners survive. New17 normal11RED to17PASS, direct4files59,12 healthy before rows/25 actual final-direct module pairs and eight recovery controls PASS. Regenerate affected emitted Perl; broad SESSION17/native custody/full admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.76.3 adds Dart canonical Hash-view result guards with initial-source permission preserved. Own33/four routes26healthy7RED, unchanged33 to33PASS; final direct62/fresh33 and eight recovery controls PASS. All19 own profiles and33 actual module/parsed pairs remain exact. Explicit grammar precedes SDK use; format/reader failed epochs retained, final reader0. Rebuild apps; full custody/context/isolation/registration/admission remain separate.
 
 ## Next Action
 
-Activate Dart76.3 from clean Git. Capture actual shared15 plus independent free/initial Number/null/Array, empty-with, arity/error profiles and actual grammar before SDK build/use with the published explicit source option. Preserve own input policy while guarding produced results; small direct proof/docs/commit before Julia76.4. No peer-policy import or broad suite.
+Activate Julia76.4 from clean Git. Independently capture shared15 and own free/initial-source/empty-with/arity/error/prior-owner profiles, with actual grammar before SDK compilation/use. Preserve own policies while repairing demonstrated gaps; small focused proof/docs/commit before installed Lua76.5.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.76.3 — Dart33PASS/four routes; final direct62/eight controls; own initial/arity profiles retained; Julia76.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.6 — Perl original13 restored; numeric seeds isolated;17PASS/direct59/eight controls; Dart76.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.2 — Rust22PASS/four routes, direct30/total52; initial-source policies preserved; P1 Perl coverage76.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.1 — Perl views15PASS/qualified4files67; stale Length oracle reconciled; actual inverse/eight controls; Rust76.2 next.
@@ -29,7 +30,6 @@ Activate Dart76.3 from clean Git. Capture actual shared15 plus independent free/
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia CountKeys25PASS/final346; Count-owned source preserved; independent peer75.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — Rust key-count22PASS/final66; ten healthy/modules exact; independent Dart75.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — ordinary CountKeys26PASS/final71; thirteen healthy exact; peers/callable coverage next.
 
 ## History
 

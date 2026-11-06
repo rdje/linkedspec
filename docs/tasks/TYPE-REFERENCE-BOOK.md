@@ -21,7 +21,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.11` | `completed` | November5 bounded daily metadata and corruption controls pass; all artifacts/caches/proof retained. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.76.3` | `pending` | Perl76.6 restores13 own policies and closes bounded numeric reads with focused59; Rust76.2 remains focused-checked. Acquire Dart shared15 and independent free/initial-receiver/empty-with/arity/error profiles before edits; broad verification/admission remain separate. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.76.4` | `pending` | Dart76.3 focused33/direct62/fresh33/eight controls PASS; acquire Julia own free/initial-source/with/arity/error profiles and actual grammar before SDK use. Full verification remains separate. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

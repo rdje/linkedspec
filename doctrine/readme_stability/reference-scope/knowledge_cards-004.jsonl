@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7864,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-authority.md","sha256":"6ae78446bbdd1823403cba3ca63368cc70112b32754514ed1be2ee8115213b20","type":"member"}
 {"bytes":7340,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-carriers.md","sha256":"6437303c1305e69c4fe7a02aa5ddff2b96ce3e511ebd262b004e3ff7ccfb0338","type":"member"}
 {"bytes":6383,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-dormant-red.md","sha256":"40d7174f0ee3c63b3afe0cd675a5cb237b9df5194c34f0c1f49406e50cda1320","type":"member"}
 {"bytes":4892,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-recomposition.md","sha256":"089ed1089c2b4706380f7ef82b0e246499fa2059e4cc338c5bdf3766ba3567ab","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3634,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-target-regex-projection.md","sha256":"772501cc71e8cc155937328f6ec4da1414340587fad86a7a4f00f4f4fab7dc95","type":"member"}
 {"bytes":3874,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-body-fluent-suffix-loss.md","sha256":"39167758e4cd9dd652162d2735187a47cf4b4d2899374b8acc99e0752327ef3c","type":"member"}
 {"bytes":4870,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-dynamic-invocation.md","sha256":"f97f89e2bd278f498c8a30558df7700ddd8357a12f5baefa44769bb2371ac49a","type":"member"}
-{"bytes":8173,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-emitted-route-identity.md","sha256":"27b73fdbac11e5e05db242900a910eb571ea904b9e29a765011727213b486748","type":"member"}

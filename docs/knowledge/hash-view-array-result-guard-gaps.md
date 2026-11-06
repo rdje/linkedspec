@@ -7,7 +7,7 @@ answers:
   - "which task owns ordinary Hash-view result guards"
   - "what sources are frozen for Hash-view76"
 date: 2026-11-06
-status: Perl76.1+76.6/Rust76.2 focused-checked; independent Dart/Julia/Lua and full admission remain
+status: Perl76.1+76.6/Rust76.2/Dart76.3 focused-checked; independent Julia/Lua and full admission remain
 tags: [perl, copy, hash, arrays, guards, with, selection]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.76.1; hash-view-result-guard-perl-2026-11-06/REVIEW.md retains actual shared15=8healthy7RED to15PASS, five independent profiles, four-file67 qualified proof, actual source inverse/restoration and eight recovery controls. Original selection36 remains unchanged."
 reverify:
@@ -73,3 +73,13 @@ and actual source inverse/restoration pass. See [[perl-copy-result-rejection-gap
 Perl view76.1 must acquire its actual unchanged baseline at this new compiler
 before any view guard edit. Original view observations above stay historical;
 no peer or view repair outcome is inferred from the copy fix.
+
+## November7 independent Dart outcome
+
+Dart76.3 independently repairs seven shared guard failures while preserving26
+healthy controls and19 own source/arity/error profiles. Same33 normal becomes
+33PASS, final direct62/fresh33 and eight recovery controls pass; all33 actual
+module/parsed pairs remain exact. Its free extra operand staysW and receiverAW;
+initial Number/null/Array views[]/null-with0W remain. Explicit grammar precedes
+SDK use. See [[dart-hash-view-result-guards]] for exact epochs/limits; independent
+Julia76.4 then installed Lua76.5 remain before full admission.

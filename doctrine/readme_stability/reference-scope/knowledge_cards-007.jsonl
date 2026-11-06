@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7683,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-recurring-six-runtime-plan.md","sha256":"88859667d7a40f600c8e81ec6fabd198a5a81fa3c7ac8f2cfb19fda08c0bb355","type":"member"}
 {"bytes":2288,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mdbook-mechanical-migration-contrast-drift.md","sha256":"70e98e2994e18f010ba8e8af077d41753c1d6aeba4a599d2be01a5bc81de3f78","type":"member"}
 {"bytes":1872,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/medium-term-alias-retirement-deferred.md","sha256":"eac535acd7067990a3fe1db2933631844b438ff7c146f6ede5ff12dab298e17f","type":"member"}
 {"bytes":2486,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md","sha256":"f8e24060a7ccef7b1ed9af98865c5144c2cb926ea67c75ad163fb56d6a3fc377","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3484,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-ordinary-recursion-guard-gap.md","sha256":"ee8e8db329ae8a585acdc81b9d7d8a797f292cd1782056ac101aa73d0c1d61b1","type":"member"}
 {"bytes":3957,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-public-entry-trivia.md","sha256":"32af7029b704df9bcb38d4a643d83645c645b1b0e474a98f95e0aff4e3063b54","type":"member"}
 {"bytes":2826,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emptiness-expression-and-host-slot-drift.md","sha256":"948ca767331de981d57b83af79b1396279cdcb7105bad63d42e22d591eef62d7","type":"member"}
-{"bytes":4203,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-ast-trim-span.md","sha256":"5caf35bf2b0711bc066433a04d260a61cc6aedfbd426ccedf76e554cfc6e0efd","type":"member"}

@@ -1,0 +1,13 @@
+{
+  "cwd": "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh",
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "run",
+    "bin/main.dart"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

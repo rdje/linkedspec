@@ -1,0 +1,8 @@
+{
+  "first_interrupted_tool_session": 68425,
+  "first_observed_tool_exit": 143,
+  "second_interrupted_tool_session": 94680,
+  "second_observed_tool_exit": 143,
+  "activation_after_both": "b1f55ddf71083425eb923a852ec2974f70522a2c",
+  "scope": "Explicit transcription of actual tool completions observed after each owned SIGTERM. First interruption follows known REPO-ROOT-PATHS failure; second stops a running nonfailed hook for this record correction. Neither is an all-doctrine result."
+}

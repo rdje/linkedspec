@@ -4088,6 +4088,21 @@ final class LinkedSpecRuntimeEngine {
             (receiver is ActionCallExpr &&
                 (canonicalActionHelperName(receiver.name) == 'copy' ||
                     canonicalActionHelperName(receiver.name) == 'with'));
+        final hashViewChain = _isOrdinaryHashViewResultChain(receiver, calls);
+        final preserveInitialHashViewSource =
+            hashViewChain &&
+            !kindGuardedSource &&
+            !_isOrdinaryCountResultChain(receiver, const []) &&
+            !_isOrdinaryKeyCountResultChain(receiver, const []) &&
+            !_isOrdinaryHashViewResultChain(receiver, const []) &&
+            const {
+              'sorted_keys',
+              'sorted_values',
+            }.contains(calls.first.method) &&
+            calls.first.args.isEmpty;
+        // Initial views retain their producer's source fallback. Their Array
+        // results own continuations before later size-source permissions.
+        kindGuardedSource = kindGuardedSource || hashViewChain;
         final keyCountChain = _isOrdinaryKeyCountResultChain(receiver, calls);
         final preserveInitialKeyCountSource =
             keyCountChain &&
@@ -4113,6 +4128,7 @@ final class LinkedSpecRuntimeEngine {
               calls.first.method == 'count' &&
               calls.first.args.isEmpty,
           preserveInitialKeyCountSource: preserveInitialKeyCountSource,
+          preserveInitialHashViewSource: preserveInitialHashViewSource,
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -6418,6 +6434,67 @@ final class LinkedSpecRuntimeEngine {
         first.args.isEmpty;
   }
 
+  // Ordered Hash-view producers keep their input policy. Only ordinary free-one
+  // and zero-extra receiver forms gain result-kind ownership.
+  bool _isOrdinaryHashViewResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    if (calls.any((call) {
+      final helper = canonicalActionHelperName(call.method);
+      return _treeTraversalHelperNames.contains(helper) ||
+          call.args.any((argument) => argument is! ActionPositionalArgument) ||
+          ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+              helper != 'with') ||
+          !(_runtimeReceiverHelperNames.contains(helper) ||
+              const {'copy', 'with', 'and', 'or', 'not'}.contains(helper));
+    })) {
+      return false;
+    }
+    if (receiver is ActionCallExpr) {
+      if (compiledSpec.functionRegistry.hasName(receiver.name)) {
+        return false;
+      }
+      if (const {'sorted_keys', 'sorted_values'}.contains(receiver.name) &&
+          (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+          !receiver.trailingBlockArg &&
+          receiver.args.length == 1 &&
+          receiver.args.single is ActionPositionalArgument) {
+        return switch (receiver.args.single.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        };
+      }
+    }
+    if (calls.isEmpty) {
+      return false;
+    }
+    final first = calls.first;
+    return const {'sorted_keys', 'sorted_values'}.contains(first.method) &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        !first.trailingBlockArg &&
+        !first.receiverTrailingBlockArg &&
+        first.args.isEmpty;
+  }
+
   // Canonical index sources retain numeric zero, null and source snapshots.
   // Only positional free-two calls and ordinary one-needle prefixes qualify.
   bool _isOrdinaryIndexResultChain(
@@ -6663,16 +6740,20 @@ final class LinkedSpecRuntimeEngine {
     bool kindGuardedResult = false,
     bool preserveInitialCountSource = false,
     bool preserveInitialKeyCountSource = false,
+    bool preserveInitialHashViewSource = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
     var countSourcePending = preserveInitialCountSource;
     var keyCountSourcePending = preserveInitialKeyCountSource;
+    var hashViewSourcePending = preserveInitialHashViewSource;
     for (final call in calls) {
       final initialCountSource = countSourcePending;
       countSourcePending = false;
       final initialKeyCountSource = keyCountSourcePending;
       keyCountSourcePending = false;
+      final initialHashViewSource = hashViewSourcePending;
+      hashViewSourcePending = false;
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
       // Earlier incompatible consumers return before this step.
@@ -6699,6 +6780,7 @@ final class LinkedSpecRuntimeEngine {
       if ((reductionResult || kindGuardedResult) &&
           !initialCountSource &&
           !initialKeyCountSource &&
+          !initialHashViewSource &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&

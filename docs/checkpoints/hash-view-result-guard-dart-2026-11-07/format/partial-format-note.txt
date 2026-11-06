@@ -1,0 +1,1 @@
+Original format check exit1 requested layout in owner and probe; output=none changed no source. Custody metadata reconstructed from unchanged actual pre-use capsules after stopped phase. No empty-phase command ran in this partial epoch.

@@ -1,0 +1,434 @@
+{
+  "arity_profile": {
+    "fresh": {
+      "value": [
+        "ran",
+        "AW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "AW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "AW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "AW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"a\":1}.sorted_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "free_values_arity_profile": {
+    "fresh": {
+      "value": [
+        "ran",
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted_values({\"a\":1},{order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "initial_produced_count": {
+    "fresh": {
+      "value": null
+    },
+    "input": "x",
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "source": "Value:: I {return(count([1]).sorted_values())}\n"
+  },
+  "initial_produced_key_count": {
+    "fresh": {
+      "value": null
+    },
+    "input": "x",
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "source": "Value:: I {return(count_keys({\"a\":1}).sorted_keys())}\n"
+  },
+  "initial_produced_length": {
+    "fresh": {
+      "value": null
+    },
+    "input": "x",
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "source": "Value:: I {return(\"abc\".length().sorted_values())}\n"
+  },
+  "initial_sorted_keys_array": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return([1].sorted_keys())}\n"
+  },
+  "initial_sorted_keys_hash_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"b\":2,\"a\":1}.sorted_keys().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_sorted_keys_null": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.sorted_keys())}\n"
+  },
+  "initial_sorted_keys_null_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.sorted_keys().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_sorted_keys_number": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.sorted_keys())}\n"
+  },
+  "initial_sorted_values_array": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return([1].sorted_values())}\n"
+  },
+  "initial_sorted_values_hash_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"b\":2,\"a\":1}.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_sorted_values_null": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.sorted_values())}\n"
+  },
+  "initial_sorted_values_null_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_sorted_values_number": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.sorted_values())}\n"
+  },
+  "keys_null_profile": {
+    "fresh": {
+      "value": [
+        [],
+        0
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        0
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        0
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        0
+      ]
+    },
+    "source": "Value:: I {return([sorted_keys(undef),sorted_keys(undef).count()])}\n"
+  },
+  "needed_source_error": {
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "source": "Value:: I {return(sorted_keys({items=\"text\";push(items,\"x\");{\"a\":1}}).coalesce(\"masked\"))}\n"
+  },
+  "values_array_error_profile": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(sorted_values([1]))}\n"
+  },
+  "values_scalar_null_profile": {
+    "fresh": {
+      "value": [
+        [],
+        [],
+        [],
+        0
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        [],
+        [],
+        0
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        [],
+        [],
+        0
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        [],
+        [],
+        0
+      ]
+    },
+    "source": "Value:: I {return([sorted_values(3),sorted_values(\"3\"),sorted_values(undef),sorted_values(length(\"abc\")).count()])}\n"
+  }
+}

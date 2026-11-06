@@ -1,0 +1,950 @@
+{
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/analysis-command.json": {
+    "bytes": 254,
+    "sha256": "86db4df90a3e5d0bf0a6803b72fc0a11c6b9759997316022c5fc637cddc7e30e"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/analysis-stdout.log.gz": {
+    "bytes": 79,
+    "sha256": "5e37befbbf42dc49b783312ff40015e0ac133d17d26a17c694424f90d0e0502a"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/cases.json": {
+    "bytes": 10328,
+    "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/custody.json": {
+    "bytes": 123486,
+    "sha256": "e53a3cdd95dc94698ce16927c58c5aaf795bd0eb9ad2de98fbf8993589ab57be"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/emitted-before-first-run.tar.gz": {
+    "bytes": 11495,
+    "sha256": "dd19b886035369e17da86602f5738fb02107c86ffb12acac0d48826c5bcc154e"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-analysis-command.json": {
+    "bytes": 301,
+    "sha256": "0cfd2e3a8803918462a59f7cb89775bdd57ed89901f8645421c10ab4121c9e02"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-analysis-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-before-first-run.tar.gz": {
+    "bytes": 11967,
+    "sha256": "3339e906a43a1329dfc6feb1192b743c48a053b5c919a67e012d20a8599e5d52"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-command.json": {
+    "bytes": 273,
+    "sha256": "adaa342572a891df32ea430bbae41fc55ebf3e28ba30b23ece955d455426f2a2"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-resolution-command.json": {
+    "bytes": 280,
+    "sha256": "bd66bd874dc5609fad3ca49d354ac405116192c53de1026c62695461f41e2dd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-resolution-stdout.log.gz": {
+    "bytes": 116,
+    "sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/fresh-stdout.log.gz": {
+    "bytes": 536,
+    "sha256": "187f167883e9dc4f36af9f0b69ccefa469ef09a830563135837853f44fee9da9"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/native-command.json": {
+    "bytes": 287,
+    "sha256": "9cdaa28f2288a29f57502f77253036c7dee7a890b973150d794a5b59d90d7ad4"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/native-stdout.log.gz": {
+    "bytes": 3572,
+    "sha256": "51a05c25e8db8dd68ca2dcd4ab74d71c605dd6405149d59c68c8e38733f92888"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "54e316d455161e2fbad35afd2bcbb4776bad49a8075082d9d7f6f15d47bbd343"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/root-before-first-run.tar.gz": {
+    "bytes": 753200,
+    "sha256": "949143b0c345bec261694e281d4090c6dc9f1468f9ce774dc768e49d6680f069"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake-final/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/analysis-command.json": {
+    "bytes": 254,
+    "sha256": "86db4df90a3e5d0bf0a6803b72fc0a11c6b9759997316022c5fc637cddc7e30e"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/analysis-stdout.log.gz": {
+    "bytes": 79,
+    "sha256": "5e37befbbf42dc49b783312ff40015e0ac133d17d26a17c694424f90d0e0502a"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/cases.json": {
+    "bytes": 10328,
+    "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/custody.json": {
+    "bytes": 122628,
+    "sha256": "8a8fc1068b6b9025d3b0f7832be68b65e35163682d0fa53dd74bd27ff1d5398b"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/emitted-before-first-run.tar.gz": {
+    "bytes": 11480,
+    "sha256": "e507a5c57e0a3176ac81c125b4802d0aa7ae59d9e022ee319be3187d39fece38"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-analysis-command.json": {
+    "bytes": 295,
+    "sha256": "0ab6751ff0bec7dd85bee850d424c40892866e732de4c3f106a81fc144c2ad26"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-analysis-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-before-first-run.tar.gz": {
+    "bytes": 11950,
+    "sha256": "fb2152261521dac13ad5444d4562b31096c75fd1377936e14cfb193ab1ea8985"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-command.json": {
+    "bytes": 267,
+    "sha256": "9d4eb8db4a3947262119e02b8222dc09feaa4edb3a1ee765244325bc8bf12a79"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-resolution-command.json": {
+    "bytes": 274,
+    "sha256": "d1a3d6c77746e743c69602b418458ac6f332dfa66c220e57b47ed7b813e03a01"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-resolution-stdout.log.gz": {
+    "bytes": 116,
+    "sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/fresh-stdout.log.gz": {
+    "bytes": 536,
+    "sha256": "187f167883e9dc4f36af9f0b69ccefa469ef09a830563135837853f44fee9da9"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/native-command.json": {
+    "bytes": 281,
+    "sha256": "5b7dae20a630f1ef45604df5d96a45ffb7c5af017bee5f761236d86aa135c6cd"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/native-stdout.log.gz": {
+    "bytes": 3572,
+    "sha256": "51a05c25e8db8dd68ca2dcd4ab74d71c605dd6405149d59c68c8e38733f92888"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "0bb521ea4898d71cdbdfebeeda4bdc7eff77d6b0b2a7f441125656aed300cd1a"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/root-before-first-run.tar.gz": {
+    "bytes": 753146,
+    "sha256": "b15b94390ff0557e44b529801cccccb2fb8f095396cae0a4c0dc23b62b33a0fa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after-intake/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/analysis-command.json": {
+    "bytes": 351,
+    "sha256": "397ec219144452aa67a4caf04f8e98367097eabdfee8c6b781761ac691f79e2c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/analysis-stdout.log.gz": {
+    "bytes": 114,
+    "sha256": "c19d11aed77eef1a0f7c6219730edac7435b2c1e66d6daa4694ae06a9329319d"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/custody.json": {
+    "bytes": 88746,
+    "sha256": "0bc0f417a9033b49627dc70b5190a1aa08289073a8c8b71f5afa9ec49873880e"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/normal-command.json": {
+    "bytes": 279,
+    "sha256": "0986745cbcf87c7fc0ce6a1eed87e1a44de14b06d54c9ba2db7389c04e403f37"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/normal-stdout.log.gz": {
+    "bytes": 2678,
+    "sha256": "9c6631b899fd688325690ba58a640d9f4981026bfd4623006f3642e7708995c7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "7208b45e4d9e3b35c63e00dff765fe5883a8a4396a150f85562aea87145ac0a7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/root-before-first-run.tar.gz": {
+    "bytes": 752922,
+    "sha256": "51d74b334828f371581a78ff553dd138b54110b10f5965a46992ae4e04bb5320"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/after/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/analysis-command.json": {
+    "bytes": 351,
+    "sha256": "397ec219144452aa67a4caf04f8e98367097eabdfee8c6b781761ac691f79e2c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/analysis-stdout.log.gz": {
+    "bytes": 114,
+    "sha256": "c19d11aed77eef1a0f7c6219730edac7435b2c1e66d6daa4694ae06a9329319d"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/custody.json": {
+    "bytes": 88748,
+    "sha256": "90359b6154291b2ca3d896173fea7ccac82ae8bf72e1401eaf3221cba1d8e23c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/normal-command.json": {
+    "bytes": 279,
+    "sha256": "0986745cbcf87c7fc0ce6a1eed87e1a44de14b06d54c9ba2db7389c04e403f37"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/normal-stdout.log.gz": {
+    "bytes": 3053,
+    "sha256": "77ff190b960eab96144a11ce2a9da438f37ff6832af711d609c037080f651781"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "e60e9f4366608d78b9f85a4c7da62558d4f017a53df7b5744dc998c691ded254"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/root-before-first-run.tar.gz": {
+    "bytes": 752536,
+    "sha256": "057f30f70c952c448ac2e912b5bfe342f7cee7b2eed46c05cda9baf34b700edd"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/before/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/capture-final-phases.patch.gz": {
+    "bytes": 1453,
+    "sha256": "5496f71d445df0dae2b45f3190d9cc60987eed3f175073ab35c444f0c3de8f4f"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/capture.py": {
+    "bytes": 5816,
+    "sha256": "8150c27322ed9f2b5ca6139e677321fd02e5e8a28bb1c38ab6f8e77f5c77e166"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json": {
+    "bytes": 10328,
+    "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/analysis-command.json": {
+    "bytes": 351,
+    "sha256": "397ec219144452aa67a4caf04f8e98367097eabdfee8c6b781761ac691f79e2c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/analysis-stdout.log.gz": {
+    "bytes": 114,
+    "sha256": "c19d11aed77eef1a0f7c6219730edac7435b2c1e66d6daa4694ae06a9329319d"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/custody.json": {
+    "bytes": 88760,
+    "sha256": "b1b7ec863d556893fbf949f9f9e26bc7d04a861fdd3f9acc81d38aae57d672da"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/normal-command.json": {
+    "bytes": 407,
+    "sha256": "87bf134af09fdffee82f95e66ea43e0ad60a28856ffcd047c65d7cbddca41641"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/normal-stdout.log.gz": {
+    "bytes": 4698,
+    "sha256": "b93ff3f5553d4f0888366d3d670f6b3d5391eb9ae59a1a0f210bc521ada3421b"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "de1306e33c8de6635e59b80984be89d6d1b193591740b677f27aebd3de967c62"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/root-before-first-run.tar.gz": {
+    "bytes": 752973,
+    "sha256": "f05c1e33930a9d3a463fecfbb6fb0e26b8e146a50492e1c73f8e23ad2ff19d20"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct-final/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/analysis-command.json": {
+    "bytes": 351,
+    "sha256": "397ec219144452aa67a4caf04f8e98367097eabdfee8c6b781761ac691f79e2c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/analysis-stdout.log.gz": {
+    "bytes": 114,
+    "sha256": "c19d11aed77eef1a0f7c6219730edac7435b2c1e66d6daa4694ae06a9329319d"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/custody.json": {
+    "bytes": 88748,
+    "sha256": "c7fa75f8de3bc7d650c0097a2465147884e3676958c9544dd86f7420d0f19666"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/normal-command.json": {
+    "bytes": 407,
+    "sha256": "87bf134af09fdffee82f95e66ea43e0ad60a28856ffcd047c65d7cbddca41641"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/normal-stdout.log.gz": {
+    "bytes": 4696,
+    "sha256": "ef7b7553c2e11e73d95a6aa8a14cfc31de423c1dbce6423c200d8899d6eb41c7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "faf35c82b0eaa834d4c6ba77ac2bbff732ae0180df03ed34c0cbb9df2244e994"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/root-before-first-run.tar.gz": {
+    "bytes": 752922,
+    "sha256": "67a83f55f5e90a129be281a6d5c60cd20eb31bc8e7be971681888497a3c8cc9c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/direct/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/finish_format.py": {
+    "bytes": 1988,
+    "sha256": "1c0f3641e3b04c73dfe78bf134723fb3bcf50bb2450fbc30f8e68d069b058790"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/custody.json": {
+    "bytes": 88760,
+    "sha256": "7c2e94f50766bfdd4af9172937b6a852f149b4a24052ad578def42ec8eaa3ba6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/empty-phase-command.json": {
+    "bytes": 213,
+    "sha256": "2b7ed8faf0df3a1fd8abb42104b2d9c7ee9f346473f9103afd4e356cb70bdcae"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/empty-phase-exit.txt": {
+    "bytes": 4,
+    "sha256": "ce8bafb38615aeb5d44ebbabe78ec14ac35a5de87bdc5ad5ea82a72656024ce4"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/empty-phase-stderr.log.gz": {
+    "bytes": 272,
+    "sha256": "142b99220b038b8aa717c6c1edad759489bda34ad493e50c288b29089b8f2d4a"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/empty-phase-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/format-command.json": {
+    "bytes": 355,
+    "sha256": "8369b6be09c84f84dadc7605862dcec45dcd587fa713895091bf25e07c5dcfab"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/format-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/format-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/format-stdout.log.gz": {
+    "bytes": 67,
+    "sha256": "19eedadfa2eb883649b12d8b5bdcf9db50ef67670710e43537b2d5e0d319106f"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "16f07a90516b749cb62ef99aa72f73a4387e2c505750db6f132e6832335c8558"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/root-before-first-run.tar.gz": {
+    "bytes": 752973,
+    "sha256": "0447e65abf7df1cfecc59681b0a599441ce8266add7913fc4e2a7f6463993220"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format-final/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/custody.json": {
+    "bytes": 88748,
+    "sha256": "0b1a68748027dc4fc91a118b87409fb9af38fbfe100372ab50750a487b0eef49"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-apply-command.json": {
+    "bytes": 241,
+    "sha256": "c46855e1a2ccdd6ca6188fa822e8e4566355a27f12ff189a2fca0e93be161579"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-apply-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-apply-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-apply-stdout.log.gz": {
+    "bytes": 122,
+    "sha256": "ff4d37a4f0ac4ddc9a0b3c8a211761fdaebfd0b5eb8101923cab6c86e18040a3"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-command.json": {
+    "bytes": 355,
+    "sha256": "8369b6be09c84f84dadc7605862dcec45dcd587fa713895091bf25e07c5dcfab"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/format-stdout.log.gz": {
+    "bytes": 125,
+    "sha256": "e231a822e9a60dc0eb86a45f026acebcf721cef3c1a855d5055a9c381ebcc096"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/formatted-result.tar.gz": {
+    "bytes": 58468,
+    "sha256": "7bac85a4947ab47c3c6bb922ba642b29956615361e93d42156aff056a27dde90"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/partial-format-note.txt": {
+    "bytes": 237,
+    "sha256": "45db665202b382baccab3b60975f5167cb32a4197bab6c824cbbc7d6ec48258f"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "b0884998eed334e707ce351170921a3e6958e831e618fb1f6c17cf79f3ab3239"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/root-before-first-run.tar.gz": {
+    "bytes": 752922,
+    "sha256": "1f252ad9a96b6539c45c84841d5e1d978bb9f04963e429d7695f26f4436afdd1"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/format/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/freeze_profiles.py": {
+    "bytes": 1340,
+    "sha256": "ccf0e9f46c43b7b886eeb637f61618748d7de7a15b40d27a799a735f2c482a3c"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "b4bf90d637831a5a8c6c88f5ef2e3f7f7325ec4c0b1fa32ae2db54b991e20daa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/analysis-command.json": {
+    "bytes": 254,
+    "sha256": "86db4df90a3e5d0bf0a6803b72fc0a11c6b9759997316022c5fc637cddc7e30e"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/analysis-stdout.log.gz": {
+    "bytes": 79,
+    "sha256": "5e37befbbf42dc49b783312ff40015e0ac133d17d26a17c694424f90d0e0502a"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/cases.json": {
+    "bytes": 10328,
+    "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/custody.json": {
+    "bytes": 121136,
+    "sha256": "07947ca423cda33c7efff67572f74474dd2a83ce6bef0cf05864bdc8409c8ec6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/emitted-before-first-run.tar.gz": {
+    "bytes": 11507,
+    "sha256": "2afc3cf575b22e949d15c732070dfe9632eecab75175e5302d64af2346d7f0e0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-analysis-command.json": {
+    "bytes": 289,
+    "sha256": "9c67481407c62d24a13c91bc48439312e6d2fb26b11502d4d46158c4af51b216"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-analysis-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-before-first-run.tar.gz": {
+    "bytes": 11962,
+    "sha256": "91e521bffd260a7bc698b1f44c89039aa0e19b161ab4510bcccc486bc1e5c9db"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-command.json": {
+    "bytes": 261,
+    "sha256": "db1db915bdd8247143e9923da4c3c153bf9e01bfbe2b1f693c13255b8eb945a5"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-resolution-command.json": {
+    "bytes": 268,
+    "sha256": "97555cd4e648e84a4c36151cea756a7bc9ccbf8b1660aff00aadcccff03e9945"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-resolution-stdout.log.gz": {
+    "bytes": 116,
+    "sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/fresh-stdout.log.gz": {
+    "bytes": 556,
+    "sha256": "cb23cd68df55dfb0821eb72c75e99790c2a8d3ffa7268ecb67c9f7ee0b021ab1"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/native-command.json": {
+    "bytes": 275,
+    "sha256": "5804b4c32bb2017486999474ec4fedda135f609577c5f92027dec748cadad358"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/native-stdout.log.gz": {
+    "bytes": 3627,
+    "sha256": "c1515e4ae3b97789e87c2881a8543342f7f5a2fc9ad0ad9c605ab763a6051510"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/resolved-before-first-run.tar.gz": {
+    "bytes": 4208,
+    "sha256": "98ab6c841b5004e04ab643f30f14867008b4cc53e27e62d380abe977b6bd7d4e"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/root-before-first-run.tar.gz": {
+    "bytes": 751102,
+    "sha256": "7ae28ccc5579fff7e13f6e2443d7a03c84a12e286924334a7a95ae578c194a00"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/intake/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/prepare.py": {
+    "bytes": 1368,
+    "sha256": "0220f0a3c876749bc886f06454e50560562d911894e9f575b7e497dcbec94854"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/producer-change.patch.gz": {
+    "bytes": 1588,
+    "sha256": "14d3666887bf353e51ba189798c3e026582d4df0acaec95400bb5650dfaf2d17"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/raw-identities.json": {
+    "bytes": 17767,
+    "sha256": "2fc887723d0f6ceb4c5659513bca6ac6ad8b98cc16ef8fd463f8de5dfc993ad5"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/review.py": {
+    "bytes": 11939,
+    "sha256": "4f3c052e224a7d9a44239172e1ae5301d6c5cb743064b290471f4bd277d29e1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/seal.py": {
+    "bytes": 1936,
+    "sha256": "21d1552bee0a05416598dee4e67d766ddfdaf0e8656204ae158fedda9dbb830f"
+  }
+}

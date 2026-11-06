@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3486,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parse-job-annotation-contract.md","sha256":"cd524d2b1db839467ed5651898c87c22e9f16ec5e05453d2634b4006a507286a","type":"member"}
 {"bytes":4123,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parser-registry-dispatch-contract.md","sha256":"7c61df97f1e2e036948f56f102f3f8f05c532c32ebd9c15da6f05102a7fe7a34","type":"member"}
 {"bytes":3188,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-prototype-function-body-selection.md","sha256":"59201bfb2cc311b21e04bfd14f05bbd73e315ba03b51755a6be51cd1df702584","type":"member"}
 {"bytes":5199,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-target-preparation-gaps.md","sha256":"fc1600cdc6fad658e2a62698dd359d440a54a8a33d2e8a2ca3812b26c93a9414","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2899,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-authoring-model-public-no-drift.md","sha256":"b5b374f8060bf88116ce1883a2042cfacf94eaa88fc346929cfce2b29303319e","type":"member"}
 {"bytes":4491,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-lossless-gap-composition.md","sha256":"2c2cb42c2e31e12179a735bb78b35074f2e43b56dd5b96d1947c556d5172dd3a","type":"member"}
 {"bytes":2605,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-path-mutation-result-checker-root-kind.md","sha256":"3507d6e4896b7d1633a12c155265f128a83b8e14490ff819bddc5934f5cef3b6","type":"member"}
-{"bytes":5326,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-cursor-algebra-direction.md","sha256":"dd2d24fff8a59cfdcc408ae9416f7307a6a96965f3c9f5d73bd5ffdd4a5b8e20","type":"member"}

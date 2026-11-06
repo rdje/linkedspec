@@ -1,0 +1,14 @@
+{
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/review-qualified-stderr.log": {
+    "capsule": "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/review-qualified-stderr.log.gz",
+    "capsule_sha256": "e5a663a0f013f1efa02b0e8806391eece73cc4af6172defbef408145365f0296",
+    "raw_bytes": 618,
+    "raw_sha256": "cc1b7745335e629fb516bb3b87e59d02fccb868e6289481a1ec8608126782fe4"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/review-stderr.log": {
+    "capsule": "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/review-stderr.log.gz",
+    "capsule_sha256": "a654d8f6deb1ee7694add60a3ed3996e924df3968cfa85e640ccfe84d688c360",
+    "raw_bytes": 598,
+    "raw_sha256": "cdd00ad8570c18f439af4856e42758b528c1b35a8d1ec75893ea5c71ca93a846"
+  }
+}

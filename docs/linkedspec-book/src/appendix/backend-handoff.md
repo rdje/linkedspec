@@ -4395,3 +4395,38 @@ and generated format stay unchanged. Full native/cache/transitive custody, sourc
 registered-function contexts, general isolation, normal registration23.4.1 and
 full23.4 admission remain separate. Independent Dart76.3 must establish its own
 initial-source and error/arity profiles before any runtime repair.
+
+## Dart ordinary Hash-view result guards
+
+Dart canonical ordinary free-one sorted_keys/sorted_values and zero-extra first
+receiver views now retain Array-result guards before incompatible Hash consumers.
+For example, `sorted_keys({"a":1}).set_key("k",1)` returns null and skips the
+consumer operands; later `.copy().with(){return("ran")}` and logical operands
+retain rejection. Compatible ordered views, selected nested kinds, explicit
+bridges, source-once snapshots and needed errors keep their original behavior.
+
+Initial producer permission is separate: Number/null/Array initial views retain[];
+`undef.sorted_values().with(){return(value.count())}` returns0 with its body run.
+A previously produced Count/CountKeys/Length Number still rejects a Hash view and
+returns null. Valid Hash/empty-view bodies run. Own malformed receiver extra
+operand remains ran/AW, free extra remains ran/W; these excluded profiles are
+preservation observations, not new supported signatures or peer normalization.
+
+Original33 public source programs on native/restored/generated-plan/independently
+loaded emitted modules show26 healthy/seven RED. The same new normal33 becomes
+33PASS, final direct constructor/copy/receiver-arity dependents pass62 and fresh33
+passes. All19 own source/error/arity profiles and33 actual emitted/parsed pairs
+remain exact. Final fatal scoped analysis, format and eight readonly recovery
+corruptions pass. The first format RED and two reader-instrument failures remain
+separate; final reader exits0 with empty own stderr. Failed traceback channels use
+lossless compressed transport; separate publication recovery preserves that result
+and rejects two capsule corruptions. Actual grammar input precedes
+SDK use through the published explicit parserSpecSource parameter. Full raw
+epochs, producer versions and exact declared inputs survive at
+docs/checkpoints/hash-view-result-guard-dart-2026-11-07/REVIEW.md.
+
+Rebuild Dart applications against the updated runtime; emitted module bytes and
+format stay unchanged. Source/registered-function contexts, general isolation,
+normal registration23.4.1, full native/cache/transitive custody4.2/SESSION5 and
+full23.4 remain separate. Independent Julia76.4 then installed Lua76.5 must acquire
+their own source/arity/error profiles and actual grammar inputs before edits.

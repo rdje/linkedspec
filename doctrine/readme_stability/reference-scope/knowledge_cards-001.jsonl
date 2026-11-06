@@ -63,6 +63,7 @@
 {"bytes":3860,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-global-cursor-option-removal.md","sha256":"ea79861aee78ef7ac3669e60f84c2d3a538a9fe7d1e80e80c35b1a60e7163277","type":"member"}
 {"bytes":5330,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-governed-capture-mark-parity.md","sha256":"2f152a7b71cffc768aa276297a860c497e364aca9b2d871134452547add76afa","type":"member"}
 {"bytes":9274,"lines":111,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-hash-splice-pairing-gap.md","sha256":"12951d644161b6b61df0bbb024840279bc2caeb2513dd3fb08553482c095ef38","type":"member"}
+{"bytes":4025,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.3","path":"docs/knowledge/dart-hash-view-result-guards.md","sha256":"949bdd196f508dce20a55f2acf2a2b1c204e178b192aaee33a3e638b88214e43","type":"member"}
 {"bytes":3484,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-helper-action-surface-bridge.md","sha256":"be2b9a5c1438b388efb5f36882e24b787aad3041f1abd8030de5dc394d9fe01a","type":"member"}
 {"bytes":8495,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-helper-unicode-order-gap.md","sha256":"b500001e4d15f40d46f18651d945f340424fc531aceb7932a10581d1b5c4e8ce","type":"member"}
 {"bytes":2666,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-hlink-scalar-held-array-append.md","sha256":"37fdad8356702e66f0d5a6da11290803a38450c13457f1df4e755e01a579e87a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2603,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-receiver-string-bridge-guards.md","sha256":"6f08847af48c871ed82f525d210922c472d61ab4e726cda82b119945716e9291","type":"member"}
 {"bytes":8526,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-effect-integration-gap.md","sha256":"6c550d60366c2e9abcd71396f62daa7e27fb345a03bdc318b95ea94bb8242196","type":"member"}
 {"bytes":8247,"lines":112,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-transaction-dormant-red.md","sha256":"217dff2ad4ac4301d77cc9e6c783ea0dccc6ee24f6099a65f806a8f2af540c0a","type":"member"}
-{"bytes":3263,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-dispatch-rule-local-scope.md","sha256":"80be721fa2902cdcc4252869e6994f1225cf5719ea6c7cc254254459819ee73d","type":"member"}

@@ -1,0 +1,11 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "format",
+    "lib/src/runtime/interpreter.dart",
+    "test/hash_view_result_guard_composition_test.dart",
+    "tool/probe_hash_view_results.dart"
+  ]
+}

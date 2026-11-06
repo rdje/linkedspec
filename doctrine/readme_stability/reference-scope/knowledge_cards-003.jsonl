@@ -1,9 +1,10 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3027,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-perl-reference.md","sha256":"b6eacb40894b7d2aff342211e6f92481e3570268d8d48389161a3e2806ea8f8e","type":"member"}
 {"bytes":4744,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-rust-parity.md","sha256":"662c96fba4fe1201273f5b2394734b062a28b51fd6e18aaff46b5f9fd00d1520","type":"member"}
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
 {"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
 {"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}
-{"bytes":4958,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"d9a1f277600070deab954d480d75c434ca57b4ae226df8b670f7ecc3b207f529","type":"member"}
+{"bytes":5542,"lines":85,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.3","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"0c236fc76e6801596b4c1d72a0a29d4f46e627f7a6538bc6cd42a4d24ed608ff","type":"member"}
 {"bytes":8469,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-objective-audit-input-recovery.md","sha256":"0056baa6fcce07fdbd38cd70d0f1832001636aa51ac307efdc030f54cf5dc830","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
 {"bytes":3808,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hlink-scalarref-oracle-gap.md","sha256":"707ab66f1f39951b8cca2dd1b60508585c22172f7062bab3ed10482b899f79d5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":10056,"lines":155,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-authority-boundary-gaps.md","sha256":"e9f2a4c751308cafde8b17214a621bffd580ca3f66a22faa4b33530d61bcd2d4","type":"member"}
 {"bytes":4441,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-parent-state-test-gap.md","sha256":"b456785271b5f20565ca825ba1d4335d0eaa7720b833948456a21c70f2a0e423","type":"member"}
 {"bytes":7377,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-admission.md","sha256":"f6f0bf4bad7e01a40b6e099f519d8a029435e0d628a383c853efd3ffef55c032","type":"member"}
-{"bytes":7864,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-authority.md","sha256":"6ae78446bbdd1823403cba3ca63368cc70112b32754514ed1be2ee8115213b20","type":"member"}

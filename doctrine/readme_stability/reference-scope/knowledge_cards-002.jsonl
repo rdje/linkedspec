@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3263,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-dispatch-rule-local-scope.md","sha256":"80be721fa2902cdcc4252869e6994f1225cf5719ea6c7cc254254459819ee73d","type":"member"}
 {"bytes":7624,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-observation-admission.md","sha256":"0cff0553e4a2a234f90c8496df4c2e90d40426faaf644b7313871d78d0160c50","type":"member"}
 {"bytes":5618,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-brace-scanner-defects.md","sha256":"d53c4461a9966e212a731743406969a1ea45cc9e16fe9f0b79b4e3abd169aa58","type":"member"}
 {"bytes":3790,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-dialect-bridge.md","sha256":"49c857fe360d965fb653b2af6db3cac7b1ab61daee39db72039b27ee8d529b64","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2364,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-helper-odd-arity-current-behavior.md","sha256":"f98964865a50e8378b37cff64a042c209d0053d1193fad1c687f82380180cc73","type":"member"}
 {"bytes":2551,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-methodlowering-source-fallback.md","sha256":"9a9899938788f9cab88149d783fbc172d8975908c634c0e1973c3ffb52c5bf89","type":"member"}
 {"bytes":3328,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-migration-split.md","sha256":"15f75e26ad0b1d92d05488e25f001e182cd470ee9edb9bbf24cb2f7cf7baaac0","type":"member"}
-{"bytes":3027,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-perl-reference.md","sha256":"b6eacb40894b7d2aff342211e6f92481e3570268d8d48389161a3e2806ea8f8e","type":"member"}

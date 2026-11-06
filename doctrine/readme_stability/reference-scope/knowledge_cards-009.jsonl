@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5880,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-invalidated-token-restoration.md","sha256":"9ce8631df3a1e1febeb6fbe804aad2fcbb838064b54442b5621350f05be1015c","type":"member"}
 {"bytes":2910,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-runtime-ascii-rule-guard.md","sha256":"a8a882e66d222deedfbc1ea7a11c0ffaf28cc04e43f789b352c09cb53a549451","type":"member"}
 {"bytes":1817,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-token-lexical-order-drift.md","sha256":"792b07faf5cdd4d3df1cbec6ad45ea915170bbd0fd733912f8911d3561cb1a3e","type":"member"}
 {"bytes":5663,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-dormant-red.md","sha256":"366c0e730beb39f24e52a9998385d9d8f7cec1e369ff09de6d42dcd093c14565","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1894,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/referenced-intermediate-qualified-runtime-target.md","sha256":"10c88baade89d49b2f5513aa0c7644dde6ecd0806bb4df635879834f44c2d6db","type":"member"}
 {"bytes":8075,"lines":127,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/regex-substitution-callback-and-flag-discrepancies.md","sha256":"b120e475c964351dc166598a5a9f0f6129e26b7bc7d938044c30e0d74adf26c6","type":"member"}
 {"bytes":3837,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repeated-and-falsey-group-acceptance.md","sha256":"bc965e157960453b887b2bc533b4baa0053156b9e2c2552fb8aca8d6b15738dd","type":"member"}
-{"bytes":4821,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/replacement-repair-engineering-history-capacity.md","sha256":"150150147f888200b5434b758e675aca17936831df77c930882436128cbd081b","type":"member"}

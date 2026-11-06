@@ -1,0 +1,16 @@
+{
+  "action": "Stopped only own failing pre-commit process tree before Git HEAD changed",
+  "root_pid": 17272,
+  "terminated_pids": [
+    17272,
+    17291,
+    17705,
+    31231,
+    88845,
+    88846,
+    89028,
+    96774
+  ],
+  "reason": "REPO-ROOT-PATHS rejected two uncompressed retained reader failure tracebacks; lossless compressed transport needed. No hook bypass or successful all-doctrine verdict claimed.",
+  "activation": "b1f55ddf71083425eb923a852ec2974f70522a2c"
+}

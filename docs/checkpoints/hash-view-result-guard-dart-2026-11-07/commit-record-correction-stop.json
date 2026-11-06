@@ -1,0 +1,16 @@
+{
+  "root_pid": 67735,
+  "terminated_pids": [
+    67735,
+    67751,
+    68326,
+    72373,
+    25807,
+    25808,
+    25983,
+    67617,
+    67812
+  ],
+  "reason": "Stop only own current hook tree before HEAD change to correct the evidence note: the observed first tool exit143 needs an explicit retained result record. This second interruption is not a hook failure or passing doctrine report.",
+  "activation": "b1f55ddf71083425eb923a852ec2974f70522a2c"
+}
