@@ -1,0 +1,208 @@
+[
+  {
+    "id": "free_missing",
+    "body": "return(count_keys(undef))",
+    "source": "Value:: I {return(count_keys(undef))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_missing",
+    "body": "return(undef.count_keys())",
+    "source": "Value:: I {return(undef.count_keys())}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_number",
+    "body": "return(count_keys(4))",
+    "source": "Value:: I {return(count_keys(4))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value",
+    "seed_namespace": "4"
+  },
+  {
+    "id": "receiver_number",
+    "body": "return(4.count_keys())",
+    "source": "Value:: I {return(4.count_keys())}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value",
+    "seed_namespace": "4"
+  },
+  {
+    "id": "free_false",
+    "body": "return(count_keys(false))",
+    "source": "Value:: I {return(count_keys(false))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_false",
+    "body": "return(false.count_keys())",
+    "source": "Value:: I {return(false.count_keys())}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_text",
+    "body": "return(count_keys(\"text\"))",
+    "source": "Value:: I {return(count_keys(\"text\"))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_text",
+    "body": "return(\"text\".count_keys())",
+    "source": "Value:: I {return(\"text\".count_keys())}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_array",
+    "body": "return(count_keys([]))",
+    "source": "Value:: I {return(count_keys([]))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_array",
+    "body": "return([].count_keys())",
+    "source": "Value:: I {return([].count_keys())}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_empty_hash",
+    "body": "return(count_keys({}))",
+    "source": "Value:: I {return(count_keys({}))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_empty_hash",
+    "body": "return({}.count_keys())",
+    "source": "Value:: I {return({}.count_keys())}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_hash",
+    "body": "return(count_keys({\"a\":1,\"b\":2}))",
+    "source": "Value:: I {return(count_keys({\"a\":1,\"b\":2}))}",
+    "expected": 2,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_hash",
+    "body": "return({\"a\":1,\"b\":2}.count_keys())",
+    "source": "Value:: I {return({\"a\":1,\"b\":2}.count_keys())}",
+    "expected": 2,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_true",
+    "body": "return(count_keys(true))",
+    "source": "Value:: I {return(count_keys(true))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "free_nonempty_array",
+    "body": "return(count_keys([1]))",
+    "source": "Value:: I {return(count_keys([1]))}",
+    "expected": 0,
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "receiver_true",
+    "body": "return(true.count_keys())",
+    "source": "Value:: I {return(true.count_keys())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": 0
+  },
+  {
+    "id": "receiver_nonempty_array",
+    "body": "return([1].count_keys())",
+    "source": "Value:: I {return([1].count_keys())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": 0
+  },
+  {
+    "id": "named_hash",
+    "body": "meta={\"a\":1,\"b\":2};return([count_keys(meta),meta.count_keys()])",
+    "source": "Value:: I {meta={\"a\":1,\"b\":2};return([count_keys(meta),meta.count_keys()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      2,
+      2
+    ]
+  },
+  {
+    "id": "free_nonhash_order",
+    "body": "calls=0;order=\"\";out=count_keys({calls=num_add(calls,1);order=cat(order,\"S\");[1]}).add({order=cat(order,\"A\");1});return([out,calls,order])",
+    "source": "Value:: I {calls=0;order=\"\";out=count_keys({calls=num_add(calls,1);order=cat(order,\"S\");[1]}).add({order=cat(order,\"A\");1});return([out,calls,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      1,
+      "SA"
+    ]
+  },
+  {
+    "id": "receiver_nonhash_order",
+    "body": "calls=0;order=\"\";out={calls=num_add(calls,1);order=cat(order,\"S\");true}.count_keys().add({order=cat(order,\"A\");1});return([out,calls,order])",
+    "source": "Value:: I {calls=0;order=\"\";out={calls=num_add(calls,1);order=cat(order,\"S\");true}.count_keys().add({order=cat(order,\"A\");1});return([out,calls,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      1,
+      "SA"
+    ]
+  },
+  {
+    "id": "numeric_forms",
+    "body": "return([count_keys(0),count_keys(-4),count_keys(4.5)])",
+    "source": "Value:: I {return([count_keys(0),count_keys(-4),count_keys(4.5)])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "initial_compatible",
+    "body": "return([count_keys(false).add(1),count_keys([1]).add(1),false.count_keys().add(1),[1].count_keys().add(1)])",
+    "source": "Value:: I {return([count_keys(false).add(1),count_keys([1]).add(1),false.count_keys().add(1),[1].count_keys().add(1)])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      1,
+      1,
+      1
+    ]
+  }
+]

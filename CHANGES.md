@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — enforce CountKeys initial source kind and literal boundary
+
+Two producer clauses require a Hash reference for computed sources and an identifier for named Hashes. Unchanged23 groups10PASS13RED become23PASS/native-fresh; ten healthy observations exact. Initial Boolean/Array zero and source-once/order/compatible continuations complete; twelve exact localized public/emitted numeric4 seed rows stay zero with host data unchanged. Final37/owner syntax and six recovery corruptions pass. Actual first inputs/modules/full raw epochs retained; regenerate emitted Perl. Catalog/examples/book/Knowledge/task/live pointers align. Perl75.1 result guards next; full admission/peers/legacy scope remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.4.13 — retain artifacts after bounded daily review
 
 Dated eight-scope review retains all1043 selected path/suffix/byte rows matching independent metadata; configured rust/target is covered. Five corruption controls and separate readonly replay pass. No removals or disposability/liveness/reclamation inference. Actual direct producers/Git-index input and all retained outputs survive with a three-leg claim. Latest-only cleanup/book/Knowledge/task/live records align. No runtime/storage/hook/CI change; P1 domain75.0.2 resumes next.

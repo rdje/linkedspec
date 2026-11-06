@@ -1,4 +1,5 @@
-{"member_count":9,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":10,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":11342,"lines":166,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/with-result-selection-source-gap.md","sha256":"4dc6beed40a22aa352a1aad1a450c46c73623bb2f95f50cce0cfc0a20bdf767f","type":"member"}
 {"bytes":10296,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/working-vars-no-strict-need-my-lexical.md","sha256":"bef0745a3fd57bbce5fe7fef8db35a7f47350fc0baa2d7b3ea91c9ab329f3243","type":"member"}
 {"bytes":10473,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-map-leaves-neutral-composition.md","sha256":"1f45c33b8ce6ec4f32f1a86bb6765da6b583eaed1521af81d0e70bf042b02aa4","type":"member"}
 {"bytes":9108,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-dart-runtime.md","sha256":"4ae9c1a26d8fe0fa0bf5e1f6a9a0b8b939c484289a568cd5a4276489e9917a6b","type":"member"}

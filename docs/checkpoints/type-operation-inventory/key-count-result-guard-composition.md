@@ -2,7 +2,8 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.3.75.0; implementation family75. Existing
 count-length-results.md3, helper catalog CountKeys and actual-kind/copy/eager-logical
-contracts retain authority. Assessment only: no production repair or peer verdict.
+contracts retain authority. The initial assessment made no production repair or
+peer verdict; current Perl prerequisite results are recorded below.
 
 Canonical count_keys(value), one positional recognized source, and receiver.count_keys()
 with zero extra operands yield Number counts. Preserve Hash counts, documented
@@ -73,5 +74,18 @@ counts, and source-once/order/in-place snapshots/functions/preflight stay.
 Exactly four failing module bodies change; new9/Count block14/Count-length5=28,
 owner syntax and five recovery corruptions pass. Actual first inputs/modules/raw
 channels retained in key-count-typed-source-2026-11-06. Regenerate emitted Perl.
-No Hash-domain/symbol/result-guard change. Domain75.0.2 remains next before75.1
-and independent peers; full custody/isolation/discovery/admission remain separate.
+That typed-source slice makes no Hash-domain/symbol/result-guard change. The
+subsequent domain75.0.2 repair below precedes75.1 and independent peers; full
+custody/isolation/discovery/admission remain separate.
+
+## Perl source-domain75.0.2
+
+Exactly two producer clauses require an identifier for named Hashes and a Hash
+reference for computed sources. Unchanged23 groups10PASS13RED become23PASS; ten
+healthy observations exact. Initial Boolean/Array zero, source-once/order and
+compatible continuations complete; twelve exact public/emitted literal4 seed rows
+return zero without host mutation. Domain23/typed9/Count-length5=37 and syntax
+pass; six recovery corruptions reject. Regenerate emitted Perl. Actual inputs/
+modules/full raw epochs: key-count-domain-perl-2026-11-06/REVIEW.md. Perl75.1 must
+capture its own valid current aggregate before guard edits; the aborted original
+remains historical. Number2 consumer seeds and general SESSION17 scope stay open.

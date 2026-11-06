@@ -1554,7 +1554,19 @@ admission remain open.
 - **Returns**: int
 - **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input. On Perl/Rust/Dart/Julia/Lua, `{"a":1,"b":2}.count_keys().mul(2)` → `4` and `{}.count_keys().add(1)` → `1`; the result feeds existing compatible scalar/number methods just like `num_add(count_keys(meta),3)`. Source evaluation and the count precede later operands, so their mutations do not recompute that count.
 
-- **Current Perl limitations (November6)**: Boolean/Array sources can raise `Not a HASH reference`. Numeric `count_keys(4)` can also count host `main::4`; empty-host zero conceals that source-classification bug. These zero-policy defects remain P1 repair75.0.2. Typed-source75.0.1 now correctly lowers ordinary mutating value blocks and canonical terminal receivers: required binding errors occur during execution, and valid Hash blocks produce counts. Regenerate emitted Perl. Compatible Hash counts and missing-input zero pass the retained controls. CountKeys result guards75.1 remain pending; incompatible consumers can return the wrong value or run later bodies. The backend handoff appendix records the exact scope and repair order. Other backends require independent assessment.
+- **Current Perl status (November6)**: Typed-source75.0.1 and source-domain75.0.2 are implemented with focused checks. Initial Boolean/Array/missing/Number/text sources return `0`; valid named Hash counts remain intact. Numeric `4` is data, including under the retained localized `main::4` controls. Mutating value blocks use typed ownership, so required binding errors occur during execution. Regenerate emitted Perl. Result guards75.1 remain pending: incompatible consumers can still return the wrong value or run later bodies. Full admission and independent backend assessment remain separate.
+
+```text
+count_keys(false)                     # 0
+[1,2].count_keys()                    # 0
+count_keys(4).add(1)                  # 1
+meta={"a":1,"b":2};count_keys(meta)  # 2
+```
+
+The initial source is evaluated once before later operands. For example,
+`count_keys({calls=num_add(calls,1);[1]}).add(1)` increments an existing numeric
+`calls` once and yields `1`. A source binding error still propagates; returning
+zero for an ordinary non-Hash value does not mask failed source evaluation.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

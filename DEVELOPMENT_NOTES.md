@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — Definedness and word characters do not identify a Hash source
+
+CountKeys had two distinct source errors: its defined-only reference dereference throws on Boolean/Array values, and its word-character shortcut mistakes numeric4 for a Hash name. Require ref HASH in the computed path and the existing identifier grammar in the named shortcut, preserving working Hash counts. Empty-host zero alone concealed the numeric lookup; twelve exact free/receiver public/emitted seed rows distinguish it and now stay zero without host mutation. Unchanged23/final37 and ten exact healthy observations preserve source/order/typed errors. The final normal simplification is separately exact/replayed. Original before/after archives, actual pre-run modules/carriers and lossless channels remain recoverable; no original aborted aggregate is promoted. Perl75.1 captures its own valid current profile before guards.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.4.13 — Daily artifact review does not infer disposal authority
 
 The November6 review uses the existing non-following scanner and independent scandir/lstat for each of1043 selected rows in eight named scopes. Supported project-data wrappers confirm the active Cargo target is included. Metadata alone grants no liveness or disposal authority, so all artifacts/caches/proof remain retained. Five mutations reject and readonly replay passes; exact direct producer bodies and Git-index bytes remain in the dated observation. Prior observations/claims stay immutable. The public maintenance pointer also names the already completed growth assessment and still-scheduled prospective reuse accurately. Resume P1 CountKeys domain75.0.2 after this clean maintenance leaf.

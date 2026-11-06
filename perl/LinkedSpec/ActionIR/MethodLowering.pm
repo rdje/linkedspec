@@ -8128,7 +8128,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   my $target_kind = $remembered_bare_symbol_kind->($target_expr);
   if (
    defined($hash_symbol) &&
-   length($hash_symbol) &&
+   $hash_symbol =~ /\A[A-Za-z_][A-Za-z0-9_]*\z/o &&
    $target_expr =~ $hash_symbol_expr_re &&
    (($target_kind // '') ne 'scalar')
   ) {
@@ -8139,7 +8139,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_count_keys = '.$lowered_target.'; defined($__ls_count_keys) ? scalar(keys %{$__ls_count_keys}) : 0 }';
+  return 'do { my $__ls_count_keys = '.$lowered_target.'; ref($__ls_count_keys) eq \'HASH\' ? scalar(keys %{$__ls_count_keys}) : 0 }';
  }
  if ($method_call && $method_call->{method} eq 'sorted_keys') {
   my $sorted_keys_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

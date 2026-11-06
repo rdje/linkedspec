@@ -3826,10 +3826,10 @@ and already-produced result consumption must remain distinct.
 
 The assessment retains twenty-two finite programs. Seven original preservation
 programs and an additional initial-source continuation control are healthy;
-twelve programs expose guard gaps. Two producer prerequisites must be fixed
-first: mutating value-block sources can emit invalid Perl, and Boolean/Array
-sources can raise `Not a HASH reference` where zero is documented. These are
-owned by75.0.1 and75.0.2 before ordinary Perl guards75.1. The aborted domain probe
+twelve programs expose guard gaps. At the assessment boundary two producer
+prerequisites required repair: mutating value blocks emitted invalid Perl, and
+Boolean/Array sources raised `Not a HASH reference` where zero is documented.
+Both are now focused-checked in75.0.1 and75.0.2 before ordinary Perl guards75.1. The aborted domain probe
 is not treated as a valid profile. Independent Count/source/Hash controls identify
 the exact causes without changing production code during the assessment.
 
@@ -3840,14 +3840,14 @@ regressions; this finding is limited to those carriers and that numeric namespac
 Actual inputs, full raw outputs, modules and readonly recovery are retained under
 `docs/checkpoints/key-count-selection-2026-11-06/`.
 
-After the two producer repairs, implement Perl75.1 and independently assess
+Next implement Perl75.1 and independently assess
 Rust75.2, Dart75.3, Julia75.4 and installed Lua75.5. Preserve their own producer/
 source domains, signatures, copy depths and mutation restrictions. Full native/
 transitive custody, general isolation, canonical discovery and admission remain
 pending; no peer failure or declared Lua5.4 support is inferred.
 
 A separate producer check distinguishes numeric input from a Hash binding name:
-`count_keys(4)` currently emits a host Hash lookup and returns `1` when seeded
+`count_keys(4)` at the assessment boundary emits a host Hash lookup and returns `1` when seeded
 `main::4` has one key. Empty and outer-only seeds return `0`. Both exact public
 and emitted-module carriers reproduce this, with host data unchanged. Domain
 repair75.0.2 therefore includes numeric-literal classification as well as the
@@ -3871,7 +3871,21 @@ emitted modules change. Regenerate emitted Perl. Actual first inputs, full raw
 channels and pre-run modules are retained under
 `docs/checkpoints/key-count-typed-source-2026-11-06/`.
 
-The Boolean/Array and numeric-source zero-domain defects remain75.0.2, followed
-by ordinary result guards75.1 and independent peers. Full source/context/custody/
-isolation/discovery/admission remain separate; this source fix does not close
-those broader claims.
+Perl source-domain75.0.2 now implements the documented initial zero policy.
+Computed sources are dereferenced only when they are Hash references; the named
+Hash shortcut requires an identifier, so numeric4 stays data. For example,
+`count_keys(false)`, `[1].count_keys()` and `count_keys(4)` return `0`, while
+`count_keys({"a":1,"b":2})` and a named working Hash still count two keys.
+
+The unchanged23 regression moves ten passing/thirteen failing groups to23PASS.
+All ten healthy complete observations remain exact. Twelve localized public/
+emitted numeric4 seed controls now return zero with host data unchanged;
+non-Hash source-once/order/compatible-add controls complete normally. The final
+domain23, typed-source9 and Count-length5 checks pass37 groups. Regenerate emitted
+Perl. Actual first inputs, full channels, modules and readonly recovery live in
+`docs/checkpoints/key-count-domain-perl-2026-11-06/`.
+
+Ordinary result guards75.1 and independently assessed peers are next. The original
+aborted assessment aggregate remains historical;75.1 captures a valid current
+profile before its guard edits. Full source/context/transitive custody, legacy
+bare/absent binding scope, general isolation/discovery/admission remain separate.

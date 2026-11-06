@@ -11,9 +11,9 @@ answers:
   - "may an aborted key-count domain profile be frozen"
   - "why does count_keys(4) count host main::4"
 date: 2026-11-06
-status: Perl typed75.0.1 focused-checked; domain75.0.2 next before Perl75.1/independent peers
+status: Perl typed75.0.1 and domain75.0.2 focused-checked; guards75.1 next before independent peers
 tags: [perl, count_keys, guards, source, domain, copy, logical, host]
-evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict."
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict at that assessment boundary."
 reverify:
   - "bash tools/run_python_project_data.sh docs/checkpoints/key-count-selection-2026-11-06/review.py"
 ---
@@ -62,5 +62,9 @@ carrier/module and raw channels are retained; no native seeded/general isolation
 Current typed-source repair75.0.1 is implemented with focused checks:
 [[perl-key-count-typed-source]]. Nine groups5PASS4RED become9PASS, five healthy
 observations exact; free and canonical terminal receiver mutation blocks use the
-same typed owner. Regenerate emitted Perl. The domain and consumer defects above
-remain independently owned and unrepaired; no peer or full-admission inference.
+same typed owner. Regenerate emitted Perl. The consumer defects above remain
+75.1-owned. The source-domain repair75.0.2
+is now focused-checked: [[perl-key-count-source-domain]]. Boolean/Array sources
+return zero, valid named Hash counts remain, and twelve exact public/emitted
+numeric4 seed rows return zero with unchanged host data. The original assessment
+observations remain historical; no peer or full-admission inference.

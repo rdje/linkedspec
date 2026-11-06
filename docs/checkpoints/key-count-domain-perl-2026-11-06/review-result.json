@@ -1,0 +1,1 @@
+{"after": "23PASS", "before": "10PASS/13RED", "healthy_exact": 10, "localized_seed_rows": 12, "nearest": "37PASS", "rejected_controls": ["missing-row", "false-as-number", "numeric-host-read", "host-data-change", "changed-module", "forged-source-boundary"], "result": "PASS"}

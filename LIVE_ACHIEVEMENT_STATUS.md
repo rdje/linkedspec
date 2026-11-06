@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT resumes P1 key-count domain75.0.2 after typed-source75.0.1 and due daily artifact review4.13. Boolean/Array dereferences and numeric4/main::4 producer classification precede Perl75.1/independent peers75.2-.5 and unrelated selection/full23.4.
+PNT key-count75: Perl typed75.0.1 and domain75.0.2 prerequisites implemented with focused checks; ordinary Perl75.1 result guards next, then independent peers75.2-.5. Full23.4 admission remains deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.13 completes the dated eight-scope daily artifact review: all1043 selected per-file rows agree with independent metadata, configured Rust target is covered, five corruption controls and readonly replay pass. No files removed; caches/proof/active outputs/other repositories retained without liveness/disposability/reclamation inference. Actual direct producers/Git-index input, observation/actual channels and three-leg claim retained. Latest-only cleanup, book/Knowledge/task/live pointers updated; no runtime/storage/hook/CI change or broad suite.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 repairs two CountKeys source producer clauses. Unchanged23 groups10PASS13RED become23PASS/native-fresh; ten healthy complete observations exact. Initial Boolean/Array zero and source-once/order/compatible prefixes complete. Twelve exact free/receiver public/emitted numeric4 seed rows stay zero/host unchanged. Final domain23+typed9+Count-length5=37, syntax and six recovery corruptions pass; actual first inputs/modules/carriers/full raw epochs retained. Regenerate emitted Perl; no peer/full-admission inference.
 
 ## Next Action
 
-Activate P1 domain75.0.2 from clean Git. Recover exact CountKeys Boolean/Array/reference failures and numeric4/main::4 source-symbol counterexample; retain unchanged focused domain/Hash/source-order/seed normal before producer repair. Preserve valid named Hash sources, the typed-source fix and original assessment epochs. Commit before Perl75.1 guards/independent peers.
+Activate Perl75.1 from clean Git. Recover frozen shared22 and exact main::2 result-consumer seeds. Capture unchanged guard baseline and valid current source-domain/error profile before source admission/copy/logical/Count fallback repairs. Preserve initial CountKeys zero, source order/typed errors, named Hashes and explicit bridges; commit before independent Rust75.2.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — initial Hash-kind/numeric-source policy23PASS/final37; consumer75.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.13 — dated artifact retention review; zero removals; P1 domain75.0.2 resumes.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
@@ -29,7 +30,6 @@ Activate P1 domain75.0.2 from clean Git. Recover exact CountKeys Boolean/Array/r
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.7 — original long Count source causally resolved by earlier copy dispatcher; regression restored; director-requested pause before P3 formatting.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 — installed Lua initial Boolean Count focused-checked; all concrete P1s done, P2 compiler73.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 — Julia initial Boolean Count focused-checked; installed Lua5 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — Dart Boolean Count source focused-checked; clean fresh-context Julia4/Lua5 handoff.
 
 ## History
 
