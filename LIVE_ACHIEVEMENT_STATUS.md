@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: ordinary five-backend guards and Perl/Rust/Dart/Julia callable behavior are focused-checked. Installed Lua75.6.5 remains. Full23.4/source-context/custody admission stays deferred until feature coverage.
+PNT key-count75: ordinary five-backend guards and all bounded callable backend children have focused outcomes on recorded hosts. Remaining-family selection23.1.36 is next. Full23.4/source-context/custody admission stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 independently preserves Julia callable16/four routes without production edits. Supporting grammar is captured and explicitly supplied before SDK use. Boolean terminal/composed null/null and errors stay exact. Direct84+126+27 assertions, strict depwarn, empty stderr and six recovery corruptions pass. All16 original observations and module/parsed bodies remain exact. Native/cache/transitive custody and full admission stay separately owned.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 independently preserves16 authored programs/four routes on PUC5.5.1 and LuaJIT. Supporting grammar is captured and explicitly supplied before SDK use; separate Boolean null/null/arity/error profiles stay exact. Each direct84+126 checks passes with empty stderr; eight recovery corruptions reject. All16 original observations and module/parsed bodies per host remain exact. Runtime unchanged; native/cache/transitive custody, declared5.4 and full admission remain separate.
 
 ## Next Action
 
-Activate installed Lua75.6.5 from clean Git. Read actual grammar-input contract, retain inputs before SDK use and freeze independent installed-host Boolean/arity/error profiles. Small direct checks/docs/commit. Resource4.14 remains before memory-guarded full verification.
+Activate selection23.1.36 from clean Git. Recover actual remaining inventory/gap matrix/contracts/Knowledge, retain minimum full-source public observations and freeze one existing-contract feature family; own backend leaves before production. No broad verification pivot. Resource4.14 remains before memory-guarded full verification.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — each installed Lua16PASS/four routes; direct210 checks; runtime unchanged; selection36 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Julia16PASS/four routes; direct237 assertions; runtime unchanged; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Dart16PASS/four routes; qualified grammar/normal16/direct29; runtime unchanged; Julia4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Rust already16PASS/four routes; new16/direct29; runtime unchanged; Dart75.6.3 next.
@@ -29,7 +30,6 @@ Activate installed Lua75.6.5 from clean Git. Read actual grammar-input contract,
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
 
 ## History
 

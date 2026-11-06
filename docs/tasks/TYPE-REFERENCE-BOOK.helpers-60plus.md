@@ -1973,13 +1973,15 @@
   - [x] **LOCKSTEP** — actual first inputs/producers/full raw/artifacts recover with seven corruptions; book/Knowledge/target/task/index/live/resume/history align. Callable75.6 next; full custody/context/isolation/declared5.4/admission separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6`
-  Status: `in_progress` / P1 callable-receiver coverage before key-count admission
+  Status: `in_progress` / all bounded backend children have focused outcomes; full admission remains separate
   Goal: Independently assess registered callable-result CountKeys receivers/continuations and repair demonstrated contract gaps without importing literal/free-helper source policy.
   Priority/schedule: P1 after bounded independent75.2-.5 and before unrelated selection/full23.4/parent75 closeout; coordinate canonical source/context discovery4.1 and preserve named exclusions until assessed.
   Reproduction/evidence: Perl75.1 intake retains make(false-result).count_keys().add(1) as null/unready/unresolved count_keys, distinct from direct function false, free CountKeys(function()).add(1)=1, compatible Hash-function CountKeys1 and text-function uppercase X, all ready/clean. The incompatible receiver is not a registration defect or an admitted literal-source zero oracle. Compatible callable-result CountKeys continuation/copy/logical/with coverage is not established by those terminal controls.
   Acceptance: Use public Get/descriptor/substitution/emission and published compatible-function contract, retain actual first inputs/modules/full channels before calls/loads, distinguish compatible/incompatible result kinds and initial free-helper sources, own every demonstrated gap and preserve existing source effects/needed errors/copy/zero/actual-kind policies. Freeze peer profiles independently; no inferred peer failure or silent profile normalization. Keep full transitive custody/isolation/admission with their existing owners. Current75.1 leaves registered-function receiver paths on their existing owner rather than silently expanding them.
   Planned verification: Small original RED/GREEN and directly affected function/source/result preservation, syntax/book/Knowledge/history/memory/normal hooks; full verification after feature coverage.
   Planned claim verification: none: Finite authored callable-receiver behavior controls; separate any actual measurement.
+  Bounded outcomes November6: Perl75.6.1 repairs its demonstrated callable continuation defect; Rust2/Dart3 through qualified3.1/Julia4/installed Lua5 preserve independently healthy behavior. Boolean source/error boundaries remain backend-specific. All bounded children have focused outcomes; source/context/direct-native-cache custody, isolation and full23.4 admission remain separately owned. Next remaining-family selection23.1.36 follows clean child5 landing; no parent closeout or canonical admission is claimed.
+
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1`
   Status: `completed`
@@ -2079,9 +2081,20 @@
   Next: Commit from clean8637b82e activation, then independently acquire installed Lua75.6.5 grammar/host profiles. Full native/cache/transitive custody4.2/SESSION5, general isolation and full23.4 remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete installed Lua compatible callable-result CountKeys continuation behavior.
   Dependencies: Completed ordinary75.1-.5 and peer75.7; parent75.6; existing compatible user-function receiver contract.
   Acceptance: Retain actual full-source public baseline before production. Compatible Hash-function counts feed numeric/String helpers and explicit bridges, preserve source-once/snapshot/needed errors, and reject incompatible Array/Hash consumers before operands/later copy/logical/with/Count fallback. Preserve existing direct function values, source domains, function registration/signatures/scoping and copy rules; independently freeze incompatible/unsupported function-result profiles rather than import a peer. For Perl independently assess the named Boolean-function null/unready/count_keys observation with full Get/descriptor/emitted context, not context-free substitution. Preserve established terminal behavior and repair a demonstrated continuation gap rather than promote a diagnostic to a source policy. Own any source prerequisite before guard edits. No alias/traversal/deferred/context expansion or full native/isolation/admission claim.
   Planned verification: Small original RED/GREEN or explicit healthy preservation, directly affected callable/CountKeys normals, syntax/scoped format/analyzer as supported, book/Knowledge/history/memory and mandatory hooks. Full verification after feature coverage.
   Planned claim verification: none: Finite authored callable-result controls; separate actual measurements if any.
+
+  Activation: Cleanf1041c8e55fe6e03e67f8444241352ec99bd1c44 after Julia75.6.4 all10 doctrines/post-pointer/brief0. Use published user_function_definition_ast_parser_from_spec_source and pass the explicit parser to composition; declare actual grammar before host invocation. Independently freeze each installed host's source-bound Boolean terminal/composed, malformed arity and needed-error fields. Shared16 programs are candidates, not a peer policy; no unsafe full runner/formatter/declared5.4 claim.
+  Verification tier: `focused`
+  Focused checks: Authored callable16/four routes independently on installed PUC/LuaJIT; ordinary CountKeys direct dependent and exact loadfile/runner include checks; book/Knowledge/history/memory and mandatory commit doctrines. No full suite.
+  Canonical trigger: Deferred full23.4/final clean push after feature coverage; no admission or infrastructure movement.
+  Claim verification: none: Finite authored feature/preservation controls; native/cache/transitive custody4.2/SESSION5 and general isolation remain separately owned.
+
+  Outcome: Independent PUC5.5.1/LuaJIT2.1.1788460057 intakes preserve16 authored programs/four routes each. Compatible12 plus own Boolean null/null, malformed arity and needed-error profiles remain exact. Explicit supporting grammar declared before host invocation, printed before public constructor and supplied through explicit parser composition. No runtime/parser/signature/format edit or product RED.
+  Verification: Each installed host direct84 callable +126 ordinary CountKeys checks PASS with empty stderr; interpreter/runner loadfile and new-normal compile/execute pass; runner adds one three-line group. All16 original observations and actual module/parsed bodies per host exact. Eight effective readonly corruption controls reject; actual first input/producer/full-channel proof and limits in docs/checkpoints/key-count-callable-lua-2026-11-06/REVIEW.md. Book/map/history/memory and normal doctrines before landing; no full suite/formatter/declared5.4.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 - preserve installed Lua callable CountKeys composition`.
+  Next: Commit from cleanf1041c8e activation, then activate remaining-family selection23.1.36 from clean Git. Full native/cache/transitive custody4.2/SESSION5, source/context discovery, general isolation and full23.4 remain separate; no parent admission inferred.

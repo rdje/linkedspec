@@ -9,7 +9,7 @@ answers:
   - "which task fixes callable CountKeys composition on Perl"
   - "which peers still need independent callable CountKeys assessment"
 date: 2026-11-06
-status: Perl75.6.1 implemented with focused checks; independent peer75.6.2-.5 and full admission pending
+status: own bounded implementation/preservation and callable backend children focused-checked; full admission remains separate
 tags: [perl, count_keys, user-functions, guards, source, zero, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1; docs/checkpoints/key-count-callable-perl-2026-11-06/REVIEW.md retains original/qualified/terminal/normal epochs. Unchanged16 authored groups7PASS9RED become16PASS on native/fresh emission; seven healthy semantic observations exact. Original malformed setup stays rejected; terminal Boolean0 distinguishes diagnostic from semantics."
 reverify:
@@ -51,3 +51,12 @@ Historical source/patch/input recovery proves those named epochs; current code
 freshness uses the normal. Independent Rust/Dart/Julia/installed Lua callable
 coverage, full transitive custody/context/isolation/discovery/declared5.4/full23.4
 remain separately owned.
+
+## November6 callable frontier supersession
+
+Independent Perl75.6.1, Rust2, qualified Dart3/3.1, Julia4 and installed Lua5
+now have focused outcomes. Earlier next-peer directions above are historical
+leaf boundaries; full native/cache/transitive custody, source/context discovery,
+isolation, declared Lua5.4 and full23.4 remain separately owned. Current successor
+is remaining-family selection23.1.36 after clean landing. See
+[[lua-callable-key-count-preservation]] and MEMORY.md for current continuity.

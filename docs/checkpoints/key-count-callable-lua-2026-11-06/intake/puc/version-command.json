@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "puc",
+    "-v"
+  ],
+  "environment": {
+    "LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE": "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc"
+  }
+}

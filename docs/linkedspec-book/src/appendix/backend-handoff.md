@@ -3917,8 +3917,8 @@ At this historical75.1 boundary, registered-function prefixes retained their old
 route and one Boolean-function continuation stayed null/unready/count_keys.
 Callable75.6.1 below independently resolves that observation as a continuation
 defect: the terminal Boolean-function count already returns0/ready. Ordinary
-peer repairs below remain focused-checked; independent installed Lua callable75.6.5
-and full source/context/native-transitive custody, general isolation, legacy
+peer repairs and installed Lua callable75.6.5 below remain focused-checked.
+Full source/context/native-transitive custody, general isolation, legacy
 bare/absent bindings, discovery, declared Lua5.4 and full23.4 remain separate.
 
 
@@ -3946,7 +3946,7 @@ channels live under `docs/checkpoints/key-count-guard-rust-2026-11-06/`.
 
 The older Length reader remains source-bound to its accepted historical commit;
 current Length checks are separate. Dart75.3 and Julia75.4 are focused-checked
-below; installed Lua75.5 is also focused-checked and independent installed Lua callable75.6.5 remain pending. Full source/context/native-
+below; installed Lua75.5 is also focused-checked and installed Lua callable75.6.5 is focused-checked below. Full source/context/native-
 transitive custody, general isolation, canonical discovery and full23.4 admission
 remain separate; no host-seeding or declared Lua5.4 claim follows.
 
@@ -3976,7 +3976,7 @@ direct inputs and complete raw channels are retained under
 
 The original Length reader remains bound to its accepted historical source;
 current Length tests remain separate. Julia75.4 and installed Lua75.5 are focused-
-checked below, with loop-index rights preserved; independent installed Lua callable75.6.5 remain next. Full source/context/native-transitive
+checked below, with loop-index rights preserved; installed Lua callable75.6.5 is focused-checked below. Full source/context/native-transitive
 custody, general isolation, canonical discovery/callable75.6 and full23.4 admission
 remain separate; no Boolean policy normalization or Dart host-seeding is claimed.
 
@@ -4009,7 +4009,7 @@ six original and four additional effective corruption controls.
 The original Length reader remains bound to its acceptedfbe625974 source;
 current Length testing remains separate. Fresh Modules share process/runtime.
 Rust/Dart Count ownership75.7 and installed Lua75.5 are focused-checked below;
-independent installed Lua callable75.6.5 are next before admission.
+installed Lua callable75.6.5 is focused-checked below; full admission remains separate.
 Full source/context/native-transitive custody, general isolation, canonical
 discovery/declared Lua5.4 and full23.4 remain separate; no host-seeding claim.
 
@@ -4041,7 +4041,7 @@ source/manifest/lock/config/writer inputs and complete raw channels recover unde
 reject. Emitted execution in this review covers new3. Full native/transitive
 custody, general isolation/source-context discovery/callable/full23.4 remain
 separate. Installed Lua75.5 below retains scalar/Count/index mutation rights and
-the explicit Count-owned-source controls; independent installed Lua callable75.6.5 are next, with no declared5.4 inference.
+the explicit Count-owned-source controls; installed Lua callable75.6.5 is focused-checked below, with no declared5.4 inference.
 
 
 ## Ordinary installed Lua key-count guards
@@ -4075,8 +4075,8 @@ seven effective corruption controls reject. The older Length reader remains boun
 to acceptedf5e2350ba, with original proof untouched and current tests separate.
 Fresh modules share process/runtime; full native/transitive/toolchain custody,
 general isolation/source-context discovery/callable/full23.4 stay separate.
-Ordinary guards are focused-checked across five backends; independent installed Lua callable75.6.5 are next
-before parent/full admission, preserving named exclusions until assessed.
+Ordinary guards and bounded callable children are focused-checked across five backends
+on recorded hosts. Parent/full admission and named source/context exclusions remain separate.
 
 
 ## Perl function-result CountKeys composition
@@ -4097,7 +4097,7 @@ to16PASS on native/freshly emitted Perl; all seven healthy semantic observations
 stay exact. The original inline-two-definition setup failure, corrected15 intake,
 terminal discriminator, exact normal epochs and source/module/handler inputs are
 retained under `docs/checkpoints/key-count-callable-perl-2026-11-06/`.
-Regenerate emitted Perl. Independent Rust75.6.2 is checked below; Dart75.6.3 is checked below; Julia75.6.4 is checked below; installed Lua75.6.5 is next. Peers/full admission,
+Regenerate emitted Perl. Independent Rust75.6.2 is checked below; Dart75.6.3 is checked below; Julia75.6.4 is checked below; installed Lua75.6.5 is checked below. Peers/full admission,
 transitive custody and general isolation stay with their existing owners.
 
 
@@ -4120,7 +4120,7 @@ serialized inputs/full channels are retained under
 is byte-identical to the clean activation. This is healthy preservation, not a
 product RED/GREEN or a new Rust implementation claim.
 
-Dart75.6.3 is checked below; Julia75.6.4 is checked below; installed Lua75.6.5 is next with its own function-result/source/error profiles. Full
+Dart75.6.3 is checked below; Julia75.6.4 is checked below; installed Lua75.6.5 is checked below with its own function-result/source/error profiles. Full
 source/context/native-transitive custody, general isolation, discovery and full
 23.4 admission remain separately owned.
 
@@ -4154,7 +4154,7 @@ from its saved declaration; observed Rust behavior remains valid, with that buil
 input/native-cache leg explicitly open. Direct asset closure4.2 and broader
 native/transitive/cache provenance under SESSION5 remain before admission.
 These limits do not imply a runtime failure or a recovered original first input.
-Julia75.6.4 is checked below; installed Lua75.6.5 is next; full23.4 remains separate.
+Julia75.6.4 is checked below; installed Lua75.6.5 is checked below; full23.4 remains separate.
 
 
 ## Julia function-result CountKeys preservation
@@ -4183,4 +4183,34 @@ retained under docs/checkpoints/key-count-callable-julia-2026-11-06/. This is fi
 healthy preservation, not product RED/GREEN or portable admission. Julia binary,
 external packages/depot/cache/full transitive provenance, source-context discovery,
 general process isolation and full23.4 remain separately owned. Fresh Modules share
-runtime/process. Installed Lua75.6.5 is next, with independently acquired host profiles.
+runtime/process. Installed Lua75.6.5 is checked below with independently acquired host profiles.
+
+
+## Installed Lua function-result CountKeys preservation
+
+Callable75.6.5 independently confirms existing behavior on PUC5.5.1 and
+LuaJIT2.1.1788460057. Each host preserves16 authored programs on native, restored
+SpecFile, generated-plan and fresh-module routes. No runtime, parser, signature or
+generated-format repair is needed. Hash-function counts preserve numeric/text
+flow, source-once/count snapshots, incompatible operand/body skips, copy/logical/
+with absorption and explicit bridges. Each independently observed Boolean-function
+terminal/composed receiver remains null/null; free Boolean CountKeys plus1 stays1.
+Malformed arity skips all effects. Needed errors retain their native/generated
+text, code, flags and diagnostic stage in separate source-bound host profiles.
+
+The original acquisition declares specs/user_function_definition.spec before host
+invocation. It prints the actual immutable string before using the public
+user_function_definition_ast_parser_from_spec_source constructor, then supplies
+that explicit parser to composition. The new regression does the same. Each host
+passes84 callable and126 ordinary CountKeys checks with empty stderr; loadfile-only
+interpreter/full-runner syntax checks pass and one three-line normal group is added.
+All16 original observations and actual module/parsed bodies per host remain exact.
+Eight effective recovery corruptions reject. Actual first inputs/producer/full
+channels are retained under docs/checkpoints/key-count-callable-lua-2026-11-06/.
+
+This is finite healthy preservation, not product RED/GREEN or new implementation.
+No emitted-source regeneration, unsafe full-runner execution, formatter or declared
+Lua5.4 proof is claimed. Fresh modules share runtime/process. Native-build/binary/
+cache/transitive provenance, source/context discovery, general isolation and full
+23.4 admission remain separately owned. All bounded callable backend children now
+have focused outcomes; remaining-family selection23.1.36 resumes from clean Git.

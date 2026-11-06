@@ -9,7 +9,7 @@ answers:
   - "where is independent Rust callable CountKeys four-route proof"
   - "which backend follows Rust callable75.6.2"
 date: 2026-11-06
-status: Rust75.6.2 healthy preservation focused-checked; independent remaining peers/full admission pending
+status: own bounded implementation/preservation and callable backend children focused-checked; full admission remains separate
 tags: [rust, count_keys, user-functions, guards, source, zero, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2; docs/checkpoints/key-count-callable-rust-2026-11-06/REVIEW.md retains actual inputs/Cargo locks/modules/serialized inputs/raw channels. Actual16 PASS/four routes; maintained16/native-restored-plan and direct25+4 PASS, scoped format/six recovery corruptions PASS. No Rust runtime edit or product RED."
 reverify:
@@ -51,3 +51,12 @@ The recorded behavior/source identities remain actual; original embedded asset
 and warm native-producer provenance are not closed. Direct asset audit4.2 and
 native/cache producer audit SESSION-STARTUP-READING.5 own prospective repair
 before admission; do not retrospectively label the original build fully captured.
+
+## November6 callable frontier supersession
+
+Independent Perl75.6.1, Rust2, qualified Dart3/3.1, Julia4 and installed Lua5
+now have focused outcomes. Earlier next-peer directions above are historical
+leaf boundaries; full native/cache/transitive custody, source/context discovery,
+isolation, declared Lua5.4 and full23.4 remain separately owned. Current successor
+is remaining-family selection23.1.36 after clean landing. See
+[[lua-callable-key-count-preservation]] and MEMORY.md for current continuity.

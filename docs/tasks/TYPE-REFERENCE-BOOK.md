@@ -21,7 +21,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.11` | `completed` | November5 bounded daily metadata and corruption controls pass; all artifacts/caches/proof retained. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5` | `pending` | Ordinary five-backend CountKeys and Perl/Rust/Dart/Julia callable children have focused outcomes. Independently acquire installed Lua grammar/host profiles before parent admission or next family selection; full verification remains separate. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.1.36` | `pending` | Ordinary75 and bounded callable75.6 backend outcomes are focused-checked on recorded hosts. Recover the next actually open family from inventory/contracts before a finite public selection; broad verification/admission remain separate. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

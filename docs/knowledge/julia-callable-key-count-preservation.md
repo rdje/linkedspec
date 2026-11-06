@@ -8,7 +8,7 @@ answers:
   - "how can Julia callable probes avoid implicit grammar discovery"
   - "which task completes Julia callable75.6.4"
 date: 2026-11-06
-status: Julia75.6.4 focused-checked; installed Lua and full admission pending
+status: own bounded implementation/preservation and callable backend children focused-checked; full admission remains separate
 tags: [julia, count_keys, user-functions, guards, grammar, scalar]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4; docs/checkpoints/key-count-callable-julia-2026-11-06/REVIEW.md retains actual original and direct epochs. Compatible12/four own profiles complete16 PASS/four routes; direct84+126+27 assertions and six recovery corruptions PASS. No runtime edit."
 reverify:
@@ -37,3 +37,12 @@ full transitive provenance4.2/SESSION5, general isolation/source-context discove
 installed Lua75.6.5 and full23.4 remain separate. Fresh Modules share runtime/process.
 Historical recovery is not latest-code proof. See [[julia-spec-driven-function-shell-parser]]
 and [[julia-key-count-result-guards]].
+
+## November6 callable frontier supersession
+
+Independent Perl75.6.1, Rust2, qualified Dart3/3.1, Julia4 and installed Lua5
+now have focused outcomes. Earlier next-peer directions above are historical
+leaf boundaries; full native/cache/transitive custody, source/context discovery,
+isolation, declared Lua5.4 and full23.4 remain separately owned. Current successor
+is remaining-family selection23.1.36 after clean landing. See
+[[lua-callable-key-count-preservation]] and MEMORY.md for current continuity.

@@ -1,0 +1,29 @@
+{
+  "compatible_targets_per_host": 12,
+  "direct_checks_per_host": 210,
+  "groups_per_host": 16,
+  "independent_profiles_per_host": 4,
+  "original_observations_and_modules_preserved_per_host": 16,
+  "recovery_corruptions": [
+    "puc compatible numeric regression",
+    "puc Boolean peer normalization",
+    "luajit compatible numeric regression",
+    "luajit Boolean peer normalization",
+    "needed source error masked",
+    "missing fresh route",
+    "profile source drift",
+    "actual module drift"
+  ],
+  "routes": [
+    "fresh",
+    "native",
+    "plan",
+    "restored"
+  ],
+  "runtime_changes": 0,
+  "scope": "installed safe hosts only; declared direct grammar inputs; native/cache/transitive custody, isolation, declared Lua5.4 and full admission remain separate",
+  "versions": {
+    "luajit": "LuaJIT 2.1.1788460057 -- Copyright (C) 2005-2026 Mike Pall. https://luajit.org/",
+    "puc": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio"
+  }
+}

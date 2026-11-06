@@ -1,0 +1,162 @@
+{
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/boolean_receiver_profile.lua": {
+    "bytes": 6624,
+    "mode": 420,
+    "sha256": "3c1389f0926a7db0b59c33019757c655ad053ae2d666e2c4f5609daf48436509"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/boolean_terminal_profile.lua": {
+    "bytes": 6582,
+    "mode": 420,
+    "sha256": "3bc321b94c5fbe10848affbab982b3d58fd9738d67119d7859b3c28188b7d20e"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/compatible_counts.lua": {
+    "bytes": 7716,
+    "mode": 420,
+    "sha256": "b53c15c7ed1f60cfca34dcbdd97ccc7e66e09d922008a285271588e59a31d3d6"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/copy_guard.lua": {
+    "bytes": 7908,
+    "mode": 420,
+    "sha256": "338e82b8042ceb04cb6881141d75a85c163940f7ed61e36c4057c99436de65f0"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/count_consumers.lua": {
+    "bytes": 7952,
+    "mode": 420,
+    "sha256": "3a8c5a085d1e0fa9a9b4cecc04cf5ab0f02e4edec21a3c8693eadb93b890f6d7"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/explicit_bridges.lua": {
+    "bytes": 8020,
+    "mode": 420,
+    "sha256": "008ff7f065f364c364608c551652571fd4450fece6aeebcce3773e33e8370191"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/function_controls.lua": {
+    "bytes": 10038,
+    "mode": 420,
+    "sha256": "e47dc0ff12ba35a5eb568f4e598fc63db87be4200c0fb6161e73854cac858ce4"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/later_with.lua": {
+    "bytes": 7866,
+    "mode": 420,
+    "sha256": "68c7c09dd222b338440beb9654d3102c340c4cb815f7436658718e7e1d3f9e7b"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/logical_guard.lua": {
+    "bytes": 8082,
+    "mode": 420,
+    "sha256": "27487eb072fcfad1e0bff2885441706bdb76f32f7c83f6e5cab40c7960866216"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/malformed_receiver_profile.lua": {
+    "bytes": 7856,
+    "mode": 420,
+    "sha256": "c1338f46f822717203982f45b3a20e9f08fe9956dddba97ebdf309df7ee57584"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/needed_argument_error.lua": {
+    "bytes": 7420,
+    "mode": 420,
+    "sha256": "10a200267c1cf5cca0735a8cb0ad63cce5976a3a557a44226708a55259cb77c8"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/parameter_source_control.lua": {
+    "bytes": 7080,
+    "mode": 420,
+    "sha256": "ce1a263964123c711e26e9b669d48a12e965b2a2520c9a26cbfceba320c3067d"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/source_once_snapshot.lua": {
+    "bytes": 7486,
+    "mode": 420,
+    "sha256": "a44366dde524c5c13c3481221d1dd98fb1d8825e691a41a0a7d28494e9cbd01b"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/valid_zero.lua": {
+    "bytes": 8062,
+    "mode": 420,
+    "sha256": "d28b5d33476dcfe944dd8d930b4d396ed88d442016b9a72bed20ee9dbac077fc"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/wrong_array.lua": {
+    "bytes": 7586,
+    "mode": 420,
+    "sha256": "788d1f6af51d620124f73a75c6ea4b32f46970b356fd95b4876b1c80d81c5c9c"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/emitted/wrong_hash.lua": {
+    "bytes": 7788,
+    "mode": 420,
+    "sha256": "cb69fd402481bdc9f84dcdd7f1909cd042ef2e5470362d6650b417bcbe3ee48d"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/boolean_receiver_profile.json": {
+    "bytes": 1930,
+    "mode": 420,
+    "sha256": "fc8e0b56f3f587ec4be63d6af8f2bd71b9ef6f52b0b8ef2d42b17f4f18062e5f"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/boolean_terminal_profile.json": {
+    "bytes": 1909,
+    "mode": 420,
+    "sha256": "d77e4711092fc80dc2d46bdbb22091adab390b92b37b8b35785649fbcc7bf7fe"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/compatible_counts.json": {
+    "bytes": 2483,
+    "mode": 420,
+    "sha256": "f2ab41f68c4d01dc107d46291a7bbf6246fedee36a6d5b71d93af56d4620e4ee"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/copy_guard.json": {
+    "bytes": 2586,
+    "mode": 420,
+    "sha256": "2271d72464a6dd0f8529943510ba8683a129a3ad133a01493b58624bc36eb975"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/count_consumers.json": {
+    "bytes": 2603,
+    "mode": 420,
+    "sha256": "c7a8d41aea4c7a3f4b004400102f21e37071c11efa2bdde3077f74d7986bd6f7"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/explicit_bridges.json": {
+    "bytes": 2636,
+    "mode": 420,
+    "sha256": "4072ccef2dd4f8649e3368805a3dd953a224308f415323479314791744337ccf"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/function_controls.json": {
+    "bytes": 3644,
+    "mode": 420,
+    "sha256": "ddc468b3c0fde53760fce3f00a478b92b66d9d15b37120310412801372e832b7"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/later_with.json": {
+    "bytes": 2565,
+    "mode": 420,
+    "sha256": "cd4f9460af97fa90e73da489b6db46295fc042e7d3a631d08f9f040be9caaad7"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/logical_guard.json": {
+    "bytes": 2670,
+    "mode": 420,
+    "sha256": "1a5f3a281c8a69c42ddfb5ceffd091bc3d2c03fe4f111abaa855c3478dab0a92"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/malformed_receiver_profile.json": {
+    "bytes": 2544,
+    "mode": 420,
+    "sha256": "59a5ed59caf174b76c6adf7f2b9d829b430710635b3ccbe0f4d22a47d6189f19"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/needed_argument_error.json": {
+    "bytes": 2331,
+    "mode": 420,
+    "sha256": "68ad6eb66dc1333eb13dd7346816698ca85934a571e404b32a1160ef028bd80e"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/parameter_source_control.json": {
+    "bytes": 2158,
+    "mode": 420,
+    "sha256": "8aad673d2e1ff00a01357f14bbd90d76cc3c0e299fb764a27c3ce632b1dac93f"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/source_once_snapshot.json": {
+    "bytes": 2365,
+    "mode": 420,
+    "sha256": "da785880b0d43575125dd27883025dcf706d24996b9f33e16eeb2525c17b70a1"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/valid_zero.json": {
+    "bytes": 2663,
+    "mode": 420,
+    "sha256": "370ef0f4d64b08a42b15c76f4cbc3698da5420ff10f27ee14059b0ffa56968dc"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/wrong_array.json": {
+    "bytes": 2424,
+    "mode": 420,
+    "sha256": "8fe411fec3c6a9b56a5a33486820583ccd911eb8be5b088e48d7b24e479006e5"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/parsed/wrong_hash.json": {
+    "bytes": 2526,
+    "mode": 420,
+    "sha256": "32db0098a619ed4cf977ebbc85bfcdaf8086850e76fa3cbae7d10b6e792774cc"
+  }
+}

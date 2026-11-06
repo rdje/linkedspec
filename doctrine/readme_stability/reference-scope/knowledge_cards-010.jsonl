@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2703,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.8","path":"docs/knowledge/retained-artifact-growth.md","sha256":"6415ac645e75a0c54e47e99e2fea0ef596426b191f741a09190abc032a9a624f","type":"member"}
 {"bytes":4751,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/retired-return-helpers-canonical-rewrite.md","sha256":"5b8ea4cfc84eea03aa03a1628cb0fc8869cf1a64037ec6bea659ea7e8591aa49","type":"member"}
 {"bytes":4653,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rgx-bootstrap-published-remedy.md","sha256":"0756574be7dfe0cba746597878fd0c0e1b9a49aa22e697a95931ba506d1eb476","type":"member"}
 {"bytes":2721,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/roadmap-progressive-summary-projection-drift.md","sha256":"7c63b058dacbae5e8e34767345a086c186d6e3dcde36239560e478ce9a9aaaa8","type":"member"}
@@ -32,7 +33,7 @@
 {"bytes":3120,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-build-requirements-documentation-gap.md","sha256":"6d90e2d30957f9651ca0c92342f1ab4de388f6eb188ac905e78bb10ae9499e11","type":"member"}
 {"bytes":6761,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-codeblock-dynamic-invocation.md","sha256":"f0f6aaec5279a6ef519a96d9c651e2e3eb5e134f3cee8f901943272fdb9ef79d","type":"member"}
 {"bytes":6575,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-codeblock-literal-state.md","sha256":"0f331db9cb0aa3579c8d1a0c37f53cdb93300be1b61b6e1be4c4558ecae53bbe","type":"member"}
-{"bytes":3764,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/rust-callable-key-count-preservation.md","sha256":"11fb8ace70fcd68ec1d19e94674d4e954f8692c27111c5b1d5d861b12cea124a","type":"member"}
+{"bytes":4288,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/rust-callable-key-count-preservation.md","sha256":"9aeec75b384aed8a7cc592ae8e19ed99d8697889a4bbba25011c7b8bc91815f5","type":"member"}
 {"bytes":3717,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-named-mark-scope-gap.md","sha256":"a1d6eccc01f5d11fe40d54cc28c7d1ce317489380bb6d6a25b47f64d8a2f7083","type":"member"}
 {"bytes":4965,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-canonical-primary-cli-trace.md","sha256":"655ccae44aadf93b90b26ebed81f372649612f8bcd269725a855e6c9c828217f","type":"member"}
 {"bytes":2574,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-canonical-set-result-guards.md","sha256":"5bfb6596e9d90e02798eff5b65417902a3e9ba42e8960ba6849a12512f308bb6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6620,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-project-data-ssd-storage.md","sha256":"e3550228c15ac1612eb2c23e4cbdc02fb40172c1196a5654a09295f11fe2facb","type":"member"}
 {"bytes":2218,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-push-snapshot-result-guards.md","sha256":"bf24e64b366c2043d912b45f667e4e480e282e4df726e0442722467631fb1c32","type":"member"}
 {"bytes":2580,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-receiver-string-bridge-guards.md","sha256":"cefc98541a51419d38ec3796c53d56b461869cd17e42f7c6ea740929f78dd4d6","type":"member"}
-{"bytes":4475,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-token-variable-use-gap.md","sha256":"9029e74870c5704e344c814ab036681b1cc48c5f824b76b607d81cfbfa0ae9ab","type":"member"}

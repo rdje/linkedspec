@@ -9,7 +9,7 @@ answers:
   - "does Lua CountKeys repair change scalar_result or loop-index mutation rights"
   - "must Lua CountKeys emitted modules be regenerated"
 date: 2026-11-06
-status: bounded installed-host Lua75.5 focused-checked; callable75.6/full admission pending
+status: own bounded implementation/preservation and callable backend children focused-checked; full admission remains separate
 tags: [lua, count_keys, count, guards, scalar, source, mutation, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.5; docs/checkpoints/key-count-guard-lua-2026-11-06/REVIEW.md retains actual first inputs/modules/full raw epochs. Each host25 groups13PASS12RED become25PASS/four routes; thirteen healthy exact and25 module/parsed bodies unchanged. New126/Count92/Length122 and Count-length programs pass; seven recovery corruptions reject."
 reverify:
@@ -43,3 +43,12 @@ corruptions reject. Fresh modules share process/runtime. No native host seeding
 or full transitive/toolchain closure4.2/general isolation/source-context discovery/
 callable75.6/full23.4 admission follows. Historical recovery is not latest-runtime
 proof. Current frontier belongs to MEMORY.md.
+
+## November6 callable frontier supersession
+
+Independent Perl75.6.1, Rust2, qualified Dart3/3.1, Julia4 and installed Lua5
+now have focused outcomes. Earlier next-peer directions above are historical
+leaf boundaries; full native/cache/transitive custody, source/context discovery,
+isolation, declared Lua5.4 and full23.4 remain separately owned. Current successor
+is remaining-family selection23.1.36 after clean landing. See
+[[lua-callable-key-count-preservation]] and MEMORY.md for current continuity.

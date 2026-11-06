@@ -1,0 +1,202 @@
+{
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/capture.py": {
+    "bytes": 5087,
+    "sha256": "a8ac89c156c396db868842fe58c9c0a593900ae059e7c284dfe01446ada1a7cb"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "7162a6405715c4e0d181f93dff5e4f08a697dd51107a77fdc0b7387afc2d1f85"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/input-identities.json": {
+    "bytes": 36583,
+    "sha256": "70c8a427c38b3a31b7d0e30df5426a672163751b9891ac58eaed2671327f7d2b"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 651556,
+    "sha256": "2241d0e03ee7b5a877c2699c0008f2cb31e1651c6c60934e6ccffd100f5ff82d"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 8440,
+    "sha256": "3f5ceebb87278bd84fdc2d1e1318aa8c7b1dd8675c884f1c5b8314252ff95017"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/artifact-identities.json": {
+    "bytes": 7164,
+    "sha256": "ff4ba31ecc83fb2fca71648add2aa70c4721526f6c363b52b28a52199ee7b12a"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/normal-command.json": {
+    "bytes": 375,
+    "sha256": "ccbc617f4104b55f0e2ace2427ad64e240ad379fedfde726178b8824090dc6db"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/normal-stdout.log.gz": {
+    "bytes": 4665,
+    "sha256": "a2428063992361c67da17c763d83daf157676329023bf2803e5b542db4830d28"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/version-command.json": {
+    "bytes": 228,
+    "sha256": "98d9a1bb030ead40f493fe8ef875f1aceb7cb4d51979101de7bc002006cec7db"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 8321,
+    "sha256": "b34e2a2e76cb524c76a57f716839db33486aea7fd97986c9022e6128b1ec01ab"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/artifact-identities.json": {
+    "bytes": 7068,
+    "sha256": "c826c20e01d6d56c1a450848c3d32360f4452b055f7051643e14f8ec33af4a9c"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/normal-command.json": {
+    "bytes": 369,
+    "sha256": "d3a9f697c88364f040e62455869160b66c2171283238b8b30ae71fd6f80e610d"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/normal-stdout.log.gz": {
+    "bytes": 4627,
+    "sha256": "f4066017c96200d9a9a2d72b5c25ea862ee77482ad32b51a4569a1911fd40001"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/version-command.json": {
+    "bytes": 222,
+    "sha256": "67c40555ca2dadea8296c9bde4e09fdd560dd4d387914029e57c205b00d53ae8"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/direct/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/freeze_profiles.py": {
+    "bytes": 1891,
+    "sha256": "e9a41f12d940ee7b445cba3931d799fe37be6e74f8975c76e00bff23f72a8a78"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "7162a6405715c4e0d181f93dff5e4f08a697dd51107a77fdc0b7387afc2d1f85"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/cases.json": {
+    "bytes": 5443,
+    "sha256": "245181e02ad12ced3f8eb44dfe3ce0e29edf2724248920471dc84641967b906e"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/input-identities.json": {
+    "bytes": 35481,
+    "sha256": "0eba8da1d8e728959968f03dae197668c1b1dc24c9cc4847ccf5499ae42db5cb"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 649798,
+    "sha256": "5c9191061bdd44eef881119744064dcd99453408d14a44425043b1ad283c3eac"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 8395,
+    "sha256": "f90c809808f745327bdd05cc3bbe2700a2198e48460067ff3116d10125ed8659"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/artifact-identities.json": {
+    "bytes": 7164,
+    "sha256": "b2f7dc0e2b8b259f6e0c8a97ccb751f0522870d400c581e7223199b97783c063"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/normal-command.json": {
+    "bytes": 437,
+    "sha256": "67c94122bbc23e835a6c367127f32a600f8bd058f6009ccac57de94e0c9a910b"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/normal-stdout.log.gz": {
+    "bytes": 4179,
+    "sha256": "47fc4ad2cfb62c34d67c50c9efeb966371e433352c038dc6a59192b44a546cc6"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/version-command.json": {
+    "bytes": 228,
+    "sha256": "663d368c16fdf750c8ac99f7d0df433bd3d673c32b50a262b2dceaedbc8e0de1"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 8306,
+    "sha256": "cedc7f5b439358c70ff7286a854863f854b87edad69bccf6f31371a3084c3240"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/artifact-identities.json": {
+    "bytes": 7068,
+    "sha256": "a070d60e75dff97aea3bc26762de8f03fcdcb793f3979b65eccbea3549c1ea28"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/normal-command.json": {
+    "bytes": 428,
+    "sha256": "ca3d3c51a28a83e2729e6997d14f333ecbc04c3dcf3e9dcac102ab7c8a63c898"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/normal-stdout.log.gz": {
+    "bytes": 4159,
+    "sha256": "476d5e8f3a0e1010860c25b6b83b3cb3f6df1838a426540271d2a2c482ef1d37"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/version-command.json": {
+    "bytes": 222,
+    "sha256": "68d036755278c7b1e802babe11624b53d6aa44ea2193df01142a29dda28a42ce"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/intake/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/key-count-callable-lua-2026-11-06/observer.lua": {
+    "bytes": 3195,
+    "sha256": "3b8121e60521139fbb50557ae6e6c33501d061e55d0bc21ca6a8c874a1f9ef38"
+  }
+}

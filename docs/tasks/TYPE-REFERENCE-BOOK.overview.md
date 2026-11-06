@@ -2262,6 +2262,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Verification: Readonly exact19-row recovery, three effective corruptions, public substitution/full-module empty/outer/main seed distinctions, observer syntax and book render; Knowledge/history/memory/diff and normal hooks govern landing. Next Perl74.1 before peers/key-count75.0.
   Commit: TYPE-REFERENCE-BOOK.1.2.23.1.35 — freeze Length source guards and own key-count gaps.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.36`
+  Status: `pending`
+  Goal: Select and freeze the next actually open roadmap-required fluent source/consumer family after bounded Length74/CountKeys75 coverage.
+  Dependencies: Focused ordinary75.1-.5/peer75.7 and callable75.6 backend outcomes; current23.1 inventory/gap matrix/contracts/Knowledge. Full23.4 remains separate.
+  Acceptance: Recover actual remaining feature requirements and canonical source roles before probing. Select at most one finite existing-contract gap using minimum full-source public Get/descriptor/substitution/emitted native-fresh controls. Preserve source domains, signatures, actual kinds, ordered effects/errors, copy/alias and named excluded contexts. Retain actual first inputs/producer/modules/full channels; distinguish healthy behavior from a demonstrated defect, assess peers independently and create bounded backend leaves before production edits. No broad census/suite/admission, unsupported context promotion, invented population claim or dependency-internal inspection.
+  Planned verification: Small public selection and direct-preservation controls, syntax/book/Knowledge/history/memory/diff and normal hooks; full verification after feature coverage.
+  Planned claim verification: none: Finite authored selection controls; separate any actual population or performance measurement.
+
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.9`
   Status: `completed` / director-requested clean pause
   Goal: Finish the current verified unit and save a committed, idle handoff at the director's next-checkpoint pause request.

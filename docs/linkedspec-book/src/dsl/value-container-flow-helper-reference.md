@@ -1256,16 +1256,16 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 | `binding_name.map_leaves!() { block }` | updated hash/array value | All five backends: atomically replace leaves and rebind one bare named receiver. |
 
 Registered Hash-function results also compose on the focused-checked Perl, Rust,
-Dart and Julia routes. With `fn make_hash(){return({"k":1})}`,
+Dart, Julia and installed PUC5.5.1/LuaJIT routes. With `fn make_hash(){return({"k":1})}`,
 `make_hash().count_keys().add(1)` yields `2`, and
 `make_hash().count_keys().cat(" keys").uppercase()` yields `"1 KEYS"`.
 An incompatible `.take(effect)` returns null and skips `effect`; a following
 `.copy().with(){return("ran")}` keeps that rejection. An explicit compatible bridge,
 `make_hash().count_keys().with(){return([1,2])}.count()`, yields `2`.
-Dart/Julia Boolean-function receiver terminal/composed results remain null/null;
+Dart/Julia/installed Lua Boolean-function receiver terminal/composed results remain null/null;
 Perl/Rust return0/1. Free `count_keys(make_bool()).add(1)` remains1 for a function
-returning false. These are independent focused backend profiles; installed Lua
-callable coverage and full admission remain separate.
+returning false. These are independently observed focused backend profiles;
+declared Lua5.4 and full admission remain separate.
 
 `rename_key` preserves a field's value while returning a new Hash. On Perl, this returns `[{"stage":"draft"},{"old_stage":"draft"}]`:
 

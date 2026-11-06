@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1872,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/medium-term-alias-retirement-deferred.md","sha256":"eac535acd7067990a3fe1db2933631844b438ff7c146f6ede5ff12dab298e17f","type":"member"}
 {"bytes":2486,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md","sha256":"f8e24060a7ccef7b1ed9af98865c5144c2cb926ea67c75ad163fb56d6a3fc377","type":"member"}
 {"bytes":2111,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-handoff-task-status-consistency.md","sha256":"f676ce242569c4d89dac7a614d579bc9e7268c721ec3f24c513ab5cb307e1018","type":"member"}
 {"bytes":1931,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-post-commit-hook-verification-only.md","sha256":"056d664f26ee8241d82c7afd947f8891f4160eb7fe27a7e18b62896ec4de0ed0","type":"member"}
@@ -79,7 +80,7 @@
 {"bytes":4625,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-literal-record.md","sha256":"cbe04af46db9d6a4ebf92ba87e28f59f54b4176ad8b68a307a078b0cddbdf11a","type":"member"}
 {"bytes":2171,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-control-parent-reconciliation.md","sha256":"ec396207e59608bee0d6e4db4b9b55dbc4fe98c77f97218bd9006f06c88aabe5","type":"member"}
 {"bytes":5630,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-grouped-pattern-membership.md","sha256":"549e21957b85b385ef5a7c33a4d64a3061589f45d88b65fb391bf90a4054ed24","type":"member"}
-{"bytes":3738,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1","path":"docs/knowledge/perl-callable-key-count-result-guards.md","sha256":"514cc38ec89f38aaf7bf68aa26888b7ea272f05239dab7e11f351fc44360e898","type":"member"}
+{"bytes":4265,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/perl-callable-key-count-result-guards.md","sha256":"ecc968d38c4632366a01c2c6bca2e52b21f903edbdeaa19d812aaafdad96ecb9","type":"member"}
 {"bytes":3520,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-marker-conditional-execution.md","sha256":"6cb5c77bd8e8d01e918609bfd0562050ebe23635497bfaa4fa253cbbc0131c9b","type":"member"}
 {"bytes":3094,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-null-return-execution.md","sha256":"b12c799a952629dfc5e50d7a49948eaa3497b06cda08982da8d6c078a86ad69a","type":"member"}
 {"bytes":3696,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-replay-instrument-recovery.md","sha256":"98edbe7275d3bbf18cd3f560caad7c74b510c3d0378eeac2756af5b7200b5f12","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4203,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-ast-trim-span.md","sha256":"5caf35bf2b0711bc066433a04d260a61cc6aedfbd426ccedf76e554cfc6e0efd","type":"member"}
 {"bytes":4938,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-blind-return-duplicate-scalar.md","sha256":"83199b9e2639fd0573b3a301818de24935bba81de15b4ec8c37531689f7dbcf0","type":"member"}
 {"bytes":6279,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-executable-source-membership.md","sha256":"7944d2f5940e85611abd03b2ea86ff230a826c3171a3e9a0de65f109b4b00bf6","type":"member"}
-{"bytes":2141,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-explicit-push-result-fluent.md","sha256":"26323ae4f54357b6d809eee55fe931bf748543a76b3a738dd8144be01f7f63dc","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":12467,"lines":139,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-public-teaching-checker-blind-spots.md","sha256":"485e63211e64a49e71db9422fc9888a557fd07b14db2c9dc71e2d78ae9ab057f","type":"member"}
 {"bytes":26389,"lines":395,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-chronology-compaction.md","sha256":"18f6e8bf14bb10760962851d21406f8e986bbe617ab58d0318c919d20432b4de","type":"member"}
 {"bytes":10797,"lines":174,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-partition-plan.md","sha256":"80e74171947f5ee4eed9176f827cdf7904054944c8a0618b452bef6a7c34e7b0","type":"member"}
 {"bytes":4733,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/static-named-capture-lowering-and-function-fence.md","sha256":"11c348472b5ead1e2f64e3804ac52af8ccac3be57720c3c4c58fa83a5efa679f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":65285,"lines":316,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-runtime-rollout-plan.md","sha256":"b2cc1cf89663f4bc0bdb491e084fa206b494394b73e8e47544c7f12a4de1dbfa","type":"member"}
 {"bytes":4109,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-wrapper-quoted-name-boundaries.md","sha256":"8da523222572c9d9c5907a475524591af7e03593b1932c1e0b2b4b84b28c668f","type":"member"}
 {"bytes":4155,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-17-case-contract-data.md","sha256":"96f5d3b71b0b43af5acb76fe451c3a242ba3ded475512565945c817cc5ff8924","type":"member"}
-{"bytes":5200,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-case-mapping-cross-backend-gap.md","sha256":"c44d76aa0e888f1747096fe7133ab6c8afc512fe40b597ae8fdddaed4b58ab04","type":"member"}

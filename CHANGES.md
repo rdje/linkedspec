@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — Preserve installed Lua callable CountKeys composition
+
+Both PUC5.5.1 and LuaJIT independently pass16 authored programs/four routes without production edits. Add explicit-grammar callable regression, separate source-bound host Boolean null/null/arity/error profiles and one runner group. Each direct84+126 checks passes with empty stderr; all16 original observations/module/parsed bodies per host remain exact. Eight readonly corruption controls reject. Actual inputs/full channels and limits: docs/checkpoints/key-count-callable-lua-2026-11-06/REVIEW.md. Book/Knowledge/continuity align; next remaining-family selection23.1.36 is owned. Full verification and declared5.4 remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Preserve Julia callable CountKeys composition
 
 Existing Julia behavior passes16 authored programs/four routes without runtime edits. Add an explicit-grammar regression and source-bound independent Boolean null/null, malformed-arity and needed-error profiles. Compatible Hash-function counts preserve guards, effects, snapshots and bridges. Direct strict-depwarn84+126+27 assertions and six readonly evidence-corruption controls pass; all16 original observations and module/parsed bodies stay exact. Actual inputs/full channels and limits: docs/checkpoints/key-count-callable-julia-2026-11-06/REVIEW.md. Book and continuity align; installed Lua75.6.5 is next. Full verification remains deferred.

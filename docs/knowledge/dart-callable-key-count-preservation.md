@@ -9,7 +9,7 @@ answers:
   - "does a qualified later run recover the original missing grammar capture"
   - "which task completes Dart callable75.6.3"
 date: 2026-11-06
-status: Dart75.6.3 completed through focused acquisition child75.6.3.1; Julia/installed Lua and full admission pending
+status: own bounded implementation/preservation and callable backend children focused-checked; full admission remains separate
 tags: [dart, count_keys, user-functions, guards, source, custody, grammar, scalar]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1; docs/checkpoints/key-count-callable-dart-2026-11-06/REVIEW.md retains original partial and qualified epochs. Compatible12 plus four own profiles complete16 PASS/four routes; qualified normal16/direct29, fatal analysis/scoped format/safe empty-path rejection and six recovery corruptions PASS. No Dart runtime edit."
 reverify:
@@ -47,3 +47,12 @@ compile-time include_str! asset/warm-producer legs remain named under direct
 closure4.2 and native/cache audit SESSION5 before admission. Full source/context/
 transitive/toolchain/isolation/discovery/full23.4 remains separate. Julia75.6.4
 and installed Lua75.6.5 require independent acquisition before any peer verdict.
+
+## November6 callable frontier supersession
+
+Independent Perl75.6.1, Rust2, qualified Dart3/3.1, Julia4 and installed Lua5
+now have focused outcomes. Earlier next-peer directions above are historical
+leaf boundaries; full native/cache/transitive custody, source/context discovery,
+isolation, declared Lua5.4 and full23.4 remain separately owned. Current successor
+is remaining-family selection23.1.36 after clean landing. See
+[[lua-callable-key-count-preservation]] and MEMORY.md for current continuity.
