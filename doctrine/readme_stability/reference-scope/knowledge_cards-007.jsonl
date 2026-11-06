@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4504,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-capability-admission.md","sha256":"0d6d478070b70b328b3fe7c1aa51dacafefef2e3f051eeaf7cc3cd95b2cccdb9","type":"member"}
 {"bytes":7248,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-public-surface-no-drift.md","sha256":"27351880391689a009228dad866f0383ed2bf1fd234afd50042efede1df41c06","type":"member"}
 {"bytes":4049,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-recurring-six-runtime-gate.md","sha256":"58453da6ed18e5fa4dca615f34c3ca25789fca82a8eccd32db6b974d10f70664","type":"member"}
 {"bytes":7843,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-capture-endpoint-presence-authority.md","sha256":"e65662452f8b93a34aa3a506de1d1c03c750035af5aaec9ebb2234285299994f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3885,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-capture-plan.md","sha256":"1e32d0879fd8c7bfb9d288df8acd3509fc10968c8ed539cf2a2b2c3e83a20814","type":"member"}
 {"bytes":4485,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-fixture-selector-context.md","sha256":"4e228b9fb252bf61656d3e34af9f708f15dd6a267e516974046d70f6b237f1fd","type":"member"}
 {"bytes":2850,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-final-codeblock-signature-declaration-gap.md","sha256":"2bfb91febf8defc5d224f876efe66b39488c34de387484de2fa1aa87512d565e","type":"member"}
-{"bytes":8047,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-flow-recursive-source-provenance.md","sha256":"4797bc27ca23765357f0e943974b276fc6891a437e474073eb3bfcd43eb8fe2a","type":"member"}

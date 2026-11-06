@@ -3919,7 +3919,7 @@ function counts and text function uppercase. The incompatible Boolean-function
 CountKeys receiver keeps its null/unready/count_keys profile; it is excluded from
 this ordinary guard admission. Concrete P1 callable75.6 owns the remaining
 callable continuation coverage before parent/full admission. Independent Rust,
-Dart, Julia and installed Lua assessments are next. Full source/context/native-
+Dart and Julia repairs are recorded below; installed Lua75.5 remains next. Full source/context/native-
 transitive custody, general isolation, legacy bare/absent bindings, discovery,
 declared Lua5.4 and full23.4 remain separate.
 
@@ -3947,8 +3947,8 @@ requirement. Actual declared Cargo inputs, module/serialized bodies and full raw
 channels live under `docs/checkpoints/key-count-guard-rust-2026-11-06/`.
 
 The older Length reader remains source-bound to its accepted historical commit;
-current Length checks are separate. Independent Dart75.3 is next, with Julia,
-installed Lua and callable75.6 still pending. Full source/context/native-
+current Length checks are separate. Dart75.3 and Julia75.4 are focused-checked
+below; installed Lua75.5 and callable75.6 remain pending. Full source/context/native-
 transitive custody, general isolation, canonical discovery and full23.4 admission
 remain separate; no host-seeding or declared Lua5.4 claim follows.
 
@@ -3977,7 +3977,49 @@ direct inputs and complete raw channels are retained under
 `docs/checkpoints/key-count-guard-dart-2026-11-06/`.
 
 The original Length reader remains bound to its accepted historical source;
-current Length tests remain separate. Independent Julia75.4 and installed Lua75.5
-are next, with loop-index rights preserved. Full source/context/native-transitive
+current Length tests remain separate. Julia75.4 is focused-checked below; installed
+Lua75.5 is next, with loop-index rights preserved. Full source/context/native-transitive
 custody, general isolation, canonical discovery/callable75.6 and full23.4 admission
 remain separate; no Boolean policy normalization or Dart host-seeding is claimed.
+
+
+## Ordinary Julia key-count guards
+
+Julia75.4 independently reproduces twelve guard gaps in shared22 controls before
+repair. Its free source profile is[0,0,0,0,0,0,2], receiver profile
+[0,0,null,0,0,0,2]. `count_keys(false)` returns0 while `false.count_keys()` remains
+null under the existing scalar boundary. Needed source errors preserve native/
+restored diagnostic/class and generated exception/message wrapper.
+
+Canonical positional free-one/zero-extra CountKeys roles now join common kind
+ownership before Count initial-source permission. A distinct first-step KeyCount
+permission skips only common guard. scalar_result initialization/assignments/
+scalar guard, Count permission, enumerate/call_index and the separate Array-end
+mutation restriction stay intact. Already-produced counts reject incompatible
+Array/Hash operands and later copy/logical/with bodies; legitimate zero, explicit
+bridges, source snapshots/order, functions and preflight stay healthy.
+
+Unchanged22 groups move ten passing/twelve failing to22PASS across native/
+restored/plan/fresh Modules; all ten healthy complete observations remain exact.
+Actual22 emitted modules/parsed inputs are byte-identical. Current126/Count-length6/
+Count guards92/Length122=346 focused assertions pass with strict depwarn and empty
+stderr. One normal include is registered. Rebuild Julia applications/runtime;
+no source-regeneration/format change. Actual declared first inputs and full raw
+channels recover under `docs/checkpoints/key-count-guard-julia-2026-11-06/`, with
+six original and four additional effective corruption controls.
+
+The original Length reader remains bound to its acceptedfbe625974 source;
+current Length testing remains separate. Fresh Modules share process/runtime.
+Independent landed-peer Count ownership75.7 is next, then installed Lua75.5 and
+callable75.6 before admission.
+Full source/context/native-transitive custody, general isolation, canonical
+discovery/declared Lua5.4 and full23.4 remain separate; no host-seeding claim.
+
+A separate preservation check caught free Count-produced Numbers regaining
+KeyCount initial-source zero in the first candidate, including a later with body.
+Receiver Count forms already rejected. Excluding canonical free Count ownership
+from that initial permission fixes both failing programs; a third authored group
+preserves initial Number/free-key zero and Boolean receiver null. Maintained25
+programs pass126 assertions, with all25 module/parsed bodies unchanged. Original22
+phases/producer patch stay immutable; separate ownership/final-current epochs and
+the current-producer patch retain the correction. No prior peer failure is inferred.

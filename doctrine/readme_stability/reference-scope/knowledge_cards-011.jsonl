@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5189,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-admission.md","sha256":"f49e75dc4988bb07396390dda18e84761c350cd5cd787494d78fd7adf0a089ce","type":"member"}
 {"bytes":4553,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-core.md","sha256":"62988d611c243bcc24f205d0906a381860046fd538d9e132ca9409aa594cfc30","type":"member"}
 {"bytes":7107,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-preflight.md","sha256":"b89cecaa01615bfd21bbcecac9fd0881c20931689827aecb1ac198bcb05d494a","type":"member"}
 {"bytes":5100,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-routes.md","sha256":"d205d0272432a0d539f0a7586163f274cd11da580b8c8da9388ed0148332e0a6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5690,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/structural-progressive-staged-authoring-doctrine.md","sha256":"65a9dcdcf76e8ef17a3a009ece7c259ffc4fd69b5dbedbeba6717ec9d93d8059","type":"member"}
 {"bytes":3143,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/substring-optional-arguments.md","sha256":"3378d2eac7ab3934c4306402a2c4a04ed9b3043578029620ed081e0d62252d55","type":"member"}
 {"bytes":2314,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supplied-policy-reference-provenance.md","sha256":"6045e7c97a4b94e42993942cef1efb3a950d34f3c3ed3441d204b43cc9217435","type":"member"}
-{"bytes":17406,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-reading-closeout-audit.md","sha256":"0e01c3c58a7f04ba640dca503b4c4bea73d6905d455b5dd6df8edada20c3c016","type":"member"}

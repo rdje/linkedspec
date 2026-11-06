@@ -1,0 +1,222 @@
+{
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/compatible_prefix_guard.jl": {
+    "bytes": 5721,
+    "mode": 420,
+    "sha256": "9ece6767026e3c165e27bf2d39529577b06db8c2a90d915d873aff043287b6e3"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/copy_guard.jl": {
+    "bytes": 5371,
+    "mode": 420,
+    "sha256": "bf45665ccbdd627d47914a48b1492fe63104573263fc9cc6736919e3a492404b"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/count_contrast.jl": {
+    "bytes": 6057,
+    "mode": 420,
+    "sha256": "23545b28dc8c3e893895bed7bf10cf4dfa16dd761a8fad1764c7fffb79148c1e"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/explicit_bridges.jl": {
+    "bytes": 6103,
+    "mode": 420,
+    "sha256": "d3c4be4744fe7b21b09db6025d6f32d80d81ea8eb3c27d0f9ce058799c8d9c6f"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/free_keys_count.jl": {
+    "bytes": 4745,
+    "mode": 420,
+    "sha256": "692de2481fd05bf988db4f2fb5e08a28808955ebbe9a40b09a50fe0c5b20345f"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/function_guard.jl": {
+    "bytes": 5475,
+    "mode": 420,
+    "sha256": "007f121255e74c07e31bcd66a9a86b6f65df0e4d1943fd2dd1dc7c0e56c014b7"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/initial_source_fallback.jl": {
+    "bytes": 5193,
+    "mode": 420,
+    "sha256": "cf7b4d6102fb7fd27d9a58a876755ff150fd6a460a2799d4c625fc55a74651e2"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/key_count_compatible.jl": {
+    "bytes": 5049,
+    "mode": 420,
+    "sha256": "763f640f71feadbd4faeda23d3a285831c06f12b3d94da186fc31e94844d3aab"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/key_count_free_guard.jl": {
+    "bytes": 5601,
+    "mode": 420,
+    "sha256": "2ba90e347d634b6a34c028a611c0b76ad198bfd62f3c32ebba8a6a3f6cd77664"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/key_count_receiver_guard.jl": {
+    "bytes": 5513,
+    "mode": 420,
+    "sha256": "7a92f094a9668cabc0c4ad1fcaf571f64d1f78105249cedafc3e93ff386ee156"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/keys_count_copy_logical.jl": {
+    "bytes": 5457,
+    "mode": 420,
+    "sha256": "0a0bcdeeff0a4cd092cf692012365d5252d54f4decd599f3cdbf87f0011b009b"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/keys_count_with.jl": {
+    "bytes": 5345,
+    "mode": 420,
+    "sha256": "fa46208a7dc6ab0a50806d8260db1ac93228e77ce545e755ae02554765af2991"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/logical_guard.jl": {
+    "bytes": 5545,
+    "mode": 420,
+    "sha256": "64da851177dbea3638c65b891bab74e2c3a69e856b002279ce23925dbd52e617"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/logical_valid_zero.jl": {
+    "bytes": 5975,
+    "mode": 420,
+    "sha256": "d96d431032c182ce6eea278f1b295bd2eb4ff6e4ccefa8b19efa9841d0f04a2d"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/malformed_receiver.jl": {
+    "bytes": 5459,
+    "mode": 420,
+    "sha256": "655ee407c35f9d883415f5024ff6891440c7ad3c200ded620c820c4db203d231"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/needed_source_error.jl": {
+    "bytes": 4981,
+    "mode": 420,
+    "sha256": "7e6225c3b98eb0a836789ba4f5783973137041ae92514f1fc4e2b12349237f24"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/produced_zero_keys.jl": {
+    "bytes": 5291,
+    "mode": 420,
+    "sha256": "094bb1526a27b376da6cba878848193bab6647cda69423b7d055e8a4904c9826"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/receiver_keys_count.jl": {
+    "bytes": 4759,
+    "mode": 420,
+    "sha256": "d9efa4997972bc3969268edfd5892e9718961468495b5e6ce389333bbb4a1542"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/seeded_hash.jl": {
+    "bytes": 4839,
+    "mode": 420,
+    "sha256": "218a410dd17c59beaacd4ca7c7529ebf4021819186016f2793d3b5a89f1c0ec3"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/source_domain.jl": {
+    "bytes": 6187,
+    "mode": 420,
+    "sha256": "fac0a0c337d0e4eab14f4395fe0eeca5c6a8216be589cab29e31085d1caf0863"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/source_once_snapshot.jl": {
+    "bytes": 5463,
+    "mode": 420,
+    "sha256": "ff79f4ae0640a5426ce39f9e87c8978175dade3c1ebc08ca56d809cd5a06e3a6"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/emitted/zero_with.jl": {
+    "bytes": 5057,
+    "mode": 420,
+    "sha256": "2a37e06143068fd7c4a2b0599cf46072288ecdf82f2cb7c05c647b32fea92437"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/compatible_prefix_guard.json": {
+    "bytes": 812,
+    "mode": 420,
+    "sha256": "d65333e7cd5cfb25a6942f82e21e0213648d0662a74a9d857ae8bf50bf35cb3a"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/copy_guard.json": {
+    "bytes": 650,
+    "mode": 420,
+    "sha256": "354df4e838c128ecf383ed7ddfbcb77daa93404e62d25679015d303aaba4a7d1"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/count_contrast.json": {
+    "bytes": 989,
+    "mode": 420,
+    "sha256": "9b238da245d63e1aa5451558451689ba45406a2d467371a94b3f1dfa16d755b8"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/explicit_bridges.json": {
+    "bytes": 1010,
+    "mode": 420,
+    "sha256": "21219c899ecfc858f128ad0af0ce999f19bc8485aab4ca3344df8fad44e68c65"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/free_keys_count.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "a1bb2b2faeeca33155bc46a8c035e1c857e30d122e4462016d4d0a787b5abdbf"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/function_guard.json": {
+    "bytes": 6466,
+    "mode": 420,
+    "sha256": "ade0ad85a407355fb5b94723abd409abca03bc6a2a5deda33a5385567eefc15d"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/initial_source_fallback.json": {
+    "bytes": 548,
+    "mode": 420,
+    "sha256": "ea8e5d7fed9a141b9ae804593e1942fbf99efe935e0da4b5ffb048f9b995ea88"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/key_count_compatible.json": {
+    "bytes": 479,
+    "mode": 420,
+    "sha256": "82fbc301ada68699023bbd10f8b79b90e5e29430f173852aaf6461b0e09f2405"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/key_count_free_guard.json": {
+    "bytes": 755,
+    "mode": 420,
+    "sha256": "803c8223a902a770a3d97f59267477934041f3e6259f67ff4c2cfebfbdde92b0"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/key_count_receiver_guard.json": {
+    "bytes": 707,
+    "mode": 420,
+    "sha256": "7de0c8d07c2b23a965a15c21d5ab56f512fe56e263c52f1d1f9fbaffeed426b7"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/keys_count_copy_logical.json": {
+    "bytes": 680,
+    "mode": 420,
+    "sha256": "ba5733a964118b07e29d3292c24c77a043103e3acf41793adbfcc623435820f6"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/keys_count_with.json": {
+    "bytes": 632,
+    "mode": 420,
+    "sha256": "365b788be41bd8ed5dc4d880d5aef4f958b56239835d41d33b348f08f8b7b232"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/logical_guard.json": {
+    "bytes": 734,
+    "mode": 420,
+    "sha256": "466458eab03dddb17547aff3179a6cce39e9de9f8b262a7e05751be90851ade0"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/logical_valid_zero.json": {
+    "bytes": 944,
+    "mode": 420,
+    "sha256": "936e36f8d6cb1ed2efe47e940e91b9be1b240b03e7311c37c8192b88e77e6bdc"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/malformed_receiver.json": {
+    "bytes": 686,
+    "mode": 420,
+    "sha256": "a9b2af8d24d53b41f67eca5f784c2e76fb838629d107b1d451dd394260b11cda"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/needed_source_error.json": {
+    "bytes": 446,
+    "mode": 420,
+    "sha256": "92c595987598b513b64fd6fc68a0b8ed6c034de17cea54cfbe7425e88a0be9fe"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/produced_zero_keys.json": {
+    "bytes": 602,
+    "mode": 420,
+    "sha256": "9a106468f9a79b4cdc0825bf7b5dda6585e42971721b08c605b9d3f7960a059a"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/receiver_keys_count.json": {
+    "bytes": 335,
+    "mode": 420,
+    "sha256": "df252d2eb369d4bdb5bab8146aa354c175786bcbe0c059b2711df69222e3ed47"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/seeded_hash.json": {
+    "bytes": 383,
+    "mode": 420,
+    "sha256": "ea359657771ede17ec5646d7a31d6c9b2e87f854efa68bdfb0afc9083f7166cf"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/source_domain.json": {
+    "bytes": 1055,
+    "mode": 420,
+    "sha256": "d5eb08bcf5a8fdb44ff9a3e668161bac2826865ec1301331aec65d254ec58e17"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/source_once_snapshot.json": {
+    "bytes": 686,
+    "mode": 420,
+    "sha256": "05b3e5ce0ec7b4bf1cdf5479ffe1385c1c468beb4015ae36782f6f5fc1b9dd27"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/normal-artifacts/parsed/zero_with.json": {
+    "bytes": 494,
+    "mode": 420,
+    "sha256": "60fb1b7e2d8e31b33cf638dea28fc75161178e2c4448c736d4ddc4a6b79b6a01"
+  }
+}

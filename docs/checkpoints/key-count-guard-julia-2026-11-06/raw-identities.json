@@ -1,0 +1,62 @@
+{
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/final/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final/stdout.log": {
+    "bytes": 36785,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/final/stdout.log.gz",
+    "capsule_sha256": "379dd12c89135c43fed8840004c732768c0dab7b361933d1c8f4962b69bbbe42",
+    "sha256": "6bf4512ed29a1ced17b815b423661406d27444dcaeefb981e705afac54112fd3"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-after/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-after/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-after/stdout.log": {
+    "bytes": 4595,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-after/stdout.log.gz",
+    "capsule_sha256": "4f4304b8ecae68dcd67839200a223e385a2495a01c67d0eb4d63a99c104f1f8c",
+    "sha256": "ba01b99cc7eef5b6c4a4494b70c5dc3d5af96e6a8b5402986d98cc091d032e56"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-before/stderr.log": {
+    "bytes": 209,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-before/stderr.log.gz",
+    "capsule_sha256": "e5bc6e2225e6ce27db47df3b18a31f1fbedd36fb8311ba68f084524651156363",
+    "sha256": "349f8f2b51bb765fa8e374505f1ffc4ce8359228d891d69645e364643e3d5710"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-before/stdout.log": {
+    "bytes": 40468,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-before/stdout.log.gz",
+    "capsule_sha256": "a3080eddd6f076663213bef5cd46c894dde4cb4de2c66650106f26cfffe97d60",
+    "sha256": "ac41693d0f872b77bf9b3bd12aabd6bcf2f628512024c8eea760946e8bc551ae"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-after/stderr.log": {
+    "bytes": 137,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-after/stderr.log.gz",
+    "capsule_sha256": "c67ee2e20c80e38403bafd73009d80bac27f4d0966471057767274f407d9e4c7",
+    "sha256": "0b83f53dbf43fd82a388b26844044940ecca13ca36b6757750e9bd5c42c0c566"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-after/stdout.log": {
+    "bytes": 25655,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-after/stdout.log.gz",
+    "capsule_sha256": "542ca5e0d02580ab3520038aa3c65aadf309b76361065db5c09636cd384e3f16",
+    "sha256": "8e7d05400c086cd2142e2a949bfd5c5593e2b8597eea1f24e0021afe20fa6426"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-before/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-before/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-before/stdout.log": {
+    "bytes": 25659,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/probe-before/stdout.log.gz",
+    "capsule_sha256": "b3be51daf517cded7fb2a75bab9e13df4ef33e3d5c229daebab5e7f7fd4a4471",
+    "sha256": "11e23d4e14087ca18e1d9e80c9a0cc73104266f723280c360d410ebe461834e3"
+  }
+}

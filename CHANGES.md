@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — guard Julia CountKeys results while preserving scalar and mutation boundaries
+
+Canonical CountKeys role precedes Count source permission; distinct first-step KeyCount permission skips common guard only, retaining scalar_result/Count permission/enumerate/call_index Array-end restrictions. Independent unchanged22 groups10PASS12RED become22PASS/four routes, ten healthy observations exact and22 emitted/parsed inputs unchanged. Final346/strict depwarn/six recovery corruptions pass with actual declared first inputs/full raw epochs. Rebuild Julia apps/runtime; no source-regeneration/format change. Book/Knowledge/task/live align; historical Length replay source-bound. Installed Lua75.5 next, callable75.6 before broader admission; full source/context/custody/isolation/admission separate.
+
+The separate Count-owned-source check exposes two failing programs in the first candidate; exclude free Count ownership from initial KeyCount permission. Three added preservation groups now pass; maintained25 programs/current126 assertions and all346 selected assertions pass. Original22 epochs stay immutable, with six original/four extra recovery controls; P1 independent Rust/Dart75.7 precedes installed Lua75.5.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — guard Dart CountKeys results while preserving source policy
 
 Canonical CountKeys role joins kind guards before Count fallback. Separate initial KeyCount permission skips only common guard, preserving scalarResult/Count consumption and receiver Boolean null. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy error/value/class profiles exact and22 emitted/parsed inputs unchanged. Final67/fatal analysis/scoped format/six corruptions pass. Actual direct pub/source/lock/config/module/full raw epochs retained. Rebuild Dart apps/runtime; book/Knowledge/task/live align and historical Length replay source-bound. Julia75.4 next; full source/context/custody/isolation/admission stay separate.

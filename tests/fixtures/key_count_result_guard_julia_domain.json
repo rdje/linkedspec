@@ -1,0 +1,21 @@
+{
+  "id": "source_domain",
+  "source": "Value:: I {return([count_keys(undef),count_keys(4),count_keys(false),count_keys(\"text\"),count_keys([]),count_keys({}),count_keys({\"a\":1,\"b\":2}),undef.count_keys(),4.count_keys(),false.count_keys(),\"text\".count_keys(),[].count_keys(),{}.count_keys(),{\"a\":1,\"b\":2}.count_keys()])}",
+  "expected": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    null,
+    0,
+    0,
+    0,
+    2
+  ],
+  "provenance": "Independent Julia75.4 probe-before, all four public routes; preserve current initial policy without peer normalization."
+}

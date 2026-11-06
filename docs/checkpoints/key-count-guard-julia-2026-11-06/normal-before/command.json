@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=julia",
+    "--startup-file=no",
+    "--history-file=no",
+    "--depwarn=error",
+    "-e",
+    "using LinkedSpecJulia,JSON3,Test; for path in ARGS; include(path); end",
+    "julia/test/key_count_result_guard_composition_test.jl"
+  ],
+  "environment": {
+    "JULIA_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "JULIA_PKG_PRECOMPILE_AUTO": "0",
+    "LINKEDSPEC_KEY_COUNT_CAPTURE": "docs/checkpoints/key-count-guard-julia-2026-11-06/normal-before/normal-artifacts"
+  }
+}

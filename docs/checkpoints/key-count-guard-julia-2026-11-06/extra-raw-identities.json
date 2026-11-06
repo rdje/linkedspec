@@ -1,0 +1,38 @@
+{
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final-current/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/final-current/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/final-current/stdout.log": {
+    "bytes": 37336,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/final-current/stdout.log.gz",
+    "capsule_sha256": "6733182d4a12860bfd1683c621a819117fd32d9bd46e057a6dd7dd5461a96733",
+    "sha256": "84cbd653a3a909a5d3d0b92e9f584f672b0d256a63258ea311f0956b909e2bbb"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-after/stderr.log": {
+    "bytes": 137,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-after/stderr.log.gz",
+    "capsule_sha256": "44c06354ce405cfef5b558df88563c3d2e50399ea61e27bc056931f2a13bde23",
+    "sha256": "efc2d3db9ae4cf959d54f1fbc7c2e37c9b26f3e85f5f4d42e0a7805cc7434850"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-after/stdout.log": {
+    "bytes": 2259,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-after/stdout.log.gz",
+    "capsule_sha256": "f88b83f3350aa0dbf82260f442320ebd50cee49dc5ff93b932f6262560a5e0a8",
+    "sha256": "b18d00b7ac44193cb37f290deaa97389eb34409772b7c02015116f6b45782272"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/stdout.log": {
+    "bytes": 2243,
+    "capsule": "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/stdout.log.gz",
+    "capsule_sha256": "dae2f3bd816bc5e7f261ee2338f4d0edee1e18ae384effa9c7ea1e43786d49ae",
+    "sha256": "a7bcba50d1e39f45749f53e821fae1f28746168a014c76d7cb64f0a4e58d6156"
+  }
+}

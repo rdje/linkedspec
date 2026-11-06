@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8047,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-flow-recursive-source-provenance.md","sha256":"4797bc27ca23765357f0e943974b276fc6891a437e474073eb3bfcd43eb8fe2a","type":"member"}
 {"bytes":2439,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-free-default-result-guards.md","sha256":"3c33607251d991e35135928caa2740df1556aecf5e4ecec5ec56d39bffaf3a1a","type":"member"}
 {"bytes":2639,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-free-string-result-guards.md","sha256":"1b34dd14ff5a107d4c3fe2703470ef81baa28f7acf907bb14c7bf2e5d2fd332e","type":"member"}
 {"bytes":3511,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-array-constructor-bare-values.md","sha256":"85da9cb3aa0aee014cc23248463b2c36c7501f5e7a65d20a49398901e77e497d","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2926,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-referenced-blind-intermediate-compile-gap.md","sha256":"b9b35bb3ab51ac6655a157c16bea06f835bcfe2899aa31bbd31fec7731a3a164","type":"member"}
 {"bytes":1616,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-referenced-intermediate-compatibility.md","sha256":"52a77cba0463f2861c42ff31951ede761aa6d25b76c7efcbdfe23b7ba13d53ac","type":"member"}
 {"bytes":2136,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rename-key-copy-and-collision.md","sha256":"c3dbdccf9d9413ac303e73ff00afe53cf343caf719113f1d590cd57bfabc0549","type":"member"}
-{"bytes":3094,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-repeated-blind-parent-acceptance.md","sha256":"feb9a733165ab956f07224e0390cd3454a6046946870bd3483c7f5e048f49c14","type":"member"}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: bounded Perl/Rust/Dart guards implemented with focused checks. Independently assess Julia75.4 and installed Lua75.5 next, preserving loop-index rights; P1 callable75.6 precedes parent/full23.4 admission. Full verification remains deferred until agreed feature coverage.
+PNT key-count75: bounded Perl/Rust/Dart/Julia guards implemented with focused checks. Independently assess landed Rust/Dart Count-owned source permissions75.7 next, then installed Lua75.5 preserving loop-index rights; P1 callable75.6 precedes parent/full23.4 admission. Full verification remains deferred until agreed feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.3 guards canonical CountKeys results before Count permission, with common-only initial KeyCount exception preserving scalarResult and receiver Boolean null. Unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy/error/class profiles exact and22 modules/parsed inputs unchanged. Final67/fatal root/fresh analysis/scoped format/six corruptions pass; direct input/full raw epochs retained, old Length replay source-bound. Rebuild Dart apps/runtime; no peer/full-admission inference.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.4 guards Julia CountKeys before Count permission, preserving scalar_result and mutation restrictions. Original22 groups10PASS12RED become22PASS; separate3 catches/fixes two candidate free Count-to-CountKeys permission failures. Current25/126 plus direct Count/Length=346 assertions pass, strict depwarn/final stderr clean; ten original healthy profiles and25 modules/parsed bodies exact. Original and extra actual input/raw epochs plus six/four recovery controls retained. Independent landed-peer review75.7 next; no peer/full-admission inference.
 
 ## Next Action
 
-Activate independent Julia75.4 from clean Git. Recover shared22/contracts and retain Julia native/restored/plan/fresh-module baseline plus its own source-domain/error profiles before attribution/guard edits. Own producer prerequisites first; preserve scalar_result/Count exception and loop-index mutation restrictions. Smallest direct checks/docs/commit before installed Lua75.5; callable75.6 remains before broader admission.
+Activate P175.7 from clean Git: independently replay free Count-produced Number/zero to CountKeys and later with effects on landed Rust and Dart, contrast receiver Count and initial Number/free-key/Bool profiles. Retain actual first inputs/modules/raw channels; repair demonstrated gaps with smallest direct checks/docs/commit. No peer verdict from Julia. Then installed Lua75.5, preserving namespace/scalar/index restrictions; callable75.6 remains before admission.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia CountKeys25PASS/final346; Count-owned source preserved; independent peer75.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — Rust key-count22PASS/final66; ten healthy/modules exact; independent Dart75.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — ordinary CountKeys26PASS/final71; thirteen healthy exact; peers/callable coverage next.
@@ -29,7 +30,6 @@ Activate independent Julia75.4 from clean Git. Recover shared22/contracts and re
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — Perl Length guards/rejection19PASS; direct36 preserved; independent Rust74.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.35 — finite Length74 frozen; Perl first; key-count75 P1 scheduled; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.8 — bounded growth/outgoing-scope assessment; prospective reuse4.12 separate; selection23.1.35 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — two Dart predicate layouts focused-checked; PNT resumed to advisory artifact growth23.4.8.
 
 ## History
 

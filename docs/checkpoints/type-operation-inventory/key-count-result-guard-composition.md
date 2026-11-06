@@ -116,7 +116,7 @@ Unchanged22 now pass; ten healthy exact, actual22 modules/serialized inputs
 unchanged. Final66/scoped format/six recovery corruptions pass; actual declared
 Cargo/input/module/raw epochs in key-count-guard-rust-2026-11-06/REVIEW.md.
 Rebuild Rust runtime/apps; no generated-format change or source-regeneration need.
-Dart75.3 next; remaining peers/callable/source-context/custody/isolation/discovery/
+Dart75.3 and Julia75.4 are focused-checked below; installed Lua/callable/source-context/custody/isolation/discovery/
 admission stay separately owned. Original Length proof requires its accepted
 source boundary after Engine changes; its current normal still passes.
 
@@ -131,6 +131,27 @@ Boolean receiver null. Unchanged22 now pass; ten healthy observations and22
 modules/parsed inputs unchanged. Final67/fatal analysis/scoped format/six
 corruptions pass; direct source/pub/lock/config/input/module/raw epochs retained
 in key-count-guard-dart-2026-11-06/REVIEW.md. Rebuild Dart apps/runtime; no source-
-regeneration/format change. Julia75.4 next; remaining peers/source-context/custody/
+regeneration/format change. Julia75.4 is focused-checked below; installed Lua/source-context/custody/
 isolation/discovery/callable/admission remain separate. Historical Length
 recovery requires its accepted07f1cae context, with original evidence untouched.
+
+
+## Ordinary Julia guards75.4
+
+Independent shared22 intake observes ten healthy/twelve wrong on native/restored/
+plan/fresh Modules. Frozen free domain[0,0,0,0,0,0,2], receiver
+[0,0,null,0,0,0,2] and error/class/diagnostic/wrapper remain exact. CountKeys role
+precedes Count fallback; distinct initial KeyCount permission skips only common
+guard, preserving scalar_result/Count permission and enumerate/call_index mutation
+restriction. Unchanged22 now pass, ten healthy exact,22 modules/parsed inputs
+unchanged. Final346/strict depwarn/six original plus four extra recovery corruptions pass with actual
+first inputs/full raw epochs in key-count-guard-julia-2026-11-06/REVIEW.md. Rebuild
+Julia apps/runtime; no source-regeneration/format change. Historical Length replay
+requires acceptedfbe625974 context; original proof stays. Independent landed-peer Count ownership75.7 next, then installed Lua75.5;
+callable/source-context/custody/isolation/discovery/full admission remain separate.
+
+Separate Count-owned-source3 catches two candidate permission failures before
+landing. Exclude free Count role from initial KeyCount permission; all3 now pass
+and the initial-source profile stays exact. Current normal25/126 assertions,
+all346 selected assertions and25 unchanged module/parsed bodies pass. Original22
+proof remains immutable; ownership/final-current epochs retain the added check.

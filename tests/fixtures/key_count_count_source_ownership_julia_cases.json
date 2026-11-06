@@ -1,0 +1,35 @@
+[
+  {
+    "id": "count_to_keys",
+    "source": "Value:: I {return([count([1]).count_keys(),count([]).count_keys(),[1].count().count_keys(),[].count().count_keys()])}",
+    "input": "x",
+    "expected": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "count_to_keys_effects",
+    "source": "Value:: I {order=\"\";out=count([1]).count_keys().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "initial_keys_controls",
+    "source": "Value:: I {return([1.count_keys(),0.count_keys(),count_keys(1),count_keys(0),{}.count_keys(),false.count_keys()])}",
+    "input": "x",
+    "expected": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+    ]
+  }
+]

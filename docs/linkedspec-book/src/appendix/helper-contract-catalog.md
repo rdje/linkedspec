@@ -1556,7 +1556,7 @@ admission remain open.
 
 - **Current Perl status (November6)**: Typed-source75.0.1, source-domain75.0.2 and bounded ordinary result guards75.1 are implemented with focused checks. In retained literal/computed initial-source controls, Boolean/Array/missing/Number/text inputs return `0`; valid named Hash counts remain intact. Numeric `4` stays data under localized host controls. Mutating value blocks keep typed errors during execution. Regenerate emitted Perl.
 
-Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Registered callable-result receiver coverage75.6, independent peers and full admission remain separate.
+Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Registered callable-result receiver coverage75.6, installed Lua assessment and full admission remain separate.
 
 ```text
 count_keys(false)                     # 0
@@ -1587,7 +1587,7 @@ Rust75.2 now applies the ordinary result guards in both direct and trailing-`wit
 execution. Its independent22-case, four-route regression passes, preserving its
 initial zero policy, source order and needed errors. Incompatible operands and
 later bodies stay skipped. Rebuild Rust applications/runtime; the retained
-emitted modules and serialized inputs are unchanged. Independent Dart/Julia/Lua,
+emitted modules and serialized inputs are unchanged. Installed Lua assessment,
 callable-receiver coverage and full admission remain separate.
 
 Dart75.3 now guards ordinary CountKeys results with its own source profile
@@ -1596,7 +1596,18 @@ preserved. Free `count_keys(false)` returns `0`, while receiver
 KeyCount permission skips only the common guard; it adds no Boolean receiver
 rights. Its independent22-case/four-route checks and direct Count/Length checks
 pass. Rebuild Dart apps/runtime; broader domain/callable admission and remaining
-Julia/Lua assessment stay separate.
+installed Lua assessment stay separate.
+
+Julia75.4 now guards ordinary CountKeys results while preserving its independent
+source profile: `count_keys(false)` returns `0`, and `false.count_keys()` remains
+null. The first-step KeyCount permission skips only the common guard;
+`scalar_result`, Count permission and loop-index Array-end mutation restrictions
+stay intact. Free Count-produced Numbers are explicitly excluded from initial
+KeyCount permission, so `count([1]).count_keys()` returns null and skips later
+bodies. Its maintained25-case/four-route regression and selected Count/
+Length checks pass346 assertions with strict depwarn. Rebuild Julia apps/runtime;
+actual emitted modules/parsed inputs are unchanged. Independent landed-peer Count ownership75.7, installed Lua, callable
+receivers and full admission remain separately owned.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

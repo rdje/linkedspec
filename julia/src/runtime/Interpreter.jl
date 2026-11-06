@@ -6305,6 +6305,12 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
+    key_count_chain = _runtime_is_ordinary_key_count_result_chain(chain.receiver, chain.calls)
+    preserve_initial_key_count_source = key_count_chain && !kind_guarded_result &&
+        !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
+        !_runtime_is_ordinary_key_count_result_chain(chain.receiver, ()) &&
+        first(chain.calls).method == "count_keys" && isempty(first(chain.calls).args)
+    kind_guarded_result = kind_guarded_result || key_count_chain
     count_chain = _runtime_is_ordinary_count_result_chain(chain.receiver, chain.calls)
     preserve_initial_count_source = count_chain && !kind_guarded_result &&
         !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
@@ -6313,6 +6319,7 @@ function _evaluate_runtime_fluent_chain!(
     for (call_index, call) in enumerate(chain.calls)
         helper_name = canonical_action_helper_name(call.method)
         initial_count_source = preserve_initial_count_source && call_index == 1
+        initial_key_count_source = preserve_initial_key_count_source && call_index == 1
         # A legitimate null source keeps canonical has_key's key evaluation.
         # Earlier incompatible consumers return before this step.
         nullable_presence = value === nothing &&
@@ -6328,6 +6335,7 @@ function _evaluate_runtime_fluent_chain!(
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
         if (reduction_result || kind_guarded_result) && !initial_count_source &&
+            !initial_key_count_source &&
             !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && !nullable_membership && !nullable_index && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
@@ -6811,6 +6819,34 @@ function _runtime_is_ordinary_length_result_chain(receiver, calls)
     isempty(calls) && return false
     first_call = first(calls)
     return first_call.method == "length" &&
+        something(first_call.source_method, first_call.method) == first_call.method &&
+        !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
+        isempty(first_call.args)
+end
+
+# CountKeys results retain ownership without granting new scalar source rights.
+function _runtime_is_ordinary_key_count_result_chain(receiver, calls)
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr && receiver.name == "count_keys" &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg && length(receiver.args) == 1 &&
+        ordinary_args(receiver.args)
+        return true
+    end
+    isempty(calls) && return false
+    first_call = first(calls)
+    return first_call.method == "count_keys" &&
         something(first_call.source_method, first_call.method) == first_call.method &&
         !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
         isempty(first_call.args)

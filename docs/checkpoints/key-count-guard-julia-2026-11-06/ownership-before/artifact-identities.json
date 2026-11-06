@@ -1,0 +1,32 @@
+{
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/emitted/count_to_keys.jl": {
+    "bytes": 5149,
+    "mode": 420,
+    "sha256": "da9f47fcce21bc80f18f50dbd4f8e744ae1f2695f3a92435574657b03ee3f223"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/emitted/count_to_keys_effects.jl": {
+    "bytes": 5165,
+    "mode": 420,
+    "sha256": "487ac1904f214196aa2a458cd67579b29379d07a4a66de2b386d087ddc4154af"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/emitted/initial_keys_controls.jl": {
+    "bytes": 5147,
+    "mode": 420,
+    "sha256": "317280038ec619b53ed1dc5706a6af08c12cce24ef7f480c4f7e86b0858c288b"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/parsed/count_to_keys.json": {
+    "bytes": 536,
+    "mode": 420,
+    "sha256": "bc8fe5c7fa6b376998da66b8c6336cf2a961f184fecc2b6d412506774890ad8c"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/parsed/count_to_keys_effects.json": {
+    "bytes": 536,
+    "mode": 420,
+    "sha256": "f5d88c44dbb03ff9ccb2e3f600539d460717b9949635d178c434477735154c13"
+  },
+  "docs/checkpoints/key-count-guard-julia-2026-11-06/ownership-before/parsed/initial_keys_controls.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "97652d353bfcccb0b349ef57b1880c9f35a2c9c5850635ac45aef57810303bb9"
+  }
+}
