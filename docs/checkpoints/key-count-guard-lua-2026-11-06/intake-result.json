@@ -1,0 +1,38 @@
+{
+  "healthy": 13,
+  "hosts": {
+    "luajit": "LuaJIT 2.1.1788460057 -- Copyright (C) 2005-2026 Mike Pall. https://luajit.org/",
+    "puc": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio"
+  },
+  "programs": 25,
+  "red": [
+    "key_count_free_guard",
+    "key_count_receiver_guard",
+    "function_guard",
+    "copy_guard",
+    "logical_guard",
+    "seeded_hash",
+    "count_contrast",
+    "free_keys_count",
+    "receiver_keys_count",
+    "keys_count_with",
+    "keys_count_copy_logical",
+    "produced_zero_keys"
+  ],
+  "source_domain": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    null,
+    0,
+    0,
+    0,
+    2
+  ]
+}

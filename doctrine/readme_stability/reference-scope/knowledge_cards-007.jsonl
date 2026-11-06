@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1931,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-post-commit-hook-verification-only.md","sha256":"056d664f26ee8241d82c7afd947f8891f4160eb7fe27a7e18b62896ec4de0ed0","type":"member"}
 {"bytes":2073,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/method-like-dsl-migration-status.md","sha256":"6c8e11172488eb12df2645d71b652ec77c7ed026ba7069a1af3014ebcf1f8bbe","type":"member"}
 {"bytes":4504,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-capability-admission.md","sha256":"0d6d478070b70b328b3fe7c1aa51dacafefef2e3f051eeaf7cc3cd95b2cccdb9","type":"member"}
 {"bytes":7248,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-public-surface-no-drift.md","sha256":"27351880391689a009228dad866f0383ed2bf1fd234afd50042efede1df41c06","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2940,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-explicit-push-result-reads.md","sha256":"27fc1049ad4e3838d6c500c3a6e6da9509aec9ca74052b59f9dc9d3fcfbe965b","type":"member"}
 {"bytes":7371,"lines":103,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-capture-framework.md","sha256":"948f4f4da14711eef7add56918b0ab93de7c23a126d48a083c9858bfa15477c7","type":"member"}
 {"bytes":3885,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-capture-plan.md","sha256":"1e32d0879fd8c7bfb9d288df8acd3509fc10968c8ed539cf2a2b2c3e83a20814","type":"member"}
-{"bytes":4485,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-fixture-selector-context.md","sha256":"4e228b9fb252bf61656d3e34af9f708f15dd6a267e516974046d70f6b237f1fd","type":"member"}

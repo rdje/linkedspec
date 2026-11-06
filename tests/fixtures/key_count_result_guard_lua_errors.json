@@ -1,0 +1,30 @@
+{
+  "needed_source_error": {
+    "fresh": {
+      "code": "generated_execution_failed",
+      "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+      "generated": true,
+      "runtime": false
+    },
+    "native": {
+      "code": "binding_kind_mismatch",
+      "diagnostic_stage": "runtime_execution",
+      "error": "RuntimeInterpreterException: binding_kind_mismatch",
+      "generated": false,
+      "runtime": true
+    },
+    "plan": {
+      "code": "generated_execution_failed",
+      "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+      "generated": true,
+      "runtime": false
+    },
+    "restored": {
+      "code": "binding_kind_mismatch",
+      "diagnostic_stage": "runtime_execution",
+      "error": "RuntimeInterpreterException: binding_kind_mismatch",
+      "generated": false,
+      "runtime": true
+    }
+  }
+}

@@ -1,6 +1,6 @@
 ---
 id: key-count-source-and-guard-gaps
-title: Perl key-count needs typed-source domain and continuation repairs
+title: Key-count source and guard assessment with current ordinary repairs
 answers:
   - "why does count_keys of a mutating value block emit invalid Perl"
   - "why does count_keys false or an Array raise Not a HASH reference"
@@ -11,7 +11,7 @@ answers:
   - "may an aborted key-count domain profile be frozen"
   - "why does count_keys(4) count host main::4"
 date: 2026-11-06
-status: Perl typed/domain/ordinary guards focused-checked; independent peers and callable75.6 next
+status: ordinary Perl/Rust/Dart/Julia/installed Lua guards focused-checked; callable75.6 next
 tags: [perl, count_keys, guards, source, domain, copy, logical, host]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict at that assessment boundary."
 reverify:
@@ -46,8 +46,9 @@ read and regression after both prerequisites; no generic native/host isolation.
 
 The shared22 target retains seven original healthy/twelve guard targets plus two
 producer prerequisites and one additional healthy initial-source continuation
-control. Remaining Rust/Dart/Julia/installed Lua75.2-.5 require independent source/
-domain/error profiles and runtime RED/GREEN. Full native/transitive custody4.2,
+control. The assessment scheduled independent Rust/Dart/Julia/installed Lua75.2-.5 source/
+domain/error profiles and runtime RED/GREEN; completed bounded results are linked
+below. Full native/transitive custody4.2,
 isolation, canonical discovery4.1, declared5.4 and full23.4 remain separate.
 Historical readonly recovery never claims latest-runtime freshness or defect age.
 
@@ -76,3 +77,14 @@ Number2 seeds now null/host unchanged. Final71/syntax/seven recovery corruptions
 pass. Initial coalesce/cat zero also remains intact. Registered-function receiver
 paths stay on their existing owner; concrete P1 callable75.6 precedes broader
 admission. Assessment-era defects above remain historical, not current verdicts.
+
+Current ordinary peer guards are now focused-checked:
+[[rust-key-count-result-guards]], [[dart-key-count-result-guards]],
+[[julia-key-count-result-guards]] and [[lua-key-count-result-guards]]. Each backend
+established its own baseline and source/error profile; no Boolean normalization
+or broad context admission follows. The separate
+[[count-key-source-ownership-peer-preservation]] confirms existing Rust/Dart
+Count exclusions, and Julia/Lua explicitly preserve free Count ownership before
+KeyCount initial permission. Original assessment defects remain historical.
+Callable75.6 is the next owned context lane before parent/full admission; native/
+transitive custody4.2/isolation/discovery4.1/legacy SESSION17/full23.4 stay separate.

@@ -1,0 +1,25 @@
+{
+  "expected": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    null,
+    0,
+    0,
+    0,
+    2
+  ],
+  "hosts": {
+    "luajit": "LuaJIT 2.1.1788460057 -- Copyright (C) 2005-2026 Mike Pall. https://luajit.org/",
+    "puc": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio"
+  },
+  "id": "source_domain",
+  "provenance": "Independent Lua75.5 actual probe-before on both hosts; no peer policy imported.",
+  "source": "Value:: I {return([count_keys(undef),count_keys(4),count_keys(false),count_keys(\"text\"),count_keys([]),count_keys({}),count_keys({\"a\":1,\"b\":2}),undef.count_keys(),4.count_keys(),false.count_keys(),\"text\".count_keys(),[].count_keys(),{}.count_keys(),{\"a\":1,\"b\":2}.count_keys()])}"
+}

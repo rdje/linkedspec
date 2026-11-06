@@ -116,7 +116,7 @@ Unchanged22 now pass; ten healthy exact, actual22 modules/serialized inputs
 unchanged. Final66/scoped format/six recovery corruptions pass; actual declared
 Cargo/input/module/raw epochs in key-count-guard-rust-2026-11-06/REVIEW.md.
 Rebuild Rust runtime/apps; no generated-format change or source-regeneration need.
-Dart75.3 and Julia75.4 are focused-checked below; installed Lua/callable/source-context/custody/isolation/discovery/
+Dart75.3/Julia75.4/installed Lua75.5 are focused-checked below; callable/source-context/custody/isolation/discovery/
 admission stay separately owned. Original Length proof requires its accepted
 source boundary after Engine changes; its current normal still passes.
 
@@ -131,7 +131,7 @@ Boolean receiver null. Unchanged22 now pass; ten healthy observations and22
 modules/parsed inputs unchanged. Final67/fatal analysis/scoped format/six
 corruptions pass; direct source/pub/lock/config/input/module/raw epochs retained
 in key-count-guard-dart-2026-11-06/REVIEW.md. Rebuild Dart apps/runtime; no source-
-regeneration/format change. Julia75.4 is focused-checked below; installed Lua/source-context/custody/
+regeneration/format change. Julia75.4/installed Lua75.5 are focused-checked below; source-context/custody/
 isolation/discovery/callable/admission remain separate. Historical Length
 recovery requires its accepted07f1cae context, with original evidence untouched.
 
@@ -147,7 +147,7 @@ restriction. Unchanged22 now pass, ten healthy exact,22 modules/parsed inputs
 unchanged. Final346/strict depwarn/six original plus four extra recovery corruptions pass with actual
 first inputs/full raw epochs in key-count-guard-julia-2026-11-06/REVIEW.md. Rebuild
 Julia apps/runtime; no source-regeneration/format change. Historical Length replay
-requires acceptedfbe625974 context; original proof stays. Independent landed-peer Count ownership75.7 confirmed below; installed Lua75.5 next;
+requires acceptedfbe625974 context; original proof stays. Independent landed-peer Count ownership75.7 and installed Lua75.5 confirmed below; callable75.6 next;
 callable/source-context/custody/isolation/discovery/full admission remain separate.
 
 Separate Count-owned-source3 catches two candidate permission failures before
@@ -166,6 +166,23 @@ zero stays. No peer runtime defect demonstrated; both runtime files byte-identic
 to activation50e5933f5. The separate3 joins each original22 normal,25PASS/native-
 restored-plan each; scoped format/Dart fatal analysis/five recovery controls pass.
 Actual inputs/modules/full channels retained under count-key-ownership-peers-
-2026-11-06/REVIEW.md. Emitted execution covers new3 only. Installed Lua75.5 includes
-these preservation controls next; full custody/context/isolation/callable/admission
+2026-11-06/REVIEW.md. Emitted execution covers new3 only. Installed Lua75.5 below includes
+these preservation controls; full custody/context/isolation/callable/admission
 remain separate.
+
+
+## Ordinary installed Lua guards75.5
+
+Both actual installed PUC5.5.1/LuaJIT2.1.1788460057 independently freeze25/four-route
+baseline13PASS12RED, own free/receiver domain and error flags/code/wrapper before
+production. Canonical CountKeys role precedes Count permission; separate first-
+step common-only permission excludes free Count ownership, preserving scalar/
+Count/index mutation boundaries and existing namespace/no new chunk locals.
+Unchanged25 now PASS/four routes per host; thirteen healthy and25 module/parsed
+bodies exact. New126/Count92/Length122 checks and Count-length programs pass per
+host with empty stderr, loadfile checks and seven recovery corruptions. Actual
+first inputs/modules/full channels retained in key-count-guard-lua-2026-11-06/
+REVIEW.md. Rebuild Lua apps/runtime; no source-regeneration/format movement.
+Historical Length recovery requires acceptedf5e2350ba; original proof stays.
+All five ordinary backends focused-checked; callable75.6 next, with full custody/
+context/isolation/discovery/declared5.4/full admission separately owned.

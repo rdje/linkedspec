@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3143,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/substring-optional-arguments.md","sha256":"3378d2eac7ab3934c4306402a2c4a04ed9b3043578029620ed081e0d62252d55","type":"member"}
 {"bytes":2314,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supplied-policy-reference-provenance.md","sha256":"6045e7c97a4b94e42993942cef1efb3a950d34f3c3ed3441d204b43cc9217435","type":"member"}
 {"bytes":17406,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-reading-closeout-audit.md","sha256":"0e01c3c58a7f04ba640dca503b4c4bea73d6905d455b5dd6df8edada20c3c016","type":"member"}
 {"bytes":28330,"lines":490,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-source-reading-coverage.md","sha256":"57fbfd04494ac6bf694f72fd4ca7d441e78cd17e723700bf3272891706241252","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3629,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-binding-neutral-contract.md","sha256":"7f917b986a488b58f7a27efe12018761f5eca7a2244b891097f7689c288f6cf5","type":"member"}
 {"bytes":2857,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-expression-compatibility-retirement-doctrine.md","sha256":"daeeecc6f12102331c492fc7d2e8a4463242426e1b02cb72ff3a2ae338ed72b8","type":"member"}
 {"bytes":9575,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/user-function-parser-state-boundary.md","sha256":"fc083f0efd3b137746e5afa232026a50fe9a86dea24ef12ba6cf7a02b09dfbb9","type":"member"}
-{"bytes":6183,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/user-observable-backend-cli-parity-contract.md","sha256":"19f35f59a08ed4383c4c81900a50b7bf760a6b4f3f9a9aaa55990ce128e40b5e","type":"member"}

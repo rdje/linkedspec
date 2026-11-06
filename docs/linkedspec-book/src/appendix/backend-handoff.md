@@ -3919,7 +3919,7 @@ function counts and text function uppercase. The incompatible Boolean-function
 CountKeys receiver keeps its null/unready/count_keys profile; it is excluded from
 this ordinary guard admission. Concrete P1 callable75.6 owns the remaining
 callable continuation coverage before parent/full admission. Independent Rust,
-Dart and Julia repairs are recorded below; installed Lua75.5 remains next. Full source/context/native-
+Dart, Julia and installed Lua repairs are recorded below; callable75.6 remains next. Full source/context/native-
 transitive custody, general isolation, legacy bare/absent bindings, discovery,
 declared Lua5.4 and full23.4 remain separate.
 
@@ -3948,7 +3948,7 @@ channels live under `docs/checkpoints/key-count-guard-rust-2026-11-06/`.
 
 The older Length reader remains source-bound to its accepted historical commit;
 current Length checks are separate. Dart75.3 and Julia75.4 are focused-checked
-below; installed Lua75.5 and callable75.6 remain pending. Full source/context/native-
+below; installed Lua75.5 is also focused-checked and callable75.6 remains pending. Full source/context/native-
 transitive custody, general isolation, canonical discovery and full23.4 admission
 remain separate; no host-seeding or declared Lua5.4 claim follows.
 
@@ -3977,8 +3977,8 @@ direct inputs and complete raw channels are retained under
 `docs/checkpoints/key-count-guard-dart-2026-11-06/`.
 
 The original Length reader remains bound to its accepted historical source;
-current Length tests remain separate. Julia75.4 is focused-checked below; installed
-Lua75.5 is next, with loop-index rights preserved. Full source/context/native-transitive
+current Length tests remain separate. Julia75.4 and installed Lua75.5 are focused-
+checked below, with loop-index rights preserved; callable75.6 remains next. Full source/context/native-transitive
 custody, general isolation, canonical discovery/callable75.6 and full23.4 admission
 remain separate; no Boolean policy normalization or Dart host-seeding is claimed.
 
@@ -4010,8 +4010,8 @@ six original and four additional effective corruption controls.
 
 The original Length reader remains bound to its acceptedfbe625974 source;
 current Length testing remains separate. Fresh Modules share process/runtime.
-Rust/Dart Count ownership75.7 is confirmed below; installed Lua75.5 is next, then
-callable75.6 before admission.
+Rust/Dart Count ownership75.7 and installed Lua75.5 are focused-checked below;
+callable75.6 is next before admission.
 Full source/context/native-transitive custody, general isolation, canonical
 discovery/declared Lua5.4 and full23.4 remain separate; no host-seeding claim.
 
@@ -4042,5 +4042,40 @@ source/manifest/lock/config/writer inputs and complete raw channels recover unde
 `docs/checkpoints/count-key-ownership-peers-2026-11-06/`; five corruption controls
 reject. Emitted execution in this review covers new3. Full native/transitive
 custody, general isolation/source-context discovery/callable/full23.4 remain
-separate. Installed Lua75.5 is next, retaining scalar/Count/index mutation rights
-and the explicit Count-owned-source controls; no declared5.4 inference.
+separate. Installed Lua75.5 below retains scalar/Count/index mutation rights and
+the explicit Count-owned-source controls; callable75.6 is next, with no declared5.4 inference.
+
+
+## Ordinary installed Lua key-count guards
+
+Lua75.5 independently observes25 programs on both PUC5.5.1 and
+LuaJIT2.1.1788460057 before production: thirteen healthy and twelve guard failures.
+Free sources give[0,0,0,0,0,0,2], receiver sources[0,0,null,0,0,0,2]. In particular,
+free Boolean CountKeys returns0 and receiver Boolean CountKeys remains null.
+Both installed hosts agree only after independent observation; native/generated
+error message/code/flags and diagnostic stage remain on their existing profiles.
+
+Canonical free-one/zero-extra CountKeys roles now enter common kind ownership
+before Count permission. Distinct initial KeyCount permission skips only common
+guard and excludes free Count ownership. scalar_result, Count permission, loop
+index and the separate Array-end mutation restriction stay exact. The helper
+uses the existing namespace and adds no interpreter chunk locals. Produced counts
+reject incompatible operands/later copy/logical/with; legitimate zero, explicit
+bridges, snapshots/order, preflight and needed errors stay healthy.
+
+Unchanged25 groups13PASS12RED become25PASS/four routes per host. All thirteen
+healthy observations remain exact; actual25 emitted modules/parsed inputs per
+host stay byte-identical. New126/Count guards92/Length122 checks plus two Count/
+length programs on native/plan/fresh pass on each host, with empty final stderr.
+Interpreter/runner loadfile checks and three registration lines pass. No unsafe
+full runner, formatter or declared5.4 execution. Rebuild Lua applications/runtime;
+no source-regeneration/generated-format migration is required.
+
+Actual declared first inputs, pre-run modules/parsed data and all full raw
+channels recover under `docs/checkpoints/key-count-guard-lua-2026-11-06/`;
+seven effective corruption controls reject. The older Length reader remains bound
+to acceptedf5e2350ba, with original proof untouched and current tests separate.
+Fresh modules share process/runtime; full native/transitive/toolchain custody,
+general isolation/source-context discovery/callable/full23.4 stay separate.
+Ordinary guards are focused-checked across five backends; callable75.6 is next
+before parent/full admission, preserving named exclusions until assessed.

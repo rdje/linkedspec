@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "puc",
+    "lua/test/key_count_result_guard_composition_test.lua"
+  ],
+  "environment": {
+    "LINKEDSPEC_KEY_COUNT_CAPTURE": "docs/checkpoints/key-count-guard-lua-2026-11-06/normal-after/puc"
+  }
+}

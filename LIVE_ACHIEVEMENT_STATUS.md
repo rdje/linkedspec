@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: Perl/Rust/Dart/Julia bounded guards focused-checked. Peer Count-owned-source75.7 is healthy and explicitly covered; independently assess installed Lua75.5 next. Callable75.6 precedes parent/full23.4 admission; full verification remains deferred until feature coverage.
+PNT key-count75: ordinary Perl/Rust/Dart/Julia/installed Lua guards are implemented with focused checks. P1 callable75.6 is next before parent/full23.4 admission. Full verification stays deferred until agreed feature coverage; source/context/custody/isolation lanes retain ownership.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.7 confirms existing Rust/Dart Count exclusions with new3/four-route controls. No peer runtime defect demonstrated; both runtime files byte-identical. Each maintained25 normal passes/native-restored-plan with independent domain/Bool/error policy. Scoped format/Dart fatal analysis/five recovery corruptions pass; actual first inputs/new3 modules/full raw channels retained. Book/task/Knowledge align; installed Lua75.5 next, no full admission inference.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.5 guards installed Lua CountKeys before Count permission with a common-only exception excluding Count ownership, preserving scalar/index boundaries and chunk-local count. Both hosts unchanged25 groups13PASS12RED become25PASS/four routes; thirteen healthy and25 modules/parsed inputs exact. New126/Count92/Length122/Count-length/loadfile checks pass per host with empty final stderr; seven recovery corruptions pass. Actual first inputs/full raw epochs retained; rebuild Lua apps/runtime. Callable75.6 next, no full admission inference.
 
 ## Next Action
 
-Activate installed Lua75.5 from clean Git. Retain independent PUC/LuaJIT baseline shared22 plus Count-owned-source3 and source-domain/error profiles before attribution/guard edits. Preserve free Count ownership before KeyCount initial permission, scalar_result/Count/index mutation boundaries and namespace/no new chunk locals. Own producer prerequisites first; no unsafe runner/formatter/declared5.4 inference. Small direct checks/docs/commit, then callable75.6 before broader admission.
+Activate callable75.6 from clean Git. Read canonical registered-function receiver contracts and prior Perl owner controls; use full-source public Get/descriptor/substitution/emission context. Retain compatible Hash-function CountKeys continuations/copy/logical/with, source-once/needed-error/preflight controls and independently frozen peer profiles before attributing/fixing gaps. Preserve the excluded Perl Boolean-function null/unready/count_keys profile until explicitly assessed. Detail bounded assessment/fix children as needed before changes; smallest direct checks/docs/commit per unit, then continue roadmap without broad verification between slices.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — installed Lua25PASS/four routes;13 healthy/Count/scalar/index exact; callable75.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — peers Count ownership3PASS/four routes; both25 normals; runtimes unchanged; installed Lua75.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia CountKeys25PASS/final346; Count-owned source preserved; independent peer75.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
@@ -29,7 +30,6 @@ Activate installed Lua75.5 from clean Git. Retain independent PUC/LuaJIT baselin
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — Rust Length/source-owner24PASS; twelve healthy exact/final44; independent Dart74.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — produced Length ownership8PASS/existing19 preserved; qualified capture limits explicit; Rust74.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — Perl Length guards/rejection19PASS; direct36 preserved; independent Rust74.2 next.
-- TYPE-REFERENCE-BOOK.1.2.23.1.35 — finite Length74 frozen; Perl first; key-count75 P1 scheduled; no production change.
 
 ## History
 

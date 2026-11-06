@@ -86,7 +86,7 @@
 {"bytes":4448,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-registry.md","sha256":"a183dc4a2b519aa5a94a4be6bc75d837470dfb0ac8d09f0ad1645a6556126f7c","type":"member"}
 {"bytes":3843,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-runtime-execution.md","sha256":"effa3c61986406f90b2c2aed0059f8193063dc3ec3a2a395353b53c29b7be51e","type":"member"}
 {"bytes":4216,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-variadic-user-functions.md","sha256":"60e5c3385f01f3bc05eeddcdb90dbbc0cf42c61795f23e77bd5fbd1f06023834","type":"member"}
-{"bytes":5199,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.1","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"866c569ed18923f0526aae91713f973d974a1ff3660bfccb33978f8c8661843c","type":"member"}
+{"bytes":5984,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.5","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"3610c9b902620a1d42ff1e5547e2a3ec84d02cc19a9d2e8ce5d821eca98abd0a","type":"member"}
 {"bytes":2060,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-atomic-publication.md","sha256":"149954a325a06801c9ee84c520269322694f864a9bbc298c51806bf2b68d041b","type":"member"}
 {"bytes":1872,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-nonatomic-publication.md","sha256":"b13a018b828a88ace208e3bb446dd96b039558071315a0d83cf392297b5c87f1","type":"member"}
 {"bytes":6626,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-agnostic-backend-vision.md","sha256":"c3bf8200047285bc1e323e9baa04e03c6c21aeb7544aae2f3d6090cdfa49fd6c","type":"member"}

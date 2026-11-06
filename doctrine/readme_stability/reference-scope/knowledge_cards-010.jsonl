@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3583,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/root-rule-selection-five-backend-admission.md","sha256":"ec39b6b9278ee27d01fceb53bfda44133288fbc4533c56fdfb2b4cf1405c9c65","type":"member"}
 {"bytes":14167,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/root-rule-selection-precedence.md","sha256":"aecdcd2d93b397b3ffc4583a39ea830f539a61294572a628434b3eb3eb5ed8f0","type":"member"}
 {"bytes":6182,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/routing-decision-accepted-state-gap.md","sha256":"a3ce75fceaee09dd127b5ca6db39806a19ce0e7fecc6bf3118875e22220cf178","type":"member"}
 {"bytes":6979,"lines":123,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/routing-verifier-child-signal-status-gap.md","sha256":"f93670d04e23b56bae427ace447cf707289c9ea4e23d49977f9e8eb74aa11994","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7589,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recursive-observation-admission.md","sha256":"2bf13ad2f6086d2e98a1788d927737ddd048aafc29205c7497fb2f50a98dc8b4","type":"member"}
 {"bytes":8240,"lines":122,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-referenced-intermediate-runtime-outliers.md","sha256":"4598da5d7b382aa3eb299e9144c05824a99bdeff94ee78e1716504b41a5812d0","type":"member"}
 {"bytes":7928,"lines":139,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-regex-input-context-drift.md","sha256":"21565aa6009ce8c3f2d4568205eaaf7d5642bf45dc29cbefd88bbff9542113b4","type":"member"}
-{"bytes":3698,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-retired-array-aliases-not-added.md","sha256":"23e7e4ab82ff0b694410ef327ee658a8d05c0314529f5da14246a2fd5dd4def2","type":"member"}

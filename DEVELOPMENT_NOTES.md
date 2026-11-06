@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — Lua KeyCount permission must preserve both Count ownership and scalar rejection
+
+Independent PUC5.5.1/LuaJIT2.1.1788460057 profiles freeze free Boolean0 versus receiver Boolean null. Admit canonical CountKeys ownership before Count permission; only first-step common guard can be skipped, and existing free Count ownership prevents that exception. Keep scalar_result/scalar guard/Count exception/loop-index Array-end rights and interpreter chunk-local count unchanged. Authored25/four routes, thirteen exact healthy profiles, new126/Count92/Length122/Count-length/loadfile checks and seven recovery corruptions pass per host. Actual inputs/module/raw epochs retained; older Length replay needs acceptedf5e2350ba context. Ordinary five-backend guards are focused-checked; callable75.6 remains next before parent/full admission.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — Keep Count ownership distinct from initial KeyCount zero
 
 Both Rust direct/trailing-with and Dart already exclude free Count ownership before granting initial KeyCount source permission. Independent public3 controls preserve Count1/0 rejection, skipped later with effects and literal/free-key/empty Hash zero. No runtime defect demonstrated; regression coverage now explicitly joins each original22 normal,25PASS each. Original Boolean/domain/error fixtures remain independent. New3 emitted routes, scoped formatting/fatal analysis and five recovery corruptions pass with actual first inputs/full channels. Source files byte-identical; full custody/context/isolation/callable/admission remain separate.

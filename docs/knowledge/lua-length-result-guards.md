@@ -8,11 +8,11 @@ answers:
   - "which installed hosts were checked for Length guards"
   - "must Lua Length emitted modules be regenerated"
 date: 2026-11-06
-status: installed-host Lua74.5 implemented with focused checks; P1 key-count75.0 next; full admission open
+status: historical installed-host Lua74.5 focused evidence; current frontier belongs to MEMORY.md
 tags: [lua, length, count, guards, source, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.74.5; docs/checkpoints/length-guard-lua-2026-11-06 retains actual declared first inputs, raw phases and readonly recovery/five corruptions. Each host24 programs12PASS12RED to24PASS, twelve healthy exact, final122 plus nearest Count92 and Count/length checks."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/length-guard-lua-2026-11-06/review.py"
+  - "Historical recovery requires acceptedf5e2350ba41b67584640ca80b662ec0708ed484a source/normal/profile inputs: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-lua-2026-11-06/review.py"
   - "bash tools/run_lua_project_data.sh puc lua/test/length_result_guard_composition_test.lua"
   - "bash tools/run_lua_project_data.sh luajit lua/test/length_result_guard_composition_test.lua"
 ---
@@ -38,5 +38,12 @@ Actual declared first Lua/native source/direct-fixture/wrapper/module/parsed
 inputs and complete raw channels survive losslessly, with byte/mode identities
 and five effective corruptions. Native binaries/external toolchain/transitive
 closure4.2, general process/package isolation, canonical discovery4.1, declared5.4
-and full23.4 remain separate. Fresh modules share process/runtime. P1 key-count75.0
-is next before unrelated selection; bounded Length implementations are complete.
+and full23.4 remain separate. Fresh modules share process/runtime. P1 key-count75.0 was the historical
+successor; bounded Length implementations are complete and current frontier
+belongs to MEMORY.md.
+
+The original readonly reader binds interpreter/normal/profile bytes to accepted
+Lua74.5 context f5e2350ba41b67584640ca80b662ec0708ed484a. After CountKeys75.5,
+replay it only in that matching historical context. Original epochs/readers stay
+unchanged; historical recovery is not latest-runtime proof. Current Length normal
+remains independently runnable on supported installed hosts.

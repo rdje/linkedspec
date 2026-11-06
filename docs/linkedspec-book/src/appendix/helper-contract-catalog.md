@@ -1556,7 +1556,7 @@ admission remain open.
 
 - **Current Perl status (November6)**: Typed-source75.0.1, source-domain75.0.2 and bounded ordinary result guards75.1 are implemented with focused checks. In retained literal/computed initial-source controls, Boolean/Array/missing/Number/text inputs return `0`; valid named Hash counts remain intact. Numeric `4` stays data under localized host controls. Mutating value blocks keep typed errors during execution. Regenerate emitted Perl.
 
-Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Registered callable-result receiver coverage75.6, installed Lua assessment and full admission remain separate.
+Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Registered callable-result receiver coverage75.6 and full admission remain separate.
 
 ```text
 count_keys(false)                     # 0
@@ -1587,16 +1587,15 @@ Rust75.2 now applies the ordinary result guards in both direct and trailing-`wit
 execution. Its independent22-case, four-route regression passes, preserving its
 initial zero policy, source order and needed errors. Incompatible operands and
 later bodies stay skipped. Rebuild Rust applications/runtime; the retained
-emitted modules and serialized inputs are unchanged. Installed Lua assessment,
-callable-receiver coverage and full admission remain separate.
+emitted modules and serialized inputs are unchanged. Callable-receiver coverage
+and full admission remain separate.
 
 Dart75.3 now guards ordinary CountKeys results with its own source profile
 preserved. Free `count_keys(false)` returns `0`, while receiver
 `false.count_keys()` remains null under its scalar boundary. A one-step initial
 KeyCount permission skips only the common guard; it adds no Boolean receiver
 rights. Its independent22-case/four-route checks and direct Count/Length checks
-pass. Rebuild Dart apps/runtime; broader domain/callable admission and remaining
-installed Lua assessment stay separate.
+pass. Rebuild Dart apps/runtime; broader domain/callable admission stays separate.
 
 Julia75.4 now guards ordinary CountKeys results while preserving its independent
 source profile: `count_keys(false)` returns `0`, and `false.count_keys()` remains
@@ -1606,8 +1605,8 @@ stay intact. Free Count-produced Numbers are explicitly excluded from initial
 KeyCount permission, so `count([1]).count_keys()` returns null and skips later
 bodies. Its maintained25-case/four-route regression and selected Count/
 Length checks pass346 assertions with strict depwarn. Rebuild Julia apps/runtime;
-actual emitted modules/parsed inputs are unchanged. Installed Lua, callable
-receivers and full admission remain separately owned.
+actual emitted modules/parsed inputs are unchanged. Callable receivers and full
+admission remain separately owned.
 
 Peer preservation75.7 independently confirms that Rust and Dart already exclude
 Count-owned values from initial KeyCount permission. Their new three-program
@@ -1621,8 +1620,17 @@ count([1]).count_keys()              # null: Count owns its Number result
 count([1]).count_keys().with(){return("ran")} # null; body skipped
 ```
 
-The retained emitted checks cover the new3 programs. Installed Lua75.5 includes
-these preservation controls next; callable/context/full admission stays separate.
+The retained peer emitted checks cover the new3 programs. Installed Lua75.5 also
+includes these preservation controls; callable/context/full admission stays separate.
+
+Installed Lua75.5 now guards ordinary CountKeys results on PUC5.5.1 and LuaJIT.
+Its independent free Boolean zero/receiver Boolean null profile stays exact.
+The common-only initial KeyCount exception excludes free Count ownership;
+scalar state, Count permission and loop-index mutation restrictions remain intact,
+with no new interpreter chunk locals. Its25-case/four-route regression and
+selected Count/Length checks pass on each host. Rebuild Lua apps/runtime; actual
+modules/parsed inputs are unchanged. All five ordinary backend implementations
+have focused checks passing; callable75.6 and full admission remain open.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

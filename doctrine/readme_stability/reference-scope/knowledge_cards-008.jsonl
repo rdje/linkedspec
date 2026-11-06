@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4485,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-fixture-selector-context.md","sha256":"4e228b9fb252bf61656d3e34af9f708f15dd6a267e516974046d70f6b237f1fd","type":"member"}
 {"bytes":2850,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-final-codeblock-signature-declaration-gap.md","sha256":"2bfb91febf8defc5d224f876efe66b39488c34de387484de2fa1aa87512d565e","type":"member"}
 {"bytes":8047,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-flow-recursive-source-provenance.md","sha256":"4797bc27ca23765357f0e943974b276fc6891a437e474073eb3bfcd43eb8fe2a","type":"member"}
 {"bytes":2439,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-free-default-result-guards.md","sha256":"3c33607251d991e35135928caa2740df1556aecf5e4ecec5ec56d39bffaf3a1a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3871,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-unwind-actual-state-gap.md","sha256":"b434647511695d2ba198e588720685fc62248a438a0cefdb85fdd24601439329","type":"member"}
 {"bytes":6738,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recursive-observation-admission.md","sha256":"caf9a27fc368b37797c26ae3c72472d193de22ea245fefb93e1e4955f41afb84","type":"member"}
 {"bytes":2926,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-referenced-blind-intermediate-compile-gap.md","sha256":"b9b35bb3ab51ac6655a157c16bea06f835bcfe2899aa31bbd31fec7731a3a164","type":"member"}
-{"bytes":1616,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-referenced-intermediate-compatibility.md","sha256":"52a77cba0463f2861c42ff31951ede761aa6d25b76c7efcbdfe23b7ba13d53ac","type":"member"}

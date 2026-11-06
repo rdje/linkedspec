@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — Guard installed Lua CountKeys while preserving Count and scalar boundaries
+
+Canonical CountKeys role precedes Count permission; a separate first-step common-only exception excludes free Count ownership and preserves scalar_result/Count/index mutation rights with no new interpreter chunk locals. Both installed hosts25 groups13PASS12RED become25PASS/four routes; thirteen healthy observations and25 emitted/parsed bodies exact. New126/Count92/Length122 plus Count-length programs/loadfile checks pass per host with empty final stderr; seven recovery corruptions reject. Actual first inputs/full channels retained. Rebuild Lua apps/runtime; book/Knowledge/task/live align and old Length recovery is source-bound. Callable75.6 next; full custody/context/isolation/declared5.4/admission separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — Lock down peer Count-owned source preservation
 
 Added three authored Count-to-CountKeys/source-zero programs to the Rust/Dart normals. Both existing source-permission implementations are healthy: new3 pass/four routes independently and both runtime files stay byte-identical. Each maintained25 normal passes/native-restored-plan; scoped format/Dart fatal analysis/five recovery corruptions pass. Actual first inputs/modules/full channels retained; emitted execution covers new3 only. Book/Knowledge/task/live align; installed Lua75.5 next, full custody/context/isolation/callable/admission separate.

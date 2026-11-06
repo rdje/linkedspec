@@ -68,7 +68,8 @@
 {"bytes":12765,"lines":204,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-interpreter-prefix-reading-and-iteration-option-gap.md","sha256":"11d508dac997e5653c4f05cbff0d025756371770a6ee32889ed0e814a79d679b","type":"member"}
 {"bytes":23260,"lines":205,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-invocation-and-callable-consumer-reading.md","sha256":"71c3ec4aa9c7902e811a4bb1b72a269956f841d128168b407886df232e089eae","type":"member"}
 {"bytes":15807,"lines":258,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-json-matching-reading-and-integer-encoding-gap.md","sha256":"5c53696003496300395ad7b04d404bed3ae5123bd247ac7eb0fbb2792e3dacbd","type":"member"}
-{"bytes":2838,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.5","path":"docs/knowledge/lua-length-result-guards.md","sha256":"7e2aec382bf84c13401ec5ae2bfdaaab1f9158438310d16d8a24126c4c066abb","type":"member"}
+{"bytes":3196,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.5","path":"docs/knowledge/lua-key-count-result-guards.md","sha256":"ed3f596a2683620e1d91e396627c24d1b0da4d9c35b0e6bd1825c9c69b25b975","type":"member"}
+{"bytes":3357,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.5","path":"docs/knowledge/lua-length-result-guards.md","sha256":"1327c984b36506e8295f865ba865910808863b4a906d6bfe873f42f25430b4e0","type":"member"}
 {"bytes":2743,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-lexical-result-source-guards.md","sha256":"67bdb1177d8113c01e6f27c933774a21b840792efe1da373310ce5e06a6dbe86","type":"member"}
 {"bytes":3314,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-live-recognition-progress.md","sha256":"d6ce26412d1d44da161b8a6cf918d420ecb9e3f8707c646a09b46ecfffc10c70","type":"member"}
 {"bytes":2416,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-local-match-writer-presence-compatibility.md","sha256":"1a76904e7b4aaf6f20007f9f906dd89ca603918ee8491dcdbc98974ed580d590","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4531,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-admission.md","sha256":"c81df69433dbb4ab504cb25d597c3a1870504cac39e9c289a78614d116a32e6f","type":"member"}
 {"bytes":4625,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-dormant-red.md","sha256":"77a602fd9b317792c8ee1a2d590af736e03608e193b7ae13e451d2b95cac8740","type":"member"}
 {"bytes":4681,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-integration.md","sha256":"abf470a2cecd09f35e06fbe9dc1634b1bc50afe4ea47aa3d477e85094f591187","type":"member"}
-{"bytes":5171,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-private-authority.md","sha256":"4a4985fd088ba4a6bb9dc4122de96150fb6c0f748fcb6323ee62b0403ac4ca93","type":"member"}
