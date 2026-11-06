@@ -1,0 +1,62 @@
+{
+  "boolean_receiver_profile": {
+    "fresh": null,
+    "fresh_error": null,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "count_keys"
+      ]
+    },
+    "native": null,
+    "native_error": null
+  },
+  "malformed_receiver_profile": {
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_error": null,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_error": null
+  },
+  "needed_argument_error": {
+    "fresh": null,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "rule_label": "Value",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "native": null,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "rule_label": "Value",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "type": "runtime_handler"
+    }
+  }
+}

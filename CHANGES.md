@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Complete Perl function-result CountKeys chains
+
+Removed the function-only CountKeys guard bypass while retaining the typed function evaluator. Hash-function counts now compose through numeric/text methods and reject incompatible consumers before operands/later copy/logical/with. Independent terminal Boolean0/ready shows the former composed null/unready was a continuation defect; composed1/ready is now required. Unchanged16 groups7PASS9RED become16PASS/native/fresh; seven healthy exact, direct43/syntax and six recovery corruptions pass. Actual original/qualified/terminal/input/module/handler/raw epochs retained; portable sealing metadata qualified without rerunning product epochs. Book/Knowledge/live/task align. Regenerate emitted Perl. Independent Rust75.6.2 next; full verification/custody/context/isolation deferred.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — Guard installed Lua CountKeys while preserving Count and scalar boundaries
 
 Canonical CountKeys role precedes Count permission; a separate first-step common-only exception excludes free Count ownership and preserves scalar_result/Count/index mutation rights with no new interpreter chunk locals. Both installed hosts25 groups13PASS12RED become25PASS/four routes; thirteen healthy observations and25 emitted/parsed bodies exact. New126/Count92/Length122 plus Count-length programs/loadfile checks pass per host with empty final stderr; seven recovery corruptions reject. Actual first inputs/full channels retained. Rebuild Lua apps/runtime; book/Knowledge/task/live align and old Length recovery is source-bound. Callable75.6 next; full custody/context/isolation/declared5.4/admission separate.

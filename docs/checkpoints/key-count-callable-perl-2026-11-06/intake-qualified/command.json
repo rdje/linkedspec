@@ -1,0 +1,11 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "perl",
+  "-Iperl",
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/observer.pl",
+  "tests/fixtures/key_count_callable_result_cases.json",
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/intake-qualified/modules"
+]

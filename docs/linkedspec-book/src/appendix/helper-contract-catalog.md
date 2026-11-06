@@ -1556,7 +1556,7 @@ admission remain open.
 
 - **Current Perl status (November6)**: Typed-source75.0.1, source-domain75.0.2 and bounded ordinary result guards75.1 are implemented with focused checks. In retained literal/computed initial-source controls, Boolean/Array/missing/Number/text inputs return `0`; valid named Hash counts remain intact. Numeric `4` stays data under localized host controls. Mutating value blocks keep typed errors during execution. Regenerate emitted Perl.
 
-Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Registered callable-result receiver coverage75.6 and full admission remain separate.
+Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Perl callable75.6.1 now uses these guards too; independent peer callable coverage75.6.2-.5 and full admission remain separate.
 
 ```text
 count_keys(false)                     # 0
@@ -1630,7 +1630,47 @@ scalar state, Count permission and loop-index mutation restrictions remain intac
 with no new interpreter chunk locals. Its25-case/four-route regression and
 selected Count/Length checks pass on each host. Rebuild Lua apps/runtime; actual
 modules/parsed inputs are unchanged. All five ordinary backend implementations
-have focused checks passing; callable75.6 and full admission remain open.
+have focused checks passing; Perl callable75.6.1 is checked below, with peer callable coverage and full admission open.
+
+Perl registered-function results now compose through the same CountKeys guards.
+The existing function evaluator still owns argument order, parameter bindings,
+local scope, and required argument errors. A Hash result produces its count once;
+later operands see that Number, even if they mutate the original Hash:
+
+```text
+fn echo_hash(payload){return(payload)}
+Value:: I {
+  meta={"x":1};order="";
+  out=echo_hash({order=cat(order,"S");meta}).count_keys()
+    .add({order=cat(order,"A");meta["y"]=2;3});
+  return([out,count_keys(meta),order])  # [4,2,"SA"]
+}
+```
+
+These additional Perl examples show valid zero and rejected consumers:
+
+```text
+fn make_hash(){return({"k":1})}
+fn make_empty(){return({})}
+fn make_bool(){return(false)}
+Value:: I {
+  return([
+    make_hash().count_keys().add(1),                  # 2
+    make_hash().count_keys().cat(" keys").uppercase(), # "1 KEYS"
+    make_empty().count_keys().coalesce(7).add(1),       # 1
+    make_bool().count_keys().add(1),                  # 1: existing initial count is 0
+    make_hash().count_keys().count(),                # null: Number is not an Array
+    make_hash().count_keys().take(1).copy()
+      .with(){return("ran")}                        # null: body skipped
+  ])
+}
+```
+
+The earlier Boolean-function null/unready result was an incomplete continuation,
+not an initial-source policy: its terminal count already returned0. The separate
+terminal and composed controls now both pass. Malformed receiver arity still
+rejects before source/operand/body effects. The16-case focused native/emitted
+regression passes; peer callable profiles remain independently assessed.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

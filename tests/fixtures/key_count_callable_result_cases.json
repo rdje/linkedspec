@@ -1,0 +1,163 @@
+[
+  {
+    "id": "compatible_counts",
+    "source": "fn make_hash(){return({\"k\":1})} Value:: I {return([make_hash().count_keys(),make_hash().count_keys().add(1),count_keys(make_hash()).add(1),make_hash().count_keys().cat(\" keys\").uppercase()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      2,
+      2,
+      "1 KEYS"
+    ]
+  },
+  {
+    "id": "wrong_array",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys().take({order=cat(order,\"A\");1});return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "wrong_hash",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "later_with",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "copy_guard",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys().take({order=cat(order,\"A\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "logical_guard",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys().take({order=cat(order,\"A\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "count_consumers",
+    "source": "fn make_hash(){return({\"k\":1})} Value:: I {order=\"\";a=make_hash().count_keys().count();b=make_hash().count_keys().count_keys();c=make_hash().count_keys().count().with(){order=cat(order,\"W\");return(\"ran\")};return([a,b,c,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "valid_zero",
+    "source": "fn make_empty(){return({})} Value:: I {order=\"\";a=make_empty().count_keys().coalesce(7).add(1);b=make_empty().count_keys().with(){return(\"recovered\")};c=make_empty().count_keys().copy();d=make_empty().count_keys().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};return([a,b,c,d,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      "recovered",
+      0,
+      false,
+      "DW"
+    ]
+  },
+  {
+    "id": "explicit_bridges",
+    "source": "fn make_hash(){return({\"k\":1})} Value:: I {return([make_hash().count_keys().cat(\",tail\").split(\",\").last().uppercase(),make_hash().count_keys().with(){return([1,2])}.count(),make_hash().count_keys().with(){return({\"x\":1})}.count_keys()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "TAIL",
+      2,
+      1
+    ]
+  },
+  {
+    "id": "source_once_snapshot",
+    "source": "fn echo_hash(payload){return(payload)} Value:: I {meta={\"x\":1};order=\"\";out=echo_hash({order=cat(order,\"S\");meta}).count_keys().add({order=cat(order,\"A\");meta[\"y\"]=2;3});return([out,count_keys(meta),order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      4,
+      2,
+      "SA"
+    ]
+  },
+  {
+    "id": "needed_argument_error",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {return(make_hash({items=\"text\";push(items,\"x\")}).count_keys().coalesce(\"masked\"))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "boolean_receiver_profile",
+    "source": "fn make_bool(){return(false)} Value:: I {return(make_bool().count_keys().add(1))}",
+    "input": "x",
+    "rule": "Value",
+    "expected": 1
+  },
+  {
+    "id": "malformed_receiver_profile",
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "function_controls",
+    "source": "fn make_bool(){return(false)}\nfn make_text(){return(\"x\")}\nValue:: I {return([make_bool(),count_keys(make_bool()).add(1),make_text().uppercase()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      false,
+      1,
+      "X"
+    ]
+  },
+  {
+    "id": "parameter_source_control",
+    "source": "fn echo_hash(payload){return(payload)} Value:: I {return([echo_hash({\"x\":1}).count_keys(),count_keys(echo_hash({\"x\":1})),echo_hash({\"x\":1})])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      1,
+      {
+        "x": 1
+      }
+    ]
+  },
+  {
+    "id": "boolean_terminal_profile",
+    "source": "fn make_bool(){return(false)} Value:: I {return(make_bool().count_keys())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": 0
+  }
+]

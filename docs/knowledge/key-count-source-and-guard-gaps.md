@@ -11,7 +11,7 @@ answers:
   - "may an aborted key-count domain profile be frozen"
   - "why does count_keys(4) count host main::4"
 date: 2026-11-06
-status: ordinary Perl/Rust/Dart/Julia/installed Lua guards focused-checked; callable75.6 next
+status: ordinary five-backend and Perl callable75.6.1 focused-checked; independent peer callable75.6.2-.5 next
 tags: [perl, count_keys, guards, source, domain, copy, logical, host]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict at that assessment boundary."
 reverify:
@@ -88,3 +88,8 @@ Count exclusions, and Julia/Lua explicitly preserve free Count ownership before
 KeyCount initial permission. Original assessment defects remain historical.
 Callable75.6 is the next owned context lane before parent/full admission; native/
 transitive custody4.2/isolation/discovery4.1/legacy SESSION17/full23.4 stay separate.
+
+Perl callable continuations now have their own independently qualified correction
+in [[perl-callable-key-count-result-guards]]; the initial Boolean-function exclusion
+was a continuation defect, distinguished by actual terminal0/ready. Peer callable
+profiles remain separate rather than inferred from Perl.

@@ -1,0 +1,12 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "prove",
+  "-v",
+  "-Iperl",
+  "t/key_count_result_guard_composition.t",
+  "t/value_copy_function.t",
+  "t/count_length_receiver_contract.t"
+]

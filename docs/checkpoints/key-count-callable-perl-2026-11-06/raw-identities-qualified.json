@@ -1,0 +1,110 @@
+{
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stderr-0.log": {
+    "bytes": 8035,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stderr-0.log.gz",
+    "capsule_sha256": "24defa70640c3875776886c10893152cfa050244cf7c33056551634e9bb53e69",
+    "sha256": "06fffed7a97ccd944dbb5513739600a370c52ee9818574a45be8d9acbfbaa04a"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stderr-1.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stderr-1.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stdout-0.log": {
+    "bytes": 209340,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stdout-0.log.gz",
+    "capsule_sha256": "ff959a197fa0b04a511ccfc48c7fb83ab797b8732430f1f9a8c3a467bd29a8b1",
+    "sha256": "85e7be75bbacdd52a597b8a7691558b611f32d7dc62b83c9c2633b9dfe608f28"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stdout-1.log": {
+    "bytes": 412925,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/after/stdout-1.log.gz",
+    "capsule_sha256": "f2fbf5bbb0accb605b549a8632b4153263f81eae78a036e7d71cbe5152d26561",
+    "sha256": "de466a9cee67afe58e205979c542df9a1fae3ea06ae792c49a618f49e8fdbd98"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stderr-0.log": {
+    "bytes": 15486,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stderr-0.log.gz",
+    "capsule_sha256": "2c19c1cb9111b38ea76f60b2371c2b8a6ec50639ac62f2ecb873a0e6994ba307",
+    "sha256": "1889e7dcb54d586a814e494327230f30281353109f16053123038449afdc7fd1"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stderr-1.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stderr-1.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stdout-0.log": {
+    "bytes": 196139,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stdout-0.log.gz",
+    "capsule_sha256": "82d873da32c85863ba1e9e07982776f52af189830eb1ebb9f9528cd1a8db2c66",
+    "sha256": "b7ce3fabda5bda72c314811db515c3df543effc281acff84f788403d037dc6f8"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stdout-1.log": {
+    "bytes": 385953,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/before/stdout-1.log.gz",
+    "capsule_sha256": "5e0dfaf694cd339ae6dc9f5a5c152e51ff43e8da93f92e2e3a7b8aeb759c3d2c",
+    "sha256": "9523784ae2f0e67df72696f11d440c406f52cf9c718c72f94d5ec1064dd06697"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/final/direct-stderr.log": {
+    "bytes": 13623,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/final/direct-stderr.log.gz",
+    "capsule_sha256": "a2c18908d7512bd2025fa1c2edbab478bf366cb885184b454a9659a54b0db70d",
+    "sha256": "8bb510a185d394749c5d102891725d823be7070a0dd9f1c89f3a728b9a6895ea"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/final/direct-stdout.log": {
+    "bytes": 24539,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/final/direct-stdout.log.gz",
+    "capsule_sha256": "b22453e4ba3db6e08481d88cd8879f89a092d284c8c643573084deadec88a5ab",
+    "sha256": "3d1f3123bc7f2bdaf58a13a19bc149623aed154df78db93d0624867229a7aaff"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/final/owner-syntax-stderr.log": {
+    "bytes": 53,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/final/owner-syntax-stderr.log.gz",
+    "capsule_sha256": "6522391eca8d87605a0914b04ff09d388a536cc3824532d93f5f7c7f8661776b",
+    "sha256": "29ae13d9de9d9912d0325b20c2d2ab6c9e344ce2f5f467c08dfc70434048f14e"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/final/owner-syntax-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/final/owner-syntax-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/intake-qualified/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/intake-qualified/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/intake-qualified/stdout.log": {
+    "bytes": 365529,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/intake-qualified/stdout.log.gz",
+    "capsule_sha256": "322a359aa9df507be83d82ffc5421a460668a3b23c6bd1bb182af60355e214a4",
+    "sha256": "713a6d3e09eea1b5fb41b78cb0f3e2d08f273d681b062a78d9c08a7b3f6159ce"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/intake/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/intake/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/intake/stdout.log": {
+    "bytes": 323233,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/intake/stdout.log.gz",
+    "capsule_sha256": "806bcc1a1cf8da74ff85b98da529832bfe390d2760cd2bffd585dbc257dcad42",
+    "sha256": "62aabff93a388ecddfd140d027e4f195b0ba6c42ccc016617f88f552d36ead83"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/terminal-profile/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/terminal-profile/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/terminal-profile/stdout.log": {
+    "bytes": 20744,
+    "capsule": "docs/checkpoints/key-count-callable-perl-2026-11-06/terminal-profile/stdout.log.gz",
+    "capsule_sha256": "7385adf4f7c5ee63db44c66433670e13ee5a03cf82401e406c8ee460730adcd4",
+    "sha256": "c662ae166b62081446c28785b849702056159cd5163caecc8270bbd46b59bf06"
+  }
+}

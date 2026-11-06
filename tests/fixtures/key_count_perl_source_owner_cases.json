@@ -26,13 +26,11 @@
     "id": "function_initial_source",
     "body": "return(make().count_keys().add(1))",
     "source": "fn make(){return(false)} Value:: I {return(make().count_keys().add(1))}",
-    "expected": null,
+    "expected": 1,
     "input": "x",
     "rule": "Value",
-    "expected_unresolved": [
-      "count_keys"
-    ],
-    "domain_note": "Preserve current incompatible function-result null/unready profile. The original expected1 hypothesis was excluded after independent function-value/free-CountKeys/compatible Hash/text controls; no function-context expansion."
+    "expected_unresolved": [],
+    "domain_note": "Callable75.6.1 independently confirms terminal Boolean-function CountKeys0/ready; numeric composition now1/ready. Earlier null/unready was an incomplete continuation, retained in the historical75.1 proof."
   },
   {
     "id": "already_owned_sources",

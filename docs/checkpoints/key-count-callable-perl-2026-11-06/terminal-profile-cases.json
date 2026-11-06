@@ -1,0 +1,9 @@
+[
+  {
+    "id": "boolean_terminal_profile",
+    "source": "fn make_bool(){return(false)} Value:: I {return(make_bool().count_keys())}",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  }
+]

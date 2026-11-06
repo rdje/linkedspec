@@ -1,0 +1,16 @@
+{
+  "after_pass": 16,
+  "authored_groups": 16,
+  "before_pass": 7,
+  "before_red": 9,
+  "healthy_preserved": 7,
+  "recovery_corruptions": [
+    "compatible numeric regression",
+    "skipped source or later effects",
+    "needed source error masked",
+    "Boolean diagnostic wrongly retained",
+    "producer input drift",
+    "actual module drift"
+  ],
+  "scope": "historical exact epochs; current-code freshness uses maintained normal, peers/full admission separate"
+}

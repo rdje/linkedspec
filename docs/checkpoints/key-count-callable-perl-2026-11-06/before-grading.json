@@ -1,0 +1,18 @@
+{
+  "boolean_receiver_profile": "RED",
+  "boolean_terminal_profile": "PASS",
+  "compatible_counts": "RED",
+  "copy_guard": "RED",
+  "count_consumers": "RED",
+  "explicit_bridges": "PASS",
+  "function_controls": "PASS",
+  "later_with": "RED",
+  "logical_guard": "RED",
+  "malformed_receiver_profile": "PASS",
+  "needed_argument_error": "PASS",
+  "parameter_source_control": "PASS",
+  "source_once_snapshot": "RED",
+  "valid_zero": "PASS",
+  "wrong_array": "RED",
+  "wrong_hash": "RED"
+}

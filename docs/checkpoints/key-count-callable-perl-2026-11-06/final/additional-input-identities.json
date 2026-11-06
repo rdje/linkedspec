@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/key-count-callable-perl-2026-11-06/capture_final.py": {
+    "bytes": 1945,
+    "mode": 420,
+    "sha256": "5f347c9fe97473d9962747e2c6bd88964427b011eb42445744bbde3e20c81512"
+  },
+  "t/count_length_receiver_contract.t": {
+    "bytes": 2853,
+    "mode": 420,
+    "sha256": "61ede485aa1bd44e9b38bf0a4de685dda5fb111b990c30102ce02d9b064f8d41"
+  },
+  "t/key_count_result_guard_composition.t": {
+    "bytes": 8833,
+    "mode": 420,
+    "sha256": "0f05ccdc5f030f29c8a002ec212694d926229b18dcd6f6c9d5179f057ad1d9c8"
+  },
+  "t/value_copy_function.t": {
+    "bytes": 5225,
+    "mode": 420,
+    "sha256": "51311b59dab115ac1e4b9b8f2e0a9fead9535dd8b4a57166a26b2354231595f0"
+  }
+}

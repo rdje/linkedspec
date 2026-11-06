@@ -1,0 +1,22 @@
+diff --git a/perl/LinkedSpec/ActionIR/MethodLowering.pm b/perl/LinkedSpec/ActionIR/MethodLowering.pm
+index 705a3227f25eb8fdcaa1a39e4d1d61482adce433..d15962481cf4f8f71cbe8799b245633f38910206 100644
+--- a/perl/LinkedSpec/ActionIR/MethodLowering.pm
++++ b/perl/LinkedSpec/ActionIR/MethodLowering.pm
+@@ -5601,14 +5601,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
+    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+-  # Registered-function receivers retain their current compatible-value owner.
+-  # Canonical free CountKeys and ordinary zero-extra prefixes retain result kinds.
++  # Canonical free CountKeys and zero-extra prefixes retain result kinds,
++  # including registered functions lowered by their existing typed value owner.
+   my $ordinary_key_count_result_chain = (_ordinary_free_key_count_result_source($receiver)
+     || (($calls->[0]{method} // '') eq 'count_keys'
+      && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'count_keys'
+-     && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}}
+-     && !(($receiver->{kind} // '') eq 'call'
+-       && defined(_user_function_definition_for_name($deps, $receiver->{name})))))
++     && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}}))
+    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);

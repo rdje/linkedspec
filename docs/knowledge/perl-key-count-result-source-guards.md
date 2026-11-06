@@ -9,7 +9,7 @@ answers:
   - "can CountKeys Number2 still read main Hash2"
   - "which task owns callable-result CountKeys receiver coverage"
 date: 2026-11-06
-status: bounded Perl75.1 implemented with focused checks; peers/callable75.6/admission pending
+status: historical bounded Perl75.1 proof; callable correction75.6.1 and ordinary peers focused-checked, peer callable/admission pending
 tags: [perl, count_keys, guards, source, zero, copy, logical, with, host]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.1; docs/checkpoints/key-count-guard-perl-2026-11-06/REVIEW.md retains actual intake/functions/original/corrected/final epochs. Corrected unchanged26 groups13PASS13RED to26PASS (25 ready/one excluded), thirteen healthy exact; six localized public/emitted seeds null/host unchanged; final71/syntax/seven recovery corruptions pass."
 reverify:
@@ -39,11 +39,14 @@ Six exact public/emitted Number2 seed rows now reject without host reads/mutatio
 Final71 groups/syntax and seven recovery corruptions pass, with retained actual
 first inputs/modules/carrier/full raw channels. No native seeded/general isolation.
 
-Registered-function receiver paths retain their current owner. Four ready controls
+At the historical75.1 boundary registered-function receiver paths retained their owner. Four ready controls
 confirm direct Boolean function values, free CountKeys(function()), compatible
-Hash-function counts and text-function uppercase. An incompatible Boolean function
-CountKeys receiver remains null/unready with unresolved count_keys; it is one
-excluded profile, not an admitted initial-zero oracle. P1 callable75.6 assesses
-remaining callable continuation coverage before parent/admission closure.
+Hash-function counts and text-function uppercase. The Boolean-function
+CountKeys continuation was then null/unready with unresolved count_keys. Independent
+terminal0/ready evidence in [[perl-callable-key-count-result-guards]] establishes
+that this was an incomplete continuation;75.6.1 repairs it to1/ready and checks
+compatible Hash-result chains. The original13PASS13RED/26PASS proof remains historical.
+Current26 normal expects the repaired function composition; peer callable75.6.2-.5
+remain before parent/admission closure.
 Full native/transitive custody/context/discovery/isolation/legacy SESSION17/
 declared5.4/full23.4 remain separate. Historical recovery is not latest-code proof.

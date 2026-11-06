@@ -3913,15 +3913,13 @@ pass. Actual first inputs, original/calibrated outputs, modules/carrier, full ra
 channels and readonly recovery live under
 `docs/checkpoints/key-count-guard-perl-2026-11-06/`. Regenerate emitted Perl.
 
-Registered-function receiver prefixes stay on their current owner. Four controls
-confirm ordinary function values, free CountKeys(function()), compatible Hash
-function counts and text function uppercase. The incompatible Boolean-function
-CountKeys receiver keeps its null/unready/count_keys profile; it is excluded from
-this ordinary guard admission. Concrete P1 callable75.6 owns the remaining
-callable continuation coverage before parent/full admission. Independent Rust,
-Dart, Julia and installed Lua repairs are recorded below; callable75.6 remains next. Full source/context/native-
-transitive custody, general isolation, legacy bare/absent bindings, discovery,
-declared Lua5.4 and full23.4 remain separate.
+At this historical75.1 boundary, registered-function prefixes retained their old
+route and one Boolean-function continuation stayed null/unready/count_keys.
+Callable75.6.1 below independently resolves that observation as a continuation
+defect: the terminal Boolean-function count already returns0/ready. Ordinary
+peer repairs below remain focused-checked; independent peer callable75.6.2-.5
+and full source/context/native-transitive custody, general isolation, legacy
+bare/absent bindings, discovery, declared Lua5.4 and full23.4 remain separate.
 
 
 ## Ordinary Rust key-count guards
@@ -3948,7 +3946,7 @@ channels live under `docs/checkpoints/key-count-guard-rust-2026-11-06/`.
 
 The older Length reader remains source-bound to its accepted historical commit;
 current Length checks are separate. Dart75.3 and Julia75.4 are focused-checked
-below; installed Lua75.5 is also focused-checked and callable75.6 remains pending. Full source/context/native-
+below; installed Lua75.5 is also focused-checked and independent peer callable75.6.2-.5 remain pending. Full source/context/native-
 transitive custody, general isolation, canonical discovery and full23.4 admission
 remain separate; no host-seeding or declared Lua5.4 claim follows.
 
@@ -3978,7 +3976,7 @@ direct inputs and complete raw channels are retained under
 
 The original Length reader remains bound to its accepted historical source;
 current Length tests remain separate. Julia75.4 and installed Lua75.5 are focused-
-checked below, with loop-index rights preserved; callable75.6 remains next. Full source/context/native-transitive
+checked below, with loop-index rights preserved; independent peer callable75.6.2-.5 remain next. Full source/context/native-transitive
 custody, general isolation, canonical discovery/callable75.6 and full23.4 admission
 remain separate; no Boolean policy normalization or Dart host-seeding is claimed.
 
@@ -4011,7 +4009,7 @@ six original and four additional effective corruption controls.
 The original Length reader remains bound to its acceptedfbe625974 source;
 current Length testing remains separate. Fresh Modules share process/runtime.
 Rust/Dart Count ownership75.7 and installed Lua75.5 are focused-checked below;
-callable75.6 is next before admission.
+independent peer callable75.6.2-.5 are next before admission.
 Full source/context/native-transitive custody, general isolation, canonical
 discovery/declared Lua5.4 and full23.4 remain separate; no host-seeding claim.
 
@@ -4043,7 +4041,7 @@ source/manifest/lock/config/writer inputs and complete raw channels recover unde
 reject. Emitted execution in this review covers new3. Full native/transitive
 custody, general isolation/source-context discovery/callable/full23.4 remain
 separate. Installed Lua75.5 below retains scalar/Count/index mutation rights and
-the explicit Count-owned-source controls; callable75.6 is next, with no declared5.4 inference.
+the explicit Count-owned-source controls; independent peer callable75.6.2-.5 are next, with no declared5.4 inference.
 
 
 ## Ordinary installed Lua key-count guards
@@ -4077,5 +4075,27 @@ seven effective corruption controls reject. The older Length reader remains boun
 to acceptedf5e2350ba, with original proof untouched and current tests separate.
 Fresh modules share process/runtime; full native/transitive/toolchain custody,
 general isolation/source-context discovery/callable/full23.4 stay separate.
-Ordinary guards are focused-checked across five backends; callable75.6 is next
+Ordinary guards are focused-checked across five backends; independent peer callable75.6.2-.5 are next
 before parent/full admission, preserving named exclusions until assessed.
+
+
+## Perl function-result CountKeys composition
+
+Callable75.6.1 removes the registered-function-only bypass from the existing
+CountKeys result guards. Function calls still use their established typed value
+owner; parser, signatures, function scoping and copy depth do not change.
+Compatible Hash-function counts now feed numeric/text methods, reject wrong
+Array/Hash/Count/CountKeys consumers before their operands, and retain rejection
+through copy/logical/immediate with. Source evaluation occurs once before count
+snapshot and later operands; valid zero and explicit bridges remain valid.
+
+The separate Boolean terminal probe returns0/ready, distinguishing an earlier
+continuation defect from a source-domain exclusion. Its numeric continuation now
+returns1/ready. Independently frozen malformed-arity and needed native/generated
+binding-error profiles remain exact. The unchanged16-case normal moves7PASS9RED
+to16PASS on native/freshly emitted Perl; all seven healthy semantic observations
+stay exact. The original inline-two-definition setup failure, corrected15 intake,
+terminal discriminator, exact normal epochs and source/module/handler inputs are
+retained under `docs/checkpoints/key-count-callable-perl-2026-11-06/`.
+Regenerate emitted Perl. Independent Rust75.6.2 is next; peers/full admission,
+transitive custody and general isolation stay with their existing owners.
