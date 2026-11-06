@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2910,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-runtime-ascii-rule-guard.md","sha256":"a8a882e66d222deedfbc1ea7a11c0ffaf28cc04e43f789b352c09cb53a549451","type":"member"}
 {"bytes":1817,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-token-lexical-order-drift.md","sha256":"792b07faf5cdd4d3df1cbec6ad45ea915170bbd0fd733912f8911d3561cb1a3e","type":"member"}
 {"bytes":5663,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-dormant-red.md","sha256":"366c0e730beb39f24e52a9998385d9d8f7cec1e369ff09de6d42dcd093c14565","type":"member"}
 {"bytes":10115,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-integration.md","sha256":"5267b896a1921e9f6b338857b6bfb84fb9823df5a5fbfe5e5de625bf27016ed1","type":"member"}
@@ -56,7 +57,7 @@
 {"bytes":3366,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-validation-diagnostic-source-drift.md","sha256":"2312b25002947fb7448e15664297ec92b37d272b44f1cbf1d67f60262fa6de18","type":"member"}
 {"bytes":2763,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-variadic-user-functions.md","sha256":"0fc45642937bb9596b2d9a54cec7a3dd4ef41a005dfda486096a411726e38341","type":"member"}
 {"bytes":6058,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-with-callback-identity-and-snapshot.md","sha256":"ee7e410e3317a6f037aa177640375fd60ffcb877cdfa8561a003f4d35eb6a19f","type":"member"}
-{"bytes":8826,"lines":163,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md","sha256":"44048a301acaf7a71f28c6a0a0ed8c677d2c94842a9b626b028f5286dac56213","type":"member"}
+{"bytes":9436,"lines":173,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md","sha256":"12dcd95e923d2ccc2cd8accfd94f6f641c89df578c42c82a63f890cb45a65f52","type":"member"}
 {"bytes":1469,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-all-target-actionir-ready-invariant.md","sha256":"6369b1eb3f16a226c925727f769ede8e36c2a2296593ba5b1384d7b967f4718a","type":"member"}
 {"bytes":6252,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-array-assignment-description-drift.md","sha256":"051ce38c046a2053b7b71fba410bd4b38bd0dbc9f16ffae9b07a2d5fc54808d4","type":"member"}
 {"bytes":3611,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-behavior-calibration-source-stages.md","sha256":"161415a4dcb2380139b6296023732f9b403244ffd959c3cc70242f41503b5363","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8075,"lines":127,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/regex-substitution-callback-and-flag-discrepancies.md","sha256":"b120e475c964351dc166598a5a9f0f6129e26b7bc7d938044c30e0d74adf26c6","type":"member"}
 {"bytes":3837,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repeated-and-falsey-group-acceptance.md","sha256":"bc965e157960453b887b2bc533b4baa0053156b9e2c2552fb8aca8d6b15738dd","type":"member"}
 {"bytes":4821,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/replacement-repair-engineering-history-capacity.md","sha256":"150150147f888200b5434b758e675aca17936831df77c930882436128cbd081b","type":"member"}
-{"bytes":49577,"lines":411,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.13","path":"docs/knowledge/repo-generated-artifact-cleanup-boundary.md","sha256":"fa0a978c47bd1f2bb093a3e5a2cc039f9776ff317abc8793a544c62b9db79966","type":"member"}

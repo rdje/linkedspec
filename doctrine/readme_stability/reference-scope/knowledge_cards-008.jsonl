@@ -23,6 +23,7 @@
 {"bytes":3547,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-handler-error-provenance-target.md","sha256":"2b20bbbe3bf0ad0e7bcf080615f61ff70c885495d3e2de450b002c7157c7084f","type":"member"}
 {"bytes":4453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-constructor-nested-values.md","sha256":"b79a3d50a19aef95ce5eb5bfe69329e610b23eaa569a13c8bcfcdc71a6b4864f","type":"member"}
 {"bytes":4488,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-hash-tree-traversal-callback-frame.md","sha256":"4cf5e96a02aa2474e07667adfa8a80e2b55741b4dd74312aa475a3e2ad26a5a4","type":"member"}
+{"bytes":3668,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/perl-hash-view-initial-source-ownership.md","sha256":"14fe2fc923debf4386734fd014ba5cf2b0cb9344f4b226ee75fefff3c588f971","type":"member"}
 {"bytes":3365,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-helper-scan-occurrence-provenance.md","sha256":"55bc426a73c268350d39cc45a62b828becb6b214529428ec975f9d8c4a698006","type":"member"}
 {"bytes":4214,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-helper-source-provenance-channel.md","sha256":"4c32b77f319f2106899bc00694e32ed7e1c1603a0cfd319092f727b9f72d353d","type":"member"}
 {"bytes":3978,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-identical-dependency-regex-index-aliasing.md","sha256":"9a9f57de17bd0486cad8a55e1bf12067bdc313d5dbc264be46e7d014d704ee3a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3127,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-commit-boolean-kind-drift.md","sha256":"6b81991c66eaca18b08f150d928651db3c6ccb918b4e7d64b989546b7cd178f2","type":"member"}
 {"bytes":4622,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-compatibility-observation-gap.md","sha256":"aa5e8382aaa5254d38d8cca045b24f0d1486f5fbe11561ad47187017694fd0d8","type":"member"}
 {"bytes":5880,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-invalidated-token-restoration.md","sha256":"9ce8631df3a1e1febeb6fbe804aad2fcbb838064b54442b5621350f05be1015c","type":"member"}
-{"bytes":2910,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-runtime-ascii-rule-guard.md","sha256":"a8a882e66d222deedfbc1ea7a11c0ffaf28cc04e43f789b352c09cb53a549451","type":"member"}

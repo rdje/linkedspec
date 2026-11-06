@@ -4315,9 +4315,9 @@ docs/checkpoints/hash-view-result-guard-perl-2026-11-06/REVIEW.md. This is focus
 Perl proof. New standalone normal `t/hash_view_result_guard_composition.t` needs
 canonical registration23.4.1; full native/cache/transitive custody, process isolation,
 source/callable context closure, independent peers and full23.4 admission remain
-separate. The independent Rust76.2 outcome follows below. P1 follow-up76.6 compares
-the earlier Perl guard change's initial non-Hash receiver policies with its original
-activation; no Perl product regression is inferred from the current coverage gap.
+separate. Independent Rust76.2 and Perl follow-up76.6 outcomes follow below. The
+later Perl comparison identifies and corrects initial-input regressions that this
+first fifteen-source result-guard proof did not cover.
 
 ## Rust ordinary Hash-view result guards
 
@@ -4352,6 +4352,46 @@ inputs/modules and complete raw channels survive under
 docs/checkpoints/hash-view-result-guard-rust-2026-11-06/REVIEW.md. Earlier grammar
 omissions and full native/cache/transitive/toolchain custody remain4.2/SESSION5-owned.
 New normal registration23.4.1, isolation, source/registered-function contexts,
-independent peers and full23.4 admission remain separate. P1 Perl76.6 closes its
-missing historical/current initial-receiver comparison before Dart76.3; Rust
-observations do not establish a Perl source policy or regression.
+independent peers and full23.4 admission remain separate. Independent Perl76.6
+closes its initial-receiver gap below using actual Perl evidence; Rust observations
+do not establish its policy. Dart76.3 follows with its own source fences.
+
+## Perl first-view policy restoration and numeric source boundary
+
+Perl76.6 corrects eight regressions introduced by76.1's result-guard admission.
+Same-path original/current owner controls, with the same surrounding own SDK,
+show initial Number/null views changed[] to null, initial Array errors were
+suppressed, and two null-source with bodies stopped running. Five valid Hash/
+produced Count/CountKeys/Length controls remain correct. The original input-policy
+preservation statement lacked these distinguishing receiver controls.
+
+Keep a terminal first view on its original producer. For a longer chain, lower
+that first producer once, then guard the resulting Array and later links. Prior
+produced/selected/copy/size/logical owners retain their guards. Thus
+`undef.sorted_keys().with(){return(value.count())}` again returns0 with its body
+run; `[1].sorted_values()` keeps its original source error. Wrong Hash consumers
+of a valid view still skip operands, copies, logical links and later bodies.
+
+The original numeric shortcut also exposed a blocking host read. Literal receiver,
+free and computed numeric sorted_keys sources select keys from main::3 under the
+measured seeded state; current free/computed forms still did so before repair.
+Exclude Number ASTs from the named-Hash shortcut and require a reference before
+computed dereference. `sorted_keys(3)`, `3.sorted_keys()` and
+`sorted_keys(length("abc"))` now keep[] across localized empty/outer/main states.
+Actual host values remain unchanged; named Hash keys remain[a,b]. References keep
+their old domain/error behavior. This closes those exact numeric probes; broader
+bare/absent/other-helper isolation remains SESSION17-owned.
+
+The unchanged17 normal has11 failing groups before and17PASS after; direct view15,
+scalar-isolation15 and copy12 make four files59 passing top-level tests. All13
+original semantic observations are restored, with only generated eval serials
+normalized;12 healthy pre-change observations and25 actual final/direct module+
+handler pairs remain exact. Eight readonly recovery corruptions reject. Exact
+source/grammar/SDK/fixture inputs, module/handler bodies and full channels survive
+at docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/REVIEW.md.
+
+Regenerate affected emitted Perl, including modules emitted with76.1. The schema
+and generated format stay unchanged. Full native/cache/transitive custody, source/
+registered-function contexts, general isolation, normal registration23.4.1 and
+full23.4 admission remain separate. Independent Dart76.3 must establish its own
+initial-source and error/arity profiles before any runtime repair.

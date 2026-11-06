@@ -1,0 +1,93 @@
+[
+  {
+    "id": "sorted_keys_number",
+    "body": "return(3.sorted_keys())",
+    "source": "Value:: I {return(3.sorted_keys())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_keys_null",
+    "body": "return(undef.sorted_keys())",
+    "source": "Value:: I {return(undef.sorted_keys())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_keys_array",
+    "body": "return([1].sorted_keys())",
+    "source": "Value:: I {return([1].sorted_keys())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_keys_null_with",
+    "body": "order=\"\";out=undef.sorted_keys().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.sorted_keys().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_keys_hash_with",
+    "body": "order=\"\";out={\"b\":2,\"a\":1}.sorted_keys().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"b\":2,\"a\":1}.sorted_keys().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_values_number",
+    "body": "return(3.sorted_values())",
+    "source": "Value:: I {return(3.sorted_values())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_values_null",
+    "body": "return(undef.sorted_values())",
+    "source": "Value:: I {return(undef.sorted_values())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_values_array",
+    "body": "return([1].sorted_values())",
+    "source": "Value:: I {return([1].sorted_values())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_values_null_with",
+    "body": "order=\"\";out=undef.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "sorted_values_hash_with",
+    "body": "order=\"\";out={\"b\":2,\"a\":1}.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"b\":2,\"a\":1}.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "produced_count",
+    "body": "return(count([1]).sorted_values())",
+    "source": "Value:: I {return(count([1]).sorted_values())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "produced_key_count",
+    "body": "return(count_keys({\"a\":1}).sorted_keys())",
+    "source": "Value:: I {return(count_keys({\"a\":1}).sorted_keys())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "produced_length",
+    "body": "return(\"abc\".length().sorted_values())",
+    "source": "Value:: I {return(\"abc\".length().sorted_values())}\n",
+    "rule": "Value",
+    "input": "x"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "receiver_number",
+    "body": "return(3.sorted_keys())",
+    "source": "Value:: I {return(3.sorted_keys())}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "free_number",
+    "body": "return(sorted_keys(3))",
+    "source": "Value:: I {return(sorted_keys(3))}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "computed_number",
+    "body": "return(sorted_keys(length(\"abc\")))",
+    "source": "Value:: I {return(sorted_keys(length(\"abc\")))}\n",
+    "rule": "Value",
+    "input": "x"
+  },
+  {
+    "id": "valid_named_hash",
+    "body": "set_key(meta,\"b\",2);set_key(meta,\"a\",1);return(sorted_keys(meta))",
+    "source": "Value:: I {set_key(meta,\"b\",2);set_key(meta,\"a\",1);return(sorted_keys(meta))}\n",
+    "rule": "Value",
+    "input": "x"
+  }
+]

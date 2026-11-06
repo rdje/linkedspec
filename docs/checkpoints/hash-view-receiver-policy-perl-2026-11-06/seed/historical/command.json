@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/seed_observer.pl",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/seed-owner.pm",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/seed-cases.json",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/seed/historical"
+  ]
+}

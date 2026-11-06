@@ -1,4 +1,5 @@
-{"member_count":26,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":27,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":17360,"lines":111,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-neutral-contract-plan.md","sha256":"a2bc9ffbe05e43d53498b1dbbb940348311f6bebd4ee7605a16da0b4c69bbe9a","type":"member"}
 {"bytes":9163,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-recurring-gate.md","sha256":"9e357910d29595bddbf84bb41312eb4a6042d04c1082bf95d3e74367ec14ded5","type":"member"}
 {"bytes":65285,"lines":316,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-runtime-rollout-plan.md","sha256":"b2cc1cf89663f4bc0bdb491e084fa206b494394b73e8e47544c7f12a4de1dbfa","type":"member"}
 {"bytes":4109,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-wrapper-quoted-name-boundaries.md","sha256":"8da523222572c9d9c5907a475524591af7e03593b1932c1e0b2b4b84b28c668f","type":"member"}

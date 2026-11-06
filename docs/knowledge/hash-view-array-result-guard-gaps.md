@@ -7,12 +7,12 @@ answers:
   - "which task owns ordinary Hash-view result guards"
   - "what sources are frozen for Hash-view76"
 date: 2026-11-06
-status: Perl76.1/Rust76.2 focused-checked; P1 Perl receiver-policy coverage76.6 and independent peers remain
+status: Perl76.1+76.6/Rust76.2 focused-checked; independent Dart/Julia/Lua and full admission remain
 tags: [perl, copy, hash, arrays, guards, with, selection]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.76.1; hash-view-result-guard-perl-2026-11-06/REVIEW.md retains actual shared15=8healthy7RED to15PASS, five independent profiles, four-file67 qualified proof, actual source inverse/restoration and eight recovery controls. Original selection36 remains unchanged."
 reverify:
-  - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/hash_view_result_guard_composition.t t/sorted_values_scalar_isolation.t t/copy_result_guard_composition.t t/constructor_result_composition.t"
-  - "bash tools/run_python_project_data.sh docs/checkpoints/hash-view-result-guard-perl-2026-11-06/review.py"
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -j1 -Iperl t/hash_view_receiver_source_policy.t t/hash_view_result_guard_composition.t t/sorted_values_scalar_isolation.t t/copy_result_guard_composition.t"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/review.py"
 ---
 
 ## Focused Perl76.1 implementation
@@ -35,11 +35,13 @@ Complete declared inputs/modules/full channels and limits are in current REVIEW.
 Registration23.4.1, full custody/isolation, callable/source contexts, peers and23.4
 remain separate.
 
-Rust76.2 now independently implements source-aware result guards; see
-[[rust-hash-view-result-guards]]. Its initial-source fences reveal that earlier
-Perl76.1 coverage lacks initial non-Hash receiver comparisons. P1 follow-up76.6
-owns a bounded historical/current Perl assessment next, before Dart76.3. This is
-a coverage gap; no Perl product regression or Rust-policy equivalence is inferred.
+Rust76.2 independently implements source-aware result guards; see
+[[rust-hash-view-result-guards]]. Its source fences exposed missing Perl76.1
+initial-receiver coverage. Independent Perl76.6 then proves and repairs eight
+own regressions, restoring all13 original policies while preserving result guards;
+[[perl-hash-view-initial-source-ownership]] also closes its bounded numeric-source
+prerequisite. New17/direct59/eight controls pass. No Rust-policy equivalence is
+assumed; independent Dart76.3 is next. Broader source/context admission remains open.
 
 ## Original selection36 before implementation
 

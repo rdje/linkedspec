@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-view76: Perl copy76.0/view76.1 and Rust76.2 guards have focused proof. P1 Perl initial-receiver coverage76.6 follows before independent Dart76.3. Full verification stays deferred until feature coverage.
+PNT Hash-view76: Perl copy76.0/views76.1+76.6 and Rust76.2 have focused proof. Perl76.6 repairs eight initial-source regressions and bounded numeric source reads. Independent Dart76.3 is next; full verification stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.76.2 admits Rust canonical free-one/zero-extra views to both existing guard paths while retaining initial-source permission separately from produced ownership. Shared15=8healthy7RED/four routes; separate own5/receiver2 profiles preserve Rust policies. Unchanged22 normal15healthy7RED to22PASS; four-route22GREEN. All15 healthy observations/actual22 module+serialized bodies exact; direct30/total52/scoped format/eight recovery controls PASS. Actual grammar inputs precede Cargo. Rebuild Rust apps/runtime; full admission remains separate. P1 Perl76.6 closes missing initial-receiver coverage next, without a regression verdict or peer-policy import.
+TYPE-REFERENCE-BOOK.1.2.23.3.76.6 restores all13 original Perl source policies after eight76.1 regressions, while retaining view result guards. Four localized numeric-source programs expose real main::3 reads; Number-AST/ref guards now keep numeric data[] with host values unchanged and valid Hash[a,b]. Original Array errors/null-with0W/prior produced owners survive. New17 normal11RED to17PASS, direct4files59,12 healthy before rows/25 actual final-direct module pairs and eight recovery controls PASS. Regenerate affected emitted Perl; broad SESSION17/native custody/full admission remain separate.
 
 ## Next Action
 
-Activate P1 Perl76.6 from clean Git: bounded historical/current initial Number/null/Array view receivers and empty-with, original684597174 owner versus current Perl. Close the missing comparison and repair only demonstrated drift under Perl's own policies; small direct proof/docs/commit, then Dart76.3. No broad suite.
+Activate Dart76.3 from clean Git. Capture actual shared15 plus independent free/initial Number/null/Array, empty-with, arity/error profiles and actual grammar before SDK build/use with the published explicit source option. Preserve own input policy while guarding produced results; small direct proof/docs/commit before Julia76.4. No peer-policy import or broad suite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.76.6 — Perl original13 restored; numeric seeds isolated;17PASS/direct59/eight controls; Dart76.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.2 — Rust22PASS/four routes, direct30/total52; initial-source policies preserved; P1 Perl coverage76.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.1 — Perl views15PASS/qualified4files67; stale Length oracle reconciled; actual inverse/eight controls; Rust76.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Perl copy12PASS/direct five files92; actual inverse RED/restored GREEN; view76.1 next.
@@ -29,7 +30,6 @@ Activate P1 Perl76.6 from clean Git: bounded historical/current initial Number/n
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — Rust key-count22PASS/final66; ten healthy/modules exact; independent Dart75.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — ordinary CountKeys26PASS/final71; thirteen healthy exact; peers/callable coverage next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.13 — dated artifact retention review; zero removals; P1 domain75.0.2 resumes.
 
 ## History
 

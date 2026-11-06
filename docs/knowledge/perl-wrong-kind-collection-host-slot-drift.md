@@ -161,3 +161,13 @@ TYPE45.11.1 repairs scalar/numeric `sorted_values` symbolic Hash reads; see
 [the precise source/seed/regeneration boundary](docs/knowledge/perl-sorted-values-scalar-host-isolation.md).
 The existing absent/legacy and other-helper findings above remain SESSION17-owned.
 This bounded fix does not close general collection host-slot isolation.
+
+## Bounded numeric sorted_keys repair — November6
+
+TYPE76.6 independently repairs literal/computed numeric sorted_keys reads while
+restoring initial view receiver policy. Actual empty/outer/main::3 native/fresh
+controls distinguish the old read; all measured numeric rows now stay[] with host
+values unchanged, while valid named Hashes stay[a,b] and initial Array errors
+survive. See [[perl-hash-view-initial-source-ownership]] for exact inputs and proof.
+This does not close SESSION17.2's broader bare/absent/other-helper or general
+isolation acceptance; those original observations remain dated evidence.

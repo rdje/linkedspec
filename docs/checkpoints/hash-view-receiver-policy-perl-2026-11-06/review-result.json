@@ -1,0 +1,29 @@
+{
+  "direct_files": 4,
+  "direct_top_level_tests": 59,
+  "final_direct_module_handler_pairs": 25,
+  "final_pass": 17,
+  "healthy_before_observations_exact": 12,
+  "normal_before_failed": 11,
+  "normal_groups": 17,
+  "numeric_seed_sources": 4,
+  "policy_sources": 13,
+  "recovery_corruptions": [
+    "null body suppressed",
+    "Array error masked",
+    "numeric host read",
+    "valid named Hash lost",
+    "produced Count permission revived",
+    "host input mutated",
+    "missing source row",
+    "module drift"
+  ],
+  "restored_regressions": 8,
+  "scope": "Focused own Perl receiver-policy restoration and bounded numeric sorted_keys isolation; historical owner source counterfactuals use same current SDK. Full native/cache/context custody, broad SESSION17 isolation, registration and full23.4 remain separate",
+  "seed_states": [
+    "empty",
+    "outer",
+    "main"
+  ],
+  "unchanged_policy_controls": 5
+}

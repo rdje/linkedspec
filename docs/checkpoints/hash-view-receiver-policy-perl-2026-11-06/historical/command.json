@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/observer.pl",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/owner.pm",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/cases.json",
+    "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/historical"
+  ]
+}

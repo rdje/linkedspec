@@ -1289,11 +1289,20 @@ The backend handoff records focused
 and remaining independent backend work. Ordering and copy depth are retained;
 backend initial-source policies and remaining contexts are listed there.
 
-Rust initial view receivers keep their existing empty-Array fallback:
-`3.sorted_values()`, `undef.sorted_keys()` and `[1].sorted_values()` return[].
-`undef.sorted_values().with(){return(value.count())}` returns0 with its body run.
-Those initial-source permissions are separate from guards on already produced
-results. Rebuild Rust applications against the updated runtime.
+Initial-source permissions are separate from guards on already produced results.
+These focused input examples preserve each backend's existing policy:
+
+| Initial receiver example | Perl | Rust |
+| --- | --- | --- |
+| `3.sorted_values()` or `undef.sorted_keys()` | `[]` | `[]` |
+| `[1].sorted_keys()` or `[1].sorted_values()` | initial source error (`Not a HASH reference`) | `[]` |
+| `undef.sorted_values().with(){return(value.count())}` | `0`; body runs | `0`; body runs |
+
+Perl76.6 restores these initial-input behaviors after the earlier guard change.
+Numeric `sorted_keys` sources also keep[] independently of unrelated numeric host
+Hashes: `sorted_keys(3)`, `3.sorted_keys()` and `sorted_keys(length("abc"))` use
+the evaluated DSL data. Actual Hashes still project ordered keys. Regenerate
+affected emitted Perl. Rebuild Rust applications against the updated runtime.
 
 Registered Hash-function results also compose on the focused-checked Perl, Rust,
 Dart, Julia and installed PUC5.5.1/LuaJIT routes. With `fn make_hash(){return({"k":1})}`,

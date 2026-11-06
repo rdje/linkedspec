@@ -44,6 +44,7 @@ native/cache/transitive custody4.2 and general isolation/full23.4 remain separat
 Actual own grammar bytes, including compile-time user_function_definition.spec,
 precede this leaf's Cargo build; earlier missing grammar edges stay4.2-owned.
 
-P1 follow-up76.6 separately owns the missing initial-receiver policy comparison in
-earlier Perl76.1 coverage, before Dart76.3. No Perl regression or cross-backend input
-policy is inferred from Rust observations. Current frontier is MEMORY.md.
+Independent Perl76.6 closes the missing comparison and repairs its own eight
+regressions/bounded numeric source reads: [[perl-hash-view-initial-source-ownership]].
+Its verdict follows actual Perl controls; no cross-backend input policy is inferred
+from Rust observations. Independent Dart76.3 is next; current frontier is MEMORY.md.

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":49577,"lines":411,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.13","path":"docs/knowledge/repo-generated-artifact-cleanup-boundary.md","sha256":"fa0a978c47bd1f2bb093a3e5a2cc039f9776ff317abc8793a544c62b9db79966","type":"member"}
 {"bytes":9957,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-path-portability.md","sha256":"25b84c329fe3e95fea307cce05638ffc6926f864f9c32d59366f03454e1a4f6b","type":"member"}
 {"bytes":5029,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-relocation-process-proof.md","sha256":"01a50226185352ff47d312072c38914ed46b4c0dcf85f8fe50772138d84f0954","type":"member"}
 {"bytes":2421,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/restricted-macos-ram-host-size-fallback.md","sha256":"02042261ba20e7da92b91f1f959c2ecde176c98e34058fe4f94eacad95ae5a92","type":"member"}
@@ -87,7 +88,7 @@
 {"bytes":2434,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-governed-capture-mark-parity.md","sha256":"e3425b8da2e2540e405fc4a45736765fe5f3883cec11ebab41f8d4e092467dde","type":"member"}
 {"bytes":7494,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-separator-and-cat-arity-defects.md","sha256":"5fbb19473630b0ac33d61f860096ba3626ccdfa341b0a6f67b3114cb687ba9a4","type":"member"}
 {"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
-{"bytes":3567,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.2","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"8dc3cd75b3d881119ff659946af6f084548f97ea5923ac10e7bb3aa0dfae72b5","type":"member"}
+{"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}
 {"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}
 {"bytes":3589,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-index-source-guards.md","sha256":"56c43f8233d90e753c85202a4e98be40e82c0eebd631faea66bbe5db419fd639","type":"member"}
 {"bytes":3319,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/rust-key-count-result-guards.md","sha256":"11af538631dbc444f5caf0914e80a31dba84e755875e9e9de330b48245f73cd4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3838,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-primary-cli-mechanism-audit.md","sha256":"ffeaa28e07b37406cce44ffc03c4ec5e32aaad91f4751a2ea519bffefe10144b","type":"member"}
 {"bytes":4809,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-admission.md","sha256":"8b34360e7528d20a7f8a6bc7cabb938fc2a17fc94842171d36bd326081d80fa8","type":"member"}
 {"bytes":9665,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-authority.md","sha256":"ce04230b82f5cd763a570e74147bac6e5e717d7fc181cd899ae56fb9d96e07f2","type":"member"}
-{"bytes":4628,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-carriers.md","sha256":"79f8bf7d9a14e94438f4ed24e7f6c58404ca3463917dae3ee29b4e9c8b573252","type":"member"}

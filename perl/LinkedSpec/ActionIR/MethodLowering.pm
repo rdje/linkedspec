@@ -5646,9 +5646,10 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   # Ordinary Hash views yield Arrays, then dispatch each consumer by its actual
-  # result kind. Keep compatibility callable receivers on their existing route.
+  # result kind. A terminal first view keeps its original producer/input policy.
+  # Keep compatibility callable receivers on their existing route.
   my $ordinary_hash_view_result_chain = (_ordinary_free_hash_view_result_source($receiver)
-    || (($receiver->{kind} // '') ne 'raw_perl'
+    || (@$calls > 1 && ($receiver->{kind} // '') ne 'raw_perl'
      && !(($receiver->{kind} // '') eq 'call'
        && _user_function_definition_for_name($deps, $receiver->{name}))
      && ($calls->[0]{method} // '') =~ /\A(?:sorted_keys|sorted_values)\z/o
@@ -6285,7 +6286,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || _ordinary_explicit_push_result_source($receiver)
    || _ordinary_set_result_source($receiver)
    || _ordinary_free_default_result_source($receiver)
-   || $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain
+   || $constructor_result_source || $ordinary_copy_result_chain
    || $free_string_result_source
    || $free_numeric_result_source || $ordinary_number_receiver_prefix
    || $ordinary_lexical_result_chain || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
@@ -6293,6 +6294,15 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $ordinary_contains_result_chain || $ordinary_index_result_chain
    || $ordinary_length_result_chain
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
+  # An initial view owns its source fallback/errors before its Array result is
+  # guarded. Existing produced/selected/copy/size owners retain their kind guard.
+  my $initial_hash_view_prefix = $ordinary_hash_view_result_chain
+   && !_ordinary_free_hash_view_result_source($receiver)
+   && !$retained_result_source && !$logical_receiver
+   && !$ordinary_count_result_chain && !$ordinary_key_count_result_chain
+   && ($calls->[0]{method} // '') =~ /\A(?:sorted_keys|sorted_values)\z/o
+   && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}};
+  $retained_result_source ||= $ordinary_hash_view_result_chain;
   my $emitted_result_chain = $defined_default_chain || $scalar_string_chain || $retained_result_source;
   $key_count_source_zero_fallback = $ordinary_key_count_result_chain && !$retained_result_source
    && !_ordinary_free_count_result_source($receiver)
@@ -6307,11 +6317,21 @@ my $lower_numeric_array_reducer_source_expr = sub {
   if ($logical_receiver || $emitted_result_chain) {
    # The compatibility callable-result path was already lowered above.
    # Re-reading its raw AST source would emit invalid Perl such as pick()[0].
-   my $current_expr = $logical_receiver
-    ? $lower_ast_logical_call_node->($receiver)
-    : (($receiver->{kind} // '') eq 'raw_perl' && $ordinary_count_result_chain
-      ? $receiver_expr
-      : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 }));
+   my $current_expr;
+   if ($initial_hash_view_prefix) {
+    # Lower exactly the first receiver step through its original producer.
+    # Its terminal fragment cannot readmit this result-guard prefix recursively.
+    $current_expr = $lower_ast_fluent_chain_node->({
+     kind => 'fluent_chain', receiver => $receiver, calls => [$calls->[0]],
+     source_span => $node->{source_span},
+    });
+   } else {
+    $current_expr = $logical_receiver
+     ? $lower_ast_logical_call_node->($receiver)
+     : (($receiver->{kind} // '') eq 'raw_perl' && $ordinary_count_result_chain
+       ? $receiver_expr
+       : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 }));
+   }
    return undef unless defined($current_expr) && length($current_expr);
    # Keep an already lowered Hash literal inside the emitted-host bridge.
    # Its fat arrows are host syntax, not retired authored Hash syntax.
@@ -6329,6 +6349,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $current_expr = '$__ls_free_default_value';
    }
    foreach my $call (@$calls) {
+    next if $initial_hash_view_prefix && $call == $calls->[0];
     # Retained result sources and scalar prefixes may cross kinds at any link.
     # Reuse actual-kind dispatch after intermediate results as well as at the source.
     $current_family = 'default_result'
@@ -8236,14 +8257,18 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
   if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
-   return '[sort keys %'.$hash_symbol.']';
+   # Numeric literals are data, not names for ambient numeric Hash slots.
+   my $target_node = _parse_method_value_ast_expr($target_expr, $deps);
+   unless (ref($target_node) eq 'HASH' && ($target_node->{kind} // '') eq 'number') {
+    return '[sort keys %'.$hash_symbol.']';
+   }
   }
 
   my $lowered_target = _lower_method_value_expr($target_expr, $deps);
   $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_sorted_keys = '.$lowered_target.'; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }';
+  return 'do { my $__ls_sorted_keys = '.$lowered_target.'; defined($__ls_sorted_keys) && ref($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }';
  }
  if ($method_call && $method_call->{method} eq 'sorted_values') {
   my $sorted_values_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 1, 1);

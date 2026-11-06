@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "prove",
+    "-j1",
+    "-v",
+    "-Iperl",
+    "t/hash_view_receiver_source_policy.t"
+  ],
+  "environment": {
+    "LINKEDSPEC_VIEW_RECEIVER_SOURCE_CAPTURE": "docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/after/artifacts"
+  }
+}
