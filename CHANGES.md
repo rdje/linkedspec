@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — guard Rust CountKeys results in both fluent paths
+
+Canonical CountKeys roles join existing actual-kind guards before Count fallback in direct and trailing-with paths, preserving initial source zero versus produced results. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy observations exact and actual22 emitted modules/serialized inputs unchanged. Final66/scoped format/six recovery corruptions pass, no owned warning summary. Actual declared Cargo/input/module/full raw epochs retained. Rebuild Rust apps/runtime; no source-regeneration/format change. Book/Knowledge/task/live records align; historical Length reader source boundary is explicit. Independent Dart75.3 next; full source/context/custody/isolation/admission remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — retain CountKeys guards through ordinary composition
 
 Canonical free/ordinary receiver CountKeys results retain actual-kind/copy/logical/with rejection before Count fallback. Separate source ownership from later default/text routing to preserve initial zero through coalesce/cat. Corrected unchanged26 groups13PASS13RED become26PASS (25 ready/one excluded); all thirteen healthy observations exact. Six current public/emitted Number2 seeds null/host unchanged; final71/syntax/seven recovery corruptions pass. Original hypothesis/diagnostic calibration, actual first inputs/modules/carrier/full channels retained. Regenerate emitted Perl. Book/Knowledge/task/live records align; independent peers next, concrete P1 callable75.6 before broader admission.

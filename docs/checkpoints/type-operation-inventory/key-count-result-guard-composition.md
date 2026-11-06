@@ -104,3 +104,18 @@ metadata-label calibration epochs are retained separately; actual valid domain
 profile is frozen without promoting the aborted assessment. Evidence:
 key-count-guard-perl-2026-11-06/REVIEW.md. Regenerate emitted Perl. Independent
 peers next; full source/context/custody/isolation/discovery/admission separate.
+
+## Ordinary Rust guards75.2
+
+Independent shared22 intake observes ten healthy/twelve wrong across native/
+restored/plan/compiled emitted routes. Current source-domain two copies of
+[0,0,0,0,0,0,2] and needed error wrapper are frozen before code; no prerequisites.
+Canonical CountKeys roles join both direct/trailing-with guards before Count
+fallback, preserving first-input zero versus produced Count/CountKeys data.
+Unchanged22 now pass; ten healthy exact, actual22 modules/serialized inputs
+unchanged. Final66/scoped format/six recovery corruptions pass; actual declared
+Cargo/input/module/raw epochs in key-count-guard-rust-2026-11-06/REVIEW.md.
+Rebuild Rust runtime/apps; no generated-format change or source-regeneration need.
+Dart75.3 next; remaining peers/callable/source-context/custody/isolation/discovery/
+admission stay separately owned. Original Length proof requires its accepted
+source boundary after Engine changes; its current normal still passes.

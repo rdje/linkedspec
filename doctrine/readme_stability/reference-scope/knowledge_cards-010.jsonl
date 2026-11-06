@@ -76,10 +76,11 @@
 {"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
 {"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}
 {"bytes":3589,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-index-source-guards.md","sha256":"56c43f8233d90e753c85202a4e98be40e82c0eebd631faea66bbe5db419fd639","type":"member"}
+{"bytes":2965,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.2","path":"docs/knowledge/rust-key-count-result-guards.md","sha256":"1187212108ec45d77cddd2cfba48d38ae40cbd5dd8016f0122f1aceddb0c100d","type":"member"}
 {"bytes":5385,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-large-number-conversion-defect.md","sha256":"3e5a8cb1fc069e6de50d1fe8766e1f4dbbc8a814f6345fe82475db4a15255644","type":"member"}
 {"bytes":3202,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-leading-input-trivia-boundary.md","sha256":"29e9abff9a3c7721c9612913f2bf72f9e60de941fcb8fb57bbdcccde835ceec7","type":"member"}
 {"bytes":4920,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-legacy-shipped-spec-oracle-smokes.md","sha256":"42324792ec6c09ef3e563e0390927e7de9cfcfba35a766c968bfa3972b629e3d","type":"member"}
-{"bytes":3057,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.2","path":"docs/knowledge/rust-length-result-guards.md","sha256":"31082a12947c069eb8d893d797e4ee07ccb982cf132e1a57de0bfbc7bce2d421","type":"member"}
+{"bytes":3727,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.2","path":"docs/knowledge/rust-length-result-guards.md","sha256":"108bdc17f192fa9d6daf4f87f42c3f7ef1f2277dd903af75aaa5f3883452a801","type":"member"}
 {"bytes":2797,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lexical-result-source-guards.md","sha256":"6d38d89a947d7930d792fd428d00e28b1af01e44f3543c80a9ae74ba70e412ab","type":"member"}
 {"bytes":2365,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lifecycle-i-return-dispatch-parity.md","sha256":"0acad5ea98416724010ca5f740288199ba5f487beec9e285ed63c0855f8ea45a","type":"member"}
 {"bytes":2412,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-local-match-writer-presence-repair.md","sha256":"eca4ce770d9e329c86a9dad60d8e023e1a6af4495c6d40ec7cd6f8d5b0eab3d1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5262,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-retv-propagation.md","sha256":"733e886fd44c9476b6212aa5299151275728d62718bd1cfdb086388f57550a00","type":"member"}
 {"bytes":5189,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-admission.md","sha256":"f49e75dc4988bb07396390dda18e84761c350cd5cd787494d78fd7adf0a089ce","type":"member"}
 {"bytes":4553,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-core.md","sha256":"62988d611c243bcc24f205d0906a381860046fd538d9e132ca9409aa594cfc30","type":"member"}
-{"bytes":7107,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-preflight.md","sha256":"b89cecaa01615bfd21bbcecac9fd0881c20931689827aecb1ac198bcb05d494a","type":"member"}

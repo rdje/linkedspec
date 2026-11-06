@@ -1,0 +1,194 @@
+{
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/normal-stderr.log": {
+    "bytes": 3393508,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/normal-stderr.log.gz",
+    "capsule_sha256": "030f5142b4afedc3695385e5f5001dd473bf64eec2035f43619c65333402badd",
+    "sha256": "97bffc90156582f5a148abbe2a580b0b2acf45cceed52ea1dadfa65c927fc00c"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/normal-stdout.log": {
+    "bytes": 1824,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/nearest/normal-stdout.log.gz",
+    "capsule_sha256": "8e7afd686e8a9be88458123572cf867f2fce7bd004be52a2810b0bcc41e69170",
+    "sha256": "546be36b46625fee7c31fafbe4ef498ff78aa49c0b6d4f05a2148a74c3d2faca"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/normal-stderr.log": {
+    "bytes": 3383354,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/normal-stderr.log.gz",
+    "capsule_sha256": "dd986a801f5a0bddb54f090bd4722e8872ada56c8d6cc909b63bcd87badd9a3d",
+    "sha256": "0ed8ee1a0b4cceb869254b1a221eb634788143d6ef4f368321d2ae3bfef2e463"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/normal-stdout.log": {
+    "bytes": 777,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-after/normal-stdout.log.gz",
+    "capsule_sha256": "a777c288acd241e21ad1b413435642f1e320d1ae9a77525f23fb0209f4ad9230",
+    "sha256": "c332ebe1dd68d83eac7bce269cd0241af8930327f011af52e471367e9966434f"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/normal-stderr.log": {
+    "bytes": 3386558,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/normal-stderr.log.gz",
+    "capsule_sha256": "1207897b9463608a06b993d2e99d017c7892fc15238c2949adbc2f33d8e59b1d",
+    "sha256": "c8c7d1af3c7e2013a4b8aaed961b910103cdb6ab373bb142a24812330595965d"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/normal-stdout.log": {
+    "bytes": 1108,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/normal-before/normal-stdout.log.gz",
+    "capsule_sha256": "06e00aaefa519ea8c5f42b27069bc51d270271c1625aae11771899b0e4c1d1d7",
+    "sha256": "f1569912bb3d253a463e4fbe80f465c90ac62c202f6c7a8faae027b13d79a5a4"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-lock-stderr.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-lock-stderr.log.gz",
+    "capsule_sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d",
+    "sha256": "237bfdcb405655336815b2030d4e0c5af4b224fef4751953f48cedbf1bd5cc94"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-lock-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-lock-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-stderr.log": {
+    "bytes": 3380927,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-stderr.log.gz",
+    "capsule_sha256": "613dc25d334c5563a13cd7c103ef666ad0985bf3e5e982e5158ca152a4179590",
+    "sha256": "aca013c68a5975e63c989813c0c9e2849ab15ed416f1fb76eb98f8469de53a0e"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-stdout.log": {
+    "bytes": 1472,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/fresh-stdout.log.gz",
+    "capsule_sha256": "74187b20de922971d6484ab4ba3fa65cda3cd7ba10d0c83e5156bdd4f3cf208d",
+    "sha256": "d094126f94b15572e97d130baace4ca01f1b0e512ac6691dc034b849f566fa8c"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-lock-stderr.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-lock-stderr.log.gz",
+    "capsule_sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d",
+    "sha256": "237bfdcb405655336815b2030d4e0c5af4b224fef4751953f48cedbf1bd5cc94"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-lock-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-lock-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-stderr.log": {
+    "bytes": 3380997,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-stderr.log.gz",
+    "capsule_sha256": "8556c4e36d33438baf6293e32a1683986b967d06a5cfe35e1282517fd8e02665",
+    "sha256": "10c6fd36184ea04b6b8c116ac69696964b000203f31dc6b7ad7f352a2ef36f21"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-stdout.log": {
+    "bytes": 52372,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-after/native-stdout.log.gz",
+    "capsule_sha256": "86c953e924629b91c9d9fb4ba9124e3383172983d2178540ccf4a3aa913be6cf",
+    "sha256": "b2d9504a37c9249c6e1f1b16e4ea74ad1889b720ea2a24e44afde872cd324af9"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-lock-stderr.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-lock-stderr.log.gz",
+    "capsule_sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d",
+    "sha256": "237bfdcb405655336815b2030d4e0c5af4b224fef4751953f48cedbf1bd5cc94"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-lock-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-lock-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-stderr.log": {
+    "bytes": 3380928,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-stderr.log.gz",
+    "capsule_sha256": "c1672d5419b72b3dc43fb0df17be03624421464a0a45d8ee14019c509b4912b5",
+    "sha256": "99022dcf747bb6cc0e0cf8137259ba2d5115c5b2f6ac5104ca92004705059825"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-stdout.log": {
+    "bytes": 1473,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/fresh-stdout.log.gz",
+    "capsule_sha256": "26bf5dbb9e98dbf6ae4e8f4c71b43636dd7b8baba3773f0f3ab4585a5d505d43",
+    "sha256": "e34e4b6b1069900cd92436362d686a00a3a6cc736fa7e7c255dc6e92c7c4aca7"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-lock-stderr.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-lock-stderr.log.gz",
+    "capsule_sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d",
+    "sha256": "237bfdcb405655336815b2030d4e0c5af4b224fef4751953f48cedbf1bd5cc94"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-lock-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-lock-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-stderr.log": {
+    "bytes": 3380999,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-stderr.log.gz",
+    "capsule_sha256": "7d9830dc5e37e486adddc31eb6b9a84a1f84cac308cc6d80f0789cde403cf93c",
+    "sha256": "77f55d2a49017d1c751796db121536bb62c3149cb5ff0cb31aa21a13dfba6a33"
+  },
+  "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-stdout.log": {
+    "bytes": 52375,
+    "capsule": "docs/checkpoints/key-count-guard-rust-2026-11-06/probe-before/native-stdout.log.gz",
+    "capsule_sha256": "4db2d12829913dc623eebcabb88086ecf691f9faa869c045501b9d8f14f4dbd2",
+    "sha256": "33cecc595443f9dc2ee424fd15484ea6d5e5613605dacd8e859248157d840971"
+  }
+}

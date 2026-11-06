@@ -1,0 +1,1 @@
+{"after": "22PASS/four routes", "before": "10PASS/12RED", "emitted_modules_unchanged": 22, "healthy_exact": 10, "nearest": "44PASS; final66", "rejected_controls": ["missing-row", "false-as-number", "error-wrapper-drift", "post-rejection-effect", "changed-module", "forged-source-boundary"], "result": "PASS", "serialized_inputs_unchanged": 22}

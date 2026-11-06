@@ -6523,7 +6523,7 @@ impl Engine {
                     return self
                         .eval_selected_receiver_value_chain(current, calls, true, ctx, rule_label);
                 }
-                let kind_guarded_source = self.is_ordinary_computed_read(receiver)
+                let mut kind_guarded_source = self.is_ordinary_computed_read(receiver)
                     || self.is_explicit_push_result_source(receiver)
                     || Self::is_explicit_set_result_source(receiver)
                     || Self::is_free_default_result_source(receiver)
@@ -6541,18 +6541,29 @@ impl Engine {
                     || Self::is_ordinary_length_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"));
+                let key_count_chain = Self::is_ordinary_key_count_result_chain(receiver, calls);
+                let key_count_source_prefix = key_count_chain
+                    && !kind_guarded_source
+                    && !Self::is_ordinary_count_result_chain(receiver, &[])
+                    && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+                    && calls
+                        .first()
+                        .is_some_and(|first| first.method == "count_keys" && first.args.is_empty());
+                // Produced key counts own their Number before Count source fallback.
+                kind_guarded_source |= key_count_chain;
                 let count_chain = Self::is_ordinary_count_result_chain(receiver, calls);
                 if kind_guarded_source || count_chain {
                     let mut current = self.eval_expr(receiver, ctx, rule_label)?;
                     let mut remaining = calls.as_slice();
-                    // An initial Count retains its existing source-domain fallback.
+                    // Initial size sources retain their existing zero fallback.
                     // Already produced/selected/copied results keep their kind guard.
-                    if count_chain
-                        && !kind_guarded_source
-                        && !Self::is_ordinary_count_result_chain(receiver, &[])
-                        && calls
-                            .first()
-                            .is_some_and(|first| first.method == "count" && first.args.is_empty())
+                    if key_count_source_prefix
+                        || (count_chain
+                            && !kind_guarded_source
+                            && !Self::is_ordinary_count_result_chain(receiver, &[])
+                            && calls.first().is_some_and(|first| {
+                                first.method == "count" && first.args.is_empty()
+                            }))
                     {
                         current = self.eval_receiver_dynamic_value_chain_call(
                             current,
@@ -7217,6 +7228,15 @@ impl Engine {
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
+        let key_count_chain = Self::is_ordinary_key_count_result_chain(receiver, calls);
+        let key_count_source_prefix = key_count_chain
+            && !kind_guarded_value
+            && !Self::is_ordinary_count_result_chain(receiver, &[])
+            && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+            && calls
+                .first()
+                .is_some_and(|first| first.method == "count_keys" && first.args.is_empty());
+        kind_guarded_value |= key_count_chain;
         let count_chain = Self::is_ordinary_count_result_chain(receiver, calls);
         let count_source_prefix = count_chain
             && !kind_guarded_value
@@ -7241,7 +7261,7 @@ impl Engine {
             // Guard actual selected/copied kinds and scalar producers before
             // incompatible container operands, preserving the completed prefix.
             if (reduced_value || logical_prefix || kind_guarded_value)
-                && !(index == 0 && count_source_prefix)
+                && !(index == 0 && (count_source_prefix || key_count_source_prefix))
                 && call.method != "copy"
                 && !Self::is_generic_receiver_value_method(&call.method)
             {
@@ -8945,6 +8965,55 @@ impl Engine {
         calls
             .first()
             .is_some_and(|first| first.method == "length" && first.args.is_empty())
+    }
+
+    // CountKeys retains Hash/non-Hash source policy while guarding numeric results.
+    // Only canonical free-one calls and zero-operand prefixes qualify.
+    fn is_ordinary_key_count_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        if let Expr::Call { name, args } = receiver
+            && name == "count_keys"
+            && args.len() == 1
+            && matches!(
+                &args[0],
+                Arg::Positional(
+                    Expr::Variable { .. }
+                        | Expr::NumberLiteral { .. }
+                        | Expr::StringLiteral { .. }
+                        | Expr::BooleanLiteral { .. }
+                        | Expr::Undef
+                        | Expr::ArrayLiteral { .. }
+                        | Expr::HashLiteral { .. }
+                        | Expr::BlockValue { .. }
+                        | Expr::Call { .. }
+                        | Expr::FluentChain { .. }
+                        | Expr::ReceiverMutationChain { .. }
+                        | Expr::IndexedVar { .. }
+                        | Expr::NestedAccess { .. }
+                        | Expr::ValueAccess { .. }
+                        | Expr::AssignScalar { .. }
+                        | Expr::AssignArrayAppend { .. }
+                        | Expr::AssignHashIndex { .. }
+                        | Expr::AssignNestedAccess { .. }
+                        | Expr::CodeblockLiteral(_)
+                )
+            )
+        {
+            return true;
+        }
+        calls
+            .first()
+            .is_some_and(|first| first.method == "count_keys" && first.args.is_empty())
     }
 
     // Membership retains numeric flags, equality and nullable-source behavior.

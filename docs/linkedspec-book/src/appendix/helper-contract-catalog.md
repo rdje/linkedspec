@@ -1583,6 +1583,13 @@ out=count_keys({"k":1}).take({order=cat(order,"A");1})
 # out=null, order=""; incompatible operands and later bodies stay skipped
 ```
 
+Rust75.2 now applies the ordinary result guards in both direct and trailing-`with`
+execution. Its independent22-case, four-route regression passes, preserving its
+initial zero policy, source order and needed errors. Incompatible operands and
+later bodies stay skipped. Rebuild Rust applications/runtime; the retained
+emitted modules and serialized inputs are unchanged. Independent Dart/Julia/Lua,
+callable-receiver coverage and full admission remain separate.
+
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`
 - **Returns**: array

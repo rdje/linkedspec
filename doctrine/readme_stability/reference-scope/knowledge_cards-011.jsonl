@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7107,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-preflight.md","sha256":"b89cecaa01615bfd21bbcecac9fd0881c20931689827aecb1ac198bcb05d494a","type":"member"}
 {"bytes":5100,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-routes.md","sha256":"d205d0272432a0d539f0a7586163f274cd11da580b8c8da9388ed0148332e0a6","type":"member"}
 {"bytes":2018,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-call-selection-guard.md","sha256":"2138850f570e41d87e33d3697d368fc512f1a7513cff0ba90140a6f83e078b0f","type":"member"}
 {"bytes":3401,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-code-rejection-routes.md","sha256":"b396ccbb78dcffb14bce104395fbc69388ba0ecb7e2f0f034633887483c5f6c5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2314,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supplied-policy-reference-provenance.md","sha256":"6045e7c97a4b94e42993942cef1efb3a950d34f3c3ed3441d204b43cc9217435","type":"member"}
 {"bytes":17406,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-reading-closeout-audit.md","sha256":"0e01c3c58a7f04ba640dca503b4c4bea73d6905d455b5dd6df8edada20c3c016","type":"member"}
 {"bytes":28330,"lines":490,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-source-reading-coverage.md","sha256":"57fbfd04494ac6bf694f72fd4ca7d441e78cd17e723700bf3272891706241252","type":"member"}
-{"bytes":16773,"lines":248,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tagged-record-evaluation-and-split-drift.md","sha256":"ea09869c5ee30d8159918951ea3446ce6df39e240dcb772b998a2c0bcbb6f1bd","type":"member"}

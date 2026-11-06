@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":16773,"lines":248,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tagged-record-evaluation-and-split-drift.md","sha256":"ea09869c5ee30d8159918951ea3446ce6df39e240dcb772b998a2c0bcbb6f1bd","type":"member"}
 {"bytes":3651,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/targeted-session-startup.md","sha256":"fdfcadf09c6d5ce25f14bc10f8d7f2202f8142eec1b43137ab11515164e1b388","type":"member"}
 {"bytes":6203,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"ca8601711769ac7fc7dd6ec9e339c13d8971bc7aa22ffc698442a9a05d0b98cc","type":"member"}
 {"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4029,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variadic-callable-signature-seams.md","sha256":"75bac9c4a1300e3b155b7b7fee66c058d88b91067a53e94bfb7a00cfa3716e8c","type":"member"}
 {"bytes":3577,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variadic-user-function-contract.md","sha256":"fc697ec25ad13f4a87bf4646cbf2e9a2c2982cf7db39aad61c6aaf7573902f05","type":"member"}
 {"bytes":2780,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variant-specific-cli-requirement.md","sha256":"46a55a9963de9e60905c977945e34c064e324ebe86472c79b09fc8284cbd2730","type":"member"}
-{"bytes":5906,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.10.2","path":"docs/knowledge/verification-cadence-policy.md","sha256":"c5b7696fdd8941bf39df7a85383a892ebd043ef81719d87ab1bb30f9ae1d96f4","type":"member"}

@@ -3922,3 +3922,32 @@ callable continuation coverage before parent/full admission. Independent Rust,
 Dart, Julia and installed Lua assessments are next. Full source/context/native-
 transitive custody, general isolation, legacy bare/absent bindings, discovery,
 declared Lua5.4 and full23.4 remain separate.
+
+
+## Ordinary Rust key-count guards
+
+Rust75.2 independently reproduces twelve failures in the shared22 target before
+repair. For example, wrong free consumers yield empty Array/Number1/AKV effects,
+and the receiver guard runs SAW. Its free/receiver source-domain profile is two
+copies of[0,0,0,0,0,0,2]; needed source errors propagate with the existing generated
+wrapper. These are Rust observations, with no imported Perl policy.
+
+Canonical positional free-one/zero-extra prefixes now retain numeric result
+ownership in both direct fluent and trailing-with dispatch. Initial source zero
+stays distinct from already-produced Count/CountKeys consumption. Incompatible
+operands/later copy/logical/with effects remain skipped; zero/explicit bridges/
+source snapshots/order/functions/preflight/needed errors stay healthy.
+
+Unchanged22 groups move ten passing/twelve failing to22PASS on native/restored/
+plan/compiled emitted routes; all ten healthy observations stay exact. Actual22
+emitted modules and serialized inputs are byte-identical. Normal22 plus direct
+Count-length1/Count guards19/Length24=66 focused groups and scoped formatting pass.
+Rebuild Rust apps/runtime; there is no generated-format or source-regeneration
+requirement. Actual declared Cargo inputs, module/serialized bodies and full raw
+channels live under `docs/checkpoints/key-count-guard-rust-2026-11-06/`.
+
+The older Length reader remains source-bound to its accepted historical commit;
+current Length checks are separate. Independent Dart75.3 is next, with Julia,
+installed Lua and callable75.6 still pending. Full source/context/native-
+transitive custody, general isolation, canonical discovery and full23.4 admission
+remain separate; no host-seeding or declared Lua5.4 claim follows.
