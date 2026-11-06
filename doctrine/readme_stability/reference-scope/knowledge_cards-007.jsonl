@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4741,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-dart-compatibility.md","sha256":"0dac580b5c0f4a1f0d97084630d339276648bf4d03e1f4cdff356b059910a986","type":"member"}
 {"bytes":3883,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-julia-compatibility.md","sha256":"1060eaa57e2c33c7b0251453c2562703e4d88611b1f85a228e3d1cc77b69dcdb","type":"member"}
 {"bytes":3424,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-lua-compatibility.md","sha256":"fd46be9dae0b38119c2129e3df8465a574bfa4b24bfaf1a7e7a32b9f44001600","type":"member"}
 {"bytes":4943,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-method-source-gap.md","sha256":"acdec7ca6ddf1a063df3adbe6a69625ec06ccd566902be8af43b51f0b4d8bb9c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2639,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-free-string-result-guards.md","sha256":"1b34dd14ff5a107d4c3fe2703470ef81baa28f7acf907bb14c7bf2e5d2fd332e","type":"member"}
 {"bytes":3511,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-array-constructor-bare-values.md","sha256":"85da9cb3aa0aee014cc23248463b2c36c7501f5e7a65d20a49398901e77e497d","type":"member"}
 {"bytes":4814,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-codeblock-caller-scope-leak.md","sha256":"52e33d04a52dccc3764b4bbe1b916e00bd77a90aef72c0babf4d3d6fe3bbb042","type":"member"}
-{"bytes":4914,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-capture-not-standalone.md","sha256":"26f496d6f6d57031d8f8218ff097ebe77e9e4cbc3a420757801169615b7c6d35","type":"member"}

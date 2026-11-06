@@ -1,0 +1,24 @@
+{"actual": {"value": [5, 5, null, 0]}, "id": "length_compatible", "matches_target": true}
+{"actual": {"value": [null, null, ""]}, "id": "length_free_guard", "matches_target": true}
+{"actual": {"value": [null, "S"]}, "id": "length_receiver_guard", "matches_target": true}
+{"actual": {"value": [1, "recovered", 1]}, "id": "zero_null_with", "matches_target": true}
+{"actual": {"value": ["TAIL", "TAIL"]}, "id": "explicit_bridges", "matches_target": true}
+{"actual": {"value": [5, "x", "SA"]}, "id": "source_once_snapshot", "matches_target": true}
+{"actual": {"value": [null, ""]}, "id": "function_guard", "matches_target": true}
+{"actual": {"fresh": {"class": "GeneratedSourceException", "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "native": {"class": "RuntimeInterpreterException", "diagnostic": {"detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar", "handler_source_label": "dart_runtime:rule:Value", "owner_stage": "dart_runtime", "rule_label": "Value", "stage": "runtime_execution", "summary": "Dart runtime interpreter failed", "top_rule": "Value", "type": "runtime_parser"}, "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "plan": {"class": "GeneratedSourceException", "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "restored": {"class": "RuntimeInterpreterException", "diagnostic": {"detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar", "handler_source_label": "dart_runtime:rule:Value", "owner_stage": "dart_runtime", "rule_label": "Value", "stage": "runtime_execution", "summary": "Dart runtime interpreter failed", "top_rule": "Value", "type": "runtime_parser"}, "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}}, "id": "needed_source_error", "matches_target": true}
+{"actual": {"value": [null, ""]}, "id": "malformed_receiver", "matches_target": true}
+{"actual": {"value": [null, ""]}, "id": "copy_guard", "matches_target": true}
+{"actual": {"value": [null, ""]}, "id": "logical_guard", "matches_target": true}
+{"actual": {"value": [false, false, "DWEF"]}, "id": "logical_valid_null_zero", "matches_target": true}
+{"actual": {"value": null}, "id": "seeded_hash", "matches_target": true}
+{"actual": {"value": [null, "", null, ""]}, "id": "count_contrast", "matches_target": true}
+{"actual": {"value": [null, null, ""]}, "id": "compatible_prefix_guard", "matches_target": true}
+{"actual": {"value": [1, 1, 1, 2, 2, null]}, "id": "scalar_array_sources", "matches_target": null}
+{"actual": {"value": null}, "id": "free_length_count", "matches_target": true}
+{"actual": {"value": null}, "id": "receiver_length_count", "matches_target": true}
+{"actual": {"value": [null, "S"]}, "id": "length_count_with", "matches_target": true}
+{"actual": {"value": [null, ""]}, "id": "length_count_copy_logical", "matches_target": true}
+{"actual": {"value": [null, null, null, null]}, "id": "produced_null_zero_count", "matches_target": true}
+{"actual": {"value": [0, 0, 0, 0, 0, 2, 2]}, "id": "initial_count_policy", "matches_target": true}
+{"actual": {"value": [2, 2]}, "id": "explicit_array_bridge", "matches_target": true}
+{"actual": {"fresh": {"class": "GeneratedSourceException", "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "native": {"class": "RuntimeInterpreterException", "diagnostic": {"detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar", "handler_source_label": "dart_runtime:rule:Value", "owner_stage": "dart_runtime", "rule_label": "Value", "stage": "runtime_execution", "summary": "Dart runtime interpreter failed", "top_rule": "Value", "type": "runtime_parser"}, "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "plan": {"class": "GeneratedSourceException", "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "restored": {"class": "RuntimeInterpreterException", "diagnostic": {"detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar", "handler_source_label": "dart_runtime:rule:Value", "owner_stage": "dart_runtime", "rule_label": "Value", "stage": "runtime_execution", "summary": "Dart runtime interpreter failed", "top_rule": "Value", "type": "runtime_parser"}, "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}}, "id": "needed_length_source_error", "matches_target": true}

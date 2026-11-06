@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3288,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-starts-open-block-validation.md","sha256":"c02590d348e15532e2779f5ce32454901346bda6c27440b953ff7b20dbc997d1","type":"member"}
 {"bytes":3712,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtime-input-boundary-validation-regression.md","sha256":"638596cdbf4d2b9d8537c2e59058d1a077a6974d3e77317039725fc9263becff","type":"member"}
 {"bytes":2127,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtimecontext-boundary.md","sha256":"3559e06549bd2a71c9d654d3e14e86804127ebb4f9179efa1c4ac6727c5173f5","type":"member"}
 {"bytes":4756,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-action-edge-child-return-dispatch.md","sha256":"ed2a995cb674dcc05c325b3abca38edf360d765246bbd7245c9a977afaa96dc8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7181,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-execution.md","sha256":"9a0a9b29bc8193a59255d64fa8784d61f40b9217e8e846a83362188d2b64a311","type":"member"}
 {"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
 {"bytes":3281,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-error-boundary-string-result.md","sha256":"cbdfc4a4b903a287ddf53dd55a3256e6607565428cebd7deb9d7df17ee0edff2","type":"member"}
-{"bytes":4155,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-structured-diagnostics.md","sha256":"2332a9bb056478f2c50b6cc670de1b3d839defd68dc402e58556b8a4e4edf104","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6283,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-preflight.md","sha256":"b5f77f81792563ed7ab83880fbaf71ebd869933ff8d3c09b052a07f834759be8","type":"member"}
 {"bytes":5778,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-routes.md","sha256":"105008bc485647280027fe63afb86c2f2fe83b80b78f678de52beca1f6680bb2","type":"member"}
 {"bytes":1982,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-call-selection-guard.md","sha256":"145b71a45888b9b829525a5858189e5e962e9e1429cbd45dbe9442c9ae3f4b0c","type":"member"}
 {"bytes":3257,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-rule-local-cursor-admission.md","sha256":"694a1ecfce83dcfa23264eb3ca8efc4de27d07317b8c7dd3acb1167a9f706e2a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4049,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-recurring-six-runtime-gate.md","sha256":"58453da6ed18e5fa4dca615f34c3ca25789fca82a8eccd32db6b974d10f70664","type":"member"}
 {"bytes":7843,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-capture-endpoint-presence-authority.md","sha256":"e65662452f8b93a34aa3a506de1d1c03c750035af5aaec9ebb2234285299994f","type":"member"}
 {"bytes":2230,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-capture-value-source-compatibility.md","sha256":"b77e39c6e6bdba7c17414dffcf47b1fe35b305ea04082857589818a0b8e2cc5c","type":"member"}
-{"bytes":4741,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-dart-compatibility.md","sha256":"0dac580b5c0f4a1f0d97084630d339276648bf4d03e1f4cdff356b059910a986","type":"member"}

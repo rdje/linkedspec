@@ -1,0 +1,10 @@
+[
+  "bash",
+  "tools/run_dart_project_data.sh",
+  "format",
+  "--output=none",
+  "--set-exit-if-changed",
+  "dart/lib/src/runtime/interpreter.dart",
+  "dart/test/length_result_guard_composition_test.dart",
+  "dart/tool/probe_length_result_guards.dart"
+]

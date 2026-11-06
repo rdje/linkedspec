@@ -4082,6 +4082,7 @@ final class LinkedSpecRuntimeEngine {
             _isOrdinaryContainsResultChain(receiver, calls) ||
             _isOrdinaryIndexResultChain(receiver, calls) ||
             _isOrdinaryHasKeyResultChain(receiver, calls) ||
+            _isOrdinaryLengthResultChain(receiver, calls) ||
             _isOrdinaryLogicalResultChain(receiver, calls) ||
             _isInputCursorValueSource(receiver) ||
             (receiver is ActionCallExpr &&
@@ -6274,6 +6275,69 @@ final class LinkedSpecRuntimeEngine {
     }
     final first = calls.first;
     return first.method == 'count' &&
+        (first.sourceMethod ?? first.method) == first.method &&
+        !first.trailingBlockArg &&
+        !first.receiverTrailingBlockArg &&
+        first.args.isEmpty;
+  }
+
+  // Length keeps scalar/Array sources and its nullable numeric result.
+  bool _isOrdinaryLengthResultChain(
+    ActionExpr? receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    const traversal = {'walk_leaves', 'map_leaves', 'reduce_leaves'};
+    if (calls.any(
+      (call) =>
+          traversal.contains(canonicalActionHelperName(call.method)) ||
+          ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+              canonicalActionHelperName(call.method) != 'with'),
+    )) {
+      return false;
+    }
+    bool ordinaryArgs(List<ActionArgument> arguments) {
+      if (arguments.any((argument) => argument is! ActionPositionalArgument)) {
+        return false;
+      }
+      return arguments.every(
+        (argument) => switch (argument.value) {
+          ActionVariableExpr() ||
+          ActionNumberLiteralExpr() ||
+          ActionStringLiteralExpr() ||
+          ActionBooleanLiteralExpr() ||
+          ActionUndefExpr() ||
+          ActionArrayLiteralExpr() ||
+          ActionHashLiteralExpr() ||
+          ActionBlockValueExpr() ||
+          ActionCallExpr() ||
+          ActionFluentChainExpr() ||
+          ActionReceiverMutationChainExpr() ||
+          ActionIndexedVarExpr() ||
+          ActionNestedAccessExpr() ||
+          ActionValueAccessExpr() ||
+          ActionAssignScalarExpr() ||
+          ActionAssignArrayAppendExpr() ||
+          ActionAssignHashIndexExpr() ||
+          ActionAssignNestedAccessExpr() ||
+          ActionCodeblockLiteralExpr() => true,
+          _ => false,
+        },
+      );
+    }
+
+    if (receiver is ActionCallExpr &&
+        receiver.name == 'length' &&
+        (receiver.sourceMethod ?? receiver.name) == receiver.name &&
+        !receiver.trailingBlockArg &&
+        receiver.args.length == 1 &&
+        ordinaryArgs(receiver.args)) {
+      return true;
+    }
+    if (calls.isEmpty) {
+      return false;
+    }
+    final first = calls.first;
+    return first.method == 'length' &&
         (first.sourceMethod ?? first.method) == first.method &&
         !first.trailingBlockArg &&
         !first.receiverTrailingBlockArg &&

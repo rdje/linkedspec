@@ -2,7 +2,7 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.35; implementation family23.3.74.
 Existing count-length-results.md3, catalog Length and typed result/copy/eager-logical
-contracts retain authority. Status: Perl74.1/74.6 and Rust74.2 implemented with focused checks; independent Dart/Julia/Lua74.3-.5 pending.
+contracts retain authority. Status: Perl74.1/74.6 Rust74.2 Dart74.3 implemented with focused checks; independent Julia/Lua74.4-.5 pending.
 
 Canonical ordinary length(value), one positional recognized value, and receiver.length()
 with zero extra operands keep current Number/null results. Length of a scalar is its
@@ -90,3 +90,18 @@ pass. Actual declared source/manifests/locks/modules/full raw phases and inspect
 wrapper qualification survive in length-guard-rust-2026-11-06. Dependency warnings
 stay public upstream-owned; broader native/transitive custody, canonical selection,
 isolation and full admission remain open. Independent Dart74.3 next.
+
+## Bounded Dart74.3
+
+Independent native/restored/plan/emitted authored24 controls12PASS12RED become24PASS;
+twelve healthy observations and independently frozen [1,1,1,2,2,null] domain stay
+exact. Canonical positional free-one/zero-extra Length role joins kindGuardedSource
+before Count initial-source permission. ScalarResult initialization/assignments,
+common guards/Count permission/producers/domains/signatures/copy depths/function/
+parser/schema stay. Actual24 module bodies unchanged; rebuild Dart apps/runtime.
+Final Length24/Count-length2/Count guard19=45, full-owner/probe/normal format,
+targeted fatal root/fresh analysis and five readonly corruptions pass. Actual
+source/pub/lock/config/modules/parsed input archives/full raw channels survive
+losslessly in length-guard-dart-2026-11-06. Outside helper/admission bytes and
+normal/oracles exact. Full custody/selection/isolation/admission remain separate.
+Independently baseline Julia74.4 next; no peer failure inferred.

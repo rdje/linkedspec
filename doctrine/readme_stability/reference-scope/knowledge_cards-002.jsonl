@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8772,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-quantifier-literal-corruption.md","sha256":"ce09f6f67763afb04b087250b2f5f277f16b6cc36995ce480c2408afb36976a6","type":"member"}
 {"bytes":3280,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-repeated-and-group-outcomes.md","sha256":"f6b82904c9f20aa681ccc706641c0541b81f4e74346bd7356a668bc2e1043502","type":"member"}
 {"bytes":5369,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-residual-parser-smoke-split.md","sha256":"a27ac21face73e9e1ba8cca3b92be1afa463c2e5901ca058bc039201f4a4c3bc","type":"member"}
 {"bytes":5061,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-root-rule-selection-admission.md","sha256":"fff245ebb4db43a07a4afba95b76d18dabff90838ec1f9351bfc63b2fc2d6fb8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4744,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-rust-parity.md","sha256":"662c96fba4fe1201273f5b2394734b062a28b51fd6e18aaff46b5f9fd00d1520","type":"member"}
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
 {"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
-{"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}

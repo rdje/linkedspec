@@ -3668,7 +3668,7 @@ The owned artifact-growth review23.4.8 precedes unrelated feature selection;
 full admission remains separate.
 
 
-## Length continuations: Perl and Rust guards, remaining peers
+## Length continuations: Perl, Rust and Dart guards
 
 The next target is ordinary `length(value)` and `value.length()` result guards.
 The existing producer keeps its Number/null values: `length("tail").add(1)` is `5`,
@@ -3707,8 +3707,8 @@ actual null/zero data from an earlier rejected consumer.
 
 The unchanged Perl normal passes nineteen groups after ten original failures;
 nine original healthy programs remain exact. Direct Count/length/logical
-preservation checks pass. Rust74.2 now passes its independent assessment and focused repair. Dart74.3 is
-next, followed by Julia74.4 and installed Lua74.5; preserve their producer domains. No new
+preservation checks pass. Rust74.2 now passes its independent assessment and focused repair. Dart74.3 is also implemented with focused checks. Julia74.4 is
+next, followed by installed Lua74.5; preserve their producer domains. No new
 method, signature, conversion policy or schema is introduced.
 
 A follow-up Perl74.6 check distinguishes initial Count input from an existing
@@ -3749,3 +3749,21 @@ Retained actual Cargo inputs, raw results and replay qualifications are in
 `docs/checkpoints/length-guard-rust-2026-11-06/`. Dependency warnings retain their
 existing upstream owner. Full native/transitive custody, canonical selection,
 general isolation, remaining backends and full admission stay pending.
+
+
+Dart74.3 now follows the same bounded guard contract. The twenty-four authored
+programs pass on native, restored, generated-plan and separate emitted routes;
+twelve original healthy observations stay exact. Length results reject Array/
+Hash-only consumers before operands and later bodies, while legitimate null/zero,
+copy/eager logical behavior and explicit bridges retain their existing semantics.
+Initial Count zero remains separate from already produced Length data.
+
+The independently observed Dart source-domain profile is also
+`[1,1,1,2,2,null]`; its producer and conversion rules are unchanged. Twenty-four
+emitted module bodies are byte-identical before and after: rebuild Dart apps/runtime.
+Final Length and directly dependent Count/length checks pass forty-five groups,
+with fatal targeted analysis and full owned-file formatting clean. Actual direct
+inputs and raw results are retained under
+`docs/checkpoints/length-guard-dart-2026-11-06/`. Julia and installed Lua still
+require independent assessment; full custody, isolation, selection and admission
+remain pending.

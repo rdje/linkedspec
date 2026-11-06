@@ -1586,7 +1586,7 @@
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74`
-  Status: `in_progress` / Perl74.1/74.6 and Rust74.2 focused-checked; Dart/Julia/Lua remain
+  Status: `in_progress` / Perl74.1/74.6 Rust74.2 Dart74.3 focused-checked; Julia/Lua remain
   Goal: Preserve Length numeric/null producers and actual-kind continuation guards through copy/logical/with.
   Dependencies: Selection23.1.35; length-result-guard-composition.md/shared16; existing count/length3 and copy/eager-logical authority.
   Acceptance: Independently assess each backend; preserve domains/signatures/source once/snapshots/needed errors/preflight/copy depths/valid null-zero/explicit bridges/functions/parser/schema. Fix demonstrated incompatible operands/later effects and Perl main::4 leak. No new language authority or full admission. P1 key-count75.0 follows74.5 before unrelated selection.
@@ -1638,13 +1638,29 @@
   - [x] **LOCKSTEP** — actual inputs/producers/raw phases and inspector/unused-import qualifications retained with five corruptions; book/Knowledge/target/roadmap/task/index/live/resume/history align. Independent Dart74.3 next; full custody/selection/isolation/admission stay separately owned.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.3`
-  Status: `pending`
+  Status: `completed` / Dart Length and source-owner guards focused-checked
   Goal: Independently assess and repair Dart ordinary Length source/continuation guards.
   Dependencies: Completed23.3.74.2; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
   Source-owner preservation: Independently assess produced-Length-to-Count rejection, initial Count zero and explicit Array bridge controls from74.6 before attributing a peer defect.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
-  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
-  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+  Verification tier: `focused`
+  Focused checks: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored Dart Length/source-owner controls and preservation; no population/performance/full-custody measurement.
+  Activation: Cleanf336473737d9bcddb648b136d5c98843cdea1894 after Rust74.2 all ten doctrines/post-pointer/brief0. Frozen74/shared16/source-owner8, current Dart Count/source/Boolean permission card and SDK probe/relative package capture pattern, relevant book and73.8 formatter closure recovered. Independently retain actual parse/compile/native/restored/plan/emitted inputs and source domains before production. No peer failure inferred. Use one test worker/offline locked resolution and quiet host trend monitoring under latest director guidance; no historical86% guard override.
+  Diagnosis/result: Independent native/restored/plan/emitted24 reproduces twelve wrong value/effect programs, including free/receiver Length and produced-Length Count fallback. kindGuardedSource omits Length before Count initial-source permission is decided. Add exact canonical positional free-one/zero-extra Length predicate to that existing owner; preserve common/scalar guards, scalarResult initialization/assignments and one-step Count permission. No producer/domain/signature/copy-depth/function/parser/schema change.
+  Verification: Unchanged24 controls12PASS12RED become24PASS on all four routes; all twelve healthy observations, native/restored diagnostics and generated error class/wrapper profiles exact. Independent source-domain [1,1,1,2,2,null] frozen before normal compilation. Actual24 emitted module bodies unchanged. Final Length24/Count-length2/Count guards19=45, fatal targeted root/fresh analysis and whole-owner/new-normal/probe formatter pass. Outside the new helper/source-admission line all runtime bytes exact; normal/oracles unchanged. Rebuild Dart apps/runtime; no generated-format movement.
+  Evidence/limits: docs/checkpoints/length-guard-dart-2026-11-06/REVIEW.md; actual declared own source/probe/fixtures/pub manifests/locks/config before root execution, actual emitted modules/parsed specs before native execution, generated runner/resolved inputs before fresh analysis/execution. Surviving byte/mode identities exact before removing only redundant owned package; full raw channels losslessly sealed/identity-bound and inspector outputs replay exactly. Readonly recovery/five corruptions pass. Complete native/transitive closure4.2/general isolation/selection4.1/full23.4 and Julia/Lua assessments stay separate. Independent Julia74.4 next.
+  Continuity: Engineering notes crosses its90% byte threshold with this record. The existing rollover archives a complete clean-HEAD suffix as segment4928, with atomic root/manifest/catalog/segment changes; post-roll check passes at27118 bytes. No immutable prior segment is edited.
+  Session health: Large multi-backend context; a fresh session is recommended for the Julia review after this committed checkpoint. This is advisory, not a pause: PNT continues unless the director stops/clears it. Exact next action remains independent Julia74.4 from committed MEMORY.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — guard Dart Length results and produced-source ownership.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — complete independent public SDK native/restored/plan/emitted24 observations and unchanged normal12PASS12RED establish actual Dart gaps without importing peer verdicts.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — retained public parsed/emitted artifacts and Count/compatible-prefix contrasts identify missing Length kindGuardedSource admission before Count source-permission calculation.
+  - [x] **FIX** — canonical positional free-one/zero-extra Length role joins current common guards; scalarResult/common/scalar/Count permission logic and all producers/domains remain unchanged.
+  - [x] **ADDRESSED (verified)** — authored24 now PASS on all four routes; rejected operands/later copy/logical/with skip, produced Length Number/null cannot regain initial Count fallback.
+  - [x] **NO REGRESSION** — twelve healthy observations/domain/error profiles exact; initial Count zero/explicit Array bridges/source snapshots/preflight/needed errors stay. Final45/fatal analysis/full format pass; actual24 modules unchanged.
+  - [x] **LOCKSTEP** — declared first inputs/producers/raw phases retained losslessly with five corruptions; book/Knowledge/target/roadmap/task/index/live/resume/history align. Independent Julia74.4 next; full custody/selection/isolation/admission remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.4`
   Status: `pending`
