@@ -89,3 +89,18 @@ pass; six recovery corruptions reject. Regenerate emitted Perl. Actual inputs/
 modules/full raw epochs: key-count-domain-perl-2026-11-06/REVIEW.md. Perl75.1 must
 capture its own valid current aggregate before guard edits; the aborted original
 remains historical. Number2 consumer seeds and general SESSION17 scope stay open.
+
+## Ordinary Perl guards75.1
+
+Canonical free-one/ordinary zero-extra CountKeys source roles join existing
+copy/logical/with/actual-kind guards before Count fallback. Initial source zero
+uses source ownership rather than later default/text routing; coalesce/cat zero
+counterexamples repair with result guards. Registered-function receiver prefixes
+keep their existing owner; callable75.6 owns remaining coverage before admission.
+Corrected unchanged26 groups13PASS13RED become26PASS (25 ready/one excluded),
+thirteen healthy exact, six public/emitted Number2 seeds null/host unchanged.
+Final71/syntax/seven corruption controls pass. Original expected-function and
+metadata-label calibration epochs are retained separately; actual valid domain
+profile is frozen without promoting the aborted assessment. Evidence:
+key-count-guard-perl-2026-11-06/REVIEW.md. Regenerate emitted Perl. Independent
+peers next; full source/context/custody/isolation/discovery/admission separate.

@@ -1,0 +1,164 @@
+{
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-1.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10895,
+    "raw_sha256": "c9acd0654201600ae39aa66fba819855bf95b7b555236a9dc7c86fb291242340",
+    "sha256": "f58eb7fc8c18ae15367f9b44b98f9a1d2ad635a033997767eada545c6cb19c3a"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-10.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12536,
+    "raw_sha256": "2415b7e18547107b2690fea82e1c5be88bbc1832a8b0a73199bcb9c4f3f6d718",
+    "sha256": "2537cd2d9bd7a0f2c327929c7956cc0628ff991318a9afeec8f751337146f8b5"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-11.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13012,
+    "raw_sha256": "c0c43442d8cada89729e478274b2ab7a3f1fa72c8a8403cb1927ec890eda8521",
+    "sha256": "ee5fa8e0f09b21f440b12a8a0b4bb356dd2ec59d9565a03982f7e6d385703b1f"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-12.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 14449,
+    "raw_sha256": "0074eacac0be9dbb4e402db09dc1ebbbbfdd55d7247146a86e9975b5cbdddd4a",
+    "sha256": "a6c4407dfd8c3a4f20c97bb9952ae774745f3792bd75d3f88550ef90c729e79e"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-13.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10162,
+    "raw_sha256": "4f30ddf5199aa3a4762abe15b27b0c82a62597385b560483c6ef689e7b055610",
+    "sha256": "1bac3163178fd6da51ac6c5f811697a3e0490177d2e5ca55784242741b38d80c"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-14.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 14761,
+    "raw_sha256": "dc2811061af31a4897a63ed8dacef2696b5be7bfde825a1895f07795ebe5be1e",
+    "sha256": "7715b13a6ec66301d2bae9c7cf4f601028cc1c8a433aff906efb15b1122d12e9"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-15.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13485,
+    "raw_sha256": "1a841906ba6340040b0963e83a3372476d9c6c1ee59d186d025cfcb3facff683",
+    "sha256": "eed52946a9b66033ca8b7a5e2355b8cc311c6239946bb79423b416fe335acb7b"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-16.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13211,
+    "raw_sha256": "50fb6ffe40244c051bd3e1003b0679786adb16cca5335afa5f4749b03c34ed19",
+    "sha256": "5f8d83994dafb7ff09945b93afcd56074031509627ed2d10d6cfcd17015ad2d3"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-17.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9871,
+    "raw_sha256": "6edf493a489da4c5d7e3b31c0623ebc48a063c43e5a60adf5c8467fc43bbf44c",
+    "sha256": "f9f04fd3025f4e1bb6f9c26202fa9587deab156ad7416d911aec4b5ee8a138c3"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-18.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9944,
+    "raw_sha256": "547f07994138d9d3a4cbebe93b434c7c729906d8b50a85069fe50c5cf5b46a06",
+    "sha256": "ff1afd7d8886910c60146a9adb7693ca40c73562d070b69e0142756fe525d83f"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-19.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11900,
+    "raw_sha256": "25eb73e31bb44006612cff31a28bee5305156eb2424de10ed9a20cffd9e158b9",
+    "sha256": "4711b64abb385dc36d9431cd4b3c69437af38dc5fd0bea96cb2940365554fe4b"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-2.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13028,
+    "raw_sha256": "73f8d4d5c4a6301f8a9b09b4284b29bd4b64b98a374fe05a15d8c7c51721fc5a",
+    "sha256": "dcb6d3881b894439f042cbecd60fc9a06487bc0babaa4135dd92f6dcf56d3d94"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-20.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12473,
+    "raw_sha256": "aa3896574aa8b389b9be3bd23f8c3c58502c00805afd27a97f7d60d6085b0373",
+    "sha256": "bc775b077988b1ca123edfd4d09579e2453c1e705a6e5d3710cdb18248ede483"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-21.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11829,
+    "raw_sha256": "f2b6ce9039c850345bb583266b31ed9ec2595e2073b25527a8ac635ac28425f0",
+    "sha256": "59129ea8ab81af3f462ac80b6e4aebc630681a72f240275ce253d0796544c159"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-22.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11691,
+    "raw_sha256": "828308d4ec9b9348d7b82013673e14fc31cc2946ed7a52421fa94298eb268668",
+    "sha256": "cdfb7bf2321d6e766fba46d9ef7e7aa1d42f6b9075cd1cd65bcf74f989d63a68"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-23.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11372,
+    "raw_sha256": "3441d12b7af36349df6b8dd0c000dc583d370c6fd315123d3c0ef37ed981f9c0",
+    "sha256": "38e9d693b028b944e9cb6bda9bad8fcbc35c0323003f12ef1806320e5308eff2"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-24.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12225,
+    "raw_sha256": "7d356ff12e148a5138b34b08849386a66a06a05145372d4b31f232a15adc0b63",
+    "sha256": "d11e3bb4c2d2d54d0d71489b927b56a9d462b6f2cbbe0c9b1283e299083bd54b"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-25.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9719,
+    "raw_sha256": "f9bbc97235cd7f29fbdbf72069730ee8af7e70a008f72762c234782c6e9837f3",
+    "sha256": "2eb8efb7ec41ae2934627708d61020a6aa51cda30deb692ca25f258cb92d9752"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-26.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11285,
+    "raw_sha256": "055a3b3baf8a16e1658ba40a007460de52505d89629536950a0b33b6c3ee7ef3",
+    "sha256": "94f2af9f67052862fbe790f35edc216ad6c70ce6239c7d5fec62b56afbb78067"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-3.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12869,
+    "raw_sha256": "76859538bf31fab77c1349a70521ffe5785bcc135ff54a6d786746e4dddb579b",
+    "sha256": "a9e9a428aeed903f6b4f121baa5c84462a77d330d0731ad0de3d74cced1e2f10"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-4.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10518,
+    "raw_sha256": "ba1c72def9d377b2cf36cbd23d273af3aa2444433a4b5f2b35bcdbdb2b600e5b",
+    "sha256": "0c5249b5c1b95a5a2930124112f91622b8c197c6e31e26a226d96cf4e3abab23"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-5.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 14635,
+    "raw_sha256": "b993637d9abaa1712f8c0ccc06de9aacb43f3d64247a8d1dcc9d4f49cc9abc4f",
+    "sha256": "fc08199e3f35f23596d12df9636437bcd4093bfe43000816b64d809eab5ec037"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-6.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12305,
+    "raw_sha256": "b968844de7560374a4dee87ceca326feaa7644e4bd64a6021dbf03c6298a7b8d",
+    "sha256": "341a2d0d85bc78d2735d95472a6be6ec24be81510060e80d627e96455dc43519"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-7.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12252,
+    "raw_sha256": "138edc7a1754cf9ea16abd1c1083c4a8d36d9ec9d03cb3b2ccaecab82ded9686",
+    "sha256": "40b2e2f1581acee67336cfeacd3323ae422efe1e38397e6a15499c8f06455160"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-8.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9920,
+    "raw_sha256": "7e9d669aec4bd67cc487b5854f6141c08173090edebb317c9f3013336f694d3b",
+    "sha256": "60411b4f87c6ec9854c323ff1aab3d650a7d426649bfaa02e07e7d57628ab7d9"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/module-9.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9717,
+    "raw_sha256": "08dab55116763ada0d620fb0456f0f1eb392531b12c7930dee9a4677245686b5",
+    "sha256": "f6edde88959b347b339ca9f2f146dfe9a845f94a75afdadb97b69ba575fb53cf"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules/public-13.pl.gz": {
+    "mode": 420,
+    "raw_bytes": 842,
+    "raw_sha256": "a79388cd7c01513f48b4846166c7f0287a03a1e4136bca5d5b82610da2676788",
+    "sha256": "24173b9f24ebd5a72576157b76253eb8fbfdb16977f17c8d8bd365f9cbc695c5"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-1.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10710,
+    "raw_sha256": "166bdc8a238dbf463a128b7246b1def34f61f008cbb0e7664f2e23c9b32fb4f0",
+    "sha256": "66b443b1d88ce4e8ce2705d4e024cb538dcd50c5b9a441c05474ed30274b0f68"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-10.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11896,
+    "raw_sha256": "5d40856492c48afccdb0bd5082399434c8d4a8cdac377ae961b74fb5f796ddf6",
+    "sha256": "b50bf74e0556829b69f3066895cf329f343d6e5edf97174e4b4782be42972128"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-11.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12623,
+    "raw_sha256": "19a9d5ccb59c2b421ba7c2a2449da4d47637e15aec3a5b12c5920cab8cb05e4d",
+    "sha256": "8f44b4329b9dfc494fe78de97a1010fdf797e9b9591c4da9ed8c214b37016db3"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-12.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13853,
+    "raw_sha256": "bc9d52c60324c5c2c3f58c18a29629e5b4867e48c08f2aa46d038dc7025ff362",
+    "sha256": "b04c6e01048fde90d515cb558245b7a5c8f22319d1f6ed31b3d87dba6ee30cd5"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-13.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10000,
+    "raw_sha256": "d42b065a1006bcf3e3eadc58aea93ae44e903696b160a492d6d24372ca2244a1",
+    "sha256": "8f1970a96bc72fee14697f15ed708808e57d24b36717f59f482f742d2ea2df75"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-14.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 14273,
+    "raw_sha256": "4943c67cef2d71b5498f5cdfc6e51fd0fb0bfb294743f8d3945ecb44239a7f5f",
+    "sha256": "895814e61424977c29f9fda8964885ade306cfbfbdf6c34a4ddd9179c6ee6a5f"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-15.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13485,
+    "raw_sha256": "1a841906ba6340040b0963e83a3372476d9c6c1ee59d186d025cfcb3facff683",
+    "sha256": "3fd25b2c41da5441397733ae40a77067edf35cb555c4d50b09a4d9552954c221"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-16.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12329,
+    "raw_sha256": "2392de7da871b5c101de3ce83d96b4877c7ec9f0c1dead421ae9e892dd39367f",
+    "sha256": "72b9c5fe205609425a9f9e6f31355cd424ca6993afc8a6415f6d785d574ab3b1"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-17.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9834,
+    "raw_sha256": "6cca2e4fc24b49fee94649dd80100b4a270ef4c686fc0fb39a21ed8076e3fd52",
+    "sha256": "c3013a734d5553b3702c5e99a911075ff7d9bd3905e170b8472052a11ad609b0"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-18.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9708,
+    "raw_sha256": "0703f033de1f644886453dfec6e14140f01f725d538575ad1162760b43e47bb0",
+    "sha256": "2193a95b27dc99ba5a2f87c3d7dd144fce7154e8d103fdacd9f096deddd79f25"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-19.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11206,
+    "raw_sha256": "b1be53d338e97104615c1dd591b6dd14c681b50e32a369de6663b171f44597b4",
+    "sha256": "6b0d53e3e2b7d30d045aec37c69d06f826926c726d12ca91639237f04f1b91d6"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-2.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12703,
+    "raw_sha256": "14e6b7b3c7a435f847620ab8fab90f7b33c115f16798546dae205639ae2fd57a",
+    "sha256": "b16291fb4b3450413b811243f9c912019bf247feb0443d330938efa8262c2f32"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-20.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12436,
+    "raw_sha256": "9a6657d10679b62348746b955569f3e3cc1c9c6e7f3ca2b76d47906db41ccdca",
+    "sha256": "d4314650b79e31d15f0ab5cfc2e6e09f42495f82cb2855fd7999438c0da4f286"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-21.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11011,
+    "raw_sha256": "90a0c5e33b732d176afeeca7d67b36b1c62213156788ef1fe1b1aa274b06d7a7",
+    "sha256": "08aa658865ea6e63a70d258c18e0c9e0ed05d92f78eee5ba314eaecb258e550d"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-22.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10951,
+    "raw_sha256": "94d3c6a8ce3d0e01927cab69eb5f46a5d49dd38ff5ac6d7e23fb36887704d4bf",
+    "sha256": "d809ae3aae1fb1332d378a25efc8b7e65a87d2fc09ebcc55d2d2a23654399d9d"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-23.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10875,
+    "raw_sha256": "137fe7b7627182731e6d60dbe6928cb4144a76ff2836d469f05077747c505772",
+    "sha256": "5da2f55ece966ac3d6d8dee0e0eddb53ba8a15620b0a45df9733fb1bf61cb079"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-24.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11721,
+    "raw_sha256": "7a344ecf32c8fec7d5f7e6c4a4eb3d9e4c97f67e55fcfa7a6cfbf3778975312a",
+    "sha256": "6a87e848ec66e7a54fc0d19820f6f0b6235ea6e33db97e8e527cdb5d28184ee2"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-25.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9719,
+    "raw_sha256": "f9bbc97235cd7f29fbdbf72069730ee8af7e70a008f72762c234782c6e9837f3",
+    "sha256": "ef75fa2261e88686ebd80ebd5e319d9910dda442ba592aec4e02572eccafeff7"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-26.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11285,
+    "raw_sha256": "055a3b3baf8a16e1658ba40a007460de52505d89629536950a0b33b6c3ee7ef3",
+    "sha256": "fa88ca86a6d8598efb1ee0aed03a0839828cfefe41cc9c2b4746a4ec7e67a772"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-3.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12175,
+    "raw_sha256": "72c1f0eaf2e4f35491ac5392cb01bea6d7b4fc5eac3b7d3eafa7f4b593e9088f",
+    "sha256": "6e5f7ddba8d98083165662891f528072e1e26c0f8be2992b39c22515930956fa"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-4.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10273,
+    "raw_sha256": "fa1aeede270cc9e1f4d87c00d1afae17a3e536980e395ac88d5218a79ca99ce1",
+    "sha256": "c1499229188899546b69ddc5c9a775a6c3d5293a869fca9d73a3e70eef354cd6"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-5.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13734,
+    "raw_sha256": "6c10e4a3373688c80f8d83273cb6d861f14af73a0eb67887d2c9489c37693523",
+    "sha256": "e33b3dddd3eda1d6602fb3c3211c96d21e3adf8535c4f6a7f4d4e6b285014e60"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-6.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12120,
+    "raw_sha256": "085621d6b232b00bc9494b9cc005e9b83849cf05a2eea480ba1c469516f72ed4",
+    "sha256": "5f0f9c7f6269a4135df5eebb9f05414fe48c3eed92caf8eb9512a71922a03b4d"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-7.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11764,
+    "raw_sha256": "553d15c330537502073182ce0dee88e5b1b032e5d5889b1e42a3f84f440e4a65",
+    "sha256": "c7af5a2a32dfb2386ad5c1703bff849518bc50a08e8a43067f6c710d5d1b1a84"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-8.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9920,
+    "raw_sha256": "7e9d669aec4bd67cc487b5854f6141c08173090edebb317c9f3013336f694d3b",
+    "sha256": "d7bd9efdbb60accd38fbc746f66b6593f96e06431890f9a66c8f72952bd209f8"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/module-9.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9717,
+    "raw_sha256": "08dab55116763ada0d620fb0456f0f1eb392531b12c7930dee9a4677245686b5",
+    "sha256": "e4ee8a7e8d53bc1ebe2d0378244efa9042c08b5928e7c6a5c74ded94fddcd15a"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/before/modules/public-13.pl.gz": {
+    "mode": 420,
+    "raw_bytes": 680,
+    "raw_sha256": "39b2f75d069a41a59272cd64d19a295c0d7d20db16406a163b93a0897b3de15d",
+    "sha256": "706cc4c2f9d6e901981676b3b7bfdae4ce2f029fe6305cc596e3f1b7ae185bfa"
+  }
+}

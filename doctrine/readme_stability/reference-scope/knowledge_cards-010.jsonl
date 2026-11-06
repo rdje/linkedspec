@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6106,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rtlutils-regex-hang.md","sha256":"7c5ef8aba87826a8f3eb32d7000fadced8989bda23a85472b00d22b13ae5d788","type":"member"}
 {"bytes":5439,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-call-computed-result-selection-gap.md","sha256":"bc0155c0b8e03ec5e578c61a5b61b550f6c95dbe5e88110bb14f1d2a1bc46211","type":"member"}
 {"bytes":4404,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-and-bare-edge-contract.md","sha256":"94cc91e5887da22ddb326419b8deebdc9185ff89cea93b1b80e91b36bb2e18b2","type":"member"}
 {"bytes":7559,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-five-backend-admission.md","sha256":"46c9eac5875585ec263269450e20c34e22686cb4d36a391a66c4b6104e6e31f6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5189,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-admission.md","sha256":"f49e75dc4988bb07396390dda18e84761c350cd5cd787494d78fd7adf0a089ce","type":"member"}
 {"bytes":4553,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-core.md","sha256":"62988d611c243bcc24f205d0906a381860046fd538d9e132ca9409aa594cfc30","type":"member"}
 {"bytes":7107,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-preflight.md","sha256":"b89cecaa01615bfd21bbcecac9fd0881c20931689827aecb1ac198bcb05d494a","type":"member"}
-{"bytes":5100,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-routes.md","sha256":"d205d0272432a0d539f0a7586163f274cd11da580b8c8da9388ed0148332e0a6","type":"member"}

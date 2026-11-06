@@ -1,0 +1,158 @@
+{
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/already_owned_sources.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11293,
+    "raw_sha256": "11436a2869a1636e6e16bb75958235fafe4998e866923e4f9a58b459a351d43c",
+    "sha256": "85b2c5b56f6ad983120c589781b17420921db219a4652b8759b5a5c6ef0568cc"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/compatible_prefix_guard.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13493,
+    "raw_sha256": "6b60669c46fa2bf145b77cf84bdbafd60c8b772d1897b12c99d2b8a501b4805e",
+    "sha256": "9493a552022edeeafa18e6ab9ebe5eed9d2d64b54a5f6bc0774bea1f6cc4711c"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/copy_guard.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11904,
+    "raw_sha256": "8c7b748b55d20c53f2029ef09f40b5bc4e62106b6912fd9735e485e20008893e",
+    "sha256": "582cf40d6e7b78cec0750142a46b8837d920bdf3a782702a5f856d8cd8924649"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/count_contrast.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 14281,
+    "raw_sha256": "d020f4eab16d1b08e6d53fe5f7fc80bff68f92c6288515069e02c449dfb6fe29",
+    "sha256": "3b86dbf9e20942d924ce0947f629f84d228df45b9d7291e91f076022b5c00f95"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/explicit_bridges.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13742,
+    "raw_sha256": "040de33dcced60165b13112a780aeaa519c34a05eba01785c0fca7a212cfc681",
+    "sha256": "b95401ecc3f535713287601a1f6b74e181ab56fcb86d98b2c3521e56d82d26de"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/free_keys_count.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9842,
+    "raw_sha256": "de6f186bde9a9d92f804e686c5c9c71f79f9906f9b71c7430cdea169d3e3ad40",
+    "sha256": "ab2aada94615847bfc5b1b3a8c04424e4be6d7a1ccfe5e33c60f7262cd620dd0"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/function_guard.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11772,
+    "raw_sha256": "a3345121c7cfa6b729f7c7ce2c3ed95613d2108a6c77253f285dfdc7ce9694e0",
+    "sha256": "708f4481cbc36e22c457bd64b46fd2c65c3507fd5896ea09be781c5f21697405"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/function_initial_source.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9727,
+    "raw_sha256": "cca12099a7568ff60214d8747f78261b6b331e18d6700cac0a33c8230d6f0515",
+    "sha256": "728663e176a573082b817944af392fcd1d7dd801a7719bca63daf928bae1c60a"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/initial_copy_logical.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11729,
+    "raw_sha256": "8ec392decbac87639505df885066eb2bcb83697683f8359e13e90d1696060f03",
+    "sha256": "73544da6604efeb70f5fecd486bc44e5400b791be5db8011ac6e027e6fc72e4d"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/initial_scalar_continuations.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10883,
+    "raw_sha256": "e94575f545e30e1140c63692e5cecebe06af75cc0adf54535985e6a9f195043a",
+    "sha256": "0fcb8a996bc0612ce3f4ebd08cf187d2ec3445f629ae0b83ca11c41f7449e9b8"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/initial_source_fallback.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10959,
+    "raw_sha256": "b2f6c23d98644ffd1053ed05c5e2807c90662446736696737b3c74101ffcc2d8",
+    "sha256": "d44ca9c8d59ef2b378be3292ffa9a50be90368f6e787230684ca248b058a3f49"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/key_count_compatible.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10718,
+    "raw_sha256": "52656b5cc06af0e39be7603c45add342e805cbd38ace9da53e7325e0a1420c31",
+    "sha256": "6e28746379efbc34ad98375f6a28df3cf6d2e5b03201c3db10e57ff4b1950b67"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/key_count_free_guard.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12711,
+    "raw_sha256": "feeb150689595010615c9943afc87c6c0da57eebac246eab1680e9833c9f882a",
+    "sha256": "c443470374df2ea91e329180960993546b14f5de054b222b572e313b89d5699c"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/key_count_receiver_guard.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12183,
+    "raw_sha256": "1b66e6b0b7a69489053a14638ae35cb57a67f2ce3c1f94cfaa2c5c50841d1fbf",
+    "sha256": "6ba2a12ca04db5d151a5275b75f26b492940ffc212c1d272a9feea7eecf3060e"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/keys_count_copy_logical.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12444,
+    "raw_sha256": "baaa0f3b8901f3751148bf6352a33a116c59e126c577aeb8af4e8036facb7903",
+    "sha256": "80ac752c542ceea45f9b9bda68289d975b084e9c807c72a954aa7857ad60e670"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/keys_count_with.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11214,
+    "raw_sha256": "3470c0111f4a0a3e3d4ad124e9f30648e1b03caabf281523f45f2be2bef4b9b2",
+    "sha256": "67e55c208ef9f44d64b4d689a10421da286986c4495b1979a2fddea088a76cf2"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/logical_guard.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12631,
+    "raw_sha256": "d5839a8d3f77107ba289688ef08ffa2becd139926e34ee7d6b6a94ddd260e15a",
+    "sha256": "d002a342a432d5f18d238f1548352449baad40633229923581fa968f6b576d33"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/logical_valid_zero.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 13861,
+    "raw_sha256": "f45eedc219ccea76e36c88c7e038a2adf907434257e1b34f79b78965b75ae86f",
+    "sha256": "32398648982812f919cfb4507130294020cfdd98ba5b42c0fd5bd0e55d77a372"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/malformed_receiver.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9725,
+    "raw_sha256": "b73941c386eb4a1399721841db89b32420c9ba6eb65c94e3ba74975c413eec16",
+    "sha256": "67067b79f3477cc4ac806e9abc8718e9c23162865180421f68f40cfa644ce580"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/needed_source_error.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9928,
+    "raw_sha256": "1655c2ecbcf13058a1e33001a3e443b12b91e68480a4683bcf9a29086ce5ab77",
+    "sha256": "1875ddbde6cf8ead4b0e5420f55ff624db8eed2514d483a1c39ddf73bc51f662"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/produced_zero_keys.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11019,
+    "raw_sha256": "e64c33b8499aadceb58c115b95261383ed90b6e6a61b22bc2fdc5d5ca1c41c6c",
+    "sha256": "fb6d3a804ae3c6c4072df2fe58f821e7002dde01eee74eb3f7b7a8895710d483"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/receiver_keys_count.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9716,
+    "raw_sha256": "c00569ca9bc43446e116103407834557695f55ee36d3271eb390e27f544f2b60",
+    "sha256": "4862be120f9408b8b6324bbfd09d250dd8a51c93976f90f18113ff26328c3ae2"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/seeded_hash.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10008,
+    "raw_sha256": "7dc23f00a1c071762144735e466c88117d85b293f52d59f64e9a11594f731179",
+    "sha256": "91dc0bfff919d162c5d2d2ddaf42d10731a3aab76e801eb24868d2e37706452c"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/source_domain.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12337,
+    "raw_sha256": "d546ac4d8c62ea0bfde48f6384bfee3a8b5cad5ba8bd6a6c342a2aa8ce92f99c",
+    "sha256": "06d2fbe5fd5bf57d0fcd96172321daab2ad90b603ac9c9033698a962ef5a24b4"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/source_once_snapshot.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12128,
+    "raw_sha256": "faca4d60a88e100ea8bb971c9f37279f3e568dcbf1b8ae6e0306e0e1d298d759",
+    "sha256": "0781bd8b065916f3316168fa7f6b9f47de7b04b9071c9ac42c94a9aaa98f374c"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake/modules/zero_with.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 10281,
+    "raw_sha256": "d45e9512683892a2c41b220bc57972afc7157dd02a4d1fff9d5e94876bba3126",
+    "sha256": "b7ec00481e49bf281fcc109a17cfe2e119ca9b64752d8de65f41216f380fd84d"
+  }
+}

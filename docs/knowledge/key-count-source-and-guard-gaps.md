@@ -11,7 +11,7 @@ answers:
   - "may an aborted key-count domain profile be frozen"
   - "why does count_keys(4) count host main::4"
 date: 2026-11-06
-status: Perl typed75.0.1 and domain75.0.2 focused-checked; guards75.1 next before independent peers
+status: Perl typed/domain/ordinary guards focused-checked; independent peers and callable75.6 next
 tags: [perl, count_keys, guards, source, domain, copy, logical, host]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict at that assessment boundary."
 reverify:
@@ -68,3 +68,11 @@ is now focused-checked: [[perl-key-count-source-domain]]. Boolean/Array sources
 return zero, valid named Hash counts remain, and twelve exact public/emitted
 numeric4 seed rows return zero with unchanged host data. The original assessment
 observations remain historical; no peer or full-admission inference.
+
+Current bounded guard75.1 is focused-checked:
+[[perl-key-count-result-source-guards]]. Corrected26 groups13PASS13RED become
+26PASS (25 ready/one excluded), thirteen healthy exact; six exact public/emitted
+Number2 seeds now null/host unchanged. Final71/syntax/seven recovery corruptions
+pass. Initial coalesce/cat zero also remains intact. Registered-function receiver
+paths stay on their existing owner; concrete P1 callable75.6 precedes broader
+admission. Assessment-era defects above remain historical, not current verdicts.

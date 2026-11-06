@@ -1,0 +1,26 @@
+{
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/function-controls/modules/function_free_keys.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9925,
+    "raw_sha256": "357ccb7b67ded3d10eab02d44611b154041dc47db92dee441f7a05d2854f8795",
+    "sha256": "f61be8254341f4454638c3aff01e469d3f2316af8bbc43acdd6f030bf54965c5"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/function-controls/modules/function_hash_receiver.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9684,
+    "raw_sha256": "18a2edcc61c75600d59dfb6e7226d5946652ab877a4da250bfbfe50a7808e352",
+    "sha256": "f1a123a0240f8c2a1f876f2a032d444935d962eb02001792d420ce3c0c11828f"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/function-controls/modules/function_text_receiver.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9682,
+    "raw_sha256": "b9ac9f853f8ebf3034b833f5f4fda48e3532e1626c7b8f844873a25ff78eb445",
+    "sha256": "f8995ad9ccc44cb4f4bace9a27c95bf4d18f7642ae2cc545a1beeebf61f86536"
+  },
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/function-controls/modules/function_value.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9490,
+    "raw_sha256": "e05568380e02d1718e00e99bca212652826586a5d22f04705cf4e5cd787dc489",
+    "sha256": "acfd008a7b6422338e26f1c236cd1b865023fc0383c0031f01b5eaaaad8be2e2"
+  }
+}

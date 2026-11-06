@@ -1,0 +1,11 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "perl",
+  "-Iperl",
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/intake_probe.pl",
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/function-controls.json",
+  "docs/checkpoints/key-count-guard-perl-2026-11-06/function-controls/modules"
+]

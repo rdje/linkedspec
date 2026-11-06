@@ -1554,7 +1554,9 @@ admission remain open.
 - **Returns**: int
 - **Behavior**: Returns the number of keys in the hash. Returns `0` for missing or non-hash input. On Perl/Rust/Dart/Julia/Lua, `{"a":1,"b":2}.count_keys().mul(2)` → `4` and `{}.count_keys().add(1)` → `1`; the result feeds existing compatible scalar/number methods just like `num_add(count_keys(meta),3)`. Source evaluation and the count precede later operands, so their mutations do not recompute that count.
 
-- **Current Perl status (November6)**: Typed-source75.0.1 and source-domain75.0.2 are implemented with focused checks. Initial Boolean/Array/missing/Number/text sources return `0`; valid named Hash counts remain intact. Numeric `4` is data, including under the retained localized `main::4` controls. Mutating value blocks use typed ownership, so required binding errors occur during execution. Regenerate emitted Perl. Result guards75.1 remain pending: incompatible consumers can still return the wrong value or run later bodies. Full admission and independent backend assessment remain separate.
+- **Current Perl status (November6)**: Typed-source75.0.1, source-domain75.0.2 and bounded ordinary result guards75.1 are implemented with focused checks. In retained literal/computed initial-source controls, Boolean/Array/missing/Number/text inputs return `0`; valid named Hash counts remain intact. Numeric `4` stays data under localized host controls. Mutating value blocks keep typed errors during execution. Regenerate emitted Perl.
+
+Canonical free counts and ordinary literal/binding/block receiver counts reject incompatible Array/Hash consumers with null before operands or later bodies. Rejection survives copy/eager logical/with; legitimate zero and explicit bridges remain valid. Registered callable-result receiver coverage75.6, independent peers and full admission remain separate.
 
 ```text
 count_keys(false)                     # 0
@@ -1567,6 +1569,19 @@ The initial source is evaluated once before later operands. For example,
 `count_keys({calls=num_add(calls,1);[1]}).add(1)` increments an existing numeric
 `calls` once and yields `1`. A source binding error still propagates; returning
 zero for an ordinary non-Hash value does not mask failed source evaluation.
+
+```text
+false.count_keys().coalesce(7)       # 0
+[].count_keys().cat("!")             # "0!"
+count_keys({}).count()               # null: a produced Number is not an Array
+count_keys({}).with(){return([1,2])}.count() # 2: explicit Array bridge
+
+order="";
+out=count_keys({"k":1}).take({order=cat(order,"A");1})
+  .copy().and({order=cat(order,"D");true})
+  .with(){order=cat(order,"W");return("ran")};
+# out=null, order=""; incompatible operands and later bodies stay skipped
+```
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

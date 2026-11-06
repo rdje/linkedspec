@@ -3820,8 +3820,8 @@ Hash/String bridges retain their existing behavior and source snapshots.
 
 A produced count is Number data. The target for
 `count_keys({"k":1}).take(1).with(){return("ran")}` is null with the body skipped;
-current Perl runs the body. `count_keys({"k":1}).count()` should also reject the
-Array-only consumer, but currently returns zero. Initial CountKeys source policy
+the assessment-era Perl runs the body. `count_keys({"k":1}).count()` also
+returned zero instead of rejecting the Array-only consumer;75.1 now repairs both. Initial CountKeys source policy
 and already-produced result consumption must remain distinct.
 
 The assessment retains twenty-two finite programs. Seven original preservation
@@ -3840,7 +3840,7 @@ regressions; this finding is limited to those carriers and that numeric namespac
 Actual inputs, full raw outputs, modules and readonly recovery are retained under
 `docs/checkpoints/key-count-selection-2026-11-06/`.
 
-Next implement Perl75.1 and independently assess
+Perl75.1 is now focused-checked below; next independently assess
 Rust75.2, Dart75.3, Julia75.4 and installed Lua75.5. Preserve their own producer/
 source domains, signatures, copy depths and mutation restrictions. Full native/
 transitive custody, general isolation, canonical discovery and admission remain
@@ -3885,7 +3885,40 @@ domain23, typed-source9 and Count-length5 checks pass37 groups. Regenerate emitt
 Perl. Actual first inputs, full channels, modules and readonly recovery live in
 `docs/checkpoints/key-count-domain-perl-2026-11-06/`.
 
-Ordinary result guards75.1 and independently assessed peers are next. The original
-aborted assessment aggregate remains historical;75.1 captures a valid current
-profile before its guard edits. Full source/context/transitive custody, legacy
+The original aborted assessment aggregate remains historical;75.1 captures a
+valid current profile before its guard edits. Full source/context/transitive custody, legacy
 bare/absent binding scope, general isolation/discovery/admission remain separate.
+
+
+## Ordinary Perl key-count guards
+
+Perl75.1 now guards canonical free CountKeys results and ordinary zero-extra
+literal/binding/block prefixes through the existing actual-kind dispatcher.
+Incompatible Array/Hash consumers return null before their operands and later
+copy/logical/with effects. Produced Number/zero cannot regain Count's initial
+zero fallback. For example, `count_keys({}).count()` is null, while
+`count_keys({}).with(){return([1,2])}.count()` is2 through an explicit Array bridge.
+
+Initial source zero remains distinct. `false.count_keys().coalesce(7)` now gives0
+and `[].count_keys().cat("!")` gives"0!". Later default/text routing no longer
+places a Hash guard before that initial producer. Existing Count/Length/numeric/
+default results retain strict incompatible-consumer behavior.
+
+The corrected unchanged26-case regression moves thirteen passing/thirteen
+failing groups to26PASS: twenty-five ready cases and one excluded function
+profile. All thirteen healthy complete observations stay exact. Six exact public/
+emitted Number2 host-seed controls now return null without host mutation. Final
+guard26/domain23/typed9/Length-Count8/Count-length5=71 focused groups and syntax
+pass. Actual first inputs, original/calibrated outputs, modules/carrier, full raw
+channels and readonly recovery live under
+`docs/checkpoints/key-count-guard-perl-2026-11-06/`. Regenerate emitted Perl.
+
+Registered-function receiver prefixes stay on their current owner. Four controls
+confirm ordinary function values, free CountKeys(function()), compatible Hash
+function counts and text function uppercase. The incompatible Boolean-function
+CountKeys receiver keeps its null/unready/count_keys profile; it is excluded from
+this ordinary guard admission. Concrete P1 callable75.6 owns the remaining
+callable continuation coverage before parent/full admission. Independent Rust,
+Dart, Julia and installed Lua assessments are next. Full source/context/native-
+transitive custody, general isolation, legacy bare/absent bindings, discovery,
+declared Lua5.4 and full23.4 remain separate.

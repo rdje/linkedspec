@@ -1,4 +1,5 @@
-{"member_count":10,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":11,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2476,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/verification-output-chunk-boundary.md","sha256":"06909441328e5b042a3abd5f911b622eed668e5d6f4d3d029e952ef4f00f33c7","type":"member"}
 {"bytes":11342,"lines":166,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/with-result-selection-source-gap.md","sha256":"4dc6beed40a22aa352a1aad1a450c46c73623bb2f95f50cce0cfc0a20bdf767f","type":"member"}
 {"bytes":10296,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/working-vars-no-strict-need-my-lexical.md","sha256":"bef0745a3fd57bbce5fe7fef8db35a7f47350fc0baa2d7b3ea91c9ab329f3243","type":"member"}
 {"bytes":10473,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-map-leaves-neutral-composition.md","sha256":"1f45c33b8ce6ec4f32f1a86bb6765da6b583eaed1521af81d0e70bf042b02aa4","type":"member"}

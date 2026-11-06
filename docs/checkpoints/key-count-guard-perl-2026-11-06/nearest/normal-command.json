@@ -1,0 +1,15 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "LINKEDSPEC_KEY_COUNT_GUARD_DIR=docs/checkpoints/key-count-guard-perl-2026-11-06/nearest/modules",
+  "prove",
+  "-v",
+  "-Iperl",
+  "t/key_count_result_guard_composition.t",
+  "t/key_count_source_domain.t",
+  "t/key_count_block_source_composition.t",
+  "t/length_count_source_ownership.t",
+  "t/count_length_receiver_contract.t"
+]

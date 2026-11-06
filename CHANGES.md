@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — retain CountKeys guards through ordinary composition
+
+Canonical free/ordinary receiver CountKeys results retain actual-kind/copy/logical/with rejection before Count fallback. Separate source ownership from later default/text routing to preserve initial zero through coalesce/cat. Corrected unchanged26 groups13PASS13RED become26PASS (25 ready/one excluded); all thirteen healthy observations exact. Six current public/emitted Number2 seeds null/host unchanged; final71/syntax/seven recovery corruptions pass. Original hypothesis/diagnostic calibration, actual first inputs/modules/carrier/full channels retained. Regenerate emitted Perl. Book/Knowledge/task/live records align; independent peers next, concrete P1 callable75.6 before broader admission.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — enforce CountKeys initial source kind and literal boundary
 
 Two producer clauses require a Hash reference for computed sources and an identifier for named Hashes. Unchanged23 groups10PASS13RED become23PASS/native-fresh; ten healthy observations exact. Initial Boolean/Array zero and source-once/order/compatible continuations complete; twelve exact localized public/emitted numeric4 seed rows stay zero with host data unchanged. Final37/owner syntax and six recovery corruptions pass. Actual first inputs/modules/full raw epochs retained; regenerate emitted Perl. Catalog/examples/book/Knowledge/task/live pointers align. Perl75.1 result guards next; full admission/peers/legacy scope remain separate.

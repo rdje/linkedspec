@@ -1857,6 +1857,23 @@ sub _ordinary_free_length_result_source {
  return 1
 }
 
+# CountKeys keeps Hash counts and the initial non-Hash zero policy.
+# Only canonical ordinary one-value calls join result-kind dispatch.
+sub _ordinary_free_key_count_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') eq 'count_keys'
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 1;
+ foreach my $value (@{$call->{args}}) {
+  return 0 unless ref($value) eq 'HASH'
+   && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+ }
+ return 1
+}
+
 # Scalar numeric calls keep their numeric producer and strict input domains.
 # The one-Array min/max reducer is a separate source role.
 sub _ordinary_free_numeric_result_source {
@@ -5584,15 +5601,26 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Keep ordinary presence/membership/index/Count/Length copy steps in one emitted chain so
+  # Registered-function receivers retain their current compatible-value owner.
+  # Canonical free CountKeys and ordinary zero-extra prefixes retain result kinds.
+  my $ordinary_key_count_result_chain = (_ordinary_free_key_count_result_source($receiver)
+    || (($calls->[0]{method} // '') eq 'count_keys'
+     && ($calls->[0]{source_method} // $calls->[0]{method}) eq 'count_keys'
+     && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}}
+     && !(($receiver->{kind} // '') eq 'call'
+       && defined(_user_function_definition_for_name($deps, $receiver->{name})))))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Keep ordinary presence/membership/index/size copy steps in one emitted chain so
   # rejection survives copy. Logical producer folding keeps its existing route.
   my $guarded_copy_chain = ($ordinary_has_key_result_chain || $ordinary_contains_result_chain
-    || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain)
+    || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
    && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
-  # A logical producer must not turn a rejected Count/Length prefix into valid null.
+  # A logical producer must not turn a rejected size prefix into valid null.
   # Keep these canonical chains together, including any ordinary copy links.
-  my $guarded_size_logical_chain = ($ordinary_count_result_chain || $ordinary_length_result_chain)
+  my $guarded_size_logical_chain = ($ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain)
    && (grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 
   # Logical and copy receivers consume generic typed values. Fold prefixes
@@ -5773,7 +5801,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
     || $ordinary_logical_result_source || $ordinary_lexical_result_chain
     || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
     || $ordinary_has_key_result_chain || $ordinary_string_predicate_result_chain
-    || $ordinary_contains_result_chain || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain)
+    || $ordinary_contains_result_chain || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain)
    && (grep { ($_->{method} // '') eq 'with' && $_->{receiver_trailing_block_arg} } @$calls)
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || ($_->{receiver_trailing_block_arg} && ($_->{method} // '') ne 'with') } @$calls);
@@ -5925,6 +5953,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $lower_tree_receiver_block_call;
   my $append_selected_value_chain_call;
   my $count_source_zero_fallback;
+  my $key_count_source_zero_fallback;
   $append_selected_value_chain_call = sub {
    my ($current_expr, $call, $receiver_family, $rejection_flag) = @_;
    my $method = $call->{method} // '';
@@ -5997,9 +6026,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
              || ($call == $calls->[0] && !_ordinary_free_index_result_source($receiver)))) {
       $kind_matches = "(!defined($value_expr) || $kind_matches)";
      }
-     # Count's initial source accepts non-arrays with its existing zero
-     # fallback. Later incompatible consumers still set the rejection flag.
-     if ($count_source_zero_fallback && $method eq 'count' && $call == $calls->[0]) {
+     # Initial size sources keep their zero fallback. Later incompatible
+     # consumers still set the rejection flag.
+     if ((($count_source_zero_fallback && $method eq 'count')
+          || ($key_count_source_zero_fallback && $method eq 'count_keys'))
+         && $call == $calls->[0]) {
       $kind_matches = '1';
      }
      $expression = "$kind_matches ? ($expression) : $rejected";
@@ -6199,8 +6230,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
   my $scalar_string_chain = $first_method !~ /^(?:push_front|push_back|pop_front|pop_back)$/o
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '') } @$calls)
    && (grep { _is_scalar_string_receiver_value_chain_method($_->{method} // '') } @$calls);
-  my $emitted_result_chain = $defined_default_chain || $scalar_string_chain
-   || $receiver_is_with_trailing_block
+  # Existing source ownership is distinct from later default/text routing.
+  my $retained_result_source = $receiver_is_with_trailing_block
    || ($receiver->{kind} // '') eq 'value_access'
    || _ordinary_input_cursor_result_source($receiver)
    || _ordinary_explicit_push_result_source($receiver)
@@ -6214,6 +6245,12 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $ordinary_contains_result_chain || $ordinary_index_result_chain
    || $ordinary_length_result_chain
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
+  my $emitted_result_chain = $defined_default_chain || $scalar_string_chain || $retained_result_source;
+  $key_count_source_zero_fallback = $ordinary_key_count_result_chain && !$retained_result_source
+   && !_ordinary_free_count_result_source($receiver)
+   && !_ordinary_free_key_count_result_source($receiver);
+  # CountKeys results own their Number before Count's initial-source permission.
+  $emitted_result_chain ||= $ordinary_key_count_result_chain;
   # New Count receiver sources keep the legacy non-array zero fallback.
   # Existing emitted-result owners, including Length, retain their own kind guards.
   $count_source_zero_fallback = $ordinary_count_result_chain && !$emitted_result_chain
@@ -6252,7 +6289,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
       || $ordinary_logical_result_source || $ordinary_lexical_result_chain
       || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
       || $ordinary_has_key_result_chain || $ordinary_string_predicate_result_chain
-      || $ordinary_contains_result_chain || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain;
+      || $ordinary_contains_result_chain || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain;
     my $source_expr = $current_expr;
     my $applied = $current_family eq 'array'
       && !(defined($rejection_flag) && ($call->{method} // '') eq 'with')

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "initial_scalar_continuations",
+    "body": "return([false.count_keys().coalesce(7),[].count_keys().cat(\"!\"),undef.count_keys().with(){return(value)}])",
+    "source": "Value:: I {return([false.count_keys().coalesce(7),[].count_keys().cat(\"!\"),undef.count_keys().with(){return(value)}])}",
+    "expected": [
+      0,
+      "0!",
+      0
+    ],
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "initial_copy_logical",
+    "body": "order=\"\";out=[].count_keys().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=[].count_keys().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};return([out,order])}",
+    "expected": [
+      false,
+      "DW"
+    ],
+    "input": "x",
+    "rule": "Value"
+  },
+  {
+    "id": "function_initial_source",
+    "body": "return(make().count_keys().add(1))",
+    "source": "fn make(){return(false)} Value:: I {return(make().count_keys().add(1))}",
+    "expected": null,
+    "input": "x",
+    "rule": "Value",
+    "expected_unresolved": [
+      "count_keys"
+    ],
+    "domain_note": "Preserve current incompatible function-result null/unready profile. The original expected1 hypothesis was excluded after independent function-value/free-CountKeys/compatible Hash/text controls; no function-context expansion."
+  },
+  {
+    "id": "already_owned_sources",
+    "body": "return([count([1]).count_keys(),length(\"x\").count_keys(),num_add(1,1).count_keys(),coalesce(undef,4).count_keys()])",
+    "source": "Value:: I {return([count([1]).count_keys(),length(\"x\").count_keys(),num_add(1,1).count_keys(),coalesce(undef,4).count_keys()])}",
+    "expected": [
+      null,
+      null,
+      null,
+      null
+    ],
+    "input": "x",
+    "rule": "Value"
+  }
+]

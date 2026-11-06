@@ -1,0 +1,22 @@
+[
+  {
+    "id": "function_value",
+    "source": "fn make(){return(false)} Value:: I {return(make())}",
+    "expected": false
+  },
+  {
+    "id": "function_free_keys",
+    "source": "fn make(){return(false)} Value:: I {return(count_keys(make()).add(1))}",
+    "expected": 1
+  },
+  {
+    "id": "function_hash_receiver",
+    "source": "fn make_hash(){return({\"k\":1})} Value:: I {return(make_hash().count_keys())}",
+    "expected": 1
+  },
+  {
+    "id": "function_text_receiver",
+    "source": "fn make_text(){return(\"x\")} Value:: I {return(make_text().uppercase())}",
+    "expected": "X"
+  }
+]

@@ -8,7 +8,7 @@ answers:
   - "which regression protects initial CountKeys zero and source order"
   - "is the Perl CountKeys source-domain repair fully admitted"
 date: 2026-11-06
-status: P1 domain75.0.2 implemented with focused checks; consumer75.1 next
+status: Perl domain75.0.2 and ordinary guards75.1 focused-checked; peers/callable/admission pending
 tags: [perl, count_keys, source, domain, hash, host, guards]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2; docs/checkpoints/key-count-domain-perl-2026-11-06/REVIEW.md retains actual first inputs/modules/full raw channels. Unchanged23 groups10PASS13RED to23PASS, ten healthy exact, twelve localized seed rows zero/host unchanged, final37/syntax/six recovery corruptions pass."
 reverify:
@@ -30,9 +30,10 @@ twelve rows become0 without warnings/errors or host mutation. This is limited
 to those exact localized carriers, not native seeded or general isolation.
 Final domain23/typed-source9/Count-length5=37 focused groups and owner syntax pass.
 
-The original aborted assessment profile remains historical. Consumer75.1 must
-capture its own valid current domain aggregate before result-guard changes;
-computed Number2/main::2 consumer handling is still pending:
+The original aborted assessment profile remains historical. Consumer75.1 captures
+a valid current domain aggregate before guard edits and repairs ordinary Number2/
+main::2 consumption: [[perl-key-count-result-source-guards]]. Callable75.6 and
+broader admission remain separate:
 [[key-count-source-and-guard-gaps]]. Full source/context/transitive custody,
 legacy bare/absent SESSION17, general isolation/discovery/full23.4 remain separate.
 Readonly recovery checks historical inputs, not latest-runtime source freshness.
