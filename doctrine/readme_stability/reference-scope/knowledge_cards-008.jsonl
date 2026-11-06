@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2940,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-explicit-push-result-reads.md","sha256":"27fc1049ad4e3838d6c500c3a6e6da9509aec9ca74052b59f9dc9d3fcfbe965b","type":"member"}
 {"bytes":7371,"lines":103,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-capture-framework.md","sha256":"948f4f4da14711eef7add56918b0ab93de7c23a126d48a083c9858bfa15477c7","type":"member"}
 {"bytes":3885,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-capture-plan.md","sha256":"1e32d0879fd8c7bfb9d288df8acd3509fc10968c8ed539cf2a2b2c3e83a20814","type":"member"}
 {"bytes":4485,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-factory-fixture-selector-context.md","sha256":"4e228b9fb252bf61656d3e34af9f708f15dd6a267e516974046d70f6b237f1fd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5663,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-dormant-red.md","sha256":"366c0e730beb39f24e52a9998385d9d8f7cec1e369ff09de6d42dcd093c14565","type":"member"}
 {"bytes":10115,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-integration.md","sha256":"5267b896a1921e9f6b338857b6bfb84fb9823df5a5fbfe5e5de625bf27016ed1","type":"member"}
 {"bytes":6328,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-private-authority.md","sha256":"a6d2ec1f94771491e603264b18a8eaf22a1716b2ceeee71b90219693314f1eb6","type":"member"}
-{"bytes":3871,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-unwind-actual-state-gap.md","sha256":"b434647511695d2ba198e588720685fc62248a438a0cefdb85fdd24601439329","type":"member"}

@@ -1,0 +1,23 @@
+{
+  "compatible_targets": 12,
+  "groups": 16,
+  "independent_profiles": 4,
+  "module_and_parsed_bodies_unchanged": 16,
+  "original_observations_preserved": 16,
+  "recovery_corruptions": [
+    "compatible numeric regression",
+    "Boolean peer normalization",
+    "needed source error masked",
+    "missing fresh route",
+    "profile source drift",
+    "actual module drift"
+  ],
+  "routes": [
+    "native",
+    "restored",
+    "plan",
+    "fresh"
+  ],
+  "runtime_changes": 0,
+  "scope": "finite historical authored preservation; declared direct grammar inputs only; native/cache/transitive custody and isolation/admission remain separate"
+}

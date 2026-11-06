@@ -1,0 +1,92 @@
+{
+  "boolean_receiver_profile": {
+    "fresh": {
+      "value": null
+    },
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "source": "fn make_bool(){return(false)} Value:: I {return(make_bool().count_keys().add(1))}"
+  },
+  "boolean_terminal_profile": {
+    "fresh": {
+      "value": null
+    },
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "source": "fn make_bool(){return(false)} Value:: I {return(make_bool().count_keys())}"
+  },
+  "malformed_receiver_profile": {
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {order=\"\";out=make_hash({order=cat(order,\"S\");0}).count_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}"
+  },
+  "needed_argument_error": {
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "actual_arity": null,
+        "code": null,
+        "expected_arity": null,
+        "helper_name": null,
+        "stage": "runtime_execution"
+      },
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "actual_arity": null,
+        "code": null,
+        "expected_arity": null,
+        "helper_name": null,
+        "stage": "runtime_execution"
+      },
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "source": "fn make_hash(ignored){return({\"k\":1})} Value:: I {return(make_hash({items=\"text\";push(items,\"x\")}).count_keys().coalesce(\"masked\"))}"
+  }
+}

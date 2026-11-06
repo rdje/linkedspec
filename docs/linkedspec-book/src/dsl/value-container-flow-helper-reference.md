@@ -1241,6 +1241,7 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 | Helper | Result | Use it when |
 | --- | --- | --- |
 | `count_keys(hash_expr)` | scalar count | count object keys; undefined hash expressions count as `0`. |
+
 | `sorted_keys(hash_expr)` | array value | get keys in stable lexical order. |
 | `sorted_values(hash_expr)` | array value | get values in the stable lexical order of their keys. |
 | `has_key(hash_expr, key)` | `1` or `0` | test key existence, not value definedness. |
@@ -1253,6 +1254,18 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 | `hash_expr.map_leaves() { block }` | hash value | return a new tree with every non-hash leaf replaced by the block result. |
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
 | `binding_name.map_leaves!() { block }` | updated hash/array value | All five backends: atomically replace leaves and rebind one bare named receiver. |
+
+Registered Hash-function results also compose on the focused-checked Perl, Rust,
+Dart and Julia routes. With `fn make_hash(){return({"k":1})}`,
+`make_hash().count_keys().add(1)` yields `2`, and
+`make_hash().count_keys().cat(" keys").uppercase()` yields `"1 KEYS"`.
+An incompatible `.take(effect)` returns null and skips `effect`; a following
+`.copy().with(){return("ran")}` keeps that rejection. An explicit compatible bridge,
+`make_hash().count_keys().with(){return([1,2])}.count()`, yields `2`.
+Dart/Julia Boolean-function receiver terminal/composed results remain null/null;
+Perl/Rust return0/1. Free `count_keys(make_bool()).add(1)` remains1 for a function
+returning false. These are independent focused backend profiles; installed Lua
+callable coverage and full admission remain separate.
 
 `rename_key` preserves a field's value while returning a new Hash. On Perl, this returns `[{"stage":"draft"},{"old_stage":"draft"}]`:
 

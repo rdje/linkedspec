@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4751,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/retired-return-helpers-canonical-rewrite.md","sha256":"5b8ea4cfc84eea03aa03a1628cb0fc8869cf1a64037ec6bea659ea7e8591aa49","type":"member"}
 {"bytes":4653,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rgx-bootstrap-published-remedy.md","sha256":"0756574be7dfe0cba746597878fd0c0e1b9a49aa22e697a95931ba506d1eb476","type":"member"}
 {"bytes":2721,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/roadmap-progressive-summary-projection-drift.md","sha256":"7c63b058dacbae5e8e34767345a086c186d6e3dcde36239560e478ce9a9aaaa8","type":"member"}
 {"bytes":2913,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/root-rule-rollout-roadmap-projection.md","sha256":"cc484f11d03bf9956ddeafc9d7d620f4c56e0806aab4c48d6ca3cdc71c94df13","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2218,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-push-snapshot-result-guards.md","sha256":"bf24e64b366c2043d912b45f667e4e480e282e4df726e0442722467631fb1c32","type":"member"}
 {"bytes":2580,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-receiver-string-bridge-guards.md","sha256":"cefc98541a51419d38ec3796c53d56b461869cd17e42f7c6ea740929f78dd4d6","type":"member"}
 {"bytes":4475,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-token-variable-use-gap.md","sha256":"9029e74870c5704e344c814ab036681b1cc48c5f824b76b607d81cfbfa0ae9ab","type":"member"}
-{"bytes":5747,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-transaction-dormant-red.md","sha256":"983db7178c1ee7151054575cfcf38e3c51c07c3d2ea5c09fa7b66acfbe947fe0","type":"member"}

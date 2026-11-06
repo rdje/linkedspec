@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2486,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md","sha256":"f8e24060a7ccef7b1ed9af98865c5144c2cb926ea67c75ad163fb56d6a3fc377","type":"member"}
 {"bytes":2111,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-handoff-task-status-consistency.md","sha256":"f676ce242569c4d89dac7a614d579bc9e7268c721ec3f24c513ab5cb307e1018","type":"member"}
 {"bytes":1931,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-post-commit-hook-verification-only.md","sha256":"056d664f26ee8241d82c7afd947f8891f4160eb7fe27a7e18b62896ec4de0ed0","type":"member"}
 {"bytes":2073,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/method-like-dsl-migration-status.md","sha256":"6c8e11172488eb12df2645d71b652ec77c7ed026ba7069a1af3014ebcf1f8bbe","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4938,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-blind-return-duplicate-scalar.md","sha256":"83199b9e2639fd0573b3a301818de24935bba81de15b4ec8c37531689f7dbcf0","type":"member"}
 {"bytes":6279,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-executable-source-membership.md","sha256":"7944d2f5940e85611abd03b2ea86ff230a826c3171a3e9a0de65f109b4b00bf6","type":"member"}
 {"bytes":2141,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-explicit-push-result-fluent.md","sha256":"26323ae4f54357b6d809eee55fe931bf748543a76b3a738dd8144be01f7f63dc","type":"member"}
-{"bytes":2940,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-explicit-push-result-reads.md","sha256":"27fc1049ad4e3838d6c500c3a6e6da9509aec9ca74052b59f9dc9d3fcfbe965b","type":"member"}

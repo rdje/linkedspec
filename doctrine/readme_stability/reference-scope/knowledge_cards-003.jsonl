@@ -40,6 +40,7 @@
 {"bytes":3483,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-codeblock-dynamic-invocation-gap.md","sha256":"96ced49749a62b13528dbb443077b082e074ad79c3230507c11d6b629bfccc47","type":"member"}
 {"bytes":7485,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-codeblock-dynamic-invocation.md","sha256":"4b5b0d495883903241058d8ee0d08f40f0b2cefa4bd3005e618d6f6cec7bd7f1","type":"member"}
 {"bytes":5494,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-codeblock-literal-state.md","sha256":"20d4b52d02c9fd903a9c890297758111b0f535daa22da258fea630beda81b388","type":"member"}
+{"bytes":2740,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4","path":"docs/knowledge/julia-callable-key-count-preservation.md","sha256":"f25f6983ea54ced1c387dbf8ac1023db036aa43d8ebf4dfe42019c3bf1987c1a","type":"member"}
 {"bytes":9126,"lines":147,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-selector-validation-gap.md","sha256":"715f264cd6dcefd803b103e6cd16f416d64f088cf996023d3f5cd0f58a0c33c4","type":"member"}
 {"bytes":7671,"lines":126,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callback-helper-recursion-identity-gap.md","sha256":"b93c6b821bba9105f8aa144d702198505e11fd9473c51d918f9ff2cd412568fd","type":"member"}
 {"bytes":2904,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-canonical-primary-cli-trace.md","sha256":"374208f60b9e93245cf4f39ed6300907d038dde46ee5ad77cbd591fc77628600","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7377,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-admission.md","sha256":"f6f0bf4bad7e01a40b6e099f519d8a029435e0d628a383c853efd3ffef55c032","type":"member"}
 {"bytes":7864,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-authority.md","sha256":"6ae78446bbdd1823403cba3ca63368cc70112b32754514ed1be2ee8115213b20","type":"member"}
 {"bytes":7340,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-carriers.md","sha256":"6437303c1305e69c4fe7a02aa5ddff2b96ce3e511ebd262b004e3ff7ccfb0338","type":"member"}
-{"bytes":6383,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-dormant-red.md","sha256":"40d7174f0ee3c63b3afe0cd675a5cb237b9df5194c34f0c1f49406e50cda1320","type":"member"}

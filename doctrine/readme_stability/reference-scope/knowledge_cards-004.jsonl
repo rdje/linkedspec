@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6383,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-dormant-red.md","sha256":"40d7174f0ee3c63b3afe0cd675a5cb237b9df5194c34f0c1f49406e50cda1320","type":"member"}
 {"bytes":4892,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-recomposition.md","sha256":"089ed1089c2b4706380f7ef82b0e246499fa2059e4cc338c5bdf3766ba3567ab","type":"member"}
 {"bytes":7321,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-project-data-ssd-storage.md","sha256":"9f45017af2d4be63899833f90011e39cf49b7c7cb1de05d7424c84295e47dda2","type":"member"}
 {"bytes":2346,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-push-snapshot-result-guards.md","sha256":"2f096ae9ea6bfb4ce4ad01063576c976a61aff0af354317e870bc6f7af1d8489","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4870,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-dynamic-invocation.md","sha256":"f97f89e2bd278f498c8a30558df7700ddd8357a12f5baefa44769bb2371ac49a","type":"member"}
 {"bytes":8173,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-emitted-route-identity.md","sha256":"27b73fdbac11e5e05db242900a910eb571ea904b9e29a765011727213b486748","type":"member"}
 {"bytes":4537,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-literal-state.md","sha256":"fdf714656d594dc667ec7b024f87cef3d04b38846c433cdd3b91dd7c9b3f4e17","type":"member"}
-{"bytes":6967,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"1579b754c28016675926185e4bf44f7a2eaa1e13b5a46276a47708adf8ca28f3","type":"member"}

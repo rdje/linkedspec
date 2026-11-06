@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Preserve Julia callable CountKeys composition
+
+Existing Julia behavior passes16 authored programs/four routes without runtime edits. Add an explicit-grammar regression and source-bound independent Boolean null/null, malformed-arity and needed-error profiles. Compatible Hash-function counts preserve guards, effects, snapshots and bridges. Direct strict-depwarn84+126+27 assertions and six readonly evidence-corruption controls pass; all16 original observations and module/parsed bodies stay exact. Actual inputs/full channels and limits: docs/checkpoints/key-count-callable-julia-2026-11-06/REVIEW.md. Book and continuity align; installed Lua75.6.5 is next. Full verification remains deferred.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Bind Dart callable preservation to its actual grammar input
 
 Dart's existing runtime passes12 compatible/four own profiles over16 source programs/four routes; Boolean-function receivers remain null/null and full needed-error diagnostics/wrappers stay exact. Initial intake/normal/direct missed the default-loaded grammar asset and remain partial. Qualified companions capture/supply the actual grammar before SDK calls, preserving all16 observations/module/parsed bodies; qualified normal16/direct29, fatal analysis/format/safe probe path denial and six recovery corruptions pass. No runtime edit. Named Rust embedded-asset/native-cache custody remains4.2/SESSION5-owned before admission. Book/Knowledge/live/task align; parent75.6.3 closes through this child. Julia75.6.4 next, with actual grammar inputs declared before use/build; no broad suite or push.

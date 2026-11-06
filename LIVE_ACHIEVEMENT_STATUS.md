@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: ordinary five-backend guards and Perl/Rust/Dart callable behavior are focused-checked. Dart parent3 closes through acquisition child3.1 with qualified direct grammar input; Julia/installed Lua4-.5 remain. Full23.4/source-context/custody admission stays deferred until coverage.
+PNT key-count75: ordinary five-backend guards and Perl/Rust/Dart/Julia callable behavior are focused-checked. Installed Lua75.6.5 remains. Full23.4/source-context/custody admission stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 captures/supplies Dart function grammar before SDK use. Compatible12/four own profiles complete16 PASS/four routes; current normal16/direct29/fatal analysis/format/safe path denial/six recovery corruptions pass. Boolean-function receiver null/null and errors remain exact; no runtime edit. Original partial epochs stay unchanged and qualified observations/module/parsed bodies stay exact. Specific historical/default and Rust embedded-asset/native-cache legs remain4.2/SESSION5-owned before admission.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 independently preserves Julia callable16/four routes without production edits. Supporting grammar is captured and explicitly supplied before SDK use. Boolean terminal/composed null/null and errors stay exact. Direct84+126+27 assertions, strict depwarn, empty stderr and six recovery corruptions pass. All16 original observations and module/parsed bodies remain exact. Native/cache/transitive custody and full admission stay separately owned.
 
 ## Next Action
 
-Activate independent Julia75.6.4 from clean Git. Read actual SDK function-grammar loading/build contract first; declare its real grammar asset before first use/build and use a published explicit source option if available. Retain compatible targets and independent Boolean terminal/composed, malformed-arity and needed-error profiles before any repair. Small direct checks/docs/commit, then installed Lua. No broad audit/CI pivot; resource4.14 remains before memory-guarded full verification.
+Activate installed Lua75.6.5 from clean Git. Read actual grammar-input contract, retain inputs before SDK use and freeze independent installed-host Boolean/arity/error profiles. Small direct checks/docs/commit. Resource4.14 remains before memory-guarded full verification.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Julia16PASS/four routes; direct237 assertions; runtime unchanged; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Dart16PASS/four routes; qualified grammar/normal16/direct29; runtime unchanged; Julia4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Rust already16PASS/four routes; new16/direct29; runtime unchanged; Dart75.6.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Perl callable16PASS/direct43; Boolean continuation corrected; independent Rust75.6.2 next.
@@ -29,7 +30,6 @@ Activate independent Julia75.6.4 from clean Git. Read actual SDK function-gramma
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — Dart Length/source-owner24PASS; twelve healthy exact/final45; Julia74.4 next.
 
 ## History
 

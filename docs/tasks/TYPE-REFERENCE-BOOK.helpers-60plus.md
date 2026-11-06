@@ -2059,12 +2059,24 @@
   Landing data qualification: Git whitespace preflight flags the mandatory single-space context lines inside the stored unified normal-source diff. Seal all three actual source-version patches losslessly as .patch.gz, verify decompression before unlinking plain copies, preserve the actual pre-capsule reader/result and rerun the readonly reader against identical patch bytes. This is proof-data representation, not a runtime/test/source-epoch change; no product check is repeated.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess and complete Julia compatible callable-result CountKeys continuation behavior.
   Dependencies: Completed ordinary75.1-.5 and peer75.7; parent75.6; existing compatible user-function receiver contract.
   Acceptance: Retain actual full-source public baseline before production. Compatible Hash-function counts feed numeric/String helpers and explicit bridges, preserve source-once/snapshot/needed errors, and reject incompatible Array/Hash consumers before operands/later copy/logical/with/Count fallback. Preserve existing direct function values, source domains, function registration/signatures/scoping and copy rules; independently freeze incompatible/unsupported function-result profiles rather than import a peer. For Perl independently assess the named Boolean-function null/unready/count_keys observation with full Get/descriptor/emitted context, not context-free substitution. Preserve established terminal behavior and repair a demonstrated continuation gap rather than promote a diagnostic to a source policy. Own any source prerequisite before guard edits. No alias/traversal/deferred/context expansion or full native/isolation/admission claim.
   Planned verification: Small original RED/GREEN or explicit healthy preservation, directly affected callable/CountKeys normals, syntax/scoped format/analyzer as supported, book/Knowledge/history/memory and mandatory hooks. Full verification after feature coverage.
   Planned claim verification: none: Finite authored callable-result controls; separate actual measurements if any.
+
+  Activation: Clean8637b82ea6e08d25e7b4885a00380442464d6471; Julia-only public callable acquisition, explicit supporting function grammar declared before SDK use. Independently freeze Boolean terminal/composed, malformed arity and required error profiles; shared16 sources are candidates, not a peer policy. No runtime edit without demonstrated own RED.
+  Verification tier: `focused`
+  Focused checks: Finite callable16 four-route public observations plus ordinary CountKeys and function-shell direct dependents with strict depwarn; book/Knowledge/history/memory and normal commit doctrines. No full suite.
+  Canonical trigger: Deferred full23.4/final clean push after feature coverage; no admission or infrastructure movement.
+  Claim verification: none: Finite authored feature/preservation controls; raw historical recovery is bounded, with native/cache/transitive custody and general isolation remaining4.2/SESSION5-owned.
+
+  Outcome: Existing Julia guards preserve all16 authored programs/four routes; compatible12 and independent Boolean terminal/composed null/null, malformed arity and required-error profiles. Free Boolean helper remains1; no runtime/parser/signature/format repair. Explicit grammar captured before SDK use and supplied by parser_spec_source.
+  Verification: Direct strict-depwarn new84/ordinary126/pure-function-context27=237 assertions PASS, empty stderr; runner registration once. All16 original observations/modules/parsed bodies exact; six effective readonly recovery corruptions PASS. Actual inputs/producer/full channels and limits: docs/checkpoints/key-count-callable-julia-2026-11-06/REVIEW.md. Book/map/history/memory and normal doctrines before landing; no full suite.
+  Continuity: Read-only source policy digests unchanged: README882682fa, containment8f77fa39, claim9f99df25. Artifact record2026-11-06 is current; no cleanup due. RAM sampled with vm_stat for one single-threaded Julia job, no escalating trend requiring intervention. Other repositories/submodules remain read-only.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 - preserve Julia callable CountKeys composition`.
+  Next: Commit from clean8637b82e activation, then independently acquire installed Lua75.6.5 grammar/host profiles. Full native/cache/transitive custody4.2/SESSION5, general isolation and full23.4 remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5`
   Status: `pending`

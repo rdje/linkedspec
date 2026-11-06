@@ -1,4 +1,5 @@
-{"member_count":20,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":21,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":19479,"lines":266,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-rule-label-contract.md","sha256":"d82181eb5843766ac5b7f60b3ad7cffad73ebde539f321d2d7a056926918538e","type":"member"}
 {"bytes":3763,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-binding-array-end-result-supersession.md","sha256":"d0723bf4eef9984506ec141a6ce7e3f25260b7f37a86640f12613447e41bc92c","type":"member"}
 {"bytes":3629,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-binding-neutral-contract.md","sha256":"7f917b986a488b58f7a27efe12018761f5eca7a2244b891097f7689c288f6cf5","type":"member"}
 {"bytes":2857,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-expression-compatibility-retirement-doctrine.md","sha256":"daeeecc6f12102331c492fc7d2e8a4463242426e1b02cb72ff3a2ae338ed72b8","type":"member"}

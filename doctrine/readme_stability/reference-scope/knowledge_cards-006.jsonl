@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4625,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-dormant-red.md","sha256":"77a602fd9b317792c8ee1a2d590af736e03608e193b7ae13e451d2b95cac8740","type":"member"}
 {"bytes":4681,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-integration.md","sha256":"abf470a2cecd09f35e06fbe9dc1634b1bc50afe4ea47aa3d477e85094f591187","type":"member"}
 {"bytes":5171,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-private-authority.md","sha256":"4a4985fd088ba4a6bb9dc4122de96150fb6c0f748fcb6323ee62b0403ac4ca93","type":"member"}
 {"bytes":7907,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recursive-observation-admission.md","sha256":"effa1d441512c9f537bd952b0f7e887db722420ed08b9d91fd57d61b2b0e1190","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7683,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-recurring-six-runtime-plan.md","sha256":"88859667d7a40f600c8e81ec6fabd198a5a81fa3c7ac8f2cfb19fda08c0bb355","type":"member"}
 {"bytes":2288,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mdbook-mechanical-migration-contrast-drift.md","sha256":"70e98e2994e18f010ba8e8af077d41753c1d6aeba4a599d2be01a5bc81de3f78","type":"member"}
 {"bytes":1872,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/medium-term-alias-retirement-deferred.md","sha256":"eac535acd7067990a3fe1db2933631844b438ff7c146f6ede5ff12dab298e17f","type":"member"}
-{"bytes":2486,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md","sha256":"f8e24060a7ccef7b1ed9af98865c5144c2cb926ea67c75ad163fb56d6a3fc377","type":"member"}
