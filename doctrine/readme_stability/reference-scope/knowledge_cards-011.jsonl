@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3401,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-code-rejection-routes.md","sha256":"b396ccbb78dcffb14bce104395fbc69388ba0ecb7e2f0f034633887483c5f6c5","type":"member"}
 {"bytes":1939,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-invocation-accumulator-scope.md","sha256":"aab32b86c0cf9d2dc26f8ca0f450b3429a9de21ba3e08bf551155d4c9d7161b1","type":"member"}
 {"bytes":7181,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-execution.md","sha256":"9a0a9b29bc8193a59255d64fa8784d61f40b9217e8e846a83362188d2b64a311","type":"member"}
 {"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":16773,"lines":248,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tagged-record-evaluation-and-split-drift.md","sha256":"ea09869c5ee30d8159918951ea3446ce6df39e240dcb772b998a2c0bcbb6f1bd","type":"member"}
 {"bytes":3651,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/targeted-session-startup.md","sha256":"fdfcadf09c6d5ce25f14bc10f8d7f2202f8142eec1b43137ab11515164e1b388","type":"member"}
 {"bytes":6203,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"ca8601711769ac7fc7dd6ec9e339c13d8971bc7aa22ffc698442a9a05d0b98cc","type":"member"}
-{"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}

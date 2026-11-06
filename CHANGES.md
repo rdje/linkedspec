@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — lower CountKeys value-block sources through typed ownership
+
+Add CountKeys to existing typed block arguments and canonical terminal block delegation; forward original source span/method. Unchanged9 groups5PASS4RED become9PASS/native-fresh; all five healthy observations exact and only four failing module bodies change. Needed errors execute after valid loads without warnings; source-once/in-place snapshots/functions/preflight stay. New9/Count block14/Count-length5=28, syntax and five recovery controls pass. Actual first inputs/modules/full raw channels retained. Regenerate emitted Perl. Count source card stale current labels corrected from canonical nodes. Domain75.0.2 next; due daily cleanup at next clean boundary.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — freeze key-count guards and own producer prerequisites
 
 Freeze shared22 after actual Perl Get/descriptor/substitution/emission/native/fresh intake. Retain seven healthy/twelve guard gaps from nineteen runtime-clean initial programs, plus one additional initial-source preservation control. Own mutating-block compile failure75.0.1 and Boolean/Array dereference errors75.0.2 before Perl75.1/independent peers. Exact public/full-module seeds expose main::2 read. Numeric-source seeds also expose main::4 lookup under the producer, explicitly owned by domain75.0.2. Actual first inputs/modules/full raw channels and six replay corruptions pass; no production change or peer/full-admission claim. Book/catalog caveats and task/Knowledge/live records align.

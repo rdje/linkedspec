@@ -1,0 +1,104 @@
+[
+  {
+    "id": "error_fluent_default",
+    "body": "return(count_keys({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))",
+    "source": "Value:: I {return(count_keys({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_direct",
+    "body": "return(count_keys({items=\"text\";push(items,\"x\")}))",
+    "source": "Value:: I {return(count_keys({items=\"text\";push(items,\"x\")}))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_receiver_source",
+    "body": "return({items=\"text\";push(items,\"x\")}.count_keys())",
+    "source": "Value:: I {return({items=\"text\";push(items,\"x\")}.count_keys())}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "error_receiver_default",
+    "body": "return({items=\"text\";push(items,\"x\")}.count_keys().coalesce(\"masked\"))",
+    "source": "Value:: I {return({items=\"text\";push(items,\"x\")}.count_keys().coalesce(\"masked\"))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch",
+    "expected_stages": {
+      "native": "rule_handler_eval",
+      "fresh": "execute_generated"
+    }
+  },
+  {
+    "id": "typed_hash_mutation",
+    "body": "order=\"\";out=count_keys({items=[];push(items,\"x\");order=cat(order,\"S\");{\"k\":items.count()}}).add({order=cat(order,\"A\");3});return([out,order])",
+    "source": "Value:: I {order=\"\";out=count_keys({items=[];push(items,\"x\");order=cat(order,\"S\");{\"k\":items.count()}}).add({order=cat(order,\"A\");3});return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      4,
+      "SA"
+    ]
+  },
+  {
+    "id": "source_snapshot",
+    "body": "source={\"a\":1};calls=0;order=\"\";out=count_keys({calls=num_add(calls,1);order=cat(order,\"S\");source}).add({order=cat(order,\"A\");source[\"b\"]=2;1});return([out,calls,order,source])",
+    "source": "Value:: I {source={\"a\":1};calls=0;order=\"\";out=count_keys({calls=num_add(calls,1);order=cat(order,\"S\");source}).add({order=cat(order,\"A\");source[\"b\"]=2;1});return([out,calls,order,source])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      2,
+      1,
+      "SA",
+      {
+        "a": 1,
+        "b": 2
+      }
+    ]
+  },
+  {
+    "id": "pure_hash_block",
+    "body": "return(count_keys({{\"k\":1}}))",
+    "source": "Value:: I {return(count_keys({{\"k\":1}}))}",
+    "input": "x",
+    "rule": "Value",
+    "expected": 1
+  },
+  {
+    "id": "function_block_source",
+    "body": "return(build({\"a\":1,\"b\":2}))",
+    "source": "fn build(values){return(count_keys({values}))} Value:: I {return(build({\"a\":1,\"b\":2}))}",
+    "input": "x",
+    "rule": "Value",
+    "expected": 2
+  },
+  {
+    "id": "malformed_receiver",
+    "body": "effects=0;out={effects=num_add(effects,1);{\"k\":1}}.count_keys({effects=num_add(effects,1);0});return([out,effects])",
+    "source": "Value:: I {effects=0;out={effects=num_add(effects,1);{\"k\":1}}.count_keys({effects=num_add(effects,1);0});return([out,effects])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      0
+    ]
+  }
+]

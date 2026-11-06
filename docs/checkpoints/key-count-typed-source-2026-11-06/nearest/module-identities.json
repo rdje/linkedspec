@@ -1,0 +1,56 @@
+{
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-1.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9914,
+    "raw_sha256": "19cf82e4e034287d9eac570fe1d1650ab8cacb8cad85127cb70195ab14510d5d",
+    "sha256": "192cc2300ecf8758a346f2f82919573b5348d18ac79019e406ea5bc295134a2b"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-2.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9722,
+    "raw_sha256": "082d371cd86ebd22c59c50ed14ba743db035ed1ff94cb9da00565cef021eb7ba",
+    "sha256": "072f4849254c30eb6f0e959648387f8a9a448f0aadf7b751cdd5444465de087d"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-3.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9722,
+    "raw_sha256": "082d371cd86ebd22c59c50ed14ba743db035ed1ff94cb9da00565cef021eb7ba",
+    "sha256": "072f4849254c30eb6f0e959648387f8a9a448f0aadf7b751cdd5444465de087d"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-4.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9964,
+    "raw_sha256": "eb02276542cdcbdd69c36d1e7b83a5ed050f45b2becf49fb348049630a1b131a",
+    "sha256": "8e6fe5413eea9a042acd7c8fdc29783a2b6c38577fcce2a2ce231688b47567a3"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-5.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 11797,
+    "raw_sha256": "d1e6432efb9a76c5dac5b751c36baca84f4e96ffc2dd7357cbeb60ff47df8276",
+    "sha256": "05cd2b5a5f41a3bbc16c05abbc61cc722d1b973ae80602d341979cf77c3ae990"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-6.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 12599,
+    "raw_sha256": "8c4dfe54963e77a806dc08d315a72c4a0bc6e4576988626863e4e218bfa23313",
+    "sha256": "bc2d5981360af6e88532a91318d882e5e43ae68be81c020a93001a11bb15c244"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-7.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9628,
+    "raw_sha256": "9077e35c6259ffd7d6e62341132e74a865588185317d802a3436179987095658",
+    "sha256": "c4baea003eeeb54cfc57354726f158b1cf5a401c3886b388b04ef6752753c308"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-8.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9942,
+    "raw_sha256": "a9da839a97a0789268ae26d70eb3c1ac934525d72385d4f0b4cb34c0150262d2",
+    "sha256": "dd1bfd764da2e55b8914ebf2110206621deb85307f99ab1c346855b6e774afa6"
+  },
+  "docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules/module-9.pm.gz": {
+    "mode": 420,
+    "raw_bytes": 9726,
+    "raw_sha256": "44aabbdb1cc44f1e3019d92c3f00183fc6f2021882eb0bb5b6b40b6617d1604c",
+    "sha256": "359791e7a4f12b2276397f4a1915d5a50795ba247872db72225262ffb8dfdc45"
+  }
+}

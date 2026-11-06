@@ -9,9 +9,9 @@ answers:
   - "can a computed CountKeys result read host main Hash2"
   - "which task owns key-count source and consumer guards"
   - "may an aborted key-count domain profile be frozen"
-  - "why does count_keys of numeric4 read host main Hash4"
+  - "why does count_keys(4) count host main::4"
 date: 2026-11-06
-status: assessment75.0 frozen; P1 typed75.0.1/domain75.0.2 precede Perl75.1 and independent peers
+status: Perl typed75.0.1 focused-checked; domain75.0.2 next before Perl75.1/independent peers
 tags: [perl, count_keys, guards, source, domain, copy, logical, host]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.0; docs/checkpoints/key-count-selection-2026-11-06 retains actual initial21/isolated20/preservation1/seed6 controls, declared first inputs/modules/full raw channels and readonly recovery/six corruptions at f5e2350ba. No production repair or peer verdict."
 reverify:
@@ -58,3 +58,9 @@ zero is therefore not proof of rejecting numeric data. P1 domain75.0.2 also owns
 this literal-data/Hash-symbol boundary, preserving valid named Hash sources and
 leaving broader bare/absent SESSION17 scope separate. Actual producer-seed inputs,
 carrier/module and raw channels are retained; no native seeded/general isolation.
+
+Current typed-source repair75.0.1 is implemented with focused checks:
+[[perl-key-count-typed-source]]. Nine groups5PASS4RED become9PASS, five healthy
+observations exact; free and canonical terminal receiver mutation blocks use the
+same typed owner. Regenerate emitted Perl. The domain and consumer defects above
+remain independently owned and unrepaired; no peer or full-admission inference.

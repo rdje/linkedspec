@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
 {"bytes":21168,"lines":363,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-partition-capacity-registry-drift.md","sha256":"6dfc8e83cd9569dc27c0fa7adb4ab0b541d91d7a4dffc1cab42c359e08290001","type":"member"}
 {"bytes":3731,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-capability-markers-not-frontier.md","sha256":"6e5dd80e47733c7fb17aea828641d19fd209c753630cdfbffd47af8e7b187c9c","type":"member"}
 {"bytes":4354,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-metadata-gate-boundary.md","sha256":"66b9d115ce111edfd55997927353fdcba874af0d31ab35544208a66dfa012128","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5906,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.10.2","path":"docs/knowledge/verification-cadence-policy.md","sha256":"c5b7696fdd8941bf39df7a85383a892ebd043ef81719d87ab1bb30f9ae1d96f4","type":"member"}
 {"bytes":2476,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/verification-output-chunk-boundary.md","sha256":"06909441328e5b042a3abd5f911b622eed668e5d6f4d3d029e952ef4f00f33c7","type":"member"}
 {"bytes":11342,"lines":166,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/with-result-selection-source-gap.md","sha256":"4dc6beed40a22aa352a1aad1a450c46c73623bb2f95f50cce0cfc0a20bdf767f","type":"member"}
-{"bytes":10296,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/working-vars-no-strict-need-my-lexical.md","sha256":"bef0745a3fd57bbce5fe7fef8db35a7f47350fc0baa2d7b3ea91c9ab329f3243","type":"member"}

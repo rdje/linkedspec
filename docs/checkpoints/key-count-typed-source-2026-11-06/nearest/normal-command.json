@@ -1,0 +1,13 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "LINKEDSPEC_KEY_COUNT_BLOCK_DIR=docs/checkpoints/key-count-typed-source-2026-11-06/nearest/modules",
+  "prove",
+  "-v",
+  "-Iperl",
+  "t/key_count_block_source_composition.t",
+  "t/count_block_source_composition.t",
+  "t/count_length_receiver_contract.t"
+]

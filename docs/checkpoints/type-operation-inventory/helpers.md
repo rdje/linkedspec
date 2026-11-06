@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: key-count-result-guard-composition.md75 freezes shared22 after Length74 bounded implementations. P1 typed75.0.1/domain75.0.2 producer repairs precede Perl75.1/independent peers75.2-.5 and unrelated selection. No production repair, peer failure or full admission is inferred from assessment75.0.
+Current finite frontier: key-count-result-guard-composition.md75 freezes shared22 after Length74 bounded implementations. P1 typed75.0.1 is focused-checked; domain75.0.2 remains before Perl75.1/independent peers75.2-.5 and unrelated selection. Assessment75.0 is historical; no domain/consumer/peer/full-admission closure is inferred.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

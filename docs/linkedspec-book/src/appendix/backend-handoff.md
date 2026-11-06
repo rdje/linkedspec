@@ -3854,3 +3854,24 @@ repair75.0.2 therefore includes numeric-literal classification as well as the
 Boolean/Array dereference errors. The empty-process zero observation alone does
 not establish the documented numeric-input policy. Broader bare/absent binding
 isolation remains separately owned.
+
+
+Perl typed-source75.0.1 now repairs the value-block compilation prerequisite.
+Free CountKeys arguments and canonical zero-extra terminal block receivers use
+the same typed source owner. For example,
+`count_keys({items=[];push(items,"x");{"k":items.count()}})` returns `1`.
+`{items="text";push(items,"x")}.count_keys()` now loads successfully and raises
+the required binding error during execution; later defaults cannot mask it.
+
+The unchanged nine-case regression passes after four original failures. Five
+healthy observations remain exact, including source-once/order/in-place Hash
+snapshots, function parameters and malformed receiver preflight. The new and
+nearest Count checks pass twenty-eight groups; only the four failing cases'
+emitted modules change. Regenerate emitted Perl. Actual first inputs, full raw
+channels and pre-run modules are retained under
+`docs/checkpoints/key-count-typed-source-2026-11-06/`.
+
+The Boolean/Array and numeric-source zero-domain defects remain75.0.2, followed
+by ordinary result guards75.1 and independent peers. Full source/context/custody/
+isolation/discovery/admission remain separate; this source fix does not close
+those broader claims.

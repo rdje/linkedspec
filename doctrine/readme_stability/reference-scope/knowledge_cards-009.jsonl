@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3482,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-residual-lowering-producer-selection.md","sha256":"5e824f0415b4aff0cd7d700f08e32f869521943eca17ac6351b2022888baca75","type":"member"}
 {"bytes":4639,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-residual-replacement-source-frames.md","sha256":"2c9a58e84b8f8bcea53cfc535363998453036a94ce7d8a86ccf9d7fcd3d7ab28","type":"member"}
 {"bytes":4315,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-admission.md","sha256":"cdb0c7cbe1088a37725e8ccfda7045bddfd420302f086e4376591e07a6e64658","type":"member"}
 {"bytes":3844,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-core.md","sha256":"c749c26a9796f7d57e0b2eb9eb769d3f7e2c3167083650b7416b76835cd1dedd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6979,"lines":123,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/routing-verifier-child-signal-status-gap.md","sha256":"f93670d04e23b56bae427ace447cf707289c9ea4e23d49977f9e8eb74aa11994","type":"member"}
 {"bytes":6106,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rtlutils-regex-hang.md","sha256":"7c5ef8aba87826a8f3eb32d7000fadced8989bda23a85472b00d22b13ae5d788","type":"member"}
 {"bytes":5439,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-call-computed-result-selection-gap.md","sha256":"bc0155c0b8e03ec5e578c61a5b61b550f6c95dbe5e88110bb14f1d2a1bc46211","type":"member"}
-{"bytes":4404,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-and-bare-edge-contract.md","sha256":"94cc91e5887da22ddb326419b8deebdc9185ff89cea93b1b80e91b36bb2e18b2","type":"member"}

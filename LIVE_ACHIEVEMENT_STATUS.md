@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT moves from focused-checked bounded Length74 to P1 key-count75.0's frozen22 target. Newly isolated Perl typed-source75.0.1 and domain75.0.2 prerequisites precede Perl75.1/independent peers75.2-.5 before unrelated selection/full23.4.
+PNT continues through P1 key-count75 after focused-checked bounded Length74. Typed-source75.0.1 is implemented with focused checks. Domain75.0.2 remains before Perl75.1/independent peers75.2-.5 and unrelated selection/full23.4. Run due daily artifact cleanup at the next clean boundary.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.0 retains actual primary21/isolated20/preservation1/seed6 controls. Initial runtime-clean19 has seven healthy/twelve guard gaps; one needed-source compile/fresh-load failure and one aborted domain profile are separate P1 prerequisites, not valid guard/domain oracles. CountKeys omits typed mutating-block lowering, checks definedness rather than Hash kind, and lacks Count/Length result ownership. Exact carriers read host main::2 through the result consumer and main::4 through numeric producer input, with unchanged host data; domain75.0.2 owns both non-Hash references and numeric-literal classification. Frozen22/actual declared first inputs/modules/full raw channels and readonly recovery/six corruptions pass. No production change, peer verdict or full admission.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 reuses typed argument ownership and canonical terminal block delegation for CountKeys. Unchanged9 groups5PASS4RED become9PASS/native-fresh; five healthy complete observations exact. Needed errors execute after successful loads without warnings; valid mutations yield Hash counts and source-once/order/in-place snapshots/functions/preflight remain. Four failing module bodies change. New9/Count block14/Count-length5=28, syntax and five recovery controls pass. Actual declared first inputs/pre-run modules/full raw channels retained losslessly. Regenerate emitted Perl. Relevant Count source card stale labels corrected; domain/result guards/peers/full admission remain open.
 
 ## Next Action
 
-Activate P1 typed-source75.0.1 from clean Git. Establish unchanged focused needed-error/valid Hash/source-order controls, repair only the demonstrated mutating CountKeys block lowering and commit. Then domain75.0.2 before Perl75.1 guards/independent peers. Retain all original assessment epochs and capture a valid Perl domain profile only after producer repair.
+At the clean boundary, check docs/ARTIFACT_CLEANUP.md against current UTC; last cleanup was November5 04:49 and is now due if elapsed. Own/commit a bounded safe review before domain75.0.2, then return immediately to its Boolean/Array and numeric4/main::4 zero-policy repair before Perl75.1 guards/independent peers. Preserve original assessment/typed-source epochs and establish unchanged domain normal before production.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
@@ -29,7 +30,6 @@ Activate P1 typed-source75.0.1 from clean Git. Establish unchanged focused neede
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 — Julia initial Boolean Count focused-checked; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — Dart Boolean Count source focused-checked; clean fresh-context Julia4/Lua5 handoff.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — Rust Count source fallback focused-checked; Dart Boolean source3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — Perl Count logical rejection focused-checked; Rust source2 next.
 
 ## History
 

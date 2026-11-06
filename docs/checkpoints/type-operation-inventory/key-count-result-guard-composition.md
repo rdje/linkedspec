@@ -62,3 +62,16 @@ zero is therefore not proof of rejecting numeric data. P1 domain75.0.2 also owns
 this literal-data/Hash-symbol boundary, preserving valid named Hash sources and
 leaving broader bare/absent SESSION17 scope separate. Actual producer-seed inputs,
 carrier/module and raw channels are retained; no native seeded/general isolation.
+
+## Perl typed-source75.0.1
+
+Ordinary CountKeys block arguments and canonical zero-extra/non-trailing terminal
+block receivers now use the existing typed argument owner. Unchanged9 groups
+5PASS4RED become9PASS/native-fresh; five healthy observations exact. Needed errors
+execute after successful loading without warnings, valid mutations yield Hash
+counts, and source-once/order/in-place snapshots/functions/preflight stay.
+Exactly four failing module bodies change; new9/Count block14/Count-length5=28,
+owner syntax and five recovery corruptions pass. Actual first inputs/modules/raw
+channels retained in key-count-typed-source-2026-11-06. Regenerate emitted Perl.
+No Hash-domain/symbol/result-guard change. Domain75.0.2 remains next before75.1
+and independent peers; full custody/isolation/discovery/admission remain separate.
