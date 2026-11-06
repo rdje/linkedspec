@@ -1,0 +1,12 @@
+{
+  "id": "scalar_array_sources",
+  "source": "Value:: I {return([length(0),length(false),false.length(),length([1,2]),[1,2].length(),undef.length()])}",
+  "expected": [
+    1,
+    1,
+    1,
+    2,
+    2,
+    null
+  ]
+}

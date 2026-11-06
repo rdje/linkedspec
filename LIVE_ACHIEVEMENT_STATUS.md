@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT continues through Length74. Perl74.1/74.6, Rust74.2 and Dart74.3 are implemented with focused checks. Independent Julia74.4 is next, then installed Lua74.5; key-count75 remains P1 afterward.
+PNT continues through Length74. Perl74.1/74.6, Rust74.2, Dart74.3 and Julia74.4 are implemented with focused checks. Independently assess installed Lua74.5 next; key-count75 remains P1 afterward.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.74.3 adds canonical Length role to Dart kindGuardedSource before Count initial permission. Unchanged24 controls12PASS12RED become24PASS on native/restored/plan/emitted routes; twelve healthy observations/current domains/error profiles exact. Actual24 module texts unchanged; rebuild Dart apps/runtime. Final45, fatal targeted root/fresh analysis, full formatter and five readonly corruptions pass. Actual declared inputs/full raw channels retained losslessly. No producer/scalarResult/Count permission/schema change or full custody/isolation/selection/peer/admission claim.
+TYPE-REFERENCE-BOOK.1.2.23.3.74.4 adds canonical Length role before Julia Count source permission. Authored24 programs12PASS12RED become24PASS; new normal74PASS48FAIL becomes122PASS assertions. Twelve healthy observations/domain/error profiles and24 module/parsed bodies exact. Final220/strict depwarn/five readonly corruptions pass. Scalar state/Count permission/enumerate/call_index mutation restriction/producers/schema unchanged. Actual declared first inputs/full raw channels retained losslessly; rebuild Julia apps/runtime. Full custody/isolation/discovery/admission remain separate.
 
 ## Next Action
 
-Activate independent Julia74.4 from clean Git; recover shared16/source-owner8/current Count guards, retain actual baseline inputs and freeze domains before repair. Keep separate index-mutation restrictions. Then safe installed Lua74.5/P1 key-count75.0 before unrelated selection; full verification owners remain separate.
+Activate independent installed Lua74.5 from clean Git. Recover safe Lua runner/source restrictions, shared16/source-owner8 and current Count guards; retain independent public baseline inputs and freeze domains/error profiles before repair. No new interpreter chunk locals/unsafe runner/formatter/declared5.4 claim. P1 key-count75.0 follows before unrelated selection; full verification remains separately owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — Dart Length/source-owner24PASS; twelve healthy exact/final45; Julia74.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — Rust Length/source-owner24PASS; twelve healthy exact/final44; independent Dart74.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — produced Length ownership8PASS/existing19 preserved; qualified capture limits explicit; Rust74.2 next.
@@ -29,7 +30,6 @@ Activate independent Julia74.4 from clean Git; recover shared16/source-owner8/cu
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — Perl Count logical rejection focused-checked; Rust source2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1 — Perl Count copy-state focused-checked; logical producer next; P2 compiler scaling owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.0 — finite Count/copy/source assessment frozen; six concrete P1 repairs and exact next action retained.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — installed Lua Count guards focused-checked; primary73 leads to mandatory P1 source/copy assessment.
 
 ## History
 

@@ -6,7 +6,7 @@
 - Status: `active` / remaining fluent-family and inter-type feature selection; full reference/admission open
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-11-05`
+- Last updated: `2026-11-06`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -1597,6 +1597,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Status: `pending` / P1 canonical admission prerequisite
   Goal: Register new bounded feature regressions in canonical CI before full admission/final push.
   Addition74.3: Inventory Dart length_result_guard_composition_test/shared24 and length_result_guard_dart_domain.json against actual runner/canonical discovery; focused45 does not establish selection. Avoid duplicate entries where discovery already exists.
+  Addition74.4: Inventory Julia length_result_guard_composition_test/shared24 and independent domain/error profiles against runner/canonical discovery; focused220 assertions and one runtests include do not establish canonical selection. Avoid duplicate entries.
   Addition74.2: Inventory Rust length_result_guard_composition/shared24 and length_result_guard_rust_domain.json against actual package/canonical discovery. Focused44 does not establish canonical coverage; classify existing automatic selection before adding any duplicate entry.
   Addition74.6: t/length_count_source_ownership.t/shared8 fixture require exact canonical presence/syntax/execution registration; focused8PASS/existing19PASS do not establish discovery.
   Addition74.1: t/length_result_guard_composition.t (shared16 plus three host-seed groups) and tests/fixtures/length_result_guard_cases.json require exact canonical presence/syntax/execution registration before admission/push. Current focused19PASS does not establish inclusion.

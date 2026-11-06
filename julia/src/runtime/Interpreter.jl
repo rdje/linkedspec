@@ -6300,6 +6300,7 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_string_predicate_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_contains_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_index_result_chain(chain.receiver, chain.calls) ||
+        _runtime_is_ordinary_length_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_has_key_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
@@ -6782,6 +6783,34 @@ function _runtime_is_ordinary_count_result_chain(receiver, calls)
     isempty(calls) && return false
     first_call = first(calls)
     return first_call.method == "count" &&
+        something(first_call.source_method, first_call.method) == first_call.method &&
+        !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
+        isempty(first_call.args)
+end
+
+# Length results retain ownership before initial Count fallback.
+function _runtime_is_ordinary_length_result_chain(receiver, calls)
+    any(call -> canonical_action_helper_name(call.method) in ("walk_leaves", "map_leaves", "reduce_leaves") ||
+        ((call.trailing_block_arg || call.receiver_trailing_block_arg) &&
+            canonical_action_helper_name(call.method) != "with"), calls) && return false
+    ordinary_args(args) = all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+    }, args)
+    if receiver isa ActionCallExpr && receiver.name == "length" &&
+        something(receiver.source_method, receiver.name) == receiver.name &&
+        !receiver.trailing_block_arg && length(receiver.args) == 1 &&
+        ordinary_args(receiver.args)
+        return true
+    end
+    isempty(calls) && return false
+    first_call = first(calls)
+    return first_call.method == "length" &&
         something(first_call.source_method, first_call.method) == first_call.method &&
         !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
         isempty(first_call.args)

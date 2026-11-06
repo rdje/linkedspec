@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
+{"bytes":3281,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-error-boundary-string-result.md","sha256":"cbdfc4a4b903a287ddf53dd55a3256e6607565428cebd7deb9d7df17ee0edff2","type":"member"}
 {"bytes":4155,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-structured-diagnostics.md","sha256":"2332a9bb056478f2c50b6cc670de1b3d839defd68dc402e58556b8a4e4edf104","type":"member"}
 {"bytes":9272,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalar-helper-null-and-empty-drift.md","sha256":"ef01c668f4dbca2ade9ec7b4ee388083801c3cb58a40c5c9678e6c974b11fb05","type":"member"}
 {"bytes":3230,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalaref-legacy-path-parity.md","sha256":"a11180b1c03bf3f69de2a6ec85a8f1492e0da04b9db0aaabe488c179e5fd573d","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
 {"bytes":21168,"lines":363,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-partition-capacity-registry-drift.md","sha256":"6dfc8e83cd9569dc27c0fa7adb4ab0b541d91d7a4dffc1cab42c359e08290001","type":"member"}
 {"bytes":3731,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-capability-markers-not-frontier.md","sha256":"6e5dd80e47733c7fb17aea828641d19fd209c753630cdfbffd47af8e7b187c9c","type":"member"}
-{"bytes":4354,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-metadata-gate-boundary.md","sha256":"66b9d115ce111edfd55997927353fdcba874af0d31ab35544208a66dfa012128","type":"member"}
-{"bytes":2042,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-verification-single-owner.md","sha256":"b46df5a6cf5e5d1b20a758a763ac713673cbde5ffbd06610785169a36f237e96","type":"member"}

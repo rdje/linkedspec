@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4354,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-metadata-gate-boundary.md","sha256":"66b9d115ce111edfd55997927353fdcba874af0d31ab35544208a66dfa012128","type":"member"}
+{"bytes":2042,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-verification-single-owner.md","sha256":"b46df5a6cf5e5d1b20a758a763ac713673cbde5ffbd06610785169a36f237e96","type":"member"}
 {"bytes":3214,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-aggregate-assignment-expression-values.md","sha256":"79911d7c21305f46e1a299b171523f7c3c804696ee615a1286191d9b5ca8da91","type":"member"}
 {"bytes":3466,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-end-mutation-methods.md","sha256":"5dc70600359b0252f53a54dfb612c14b76aab46153ace0f33d859640d9beaf71","type":"member"}
 {"bytes":3805,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-array-numeric-reducer-receiver-methods.md","sha256":"3f9ac5646c143e412612dc46c4a3d3e1446c0bb4b15cccaaf83cf0ed6d251328","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":10296,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/working-vars-no-strict-need-my-lexical.md","sha256":"bef0745a3fd57bbce5fe7fef8db35a7f47350fc0baa2d7b3ea91c9ab329f3243","type":"member"}
 {"bytes":10473,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-map-leaves-neutral-composition.md","sha256":"1f45c33b8ce6ec4f32f1a86bb6765da6b583eaed1521af81d0e70bf042b02aa4","type":"member"}
 {"bytes":9108,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-dart-runtime.md","sha256":"4ae9c1a26d8fe0fa0bf5e1f6a9a0b8b939c484289a568cd5a4276489e9917a6b","type":"member"}
-{"bytes":8978,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-julia-runtime.md","sha256":"2158a287e47b18dd7748051d1160ac35c2fda2137bb8fe858f97a79bdcf51a4f","type":"member"}
-{"bytes":4629,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/write-vivification-lua-runtime.md","sha256":"9b6b93f7ea3d1e3a6cdaa8ec942ddc0c69e93fbdae708ff06eba5f4855f9a435","type":"member"}

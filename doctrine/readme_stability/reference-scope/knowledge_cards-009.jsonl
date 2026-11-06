@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3844,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-core.md","sha256":"c749c26a9796f7d57e0b2eb9eb769d3f7e2c3167083650b7416b76835cd1dedd","type":"member"}
 {"bytes":6787,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-preflight.md","sha256":"85d11f271e9898e74935228525aae057229fa1c00680d4598571a252e4d313a7","type":"member"}
 {"bytes":3045,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-routes.md","sha256":"5d469af97c131d5db43d98efdc6a37b50c523f64c6e0a7223b137528c7f62602","type":"member"}
 {"bytes":7551,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-rule-local-cursor-rollout-boundaries.md","sha256":"761e45a802f463288265d4ce6afdfbd5d7b992209bd686889163888ab0e954b9","type":"member"}
@@ -103,6 +104,7 @@
 {"bytes":4385,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-observation-public-no-drift.md","sha256":"b0eb978c70ef292f35adc10e5ca6e6be6a30d3e99cc00dbbfa848d927eabb6da","type":"member"}
 {"bytes":4889,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-observation-recurring-gate.md","sha256":"0c02c75080a9b581d04b1394d28a2abea4b729e3d4d1728c4de545df024a44a2","type":"member"}
 {"bytes":11803,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-source-observation-audit.md","sha256":"9565ac25552a6ae15bab2c560a48e623bc34903ae5708e8944770d1a03381a88","type":"member"}
+{"bytes":1358,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.4","path":"docs/knowledge/reference-scope-selected-owner.md","sha256":"9f45e1af52c5affe16f70b70e3012131abe194347b3dda6c54124dd29018ba9c","type":"member"}
 {"bytes":5250,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/referenced-intermediate-edge-ownership-authority.md","sha256":"3e3c5de29df8a161df5982bb1cb6c7ee3a3c6cd376315cef0c723a7d9ef53e31","type":"member"}
 {"bytes":1894,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/referenced-intermediate-qualified-runtime-target.md","sha256":"10c88baade89d49b2f5513aa0c7644dde6ecd0806bb4df635879834f44c2d6db","type":"member"}
 {"bytes":8075,"lines":127,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/regex-substitution-callback-and-flag-discrepancies.md","sha256":"b120e475c964351dc166598a5a9f0f6129e26b7bc7d938044c30e0d74adf26c6","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":4404,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-and-bare-edge-contract.md","sha256":"94cc91e5887da22ddb326419b8deebdc9185ff89cea93b1b80e91b36bb2e18b2","type":"member"}
 {"bytes":7559,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-five-backend-admission.md","sha256":"46c9eac5875585ec263269450e20c34e22686cb4d36a391a66c4b6104e6e31f6","type":"member"}
 {"bytes":14210,"lines":167,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-neutral-contract.md","sha256":"3340fc3471e370ade19e3e224108a48173ca7f6b481cc750f04e67858c88b16c","type":"member"}
-{"bytes":3105,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-ownership-decision.md","sha256":"95f9f9c1eced9004d6255f494766388fbe6190e40b3c60e2702fda89e77aa109","type":"member"}
-{"bytes":5831,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-public-no-drift.md","sha256":"c5fd8ae0dc1b9fa540e3d11db0d6f8c09a08d6194546dbc477375878daa1abd8","type":"member"}

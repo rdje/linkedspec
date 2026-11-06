@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":20954,"lines":351,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-reading-history-capacity-admission.md","sha256":"7560fd849edf15f05f887b7317d526eb8d9aa404f3d70f72a081c6c94a000862","type":"member"}
 {"bytes":17495,"lines":264,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-reading-history-capacity-proposal.md","sha256":"e1ba0fe806d8ea5b3b4279c5f20f51fcfd9a189fe93edc7268ad14c9ed3ca418","type":"member"}
 {"bytes":2696,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-receiver-string-bridge-guards.md","sha256":"54af89bd1109850431a30f4e98f9a6dc713301c0563d90280eedfaa8863b1247","type":"member"}
 {"bytes":6280,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-recognition-attempt-preflight-gap.md","sha256":"9cd2aada414deb35b55022a886cc24380f124f6787a6da6dd26804d9dc6f0f9b","type":"member"}
@@ -89,7 +90,7 @@
 {"bytes":4819,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-closure-scoped-policy-freeze.md","sha256":"49a3e075e18c5e696bb762c6c35f22cbc30e25079c4d580bc92e660313de1fea","type":"member"}
 {"bytes":19021,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-configuration-source-contracts.md","sha256":"1c0f0b7598896e951688f2750c022b1143b868322130692882cd0131fa826daf","type":"member"}
 {"bytes":3894,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-helper-retirement-split-inventory.md","sha256":"9aa9894fa1f4dd749d9ee052743f773ee4ad7fd5fe0309bf03a146bf5b36e90b","type":"member"}
-{"bytes":5541,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.3","path":"docs/knowledge/length-result-source-guard-gap.md","sha256":"30b18ca78282fa7569a92ad9487b2af159b08de3cf1b106e9ccff9721fa74066","type":"member"}
+{"bytes":5761,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.4","path":"docs/knowledge/length-result-source-guard-gap.md","sha256":"bc0ee4b9e931e38093ee03e308ab35862647ec89515930555543119834aab462","type":"member"}
 {"bytes":5024,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lexical-result-source-guards.md","sha256":"62a0640ccc503da74ac67a0d316cfd15e755ec23f182f8e4c9206dd84b9a46dd","type":"member"}
 {"bytes":1468,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/linkedspec-pm-is-thin-facade.md","sha256":"751b9afd0a6182e38192313d9a443c31309f61464fc0b380c6314cebbedb413e","type":"member"}
 {"bytes":5018,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lispish-corpus-catastrophic-backtracking.md","sha256":"a15bd170d332f0165bf21f076439b95ec7ef179ec2b94241c54838323fb1caa7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2529,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-capture-endpoint-absence-compatibility.md","sha256":"98cf18971e8bf0c0835d3b87453c5ed6e157215e42b9fe43e39a568961e78d35","type":"member"}
 {"bytes":14306,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-compiled-corpus-facade-reading.md","sha256":"fe5b4488d5ade024797dcd9842055cee2b8948d95c7373c938b7fb713a5f17e2","type":"member"}
 {"bytes":2874,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-compiled-spec-state.md","sha256":"6ea452adc6fd6d8a6084e801d5fdb10f2d7e0645cf660a28f4c1055acd5b3df2","type":"member"}
-{"bytes":3033,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-complete-named-mark-parity.md","sha256":"71992a27fcfb16666241de547a7da847f59095f6621ee22e3ad201e6dd480d91","type":"member"}

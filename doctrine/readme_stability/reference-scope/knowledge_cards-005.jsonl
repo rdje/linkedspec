@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3033,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-complete-named-mark-parity.md","sha256":"71992a27fcfb16666241de547a7da847f59095f6621ee22e3ad201e6dd480d91","type":"member"}
 {"bytes":2054,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-constructor-result-guards.md","sha256":"9755424f9a0cdedbad9043efafa6d4904b6a26f4ef5913e7da500154ea8708de","type":"member"}
 {"bytes":3500,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contains-source-guards.md","sha256":"0e4213f89727795c0ccc1908326a1845d818d5ddad45528893e68bff10b55dc1","type":"member"}
 {"bytes":3389,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-contextual-user-function-codeblock-runtime.md","sha256":"25d0c0393f8620cae0c026e84e286d46822ce43d66e650c6811f0c5acd16306a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3093,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-repeated-and-group-outcomes.md","sha256":"3796d3243345c04a16d06196f0934510eafa127154ccb582416e45f847317b75","type":"member"}
 {"bytes":20902,"lines":224,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-cursor-consumer-reading.md","sha256":"0a737ca590f61c8b592f518dc42875fbe7d9c2189ffc6c4caf7854bf6b441498","type":"member"}
 {"bytes":4586,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-admission.md","sha256":"c2dc4ab99c7b54b82ee71403678691c70afd674125e4823db251ba7380313760","type":"member"}
-{"bytes":4979,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-core.md","sha256":"50d3725a6a20e6984c85b852ff8b0c6aac51dfdcd48fe553cceeeda3b5218b58","type":"member"}

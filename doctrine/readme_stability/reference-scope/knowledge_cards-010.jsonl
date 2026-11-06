@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3105,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-ownership-decision.md","sha256":"95f9f9c1eced9004d6255f494766388fbe6190e40b3c60e2702fda89e77aa109","type":"member"}
+{"bytes":5831,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-public-no-drift.md","sha256":"c5fd8ae0dc1b9fa540e3d11db0d6f8c09a08d6194546dbc477375878daa1abd8","type":"member"}
 {"bytes":3288,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-starts-open-block-validation.md","sha256":"c02590d348e15532e2779f5ce32454901346bda6c27440b953ff7b20dbc997d1","type":"member"}
 {"bytes":3712,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtime-input-boundary-validation-regression.md","sha256":"638596cdbf4d2b9d8537c2e59058d1a077a6974d3e77317039725fc9263becff","type":"member"}
 {"bytes":2127,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/runtimecontext-boundary.md","sha256":"3559e06549bd2a71c9d654d3e14e86804127ebb4f9179efa1c4ac6727c5173f5","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3401,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-code-rejection-routes.md","sha256":"b396ccbb78dcffb14bce104395fbc69388ba0ecb7e2f0f034633887483c5f6c5","type":"member"}
 {"bytes":1939,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-invocation-accumulator-scope.md","sha256":"aab32b86c0cf9d2dc26f8ca0f450b3429a9de21ba3e08bf551155d4c9d7161b1","type":"member"}
 {"bytes":7181,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-execution.md","sha256":"9a0a9b29bc8193a59255d64fa8784d61f40b9217e8e846a83362188d2b64a311","type":"member"}
-{"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
-{"bytes":3281,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-error-boundary-string-result.md","sha256":"cbdfc4a4b903a287ddf53dd55a3256e6607565428cebd7deb9d7df17ee0edff2","type":"member"}

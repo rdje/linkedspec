@@ -3668,9 +3668,9 @@ The owned artifact-growth review23.4.8 precedes unrelated feature selection;
 full admission remains separate.
 
 
-## Length continuations: Perl, Rust and Dart guards
+## Length continuations: Perl, Rust, Dart and Julia guards
 
-The next target is ordinary `length(value)` and `value.length()` result guards.
+Ordinary `length(value)` and `value.length()` results retain their actual kinds.
 The existing producer keeps its Number/null values: `length("tail").add(1)` is `5`,
 `length("").coalesce(7).add(1)` is `1`, and
 `length(undef).with(){return("recovered")}` returns `recovered`.
@@ -3707,9 +3707,10 @@ actual null/zero data from an earlier rejected consumer.
 
 The unchanged Perl normal passes nineteen groups after ten original failures;
 nine original healthy programs remain exact. Direct Count/length/logical
-preservation checks pass. Rust74.2 now passes its independent assessment and focused repair. Dart74.3 is also implemented with focused checks. Julia74.4 is
-next, followed by installed Lua74.5; preserve their producer domains. No new
-method, signature, conversion policy or schema is introduced.
+preservation checks pass. Rust74.2, Dart74.3 and Julia74.4 also implement the
+guards with independent focused checks; installed Lua74.5 remains. Preserve each
+backend's producer domains. No new method, signature, conversion policy or schema
+is introduced.
 
 A follow-up Perl74.6 check distinguishes initial Count input from an existing
 Length result. `count(4)` and `4.count()` still return Number `0` under Count's
@@ -3764,6 +3765,25 @@ emitted module bodies are byte-identical before and after: rebuild Dart apps/run
 Final Length and directly dependent Count/length checks pass forty-five groups,
 with fatal targeted analysis and full owned-file formatting clean. Actual direct
 inputs and raw results are retained under
-`docs/checkpoints/length-guard-dart-2026-11-06/`. Julia and installed Lua still
-require independent assessment; full custody, isolation, selection and admission
-remain pending.
+`docs/checkpoints/length-guard-dart-2026-11-06/`. Installed Lua still requires
+independent assessment; full custody, isolation, selection and admission remain
+pending.
+
+
+Julia74.4 now implements these Length guards on native, restored, generated-plan
+and fresh emitted Module routes. For example,
+`length("tail").count().copy().with(){return("ran")}` returns null and skips
+the body, while `4.count()` remains Number `0`. An explicit Array bridge such as
+`length("x").with(){return([1,2])}.count()` still returns `2`. Valid null/zero,
+eager logical effects, source snapshots and existing error wrappers are preserved.
+
+All twenty-four authored programs pass; twelve original healthy observations stay
+exact. Julia independently freezes its source-domain profile as
+`[1,1,1,2,2,null]`. Its scalar state, initial Count permission and the separate
+Array-end mutation restriction are unchanged. Twenty-four emitted module bodies
+and parsed inputs are byte-identical before/after; rebuild Julia apps/runtime.
+The focused Length/Count checks pass 220 assertions with strict deprecation checks.
+Actual declared direct inputs and complete raw evidence survive under
+`docs/checkpoints/length-guard-julia-2026-11-06/`. Fresh Modules share a process and
+runtime; independent isolation, full native/transitive custody, canonical discovery,
+installed Lua and full admission remain pending.

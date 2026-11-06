@@ -2,7 +2,7 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.35; implementation family23.3.74.
 Existing count-length-results.md3, catalog Length and typed result/copy/eager-logical
-contracts retain authority. Status: Perl74.1/74.6 Rust74.2 Dart74.3 implemented with focused checks; independent Julia/Lua74.4-.5 pending.
+contracts retain authority. Status: Perl74.1/74.6 Rust74.2 Dart74.3 Julia74.4 implemented with focused checks; installed Lua74.5 pending.
 
 Canonical ordinary length(value), one positional recognized value, and receiver.length()
 with zero extra operands keep current Number/null results. Length of a scalar is its
@@ -105,3 +105,18 @@ source/pub/lock/config/modules/parsed input archives/full raw channels survive
 losslessly in length-guard-dart-2026-11-06. Outside helper/admission bytes and
 normal/oracles exact. Full custody/selection/isolation/admission remain separate.
 Independently baseline Julia74.4 next; no peer failure inferred.
+
+## Bounded Julia74.4
+
+Independent native/restored/plan/fresh Module24 programs12PASS12RED become24PASS;
+twelve healthy observations stay exact. Its own [1,1,1,2,2,null] domain and full
+per-route error profiles freeze before unchanged normal execution. Canonical
+Length role joins kind_guarded_result before Count initial-source permission.
+Keep scalar_result, one-step Count permission and enumerate/call_index Array-end
+mutation restriction exact. Both producers/domains/signatures/copy depths/function/
+parser/schema stay. Actual24 module texts/parsed inputs unchanged: rebuild Julia
+apps/runtime. New normal122/Count-length6/Count guard92=220 assertions/strict
+depwarn pass. Actual declared first inputs/full raw channels recover losslessly
+with five corruptions in length-guard-julia-2026-11-06. Fresh Modules share process/
+runtime; full custody/isolation/discovery/admission separate. Installed Lua74.5
+next; P1 key-count75.0 afterward before unrelated selection.

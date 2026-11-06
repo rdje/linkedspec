@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — guard Julia Length results and produced-source ownership
+
+Canonical Length role joins kind_guarded_result before Count source permission; scalar state, Count permission and enumerate/call_index mutation restrictions stay exact. Authored24 programs12PASS12RED become24PASS; new normal74PASS48FAIL becomes122PASS assertions. Twelve healthy/domain/error profiles and24 module/parsed bodies exact. Final220/strict depwarn/five readonly corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Julia apps/runtime. Installed Lua74.5 next; full custody/isolation/discovery/admission separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — guard Dart Length results and produced-source ownership
 
 Canonical positional free-one/zero-extra Length role joins kindGuardedSource before Count permission. Authored24 controls12PASS12RED become24PASS on native/restored/plan/emitted routes; twelve healthy observations/domains/error profiles exact. ScalarResult/common/scalar/Count permission logic/producers/signatures/schema unchanged. Actual24 module texts unchanged; rebuild Dart apps/runtime. Final45/fatal targeted analysis/full format/five readonly corruptions pass. Actual declared inputs/full raw channels retained losslessly. Independent Julia74.4 next; full custody/isolation/selection/admission remain separate.
