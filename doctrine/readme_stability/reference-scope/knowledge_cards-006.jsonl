@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":27204,"lines":239,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md","sha256":"bce8e81bfe891ada9dac88da199afb8f8cae0bbeef7b4e1e6f1add4109c9432d","type":"member"}
 {"bytes":4531,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-admission.md","sha256":"c81df69433dbb4ab504cb25d597c3a1870504cac39e9c289a78614d116a32e6f","type":"member"}
 {"bytes":4625,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-dormant-red.md","sha256":"77a602fd9b317792c8ee1a2d590af736e03608e193b7ae13e451d2b95cac8740","type":"member"}
 {"bytes":4681,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-integration.md","sha256":"abf470a2cecd09f35e06fbe9dc1634b1bc50afe4ea47aa3d477e85094f591187","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":11960,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-implementation-admission-ledger.md","sha256":"9a61cc031621ba05e0e4f28b7bb8439bdc305b24ccec5646808e9aeee78a094b","type":"member"}
 {"bytes":10304,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-native-server-topology.md","sha256":"86e2f60d46cedd12ba08067196a65629d8dda942c60a6e505451e020d6dbf772","type":"member"}
 {"bytes":7683,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-recurring-six-runtime-plan.md","sha256":"88859667d7a40f600c8e81ec6fabd198a5a81fa3c7ac8f2cfb19fda08c0bb355","type":"member"}
-{"bytes":2288,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mdbook-mechanical-migration-contrast-drift.md","sha256":"70e98e2994e18f010ba8e8af077d41753c1d6aeba4a599d2be01a5bc81de3f78","type":"member"}

@@ -1,0 +1,35 @@
+{
+  "copy_failures": [
+    "copy_rejected_default",
+    "copy_rejected_with",
+    "receiver_copy_control"
+  ],
+  "frozen_view_healthy": 8,
+  "frozen_view_red": 7,
+  "frozen_view_sources": 15,
+  "nonadmitted_arity_profile": 1,
+  "original_groups": 16,
+  "production_changes": 0,
+  "qualified_copy_groups": 6,
+  "recovery_corruptions": [
+    "view runtime failure hidden",
+    "receiver compile failure hidden",
+    "valid copied null suppressed",
+    "copy rejection surprise normalized",
+    "nonadmitted arity promoted",
+    "missing healthy source",
+    "projected source drift",
+    "actual module drift"
+  ],
+  "scope": "finite original16 and independent copy6 at identical declared runtime inputs; shared15 is a source-preserving projection, not one original15 execution; peers/full native-transitive custody/isolation/admission separate",
+  "separate_copy_oracle_failure": "constructor_copy_oracle",
+  "view_failures": [
+    "copy_guard",
+    "free_sorted_keys_hash_guard",
+    "free_sorted_values_hash_guard",
+    "later_with",
+    "logical_guard",
+    "receiver_sorted_keys_hash_guard",
+    "receiver_sorted_values_hash_guard"
+  ]
+}

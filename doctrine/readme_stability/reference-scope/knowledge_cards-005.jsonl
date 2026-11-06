@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4537,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-literal-state.md","sha256":"fdf714656d594dc667ec7b024f87cef3d04b38846c433cdd3b91dd7c9b3f4e17","type":"member"}
 {"bytes":6967,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"1579b754c28016675926185e4bf44f7a2eaa1e13b5a46276a47708adf8ca28f3","type":"member"}
 {"bytes":2846,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/lua-callable-key-count-preservation.md","sha256":"d1228a65bc7e6724b60ecae00ca1b845792984fe013f6729f6351d124a8de706","type":"member"}
 {"bytes":2435,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-canonical-set-result-guards.md","sha256":"b7a0e154a5fec4c44105228b257656952dbe87cca4d0b8df955a49a3e0211a42","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":9646,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-readme-reading-and-status-drift.md","sha256":"381b6273d6505bff2fb0ad6d9c084341175a139cd40843adc8279c30653a116e","type":"member"}
 {"bytes":4030,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-receiver-copy-value-preservation.md","sha256":"7e8bbafcdc783eaabb565ce99ebd6ac183250682024e014696187e658438fcb5","type":"member"}
 {"bytes":2753,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-receiver-string-bridge-guards.md","sha256":"d7390973550d2ec7af25ed6524b8a87d08cb78f0d91852b51f9d87d0d06eddb3","type":"member"}
-{"bytes":27204,"lines":239,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-numeric-semantic-reading-and-copy-gaps.md","sha256":"bce8e81bfe891ada9dac88da199afb8f8cae0bbeef7b4e1e6f1add4109c9432d","type":"member"}

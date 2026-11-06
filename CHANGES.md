@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.36 — Freeze Hash-view guards and own copy rejection prerequisite
+
+Full-source original16 public controls expose seven Perl Hash-view guard failures and a separate copy-oracle failure; compatible/typed/snapshot/empty-with/error controls stay healthy. Minimal unchanged-input copy6 qualifies three healthy/three failing native-fresh controls, distinguishing rejected prefixes from legitimate null. Freeze views15 by source-preserving projection and separate copy6; schedule P176.0 before view76.1/independent peers. Retain actual inputs/modules/handlers/full channels and original/qualified reviewer epochs; qualified recovery/eight corruptions pass. No production edit or peer/admission claim. Evidence: docs/checkpoints/hash-view-selection-2026-11-06/REVIEW.md.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — Preserve installed Lua callable CountKeys composition
 
 Both PUC5.5.1 and LuaJIT independently pass16 authored programs/four routes without production edits. Add explicit-grammar callable regression, separate source-bound host Boolean null/null/arity/error profiles and one runner group. Each direct84+126 checks passes with empty stderr; all16 original observations/module/parsed bodies per host remain exact. Eight readonly corruption controls reject. Actual inputs/full channels and limits: docs/checkpoints/key-count-callable-lua-2026-11-06/REVIEW.md. Book/Knowledge/continuity align; next remaining-family selection23.1.36 is owned. Full verification and declared5.4 remain separate.

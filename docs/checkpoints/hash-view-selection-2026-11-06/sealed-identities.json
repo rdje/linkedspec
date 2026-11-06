@@ -1,0 +1,282 @@
+{
+  "docs/checkpoints/hash-view-selection-2026-11-06/capture.py": {
+    "bytes": 2643,
+    "sha256": "68a1ef3dddb34db2e237ad785137b72a336fc1541fd5ede3f9b7ba368c12ca7a"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/capture_copy.py": {
+    "bytes": 2676,
+    "sha256": "07de6ab595ec4c4dd8c210e576f640c21276d34fef91e5d9705ba1bf2c4a8bbd"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/cases.json": {
+    "bytes": 7555,
+    "sha256": "753a3a2eb6206e1753b96cb97aafbf825191f7d0c4dad6615800b20d26de85df"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/cases.py": {
+    "bytes": 3347,
+    "sha256": "cb4011abe50dd019a66fbd6cab73aeacd6fcce547104fea05c48ba753a4d00c4"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls.json": {
+    "bytes": 2562,
+    "sha256": "169ee8fb3ef5f50fda4bf8d5fdbd4043e12438282d0abb4c9ccd31b9a3f2a3d9"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/activation.txt": {
+    "bytes": 41,
+    "sha256": "4a27b9c1278fb73df00a4b40fde4c4273086abe9d98c3d18423ae75289d84e8a"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/command.json": {
+    "bytes": 328,
+    "sha256": "a996d4dd14b41931b2fc2c99b96bf9ba6a71dd698756b5abc20687456daafb46"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "b0e9d8d434434f5540823984311d7bf1918b12649f2955593b051c9ad3fbc09a"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/constructor_rejected_with.pm.gz": {
+    "bytes": 2751,
+    "sha256": "ad22483b29b69973cd0a341a16c8e6f99d1f58682705a574833c5bc902f4881b"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_rejected_default.handler.pl.gz": {
+    "bytes": 2822,
+    "sha256": "90b56b1fdd97c2879c4b9064a845506b4d3d1c7a2e66fd37be88629235a78b6e"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_rejected_default.pm.gz": {
+    "bytes": 2827,
+    "sha256": "332bb42362d7e509b6cadb53592065fec2cc8a68a0627fce099f608903802915"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_rejected_with.handler.pl.gz": {
+    "bytes": 2770,
+    "sha256": "20bc91dd0f5d56f7c9268ebda4f34d4d08250822b1caf2573922788d7ef98eb4"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_rejected_with.pm.gz": {
+    "bytes": 2774,
+    "sha256": "df71cf4dc9055445b3cfbcc820c31a72d0de716c6310b137a1ab87b2544bbcaa"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_valid_null_with.handler.pl.gz": {
+    "bytes": 2662,
+    "sha256": "e9eca844776a5f652525dff1c1f65b0b20c69f13fe916f8b4a52d4642157d71e"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_valid_null_with.pm.gz": {
+    "bytes": 2667,
+    "sha256": "6a6c67bb67c4ce178e11b870a598ce46245347211757cf981e40a900a40e824b"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_without_with.handler.pl.gz": {
+    "bytes": 2731,
+    "sha256": "854a98846bbcdb2c7007d84c3c097452c7ee0d6f4d78b7b1406528f2ded20ba3"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/copy_without_with.pm.gz": {
+    "bytes": 2736,
+    "sha256": "160baafba2a2cb84c7e45312db711743b1e49fc637db667bb6db31b1e20a9d1f"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/input-identities.json": {
+    "bytes": 17801,
+    "sha256": "d3cc3fb1e6ba8c7016c8dc77bffa37e05fc289b4192e8ae326ccec040c8114b9"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/inputs-before-first-run.tar.gz": {
+    "bytes": 472142,
+    "sha256": "c0b5bf9425950532037ac157008430800afe64ad2bb5b58784360f5b02b09bb6"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/receiver_copy_control.handler.pl.gz": {
+    "bytes": 2770,
+    "sha256": "860e1c9cdd56cb94de1799a09a5ec7e5a75175a67ec18d8d3703818528bef184"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/receiver_copy_control.pm.gz": {
+    "bytes": 2774,
+    "sha256": "2adb440ef54f7557991707927e38f10b918270944e03314ef1c7a959274633b3"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy-controls/stdout.log.gz": {
+    "bytes": 5879,
+    "sha256": "5a59fd317372795e8399c481bc2804b92ec49a2f072a979f63f23e25795ca832"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/copy_cases.py": {
+    "bytes": 1480,
+    "sha256": "5778a5015059fdea9cb595f5cdf3787c05aa1b08bd4c810910b462e9238fd418"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/freeze_targets.py": {
+    "bytes": 851,
+    "sha256": "7daabe6738be7caa33ea577cc1c56980ef587424e83bb20f95cca74bf26e6d04"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "4a27b9c1278fb73df00a4b40fde4c4273086abe9d98c3d18423ae75289d84e8a"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/arity_profile.handler.pl.gz": {
+    "bytes": 2638,
+    "sha256": "467ee73977a79e3490a7a726613740ed95e2aafbe75d11ce295ca5e094205886"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/arity_profile.pm.gz": {
+    "bytes": 2643,
+    "sha256": "b3fbb03ac3c9df4f0b382ad9c5fdd8da3b9991b7e0f60fbc3fce786fabbdfb8f"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/command.json": {
+    "bytes": 313,
+    "sha256": "66e93a077589f2d0ea5982d8973b07d4cb0aadd216a927e810c69cd0858a93a7"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/constructor_copy_oracle.handler.pl.gz": {
+    "bytes": 2887,
+    "sha256": "320d24142ed32851ac881ab35947037810f6b1de4ef7c1b1b83f45d99278148f"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/constructor_copy_oracle.pm.gz": {
+    "bytes": 2892,
+    "sha256": "222b33560f00a6608eb4a1936d96558ef86d13614d0479e04feb3923b7c83e4e"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/copy_guard.handler.pl.gz": {
+    "bytes": 2818,
+    "sha256": "214c39dab98e51e463d3f7924270cc2f374099e8b7fb21edc0114c2d85a68b4e"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/copy_guard.pm.gz": {
+    "bytes": 2823,
+    "sha256": "e20dc60a3fc58cc013d04bf3ca059a557cb6f3a58021a8a07224f24cc9857f38"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/explicit_bridges.handler.pl.gz": {
+    "bytes": 2663,
+    "sha256": "a6fda2e9056dd1fabc40744ac97e771e4178638dff57d219c412a4cfc91bdc46"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/explicit_bridges.pm.gz": {
+    "bytes": 2667,
+    "sha256": "eb72bb91403adce3ebe3640e7a52051f645bb982a59d5777a9ec3a9f4b0a10a1"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2692,
+    "sha256": "5a39fa66a3ca0274832470b1468deb407ef6d2d918f3a1fe8fa9d8700a615e4a"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2697,
+    "sha256": "fd6423cfa9ac0b39722df832670f0f4494e1c307cd691436e1a70dc537914bd6"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/free_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2713,
+    "sha256": "18989fcae78d8f7fbd709c01b07a850169eb3bd2f00bcf44ed40c8d7b1d0bd16"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/free_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2718,
+    "sha256": "ddb6f2ff19b3af1bbe23615b9d9520581c90a8e913e46ee2e20ede425f2bb497"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/input-identities.json": {
+    "bytes": 17783,
+    "sha256": "3e2c4fec9d758c53083587046eb52825bcf3e30d8d94310bd801730f9f361dc5"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 473195,
+    "sha256": "3b6200c167c5d268ee4356dd8b8b01bc2e74d1ae29c16a3be36aced6a091a441"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/keys_compatible.handler.pl.gz": {
+    "bytes": 2565,
+    "sha256": "9a0b5a6560b8747dccea95bae04aeff2ec231a63c44bb0a5dee01ca21b378f5f"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/keys_compatible.pm.gz": {
+    "bytes": 2572,
+    "sha256": "92f780a7c9cf25ba30a0ff73065e4a5e0d55788f858685aa3a2b894b6cdd9377"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/later_with.handler.pl.gz": {
+    "bytes": 2728,
+    "sha256": "ec1e6d0b726fbab418d45bfacaba794b41993caa95dd49b43e52d076c1bd344c"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/later_with.pm.gz": {
+    "bytes": 2733,
+    "sha256": "1a6a565fc6ed2e7df60ee491570d6524aa39e2700b164daf317aa99ebea444c7"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/logical_guard.handler.pl.gz": {
+    "bytes": 2852,
+    "sha256": "79238bdf38b33591dff33718c305e46b8d5fe002d8dbab5ce033084f572dd02f"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/logical_guard.pm.gz": {
+    "bytes": 2857,
+    "sha256": "d89d6596d4cfa7b41f9e2c774034773f8b6f1d4f9c4e67c443aca684759f1cfe"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/needed_source_error.handler.pl.gz": {
+    "bytes": 2488,
+    "sha256": "05075fe98608ba37a41b8f7495a1886cc364e610b390fba4804017b5863eec84"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/needed_source_error.pm.gz": {
+    "bytes": 2492,
+    "sha256": "2b7fb0b5493dcb1ee04c64330a009e4fb6010ac0faceaa876d8e7ecd26c4eb62"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/nested_kinds.handler.pl.gz": {
+    "bytes": 2588,
+    "sha256": "2ec689f67f3705531681c0dc29b7fe1b26cc016696071db987f43f27841ba8a1"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/nested_kinds.pm.gz": {
+    "bytes": 2593,
+    "sha256": "8ffbaf062e7b50f395bd503cd696829372020ee10421fd2a7504fc3a3465ceeb"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/receiver_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2433,
+    "sha256": "5d06ee2e188d74114e495c5dde7054c1c9452494e850357b57e47a13439d3a3d"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/receiver_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2438,
+    "sha256": "c9a19567285d4774135d436dc14906adfd3d06cec5cd459f49b3b3db5163ae83"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/receiver_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2433,
+    "sha256": "47a58b0b8bd2cd4156246783f8c29f52649e2a6170647f6fb12f79a38a0bfc44"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/receiver_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2438,
+    "sha256": "6a12969ab118be5da2031a09f76f6d0246f18a779d2c8f8e91c6999416ecff04"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/source_once_snapshot.handler.pl.gz": {
+    "bytes": 2910,
+    "sha256": "5f0433c953c1c6e3815d41ae06e0fbdb7a4748e034a3f612ee6c11467604c22f"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/source_once_snapshot.pm.gz": {
+    "bytes": 2916,
+    "sha256": "bf208767ca0b4e3130bc0e186a7183426ecbc96c41f957c446b04129f5571c90"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/stdout.log.gz": {
+    "bytes": 13245,
+    "sha256": "736ac9dbbb4eb9eb2d78c30a675b8e2e9ae86a43aa64a38a6c7205c81e56b02c"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/valid_empty_with.handler.pl.gz": {
+    "bytes": 2674,
+    "sha256": "7d1b86588a795cd653544a1bff371f27e1a912d45c9c27ff82beebac64882a59"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/valid_empty_with.pm.gz": {
+    "bytes": 2680,
+    "sha256": "4832b73fed215726f3de4e39d2dab0f98a64428aa53e84935c4db12eeef050c8"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/values_compatible.handler.pl.gz": {
+    "bytes": 2576,
+    "sha256": "e27764581f3c3228c38579521c6ad0e6521c8a2232052a22b47109a1fa415687"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/intake/values_compatible.pm.gz": {
+    "bytes": 2580,
+    "sha256": "0aa68b1cbc928d15e2ab4333135866deae36bcf7c1265d1a561b06a78da3a4ad"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/observer.pl": {
+    "bytes": 3018,
+    "sha256": "6648334099ebece8fbe213f5a64999c29d726ef1f8834b3e0afecd63793706d6"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/review.py": {
+    "bytes": 10910,
+    "sha256": "b0c61e4cadabc2436c00c13e16a8c6b033c5af0608134242a2e88a86069c3f6c"
+  },
+  "docs/checkpoints/hash-view-selection-2026-11-06/seal.py": {
+    "bytes": 1138,
+    "sha256": "df3bfef47699c296f33c741ecc70dac170c7c653a01209612d6c1e7254eba049"
+  },
+  "tests/fixtures/copy_result_guard_cases.json": {
+    "bytes": 2562,
+    "sha256": "169ee8fb3ef5f50fda4bf8d5fdbd4043e12438282d0abb4c9ccd31b9a3f2a3d9"
+  },
+  "tests/fixtures/hash_view_result_guard_cases.json": {
+    "bytes": 6929,
+    "sha256": "ba26e8caef9ec0700192d6605ab5632042c17be5accdcd1cbf3a97c1159e0d8f"
+  }
+}

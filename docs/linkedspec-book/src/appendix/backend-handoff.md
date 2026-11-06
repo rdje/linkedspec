@@ -4214,3 +4214,35 @@ Lua5.4 proof is claimed. Fresh modules share runtime/process. Native-build/binar
 cache/transitive provenance, source/context discovery, general isolation and full
 23.4 admission remain separately owned. All bounded callable backend children now
 have focused outcomes; remaining-family selection23.1.36 resumes from clean Git.
+
+
+## Selected Hash-view guards and a separate Perl copy gap
+
+Selection23.1.36 retains existing compatible sorted_keys/sorted_values Array
+results: ordered keys/values, nested kinds, snapshots, Array/String bridges and
+valid empty-Array with already work. Wrong Hash consumers expose seven Perl
+failures across original16 full-source controls. Free sources raise native/fresh
+Not-a-HASH-reference errors; two literal receiver forms keep raw DSL and fail to
+compile despite ready descriptors. Family76 owns the canonical free-one/zero-extra
+source/prefix guards, preserving original producers, domains, order and copy depth.
+Peers must be independently assessed before any repair verdict.
+
+An independent constructor/copy control also exposes rejection-state loss. On
+current Perl, copy(["a"]).set_key("k",1).with(){return("ran")} returns"ran";
+the incompatible Hash operand is skipped, but the later body runs. A later
+coalesce fallback can also run. Array-constructor rejection stays null and skips
+its body. Minimal copy6 verifies three failures and three healthy native/fresh
+controls at unchanged declared runtime inputs. Legitimate copy(undef).with remains
+valid and must still run; treating every null as rejection would be wrong.
+P1 Perl76.0 owns this copy-root/zero-extra copy-prefix repair before view76.1.
+Earlier Count-copy proof covered another source role, not generic copy closure.
+
+Frozen view15 projects original14 unchanged sources plus a separately qualified
+constructor control; it is not one original15 execution. Copy6 stays separate.
+The malformed extra-operand receiver remains an unready nonadmitted profile.
+Actual inputs, observer, module/handler bodies, complete channels and original
+reviewer failure survive under docs/checkpoints/hash-view-selection-2026-11-06/.
+A separate qualified readonly reviewer adds an explicit typed-object check and
+rejects eight evidence corruptions. This is selection and instrument qualification;
+no production repair, peer/full-domain/native-transitive/isolation/admission proof
+is implied. Full verification remains deferred until feature coverage.

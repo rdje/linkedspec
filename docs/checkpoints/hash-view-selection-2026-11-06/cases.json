@@ -1,0 +1,176 @@
+[
+  {
+    "id": "keys_compatible",
+    "body": "return([sorted_keys({\"b\":2,\"a\":1}).join_values(\",\"),sorted_keys({}).count(),{\"b\":2,\"a\":1}.sorted_keys().last().uppercase()])",
+    "source": "Value:: I {return([sorted_keys({\"b\":2,\"a\":1}).join_values(\",\"),sorted_keys({}).count(),{\"b\":2,\"a\":1}.sorted_keys().last().uppercase()])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "a,b",
+      0,
+      "B"
+    ]
+  },
+  {
+    "id": "values_compatible",
+    "body": "return([sorted_values({\"b\":\"tail\",\"a\":\"head\"}).last().uppercase(),sorted_values({}).count(),{\"b\":\"tail\",\"a\":\"head\"}.sorted_values().join_values(\"|\")])",
+    "source": "Value:: I {return([sorted_values({\"b\":\"tail\",\"a\":\"head\"}).last().uppercase(),sorted_values({}).count(),{\"b\":\"tail\",\"a\":\"head\"}.sorted_values().join_values(\"|\")])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "TAIL",
+      0,
+      "head|tail"
+    ]
+  },
+  {
+    "id": "free_sorted_keys_hash_guard",
+    "body": "order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "receiver_sorted_keys_hash_guard",
+    "body": "order=\"\";out={\"a\":1}.sorted_keys().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"a\":1}.sorted_keys().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "free_sorted_values_hash_guard",
+    "body": "order=\"\";out=sorted_values({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_values({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "receiver_sorted_values_hash_guard",
+    "body": "order=\"\";out={\"a\":1}.sorted_values().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"a\":1}.sorted_values().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "later_with",
+    "body": "order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_guard",
+    "body": "order=\"\";out=sorted_values({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_values({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_guard",
+    "body": "order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "explicit_bridges",
+    "body": "return([sorted_keys({\"b\":2,\"a\":1}).join_values(\",\").uppercase().split(\",\").last(),sorted_values({\"a\":1}).with(){return({\"k\":1})}.count_keys()])",
+    "source": "Value:: I {return([sorted_keys({\"b\":2,\"a\":1}).join_values(\",\").uppercase().split(\",\").last(),sorted_values({\"a\":1}).with(){return({\"k\":1})}.count_keys()])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "B",
+      1
+    ]
+  },
+  {
+    "id": "nested_kinds",
+    "body": "return([sorted_values({\"a\":false,\"b\":{\"n\":[7]}})[0],sorted_values({\"a\":false,\"b\":{\"n\":[7]}})[1][\"n\"][-1].add(1)])",
+    "source": "Value:: I {return([sorted_values({\"a\":false,\"b\":{\"n\":[7]}})[0],sorted_values({\"a\":false,\"b\":{\"n\":[7]}})[1][\"n\"][-1].add(1)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      false,
+      8
+    ]
+  },
+  {
+    "id": "source_once_snapshot",
+    "body": "meta={\"a\":1};order=\"\";out=sorted_keys({order=cat(order,\"S\");meta}).join_values({order=cat(order,\"A\");meta[\"b\"]=2;\",\"});return([out,count_keys(meta),order])",
+    "source": "Value:: I {meta={\"a\":1};order=\"\";out=sorted_keys({order=cat(order,\"S\");meta}).join_values({order=cat(order,\"A\");meta[\"b\"]=2;\",\"});return([out,count_keys(meta),order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "a",
+      2,
+      "SA"
+    ]
+  },
+  {
+    "id": "constructor_copy_oracle",
+    "body": "order=\"\";a=array(\"a\").set_key({order=cat(order,\"A\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};b=copy([\"a\"]).set_key({order=cat(order,\"B\");\"k\"},1).with(){order=cat(order,\"X\");return(\"ran\")};return([a,b,order])",
+    "source": "Value:: I {order=\"\";a=array(\"a\").set_key({order=cat(order,\"A\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};b=copy([\"a\"]).set_key({order=cat(order,\"B\");\"k\"},1).with(){order=cat(order,\"X\");return(\"ran\")};return([a,b,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_source_error",
+    "body": "return(sorted_keys({items=\"text\";push(items,\"x\");{\"a\":1}}).coalesce(\"masked\"))",
+    "source": "Value:: I {return(sorted_keys({items=\"text\";push(items,\"x\");{\"a\":1}}).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "valid_empty_with",
+    "body": "order=\"\";out=sorted_keys({}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_keys({}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      0,
+      "W"
+    ]
+  },
+  {
+    "id": "arity_profile",
+    "body": "order=\"\";out={\"a\":1}.sorted_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"a\":1}.sorted_keys({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  }
+]

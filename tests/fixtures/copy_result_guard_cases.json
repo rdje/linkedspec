@@ -1,0 +1,68 @@
+[
+  {
+    "id": "copy_without_with",
+    "body": "order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_rejected_with",
+    "body": "order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_valid_null_with",
+    "body": "order=\"\";out=copy(undef).with(){order=cat(order,\"W\");return(\"valid-null\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy(undef).with(){order=cat(order,\"W\");return(\"valid-null\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "valid-null",
+      "W"
+    ]
+  },
+  {
+    "id": "constructor_rejected_with",
+    "body": "order=\"\";out=array(\"a\").set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=array(\"a\").set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_rejected_default",
+    "body": "order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).coalesce({order=cat(order,\"D\");{\"x\":1}}).count_keys();return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).coalesce({order=cat(order,\"D\");{\"x\":1}}).count_keys();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "receiver_copy_control",
+    "body": "order=\"\";out=[\"a\"].copy().set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=[\"a\"].copy().set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  }
+]

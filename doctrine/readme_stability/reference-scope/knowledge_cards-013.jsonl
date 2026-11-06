@@ -1,4 +1,6 @@
-{"member_count":22,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":24,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4109,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-wrapper-quoted-name-boundaries.md","sha256":"8da523222572c9d9c5907a475524591af7e03593b1932c1e0b2b4b84b28c668f","type":"member"}
+{"bytes":4155,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-17-case-contract-data.md","sha256":"96f5d3b71b0b43af5acb76fe451c3a242ba3ded475512565945c817cc5ff8924","type":"member"}
 {"bytes":5200,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-case-mapping-cross-backend-gap.md","sha256":"c44d76aa0e888f1747096fe7133ab6c8afc512fe40b597ae8fdddaed4b58ab04","type":"member"}
 {"bytes":19479,"lines":266,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/unicode-rule-label-contract.md","sha256":"d82181eb5843766ac5b7f60b3ad7cffad73ebde539f321d2d7a056926918538e","type":"member"}
 {"bytes":3763,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-binding-array-end-result-supersession.md","sha256":"d0723bf4eef9984506ec141a6ce7e3f25260b7f37a86640f12613447e41bc92c","type":"member"}

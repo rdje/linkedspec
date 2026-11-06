@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2288,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mdbook-mechanical-migration-contrast-drift.md","sha256":"70e98e2994e18f010ba8e8af077d41753c1d6aeba4a599d2be01a5bc81de3f78","type":"member"}
 {"bytes":1872,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/medium-term-alias-retirement-deferred.md","sha256":"eac535acd7067990a3fe1db2933631844b438ff7c146f6ede5ff12dab298e17f","type":"member"}
 {"bytes":2486,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md","sha256":"f8e24060a7ccef7b1ed9af98865c5144c2cb926ea67c75ad163fb56d6a3fc377","type":"member"}
 {"bytes":2111,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-handoff-task-status-consistency.md","sha256":"f676ce242569c4d89dac7a614d579bc9e7268c721ec3f24c513ab5cb307e1018","type":"member"}
@@ -104,6 +105,7 @@
 {"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}
 {"bytes":3150,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-index-rejection.md","sha256":"2434156c325d4b3bca374079a494c9d33f24c27b914422b64611fbbbbd5473a6","type":"member"}
 {"bytes":3088,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-presence-rejection.md","sha256":"18e7d7b67c3089d746a0c5987fc59f1047dbad3ba51f17eba5a7f3601dbd1e87","type":"member"}
+{"bytes":2519,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.36","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"1557e6ba6057410fe2a3152dc93108aa16303828ca662c6cd0670672e299a8c2","type":"member"}
 {"bytes":3479,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-copy-rejection.md","sha256":"8d15d6301567d79d1b9c037486154e8f23b35d99c9ca999272274de545752aab","type":"member"}
 {"bytes":2236,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6","path":"docs/knowledge/perl-count-logical-rejection.md","sha256":"ee128e316e65f603a8f4549d456ee48a45747fe8304b313b869690d0a68c0be3","type":"member"}
 {"bytes":3354,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-receiver-compilation.md","sha256":"9ff84cf949601d675a474d06c11f4d5e9c0c154944afecf3241a042ccbd87384","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3957,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-public-entry-trivia.md","sha256":"32af7029b704df9bcb38d4a643d83645c645b1b0e474a98f95e0aff4e3063b54","type":"member"}
 {"bytes":2826,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emptiness-expression-and-host-slot-drift.md","sha256":"948ca767331de981d57b83af79b1396279cdcb7105bad63d42e22d591eef62d7","type":"member"}
 {"bytes":4203,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-ast-trim-span.md","sha256":"5caf35bf2b0711bc066433a04d260a61cc6aedfbd426ccedf76e554cfc6e0efd","type":"member"}
-{"bytes":4938,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-blind-return-duplicate-scalar.md","sha256":"83199b9e2639fd0573b3a301818de24935bba81de15b4ec8c37531689f7dbcf0","type":"member"}
-{"bytes":6279,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-executable-source-membership.md","sha256":"7944d2f5940e85611abd03b2ea86ff230a826c3171a3e9a0de65f109b4b00bf6","type":"member"}

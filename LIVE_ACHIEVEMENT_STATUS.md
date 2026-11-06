@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: ordinary five-backend guards and all bounded callable backend children have focused outcomes on recorded hosts. Remaining-family selection23.1.36 is next. Full23.4/source-context/custody admission stays deferred until feature coverage.
+PNT selection36 freezes Hash-view Array result guards76 and an independent P1 Perl copy rejection gap76.0. Ordinary Length74/CountKeys75/callable75.6 retain focused outcomes. Full verification stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 independently preserves16 authored programs/four routes on PUC5.5.1 and LuaJIT. Supporting grammar is captured and explicitly supplied before SDK use; separate Boolean null/null/arity/error profiles stay exact. Each direct84+126 checks passes with empty stderr; eight recovery corruptions reject. All16 original observations and module/parsed bodies per host remain exact. Runtime unchanged; native/cache/transitive custody, declared5.4 and full admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.1.36: original16 public programs retain seven view failures, seven healthy programs, a separate copy-oracle failure and one nonadmitted arity profile. Minimal copy6 at unchanged declared inputs qualifies three healthy/three failing native-fresh cases, separating rejected prefixes from legitimate null. Shared views15 is a source-preserving projection; it was not one original15 run. Actual inputs/modules/handlers/full channels and original reviewer failure remain intact; qualified recovery/eight corruptions pass. No production change or peer verdict.
 
 ## Next Action
 
-Activate selection23.1.36 from clean Git. Recover actual remaining inventory/gap matrix/contracts/Knowledge, retain minimum full-source public observations and freeze one existing-contract feature family; own backend leaves before production. No broad verification pivot. Resource4.14 remains before memory-guarded full verification.
+Activate P1 Perl76.0 from clean Git, run actual unchanged copy6 normal baseline, then repair rejection-state preservation without suppressing legitimate null. Small direct checks/docs/commit before view76.1 and independent peers. Source/context/native-cache/isolation/declared5.4/full23.4 stay separately owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.1.36 — views15 frozen by projection; copy6 distinguishes3RED/3healthy; no production edit; P176.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — each installed Lua16PASS/four routes; direct210 checks; runtime unchanged; selection36 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Julia16PASS/four routes; direct237 assertions; runtime unchanged; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Dart16PASS/four routes; qualified grammar/normal16/direct29; runtime unchanged; Julia4 next.
@@ -29,7 +30,6 @@ Activate selection23.1.36 from clean Git. Recover actual remaining inventory/gap
 - TYPE-REFERENCE-BOOK.1.2.23.4.13 — dated artifact retention review; zero removals; P1 domain75.0.2 resumes.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
-- TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
 
 ## History
 

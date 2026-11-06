@@ -3,6 +3,7 @@
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
 {"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
 {"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}
+{"bytes":2258,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.36","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"f0ff2365d0d40fdc3dbf38ff3f36905d217f58b720122ce4cba0ae4af4193488","type":"member"}
 {"bytes":8469,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-objective-audit-input-recovery.md","sha256":"0056baa6fcce07fdbd38cd70d0f1832001636aa51ac307efdc030f54cf5dc830","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
 {"bytes":3808,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hlink-scalarref-oracle-gap.md","sha256":"707ab66f1f39951b8cca2dd1b60508585c22172f7062bab3ed10482b899f79d5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4441,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-parent-state-test-gap.md","sha256":"b456785271b5f20565ca825ba1d4335d0eaa7720b833948456a21c70f2a0e423","type":"member"}
 {"bytes":7377,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-admission.md","sha256":"f6f0bf4bad7e01a40b6e099f519d8a029435e0d628a383c853efd3ffef55c032","type":"member"}
 {"bytes":7864,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-authority.md","sha256":"6ae78446bbdd1823403cba3ca63368cc70112b32754514ed1be2ee8115213b20","type":"member"}
-{"bytes":7340,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-carriers.md","sha256":"6437303c1305e69c4fe7a02aa5ddff2b96ce3e511ebd262b004e3ff7ccfb0338","type":"member"}

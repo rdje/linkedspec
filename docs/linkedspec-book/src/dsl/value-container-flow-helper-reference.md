@@ -472,6 +472,14 @@ remain. Source errors propagate, and copying preserves the captured Count result
 operand effects. These ordinary checks do not extend deferred callback syntax or establish full
 portable admission.
 
+The generic Perl copy root still has a separately tracked limit: after
+`copy(["a"]).set_key("k",1)`, a later `.with(){return("ran")}` currently runs
+and returns `"ran"`. A later default can also recover that rejected prefix.
+The Hash consumer correctly skips its operand, but rejection is lost before the
+later operation. P1 repair76.0 preserves that state; legitimate
+`copy(undef).with(){return("valid-null")}` must continue to run. The current
+Count-specific proof above does not establish generic copy-root closure.
+
 Ordinary Perl also keeps that Count rejection through eager `.and(rhs,...)`,
 `.or(rhs,...)` and `.not()` links, with or without copy or a final `with`:
 
@@ -1254,6 +1262,15 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 | `hash_expr.map_leaves() { block }` | hash value | return a new tree with every non-hash leaf replaced by the block result. |
 | `hash_expr.reduce_leaves(initial) { block }` | value | fold every non-hash leaf into an accumulator. |
 | `binding_name.map_leaves!() { block }` | updated hash/array value | All five backends: atomically replace leaves and rebind one bare named receiver. |
+
+Sorted Hash views produce Arrays and already support compatible continuations:
+`sorted_keys({"b":2,"a":1}).join_values(",")` is `"a,b"`, and
+`sorted_values({"b":"tail","a":"head"}).last().uppercase()` is `"TAIL"`.
+Current Perl Hash-view result guards are incomplete: an incompatible
+`.set_key("k",1)` can raise a host reference error or fail to compile. Family76
+owns that guard repair; canonical constructors already reject that wrong kind.
+The [backend handoff](../appendix/backend-handoff.md#selected-hash-view-guards-and-a-separate-perl-copy-gap)
+records the exact bounded selection and separate copy prerequisite.
 
 Registered Hash-function results also compose on the focused-checked Perl, Rust,
 Dart, Julia and installed PUC5.5.1/LuaJIT routes. With `fn make_hash(){return({"k":1})}`,

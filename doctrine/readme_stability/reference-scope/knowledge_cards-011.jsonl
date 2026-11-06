@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2218,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-push-snapshot-result-guards.md","sha256":"bf24e64b366c2043d912b45f667e4e480e282e4df726e0442722467631fb1c32","type":"member"}
+{"bytes":2580,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-receiver-string-bridge-guards.md","sha256":"cefc98541a51419d38ec3796c53d56b461869cd17e42f7c6ea740929f78dd4d6","type":"member"}
 {"bytes":4475,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-token-variable-use-gap.md","sha256":"9029e74870c5704e344c814ab036681b1cc48c5f824b76b607d81cfbfa0ae9ab","type":"member"}
 {"bytes":5747,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-transaction-dormant-red.md","sha256":"983db7178c1ee7151054575cfcf38e3c51c07c3d2ea5c09fa7b66acfbe947fe0","type":"member"}
 {"bytes":9910,"lines":116,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recognition-transaction-integration.md","sha256":"f2413ba9a974c15ed4876ecc0b0778b4cab208ba37c2110cee6aba9dee2157fe","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":4123,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parser-registry-dispatch-contract.md","sha256":"7c61df97f1e2e036948f56f102f3f8f05c532c32ebd9c15da6f05102a7fe7a34","type":"member"}
 {"bytes":3188,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-prototype-function-body-selection.md","sha256":"59201bfb2cc311b21e04bfd14f05bbd73e315ba03b51755a6be51cd1df702584","type":"member"}
 {"bytes":5199,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-target-preparation-gaps.md","sha256":"fc1600cdc6fad658e2a62698dd359d440a54a8a33d2e8a2ca3812b26c93a9414","type":"member"}
-{"bytes":13410,"lines":157,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/standalone-lifecycle-block-audit.md","sha256":"1149e44d1936e5bab801dfc6b675cf6a857661c16f3b205b990b24d22570b608","type":"member"}
-{"bytes":17960,"lines":292,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-codebase-reading-inventory.md","sha256":"28c9a78315e9d20747b0de1e2b84618b060f40f2a17911f01201cacf6701b4ae","type":"member"}
