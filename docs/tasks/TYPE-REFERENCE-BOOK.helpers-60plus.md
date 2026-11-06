@@ -1258,7 +1258,7 @@
   Narrative: exact predecessor via `python3 tools/read_task_narrative.py --tree TYPE-REFERENCE-BOOK --id TYPE-REFERENCE-BOOK.1.2.23.3.72.6.5`.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.73`
-  Status: `in_progress` / bounded primary Count backends recorded; mandatory P1 copy/source assessment remains
+  Status: `in_progress` / bounded Count implementation/P1/P2/P3 complete; final admission remains
   Children: `.73.0` Perl typed-source producer, `.73.1` Perl guards/readiness, `.73.2` Rust, `.73.3` Dart, `.73.4` Julia, `.73.5` safe Lua, `.73.6` independent copy/source/rejection assessment and repairs; `.73.7` owned compiler-scaling diagnosis and `.73.8` pre-existing Dart member formatting debt follow the P1 repairs.
   Goal: Retain Count numeric results, source/consumer snapshots and rejection through ordinary continuations.
   Dependencies: selection34/frozen count-result-guard-composition.md/shared16/excluded18/current count3/ADR0138 authority.
@@ -1586,7 +1586,7 @@
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74`
-  Status: `in_progress` / Perl74.1 focused-checked; independent peers remain
+  Status: `in_progress` / Perl74.1 focused-checked; P1 source-owner74.6 complete; independent peers remain
   Goal: Preserve Length numeric/null producers and actual-kind continuation guards through copy/logical/with.
   Dependencies: Selection23.1.35; length-result-guard-composition.md/shared16; existing count/length3 and copy/eager-logical authority.
   Acceptance: Independently assess each backend; preserve domains/signatures/source once/snapshots/needed errors/preflight/copy depths/valid null-zero/explicit bridges/functions/parser/schema. Fix demonstrated incompatible operands/later effects and Perl main::4 leak. No new language authority or full admission. P1 key-count75.0 follows74.5 before unrelated selection.
@@ -1616,7 +1616,8 @@
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.2`
   Status: `pending`
   Goal: Independently assess and repair Rust ordinary Length source/continuation guards.
-  Dependencies: Completed23.3.74.1; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Dependencies: Completed23.3.74.1 and P1 source-owner74.6; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Source-owner preservation: Independently assess produced-Length-to-Count rejection, initial Count zero and explicit Array bridge controls from74.6 before attributing a peer defect.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
   Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
   Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
@@ -1625,6 +1626,7 @@
   Status: `pending`
   Goal: Independently assess and repair Dart ordinary Length source/continuation guards.
   Dependencies: Completed23.3.74.2; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Source-owner preservation: Independently assess produced-Length-to-Count rejection, initial Count zero and explicit Array bridge controls from74.6 before attributing a peer defect.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
   Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
   Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
@@ -1633,6 +1635,7 @@
   Status: `pending`
   Goal: Independently assess and repair Julia ordinary Length source/continuation guards.
   Dependencies: Completed23.3.74.3; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Source-owner preservation: Independently assess produced-Length-to-Count rejection, initial Count zero and explicit Array bridge controls from74.6 before attributing a peer defect.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
   Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
   Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
@@ -1641,9 +1644,35 @@
   Status: `pending`
   Goal: Independently assess and repair safe installed Lua ordinary Length source/continuation guards.
   Dependencies: Completed23.3.74.4; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
+  Source-owner preservation: Independently assess produced-Length-to-Count rejection, initial Count zero and explicit Array bridge controls from74.6 before attributing a peer defect.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
   Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
   Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.6`
+  Status: `completed` / P1 produced-Length ownership focused-checked
+  Goal: Resolve the composed Length-to-Count preservation edge before peer rollout.
+  Related continuity defect: Count73 parent label still claims P1 copy/source assessment remains despite completed73.6/.7/.8. Correct that stale dependency label to bounded work complete/final admission pending; do not imply full23.4 passed.
+  Reproduction/impact: Review of74.1 shows Count initial-source fallback is decided before Length result ownership joins emitted-result dispatch. Public native descriptor probe of length("tail").count().with plus standalone Count controls is running from ignored project-local logs; retain its complete result before attributing a defect. Expected produced numeric Length rejects Count/operands/later bodies, while initial count(4)/4.count retain zero. No peer failure inferred.
+  Priority/schedule: P1 immediately after completed74.1, before Rust74.2 and remaining peers/unrelated selection.
+  Dependencies: Clean0406d70237ebe0f795cd1b880e87203c7e977f35, frozen74/shared16/current Count initial-source ownership policy and actual original74.1 proof.
+  Acceptance: Reproduce through public Get/descriptor/substitution/emission/native/fresh controls, then distinguish Length-produced sources from independent initial Count sources. Repair only the demonstrated role ordering; keep original shared16/host seeds, Count source fallback, valid null/zero, source-once/snapshots, copy/logical/with/needed errors and signatures/parser/schema. Add bounded focused regression and retain actual first-execution inputs. No producer normalization or peer defect inference.
+  Verification tier: `focused`
+  Focused checks: Minimum original composed-Length/Count/source-owner RED/GREEN plus selected existing Count fallback and Length controls; owner syntax/book/Knowledge/history/memory/diff/normal hooks. No broad matrix.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored source-owner preservation controls; no performance/population/full-custody measurement.
+  Public reproduction: Complete initial native result is [ran,W,0,0], ready/raw0/fallback0/unresolved0; target [null,empty,0,0]. Raw actual probe/source/channels retained in length-count-owner-perl-2026-11-06/initial; native first-input closure remains4.2-owned. New unchanged native/fresh8 will precede production.
+  Activation: Clean0406d70237ebe0f795cd1b880e87203c7e977f35 after74.1 all ten doctrines/post-pointer/brief0. Current code review identifies a possible source-role precedence edge; public probe must establish actual behavior before diagnosis. No completed evidence is revised.
+  Result: Complete new native/fresh8 baseline4PASS4RED; public emitted module1 wraps Count in a constant-true guard. Add Length to existing emitted-result ownership before Count initial fallback is selected; remove its later duplicate admission. Produced Length Number/null now reject Count/later copy/logical/with; initial Count retains zero, explicit Array bridges work and needed errors stay. No producer/domain/signature/parser/schema change; no introduction date inferred.
+  Verification/limits: Unchanged qualified8 now8PASS with four healthy observations exact; existing Length19/host controls pass. Initial archive omitted the untracked fixture; replay KeyError exposes it. Retain actual original producers/archives/raw results and qualify that first-run gap; corrected before-qualified/after-qualified freeze301 declared inputs including the fixture before proof and reproduce exact original outcomes. Complete native/transitive custody/first-run gap remain4.2-owned. Readonly recovery/four corruptions pass; owner/normal/phase0 syntax and book render/Knowledge/history/memory/diff/normal hooks govern landing. Evidence: docs/checkpoints/length-count-owner-perl-2026-11-06/REVIEW.md. Regenerate emitted Perl; independent Rust74.2 next, with source-owner distinctions. No broad suite/peer/full admission claim.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — preserve produced Length ownership before Count fallback.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — public Get/descriptor and actual emitted native/fresh8 expose four failing composed-Length programs; initial standalone Count zeros remain healthy.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — emitted module1 constant-true Count guard and MethodLowering fallback/admission ordering distinguish initial Count source from an already produced Length result.
+  - [x] **FIX** — move Length emitted-result ownership before Count fallback selection, retaining both original producers and all other source roles.
+  - [x] **ADDRESSED (verified)** — unchanged qualified8 PASS; produced null/zero/Number Count links now reject and later copy/logical/with effects skip.
+  - [x] **NO REGRESSION** — four healthy observations exact; initial Count zero, receiver Length, explicit Array bridge/needed errors and existing19 host/Length controls pass.
+  - [x] **LOCKSTEP** — first-capture missing-fixture failure preserved/qualified; corrected actual declared inputs and four corruptions pass; Count parent/current book/Knowledge/target/roadmap/task/index/live/resume/history align. Independent Rust74.2 next; full custody/admission remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.75`
   Status: `pending` / owned P1 key-count source-guard defect

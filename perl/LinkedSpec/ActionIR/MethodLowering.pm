@@ -6212,12 +6212,13 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $ordinary_lexical_result_chain || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
    || $ordinary_has_key_result_chain || $ordinary_string_predicate_result_chain
    || $ordinary_contains_result_chain || $ordinary_index_result_chain
+   || $ordinary_length_result_chain
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
   # New Count receiver sources keep the legacy non-array zero fallback.
-  # Existing emitted-result owners (notably copy) retain their own kind guards.
+  # Existing emitted-result owners, including Length, retain their own kind guards.
   $count_source_zero_fallback = $ordinary_count_result_chain && !$emitted_result_chain
    && !_ordinary_free_count_result_source($receiver);
-  $emitted_result_chain ||= $ordinary_count_result_chain || $ordinary_length_result_chain;
+  $emitted_result_chain ||= $ordinary_count_result_chain;
   if ($logical_receiver || $emitted_result_chain) {
    # The compatibility callable-result path was already lowered above.
    # Re-reading its raw AST source would emit invalid Perl such as pick()[0].

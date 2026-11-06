@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — Result ownership must precede an initial-source exception
+
+Public Length.count emission used a constant-true Count guard because Length joined emitted-result dispatch after Count initial fallback was decided. Moving the same role earlier rejects produced values while preserving standalone Count zero; original receiver/bridge/error controls stay. Qualified8 and existing19 pass. A git ls-files capture omits new untracked fixture inputs unless explicitly listed: replay caught KeyError, originals remain frozen and corrected original/final runs include the actual fixture before execution. Historical first-run gaps remain4.2-owned rather than retroactively upgraded.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — Length uses existing rejection ownership without producer normalization
 
 A canonical Length source must join actual-kind dispatch at every continuation and remain in one dispatcher through copy/eager logical links. Reusing the existing rejection flag distinguishes a rejected consumer from legitimate null/zero and avoids host symbolic Hash access. The Count/Length logical role shares the current eager producer; existing Count fallback and Length producer are unchanged. Original/final normal identities and nine healthy observations stay exact; actual primary modules precede eval. Four readonly corruptions catch row omission, Bool-to-Number substitution, host leakage and changed module bytes. Native/transitive closure and general isolation remain separate.

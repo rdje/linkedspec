@@ -1,0 +1,11 @@
+[
+  "bash",
+  "tools/project_data_run.sh",
+  "env",
+  "PERL5LIB=",
+  "LINKEDSPEC_LENGTH_MODULE_DIR=docs/checkpoints/length-count-owner-perl-2026-11-06/after-qualified/modules",
+  "prove",
+  "-v",
+  "-Iperl",
+  "t/length_count_source_ownership.t"
+]

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — preserve produced Length ownership before Count fallback
+
+A remaining Length-to-Count edge misclassified produced numeric/null data as initial Count input. Admit Length ownership before selecting Count fallback; both producers and initial Count zero stay. Qualified unchanged8 groups4PASS4RED become8PASS, four healthy observations exact; existing19 Length/host controls pass. First capture omitted an untracked fixture; preserve originals/failure and explicitly qualify that gap, then capture actual fixture before the corrected RED/GREEN pair. Readonly recovery/four corruptions pass. Count parent label corrected. Independent Rust74.2 next; no broad suite/peer/full custody/admission claim.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — guard Perl Length continuations and rejection
 
 Canonical ordinary Length source roles now reuse actual-kind/with guards and persistent copy/eager-logical rejection state. Unchanged19 groups9PASS10RED become19PASS, including localized empty/outer/main::4 host controls; all nine original healthy observations are exact. Direct36 Count/length/logical preservation groups pass. Legacy Length producer/Count fallback/domains/signatures/copy depth remain unchanged. Actual input archives/pre-load primary modules/raw phases and four readonly corruptions retained. Regenerate emitted Perl; independently assess Rust74.2 next. No broad suite/full admission claim.

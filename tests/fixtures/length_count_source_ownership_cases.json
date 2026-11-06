@@ -1,0 +1,80 @@
+[
+  {
+    "id": "free_length_count",
+    "source": "Value:: I {return(length(\"tail\").count())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": null
+  },
+  {
+    "id": "receiver_length_count",
+    "source": "Value:: I {return(\"tail\".length().count())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": null
+  },
+  {
+    "id": "length_count_with",
+    "source": "Value:: I {order=\"\";out=length({order=cat(order,\"S\");\"tail\"}).count().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "length_count_copy_logical",
+    "source": "Value:: I {order=\"\";out=length(\"tail\").count().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "produced_null_zero_count",
+    "source": "Value:: I {return([length(undef).count(),length(\"\").count(),length([]).count(),length(\"tail\").count()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "initial_count_policy",
+    "source": "Value:: I {return([count(4),4.count(),count(undef),undef.count(),{undef}.count(),count([1,2]),[1,2].count()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "id": "explicit_array_bridge",
+    "source": "Value:: I {return([length(\"x\").with(){return([1,2])}.count(),length(\"x\").cat(\",tail\").split(\",\").count()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      2,
+      2
+    ]
+  },
+  {
+    "id": "needed_length_source_error",
+    "source": "Value:: I {return(length({items=\"text\";push(items,\"x\")}).count().coalesce(\"masked\"))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  }
+]

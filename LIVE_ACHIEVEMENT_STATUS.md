@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT continues through ordinary Length source/result guards74. Perl74.1 is implemented with focused checks; independent Rust74.2 is next, then Dart/Julia/installed Lua. Key-count75 remains an owned P1 immediately afterward.
+PNT continues through Length74. Perl primary74.1 and P1 produced-source ownership74.6 are implemented with focused checks. Independent Rust74.2 is next, then peers; key-count75 remains P1 afterward.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.74.1 admits canonical Length sources to existing actual-kind/with/copy/eager-logical rejection dispatch. Unchanged19 groups9PASS10RED become19PASS; nine healthy observations remain exact. Empty/outer/main::4 host controls now reject with null and leave host data untouched. Direct36 Count/length/logical preservation groups and syntax pass; actual primary modules precede eval. Legacy Length producer/Count fallback and current source policies stay. No peer/full-custody/isolation/admission claim.
+TYPE-REFERENCE-BOOK.1.2.23.3.74.6 moves Length ownership before Count initial-source fallback. Qualified unchanged8 groups4PASS4RED become8PASS; four healthy controls exact and existing19 host/Length checks pass. Initial Count keeps zero; produced Length Number/null rejects Count and later copy/logical/with. First archive omitted the untracked fixture; original failure/records survive, corrected qualified epochs include it before proof. No first-run/full native-transitive custody upgrade or peer/admission claim. Count73 parent label now reflects completed bounded work and pending final admission.
 
 ## Next Action
 
-Activate independent Rust74.2 from clean Git; retain actual baseline inputs and freeze current source-domain observations before production. Preserve both direct/trailing-with guards and Count behavior. Then74.3-.5 and P1 key-count75.0 before unrelated selection/full admission; new normal registration stays4.1-owned.
+Activate independent Rust74.2 from clean Git; include produced-Length/initial Count/Array-bridge distinctions and freeze current domains before repair. Actual native/restored/plan/emitted Cargo inputs precede proof. Then74.3-.5/P1 key-count75.0; registration/custody/isolation/full admission remain separately owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — produced Length ownership8PASS/existing19 preserved; qualified capture limits explicit; Rust74.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — Perl Length guards/rejection19PASS; direct36 preserved; independent Rust74.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.35 — finite Length74 frozen; Perl first; key-count75 P1 scheduled; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.8 — bounded growth/outgoing-scope assessment; prospective reuse4.12 separate; selection23.1.35 next.
@@ -29,7 +30,6 @@ Activate independent Rust74.2 from clean Git; retain actual baseline inputs and 
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.5 — installed Lua Count guards focused-checked; primary73 leads to mandatory P1 source/copy assessment.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.4 — Julia Count guards focused-checked; source/domain/observed errors and mutation boundaries retained.
 - TYPE-REFERENCE-BOOK.1.2.23.4.11 — bounded daily metadata review; all artifacts retained, independent controls pass.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.3 — Dart Count actual-kind guards focused-checked; direct emitted host inputs retained.
 
 ## History
 

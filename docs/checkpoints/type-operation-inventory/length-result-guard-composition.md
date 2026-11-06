@@ -59,3 +59,18 @@ Direct Count/length/source/logical preservation and syntax pass; original/source
 fixture identities, modules, raw phases and readonly corruptions survive under
 length-guard-perl-2026-11-06. Regenerate emitted Perl. Rust74.2 independently next; no peer,
 complete native/transitive custody, general isolation, registration or full admission claim.
+
+## P1 Perl74.6 produced-Length ownership
+
+A remaining free Length-to-Count edge used Count's initial-source zero fallback:
+length("tail").count().with ran its body. The public emitted source contains a
+constant-true guard; Count fallback is decided before Length ownership is added.
+Move Length into emitted-result ownership before that decision. Only independent
+initial Count sources retain non-array zero; produced Length Number/null values
+now reject Count, including through copy/logical/with. Receiver Length, initial
+Count, explicit Array bridges and needed source errors stay. Unchanged8 groups
+4PASS4RED become8PASS; existing Length19 preservation stays required. Actual raw
+probe/new-normal modules/declared phase inputs survive in
+length-count-owner-perl-2026-11-06. This remaining gap does not invalidate the
+original bounded19 outcomes or establish when the old behavior was introduced.
+Independent Rust74.2 follows this P1; no peer failure or full admission claim.

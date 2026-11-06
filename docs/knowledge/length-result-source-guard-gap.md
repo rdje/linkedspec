@@ -8,10 +8,10 @@ answers:
   - "where are the count_keys source guard gaps owned"
   - "how is the Length selection summary recovered after Trace stdout"
 date: 2026-11-06
-status: Perl74.1 focused-checked; independent Rust74.2 next; key-count75 P1 separately owned
+status: Perl74.1/produced-source74.6 focused-checked; independent Rust74.2 next; key-count75 P1 owned
 tags: [length, count_keys, source, guards, perl, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.35; declared own inputs/raw public observations and actual supplemental emitted modules in docs/checkpoints/length-selection-2026-11-05; shared16 frozen before production."
-reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/length_result_guard_composition.t; readonly retained RED/GREEN: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-perl-2026-11-06/review.py. Historical selection writers are one-shot, never replay."
+reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/length_result_guard_composition.t t/length_count_source_ownership.t; readonly retained RED/GREEN: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-perl-2026-11-06/review.py. Historical selection writers are one-shot, never replay."
 ---
 
 Public Get/descriptor/substitution/emission/native/fresh diagnostics show Length
@@ -55,3 +55,19 @@ emitted modules. Declared own inputs and actual new-normal modules before eval,
 raw before/after/direct preservation phases and four corruption controls survive
 in length-guard-perl-2026-11-06. Independent Rust74.2 is next; no peer/full admission,
 complete native/transitive custody or general isolation inference.
+
+P1 Perl74.6 resolves a separate produced-Length/initial-Count precedence edge.
+Public length("tail").count().with returns ran/W before repair; emitted source
+uses a constant-true Count guard. Count initial fallback was selected before
+Length joined emitted-result ownership. Move that role admission earlier without
+changing either producer: produced Number/null now rejects Count and later
+copy/logical/with, while initial count(4)/4.count retain0. Unchanged8 groups
+4PASS4RED become8PASS; four healthy receiver/initial-source/bridge/error controls
+stay exact. Evidence: length-count-owner-perl-2026-11-06. This is a remaining
+composition gap, not a claimed introduction/regression date. Rust74.2 next.
+
+The74.6 first input archive omitted the untracked new fixture; readonly replay
+exposed KeyError. Original first phases/producer/reviewer/manifest survive without
+fixture pre-execution credit. Corrected qualified original/final epochs freeze301
+declared inputs including the actual fixture before proof and reproduce the same
+outcomes; first-run/native-transitive gaps remain4.2-owned. See qualification.md.

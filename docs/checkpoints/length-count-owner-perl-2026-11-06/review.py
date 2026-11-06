@@ -1,0 +1,150 @@
+"""Read-only finite Length RED/GREEN and declared-input recovery."""
+import copy
+import gzip
+import hashlib
+import json
+from pathlib import Path, PurePosixPath
+import re
+import tarfile
+
+ROOT = Path(__file__).resolve().parents[3]
+HERE = Path('docs/checkpoints/length-count-owner-perl-2026-11-06')
+FIXTURE = 'tests/fixtures/length_count_source_ownership_cases.json'
+OWNER = 'perl/LinkedSpec/ActionIR/MethodLowering.pm'
+NORMAL = 't/length_count_source_ownership.t'
+
+
+def same(a, b):
+    return json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
+
+
+def archive_inputs(phase):
+    directory = ROOT / HERE / phase
+    identities = json.loads((directory / 'input-identities.json').read_text())
+    recovered = {}
+    with tarfile.open(directory / 'inputs-before.tar.gz') as archive:
+        for member in archive.getmembers():
+            path = PurePosixPath(member.name)
+            assert member.isfile() and not path.is_absolute() and '..' not in path.parts
+            assert member.name not in recovered
+            body = archive.extractfile(member).read()
+            assert hashlib.sha256(body).hexdigest() == identities[member.name]
+            recovered[member.name] = body
+    assert set(recovered) == set(identities), 'complete declared input recovery'
+    return recovered
+
+
+def observations(phase):
+    directory = ROOT / HERE / phase
+    stdout = gzip.decompress((directory / 'stdout.log.gz').read_bytes()).decode()
+    stderr = gzip.decompress((directory / 'stderr.log.gz').read_bytes()).decode()
+    groups = re.findall(r'^(not )?ok (\d+) - (.*)$', stdout, re.M)
+    found = []
+    for line in stderr.splitlines():
+        match = re.search(r'LENGTH_(?:GUARD_(?:ACTUAL|ERROR)|HOST) (\S+) (\{.*\})', line)
+        if match:
+            found.append((match[1], json.loads(match[2])))
+    return groups, found
+
+
+def validate(rows, fixtures, require_targets):
+    expected_ids = [r['id'] for r in fixtures]
+    assert [r[0] for r in rows] == expected_ids, 'observation population/order'
+    for identifier, row in rows:
+        assert row['native_callable'] == row['loaded'] == 1
+        assert not any(row.get(k) for k in ('build_error', 'emission_error', 'load_error', 'descriptor_error'))
+        assert row['warnings'] == []
+        metadata = row['metadata']
+        assert metadata['language_agnostic_action_ir_ready'] == 1
+        assert all(metadata[k] == 0 for k in ('raw_perl_dependency_count',
+            'canonical_action_ir_fallback_count', 'unresolved_helper_count'))
+        fixture = next(f for f in fixtures if f['id'] == identifier)
+        if fixture.get('expected_error'):
+            for route in ('native', 'fresh'):
+                error = row[route+'_error']
+                assert isinstance(error, dict)
+                assert fixture['expected_error'] in json.dumps(error)
+                assert error['stage'] == ('rule_handler_eval' if route == 'native' else 'execute_generated')
+                assert row[route] is None
+        else:
+            assert not row['native_error'] and not row['fresh_error']
+            assert row['native_cursor'] == row['fresh_cursor'] == 0
+            assert same(row['native'], row['fresh'])
+            if require_targets:
+                expected = fixture.get('expected', fixture.get('perl_expected'))
+                assert same(row['native'], expected), 'target value/kind/effects'
+
+
+def verify_digest(body, digest):
+    assert hashlib.sha256(body).hexdigest() == digest, 'retained proof byte identity'
+
+
+def main():
+    manifests = json.loads((ROOT / HERE / 'retained-identities.json').read_text())
+    for path, digest in manifests.items():
+        verify_digest((ROOT / path).read_bytes(), digest)
+    recovered = {p: archive_inputs(p) for p in ('before-qualified', 'after-qualified', 'before', 'after', 'nearest')}
+    for phase in ('before', 'after'):
+        assert FIXTURE not in recovered[phase], 'original missing-fixture boundary changes'
+        assert recovered[phase][NORMAL] == recovered[phase+'-qualified'][NORMAL]
+        assert recovered[phase][OWNER] == recovered[phase+'-qualified'][OWNER]
+    assert recovered['after-qualified'][OWNER] == recovered['nearest'][OWNER]
+    assert recovered['after-qualified'][OWNER] == (ROOT / OWNER).read_bytes()
+    for phase in ('before', 'after', 'nearest'):
+        assert recovered[phase][str(HERE / 'capture.py')] == (ROOT / HERE / 'capture.initial.py').read_bytes()
+    for phase in ('before-qualified', 'after-qualified'):
+        assert recovered[phase][str(HERE / 'capture.py')] == (ROOT / HERE / 'capture.py').read_bytes()
+    for phase in ('before', 'after'):
+        assert same(observations(phase)[1], observations(phase+'-qualified')[1]), 'qualified outcomes differ from initial observations'
+    assert recovered['before-qualified'][FIXTURE] == recovered['after-qualified'][FIXTURE] == (ROOT / FIXTURE).read_bytes()
+    assert recovered['before-qualified'][NORMAL] == recovered['after-qualified'][NORMAL] == (ROOT / NORMAL).read_bytes()
+    assert recovered['nearest']['t/length_result_guard_composition.t'] == (ROOT / 't/length_result_guard_composition.t').read_bytes(), 'actual nearest consumer'
+    changed = [p for p in recovered['before-qualified'] if recovered['before-qualified'][p] != recovered['after-qualified'][p]]
+    assert changed == [OWNER], 'only the compiler owner changes between original epochs'
+    before_owner = recovered['before-qualified'][OWNER].decode()
+    after_owner = recovered['after-qualified'][OWNER].decode()
+    producer = re.compile(r" if \(\$method_call && \$method_call->\{method\} eq 'length'\) \{.*?(?=\nif \(\$method_call && \$method_call->\{method\} eq 'substr')", re.S)
+    assert producer.search(before_owner).group() == producer.search(after_owner).group(), 'legacy Length producer unchanged'
+    fixtures = json.loads(recovered['before-qualified'][FIXTURE])
+    groups = {}
+    rows = {}
+    for phase in ('before-qualified', 'after-qualified'):
+        groups[phase], rows[phase] = observations(phase)
+        assert [int(g[1]) for g in groups[phase]] == list(range(1, 9))
+        modules = ROOT / HERE / phase / 'modules'
+        assert {p.name for p in modules.iterdir()} == {'module-'+str(i)+'.pm.gz' for i in range(1, 9)}
+        for module in modules.iterdir():
+            assert b'sub Execute' in gzip.decompress(module.read_bytes())
+        validate(rows[phase], fixtures, phase == 'after-qualified')
+    assert [int(g[1]) for g in groups['before-qualified'] if g[0]] == [1,3,4,5]
+    assert not any(g[0] for g in groups['after-qualified'])
+    assert (ROOT / HERE / 'before-qualified/exit.txt').read_text() == '1\n'
+    assert (ROOT / HERE / 'after-qualified/exit.txt').read_text() == '0\n'
+    healthy = [1,5,6,7]
+    for index in healthy:
+        assert same(rows['before-qualified'][index], rows['after-qualified'][index]), 'original healthy observation changed'
+    nearest = ROOT / HERE / 'nearest'
+    assert (nearest / 'exit.txt').read_text() == '0\n'
+    assert b'Result: PASS' in gzip.decompress((nearest / 'stdout.log.gz').read_bytes())
+    rejected = []
+    for control in ('missing-row', 'zero-as-false', 'wrong-count-value', 'changed-module'):
+        altered = copy.deepcopy(rows['after-qualified'])
+        try:
+            if control == 'missing-row': altered.pop()
+            elif control == 'zero-as-false': altered[5][1]['native'][0] = False
+            elif control == 'wrong-count-value': altered[0][1]['native'] = altered[0][1]['fresh'] = 0
+            else:
+                path = str(HERE / 'after-qualified/modules/module-1.pm.gz')
+                verify_digest((ROOT / path).read_bytes()+b'changed', manifests[path])
+            validate(altered, fixtures, True)
+        except AssertionError:
+            rejected.append(control)
+        else:
+            raise AssertionError('ineffective control: '+control)
+    print(json.dumps(dict(result='PASS', original_groups='4PASS4RED', final_groups='8PASS',
+        unchanged_healthy_programs=4, rejected_controls=rejected,
+        limits='Qualified primary epochs include the new fixture before execution; original primary epochs omit that fixture and are not upgraded. Finite native/fresh same-process proof and declared own input recovery. Actual new-normal modules persist before eval; nearest consumers retain their existing capture limits. No full native/transitive closure, general isolation, peer or full admission claim.'), sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

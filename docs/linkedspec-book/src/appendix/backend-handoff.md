@@ -3711,6 +3711,17 @@ preservation checks pass. Rust74.2, Dart74.3, Julia74.4 and installed Lua74.5 ea
 need independent assessment; preserve their current producer domains. No new
 method, signature, conversion policy or schema is introduced.
 
+A follow-up Perl74.6 check distinguishes initial Count input from an existing
+Length result. `count(4)` and `4.count()` still return Number `0` under Count's
+existing fallback. `length("tail").count()` now returns null and skips a later
+with body: the Number `4` is already produced data, so it must satisfy Count's
+Array-only consumer guard. This also holds for produced null/zero and across
+copy/eager logical links. An explicit Array bridge still works:
+`length("x").with(){return([1,2])}.count()` returns `2`. The separate unchanged
+eight-group regression passes after four original failures; the original19
+preservation checks remain required. No Count or Length producer rule changes.
+
+
 Sixteen finite programs retain compatible Number/null flow, effects/snapshots,
 source errors, malformed receiver preflight, functions, copy/logical state and
 bridges. Actual public observations and supplemental modules survive in
