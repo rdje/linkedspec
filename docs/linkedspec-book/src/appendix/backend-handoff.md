@@ -4010,7 +4010,7 @@ six original and four additional effective corruption controls.
 
 The original Length reader remains bound to its acceptedfbe625974 source;
 current Length testing remains separate. Fresh Modules share process/runtime.
-Independent landed-peer Count ownership75.7 is next, then installed Lua75.5 and
+Rust/Dart Count ownership75.7 is confirmed below; installed Lua75.5 is next, then
 callable75.6 before admission.
 Full source/context/native-transitive custody, general isolation, canonical
 discovery/declared Lua5.4 and full23.4 remain separate; no host-seeding claim.
@@ -4023,3 +4023,24 @@ preserves initial Number/free-key zero and Boolean receiver null. Maintained25
 programs pass126 assertions, with all25 module/parsed bodies unchanged. Original22
 phases/producer patch stay immutable; separate ownership/final-current epochs and
 the current-producer patch retain the correction. No prior peer failure is inferred.
+
+
+## Peer Count-owned-source preservation
+
+Rust/Dart75.7 independently checks the Count-to-CountKeys concern raised by the
+first Julia candidate. Both existing implementations already exclude free Count
+ownership before initial KeyCount permission, including Rust's direct/trailing-
+with paths. New3 programs pass on native/restored/plan/emitted routes on each
+backend: free/receiver Count1/0 rejects, later with skips, and initial literal/
+free-key/empty Hash zero remains valid. No peer runtime defect is demonstrated.
+
+The separate3 now joins both original22 normals. Each passes25 cases on native/
+restored/plan routes, with its existing independent Boolean source profile.
+Both runtime source files remain byte-identical to activation50e5933f5. Scoped
+formatting and Dart fatal analysis pass. Actual new3 modules/inputs, declared
+source/manifest/lock/config/writer inputs and complete raw channels recover under
+`docs/checkpoints/count-key-ownership-peers-2026-11-06/`; five corruption controls
+reject. Emitted execution in this review covers new3. Full native/transitive
+custody, general isolation/source-context discovery/callable/full23.4 remain
+separate. Installed Lua75.5 is next, retaining scalar/Count/index mutation rights
+and the explicit Count-owned-source controls; no declared5.4 inference.

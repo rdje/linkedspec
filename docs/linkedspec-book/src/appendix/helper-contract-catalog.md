@@ -1606,8 +1606,23 @@ stay intact. Free Count-produced Numbers are explicitly excluded from initial
 KeyCount permission, so `count([1]).count_keys()` returns null and skips later
 bodies. Its maintained25-case/four-route regression and selected Count/
 Length checks pass346 assertions with strict depwarn. Rebuild Julia apps/runtime;
-actual emitted modules/parsed inputs are unchanged. Independent landed-peer Count ownership75.7, installed Lua, callable
+actual emitted modules/parsed inputs are unchanged. Installed Lua, callable
 receivers and full admission remain separately owned.
+
+Peer preservation75.7 independently confirms that Rust and Dart already exclude
+Count-owned values from initial KeyCount permission. Their new three-program
+checks pass on four routes; each maintained key-count normal now passes25 cases
+on native/restored/plan routes. Both runtime implementations stay byte-identical.
+Initial source zero stays distinct from a Count-produced Number:
+
+```text
+1.count_keys()                       # 0: initial non-Hash source
+count([1]).count_keys()              # null: Count owns its Number result
+count([1]).count_keys().with(){return("ran")} # null; body skipped
+```
+
+The retained emitted checks cover the new3 programs. Installed Lua75.5 includes
+these preservation controls next; callable/context/full admission stays separate.
 
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`

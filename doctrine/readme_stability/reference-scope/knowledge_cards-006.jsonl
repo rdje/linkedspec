@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7907,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recursive-observation-admission.md","sha256":"effa1d441512c9f537bd952b0f7e887db722420ed08b9d91fd57d61b2b0e1190","type":"member"}
 {"bytes":16153,"lines":187,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recursive-repeated-root-consumer-reading.md","sha256":"006004eab0a03d81251da6d59fe039746cd2f017129c29cbe8900b02a4516e28","type":"member"}
 {"bytes":3093,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-repeated-and-group-outcomes.md","sha256":"3796d3243345c04a16d06196f0934510eafa127154ccb582416e45f847317b75","type":"member"}
 {"bytes":20902,"lines":224,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-cursor-consumer-reading.md","sha256":"0a737ca590f61c8b592f518dc42875fbe7d9c2189ffc6c4caf7854bf6b441498","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2486,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-commit-pointer-self-hash-and-activation-boundary.md","sha256":"f8e24060a7ccef7b1ed9af98865c5144c2cb926ea67c75ad163fb56d6a3fc377","type":"member"}
 {"bytes":2111,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-handoff-task-status-consistency.md","sha256":"f676ce242569c4d89dac7a614d579bc9e7268c721ec3f24c513ab5cb307e1018","type":"member"}
 {"bytes":1931,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/memory-post-commit-hook-verification-only.md","sha256":"056d664f26ee8241d82c7afd947f8891f4160eb7fe27a7e18b62896ec4de0ed0","type":"member"}
-{"bytes":2073,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/method-like-dsl-migration-status.md","sha256":"6c8e11172488eb12df2645d71b652ec77c7ed026ba7069a1af3014ebcf1f8bbe","type":"member"}

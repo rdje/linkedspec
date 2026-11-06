@@ -1,4 +1,5 @@
-{"member_count":14,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":15,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4029,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variadic-callable-signature-seams.md","sha256":"75bac9c4a1300e3b155b7b7fee66c058d88b91067a53e94bfb7a00cfa3716e8c","type":"member"}
 {"bytes":3577,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variadic-user-function-contract.md","sha256":"fc697ec25ad13f4a87bf4646cbf2e9a2c2982cf7db39aad61c6aaf7573902f05","type":"member"}
 {"bytes":2780,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variant-specific-cli-requirement.md","sha256":"46a55a9963de9e60905c977945e34c064e324ebe86472c79b09fc8284cbd2730","type":"member"}
 {"bytes":5906,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.10.2","path":"docs/knowledge/verification-cadence-policy.md","sha256":"c5b7696fdd8941bf39df7a85383a892ebd043ef81719d87ab1bb30f9ae1d96f4","type":"member"}

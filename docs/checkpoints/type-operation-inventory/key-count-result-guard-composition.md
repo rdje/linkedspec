@@ -147,7 +147,7 @@ restriction. Unchanged22 now pass, ten healthy exact,22 modules/parsed inputs
 unchanged. Final346/strict depwarn/six original plus four extra recovery corruptions pass with actual
 first inputs/full raw epochs in key-count-guard-julia-2026-11-06/REVIEW.md. Rebuild
 Julia apps/runtime; no source-regeneration/format change. Historical Length replay
-requires acceptedfbe625974 context; original proof stays. Independent landed-peer Count ownership75.7 next, then installed Lua75.5;
+requires acceptedfbe625974 context; original proof stays. Independent landed-peer Count ownership75.7 confirmed below; installed Lua75.5 next;
 callable/source-context/custody/isolation/discovery/full admission remain separate.
 
 Separate Count-owned-source3 catches two candidate permission failures before
@@ -155,3 +155,17 @@ landing. Exclude free Count role from initial KeyCount permission; all3 now pass
 and the initial-source profile stays exact. Current normal25/126 assertions,
 all346 selected assertions and25 unchanged module/parsed bodies pass. Original22
 proof remains immutable; ownership/final-current epochs retain the added check.
+
+
+## Peer Count-owned-source preservation75.7
+
+Rust direct/trailing-with and Dart initial KeyCount permissions already exclude
+free Count ownership. Independent new3 controls pass/four routes on each backend;
+Count1/0 rejects CountKeys/later with while initial literal/free-key/empty Hash
+zero stays. No peer runtime defect demonstrated; both runtime files byte-identical
+to activation50e5933f5. The separate3 joins each original22 normal,25PASS/native-
+restored-plan each; scoped format/Dart fatal analysis/five recovery controls pass.
+Actual inputs/modules/full channels retained under count-key-ownership-peers-
+2026-11-06/REVIEW.md. Emitted execution covers new3 only. Installed Lua75.5 includes
+these preservation controls next; full custody/context/isolation/callable/admission
+remain separate.

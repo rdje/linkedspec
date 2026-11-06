@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — Lock down peer Count-owned source preservation
+
+Added three authored Count-to-CountKeys/source-zero programs to the Rust/Dart normals. Both existing source-permission implementations are healthy: new3 pass/four routes independently and both runtime files stay byte-identical. Each maintained25 normal passes/native-restored-plan; scoped format/Dart fatal analysis/five recovery corruptions pass. Actual first inputs/modules/full channels retained; emitted execution covers new3 only. Book/Knowledge/task/live align; installed Lua75.5 next, full custody/context/isolation/callable/admission separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — guard Julia CountKeys results while preserving scalar and mutation boundaries
 
 Canonical CountKeys role precedes Count source permission; distinct first-step KeyCount permission skips common guard only, retaining scalar_result/Count permission/enumerate/call_index Array-end restrictions. Independent unchanged22 groups10PASS12RED become22PASS/four routes, ten healthy observations exact and22 emitted/parsed inputs unchanged. Final346/strict depwarn/six recovery corruptions pass with actual declared first inputs/full raw epochs. Rebuild Julia apps/runtime; no source-regeneration/format change. Book/Knowledge/task/live align; historical Length replay source-bound. Installed Lua75.5 next, callable75.6 before broader admission; full source/context/custody/isolation/admission separate.

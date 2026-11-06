@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5262,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-retv-propagation.md","sha256":"733e886fd44c9476b6212aa5299151275728d62718bd1cfdb086388f57550a00","type":"member"}
 {"bytes":5189,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-admission.md","sha256":"f49e75dc4988bb07396390dda18e84761c350cd5cd787494d78fd7adf0a089ce","type":"member"}
 {"bytes":4553,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-core.md","sha256":"62988d611c243bcc24f205d0906a381860046fd538d9e132ca9409aa594cfc30","type":"member"}
 {"bytes":7107,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-root-rule-selection-preflight.md","sha256":"b89cecaa01615bfd21bbcecac9fd0881c20931689827aecb1ac198bcb05d494a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":11346,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/string-predicate-result-source-guards.md","sha256":"5d08d43b8e3dd72fdbe5f08030cfab9a9909850b484f5f0bf0d1a4ed88b08a53","type":"member"}
 {"bytes":5690,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/structural-progressive-staged-authoring-doctrine.md","sha256":"65a9dcdcf76e8ef17a3a009ece7c259ffc4fd69b5dbedbeba6717ec9d93d8059","type":"member"}
 {"bytes":3143,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/substring-optional-arguments.md","sha256":"3378d2eac7ab3934c4306402a2c4a04ed9b3043578029620ed081e0d62252d55","type":"member"}
-{"bytes":2314,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supplied-policy-reference-provenance.md","sha256":"6045e7c97a4b94e42993942cef1efb3a950d34f3c3ed3441d204b43cc9217435","type":"member"}

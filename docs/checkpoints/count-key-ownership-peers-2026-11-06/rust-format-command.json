@@ -1,0 +1,14 @@
+{
+  "cwd": ".",
+  "argv": [
+    "rustfmt",
+    "--edition",
+    "2024",
+    "--check",
+    "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs"
+  ],
+  "inputs": {
+    "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs": "c0f9085197d4bc6ce564155d98da777a0a595b26b1d388f4e1327cd2071f8822",
+    "dart/test/key_count_result_guard_composition_test.dart": "36c8fe42b717db28b55d3bf147d428da2b014a4b4cc954bf3e70f93215d102e9"
+  }
+}

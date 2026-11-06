@@ -44,10 +44,15 @@ fn routes(source: &str, input: &str) -> Vec<Result<Value, String>> {
 }
 
 fn check_case(label: &str) {
-    let cases: Vec<Value> = serde_json::from_str(include_str!(
+    let mut cases: Vec<Value> = serde_json::from_str(include_str!(
         "../../../tests/fixtures/key_count_result_guard_cases.json"
     ))
     .unwrap();
+    let ownership: Vec<Value> = serde_json::from_str(include_str!(
+        "../../../tests/fixtures/key_count_count_source_ownership_cases.json"
+    ))
+    .unwrap();
+    cases.extend(ownership);
     let row = cases.iter().find(|row| row["id"] == label).unwrap();
     let actual = routes(
         row["source"].as_str().unwrap(),
@@ -117,4 +122,7 @@ key_count_cases! {
     keys_count_copy_logical,
     produced_zero_keys,
     initial_source_fallback,
+    count_to_keys,
+    count_to_keys_effects,
+    initial_keys_controls,
 }

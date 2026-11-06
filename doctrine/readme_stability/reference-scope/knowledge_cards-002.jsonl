@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5618,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-brace-scanner-defects.md","sha256":"d53c4461a9966e212a731743406969a1ea45cc9e16fe9f0b79b4e3abd169aa58","type":"member"}
 {"bytes":3790,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-dialect-bridge.md","sha256":"49c857fe360d965fb653b2af6db3cac7b1ab61daee39db72039b27ee8d529b64","type":"member"}
 {"bytes":8772,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-quantifier-literal-corruption.md","sha256":"ce09f6f67763afb04b087250b2f5f277f16b6cc36995ce480c2408afb36976a6","type":"member"}
 {"bytes":3280,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-repeated-and-group-outcomes.md","sha256":"f6b82904c9f20aa681ccc706641c0541b81f4e74346bd7356a668bc2e1043502","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3328,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-migration-split.md","sha256":"15f75e26ad0b1d92d05488e25f001e182cd470ee9edb9bbf24cb2f7cf7baaac0","type":"member"}
 {"bytes":3027,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-perl-reference.md","sha256":"b6eacb40894b7d2aff342211e6f92481e3570268d8d48389161a3e2806ea8f8e","type":"member"}
 {"bytes":4744,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-rust-parity.md","sha256":"662c96fba4fe1201273f5b2394734b062a28b51fd6e18aaff46b5f9fd00d1520","type":"member"}
-{"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}

@@ -60,6 +60,7 @@ void main() {
   final cases = <Map<String, dynamic>>[];
   for (final fixture in <String>[
     'tests/fixtures/key_count_result_guard_cases.json',
+    'tests/fixtures/key_count_count_source_ownership_cases.json',
   ]) {
     cases.addAll(
       (jsonDecode(File.fromUri(root.resolve(fixture)).readAsStringSync())

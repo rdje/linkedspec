@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — Keep Count ownership distinct from initial KeyCount zero
+
+Both Rust direct/trailing-with and Dart already exclude free Count ownership before granting initial KeyCount source permission. Independent public3 controls preserve Count1/0 rejection, skipped later with effects and literal/free-key/empty Hash zero. No runtime defect demonstrated; regression coverage now explicitly joins each original22 normal,25PASS each. Original Boolean/domain/error fixtures remain independent. New3 emitted routes, scoped formatting/fatal analysis and five recovery corruptions pass with actual first inputs/full channels. Source files byte-identical; full custody/context/isolation/callable/admission remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia key-count ownership must preserve both scalar and mutation gates
 
 Independent Julia source profile gives free Boolean0 and receiver Boolean null; preserve the actual policy rather than import a peer's normalization. Canonical CountKeys ownership precedes Count permission, with a separate first-step exception only at common guard. Existing scalar_result initialization/assignments/scalar guard, Count permission and enumerate/call_index with its separate Array-end mutation restriction stay exact. All ten healthy observations and22 module/parsed inputs remain unchanged; final346/strict depwarn/six recovery corruptions pass. First inputs/full raw channels retained; historical Length reader stays bound to acceptedfbe625974, while current Length122 passes. Fresh Modules share process/runtime; full custody/source-context/callable/admission remain separate.
