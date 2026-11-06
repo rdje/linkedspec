@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: ordinary five-backend guards and Perl callable75.6.1 are implemented with focused checks. Independent peer callable75.6.2-.5 precede parent/full23.4 admission; full verification is deferred until agreed feature coverage.
+PNT key-count75: ordinary five-backend guards, Perl callable75.6.1 and independent Rust75.6.2 are focused-checked. Dart/Julia/installed Lua callable75.6.3-.5 precede parent/full23.4 admission; full verification remains deferred until agreed feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 removes the Perl registered-function CountKeys guard bypass. Unchanged16 groups7PASS9RED become16PASS/native/fresh; seven healthy exact. Direct43/syntax and six recovery corruptions pass. Independent Bool terminal0/ready distinguishes the earlier continuation defect; composed1/ready now passes. Original/qualified/terminal and actual input/module/handler/raw epochs retained; book/Knowledge align. Regenerate emitted Perl; independent peer callable coverage/full admission remain pending.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 confirms existing Rust callable CountKeys16PASS/four routes, without runtime edits. New normal16/native-restored-plan, direct CountKeys25/function context4, scoped format and six recovery corruptions pass. Independent Boolean0/1, arity and required-error profiles and actual Cargo/input/module/serialized/raw epochs are retained. Resource4.14 owns the denied-sysctl fallback/stale policy card; current independent monitoring has no pressure blocker. Dart75.6.3 next.
 
 ## Next Action
 
-Activate independent Rust75.6.2 from clean Git. Read existing registered-function receiver contracts and published Rust routes, retain actual compatible-result baseline and independent source/error profiles before attributing/fixing gaps. Perl is not a peer oracle. Run smallest direct checks, docs and commit before Dart/Julia/installed Lua; no broad suite between slices.
+Activate independent Dart75.6.3 from clean Git. Read callable/CountKeys source/error contracts and retain actual native/restored/plan/fresh baseline before production. Shared16 source programs are candidates, not a Boolean/domain/error profile oracle; freeze Dart terminal/composed Boolean, malformed arity and needed-error profiles independently. Small direct checks/docs/commit, then Julia/installed Lua. Resource4.14 remains before memory-guarded full verification.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Rust already16PASS/four routes; new16/direct29; runtime unchanged; Dart75.6.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Perl callable16PASS/direct43; Boolean continuation corrected; independent Rust75.6.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — installed Lua25PASS/four routes;13 healthy/Count/scalar/index exact; callable75.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — peers Count ownership3PASS/four routes; both25 normals; runtimes unchanged; installed Lua75.5 next.
@@ -29,7 +30,6 @@ Activate independent Rust75.6.2 from clean Git. Read existing registered-functio
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — Julia Length/source-owner24PASS; twelve healthy exact/final220 assertions; installed Lua74.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — Dart Length/source-owner24PASS; twelve healthy exact/final45; Julia74.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — Rust Length/source-owner24PASS; twelve healthy exact/final44; independent Dart74.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — produced Length ownership8PASS/existing19 preserved; qualified capture limits explicit; Rust74.2 next.
 
 ## History
 

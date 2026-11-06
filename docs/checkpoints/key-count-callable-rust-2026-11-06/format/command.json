@@ -1,0 +1,7 @@
+[
+  "rustfmt",
+  "--edition",
+  "2024",
+  "--check",
+  "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs"
+]

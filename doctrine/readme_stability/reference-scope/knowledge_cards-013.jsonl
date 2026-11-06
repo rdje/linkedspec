@@ -1,4 +1,6 @@
-{"member_count":17,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":19,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3629,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-binding-neutral-contract.md","sha256":"7f917b986a488b58f7a27efe12018761f5eca7a2244b891097f7689c288f6cf5","type":"member"}
+{"bytes":2857,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/uniform-expression-compatibility-retirement-doctrine.md","sha256":"daeeecc6f12102331c492fc7d2e8a4463242426e1b02cb72ff3a2ae338ed72b8","type":"member"}
 {"bytes":9575,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/user-function-parser-state-boundary.md","sha256":"fc083f0efd3b137746e5afa232026a50fe9a86dea24ef12ba6cf7a02b09dfbb9","type":"member"}
 {"bytes":6183,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/user-observable-backend-cli-parity-contract.md","sha256":"19f35f59a08ed4383c4c81900a50b7bf760a6b4f3f9a9aaa55990ce128e40b5e","type":"member"}
 {"bytes":4029,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variadic-callable-signature-seams.md","sha256":"75bac9c4a1300e3b155b7b7fee66c058d88b91067a53e94bfb7a00cfa3716e8c","type":"member"}

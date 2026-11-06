@@ -8,7 +8,7 @@ answers:
   - "what is the independent Rust key-count source domain profile"
   - "must emitted Rust source be regenerated for key-count guards"
 date: 2026-11-06
-status: bounded Rust75.2 implemented with focused checks; peers/callable/admission pending
+status: ordinary Rust75.2 and independent callable75.6.2 focused-checked; remaining peer callable/admission pending
 tags: [rust, count_keys, count, guards, source, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.75.2; docs/checkpoints/key-count-guard-rust-2026-11-06/REVIEW.md retains actual declared Cargo/input/module/raw epochs. Unchanged22 groups10PASS12RED become22PASS/four routes, ten healthy exact;22 modules/serialized inputs unchanged; final66/scoped format/six corruptions pass."
 reverify:
@@ -40,3 +40,8 @@ is only a wrong Hash-consumer control here, not native host-seeding/isolation.
 Historical recovery is not latest-code proof. Full native/transitive/toolchain
 custody4.2, source/context discovery4.1/general isolation/callable75.6/full23.4
 remain separate. Current frontier belongs to MEMORY.md.
+
+Independent [[rust-callable-key-count-preservation]] now confirms16 function-result
+programs on four routes with no runtime repair, plus maintained16/direct29 checks.
+Its own terminal Boolean0/composed1 and source/error profiles are frozen; remaining
+Dart/Julia/installed Lua callable coverage and full admission stay separate.

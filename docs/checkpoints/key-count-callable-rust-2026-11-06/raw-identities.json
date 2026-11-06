@@ -1,0 +1,122 @@
+{
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/normal-stderr.log": {
+    "bytes": 3383822,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/normal-stderr.log.gz",
+    "capsule_sha256": "0a1e1a2dcd868941eec3dae7cb3efa44b348f38979fd34f45c265f25db8e8995",
+    "sha256": "31b2b627573b30597e467e239ac8a90e2f755c58418932c76040dac3317f0a12"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/normal-stdout.log": {
+    "bytes": 1230,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/direct/normal-stdout.log.gz",
+    "capsule_sha256": "3c9ec2d871fd173e1b0b5bb5eb6f3d22dbb0210f8382db4919fb147a262c4b85",
+    "sha256": "c34aaadd51f7a3a148401397079e5def299a99542f91bfeb97a0883e6cbe217a"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/format/stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/format/stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/format/stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/format/stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-lock-stderr.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-lock-stderr.log.gz",
+    "capsule_sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d",
+    "sha256": "237bfdcb405655336815b2030d4e0c5af4b224fef4751953f48cedbf1bd5cc94"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-lock-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-lock-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-stderr.log": {
+    "bytes": 3380929,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-stderr.log.gz",
+    "capsule_sha256": "4793fe63b631645b5960960039f5f970786ad476e20beca7702938f8fbc31c7d",
+    "sha256": "12f7b1f82bdc05f964a3e46edeaf617a9256c6a9963ae0c680855176c1803f0c"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-stdout.log": {
+    "bytes": 1231,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/fresh-stdout.log.gz",
+    "capsule_sha256": "112e10f8be90f39e981a8f5c43c6283e550d5365d4dd5f3b6b47788855392cb4",
+    "sha256": "02c63fd1f343842fceebf6ea509bdec6b9bc7f217201dadcaba1daa8afd55647"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-lock-stderr.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-lock-stderr.log.gz",
+    "capsule_sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d",
+    "sha256": "237bfdcb405655336815b2030d4e0c5af4b224fef4751953f48cedbf1bd5cc94"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-lock-stdout.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-lock-stdout.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-stderr.log": {
+    "bytes": 3380997,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-stderr.log.gz",
+    "capsule_sha256": "befda8d4e80bcdad2e58f4a382ffd2191bbf2311141d11eb5daf160754caeeb3",
+    "sha256": "44c050fcbb92bffd8f652726509ba25ed3df632cb183ce563dbc6d7950706a19"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-stdout.log": {
+    "bytes": 64016,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/intake/native-stdout.log.gz",
+    "capsule_sha256": "aa7f25f889267406571ec5c324ba5f24b1ea402d88559217f6e401de7c26b935",
+    "sha256": "9df7a1d89bf18f851c922158ceb2aeecf97a570dc58ede9824b0113f2118d065"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/cargo-version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/cargo-version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/cargo-version-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/cargo-version-stdout.log.gz",
+    "capsule_sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab",
+    "sha256": "c10ec31b8c6e6e2693cf65fc1971b41edbc3da1ae7db6f9f3f36c4823f8dcab5"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/normal-stderr.log": {
+    "bytes": 3383426,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/normal-stderr.log.gz",
+    "capsule_sha256": "1ad324819f799d2c856e1a037a00f4b82cc370da6e57d24f0252d3bc57806084",
+    "sha256": "2911295f700816c82d74b15355e8189a12c13cef9aac618fd1bee23c49f9ee4e"
+  },
+  "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/normal-stdout.log": {
+    "bytes": 592,
+    "capsule": "docs/checkpoints/key-count-callable-rust-2026-11-06/normal/normal-stdout.log.gz",
+    "capsule_sha256": "21b9c4ab6928b23f95fa80fb0d5abe689bfea8ad9d7cb93064a86cc0b80c2ebe",
+    "sha256": "a5c528f345cf94c45598e625be0e974c89ca509bfbade5fff293faa95644863b"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "authored_groups": 16,
+  "direct_pass": 29,
+  "intake_pass": 16,
+  "normal_pass": 16,
+  "recovery_corruptions": [
+    "compatible numeric regression",
+    "later effect leak",
+    "needed error masked",
+    "Boolean zero kind drift",
+    "missing fresh route member",
+    "producer input drift"
+  ],
+  "routes": [
+    "native",
+    "restored",
+    "plan",
+    "fresh"
+  ],
+  "runtime_changes": 0,
+  "scope": "historical exact inputs; current freshness uses normal; no peer/full-custody/isolation/admission inference"
+}

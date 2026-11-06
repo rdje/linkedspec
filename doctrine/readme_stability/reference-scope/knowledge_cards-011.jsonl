@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7589,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-recursive-observation-admission.md","sha256":"2bf13ad2f6086d2e98a1788d927737ddd048aafc29205c7497fb2f50a98dc8b4","type":"member"}
+{"bytes":8240,"lines":122,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-referenced-intermediate-runtime-outliers.md","sha256":"4598da5d7b382aa3eb299e9144c05824a99bdeff94ee78e1716504b41a5812d0","type":"member"}
 {"bytes":7928,"lines":139,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-regex-input-context-drift.md","sha256":"21565aa6009ce8c3f2d4568205eaaf7d5642bf45dc29cbefd88bbff9542113b4","type":"member"}
 {"bytes":3698,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-retired-array-aliases-not-added.md","sha256":"23e7e4ab82ff0b694410ef327ee658a8d05c0314529f5da14246a2fd5dd4def2","type":"member"}
 {"bytes":5262,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-retv-propagation.md","sha256":"733e886fd44c9476b6212aa5299151275728d62718bd1cfdb086388f57550a00","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":12467,"lines":139,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-public-teaching-checker-blind-spots.md","sha256":"485e63211e64a49e71db9422fc9888a557fd07b14db2c9dc71e2d78ae9ab057f","type":"member"}
 {"bytes":26389,"lines":395,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-chronology-compaction.md","sha256":"18f6e8bf14bb10760962851d21406f8e986bbe617ab58d0318c919d20432b4de","type":"member"}
 {"bytes":10797,"lines":174,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-task-partition-plan.md","sha256":"80e74171947f5ee4eed9176f827cdf7904054944c8a0618b452bef6a7c34e7b0","type":"member"}
-{"bytes":4733,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/static-named-capture-lowering-and-function-fence.md","sha256":"11c348472b5ead1e2f64e3804ac52af8ccac3be57720c3c4c58fa83a5efa679f","type":"member"}
-{"bytes":11346,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/string-predicate-result-source-guards.md","sha256":"5d08d43b8e3dd72fdbe5f08030cfab9a9909850b484f5f0bf0d1a4ed88b08a53","type":"member"}

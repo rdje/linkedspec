@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Preserve Rust function-result CountKeys behavior
+
+Independent actual16 PASS/native-restored-plan-fresh; Rust already handles the callable chains and production bytes stay unchanged. Added maintained16 and independently frozen Boolean terminal0/composed1, malformed-arity and required-error profiles; direct CountKeys25/function context4 and scoped formatting pass. Actual Cargo/source/lock/module/serialized/raw inputs retained; six recovery corruptions reject. Book/Knowledge/live/task align. P1 resource4.14 owns denied-sysctl16GiB fallback on the24GiB host and stale operating-policy card; current work uses independent monitoring, without a pressure blocker. Independent Dart75.6.3 next; full verification/custody/context/isolation remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Complete Perl function-result CountKeys chains
 
 Removed the function-only CountKeys guard bypass while retaining the typed function evaluator. Hash-function counts now compose through numeric/text methods and reject incompatible consumers before operands/later copy/logical/with. Independent terminal Boolean0/ready shows the former composed null/unready was a continuation defect; composed1/ready is now required. Unchanged16 groups7PASS9RED become16PASS/native/fresh; seven healthy exact, direct43/syntax and six recovery corruptions pass. Actual original/qualified/terminal/input/module/handler/raw epochs retained; portable sealing metadata qualified without rerunning product epochs. Book/Knowledge/live/task align. Regenerate emitted Perl. Independent Rust75.6.2 next; full verification/custody/context/isolation deferred.
