@@ -1,0 +1,14 @@
+{
+  "cwd": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh",
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "pub",
+    "get",
+    "--offline"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

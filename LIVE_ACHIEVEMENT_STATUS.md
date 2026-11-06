@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT key-count75: bounded Perl and Rust ordinary guards implemented with focused checks. Independently assess Dart75.3, Julia75.4 and installed Lua75.5 next; concrete P1 callable75.6 precedes parent/full23.4 admission. Full verification stays deferred until agreed feature coverage.
+PNT key-count75: bounded Perl/Rust/Dart guards implemented with focused checks. Independently assess Julia75.4 and installed Lua75.5 next, preserving loop-index rights; P1 callable75.6 precedes parent/full23.4 admission. Full verification remains deferred until agreed feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.2 guards canonical CountKeys before Count fallback in both Rust direct/trailing-with paths, preserving initial zero and already-produced ownership. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy exact, actual22 modules/serialized inputs unchanged. Final66/scoped format/six recovery corruptions pass; no owned warning summary. Actual declared Cargo/input/module/full raw epochs retained, historical Length reverify source-bound. Rebuild Rust apps/runtime; no generated-format/source-regeneration change or full-admission inference.
+TYPE-REFERENCE-BOOK.1.2.23.3.75.3 guards canonical CountKeys results before Count permission, with common-only initial KeyCount exception preserving scalarResult and receiver Boolean null. Unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy/error/class profiles exact and22 modules/parsed inputs unchanged. Final67/fatal root/fresh analysis/scoped format/six corruptions pass; direct input/full raw epochs retained, old Length replay source-bound. Rebuild Dart apps/runtime; no peer/full-admission inference.
 
 ## Next Action
 
-Activate independent Dart75.3 from clean Git. Recover shared22/contracts and retain Dart native/restored/plan/fresh-module original observations plus its own source-domain/error profiles before attribution/guard edits. Own producer prerequisites first and preserve existing policies. Smallest direct checks/docs/commit before Julia75.4; installed Lua/callable75.6 remain before broader admission.
+Activate independent Julia75.4 from clean Git. Recover shared22/contracts and retain Julia native/restored/plan/fresh-module baseline plus its own source-domain/error profiles before attribution/guard edits. Own producer prerequisites first; preserve scalar_result/Count exception and loop-index mutation restrictions. Smallest direct checks/docs/commit before installed Lua75.5; callable75.6 remains before broader admission.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — Rust key-count22PASS/final66; ten healthy/modules exact; independent Dart75.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — ordinary CountKeys26PASS/final71; thirteen healthy exact; peers/callable coverage next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — initial Hash-kind/numeric-source policy23PASS/final37; consumer75.1 next.
@@ -29,7 +30,6 @@ Activate independent Dart75.3 from clean Git. Recover shared22/contracts and ret
 - TYPE-REFERENCE-BOOK.1.2.23.1.35 — finite Length74 frozen; Perl first; key-count75 P1 scheduled; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.8 — bounded growth/outgoing-scope assessment; prospective reuse4.12 separate; selection23.1.35 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — two Dart predicate layouts focused-checked; PNT resumed to advisory artifact growth23.4.8.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.7 — original long Count source causally resolved by earlier copy dispatcher; regression restored; director-requested pause before P3 formatting.
 
 ## History
 

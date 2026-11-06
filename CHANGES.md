@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — guard Dart CountKeys results while preserving source policy
+
+Canonical CountKeys role joins kind guards before Count fallback. Separate initial KeyCount permission skips only common guard, preserving scalarResult/Count consumption and receiver Boolean null. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy error/value/class profiles exact and22 emitted/parsed inputs unchanged. Final67/fatal analysis/scoped format/six corruptions pass. Actual direct pub/source/lock/config/module/full raw epochs retained. Rebuild Dart apps/runtime; book/Knowledge/task/live align and historical Length replay source-bound. Julia75.4 next; full source/context/custody/isolation/admission stay separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — guard Rust CountKeys results in both fluent paths
 
 Canonical CountKeys roles join existing actual-kind guards before Count fallback in direct and trailing-with paths, preserving initial source zero versus produced results. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy observations exact and actual22 emitted modules/serialized inputs unchanged. Final66/scoped format/six recovery corruptions pass, no owned warning summary. Actual declared Cargo/input/module/full raw epochs retained. Rebuild Rust apps/runtime; no source-regeneration/format change. Book/Knowledge/task/live records align; historical Length reader source boundary is explicit. Independent Dart75.3 next; full source/context/custody/isolation/admission remain separate.

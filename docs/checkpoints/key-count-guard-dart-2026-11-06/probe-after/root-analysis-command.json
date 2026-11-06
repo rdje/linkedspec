@@ -1,0 +1,15 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "analyze",
+    "--fatal-infos",
+    "--fatal-warnings",
+    "tool/probe_key_count_result_guards.dart"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

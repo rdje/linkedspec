@@ -119,3 +119,18 @@ Rebuild Rust runtime/apps; no generated-format change or source-regeneration nee
 Dart75.3 next; remaining peers/callable/source-context/custody/isolation/discovery/
 admission stay separately owned. Original Length proof requires its accepted
 source boundary after Engine changes; its current normal still passes.
+
+## Ordinary Dart guards75.3
+
+Independent shared22 intake has ten healthy/twelve wrong across native/restored/
+plan/fresh modules. Frozen free source profile[0,0,0,0,0,0,2], receiver
+[0,0,null,0,0,0,2] and error/class/diagnostic/wrapper remain exact. Canonical
+CountKeys role precedes Count fallback; a distinct initial KeyCount permission
+skips only the common guard, preserving scalarResult/Count permission and
+Boolean receiver null. Unchanged22 now pass; ten healthy observations and22
+modules/parsed inputs unchanged. Final67/fatal analysis/scoped format/six
+corruptions pass; direct source/pub/lock/config/input/module/raw epochs retained
+in key-count-guard-dart-2026-11-06/REVIEW.md. Rebuild Dart apps/runtime; no source-
+regeneration/format change. Julia75.4 next; remaining peers/source-context/custody/
+isolation/discovery/callable/admission remain separate. Historical Length
+recovery requires its accepted07f1cae context, with original evidence untouched.

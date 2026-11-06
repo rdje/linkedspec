@@ -1,4 +1,5 @@
-{"member_count":12,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":13,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2780,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/variant-specific-cli-requirement.md","sha256":"46a55a9963de9e60905c977945e34c064e324ebe86472c79b09fc8284cbd2730","type":"member"}
 {"bytes":5906,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.10.2","path":"docs/knowledge/verification-cadence-policy.md","sha256":"c5b7696fdd8941bf39df7a85383a892ebd043ef81719d87ab1bb30f9ae1d96f4","type":"member"}
 {"bytes":2476,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/verification-output-chunk-boundary.md","sha256":"06909441328e5b042a3abd5f911b622eed668e5d6f4d3d029e952ef4f00f33c7","type":"member"}
 {"bytes":11342,"lines":166,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/with-result-selection-source-gap.md","sha256":"4dc6beed40a22aa352a1aad1a450c46c73623bb2f95f50cce0cfc0a20bdf767f","type":"member"}

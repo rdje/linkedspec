@@ -8,11 +8,11 @@ answers:
   - "what are the frozen Dart Length Bool null and Array observations"
   - "must Dart Length emitted modules be regenerated"
 date: 2026-11-06
-status: Dart74.3 implemented with focused checks; independent Julia74.4 next; full admission open
+status: Dart Length74.3 focused-checked; historical recovery source-bound and full admission open
 tags: [dart, length, count, guards, source, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.74.3; actual declared input archives/raw phases in docs/checkpoints/length-guard-dart-2026-11-06; authored24 controls12PASS12RED to24PASS, twelve healthy exact, final45/scoped fatal analysis/full format/five corruptions pass."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/length-guard-dart-2026-11-06/review.py"
+  - "Historical74.3 recovery requires accepted07f1cae531d3e0f7510423b1103b1f3283ad475d interpreter/normal/profile inputs after later runtime changes. At that boundary: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-dart-2026-11-06/review.py. Original epochs/readers stay unchanged."
   - "From dart/: bash ../tools/run_dart_project_data.sh test --reporter expanded --concurrency=1 test/length_result_guard_composition_test.dart"
 ---
 
@@ -36,4 +36,11 @@ Actual declared source/pub/lock/config/modules/parsed inputs precede their
 respective runs and survive in archives. Raw channels are losslessly sealed,
 not filtered; readonly replay and five corruptions pass. Complete native/
 transitive closure4.2, general isolation, canonical selection4.1 and full23.4
-remain separate. Independently assess Julia74.4 next; no peer defect inferred.
+remain separate. Julia74.4 was next at that historical boundary; current
+frontier belongs to MEMORY.md, with no peer defect inferred.
+
+Key-count75.3 later changes the interpreter while current Length24 still passes.
+The archived Length reader compares interpreter/normal/profile bytes with its
+accepted source, so its historical command requires the named07f1cae context.
+Use the separate current normal command above for present behavior; never
+rewrite the original epochs to imply latest-runtime recovery.

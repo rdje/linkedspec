@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
 {"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}
 {"bytes":8469,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-objective-audit-input-recovery.md","sha256":"0056baa6fcce07fdbd38cd70d0f1832001636aa51ac307efdc030f54cf5dc830","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4892,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-recomposition.md","sha256":"089ed1089c2b4706380f7ef82b0e246499fa2059e4cc338c5bdf3766ba3567ab","type":"member"}
 {"bytes":7321,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-project-data-ssd-storage.md","sha256":"9f45017af2d4be63899833f90011e39cf49b7c7cb1de05d7424c84295e47dda2","type":"member"}
 {"bytes":2346,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-push-snapshot-result-guards.md","sha256":"2f096ae9ea6bfb4ce4ad01063576c976a61aff0af354317e870bc6f7af1d8489","type":"member"}
-{"bytes":14267,"lines":228,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-reading-commit-closeout-audit.md","sha256":"c7fc3ee3700d4e39bb40025a1e4f94619390a348ba5ff754594a64c5413e1b8a","type":"member"}

@@ -1590,6 +1590,14 @@ later bodies stay skipped. Rebuild Rust applications/runtime; the retained
 emitted modules and serialized inputs are unchanged. Independent Dart/Julia/Lua,
 callable-receiver coverage and full admission remain separate.
 
+Dart75.3 now guards ordinary CountKeys results with its own source profile
+preserved. Free `count_keys(false)` returns `0`, while receiver
+`false.count_keys()` remains null under its scalar boundary. A one-step initial
+KeyCount permission skips only the common guard; it adds no Boolean receiver
+rights. Its independent22-case/four-route checks and direct Count/Length checks
+pass. Rebuild Dart apps/runtime; broader domain/callable admission and remaining
+Julia/Lua assessment stay separate.
+
 ### `sorted_keys(hash)`
 - **Signature**: `sorted_keys(h: hash)`
 - **Returns**: array

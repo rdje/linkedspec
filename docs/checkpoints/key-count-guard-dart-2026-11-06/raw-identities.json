@@ -1,0 +1,314 @@
+{
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/normal-stdout.log": {
+    "bytes": 44511,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/normal-stdout.log.gz",
+    "capsule_sha256": "e2f3ec91889e2addbba84117c60203da6a70df603150bcc0f83f3df4f7b2a2ed",
+    "sha256": "c7f4711aee2aa0ab0ff20995ed4d24669ad6d551d0e572b96a6bc94ccc782718"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-analysis-stdout.log": {
+    "bytes": 129,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-analysis-stdout.log.gz",
+    "capsule_sha256": "e5aee99ab87d772430f714055f3eedadd91a31185635d6835d01a90595a96165",
+    "sha256": "d658554ec42856e1a1598b9adbe700b2a3a5c3be2cb323eec0a2466775400cbd"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/final/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/final/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/normal-stdout.log": {
+    "bytes": 4768,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/normal-stdout.log.gz",
+    "capsule_sha256": "8ad0c8989d9f21fe56bbfab58d91ab2bd3c5eca24217639ce7c01c88fcc40b2c",
+    "sha256": "6648f9bb531e4fd37f610da6dd576fc9008bad2d74b14164f7ae87d12e4c0914"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-analysis-stdout.log": {
+    "bytes": 129,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-analysis-stdout.log.gz",
+    "capsule_sha256": "e5aee99ab87d772430f714055f3eedadd91a31185635d6835d01a90595a96165",
+    "sha256": "d658554ec42856e1a1598b9adbe700b2a3a5c3be2cb323eec0a2466775400cbd"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-after/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/normal-stdout.log": {
+    "bytes": 9704,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/normal-stdout.log.gz",
+    "capsule_sha256": "1e5ff25265252a5de50ccc10440bde6dded610e0a6b759f415ceffe7e8ef9133",
+    "sha256": "4cb548d7815c7a33361270f4ca81fa178d1f8402f1d62c452a8ff89758515661"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-analysis-stdout.log": {
+    "bytes": 129,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-analysis-stdout.log.gz",
+    "capsule_sha256": "e5aee99ab87d772430f714055f3eedadd91a31185635d6835d01a90595a96165",
+    "sha256": "d658554ec42856e1a1598b9adbe700b2a3a5c3be2cb323eec0a2466775400cbd"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/normal-before/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-analysis-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-analysis-stdout.log.gz",
+    "capsule_sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b",
+    "sha256": "ac6cec2b1916a297ced1907519949d3cae92e5795ee669ee33c50ae78f8b584f"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-resolution-stdout.log": {
+    "bytes": 126,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-resolution-stdout.log.gz",
+    "capsule_sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30",
+    "sha256": "7feb60272d91a9575face539b5795e5761fd26c89cac32035e8d7356412996aa"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-stdout.log": {
+    "bytes": 1539,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/fresh-stdout.log.gz",
+    "capsule_sha256": "6ea35db6c5ebfd98dd2966c84257353db88c9427adaae3e3e6079faa194dbc1f",
+    "sha256": "db42f0822a00f8a3fc36bdc6dc520f47613077f9e827b06afbebdb0866c3ee6a"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/native-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/native-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/native-stdout.log": {
+    "bytes": 25795,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/native-stdout.log.gz",
+    "capsule_sha256": "24ad592bf248c65b4dfb2a197dc57a5a0567b4bb43a14819df7fe05ea2a94e00",
+    "sha256": "6d28ba34270987a86fee2c73af50c2c11c7f35817187e062c909ba87951b8065"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-analysis-stdout.log": {
+    "bytes": 65,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-analysis-stdout.log.gz",
+    "capsule_sha256": "207278ea2969eddaf6520fef1d7f413d07a9ac3ea8d3f9200ba2e1999c2a3e1e",
+    "sha256": "45ff57ab70e5b1706344ad1212d90c0ce3f3ba52f575bd1f803d26b1d36d02b1"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-after/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-analysis-stdout.log": {
+    "bytes": 36,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-analysis-stdout.log.gz",
+    "capsule_sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b",
+    "sha256": "ac6cec2b1916a297ced1907519949d3cae92e5795ee669ee33c50ae78f8b584f"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-resolution-stdout.log": {
+    "bytes": 126,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-resolution-stdout.log.gz",
+    "capsule_sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30",
+    "sha256": "7feb60272d91a9575face539b5795e5761fd26c89cac32035e8d7356412996aa"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-stdout.log": {
+    "bytes": 1540,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/fresh-stdout.log.gz",
+    "capsule_sha256": "c9f8495973239a828a900244e2a472b8921aeaf450cb1c03c6d9f1bcbd3ee7e7",
+    "sha256": "efe8a73a942fa02a6d3962ab09e45c2e4f9e62204dc8643ec5cf1a38035d3dd6"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/native-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/native-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/native-stdout.log": {
+    "bytes": 25798,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/native-stdout.log.gz",
+    "capsule_sha256": "df5cdf3cdbdc551c51e6d5db9daa831682c4970e7cb4a32a0946e6fd4fd022d6",
+    "sha256": "9f503f2083a95caabec4e830553ae48b71af9b193d80263f861cc559d78a7349"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-analysis-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-analysis-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-analysis-stdout.log": {
+    "bytes": 65,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-analysis-stdout.log.gz",
+    "capsule_sha256": "207278ea2969eddaf6520fef1d7f413d07a9ac3ea8d3f9200ba2e1999c2a3e1e",
+    "sha256": "45ff57ab70e5b1706344ad1212d90c0ce3f3ba52f575bd1f803d26b1d36d02b1"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-resolution-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-resolution-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-resolution-stdout.log": {
+    "bytes": 68,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/root-resolution-stdout.log.gz",
+    "capsule_sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6",
+    "sha256": "d4cb7a3c68b4133b4f6e58c67ff5bfd13725d8021e930388cdc98da8a575919d"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/version-stdout.log": {
+    "bytes": 83,
+    "capsule": "docs/checkpoints/key-count-guard-dart-2026-11-06/probe-before/version-stdout.log.gz",
+    "capsule_sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0",
+    "sha256": "959b6cdcef8a546d41712e9b306acc79c4fac170a80bbb2b8877160ebb9532cb"
+  }
+}

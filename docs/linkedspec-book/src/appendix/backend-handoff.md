@@ -3951,3 +3951,33 @@ current Length checks are separate. Independent Dart75.3 is next, with Julia,
 installed Lua and callable75.6 still pending. Full source/context/native-
 transitive custody, general isolation, canonical discovery and full23.4 admission
 remain separate; no host-seeding or declared Lua5.4 claim follows.
+
+
+## Ordinary Dart key-count guards
+
+Dart75.3 independently reproduces twelve guard gaps in the shared22 target.
+Its source profile differs from Rust: free sources give[0,0,0,0,0,0,2], receiver
+sources give[0,0,null,0,0,0,2]. In particular, `count_keys(false)` returns0 while
+`false.count_keys()` remains null. That existing scalar boundary is preserved.
+
+Canonical free-one/zero-extra CountKeys roles now join kind guards before Count
+initial-source permission. A separate one-step KeyCount permission skips only
+the common guard; scalarResult initialization/assignments/scalar guard and Count
+flag consumption stay intact. Produced counts reject incompatible Array/Hash
+operands and later copy/logical/with bodies. Zero, explicit bridges, source
+snapshots/order, functions, preflight and needed errors remain healthy.
+
+Unchanged22 groups move ten passing/twelve failing to22PASS across native/
+restored/plan/fresh modules. All ten healthy complete observations remain exact,
+including error class/diagnostic/wrapper. Actual22 emitted modules/parsed inputs
+are byte-identical. New22/Count-length2/Count guards19/Length24=67 focused groups,
+fatal targeted root/fresh analysis and scoped formatting pass. Rebuild Dart apps/
+runtime; no generated-format or source-regeneration change is needed. Actual
+direct inputs and complete raw channels are retained under
+`docs/checkpoints/key-count-guard-dart-2026-11-06/`.
+
+The original Length reader remains bound to its accepted historical source;
+current Length tests remain separate. Independent Julia75.4 and installed Lua75.5
+are next, with loop-index rights preserved. Full source/context/native-transitive
+custody, general isolation, canonical discovery/callable75.6 and full23.4 admission
+remain separate; no Boolean policy normalization or Dart host-seeding is claimed.

@@ -1,0 +1,13 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "format",
+    "--set-exit-if-changed",
+    "--output=none",
+    "lib/src/runtime/interpreter.dart",
+    "test/key_count_result_guard_composition_test.dart",
+    "tool/probe_key_count_result_guards.dart"
+  ]
+}

@@ -68,9 +68,10 @@
 {"bytes":4098,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-index-source-guards.md","sha256":"cb2e53a48bcb42b164e631eab1203450bdf2bee6e6e067970267e05c81e5c71a","type":"member"}
 {"bytes":9554,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-input-slice-boundary-gaps.md","sha256":"1cfbc5f9851d58692056537e519a7dd2085df81eb24213ea131b9a7a4a894aa5","type":"member"}
 {"bytes":8056,"lines":130,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-julia-unicode-17-case-mapping.md","sha256":"d26cc11c1dc3bedf1ca940d859ed65dcb8c6a6177b9688030102e8cf51c5a448","type":"member"}
+{"bytes":3021,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.3","path":"docs/knowledge/dart-key-count-result-guards.md","sha256":"dead228def78d2fc16906cacfd06b7c08547ef7a6a4892d83a64a5504b6d9be3","type":"member"}
 {"bytes":9091,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-large-number-helper-corruption.md","sha256":"7afc8ad9d3710e5272e3c62dc25261aac7f7f87dcf4b5b3b29a56b68b9ac3426","type":"member"}
 {"bytes":3927,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-legacy-structural-accumulator-parity.md","sha256":"b2e604bd2ca7ee5ea97a38880f89feaefcd0738f3ec83bb86b4dc5233bf71f00","type":"member"}
-{"bytes":2612,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.3","path":"docs/knowledge/dart-length-result-guards.md","sha256":"a79cc707778008882ec073f27d26679880c56c6865a2e2acb8e41df15ec7c891","type":"member"}
+{"bytes":3245,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.3","path":"docs/knowledge/dart-length-result-guards.md","sha256":"ac83fca2549629d118739e2f5cf5f3e090b454a236504ccfa5b9e7e79408cc96","type":"member"}
 {"bytes":2634,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-lexical-result-source-guards.md","sha256":"055f8d1d8a2613fd606b2ebc8e7d8a2f8157a0da5b8eb405528286c5e33bc019","type":"member"}
 {"bytes":4298,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-live-recognition-repetition-progress.md","sha256":"cd3bde524c77f2c5d114510f38c2f3105d4a408dc818435c660a012daa2bd116","type":"member"}
 {"bytes":2300,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-local-match-writer-presence-compatibility.md","sha256":"94592a4a244fb4f2a978fb703366690a163c2928809a8f82dbc3c7bc5c6ea220","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3263,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-dispatch-rule-local-scope.md","sha256":"80be721fa2902cdcc4252869e6994f1225cf5719ea6c7cc254254459819ee73d","type":"member"}
 {"bytes":7624,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-observation-admission.md","sha256":"0cff0553e4a2a234f90c8496df4c2e90d40426faaf644b7313871d78d0160c50","type":"member"}
 {"bytes":5618,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-brace-scanner-defects.md","sha256":"d53c4461a9966e212a731743406969a1ea45cc9e16fe9f0b79b4e3abd169aa58","type":"member"}
-{"bytes":3790,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-regex-dialect-bridge.md","sha256":"49c857fe360d965fb653b2af6db3cac7b1ab61daee39db72039b27ee8d529b64","type":"member"}

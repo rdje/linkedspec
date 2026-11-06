@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":14306,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-compiled-corpus-facade-reading.md","sha256":"fe5b4488d5ade024797dcd9842055cee2b8948d95c7373c938b7fb713a5f17e2","type":"member"}
 {"bytes":2874,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-compiled-spec-state.md","sha256":"6ea452adc6fd6d8a6084e801d5fdb10f2d7e0645cf660a28f4c1055acd5b3df2","type":"member"}
 {"bytes":3033,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-complete-named-mark-parity.md","sha256":"71992a27fcfb16666241de547a7da847f59095f6621ee22e3ad201e6dd480d91","type":"member"}
 {"bytes":2054,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-constructor-result-guards.md","sha256":"9755424f9a0cdedbad9043efafa6d4904b6a26f4ef5913e7da500154ea8708de","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5171,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recognition-transaction-private-authority.md","sha256":"4a4985fd088ba4a6bb9dc4122de96150fb6c0f748fcb6323ee62b0403ac4ca93","type":"member"}
 {"bytes":7907,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recursive-observation-admission.md","sha256":"effa1d441512c9f537bd952b0f7e887db722420ed08b9d91fd57d61b2b0e1190","type":"member"}
 {"bytes":16153,"lines":187,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-recursive-repeated-root-consumer-reading.md","sha256":"006004eab0a03d81251da6d59fe039746cd2f017129c29cbe8900b02a4516e28","type":"member"}
-{"bytes":3093,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-repeated-and-group-outcomes.md","sha256":"3796d3243345c04a16d06196f0934510eafa127154ccb582416e45f847317b75","type":"member"}
