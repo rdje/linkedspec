@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.4.13 — retain artifacts after bounded daily review
+
+Dated eight-scope review retains all1043 selected path/suffix/byte rows matching independent metadata; configured rust/target is covered. Five corruption controls and separate readonly replay pass. No removals or disposability/liveness/reclamation inference. Actual direct producers/Git-index input and all retained outputs survive with a three-leg claim. Latest-only cleanup/book/Knowledge/task/live records align. No runtime/storage/hook/CI change; P1 domain75.0.2 resumes next.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — lower CountKeys value-block sources through typed ownership
 
 Add CountKeys to existing typed block arguments and canonical terminal block delegation; forward original source span/method. Unchanged9 groups5PASS4RED become9PASS/native-fresh; all five healthy observations exact and only four failing module bodies change. Needed errors execute after valid loads without warnings; source-once/in-place snapshots/functions/preflight stay. New9/Count block14/Count-length5=28, syntax and five recovery controls pass. Actual first inputs/modules/full raw channels retained. Regenerate emitted Perl. Count source card stale current labels corrected from canonical nodes. Domain75.0.2 next; due daily cleanup at next clean boundary.

@@ -2227,6 +2227,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned verification: Focused selected producer/consumer proof, corruptions and current claim compatibility; canonical if a storage/infrastructure contract changes and at final publication.
   Planned claim verification: none: Unactivated producer admission; declare actual recovery/savings scope and retained inputs on activation.
 
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.13`
+  Status: `completed` / bounded retention-only daily artifact review
+  Goal: Review the named LinkedSpec artifact scopes and refresh the latest-only cleanup record after the November5 boundary.
+  Acceptance: Reuse the canonical non-following scanner and independent scandir/lstat for root-level strays, six named Rust release/incremental/deps locations and retained logs; verify the configured Cargo target is covered. Retain Dart/Julia caches and Lua managed-run conventions, active output/proof and all other repositories. Delete only exact provably disposable artifacts, otherwise record retention without liveness/disposability/reclamation inference. Keep previous observations/claims immutable, retain actual direct producers/Git-index input and effective corruption controls, then commit before domain75.0.2.
+  Priority/schedule: Next clean boundary after typed-source75.0.1; November5T04:49:48Z is now over24h old. Return immediately to P1 domain75.0.2 afterward; no dirty pivot or dependency implementation access.
+  Verification tier: `focused`
+  Focused checks: Bounded existing scanner/independent per-file metadata and retained-snapshot corruption controls; separate readonly replay, selected claim/source identities, book render, memory/history/task/Knowledge integrity and normal hooks. No broad runtime suite.
+  Canonical trigger: Final clean push; no production/storage-default/hook/CI contract changes in this dated maintenance leaf.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.13.json`
+  Activation: Clean856a9c2d4df577f5b2980434434f43148e1e22bb, typed-source75.0.1 all ten doctrines/post-pointer/brief0/clean Git. Read last cleanup November5 04:49, canonical cleanup boundary, previous review/claim/scanner and book maintenance record. New namespace4.13 is unused. Metadata alone gives no deletion authority; retain protected caches/proof and preserve source/domain repair priority.
+  Result: New dated observation2026-11-06T05:15:49.166118+00:00 retains1043 primary per-file path/suffix/byte rows, all matching independent scandir/lstat in eight named scopes. Configured Cargo target rust/target is covered. Five actual missing-row/wrong-size/duplicate-row/outside-path/producer-byte controls reject; separate readonly replay passes with empty stderr. No files removed and no ownership/liveness/disposability/reclamation inference. Direct producer bodies and Git-index input survive in docs/checkpoints/artifact-review-2026-11-06/observation.json.gz; previous observations/claims untouched.
+  Documentation/verification: Latest-only cleanup date, book maintenance example and existing cleanup fact agree. Source/book/card/cleanup record have no live-claim input intersections; selected three-leg claim binds actual direct producers/retained inputs. Readonly source/claim identities, book render, history/memory/task/map and normal mandatory doctrines govern focused landing. No runtime/storage-default/hook/CI change, broad suite or push; immediately resume P1 domain75.0.2.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.4.13 — retain artifacts after bounded daily review.
+
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.35`
   Status: `completed` / finite Length74 frozen; key-count75 P1 owned
   Goal: Select and freeze one next roadmap-required fluent source/consumer family from the current inventory and remaining gap matrix.

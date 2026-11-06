@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT continues through P1 key-count75 after focused-checked bounded Length74. Typed-source75.0.1 is implemented with focused checks. Domain75.0.2 remains before Perl75.1/independent peers75.2-.5 and unrelated selection/full23.4. Run due daily artifact cleanup at the next clean boundary.
+PNT resumes P1 key-count domain75.0.2 after typed-source75.0.1 and due daily artifact review4.13. Boolean/Array dereferences and numeric4/main::4 producer classification precede Perl75.1/independent peers75.2-.5 and unrelated selection/full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 reuses typed argument ownership and canonical terminal block delegation for CountKeys. Unchanged9 groups5PASS4RED become9PASS/native-fresh; five healthy complete observations exact. Needed errors execute after successful loads without warnings; valid mutations yield Hash counts and source-once/order/in-place snapshots/functions/preflight remain. Four failing module bodies change. New9/Count block14/Count-length5=28, syntax and five recovery controls pass. Actual declared first inputs/pre-run modules/full raw channels retained losslessly. Regenerate emitted Perl. Relevant Count source card stale labels corrected; domain/result guards/peers/full admission remain open.
+TYPE-REFERENCE-BOOK.1.2.23.4.13 completes the dated eight-scope daily artifact review: all1043 selected per-file rows agree with independent metadata, configured Rust target is covered, five corruption controls and readonly replay pass. No files removed; caches/proof/active outputs/other repositories retained without liveness/disposability/reclamation inference. Actual direct producers/Git-index input, observation/actual channels and three-leg claim retained. Latest-only cleanup, book/Knowledge/task/live pointers updated; no runtime/storage/hook/CI change or broad suite.
 
 ## Next Action
 
-At the clean boundary, check docs/ARTIFACT_CLEANUP.md against current UTC; last cleanup was November5 04:49 and is now due if elapsed. Own/commit a bounded safe review before domain75.0.2, then return immediately to its Boolean/Array and numeric4/main::4 zero-policy repair before Perl75.1 guards/independent peers. Preserve original assessment/typed-source epochs and establish unchanged domain normal before production.
+Activate P1 domain75.0.2 from clean Git. Recover exact CountKeys Boolean/Array/reference failures and numeric4/main::4 source-symbol counterexample; retain unchanged focused domain/Hash/source-order/seed normal before producer repair. Preserve valid named Hash sources, the typed-source fix and original assessment epochs. Commit before Perl75.1 guards/independent peers.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.13 — dated artifact retention review; zero removals; P1 domain75.0.2 resumes.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
 - TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — installed Lua Length24PASS/host; twelve healthy exact; P1 key-count75.0 next.
@@ -29,7 +30,6 @@ At the clean boundary, check docs/ARTIFACT_CLEANUP.md against current UTC; last 
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 — installed Lua initial Boolean Count focused-checked; all concrete P1s done, P2 compiler73.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 — Julia initial Boolean Count focused-checked; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — Dart Boolean Count source focused-checked; clean fresh-context Julia4/Lua5 handoff.
-- TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — Rust Count source fallback focused-checked; Dart Boolean source3 next.
 
 ## History
 

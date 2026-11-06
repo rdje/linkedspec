@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.4.13 — Daily artifact review does not infer disposal authority
+
+The November6 review uses the existing non-following scanner and independent scandir/lstat for each of1043 selected rows in eight named scopes. Supported project-data wrappers confirm the active Cargo target is included. Metadata alone grants no liveness or disposal authority, so all artifacts/caches/proof remain retained. Five mutations reject and readonly replay passes; exact direct producer bodies and Git-index bytes remain in the dated observation. Prior observations/claims stay immutable. The public maintenance pointer also names the already completed growth assessment and still-scheduled prospective reuse accurately. Resume P1 CountKeys domain75.0.2 after this clean maintenance leaf.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — Typed CountKeys blocks need both argument ownership and terminal delegation
 
 The same mutating block bypassed typed ownership through free CountKeys and its terminal receiver compatibility route. Reuse the established Count argument/delegation mechanism, keeping canonical zero-extra/non-trailing checks and original span. Both missing paths are independently RED in the unchanged new normal; the receiver/default path was already healthy. Final9/nearest28/syntax pass; five healthy complete observations exact and four module bodies change. Actual new-normal modules persist before native/fresh execution. Historical source-delta recovery avoids claiming freshness after future domain repairs; broader native/transitive closure remains4.2-owned. Correct relevant Count card current status from completed canonical source/Julia/Lua nodes without refreshing old observations.
