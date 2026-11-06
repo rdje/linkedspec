@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4586,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-admission.md","sha256":"c2dc4ab99c7b54b82ee71403678691c70afd674125e4823db251ba7380313760","type":"member"}
 {"bytes":4979,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-core.md","sha256":"50d3725a6a20e6984c85b852ff8b0c6aac51dfdcd48fe553cceeeda3b5218b58","type":"member"}
 {"bytes":6283,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-preflight.md","sha256":"b5f77f81792563ed7ab83880fbaf71ebd869933ff8d3c09b052a07f834759be8","type":"member"}
 {"bytes":5778,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-root-rule-selection-routes.md","sha256":"105008bc485647280027fe63afb86c2f2fe83b80b78f678de52beca1f6680bb2","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4504,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-capability-admission.md","sha256":"0d6d478070b70b328b3fe7c1aa51dacafefef2e3f051eeaf7cc3cd95b2cccdb9","type":"member"}
 {"bytes":7248,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-public-surface-no-drift.md","sha256":"27351880391689a009228dad866f0383ed2bf1fd234afd50042efede1df41c06","type":"member"}
 {"bytes":4049,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mutation-recurring-six-runtime-gate.md","sha256":"58453da6ed18e5fa4dca615f34c3ca25789fca82a8eccd32db6b974d10f70664","type":"member"}
-{"bytes":7843,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-capture-endpoint-presence-authority.md","sha256":"e65662452f8b93a34aa3a506de1d1c03c750035af5aaec9ebb2234285299994f","type":"member"}

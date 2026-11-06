@@ -1586,7 +1586,7 @@
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74`
-  Status: `in_progress` / Perl74.1/74.6 Rust74.2 Dart74.3 focused-checked; Julia/Lua remain
+  Status: `in_progress` / all bounded backend implementations focused-checked; final admission pending
   Goal: Preserve Length numeric/null producers and actual-kind continuation guards through copy/logical/with.
   Dependencies: Selection23.1.35; length-result-guard-composition.md/shared16; existing count/length3 and copy/eager-logical authority.
   Acceptance: Independently assess each backend; preserve domains/signatures/source once/snapshots/needed errors/preflight/copy depths/valid null-zero/explicit bridges/functions/parser/schema. Fix demonstrated incompatible operands/later effects and Perl main::4 leak. No new language authority or full admission. P1 key-count75.0 follows74.5 before unrelated selection.
@@ -1687,13 +1687,27 @@
   - [x] **LOCKSTEP** — actual declared first inputs/producers/full raw phases recover with five corruptions; book/Knowledge/target/roadmap/task/index/live/resume/history align. Lua74.5 next; full custody/isolation/selection/admission separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.5`
-  Status: `pending`
+  Status: `completed` / installed Lua Length and source-owner guards focused-checked
   Goal: Independently assess and repair safe installed Lua ordinary Length source/continuation guards.
   Dependencies: Completed23.3.74.4; frozen74/shared16/current producer domains and nearest Count/copy/logical contracts.
   Source-owner preservation: Independently assess produced-Length-to-Count rejection, initial Count zero and explicit Array bridge controls from74.6 before attributing a peer defect.
   Acceptance: Retain unchanged authored baseline before production on supported native/restored/plan/fresh or compiled emitted routes. Freeze actual source-domain observations before repair; do not import Perl Bool conversion. Repair only demonstrated canonical free-one/zero-extra receiver guards and persistent rejection through copy/eager logical/with; preserve compatible scalar/numeric/bridges, valid null/zero, source-once/order/snapshot/function/errors/arity/copy-depth/excluded contexts/parser/schema. Perl includes exact empty/outer/main::4 host controls and unchanged host data. Peers do not inherit a Perl defect; retain both Rust direct/with loops and Julia/Lua loop-index restrictions. Lua no new chunk locals/unsafe runner/formatter/declared5.4 claim. Actual first-execution inputs retained; broad registration/custody/isolation/admission remain separate.
-  Planned verification: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
-  Planned claim verification: none: Finite authored behavior repair; declare additional measurement only if actually needed.
+  Verification tier: `focused`
+  Focused checks: Focused original RED/GREEN plus directly dependent Count/length/copy/logical preservation, owner syntax/scoped formatter or analyzer, book/Knowledge/history/memory and normal hooks; canonical only at full23.4/final push.
+  Canonical trigger: Full23.4/final clean push after scheduled prerequisites.
+  Claim verification: none: Finite authored installed-host behavior controls, not full-host/domain/custody measurement.
+  Activation: Cleanfbe625974f39e29a820dc120c65b5b714e3808e5 after Julia74.4 all ten doctrines/post-pointer/brief0/clean Git. Current installed-host Count/Boolean source card, safe wrapper/normal/run.lua include and shared16/source-owner8 recovered. Independently retain actual declared first inputs/module/parsed bodies and version/error/domain profiles before production. Use existing namespace/no new interpreter chunk locals; retain loop-index mutation restriction. No unsafe runner/formatter/declared5.4 inference. Quiet RAM trend monitoring under latest director guidance.
+  Diagnosis/result: Independent installed PUC5.5.1/LuaJIT2.1.1788460057 native/restored/plan/fresh24 exposes twelve actual wrong-value/effect programs on each host. Existing kind_guarded_result omits Length before Count permission. Add only canonical positional free-one/zero-extra Length namespace member/admission. No new interpreter chunk locals; scalar-result state, one-step Count permission, loop-index Array-end mutation rights and both producers/domains/signatures/copy depths/functions/parser/schema exact.
+  Verification: Unchanged24 programs12PASS12RED become24PASS/four routes on each host. New normal122 checks/48 failures becomes122 checks/zero failures. Both own [1,1,1,2,2,null] domain/error fields freeze before selecting shared profiles; twelve healthy observations exact per host. Actual24 emitted module/parsed bodies per host unchanged. Final new122/nearest Count guards92 plus two Count-length programs/native-plan-fresh, version and source/runner loadfile checks pass on both hosts; final stderr empty. Three runner lines register normal. Rebuild Lua apps/runtime. No unsafe full runner/formatter/declared5.4/full CI.
+  Evidence/limits: docs/checkpoints/length-guard-lua-2026-11-06/REVIEW.md retains actual declared Lua/native sources/direct fixtures/producers/wrappers before each phase's host commands and actual modules/parsed bodies before all routes/loads. Full raw/version/failure channels losslessly sealed, byte/mode identities recovered before redundant owned files removed. Readonly recovery/five corruptions pass; outside-member/admission runtime/normal/oracle bytes exact. Fresh modules share process/runtime; native binary/toolchain/transitive custody4.2, general isolation, discovery4.1, declared5.4 and full23.4 remain separate. Parent74 records bounded implementations complete/final admission pending; P1 key-count75.0 next before unrelated selection.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — guard installed Lua Length results and produced-source ownership.
+  Acceptance Checklist:
+  - [x] **REPRODUCE / ISSUE** — each installed host independently captures actual four-route24 target observations and unchanged normal122/48-failure RED before production; own domain/error fields freeze first.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — retained public parsed/emitted controls and Count/compatible-prefix contrasts locate missing Length role before Count permission in interpreter.lua kind_guarded_result.
+  - [x] **FIX** — canonical Length member/admission uses existing namespace/current guards; no new chunk locals, scalar/Count permission/loop-index mutation-right changes or producer normalization.
+  - [x] **ADDRESSED (verified)** — authored24 PASS/all four routes/both hosts; wrong-kind operands/later copy/logical/with skip and produced Length cannot regain Count fallback.
+  - [x] **NO REGRESSION** — twelve healthy observations/domain/error fields exact per host; valid null-zero/Count fallback/bridges/source snapshots/preflight/needed errors stay. New122/nearest92/Count-length/version/loadfile pass; actual24 modules/parsed inputs unchanged.
+  - [x] **LOCKSTEP** — actual first declared inputs/producers/full raw phases recover with five corruptions; book/Knowledge/target/roadmap/task/index/live/resume/history align. P1 key-count75.0 next; full custody/isolation/discovery/declared5.4/admission separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.74.6`
   Status: `completed` / P1 produced-Length ownership focused-checked

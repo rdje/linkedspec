@@ -3668,7 +3668,7 @@ The owned artifact-growth review23.4.8 precedes unrelated feature selection;
 full admission remains separate.
 
 
-## Length continuations: Perl, Rust, Dart and Julia guards
+## Length continuations across the five backends
 
 Ordinary `length(value)` and `value.length()` results retain their actual kinds.
 The existing producer keeps its Number/null values: `length("tail").add(1)` is `5`,
@@ -3708,7 +3708,7 @@ actual null/zero data from an earlier rejected consumer.
 The unchanged Perl normal passes nineteen groups after ten original failures;
 nine original healthy programs remain exact. Direct Count/length/logical
 preservation checks pass. Rust74.2, Dart74.3 and Julia74.4 also implement the
-guards with independent focused checks; installed Lua74.5 remains. Preserve each
+guards with independent focused checks; installed Lua74.5 now does too. Preserve each
 backend's producer domains. No new method, signature, conversion policy or schema
 is introduced.
 
@@ -3765,9 +3765,8 @@ emitted module bodies are byte-identical before and after: rebuild Dart apps/run
 Final Length and directly dependent Count/length checks pass forty-five groups,
 with fatal targeted analysis and full owned-file formatting clean. Actual direct
 inputs and raw results are retained under
-`docs/checkpoints/length-guard-dart-2026-11-06/`. Installed Lua still requires
-independent assessment; full custody, isolation, selection and admission remain
-pending.
+`docs/checkpoints/length-guard-dart-2026-11-06/`. The installed Lua assessment is described below; full custody, isolation,
+selection and admission remain pending.
 
 
 Julia74.4 now implements these Length guards on native, restored, generated-plan
@@ -3785,5 +3784,27 @@ and parsed inputs are byte-identical before/after; rebuild Julia apps/runtime.
 The focused Length/Count checks pass 220 assertions with strict deprecation checks.
 Actual declared direct inputs and complete raw evidence survive under
 `docs/checkpoints/length-guard-julia-2026-11-06/`. Fresh Modules share a process and
-runtime; independent isolation, full native/transitive custody, canonical discovery,
-installed Lua and full admission remain pending.
+runtime; independent isolation, full native/transitive custody, canonical discovery
+and full admission remain pending.
+
+
+Installed PUC Lua5.5.1 and LuaJIT2.1.1788460057 now implement the same bounded
+Length guards after independent baselines. For example,
+`length("tail").take(1).copy().and(true).with(){return("ran")}` returns null and
+skips later effects. `length(undef).with(){return("recovered")}` still returns
+`recovered`, and initial `4.count()` remains Number `0`. The source-domain profile
+is independently `[1,1,1,2,2,null]` on both hosts; existing conversion rules stay.
+
+Each host passes all twenty-four authored programs across native, restored,
+generated-plan and fresh emitted routes. Twelve original healthy observations
+remain exact per host. The new Length checks, nearest Count guards and Count/length
+receiver examples pass; existing scalar state and Array-end mutation restrictions
+stay unchanged. Twenty-four emitted module bodies and parsed inputs per host are
+byte-identical before/after: rebuild Lua applications/runtime. Actual declared
+inputs and full raw evidence are retained under
+`docs/checkpoints/length-guard-lua-2026-11-06/`.
+
+All five backends now have bounded Length implementations with focused checks.
+Full admission, native/transitive custody, canonical discovery and independent
+isolation remain pending; the installed-host result does not verify declared
+Lua5.4. The next owned defect is key-count (`count_keys`) continuation guards.

@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "luajit",
+    "-e",
+    "dofile(\"lua/test/length_result_guard_composition_test.lua\"); dofile(\"lua/test/count_length_receivers_test.lua\"); dofile(\"lua/test/count_result_guard_composition_test.lua\")"
+  ],
+  "environment": {
+    "LINKEDSPEC_LENGTH_CAPTURE": "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit"
+  }
+}

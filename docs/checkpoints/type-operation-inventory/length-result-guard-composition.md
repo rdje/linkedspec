@@ -2,7 +2,7 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.35; implementation family23.3.74.
 Existing count-length-results.md3, catalog Length and typed result/copy/eager-logical
-contracts retain authority. Status: Perl74.1/74.6 Rust74.2 Dart74.3 Julia74.4 implemented with focused checks; installed Lua74.5 pending.
+contracts retain authority. Status: all bounded Perl/Rust/Dart/Julia/installed Lua implementations focused-checked; full admission pending.
 
 Canonical ordinary length(value), one positional recognized value, and receiver.length()
 with zero extra operands keep current Number/null results. Length of a scalar is its
@@ -120,3 +120,20 @@ depwarn pass. Actual declared first inputs/full raw channels recover losslessly
 with five corruptions in length-guard-julia-2026-11-06. Fresh Modules share process/
 runtime; full custody/isolation/discovery/admission separate. Installed Lua74.5
 next; P1 key-count75.0 afterward before unrelated selection.
+
+## Bounded installed Lua74.5
+
+PUC5.5.1/LuaJIT2.1.1788460057 independently capture native/restored/plan/fresh24
+programs12PASS12RED becoming24PASS; twelve healthy observations exact per host.
+Actual domain [1,1,1,2,2,null] and error fields agree before choosing shared fences.
+Canonical Length member/admission joins kind_guarded_result before Count initial
+permission; no new chunk locals. Scalar state, Count one-step permission, loop-
+index mutation rights and producers/domains/signatures/copy depths/function/
+parser/schema stay exact. Actual24 emitted/parsed bodies per host unchanged;
+rebuild Lua apps/runtime. Final new122/nearest Count92 plus two Count-length
+programs/native-plan-fresh, version and source/runner loadfile pass per host.
+No unsafe full runner/formatter/declared5.4/full CI. Actual declared first inputs/
+full raw phases recover with five corruptions in length-guard-lua-2026-11-06.
+Fresh modules share process/runtime; full native/transitive custody/isolation/
+discovery/declared5.4/admission remain separate. Length bounded implementations
+are complete; P1 key-count75.0 next before unrelated selection.

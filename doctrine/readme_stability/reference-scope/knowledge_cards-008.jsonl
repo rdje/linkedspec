@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3511,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-array-constructor-bare-values.md","sha256":"85da9cb3aa0aee014cc23248463b2c36c7501f5e7a65d20a49398901e77e497d","type":"member"}
 {"bytes":4814,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-function-codeblock-caller-scope-leak.md","sha256":"52e33d04a52dccc3764b4bbe1b916e00bd77a90aef72c0babf4d3d6fe3bbb042","type":"member"}
 {"bytes":4914,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-capture-not-standalone.md","sha256":"26f496d6f6d57031d8f8218ff097ebe77e9e4cbc3a420757801169615b7c6d35","type":"member"}
 {"bytes":3422,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-generated-source-cold-trace-dependency.md","sha256":"c81708e49d94b5a664b55fa894f28ee9ace479e8dd9fb36db7e8df1d3d9af2c6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4928,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-residual-event-order-diagnosis.md","sha256":"5868e4a12da141f0ea2e2ac087afe6e94c8355f1ee81f216d9f3c70b9847550d","type":"member"}
 {"bytes":3482,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-residual-lowering-producer-selection.md","sha256":"5e824f0415b4aff0cd7d700f08e32f869521943eca17ac6351b2022888baca75","type":"member"}
 {"bytes":4639,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-residual-replacement-source-frames.md","sha256":"2c9a58e84b8f8bcea53cfc535363998453036a94ce7d8a86ccf9d7fcd3d7ab28","type":"member"}
-{"bytes":4315,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-root-rule-selection-admission.md","sha256":"cdb0c7cbe1088a37725e8ccfda7045bddfd420302f086e4376591e07a6e64658","type":"member"}

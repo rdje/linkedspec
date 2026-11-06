@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "puc",
+    "docs/checkpoints/length-guard-lua-2026-11-06/observer.lua",
+    "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/cases.json",
+    "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc"
+  ],
+  "environment": {
+    "LINKEDSPEC_LENGTH_CAPTURE": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc"
+  }
+}

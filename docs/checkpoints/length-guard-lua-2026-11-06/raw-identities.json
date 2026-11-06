@@ -1,0 +1,242 @@
+{
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/normal-stdout.log": {
+    "bytes": 51126,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/normal-stdout.log.gz",
+    "capsule_sha256": "08abfdabee48c2020fd356e37516361b6265512b86ce9889cfb9112070a0304e",
+    "sha256": "1e76280ce05e233743c559dda7ff886e9d0364bce88f601962c753da9effd089"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/version-stdout.log": {
+    "bytes": 80,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/luajit/version-stdout.log.gz",
+    "capsule_sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7",
+    "sha256": "f1d7f1ad71b1a124913210cdb78a9310db26351293be54f218a1d8ea0a3a5c3c"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/normal-stdout.log": {
+    "bytes": 51084,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/normal-stdout.log.gz",
+    "capsule_sha256": "21aa5fdf0296449fab214c9174f06a7c104631fe17afa06b8ddd6b287e678812",
+    "sha256": "ba2d886b149603b11ef2a7fcedfbbd93dd2874f29987190e8a821cefcec650ce"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/version-stdout.log": {
+    "bytes": 52,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/final/puc/version-stdout.log.gz",
+    "capsule_sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d",
+    "sha256": "1f8b153a53486375e1d963502928fd809356f8cddd8102220918918644c65ffd"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/normal-stdout.log": {
+    "bytes": 26025,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/normal-stdout.log.gz",
+    "capsule_sha256": "4901fa18d3f3b24f54708fe32ed9058a6be6d0e1a56ff4d5ed7b59a8bc08cadf",
+    "sha256": "769d7f7ad8caa9c6952686a69f1ae1efc3bcec09153cea6e3505c0bd85669aa0"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/version-stdout.log": {
+    "bytes": 80,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/luajit/version-stdout.log.gz",
+    "capsule_sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7",
+    "sha256": "f1d7f1ad71b1a124913210cdb78a9310db26351293be54f218a1d8ea0a3a5c3c"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/normal-stdout.log": {
+    "bytes": 26004,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/normal-stdout.log.gz",
+    "capsule_sha256": "ba0ac01109b96e2a6f7940fd3fd6f819c720dfa465a20560885248b4e69457f9",
+    "sha256": "52d52072ca45df067696f86ce7216ebee548f80db939da605e04fe06c75c7fae"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/version-stdout.log": {
+    "bytes": 52,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-after/puc/version-stdout.log.gz",
+    "capsule_sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d",
+    "sha256": "1f8b153a53486375e1d963502928fd809356f8cddd8102220918918644c65ffd"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/normal-stderr.log": {
+    "bytes": 1330,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/normal-stderr.log.gz",
+    "capsule_sha256": "c43f414963887ae4f10989406f713bae442768da5c3349022963483925f81420",
+    "sha256": "41470369d937e71990a56b2c241351f0c7e12cc2dc1287b3a97450ba87753821"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/normal-stdout.log": {
+    "bytes": 26018,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/normal-stdout.log.gz",
+    "capsule_sha256": "694e342ca773670aea442611a6da5387122ab5785f637403e8def1cbbb42404d",
+    "sha256": "9cdc9cc11410844567b9c8166d32c53d45c2db0fbd31fcd3ef45c58de4b7a1d9"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/version-stdout.log": {
+    "bytes": 80,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/luajit/version-stdout.log.gz",
+    "capsule_sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7",
+    "sha256": "f1d7f1ad71b1a124913210cdb78a9310db26351293be54f218a1d8ea0a3a5c3c"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/normal-stderr.log": {
+    "bytes": 1314,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/normal-stderr.log.gz",
+    "capsule_sha256": "05bbec5eacc38f2eba083b7c749510b7930580c8583eb24ea801e1117fd2465c",
+    "sha256": "277ffad3d765312162267b1807f28178b2b822cf16b0cc40317746c896dd9b44"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/normal-stdout.log": {
+    "bytes": 25997,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/normal-stdout.log.gz",
+    "capsule_sha256": "0d24e2a1062c273982f284db12ea1af60f47d9e8719307e3e01f0ab85b3696f0",
+    "sha256": "30a5b37692a1725665768810a019b71e33fe187c55193b235b753c88b8fa0d2a"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/version-stdout.log": {
+    "bytes": 52,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/normal-before/puc/version-stdout.log.gz",
+    "capsule_sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d",
+    "sha256": "1f8b153a53486375e1d963502928fd809356f8cddd8102220918918644c65ffd"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/normal-stdout.log": {
+    "bytes": 25834,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/normal-stdout.log.gz",
+    "capsule_sha256": "347cda230c217a4422d9707a0169f570b9a4746412e3ba3a68a0f63d034ca328",
+    "sha256": "801d371d228f7022a6b474963d66cdd00177bc8de47cfe2f13ae0d334f54f2f4"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/version-stdout.log": {
+    "bytes": 80,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/luajit/version-stdout.log.gz",
+    "capsule_sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7",
+    "sha256": "f1d7f1ad71b1a124913210cdb78a9310db26351293be54f218a1d8ea0a3a5c3c"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/normal-stdout.log": {
+    "bytes": 25813,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/normal-stdout.log.gz",
+    "capsule_sha256": "72d4031b670e6fe364c3425fd1b96d4387798bf2566f56ab0fdddb227a0b4ead",
+    "sha256": "f45f4ab0d9a9f4b6586dc07e768bc2d766eb94629ace7230aa3d48380146d35d"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/version-stdout.log": {
+    "bytes": 52,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-after/puc/version-stdout.log.gz",
+    "capsule_sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d",
+    "sha256": "1f8b153a53486375e1d963502928fd809356f8cddd8102220918918644c65ffd"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/normal-stdout.log": {
+    "bytes": 25826,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/normal-stdout.log.gz",
+    "capsule_sha256": "82b0e589ba1733043a8de745c321585db8692b6dd45e3161ba1e068fbad6dfdc",
+    "sha256": "a379e0c6faf285cdc659890c4cf579f3cf883c05a9a41b0ec3d38dee7480aad5"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/version-stdout.log": {
+    "bytes": 80,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/luajit/version-stdout.log.gz",
+    "capsule_sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7",
+    "sha256": "f1d7f1ad71b1a124913210cdb78a9310db26351293be54f218a1d8ea0a3a5c3c"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/normal-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/normal-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/normal-stdout.log": {
+    "bytes": 25805,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/normal-stdout.log.gz",
+    "capsule_sha256": "7e1d8deb04d524eb205986dcfedca1dcee77656f735f7d02201fb242bbbfa12b",
+    "sha256": "38a4bb13a66204001eeb0a53018ce0d11fd75e95e07377846a101d5b30860c86"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/version-stderr.log": {
+    "bytes": 0,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/version-stderr.log.gz",
+    "capsule_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/version-stdout.log": {
+    "bytes": 52,
+    "capsule": "docs/checkpoints/length-guard-lua-2026-11-06/probe-before/puc/version-stdout.log.gz",
+    "capsule_sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d",
+    "sha256": "1f8b153a53486375e1d963502928fd809356f8cddd8102220918918644c65ffd"
+  }
+}

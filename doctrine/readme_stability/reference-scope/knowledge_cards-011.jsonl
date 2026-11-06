@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7181,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-execution.md","sha256":"9a0a9b29bc8193a59255d64fa8784d61f40b9217e8e846a83362188d2b64a311","type":"member"}
 {"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
 {"bytes":3281,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-error-boundary-string-result.md","sha256":"cbdfc4a4b903a287ddf53dd55a3256e6607565428cebd7deb9d7df17ee0edff2","type":"member"}
 {"bytes":4155,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-structured-diagnostics.md","sha256":"2332a9bb056478f2c50b6cc670de1b3d839defd68dc402e58556b8a4e4edf104","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6203,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"ca8601711769ac7fc7dd6ec9e339c13d8971bc7aa22ffc698442a9a05d0b98cc","type":"member"}
 {"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
 {"bytes":21168,"lines":363,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-partition-capacity-registry-drift.md","sha256":"6dfc8e83cd9569dc27c0fa7adb4ab0b541d91d7a4dffc1cab42c359e08290001","type":"member"}
-{"bytes":3731,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-capability-markers-not-frontier.md","sha256":"6e5dd80e47733c7fb17aea828641d19fd209c753630cdfbffd47af8e7b187c9c","type":"member"}

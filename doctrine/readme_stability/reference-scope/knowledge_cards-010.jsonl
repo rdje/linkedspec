@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":14210,"lines":167,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-neutral-contract.md","sha256":"3340fc3471e370ade19e3e224108a48173ca7f6b481cc750f04e67858c88b16c","type":"member"}
 {"bytes":3105,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-ownership-decision.md","sha256":"95f9f9c1eced9004d6255f494766388fbe6190e40b3c60e2702fda89e77aa109","type":"member"}
 {"bytes":5831,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-local-cursor-public-no-drift.md","sha256":"c5fd8ae0dc1b9fa540e3d11db0d6f8c09a08d6194546dbc477375878daa1abd8","type":"member"}
 {"bytes":3288,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rule-starts-open-block-validation.md","sha256":"c02590d348e15532e2779f5ce32454901346bda6c27440b953ff7b20dbc997d1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2018,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-call-selection-guard.md","sha256":"2138850f570e41d87e33d3697d368fc512f1a7513cff0ba90140a6f83e078b0f","type":"member"}
 {"bytes":3401,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-code-rejection-routes.md","sha256":"b396ccbb78dcffb14bce104395fbc69388ba0ecb7e2f0f034633887483c5f6c5","type":"member"}
 {"bytes":1939,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-invocation-accumulator-scope.md","sha256":"aab32b86c0cf9d2dc26f8ca0f450b3429a9de21ba3e08bf551155d4c9d7161b1","type":"member"}
-{"bytes":7181,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-execution.md","sha256":"9a0a9b29bc8193a59255d64fa8784d61f40b9217e8e846a83362188d2b64a311","type":"member"}

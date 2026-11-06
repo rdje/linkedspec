@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — guard installed Lua Length results and produced-source ownership
+
+Canonical Length namespace member/admission precedes Count permission; no new chunk locals or scalar/Count/mutation-right/producer/schema changes. PUC5.5.1/LuaJIT independently move authored24 programs12PASS12RED to24PASS/all four routes. New122/48-failure normal becomes122/zero per host; twelve healthy observations/domain/error fields and24 emitted/parsed bodies exact. Final nearest Count92/Count-length/version/loadfile and five corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Lua apps/runtime. Bounded Length implementations complete, full admission separate; P1 key-count75.0 next.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — guard Julia Length results and produced-source ownership
 
 Canonical Length role joins kind_guarded_result before Count source permission; scalar state, Count permission and enumerate/call_index mutation restrictions stay exact. Authored24 programs12PASS12RED become24PASS; new normal74PASS48FAIL becomes122PASS assertions. Twelve healthy/domain/error profiles and24 module/parsed bodies exact. Final220/strict depwarn/five readonly corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Julia apps/runtime. Installed Lua74.5 next; full custody/isolation/discovery/admission separate.
