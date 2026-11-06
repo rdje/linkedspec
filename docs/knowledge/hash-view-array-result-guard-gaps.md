@@ -7,7 +7,7 @@ answers:
   - "which task owns ordinary Hash-view result guards"
   - "what sources are frozen for Hash-view76"
 date: 2026-11-06
-status: Perl76.1 implemented with focused checks; independent peers and full admission remain
+status: Perl76.1/Rust76.2 focused-checked; P1 Perl receiver-policy coverage76.6 and independent peers remain
 tags: [perl, copy, hash, arrays, guards, with, selection]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.76.1; hash-view-result-guard-perl-2026-11-06/REVIEW.md retains actual shared15=8healthy7RED to15PASS, five independent profiles, four-file67 qualified proof, actual source inverse/restoration and eight recovery controls. Original selection36 remains unchanged."
 reverify:
@@ -33,7 +33,13 @@ qualified same four files67 PASS. See [[perl-length-sorted-values-oracle-reconci
 Actual source-role inverse RED/restored GREEN and eight recovery corruptions pass.
 Complete declared inputs/modules/full channels and limits are in current REVIEW.md.
 Registration23.4.1, full custody/isolation, callable/source contexts, peers and23.4
-remain separate. Rust76.2 must acquire its own unchanged baseline.
+remain separate.
+
+Rust76.2 now independently implements source-aware result guards; see
+[[rust-hash-view-result-guards]]. Its initial-source fences reveal that earlier
+Perl76.1 coverage lacks initial non-Hash receiver comparisons. P1 follow-up76.6
+owns a bounded historical/current Perl assessment next, before Dart76.3. This is
+a coverage gap; no Perl product regression or Rust-policy equivalence is inferred.
 
 ## Original selection36 before implementation
 

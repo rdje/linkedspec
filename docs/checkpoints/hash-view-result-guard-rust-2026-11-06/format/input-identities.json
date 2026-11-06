@@ -1,0 +1,10 @@
+{
+  "rust/linkedspec-runtime/src/engine.rs": {
+    "sha256": "4df009a7c45e59d568dd5320ac046b8355f18070f73febc02678fa6a04bafbbd",
+    "bytes": 635930
+  },
+  "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs": {
+    "sha256": "96e130c1a3d3ef006e7bb2599e4c8c4e801673b3e55fca0852230b9b306856dd",
+    "bytes": 4817
+  }
+}

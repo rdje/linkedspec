@@ -1276,17 +1276,24 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 Sorted Hash views produce Arrays and already support compatible continuations:
 `sorted_keys({"b":2,"a":1}).join_values(",")` is `"a,b"`, and
 `sorted_values({"b":"tail","a":"head"}).last().uppercase()` is `"TAIL"`.
-Perl canonical ordinary free-one calls and zero-extra receiver prefixes now guard
+Perl and Rust canonical ordinary free-one calls and zero-extra receiver prefixes guard
 their Array results before incompatible Hash consumers. For example,
 `sorted_keys({"a":1}).set_key("k",1)` and
 `{"a":1}.sorted_values().set_key("k",1)` return null. Consumer operands are
 skipped; later `.copy().with(){return("ran")}` and eager logical operands keep
 that rejection. Valid empty Arrays still enter a body:
 `sorted_keys({}).with(){return(value.count())}` returns0.
-The [backend handoff](../appendix/backend-handoff.md#perl-ordinary-hash-view-result-guards)
-records focused Perl proof and remaining independent backend work. Original
-producer domains, key ordering and copy depth remain unchanged; registered-function
-receiver contexts and full admission remain separate.
+The backend handoff records focused
+[Perl](../appendix/backend-handoff.md#perl-ordinary-hash-view-result-guards) and
+[Rust](../appendix/backend-handoff.md#rust-ordinary-hash-view-result-guards) proof
+and remaining independent backend work. Ordering and copy depth are retained;
+backend initial-source policies and remaining contexts are listed there.
+
+Rust initial view receivers keep their existing empty-Array fallback:
+`3.sorted_values()`, `undef.sorted_keys()` and `[1].sorted_values()` return[].
+`undef.sorted_values().with(){return(value.count())}` returns0 with its body run.
+Those initial-source permissions are separate from guards on already produced
+results. Rebuild Rust applications against the updated runtime.
 
 Registered Hash-function results also compose on the focused-checked Perl, Rust,
 Dart, Julia and installed PUC5.5.1/LuaJIT routes. With `fn make_hash(){return({"k":1})}`,

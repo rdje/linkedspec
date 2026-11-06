@@ -1,0 +1,26 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_cargo_local.sh",
+    "test",
+    "--manifest-path",
+    "rust/Cargo.toml",
+    "--locked",
+    "--offline",
+    "-j",
+    "1",
+    "-p",
+    "linkedspec-runtime",
+    "--test",
+    "value_copy",
+    "--test",
+    "constructor_result_composition",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

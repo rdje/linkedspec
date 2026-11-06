@@ -4315,4 +4315,43 @@ docs/checkpoints/hash-view-result-guard-perl-2026-11-06/REVIEW.md. This is focus
 Perl proof. New standalone normal `t/hash_view_result_guard_composition.t` needs
 canonical registration23.4.1; full native/cache/transitive custody, process isolation,
 source/callable context closure, independent peers and full23.4 admission remain
-separate. Rust76.2 begins with its own unchanged baseline after clean landing.
+separate. The independent Rust76.2 outcome follows below. P1 follow-up76.6 compares
+the earlier Perl guard change's initial non-Hash receiver policies with its original
+activation; no Perl product regression is inferred from the current coverage gap.
+
+## Rust ordinary Hash-view result guards
+
+Rust76.2 retains canonical positional free-one sorted_keys/sorted_values and
+zero-extra first receiver views inside both direct-fluent and trailing-with guards.
+Wrong Hash consumers skip operands and later copy/logical/with activity.
+`sorted_keys({"a":1}).set_key("k",1)` returns null, and a following copy/with body
+keeps that rejection. Original ordered producers, copy depth, source snapshots,
+signatures and needed errors are preserved.
+
+Keep initial-source policy separate from produced ownership. Initial Number/null/
+Array view receivers retain[]; `undef.sorted_values().with(){return(value.count())}`
+returns0 with its body run. Once an Array has been produced, later consumers use
+its actual kind before Count/CountKeys initial-source exceptions. Existing guarded
+sources retain their prior permissions. Unknown/keyword/traversal and registered-
+function receiver compatibility stay outside this new role.
+
+Actual shared15 has eight healthy/seven RED on native/restored/generated-plan/
+compiled emitted routes. Five own source profiles and two initial-receiver fences
+are acquired in separate original epochs. The unchanged22 maintained normal moves
+15healthy7RED to22PASS; a subsequent single22 four-route epoch is GREEN. All15
+healthy observations and actual22 serialized inputs/emitted module bodies remain
+exact. Rust malformed profiles retain ran/AW and the free Array-source[] fallback;
+Perl's distinct profile is not imported. Required source errors keep the existing
+generated wrapper. Constructor24/copy6 add30 direct tests, total52; scoped formatting
+and eight readonly recovery corruptions pass.
+
+Rebuild Rust apps/runtime. Emitted module bytes, serialization and generated format
+remain unchanged. Actual own/Cargo/source/grammar inputs precede compilation,
+including the public parser's embedded user_function_definition.spec; native/fresh
+inputs/modules and complete raw channels survive under
+docs/checkpoints/hash-view-result-guard-rust-2026-11-06/REVIEW.md. Earlier grammar
+omissions and full native/cache/transitive/toolchain custody remain4.2/SESSION5-owned.
+New normal registration23.4.1, isolation, source/registered-function contexts,
+independent peers and full23.4 admission remain separate. P1 Perl76.6 closes its
+missing historical/current initial-receiver comparison before Dart76.3; Rust
+observations do not establish a Perl source policy or regression.

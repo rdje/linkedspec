@@ -1,0 +1,18 @@
+[
+  {
+    "id": "receiver_input_profile",
+    "body": "return([3.sorted_values(),undef.sorted_values(),[1].sorted_values(),3.sorted_keys(),undef.sorted_keys(),[1].sorted_keys(),{\"b\":2,\"a\":1}.sorted_values()])",
+    "source": "Value:: I {return([3.sorted_values(),undef.sorted_values(),[1].sorted_values(),3.sorted_keys(),undef.sorted_keys(),[1].sorted_keys(),{\"b\":2,\"a\":1}.sorted_values()])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "receiver_null_with_profile",
+    "body": "order=\"\";out=undef.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.sorted_values().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  }
+]

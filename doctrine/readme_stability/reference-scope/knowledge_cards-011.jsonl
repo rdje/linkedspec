@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3340,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-dormant-red.md","sha256":"d337edf3de33fd08b179cdabac188261572401292d3335e26a4287b50791b3e8","type":"member"}
 {"bytes":6620,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-project-data-ssd-storage.md","sha256":"e3550228c15ac1612eb2c23e4cbdc02fb40172c1196a5654a09295f11fe2facb","type":"member"}
 {"bytes":2218,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-push-snapshot-result-guards.md","sha256":"bf24e64b366c2043d912b45f667e4e480e282e4df726e0442722467631fb1c32","type":"member"}
 {"bytes":2580,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-receiver-string-bridge-guards.md","sha256":"cefc98541a51419d38ec3796c53d56b461869cd17e42f7c6ea740929f78dd4d6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5477,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-linked-parsing-architecture.md","sha256":"961e5cdb6fa30ea6aa8fc5bae978eeebdb12759988455846faca76a4e1bb9898","type":"member"}
 {"bytes":3486,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parse-job-annotation-contract.md","sha256":"cd524d2b1db839467ed5651898c87c22e9f16ec5e05453d2634b4006a507286a","type":"member"}
 {"bytes":4123,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parser-registry-dispatch-contract.md","sha256":"7c61df97f1e2e036948f56f102f3f8f05c532c32ebd9c15da6f05102a7fe7a34","type":"member"}
-{"bytes":3188,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-prototype-function-body-selection.md","sha256":"59201bfb2cc311b21e04bfd14f05bbd73e315ba03b51755a6be51cd1df702584","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3188,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-prototype-function-body-selection.md","sha256":"59201bfb2cc311b21e04bfd14f05bbd73e315ba03b51755a6be51cd1df702584","type":"member"}
 {"bytes":5199,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-target-preparation-gaps.md","sha256":"fc1600cdc6fad658e2a62698dd359d440a54a8a33d2e8a2ca3812b26c93a9414","type":"member"}
 {"bytes":13410,"lines":157,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/standalone-lifecycle-block-audit.md","sha256":"1149e44d1936e5bab801dfc6b675cf6a857661c16f3b205b990b24d22570b608","type":"member"}
 {"bytes":17960,"lines":292,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/startup-codebase-reading-inventory.md","sha256":"28c9a78315e9d20747b0de1e2b84618b060f40f2a17911f01201cacf6701b4ae","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2605,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-path-mutation-result-checker-root-kind.md","sha256":"3507d6e4896b7d1633a12c155265f128a83b8e14490ff819bddc5934f5cef3b6","type":"member"}
 {"bytes":5326,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-cursor-algebra-direction.md","sha256":"dd2d24fff8a59cfdcc408ae9416f7307a6a96965f3c9f5d73bd5ffdd4a5b8e20","type":"member"}
 {"bytes":17360,"lines":111,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-neutral-contract-plan.md","sha256":"a2bc9ffbe05e43d53498b1dbbb940348311f6bebd4ee7605a16da0b4c69bbe9a","type":"member"}
-{"bytes":9163,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-source-location-recurring-gate.md","sha256":"9e357910d29595bddbf84bb41312eb4a6042d04c1082bf95d3e74367ec14ded5","type":"member"}

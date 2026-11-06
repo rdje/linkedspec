@@ -1,0 +1,558 @@
+{
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "1d733672349234ebb83205b6c133cef38b1e318fe4455f9ab841351856baec1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/cargo-version-command.json": {
+    "bytes": 162,
+    "sha256": "7c196492230e3ed17a3d73059d063cc9a744d4efd83f857500f385571f6ad600"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/cases.json": {
+    "bytes": 9465,
+    "sha256": "32a6ed6c7d0bbeae2787da81d8ae2d6133349b78f2c586fefa30ad239f8248f9"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/custody.json": {
+    "bytes": 174291,
+    "sha256": "2f09a1287f9810763cccadba0c575a59f6e6b12a114ba783bd44a96e50276754"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-before-first-run.tar.gz": {
+    "bytes": 23405,
+    "sha256": "9cb1e66fae040556f2819d0da429c8487ad63439df3043683edc415d19d2e7e7"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-command.json": {
+    "bytes": 324,
+    "sha256": "55b07881bcd4df803a40ef1f35c091cd16eebf9b9f1c095628be1f1e382f5acc"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-lock-command.json": {
+    "bytes": 303,
+    "sha256": "3781c36a9e02de398c937c9276f9087b8a768ee54ca76c4b58aab206c9907879"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-stderr.log.gz": {
+    "bytes": 121896,
+    "sha256": "b1c391d17e0d762211331f2d19198432cbfa8b00f3a34d23e9816812aaf1a373"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/fresh-stdout.log.gz": {
+    "bytes": 444,
+    "sha256": "7f72adf54401d3a5e5376537305f6179a02baa97064d5200ba72d42d6a0a7471"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-before-first-run.tar.gz": {
+    "bytes": 15355,
+    "sha256": "a211f0d53160999403668dcd2088224239f98ab1d81c693756f99761e75cbbab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-command.json": {
+    "bytes": 417,
+    "sha256": "84592b33d5ff653b505a1ac5f43f3a8045b78ab76e49240c7be2d48d3d0c92fb"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-lock-command.json": {
+    "bytes": 304,
+    "sha256": "1af72f6a75f92e88bda78251bf38e71b16c03062fdb3f0466e71213877de7987"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-stderr.log.gz": {
+    "bytes": 121902,
+    "sha256": "84021222434c8e0159c778cc48268f9c33d6deb2d359eb4b3be996be1c28f51d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/native-stdout.log.gz": {
+    "bytes": 2342,
+    "sha256": "af549771ce97df48115620fc5ff29697280dae9cce971b240e139a19e507a5e5"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/root-before-first-run.tar.gz": {
+    "bytes": 938711,
+    "sha256": "b99ad987e4c1fca486c06492bc1e040443cfd2290246589d3617548a6a80c593"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/after-intake/rustc-version.txt": {
+    "bytes": 192,
+    "sha256": "e61cba8ded8c60e985f759f74a221c4773649021477d00b44c7af411eb8c218c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/capture.py": {
+    "bytes": 6393,
+    "sha256": "3e01161823d63c39ff3b8864240749c40ffe90148ef938a7fb1c004a45875248"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/capture_after.py": {
+    "bytes": 6563,
+    "sha256": "4f4f20cca2c9593321b6c6e5e114ac9e14e1a5de8fe3d8c6bb8c26cfd45d9546"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/capture_format.py": {
+    "bytes": 1172,
+    "sha256": "bce3380f035922109d232e1e5b7a0f1505eb0461e29891a5da0e2513ba4d9d0e"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/capture_receiver.py": {
+    "bytes": 6353,
+    "sha256": "42e0576382ff8bdff7d6a0feb9eab2d9cdeb96fa76011c2c9241d556c50cd839"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/capture_test.py": {
+    "bytes": 6550,
+    "sha256": "c82792777ca9f025d5a7df29772a454e1522fd360dd4abb1597f5b5e8003f69b"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "1d733672349234ebb83205b6c133cef38b1e318fe4455f9ab841351856baec1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/cargo-version-command.json": {
+    "bytes": 162,
+    "sha256": "7c196492230e3ed17a3d73059d063cc9a744d4efd83f857500f385571f6ad600"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/custody.json": {
+    "bytes": 160897,
+    "sha256": "63f89d4dee72219c90ffe0035b7453e16aaf6fe7be2e374aa3d2a1c7d40b5403"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/normal-command.json": {
+    "bytes": 428,
+    "sha256": "182cb22557576ce59b951c5662316a97346c40192a317d313fd6557961a6b19c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/normal-stderr.log.gz": {
+    "bytes": 123214,
+    "sha256": "21d8e56f98b1ac2b75c65a45c5ff2a84345e1a7b61264923d1a3e9a1923f1e53"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/normal-stdout.log.gz": {
+    "bytes": 547,
+    "sha256": "d6a805cd2927c070b7aaa68a8997ddb0201b5d445069b5527ed23886f13e810d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/root-before-first-run.tar.gz": {
+    "bytes": 939730,
+    "sha256": "5ef69d1b36b378ef59aed26784260d46f750623d708cc64c166cb6cda82ab5ec"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/direct/rustc-version.txt": {
+    "bytes": 192,
+    "sha256": "e61cba8ded8c60e985f759f74a221c4773649021477d00b44c7af411eb8c218c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/format/command.json": {
+    "bytes": 170,
+    "sha256": "bedf8794d7a2763d3e7970d910c1b04bfd20fc4ff0562c9180aa33c9549b64c3"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/format/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/format/input-identities.json": {
+    "bytes": 335,
+    "sha256": "653d6211ca6b9d4084583fd6b139cb0d75b3ddc26b65f8be478e250f23c72d42"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/format/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/format/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/freeze_profiles.py": {
+    "bytes": 1648,
+    "sha256": "164823930f63480feb89473c4aaf7c2b3a5e8b1a696b2de8b51b0ffbb09cccca"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "1d733672349234ebb83205b6c133cef38b1e318fe4455f9ab841351856baec1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/cargo-version-command.json": {
+    "bytes": 162,
+    "sha256": "7c196492230e3ed17a3d73059d063cc9a744d4efd83f857500f385571f6ad600"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/cases.json": {
+    "bytes": 8615,
+    "sha256": "9349c92e560926de4a3a2694a704545cfc1a3f3d6e9c9032676f87bda24e4940"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/custody.json": {
+    "bytes": 171829,
+    "sha256": "c2cee72b2b2d1c22d82c3d0d6081ff5ba880a8bd2282c1ff44f4c09ea3c3fd45"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-before-first-run.tar.gz": {
+    "bytes": 22557,
+    "sha256": "5da4424cbc55097ada78c08933feffe4b1b7a369f847b35c6036c26f4c16005f"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-command.json": {
+    "bytes": 318,
+    "sha256": "95e6b9fc3df3d07e76e514c3c52202d56f542de6be4f154d40087d9695f8e68a"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-lock-command.json": {
+    "bytes": 297,
+    "sha256": "b2f757a12c2a4a647827f81af7b2ab5dd65647696003c7ea680faae421b9b42e"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-stderr.log.gz": {
+    "bytes": 121890,
+    "sha256": "5c596a5a16501d98a1fc0345e75453d760371405a07279b604e0037c19fa9188"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/fresh-stdout.log.gz": {
+    "bytes": 444,
+    "sha256": "9489eb592a006d2176994f3933a5fb2470ea06b3d0a17ef0eb62d50cf87c79ee"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-before-first-run.tar.gz": {
+    "bytes": 15295,
+    "sha256": "26f4679d1edbdab165dc6c9ef95cfbca3994d318904ded04e84dbcec04473d46"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-command.json": {
+    "bytes": 405,
+    "sha256": "ad6bb5fd2e508b00f9a12260d079c2c502676fe207a86a23b419cc688e6cb962"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-lock-command.json": {
+    "bytes": 298,
+    "sha256": "459cbc50eff7c333c72c8c0018c97d3e245f3fefeed917b050e7407b51d59482"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-stderr.log.gz": {
+    "bytes": 121897,
+    "sha256": "72baaea81b3469d2879e860c61f49a93504610a40e3e9e2545bf985c9c59072b"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/native-stdout.log.gz": {
+    "bytes": 2271,
+    "sha256": "38f09b7ac3fd9658e0a829f2fff07ef79edc33b9d22480d95f40d20a2a335ac9"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/root-before-first-run.tar.gz": {
+    "bytes": 936516,
+    "sha256": "7550b82f3d4223a0305ebff96279bd22b212e736b164af99c31729778156ed51"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/intake/rustc-version.txt": {
+    "bytes": 192,
+    "sha256": "e61cba8ded8c60e985f759f74a221c4773649021477d00b44c7af411eb8c218c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/activation.txt": {
+    "bytes": 41,
+    "sha256": "1d733672349234ebb83205b6c133cef38b1e318fe4455f9ab841351856baec1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/cargo-version-command.json": {
+    "bytes": 162,
+    "sha256": "7c196492230e3ed17a3d73059d063cc9a744d4efd83f857500f385571f6ad600"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/custody.json": {
+    "bytes": 160903,
+    "sha256": "6e16c1fd1a7327f0fde627a510ab94bf54d13e9f0772f3e5e8ddaa796d30fc9b"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/normal-command.json": {
+    "bytes": 400,
+    "sha256": "f1438036366f54b6e98cdd34bf70ac537d0e5cef56d25e0449b1db901651b9eb"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/normal-stderr.log.gz": {
+    "bytes": 122433,
+    "sha256": "35fe9ba6b3431b398c786f543666ee22aada93342e831910833d484b15df0eee"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/normal-stdout.log.gz": {
+    "bytes": 309,
+    "sha256": "5673e2b1d4914052303f38be90d2b13bfb9b80eb53fe21b4f471a47bee8ef57b"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/root-before-first-run.tar.gz": {
+    "bytes": 939730,
+    "sha256": "6c92892bb1bffb85cb43e9bf8aca9987bdb86a9f77eabf14810dcfb034a00d08"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-after/rustc-version.txt": {
+    "bytes": 192,
+    "sha256": "e61cba8ded8c60e985f759f74a221c4773649021477d00b44c7af411eb8c218c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/activation.txt": {
+    "bytes": 41,
+    "sha256": "1d733672349234ebb83205b6c133cef38b1e318fe4455f9ab841351856baec1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/cargo-version-command.json": {
+    "bytes": 162,
+    "sha256": "7c196492230e3ed17a3d73059d063cc9a744d4efd83f857500f385571f6ad600"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/custody.json": {
+    "bytes": 160904,
+    "sha256": "05dcd7d9d522152723c659067d0b79a6579de2c0f41928e0295e6b033a419d52"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/normal-command.json": {
+    "bytes": 400,
+    "sha256": "f1438036366f54b6e98cdd34bf70ac537d0e5cef56d25e0449b1db901651b9eb"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/normal-exit.txt": {
+    "bytes": 4,
+    "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/normal-stderr.log.gz": {
+    "bytes": 122836,
+    "sha256": "34190820648c9474c617e4ae011ef991ecc6bb0755d1c9547c23e54c92b9b6cb"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/normal-stdout.log.gz": {
+    "bytes": 370,
+    "sha256": "782abc00326f5e3dd43f5749fa5e45c039aad8c4578f99460b915d2495bf2792"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/root-before-first-run.tar.gz": {
+    "bytes": 939297,
+    "sha256": "ac2974dd65660d9264b6025d60e125bcd577554ce2c9614f3f5d36d259ce276c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/normal-before/rustc-version.txt": {
+    "bytes": 192,
+    "sha256": "e61cba8ded8c60e985f759f74a221c4773649021477d00b44c7af411eb8c218c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/observer.rs": {
+    "bytes": 4083,
+    "sha256": "7842ab8315303c8e808eae1c74a4f653e7090831b0ae1ca382c89a61f0798cba"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/prepare.py": {
+    "bytes": 2846,
+    "sha256": "5ab7483a287c4076047a70f4b976c110e2e4abc620de39116cd455df9739efeb"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/prepare_after.py": {
+    "bytes": 1171,
+    "sha256": "c0c7dec1c9f1f81d289522f127af5a3f52531a9b91be1b4b8158ca2e6f0985a3"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/prepare_normal.py": {
+    "bytes": 4220,
+    "sha256": "664615b278aa82eebff12c4c9adbcb9c6e4a0fabec2ab484238eaa65d79913a8"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/prepare_receiver.py": {
+    "bytes": 1812,
+    "sha256": "ecbe1c1d0e2bebb60d4b1ea68c65f4330c9dabeb4f6b8628dd7c3f4bbfb8de1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/producer-change.patch.gz": {
+    "bytes": 1689,
+    "sha256": "33acdaf9a6718c8c0f717d34167096a408f277ee7582329b676c9ecaadc9ec13"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/profile-sources.json": {
+    "bytes": 1689,
+    "sha256": "a68939e88f5af108932d9cab8aaafe8b7388197f9ec5af5457f3dc3658936371"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/raw-identities.json": {
+    "bytes": 13584,
+    "sha256": "439735c49305e75dc8867b9d942bc8d94acdf72482a394df4626d70c0158c86f"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "1d733672349234ebb83205b6c133cef38b1e318fe4455f9ab841351856baec1d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/cargo-version-command.json": {
+    "bytes": 162,
+    "sha256": "7c196492230e3ed17a3d73059d063cc9a744d4efd83f857500f385571f6ad600"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/cases.json": {
+    "bytes": 853,
+    "sha256": "28b9426244ba9ab88aee7806493b565a26452436b6be739c341938d89feb9f14"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/custody.json": {
+    "bytes": 163736,
+    "sha256": "982e6ce2f5146444a8fc4e2f391d164206f0bdaac5dbb85f34f7976853e2c821"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-before-first-run.tar.gz": {
+    "bytes": 15513,
+    "sha256": "62ca020a088ba0abfb67a8919559fb9c490c527612243a422589344f4d46093e"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-command.json": {
+    "bytes": 327,
+    "sha256": "424cc3d12e3d01e97218d05d4d9e44ef16bacb80a3dbd067e64fc9f52d4e6041"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-lock-command.json": {
+    "bytes": 306,
+    "sha256": "917293bb0379dbdb7203225f3a410234608cb3c2d297b2e541886a1388d8a698"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-stderr.log.gz": {
+    "bytes": 121899,
+    "sha256": "4d5fc4194b06d1b9bf30fd636dcd940bf678a4184cead0a45d6ea55b3f01b5ed"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/fresh-stdout.log.gz": {
+    "bytes": 107,
+    "sha256": "f14cbeaf291ca13ba2bc7e7d731d970264937543ffdac986c356420beffc4cbc"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-before-first-run.tar.gz": {
+    "bytes": 14488,
+    "sha256": "8ec5e8e1889ce35e40d2ebe850b7b7e03dd342c6927e1436250365a45dabbbee"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-command.json": {
+    "bytes": 423,
+    "sha256": "cb13c42ec37fab3d5956a82178dd0e48b264c6d0f7e53fd7fb0dfeb8d5ad27dd"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-lock-command.json": {
+    "bytes": 307,
+    "sha256": "a4aa11ff67387121cba3c2e9d75e8add8904ddf07d81605e33a3b540a7f04334"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-stderr.log.gz": {
+    "bytes": 121904,
+    "sha256": "fc340fc30d2c2f7a4593def378fb78ad4277d4346f9ca720ae9f0abb1cd4bd70"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/native-stdout.log.gz": {
+    "bytes": 784,
+    "sha256": "b834775c538c730214f226943a70a64689aacf53366a2e9fa7437d5da201dd46"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/root-before-first-run.tar.gz": {
+    "bytes": 937502,
+    "sha256": "e36adc78f480bdadb9de308cfa54635882972571eb7421a653f0995a3eb1c31e"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-intake/rustc-version.txt": {
+    "bytes": 192,
+    "sha256": "e61cba8ded8c60e985f759f74a221c4773649021477d00b44c7af411eb8c218c"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/receiver-profile-sources.json": {
+    "bytes": 853,
+    "sha256": "28b9426244ba9ab88aee7806493b565a26452436b6be739c341938d89feb9f14"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/review.py": {
+    "bytes": 14070,
+    "sha256": "384674704b47eca4bbe562fbd32f4d242ebce79cbb7a00f4d98d7b5c20649a3e"
+  },
+  "docs/checkpoints/hash-view-result-guard-rust-2026-11-06/seal.py": {
+    "bytes": 2289,
+    "sha256": "79113f9a14c016b18fde8a7f2be9d55dfe174394203fa6ce80620d34c62f67dc"
+  }
+}

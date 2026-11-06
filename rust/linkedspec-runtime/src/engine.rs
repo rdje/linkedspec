@@ -6541,6 +6541,19 @@ impl Engine {
                     || Self::is_ordinary_length_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"));
+                let hash_view_chain = self.is_ordinary_hash_view_result_chain(receiver, calls);
+                let hash_view_source_prefix = hash_view_chain
+                    && !kind_guarded_source
+                    && !Self::is_ordinary_count_result_chain(receiver, &[])
+                    && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+                    && !self.is_ordinary_hash_view_result_chain(receiver, &[])
+                    && calls.first().is_some_and(|first| {
+                        matches!(first.method.as_str(), "sorted_keys" | "sorted_values")
+                            && first.args.is_empty()
+                    });
+                // Initial views retain their source fallback; the produced Array
+                // owns every continuation before later size-source permissions.
+                kind_guarded_source |= hash_view_chain;
                 let key_count_chain = Self::is_ordinary_key_count_result_chain(receiver, calls);
                 let key_count_source_prefix = key_count_chain
                     && !kind_guarded_source
@@ -6557,7 +6570,8 @@ impl Engine {
                     let mut remaining = calls.as_slice();
                     // Initial size sources retain their existing zero fallback.
                     // Already produced/selected/copied results keep their kind guard.
-                    if key_count_source_prefix
+                    if hash_view_source_prefix
+                        || key_count_source_prefix
                         || (count_chain
                             && !kind_guarded_source
                             && !Self::is_ordinary_count_result_chain(receiver, &[])
@@ -7228,6 +7242,17 @@ impl Engine {
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
+        let hash_view_chain = self.is_ordinary_hash_view_result_chain(receiver, calls);
+        let hash_view_source_prefix = hash_view_chain
+            && !kind_guarded_value
+            && !Self::is_ordinary_count_result_chain(receiver, &[])
+            && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+            && !self.is_ordinary_hash_view_result_chain(receiver, &[])
+            && calls.first().is_some_and(|first| {
+                matches!(first.method.as_str(), "sorted_keys" | "sorted_values")
+                    && first.args.is_empty()
+            });
+        kind_guarded_value |= hash_view_chain;
         let key_count_chain = Self::is_ordinary_key_count_result_chain(receiver, calls);
         let key_count_source_prefix = key_count_chain
             && !kind_guarded_value
@@ -7261,7 +7286,8 @@ impl Engine {
             // Guard actual selected/copied kinds and scalar producers before
             // incompatible container operands, preserving the completed prefix.
             if (reduced_value || logical_prefix || kind_guarded_value)
-                && !(index == 0 && (count_source_prefix || key_count_source_prefix))
+                && !(index == 0
+                    && (count_source_prefix || key_count_source_prefix || hash_view_source_prefix))
                 && call.method != "copy"
                 && !Self::is_generic_receiver_value_method(&call.method)
             {
@@ -9014,6 +9040,71 @@ impl Engine {
         calls
             .first()
             .is_some_and(|first| first.method == "count_keys" && first.args.is_empty())
+    }
+
+    // Ordered Hash-view producers retain their input policy. Only canonical
+    // ordinary calls and zero-extra prefixes gain result-kind ownership.
+    fn is_ordinary_hash_view_result_chain(
+        &self,
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls.iter().any(|call| {
+            Self::is_tree_traversal_receiver_method(&call.method)
+                || call
+                    .args
+                    .iter()
+                    .any(|arg| matches!(arg, Arg::Keyword { .. }))
+                || !(Self::is_generic_receiver_value_method(&call.method)
+                    || Self::is_array_receiver_value_chain_method(&call.method)
+                    || Self::is_hash_receiver_value_chain_method(&call.method)
+                    || Self::is_string_receiver_value_chain_method(&call.method)
+                    || Self::is_number_receiver_value_chain_method(&call.method)
+                    || Self::is_receiver_with_trailing_block_call(call))
+        }) {
+            return false;
+        }
+        // Registered-function receiver compatibility remains on its existing route.
+        if let Expr::Call { name, args } = receiver {
+            if self.spec.find_function(name).is_some() {
+                return false;
+            }
+            if matches!(name.as_str(), "sorted_keys" | "sorted_values")
+                && args.len() == 1
+                && matches!(
+                    &args[0],
+                    Arg::Positional(
+                        Expr::Variable { .. }
+                            | Expr::NumberLiteral { .. }
+                            | Expr::StringLiteral { .. }
+                            | Expr::BooleanLiteral { .. }
+                            | Expr::Undef
+                            | Expr::ArrayLiteral { .. }
+                            | Expr::HashLiteral { .. }
+                            | Expr::BlockValue { .. }
+                            | Expr::Call { .. }
+                            | Expr::FluentChain { .. }
+                            | Expr::ReceiverMutationChain { .. }
+                            | Expr::IndexedVar { .. }
+                            | Expr::NestedAccess { .. }
+                            | Expr::ValueAccess { .. }
+                            | Expr::AssignScalar { .. }
+                            | Expr::AssignArrayAppend { .. }
+                            | Expr::AssignHashIndex { .. }
+                            | Expr::AssignNestedAccess { .. }
+                            | Expr::CodeblockLiteral(_)
+                    )
+                )
+            {
+                return true;
+            }
+        }
+        calls.first().is_some_and(|first| {
+            matches!(first.method.as_str(), "sorted_keys" | "sorted_values")
+                && first.args.is_empty()
+        })
     }
 
     // Membership retains numeric flags, equality and nullable-source behavior.

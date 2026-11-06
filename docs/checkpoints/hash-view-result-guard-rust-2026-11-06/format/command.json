@@ -1,0 +1,8 @@
+[
+  "rustfmt",
+  "--edition",
+  "2024",
+  "--check",
+  "rust/linkedspec-runtime/src/engine.rs",
+  "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs"
+]
