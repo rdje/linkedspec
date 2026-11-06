@@ -1,0 +1,24 @@
+{"actual": {"value": [5, 5, null, 0]}, "generated_error": null, "id": "length_compatible", "matches_target": true}
+{"actual": {"value": [null, null, ""]}, "generated_error": null, "id": "length_free_guard", "matches_target": true}
+{"actual": {"value": [null, "S"]}, "generated_error": null, "id": "length_receiver_guard", "matches_target": true}
+{"actual": {"value": [1, "recovered", 1]}, "generated_error": null, "id": "zero_null_with", "matches_target": true}
+{"actual": {"value": ["TAIL", "TAIL"]}, "generated_error": null, "id": "explicit_bridges", "matches_target": true}
+{"actual": {"value": [5, "x", "SA"]}, "generated_error": null, "id": "source_once_snapshot", "matches_target": true}
+{"actual": {"value": [null, ""]}, "generated_error": null, "id": "function_guard", "matches_target": true}
+{"actual": {"error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "generated_error": {"error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "id": "needed_source_error", "matches_target": true}
+{"actual": {"value": [null, ""]}, "generated_error": null, "id": "malformed_receiver", "matches_target": true}
+{"actual": {"value": [null, ""]}, "generated_error": null, "id": "copy_guard", "matches_target": true}
+{"actual": {"value": [null, ""]}, "generated_error": null, "id": "logical_guard", "matches_target": true}
+{"actual": {"value": [false, false, "DWEF"]}, "generated_error": null, "id": "logical_valid_null_zero", "matches_target": true}
+{"actual": {"value": null}, "generated_error": null, "id": "seeded_hash", "matches_target": true}
+{"actual": {"value": [null, "", null, ""]}, "generated_error": null, "id": "count_contrast", "matches_target": true}
+{"actual": {"value": [null, null, ""]}, "generated_error": null, "id": "compatible_prefix_guard", "matches_target": true}
+{"actual": {"value": [1, 1, 1, 2, 2, null]}, "generated_error": null, "id": "scalar_array_sources", "matches_target": null}
+{"actual": {"value": null}, "generated_error": null, "id": "free_length_count", "matches_target": true}
+{"actual": {"value": null}, "generated_error": null, "id": "receiver_length_count", "matches_target": true}
+{"actual": {"value": [null, "S"]}, "generated_error": null, "id": "length_count_with", "matches_target": true}
+{"actual": {"value": [null, ""]}, "generated_error": null, "id": "length_count_copy_logical", "matches_target": true}
+{"actual": {"value": [null, null, null, null]}, "generated_error": null, "id": "produced_null_zero_count", "matches_target": true}
+{"actual": {"value": [0, 0, 0, 0, 0, 2, 2]}, "generated_error": null, "id": "initial_count_policy", "matches_target": true}
+{"actual": {"value": [2, 2]}, "generated_error": null, "id": "explicit_array_bridge", "matches_target": true}
+{"actual": {"error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "generated_error": {"error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"}, "id": "needed_length_source_error", "matches_target": true}

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — Length source ownership must feed both Rust guard loops
+
+Current direct and trailing-with kind-source lists both omitted Length; Count initial-source exceptions then also consumed produced Length data as zero fallback. An exact ordinary Length role admitted before that decision fixes guards without producer normalization. Twelve healthy observations/source domains and24 emitted module bodies stay exact; native/restored/plan/compiled emitted24 and final focused44 pass. Generated errors retain their existing wrapper profile, corrected in the readonly inspector without rerunning observations. Final normal differs only by one removed unused json import. Actual source/manifests/resolved locks/IR/modules precede respective runs; all raw diagnostics are sealed losslessly. Broader closure and upstream warnings retain explicit owners.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — Result ownership must precede an initial-source exception
 
 Public Length.count emission used a constant-true Count guard because Length joined emitted-result dispatch after Count initial fallback was decided. Moving the same role earlier rejects produced values while preserving standalone Count zero; original receiver/bridge/error controls stay. Qualified8 and existing19 pass. A git ls-files capture omits new untracked fixture inputs unless explicitly listed: replay caught KeyError, originals remain frozen and corrected original/final runs include the actual fixture before execution. Historical first-run gaps remain4.2-owned rather than retroactively upgraded.

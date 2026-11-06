@@ -1,0 +1,14 @@
+{"actual": {"value": [5, 5, null, 0]}, "id": "length_compatible", "matches_target": true}
+{"actual": {"value": [[], 4, "AKV"]}, "id": "length_free_guard", "matches_target": false}
+{"actual": {"value": ["ran", "SAW"]}, "id": "length_receiver_guard", "matches_target": false}
+{"actual": {"value": [1, "recovered", 1]}, "id": "zero_null_with", "matches_target": true}
+{"actual": {"value": ["TAIL", "TAIL"]}, "id": "explicit_bridges", "matches_target": true}
+{"actual": {"value": [5, "x", "SA"]}, "id": "source_once_snapshot", "matches_target": true}
+{"actual": {"value": ["ran", "AW"]}, "id": "function_guard", "matches_target": false}
+{"actual": {"value": [5, 5, null, 0]}, "id": "length_compatible", "matches_target": true}
+{"actual": {"value": [[], 4, "AKV"]}, "id": "length_free_guard", "matches_target": false}
+{"actual": {"value": ["ran", "SAW"]}, "id": "length_receiver_guard", "matches_target": false}
+{"actual": {"value": [1, "recovered", 1]}, "id": "zero_null_with", "matches_target": true}
+{"actual": {"value": ["TAIL", "TAIL"]}, "id": "explicit_bridges", "matches_target": true}
+{"actual": {"value": [5, "x", "SA"]}, "id": "source_once_snapshot", "matches_target": true}
+{"actual": {"value": ["ran", "AW"]}, "id": "function_guard", "matches_target": false}

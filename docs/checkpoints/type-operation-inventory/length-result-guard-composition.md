@@ -2,7 +2,7 @@
 
 Owner: TYPE-REFERENCE-BOOK.1.2.23.1.35; implementation family23.3.74.
 Existing count-length-results.md3, catalog Length and typed result/copy/eager-logical
-contracts retain authority. Status: Perl74.1 implemented with focused checks; independent peers74.2-.5 pending.
+contracts retain authority. Status: Perl74.1/74.6 and Rust74.2 implemented with focused checks; independent Dart/Julia/Lua74.3-.5 pending.
 
 Canonical ordinary length(value), one positional recognized value, and receiver.length()
 with zero extra operands keep current Number/null results. Length of a scalar is its
@@ -74,3 +74,19 @@ probe/new-normal modules/declared phase inputs survive in
 length-count-owner-perl-2026-11-06. This remaining gap does not invalidate the
 original bounded19 outcomes or establish when the old behavior was introduced.
 Independent Rust74.2 follows this P1; no peer failure or full admission claim.
+
+## Bounded Rust74.2
+
+Independent native/restored/plan/compiled emitted shared24 controls12PASS12RED
+become24PASS; all twelve healthy observations are exact. Its actual initial
+source-domain profile [1,1,1,2,2,null] is frozen before normal execution. Canonical
+positional free-one/zero-extra Length role joins direct/trailing-with kind guards
+before Count initial-source exception selection. Preserve both producers/domains/
+signatures/copy depths/function/parser/schema; valid null/zero, eager copy/logical/
+with/source snapshots/errors and bridges stay. Actual24 emitted module bodies
+are unchanged; rebuild Rust applications/runtime. Final unused-import-only cleanup,
+Length24/Count-length1/Count guards19=44, scoped rustfmt and five readonly corruptions
+pass. Actual declared source/manifests/locks/modules/full raw phases and inspector
+wrapper qualification survive in length-guard-rust-2026-11-06. Dependency warnings
+stay public upstream-owned; broader native/transitive custody, canonical selection,
+isolation and full admission remain open. Independent Dart74.3 next.

@@ -8,7 +8,7 @@ answers:
   - "where are the count_keys source guard gaps owned"
   - "how is the Length selection summary recovered after Trace stdout"
 date: 2026-11-06
-status: Perl74.1/produced-source74.6 focused-checked; independent Rust74.2 next; key-count75 P1 owned
+status: Perl74.1/74.6 and Rust74.2 focused-checked; independent Dart74.3 next; key-count75 P1 owned
 tags: [length, count_keys, source, guards, perl, copy, logical, with]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.35; declared own inputs/raw public observations and actual supplemental emitted modules in docs/checkpoints/length-selection-2026-11-05; shared16 frozen before production."
 reverify: "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/length_result_guard_composition.t t/length_count_source_ownership.t; readonly retained RED/GREEN: bash tools/run_python_project_data.sh docs/checkpoints/length-guard-perl-2026-11-06/review.py. Historical selection writers are one-shot, never replay."
@@ -71,3 +71,5 @@ exposed KeyError. Original first phases/producer/reviewer/manifest survive witho
 fixture pre-execution credit. Corrected qualified original/final epochs freeze301
 declared inputs including the actual fixture before proof and reproduce the same
 outcomes; first-run/native-transitive gaps remain4.2-owned. See qualification.md.
+
+Rust74.2 now independently repairs both source guards and produced-Length/Count ownership: [[rust-length-result-guards]]. Dart74.3 is next; remaining peers require their own baseline.

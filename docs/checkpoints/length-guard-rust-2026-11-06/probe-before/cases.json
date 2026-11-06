@@ -1,0 +1,248 @@
+[
+  {
+    "id": "length_compatible",
+    "source": "Value:: I {return([length(\"tail\").add(1),\"tail\".length().add(1),length(undef),length(\"\")])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      5,
+      5,
+      null,
+      0
+    ]
+  },
+  {
+    "id": "length_free_guard",
+    "source": "Value:: I {order=\"\";a=length(\"tail\").take({order=cat(order,\"A\");1});b=length(\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([a,b,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "length_receiver_guard",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");\"tail\"}.length().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "zero_null_with",
+    "source": "Value:: I {return([length(\"\").coalesce(7).add(1),length(undef).with(){return(\"recovered\")},length(\"\").with(){return(value.add(1))}])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      1,
+      "recovered",
+      1
+    ]
+  },
+  {
+    "id": "explicit_bridges",
+    "source": "Value:: I {return([length(\"tail\").cat(\",tail\").split(\",\").last().uppercase(),length(\"tail\").with(){return([\"head\",\"tail\"])}[-1].uppercase()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "TAIL",
+      "TAIL"
+    ]
+  },
+  {
+    "id": "source_once_snapshot",
+    "source": "Value:: I {source=\"tail\";order=\"\";out=length({order=cat(order,\"S\");source}).add({source=\"x\";order=cat(order,\"A\");1});return([out,source,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      5,
+      "x",
+      "SA"
+    ]
+  },
+  {
+    "id": "function_guard",
+    "source": "fn size(){order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])} Value:: I {return(size())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_source_error",
+    "source": "Value:: I {return(length({items=\"text\";push(items,\"x\")}).coalesce(\"masked\"))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "malformed_receiver",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");\"tail\"}.length({order=cat(order,\"A\");0}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "copy_guard",
+    "source": "Value:: I {order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_guard",
+    "source": "Value:: I {order=\"\";out=length(\"tail\").take({order=cat(order,\"A\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_valid_null_zero",
+    "source": "Value:: I {order=\"\";a=length(undef).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(value)};b=length(\"\").copy().and({order=cat(order,\"E\");true}).with(){order=cat(order,\"F\");return(value)};return([a,b,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      false,
+      false,
+      "DWEF"
+    ]
+  },
+  {
+    "id": "seeded_hash",
+    "source": "Value:: I {return(length(\"tail\").set_key(\"k\",1))}",
+    "input": "x",
+    "rule": "Value",
+    "expected": null
+  },
+  {
+    "id": "count_contrast",
+    "source": "Value:: I {order=\"\";a=length([]).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};length_order=order;order=\"\";b=count([]).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([a,length_order,b,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "",
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "compatible_prefix_guard",
+    "source": "Value:: I {order=\"\";a=length(\"tail\").add(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};b=length(\"tail\").uppercase().take({order=cat(order,\"A\");1});return([a,b,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "scalar_array_sources",
+    "source": "Value:: I {return([length(0),length(false),false.length(),length([1,2]),[1,2].length(),undef.length()])}",
+    "input": "x",
+    "rule": "Value",
+    "perl_expected": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      null
+    ],
+    "domain_note": "Existing producer observation; freeze each peer before edits rather than importing Perl Bool-to-text behavior."
+  },
+  {
+    "id": "free_length_count",
+    "source": "Value:: I {return(length(\"tail\").count())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": null
+  },
+  {
+    "id": "receiver_length_count",
+    "source": "Value:: I {return(\"tail\".length().count())}",
+    "input": "x",
+    "rule": "Value",
+    "expected": null
+  },
+  {
+    "id": "length_count_with",
+    "source": "Value:: I {order=\"\";out=length({order=cat(order,\"S\");\"tail\"}).count().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      "S"
+    ]
+  },
+  {
+    "id": "length_count_copy_logical",
+    "source": "Value:: I {order=\"\";out=length(\"tail\").count().copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "produced_null_zero_count",
+    "source": "Value:: I {return([length(undef).count(),length(\"\").count(),length([]).count(),length(\"tail\").count()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": "initial_count_policy",
+    "source": "Value:: I {return([count(4),4.count(),count(undef),undef.count(),{undef}.count(),count([1,2]),[1,2].count()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  {
+    "id": "explicit_array_bridge",
+    "source": "Value:: I {return([length(\"x\").with(){return([1,2])}.count(),length(\"x\").cat(\",tail\").split(\",\").count()])}",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      2,
+      2
+    ]
+  },
+  {
+    "id": "needed_length_source_error",
+    "source": "Value:: I {return(length({items=\"text\";push(items,\"x\")}).count().coalesce(\"masked\"))}",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  }
+]

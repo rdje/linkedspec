@@ -6538,6 +6538,7 @@ impl Engine {
                     || Self::is_ordinary_contains_result_chain(receiver, calls)
                     || Self::is_ordinary_index_result_chain(receiver, calls)
                     || Self::is_ordinary_has_key_result_chain(receiver, calls)
+                    || Self::is_ordinary_length_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"));
                 let count_chain = Self::is_ordinary_count_result_chain(receiver, calls);
@@ -7212,6 +7213,7 @@ impl Engine {
             || Self::is_ordinary_contains_result_chain(receiver, calls)
             || Self::is_ordinary_index_result_chain(receiver, calls)
             || Self::is_ordinary_has_key_result_chain(receiver, calls)
+            || Self::is_ordinary_length_result_chain(receiver, calls)
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
@@ -8894,6 +8896,55 @@ impl Engine {
         calls
             .first()
             .is_some_and(|first| first.method == "count" && first.args.is_empty())
+    }
+
+    // Length retains scalar/Array sources and its nullable numeric result.
+    // Only canonical free-one calls and zero-operand prefixes qualify.
+    fn is_ordinary_length_result_chain(
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls
+            .iter()
+            .any(|call| Self::is_tree_traversal_receiver_method(&call.method))
+        {
+            return false;
+        }
+        if let Expr::Call { name, args } = receiver
+            && name == "length"
+            && args.len() == 1
+            && matches!(
+                &args[0],
+                Arg::Positional(
+                    Expr::Variable { .. }
+                        | Expr::NumberLiteral { .. }
+                        | Expr::StringLiteral { .. }
+                        | Expr::BooleanLiteral { .. }
+                        | Expr::Undef
+                        | Expr::ArrayLiteral { .. }
+                        | Expr::HashLiteral { .. }
+                        | Expr::BlockValue { .. }
+                        | Expr::Call { .. }
+                        | Expr::FluentChain { .. }
+                        | Expr::ReceiverMutationChain { .. }
+                        | Expr::IndexedVar { .. }
+                        | Expr::NestedAccess { .. }
+                        | Expr::ValueAccess { .. }
+                        | Expr::AssignScalar { .. }
+                        | Expr::AssignArrayAppend { .. }
+                        | Expr::AssignHashIndex { .. }
+                        | Expr::AssignNestedAccess { .. }
+                        | Expr::CodeblockLiteral(_)
+                )
+            )
+        {
+            return true;
+        }
+        calls
+            .first()
+            .is_some_and(|first| first.method == "length" && first.args.is_empty())
     }
 
     // Membership retains numeric flags, equality and nullable-source behavior.

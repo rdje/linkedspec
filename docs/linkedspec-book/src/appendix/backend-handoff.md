@@ -3668,7 +3668,7 @@ The owned artifact-growth review23.4.8 precedes unrelated feature selection;
 full admission remains separate.
 
 
-## Length continuations: Perl guards and remaining peers
+## Length continuations: Perl and Rust guards, remaining peers
 
 The next target is ordinary `length(value)` and `value.length()` result guards.
 The existing producer keeps its Number/null values: `length("tail").add(1)` is `5`,
@@ -3707,8 +3707,8 @@ actual null/zero data from an earlier rejected consumer.
 
 The unchanged Perl normal passes nineteen groups after ten original failures;
 nine original healthy programs remain exact. Direct Count/length/logical
-preservation checks pass. Rust74.2, Dart74.3, Julia74.4 and installed Lua74.5 each
-need independent assessment; preserve their current producer domains. No new
+preservation checks pass. Rust74.2 now passes its independent assessment and focused repair. Dart74.3 is
+next, followed by Julia74.4 and installed Lua74.5; preserve their producer domains. No new
 method, signature, conversion policy or schema is introduced.
 
 A follow-up Perl74.6 check distinguishes initial Count input from an existing
@@ -3730,3 +3730,22 @@ checks three corruptions. Initial and supplemental capture boundaries differ;
 this is not complete native/transitive custody or independent-process isolation.
 Two independently observed Perl `count_keys` guard gaps are owned P1 family75
 immediately after74, before unrelated selection. Full admission stays pending.
+
+
+Rust74.2 applies Length source guards in both direct and trailing-with execution,
+including the produced-Length/initial Count distinction above. Its twenty-four
+authored source programs now agree on native, restored, generated-plan and
+independently compiled emitted routes. For example,
+`length("tail").take(1).copy().and(true).with(){return("ran")}` returns null and
+skips later effects, while legitimate null/zero still follow ordinary eager
+logical and with behavior. Count's independent initial zero fallback remains.
+
+Twelve original healthy observations are unchanged, and the separately observed
+Rust scalar/Array source profile matches `[1,1,1,2,2,null]`. The twenty-four
+emitted module texts are byte-identical before and after this runtime repair.
+Rebuild Rust applications/runtime to use it; no generated format changes.
+Final Length and directly dependent Count/length checks pass forty-four groups.
+Retained actual Cargo inputs, raw results and replay qualifications are in
+`docs/checkpoints/length-guard-rust-2026-11-06/`. Dependency warnings retain their
+existing upstream owner. Full native/transitive custody, canonical selection,
+general isolation, remaining backends and full admission stay pending.

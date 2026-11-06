@@ -1596,6 +1596,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
   Goal: Register new bounded feature regressions in canonical CI before full admission/final push.
+  Addition74.2: Inventory Rust length_result_guard_composition/shared24 and length_result_guard_rust_domain.json against actual package/canonical discovery. Focused44 does not establish canonical coverage; classify existing automatic selection before adding any duplicate entry.
   Addition74.6: t/length_count_source_ownership.t/shared8 fixture require exact canonical presence/syntax/execution registration; focused8PASS/existing19PASS do not establish discovery.
   Addition74.1: t/length_result_guard_composition.t (shared16 plus three host-seed groups) and tests/fixtures/length_result_guard_cases.json require exact canonical presence/syntax/execution registration before admission/push. Current focused19PASS does not establish inclusion.
   Existing authority: docs/knowledge/perl-receiver-copy-canonical-selection.md states the runner uses exact explicit suites; future files require registration, with historical inverse/custody constraints.

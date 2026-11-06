@@ -71,6 +71,7 @@
 {"bytes":5385,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-large-number-conversion-defect.md","sha256":"3e5a8cb1fc069e6de50d1fe8766e1f4dbbc8a814f6345fe82475db4a15255644","type":"member"}
 {"bytes":3202,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-leading-input-trivia-boundary.md","sha256":"29e9abff9a3c7721c9612913f2bf72f9e60de941fcb8fb57bbdcccde835ceec7","type":"member"}
 {"bytes":4920,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-legacy-shipped-spec-oracle-smokes.md","sha256":"42324792ec6c09ef3e563e0390927e7de9cfcfba35a766c968bfa3972b629e3d","type":"member"}
+{"bytes":3057,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.2","path":"docs/knowledge/rust-length-result-guards.md","sha256":"31082a12947c069eb8d893d797e4ee07ccb982cf132e1a57de0bfbc7bce2d421","type":"member"}
 {"bytes":2797,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lexical-result-source-guards.md","sha256":"6d38d89a947d7930d792fd428d00e28b1af01e44f3543c80a9ae74ba70e412ab","type":"member"}
 {"bytes":2365,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lifecycle-i-return-dispatch-parity.md","sha256":"0acad5ea98416724010ca5f740288199ba5f487beec9e285ed63c0855f8ea45a","type":"member"}
 {"bytes":2412,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-local-match-writer-presence-repair.md","sha256":"eca4ce770d9e329c86a9dad60d8e023e1a6af4495c6d40ec7cd6f8d5b0eab3d1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
 {"bytes":3281,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-error-boundary-string-result.md","sha256":"cbdfc4a4b903a287ddf53dd55a3256e6607565428cebd7deb9d7df17ee0edff2","type":"member"}
 {"bytes":4155,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-structured-diagnostics.md","sha256":"2332a9bb056478f2c50b6cc670de1b3d839defd68dc402e58556b8a4e4edf104","type":"member"}
-{"bytes":9272,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalar-helper-null-and-empty-drift.md","sha256":"ef01c668f4dbca2ade9ec7b4ee388083801c3cb58a40c5c9678e6c974b11fb05","type":"member"}

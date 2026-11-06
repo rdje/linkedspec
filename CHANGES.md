@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — guard Rust Length results and produced-source ownership
+
+Canonical positional free-one/zero-extra Length role now joins direct/trailing-with kind guards before Count initial fallback. Authored24 controls12PASS12RED become24PASS on native/restored/plan/compiled emitted routes; twelve healthy observations/domains exact. Actual24 module texts unchanged: rebuild Rust apps/runtime. Remove one unused test import only; final44/scoped format and five readonly corruptions pass. Actual declared Cargo inputs/producers/raw phases retained losslessly; initial inspector wrapper qualification/upstream warning ownership explicit. Independent Dart74.3 next; full native/transitive custody, canonical selection, isolation and full admission remain separate.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — preserve produced Length ownership before Count fallback
 
 A remaining Length-to-Count edge misclassified produced numeric/null data as initial Count input. Admit Length ownership before selecting Count fallback; both producers and initial Count zero stay. Qualified unchanged8 groups4PASS4RED become8PASS, four healthy observations exact; existing19 Length/host controls pass. First capture omitted an untracked fixture; preserve originals/failure and explicitly qualify that gap, then capture actual fixture before the corrected RED/GREEN pair. Readonly recovery/four corruptions pass. Count parent label corrected. Independent Rust74.2 next; no broad suite/peer/full custody/admission claim.
