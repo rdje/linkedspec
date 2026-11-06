@@ -4276,6 +4276,43 @@ retained in docs/checkpoints/copy-result-guard-perl-2026-11-06/.
 This is focused Perl implementation proof. The new standalone normal is
 `t/copy_result_guard_composition.t`; explicit canonical registration23.4.1 and
 full native/cache/transitive custody, source-context discovery, general isolation,
-unassessed peers and full23.4 admission remain separately owned. Perl Hash-view76.1
-must establish its own actual unchanged baseline at this compiler before guard
-edits. No peer or Hash-view repair is inferred from the copy fix.
+unassessed peers and full23.4 admission remain separately owned. The independent
+Perl Hash-view76.1 outcome follows below; no view or peer repair is inferred from
+the copy fix alone.
+
+## Perl ordinary Hash-view result guards
+
+Perl76.1 guards the Array results of canonical ordinary free-one sorted_keys/
+sorted_values calls and zero-extra first receiver prefixes. A wrong Hash consumer
+returns null and skips its operands, later copies, logical operands and immediate
+with bodies. For example,
+`sorted_values({"a":1}).set_key("k",1).copy().with(){return("ran")}` stays null.
+Compatible Arrays, selected values and explicit bridges retain their actual kinds;
+`sorted_keys({}).with(){return(value.count())}` still returns0 with its body run.
+The original view producers, key ordering, copy depth, source-once snapshots,
+source domains, arities and needed errors remain unchanged. Regenerate emitted Perl.
+
+Actual shared15 at the post-copy compiler has eight healthy/seven RED programs;
+the repaired same15 all pass native/fresh. Eight healthy semantic observations and
+actual after/direct emitted module/handler bodies are preserved. Five independently
+frozen Perl source/arity/error profiles remain unchanged. Malformed extra-argument
+forms stay nonadmitted; raw/registered-function receiver compatibility routes are
+outside this new prefix role. A one-role source inverse reproduces the reference
+error; exact restoration returns null with operands skipped. Eight readonly
+recovery corruptions reject.
+
+The first nearest check exposed one obsolete scalar-isolation expectation.
+Existing Length74.1 ownership makes `"abc".length().sorted_values()` null because
+the Number result rejects a Hash consumer. The free producer's
+`sorted_values(length("abc"))` still returns[]. Actual same-path activation/current
+controls return[null,[]] with byte-identical emitted bodies. Correct exactly that
+fixture expectation; retain the failed first run. The qualified same four files
+pass67 top-level tests: new views15, scalar-isolation15, copy12 and constructor25,
+including the existing localized host-Hash seeds. No introduction date is inferred.
+
+Evidence, actual source/instrument/input archives, modules and full channels:
+docs/checkpoints/hash-view-result-guard-perl-2026-11-06/REVIEW.md. This is focused
+Perl proof. New standalone normal `t/hash_view_result_guard_composition.t` needs
+canonical registration23.4.1; full native/cache/transitive custody, process isolation,
+source/callable context closure, independent peers and full23.4 admission remain
+separate. Rust76.2 begins with its own unchanged baseline after clean landing.

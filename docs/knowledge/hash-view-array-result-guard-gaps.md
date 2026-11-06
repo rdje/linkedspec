@@ -1,17 +1,41 @@
 ---
 id: hash-view-array-result-guard-gaps
-title: Hash-view Array results need ordinary result ownership and guarded consumers
+title: Ordinary Perl Hash-view Array results retain guarded consumer ownership
 answers:
   - "why do Perl sorted_keys and sorted_values wrong Hash consumers raise host errors"
   - "why can a ready sorted_keys receiver emit raw DSL and fail to compile"
   - "which task owns ordinary Hash-view result guards"
   - "what sources are frozen for Hash-view76"
 date: 2026-11-06
-status: selection36 frozen and Perl copy76.0 focused-checked; views76.1 and independent peers remain
+status: Perl76.1 implemented with focused checks; independent peers and full admission remain
 tags: [perl, copy, hash, arrays, guards, with, selection]
-evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.36; docs/checkpoints/hash-view-selection-2026-11-06/REVIEW.md retains original16/copy6 inputs/modules/handlers/full raw channels and separate original/qualified review. No production change."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/hash-view-selection-2026-11-06/review_qualified.py"
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.76.1; hash-view-result-guard-perl-2026-11-06/REVIEW.md retains actual shared15=8healthy7RED to15PASS, five independent profiles, four-file67 qualified proof, actual source inverse/restoration and eight recovery controls. Original selection36 remains unchanged."
+reverify:
+  - "bash tools/project_data_run.sh env PERL5LIB= prove -Iperl t/hash_view_result_guard_composition.t t/sorted_values_scalar_isolation.t t/copy_result_guard_composition.t t/constructor_result_composition.t"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/hash-view-result-guard-perl-2026-11-06/review.py"
 ---
+
+## Focused Perl76.1 implementation
+
+Canonical free-one and zero-extra first receiver Hash-view results now use existing
+actual-kind/rejection ownership, including retained copy/logical/with chains and
+per-link result kinds. Keep original ordered producers and their own source/error/
+arity/depth policies. Raw/registered-function receiver compatibility remains outside
+the new prefix role; no new context or peer authority follows. Regenerate Perl.
+
+Actual unchanged shared15 at post-copy684597174 moves eight healthy/seven RED to
+15PASS; eight healthy semantic observations and actual final/direct modules stay
+exact. Five independent source/arity/error profiles are preserved. Failed first
+direct4/67 exposes a pre-existing stale fluent-Length oracle; actual activation/
+implemented policy-control proves[null,[]] and identical module/handler bytes for
+fluent Length versus free sorted_values(length). Correct exactly that expectation;
+qualified same four files67 PASS. See [[perl-length-sorted-values-oracle-reconciliation]].
+Actual source-role inverse RED/restored GREEN and eight recovery corruptions pass.
+Complete declared inputs/modules/full channels and limits are in current REVIEW.md.
+Registration23.4.1, full custody/isolation, callable/source contexts, peers and23.4
+remain separate. Rust76.2 must acquire its own unchanged baseline.
+
+## Original selection36 before implementation
 
 Public original16 retains seven view failures: five free-root/continuation native-
 fresh Not-a-HASH-reference errors and two literal receiver compile failures with

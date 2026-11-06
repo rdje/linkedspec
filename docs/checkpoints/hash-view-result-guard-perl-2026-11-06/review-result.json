@@ -1,0 +1,22 @@
+{
+  "direct_files": 4,
+  "direct_top_level_tests": 67,
+  "final_pass": 15,
+  "groups": 15,
+  "independent_profiles": 5,
+  "oracle_correction": "one stale fluent Length expectation; activation/final actual [null,[]] and emitted bytes identical",
+  "original_healthy": 8,
+  "original_red": 7,
+  "recovery_corruptions": [
+    "guard operand runs",
+    "copy recovers rejection",
+    "Boolean becomes numeric",
+    "needed error masked",
+    "missing snapshot row",
+    "malformed arity admitted",
+    "source-domain error erased",
+    "module body drift"
+  ],
+  "same_path_source_inverse": "actual reference-error RED/restored GREEN",
+  "scope": "Focused Perl canonical ordinary Hash-view repair; original producer/source policies retained. Full native/transitive custody, isolation, registration23.4.1, callable contexts, peers and full23.4 remain separate"
+}

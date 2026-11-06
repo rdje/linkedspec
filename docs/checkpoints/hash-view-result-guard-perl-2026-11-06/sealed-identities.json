@@ -1,0 +1,946 @@
+{
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "f46d1e8c98bcdf47f79a5b63e71b8599b07b8fa0bf1cbbe0951c49303bad142a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "291716f13ac1b8ff3c84adb6093b8b5ba2e0acfaa40f20a9a691c2807c9a0944"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2762,
+    "sha256": "84a19dd0295e5227a3cc69c6c16a69a1338fa6310982aec03c1a3aede6147277"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/copy_guard.handler.pl.gz": {
+    "bytes": 2899,
+    "sha256": "b4992840d47e34001bdb4c7b8903b31bf05f9c3ace9ab6596ecd26d073962ec1"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/copy_guard.pm.gz": {
+    "bytes": 2914,
+    "sha256": "889bd5a3663b3e2fdf8c65662eda4bab21a51cb539e4faef9ff5f87ffcd19821"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/explicit_bridges.handler.pl.gz": {
+    "bytes": 2727,
+    "sha256": "cdee5179c48067a5c5deef777698c8075549246cd1c94223ae1e6b066ae17d97"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/explicit_bridges.pm.gz": {
+    "bytes": 2742,
+    "sha256": "35b6fddee21d23b996a2fd938453174d6682af45f88601ec8793f80e79d86e4c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2766,
+    "sha256": "87c01fd7cdd8e96a223fb42a79883593b765cc7c285f906134e6246f5636e29e"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2784,
+    "sha256": "0baf156059a8467690ac32319173f81ae9fb44986f335e174d8ede03dffa61c7"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/free_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2786,
+    "sha256": "809a880f959a12bc48e331e340746a40761d414f0d33d9065a12880bc1c8e2a7"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/free_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2803,
+    "sha256": "ce3f682023400d8044dcf2770c0e4e63d8c791a421f9e53ea2fcf5f6d04e04fa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/keys_compatible.handler.pl.gz": {
+    "bytes": 2633,
+    "sha256": "50f91405078333b966aa4e6d2990c7fd567920c47afa23f0a6a385b6d4a9bb7b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/keys_compatible.pm.gz": {
+    "bytes": 2648,
+    "sha256": "ac52507bdd4547f48f5a2134c752a6a747fedea4e1e0ddade2acae891a0cb600"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/later_with.handler.pl.gz": {
+    "bytes": 2804,
+    "sha256": "22ccc9d84adc5cd2df3d00e3e353401926c5dc56e8493d1a991aae7f690b7803"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/later_with.pm.gz": {
+    "bytes": 2818,
+    "sha256": "7ebc85a6e6c82abc45ad4638964671c926905b0369137ab2bc142fed7a56b07b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/logical_guard.handler.pl.gz": {
+    "bytes": 2894,
+    "sha256": "c6c371b54772040d078b7b801b9cdd3a6933fda5d675c1cbd7010b68c13fed78"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/logical_guard.pm.gz": {
+    "bytes": 2908,
+    "sha256": "0beeed6139d4881a8a4e9b96f705dc64dfb7275efb1f4025babe4ce6cebd89ec"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/needed_source_error.handler.pl.gz": {
+    "bytes": 2529,
+    "sha256": "78f0198a133adaa4931dbe48cc32af8a59312a20c90dd5e5ab0f52f75e339950"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/needed_source_error.pm.gz": {
+    "bytes": 2544,
+    "sha256": "d7c494df67df2c680784055ab47ab8f476a9c2c2869f4c22438986fad982b3c3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/nested_kinds.handler.pl.gz": {
+    "bytes": 2588,
+    "sha256": "7635b7419b2dd7eb87471180fd6c26e93978164c3be357e61ffaf6d81cbfd567"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/nested_kinds.pm.gz": {
+    "bytes": 2604,
+    "sha256": "fdef2a8b5ffead44145803d789d67984758aa6d3edd4ff26d8b299eee2f32acd"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/receiver_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "7dfa2d0410ad023758e90514fb0931064f9165515415a0338af49783ad9350e2"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/receiver_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2792,
+    "sha256": "e3a71a03290cbfea1faf5d8a41d35f6fd6b6068cf7fd4972c92eab19633a8b47"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/receiver_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2795,
+    "sha256": "728385069803cb22d66f906a0e4db39a5b88c7b3eb30c7c23be68084cc77781f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/receiver_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2810,
+    "sha256": "305fe33f32b5b2dd3449693187604539dc9bfb1153f1d9de2032dfd536dece05"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/source_once_snapshot.handler.pl.gz": {
+    "bytes": 2994,
+    "sha256": "447089cab6f15768eb514935d17c773c8c0177a21c81850fc043243406006653"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/source_once_snapshot.pm.gz": {
+    "bytes": 3014,
+    "sha256": "0232b7b51601ba302b92adc6266a9ec3c1d620ce37a4d81b3b286f6558b17b8d"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/valid_empty_with.handler.pl.gz": {
+    "bytes": 2712,
+    "sha256": "511bf0b57794ef4d8de4c2f3d07342030577a8d35fa6e69ea789b22d8f7572cf"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/valid_empty_with.pm.gz": {
+    "bytes": 2727,
+    "sha256": "8eaaf3d2a8ae17cbc3a2361257aee6d646dd0136c70c519e655300c49a405d77"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/values_compatible.handler.pl.gz": {
+    "bytes": 2650,
+    "sha256": "e975f1cbd9c91c22249be441bb882e99d2205c14e69e8da92e5449cfddf6fe9c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts/values_compatible.pm.gz": {
+    "bytes": 2666,
+    "sha256": "e4b08363e5d8bc07aef5014cacd3776c5033cb449ea250d63e007b1ad6b74da5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/command.json": {
+    "bytes": 327,
+    "sha256": "c3fa78b7906a6af3bb99793d6c218a5fe4b220b7bfb53cc7d47cd479c5d3a676"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/input-identities.json": {
+    "bytes": 54471,
+    "sha256": "758ba5d38c8886a2b5755145b3c7401e09530336cd70e4fdd6c0ca26a4e20ceb"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/inputs-before-first-run.tar.gz": {
+    "bytes": 613088,
+    "sha256": "4e25d6a6011f78b4514f3372e68a9acf471c3247be82f9ceaee53f0c1b56aa4b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/stderr.log.gz": {
+    "bytes": 11685,
+    "sha256": "ab649b328fe1fced2aed67dc88c179a5324661c1196a1aa45a78c5f153dda46c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/stdout.log.gz": {
+    "bytes": 853,
+    "sha256": "cd3b2029477c5e5a093375a8baa8f08cb3155c90e1c55f1aba3c856a3f288078"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "f46d1e8c98bcdf47f79a5b63e71b8599b07b8fa0bf1cbbe0951c49303bad142a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "b1894f546c3cfd8d8e62444e5226342edfe29780b230e1d425eeaff889e41533"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2762,
+    "sha256": "21bfe6c43ffc9fa21ab3baeacc7ffd4a4f7f1bd279d5b4f65f6c8e6f54781a63"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/copy_guard.handler.pl.gz": {
+    "bytes": 2862,
+    "sha256": "9c650c2404815873ce632ec2269df5b2c4164d3f62d6efa1eb18765a3c7eedb5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/copy_guard.pm.gz": {
+    "bytes": 2877,
+    "sha256": "68de47c005b28171aa81688c1c49a4ec281211c357cd3a0fd628b7cb4c59c193"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/explicit_bridges.handler.pl.gz": {
+    "bytes": 2663,
+    "sha256": "ed7bb2e2ea44b22ac4ce2bb27c30964dc73830dd9936950a55b5d1c1d68abd78"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/explicit_bridges.pm.gz": {
+    "bytes": 2679,
+    "sha256": "581db42b09635bde814237f6de9be6aeb8f7cc4249795d26ddae3657460ae596"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2692,
+    "sha256": "a40304881f36ad3c3d0a952f97ec2ab7e770776a031b21093279bb4fb3070494"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2708,
+    "sha256": "31156fc58f8cde9a5e914b403ba4dcbdc143ae6b32f9204ec6066f1220d1f04d"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/free_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2713,
+    "sha256": "e00fc562ab7504be579990148e19cf657283bbf5daad12b549023a66fb151204"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/free_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2730,
+    "sha256": "6da322c1d60e7adbb858e1a27a53def5e61d7f26274af8018bc005ef059eac96"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/keys_compatible.handler.pl.gz": {
+    "bytes": 2565,
+    "sha256": "235417913ab1f31f9eb73eaff541e226a1863ee4219436470aa3343d2d370014"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/keys_compatible.pm.gz": {
+    "bytes": 2582,
+    "sha256": "325866fe4af71fa85829e5fd3b9a4ff8ffcc3f431f5c739c3ebbd93ef0ea1759"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/later_with.handler.pl.gz": {
+    "bytes": 2728,
+    "sha256": "2e5cc93e9a9ed279bf92955cd31ae7c239409db1758d866cf06f0977f08e6a17"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/later_with.pm.gz": {
+    "bytes": 2745,
+    "sha256": "377371f097bdad549cc7a57a836b14be1d2a1a8a3458bbf9a0035a25a73c34cb"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/logical_guard.handler.pl.gz": {
+    "bytes": 2852,
+    "sha256": "6fec591270476cf6225ae24006ea8c9426c113cb92126c696b489c1cb9f1d9be"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/logical_guard.pm.gz": {
+    "bytes": 2867,
+    "sha256": "085628d690e934415e449b6b13cc8a16a7059e9a968d5191e738c8d86e42c08a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/needed_source_error.handler.pl.gz": {
+    "bytes": 2488,
+    "sha256": "2e0497cfbab90fca938da6ef3f94274a8dddd1fef690e5f046915252555503fb"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/needed_source_error.pm.gz": {
+    "bytes": 2502,
+    "sha256": "f5a9194c55924a4d1e0a1bf65b127012ee8cff20ced8a4f2780f3f47b708ba7d"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/nested_kinds.handler.pl.gz": {
+    "bytes": 2588,
+    "sha256": "fff581972f72e7c88cf0be6f073f583eb0a7f8c91fafac2d38b43dcc2e5e2889"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/nested_kinds.pm.gz": {
+    "bytes": 2604,
+    "sha256": "d7fa8e6d7982d4d1c8e73767b4082efa5a142d22ed6e290006f883b563b0a05b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/receiver_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2433,
+    "sha256": "f21c3e6daafc99af7c60dc942d3b34bf073bc54528f07549053c4f504fd96651"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/receiver_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2448,
+    "sha256": "92c86c7c9543d5f86f363e9a97440d58de2bb8017f40608bd0ec9f9f269a84b5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/receiver_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2433,
+    "sha256": "b3550b0fdfc6b3d5e7f7dbaf2a9880d2986ace8a4cf438feaad5559103017da8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/receiver_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2447,
+    "sha256": "67ad9d09cd32e5e3ec8d4f379bf47ddb8370badc72d2c1b6409d222ed118d74e"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/source_once_snapshot.handler.pl.gz": {
+    "bytes": 2910,
+    "sha256": "4437cff45472fe0347c6a185de0bb95d1719a3c35e48d1257b9ad35a34f10e1f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/source_once_snapshot.pm.gz": {
+    "bytes": 2926,
+    "sha256": "365249d091b12bbd28200747c83e2bf1332d04fad517ffabf2923732fe2878e0"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/valid_empty_with.handler.pl.gz": {
+    "bytes": 2674,
+    "sha256": "7a99f159f1bd85ae0b1fa34a4779fe772bd4a1de6320ff0123692a66a19365f8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/valid_empty_with.pm.gz": {
+    "bytes": 2691,
+    "sha256": "7277fe56285bf75776b35a663e3ea9cdf942e0001b05b877dd60606a493939a0"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/values_compatible.handler.pl.gz": {
+    "bytes": 2576,
+    "sha256": "4495a985864ac27e979d82c05d178fe4fb155f65ccd3df27539efdaade350ed7"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/artifacts/values_compatible.pm.gz": {
+    "bytes": 2591,
+    "sha256": "a725984c02735cad96ff064dbb5fd171343d780ec1f3e6c599bb29565a84a680"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/command.json": {
+    "bytes": 328,
+    "sha256": "158d25a7d0339ba97a2b92ce7fca41ecf16cdef024d5dc41a2d960ee08abfb4a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/input-identities.json": {
+    "bytes": 54471,
+    "sha256": "f005bfa1aa00b13b3d9b45e915427000f26db6e7bbe3a443a75410e7bebe35c0"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/inputs-before-first-run.tar.gz": {
+    "bytes": 612938,
+    "sha256": "b850a6987f7b67512f27222ace7a599f298e82f49950b0fe5f9097f5a5e1c4f0"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/stderr.log.gz": {
+    "bytes": 12809,
+    "sha256": "5f7fc095b5f6b157073f731687bdef76e8008e4133327103c321559121c1f71d"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/before/stdout.log.gz": {
+    "bytes": 1220,
+    "sha256": "b1628023cc5ef27c3cb8205acd113e7b0dee67a86f044c2cc34ed53df0ce13d2"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/capture.py": {
+    "bytes": 3273,
+    "sha256": "c6a5a70f87e95ce7918538d52976fb7509b8c159be3d508993dc8ca9752ff3ae"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/capture_qualified.py": {
+    "bytes": 3271,
+    "sha256": "230b85037dc2fac205e1b0fd4e2cf00ad6b42972600ee2db365a92b7a99fb1f3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/causal-control-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/causal-control-result.log": {
+    "bytes": 165,
+    "sha256": "c8c7e168a311c8acee9b96ced0d09e1d5c8f0f89c683f98b75ab9c4125854449"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/causal-control-stderr.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/causal_control.py": {
+    "bytes": 5242,
+    "sha256": "571fc3295409042f73632474b3a2c8b8cc919aeee5aa5ee2d19d8a76b69b3c47"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/activation.txt": {
+    "bytes": 41,
+    "sha256": "f46d1e8c98bcdf47f79a5b63e71b8599b07b8fa0bf1cbbe0951c49303bad142a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "3d3d2b86efcf92edddf03799a87c67018dd4e72c46e36f750121593cf9382fe8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2762,
+    "sha256": "2ec84724bf0ca876326f0e577651c2ad00d06779f644d1691a27bf33b5f80c2b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/copy_guard.handler.pl.gz": {
+    "bytes": 2899,
+    "sha256": "d774ea9f56ffe1f51e8d9a79a080bb6ff634537e1706e9b3774354d3aa8e1918"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/copy_guard.pm.gz": {
+    "bytes": 2914,
+    "sha256": "750b3c0f313f5d2b4998607a9467e8da11adbd21ea70b3fee50751c6fdc93cf8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/explicit_bridges.handler.pl.gz": {
+    "bytes": 2727,
+    "sha256": "aa7aa40247911e452f3f2b0864101d0815cf5aae87f98eca2bfe7fc04790f0c9"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/explicit_bridges.pm.gz": {
+    "bytes": 2742,
+    "sha256": "ae1fdd1c3bd7bb8b46fa28f4e049a0694506f8f81bc5ae42bccf3b7bbbdd1f37"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2766,
+    "sha256": "977b66096412a1a8c81fd212d3ea6e514ef55cd1e38c52df5ba59ca295d75d45"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2784,
+    "sha256": "8fdc90395f0c28d69149ff4d3a811ab7ccb9000528c6f796c9e6bbea4748b116"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/free_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2786,
+    "sha256": "85d47c599979077faae8c656e13c855379ebcc5b6ef834547be04a6d7577c499"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/free_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2803,
+    "sha256": "eba8e30125da204887f8913ece3effb70c9a78406c161abd35c637b3bc761164"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/keys_compatible.handler.pl.gz": {
+    "bytes": 2633,
+    "sha256": "eab09ebe81c4f6a74efb3d67738c306539044326078566f0c08b32ca60565929"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/keys_compatible.pm.gz": {
+    "bytes": 2648,
+    "sha256": "37aaf03fd00f07e84cd6d8a85331bf42e8006efeb4f4b1d45be6944d3e00ac69"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/later_with.handler.pl.gz": {
+    "bytes": 2804,
+    "sha256": "dc5d8d7ff426b16bce256181958d3b37d10f976ad64f1a398ea06029f0a22d05"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/later_with.pm.gz": {
+    "bytes": 2818,
+    "sha256": "4db92678ac9fa591ef36a5aa499bdb82ee29987ea5bbdcda474b575e9ab6cb21"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/logical_guard.handler.pl.gz": {
+    "bytes": 2894,
+    "sha256": "4a601e6a20615d37666c903102e8263b2183160ba0917f5fb24c5d2944d163a5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/logical_guard.pm.gz": {
+    "bytes": 2908,
+    "sha256": "30ebb5f77d6dbb849ccaad69cf8784de50dcc1338848ae56be28c2f1c9320729"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/needed_source_error.handler.pl.gz": {
+    "bytes": 2529,
+    "sha256": "df82e19ed7b54bb20188168a2bfba25b7ca94147ee64811fca7c76434abb4b7b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/needed_source_error.pm.gz": {
+    "bytes": 2544,
+    "sha256": "f064fd84aa7ce83e3cc82566adcf6c364431075238af16ead2e81cc83711741a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/nested_kinds.handler.pl.gz": {
+    "bytes": 2588,
+    "sha256": "927c452bd953e9446940ee834ca9a91a3dadfe3f2003c686ac7b54dec455de09"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/nested_kinds.pm.gz": {
+    "bytes": 2604,
+    "sha256": "eb6c0abf2436ac3240fdd9b4e9abcc496408278b1a0a10033b15a538a2a1737c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/receiver_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "5cf4a23b0abb2023eddd8d5138b836a924ae194922db2f0870adf41a4b6ac016"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/receiver_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2792,
+    "sha256": "d15d4e6fe611dbb5e106a46609bc869eea3244159dec01965f7ef0611ca0b7be"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/receiver_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2795,
+    "sha256": "47677fe0cf80ca662920856160579f3e3a94aea4419f12e887c452cbe76bbdea"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/receiver_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2810,
+    "sha256": "8be69b35bacb2ba81d5488ed4323c9e736c9b93b4d179c56447d4534468b512c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/source_once_snapshot.handler.pl.gz": {
+    "bytes": 2994,
+    "sha256": "b69de0007fc1d2605d6d6f03ef2a7cb81a23ee9db7b0ee63b7e3a04c74b941fe"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/source_once_snapshot.pm.gz": {
+    "bytes": 3014,
+    "sha256": "9816e904903b3db1d67585fa90abcc4de45e1a53cef76d40548e53e8de13dbad"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/valid_empty_with.handler.pl.gz": {
+    "bytes": 2712,
+    "sha256": "4f6d7c071ce340ec9fd89d96bf069ec456ccb2d391dbe9db50b9635ccec49b6e"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/valid_empty_with.pm.gz": {
+    "bytes": 2727,
+    "sha256": "b9c7ced36746e808a00b65cd2677f8c69b93c1040022dfd0f39a61add057dad7"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/values_compatible.handler.pl.gz": {
+    "bytes": 2650,
+    "sha256": "72589a11c2e6d197a7cdf5139051f3a0e7c7b09780720348b76faacf8c7bef9f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/artifacts/values_compatible.pm.gz": {
+    "bytes": 2666,
+    "sha256": "809f79ee1c3b139bb3a86e7e8ee103fd1c74189b28a1c9e315565827fae9f75f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/command.json": {
+    "bytes": 463,
+    "sha256": "7fc195ed614ca6ba4d36793ec92cd2c7f3fe3db5f29c0f7c43053d6759a25fa5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/input-identities.json": {
+    "bytes": 55177,
+    "sha256": "fc01aa8165a096763ed44b08366e9c486c4b321667ec3c79dcb91bdbffaf36a9"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/inputs-before-first-run.tar.gz": {
+    "bytes": 616026,
+    "sha256": "25ad38ef098836473cad0067ab9b8b2d38341173a20a99c115b20a1ffc86c4ee"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/stderr.log.gz": {
+    "bytes": 12722,
+    "sha256": "319cb00beedf60b3c55883e42963c62f8d49051cf2001b29b0d2b2c2b1916d20"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct-qualified/stdout.log.gz": {
+    "bytes": 2425,
+    "sha256": "b175d409282f7ec6470c3c194bc019c7a42664ec686555c5f893409d58c2a6c9"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "f46d1e8c98bcdf47f79a5b63e71b8599b07b8fa0bf1cbbe0951c49303bad142a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "29152afa18860a4ae168026bff07d972cffd90a21af37020ceee661b18f3ce95"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2762,
+    "sha256": "13799dfb087c9a492ee853bf48ec9af6eb6638b67edd3c90d62871bd57d68586"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/copy_guard.handler.pl.gz": {
+    "bytes": 2899,
+    "sha256": "4fa30fde9d4ece8bcd105be49d66a63849e8eb5ca0f82666473e26895f2474e1"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/copy_guard.pm.gz": {
+    "bytes": 2914,
+    "sha256": "c9945e48c8730c93e22554eaf91d4a5c53f5a9466e01d8c6ccc843d86feb6b65"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/explicit_bridges.handler.pl.gz": {
+    "bytes": 2727,
+    "sha256": "00d284ebbb22cb9c303f600ee257be50d409bc24eadd5e5fdc29f89bab12e695"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/explicit_bridges.pm.gz": {
+    "bytes": 2742,
+    "sha256": "e63ad03167f8fa28005f94783a9cc627e2d7fb2f948a6343336c16dc333b8813"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2766,
+    "sha256": "10903e860a97d41c8e3e73716527d1e7fb3cbc9401fb7ff75fc32d2989f8dfd1"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2784,
+    "sha256": "0ea456d314a762cffc37b13061141cda30063a92e1e605e8ab1080de987f5f40"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/free_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2786,
+    "sha256": "2ca15cb3dd7108915d736a3b7bd1c83f6a0631521ff69e5c42adfdfba4a9922f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/free_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2803,
+    "sha256": "7b91704d7e7dc8e1b1461bb4673034577633b83c9d279ef35942488a09283eed"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/keys_compatible.handler.pl.gz": {
+    "bytes": 2633,
+    "sha256": "0a354e0fff8bfa46246ab58fbdd564c527396966062eb6f30ce62b0979164180"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/keys_compatible.pm.gz": {
+    "bytes": 2648,
+    "sha256": "63e13765b194979e6fa35aae10a5bb7d465eb5fbacb8298ecdf7de4dcc55d7b3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/later_with.handler.pl.gz": {
+    "bytes": 2804,
+    "sha256": "c945c5b3432e119ce7e69b3f1c01c324a6937215c51d56d1844f7deb14e09102"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/later_with.pm.gz": {
+    "bytes": 2818,
+    "sha256": "bc18640acf8fb4bc9eeb0751975d6401813b5f3df7ac9e9156879bd614728482"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/logical_guard.handler.pl.gz": {
+    "bytes": 2894,
+    "sha256": "1d55be5e8fee99b68be1dc7f04755e288bd5a5c5200a56565c0ac9093b340905"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/logical_guard.pm.gz": {
+    "bytes": 2908,
+    "sha256": "38ee6ca0747732a7a069ba81f42d321100cba75625d085e4ba6aa275c10682b3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/needed_source_error.handler.pl.gz": {
+    "bytes": 2529,
+    "sha256": "60572bd833527d825b7507a74a4aa034c64067a1a3a158abebfa662e1b4dc112"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/needed_source_error.pm.gz": {
+    "bytes": 2544,
+    "sha256": "2643f2790f3019680c05c1dd8d35a9dddfa78e59897571b7ff8a7d2daab303a2"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/nested_kinds.handler.pl.gz": {
+    "bytes": 2588,
+    "sha256": "24590b2f9835f4487601cb972332462e90de829a2bd9b14b012e5c37beedb020"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/nested_kinds.pm.gz": {
+    "bytes": 2604,
+    "sha256": "a54244bee6994d944b1c17cc1555756aa6b949a7aa85c05ab25fc6a317ad446d"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/receiver_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "261ce8496cbc710bd1c25f5cd99db4bd0c0129a0ae5415d7161a08a71c11d20f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/receiver_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2792,
+    "sha256": "bf0f7dbd2a38e3db1d22bea230ad6b816168d1b94e11c9e8ea9b3a17dfec2513"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/receiver_sorted_values_hash_guard.handler.pl.gz": {
+    "bytes": 2795,
+    "sha256": "2a6a019e7ec4c7e027a12771c6e03b7faf8797c94b764f751f5fea8ddcf2d640"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/receiver_sorted_values_hash_guard.pm.gz": {
+    "bytes": 2810,
+    "sha256": "c8b8eb1f0939e486a4ede52f264aefead0ebeacbf5516e8f9484391bfee074a9"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/source_once_snapshot.handler.pl.gz": {
+    "bytes": 2994,
+    "sha256": "dcdd0eed1445397f298a14ae0e9631803e8894e28217d50d8cfbe3949e0bade2"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/source_once_snapshot.pm.gz": {
+    "bytes": 3014,
+    "sha256": "c6a177c4deac260e8a04573151c4c007ad74b1d0608977734a91b4094cc8b3e9"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/valid_empty_with.handler.pl.gz": {
+    "bytes": 2712,
+    "sha256": "99d06a076ccbed4a981b1e2c6c14939c8a1a5e342b29573d3d1b444380230d5f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/valid_empty_with.pm.gz": {
+    "bytes": 2727,
+    "sha256": "ef2d8eb3834a9fef7968a409e11cfbfabe04cbc76073837c86f58723a4e284bb"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/values_compatible.handler.pl.gz": {
+    "bytes": 2650,
+    "sha256": "40ccc48c7bcba06e2487f531f0003c014bfc4fea63c62e99a4698204ead9a795"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/artifacts/values_compatible.pm.gz": {
+    "bytes": 2666,
+    "sha256": "0a3da45a744b55b0965755e23f8088c8ef0f4c932ba3d16d7e4dac9ab3f010de"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/command.json": {
+    "bytes": 453,
+    "sha256": "b6d9fd5c822cb6902980c14177c4f28fcddaf79bd023c1ade5422653159d95f1"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/input-identities.json": {
+    "bytes": 54962,
+    "sha256": "4ab2791a401b2f048e1eedcc5b03676fbbf66fb6803882d84ec563c8c2c5eedf"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 615854,
+    "sha256": "0122faf22021542bbe01131891b156e7c906a2b9a5b2ae612c40d008ea58cbea"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/stderr.log.gz": {
+    "bytes": 12893,
+    "sha256": "6cc7fa6d3f77116eec455d7ee57de10868eeb1a44187fecd7c5e359b4ae6ccdd"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/direct/stdout.log.gz": {
+    "bytes": 2565,
+    "sha256": "eaf49fa24b23dd8e2328ad181a3b9faeac3a068143633f760d2248f9b3747d59"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/freeze_profiles.py": {
+    "bytes": 1700,
+    "sha256": "dec54c9da0d2b0d766000d59c73a1c59d23a240fc9d310def3d4be642327b7c8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/frozen-profiles.json": {
+    "bytes": 10953,
+    "sha256": "fa68a615b6626af3cc474f34c53c6b9db748eb4bdc6af403c0580799a026e22e"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/case.json": {
+    "bytes": 433,
+    "sha256": "28d00398d79dd3015c212c596cfaaaa91670b360dbe85443d0637d46978fb90c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/command.json": {
+    "bytes": 458,
+    "sha256": "ffa6b383709d0b6995e2ba71d0cb146a30d7465803668315b7fa0c7a0034f790"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2692,
+    "sha256": "9ae89405a31db5ecde45a05fd01b46d5d3d6d726a3c4a5095a690fb519925a67"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2703,
+    "sha256": "a0206d0f81c071cacd5ca118c46b3a0f57186450b33a36c29d1a11b24487aee5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/input-identities.json": {
+    "bytes": 17845,
+    "sha256": "69737a8cf38a84841f6fa9c5251d1f3b96aa6d2830509b18d8ed05fb707a1e3c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/inputs-before-first-run.tar.gz": {
+    "bytes": 546885,
+    "sha256": "181c71f483c5fb17642d48e4ab0ddc6d01b81922976642bdad2e78e4d1e623ea"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/inverse/stdout.log.gz": {
+    "bytes": 3644,
+    "sha256": "3ddf5fd95f8982d8c405bc26171aa30615a3f814d6d4c9bc071e7ad348a4fae6"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/command.json": {
+    "bytes": 459,
+    "sha256": "f7335fa10a198a125313a3c5dacdd3d79ebc1fd9a28d350e22c45852a9216b62"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/free_sorted_keys_hash_guard.handler.pl.gz": {
+    "bytes": 2766,
+    "sha256": "99a995750b41316e1d943cb19d6285cee7cf95e228582f2cef743280884c3143"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/free_sorted_keys_hash_guard.pm.gz": {
+    "bytes": 2777,
+    "sha256": "609c49a81276bafa44779e717b6716b1376d5b6bf6ccec40ebbc4d50593f3d34"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/input-identities.json": {
+    "bytes": 17845,
+    "sha256": "67ec8cb1c176ea25814145b58c913a7273329738460237754aa10553d07104c8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/inputs-before-first-run.tar.gz": {
+    "bytes": 546890,
+    "sha256": "cdc6c0cbfd360bda42199f85a15babc37cf0da43f43758c1d70d8ea2f3e94b44"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/guard-control/restored/stdout.log.gz": {
+    "bytes": 3520,
+    "sha256": "8c6fcb8b1b3d290d36919bde8eca1a49e332891a942c4888867b85decdd6c2f3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/observe_control.pl": {
+    "bytes": 3389,
+    "sha256": "ce644b4027dd7e61abfc0a1a68466786188836db07c748435dbea71eb87fc562"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/observe_profiles.pl": {
+    "bytes": 3023,
+    "sha256": "aeb4299fdb1891c93e75f1d7c7c9470959fcc3617e2e7519263dde702ec89872"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control-result.log": {
+    "bytes": 172,
+    "sha256": "0401880a07a2b7f4844d1f16deb8f3d338e75b1eeb13b492ff6cb02b00093a52"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control-stderr.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/command.json": {
+    "bytes": 464,
+    "sha256": "980d740e0172d4b15871bc9adc4c85727bdee00ddabae7e918c154b8904f0ab5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/input-identities.json": {
+    "bytes": 17847,
+    "sha256": "db178a96a585e93f8664f50424dbf1fe7e4e330ef9ad63b3cba641a0784bdfa5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/inputs-before-first-run.tar.gz": {
+    "bytes": 546526,
+    "sha256": "4cc282238469cee3e782565fa9dccf91ba0c0fdcf3d6ca3e785c8f85fdf067ec"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/length_sorted_values_policy.handler.pl.gz": {
+    "bytes": 2470,
+    "sha256": "9fc61714589e8741bb1a5079c933b1cf06556e236796f07cb7a67f8d3cec924f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/length_sorted_values_policy.pm.gz": {
+    "bytes": 2480,
+    "sha256": "608ce6333d1b2d60c9188d8822137bb732e452459360e1e9674ca3793bffadb1"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation/stdout.log.gz": {
+    "bytes": 3163,
+    "sha256": "316389b10d227e89d07015bfd8be37505ebf6ac5cbc9a7f7ab98861b8ba2c246"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/case.json": {
+    "bytes": 331,
+    "sha256": "6f8007d01723849a7e2a7ffa9907153baaeb29dafffc9c94c4deb0c21722c708"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/command.json": {
+    "bytes": 465,
+    "sha256": "a77536c2c478b6784e6e93aefc310b438f1900542b1fdcfb1d6bf57468b301e7"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/input-identities.json": {
+    "bytes": 17847,
+    "sha256": "e2e59cb7bdd714d10059426a7c4ed5bcacc26bc59c66c88bc275f72f5c7b4aae"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/inputs-before-first-run.tar.gz": {
+    "bytes": 546816,
+    "sha256": "0128c6d581d1d5b81c59f5f4ad7f890fb6680bb661792b786fc6176ac0e85e2c"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/length_sorted_values_policy.handler.pl.gz": {
+    "bytes": 2470,
+    "sha256": "c5f595b6589ffe880a0e23d8c61b06d7a8bdcb3cd93110ac1ca2e8165f276beb"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/length_sorted_values_policy.pm.gz": {
+    "bytes": 2480,
+    "sha256": "3b34fd73316534e65a2617e496c4510dfdc203c4fce7603a76ce67e1da6678b2"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/implemented/stdout.log.gz": {
+    "bytes": 3166,
+    "sha256": "b1943bc6810e55e40f3f65a1766d95bc633d9959a76cbab0c6ef6559387c656b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/prepare.py": {
+    "bytes": 2330,
+    "sha256": "93b99b7dea8112bbb80dacd4373a139d568b23c34c70b744c7f21bd76a8e5138"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/prepare_control.py": {
+    "bytes": 680,
+    "sha256": "31f8d4e3bc31dfdeb5fdf8d064506c5ed95da2f5ecf8bb166c9185631762dd09"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/prepare_qualified.py": {
+    "bytes": 942,
+    "sha256": "8f748b0d65b69fa6aa0e0abe98d4761b79f520083d06a37673442109101a4d3f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/producer-change.patch.gz": {
+    "bytes": 1755,
+    "sha256": "b5a82018c5a97135bb50f4694773ac4b3df29b295802457aa2e11d57812aa879"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/activation.txt": {
+    "bytes": 41,
+    "sha256": "f46d1e8c98bcdf47f79a5b63e71b8599b07b8fa0bf1cbbe0951c49303bad142a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/arity_profile.handler.pl.gz": {
+    "bytes": 2638,
+    "sha256": "3cc926efbba48f039bb5ca53a0ea7ae258037feb6ad18b052388f7fda74b1bcd"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/arity_profile.pm.gz": {
+    "bytes": 2651,
+    "sha256": "e1a0a7525d05e6d21e1e06f91318af0bad898f53f04f8d1e6a21dfc92fd330e1"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/free_values_arity_profile.handler.pl.gz": {
+    "bytes": 2637,
+    "sha256": "c88c7d50cc5cfbfc11f4d8ccc6b554b331ed054a30ecdaadf190af4688563dff"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/free_values_arity_profile.pm.gz": {
+    "bytes": 2650,
+    "sha256": "4711d2bc085414cca0a79f4b732dc31225ef669ce738f05fea54bbcfc634bef2"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/keys_null_profile.handler.pl.gz": {
+    "bytes": 2466,
+    "sha256": "b0502fb1481a73781e0a089f1acb214398c98a47d5fa53a66072fe5bcccff959"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/keys_null_profile.pm.gz": {
+    "bytes": 2479,
+    "sha256": "f11f576da6b8d4123812372fb7f8ac999119a1c0ac6a8a913e75023708536e4b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/values_array_error_profile.handler.pl.gz": {
+    "bytes": 2355,
+    "sha256": "d5de9862164130752d152eed1f374fc9a79e6bc6e2169dbb4cbead6d9fb80f27"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/values_array_error_profile.pm.gz": {
+    "bytes": 2368,
+    "sha256": "d73857c9c482db567f0875502a09776f2fc62f461bca756aee3074acfdfdc2f3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/values_scalar_null_profile.handler.pl.gz": {
+    "bytes": 2538,
+    "sha256": "314696e83717921d2a572dbb0be0c28bb25c7d576fdf82e34d8cc5a2f85e14a3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/artifacts/values_scalar_null_profile.pm.gz": {
+    "bytes": 2551,
+    "sha256": "f4ca8f6c405356ee988ca548c54ed144fdc20bd3eb812c8735a6edd777dae78f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/command.json": {
+    "bytes": 386,
+    "sha256": "5c10d8b407bded6dec9192310a5202e9e6d47276695626b705c66404be02ab56"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/input-identities.json": {
+    "bytes": 54471,
+    "sha256": "758ba5d38c8886a2b5755145b3c7401e09530336cd70e4fdd6c0ca26a4e20ceb"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/inputs-before-first-run.tar.gz": {
+    "bytes": 613088,
+    "sha256": "22a9a104a3147af44bc90238119e5f89f063878ad4f39386430f2099202c94ec"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-after/stdout.log.gz": {
+    "bytes": 5873,
+    "sha256": "646fb552dc1f8a28f21630d38b1c1b61e85313770654cc1f130d29861d04040b"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/activation.txt": {
+    "bytes": 41,
+    "sha256": "f46d1e8c98bcdf47f79a5b63e71b8599b07b8fa0bf1cbbe0951c49303bad142a"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/arity_profile.handler.pl.gz": {
+    "bytes": 2638,
+    "sha256": "0ad67ee36a221a67ab902f587208c9732a9fc27ef0a34879930e586c8b486312"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/arity_profile.pm.gz": {
+    "bytes": 2651,
+    "sha256": "13b8d1b80b2b061285cb5344dafd72d06606f1fc76828e92b7aa7e558e50737f"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/free_values_arity_profile.handler.pl.gz": {
+    "bytes": 2637,
+    "sha256": "5e9703389aecd6100de4dadfdd5834efcd2ac82b3b80407b341f820c9c0613a8"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/free_values_arity_profile.pm.gz": {
+    "bytes": 2650,
+    "sha256": "3da881275a29c81c89430b3e375059b63312324e3ded2c9050ad18ccc03098b7"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/keys_null_profile.handler.pl.gz": {
+    "bytes": 2418,
+    "sha256": "221f2b4b8e6ea5c8ab4acdbd149ea06a012cd77a7f0c8c3b95241fa367a755a3"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/keys_null_profile.pm.gz": {
+    "bytes": 2431,
+    "sha256": "3b87bb526225af23dd2da6dfa8ca9b365889cc34f34af46a8d6d8d6f932b981d"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_array_error_profile.handler.pl.gz": {
+    "bytes": 2355,
+    "sha256": "0aebd417c8b0fd625e0b276852b22672730cdcdf2f1d19a65cb5170e743e92cf"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_array_error_profile.pm.gz": {
+    "bytes": 2368,
+    "sha256": "a186039be35e100f4d47f65dd928d6adc6da2e8e2e5838d3d2160fc17c8d8152"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_scalar_null_profile.handler.pl.gz": {
+    "bytes": 2488,
+    "sha256": "5328b44f7d0d0da49e6132cc6a4c49d83e463d7e573a3199f4eb1c1f040c5677"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_scalar_null_profile.pm.gz": {
+    "bytes": 2502,
+    "sha256": "0c89f590516ae4f34339b95b1c4256591d1bd3bd36f53f86cb85e71ba4b95af5"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/command.json": {
+    "bytes": 387,
+    "sha256": "d9b84ce68b9fc5f349d1efb75b8cba338b954a91a687d24df3b50af1396719cd"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/input-identities.json": {
+    "bytes": 54471,
+    "sha256": "f005bfa1aa00b13b3d9b45e915427000f26db6e7bbe3a443a75410e7bebe35c0"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/inputs-before-first-run.tar.gz": {
+    "bytes": 612938,
+    "sha256": "e2adacb760bdd0a4d0fcc37ee9edd13f98f3443e697a600998c7a25720bd0373"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/stdout.log.gz": {
+    "bytes": 5812,
+    "sha256": "6615d9244d2bfea7172c82579dcaf9a669703a1643cc6e476ba3e3247560fe84"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profiles.json": {
+    "bytes": 1689,
+    "sha256": "a68939e88f5af108932d9cab8aaafe8b7388197f9ec5af5457f3dc3658936371"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/review.py": {
+    "bytes": 15558,
+    "sha256": "002573f158daf51dde6bf2ce8320ab4c72aeb68a35233650dd837418cf022a0e"
+  },
+  "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/seal.py": {
+    "bytes": 2021,
+    "sha256": "81f4187e86de106bc93e1f50548eb8cae4ada1bf6c8f0d40bdcbe3a03c28ee1a"
+  }
+}

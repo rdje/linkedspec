@@ -1834,6 +1834,21 @@ sub _ordinary_copy_result_source {
   && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 1;
 }
 
+# Hash views keep their existing source policy and ordered Array producer.
+# Canonical one-value calls alone gain guarded result ownership.
+sub _ordinary_free_hash_view_result_source {
+ my ($call) = @_;
+ return 0 unless ref($call) eq 'HASH' && ($call->{kind} // '') eq 'call'
+  && ($call->{name} // '') =~ /\A(?:sorted_keys|sorted_values)\z/o
+  && ($call->{source_method} // $call->{name}) eq $call->{name}
+  && !$call->{trailing_block_arg}
+  && defined($call->{source}) && length($call->{source})
+  && ref($call->{args}) eq 'ARRAY' && @{$call->{args}} == 1;
+ my $value = $call->{args}[0];
+ return ref($value) eq 'HASH'
+  && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+}
+
 # Count keeps its numeric result and existing non-array zero source policy.
 # Only canonical ordinary one-value calls join result-kind dispatch.
 sub _ordinary_free_count_result_source {
@@ -5630,17 +5645,29 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
-  # Keep ordinary presence/membership/index/size copy steps in one emitted chain so
-  # rejection survives copy. Logical producer folding keeps its existing route.
-  my $guarded_copy_chain = $ordinary_copy_result_chain
+  # Ordinary Hash views yield Arrays, then dispatch each consumer by its actual
+  # result kind. Keep compatibility callable receivers on their existing route.
+  my $ordinary_hash_view_result_chain = (_ordinary_free_hash_view_result_source($receiver)
+    || (($receiver->{kind} // '') ne 'raw_perl'
+     && !(($receiver->{kind} // '') eq 'call'
+       && _user_function_definition_for_name($deps, $receiver->{name}))
+     && ($calls->[0]{method} // '') =~ /\A(?:sorted_keys|sorted_values)\z/o
+     && ($calls->[0]{source_method} // $calls->[0]{method}) eq $calls->[0]{method}
+     && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}}))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Copy and Hash-view results stay together; other source roles retain copy
+  # links here so folding cannot turn an earlier rejection into ordinary null.
+  my $guarded_copy_chain = $ordinary_copy_result_chain || $ordinary_hash_view_result_chain
    || (($ordinary_has_key_result_chain || $ordinary_contains_result_chain
     || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
    && !(grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls));
-  # A logical producer must not turn a rejected size/copy prefix into valid null.
+  # A logical producer must not turn a rejected size/copy/view prefix into valid null.
   # Keep these canonical chains together, including any ordinary copy links.
   my $guarded_result_logical_chain = ($ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain
-    || $ordinary_copy_result_chain)
+    || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain)
    && (grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 
   # Logical and copy receivers consume generic typed values. Fold prefixes
@@ -5816,7 +5843,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
-    || $constructor_result_source || $ordinary_copy_result_chain || $free_string_result_source || $ordinary_string_receiver_prefix
+    || $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain
+    || $free_string_result_source || $ordinary_string_receiver_prefix
     || $free_numeric_result_source || $ordinary_number_receiver_prefix
     || $ordinary_logical_result_source || $ordinary_lexical_result_chain
     || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
@@ -6257,7 +6285,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || _ordinary_explicit_push_result_source($receiver)
    || _ordinary_set_result_source($receiver)
    || _ordinary_free_default_result_source($receiver)
-   || $constructor_result_source || $ordinary_copy_result_chain
+   || $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain
    || $free_string_result_source
    || $free_numeric_result_source || $ordinary_number_receiver_prefix
    || $ordinary_lexical_result_chain || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain
@@ -6304,7 +6332,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
     # Retained result sources and scalar prefixes may cross kinds at any link.
     # Reuse actual-kind dispatch after intermediate results as well as at the source.
     $current_family = 'default_result'
-     if $constructor_result_source || $ordinary_copy_result_chain || $free_string_result_source || $ordinary_string_receiver_prefix
+     if $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain
+      || $free_string_result_source || $ordinary_string_receiver_prefix
       || $free_numeric_result_source || $ordinary_number_receiver_prefix
       || $ordinary_logical_result_source || $ordinary_lexical_result_chain
       || $ordinary_definedness_result_chain || $ordinary_emptiness_result_chain

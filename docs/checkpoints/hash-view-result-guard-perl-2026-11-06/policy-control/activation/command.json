@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/observe_control.pl",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/owner.pm",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/case.json",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/policy-control/activation"
+  ]
+}

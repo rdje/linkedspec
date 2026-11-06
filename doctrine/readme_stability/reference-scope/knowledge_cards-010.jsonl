@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":9957,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-path-portability.md","sha256":"25b84c329fe3e95fea307cce05638ffc6926f864f9c32d59366f03454e1a4f6b","type":"member"}
 {"bytes":5029,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-relocation-process-proof.md","sha256":"01a50226185352ff47d312072c38914ed46b4c0dcf85f8fe50772138d84f0954","type":"member"}
 {"bytes":2421,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/restricted-macos-ram-host-size-fallback.md","sha256":"02042261ba20e7da92b91f1f959c2ecde176c98e34058fe4f94eacad95ae5a92","type":"member"}
 {"bytes":2703,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.8","path":"docs/knowledge/retained-artifact-growth.md","sha256":"6415ac645e75a0c54e47e99e2fea0ef596426b191f741a09190abc032a9a624f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":9665,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-authority.md","sha256":"ce04230b82f5cd763a570e74147bac6e5e717d7fc181cd899ae56fb9d96e07f2","type":"member"}
 {"bytes":4628,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-carriers.md","sha256":"79f8bf7d9a14e94438f4ed24e7f6c58404ca3463917dae3ee29b4e9c8b573252","type":"member"}
 {"bytes":3340,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-dormant-red.md","sha256":"d337edf3de33fd08b179cdabac188261572401292d3335e26a4287b50791b3e8","type":"member"}
-{"bytes":6620,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-project-data-ssd-storage.md","sha256":"e3550228c15ac1612eb2c23e4cbdc02fb40172c1196a5654a09295f11fe2facb","type":"member"}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "prove",
+    "-j1",
+    "-v",
+    "-Iperl",
+    "t/hash_view_result_guard_composition.t"
+  ],
+  "environment": {
+    "LINKEDSPEC_HASH_VIEW_RESULT_CAPTURE": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/after/artifacts"
+  }
+}

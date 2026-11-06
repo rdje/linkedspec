@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: selection23.1.36 freezes ordinary Hash-view Array result guards76 in hash-view-result-guard-composition.md/shared15. Independent Perl copy rejection76.0 is now repaired with focused checks; Perl view76.1 is next before separately assessed peers76.2-.5. Bounded Length74/CountKeys75/callable75.6 retain focused outcomes. Full source/context/native-cache custody, general isolation, declared Lua5.4 and full23.4 admission remain separate; no implementation or parent admission is inferred from selection.
+Current finite frontier: selection23.1.36 freezes ordinary Hash-view Array result guards76 in hash-view-result-guard-composition.md/shared15. Perl copy76.0/views76.1 are implemented with focused checks; views15PASS/qualified4files67 and five preserved profiles include a reconciled stale Length oracle. Rust76.2 must acquire its own actual baseline before separately assessed peers76.3-.5. Bounded Length74/CountKeys75/callable75.6 retain focused outcomes. Full source/context/native-cache custody, general isolation, declared Lua5.4 and full23.4 admission remain separate; no parent admission is inferred from focused outcomes.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

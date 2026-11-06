@@ -47,3 +47,9 @@ Broader absent/legacy binding isolation and other collection helpers remain
 owned by `SESSION-STARTUP-READING.17`, especially `.17.2`. This repair does not
 close that task. Original String receiver oracle reconciliation follows under
 `TYPE-REFERENCE-BOOK.1.2.23.3.45.11.2`; portable admission remains separate.
+
+November6 oracle reconciliation: the later Length74.1 result guard makes fluent
+Length.sorted_values null while the free sorted_values(length(...)) fallback stays[].
+See [[perl-length-sorted-values-oracle-reconciliation]] for actual activation/current
+source controls and the single stale fixture correction; this does not alter the
+free producer or expand the original isolation claim.

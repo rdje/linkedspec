@@ -1,0 +1,13 @@
+[
+  {
+    "id": "free_sorted_keys_hash_guard",
+    "body": "order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  }
+]

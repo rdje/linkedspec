@@ -10,7 +10,7 @@
     "name": "fluent Length Number",
     "source": "Top:: I {return(\"abc\".length().sorted_values())}",
     "input": "x",
-    "expected": [],
+    "expected": null,
     "expected_cursor": 0
   },
   {

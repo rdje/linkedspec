@@ -1276,11 +1276,17 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 Sorted Hash views produce Arrays and already support compatible continuations:
 `sorted_keys({"b":2,"a":1}).join_values(",")` is `"a,b"`, and
 `sorted_values({"b":"tail","a":"head"}).last().uppercase()` is `"TAIL"`.
-Current Perl Hash-view result guards are incomplete: an incompatible
-`.set_key("k",1)` can raise a host reference error or fail to compile. Family76
-owns that guard repair; canonical constructors already reject that wrong kind.
-The [backend handoff](../appendix/backend-handoff.md#selected-hash-view-guards-and-a-separate-perl-copy-gap)
-records the exact bounded selection and separate copy prerequisite.
+Perl canonical ordinary free-one calls and zero-extra receiver prefixes now guard
+their Array results before incompatible Hash consumers. For example,
+`sorted_keys({"a":1}).set_key("k",1)` and
+`{"a":1}.sorted_values().set_key("k",1)` return null. Consumer operands are
+skipped; later `.copy().with(){return("ran")}` and eager logical operands keep
+that rejection. Valid empty Arrays still enter a body:
+`sorted_keys({}).with(){return(value.count())}` returns0.
+The [backend handoff](../appendix/backend-handoff.md#perl-ordinary-hash-view-result-guards)
+records focused Perl proof and remaining independent backend work. Original
+producer domains, key ordering and copy depth remain unchanged; registered-function
+receiver contexts and full admission remain separate.
 
 Registered Hash-function results also compose on the focused-checked Perl, Rust,
 Dart, Julia and installed PUC5.5.1/LuaJIT routes. With `fn make_hash(){return({"k":1})}`,
@@ -1306,7 +1312,7 @@ A missing old key leaves the result contents unchanged; false and null field val
 
 Each `pick_keys` key belongs to that call and is evaluated in argument order. A later call can select different keys from the same snapshot; it does not inherit an earlier key. For example, `meta={"first":"b","rest":"ar"}; return([meta.pick_keys("first"),meta.pick_keys("rest"),pick_keys(meta,"first","rest")])` returns `[{"first":"b"},{"rest":"ar"},{"first":"b","rest":"ar"}]`. A computed key block runs once for its operand: `pick_keys(meta,{seen=num_add(seen,1);"first"},"rest")` increments `seen` once and retains both existing keys. The source Hash stays unchanged. Regenerate affected Perl parsers emitted before the per-key lowering repair; their generated source may contain repeated earlier keys.
 
-On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Array fallback: `sorted_values(3)`, `sorted_values("3")` and `sorted_values(length("abc"))` return `[]`, independently of unrelated host hashes. The source is evaluated once. Actual Hash values still project values by sorted keys: `sorted_values({"b":"B","a":"A"})` returns `["A","B"]`. Producer-specific guards retain their own policy: `"abc".length().copy().sorted_values()` returns null. This does not define a universal wrong-kind policy or resolve absent/legacy binding behavior in other collection helpers. Regenerate Perl parsers emitted before the scalar-isolation repair; older modules can still consult symbolic host hashes. Generated metadata and format v2 are unchanged.
+On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Array fallback: `sorted_values(3)`, `sorted_values("3")` and `sorted_values(length("abc"))` return `[]`, independently of unrelated host hashes. The source is evaluated once. Actual Hash values still project values by sorted keys: `sorted_values({"b":"B","a":"A"})` returns `["A","B"]`. Produced-Length guards retain their own policy: both `"abc".length().sorted_values()` and `"abc".length().copy().sorted_values()` return null because that Number result rejects a Hash consumer. This does not define a universal wrong-kind policy or resolve absent/legacy binding behavior in other collection helpers. Regenerate Perl parsers emitted before the scalar-isolation or Hash-view guard repairs. Generated metadata and format v2 are unchanged.
 
 `pick_keys` uses field existence, so requested false and null fields are retained while missing fields are omitted. For example, with `meta={"off":false,"nil":undef,"other":1}`, `pick_keys(meta,"off","nil","missing")` returns `{"off":false,"nil":null}` and leaves `meta` unchanged. `has_key(pick_keys(meta,"nil"),"nil")` remains true even though that stored value is null.
 

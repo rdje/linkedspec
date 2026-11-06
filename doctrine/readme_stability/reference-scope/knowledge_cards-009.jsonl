@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1817,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-token-lexical-order-drift.md","sha256":"792b07faf5cdd4d3df1cbec6ad45ea915170bbd0fd733912f8911d3561cb1a3e","type":"member"}
 {"bytes":5663,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-dormant-red.md","sha256":"366c0e730beb39f24e52a9998385d9d8f7cec1e369ff09de6d42dcd093c14565","type":"member"}
 {"bytes":10115,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-integration.md","sha256":"5267b896a1921e9f6b338857b6bfb84fb9823df5a5fbfe5e5de625bf27016ed1","type":"member"}
 {"bytes":6328,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-transaction-private-authority.md","sha256":"a6d2ec1f94771491e603264b18a8eaf22a1716b2ceeee71b90219693314f1eb6","type":"member"}
@@ -34,7 +35,7 @@
 {"bytes":1822,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-single-numeric-array-constructor.md","sha256":"4272a587f9fda6be54390631da9f955be5f65d77a0eafd24cc8196bb7433b63f","type":"member"}
 {"bytes":9219,"lines":141,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-slash-call-outer-block-validation.md","sha256":"a458c5f6a59b5ffb0a0b19ab7fc02edd7f514ff91cc25208cff7887706eedf70","type":"member"}
 {"bytes":2447,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-sort-comparator-working-variable-capture.md","sha256":"b3faba1bb3168d8eb9eb194067cdb7ca225f93e2e2d7e7d578072ad258f353b5","type":"member"}
-{"bytes":3051,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-sorted-values-scalar-host-isolation.md","sha256":"99502cfdb14d2ea4c159fc61e8b978c75e368dd260547f2bbefed55013be1cfd","type":"member"}
+{"bytes":3439,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.1","path":"docs/knowledge/perl-sorted-values-scalar-host-isolation.md","sha256":"e740c253650a1ca1edc9007571f30770e7eb678134d5ade8cc1a691b9548b43e","type":"member"}
 {"bytes":3818,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-source-location-slice-compatibility.md","sha256":"0e3c35d118acea5112191ff54528ecfd694bad170c449f8172ac9c6f38c5a177","type":"member"}
 {"bytes":6350,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-source-membership-callable-signature-precedence.md","sha256":"17dd611057ca668313a4c0efd102e36a216fae6bb02823b38b73a0e7f4840ab7","type":"member"}
 {"bytes":3494,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-sparse-and-structural-slots.md","sha256":"a8ec1e7af23de9245e2af160da06593b3965129d8a303090fd61a2737a80c450","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3837,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repeated-and-falsey-group-acceptance.md","sha256":"bc965e157960453b887b2bc533b4baa0053156b9e2c2552fb8aca8d6b15738dd","type":"member"}
 {"bytes":4821,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/replacement-repair-engineering-history-capacity.md","sha256":"150150147f888200b5434b758e675aca17936831df77c930882436128cbd081b","type":"member"}
 {"bytes":49577,"lines":411,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.13","path":"docs/knowledge/repo-generated-artifact-cleanup-boundary.md","sha256":"fa0a978c47bd1f2bb093a3e5a2cc039f9776ff317abc8793a544c62b9db79966","type":"member"}
-{"bytes":9957,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-path-portability.md","sha256":"25b84c329fe3e95fea307cce05638ffc6926f864f9c32d59366f03454e1a4f6b","type":"member"}

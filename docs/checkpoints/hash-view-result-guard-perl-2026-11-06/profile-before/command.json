@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/observe_profiles.pl",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profiles.json",
+    "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts"
+  ],
+  "environment": {}
+}

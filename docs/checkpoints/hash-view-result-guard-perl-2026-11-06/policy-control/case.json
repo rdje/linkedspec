@@ -1,0 +1,13 @@
+[
+  {
+    "id": "length_sorted_values_policy",
+    "body": "return([\"abc\".length().sorted_values(),sorted_values(length(\"abc\"))])",
+    "source": "Value:: I {return([\"abc\".length().sorted_values(),sorted_values(length(\"abc\"))])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      []
+    ]
+  }
+]

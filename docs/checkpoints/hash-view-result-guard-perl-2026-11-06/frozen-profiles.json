@@ -1,0 +1,221 @@
+{
+  "observations": {
+    "arity_profile": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10419,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/arity_profile.handler.pl.gz",
+        "sha256": "2e6be241c10ef15454659d43378d2ecd14b301e624de715d73e04cf256bdff52"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "sorted_keys"
+        ]
+      },
+      "module_input": {
+        "bytes": 10441,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/arity_profile.pm.gz",
+        "sha256": "c110ff63fc3eba3d17e17e0dd1c5ea2cd9cbcf58ac8fc814cb36e8f6614ff1d4"
+      },
+      "native": [
+        "ran",
+        "W"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:sorted_keys\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "free_values_arity_profile": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10421,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/free_values_arity_profile.handler.pl.gz",
+        "sha256": "24096d059b690da415cb9efddaa91c1acc0e99390919120f76ec5de64772857e"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "sorted_values"
+        ]
+      },
+      "module_input": {
+        "bytes": 10443,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/free_values_arity_profile.pm.gz",
+        "sha256": "5f1d3aa961bd18ca6d4f0501f7f6a02992afa3fce8a04d1ccc20875bb4bee26c"
+      },
+      "native": [
+        "ran",
+        "W"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:sorted_values\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "keys_null_profile": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        0
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9913,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/keys_null_profile.handler.pl.gz",
+        "sha256": "29723713bd3289a7aa353a093066419e7267bbe88c099e27f5809e6f181f10ea"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 9935,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/keys_null_profile.pm.gz",
+        "sha256": "9980937fb10d403a6b02884b0b7b4dc3c2710b6dd35ffe3c71368a0d42d890b2"
+      },
+      "native": [
+        [],
+        0
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_sorted_keys = undef; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_sorted_keys = undef; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; $__ls_scalar_source }; 1 ? (do { my $__ls_count = $__ls_selected_default; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }) : undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "values_array_error_profile": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 15082) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "handler_input": {
+        "bytes": 9603,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_array_error_profile.handler.pl.gz",
+        "sha256": "5c68073cddf4c1d16417d1a6e1c864aaab473bab1776f79e5ad63346e257fb3f"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 9625,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_array_error_profile.pm.gz",
+        "sha256": "7f026d09c741f61268e18e2187e0bebf808014666bbbbbc53250c75e225fde1e"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "substitution": "return do { my $__ls_sorted_values = [do { my @__ls_evaluated_values = (1); @__ls_evaluated_values }]; defined($__ls_sorted_values) && ref($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "values_scalar_null_profile": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        [],
+        [],
+        0
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10649,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_scalar_null_profile.handler.pl.gz",
+        "sha256": "54414a84162894ab8c5bb2d2e2b4f6a803ee0f124211a9f070b8647824842220"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10671,
+        "path": "docs/checkpoints/hash-view-result-guard-perl-2026-11-06/profile-before/artifacts/values_scalar_null_profile.pm.gz",
+        "sha256": "53cfc0aec85dfa652a0462cc60a6626ec6ef07f9cddd215eecffd0453ca8387f"
+      },
+      "native": [
+        [],
+        [],
+        [],
+        0
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_sorted_values = 3; defined($__ls_sorted_values) && ref($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_sorted_values = \"3\"; defined($__ls_sorted_values) && ref($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_sorted_values = undef; defined($__ls_sorted_values) && ref($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_selected_default = do { my $__ls_scalar_source = do { my $__ls_sorted_values = do { my $__ls_length = \"abc\"; defined($__ls_length) ? (ref($__ls_length) eq 'ARRAY' ? scalar(@{$__ls_length}) : length($__ls_length)) : undef }; defined($__ls_sorted_values) && ref($__ls_sorted_values) ? [map { $__ls_sorted_values->{$_} } sort keys %{$__ls_sorted_values}] : [] }; $__ls_scalar_source }; 1 ? (do { my $__ls_count = $__ls_selected_default; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }) : undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  "raw_stdout_sha256": "58810bc28415ff65f99803d099367228acdf022b17b14a1f2bfcceaf60c97258",
+  "scope": "Own Perl profile, excluded malformed/source-domain behavior; no portable admission"
+}

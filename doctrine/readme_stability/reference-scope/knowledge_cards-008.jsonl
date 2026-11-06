@@ -43,6 +43,7 @@
 {"bytes":3754,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-legacy-mark-control-source-origins.md","sha256":"6c1da3505bc2ef98b1c316f78043b2b7492276da48a0a3f76f296777be4341cf","type":"member"}
 {"bytes":4342,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-legacy-named-capture-source-origins.md","sha256":"56afcfeb3808dd1535daf2ec22b166aee648652a4450791b70d155b8a54077c0","type":"member"}
 {"bytes":5115,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-legacy-source-producer-partition.md","sha256":"94b67ce72bf97f2769497b28b87543a592deb8e23a50344548b5104a87348b09","type":"member"}
+{"bytes":2311,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.1","path":"docs/knowledge/perl-length-sorted-values-oracle-reconciliation.md","sha256":"2dc749d3cb4878f898bd6050daabcdda8a0a5cf3a4f8e878f2d09b72777cb4cd","type":"member"}
 {"bytes":6932,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-lifecycle-final-value-e-drift.md","sha256":"3b9097211f985ea44670c74e845b489ea41b4fc154327cae474cf231f0b47a39","type":"member"}
 {"bytes":4256,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-local-match-writer-absence-gap.md","sha256":"926d99938c8fa4e8170d9a2efe6feec0bfb3ecb97c7b41422f8e43d71a801e53","type":"member"}
 {"bytes":2611,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-local-match-writer-presence-repair.md","sha256":"c15dff748a16208d979c86cc0f40d7658ec016b9553bdac07f3a7ae86263b5c8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4622,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-compatibility-observation-gap.md","sha256":"aa5e8382aaa5254d38d8cca045b24f0d1486f5fbe11561ad47187017694fd0d8","type":"member"}
 {"bytes":5880,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-invalidated-token-restoration.md","sha256":"9ce8631df3a1e1febeb6fbe804aad2fcbb838064b54442b5621350f05be1015c","type":"member"}
 {"bytes":2910,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-runtime-ascii-rule-guard.md","sha256":"a8a882e66d222deedfbc1ea7a11c0ffaf28cc04e43f789b352c09cb53a549451","type":"member"}
-{"bytes":1817,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-token-lexical-order-drift.md","sha256":"792b07faf5cdd4d3df1cbec6ad45ea915170bbd0fd733912f8911d3561cb1a3e","type":"member"}

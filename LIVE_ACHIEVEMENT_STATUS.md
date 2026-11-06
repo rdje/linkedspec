@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-view76: prerequisite Perl copy76.0 is implemented with focused checks. Perl view76.1 and independent peers remain. Full verification stays deferred until feature coverage.
+PNT Hash-view76: Perl copy prerequisite76.0 and view guards76.1 are implemented with focused checks. Independent Rust76.2 is next. Full verification stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.76.0 retains rejection for canonical free-copy and zero-extra first copy prefixes through defaults/copies/logical/with. Legitimate null/empty and existing producer/depth/signature policies stay exact. New12=7healthy5RED to12PASS; intermediate11/1logical compile regression is retained. Direct five files92 tests/final syntax, same-path source inverse RED/restored GREEN and six recovery corruptions pass. Seven healthy semantic rows and final/direct actual modules/handlers stay exact. Regenerate affected Perl; registration/native-cache/custody/full verification remain separately owned.
+TYPE-REFERENCE-BOOK.1.2.23.3.76.1 guards canonical ordinary Perl Hash-view Array results through consumers/copy/logical/with. Shared15=8healthy7RED to15PASS; five own source/arity/error profiles remain. Original eight healthy semantic observations and actual module/handler identities stay exact. First direct4/67 exposes a pre-existing stale Length oracle; actual activation/current source control proves[null,[]]/identical bodies, and exactly one expected value is corrected. Qualified4/67, source-role inverse RED/restored GREEN and eight recovery corruptions pass. Regenerate affected Perl; full admission stays separately owned.
 
 ## Next Action
 
-Activate Perl view76.1 from clean Git; capture actual unchanged shared15 baseline at post-copy compiler before guard edits. Preserve original selection16/copy6 and independent source/error/arity profiles. Small direct checks/docs/commit, then Rust76.2; no broad suite.
+Activate Rust76.2 from clean Git; capture actual unchanged shared15 and independent source/error/arity profiles, declaring actual own/Cargo/grammar inputs before build/SDK use. Small direct checks/docs/commit, then Dart76.3; no broad suite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.76.1 — Perl views15PASS/qualified4files67; stale Length oracle reconciled; actual inverse/eight controls; Rust76.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Perl copy12PASS/direct five files92; actual inverse RED/restored GREEN; view76.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.36 — views15 frozen by projection; copy6 distinguishes3RED/3healthy; no production edit; P176.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — each installed Lua16PASS/four routes; direct210 checks; runtime unchanged; selection36 next.
@@ -29,7 +30,6 @@ Activate Perl view76.1 from clean Git; capture actual unchanged shared15 baselin
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — ordinary CountKeys26PASS/final71; thirteen healthy exact; peers/callable coverage next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — initial Hash-kind/numeric-source policy23PASS/final37; consumer75.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.13 — dated artifact retention review; zero removals; P1 domain75.0.2 resumes.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
 
 ## History
 
