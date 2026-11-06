@@ -1,0 +1,13 @@
+[
+  {
+    "id": "logical_rejection",
+    "body": "order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  }
+]

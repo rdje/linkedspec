@@ -1,0 +1,20 @@
+{
+  "direct_files": 5,
+  "direct_top_level_tests": 92,
+  "final_pass": 12,
+  "first_candidate_pass": 11,
+  "first_candidate_regression": "logical_rejection compile failure",
+  "groups": 12,
+  "original_healthy": 7,
+  "original_red": 5,
+  "recovery_corruptions": [
+    "rejected with recovery",
+    "legitimate null suppressed",
+    "logical operand runs",
+    "needed error masked",
+    "missing healthy bridge",
+    "module body drift"
+  ],
+  "same_path_source_inverse": "actual RED/restored GREEN; only logical copy-role predicate changes",
+  "scope": "focused Perl canonical copy source/prefix repair; original/failed/final epochs retained; full native-transitive custody/isolation, registration23.4.1, peers and full23.4 remain separate"
+}

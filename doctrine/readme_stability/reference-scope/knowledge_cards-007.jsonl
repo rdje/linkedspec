@@ -105,7 +105,7 @@
 {"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}
 {"bytes":3150,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-index-rejection.md","sha256":"2434156c325d4b3bca374079a494c9d33f24c27b914422b64611fbbbbd5473a6","type":"member"}
 {"bytes":3088,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-presence-rejection.md","sha256":"18e7d7b67c3089d746a0c5987fc59f1047dbad3ba51f17eba5a7f3601dbd1e87","type":"member"}
-{"bytes":2519,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.36","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"1557e6ba6057410fe2a3152dc93108aa16303828ca662c6cd0670672e299a8c2","type":"member"}
+{"bytes":4154,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.0","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"710cfa713e3c12d734e5ec6ef64adbaf7a6440094d3e862c8f36a53e4ada0dd1","type":"member"}
 {"bytes":3479,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-copy-rejection.md","sha256":"8d15d6301567d79d1b9c037486154e8f23b35d99c9ca999272274de545752aab","type":"member"}
 {"bytes":2236,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6","path":"docs/knowledge/perl-count-logical-rejection.md","sha256":"ee128e316e65f603a8f4549d456ee48a45747fe8304b313b869690d0a68c0be3","type":"member"}
 {"bytes":3354,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-receiver-compilation.md","sha256":"9ff84cf949601d675a474d06c11f4d5e9c0c154944afecf3241a042ccbd87384","type":"member"}

@@ -472,13 +472,23 @@ remain. Source errors propagate, and copying preserves the captured Count result
 operand effects. These ordinary checks do not extend deferred callback syntax or establish full
 portable admission.
 
-The generic Perl copy root still has a separately tracked limit: after
-`copy(["a"]).set_key("k",1)`, a later `.with(){return("ran")}` currently runs
-and returns `"ran"`. A later default can also recover that rejected prefix.
-The Hash consumer correctly skips its operand, but rejection is lost before the
-later operation. P1 repair76.0 preserves that state; legitimate
-`copy(undef).with(){return("valid-null")}` must continue to run. The current
-Count-specific proof above does not establish generic copy-root closure.
+Canonical ordinary Perl copy results and zero-extra first copy prefixes now retain
+that same rejection state. An incompatible consumer skips its operands and later
+copies, defaults, logical operands and immediate `with` bodies:
+
+```text
+copy(["a"]).set_key("k",1).with(){return("ran")}       # null; body skipped
+copy(["a"]).set_key("k",1).coalesce({"x":1}).count_keys() # null; fallback skipped
+["a"].copy().set_key("k",1).with(){return("ran")}       # null; body skipped
+copy(undef).with(){return("valid-null")}                # "valid-null"
+copy(1).add("bad").coalesce(7)                          # 7; valid numeric-domain null
+```
+
+A valid copied null remains an ordinary input; it is distinct from a rejected
+consumer. Empty copied Arrays also remain valid `with` inputs. Copy kinds, depth,
+signatures and existing callback/deferred boundaries are preserved. Perl76.0 is
+implemented with focused native/fresh and direct-dependent checks; regenerate
+affected emitted Perl. Full source/context/portable admission remains separate.
 
 Ordinary Perl also keeps that Count rejection through eager `.and(rhs,...)`,
 `.or(rhs,...)` and `.not()` links, with or without copy or a final `with`:

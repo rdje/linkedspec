@@ -1,0 +1,614 @@
+{
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "44b3af0a192591f53819efb7b6acba3ac9384f7ebaa7ad4806386dda2de0cbd3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/bridge_rejection.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "865845a482ae4dde32226089677cde6b3cdc2656714165db314c1406d2364e13"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/bridge_rejection.pm.gz": {
+    "bytes": 2908,
+    "sha256": "12b31f56d64ce4c496b96e33b0d65b85b4c98b91d9fd5b1e1af601c18e529aac"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "d49cbb2e6e71f8062bde025d6ce2c7f5a12ec806b7780a64c8a4a5ded79732a4"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "ad43b6133743b9c9388015316871abd71da56ea36465fd7b7af79dc9a23f82a5"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_rejected_default.handler.pl.gz": {
+    "bytes": 2869,
+    "sha256": "c0834c82b6f511877e08908458c4e59a63e419f3cf88424d0de9370f83f2a6ca"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_rejected_default.pm.gz": {
+    "bytes": 2880,
+    "sha256": "ae1e5e8bae1d2b23fac7d9c6fb8c62ceb80e73429c296b589167973590397afc"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_rejected_with.handler.pl.gz": {
+    "bytes": 2816,
+    "sha256": "d40ccc7dbff9712713250f5341e326dcde70082f50ee6611ed70e7d0daacb9f3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_rejected_with.pm.gz": {
+    "bytes": 2826,
+    "sha256": "275e67bb52efc75658242323aad3a9adfed65be5c23e95539be5369ee2345751"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_valid_null_with.handler.pl.gz": {
+    "bytes": 2707,
+    "sha256": "91059d195c2cff33a53673d26545146e6565e2f5ddbec8be6ae6e48b37c9e608"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_valid_null_with.pm.gz": {
+    "bytes": 2717,
+    "sha256": "aeb55cd363e393daa3385f33b671e346a8d5dbbe8a272189c479ed4c232d71b6"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_without_with.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "78ce1c405b0ea3f7c5127d48d4d9251b4428a8d8f6b0d1898633ad4768da753f"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/copy_without_with.pm.gz": {
+    "bytes": 2787,
+    "sha256": "af2ec5ad1d73e210c4ab16cc48ea4ede9910282c657448318a19b95b8df8f4de"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/empty_copy_with.handler.pl.gz": {
+    "bytes": 2749,
+    "sha256": "1d7dd4b25abb0779e706678fd7473372b4328f8fa952960cb7d145d8e6a660ca"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/empty_copy_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "a1f286124d10ca946bef6b4991911fdeccc3896c42279e632360963dd2490c4a"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/logical_rejection.handler.pl.gz": {
+    "bytes": 2454,
+    "sha256": "96f41bb5607c23986ffbf1fc6a38d12de64edab2a503dc62506adcac51b64854"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/logical_rejection.pm.gz": {
+    "bytes": 2465,
+    "sha256": "3af89b4f229c8576e63c52803e7e99d5d4188f3ed62fc6eba7419eaa88b59271"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/needed_copy_source_error.handler.pl.gz": {
+    "bytes": 2562,
+    "sha256": "39ae93241ae4d2de76983703cce14826ba75f4bd23198d8648275c3e473c2e04"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/needed_copy_source_error.pm.gz": {
+    "bytes": 2574,
+    "sha256": "edba8ba4ffbf2e492b95218cf5ad72130f1141f70bd317f88d71cdb945b4d243"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/numeric_domain_null.handler.pl.gz": {
+    "bytes": 2585,
+    "sha256": "a7074698b4142771f2c177b5043efff1ad47396f40b1d5c9ef5cfbf2f1c4755b"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/numeric_domain_null.pm.gz": {
+    "bytes": 2596,
+    "sha256": "09e486eec1c8efada152d4470e3bb20869a1ca79b9d10703cc004f5f36df03ff"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/receiver_copy_control.handler.pl.gz": {
+    "bytes": 2827,
+    "sha256": "6328146fb3cdf5a18a8ee3317682c04085e5327a2fc4c81e26978c17dec0fd19"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/receiver_copy_control.pm.gz": {
+    "bytes": 2837,
+    "sha256": "7db2fa6f8d7a9c274f96c74f6412cc503623d6ff086c045c8abe0e3c963842e3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/repeated_copy_rejection.handler.pl.gz": {
+    "bytes": 2835,
+    "sha256": "cb36bdf8668589ce2e5dda037eb42e1a672f0b54019235b99e40249a59fe270e"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/artifacts/repeated_copy_rejection.pm.gz": {
+    "bytes": 2846,
+    "sha256": "b50191501f85c9182ec45a6d488aec19223b5064994e7056a745ca14843245b8"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/command.json": {
+    "bytes": 301,
+    "sha256": "7bb19e1b339176a9873c41475a6a84c3da9cb19e8bf55ed26be1d5979fa2166e"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/input-identities.json": {
+    "bytes": 54063,
+    "sha256": "abc90579bdc761c03c869d4f25ae51f6879217f2987b6a09e9fc76e02fa89360"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/inputs-before-first-run.tar.gz": {
+    "bytes": 611836,
+    "sha256": "94bc302386aacd8af6057b1ce9b807ba8d745e9ec222ce9fa34b831d5b54a692"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/stderr.log.gz": {
+    "bytes": 10086,
+    "sha256": "d63b5390a878417964a71c3c6e6fcbac0bd9cf1587c2d666172dc887de6d7401"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/after/stdout.log.gz": {
+    "bytes": 1065,
+    "sha256": "bbb033a068fc755f8ad557ddaf9bb048bfa79447f1654e8f83ddbea4f17cd88c"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "44b3af0a192591f53819efb7b6acba3ac9384f7ebaa7ad4806386dda2de0cbd3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/bridge_rejection.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "15d993880bc22d5b53cfb137ad78d9123f9d6084097eac2d73706761c550a363"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/bridge_rejection.pm.gz": {
+    "bytes": 2908,
+    "sha256": "23f8fa28066463dcaa45949da85eabb0b3350a9421c0cb9ffd8c1d774ddab786"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "eb52111dc55049625cc45236b670e3790bc6259336695725c75200e7a39fe947"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "7240dcb5dca41c0d4fdec3df58d740cb9324d2e306f39326e177f2285f75a1fd"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_rejected_default.handler.pl.gz": {
+    "bytes": 2822,
+    "sha256": "25f3aad5980522069f6283596fc3d074cb8fbb76abb24e37fdae1905e4d4b4d0"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_rejected_default.pm.gz": {
+    "bytes": 2835,
+    "sha256": "288f6081272d30d5026970a44d94412eb0403f29ba5547d249c27f58fbb0599b"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_rejected_with.handler.pl.gz": {
+    "bytes": 2770,
+    "sha256": "56682b76708c1f10d5c7d1027bc0d83387e2644f734e4579b71a68664b3d29d4"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_rejected_with.pm.gz": {
+    "bytes": 2782,
+    "sha256": "9164f38c847dd72001943b224bbae770f22d543c19a440776e3389468bb9c6f9"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_valid_null_with.handler.pl.gz": {
+    "bytes": 2662,
+    "sha256": "3b841f4186b104ea5cbd8f2ccf98a818e8e84fb7dc1d01fc6ede30f808dab8d4"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_valid_null_with.pm.gz": {
+    "bytes": 2672,
+    "sha256": "b97ea7ca77218e0711a7cde855491ef56a28b65dfb64bf37fc2895b5a0eb75b6"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_without_with.handler.pl.gz": {
+    "bytes": 2731,
+    "sha256": "fe758f19dfb7da17e3b851cfa4e900344b4d91663e3cb608023b6f9a9b2004ec"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/copy_without_with.pm.gz": {
+    "bytes": 2742,
+    "sha256": "cd559bb4b712cf794c5f0dd9707ec66c6c4e3ebaabd0af868832eba25454dc5e"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/empty_copy_with.handler.pl.gz": {
+    "bytes": 2711,
+    "sha256": "20a65e70f856b334468136b010aa6b7f2ec29757147df7499a3aa357364961be"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/empty_copy_with.pm.gz": {
+    "bytes": 2723,
+    "sha256": "0a8a37101430237cc986016066325d4828db8419cb4185ed31825a2fd8fe7cea"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/logical_rejection.handler.pl.gz": {
+    "bytes": 2881,
+    "sha256": "2f0bf4c1c0960e3cc6d070f9802045e94e069684d27da5b81823bfb7b44e6ca0"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/logical_rejection.pm.gz": {
+    "bytes": 2891,
+    "sha256": "03603d143bf10af3e689f52b9c82d74779a9fc000480bf48a6cca7129fac7aa7"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/needed_copy_source_error.handler.pl.gz": {
+    "bytes": 2525,
+    "sha256": "ef4544d8fcca60e941de886be573f96a13514ecfa03aae9b00656870f13e0384"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/needed_copy_source_error.pm.gz": {
+    "bytes": 2537,
+    "sha256": "f66ff27213d3890ede4b1297d1311b5225edcce51aab85f51fa710842d699d39"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/numeric_domain_null.handler.pl.gz": {
+    "bytes": 2586,
+    "sha256": "7835ae0a546ed0bf3743ddb132240f8d46bd10d420db41f4855f4bcd61d50f47"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/numeric_domain_null.pm.gz": {
+    "bytes": 2598,
+    "sha256": "86fd26640ddd54dd32e0275d148d7630a4f860b5fd063b3160d40d0369e9854d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/receiver_copy_control.handler.pl.gz": {
+    "bytes": 2770,
+    "sha256": "a83aab850fd98339bd3ae045d19df55ba3463e32ac37787d4fc7345e8abb4848"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/receiver_copy_control.pm.gz": {
+    "bytes": 2782,
+    "sha256": "3d60094d37bcd3090fd860906b637379099f4f1af57c928a2c2adaa6cbb3a34c"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/repeated_copy_rejection.handler.pl.gz": {
+    "bytes": 2784,
+    "sha256": "45eab75775d2c0cbdad435547b0fe4f8f693c2b3ad54ef74d15964e747ad0b32"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/artifacts/repeated_copy_rejection.pm.gz": {
+    "bytes": 2795,
+    "sha256": "0a333ce5a31ca4de8168743b4c182791d7af0aba71f34f8151f65db28381ccc7"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/command.json": {
+    "bytes": 302,
+    "sha256": "53c86a65438e58e3a510671511f59b4f862be21f5d094d53d92069f47e9f455c"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/input-identities.json": {
+    "bytes": 54063,
+    "sha256": "64dc1c3243c32d6106246f19556e2773fafa98e45230a2dc256c9e2fe004f200"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/inputs-before-first-run.tar.gz": {
+    "bytes": 611712,
+    "sha256": "b96cda9b40dbde521b305bdc57ee0617372240f841089b38ee085ed4dea38843"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/stderr.log.gz": {
+    "bytes": 9717,
+    "sha256": "d01f18e0ce6806fcd74a1823d207ed1029b9fd6a2a8540dfc6dbf1d25f0fb071"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/before/stdout.log.gz": {
+    "bytes": 916,
+    "sha256": "d46617dcd885b8aba03c05601fd26c909367937e0683ac0a397962e857d936c9"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/capture.py": {
+    "bytes": 3110,
+    "sha256": "fbce30a6d82606bab0eca26a79fd7ccca5a934d46b49828d26f015e6316e586b"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/capture_final.py": {
+    "bytes": 3152,
+    "sha256": "4d759bdcaad6dff635d60e5e136efbbf02defb3a337b4630731111b2219e51e9"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/causal-control-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/causal-control-result.log": {
+    "bytes": 197,
+    "sha256": "0f7dec062587a8da5a83697188eba55e1f6b56ab98d06434c470eb310cd37251"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/causal-control-stderr.log": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/causal_control.py": {
+    "bytes": 4429,
+    "sha256": "463b883f0f24f55dac3cec5cf5fc8c55dc25a7ffcb964127b93e10c09a552113"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "44b3af0a192591f53819efb7b6acba3ac9384f7ebaa7ad4806386dda2de0cbd3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/bridge_rejection.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "cd27e6bc470cbcbcafd0d282ccd3173dbd559772a62687f68ec57096cf2f0519"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/bridge_rejection.pm.gz": {
+    "bytes": 2908,
+    "sha256": "1205b2e7a9c24351e7479344ca2ce0c83af2e86ec47c363f32fc98bf6589f7c3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "9abad9e5232c1ad214051ac6349e72c1effefc80614848c36407b6afe95f87a8"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "c4c2c47bbdaa646acef74a94ee2963e83dd8883de0b640b35a40d0c3822cb687"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_rejected_default.handler.pl.gz": {
+    "bytes": 2869,
+    "sha256": "3e66d72d602f6dde6604ba35fea50c0e17a7be7089f484a44e3a619a43bba8a7"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_rejected_default.pm.gz": {
+    "bytes": 2880,
+    "sha256": "9ecd3d936975d6097de0c322681320105b83b80f0ed3df9cdd7c52ef49b2476f"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_rejected_with.handler.pl.gz": {
+    "bytes": 2816,
+    "sha256": "cabffbdc62317d5dc70cc283f43641ed64fb44117195c19327b5125f233f8fde"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_rejected_with.pm.gz": {
+    "bytes": 2826,
+    "sha256": "720f4cf98b5a6f217c815bd8a6b91b6ca47807601c25a765502b52f60eb32d7d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_valid_null_with.handler.pl.gz": {
+    "bytes": 2707,
+    "sha256": "19229afe773e6fda7acc4baa986f7ae06e0fd21e709f4fee76fef125456c05ff"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_valid_null_with.pm.gz": {
+    "bytes": 2717,
+    "sha256": "b82dcfac0d4f0e06cabd99cd8d310747f72e15a35f2ab001f6090eefe2ba6935"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_without_with.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "da4a1754f72e9befa64295c083e51c9615e21e104b31dd4652e7e59fa3b27c62"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/copy_without_with.pm.gz": {
+    "bytes": 2787,
+    "sha256": "b9245760e784bda74c8437e811d78e6d299113efd2ce9701e772b6faea966c57"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/empty_copy_with.handler.pl.gz": {
+    "bytes": 2749,
+    "sha256": "0d8d90885da2388a9648bcc8ac69354fd61160c25a2055710d5af99ad701e9dc"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/empty_copy_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "db307bddae0cbe59d3ebe5494173d0c8a2b1e994c28b65ba23ce929234f21a8c"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/logical_rejection.handler.pl.gz": {
+    "bytes": 2901,
+    "sha256": "544f2392e59a8e5d4a1c159f2c9cb0957d3a28d95d8ce7cfe8e30f77dffb4540"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/logical_rejection.pm.gz": {
+    "bytes": 2912,
+    "sha256": "9d85ec809da450ef48368785e65d0ba77aa8c394c77dae9e29143084953ef235"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/needed_copy_source_error.handler.pl.gz": {
+    "bytes": 2562,
+    "sha256": "c65ae5daf6aaf7f7bb93c969864ac06a32b7cd1323581819c3011b5e6055ddbb"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/needed_copy_source_error.pm.gz": {
+    "bytes": 2574,
+    "sha256": "5a52f0f04e8f06ee782db467b950ce36b4c0434750271acfbd8397e348c727a5"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/numeric_domain_null.handler.pl.gz": {
+    "bytes": 2585,
+    "sha256": "c2da926d1609c43bcc647516be6e758d4c840e5a0b57befd4ffcd88ed3809eb8"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/numeric_domain_null.pm.gz": {
+    "bytes": 2596,
+    "sha256": "614f02476b605d1c1eeaf9d90edf01f71bc1f8bca561466f26697681e8e41e7e"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/receiver_copy_control.handler.pl.gz": {
+    "bytes": 2827,
+    "sha256": "467b2f1c758dfa1329435e78bdf17c793461baa11dbf8e8d9f7978b2d6f044fb"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/receiver_copy_control.pm.gz": {
+    "bytes": 2837,
+    "sha256": "60327d34841819dde9f95810ade6604cdc1d4374c944a7a62061d2fa8dc2b481"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/repeated_copy_rejection.handler.pl.gz": {
+    "bytes": 2835,
+    "sha256": "384417f9c3ed56f61d132dccc4d5618369141897ce47a5b3b25b9d1007471d2f"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/artifacts/repeated_copy_rejection.pm.gz": {
+    "bytes": 2846,
+    "sha256": "71d2d68796f40b0ff9d37b531d7194b018c3fd99c2d165a8a08481b2c439b0d4"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/command.json": {
+    "bytes": 458,
+    "sha256": "8a526a07edf87d971d94e45d1bedf5a3f8345778c916f7945073a556440bf3d7"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/input-identities.json": {
+    "bytes": 54702,
+    "sha256": "bcf74b21f1b0b55d895b89c303e2d50ba78091aef0cd7aee0eba6d6ac8e8a8a5"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 616658,
+    "sha256": "b66ec19f0fe8ec1d3fbf802e6a46aa046840b037fe9a66a30be3f97e1bdcc3d8"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/stderr.log.gz": {
+    "bytes": 10229,
+    "sha256": "0c5ed7bf6ed9c49b0191f214a527390a7b2756c4a2262699a43da89e9204dd2d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/direct/stdout.log.gz": {
+    "bytes": 3187,
+    "sha256": "52cba85b52e8ba7b32895fe1a7dfe5e3258001f10647a344ed85700fb200a17b"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/activation.txt": {
+    "bytes": 41,
+    "sha256": "44b3af0a192591f53819efb7b6acba3ac9384f7ebaa7ad4806386dda2de0cbd3"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/bridge_rejection.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "19b898b911490f00d767a5a447c1f0c974b8eb8073a169c6d1d79bf662f94cfc"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/bridge_rejection.pm.gz": {
+    "bytes": 2908,
+    "sha256": "ec1785b12062121376d7de3251a28b5d481d7ac9a5af19a34a81c736298eb860"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/constructor_rejected_with.handler.pl.gz": {
+    "bytes": 2747,
+    "sha256": "b2809c7894c1f6d787c740705a33f35cf7cc1b2157230652e8581442a827bca9"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/constructor_rejected_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "ea0dd0735be2c325e1e52c8b0278f4f1d42329e1434e07cdc014359e424a1879"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_rejected_default.handler.pl.gz": {
+    "bytes": 2869,
+    "sha256": "88c00ec76e75a1b109c34ba6f8021f47f60c3eb54baeb2056dd22a259cd0f14d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_rejected_default.pm.gz": {
+    "bytes": 2880,
+    "sha256": "a74159c2ffa390cc98d4fc52040c329608bff8fb0758693dcd06f7e4bbe368f1"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_rejected_with.handler.pl.gz": {
+    "bytes": 2816,
+    "sha256": "2dbcd9fb70096b09611d1b53aa1f0a1e8e76a0d15ac85b5b8a48dbc7b655893f"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_rejected_with.pm.gz": {
+    "bytes": 2826,
+    "sha256": "2499dca2e8413aaf61a30d9ecc9ca7847d8c2ebb667dbc7453bbe07802a2c89c"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_valid_null_with.handler.pl.gz": {
+    "bytes": 2707,
+    "sha256": "74936b456750aeaecc1c7fb0b3d4f4f6eb8108b724fc0cc3e6c86296602eabd0"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_valid_null_with.pm.gz": {
+    "bytes": 2717,
+    "sha256": "85542cb62c5e9c2d18ed0281ebdf08bed301094f0cbf59ece128f508db46e9ae"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_without_with.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "9c813f32d9b532f2eafbee4261f324193dc5cd7b256788890c6f04147632fe66"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/copy_without_with.pm.gz": {
+    "bytes": 2787,
+    "sha256": "9f2eeda91459fa75c8110192aff341b53b01143c6e642c37b3002a1871ba11cf"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/empty_copy_with.handler.pl.gz": {
+    "bytes": 2749,
+    "sha256": "b8aa3e0a0a2357db7e555a564130d16c7c33039cab472e40669f705ffd924324"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/empty_copy_with.pm.gz": {
+    "bytes": 2760,
+    "sha256": "2821f2d6668661375ffa9851c9fecb0540e7b63453e4bd480912a7d91de438a2"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/logical_rejection.handler.pl.gz": {
+    "bytes": 2901,
+    "sha256": "289a1cfe1311a85836ddeec46ba63d18dc9e1c6110ae9f9724c15dd174b86aeb"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/logical_rejection.pm.gz": {
+    "bytes": 2912,
+    "sha256": "714d86d77dc155d5f371af62912220acea487615f337111a350ae2c40cfc7694"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/needed_copy_source_error.handler.pl.gz": {
+    "bytes": 2562,
+    "sha256": "d120171d0354844828ff67dbd0e7f3dfe5fb72c51a1add1de8f80869bca78c5c"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/needed_copy_source_error.pm.gz": {
+    "bytes": 2574,
+    "sha256": "05ee65d31480fcd11a9cc9efa3c9dd2033361a3377711ab50129f8ec5e58ed4b"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/numeric_domain_null.handler.pl.gz": {
+    "bytes": 2585,
+    "sha256": "631eea7f11272071204b508ebefe4c7135a4fe70567d392c16bd1792f60a9742"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/numeric_domain_null.pm.gz": {
+    "bytes": 2596,
+    "sha256": "d1ef8280dd793859b7829c765231c3561a2970e79db2fb5734e815f9d4926175"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/receiver_copy_control.handler.pl.gz": {
+    "bytes": 2827,
+    "sha256": "c224ec407554d4c655b07704c76e2ab151afa78d28e838b14e0ec14411613d71"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/receiver_copy_control.pm.gz": {
+    "bytes": 2837,
+    "sha256": "69a9f954b2cc3f45112e48c1cde33032a526ab52c08502ab5b64c383aa4699ba"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/repeated_copy_rejection.handler.pl.gz": {
+    "bytes": 2835,
+    "sha256": "136ee0faab12ff55d87431011558f0489440ccf6f87ca3e033b72b49af7986f1"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/artifacts/repeated_copy_rejection.pm.gz": {
+    "bytes": 2846,
+    "sha256": "13793b057dd041baa183541809b7b0f6ebc692ad39ef88a343b5f4d964ee6fbc"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/command.json": {
+    "bytes": 301,
+    "sha256": "78adee294033785ca41b2dc78b9708d3892277641086cfe1f4321f798e9fe11a"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/input-identities.json": {
+    "bytes": 54069,
+    "sha256": "ca09c54af2fcd4564419694b7466f9cd4e7e88d3fc3d9f661bfd4333e7a529f2"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/inputs-before-first-run.tar.gz": {
+    "bytes": 611836,
+    "sha256": "352917cae2c1ce9b1484dfdbcbe78c5ea44a58e79aea6f0f923a4d072e42dafe"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/stderr.log.gz": {
+    "bytes": 9124,
+    "sha256": "cda19ce74e94ba2ef8c341da31e845491a81454528d42b2b335accd6f7c51f66"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/final/stdout.log.gz": {
+    "bytes": 800,
+    "sha256": "00331bc4dfb13af84fd82d5c103be90f0e63a8430d1ef6638ef15e7d0c003a89"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/case.json": {
+    "bytes": 519,
+    "sha256": "4ab7a5cd65296567526cb2f0560d5fc9bf169928490798a6ba0e0540464ea483"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/command.json": {
+    "bytes": 444,
+    "sha256": "08e2ccec78734717a491a7203fb2ddf88e0dece06f42997737b7970971862a3a"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/input-identities.json": {
+    "bytes": 17639,
+    "sha256": "c3f236289778e3e4e85a746da59ccc355e1515e14f4118b8b199ff23afe5cae8"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/inputs-before-first-run.tar.gz": {
+    "bytes": 545377,
+    "sha256": "10fd13c7527c028464106e89c3c6a890358e61ff82edec5d16796d75332bd0ca"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/logical_rejection.handler.pl.gz": {
+    "bytes": 2454,
+    "sha256": "fd2634fc70c427be2b5c4b472aee8fe29f7cbd8e99ef4f3837800f0d4f20f076"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/logical_rejection.pm.gz": {
+    "bytes": 2462,
+    "sha256": "effbeee81635eab9547db82f287d6fb627a0aca3219aa655fe47e97c100a7ee7"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse/stdout.log.gz": {
+    "bytes": 3525,
+    "sha256": "a1b5e927924b4c83448fb1bc89d8941a9f50d5e38dfd36f3bac28b2a0370469a"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/command.json": {
+    "bytes": 445,
+    "sha256": "d878d7bdb6875d3973c4acee58d3e5861e422d02c38bf94510027bea0565c2fd"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/input-identities.json": {
+    "bytes": 17639,
+    "sha256": "21ec28d3d2c1e38d0eb88ed2084f580301a88dcad2e9d1cb2f9324da264e2931"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/inputs-before-first-run.tar.gz": {
+    "bytes": 545409,
+    "sha256": "a6b609eb797882bac9337a2b359c7c81fab649ebb098f628233d0c3f3e78c521"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/logical_rejection.handler.pl.gz": {
+    "bytes": 2901,
+    "sha256": "697a310ad31ceef57408560e50889e8f422819e498ce54dea34f3f85ef0cec04"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/logical_rejection.pm.gz": {
+    "bytes": 2909,
+    "sha256": "4e46f583c087f9b61a6f57d3ff978cac2ffc5da8e0f4f9ba15f0fe71dbe9c620"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/restored/stdout.log.gz": {
+    "bytes": 3712,
+    "sha256": "7cf36727c44f97845dae66a02a36aada28a0d0a2af00af8002a709a9049bf578"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/observe_control.pl": {
+    "bytes": 3374,
+    "sha256": "8b025381f9a98ab6462b91db1e9c26f1242507d75c1cac7d79b6735a9613e6f7"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change-final.patch": {
+    "bytes": 7180,
+    "sha256": "a2a618ff05fff7b92e8ab0803d987cfccb90de9ccee24fceaa1dd053f9ef8b0f"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change.patch": {
+    "bytes": 5149,
+    "sha256": "4505e0a46f6320542f96c1c538fd4f8338c8b44876070edc4655f3dc94d45b7b"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/review.py": {
+    "bytes": 11361,
+    "sha256": "2f3b134ca39a99593cb0eb2026f04c30b7897c4369dd14b844b593834e7f566d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/seal.py": {
+    "bytes": 1334,
+    "sha256": "61691f92bc55e971dc89d7ebb13fa9ff0686144a9377c5dcf02b5388a14cb5b5"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/write_preservation.py": {
+    "bytes": 1704,
+    "sha256": "11804be23c6845ea95591e7b39d5db5409fd0b7790f00c6598f882a546d4f8bd"
+  }
+}

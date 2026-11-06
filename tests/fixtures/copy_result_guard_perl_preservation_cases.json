@@ -1,0 +1,65 @@
+[
+  {
+    "id": "numeric_domain_null",
+    "body": "return([copy(1).add(\"bad\").with(){return(\"valid-null\")},copy(1).add(\"bad\").coalesce(7)])",
+    "source": "Value:: I {return([copy(1).add(\"bad\").with(){return(\"valid-null\")},copy(1).add(\"bad\").coalesce(7)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "valid-null",
+      7
+    ]
+  },
+  {
+    "id": "empty_copy_with",
+    "body": "order=\"\";out=copy([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      0,
+      "W"
+    ]
+  },
+  {
+    "id": "repeated_copy_rejection",
+    "body": "order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).copy().copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).copy().copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "logical_rejection",
+    "body": "order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy([\"a\"]).set_key({order=cat(order,\"K\");\"k\"},1).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "bridge_rejection",
+    "body": "order=\"\";out=copy(false).cat(\"x\").split(\",\").set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy(false).cat(\"x\").split(\",\").set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  },
+  {
+    "id": "needed_copy_source_error",
+    "body": "return(copy({items=\"text\";push(items,\"x\");[\"a\"]}).coalesce(\"masked\"))",
+    "source": "Value:: I {return(copy({items=\"text\";push(items,\"x\");[\"a\"]}).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  }
+]

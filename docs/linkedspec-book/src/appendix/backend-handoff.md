@@ -4227,14 +4227,14 @@ compile despite ready descriptors. Family76 owns the canonical free-one/zero-ext
 source/prefix guards, preserving original producers, domains, order and copy depth.
 Peers must be independently assessed before any repair verdict.
 
-An independent constructor/copy control also exposes rejection-state loss. On
-current Perl, copy(["a"]).set_key("k",1).with(){return("ran")} returns"ran";
+An independent constructor/copy control also exposes rejection-state loss. At
+selection36, copy(["a"]).set_key("k",1).with(){return("ran")} returned"ran";
 the incompatible Hash operand is skipped, but the later body runs. A later
 coalesce fallback can also run. Array-constructor rejection stays null and skips
 its body. Minimal copy6 verifies three failures and three healthy native/fresh
 controls at unchanged declared runtime inputs. Legitimate copy(undef).with remains
 valid and must still run; treating every null as rejection would be wrong.
-P1 Perl76.0 owns this copy-root/zero-extra copy-prefix repair before view76.1.
+P1 Perl76.0 repairs this copy-root/zero-extra copy-prefix gap below, before view76.1.
 Earlier Count-copy proof covered another source role, not generic copy closure.
 
 Frozen view15 projects original14 unchanged sources plus a separately qualified
@@ -4246,3 +4246,36 @@ A separate qualified readonly reviewer adds an explicit typed-object check and
 rejects eight evidence corruptions. This is selection and instrument qualification;
 no production repair, peer/full-domain/native-transitive/isolation/admission proof
 is implied. Full verification remains deferred until feature coverage.
+
+
+## Perl copy result rejection state
+
+Perl76.0 retains rejection in canonical free-copy results and zero-extra first
+copy prefixes. Wrong-kind consumers skip their operands and later defaults,
+repeated copies, eager logical operands and immediate with bodies. Legitimate
+copied null, numeric-domain null and empty Arrays still permit their valid
+operations. The original typed copy producer, copy depth, signatures, source
+snapshots/errors and existing scope/callback/deferred boundaries are preserved.
+Regenerate affected emitted Perl; generated format and schema are unchanged.
+
+New12 unchanged-source native/fresh groups move seven healthy/five RED to12PASS.
+An intermediate candidate11PASS/1logical compile regression remains preserved;
+copy also needs the existing guarded logical consumer emitter. All seven original
+healthy semantic observations (including diagnostics/cursors/metadata/warnings)
+remain exact. Final/direct emitted module and handler bodies agree byte-for-byte
+for all12 sources. The selected five files pass92 top-level TAP tests, including
+free/receiver copy, constructor and Count-copy regressions; syntax checks pass.
+
+A one-source same-path control removes only copy from guarded logical ownership
+and reproduces native/fresh compile RED. Restoring the exact final owner yields
+GREEN with operands/body skipped; the checkout owner remains unchanged. Six
+readonly evidence corruptions reject. Complete original/failed/final/direct/
+control inputs, producers, module/handler strings and full command channels are
+retained in docs/checkpoints/copy-result-guard-perl-2026-11-06/.
+
+This is focused Perl implementation proof. The new standalone normal is
+`t/copy_result_guard_composition.t`; explicit canonical registration23.4.1 and
+full native/cache/transitive custody, source-context discovery, general isolation,
+unassessed peers and full23.4 admission remain separately owned. Perl Hash-view76.1
+must establish its own actual unchanged baseline at this compiler before guard
+edits. No peer or Hash-view repair is inferred from the copy fix.

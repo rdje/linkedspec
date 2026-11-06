@@ -21,7 +21,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.11` | `completed` | November5 bounded daily metadata and corruption controls pass; all artifacts/caches/proof retained. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.76.0` | `pending` | Selection36 freezes views15 and independently qualifies copy rejection6. Repair P1 Perl copy state before view76.1 and independent peers; broad verification/admission remain separate. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.76.1` | `pending` | P1 Perl copy76.0 is implemented with focused checks. Capture actual shared15 post-copy baseline before Perl view guards, then independently assess peers; broad verification/admission remain separate. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |

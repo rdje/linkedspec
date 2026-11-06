@@ -1,0 +1,11 @@
+{
+  "evidence_kind": "tool-result transcription; raw hook channels were not separately acquired",
+  "base_head": "e2eab09c3452ae2a2e54c0b7d6a46acae08fb1f2",
+  "staged_diff_check_exit": 2,
+  "diagnostic": "Trailing whitespace in retained patch context lines: producer-change.patch:8 and producer-change-final.patch:8,52",
+  "attempted_commit_exit": 143,
+  "head_unchanged_after_cancellation": true,
+  "intervention": "Terminated only this attempted commit and its hook descendants before landing",
+  "repair": "Lossless gzip transport with original-byte aliases and separate publication recovery reader",
+  "tested_runtime_source_changed": false
+}

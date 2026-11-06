@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change-final.patch": {
+    "bytes": 7180,
+    "capsule": "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change-final.patch.gz",
+    "sha256": "a2a618ff05fff7b92e8ab0803d987cfccb90de9ccee24fceaa1dd053f9ef8b0f"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change.patch": {
+    "bytes": 5149,
+    "capsule": "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change.patch.gz",
+    "sha256": "4505e0a46f6320542f96c1c538fd4f8338c8b44876070edc4655f3dc94d45b7b"
+  }
+}

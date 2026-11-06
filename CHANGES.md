@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Retain Perl copy result rejection state
+
+Canonical free-copy results and zero-extra copy prefixes now retain existing actual-kind/rejection state through defaults, repeated copies, logical consumers and with. Legitimate null/numeric-domain null/empty and existing producer/kind/depth/signature policies remain. New12 moves7healthy5RED to12PASS; intermediate11PASS/1logical compile failure remains retained. All seven healthy semantic rows stay exact. Direct five files92 tests/final syntax and actual one-source inverse RED/restored GREEN pass; six recovery corruptions reject. Regenerate affected Perl. Evidence: docs/checkpoints/copy-result-guard-perl-2026-11-06/REVIEW.md. New canonical registration/full verification remain separately owned; view76.1 next.
+
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.36 — Freeze Hash-view guards and own copy rejection prerequisite
 
 Full-source original16 public controls expose seven Perl Hash-view guard failures and a separate copy-oracle failure; compatible/typed/snapshot/empty-with/error controls stay healthy. Minimal unchanged-input copy6 qualifies three healthy/three failing native-fresh controls, distinguishing rejected prefixes from legitimate null. Freeze views15 by source-preserving projection and separate copy6; schedule P176.0 before view76.1/independent peers. Retain actual inputs/modules/handlers/full channels and original/qualified reviewer epochs; qualified recovery/eight corruptions pass. No production edit or peer/admission claim. Evidence: docs/checkpoints/hash-view-selection-2026-11-06/REVIEW.md.

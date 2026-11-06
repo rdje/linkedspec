@@ -1,0 +1,30 @@
+{
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/patch-aliases.json": {
+    "bytes": 573,
+    "sha256": "7ca6682a0de51abafb95b26037391b84ef3391646f80fcf2f082e5195132b26e"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change-final.patch.gz": {
+    "bytes": 1953,
+    "sha256": "1cf306fa08831c258821be2b1a5173f399bb01ee2b035d16cbecaee52b5b55cb"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/producer-change.patch.gz": {
+    "bytes": 1419,
+    "sha256": "e08db108159498947b3466ab883b87dae94beb39a7fdf50c67cf4d2c65a4c67d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/publish_patches.py": {
+    "bytes": 2764,
+    "sha256": "90bbe9d8c9a647d02316767530e721675a52571663cd17b90b1d3272b0b4241a"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/review.py": {
+    "bytes": 11361,
+    "sha256": "2f3b134ca39a99593cb0eb2026f04c30b7897c4369dd14b844b593834e7f566d"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/review_publication.py": {
+    "bytes": 12070,
+    "sha256": "6250558d838b91d68f9a691c8ed0027cc396b7f563d954ded4b032c916471094"
+  },
+  "docs/checkpoints/copy-result-guard-perl-2026-11-06/sealed-identities.json": {
+    "bytes": 31066,
+    "sha256": "68e9d1e28b45cc0a4a40da3a51c9493f15304d0c63cde4912045483bd3a9a63f"
+  }
+}

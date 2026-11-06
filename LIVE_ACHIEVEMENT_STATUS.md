@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT selection36 freezes Hash-view Array result guards76 and an independent P1 Perl copy rejection gap76.0. Ordinary Length74/CountKeys75/callable75.6 retain focused outcomes. Full verification stays deferred until feature coverage.
+PNT Hash-view76: prerequisite Perl copy76.0 is implemented with focused checks. Perl view76.1 and independent peers remain. Full verification stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.1.36: original16 public programs retain seven view failures, seven healthy programs, a separate copy-oracle failure and one nonadmitted arity profile. Minimal copy6 at unchanged declared inputs qualifies three healthy/three failing native-fresh cases, separating rejected prefixes from legitimate null. Shared views15 is a source-preserving projection; it was not one original15 run. Actual inputs/modules/handlers/full channels and original reviewer failure remain intact; qualified recovery/eight corruptions pass. No production change or peer verdict.
+TYPE-REFERENCE-BOOK.1.2.23.3.76.0 retains rejection for canonical free-copy and zero-extra first copy prefixes through defaults/copies/logical/with. Legitimate null/empty and existing producer/depth/signature policies stay exact. New12=7healthy5RED to12PASS; intermediate11/1logical compile regression is retained. Direct five files92 tests/final syntax, same-path source inverse RED/restored GREEN and six recovery corruptions pass. Seven healthy semantic rows and final/direct actual modules/handlers stay exact. Regenerate affected Perl; registration/native-cache/custody/full verification remain separately owned.
 
 ## Next Action
 
-Activate P1 Perl76.0 from clean Git, run actual unchanged copy6 normal baseline, then repair rejection-state preservation without suppressing legitimate null. Small direct checks/docs/commit before view76.1 and independent peers. Source/context/native-cache/isolation/declared5.4/full23.4 stay separately owned.
+Activate Perl view76.1 from clean Git; capture actual unchanged shared15 baseline at post-copy compiler before guard edits. Preserve original selection16/copy6 and independent source/error/arity profiles. Small direct checks/docs/commit, then Rust76.2; no broad suite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Perl copy12PASS/direct five files92; actual inverse RED/restored GREEN; view76.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.36 — views15 frozen by projection; copy6 distinguishes3RED/3healthy; no production edit; P176.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — each installed Lua16PASS/four routes; direct210 checks; runtime unchanged; selection36 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Julia16PASS/four routes; direct237 assertions; runtime unchanged; installed Lua5 next.
@@ -29,7 +30,6 @@ Activate P1 Perl76.0 from clean Git, run actual unchanged copy6 normal baseline,
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — initial Hash-kind/numeric-source policy23PASS/final37; consumer75.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.13 — dated artifact retention review; zero removals; P1 domain75.0.2 resumes.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — typed CountKeys9PASS/nearest28; domain next after due cleanup.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — key-count22 frozen; typed/domain producer P1s next; no production change.
 
 ## History
 

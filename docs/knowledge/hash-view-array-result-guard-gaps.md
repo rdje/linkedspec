@@ -7,7 +7,7 @@ answers:
   - "which task owns ordinary Hash-view result guards"
   - "what sources are frozen for Hash-view76"
 date: 2026-11-06
-status: selection36 frozen; P1 Perl76.0 then views76.1 and independent peers pending
+status: selection36 frozen and Perl copy76.0 focused-checked; views76.1 and independent peers remain
 tags: [perl, copy, hash, arrays, guards, with, selection]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.36; docs/checkpoints/hash-view-selection-2026-11-06/REVIEW.md retains original16/copy6 inputs/modules/handlers/full raw channels and separate original/qualified review. No production change."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/hash-view-selection-2026-11-06/review_qualified.py"
@@ -32,3 +32,12 @@ qualified reader adds an explicit typed-object assertion. This is an instrument
 repair, no product RED credit. Raw native epochs are unchanged. Full source/context/
 native-cache/transitive custody4.2/SESSION5, general isolation, declared Lua5.4
 and full23.4 remain separate. Historical recovery is not latest-code proof.
+
+## November6 copy prerequisite outcome
+
+Perl76.0 now preserves canonical copy rejection through later defaults/copies/
+logical/with while retaining legitimate null; focused new12/direct five files92
+and actual source inverse/restoration pass. See [[perl-copy-result-rejection-gap]].
+Perl view76.1 must acquire its actual unchanged baseline at this new compiler
+before any view guard edit. Original view observations above stay historical;
+no peer or view repair outcome is inferred from the copy fix.

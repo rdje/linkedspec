@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/copy-result-guard-perl-2026-11-06/observe_control.pl",
+    "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/owner.pm",
+    "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/case.json",
+    "docs/checkpoints/copy-result-guard-perl-2026-11-06/logical-control/inverse"
+  ]
+}
