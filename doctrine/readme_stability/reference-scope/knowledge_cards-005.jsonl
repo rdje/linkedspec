@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":14294,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-backend-full-parity-plan.md","sha256":"7e3fbffed6633dcb0907065ae4816fca609056a334bb952eac8a240aec2e4b34","type":"member"}
 {"bytes":3583,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-postcall-return-scope-gap.md","sha256":"c0c8c94f09cff020a7b65ec787ac96bb876b65f507eeecf368d0b7720bf1d154","type":"member"}
 {"bytes":3634,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-target-regex-projection.md","sha256":"772501cc71e8cc155937328f6ec4da1414340587fad86a7a4f00f4f4fab7dc95","type":"member"}
 {"bytes":3874,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-body-fluent-suffix-loss.md","sha256":"39167758e4cd9dd652162d2735187a47cf4b4d2899374b8acc99e0752327ef3c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":9090,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-project-data-ssd-storage.md","sha256":"69cf477446d686e1d865d5f51586ca64df4417f5eb8ad53106e232fa7aa06889","type":"member"}
 {"bytes":2165,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-pure-split-bridge.md","sha256":"67b43679cd2858dbecb52f25b8b639985fea6cf0dfb8d1ae6738dd2261582de0","type":"member"}
 {"bytes":2281,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-push-snapshot-result-guards.md","sha256":"5b0300638a70d141f61a5b54f54d0f0f789231d81f43a0f91bc3596bc995b04a","type":"member"}
-{"bytes":15980,"lines":205,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-query-generated-observation-consumer-reading.md","sha256":"02622582dada29256fc5cdb37d025269eb3255c7dda3892fd9a74986acfdc362","type":"member"}

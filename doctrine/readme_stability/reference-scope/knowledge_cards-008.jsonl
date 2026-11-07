@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3373,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dynamic-codeblock-receiver-guard-gap.md","sha256":"9768d54b3bdd38669e3a122dd4bfd27c859fa20810b972a7b2d192dd02ed0008","type":"member"}
 {"bytes":4769,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitcontext-callback-capture.md","sha256":"1e6dd57d3a8499859aa8e28a7912a4220f2704d694d7db27f8b575e9d6372c52","type":"member"}
 {"bytes":3698,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-boundary-regex-catalog-gap.md","sha256":"5e428ef766467f7c4b140889546ff248a4ab1a80cd1766dce33198ba25b298bf","type":"member"}
 {"bytes":3484,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-ordinary-recursion-guard-gap.md","sha256":"ee8e8db329ae8a585acdc81b9d7d8a797f292cd1782056ac101aa73d0c1d61b1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3057,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-push-aggregate-value-abi.md","sha256":"3b235fa484cf52e285d5a2d440f6fef8fc013a3453d431e794a60f0699f12527","type":"member"}
 {"bytes":5057,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-action-source-ownership.md","sha256":"b7ba189b07c3438919593688514a05112eea8f1778eefd68452c5a90cd06c15b","type":"member"}
 {"bytes":3434,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-boundary-labels.md","sha256":"8b54b996767c9c538ccf17ede223d8bebd9098158fd1a89cd5aebdcbadece6b1","type":"member"}
-{"bytes":2091,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-primitive-rewrite-event-drift.md","sha256":"1f765957c9459a1aa5cef4289fc64b2af9de8c55b9e1c6f5b2de8a41dbb3a3a5","type":"member"}

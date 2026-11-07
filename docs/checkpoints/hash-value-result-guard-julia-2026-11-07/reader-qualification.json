@@ -1,0 +1,15 @@
+{
+  "actual_versions": {
+    "after": "julia version 1.12.7\n",
+    "after-complete": "julia version 1.12.7\n",
+    "before": "julia version 1.12.7\n",
+    "direct": "julia version 1.12.7\n",
+    "intake": "julia version 1.12.7\n"
+  },
+  "changed_assumption": "b'julia version 1.12.6' in raw(phase,tag='version')",
+  "original_exit": 1,
+  "original_reader_sha256": "e28f9d38b49150ad7f970736dae423f140b46366d68c8ae460395d8ab2a3615d",
+  "qualified_reader_sha256": "3e430c75c61b4e8ba4d6e7c519741fa07fbf252c4815261f3e08bfa9a8a95cfc",
+  "scope": "reader-only derivation of historical captured host version; no runtime/probe/normal/target/semantic observation edits",
+  "substitution": "raw(phase,tag='version')==raw('intake',tag='version') and re.fullmatch(rb'julia version [0-9]+\\.[0-9]+\\.[0-9]+\\n',raw(phase,tag='version'))"
+}

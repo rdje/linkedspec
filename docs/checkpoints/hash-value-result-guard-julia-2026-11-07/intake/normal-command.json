@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=julia",
+    "--startup-file=no",
+    "--history-file=no",
+    "--depwarn=error",
+    "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/observer.jl",
+    "tests/fixtures/hash_value_result_guard_julia_cases.json",
+    "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/intake"
+  ],
+  "cwd": ".",
+  "environment": {
+    "JULIA_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "JULIA_PKG_PRECOMPILE_AUTO": "0"
+  }
+}

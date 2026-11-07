@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT bounded Hash-valued77: Perl/Rust/Dart have focused outcomes. Independent Julia77.4 next, then installed Lua77.5; full23.4 remains separate. Daily artifact4.15 is complete.
+PNT bounded Hash-valued77: Perl/Rust/Dart/Julia have focused outcomes. Independent installed Lua77.5 next; full23.4 remains separate. Daily artifact4.15 is current.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.77.3 retains Dart pure Hash-result actual-kind/rejection guards after original first-source policy. Independent89/13RED becomes89PASS/four routes; exact private SDK old/current13RED/89PASS with actual frames/routing, direct151/fatal analysis/format/candidate identity and first readonly/eight controls PASS. All76 healthy observations/65 own profiles/matching89 parsed-module pairs exact, full needed diagnostics retained. Producers/source/arity/key/copy/collision/mutation/format unchanged; rebuild Dart apps. Actual grammar/routing precede SDK use; no full context/native custody/admission claim.
+TYPE-REFERENCE-BOOK.1.2.23.3.77.4 retains Julia pure Hash-result actual-kind/rejection guards and initial producer policy. Independent89/shared28 plus61 fences,13 original failures to510PASS/four routes/direct825; exact private old/current13RED/89PASS with89 frames. All76 healthy observations/65 profiles/89 actual parsed-module pairs exact. Partial with-normalization gap and original reader manifest/host version failure remain explicit; separate qualified readonly0/empty stderr/eight corruptions PASS. Scalar_result/mutation policy and Hash producers remain exact. Rebuild apps/runtime; formats unchanged. No full context/native custody/admission claim.
 
 ## Next Action
 
-From clean Dart77.3 landing independently activate Julia77.4. Acquire unchanged28/own source/arity/error fences and actual SDK/grammar inputs before use, repair demonstrated bounded result gaps only, then smallest direct/inverse/recovery/book/Knowledge/live/commit. Installed Lua5 follows; no imported peer policy or broad verification between feature slices.
+From clean Julia77.4 landing independently activate installed Lua77.5. Acquire unchanged28/own source/arity/error fences and actual SDK/grammar inputs before use, repair demonstrated bounded result gaps only, then smallest direct/inverse/recovery/book/Knowledge/live/commit. No imported peer policy or broad verification between feature slices.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.77.4 — Julia89/four routes510PASS/direct825, exact private13RED/89PASS, qualified readonly/eight controls; partial/version correction explicit; Lua77.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.3 — Dart89/four routes/direct151; exact private13RED/89PASS,65 own profiles/89 artifact pairs/eight controls; Julia77.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.15 — bounded1157-row daily review/five controls/readonly replay; zero removals, protected artifacts retained; Dart77.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.2 — Rust89/four routes/direct141; qualified13RED/89PASS/nine controls; compiler-failure/help-input qualification explicit; Dart77.3 next.
@@ -29,7 +30,6 @@ From clean Dart77.3 landing independently activate Julia77.4. Acquire unchanged2
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.1 — Perl views15PASS/qualified4files67; stale Length oracle reconciled; actual inverse/eight controls; Rust76.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Perl copy12PASS/direct five files92; actual inverse RED/restored GREEN; view76.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.36 — views15 frozen by projection; copy6 distinguishes3RED/3healthy; no production edit; P176.0 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — each installed Lua16PASS/four routes; direct210 checks; runtime unchanged; selection36 next.
 
 ## History
 

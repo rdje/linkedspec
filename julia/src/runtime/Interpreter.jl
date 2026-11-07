@@ -6305,6 +6305,16 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
+    hash_value_chain = _runtime_is_ordinary_hash_value_result_chain(engine, chain.receiver, chain.calls)
+    preserve_initial_hash_value_source = hash_value_chain && !kind_guarded_result &&
+        !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
+        !_runtime_is_ordinary_key_count_result_chain(chain.receiver, ()) &&
+        !_runtime_is_ordinary_hash_view_result_chain(engine, chain.receiver, ()) &&
+        !_runtime_is_ordinary_hash_value_result_chain(engine, chain.receiver, ()) &&
+        _runtime_is_ordinary_hash_value_receiver_call(first(chain.calls))
+    # Only the initial helper keeps its producer fallback. Its actual result
+    # owns later consumers before view and size source permissions are considered.
+    kind_guarded_result = kind_guarded_result || hash_value_chain
     hash_view_chain = _runtime_is_ordinary_hash_view_result_chain(engine, chain.receiver, chain.calls)
     preserve_initial_hash_view_source = hash_view_chain && !kind_guarded_result &&
         !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
@@ -6330,6 +6340,7 @@ function _evaluate_runtime_fluent_chain!(
         initial_count_source = preserve_initial_count_source && call_index == 1
         initial_key_count_source = preserve_initial_key_count_source && call_index == 1
         initial_hash_view_source = preserve_initial_hash_view_source && call_index == 1
+        initial_hash_value_source = preserve_initial_hash_value_source && call_index == 1
         # A legitimate null source keeps canonical has_key's key evaluation.
         # Earlier incompatible consumers return before this step.
         nullable_presence = value === nothing &&
@@ -6345,7 +6356,7 @@ function _evaluate_runtime_fluent_chain!(
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
         if (reduction_result || kind_guarded_result) && !initial_count_source &&
-            !initial_key_count_source && !initial_hash_view_source &&
+            !initial_key_count_source && !initial_hash_view_source && !initial_hash_value_source &&
             !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && !nullable_membership && !nullable_index && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
@@ -6860,6 +6871,58 @@ function _runtime_is_ordinary_key_count_result_chain(receiver, calls)
         something(first_call.source_method, first_call.method) == first_call.method &&
         !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
         isempty(first_call.args)
+end
+
+# Pure Hash-valued helpers gain result ownership only for canonical ordinary
+# positional forms. Deferred/callback and malformed calls retain their policies.
+function _runtime_is_ordinary_hash_value_arguments(args)
+    return all(arg -> arg isa ActionPositionalArgument && arg.value isa Union{
+        ActionVariableExpr, ActionNumberLiteralExpr,
+        ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+        ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+        ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+        ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+        ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+        ActionAssignNestedAccessExpr,
+    }, args)
+end
+
+function _runtime_is_canonical_hash_value_arity(helper, count)
+    helper == "merge_hash" && return count == 2
+    helper in ("set_key", "rename_key") && return count == 3
+    return helper in ("drop_keys", "pick_keys") && count >= 2
+end
+
+function _runtime_is_ordinary_hash_value_receiver_call(call)
+    return something(call.source_method, call.method) == call.method &&
+        !call.trailing_block_arg && !call.receiver_trailing_block_arg &&
+        _runtime_is_canonical_hash_value_arity(call.method, length(call.args) + 1) &&
+        _runtime_is_ordinary_hash_value_arguments(call.args)
+end
+
+function _runtime_is_ordinary_hash_value_result_chain(engine, receiver, calls)
+    any(calls) do call
+        helper = canonical_action_helper_name(call.method)
+        helper in _RUNTIME_TREE_TRAVERSAL_NAMES ||
+            !(_runtime_is_ordinary_hash_value_arguments(call.args) ||
+                (helper == "with" && length(call.args) == 1 &&
+                    first(call.args) isa ActionPositionalArgument &&
+                    first(call.args).value isa ActionCodeblockArgumentExpr)) ||
+            ((call.trailing_block_arg || call.receiver_trailing_block_arg) && helper != "with") ||
+            !(helper in _RUNTIME_PURE_HELPER_NAMES || helper in _RUNTIME_ARRAY_HELPER_NAMES ||
+                helper in _RUNTIME_HASH_HELPER_NAMES ||
+                helper in ("copy", "with", "and", "or", "not", "coalesce", "coalesce_nonempty"))
+    end && return false
+    if receiver isa ActionCallExpr
+        has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return false
+        if something(receiver.source_method, receiver.name) == receiver.name &&
+            !receiver.trailing_block_arg &&
+            _runtime_is_canonical_hash_value_arity(receiver.name, length(receiver.args)) &&
+            _runtime_is_ordinary_hash_value_arguments(receiver.args)
+            return true
+        end
+    end
+    return length(calls) > 1 && _runtime_is_ordinary_hash_value_receiver_call(first(calls))
 end
 
 # Ordered Hash-view producers retain input policy; canonical ordinary free-one

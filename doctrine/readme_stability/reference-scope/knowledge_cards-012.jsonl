@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":10458,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-spec-self-hosted-grammar.md","sha256":"727c710695b3a82d1544f2ecef49d3da958d94a01ed95d996b97880adc8074d6","type":"member"}
 {"bytes":3833,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-top-rule-no-regex-two-rule-minimum.md","sha256":"e569ab56048c6d7e4a8b44f56e4a61904964df3c63e47dcc1ddaa023d533e220","type":"member"}
 {"bytes":3468,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-and-bcode-unbound-inputs.md","sha256":"387291427b703c2c49fd521bc2658f63291975053c5bb77abe1ecf5973150cb4","type":"member"}
 {"bytes":2335,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-backend-portability-ceiling.md","sha256":"ea4df84a1081bccd8a557cf2a62eea0113959c5e0c1c21ea497abd59b60120ff","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2042,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-coverage-extension-split.md","sha256":"d36ddea8e2fb49cecdd1b92cf7a2b47d4612013b1d62c1a7785a072fad10974f","type":"member"}
 {"bytes":4382,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-cross-variant-capability-contract.md","sha256":"e12e5b3079fe94669a4702d93e999a98a338557de6bccf1f1717c26cd550d9c8","type":"member"}
 {"bytes":2131,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-emitcontext-owner-bridge-decisions.md","sha256":"7a9ba0728c1e56a31dc6a81433bf723d327247cb777c737c9dd0b7be95201db8","type":"member"}
-{"bytes":3205,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-handler-branch-helper.md","sha256":"b4e90f648a7b4e81450f456e040600d76e004bf26ad6ba7b000193357df2b190","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":15980,"lines":205,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-query-generated-observation-consumer-reading.md","sha256":"02622582dada29256fc5cdb37d025269eb3255c7dda3892fd9a74986acfdc362","type":"member"}
 {"bytes":22449,"lines":329,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-commit-closeout-audit.md","sha256":"4633a10b9ecec33c6d3e2e456d0fb9db7759ecfa5abe8ac6f88f162b9fb0b9fc","type":"member"}
 {"bytes":22719,"lines":327,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-admission.md","sha256":"8b8dc415fc24706b140128b851752676a68dbf169840649871d78701692b4b9c","type":"member"}
 {"bytes":21407,"lines":321,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-proposal.md","sha256":"8d353b371b219816af3aa64432c7d5233bd369dd76661febeead7b26ab5686d9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7466,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-julia-runtime.md","sha256":"8532856277de595c2c07d389272acb0c16ca890ca266c56da9da7f9cc58fecd7","type":"member"}
 {"bytes":5453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-lua-runtime.md","sha256":"a3810243b04dc05183fe1c047bd20874215865d5d1e2999c80ecef232cddf9db","type":"member"}
 {"bytes":11288,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-neutral-contract.md","sha256":"c61a6a296505124974789b562b5d285b8f0f5f9dd978c94afb308c60dfc0590b","type":"member"}
-{"bytes":11828,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-rust-runtime.md","sha256":"e21fa1298044904f87481ecaab897a0129c64e84eedbf6bc89fab558fb0356db","type":"member"}

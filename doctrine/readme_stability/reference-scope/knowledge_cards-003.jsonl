@@ -6,7 +6,7 @@
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
 {"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
 {"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}
-{"bytes":3658,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.3","path":"docs/knowledge/hash-value-result-guard-selection.md","sha256":"8193305057da94ce015b1cb686a12dfbce9cf55dfa6a21472186ebe7f1d19fb9","type":"member"}
+{"bytes":4200,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.4","path":"docs/knowledge/hash-value-result-guard-selection.md","sha256":"403e97a60d409537435fae4b06feb3b9a3f35abcc97676e2792c19ac2ef4f5fb","type":"member"}
 {"bytes":6744,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"069041fd6ac15893ee7215bdc53918862a8de167e5300b94371cd419dbf1b194","type":"member"}
 {"bytes":8469,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-objective-audit-input-recovery.md","sha256":"0056baa6fcce07fdbd38cd70d0f1832001636aa51ac307efdc030f54cf5dc830","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
@@ -90,6 +90,7 @@
 {"bytes":2981,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-global-cli-61-audit.md","sha256":"f7be5e9d4877a49f534b2c6e035697bd8989ff89236351f859730101a5e98583","type":"member"}
 {"bytes":5097,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-global-cursor-option-removal.md","sha256":"e3979981ce2c9b74eda2730c205a726ab46f716543c2b3b01023bf592e54ab5f","type":"member"}
 {"bytes":5862,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-governed-capture-mark-parity.md","sha256":"aebee7aa9897d1fdac112645be8e34effa6bb8e3e796a32c7eb13e5d2806b694","type":"member"}
+{"bytes":4583,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.4","path":"docs/knowledge/julia-hash-value-result-guards.md","sha256":"56ffde868aa2d875f1fd65b3a9b65e18ad067f8c8f13dde9a884d0fd8d8b7fa5","type":"member"}
 {"bytes":3648,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.4","path":"docs/knowledge/julia-hash-view-result-guards.md","sha256":"e8e2e95a7939ba25d1612cee502c8a60cd3b17682623b342b8ee47a84f251e9c","type":"member"}
 {"bytes":2563,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-helper-regex-flag-normalization.md","sha256":"4ba709483edd4336fe864451cdac365b35d5e86770ed4baf6295a902ee9fc4ce","type":"member"}
 {"bytes":2985,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-implicit-blind-iteration-collections.md","sha256":"4ff297e4de92da322cee5b67bfd3644ba25935c1bd5c8e4343aac6ff7cea470f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4097,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-arguments-resolution-loading.md","sha256":"b0d040014759ebcce88d73756af81443714a62f9d46062c93b88f2ca4350c83e","type":"member"}
 {"bytes":4625,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-failure-trace-routing.md","sha256":"1f2d9fcf5e3258057447ed137cd2cacceadea04636c45385f92fd83d2c88cc90","type":"member"}
 {"bytes":3333,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-mechanism-audit.md","sha256":"736e8d25757f9ff8de076aa2488fedc523fb8c65aace179d4dbd6b3763207351","type":"member"}
-{"bytes":6735,"lines":93,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-native-execution-canonical-json.md","sha256":"e58b9e31ec6aacfe4107ee8e90f20c29f46ef3b8f99e6fffbbbb1adbe702f048","type":"member"}

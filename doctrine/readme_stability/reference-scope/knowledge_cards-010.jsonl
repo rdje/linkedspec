@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4385,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-observation-public-no-drift.md","sha256":"b0eb978c70ef292f35adc10e5ca6e6be6a30d3e99cc00dbbfa848d927eabb6da","type":"member"}
 {"bytes":4889,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-observation-recurring-gate.md","sha256":"0c02c75080a9b581d04b1394d28a2abea4b729e3d4d1728c4de545df024a44a2","type":"member"}
 {"bytes":11803,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-source-observation-audit.md","sha256":"9565ac25552a6ae15bab2c560a48e623bc34903ae5708e8944770d1a03381a88","type":"member"}
 {"bytes":1358,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.4","path":"docs/knowledge/reference-scope-selected-owner.md","sha256":"9f45e1af52c5affe16f70b70e3012131abe194347b3dda6c54124dd29018ba9c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4962,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-spec-resolution.md","sha256":"596ca5802f894ee4ca501e09e70dec268daf4dbc2655ac3f5ecba6e2c7b0bf47","type":"member"}
 {"bytes":3538,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-null-output-oracle-fixture-boundary.md","sha256":"ab8bee86d07f0b08e8ec4d55c94f6c18a81ca6182f9b38e178a4cb7cce3deeef","type":"member"}
 {"bytes":2609,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-numeric-comparison-source-guards.md","sha256":"4e93b75ec5c5a3fbc34ed6483756c8931e8c6722e5fb06f002168183d0140f8e","type":"member"}
-{"bytes":6629,"lines":96,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-outer-action-source-fidelity.md","sha256":"2e75f136b27150bd97d591becea8d8ff0c763ed6e07a159820d2883266f26840","type":"member"}

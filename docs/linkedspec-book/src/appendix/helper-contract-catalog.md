@@ -1449,7 +1449,7 @@ Needed key errors propagate before a consumer runs. Regenerate emitted Perl pars
 
 The ordinary Hash-valued results of `merge_hash`, pure `set_key`, `rename_key`,
 `drop_keys` and `pick_keys` now retain actual-kind/rejection guards on bounded Perl,
-Rust and Dart routes. Incompatible Array consumers return null before operands; later copy/
+Rust, Dart and Julia routes. Incompatible Array consumers return null before operands; later copy/
 logical/with work is skipped, and needed producer errors remain errors. Current
 source/arity/key/collision/mutation policies stay intact. Canonical selected free/
 receiver arities are merge2/1, set/rename3/2, drop/pick with at least one key.

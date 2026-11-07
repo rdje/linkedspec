@@ -1,0 +1,40 @@
+{
+  "actual_module_parsed_pairs_unchanged": 89,
+  "complete_normal": 510,
+  "direct_assertions": 825,
+  "healthy_preserved": 76,
+  "normal_before": {
+    "FAIL": 52,
+    "PASS": 458
+  },
+  "observed_julia_version": "julia version 1.12.7",
+  "original_failures": 13,
+  "own_source_controls": 61,
+  "partial_after": {
+    "FAIL": 12,
+    "PASS": 498
+  },
+  "private_current": {
+    "PASS": 89,
+    "frames": 89
+  },
+  "private_old": {
+    "RED": 13,
+    "frames": 89
+  },
+  "profiles": 65,
+  "programs": 89,
+  "reader_qualification": "original reader exit1 on manifest-derived1.12.6 assumption; separate reader derives actual captured host bytes; original proof/seal/reader/channels unchanged",
+  "recovery_corruptions": [
+    "hidden original RED",
+    "later body still runs",
+    "masked required error",
+    "normalized initial source",
+    "Bool normalized to Number",
+    "missing preservation member",
+    "profile source drift",
+    "actual module drift"
+  ],
+  "scope": "finite declared own direct source/grammar/artifact proof; fresh Modules share runtime/process; full native/cache/transitive custody4.2/SESSION5, contexts, general isolation, registration and23.4 remain separate",
+  "shared": 28
+}

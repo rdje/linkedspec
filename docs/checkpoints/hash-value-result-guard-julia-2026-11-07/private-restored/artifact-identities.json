@@ -1,0 +1,892 @@
+{
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/constructor_hash_guard.jl": {
+    "bytes": 5319,
+    "mode": 420,
+    "sha256": "ad3c14222ee04147b4b7e4c0d264af4b786ec63d2a345354694dcafa58db734f"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/drop_keys_compatible.jl": {
+    "bytes": 5297,
+    "mode": 420,
+    "sha256": "0ff695b761f6687a2428aa3d50d04d976b652b020099b84019f8d414d9d908cc"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/drop_keys_free_array_guard.jl": {
+    "bytes": 5171,
+    "mode": 420,
+    "sha256": "fd2dc554b8be209cd85babb0a8b45b8c3eb9e11fea485f386bad0b06697f6275"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/drop_keys_free_zero_keys.jl": {
+    "bytes": 5365,
+    "mode": 420,
+    "sha256": "50602a38008c7d7009f22f09c18512de3128d7be3a7f452484ac1fb48f93529a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/drop_keys_receiver_array_guard.jl": {
+    "bytes": 5179,
+    "mode": 420,
+    "sha256": "1d7a35b8b91dd1759ff6f48b3223431405eba7c29259f412bf9515b68a5a6fb7"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/drop_keys_receiver_zero_keys.jl": {
+    "bytes": 5379,
+    "mode": 420,
+    "sha256": "1176a2c69eb0e4468cde4e421e7b1f2b60f39ebf8611285c26c99a875a401cc2"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/empty_pick_with.jl": {
+    "bytes": 5287,
+    "mode": 420,
+    "sha256": "603e748269c372c5c3884a4460601d0360fada78ceb5b9498c2b81688eda280e"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/explicit_bridges.jl": {
+    "bytes": 5697,
+    "mode": 420,
+    "sha256": "28758d34270bf8ece56ea699bddadf7ccbda8c4c4350ccc64f33cfddf7cf9bff"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/extra_merge_hash_free.jl": {
+    "bytes": 5737,
+    "mode": 420,
+    "sha256": "e5fb86a5fcc3235802b13f0f09ae4b1a52f8e4bb164a00cab6c03c5d733599d6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/extra_merge_hash_receiver.jl": {
+    "bytes": 5745,
+    "mode": 420,
+    "sha256": "26e38f411230a4e99a1b7ce4c18777de1be356a3ddc323f7971f7fee6c4dfeee"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/extra_rename_key_free.jl": {
+    "bytes": 5749,
+    "mode": 420,
+    "sha256": "ec387fc0e400b07103b8cbddbebfd5ef9605fe954322eccef6352c5b0595260e"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/extra_rename_key_receiver.jl": {
+    "bytes": 5757,
+    "mode": 420,
+    "sha256": "6acfb9632d2d8ea8e558b2f0cfb39b47eb9cd2570520012a834731206709b8e5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/extra_set_key_free.jl": {
+    "bytes": 5701,
+    "mode": 420,
+    "sha256": "a1e29645a68aedeef5a6b7e2bfba7559870a243feaf7a72f91909256a9948c50"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/extra_set_key_receiver.jl": {
+    "bytes": 5709,
+    "mode": 420,
+    "sha256": "ad9630f1d0a77bfebb968520f89dc705a99e250a9aeae12452a12d9cc3621875"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_drop_keys_free.jl": {
+    "bytes": 4731,
+    "mode": 420,
+    "sha256": "1042960c1aad8603233fcd263e227a161404953e1cfc75741046b3d6c0fcc3ca"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_drop_keys_receiver.jl": {
+    "bytes": 4739,
+    "mode": 420,
+    "sha256": "909515f431181ba48c195495a8f83b5d95f29ad6306041c6d941b24a190ed26c"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_drop_keys_with.jl": {
+    "bytes": 5241,
+    "mode": 420,
+    "sha256": "5dff16ba3eca133f822d5942cf054e528d17746d56f1ee5f7196b42b9fd0d0cb"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_merge_hash_free.jl": {
+    "bytes": 4763,
+    "mode": 420,
+    "sha256": "794396b8180ccb5dcb560b8ed6a66191d37e6dcc6ad02fb23b98bd65590969d3"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_merge_hash_receiver.jl": {
+    "bytes": 4771,
+    "mode": 420,
+    "sha256": "17697deb0abd37d200e3f28251e90f419080c800a4028d238b3585b26187fee9"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_merge_hash_with.jl": {
+    "bytes": 5273,
+    "mode": 420,
+    "sha256": "6344732662221f5aa84f422dcad8813c87e63861bac9f6738ff37fefb38b46c4"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_pick_keys_free.jl": {
+    "bytes": 4731,
+    "mode": 420,
+    "sha256": "0e3c4130ae053346b3e3a392f4cf9c93db7a9c20829742a8200b15ee493bea12"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_pick_keys_receiver.jl": {
+    "bytes": 4739,
+    "mode": 420,
+    "sha256": "2deb22d1403ea5840d452824361a6e0c431534fe72985f58000863e836af69ef"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_pick_keys_with.jl": {
+    "bytes": 5241,
+    "mode": 420,
+    "sha256": "419ba8f43761e0292753ae2a299618597bcf50c27fd6e92817dc92b13ab4aa95"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_rename_key_free.jl": {
+    "bytes": 4775,
+    "mode": 420,
+    "sha256": "eb3ba08e4e2d2625097765cd5e81730e46ae4a59a48787cd5156520edd901bc9"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_rename_key_receiver.jl": {
+    "bytes": 4783,
+    "mode": 420,
+    "sha256": "01556b585f37044a95d3de07a968a4468692f4932393d7f70dad37fbad019ff4"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_rename_key_with.jl": {
+    "bytes": 5285,
+    "mode": 420,
+    "sha256": "4bfc6b9231a6a6584ca54fe8b2207181a2245170b2e94ef0809208e89054f4c5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_set_key_free.jl": {
+    "bytes": 4727,
+    "mode": 420,
+    "sha256": "cce5b918737739eeb466b46a177eaaa9d217aa86e52abbd99008163fb595a6eb"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_set_key_receiver.jl": {
+    "bytes": 4735,
+    "mode": 420,
+    "sha256": "bdd00173365eae69286777fdc5cdb194b9dd0fde121e11e99f21a4726f1a9b5c"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_array_set_key_with.jl": {
+    "bytes": 5237,
+    "mode": 420,
+    "sha256": "a25a7b4067f2dbde027eee8840b31335224f9c4eb26efdb5cdd963586e6b97ad"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_drop_keys_free.jl": {
+    "bytes": 4741,
+    "mode": 420,
+    "sha256": "61d674835f4e4d66b9f301c0284c67949acb8ac417667835a5ffa00d0696dc73"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_drop_keys_receiver.jl": {
+    "bytes": 4749,
+    "mode": 420,
+    "sha256": "ac70d12a4f4988d7cf430afd7e67e2a9e1d3b08c82a808e80d5d6ed206dba27b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_drop_keys_with.jl": {
+    "bytes": 5251,
+    "mode": 420,
+    "sha256": "3d406028ba9ce5886b9c06e57f6c4f4fd3cf943729c1d4058a2feb9d3149f9b5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_merge_hash_free.jl": {
+    "bytes": 4773,
+    "mode": 420,
+    "sha256": "0fe77b394db0a8b433bfc753a4ca6cd232dec5a5f3e03820ea520b7950eb427a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_merge_hash_receiver.jl": {
+    "bytes": 4781,
+    "mode": 420,
+    "sha256": "45164d264429dd59ce9f3e8d35cbd3cd2aeaaf5370b9cf02a6b07a34c7d7ea93"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_merge_hash_with.jl": {
+    "bytes": 5283,
+    "mode": 420,
+    "sha256": "78b6645b3880be5452f08f0de7d67ad38179d5bfeda6d5b97aa53ecabef8e0b8"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_pick_keys_free.jl": {
+    "bytes": 4741,
+    "mode": 420,
+    "sha256": "0fa257d976f75e5fa2385f515ee1751d18f485c34b1a696ac7e469951a2206cd"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_pick_keys_receiver.jl": {
+    "bytes": 4749,
+    "mode": 420,
+    "sha256": "290143b2a0ddccaf7194c55201ba790fb1bcffad8591f60a9c76455164ea4de5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_pick_keys_with.jl": {
+    "bytes": 5251,
+    "mode": 420,
+    "sha256": "798c38ed452b670805d5d131117f23427574362db3a359132c249faaaac37fda"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_rename_key_free.jl": {
+    "bytes": 4785,
+    "mode": 420,
+    "sha256": "bff498ed494872a624e2e1cd2ee9f56c9ce5c2a1aa01c3075e28c743a2d9a7ce"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_rename_key_receiver.jl": {
+    "bytes": 4793,
+    "mode": 420,
+    "sha256": "3024e4414be298e7cafca0e91b6e628cbf7d4f417cf25ba509cf376459118527"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_rename_key_with.jl": {
+    "bytes": 5295,
+    "mode": 420,
+    "sha256": "bdbb44a475b380aa5c0a9e44efbd430f6a209e6afcb8ba161d3bc38c8cc27066"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_set_key_free.jl": {
+    "bytes": 4737,
+    "mode": 420,
+    "sha256": "9d578b367f84078a6d70d7e9d82121a687f92cda33968f3860cdc3b96fcae62a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_set_key_receiver.jl": {
+    "bytes": 4745,
+    "mode": 420,
+    "sha256": "20b63b71118a3e53731956a42cd866dd35b5b18037815fba81ed27efc0970168"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_null_set_key_with.jl": {
+    "bytes": 5247,
+    "mode": 420,
+    "sha256": "dae1b95a8cc818e0c332b1d94a88c4b3c8d63f373b6ddded0faad71ac6194501"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_drop_keys_free.jl": {
+    "bytes": 4721,
+    "mode": 420,
+    "sha256": "774214beb5def77a04e6d799f4f52fc124412886e775d1e93681f412ef33ecc6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_drop_keys_receiver.jl": {
+    "bytes": 4729,
+    "mode": 420,
+    "sha256": "6e1bf234685d092d7f26bffd755fb2702739d8398f27e36b6e50f21e66f2031d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_drop_keys_with.jl": {
+    "bytes": 5231,
+    "mode": 420,
+    "sha256": "cfed1c3fa9744ef6f0f67f0a9465087082a65338ef988344e02f0a68b715d9cd"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_merge_hash_free.jl": {
+    "bytes": 4753,
+    "mode": 420,
+    "sha256": "15cd9d7240182980debadfdaf69bcba7fa1d79e1fbd6407de2096ea45d158ede"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_merge_hash_receiver.jl": {
+    "bytes": 4761,
+    "mode": 420,
+    "sha256": "8421faa7bfe11d8308985572b611d95215605bed67f8c05b1f46402782c1063e"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_merge_hash_with.jl": {
+    "bytes": 5263,
+    "mode": 420,
+    "sha256": "850cfeedb5abad1ebadc9fd346a84d6e119ee77ae35b8ee4b97f437b29beef53"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_pick_keys_free.jl": {
+    "bytes": 4721,
+    "mode": 420,
+    "sha256": "d754056487adb35ec59b17eb334b661813f35404c1bfef1b5eef20bc67b8ddda"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_pick_keys_receiver.jl": {
+    "bytes": 4729,
+    "mode": 420,
+    "sha256": "b8e7cb6d1c613ddaa0d05b8e7c9fbd0cc80d2e4b08c41fc0e7f30320911ed5c6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_pick_keys_with.jl": {
+    "bytes": 5231,
+    "mode": 420,
+    "sha256": "1f6b43d305c1a5f7f89c92e90b5461def8fe7e33736b174ba96d6c55177ee2c6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_rename_key_free.jl": {
+    "bytes": 4765,
+    "mode": 420,
+    "sha256": "3701a764941761a12ffa881b15b2bfa54ce2e2b63ae76a0dbc60b399fc905764"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_rename_key_receiver.jl": {
+    "bytes": 4773,
+    "mode": 420,
+    "sha256": "b50b817a9f9e4f27dfa9717a43a55fad057f030ceb7a851fd18194048bed3db0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_rename_key_with.jl": {
+    "bytes": 5275,
+    "mode": 420,
+    "sha256": "39d5470e8442f3d6c48c59a82727cdff49df8e2364f6f67f738612980b060a8b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_set_key_free.jl": {
+    "bytes": 4717,
+    "mode": 420,
+    "sha256": "bd6c692395cef30e4c6b73d569e49ce922215fd2ca25df1cecaed90d7b82404d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_set_key_receiver.jl": {
+    "bytes": 4725,
+    "mode": 420,
+    "sha256": "9a692868c91c9104a96377df419a6a74779c134f3810c71420f39db94679ee69"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/initial_number_set_key_with.jl": {
+    "bytes": 5227,
+    "mode": 420,
+    "sha256": "f6bc6635218787a24d0da4cb02612e480b86fb355b5b7b199905094d2d3ee975"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/merge_hash_compatible.jl": {
+    "bytes": 5263,
+    "mode": 420,
+    "sha256": "828467b65f633724f9be553b182865da5180084b6df99b5a6988db9279e6586b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/merge_hash_free_array_guard.jl": {
+    "bytes": 5155,
+    "mode": 420,
+    "sha256": "8a8c0a4bc545b31f3dde713bb373bce6ca4ad81526d8857980d87165ef6d1071"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/merge_hash_receiver_array_guard.jl": {
+    "bytes": 5163,
+    "mode": 420,
+    "sha256": "1d25cfc05cde331a10d6796fa179d1becb1d80668f51b5e97a1782474f68a954"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/merge_later_with.jl": {
+    "bytes": 5415,
+    "mode": 420,
+    "sha256": "082d2ad1bdfe5257b6d1eb009eefde2ad5a27a997b3bf0402676e9da6fa571b7"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/needed_source_error_composed.jl": {
+    "bytes": 5181,
+    "mode": 420,
+    "sha256": "3f82cf19bb5f964423fa452e0f07061d8abb9d5a31ef28b92872a90e5dc089ee"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/needed_source_error_terminal.jl": {
+    "bytes": 5007,
+    "mode": 420,
+    "sha256": "e62086792811bb9ce6a1c9dd680396a8f2b97b5a7cbd9d424077d904dd2c8f65"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/needed_value_error_composed.jl": {
+    "bytes": 5149,
+    "mode": 420,
+    "sha256": "755e810cdd0ac350ce72f36d8c15ef11f70e6e6fa44c504009202e48d417f0a0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/needed_value_error_terminal.jl": {
+    "bytes": 4975,
+    "mode": 420,
+    "sha256": "041095031896d784c0d2707905d827549847f4f2dc10fdff159aa3fae9a2d3f8"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/nested_kinds_and_source.jl": {
+    "bytes": 5759,
+    "mode": 420,
+    "sha256": "0dfe7d66c57e933cde450283230cfe683af9845d68a3e0753c23cd0570ffa843"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/pick_keys_compatible.jl": {
+    "bytes": 5297,
+    "mode": 420,
+    "sha256": "7eae06b00fe10a563c78e06a0534ba235e178f541b7c3b4b169308f5a363f2f6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/pick_keys_free_array_guard.jl": {
+    "bytes": 5171,
+    "mode": 420,
+    "sha256": "523c1228446f4a658e238aff13bfcb234eae79ec28d29e6ff76a9aa2da1e23a2"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/pick_keys_free_zero_keys.jl": {
+    "bytes": 5365,
+    "mode": 420,
+    "sha256": "3c0fff78c7f70e3cd25fc233778b3161e6cf09d88f19702247c46bd4768939b9"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/pick_keys_receiver_array_guard.jl": {
+    "bytes": 5179,
+    "mode": 420,
+    "sha256": "edaeeedbc44dd18d0162001646c0f2d66f8abe5393642f189f868a988f45eebc"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/pick_keys_receiver_zero_keys.jl": {
+    "bytes": 5379,
+    "mode": 420,
+    "sha256": "1b1bd24735fd776641cee55d311d009ef472ac94e1d6b1e09e9673dff41d195c"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/prior_array.jl": {
+    "bytes": 5351,
+    "mode": 420,
+    "sha256": "c0f0e1c238d09c5061265ad76248a17400b733d4aa7c4bf7d374a3cf9f410bad"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/prior_copy.jl": {
+    "bytes": 5343,
+    "mode": 420,
+    "sha256": "b6ee293947106789cb4590fa6271d9b92a869ab36463c9aa28459c5a8cbd75dc"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/prior_count.jl": {
+    "bytes": 5369,
+    "mode": 420,
+    "sha256": "2150697c7911afa920be3893ad2723bf78a4beca7cca00b1839e451a23d0ad3d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/prior_key_count.jl": {
+    "bytes": 5443,
+    "mode": 420,
+    "sha256": "aae0ba7252613c1cb3d3201e7be56d0ac9e22a2ebac971c26618ef914fe2fc44"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/prior_length.jl": {
+    "bytes": 5401,
+    "mode": 420,
+    "sha256": "e2dc525bd7cad354735adec2dda34e91b1e30003305ca68e5c5d03dd518850cd"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/prior_view.jl": {
+    "bytes": 5433,
+    "mode": 420,
+    "sha256": "7b333804fe674ad1ec79d8a9b6d652ede80346e15e4261a44dca2afa7194384a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/rename_key_compatible.jl": {
+    "bytes": 5287,
+    "mode": 420,
+    "sha256": "3dde3fefd7c5fbc52bd9b80a283532b221820cc28d5ebbde3efa41fce130c6ac"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/rename_key_free_array_guard.jl": {
+    "bytes": 5167,
+    "mode": 420,
+    "sha256": "8a8f909287a4a26bddfbff36b95ea530da88c1a8339d4f52bf2da36bfaa1dd1c"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/rename_key_receiver_array_guard.jl": {
+    "bytes": 5175,
+    "mode": 420,
+    "sha256": "2397c8dbe8befa4c1a1e8f4fba98304fc8b8401f4393fcb3a8f66d2c960c9318"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/rename_logical_later_with.jl": {
+    "bytes": 5655,
+    "mode": 420,
+    "sha256": "1e12bc36ae711937b2dba90d53b3a00cf2d6e5f7ecd5854261745cf8bdaa7cb5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/set_copy_later_with.jl": {
+    "bytes": 5433,
+    "mode": 420,
+    "sha256": "30ac24c25343f9b1311be33688f9025d1f99a5a84a6687367f0d6acb02520771"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/set_key_compatible.jl": {
+    "bytes": 5197,
+    "mode": 420,
+    "sha256": "ecd21e407b6080a2b4ffd03836ab00fd3dbb4028ac18c864157a3a5227677c20"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/set_key_free_array_guard.jl": {
+    "bytes": 5119,
+    "mode": 420,
+    "sha256": "6dc2ebd808503b9bbb84ea79f3552f6fc7c88613664c1c002e606ba0ec7637d0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/set_key_receiver_array_guard.jl": {
+    "bytes": 5127,
+    "mode": 420,
+    "sha256": "f058a404f1f05904ba7331edede19eca932ce4c5b3a79016e66694170ec50fe2"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/source_once_snapshot.jl": {
+    "bytes": 5495,
+    "mode": 420,
+    "sha256": "eb06539500a1266ba2b760a23f91d599167e485f881f09ccff349f685656b9d9"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/emitted/variadic_key_preservation.jl": {
+    "bytes": 5259,
+    "mode": 420,
+    "sha256": "9a2b30915746de61094e0325304510a3dba385a5098c35251506a7924c364a86"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/constructor_hash_guard.json": {
+    "bytes": 605,
+    "mode": 420,
+    "sha256": "422ef0009296e2065bfc50dbc7974461d1d4b9f4f469d94aa7ee24de0a6ce87b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/drop_keys_compatible.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "41e6194e3aa050e764d720471bdf8efa6344b8f38cd0b6e1858dc7e0d029d2a0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/drop_keys_free_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "0159bd8097776b5d25689ced749570f422afff18548e1686dd5160b6498ed4e8"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/drop_keys_free_zero_keys.json": {
+    "bytes": 626,
+    "mode": 420,
+    "sha256": "8b5e624755b2f563732472379292b681852b1ebaf14a22437083e95d984b2b17"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/drop_keys_receiver_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "d844ea6470bb03f201ee85e4443b15452a42c82a9cdb4ac7c2cbbcabff859fd6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/drop_keys_receiver_zero_keys.json": {
+    "bytes": 629,
+    "mode": 420,
+    "sha256": "00186f29d13c2af40657e421a51a4627d3f880cb023e2ae981c01a09c2dad2da"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/empty_pick_with.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "95e3263cedcef95b5041b28ecbeac41b85ad32ef68fbe4c07abf5b0de4f2f3f4"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/explicit_bridges.json": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "faa559757184bd2b140be450c4478faf67d1bdfc2ff42407c20f1c260f691022"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/extra_merge_hash_free.json": {
+    "bytes": 815,
+    "mode": 420,
+    "sha256": "fed428dc4b6055dee5dbec9875dec05246e0c0da93c4e8a4348e2a5f39077e40"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/extra_merge_hash_receiver.json": {
+    "bytes": 815,
+    "mode": 420,
+    "sha256": "7228de3efba5cdaeb1ff71168ecd26b4ba720312b1e00102d7ca11129ada60c4"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/extra_rename_key_free.json": {
+    "bytes": 821,
+    "mode": 420,
+    "sha256": "044cb952de6f5c254c6cf254894b2d661d7939dd423153232b59f96ba7551aeb"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/extra_rename_key_receiver.json": {
+    "bytes": 821,
+    "mode": 420,
+    "sha256": "c80eb11c7da3b8f93a63b4e29428f06ecce6071c07d543fd6f790f2b9fe2080a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/extra_set_key_free.json": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "2e9bb6e6ba4851775d1b8fb536e135313b8f4503d8047215dd6956530cb92ae0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/extra_set_key_receiver.json": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "f1bfe9a1c6a675de1a347a3e26828cdb9522ac25c13692842d4c2da05bd67cb7"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_drop_keys_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "c97dc0de497d504623e04972e3b073be14b9101002249d210944119490d7b022"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_drop_keys_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "393fe3e96260f6584bdf7cd409883d70be0413ef8f3b24258e4120eb70e88be8"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_drop_keys_with.json": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "9bda229971c2ba05200b7641cd00684b02176a88d177adf23c08314ebd1200b6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_merge_hash_free.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "7c0c012ed691946263a35842b064b668b65a84859ec03a34660eb856a4904cf6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_merge_hash_receiver.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "c68bc9a9ce2098517ccb6c5f18a539b3f118a331abc7de84bb87b88946404cd6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_merge_hash_with.json": {
+    "bytes": 575,
+    "mode": 420,
+    "sha256": "6496888d205c01cf04d2873f165dc01d3283f0002fed994bcb8b24fb9fbe0a12"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_pick_keys_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "065cdb84ce3e498a40e79e9cb0b59325657c2accc40b6d919851e7f7700022ce"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_pick_keys_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "5cbbce5613b51125c4844051ce8bd539936e754451829b75bc58ed64ad0616eb"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_pick_keys_with.json": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "b8bc671ff31474980dec2e0bb06631a2af0e11f5e0f63d6f1a0aeae250dcb9bd"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_rename_key_free.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "f8781d5bd78a1e68f4fe3b7a057e870fcee8e40ffebaebb7389dcbd86378060b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_rename_key_receiver.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "5c7639f4c2ddc8e394a4f0b1d33831828b92d593b6679b6a57937381c173caa6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_rename_key_with.json": {
+    "bytes": 581,
+    "mode": 420,
+    "sha256": "69284aafa6f3956cc5ade0178137110e4ad4b9be6030acb2978fcfc0c75b3643"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_set_key_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "dededef391e445d2374a5df2c61fc49c3dcd1ec1f35fba303336f436e0388b16"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_set_key_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "b10c2c69a3d47ff800d2c077655dd78290c8e1d27cfd2deebc9603b4c3f721a1"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_array_set_key_with.json": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "76a23d94f9e3dbf6da4d81d9807f8bce7f2d0eb08effbf431ab1a5e74ae589e5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_drop_keys_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "18dfa41c81001a5d4598904ca3733052a9bbd29f58b8644e477f73ea86a08854"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_drop_keys_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "edf1315c8f6a2133a168e6d510318fe75ddc61835c115777cad15d45c3138796"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_drop_keys_with.json": {
+    "bytes": 566,
+    "mode": 420,
+    "sha256": "4882aff4f07ad53d3fd7e2e38322462308c6da0539dd5adee3bec3177430c189"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_merge_hash_free.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "586224581048b77504a5dbea83fc60d02201b96d731ce0c03f7547525c35caec"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_merge_hash_receiver.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "efd655c350ecefeba4633991df779c04460af91cc61b4b033a13cc314bac77d4"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_merge_hash_with.json": {
+    "bytes": 581,
+    "mode": 420,
+    "sha256": "5eeecc1a34674f3d612ae816fa4f426e1f7de7ac2b9c673795f4850f7f7f18cf"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_pick_keys_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "64a396c0151d03f0504fe17f64a76f54acc6e875f73ccf84a6d8fb950f81eeb5"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_pick_keys_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "6d83f5e7993bfd100c310db8aba90434d5afbff48e7121e263ca8e5f703ea79b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_pick_keys_with.json": {
+    "bytes": 566,
+    "mode": 420,
+    "sha256": "a340e517155bd6e5b7690238821ed1d99d4e13cabb6870ada34a79da5c1d2069"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_rename_key_free.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "81c0b2525349ba0f5177b5de08705751ac2005b009488b431fc50cf9e9c74a6b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_rename_key_receiver.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "a5ddbc30a8ffe1af8241b7225716159b2ece79d44a7c5ecf606ea555f0da0e9f"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_rename_key_with.json": {
+    "bytes": 587,
+    "mode": 420,
+    "sha256": "29555defd7fe1fbee686372f6c0f868e5732da580ac12dde43cf157ab34fdc36"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_set_key_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "2447f5674bd5243f0e35606177099d3151bbe1bfeb1bb0ba9f8c0a501faf7f06"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_set_key_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "d0e508027631bb0d99c1562e644417780f47f3bbaf6873e01274dd1d8a96e388"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_null_set_key_with.json": {
+    "bytes": 566,
+    "mode": 420,
+    "sha256": "70b51cdf88d54d4cbd4167d3f92bdac8be8994c67633acbc45e10c0f8d50c2ea"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_drop_keys_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "6a1a74e11ef0b020df85b529a3eea51d5994eacc4b2848d4974134b2ecdacbe6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_drop_keys_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "cd20e6d42216919b562201836c1e718ba3b6988d66a384d89c46bdcef4643efd"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_drop_keys_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "650341512acf628870dfa8ae51592fa2318b46dafc22aced91aa2bb1bd0c23cd"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_merge_hash_free.json": {
+    "bytes": 314,
+    "mode": 420,
+    "sha256": "feb9dda94a054f95ab55c3033bc9bbb0a0041bea3e92f72830f1a43185ff4ec6"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_merge_hash_receiver.json": {
+    "bytes": 314,
+    "mode": 420,
+    "sha256": "43eb50843ea63e5964f03d4bff731f0bcc801a959ef5af2b9951841bec9d86fa"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_merge_hash_with.json": {
+    "bytes": 569,
+    "mode": 420,
+    "sha256": "4b16d7f4a16164f36a4eeebe41fdda2ca4616293f6e84521ed6c724f8007f92f"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_pick_keys_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "7365a5937236bb0a7f57ef4313728ab1972a8463d37e7f15016a67e64e34bd3d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_pick_keys_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "1b4801c3b6ba1bf3610bfc0abadea5eef5ed0652f08c6d160433f48466b2a764"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_pick_keys_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "a933549d0e7fe2e70de7443ae5aaa81a848cc9a08e368bada9b9c0bf904fcbd0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_rename_key_free.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "9bf3d1fe450965ad7d9f50511721e9d42eb271154e60e35e6c52ca855914d26d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_rename_key_receiver.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "b99d4aa00c44f4a24fb84f93023b69f045f22fe33f4aa1b59c1c1da848bad412"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_rename_key_with.json": {
+    "bytes": 575,
+    "mode": 420,
+    "sha256": "dcbc099efb5f5413766ec563284aeeacbd17711d495228cd00ae1e469903b16b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_set_key_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "17da80ff63ce56762b0058db2baca9a37941415b84de069038a8638f02fcab5d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_set_key_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "ddf8eb49b34746e528ab07335e86bb1a6a52bbda19a5fc0e1f98be6170f91516"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/initial_number_set_key_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "c8f3ca3cb3345f2424bd9070851a5cfbf767ecaa087863bfadb6be1ce5e6e69a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/merge_hash_compatible.json": {
+    "bytes": 578,
+    "mode": 420,
+    "sha256": "2305835c6ef7bde11e1a5787490e1e09618c28c115bc13aaa43357078b3241eb"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/merge_hash_free_array_guard.json": {
+    "bytes": 518,
+    "mode": 420,
+    "sha256": "45a590162981cffba3e9edfb97141f08fe6adc84044006ac65f0cb5d8f0e5b3c"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/merge_hash_receiver_array_guard.json": {
+    "bytes": 518,
+    "mode": 420,
+    "sha256": "9ccaee44bd98ad8787a9eeabcb361ec70f6b1a3d22cb578d1238a9ff90232d6d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/merge_later_with.json": {
+    "bytes": 659,
+    "mode": 420,
+    "sha256": "626d951f58119d115b166ea1782f93a5e837ac39fb4ba3520752bb943b4f1588"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/needed_source_error_composed.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "2befe17ac29edbcb0846c2a4ba7f3a1d064e4747f00bbff41d29e7bb46a9e45b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/needed_source_error_terminal.json": {
+    "bytes": 443,
+    "mode": 420,
+    "sha256": "c668ad55b435ef71db1969de719dd7f10dffdb3765fe5ec193fcbda0bd610772"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/needed_value_error_composed.json": {
+    "bytes": 515,
+    "mode": 420,
+    "sha256": "991777bccdc2dddb2dd0fa416814d04eaf8a021a142bfd2e34aeb486d75c0f2d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/needed_value_error_terminal.json": {
+    "bytes": 428,
+    "mode": 420,
+    "sha256": "79834e844bc173b31fe29bb2265c780c11e3849393dbbe0620d1137243bdbf41"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/nested_kinds_and_source.json": {
+    "bytes": 824,
+    "mode": 420,
+    "sha256": "d65ba8a3bc4ef7a489e4418c6a7df48501572ae070c2f3d565df64e37c10a891"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/pick_keys_compatible.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "fb48e84a073165764cef47446c1f5cf556b0ca5f8834c93ebd94f36e7b3e9a4a"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/pick_keys_free_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "1281ae58d25ac00fa9a152e4eb7fd98c5f0912d9abe5cd36522e8d66836ff9b0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/pick_keys_free_zero_keys.json": {
+    "bytes": 626,
+    "mode": 420,
+    "sha256": "22e73869492154a09dd39dbf827eb5eaff07ea13765b870b667843f3e8ba8b40"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/pick_keys_receiver_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "c4a07a3aa1862ae1b389ccb80e90d1e2140397058a3abc59fe76b62f642ef5bb"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/pick_keys_receiver_zero_keys.json": {
+    "bytes": 629,
+    "mode": 420,
+    "sha256": "0914ee0e1f191485364d6165320c8d7e8b28e19bf22cbd2666b9bf68006b996b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/prior_array.json": {
+    "bytes": 632,
+    "mode": 420,
+    "sha256": "ada4bd4e605c076c15957d64fcf26a2b6147640d009031fbf720af50bd044a9f"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/prior_copy.json": {
+    "bytes": 629,
+    "mode": 420,
+    "sha256": "a5abc2209ee79a7f5cff80181eabc25c3c22c9842d021321bab5cb400aaeb36b"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/prior_count.json": {
+    "bytes": 641,
+    "mode": 420,
+    "sha256": "669af436992386435f4893b608f82220b71a28ec35b8472382c45b23733c8e60"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/prior_key_count.json": {
+    "bytes": 674,
+    "mode": 420,
+    "sha256": "9209e8c72917ec16be557621b58ebe3acf962c2e319923b3590eacf84a33fb9f"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/prior_length.json": {
+    "bytes": 656,
+    "mode": 420,
+    "sha256": "e8d3c0a936b815a5bb8005eaac8fd58738b790152a393808f26589da0628bd4e"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/prior_view.json": {
+    "bytes": 674,
+    "mode": 420,
+    "sha256": "74b03120754364461d79fa2514673199a0ce64dbd635e670bdce7ab641b32a44"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/rename_key_compatible.json": {
+    "bytes": 590,
+    "mode": 420,
+    "sha256": "65fa80cec0630ecb853849ed7a43d24888d79de7a43abaf1addfd16f44266144"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/rename_key_free_array_guard.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "862eb4d1c38e575e0df70155e05eca9b379648cd9ddd3008d3a8cb87c594c81d"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/rename_key_receiver_array_guard.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "d176b1e523e0493a11cf67703d887b436c84279a644d5de6bddb9d5fd9893a09"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/rename_logical_later_with.json": {
+    "bytes": 770,
+    "mode": 420,
+    "sha256": "808190df1a6011866955718b5e351abc39db27b3c6908bef334c00d6a64a8451"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/set_copy_later_with.json": {
+    "bytes": 665,
+    "mode": 420,
+    "sha256": "e9660763b048951e63f6a37f45e3fdc9eca91d7412c48c3fffdd198e313de9b0"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/set_key_compatible.json": {
+    "bytes": 548,
+    "mode": 420,
+    "sha256": "ef247f4956f29770d857c9d985a9cd2c3861a01755a05105b265ae3991e31466"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/set_key_free_array_guard.json": {
+    "bytes": 503,
+    "mode": 420,
+    "sha256": "0eea5878849204736ab1a501db84850a337be871edfa565297e11cd906a4ac25"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/set_key_receiver_array_guard.json": {
+    "bytes": 503,
+    "mode": 420,
+    "sha256": "abeaa88d82b4a24d7e1c4b188144b557311d3bfc9e652b9c20ac8a56dd312935"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/source_once_snapshot.json": {
+    "bytes": 695,
+    "mode": 420,
+    "sha256": "fe820d481d820b8da86177a3517250b6c3bc6ede13b9cc3fd1d5e19192ce0462"
+  },
+  "docs/checkpoints/hash-value-result-guard-julia-2026-11-07/private-restored/parsed/variadic_key_preservation.json": {
+    "bytes": 572,
+    "mode": 420,
+    "sha256": "90eb43d77a8643c2a512ff82df31139ccca73531267002230608783c3d7384ca"
+  }
+}

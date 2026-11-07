@@ -4718,3 +4718,40 @@ source/context, native/cache/transitive/toolchain custody4.2/SESSION5, general
 isolation, registration prerequisites, declared-host coverage and full23.4 remain
 separate. Evidence: docs/checkpoints/hash-value-result-guard-dart-2026-11-07/REVIEW.md.
 Independent Julia77.4 follows clean landing, then installed Lua77.5.
+
+
+### Julia pure Hash-helper result guards
+
+Julia77.4 independently acquires unchanged28 plus61 own source/shape/prior-owner
+controls on actual installed1.12.7. All89/four routes expose13 failures/76 healthy;
+normal458PASS52FAIL confirms actual source roles are missing before the existing
+kind guard. Initial Number/null/Array policies are frozen before production.
+Canonical positional merge2, set/rename3 and drop/pick>=2 including receivers now
+retain result ownership, with one initial source permission before view/size roles.
+Earlier owners, scalar_result assignments/guard, call_index mutation rights and
+complete Hash producer bodies remain unchanged.
+
+First partial repair498PASS12FAIL is retained. Actual parse_action_block produces
+with block_value, while compile_spec payloads normalize it into codeblock_argument.
+Admit only that existing single contextual with operand; explicit deferred
+literals/other callbacks and unknown/keyword/traversal/non-with trailing forms gain
+no new role. Complete normal510PASS and direct825PASS preserve all76 healthy
+observations/65 own profiles/89 actual parsed-module pairs. Six extras retain
+SATW, four zero-key profiles AW; needed native/restored diagnostics and generated
+framing stay exact. These finite fences establish no portable fallback authority.
+
+Exact old/current private SDKs at one path, with compiled modules disabled and
+actual module path verified, reproduce13RED/89PASS with all89 frames. Actual own
+inputs/grammar/instruments precede SDK use, artifacts precede execution, full
+channels are gzip from first storage. One local runner include/current-candidate
+comparison passes. Original first reader fails its manifest1.12.6 host assumption;
+every actual captured executable reports1.12.7. Preserve that reader/failure/seal;
+separate observed-version reader first returns0/empty stderr/eight effective
+corruptions. No failed epoch is called passing.
+
+Rebuild Julia applications/runtime; emitted/parsed formats stay unchanged. Fresh
+Modules share runtime/process. Full source/context/native/cache/transitive custody
+4.2/SESSION5, general isolation, canonical admission23.4.1 and full23.4 stay separate.
+Independent installed Lua77.5 follows clean landing. Evidence:
+`docs/checkpoints/hash-value-result-guard-julia-2026-11-07/REVIEW.md`; readonly
+`review_observed_version.py` recovers historical proof, not future runtime state.
