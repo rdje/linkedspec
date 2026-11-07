@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: Perl Array preflight78.1.0 freezes unchanged37 and own123 profiles. Literal Number3 reaches @3 in all eight selected transforms; localized main-only public/native/fresh controls demonstrate16 host reads. Immediate source-isolation78.0 precedes composition78.1.1. Other backends assess independently; all bounded77 outcomes and qualified capacity4.16 remain unchanged. Full source/context/native custody/registration/declared Lua5.4/full23.4 stay separate. Evidence: docs/checkpoints/array-transform-result-perl-2026-11-07/PREFLIGHT.md.
+Current finite frontier: Perl source78.0 isolates literal Number inputs at eight Array shortcuts; actual189PASS/private16RED-restored189PASS/two readonly/six controls and unchanged123 policies are focused-checked. All original37 result projections/artifact pairs retain19 defects/18 healthy. Composition78.1.1 is next before independent peers. Full source/context/native custody/registration/declared Lua5.4/full23.4 remain separate. Evidence: docs/checkpoints/array-transform-source-perl-2026-11-07/REVIEW.md.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

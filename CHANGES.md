@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.0 — Isolate Perl Array-transform Number sources
+
+Perl source78.0 reuses the existing Number-AST predicate at exactly eight named-Array shortcuts. The actual normal changes16 main-only host RED/173 healthy to189PASS; own123 policies and every healthy public projection remain exact. Exact private old/current images reproduce16RED/189PASS with matching module/handler pairs. Two readonly recoveries and six specific corruptions pass. Separate unchanged37 result projections and all37 artifact pairs still retain19 selected failures/18 healthy; composition78.1.1 is next.
+
+Genuine Arrays retain their existing producer paths; Number literals use the original computed-source fallback. Regenerate affected emitted Perl. Own Perl/three grammar inputs match activation Git before repair; source/artifact/channel custody remains scoped and full native/cache/transitive/context/registration/admission stays separately owned. Evidence: docs/checkpoints/array-transform-source-perl-2026-11-07/REVIEW.md.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 — Freeze Perl Array-source policies and host-read prerequisite
 
 Perl Array preflight retains unchanged37/19 result failures and own123 source/arity/error profiles. Localized empty/main/outer controls expose literal Number3 lowered to @3 in eight producers, with16 main-only free/receiver host reads. No production edit. Source78.0 is immediate before composition78.1.1; full admission remains separate.

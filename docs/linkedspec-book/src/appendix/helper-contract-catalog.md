@@ -946,9 +946,9 @@ The ordinary Array results of `take`, `take_last`, `drop_front`, `drop_back`,
 repair. Original Perl controls preserve compatible Array/selected String/Hash
 bridges, but incompatible `set_key` tails can raise a Hash-reference error or
 retain literal DSL that fails compilation. Ready metadata does not certify these
-programs. Perl preflight also demonstrates literal Number inputs reading an unrelated
-host Array; source-isolation78.0 precedes result repair78.1.1. Family78 independently
-assesses each backend before repair, preserving
+programs. Bounded Perl source-isolation78.0 now excludes Number literals from the
+eight named-Array shortcuts, preserving their computed-source fallback; result
+repair78.1.1 remains open. Family78 independently assesses each backend, preserving
 existing source/optional-arity/coercion/depth/mutation behavior. See the
 [worked current/target boundary](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-selected-open-repair).
 

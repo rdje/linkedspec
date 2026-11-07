@@ -1,0 +1,8 @@
+{
+  "logical_path": "docs/checkpoints/array-transform-source-perl-2026-11-07/source.patch",
+  "storage_path": "docs/checkpoints/array-transform-source-perl-2026-11-07/source.patch.gz",
+  "encoding": "gzip",
+  "bytes": 7142,
+  "sha256": "fd7101df0e470948b7a4393ae45f5f50e618a0f2448d935f28c82cbe6cee5e79",
+  "reason": "Valid unified-diff blank context has trailing spaces; preserve original bytes without a whitespace exemption"
+}

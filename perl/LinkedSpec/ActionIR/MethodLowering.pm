@@ -7960,7 +7960,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return 'do { my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > 1 ? [@'.$array_symbol.'[1 .. $__ls_tail_len - 1]] : [] }'
     unless $tail_has_explicit_count;
    return 'do { my $__ls_tail_skip = '.$tail_skip_expr.'; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@'.$array_symbol.'); $__ls_tail_len > $__ls_tail_skip ? [@'.$array_symbol.'[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] }';
@@ -7990,7 +7991,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return 'do { my $__ls_take_len = scalar(@'.$array_symbol.'); $__ls_take_len ? [@'.$array_symbol.'[0 .. 0]] : [] }'
     unless $take_has_explicit_count;
    return 'do { my $__ls_take_count = '.$take_count_expr.'; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@'.$array_symbol.'); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@'.$array_symbol.'[0 .. $__ls_take_end]] } else { [] } }';
@@ -8024,7 +8026,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return 'do { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_len = scalar(@'.$array_symbol.'); $__ls_slice_len > $__ls_slice_start ? [@'.$array_symbol.'[$__ls_slice_start .. $__ls_slice_len - 1]] : [] }'
     unless $slice_has_explicit_count;
    return 'do { my $__ls_slice_start = '.$slice_start_expr.'; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = '.$slice_count_expr.'; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@'.$array_symbol.'); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@'.$array_symbol.'[$__ls_slice_start .. $__ls_slice_end]] } else { [] } }';
@@ -8054,7 +8057,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return 'do { my $__ls_take_last_len = scalar(@'.$array_symbol.'); $__ls_take_last_len ? [@'.$array_symbol.'[$__ls_take_last_len - 1 .. $__ls_take_last_len - 1]] : [] }'
     unless $take_last_has_explicit_count;
    return 'do { my $__ls_take_last_count = '.$take_last_count_expr.'; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@'.$array_symbol.'); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@'.$array_symbol.'[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } }';
@@ -8084,7 +8088,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   }
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return 'do { my $__ls_drop_last_len = scalar(@'.$array_symbol.'); $__ls_drop_last_len > 1 ? [@'.$array_symbol.'[0 .. $__ls_drop_last_len - 2]] : [] }'
     unless $drop_last_has_explicit_count;
    return 'do { my $__ls_drop_last_count = '.$drop_last_count_expr.'; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@'.$array_symbol.'); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@'.$array_symbol.'[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@'.$array_symbol.'[0 .. $__ls_drop_last_len - 1]] } else { [] } }';
@@ -8108,7 +8113,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $array_symbol = $extract_array_symbol_name->($target_expr);
-   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+   if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+       && !_method_value_is_numeric_literal($target_expr, $deps)) {
     push @parts, '@'.$array_symbol;
     next;
    }
@@ -8196,7 +8202,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return '[sort { '.$sort_comparison.' } @'.$array_symbol.']';
   }
 
@@ -8214,7 +8221,8 @@ if ($method_call && $method_call->{method} eq 'num_add') {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return '[reverse @'.$array_symbol.']';
   }
 

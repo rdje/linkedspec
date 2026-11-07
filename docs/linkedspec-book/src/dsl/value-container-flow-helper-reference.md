@@ -1268,13 +1268,20 @@ preservation controls. Initial source behavior, optional/excluded arities, count
 start coercion, sort/copy depth, list splices and mutation keep their existing
 contracts. Other Array transforms and full context/portable admission remain open.
 
-Perl source qualification: literal Number inputs currently reach legacy named-Array
-shortcuts. For example, `take(3,1)` can read an unrelated Perl host Array named `3`;
-the same issue affects the other seven selected producers and receiver forms.
-Number inputs are outside the published Array signature. Source-isolation repair
-78.0 precedes continuation repair; a correct result guard cannot establish input
-isolation. Native and emitted modules share this observed defect, so previously
-emitted parsers will require regeneration after its repair.
+Perl source-isolation78.0 keeps Number literals out of the eight legacy named-Array
+shortcuts. The bounded native/emitted controls now ignore unrelated Perl host Arrays,
+while preserving the existing computed-source fallback, genuine Arrays, optional
+counts, needed errors and source snapshots. Regenerate previously emitted Perl.
+Portable programs pass Arrays; these Number examples describe Perl compatibility:
+
+```text
+take(3,1)                    # []; never reads an unrelated host Array named 3
+3.take_last(1)               # []
+concat_arrays(3,["tail"])    # ["tail"]; later Array operands still contribute
+```
+
+The unchanged37 result controls still have their original19 selected failures;
+source isolation is focused-checked and continuation repair78.1.1 remains open.
 
 ## Hash helpers
 

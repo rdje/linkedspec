@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-Current Perl Array frontier: preflight78.1.0 retains own source policies and demonstrates Number-to-host-Array reads; immediate source78.0 precedes result78.1.1. No production repair or peer verdict; frozen37 and full23.4 remain separate.
+Current Perl Array frontier: source78.0 is repaired/focused-checked with189PASS/own123 policies, exact private inverse and unchanged37 result defects. Composition78.1.1 is next; independent peers/full23.4 remain separate.
 
 November5 frontier: Count P1/compiler73.7/Dart formatting73.8 are committed with focused proof. Growth assessment23.4.8 and the outgoing-scope correction are focused-checked; the fixed pre-landing range has15 commits and the director reports about11.5MB outgoing. The whole local store includes published history and the warned blob already exists at the origin base. Director authorizes RAM-window retry; normal hooks govern landing before selection23.1.35. Prospective input reuse4.12 remains separate. Canonical4683555e is the last published checkpoint.
 

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_TRANSFORM_SOURCE_CAPTURE=docs/checkpoints/array-transform-source-perl-2026-11-07/after",
+    "prove",
+    "-v",
+    "-j1",
+    "-Iperl",
+    "t/array_transform_source_isolation.t"
+  ],
+  "cwd": "."
+}

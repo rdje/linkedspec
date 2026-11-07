@@ -1,0 +1,689 @@
+[
+  {
+    "id": "literal_number_take_free_empty",
+    "body": "return(take(3,1))",
+    "source": "Value:: I {return(take(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_free_main",
+    "body": "return(take(3,1))",
+    "source": "Value:: I {return(take(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_free_outer",
+    "body": "return(take(3,1))",
+    "source": "Value:: I {return(take(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_receiver_empty",
+    "body": "return(3.take(1))",
+    "source": "Value:: I {return(3.take(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_receiver_main",
+    "body": "return(3.take(1))",
+    "source": "Value:: I {return(3.take(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_receiver_outer",
+    "body": "return(3.take(1))",
+    "source": "Value:: I {return(3.take(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_last_free_empty",
+    "body": "return(take_last(3,1))",
+    "source": "Value:: I {return(take_last(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_last_free_main",
+    "body": "return(take_last(3,1))",
+    "source": "Value:: I {return(take_last(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_last_free_outer",
+    "body": "return(take_last(3,1))",
+    "source": "Value:: I {return(take_last(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_last_receiver_empty",
+    "body": "return(3.take_last(1))",
+    "source": "Value:: I {return(3.take_last(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_last_receiver_main",
+    "body": "return(3.take_last(1))",
+    "source": "Value:: I {return(3.take_last(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_take_last_receiver_outer",
+    "body": "return(3.take_last(1))",
+    "source": "Value:: I {return(3.take_last(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_front_free_empty",
+    "body": "return(drop_front(3,1))",
+    "source": "Value:: I {return(drop_front(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_front_free_main",
+    "body": "return(drop_front(3,1))",
+    "source": "Value:: I {return(drop_front(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_front_free_outer",
+    "body": "return(drop_front(3,1))",
+    "source": "Value:: I {return(drop_front(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_front_receiver_empty",
+    "body": "return(3.drop_front(1))",
+    "source": "Value:: I {return(3.drop_front(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_front_receiver_main",
+    "body": "return(3.drop_front(1))",
+    "source": "Value:: I {return(3.drop_front(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_front_receiver_outer",
+    "body": "return(3.drop_front(1))",
+    "source": "Value:: I {return(3.drop_front(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_back_free_empty",
+    "body": "return(drop_back(3,1))",
+    "source": "Value:: I {return(drop_back(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_back_free_main",
+    "body": "return(drop_back(3,1))",
+    "source": "Value:: I {return(drop_back(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_back_free_outer",
+    "body": "return(drop_back(3,1))",
+    "source": "Value:: I {return(drop_back(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_back_receiver_empty",
+    "body": "return(3.drop_back(1))",
+    "source": "Value:: I {return(3.drop_back(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_back_receiver_main",
+    "body": "return(3.drop_back(1))",
+    "source": "Value:: I {return(3.drop_back(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_drop_back_receiver_outer",
+    "body": "return(3.drop_back(1))",
+    "source": "Value:: I {return(3.drop_back(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_slice_free_empty",
+    "body": "return(slice(3,1,1))",
+    "source": "Value:: I {return(slice(3,1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_slice_free_main",
+    "body": "return(slice(3,1,1))",
+    "source": "Value:: I {return(slice(3,1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_slice_free_outer",
+    "body": "return(slice(3,1,1))",
+    "source": "Value:: I {return(slice(3,1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_slice_receiver_empty",
+    "body": "return(3.slice(1,1))",
+    "source": "Value:: I {return(3.slice(1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_slice_receiver_main",
+    "body": "return(3.slice(1,1))",
+    "source": "Value:: I {return(3.slice(1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_slice_receiver_outer",
+    "body": "return(3.slice(1,1))",
+    "source": "Value:: I {return(3.slice(1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_sorted_free_empty",
+    "body": "return(sorted(3))",
+    "source": "Value:: I {return(sorted(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_sorted_free_main",
+    "body": "return(sorted(3))",
+    "source": "Value:: I {return(sorted(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_sorted_free_outer",
+    "body": "return(sorted(3))",
+    "source": "Value:: I {return(sorted(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_sorted_receiver_empty",
+    "body": "return(3.sorted())",
+    "source": "Value:: I {return(3.sorted())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_sorted_receiver_main",
+    "body": "return(3.sorted())",
+    "source": "Value:: I {return(3.sorted())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_sorted_receiver_outer",
+    "body": "return(3.sorted())",
+    "source": "Value:: I {return(3.sorted())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_reversed_free_empty",
+    "body": "return(reversed(3))",
+    "source": "Value:: I {return(reversed(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_reversed_free_main",
+    "body": "return(reversed(3))",
+    "source": "Value:: I {return(reversed(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_reversed_free_outer",
+    "body": "return(reversed(3))",
+    "source": "Value:: I {return(reversed(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_reversed_receiver_empty",
+    "body": "return(3.reversed())",
+    "source": "Value:: I {return(3.reversed())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": []
+  },
+  {
+    "id": "literal_number_reversed_receiver_main",
+    "body": "return(3.reversed())",
+    "source": "Value:: I {return(3.reversed())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": []
+  },
+  {
+    "id": "literal_number_reversed_receiver_outer",
+    "body": "return(3.reversed())",
+    "source": "Value:: I {return(3.reversed())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": []
+  },
+  {
+    "id": "literal_number_concat_arrays_free_empty",
+    "body": "return(concat_arrays(3,[\"extra\"]))",
+    "source": "Value:: I {return(concat_arrays(3,[\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": [
+      "extra"
+    ]
+  },
+  {
+    "id": "literal_number_concat_arrays_free_main",
+    "body": "return(concat_arrays(3,[\"extra\"]))",
+    "source": "Value:: I {return(concat_arrays(3,[\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": [
+      "extra"
+    ]
+  },
+  {
+    "id": "literal_number_concat_arrays_free_outer",
+    "body": "return(concat_arrays(3,[\"extra\"]))",
+    "source": "Value:: I {return(concat_arrays(3,[\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": [
+      "extra"
+    ]
+  },
+  {
+    "id": "literal_number_concat_arrays_receiver_empty",
+    "body": "return(3.concat_arrays([\"extra\"]))",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty",
+    "expected": [
+      "extra"
+    ]
+  },
+  {
+    "id": "literal_number_concat_arrays_receiver_main",
+    "body": "return(3.concat_arrays([\"extra\"]))",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "expected": [
+      "extra"
+    ]
+  },
+  {
+    "id": "literal_number_concat_arrays_receiver_outer",
+    "body": "return(3.concat_arrays([\"extra\"]))",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer",
+    "expected": [
+      "extra"
+    ]
+  },
+  {
+    "id": "take_compatible",
+    "body": "return([take([\"head\",\"tail\"],1),[\"head\",\"tail\"].take(1)])",
+    "source": "Value:: I {return([take([\"head\",\"tail\"],1),[\"head\",\"tail\"].take(1)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "head"
+      ],
+      [
+        "head"
+      ]
+    ]
+  },
+  {
+    "id": "take_last_compatible",
+    "body": "return([take_last([\"head\",\"tail\"],1),[\"head\",\"tail\"].take_last(1)])",
+    "source": "Value:: I {return([take_last([\"head\",\"tail\"],1),[\"head\",\"tail\"].take_last(1)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "tail"
+      ],
+      [
+        "tail"
+      ]
+    ]
+  },
+  {
+    "id": "drop_front_compatible",
+    "body": "return([drop_front([\"head\",\"tail\"],1),[\"head\",\"tail\"].drop_front(1)])",
+    "source": "Value:: I {return([drop_front([\"head\",\"tail\"],1),[\"head\",\"tail\"].drop_front(1)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "tail"
+      ],
+      [
+        "tail"
+      ]
+    ]
+  },
+  {
+    "id": "drop_back_compatible",
+    "body": "return([drop_back([\"head\",\"tail\"],1),[\"head\",\"tail\"].drop_back(1)])",
+    "source": "Value:: I {return([drop_back([\"head\",\"tail\"],1),[\"head\",\"tail\"].drop_back(1)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "head"
+      ],
+      [
+        "head"
+      ]
+    ]
+  },
+  {
+    "id": "slice_compatible",
+    "body": "return([slice([\"head\",\"tail\"],1,1),[\"head\",\"tail\"].slice(1,1)])",
+    "source": "Value:: I {return([slice([\"head\",\"tail\"],1,1),[\"head\",\"tail\"].slice(1,1)])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "tail"
+      ],
+      [
+        "tail"
+      ]
+    ]
+  },
+  {
+    "id": "sorted_compatible",
+    "body": "return([sorted([\"tail\",\"head\"]),[\"tail\",\"head\"].sorted()])",
+    "source": "Value:: I {return([sorted([\"tail\",\"head\"]),[\"tail\",\"head\"].sorted()])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "head",
+        "tail"
+      ],
+      [
+        "head",
+        "tail"
+      ]
+    ]
+  },
+  {
+    "id": "reversed_compatible",
+    "body": "return([reversed([\"head\",\"tail\"]),[\"head\",\"tail\"].reversed()])",
+    "source": "Value:: I {return([reversed([\"head\",\"tail\"]),[\"head\",\"tail\"].reversed()])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "tail",
+        "head"
+      ],
+      [
+        "tail",
+        "head"
+      ]
+    ]
+  },
+  {
+    "id": "concat_arrays_compatible",
+    "body": "return([concat_arrays([\"head\"],[\"tail\"]),[\"head\"].concat_arrays([\"tail\"])])",
+    "source": "Value:: I {return([concat_arrays([\"head\"],[\"tail\"]),[\"head\"].concat_arrays([\"tail\"])])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "head",
+        "tail"
+      ],
+      [
+        "head",
+        "tail"
+      ]
+    ]
+  },
+  {
+    "id": "explicit_selected_bridges",
+    "body": "return([take([\"head\",\"tail\"],1).last().uppercase(),reversed([{\"k\":\"tail\"}]).last().pick_keys(\"k\").count_keys(),sorted([\"b\",\"a\"]).join_values(\",\")])",
+    "source": "Value:: I {return([take([\"head\",\"tail\"],1).last().uppercase(),reversed([{\"k\":\"tail\"}]).last().pick_keys(\"k\").count_keys(),sorted([\"b\",\"a\"]).join_values(\",\")])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "HEAD",
+      1,
+      "a,b"
+    ]
+  },
+  {
+    "id": "nested_kinds_and_source",
+    "body": "items=[false,0,undef,{\"k\":\"tail\"}];out=reversed(items);return([out,items])",
+    "source": "Value:: I {items=[false,0,undef,{\"k\":\"tail\"}];out=reversed(items);return([out,items])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        {
+          "k": "tail"
+        },
+        null,
+        0,
+        false
+      ],
+      [
+        false,
+        0,
+        null,
+        {
+          "k": "tail"
+        }
+      ]
+    ]
+  },
+  {
+    "id": "source_once",
+    "body": "order=\"\";out=take({order=cat(order,\"S\");[\"head\",\"tail\"]},1).last().uppercase();return([out,order])",
+    "source": "Value:: I {order=\"\";out=take({order=cat(order,\"S\");[\"head\",\"tail\"]},1).last().uppercase();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      "HEAD",
+      "S"
+    ]
+  },
+  {
+    "id": "source_snapshot",
+    "body": "items=[\"head\",\"tail\"];out=take(items,{items=[\"changed\"];1});return([out,items])",
+    "source": "Value:: I {items=[\"head\",\"tail\"];out=take(items,{items=[\"changed\"];1});return([out,items])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      [
+        "head"
+      ],
+      [
+        "changed"
+      ]
+    ]
+  },
+  {
+    "id": "valid_empty_with",
+    "body": "order=\"\";out=take([\"tail\"],0).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=take([\"tail\"],0).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      0,
+      "W"
+    ]
+  },
+  {
+    "id": "needed_source_error_terminal",
+    "body": "return(take({items=\"bad\";items+=1;[\"tail\"]},1))",
+    "source": "Value:: I {return(take({items=\"bad\";items+=1;[\"tail\"]},1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "needed_source_error_composed",
+    "body": "order=\"\";return(take({items=\"bad\";items+=1;[\"tail\"]},1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(take({items=\"bad\";items+=1;[\"tail\"]},1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "needed_count_error_terminal",
+    "body": "return(take([\"tail\"],{items=\"bad\";items+=1;1}))",
+    "source": "Value:: I {return(take([\"tail\"],{items=\"bad\";items+=1;1}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "needed_count_error_composed",
+    "body": "order=\"\";return(take([\"tail\"],{items=\"bad\";items+=1;1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(take([\"tail\"],{items=\"bad\";items+=1;1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected_error": "binding_kind_mismatch"
+  },
+  {
+    "id": "constructor_array_guard",
+    "body": "order=\"\";out=array(\"head\",\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=array(\"head\",\"tail\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "expected": [
+      null,
+      ""
+    ]
+  }
+]

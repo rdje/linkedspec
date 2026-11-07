@@ -17,6 +17,7 @@
 {"bytes":5029,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-relocation-process-proof.md","sha256":"01a50226185352ff47d312072c38914ed46b4c0dcf85f8fe50772138d84f0954","type":"member"}
 {"bytes":2421,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/restricted-macos-ram-host-size-fallback.md","sha256":"02042261ba20e7da92b91f1f959c2ecde176c98e34058fe4f94eacad95ae5a92","type":"member"}
 {"bytes":2703,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.8","path":"docs/knowledge/retained-artifact-growth.md","sha256":"6415ac645e75a0c54e47e99e2fea0ef596426b191f741a09190abc032a9a624f","type":"member"}
+{"bytes":1877,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.0","path":"docs/knowledge/retained-unified-diff-storage.md","sha256":"f25df321854e63a401780574fbdd03cbdaa745a1970b7f634eb595fabd6a1352","type":"member"}
 {"bytes":4751,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/retired-return-helpers-canonical-rewrite.md","sha256":"5b8ea4cfc84eea03aa03a1628cb0fc8869cf1a64037ec6bea659ea7e8591aa49","type":"member"}
 {"bytes":4653,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rgx-bootstrap-published-remedy.md","sha256":"0756574be7dfe0cba746597878fd0c0e1b9a49aa22e697a95931ba506d1eb476","type":"member"}
 {"bytes":2721,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/roadmap-progressive-summary-projection-drift.md","sha256":"7c63b058dacbae5e8e34767345a086c186d6e3dcde36239560e478ce9a9aaaa8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2974,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mutation-testing-policy.md","sha256":"25bfa6619dc5c97a61c0871e4e5b1b2d2fe813d28d500b9aaea37e6a00622ec4","type":"member"}
 {"bytes":2503,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-capture-endpoint-presence-repair.md","sha256":"34a0b23938788a4f8650dbb735a44bbe6c4fd6f54d81ddd960f7e5a5802adf8d","type":"member"}
 {"bytes":4271,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-default-container-guard-gap.md","sha256":"4aab311893b0d226b31148befbb705fd67e2a87fa38cbb606af3e856588992e7","type":"member"}
-{"bytes":5692,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-direct-value-execution.md","sha256":"005d0ad1f04d06b98fe9635963bafb5b964e5221111878c886b6838cfebdf900","type":"member"}
