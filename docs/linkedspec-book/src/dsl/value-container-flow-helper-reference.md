@@ -1369,6 +1369,17 @@ or indexed mutation retain their existing contracts. See the
 [backend handoff](../appendix/backend-handoff.md#selected-hash-valued-helper-result-guards)
 for the bounded evidence and repair prerequisites.
 
+Perl preflight also confirms a separate source-isolation defect before that
+composition repair: using Number `3` as a source for these five pure helpers can
+read unrelated host `%main::3` data on both native and fresh emitted routes.
+`merge_hash(3,{"b":2})`, for example, keeps its clean `{ "b":2 }` fallback only
+when that host Hash has no matching data. Ten localized free/receiver controls
+distinguish main from the loader's outer namespace and show no host mutation.
+Immediate77.0 owns the source repair; composition77.1.1 follows. Use actual Hash
+inputs under the published signatures. Existing Array-source errors and Perl's
+finite Number/null fallback policies must remain distinct; no portable wrong-
+source policy or general isolation claim follows.
+
 `pick_keys` uses field existence, so requested false and null fields are retained while missing fields are omitted. For example, with `meta={"off":false,"nil":undef,"other":1}`, `pick_keys(meta,"off","nil","missing")` returns `{"off":false,"nil":null}` and leaves `meta` unchanged. `has_key(pick_keys(meta,"nil"),"nil")` remains true even though that stored value is null.
 
 Examples:

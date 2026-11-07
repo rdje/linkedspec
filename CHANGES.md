@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — Freeze Perl source policies and a host-read prerequisite
+
+Actual76 retains unchanged28 targets/15 composition failures/13 healthy plus48 own source/shape profiles. Ten unchanged Number3 sources under localized empty/outer/main host3 states expose main-only native/fresh host Hash reads; host maps unchanged. Own five defined-only producer sites identify symbolic dereferencing. Freeze exact profiles and ten-source host target; immediate P1 source-isolation77.0 precedes composition77.1.1/peers. First readonly recovery/eight corruptions PASS; both epochs0/empty stderr,86 actual artifact pairs/input modes/bytes/full channels retained. Book/Knowledge/task decomposition/live align; no SDK change or full isolation/admission claim. Evidence: docs/checkpoints/hash-value-result-guard-perl-2026-11-07/PREFLIGHT.md.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.1.37 — Freeze Hash-valued helper result targets
 
 Original Perl32 public intake yields exact eligible28 unchanged sources/15 actual failures/13 healthy controls plus four separate unready zero-key profiles. Actual artifacts show legacy take fallback/raw DSL versus constructor rejection. Freeze targets, original inputs/full channels/32 artifact pairs, source-policy prerequisites and independent77 backend leaves before production. First readonly recovery/eight effective evidence corruptions PASS, empty stderr. Correct omitted74-76 parent child pointers; frozen first contract backlog-name erratum points to existing FUTURE-PARITY-BACKLOG.5. Book/Knowledge/live/task continuity align; no SDK edit/peer verdict/full admission. Evidence: docs/checkpoints/hash-value-result-selection-2026-11-07/REVIEW.md.

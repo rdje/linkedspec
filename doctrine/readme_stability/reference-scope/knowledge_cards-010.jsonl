@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5250,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/referenced-intermediate-edge-ownership-authority.md","sha256":"3e3c5de29df8a161df5982bb1cb6c7ee3a3c6cd376315cef0c723a7d9ef53e31","type":"member"}
 {"bytes":1894,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/referenced-intermediate-qualified-runtime-target.md","sha256":"10c88baade89d49b2f5513aa0c7644dde6ecd0806bb4df635879834f44c2d6db","type":"member"}
 {"bytes":8075,"lines":127,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/regex-substitution-callback-and-flag-discrepancies.md","sha256":"b120e475c964351dc166598a5a9f0f6129e26b7bc7d938044c30e0d74adf26c6","type":"member"}
 {"bytes":3837,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repeated-and-falsey-group-acceptance.md","sha256":"bc965e157960453b887b2bc533b4baa0053156b9e2c2552fb8aca8d6b15738dd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2323,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-action-edge-fluent-closure.md","sha256":"f78eb66c375a8e699b8b708e95e1df2e9baf74fa84297a7e065d66f631f9b1e1","type":"member"}
 {"bytes":7524,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-batch2-oracle-split.md","sha256":"c8bc660ab5a783fc0de12dc9a3f54c16d6c21f3b16f4fb5f45fae309ad5d39bc","type":"member"}
 {"bytes":2668,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-followon-closed.md","sha256":"6b1a96e8dd6996828d7396992f2f8ca094127a9357806ab732c1b97107ec42a2","type":"member"}
-{"bytes":27627,"lines":250,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-perl-output-oracle.md","sha256":"86b1bab73ab3d803bf3c0af8d0f630a70857d29c7ef3e56de8583e2a9c12a46a","type":"member"}

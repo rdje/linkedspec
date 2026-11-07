@@ -1455,6 +1455,12 @@ owns independent backend repairs, preserving producer/source/arity/key/collision
 and mutation policies. This is an open gap, not completed portable admission; see
 [the worked boundary examples](../dsl/value-container-flow-helper-reference.md#hash-valued-helper-continuations-selected-open-repair).
 
+Perl preflight independently exposes a source prerequisite: Number `3` passed as
+the source of any of these five pure helpers can read an unrelated host
+`%main::3` on native/fresh routes. Immediate77.0 owns the bounded scalar source
+repair before composition77.1.1. Published signatures still require actual Hash
+inputs; this does not define a portable wrong-source fallback.
+
 ### `set_key(h, key, value)`
 - **Signature**: `set_key(h: hash, key: string, value: expr)`
 - **Returns**: hash

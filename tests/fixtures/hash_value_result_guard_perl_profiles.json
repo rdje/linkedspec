@@ -1,0 +1,1852 @@
+[
+  {
+    "case": {
+      "id": "initial_number_merge_hash_free",
+      "body": "return(merge_hash(3,{\"b\":2}))",
+      "source": "Value:: I {return(merge_hash(3,{\"b\":2}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_merge_hash_receiver",
+      "body": "return(3.merge_hash({\"b\":2}))",
+      "source": "Value:: I {return(3.merge_hash({\"b\":2}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_merge_hash_free",
+      "body": "return(merge_hash(undef,{\"b\":2}))",
+      "source": "Value:: I {return(merge_hash(undef,{\"b\":2}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_merge_hash_receiver",
+      "body": "return(undef.merge_hash({\"b\":2}))",
+      "source": "Value:: I {return(undef.merge_hash({\"b\":2}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_merge_hash_free",
+      "body": "return(merge_hash([1],{\"b\":2}))",
+      "source": "Value:: I {return(merge_hash([1],{\"b\":2}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_merge_hash_receiver",
+      "body": "return([1].merge_hash({\"b\":2}))",
+      "source": "Value:: I {return([1].merge_hash({\"b\":2}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_merge_hash_with",
+      "body": "order=\"\";out=undef.merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=undef.merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "extra_merge_hash_free",
+      "body": "order=\"\";out=merge_hash({order=cat(order,\"S\");{\"a\":1}},{\"b\":2},{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=merge_hash({order=cat(order,\"S\");{\"a\":1}},{\"b\":2},{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "SAW"
+      ],
+      "fresh": [
+        "ran",
+        "SAW"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "extra_merge_hash_receiver",
+      "body": "order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.merge_hash({\"b\":2},{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.merge_hash({\"b\":2},{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "SAW"
+      ],
+      "fresh": [
+        "ran",
+        "SAW"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_set_key_free",
+      "body": "return(set_key(3,\"b\",2))",
+      "source": "Value:: I {return(set_key(3,\"b\",2))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_set_key_receiver",
+      "body": "return(3.set_key(\"b\",2))",
+      "source": "Value:: I {return(3.set_key(\"b\",2))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_set_key_free",
+      "body": "return(set_key(undef,\"b\",2))",
+      "source": "Value:: I {return(set_key(undef,\"b\",2))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_set_key_receiver",
+      "body": "return(undef.set_key(\"b\",2))",
+      "source": "Value:: I {return(undef.set_key(\"b\",2))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {
+        "b": 2
+      },
+      "fresh": {
+        "b": 2
+      },
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_set_key_free",
+      "body": "return(set_key([1],\"b\",2))",
+      "source": "Value:: I {return(set_key([1],\"b\",2))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_set_key_receiver",
+      "body": "return([1].set_key(\"b\",2))",
+      "source": "Value:: I {return([1].set_key(\"b\",2))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_set_key_with",
+      "body": "order=\"\";out=undef.set_key(\"b\",2).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=undef.set_key(\"b\",2).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "extra_set_key_free",
+      "body": "order=\"\";out=set_key({order=cat(order,\"S\");{\"a\":1}},\"b\",2,{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=set_key({order=cat(order,\"S\");{\"a\":1}},\"b\",2,{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "set_key"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "extra_set_key_receiver",
+      "body": "order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.set_key(\"b\",2,{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.set_key(\"b\",2,{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "set_key"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_rename_key_free",
+      "body": "return(rename_key(3,\"a\",\"b\"))",
+      "source": "Value:: I {return(rename_key(3,\"a\",\"b\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_rename_key_receiver",
+      "body": "return(3.rename_key(\"a\",\"b\"))",
+      "source": "Value:: I {return(3.rename_key(\"a\",\"b\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_rename_key_free",
+      "body": "return(rename_key(undef,\"a\",\"b\"))",
+      "source": "Value:: I {return(rename_key(undef,\"a\",\"b\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_rename_key_receiver",
+      "body": "return(undef.rename_key(\"a\",\"b\"))",
+      "source": "Value:: I {return(undef.rename_key(\"a\",\"b\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_rename_key_free",
+      "body": "return(rename_key([1],\"a\",\"b\"))",
+      "source": "Value:: I {return(rename_key([1],\"a\",\"b\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_rename_key_receiver",
+      "body": "return([1].rename_key(\"a\",\"b\"))",
+      "source": "Value:: I {return([1].rename_key(\"a\",\"b\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_rename_key_with",
+      "body": "order=\"\";out=undef.rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=undef.rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "extra_rename_key_free",
+      "body": "order=\"\";out=rename_key({order=cat(order,\"S\");{\"a\":1}},\"a\",\"b\",{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=rename_key({order=cat(order,\"S\");{\"a\":1}},\"a\",\"b\",{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "rename_key"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "extra_rename_key_receiver",
+      "body": "order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.rename_key(\"a\",\"b\",{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.rename_key(\"a\",\"b\",{order=cat(order,\"A\");9}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "rename_key"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_drop_keys_free",
+      "body": "return(drop_keys(3,\"a\"))",
+      "source": "Value:: I {return(drop_keys(3,\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_drop_keys_receiver",
+      "body": "return(3.drop_keys(\"a\"))",
+      "source": "Value:: I {return(3.drop_keys(\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_drop_keys_free",
+      "body": "return(drop_keys(undef,\"a\"))",
+      "source": "Value:: I {return(drop_keys(undef,\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_drop_keys_receiver",
+      "body": "return(undef.drop_keys(\"a\"))",
+      "source": "Value:: I {return(undef.drop_keys(\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_drop_keys_free",
+      "body": "return(drop_keys([1],\"a\"))",
+      "source": "Value:: I {return(drop_keys([1],\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_drop_keys_receiver",
+      "body": "return([1].drop_keys(\"a\"))",
+      "source": "Value:: I {return([1].drop_keys(\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_drop_keys_with",
+      "body": "order=\"\";out=undef.drop_keys(\"a\").with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=undef.drop_keys(\"a\").with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_pick_keys_free",
+      "body": "return(pick_keys(3,\"a\"))",
+      "source": "Value:: I {return(pick_keys(3,\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_number_pick_keys_receiver",
+      "body": "return(3.pick_keys(\"a\"))",
+      "source": "Value:: I {return(3.pick_keys(\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_pick_keys_free",
+      "body": "return(pick_keys(undef,\"a\"))",
+      "source": "Value:: I {return(pick_keys(undef,\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_pick_keys_receiver",
+      "body": "return(undef.pick_keys(\"a\"))",
+      "source": "Value:: I {return(undef.pick_keys(\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": {},
+      "fresh": {},
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_pick_keys_free",
+      "body": "return(pick_keys([1],\"a\"))",
+      "source": "Value:: I {return(pick_keys([1],\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_array_pick_keys_receiver",
+      "body": "return([1].pick_keys(\"a\"))",
+      "source": "Value:: I {return([1].pick_keys(\"a\"))}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "initial_null_pick_keys_with",
+      "body": "order=\"\";out=undef.pick_keys(\"a\").with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=undef.pick_keys(\"a\").with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        "ran",
+        "W"
+      ],
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "produced_count_merge_guard",
+      "body": "order=\"\";out=count([]).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=count([]).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        null,
+        ""
+      ],
+      "fresh": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "produced_count_keys_merge_guard",
+      "body": "order=\"\";out=count_keys({\"a\":1}).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=count_keys({\"a\":1}).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        null,
+        ""
+      ],
+      "fresh": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "produced_length_merge_guard",
+      "body": "order=\"\";out=length(\"abc\").merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "source": "Value:: I {order=\"\";out=length(\"abc\").merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+      "input": "x",
+      "rule": "Value",
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": [
+        null,
+        ""
+      ],
+      "fresh": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "drop_keys_free_zero_keys_profile",
+      "body": "return(drop_keys({\"a\":1}))",
+      "source": "Value:: I {return(drop_keys({\"a\":1}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true,
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_keys"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "drop_keys_receiver_zero_keys_profile",
+      "body": "return({\"a\":1}.drop_keys())",
+      "source": "Value:: I {return({\"a\":1}.drop_keys())}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true,
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_keys"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "pick_keys_free_zero_keys_profile",
+      "body": "return(pick_keys({\"a\":1}))",
+      "source": "Value:: I {return(pick_keys({\"a\":1}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true,
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "pick_keys"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "pick_keys_receiver_zero_keys_profile",
+      "body": "return({\"a\":1}.pick_keys())",
+      "source": "Value:: I {return({\"a\":1}.pick_keys())}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true,
+      "policy_profile": true
+    },
+    "expected_observation": {
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "pick_keys"
+        ]
+      },
+      "native_callable": 1,
+      "loaded": 1,
+      "substitution_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "build_error": null,
+      "load_error": null,
+      "native": null,
+      "fresh": null,
+      "native_error": null,
+      "fresh_error": null,
+      "native_cursor": 0,
+      "fresh_cursor": 0,
+      "warnings": []
+    }
+  }
+]

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — Do not preserve accidental host reads as scalar fallback policy
+
+The independent48 fences distinguish legitimate Number3/null fallback Hashes, Array[1] errors/null-with W and produced size guards. Extra merge remains ready1/SAW while set/rename extras and zero-key drop/pick are unready. Public substitution reveals defined-only scalar dereferencing; qualified localized main/outer/empty oracle on ten unchanged sources proves main::3 contamination for all five free/receiver producers, without host mutation. Split preflight77.1.0, immediate source-isolation77.0 and composition77.1.1 before any SDK edit. Preserve clean fallbacks/errors/order/real Hash inputs, not host dependence. Actual76 plus reused10 artifact pairs and first recovery/eight controls pass; full SESSION17 isolation/custody/admission stays separate. Evidence: docs/checkpoints/hash-value-result-guard-perl-2026-11-07/PREFLIGHT.md.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.1.37 — Guard ownership must follow Hash-valued producers
 
 Pure merge_hash/set_key/rename_key/drop_keys/pick_keys results omit existing Perl retained/source/prefix/copy/with classification. Actual32 shows five free wrong-kind[]/five receiver compile failures/three later bodies/two required-error compile failures;13 healthy and four unready zero-key profiles remain distinct. Freeze exact eligible28, not normalized failure output. Each77 backend must first acquire its own initial Number/null/Array/arity/key-list/needed-error fences, preserving producer/source policy after the earlier76.1 regression lesson. First historical readonly recovery/eight corruptions PASS; all32 artifact pairs/input identities/full channels retained. No production or peer/full-custody/context/admission claim. Evidence: docs/checkpoints/hash-value-result-selection-2026-11-07/REVIEW.md.

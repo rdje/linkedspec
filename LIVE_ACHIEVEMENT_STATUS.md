@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-valued helper family77: completed selection37 freezes the finite existing-contract gap. Independent Perl/Rust/Dart/Julia/installed Lua leaves pending; full23.4 verification/admission remains separate.
+PNT Hash-valued77: Perl preflight77.1.0 confirms a source-isolation prerequisite before composition. Immediate P1 source repair77.0 next; composition77.1.1 and independent peers follow. Full23.4 remains separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.1.37 retains original32 public Perl programs, exact eligible28 unchanged targets/15 failures/13 healthy and four separate unready zero-key profiles. First readonly recovery/eight effective evidence corruptions PASS, empty stderr;32 actual artifact pairs/input identities/full channels retained. No SDK edit or peer verdict. Source/arity/error prerequisites and bounded77 backend ownership precede production.
+TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 freezes actual76 (unchanged28/15 failures/13 healthy plus48 own policies) and ten reused Number3 source controls/three localized host states. Every source reads unrelated main::3 on native/fresh only when populated; empty/outer and unchanged host maps distinguish the cause. First recovery/eight controls PASS,86 actual artifact pairs/input modes/bytes/full channels retained; no SDK edit.
 
 ## Next Action
 
-Activate pending Perl77.1 from clean Git. Acquire own unchanged28 plus affected helpers' initial Number/null/Array, arity/key-list and required-error fences before production; preserve original producer/source policies. Then repair demonstrated bounded composition gaps with focused direct checks. No broad suite/admission.
+From clean preflight landing, activate P1 source-isolation77.0. Run unchanged ten/three-state RED and preserve48 own policies/real Hash inputs/order/errors, repair only symbolic non-reference host reads, retain inverse/recovery and focused direct normals, update book/Knowledge/live and commit. Then composition77.1.1 reacquires unchanged28/own48; peers assess independently.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — Perl76/own48; ten main-only host reads; first recovery/eight controls PASS; source77.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.37 — Hash-valued28 targets/15 failures/13 healthy; four unready profiles/eight controls; independent77 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.5 — each installed host33/184PASS/direct300 plus copy/arity controls/eight corruptions; next selection37 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.4 — Julia33/four routes184PASS/direct315/eight controls; own profiles preserved; installed Lua76.5 next.
@@ -29,7 +30,6 @@ Activate pending Perl77.1 from clean Git. Acquire own unchanged28 plus affected 
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Rust already16PASS/four routes; new16/direct29; runtime unchanged; Dart75.6.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Perl callable16PASS/direct43; Boolean continuation corrected; independent Rust75.6.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — installed Lua25PASS/four routes;13 healthy/Count/scalar/index exact; callable75.6 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — peers Count ownership3PASS/four routes; both25 normals; runtimes unchanged; installed Lua75.5 next.
 
 ## History
 

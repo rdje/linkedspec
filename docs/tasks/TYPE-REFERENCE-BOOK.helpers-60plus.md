@@ -2302,13 +2302,13 @@
   - [x] **FIX** — Existing namespace role/current guard plus first-source permission before Count/CountKeys; chunk-local/scalar_result/loop-index policy and producers unchanged.
   - [x] **ADDRESSED (verified)** — Each same184 checks28FAIL becomes184PASS on33/four routes; wrong operands/later bodies skip.
   - [x] **NO REGRESSION** — Each own19 profiles/26 healthy rows/33 actual artifact pairs exact; direct300 counted checks plus copy/arity controls and eight evidence corruptions PASS.
-  - [x] **LOCKSTEP** — Book/Knowledge/live/frontier records qualify installed hosts and remaining full/native/context/isolation/registration/declared5.4 boundaries; pending selection37 owns the next clean acquisition.
+  - [x] **LOCKSTEP** — Book/Knowledge/live/frontier records qualify installed hosts and remaining full/native/context/isolation/registration/declared5.4 boundaries; selection37 owns the next clean acquisition.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.76.5 - guard installed Lua Hash-view Array results`.
   Limits/next: Fresh modules share runtime/process. All bounded76 children have focused outcomes; full native/cache/transitive custody4.2/SESSION5, source/registered-function contexts, general isolation, canonical registration23.4.1, declared5.4 and full23.4 remain separate. Commit clean/brief0 then activate remaining-family selection23.1.37; no parent admission inferred.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77`
   Status: `in_progress` / selected existing-contract Hash-valued helper guards; implementations pending
-  Children: `.77.1`, `.77.2`, `.77.3`, `.77.4`, `.77.5`.
+  Children: `.77.0`, `.77.1`, `.77.2`, `.77.3`, `.77.4`, `.77.5`.
   Goal: Preserve ordinary pure Hash-valued helper results through current actual-kind consumers and rejection continuations.
   Dependencies: Completed selection23.1.37, frozen hash_value_result_guard_cases.json, hash-value-result-guard-composition.md plus selection REVIEW backlog-name erratum; source-policy lesson76.6.
   Reproduction/impact: Original Perl28 eligible controls contain15 failures: free incompatible take returns[], literal receiver/composed needed-error compilation fails, later with/logical bodies run. Thirteen healthy controls and four nonadmitted zero-key profiles retained separately. No peer defect inferred.
@@ -2316,13 +2316,20 @@
   Frontier: Perl77.1 first, then independent Rust2/Dart3/Julia4/installed Lua5, one coherent focused-checked commit each; split a newly demonstrated unsafe scope before changes.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.1`
-  Status: `pending`
+  Status: `in_progress`
+  Children: `.77.1.0`, `.77.1.1`.
   Goal: Independently assess and repair Perl ordinary Hash-valued helper result composition.
   Dependencies: Frozen77/selection37 targets and erratum; clean selection37 landing.
   Acceptance: Before production acquire own unchanged28 on public Get/descriptor/substitution/native and independently loaded full emitted module, plus each affected helper's actual initial Number/null/Array and excluded-arity/key-list/needed-error fences. Preserve all healthy semantics and actual producer/source policies; repair only demonstrated canonical pure Hash-result guard gaps under frozen77. Retain actual first inputs/grammar/instruments/artifacts/full channels, unchanged-target RED/GREEN and distinguishing inverse/recovery proof where a repair is needed. If already healthy, retain outcome without a speculative edit. Update smallest new/direct-dependent normal and public book; no broader context/domain/signature/collision/mutation/native-custody/admission claim.
   Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
   Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
   Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.
+
+  Activation: Clean37035461c8b1c6838e31982000e4f7aa9a473809 after selection37 all10/post-pointer/brief0/clean Git. Read frozen77 plus backlog-name erratum, public helper signatures/source/copy/collision/mutation contracts, known pick/rename and initial-view source lessons, current MethodLowering source/prefix/retained/copy/logical/with paths and nearest normal harness. Serial public intake has ample24GiB host headroom; no production change until own first source/arity/error fences are retained.
+
+  First source intake: Actual unchanged76 (shared28 plus48 own fences) completes exit0/empty stderr; all own inputs/modules/handlers retained. Initial Number3/null free/receiver produce documented finite fallback Hash values, initial Array[1] raises native/fresh HASH-reference errors, null-source with runs W, existing produced Count/CountKeys/Length guards returnnull/skip A/W. Extra merge free/receiver remains ready1/SAW, unlike unready set/rename extras and zero-key profiles; preserve excluded shapes without portable promotion.
+  Suspicious source boundary: Public extra-merge substitution dereferences a non-reference scalar as a Hash. Before freezing that policy or any SDK edit, reuse the already qualified76.6 localized main/outer/empty host oracle on ten unchanged initial Number3 helper sources. Retain actual input/source/host-before-after/artifacts/full channels; if contamination reproduces, own a bounded repair explicitly rather than blessing host dependence.
+  Decomposition: Preflight77.1.0 completes the actual unchanged76/source48 and localized10/three-state custody/freeze before production. New P1 source-isolation77.0 then repairs the confirmed host contamination; composition77.1.1 follows from a clean commit. This remains one task tree, preserves current dirty diagnostic work and separates producer policy repair from guard composition.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.2`
   Status: `pending`
@@ -2359,3 +2366,45 @@
   Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
   Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
   Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0`
+  Status: `completed` / original preflight frozen; source-isolation77.0 next
+  Goal: Freeze independent Perl Hash-valued composition/source policies and qualify the newly exposed host-contamination prerequisite.
+  Acceptance: Retain actual original76 (unchanged28 plus48 own source/shape fences), actual ten unchanged Number3 sources under empty/outer/main host3 states, declared first inputs/grammars/instruments/actual modules/native handlers/full channels. Distinguish15 composition failures/13 healthy targets, all48 profiles and ten independently exposed host reads; freeze targets without blessing host dependence. Qualify readonly recovery and distinguishing evidence controls, open immediate77.0 before production, update public book/Knowledge/continuity and commit. No SDK/dependency change, portable source normalization, peer verdict, broad isolation or full23.4 admission.
+  Verification tier: `focused`
+  Focused checks: Own unchanged28/native-fresh public intake plus affected initial Number/null/Array/null-with/excluded-arity/size-owner fences; smallest new and directly affected producer/view/source normals, source/test syntax, retained inverse and readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+  Canonical trigger: Full23.4/final clean push after feature coverage; any new authority/infrastructure separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no complete domain/context/backend population or performance measurement.
+  Activation: Clean37035461c source state; preflight decomposed from original77.1 activation after actual suspicious output. No SDK file changed.
+  Root cause: seed_before actual10 show native/fresh main-only host3 contamination, empty/outer clean and host-before/after unchanged. Public substitutions/actual handlers dereference non-reference scalar inputs; own MethodLowering.pm8339/8374/8404/8438/8470 test only defined, enabling symbolic main Hash reads. No dependency implementation was inspected.
+  Outcome: Both actual epochs exit0/empty stderr; first readonly recovery/eight effective corruptions PASS. Shared28 unchanged/15 failures/13 healthy, own48 exact policies and ten localized scalar host targets frozen. Actual86 artifact pairs/activation own Perl and conservative grammar bytes/modes/full channels retained. Public substitutions/own five producer sites identify symbolic main Hash reads, not DSL or outer namespace data. No SDK change; PREFLIGHT.md owns exact boundaries.
+  Next: Commit preflight, then immediate77.0 source repair before composition77.1.1; no peer/general isolation/admission inference.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — freeze Perl Hash-helper source policies and host-read prerequisite.
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source/native/fresh actual76 plus ten localized source programs retain15 composition failures and ten main-only host reads.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — public actual handlers and MethodLowering.pm:8339/:8374/:8404/:8438/:8470 test defined alone before non-reference symbolic Hash reads; host-before/after and empty/outer distinguish the mechanism.
+  - [x] **FIX** — freeze original own policies and independent host target, schedule immediate source-isolation77.0 before composition77.1.1; runtime repairs remain separately owned.
+  - [x] **ADDRESSED (verified)** — first historical readonly recovery and eight effective corruption controls PASS, both parser epochs exit0/empty stderr, all86 actual artifact pairs recover.
+  - [x] **NO REGRESSION** — no SDK/grammar/dependency change, source-domain/arity/collision/mutation expansion, peer verdict or broad isolation claim.
+  - [x] **LOCKSTEP** — task decomposition/index, source repair owner, helper frontier, public book, Knowledge and live resume pointers agree on source-isolation77.0 next.
+  Checklist format correction: The staged shape check exposes one older76.5 checked LOCKSTEP line containing the forbidden pending word. Apply the existing task-acceptance-evidence-gate-boundary rule and remove only that word from this mutable summary; its historical scope/status and all measured evidence remain exact. No commit attempt or hook chain was started for this pre-stage rejection; rerun the actual staged checker before normal commit.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.0`
+  Status: `pending`
+  Priority/schedule: P1 immediately after clean77.1.0 preflight commit, before composition77.1.1 or peer77.2.
+  Goal: Prevent ordinary Perl pure Hash helper scalar values from reading unrelated host Hashes while preserving actual producer policies.
+  Reproduction/impact: Actual seed_before ten unchanged initial Number3 free/receiver merge_hash/set_key/rename_key/drop_keys/pick_keys sources expose main::3 entries in native/fresh results only when that unrelated host Hash is populated. Empty/outer controls distinguish symbolic host-name reads; host maps remain unmodified. Own MethodLowering producer sites guard defined alone before dereferencing.
+  Acceptance: Freeze and run unchanged localized host-source target on actual first inputs before edits, preserve all48 own clean-host source/shape profiles including Array HASH-reference errors, null-with W, merge extra ready1/SAW and eight unready extras/zero-key forms. Preserve genuine named Hash operands, source/key/value/overlay order/snapshots, splices, copy depth, collision and statement/operator mutation. Repair only demonstrated non-reference symbolic reads; do not suppress wrong-reference errors or change canonical arity. Retain actual RED/GREEN/inverse/artifacts/readonly recovery and smallest directly affected normals/book/Knowledge/live, commit before composition. Full SESSION17 isolation/native custody/23.4 remain separate.
+  Planned verification: Finite ten/three-state host oracle plus directly affected source/key/merge/drop normals and frozen48 source fences; no broad suite or general isolation claim.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority separately owned.
+  Planned claim verification: none: Finite authored source-isolation defect controls, no complete host/domain/backend population claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.1.1`
+  Status: `pending`
+  Goal: Repair Perl Hash-valued helper result composition after bounded source isolation.
+  Dependencies: Committed preflight77.1.0 and source-isolation77.0; frozen77/erratum and unchanged28.
+  Acceptance: Reacquire current unchanged28 baseline and all48 own source/shape policies after77.0 before composition edits. Preserve producer/source fixes and existing size owners; use current actual-kind/rejection guards for demonstrated canonical Hash-result gaps. Own unchanged-target RED/GREEN, direct key/view/source normals, actual inverse/readonly recovery and book/Knowledge/continuity commit. No unsupported shape/context/registered receiver/collision/mutation or full admission promotion.
+  Planned verification: Smallest new/direct producer/view/source normals, syntax and actual inverse/recovery, book/Knowledge/history/memory/diff and hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored feature/preservation controls, no complete source/context/backend population measurement.

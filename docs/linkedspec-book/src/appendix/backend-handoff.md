@@ -4517,7 +4517,8 @@ kept outside the shared28 fixture. These are finite authored observations.
 The public substitution and actual handlers distinguish legacy take fallback/raw
 DSL from the constructor's retained rejection marker. Existing own Perl source/
 prefix/retained/copy/with classifications omit these pure Hash-valued roles.
-Family77 has independent pending Perl1/Rust2/Dart3/Julia4/installed Lua5 children.
+Family77 has independent Perl1/Rust2/Dart3/Julia4/installed Lua5 children.
+Perl's preflight outcome follows below; the peer assessments remain pending.
 Each first acquires its own unchanged28 and actual initial Number/null/Array,
 arity/key-list and required-error policies before production. Preserve source
 capture/order, splices, copy depth, mutation and collision differences; keep rename
@@ -4530,3 +4531,34 @@ corruptions pass with empty stderr. The frozen first contract has a backlog-name
 erratum in REVIEW: collision normalization remains FUTURE-PARITY-BACKLOG.5.
 No SDK production edit, domain/signature/context/deferred/registered-function
 expansion, general isolation/native-transitive custody or full23.4 admission.
+
+### Perl preflight: source isolation before composition
+
+Perl77.1.0 retains actual76 programs: unchanged28 targets plus48 independent own
+source/shape fences. The shared15 failures/13 healthy controls remain. Number3/
+null sources have finite fallback Hashes; Array[1] sources raise existing native/
+fresh HASH-reference errors; legitimate null-source with runs W. Existing produced
+Count/CountKeys/Length guards returnnull/skip A/W. Extra merge free/receiver stays
+ready1 and runs SAW, whereas set_key/rename_key extras and zero-key drop/pick are
+unready. Keep these own profiles separate from canonical family77 authority.
+
+Suspicious scalar dereferencing in the actual extra-merge substitution prompted
+ten unchanged Number3 sources under localized empty/outer/main host3 states.
+Every free/receiver merge_hash/set_key/rename_key/drop_keys/pick_keys source reads
+unrelated main::3 entries into native/fresh results only when that Hash is
+populated. Empty/outer controls keep the clean fallback, and both host maps are
+unchanged before/after. Own MethodLowering producer sites check defined alone
+before symbolic Hash dereferencing. This is a confirmed bounded source defect,
+not a legitimate input policy to preserve.
+
+Immediate P1 source-isolation77.0 precedes composition77.1.1 and independent
+peers. Preserve clean fallbacks, wrong-reference errors, actual named Hashes,
+source/key/value/overlay order/snapshots, splices, depth, collision and mutation
+contracts. No SDK edit occurs in preflight. Its first readonly recovery/eight
+effective evidence corruptions pass with empty stderr; actual86 artifact pairs
+mean76 first-intake pairs plus10 reused source pairs in the localized acquisition.
+The frozen48 own profiles and separate ten-source host-isolation targets retain
+their original inputs/full channels. Evidence and historical reader:
+`docs/checkpoints/hash-value-result-guard-perl-2026-11-07/PREFLIGHT.md` and
+`review_preflight.py`. General SESSION17 isolation, native/cache/transitive
+custody4.2/SESSION5, registration, peer verdicts and full23.4 remain separate.

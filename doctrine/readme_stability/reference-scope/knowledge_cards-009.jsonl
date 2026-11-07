@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2852,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-receiver-string-bridge-guards.md","sha256":"5bdc5c177a45f7b27df2daa1d167359eb4903b2ef77ac007cb4cd920e85f77a6","type":"member"}
 {"bytes":5237,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-annotation-statement-origins.md","sha256":"7fd9517f356552827599db0e266a7f64525cbfc1d123fa1f5e8e850de6cd7694","type":"member"}
 {"bytes":3127,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-commit-boolean-kind-drift.md","sha256":"6b81991c66eaca18b08f150d928651db3c6ccb918b4e7d64b989546b7cd178f2","type":"member"}
 {"bytes":4622,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-compatibility-observation-gap.md","sha256":"aa5e8382aaa5254d38d8cca045b24f0d1486f5fbe11561ad47187017694fd0d8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4889,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-observation-recurring-gate.md","sha256":"0c02c75080a9b581d04b1394d28a2abea4b729e3d4d1728c4de545df024a44a2","type":"member"}
 {"bytes":11803,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recursive-source-observation-audit.md","sha256":"9565ac25552a6ae15bab2c560a48e623bc34903ae5708e8944770d1a03381a88","type":"member"}
 {"bytes":1358,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.74.4","path":"docs/knowledge/reference-scope-selected-owner.md","sha256":"9f45e1af52c5affe16f70b70e3012131abe194347b3dda6c54124dd29018ba9c","type":"member"}
-{"bytes":5250,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/referenced-intermediate-edge-ownership-authority.md","sha256":"3e3c5de29df8a161df5982bb1cb6c7ee3a3c6cd376315cef0c723a7d9ef53e31","type":"member"}

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "initial_number_merge_hash_free",
+    "body": "return(merge_hash(3,{\"b\":2}))",
+    "source": "Value:: I {return(merge_hash(3,{\"b\":2}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_merge_hash_receiver",
+    "body": "return(3.merge_hash({\"b\":2}))",
+    "source": "Value:: I {return(3.merge_hash({\"b\":2}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_set_key_free",
+    "body": "return(set_key(3,\"b\",2))",
+    "source": "Value:: I {return(set_key(3,\"b\",2))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_set_key_receiver",
+    "body": "return(3.set_key(\"b\",2))",
+    "source": "Value:: I {return(3.set_key(\"b\",2))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_rename_key_free",
+    "body": "return(rename_key(3,\"a\",\"b\"))",
+    "source": "Value:: I {return(rename_key(3,\"a\",\"b\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_rename_key_receiver",
+    "body": "return(3.rename_key(\"a\",\"b\"))",
+    "source": "Value:: I {return(3.rename_key(\"a\",\"b\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_drop_keys_free",
+    "body": "return(drop_keys(3,\"a\"))",
+    "source": "Value:: I {return(drop_keys(3,\"a\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_drop_keys_receiver",
+    "body": "return(3.drop_keys(\"a\"))",
+    "source": "Value:: I {return(3.drop_keys(\"a\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_pick_keys_free",
+    "body": "return(pick_keys(3,\"a\"))",
+    "source": "Value:: I {return(pick_keys(3,\"a\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  },
+  {
+    "id": "initial_number_pick_keys_receiver",
+    "body": "return(3.pick_keys(\"a\"))",
+    "source": "Value:: I {return(3.pick_keys(\"a\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "policy_profile": true
+  }
+]
