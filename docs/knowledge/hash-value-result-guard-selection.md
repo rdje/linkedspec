@@ -9,7 +9,7 @@ answers:
   - "are zero-key drop_keys and pick_keys admitted canonical forms"
   - "must Hash-valued guard repairs preserve initial source policies"
 date: 2026-11-07
-status: original finite Perl selection frozen; independent backend family77 pending
+status: original selection frozen; bounded Perl source/result repairs focused-checked, peers pending
 tags: [hash, helpers, guards, perl, selection, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.37; hash-value-result-selection-2026-11-07/REVIEW.md retains original32, exact shared28 with15 failures/13 healthy controls, four separate unready zero-key profiles,32 actual artifact pairs and eight effective evidence corruptions. No SDK production change or peer verdict."
 reverify:
@@ -35,3 +35,9 @@ one naming typo in the frozen first contract without rewriting its seal).
 
 Reverify recovers historical evidence, not the latest production verdict. No full
 context/native-transitive custody/isolation/registration/23.4 admission follows.
+
+Perl source77.0 and result77.1.1 now have separate focused outcomes. See
+[[perl-hash-helper-scalar-host-read]] and [[perl-hash-value-result-guards]] for the
+precise source policy, actual inverse, healthy preservation and current limits.
+The original selection and frozen shared28 remain unchanged; peers assess their
+own source/arity/error profiles before implementation.

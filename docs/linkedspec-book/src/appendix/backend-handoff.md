@@ -4597,3 +4597,38 @@ producer. Metadata/format v2 are unchanged. This bounded source result does not
 close general SESSION17 isolation, native/cache/transitive custody, registration
 4.1, peer source policies or full23.4. Clean composition77.1.1 next reacquires
 unchanged28/own48 before result-guard edits; independent peers follow.
+
+## Perl pure Hash-valued helper result composition
+
+Perl77.1.1 follows source77.0. Ordinary selected merge_hash/set_key/rename_key/
+drop_keys/pick_keys free/receiver roles now retain existing actual-kind and
+rejection guards through copy/logical/with. Canonical selected arities remain
+merge2/1, set/rename3/2 and drop/pick with at least one key. An initial helper
+runs once through its original producer before guarding the result; earlier
+retained/view/copy/constructor/size owners keep their own guard permission.
+Source77.0's numeric-name/dereference barriers and all original producers remain.
+
+Actual unchanged89 groups comprise shared28 plus13 own initial/earlier-source
+targets and48 original public policy projections. Original15RED becomes89PASS.
+All74 before-healthy projections remain exact with only eval serials normalized,
+including complete Array-with error locations/stages. Initial Number3 helper-with
+retains Hash counts/W; prior views/copy/Array constructors reject merge before
+A/W. Needed composed source/value errors now equal their terminal controls,
+instead of failing compilation. Bool/null values, source-once snapshots, empty
+Hash with and source/arity/copy/collision/mutation boundaries remain intact.
+
+Exact old/current images at one private path reproduce15RED/89PASS while the
+checkout stays fixed. Direct four files185 pass: new89, source0 isolation64, view
+result15 and initial-view source17. All89 actual emitted-module/native-handler
+pairs equal old/inverse and current/restored/direct. First readonly recovery/
+eight effective corruption controls pass with empty stderr. Complete commands/
+channels/actual source images and pre-use own SDK/three conservative grammar/
+test/input bytes/modes are retained; the separate direct producer declares both
+additional view-source fixtures before use.
+
+Evidence: `docs/checkpoints/hash-value-composition-perl-2026-11-07/REVIEW.md` and
+readonly `review.py`. Regenerate previously emitted Perl; metadata and format v2
+are unchanged. Rust77.2 then Dart3/Julia4/installed Lua5 assess shared28 and their
+own source/arity/error policies independently. No unknown/keyword/traversal/
+non-with trailing/deferred/registered receiver/context/domain/signature promotion,
+general isolation/native custody/registration4.1 or full23.4 admission follows.

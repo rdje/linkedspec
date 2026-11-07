@@ -1338,7 +1338,8 @@ On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Arra
 ### Hash-valued helper continuations: selected open repair
 
 `merge_hash`, pure `set_key`, `rename_key`, `drop_keys` and `pick_keys` return
-Hashes. Compatible ordinary composition already works in the selected Perl controls:
+Hashes. Bounded Perl77.1.1 now retains actual-kind and rejection guards for their
+ordinary results; peer assessment/full admission remains open. Compatible examples:
 
 ```text
 merge_hash({"a":1},{"b":2}).count_keys()                # 2
@@ -1347,8 +1348,8 @@ pick_keys({"b":"tail","a":"head"},"b").sorted_values().last().uppercase() # "TAI
 pick_keys({"a":1},"missing").with(){return(value.count_keys())} # 0; body runs
 ```
 
-The incompatible-result boundary still needs repair. This selected original Perl
-program returns `[[], ""]`; its frozen actual-kind target is `[null, ""]`:
+The selected Perl program now returns `[null, ""]`. Its incompatible Array
+consumer rejects before evaluating the `A` operand:
 
 ```text
 order="";
@@ -1356,11 +1357,16 @@ out=pick_keys({"a":1,"b":2},"b").take({order=cat(order,"A");1});
 return([out,order]);
 ```
 
-A literal receiver followed by the incompatible Array consumer
-can fail compilation; later `.copy()`, logical or `.with()` links can run after
-rejection. A composed producer error can become a compilation error. These are
-tracked open defects under family77, with the intended null/skip/error targets
-frozen before implementation. Independent peer assessment is pending.
+Literal receiver forms now compile through the same guards. Rejection skips
+later `.copy()`, logical and `.with()` operands/bodies, rather than becoming a
+legitimate null that runs them. Required source/value producer errors propagate
+through composed `.take()`/`.coalesce()` exactly as in their terminal controls.
+All original48 own source/arity/error profiles remain: initial Number3 helper-with
+keeps its Hash/count/W behavior, initial Array helper-with keeps its error, and
+an earlier view/copy/Array-constructor result still rejects a Hash consumer before
+its operands. Nested false/null values, source snapshots and valid empty Hash
+with bodies retain their existing semantics. Independent peers assess their own
+policies; these finite controls do not establish portable source authority.
 
 Use at least one key for `drop_keys`/`pick_keys`; the four selected Perl zero-key
 forms are unready profiles. Keep rename destinations absent for portable collision
@@ -1378,8 +1384,8 @@ a dereference barrier. Original Array errors and null/key branches remain: the
 selected Number3 pick/drop controls run source/key effects `SK`, while null runs
 only `S`. All48 original own policies remain exact. Regenerate Perl parsers
 emitted before this repair; metadata and format v2 are unchanged. Use actual Hash
-inputs under the published signatures. Composition77.1.1 and broad source/
-isolation/portable admission remain separate.
+inputs under the published signatures. Bounded Perl composition77.1.1 is
+focused-checked; broad source/isolation/portable admission remains separate.
 
 `pick_keys` uses field existence, so requested false and null fields are retained while missing fields are omitted. For example, with `meta={"off":false,"nil":undef,"other":1}`, `pick_keys(meta,"off","nil","missing")` returns `{"off":false,"nil":null}` and leaves `meta` unchanged. `has_key(pick_keys(meta,"nil"),"nil")` remains true even though that stored value is null.
 

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2668,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-followon-closed.md","sha256":"6b1a96e8dd6996828d7396992f2f8ca094127a9357806ab732c1b97107ec42a2","type":"member"}
 {"bytes":27627,"lines":250,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-perl-output-oracle.md","sha256":"86b1bab73ab3d803bf3c0af8d0f630a70857d29c7ef3e56de8583e2a9c12a46a","type":"member"}
 {"bytes":3050,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-presence-result-source-guards.md","sha256":"23c6bfdeb88982761eff1bdedbe401da21e5a1ec1c36deac2a7522a735a53676","type":"member"}
 {"bytes":3838,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-primary-cli-mechanism-audit.md","sha256":"ffeaa28e07b37406cce44ffc03c4ec5e32aaad91f4751a2ea519bffefe10144b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3468,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-and-bcode-unbound-inputs.md","sha256":"387291427b703c2c49fd521bc2658f63291975053c5bb77abe1ecf5973150cb4","type":"member"}
 {"bytes":2335,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-backend-portability-ceiling.md","sha256":"ea4df84a1081bccd8a557cf2a62eea0113959c5e0c1c21ea497abd59b60120ff","type":"member"}
 {"bytes":12634,"lines":277,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-perl-coupling-inventory.md","sha256":"adc300a20dda0d53d27bf3e615def64bacd9de36b09511351df770c0d8e01c24","type":"member"}
-{"bytes":3528,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-boundary-marker-action-timing.md","sha256":"cc1b932e12c78334ad9c09b12eeb8e17f261710f8f193a287b3b92c77fceb069","type":"member"}

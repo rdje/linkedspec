@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3528,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-boundary-marker-action-timing.md","sha256":"cc1b932e12c78334ad9c09b12eeb8e17f261710f8f193a287b3b92c77fceb069","type":"member"}
 {"bytes":3563,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-marker-cross-backend-semantics.md","sha256":"724833c24f4135ad20f69749c3d5b941819714d578bd8c7fabbeeab4ee67df4e","type":"member"}
 {"bytes":4262,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-ast-enrichment-recurring-gate.md","sha256":"317b1379691b8f783e17c3cf11fa1c62b9cc02d0670e8691aad0a044fc2cdc24","type":"member"}
 {"bytes":5427,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-consumer-current-projection-lockstep.md","sha256":"c7034874cee3a92d5dbfd598f8b6973a3591c6c32cf444992b14b8448b4d3b80","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2037,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-rep-dispatch.md","sha256":"b7ab0e85128bf408a4c50c7dd099c297970a3caeeeb67edf01d36748a230a975","type":"member"}
 {"bytes":3117,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-observability-coverage-audit.md","sha256":"8c35c66579bf300f66e98b5665af06e4c156f2d85b9aec14a14dc794629d9dfc","type":"member"}
 {"bytes":2519,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-parity-proof-closed.md","sha256":"ea435b5bed05d513bc4d91e1680baae077125f6eb01fa15352fbf9166751a87a","type":"member"}
-{"bytes":1962,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-ruleir-planning-decisions.md","sha256":"ebbdabf6e76a7215fc01d7db39b67c18bfd485d3433920317338f1491f6823ce","type":"member"}

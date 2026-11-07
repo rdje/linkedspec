@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_HASH_VALUE_COMPOSITION_CAPTURE=docs/checkpoints/hash-value-composition-perl-2026-11-07/after",
+    "prove",
+    "-v",
+    "-j1",
+    "-Iperl",
+    "t/hash_value_result_guard_composition.t"
+  ]
+}

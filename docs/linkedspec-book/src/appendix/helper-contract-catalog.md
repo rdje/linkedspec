@@ -1448,11 +1448,12 @@ Needed key errors propagate before a consumer runs. Regenerate emitted Perl pars
   aggregate-selector wrapper is required or accepted.
 
 The ordinary Hash-valued results of `merge_hash`, pure `set_key`, `rename_key`,
-`drop_keys` and `pick_keys` have a selected open continuation repair. Compatible
-Hash consumers/explicit bridges work in the selected Perl controls; incompatible
-Array consumers can return `[]`, fail compilation or run later bodies. Family77
-owns independent backend repairs, preserving producer/source/arity/key/collision
-and mutation policies. This is an open gap, not completed portable admission; see
+`drop_keys` and `pick_keys` now retain actual-kind/rejection guards on bounded Perl
+routes. Incompatible Array consumers return null before operands; later copy/
+logical/with work is skipped, and needed producer errors remain errors. Current
+source/arity/key/collision/mutation policies stay intact. Canonical selected free/
+receiver arities are merge2/1, set/rename3/2, drop/pick with at least one key.
+Independent peers and full source/context/portable admission remain open; see
 [the worked boundary examples](../dsl/value-container-flow-helper-reference.md#hash-valued-helper-continuations-selected-open-repair).
 
 Perl's bounded source77.0 repair excludes Number ASTs from these five named-Hash
@@ -1460,7 +1461,8 @@ shortcuts and guards computed non-reference dereferencing. Observed Number3,
 String `"3"` merge, Number3 overlay and pick/drop key-effect controls now stay
 independent of unrelated `%main::3` data. Preserve the existing Array errors,
 null/key branches and own arity policies; regenerate previously emitted Perl.
-Composition77.1.1 and broad source/isolation admission remain separate. Published
+Bounded Perl composition77.1.1 is focused-checked; broad source/isolation admission
+remains separate. Published
 signatures still require actual Hash inputs; this defines no portable fallback.
 
 ### `set_key(h, key, value)`
