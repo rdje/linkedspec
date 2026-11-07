@@ -1,0 +1,186 @@
+[
+  {
+    "case": {
+      "id": "drop_keys_free_zero_keys_profile",
+      "body": "return(drop_keys({\"a\":1}))",
+      "source": "Value:: I {return(drop_keys({\"a\":1}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true
+    },
+    "observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9476,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_free_zero_keys_profile.handler.pl.gz",
+        "sha256": "e205573cf8103cdafa64608ec480213977c852b838351751338644514aa93821"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_keys"
+        ]
+      },
+      "module_input": {
+        "bytes": 9493,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_free_zero_keys_profile.pm.gz",
+        "sha256": "040ac14ea138fecd5ed00bdd32b057ee72197cebafc84e3442115b45b9216e48"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:drop_keys\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "drop_keys_receiver_zero_keys_profile",
+      "body": "return({\"a\":1}.drop_keys())",
+      "source": "Value:: I {return({\"a\":1}.drop_keys())}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true
+    },
+    "observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9476,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_receiver_zero_keys_profile.handler.pl.gz",
+        "sha256": "e205573cf8103cdafa64608ec480213977c852b838351751338644514aa93821"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_keys"
+        ]
+      },
+      "module_input": {
+        "bytes": 9493,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_receiver_zero_keys_profile.pm.gz",
+        "sha256": "040ac14ea138fecd5ed00bdd32b057ee72197cebafc84e3442115b45b9216e48"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:drop_keys\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "pick_keys_free_zero_keys_profile",
+      "body": "return(pick_keys({\"a\":1}))",
+      "source": "Value:: I {return(pick_keys({\"a\":1}))}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true
+    },
+    "observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9476,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_free_zero_keys_profile.handler.pl.gz",
+        "sha256": "85974d8b7c4ecb9ab2df1fd052dc63f614ac6ada3c3cff19188952c29fbcb518"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "pick_keys"
+        ]
+      },
+      "module_input": {
+        "bytes": 9493,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_free_zero_keys_profile.pm.gz",
+        "sha256": "ddf540bc3211fed7014da76d9f05c37e445f1cd64d400a9809448b68d5f3c57a"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:pick_keys\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "id": "pick_keys_receiver_zero_keys_profile",
+      "body": "return({\"a\":1}.pick_keys())",
+      "source": "Value:: I {return({\"a\":1}.pick_keys())}\n",
+      "input": "x",
+      "rule": "Value",
+      "profile_only": true
+    },
+    "observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9476,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_receiver_zero_keys_profile.handler.pl.gz",
+        "sha256": "85974d8b7c4ecb9ab2df1fd052dc63f614ac6ada3c3cff19188952c29fbcb518"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "pick_keys"
+        ]
+      },
+      "module_input": {
+        "bytes": 9493,
+        "path": "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_receiver_zero_keys_profile.pm.gz",
+        "sha256": "ddf540bc3211fed7014da76d9f05c37e445f1cd64d400a9809448b68d5f3c57a"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:pick_keys\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    }
+  }
+]

@@ -1447,6 +1447,14 @@ Needed key errors propagate before a consumer runs. Regenerate emitted Perl pars
   `merge_hash(copy(base), overlay)` is equivalent when an explicit source snapshot makes the intent clearer; no
   aggregate-selector wrapper is required or accepted.
 
+The ordinary Hash-valued results of `merge_hash`, pure `set_key`, `rename_key`,
+`drop_keys` and `pick_keys` have a selected open continuation repair. Compatible
+Hash consumers/explicit bridges work in the selected Perl controls; incompatible
+Array consumers can return `[]`, fail compilation or run later bodies. Family77
+owns independent backend repairs, preserving producer/source/arity/key/collision
+and mutation policies. This is an open gap, not completed portable admission; see
+[the worked boundary examples](../dsl/value-container-flow-helper-reference.md#hash-valued-helper-continuations-selected-open-repair).
+
 ### `set_key(h, key, value)`
 - **Signature**: `set_key(h: hash, key: string, value: expr)`
 - **Returns**: hash

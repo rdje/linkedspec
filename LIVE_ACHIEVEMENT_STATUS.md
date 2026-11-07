@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-view76: all bounded Perl/Rust/Dart/Julia/installed Lua backend and source-policy children have focused outcomes. Remaining-family selection23.1.37 is pending; full23.4 verification/admission remains separate.
+PNT Hash-valued helper family77: completed selection37 freezes the finite existing-contract gap. Independent Perl/Rust/Dart/Julia/installed Lua leaves pending; full23.4 verification/admission remains separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.76.5 guards installed Lua view Arrays in the existing namespace. Each PUC5.5.1/LuaJIT33/four routes26healthy7RED becomes184 checks0failures; direct300 counted checks plus copy/arity controls and first recovery eight corruptions PASS. Each19 own profiles/33 actual artifact pairs exact; no added chunk locals/scalar_result/loop-index/producer change. Actual grammar precedes SDK use; emitted bytes/format unchanged. Full custody/context/isolation/registration/declared5.4/admission separate.
+TYPE-REFERENCE-BOOK.1.2.23.1.37 retains original32 public Perl programs, exact eligible28 unchanged targets/15 failures/13 healthy and four separate unready zero-key profiles. First readonly recovery/eight effective evidence corruptions PASS, empty stderr;32 actual artifact pairs/input identities/full channels retained. No SDK edit or peer verdict. Source/arity/error prerequisites and bounded77 backend ownership precede production.
 
 ## Next Action
 
-Activate pending remaining-family selection23.1.37 from clean Git. Recover requirements/current inventory/contracts/Knowledge, select one actually open finite source/consumer gap and acquire public controls before any implementation or peer verdict. No broad suite/admission or guessed defect.
+Activate pending Perl77.1 from clean Git. Acquire own unchanged28 plus affected helpers' initial Number/null/Array, arity/key-list and required-error fences before production; preserve original producer/source policies. Then repair demonstrated bounded composition gaps with focused direct checks. No broad suite/admission.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.1.37 — Hash-valued28 targets/15 failures/13 healthy; four unready profiles/eight controls; independent77 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.5 — each installed host33/184PASS/direct300 plus copy/arity controls/eight corruptions; next selection37 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.4 — Julia33/four routes184PASS/direct315/eight controls; own profiles preserved; installed Lua76.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.3 — Dart33PASS/four routes; final direct62/eight controls; own initial/arity profiles retained; Julia76.4 next.
@@ -29,7 +30,6 @@ Activate pending remaining-family selection23.1.37 from clean Git. Recover requi
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Perl callable16PASS/direct43; Boolean continuation corrected; independent Rust75.6.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — installed Lua25PASS/four routes;13 healthy/Count/scalar/index exact; callable75.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — peers Count ownership3PASS/four routes; both25 normals; runtimes unchanged; installed Lua75.5 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia CountKeys25PASS/final346; Count-owned source preserved; independent peer75.7 next.
 
 ## History
 

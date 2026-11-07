@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":21407,"lines":321,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-proposal.md","sha256":"8d353b371b219816af3aa64432c7d5233bd369dd76661febeead7b26ab5686d9","type":"member"}
 {"bytes":9646,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-readme-reading-and-status-drift.md","sha256":"381b6273d6505bff2fb0ad6d9c084341175a139cd40843adc8279c30653a116e","type":"member"}
 {"bytes":4030,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-receiver-copy-value-preservation.md","sha256":"7e8bbafcdc783eaabb565ce99ebd6ac183250682024e014696187e658438fcb5","type":"member"}
 {"bytes":2753,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-receiver-string-bridge-guards.md","sha256":"d7390973550d2ec7af25ed6524b8a87d08cb78f0d91852b51f9d87d0d06eddb3","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":11828,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-rust-runtime.md","sha256":"e21fa1298044904f87481ecaab897a0129c64e84eedbf6bc89fab558fb0356db","type":"member"}
 {"bytes":2453,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/marker-switch-outside-branch-statement-drift.md","sha256":"1aa77da022269fca92cdece89863ebd8b3297bc4664db5e4289f3b26ef25a55f","type":"member"}
 {"bytes":12624,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-2026-07-28-stdio-contract.md","sha256":"976ae983653173a1be0eef61af9cdcdbb8c68303a9181b82dc6c6ef20204840e","type":"member"}
-{"bytes":6596,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-all-twenty-transport-blocker.md","sha256":"699dd12b4f09c72e604fbf0d7320dd4c3184b5bbc1097d5d2c59472ba97ffccb","type":"member"}

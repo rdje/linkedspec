@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/hash-value-result-selection-2026-11-07/observer.pl",
+    "docs/checkpoints/hash-value-result-selection-2026-11-07/cases.json",
+    "docs/checkpoints/hash-value-result-selection-2026-11-07/intake"
+  ]
+}

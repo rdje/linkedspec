@@ -1,0 +1,330 @@
+{
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/capture.py": {
+    "bytes": 2892,
+    "sha256": "371d6a174b7ac39df7946d05959c2e39d0478b47824ba2ec1a4ac6f6c865ca6a"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/cases.json": {
+    "bytes": 12820,
+    "sha256": "8b88590b5e1ae82c52aa5286ec08dba094aa194d1d5af91fc036bce39b1a87cf"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/cases.py": {
+    "bytes": 3749,
+    "sha256": "dafca0d61e32825f60b374ccb52d15907b9b2a15d83f753e095c658be7251925"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/freeze_targets.py": {
+    "bytes": 1004,
+    "sha256": "38c463c84f27320eea868d7b288a50683bc8099a8b6fde4029e3c0f3d80e3b04"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "4bbe856ec90b1884ebaedac2bea35df9be876696f5e172e1283bb97f49ecc19d"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/command.json": {
+    "bytes": 337,
+    "sha256": "eb43cc3221753811992ce7a487d8e1bd3f2e6d1ce061cc36b45879e8f2b7597d"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/constructor_hash_guard.handler.pl.gz": {
+    "bytes": 2839,
+    "sha256": "b991dc164a09d401cea20989bc057751971bab711a2d3ccf2aeda642e281a7be"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/constructor_hash_guard.pm.gz": {
+    "bytes": 2844,
+    "sha256": "2301ed1f50a837f7a3db9220df9595fa27f32832274adcfda29783e579275d7e"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_compatible.handler.pl.gz": {
+    "bytes": 2550,
+    "sha256": "fc9a3b40570ffd1a1d07c1c5d029a2d1f96f1a77fb55d9a28ad4f34a6a4261cb"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_compatible.pm.gz": {
+    "bytes": 2553,
+    "sha256": "11753bb93639b976a886d9ac03388faf547764c4198c5d884e91737709923bbc"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_free_array_guard.handler.pl.gz": {
+    "bytes": 2786,
+    "sha256": "27b770fbf4041fc295c6a4f0d165f40a511338a98f550c5c944eda9648e7c845"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_free_array_guard.pm.gz": {
+    "bytes": 2790,
+    "sha256": "a64a08c3fbf71d06291188d4b02e91c31a341ed7d62f9f562db0bec0266b73a8"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "ff31f778fdeaa191dfa09e4f0c38fdb15611deeddaa35cec8150c5f027341e91"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2346,
+    "sha256": "57a1a2bcf5b4cc342bcab697f562ade73e35fe030abbb3f7c76d5203dee36cf2"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_receiver_array_guard.handler.pl.gz": {
+    "bytes": 2429,
+    "sha256": "e0a79235fc1bb1327afe88cdb2e5155e6a73face6fecabc2c7466baa4c4ee9de"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_receiver_array_guard.pm.gz": {
+    "bytes": 2432,
+    "sha256": "202bb675f04c0a2e4ff91594080f02f2d68510a5f1d4a033d538f36860c233d7"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "ff31f778fdeaa191dfa09e4f0c38fdb15611deeddaa35cec8150c5f027341e91"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2346,
+    "sha256": "57a1a2bcf5b4cc342bcab697f562ade73e35fe030abbb3f7c76d5203dee36cf2"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/empty_pick_with.handler.pl.gz": {
+    "bytes": 2741,
+    "sha256": "9da71cbc67e9dfdd9dcbc3b9888cbe479a090dab9b141e70fc2bdde3655010e9"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/empty_pick_with.pm.gz": {
+    "bytes": 2745,
+    "sha256": "72a8377ebe0f7049a52b0290a27a9c2d3e85dc216ef6b335a88044692d1eac0b"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/explicit_bridges.handler.pl.gz": {
+    "bytes": 2776,
+    "sha256": "ea66cfeacacc172113682df46388e00ead2bb96334815520ec3cd893fc28c783"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/explicit_bridges.pm.gz": {
+    "bytes": 2780,
+    "sha256": "679c90da9098240e7c45155f0ce569d930a48d79746d45956113f3bb2ad108f7"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/input-identities.json": {
+    "bytes": 18397,
+    "sha256": "aa835fbf9ea867f4f6fb2566ba1be69b429e3a9611baedf1f7dd904d5b33f3ad"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 534099,
+    "sha256": "2908642e7e6f3e9a9eb300228e35d0c5c2916de33a5deae764cd0b51c61bda52"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_hash_compatible.handler.pl.gz": {
+    "bytes": 2519,
+    "sha256": "4693f6228280b454ac6aa729b9a64374981256ffe65df84f77bcd46f7441cc8c"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_hash_compatible.pm.gz": {
+    "bytes": 2523,
+    "sha256": "1f9cc97f67f382858d98b76f0e0cd8faa614ca67284de7028e0be43c22592305"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_hash_free_array_guard.handler.pl.gz": {
+    "bytes": 2758,
+    "sha256": "9c8f3c40b2d59c73b6847dd02b9f47d9abc0b5782ee355bf4850aa93143b6f23"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_hash_free_array_guard.pm.gz": {
+    "bytes": 2762,
+    "sha256": "d29eafb560a3c0753ae57bb1ad740017c5ec876a39009dd3a9a7a834becbc71b"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_hash_receiver_array_guard.handler.pl.gz": {
+    "bytes": 2428,
+    "sha256": "7b198c87d7f6279ba4bab3a68c290f6cecdff47cfc794d944191c6378e2af1e4"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_hash_receiver_array_guard.pm.gz": {
+    "bytes": 2431,
+    "sha256": "4ee446346a15132a39df5d0773eceac019bfae32c1d78367a8ad4bc9138971c1"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_later_with.handler.pl.gz": {
+    "bytes": 2795,
+    "sha256": "bfec0c35eda5eb93a1536ce624239ca9b3f4c37fb9f6f5eae627b18d8cb41025"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/merge_later_with.pm.gz": {
+    "bytes": 2799,
+    "sha256": "6b2f3d188ff4e466da0cf56173e2dd719eea14c17c429dbcceb2165bc6b8d3db"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_source_error_composed.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "2ac358daa8ac90af9b6beea8c55e84bbc860d43cb983be5b225140e43097e9a4"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_source_error_composed.pm.gz": {
+    "bytes": 2400,
+    "sha256": "051a55e4951150152bd76b09d09dac8a015d70ed176bcacdf95e38a65b416479"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_source_error_terminal.handler.pl.gz": {
+    "bytes": 2459,
+    "sha256": "f0f9b7e15d1b25bfc16a3917f0c66fb35f2205e5574cd450fc8e9e0a89691255"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_source_error_terminal.pm.gz": {
+    "bytes": 2462,
+    "sha256": "6e6bae7aea27aa43177b1f834ed9c5eb9dac861241b4851c6ef1efd9610d361a"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_value_error_composed.handler.pl.gz": {
+    "bytes": 2393,
+    "sha256": "28bcdb796187245bcdbe4bfa2d8246f686b21db0f54d9c336bf42e674931afcf"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_value_error_composed.pm.gz": {
+    "bytes": 2397,
+    "sha256": "9da8ca0b82488dd1a36af53eff2aaf260538b49d8adcec1ff3e1eda01a157d17"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_value_error_terminal.handler.pl.gz": {
+    "bytes": 2473,
+    "sha256": "3f49fe67e0a81180a82fad15af7dd1ef61159adce6904256778c3e40fd38aa2d"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/needed_value_error_terminal.pm.gz": {
+    "bytes": 2476,
+    "sha256": "7b8ae7ba918e4f9c23858551edccfc02699d79c5cce67ee3161b3c0141cb1809"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/nested_kinds_and_source.handler.pl.gz": {
+    "bytes": 2746,
+    "sha256": "0e79efaeec9f273403dbe3522354856328669e3033cd8f41da201e9bda758add"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/nested_kinds_and_source.pm.gz": {
+    "bytes": 2749,
+    "sha256": "1069eebcd9797981d47e4cdc6c299105630f398749f93f2a0d367b7e17f1647d"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_compatible.handler.pl.gz": {
+    "bytes": 2559,
+    "sha256": "267c5fd977a10e55731c283cead56abd3490970ee3de2453796b1c33bc33505c"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_compatible.pm.gz": {
+    "bytes": 2563,
+    "sha256": "d6d1564513993393b4279b5dbfd6543b4bb050f8ca03012a033662912aef477f"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_free_array_guard.handler.pl.gz": {
+    "bytes": 2796,
+    "sha256": "d134b2856891e143b57c49c3d41d12555dd8edbe4cbc528aecfb4c6028403023"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_free_array_guard.pm.gz": {
+    "bytes": 2800,
+    "sha256": "db7c3386d8a5cc48afbf7c6a6edb88e6c2852d5bf6046484d5b2a549b4d0a274"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "fa6c779d1213a816c2a07a2aafa563ed114deda2480984df4fea1edd90bad629"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2346,
+    "sha256": "916e20d051b79f2e68136ff7bd2dca1ebd7ecfc253ce0d9867c373a5c73f0f43"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_receiver_array_guard.handler.pl.gz": {
+    "bytes": 2430,
+    "sha256": "06788221c96bbc794c641aaf7a26c6a8a03cd7fefe5b2363e6a2ca7d944a629d"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_receiver_array_guard.pm.gz": {
+    "bytes": 2432,
+    "sha256": "76d90a6a3679b6641353785ed0e885740277aa8917dbb77262066cd766b4e490"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "fa6c779d1213a816c2a07a2aafa563ed114deda2480984df4fea1edd90bad629"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2346,
+    "sha256": "03d20b12b4c58e750bfeb20f9ec78afe0bfb7f4bc8101237691ca836bb48309e"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_key_compatible.handler.pl.gz": {
+    "bytes": 2556,
+    "sha256": "9afdea5de3a0b2747f92bd52b309309e1efdf0a40fe3d90a14c177a274e24881"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_key_compatible.pm.gz": {
+    "bytes": 2560,
+    "sha256": "4e613162b12ac13b17252a2bcd876d85b9905acb565981e23a953088144f0101"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_key_free_array_guard.handler.pl.gz": {
+    "bytes": 2792,
+    "sha256": "b51f8a191eb5c51bf942bf606efc4277ce35bcb743ed72f6dacf3445db606df5"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_key_free_array_guard.pm.gz": {
+    "bytes": 2796,
+    "sha256": "8f323b57cc548df748baf584d14331045f13737150d16dbfd1de3c4dd6093599"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_key_receiver_array_guard.handler.pl.gz": {
+    "bytes": 2428,
+    "sha256": "10af0077b90cb0a1c31cba1dad1574c6e290974d7f38ab0e7d2fa87cfdb27691"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_key_receiver_array_guard.pm.gz": {
+    "bytes": 2432,
+    "sha256": "3ba8b5c31319d205e635c3bb332709bf05a29120c313226435761e739323621c"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_logical_later_with.handler.pl.gz": {
+    "bytes": 2948,
+    "sha256": "482a2495b3eec5a31350d211cb8209f07ee6b481f02060d6790e740e3044859d"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/rename_logical_later_with.pm.gz": {
+    "bytes": 2952,
+    "sha256": "6216b8e59679886b2d345b70316ca1cef839276ff28b1b70d7cc7214329c8c11"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_copy_later_with.handler.pl.gz": {
+    "bytes": 2924,
+    "sha256": "7231ae6e3d605409873a7b984be62c56f771e3a1652f836aea0b3a696358798b"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_copy_later_with.pm.gz": {
+    "bytes": 2928,
+    "sha256": "f0641fa50fcb8a6f93f0a5e6b7463d4b6cdd5d9b636e0e32d9270c84853e9a71"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_key_compatible.handler.pl.gz": {
+    "bytes": 2533,
+    "sha256": "d71f8cacddfdb8ab7ba03ac1e6aac4f4b7322bc294ee4701f1cd11462b8d8fef"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_key_compatible.pm.gz": {
+    "bytes": 2537,
+    "sha256": "cc5c34350ee86027b51360e026f7ad46a57e0588962847b8da5f0b734ce78968"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_key_free_array_guard.handler.pl.gz": {
+    "bytes": 2778,
+    "sha256": "d626c0fa718dbfdd53bd8658da15ba02486d86a7918afb19840c4f2df5a79afa"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_key_free_array_guard.pm.gz": {
+    "bytes": 2783,
+    "sha256": "b3613522b1e082790119f8ad13bd5e091dfa5d96a8447326f0d70679239b6094"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_key_receiver_array_guard.handler.pl.gz": {
+    "bytes": 2426,
+    "sha256": "28bfc7f4006c0ea0b1a0f911547a2e0e9a8aa798f37fc02d83f1484ffd1b51d1"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/set_key_receiver_array_guard.pm.gz": {
+    "bytes": 2429,
+    "sha256": "1a375fa7304a7ace566d16221ceb0c835e97860d9cbf1c98cc4edef1d2e2e9d3"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/source_once_snapshot.handler.pl.gz": {
+    "bytes": 2710,
+    "sha256": "ea9196601aa870e67eba6bcac6a7c6ea01c669710effec55fa432be4ea9f88e6"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/source_once_snapshot.pm.gz": {
+    "bytes": 2714,
+    "sha256": "1aa11b8ef5035766b22b3e9720f9196e7388bf734d7478ae567429519c9d2d83"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/stdout.log.gz": {
+    "bytes": 23181,
+    "sha256": "70e4363f3e6463fe4a65a220fae2388e024b530b579ff067a7d2fc96e92dd936"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/variadic_key_preservation.handler.pl.gz": {
+    "bytes": 2588,
+    "sha256": "fbb86cd00a9239b02114d840ae055c04c8044cd39da2f08f7aadd744ea871259"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/intake/variadic_key_preservation.pm.gz": {
+    "bytes": 2593,
+    "sha256": "6dc73d5dfbed738cbe2618e3c8a07e88b51108be1284f39f5fdb65afa0e11a15"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/observer.pl": {
+    "bytes": 3350,
+    "sha256": "a3c34e99685ab7c049a2b4d35b30d6bfc234f9fc5bedc381e7321c9a26090c7e"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/review.py": {
+    "bytes": 11544,
+    "sha256": "e999ac8f19d7db2859cec93979e585bb4cac4c3f9b064e32a802013aacebaab2"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/run_review.py": {
+    "bytes": 1013,
+    "sha256": "839dc84d2e98378c240c199992d4b82b591b2c0df71dc79abef1eac722e243ef"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/seal.py": {
+    "bytes": 1159,
+    "sha256": "6a6c423ee75911b3856f51df957a874516182cd9e0773f715661317f2eb7db97"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/zero-key-profiles.json": {
+    "bytes": 6383,
+    "sha256": "929b1df7e62c003ad739381b1d54aaa1e88f86448bf69e239e351c88c185feee"
+  },
+  "docs/checkpoints/type-operation-inventory/hash-value-result-guard-composition.md": {
+    "bytes": 3141,
+    "sha256": "aa16075ead0744034f270439a038bef61e702696dee0875978ea0c66571b19e8"
+  },
+  "tests/fixtures/hash_value_result_guard_cases.json": {
+    "bytes": 11916,
+    "sha256": "355777a30a33c1054274dbe7f27e0eeca9a7a8648f4bcc0890f2982d86646a7c"
+  }
+}

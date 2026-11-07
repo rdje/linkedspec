@@ -2305,3 +2305,57 @@
   - [x] **LOCKSTEP** — Book/Knowledge/live/frontier records qualify installed hosts and remaining full/native/context/isolation/registration/declared5.4 boundaries; pending selection37 owns the next clean acquisition.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.76.5 - guard installed Lua Hash-view Array results`.
   Limits/next: Fresh modules share runtime/process. All bounded76 children have focused outcomes; full native/cache/transitive custody4.2/SESSION5, source/registered-function contexts, general isolation, canonical registration23.4.1, declared5.4 and full23.4 remain separate. Commit clean/brief0 then activate remaining-family selection23.1.37; no parent admission inferred.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77`
+  Status: `in_progress` / selected existing-contract Hash-valued helper guards; implementations pending
+  Children: `.77.1`, `.77.2`, `.77.3`, `.77.4`, `.77.5`.
+  Goal: Preserve ordinary pure Hash-valued helper results through current actual-kind consumers and rejection continuations.
+  Dependencies: Completed selection23.1.37, frozen hash_value_result_guard_cases.json, hash-value-result-guard-composition.md plus selection REVIEW backlog-name erratum; source-policy lesson76.6.
+  Reproduction/impact: Original Perl28 eligible controls contain15 failures: free incompatible take returns[], literal receiver/composed needed-error compilation fails, later with/logical bodies run. Thirteen healthy controls and four nonadmitted zero-key profiles retained separately. No peer defect inferred.
+  Acceptance: Canonical free/receiver merge_hash2/1, pure set_key3/2, rename_key3/2, drop_keys/pick_keys with at least one key only. Each backend independently acquires actual unchanged28 and own initial Number/null/Array, arity/key-list/error policies before edits; preserve producers, source-once/snapshots/order/keys/splices/copy depth, mutation and collision boundaries. Existing guards handle compatible bridges and skip incompatible operands/later copy/logical/with; required producer errors remain errors. No keyword/unknown/traversal/non-with trailing/deferred/callback/unassessed registered-function receiver promotion. Full23.4 remains separate.
+  Frontier: Perl77.1 first, then independent Rust2/Dart3/Julia4/installed Lua5, one coherent focused-checked commit each; split a newly demonstrated unsafe scope before changes.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.1`
+  Status: `pending`
+  Goal: Independently assess and repair Perl ordinary Hash-valued helper result composition.
+  Dependencies: Frozen77/selection37 targets and erratum; clean selection37 landing.
+  Acceptance: Before production acquire own unchanged28 on public Get/descriptor/substitution/native and independently loaded full emitted module, plus each affected helper's actual initial Number/null/Array and excluded-arity/key-list/needed-error fences. Preserve all healthy semantics and actual producer/source policies; repair only demonstrated canonical pure Hash-result guard gaps under frozen77. Retain actual first inputs/grammar/instruments/artifacts/full channels, unchanged-target RED/GREEN and distinguishing inverse/recovery proof where a repair is needed. If already healthy, retain outcome without a speculative edit. Update smallest new/direct-dependent normal and public book; no broader context/domain/signature/collision/mutation/native-custody/admission claim.
+  Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.2`
+  Status: `pending`
+  Goal: Independently assess and repair Rust ordinary Hash-valued helper result composition.
+  Dependencies: Frozen77/selection37 targets and erratum; preceding bounded77 backend landing (no imported defect verdict).
+  Acceptance: Before production acquire own unchanged28 on native/restored CompiledSpec/generated-plan, plus each affected helper's actual initial Number/null/Array and excluded-arity/key-list/needed-error fences. Preserve all healthy semantics and actual producer/source policies; repair only demonstrated canonical pure Hash-result guard gaps under frozen77. Retain actual first inputs/grammar/instruments/artifacts/full channels, unchanged-target RED/GREEN and distinguishing inverse/recovery proof where a repair is needed. If already healthy, retain outcome without a speculative edit. Update smallest new/direct-dependent normal and public book; no broader context/domain/signature/collision/mutation/native-custody/admission claim.
+  Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.3`
+  Status: `pending`
+  Goal: Independently assess and repair Dart ordinary Hash-valued helper result composition.
+  Dependencies: Frozen77/selection37 targets and erratum; preceding bounded77 backend landing (no imported defect verdict).
+  Acceptance: Before production acquire own unchanged28 on native/restored/generated-plan and owned analysis/format, plus each affected helper's actual initial Number/null/Array and excluded-arity/key-list/needed-error fences. Preserve all healthy semantics and actual producer/source policies; repair only demonstrated canonical pure Hash-result guard gaps under frozen77. Retain actual first inputs/grammar/instruments/artifacts/full channels, unchanged-target RED/GREEN and distinguishing inverse/recovery proof where a repair is needed. If already healthy, retain outcome without a speculative edit. Update smallest new/direct-dependent normal and public book; no broader context/domain/signature/collision/mutation/native-custody/admission claim.
+  Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.4`
+  Status: `pending`
+  Goal: Independently assess and repair Julia ordinary Hash-valued helper result composition.
+  Dependencies: Frozen77/selection37 targets and erratum; preceding bounded77 backend landing (no imported defect verdict).
+  Acceptance: Before production acquire own unchanged28 on native/plan/fresh full emitted source, plus each affected helper's actual initial Number/null/Array and excluded-arity/key-list/needed-error fences. Preserve all healthy semantics and actual producer/source policies; repair only demonstrated canonical pure Hash-result guard gaps under frozen77. Retain actual first inputs/grammar/instruments/artifacts/full channels, unchanged-target RED/GREEN and distinguishing inverse/recovery proof where a repair is needed. If already healthy, retain outcome without a speculative edit. Update smallest new/direct-dependent normal and public book; no broader context/domain/signature/collision/mutation/native-custody/admission claim.
+  Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.77.5`
+  Status: `pending`
+  Goal: Independently assess and repair installed Lua ordinary Hash-valued helper result composition.
+  Dependencies: Frozen77/selection37 targets and erratum; preceding bounded77 backend landing (no imported defect verdict).
+  Acceptance: Before production acquire own unchanged28 on each actual PUC/LuaJIT native/plan/fresh full emitted source, plus each affected helper's actual initial Number/null/Array and excluded-arity/key-list/needed-error fences. Preserve all healthy semantics and actual producer/source policies; repair only demonstrated canonical pure Hash-result guard gaps under frozen77. Retain actual first inputs/grammar/instruments/artifacts/full channels, unchanged-target RED/GREEN and distinguishing inverse/recovery proof where a repair is needed. If already healthy, retain outcome without a speculative edit. Update smallest new/direct-dependent normal and public book; no broader context/domain/signature/collision/mutation/native-custody/admission claim.
+  Planned verification: Smallest finite new targets plus directly affected producer/source normals; backend syntax/owned formatting or precise runner include, readonly recovery, book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new authority/infrastructure separately owned.
+  Planned claim verification: none: Finite authored feature/preservation controls, not a complete method/domain/context/backend or performance measurement.

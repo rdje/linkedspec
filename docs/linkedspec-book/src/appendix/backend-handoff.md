@@ -4500,4 +4500,33 @@ unchanged per host. Fresh modules share runtime/process. Full native/cache/
 transitive custody4.2/SESSION5, source/registered-function contexts, general
 isolation, canonical registration23.4.1, declared Lua5.4 and full23.4 remain
 separate. All bounded76 backend/source-policy children have focused outcomes;
-remaining-family selection23.1.37 follows clean landing before another acquisition.
+remaining-family selection23.1.37 below freezes the next bounded repair.
+
+## Selected Hash-valued helper result guards
+
+Selection37 retains one actual original32 public Perl intake at activation795e8c1a.
+Its28 eligible unchanged programs contain15 failures and13 healthy controls:
+five free incompatible Array consumers return[], five literal receivers retain
+raw DSL and compile-fail, three later-body chains run W/D, and two composed
+required-error programs compile-fail before their terminal producer's binding
+error. Compatible Hash consumers, bridges, nested kinds, variadic keys, source
+snapshots, valid empty Hash with and constructor rejection remain healthy.
+Four zero-key drop_keys/pick_keys forms are unready/unresolved-helper profiles,
+kept outside the shared28 fixture. These are finite authored observations.
+
+The public substitution and actual handlers distinguish legacy take fallback/raw
+DSL from the constructor's retained rejection marker. Existing own Perl source/
+prefix/retained/copy/with classifications omit these pure Hash-valued roles.
+Family77 has independent pending Perl1/Rust2/Dart3/Julia4/installed Lua5 children.
+Each first acquires its own unchanged28 and actual initial Number/null/Array,
+arity/key-list and required-error policies before production. Preserve source
+capture/order, splices, copy depth, mutation and collision differences; keep rename
+destinations absent. No peer defect is inferred from Perl.
+
+Evidence: `docs/checkpoints/hash-value-result-selection-2026-11-07/REVIEW.md` and
+readonly `review.py`. Actual first inputs/grammars/instruments/full channels and32
+emitted module/native handler pairs are retained; first recovery/eight evidence
+corruptions pass with empty stderr. The frozen first contract has a backlog-name
+erratum in REVIEW: collision normalization remains FUTURE-PARITY-BACKLOG.5.
+No SDK production edit, domain/signature/context/deferred/registered-function
+expansion, general isolation/native-transitive custody or full23.4 admission.

@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: all bounded Hash-view76 children, including Perl copy76.0/source-policy76.6, Rust76.2/Dart76.3/Julia76.4 and installed Lua76.5, have focused outcomes. Each installed Lua33/184PASS/direct300 plus copy/arity controls/eight corruptions; own profiles/artifacts preserved. Pending selection23.1.37 recovers current requirements/contracts before another finite source/consumer acquisition. Full source/context/native-cache custody, broad SESSION17 isolation, declared Lua5.4 and full23.4 remain separate; no parent admission follows from focused outcomes.
+Current finite frontier: all bounded Hash-view76 children have focused outcomes. Completed selection23.1.37 freezes one original Perl32 intake into28 unchanged eligible targets (15 failures/13 healthy) and four separate unready zero-key profiles. Independent Hash-valued helper family77/backend1-5 is defined; pending Perl77.1 first acquires each affected helper's own initial source/arity/error fences before production. See hash-value-result-selection-2026-11-07/REVIEW.md and frozen hash-value-result-guard-composition.md plus its backlog-name erratum. Full source/context/native-cache custody, SESSION17 isolation, declared Lua5.4 and full23.4 remain separate.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

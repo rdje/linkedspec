@@ -1,4 +1,5 @@
-{"member_count":31,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":32,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1836,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/type-task-selection-lookup.md","sha256":"e41aeb2fa2a2db382c6fe2cab9d83204e641fe6d45e226e3274d2f151eb0a7fc","type":"member"}
 {"bytes":2899,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-authoring-model-public-no-drift.md","sha256":"b5b374f8060bf88116ce1883a2042cfacf94eaa88fc346929cfce2b29303319e","type":"member"}
 {"bytes":4491,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-lossless-gap-composition.md","sha256":"2c2cb42c2e31e12179a735bb78b35074f2e43b56dd5b96d1947c556d5172dd3a","type":"member"}
 {"bytes":2605,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-path-mutation-result-checker-root-kind.md","sha256":"3507d6e4896b7d1633a12c155265f128a83b8e14490ff819bddc5934f5cef3b6","type":"member"}

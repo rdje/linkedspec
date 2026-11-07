@@ -1335,6 +1335,40 @@ Each `pick_keys` key belongs to that call and is evaluated in argument order. A 
 
 On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Array fallback: `sorted_values(3)`, `sorted_values("3")` and `sorted_values(length("abc"))` return `[]`, independently of unrelated host hashes. The source is evaluated once. Actual Hash values still project values by sorted keys: `sorted_values({"b":"B","a":"A"})` returns `["A","B"]`. Produced-Length guards retain their own policy: both `"abc".length().sorted_values()` and `"abc".length().copy().sorted_values()` return null because that Number result rejects a Hash consumer. This does not define a universal wrong-kind policy or resolve absent/legacy binding behavior in other collection helpers. Regenerate Perl parsers emitted before the scalar-isolation or Hash-view guard repairs. Generated metadata and format v2 are unchanged.
 
+### Hash-valued helper continuations: selected open repair
+
+`merge_hash`, pure `set_key`, `rename_key`, `drop_keys` and `pick_keys` return
+Hashes. Compatible ordinary composition already works in the selected Perl controls:
+
+```text
+merge_hash({"a":1},{"b":2}).count_keys()                # 2
+{"a":1}.rename_key("a","b").sorted_keys().join_values(",") # "b"
+pick_keys({"b":"tail","a":"head"},"b").sorted_values().last().uppercase() # "TAIL"
+pick_keys({"a":1},"missing").with(){return(value.count_keys())} # 0; body runs
+```
+
+The incompatible-result boundary still needs repair. This selected original Perl
+program returns `[[], ""]`; its frozen actual-kind target is `[null, ""]`:
+
+```text
+order="";
+out=pick_keys({"a":1,"b":2},"b").take({order=cat(order,"A");1});
+return([out,order]);
+```
+
+A literal receiver followed by the incompatible Array consumer
+can fail compilation; later `.copy()`, logical or `.with()` links can run after
+rejection. A composed producer error can become a compilation error. These are
+tracked open defects under family77, with the intended null/skip/error targets
+frozen before implementation. Independent peer assessment is pending.
+
+Use at least one key for `drop_keys`/`pick_keys`; the four selected Perl zero-key
+forms are unready profiles. Keep rename destinations absent for portable collision
+behavior. Initial source policies, key splices, copy depth and `set_key` statement
+or indexed mutation retain their existing contracts. See the
+[backend handoff](../appendix/backend-handoff.md#selected-hash-valued-helper-result-guards)
+for the bounded evidence and repair prerequisites.
+
 `pick_keys` uses field existence, so requested false and null fields are retained while missing fields are omitted. For example, with `meta={"off":false,"nil":undef,"other":1}`, `pick_keys(meta,"off","nil","missing")` returns `{"off":false,"nil":null}` and leaves `meta` unchanged. `has_key(pick_keys(meta,"nil"),"nil")` remains true even though that stored value is null.
 
 Examples:

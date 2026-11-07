@@ -1,0 +1,32 @@
+{
+  "source": "Tool-result transcription; complete raw hook channels were not separately acquired",
+  "activation": "795e8c1ade747d12a1c1e304ddf144a9372eea2e",
+  "command": [
+    "git",
+    "--no-pager",
+    "commit",
+    "-F",
+    "git_message_brief.txt"
+  ],
+  "observed_rejection": "TASK-ACCEPTANCE: two new checked evidence lines contain the forbidden pending word; all six required labels are present",
+  "canonical_existing_fact": "docs/knowledge/task-acceptance-evidence-gate-boundary.md",
+  "scope": "Checklist prose correction only; no gate change or runtime status promotion",
+  "termination": {
+    "verified_root_pid": 29469,
+    "verified_same_repository_hook": true,
+    "own_descendant_pids": [
+      29469,
+      29496,
+      29995,
+      35350,
+      72582,
+      72584,
+      72973,
+      75138,
+      75520,
+      77852
+    ],
+    "signal": "SIGTERM",
+    "tool_exit": 143
+  }
+}
