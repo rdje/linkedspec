@@ -1,0 +1,15 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.16",
+  "failure": "first4.16 commit: diagnostics chapter2063/2048 lines; remaining claim verifier interrupted, not passed",
+  "before": {
+    "lines": 2063,
+    "bytes": 161116,
+    "sha256": "ed0ce7681ce06a7887818d05d36e5a1f6ee37507038cd5a8e8c6d00994aeba03"
+  },
+  "after": {
+    "lines": 2048,
+    "bytes": 161101,
+    "sha256": "99ae6834a39947d32b6a677a5e73c086dbf3158d6adebad53601572192ec90ef"
+  },
+  "preservation": "All pre-existing fenced examples byte-exact; only own new example becomes an inline command and two outside-example redundant blank lines are removed."
+}

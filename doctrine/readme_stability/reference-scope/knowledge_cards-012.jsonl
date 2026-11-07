@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2057,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-output-return-shape-contract.md","sha256":"1615b468a898c6224139ded36bc784133e687a543a41f61b13f81b0b316ce80e","type":"member"}
 {"bytes":3148,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-regex-feature-contract.md","sha256":"4c1b8d0e984119f88e31592f53313e8c11dd506475122549a9fa80af14c8bfad","type":"member"}
 {"bytes":3377,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-rule-mode-semantics-map.md","sha256":"d6f068858022ddb38e405a3338f4a5dae046ade43a675715906e030f7f6bd200","type":"member"}
 {"bytes":10458,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-spec-self-hosted-grammar.md","sha256":"727c710695b3a82d1544f2ecef49d3da958d94a01ed95d996b97880adc8074d6","type":"member"}
@@ -31,6 +32,7 @@
 {"bytes":3651,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/targeted-session-startup.md","sha256":"fdfcadf09c6d5ce25f14bc10f8d7f2202f8142eec1b43137ab11515164e1b388","type":"member"}
 {"bytes":6203,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"ca8601711769ac7fc7dd6ec9e339c13d8971bc7aa22ffc698442a9a05d0b98cc","type":"member"}
 {"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
+{"bytes":2359,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.16","path":"docs/knowledge/task-narrative-legacy-frontier-boundary.md","sha256":"122ef9f1639b6b1ebd6cf3e4ece2ad4aeddd98cecc9d39d4e6722a9d322383e0","type":"member"}
 {"bytes":21168,"lines":363,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-partition-capacity-registry-drift.md","sha256":"6dfc8e83cd9569dc27c0fa7adb4ab0b541d91d7a4dffc1cab42c359e08290001","type":"member"}
 {"bytes":3731,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-capability-markers-not-frontier.md","sha256":"6e5dd80e47733c7fb17aea828641d19fd209c753630cdfbffd47af8e7b187c9c","type":"member"}
 {"bytes":4354,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-tree-metadata-gate-boundary.md","sha256":"66b9d115ce111edfd55997927353fdcba874af0d31ab35544208a66dfa012128","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":2696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-backend-parity-split.md","sha256":"dc11575830d8bcb1175b9856abc93dcdf31ffb62e38d7a97fa005f84791df340","type":"member"}
 {"bytes":3520,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-cli-control.md","sha256":"221646ffa91fdd1e025bc83efffcba0dcc7441d474026804cc81635ecf61059c","type":"member"}
 {"bytes":2586,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-compile-actionir-coverage-closed.md","sha256":"79a38215343e15dfc52ad5eec0c4b877d69f3accfb9e4d224b88a4ddd85b43d8","type":"member"}
-{"bytes":1913,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-compile-actionir-coverage-split.md","sha256":"942033687b3292e9c90170521d060fcb3b3cf609e752addf04676f7b1975978b","type":"member"}
-{"bytes":2042,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-coverage-extension-split.md","sha256":"d36ddea8e2fb49cecdd1b92cf7a2b47d4612013b1d62c1a7785a072fad10974f","type":"member"}

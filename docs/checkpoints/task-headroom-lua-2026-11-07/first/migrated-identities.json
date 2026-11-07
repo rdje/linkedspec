@@ -1,0 +1,12 @@
+{
+  "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.16.json": {
+    "bytes": 4535,
+    "mode": 420,
+    "sha256": "17fc11f782908f1fc9e3f38518802d6e36e4480c3ce3b2b22bbd648c660cb9cd"
+  },
+  "docs/tasks/LUA-BACKEND-PARITY.md": {
+    "bytes": 130163,
+    "mode": 420,
+    "sha256": "762981ae57960bb5fbffc29ad363a49f0f48c218f497ca7c75b86c49b0c2ae1c"
+  }
+}

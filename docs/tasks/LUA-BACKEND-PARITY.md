@@ -60,10 +60,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Status: `done`
   Goal: Implement Lua as the third full-parity future backend.
   Children: `.1`, `.2`, `.3`, `.4`, `.5`, `.6`, `.7`, `.8`
-  Verification: **PASS 2026-07-16.** All eight parents and every implementation leaf are closed. Lua is the fifth
-    exact backend across 16 executable capabilities at 80/0/0; PUC Lua and LuaJIT pass 177/177, primary CLI 61x2,
-    corpus 105/105, shared CLI matrix 5x2x61, and canonical Phase 0 `1..1031` in 625 seconds.
   Commit: `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY`.
 
 - ID: `LUA-BACKEND-PARITY.1`
   Status: `done`
@@ -76,79 +74,24 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Reverify PUC Lua/LuaJIT/LPeg availability; record the absence or adoption of LuaRocks, Busted,
     Luacheck, and StyLua; choose dependency/test strategy, module search paths, `lua/` layout, `linkedspec-lua`,
     corpus runner, writable cache boundaries, and primary-versus-secondary runtime gates before source code.
-  Verification: **PASS 2026-07-11.** PUC Lua 5.4.8 is the primary runtime; LuaJIT 2.1/5.1 is secondary. Core
-    modules use their shared language subset, with runtime-specific code isolated. Repository layout is
-    `lua/src/linkedspec/`, `lua/test/`, and `lua/bin/`; the distinct executable is `lua/bin/linkedspec-lua`, the
-    corpus adapter is `lua/bin/corpus_runner.lua`, and `tools/run_lua_local.sh` owns gates. Commands prepend exact
-    repo paths to `LUA_PATH` and retain `;;`; they never write global module paths. Initial scaffold/test driver has
-    zero external dependencies. No JSON module is installed, so `.1.3` owns a pure-Lua typed JSON codec with an
-    explicit null sentinel and array/harray tags. LPeg exists as separate Homebrew C modules for 5.4/5.1 but is not
-    a foundation dependency or regex decision. Future optional LuaRocks state, if adopted, must live under a
-    caller-owned `/private/tmp/linkedspec-lua-rocks*` tree and be deleted; current gates use no cache. No code changed.
   Commit: `LUA-BACKEND-PARITY.1.1 - lock Lua toolchain and package policy`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.1.2`
   Status: `done`
   Goal: Add the minimal native Lua module, CLI/corpus-runner stubs, and repo-owned test driver.
   Acceptance: In-memory module load, backend status, exact entrypoint identities, primary PUC Lua smoke, optional
     LuaJIT compatibility smoke, and cleanup work without network/global package installation.
-  Verification: **PASS 2026-07-11.** Added `lua/src/linkedspec/init.lua` with immutable-call status copies and
-    exact backend/CLI/corpus entrypoint identities; dependency-free TAP-like `lua/test/run.lua`; executable
-    developer stubs `lua/bin/linkedspec-lua` and `lua/bin/corpus_runner.lua`; README; and
-    `tools/run_lua_local.sh`. The gate injects repo `LUA_PATH`, syntax-checks every source, passes 4/4 native module
-    tests on PUC Lua and 4/4 on LuaJIT, and byte-checks both explicit exit-2 stub failures. No parser/corpus API,
-    JSON/LPeg dependency, package/cache write, or public CLI behavior is faked. Corpus IO `.1.3` is next.
   Commit: `LUA-BACKEND-PARITY.1.2 - scaffold native Lua backend`
-
-### `LUA-BACKEND-PARITY.1.2` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Repository/toolbox inventory (`rg --files`, runtime probes, and the `.1.1` policy)
-  established that no task-owned native Lua module, test driver, command path, or local gate existed.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Lua was only a future backend intention; the complete parity plan deliberately
-  assigned the first implementation boundary to `.1.2`, so no earlier source path could truthfully expose it.
-- [x] **FIX** — Added the dependency-free module/test/bin/README layout and `tools/run_lua_local.sh`, while keeping
-  parser and corpus behavior explicit exit-2 unavailable boundaries.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` syntax-checks every Lua source, passes PUC Lua 4/4,
-  passes LuaJIT 4/4, and verifies exact process stderr/status for both command stubs.
-- [x] **NO REGRESSION** — Capability, generated-source, language-coverage, doctrine, Knowledge Map, memory, and
-  mdBook gates pass; the four admitted backends remain 60/0/0 and the scaffold claims no new capability.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook, Knowledge Map, changes/development/live status, and bounded
-  memory all name the verified scaffold boundary and active strict corpus-IO successor `.1.3`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.1.2`.
 
 - ID: `LUA-BACKEND-PARITY.1.3`
   Status: `done`
   Goal: Add strict manifest/fixture IO without parser execution.
   Acceptance: Validate the 105-case manifest, exact directory membership, required UTF-8 files, expected JSON, and
     stale/missing fixtures; keep execution disabled until runtime ownership exists.
-  Verification: **PASS 2026-07-11.** Added the zero-dependency `linkedspec.json` codec with strict UTF-8
-    validation, strict JSON grammar/Unicode escapes, explicit null/array/harray identity, duplicate-key rejection,
-    ambiguous-plain-table rejection, finite numbers, cycles, and recursively canonical object ordering. Added
-    `linkedspec.corpus` to validate format/count/names/duplicates, exact missing/stale directory membership, all
-    required strict-UTF-8 files, and typed expected JSON for the exact 105-case checked-in manifest. The developer
-    corpus command validates and reports 105 fixtures while explicitly refusing execution; the primary CLI remains
-    an exit-2 parser stub. `tools/run_lua_local.sh` passes syntax, 10/10 PUC Lua tests, exact process checks, 105
-    command validation, and 10/10 LuaJIT compatibility tests with no leftover temp directories.
   Commit: `LUA-BACKEND-PARITY.1.3 - add strict Lua corpus IO`
-
-### `LUA-BACKEND-PARITY.1.3` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Knowledge Map/toolbox audit plus direct manifest inspection confirmed the exact
-  105-case corpus and showed the Lua scaffold had no JSON decoder, typed JSON identities, UTF-8 validator, fixture
-  loader, or drift guard.
-- [x] **ROOT CAUSE (WHY + WHERE)** — No installed Lua JSON package can preserve the required null/array/harray
-  distinction portably across PUC Lua and LuaJIT; Lua's standard library also has no directory iterator, so `.1.3`
-  owned a repository codec and a safely quoted, NUL-delimited read-only fixture inventory adapter.
-- [x] **FIX** — Added strict `linkedspec.json`, `linkedspec.corpus`, validation-only corpus runner behavior, public
-  in-memory loading, focused malformed/drift/UTF-8 proofs, and exact command-gate accounting.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 10/10 on PUC Lua and 10/10 on LuaJIT, loads
-  all 105 fixtures, validates exact process output, and rejects unsupported format, unsafe/duplicate names,
-  count/directory drift, missing files, malformed JSON, invalid UTF-8, duplicate JSON keys, and ambiguous tables.
-- [x] **NO REGRESSION** — At that foundation boundary, parser execution and `parse_spec` remain absent, the primary
-  CLI retains its exact scaffold failure, and the corpus runner rejects `--execute` until the later `.6.3` gate;
-  capability/generated-source states stay 60/0/0.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook, Knowledge Map, README, changes/development/live status, and
-  bounded memory all describe strict UTF-8 as this text boundary encoding—not as a synonym for Unicode—and point
-  to source AST `.2.1` next.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.2`
   Status: `done`
@@ -160,139 +103,32 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Goal: Define typed source AST and lossless JSON/provenance projection.
   Acceptance: Spec/rule/mode/body/edge/lifecycle/function/parse-job/source-span types match the neutral schema;
     explicit tagged representations preserve scalar/array/harray/codeblock identity.
-  Verification: **PASS 2026-07-11.** Added `linkedspec.spec_ast` with private metatable identities and validated
-    constructors for `SpecFile`, `FunctionDefinition`, ordinary/staged source spans, `StagedParseJob`, rules,
-    headers, every simple/bounded mode, ten body-element variants, edge targets, and fluent calls. Neutral field
-    projection/from-JSON follows the Rust/Dart/Julia contract, preserves typed JSON array/harray/scalars and explicit
-    codeblock AST identity, clones optional function payload/AST values defensively, and rejects unknown variants,
-    ambiguous payload tables, wrong node lists, and sparse arrays. The public module exposes the data API, top-rule
-    and label lookup, and repetition/AND mode queries without exposing `parse_spec`. The local gate passes syntax,
-    exact corpus/process legs, 13/13 PUC Lua tests, and 13/13 LuaJIT compatibility tests.
   Commit: `LUA-BACKEND-PARITY.2.1 - add typed Lua source AST`
-
-### `LUA-BACKEND-PARITY.2.1` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Knowledge Map and canonical Dart/Julia/Rust AST inspection established the neutral
-  node/field contract; direct Lua module inspection showed no typed source/provenance representation before this
-  leaf.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Parser work cannot be safe over untyped Lua tables: array/harray layout and
-  codeblock/body variant identity would otherwise be guessed, while staged function payload provenance could drift
-  from existing `source_span`/`body_parse_job` fields.
-- [x] **FIX** — Added validated metatable-typed AST nodes, complete neutral projection/reconstruction, defensive
-  typed-JSON payload cloning, mode helpers, lookups, all ten body variants, and public in-memory exposure.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 13/13 on PUC Lua and 13/13 on LuaJIT; one
-  representative function/staged-job/bounded-rule AST round-trips byte-canonical JSON, all body variants round-trip,
-  and malformed modes/kinds/nodes/payloads/sparse lists are rejected.
-- [x] **NO REGRESSION** — Exact 105-case corpus validation and process checks remain green; `parse_spec` remains
-  absent and no source syntax, runtime, CLI, capability, or generated-source behavior is claimed early.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook with Lua construction example, README, Knowledge Map, and
-  live continuity identify the completed data-only boundary and activate parser `.2.2`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.2.1`.
 
 - ID: `LUA-BACKEND-PARITY.2.2`
   Status: `done`
   Goal: Parse rule paragraphs and universal source syntax.
   Acceptance: Headers/modes, regex slots, action/blind edges, lifecycle/plain blocks, markers, fluent continuations,
     comments, nested blocks, quote forms, and newline/semicolon statement boundaries have focused fixtures.
-  Verification: **PASS 2026-07-11.** Added public `parse_spec(source)` and typed `SpecParseException` values. The
-    permissive rule-level parser produces the `.2.1` AST for headers and every simple/bounded mode; header-rest and
-    body regex slots; grouped/indexed action and blind edges; attached/multiline fluent continuations; lifecycle,
-    plain, and receiver-when/otherwise blocks; split/conditional/lifecycle markers; raw fallback; comments; nested
-    parentheses/braces; and braces inside double- or single-quoted text. Because Lua strings can carry arbitrary
-    bytes, the public source seam rejects invalid UTF-8 before scanning while preserving valid Unicode text.
-    Compact lifecycle fluent calls normalize
-    into semicolon-separated same-line statements with no trailing semicolon; physical newlines remain statement
-    separators without inserted semicolons. It parses all 21 shipped specs and 102/105 rule-only corpus sources;
-    the three top-level-function sources remain intentionally routed to `.2.4`. The local gate passes syntax,
-    exact process/105-manifest legs, 23/23 PUC Lua tests, and 23/23 LuaJIT compatibility tests. Primary CLI and
-    corpus execution remain unavailable.
   Commit: `LUA-BACKEND-PARITY.2.2 - parse Lua rule source`
-
-### `LUA-BACKEND-PARITY.2.2` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Knowledge Map plus Dart/Julia parser/toolbox inspection established the admitted
-  permissive rule-parser boundary; Lua had typed target nodes but no public source-to-AST producer.
-- [x] **ROOT CAUSE (WHY + WHERE)** — `.2.1` deliberately stopped at data types. Without a dedicated scanner,
-  nested blocks/parentheses, both quote delimiters, header-line regexes, multiline fluent chains, and newline versus
-  semicolon statement separation could not be represented reliably.
-- [x] **FIX** — Added a shared Lua 5.1/5.4 scanner/parser for headers, modes, body families, quote-aware nesting,
-  fluent/attached blocks, comments/raw fallback, strict-UTF-8 source admission, exact line attribution, and typed
-  parse errors; exported the native
-  `parse_spec` API while keeping command/runtime surfaces unavailable.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 23/23 on PUC Lua and 23/23 on LuaJIT, all 21
-  shipped specs, 102 rule-only corpus specs, three intentional function-shell exclusions, and focused shapes.
-- [x] **NO REGRESSION** — Exact 105-case manifest/process checks remain green; no compiler, runtime, corpus execute,
-  primary CLI, validation, ActionIR, capability, or generated-source behavior is claimed by parsing alone.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README examples, Knowledge Map, and live continuity document
-  the native parser, both quote forms, exact newline/semicolon rule, rule-only boundary, and active validation `.2.3`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.2.2`.
 
 - ID: `LUA-BACKEND-PARITY.2.3`
   Status: `done`
   Goal: Add exact source validation and strict-syntax behavior.
   Acceptance: Top rule, duplicates, edge families/targets/indexes, raw fallback, helper/function collisions, regex
     structure, and strict unused rules match the admitted variants with typed diagnostics.
-  Verification: **PASS 2026-07-11.** Added public `validate_spec(spec, {strict_syntax=...})` and typed validation
-    exceptions. Checks cover a top rule, duplicate rules/functions, exact 239-name helper/control and runtime/
-    lifecycle/function collisions, identifier/parameter shape, duplicate params, arity, raw fallback, mixed edge
-    families, grouped action targets without shared code, undefined targets, regex-slot bounds, regex structure,
-    and strict unused rules. Added a private current-call inventory module and extended
-    `tools/check_language_capability_coverage.pl` so Lua must exactly equal Dart/Julia and the neutral Perl/corpus/
-    mdBook surface; count is 239. Focused validation exposed and fixed empty-body headers (`Child:`) being collected
-    as raw text. The local gate passes syntax/process/manifest, 31/31 PUC Lua, all 21 shipped specs, 102 rule-only
-    corpus sources, exact call-name coverage, and 31/31 LuaJIT. No ActionIR/runtime/CLI execution is claimed.
   Commit: `LUA-BACKEND-PARITY.2.3 - validate Lua source AST`
-
-### `LUA-BACKEND-PARITY.2.3` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Direct permissive-parser probes accepted missing tops, duplicates, raw lines, bad
-  targets/slots, mixed edges, malformed regex structure, and unused rules; no Lua validator or complete helper-name
-  collision inventory existed.
-- [x] **ROOT CAUSE (WHY + WHERE)** — `.2.2` deliberately separates recognition from acceptance, while `.3.2` had
-  not yet materialized Lua contracts. Validation therefore needed its own reusable exact 239-name reservation data
-  and stable AST checks before compiler/runtime work.
-- [x] **FIX** — Added typed validation, complete registry/edge/regex/strict checks, the reusable call-name module,
-  cross-language checker equality, focused failures, and the empty-body header parser correction found by validation.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 31/31 on PUC Lua and 31/31 on LuaJIT, all 21
-  shipped specs and 102 rule-only corpus specs; `perl tools/check_language_capability_coverage.pl` proves exact 239.
-- [x] **NO REGRESSION** — Parser/corpus/process proofs remain green; permissive parsing is still distinct from
-  validation; no ActionIR lowering, arbitrary Lua global fallback, runtime, corpus execute, primary CLI, or codegen
-  is exposed.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README, Knowledge Map, call-name checker, and live continuity
-  document the validator/strict boundary and activate spec-produced function-shell projection `.2.4`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.2.3`.
 
 - ID: `LUA-BACKEND-PARITY.2.4`
   Status: `done`
   Goal: Consume spec-driven top-level user-function shells.
   Acceptance: `specs/user_function_definition.spec` owns shell parsing/projection; Lua has no competing raw scanner;
     body payload/jobs/AST and provenance remain ordered and exact.
-  Verification: **PASS 2026-07-11.** Added `user_function_definition_shell.lua` and public normalization,
-    projection, and composed-parse APIs over explicitly typed JSON nodes returned by
-    `specs/user_function_definition.spec`. The projector validates definition/error node types, identifiers,
-    params/arity, exact Unicode character-index source/body spans, body containment, staged payload/job identity,
-    parser/top/result/failure/diagnostic fields, and parent paths. It defensively copies sidecars, normalizes
-    `functions.<index>.body_source` and deterministic job IDs, strips spans with spaces while retaining CR/LF and
-    all non-function Unicode text, then composes the ordinary rule parser. `body_ast` remains undispatched. Empty
-    node input over leading `fn` source yields a typed rule parse error, proving no raw scanner. Focused output-shape,
-    error-node, drift, overlap, Unicode, composition, and validation proofs pass. The local gate passes
-    syntax/process/manifest/coverage, 35/35 PUC Lua, and 35/35 LuaJIT. Source frontend `.2` closes; `.3.1` follows.
   Commit: `LUA-BACKEND-PARITY.2.4 - project Lua function shells`
-
-### `LUA-BACKEND-PARITY.2.4` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Direct rule parsing rejects leading top-level `fn` source, while Knowledge Map and
-  Dart/Julia reference inspection show the owning spec returns typed definition/error nodes plus staged sidecars;
-  Lua had no consumer for those nodes.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Function-shell syntax belongs to `specs/user_function_definition.spec`, not a
-  backend raw scanner. Lua needed a neutral projection boundary capable of interpreting Unicode character spans and
-  preserving staged parse intent before the registry exists.
-- [x] **FIX** — Added typed output normalization, exact node/span/sidecar validation, defensive copying,
-  path/job normalization, line-preserving stripping, composed rule parsing, and typed error/no-scanner behavior.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 35/35 on PUC Lua and 35/35 on LuaJIT, including
-  Unicode offsets, two ordered functions, staged provenance, composed validation, spec errors, drift, wrappers,
-  overlap rejection, and explicit empty-node no-raw-scan proof.
-- [x] **NO REGRESSION** — All parser/validator/105-manifest/process/239-name proofs remain green; body staged jobs
-  are preserved but not dispatched, and no ActionIR, runtime, corpus execute, primary CLI, or codegen is claimed.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API examples, Knowledge Map, and live continuity close
-  source frontend `.2` and activate typed ActionIR parsing `.3.1`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.3`
   Status: `done`
@@ -304,168 +140,38 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Goal: Parse action/helper text into typed AST nodes.
   Acceptance: Calls/args, four value kinds, access, assignments, controls, block values, receiver chains, generic
     final-codeblock syntax, and value-drop statements are structural nodes rather than Lua code rewrites.
-  Verification: **PASS 2026-07-11.** Added private-metatable typed `ActionBlock`, `ActionStatement`, `ActionExpr`,
-    `ActionArgument`, access-segment, hash-entry, fluent-call, and Unicode character-span records plus typed JSON
-    projection. Public block/statement/expression parsing covers value-drop statements, physical-newline and
-    same-line-semicolon separation, calls/nested args, assignment-valued args, both quote forms, primitive/regex
-    literals, all four value kinds, direct/nested access, scalar/append/hash/nested assignments, attached controls,
-    switch branches, receiver chains, generic final codeblocks, and structural `raw_perl` fallback. Arbitrary
-    helper and receiver-method names accept `call(args) { ... }`; its final block-value argument matches explicit
-    `call(args, { ... })`. Spans count Unicode characters over strict-UTF-8 host strings. The local gate passes
-    syntax/process/manifest checks and 41/41 tests on both PUC Lua and LuaJIT. The complete local CI gate also
-    passes phase0 `1..1030`, both 61-case Perl CLI environments, and the 60/0/0 admitted-backend census.
   Commit: `LUA-BACKEND-PARITY.3.1 - parse typed Lua ActionIR`
-
-### `LUA-BACKEND-PARITY.3.1` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — The function-shell frontend preserved action/body text and staged parse jobs but had
-  no typed action block, statement, expression, argument, access, control, or receiver-chain parser to consume it.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Lua cannot safely execute or text-rewrite universal helper source: table
-  shape cannot identify values, byte indexes are not Unicode character spans, and host globals cannot define the
-  portable call surface. A typed structural seam had to precede contract resolution and runtime dispatch.
-- [x] **FIX** — Added typed ActionIR data/projection and public recursive parsing with quote/regex/delimiter-aware
-  scanners, exact statement separators, all four value forms, assignments/controls/access/chains, generic final
-  codeblock arguments, and explicit unsupported-expression nodes.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 41/41 on PUC Lua and 41/41 on LuaJIT. Focused
-  checks lock the single-quoted `substr(value, '"|\\s', "", go)` form, Unicode spans, compact/newline statements,
-  generic helper/receiver final blocks, explicit-block equivalence, attached controls, typed JSON, and invalid UTF-8.
-- [x] **NO REGRESSION** — Exact primary-command stub, validation-only 105-fixture command, source frontend,
-  function projection, and 239-name inventory remain green; no contract resolution, Lua-global fallback, staged
-  dispatch, runtime execution, CLI promotion, capability claim, or generated source is introduced. Full local CI
-  passes phase0 `1..1030`, both 61-case CLI environments, capability/generated-source, and doctrine gates.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README examples, Knowledge Map, changes/development/live
-  status, and bounded memory close typed parsing and activate current ActionIR contract resolution `.3.2`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.3.2`
   Status: `done`
   Goal: Resolve current ActionIR contracts and generic diagnostics.
   Acceptance: The governed current-name inventory drives helpers/controls/methods; aliases canonicalize; registered
     functions resolve first; unknown/non-current calls never fall through to arbitrary Lua globals.
-  Verification: **PASS 2026-07-11.** Added typed resolution/contract/diagnostic records and public block,
-    statement, and expression resolvers over the `.3.1` AST. The resolver reuses the exact 239-name
-    `action_call_names` source shared with function validation, canonicalizes numeric/symbol/current aliases,
-    assigns stable helper families/surfaces/counts, walks nested arguments/shapes/access/block values/controls,
-    records all structural assignments, and emits only generic `unknown_helper` / `raw_perl` diagnostics. An
-    optional registry interface resolves exact-arity function calls before helper fallback and reports stable
-    arity mismatches; `.3.3` owns the concrete ordered registry. The prerequisite audit repaired the governed
-    current `=(target, value)` alias missing from `.3.1`'s symbol scanner. Typed JSON matches Dart/Julia fields.
-    The local gate passes syntax/process/manifest checks and 46/46 tests on both PUC Lua and LuaJIT; exact
-    239-name cross-language coverage remains green. Full local CI also passes phase0 `1..1030`, both 61-case
-    Perl CLI environments, the 60/0/0 admitted-backend census, and all doctrine gates.
   Commit: `LUA-BACKEND-PARITY.3.2 - resolve Lua ActionIR contracts`
-
-### `LUA-BACKEND-PARITY.3.2` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — `.3.1` produced typed calls, controls, assignments, chains, and raw fallback but did
-  not classify current behavior or distinguish canonical, unknown, and future registered-function calls.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Direct execution or Lua-global lookup would fork semantics. Resolution must
-  share validation's governed 239-name source and traverse typed nodes before compiler/runtime ownership begins.
-  Canonical-table comparison also found `=(...)` reserved but unreachable in the completed parser.
-- [x] **FIX** — Added typed recursive contracts/diagnostics/JSON, exact alias/family classification, structural
-  assignment/control records, current-name sharing, generic unknown/raw errors, registry-first resolution seam,
-  and restored the governed `=` symbol callee.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 46/46 on PUC Lua and 46/46 on LuaJIT. Tests
-  lock nested helpers, numeric aliases, `=(...)`, all assignment forms, controls/methods, typed JSON, unknown/raw
-  ordering, exact known-name behavior, and generic final-codeblock arity through a registry stub.
-- [x] **NO REGRESSION** — `perl tools/check_language_capability_coverage.pl` remains exact at 239 current names and
-  105 fixtures. Parser/function/source/corpus/process proofs remain green; no concrete registry, arbitrary globals,
-  runtime behavior, primary CLI, capability promotion, or generated source is introduced. Full local CI passes
-  phase0 `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and doctrine checks.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API, Knowledge Map, changes/development/live status,
-  and bounded memory close contract resolution and activate concrete ordered function registry `.3.3`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.3.3`
   Status: `done`
   Goal: Add ordered user-function and staged body-job registries.
   Acceptance: Exact arity, eager values, fresh frames, body source/payload/job/AST, and recursion diagnostics match
     neutral semantics; no implicit caller mutation or Lua closure leakage.
-  Verification: **PASS 2026-07-11.** Added typed registry, entry, call-resolution, invocation-frame, and registry-
-    exception records. Registry construction snapshots ordered `FunctionDefinition` values, rejects duplicate
-    names, preserves body source/payload/parse-job/optional AST, exposes the staged job queue and neutral descriptor/
-    JSON projections, and supplies the concrete exact-arity interface consumed by `.3.2`. Body-AST stitching
-    returns a new typed `SpecFile` and validates the job's `replace_field` / `body_ast` policy. Invocation framing
-    accepts already-evaluated scalar/array/harray/codeblock values, copies mutable values into fresh data-only
-    variable/array/harray stores, reparses copied codeblock source, never accepts caller stores or Lua functions,
-    and rejects ambiguous tables and cycles. Unknown/arity/recursion failures are typed; recursion carries stable
-    stage, rule, helper, handler-source, and cycle identity. The focused gate passes syntax/process/manifest checks
-    and 50/50 tests on both PUC Lua and LuaJIT; exact 239-name/105-fixture coverage remains green. Full local CI
-    passes phase0 `1..1030`, both 61-case CLI environments, the 60/0/0 admitted-backend census, and doctrines.
   Commit: `LUA-BACKEND-PARITY.3.3 - add Lua function registry`
-
-  Artifact observation 2026-07-11: disk free space fell from about 51 GB to 42 GB while LinkedSpec gates ran, but
-    `du` showed the LinkedSpec Claude scratch subtree at 0 bytes and repository build output at 8 KB. The pressure
-    is external: active Nexsim `cargo-mutants` scratch is about 8.2 GB and Pgen Claude scratch is about 16 GB,
-    including old multi-gigabyte logs while a current release/PGO build is also running. Live PIDs confirmed both
-    projects have active producers, so deleting either tree is not 100% safe. No external artifact was removed;
-    the director clarified that this workflow sweeps only unused artifacts it owns. External cleanup remains with
-    those projects/agents; LinkedSpec-owned scratch/build output is clean at this observation boundary.
-
-### `LUA-BACKEND-PARITY.3.3` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — `.3.2` could query only an abstract registry interface; there was no ordered concrete
-  owner for definitions, body jobs, body-AST stitching, exact function identity, or isolated invocation input.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Letting compiler/runtime tables or Lua closures stand in for the registry would
-  lose neutral staged provenance and leak host state. The typed function shell needed a dedicated immutable bridge
-  before compiled state and execution.
-- [x] **FIX** — Added defensive registry snapshots, stable entries/resolutions/descriptors, exact-arity lookup,
-  staged job enumeration, immutable body-AST stitching, four-kind deep copies into fresh frames, and source-labeled
-  typed recursion diagnostics.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 50/50 on PUC Lua and 50/50 on LuaJIT. Tests lock
-  ordering, definition snapshot isolation, staged jobs, duplicate/unknown/arity outcomes, concrete resolver
-  precedence, immutable AST stitching, eager input framing, caller isolation, fresh stores, and recursion identity.
-- [x] **NO REGRESSION** — Exact 239-name and 105-fixture coverage, parser/validator/function-shell/ActionIR/process
-  proofs remain green. No function body executes, no staged job dispatches, and no caller store, Lua closure,
-  primary CLI, corpus execution, capability, or generated-source claim is introduced. Full local CI passes phase0
-  `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and doctrine checks.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API, Knowledge Map, changes/development/live status,
-  and bounded memory close registry ownership and activate typed compiled state `.3.4`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.3.4`
   Status: `done`
   Goal: Compile source AST into typed effective state and descriptors.
   Acceptance: Ordered effective rules/functions, modes, regex/dependency state, action/blind/lifecycle payloads,
     source identities, and outward descriptor JSON match the exact shared contract.
-  Verification: **PASS 2026-07-11.** Added typed compiled-spec/rule/mode/dependency/action-edge/blind-edge/action-
-    payload/dependency-regex/descriptor state and exception records. Public `compile_spec(...)` snapshots and
-    validates typed source by default, carries the ordered function registry, records source definition order,
-    derives deterministic last-definition rule order/redefinition metadata when validation is explicitly skipped,
-    and compiles rule modes, regex slots, dependency refs, action/blind edges, lifecycle/plain blocks, source
-    identity, parsed ActionIR, and registry-aware contracts. Child dependency slots resolve to copied parent regex
-    rows with stable zero-based indexes; invalid slots/labels are typed. `to_descriptor_json(...)` matches the
-    executable shared schema exactly: four top-level keys, three model identities, order/count metadata, canonical
-    function records, Lua interpreter handler identity, and structured dependency-regex rows. The focused gate
-    passes syntax/process/manifest checks and 55/55 tests on PUC Lua and LuaJIT; exact 239-name/105-fixture coverage
-    remains green. Full local CI passes phase0 `1..1030`, CLI 61x2, census 60/0/0, and doctrines.
   Commit: `LUA-BACKEND-PARITY.3.4 - compile Lua spec state`
-
-### `LUA-BACKEND-PARITY.3.4` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Lua had typed source, ActionIR/contracts, and registry records but no effective rule
-  model, dependency-regex derivation, or outward descriptor for compiler/runtime/tooling consumers.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Runtime ownership cannot safely infer rule modes, regex indexes, body roles,
-  or public descriptor fields from mutable source tables. The same typed compiler boundary used by Dart/Julia had
-  to land before matching.
-- [x] **FIX** — Added defensive source snapshots, ordered/last-definition compiled rule state, complete mode/edge/
-  payload metadata, child-regex slot resolution, dependency-regex state, registry-aware ActionIR contracts, typed
-  failures, neutral JSON, and the exact executable outward descriptor projection.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 55/55 on PUC Lua and 55/55 on LuaJIT. Tests lock
-  public parsed-source compilation, source isolation, modes, regex/dependencies, action/blind/lifecycle/plain
-  payload structure, registry contracts, redefinitions, typed failures, exact schema keys/models/functions, and
-  canonical JSON round-trip.
-- [x] **NO REGRESSION** — Source/function/ActionIR/registry/process/corpus-manifest/239-name proofs remain green;
-  no regex engine, match execution, staged dispatch, primary CLI, corpus execution, capability, or generated-source
-  claim is introduced. Full local CI passes phase0 `1..1030`, CLI 61x2, capability/generated-source/native-
-  resolution, and doctrine checks.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README API, Knowledge Map, changes/development/live status,
-  and bounded memory close compiler layer `.3` and activate regex/match-state adapter `.4.1`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.3.4`.
 
 - ID: `LUA-BACKEND-PARITY.4`
   Status: `done`
   Goal: Implement matching and runtime execution.
   Children: `.4.1`, `.4.2`, `.4.3`, `.4.4`
-  Verification: **PASS 2026-07-16 reconciliation.** Children `.4.1-.4.4` were already complete; the stale parent
-    status is reconciled during `.8.4` closeout. Matching, runtime/helper execution, diagnostics, and native trace
-    remain proven at the `.4.4` boundary's 129/129 on PUC Lua and LuaJIT. No behavior changed in this reconciliation.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.1`
   Status: `done`
@@ -473,74 +179,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Compare available Lua/LPeg/native-extension options against neutral regex fixtures; implement
     seek/consume, alternatives, captures/named captures, entry/local state, UTF-8 character offsets, line/column,
     zero progress, and invalid-pattern diagnostics without backend-specific regex semantics.
-  Verification: **PASS 2026-07-11.** Direct probes confirmed LPeg on both runtimes but rejected it as the provider:
-    LPeg constructs PEGs and does not parse the governed PCRE dialect. No `rex_*` binding is installed; system
-    PCRE2 10.47, headers, `pkg-config`, and both Lua ABIs are available. Added a minimal repository-owned PCRE2 C
-    binding plus a build script that compiles separate PUC/LuaJIT modules into one disposable caller-owned
-    `/private/tmp/linkedspec-lua-native.*` tree; the local gate removes it on every exit, writes no repo/global
-    binary/cache, and uses no LuaRocks/network/subprocess matching. Added typed alternatives, matches, line/column,
-    immutable entry/local registers, errors, and JSON. Ordered seek chooses earliest start then source alternative;
-    consume anchors at the byte cursor. Full/compacted/named captures, explicit zero-width presence, child-entry
-    seeding, progress guards, strict-UTF-8 boundary validation, byte/code-unit and Unicode character positions, and
-    compiled-rule inputs match the neutral model. Focused dialect proof covers inline flags, POSIX classes,
-    possessive quantifiers, Python named captures, recursion, and `\K`. The gate passes 60/60 tests on both runtimes,
-    exact 239-name/105-fixture coverage, and leaves no native artifact. Full local CI passes phase0 `1..1030`, CLI
-    61x2, census 60/0/0, and doctrines.
   Commit: `LUA-BACKEND-PARITY.4.1 - add Lua runtime matching`
-
-### `LUA-BACKEND-PARITY.4.1` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Compiled regex rows existed only as strings; Lua had no conforming regex provider,
-  stable alternative selection, match records, character positions, or entry/local register state.
-- [x] **ROOT CAUSE (WHY + WHERE)** — LPeg is not a PCRE parser and pure Lua patterns omit required syntax. Shelling
-  out would violate native in-memory embedding, while one ABI-specific binary would violate PUC/LuaJIT parity.
-- [x] **FIX** — Added a narrow PCRE2 binding built per runtime ABI into disposable owned storage, typed neutral
-  matching/position/register/error records, seek/consume selection, capture projection, and compiled-rule input.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 60/60 on PUC Lua and 60/60 on LuaJIT. Tests lock
-  advanced governed syntax, stable alternative identity, consume anchoring, compact/named captures, Unicode byte/
-  character/line/column positions, entry/local separation, zero-width presence/progress, JSON, and typed failures.
-- [x] **NO REGRESSION** — Frontend/ActionIR/registry/compiler/process/manifest/239-name proofs remain green. The gate
-  creates and removes only its own native temp tree; no rule dispatch, helpers, staged execution, primary CLI,
-  corpus execution, capability, or generated-source claim is introduced. Full local CI passes phase0 `1..1030`,
-  CLI 61x2, capability/generated-source/native-resolution, and doctrine checks.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, mdBook/README build and API docs, Knowledge Map, changes/development/
-  live status, and bounded memory close matching `.4.1` and activate compiled rule interpreter `.4.2`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.2`
   Status: `done`
   Goal: Execute rule modes, dispatch, lifecycles, recursion, and result channels.
   Acceptance: Default/OR/AND/repetition acode/bcode paths, bounds, cursor state, explicit return/next/exit, retv,
     local stores, lifecycle order, recursion/safety cutoffs, and direct output shape match the oracle.
-  Verification: **PASS 2026-07-11.** Added a typed Lua runtime engine/result/event/error boundary over compiled
-    state and the `.4.1` matcher. Default, Single, AND, OR, optional, star/plus, and bounded modes execute regex or
-    blind paths with action-edge child dispatch, entry/local register transfer, `retv`, narrow accumulators,
-    cursor state, and a direct one-value output wrapper. Applicable `I/LS/LE/IT/EX/LX/E` ordering is recorded.
-    `return(...)`, `return_undef()`, iteration-correct `next()`, and immediate typed `exit_now(...)` execute;
-    false is preserved separately from null. Child rule bindings are copied/restored, bounds and invalid helpers
-    fail through typed errors, and same-rule/cursor recursion plus zero-progress terminate safely. The focused gate
-    passes 66/66 on both PUC Lua and LuaJIT with all prior process/manifest/current-name proofs green.
   Commit: `LUA-BACKEND-PARITY.4.2 - add Lua runtime rule interpreter`
-
-### `LUA-BACKEND-PARITY.4.2` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — Lua could compile neutral rules and match patterns but had no owner for executable
-  rule modes, edges, lifecycle actions, child results, repetition, or direct parse output.
-- [x] **ROOT CAUSE (WHY + WHERE)** — `.4.1` intentionally stopped at match/register primitives. Without a runtime
-  owner, callers could not preserve rule-local scopes, distinguish false/null results, interpret `next()` as an
-  iteration control, or apply recursion/progress fences consistently with Dart/Julia.
-- [x] **FIX** — Added `interpreter.lua` with typed engine/result/event/errors, compiled-rule dispatch, narrow
-  ActionIR execution, lifecycle flow, local store isolation, `retv`, accumulators, repetition/control semantics,
-  recursion/progress guards, and JSON projection; exported the API from the native module.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 66/66 on PUC Lua and 66/66 on LuaJIT. Focused
-  cases lock default seek/consume repetition, action/blind children, AND/OR, bounds, lifecycle order, local stores,
-  `retv`, `return`/`next`/`exit_now`, false/null identity, cursors, output shape, recursion, zero progress, and typed
-  unsupported-helper failures.
-- [x] **NO REGRESSION** — Frontend/ActionIR/registry/compiler/matching/process/manifest/239-name proofs remain
-  green. Runtime helper breadth, staged functions, corpus execution, primary CLI, capability, and generated source
-  remain explicit later owners; the gate removes only its own inactive native temp tree. Full local CI passes
-  phase0 `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and all doctrines.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, Lua README/API, mdBook handoff/status, Knowledge Map, changes/
-  development/live status, and bounded memory close `.4.2` and activate helper-family split `.4.3.0`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3`
   Status: `done`
@@ -550,42 +198,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Every current governed helper and method is behavior-tested, including scalar/string/number,
     array/harray mutation and pure operations, captures/positions/cursor/marks, controls, assignments, tree walks,
     diagnostic calls, and final-codeblock equivalence; split by mechanism before broad implementation.
-  Verification: **PASS 2026-07-15.** The recursively split runtime surface closes with exact execution or explicit
-    non-function ownership for all 246 admitted names. PUC Lua and LuaJIT pass 125/125; shared coverage remains
-    246/105+1/122 and capability remains 64/0/0. Canonical local CI passes CLI 61x2 and Phase 0 `1..1031` in 608
-    seconds. Generated-source, general-function, corpus-execution, primary-CLI, and diagnostic/trace obligations
-    retain later owners.
   Commit: closed by `.4.3.9.2`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.0`
   Status: `done`
   Goal: Split the complete Lua helper/value/control/method surface into mechanism-sized executable leaves.
   Acceptance: Every current family has one ordered owner with explicit dependencies, scope, verification, and
     no-drift closeout; no broad helper implementation starts before the split is durable.
-  Verification: **PASS 2026-07-11.** The 239-name runtime surface and mdBook helper catalog are divided into nine
-    ordered implementation/closeout leaves: core four-kind stores/access/entry-match; scalar/string; numeric;
-    arrays; harrays; value/control/block/callbacks; capture/mark/input/cursor state; diagnostic output; and final
-    exhaustive no-drift. Each leaf names its dependency and focused acceptance, may split again before code, and
-    leaves `.4.3.1` as the sole executable frontier. No runtime behavior changed; committed `.4.2` remains 66/66
-    on both runtimes and its full local CI proof remains authoritative. mdBook, memory architecture, Knowledge Map,
-    task-tree metadata, doctrine, and whitespace gates pass.
   Commit: `LUA-BACKEND-PARITY.4.3.0 - split Lua runtime helper families`
-
-### `LUA-BACKEND-PARITY.4.3.0` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — `.4.3` named four value kinds, every governed helper/method, controls, callbacks,
-  captures, cursor/marks, and diagnostic calls in one leaf; that is not a safe signoff-sized implementation unit.
-- [x] **ROOT CAUSE (WHY + WHERE)** — The mdBook catalog and completed Dart/Julia rollouts show distinct store,
-  scalar/string, numeric, array, harray, control/block, stateful cursor/capture, and diagnostic mechanisms. Lua also
-  needs an explicit exhaustive closeout so recognizing 239 names cannot be mistaken for executing them.
-- [x] **FIX** — Converted `.4.3` into a ten-child container (`.0` planning plus `.1`-`.9` execution/closeout),
-  ordered by dependency and leaving recursively smaller splits available before any broad code leaf starts.
-- [x] **ADDRESSED (verified)** — Every current helper/catalog family has one owner and `.4.3.1` is the only active
-  code frontier; no implementation behavior or capability claim changed.
-- [x] **NO REGRESSION** — The committed `.4.2` 66x2/full-CI proof remains green and unchanged. Planning checks
-  cover mdBook, memory architecture, Knowledge Map, task metadata, doctrine, and whitespace.
-- [x] **LOCKSTEP** — Task tree/index, roadmaps, Lua README, mdBook handoff/status, Knowledge Map, architecture/live
-  docs, changes/development notes, and bounded memory record the same ordered split.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.1`
   Status: `done`
@@ -594,43 +216,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Scalar/array/harray/codeblock/null/boolean/number values retain typed identity; named and bare store
     reads/writes, append/hash-index/nested assignment without autovivification, copy/array/hash snapshots, and all
     `entry_*` / `match_*` text/group/map/position helpers pass focused cross-backend examples.
-  Verification: **PASS 2026-07-11.** Added public four-kind runtime classification and defensive codeblock
-    snapshots; centralized scalar/array/harray stores with competing-slot replacement and per-rule copy/restore;
-    implemented bare/typed snapshots, scalar/append/hash-index assignment, zero-based array and string-key harray
-    reads, checked nested mixed access/assignment with no intermediate autovivification, and current-edge `retv`
-    dispatch. Added all `entry_*` / `match_*` text, compact group, named/presence/map, Unicode length/span, and
-    start/end line/column helpers with absent-match null/empty/origin distinctions. Focused gate passes 69/69 on
-    PUC Lua and LuaJIT; positive/fixed-width negative lookbehind now have permanent dual-ABI proof, and Dart's real
-    `spec_spec_minimal_rule` fixture passes 1/1. Prior source/ActionIR/compiler/matching/dispatch/process/manifest
-    proofs remain green.
-  Correction 2026-07-13: `.4.3.6.1` establishes that ordinary authored `{ statements }` values execute eagerly,
-    including assignment RHS positions; the earlier codeblock-storage fixture was a Lua scaffold contradiction,
-    not a portable authoring contract. Structural `block_value` copying/classification remains required for
-    contextual final block arguments, registry frames, and future explicit callable values.
   Commit: `LUA-BACKEND-PARITY.4.3.1 - add Lua runtime value capture helpers`
-
-### `LUA-BACKEND-PARITY.4.3.1` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — `.4.2` could retain a few scalar locals and literal shapes but lacked one four-kind
-  store/access owner, aggregate snapshot isolation, checked nested assignment, codeblock copying, and most governed
-  entry/match reads.
-- [x] **ROOT CAUSE (WHY + WHERE)** — `interpreter.lua` used truthy fallback and direct table paths around a narrow
-  dispatcher. Lua tables do not identify arrays, harrays, codeblocks, absence, or storage intent without explicit
-  typed routing, and current-edge `retv` had to dispatch its child before reading.
-- [x] **FIX** — Added explicit four-kind classification/copy, scalar/array/harray binding helpers, typed target and
-  access routing, checked copy-on-write mixed paths, named/compact capture projections, Unicode positions, and
-  absent-match contracts; exported `runtime_value_kind(...)`.
-- [x] **ADDRESSED (verified)** — `bash tools/run_lua_local.sh` passes 69/69 on both runtimes. New cases prove stored
-  scalar/array/harray values, structurally supplied codeblock classification/copying, false/null identity, named
-  stores, append/hash/nested mutation, snapshot isolation, failed-path no-autovivification, current-edge `retv`,
-  full entry/match families, Unicode lines/spans, and absent null/empty/origin behavior. `.4.3.6.1` later corrects
-  ordinary authored brace assignment from inert scaffold behavior to eager evaluation.
-- [x] **NO REGRESSION** — Existing 66 interpreter tests plus frontend/registry/compiler/matcher/process/manifest/
-  exact-name checks remain green. The director-raised `spec.spec` lookbehind concern is resolved by actual engine/
-  corpus proof rather than host-language assumptions; scalar/string pure helpers and later families remain owners.
-  Full local CI passes phase0 `1..1030`, CLI 61x2, capability/generated-source/native-resolution, and doctrines.
-- [x] **LOCKSTEP** — Roadmaps, task index/tree, Lua API README, mdBook handoff/status, Knowledge Map, architecture/
-  live docs, changes/development notes, and memory advance to scalar/string `.4.3.2`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2`
   Status: `done`
@@ -640,34 +227,15 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Definedness/emptiness/coalesce, `cat`, trim/case/length, substring/prefix/suffix/contains/replace,
     regex match/substitution flags, split bridges, lexical comparisons, scalar statement mutation, and receiver
     forms match catalog examples across the child leaves.
-  Verification: **PASS 2026-07-12.** Pure scalar/string, exact Unicode 17 casing, six-variant scalar text, strict
-    helper regex/matches, literal/regex/Unicode split, scalar substitution, explicit array split replacement, and
-    focused public no-drift pass. Full PUC Lua/LuaJIT gates are 76/76; numeric helpers `.4.3.3` are next.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.0`
   Status: `done`
   Goal: Split pure scalar evaluation from regex-aware split/substitution and statement mutation before code.
   Acceptance: The two mechanisms have ordered owners and `.4.3.2.1` is the sole executable frontier.
-  Verification: **PASS 2026-07-11.** Pure scalar/string value dispatch and compatible receivers are owned by
-    `.4.3.2.1`; regex matching/replacement flags, split bridges, and statement-only named mutation are owned by
-    `.4.3.2.2`. No code/capability changed. mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace
-    checks pass; committed `.4.3.1` remains 69/69 on both Lua ABIs with full local CI green.
   Commit: `LUA-BACKEND-PARITY.4.3.2.0 - split Lua scalar string mechanisms`
-
-### `LUA-BACKEND-PARITY.4.3.2.0` Acceptance Checklist
-
-- [x] **REPRODUCE / ISSUE** — `.4.3.2` combined pure string values/receivers with PCRE replacement, split bridges,
-  flag semantics, and statement-only mutation even though they have different dependencies and failure modes.
-- [x] **ROOT CAUSE (WHY + WHERE)** — Pure transformations need only scalar conversion/truth/null rules; regex and
-  split mutation need the native matcher dialect, replacement expansion, named-store intent, and value-versus-
-  statement boundaries. One implementation commit would obscure those contracts.
-- [x] **FIX** — Converted `.4.3.2` into a three-child container: `.0` planning, `.1` pure scalar/string, `.2`
-  regex/split/mutation, leaving the broader `.4.3.9` exhaustive closeout unchanged.
-- [x] **ADDRESSED (verified)** — `.4.3.2.1` is the only active code frontier and every original acceptance item has
-  one ordered owner; no runtime behavior changed.
-- [x] **NO REGRESSION** — Committed `.4.3.1` remains 69/69 on both ABIs/full CI green; docs/governance gates pass.
-- [x] **LOCKSTEP** — Task/index, roadmaps, README/book, KM, architecture/live docs, changes/notes, and memory agree.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1`
   Status: `done`
@@ -688,11 +256,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Measure special-case lower/uppercase behavior through real Perl, Rust-source, Dart, and Julia paths;
     record the root cause and exact divergent examples; give non-casing helpers and canonical Unicode casing separate
     ordered owners before runtime code changes.
-  Verification: **PASS 2026-07-11.** Direct Perl, Dart, and Julia probes plus Rust runtime-source inspection prove
-    divergent special-case results. A Knowledge Map fact card and public warning preserve the exact evidence.
-    Deterministic non-case helpers are isolated in `.1`; version/policy/neutral fixture/all-variant repair are `.2`.
-    Knowledge Map generation/validation, mdBook build, memory/task/doctrine metadata, and whitespace checks pass.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.0 - split Unicode casing parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.1`
   Status: `done`
@@ -701,13 +266,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `cat`, coalesce families, defined/undefined/empty predicates, trim/length, prefix/suffix/contains/remove,
     literal substring/replace, explicit `str_*` comparisons, stable scalar conversion, null propagation, lazy fallback,
     and function/receiver composition match cross-backend examples on both Lua ABIs.
-  Verification: **PASS 2026-07-11.** Lua now executes lazy `coalesce`/`coalesce_nonempty`, `cat`, definedness/
-    emptiness, Unicode-whitespace trim and codepoint length/substrings, literal prefix/suffix/contains/remove/replace,
-    six `str_*` comparisons, reference-style stable scalar text, and compatible receiver chains. Null/false/empty
-    remain distinct; terminal string results reject later string links. One focused test adds 40 assertions and the
-    shared gate passes 70/70 on both PUC Lua and LuaJIT with owned native artifacts removed. Full CI passes phase0
-    `1..1030`, CLI 61x2, capability 60/0/0, KM/book/governance, and cleanup.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.1 - add Lua pure string helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2`
   Status: `done`
@@ -727,11 +287,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.2.1.1`
   Acceptance: Record one versioned full-default locale-independent policy, normative data inputs, context behavior,
     normalization/encoding boundaries, generated-artifact drift gates, and bounded backend rollout owners.
-  Verification: **PASS 2026-07-12.** Director authorized the expert signoff/SOTA route. ADR `0027` pins Unicode
-    17.0.0 Default Case Conversion with full mappings, standard context rules, no locale tailoring, and no implicit
-    normalization. `.1` owns official data/generator/contract; `.2` Perl/Rust; `.3` Dart/Julia; `.4` Lua and final
-    admission. No runtime behavior changed. KM, mdBook, task/roadmap/live docs, memory, doctrines, and whitespace pass.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.0 - adopt Unicode casing contract`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.2.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.1`
   Status: `done`
@@ -741,13 +298,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     license/source hashes generate deterministic lower/upper maps and Cased/Case_Ignorable ranges; the executable
     neutral fixture covers identity, expansion, combining output, supplementary characters, and Final_Sigma context;
     regeneration and schema/count/hash checks fail closed without requiring network during ordinary gates.
-  Verification: **PASS 2026-07-12.** Exact official bytes are stored as deterministic gzip under
-    `unicode_case/upstream/17.0.0/` and verified after decompression against four pinned SHA-256 values. The neutral
-    contract contains 1,563 lower mappings, 1,581 upper mappings, 158 Cased and 464 Case_Ignorable merged ranges,
-    one Final_Sigma rule, and 12 exact fixtures. Generator/checker regeneration is byte-identical and independently
-    executes all fixtures. Full local CI passes the new tracked contract step, CLI 61x2, phase0 `1..1030` in 495s,
-    capability 60/0/0, generated/native contracts, doctrines, KM/book, whitespace, and owned cleanup.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.1 - add Unicode casing data contract`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.2.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.2`
   Status: `done`
@@ -755,15 +307,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.2.1.2.1`
   Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
     versions; neutral fixture and focused/full Perl/Rust gates pass without changing null/aggregate boundaries.
-  Verification: **PASS 2026-07-12.** The generator now byte-deterministically emits
-    `perl/LinkedSpec/UnicodeCaseMapping.pm` and `rust/linkedspec-runtime/src/unicode_case_mapping.rs` from the
-    neutral contract. Perl ActionIR scalar, receiver, value-array, and mutating-array paths and all three Rust
-    runtime casing seams use those modules; source audits find no host casing call left in the owned paths. All 12
-    fixtures pass direct/helper/receiver/array execution in both backends. Focused Perl passes 52 tests; full Perl
-    phase0 passes `1..1030` in 491s; the complete Rust runtime package passes 137 unit, 105-case oracle, full
-    generated-source classifier, 196 integration, source-emitter/loader/diagnostic/trace, and Unicode tests. The
-    authoritative local CI rerun passes CLI 61x2 and phase0 `1..1030` in 494s plus all contracts/doctrines/docs gates.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.2 - align Perl and Rust Unicode casing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.2.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.3`
   Status: `done`
@@ -771,13 +316,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.2.1.2.2`
   Acceptance: Function and receiver lower/uppercase paths consume generated tables/context rules, not host Unicode
     versions; the same neutral fixture and focused/full Dart/Julia gates pass with exact strings.
-  Verification: **PASS 2026-07-12.** The generator/checker byte-compare deterministic Dart and Julia modules.
-    Scalar helper, receiver, value-array, and mutating-array execution uses the generated Unicode 17 evaluator in
-    both backends. All 12 fixtures pass through every path (Dart focused 1 test; Julia 39 assertions). Full Dart
-    local gate passes formatter/analyzer, 182 tests, CLI 61x2, and corpus 105/105. Full Julia local gate passes the
-    package suite, primary CLI process conformance, and corpus 105/105.
-    Authoritative full local CI also passes CLI 61x2 and phase0 `1..1030` in 493s plus every shared gate.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.3 - align Dart and Julia Unicode casing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.2.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.2.4`
   Status: `done`
@@ -786,11 +326,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Lua function/receiver lower/uppercase paths use the same generated maps/context rules without native
     byte/locale casing; both ABIs pass, six-variant fixture outputs are byte-identical UTF-8, full gates/docs/KM pass,
     and `.4.3.2.1.2` closes before scalar-to-text `.1.3` begins.
-  Verification: **PASS 2026-07-12.** Generated pure-Lua maps/properties plus strict UTF-8 scalar decode/encode pass
-    all 12 fixtures through direct, helper, receiver, and array-value paths. PUC Lua and LuaJIT each pass 71/71;
-    six-variant expected UTF-8 outputs are identical by the shared neutral fixture. Full local CI passes CLI 61x2
-    and phase0 `1..1030` in 490s plus every shared gate.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.2.4 - admit six-variant Unicode casing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.1.3`
   Status: `done`
@@ -799,12 +336,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: A neutral fixture fixes `cat`/string-helper handling for null, array, harray, codeblock, booleans,
     integral-looking decimals, and nonintegral numbers; Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT return identical
     values and nulls. Retired `concat` remains rejected rather than becoming an accidental alias.
-  Verification: **PASS 2026-07-12.** ADR `0028` and `linkedspec-scalar-text-v1` define strings unchanged,
-    booleans as `1`/`0`, stable finite decimal text, and null for non-text kinds. One neutral executable fixture
-    passes on Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT; the Lua suite is 72/72 on both ABIs. Codeblock is
-    normatively non-text without preempting the explicit final-codeblock syntax owner `.11.1`; `concat` remains
-    retired. Full Rust, Dart, Julia, dual-ABI Lua, and canonical local CI gates pass.
   Commit: `LUA-BACKEND-PARITY.4.3.2.1.3 - align scalar text coercion`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2`
   Status: `done`
@@ -825,12 +358,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: LinkedSpec lowering/runtime probes and Lua ActionIR projections identify the distinct value,
     regex-compilation, receiver, scalar-store mutation, and array-store mutation seams; signoff-sized children own
     them in dependency order without changing runtime behavior.
-  Verification: **PASS 2026-07-12.** `call_spec_handler_subst` proves the current Perl pure/mutation shapes; Lua
-    ActionIR JSON proves regex pattern/flag and explicit target preservation. Source inspection locates the missing
-    regex value evaluation and statement-context dispatch in `lua/src/linkedspec/interpreter.lua`; the PCRE2
-    compiler seam already exists in `lua/src/linkedspec/matching.lua`. Knowledge and book contracts were checked
-    before deriving the split.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.0 - split Lua regex string mechanisms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.1`
   Status: `done`
@@ -841,11 +370,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     fail-closed helper boundary, null/non-text inputs return false, and terminal receiver composition is exact on
     PUC Lua and LuaJIT. The pre-existing Perl invalid-literal generation boundary is recorded, not silently treated
     as Lua authorization to change the reference engine.
-  Verification: **PASS 2026-07-12.** Lua evaluates regex ActionIR as an internal typed helper value, normalizes
-    flags in stable `imsx` order, accepts `g/o` as predicate no-ops, caches successful and failed PCRE2 compilation,
-    and executes `matches` identically in function and terminal receiver form. Null, non-regex, unknown-flag, and
-    invalid-pattern inputs return false. The full PUC Lua/LuaJIT gate passes 73/73 on both ABIs.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.1 - add Lua helper regex matches`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.2`
   Status: `done`
@@ -856,13 +382,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     empty array on invalid regex input, and return a typed copied array from string receiver form without mutating
     sources. Downstream array-method continuation remains owned by `.4.3.4`, which depends on this bridge. Pure
     Unicode `substr` and literal `replace_substr` remain distinct and regression-locked.
-  Verification: **PASS 2026-07-12.** Function and string-receiver `split` return copied typed arrays for literal
-    and PCRE2 delimiters, preserve leading/trailing empty fields, split an empty literal delimiter by Unicode
-    scalar bytes, handle zero-width regex delimiters with explicit progress, reuse strict helper flags, and return
-    empty arrays for null/non-text/unknown/invalid inputs. Unicode `substr` and literal `replace_substr` remain
-    distinct and pure. The full PUC Lua/LuaJIT gate passes 74/74 on both ABIs. Downstream array methods remain
-    correctly owned by `.4.3.4`.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.2 - add Lua pure split bridge`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.3`
   Status: `done`
@@ -872,12 +393,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     replacement, `i/m/s/x` compile, `o` is a no-op, `$0`/`$n` replacement expansion is deterministic, invalid
     patterns diagnose with rule attribution, and pure character-slice `substr(value,start,width?)` stays a value
     helper even when its result is discarded.
-  Verification: **PASS 2026-07-12.** Dropped four-argument `substr` and `regex_subst` calls now mutate bare scalar
-    targets before pure helper evaluation. String and regex patterns share strict PCRE2 compilation; `g` controls
-    global replacement, `i/m/s/x` compile, `o` is a no-op, and `$0`/`$n` expand per match. Zero-width global
-    matches advance by a decoded Unicode scalar. Unknown flags and invalid patterns raise rule-attributed runtime
-    diagnostics. Discarded numeric `substr` remains pure. The full PUC Lua/LuaJIT gate passes 75/75 on both ABIs.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.3 - add Lua scalar regex mutation`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.4`
   Status: `done`
@@ -886,12 +403,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Dropped `split(array(target), source, delimiter)` replaces the named aggregate store for literal and
     regex delimiters, respects rule-local reset/snapshot behavior, leaves pure split source values untouched, and
     preserves scalar-held versus explicit aggregate boundaries on both Lua ABIs.
-  Verification: **PASS 2026-07-12.** Dropped `split(array(target), source, delimiter)` now replaces only the named
-    explicit aggregate store, reusing pure literal/regex/Unicode split values and copying the result. Focused proof
-    preserves literal empty fields, regex delimiters, source non-mutation, scalar-held pure split values, and pure
-    value split. Existing rule-local store copy/restore remains the owner of invocation isolation. The full PUC
-    Lua/LuaJIT gate passes 76/76 on both ABIs.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.4 - add Lua array split mutation`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5`
   Status: `done`
@@ -901,20 +414,14 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Neutral focused fixtures cover the complete landed mechanism on both ABIs; catalog/book/README/task/
     KM/live state contain no retired `concat`, helper-flag, pure-versus-mutation, or frontier drift. Exact shipped
     execution stays owned by `.6.2`, after the later helper/control/output families and executable corpus runner.
-  Verification: **PASS 2026-07-12.** Full dual-ABI gate passes 76/76. A non-host `concat(` call-shape scan is
-    clean across current Lua/spec/capability/book/roadmap surfaces after correcting stale positive roadmap/catalog
-    prose to canonical `cat`; historical retirement text remains non-executable. Task/KM/book/status state agrees.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.5`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5.0`
   Status: `done`
   Goal: Diagnose and correctly route the premature shipped-corpus acceptance before closeout work.
-  Verification: **PASS 2026-07-12.** A disposable native in-memory probe showed `portmap_constant` and both EBNF
-    cases stop at later-owned `control_if`, `simenv_multiline_value` stops at later-owned `print`, and both
-    `lib_reader` cases execute but remain empty behind later array/child-flow breadth. The official corpus runner
-    deliberately rejects `--execute` until phase 6. Exact named-case proof is therefore routed to `.6.2` rather
-    than weakening fixtures or blocking scalar/string closure on unrelated families.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.0 - route Lua string corpus proof`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.5.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.2.2.5.1`
   Status: `done`
@@ -923,10 +430,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Both Lua ABIs pass the complete focused gate; public docs explain pure versus statement mutation,
     strict flags, captures, empty fields, and the current explicit-target compatibility boundary; current authored
     surfaces contain no retired `concat`; task/roadmap/KM/book/status state agrees before numeric helpers.
-  Verification: **PASS 2026-07-12.** PUC Lua and LuaJIT pass 76/76; strict flag, capture, empty-field, pure/value,
-    statement-mutation, invalid-boundary, and explicit-target compatibility docs agree. Public active helper
-    reference now leads with `cat`; stale positive `concat` roadmap prose is corrected. Numeric `.4.3.3` activates.
   Commit: `LUA-BACKEND-PARITY.4.3.2.2.5.1 - close Lua string helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.2.2.5.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3`
   Status: `done`
@@ -935,23 +440,14 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.1`
   Acceptance: Arithmetic/unary/clamp/comparison/range and aggregate min/max/sum/avg/median behavior, invalid-input
     null propagation, division/modulo fences, word aliases, symbol callees, and receiver forms match the oracle.
-  Verification: **PASS 2026-07-12.** The strict 55-case scalar contract is exact across six runtime variants.
-    Lua canonical calls, every word/symbol alias, numeric receiver composition/comparison terminality, strict
-    copied-array reducers, and all six array receiver terminals pass 91/91 on PUC Lua and LuaJIT. Focused closeout
-    proves every reducer canonical/alias spelling directly, aligns public/status surfaces, and preserves exact
-    shipped-corpus execution under dependency-complete phase 6.
   Commit: `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.0`
   Status: `done`
   Goal: Audit the neutral numeric contract and split implementation by runtime mechanism before code.
-  Verification: **PASS 2026-07-12.** Knowledge Map cards, the public helper catalog, Perl/Rust/Dart/Julia runtime
-    seams and focused tests, Lua ActionIR contracts, and the current Lua evaluator were inspected. Canonical alias
-    and symbol resolution already exists in `action_contracts.lua`; Lua still lacks numeric value dispatch,
-    receiver injection/terminal handling, and aggregate reducer execution. Scalar evaluation, receiver admission,
-    reducers, and closeout are independently verifiable and now have separate children. The full Lua local gate
-    passes 76/76 on both PUC Lua and LuaJIT after the planning-only split.
   Commit: `LUA-BACKEND-PARITY.4.3.3.0 - split Lua numeric helper mechanisms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1`
   Status: `done`
@@ -966,12 +462,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Status: `done`
   Goal: Measure cross-backend scalar numeric drift and split neutral policy from backend implementation.
   Dependencies: `.4.3.3.0`
-  Verification: **PASS 2026-07-12.** LinkedSpec `Get` probes plus direct Perl/Rust/Dart/Julia runtime/test/source
-    inspection found incompatible boolean, invalid-comparison, call-arity, numeric-string, and signed-modulo
-    behavior. No backend is a complete accidental contract: the public book says invalid numeric inputs return
-    null, while Perl remains the reference for fixed-versus-variadic lowering and modulo sign. Neutral policy/data,
-    admitted-backend repair, and Lua implementation require separate signoff leaves before receiver work.
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.0 - split scalar numeric contract alignment`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.1.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.1`
   Status: `done`
@@ -980,13 +472,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: An ADR and machine-readable contract define accepted finite decimal inputs, exact/variadic arities,
     invalid-to-null behavior, numeric comparison truth, half-away rounding, min/max, clamp, division, and signed
     integer modulo without host-language fallback; an offline checker validates schema/cases and tracked inputs.
-  Verification: **PASS 2026-07-12.** ADR `0029` and `linkedspec-scalar-numeric-v1` define 18 canonical scalar
-    helpers across 55 exact cases: strict finite decimal values, explicit arities, invalid-to-null, numeric
-    comparisons, half-away rounding, variadic scalar min/max, clamp/division fences, and floor signed modulo.
-    `tools/check_scalar_numeric_contract.py` independently evaluates every case, regenerates the complete `.spec`
-    fixture, and runs in local CI. The checker, Knowledge Map, doctrine/memory gates, and mdBook build pass. The
-    authoritative full local gate passes both 61-case CLI environments and phase0 `1..1030` in 559 seconds.
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.1 - adopt scalar numeric helper contract`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.2`
   Status: `done`
@@ -995,15 +482,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Direct canonical helper execution in both backends consumes every contract case; booleans and invalid
     operands return null, arities are exact/variadic as governed, signed modulo and numeric strings match, and full
     Perl/Rust gates pass without weakening unrelated generic scalar coercion.
-  Verification: **PASS 2026-07-12.** Perl generated actions now route canonical scalar-value paths through a
-    dedicated strict adapter, with fixed-arity/aggregate overload fences remaining in the frontend; independently
-    loadable generated source declares the dependency. Rust uses a
-    helper-local strict finite-decimal adapter without changing generic `RuntimeValue::as_number`. Both execute the
-    unchanged 55-case fixture exactly, including boolean/aggregate rejection, exact arities, invalid nulls,
-    half-away rounding, strict strings, and floor signed modulo. Canonical local CI passes both Perl 61-case CLI
-    environments and phase0 `1..1030` in 511 seconds. The Rust local gate passes the complete runtime package,
-    formatting, and both 61-case CLI environments; library clippy passes with established unrelated warnings.
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.2 - align Perl Rust scalar numeric helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.1.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.3`
   Status: `done`
@@ -1012,14 +492,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Both native interpreters consume every unchanged contract case through direct canonical calls;
     numeric parsing, arity, invalid/null, signed modulo, and result normalization agree with Perl/Rust, and full
     package/CLI/corpus gates pass.
-  Verification: **PASS 2026-07-12.** Dart and Julia now enforce the v1 strict finite-decimal grammar without
-    trimming or host-only forms, exact fixed/variadic arities, invalid-to-null results, half-away rounding, and
-    floor signed modulo. Each package reads the unchanged 55-case JSON/spec fixture and matches its exact expected
-    value through direct native execution. Dart's authoritative gate passes format, analyzer, 184 package tests,
-    61/61 CLI cases in default and POSIX environments, and 105/105 corpus fixtures. Julia's authoritative gate
-    passes the complete package suite, primary CLI conformance, and 105/105 corpus fixtures. The one stale Julia
-    folded-subtraction happy path was corrected to the governed exact-arity call.
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.3 - align Dart Julia scalar numeric helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.1.4`
   Status: `done`
@@ -1028,13 +502,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: One Lua evaluator consumes every neutral case for canonical helpers on PUC Lua and LuaJIT, never
     delegates syntax/rounding/modulo policy to host accident, full dual-ABI tests pass, and one six-runtime checker
     proves exact results before aliases/receivers `.4.3.3.2`.
-  Verification: **PASS 2026-07-12.** Before the change, direct PUC Lua and LuaJIT execution reached
-    `unsupported runtime helper 'num_add'`. One portable `scalar_numeric.lua` evaluator now owns strict decimal
-    admission, governed arities, invalid/null fences, finite normalization, half-away rounding, floor signed
-    modulo, scalar min/max/clamp, and numeric comparisons. Both Lua ABIs consume all 55 unchanged contract cases;
-    the complete Lua gate passes 89/89 plus the exact 105-manifest/CLI scaffold. The composed admission checker
-    proves the identical 55-case result through Perl, Rust, Dart, Julia, PUC Lua, and LuaJIT.
   Commit: `LUA-BACKEND-PARITY.4.3.3.1.4 - implement Lua scalar numeric helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.1.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.2`
   Status: `done`
@@ -1043,14 +512,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: All governed word/symbol spellings canonicalize to the same evaluator; integer/float/bare-scalar
     receivers inject exactly one first argument; number-returning links compose; comparison links return numeric
     truth values and terminate later receiver continuation on both Lua ABIs.
-  Verification: **PASS 2026-07-12.** All 18 governed word aliases and 11 arithmetic/comparison symbol callees
-    execute through the existing scalar evaluator. Integer, float, and bare-scalar receivers inject their value;
-    number-returning links compose; all six numeric comparison links are terminal. Baseline probes proved function
-    aliases/symbols already returned canonical values while receivers returned null. The first full run exposed `/`
-    callee versus regex-start ambiguity inside harray values; structural slash-call detection fixes it while grouped,
-    character-class, zero-width, and invalid regex literals remain locked. PUC Lua and LuaJIT pass 90/90 plus the
-    exact manifest/CLI scaffold; the unchanged 55-case six-runtime scalar contract passes.
   Commit: `LUA-BACKEND-PARITY.4.3.3.2 - add Lua numeric call and receiver forms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.3`
   Status: `done`
@@ -1059,12 +522,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `num_sum`/`avg`/`median`/`range` and one-array `min`/`max` preserve typed arrays, reject any
     non-numeric element, implement the governed empty-array results, leave source values unchanged, and execute
     equivalent explicit-array, bare-array, and terminal receiver forms on both Lua ABIs.
-  Verification: **PASS 2026-07-12.** One strict copied-array evaluator implements sum/avg/odd-even median/range
-    and one-array min/max through the scalar numeric admission grammar. Explicit arrays, bare typed arrays, word
-    aliases, and six terminal receiver methods agree; sum(empty) is zero, other empty/invalid cases are null, and
-    source values remain unchanged. PUC Lua and LuaJIT pass 91/91 plus exact manifest/CLI scaffolding; the unchanged
-    six-runtime 55-case scalar contract remains exact.
   Commit: `LUA-BACKEND-PARITY.4.3.3.3 - add Lua numeric aggregate reducers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.3.4`
   Status: `done`
@@ -1073,11 +532,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused canonical/alias/symbol/receiver/reducer/invalid-boundary proof passes the full dual-ABI gate;
     Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture/live docs, and runtime status agree before
     array helpers `.4.3.4`; exact shipped-corpus proof remains owned by dependency-complete phase 6.
-  Verification: **PASS 2026-07-12.** The focused fixture now directly executes all reducer canonical and alias
-    spellings in addition to the complete scalar canonical/word/symbol/receiver and invalid-boundary coverage.
-    PUC Lua and LuaJIT pass 91/91; the unchanged six-runtime scalar contract remains 55/55. Lua README, mdBook,
-    task/index/roadmaps, Knowledge Map, architecture/live docs, memory, and `runtime-numeric-reducers` agree.
   Commit: `LUA-BACKEND-PARITY.4.3.3.4 - close Lua numeric helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.3.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4`
   Status: `done`
@@ -1087,13 +543,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Typed construction/copy/flatten/concat, selection/order/membership/join/split/filter/map-style
     transforms, append/end mutations, child push/index reuse, numeric terminals, and snapshot isolation match the
     catalog without false/null or empty-array drift.
-  Verification: **PASS 2026-07-12.** All 34 non-callback `ARRAY_HELPERS` names plus six strict numeric array
-    terminals have direct runtime routes and focused dual-ABI proof. Construction/splicing, copied selection,
-    joins/transforms, append/end/split and cached child flow, tagged records, receiver composition, invalid
-    boundaries, updated-result semantics, and source isolation pass 99/99. Only the three explicitly delegated
-    tree callback names remain for `.4.3.6`; cross-backend helper caveats, including the direct implicit child-push
-    expression result, remain owned by `FUTURE-PARITY-BACKLOG.5`.
   Commit: closed by `LUA-BACKEND-PARITY.4.3.4.6 - close Lua array helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.0`
   Status: `done`
@@ -1102,12 +553,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     earlier Dart/Julia rollouts, and current binding semantics; distinguish construction/splicing, copied
     selection, scalar/regex transforms, mutations/child flow, tagged records, and closeout; route any cross-cutting
     contract drift before implementation.
-  Verification: **PASS 2026-07-12.** Lua already has array literals/constructors/copy, minimal copied
-    count/first/sorted/filter/trim/case helpers, bare push/append/split/transform rebinding, end mutations, and
-    receiver dispatch from earlier core/string/uniform-binding leaves. Missing breadth divides into six executable
-    children. The audit also proves the later adopted `linkedspec-uniform-binding-v1` updated-value rule supersedes
-    older statement-only array-end prose; `FUTURE-PARITY-BACKLOG.12.1.11` owns that public/KM repair before `.1`.
   Commit: `LUA-BACKEND-PARITY.4.3.4.0 - split Lua array helper mechanisms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.1`
   Status: `done`
@@ -1117,13 +564,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     explicit flat values in constructor context, preserve ordinary nested arrays, cover the empty/missing list
     boundaries already shared by Rust/Dart/Julia, route any Perl/catalog arity contradiction to an explicit owner,
     and never alias source containers on either Lua ABI.
-  Verification: **PASS 2026-07-12.** Lua now evaluates `array(...)` and array literals left-to-right, recognizes
-    only explicit `flat`/`flat_array` call or terminal receiver ASTs as constructor splices, and preserves ordinary
-    array/copy values as nested elements. `flat`, variadic `flat_array`, and `concat_arrays` return fresh arrays;
-    zero/variadic list boundaries match Rust/Dart/Julia while measured Perl direct-value drift is owned by
-    `FUTURE-PARITY-BACKLOG.5`; nested values and later source updates do not alias saved results, and both PUC Lua
-    and LuaJIT pass 92/92 plus manifest/CLI scaffolding.
   Commit: `LUA-BACKEND-PARITY.4.3.4.1 - add Lua array construction splicing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.2`
   Status: `done`
@@ -1132,13 +574,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `count`, `first`, `last`, `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`,
     `reversed`, `contains`, `index_of`, and `uniq` match zero-based/default/empty/invalid policy, preserve sources,
     and compose through bare, literal, function, and receiver forms on both ABIs.
-  Verification: **PASS 2026-07-12.** Lua now copies `last`, take/drop defaults and explicit counts, zero-based
-    `slice`, `reversed`, scalar-text `contains`/`index_of`, and stable `uniq` through function and receiver forms;
-    existing `count`/`first`/`sorted` share the same non-array/empty policy. Literal, bare-binding, chained,
-    omitted/invalid count, past-end, missing membership/index, and source-isolation cases pass 93/93 on PUC Lua
-    and LuaJIT plus manifest/CLI scaffolding. Cross-backend negative-count drift is routed to
-    `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.4.2 - add Lua copied array selection`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.3`
   Status: `done`
@@ -1150,14 +587,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     updated targets under uniform binding, and sources stay exact. Pre-existing Rust/Dart/Julia omission of dropped
     `split_each`/`filter_match`/`uniq` rebinding is explicitly routed to `FUTURE-PARITY-BACKLOG.5`, not copied into
     Lua.
-  Verification: **PASS 2026-07-12.** Lua now shares copied direct/receiver evaluation for delimiter-first
-    `join_values`, literal/PCRE2 `split_each`, PCRE2 `filter_match`, trim/filter/case transforms, and stable `uniq`;
-    seven dropped bare transform calls rebind their named typed array, while value forms preserve sources and
-    wrong-kind targets emit neutral fields. Direct, literal, receiver, chained, invalid, missing/null join,
-    terminal join, Unicode, regex-flag, isolation, and rebinding cases pass 95/95 on PUC Lua and LuaJIT plus
-    manifest/CLI scaffolding. Toolbox proof routes pre-existing Rust/Dart/Julia dropped-transform and invalid-join
-    drift to `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.4.3 - add Lua array transform pipelines`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.4`
   Status: `done`
@@ -1166,13 +597,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `push`/`+=`, three-argument split, push/pop end methods, action-edge push, static-rule precedence,
     implicit/explicit accumulators, and zero-based child-result selection mutate or append exactly once, return
     independent updated values where governed, diagnose wrong kinds, and preserve pure two-argument split.
-  Verification: **PASS 2026-07-12.** Lua now types per-rule accumulators, exposes current/absent compiled-rule
-    arrays through the uniform lookup seam, reuses cached action-edge children, and supports whole or zero-based
-    indexed push into implicit/explicit accumulators. Fluent `.push`/`.push(target)`, all four block forms,
-    wrong-kind targets, static rule precedence, independent append/end updates, mutable three-argument versus pure
-    two-argument split, and source isolation pass 98/98 on PUC Lua and LuaJIT plus manifest/CLI scaffolding. Perl
-    toolbox proof matches the four lifecycle-returned child-push results exactly.
   Commit: `LUA-BACKEND-PARITY.4.3.4.4 - close Lua array mutation flow`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.5`
   Status: `done`
@@ -1181,12 +607,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `split_tagged_records(source, delimiter, tag, fields...)` evaluates its source and carried fields
     once, preserves regex/literal split policy and typed record shapes, composes with array values/receivers, and
     matches shipped helper examples without beginning tree callbacks owned by `.4.3.6`.
-  Verification: **PASS 2026-07-12.** Lua now evaluates the source, delimiter, tag, and every carried field once,
-    reuses the governed literal/PCRE2 split evaluator, and emits fresh typed records shaped exactly as
-    `[tag, item, fields...]`. Direct and scalar-receiver calls compose with array terminals; empty literal fields,
-    regex delimiters, missing arity, invalid sources, carried-container isolation, and one-time side effects pass
-    99/99 on PUC Lua and LuaJIT plus manifest/CLI scaffolding. Tree callbacks remain untouched for `.4.3.6`.
   Commit: `LUA-BACKEND-PARITY.4.3.4.5 - add Lua tagged record construction`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.5`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.4.6`
   Status: `done`
@@ -1195,18 +617,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused construction/selection/transform/mutation/tagged/receiver/invalid proof passes both Lua
     ABIs; numeric terminals remain exact; Lua README, mdBook, task/index/roadmaps, Knowledge Map, architecture/live
     docs, runtime status, cleanup, and doctrines agree before hash helpers `.4.3.5`; tree callbacks stay `.4.3.6`.
-  Verification: **PASS 2026-07-12.** Audited the 37-name ActionIR array set: 34 ordinary names are implemented
-    through copied array dispatch, constructor/copy, shared typed predicates/casing, pure/mutable split, and five
-    uniform-binding mutations; `walk_leaves`/`map_leaves`/`reduce_leaves` remain exactly `.4.3.6`. Six strict
-    numeric terminals remain exact. The audit caught and repaired residual public catalog drift: `count` invalid
-    input is `0`, `take` invalid input is `[]`, ordinary/explicit-target push returns updated snapshots, and a
-    punctuation-shaped stale statement-only end-mutation row is now forbidden by the recurring checker. A toolbox
-    probe found direct implicit `push(Child)` returns Perl's host count but Lua's updated accumulator; value use is
-    now documented non-portable and routed to `FUTURE-PARITY-BACKLOG.5`. Four `array (statement)` prose false
-    positives were removed from the selector scan, correcting its inventory from 31 to 27 genuine history entries.
-    PUC Lua and LuaJIT pass 99/99; mdBook, public selector/mutation checks, Knowledge Map, cleanup, memory, and
-    doctrines pass.
   Commit: `LUA-BACKEND-PARITY.4.3.4.6 - close Lua array helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.4.6`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5`
   Status: `done`
@@ -1216,12 +628,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Typed hash/harray construction/copy/flatten, key/value views, merge/pick/drop/rename/set-key,
     hash-index assignment, scalar-held maps, deterministic ordering, receiver forms, and nested-map preservation
     match the catalog.
-  Verification: **PASS 2026-07-13.** All 13 non-callback hash names are routed and focused across copied
-    construction/splicing, deterministic views, pure transforms/receivers, and named/direct mutation. The three
-    block-bearing tree names remain exclusively `.4.3.6`. Both Lua ABIs pass 103/103; public mutation-result and
-    selector guards, mdBook, Knowledge Map, cleanup, memory, and doctrines pass. Cross-backend odd arity, flattened
-    harray order, rename collision, and other helper caveats remain explicitly owned by `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.0`
   Status: `done`
@@ -1231,15 +639,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     tests, current Perl/catalog behavior, later Dart/Julia implementations, receiver routing, constructor splice
     classification, deterministic ordering, mutations, callbacks, and existing caveat owners; create executable
     children before changing runtime behavior.
-  Verification: **PASS 2026-07-12.** The 16-name `HASH_HELPERS` set contains 13 ordinary names plus three tree
-    callbacks already owned by `.4.3.6`. Lua currently has typed harray literals/`hash(...)`, defensive `copy`,
-    direct hash-index/nested assignment, and uniform bare storage, but no copied hash-helper dispatcher or receiver
-    family. `flat` currently always enters array dispatch, so harray identity and constructor splicing need one
-    syntax-plus-runtime mechanism; count/sorted views/membership are deterministic terminals/bridges; merge/
-    set/rename/drop/pick are copied transforms; named `set_key` and direct assignment need one mutation boundary;
-    public no-drift is separate. Direct odd-arity `hash(...)` divergence is already owned by
-    `FUTURE-PARITY-BACKLOG.5`; callbacks stay untouched.
   Commit: `LUA-BACKEND-PARITY.4.3.5.0 - split Lua harray helper mechanisms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.1`
   Status: `done`
@@ -1248,14 +649,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `hash(...)`, harray literals, `copy`, `flat`, and `flat_hash` evaluate once, preserve ordinary nested
     harray values, splice only explicit direct/terminal flat ASTs in hash-constructor context, never alias sources,
     and leave odd-arity normalization with `FUTURE-PARITY-BACKLOG.5`.
-  Verification: **PASS 2026-07-13.** Lua now dispatches `flat(...)` by runtime kind, returns copied harray values
-    from direct/receiver `flat_hash(...)`, and recognizes only explicit direct or terminal `flat`/`flat_hash` ASTs
-    as harray-constructor splices. Ordinary harray values remain nested copied fields. Explicit harray flattening
-    into `array(...)` or `[...]` emits deterministic sorted key/value pairs. A focused end-to-end case proves
-    left-to-right one-time evaluation, direct and receiver forms, nested-map preservation, copied isolation after
-    deep source mutation, and unchanged Lua odd-arity behavior. PUC Lua and LuaJIT pass 100/100 plus exact
-    manifest/CLI scaffolding; cross-backend odd-arity normalization remains `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.5.1 - add Lua harray construction splicing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.2`
   Status: `done`
@@ -1263,13 +658,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.5.1`
   Acceptance: `count_keys`, `sorted_keys`, `sorted_values`, and `has_key` return exact typed zero/array/boolean
     boundaries, sort values by key, preserve nested values, and compose through function and receiver forms.
-  Verification: **PASS 2026-07-13.** Lua now returns exact lexical `sorted_keys`, key-ordered copied
-    `sorted_values`, `count_keys`, and presence-based `has_key` results through function and receiver forms.
-    Sorted array views continue through array receiver helpers; count/membership results are terminal. Null-valued
-    fields remain present, nested values are copied, and wrong-kind/missing sources return `0` or `[]`. A Perl
-    toolbox matrix confirms those invalid boundaries and exposed one stale mdBook catalog `undef` claim, now
-    corrected to `0`. PUC Lua and LuaJIT pass 101/101 plus exact manifest/CLI scaffolding.
   Commit: `LUA-BACKEND-PARITY.4.3.5.2 - add Lua deterministic harray views`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.3`
   Status: `done`
@@ -1279,11 +669,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `merge_hash`, value-form `set_key`, `rename_key`, `drop_keys`, and `pick_keys` copy inputs, preserve
     deterministic override/order semantics and nested values, accept governed bare typed operands, and continue
     through compatible harray or array-view receiver chains.
-  Verification: **PASS 2026-07-13.** Contract revalidation `.0` and Lua implementation `.1` establish copied
-    merge/set/rename/drop/pick values, bare typed operands, later-overlay override, deterministic Lua rename
-    collision behavior, deep nested isolation, and harray/array-view receiver continuation at 102/102 on both
-    ABIs. Cross-backend destination-collision drift remains explicitly owned by `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.5.3.1 - add Lua copied harray transforms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.3.0`
   Status: `done`
@@ -1293,16 +680,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `merge_hash(base, overlay)`, `copy(base)`, removed selector spelling, override/collision rules, pure transform
     boundaries, and compatible receiver chains; stale current-facing Knowledge Map/mdBook/runtime fact claims are
     corrected and the Lua implementation leaf receives one exact contract.
-  Verification: **PASS 2026-07-13.** Current Perl returns `2` for both bare-first
-    `merge_hash(base, overlay)` and `merge_hash(copy(base), overlay)`, and lowers the bare form to
-    `{%base, %overlay}`; exact `hash(base)` now rejects as a removed selector. The checked-in neutral corpus already
-    carries bare-first merge with expected `2`; its selected case passes Dart and Julia, and Rust passes the full
-    105-case oracle including both merge fixtures. Current backend tests also lock later-argument override, copied
-    pure value/receiver transforms, renamed-value preservation, source isolation, and harray-to-array receiver
-    bridges. A later direct probe found rename-to-existing-destination policy differs and routed it to backlog `.5`.
-    Corrected the obsolete July 4 merge card, composability/receiver/core runtime facts, and mdBook contract; the
-    executable Lua leaf now owns the current bare typed binding contract.
   Commit: `LUA-BACKEND-PARITY.4.3.5.3.0 - revalidate harray transform contracts`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.3.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.3.1`
   Status: `done`
@@ -1310,14 +689,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.5.3.0`
   Acceptance: Implement and focus-test the parent transform contract on PUC Lua and LuaJIT without crossing the
     named-mutation boundary owned by `.4.3.5.4`.
-  Verification: **PASS 2026-07-13.** Lua now executes deep-copied `merge_hash`, value-form `set_key`,
-    `rename_key`, `drop_keys`, and `pick_keys` through function and receiver paths. Bare base/overlay values merge
-    in argument order with later keys overriding; views continue into array receivers; saved nested results remain
-    isolated after source mutation; pure set/rename do not alter their source. Lua deterministically lets the old
-    value win a destination collision, matching Perl/Julia; Dart/Rust preserve the existing destination, so the
-    mdBook warns against portable collision dependence and backlog `.5` owns normalization. PUC Lua and LuaJIT pass
-    102/102 plus exact manifest/CLI scaffolding.
   Commit: `LUA-BACKEND-PARITY.4.3.5.3.1 - add Lua copied harray transforms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.4`
   Status: `done`
@@ -1326,13 +699,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Standalone `set_key(target, key, value)` and direct `target[key] = value` mutate named typed harrays,
     return independent updated snapshots, create only permitted absent targets, reject wrong kinds with neutral
     fields, and leave pure function/receiver transforms non-mutating.
-  Verification: **PASS 2026-07-13.** Statement-context `set_key(target, key, value)` and direct
-    `target[key] = value` now share one kind-checked harray binding seam. Absent targets create harrays;
-    scalar/array conflicts raise `binding_kind_mismatch` with stable identifier, expected-kind, and actual-kind
-    fields; existing scalar-held harrays preserve their binding. Direct assignment yields an independent updated
-    snapshot, later nested writes do not alias saved values, and assigned/function/receiver `set_key` remains a
-    copied pure transform. PUC Lua and LuaJIT pass 103/103 plus exact manifest/CLI scaffolding.
   Commit: `LUA-BACKEND-PARITY.4.3.5.4 - add Lua named harray mutation`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.5.5`
   Status: `done`
@@ -1341,13 +709,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused construction/view/transform/mutation/receiver/invalid proof passes both ABIs; Lua README,
     mdBook, task/index/roadmaps, Knowledge Map, architecture/live docs, cleanup, and doctrines agree before
     callbacks `.4.3.6`; cross-backend caveats stay explicitly owned rather than silently normalized.
-  Verification: **PASS 2026-07-13.** Audited the exact ordinary inventory: `hash`, `copy`, and runtime-kind
-    `flat` use constructor/generic routes; `flat_hash`, `count_keys`, `sorted_keys`, `sorted_values`, `has_key`,
-    `merge_hash`, value `set_key`, `rename_key`, `drop_keys`, and `pick_keys` use the copied harray dispatcher;
-    statement `set_key` and direct assignment use uniform binding. Existing focused cases cover every mechanism,
-    receivers, invalid boundaries, deep isolation, and mutation results at 103/103 on PUC Lua and LuaJIT. Expanded
-    the recurring public mutation-result guard for independent hash-index snapshots and pure receiver set-key.
   Commit: `LUA-BACKEND-PARITY.4.3.5.5 - close Lua harray helper parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.5.5`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6`
   Status: `done`
@@ -1359,15 +722,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     array/harray walk/map/reduce callbacks match the governed surface; unsupported built-in block arities fail
     generically. General user-function invocation and its contextual final-codeblock path remain owned by `.5.1`;
     explicit callable literals and dynamic codeblock-variable calls remain owned by `FUTURE-PARITY-BACKLOG.11.7`.
-  Verification: **PASS 2026-07-13.** Eager ordinary blocks, lazy inline controls, attached/marker if and switch,
-    attached while, metadata-governed helper/receiver `with`, and same-root-kind harray/array callbacks are exact
-    through `.1-.5`. Typed missing/wrong codeblock and arity diagnostics remain generic. `tools/run_lua_local.sh`
-    passes 114/114 on PUC Lua and LuaJIT plus syntax/corpus/process checks; callable-codeblock and punctuation-light
-    neutral checkers pass, capability census is 64/0/0, and the immediately preceding mandatory full local gate
-    passes both primary CLI environments at 61/61 plus phase0 `1..1031` in 987 seconds. `.6` aligns every public
-    surface and routes general user-function final `callback: codeblock` execution to `.5.1`, explicit callable
-    literals/dynamic calls to `FUTURE-PARITY-BACKLOG.11.7`, and generated preservation to `.8.1-.8.4`.
   Commit: closed by `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.0`
   Status: `done`
@@ -1377,12 +733,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     callable-codeblock decisions, and staged-function ownership identify each missing execution seam; executable
     leaves are dependency ordered, and no child claims general user-function execution before `.5.1` or explicit
     callable-codeblock v1 before `FUTURE-PARITY-BACKLOG.11.7`.
-  Verification: **PASS 2026-07-13.** Lua already parses and resolves eager `block_value`, generic attached and
-    parenthesized final blocks, inline and structured control nodes, but the interpreter preserves blocks as inert
-    values and has no control/callback executor. `user_function_registry.prepare_invocation` is not connected to
-    runtime dispatch, and `.5.1` owns that connection. The work is split into eager value blocks, inline controls,
-    statement controls, contextual built-ins/`with`, tree callbacks, and a no-drift/dependency closeout.
   Commit: `LUA-BACKEND-PARITY.4.3.6.0 - split Lua block control callback mechanisms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.1`
   Status: `done`
@@ -1391,13 +743,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Eager no-pair brace blocks evaluate statements once in order, return the last expression or null for
     an empty/no-value path, and consume local `return` without leaking it to the enclosing rule. Harray literals
     remain pair-classified, and trailing contextual block arguments remain inert until their callable consumes them.
-  Verification: **PASS 2026-07-13.** `evaluate_block_value` executes non-final statements through the existing
-    dropped-statement mutation seam, evaluates the final expression as a value, and catches only local return flow.
-    One end-to-end case covers scalar last values, early harray return, skipped writes, no-argument null, non-final
-    mutation, block receiver dispatch, empty/keyed harray precedence, and inert trailing-block AST preservation.
-    The prior `callback = { return("later") }` Lua-only scaffold expectation is corrected to the portable eager
-    scalar result. PUC Lua and LuaJIT pass 104/104; Perl toolbox lowering and three focused Rust block tests agree.
   Commit: `LUA-BACKEND-PARITY.4.3.6.1 - execute Lua eager block values`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.2`
   Status: `done`
@@ -1408,14 +755,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     bare case labels, and block-local return, diagnose malformed arity generically, and compose as helper,
     assignment, and fluent-return operands on both Lua ABIs. `i`/`elif` remain statement-marker aliases,
     `when`/`otherwise` remain attached-block aliases, and retired/non-surface `unless` remains unknown.
-  Verification: **PASS 2026-07-13.** Lua now validates and lazily executes inline `if`/`elseif`/`else` and
-    `switch`/`case`/`default`, evaluates only selected payloads, evaluates the switch subject once, preserves
-    false/null results and block-local return, and distinguishes literal bare case labels from compound value
-    expressions. Generic typed arity failures cover unambiguous malformed call shapes. Structural-only aliases
-    are rejected as inline values. Assignment and action-edge fluent return composition pass 105/105 on PUC Lua
-    and LuaJIT. Lua follows Perl-oracle condition truthiness; cross-backend scalar/aggregate truthiness drift is
-    durably routed to `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.6.2 - execute Lua lazy inline controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3`
   Status: `done`
@@ -1424,10 +765,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.6.1`
   Acceptance: If-family, switch-family, and while-family statements share the scoped block executor, preserve
     parser order and local return, and never evaluate unselected branches or an extra loop body.
-  Verification: **PASS 2026-07-13.** Children `.1`-`.3` execute attached/marker if and switch plus attached while
-    through one nesting-aware statement executor. PUC Lua and LuaJIT passed 108/108 before the independent
-    punctuation-light syntax slice; callback-bearing built-ins remain owned by `.4` and `.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.1` through `.4.3.6.3.3` child commits
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.1`
   Status: `done`
@@ -1435,15 +774,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.6.1`
   Acceptance: Exactly one selected branch executes, condition aliases and marker boundaries match ActionIR order,
     empty branches are neutral, and malformed/orphaned control nodes retain structured diagnostics.
-  Verification: **PASS 2026-07-13.** One nesting-aware statement-range executor now selects exactly one attached
-    or marker branch, skips later conditions and all unselected bodies, preserves empty branches and block-local
-    return, and attributes malformed/orphaned chains with `malformed_statement_control`, authored keyword,
-    reason, ActionIR kind, and rule. The portable alias matrix is explicit: attached `when/otherwise`, marker
-    `i/elif`; broader Perl/Dart/Julia acceptance is non-portable and routed to `FUTURE-PARITY-BACKLOG.5`. One
-    end-to-end case covers nested markers, both alias families, skipped fatal paths, empty branches, local returns,
-    mixed forms, orphan markers, missing `endif`, duplicate `else`, and `elseif` after `else`. PUC Lua and LuaJIT
-    pass 106/106.
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.1 - execute Lua if statement controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.2`
   Status: `done`
@@ -1451,16 +783,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.6.3.1`
   Acceptance: The switch subject evaluates once; the first matching case or one default executes; later cases are
     skipped; comparison and null behavior reuse governed scalar equality without host-table coercion.
-  Verification: **PASS 2026-07-13.** Attached switch validates nested `case/default` bodies; marker switch scans
-    nested `endswitch` depth and optional `endcase` boundaries before evaluating its subject once. Both select the
-    first matching case or one default, execute through the shared statement range/block seam, preserve empty and
-    local-return bodies, keep bare labels literal, and skip all later candidate/body side effects. Inline,
-    attached, and marker forms now share Perl-oracle scalar comparison: null equals empty text, booleans use `0/1`,
-    and aggregates are not scalar-comparable. Orphan/missing/duplicate/mixed controls retain typed diagnostics.
-    One focused case plus expanded inline assertions pass 107/107 on PUC Lua and LuaJIT. Cross-backend boolean/
-    aggregate switch-comparison and marker outside-branch execution drift is routed to
-    `FUTURE-PARITY-BACKLOG.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.2 - execute Lua switch statement controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.3.3`
   Status: `done`
@@ -1469,14 +793,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Conditions re-evaluate before each body, false initially runs zero bodies, body state is visible to
     the next condition, local return exits only the current block contract, and the governed runaway guard fails
     deterministically with rule attribution.
-  Verification: **PASS 2026-07-13.** The indexed statement executor now dispatches typed attached while nodes,
-    validates the required body before spending the condition, re-evaluates the condition before every body,
-    exposes body mutations to the next condition, preserves false-initial and empty-body behavior, treats
-    Perl-reference `next()` as inner-loop continue, and propagates return through the action or expression-block
-    boundary that owns it. The configurable guard permits exactly `max_iterations` bodies, rechecks once, and
-    emits typed code/keyword/kind/limit/rule fields only if that next condition remains true. One focused case
-    passes 108/108 on PUC Lua and LuaJIT. Exact-limit and `next()` drift is routed to backlog `.5`.
   Commit: `LUA-BACKEND-PARITY.4.3.6.3.3 - execute Lua attached while controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.4`
   Status: `done`
@@ -1486,14 +804,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `call(args, { ... })` are identical in helper and receiver form; `with` installs copied temporary bindings and
     restores all prior/absent bindings on success, local return, and error. This leaf does not claim general
     user-function dispatch, which remains `.5.1`.
-  Verification: **PASS 2026-07-13.** One copied metadata registry declares helper/receiver `with` plus receiver
-    walk/map/reduce final-codeblock signatures. Attached and parenthesized helper/receiver `with` execute the same
-    raw final block without eager pre-execution, evaluate the optional value/receiver first, and restore the prior
-    or absent uniform `value` binding across scalar/array/harray stores after normal completion, block-local
-    return, callback/result-copy failure, or runtime error. Aggregate inputs/results are isolated, compatible
-    receiver chains continue, harrays are not promoted, and malformed block type/arity stays typed. Tree
-    callbacks reuse the registry but remain behavior-owned by `.5`. PUC Lua and LuaJIT pass 112/112.
   Commit: `LUA-BACKEND-PARITY.4.3.6.4 - execute Lua built-in final blocks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5`
   Status: `done`
@@ -1502,14 +814,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.6.1`, `.4.3.6.4`
   Acceptance: `walk_leaves`, `map_leaves`, and `reduce_leaves` use one scoped callback frame, deterministic paths,
     copied inputs/results, exact continuation, and generic invalid-kind/block-arity boundaries.
-  Verification: **PASS 2026-07-13.** `.5.1` establishes the copied/restored callback frame and sorted harray-root
-    execution; `.5.2` generalizes one dispatcher by receiver root kind. Harray roots recurse only through nested
-    harrays in lexical-key order, while array roots recurse only through nested arrays in zero-based index order;
-    cross-kind aggregates remain leaves. Walk/map/reduce copying, scope, continuation, terminality, empty/invalid
-    laziness, typed malformed calls, and exact Perl results are locked on both Lua ABIs at 114/114. The mandatory
-    full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61, and phase0
-    `1..1031` green in 987 seconds.
   Commit: closed by `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.5`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1`
   Status: `done`
@@ -1518,13 +824,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.6.4`
   Acceptance: Lexically sorted harray keys produce stable path/value bindings; walk side effects, mapped copies,
     and typed reduce accumulation match the governed contract without leaking callback locals or aliasing sources.
-  Verification: **PASS 2026-07-13.** `.1.0` localized and split the reference argument-loss defect, `.1.1`
-    repaired authored-value precedence before optional-scope fallback, and `.1.2` executes deterministic Lua
-    harray callbacks through one copied/restored frame. Both Lua ABIs pass 113/113 with an exact Perl-reference
-    output lock. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments
-    at 61/61, and phase0 `1..1031` green in 983 seconds. Array-root traversal was then independently owned and
-    closed by `.4.3.6.5.2` without changing this hash-root contract.
   Commit: closed by `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.5.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.0`
   Status: `done`
@@ -1532,12 +833,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.4.3.6.4`
   Acceptance: Use the toolbox and typed AST dump to locate the exact corruption boundary; give the reference repair
     and Lua traversal separate commit-sized owners; record the public depth contract from executable evidence.
-  Verification: **PASS 2026-07-13.** The typed AST preserves `cat(key, "@", depth)` intact inside `seen += ...`,
-    but `MethodLowering` passes the call through the legacy optional-scope normalizer. With three `cat` arguments,
-    its first bare value is stripped as a supposed scope label; the same call in a two-argument return stays intact.
-    Perl/Rust traversal source and direct execution also establish `depth == count(path)` (root leaf 1), contrary
-    to the mdBook's stale "zero-based depth" wording. Reference repair `.1.1` precedes Lua implementation `.1.2`.
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.0 - split callback append scope repair`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.5.1.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.1`
   Status: `done`
@@ -1546,15 +843,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `cat(key, ...)` and comparable value helpers retain every authored bare first argument inside
     `+=` callback side effects; direct helper behavior stays unchanged, typed AST/lowering/runtime tests lock the
     exact source location, and accepted optional-scope forms outside the affected value-helper path do not change.
-  Verification: **PASS 2026-07-13.** `MethodExpr` now accepts an explicit authored-value-precedence mode: if the
-    raw list already satisfies helper arity it is copied intact, and legacy optional-scope stripping remains only
-    the invalid-count fallback. `cat`, `num_add`, `num_mul`, scalar `num_min`/`num_max`, `coalesce`,
-    `coalesce_nonempty`, optional-width `substr`, and coalesce family inference consume that mode; existing
-    collection helpers share the same centralized rule. Typed AST/lowering tests lock every family plus the
-    original append RHS. The executable hash-tree test now maps/reduces/walks with `key`/`depth` as first values
-    and returns root depth 1/nested depth 2. Focused AST tests pass, and the mandatory full local CI gate exits 0
-    with capability 64/0/0, both primary CLI environments at 61/61, and phase0 `1..1031` green.
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.1 - preserve authored callback values`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.5.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.1.2`
   Status: `done`
@@ -1563,18 +853,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Lexically sorted harray keys produce stable copied `value`/`key`/`path`/`depth` bindings; walk side
     effects, mapped copies, and typed reduce accumulation match the corrected reference contract without leaking
     callback locals or aliasing sources. Public docs define depth as `count(path)`, so a root leaf has depth 1.
-  Verification: **PASS 2026-07-13.** `runtime_scoped_binding.run_frame` snapshots all three private stores for
-    ordered `value`/`key`/`path`/`depth` and optional `acc` bindings, copies inputs/results, restores every prior
-    or absent value in reverse frame order after success or error, and preserves the existing one-binding `with`
-    API. Lua walks harray interiors by lexical key order, treats every non-harray value (including arrays) as a
-    leaf, maps into new typed harrays, preserves walk side effects while returning a source copy, threads copied
-    typed reduce results, defines depth as path length, keeps reduce terminal, and returns null for non-harray
-    receivers without evaluating initial/callback expressions. Empty trees run no callbacks. Focused proof covers
-    source/result isolation, exact outer binding restoration, missing/wrong block and arity diagnostics, and the
-    exact Perl output `[{...},"a@1;arr@1;y@2;",3,["a@1","arr@1","y@2"]]`. PUC Lua and LuaJIT pass 113/113.
-    The mandatory full local CI gate exits 0 with capability 64/0/0, both primary CLI environments at 61/61,
-    and phase0 `1..1031` green in 983 seconds.
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.1.2 - execute Lua harray callbacks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.5.1.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.5.2`
   Status: `done`
@@ -1584,18 +864,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     arrays; harrays remain leaves, just as arrays remain leaves under a hash root. One root-kind dispatcher keeps
     harray lexical order intact. Walk/map/reduce return exact types, continuation is exact, callback frames restore
     atomically, and empty/invalid inputs stay lazy and neutral.
-  Verification: **PASS 2026-07-13.** The Lua traversal dispatcher now selects the receiver root kind once, obtains
-    deterministic children through lexical harray keys or one-based Lua offsets converted to zero-based indexes,
-    recurses only when a child has that same runtime kind, and rebuilds typed containers through shared walk/map/
-    reduce control. Array callbacks receive copied `value`/`index`/`path`/`depth` and reduce-only `acc`; map and
-    walk continue through `.count()`, reduce remains terminal, invalid receivers skip initial/callback evaluation,
-    empty arrays run no callbacks, and exact outer bindings restore. The focused fixture also proves a harray leaf
-    stays opaque inside an array root and reproduces the checked-in Perl oracle result
-    `[[\"0=a\",[\"1/0=b\",\"1/1=c\"],\"2={h}\"],\"0:a;1/0:b;1/1:c;2:{h};\",3,[\"0\",\"1/0\",\"1/1\",\"2\"],\"undef\"]`.
-    PUC Lua and LuaJIT pass 114/114 plus syntax, corpus, and process checks; the prior harray proof remains green
-    through the shared dispatcher. The mandatory full local CI gate exits 0 with capability 64/0/0, both primary
-    CLI environments at 61/61, and phase0 `1..1031` green in 987 seconds.
   Commit: `LUA-BACKEND-PARITY.4.3.6.5.2 - execute Lua array callbacks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.5.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.6.6`
   Status: `done`
@@ -1604,15 +874,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused dual-ABI proof, catalog/README/mdBook/KM/task/live state, and unsupported-block diagnostics
     agree; general user-function contextual blocks are explicitly handed to `.5.1`, explicit callable literals and
     dynamic codeblock calls to `FUTURE-PARITY-BACKLOG.11.7`, with no premature parity claim.
-  Verification: **PASS 2026-07-13.** The complete focused dual-ABI suite passes 114/114 and locks eager blocks,
-    inline/statement controls, built-in final-codeblock contracts, cleanup-safe `with`, root-kind tree callbacks,
-    typed unsupported final-kind/arity boundaries, and the punctuation-light exclusions. The independent callable-
-    codeblock checker passes 7 literals, 11 calls, 9 invalid literals, 7 invalid calls, 4 invalid declarations,
-    and 8 contextual forms; the punctuation-light checker passes 6 standalone, 4 receiver, and 6 excluded forms;
-    capability census remains 64/0/0. Public/catalog/book/KM/task/live state agrees. `.5.1` now explicitly owns
-    final `callback: codeblock` metadata and attached/parenthesized user-function execution; `.11.7` retains
-    `{|params| ...}` literals and dynamic codeblock-variable calls. No parser/runtime code changes in this leaf.
   Commit: `LUA-BACKEND-PARITY.4.3.6.6 - close Lua block control callback parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.6.6`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7`
   Status: `done`
@@ -1622,15 +885,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Capture anchors/slices/boundaries, rule-local named marks, Unicode character positions/lengths,
     input views, save/restore and entry/local rewinds, consume continuation, earliest boundary selection, and
     unresolved-rule behavior match the runtime contract.
-  Verification: **PASS 2026-07-15.** The 62 unique current capture/mark/input/cursor/control call names agree
-    exactly across Lua contracts, the 246-name admitted inventory, interpreter dispatch, and focused execution
-    sources. Four placement spellings compile/execute through typed post-action slot events. Governed anonymous,
-    named, complete-mark, cursor-control, and boundary fixtures remain exact; all public positions and widths use
-    Unicode characters over byte-safe internal state. The dual-ABI gate passes 121/121, complete-mark and
-    punctuation-light checkers pass, coverage is 246 names over 105+1 occurrence sources with all 122 public Perl
-    contracts present, capability remains 64/0/0, and public selector admission remains 57/27/0. Public/API/book/
-    KM/task/live state agrees. Helper caveats remain `.5`; generated preservation/execution remains `.8.1-.8.4`.
   Commit: closed by `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.0`
   Status: `done`
@@ -1639,13 +895,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Contract sources, toolbox probes, Knowledge Map facts, governed fixtures, current Lua state seams,
     split-marker compilation, Unicode projections, and dependency order are inspected before behavior changes;
     every discovered obligation has one explicit child owner and the first executable leaf is dependency-ready.
-  Verification: **PASS 2026-07-13.** Canonical Perl/Rust/Dart/Julia sources, four governed fixtures, Lua match
-    registers/parser/compiler/interpreter seams, Knowledge Map facts, and shipped marker use were inspected. The
-    parent is split into six dependency-ordered mechanisms plus no-drift. A new fact card records byte-offset/
-    Unicode seams, unexecuted split-marker nodes, and the corpus-seeded 239-name checker blind spot that omits seven
-    documented current mark helpers identically across backends. PUC Lua and LuaJIT remain 114/114; Knowledge Map,
-    memory architecture, task metadata, all doctrines, mdBook build, and whitespace checks pass.
   Commit: `LUA-BACKEND-PARITY.4.3.7.0 - split Lua capture cursor mechanisms`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.1`
   Status: `done`
@@ -1654,15 +905,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Input text/length/slice/end position/line/column and cursor position/line/column/rest/rest length use
     Unicode character units at the DSL boundary; cursor save/restore is LIFO and entry/local rewinds preserve
     register snapshots while changing only the live cursor; consume-mode continuation observes the restored cursor.
-  Verification: **PASS 2026-07-13.** Lua now dispatches all six whole-input helpers, five live-cursor readers,
-    and four explicit cursor controls through byte-safe runtime state with Unicode-character projection at the DSL
-    boundary. The focused test locks multibyte input text/length/slice/end coordinates, cursor coordinates/rest,
-    receiver continuation, invalid/past-end slices, nested LIFO save/restore, entry/local rewinds, empty restore,
-    typed exact-arity failures, and consume continuation from a rewound cursor. `bash tools/run_lua_local.sh`
-    passes 115/115 on separately built PUC Lua and LuaJIT adapters plus syntax, CLI-scaffold, and 105-fixture
-    manifest checks. The authoritative `bash tools/run_ci_local.sh` passes capability 64/0/0, both primary CLI
-    environments at 61/61, phase0 `1..1031` in 918 seconds, and every contract/doctrine/documentation gate.
   Commit: `LUA-BACKEND-PARITY.4.3.7.1 - add Lua input cursor controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.2`
   Status: `done`
@@ -1673,15 +917,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     neutral, advancing forms mutate only after a valid read, and receiver continuation/terminality is exact.
     `start_capture_slice()` follows the governed void mutation contract shared by the helper catalog and the
     Rust/Dart/Julia runtimes; it must not copy Perl's incidental assignment-expression result into Lua.
-  Verification: **PASS 2026-07-13.** Lua executes all 16 current anonymous capture calls through one register-
-    backed byte-offset seam. The focused Unicode test covers local-match/live-cursor/input-end endpoints, start
-    position/line/column, stable and advancing text/length reads, value continuation, valid-only mutation, a
-    reversed-span neutral read, void setter semantics, and typed exact-arity diagnostics. `bash
-    tools/run_lua_local.sh` passes 116/116 on separately built PUC Lua and LuaJIT adapters plus syntax,
-    CLI-scaffold, and exact 105-fixture manifest checks. The authoritative `bash tools/run_ci_local.sh` passes
-    capability 64/0/0, both primary CLI environments at 61/61, phase0 `1..1031` in 766 seconds, and every
-    contract/doctrine/documentation gate.
   Commit: `LUA-BACKEND-PARITY.4.3.7.2 - add Lua anonymous capture helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.3`
   Status: `done`
@@ -1695,17 +932,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `mark_line`, `mark_col`, and `clear_mark`; this leaf extends that implementation for the remaining governed
     named writers, spans, and bridges rather than creating a Lua-only dialect or parallel mark frame. Final
     shared-inventory admission `.17.5` is complete before this leaf's complete-family parity claim.
-  Verification: **PASS 2026-07-15.** Lua extends the admitted parse-scoped rule-label mark store rather than
-    creating a second frame. The unchanged governed named-capture fixture returns its exact native value and the
-    same value after public `SpecFile` serialization/reconstruction. A supplemental multibyte case locks current,
-    input-start, anonymous, and copy/delete writers; stable and advancing current-edge reads; both bridge
-    directions; missing/reversed neutral behavior; character-based public positions; valid-only mutation; and
-    exact typed arity. `capture_take()` remains the anonymous zero-argument call while `capture_take(name)` uses
-    the named-mark overload. `bash tools/run_lua_local.sh` passes 120/120 on separately built PUC Lua and LuaJIT
-    adapters plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. The authoritative
-    `bash tools/run_ci_local.sh` passes capability 64/0/0, coverage 246/105+1/122, both primary CLI environments
-    at 61/61, phase0 `1..1031` in 637 seconds, and every contract/doctrine/documentation gate.
   Commit: `LUA-BACKEND-PARITY.4.3.7.3 - execute Lua named mark spans`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.4`
   Status: `done`
@@ -1714,18 +942,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `@capture_slice`, compatibility capture-boundary aliases, and `@mark(name)` compile into explicit
     rule-slot events whose mutations become visible after that matched action site; helper calls remain available
     for in-block timing, malformed names stay typed, and the shipped `@move_pos` source has an executable owner.
-  Verification: **PASS 2026-07-15.** Lua compiles preferred `@capture_slice`, compatibility
-    `@capture_from_here` / `@move_pos`, and `@mark(name)` into typed `CompiledRuleSlotEvent` records attached to
-    the preceding regex slot. The interpreter applies those events after that slot's action/child dispatch and
-    before `LE`, through the existing anonymous capture boundary and parse-scoped rule-label mark store. One
-    multibyte test locks same-slot invisibility, later-slot visibility, all three anonymous spellings, two named
-    marks, Unicode positions, native and serialized-source execution, typed malformed names/fragments, and the
-    exact checked-in EBNF `logging_annotation` line. `bash tools/run_lua_local.sh` passes 121/121 on separately
-    built PUC Lua and LuaJIT adapters plus syntax, CLI-scaffold, and exact 105-fixture manifest checks. The
-    authoritative `bash tools/run_ci_local.sh` passes capability 64/0/0, coverage 246/105+1/122, public-selector
-    admission across 57 files with 27 classified references and zero current examples, both primary CLI
-    environments at 61/61, phase0 `1..1031` in 633 seconds, and every contract/doctrine/documentation gate.
   Commit: `LUA-BACKEND-PARITY.4.3.7.4 - execute Lua rule slot markers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.5`
   Status: `done`
@@ -1737,15 +955,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     null without cursor movement when every supplied rule is unresolved or unusable. Until helper-caveat owner
     `FUTURE-PARITY-BACKLOG.5` normalizes the public minimum arity, a zero-argument call follows Rust/Dart/Julia by
     returning null without movement rather than copying Perl's generated-handler undefined-subroutine failure.
-  Verification: **PASS 2026-07-13.** Lua resolves bare and quoted rule names, ignores unresolved and regex-free
-    rules, caches usable compiled alternations separately from ordinary rule matching, and always seeks from the
-    live cursor regardless of parse mode. The focused Unicode test locks argument-order-independent earliest
-    selection, consume-mode operation, unconsumed boundary rest, character cursor projection, returned-text
-    receiver continuation, EOF fallback, all-unusable and zero-argument neutral no-op behavior. `bash
-    tools/run_lua_local.sh` passes 117/117 on separately built PUC Lua and LuaJIT adapters plus syntax,
-    CLI-scaffold, and exact 105-fixture manifest checks. Full local CI passes capability 64/0/0, CLI 61/61 in
-    both option environments, phase0 `1..1031` in 862 seconds, and every contract/doctrine/documentation gate.
   Commit: `LUA-BACKEND-PARITY.4.3.7.5 - add Lua boundary capture`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.5`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.7.6`
   Status: `done`
@@ -1755,15 +966,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     Knowledge Map, task/live state, and later capability routing agree with no premature generated-source or
     capability claim; the documented-mark inventory gap has an explicit cross-backend disposition; parent
     `.4.3.7` closes and diagnostic helper `.4.3.8` becomes the sole active frontier.
-  Verification: **PASS 2026-07-15.** A source-derived audit proves 62/62 current calls in the contract family,
-    62/62 interpreter dispatch, and 62/62 focused execution-source occurrence. The marker proof covers preferred
-    `@capture_slice`, compatibility `@capture_from_here`/`@move_pos`, and `@mark(name)` with exact post-action/
-    pre-`LE` timing. `bash tools/run_lua_local.sh` passes 121/121 on both separately built ABIs. The exact seven-
-    helper mark checker, 246/105+1/122 coverage report, 57/27/0 public-selector guard, punctuation-light checker,
-    and capability 64/0/0 all pass. The former documented-mark gap is resolved cross-backend by completed `.17`.
-    API/book/KM/task/live surfaces close native capture/cursor parity without claiming generated Lua support;
-    `.8.1-.8.4` retain preservation/execution/admission. No parser/runtime/fixture/capability behavior changed.
   Commit: `LUA-BACKEND-PARITY.4.3.7.6 - close Lua capture cursor parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.7.6`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.8`
   Status: `done`
@@ -1772,15 +976,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: `print`, `say`, and `print_each` evaluate eagerly, stay out of parse-result values, are quiet without
     a sink, preserve message ordering/Unicode, and expose an event seam that `.4.4` can instrument without changing
     helper semantics; `exit_now` remains immediate typed control.
-  Verification: **PASS 2026-07-15.** `runtime_parse(..., { diagnostic_sink = callback })` delivers typed
-    `RuntimeDiagnosticOutputEvent` records with helper/rule/message fields. `print` concatenates one or more eager
-    values, `say` appends one newline, and `print_each(array, prefix[, suffix])` emits one event per item in source
-    order. Missing sinks stay quiet without skipping evaluation; output events never enter `RuntimeParseResult`.
-    Focused coverage locks Unicode, null/boolean text, exact Perl-reference optional-suffix behavior, invalid sink/
-    arity diagnostics, and immediate typed `exit_now`. `bash tools/run_lua_local.sh` passes 122/122 on PUC Lua and
-    LuaJIT. Canonical CI passes capability 64/0/0, coverage 246/105+1/122, CLI 61x2, and Phase 0 `1..1031` in 611
-    seconds. The audited cross-backend transport/format drift is routed to `FUTURE-PARITY-BACKLOG.5.1`.
   Commit: `LUA-BACKEND-PARITY.4.3.8 - add Lua diagnostic output events`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.8`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.9`
   Status: `done`
@@ -1790,11 +987,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Every governed current name is execution-covered or has a later explicit non-helper owner; exact
     246-name admission, mdBook examples, both runtime gates, statuses, API docs, task trees, Knowledge Map, and
     capability claims agree with zero hidden partial surface before `.4.4`.
-  Verification: **PASS 2026-07-15.** The permanent probe executes a sorted view of every admitted call name through
-    parse, compile, and runtime. Exactly 233 reach runtime owners and only the thirteen documented structural or
-    receiver-only function forms report unsupported; direct `call(rule)` result/`retv`/cursor behavior is focused.
-    The public status is `runtime-helper-value-control`. Both Lua ABIs pass 125/125.
   Commit: closed by `.4.3.9.2`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.9`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.9.0`
   Status: `done`
@@ -1803,19 +997,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Probe all 246 admitted names through the Lua parser/compiler/interpreter; classify every unsupported
     result as a real missing value helper or an explicit statement/receiver-only surface; inspect status and focused
     evidence drift; split repair from final admission; route any cross-backend/reference contradiction durably.
-  Verification: **PASS 2026-07-15.** A disposable PUC Lua PCRE2 adapter and generated minimal action per admitted
-    name produce 230 handled names and 16 `unsupported runtime helper` results. Thirteen are intentional non-function
-    owners: structural `case`/`elif`/`elseif`/`i`/`when`/`while`, receiver-only `walk_leaves`/`map_leaves`/
-    `reduce_leaves`, and named-receiver-only `push_back`/`push_front`/`pop_back`/`pop_front`. The remaining exact
-    gap is eager value helpers `and`/`or`/`not`. The audit also finds stale public status
-    `runtime-numeric-reducers`, reports a duplicate source `or` inventory row, and finds no focused direct
-    `call(rule)` execution assertion. `.4.3.9.2` later disproves the duplicate-row report against source history:
-    every inspected revision contains exactly one row, so the durable record treats it as an audit-note error.
-    Toolbox probes show Perl `return(and(...))` / `return(or(...))` lower through keyword-precedence
-    forms and return null, while Rust/Dart/Julia implement eager boolean composition; normalization is routed to
-    dependency-gated `FUTURE-PARITY-BACKLOG.5.2`. `.1` owns the Lua logical repair and `.2` the recurring exact
-    ownership/status/direct-call admission.
   Commit: `LUA-BACKEND-PARITY.4.3.9.0 - split Lua exhaustive helper closeout`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.9.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.9.1`
   Status: `done`
@@ -1825,15 +1008,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     Lua's already-governed runtime truthiness, return booleans including empty-call false/false/true behavior, work
     in value/receiver-compatible positions, and pass exact Unicode-neutral side-effect proof on PUC Lua and LuaJIT;
     no cross-backend truthiness or Perl-lowering normalization is claimed.
-  Verification: **PASS 2026-07-15.** One shared evaluator materializes every authored argument once left-to-right
-    before composing with `runtime_truthy`. `and` requires at least one truthful value and otherwise returns false;
-    `or` returns true when any value is truthful and false for empty; `not` returns true for empty and negates the
-    first value after eagerly evaluating any extras. Focused execution locks false-first `and`, true-first `or`,
-    extra-argument `not`, exact side-effect order, false/false/true empty results, Lua's already-governed `"0"` and
-    aggregate truthiness, boolean JSON identity, and receiver continuation through `with`.
-    `bash tools/run_lua_local.sh` passes 123/123 on PUC Lua and LuaJIT. Cross-backend truthiness, arity, Dart short-
-    circuit/empty-`and`, and Perl keyword-lowering normalization remain dependency-gated `.5.2`.
   Commit: `LUA-BACKEND-PARITY.4.3.9.1 - execute Lua eager logical helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.9.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.3.9.2`
   Status: `done`
@@ -1844,16 +1020,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     source history; public backend status names the completed native helper/value/control boundary without implying
     trace, functions, corpus, CLI, or generated support; dual-ABI, 246/105+1/122, capability, API, book, Knowledge
     Map, task, and canonical gates agree; parent `.4.3` closes and `.4.4` activates.
-  Verification: **PASS 2026-07-15.** `action_call_names.current_names()` exposes a defensive sorted internal view
-    for the permanent test. Every one of 246 generated `name()` sources parses and compiles; runtime reports exactly
-    233 owned function forms plus the thirteen governed structural/receiver-only forms, with no unowned residual.
-    Focused `call(Child)` proof locks child result, refreshed `retv`, and cursor 2. `backend_status().parity` now says
-    `runtime-helper-value-control`, deliberately short of later trace/functions/corpus/CLI/generated claims. Git
-    source-history and current exact scans contain one `or` inventory row, correcting the unreproducible `.0`
-    duplicate-note assertion without a fake code edit. PUC Lua and LuaJIT pass 125/125; coverage is 246/105+1/122
-    and capability is 64/0/0. Canonical local CI passes CLI 61/61 in default and POSIX environments plus Phase 0
-    `1..1031` in 608 seconds.
   Commit: `LUA-BACKEND-PARITY.4.3.9.2 - close Lua runtime helper no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.3.9.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.4`
   Status: `done`
@@ -1863,11 +1031,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     caller-owned tracing exposes exact ordered levels, event primitives, sinks, and runtime interpreter events
     without changing parse results. Full frontend/compiler/function/staged propagation remains `.5.3`, after `.5.1`
     and `.5.2` provide the general staged-function and native-loading owners it must traverse.
-  Verification: **PASS 2026-07-15.** Children `.0-.4` split, implement, instrument, and close the exact native
-    runtime boundary: structured diagnostics, ordered controls, caller-owned sinks, event primitives, result-neutral
-    runtime entrypoints, and interpreter events. PUC Lua and LuaJIT pass 129/129; canonical local CI passes CLI
-    61x2 and Phase 0 `1..1031` in 608 seconds. Full native-pipeline trace remains `.5.3` after `.5.1/.5.2`.
   Commit: closed by `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.4`.
 
 - ID: `LUA-BACKEND-PARITY.4.4.0`
   Status: `done`
@@ -1875,14 +1040,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Structured failure payloads, trace controls/sinks, runtime instrumentation, and no-drift closeout are
     separately owned; dependency-incomplete full-pipeline propagation is explicitly retained by `.5.3` rather than
     being claimed before general staged functions and native loading exist.
-  Verification: **PASS 2026-07-15.** Knowledge Map-first comparison against the completed Dart and Julia rollout
-    proves both backends implemented runtime diagnostics, controls/sinks, and runtime events before their later
-    frontend/compiler/function/staged trace work. Current Lua already has the necessary rule stack, typed runtime
-    exception seam, compiled action source, cursor/capture state, and per-parse caller-owned option boundary, but no
-    neutral `RuntimeDiagnostic` or trace owner. The split creates `.4.4.1` structured runtime diagnostics, `.4.4.2`
-    levels/config/events/sinks, `.4.4.3` runtime instrumentation, and `.4.4.4` no-drift closeout. No Lua behavior or
-    capability claim changed; `.4.4.1` is active.
   Commit: `LUA-BACKEND-PARITY.4.4.0 - split Lua diagnostics trace controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.4.0`.
 
 - ID: `LUA-BACKEND-PARITY.4.4.1`
   Status: `done`
@@ -1891,15 +1050,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `rule_label`, `handler_source_label`, and optional `spec_name` / `spec_path` fields; the deepest available rule
     and source attribution survive stack unwinding, richer inner diagnostics are preserved, textual errors remain
     useful, and successful parse results are unchanged on PUC Lua and LuaJIT.
-  Verification: **PASS 2026-07-15.** Lua `RuntimeInterpreterException` tables now carry typed
-    `RuntimeDiagnostic` payloads with exact neutral snake-case fields and deterministic JSON. Engine options accept
-    optional `spec_name` / `spec_path`; specific `top_rule_selection`, `runtime_input`, `rule_lookup`, and
-    `runtime_execution` stages preserve top/deepest-rule/`lua_runtime:rule:<label>` identity. Child and direct
-    lookup payloads attach before unwind and survive parent/parse fallback wrapping. Existing message/tostring and
-    successful result values are unchanged. PUC Lua and LuaJIT pass 126/126; coverage remains 246/105+1/122 and
-    capability remains 64/0/0. Canonical local CI passes both primary CLI environments at 61/61 and Phase 0
-    `1..1031` in 613 seconds. Public status is `runtime-structured-diagnostics`; `.4.4.2` is active.
   Commit: `LUA-BACKEND-PARITY.4.4.1 - add Lua runtime diagnostics`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.4.1`.
 
 - ID: `LUA-BACKEND-PARITY.4.4.2`
   Status: `done`
@@ -1907,17 +1059,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Ordered none/low/medium/high/full/debug levels, explicit and documented environment configuration,
     enter/exit/decision/mark/dump/log events, stdout/routed-file/mirror sinks, route reset/truncate behavior, and
     direct traced runtime entrypoints are default-quiet and preserve successful parse results on both Lua ABIs.
-  Verification: **PASS 2026-07-15.** Lua now exports immutable typed trace levels/config/sink/event/scope records,
-    exact named aliases plus numeric thresholds, environment configuration, structured JSON, and balanced event
-    rendering. Caller-owned emitters record enter/exit/decision/mark/dump/log events and route bytes to stdout,
-    resettable/appending files, or both, with optional level emoji. `runtime_parse` / `runtime_execute` accept a
-    direct emitter; `runtime_parse_with_trace` / `runtime_execute_with_trace` construct one without mutating caller
-    options. This controls slice deliberately emits only balanced `lua_runtime:parse` events; `.4.4.3` owns deeper
-    interpreter events. Disabled/absent tracing is quiet and traced/untraced result JSON is exact. PUC Lua and
-    LuaJIT pass 128/128; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local CI passes
-    both primary CLI environments at 61/61 and Phase 0 `1..1031` in 611 seconds. Public status is
-    `runtime-trace-controls`; `.4.4.3` is active.
   Commit: `LUA-BACKEND-PARITY.4.4.2 - add Lua trace controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.4.2`.
 
 - ID: `LUA-BACKEND-PARITY.4.4.3`
   Status: `done`
@@ -1925,15 +1068,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: The optional emitter covers parse/rule scopes, recursion cutoffs, regex match/no-match, action/blind
     child dispatch, lifecycle blocks, cursor controls, source-boundary capture, and governed mark/capture positions
     where applicable; disabled or absent tracing is a no-op and traced/untraced results are identical on both ABIs.
-  Verification: **PASS 2026-07-15.** The optional emitter now spans balanced parse/rule scopes, recursion cutoffs,
-    regex match/no-match with alternatives/spans, action/blind child dispatch with target/cursor identity,
-    lifecycle source lines, all four cursor controls with stack transitions, successful/unusable source-boundary
-    capture, governed helper mark/capture positions, and post-mutation rule-slot capture/named marks. Disabled or
-    absent emitters remain no-ops. Focused success/no-match/action/blind/recursion paths preserve exact result JSON.
-    PUC Lua and LuaJIT pass 129/129; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local
-    CI passes both primary CLI environments at 61/61 and Phase 0 `1..1031` in 610 seconds. Public status is
-    `runtime-trace-events`; `.4.4.4` is active. Full frontend/compiler/function/staged trace remains `.5.3`.
   Commit: `LUA-BACKEND-PARITY.4.4.3 - instrument Lua runtime trace`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.4.3`.
 
 - ID: `LUA-BACKEND-PARITY.4.4.4`
   Status: `done`
@@ -1941,25 +1077,15 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused dual-ABI proofs, public API/status, README/mdBook, Knowledge Map, task/index/roadmaps, live
     docs, and canonical gates agree on the implemented runtime boundary without claiming dependency-incomplete
     full-pipeline tracing; parent `.4.4` closes and staged-function/native-loading `.5.1` becomes active.
-  Verification: **PASS 2026-07-15.** Knowledge Map-first comparison with completed Dart/Julia runtime boundaries
-    plus exact Lua API/source/test inventory confirms all six ordered levels, immutable environment-aware controls,
-    enter/exit/decision/mark/dump/log primitives, stdout/route/mirror sinks, reset/append, result-neutral runtime
-    entrypoints, typed runtime diagnostics, and parse/rule/regex/dispatch/recursion/lifecycle/cursor/boundary/
-    governed mark-capture events are implemented and documented. No runtime source change is needed. PUC Lua and
-    LuaJIT pass 129/129; coverage remains 246/105+1/122 and capability remains 64/0/0. Canonical local CI passes
-    CLI 61x2 and Phase 0 `1..1031` in 608 seconds. Public status remains `runtime-trace-events`; parent `.4.4`
-    closes, `.5.1` activates, and dependency-incomplete full-pipeline trace remains `.5.3`.
   Commit: `LUA-BACKEND-PARITY.4.4.4 - close Lua diagnostics trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.4.4.4`.
 
 - ID: `LUA-BACKEND-PARITY.5`
   Status: `done`
   Goal: Implement general current staged-function execution and native loading.
   Children: `.5.1`, `.5.2`, `.5.3`
-  Verification: **PASS 2026-07-15.** Staged function dispatch plus fixed/variadic/contextual execution, portable
-    native loading/composition, exact v1/v2/v3 outward descriptors, and caller-owned construction/runtime trace
-    close through `.5.1-.5.3`. PUC Lua and LuaJIT pass 155/155; all neutral callable/loading/capability/coverage/
-    public checks remain green; the census stays four-backend 64/0/0 until all-pass `.8.4`.
   Commit: `LUA-BACKEND-PARITY.5.3.3 - close Lua descriptor trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5`.
 
 - ID: `LUA-BACKEND-PARITY.5.1`
   Status: `done`
@@ -1976,11 +1102,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     and parenthesized contextual final blocks equivalently in the caller's dynamic context, with copied/restored
     bindings and no harray promotion. Explicit `{|params| ...}` literals and dynamic codeblock-variable calls remain
     routed through `FUTURE-PARITY-BACKLOG.11.7` to dependency-complete Lua owners.
-  Verification: **PASS 2026-07-15.** Deterministic staged body dispatch, fixed-v1 execution, exact variadic-v2
-    state/runtime, and final contextual-codeblock metadata/runtime are complete through `.5.1.1-.5`; PUC Lua and
-    LuaJIT pass 146/146, both neutral callable checkers and unchanged fixtures pass, public/native API/status agree,
-    capability remains 64/0/0, and every later boundary retains an explicit owner.
   Commit: `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.0`
   Status: `done`
@@ -1988,17 +1111,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Existing Lua shell/registry/compiled/runtime seams and neutral staged/callable contracts are audited
     before code; staged dispatch, fixed execution, variadic metadata/runtime, contextual-codeblock metadata/runtime,
     and no-drift each receive an exact owner without pulling dynamic callable literals out of `.11.7`.
-  Verification: **PASS 2026-07-15.** Knowledge Map-first inspection confirms Lua already projects exact-v1 function
-    nodes, preserves parse-job/body payloads, owns registry-first contract resolution and isolated pre-execution
-    frames, compiles function records, parses generic trailing block arguments, and executes built-in contextual
-    blocks—but it does not dispatch body jobs or call registered functions. The neutral staged provider is one
-    independent mechanism; fixed runtime execution depends on it; variadic-v2 requires typed shell/state evolution
-    before runtime; final `callback: codeblock` requires declaration/normalization before contextual execution.
-    Explicit `{|params| ...}` literals and bound codeblock calls remain dependency-gated `.11.7`. No behavior,
-    status, capability, or test count changes. PUC Lua and LuaJIT pass the unchanged 129/129; callable-signature
-    and callable-codeblock checkers pass 3/9/7 and 7/11/9/7/4/8 inventories; capability remains 64/0/0; mdBook,
-    memory, Knowledge Map, task metadata, doctrines, and whitespace gates pass. `.5.1.1` is active.
   Commit: `LUA-BACKEND-PARITY.5.1.0 - split Lua staged function execution`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.0`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.1`
   Status: `done`
@@ -2007,17 +1121,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `actionir-body.spec` to `builtin:actionir-body.spec`; record the governed digest/cache/compiled identity; parse
     exact body text through `parse_action_block(...)`; stitch `body_ast` under replace-field policy; expose composed
     shell+dispatch APIs; reject unsupported providers and sidecar drift on PUC Lua and LuaJIT.
-  Verification: **PASS 2026-07-15.** `linkedspec.staged_parser_registry` defensively round-trips exact
-    `StagedParseJob` values and stable-sorts by parent path, source span, job id, then input order. The sole
-    provider resolves `actionir-body.spec` to `builtin:actionir-body.spec`, records the exact governed digest and
-    neutral cache/compiled/result identity, and parses body text through `parse_action_block(...)`. Function
-    dispatch validates fixed-v1 path/name/params/arity/text/provider/top/result/failure fields, rejects duplicate
-    job ids, and rebuilds definitions/specs so source and stitched result remain isolated. Public one/many-job,
-    dispatch, stitch-only, and composed shell APIs are exported with typed contextual errors. PUC Lua and LuaJIT
-    pass 130/130; coverage remains 246/105+1/122, capability remains 64/0/0, status is
-    `runtime-staged-registry`, and `.5.1.2` is active.
-    Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 622 seconds.
   Commit: `LUA-BACKEND-PARITY.5.1.1 - add Lua staged body dispatch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.2`
   Status: `done`
@@ -2027,19 +1132,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `body_ast` in fresh scalar/array/harray stores, return local final/early-return values, restore caller stores on
     success/failure, feed receiver chains, execute-and-discard standalone calls, and diagnose arity/keyword/
     direct-mutual recursion without helper fallback on both ABIs.
-  Verification: **PASS 2026-07-15.** `interpreter.lua` resolves registered raw call names before canonical helper
-    dispatch, rejects keyword AST arguments before evaluation, evaluates positional arguments exactly once in
-    source order, and uses `prepare_invocation(...)` to copy values into fresh scalar/array/harray stores. Each
-    function executes a cached typed ActionIR block only after its canonical JSON exactly matches the governed
-    staged `body_ast`; missing or drifting staged bodies fail closed. Protected execution restores caller stores
-    and the active-function path on success/failure. Final expressions, local early returns, nested calls,
-    standalone value drop, array/string/number/harray result chains, caller isolation, exact arity, and direct/
-    mutual recursion cycles are locked. Registered keyword contracts use the portable
-    `user_function_keyword_arguments_unsupported` diagnostic instead of helper fallback. PUC Lua and LuaJIT pass
-    133/133; coverage remains 246/105+1/122, capability remains 64/0/0, public status is
-    `runtime-user-functions-fixed-v1`, and `.5.1.3.1` is active. Canonical local CI passes CLI 61x2 plus Phase 0
-    `1..1031` in 605 seconds.
   Commit: `LUA-BACKEND-PARITY.5.1.2 - execute Lua fixed user functions`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.2`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.3`
   Status: `done`
@@ -2048,13 +1142,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.5.1.2`
   Acceptance: The spec-owned shell, typed state, registry resolution, and runtime consume the unchanged neutral
     signature contract; descriptor admission remains `.5.3` and generated preservation/execution remains `.8`.
-  Verification: **PASS 2026-07-15.** `.5.1.3.1` preserves the exact fixed-v1/variadic-v2 signature union through
-    every native state boundary and resolves minimum/unbounded arity at 136/136. `.5.1.3.2` evaluates caller
-    arguments once left-to-right, copies the complete frame, binds fixed prefixes normally, and copies all extras
-    into one fresh typed rest array. The unchanged neutral fixture plus empty/nonempty/mixed/codeblock/freshness,
-    receiver-chain, minimum-arity, and keyword proof pass at 139/139 on both Lua ABIs. Descriptors remain `.5.3`,
-    generated source remains `.8`, status is `runtime-user-functions-variadic-v2`, and `.5.1.4.1` is active.
   Commit: children `.5.1.3.1`, `.5.1.3.2`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.3.1`
   Status: `done`
@@ -2063,19 +1152,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Fixed v1 retains exact params/arity; variadic v2 uses only the typed callable signature with final
     rest, minimum/unbounded maximum arity, positional-only resolution, identical staged copies, and all seven exact
     invalid-definition diagnostics without prematurely changing outward descriptor or generated-source contracts.
-  Verification: **PASS 2026-07-15.** Lua's typed `CallableSignature` preserves exactly kind/version/positional
-    parameters/final rest/minimum/unbounded maximum. Fixed-v1 shell, AST, staged jobs, registry, and compiled JSON
-    retain only top-level params/arity; variadic-v2 serialized state retains only `callable_signature`, with its
-    internal positional mirror derived from and checked against that signature. Exact shell-sidecar/staged identity,
-    mixed-version fences, all seven governed invalid definitions, duplicate/reserved identifiers, and malformed
-    rest/signature forms are locked through typed diagnostics. Registry resolution accepts every arity at or above
-    the fixed-prefix minimum, carries `at least N` expectations through call contracts, and preserves an unbounded
-    maximum. Runtime execution and outward descriptor conversion fail closed for `.5.1.3.2` and `.5.3`; generated
-    source remains `.8`. PUC Lua and LuaJIT pass 136/136; callable signature/codeblock checkers pass 3/9/7 and
-    7/11/9/7/4/8 inventories; coverage remains 246/105+1/122; capability remains 64/0/0; status is
-    `runtime-user-functions-variadic-v2-state`; and `.5.1.3.2` is active. Canonical local CI passes CLI 61x2 plus
-    Phase 0 `1..1031` in 620 seconds.
   Commit: `LUA-BACKEND-PARITY.5.1.3.1 - preserve Lua variadic signatures`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.3.2`
   Status: `done`
@@ -2084,18 +1162,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Arguments evaluate once left-to-right; fixed prefixes bind normally; extras bind as one fresh copied
     typed array including the empty case and nested/null/boolean/codeblock identities; minimum-arity and keyword
     failures are typed; results chain; the unchanged neutral fixture passes on PUC Lua and LuaJIT.
-  Verification: **PASS 2026-07-15.** `prepare_invocation(...)` retains every evaluated argument as an isolated
-    copy, binds fixed-prefix parameters through the established four-kind stores, and copies extras again into one
-    fresh `json.array()` bound through the final rest name. Empty/repeated calls do not alias; nested array/harray,
-    null, boolean, and structural codeblock identities survive; caller inputs and the separate typed-store mirror
-    remain isolated. The native interpreter executes the unchanged shared callable-signature fixture exactly,
-    including fixed/empty/nonempty/mixed/prefix-object/result-chain cases. Supplemental proof locks eager ordered
-    side effects, rest mutation, codeblock count, `at least N` runtime diagnostics, and keyword rejection. PUC Lua
-    and LuaJIT pass 139/139; callable signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; coverage remains
-    246/105+1/122; capability remains 64/0/0; public status is `runtime-user-functions-variadic-v2`; and
-    `.5.1.4.1` is active. Descriptor admission remains `.5.3`; generated source remains `.8`.
-    Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 621 seconds.
   Commit: `LUA-BACKEND-PARITY.5.1.3.2 - execute Lua variadic functions`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.4`
   Status: `done`
@@ -2104,10 +1172,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Dependencies: `.5.1.3`
   Acceptance: Declaration metadata and attached/parenthesized contextual execution match the neutral final-codeblock
     contract without implementing explicit callable literals or bound codeblock-variable invocation.
-  Verification: **PASS 2026-07-15.** Metadata and normalization pass 142/142 through `.5.1.4.1`; dynamic
-    contextual execution, restoration, precedence, result composition, and typed failures pass 146/146 through
-    `.5.1.4.2`. Explicit literals/general dynamic calls remain `.11.7`.
   Commit: `LUA-BACKEND-PARITY.5.1.4.2 - execute Lua contextual codeblocks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.4`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.4.1`
   Status: `done`
@@ -2116,18 +1182,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Final-only `callback: codeblock` carries exact typed metadata; attached and parenthesized contextual
     blocks normalize equivalently; invalid non-final/argument-list/missing-name/unknown-type forms reject; harray
     literals are never promoted; built-in contracts remain unchanged.
-  Verification: **PASS 2026-07-15.** Lua canonicalizes spec-produced `fixed_params` plus final `codeblock_param`
-    into ordered fixed-v1 `params`/`arity` and an exact one-entry `parameter_kinds` harray, then preserves identical
-    metadata through the body payload, staged parse job, typed AST round-trip, immutable registry, stitching, and
-    compiled JSON. Sidecar drift and the governed non-final, nested-argument-list, missing-name, and unknown-type
-    declarations reject. Callable metadata—not callee-name logic—normalizes attached and parenthesized user-function
-    blocks to the same zero-positional typed `codeblock_argument` without mutating source ActionIR; harray literals
-    remain harrays, and built-in contracts remain exact. Descriptor conversion fails closed for `.5.3`; callback
-    execution remains exclusively `.5.1.4.2`. PUC Lua and LuaJIT pass 142/142; signature/codeblock checkers pass
-    3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains 64/0/0; public status is
-    `runtime-user-functions-contextual-codeblock-metadata-v1`; and `.5.1.4.2` is active. Canonical local CI passes
-    CLI 61x2 plus Phase 0 `1..1031` in 605 seconds.
   Commit: `LUA-BACKEND-PARITY.5.1.4.1 - preserve Lua final codeblock metadata`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.4.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.4.2`
   Status: `done`
@@ -2136,17 +1192,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Attached and parenthesized zero-positional contextual blocks execute equivalently through the declared
     final slot, see current dynamic bindings, preserve copied/restored parameter stores, keep nonparameter effects
     visible where governed, return ordinary chainable values, and reject wrong-kind/missing callbacks on both ABIs.
-  Verification: **PASS 2026-07-15.** Runtime normalization keeps the contextual block inert until the registered
-    function frame is prepared, then the declared slot invokes it with zero positional arguments against current
-    copied function bindings. Nonparameter writes remain visible to later function statements; the entire frame
-    restores before returning to the outer caller; returned values feed receiver chains; and registered functions
-    plus governed helpers keep static precedence. Missing and harray callbacks, nonzero contextual calls, and
-    active self-invocation produce typed diagnostics. PUC Lua and LuaJIT pass 146/146; signature/codeblock checkers
-    pass 3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains 64/0/0; public status is
-    `runtime-user-functions-contextual-codeblock-v1`; and `.5.1.5` is active. Descriptors remain `.5.3`, generated
-    source remains `.8`, and explicit literals/general dynamic calls remain `.11.7`. Canonical local CI passes
-    CLI 61x2 plus Phase 0 `1..1031` in 622 seconds.
   Commit: `LUA-BACKEND-PARITY.5.1.4.2 - execute Lua contextual codeblocks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.4.2`.
 
 - ID: `LUA-BACKEND-PARITY.5.1.5`
   Status: `done`
@@ -2155,15 +1202,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused dual-ABI proof, neutral contract checkers/fixtures, public API/status, docs/book, task/index/
     roadmaps/live/KM, and canonical gates agree; parent `.5.1` closes and native loading `.5.2` activates without
     claiming descriptors/full-pipeline trace `.5.3`, generated execution `.8`, or dynamic callable literals `.11.7`.
-  Verification: **PASS 2026-07-15.** Source/API/test/public-doc/KM inventory finds no unowned staged-function
-    seam. The only live residue was stale Lua README prose claiming staged dispatch was absent; it now describes
-    the implemented registry/runtime and the correct later owners. PUC Lua and LuaJIT remain 146/146; callable
-    signature/codeblock checkers pass 3/9/7 and 7/11/9/7/4/8; coverage remains 246/105+1/122; capability remains
-    64/0/0; status remains `runtime-user-functions-contextual-codeblock-v1`; parent `.5.1` closes; and `.5.2`
-    activates. Descriptor/full trace `.5.3`, generated source `.8`, corpus/CLI later lanes, and explicit/dynamic
-    codeblocks `.11.7` remain explicit without partial claims. Canonical local CI passes CLI 61x2 plus Phase 0
-    `1..1031` in 644 seconds; mutation testing remains manual-only and was not run.
   Commit: `LUA-BACKEND-PARITY.5.1.5 - close Lua staged functions no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.1.5`.
 
 - ID: `LUA-BACKEND-PARITY.5.2`
   Status: `done`
@@ -2171,11 +1211,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.5.2.0`, `.5.2.1`, `.5.2.2`, `.5.2.3`, `.5.2.4`
   Acceptance: Consume exact name/path/root/UTF-8/stage contract; expose load/compile/create-engine conveniences as
     adapters over native in-memory APIs; remove any backend-local fallback or implicit transcoding.
-  Verification: **PASS 2026-07-15.** Typed deterministic resolve/load, cached spec-owned function parsing,
-    validation/compile composition, source-identified engines, exact neutral errors, direct 14/9/4 fixture use,
-    public APIs/status, and later-owner fences agree through `.5.2.1-.4`. PUC Lua and LuaJIT remain 153/153;
-    capability remains 64/0/0 and no host fallback, transcoding, or second loading path exists.
   Commit: `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.2`.
 
 - ID: `LUA-BACKEND-PARITY.5.2.0`
   Status: `done`
@@ -2184,19 +1221,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     Lua filesystem/UTF-8/parser/function-shell/staged/compiler/engine seams, and exact later trace/descriptor owners;
     prove whether the current Lua runtime can execute `specs/user_function_definition.spec`; separately own
     resolution/loading, automatic function-shell parsing, full pipeline/engine composition, and no-drift.
-  Verification: **PASS 2026-07-15.** Knowledge Map-first inspection confirms the portable contract separates
-    `name` from exact `path`, uses cwd exact/cwd suffix/declared direct roots in order, selects the first regular
-    file without recursive search, preserves strict UTF-8 text exactly, and exposes typed stage/code failures.
-    Lua already owns strict UTF-8 validation, rule-only parse/validate/compile, deterministic staged body dispatch,
-    full fixed-v1/variadic-v2/contextual execution, and runtime engine source identity. A direct native probe parses,
-    validates, and compiles `specs/user_function_definition.spec`, executes top rule `user_function_definitions`
-    against a real `fn zero()` source, and returns one exact `function_definition` node named `zero` with its exact
-    body text. The remaining work is therefore ordered as `.5.2.1` portable request/resolution/load plus 14/9/4
-    direct fixture consumption, `.5.2.2` automatic spec-defined function-shell parsing with no raw scanner,
-    `.5.2.3` parse/validate/compile/create-engine composition and identity/error proof, then `.5.2.4` no-drift.
-    No behavior, public status, capability, or test count changes; PUC Lua and LuaJIT remain 146/146, the native
-    contract checker passes 14/9/4, capability remains 64/0/0, and `.5.2.1` is active.
   Commit: `LUA-BACKEND-PARITY.5.2.0 - split Lua native spec loading`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.2.0`.
 
 - ID: `LUA-BACKEND-PARITY.5.2.1`
   Status: `done`
@@ -2208,11 +1234,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     use implicit roots; preserve exact caller path identity; read bytes in process; strictly decode UTF-8 without
     BOM removal, normalization, newline conversion, trimming, replacement, or implicit UTF-16/32 transcoding; and
     consume every shared 14 name, 9 resolution, and 4 text case directly on PUC Lua and LuaJIT.
-  Verification: `bash tools/run_lua_local.sh` passes PUC Lua 149/149 and LuaJIT 149/149; every shared 14/9/4 case
-    is consumed directly; supplemental Unicode-whitespace/control and exact-path boundaries pass; contract,
-    capability, coverage, 58-file public admission, mdBook, Knowledge Map, doctrines, and memory checks pass;
-    canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 1,265 seconds.
   Commit: `LUA-BACKEND-PARITY.5.2.1 - add Lua native spec loading`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.2.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.2.2`
   Status: `done`
@@ -2224,15 +1247,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     feed those nodes through the existing Unicode-exact shell projector and deterministic body-job dispatcher;
     expose a composed `parse_spec_with_staged_user_function_definitions(...)` API; and reject parser execution,
     output-shape, projection, or staged failures without introducing a raw `fn` scanner.
-  Verification: `bash tools/run_lua_local.sh` passes PUC Lua 151/151 and LuaJIT 151/151. The public parser resolves
-    the bundled grammar by exact module-relative path with no search roots, validates/compiles it once, reuses the
-    compiled state across direct and composed calls, returns fixed-v1/variadic-v2/final-codeblock nodes in source
-    order with Unicode character spans, and dispatches all body jobs. Focused injected parsers prove typed parser-
-    spec parse/validation, execution, output-shape, projection, and staged-error ownership. Capability remains
-    64/0/0; the parser CLI, corpus execution, loaded-source compile/engine composition, descriptors, generated
-    source, and full-pipeline trace remain unclaimed. Native 14/9/4, coverage 246/105+1/122, public 58/27/0,
-    mdBook/KM/governance checks pass; canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 631 seconds.
   Commit: `LUA-BACKEND-PARITY.5.2.2 - automate Lua function parsing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.2.2`.
 
 - ID: `LUA-BACKEND-PARITY.5.2.3`
   Status: `done`
@@ -2244,18 +1260,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     path for both request kinds; prove top-level function compilation/execution, parse-versus-validation ownership,
     runtime diagnostic identity, exact missing-name JSON, and unchanged inline in-memory APIs without CLI,
     subprocess, temporary-file, serialized-handoff, descriptor, or full-pipeline-trace claims.
-  Verification: **PASS 2026-07-15.** Public `load_and_compile_spec(...)` returns typed `LoadedCompiledSpec` with
-    exact nested request kind/value, resolved path, byte-identical decoded source, and backend-native compiled
-    state. It invokes the cached spec-owned function parser, validates once at the explicit boundary, compiles
-    without repeating validation, and exposes both `loaded:create_engine(...)` and
-    `create_loaded_spec_engine(...)`. Engine options are copied; named requests attach only the requested logical
-    name, exact-path requests attach no name, and both attach the resolved path. Fixed top-level function execution,
-    inline no-drift, runtime diagnostic identity, exact missing-name JSON, and distinct parse/validation/compile
-    stage/code failures pass. `bash tools/run_lua_local.sh` passes PUC Lua 153/153 and LuaJIT 153/153; native
-    14/9/4, capability 64/0/0, coverage 246/105+1/122, and public 58/27/0 checks pass. Canonical local CI passes
-    both 61/61 CLI environments and Phase 0 `1..1031` in 616 seconds. CLI, subprocess, temporary-file handoff,
-    descriptor, full-pipeline trace, generated source, and corpus execution remain unclaimed.
   Commit: `LUA-BACKEND-PARITY.5.2.3 - compose Lua native spec pipeline`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.2.3`.
 
 - ID: `LUA-BACKEND-PARITY.5.2.4`
   Status: `done`
@@ -2264,15 +1270,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Focused dual-ABI proof, direct neutral fixture consumption, public APIs/status, docs/book, task/index/
     roadmaps/live/KM, and canonical gates agree; parent `.5.2` closes and descriptor/full-pipeline trace `.5.3`
     activates without claiming generated source, corpus execution, or the parser CLI.
-  Verification: **PASS 2026-07-15.** Exact `init.lua` exports, loader composition, status, the two native-pipeline
-    tests, 14/9/4 fixture consumption, root/Lua docs, roadmaps/architecture/live state, mdBook API/status/handoff/
-    trace pages, task/index, and Knowledge Map agree. No unowned loading seam or stale current-behavior claim was
-    found. PUC Lua and LuaJIT remain 153/153; native 14/9/4, capability 64/0/0, coverage 246/105+1/122, and public
-    58/27/0 checks pass. No Lua source, behavior, status, capability, or test count changes. Parent `.5.2` closes
-    and `.5.3` activates; generated source, corpus execution, and parser CLI remain later owners. Mutation testing
-    remains manual-only and was not run. Canonical local CI passes both 61/61 CLI environments and Phase 0
-    `1..1031` in 607 seconds.
   Commit: `LUA-BACKEND-PARITY.5.2.4 - close Lua native loading no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.5.3`
   Status: `done`
@@ -2284,12 +1283,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     caller-owned emitter through native loading, frontend, validation, compilation, function-shell, staged dispatch,
     and runtime phases; preserve the four-backend census until all-pass Lua admission `.8.4`; no partial/gap state
     lacks a concrete next owner.
-  Verification: **PASS 2026-07-15.** Planning and ADR `0041` establish the exact descriptor/census policy;
-    `.5.3.1` implements the governed fixed-v1/variadic-v2/final-codeblock-v3 union; `.5.3.2` passes one caller
-    emitter through native IO, frontend/compiler/function/staged phases, engine construction, and runtime; and
-    `.5.3.3` confirms exact API/status/test/contract/book/KM no-drift. Both Lua ABIs pass 155/155 with status
-    `native-full-pipeline-trace-v1`; the capability census deliberately remains four-backend 64/0/0 until `.8.4`.
   Commit: `LUA-BACKEND-PARITY.5.3.3 - close Lua descriptor trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.3`.
 
 - ID: `LUA-BACKEND-PARITY.5.3.0`
   Status: `done`
@@ -2300,18 +1295,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     capability-manifest admission policy, and the history of any contradictory owner text; record foundational
     contract conflicts durably; split decision, descriptor, trace, and admission work so no behavior leaf starts
     before its exact source of truth and dependency are settled.
-  Verification: **PASS 2026-07-15.** Exact executable-contract, Lua fence, completed-backend precedent, API seam,
-    capability policy, and git-history inspection finds two neutral-policy dependencies before behavior code. The
-    fixed-v1 and variadic-v2 outward schemas are exact, but no neutral outward function-record schema places the
-    final-codeblock `parameter_kinds` metadata that ADR `0032` requires descriptors to preserve. Separately, the
-    original `.5.3` immediate-census wording predates commit `4a2adda9`, whose current four-backend census policy
-    keeps Lua outside until the dedicated parity tree completes. Runtime alone accepts a caller emitter; every
-    loading/frontend/validation/compiler/function/staged seam is now inventoried. `.5.3.0.1` owns the two director
-    decisions; `.5.3.1-.3` separately own descriptor implementation, one-emitter propagation, and no-drift/
-    selected admission. No source, behavior, status, capability, descriptor, or test expectation changes. PUC Lua
-    and LuaJIT remain 153/153; callable-signature/codeblock checkers remain 3/9/7 and 7/11/9/7/4/8; capability
-    remains 64/0/0; canonical local CI passes both 61/61 CLI environments and Phase 0 `1..1031` in 605 seconds.
   Commit: `LUA-BACKEND-PARITY.5.3.0 - split Lua descriptor trace admission`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.3.0`.
 
 - ID: `LUA-BACKEND-PARITY.5.3.0.1`
   Status: `done`
@@ -2321,18 +1306,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     explicit Lua fence under its exact future cross-backend owner; reconcile `.5.3` census wording with the newer
     full-backend admission policy; update the governing contract/decision/task/docs consistently before descriptor
     or census code changes.
-  Verification: **PASS 2026-07-15.** The director accepted both audit recommendations. ADR `0041` defines an exact
-    final-codeblock outward descriptor version 3 over fixed `params`/`arity` plus a sole final
-    `parameter_kinds[name] = "codeblock"` entry; executable schema/checker and Lua emission are ordered first in
-    `.5.3.1`, without generic callable-codeblock capability promotion or unrelated backend runtime work. Lua stays
-    outside the four-backend all-pass census through `.5.3-.7`; `.8.4` alone expands it after native, corpus, CLI,
-    generated, and generated-subset proof is complete. No source, descriptor, capability, status, or test
-    expectation changed. Artifact review safely removed reproducible Rust/Dart caches while preserving tracked
-    corpus/Git data and pre-existing nested-submodule work. Focused post-decision verification passes Lua 153/153
-    on PUC Lua and LuaJIT, callable-signature 3/9/7, callable-codeblock 7/11/9/7/4/8, capability 64/0/0, mdBook,
-    Knowledge Map, memory/doctrines, and whitespace. The immediately preceding `.5.3.0` canonical baseline remains
-    CLI 61x2 plus Phase 0 `1..1031`; a decision-only slice does not rebuild the cleaned Rust target.
   Commit: `LUA-BACKEND-PARITY.5.3.0.1 - settle descriptor and census policy`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.3.0.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.3.1`
   Status: `done`
@@ -2343,16 +1318,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     signatures/parameter kinds through staged and outward copies; remove the Lua fence without a Lua-only record
     shape; reject schema drift; and keep compiled descriptor metadata/order exact on both Lua ABIs. Do not promote
     generic callable-codeblock capability or force unrelated backend runtime work into this leaf.
-  Verification: **PASS 2026-07-15.** The neutral outward contract now owns exact fixed-v1, variadic-v2, and
-    final-codeblock-v3 record sequences, versions, parameter storage, compatibility aliases, and the sole-final-
-    parameter codeblock policy; the portable checker rejects drift before emitter code. Lua removes both fences,
-    selects the exact outward variant from typed registry state, preserves identical signature/parameter-kind
-    staged copies, and retains exact source order/count/JSON round-trip. Perl's already-existing final-codeblock
-    field set is outward v3 without internal/runtime change. PUC Lua and LuaJIT pass 153/153; signature/codeblock
-    checkers pass 3/9/7 and 7/11/9/7/4/8; focused Perl suites pass 76; mdBook, Knowledge Map, memory/doctrines, and
-    whitespace pass. Canonical local CI passes CLI 61x2 plus Phase 0 `1..1031` in 616 seconds. Capability stays
-    four-backend 64/0/0; generic callable codeblocks remain future; mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.5.3.1 - admit Lua function descriptors`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.3.1`.
 
 - ID: `LUA-BACKEND-PARITY.5.3.2`
   Status: `done`
@@ -2362,15 +1329,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     spec-owned function parser, function-shell projection, staged body resolve/load/compile/execute/stitch, engine
     creation, and runtime execution; ordered phase/rule events, quiet-default behavior, level filtering, sinks,
     error attribution, result neutrality, and no hidden emitter creation match the shared trace precedent.
-  Verification: **PASS 2026-07-15.** A pre-change direct native TOOLBOX-style probe showed the caller emitter at
-    zero events after load/compile and engine creation, with its first five events appearing only at runtime.
-    `SpecLoadOptions.trace` now carries that same typed identity through balanced IO/frontend/compiler/function/
-    staged/engine scopes and medium decisions; compiled/engine state retains nothing and no hidden factory runs.
-    Exact ordered topics, route output, disabled/low/medium filtering, balanced attributed validation failure,
-    descriptor/runtime neutrality, and invalid-emitter rejection pass. PUC Lua and LuaJIT pass 155/155 with status
-    `native-full-pipeline-trace-v1`; capability remains four-backend 64/0/0. Canonical local CI passes both 61/61
-    CLI environments and Phase 0 reaches true stop `1..1031` in 608 seconds. Mutation testing is not run.
   Commit: `LUA-BACKEND-PARITY.5.3.2 - propagate Lua full-pipeline trace`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.3.2`.
 
 - ID: `LUA-BACKEND-PARITY.5.3.3`
   Status: `done`
@@ -2380,32 +1340,15 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     task/index/roadmaps/live/KM, and canonical gates agree; the census remains the exact four-backend all-pass
     surface and `.8.4` remains its sole Lua expansion owner; parent `.5.3` closes without claiming generated source,
     corpus execution, or the primary parser CLI.
-  Verification: **PASS 2026-07-15.** Exact exports/options/status, the three-variant descriptor contract, both
-    neutral trace capability definitions, focused descriptor and full-pipeline trace tests, root/Lua docs,
-    mdBook API/status/handoff/compiler pages, task/index/roadmaps/live state, and Knowledge Map agree. No unowned
-    seam or stale current-behavior claim remains. PUC Lua and LuaJIT pass 155/155; callable-signature/codeblock
-    checks pass 3/9/7 and 7/11/9/7/4/8; native loading passes 14/9/4; coverage is 246/105+1/122; public aggregate
-    surface is 58/27/0; capability remains 64/0/0. No Lua source, status, behavior, manifest row, or test count
-    changes. Parent `.5.3` and `.5` close; corpus window `.6.1` activates; generated source, primary CLI, and census
-    expansion remain `.8.1-.8.4`. Canonical local CI passes both 61/61 CLI environments and Phase 0 reaches true
-    stop `1..1031` in 611 seconds. Mutation testing remains manual-only and was not run.
   Commit: `LUA-BACKEND-PARITY.5.3.3 - close Lua descriptor trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.5.3.3`.
 
 - ID: `LUA-BACKEND-PARITY.6`
   Status: `done`
   Goal: Reach complete interpreter-corpus parity.
   Children: `.6.1`, `.6.2`, `.6.3`
-  Verification: **PASS 2026-07-15.** Reusable native corpus execution validates all 105 fixtures before selection,
-    preserves exact typed outputs and result evidence, and continues after per-fixture failures. Three permanent
-    windows independently lock core 40/40, advanced/shipped 59/59, and governed 6/6 behavior. Final `.6.3` then
-    executes the complete manifest without selectors as one ordered 105/105 library gate and through the separate
-    developer corpus command. Default runner operation remains validation-only; `--execute` reports every fixture,
-    returns 0 for 105/105, 1 for fixture failures, and 2 for arguments or manifest drift. PUC Lua and LuaJIT pass
-    167/167 with public status `runtime-corpus-full`. The primary parser CLI, generated-source state, coverage
-    246/105+1/122, and capability 64/0/0 remain unchanged. Canonical local CI exits 0 with CLI 61/61 in default
-    and POSIX environments plus Phase 0 true reach `1..1031` in 621 seconds. Parent `.6` closes and `.7.1`
-    activates.
   Commit: `LUA-BACKEND-PARITY.6.3 - close full Lua corpus gate`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6`.
 
 - ID: `LUA-BACKEND-PARITY.6.1`
   Status: `done`
@@ -2413,15 +1356,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Children: `.6.1.0`, `.6.1.1`, `.6.1.2`, `.6.1.3`, `.6.1.4`
   Acceptance: Run ordered subsets, classify failures by mechanism, split repairs before code, and preserve exact
     expected values/endpoints rather than weakening fixtures.
-  Verification: **PASS 2026-07-15.** Typed segment-kind repair closes the sole measured residual without changing
-    its oracle; one reusable non-aborting executor then owns strict validation, selection, automatic native
-    execution, and typed proof records. Permanent tests admit exact core offsets 0-39 at 40/40 and governed
-    capability offsets 99-104 at 6/6 on both Lua ABIs. All outputs equal one wrapping of unchanged expected JSON;
-    exact byte/character endpoints are 1 for the core prefix and `2,1,2,1,5,5` for the governed window. PUC Lua
-    and LuaJIT pass 162/162. Public exports/status, CLI boundary, corpus data, coverage 246/105+1/122, and the
-    four-backend 64/0/0 capability census do not change. Canonical local CI exits 0 with CLI 61x2 and Phase 0
-    `1..1031` passing in 651 seconds (1,328.76 seconds total under concurrent load). `.6.2` owns offsets 40-98.
   Commit: `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.1`.
 
 - ID: `LUA-BACKEND-PARITY.6.1.0`
   Status: `done`
@@ -2431,22 +1367,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     parse/validate/compile/runtime APIs without changing source or fixtures; classify every failure by stage and
     mechanism; retrieve the canonical semantic contract for each residual; and create narrowly owned repair,
     executor, permanent-window, and closeout leaves before behavior work.
-  Verification: **PASS 2026-07-15.** The owned windows are the 40-case core prefix at offsets 0-39 and the six
-    governed capability fixtures at offsets 99-104; `.6.2` retains offsets 40-98 for advanced helpers, functions,
-    recursion, and shipped specs. Disposable manifest-ordered native probes pass the same 45/46 exact cases on PUC
-    Lua and LuaJIT. All six capability fixtures and 39/40 core fixtures pass; the sole residual is offset 20
-    `terse_11_4_nested_mixed_value_path_assignment`, an output mismatch after successful parse, validation,
-    compilation, match, and endpoint execution. Canonical `terse-nested-value-path-assignment` semantics require a
-    numeric index segment into a hash to fail without mutation and return null. Lua currently discards the parsed
-    segment kind at `assign_nested_access`, lets generic harray `write_index(...)` stringify numeric key `0`, and
-    therefore adds an invalid `"0":"bad"` field and returns the mutated root. `.6.1.1` owns only that repair;
-    `.6.1.2` owns the reusable library executor/result boundary; `.6.1.3` permanently admits offsets 0-39; and
-    `.6.1.4` admits offsets 99-104 and closes no-drift. No Lua source, fixture, expected value, public status,
-    capability row, or test count changes in this planning slice. Focused PUC Lua and LuaJIT suites remain
-    155/155; mdBook, Knowledge Map, memory/task/doctrine, and whitespace checks pass; canonical local CI passes
-    both 61/61 CLI environments and Phase 0 reaches true stop `1..1031` in 606 seconds. Mutation testing remains
-    manual-only and was not run.
   Commit: `LUA-BACKEND-PARITY.6.1.0 - split Lua controlled corpus admission`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.1.0`.
 
 - ID: `LUA-BACKEND-PARITY.6.1.1`
   Status: `done`
@@ -2456,18 +1378,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     write arrays and key segments to traverse or write hashes, preserve copy-on-write/no-autovivification behavior,
     return null without root mutation for missing/wrong-kind/gap paths, and pass the exact offset-20 oracle case on
     both Lua ABIs without weakening its expected JSON.
-  Verification: **PASS 2026-07-15.** Lua now normalizes index-expression values to finite nonnegative integer
-    positions, preserves key versus index segment identity for nested reads and writes, and rejects every
-    wrong-container transition instead of routing numeric indices through harray stringification. Nested assignment
-    evaluates all segment expressions in order, then the RHS, before root/path validation; it mutates only a deep
-    copied root and stores that root only after the complete path succeeds. Focused proof locks valid dynamic
-    numeric-string indices, hash/array traversal, append-at-length, wrong-kind reads/writes, missing intermediates,
-    expression side effects on rejected paths, unchanged roots, null results, and stored false preservation. The
-    exact manifest offset-20 source passes with unchanged wrapped expected JSON and byte/character cursor 1. PUC
-    Lua and LuaJIT pass 157/157; disposable ordered offsets 0-39 plus 99-104 pass 46/46 on both ABIs. No fixture,
-    expected value, parser grammar, public status, capability row, or later corpus boundary changes. Canonical
-    local CI passes CLI 61x2 plus Phase 0 `1..1031` in 619 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.1.1 - preserve Lua nested path segment kinds`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.6.1.2`
   Status: `done`
@@ -2478,18 +1390,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     output structurally; retain actual value/output/match/endpoints/trace/diagnostic/failure stage; report every
     selected fixture without aborting; and prove controlled scalar/aggregate/dispatch/lifecycle/function/boundary/
     failure cases while keeping the validation-only corpus CLI unchanged.
-  Verification: **PASS 2026-07-15.** Lua now validates the complete strict manifest before named or zero-based
-    offset/limit selection, then automatically parses spec-defined functions, explicitly validates and compiles,
-    constructs fixture-name/exact-path-identified engines, executes native runtime, and compares exact one-level
-    wrapped typed JSON structurally. Typed fixture records retain copied expected/actual value/output, match,
-    byte/character endpoints, per-fixture trace lines, typed runtime diagnostics, stable failure stage, and failure
-    text. Parse/validate/compile/execute/match/compare/unexpected failures remain records so every selected fixture
-    runs. Controlled scalar, nested aggregate, action/blind dispatch, lifecycle shape, top-level function,
-    boundary/trace, parse/validation/runtime/mismatch/no-match, post-failure continuation, and strict selection
-    proof passes 160/160 on PUC Lua and LuaJIT. The developer corpus CLI remains validation-only; public status,
-    capability census, manifest/fixtures/expected JSON, and permanent corpus windows are unchanged. Canonical
-    local CI passes CLI 61x2 plus Phase 0 `1..1031` in 623 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.1.2 - add Lua library corpus execution`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.1.2`.
 
 - ID: `LUA-BACKEND-PARITY.6.1.3`
   Status: `done`
@@ -2498,15 +1400,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: The exact manifest offsets 0-39 pass in order on PUC Lua and LuaJIT through the library executor;
     permanent assertions lock count, first/last names, zero failures, exact expected outputs, and unchanged
     endpoints without parser/runtime or fixture work outside routed failures.
-  Verification: **PASS 2026-07-15.** One permanent library-executor test validates the full unchanged 105-case
-    manifest, selects exact zero-based offsets 0-39, and locks 40 results in manifest order from
-    `proof_edge_array_literal` through `terse_2_2_5_2_attached_switch_blocks`. Every result passes, matches, has
-    byte and character endpoint 1, has no failure stage/text, and structurally equals exactly one wrapping of its
-    own unchanged expected JSON. PUC Lua and LuaJIT pass 161/161 with 40/40 core, zero failures. No production
-    source, manifest/fixture/expected JSON, public status, capability census, CLI, or offsets 40-104 changed.
-    Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 640 seconds (1,316.33 seconds total
-    under concurrent load). Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.1.3 - admit Lua core corpus prefix`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.1.3`.
 
 - ID: `LUA-BACKEND-PARITY.6.1.4`
   Status: `done`
@@ -2515,20 +1410,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Exact manifest offsets 99-104 pass in order on both Lua ABIs; permanent assertions lock the six
     governed names, endpoints, and outputs; API/status/tests/root and Lua docs/mdBook/KM/task/live state agree;
     parent `.6.1` closes without changing capability-census membership; and `.6.2` activates for offsets 40-98.
-  Verification: **PASS 2026-07-15.** One permanent library-executor test validates the complete unchanged
-    105-case manifest and selects exact zero-based offsets 99-104. It locks these six ordered names:
-    `capability_cursor_control_surface`, `capability_pure_helper_surface`,
-    `capability_position_helper_surface`, `capability_control_marker_surface`,
-    `capability_capture_anonymous_surface`, and `capability_capture_named_surface`. All six pass, match, retain no
-    failure, and structurally equal exactly one wrapping of their unchanged expected JSON. Their exact byte and
-    character endpoints are `2,1,2,1,5,5`. PUC Lua and LuaJIT pass 162/162. `init.lua` retains the exact corpus
-    load/execute/result/query exports and public status `native-full-pipeline-trace-v1`; the primary CLI remains an
-    explicit scaffold and the developer corpus CLI remains validation-only. Coverage is 246/105+1/122 with zero
-    omissions, and ADR `0041` keeps capability at four-backend 64/0/0 until sole Lua admission `.8.4`. No
-    production source, manifest/fixture/expected JSON, public status, CLI behavior, or census row changed.
-    Canonical local CI exits 0 with CLI 61x2 and Phase 0 `1..1031` passing in 651 seconds (1,328.76 seconds total
-    under concurrent load). Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.1.4 - admit Lua capability corpus window`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.1.4`.
 
 - ID: `LUA-BACKEND-PARITY.6.2`
   Status: `done`
@@ -2538,17 +1421,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     backend-local expected files. This includes exact `portmap_constant`, `simenv_multiline_value`,
     `ebnf_expression_rules`, `ebnf_logging_annotation`, `lib_reader_sattribute`, and `lib_reader_cattribute` proof
     after the helper/control/output owners on which those cases depend.
-  Verification: **PASS 2026-07-15.** Planning measured the exact 59-case window at the same 50/59 on both Lua
-    ABIs and routed nine failures to four toolbox-proven mechanisms. Dependency-ordered repairs for action-edge
-    child-call reuse, receiver copy, flat-array hash splicing, and public leading trivia raised the unchanged
-    window through 56/59, 57/59, 58/59, and 59/59. Independent successor measurement found no residual. One
-    recurring production-library test now validates the full unchanged 105-case manifest, selects exact offsets
-    40-98, and locks all 59 literal names in order, exact one-level wrapped expected output, match state, byte and
-    character endpoints, 59 passes, and zero failures. PUC Lua and LuaJIT pass 166/166. Public status/CLI,
-    generated source, corpus/oracle data, coverage 246/105+1/122, and capability 64/0/0 remain unchanged. Parent
-    `.6.2` closes and complete-manifest `.6.3` activates. Canonical local CI exits 0 with CLI 61x2 and Phase 0
-    `1..1031` passing in 621 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.2.6 - admit Lua advanced corpus window`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.0`
   Status: `done`
@@ -2558,21 +1432,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     retain exact names, stages, outputs, endpoints, trace evidence, and canonical Perl generated-source evidence;
     retrieve existing Knowledge Map mechanisms before diagnosis; and create narrowly owned repair, residual-
     measurement, permanent-admission, and no-drift leaves before changing runtime behavior or expected values.
-  Verification: **PASS 2026-07-15.** Both Lua ABIs produce the same 50/59 exact result. The nine residuals are
-    `terse_2_3_5_2_hash_receiver_value_chains` (compare), three HLink cases (execute), two EBNF cases (compare),
-    `simenv_multiline_value` (execute), `ds_vhistory_version_entry` (compare), and `pplugin_empty` (compare).
-    Production debug trace plus canonical generated Perl prove four current mechanisms: action-edge `call(child)`
-    executes the already-selected child without marking/reusing the edge result and the fallback executes it a
-    second time (all three HLink, both EBNF, and SimEnv); receiver-form `.copy()` discards its evaluated harray
-    receiver (hash receiver fixture); `hash(flat_array(defs))` does not classify `flat_array` as a hash splice
-    (PPlugin); and public `runtime_parse(...)` starts at byte zero instead of mirroring the Perl wrapper's leading
-    blank/comment-line skip (history). `.6.2.1-.4` own those repairs, `.6.2.5` remeasures and splits any newly
-    exposed residual before further behavior, and `.6.2.6` owns permanent exact 59/59 admission/no-drift. This
-    planning slice changes no production source, test, corpus data, expected JSON, public status/CLI, or capability
-    census. PUC Lua and LuaJIT remain 162/162; mdBook, Knowledge Map, memory/doctrine, and canonical local CI pass.
-    The canonical gate includes CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in
-    629 seconds. Mutation testing remains manual-only and was not run.
   Commit: `LUA-BACKEND-PARITY.6.2.0 - split Lua advanced corpus residuals`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.0`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.1`
   Status: `done`
@@ -2583,19 +1444,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     unrelated named calls retain normal execution. Focused tests lock call count, cursor, value, recursion, and
     passive-child behavior on both Lua ABIs; the six currently affected corpus cases are re-executed unchanged and
     the full offsets 40-98 window is remeasured to route any successor mechanism.
-  Verification: **PASS 2026-07-15.** `call(target)` now routes through the current action-edge state when the
-    labels agree, caches the selected child result, refreshes `retv`, and prevents fallback re-execution. A
-    structurally passive child—no lifecycle, action-edge, blind-edge, or plain action payload—is not re-searched
-    after the parent dependency regex has already consumed its match; its cached result is null and trace marks
-    `passive=1`. Unrelated named calls retain ordinary direct execution. One focused trace-backed test locks a
-    non-self child at one entry, passive child at zero re-searches/one edge dispatch, self-recursive cursor/value/
-    call count, and an unrelated call followed by normal edge fallback. PUC Lua and LuaJIT pass 163/163. Exact
-    offsets 40-98 improve identically from 50/59 to 56/59: all three HLink, both EBNF, and SimEnv cases now pass
-    unchanged. Only the separately owned receiver-copy, PPlugin flat-array hash-splice, and history leading-trivia
-    compare residuals remain. Corpus/oracle data, public status/CLI, coverage, and capability census are unchanged.
-    Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach
-    `1..1031` in 634 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.2.1 - reuse Lua action-edge child calls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.1`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.2`
   Status: `done`
@@ -2605,18 +1455,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `copy(value)`, missing/undefined values, nested isolation, and subsequent array/harray/string-compatible
     continuations retain their governed behavior. The unchanged hash-receiver corpus fixture returns its expected
     sixth value `2` on both Lua ABIs.
-  Verification: **PASS 2026-07-15.** Zero-argument receiver `.copy()` now deep-copies the fluent chain's already
-    evaluated current value instead of falling through to function-form zero-argument `copy()` and returning
-    null. One focused test proves one-time scalar receiver evaluation, nested harray/array isolation, harray,
-    derived-harray, array, and string continuation types, missing receiver null behavior, and unchanged
-    `copy(value)` / `copy()` function forms. PUC Lua and LuaJIT pass 164/164. The unchanged
-    `terse_2_3_5_2_hash_receiver_value_chains` fixture returns exact wrapped output
-    `[["a,b,c",9,2,0,2,2,0]]` at endpoint 1 on both ABIs; exact offsets 40-98 rise identically from 56/59 to
-    57/59. Only the separately owned PPlugin flat-array hash-splice and history leading-trivia compares remain.
-    Corpus/oracle data, public status/CLI, coverage, and capability census are unchanged. Canonical local CI exits
-    0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach `1..1031` in 628 seconds. Mutation
-    testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.2.2 - preserve Lua receiver copy values`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.2`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.3`
   Status: `done`
@@ -2626,17 +1466,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     key/value tokens rather than stringifying the Lua table as one key; empty input yields an empty harray, nested
     values remain copied, and ordinary non-splice arguments retain their existing boundaries. The unchanged
     `pplugin_empty` fixture returns `[{}]` on both Lua ABIs.
-  Verification: **PASS 2026-07-15.** Lua hash-splice classification now includes canonical `flat_array`, so
-    direct-call and terminal receiver forms contribute the helper's copied array members as ordered alternating
-    key/value tokens to both `hash(...)` and `harray(...)`. Focused proof covers direct and receiver spellings,
-    empty direct/receiver results, positioned insertion, the harray alias, nested copied isolation after source
-    mutation, and an ordinary unwrapped array retained as one copied value. PUC Lua and LuaJIT pass 164/164. The
-    unchanged `pplugin_empty` fixture returns exact `[{}]` at endpoint 0 on both ABIs; exact offsets 40-98 rise
-    identically from 57/59 to 58/59. Only the separately owned `ds_vhistory_version_entry` public leading-trivia
-    compare remains under `.6.2.4`. Corpus/oracle data, public status/CLI, coverage, and capability census are
-    unchanged. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true
-    reach `1..1031` in 634 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.2.3 - splice Lua flat arrays into hashes`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.3`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.4`
   Status: `done`
@@ -2646,17 +1477,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     lines exactly as the Perl wrapper does, while ordinary indexed-variable reads and nonleading content remain
     unchanged. Focused entry-boundary tests and the unchanged `ds_vhistory_version_entry` oracle pass on both Lua
     ABIs without weakening expected output.
-  Verification: **PASS 2026-07-15.** Public `runtime_parse(...)` now computes the byte boundary after complete
-    leading blank lines or leading `#` comment lines, including a comment ending at EOF, then updates both the
-    live cursor and match registers before top-rule entry. Ordinary leading spaces/content are not trimmed.
-    Focused Unicode proof locks initial and final absolute byte/character offsets, remaining input, terminal-comment
-    EOF behavior, the history-shaped null-object mechanism, and an unchanged scalar-held `payload[1]` read. PUC
-    Lua and LuaJIT pass 165/165. The unchanged `ds_vhistory_version_entry` fixture returns exact wrapped expected
-    output with null object at endpoint 62 on both ABIs; exact offsets 40-98 rise identically from 58/59 to 59/59
-    with no successor residual. Corpus/oracle data, public status/CLI, coverage, and capability census are
-    unchanged. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true
-    reach `1..1031` in 644 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.6.2.4 - mirror Lua public leading trivia`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.4`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.5`
   Status: `done`
@@ -2666,16 +1488,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     remaining failure with production trace, Knowledge Map retrieval, and canonical toolbox/generated-source
     evidence; create mechanism-sized child leaves before changing behavior; or record a zero-residual boundary and
     activate permanent admission when all 59 pass unchanged.
-  Verification: **PASS 2026-07-15.** Separately built PUC Lua and LuaJIT PCRE2 adapters executed the production
-    library corpus path with `{ offset = 40, limit = 59 }`. Each run first validated the complete 105-case
-    manifest, selected 59 results in manifest order from `terse_2_2_6_2_attached_while_blocks` through
-    `lib_reader_cattribute`, and reported 59 passes, zero failures, and true aggregate status. No successor
-    residual exists, so no behavior repair or new child leaf is needed; permanent admission `.6.2.6` activates.
-    The complete Lua local gate remains 165/165 on PUC Lua and LuaJIT. Production source, tests, corpus/oracle
-    data, expected JSON, public status/CLI, coverage 246/105+1/122, and capability 64/0/0 are unchanged. Mutation
-    testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0
-    true reach `1..1031` in 622 seconds.
   Commit: `LUA-BACKEND-PARITY.6.2.5 - record Lua advanced zero residual`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.5`.
 
 - ID: `LUA-BACKEND-PARITY.6.2.6`
   Status: `done`
@@ -2685,35 +1499,16 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     expected outputs, match/endpoints, 59 passes, and zero failures on PUC Lua and LuaJIT; docs/KM/task/roadmap/
     architecture/live state agree; parent `.6.2` closes and full-manifest `.6.3` activates without premature CLI,
     generated-source, public-status, or capability-census promotion.
-  Verification: **PASS 2026-07-15.** A permanent production-library test validates all 105 manifest entries before
-    selecting `{ offset = 40, limit = 59 }`. Its literal ledger locks every selected name in exact manifest order
-    from `terse_2_2_6_2_attached_while_blocks` through `lib_reader_cattribute`, the exact byte/character endpoint
-    for each case, match state, no failure stage/text, and structural equality with exactly one wrapping of each
-    unchanged expected JSON value. Aggregate assertions require 59 selected results, 59 passes, zero failures,
-    and true status. PUC Lua and LuaJIT pass 166/166. Production source, manifest/fixtures/oracles, public status,
-    primary and developer CLI behavior, generated-source state, coverage 246/105+1/122, and capability 64/0/0 do
-    not change. Parent `.6.2` closes and `.6.3` becomes the sole active corpus leaf. Mutation testing was not run.
-    Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus Phase 0 true reach
-    `1..1031` in 621 seconds.
   Commit: `LUA-BACKEND-PARITY.6.2.6 - admit Lua advanced corpus window`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.2.6`.
 
 - ID: `LUA-BACKEND-PARITY.6.3`
   Status: `done`
   Goal: Make 105/105 exact interpreter execution recurring.
   Acceptance: One strict manifest-driven library gate and corpus runner pass all fixtures, reject manifest drift,
     and run through native in-memory APIs before CLI work is admitted.
-  Verification: **PASS 2026-07-15.** One permanent no-selector library test validates manifest format/count and
-    exact directory/file/UTF-8/JSON state, then executes all 105 fixtures in manifest order. It locks first/last
-    names, result count/order, match state, absent failures, 105 passes, zero failures, and exactly one wrapping of
-    each unchanged expected JSON value. The thin developer runner retains validation-only default operation and
-    adds bare `--execute`: it prints ordered `PASS`/`FAIL` records plus an exact summary, returns 0 for the complete
-    105/105 corpus, 1 for a recorded fixture mismatch, and 2 for manifest drift. The focused gate invokes full
-    runner execution directly and PUC Lua/LuaJIT suites pass 167/167. Public status advances from
-    `native-full-pipeline-trace-v1` to `runtime-corpus-full`. The primary `linkedspec-lua` command remains the exact
-    exit-2 scaffold; generated source, coverage 246/105+1/122, and capability 64/0/0 remain later-owned.
-    Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX environments plus
-    Phase 0 true reach `1..1031` in 621 seconds.
   Commit: `LUA-BACKEND-PARITY.6.3 - close full Lua corpus gate`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.6.3`.
 
 - ID: `LUA-BACKEND-PARITY.7`
   Status: `done`
@@ -2726,67 +1521,31 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Implement the exact ADR `0023` option/argument schema, strict UTF-8 source/input boundaries,
     canonical JSON, failures/exits, and trace without subcommands, positionals, environment-dependent parsing, or
     semantics unavailable to in-memory callers.
-  Verification: **PASS 2026-07-15.** `lua/src/linkedspec/primary_cli.lua` implements only the portable adapter:
-    exact long/short help, strict case-sensitive option parsing with no abbreviations/negations/positionals,
-    deterministic named/file/inline source selection, compile-before-input ordering, strict preserved UTF-8,
-    native loaded/inline engine execution, recursively canonical JSON, stable exits 0/1/2, and ADR `0024` phase
-    trace levels/escaping/emoji/stdout/route/mirror/reset/append behavior. The executable resolves its actual cwd
-    through the narrow native filesystem module and delegates all parser semantics to existing in-memory APIs.
-    Focused direct/process proof passes 169/169 on PUC Lua and LuaJIT. The unchanged neutral process suite passes
-    61/61 under both default and `POSIXLY_CORRECT=1` as diagnostic evidence; `.7.2` owns making those two legs
-    recurring and adding Lua to the shared matrix. Public status deliberately remains `runtime-corpus-full` until
-    that admission. Corpus 105/105, generated-source state, coverage 246/105+1/122, and capability 64/0/0 do not
-    change. Mutation testing was not run. Canonical local CI exits 0 with CLI 61/61 in default and POSIX
-    environments plus Phase 0 true reach `1..1031` in 606 seconds.
   Commit: `LUA-BACKEND-PARITY.7.1 - implement Lua primary CLI adapter`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.7.1`.
 
 - ID: `LUA-BACKEND-PARITY.7.2`
   Status: `done`
   Goal: Pass the shared 61-case process suite in default and POSIX environments.
   Acceptance: Add Lua as a first-class backend to the recurring neutral CLI matrix; stdout/stderr/files/exit bytes
     and executable-display substitution are exact.
-  Verification: **PASS 2026-07-15.** `tools/run_lua_local.sh` now replaces its three-case process smoke with the
-    unchanged shared manifest under explicit default and `POSIXLY_CORRECT=1` environments; both pass 61/61 while
-    PUC Lua and LuaJIT remain 169/169 and the developer corpus command remains 105/105. The warmed matrix accepts
-    `LINKEDSPEC_LUA_CMD`, builds only the primary PUC native adapters in unique caller-owned temporary storage,
-    removes that tree on exit, and runs the same command/display substitution as the focused gate. Perl, Rust,
-    Dart, Julia, and Lua pass 5 backends x 2 environments x 61 exact cases. The canonical local gate now tracks
-    and syntax-checks the matrix's native-build dependency and accurately labels its optional five-backend leg.
-    Public status advances from `runtime-corpus-full` to `runtime-corpus-primary-cli`. Primary adapter semantics,
-    corpus/oracles, generated-source state, coverage 246/105+1/122, and capability 64/0/0 do not change. Mutation
-    testing was not run. Canonical local CI exits 0 with reference CLI 61/61 in default and POSIX environments plus
-    Phase 0 true reach `1..1031` in 607 seconds.
   Commit: `LUA-BACKEND-PARITY.7.2 - admit Lua primary CLI matrix`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.7.2`.
 
 - ID: `LUA-BACKEND-PARITY.7.3`
   Status: `done`
   Goal: Close CLI/native/corpus no-drift and public usage docs.
   Acceptance: Direct process families, package/corpus gates, executable installation guidance, limitations, mdBook,
     KM, and local CI agree; primary CLI contains no corpus/status extensions.
-  Verification: **PASS 2026-07-15.** The immediately preceding implementation/admission proof remains exact:
-    PUC Lua and LuaJIT pass 169/169, focused PUC primary processes pass the unchanged manifest 61/61 under default
-    and POSIX environments, the separate developer corpus runner executes 105/105, the warmed matrix passes
-    5x2x61, and canonical local CI reaches Phase 0 `1..1031` in 607 seconds. A checkout-local disposable PUC build
-    independently proves direct `require("linkedspec")` status, executable help, exact inline execution, and
-    105-fixture corpus validation when `LUA_PATH`/`LUA_CPATH` remain exported for the session. Static adapter/
-    manifest audit confirms `status` and `corpus` are rejected positionals, not primary extensions. The audit
-    root-causes and corrects two documentation drifts: mdBook foundation prose still described the historical
-    exit-2/validation-only scaffold, and the Lua README removed native modules before later command examples used
-    them. Public setup now keeps caller-built modules alive behind cleanup-safe `trap`, explicitly claims no
-    LuaRocks/global installation, and preserves generated source/census ownership under `.8.1-.8.4`. No runtime,
-    CLI, corpus, generated-source, manifest, or capability behavior changes. Mutation testing was not run.
-    Canonical local CI exits 0 with reference CLI 61/61 in default and POSIX environments plus Phase 0 true reach
-    `1..1031` in 608 seconds.
   Commit: `LUA-BACKEND-PARITY.7.3 - close Lua primary usage no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.7.3`.
 
 - ID: `LUA-BACKEND-PARITY.8`
   Status: `done`
   Goal: Implement generated Lua source and complete capability admission.
   Children: `.8.1`, `.8.2`, `.8.3`, `.8.4`
-  Verification: **PASS 2026-07-16.** Deterministic exact v1/v2/v3 emission, fresh dual-ABI isolation, ten-family
-    execution/four rejections/portable trace, exact interpreter-first 8/105 proof, and all-pass census admission
-    are recurring. Generated source and the complete capability census both report 80/0/0.
   Commit: `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8`.
 
 - ID: `LUA-BACKEND-PARITY.8.1`
   Status: `done`
@@ -2795,14 +1554,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Effective compiled state, including exact fixed-v1/variadic-v2/final-codeblock-v3 callable records, stable
     identity/metadata/errors, Unicode/strict-UTF-8 payload boundary, direct/traced entrypoints, caller-owned
     isolation, and cleanup pass without altering native interpreter/CLI.
-  Verification: **PASS 2026-07-16.** Deterministic exact-state emission `.8.1.1` and fresh-process dual-ABI
-    isolation `.8.1.2` together close the scaffold. PUC Lua and LuaJIT each pass 173/173, including valid/corrupt
-    generated modules, Unicode metadata/direct/traced result identity, stable missing-rule/compile-load failures,
-    explicit repository/native module paths, and caller-owned cleanup after success and injected failure. Native
-    interpreter/CLI/corpus semantics and capability 64/0/0 remain unchanged. Canonical local CI passes reference
-    CLI 61x2 and Phase 0 `1..1031` in 607 seconds. Exact plans/families/portable generated trace activate under
-    `.8.2`; subset admission and census remain `.8.3-.8.4`.
   Commit: `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.1`.
 
 - ID: `LUA-BACKEND-PARITY.8.1.0`
   Status: `done`
@@ -2812,23 +1565,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     the neutral generated-source contract, effective Lua compiled state, canonical JSON/strict-UTF-8 boundary,
     public trace/runtime seams, completed backend emitters, and fresh-process cleanup requirements; then create
     separate deterministic-emission and isolated-load/run leaves with no runtime, CLI, corpus, or census change.
-  Verification: **PASS 2026-07-16.** `git blame` proves the broad `.8.1` emitter/isolation leaf was drafted on
-    2026-07-11 and its fixed-v1/variadic-v2 wording on 2026-07-12, before ADR `0041` and the executable
-    `final_codeblock_v3` descriptor landed on 2026-07-15. The neutral generated-source contract requires
-    compiled state plus source identity, deterministic Unicode host source, strict-UTF-8 persistence, exact
-    metadata/errors, and direct/traced roles; plan validation, ten-family routing, portable generated trace roles,
-    and accepted-subset admission remain later-owned. Lua's typed effective state is reconstructible without its
-    internal compiled JSON: source-ordered immutable function definitions preserve exact v1/v2/v3 metadata,
-    last-definition `compiled_rule_order` selects effective rules, `spec_ast.to_json/from_json` rebuilds `SpecFile`,
-    and `json.encode` validates UTF-8 and sorts object keys. Completed Dart/Julia precedents isolate generated host
-    loading in caller-owned temporary storage; ASCII hex is the dependency-free Lua payload/identity spelling.
-    `.8.1.1` now owns deterministic source/metadata/errors/entrypoints and `.8.1.2` owns fresh-process PUC/LuaJIT
-    valid/corrupt load, direct/traced run, stable failure, and cleanup proof. No source, runtime, CLI, corpus,
-    generated capability, public status, or census row changes. Generated-source/callable/capability checks pass;
-    the complete Lua gate passes 169/169 on both ABIs, primary CLI 61/61 in default and POSIX environments, and
-    corpus 105/105. Canonical local CI exits 0 with both reference CLI legs at 61/61 and Phase 0 `1..1031` in 609
-    seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.8.1.0 - split Lua generated scaffold`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.1.0`.
 
 - ID: `LUA-BACKEND-PARITY.8.1.1`
   Status: `done`
@@ -2838,19 +1576,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     last-definition rule order, source-ordered callable records across fixed-v1/variadic-v2/final-codeblock-v3,
     canonical strict-UTF-8 payload encoding, and generated direct/traced entrypoint roles. Repeated equivalent input
     emits identical native Lua source without changing native interpreter, CLI, corpus, plan, or census behavior.
-  Verification: **PASS 2026-07-16.** `lua/src/linkedspec/source_emitter.lua` exposes compatibility and
-    source-identified emitters, exact contract/version/identity metadata, all four stable stages/seven codes, and
-    typed portable emit/compile-load/execution errors. It reconstructs one effective typed `SpecFile` from
-    source-ordered immutable function definitions plus last-definition compiled rule order, preserving fixed-v1,
-    variadic-v2, and final-codeblock-v3 records. Canonical strict-UTF-8 sorted-key JSON and Unicode source identity
-    are embedded as lowercase ASCII hex; equivalent input emits identical bytes. The native generated module
-    rebuilds compiled state through public APIs and exposes direct/traced result roles without changing the native
-    interpreter, CLI, corpus, plan, status, or census. PUC Lua and LuaJIT each pass 172/172, primary CLI 61/61 in
-    default and POSIX environments, and corpus 105/105. Generated-source, callable-signature, callable-codeblock,
-    capability 64/0/0, Knowledge Map, memory architecture, mdBook, doctrine, and whitespace checks pass. Canonical
-    local CI exits 0 with reference CLI 61/61 in both environments and Phase 0 `1..1031` in 620 seconds. Mutation
-    testing was not run. Fresh-process/corrupt dual-ABI proof remains `.8.1.2`; plans/families remain `.8.2`.
   Commit: `LUA-BACKEND-PARITY.8.1.1 - emit deterministic Lua source`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.1.1`.
 
 - ID: `LUA-BACKEND-PARITY.8.1.2`
   Status: `done`
@@ -2860,19 +1587,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     storage, load it in a fresh process with explicit repository/native module paths, prove exact Unicode metadata,
     direct and traced result identity, stable missing-rule and corrupt-payload failures, and remove every generated
     file/directory on success or failure. Portable generated family trace roles remain owned by `.8.2`.
-  Verification: **PASS 2026-07-16.** The dual-ABI test now writes one deterministic generated module, one
-    deliberately corrupt payload variant, and one host runner under a unique caller-owned `/private/tmp` root.
-    It launches the exact current PUC Lua or LuaJIT binary in a fresh process with explicit `LUA_PATH` and
-    ABI-specific `LUA_CPATH`. Exact stdout/empty stderr prove Unicode contract/version/identity metadata,
-    direct/traced `λ:$` result identity, native trace activity, and typed missing-rule attribution. The corrupt
-    module loads as Lua source but fails effective-state reconstruction with exact
-    `compile_or_load_generated_source` / `generated_source_compile_failed` identity. The shared temporary-root
-    wrapper verifies absence after normal completion and after an injected exception; no generated roots remain.
-    PUC Lua and LuaJIT each pass 173/173, primary remains 61x2, and corpus remains 105/105. Contract/capability
-    64/0/0, Knowledge Map, memory, doctrines, mdBook, and whitespace checks pass. Canonical local CI passes
-    reference CLI 61/61 in both environments and Phase 0 `1..1031` in 607 seconds. Portable generated family
-    trace remains `.8.2`; mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.8.1.2 - isolate generated Lua hosts`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.1.2`.
 
 - ID: `LUA-BACKEND-PARITY.8.2`
   Status: `done`
@@ -2880,21 +1596,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Ordered public rows, four rejections, per-root/nested family dispatch, portable trace/source identity,
     one isolated all-family matrix, and the unchanged variadic callable fixture execute independently with values
     equal to the native interpreter; generated Lua uses reconstructed typed rest arrays, not host vararg dispatch.
-  Verification: **PASS 2026-07-16.** Lua exposes typed plan rows and the exact ordered ten-family vocabulary,
-    validates count/label/known-family/unknown-family drift before execution with exact portable codes and
-    attribution, and embeds an authoritative immutable internal plan plus fresh public plan copies. Generated
-    execution threads the validated per-label map through every root and nested rule; the map, not compiled edge
-    presence, selects regex versus blind dispatch. Low-level trace adds `generated_rule_enter`,
-    `generated_family_decision`, and `generated_rule_exit` with source identity/rule/family beside unchanged native
-    trace. One 26-row combined specification proves all ten root families, nested dispatch, interpreter-equal
-    values, four rejections, attributed execution failure, and one fresh-process all-family module on both ABIs.
-    The unchanged neutral callable fixture reconstructs exact variadic-v2 state and fresh typed rest arrays through
-    emitted source rather than host varargs. Initial focused proof classified ordinary `Default` as `rep_acode`
-    because Lua's native `is_repetition` also denotes repeated default scanning; exact contract mode enumeration
-    root-caused and corrected that boundary without changing runtime behavior. PUC Lua and LuaJIT each pass
-    176/176, primary remains 61x2, corpus remains 105/105, and capability remains 64/0/0. Canonical local CI passes
-    reference CLI 61x2 and Phase 0 `1..1031` in 626 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.8.2 - execute generated Lua families`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.2`.
 
 - ID: `LUA-BACKEND-PARITY.8.3`
   Status: `done`
@@ -2902,19 +1605,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
   Acceptance: Interpreter-first values, independent generated load, metadata/plans/trace identity, callable-
     signature preservation/execution, checker-owned path/order/no-skip/cleanup, and complete Lua package/CLI/corpus
     gates pass before capability promotion.
-  Verification: **PASS 2026-07-16.** The neutral contract now names `lua/test/run.lua`, and its executable checker
-    locks Lua's exact eight-case count, direct contract-list consumption/order, full-manifest validation,
-    interpreter-before-emission proof, independent host load, metadata/plan/trace identity, caller-owned cleanup,
-    and unconditional test registration. One permanent test validates all 105 fixtures before selecting the exact
-    contract rows; proves each interpreter value against expected JSON; emits eight source-identified modules; and
-    launches the exact current PUC Lua or LuaJIT runtime with explicit package/native paths. The fresh host loads
-    every module independently, validates and projects every plan, checks exact metadata and result maps in
-    contract order, executes the fixed user-function fixture, and observes portable enter/decision/exit trace with
-    the first source identity. Exact stdout, empty stderr, and root absence close the process boundary. PUC Lua and
-    LuaJIT each pass 177/177; primary remains 61x2, corpus remains 105/105, capability remains 64/0/0, and the
-    contract checker reports Dart/Julia/Lua 8/105 plus strict Rust 105/105. Canonical local CI passes reference CLI
-    61x2 and Phase 0 `1..1031` in 620 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.8.3 - admit generated Lua subset`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.3`.
 
 - ID: `LUA-BACKEND-PARITY.8.4`
   Status: `done`
@@ -2924,16 +1616,8 @@ module; `linkedspec-lua` is a thin distinct executable implementing the exact sh
     `future.variadic_user_functions` entry only after native and generated callable proofs pass; PUC Lua primary and
     LuaJIT compatibility policies are honest; roadmap/book/KM/live docs/local CI/cleanup pass; no outstanding Lua
     behavior is hidden as a limitation.
-  Verification: **PASS 2026-07-16.** The manifest and checker require exactly Perl, Rust, Dart, Julia, and Lua;
-    every one of the 16 Lua rows is `pass` with direct source and recurring evidence, producing 80 pass / 0 partial
-    / 0 gap. The independent generated-source contract records Lua `pass`. Satisfied `future.lua_backend` and
-    `future.variadic_user_functions` entries are removed; the mixed generic callable-codeblock exclusion is
-    narrowed to explicit callable values, arbitrary dynamic calls, and remaining Rust/Dart/Julia parity. PUC Lua
-    and LuaJIT pass 177/177, primary 61x2, corpus 105/105, and the shared matrix 5x2x61. Generated, callable,
-    native-loading, capability, coverage 246/105+1/122, Knowledge Map, memory, doctrine, task metadata, mdBook,
-    cleanup, and whitespace gates pass. Canonical local CI passes both reference CLI legs at 61/61 and Phase 0
-    `1..1031` in 625 seconds. Mutation testing was not run.
   Commit: `LUA-BACKEND-PARITY.8.4 - admit Lua capability parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.16`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree LUA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.16 --id LUA-BACKEND-PARITY.8.4`.
 
 ## Current frontier
 

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4673,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-direct-read-autovivification-gap.md","sha256":"4b257ffce04cac82f51dc77185156e9f93c215f9f0268377b1b66ce7701221e2","type":"member"}
 {"bytes":3054,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-direct-read-selector-lifetime.md","sha256":"cfcc7fffbaac7dfa1eb68991e5cecdcf2e376826e409f28bf56da65d15d64bdb","type":"member"}
 {"bytes":2871,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-duplicate-regex-slot-identity-admission.md","sha256":"878804ad80f33b833853f8148a4f16acdb5e271e37f07e02a3090d2ffd710efa","type":"member"}
 {"bytes":3373,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dynamic-codeblock-receiver-guard-gap.md","sha256":"9768d54b3bdd38669e3a122dd4bfd27c859fa20810b972a7b2d192dd02ed0008","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7052,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-carriers.md","sha256":"2f1c41689335e2fba107e8cb7ba82a9037cfcec7b37ccf2991ebde88d76a8704","type":"member"}
 {"bytes":5234,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-dormant-red.md","sha256":"dd2afb41a0cec2b455201c25509e1ee6fee078b6313cc3c1639160dc5c2b4ff2","type":"member"}
 {"bytes":4899,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-project-data-ssd-storage.md","sha256":"095cd14dd2ed6781230bb9ed1c1f575327b1e393b71d260ce859e73385228285","type":"member"}
-{"bytes":3057,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-push-aggregate-value-abi.md","sha256":"3b235fa484cf52e285d5a2d440f6fef8fc013a3453d431e794a60f0699f12527","type":"member"}

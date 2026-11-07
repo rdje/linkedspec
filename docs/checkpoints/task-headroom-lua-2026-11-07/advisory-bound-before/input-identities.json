@@ -1,0 +1,47 @@
+{
+  "docs/checkpoints/task-headroom-lua-2026-11-07/check_advisory_candidate.py": {
+    "bytes": 1194,
+    "sha256": "e93d48456214a10f7781e91636772a3ec9798cc8afc87687fb15699154da5606",
+    "mode": 420
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/capture_advisory_bound.py": {
+    "bytes": 2684,
+    "sha256": "f687e14810ad8ddbc2ac9c5f84fcb39027282bd91ab38daef7b588701aea0718",
+    "mode": 420
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/run_advisory_step.py": {
+    "bytes": 1356,
+    "sha256": "5e24737226fe5ada2b5503d3a0cd3d39eb0aac0ad739ce35c28a24c07e45fe63",
+    "mode": 420
+  },
+  "tools/check_claim_verification.py": {
+    "bytes": 15261,
+    "sha256": "8ca565149654d95d38b225d9607fd74e7c59562cf84513cc6df784ad8d014a03",
+    "mode": 420
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "mode": 493
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "mode": 493
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+    "mode": 493
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.8.json": {
+    "bytes": 28149,
+    "sha256": "b7328f9ad20ab282224832d8147a266763353556903018e3b175ee866ded6d2e",
+    "mode": 420
+  },
+  "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+    "bytes": 161101,
+    "sha256": "99ae6834a39947d32b6a677a5e73c086dbf3158d6adebad53601572192ec90ef",
+    "mode": 420
+  }
+}

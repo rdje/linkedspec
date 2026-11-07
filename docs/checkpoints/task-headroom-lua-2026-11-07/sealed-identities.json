@@ -1,0 +1,258 @@
+{
+  "docs/checkpoints/task-headroom-lua-2026-11-07/capture.py": {
+    "bytes": 5703,
+    "sha256": "c655bfe41f17fa45e1776b1d9b3e51d9f3d100a6d3d466944a9157dbac01d387"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/activation.txt": {
+    "bytes": 41,
+    "sha256": "510b51ca22c9869a48abf9b8d0f97461536008b259c514841620668abc434744"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/actual-migrated-images.tar.gz": {
+    "bytes": 27882,
+    "sha256": "adc42442bd150f77469406923ffdfea487e54a3e0addd8f322bef63a7cb2a0e5"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-stderr.log.gz": {
+    "bytes": 43,
+    "sha256": "39e5bfcb1a50482a06fcb86a070ec66cb9c93c1aedef185dc6589f37c96ad012"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-stdout.log.gz": {
+    "bytes": 216,
+    "sha256": "1f99fed6cf3369c0508081110aeb943614f8710af7a14adcd9ca55f933ae5012"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-stdout.log.gz": {
+    "bytes": 154,
+    "sha256": "e0194f74f7a11428bf62f26c26ceb9dc84c48b6c909f6a43f77f4a169b9485c6"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/commands.json": {
+    "bytes": 2073,
+    "sha256": "f380ead7b5aee6a1559716108bb0523b5e15c82c30dfbff02bf0f4b2ad1d5565"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/host.json": {
+    "bytes": 91,
+    "sha256": "76e92986c19a5566ab87ef300b765052605e07eb3791dd3ba95d9cd53408aaef"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/input-identities.json": {
+    "bytes": 26679,
+    "sha256": "dfc1f2b9bfdccd27be363e223e579570810642100dde2e7037ac76602ae8aabb"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/inputs-before-first-migration.tar.gz": {
+    "bytes": 4423026,
+    "sha256": "9beb9aee73a7b9a45a7f329b2c8a802b2c62af7cf401f20bb57f9ad6a2e7eafa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/migrated-identities.json": {
+    "bytes": 368,
+    "sha256": "1dc9c4651a2e8a67208fc2f33cef868c22d3a23a5a4f7a1e17bf34be92074cc6"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-stdout.log.gz": {
+    "bytes": 140,
+    "sha256": "246f149e3d612421bda78b7fa16bcc8b51c8df70c6259621dc57a908ac208a14"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-stdout.log.gz": {
+    "bytes": 106,
+    "sha256": "88e13d350275dca9f6e95da404708ca569d514bcc8c8e9065026459e42e0a2da"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-stdout.log.gz": {
+    "bytes": 63817,
+    "sha256": "e332f238970defb923ae6ff7cc098a257315479ec675a931a7883c79eaa72dea"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/result.json": {
+    "bytes": 507,
+    "sha256": "972f7f72fd66ce2a3551a0b059039d70c9aa719e4f7e8afc25be1de13d35d745"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/tracked-after.patch.gz": {
+    "bytes": 127987,
+    "sha256": "b5cdf60773bf9ccb559cc375f6afc5ebea137ec5804dbd824a482d1b19dc2773"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/tracked-before.patch.gz": {
+    "bytes": 2905,
+    "sha256": "37336126dcb7fdc35237ea9291679033b25534815f5c1ba027e1ee1de638aa24"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-stdout.log.gz": {
+    "bytes": 109,
+    "sha256": "cd793f93951b3247fe2ca3603c52acde96a88d09f996c3548b598ca537a93bad"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-stdout.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/actual-qualified-images.tar.gz": {
+    "bytes": 90192,
+    "sha256": "1395daf4c7430230a627603d39dd9799717393953e2cf12f10e33841f025f898"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/boundary-after.json": {
+    "bytes": 339,
+    "sha256": "6d773aa64c60b10f23ea086dd7d93ab6cac4bbae13e1695fc94db2f3d526ff37"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/boundary-before.json": {
+    "bytes": 392,
+    "sha256": "8e266399796bd059a63201804a5ca3ce5cef02ddfa99e330d9a45cddf5443477"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-stdout.log.gz": {
+    "bytes": 216,
+    "sha256": "1f99fed6cf3369c0508081110aeb943614f8710af7a14adcd9ca55f933ae5012"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-stdout.log.gz": {
+    "bytes": 154,
+    "sha256": "e0194f74f7a11428bf62f26c26ceb9dc84c48b6c909f6a43f77f4a169b9485c6"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/commands.json": {
+    "bytes": 1375,
+    "sha256": "d42e33519ebb46cce2766c28c09416d67d91ac3f5afeb8ff2d9a51747ae1c339"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/dependency-identities.json": {
+    "bytes": 777,
+    "sha256": "3383888c24d39600eecf224fa6cb8e35d65e31ec9b7f9c934001ba7afd136733"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/input-identities.json": {
+    "bytes": 27078,
+    "sha256": "1d79c941f88c3442c1463c297a6810efb8eab2d2f881077e95fcbe51a6ce50d1"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/inputs-before-first-restoration.tar.gz": {
+    "bytes": 4323517,
+    "sha256": "1ae5268602869a13b07e1ae154dc49bd88cc9228c1f3e3521803d88eeafc0539"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-stdout.log.gz": {
+    "bytes": 106,
+    "sha256": "88e13d350275dca9f6e95da404708ca569d514bcc8c8e9065026459e42e0a2da"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-stdout.log.gz": {
+    "bytes": 63817,
+    "sha256": "e332f238970defb923ae6ff7cc098a257315479ec675a931a7883c79eaa72dea"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-stdout.log.gz": {
+    "bytes": 109,
+    "sha256": "cd793f93951b3247fe2ca3603c52acde96a88d09f996c3548b598ca537a93bad"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-stdout.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/qualify_legacy_tail.py": {
+    "bytes": 5010,
+    "sha256": "1eb932a8fa1032a68ff939cecba70d2347c2d41acb61684476cadb321a09f81c"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/review.py": {
+    "bytes": 10724,
+    "sha256": "f60ef64b0c0d8552f983040dc4c5f6eb6e87d4ecb28996d67ad85119a1aec809"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/run_review.py": {
+    "bytes": 1003,
+    "sha256": "98567257860bfc672050fde1ca32ec43f33e333bbe9b09f87690aa32018eee5a"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/seal.py": {
+    "bytes": 763,
+    "sha256": "1ff325c6977032f64daaabc5c5113b76e40030c94a621b07f72f94340f7402e3"
+  }
+}

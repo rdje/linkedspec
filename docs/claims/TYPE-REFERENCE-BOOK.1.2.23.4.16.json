@@ -1,0 +1,1262 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.16",
+  "claims": [
+    {
+      "name": "qualified-lua-task-narrative-preservation",
+      "statement": "The qualified dated Lua task migration retains157 IDs/all complete CORE fields,149 selected closed contracts/eight unchanged short bodies and the exact232154-byte current/trailing tail, renewing115343 current-text bytes. First readonly recovery passes seven reason-sensitive denials.",
+      "scope": "Exact Lua source at2286c6606a9fb86290801e1c8a0053e59d342a1f and retained qualified images only. First generic migration is semantic RED despite passing narrative/Unicode/capability/language-closure metadata checks: case-sensitive frontier handling loses the current tail. Separate restoration preserves that tail; generic last-node query still includes chronology and repair4.17 remains pending after feature coverage, earlier if capacity blocks progress. Complete original source is retained by ancestor Git/immutable epoch. Current-text capacity is distinct from disk-size savings. No new tool/limit/policy/runtime/Lua5.4 or complete generic-boundary admission, current whole-project census, performance or historical audit claim. OS/Python/Git/toolchain/transitive input closure and general isolation remain4.2/SESSION5. Unchanged tracked metadata-consumer inputs remain at declared activation Git plus retained before patch; direct writers/query inputs/all task/archive images were captured before use.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-lua-2026-11-07/review.py",
+        "granularity": "Each of157 named current IDs and complete multiline CORE fields, each149 selected closed contract/eight short bodies, exact current tail and full source, and each retained public query channel.",
+        "result": "{\n  \"result\": \"PASS\",\n  \"current_ids\": 157,\n  \"archived_closed\": 149,\n  \"unchanged_short_bodies\": 8,\n  \"legacy_tail_bytes\": 232154,\n  \"qualified_bytes_renewed\": 115343,\n  \"effective_denials\": [\n    \"actual-first-tail-loss\",\n    \"changed-Goal\",\n    \"missing-current-ID\",\n    \"changed-short-body\",\n    \"forged-source-hash\",\n    \"truncated-full-query\",\n    \"rewritten-historical-node-query\"\n  ],\n  \"original_phase\": \"semantic RED despite passing metadata\",\n  \"limit\": \"Generic legacy node-query/boundary repair remains TYPE-REFERENCE-BOOK.1.2.23.4.17; no runtime/Lua5.4 admission\"\n}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Passing ID/status metadata establishes frontier preservation, or a changed Goal/missing ID/changed short body/source hash/query output can pass.",
+        "oracle": "Independent line-state section/field projection recognizes the actual lowercase boundary, compared with retained accepted Git source and actual first/qualified images. It does not reuse the producer regex.",
+        "red_control": "Actual first migration loses232154 current-tail bytes despite all captured metadata exits0; qualifier retains that semantic RED and restores the exact tail. Seven specific denials include actual first loss, changed Goal, missing ID, changed short body, forged source hash, truncated whole query and rewritten historical node-query output. First readonly exits0 with empty stderr; original unsafe producer/results remain unchanged."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/actual-index.txt.gz",
+            "sha256": "cca2e92be6300608c7a630ce2147dbc05c7efa5abe43b0d31303179103b73e4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/command.json",
+            "sha256": "00f52b12f2d2971b3635c5b30d93d1b9b1254283a1b09feb1fced7631f843dfb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/input-identities.json",
+            "sha256": "aea7cfc8046579724b78ec0db3b86d0c26bffa4c8241c90f6bf2ef35ee2641ef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/inputs-before-validator.tar.gz",
+            "sha256": "f9730fca4730eeb66060038a072d587d7f1606cc6ad9c833718d383c856f65be",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/stdout.log.gz",
+            "sha256": "f3533256f2754e64ba56ce8ec0440eaba1abeef942df26c7d8299f0be800d546",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/actual-index.txt.gz",
+            "sha256": "cca2e92be6300608c7a630ce2147dbc05c7efa5abe43b0d31303179103b73e4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/command.json",
+            "sha256": "00f52b12f2d2971b3635c5b30d93d1b9b1254283a1b09feb1fced7631f843dfb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/input-identities.json",
+            "sha256": "6c440040289cf3a8c95210635d96c0568bf16a32f7f15eff223c0c642b5574e5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/inputs-before-validator.tar.gz",
+            "sha256": "cd61274e38bd0ce7773d4cf6ba6703d498de85eeeabe67dd7baa2430850afa48",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/stderr.log.gz",
+            "sha256": "a9304ab97f2087181db5bd11e88decf760a40cd8245fd784d820741ddcf53b80",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-edited-book.md.gz",
+            "sha256": "ec03a742dbfa6c346dfc2f0fff9917b370ded9023ed71b3086bfd97751ca1c44",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-original-claim.json.gz",
+            "sha256": "993dd9e41df3549407b4d9be15248ba26794b3f46a4832a38846842dd4887b9c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-preservation-result.json",
+            "sha256": "827028de334d72b5bab222a4dbcc04c54f6e3d89a4c4375ac8ed0a68c44c6686",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-preserver-source.py.gz",
+            "sha256": "766b84a3d01e0c4c11369c5453e7466881bbdae56549c68220054d4191e27ae2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.command.json",
+            "sha256": "6c0596262b00c74ec95d0f1fe97bdfb9fc1d0bced78b081bfff3642048ca2078",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.stdout.log.gz",
+            "sha256": "57729a3d84f948c4d5ea033745c867449eba02369ceac6e93bcc89be3f95cf41",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.command.json",
+            "sha256": "75ee08d85a902d9375678c84ca0ee4e798acd09002590ab25e9b17e43b302370",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.stdout.log.gz",
+            "sha256": "0650d3268e451fe216328c68a3b77f4bdcbd5d64a1bde38bc4c9762fbe4647c9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.command.json",
+            "sha256": "4dbbb5e72a5f0ff756754039a0cf358cddf1de177da999682bcaa767d644a689",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.stdout.log.gz",
+            "sha256": "8934c103ce644663690c9b344abaa4c934be1d038413c22e8660999bb6c7e73a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.command.json",
+            "sha256": "03aff09cbaa64d878fb0951a6e0811cbc450069a7e763945fde2b7a72d709219",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.stdout.log.gz",
+            "sha256": "0650d3268e451fe216328c68a3b77f4bdcbd5d64a1bde38bc4c9762fbe4647c9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.command.json",
+            "sha256": "36f47135d72dda0b91706a91bb05e687db994614b5ed5424b404421e8b7c01d5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.producer.py.gz",
+            "sha256": "e96d18d595f26f78c1ee1180ea50fb9e3430ab689989e85aaaa1edd3f22f4a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.staged-book.md.gz",
+            "sha256": "ec03a742dbfa6c346dfc2f0fff9917b370ded9023ed71b3086bfd97751ca1c44",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.stderr.log.gz",
+            "sha256": "0e1dd7f93e58ef4954893264ae8d3832a0db56c1e2b7838d3922cd256e7eaedb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/book-before-containment.md.gz",
+            "sha256": "0e0ad15c850c485191256ffb4beb73db56331d54929f3a9f6a1e8ab13f1a30a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/book-budget-record.json",
+            "sha256": "efa64d30ec1cbe6aa7e95bde35ee2e932c54c3b0916c5183604a028753599911",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/capture.py",
+            "sha256": "c655bfe41f17fa45e1776b1d9b3e51d9f3d100a6d3d466944a9157dbac01d387",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/capture_advisory_bound.py",
+            "sha256": "f687e14810ad8ddbc2ac9c5f84fcb39027282bd91ab38daef7b588701aea0718",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/capture_advisory_validation.py",
+            "sha256": "bf5d3ff13191f85759b5d8f02ff9df4688b5e5dda8503316fd56b1a68a234f42",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/check_advisory_candidate.py",
+            "sha256": "e93d48456214a10f7781e91636772a3ec9798cc8afc87687fb15699154da5606",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/check_advisory_claim.py",
+            "sha256": "7d3d4a8af42ede67ca36e05dd0d618366b0fb3690e5904c50dff8fe612f1eae6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/check_final_claims.py",
+            "sha256": "1be79401d6e20e926bbb8310abb066b0bd8e368c6ef6374b19ae9646873dc14c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/contain_book_budget.py",
+            "sha256": "9dcf8e9791c44f4d1588ab109410e66562f0ae6eadb37896cef7c234bbfc320c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/activation.txt",
+            "sha256": "510b51ca22c9869a48abf9b8d0f97461536008b259c514841620668abc434744",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/actual-migrated-images.tar.gz",
+            "sha256": "adc42442bd150f77469406923ffdfea487e54a3e0addd8f322bef63a7cb2a0e5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-stderr.log.gz",
+            "sha256": "39e5bfcb1a50482a06fcb86a070ec66cb9c93c1aedef185dc6589f37c96ad012",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-stdout.log.gz",
+            "sha256": "1f99fed6cf3369c0508081110aeb943614f8710af7a14adcd9ca55f933ae5012",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-stdout.log.gz",
+            "sha256": "e0194f74f7a11428bf62f26c26ceb9dc84c48b6c909f6a43f77f4a169b9485c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/commands.json",
+            "sha256": "f380ead7b5aee6a1559716108bb0523b5e15c82c30dfbff02bf0f4b2ad1d5565",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/host.json",
+            "sha256": "76e92986c19a5566ab87ef300b765052605e07eb3791dd3ba95d9cd53408aaef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/input-identities.json",
+            "sha256": "dfc1f2b9bfdccd27be363e223e579570810642100dde2e7037ac76602ae8aabb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/inputs-before-first-migration.tar.gz",
+            "sha256": "9beb9aee73a7b9a45a7f329b2c8a802b2c62af7cf401f20bb57f9ad6a2e7eafa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migrated-identities.json",
+            "sha256": "1dc9c4651a2e8a67208fc2f33cef868c22d3a23a5a4f7a1e17bf34be92074cc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-stdout.log.gz",
+            "sha256": "246f149e3d612421bda78b7fa16bcc8b51c8df70c6259621dc57a908ac208a14",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-stdout.log.gz",
+            "sha256": "88e13d350275dca9f6e95da404708ca569d514bcc8c8e9065026459e42e0a2da",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-stdout.log.gz",
+            "sha256": "e332f238970defb923ae6ff7cc098a257315479ec675a931a7883c79eaa72dea",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/result.json",
+            "sha256": "972f7f72fd66ce2a3551a0b059039d70c9aa719e4f7e8afc25be1de13d35d745",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/tracked-after.patch.gz",
+            "sha256": "b5cdf60773bf9ccb559cc375f6afc5ebea137ec5804dbd824a482d1b19dc2773",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/tracked-before.patch.gz",
+            "sha256": "37336126dcb7fdc35237ea9291679033b25534815f5c1ba027e1ee1de638aa24",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-stdout.log.gz",
+            "sha256": "cd793f93951b3247fe2ca3603c52acde96a88d09f996c3548b598ca537a93bad",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-stdout.log.gz",
+            "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/preserve_advisory_claim.py",
+            "sha256": "3633bcafcbf8af189c3f192342a1d2ad979357226c5ea9c5d943810764a0109a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/actual-qualified-images.tar.gz",
+            "sha256": "1395daf4c7430230a627603d39dd9799717393953e2cf12f10e33841f025f898",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/boundary-after.json",
+            "sha256": "6d773aa64c60b10f23ea086dd7d93ab6cac4bbae13e1695fc94db2f3d526ff37",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/boundary-before.json",
+            "sha256": "8e266399796bd059a63201804a5ca3ce5cef02ddfa99e330d9a45cddf5443477",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-stdout.log.gz",
+            "sha256": "1f99fed6cf3369c0508081110aeb943614f8710af7a14adcd9ca55f933ae5012",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-stdout.log.gz",
+            "sha256": "e0194f74f7a11428bf62f26c26ceb9dc84c48b6c909f6a43f77f4a169b9485c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/commands.json",
+            "sha256": "d42e33519ebb46cce2766c28c09416d67d91ac3f5afeb8ff2d9a51747ae1c339",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/dependency-identities.json",
+            "sha256": "3383888c24d39600eecf224fa6cb8e35d65e31ec9b7f9c934001ba7afd136733",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/input-identities.json",
+            "sha256": "1d79c941f88c3442c1463c297a6810efb8eab2d2f881077e95fcbe51a6ce50d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/inputs-before-first-restoration.tar.gz",
+            "sha256": "1ae5268602869a13b07e1ae154dc49bd88cc9228c1f3e3521803d88eeafc0539",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-stdout.log.gz",
+            "sha256": "88e13d350275dca9f6e95da404708ca569d514bcc8c8e9065026459e42e0a2da",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-stdout.log.gz",
+            "sha256": "e332f238970defb923ae6ff7cc098a257315479ec675a931a7883c79eaa72dea",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-stdout.log.gz",
+            "sha256": "cd793f93951b3247fe2ca3603c52acde96a88d09f996c3548b598ca537a93bad",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-stdout.log.gz",
+            "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualify_legacy_tail.py",
+            "sha256": "1eb932a8fa1032a68ff939cecba70d2347c2d41acb61684476cadb321a09f81c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-command.json",
+            "sha256": "6ec76efad541aa42e0b07000e3ed24a7b3b29318cf5c60e5853a645231de148f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-result.json",
+            "sha256": "dee20569a5a22fc5ac01bd38dac50d2798da9917de704097af8e48554e442f82",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-stdout.log.gz",
+            "sha256": "96c492f1052d14af9fdd65219957aaad4fe7cdc4248cb816d6eeecf4cc168769",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review.py",
+            "sha256": "f60ef64b0c0d8552f983040dc4c5f6eb6e87d4ecb28996d67ad85119a1aec809",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/run_advisory_step.py",
+            "sha256": "5e24737226fe5ada2b5503d3a0cd3d39eb0aac0ad739ce35c28a24c07e45fe63",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/run_review.py",
+            "sha256": "98567257860bfc672050fde1ca32ec43f33e333bbe9b09f87690aa32018eee5a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/seal.py",
+            "sha256": "1ff325c6977032f64daaabc5c5113b76e40030c94a621b07f72f94340f7402e3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/sealed-identities.json",
+            "sha256": "4b8af09326ea58b1a6d9c8f53029b5d9efb577c706c99ecce36762e61530ee48",
+            "role": "input"
+          },
+          {
+            "path": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.16.json",
+            "sha256": "17fc11f782908f1fc9e3f38518802d6e36e4480c3ce3b2b22bbd648c660cb9cd",
+            "role": "input"
+          }
+        ]
+      }
+    },
+    {
+      "name": "dated-advisory-claim-mode-only-preservation",
+      "statement": "Only the selected advisory4.8 durability mode/revision changes; all64 original input hashes and every measured/unselected field remain exact. Six corruption controls reject, and actual selected candidate validation changes from stale-book RED to GREEN.",
+      "scope": "One named claim in the record at clean2286c6606a9fb86290801e1c8a0053e59d342a1f. Two other claims remain byte-value identical. No new publication/blob/pack/server or current storage measurement, schema change or transitive toolchain/isolation admission. The first diagnostic recorder fails its postcondition after retaining the actual stale-input error; qualified bound epochs retain pre-use checker/validator/material and wrapper channels. The candidate checker overlays only book/record on a captured index; complete staged checks separately govern landing. Original helper recipes retain their historical boundaries; new replay uses captured edited prose and fixed-Git inputs.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-lua-2026-11-07/preserve_advisory_claim.py",
+        "granularity": "Every original field/input row/hash in all three claims, with only two selected durability fields changed; every named64 input byte stream at the exact Git revision.",
+        "result": "{\n  \"result\": \"PASS\",\n  \"original_input_count\": 64,\n  \"only_mode_revision_changed\": true,\n  \"stale_live_book_red\": true,\n  \"rejected_controls\": [\n    \"original-statement\",\n    \"original-input-hash\",\n    \"wrong-revision\",\n    \"omitted-input\",\n    \"unselected-claim\",\n    \"bool-version\"\n  ]\n}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A stale live book binding accepts the edit, or preservation can refresh measurements/hashes/revision or change an unselected claim.",
+        "oracle": "Actual existing validator with explicit book/record candidate overlays; independent fixed-Git full-input streams and strict canonical JSON value/type equality with the complete original record.",
+        "red_control": "Qualified actual validator rejects the exact stale chapter then passes the preserved record. Original-statement, original-input-hash, wrong-revision, omitted-input, unselected-claim and Bool-version each reject; writer/default replay pass. Original wrapper assertion failure remains, with no false passing credit."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/actual-index.txt.gz",
+            "sha256": "cca2e92be6300608c7a630ce2147dbc05c7efa5abe43b0d31303179103b73e4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/command.json",
+            "sha256": "00f52b12f2d2971b3635c5b30d93d1b9b1254283a1b09feb1fced7631f843dfb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/input-identities.json",
+            "sha256": "aea7cfc8046579724b78ec0db3b86d0c26bffa4c8241c90f6bf2ef35ee2641ef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/inputs-before-validator.tar.gz",
+            "sha256": "f9730fca4730eeb66060038a072d587d7f1606cc6ad9c833718d383c856f65be",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-after/stdout.log.gz",
+            "sha256": "f3533256f2754e64ba56ce8ec0440eaba1abeef942df26c7d8299f0be800d546",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/actual-index.txt.gz",
+            "sha256": "cca2e92be6300608c7a630ce2147dbc05c7efa5abe43b0d31303179103b73e4f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/command.json",
+            "sha256": "00f52b12f2d2971b3635c5b30d93d1b9b1254283a1b09feb1fced7631f843dfb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/input-identities.json",
+            "sha256": "6c440040289cf3a8c95210635d96c0568bf16a32f7f15eff223c0c642b5574e5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/inputs-before-validator.tar.gz",
+            "sha256": "cd61274e38bd0ce7773d4cf6ba6703d498de85eeeabe67dd7baa2430850afa48",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/stderr.log.gz",
+            "sha256": "a9304ab97f2087181db5bd11e88decf760a40cd8245fd784d820741ddcf53b80",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-bound-before/stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-edited-book.md.gz",
+            "sha256": "ec03a742dbfa6c346dfc2f0fff9917b370ded9023ed71b3086bfd97751ca1c44",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-original-claim.json.gz",
+            "sha256": "993dd9e41df3549407b4d9be15248ba26794b3f46a4832a38846842dd4887b9c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-preservation-result.json",
+            "sha256": "827028de334d72b5bab222a4dbcc04c54f6e3d89a4c4375ac8ed0a68c44c6686",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-preserver-source.py.gz",
+            "sha256": "766b84a3d01e0c4c11369c5453e7466881bbdae56549c68220054d4191e27ae2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.command.json",
+            "sha256": "6c0596262b00c74ec95d0f1fe97bdfb9fc1d0bced78b081bfff3642048ca2078",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-after.stdout.log.gz",
+            "sha256": "57729a3d84f948c4d5ea033745c867449eba02369ceac6e93bcc89be3f95cf41",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.command.json",
+            "sha256": "75ee08d85a902d9375678c84ca0ee4e798acd09002590ab25e9b17e43b302370",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-apply.stdout.log.gz",
+            "sha256": "0650d3268e451fe216328c68a3b77f4bdcbd5d64a1bde38bc4c9762fbe4647c9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.command.json",
+            "sha256": "4dbbb5e72a5f0ff756754039a0cf358cddf1de177da999682bcaa767d644a689",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-before.stdout.log.gz",
+            "sha256": "8934c103ce644663690c9b344abaa4c934be1d038413c22e8660999bb6c7e73a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.command.json",
+            "sha256": "03aff09cbaa64d878fb0951a6e0811cbc450069a7e763945fde2b7a72d709219",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-step-replay.stdout.log.gz",
+            "sha256": "0650d3268e451fe216328c68a3b77f4bdcbd5d64a1bde38bc4c9762fbe4647c9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.command.json",
+            "sha256": "36f47135d72dda0b91706a91bb05e687db994614b5ed5424b404421e8b7c01d5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.producer.py.gz",
+            "sha256": "e96d18d595f26f78c1ee1180ea50fb9e3430ab689989e85aaaa1edd3f22f4a22",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.staged-book.md.gz",
+            "sha256": "ec03a742dbfa6c346dfc2f0fff9917b370ded9023ed71b3086bfd97751ca1c44",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.stderr.log.gz",
+            "sha256": "0e1dd7f93e58ef4954893264ae8d3832a0db56c1e2b7838d3922cd256e7eaedb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/advisory-validator-before.stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/book-before-containment.md.gz",
+            "sha256": "0e0ad15c850c485191256ffb4beb73db56331d54929f3a9f6a1e8ab13f1a30a3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/book-budget-record.json",
+            "sha256": "efa64d30ec1cbe6aa7e95bde35ee2e932c54c3b0916c5183604a028753599911",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/capture.py",
+            "sha256": "c655bfe41f17fa45e1776b1d9b3e51d9f3d100a6d3d466944a9157dbac01d387",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/capture_advisory_bound.py",
+            "sha256": "f687e14810ad8ddbc2ac9c5f84fcb39027282bd91ab38daef7b588701aea0718",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/capture_advisory_validation.py",
+            "sha256": "bf5d3ff13191f85759b5d8f02ff9df4688b5e5dda8503316fd56b1a68a234f42",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/check_advisory_candidate.py",
+            "sha256": "e93d48456214a10f7781e91636772a3ec9798cc8afc87687fb15699154da5606",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/check_advisory_claim.py",
+            "sha256": "7d3d4a8af42ede67ca36e05dd0d618366b0fb3690e5904c50dff8fe612f1eae6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/check_final_claims.py",
+            "sha256": "1be79401d6e20e926bbb8310abb066b0bd8e368c6ef6374b19ae9646873dc14c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/contain_book_budget.py",
+            "sha256": "9dcf8e9791c44f4d1588ab109410e66562f0ae6eadb37896cef7c234bbfc320c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/activation.txt",
+            "sha256": "510b51ca22c9869a48abf9b8d0f97461536008b259c514841620668abc434744",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/actual-migrated-images.tar.gz",
+            "sha256": "adc42442bd150f77469406923ffdfea487e54a3e0addd8f322bef63a7cb2a0e5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-stderr.log.gz",
+            "sha256": "39e5bfcb1a50482a06fcb86a070ec66cb9c93c1aedef185dc6589f37c96ad012",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/before-query-stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/capability-owners-stdout.log.gz",
+            "sha256": "1f99fed6cf3369c0508081110aeb943614f8710af7a14adcd9ca55f933ae5012",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/closure-owners-stdout.log.gz",
+            "sha256": "e0194f74f7a11428bf62f26c26ceb9dc84c48b6c909f6a43f77f4a169b9485c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/commands.json",
+            "sha256": "f380ead7b5aee6a1559716108bb0523b5e15c82c30dfbff02bf0f4b2ad1d5565",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/host.json",
+            "sha256": "76e92986c19a5566ab87ef300b765052605e07eb3791dd3ba95d9cd53408aaef",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/input-identities.json",
+            "sha256": "dfc1f2b9bfdccd27be363e223e579570810642100dde2e7037ac76602ae8aabb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/inputs-before-first-migration.tar.gz",
+            "sha256": "9beb9aee73a7b9a45a7f329b2c8a802b2c62af7cf401f20bb57f9ad6a2e7eafa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migrated-identities.json",
+            "sha256": "1dc9c4651a2e8a67208fc2f33cef868c22d3a23a5a4f7a1e17bf34be92074cc6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/migration-stdout.log.gz",
+            "sha256": "246f149e3d612421bda78b7fa16bcc8b51c8df70c6259621dc57a908ac208a14",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/narrative-stdout.log.gz",
+            "sha256": "88e13d350275dca9f6e95da404708ca569d514bcc8c8e9065026459e42e0a2da",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/node-query-stdout.log.gz",
+            "sha256": "e332f238970defb923ae6ff7cc098a257315479ec675a931a7883c79eaa72dea",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/result.json",
+            "sha256": "972f7f72fd66ce2a3551a0b059039d70c9aa719e4f7e8afc25be1de13d35d745",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/tracked-after.patch.gz",
+            "sha256": "b5cdf60773bf9ccb559cc375f6afc5ebea137ec5804dbd824a482d1b19dc2773",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/tracked-before.patch.gz",
+            "sha256": "37336126dcb7fdc35237ea9291679033b25534815f5c1ba027e1ee1de638aa24",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/unicode-owner-stdout.log.gz",
+            "sha256": "cd793f93951b3247fe2ca3603c52acde96a88d09f996c3548b598ca537a93bad",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/first/whole-query-stdout.log.gz",
+            "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/preserve_advisory_claim.py",
+            "sha256": "3633bcafcbf8af189c3f192342a1d2ad979357226c5ea9c5d943810764a0109a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/actual-qualified-images.tar.gz",
+            "sha256": "1395daf4c7430230a627603d39dd9799717393953e2cf12f10e33841f025f898",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/boundary-after.json",
+            "sha256": "6d773aa64c60b10f23ea086dd7d93ab6cac4bbae13e1695fc94db2f3d526ff37",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/boundary-before.json",
+            "sha256": "8e266399796bd059a63201804a5ca3ce5cef02ddfa99e330d9a45cddf5443477",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/capability-owners-stdout.log.gz",
+            "sha256": "1f99fed6cf3369c0508081110aeb943614f8710af7a14adcd9ca55f933ae5012",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/closure-owners-stdout.log.gz",
+            "sha256": "e0194f74f7a11428bf62f26c26ceb9dc84c48b6c909f6a43f77f4a169b9485c6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/commands.json",
+            "sha256": "d42e33519ebb46cce2766c28c09416d67d91ac3f5afeb8ff2d9a51747ae1c339",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/dependency-identities.json",
+            "sha256": "3383888c24d39600eecf224fa6cb8e35d65e31ec9b7f9c934001ba7afd136733",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/input-identities.json",
+            "sha256": "1d79c941f88c3442c1463c297a6810efb8eab2d2f881077e95fcbe51a6ce50d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/inputs-before-first-restoration.tar.gz",
+            "sha256": "1ae5268602869a13b07e1ae154dc49bd88cc9228c1f3e3521803d88eeafc0539",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/narrative-stdout.log.gz",
+            "sha256": "88e13d350275dca9f6e95da404708ca569d514bcc8c8e9065026459e42e0a2da",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/node-query-stdout.log.gz",
+            "sha256": "e332f238970defb923ae6ff7cc098a257315479ec675a931a7883c79eaa72dea",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/unicode-owner-stdout.log.gz",
+            "sha256": "cd793f93951b3247fe2ca3603c52acde96a88d09f996c3548b598ca537a93bad",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualified/whole-query-stdout.log.gz",
+            "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/qualify_legacy_tail.py",
+            "sha256": "1eb932a8fa1032a68ff939cecba70d2347c2d41acb61684476cadb321a09f81c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-command.json",
+            "sha256": "6ec76efad541aa42e0b07000e3ed24a7b3b29318cf5c60e5853a645231de148f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-result.json",
+            "sha256": "dee20569a5a22fc5ac01bd38dac50d2798da9917de704097af8e48554e442f82",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review-stdout.log.gz",
+            "sha256": "96c492f1052d14af9fdd65219957aaad4fe7cdc4248cb816d6eeecf4cc168769",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/review.py",
+            "sha256": "f60ef64b0c0d8552f983040dc4c5f6eb6e87d4ecb28996d67ad85119a1aec809",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/run_advisory_step.py",
+            "sha256": "5e24737226fe5ada2b5503d3a0cd3d39eb0aac0ad739ce35c28a24c07e45fe63",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/run_review.py",
+            "sha256": "98567257860bfc672050fde1ca32ec43f33e333bbe9b09f87690aa32018eee5a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/seal.py",
+            "sha256": "1ff325c6977032f64daaabc5c5113b76e40030c94a621b07f72f94340f7402e3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/task-headroom-lua-2026-11-07/sealed-identities.json",
+            "sha256": "4b8af09326ea58b1a6d9c8f53029b5d9efb577c706c99ecce36762e61530ee48",
+            "role": "input"
+          },
+          {
+            "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.8.json",
+            "sha256": "8f1708d8f984281c401b38bb03942f7c7bd9dc43d2cb40627e25121465645522",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}

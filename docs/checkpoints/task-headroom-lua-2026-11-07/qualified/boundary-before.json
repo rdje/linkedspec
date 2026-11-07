@@ -1,0 +1,13 @@
+{
+  "result": "RED",
+  "expected": "exact legacy current frontier and all trailing sections remain current",
+  "actual_tail_present": false,
+  "current": {
+    "bytes": 130163,
+    "sha256": "762981ae57960bb5fbffc29ad363a49f0f48c218f497ca7c75b86c49b0c2ae1c"
+  },
+  "original_tail": {
+    "bytes": 232154,
+    "sha256": "11b1255513208ea77e2f8bd3efe6c52fe29bd7021cb13ee5c908f42049e28114"
+  }
+}

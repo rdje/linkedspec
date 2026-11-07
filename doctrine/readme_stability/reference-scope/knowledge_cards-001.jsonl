@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4211,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-call-name-inventory-does-not-prove-runtime-semantics.md","sha256":"498824476e6e67bf0446f0ec2efc63f020c0eefbf753137bb81ff653a7757828","type":"member"}
 {"bytes":13120,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-supporting-grammar-dependencies.md","sha256":"68e6722ff6b12554ca482ef2ac014591e33778e24d1d7ec4d1e98aeebc284468","type":"member"}
 {"bytes":2249,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-task-id-uniqueness.md","sha256":"d2cda9342bfc14877ad40dd319ce1c1e991d7f746fccbdc31045b6f860b60d08","type":"member"}
 {"bytes":3826,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-boundary-lookahead-helper.md","sha256":"4488cedc2f8c5ee12835a0945d507c431e78bdaa31496bc5c54957b67759878b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":19250,"lines":308,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-engineering-history-capacity-blocker.md","sha256":"23f844e476bf18ba67ae08075cd578be62ec86d56df38dbc53709bf42ded9840","type":"member"}
 {"bytes":12763,"lines":198,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-history-capacity-blocker.md","sha256":"5be25e9b4c91f23046632009cdb7ce917aec011209906beec3b7f8f1e4cac0ad","type":"member"}
 {"bytes":20499,"lines":313,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-next-engineering-history-capacity.md","sha256":"802349c8350496c962556fe83e282308c76335a40708a83f0a8130949c4576ee","type":"member"}
-{"bytes":14648,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-second-history-capacity-blocker.md","sha256":"764e4c01f60556957ead97d2f32655bd2f133ec0a7099a707d0faf653925f327","type":"member"}

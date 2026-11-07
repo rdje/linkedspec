@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1654,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-array-split-mutation.md","sha256":"7441fd6d84185128e0994ef3d653f1cc2cba51e1846765a214bfb284a1274e4c","type":"member"}
 {"bytes":16127,"lines":284,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md","sha256":"1d2a8f87ba97959cf3ef112a5120f1fe09725a27a47926a11485bc82ab783487","type":"member"}
 {"bytes":14294,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-backend-full-parity-plan.md","sha256":"7e3fbffed6633dcb0907065ae4816fca609056a334bb952eac8a240aec2e4b34","type":"member"}
 {"bytes":3583,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-postcall-return-scope-gap.md","sha256":"c0c8c94f09cff020a7b65ec787ac96bb876b65f507eeecf368d0b7720bf1d154","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6033,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-dormant-red.md","sha256":"b49ab06c3323b938064c2ab8e51a6d35795f87f660148a545633198f8d014976","type":"member"}
 {"bytes":5839,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-private-authority.md","sha256":"37b907f52b32486379de7e7f2c49edc6da50e428a52d1ef11a0dae2288f9105e","type":"member"}
 {"bytes":4829,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-recomposition.md","sha256":"6f6e49084d307df63c4d92ce4451dea6083368749f22a14c9c6b7cafba24920b","type":"member"}
-{"bytes":9090,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-project-data-ssd-storage.md","sha256":"69cf477446d686e1d865d5f51586ca64df4417f5eb8ad53106e232fa7aa06889","type":"member"}

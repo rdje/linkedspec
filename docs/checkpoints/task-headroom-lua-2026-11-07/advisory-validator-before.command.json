@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/task-headroom-lua-2026-11-07/check_advisory_claim.py"
+  ],
+  "cwd": ".",
+  "staged_book_sha256": "99ae6834a39947d32b6a677a5e73c086dbf3158d6adebad53601572192ec90ef"
+}

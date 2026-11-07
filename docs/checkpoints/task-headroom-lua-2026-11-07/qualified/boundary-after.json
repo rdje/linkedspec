@@ -1,0 +1,13 @@
+{
+  "result": "GREEN",
+  "actual_tail_present": true,
+  "current": {
+    "bytes": 362317,
+    "sha256": "76c2e43f73c275f8471ff7dd8ad748c30a06d26cb850bd1825e3c5d6a3f863f6"
+  },
+  "restored_tail": {
+    "bytes": 232154,
+    "sha256": "11b1255513208ea77e2f8bd3efe6c52fe29bd7021cb13ee5c908f42049e28114"
+  },
+  "source_bytes_renewed": 115343
+}

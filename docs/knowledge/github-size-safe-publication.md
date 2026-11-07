@@ -11,7 +11,7 @@ date: 2026-11-04
 status: backlog published at d3a26a94f5c2; bounded logical input custody reviewed
 tags: [git, publication, pack, github, continuity]
 evidence: "Primary Git/GitHub contracts; original records, raw/normalized plans, actual publication logs/receipt and complete logical Git-object manifest in docs/checkpoints/publication-custody-2026-11-04/; scoped claim TYPE-REFERENCE-BOOK.1.2.23.4.7."
-reverify: "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/review.py; optional --verify-objects repeats full opaque body hashes. Historical close_claim.py requires accepted eda3c81 Git inputs. Current mode-only preservation: bash tools/run_python_project_data.sh docs/checkpoints/artifact-growth-2026-11-05/preserve_publication_claim.py. Archived planners/publisher remain retired."
+reverify: "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/review.py; optional --verify-objects repeats full opaque body hashes. Historical close_claim.py requires accepted eda3c81 Git inputs. The original mode-only preserve_publication_claim.py recipe is historical at accepted2286c6606 inputs. Later advisory-boundary preservation: bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-lua-2026-11-07/preserve_advisory_claim.py. Archived planners/publisher remain retired."
 ---
 
 GitHub documents a maximum 2 GiB single push and successive smaller pushes as the
@@ -71,5 +71,6 @@ store from unpublished commits and confirms the warned blob already exists at
 the locally recorded origin base. It establishes no current oversized push.
 The later book edit preserves the dated custody claim at `eda3c81`; all original
 fields and20 original input rows remain exact, with only mode/revision changed.
-The original closeout reader remains historical; the current preservation reader
-checks this separate transition without refreshing its publication observations.
+The original closeout/preservation recipes remain historical at their accepted Git inputs.
+Later4.16 preserves the advisory metadata claim at2286c6606 without refreshing any publication
+observation; its reader uses captured edited-book bytes, not future live prose.

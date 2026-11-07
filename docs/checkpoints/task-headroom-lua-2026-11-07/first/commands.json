@@ -1,0 +1,99 @@
+{
+  "before-query": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/read_task_narrative.py",
+      "--tree",
+      "LUA-BACKEND-PARITY",
+      "--epoch",
+      "TYPE-REFERENCE-BOOK.1.2.23.4.16",
+      "--id",
+      "LUA-BACKEND-PARITY.8.4"
+    ],
+    "cwd": ".",
+    "expected_exit": 1
+  },
+  "migration": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/migrate_task_narrative.py",
+      "--apply",
+      "--epoch",
+      "TYPE-REFERENCE-BOOK.1.2.23.4.16",
+      "--tree",
+      "LUA-BACKEND-PARITY",
+      "--source-commit",
+      "2286c6606a9fb86290801e1c8a0053e59d342a1f"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  },
+  "node-query": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/read_task_narrative.py",
+      "--tree",
+      "LUA-BACKEND-PARITY",
+      "--epoch",
+      "TYPE-REFERENCE-BOOK.1.2.23.4.16",
+      "--id",
+      "LUA-BACKEND-PARITY.8.4"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  },
+  "whole-query": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/read_task_narrative.py",
+      "--tree",
+      "LUA-BACKEND-PARITY",
+      "--epoch",
+      "TYPE-REFERENCE-BOOK.1.2.23.4.16",
+      "--all"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  },
+  "narrative": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/check_task_narrative.py"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  },
+  "unicode-owner": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/check_unicode_case_contract.py"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  },
+  "capability-owners": {
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "perl",
+      "tools/check_capability_conformance.pl"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  },
+  "closure-owners": {
+    "argv": [
+      "bash",
+      "tools/run_python_project_data.sh",
+      "tools/check_language_closure_contract.py"
+    ],
+    "cwd": ".",
+    "expected_exit": 0
+  }
+}

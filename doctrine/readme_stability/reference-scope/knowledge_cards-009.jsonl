@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3057,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-push-aggregate-value-abi.md","sha256":"3b235fa484cf52e285d5a2d440f6fef8fc013a3453d431e794a60f0699f12527","type":"member"}
 {"bytes":5057,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-action-source-ownership.md","sha256":"b7ba189b07c3438919593688514a05112eea8f1778eefd68452c5a90cd06c15b","type":"member"}
 {"bytes":3434,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-boundary-labels.md","sha256":"8b54b996767c9c538ccf17ede223d8bebd9098158fd1a89cd5aebdcbadece6b1","type":"member"}
 {"bytes":2091,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-primitive-rewrite-event-drift.md","sha256":"1f765957c9459a1aa5cef4289fc64b2af9de8c55b9e1c6f5b2de8a41dbb3a3a5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1651,"lines":23,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-bound-commit-authoring.md","sha256":"ba0f6b3d69125fbf2148ccc5c27b673185579711263cf70a89a04b5ff1d911b4","type":"member"}
 {"bytes":4796,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-capability-guide-drift.md","sha256":"619d55d7064ee65959a14bedbaf8f4cb7999b0d2568bd0616837fb926a9d4bc8","type":"member"}
 {"bytes":2869,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-current-boundary-policy-drift.md","sha256":"7354fe7e55c10ecccbab67201a19263a439ff8c96344fd3423e1d23d873cfb70","type":"member"}
-{"bytes":12544,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-neutral-contract.md","sha256":"baf1548b3f68a79816318e97be4aad95c5c87ee09272e97775323866cad7f077","type":"member"}

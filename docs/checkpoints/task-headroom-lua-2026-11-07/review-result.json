@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "current_ids": 157,
+  "archived_closed": 149,
+  "unchanged_short_bodies": 8,
+  "legacy_tail_bytes": 232154,
+  "qualified_bytes_renewed": 115343,
+  "effective_denials": [
+    "actual-first-tail-loss",
+    "changed-Goal",
+    "missing-current-ID",
+    "changed-short-body",
+    "forged-source-hash",
+    "truncated-full-query",
+    "rewritten-historical-node-query"
+  ],
+  "original_phase": "semantic RED despite passing metadata",
+  "limit": "Generic legacy node-query/boundary repair remains TYPE-REFERENCE-BOOK.1.2.23.4.17; no runtime/Lua5.4 admission"
+}

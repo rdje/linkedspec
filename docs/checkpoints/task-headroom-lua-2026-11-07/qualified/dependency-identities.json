@@ -1,0 +1,18 @@
+{
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/input-identities.json": {
+    "bytes": 26679,
+    "sha256": "dfc1f2b9bfdccd27be363e223e579570810642100dde2e7037ac76602ae8aabb"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/inputs-before-first-migration.tar.gz": {
+    "bytes": 4423026,
+    "sha256": "9beb9aee73a7b9a45a7f329b2c8a802b2c62af7cf401f20bb57f9ad6a2e7eafa"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/actual-migrated-images.tar.gz": {
+    "bytes": 27882,
+    "sha256": "adc42442bd150f77469406923ffdfea487e54a3e0addd8f322bef63a7cb2a0e5"
+  },
+  "docs/checkpoints/task-headroom-lua-2026-11-07/first/migrated-identities.json": {
+    "bytes": 368,
+    "sha256": "1dc9c4651a2e8a67208fc2f33cef868c22d3a23a5a4f7a1e17bf34be92074cc6"
+  }
+}
