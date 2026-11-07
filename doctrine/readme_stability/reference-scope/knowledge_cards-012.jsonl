@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3468,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-and-bcode-unbound-inputs.md","sha256":"387291427b703c2c49fd521bc2658f63291975053c5bb77abe1ecf5973150cb4","type":"member"}
 {"bytes":2335,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-backend-portability-ceiling.md","sha256":"ea4df84a1081bccd8a557cf2a62eea0113959c5e0c1c21ea497abd59b60120ff","type":"member"}
 {"bytes":12634,"lines":277,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-perl-coupling-inventory.md","sha256":"adc300a20dda0d53d27bf3e615def64bacd9de36b09511351df770c0d8e01c24","type":"member"}
 {"bytes":3528,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-boundary-marker-action-timing.md","sha256":"cc1b932e12c78334ad9c09b12eeb8e17f261710f8f193a287b3b92c77fceb069","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2131,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-emitcontext-owner-bridge-decisions.md","sha256":"7a9ba0728c1e56a31dc6a81433bf723d327247cb777c737c9dd0b7be95201db8","type":"member"}
 {"bytes":3205,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-handler-branch-helper.md","sha256":"b4e90f648a7b4e81450f456e040600d76e004bf26ad6ba7b000193357df2b190","type":"member"}
 {"bytes":1844,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-nonrep-dispatch.md","sha256":"a30137b2df6fae246a501023da8357e96365f01d5b1075762adfc0bf68c2af6a","type":"member"}
-{"bytes":2037,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-rep-dispatch.md","sha256":"b7ab0e85128bf408a4c50c7dd099c297970a3caeeeb67edf01d36748a230a975","type":"member"}

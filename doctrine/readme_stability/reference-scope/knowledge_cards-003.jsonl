@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3328,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-migration-split.md","sha256":"15f75e26ad0b1d92d05488e25f001e182cd470ee9edb9bbf24cb2f7cf7baaac0","type":"member"}
 {"bytes":3027,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-perl-reference.md","sha256":"b6eacb40894b7d2aff342211e6f92481e3570268d8d48389161a3e2806ea8f8e","type":"member"}
 {"bytes":4744,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-rust-parity.md","sha256":"662c96fba4fe1201273f5b2394734b062a28b51fd6e18aaff46b5f9fd00d1520","type":"member"}
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3333,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-mechanism-audit.md","sha256":"736e8d25757f9ff8de076aa2488fedc523fb8c65aace179d4dbd6b3763207351","type":"member"}
 {"bytes":6735,"lines":93,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-native-execution-canonical-json.md","sha256":"e58b9e31ec6aacfe4107ee8e90f20c29f46ef3b8f99e6fffbbbb1adbe702f048","type":"member"}
 {"bytes":3923,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-process-conformance.md","sha256":"d9d61ee182bf839dcaeb7e8d3a69df4c97e85b6dba1e0bfbb7d7dd8c078ea14c","type":"member"}
-{"bytes":10056,"lines":155,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-authority-boundary-gaps.md","sha256":"e9f2a4c751308cafde8b17214a621bffd580ca3f66a22faa4b33530d61bcd2d4","type":"member"}

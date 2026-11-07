@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "template": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.13.json",
+  "template_sha256": "53a55321fb37ddca4478f6eeee4c6c39aac363b4e6bb025039fa4ae6a8cc654f",
+  "original_draft_sha256": "856d8566296536f0aa681859330abe7fd0ea1ccce9c946b0abe6fbbffeb781f8",
+  "rejected_controls": [
+    "original draft missing template",
+    "removed template binding",
+    "altered template SHA"
+  ],
+  "observation": "unchanged1157 rows/five metadata controls; separate readonly replay remains valid"
+}

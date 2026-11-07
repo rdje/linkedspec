@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":22719,"lines":327,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-admission.md","sha256":"8b8dc415fc24706b140128b851752676a68dbf169840649871d78701692b4b9c","type":"member"}
 {"bytes":21407,"lines":321,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-proposal.md","sha256":"8d353b371b219816af3aa64432c7d5233bd369dd76661febeead7b26ab5686d9","type":"member"}
 {"bytes":9646,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-readme-reading-and-status-drift.md","sha256":"381b6273d6505bff2fb0ad6d9c084341175a139cd40843adc8279c30653a116e","type":"member"}
 {"bytes":4030,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-receiver-copy-value-preservation.md","sha256":"7e8bbafcdc783eaabb565ce99ebd6ac183250682024e014696187e658438fcb5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":11288,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-neutral-contract.md","sha256":"c61a6a296505124974789b562b5d285b8f0f5f9dd978c94afb308c60dfc0590b","type":"member"}
 {"bytes":11828,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-rust-runtime.md","sha256":"e21fa1298044904f87481ecaab897a0129c64e84eedbf6bc89fab558fb0356db","type":"member"}
 {"bytes":2453,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/marker-switch-outside-branch-statement-drift.md","sha256":"1aa77da022269fca92cdece89863ebd8b3297bc4664db5e4289f3b26ef25a55f","type":"member"}
-{"bytes":12624,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-2026-07-28-stdio-contract.md","sha256":"976ae983653173a1be0eef61af9cdcdbb8c68303a9181b82dc6c6ef20204840e","type":"member"}

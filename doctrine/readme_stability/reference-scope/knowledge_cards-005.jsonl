@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3634,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-target-regex-projection.md","sha256":"772501cc71e8cc155937328f6ec4da1414340587fad86a7a4f00f4f4fab7dc95","type":"member"}
 {"bytes":3874,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-body-fluent-suffix-loss.md","sha256":"39167758e4cd9dd652162d2735187a47cf4b4d2899374b8acc99e0752327ef3c","type":"member"}
 {"bytes":4870,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-dynamic-invocation.md","sha256":"f97f89e2bd278f498c8a30558df7700ddd8357a12f5baefa44769bb2371ac49a","type":"member"}
 {"bytes":8173,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-emitted-route-identity.md","sha256":"27b73fdbac11e5e05db242900a910eb571ea904b9e29a765011727213b486748","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2281,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-push-snapshot-result-guards.md","sha256":"5b0300638a70d141f61a5b54f54d0f0f789231d81f43a0f91bc3596bc995b04a","type":"member"}
 {"bytes":15980,"lines":205,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-query-generated-observation-consumer-reading.md","sha256":"02622582dada29256fc5cdb37d025269eb3255c7dda3892fd9a74986acfdc362","type":"member"}
 {"bytes":22449,"lines":329,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-commit-closeout-audit.md","sha256":"4633a10b9ecec33c6d3e2e456d0fb9db7759ecfa5abe8ac6f88f162b9fb0b9fc","type":"member"}
-{"bytes":22719,"lines":327,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-admission.md","sha256":"8b8dc415fc24706b140128b851752676a68dbf169840649871d78701692b4b9c","type":"member"}

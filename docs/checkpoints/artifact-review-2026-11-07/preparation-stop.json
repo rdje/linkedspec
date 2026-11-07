@@ -1,0 +1,16 @@
+{
+  "reason": "Preparation correction: prior claim template is an actual composition input but omitted from the initial declaration; metadata observation/replay unchanged",
+  "head_before": "12cfcaa7ae01af8451fda2d9533ac612a08d7317",
+  "staged_diff_sha256": "2d335b1d1ae4b11d671423ee231f2b0635fc88b3d582f2a3b2e096a0aa667589",
+  "verified_commit_pid": 1708,
+  "requested_signal": "SIGTERM",
+  "signaled_owned_pids": [
+    1708,
+    1711,
+    2131,
+    5844,
+    61496,
+    61497
+  ],
+  "interpretation": "Deliberate preparation stop; neither hook failure nor all-doctrine PASS"
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2249,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-task-id-uniqueness.md","sha256":"d2cda9342bfc14877ad40dd319ce1c1e991d7f746fccbdc31045b6f860b60d08","type":"member"}
 {"bytes":3826,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-boundary-lookahead-helper.md","sha256":"4488cedc2f8c5ee12835a0945d507c431e78bdaa31496bc5c54957b67759878b","type":"member"}
 {"bytes":3280,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-compatibility-eager-block-return-escape.md","sha256":"197f989ee37b7fcb9c3021f05e17eca0d4b0c19ab7bc97c4ba4a41ce24812cee","type":"member"}
 {"bytes":2424,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-rewind-default-loop-progress-gap.md","sha256":"934c3fc3ae63dc129a3d0594fca193f44d57f923d9ea49483314f6c3009a1ae1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":14648,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-second-history-capacity-blocker.md","sha256":"764e4c01f60556957ead97d2f32655bd2f133ec0a7099a707d0faf653925f327","type":"member"}
 {"bytes":2603,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-receiver-string-bridge-guards.md","sha256":"6f08847af48c871ed82f525d210922c472d61ab4e726cda82b119945716e9291","type":"member"}
 {"bytes":8526,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-effect-integration-gap.md","sha256":"6c550d60366c2e9abcd71396f62daa7e27fb345a03bdc318b95ea94bb8242196","type":"member"}
-{"bytes":8247,"lines":112,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-transaction-dormant-red.md","sha256":"217dff2ad4ac4301d77cc9e6c783ea0dccc6ee24f6099a65f806a8f2af540c0a","type":"member"}

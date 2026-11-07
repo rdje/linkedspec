@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.15",
+  "claims": [
+    {
+      "name": "dated-bounded-artifact-retention-review",
+      "statement": "The 1157 retained named-scope artifact rows agree with independent path/byte metadata observations; all selected artifacts remain retained and five altered-evidence controls reject.",
+      "scope": "Dated 2026-11-07T05:37:20.574917+00:00 root-level strays, six explicit root/crate Rust release/incremental/deps locations and retained log directory only; .log/.bin/.DS_Store suffixes. Configured Cargo target rust/target is covered. Not a whole-project inventory, content ownership, disposability, liveness, reclamation, cold bootstrap or concurrent-adversarial claim. Dart/Julia convention presence and Lua wrapper reference grant no purge permission.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-07/review.py",
+        "granularity": "Every primary path/suffix/byte row compared with separate scandir/lstat rows in each named scope; direct producer bodies, configured-target identity and raw Git-index input retained.",
+        "result": "{\"date\": \"2026-11-07T05:37:20.574917+00:00\", \"scoped_rows\": 1157, \"removed\": 0, \"rejected_controls\": [\"missing-row\", \"wrong-size\", \"duplicate-row\", \"outside-path\", \"producer-byte\"], \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Missing, altered, duplicated or outside-path rows, or corrupted producer identity, can pass the retained metadata review.",
+        "oracle": "Independent scandir/lstat population compared with canonical os.walk population; retained dated observation is the replay oracle.",
+        "red_control": "Actual missing-row, wrong-size, duplicate-row, outside-path and producer-byte mutations reject. Healthy one-shot capture and separate readonly replay return0 with empty stderr. No deletion or liveness inference follows."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-census.py",
+            "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/census.py",
+            "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.22/census.py",
+            "sha256": "08faab18b51d343a794543e7a0c3cb8a372d83c341226c807f6fd4f50bea1461",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/capture-command.json",
+            "sha256": "268c9ace6dcae56b79bde25979889848ec2a5569e7769cc971bf7866d3c7457a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/capture-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/capture-result.json",
+            "sha256": "ebc9aa9d429e4d2ff755b8409ff2678d7c23dfaa3d9bceefbc14283e78fadcb1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/capture-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/capture-stdout.log.gz",
+            "sha256": "031577f053b5b63212b78ca467110c44544856bfc64a0ebab4ca21817bf23594",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/observation.json.gz",
+            "sha256": "b4964d8f642e3a48c7ff7d4ee792261ce6f08d628c90fa712bfe3702ec8b2c2e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/publish.py",
+            "sha256": "f868853d14febefee19f33dab0aef8e0a007fef7915437ad473dda393cf31bf3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/result.json",
+            "sha256": "ebc9aa9d429e4d2ff755b8409ff2678d7c23dfaa3d9bceefbc14283e78fadcb1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/review-command.json",
+            "sha256": "7882a7b96b15d95a3346fe0ffd731cbec38cb18189e70b4c13ce8f540b3295a2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/review-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/review-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/review-stdout.log.gz",
+            "sha256": "031577f053b5b63212b78ca467110c44544856bfc64a0ebab4ca21817bf23594",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/review.py",
+            "sha256": "8203877040facefbc5183b3cb105331e4a78ee7a8bea83033cd3e5a8064bf78a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-07/run.py",
+            "sha256": "edec6cec85d0f2d1a70d952b9ddb50c61de065cb91107c782bfe54a84cf38f70",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_lua_project_data.sh",
+            "sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    }
+  ]
+}
