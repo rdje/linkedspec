@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: selection23.1.36 freezes Hash-view Array result guards76/shared15. Perl copy76.0/views76.1+76.6, Rust76.2 and Dart76.3 have focused proof. Dart own33 normal7RED to33PASS/four routes, final direct62/eight controls; initial source/arity policies preserved. Independent Julia76.4 then installed Lua76.5 require own source/error profiles and actual grammar before SDK use. Bounded Length74/CountKeys75/callable75.6 retain focused outcomes. Full source/context/native-cache custody, broad SESSION17 isolation, declared Lua5.4 and full23.4 admission remain separate.
+Current finite frontier: selection23.1.36 freezes Hash-view guards76/shared15. Perl copy76.0/views76.1+76.6, Rust76.2, Dart76.3 and Julia76.4 have focused proof. Julia own33 normal156PASS28FAIL to184PASS/direct315/eight controls; source/arity policies retained. Independent installed Lua76.5 requires own profiles and actual grammar before SDK use. Bounded Length74/CountKeys75/callable75.6 retain outcomes. Full source/context/native-cache custody, broad SESSION17 isolation, declared Lua5.4 and full23.4 remain separate.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

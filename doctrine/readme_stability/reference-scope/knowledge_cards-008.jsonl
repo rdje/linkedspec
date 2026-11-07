@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2826,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emptiness-expression-and-host-slot-drift.md","sha256":"948ca767331de981d57b83af79b1396279cdcb7105bad63d42e22d591eef62d7","type":"member"}
 {"bytes":4203,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-ast-trim-span.md","sha256":"5caf35bf2b0711bc066433a04d260a61cc6aedfbd426ccedf76e554cfc6e0efd","type":"member"}
 {"bytes":4938,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-blind-return-duplicate-scalar.md","sha256":"83199b9e2639fd0573b3a301818de24935bba81de15b4ec8c37531689f7dbcf0","type":"member"}
 {"bytes":6279,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-executable-source-membership.md","sha256":"7944d2f5940e85611abd03b2ea86ff230a826c3171a3e9a0de65f109b4b00bf6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2852,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-receiver-string-bridge-guards.md","sha256":"5bdc5c177a45f7b27df2daa1d167359eb4903b2ef77ac007cb4cd920e85f77a6","type":"member"}
 {"bytes":5237,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-annotation-statement-origins.md","sha256":"7fd9517f356552827599db0e266a7f64525cbfc1d123fa1f5e8e850de6cd7694","type":"member"}
 {"bytes":3127,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-commit-boolean-kind-drift.md","sha256":"6b81991c66eaca18b08f150d928651db3c6ccb918b4e7d64b989546b7cd178f2","type":"member"}
-{"bytes":4622,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-compatibility-observation-gap.md","sha256":"aa5e8382aaa5254d38d8cca045b24f0d1486f5fbe11561ad47187017694fd0d8","type":"member"}

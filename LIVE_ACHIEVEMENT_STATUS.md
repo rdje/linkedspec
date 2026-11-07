@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-view76: Perl copy76.0/views76.1+76.6, Rust76.2 and Dart76.3 have focused proof. Independent Julia76.4 is next; full verification stays deferred until feature coverage.
+PNT Hash-view76: Perl copy76.0/views76.1+76.6, Rust76.2, Dart76.3 and Julia76.4 have focused proof. Independent installed Lua76.5 is next; full verification stays deferred until feature coverage.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.76.3 adds Dart canonical Hash-view result guards with initial-source permission preserved. Own33/four routes26healthy7RED, unchanged33 to33PASS; final direct62/fresh33 and eight recovery controls PASS. All19 own profiles and33 actual module/parsed pairs remain exact. Explicit grammar precedes SDK use; format/reader failed epochs retained, final reader0. Rebuild apps; full custody/context/isolation/registration/admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.76.4 adds Julia canonical Hash-view result guards with first-source permission preserved. Own33/four routes26healthy7RED; same normal156PASS28FAIL to184PASS, direct315/first recovery eight controls PASS. All19 own profiles and33 actual emitted-parsed pairs remain exact. Both malformed profilesAW; initial[]/null-with0W/prior size-null/scalar_result/call_index survive. Actual grammar precedes SDK use; rebuild runtime/apps, emitted bytes unchanged. Full custody/context/isolation/registration/admission separate.
 
 ## Next Action
 
-Activate Julia76.4 from clean Git. Independently capture shared15 and own free/initial-source/empty-with/arity/error/prior-owner profiles, with actual grammar before SDK compilation/use. Preserve own policies while repairing demonstrated gaps; small focused proof/docs/commit before installed Lua76.5.
+Activate installed Lua76.5 from clean Git. Acquire each host's own shared15/free/initial-source/with/arity/error/prior-owner profiles and actual explicit grammar before SDK use. Preserve own policies, small direct proof/docs/commit before next selection; declared5.4 and full verification stay separate.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.76.4 — Julia33/four routes184PASS/direct315/eight controls; own profiles preserved; installed Lua76.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.3 — Dart33PASS/four routes; final direct62/eight controls; own initial/arity profiles retained; Julia76.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.6 — Perl original13 restored; numeric seeds isolated;17PASS/direct59/eight controls; Dart76.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.2 — Rust22PASS/four routes, direct30/total52; initial-source policies preserved; P1 Perl coverage76.6 next.
@@ -29,7 +30,6 @@ Activate Julia76.4 from clean Git. Independently capture shared15 and own free/i
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — peers Count ownership3PASS/four routes; both25 normals; runtimes unchanged; installed Lua75.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia CountKeys25PASS/final346; Count-owned source preserved; independent peer75.7 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — Rust key-count22PASS/final66; ten healthy/modules exact; independent Dart75.3 next.
 
 ## History
 

@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=julia",
+    "--startup-file=no",
+    "--history-file=no",
+    "--depwarn=error",
+    "-e",
+    "using LinkedSpecJulia,JSON3,Test; for path in ARGS; include(path); end",
+    "julia/test/hash_view_result_guard_composition_test.jl",
+    "julia/test/constructor_result_composition_test.jl",
+    "julia/test/value_copy_test.jl",
+    "julia/test/receiver_copy_arity_test.jl"
+  ],
+  "environment": {
+    "JULIA_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "JULIA_PKG_PRECOMPILE_AUTO": "0",
+    "LINKEDSPEC_HASH_VIEW_CAPTURE": "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct"
+  }
+}

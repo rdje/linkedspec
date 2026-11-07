@@ -1,0 +1,24 @@
+{
+  "RED_groups": 7,
+  "actual_module_and_parsed_pairs_unchanged": 33,
+  "direct_assertions": 315,
+  "healthy": 26,
+  "independent_profiles": 19,
+  "normal_assertions_after": 184,
+  "normal_assertions_before": {
+    "FAIL": 28,
+    "PASS": 156
+  },
+  "original_programs": 33,
+  "recovery_corruptions": [
+    "compatible result drift",
+    "initial Array policy lost",
+    "free arity Dart normalization",
+    "needed error masked",
+    "missing source member",
+    "profile source drift",
+    "actual module drift",
+    "original RED already green"
+  ],
+  "scope": "finite declared direct source/grammar recovery; fresh Modules share runtime/process; full native/cache/transitive custody4.2/SESSION5, contexts, isolation, registration and23.4 remain separate"
+}

@@ -6305,6 +6305,15 @@ function _evaluate_runtime_fluent_chain!(
         _runtime_is_ordinary_logical_result_chain(chain.receiver, chain.calls) ||
         _runtime_is_input_cursor_value_source(chain.receiver) ||
         (chain.receiver isa ActionCallExpr && canonical_action_helper_name(chain.receiver.name) in ("copy", "with"))
+    hash_view_chain = _runtime_is_ordinary_hash_view_result_chain(engine, chain.receiver, chain.calls)
+    preserve_initial_hash_view_source = hash_view_chain && !kind_guarded_result &&
+        !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
+        !_runtime_is_ordinary_key_count_result_chain(chain.receiver, ()) &&
+        !_runtime_is_ordinary_hash_view_result_chain(engine, chain.receiver, ()) &&
+        first(chain.calls).method in ("sorted_keys", "sorted_values") && isempty(first(chain.calls).args)
+    # Initial views keep producer fallback; the resulting Array owns later links
+    # before Count/CountKeys initial-source permissions are considered.
+    kind_guarded_result = kind_guarded_result || hash_view_chain
     key_count_chain = _runtime_is_ordinary_key_count_result_chain(chain.receiver, chain.calls)
     preserve_initial_key_count_source = key_count_chain && !kind_guarded_result &&
         !_runtime_is_ordinary_count_result_chain(chain.receiver, ()) &&
@@ -6320,6 +6329,7 @@ function _evaluate_runtime_fluent_chain!(
         helper_name = canonical_action_helper_name(call.method)
         initial_count_source = preserve_initial_count_source && call_index == 1
         initial_key_count_source = preserve_initial_key_count_source && call_index == 1
+        initial_hash_view_source = preserve_initial_hash_view_source && call_index == 1
         # A legitimate null source keeps canonical has_key's key evaluation.
         # Earlier incompatible consumers return before this step.
         nullable_presence = value === nothing &&
@@ -6335,7 +6345,7 @@ function _evaluate_runtime_fluent_chain!(
         # Copied, scoped, computed and reduced results keep their actual kinds.
         # Check container-only consumers before evaluating their operands.
         if (reduction_result || kind_guarded_result) && !initial_count_source &&
-            !initial_key_count_source &&
+            !initial_key_count_source && !initial_hash_view_source &&
             !(helper_name in ("copy", "is_empty", "is_nonempty")) && (
             (!(value isa AbstractVector) && !nullable_membership && !nullable_index && (
                 helper_name in _RUNTIME_ARRAY_ONLY_RECEIVER_NAMES ||
@@ -6847,6 +6857,43 @@ function _runtime_is_ordinary_key_count_result_chain(receiver, calls)
     isempty(calls) && return false
     first_call = first(calls)
     return first_call.method == "count_keys" &&
+        something(first_call.source_method, first_call.method) == first_call.method &&
+        !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
+        isempty(first_call.args)
+end
+
+# Ordered Hash-view producers retain input policy; canonical ordinary free-one
+# and zero-extra receiver forms gain only result-kind ownership.
+function _runtime_is_ordinary_hash_view_result_chain(engine, receiver, calls)
+    any(calls) do call
+        helper = canonical_action_helper_name(call.method)
+        helper in _RUNTIME_TREE_TRAVERSAL_NAMES ||
+            any(arg -> !(arg isa ActionPositionalArgument), call.args) ||
+            ((call.trailing_block_arg || call.receiver_trailing_block_arg) && helper != "with") ||
+            !(helper in _RUNTIME_PURE_HELPER_NAMES || helper in _RUNTIME_ARRAY_HELPER_NAMES ||
+                helper in _RUNTIME_HASH_HELPER_NAMES ||
+                helper in ("copy", "with", "and", "or", "not", "coalesce", "coalesce_nonempty"))
+    end && return false
+    if receiver isa ActionCallExpr
+        has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return false
+        if receiver.name in ("sorted_keys", "sorted_values") &&
+            something(receiver.source_method, receiver.name) == receiver.name &&
+            !receiver.trailing_block_arg && length(receiver.args) == 1 &&
+            first(receiver.args) isa ActionPositionalArgument && first(receiver.args).value isa Union{
+                ActionVariableExpr, ActionNumberLiteralExpr,
+                ActionStringLiteralExpr, ActionBooleanLiteralExpr, ActionUndefExpr,
+                ActionArrayLiteralExpr, ActionHashLiteralExpr, ActionBlockValueExpr,
+                ActionCallExpr, ActionFluentChainExpr, ActionReceiverMutationChainExpr,
+                ActionIndexedVarExpr, ActionNestedAccessExpr, ActionValueAccessExpr,
+                ActionAssignScalarExpr, ActionAssignArrayAppendExpr, ActionAssignHashIndexExpr,
+                ActionAssignNestedAccessExpr, ActionCodeblockLiteralExpr,
+            }
+            return true
+        end
+    end
+    isempty(calls) && return false
+    first_call = first(calls)
+    return first_call.method in ("sorted_keys", "sorted_values") &&
         something(first_call.source_method, first_call.method) == first_call.method &&
         !first_call.trailing_block_arg && !first_call.receiver_trailing_block_arg &&
         isempty(first_call.args)

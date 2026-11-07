@@ -4430,3 +4430,37 @@ format stay unchanged. Source/registered-function contexts, general isolation,
 normal registration23.4.1, full native/cache/transitive custody4.2/SESSION5 and
 full23.4 remain separate. Independent Julia76.4 then installed Lua76.5 must acquire
 their own source/arity/error profiles and actual grammar inputs before edits.
+
+## Julia ordinary Hash-view result guards
+
+Julia canonical ordinary free-one sorted_keys/sorted_values and zero-extra first
+receiver views now retain Array-result guards. For example,
+`sorted_keys({"a":1}).set_key("k",1)` returns null and skips consumer operands;
+later copy/logical/with links retain rejection. Ordered compatible Arrays, nested
+selected kinds, explicit bridges, source-once snapshots and needed errors stay.
+
+Initial Number/null/Array views keep[];
+`undef.sorted_values().with(){return(value.count())}` returns0 with its body run.
+Produced Count/CountKeys/Length Numbers still reject Hash views and stay null.
+Valid Hash/empty-view bodies run. Both own malformed extra-operand profiles retain
+ran/AW, independently of Dart's free W; these are preservation observations, not
+new supported signatures. Original producers/depth, scalar_result boundaries and
+enumerate/call_index mutation policy stay unchanged. Registered-function receiver,
+unknown, keyword, traversal and non-with trailing forms gain no new view role.
+
+Original33 public source programs on native/restored/generated-plan/fresh Modules
+show26 healthy/seven guard failures. Same normal33 completes156PASS28FAIL before
+and184PASS after repair; direct constructor/copy dependents total315 passing
+assertions under strict depwarn. All19 own profiles and33 actual emitted-parsed
+pairs remain exact across four phases. First readonly recovery/eight effective
+corruptions pass with empty decoded own stderr. Direct stderr is empty; after's
+separate stderr is successful package precompilation. Actual grammar precedes SDK
+use through the public explicit parser_spec_source argument. Exact inputs, source
+patches, modules and complete raw epochs survive at
+docs/checkpoints/hash-view-result-guard-julia-2026-11-07/REVIEW.md.
+
+Rebuild Julia applications/runtime; emitted module bytes and format stay unchanged.
+Fresh Modules share runtime/process. Full native/cache/transitive custody4.2/
+SESSION5, source/registered-function contexts, general isolation, canonical
+registration23.4.1 and full23.4 remain separate. Installed Lua76.5 requires its own
+host profiles and actual grammar before SDK use; declared Lua5.4 remains separate.

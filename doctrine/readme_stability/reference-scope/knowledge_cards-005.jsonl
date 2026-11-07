@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4870,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-dynamic-invocation.md","sha256":"f97f89e2bd278f498c8a30558df7700ddd8357a12f5baefa44769bb2371ac49a","type":"member"}
 {"bytes":8173,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-emitted-route-identity.md","sha256":"27b73fdbac11e5e05db242900a910eb571ea904b9e29a765011727213b486748","type":"member"}
 {"bytes":4537,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-literal-state.md","sha256":"fdf714656d594dc667ec7b024f87cef3d04b38846c433cdd3b91dd7c9b3f4e17","type":"member"}
 {"bytes":6967,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"1579b754c28016675926185e4bf44f7a2eaa1e13b5a46276a47708adf8ca28f3","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":22719,"lines":327,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-admission.md","sha256":"8b8dc415fc24706b140128b851752676a68dbf169840649871d78701692b4b9c","type":"member"}
 {"bytes":21407,"lines":321,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-proposal.md","sha256":"8d353b371b219816af3aa64432c7d5233bd369dd76661febeead7b26ab5686d9","type":"member"}
 {"bytes":9646,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-readme-reading-and-status-drift.md","sha256":"381b6273d6505bff2fb0ad6d9c084341175a139cd40843adc8279c30653a116e","type":"member"}
-{"bytes":4030,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-receiver-copy-value-preservation.md","sha256":"7e8bbafcdc783eaabb565ce99ebd6ac183250682024e014696187e658438fcb5","type":"member"}

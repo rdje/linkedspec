@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3837,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repeated-and-falsey-group-acceptance.md","sha256":"bc965e157960453b887b2bc533b4baa0053156b9e2c2552fb8aca8d6b15738dd","type":"member"}
 {"bytes":4821,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/replacement-repair-engineering-history-capacity.md","sha256":"150150147f888200b5434b758e675aca17936831df77c930882436128cbd081b","type":"member"}
 {"bytes":49577,"lines":411,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.13","path":"docs/knowledge/repo-generated-artifact-cleanup-boundary.md","sha256":"fa0a978c47bd1f2bb093a3e5a2cc039f9776ff317abc8793a544c62b9db79966","type":"member"}
 {"bytes":9957,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-path-portability.md","sha256":"25b84c329fe3e95fea307cce05638ffc6926f864f9c32d59366f03454e1a4f6b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":27627,"lines":250,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-perl-output-oracle.md","sha256":"86b1bab73ab3d803bf3c0af8d0f630a70857d29c7ef3e56de8583e2a9c12a46a","type":"member"}
 {"bytes":3050,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-presence-result-source-guards.md","sha256":"23c6bfdeb88982761eff1bdedbe401da21e5a1ec1c36deac2a7522a735a53676","type":"member"}
 {"bytes":3838,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-primary-cli-mechanism-audit.md","sha256":"ffeaa28e07b37406cce44ffc03c4ec5e32aaad91f4751a2ea519bffefe10144b","type":"member"}
-{"bytes":4809,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-progressive-span-dispatch-admission.md","sha256":"8b34360e7528d20a7f8a6bc7cabb938fc2a17fc94842171d36bd326081d80fa8","type":"member"}

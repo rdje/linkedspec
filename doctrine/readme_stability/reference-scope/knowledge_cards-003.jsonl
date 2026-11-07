@@ -4,7 +4,7 @@
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
 {"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
 {"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}
-{"bytes":5542,"lines":85,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.3","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"0c236fc76e6801596b4c1d72a0a29d4f46e627f7a6538bc6cd42a4d24ed608ff","type":"member"}
+{"bytes":6105,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.4","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"4ff0e0ef7ebb08cd010a3fa3c7c33c2f9aa6c59055a75d3f2f3f7c2d1130c961","type":"member"}
 {"bytes":8469,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-objective-audit-input-recovery.md","sha256":"0056baa6fcce07fdbd38cd70d0f1832001636aa51ac307efdc030f54cf5dc830","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
 {"bytes":3808,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hlink-scalarref-oracle-gap.md","sha256":"707ab66f1f39951b8cca2dd1b60508585c22172f7062bab3ed10482b899f79d5","type":"member"}
@@ -87,6 +87,7 @@
 {"bytes":2981,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-global-cli-61-audit.md","sha256":"f7be5e9d4877a49f534b2c6e035697bd8989ff89236351f859730101a5e98583","type":"member"}
 {"bytes":5097,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-global-cursor-option-removal.md","sha256":"e3979981ce2c9b74eda2730c205a726ab46f716543c2b3b01023bf592e54ab5f","type":"member"}
 {"bytes":5862,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-governed-capture-mark-parity.md","sha256":"aebee7aa9897d1fdac112645be8e34effa6bb8e3e796a32c7eb13e5d2806b694","type":"member"}
+{"bytes":3648,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.4","path":"docs/knowledge/julia-hash-view-result-guards.md","sha256":"e8e2e95a7939ba25d1612cee502c8a60cd3b17682623b342b8ee47a84f251e9c","type":"member"}
 {"bytes":2563,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-helper-regex-flag-normalization.md","sha256":"4ba709483edd4336fe864451cdac365b35d5e86770ed4baf6295a902ee9fc4ce","type":"member"}
 {"bytes":2985,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-implicit-blind-iteration-collections.md","sha256":"4ff297e4de92da322cee5b67bfd3644ba25935c1bd5c8e4343aac6ff7cea470f","type":"member"}
 {"bytes":3790,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-index-source-guards.md","sha256":"b66a5c6c15684f94597e26a14024a17df686b33a0c7c454fe31fda76c5175d9a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3923,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-process-conformance.md","sha256":"d9d61ee182bf839dcaeb7e8d3a69df4c97e85b6dba1e0bfbb7d7dd8c078ea14c","type":"member"}
 {"bytes":10056,"lines":155,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-authority-boundary-gaps.md","sha256":"e9f2a4c751308cafde8b17214a621bffd580ca3f66a22faa4b33530d61bcd2d4","type":"member"}
 {"bytes":4441,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-parent-state-test-gap.md","sha256":"b456785271b5f20565ca825ba1d4335d0eaa7720b833948456a21c70f2a0e423","type":"member"}
-{"bytes":7377,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-admission.md","sha256":"f6f0bf4bad7e01a40b6e099f519d8a029435e0d628a383c853efd3ffef55c032","type":"member"}

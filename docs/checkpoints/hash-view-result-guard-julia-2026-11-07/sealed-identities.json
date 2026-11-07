@@ -1,0 +1,182 @@
+{
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "478cc039cd9ff22430d30aa520904462e288bf57c8cd0aa2e1685c46f2e34fa9"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/actual-emitted-parsed.tar.gz": {
+    "bytes": 8700,
+    "sha256": "6deb82e07f53be9a88343e19eef48d6aed25371319624a6afbd5959755c6e0dc"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/artifact-identities.json": {
+    "bytes": 14961,
+    "sha256": "4138a1cc149155a774f5c33532500148744fb980a277f08acb84f882af9aa090"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/command.json": {
+    "bytes": 541,
+    "sha256": "701c6d62bfb3e1ecbb7819a3733cbf36bf3b5030adbb05dcd64a1cbfdfef6b91"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/input-identities.json": {
+    "bytes": 36807,
+    "sha256": "1dc0db7ed7934c681c6db4ec586530d4f9fa8c38bf6fa07c1ea234a6707dc844"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/inputs-before-first-run.tar.gz": {
+    "bytes": 607881,
+    "sha256": "c8ab53897f644b7ebf409c12f741c5f427da0690e6468569bc73a2e41a3d369e"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/stderr.log.gz": {
+    "bytes": 131,
+    "sha256": "9d1b7649f4d1a6eb99464fca035297c8fcac1b9bbfd97d5732886ea44884e598"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/after/stdout.log.gz": {
+    "bytes": 2457,
+    "sha256": "62bedb4a03fc7ed7fd0e75ddf4a3b061740e0d25bac5079904c7ec8d8aa6312a"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "478cc039cd9ff22430d30aa520904462e288bf57c8cd0aa2e1685c46f2e34fa9"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/actual-emitted-parsed.tar.gz": {
+    "bytes": 8825,
+    "sha256": "18af3dfd22271600cf6c3e0c27fb15fab47d8b43662eb26aee912dea95b446a2"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/artifact-identities.json": {
+    "bytes": 15027,
+    "sha256": "b0f059af27e72f805e48dfb56d3a07feb9dbe95a0e4d42ceebebb55392e920df"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/command.json": {
+    "bytes": 542,
+    "sha256": "f1531b67265c683377279c41416e218334a281939359b5699c296bab2604e7c5"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/input-identities.json": {
+    "bytes": 36807,
+    "sha256": "90f181bc921d5d78896037dbd7e812c76b1c74ae354d629139e55238b5dc645d"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/inputs-before-first-run.tar.gz": {
+    "bytes": 607475,
+    "sha256": "491e6a500f83e9658b4f12cae49105e34bce19a192e92b1251d0e7a44739b662"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/stderr.log.gz": {
+    "bytes": 184,
+    "sha256": "cca8b7f284b569755c9d5d7dc831b41980d2cb895bf27e44d9e81e4bf4b6f5ac"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/before/stdout.log.gz": {
+    "bytes": 3098,
+    "sha256": "ee84543a3bf04b6cff9252e3ea05e76c4210072dfbc3a246e16f3be0f8eb8870"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/capture.py": {
+    "bytes": 4626,
+    "sha256": "041cf3a88cc9429b24d9f68b508c556d6897d32f8a8b816d326aefd2c130e33e"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "478cc039cd9ff22430d30aa520904462e288bf57c8cd0aa2e1685c46f2e34fa9"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/actual-emitted-parsed.tar.gz": {
+    "bytes": 8790,
+    "sha256": "0d5240b3b5056ddb9fa7ed9b69341fbad48e8f6af74a15a8c1b4c0166c5d03a4"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/artifact-identities.json": {
+    "bytes": 15027,
+    "sha256": "26fa768eb1d7f37e7d3d2a11780cde4d7b38af474e9454ccde859a3128dc6c1c"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/command.json": {
+    "bytes": 682,
+    "sha256": "95c555e98760296509a1c521472a55e4938302b69878bfff97c627ecd6dfe892"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/input-identities.json": {
+    "bytes": 36807,
+    "sha256": "1dc0db7ed7934c681c6db4ec586530d4f9fa8c38bf6fa07c1ea234a6707dc844"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 607881,
+    "sha256": "1f9b5934d009fa48e6b4b7b5176d25ed05a1bfeba76b5a278d1e6fab2a983465"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/direct/stdout.log.gz": {
+    "bytes": 4176,
+    "sha256": "c6b00ace8327b0ab9a7ed66ab3a4fc84f3eedd1f4f0f38e2df054a41d4bafa6d"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/freeze_profiles.py": {
+    "bytes": 1195,
+    "sha256": "e04ebc79145f754a15b331d2b9416fc38d73f413e5e5e69f8691106e37bb1b45"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "478cc039cd9ff22430d30aa520904462e288bf57c8cd0aa2e1685c46f2e34fa9"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/actual-emitted-parsed.tar.gz": {
+    "bytes": 8790,
+    "sha256": "bd160ea1b4fce5745d30bee7cf24398dacbe9c5f7959df03561a7e5038d77b9b"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/artifact-identities.json": {
+    "bytes": 15027,
+    "sha256": "6c2905fc7a9e69d35bd06c49ea1bb58132b49eda13310b59540d789798495258"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/cases.json": {
+    "bytes": 10328,
+    "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/command.json": {
+    "bytes": 519,
+    "sha256": "935d05b92a55727b18607f3b93f940e4f60ae3959d513b9554efd1cb6c782390"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/input-identities.json": {
+    "bytes": 36825,
+    "sha256": "ab7856b3bd9bf1b84bc959d7c832eddbef8819f04986385e33b50889927bc1aa"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 608528,
+    "sha256": "1d8bbda6c9fb87c14b315efa8b6d8cb42158930a68e76944f69cba72bac3742c"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/intake/stdout.log.gz": {
+    "bytes": 3649,
+    "sha256": "6247b938eb2022910a7bdfcadf8eef3c74ad457c9ba70293ebe66e3c9d3ee59c"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/observer.jl": {
+    "bytes": 3473,
+    "sha256": "0f377fbf3e6cbbc5c0bb0d8e3b7617b9afa0eb27c8dc6ed0a61e875192204b59"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/prepare.py": {
+    "bytes": 2912,
+    "sha256": "333a6da32f120c755274e6adc1ac574539eb567007aa0ab44931d371abeb93c0"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/producer-change.patch.gz": {
+    "bytes": 1520,
+    "sha256": "d440ed5eeef92a7ab752366ab68a9c8598e0996c48b554bd1e31ec48950c1c09"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/review.py": {
+    "bytes": 10563,
+    "sha256": "bebe3a35e4f05c422b6e993a89a4432be5351d871937cc4c81b2c00e9b75ab27"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/runner-registration.patch.gz": {
+    "bytes": 185,
+    "sha256": "827348ac1644c70fa17ebbc1b46bb9cfd92eb2780775449a4f85e2bae55aab9e"
+  },
+  "docs/checkpoints/hash-view-result-guard-julia-2026-11-07/seal.py": {
+    "bytes": 1353,
+    "sha256": "79fb529574bd717d1e89652b677a91ae8e312b2841ae659e5cba6c26069b4469"
+  }
+}

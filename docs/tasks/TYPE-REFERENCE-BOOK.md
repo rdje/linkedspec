@@ -21,7 +21,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.11` | `completed` | November5 bounded daily metadata and corruption controls pass; all artifacts/caches/proof retained. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.76.4` | `pending` | Dart76.3 focused33/direct62/fresh33/eight controls PASS; acquire Julia own free/initial-source/with/arity/error profiles and actual grammar before SDK use. Full verification remains separate. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.76.5` | `pending` | Julia76.4 focused33/184 assertions/direct315/eight controls PASS. Acquire each installed Lua host's own source/arity/error profiles and actual grammar before SDK use; full verification remains separate. |
 | 3 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |
 | 5 | `TYPE-REFERENCE-BOOK.1.2.23` | `pending` | Comprehensive fluent methods and returned-type transitions from inventory. |
