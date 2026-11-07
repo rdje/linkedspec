@@ -9,7 +9,7 @@ answers:
   - "are zero-key drop_keys and pick_keys admitted canonical forms"
   - "must Hash-valued guard repairs preserve initial source policies"
 date: 2026-11-07
-status: original selection frozen; bounded Perl source/result repairs focused-checked, peers pending
+status: original selection frozen; bounded Perl/Rust results focused-checked, remaining peers pending
 tags: [hash, helpers, guards, perl, selection, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.37; hash-value-result-selection-2026-11-07/REVIEW.md retains original32, exact shared28 with15 failures/13 healthy controls, four separate unready zero-key profiles,32 actual artifact pairs and eight effective evidence corruptions. No SDK production change or peer verdict."
 reverify:
@@ -41,3 +41,9 @@ Perl source77.0 and result77.1.1 now have separate focused outcomes. See
 precise source policy, actual inverse, healthy preservation and current limits.
 The original selection and frozen shared28 remain unchanged; peers assess their
 own source/arity/error profiles before implementation.
+
+Rust77.2 independently establishes13 original failures/76 healthy on actual89,
+then89PASS/four routes/direct141 and qualified exact old/current images13RED/89PASS.
+See [[rust-hash-value-result-guards]] and [[rust-runtime-embedded-help-input]]:
+original private compiler failures and the missing first-use help edge remain
+explicit; qualified epochs repair prospective input capture, not historical4.2.

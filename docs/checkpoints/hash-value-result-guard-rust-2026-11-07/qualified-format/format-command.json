@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "rustfmt",
+    "--edition",
+    "2024",
+    "--check",
+    "rust/linkedspec-runtime/src/engine.rs",
+    "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs"
+  ],
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

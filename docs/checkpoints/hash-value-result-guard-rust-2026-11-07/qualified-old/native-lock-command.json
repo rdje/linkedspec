@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_cargo_local.sh",
+    "generate-lockfile",
+    "--manifest-path",
+    "docs/checkpoints/hash-value-result-guard-rust-2026-11-07/qualified-old/native/Cargo.toml",
+    "--offline"
+  ],
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

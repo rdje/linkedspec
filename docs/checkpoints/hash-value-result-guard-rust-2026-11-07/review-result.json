@@ -1,0 +1,26 @@
+{
+  "shared": 28,
+  "own_controls": 61,
+  "total": 89,
+  "original_failures": 13,
+  "preserved": 76,
+  "four_routes": "PASS",
+  "direct_tests": 141,
+  "qualified_old": 13,
+  "qualified_fixed": 89,
+  "artifacts": 89,
+  "recovery": "PASS",
+  "original_private_attempts": "compile failures, not semantic RED",
+  "historical_missing_help": "disclosed4.2; qualified epochs capture before build",
+  "effective_corruptions": [
+    "original failure hidden",
+    "consumer effect admitted",
+    "later body admitted",
+    "required error masked",
+    "source fallback normalized",
+    "Bool changed to Number",
+    "profile omitted",
+    "actual module drift",
+    "compile failure accepted as semantic RED"
+  ]
+}

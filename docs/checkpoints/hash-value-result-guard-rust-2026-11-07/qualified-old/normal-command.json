@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_cargo_local.sh",
+    "test",
+    "--manifest-path",
+    "docs/checkpoints/hash-value-result-guard-rust-2026-11-07/control-owner/rust/Cargo.toml",
+    "--locked",
+    "--offline",
+    "-j",
+    "1",
+    "-p",
+    "linkedspec-runtime",
+    "--test",
+    "hash_value_result_guard_composition",
+    "--",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

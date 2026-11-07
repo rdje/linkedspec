@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2335,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-backend-portability-ceiling.md","sha256":"ea4df84a1081bccd8a557cf2a62eea0113959c5e0c1c21ea497abd59b60120ff","type":"member"}
+{"bytes":12634,"lines":277,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-perl-coupling-inventory.md","sha256":"adc300a20dda0d53d27bf3e615def64bacd9de36b09511351df770c0d8e01c24","type":"member"}
 {"bytes":3528,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-boundary-marker-action-timing.md","sha256":"cc1b932e12c78334ad9c09b12eeb8e17f261710f8f193a287b3b92c77fceb069","type":"member"}
 {"bytes":3563,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-marker-cross-backend-semantics.md","sha256":"724833c24f4135ad20f69749c3d5b941819714d578bd8c7fabbeeab4ee67df4e","type":"member"}
 {"bytes":4262,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-ast-enrichment-recurring-gate.md","sha256":"317b1379691b8f783e17c3cf11fa1c62b9cc02d0670e8691aad0a044fc2cdc24","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3205,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-handler-branch-helper.md","sha256":"b4e90f648a7b4e81450f456e040600d76e004bf26ad6ba7b000193357df2b190","type":"member"}
 {"bytes":1844,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-nonrep-dispatch.md","sha256":"a30137b2df6fae246a501023da8357e96365f01d5b1075762adfc0bf68c2af6a","type":"member"}
 {"bytes":2037,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-generated-rep-dispatch.md","sha256":"b7ab0e85128bf408a4c50c7dd099c297970a3caeeeb67edf01d36748a230a975","type":"member"}
-{"bytes":3117,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-observability-coverage-audit.md","sha256":"8c35c66579bf300f66e98b5665af06e4c156f2d85b9aec14a14dc794629d9dfc","type":"member"}
-{"bytes":2519,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-parity-proof-closed.md","sha256":"ea435b5bed05d513bc4d91e1680baae077125f6eb01fa15352fbf9166751a87a","type":"member"}

@@ -4632,3 +4632,51 @@ are unchanged. Rust77.2 then Dart3/Julia4/installed Lua5 assess shared28 and the
 own source/arity/error policies independently. No unknown/keyword/traversal/
 non-with trailing/deferred/registered receiver/context/domain/signature promotion,
 general isolation/native custody/registration4.1 or full23.4 admission follows.
+
+
+### Rust pure Hash-helper result guards
+
+Rust77.2 independently acquires unchanged28 plus61 own source/shape/prior-owner
+controls before edits. All four public routes reproduce13 failures/76 healthy
+controls; the unchanged89 ordinary normal is76PASS/13FAIL. Actual compiled actions
+contain canonical Hash helper sources and typed take operands. The engine's direct
+fluent and trailing-with source-role lists omit these results before existing
+actual-kind guards; legacy dispatch evaluates A and later AW/ADW work.
+
+Canonical positional free sources and first receiver prefixes now enter the
+existing persistent guards. First-helper source permission applies only without
+an earlier retained/view/size/copy/constructor owner. No producer, source fallback,
+arity, key/splice/depth/collision, statement/operator mutation or schema changes.
+Registered-function receivers, keyword/unknown/traversal/non-with trailing and
+deferred/callback roles remain on their original routes.
+
+The unchanged89 normal and post-change four routes pass; all76 originally healthy
+observations stay exact. Rust's four required source/value error controls already
+propagated before repair and remain exact, including the generated wrapper. Own
+initial merge controls ignore Number/null/Array and yield overlay Hashes; set/
+rename/drop retain original Number/Array/null; pick yields null. Initial with
+bodies still execute W. Six extra-argument SATW/four zero-key AW controls stay
+unchanged. Six earlier result owners reject merge before A/W. These independent
+profiles do not adopt Perl's source/arity/error policy.
+
+Rebuild Rust applications/runtime; actual emitted modules and serialized format
+are unchanged. Full source/context, native/cache/transitive custody4.2/SESSION5,
+normal registration4.1, declared-host coverage and full23.4 admission stay separate.
+Evidence: docs/checkpoints/hash-value-result-guard-rust-2026-11-07/REVIEW.md.
+
+
+Two initial Rust private controls fail compilation before tests because the own
+runtime embeds cli_conformance/cases/help/stdout.txt. Both attempts/raw channels
+remain retained and are not semantic RED. A separate qualified producer declares
+the actual help input before build and requires89 distinct frames/test counts;
+old/current images at one private own-Rust path give76PASS/13FAIL and89PASS, with
+four public routes. The checkout candidate is never replaced. Original public
+runs have real semantic observations but omit that first-use help input; disclose
+the historical edge under4.2 rather than retroactively asserting complete custody.
+
+Qualified canonical direct141 and scoped rustfmt pass. First authoritative readonly
+recovery returns0/empty stderr with nine effective corruption controls, including
+rejection of an actual compiler failure as semantic RED. All76 healthy observations
+and89 actual serialized/module pairs remain exact across original and qualified
+epochs. Independent Dart77.3 follows the clean boundary/daily artifact check;
+full verification/admission remains separate.

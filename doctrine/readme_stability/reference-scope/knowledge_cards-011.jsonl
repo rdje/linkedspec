@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7524,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-batch2-oracle-split.md","sha256":"c8bc660ab5a783fc0de12dc9a3f54c16d6c21f3b16f4fb5f45fae309ad5d39bc","type":"member"}
 {"bytes":2668,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-followon-closed.md","sha256":"6b1a96e8dd6996828d7396992f2f8ca094127a9357806ab732c1b97107ec42a2","type":"member"}
 {"bytes":27627,"lines":250,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-perl-output-oracle.md","sha256":"86b1bab73ab3d803bf3c0af8d0f630a70857d29c7ef3e56de8583e2a9c12a46a","type":"member"}
 {"bytes":3050,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-presence-result-source-guards.md","sha256":"23c6bfdeb88982761eff1bdedbe401da21e5a1ec1c36deac2a7522a735a53676","type":"member"}
@@ -27,6 +28,7 @@
 {"bytes":1939,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-invocation-accumulator-scope.md","sha256":"aab32b86c0cf9d2dc26f8ca0f450b3429a9de21ba3e08bf551155d4c9d7161b1","type":"member"}
 {"bytes":7181,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-execution.md","sha256":"9a0a9b29bc8193a59255d64fa8784d61f40b9217e8e846a83362188d2b64a311","type":"member"}
 {"bytes":7130,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-rule-local-cursor-normalization.md","sha256":"83948f86cb0485dc6a5f0ee5a62465761604c3eccc218cac0636fa9efc7586eb","type":"member"}
+{"bytes":2954,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/rust-runtime-embedded-help-input.md","sha256":"55f34c7676b01c9f7b5cc6cfbf5a4bcaea60057260ea3b62fc8447b67734db6e","type":"member"}
 {"bytes":3281,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-error-boundary-string-result.md","sha256":"cbdfc4a4b903a287ddf53dd55a3256e6607565428cebd7deb9d7df17ee0edff2","type":"member"}
 {"bytes":4155,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-runtime-structured-diagnostics.md","sha256":"2332a9bb056478f2c50b6cc670de1b3d839defd68dc402e58556b8a4e4edf104","type":"member"}
 {"bytes":9272,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-scalar-helper-null-and-empty-drift.md","sha256":"ef01c668f4dbca2ade9ec7b4ee388083801c3cb58a40c5c9678e6c974b11fb05","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":10458,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-spec-self-hosted-grammar.md","sha256":"727c710695b3a82d1544f2ecef49d3da958d94a01ed95d996b97880adc8074d6","type":"member"}
 {"bytes":3833,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-top-rule-no-regex-two-rule-minimum.md","sha256":"e569ab56048c6d7e4a8b44f56e4a61904964df3c63e47dcc1ddaa023d533e220","type":"member"}
 {"bytes":3468,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-and-bcode-unbound-inputs.md","sha256":"387291427b703c2c49fd521bc2658f63291975053c5bb77abe1ecf5973150cb4","type":"member"}
-{"bytes":2335,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-backend-portability-ceiling.md","sha256":"ea4df84a1081bccd8a557cf2a62eea0113959c5e0c1c21ea497abd59b60120ff","type":"member"}
-{"bytes":12634,"lines":277,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/specentry-perl-coupling-inventory.md","sha256":"adc300a20dda0d53d27bf3e615def64bacd9de36b09511351df770c0d8e01c24","type":"member"}

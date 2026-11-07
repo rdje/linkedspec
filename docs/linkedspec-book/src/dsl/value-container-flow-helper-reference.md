@@ -1338,8 +1338,9 @@ On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Arra
 ### Hash-valued helper continuations: selected open repair
 
 `merge_hash`, pure `set_key`, `rename_key`, `drop_keys` and `pick_keys` return
-Hashes. Bounded Perl77.1.1 now retains actual-kind and rejection guards for their
-ordinary results; peer assessment/full admission remains open. Compatible examples:
+Hashes. Bounded Perl77.1.1 and Rust77.2 now retain actual-kind and rejection guards
+for their ordinary results; remaining peer assessment/full admission stays open.
+Compatible examples:
 
 ```text
 merge_hash({"a":1},{"b":2}).count_keys()                # 2
@@ -1348,7 +1349,7 @@ pick_keys({"b":"tail","a":"head"},"b").sorted_values().last().uppercase() # "TAI
 pick_keys({"a":1},"missing").with(){return(value.count_keys())} # 0; body runs
 ```
 
-The selected Perl program now returns `[null, ""]`. Its incompatible Array
+The selected Perl and Rust program now returns `[null, ""]`. Its incompatible Array
 consumer rejects before evaluating the `A` operand:
 
 ```text
@@ -1367,6 +1368,17 @@ an earlier view/copy/Array-constructor result still rejects a Hash consumer befo
 its operands. Nested false/null values, source snapshots and valid empty Hash
 with bodies retain their existing semantics. Independent peers assess their own
 policies; these finite controls do not establish portable source authority.
+
+Rust independently reproduces thirteen guard failures and preserves its own
+source policies. The selected wrong-kind source controls retain overlay Hashes
+for `merge_hash`, original Number/Array/null for `set_key`/`rename_key`/`drop_keys`,
+and null for `pick_keys`. Their initial `with` bodies still run. Rust's selected
+extra-argument and zero-key controls keep their original behavior; they do not
+gain canonical guard authority. Earlier Count/CountKeys/Length/view/copy/Array
+results retain their guards. Required source/value errors already propagated on
+Rust and remain exact. Rebuild Rust applications/runtime; emitted source and
+serialized format are unchanged. Use actual Hash inputs under the published
+signatures; these preservation controls do not define portable fallback behavior.
 
 Use at least one key for `drop_keys`/`pick_keys`; the four selected Perl zero-key
 forms are unready profiles. Keep rename destinations absent for portable collision

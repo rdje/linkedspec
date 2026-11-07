@@ -94,6 +94,7 @@
 {"bytes":2434,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-governed-capture-mark-parity.md","sha256":"e3425b8da2e2540e405fc4a45736765fe5f3883cec11ebab41f8d4e092467dde","type":"member"}
 {"bytes":7494,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-separator-and-cat-arity-defects.md","sha256":"5fbb19473630b0ac33d61f860096ba3626ccdfa341b0a6f67b3114cb687ba9a4","type":"member"}
 {"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
+{"bytes":4638,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/rust-hash-value-result-guards.md","sha256":"9361c6243d5ed5d72f3c2b63e4a831d1a8626201d34078f687ce91f2c96052ac","type":"member"}
 {"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}
 {"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}
 {"bytes":3589,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-index-source-guards.md","sha256":"56c43f8233d90e753c85202a4e98be40e82c0eebd631faea66bbe5db419fd639","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6629,"lines":96,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-outer-action-source-fidelity.md","sha256":"2e75f136b27150bd97d591becea8d8ff0c763ed6e07a159820d2883266f26840","type":"member"}
 {"bytes":6250,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-outward-compiled-descriptor-projection.md","sha256":"0ffc6df9ef8c9dc4db91e6a079dc9695ac065bb0e85ebd7dadfd2145766916d9","type":"member"}
 {"bytes":2323,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-action-edge-fluent-closure.md","sha256":"f78eb66c375a8e699b8b708e95e1df2e9baf74fa84297a7e065d66f631f9b1e1","type":"member"}
-{"bytes":7524,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-batch2-oracle-split.md","sha256":"c8bc660ab5a783fc0de12dc9a3f54c16d6c21f3b16f4fb5f45fae309ad5d39bc","type":"member"}

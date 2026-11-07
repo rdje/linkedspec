@@ -6541,6 +6541,19 @@ impl Engine {
                     || Self::is_ordinary_length_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"));
+                let hash_value_chain = self.is_ordinary_hash_value_result_chain(receiver, calls);
+                let hash_value_source_prefix = hash_value_chain
+                    && !kind_guarded_source
+                    && !Self::is_ordinary_count_result_chain(receiver, &[])
+                    && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+                    && !self.is_ordinary_hash_view_result_chain(receiver, &[])
+                    && !self.is_ordinary_hash_value_result_chain(receiver, &[])
+                    && calls.first().is_some_and(|first| {
+                        Self::is_ordinary_hash_value_result_call(&first.method, &first.args, true)
+                    });
+                // The first helper keeps its producer policy. Its actual result
+                // owns later guards, without reviving an earlier rejected value.
+                kind_guarded_source |= hash_value_chain;
                 let hash_view_chain = self.is_ordinary_hash_view_result_chain(receiver, calls);
                 let hash_view_source_prefix = hash_view_chain
                     && !kind_guarded_source
@@ -6570,7 +6583,8 @@ impl Engine {
                     let mut remaining = calls.as_slice();
                     // Initial size sources retain their existing zero fallback.
                     // Already produced/selected/copied results keep their kind guard.
-                    if hash_view_source_prefix
+                    if hash_value_source_prefix
+                        || hash_view_source_prefix
                         || key_count_source_prefix
                         || (count_chain
                             && !kind_guarded_source
@@ -7242,6 +7256,17 @@ impl Engine {
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
+        let hash_value_chain = self.is_ordinary_hash_value_result_chain(receiver, calls);
+        let hash_value_source_prefix = hash_value_chain
+            && !kind_guarded_value
+            && !Self::is_ordinary_count_result_chain(receiver, &[])
+            && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+            && !self.is_ordinary_hash_view_result_chain(receiver, &[])
+            && !self.is_ordinary_hash_value_result_chain(receiver, &[])
+            && calls.first().is_some_and(|first| {
+                Self::is_ordinary_hash_value_result_call(&first.method, &first.args, true)
+            });
+        kind_guarded_value |= hash_value_chain;
         let hash_view_chain = self.is_ordinary_hash_view_result_chain(receiver, calls);
         let hash_view_source_prefix = hash_view_chain
             && !kind_guarded_value
@@ -7287,7 +7312,10 @@ impl Engine {
             // incompatible container operands, preserving the completed prefix.
             if (reduced_value || logical_prefix || kind_guarded_value)
                 && !(index == 0
-                    && (count_source_prefix || key_count_source_prefix || hash_view_source_prefix))
+                    && (count_source_prefix
+                        || key_count_source_prefix
+                        || hash_view_source_prefix
+                        || hash_value_source_prefix))
                 && call.method != "copy"
                 && !Self::is_generic_receiver_value_method(&call.method)
             {
@@ -9040,6 +9068,91 @@ impl Engine {
         calls
             .first()
             .is_some_and(|first| first.method == "count_keys" && first.args.is_empty())
+    }
+
+    fn is_ordinary_hash_value_operand(expr: &Expr) -> bool {
+        matches!(
+            expr,
+            Expr::Variable { .. }
+                | Expr::NumberLiteral { .. }
+                | Expr::StringLiteral { .. }
+                | Expr::BooleanLiteral { .. }
+                | Expr::Undef
+                | Expr::ArrayLiteral { .. }
+                | Expr::HashLiteral { .. }
+                | Expr::BlockValue { .. }
+                | Expr::Call { .. }
+                | Expr::FluentChain { .. }
+                | Expr::ReceiverMutationChain { .. }
+                | Expr::IndexedVar { .. }
+                | Expr::NestedAccess { .. }
+                | Expr::ValueAccess { .. }
+                | Expr::AssignScalar { .. }
+                | Expr::AssignArrayAppend { .. }
+                | Expr::AssignHashIndex { .. }
+                | Expr::AssignNestedAccess { .. }
+        )
+    }
+
+    fn is_ordinary_hash_value_result_call(
+        name: &str,
+        args: &[linkedspec_core::expr::Arg],
+        receiver: bool,
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let count = args.len() + usize::from(receiver);
+        let canonical_arity = match name {
+            "merge_hash" => count == 2,
+            "set_key" | "rename_key" => count == 3,
+            "drop_keys" | "pick_keys" => count >= 2,
+            _ => false,
+        };
+        canonical_arity
+            && args.iter().all(|arg| {
+                matches!(arg, Arg::Positional(value) if Self::is_ordinary_hash_value_operand(value))
+            })
+    }
+
+    // Pure Hash helpers retain their source/arity policies. Only ordinary value
+    // results and canonical first prefixes enter the existing persistent guards.
+    fn is_ordinary_hash_value_result_chain(
+        &self,
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls.iter().any(|call| {
+            Self::is_tree_traversal_receiver_method(&call.method)
+                || call.args.iter().any(|arg| match arg {
+                    Arg::Keyword { .. } => true,
+                    Arg::Positional(value) => {
+                        call.method != "with" && !Self::is_ordinary_hash_value_operand(value)
+                    }
+                })
+                || !(Self::is_generic_receiver_value_method(&call.method)
+                    || Self::is_array_receiver_value_chain_method(&call.method)
+                    || Self::is_hash_receiver_value_chain_method(&call.method)
+                    || Self::is_string_receiver_value_chain_method(&call.method)
+                    || Self::is_number_receiver_value_chain_method(&call.method)
+                    || Self::is_receiver_with_trailing_block_call(call))
+        }) {
+            return false;
+        }
+        if let Expr::Call { name, args } = receiver {
+            if self.spec.find_function(name).is_some() {
+                return false;
+            }
+            if Self::is_ordinary_hash_value_result_call(name, args, false) {
+                return true;
+            }
+        }
+        Self::is_ordinary_hash_value_operand(receiver)
+            && calls.len() > 1
+            && calls.first().is_some_and(|first| {
+                Self::is_ordinary_hash_value_result_call(&first.method, &first.args, true)
+            })
     }
 
     // Ordered Hash-view producers retain their input policy. Only canonical

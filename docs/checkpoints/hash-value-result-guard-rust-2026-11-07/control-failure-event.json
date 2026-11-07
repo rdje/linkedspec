@@ -1,0 +1,17 @@
+{
+  "basis": "Outer tool-result transcription; full inner command channels retained separately",
+  "private_inverse": {
+    "outer_exit": 0,
+    "inner_exit": 101,
+    "normal_frames": 0,
+    "meaning": "compile failure, not semantic RED; completion line was incorrect"
+  },
+  "private_restored": {
+    "outer_exit": 1,
+    "inner_exit": 101,
+    "normal_frames": 0,
+    "meaning": "compile failure; retained wrapper traceback"
+  },
+  "cause": "Missing own compile-time cli_conformance/cases/help/stdout.txt",
+  "repair": "Separate prospective qualified old/fixed four-route and ordinary epochs; actual help inputs plus89 frames/test counts required"
+}

@@ -1,0 +1,9 @@
+{
+  "candidate": "PASS",
+  "actual_direct_inputs": [
+    "rust/linkedspec-runtime/src/engine.rs",
+    "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+    "tests/fixtures/hash_value_result_guard_cases.json",
+    "tests/fixtures/hash_value_result_guard_rust_profiles.json"
+  ]
+}

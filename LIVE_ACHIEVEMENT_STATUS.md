@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-valued77: bounded Perl source77.0/composition77.1.1 have focused outcomes. Independent Rust77.2 next, then Dart/Julia/installed Lua. Full23.4 remains separate.
+PNT Hash-valued77: bounded Perl source/composition and independent Rust77.2 have focused outcomes. Clean daily artifact check, then independent Dart77.3/Julia4/installed Lua5; full23.4 separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.77.1.1 preserves pure Hash-result actual-kind/rejection dispatch through copy/logical/with and original first-source policy. Actual unchanged89 groups15RED becomes89PASS; exact old/current private-image inverse15RED/restored89PASS, direct4files185 and first recovery/eight controls PASS. All74 healthy projections/48 policies/matching89 artifact pairs exact; composed needed errors equal terminal controls. Source0 barriers/arity/copy/collision/mutation/metadata/format v2 unchanged; regenerate emitted Perl.
+TYPE-REFERENCE-BOOK.1.2.23.3.77.2 guards ordinary pure Hash-helper results through original actual-kind/rejection dispatch. Independent89/13RED becomes89PASS/four routes; qualified exact old/current private images13RED/89PASS, direct141/scoped format/candidate identity and first qualified readonly/nine controls PASS. All76 healthy observations/65 own profiles/matching89 artifact pairs exact. Original private compiler failures have zero frames and are retained; missing first-use help edge explicit under4.2, qualified capture prospective only. Producers/source/arity/key/copy/collision/mutation/format unchanged; rebuild Rust runtime/apps.
 
 ## Next Action
 
-From clean Perl77.1.1 landing activate Rust77.2 independently. Read shared28/frozen77 and actual Rust producer/source/arity/error contracts, acquire before-SDK/build inputs including actual grammar, run unchanged canonical targets plus smallest own source/shape fences, then repair demonstrated bounded gaps only. Preserve existing policy; no imported Perl verdict or broad suite/admission.
+From clean Rust77.2 landing recheck24h artifact record and own due cleanup before independently activating Dart77.3. Acquire unchanged28/actual own source/arity/error policies and actual grammar/SDK inputs before use, repair demonstrated bounded result guards only, then focused direct/inverse/recovery/book/Knowledge/live/commit. No imported Perl/Rust policy or broad verification between feature slices.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.77.2 — Rust89/four routes/direct141; qualified13RED/89PASS/nine controls; compiler-failure/help-input qualification explicit; Dart77.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.1.1 — Perl89PASS/direct185; private inverse15RED/restored89PASS/eight controls; independent Rust77.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.0 — source64PASS/direct93; private inverse14RED/restored64PASS; first recovery/eight controls; composition1.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — Perl76/own48; ten main-only host reads; first recovery/eight controls PASS; source77.0 next.
@@ -29,7 +30,6 @@ From clean Perl77.1.1 landing activate Rust77.2 independently. Read shared28/fro
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — each installed Lua16PASS/four routes; direct210 checks; runtime unchanged; selection36 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Julia16PASS/four routes; direct237 assertions; runtime unchanged; installed Lua5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Dart16PASS/four routes; qualified grammar/normal16/direct29; runtime unchanged; Julia4 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Rust already16PASS/four routes; new16/direct29; runtime unchanged; Dart75.6.3 next.
 
 ## History
 

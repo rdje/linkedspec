@@ -1,4 +1,6 @@
-{"member_count":34,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":36,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3117,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-observability-coverage-audit.md","sha256":"8c35c66579bf300f66e98b5665af06e4c156f2d85b9aec14a14dc794629d9dfc","type":"member"}
+{"bytes":2519,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-parity-proof-closed.md","sha256":"ea435b5bed05d513bc4d91e1680baae077125f6eb01fa15352fbf9166751a87a","type":"member"}
 {"bytes":1962,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-ruleir-planning-decisions.md","sha256":"ebbdabf6e76a7215fc01d7db39b67c18bfd485d3433920317338f1491f6823ce","type":"member"}
 {"bytes":3927,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-verbosity-and-formatting.md","sha256":"ddd83c81841a7c6b3c89fbb7bfb2045a47771aa546ba4c62dd8015b6a6449210","type":"member"}
 {"bytes":1836,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/type-task-selection-lookup.md","sha256":"e41aeb2fa2a2db382c6fe2cab9d83204e641fe6d45e226e3274d2f151eb0a7fc","type":"member"}
