@@ -1,0 +1,1156 @@
+{
+  "failed_targets": [
+    "take_free_hash_guard",
+    "take_receiver_hash_guard",
+    "take_last_free_hash_guard",
+    "take_last_receiver_hash_guard",
+    "drop_front_free_hash_guard",
+    "drop_front_receiver_hash_guard",
+    "drop_back_free_hash_guard",
+    "drop_back_receiver_hash_guard",
+    "slice_free_hash_guard",
+    "slice_receiver_hash_guard",
+    "sorted_free_hash_guard",
+    "sorted_receiver_hash_guard",
+    "reversed_free_hash_guard",
+    "reversed_receiver_hash_guard",
+    "concat_arrays_free_hash_guard",
+    "concat_arrays_receiver_hash_guard",
+    "take_later_with",
+    "reverse_copy_later_with",
+    "sort_logical_later_with"
+  ],
+  "healthy_targets": [
+    "take_compatible",
+    "take_last_compatible",
+    "drop_front_compatible",
+    "drop_back_compatible",
+    "slice_compatible",
+    "sorted_compatible",
+    "reversed_compatible",
+    "concat_arrays_compatible",
+    "explicit_selected_bridges",
+    "nested_kinds_and_source",
+    "source_once",
+    "source_snapshot",
+    "valid_empty_with",
+    "needed_source_error_terminal",
+    "needed_source_error_composed",
+    "needed_count_error_terminal",
+    "needed_count_error_composed",
+    "constructor_array_guard"
+  ],
+  "observations": {
+    "concat_arrays_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "concat_arrays_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 25469) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "concat_arrays_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 26019) line 55, at EOF\nsyntax error at (eval 26019) line 55, near \";\"k\"\"\nsyntax error at (eval 26019) line 55, near \";1\"\nsyntax error at (eval 26019) line 55, near \") }\"\nsyntax error at (eval 26019) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26019) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26019) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26019) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26019) line 55.\n"
+      ]
+    },
+    "constructor_array_guard": {
+      "build_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "drop_back_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "drop_back_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 18941) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "drop_back_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 19491) line 55, at EOF\nsyntax error at (eval 19491) line 55, near \";\"k\"\"\nsyntax error at (eval 19491) line 55, near \";1\"\nsyntax error at (eval 19491) line 55, near \") }\"\nsyntax error at (eval 19491) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19491) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19491) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19491) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19491) line 55.\n"
+      ]
+    },
+    "drop_front_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "drop_front_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 17309) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "drop_front_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 17859) line 55, at EOF\nsyntax error at (eval 17859) line 55, near \";\"k\"\"\nsyntax error at (eval 17859) line 55, near \";1\"\nsyntax error at (eval 17859) line 55, near \") }\"\nsyntax error at (eval 17859) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 17859) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 17859) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 17859) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 17859) line 55.\n"
+      ]
+    },
+    "explicit_selected_bridges": {
+      "build_error": null,
+      "fresh": [
+        "HEAD",
+        1,
+        "a,b"
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "HEAD",
+        1,
+        "a,b"
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "needed_count_error_composed": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": true,
+      "warnings": []
+    },
+    "needed_count_error_terminal": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": true,
+      "warnings": []
+    },
+    "needed_source_error_composed": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": true,
+      "warnings": []
+    },
+    "needed_source_error_terminal": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": true,
+      "warnings": []
+    },
+    "nested_kinds_and_source": {
+      "build_error": null,
+      "fresh": [
+        [
+          {
+            "k": "tail"
+          },
+          null,
+          0,
+          false
+        ],
+        [
+          false,
+          0,
+          null,
+          {
+            "k": "tail"
+          }
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          {
+            "k": "tail"
+          },
+          null,
+          0,
+          false
+        ],
+        [
+          false,
+          0,
+          null,
+          {
+            "k": "tail"
+          }
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "reverse_copy_later_with": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 27137) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "reversed_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "tail",
+          "head"
+        ],
+        [
+          "tail",
+          "head"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "tail",
+          "head"
+        ],
+        [
+          "tail",
+          "head"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "reversed_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 23837) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "reversed_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 24387) line 55, at EOF\nsyntax error at (eval 24387) line 55, near \";\"k\"\"\nsyntax error at (eval 24387) line 55, near \";1\"\nsyntax error at (eval 24387) line 55, near \") }\"\nsyntax error at (eval 24387) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 24387) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 24387) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 24387) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 24387) line 55.\n"
+      ]
+    },
+    "slice_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "slice_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 20573) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "slice_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 21123) line 55, at EOF\nsyntax error at (eval 21123) line 55, near \";\"k\"\"\nsyntax error at (eval 21123) line 55, near \";1\"\nsyntax error at (eval 21123) line 55, near \") }\"\nsyntax error at (eval 21123) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21123) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21123) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21123) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21123) line 55.\n"
+      ]
+    },
+    "sort_logical_later_with": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 27705) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "sorted_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "sorted_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 22205) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "sorted_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 22755) line 55, at EOF\nsyntax error at (eval 22755) line 55, near \";\"k\"\"\nsyntax error at (eval 22755) line 55, near \";1\"\nsyntax error at (eval 22755) line 55, near \") }\"\nsyntax error at (eval 22755) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 22755) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 22755) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 22755) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 22755) line 55.\n"
+      ]
+    },
+    "source_once": {
+      "build_error": null,
+      "fresh": [
+        "HEAD",
+        "S"
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "HEAD",
+        "S"
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "source_snapshot": {
+      "build_error": null,
+      "fresh": [
+        [
+          "head"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "take_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "take_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 14045) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "take_last_compatible": {
+      "build_error": null,
+      "fresh": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    },
+    "take_last_free_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 15677) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "take_last_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 16227) line 55, at EOF\nsyntax error at (eval 16227) line 55, near \";\"k\"\"\nsyntax error at (eval 16227) line 55, near \";1\"\nsyntax error at (eval 16227) line 55, near \") }\"\nsyntax error at (eval 16227) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n"
+      ]
+    },
+    "take_later_with": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Not a HASH reference at (eval 26578) line 55.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": []
+    },
+    "take_receiver_hash_guard": {
+      "build_error": null,
+      "fresh": null,
+      "fresh_error": null,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 14595) line 55, at EOF\nsyntax error at (eval 14595) line 55, near \";\"k\"\"\nsyntax error at (eval 14595) line 55, near \";1\"\nsyntax error at (eval 14595) line 55, near \") }\"\nsyntax error at (eval 14595) line 56, near \";\n }\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "type": "runtime_handler"
+      },
+      "passed": false,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n"
+      ]
+    },
+    "valid_empty_with": {
+      "build_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "passed": true,
+      "warnings": []
+    }
+  },
+  "programs": 37
+}

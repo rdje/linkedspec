@@ -2534,3 +2534,61 @@
   - [x] **ADDRESSED (verified)** — actual15RED to89PASS, exact old-image15RED/current89PASS, direct4files185 and first readonly/eight corruption controls PASS.
   - [x] **NO REGRESSION** — all74 healthy projections/48 policies and matching89 artifact pairs exact; initial Number/Array behavior, needed errors, Bool/null/source snapshots, splices/depth/collision/mutation and source0 barriers survive.
   - [x] **LOCKSTEP** — book/helper spine/Knowledge, tasks/index and change/engineering/live/MEMORY records distinguish bounded Perl closure from independent Rust77.2/full admission.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78`
+  Status: `pending` / selected existing-contract ordinary Array transform result guards
+  Children: `.78.1`, `.78.2`, `.78.3`, `.78.4`, `.78.5`.
+  Goal: Preserve selected ordinary Array-valued slice/order/concat results through current actual-kind consumers and rejection continuations.
+  Dependencies: Completed selection23.1.38, frozen array_transform_result_guard_cases.json and array-transform-result-guard-composition.md; existing constructor/view/Hash-result guards and initial-source lesson76.6/77.
+  Reproduction/impact: Original Perl37 all ready1/raw0/fallback0/unresolved0 have19 failures: eleven free/later programs raise Not a HASH reference, eight literal receiver programs retain raw DSL and fail handler/module compilation. Eighteen healthy controls and all actual original artifacts retained. No peer defect inferred.
+  Acceptance: Only take/take_last/drop_front/drop_back (existing source[,n]/[n]), slice source/start[,n], sorted/reversed free-one/zero-extra and concat_arrays free-two/receiver-one. Each backend independently acquires unchanged37 and own initial Number/null/Hash, optional/excluded-arity and needed-error fences before production. Preserve first producer source/errors and earlier produced/selected/copied guards separately; source once/snapshots/order/count/start coercion/sort/copy depth/splices and statement/operator/end mutation stay. Compatible Array/selected String/Hash bridges and valid empty with retain semantics; incompatible Hash consumers reject before operands, skipping later copy/logical/with. No other transforms/list-splice/alias/keyword/unknown/traversal/non-with trailing/deferred/callback/unassessed function-receiver promotion. Full23.4 remains separate.
+  Frontier: Capacity4.16 after clean selection38 landing, then independent Perl78.1. Acquire own source/arity/errors before any producer edit; split a newly demonstrated unsafe prerequisite before changes. Subsequent peers assess independently, one coherent focused-checked commit each.
+
+  Backend proof contract: Before production acquire unchanged37 on each leaf's named public routes and each affected producer's own initial Number/null/Hash, existing optional operand, excluded-arity/needed-error and earlier-owner fences. Preserve all healthy semantics and actual producer/input policies; repair only demonstrated canonical result guard gaps under frozen78. Retain actual first SDK/grammar/instrument/artifact inputs/full channels, unchanged-target RED/GREEN and distinguishing inverse/readonly recovery where a repair is needed. If already healthy, retain that outcome without speculative edits. Update smallest new/direct-dependent normal and public book. No broad source/domain/context/depth/coercion/mutation/native custody or admission claim.
+  Focused execution: Smallest finite new targets and directly affected producer/source normals; owned syntax/format or precise local runner include, inverse/recovery/book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.1`
+  Status: `pending`
+  Goal: Independently assess and repair Perl ordinary Array transform result composition.
+  Dependencies: Frozen78/selection38 unchanged37 and actual preceding bounded backend landing; no imported defect verdict or source policy.
+  Acceptance: Apply parent78 Acceptance and Backend proof contract in full on public Get/descriptor/substitution/native and full emitted fresh routes; independently acquire own policies before production.
+  Planned verification: Parent78 Focused execution, with own syntax/format or local runner include.
+  Planned canonical trigger: Parent78 full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.2`
+  Status: `pending`
+  Goal: Independently assess and repair Rust ordinary Array transform result composition.
+  Dependencies: Frozen78/selection38 unchanged37 and actual preceding bounded backend landing; no imported defect verdict or source policy.
+  Acceptance: Apply parent78 Acceptance and Backend proof contract in full on native/restored SpecFile/generated-plan/full emitted fresh routes; independently acquire own policies before production.
+  Planned verification: Parent78 Focused execution, with own syntax/format or local runner include.
+  Planned canonical trigger: Parent78 full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.3`
+  Status: `pending`
+  Goal: Independently assess and repair Dart ordinary Array transform result composition.
+  Dependencies: Frozen78/selection38 unchanged37 and actual preceding bounded backend landing; no imported defect verdict or source policy.
+  Acceptance: Apply parent78 Acceptance and Backend proof contract in full on native/restored SpecFile/generated-plan/full emitted fresh routes; independently acquire own policies before production.
+  Planned verification: Parent78 Focused execution, with own syntax/format or local runner include.
+  Planned canonical trigger: Parent78 full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.4`
+  Status: `pending`
+  Goal: Independently assess and repair Julia ordinary Array transform result composition.
+  Dependencies: Frozen78/selection38 unchanged37 and actual preceding bounded backend landing; no imported defect verdict or source policy.
+  Acceptance: Apply parent78 Acceptance and Backend proof contract in full on native/restored SpecFile/generated-plan/full emitted fresh routes; independently acquire own policies before production.
+  Planned verification: Parent78 Focused execution, with own syntax/format or local runner include.
+  Planned canonical trigger: Parent78 full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.5`
+  Status: `pending`
+  Goal: Independently assess and repair installed Lua ordinary Array transform result composition.
+  Dependencies: Frozen78/selection38 unchanged37 and actual preceding bounded backend landing; no imported defect verdict or source policy.
+  Acceptance: Apply parent78 Acceptance and Backend proof contract in full on each actual PUC/LuaJIT native/restored SpecFile/generated-plan/full emitted fresh routes; independently acquire own policies before production.
+  Planned verification: Parent78 Focused execution, with own syntax/format or local runner include.
+  Planned canonical trigger: Parent78 full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored controls, no population/performance measurement.

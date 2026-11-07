@@ -1,0 +1,7 @@
+{
+  "added_assertions": "        if key in RED or case.get('expected_error'):\n            assert isinstance(row.get('native_error'),dict)\n            if key not in RECEIVERS:assert isinstance(row.get('fresh_error'),dict)\n",
+  "prior_exit": 1,
+  "prior_reader_sha256": "144e7422d4fb15daed6d2e63ac81d5af30fc9645b251794f04b50123bc2b048d",
+  "qualified_reader_sha256": "1b4c41dbebd50f2b67a32fd1b7525033d7f5d5aeb46d54a0d5287909f586f67e",
+  "scope": "strict reader error-record shape checks for original RED/error rows and actual counterfactual controls; no SDK/observation/source/target/artifact edits"
+}

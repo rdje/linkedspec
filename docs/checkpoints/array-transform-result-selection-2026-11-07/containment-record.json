@@ -1,0 +1,22 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.1.38",
+  "pressure_failure": {
+    "surface": "task_evidence",
+    "bytes": 12586477,
+    "limit": 12582912
+  },
+  "first_commit_exit": 1,
+  "claim_check": "interrupted after known pressure failure; not passing",
+  "retained_candidates": {
+    "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+      "bytes": 505057,
+      "sha256": "48b069bd1ca7660d3cd08a7c7592a7ca992e482dae21e492204a0895b0adc179"
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+      "bytes": 396155,
+      "sha256": "7afb5aaf1e2e59d2edc5639d9f8bbe301b352ffea66c67c3cd3f9496e796bf49"
+    }
+  },
+  "saved_bytes": 5298,
+  "scope": "new pending78 duplicate fields and selection38 duplicate narrative only; no limit or infrastructure changes"
+}

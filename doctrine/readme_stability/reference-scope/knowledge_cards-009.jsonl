@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5057,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-action-source-ownership.md","sha256":"b7ba189b07c3438919593688514a05112eea8f1778eefd68452c5a90cd06c15b","type":"member"}
 {"bytes":3434,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-boundary-labels.md","sha256":"8b54b996767c9c538ccf17ede223d8bebd9098158fd1a89cd5aebdcbadece6b1","type":"member"}
 {"bytes":2091,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-primitive-rewrite-event-drift.md","sha256":"1f765957c9459a1aa5cef4289fc64b2af9de8c55b9e1c6f5b2de8a41dbb3a3a5","type":"member"}
 {"bytes":11431,"lines":158,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-raw-readiness-source-unit-provenance.md","sha256":"5ef3d0b864887c47f2f1767f3bf7e61ca3bec5825799e3754bae45fcf21e588a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4796,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-capability-guide-drift.md","sha256":"619d55d7064ee65959a14bedbaf8f4cb7999b0d2568bd0616837fb926a9d4bc8","type":"member"}
 {"bytes":2869,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-current-boundary-policy-drift.md","sha256":"7354fe7e55c10ecccbab67201a19263a439ff8c96344fd3423e1d23d873cfb70","type":"member"}
 {"bytes":12544,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-neutral-contract.md","sha256":"baf1548b3f68a79816318e97be4aad95c5c87ee09272e97775323866cad7f077","type":"member"}
-{"bytes":3248,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-public-closeout.md","sha256":"c33d9b19f0960f33d1ff44e101c0a2e3ae71bd8b25c6706ecf81353cabf6ff4e","type":"member"}

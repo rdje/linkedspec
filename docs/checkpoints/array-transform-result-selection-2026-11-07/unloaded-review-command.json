@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/array-transform-result-selection-2026-11-07/review_unloaded.py"
+  ],
+  "cwd": "."
+}

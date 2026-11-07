@@ -11,7 +11,7 @@ answers:
   - "which Lua callable codeblock test should be added"
   - "how is Lua admitted to recurring callable codeblock proof"
 date: 2026-08-01
-status: current-plan
+status: historical plan; four implementation and admission steps complete at recorded boundary
 tags: [lua, luajit, callable, codeblock, actionir, diagnostics, generated-source, semantic-introspection, FUTURE-PARITY-BACKLOG]
 evidence: "FUTURE-PARITY-BACKLOG.11.8.0 runs identical typed ActionIR/runtime probes on PUC Lua and LuaJIT, retrieves the neutral contract and four completed backend consumers, maps every Lua owner, and freezes one focused consumer plus .11.8.1-.4 construction/invocation/route/admission boundaries without production behavior changes."
 evidence_update_2026_08_01_construction: "FUTURE-PARITY-BACKLOG.11.8.1 implements the first planned seam exactly: the focused consumer passes 168 assertions on both Lua ABIs and the complete Lua gate remains green; dynamic invocation and route/admission owners are unchanged."
@@ -59,10 +59,13 @@ Implementation is dependency-ordered:
    exclusion only after proof, advances public/capability state, and closes parent `.11.8` and callable parent
    `.11`. Lexical capture remains excluded from version 1.
 
-Current progress: steps 1 through 3 are complete. Exact inert construction/state is documented in
+At the accepted August1 admission boundary, all four steps are complete, including
+`FUTURE-PARITY-BACKLOG.11.8.4`; the admission update above and its done task node
+own that historical outcome. Exact inert construction/state is documented in
 [[lua-callable-codeblock-literal-state]], and dynamic invocation in
 [[lua-callable-codeblock-dynamic-invocation]]. Emitted identity is documented in
-[[lua-callable-codeblock-emitted-route-identity]]. Step 4 remains dependency-ordered and unchanged.
+[[lua-callable-codeblock-emitted-route-identity]]. This corrects the stale progress
+sentence without extending that historical proof to today's host or broader contexts.
 
 One focused file, `lua/test/callable_codeblock_literal_contract_test.lua`, grows across `.1-.3`. It consumes the
 unchanged neutral JSON and owns the same ten roles as each admitted backend: neutral contract, inert construction,

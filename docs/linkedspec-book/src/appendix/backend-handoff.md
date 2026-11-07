@@ -4793,3 +4793,40 @@ context/native/cache/transitive/toolchain custody4.2/SESSION5, canonical registr
 have focused proof; remaining-feature selection23.1.38 owns the next clean PNT
 step. Evidence: `docs/checkpoints/hash-value-result-guard-lua-2026-11-07/REVIEW.md`;
 readonly review.py there recovers historical proof, not a future runtime verdict.
+
+
+## Selected Array transform result guards
+
+Selection23.1.38 independently acquires37 unchanged public Perl programs for
+ordinary take/take_last/drop_front/drop_back/slice/sorted/reversed/concat_arrays
+results. All37 report ready1/raw0/fallback0/unresolved0, but19 targets fail: eight
+free and three later-tail programs raise Not a HASH reference; eight literal
+receiver chains retain DSL and fail handler/module compilation. Eighteen healthy
+controls preserve eight compatible transforms, selected String/Hash bridges,
+nested kinds/source, once/snapshot order, empty with, four needed source/count
+errors and constructor rejection. Actual substitution shows a nonempty-ref copy
+where the constructor oracle uses a HASH test plus retained rejection state.
+MethodLowering.pm's ordinary free/prefix/retained/copy/logical/with lists omit the
+eight Array transform roles. No producer change or peer verdict is made here.
+
+Frozen shared37 and scoped contract own family78. Each backend first acquires its
+own unchanged targets and initial Number/null/Hash, optional/excluded-arity,
+needed-error and earlier-owner fences. Preserve first producer policy separately
+from result ownership, source/order/snapshots/count/start coercion/sort/depth/
+splices and all mutation. Other transforms, list-splice/alias/unknown/keyword/
+traversal/non-with trailing/deferred/unassessed callable contexts stay outside.
+Independent Perl78.1 follows clean selection landing; full23.4 remains separate.
+
+Actual own Perl/three conservative grammars/instruments/inputs precede public SDK
+use. All37 emitted modules/native handlers and complete gzip-first channels are
+retained; modules precede fresh loading, handlers precede native execution after
+Get builds them. Original first reader fails on absent fresh_error for unloaded
+modules; second reader recovers positive evidence then fails its first malformed
+error-record counterfactual. Both failures/readers/seals remain unchanged. Separate
+strict-error-shape reader first returns0/empty stderr/nine effective corruptions;
+no source/target/observation is rewritten. Fresh modules share runtime/process;
+full native/cache/transitive/toolchain custody4.2/SESSION5, isolation/context/
+registration/full23.4 admission remains separate. Evidence:
+`docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md`; readonly
+`review_typed_errors.py` there recovers historical proof, not a current runtime or
+peer verdict.

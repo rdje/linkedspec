@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3148,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-regex-feature-contract.md","sha256":"4c1b8d0e984119f88e31592f53313e8c11dd506475122549a9fa80af14c8bfad","type":"member"}
 {"bytes":3377,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-rule-mode-semantics-map.md","sha256":"d6f068858022ddb38e405a3338f4a5dae046ade43a675715906e030f7f6bd200","type":"member"}
 {"bytes":10458,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-spec-self-hosted-grammar.md","sha256":"727c710695b3a82d1544f2ecef49d3da958d94a01ed95d996b97880adc8074d6","type":"member"}
 {"bytes":3833,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-top-rule-no-regex-two-rule-minimum.md","sha256":"e569ab56048c6d7e4a8b44f56e4a61904964df3c63e47dcc1ddaa023d533e220","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2586,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-compile-actionir-coverage-closed.md","sha256":"79a38215343e15dfc52ad5eec0c4b877d69f3accfb9e4d224b88a4ddd85b43d8","type":"member"}
 {"bytes":1913,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-compile-actionir-coverage-split.md","sha256":"942033687b3292e9c90170521d060fcb3b3cf609e752addf04676f7b1975978b","type":"member"}
 {"bytes":2042,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-coverage-extension-split.md","sha256":"d36ddea8e2fb49cecdd1b92cf7a2b47d4612013b1d62c1a7785a072fad10974f","type":"member"}
-{"bytes":4382,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-cross-variant-capability-contract.md","sha256":"e12e5b3079fe94669a4702d93e999a98a338557de6bccf1f1717c26cd550d9c8","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-lua-runtime.md","sha256":"a3810243b04dc05183fe1c047bd20874215865d5d1e2999c80ecef232cddf9db","type":"member"}
 {"bytes":11288,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-neutral-contract.md","sha256":"c61a6a296505124974789b562b5d285b8f0f5f9dd978c94afb308c60dfc0590b","type":"member"}
 {"bytes":11828,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-rust-runtime.md","sha256":"e21fa1298044904f87481ecaab897a0129c64e84eedbf6bc89fab558fb0356db","type":"member"}
 {"bytes":2453,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/marker-switch-outside-branch-statement-drift.md","sha256":"1aa77da022269fca92cdece89863ebd8b3297bc4664db5e4289f3b26ef25a55f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2975,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-definedness-native-numeric-slots.md","sha256":"78a6f001faa4416c74a52eda0b3e530d5b919b668803fbf58ef6f541b667e33e","type":"member"}
 {"bytes":4740,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-diagnostic-output-events.md","sha256":"02d806257c9fb267270466cbfab8d533c68b5dad84bba2ca3043fe13f7ff855b","type":"member"}
 {"bytes":4673,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-direct-read-autovivification-gap.md","sha256":"4b257ffce04cac82f51dc77185156e9f93c215f9f0268377b1b66ce7701221e2","type":"member"}
-{"bytes":3054,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-direct-read-selector-lifetime.md","sha256":"cfcc7fffbaac7dfa1eb68991e5cecdcf2e376826e409f28bf56da65d15d64bdb","type":"member"}

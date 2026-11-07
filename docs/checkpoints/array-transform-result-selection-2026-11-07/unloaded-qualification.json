@@ -1,0 +1,9 @@
+{
+  "additional_control": "invented fresh execution after failed load",
+  "new_assertion": "assert 'fresh_error' not in row and 'fresh' not in row and row['native'] is None",
+  "old_assumption": "assert row['fresh_error'] is None and row['native'] is None",
+  "original_exit": 1,
+  "original_reader_sha256": "470f7206b895ca2d03976429b9627fd163a200b484d05c2dd43ef9a4f5f09024",
+  "qualified_reader_sha256": "144e7422d4fb15daed6d2e63ac81d5af30fc9645b251794f04b50123bc2b048d",
+  "scope": "reader-only protocol correction; no producer/source/target/artifact/observation edit"
+}

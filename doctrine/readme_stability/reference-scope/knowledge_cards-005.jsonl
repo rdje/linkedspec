@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":16127,"lines":284,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md","sha256":"1d2a8f87ba97959cf3ef112a5120f1fe09725a27a47926a11485bc82ab783487","type":"member"}
 {"bytes":14294,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-backend-full-parity-plan.md","sha256":"7e3fbffed6633dcb0907065ae4816fca609056a334bb952eac8a240aec2e4b34","type":"member"}
 {"bytes":3583,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-postcall-return-scope-gap.md","sha256":"c0c8c94f09cff020a7b65ec787ac96bb876b65f507eeecf368d0b7720bf1d154","type":"member"}
 {"bytes":3634,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-target-regex-projection.md","sha256":"772501cc71e8cc155937328f6ec4da1414340587fad86a7a4f00f4f4fab7dc95","type":"member"}
@@ -6,7 +7,7 @@
 {"bytes":4870,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-dynamic-invocation.md","sha256":"f97f89e2bd278f498c8a30558df7700ddd8357a12f5baefa44769bb2371ac49a","type":"member"}
 {"bytes":8173,"lines":101,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-emitted-route-identity.md","sha256":"27b73fdbac11e5e05db242900a910eb571ea904b9e29a765011727213b486748","type":"member"}
 {"bytes":4537,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-literal-state.md","sha256":"fdf714656d594dc667ec7b024f87cef3d04b38846c433cdd3b91dd7c9b3f4e17","type":"member"}
-{"bytes":6967,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"1579b754c28016675926185e4bf44f7a2eaa1e13b5a46276a47708adf8ca28f3","type":"member"}
+{"bytes":7255,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.38","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"fd8c7c5192255383f8bdea66bbfc299c751b39cd114f45afa16d14a1c5083df8","type":"member"}
 {"bytes":2846,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/lua-callable-key-count-preservation.md","sha256":"d1228a65bc7e6724b60ecae00ca1b845792984fe013f6729f6351d124a8de706","type":"member"}
 {"bytes":2435,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-canonical-set-result-guards.md","sha256":"b7a0e154a5fec4c44105228b257656952dbe87cca4d0b8df955a49a3e0211a42","type":"member"}
 {"bytes":9038,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-capture-cursor-runtime-audit.md","sha256":"9be6cbaa77554c3cd451bc9ed2d76e2f14e48241499b9dbff6b6b27298e777fa","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5839,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-private-authority.md","sha256":"37b907f52b32486379de7e7f2c49edc6da50e428a52d1ef11a0dae2288f9105e","type":"member"}
 {"bytes":4829,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-recomposition.md","sha256":"6f6e49084d307df63c4d92ce4451dea6083368749f22a14c9c6b7cafba24920b","type":"member"}
 {"bytes":9090,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-project-data-ssd-storage.md","sha256":"69cf477446d686e1d865d5f51586ca64df4417f5eb8ad53106e232fa7aa06889","type":"member"}
-{"bytes":2165,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-pure-split-bridge.md","sha256":"67b43679cd2858dbecb52f25b8b639985fea6cf0dfb8d1ae6738dd2261582de0","type":"member"}

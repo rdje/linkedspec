@@ -20,6 +20,7 @@
 {"bytes":34542,"lines":504,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/archogen-rust-lispish-integration.md","sha256":"4ed7bb435b765cfdd98278e1b67b2bc7934e66e926e26238059f0b379888b0c0","type":"member"}
 {"bytes":3433,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-contains-result-handoff.md","sha256":"a99073d875f72cb6b89426e6957987888d893b931f147046acbf44b9e35c3c1c","type":"member"}
 {"bytes":2945,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-helper-return-shape-caveats.md","sha256":"29dedf6a9d767e54cbca3e97c5024f16340a04b8587686d2dce56f3ede020bc6","type":"member"}
+{"bytes":3821,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.38","path":"docs/knowledge/array-transform-result-guard-selection.md","sha256":"dbaa34c31b011c6732b626dae45c45a8a2290f32a0181089d835019d4cff1a36","type":"member"}
 {"bytes":9652,"lines":147,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-tree-traversal-contract.md","sha256":"647203a478e2690c6461128eefd45774d07d0c590fe17d5dcc2f740ff8c1869e","type":"member"}
 {"bytes":2338,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.15","path":"docs/knowledge/artifact-claim-composition-inputs.md","sha256":"7789ed7fb69a76e617c60f136c8990d76b353e09d202a4a41db18d1452b69c1f","type":"member"}
 {"bytes":12263,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/backend-capability-census.md","sha256":"2f9b465ff17a21dfc946a71edf77dfc0b947105d24119d418ce5a978c8abb7d7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5938,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-scalar-numeric-drift.md","sha256":"2517f3e1ee6fd441a8406467be9fb5ee8044110189f0734a28ee7faff8bf2651","type":"member"}
 {"bytes":2470,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-switch-scalar-comparison-drift.md","sha256":"6027353d70f8e3775b741cc3ceaa901a6a824866254b469da814cb8e61abb055","type":"member"}
 {"bytes":4211,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-call-name-inventory-does-not-prove-runtime-semantics.md","sha256":"498824476e6e67bf0446f0ec2efc63f020c0eefbf753137bb81ff653a7757828","type":"member"}
-{"bytes":13120,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-supporting-grammar-dependencies.md","sha256":"68e6722ff6b12554ca482ef2ac014591e33778e24d1d7ec4d1e98aeebc284468","type":"member"}

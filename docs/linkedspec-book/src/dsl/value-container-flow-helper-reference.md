@@ -1232,6 +1232,42 @@ Perl callable bodies also support `sorted` and `take`, including their receiver 
 Sorting also preserves numeric and string scalar kinds through codeblock copies; see the [typed copy examples](values-containers-and-flow-helpers.md#scalar-kinds-after-sorting).
 For Perl callable `count`/`first`, see the [worked selection, terminal and effect examples](values-containers-and-flow-helpers.md#counting-and-selecting-first-inside-perl-codeblocks).
 
+### Array transform continuations: selected open repair
+
+`take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed` and
+`concat_arrays` return Arrays. Their compatible ordinary Perl continuations are
+already working in the selected controls:
+
+```text
+take(["head","tail"],1).last().uppercase()             # "HEAD"
+reversed([{"k":"tail"}]).last().pick_keys("k").count_keys() # 1
+sorted(["b","a"]).join_values(",")                   # "a,b"
+take(["tail"],0).with(){return(value.count())}          # 0; body runs
+```
+
+The selected Hash-consumer boundary still needs repair. This target should return
+`[null, ""]`, rejecting before either consumer operand:
+
+```text
+order="";
+out=take(["head","tail"],1).set_key(
+  {order=cat(order,"K");"k"},
+  {order=cat(order,"V");1});
+return([out,order]);
+```
+
+The original Perl source currently raises `Not a HASH reference`; literal receiver
+versions such as `["head","tail"].take(1).set_key(...)` can retain DSL and fail
+compilation. The finite selection reports ready metadata for these programs, so
+readiness alone does not prove execution or emitted compilation. Family78 owns
+independent backend repairs; no peer defect or completed implementation is implied.
+Later copy/logical/with work must retain rejection rather than turn it into a
+legitimate null. Current compatible values, nested false/null/Number kinds, source
+once/snapshot order, valid empty Array bodies and needed producer errors are
+preservation controls. Initial source behavior, optional/excluded arities, count/
+start coercion, sort/copy depth, list splices and mutation keep their existing
+contracts. Other Array transforms and full context/portable admission remain open.
+
 ## Hash helpers
 
 Hash helpers return scalar information about an object or a new hash/array value derived from it.

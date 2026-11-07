@@ -941,6 +941,15 @@ sorted([2,"10",1])               # [1,"10",2] (lexicographic)
 - **Returns**: array
 - **Behavior**: Returns a new array in reverse order. Does not mutate the input.
 
+The ordinary Array results of `take`, `take_last`, `drop_front`, `drop_back`,
+`slice`, `sorted`, `reversed` and `concat_arrays` have a selected open continuation
+repair. Original Perl controls preserve compatible Array/selected String/Hash
+bridges, but incompatible `set_key` tails can raise a Hash-reference error or
+retain literal DSL that fails compilation. Ready metadata does not certify these
+programs. Family78 independently assesses each backend before repair, preserving
+existing source/optional-arity/coercion/depth/mutation behavior. See the
+[worked current/target boundary](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-selected-open-repair).
+
 ### `array(e1, e2, ...)`
 - **Signature**: `array(values: expr...)`
 - **Returns**: array

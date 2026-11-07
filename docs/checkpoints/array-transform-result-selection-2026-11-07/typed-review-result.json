@@ -1,0 +1,23 @@
+{
+  "actual_module_handler_pairs": 37,
+  "eligible_ready": 37,
+  "error_shape_qualification": "second reader halted at first corrupted None error record; separate reader explicitly validates error-record shapes; all earlier failures/observations/seals remain unchanged",
+  "free_or_later_runtime_errors": 11,
+  "healthy_controls": 18,
+  "original_failures": 19,
+  "programs": 37,
+  "reader_qualification": "original first reader assumed a fresh-execution field for unloaded modules; separate reader requires actual field absence; original producer/observations/targets/reader/seal unchanged",
+  "receiver_compile_errors": 8,
+  "recovery_corruptions": [
+    "hidden original free runtime error",
+    "receiver compilation failure normalized",
+    "invented fresh execution after failed load",
+    "masked needed producer error",
+    "Bool normalized to Number",
+    "healthy Array order drift",
+    "missing healthy member",
+    "fixture target drift",
+    "actual handler drift"
+  ],
+  "scope": "finite original public Perl selection, unchanged targets; no production/peer verdict/full source-context/native-transitive custody/isolation/registration/23.4 admission"
+}
