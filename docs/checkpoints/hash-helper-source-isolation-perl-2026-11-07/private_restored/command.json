@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_HASH_HELPER_SOURCE_CAPTURE=docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored",
+    "prove",
+    "-v",
+    "-j1",
+    "--exec",
+    "perl -Iperl docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_runner.pl docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/control-owner.pm",
+    "t/hash_helper_source_isolation.t"
+  ]
+}

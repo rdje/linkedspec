@@ -1,0 +1,15 @@
+{
+  "source": "Tool-result transcription; complete outer wrapper stderr was not separately acquired",
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/capture.py",
+    "after"
+  ],
+  "wrapper_exit": 1,
+  "inner_prove_exit": 1,
+  "test_exit": 11,
+  "actual_raw_inner_channels": "after/stdout.log.gz and after/stderr.log.gz",
+  "cause": "Partial producer barriers repair string/computed paths; literal Number3 still takes named-Hash shortcut %3 or reference to %3",
+  "repair": "Reuse prior76.6 Number-AST exclusion locally in the five helper shortcuts; retain original before/after unchanged"
+}

@@ -995,6 +995,12 @@ sub _parse_method_value_ast_expr {
  return LinkedSpec::ActionIR::AST::parse_action_expr($expr, { deps => $deps || {} })
 }
 
+sub _method_value_is_numeric_literal {
+ my ($expr, $deps) = @_;
+ my $node = _parse_method_value_ast_expr($expr, $deps);
+ return ref($node) eq 'HASH' && ($node->{kind} // '') eq 'number';
+}
+
 sub _ordinary_grouped_assignment_node {
  my ($node, $deps) = @_;
  return undef unless ref($node) eq 'HASH' && ($node->{kind} // '') eq 'raw_perl';
@@ -8327,7 +8333,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    return undef unless defined($target_expr) && length($target_expr);
 
    my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-   if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
+   if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
     push @parts, '%'.$hash_symbol;
     next;
    }
@@ -8336,7 +8343,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    $lowered_target = $target_expr unless defined($lowered_target) && length($lowered_target);
    return undef unless defined($lowered_target) && length($lowered_target);
 
-   push @parts, 'do { my $__ls_merge_hash = '.$lowered_target.'; defined($__ls_merge_hash) ? %{$__ls_merge_hash} : () }';
+   push @parts, 'do { my $__ls_merge_hash = '.$lowered_target.'; defined($__ls_merge_hash) && ref($__ls_merge_hash) ne \'\' ? %{$__ls_merge_hash} : () }';
   }
 
   return '{'.join(', ', @parts).'}';
@@ -8363,7 +8370,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $lowered_target;
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -8371,7 +8379,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_set_key_source = '.$lowered_target.'; my %__ls_set_key = defined($__ls_set_key_source) ? %{$__ls_set_key_source} : (); '
+  return 'do { my $__ls_set_key_source = '.$lowered_target.'; my %__ls_set_key = defined($__ls_set_key_source) && ref($__ls_set_key_source) ne \'\' ? %{$__ls_set_key_source} : (); '
    .'my $__ls_set_key_key = '.$key_lowered.'; my $__ls_set_key_value = '.$value_lowered.'; '
    .'$__ls_set_key{$__ls_set_key_key} = $__ls_set_key_value; \%__ls_set_key }';
  }
@@ -8393,7 +8401,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $lowered_target;
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -8401,7 +8410,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   }
   return undef unless defined($lowered_target) && length($lowered_target);
 
-  return 'do { my $__ls_rename_key_source = '.$lowered_target.'; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{'.$old_key_lowered.'}) { my $__ls_rename_key_value = delete $__ls_rename_key{'.$old_key_lowered.'}; $__ls_rename_key{'.$new_key_lowered.'} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }';
+  return 'do { my $__ls_rename_key_source = '.$lowered_target.'; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = ref($__ls_rename_key_source) ne \'\' ? %{$__ls_rename_key_source} : (); if (exists $__ls_rename_key{'.$old_key_lowered.'}) { my $__ls_rename_key_value = delete $__ls_rename_key{'.$old_key_lowered.'}; $__ls_rename_key{'.$new_key_lowered.'} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }';
  }
  if ($method_call && $method_call->{method} eq 'drop_keys') {
   my $drop_args = $normalize_collection_args->($method_call->{args} || [], 2, undef);
@@ -8412,7 +8421,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   my $lowered_target;
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -8435,7 +8445,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
 
   # A named key list accepts zero/one/many explicit splice values without Perl's
   # scalar hash-slice advisory. Materialize each operand before its next sibling.
-  return 'do { my $__ls_drop_source = '.$lowered_target.'; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = ('.join(', ', @lowered_keys).'); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }';
+  return 'do { my $__ls_drop_source = '.$lowered_target.'; if (defined($__ls_drop_source)) { my %__ls_drop = ref($__ls_drop_source) ne \'\' ? %{$__ls_drop_source} : (); my @__ls_drop_keys = ('.join(', ', @lowered_keys).'); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }';
  }
  if ($method_call && $method_call->{method} eq 'pick_keys') {
   my $pick_args = $normalize_collection_args->($method_call->{args} || [], 2, undef);
@@ -8445,7 +8455,8 @@ if ($method_call && $method_call->{method} eq 'index_of') {
   return undef unless defined($target_expr) && length($target_expr);
   my $hash_symbol = $extract_hash_symbol_name->($target_expr);
   my $lowered_target;
-  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re) {
+  if (defined($hash_symbol) && length($hash_symbol) && $target_expr =~ $hash_symbol_expr_re
+      && !_method_value_is_numeric_literal($target_expr, $deps)) {
    $lowered_target = '\\%'.$hash_symbol;
   } else {
    $lowered_target = _lower_method_value_expr($target_expr, $deps);
@@ -8467,7 +8478,7 @@ if ($method_call && $method_call->{method} eq 'index_of') {
    push @lowered_keys, $key_lowered;
   }
 
-  return 'do { my $__ls_pick_source = '.$lowered_target.'; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ('.join(', ', @lowered_keys).') { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }';
+  return 'do { my $__ls_pick_source = '.$lowered_target.'; if (defined($__ls_pick_source)) { $__ls_pick_source = {} if ref($__ls_pick_source) eq \'\'; my %__ls_pick; foreach my $__ls_pick_key ('.join(', ', @lowered_keys).') { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }';
  }
  if ($method_call && $method_call->{method} eq 'join_values') {
   my $join_args = $normalize_method_args_with_optional_scope->($method_call->{args} || [], 2, 2);

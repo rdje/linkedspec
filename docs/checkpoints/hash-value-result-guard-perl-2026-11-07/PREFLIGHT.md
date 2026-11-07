@@ -31,11 +31,14 @@ results only in the main state. Empty and outer states keep the clean fallbacks.
 Both host maps are exactly unchanged before/after every run. These ten finite
 controls prove the named host read, not general process isolation.
 
-Actual public substitutions and handlers point to own MethodLowering.pm producer
-sites8339/8374/8404/8438/8470: defined alone admits a non-reference scalar before
-Hash dereferencing. Perl then resolves a symbolic main Hash. Immediate P1
-TYPE-REFERENCE-BOOK.1.2.23.3.77.0 owns the repair, before composition77.1.1 and
-peers. Preserve clean empty-Hash fallback, existing wrong-reference errors, real
+The initial local source inspection identified own MethodLowering.pm producer
+sites8339/8374/8404/8438/8470 with defined-only computed dereferencing. Source77.0
+later qualifies that preliminary mechanism: literal Numbers also enter named-Hash
+shortcuts and emit%3/reference-to-%3, bypassing those guards. Both paths need repair;
+see hash-helper-source-isolation-perl-2026-11-07/REVIEW.md for the retained partial
+failure and complete bounded outcome. The original ten host observations and
+all raw epochs remain exact. Source77.0 precedes composition77.1.1 and peers.
+Preserve clean empty-Hash fallback, existing wrong-reference errors, real
 named Hash inputs, operand order/snapshots, splices/copy depth/collision and
 statement/operator mutation; do not make a broad source-domain normalization.
 
@@ -64,4 +67,5 @@ localized acquisition; no claim of86 distinct source programs is made.
 Native/fresh modes share a process/runtime. General SESSION17 isolation,
 native/cache/transitive custody4.2/SESSION5, peer assessment, registration and
 full23.4 admission stay separately owned. The preflight itself fixes no runtime
-defect; clean source-isolation77.0 and composition77.1.1 commits follow.
+defect; source-isolation77.0 has its separately owned bounded outcome, while
+composition77.1.1 follows clean landing.

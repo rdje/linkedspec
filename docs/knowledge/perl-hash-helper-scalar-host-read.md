@@ -7,21 +7,30 @@ answers:
   - "which task repairs scalar source host reads before Hash helper composition"
   - "does a ready merge_hash extra operand mean other extra shapes are ready"
   - "what initial source policies must Perl Hash helper guard repairs preserve"
+  - "why does a ref guard still leave merge_hash emitting percent3"
+  - "how are literal and computed numeric Hash-helper source reads different"
 date: 2026-11-07
-status: ten localized source defects confirmed; immediate P1 source repair77.0 pending
+status: bounded source77.0 focused-checked; general SESSION17 and composition77.1.1 separate
 tags: [perl, hash, source, isolation, helpers, preflight]
-evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0; hash-value-result-guard-perl-2026-11-07/PREFLIGHT.md retains actual76 (unchanged28/shared15 failures plus48 own policies), actual ten reused Number3 sources under three localized host states and86 actual artifact pairs. All ten native/fresh results read main::3 only when populated; empty/outer controls and unchanged host maps distinguish the cause. First readonly recovery/eight corruptions PASS; SDK unchanged."
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.77.0; hash-helper-source-isolation-perl-2026-11-07/REVIEW.md retains unchanged normal64/14RED, partial11RED, final64PASS/direct93 and exact old/fixed private-image inverse14RED/restored64PASS. All48 own public policies and64 actual artifact pairs remain exact across matching old/new epochs; first readonly recovery/eight corruptions PASS. Preflight77.1.0 retains original76/ten localized sources; its defined-only diagnosis is explicitly qualified."
 reverify:
-  - "bash tools/run_python_project_data.sh docs/checkpoints/hash-value-result-guard-perl-2026-11-07/review_preflight.py"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/review.py"
 ---
 
-Actual public substitution/handler shows non-reference scalar dereference into
-Hash data. MethodLowering.pm8339/8374/8404/8438/8470 tests defined alone for pure
-merge_hash/set_key/rename_key/drop_keys/pick_keys producers, so Number3 resolves
-unrelated main::3 on both native/fresh execution. Localized empty/outer/main
-controls on each free/receiver source distinguish this from a DSL working Hash
-or outer loader namespace. Host maps stay unchanged. P1 child77.0 precedes
-composition77.1.1; the preflight makes no production change.
+This is a bounded repair within [[perl-wrong-kind-collection-host-slot-drift]].
+Actual substitution/handlers distinguish two routes: literal Number ASTs enter
+named-Hash shortcuts (%3/reference-to-%3); computed/String scalars reach defined-
+only dereferencing. The first generic barriers leave11 failures after repairing
+three controls. Source77.0 reuses76.6's Number-AST exclusion locally in the five
+helper shortcuts and adds non-reference barriers to copying/access. All64 groups
+then pass. Exact old/fixed images at one private path reproduce14RED/64PASS while
+the checkout stays fixed. Outer/main/empty host maps remain unchanged.
+
+Keep rename/drop/pick's outer defined branches. Actual Number3 pick/drop effects
+are SK; null effects S. Moving the reference check outside would skip needed keys.
+All48 original source/error/arity policies stay exact, including Array errors and
+null-with W. Actual artifact pairs match old/inverse and final/restored/direct.
+Regenerate emitted Perl; metadata and format v2 stay unchanged.
 
 Forty-eight independently acquired own clean-host fences retain Number3/null
 fallback Hashes, Array[1] errors, null-with W and produced-size guards. Extra

@@ -1369,16 +1369,17 @@ or indexed mutation retain their existing contracts. See the
 [backend handoff](../appendix/backend-handoff.md#selected-hash-valued-helper-result-guards)
 for the bounded evidence and repair prerequisites.
 
-Perl preflight also confirms a separate source-isolation defect before that
-composition repair: using Number `3` as a source for these five pure helpers can
-read unrelated host `%main::3` data on both native and fresh emitted routes.
-`merge_hash(3,{"b":2})`, for example, keeps its clean `{ "b":2 }` fallback only
-when that host Hash has no matching data. Ten localized free/receiver controls
-distinguish main from the loader's outer namespace and show no host mutation.
-Immediate77.0 owns the source repair; composition77.1.1 follows. Use actual Hash
-inputs under the published signatures. Existing Array-source errors and Perl's
-finite Number/null fallback policies must remain distinct; no portable wrong-
-source policy or general isolation claim follows.
+Perl's bounded source-isolation77.0 repair now keeps the observed Number3,
+String `"3"`, computed Number and merge-overlay controls independent of unrelated
+host `%main::3` data on native/fresh routes. `merge_hash(3,{"b":2})` keeps its
+existing `{ "b":2 }` fallback even with that host Hash populated. Number ASTs no
+longer enter these five named-Hash shortcuts; computed non-reference sources get
+a dereference barrier. Original Array errors and null/key branches remain: the
+selected Number3 pick/drop controls run source/key effects `SK`, while null runs
+only `S`. All48 original own policies remain exact. Regenerate Perl parsers
+emitted before this repair; metadata and format v2 are unchanged. Use actual Hash
+inputs under the published signatures. Composition77.1.1 and broad source/
+isolation/portable admission remain separate.
 
 `pick_keys` uses field existence, so requested false and null fields are retained while missing fields are omitted. For example, with `meta={"off":false,"nil":undef,"other":1}`, `pick_keys(meta,"off","nil","missing")` returns `{"off":false,"nil":null}` and leaves `meta` unchanged. `has_key(pick_keys(meta,"nil"),"nil")` remains true even though that stored value is null.
 

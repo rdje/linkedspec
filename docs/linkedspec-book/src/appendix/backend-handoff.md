@@ -4547,8 +4547,8 @@ ten unchanged Number3 sources under localized empty/outer/main host3 states.
 Every free/receiver merge_hash/set_key/rename_key/drop_keys/pick_keys source reads
 unrelated main::3 entries into native/fresh results only when that Hash is
 populated. Empty/outer controls keep the clean fallback, and both host maps are
-unchanged before/after. Own MethodLowering producer sites check defined alone
-before symbolic Hash dereferencing. This is a confirmed bounded source defect,
+unchanged before/after. The initial producer inspection finds defined-only computed dereferencing;
+source77.0 below also qualifies literal Number named-Hash shortcuts. This is a confirmed bounded source defect,
 not a legitimate input policy to preserve.
 
 Immediate P1 source-isolation77.0 precedes composition77.1.1 and independent
@@ -4562,3 +4562,38 @@ their original inputs/full channels. Evidence and historical reader:
 `docs/checkpoints/hash-value-result-guard-perl-2026-11-07/PREFLIGHT.md` and
 `review_preflight.py`. General SESSION17 isolation, native/cache/transitive
 custody4.2/SESSION5, registration, peer verdicts and full23.4 remain separate.
+
+## Perl bounded Hash-helper source isolation
+
+Source77.0 fixes the observed host reads before composition77.1.1. Two routes
+need separate guards: computed/String values reach defined-only dereferencing,
+while literal Numbers enter named-Hash shortcuts and emit%3/reference-to-%3.
+The first edit protects computed/String controls but leaves11 failures; that
+original partial epoch stays intact. The final edit reuses76.6's Number-AST
+exclusion locally in merge_hash/set_key/rename_key/drop_keys/pick_keys shortcuts
+and guards non-reference copying/access. Global extractors, original arity,
+key splices, copy depth, collision and statement/operator mutations stay intact.
+
+The unchanged normal64 contains16 localized targets plus48 own source/shape
+profiles, intentionally reusing ten source texts across target/policy groups.
+Actual14RED becomes64PASS. Number3 pick/drop source-key effects remain SK; null
+remains S. All48 original public projections, including Array errors/null-with W/
+size guards/extra shapes, stay exact with only eval serials normalized. All host
+maps remain unchanged. Exact old/fixed images at one private path reproduce
+14RED/64PASS while the checkout stays fixed; four direct files pass93 top-level
+tests, including existing set/pick/drop and generated FATAL-warning controls.
+
+All64 actual emitted-module/native-handler pairs match old versus inverse and
+final versus restored/direct. First readonly recovery/eight evidence corruptions
+pass with empty stderr. Full original/partial/final/private/direct raw channels,
+input bytes/modes and actual source images are retained under
+`docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/REVIEW.md` and
+`review.py`. The original preflight mechanism prose is explicitly qualified;
+no failed epoch or fixture is overwritten. The partial outer wrapper traceback
+is disclosed as a tool-result transcription; complete inner channels are kept.
+
+Regenerate Perl parsers emitted before this repair; old emitted code keeps its
+producer. Metadata/format v2 are unchanged. This bounded source result does not
+close general SESSION17 isolation, native/cache/transitive custody, registration
+4.1, peer source policies or full23.4. Clean composition77.1.1 next reacquires
+unchanged28/own48 before result-guard edits; independent peers follow.

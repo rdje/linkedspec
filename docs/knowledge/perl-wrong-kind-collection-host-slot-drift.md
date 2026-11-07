@@ -171,3 +171,15 @@ values unchanged, while valid named Hashes stay[a,b] and initial Array errors
 survive. See [[perl-hash-view-initial-source-ownership]] for exact inputs and proof.
 This does not close SESSION17.2's broader bare/absent/other-helper or general
 isolation acceptance; those original observations remain dated evidence.
+
+## Bounded Hash-valued helper repair — November7
+
+TYPE77.0 repairs the observed literal/computed scalar source reads in pure
+merge_hash/set_key/rename_key/drop_keys/pick_keys. The actual new normal64 has
+14RED, a retained partial11RED and final64PASS/direct93; exact old/fixed producer
+images at one private path reproduce14RED/64PASS. Literal Number ASTs no longer
+enter the five named-Hash shortcuts, and computed non-reference values no longer
+resolve symbolic Hashes. Keep original null/key branches, Array errors and48
+source/shape policies; regenerate affected emitted Perl. Precise source/inputs/
+limits live in [[perl-hash-helper-scalar-host-read]]. SESSION17's broader bare/
+absent/legacy/other-helper and general isolation acceptance remains open.

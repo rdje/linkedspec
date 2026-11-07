@@ -1,0 +1,3334 @@
+{
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after-wrapper-event.json": {
+    "bytes": 679,
+    "sha256": "5f03a5d0d10103f140fdd6e70cdb0f4b8f86f52547376012d0254d1ab4cd2cba"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "7195f367369ea35a0b83df30173476f287a9ef5daea5d357a2a03a91b789bf70"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/command.json": {
+    "bytes": 293,
+    "sha256": "941bf60afc6a5987c83fb306d2f085d6f72e274ca22ac949efca607beb2cd4fd"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_drop_null_key_effect.handler.pl.gz": {
+    "bytes": 3367,
+    "sha256": "3c40c023a41279fb25fb76e3c786d438d61d7bf30130a26d0ec320f0f4550eb1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_drop_null_key_effect.pm.gz": {
+    "bytes": 3377,
+    "sha256": "113962d1387c38a05ce2214fc67cedb61222191d987f488a6f7d05f6b60b8057"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_drop_number_key_effect.handler.pl.gz": {
+    "bytes": 3368,
+    "sha256": "b6322ca899011f7f9db05345f0c98f0359a7bdcccbcd1ba7879ab02d729c0ac1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_drop_number_key_effect.pm.gz": {
+    "bytes": 3378,
+    "sha256": "c9fe1bdf3c3e071916934c4c84dfba3d7b01dfd2dd29e9b85ddc139e12fb8e35"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2393,
+    "sha256": "e97039f83c7d947032a9062fe88f48eb44bf7f05afaa59a275363b98b46cc3ea"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2403,
+    "sha256": "97f1165653709a7987c64671694b03b526e638cbd83b5bd29885c04bb55ee239"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2393,
+    "sha256": "d1ae4aabdce378e9f0e77cf5cddaaab80cbc9227542c60e3db77928b425ec3b8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2403,
+    "sha256": "2b08c587bb5f9d3505d9e60d8cc898dee8ac740a5a42dc846f19bd21088cd277"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2366,
+    "sha256": "c4debcbdcbf9e6d71ab5cd5c287f0d354c89c1bc3f51e96a69a72f4d94998c04"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2376,
+    "sha256": "8bddd73fd8d446fe45d55a5feaf32261dfa378a8e99c930b24f89529a0ac4919"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2366,
+    "sha256": "c4debcbdcbf9e6d71ab5cd5c287f0d354c89c1bc3f51e96a69a72f4d94998c04"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2376,
+    "sha256": "8bddd73fd8d446fe45d55a5feaf32261dfa378a8e99c930b24f89529a0ac4919"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2381,
+    "sha256": "9120253f1eccec9cb8e9e19f3c5448c5fdfb7fd2fb755245453a0a56f7eb1cc3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2391,
+    "sha256": "86ce5dbb6246132377e99bda7fbeed62b406cd356542e495d91b8e5e44214699"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2381,
+    "sha256": "9120253f1eccec9cb8e9e19f3c5448c5fdfb7fd2fb755245453a0a56f7eb1cc3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2391,
+    "sha256": "86ce5dbb6246132377e99bda7fbeed62b406cd356542e495d91b8e5e44214699"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "4235d6047e124e84fb498f5dc397a238d9653f220c616a4b2f4fe29ac9b92347"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2400,
+    "sha256": "7886d88a27c1990197f29633fc31a961241126419ce7e30cc176de118218934c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "4235d6047e124e84fb498f5dc397a238d9653f220c616a4b2f4fe29ac9b92347"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2400,
+    "sha256": "7886d88a27c1990197f29633fc31a961241126419ce7e30cc176de118218934c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "e7d32c7d908e7fe8101d6000f9f6cf2293e06c5008e8cfb51794223969d40135"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_set_key_free.pm.gz": {
+    "bytes": 2375,
+    "sha256": "ecec0c427e53f8bb6e0311e20151cbbb167ac89a7f98d158a37a39595324ebcb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "e7d32c7d908e7fe8101d6000f9f6cf2293e06c5008e8cfb51794223969d40135"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2375,
+    "sha256": "ecec0c427e53f8bb6e0311e20151cbbb167ac89a7f98d158a37a39595324ebcb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_merge_number_overlay.handler.pl.gz": {
+    "bytes": 2366,
+    "sha256": "8adf47c25b61cdf7a2aff3c809555cb06c6f8575b857d3e4e7c53a9dce36408c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_merge_number_overlay.pm.gz": {
+    "bytes": 2375,
+    "sha256": "1a599a2d84bd35e3993f32042f89f78bc59c41a9f743af10dd3127332b14df00"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_merge_string_source.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "6d9a87f3ab836c88f53d889f73a48c4f540e943bd54f6cabfd63904e78a4cccb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_merge_string_source.pm.gz": {
+    "bytes": 2383,
+    "sha256": "348aa2bceacdc3577d85e675ef8f7ce8054e1d64f20cc6dbb6e06b782e5ca56e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_pick_null_key_effect.handler.pl.gz": {
+    "bytes": 2661,
+    "sha256": "277cba902e0eff0bca6ea97df510e607caa5259362fb1865e82617be32f857b7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_pick_null_key_effect.pm.gz": {
+    "bytes": 2671,
+    "sha256": "5aa2cc2cb2194b024b8acb9983015a57a03073bf0c4793b991b363fde16a58fe"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_pick_number_key_effect.handler.pl.gz": {
+    "bytes": 2664,
+    "sha256": "4aa91bc83e739174488fbde3aad8ee2d3c8d8a16c764dd035d81332aaf8c5ffa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/host_pick_number_key_effect.pm.gz": {
+    "bytes": 2674,
+    "sha256": "aab1e8831adf3c47f13299740dcee498e6180f39ef05ecb0aaa507c48a87200a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/input-identities.json": {
+    "bytes": 17781,
+    "sha256": "b068654b9b06209b85312cc7765f43e2d193e5cd49c8984d76243145e743ceab"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/inputs-before-first-run.tar.gz": {
+    "bytes": 472325,
+    "sha256": "2d38e250c9c021255e503e3b721f94cbefcf104f8c33fe20e377c8fd594313d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "9015571d777208fb2eb6462cd4073cdb0f213d1122a085f2635bf7eb748f3585"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "7d600f92285159aa9e5a9b1b98d5be7254252906f88b94623d900387d47777a4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "9015571d777208fb2eb6462cd4073cdb0f213d1122a085f2635bf7eb748f3585"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "7d600f92285159aa9e5a9b1b98d5be7254252906f88b94623d900387d47777a4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_merge_hash_free.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "80a5b51cb7d220eeb092e8487be4cbfdf4583b99a763da88b3581eec52db66d3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_merge_hash_free.pm.gz": {
+    "bytes": 2712,
+    "sha256": "6a42a80be85ccbd9992ed6e4048b5c09fc3c4356c4e1c8d7031dcc2e9d4b1850"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "1f56867ce638cd205a314d2ad88d5bf52f096800c455814cb0428c055c62751e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_merge_hash_receiver.pm.gz": {
+    "bytes": 2712,
+    "sha256": "24dd362eb486a8b4e7f63806e6f08abf19710b5820b184968479b39718071ccf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_rename_key_free.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "81456a387ee28503a5bbcfd0e0b5bf1151c6d47486b5ee720664eb84624faa8b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_rename_key_free.pm.gz": {
+    "bytes": 2650,
+    "sha256": "2322787d9e52093744f72f04315f307bef54daec148f93c91713a9a5e53416cc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "81456a387ee28503a5bbcfd0e0b5bf1151c6d47486b5ee720664eb84624faa8b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_rename_key_receiver.pm.gz": {
+    "bytes": 2650,
+    "sha256": "2322787d9e52093744f72f04315f307bef54daec148f93c91713a9a5e53416cc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_set_key_free.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "cc2448d3f58e00ae8beb5c16247eef237f470643e8f87ab8b951e99603056db8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_set_key_free.pm.gz": {
+    "bytes": 2648,
+    "sha256": "0a101774221a588d40347e21713977020ff882c9b96bb373c1ec90eac98210bc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_set_key_receiver.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "1085b8aca92f9dab5f4d105f9be6b37d29430432d01e0e5d699c0bfe119fe4b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_extra_set_key_receiver.pm.gz": {
+    "bytes": 2648,
+    "sha256": "f674e9b72b971a56864bcf363e3b1aa4cd7b142ec213306ffe9edc19cf663e8d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_drop_keys_free.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "93883ad9da7a9747d84f91f90faf0ac33948a34dd1939ac7a20e112961f345cd"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_drop_keys_free.pm.gz": {
+    "bytes": 2407,
+    "sha256": "807463b4076243631bf3c1ec3abab45beeedf11f0d93ba636d71dd71e4ae0715"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "1f4fb189c42ee0c9851ddd013a3fe8cd445bbe9cfa2f1c4004c0d7d7603e3dcd"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_drop_keys_receiver.pm.gz": {
+    "bytes": 2407,
+    "sha256": "1c30e789fb80e771dff04a0501f90487b0c1d708c258b1f8f05d513847ddb11b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_merge_hash_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "dc934b89738198fc7aa20311ed0d327cfa2f218465b3ee76c154db18b6cf1bbb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_merge_hash_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "84667e4171943c43d54563ce2e57d25af24fa3c5e0fd43409ae9b5ba5a40d193"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "dc934b89738198fc7aa20311ed0d327cfa2f218465b3ee76c154db18b6cf1bbb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_merge_hash_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "84667e4171943c43d54563ce2e57d25af24fa3c5e0fd43409ae9b5ba5a40d193"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_pick_keys_free.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "c6403e6fd37a86e3c118edfc38babc20ed80ef224c727018720cc04060df9a29"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_pick_keys_free.pm.gz": {
+    "bytes": 2409,
+    "sha256": "5809a21bb9ae93a9a6b5c42f18a8fa8e74809f0ade401cc8e1351b1ac527555a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "c6403e6fd37a86e3c118edfc38babc20ed80ef224c727018720cc04060df9a29"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_pick_keys_receiver.pm.gz": {
+    "bytes": 2409,
+    "sha256": "5809a21bb9ae93a9a6b5c42f18a8fa8e74809f0ade401cc8e1351b1ac527555a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_rename_key_free.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "51f4f67a78bd1330496f98a79055740f9625b7e0a1a64197ea3ff171ac7e6617"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_rename_key_free.pm.gz": {
+    "bytes": 2418,
+    "sha256": "c354efb5626b8fd6ac1135b9e3c2649e13a52d77d7c5c299cc005f35bd7b0c94"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "51f4f67a78bd1330496f98a79055740f9625b7e0a1a64197ea3ff171ac7e6617"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_rename_key_receiver.pm.gz": {
+    "bytes": 2418,
+    "sha256": "c354efb5626b8fd6ac1135b9e3c2649e13a52d77d7c5c299cc005f35bd7b0c94"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_set_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "985d2afa4f87f7f4347c2549bbe5461f314ae953efe2f3582bc6f3ebeb03ea2b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_set_key_free.pm.gz": {
+    "bytes": 2394,
+    "sha256": "4726f632e92234cdd85b76a5c937d4b7c8c094aca24ea015834a544500022f5e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_set_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "985d2afa4f87f7f4347c2549bbe5461f314ae953efe2f3582bc6f3ebeb03ea2b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_array_set_key_receiver.pm.gz": {
+    "bytes": 2394,
+    "sha256": "4726f632e92234cdd85b76a5c937d4b7c8c094aca24ea015834a544500022f5e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_drop_keys_free.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "8c7b9c3ba324fb5ad696e6a9df30230d5d911bda8257eba9e8f2c23e714feffb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_drop_keys_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "9fc32cc359d727f6b5db11433b6a3bad03e7c11024c6320343b862235c4d2043"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "8c7b9c3ba324fb5ad696e6a9df30230d5d911bda8257eba9e8f2c23e714feffb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_drop_keys_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "9fc32cc359d727f6b5db11433b6a3bad03e7c11024c6320343b862235c4d2043"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_drop_keys_with.handler.pl.gz": {
+    "bytes": 2667,
+    "sha256": "4361936f52ec25c75e8ce34c9e2a0e23e4fa0f4fb72b885cef1844450f3b8f7f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_drop_keys_with.pm.gz": {
+    "bytes": 2678,
+    "sha256": "d6f575be997adf4dbd65e391d9f81ef7063b7f6f67b4e3f1014e5a0af34dca78"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_merge_hash_free.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "db6335ad1429bc9f751741a5a9cc0869d706f34795880edd042f75627c7c43ed"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_merge_hash_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "bac5fcd0ed5eb844fe7a40cbc362b737c5896ca70abd265adce838f02e8b0430"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "db6335ad1429bc9f751741a5a9cc0869d706f34795880edd042f75627c7c43ed"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_merge_hash_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "bac5fcd0ed5eb844fe7a40cbc362b737c5896ca70abd265adce838f02e8b0430"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_merge_hash_with.handler.pl.gz": {
+    "bytes": 2651,
+    "sha256": "4534e48bc229fbe644bd56a200f243e3b0951aab2f95a5781a557f91042ddee8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_merge_hash_with.pm.gz": {
+    "bytes": 2663,
+    "sha256": "b37fb2dccf12cb4f6cfb0ac2cceaa1fd4ed49375347f366175b141cca10182a6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_pick_keys_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "4b29d7f89a94aa472fcbeea74dda49f12aee523408290933b4f11bb83ee08e63"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_pick_keys_free.pm.gz": {
+    "bytes": 2385,
+    "sha256": "896e3751c68ed7eac4510de0bfa9c17b0983cb0febf4e87e095c4fe2d012adf4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "4b29d7f89a94aa472fcbeea74dda49f12aee523408290933b4f11bb83ee08e63"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_pick_keys_receiver.pm.gz": {
+    "bytes": 2385,
+    "sha256": "896e3751c68ed7eac4510de0bfa9c17b0983cb0febf4e87e095c4fe2d012adf4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_pick_keys_with.handler.pl.gz": {
+    "bytes": 2670,
+    "sha256": "4fc33918c912d755527b7aefa0f660a562fd3176757b6ed07a05520a3142b99b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_pick_keys_with.pm.gz": {
+    "bytes": 2681,
+    "sha256": "11182efc68e6eb85c2b43a96e84908090fbe8154cabf71b93f5ab7e61f6f89f4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_rename_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "ff178c542ec4bd3abd6aaee6a1e74e327239fa07ccf4f67e9fe2f21b5a88594a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_rename_key_free.pm.gz": {
+    "bytes": 2395,
+    "sha256": "d7fa4b0e5f68215d1383898f19a1570e5e75fd4212356992859f2733717d70cb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "e0f1f591d113904170d00c216291e434d48694317e9aaff776d51351d671f99b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_rename_key_receiver.pm.gz": {
+    "bytes": 2395,
+    "sha256": "762534ab89d24acbf92134edf7419801d25ce9742a0e97098f689cc9c72f4691"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_rename_key_with.handler.pl.gz": {
+    "bytes": 2677,
+    "sha256": "49a9daaa71860e4d60d5432ff15f8a1d19a9f023688f18f471a2da34badba01c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_rename_key_with.pm.gz": {
+    "bytes": 2687,
+    "sha256": "db341880f4da3ec901155ecf5756188511a38bcab08c6bec95e9ce28d85cbdb1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_set_key_free.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "d0dc50135fc8cb9dee711a787677652128fbd2de2dd65b30f4b901068dc51d67"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_set_key_free.pm.gz": {
+    "bytes": 2370,
+    "sha256": "ba690de2e918470550d2f36d6a961893b0a697d702f088cc2a506cf79eb00e59"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_set_key_receiver.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "d0dc50135fc8cb9dee711a787677652128fbd2de2dd65b30f4b901068dc51d67"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_set_key_receiver.pm.gz": {
+    "bytes": 2370,
+    "sha256": "ba690de2e918470550d2f36d6a961893b0a697d702f088cc2a506cf79eb00e59"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_set_key_with.handler.pl.gz": {
+    "bytes": 2654,
+    "sha256": "8aab62ae3ce97e9bf6f32001e88903d38131021a2833cd31c9602a88dd915850"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_null_set_key_with.pm.gz": {
+    "bytes": 2665,
+    "sha256": "d431a519b36c5bb269e4813075da6627dc1de01208d2821255cab920bbf919a2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2393,
+    "sha256": "c690efec3617449bb4efe629a80fc3df38f13b9565a5e2e2f9fae2a289a50939"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2403,
+    "sha256": "158329b5e6cb77dd190c394c6f8be064cd22b1a8fa01bbb9101a0bf663f34713"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2393,
+    "sha256": "c690efec3617449bb4efe629a80fc3df38f13b9565a5e2e2f9fae2a289a50939"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2403,
+    "sha256": "259f92aec30744b547a28f1e79faec23f10bd2040c4da40c4decff9bee3c5cc8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2366,
+    "sha256": "04d599c39b05db0a50422c479c3f81982406fb8848c35e0a52e1667d0b451e4e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2376,
+    "sha256": "e5b4aa773181e311f2c2d5ced8dfaaeb0f024f1cfd8a1c7094dcbe709a55ad83"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2366,
+    "sha256": "07fb8085e23c042d486b44072aaf6d7164b27ba6c4b4272cf42cb51d33d978e5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2376,
+    "sha256": "fc5280d90d35fe9d7794481c35c6f85deb8853eb23a7673a9b2c566ff3d1ff20"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2381,
+    "sha256": "65e73beac74999e55284c3b2a8359248fdeb07204e36c0b5148d6e64060f22f6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2391,
+    "sha256": "319ec18ea1171a4f2778b1312d328214829140b4d6a653f7cf8be45f879ec4e4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2381,
+    "sha256": "65e73beac74999e55284c3b2a8359248fdeb07204e36c0b5148d6e64060f22f6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2391,
+    "sha256": "319ec18ea1171a4f2778b1312d328214829140b4d6a653f7cf8be45f879ec4e4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "40bf4984b907e474777d32c49bb315d67de1bce3a784996fa1887062d18b75d7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2400,
+    "sha256": "4c452ff635cf496a7c9ff988ff063d1a1094d5d1c1949fccd0e9dd51edf5e9f3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "40bf4984b907e474777d32c49bb315d67de1bce3a784996fa1887062d18b75d7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2400,
+    "sha256": "4c452ff635cf496a7c9ff988ff063d1a1094d5d1c1949fccd0e9dd51edf5e9f3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "80c39c4098ef504d0bf3b74419bd93d3f232c4c954637141b0067c27221db0ff"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_set_key_free.pm.gz": {
+    "bytes": 2375,
+    "sha256": "3bfa5e76c789e7a701752f682eaf111ee95575d8298340122cc903995275d4b1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "718684935eaf593e18e8245c66812fe815e82f46d91b0894812835a19b00d1c8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2375,
+    "sha256": "3bfa5e76c789e7a701752f682eaf111ee95575d8298340122cc903995275d4b1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "13022e5896aeeecf9bd23764f18e9179447e617bbf912d41447899573ddc39c8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "d58882996e519f58915f81a5c3633a319e3baf614a3671da2f7e57d61f242b53"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "0892b4732a93b20e9f42290b98aa0e43f9beee638f4a0b330957e59c03970b5b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "55086c1faacbebadf3e77eb847708bc574291d099c88ff7c9c88393999226f95"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_produced_count_keys_merge_guard.handler.pl.gz": {
+    "bytes": 2787,
+    "sha256": "cf4bce2729f4c05c6b184ea1e9d5e58961eb2445aa6dfe48813f1a6ffcd4619c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_produced_count_keys_merge_guard.pm.gz": {
+    "bytes": 2798,
+    "sha256": "724d272d41f934c3b9eda791667226ec5a51edd1ba0bbfad21c884ec1d79a487"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_produced_count_merge_guard.handler.pl.gz": {
+    "bytes": 2777,
+    "sha256": "477e05d11266564c09dd85d194697e325d074fbc6e7350e15bf9c3b4226392d5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_produced_count_merge_guard.pm.gz": {
+    "bytes": 2788,
+    "sha256": "0fc68f99d6fbcb76d288234ac06bc881a1747de97275f079ea27ac6e77b1e1a8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_produced_length_merge_guard.handler.pl.gz": {
+    "bytes": 2790,
+    "sha256": "6f0515bf0ff02a918203ce1ea9c36b716ac2e82e6d299b76506cdac999ebaa0d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/policy_produced_length_merge_guard.pm.gz": {
+    "bytes": 2801,
+    "sha256": "71ad3b8ba1a75ba45c3be805acfba3ab78b514098bd3c785537667cce024f8c0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/stderr.log.gz": {
+    "bytes": 27686,
+    "sha256": "ff1fdff48c357e25d48efa70532ec416d3e3b4a54ca5233d4f92830045e27cac"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/after/stdout.log.gz": {
+    "bytes": 1786,
+    "sha256": "9db1f92172be0239b3f43b091d8b73a8816dca6023f1517c2ed8961771e2f0c2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "7195f367369ea35a0b83df30173476f287a9ef5daea5d357a2a03a91b789bf70"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/command.json": {
+    "bytes": 294,
+    "sha256": "01ba240b11e60ab6f8e29a57fc8f493544b89427718c915b2ae8a83a081c3b7c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_drop_null_key_effect.handler.pl.gz": {
+    "bytes": 3354,
+    "sha256": "4cdc0db76377d0080f91fdd4b8d4360f3636089f40241b376e24e7a501a9bb75"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_drop_null_key_effect.pm.gz": {
+    "bytes": 3363,
+    "sha256": "527d5f4f17b1abfdfd24dac73d211fb80d7f998d94dc37238ceddb58fefa6ae1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_drop_number_key_effect.handler.pl.gz": {
+    "bytes": 3355,
+    "sha256": "f30d6b24040cf358cf38354edb3826c411b61c502fc0c9d32ac39caa6bca4a2a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_drop_number_key_effect.pm.gz": {
+    "bytes": 3364,
+    "sha256": "b5cdd7c2d1399d6ee46f7224bbb573c5b0de7f509ff675d15a3b2a589b26c96a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "410645f0a45a59c2b83653f410dd6be5e23c9e6a77bf2f0f954d0ef40eb44452"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "10636f356309df64aaee23ca9afd20738040512f3464e92739fdd7e1cd0cebe7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "410645f0a45a59c2b83653f410dd6be5e23c9e6a77bf2f0f954d0ef40eb44452"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "10636f356309df64aaee23ca9afd20738040512f3464e92739fdd7e1cd0cebe7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "f51f2ab5d5be53241ccb2f325c19a5b634309c6ef7031dc978541bbcd3e39ca2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2363,
+    "sha256": "34cceea0490d3e7130f6b9d2b5cfde88805a757da06492406cf7b4781a9e4f20"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "f51f2ab5d5be53241ccb2f325c19a5b634309c6ef7031dc978541bbcd3e39ca2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2363,
+    "sha256": "34cceea0490d3e7130f6b9d2b5cfde88805a757da06492406cf7b4781a9e4f20"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "ca7ac74b7ed3514931b10263cc70c09c59293ee416a543eb1efda6deaf74f20b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "27c95fd4856dcfda9d457ae9aee39b52d22fa859500451da4cec6e7c3592d9d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "ca7ac74b7ed3514931b10263cc70c09c59293ee416a543eb1efda6deaf74f20b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "27c95fd4856dcfda9d457ae9aee39b52d22fa859500451da4cec6e7c3592d9d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "d5bcaf57dd556ddaaf2fed5cccd88edff59a0857ffa03c89d8ea6a58f4cc769f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2384,
+    "sha256": "0bbf4eaf55c05042d9e5f7dbc15798f03ecb86f67d1bc5d96705195cddbd1e01"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "d5bcaf57dd556ddaaf2fed5cccd88edff59a0857ffa03c89d8ea6a58f4cc769f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2384,
+    "sha256": "0bbf4eaf55c05042d9e5f7dbc15798f03ecb86f67d1bc5d96705195cddbd1e01"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "399dbbd87275ac8c381b5713e488715588f11481ef1a4e30040f185025871d00"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_set_key_free.pm.gz": {
+    "bytes": 2362,
+    "sha256": "0a9e3141adf7b6dcf060c462d23c8b4cba41455e28509f502a228659fb920d76"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "399dbbd87275ac8c381b5713e488715588f11481ef1a4e30040f185025871d00"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2362,
+    "sha256": "ee8d23af519ce9d3202a6d6ff04b8fde1a61ffa839a51921db825ef978c00a15"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_merge_number_overlay.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "47fe030ddcdc0c97f8ae163616fd29f3bbe051b6b3d73b4fb718c744409ff9a9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_merge_number_overlay.pm.gz": {
+    "bytes": 2363,
+    "sha256": "495da6068d4280ece81561f8553beacea17a931e8afacecffb0788d8bbb07704"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_merge_string_source.handler.pl.gz": {
+    "bytes": 2361,
+    "sha256": "4bed3c6cf9bef7f28af5d459d06f63f65a6934d6145fad6ef8a42c05cfb96703"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_merge_string_source.pm.gz": {
+    "bytes": 2371,
+    "sha256": "d9cab7dd70228260376f06cf78f5832298dbc753787eb06cc3be7807f018714a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_pick_null_key_effect.handler.pl.gz": {
+    "bytes": 2651,
+    "sha256": "69919ce30fbb2daa7f6bff7c7e2a2c9b11e3e64aad0f72dcb877d42d1a9837b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_pick_null_key_effect.pm.gz": {
+    "bytes": 2661,
+    "sha256": "5103f74d98c17217c8211b4b7ed54118f9328d6575904d91eef2eaa30b3cdaaa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_pick_number_key_effect.handler.pl.gz": {
+    "bytes": 2653,
+    "sha256": "a387b9bbff269098771d2bfd18a23da1640258265855548329d1232538367d14"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/host_pick_number_key_effect.pm.gz": {
+    "bytes": 2664,
+    "sha256": "9ffa8e0b6bb4930975074a7f269897fd922fdcf3f9a5bd1c4bdd1d4575081e7f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/input-identities.json": {
+    "bytes": 17781,
+    "sha256": "c27973e182fa881b79d79edec2c79f39cf38d9c084e439d372e2caf79230ce4e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/inputs-before-first-run.tar.gz": {
+    "bytes": 472295,
+    "sha256": "440305190189106cde1e17f32a4f4b7de8936eaac2ae49ec8c04ccfdbf00bf85"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "8ef31507341a9cc3c0296e766964aa5935311a5e047b83ccb8530a3ca589d4a4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "dcdc1bf8973560845da6da5433bf648f9d487b6a87e27f8ba8a07e76c0b6aaae"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "8ef31507341a9cc3c0296e766964aa5935311a5e047b83ccb8530a3ca589d4a4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "dcdc1bf8973560845da6da5433bf648f9d487b6a87e27f8ba8a07e76c0b6aaae"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_merge_hash_free.handler.pl.gz": {
+    "bytes": 2687,
+    "sha256": "db94b13e403e9471c5f4cb512fc72bba02b4f55b977fecd2a83bb16f87d351d2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_merge_hash_free.pm.gz": {
+    "bytes": 2699,
+    "sha256": "8a51a43db36f67a36b2a8cb86576b6ebfa27a69b722b7291c9cac507d7a1e9ee"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2687,
+    "sha256": "5397ab24b712d76bcd7e6a5abddb79572b844a9df9c02518cccccbc0c5158d25"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_merge_hash_receiver.pm.gz": {
+    "bytes": 2699,
+    "sha256": "5c4f37a246712fedc9d9dfd7b20cfd2a67f0e13c8732ea01c0fb60692f3b6966"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_rename_key_free.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "4501c4c8c40c7a12cb117b559cd3d24017343aaed4d177a03f12b24a5ead4c71"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_rename_key_free.pm.gz": {
+    "bytes": 2650,
+    "sha256": "bad019c31806b7175452215e6ed726b4cc6625913beaf06479e73a68e753a946"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "4501c4c8c40c7a12cb117b559cd3d24017343aaed4d177a03f12b24a5ead4c71"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_rename_key_receiver.pm.gz": {
+    "bytes": 2650,
+    "sha256": "bad019c31806b7175452215e6ed726b4cc6625913beaf06479e73a68e753a946"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_set_key_free.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "ad3bfec519fdd8233c9496ffeb7315496180f821d0e35944f2dfa5d522277558"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_set_key_free.pm.gz": {
+    "bytes": 2648,
+    "sha256": "6f6fe269433296e2e789a644c1bf02af1ca0ed3791b7630aede0e0eb2db05b7f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_set_key_receiver.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "4ad3ac448042b5bdb5d7efa4b1caa5fa2cc499aca6af2672ba2b0a8c4c485c6e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_extra_set_key_receiver.pm.gz": {
+    "bytes": 2648,
+    "sha256": "aa0e1ba37948c7cb4a922e4a7cabd5f3ec3dd3eae28853eafa8ea94b43a2d401"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_drop_keys_free.handler.pl.gz": {
+    "bytes": 2380,
+    "sha256": "db1f94b43e24f987b3b2bbfdfe8761ed22f1bbe04c4d5a58007f8370f87a5c2f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_drop_keys_free.pm.gz": {
+    "bytes": 2391,
+    "sha256": "aa28e87274101672a4eeeaee313edfe24b5190ba4a634370b978f8c25aed58c0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2380,
+    "sha256": "db1f94b43e24f987b3b2bbfdfe8761ed22f1bbe04c4d5a58007f8370f87a5c2f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_drop_keys_receiver.pm.gz": {
+    "bytes": 2391,
+    "sha256": "aa28e87274101672a4eeeaee313edfe24b5190ba4a634370b978f8c25aed58c0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_merge_hash_free.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "d2e3ec7cdec662f85070ca490472826b11c543c5d2682587de22d6a02f7e330e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_merge_hash_free.pm.gz": {
+    "bytes": 2375,
+    "sha256": "e887f31c343a5032f2d32659797438f7aaa5b0a10270134af6353276ca5c951d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "a258edcdda07c233d9c488046fdd994816287b84188cbe931140b55fc9d79e6e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_merge_hash_receiver.pm.gz": {
+    "bytes": 2375,
+    "sha256": "e887f31c343a5032f2d32659797438f7aaa5b0a10270134af6353276ca5c951d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_pick_keys_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "73c9df496e68b7cd63ad8605074f562af1f6b0b34965e8c7f670ed38429df751"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_pick_keys_free.pm.gz": {
+    "bytes": 2397,
+    "sha256": "fe1fd639ff8764b889924b6beef8b1e1275d14d3f62c976fb184a981427b51e5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "73c9df496e68b7cd63ad8605074f562af1f6b0b34965e8c7f670ed38429df751"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_pick_keys_receiver.pm.gz": {
+    "bytes": 2397,
+    "sha256": "fe1fd639ff8764b889924b6beef8b1e1275d14d3f62c976fb184a981427b51e5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_rename_key_free.handler.pl.gz": {
+    "bytes": 2392,
+    "sha256": "995475fe149de28b61f46ffbc9a88e0c5a3d6867e905d2fed204bc85f0adfe05"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_rename_key_free.pm.gz": {
+    "bytes": 2402,
+    "sha256": "9e4122016ec9de35dc7668458673aff3086d4599e74adc0de4f278ade17d7997"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2392,
+    "sha256": "dd9866f331c84a70f6b6dff2ae1eb359c1414d3ff932420b10c06600f20da4ff"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_rename_key_receiver.pm.gz": {
+    "bytes": 2402,
+    "sha256": "612b0e6e214d7c3fcbb3d0428b3d4207ece7ec770911184d3c124793dd376217"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_set_key_free.handler.pl.gz": {
+    "bytes": 2372,
+    "sha256": "ffe842dd3b2ac91dc3acb19ab2f484c7c0f256aab020fe0898dea936fade66f1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_set_key_free.pm.gz": {
+    "bytes": 2381,
+    "sha256": "b6a00572ca286867a7cc2baf4b6858dd277a3d6fa079ff6e515450b2d63722b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_set_key_receiver.handler.pl.gz": {
+    "bytes": 2372,
+    "sha256": "ffe842dd3b2ac91dc3acb19ab2f484c7c0f256aab020fe0898dea936fade66f1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_array_set_key_receiver.pm.gz": {
+    "bytes": 2381,
+    "sha256": "b6a00572ca286867a7cc2baf4b6858dd277a3d6fa079ff6e515450b2d63722b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_drop_keys_free.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "3f7bfcf17a27752d8498a01ff7489a0bc04c641f3f26780c0042ed12b251e8f9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_drop_keys_free.pm.gz": {
+    "bytes": 2382,
+    "sha256": "caff53d437a681d0180e510f3cd1a1753718ee7fb0c2b23687139489b60f6253"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "3f7bfcf17a27752d8498a01ff7489a0bc04c641f3f26780c0042ed12b251e8f9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_drop_keys_receiver.pm.gz": {
+    "bytes": 2382,
+    "sha256": "caff53d437a681d0180e510f3cd1a1753718ee7fb0c2b23687139489b60f6253"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_drop_keys_with.handler.pl.gz": {
+    "bytes": 2652,
+    "sha256": "28ef825f45e3b33bb6b24f83dfd99f5940ae6c4c419d07e3fa96067877a8e401"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_drop_keys_with.pm.gz": {
+    "bytes": 2663,
+    "sha256": "ed4cf5d1381ff99034a4d662cc82796b12c224d14e3fca6361238e7d09513bce"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_merge_hash_free.handler.pl.gz": {
+    "bytes": 2356,
+    "sha256": "65a0936cb5f3f65e54fcbcf710e2e48b8a4a59bf1d3eb9351774d52fbbe53a88"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_merge_hash_free.pm.gz": {
+    "bytes": 2367,
+    "sha256": "de8a2db736393f77ee8003cbc3e4003c9be6e670884145f6160ffb67ed8be96d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2356,
+    "sha256": "65a0936cb5f3f65e54fcbcf710e2e48b8a4a59bf1d3eb9351774d52fbbe53a88"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_merge_hash_receiver.pm.gz": {
+    "bytes": 2367,
+    "sha256": "de8a2db736393f77ee8003cbc3e4003c9be6e670884145f6160ffb67ed8be96d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_merge_hash_with.handler.pl.gz": {
+    "bytes": 2637,
+    "sha256": "612295236a4555640057c59b4688e2cf87e3f8b91e34168126278bc33e0b3d86"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_merge_hash_with.pm.gz": {
+    "bytes": 2649,
+    "sha256": "98f75741b365797ad4b8a7b0f604a73a856f51752808dbce6a7347c857324017"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_pick_keys_free.handler.pl.gz": {
+    "bytes": 2361,
+    "sha256": "e1b544b8ee32440412e193887f77a1934da6ba2defbdfc81c63aca98f3144f3e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_pick_keys_free.pm.gz": {
+    "bytes": 2372,
+    "sha256": "a19ee45aa527ffa423e4a402d85898cf24be932864264cfd6bcd42cbadfbff9d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2361,
+    "sha256": "e1b544b8ee32440412e193887f77a1934da6ba2defbdfc81c63aca98f3144f3e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_pick_keys_receiver.pm.gz": {
+    "bytes": 2372,
+    "sha256": "a19ee45aa527ffa423e4a402d85898cf24be932864264cfd6bcd42cbadfbff9d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_pick_keys_with.handler.pl.gz": {
+    "bytes": 2660,
+    "sha256": "c8ae428f42d90ece50e2e43611bc6a659e8a07fa69689650ec53f6650751b845"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_pick_keys_with.pm.gz": {
+    "bytes": 2670,
+    "sha256": "a6fc5f4008c8be39425a27fb8a63ec07a0bdb9fbe5987535930ee2466788a008"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_rename_key_free.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "d8e77a04da7fdbb2113b7bb66199c3828bd2b55375c8bb4d8df59afd05569eb6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_rename_key_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "a4a0704fa9baae5c5ad44a7e9d3be3a2c9d3dad942568d4de4453e7abae483af"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "d8e77a04da7fdbb2113b7bb66199c3828bd2b55375c8bb4d8df59afd05569eb6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_rename_key_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "a4a0704fa9baae5c5ad44a7e9d3be3a2c9d3dad942568d4de4453e7abae483af"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_rename_key_with.handler.pl.gz": {
+    "bytes": 2662,
+    "sha256": "19e7ef18dfb4cdd917cc7202dad5269f4a2015af48c82fb1402ace44514f6680"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_rename_key_with.pm.gz": {
+    "bytes": 2672,
+    "sha256": "17b9adf56f0eac02ca56c63522ea37303ce1a8b2bdcf9a072ddfa71ab5172bae"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_set_key_free.handler.pl.gz": {
+    "bytes": 2346,
+    "sha256": "088444efd6cacbfb5586c4656b327b7ccd13dd8e698182910e4768cc8c911da1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_set_key_free.pm.gz": {
+    "bytes": 2357,
+    "sha256": "a7ea43002d58f66fe34b70237c7ca5e47123146a2be2963b18cdcde5b960a237"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_set_key_receiver.handler.pl.gz": {
+    "bytes": 2346,
+    "sha256": "088444efd6cacbfb5586c4656b327b7ccd13dd8e698182910e4768cc8c911da1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_set_key_receiver.pm.gz": {
+    "bytes": 2357,
+    "sha256": "a7ea43002d58f66fe34b70237c7ca5e47123146a2be2963b18cdcde5b960a237"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_set_key_with.handler.pl.gz": {
+    "bytes": 2642,
+    "sha256": "5a8542405f11c2ac0568d5d3c0e5101bbfb6ae879fe7801c10edcd5d4125a011"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_null_set_key_with.pm.gz": {
+    "bytes": 2653,
+    "sha256": "11edceb59a3115a863ed452f0203ba3cbb11a5b3f1186b850efb99c28d7e75f6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "e54f3ea6975543dcc4f438f4812ce8ec4a124618805a61a3ffc07e0960454135"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "2debf2bc32d8050c44a155db5c62540b2c498bda29058dd8d4f3c2f065a8846b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "e54f3ea6975543dcc4f438f4812ce8ec4a124618805a61a3ffc07e0960454135"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "2debf2bc32d8050c44a155db5c62540b2c498bda29058dd8d4f3c2f065a8846b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "06f58775e5dc4b3abe5045f6bf480f1cda4297257e36708a1ddbe96620f08d15"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2363,
+    "sha256": "66d3224b578b6479cd94930f06ebedcf9ac8e3e98a98056e892fb48b05ddeb2e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "06f58775e5dc4b3abe5045f6bf480f1cda4297257e36708a1ddbe96620f08d15"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2363,
+    "sha256": "66d3224b578b6479cd94930f06ebedcf9ac8e3e98a98056e892fb48b05ddeb2e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "2de467a69594d95fe690136cc60f94b791e34fffdc6e6c9c800b34331adb7ea8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "252a2204965cecb6eb65efc8c62ce2f6593d51f1b710e3634769fa0aa56c4a71"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "71ace6e3937977d448c8de9d8fc9fe272398df6211bc2a93651df3ac1d020b04"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "f21dd7ff8df2809bfc28c74daf8aeebf2d4ba8d3cedf6719115efbf174eb80af"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "5c5ce1502d04d955b0a293ebadee54c6e1b8833b6b795a4d7b2bdfba8d21167d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2384,
+    "sha256": "6e58c1b25ac3cf403088541cbb78bd57b973830f1a2a005a636fe0e9a7048fe9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "9111936615058c5fe64b266798280a34de1ca6bcdf31821b556579f60bbb5f2e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2384,
+    "sha256": "9004c3fbd38a780f9d3b617846d00c43c0644032ac53b8f67ecac4a7da086f0b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "17ca538cd517cf0ebd2fe8745088c131017024a3b1d3d2bbda9ad4bd9d24f998"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_set_key_free.pm.gz": {
+    "bytes": 2362,
+    "sha256": "155e5e7a6fa045a589e2eac525f049dfaec54798fb39d240f6031652559f9bb2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "17ca538cd517cf0ebd2fe8745088c131017024a3b1d3d2bbda9ad4bd9d24f998"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2362,
+    "sha256": "155e5e7a6fa045a589e2eac525f049dfaec54798fb39d240f6031652559f9bb2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "801ca571e6ce9aa59def1d6c7416c2b331cd715055581712f00bf34a921f6233"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "728bf90516398dd6c88083a37d425312e6233475f7a4caa95a7b7e2c0e043d2a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "801ca571e6ce9aa59def1d6c7416c2b331cd715055581712f00bf34a921f6233"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "728bf90516398dd6c88083a37d425312e6233475f7a4caa95a7b7e2c0e043d2a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_produced_count_keys_merge_guard.handler.pl.gz": {
+    "bytes": 2773,
+    "sha256": "cae26c442aae9b0b08656e22c987369e3ac3a273e0b76b779dbc467aaafd9948"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_produced_count_keys_merge_guard.pm.gz": {
+    "bytes": 2785,
+    "sha256": "5e02f54164427ff275242ccc90b2fd5b4bac7e99d34bea1ead2871d28ab5b0ad"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_produced_count_merge_guard.handler.pl.gz": {
+    "bytes": 2766,
+    "sha256": "f87a64e2f4eb1e0909893bce651cff18c56a7971ce9652aa4bc46fdc03d6b497"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_produced_count_merge_guard.pm.gz": {
+    "bytes": 2777,
+    "sha256": "e397eba65bef9cfd45c6391b8d260db9de57987cfb4a1f2c9dcf90e2766505f8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_produced_length_merge_guard.handler.pl.gz": {
+    "bytes": 2779,
+    "sha256": "1f653268fb09186107847e4c4c8fda010ef0848b04552ffa255f76edb3b4ba0b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/policy_produced_length_merge_guard.pm.gz": {
+    "bytes": 2789,
+    "sha256": "12c8fab9a780a3a2026ae69309b70bdd78d8b97429966d5635a6752f37ce8ce6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/stderr.log.gz": {
+    "bytes": 28015,
+    "sha256": "1f9db392f9667134ec1ca045db696e8086affb7ada5761b730ed85669c0b6e05"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/before/stdout.log.gz": {
+    "bytes": 1783,
+    "sha256": "5d323d8ddb16bc2765a13e6b5b47e6a22b919a4910b5d6326550b6cb78975e0e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/capture.py": {
+    "bytes": 2926,
+    "sha256": "d125257873cfcb8df6f031b64472955e62ac81b8f075943ab3a290a6652f2396"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/capture_private.py": {
+    "bytes": 3048,
+    "sha256": "ae702b48ecc6cb01f9fd0f2ff94e63071dfc8c17cbfca8ecf69171d78e5f3f05"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/capture_qualified.py": {
+    "bytes": 2977,
+    "sha256": "6e34054ceb40cde6e75329547bcd429dba4826aecf71fcf22a908b70d2352cf3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/extra_cases.py": {
+    "bytes": 1206,
+    "sha256": "1bd27aecf7bf663fb77c67f612249a4e823aab773ee403d2f6bf73d84b816d24"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse-wrapper-command.json": {
+    "bytes": 182,
+    "sha256": "ce1b2072278fb313a4b382103d54edfb84efd37a4ab7bf8ce7c87234b864549d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse-wrapper-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse-wrapper-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse-wrapper-stdout.log.gz": {
+    "bytes": 95,
+    "sha256": "5fa44f99cb93b77f41d163774f9c85f7e442e4558270eeb8e417cacab433ce83"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/activation.txt": {
+    "bytes": 41,
+    "sha256": "7195f367369ea35a0b83df30173476f287a9ef5daea5d357a2a03a91b789bf70"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/command.json": {
+    "bytes": 481,
+    "sha256": "03451dcd9c5f5d603e472b7132b3ef3f25466739b1ef936ca1f6dd382c5a0cd1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_drop_null_key_effect.handler.pl.gz": {
+    "bytes": 3354,
+    "sha256": "f13ccf725934221519f0b89d5e57d6991dc107082a4070db8882b2196a4ddc72"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_drop_null_key_effect.pm.gz": {
+    "bytes": 3363,
+    "sha256": "43890156a6d2c868b4c2ed9037da0b80ae84947364fa79565afe74e9d2ac8008"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_drop_number_key_effect.handler.pl.gz": {
+    "bytes": 3355,
+    "sha256": "132380bf4f1ee6ad8761b8bd663d4c98fe861dc427aad7f7b879972c9cc26713"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_drop_number_key_effect.pm.gz": {
+    "bytes": 3364,
+    "sha256": "2161e8fa69360e8f823ceeeb26d34491d06888c84d9db0eeeffcaaabe8b9a6b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "c393c30688cd70a9606067bbf2e02a626e6bb7a8e8f2051d6dfaa8bb8556c36f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "112ef6306cbbc8693d0ba6309211ad004763f8672d92417eea6476326ded38fc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "6ffb41b9ca0a5d83c18f8cac692b3be40075b226c2e7adbfcf5723077a4218b4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "112ef6306cbbc8693d0ba6309211ad004763f8672d92417eea6476326ded38fc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "173e6e1c5d799b7cef40047ba2480210aaf5a594e3c0ec10a03c0cb22c55f889"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2363,
+    "sha256": "83153c4e32e24fc9eade127dc6a0445ac1df8baef30183b9b6b8a61b7c5c6c37"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "173e6e1c5d799b7cef40047ba2480210aaf5a594e3c0ec10a03c0cb22c55f889"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2363,
+    "sha256": "83153c4e32e24fc9eade127dc6a0445ac1df8baef30183b9b6b8a61b7c5c6c37"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "3d85afc836becdeb3ee5b408626e594403dc24ed1aeedc8076c50bf36882f6a6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "f8c02b4c487b6b92b5b120610a5c3332bc80bc90dfef4ea82f74d2c0cd5a31aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "3d85afc836becdeb3ee5b408626e594403dc24ed1aeedc8076c50bf36882f6a6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "f8c02b4c487b6b92b5b120610a5c3332bc80bc90dfef4ea82f74d2c0cd5a31aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "342a42c85ae8ff92bc509a6105aeec21cf9347cff1c8199574fd24fd96163ccc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2384,
+    "sha256": "091abaf30626673ada72aaefea275dfe6b7cb78385441edb1285280d8f81c316"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "342a42c85ae8ff92bc509a6105aeec21cf9347cff1c8199574fd24fd96163ccc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2384,
+    "sha256": "091abaf30626673ada72aaefea275dfe6b7cb78385441edb1285280d8f81c316"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "021540d00f3fa494822f13e472d0517a1c494869fad2058bb3d0d1a7639a53ab"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_set_key_free.pm.gz": {
+    "bytes": 2362,
+    "sha256": "d26ed8d4e2b458bb9328b3983edc04d15d00b08e4858e3c0ec75d7e2b2130917"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "021540d00f3fa494822f13e472d0517a1c494869fad2058bb3d0d1a7639a53ab"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2362,
+    "sha256": "d26ed8d4e2b458bb9328b3983edc04d15d00b08e4858e3c0ec75d7e2b2130917"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_merge_number_overlay.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "c0938044d56f6939b5c25e507340eab7c82a4f2cf705416f1266e870b3e857d1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_merge_number_overlay.pm.gz": {
+    "bytes": 2363,
+    "sha256": "e326ecd9a667ca9a982fd979f349b6bcf5764e0807e5aa68cf6bdcb9d3b4c688"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_merge_string_source.handler.pl.gz": {
+    "bytes": 2361,
+    "sha256": "3475985aa55c3e401d519f922a20a83d065919fd0f6691b334b274ef39edc54a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_merge_string_source.pm.gz": {
+    "bytes": 2371,
+    "sha256": "162cd6b847fe5d0f88bac07b3d824dbda3232fa6b8a68329bed30c58754868fe"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_pick_null_key_effect.handler.pl.gz": {
+    "bytes": 2651,
+    "sha256": "0cccede6ee2012a777819169725c20d162bf9605cf05c081f67afe78b86039da"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_pick_null_key_effect.pm.gz": {
+    "bytes": 2661,
+    "sha256": "ecb5464060ff07d007808413715f0594d491ca4022436ec1ce91ede735057a6b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_pick_number_key_effect.handler.pl.gz": {
+    "bytes": 2653,
+    "sha256": "d91f6e62d5fc60474d0f7f6fd639a4814aff92840d1d4984b429568dcceae329"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/host_pick_number_key_effect.pm.gz": {
+    "bytes": 2664,
+    "sha256": "429cce1c04f638894aa7e248891ca0e3e79f543e703f211b89fa0db4e1e7bc58"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/input-identities.json": {
+    "bytes": 19277,
+    "sha256": "df51fb0776a55f4ffc5c98df38f422ff9f50381ceb3570d0aa0cfb8a5042f637"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/inputs-before-first-run.tar.gz": {
+    "bytes": 551907,
+    "sha256": "e46065cee534a3c110a516c9344ccedd121af38e0cb79cf977afdf1a91d6c5a9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "27a6510f06b584ff0b6f3421a2133cd0dd73bb81bf80e0961976dcbc6ed70f87"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "48d07cb89ece0bd43f665be05b6cf5d84d0e62add93b6a389c83b382a1e30a27"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "27a6510f06b584ff0b6f3421a2133cd0dd73bb81bf80e0961976dcbc6ed70f87"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "48d07cb89ece0bd43f665be05b6cf5d84d0e62add93b6a389c83b382a1e30a27"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_merge_hash_free.handler.pl.gz": {
+    "bytes": 2687,
+    "sha256": "2bc727f625349523279527f3f49c3d582398916fc743ada455578ba8454ce117"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_merge_hash_free.pm.gz": {
+    "bytes": 2699,
+    "sha256": "66fa8c751c3a733cec96492a4e5accd70a7e11ac8ca8be868dfe11553f07d50e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2687,
+    "sha256": "cf94a02cf0527d9b0b2f89c396f9f7f432640b2005c509ca2e315058808ad89d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_merge_hash_receiver.pm.gz": {
+    "bytes": 2699,
+    "sha256": "60a57199d8a38f5cd7c3f6fad6e3c618bc62473b05459971ed42478c59056a06"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_rename_key_free.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "4cc81e3734979fad5348d1b043395f9c904febe4d2a78cc63426f37194e0fb52"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_rename_key_free.pm.gz": {
+    "bytes": 2650,
+    "sha256": "d98ada8f9caf4c076cd1f58ac705202d3e787c286e100812a9547f4177845e0c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "4cc81e3734979fad5348d1b043395f9c904febe4d2a78cc63426f37194e0fb52"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_rename_key_receiver.pm.gz": {
+    "bytes": 2650,
+    "sha256": "d98ada8f9caf4c076cd1f58ac705202d3e787c286e100812a9547f4177845e0c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_set_key_free.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "bc646ca29c9c3a86800fd50621f3ee56afff93fc3ac3012344c3bfddacb1c29c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_set_key_free.pm.gz": {
+    "bytes": 2648,
+    "sha256": "95c3e821438eaa1a50d74eca0c13eb79ed9a244331e121e5dc5e3f7f2e131576"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_set_key_receiver.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "bc646ca29c9c3a86800fd50621f3ee56afff93fc3ac3012344c3bfddacb1c29c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_extra_set_key_receiver.pm.gz": {
+    "bytes": 2648,
+    "sha256": "95c3e821438eaa1a50d74eca0c13eb79ed9a244331e121e5dc5e3f7f2e131576"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_drop_keys_free.handler.pl.gz": {
+    "bytes": 2380,
+    "sha256": "21699b163728261770de1f28adfaed085e455c983a4748669ebaafef5630d257"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_drop_keys_free.pm.gz": {
+    "bytes": 2391,
+    "sha256": "7e336db82e4103e61d3509a70c2e47be4fc3e516683db4df95e1a6159cae98aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2380,
+    "sha256": "21699b163728261770de1f28adfaed085e455c983a4748669ebaafef5630d257"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_drop_keys_receiver.pm.gz": {
+    "bytes": 2391,
+    "sha256": "7e336db82e4103e61d3509a70c2e47be4fc3e516683db4df95e1a6159cae98aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_merge_hash_free.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "620165b303c4f5b9ce607c04de880b92b1ee23944a6bd1ac0658f8ade744a2f5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_merge_hash_free.pm.gz": {
+    "bytes": 2375,
+    "sha256": "d950f23991e15f031ef01dcd15cff218a186ae17e8fa2b0028680ff19160626c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2365,
+    "sha256": "9cd6aa2b843b8f2e9a5636990cda10b31b1bd8d54c55850317210e2778ac04e1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_merge_hash_receiver.pm.gz": {
+    "bytes": 2375,
+    "sha256": "62ac0f74d191b1d449fc4150189d2f686c07a53353a5e45f5d0a085d5e02b525"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_pick_keys_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "e60e128aa6261dc6b86e1f29b0fe6cbaab0092ad9723e85ff633f241fbda9f0a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_pick_keys_free.pm.gz": {
+    "bytes": 2397,
+    "sha256": "a0eb6409d326a241e503820c63ada1d0216972a56a636b030615480ffceb72b7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "7ea79e8a260962f4b0ab41954e6c358e1027bcbf8a0c17a2a724f1c9c5102848"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_pick_keys_receiver.pm.gz": {
+    "bytes": 2397,
+    "sha256": "42c91ba3cbe0efa29e279871342af0feb5fe5d57aef43fc3849a5792388ee3b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_rename_key_free.handler.pl.gz": {
+    "bytes": 2392,
+    "sha256": "77af3a72b254ff6117925fcf176ed2192312962d9c83e627ce3f0c5c892543ba"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_rename_key_free.pm.gz": {
+    "bytes": 2402,
+    "sha256": "ef64f5b771e2fe5d406b5a74afc6b9250ecd8d109876e31662f8cbcd35d6d1a9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2392,
+    "sha256": "77af3a72b254ff6117925fcf176ed2192312962d9c83e627ce3f0c5c892543ba"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_rename_key_receiver.pm.gz": {
+    "bytes": 2402,
+    "sha256": "ef64f5b771e2fe5d406b5a74afc6b9250ecd8d109876e31662f8cbcd35d6d1a9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_set_key_free.handler.pl.gz": {
+    "bytes": 2372,
+    "sha256": "4827b6e659d458877ced5061e9d6de9083ad32d69cbb294f43b4e4af35c783a3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_set_key_free.pm.gz": {
+    "bytes": 2381,
+    "sha256": "01ec4b5d2be60b28c047b05083e1ec064b7936c8b6e9c772de12cd9d28cdf75f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_set_key_receiver.handler.pl.gz": {
+    "bytes": 2372,
+    "sha256": "4827b6e659d458877ced5061e9d6de9083ad32d69cbb294f43b4e4af35c783a3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_array_set_key_receiver.pm.gz": {
+    "bytes": 2381,
+    "sha256": "01ec4b5d2be60b28c047b05083e1ec064b7936c8b6e9c772de12cd9d28cdf75f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_drop_keys_free.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "65bd379a55799f85426efa26c1f660fda0dbd459d635dd6f5c6e6a5db25e246b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_drop_keys_free.pm.gz": {
+    "bytes": 2382,
+    "sha256": "0e0bd7aba87a08be53474d430854e9ba553808b9c13bbe7823c55815e210cc77"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "65bd379a55799f85426efa26c1f660fda0dbd459d635dd6f5c6e6a5db25e246b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_drop_keys_receiver.pm.gz": {
+    "bytes": 2382,
+    "sha256": "0e0bd7aba87a08be53474d430854e9ba553808b9c13bbe7823c55815e210cc77"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_drop_keys_with.handler.pl.gz": {
+    "bytes": 2652,
+    "sha256": "d10cff3e95bbb8422d28c12040778562cdbf7b95ac1bdf8b1b4799b7911b5f3b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_drop_keys_with.pm.gz": {
+    "bytes": 2663,
+    "sha256": "0add2bc31525fa95b05853c0b5ecf9a2a4b92ea7b39a7836f710fbe93e91a6f6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_merge_hash_free.handler.pl.gz": {
+    "bytes": 2356,
+    "sha256": "c574408d75d60d2a89894773e812249c711de43f1226ddc261b23980c623c8ed"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_merge_hash_free.pm.gz": {
+    "bytes": 2367,
+    "sha256": "8be2a4e9950f5bf8d03b6c058620407dac5bd76fcac628b129a9f5d202597139"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2356,
+    "sha256": "c574408d75d60d2a89894773e812249c711de43f1226ddc261b23980c623c8ed"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_merge_hash_receiver.pm.gz": {
+    "bytes": 2367,
+    "sha256": "8be2a4e9950f5bf8d03b6c058620407dac5bd76fcac628b129a9f5d202597139"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_merge_hash_with.handler.pl.gz": {
+    "bytes": 2637,
+    "sha256": "3456203ff78f6eb80531dfe62ebba114ab4063b9118df3b8bfc726fdad1800ff"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_merge_hash_with.pm.gz": {
+    "bytes": 2649,
+    "sha256": "977a5818ec44b5acfc19c676f5d0bf350982327474a051277275836c74045487"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_pick_keys_free.handler.pl.gz": {
+    "bytes": 2361,
+    "sha256": "f7482f5269a1c2ab808872215a6768545fe57d5d2c4a97c8224c89c1e3820c06"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_pick_keys_free.pm.gz": {
+    "bytes": 2372,
+    "sha256": "d66fc9c272d1be7be45c8616b6b54051b638fea9265faadf6aadbf5de3ae41d0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2361,
+    "sha256": "f7482f5269a1c2ab808872215a6768545fe57d5d2c4a97c8224c89c1e3820c06"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_pick_keys_receiver.pm.gz": {
+    "bytes": 2372,
+    "sha256": "d66fc9c272d1be7be45c8616b6b54051b638fea9265faadf6aadbf5de3ae41d0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_pick_keys_with.handler.pl.gz": {
+    "bytes": 2660,
+    "sha256": "f6b64365165dc1df87ee3e45bba0dda369557fa4c5cde4a74d5f9ebe4fa02ebe"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_pick_keys_with.pm.gz": {
+    "bytes": 2670,
+    "sha256": "4806dc12a80142da612fcf8135fb13003e926bd216e45c0e26ee6436059cb5d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_rename_key_free.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "1f2be50cd38902335bdf1b44ae05356d7a84d59b1977d5c544ea5adb45e23998"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_rename_key_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "7cddcdd63027c150e1d165d0f95db2efe63d556b0da599e019ffd88f83d97683"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "1f2be50cd38902335bdf1b44ae05356d7a84d59b1977d5c544ea5adb45e23998"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_rename_key_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "7cddcdd63027c150e1d165d0f95db2efe63d556b0da599e019ffd88f83d97683"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_rename_key_with.handler.pl.gz": {
+    "bytes": 2662,
+    "sha256": "c1b6e68a896f9c336e2c9ecbb638c1cb185e3adda70b48ba0ab0d424126624b5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_rename_key_with.pm.gz": {
+    "bytes": 2672,
+    "sha256": "1cb0aa967e155d0afc2a443d73e750a7840e886fde36eb9f2c46a3a1779d7e0f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_set_key_free.handler.pl.gz": {
+    "bytes": 2346,
+    "sha256": "5dbf88f9b908b544667de6234397e98e69573521ec0c680e5df79db0d4146de8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_set_key_free.pm.gz": {
+    "bytes": 2357,
+    "sha256": "70b967fa6086d00abc4c199a8ff31edf0e66291de7bb23658328729e70aa9ed8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_set_key_receiver.handler.pl.gz": {
+    "bytes": 2346,
+    "sha256": "907518043de00e9568e2eefc4f384b1749a246757d588b8ce5a3ae3f55e37f5b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_set_key_receiver.pm.gz": {
+    "bytes": 2357,
+    "sha256": "d21477ae5b35f55fc4f3f2e82e32ebba43a08ce2d5b01c626d1aa32578a5c6e6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_set_key_with.handler.pl.gz": {
+    "bytes": 2642,
+    "sha256": "e8e11ba860c7002a5a3339d72f4215923b0338c0745937be9e4fae8394e661f6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_null_set_key_with.pm.gz": {
+    "bytes": 2653,
+    "sha256": "efe140d56a418f0109a3bcfdd7e0097c1613e9cf42f6ccf595716329aa5afe1a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "a9f59dc8dbb9e65b7ddd7fee86917f89ac2520b32a2ac0862781cd2c581b9eed"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "8291b68ee8724579ef066c13a2124b4f74ead35743fa310b5cb0bfe090c0926e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2375,
+    "sha256": "a661196d63e5327b33d4faf9fd2b38e6738ce345cef6c3863ae2de29237d1114"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "bbd450f6433e3eb68bb365b81fb3236a4173a9464478516dbb8c9e56ac3905a8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "766f701ec95564493f87b1d79e8d7f32e23b6f300e906f1af8b3eb62cb553452"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2363,
+    "sha256": "83f8dd9741de821135231dd662ea7d093cacf2019f900256b39ae6403e957773"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2354,
+    "sha256": "766f701ec95564493f87b1d79e8d7f32e23b6f300e906f1af8b3eb62cb553452"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2363,
+    "sha256": "83f8dd9741de821135231dd662ea7d093cacf2019f900256b39ae6403e957773"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "dab82aa6323c57be7140e9c4cc7610a9903315018a084512849cae8effb7bf91"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "7ea8a1bd1fe9d496e0d64d1913b1f813b019cc8da6c53f8fdafa9a8db8eb8697"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2368,
+    "sha256": "dab82aa6323c57be7140e9c4cc7610a9903315018a084512849cae8effb7bf91"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "7ea8a1bd1fe9d496e0d64d1913b1f813b019cc8da6c53f8fdafa9a8db8eb8697"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "4ba2dd9d2985a01f3973cdccb88c42845c4af4e44fe899baa7dffa2bf8fc8ec2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2384,
+    "sha256": "9d136d99dcbf25823183a0db10a1cae4bff5251d6b050e388e4f0ee064d9e209"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "4ba2dd9d2985a01f3973cdccb88c42845c4af4e44fe899baa7dffa2bf8fc8ec2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2384,
+    "sha256": "9d136d99dcbf25823183a0db10a1cae4bff5251d6b050e388e4f0ee064d9e209"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "6bdc2f72924eed18dfeb78840e6e938502bbc68196035526eb55f6c16e737b84"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_set_key_free.pm.gz": {
+    "bytes": 2362,
+    "sha256": "481b61ca1476086258b9fe1e91474909905759189dd3ec236e86fe681dd1d582"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2353,
+    "sha256": "6bdc2f72924eed18dfeb78840e6e938502bbc68196035526eb55f6c16e737b84"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2362,
+    "sha256": "481b61ca1476086258b9fe1e91474909905759189dd3ec236e86fe681dd1d582"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "f21ae281d90ef606e5f6d5fe7b1bf713185ac84d68ccec4ef1481ce5af82695a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "dce30ebec4d11d7872160856d6afef627ba0d864e13d1a0a0599ed5b46a9b5a5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "f21ae281d90ef606e5f6d5fe7b1bf713185ac84d68ccec4ef1481ce5af82695a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "dce30ebec4d11d7872160856d6afef627ba0d864e13d1a0a0599ed5b46a9b5a5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_produced_count_keys_merge_guard.handler.pl.gz": {
+    "bytes": 2773,
+    "sha256": "878e83cfbeb5db19adb1e65efc84b607f11a240ab5a4218af6c6a2d9258dcc29"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_produced_count_keys_merge_guard.pm.gz": {
+    "bytes": 2785,
+    "sha256": "f3fe51a55811030eff9191b92889143aac77e23a6cf5a5972b87bb4634d637b0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_produced_count_merge_guard.handler.pl.gz": {
+    "bytes": 2766,
+    "sha256": "54ad291cb1300e748eff9628f425586fd9d2f3711507501d7d79525f1760b177"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_produced_count_merge_guard.pm.gz": {
+    "bytes": 2777,
+    "sha256": "457c71a4e46a9327efcd8b6af635eb9b1309d759a9d06fd0ee0fe0803812ea6d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_produced_length_merge_guard.handler.pl.gz": {
+    "bytes": 2779,
+    "sha256": "306c10efef60204cf81b2e3754ede076d7601d284ea7b705777986fa7901f9d2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/policy_produced_length_merge_guard.pm.gz": {
+    "bytes": 2789,
+    "sha256": "b855589840e706edd488ae3979c46a1eeefc7f85b2b83fa027b51ce291fc5c4a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/stderr.log.gz": {
+    "bytes": 28110,
+    "sha256": "ad9cb9da4b5c8ea797ea42cb46dc545aa81539465d5372014a6bb03601c4711a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_inverse/stdout.log.gz": {
+    "bytes": 1772,
+    "sha256": "fff4614d9f92cdfc0eb061aee5380e87769b5528c255020ba1c88755a42e851e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored-wrapper-command.json": {
+    "bytes": 183,
+    "sha256": "cbd76e047f93d473605b52e67acc54245849f02522bbe6cadac028e76f03af92"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored-wrapper-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored-wrapper-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored-wrapper-stdout.log.gz": {
+    "bytes": 96,
+    "sha256": "3759fac3a22488bd0cd85e9c3adbe87d18c2963fcaf4776d2d06e254e39e5414"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/activation.txt": {
+    "bytes": 41,
+    "sha256": "7195f367369ea35a0b83df30173476f287a9ef5daea5d357a2a03a91b789bf70"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/command.json": {
+    "bytes": 482,
+    "sha256": "bd3030c4d7c852d061ac10ff8173c90b2eb356e78c38f021daa45b1e5f31d78d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_drop_null_key_effect.handler.pl.gz": {
+    "bytes": 3367,
+    "sha256": "f3da255283e38b7cd3d94973bf4944941f8c83cb1af52022bc5b8f5bff3dabb2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_drop_null_key_effect.pm.gz": {
+    "bytes": 3377,
+    "sha256": "6885388a1193bd59aadd0e18c2d314aeb661d00d3f960f2d7b1f26bbc670bc8c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_drop_number_key_effect.handler.pl.gz": {
+    "bytes": 3368,
+    "sha256": "931203d4e316301e565c6fbcbfd49c2133bc9e6ee21df853bad40e268d8764c2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_drop_number_key_effect.pm.gz": {
+    "bytes": 3378,
+    "sha256": "6cc21bb096fb8dda65b279c5ced7fcdf4a22cd176b499d9e63c34861787290f2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "d8482ee0c4dd0287f2d4c3b505d2a3cc49e4de3b96676e6e83d7f5aa64814e43"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2401,
+    "sha256": "3af93691b8d4f09293b870a0a490bc1207695d0b563eea60c9c8d7da1615f7b3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "d8482ee0c4dd0287f2d4c3b505d2a3cc49e4de3b96676e6e83d7f5aa64814e43"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2401,
+    "sha256": "3af93691b8d4f09293b870a0a490bc1207695d0b563eea60c9c8d7da1615f7b3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "7f6686b2927994ddde186c82d4ee571106d0c11e9ca91e0f929e2e04cb04391e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2383,
+    "sha256": "fa5ccb00b32fa3998943c91248d686fc72b3d156602642c8b0f6965e45f8e2e4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "7f6686b2927994ddde186c82d4ee571106d0c11e9ca91e0f929e2e04cb04391e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2383,
+    "sha256": "fa5ccb00b32fa3998943c91248d686fc72b3d156602642c8b0f6965e45f8e2e4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "6177531dcd60bd9b4930553cb90396b90aa38b0aecc3f2f9afa3307b6062cade"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2389,
+    "sha256": "87287d5bff507eda1abb06a525eca03bc11ad3b4002704484680bfba02c8a79d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "6177531dcd60bd9b4930553cb90396b90aa38b0aecc3f2f9afa3307b6062cade"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2389,
+    "sha256": "f0e8820edeb5080f006c96933c69371346734cf366f6e5e10ac39ae8e1642d9e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "f5cdcf1ff61d491c9905cbb1c42b79d1e52567b48c704a859c0ae6d19f88a676"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "f44a9ce4df79c8ead00b0395a0c11dfc8963451a18ffea1ef311542752b95538"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "f5cdcf1ff61d491c9905cbb1c42b79d1e52567b48c704a859c0ae6d19f88a676"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "f44a9ce4df79c8ead00b0395a0c11dfc8963451a18ffea1ef311542752b95538"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "4560bf8296052bcda32a369b32289cb7dbe8fe20bc77636e10f3b7999e973cbf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_set_key_free.pm.gz": {
+    "bytes": 2373,
+    "sha256": "6579601b300df3a5113b490466e0aa889e2fd5ebaf580968897137a843bea1b6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "a7ea56940e1bc6d4a3f71b7c20bb4d52a126bbf092461cd967ba279795f96f30"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2373,
+    "sha256": "c9ecef6738512bbcb6b1a23b48c8f59f7dee1f03da8476029b0e77a5c0f2b563"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_merge_number_overlay.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "580279f08eef8af6c30f73695723252ac8d87f726f3bd58b943f0b241790cde2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_merge_number_overlay.pm.gz": {
+    "bytes": 2381,
+    "sha256": "148516ddd0059a017bfb9696832b379d46b611975e448594593f87c666c739d9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_merge_string_source.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "41b5f16ccbc0decf1666a38b84aa5b57d42c73c25289def070e9d892b4b39985"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_merge_string_source.pm.gz": {
+    "bytes": 2383,
+    "sha256": "220f71c186587d460d0116025984755202e884d800dee6522e756d0b091de8ea"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_pick_null_key_effect.handler.pl.gz": {
+    "bytes": 2661,
+    "sha256": "641a2caf466d49675386202ecfe25915e9d862e79a8d28dfe57c00245dacfbe0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_pick_null_key_effect.pm.gz": {
+    "bytes": 2671,
+    "sha256": "365740131223a0916626540599c812d55f696b5c7e9d34e7ae0d5c65d08b978f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_pick_number_key_effect.handler.pl.gz": {
+    "bytes": 2664,
+    "sha256": "c86ade99027e08bc45bf399c83b47df126a8fb292147052124b4ae26d36a9748"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/host_pick_number_key_effect.pm.gz": {
+    "bytes": 2674,
+    "sha256": "6d1dd48212944a06449a417654be36b8ee0ab0269b3597718f36a63c68400956"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/input-identities.json": {
+    "bytes": 19505,
+    "sha256": "505d3bf5003d3bf7cc92ec629c6382d900f661bb361b9043159f9618f565ec4b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/inputs-before-first-run.tar.gz": {
+    "bytes": 552264,
+    "sha256": "c16e4a3ea8889982bfca79d2e9312acd3d40e69daed8ab96f03a07e93660857a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "49db9608d98516f80ab784d10f825ed1a2633b5ecd7f6c559c3fd83f2da13ef3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "96a604a2ad9b6a0b70188d179195956a9f887e7b17e80c064ede03aae9a84096"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "49db9608d98516f80ab784d10f825ed1a2633b5ecd7f6c559c3fd83f2da13ef3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "96a604a2ad9b6a0b70188d179195956a9f887e7b17e80c064ede03aae9a84096"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_merge_hash_free.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "040fd6f48e572fb034512dda4a183628df44240bc1a3a74fa5c924cfdd0d226a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_merge_hash_free.pm.gz": {
+    "bytes": 2712,
+    "sha256": "7c3aa178f8c521478fa1038db4188d633452788d710a7964f25c160ba891a15f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "3def2b5605e0937b6521be0e1e8f3dbc53148622323e1a5ccb7fffcbdab24c64"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_merge_hash_receiver.pm.gz": {
+    "bytes": 2712,
+    "sha256": "d6c1644606fab72cd29947ce52cdcb7cd9e5985ab298d77749c110fcedf8fe17"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_rename_key_free.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "1cf3281b1e93320b5ea926764e51d44b0c547f3667cebe9062c669d72af85f86"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_rename_key_free.pm.gz": {
+    "bytes": 2650,
+    "sha256": "913caa123ec595677b05b98a59bb7758279efc0a417869274d1943cdba0780d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "1cf3281b1e93320b5ea926764e51d44b0c547f3667cebe9062c669d72af85f86"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_rename_key_receiver.pm.gz": {
+    "bytes": 2650,
+    "sha256": "913caa123ec595677b05b98a59bb7758279efc0a417869274d1943cdba0780d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_set_key_free.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "8e16b54ca12f8d180c190c51eba948b7034a4a747876a16bb1ebf09ccebeedf8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_set_key_free.pm.gz": {
+    "bytes": 2648,
+    "sha256": "49a2c82b225aaf482623bc5926cd49f1bcfab020fc66bb96f09c1bda67d74477"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_set_key_receiver.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "8e16b54ca12f8d180c190c51eba948b7034a4a747876a16bb1ebf09ccebeedf8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_extra_set_key_receiver.pm.gz": {
+    "bytes": 2648,
+    "sha256": "e9a1feea6eda8fe52a6fb2539e33634e2321ef6cdac678db9429aaf4d7ba373d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_drop_keys_free.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "fb3924ce62f8302351bb428930d35c46de767b816bd3ed253a42e74043a63c94"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_drop_keys_free.pm.gz": {
+    "bytes": 2407,
+    "sha256": "f8ab93e654c4dfdd4b0df5364368994e4814cc463c01fa954f968f5b9aa984c6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "fb3924ce62f8302351bb428930d35c46de767b816bd3ed253a42e74043a63c94"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_drop_keys_receiver.pm.gz": {
+    "bytes": 2407,
+    "sha256": "f8ab93e654c4dfdd4b0df5364368994e4814cc463c01fa954f968f5b9aa984c6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_merge_hash_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "4b69c006d53c8c1222b32edcba0e865bebd81de0813fd4a03ad30e4561a7b34b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_merge_hash_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "2f168b20255b9a32a0c0ccfcb3ed2b637a4954edbf747a81da5c1f552744ab43"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "e21300acece2def3229d5a55265ab51cb3cab379dec4b5b6a548067d8ccb5af1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_merge_hash_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "2f168b20255b9a32a0c0ccfcb3ed2b637a4954edbf747a81da5c1f552744ab43"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_pick_keys_free.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "8386dd9d19558cb191d3f9e82213bd0e49a3d42f2216f0054293946075a620c0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_pick_keys_free.pm.gz": {
+    "bytes": 2409,
+    "sha256": "9a66f864036eb47198723d01f8d59b92ca5c392ea1706066c2c955c514187b56"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "f7bb565e608197d6a0b91ccdfe861981b20ae327503eaad4fb5afc2e33450e0f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_pick_keys_receiver.pm.gz": {
+    "bytes": 2409,
+    "sha256": "9a66f864036eb47198723d01f8d59b92ca5c392ea1706066c2c955c514187b56"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_rename_key_free.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "17464ab21146b63fda74d5d39c2b12de868812e6e0004b95608de8379bc9959e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_rename_key_free.pm.gz": {
+    "bytes": 2418,
+    "sha256": "1c1a900c0cb76f28fff12f9f467e8d97ef292fea40ad67be9795eb6bffbbd68c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "17464ab21146b63fda74d5d39c2b12de868812e6e0004b95608de8379bc9959e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_rename_key_receiver.pm.gz": {
+    "bytes": 2418,
+    "sha256": "1c1a900c0cb76f28fff12f9f467e8d97ef292fea40ad67be9795eb6bffbbd68c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_set_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "a853fc08673c54bbf0beb360c150ce5a7ec45cc59190f518598873eb1004ed31"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_set_key_free.pm.gz": {
+    "bytes": 2394,
+    "sha256": "52b8b2147d892e137960c7b4c577731d91ab2bed650e75996a1ec6b8ebec4cf4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_set_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "a853fc08673c54bbf0beb360c150ce5a7ec45cc59190f518598873eb1004ed31"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_array_set_key_receiver.pm.gz": {
+    "bytes": 2394,
+    "sha256": "52b8b2147d892e137960c7b4c577731d91ab2bed650e75996a1ec6b8ebec4cf4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_drop_keys_free.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "207befa2e80f069a69f2c579e6de92ce630fe37b262e305c9bd5c3eaa68279d9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_drop_keys_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "d908f006d1a2c75fb950bc0200d4b96545659c8d6e824b81237c451bc312a718"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "207befa2e80f069a69f2c579e6de92ce630fe37b262e305c9bd5c3eaa68279d9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_drop_keys_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "d908f006d1a2c75fb950bc0200d4b96545659c8d6e824b81237c451bc312a718"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_drop_keys_with.handler.pl.gz": {
+    "bytes": 2667,
+    "sha256": "651cc29b752b8fa4a3cdd2c6fbefe6975899eab23f755425d1a57d1ac6a5748b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_drop_keys_with.pm.gz": {
+    "bytes": 2678,
+    "sha256": "567fc7d1fa96b63044d370207f6662711a8e39de21f73a7d980460efa610f791"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_merge_hash_free.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "d7840365976e103e6dffd8a76e379a58713bdd12ed274f4510cac2148d30ed0c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_merge_hash_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "6f3fa2684266276914da9093776e963cfec9618fbe45ad489e5e79899f5f505f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "d7840365976e103e6dffd8a76e379a58713bdd12ed274f4510cac2148d30ed0c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_merge_hash_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "6f3fa2684266276914da9093776e963cfec9618fbe45ad489e5e79899f5f505f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_merge_hash_with.handler.pl.gz": {
+    "bytes": 2651,
+    "sha256": "034817c49e2ae0603608f47129502d5830aebfd09bb4eeb331a351ab7b926663"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_merge_hash_with.pm.gz": {
+    "bytes": 2663,
+    "sha256": "f2b5edcc641648731e557e3dbe9ce8c68eb0c8c26bc50802c290f20a1f8f2515"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_pick_keys_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "68fdc6eacb32d52965b9609ebcc7ba5d4c055520f4fdbbda9c64295145eebc9a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_pick_keys_free.pm.gz": {
+    "bytes": 2385,
+    "sha256": "4f741f0e31234aa0035fe9020d146ae5eb3156485a550d4240737b0d1d52b5a6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "68fdc6eacb32d52965b9609ebcc7ba5d4c055520f4fdbbda9c64295145eebc9a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_pick_keys_receiver.pm.gz": {
+    "bytes": 2385,
+    "sha256": "4f741f0e31234aa0035fe9020d146ae5eb3156485a550d4240737b0d1d52b5a6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_pick_keys_with.handler.pl.gz": {
+    "bytes": 2670,
+    "sha256": "0ac61f5cc2bb7520727ac572fe127216f0399b2ca2a46fbf3c95c7d5e3e34b24"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_pick_keys_with.pm.gz": {
+    "bytes": 2681,
+    "sha256": "2a06fa9a490fec50994fa5406df8524618db6347a4083c715476166b8f578db0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_rename_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "3f257542b657f1d257d4ee6d82ab41be1d868755cc7a185cbdf4fd25977b1938"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_rename_key_free.pm.gz": {
+    "bytes": 2395,
+    "sha256": "d6af23eb1ba2848095ffec62a46d436b749e96d9331d1a487215872f8dd823cc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "3f257542b657f1d257d4ee6d82ab41be1d868755cc7a185cbdf4fd25977b1938"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_rename_key_receiver.pm.gz": {
+    "bytes": 2395,
+    "sha256": "71de0354ddec9c22db3ba98ed36e7e7b6ea1a8e785ebea7ab76f085703247bb2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_rename_key_with.handler.pl.gz": {
+    "bytes": 2677,
+    "sha256": "0075033a1e3085175a2dacf172d9320c83ec2b3bfa606d49a8d96b50562ca667"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_rename_key_with.pm.gz": {
+    "bytes": 2687,
+    "sha256": "7c8ac0b185f5764a1fa83a1bb452739fb541482e07bcefe0d3a9218eb647f994"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_set_key_free.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "9aaee501b1a25e0d44425f9be5fe71a33f55cd01f4853c0c320625f0269da96a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_set_key_free.pm.gz": {
+    "bytes": 2370,
+    "sha256": "d59dcf5e90f30d01fcb5808ebb7931aaa2bbe86e82b8d0785f65038d10a37880"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_set_key_receiver.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "09ef26e1c75643d492ba6c1baffc6fd6c4333929d8b7bc5be1cbacd847e04f78"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_set_key_receiver.pm.gz": {
+    "bytes": 2370,
+    "sha256": "ae63d59cc0aacd0b9ac72e035f461a1d660a7a6a35cb7713cf335b18fab88991"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_set_key_with.handler.pl.gz": {
+    "bytes": 2654,
+    "sha256": "4d788279c8fa622673c7dea91ddf19b6d2f4576f2c1a32680f004cc7f4e0f537"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_null_set_key_with.pm.gz": {
+    "bytes": 2665,
+    "sha256": "ca8bac15dabe611ef5291494c6ee0ce14d63b8c5767de4432e7287cc09c0ffa7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "5d7e6098c43e3d648542e8c105ad1b9c11e1f1ee32cb6e9ea2b2fde1e0440d2b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2401,
+    "sha256": "baea467c639fae7057792254aa84195de92eb84e948c0db2656a79068305c3f1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "46b455457fdd71cf5a665cae243e50234503320d69250a7f4aba3a3f837e75b7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2401,
+    "sha256": "baea467c639fae7057792254aa84195de92eb84e948c0db2656a79068305c3f1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "7a405cbbd902fa71ab265bcee0b4a3372d657e5fd3aaae41c835f846d3e4463d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2383,
+    "sha256": "2ae3d941cdde978a32be71fa78ed0eab73a25785e3b636ded7a7ad4b91e462d4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "7a405cbbd902fa71ab265bcee0b4a3372d657e5fd3aaae41c835f846d3e4463d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2383,
+    "sha256": "2ae3d941cdde978a32be71fa78ed0eab73a25785e3b636ded7a7ad4b91e462d4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "691ff5885af1f0735641724cf41595569778008d06e974fbd3d46ba45a5263e9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2389,
+    "sha256": "6580ddb9612d319932b78d18373ffa46c0fdff33b020f387a927faa7e5b209fc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "691ff5885af1f0735641724cf41595569778008d06e974fbd3d46ba45a5263e9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2389,
+    "sha256": "6580ddb9612d319932b78d18373ffa46c0fdff33b020f387a927faa7e5b209fc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "09f174281257825c1731b8aeb54fa8bb659b5f9608e9bf67e0a18fa6f1b3edaf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "e544d36539b2d622ac4df34c0f639dd56923e09bdb0a0e956aac73ff2c8649da"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "09f174281257825c1731b8aeb54fa8bb659b5f9608e9bf67e0a18fa6f1b3edaf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "e544d36539b2d622ac4df34c0f639dd56923e09bdb0a0e956aac73ff2c8649da"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "209f68b6d8d4ab034d6eec61a850df9fef2501e8ad8008e2c1df7d5e807afbd4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_set_key_free.pm.gz": {
+    "bytes": 2373,
+    "sha256": "fd0ea5a73bdd33609ae3c9a5767d535a2c5293788f796334c84f244be02e1fd0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "209f68b6d8d4ab034d6eec61a850df9fef2501e8ad8008e2c1df7d5e807afbd4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2373,
+    "sha256": "fd0ea5a73bdd33609ae3c9a5767d535a2c5293788f796334c84f244be02e1fd0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "a864bd04a350acac56cd100b49d9a7d5c39e81d09e5ac92ed17f8002470dec95"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "ac97822666b635e8d66612b43bcea7fa6d3f804ec1081f00530d4eeeaa957982"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "a864bd04a350acac56cd100b49d9a7d5c39e81d09e5ac92ed17f8002470dec95"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "ac97822666b635e8d66612b43bcea7fa6d3f804ec1081f00530d4eeeaa957982"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_produced_count_keys_merge_guard.handler.pl.gz": {
+    "bytes": 2787,
+    "sha256": "80c3a78271d610cec231062ced2a96f6aa9cb4c0c241e39b4ae547da4c7799cc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_produced_count_keys_merge_guard.pm.gz": {
+    "bytes": 2798,
+    "sha256": "6f693f4d23aef89b7d859e2b2f6c906a87e3e80239b0637010da4fe261d80a6c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_produced_count_merge_guard.handler.pl.gz": {
+    "bytes": 2777,
+    "sha256": "bf4b6ffc7b452c04da7ffcf9f6e7f85f7fb418451338e297bb28c849bf199f6d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_produced_count_merge_guard.pm.gz": {
+    "bytes": 2788,
+    "sha256": "ef13a7f2e9ea4e3668fa0c83f900df6922b61e47d5398f46b6f28b2266851caa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_produced_length_merge_guard.handler.pl.gz": {
+    "bytes": 2790,
+    "sha256": "b3faf55414d31a383ab67085b65599a94a0852d922c1a899ee6237a4a62b79e2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/policy_produced_length_merge_guard.pm.gz": {
+    "bytes": 2801,
+    "sha256": "57af262d4dc89fafaf35b28450971105779963a82ae961ef36f9cf5623dac579"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/stderr.log.gz": {
+    "bytes": 27310,
+    "sha256": "b536ac48a505ee243ba0ccc0b85d1716292888cf75816c288f67fdf29e97c8e8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_restored/stdout.log.gz": {
+    "bytes": 1664,
+    "sha256": "879e275b649c32373e725b3eab042d6b0a0406485b93fd12c6fe4fa8083b72bf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/private_runner.pl": {
+    "bytes": 909,
+    "sha256": "7747ab397f0a7d3cfaa6ba73b810d67a7e823527beadef6e577e76a97a4bf718"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/activation.txt": {
+    "bytes": 41,
+    "sha256": "7195f367369ea35a0b83df30173476f287a9ef5daea5d357a2a03a91b789bf70"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/command.json": {
+    "bytes": 303,
+    "sha256": "bf8221e0ca3ae32ed947486abe9d9a182851690947813d4738f32e7818925bc6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_drop_null_key_effect.handler.pl.gz": {
+    "bytes": 3367,
+    "sha256": "a2eac708ae0e93595477c43ee63da770e54584f8c2a65ce1640ee3a335f533ef"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_drop_null_key_effect.pm.gz": {
+    "bytes": 3377,
+    "sha256": "c64ea6922d2ecc610218a37583ff23a6aa58ea0e6fdea4edbb55253ad98001dc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_drop_number_key_effect.handler.pl.gz": {
+    "bytes": 3368,
+    "sha256": "dfe3d5a5f44fcae8ea119444eb1508322ddb3a59ecb42be94ba42a2d48e94bae"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_drop_number_key_effect.pm.gz": {
+    "bytes": 3378,
+    "sha256": "930bcaafd8c8c793ec9faf392211d449d70cf6803b5385bc4a6d2cced47434a5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "ec51609002f3114fc98fffb4d6e4167f43ed551333c6de16df061ebc16e7b747"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2401,
+    "sha256": "fa585b711e191d0b7b97ed022b4dd8ac598cf04d3bd874bc21938283b49cc585"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "ec51609002f3114fc98fffb4d6e4167f43ed551333c6de16df061ebc16e7b747"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2401,
+    "sha256": "fa585b711e191d0b7b97ed022b4dd8ac598cf04d3bd874bc21938283b49cc585"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "327a99d9f9a534638d10087ef7f9d9df40902c410e6f34844e935f2eda2fdf9f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2383,
+    "sha256": "02f067f6b7415462cd5a2cd8995e819c7f787b08241cd5c2fbef7f6ca2bae3a4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "327a99d9f9a534638d10087ef7f9d9df40902c410e6f34844e935f2eda2fdf9f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2383,
+    "sha256": "02f067f6b7415462cd5a2cd8995e819c7f787b08241cd5c2fbef7f6ca2bae3a4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "ef5e26c28f463f842e9e79b266b8c364cff55b204645691f41aa8dc30129ccfa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2389,
+    "sha256": "61f0261673bb9d9707eafef829526d915b622ec19024ac303767702ae6ed7b52"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "ef5e26c28f463f842e9e79b266b8c364cff55b204645691f41aa8dc30129ccfa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2389,
+    "sha256": "61f0261673bb9d9707eafef829526d915b622ec19024ac303767702ae6ed7b52"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "a31425b068f3604f4fd52d2eff493571f05eae3996aa741fa2686bb04f78a97e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "e6c2004cbe3fcccc9dcf46dcc701cbb8901097e5d857cc169edb0b64a2b8728d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "20f761912d71a944d4ddcf828f27bd625e0c80aabcc639b46ca1f8a8678e7699"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "4ce856a0ce2cc43b53471840681d5d6df41011a01c1ec684091b9fd24e8cc551"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "2e72ec041526ef7c7089b170aa1cdaca7536d4ba01d87ff5ef8cee48ab883864"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_set_key_free.pm.gz": {
+    "bytes": 2373,
+    "sha256": "f72e05987d2cb4593bcdb69f41df34c643fe0b16bc4a3f1092b58a97929b9066"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "2e72ec041526ef7c7089b170aa1cdaca7536d4ba01d87ff5ef8cee48ab883864"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2373,
+    "sha256": "f72e05987d2cb4593bcdb69f41df34c643fe0b16bc4a3f1092b58a97929b9066"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_merge_number_overlay.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "afe7fc0b677b72ef56b05b66678bd1cab81e139935ec73e5162612866d5b0202"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_merge_number_overlay.pm.gz": {
+    "bytes": 2381,
+    "sha256": "b6873157be15fad55aca49551ad764b20b9f765fee3fa0ebdb7ff00f2747d760"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_merge_string_source.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "f1ed81ae50fffe6eecee16f978bdb02ea582abdf53156a658e87bf3772eedfc5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_merge_string_source.pm.gz": {
+    "bytes": 2383,
+    "sha256": "3e3b0d31e3f369bf21ef03857eac7fe5cf5d58a7a96a1bc769df2734431ea922"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_pick_null_key_effect.handler.pl.gz": {
+    "bytes": 2661,
+    "sha256": "e8d9449f9d6c151de41d5ba41ed3805b1ff6085e3b91f0fa8f67a5ea09e08705"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_pick_null_key_effect.pm.gz": {
+    "bytes": 2671,
+    "sha256": "205bb729fb2c389cd255755b610b3a2b5adc495f910b6e49ab313f371ca6c262"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_pick_number_key_effect.handler.pl.gz": {
+    "bytes": 2664,
+    "sha256": "2d6d6e90abfd5e682cfa782fcd06a0150cf2efac0b20f7d85f6c16cf4f87db35"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/host_pick_number_key_effect.pm.gz": {
+    "bytes": 2674,
+    "sha256": "a68b75c0fc2fcb79266924df7d2dc1e4a257ed13ce3d81b808b0e8d402d8610a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/input-identities.json": {
+    "bytes": 18208,
+    "sha256": "f63931de9982cdcfae2db2924a24b4cd2b7560aa686ec0600db47790d17b3b5a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/inputs-before-first-run.tar.gz": {
+    "bytes": 472793,
+    "sha256": "9aaf39c94b4bca4bc72d6b98b70dc1b12bf51914eaf58bee1d4b829b9ac1dfda"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "84227b713a3698ea8338b636d56ade3aa5c482e205142282f3f25c6ba7350972"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "45ede18bf91c73db7d0a2d404d0bd69c1eafc35a0d975171838771e5955a3697"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "84227b713a3698ea8338b636d56ade3aa5c482e205142282f3f25c6ba7350972"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "45ede18bf91c73db7d0a2d404d0bd69c1eafc35a0d975171838771e5955a3697"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_merge_hash_free.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "9c6cbba87388c65ab4140324f4ba9dd0812c25dad305f89efa714941f6e4c3a3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_merge_hash_free.pm.gz": {
+    "bytes": 2712,
+    "sha256": "a24f2fb3bd8de236862a629c88d0316026b487d5d2208177626bddec212c1d52"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "953ab876435fab9b24307abd6639785f8dfc034f0848049ae72342e9845f359a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_merge_hash_receiver.pm.gz": {
+    "bytes": 2712,
+    "sha256": "a24f2fb3bd8de236862a629c88d0316026b487d5d2208177626bddec212c1d52"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_rename_key_free.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "38595b307e04471cbd81a04fa0ff13c2aeb4c9249c4124eef05a1206cdcb524c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_rename_key_free.pm.gz": {
+    "bytes": 2650,
+    "sha256": "4a5cad5d72a5c2c880aeb98f3f95d8934e68565e94dd1c6322613d2fe30ad8b3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "38595b307e04471cbd81a04fa0ff13c2aeb4c9249c4124eef05a1206cdcb524c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_rename_key_receiver.pm.gz": {
+    "bytes": 2650,
+    "sha256": "4a5cad5d72a5c2c880aeb98f3f95d8934e68565e94dd1c6322613d2fe30ad8b3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_set_key_free.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "7f1cc6e39a9158961deb93b0301d2e25875f8322f3bd8e980b9dfedb09409304"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_set_key_free.pm.gz": {
+    "bytes": 2648,
+    "sha256": "a2b19973dd1c8044a68fa25e945eb41f687b6530c4fbe499abd0585b9fe675ec"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_set_key_receiver.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "7f1cc6e39a9158961deb93b0301d2e25875f8322f3bd8e980b9dfedb09409304"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_extra_set_key_receiver.pm.gz": {
+    "bytes": 2648,
+    "sha256": "a2b19973dd1c8044a68fa25e945eb41f687b6530c4fbe499abd0585b9fe675ec"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_drop_keys_free.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "a7f2fef1772c320812be69deafc2b7125ed1be1abd58bec9c0d5c78532c31bee"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_drop_keys_free.pm.gz": {
+    "bytes": 2407,
+    "sha256": "38e63bbba47a6cbd33471656d878dbc7c9e8a8c8cf91c8cadec9e475e5c0de03"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "a7f2fef1772c320812be69deafc2b7125ed1be1abd58bec9c0d5c78532c31bee"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_drop_keys_receiver.pm.gz": {
+    "bytes": 2407,
+    "sha256": "38e63bbba47a6cbd33471656d878dbc7c9e8a8c8cf91c8cadec9e475e5c0de03"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_merge_hash_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "03697c8f49687d5bfeb174b2b8eaa11e65862bc9be5a2aefa632c3391c0afe39"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_merge_hash_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "bede8b0729aeff079bc56d3b17b06399f403fd331aef800222d8e3828b50c4c7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "03697c8f49687d5bfeb174b2b8eaa11e65862bc9be5a2aefa632c3391c0afe39"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_merge_hash_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "bede8b0729aeff079bc56d3b17b06399f403fd331aef800222d8e3828b50c4c7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_pick_keys_free.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "d7668380a78d9aa0365694a394bb1726e4f94c913775cea5da735f16cf3e5727"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_pick_keys_free.pm.gz": {
+    "bytes": 2409,
+    "sha256": "e68ba5a98ea223eaf966d4f3a79e4356c78f240eb9636b5d88a1c3d0137ffc2b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "d7668380a78d9aa0365694a394bb1726e4f94c913775cea5da735f16cf3e5727"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_pick_keys_receiver.pm.gz": {
+    "bytes": 2409,
+    "sha256": "e68ba5a98ea223eaf966d4f3a79e4356c78f240eb9636b5d88a1c3d0137ffc2b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_rename_key_free.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "057c3572070c91555b15aa6940f59805937d070c88c890b446b4f351609ed82d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_rename_key_free.pm.gz": {
+    "bytes": 2418,
+    "sha256": "d9730b746de7335a1e6d92340870ece08459a2d27901655068fe373cd0f4c23a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "057c3572070c91555b15aa6940f59805937d070c88c890b446b4f351609ed82d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_rename_key_receiver.pm.gz": {
+    "bytes": 2418,
+    "sha256": "d9730b746de7335a1e6d92340870ece08459a2d27901655068fe373cd0f4c23a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_set_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "ea9f50133b037d3fa66f20b82e755244f1ed6da64044375a5589e7ae383c2f02"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_set_key_free.pm.gz": {
+    "bytes": 2394,
+    "sha256": "1a8cbaa68072125439752f75d70da13bb1e77456e2ac3cd2c89e78eccb7aa851"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_set_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "ea9f50133b037d3fa66f20b82e755244f1ed6da64044375a5589e7ae383c2f02"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_array_set_key_receiver.pm.gz": {
+    "bytes": 2394,
+    "sha256": "1a8cbaa68072125439752f75d70da13bb1e77456e2ac3cd2c89e78eccb7aa851"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_drop_keys_free.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "38d63b2dd75e4aa7d63f30f15371dd3d8ea4fc5f26a1052cf8ef2f7414a06215"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_drop_keys_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "a8e3bad118ce6fdb9f98f4969b550637cf82f4707d51777017b7db1d118fabb3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "38d63b2dd75e4aa7d63f30f15371dd3d8ea4fc5f26a1052cf8ef2f7414a06215"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_drop_keys_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "a8e3bad118ce6fdb9f98f4969b550637cf82f4707d51777017b7db1d118fabb3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_drop_keys_with.handler.pl.gz": {
+    "bytes": 2667,
+    "sha256": "88ed8fcacbc1c9d6895d7940b1c91c998ce2ce04d92db5433f6305dc590f4c79"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_drop_keys_with.pm.gz": {
+    "bytes": 2678,
+    "sha256": "5249b2aff1dabe19f77c26f139717fe5262333b120720f17fe028caac6962e1c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_merge_hash_free.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "e46ed31bc45f88c362755b71608efee5ea82ca6275cb123880ef750f9edaf2bf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_merge_hash_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "f9157e095ef9782c3d19ff0d076e6e4e273b37270665654388f7b1eab5dd09a8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "e46ed31bc45f88c362755b71608efee5ea82ca6275cb123880ef750f9edaf2bf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_merge_hash_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "f9157e095ef9782c3d19ff0d076e6e4e273b37270665654388f7b1eab5dd09a8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_merge_hash_with.handler.pl.gz": {
+    "bytes": 2651,
+    "sha256": "b80d14a36d1716949cf26fc464ed1bf2a8cec08e593c41341488240f79093772"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_merge_hash_with.pm.gz": {
+    "bytes": 2663,
+    "sha256": "1ffa77cfedc58a843015326a4a428a63b0dcdd84aec1461e3990271a2732fbb7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_pick_keys_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "343b1b2a5c3ec3cad497040f3069a5de91f807213c1356c2add01406b294a48b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_pick_keys_free.pm.gz": {
+    "bytes": 2385,
+    "sha256": "17b035ba34eec32da37ed8ce819ebde21c6cb92dbffa9825fc90e2251d994e89"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "63e2c293659ecec43f4be72d233cf12a1830cf97a377a040fd1ca0600109e777"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_pick_keys_receiver.pm.gz": {
+    "bytes": 2385,
+    "sha256": "45acbc18afd96f63b347855e95ce146e4e14b6b83c9ebab8a4146bf8ceeeef5b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_pick_keys_with.handler.pl.gz": {
+    "bytes": 2670,
+    "sha256": "a1b2ee03525ddcae205e9b8e9759c71a47faa91a207f0c2e19305c1d50e8be15"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_pick_keys_with.pm.gz": {
+    "bytes": 2681,
+    "sha256": "297383443b0865034e2042adfc3267cc31d3540b553dff6ecbd6cbe144155b60"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_rename_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "43c1bbc57edac40aff26681bbd175d430644e8f91fa91e4f49d4e81862c17294"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_rename_key_free.pm.gz": {
+    "bytes": 2395,
+    "sha256": "612439929a9ededb6858a3efd2d6ed9fc7b808043b38403e8e6fd987b3e10496"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "34b78385026a24ea2b976a98d3c82a58d13cd3b57af49477525acc87821a38d9"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_rename_key_receiver.pm.gz": {
+    "bytes": 2395,
+    "sha256": "612439929a9ededb6858a3efd2d6ed9fc7b808043b38403e8e6fd987b3e10496"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_rename_key_with.handler.pl.gz": {
+    "bytes": 2677,
+    "sha256": "c6f823c05980aaa0af0ce7efd0ad2e9bd68d994495901ad1257821711f4c7f17"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_rename_key_with.pm.gz": {
+    "bytes": 2687,
+    "sha256": "e8e138b320f2d1e3a960095277a5042ea64de6b478e62c79828ab72b54c2624f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_set_key_free.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "a896887d521b0906c663f3767b56ccf56d967b10532c4efdfd5b50dd1e8bc667"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_set_key_free.pm.gz": {
+    "bytes": 2370,
+    "sha256": "e8367eb8812dd8bb1edb3445a1a9b6e04bf62e39274e85b67459f2c150e74679"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_set_key_receiver.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "912f56c346ad33d1dacd4bdd7d61a2231d8b5710a38b5dc5af8cb4c1526ad9f8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_set_key_receiver.pm.gz": {
+    "bytes": 2370,
+    "sha256": "c348caab5711af645dd27d12bf83563d4be7bc423b70a8d28518f64017c2b8f1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_set_key_with.handler.pl.gz": {
+    "bytes": 2654,
+    "sha256": "18e0f001213ff9d5245c04a8a3e47579e1ec0101154730ec0181d76983d7f4b3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_null_set_key_with.pm.gz": {
+    "bytes": 2665,
+    "sha256": "9299c2b27ba3408647ab5fee0698348390d4f184a63a85c1555615821c0c8685"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "3572966df8e49edac8b168e25ab6473ef461e9a08c3e1db584c33758559934c6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2401,
+    "sha256": "601c718ffbaee9551bfff92cdd96ceb93bd1da80ee303c69b9a34b4f983c5be3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "8b8c9ed7551d220aa3003ca2c60813f8d696f6c5a2e01144b78e667eec528b75"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2401,
+    "sha256": "c2e70bd1abc6865f84ac095d412935204753b4433d8bddfcd52c2d8b36c96f15"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "146f0369533092823dcb923a677b0b921a0070370dfee4bc7a745c2f1c0ae873"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2383,
+    "sha256": "89a19ed299d469f9daf9c18cc3d0e490a1571aeeac31ae5a33713c4c68af9efa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "146f0369533092823dcb923a677b0b921a0070370dfee4bc7a745c2f1c0ae873"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2383,
+    "sha256": "89a19ed299d469f9daf9c18cc3d0e490a1571aeeac31ae5a33713c4c68af9efa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "a5bf8e56e3738a60b8adc27d61e66febbb2c6248256bbccbe96a173721f8c8cb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2389,
+    "sha256": "d18f0d94d2113469c92c1b5c2f206a36ad5a1e49973bfa98796b52ec78567758"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "a5bf8e56e3738a60b8adc27d61e66febbb2c6248256bbccbe96a173721f8c8cb"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2389,
+    "sha256": "d18f0d94d2113469c92c1b5c2f206a36ad5a1e49973bfa98796b52ec78567758"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "10f6c4d62f70babdadecc7f0f62f89f954bdfd5eb69edcba28ef159ffe6a8557"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "5cf61ca829e70a825fa1e3f3e548bc65d95434464af3d6fd7e0862a9df8c6110"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "10f6c4d62f70babdadecc7f0f62f89f954bdfd5eb69edcba28ef159ffe6a8557"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "5cf61ca829e70a825fa1e3f3e548bc65d95434464af3d6fd7e0862a9df8c6110"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "7c7ec4236e0579e829bdbd9c8b038c55fa544ef9bccee1fd0bf6e25e43028850"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_set_key_free.pm.gz": {
+    "bytes": 2373,
+    "sha256": "b224933f0306c72081fe43774ab06f83ec2fae30c1631f23eae19238ad7f21b4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "7c7ec4236e0579e829bdbd9c8b038c55fa544ef9bccee1fd0bf6e25e43028850"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2373,
+    "sha256": "b224933f0306c72081fe43774ab06f83ec2fae30c1631f23eae19238ad7f21b4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "d73d9580d0b32584f68e3497effcb5a4887192f562d00ff40ac7c3b085db4579"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "b6d99f1481a74db7d6d2bf8d076525095b5068db73cc1486d8233e963079f407"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "d73d9580d0b32584f68e3497effcb5a4887192f562d00ff40ac7c3b085db4579"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "b6d99f1481a74db7d6d2bf8d076525095b5068db73cc1486d8233e963079f407"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_produced_count_keys_merge_guard.handler.pl.gz": {
+    "bytes": 2787,
+    "sha256": "afd47589d69fd547d99f0e0a432640c52b5a2c2353e5b8d30ec0b4beb155cb2c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_produced_count_keys_merge_guard.pm.gz": {
+    "bytes": 2798,
+    "sha256": "fc9e2e540588d9b06264c3a841060b16106f62d36479265baddcc7a96d96bc25"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_produced_count_merge_guard.handler.pl.gz": {
+    "bytes": 2777,
+    "sha256": "5d0113ec892a52793047dc092ba0aa1c17e525e354be59717844b11af1fe4041"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_produced_count_merge_guard.pm.gz": {
+    "bytes": 2788,
+    "sha256": "5d47f22d9f0dbf79c04a83a3a9168112ef8b68eb4808ec5b21aeace8b6039df2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_produced_length_merge_guard.handler.pl.gz": {
+    "bytes": 2790,
+    "sha256": "cee56916da514e5b62e35aa0a266538a16794198afa9c7860bf7cb9751fc41a2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/policy_produced_length_merge_guard.pm.gz": {
+    "bytes": 2801,
+    "sha256": "ffbcccbda87a80449898ec2b66dbe6f03a94a66dd2757b8ff4ceeda562eb6b90"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/stderr.log.gz": {
+    "bytes": 27229,
+    "sha256": "0fff8c14a6161e991903c30f9724f39b14f19e9160736bda865f1d31312f3345"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_after/stdout.log.gz": {
+    "bytes": 1650,
+    "sha256": "7dd95bf3f933c57d1e45654d49c022144450be33b372ed4e1dde45258516b248"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "7195f367369ea35a0b83df30173476f287a9ef5daea5d357a2a03a91b789bf70"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/command.json": {
+    "bytes": 408,
+    "sha256": "494de57c972d627be5a6422021d2b093ca39704ff6f67ab66cda72167ca1138b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_drop_null_key_effect.handler.pl.gz": {
+    "bytes": 3367,
+    "sha256": "f6d6ba570ce7d0604540d5593fda35ee19750ec6084211831922cf0fcb449d6f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_drop_null_key_effect.pm.gz": {
+    "bytes": 3377,
+    "sha256": "5415dc652518ccefd80ad178d0d026fadf8814cf41f2918220dddd59ca9cad1c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_drop_number_key_effect.handler.pl.gz": {
+    "bytes": 3368,
+    "sha256": "c900e9ec93ba4b0844c0e1992ba9522270cb35402511bf72d1c821b74cf75f9f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_drop_number_key_effect.pm.gz": {
+    "bytes": 3378,
+    "sha256": "27eff3d096e31b7656e8616c1893692baee86acaaa05034db725a236ce53396a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "604dfc0449b556827fa5368ef56956ad5fdb76a1c644fe3fe1367a84745a2b95"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2401,
+    "sha256": "6aaed7cb836ea93be8d8e3834f21b34285c66403edef757f4b419d5fbaa1282d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "604dfc0449b556827fa5368ef56956ad5fdb76a1c644fe3fe1367a84745a2b95"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2401,
+    "sha256": "6aaed7cb836ea93be8d8e3834f21b34285c66403edef757f4b419d5fbaa1282d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "45db18ed51c39389149f2083022614b57c07c0614a5345fc3deecee6b041aece"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2383,
+    "sha256": "0d35d4fb6ffb4cbff8be57b3397d9bb9cff59c9a82c4e00d6399100e439e3fee"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "45db18ed51c39389149f2083022614b57c07c0614a5345fc3deecee6b041aece"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2383,
+    "sha256": "0d35d4fb6ffb4cbff8be57b3397d9bb9cff59c9a82c4e00d6399100e439e3fee"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "16f8b4eeeeb01902a6c2d499dc9beb1c6c0d58457962512d49a7bd5291ade4e4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2389,
+    "sha256": "33695c7ec0d05c3fb701292ea2e0ffd7a2887bcab4d78ae8670350c9a0276b0c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "16f8b4eeeeb01902a6c2d499dc9beb1c6c0d58457962512d49a7bd5291ade4e4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2389,
+    "sha256": "33695c7ec0d05c3fb701292ea2e0ffd7a2887bcab4d78ae8670350c9a0276b0c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "ab103ca6feca6bd212e005ee216e61e080cc9230f81c84f044308e1e6c83f5b5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "194665ae5a5df5827db32cd49870eb4fb41ebb5e8cfbb4a821f81a2038026102"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "ab103ca6feca6bd212e005ee216e61e080cc9230f81c84f044308e1e6c83f5b5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "194665ae5a5df5827db32cd49870eb4fb41ebb5e8cfbb4a821f81a2038026102"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "c77bebc4498b042cfe0f0d8df5b3db14769b95bf2185416064891693954d90d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_set_key_free.pm.gz": {
+    "bytes": 2373,
+    "sha256": "a685c2bce6826b0f85efba4a720d5081e6c640700b9debe5d1cb59c52389f1bf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "c77bebc4498b042cfe0f0d8df5b3db14769b95bf2185416064891693954d90d6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2373,
+    "sha256": "a685c2bce6826b0f85efba4a720d5081e6c640700b9debe5d1cb59c52389f1bf"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_merge_number_overlay.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "742bb83ef7236d001d32bd2c63221e77a5c904382fd0c80eeb8d5426f67c94a7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_merge_number_overlay.pm.gz": {
+    "bytes": 2381,
+    "sha256": "b8c59b7c9c49e225e47148f757f57c1a4ec7de4ae8e609daf8842099543dad9b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_merge_string_source.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "f7d79661da167a3970983baf078ce1a6868e7c5c391cf58c2c13a5a5530a2bb7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_merge_string_source.pm.gz": {
+    "bytes": 2383,
+    "sha256": "8466f25bb905f8331c09068fc87e360f2921d7deea019f9504ce663960d51567"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_pick_null_key_effect.handler.pl.gz": {
+    "bytes": 2661,
+    "sha256": "3a82056bcafee1348b45f0dda69d8514befaac5355244551b461a477d2470c26"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_pick_null_key_effect.pm.gz": {
+    "bytes": 2671,
+    "sha256": "04e7a23f499dc448146e07687e67b4c3751e8594b0779a642390996bc161fe21"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_pick_number_key_effect.handler.pl.gz": {
+    "bytes": 2664,
+    "sha256": "ffce6ffe492e8233e97a86d860397c8d54867cd50f42a49e0ae054d32a92ff1e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/host_pick_number_key_effect.pm.gz": {
+    "bytes": 2674,
+    "sha256": "7c18b7a01d3902ea4291147c2462960743f6b7f83b090ef3dd07b12cbeb14fad"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/input-identities.json": {
+    "bytes": 19942,
+    "sha256": "8c4cc8ae75c529f270ecf53d7fddc18a94adf78114b9c40b04c48baa780eec93"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/inputs-before-first-run.tar.gz": {
+    "bytes": 476598,
+    "sha256": "98074de395a57b3581375c0c977fc242e3d2b66967585c0901251e7a8a2adb68"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_drop_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "4c85d082b9387ca4312054016dfe2b4f1ed490b9bafb5b123b6dd6532f49e576"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_drop_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "ec8e11b9b80774e8dd69c77901c7f192779d408a598fb3f9f8220e97070bba96"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_drop_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "4c85d082b9387ca4312054016dfe2b4f1ed490b9bafb5b123b6dd6532f49e576"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_drop_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2351,
+    "sha256": "ec8e11b9b80774e8dd69c77901c7f192779d408a598fb3f9f8220e97070bba96"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_merge_hash_free.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "da5910ec828ce36a57c01a1ea65f4c32ca00f8b0cdc8c31951357a5e68c1c2bd"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_merge_hash_free.pm.gz": {
+    "bytes": 2712,
+    "sha256": "9b61f5d113928074d6d27c21d8e17226f38d34eb900100218045a61896f29733"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2702,
+    "sha256": "da5910ec828ce36a57c01a1ea65f4c32ca00f8b0cdc8c31951357a5e68c1c2bd"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_merge_hash_receiver.pm.gz": {
+    "bytes": 2712,
+    "sha256": "9b61f5d113928074d6d27c21d8e17226f38d34eb900100218045a61896f29733"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_rename_key_free.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "0f0f63c76d00ae844cf249fb5b4ac6253f90a07be56657c66e7d6989949d2775"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_rename_key_free.pm.gz": {
+    "bytes": 2650,
+    "sha256": "5f20317fc6fdd13ac39aaf83cfedef97976dca88d8c71ed8846fe0688cc77396"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2641,
+    "sha256": "05d90968e0a479f5ddaac95712edf3ed2295679a1ad54fe8a1fa0454a2143e2a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_rename_key_receiver.pm.gz": {
+    "bytes": 2650,
+    "sha256": "5f20317fc6fdd13ac39aaf83cfedef97976dca88d8c71ed8846fe0688cc77396"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_set_key_free.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "c8944cf9d7784fd70707c804dfd3992c2afb473545e17e88d8b4846fba5e039e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_set_key_free.pm.gz": {
+    "bytes": 2648,
+    "sha256": "335838b4f818166b560b93a8a501acc08ecec1858c6b5eced5695302dd1794aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_set_key_receiver.handler.pl.gz": {
+    "bytes": 2639,
+    "sha256": "c8944cf9d7784fd70707c804dfd3992c2afb473545e17e88d8b4846fba5e039e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_extra_set_key_receiver.pm.gz": {
+    "bytes": 2648,
+    "sha256": "335838b4f818166b560b93a8a501acc08ecec1858c6b5eced5695302dd1794aa"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_drop_keys_free.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "ae4d0a9fe77502df7a6b115ab42f973ae133a858bd1a8b191a545b4ed19e3425"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_drop_keys_free.pm.gz": {
+    "bytes": 2407,
+    "sha256": "46396360977e479eb0672749626d4d04611b7c58813d98746e9fd608f1836d3f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2396,
+    "sha256": "b552a606c5461e77a844426300ad6fdac5207b4f0d29ee91cdb43982963371d2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_drop_keys_receiver.pm.gz": {
+    "bytes": 2407,
+    "sha256": "61a93fec05212374cb941e6306b8662308fa9a017e1f8707a99270f72d18aa4e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_merge_hash_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "196ce1e23fbc13a33060858c78dd67d06bc92766411d2d7d8446a7d9d764e655"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_merge_hash_free.pm.gz": {
+    "bytes": 2388,
+    "sha256": "e31e432e16ce263fa881c38d0c2e3f5ac48754b31a97989c2e0a6169e0446b99"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "196ce1e23fbc13a33060858c78dd67d06bc92766411d2d7d8446a7d9d764e655"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_merge_hash_receiver.pm.gz": {
+    "bytes": 2388,
+    "sha256": "e31e432e16ce263fa881c38d0c2e3f5ac48754b31a97989c2e0a6169e0446b99"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_pick_keys_free.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "629fb899ef6a19bf465b21f93dee15e08176f2909e6f6a1f94fd6e901b91f198"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_pick_keys_free.pm.gz": {
+    "bytes": 2409,
+    "sha256": "1aa4ea3d3d03490daabee46015ac7a309372c3993a57b1eb8f5d5009cbaa5197"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2399,
+    "sha256": "629fb899ef6a19bf465b21f93dee15e08176f2909e6f6a1f94fd6e901b91f198"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_pick_keys_receiver.pm.gz": {
+    "bytes": 2409,
+    "sha256": "1aa4ea3d3d03490daabee46015ac7a309372c3993a57b1eb8f5d5009cbaa5197"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_rename_key_free.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "298cd3292fcf847d7df50cf26ee715909e6073786118b21f7d73c408faca8000"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_rename_key_free.pm.gz": {
+    "bytes": 2418,
+    "sha256": "a7d8966aff1e62ccd8e6d834462d144f0bbdbc1b3da1295cdc14d69e0be54ad4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2408,
+    "sha256": "298cd3292fcf847d7df50cf26ee715909e6073786118b21f7d73c408faca8000"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_rename_key_receiver.pm.gz": {
+    "bytes": 2418,
+    "sha256": "a7d8966aff1e62ccd8e6d834462d144f0bbdbc1b3da1295cdc14d69e0be54ad4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_set_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "cd42c30d584930372f8e9059f0f921b05f48c662c9361fc4c5b1f43b49d6fcff"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_set_key_free.pm.gz": {
+    "bytes": 2394,
+    "sha256": "466d353a0617e650f8397c2dcb83bd85e7f13764f97ad98aed642d9473cd57b4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_set_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "cd42c30d584930372f8e9059f0f921b05f48c662c9361fc4c5b1f43b49d6fcff"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_array_set_key_receiver.pm.gz": {
+    "bytes": 2394,
+    "sha256": "466d353a0617e650f8397c2dcb83bd85e7f13764f97ad98aed642d9473cd57b4"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_drop_keys_free.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "bf0b26548bde2d92998466eae95d48b96a439a0b393db1a7cdfe22adc3c9291f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_drop_keys_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "be6dae3099a5ac4d06010ddd8c4a41d686df29b47258d9fa1a04f2cb57b409a8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2386,
+    "sha256": "bf0b26548bde2d92998466eae95d48b96a439a0b393db1a7cdfe22adc3c9291f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_drop_keys_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "be6dae3099a5ac4d06010ddd8c4a41d686df29b47258d9fa1a04f2cb57b409a8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_drop_keys_with.handler.pl.gz": {
+    "bytes": 2667,
+    "sha256": "32d2556b8d71a55c288c261fa155cb4a3cacc8efdac4aa93fa3704aa539c1828"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_drop_keys_with.pm.gz": {
+    "bytes": 2678,
+    "sha256": "2aba67570958ba6b75548c70d4e034fb3002ae95d195a5d35fc04fc17877b7c1"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_merge_hash_free.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "682972ccf62632911d142c6226610bbe5118e8eb57cc759a8758a064f9396b73"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_merge_hash_free.pm.gz": {
+    "bytes": 2378,
+    "sha256": "39bf2433fe6ab7868061a0b6c8f8f57dcebf1097be70f50ffa90ee57ccc4bc18"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2370,
+    "sha256": "f3c695c2ebbc92075f6b70cad814926d1cea3e11d747dcf9e6c67ee5fd2e32b0"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_merge_hash_receiver.pm.gz": {
+    "bytes": 2378,
+    "sha256": "8bdb779370dddc4f33553ce1d9138b0d041c59938c45192d24034a02aa47ee28"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_merge_hash_with.handler.pl.gz": {
+    "bytes": 2651,
+    "sha256": "da746f17bf3bfe9cf6cc0d0cae02e1621fdd231061b8bef1660f954548465826"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_merge_hash_with.pm.gz": {
+    "bytes": 2663,
+    "sha256": "e5a90232e81439f147debee8c070c7bb1d21a4b3debd02a648a017bc0e8169a6"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_pick_keys_free.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "f4615c494798c7c75643ea8ffab68b01759591c070e7a6a1c2c089eefb4eb3ee"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_pick_keys_free.pm.gz": {
+    "bytes": 2385,
+    "sha256": "dae52de6bc9d3f13e21b4e5a458c487f47db6696d0dc913b437f2965a087dc3f"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2374,
+    "sha256": "6a74777717fcddbcdc16fcf8ed15fccaca8b019bfe7be87b4c354c0e7c3e4931"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_pick_keys_receiver.pm.gz": {
+    "bytes": 2385,
+    "sha256": "d39d65e28036c736df16f32939217b0765dac0fd3b4a585346fe2f3d7f9c66da"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_pick_keys_with.handler.pl.gz": {
+    "bytes": 2670,
+    "sha256": "6943630098bd6203efdf9b0e87503dc118cedbf601a0a56fcb75ad9c3f76d2af"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_pick_keys_with.pm.gz": {
+    "bytes": 2681,
+    "sha256": "f04a7ac1a2fdfc52702047cc89f65ff3963eb52088fac1a7961097f58c594702"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_rename_key_free.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "b12209182b67e0b48ff7eaf6ce2823f2f0a92ce192466e4be4b48ea4245e7904"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_rename_key_free.pm.gz": {
+    "bytes": 2395,
+    "sha256": "4ff14832dc7225366598394cc01d857cea9cd41692d852f7dccb1a227241897c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2384,
+    "sha256": "b12209182b67e0b48ff7eaf6ce2823f2f0a92ce192466e4be4b48ea4245e7904"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_rename_key_receiver.pm.gz": {
+    "bytes": 2395,
+    "sha256": "4ff14832dc7225366598394cc01d857cea9cd41692d852f7dccb1a227241897c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_rename_key_with.handler.pl.gz": {
+    "bytes": 2677,
+    "sha256": "4259d2bedf97f341bceda2acc485dcef9fad619685edf55bec5d9339ed0a6ea5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_rename_key_with.pm.gz": {
+    "bytes": 2687,
+    "sha256": "2e55f39e623e2028da80b0789f39d78a824cf12323f4244fd637a3a06a5b8d6c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_set_key_free.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "e18f0b4902d3841175aa52c1485dc3d171953743a2df1bb3cce33fb331c55435"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_set_key_free.pm.gz": {
+    "bytes": 2370,
+    "sha256": "837b2b5f9665f5626486440a733d57148bb966f777fc516daa44ad5d78b43c60"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_set_key_receiver.handler.pl.gz": {
+    "bytes": 2359,
+    "sha256": "e18f0b4902d3841175aa52c1485dc3d171953743a2df1bb3cce33fb331c55435"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_set_key_receiver.pm.gz": {
+    "bytes": 2370,
+    "sha256": "837b2b5f9665f5626486440a733d57148bb966f777fc516daa44ad5d78b43c60"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_set_key_with.handler.pl.gz": {
+    "bytes": 2654,
+    "sha256": "eca2210a3005506adcf86672f5ac4d98110b3f4efc80afe7356eafa2cec52f35"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_null_set_key_with.pm.gz": {
+    "bytes": 2665,
+    "sha256": "90e2f0a2db9818140aa8866ac4cf3f7154a3dc0bf5e3e33037fe98b5b366b12b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_drop_keys_free.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "6406952ff95f656823d91e3555a8f220575ced47e9f1d4af44ce95ceaeb2a82d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_drop_keys_free.pm.gz": {
+    "bytes": 2401,
+    "sha256": "a167d2039a285d02e2456af14661b783d9455a0b4927e5497725226c59f77f53"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_drop_keys_receiver.handler.pl.gz": {
+    "bytes": 2390,
+    "sha256": "6406952ff95f656823d91e3555a8f220575ced47e9f1d4af44ce95ceaeb2a82d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_drop_keys_receiver.pm.gz": {
+    "bytes": 2401,
+    "sha256": "a167d2039a285d02e2456af14661b783d9455a0b4927e5497725226c59f77f53"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_merge_hash_free.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "def563056d3fa395247a75177a4ccf4327efa224cd8cf5a88672507dad094d6e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_merge_hash_free.pm.gz": {
+    "bytes": 2383,
+    "sha256": "e528153757afbb75dada6a6b72981cd3c144ed988eca513022581626d991c168"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_merge_hash_receiver.handler.pl.gz": {
+    "bytes": 2371,
+    "sha256": "def563056d3fa395247a75177a4ccf4327efa224cd8cf5a88672507dad094d6e"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_merge_hash_receiver.pm.gz": {
+    "bytes": 2383,
+    "sha256": "e528153757afbb75dada6a6b72981cd3c144ed988eca513022581626d991c168"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_pick_keys_free.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "09d7e1d0dc303c84ba523dc0baacba9bca5cc62c3a1c04c121cb4e18f24d9117"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_pick_keys_free.pm.gz": {
+    "bytes": 2389,
+    "sha256": "c074b323f5082436984fbb0a87d54c9121c15f42628290e09f2cf112dc102dd3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_pick_keys_receiver.handler.pl.gz": {
+    "bytes": 2378,
+    "sha256": "09d7e1d0dc303c84ba523dc0baacba9bca5cc62c3a1c04c121cb4e18f24d9117"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_pick_keys_receiver.pm.gz": {
+    "bytes": 2389,
+    "sha256": "c074b323f5082436984fbb0a87d54c9121c15f42628290e09f2cf112dc102dd3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_rename_key_free.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "9744de1943f8c27db5f68bb237820836de54bd33f9e8c3c5780e929102e2c5de"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_rename_key_free.pm.gz": {
+    "bytes": 2398,
+    "sha256": "cedeb40edc25a774ad568e1b40daeffcb31c7b06cec94ffaf75ba4cbc68d997c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_rename_key_receiver.handler.pl.gz": {
+    "bytes": 2388,
+    "sha256": "9744de1943f8c27db5f68bb237820836de54bd33f9e8c3c5780e929102e2c5de"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_rename_key_receiver.pm.gz": {
+    "bytes": 2398,
+    "sha256": "cedeb40edc25a774ad568e1b40daeffcb31c7b06cec94ffaf75ba4cbc68d997c"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_set_key_free.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "059ce7487cb220d1b5ee09d21ac170229be6faefbe177db069ecfa5b518c43dc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_set_key_free.pm.gz": {
+    "bytes": 2373,
+    "sha256": "03120113e16010d94f1a0f0ba50ef9e80c6034bab55e6ae002d20468acf2d2e3"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_set_key_receiver.handler.pl.gz": {
+    "bytes": 2363,
+    "sha256": "059ce7487cb220d1b5ee09d21ac170229be6faefbe177db069ecfa5b518c43dc"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_initial_number_set_key_receiver.pm.gz": {
+    "bytes": 2373,
+    "sha256": "eb346e37643d962a557fafffd6e0e69c743bb0596c7fdc7596d0782b8059c70d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_pick_keys_free_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "d27c9999d6bad1e542b19157f232f228b45debf59f1deba63025b608b5387448"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_pick_keys_free_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "6570d2f9f889ad47433e9a0bf53c13ef4b3bb7c1dd0a8d852d57dffb7c3cbf30"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_pick_keys_receiver_zero_keys_profile.handler.pl.gz": {
+    "bytes": 2342,
+    "sha256": "d27c9999d6bad1e542b19157f232f228b45debf59f1deba63025b608b5387448"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_pick_keys_receiver_zero_keys_profile.pm.gz": {
+    "bytes": 2350,
+    "sha256": "982fe5a85764fa150ce11d0c5d829fe6ed02c5bdc2b62fccf8053a2a561c08a7"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_produced_count_keys_merge_guard.handler.pl.gz": {
+    "bytes": 2787,
+    "sha256": "9595248d8f3aee13bd69dc2561d54650da9c09aa2943c649bb815be5f891d6d5"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_produced_count_keys_merge_guard.pm.gz": {
+    "bytes": 2798,
+    "sha256": "3c6c1cb052e53f03bf57893d4fe437b26bdf021ba34c23eb67667956807e9ba8"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_produced_count_merge_guard.handler.pl.gz": {
+    "bytes": 2777,
+    "sha256": "313b746b0573c1c8634aad560907271279a968719b9ed7b8a38065b502a1a78d"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_produced_count_merge_guard.pm.gz": {
+    "bytes": 2788,
+    "sha256": "7164ee4d795d11c570bf8a16921c1aaedfd958eed24510f54a0356f13519f6c2"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_produced_length_merge_guard.handler.pl.gz": {
+    "bytes": 2790,
+    "sha256": "5a253e7cb75f7e62f3e78c8e522f5299707932f546bab52bd9572694fa8e4d8a"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/policy_produced_length_merge_guard.pm.gz": {
+    "bytes": 2801,
+    "sha256": "1ce0ee5fdf2c2222e01a626892e0d66982277f90d48778f9abf4a1c6ebb95293"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/stderr.log.gz": {
+    "bytes": 27235,
+    "sha256": "a311079bb90a963faf959d5c89bfb2056196fefd8a8d74ecd33118dae2c5ed09"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/qualified_direct/stdout.log.gz": {
+    "bytes": 2480,
+    "sha256": "53ff9669ced11fd1526d9857acaecd289b5f42a8c589f9c89f35fa26d4ba369b"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/review.py": {
+    "bytes": 12820,
+    "sha256": "8ba8556a04fdb1a70f1b31157a04258305376eb79b7a677648e50a4d4312a818"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/run_private_control.py": {
+    "bytes": 2286,
+    "sha256": "452d384138967130a2a1ae65d52898333a21b37109e74335cfb38d5e4c8d9100"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/run_review.py": {
+    "bytes": 981,
+    "sha256": "e6df68f471d9fd1101fc920a26edfec4ac88c00feb3aca4f4177872c0afa1566"
+  },
+  "docs/checkpoints/hash-helper-source-isolation-perl-2026-11-07/seal.py": {
+    "bytes": 1296,
+    "sha256": "2603b948672f0c33dab9445e47374234cd0ea501ac4e02d9efdfb10398ae84f7"
+  },
+  "docs/checkpoints/hash-value-result-guard-perl-2026-11-07/review_preflight.py": {
+    "bytes": 12486,
+    "sha256": "61d2ad739e17e0c82f197517ad1ab897a37c6aaafab5e144f924a6f77aa52e44"
+  },
+  "docs/checkpoints/hash-value-result-selection-2026-11-07/review.py": {
+    "bytes": 11544,
+    "sha256": "e999ac8f19d7db2859cec93979e585bb4cac4c3f9b064e32a802013aacebaab2"
+  },
+  "tests/fixtures/hash_helper_source_isolation_perl_cases.json": {
+    "bytes": 2523,
+    "sha256": "ca1510b143e8210cdf02f56457ae32783e05a45f682dc955e834d9718230cf7f"
+  },
+  "tests/fixtures/hash_helper_source_isolation_perl_extra_cases.json": {
+    "bytes": 2106,
+    "sha256": "265457dad69b9858b4e2549fdafa6b594492192d0b169b3be90e551744c45b4c"
+  },
+  "tests/fixtures/hash_value_result_guard_perl_profiles.json": {
+    "bytes": 53152,
+    "sha256": "612c145d4ae334f2d4c33b9c11ac9d8f8a7a566e37674ba3ad639b4c3a87e25d"
+  }
+}

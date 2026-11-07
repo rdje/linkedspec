@@ -1,0 +1,66 @@
+[
+  {
+    "id": "merge_string_source",
+    "body": "return(merge_hash(\"3\",{\"b\":2}))",
+    "source": "Value:: I {return(merge_hash(\"3\",{\"b\":2}))}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": {
+      "b": 2
+    }
+  },
+  {
+    "id": "merge_number_overlay",
+    "body": "return(merge_hash({\"a\":1},3))",
+    "source": "Value:: I {return(merge_hash({\"a\":1},3))}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": {
+      "a": 1
+    }
+  },
+  {
+    "id": "pick_number_key_effect",
+    "body": "order=\"\";out=pick_keys({order=cat(order,\"S\");3},{order=cat(order,\"K\");\"a\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=pick_keys({order=cat(order,\"S\");3},{order=cat(order,\"K\");\"a\"});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      {},
+      "SK"
+    ]
+  },
+  {
+    "id": "drop_number_key_effect",
+    "body": "order=\"\";other={||order=cat(order,\"K\");return(\"a\")};out=drop_keys({order=cat(order,\"S\");3},other());return([out,order])",
+    "source": "Value:: I {order=\"\";other={||order=cat(order,\"K\");return(\"a\")};out=drop_keys({order=cat(order,\"S\");3},other());return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      {},
+      "SK"
+    ]
+  },
+  {
+    "id": "pick_null_key_effect",
+    "body": "order=\"\";out=pick_keys({order=cat(order,\"S\");undef},{order=cat(order,\"K\");\"a\"});return([out,order])",
+    "source": "Value:: I {order=\"\";out=pick_keys({order=cat(order,\"S\");undef},{order=cat(order,\"K\");\"a\"});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      {},
+      "S"
+    ]
+  },
+  {
+    "id": "drop_null_key_effect",
+    "body": "order=\"\";other={||order=cat(order,\"K\");return(\"a\")};out=drop_keys({order=cat(order,\"S\");undef},other());return([out,order])",
+    "source": "Value:: I {order=\"\";other={||order=cat(order,\"K\");return(\"a\")};out=drop_keys({order=cat(order,\"S\");undef},other());return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      {},
+      "S"
+    ]
+  }
+]
