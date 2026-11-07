@@ -1,0 +1,3134 @@
+{
+  "luajit": {
+    "drop_keys_free_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_keys({\"a\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "drop_keys_receiver_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"a\":1}.drop_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_merge_hash_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=merge_hash({order=cat(order,\"S\");{\"a\":1}},{\"b\":2},{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_merge_hash_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.merge_hash({\"b\":2},{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_rename_key_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=rename_key({order=cat(order,\"S\");{\"a\":1}},\"a\",\"b\",{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_rename_key_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.rename_key(\"a\",\"b\",{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_set_key_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=set_key({order=cat(order,\"S\");{\"a\":1}},\"b\",2,{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_set_key_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.set_key(\"b\",2,{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "initial_array_drop_keys_free": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return(drop_keys([1],\"a\"))}\n"
+    },
+    "initial_array_drop_keys_receiver": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return([1].drop_keys(\"a\"))}\n"
+    },
+    "initial_array_drop_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].drop_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_merge_hash_free": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(merge_hash([1],{\"b\":2}))}\n"
+    },
+    "initial_array_merge_hash_receiver": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return([1].merge_hash({\"b\":2}))}\n"
+    },
+    "initial_array_merge_hash_with": {
+      "fresh": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_pick_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(pick_keys([1],\"a\"))}\n"
+    },
+    "initial_array_pick_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return([1].pick_keys(\"a\"))}\n"
+    },
+    "initial_array_pick_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].pick_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_rename_key_free": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return(rename_key([1],\"a\",\"b\"))}\n"
+    },
+    "initial_array_rename_key_receiver": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return([1].rename_key(\"a\",\"b\"))}\n"
+    },
+    "initial_array_rename_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_set_key_free": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return(set_key([1],\"b\",2))}\n"
+    },
+    "initial_array_set_key_receiver": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return([1].set_key(\"b\",2))}\n"
+    },
+    "initial_array_set_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].set_key(\"b\",2).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_drop_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(drop_keys(undef,\"a\"))}\n"
+    },
+    "initial_null_drop_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.drop_keys(\"a\"))}\n"
+    },
+    "initial_null_drop_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.drop_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_merge_hash_free": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(merge_hash(undef,{\"b\":2}))}\n"
+    },
+    "initial_null_merge_hash_receiver": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(undef.merge_hash({\"b\":2}))}\n"
+    },
+    "initial_null_merge_hash_with": {
+      "fresh": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_pick_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(pick_keys(undef,\"a\"))}\n"
+    },
+    "initial_null_pick_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.pick_keys(\"a\"))}\n"
+    },
+    "initial_null_pick_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.pick_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_rename_key_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(rename_key(undef,\"a\",\"b\"))}\n"
+    },
+    "initial_null_rename_key_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.rename_key(\"a\",\"b\"))}\n"
+    },
+    "initial_null_rename_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_set_key_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(set_key(undef,\"b\",2))}\n"
+    },
+    "initial_null_set_key_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.set_key(\"b\",2))}\n"
+    },
+    "initial_null_set_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.set_key(\"b\",2).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_drop_keys_free": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(drop_keys(3,\"a\"))}\n"
+    },
+    "initial_number_drop_keys_receiver": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(3.drop_keys(\"a\"))}\n"
+    },
+    "initial_number_drop_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.drop_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_merge_hash_free": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(merge_hash(3,{\"b\":2}))}\n"
+    },
+    "initial_number_merge_hash_receiver": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(3.merge_hash({\"b\":2}))}\n"
+    },
+    "initial_number_merge_hash_with": {
+      "fresh": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_pick_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(pick_keys(3,\"a\"))}\n"
+    },
+    "initial_number_pick_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(3.pick_keys(\"a\"))}\n"
+    },
+    "initial_number_pick_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.pick_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_rename_key_free": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(rename_key(3,\"a\",\"b\"))}\n"
+    },
+    "initial_number_rename_key_receiver": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(3.rename_key(\"a\",\"b\"))}\n"
+    },
+    "initial_number_rename_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_set_key_free": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(set_key(3,\"b\",2))}\n"
+    },
+    "initial_number_set_key_receiver": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(3.set_key(\"b\",2))}\n"
+    },
+    "initial_number_set_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.set_key(\"b\",2).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "needed_source_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(merge_hash({items=\"text\";push(items,\"x\");{\"a\":1}},{\"b\":2}).take(1).coalesce(\"masked\"))}\n"
+    },
+    "needed_source_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(merge_hash({items=\"text\";push(items,\"x\");{\"a\":1}},{\"b\":2}))}\n"
+    },
+    "needed_value_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(set_key({\"a\":1},\"b\",{items=\"text\";push(items,\"x\");2}).take(1).coalesce(\"masked\"))}\n"
+    },
+    "needed_value_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(set_key({\"a\":1},\"b\",{items=\"text\";push(items,\"x\");2}))}\n"
+    },
+    "pick_keys_free_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=pick_keys({\"a\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "pick_keys_receiver_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"a\":1}.pick_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_array": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=array(1).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_copy": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=copy(3).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].count().merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_key_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"a\":1}.count_keys().merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_length": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=\"abc\".length().merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_view": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    }
+  },
+  "puc": {
+    "drop_keys_free_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_keys({\"a\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "drop_keys_receiver_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"a\":1}.drop_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_merge_hash_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=merge_hash({order=cat(order,\"S\");{\"a\":1}},{\"b\":2},{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_merge_hash_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.merge_hash({\"b\":2},{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_rename_key_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=rename_key({order=cat(order,\"S\");{\"a\":1}},\"a\",\"b\",{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_rename_key_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.rename_key(\"a\",\"b\",{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_set_key_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=set_key({order=cat(order,\"S\");{\"a\":1}},\"b\",2,{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_set_key_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SATW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");{\"a\":1}}.set_key(\"b\",2,{order=cat(order,\"A\");0}).take({order=cat(order,\"T\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "initial_array_drop_keys_free": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return(drop_keys([1],\"a\"))}\n"
+    },
+    "initial_array_drop_keys_receiver": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return([1].drop_keys(\"a\"))}\n"
+    },
+    "initial_array_drop_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].drop_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_merge_hash_free": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(merge_hash([1],{\"b\":2}))}\n"
+    },
+    "initial_array_merge_hash_receiver": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return([1].merge_hash({\"b\":2}))}\n"
+    },
+    "initial_array_merge_hash_with": {
+      "fresh": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_pick_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(pick_keys([1],\"a\"))}\n"
+    },
+    "initial_array_pick_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return([1].pick_keys(\"a\"))}\n"
+    },
+    "initial_array_pick_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].pick_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_rename_key_free": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return(rename_key([1],\"a\",\"b\"))}\n"
+    },
+    "initial_array_rename_key_receiver": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return([1].rename_key(\"a\",\"b\"))}\n"
+    },
+    "initial_array_rename_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_array_set_key_free": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return(set_key([1],\"b\",2))}\n"
+    },
+    "initial_array_set_key_receiver": {
+      "fresh": {
+        "value": [
+          1
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1
+        ]
+      },
+      "plan": {
+        "value": [
+          1
+        ]
+      },
+      "restored": {
+        "value": [
+          1
+        ]
+      },
+      "source": "Value:: I {return([1].set_key(\"b\",2))}\n"
+    },
+    "initial_array_set_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].set_key(\"b\",2).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_drop_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(drop_keys(undef,\"a\"))}\n"
+    },
+    "initial_null_drop_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.drop_keys(\"a\"))}\n"
+    },
+    "initial_null_drop_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.drop_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_merge_hash_free": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(merge_hash(undef,{\"b\":2}))}\n"
+    },
+    "initial_null_merge_hash_receiver": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(undef.merge_hash({\"b\":2}))}\n"
+    },
+    "initial_null_merge_hash_with": {
+      "fresh": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_pick_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(pick_keys(undef,\"a\"))}\n"
+    },
+    "initial_null_pick_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.pick_keys(\"a\"))}\n"
+    },
+    "initial_null_pick_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.pick_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_rename_key_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(rename_key(undef,\"a\",\"b\"))}\n"
+    },
+    "initial_null_rename_key_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.rename_key(\"a\",\"b\"))}\n"
+    },
+    "initial_null_rename_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_null_set_key_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(set_key(undef,\"b\",2))}\n"
+    },
+    "initial_null_set_key_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(undef.set_key(\"b\",2))}\n"
+    },
+    "initial_null_set_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.set_key(\"b\",2).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_drop_keys_free": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(drop_keys(3,\"a\"))}\n"
+    },
+    "initial_number_drop_keys_receiver": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(3.drop_keys(\"a\"))}\n"
+    },
+    "initial_number_drop_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.drop_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_merge_hash_free": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(merge_hash(3,{\"b\":2}))}\n"
+    },
+    "initial_number_merge_hash_receiver": {
+      "fresh": {
+        "value": {
+          "b": 2
+        }
+      },
+      "input": "x",
+      "native": {
+        "value": {
+          "b": 2
+        }
+      },
+      "plan": {
+        "value": {
+          "b": 2
+        }
+      },
+      "restored": {
+        "value": {
+          "b": 2
+        }
+      },
+      "source": "Value:: I {return(3.merge_hash({\"b\":2}))}\n"
+    },
+    "initial_number_merge_hash_with": {
+      "fresh": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          1,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.merge_hash({\"b\":2}).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_pick_keys_free": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(pick_keys(3,\"a\"))}\n"
+    },
+    "initial_number_pick_keys_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "input": "x",
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "source": "Value:: I {return(3.pick_keys(\"a\"))}\n"
+    },
+    "initial_number_pick_keys_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.pick_keys(\"a\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_rename_key_free": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(rename_key(3,\"a\",\"b\"))}\n"
+    },
+    "initial_number_rename_key_receiver": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(3.rename_key(\"a\",\"b\"))}\n"
+    },
+    "initial_number_rename_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.rename_key(\"a\",\"b\").with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "initial_number_set_key_free": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(set_key(3,\"b\",2))}\n"
+    },
+    "initial_number_set_key_receiver": {
+      "fresh": {
+        "value": 3
+      },
+      "input": "x",
+      "native": {
+        "value": 3
+      },
+      "plan": {
+        "value": 3
+      },
+      "restored": {
+        "value": 3
+      },
+      "source": "Value:: I {return(3.set_key(\"b\",2))}\n"
+    },
+    "initial_number_set_key_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.set_key(\"b\",2).with(){order=cat(order,\"W\");return(value.count_keys())};return([out,order])}\n"
+    },
+    "needed_source_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(merge_hash({items=\"text\";push(items,\"x\");{\"a\":1}},{\"b\":2}).take(1).coalesce(\"masked\"))}\n"
+    },
+    "needed_source_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(merge_hash({items=\"text\";push(items,\"x\");{\"a\":1}},{\"b\":2}))}\n"
+    },
+    "needed_value_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(set_key({\"a\":1},\"b\",{items=\"text\";push(items,\"x\");2}).take(1).coalesce(\"masked\"))}\n"
+    },
+    "needed_value_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(set_key({\"a\":1},\"b\",{items=\"text\";push(items,\"x\");2}))}\n"
+    },
+    "pick_keys_free_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=pick_keys({\"a\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "pick_keys_receiver_zero_keys": {
+      "fresh": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "AW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"a\":1}.pick_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_array": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=array(1).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_copy": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=copy(3).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].count().merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_key_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"a\":1}.count_keys().merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_length": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=\"abc\".length().merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_view": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).merge_hash({order=cat(order,\"A\");{\"b\":2}}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    }
+  }
+}

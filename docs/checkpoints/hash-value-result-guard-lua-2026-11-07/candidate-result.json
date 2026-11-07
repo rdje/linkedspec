@@ -1,0 +1,37 @@
+{
+  "lua/src/linkedspec/interpreter.lua": {
+    "bytes": 272017,
+    "mode": 420,
+    "sha256": "3c1344d832ccff03538109b6b69d2ea4224743fd8bf5d06bae82d81a9abd76fc"
+  },
+  "lua/test/hash_value_result_guard_composition_test.lua": {
+    "bytes": 4768,
+    "mode": 420,
+    "sha256": "52c5813babf5ce06fb910af65a6a86d83c7e65332ecd52a2d30697c26590c11e"
+  },
+  "lua/test/run.lua": {
+    "bytes": 406021,
+    "mode": 420,
+    "sha256": "a855bdb6b2c4357ecd5fb436627d9bc3267137b7c5ef511206b71c7159ebdf9b"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  },
+  "tests/fixtures/hash_value_result_guard_cases.json": {
+    "bytes": 11916,
+    "mode": 420,
+    "sha256": "355777a30a33c1054274dbe7f27e0eeca9a7a8648f4bcc0890f2982d86646a7c"
+  },
+  "tests/fixtures/hash_value_result_guard_lua_cases.json": {
+    "bytes": 32230,
+    "mode": 420,
+    "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+  },
+  "tests/fixtures/hash_value_result_guard_lua_profiles.json": {
+    "bytes": 66074,
+    "mode": 420,
+    "sha256": "66ea7c19bc14d18d379ed78a2be6eda454de728f9d3c40cb7b6b949579a39512"
+  }
+}

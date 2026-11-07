@@ -67,6 +67,7 @@
 {"bytes":5130,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-generated-source-v2-rule-local-cursor.md","sha256":"62a14672d1a7b313b2691e1cfb521351d2cd0aa315200fec5663e405fe9ebe70","type":"member"}
 {"bytes":4439,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-global-cursor-option-removal.md","sha256":"ae3f9106ceca3214133b1948a4eb61861b65fe1e2910f355ad8c49411d38ff4e","type":"member"}
 {"bytes":5531,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-governed-named-span-parity.md","sha256":"63626dbf32bc05fd3a8c75a92b0fb233c5818dbec838015ba716bfb8d453d949","type":"member"}
+{"bytes":4471,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.5","path":"docs/knowledge/lua-hash-value-result-guards.md","sha256":"2ec9b88636707220fc9055b3ca58621ad2769b3d2be4c7bd87ffe87482e0f098","type":"member"}
 {"bytes":3504,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/lua-hash-view-result-guards.md","sha256":"ad0f3fc85c9b28b4b7bf3b8f520a69694cc04e2aaaf9cfce94bcd77304925a76","type":"member"}
 {"bytes":1781,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-helper-regex-matches.md","sha256":"19d52bae24fa88d6c3c73a7ea97009f3fabb6f42c398c7fa8ab9fef2a4a6e6ec","type":"member"}
 {"bytes":3013,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-helper-regex-split-mutation-preflight.md","sha256":"5dae604624b04e716dcfa431d3129d62dda6c878416b715d256ea6c9e9c059f6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4829,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-recomposition.md","sha256":"6f6e49084d307df63c4d92ce4451dea6083368749f22a14c9c6b7cafba24920b","type":"member"}
 {"bytes":9090,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-project-data-ssd-storage.md","sha256":"69cf477446d686e1d865d5f51586ca64df4417f5eb8ad53106e232fa7aa06889","type":"member"}
 {"bytes":2165,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-pure-split-bridge.md","sha256":"67b43679cd2858dbecb52f25b8b639985fea6cf0dfb8d1ae6738dd2261582de0","type":"member"}
-{"bytes":2281,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-push-snapshot-result-guards.md","sha256":"5b0300638a70d141f61a5b54f54d0f0f789231d81f43a0f91bc3596bc995b04a","type":"member"}

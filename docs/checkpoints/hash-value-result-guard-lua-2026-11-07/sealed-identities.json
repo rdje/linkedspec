@@ -1,0 +1,962 @@
+{
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "faee32cfa1ab8b3212abed5281398dd62e138a5590e2bbe621dcc339669cb508"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/complete.txt": {
+    "bytes": 69,
+    "sha256": "81e6f5e0e8901c4c1da7555534f95545a993af4114285f3823217be715630c24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/input-identities.json": {
+    "bytes": 38326,
+    "sha256": "fe1a3ecafd7fa1ea63075e110338ff6511f677fd27dad3fb8ed970c61fc9ee87"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/inputs-before-first-run.tar.gz": {
+    "bytes": 665176,
+    "sha256": "d7369f02bfdc9358a0e725f9413eb67bfc0819b1c352ab87426e6320dec9523d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 16621,
+    "sha256": "5f9e84a90b7a921abe9b2346e9b0f58881968a5ab8b04deeb742388829d4372e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/artifact-identities.json": {
+    "bytes": 42064,
+    "sha256": "d470563e2e5c26823454850421c96f7484531122d1c5a032f1beac825b59b183"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/build-command.json": {
+    "bytes": 553,
+    "sha256": "4bcb2b3f2b678cbf737838fdf9517d8bfea89de2d8ff99b44478341c14e18b16"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7600,
+    "sha256": "8920584d10cc94d48e1848fa5a88625a15c6ee3e6dd40f9c678f241a8d62c9ad"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/native-identities.json": {
+    "bytes": 704,
+    "sha256": "9faccdcff6420b6a6bb942c2ea822981785a6e301c7d350303bab3f8a3374415"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/normal-command.json": {
+    "bytes": 553,
+    "sha256": "c8b6a06ce6bb280d4c34f4a76c887ee648df6d67b5a65060e629fe4411397128"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/normal-stdout.log.gz": {
+    "bytes": 5260,
+    "sha256": "9a33a3445a830d712dc275cb742b734e4dded9bf19db36669d7364a48ae41259"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/version-command.json": {
+    "bytes": 480,
+    "sha256": "76286920c3cc4ff303bc51ecc249b361d512892e7f51084dff756fde2a570079"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 16781,
+    "sha256": "7dc29f2a026e1e9fc3c9177e1a4f80537e31a17567d036fb12d2099c48bf0be7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/artifact-identities.json": {
+    "bytes": 41530,
+    "sha256": "7f3feff8b8fc302042a0a8b82cba1ab0bb34bdd846c741cfcd68555599866be6"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/build-command.json": {
+    "bytes": 538,
+    "sha256": "6897d830285c27fd2ca94f740cb6334dc1d53878c32db7560dde785f5bdb7464"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/native-before-first-run.tar.gz": {
+    "bytes": 7678,
+    "sha256": "6759a4d10ecc7938ff6d3101a9a2156fca0ebd3ac50040e700997f3d4f4596d5"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/native-identities.json": {
+    "bytes": 695,
+    "sha256": "bc834eed9f7cb93ab8833a03b9a0fc7b80365839a07e76ec2170984edc852843"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/normal-command.json": {
+    "bytes": 541,
+    "sha256": "afdaf09acd53bbddfcc8d59e489e9191b0053f2bec0ac6f5694b40a86c53e83d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/normal-stdout.log.gz": {
+    "bytes": 5238,
+    "sha256": "c4f064fbd6ec992c7d0bc63a8e67cb49f5079ba2b7e4f62fe200c6a745a053fe"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/version-command.json": {
+    "bytes": 468,
+    "sha256": "224096605cfbec668c8adc5d497e1229d788adf2b56e8ebdbba807d86e68fa38"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/after/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/baseline-summary.json": {
+    "bytes": 1132,
+    "sha256": "da4412c2ebba755b763aff73d8b5a0cf333437fe9c9fd94079847e58653f81d0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "faee32cfa1ab8b3212abed5281398dd62e138a5590e2bbe621dcc339669cb508"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/complete.txt": {
+    "bytes": 69,
+    "sha256": "81e6f5e0e8901c4c1da7555534f95545a993af4114285f3823217be715630c24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/input-identities.json": {
+    "bytes": 38326,
+    "sha256": "0ab6c0885e72aa92c8fb57ef1044c54297304ddf7af12e9a7b5af848d67fff60"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/inputs-before-first-run.tar.gz": {
+    "bytes": 664811,
+    "sha256": "72d394c97593aa73619c4ffecfcb3b1d24320e1e25ab31f1141517052b790309"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 16646,
+    "sha256": "bed03b34e8f5ddd165523ee8a0f7cc1ba2e7301a474464bdde998bfd4b4408d6"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/artifact-identities.json": {
+    "bytes": 42242,
+    "sha256": "773fe0f9eea3e955c7537ffea3b8d620221feb42bd6db7b090ce380953f9d36f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/build-command.json": {
+    "bytes": 556,
+    "sha256": "7e1889beee2a7dc155052163571dfcdb1fadd08fda0406af45ac35d9cf5ad062"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7613,
+    "sha256": "d62f7443a7ad2ad6135bf509f166b5f322831f4f1ee024c8d3d9383f9e6a8c2e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/native-identities.json": {
+    "bytes": 707,
+    "sha256": "c3488d029fff5fdcb310b7d5949384d2854dcadbfaf23acb44929d0b51763711"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/normal-command.json": {
+    "bytes": 555,
+    "sha256": "9da3537232c617dfb6b1d2564bd00b875c42fa12084b10faf9a4207621851274"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/normal-stderr.log.gz": {
+    "bytes": 401,
+    "sha256": "bf70bdf51c0d02668dfc7fd41a433752bd49b31ba4a4ad4733850697cbb72070"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/normal-stdout.log.gz": {
+    "bytes": 5318,
+    "sha256": "cda60a8f8f241ecb6f33a0c7f232332c23865275a298e9ea5beb3cb0af19b9dd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/version-command.json": {
+    "bytes": 482,
+    "sha256": "fde319eb0e60dd76391f2b8f8c19c3ab7489d65f095116af536e5e4f60f156d1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 16896,
+    "sha256": "24f3fa7692e75cbeb4fdd1919b6cff98b6ddd4ef498c3497d26a27b56746c8ca"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/artifact-identities.json": {
+    "bytes": 41708,
+    "sha256": "2d79373d258c5dc7f50f1e1f26250edb63fb94ceac334429f8053826007f55a5"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/build-command.json": {
+    "bytes": 541,
+    "sha256": "c1c1b158045510c6f9856057f63b02c17d6e649da5dd9dc0d541cb34339a3a36"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/native-before-first-run.tar.gz": {
+    "bytes": 7676,
+    "sha256": "0a5ccd496dd5a1df536ec1b1c615fa89880e4a4e7142b579b0d2bb01f0de18b8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/native-identities.json": {
+    "bytes": 698,
+    "sha256": "454f3ded9fa8352bc2a104ff6a61ca2731c9cd706776da37b3bfd08812913838"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/normal-command.json": {
+    "bytes": 543,
+    "sha256": "67989dacecb68694196a2553666c5bf0a4019f9619b637a3cedd388109592dca"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/normal-stderr.log.gz": {
+    "bytes": 388,
+    "sha256": "3037bde18de9dcaff93eb7a9cc284e7f97a76965c877c970e6456f62c70100d8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/normal-stdout.log.gz": {
+    "bytes": 5296,
+    "sha256": "81a66439678cfbfae3294671afafde50c77e1e9e298a529a361096cd73f4a4b4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/version-command.json": {
+    "bytes": 470,
+    "sha256": "fdc9bc99e88ec8544eccfe2ea870bed514104a4ac3b253bf4ab328787047397f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/candidate-command.json": {
+    "bytes": 167,
+    "sha256": "d807b4b821092c31c2dd572592cfbe133dc60f18037e3d0b6e0b1ae17b348e51"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/candidate-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/candidate-result.json": {
+    "bytes": 1217,
+    "sha256": "a1c3118b06fd7375de4f608443126cae82e6fcffc43547e1213af685713c6eab"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/candidate-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/candidate-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "45cd4388aba74f44353632032b72c55c921d9296b2d864a00c00fc43f0336e3b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/capture.py": {
+    "bytes": 5720,
+    "sha256": "6bd0ed2db85b84b58b91917e3975b6b89b67f33fdd58aa754fab57925c2eba3a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/cases.json": {
+    "bytes": 32230,
+    "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/check_candidate.py": {
+    "bytes": 905,
+    "sha256": "4fb2158b4430d5df3ef8a107ddf56436ad01524b0333f8fe50878fff5d0c5310"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "faee32cfa1ab8b3212abed5281398dd62e138a5590e2bbe621dcc339669cb508"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/complete.txt": {
+    "bytes": 69,
+    "sha256": "81e6f5e0e8901c4c1da7555534f95545a993af4114285f3823217be715630c24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/input-identities.json": {
+    "bytes": 38326,
+    "sha256": "fe1a3ecafd7fa1ea63075e110338ff6511f677fd27dad3fb8ed970c61fc9ee87"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 665176,
+    "sha256": "1d53dcfbe49435efb90e2365228bae6f3a7ae5c0ca0d1b4190c82449c0716032"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 16722,
+    "sha256": "b76bc9b9ee6a81b696265c4535da74101107d94e8c679094d1584f424def2bc7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/artifact-identities.json": {
+    "bytes": 42242,
+    "sha256": "22f7e873616d3fdc6fde245a6e335463ec486140d0a29878121d804003bdeef5"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/build-command.json": {
+    "bytes": 556,
+    "sha256": "4f9f83e93b56a5a0ffcbfd3f8e9cde5932e67fbb2106feda51ff924cd921f915"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7612,
+    "sha256": "11c0ff8b1d73d579b2904502553ad8419681a9ff876cfb81ee72139ed0573e7a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/native-identities.json": {
+    "bytes": 707,
+    "sha256": "6109c50911949100bacc4b318d03a1993738ce0b01e6e77b5cf58f676251cdc1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/normal-command.json": {
+    "bytes": 776,
+    "sha256": "6ec29f72a1c4fb214e174c686624c61b76f18db41ee64f4f6280be81daeb0265"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/normal-stdout.log.gz": {
+    "bytes": 9158,
+    "sha256": "3ff560b310a7eda62fa549e2c8af50bf72bdf68622b09188f48795ab4d52aa7e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/version-command.json": {
+    "bytes": 482,
+    "sha256": "011e1beec81b3bc21f78dff2e9574ba0b00f57160807882f79b1163810aac6f3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 16775,
+    "sha256": "e87005d320a018be7eed79d53295af5541be7159fac223089a1b564cde52eeaa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/artifact-identities.json": {
+    "bytes": 41708,
+    "sha256": "af10cb62bd8221b8b5c4a0d39fc5e2af7dff2a1ca643b8a0ea301967ecb814be"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/build-command.json": {
+    "bytes": 541,
+    "sha256": "b8cf1cc6e10a258db6626e2a052e253ba0884f757b18b9fe6527cf8c247854d3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/native-before-first-run.tar.gz": {
+    "bytes": 7678,
+    "sha256": "4e6ec869ca4ef7d633856fe365cf377c8eb7dd18a1715831c89e05d0305068cf"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/native-identities.json": {
+    "bytes": 698,
+    "sha256": "95f814425137c09598960199a520469c8bda6accff1f5c1f890c2533fd6d1b41"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/normal-command.json": {
+    "bytes": 764,
+    "sha256": "d6a012903c973422cbcc87775ec25691864aedf76075835d7ceb15d8dcf7a238"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/normal-stdout.log.gz": {
+    "bytes": 9118,
+    "sha256": "1098920112f2eb97eb2e553a6a00d12a67f3644e75725724dd576acd7c4c0462"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/version-command.json": {
+    "bytes": 470,
+    "sha256": "ddc73f31251d75e69f6b9eecce4fe35783feb44c56c92a45a9e77a19f1f075a1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/direct/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/freeze_profiles.py": {
+    "bytes": 2016,
+    "sha256": "ebc6e2a7c0be5d8be996afa4d5dc5b4bac91e839a7a8325b68e3be984dc94f8f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "faee32cfa1ab8b3212abed5281398dd62e138a5590e2bbe621dcc339669cb508"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/cases.json": {
+    "bytes": 32230,
+    "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/complete.txt": {
+    "bytes": 69,
+    "sha256": "81e6f5e0e8901c4c1da7555534f95545a993af4114285f3823217be715630c24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/input-identities.json": {
+    "bytes": 38136,
+    "sha256": "9c7938e1a14c2d24564a886a3110b0731e5e56651294069b35c2f5ba9d2da680"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 664265,
+    "sha256": "773de37ba3a49f6c28be0d77f8408d70cb82ad3f96bdbc11754daf5460e4dd40"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 16792,
+    "sha256": "a59bc997655dba50e1c2cc258cd49e200c1f3f89eacb30849dc688e05deb7142"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/artifact-identities.json": {
+    "bytes": 42242,
+    "sha256": "4512b7f3365d005ff0c4e308fd99afbb26e43846f1c0737f0a00f2c03e0363f4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/build-command.json": {
+    "bytes": 556,
+    "sha256": "d07db795764ef7b8ba7ff58ae75a9f8b7aa01a873dfe23bf7604ea103b931148"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7611,
+    "sha256": "0ae92a65a5e52ca6748fa90fd8cb58c180ebe01fceca67b857a2239edd173356"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/native-identities.json": {
+    "bytes": 707,
+    "sha256": "e956c57e435fbb666c7c892fa27ca72276f2b91c2d971aea06cc07cb8f38b34e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/normal-command.json": {
+    "bytes": 706,
+    "sha256": "85305a2cd75a25da755606f8510c71445279b1acb90081550a67d277a53ed654"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/normal-stdout.log.gz": {
+    "bytes": 6609,
+    "sha256": "008f54fb1a8447a52664d8ebab879a800f29a7af5849273f729b0dadc37d8cf8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/version-command.json": {
+    "bytes": 482,
+    "sha256": "664c605903693d0eaf22b1237d77f62f37d54cdd9ddce7d01c8b7bbd3755bcdf"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 17022,
+    "sha256": "14fb0fe52a6319fda7efdec7f94510fcefc423950d90c5c9d38076103b2b8fa4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/artifact-identities.json": {
+    "bytes": 41708,
+    "sha256": "5ef110d9541cc8731fe428b8730553ef6316f6e63ff53a305d3a6ed13cb1d684"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/build-command.json": {
+    "bytes": 541,
+    "sha256": "80538d01f56db28c3d4edef9b80103a6bba97820ba07112d3ad6e9198c10269f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/native-before-first-run.tar.gz": {
+    "bytes": 7675,
+    "sha256": "c4a2a70d72d824f7cfc583829f917384e48c72aa720d5f02283e3246cdf5b0c4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/native-identities.json": {
+    "bytes": 698,
+    "sha256": "8becc0e9ca3389cf8e5d8afb8b9979ea5890fc0c955edbb7503f39b5894ae5c7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/normal-command.json": {
+    "bytes": 691,
+    "sha256": "924a0ee4ca59c123f7261679923ae3be9ea8af634247b2cd95b2a7de32c89594"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/normal-stdout.log.gz": {
+    "bytes": 6590,
+    "sha256": "38a51885bafc3f8984dc07332bbd9afd980a96206bc901b9c89a583df517bb03"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/version-command.json": {
+    "bytes": 470,
+    "sha256": "ab1a592a3e457f8848da39825e7cbcb7802e88064e5936f2aa6e775880331f8a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/activation.txt": {
+    "bytes": 41,
+    "sha256": "faee32cfa1ab8b3212abed5281398dd62e138a5590e2bbe621dcc339669cb508"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/complete.txt": {
+    "bytes": 69,
+    "sha256": "81e6f5e0e8901c4c1da7555534f95545a993af4114285f3823217be715630c24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/input-identities.json": {
+    "bytes": 87868,
+    "sha256": "3c73c5964db9030f3f58cace0762c9d1e4140e6a7176766468ff0f995665818d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/inputs-before-first-run.tar.gz": {
+    "bytes": 1321417,
+    "sha256": "7710de709c3c176d8dcf76e41bef1d0b417ad4b9f412247e6c6639913bb8bb54"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 16543,
+    "sha256": "d14ea1d9caba1dd62370022c0be23f3a3b164cf03cacc7baa185276acf7c7858"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/artifact-identities.json": {
+    "bytes": 42420,
+    "sha256": "0226bb203f294093342350c52687d78cbf0dc4a49a6f76166a90a3a24028e982"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/build-command.json": {
+    "bytes": 769,
+    "sha256": "b495cadff75b0e1c147846bd92be3776875db664797a105808df669fb0060c40"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7613,
+    "sha256": "5a04f89f5e43e9f2d7ade649c51000495f6c817e8948e01eb484c796b9f93792"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/native-identities.json": {
+    "bytes": 710,
+    "sha256": "a6630f259ec1ecd728dea39fc2e7768c3d18bae00aeb0e7eff67611f817049d9"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/normal-command.json": {
+    "bytes": 837,
+    "sha256": "4a99614aef091f9fe6270708a75bcb3004ad4f891943558ae907b8d2581faaf4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/normal-stderr.log.gz": {
+    "bytes": 405,
+    "sha256": "1ff868a19a44173f7b5bdb86a0fc3fd2c348a6e28f159eb2ef20f028d5aa9362"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/normal-stdout.log.gz": {
+    "bytes": 5370,
+    "sha256": "3f3b171406d34c1ea757bb288ab1e1e0c797e9deb52f93f533430f31a17a43df"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/version-command.json": {
+    "bytes": 694,
+    "sha256": "d1cb7e2010791b68a338f698ecd11b9b650b5eddc59336d279ed9a8b99cfc62b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 16678,
+    "sha256": "20300a7e177a069c4d9d104832898fb79610356bb9ec2f8941a14b3f847a8a4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/artifact-identities.json": {
+    "bytes": 41886,
+    "sha256": "0ef41ae0684a8f0fd5e1cdb414c160ea5d86890e5c995f14c1793145149b6c3b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/build-command.json": {
+    "bytes": 754,
+    "sha256": "80d60bc18090548abdfe377d7347d27dd08255c901844befc4175508bcad522a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/native-before-first-run.tar.gz": {
+    "bytes": 7681,
+    "sha256": "acf6ec6b5e9efeb85ee5b80d0f68af37a10a5536c463b5b2d78585c6bd06ab57"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/native-identities.json": {
+    "bytes": 701,
+    "sha256": "d43a0338d3c5bb835cbf855eba61c764236d1063c0e0553f61685360b8cb9699"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/normal-command.json": {
+    "bytes": 825,
+    "sha256": "13b95c48b0c46745a62e3e6730ba67f65d6d08e620eac525b36406f08593b252"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/normal-stderr.log.gz": {
+    "bytes": 392,
+    "sha256": "6344e77fab9e8120b5efd46e076b404457cacbfe295f6f0e8e0c2b5a1ddc5962"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/normal-stdout.log.gz": {
+    "bytes": 5350,
+    "sha256": "d90d28bf97056205d48d611e661e8828f65a0d2ded7a309bcde71528204cc9ba"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/version-command.json": {
+    "bytes": 682,
+    "sha256": "d54fee98d03e8ef9d60f4bd385ef5d7b39e5522c52624c0adc0e00937e62adce"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/observer.lua": {
+    "bytes": 3984,
+    "sha256": "be49e9b5f17116bc701aa442ab9401f065da51d5e5d52b7948caa449597b2b2f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/prepare.py": {
+    "bytes": 5011,
+    "sha256": "c95ed65ea187865fb71e11f5e93fb04b083bdc215a12f92e60cf46698decb74c"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/producer-change.patch.gz": {
+    "bytes": 1541,
+    "sha256": "47588d85e519dc275e7ea262a2d5e1e104deb4daa076fcc21a5ae669b553fd0f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/profile-sources.json": {
+    "bytes": 20317,
+    "sha256": "b473dec8c0b3356cdb59f5080cdf0227c9146144594c4538d42a60db9ae4ea38"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/proof_io.py": {
+    "bytes": 3309,
+    "sha256": "ebfe19e94a1b3f1e9d3b8e365f658730ab3a9678905ba878dde93f489349d364"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/activation.txt": {
+    "bytes": 41,
+    "sha256": "faee32cfa1ab8b3212abed5281398dd62e138a5590e2bbe621dcc339669cb508"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/complete.txt": {
+    "bytes": 69,
+    "sha256": "81e6f5e0e8901c4c1da7555534f95545a993af4114285f3823217be715630c24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/input-identities.json": {
+    "bytes": 87866,
+    "sha256": "9477bd8928f8b4b5628769e88d4ae3a9cc768bc331f97213b17eb4237177dc9d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/inputs-before-first-run.tar.gz": {
+    "bytes": 1321902,
+    "sha256": "9e114c1453daacb1fbea7eaa2329dad0afb1946225c9a12cfb45a985c10d6b6d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 16594,
+    "sha256": "bb0d78f390e1f1e7fb1e2dfaafb1d7f8b150fa4bec3c830c2dcf534b13285633"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/artifact-identities.json": {
+    "bytes": 42598,
+    "sha256": "a8f31b27263653738e7d1b4e2a3cc47e37f8891de3a7ddace209575d26b5820f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/build-command.json": {
+    "bytes": 772,
+    "sha256": "7546d9176ce9061cfd4772d8f91b220f639ed0cc480cd7103a0704d100bc1e24"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7611,
+    "sha256": "561d517550140a3cddd4b60212a9c545857db7ddb1033e4a2e6beb8917ddab67"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/native-identities.json": {
+    "bytes": 713,
+    "sha256": "fc87b57a63c0e2e90cc2fd7575f57195628f532eec89c32864474e8c740afb14"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/normal-command.json": {
+    "bytes": 839,
+    "sha256": "9776d07443baa9a2ea1075ca08d7930e3999a86c880bd21b181211cf4754afd1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/normal-stdout.log.gz": {
+    "bytes": 5312,
+    "sha256": "5fd0848a92059b224b0f5a60ffab98485d56a509530369c608b189ec75e476d0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/version-command.json": {
+    "bytes": 696,
+    "sha256": "db178010e0145bdbf9a7b723bda2636e58351f6444328c079ee0d3d5ee4d569c"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 16660,
+    "sha256": "8579632b1849a0f0a9d1930a8252003c068ea206eccb243e7414e3dc4b251800"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/artifact-identities.json": {
+    "bytes": 42064,
+    "sha256": "a81c2f16924e54bafa1dd1f91114628a3a9134b39ea66cdbc3ec445394966b27"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/build-command.json": {
+    "bytes": 757,
+    "sha256": "2718aa86c282983f4a90a98305dafed103f4ccc7a2eb13a7aeebda6f8beb8e41"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/native-before-first-run.tar.gz": {
+    "bytes": 7699,
+    "sha256": "702f495821d44d17c0a3c9dc1137268d19b750fce158e727213a27116e41ce7f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/native-identities.json": {
+    "bytes": 704,
+    "sha256": "889fa929eeaf4ccc3429d44a8a2b63d57ff4cf91a6fe3f2eb792086f2e3b3736"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/normal-command.json": {
+    "bytes": 827,
+    "sha256": "0a0eb5c0131fcc0ebf2d26fac2fc36f05839f46c6d78a926fb14c93e36128e4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/normal-stdout.log.gz": {
+    "bytes": 5291,
+    "sha256": "bf855248e26ed043cbf1827a8514ceea4d713f4b8dec9f8cdb2fe46ce207927d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/version-command.json": {
+    "bytes": 684,
+    "sha256": "0aef761c52a3bb776b132751710c3f79e57f9d5c2cdd8cf32b7c9f0ab22ef794"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/review.py": {
+    "bytes": 16751,
+    "sha256": "693c691d7b98e3ba575db23342f1ac2f1e03f916c622d1dba9169938ca8150c4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/run_candidate.py": {
+    "bytes": 714,
+    "sha256": "f357f41cea2c8b4a09a569b5c0a08e0de2dfa83866afb0fe4fa123ffe2cf983d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/run_review.py": {
+    "bytes": 855,
+    "sha256": "1924626889444e54140b932f0d3741b66ab325b5e6787dc595f574214a88b202"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/runner-registration.patch.gz": {
+    "bytes": 220,
+    "sha256": "81b58e1dc166a2b91378bb6cb41d2687dc4c4f95332125aaef16e92afe9f711e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/seal.py": {
+    "bytes": 916,
+    "sha256": "40ae35fe6783b01c2cde66fc1ee0abdb6cc24290829bebb64ec035c26ac6d0ad"
+  },
+  "tests/fixtures/hash_value_result_guard_cases.json": {
+    "bytes": 11916,
+    "sha256": "355777a30a33c1054274dbe7f27e0eeca9a7a8648f4bcc0890f2982d86646a7c"
+  },
+  "tests/fixtures/hash_value_result_guard_lua_cases.json": {
+    "bytes": 32230,
+    "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+  },
+  "tests/fixtures/hash_value_result_guard_lua_profiles.json": {
+    "bytes": 66074,
+    "sha256": "66ea7c19bc14d18d379ed78a2be6eda454de728f9d3c40cb7b6b949579a39512"
+  }
+}

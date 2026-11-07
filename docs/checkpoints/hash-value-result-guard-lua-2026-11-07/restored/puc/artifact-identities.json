@@ -1,0 +1,892 @@
+{
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/constructor_hash_guard.lua": {
+    "bytes": 3980,
+    "mode": 420,
+    "sha256": "1b78544eca49a955d7c3bdf1c88c61905686da0e9581e8b489ef2bc28089edc8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/drop_keys_compatible.lua": {
+    "bytes": 3958,
+    "mode": 420,
+    "sha256": "536c6128613896a34e3a0bc069f87d492fe432b0d50a2e3286df7901f2f7a549"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/drop_keys_free_array_guard.lua": {
+    "bytes": 3832,
+    "mode": 420,
+    "sha256": "de155632b5d6c159da1c5d4c66de9647be434e0233329ae25448077549892d26"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/drop_keys_free_zero_keys.lua": {
+    "bytes": 4026,
+    "mode": 420,
+    "sha256": "3c273692d05e7d5e129cd1abf0bd02f7f164ed4d65aa0be8e361c911585bc043"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/drop_keys_receiver_array_guard.lua": {
+    "bytes": 3840,
+    "mode": 420,
+    "sha256": "ecad0e08b49c4e3209fae3151223ff174db4b85f00730bb661af6f2a3ecc3025"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/drop_keys_receiver_zero_keys.lua": {
+    "bytes": 4040,
+    "mode": 420,
+    "sha256": "2cc04390f2d33d32a7a8f8db06d95ac3e84cfff9472bd90f7e9b3d07ea278dfd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/empty_pick_with.lua": {
+    "bytes": 3948,
+    "mode": 420,
+    "sha256": "4562cd0f3366f544c5a28a68bfc7eaa1eb80859aacff93bd39719f71f18e6fa1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/explicit_bridges.lua": {
+    "bytes": 4358,
+    "mode": 420,
+    "sha256": "ee8ef3eccf1fb3c8376de02ffc787d3c2145a2f3b337b4487dd8a75b65a98a79"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/extra_merge_hash_free.lua": {
+    "bytes": 4398,
+    "mode": 420,
+    "sha256": "81569f6081fb7b5ca9cc6752bb5518fcf8108f94f978df81ceceeaa2a0942303"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/extra_merge_hash_receiver.lua": {
+    "bytes": 4406,
+    "mode": 420,
+    "sha256": "e1c693cbaf8d3a4e30ae89ab29506f85c42104e855e83b56a1619c20c4319b12"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/extra_rename_key_free.lua": {
+    "bytes": 4410,
+    "mode": 420,
+    "sha256": "bf63cc9897c3f16c5252fb5715cc8ca45f4ae654ea88c2f0b36fee0bd29e3856"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/extra_rename_key_receiver.lua": {
+    "bytes": 4418,
+    "mode": 420,
+    "sha256": "2d7785b7f6480396d78802497703546245397413c99aef07fda9923e76ce0c95"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/extra_set_key_free.lua": {
+    "bytes": 4362,
+    "mode": 420,
+    "sha256": "422acd05255b232ccc1327d47faa9a1779ed32c4bb25423c7b8ac646ddc05b1f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/extra_set_key_receiver.lua": {
+    "bytes": 4370,
+    "mode": 420,
+    "sha256": "aa2e38647b445a7163ebac86eaf3b8b5be2c76bd1645412df1d0688dd405f505"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_drop_keys_free.lua": {
+    "bytes": 3392,
+    "mode": 420,
+    "sha256": "66e9d9fd96d4a1ef980a4ad8a9bd8fe89759a2c8c01ab9089e48dc1a8bc23276"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_drop_keys_receiver.lua": {
+    "bytes": 3400,
+    "mode": 420,
+    "sha256": "224bf624601afce2ef58b31916f664125ac82a3f04b1e008ed27495c59170492"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_drop_keys_with.lua": {
+    "bytes": 3902,
+    "mode": 420,
+    "sha256": "f4632cb95ec5e620db3af3487c92ef2498a85a499d07e7844415dcabd5262469"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_merge_hash_free.lua": {
+    "bytes": 3424,
+    "mode": 420,
+    "sha256": "d74793d55a3f6d6979aff12a1f1fdff2d4c44a458eb5f01f3a5634a03d807cb9"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_merge_hash_receiver.lua": {
+    "bytes": 3432,
+    "mode": 420,
+    "sha256": "ad386d4c37d596e85790055f923c72e71ba3c4ec481e9e1062c62b03669f1083"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_merge_hash_with.lua": {
+    "bytes": 3934,
+    "mode": 420,
+    "sha256": "065567ea59e6412e4b7c7324fb3e2909cafc5d8da9afed52405e66d115c14694"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_pick_keys_free.lua": {
+    "bytes": 3392,
+    "mode": 420,
+    "sha256": "087186247a1079a2f35f0377784254dccf3f30218cd19267b1e908cba98847e5"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_pick_keys_receiver.lua": {
+    "bytes": 3400,
+    "mode": 420,
+    "sha256": "4083966be04a0a20bf63f3d58274714d16e8f5313deb518506e6a720a5be7f95"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_pick_keys_with.lua": {
+    "bytes": 3902,
+    "mode": 420,
+    "sha256": "64f6485093927cacffa5eba659c449175b0d88be5282d23ebb59264edd9cd2e6"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_rename_key_free.lua": {
+    "bytes": 3436,
+    "mode": 420,
+    "sha256": "c684c5b9491e40850f58e05e28d6a8bb4f61bcafcd5505bf3b33af424dfbe93b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_rename_key_receiver.lua": {
+    "bytes": 3444,
+    "mode": 420,
+    "sha256": "b837ca2958d78045f4039f1e5d4191faf113e29c84973633fed484b15a9c3ea8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_rename_key_with.lua": {
+    "bytes": 3946,
+    "mode": 420,
+    "sha256": "643447940824e9302b1f6ecb797c14344786e2ff056eab237948796ad5cdc1cd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_set_key_free.lua": {
+    "bytes": 3388,
+    "mode": 420,
+    "sha256": "d72aed85393374a2e628a0687d99306223996d7dbac71696f984f4f5ce282eb2"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_set_key_receiver.lua": {
+    "bytes": 3396,
+    "mode": 420,
+    "sha256": "c15e2d3a73a76fa23fd959e23dd2f5e20be6821957bc2087436bcd3c99245221"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_array_set_key_with.lua": {
+    "bytes": 3898,
+    "mode": 420,
+    "sha256": "0afdeb4332ebfb419f34cab5c32686d2f050b6604b62231601c9f7d6140458ca"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_drop_keys_free.lua": {
+    "bytes": 3402,
+    "mode": 420,
+    "sha256": "9e5a6eab1c05c91a0684dc49972e2865476bc169652ea8887f40295a7b3d3299"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_drop_keys_receiver.lua": {
+    "bytes": 3410,
+    "mode": 420,
+    "sha256": "37747acae9e58df122cb8adc1f2b6d1db3cb253a3ba29f5bee93bcce95ab679b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_drop_keys_with.lua": {
+    "bytes": 3912,
+    "mode": 420,
+    "sha256": "1bf963f9a33cb3dc74d9834d528f6174f116f77a476288f1dd1b40730a49e554"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_merge_hash_free.lua": {
+    "bytes": 3434,
+    "mode": 420,
+    "sha256": "f51705145bc905120e6e3fba616c234f4b3105f4332c087bba1328110130e0c9"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_merge_hash_receiver.lua": {
+    "bytes": 3442,
+    "mode": 420,
+    "sha256": "0e570bf65d8e7ee9fe2ebe432eed4ab57a315a911bc56580381915b882f05cba"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_merge_hash_with.lua": {
+    "bytes": 3944,
+    "mode": 420,
+    "sha256": "3e671307d9cfffaa3f4f11cd5fd975cc352a192f4cea020ca514aaeb8419752b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_pick_keys_free.lua": {
+    "bytes": 3402,
+    "mode": 420,
+    "sha256": "9d375924d1c4beeb53fc6f472a7cdb16463b8eb9f2485085248422da88b105fb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_pick_keys_receiver.lua": {
+    "bytes": 3410,
+    "mode": 420,
+    "sha256": "133e662c082e36b7db21e24f2fbc005452ac660fcf990b03d7703a0154b01beb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_pick_keys_with.lua": {
+    "bytes": 3912,
+    "mode": 420,
+    "sha256": "de232124d73a9aba11192fe4067ee58d99084cecb162af82d5446c6bd91c5171"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_rename_key_free.lua": {
+    "bytes": 3446,
+    "mode": 420,
+    "sha256": "c31760f1d2b21d101c040ca4dee899fed1dd7d57b629a101770c1497f6dca317"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_rename_key_receiver.lua": {
+    "bytes": 3454,
+    "mode": 420,
+    "sha256": "c04a62f966196a401227ed1ee91de36292c43de06893b159672290fe086503b8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_rename_key_with.lua": {
+    "bytes": 3956,
+    "mode": 420,
+    "sha256": "51b9c2764be43d5d52aa018ebafc06fb7acfaf21220586bfcb7f092426288d7e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_set_key_free.lua": {
+    "bytes": 3398,
+    "mode": 420,
+    "sha256": "89b4ffc29275b6e530ebea886d87c59e4bd5225c2be092a397d1d6f83944586d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_set_key_receiver.lua": {
+    "bytes": 3406,
+    "mode": 420,
+    "sha256": "c4ff1b58ce5b7453476ca1f5c8137b6b1bc5896ea65b67bd3c0ea0c4a55418eb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_null_set_key_with.lua": {
+    "bytes": 3908,
+    "mode": 420,
+    "sha256": "e05e0e3b4a445b06da12f331dfff878e08e97d4bcbdbb20c6162f49c4f63fe87"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_drop_keys_free.lua": {
+    "bytes": 3382,
+    "mode": 420,
+    "sha256": "d85bc6a8b8ceab4552446bf5fa64eed6469c2a7901b3cbaa5f2e2b3db453d745"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_drop_keys_receiver.lua": {
+    "bytes": 3390,
+    "mode": 420,
+    "sha256": "ef2e7e0ba83d540d5fcb1527611912ef6e7bcd02560513b89a374d8740366238"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_drop_keys_with.lua": {
+    "bytes": 3892,
+    "mode": 420,
+    "sha256": "3c37209c84d4c5adcf27a6329edc766d34285cd330e622a22463f1193e2f4d5d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_merge_hash_free.lua": {
+    "bytes": 3414,
+    "mode": 420,
+    "sha256": "61f3066ff8d3c37ab8379f87e343b69fec577995ef774004107add8602ba1dd4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_merge_hash_receiver.lua": {
+    "bytes": 3422,
+    "mode": 420,
+    "sha256": "c2fd359f36f1adf38a65315d7af087757ee45bc71dc12ad4233f70ed4fa7eb0c"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_merge_hash_with.lua": {
+    "bytes": 3924,
+    "mode": 420,
+    "sha256": "8be968be9ed7208e52bd4adca215652b368a1eb4a4dc8819e8936acfa6ce328a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_pick_keys_free.lua": {
+    "bytes": 3382,
+    "mode": 420,
+    "sha256": "c11ba6f15aee1e4892e29528985579e6ec48abd90687dd3553c6112c348975af"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_pick_keys_receiver.lua": {
+    "bytes": 3390,
+    "mode": 420,
+    "sha256": "c2c8685a3fbf7434cff4b74af5c44d8da239a858d29802b504d47010f18147c2"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_pick_keys_with.lua": {
+    "bytes": 3892,
+    "mode": 420,
+    "sha256": "ad56f519405b27fc98f200aab1376db2bbb04a7fac18860cb7159a620ac4be6e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_rename_key_free.lua": {
+    "bytes": 3426,
+    "mode": 420,
+    "sha256": "a5b07aad71178247e596cdf80c997bbf4f7b198ba0836a0d3dae6e1736566c75"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_rename_key_receiver.lua": {
+    "bytes": 3434,
+    "mode": 420,
+    "sha256": "636e3a5f50111de3280f7b9d4f9e273349477f3f9db97699175cedb0b09fe4c6"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_rename_key_with.lua": {
+    "bytes": 3936,
+    "mode": 420,
+    "sha256": "ce0d1f1436fd5c278dfd14d4382b53fa0d46c21df7eccf99431df5f298a9b2e8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_set_key_free.lua": {
+    "bytes": 3378,
+    "mode": 420,
+    "sha256": "05d41bf897b173a7775d4a673e648a596f9dbbae0686845a2d51b8dc696b4f3e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_set_key_receiver.lua": {
+    "bytes": 3386,
+    "mode": 420,
+    "sha256": "daf142a109db8c3be6949437792446e4dd216e8741249c8f7df3d3f0ee215a29"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/initial_number_set_key_with.lua": {
+    "bytes": 3888,
+    "mode": 420,
+    "sha256": "aa33d80b3ecedf9d479d3215363972cce4a3513e4e432ede6e2d72bbbff74f8e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/merge_hash_compatible.lua": {
+    "bytes": 3924,
+    "mode": 420,
+    "sha256": "5cc9c1f48987682981cacab5cb86c5c6bffede39327608aacf80b4d906e15229"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/merge_hash_free_array_guard.lua": {
+    "bytes": 3816,
+    "mode": 420,
+    "sha256": "0ed55f6e5b7a1f85d58aa7f31f61d213ba75418f42dbf11dad5f47d6491f3702"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/merge_hash_receiver_array_guard.lua": {
+    "bytes": 3824,
+    "mode": 420,
+    "sha256": "2408599ce41b5a12dfc35522db8a0079dc6ce6aa01ba4fa26ea40f692764b8a0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/merge_later_with.lua": {
+    "bytes": 4076,
+    "mode": 420,
+    "sha256": "65118776ba5276c4e8f19196bb5dc694b1d0a7c4e5f17c05d93a33860035c155"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/needed_source_error_composed.lua": {
+    "bytes": 3842,
+    "mode": 420,
+    "sha256": "29075bc6b030a464b5cec83ab731a990822bc4fc5904088d7bc33c43b4752d53"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/needed_source_error_terminal.lua": {
+    "bytes": 3668,
+    "mode": 420,
+    "sha256": "906ea3678097041b5d9ab865a9ab919011029cf436faa434522292f1e41c502f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/needed_value_error_composed.lua": {
+    "bytes": 3810,
+    "mode": 420,
+    "sha256": "082bbc89d07c071b2d4c1d1929d3d6ee1f924dbb13fba124f11e86fca16169b0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/needed_value_error_terminal.lua": {
+    "bytes": 3636,
+    "mode": 420,
+    "sha256": "902ce471b2622d15fc368ef4e6d24a0a73c3a0d284d382e3f1592511a34ad22e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/nested_kinds_and_source.lua": {
+    "bytes": 4420,
+    "mode": 420,
+    "sha256": "3958d30d6304991bb558c34e2a9868ddd4f81671de0296b1376c3a56e3827fb1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/pick_keys_compatible.lua": {
+    "bytes": 3958,
+    "mode": 420,
+    "sha256": "ceaf19b65c0dc890f39d821ff4a886e59e804cf067e9e8f2f4d1bc0e3bc39b8f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/pick_keys_free_array_guard.lua": {
+    "bytes": 3832,
+    "mode": 420,
+    "sha256": "ec7fd8bbe2c18187943d58cdf4c1f103e3b065ffe38b7dd069b88d2482bcffee"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/pick_keys_free_zero_keys.lua": {
+    "bytes": 4026,
+    "mode": 420,
+    "sha256": "901dccf8ef5d8f63f4e07ffd04a8c09e6280157637b7066b6c82baafbefdccd9"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/pick_keys_receiver_array_guard.lua": {
+    "bytes": 3840,
+    "mode": 420,
+    "sha256": "d0affc43484fc671232c22954e271f385346e8207bbf7510a67b0a420d46b3bd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/pick_keys_receiver_zero_keys.lua": {
+    "bytes": 4040,
+    "mode": 420,
+    "sha256": "742cdb7bfb777828fd1e641b1a6892df3abec25c5ed23e5b63e717219ec7a764"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/prior_array.lua": {
+    "bytes": 4012,
+    "mode": 420,
+    "sha256": "9a2d899a72f9c0dd885e2c3bfb29e5dcdc4c5f6968e9263d41d4f1dd74b8cd4e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/prior_copy.lua": {
+    "bytes": 4004,
+    "mode": 420,
+    "sha256": "65f1e79230c82220719dbdf6f047bc53948227b5858d4d4966370ae267a2a5f5"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/prior_count.lua": {
+    "bytes": 4030,
+    "mode": 420,
+    "sha256": "f884c523656644b41f6fdb873a91dffb12148478027722b512b6758155c310bd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/prior_key_count.lua": {
+    "bytes": 4104,
+    "mode": 420,
+    "sha256": "d2f73941ac76260683890b91c237a079ca00317b35ae867eff7354529679e8ed"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/prior_length.lua": {
+    "bytes": 4062,
+    "mode": 420,
+    "sha256": "297c516192b8a27e6feeb284a800af481c5a7092e6aee2bacb1f1f77722d40c3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/prior_view.lua": {
+    "bytes": 4094,
+    "mode": 420,
+    "sha256": "c81d959c145f994c3099e2e0d7822377fe1bb680e48d8cb36a0685fd5caad49a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/rename_key_compatible.lua": {
+    "bytes": 3948,
+    "mode": 420,
+    "sha256": "78a9362bcc63f8e9cff930c37ed6eceeca7c4bd286e2071317c140c5052e8f76"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/rename_key_free_array_guard.lua": {
+    "bytes": 3828,
+    "mode": 420,
+    "sha256": "4bb99a392b51b1cce1a246f621b33f623d3e810b436b76a0fa02debcf832f329"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/rename_key_receiver_array_guard.lua": {
+    "bytes": 3836,
+    "mode": 420,
+    "sha256": "1788f02bef4289a89e027287be86ea476c28bb6dd395cba6db7afa6bc0ef012f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/rename_logical_later_with.lua": {
+    "bytes": 4316,
+    "mode": 420,
+    "sha256": "be69ddfe4349f3c9f53510dff3ff5915ec867f48936b65ec6b37953d38acbc89"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/set_copy_later_with.lua": {
+    "bytes": 4094,
+    "mode": 420,
+    "sha256": "6b5fdb6f948089d3b28872f292d1c6f267bc76754becfe60e92f75d06a08fe4e"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/set_key_compatible.lua": {
+    "bytes": 3858,
+    "mode": 420,
+    "sha256": "22b2d2d5f7488f020a236b733a1e1328568eebfcf0725a0d1d31ce88d8e4e9f3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/set_key_free_array_guard.lua": {
+    "bytes": 3780,
+    "mode": 420,
+    "sha256": "fcf8037489fbf98d0cba62dc21bafcc243477a1d1555e75897ae4d0bc1ec9160"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/set_key_receiver_array_guard.lua": {
+    "bytes": 3788,
+    "mode": 420,
+    "sha256": "97d926edf43481174feaf1dc387645f697059f18f78f3796962b6302c57f31bc"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/source_once_snapshot.lua": {
+    "bytes": 4156,
+    "mode": 420,
+    "sha256": "185cbc111ca240f8b099e8a9bae58f7a3fa424e32a1197dd6d32072cf3766f87"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/emitted/variadic_key_preservation.lua": {
+    "bytes": 3920,
+    "mode": 420,
+    "sha256": "908f2231036d4d62f669cb21f527263f6b0a9550b3f01386beb0e6ab2fbef43f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/constructor_hash_guard.json": {
+    "bytes": 605,
+    "mode": 420,
+    "sha256": "ffb81e5063ef9eba8e68f1a8f63bf1a366d35b7515c478c0a90644f786a39d90"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/drop_keys_compatible.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "7b135a9ad014f27ab2c24204ac05a3c88a93f17f3c6ebd2a5a59942290a153bb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/drop_keys_free_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "4083bc4b814175d352c684822cb42fed9701758c77dad09e693084914176abad"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/drop_keys_free_zero_keys.json": {
+    "bytes": 626,
+    "mode": 420,
+    "sha256": "728994747fe79b0984f737bf8cfe0f6332c29ed801f2993c677960d04804bbc4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/drop_keys_receiver_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "20a83e29dae46e03e2656a8a4f2df290de9017dc0870bd7de76dac06dc6a2eae"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/drop_keys_receiver_zero_keys.json": {
+    "bytes": 629,
+    "mode": 420,
+    "sha256": "4298fff0dcc2596ab65ad200b939d39854574ae498ca0307e06257f0789d8d3d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/empty_pick_with.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "bfd0e30378d21bfb7c317db7adbe47a6380716b4e8ac624ff6eafe9aaa7b218b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/explicit_bridges.json": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "612bc8448a22834d33a641cc6e64e8deba5f8c92ae518d38464494a5edcb26c0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/extra_merge_hash_free.json": {
+    "bytes": 815,
+    "mode": 420,
+    "sha256": "615922e65964395f567e7891105b6a9244d37d4fd112486cd67647e8a46a386d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/extra_merge_hash_receiver.json": {
+    "bytes": 815,
+    "mode": 420,
+    "sha256": "d3ec92b63b4fc0bcb43dfd9c34a507371752de5923e10c327e90682f954edaf7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/extra_rename_key_free.json": {
+    "bytes": 821,
+    "mode": 420,
+    "sha256": "a8076076089ed9d0506ec34655b4a2889cfed534af46c2e3397ba1df6889ade2"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/extra_rename_key_receiver.json": {
+    "bytes": 821,
+    "mode": 420,
+    "sha256": "a176170696366ca76c85c435f44d8eaa98fac99d2b20b07a67a0186b435ec866"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/extra_set_key_free.json": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "229318eedea943c0c14426886c3ab6ce6c5b5fe05b2b093bb6a43bcf6ed948ce"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/extra_set_key_receiver.json": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "cccd1670895a2f8a3f303c053828b3d5ca96ad84ff7fd489ba9a32794171c6fa"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_drop_keys_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "cd27c56783a04d082709b7b145172e037dc90aad4f9b53080d09ad80718c6ffb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_drop_keys_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "069b137fd725856818a159c88ae4c99fed18b33cddb3cc2d400634f83bcb1628"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_drop_keys_with.json": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "b48a4df912ca89ced6ce01dba7c4ef0baf51069ebcd8beaf405911fc2404e0e6"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_merge_hash_free.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "b6a2ea860a141ac1d0f2645c48fb3c165f51a50d878fc8b98398a04f97097451"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_merge_hash_receiver.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "7c5efcf69f5df7ceb2f6d5773f1e49a1c65f14c1af2352dc0c30274f1ce3de52"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_merge_hash_with.json": {
+    "bytes": 575,
+    "mode": 420,
+    "sha256": "60df9da502d5e47f2dd47de0cbcd4f9e6ec618ac914ae70142794b7f2d7bdc8b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_pick_keys_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "247efd7ab58e5f412007419bef244845b7c62e443ed5f6d584cb8c45369f41d2"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_pick_keys_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "8bfc65258772d52c49f2f74381f0cbb2bd49aa4c2548d3e6d90f4df767a3790d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_pick_keys_with.json": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "9cd587e6404c9f0dcbef84270b7d4b751806fa8260609f24f1002d03b02b2ce1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_rename_key_free.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "b25279e9b1443f9a1c0c63ed347b9488765bdd9893436a247f05df1a6a3e5dcd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_rename_key_receiver.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "17590124b007f0ddfec8d439cdc6b38c17e50d3a5f7dca9ea280ae04b67be2d0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_rename_key_with.json": {
+    "bytes": 581,
+    "mode": 420,
+    "sha256": "16e1667f95e283b80cda27465ba7083317448c6fe49a4017d3d266fddf324e88"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_set_key_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "e95cf9e751ed3eefd7b2e163a2605bb4f5e6f86dbf57fb98458cf86ab3b3576c"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_set_key_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "cbbaf2b55a7506127ae1e7d92b00db6784ffb666fef83a156778b47af750b551"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_array_set_key_with.json": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "ab42543e13db02b11168b7db94e2e16b9e3544a9dafe86721d5ef59606925dd3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_drop_keys_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "dc558ccc162d83370f37731c5f70423c51092763789791fc2b24f506144b27d4"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_drop_keys_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "4119fd5045f365aa0499a2c78286adc657022ff4b2129ac75027e44eb4c765db"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_drop_keys_with.json": {
+    "bytes": 566,
+    "mode": 420,
+    "sha256": "66fb824b4ce876039187c16114179fd1b708302d718016f83bdc2fa24a73a364"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_merge_hash_free.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "18e3439e7dfb6bb25e83472cd31e5566536c68e70388f76e947beb77c0b403e2"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_merge_hash_receiver.json": {
+    "bytes": 326,
+    "mode": 420,
+    "sha256": "714e75b9b39f02e0675f3963a5f8ac59f951ecc5297925d9edade86610ea0038"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_merge_hash_with.json": {
+    "bytes": 581,
+    "mode": 420,
+    "sha256": "fb0351b4fd0e753c591d705f5456239ee34b3a01bfd58d4010e26bd8da23b542"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_pick_keys_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "1a649c2f0dbc988b07215bd751f8609cf22381be83be52c1cb733ea75592e0a6"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_pick_keys_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "ebda0bf1fda9ff6e96af7f4220f079f06effb06f62a6c77ca1b36310f17dddc7"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_pick_keys_with.json": {
+    "bytes": 566,
+    "mode": 420,
+    "sha256": "52de57f48e147401cd5afa5a623608482ec5b58e34e9207a83f050a570f58232"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_rename_key_free.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "4995963ef8e7054a13b1520612600ac8fc413a7666ed895bf0b4a0beda942da3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_rename_key_receiver.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "0a8a3b679a5b190733d360e98b3dc95da59b3c391de2410f87d0d21138a7b5f8"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_rename_key_with.json": {
+    "bytes": 587,
+    "mode": 420,
+    "sha256": "11f4034e05076bdc688fbe0cba98cc2f0120af3fe9e771840a6c952864469fbf"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_set_key_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "056aa72b776b7f73d099e8ad3d1a36ccbd0873d4a41ddebae06182ecb6e615ea"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_set_key_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "1a26f98e6a4e25346053bd367676944e004f3c41916f58986976bd895f54cebb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_null_set_key_with.json": {
+    "bytes": 566,
+    "mode": 420,
+    "sha256": "99e8966374a280b61b2305f614e1f2f7e2570fc7c2148bc78357cf2570ef6372"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_drop_keys_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "f8c82e45bce3d8192f4770b49d1e7ba47fa6edb2cff4e8907b2522e0fb1c6997"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_drop_keys_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "ca4ba2378d10e9a5c6ca7a8cff9f5b843967789b95f3069e0f1f5b0e20d4cd87"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_drop_keys_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "b4f90bb8dd96e7380c90971c67c7553852543a3b84f9c519681040508b9a4593"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_merge_hash_free.json": {
+    "bytes": 314,
+    "mode": 420,
+    "sha256": "131fd59490016f1f5457c43763d84ac834f95a502740d707c79c98a18b9ab4f1"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_merge_hash_receiver.json": {
+    "bytes": 314,
+    "mode": 420,
+    "sha256": "01bb77c4e5281b131ba057587b5c92d53ce4fd1cd50f061a4292466cc3fd0dfe"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_merge_hash_with.json": {
+    "bytes": 569,
+    "mode": 420,
+    "sha256": "89b1c5d18701cdec27a0ad3b3cefc401f71c4b6d6e39ce460f216e232cbcd54b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_pick_keys_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "aec09b5ba24382659aecdaea6558fae2779bb4c1dbae30fb91b3c194376e4c9f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_pick_keys_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "8e1f5db1c9a7692c7a930472da296b3591beddb24abf88c78a08acc3bdaa9359"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_pick_keys_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "ea046720a3d03c17514ab951748554a4767a10320a3b03ffa5a4bdb3598d0a87"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_rename_key_free.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "e86f8d1eeaae84d3e33d7f23db08f2d52e8b6806aa2eee9f030429d5fa2ab35b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_rename_key_receiver.json": {
+    "bytes": 320,
+    "mode": 420,
+    "sha256": "83db1f7e03b7ddfd721069a4fad5a593b3d5bf55552afb18a891f54703cc532c"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_rename_key_with.json": {
+    "bytes": 575,
+    "mode": 420,
+    "sha256": "c4d359d283f5c218074f2ff5d562f2f913f143da6f517842a5bcee6a99fc3834"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_set_key_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "096f53b6e38d758bae207c7fa44c9ff3e1cd62a85a9b00761440223aed94271d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_set_key_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "ace18223c20f4dd7acb70a6289576560b3fc5626c3ddaaebf5afb066ac0c487c"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/initial_number_set_key_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "083848f1874e2a809f1f77497e1f5e854c0a2c2e34f522291abeed7f6178a54f"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/merge_hash_compatible.json": {
+    "bytes": 578,
+    "mode": 420,
+    "sha256": "bd41ea97490b71755ac4ed0eb9fe2c50bd26c99d37da66ff2c64ef23ff496c39"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/merge_hash_free_array_guard.json": {
+    "bytes": 518,
+    "mode": 420,
+    "sha256": "979e948bba0588da8a18543e39b4ba8ab3d833a0b02e53576258f76eba8b5d2b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/merge_hash_receiver_array_guard.json": {
+    "bytes": 518,
+    "mode": 420,
+    "sha256": "1704190846424c628b79c276aacb45f1a4a173edee7b78d7130d3705ed959748"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/merge_later_with.json": {
+    "bytes": 659,
+    "mode": 420,
+    "sha256": "f9240f8ba65f005254920ae9981eead0123d6cb0cb9b4d377d4c96b4a66fe296"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/needed_source_error_composed.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "de9887ef7460a24d5b4a718aa5fd5e71d4cfe2ccf570e4f2c322504734266e32"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/needed_source_error_terminal.json": {
+    "bytes": 443,
+    "mode": 420,
+    "sha256": "b8d775cfa629271deed299b941ad8deebd62a9b1c1d377af430b40da2d92396b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/needed_value_error_composed.json": {
+    "bytes": 515,
+    "mode": 420,
+    "sha256": "5dbd7bdcf7c102e0e1ce98062a50bcbfc9f4075f472b47c322962015c1cd1ea9"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/needed_value_error_terminal.json": {
+    "bytes": 428,
+    "mode": 420,
+    "sha256": "d72d0fb159a16f5540e7a63c03385edbae726f62ae75f13d7eb1eb362f50e630"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/nested_kinds_and_source.json": {
+    "bytes": 824,
+    "mode": 420,
+    "sha256": "b82121ab91031ad010ee20727058374b95fe0403da769155baac10ed34eec0cd"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/pick_keys_compatible.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "00f0025b7cbd805d4244fd1d5a12c9f7fff05e2ae92f6fbe5f254b187b5d532d"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/pick_keys_free_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "18216fffd0b92607a9c536addb06b19f9587f185b60f3ec03a966a4642a7c520"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/pick_keys_free_zero_keys.json": {
+    "bytes": 626,
+    "mode": 420,
+    "sha256": "9805f29606a3995cc48341ea39be1b4a3e5fbee5c4f2395b628e2772223cf659"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/pick_keys_receiver_array_guard.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "3fb7ac655a06cd6fe42d4bb72158886af70a2ad0045dd2cd83ef512e5a36b90b"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/pick_keys_receiver_zero_keys.json": {
+    "bytes": 629,
+    "mode": 420,
+    "sha256": "9f8801e1f2401f89c43a6d09fbe9e67ac847093466562ebaeabdffb5c6710b93"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/prior_array.json": {
+    "bytes": 632,
+    "mode": 420,
+    "sha256": "0018e4d482de0a8e454e3eed1b7f6bf3f3eca395056888c693e20f373f424f64"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/prior_copy.json": {
+    "bytes": 629,
+    "mode": 420,
+    "sha256": "49eed885e6eb9d8f1c611bfbdac93493becf0222d235b79493c5a0f744d0f90a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/prior_count.json": {
+    "bytes": 641,
+    "mode": 420,
+    "sha256": "f2997c3924b9662281f89dea6b6f2d1428a277999bbd48e9e86405bc162cf062"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/prior_key_count.json": {
+    "bytes": 674,
+    "mode": 420,
+    "sha256": "9620737aba7265523c63cbe1cbf31d1c87eaba9d35863e118d73256c8a79a4fb"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/prior_length.json": {
+    "bytes": 656,
+    "mode": 420,
+    "sha256": "bf0ddef3cb51d21d0260afacb45486d84e60af578fd26fcad7888c2daa2f4842"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/prior_view.json": {
+    "bytes": 674,
+    "mode": 420,
+    "sha256": "804e08a5c72925d9a3a9c6088ea5d4c11279d32dda535a4466ab61c40fa97ab2"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/rename_key_compatible.json": {
+    "bytes": 590,
+    "mode": 420,
+    "sha256": "8f873ff163ad3794207900370aacc7ff5e179947e668b83efc7f00354f8009cc"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/rename_key_free_array_guard.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "fdd99dcebc4af2a2bbec215bd316fb4ae6b45b442cfe2fc5bc3ecfc83cc36dad"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/rename_key_receiver_array_guard.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "132117b5622761a741706f59a8ea511c037d41c4760cdd7934a895d8b57f53a0"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/rename_logical_later_with.json": {
+    "bytes": 770,
+    "mode": 420,
+    "sha256": "7d354984dcf2cd5f51f412f524d0c41cb3de276045099b8ed88f21be9640ebb3"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/set_copy_later_with.json": {
+    "bytes": 665,
+    "mode": 420,
+    "sha256": "dbe374953940f66472db484523055cb82c746cbbfab08ff2d62335085be5e191"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/set_key_compatible.json": {
+    "bytes": 548,
+    "mode": 420,
+    "sha256": "49dcad0c210cbcc184dc164198c8c98f38b503a42c93053390cee6e8c58c4618"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/set_key_free_array_guard.json": {
+    "bytes": 503,
+    "mode": 420,
+    "sha256": "f75bcadb7ce8ccd569e23f2aa9006045d155647e73d16bc2fbdc982acea5a403"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/set_key_receiver_array_guard.json": {
+    "bytes": 503,
+    "mode": 420,
+    "sha256": "1fbd9271731ed1a94952c447d9e478f0fa14bef42e74173064f0b853aab7d2ec"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/source_once_snapshot.json": {
+    "bytes": 695,
+    "mode": 420,
+    "sha256": "6c82fc8e9db3eac92adabc4ac8123d8422c4a824b3623e6888a1bf0ebaf5c28a"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/restored/puc/parsed/variadic_key_preservation.json": {
+    "bytes": 572,
+    "mode": 420,
+    "sha256": "7157eb464655131c7c307cb088ad1c0e3494dab7e8def16311626286dada0654"
+  }
+}

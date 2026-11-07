@@ -1338,8 +1338,8 @@ On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Arra
 ### Hash-valued helper continuations: selected open repair
 
 `merge_hash`, pure `set_key`, `rename_key`, `drop_keys` and `pick_keys` return
-Hashes. Bounded Perl77.1.1, Rust77.2, Dart77.3 and Julia77.4 now retain actual-kind and rejection
-guards for their ordinary results; remaining peer assessment/full admission stays open.
+Hashes. Bounded Perl77.1.1, Rust77.2, Dart77.3, Julia77.4 and installed Lua77.5 now retain actual-kind and rejection
+guards for their ordinary results; full source/context admission stays open.
 Compatible examples:
 
 ```text
@@ -1349,7 +1349,7 @@ pick_keys({"b":"tail","a":"head"},"b").sorted_values().last().uppercase() # "TAI
 pick_keys({"a":1},"missing").with(){return(value.count_keys())} # 0; body runs
 ```
 
-The selected Perl, Rust, Dart and Julia program now returns `[null, ""]`. Its incompatible Array
+The selected Perl, Rust, Dart, Julia and installed Lua program now returns `[null, ""]`. Its incompatible Array
 consumer rejects before evaluating the `A` operand:
 
 ```text
@@ -1395,11 +1395,18 @@ Julia77.4 independently preserves the same selected initial Number/null/Array
 source outcomes, with-body counts, malformed extra/zero-key profiles and prior
 result guards. Its thirteen result guard gaps are repaired across native,
 restored, generated-plan and fresh-module routes. Valid contextual `with` bodies
-remain supported after their existing AST normalization; explicit deferred
-operands and other callbacks gain no new role. Required errors keep their full
+remain supported; explicit deferred operands and other callbacks gain no new role. Required errors keep their full
 native diagnostics and generated framing. Scalar-result and mutation-loop rules
 stay unchanged. Rebuild Julia applications/runtime; emitted and parsed formats
-stay unchanged. Installed Lua assessment and full context admission remain open.
+stay unchanged. Full context admission remains open.
+
+Installed PUC Lua5.5.1 and LuaJIT independently repair the same thirteen selected
+guard gaps while preserving each host's own initial source outcomes, with-body
+counts, excluded extra/zero-key profiles and earlier result guards. Required
+producer errors retain their runtime/generated flags and diagnostic framing.
+The update preserves scalar and mutation rules. Load the updated Lua runtime in
+applications; emitted and parsed formats stay unchanged. This focused outcome
+does not establish the declared Lua5.4 target or full context admission.
 
 Use at least one key for `drop_keys`/`pick_keys`; the four selected Perl zero-key
 forms are unready profiles. Keep rename destinations absent for portable collision

@@ -9,7 +9,7 @@ answers:
   - "are zero-key drop_keys and pick_keys admitted canonical forms"
   - "must Hash-valued guard repairs preserve initial source policies"
 date: 2026-11-07
-status: original selection frozen; bounded Perl/Rust/Dart/Julia results focused-checked, remaining peers pending
+status: original selection frozen; bounded Perl/Rust/Dart/Julia/installed Lua results focused-checked; full admission separate
 tags: [hash, helpers, guards, perl, selection, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.37; hash-value-result-selection-2026-11-07/REVIEW.md retains original32, exact shared28 with15 failures/13 healthy controls, four separate unready zero-key profiles,32 actual artifact pairs and eight effective evidence corruptions. No SDK production change or peer verdict."
 reverify:
@@ -52,7 +52,7 @@ Dart77.3 independently acquires89/shared28 plus61 own fences,13 original failure
 76 healthy, then unchanged89/four routes/direct151 PASS. Exact private old/current
 images reproduce13RED/89PASS with actual frames and resolved SDK routing. See
 [[dart-hash-value-result-guards]]; original source/arity/error policies and89
-parsed/module pairs remain exact. Julia77.4 now has its own outcome below; installed Lua77.5 assesses independently next.
+parsed/module pairs remain exact. Julia77.4 and installed Lua77.5 now have their own outcomes below.
 
 Julia77.4 independently acquires89/shared28 plus61 controls;13 original failures/
 76 healthy become510PASS/four routes/direct825. Exact private old/current SDKs
@@ -60,3 +60,11 @@ reproduce13RED/89PASS. First partial with-ending gap and original reader version
 failure stay explicit; qualified readonly recovery/eight corruptions passes.
 See [[julia-hash-value-result-guards]] for actual normalized with ASTs, retained
 source/arity/errors, unchanged scalar/mutation policy and custody/admission limits.
+
+Installed Lua77.5 independently acquires each actual host89/shared28 plus61
+controls,13 original failures to510 checks0 failures, direct810 plus copy/arity
+and exact private13RED/89PASS. First readonly/eight corruptions passes; all76
+healthy observations/65 profiles/89 artifact pairs per host stay exact. See
+[[lua-hash-value-result-guards]] for own block_value with ASTs, native product
+capture before SDK use and retained source/error/scalar/mutation policies. All
+bounded77 outcomes are recorded; selection23.1.38 follows clean landing.

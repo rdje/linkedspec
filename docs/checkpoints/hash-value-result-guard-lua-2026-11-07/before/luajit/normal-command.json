@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "luajit",
+    "-e",
+    "dofile(\"lua/test/hash_value_result_guard_composition_test.lua\")"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit",
+    "LINKEDSPEC_HASH_VALUE_CAPTURE": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit",
+    "LINKEDSPEC_HASH_VALUE_INPUT_ROOT": ""
+  }
+}

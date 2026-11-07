@@ -1,0 +1,17 @@
+{
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/native/linkedspec_filesystem_native.so": {
+    "bytes": 50704,
+    "mode": 493,
+    "sha256": "39086adaf2beb40ab1e7f06a61c83fcf10ed314132437530924ce791d4e2c041"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/native/linkedspec_mcp_system.so": {
+    "bytes": 50552,
+    "mode": 493,
+    "sha256": "2f447f71fbdff34e3b5f6cd2d8343e5cc5234082944e313e372054a9c241af11"
+  },
+  "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/before/luajit/native/linkedspec_regex_pcre2.so": {
+    "bytes": 51928,
+    "mode": 493,
+    "sha256": "85663b3625692955b1f1f9155e3392e4f65292870531c8975ae47b263eb1fa59"
+  }
+}

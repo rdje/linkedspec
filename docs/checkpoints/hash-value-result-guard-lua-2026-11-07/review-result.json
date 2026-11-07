@@ -1,0 +1,89 @@
+{
+  "native_products_recovered_before_sdk_use": {
+    "after": {
+      "luajit": 3,
+      "puc": 3
+    },
+    "before": {
+      "luajit": 3,
+      "puc": 3
+    },
+    "direct": {
+      "luajit": 3,
+      "puc": 3
+    },
+    "intake": {
+      "luajit": 3,
+      "puc": 3
+    },
+    "inverse": {
+      "luajit": 3,
+      "puc": 3
+    },
+    "restored": {
+      "luajit": 3,
+      "puc": 3
+    }
+  },
+  "per_host": {
+    "luajit": {
+      "actual_module_parsed_pairs_unchanged": 89,
+      "direct_counted_checks": 810,
+      "healthy_preserved": 76,
+      "normal_checks": 510,
+      "normal_failures_after": 0,
+      "normal_failures_before": 52,
+      "original_failures": 13,
+      "own_source_controls": 61,
+      "private_original": {
+        "RED": 13,
+        "frames": 89
+      },
+      "private_restored": {
+        "PASS": 89,
+        "frames": 89
+      },
+      "profiles": 65,
+      "programs": 89,
+      "receiver_copy_arity": "passing",
+      "shared": 28,
+      "value_copy_observations": 12,
+      "version": "LuaJIT 2.1.1788460057 -- Copyright (C) 2005-2026 Mike Pall. https://luajit.org/"
+    },
+    "puc": {
+      "actual_module_parsed_pairs_unchanged": 89,
+      "direct_counted_checks": 810,
+      "healthy_preserved": 76,
+      "normal_checks": 510,
+      "normal_failures_after": 0,
+      "normal_failures_before": 52,
+      "original_failures": 13,
+      "own_source_controls": 61,
+      "private_original": {
+        "RED": 13,
+        "frames": 89
+      },
+      "private_restored": {
+        "PASS": 89,
+        "frames": 89
+      },
+      "profiles": 65,
+      "programs": 89,
+      "receiver_copy_arity": "passing",
+      "shared": 28,
+      "value_copy_observations": 12,
+      "version": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio"
+    }
+  },
+  "recovery_corruptions": [
+    "hidden original PUC RED",
+    "LuaJIT later body still runs",
+    "masked PUC required error",
+    "normalized LuaJIT initial source",
+    "PUC Bool normalized to Number",
+    "missing LuaJIT preservation member",
+    "PUC profile source drift",
+    "actual LuaJIT module drift"
+  ],
+  "scope": "finite declared own direct sources/grammar/actual native products/artifacts; fresh modules share runtime/process; full toolchain/native/transitive custody4.2/SESSION5, general contexts/isolation, declared Lua5.4, registration and23.4 remain separate"
+}

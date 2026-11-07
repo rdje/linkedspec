@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/build_lua_native.sh",
+    "puc",
+    "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/native"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/control-owner/lua/src/?.lua;docs/checkpoints/hash-value-result-guard-lua-2026-11-07/control-owner/lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_HASH_VALUE_CAPTURE": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/inverse/puc",
+    "LINKEDSPEC_HASH_VALUE_INPUT_ROOT": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/control-owner/"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "-v"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_HASH_VALUE_CAPTURE": "docs/checkpoints/hash-value-result-guard-lua-2026-11-07/intake/puc",
+    "LINKEDSPEC_HASH_VALUE_INPUT_ROOT": ""
+  }
+}

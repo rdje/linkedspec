@@ -1,0 +1,40 @@
+{
+  "luajit": {
+    "profiles": 65,
+    "programs": 89,
+    "shared_target_failures": [
+      "merge_hash_free_array_guard",
+      "merge_hash_receiver_array_guard",
+      "set_key_free_array_guard",
+      "set_key_receiver_array_guard",
+      "rename_key_free_array_guard",
+      "rename_key_receiver_array_guard",
+      "drop_keys_free_array_guard",
+      "drop_keys_receiver_array_guard",
+      "pick_keys_free_array_guard",
+      "pick_keys_receiver_array_guard",
+      "merge_later_with",
+      "set_copy_later_with",
+      "rename_logical_later_with"
+    ]
+  },
+  "puc": {
+    "profiles": 65,
+    "programs": 89,
+    "shared_target_failures": [
+      "merge_hash_free_array_guard",
+      "merge_hash_receiver_array_guard",
+      "set_key_free_array_guard",
+      "set_key_receiver_array_guard",
+      "rename_key_free_array_guard",
+      "rename_key_receiver_array_guard",
+      "drop_keys_free_array_guard",
+      "drop_keys_receiver_array_guard",
+      "pick_keys_free_array_guard",
+      "pick_keys_receiver_array_guard",
+      "merge_later_with",
+      "set_copy_later_with",
+      "rename_logical_later_with"
+    ]
+  }
+}

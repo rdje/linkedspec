@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT bounded Hash-valued77: Perl/Rust/Dart/Julia have focused outcomes. Independent installed Lua77.5 next; full23.4 remains separate. Daily artifact4.15 is current.
+PNT bounded Hash-valued77 outcomes are focused-checked on all recorded backends/hosts. Remaining-feature selection23.1.38 next; full23.4 remains separate. Daily artifact4.15 is current.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.77.4 retains Julia pure Hash-result actual-kind/rejection guards and initial producer policy. Independent89/shared28 plus61 fences,13 original failures to510PASS/four routes/direct825; exact private old/current13RED/89PASS with89 frames. All76 healthy observations/65 profiles/89 actual parsed-module pairs exact. Partial with-normalization gap and original reader manifest/host version failure remain explicit; separate qualified readonly0/empty stderr/eight corruptions PASS. Scalar_result/mutation policy and Hash producers remain exact. Rebuild apps/runtime; formats unchanged. No full context/native custody/admission claim.
+TYPE-REFERENCE-BOOK.1.2.23.3.77.5 retains installed Lua pure Hash-result guards and initial source policy. Each actual host89/shared28 plus61 fences,13 original failures to510 checks0 failures/four routes/direct810 plus copy/arity; exact same-path private old/current13RED/89PASS with all89 frames. All76 healthy/65 profiles/89 parsed-module pairs per host exact. First readonly0/empty stderr/eight corruptions and candidate identity PASS. Own with block_value needs no Julia exception; scalar/mutation/chunk-local declarations and Hash producers stay exact. Actual native products precede SDK use; load updated runtime, formats unchanged. No declared5.4/full context/native custody/admission claim.
 
 ## Next Action
 
-From clean Julia77.4 landing independently activate installed Lua77.5. Acquire unchanged28/own source/arity/error fences and actual SDK/grammar inputs before use, repair demonstrated bounded result gaps only, then smallest direct/inverse/recovery/book/Knowledge/live/commit. No imported peer policy or broad verification between feature slices.
+From clean installed Lua77.5 landing activate TYPE-REFERENCE-BOOK.1.2.23.1.38. Recover next eligible finite existing-contract requirement from current canonical role inventory/Knowledge/book, own any implementation before probing/production, and preserve recorded77 qualifications. Do not invent a gap or run broad verification between feature slices; identify the existing deferred verification/prerequisite owner only if feature coverage is exhausted.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.77.5 — each installed Lua89/four routes510 checks0 failures/direct810 plus copy/arity; exact private13RED/89PASS/first recovery/eight controls; selection38 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.4 — Julia89/four routes510PASS/direct825, exact private13RED/89PASS, qualified readonly/eight controls; partial/version correction explicit; Lua77.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.3 — Dart89/four routes/direct151; exact private13RED/89PASS,65 own profiles/89 artifact pairs/eight controls; Julia77.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.15 — bounded1157-row daily review/five controls/readonly replay; zero removals, protected artifacts retained; Dart77.3 next.
@@ -29,7 +30,6 @@ From clean Julia77.4 landing independently activate installed Lua77.5. Acquire u
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.2 — Rust22PASS/four routes, direct30/total52; initial-source policies preserved; P1 Perl coverage76.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.1 — Perl views15PASS/qualified4files67; stale Length oracle reconciled; actual inverse/eight controls; Rust76.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Perl copy12PASS/direct five files92; actual inverse RED/restored GREEN; view76.1 next.
-- TYPE-REFERENCE-BOOK.1.2.23.1.36 — views15 frozen by projection; copy6 distinguishes3RED/3healthy; no production edit; P176.0 next.
 
 ## History
 

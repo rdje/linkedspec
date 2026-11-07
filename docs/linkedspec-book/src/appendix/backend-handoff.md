@@ -4755,3 +4755,41 @@ Modules share runtime/process. Full source/context/native/cache/transitive custo
 Independent installed Lua77.5 follows clean landing. Evidence:
 `docs/checkpoints/hash-value-result-guard-julia-2026-11-07/REVIEW.md`; readonly
 `review_observed_version.py` recovers historical proof, not future runtime state.
+
+
+### Installed Lua pure Hash-helper result guards
+
+Lua77.5 independently acquires89/shared28 plus61 source/shape/prior-owner controls
+on each actual PUC5.5.1/LuaJIT2.1.1788460057 host before production. Each exposes13
+guard failures/76 healthy observations; unchanged normal510 checks52 failures.
+Own compiled with ASTs retain block_value, and the kind-preserving public projector
+confirms ordinary operands suffice; no Julia contextual-node exception is imported.
+The existing namespace now admits canonical merge2, set/rename3, drop/pick>=2
+including receivers, with one first-helper source permission before view/size roles.
+No interpreter chunk locals, scalar-result or loop/index mutation changes are added;
+entire Hash producer bodies and source/key/splice/depth/collision policies stay.
+
+Each unchanged89/four routes now510 checks0 failures. Direct new510/view184/
+constructor116 gives810 counted checks plus12 copy observation rows and passing
+receiver-arity controls, with empty stderr. Each exact old/current SDK at one
+private path reproduces13RED/89PASS with all89 frames and actual runtime source
+verified. All76 healthy observations/65 profiles/89 parsed-module pairs remain
+exact per host across six phases. Initial Number/null/Array outcomes/with counts,
+six SATW extra profiles, four AW zero-key profiles, six earlier result-owner guards
+and full native/generated needed-error fields remain exact. These are finite
+preservation fences, not new portable fallback or signature authority.
+
+Published low-level native build/project-data interfaces capture actual own source/
+grammar/instruments before build/use and three actual native products before SDK
+loading. Full SDK/reader channels are gzip-first; emitted/parsed inputs precede
+execution. First readonly recovery0/empty stderr/eight effective corruptions and
+one-time current/direct candidate identity pass; no failed epoch/qualification.
+The private source/native outputs are removed only after byte/mode recovery.
+
+Load updated runtime in apps; emitted/parsed formats stay unchanged. Fresh modules
+share runtime/process; no cross-host byte or general isolation claim. Full source/
+context/native/cache/transitive/toolchain custody4.2/SESSION5, canonical registration
+23.4.1, declared Lua5.4 and full23.4 remain separate. All bounded77 backend outcomes
+have focused proof; remaining-feature selection23.1.38 owns the next clean PNT
+step. Evidence: `docs/checkpoints/hash-value-result-guard-lua-2026-11-07/REVIEW.md`;
+readonly review.py there recovers historical proof, not a future runtime verdict.

@@ -1091,7 +1091,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`, `.23.1.11`, `.23.1.12`, `.23.1.13`, `.23.1.14`, `.23.1.15`, `.23.1.16`, `.23.1.17`, `.23.1.18`, `.23.1.19`, `.23.1.20`, `.23.1.21`, `.23.1.22`, `.23.1.23`, `.23.1.24`, `.23.1.25`, `.23.1.26`, `.23.1.27`, `.23.1.28`, `.23.1.29`, `.23.1.30`, `.23.1.31`, `.23.1.32`, `.23.1.33`, `.23.1.34`, `.23.1.35`, `.23.1.36`, `.23.1.37`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`, `.23.1.11`, `.23.1.12`, `.23.1.13`, `.23.1.14`, `.23.1.15`, `.23.1.16`, `.23.1.17`, `.23.1.18`, `.23.1.19`, `.23.1.20`, `.23.1.21`, `.23.1.22`, `.23.1.23`, `.23.1.24`, `.23.1.25`, `.23.1.26`, `.23.1.27`, `.23.1.28`, `.23.1.29`, `.23.1.30`, `.23.1.31`, `.23.1.32`, `.23.1.33`, `.23.1.34`, `.23.1.35`, `.23.1.36`, `.23.1.37`, `.23.1.38`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -2284,7 +2284,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Next: Commit selection36, then P1 Perl76.0 before view76.1 and independent peers; full verification after feature coverage.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.37`
-  Status: `completed` / finite original selection frozen; family77 pending
+  Status: `completed` / finite original selection frozen; bounded77 outcomes focused-checked, full23.4 separate
   Goal: Select and freeze the next actually open roadmap-required fluent source/consumer family after bounded Hash-view76 coverage.
   Dependencies: Focused76.0-.6/backend and initial-source outcomes; current23.1 inventory/gap matrix/contracts/Knowledge. Full23.4 remains separate.
   Acceptance: Recover actual remaining requirements and canonical source roles before probing. Select at most one finite existing-contract gap with minimal full-source public Get/descriptor/substitution/emitted native-fresh controls. Preserve source domains/signatures/actual kinds/ordered effects/errors/copy/alias and excluded contexts. Retain actual first inputs/producers/modules/full channels, distinguish healthy preservation from demonstrated defects, independently assess peers and create bounded backend leaves before production. No broad census/suite/admission, unsupported-context promotion, invented population claim or dependency-internal inspection.
@@ -2423,3 +2423,14 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **ADDRESSED (verified)** — all1157 primary rows match independent metadata; five altered-evidence controls reject; separate readonly replay0/empty stderr and actual source/claim identities agree.
   - [x] **NO REGRESSION** — earlier observations/claims, active outputs, protected caches, submodules and other repositories remain untouched; no runtime or storage policy changes.
   - [x] **LOCKSTEP** — book maintenance example, Knowledge, tasks/index and change/engineering/live/MEMORY route the clean handoff to independent Dart77.3.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.38`
+  Status: `pending`
+  Goal: Select the next roadmap-aligned finite feature or establish the existing implemented-feature boundary after bounded Hash-valued77 outcomes.
+  Dependencies: Clean installed Lua77.5 landing; current23.1 requirements/canonical role inventory/book/Knowledge and recorded77 source/custody qualifications.
+  Acceptance: Recover the next eligible requirement from current canonical inventory and parent frontier without treating method names as defect evidence. Select at most one finite existing-contract gap with minimal distinguishing public observations where needed, own any implementation/prerequisite before changes, and preserve all source/arity/context/collision/mutation boundaries. If ordinary feature coverage is exhausted, identify the already owned prerequisite/deferred verification task now eligible; do not invent a gap or make an aggregate completeness claim. Retain actual first producers/inputs/artifacts/channels for any acquisition and distinguish healthy behavior from measured defects. No broad suite/matrix between feature slices, no dependency-internal inspection or unsupported authority.
+  Planned verification: Targeted canonical requirements/role/Knowledge/book retrieval and only distinguishing public controls needed for selection; readonly evidence recovery if new observations, book/history/memory/task/Knowledge/diff and normal hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; new public authority/infrastructure separately owned.
+  Planned claim verification: none: Finite authored feature selection and preservation distinctions; separately declare any population/performance measurement.
+  Frontier: Activate only from clean Git after77.5 normal hooks/post-pointer/brief0. Keep family77 historical contracts/fixtures/seals unchanged and carry actual per-backend qualifications forward.
