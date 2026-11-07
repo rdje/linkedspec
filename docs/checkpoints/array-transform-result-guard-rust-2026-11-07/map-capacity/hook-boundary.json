@@ -1,0 +1,17 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.2",
+  "source": "Actual final API poll result; earlier one-line diagnostic is transcribed, not a complete raw hook stream",
+  "session_id": 72669,
+  "final_tool_poll": {
+    "chunk_id": "d9002a",
+    "wall_time_seconds": 0.000827542,
+    "exit_code": 1,
+    "original_token_count": 345,
+    "output": "\n================ DOCTRINE ENFORCEMENT REPORT ================\n  PASS  MEMORY-ARCH — durable 4-layer memory, activation-boundary, and clean-handoff invariants (MEMORY_ARCHITECTURE.md §9)\n  PASS  KNOWLEDGE-MAP — the derived Knowledge Map is in sync with its fact sources\n  PASS  TASK-TREE-METADATA — task metadata, partitions, and stable closed-capability anchors stay consistent\n  PASS  TASK-ACCEPTANCE — staged governed changes carry a task-tree acceptance checklist with LinkedSpec-tool evidence\n  PASS  REPO-ROOT-PATHS — tracked repository paths and all five primary-command roots are relocation-safe\n  PASS  PROJECT-DATA-STORAGE — tracked project-storage defaults and documented outputs stay repository-filesystem rooted\n  PASS  DOCUMENT-HISTORY — bounded current documentation views preserve exact repository-local queryable history\n  FAIL  README-STABILITY — README and every routed destination retain reviewed resulting-tree pressure controls\n  PASS  CLAIM-VERIFICATION — new claim declarations disclose three legs and records bind tracked producer/input identities\n  PASS  VERIFICATION-CADENCE — ordinary commits declare focused proof while canonical boundaries carry exact staged-tree receipts\n============================================================\ndoctrines: one or more doctrines FAILED — commit/merge blocked. Fix above; do not bypass.\n"
+  },
+  "observed_earlier_diagnostic": "surface knowledge_map exceeds control: lines 22501/22500",
+  "head": "b0376420ba6258420b146981b848d4646fb3ff55",
+  "outcome": "nine doctrines PASS; README-STABILITY FAIL; commit did not land",
+  "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18",
+  "current_containment": "Consolidate only overlapping new unpublished aliases; preserve factual bodies and every activation-owned lookup key; raise no limit."
+}

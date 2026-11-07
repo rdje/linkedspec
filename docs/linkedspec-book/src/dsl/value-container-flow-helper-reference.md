@@ -1232,10 +1232,12 @@ Perl callable bodies also support `sorted` and `take`, including their receiver 
 Sorting also preserves numeric and string scalar kinds through codeblock copies; see the [typed copy examples](values-containers-and-flow-helpers.md#scalar-kinds-after-sorting).
 For Perl callable `count`/`first`, see the [worked selection, terminal and effect examples](values-containers-and-flow-helpers.md#counting-and-selecting-first-inside-perl-codeblocks).
 
-### Array transform continuations: guarded Perl results
+<a id="array-transform-continuations-guarded-perl-results"></a>
+
+### Array transform continuations: guarded results
 
 `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed` and
-`concat_arrays` return Arrays. Their ordinary Perl results now retain actual-kind
+`concat_arrays` return Arrays. Their ordinary Perl and Rust results now retain actual-kind
 guards through later consumers, `copy`, logical helpers and immediate `with`:
 
 ```text
@@ -1276,7 +1278,7 @@ Legitimate empty Arrays still enter `with`, as the zero-count example shows.
 Producer operands run once, source snapshots and nested Bool/null/Number values
 are preserved, and needed producer errors still propagate.
 
-The bounded Perl forms retain their existing arities: four take/drop helpers
+The bounded Perl and Rust forms retain their existing arities: four take/drop helpers
 accept an optional count, `slice` requires a start and permits an omitted count,
 and `sorted`/`reversed` take no extra receiver operands. Guarded `concat_arrays`
 forms are free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
@@ -1296,9 +1298,27 @@ take(3,1)                    # []; never reads an unrelated host Array named 3
 concat_arrays(3,["tail"])    # ["tail"]; later Array operands still contribute
 ```
 
+Rust retains its own initial Number/null/Hash source behavior. The following
+compatibility examples describe Rust, and do not extend portable input authority:
+
+```text
+take(3,1)                         # []
+sorted({"k":1})                    # []
+concat_arrays(undef,["tail"])       # [null,"tail"]
+concat_arrays(3,["tail"])           # [3,"tail"]
+```
+
+The first producer keeps that policy; its resulting Array then owns subsequent
+kind checks. Earlier produced or copied values keep their existing guards.
+Omitted take/drop counts retain the default of one, and `slice` with an omitted
+count keeps the remaining tail. Malformed or variadic calls retain their existing
+backend behavior and gain no new guarded-result authority.
+
 Perl composition78.1.1 is focused-checked on native and full emitted-fresh routes;
-regenerate previously emitted Perl to receive these guards. Independent Rust78.2
-assessment and full source/context/admission remain open.
+regenerate previously emitted Perl to receive these guards. Rust78.2 is
+focused-checked on native, restored compiled state, generated plans and compiled
+emitted-fresh routes; rebuild Rust applications/runtime. Independent Dart78.3,
+Julia and Lua assessments and full source/context/admission remain open.
 
 ## Hash helpers
 

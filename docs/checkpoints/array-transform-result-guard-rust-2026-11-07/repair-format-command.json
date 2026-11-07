@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "rustfmt",
+    "--edition",
+    "2024",
+    "rust/linkedspec-runtime/src/engine.rs"
+  ],
+  "cwd": "."
+}

@@ -1,0 +1,25 @@
+"""Record the ordinary slice's derived-map, history, memory, book and diff checks."""
+import gzip
+import json
+from pathlib import Path
+import subprocess
+
+BASE = Path(__file__).resolve().parent
+OUT = BASE / 'doc-checks'
+OUT.mkdir()
+commands = (
+    ('knowledge-map', ['bash', 'knowledge-map/scripts/gen_knowledge_map.sh']),
+    ('change-history', ['perl', 'tools/roll_document_history.pl', '--surface', 'change_history', '--check']),
+    ('engineering-history', ['perl', 'tools/roll_document_history.pl', '--surface', 'engineering_notes', '--check']),
+    ('memory', ['bash', 'scripts/check_memory_architecture.sh']),
+    ('book', ['bash', 'tools/run_mdbook_local.sh']),
+    ('diff', ['git', 'diff', '--check']),
+)
+for tag, command in commands:
+    (OUT / (tag + '-command.json')).write_text(json.dumps(dict(argv=command, cwd='.'), indent=2) + '\n')
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    for channel in ('stdout', 'stderr'):
+        (OUT / (tag + '-' + channel + '.log.gz')).write_bytes(gzip.compress(getattr(result, channel), mtime=0))
+    (OUT / (tag + '-exit.txt')).write_text(str(result.returncode) + '\n')
+    assert result.returncode == 0, tag + ' failed; first channels preserved'
+    print(tag + ':0', flush=True)

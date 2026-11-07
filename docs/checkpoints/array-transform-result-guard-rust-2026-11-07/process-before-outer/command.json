@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/capture_process_storage.py",
+    "before"
+  ],
+  "cwd": "."
+}

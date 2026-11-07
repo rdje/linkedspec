@@ -1,0 +1,1 @@
+Supersede this own commit attempt before landing: task diagnosis names nonexistent eval_fluent_with_trailing_block; actual method is eval_receiver_with_trailing_block_chain at engine.rs:7250. Runtime/test inputs remain unchanged. No unfinished hook result receives PASS credit.

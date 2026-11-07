@@ -26,11 +26,14 @@ answers:
   - which recurring oracle proves a copied LinkedSpec binary uses its moved repository
   - how is executable root precedence proved against an ambient repository
   - do all five LinkedSpec primary runtimes resolve named specs outside the checkout
-date: 2026-07-27
+  - why do raw process argv snapshots need compressed evidence for root portability
+date: 2026-11-07
 status: current
 tags: [architecture, paths, repository-root, relocation, portability, doctrine, cli, rust, REPO-ROOT-PATH-PORTABILITY]
-evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. PROJECT-DATA-SSD-ROOTING.2.4 migrates 88 existing current Julia reverify cards to self-rooted repository-storage wrappers and removes disposable package-manager usage metadata containing runtime absolute paths. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. REPO-ROOT-PATH-PORTABILITY.2.2 adds a Rust integration owner that distinguishes a synthetic moved repository from a conflicting ambient repository by exact named-spec output, requires exact failure after marker removal, composes Perl/Dart/Julia/Lua outside-cwd named-spec proof in one self-rooted oracle, raises routing to 39 entrypoints, and registers the process proof once in canonical local CI. ADR 0052 is fully implemented."
-reverify: "bash scripts/check_repo_root_path_portability.sh && bash tools/test_repo_root_process_portability.sh && bash scripts/check_doctrines.sh"
+evidence: "REPO-ROOT-PATH-PORTABILITY.0 found zero current/former checkout literals and zero tracked symlinks, with outside-cwd Perl/Dart/Julia/Lua probes green and a copied Rust binary RED. REPO-ROOT-PATH-PORTABILITY.1.1 replaces Rust compile-time CARGO_MANIFEST_DIR discovery with current-executable then cwd marker discovery; the moved-tree process exits 0 with exact relocated-root. PROJECT-DATA-SSD-ROOTING.2.2 finds that a synthetic executable below repository-local TMPDIR is genuinely below the checkout and therefore cannot model external ancestry; the topology unit now injects the marker predicate over relative paths, while the storage oracle separately exercises an actual copied binary and same-device trace. PROJECT-DATA-SSD-ROOTING.2.4 migrates 88 existing current Julia reverify cards to self-rooted repository-storage wrappers and removes disposable package-manager usage metadata containing runtime absolute paths. REPO-ROOT-PATH-PORTABILITY.2.1 registers the read-only REPO-ROOT-PATHS structural doctrine with 14 classifier cases and all five runtime-anchor locks. REPO-ROOT-PATH-PORTABILITY.2.2 adds a Rust integration owner that distinguishes a synthetic moved repository from a conflicting ambient repository by exact named-spec output, requires exact failure after marker removal, composes Perl/Dart/Julia/Lua outside-cwd named-spec proof in one self-rooted oracle, raises routing to 39 entrypoints, and registers the process proof once in canonical local CI. ADR 0052 is fully implemented. Rust78.2 retains an observed raw process-JSON portability RED and unchanged-oracle GREEN after exact gzip preservation; original bytes/mode and two mapping-corruption controls are independently verified."
+reverify:
+  - "bash scripts/check_repo_root_path_portability.sh && bash tools/test_repo_root_process_portability.sh && bash scripts/check_doctrines.sh"
+  - "bash tools/run_python_project_data.sh docs/checkpoints/array-transform-result-guard-rust-2026-11-07/review_process_storage.py"
 ---
 
 ADR `0052` makes checkout relocation a correctness property. Checked-in references to repository-owned files are
@@ -105,3 +108,19 @@ Related facts: [[native-spec-resolution-contract]], [[native-spec-resolution-pol
 [[neutral-cli-fixture-runner]], [[rust-local-verification-gate]], [[rust-project-data-ssd-storage]],
 [[julia-project-data-ssd-storage]], [[lua-toolchain-package-policy]],
 [[repository-root-relocation-process-proof]].
+
+2026-11-07 — Raw process observations are audit data, and may contain actual
+checkout argv. A new tracked plaintext process census still triggers the text
+classifier. Rust78.2 retains the observed REPO-ROOT-PATHS RED, then preserves the
+exact raw JSON bytes and original mode in an inert gzip carrier before removing
+only the verified plaintext copy. A repository-relative logical/physical mapping
+and readonly validator recover the original observation; two wrong-identity/hash
+controls reject. The unchanged structural oracle then returns0. Source and raw
+channels are retained under array-transform-result-guard-rust-2026-11-07.
+
+The carrier is for historical audit reading. Active code, configuration and
+locator metadata continue to use relative project paths or derive their root at
+runtime. The validator never executes observed argv or uses it to locate a
+checkout. Capture raw process/command channels gzip-first, alongside relative
+review metadata, so observed bytes remain exact without becoming durable root
+identity. This is a representation repair under ADR0052; the checker is unchanged.

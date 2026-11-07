@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "rustc",
+    "-Vv"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

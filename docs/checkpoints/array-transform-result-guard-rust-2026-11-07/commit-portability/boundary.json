@@ -1,0 +1,18 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.2",
+  "kind": "known portability RED; own commit deliberately terminated",
+  "source": "Final API poll result, not a complete raw process-channel capture",
+  "session_id": 32570,
+  "verified_commit_pid": 9608,
+  "final_tool_poll": {
+    "chunk_id": "86756f",
+    "wall_time_seconds": 4.8083e-05,
+    "exit_code": 143,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "head_before_and_after": "b0376420ba6258420b146981b848d4646fb3ff55",
+  "unfinished_hook_credit": "none",
+  "raw_failure": "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/process-storage-before/stderr.log.gz",
+  "resolution": "Exact raw process snapshot bytes/mode retained in inert gzip; relative logical/physical mapping; unchanged oracle1RED to0GREEN and two corruption controls."
+}

@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_cargo_local.sh",
+    "run",
+    "--manifest-path",
+    "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/intake/native/Cargo.toml",
+    "--locked",
+    "--offline",
+    "-j",
+    "1",
+    "--",
+    "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/intake/fresh"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

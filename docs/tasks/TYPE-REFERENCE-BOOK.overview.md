@@ -1428,7 +1428,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`; remaining admission leaves split at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`; remaining admission leaves split at activation.
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
@@ -2489,3 +2489,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Recognize or safely refuse supported legacy boundaries before mutation; preserve all current sections/CORE/open bodies and original archives. Add distinguishing boundary/corruption controls, qualify affected frozen historical consumers without rewriting evidence, and prove actual node/full-source queries.
   Planned verification: Focused boundary/reader/migration and direct metadata consumers; infrastructure canonical receipt required at activation.
   Planned claim verification: none: Declare exact repair proof or scoped no-measurement rationale at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.18`
+  Status: `pending`
+  Priority: P1 first on PNT resumption, before independent Dart78.3 or further fact growth.
+  Goal: Recover bounded Knowledge Map growth capacity while preserving published facts and lookup keys.
+  Reproduction/impact: Rust78.2 normal hooks expose knowledge_map22501 lines against max22500 in doctrine/readme_stability/routes.jsonl. Current Rust closure consolidates only overlapping unpublished lookup aliases within its own additions; factual bodies and activation-owned questions remain. Qualified containment reaches22499/22500 with generator/control unchanged and prior question text/fact bodies preserved. It leaves one line before the hard bound for the next backend fact, so capacity recovery is a prerequisite rather than an unowned warning.
+  Dependencies: Clean stopped Rust78.2 checkpoint; director instruction to resume. Generic task-boundary4.17 remains a separate owner.
+  Acceptance: Recover README_POLICY/ADR0063 and current containment authority, inspect the generator and every affected reader/gate, and inventory exact current lines/bytes/facts/questions. Preserve all activation-owned facts and lookup identities. Prepare a bounded compaction/partition or explicitly authorized capacity proposal with exact affected surfaces, preservation oracle and implementation leaves before mutation. A cap increase requires accepted authority under README_POLICY; Rust78.2 raises no cap and changes no generator. Do not silently remove published questions or duplicate the full index into another unbounded landing page.
+  Planned verification: Focused planning and preservation/reader-contract proof; source-bound canonical receipt if implementation changes generator/registry/infrastructure.
+  Planned canonical trigger: Actual infrastructure/control movement, milestone and final clean push; declare at activation.
+  Planned claim verification: none: Planning only; declare exact scoped proof or no-measurement explanation at activation.
+  Next: Remain pending while PNT is stopped; first eligible task on explicit resumption, before Dart78.3.

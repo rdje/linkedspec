@@ -1,0 +1,8 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.2",
+  "defect": "First repair.py asserts before any owner write: an eight-space substring also matches the sixteen-space line. The shell lacked fail-fast and started after acquisition with unchanged old SDK.",
+  "resolution": "Keep original repair/after instruments/channels/inputs. Qualified writer anchors full line starts; production follows only after old-source capture finishes. Guard dependent launches by explicit successful completion.",
+  "original_sha256": "89841a047af37619497659a47061d5950278fa51d37bb85d089164f015d17493",
+  "qualified_sha256": "21289ff25f3d44aaee2e3da9cab358da73d35c399fc01f2cedf9213658576839",
+  "capture_sha256": "38095a63a13fdb7dfdda5ef638bfd24a47c590c33da8b72c97dfa11bbc8e78f8"
+}

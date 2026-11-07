@@ -14,7 +14,7 @@
 {"bytes":3837,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repeated-and-falsey-group-acceptance.md","sha256":"bc965e157960453b887b2bc533b4baa0053156b9e2c2552fb8aca8d6b15738dd","type":"member"}
 {"bytes":4821,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/replacement-repair-engineering-history-capacity.md","sha256":"150150147f888200b5434b758e675aca17936831df77c930882436128cbd081b","type":"member"}
 {"bytes":50098,"lines":412,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.15","path":"docs/knowledge/repo-generated-artifact-cleanup-boundary.md","sha256":"b5461bea8b664eb1215b88f6f98cc1fe8dfc2ff0c3ec906a25fa9f404cbd082f","type":"member"}
-{"bytes":9957,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-path-portability.md","sha256":"25b84c329fe3e95fea307cce05638ffc6926f864f9c32d59366f03454e1a4f6b","type":"member"}
+{"bytes":11487,"lines":126,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.2","path":"docs/knowledge/repository-root-path-portability.md","sha256":"5314485beb8a2d0d285ac5f1f162c6f5c21d4c449bf85d9f1d989eab8f8c37ff","type":"member"}
 {"bytes":5029,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/repository-root-relocation-process-proof.md","sha256":"01a50226185352ff47d312072c38914ed46b4c0dcf85f8fe50772138d84f0954","type":"member"}
 {"bytes":2421,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/restricted-macos-ram-host-size-fallback.md","sha256":"02042261ba20e7da92b91f1f959c2ecde176c98e34058fe4f94eacad95ae5a92","type":"member"}
 {"bytes":2703,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.8","path":"docs/knowledge/retained-artifact-growth.md","sha256":"6415ac645e75a0c54e47e99e2fea0ef596426b191f741a09190abc032a9a624f","type":"member"}
@@ -43,6 +43,7 @@
 {"bytes":8016,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-anonymous-capture-slice-family.md","sha256":"4aa55f8c7b698c7df694290d66b92d8aeabbbeaaf63500c004bbb3184fd3a496","type":"member"}
 {"bytes":2999,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-arithmetic-result-source-guards.md","sha256":"55972cb0ffa572610f74f2b43c9b50f61fe5b8905b8b70e23a5c258b8050c6a1","type":"member"}
 {"bytes":4637,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-slice-boundary-panics.md","sha256":"70b8fabb8813bc998107ee42927ae75f33b6e0f5684fea12b2e9d321e758c59e","type":"member"}
+{"bytes":3766,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.2","path":"docs/knowledge/rust-array-transform-result-guards.md","sha256":"ecdc63bac037b582f7772db7efda649b001e173f49f3325805ebcbba438821e3","type":"member"}
 {"bytes":4018,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-tree-traversal-receiver-blocks.md","sha256":"d41a1ad187dcc25e90bf46dfd9cf3db45b6243aaa05dab0c214472edc7d9c9bf","type":"member"}
 {"bytes":2766,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-bare-variable-newline-consumption.md","sha256":"8da50da82b131e5f7e8e400d1db5ef9e58538b57f2d1501c1bbe9d32500fa38c","type":"member"}
 {"bytes":3658,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-blind-fluent-parent-push.md","sha256":"16f20cc09aa660ca21fb4f6b216599f3a774ab47cd67e11f0d9e3660638067ee","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5675,"lines":93,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mcp-final-eof-byte-limit-gap.md","sha256":"944ae1fffdf9bbc032706aca4bba7646f4df61c8ff81d4867b7ea0121ad55020","type":"member"}
 {"bytes":5146,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-minimum-miss-and-live-progress.md","sha256":"aff85c4c14ea7f3d0776b0601345fd5cc61a131e8e612fe51440698ce31fd9a9","type":"member"}
 {"bytes":2974,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mutation-testing-policy.md","sha256":"25bfa6619dc5c97a61c0871e4e5b1b2d2fe813d28d500b9aaea37e6a00622ec4","type":"member"}
-{"bytes":2503,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-capture-endpoint-presence-repair.md","sha256":"34a0b23938788a4f8650dbb735a44bbe6c4fd6f54d81ddd960f7e5a5802adf8d","type":"member"}

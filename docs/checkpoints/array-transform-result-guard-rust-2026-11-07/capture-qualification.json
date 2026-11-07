@@ -1,0 +1,7 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.2",
+  "defect": "Original before root archive omitted the new untracked include_str optional fixture path. All195 semantic frames survive; no complete first-normal custody credit.",
+  "repair": "Explicit fixture in separate qualified-before and all subsequent first-use captures; original capture/before untouched.",
+  "original_sha256": "7eeb320451a8f8c5ad5b50aa087320cf26c27a5c410ab5f062cd0d6a66ee50c2",
+  "qualified_sha256": "ed34c1636197fe7396d151bd478332dc9640815f68afb9aff15b13c376956e71"
+}

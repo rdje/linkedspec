@@ -1,0 +1,3927 @@
+[
+  {
+    "archive": "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/before/root-before-first-run.tar.gz",
+    "files": {
+      "cli_conformance/cases/help/stdout.txt": {
+        "bytes": 1977,
+        "mode": 420,
+        "sha256": "e44c0c50d838db791f4e23c101e0bdc1374efe57a0702c797c592f25dd3b6487"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/additional-targets.json": {
+        "bytes": 5431,
+        "mode": 420,
+        "sha256": "c6f0016337ae1da6654be57f4d57a958279bfa0ee789efa34f409a9b28061366"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/baseline.json": {
+        "bytes": 786,
+        "mode": 420,
+        "sha256": "29951dc290ec6f44df957774e9dced7920ffc112908309ddcab7d6758fa2bc97"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/capture.py": {
+        "bytes": 9315,
+        "mode": 420,
+        "sha256": "7eeb320451a8f8c5ad5b50aa087320cf26c27a5c410ab5f062cd0d6a66ee50c2"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/format_normal.py": {
+        "bytes": 895,
+        "mode": 420,
+        "sha256": "26716423379063d84226972d64c37b01993fef23b5592b0fef68bd2ba93781a8"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/normal-format-stderr.log.gz": {
+        "bytes": 20,
+        "mode": 420,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/normal-format-stdout.log.gz": {
+        "bytes": 20,
+        "mode": 420,
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/normal-unformatted.rs.gz": {
+        "bytes": 2319,
+        "mode": 420,
+        "sha256": "6d2c535ffc133efae052659f5656e695bce0191fc90ed37b35b0574f6417fba2"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/observer.rs": {
+        "bytes": 4119,
+        "mode": 420,
+        "sha256": "5f3eb736a6469169e8ad770fa70baeb6e4b74dda875bd2704b7318b7e6785b53"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/prepare.py": {
+        "bytes": 4161,
+        "mode": 420,
+        "sha256": "b4d7126d66655772419501ae89886cb4b7d8c94352a9fd6ea84a59be2981d707"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/prepare_normal.py": {
+        "bytes": 3580,
+        "mode": 420,
+        "sha256": "4dbb204b15207a8a89ab6728f87629252381e0830d33583feebdb808394298da"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/profile-sources.json": {
+        "bytes": 49423,
+        "mode": 420,
+        "sha256": "f9d58eb502572e6b02dd7cc42c4fac67cd8c8e65d6a67ecae6485e1840af32af"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/record.py": {
+        "bytes": 882,
+        "mode": 420,
+        "sha256": "231da065bc97eebec48df3bc953cf41c210191939b952ef586edb3f5fcb6abb7"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/repair.py": {
+        "bytes": 6098,
+        "mode": 420,
+        "sha256": "89841a047af37619497659a47061d5950278fa51d37bb85d089164f015d17493"
+      },
+      "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/review.py": {
+        "bytes": 12249,
+        "mode": 420,
+        "sha256": "2413b7789a87a1d3f160509b758d6d73872045accee356ba09ff9374a8d96dbd"
+      },
+      "rust/.gitignore": {
+        "bytes": 31,
+        "mode": 420,
+        "sha256": "3c190dc8bc9f793ca5c8d1e5f01b329ea63b2853bc9e8a3e18da63f7fb10c5b5"
+      },
+      "rust/Cargo.lock": {
+        "bytes": 47424,
+        "mode": 420,
+        "sha256": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428"
+      },
+      "rust/Cargo.toml": {
+        "bytes": 473,
+        "mode": 420,
+        "sha256": "412b4ca6561744edee837a4096961a305de9be391cfbc3e06184ee106d9df7f8"
+      },
+      "rust/README.md": {
+        "bytes": 29052,
+        "mode": 420,
+        "sha256": "f2bc37c577ceee41962797dd8ebae4c552794136729fd99eb4e75001e67ec563"
+      },
+      "rust/linkedspec-core/Cargo.toml": {
+        "bytes": 363,
+        "mode": 420,
+        "sha256": "4e1b8f9d81bc30eaee3c2243bf5142fb3b26a51f60f9c99e91fd5e10dda709ed"
+      },
+      "rust/linkedspec-core/src/ast.rs": {
+        "bytes": 12809,
+        "mode": 420,
+        "sha256": "1bc180bef4445edfd797c69ea1064639ce53df7407b1629b914f8bce73b4d9d8"
+      },
+      "rust/linkedspec-core/src/callable_contract.rs": {
+        "bytes": 13968,
+        "mode": 420,
+        "sha256": "2b24993078757eb4005d71a22fa2e1d1e7266ab34eb80f8275b4b37bfb247605"
+      },
+      "rust/linkedspec-core/src/compiler.rs": {
+        "bytes": 83853,
+        "mode": 420,
+        "sha256": "7a1a92eaf5ed7bc93392bc5666ac5cb061c573ac04fde3499139d2fc055dccda"
+      },
+      "rust/linkedspec-core/src/descriptor.rs": {
+        "bytes": 16895,
+        "mode": 420,
+        "sha256": "d0a089263e72be9c359bce09abfb5b0602d5e5774c159097faa252ff8bb245c8"
+      },
+      "rust/linkedspec-core/src/entry_rule.rs": {
+        "bytes": 4101,
+        "mode": 420,
+        "sha256": "0de08149c4b3f73a8d41443151764aad6e1474e4aee4c8166eb85e890c560c22"
+      },
+      "rust/linkedspec-core/src/error.rs": {
+        "bytes": 3275,
+        "mode": 420,
+        "sha256": "a25c2a569810a215cfcf79d0053f38d94e99e6930164709670f8d3c858b52519"
+      },
+      "rust/linkedspec-core/src/expr.rs": {
+        "bytes": 227344,
+        "mode": 420,
+        "sha256": "81e72383a971ce6c8c306a8d6a7550ac1304b7cd5be31781daa72506ce8127bf"
+      },
+      "rust/linkedspec-core/src/lib.rs": {
+        "bytes": 876,
+        "mode": 420,
+        "sha256": "c2cca39ba3ec0e03606737486361b24d0255566167020f4ebeb0df1469e986a3"
+      },
+      "rust/linkedspec-core/src/numeric.rs": {
+        "bytes": 2760,
+        "mode": 420,
+        "sha256": "65ad021924defd8dd6a623edf5adc7dcdd43d32fc4dad65460b01944035f8072"
+      },
+      "rust/linkedspec-core/src/parser.rs": {
+        "bytes": 70862,
+        "mode": 420,
+        "sha256": "64e4990dc755e1fdd36c7b2172f36de68b54f13f9e6213c44bc5ccb6399e6a0a"
+      },
+      "rust/linkedspec-core/src/trace.rs": {
+        "bytes": 21960,
+        "mode": 420,
+        "sha256": "bc18a16e2b4ab8a12663d93824ce80868237f2365f4d8ff797ea2b30ae8ca421"
+      },
+      "rust/linkedspec-core/src/types.rs": {
+        "bytes": 19609,
+        "mode": 420,
+        "sha256": "836a7fd0de6fdf1d351283476074a63cb16d1cb7a6c9ca1d3d7428735dac0ced"
+      },
+      "rust/linkedspec-core/src/unicode_rule_label.rs": {
+        "bytes": 20086,
+        "mode": 420,
+        "sha256": "28f1a8ffefd324a9191e8cd1bc26dad85ffa7eb6d97edf58106156311d3d114c"
+      },
+      "rust/linkedspec-core/src/validation.rs": {
+        "bytes": 57088,
+        "mode": 420,
+        "sha256": "ff89c288234eb2f195b654113ac25a62ba14793068388701690eb7e7512b7feb"
+      },
+      "rust/linkedspec-core/tests/action_source_fidelity.rs": {
+        "bytes": 6644,
+        "mode": 420,
+        "sha256": "ec95bc7eb0d8495ece1f9605123967e5e390875515f7274da1932f8417d7c6bf"
+      },
+      "rust/linkedspec-core/tests/descriptor_test.rs": {
+        "bytes": 10574,
+        "mode": 420,
+        "sha256": "3beeedc86c3066001aff5d441bb259d472c4dee9ff7123e40c074d4b6e223da8"
+      },
+      "rust/linkedspec-core/tests/division_statement_boundaries.rs": {
+        "bytes": 7015,
+        "mode": 420,
+        "sha256": "f3d670592f29c08115fbb85f9218b730590886e45108264578ae4ec6efe71d88"
+      },
+      "rust/linkedspec-core/tests/expression_diagnostics.rs": {
+        "bytes": 3813,
+        "mode": 420,
+        "sha256": "7322e769570cba8d510ee99dbe4278734524e3cd1d3272683e0e6302fd06efb1"
+      },
+      "rust/linkedspec-core/tests/hash_key_separator.rs": {
+        "bytes": 5830,
+        "mode": 420,
+        "sha256": "5d10ada0958eb94bbc889f674a86da929f70031968d5b1570a053b783f4e7629"
+      },
+      "rust/linkedspec-core/tests/numeric_conversion_contract.rs": {
+        "bytes": 3993,
+        "mode": 420,
+        "sha256": "72fbca74d2f9dc87186a76b8b73e8de59a02002a79da3d60cb7e5de47c774fc7"
+      },
+      "rust/linkedspec-core/tests/regex_statement_boundaries.rs": {
+        "bytes": 5308,
+        "mode": 420,
+        "sha256": "38eae8e403a1a6dbc9d675bedb8651cb31a6c0a4e69957fc1c99c64378ff8151"
+      },
+      "rust/linkedspec-core/tests/rule_code_rejection.rs": {
+        "bytes": 3611,
+        "mode": 420,
+        "sha256": "e17a7ceeec12fe8001c4b67d27ec1fbe2e117495fdc11865856861f4a8b784e6"
+      },
+      "rust/linkedspec-core/tests/rule_local_cursor_normalization_test.rs": {
+        "bytes": 12185,
+        "mode": 420,
+        "sha256": "34191a4b209f03e502918bc31021b09b3be7788b746174baf28fdec57978c702"
+      },
+      "rust/linkedspec-core/tests/symbol_statement_boundaries.rs": {
+        "bytes": 5334,
+        "mode": 420,
+        "sha256": "8dfe82c4eb54a371f250cf3db7ba1a39df6b4938ec659408cf77fb2c3eb1549c"
+      },
+      "rust/linkedspec-core/tests/types_test.rs": {
+        "bytes": 7203,
+        "mode": 420,
+        "sha256": "4f038028a41a9984e64515e74672882f7ed3710a63f3c12de97ab0c2edb5bda7"
+      },
+      "rust/linkedspec-core/tests/unicode_rule_label_contract.rs": {
+        "bytes": 5721,
+        "mode": 420,
+        "sha256": "87c3c10bf41315945a00cf0bd48fa39b4de10228a6d8468d1f9c75305cc8ca13"
+      },
+      "rust/linkedspec-runtime/Cargo.toml": {
+        "bytes": 533,
+        "mode": 420,
+        "sha256": "84f14febdd52e5f482f99e8c8724025f09e544e586e44a9f27c4afc62ae04c35"
+      },
+      "rust/linkedspec-runtime/examples/operand_snapshot_probe.rs": {
+        "bytes": 1662,
+        "mode": 420,
+        "sha256": "c88c276e357864868917f3cf85f94ad42028bbea614d4c807d48533f7a6f6b9b"
+      },
+      "rust/linkedspec-runtime/src/bin/linkedspec-rust.rs": {
+        "bytes": 648,
+        "mode": 420,
+        "sha256": "2bccab116d4fc9a90fb22f23b1f3af9ba482a1c079525584d457166d44089fba"
+      },
+      "rust/linkedspec-runtime/src/bounded_child_parse_authority.rs": {
+        "bytes": 54345,
+        "mode": 420,
+        "sha256": "853515c34ea04dc7cffb073e7946d668dc23d32e5a545294bcf0418f6b65e787"
+      },
+      "rust/linkedspec-runtime/src/diagnostic.rs": {
+        "bytes": 5269,
+        "mode": 420,
+        "sha256": "091f341e9dba870072723ec1f0509be93645cd42b533fe4a1d39796f7228e2ef"
+      },
+      "rust/linkedspec-runtime/src/diagnostic_output.rs": {
+        "bytes": 3792,
+        "mode": 420,
+        "sha256": "8df1c9b681bb15f30e535931249face6308575c17671b17aa0edf5af3056e7d3"
+      },
+      "rust/linkedspec-runtime/src/engine.rs": {
+        "bytes": 641025,
+        "mode": 420,
+        "sha256": "25701fcb9c47384ac77dc204891b93bb63fbc15aab5a895043c97068b5010ddc"
+      },
+      "rust/linkedspec-runtime/src/helpers.rs": {
+        "bytes": 33507,
+        "mode": 420,
+        "sha256": "850047e85f82e0ab3799e02960c245c49077ab3e7bde593c83887b187bffeb3e"
+      },
+      "rust/linkedspec-runtime/src/lib.rs": {
+        "bytes": 2440,
+        "mode": 420,
+        "sha256": "3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c"
+      },
+      "rust/linkedspec-runtime/src/mcp_contract.rs": {
+        "bytes": 83225,
+        "mode": 420,
+        "sha256": "7473a113474d090a1304ffc0d419de18b6b97c10639e7a484e5625abc83e7ece"
+      },
+      "rust/linkedspec-runtime/src/mcp_contract_runtime.rs": {
+        "bytes": 19931,
+        "mode": 420,
+        "sha256": "a048e41cac8a701a90c0189688576f24dabe6e19e490bef6eb8e957886a59a21"
+      },
+      "rust/linkedspec-runtime/src/mcp_server.rs": {
+        "bytes": 47666,
+        "mode": 420,
+        "sha256": "3b910bb388e4a87b9aec5c3c1c1d2e3a054c05870ad402be4a58c3b081e67686"
+      },
+      "rust/linkedspec-runtime/src/mcp_wire.rs": {
+        "bytes": 25848,
+        "mode": 420,
+        "sha256": "261136a3af1acde8135152d60a6947cecceddc574fa1d4167f7ed60927c83c15"
+      },
+      "rust/linkedspec-runtime/src/primary_cli.rs": {
+        "bytes": 27313,
+        "mode": 420,
+        "sha256": "b5d2ca34fc41f99e3bad43d9b054e3df2ff1f7ba5c855adba3a39026062314df"
+      },
+      "rust/linkedspec-runtime/src/recognition_transaction.rs": {
+        "bytes": 53003,
+        "mode": 420,
+        "sha256": "939d533b52739d45f7e7c16f29761357385ae6b9ffa40bf20212835d4b2f5236"
+      },
+      "rust/linkedspec-runtime/src/runtime.rs": {
+        "bytes": 100613,
+        "mode": 420,
+        "sha256": "0f95699ecd6ba0a37729d85b7023ffcff5d4950650232725ae447b1790f2a9dc"
+      },
+      "rust/linkedspec-runtime/src/semantic_index.rs": {
+        "bytes": 25946,
+        "mode": 420,
+        "sha256": "586f8a3804a1d68670453d508aa6400be8670196dbfb8fed4a78828cc31c5824"
+      },
+      "rust/linkedspec-runtime/src/semantic_index/call_projection.rs": {
+        "bytes": 42492,
+        "mode": 420,
+        "sha256": "0b42e96a28e0ad834fe98c0c2028a872f63841322ce59d3bfee51ce3834870bf"
+      },
+      "rust/linkedspec-runtime/src/semantic_index/query.rs": {
+        "bytes": 34290,
+        "mode": 420,
+        "sha256": "1e64f6af966c5df1fbb5c259206ebcabfa1a51771aa38d6afc7c21776668f2ba"
+      },
+      "rust/linkedspec-runtime/src/semantic_index/runtime_projection.rs": {
+        "bytes": 9816,
+        "mode": 420,
+        "sha256": "f6c771e25c969001b700655ef983f84333b7cb28fa6eca16ba4b259a2267c79d"
+      },
+      "rust/linkedspec-runtime/src/semantic_index/static_projection.rs": {
+        "bytes": 56205,
+        "mode": 420,
+        "sha256": "4e689752877755999c44def782b3b2af10b1b10a92b6ba4e3dcca07aecae5168"
+      },
+      "rust/linkedspec-runtime/src/semantic_observation.rs": {
+        "bytes": 4751,
+        "mode": 420,
+        "sha256": "5f570ff4a9d33aebe0c525afea6a6ae226e885e483e34ca486202e717a3c5e16"
+      },
+      "rust/linkedspec-runtime/src/source_emitter.rs": {
+        "bytes": 54538,
+        "mode": 420,
+        "sha256": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b"
+      },
+      "rust/linkedspec-runtime/src/source_location.rs": {
+        "bytes": 17787,
+        "mode": 420,
+        "sha256": "ae96ffc1bb26eaa7ed88cb701aeccdc36ba68cc18a45f953d42bb391c88f8120"
+      },
+      "rust/linkedspec-runtime/src/spec_loader.rs": {
+        "bytes": 17279,
+        "mode": 420,
+        "sha256": "849dc6ae9775c693f7c112b6ed9bcbf5370e22f7f3d9bb3e07e3307ace9e2131"
+      },
+      "rust/linkedspec-runtime/src/spec_parser.rs": {
+        "bytes": 39214,
+        "mode": 420,
+        "sha256": "d25de1bfd0a36de1979049072431e14c3319cf9297899b9f0be56c321a165560"
+      },
+      "rust/linkedspec-runtime/src/staged_ast_enrichment.rs": {
+        "bytes": 107442,
+        "mode": 420,
+        "sha256": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245"
+      },
+      "rust/linkedspec-runtime/src/staged_parse_job.rs": {
+        "bytes": 11273,
+        "mode": 420,
+        "sha256": "5f5aad25051a97d03d93008b214ba1652e7e6cf7243b884668ae18f8460fd61d"
+      },
+      "rust/linkedspec-runtime/src/staged_parser_registry.rs": {
+        "bytes": 24700,
+        "mode": 420,
+        "sha256": "8fdd3a75fbb411a1783d19201678b4c5df66f9f7198b8b469c475366770b1a89"
+      },
+      "rust/linkedspec-runtime/src/unicode_case_mapping.rs": {
+        "bytes": 97636,
+        "mode": 420,
+        "sha256": "33e24ab8fbb5954849f43f1a3f34c6c9afc1094524c3839e32040f327a96f669"
+      },
+      "rust/linkedspec-runtime/tests/action_source_fidelity.rs": {
+        "bytes": 2617,
+        "mode": 420,
+        "sha256": "fdf946c68ae0a3e1c9489ba8c4eaf30ac38fe2529ec59b61a7033ccd089e6460"
+      },
+      "rust/linkedspec-runtime/tests/active_edge_body_candidates.rs": {
+        "bytes": 8374,
+        "mode": 420,
+        "sha256": "cde6f869c19826e842dd2d11add4383c0479255aaeae65ec828c32dbe979fb57"
+      },
+      "rust/linkedspec-runtime/tests/aggregate_numeric_receivers.rs": {
+        "bytes": 3597,
+        "mode": 420,
+        "sha256": "43617af7c0ed67b5b0702630dde7e136cff4913f9c5b488b89d5fb83f86c6cc2"
+      },
+      "rust/linkedspec-runtime/tests/aggregate_operand_snapshots.rs": {
+        "bytes": 2513,
+        "mode": 420,
+        "sha256": "3d46f7a1a12bfae43278025d37542fcabb96da2b9d985402f2917b217b3ab36b"
+      },
+      "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs": {
+        "bytes": 10952,
+        "mode": 420,
+        "sha256": "a1754834039bd30a7a48266f1f006319347f970311f4eb8127e120fd90f3e6b4"
+      },
+      "rust/linkedspec-runtime/tests/array_transform_writeback.rs": {
+        "bytes": 3409,
+        "mode": 420,
+        "sha256": "abc7127e78ac1db2120386e296f1ffdd0202ae9d14f85eacdee00866b9cc7261"
+      },
+      "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs": {
+        "bytes": 3745,
+        "mode": 420,
+        "sha256": "be27a315c57374d1c6148e879d7b007fc4be11a6704a8c91929fb3ae35e4f6a4"
+      },
+      "rust/linkedspec-runtime/tests/blind_parent_push.rs": {
+        "bytes": 7083,
+        "mode": 420,
+        "sha256": "c8492e8d35d0b7792f410fe1845bf0625d147a1d2720b8a45c30ac9422d101e0"
+      },
+      "rust/linkedspec-runtime/tests/blind_postcall_results.rs": {
+        "bytes": 5407,
+        "mode": 420,
+        "sha256": "88d2533a8ceab15a77a8d541c334cf551ab43e222bb953464382e140bb24a7ed"
+      },
+      "rust/linkedspec-runtime/tests/blind_repetition_collection.rs": {
+        "bytes": 3296,
+        "mode": 420,
+        "sha256": "c332109ae92f7dae855a1b18a90edf5e9aef0f6638098411b5ead10a955eac54"
+      },
+      "rust/linkedspec-runtime/tests/boundary_capture_fluent_results.rs": {
+        "bytes": 6393,
+        "mode": 420,
+        "sha256": "f2ecee33a6a1cdd9c0bf55e8c214b336cd9a5297e742b9a4d7b5701285b6a28d"
+      },
+      "rust/linkedspec-runtime/tests/callable_codeblock_literal_contract.rs": {
+        "bytes": 32997,
+        "mode": 420,
+        "sha256": "935137a5ed8917be7811667e2bcbdca131b7114ac0c33b0aacdc25a79d3c30cf"
+      },
+      "rust/linkedspec-runtime/tests/callback_identity.rs": {
+        "bytes": 5831,
+        "mode": 420,
+        "sha256": "ec68a1c625cedfe207991f553846054408f5cf218c20ba7373ca0fd0921fecb8"
+      },
+      "rust/linkedspec-runtime/tests/capture_advance_number_results.rs": {
+        "bytes": 6283,
+        "mode": 420,
+        "sha256": "2a5c5c104e52feba1cb1379c78854e581c015f251c70d17e232f3995ba8efc26"
+      },
+      "rust/linkedspec-runtime/tests/capture_advance_text_results.rs": {
+        "bytes": 6445,
+        "mode": 420,
+        "sha256": "67dedb4677e711035a9f77ca1f330f48ae4241d206b30ead2fe3abc729466dc6"
+      },
+      "rust/linkedspec-runtime/tests/capture_boundary_number_results.rs": {
+        "bytes": 5127,
+        "mode": 420,
+        "sha256": "b2fb1ec5fec574f5c55aa038b3052d46321c9e7638d54b4ca333d54f0f81bbf0"
+      },
+      "rust/linkedspec-runtime/tests/capture_boundary_text_results.rs": {
+        "bytes": 6070,
+        "mode": 420,
+        "sha256": "359292f463aa1a0f4992ba1ea3e8e40cc8695411bacb640c10d220a9df97d3a9"
+      },
+      "rust/linkedspec-runtime/tests/capture_collection_selection.rs": {
+        "bytes": 4045,
+        "mode": 420,
+        "sha256": "88ced79c803448d28e1c7ba7b32ab3dab90e4ee8347be948dae6359b0430eb42"
+      },
+      "rust/linkedspec-runtime/tests/capture_endpoint_absence.rs": {
+        "bytes": 3040,
+        "mode": 420,
+        "sha256": "077a15226e606403a26948d4719154d4b6ae5752d95a53aafe32cbff1379c9e9"
+      },
+      "rust/linkedspec-runtime/tests/capture_reset_value_block.rs": {
+        "bytes": 9044,
+        "mode": 420,
+        "sha256": "f027ff631ecd89bb48486f69975ad2e697bee883982d9daa0b2c36498c5d3005"
+      },
+      "rust/linkedspec-runtime/tests/coalesce_lazy_values.rs": {
+        "bytes": 2589,
+        "mode": 420,
+        "sha256": "722368fd643201794842fa994e813ee0e179dd828d77a343ab3971dfff6e0318"
+      },
+      "rust/linkedspec-runtime/tests/coalesce_nonempty_values.rs": {
+        "bytes": 2557,
+        "mode": 420,
+        "sha256": "cf4f92acc36baf3544ff46c215da889c4625e839fbb26312144c76845198b55a"
+      },
+      "rust/linkedspec-runtime/tests/coalesce_receiver_values.rs": {
+        "bytes": 2502,
+        "mode": 420,
+        "sha256": "90a8b4ab5806b29ecd22a63cd5e007ab5ce2e1ca292df9ea699a7495233508b5"
+      },
+      "rust/linkedspec-runtime/tests/complete_named_mark_contract.rs": {
+        "bytes": 3167,
+        "mode": 420,
+        "sha256": "00750f546668f63acd29ddcf732f869262f6ea9833ae503ae9b82e5a9d6dccce"
+      },
+      "rust/linkedspec-runtime/tests/computed_selection.rs": {
+        "bytes": 3768,
+        "mode": 420,
+        "sha256": "c4872959f24603961c6225e9239451d3af1e21c46cfee2ab9ae396b41519363c"
+      },
+      "rust/linkedspec-runtime/tests/conditional_selection.rs": {
+        "bytes": 3178,
+        "mode": 420,
+        "sha256": "c852f2841bd430e3e1e2b2b15356a5740a0d68e00d040db42e1e20d6e2b9c431"
+      },
+      "rust/linkedspec-runtime/tests/constructor_result_composition.rs": {
+        "bytes": 7743,
+        "mode": 420,
+        "sha256": "45c58804c9c63415e8cb7fbfcfc7cc6da25f1ae337c916098ff3ea55aab05c6f"
+      },
+      "rust/linkedspec-runtime/tests/contains_null_prefix_with_preservation.rs": {
+        "bytes": 2892,
+        "mode": 420,
+        "sha256": "afecbeb2b23126ce7387046dab58817a3f7ab8ede7a4ee1aeb474904498ee2f3"
+      },
+      "rust/linkedspec-runtime/tests/contains_result_guard_composition.rs": {
+        "bytes": 6331,
+        "mode": 420,
+        "sha256": "bbedb2d95fd8f55d3edd6a8cf315e77a02970856e314b290797ba258e7ce0de7"
+      },
+      "rust/linkedspec-runtime/tests/contains_result_receivers.rs": {
+        "bytes": 2789,
+        "mode": 420,
+        "sha256": "ccbeed563fd503f901222ca8218ae6a248e5aaaeefe17c3cb5a85b32c2e5ec86"
+      },
+      "rust/linkedspec-runtime/tests/copied_null_contains_composition.rs": {
+        "bytes": 3817,
+        "mode": 420,
+        "sha256": "2329027bf51d01735b2d8db6b7131b1c33e8f6d83d5484a49cbd6a92d630b11e"
+      },
+      "rust/linkedspec-runtime/tests/copied_null_index_composition.rs": {
+        "bytes": 5071,
+        "mode": 420,
+        "sha256": "83df4db02d7c2dbe33c1e517cbfde9df48dc8067a441b0ed201beadff77d04d0"
+      },
+      "rust/linkedspec-runtime/tests/copied_null_presence_composition.rs": {
+        "bytes": 4203,
+        "mode": 420,
+        "sha256": "20d6775062feb44134c58385db1cd4f9af03c1f1ee549ce8f22699b648dd1097"
+      },
+      "rust/linkedspec-runtime/tests/corpus/README.md": {
+        "bytes": 6381,
+        "mode": 420,
+        "sha256": "85cd1602b2fb18169840f3a83ba093955c248fe357d632910275a0a10d9cceeb"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/expected.json": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "ae3574cd59f0a8fc31814984e12a30bc501550c9841ffb36754bfaa21f5f98d8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.spec": {
+        "bytes": 93,
+        "mode": 420,
+        "sha256": "688f57b5524113acf25ece485820448cd8f9a9a32c04d2a9b6a428bc26216ebc"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/expected.json": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "ae3574cd59f0a8fc31814984e12a30bc501550c9841ffb36754bfaa21f5f98d8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.spec": {
+        "bytes": 109,
+        "mode": 420,
+        "sha256": "7099c199d8e280a96e6d7f2dfb47b773141c507865f62f2a8a8f276a6ffebb97"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/expected.json": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "ae3574cd59f0a8fc31814984e12a30bc501550c9841ffb36754bfaa21f5f98d8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.spec": {
+        "bytes": 93,
+        "mode": 420,
+        "sha256": "688f57b5524113acf25ece485820448cd8f9a9a32c04d2a9b6a428bc26216ebc"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/expected.json": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "24a279376551117f31ed9d92797023d0f89b376a6392801c7d6626e4cb7877e5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.spec": {
+        "bytes": 57,
+        "mode": 420,
+        "sha256": "6515cb1e713d06b6495958b4715e5b23431993f0a2473049801f82ed167f86f9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/expected.json": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "24a279376551117f31ed9d92797023d0f89b376a6392801c7d6626e4cb7877e5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.spec": {
+        "bytes": 68,
+        "mode": 420,
+        "sha256": "4bb8ac3ffcb1e22f1a770a00dc3504123de43b14edf41ffc5625d71d2a30fc29"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/expected.json": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "24a279376551117f31ed9d92797023d0f89b376a6392801c7d6626e4cb7877e5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.spec": {
+        "bytes": 57,
+        "mode": 420,
+        "sha256": "6515cb1e713d06b6495958b4715e5b23431993f0a2473049801f82ed167f86f9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/expected.json": {
+        "bytes": 12,
+        "mode": 420,
+        "sha256": "1044cdfb71c1f490fae6d1083e718d0cbf652b654605b5215dd2ff38e6e0046b"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.spec": {
+        "bytes": 53,
+        "mode": 420,
+        "sha256": "bf5e358979fc340facc39f650c8f494fe19e6f86007fea84e706e6f2c084e311"
+      },
+      "rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/expected.json": {
+        "bytes": 405,
+        "mode": 420,
+        "sha256": "d933cc4288ac2b21d3bcbcfd7b843f28206a677868d7c5de0288323f6519623c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.spec": {
+        "bytes": 1368,
+        "mode": 420,
+        "sha256": "22b52d8899f2891f8807afbe1c477556c686bb2f6fcedb8f1513628b4e9441d0"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.txt": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "31de4315077d8b860840d73e01ee3490a5d882525fab1a668842698a836b0a6a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/expected.json": {
+        "bytes": 529,
+        "mode": 420,
+        "sha256": "f7b396e1ccf41a76d9182ddca14ee396f07222b55b5a7b34f6c564047143f9ce"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.spec": {
+        "bytes": 1796,
+        "mode": 420,
+        "sha256": "ae3588eae6e6052d0d3257b82552d31cdc982d1c637081c0aaa764ac969758ef"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.txt": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "31de4315077d8b860840d73e01ee3490a5d882525fab1a668842698a836b0a6a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/expected.json": {
+        "bytes": 27,
+        "mode": 420,
+        "sha256": "fae9c4bb51d327ddd25f76fb7f30f59d259fcbf2b36069f63897e3e7001d9206"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.spec": {
+        "bytes": 349,
+        "mode": 420,
+        "sha256": "355a9d0bd7b962bfa0782693978f0d29c46b58847c49cde7418a8d05927bb92d"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.txt": {
+        "bytes": 1,
+        "mode": 420,
+        "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/expected.json": {
+        "bytes": 119,
+        "mode": 420,
+        "sha256": "17b6101914b25410c8153a131cb6d47760d1b422a745466dd7500b820747f12a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.spec": {
+        "bytes": 491,
+        "mode": 420,
+        "sha256": "ed723182b9ced1461b0c76e6d0a63355d059a2e9f1802e7f1d9f0b275bcd8380"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.txt": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "fb8e20fc2e4c3f248c60c39bd652f3c1347298bb977b8b4d5903b85055620603"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/expected.json": {
+        "bytes": 864,
+        "mode": 420,
+        "sha256": "f0617535cd64b40f5d0e4229e200124f7a3e92c651ca7a3d0b13d62fe38dda6e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.spec": {
+        "bytes": 1188,
+        "mode": 420,
+        "sha256": "a47d1d7994ce799205f6ea11a154bafcae4330ba911b07c7e664a795fe1a5d81"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.txt": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "fb8e20fc2e4c3f248c60c39bd652f3c1347298bb977b8b4d5903b85055620603"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/expected.json": {
+        "bytes": 803,
+        "mode": 420,
+        "sha256": "f1ffc22cfef2b39b5e54e1c981e6457d87980e6f18fe3a4ecfa00cb6787708b5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.spec": {
+        "bytes": 1089,
+        "mode": 420,
+        "sha256": "0217a35a04029e3ec4e782f0f93c53e09331bfd7b7f84b9389148669f689e1bb"
+      },
+      "rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.txt": {
+        "bytes": 1,
+        "mode": 420,
+        "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/expected.json": {
+        "bytes": 404,
+        "mode": 420,
+        "sha256": "bb859a2fff632c52a98756bac9a53856fb86cf20480c8c0b92f02ee6bc1b1947"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.spec": {
+        "bytes": 3523,
+        "mode": 420,
+        "sha256": "86c24f62739cd6099b12be742511f77a12b128f3cbb2080f872157fb8ef26477"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.txt": {
+        "bytes": 63,
+        "mode": 420,
+        "sha256": "7ed760b166984cb313bb0540faf8ce704b6db037c4d4afbdffdcdf8e7833d2dc"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/expected.json": {
+        "bytes": 519,
+        "mode": 420,
+        "sha256": "205f03616546185908695ff420d92b3bf521e5ba0a1d0ea66a493e0cd2c1b339"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.spec": {
+        "bytes": 7029,
+        "mode": 420,
+        "sha256": "a9082820aed7e3a0f934a25c6e31e71f48f6604a6a2effe804625a8ff1eda054"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.txt": {
+        "bytes": 40,
+        "mode": 420,
+        "sha256": "46ad571b16ef7c06b44a9bf454bd265e53502bbe899885e1bf2223161a08654a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/expected.json": {
+        "bytes": 290,
+        "mode": 420,
+        "sha256": "f7646e28a5d4393b55819a3244fb65baa32142eb811ad6996dfc30275128feaa"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.spec": {
+        "bytes": 7029,
+        "mode": 420,
+        "sha256": "a9082820aed7e3a0f934a25c6e31e71f48f6604a6a2effe804625a8ff1eda054"
+      },
+      "rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.txt": {
+        "bytes": 39,
+        "mode": 420,
+        "sha256": "d21e85b79d58ab9cd5b2b367d6179bf9c38409b9a3560707048f8e4df40150cd"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/expected.json": {
+        "bytes": 13,
+        "mode": 420,
+        "sha256": "f8b26f99721bddab8f85d47ccdbb5be4cc8d0c55c372572e1ac6be36b1c21006"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.spec": {
+        "bytes": 925,
+        "mode": 420,
+        "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.txt": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "c93852370e1b1afda3feeb94ffda3df904cea135ea2107abc216358853df375a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/expected.json": {
+        "bytes": 15,
+        "mode": 420,
+        "sha256": "9d470e25292525caf986c24310bcd7fdb2912b7f6e735c7c51eb97407e7f65cc"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec": {
+        "bytes": 925,
+        "mode": 420,
+        "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.txt": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "bcdfc8bcdcd251838393eca16cc5812ee2869fca30d88dd14e25fd50af83f644"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/expected.json": {
+        "bytes": 35,
+        "mode": 420,
+        "sha256": "201a25afb8822de8d358a730420580b0ce0a4717581ec619b7e0febcd319d4f9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.spec": {
+        "bytes": 925,
+        "mode": 420,
+        "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.txt": {
+        "bytes": 13,
+        "mode": 420,
+        "sha256": "a7b8bc2bd1865c60eaf580aca9058d975c4e1560c5395cff5762b3a441281173"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/expected.json": {
+        "bytes": 26,
+        "mode": 420,
+        "sha256": "d3d778adf9be75250bbbfcb5cd806c19e020c0a83eb28334c40733ea615bf0fd"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.spec": {
+        "bytes": 925,
+        "mode": 420,
+        "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.txt": {
+        "bytes": 14,
+        "mode": 420,
+        "sha256": "560b5cadcbd8c3df889f36a9f738c63f02df1e2b816676982ed1300a796ada77"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_raw_string/expected.json": {
+        "bytes": 20,
+        "mode": 420,
+        "sha256": "8c0760e3f3800f1a685230bea026693f49aacf097a8ac6272056bad238afd240"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.spec": {
+        "bytes": 925,
+        "mode": 420,
+        "sha256": "654d5c88a07bb9a067de3c13d7fa3a7616092d2c15be522f23a7ce6b8205172e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.txt": {
+        "bytes": 10,
+        "mode": 420,
+        "sha256": "c9ecf5e54c7b3f2640ecca21f96d4c3625a2b7935104f41c5ede29935a9e52c9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/expected.json": {
+        "bytes": 211,
+        "mode": 420,
+        "sha256": "6831df0ee46d680bdf8afacbe13ca97c4b72ea8b3a503f5d81952e569e4b2717"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.spec": {
+        "bytes": 917,
+        "mode": 420,
+        "sha256": "5705d98ddde28ad2c9c36573b1429039ea04f6551698b2381b79d400b84e12fb"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.txt": {
+        "bytes": 31,
+        "mode": 420,
+        "sha256": "8969acd8b08c7ec4ed628fee591a7a31173d51d585b76fd097c006022c2137ca"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/expected.json": {
+        "bytes": 158,
+        "mode": 420,
+        "sha256": "8e46f0cb14c854a9310c21d2deeb0f6dbf187ebb8bd094d95cab29805bbd49ec"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.spec": {
+        "bytes": 917,
+        "mode": 420,
+        "sha256": "5705d98ddde28ad2c9c36573b1429039ea04f6551698b2381b79d400b84e12fb"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.txt": {
+        "bytes": 28,
+        "mode": 420,
+        "sha256": "82020fe3043c06cf4b3d798d7c278d5d7f288c86787d98d8dd729f077c0ee2c9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lispish_x_y/expected.json": {
+        "bytes": 32,
+        "mode": 420,
+        "sha256": "b469ae5e707ab10d8cd54ee3c342d7af3310bdbc941ac550f3dc94b380c943c9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.spec": {
+        "bytes": 2364,
+        "mode": 420,
+        "sha256": "1aca70b0a5dca6f2d788f07275e4746426964062ccbe6dffcc129594807583ab"
+      },
+      "rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.txt": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "b2cac70a85d6e1a2e44ae3e80097942e7d4f407e5c97805420d1b17612ca221f"
+      },
+      "rust/linkedspec-runtime/tests/corpus/manifest.json": {
+        "bytes": 4497,
+        "mode": 420,
+        "sha256": "96404f8aabdcefcba517f229c9c3c2f94c4f51dd4c2a7c8fbee94e6ed27e1d28"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_bare/expected.json": {
+        "bytes": 39,
+        "mode": 420,
+        "sha256": "a378ff2941a8f6cc4b02501299a41c85d7c4cdb7308a2e095b0e64362f74f199"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_bare/input.spec": {
+        "bytes": 1153,
+        "mode": 420,
+        "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_bare/input.txt": {
+        "bytes": 3,
+        "mode": 420,
+        "sha256": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_bit/expected.json": {
+        "bytes": 49,
+        "mode": 420,
+        "sha256": "88ee33718a5f56a73b8fd90dcce5a024c5ed2f604d65e715d6211d4fbc6011b8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_bit/input.spec": {
+        "bytes": 1153,
+        "mode": 420,
+        "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_bit/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "1d183580d5b76b4c42b9a80c21025d83c5bd23c98be65c18b56898a9ab1a7b55"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_concatenation/expected.json": {
+        "bytes": 203,
+        "mode": 420,
+        "sha256": "96a7d451c32e4a8d41a6cc3d772d5026cfbd6072de32d04fe0cfb94c9c30b0d9"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.spec": {
+        "bytes": 1153,
+        "mode": 420,
+        "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.txt": {
+        "bytes": 12,
+        "mode": 420,
+        "sha256": "236640768ce5c50f5f5713607506f55c5f942dcc3fba4a09fa6f4735e4dea217"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_constant/expected.json": {
+        "bytes": 44,
+        "mode": 420,
+        "sha256": "88cdb4f518013359cf0f75e33b40cc99731ec617e6093b2d62f0b13ac3400e0c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_constant/input.spec": {
+        "bytes": 1153,
+        "mode": 420,
+        "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_constant/input.txt": {
+        "bytes": 4,
+        "mode": 420,
+        "sha256": "922783559b2a7bbad9720fdfd9cc6b5419c1ce5fcf5dd43bf35ef8c0bfb06ec0"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_slice/expected.json": {
+        "bytes": 62,
+        "mode": 420,
+        "sha256": "e3f50561a91777d3241f3f7819d81fae0d4c7350f384da604d354010aa173bec"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_slice/input.spec": {
+        "bytes": 1153,
+        "mode": 420,
+        "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/portmap_slice/input.txt": {
+        "bytes": 8,
+        "mode": 420,
+        "sha256": "ae3c4fae4ba6e831f3f86de970d56fa43305c506f4c6566b01a610aa9aab6d55"
+      },
+      "rust/linkedspec-runtime/tests/corpus/pplugin_empty/expected.json": {
+        "bytes": 3,
+        "mode": 420,
+        "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      "rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.spec": {
+        "bytes": 650,
+        "mode": 420,
+        "sha256": "5f165a65b8fac5e1bb55997eb2dfa0be2bc264d7b3e8017eb759764202c1b31c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.txt": {
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/expected.json": {
+        "bytes": 26,
+        "mode": 420,
+        "sha256": "f374ac42f688feb797acccedb5222639b82f338a99c5eb888eec2bc34d06d964"
+      },
+      "rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.spec": {
+        "bytes": 68,
+        "mode": 420,
+        "sha256": "e9a8eaefc82f5a494c24672953a9d50e07631ac7e84512b0ff8e734ec2e53ed5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/expected.json": {
+        "bytes": 12,
+        "mode": 420,
+        "sha256": "5995d35dc51221ddaf6c68d8d0d1e25bf5b70f8c44cf038edc8974d2e952d91b"
+      },
+      "rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.spec": {
+        "bytes": 57,
+        "mode": 420,
+        "sha256": "b92981a56804db49fd32f26214f7d90b9646cb0b2bc6f972d0f9ff90c05a9d2f"
+      },
+      "rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/expected.json": {
+        "bytes": 311,
+        "mode": 420,
+        "sha256": "fbb8ebac6c84be5e2b7cdbd58e7065b60af0f6f589aadecdb2fb5d2dde9b3c04"
+      },
+      "rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.spec": {
+        "bytes": 608,
+        "mode": 420,
+        "sha256": "61a244abd049ed1537d923d1526f3250f8cc5b8ea4351691b7ce0a4eca41f192"
+      },
+      "rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.txt": {
+        "bytes": 80,
+        "mode": 420,
+        "sha256": "a3d018da92ba217e8eaa3ee43c07c0c35b3cd78184f8916bf1a3f33dc816fdb5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/expected.json": {
+        "bytes": 291,
+        "mode": 420,
+        "sha256": "56c346f77d7072caeaeb33896a28bd6a4ac5be2fa19b216d73804062c70640e4"
+      },
+      "rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.spec": {
+        "bytes": 12687,
+        "mode": 420,
+        "sha256": "b0566013312ae33631de4a52166f8f81d944ef12b09f4bdedbeab62eed8d36fa"
+      },
+      "rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.txt": {
+        "bytes": 28,
+        "mode": 420,
+        "sha256": "ad33131fbbf0ba025b8f8b95a17e80db199cb586717d7b03cdec11e8ce35fd94"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/expected.json": {
+        "bytes": 499,
+        "mode": 420,
+        "sha256": "7d15fc07125edd071ccde77d808b8bd2a2bc5c7958e0f84927dee8ce8222d015"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.spec": {
+        "bytes": 83434,
+        "mode": 420,
+        "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.txt": {
+        "bytes": 48,
+        "mode": 420,
+        "sha256": "1148d81b3111a14fd4f2f8809ec347be8abfd4a74488dbc71d65cb622500f406"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/expected.json": {
+        "bytes": 192,
+        "mode": 420,
+        "sha256": "2a681dd09b5b4379ddeaa8976143fad38acef9c84ee0f0686d9a1a3a1f29dd91"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec": {
+        "bytes": 83434,
+        "mode": 420,
+        "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.txt": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "5d3b7af515e65d57f5a24e758fbc5990586c4a4dd0432f6eb7a786cc92724d73"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/expected.json": {
+        "bytes": 192,
+        "mode": 420,
+        "sha256": "2a681dd09b5b4379ddeaa8976143fad38acef9c84ee0f0686d9a1a3a1f29dd91"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec": {
+        "bytes": 83434,
+        "mode": 420,
+        "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.txt": {
+        "bytes": 11,
+        "mode": 420,
+        "sha256": "b2ed5d77c631af3fb2138471777af573d60805720ed04dc20c9a5e8a8c45dfeb"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/expected.json": {
+        "bytes": 664,
+        "mode": 420,
+        "sha256": "e5bb1ac8aa9061bd49de245683800e416fa3e74fbb2e710911a2335b22e521d0"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec": {
+        "bytes": 83434,
+        "mode": 420,
+        "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee"
+      },
+      "rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.txt": {
+        "bytes": 95,
+        "mode": 420,
+        "sha256": "c76fe8735be56b6d9317e7d8d4a678bbfe9b71231a3dec233892beeb20c14211"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/expected.json": {
+        "bytes": 102,
+        "mode": 420,
+        "sha256": "ce9aea8b784021661fdd539dcd929215aef2fa9be08199fb2a48cbc48af407b7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.spec": {
+        "bytes": 1839,
+        "mode": 420,
+        "sha256": "39d232ce1f7f87f3ab2bbc226f864dcca487bc103b27c3e55ab4ac2334660882"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.txt": {
+        "bytes": 15,
+        "mode": 420,
+        "sha256": "d607fe9bd4159d5a9bfcf6876a6d14f924e603c17b8f8e7c2bb4d436720f5f61"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tclite_command_subst/expected.json": {
+        "bytes": 89,
+        "mode": 420,
+        "sha256": "514aa16067ea991f8ebd74698653952a1af58babf87c9dee242b464d3a405ab1"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.spec": {
+        "bytes": 969,
+        "mode": 420,
+        "sha256": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.txt": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tclite_double_quote/expected.json": {
+        "bytes": 88,
+        "mode": 420,
+        "sha256": "7470ffc121ff5d13a5bbdd0dbe356e4e1611fc6e759a1f32118b9036a6077d8f"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.spec": {
+        "bytes": 969,
+        "mode": 420,
+        "sha256": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.txt": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/expected.json": {
+        "bytes": 170,
+        "mode": 420,
+        "sha256": "f23f8d54d7396a55b06dc9db588c619049589d80898be3682bf64dc619ea39c1"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.spec": {
+        "bytes": 363,
+        "mode": 420,
+        "sha256": "84e0337cedf5498f2ea5cc5d432d0564a9f937fe1ca876c033a6a585b2f71d8f"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/expected.json": {
+        "bytes": 195,
+        "mode": 420,
+        "sha256": "8ea90a7325ed237fe36a763ab03350870de1e836adb6c1c576cada1c156f2d1a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.spec": {
+        "bytes": 274,
+        "mode": 420,
+        "sha256": "29a9103ff0e8f0b34bb97581e4fb1260395bed97c19f3a6b8d7c6586030ac5e0"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/expected.json": {
+        "bytes": 463,
+        "mode": 420,
+        "sha256": "a38954208c1ff071a2c78274bf6ddffcb5ec5b96b4d9496d253c4289de8d64ef"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.spec": {
+        "bytes": 380,
+        "mode": 420,
+        "sha256": "35d6122d1ee05a4d6636849a0ae07d423cab1d64e6a43537edb96b2785d53514"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/expected.json": {
+        "bytes": 179,
+        "mode": 420,
+        "sha256": "a20df9c5ab816d0e2f5b724a61f4678593c71db050598d4c025f99c8ce8cdff6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.spec": {
+        "bytes": 462,
+        "mode": 420,
+        "sha256": "89b57fb04743dd92d86307b6febff1ff1a790e7719e5b72025043068fd845f62"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/expected.json": {
+        "bytes": 198,
+        "mode": 420,
+        "sha256": "f54d2343ddeb98483e1094b02b6cfa299fe6be02b41c22e7b6046dffab9aa9c8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.spec": {
+        "bytes": 633,
+        "mode": 420,
+        "sha256": "73113e3378dd0c2c44db437cda56e72926c14162175bed09438061867caf82ca"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/expected.json": {
+        "bytes": 72,
+        "mode": 420,
+        "sha256": "883100e370ff24f40bec6658de702fca9285f23d5d41c407b78fbc92d4d86713"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.spec": {
+        "bytes": 232,
+        "mode": 420,
+        "sha256": "ab72b5133dc7e58df542208df2e1ac5f385eceda4360cd8356178b94fb9a2880"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/expected.json": {
+        "bytes": 50,
+        "mode": 420,
+        "sha256": "32fa7db723c13d411bc25010e145047ac8e00d4c8c26db0b82c36e01e5848fe5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.spec": {
+        "bytes": 290,
+        "mode": 420,
+        "sha256": "9beb28a1000fdccf243020a87b7c432a0c3446b36bec3f3ac814cf2c5077ef73"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/expected.json": {
+        "bytes": 48,
+        "mode": 420,
+        "sha256": "41972059d317aa39c2a2ca47f43d9e8cd6be6ef15417fbe478170e44f36f8507"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.spec": {
+        "bytes": 396,
+        "mode": 420,
+        "sha256": "2b5dc32e52540aefdaf40cd7b29bbd0eff1e2be9309369058579837eb3f50666"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/expected.json": {
+        "bytes": 78,
+        "mode": 420,
+        "sha256": "865025acac7e227580172a8b7b8f98855415d91474986431356d3ea24a1cbcef"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.spec": {
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "d5169c8247a2000dde3f99b0900a97895763cc84eac3d5fa3b76d962ab6f373c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/expected.json": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "ae3574cd59f0a8fc31814984e12a30bc501550c9841ffb36754bfaa21f5f98d8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.spec": {
+        "bytes": 93,
+        "mode": 420,
+        "sha256": "688f57b5524113acf25ece485820448cd8f9a9a32c04d2a9b6a428bc26216ebc"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/expected.json": {
+        "bytes": 11,
+        "mode": 420,
+        "sha256": "5a7630359eb5b441e6b1825661b49d1e93ce94f66ab5e487b7668bd633c5792b"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.spec": {
+        "bytes": 75,
+        "mode": 420,
+        "sha256": "b37ac227b7ed8cf9ad67a93b117da3fca4bef2ed7f96dfbc356f5de60a7ee6a3"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/expected.json": {
+        "bytes": 21,
+        "mode": 420,
+        "sha256": "bc2b026a418b55a4b4ecd80a61beb567b53014e58880d52b33783c099954d029"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.spec": {
+        "bytes": 85,
+        "mode": 420,
+        "sha256": "648360a2ad0a9d97e06c780f64198dfb24465559fd670e0c20091724f9f34d79"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/expected.json": {
+        "bytes": 21,
+        "mode": 420,
+        "sha256": "bc2b026a418b55a4b4ecd80a61beb567b53014e58880d52b33783c099954d029"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.spec": {
+        "bytes": 85,
+        "mode": 420,
+        "sha256": "648360a2ad0a9d97e06c780f64198dfb24465559fd670e0c20091724f9f34d79"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/expected.json": {
+        "bytes": 21,
+        "mode": 420,
+        "sha256": "64c99569dd7434f00181919782630fc785c1e0c4653d164517faef64c6730af6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.spec": {
+        "bytes": 111,
+        "mode": 420,
+        "sha256": "b4cd7d34dc1df1d2fce23d9fdc837941b27cf84ba76c9b64ed2a394b50420761"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/expected.json": {
+        "bytes": 77,
+        "mode": 420,
+        "sha256": "c864e640d55c238ad45b2404d04f1c879a78211bcd701c91ba769cb386eeda81"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.spec": {
+        "bytes": 251,
+        "mode": 420,
+        "sha256": "b25dac54c87c156952d2a2482d126dec3f3ece0f2237d67a6aca6a7205b49453"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/expected.json": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "24a279376551117f31ed9d92797023d0f89b376a6392801c7d6626e4cb7877e5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.spec": {
+        "bytes": 69,
+        "mode": 420,
+        "sha256": "cd73c8ad93998d36cca062bb83f5eecad499839a42c25a09d5218eee1156b059"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/expected.json": {
+        "bytes": 115,
+        "mode": 420,
+        "sha256": "6d56e0882f119d80eaed2c98ec861f0d20eaa630e3d4490024e94db62819a0ae"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.spec": {
+        "bytes": 165,
+        "mode": 420,
+        "sha256": "053ce416fcd3d24c16e0daa12cb2a4b24f830a1a56762c88a0f22e75fe7b9fcf"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/expected.json": {
+        "bytes": 132,
+        "mode": 420,
+        "sha256": "456f684bdcd729846347a9337d15d5908776420d9e964d146a72f2928629b421"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.spec": {
+        "bytes": 158,
+        "mode": 420,
+        "sha256": "9c4f62ee357eb1726c88a54b26bab8c6a792d73534f617ef64f61b042a0b711b"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/expected.json": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "ae3574cd59f0a8fc31814984e12a30bc501550c9841ffb36754bfaa21f5f98d8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.spec": {
+        "bytes": 108,
+        "mode": 420,
+        "sha256": "c2561ae8edd064d5ec808b5b8afc4eb8cbaac087f30cab298e2466dd3b341d9e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/expected.json": {
+        "bytes": 22,
+        "mode": 420,
+        "sha256": "7d25aa3ba789c0f4b512301520fbc2568f1b48c4e3690b75ce57eb6dfff64329"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.spec": {
+        "bytes": 95,
+        "mode": 420,
+        "sha256": "cd0b91430e3b081333e54b4602fd5e446dded6bf9506b9d7782f77339c2e2e4c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/expected.json": {
+        "bytes": 5,
+        "mode": 420,
+        "sha256": "24a279376551117f31ed9d92797023d0f89b376a6392801c7d6626e4cb7877e5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.spec": {
+        "bytes": 72,
+        "mode": 420,
+        "sha256": "e563391ed97004c067721f4aa57e19d138c8937e3190e4f0fe7602e991d82fe6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/expected.json": {
+        "bytes": 19,
+        "mode": 420,
+        "sha256": "ae3574cd59f0a8fc31814984e12a30bc501550c9841ffb36754bfaa21f5f98d8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.spec": {
+        "bytes": 100,
+        "mode": 420,
+        "sha256": "310ac8e9fc8d83ed427f2b28a6f059d38172499fcd9a2cd0be503062d4ee692b"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/expected.json": {
+        "bytes": 22,
+        "mode": 420,
+        "sha256": "7d25aa3ba789c0f4b512301520fbc2568f1b48c4e3690b75ce57eb6dfff64329"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.spec": {
+        "bytes": 96,
+        "mode": 420,
+        "sha256": "ba1988aa2d985095a4ea72a06af1999c62760a2ad5f4767466f634364333cbe8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/expected.json": {
+        "bytes": 3,
+        "mode": 420,
+        "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.spec": {
+        "bytes": 61,
+        "mode": 420,
+        "sha256": "2992bb5cf3c74adfd75e80df172d2dc64585356cf70445c652ef6c7ee7450f77"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/expected.json": {
+        "bytes": 12,
+        "mode": 420,
+        "sha256": "455c81c0e0b2e59b30dd1b6de3c940b4dcfcee5606f2a45cb40d03c18f49918a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.spec": {
+        "bytes": 100,
+        "mode": 420,
+        "sha256": "9f96852b6a11e554000003b556395c8dc8859dd7a7b4329ee0b7959250e80488"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/expected.json": {
+        "bytes": 81,
+        "mode": 420,
+        "sha256": "accfb143c011d2d03418a89ddc8074e54102a9535e0f487edcafda6239bd0a41"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.spec": {
+        "bytes": 197,
+        "mode": 420,
+        "sha256": "3f6293f3e55fa84015d10236277cb92c879cd2e1e8421f0a543c10448809be62"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/expected.json": {
+        "bytes": 55,
+        "mode": 420,
+        "sha256": "3c1746d913891df707ab9a780490bb8a7dd3474f7ec07a9f339425e87ba35c2d"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.spec": {
+        "bytes": 86,
+        "mode": 420,
+        "sha256": "4a7acb35b86ce1729cfef4ade56f04c10e8bb893a84250821ab8493940961455"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/expected.json": {
+        "bytes": 66,
+        "mode": 420,
+        "sha256": "6eb45342ffd4d8e2281b9fb8e924f527611af615646aaa7d59853f0e05511076"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.spec": {
+        "bytes": 170,
+        "mode": 420,
+        "sha256": "ee831ef4e99b9645d54f156b9204670bc313703a650336a6ebe51d543e2bb709"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/expected.json": {
+        "bytes": 4,
+        "mode": 420,
+        "sha256": "ee195db0cd14979ece92e4ac42d91fef87d1ee254f8df170907cd674dab12d44"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.spec": {
+        "bytes": 65,
+        "mode": 420,
+        "sha256": "aead961499eaaa450b12b2eb8ec53034078e4794b99ddb43296cbcebafab3d8d"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/expected.json": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "9b9150f062f17c62a85d839d86fb5253802c63079f6733832008d6e1e14db66e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.spec": {
+        "bytes": 135,
+        "mode": 420,
+        "sha256": "5d0da3c4a2035505eb6bff771f497ee56f64eff38b774b0629f51d2194045e97"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/expected.json": {
+        "bytes": 11,
+        "mode": 420,
+        "sha256": "5a7630359eb5b441e6b1825661b49d1e93ce94f66ab5e487b7668bd633c5792b"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.spec": {
+        "bytes": 179,
+        "mode": 420,
+        "sha256": "953faf022c2bb2caa371f2be554074940f552e1683fb637eb5e588be8e32fcf8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/expected.json": {
+        "bytes": 51,
+        "mode": 420,
+        "sha256": "d5a980e3a5bb4b8755286f012d91146de4a20e6c515972646fbc03a2fa2edbef"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.spec": {
+        "bytes": 157,
+        "mode": 420,
+        "sha256": "5e4bcfdcd5227704721b91508489e92b21c98068753579354b6f8a5106a6b0af"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/expected.json": {
+        "bytes": 38,
+        "mode": 420,
+        "sha256": "b91ab810bdfe9395167e3cf722a877f9ac4a2c4afbaf5854c88c6e8c23e3e4e6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.spec": {
+        "bytes": 118,
+        "mode": 420,
+        "sha256": "494ac49d4213ecc8068ef09f51bfd4a08b03df62b67c1f84aad73781bda41536"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/expected.json": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "9151b31d08300a79db9374424c9b1be713f607cd0cd7a0f96b42b834f3e05cf7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.spec": {
+        "bytes": 118,
+        "mode": 420,
+        "sha256": "0af99e3a8b91959c8d1502e290dbf7707502d52db8e26d9c333c0f07e65771df"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/expected.json": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "9151b31d08300a79db9374424c9b1be713f607cd0cd7a0f96b42b834f3e05cf7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.spec": {
+        "bytes": 95,
+        "mode": 420,
+        "sha256": "3e8cd990f0a5ceafff16147c3640b48824323e4824ef5c555c8eccfaebe1cf60"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/expected.json": {
+        "bytes": 8,
+        "mode": 420,
+        "sha256": "832e95c9fe906cebd486e49e22537100263d473e5ced8a26301cbbd6e126f42c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.spec": {
+        "bytes": 158,
+        "mode": 420,
+        "sha256": "f3f47bd0e90afb5d9e9fbfed6e341aa9fc8ec277cffef3cce9ac1bab6e76fa9d"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/expected.json": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.spec": {
+        "bytes": 125,
+        "mode": 420,
+        "sha256": "5ccb4200f6ce146e4b9e08374875b3b6cdce46c4d57603ccf1c3860cdacd764c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/expected.json": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.spec": {
+        "bytes": 106,
+        "mode": 420,
+        "sha256": "2efcc170beeee1115d792b6cb620e61cb4b7ac698ffd6f63b4f24f02e43ba448"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/expected.json": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.spec": {
+        "bytes": 181,
+        "mode": 420,
+        "sha256": "e7bd76a6879d1d50f7f94ebbc883933dd6a505fab3c82108027f8525a34c54ad"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/expected.json": {
+        "bytes": 41,
+        "mode": 420,
+        "sha256": "c5affb583ddbc3f689cdf72495795d89a9c7cd8c7ac2585a0a0c79025cc8df61"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.spec": {
+        "bytes": 213,
+        "mode": 420,
+        "sha256": "d064aeb60a28fe57a8ad11e5d781fc22c301f665f62951a5cf070438f9cb2236"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/expected.json": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "9151b31d08300a79db9374424c9b1be713f607cd0cd7a0f96b42b834f3e05cf7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.spec": {
+        "bytes": 149,
+        "mode": 420,
+        "sha256": "b101f60523e10b255bc815118c81e4a22b1ec74e19d9c1a2281e59515fdf44b2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/expected.json": {
+        "bytes": 2,
+        "mode": 420,
+        "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.spec": {
+        "bytes": 175,
+        "mode": 420,
+        "sha256": "351c89de99d2d419f24d751d34ed83fc92ae11b32d4a4e2f06e4312c563221a5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/expected.json": {
+        "bytes": 61,
+        "mode": 420,
+        "sha256": "2007b4768b195250aa10b00920e4ef6a9188f052eab47f277c6ef3c0f5139628"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.spec": {
+        "bytes": 402,
+        "mode": 420,
+        "sha256": "1716fe960ec8ef2a294d95ecfec9111ef05f9d1fdafcd59f33785ddc90b88146"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/expected.json": {
+        "bytes": 51,
+        "mode": 420,
+        "sha256": "89d72ba81d068c42478c6742f0aa3cdbc3104a39496d88a6b403c67e43e9a202"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.spec": {
+        "bytes": 508,
+        "mode": 420,
+        "sha256": "35d3f7d2621601be58228b70edf38ec7dc5d53ce8732bff98ee54dec7845666c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/expected.json": {
+        "bytes": 78,
+        "mode": 420,
+        "sha256": "e9874e32de0c4abba9011c373db129743ea815101ab2cab83e7a8fd0bd9e43de"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.spec": {
+        "bytes": 377,
+        "mode": 420,
+        "sha256": "893d49b1904c0484568fbc8d2533c034fcb4043ac1271d032ad48846399448b4"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/expected.json": {
+        "bytes": 29,
+        "mode": 420,
+        "sha256": "09dadc64cfb1e30328e5ce6b0fbbfe7dbf1fd876dac603711224545d6c358e16"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.spec": {
+        "bytes": 191,
+        "mode": 420,
+        "sha256": "78a557cbb36971903ed426f75f3df8efa83638c05afa862e4603ed62dcff1c33"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/expected.json": {
+        "bytes": 47,
+        "mode": 420,
+        "sha256": "de3c6e6c05c8d8e3d6c645c5e48fecbe1b7a2678d1bfa7303ee6556111edfa31"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.spec": {
+        "bytes": 277,
+        "mode": 420,
+        "sha256": "46a9c5332a3f6161823abd91517ad03d81cbf45e29f659d48ab75fe2f26cdbd7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/expected.json": {
+        "bytes": 81,
+        "mode": 420,
+        "sha256": "7e5a05750e163228d07c516c9bfa635d5f980d28b72738376133f4fcad118c39"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.spec": {
+        "bytes": 425,
+        "mode": 420,
+        "sha256": "0dc60365ee631e67d32c9e4aecb0d8963bfc83ec1a26486106d5d137942c13c2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/expected.json": {
+        "bytes": 102,
+        "mode": 420,
+        "sha256": "403a60b2bb1a29a921a4206d64a06b49bfae4f69b9850582da8f51b0e8c9e88f"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.spec": {
+        "bytes": 277,
+        "mode": 420,
+        "sha256": "c549620397b2e68828c822e6dffee5e59f3f1a732a015ec1cc08edc27e423bf1"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/expected.json": {
+        "bytes": 43,
+        "mode": 420,
+        "sha256": "e0a025702c2f1da7c4a67a52863547097417bf62e5efdd256a281d456667d1e4"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.spec": {
+        "bytes": 111,
+        "mode": 420,
+        "sha256": "2475f9ebe6470e9f522266aa0523a5bbced4a04b5004407fc5029b734251d429"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/expected.json": {
+        "bytes": 9,
+        "mode": 420,
+        "sha256": "5c201add318b78910f7ee228b97a27494ceaf7755b83da37718938fae4367fb1"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.spec": {
+        "bytes": 430,
+        "mode": 420,
+        "sha256": "bbdd4761d421d0dc0f13d89f1318de14919b06cb6307071079e6c91b15e87e4a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/expected.json": {
+        "bytes": 10,
+        "mode": 420,
+        "sha256": "e86b51a677548fed27bab69607013295c06a54211015cc39a2929e8ad6c1fac1"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.spec": {
+        "bytes": 439,
+        "mode": 420,
+        "sha256": "720bc3b4ea74eb3294ccf6f3e8b1003854cc58a82c25ea979dc40df5973b1287"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/expected.json": {
+        "bytes": 10,
+        "mode": 420,
+        "sha256": "e86b51a677548fed27bab69607013295c06a54211015cc39a2929e8ad6c1fac1"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.spec": {
+        "bytes": 436,
+        "mode": 420,
+        "sha256": "0d2b733d4aa145aacb393b43dd6c1190a3adb5489e3629e88cf6a81629e2c947"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/expected.json": {
+        "bytes": 78,
+        "mode": 420,
+        "sha256": "7cbf8d69cdad5ee7e95aca10e8fe5ac4537d13fbf386a4ce4b7815317c6042ad"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.spec": {
+        "bytes": 236,
+        "mode": 420,
+        "sha256": "a19422d829c0b9833225b668f4cc26f7bce94aafa345d59d6267c47b4f4dd8a0"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/expected.json": {
+        "bytes": 161,
+        "mode": 420,
+        "sha256": "777b8d8fe1d816ec035be56602640590bf417f0a2d656d8c18ce351db31ba9e5"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.spec": {
+        "bytes": 221,
+        "mode": 420,
+        "sha256": "89d28677c5bbbc1aa660da7bc3de483934ad5a40be04394ecba66ea032bc06a7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/expected.json": {
+        "bytes": 123,
+        "mode": 420,
+        "sha256": "3c0d7c78dfc739f1d731bb2e456fa2c1edd816ffb0580223d5d1068ec11f0979"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.spec": {
+        "bytes": 209,
+        "mode": 420,
+        "sha256": "4fd700654c7afad2967abdd9a3fcd1ef5ccc6170e93b37ed20f28897d89cf307"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/expected.json": {
+        "bytes": 443,
+        "mode": 420,
+        "sha256": "c37ec504045137770bb24bf14739d96da9f2281f6f027f55af3e0cb46988bc43"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.spec": {
+        "bytes": 516,
+        "mode": 420,
+        "sha256": "ad341a61052f03a56c856fe960c0ad669b58f663a2a58b815f2499be53ee7d9c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/expected.json": {
+        "bytes": 38,
+        "mode": 420,
+        "sha256": "b09961c0a741d6eeaa0bb89964420ba30ac00fd080901337eda3a1ac61768a4e"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.spec": {
+        "bytes": 282,
+        "mode": 420,
+        "sha256": "2458f2806bc331bdc6ae2cce6c747c941b8f3ead5f15d6c4680c916ce37d8dd7"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/expected.json": {
+        "bytes": 78,
+        "mode": 420,
+        "sha256": "111489369d13e702e19f6b1fa843bf9bbac6df8972183e987bee6b0e3fe48b75"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.spec": {
+        "bytes": 304,
+        "mode": 420,
+        "sha256": "0befe8d9658a8c7a36c59971eca867554a17b495a295640d050daf7fcbf79adc"
+      },
+      "rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.txt": {
+        "bytes": 6,
+        "mode": 420,
+        "sha256": "2be1c55b58708d3075fa692891dd9d763623b537f467012b67768cedba086fd2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tkgui_empty/expected.json": {
+        "bytes": 3,
+        "mode": 420,
+        "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.spec": {
+        "bytes": 489,
+        "mode": 420,
+        "sha256": "db1671535cf2747a46e1be80577de2155785b900bb41c5d4128768204a272465"
+      },
+      "rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.txt": {
+        "bytes": 0,
+        "mode": 420,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/expected.json": {
+        "bytes": 40,
+        "mode": 420,
+        "sha256": "da110d41b2a5ac923cf81573d289a461ee6531882dab7f3b135c8f45a82ed45c"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.spec": {
+        "bytes": 246,
+        "mode": 420,
+        "sha256": "112474cd5e4e1d0792e2dc71993d1538c67aefaf35f86f3eb7060b94f5ed522f"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.txt": {
+        "bytes": 7,
+        "mode": 420,
+        "sha256": "b15f626a1eb193ed7af80f65fae3bdee2f4bd4e71c922fee384f308de43594b8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/expected.json": {
+        "bytes": 65,
+        "mode": 420,
+        "sha256": "b127d9672b37e044774cd6f6780a613b7d6085d2d2b274d919b90a5c53508141"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.spec": {
+        "bytes": 233,
+        "mode": 420,
+        "sha256": "18c910ede1516bf6d502aa4454c9946668010b9d839c5eef6a2ae9ed91a49fab"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.txt": {
+        "bytes": 7,
+        "mode": 420,
+        "sha256": "b15f626a1eb193ed7af80f65fae3bdee2f4bd4e71c922fee384f308de43594b8"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/expected.json": {
+        "bytes": 45,
+        "mode": 420,
+        "sha256": "3acdf3d78d0d569de3f8124dea53525fa237ea8e7a50623dc4688885818aa13a"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.spec": {
+        "bytes": 233,
+        "mode": 420,
+        "sha256": "18c910ede1516bf6d502aa4454c9946668010b9d839c5eef6a2ae9ed91a49fab"
+      },
+      "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.txt": {
+        "bytes": 7,
+        "mode": 420,
+        "sha256": "8e5e42365a190d8d9f156c404efb064e0d9353790ecbc0c49ef9d6a382de5f36"
+      },
+      "rust/linkedspec-runtime/tests/corpus/vhdl_library_use/expected.json": {
+        "bytes": 136,
+        "mode": 420,
+        "sha256": "80eedf9bfee1b6901217919e6791009a48396b743f1ead1cd8f55cff3691c5a2"
+      },
+      "rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec": {
+        "bytes": 16985,
+        "mode": 420,
+        "sha256": "1bd4b995847f6b1ade72fd6a9f3c7bd531218ac97d3cd643f9633d4671f167e6"
+      },
+      "rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.txt": {
+        "bytes": 43,
+        "mode": 420,
+        "sha256": "9f250b37859e72439ab68a37677530486ba4d99491e318faba6f14d9473d0ea1"
+      },
+      "rust/linkedspec-runtime/tests/corpus_oracle.rs": {
+        "bytes": 8478,
+        "mode": 420,
+        "sha256": "755593ac70167a3a2b73ce1eb87a59991b9578828f76e8f68a0a4bb3d8995f06"
+      },
+      "rust/linkedspec-runtime/tests/count_length_receivers.rs": {
+        "bytes": 3258,
+        "mode": 420,
+        "sha256": "773324b6d19bbbd72794b787eb7cbc815462083e0aefcb0a0d0bc9de93be8fa1"
+      },
+      "rust/linkedspec-runtime/tests/count_result_guard_composition.rs": {
+        "bytes": 5137,
+        "mode": 420,
+        "sha256": "43b601ca80a2a458b5f9f4b8385eeec0d1768b4e1f8a5f37ee23b044cc2cfa32"
+      },
+      "rust/linkedspec-runtime/tests/count_source_fallback.rs": {
+        "bytes": 3604,
+        "mode": 420,
+        "sha256": "26769d225818c66f2abd871c9cbb33c66a68db1dcd3fdb02191d291031745b51"
+      },
+      "rust/linkedspec-runtime/tests/cursor_control_arity.rs": {
+        "bytes": 9613,
+        "mode": 420,
+        "sha256": "7d5d9813d74af6887a86600c2169dd8067ea4fb24443f82d3dff818e7b43ddf0"
+      },
+      "rust/linkedspec-runtime/tests/cursor_rewind_result.rs": {
+        "bytes": 7284,
+        "mode": 420,
+        "sha256": "eec0449925422d0fdefca59bd886ae5876a09903b43be211f5d1708713bf1dca"
+      },
+      "rust/linkedspec-runtime/tests/default_blind_plan_repetition.rs": {
+        "bytes": 4483,
+        "mode": 420,
+        "sha256": "1e1ec787b5db0c3d4c157fab16085d0b30d627bd306f5f1533b53ab7a358f4d6"
+      },
+      "rust/linkedspec-runtime/tests/default_selected_receivers.rs": {
+        "bytes": 1820,
+        "mode": 420,
+        "sha256": "c7bd626738f451dec4bc29ec8ac8dbc652b96c3ff200f340eb4c2b14f1c49016"
+      },
+      "rust/linkedspec-runtime/tests/defined_default_receivers.rs": {
+        "bytes": 3134,
+        "mode": 420,
+        "sha256": "10a277ef88cacd845989b597ad893af1a587328b49c9cb186c96f5b0aaa24f1c"
+      },
+      "rust/linkedspec-runtime/tests/definedness_result_guard_composition.rs": {
+        "bytes": 5896,
+        "mode": 420,
+        "sha256": "0754c9dc615e91be34f85348f48b3aee95dc5e7ae7dafcd04ee6d0d73ada2b03"
+      },
+      "rust/linkedspec-runtime/tests/definedness_result_receivers.rs": {
+        "bytes": 2599,
+        "mode": 420,
+        "sha256": "1aa88269b1f58e3f3b024bbe1f681c3ab356f6c4af106ce7be83ae14290e921e"
+      },
+      "rust/linkedspec-runtime/tests/diagnostic_output_contract.rs": {
+        "bytes": 18067,
+        "mode": 420,
+        "sha256": "634105c3fa4838cf0e3523705d8512525856cd2c8f85623c27b7737f5df6bcc3"
+      },
+      "rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs": {
+        "bytes": 17020,
+        "mode": 420,
+        "sha256": "dcc4df086aed060ad60dcf0e8914ccc631004828cf1c0968c4e949429f64c14d"
+      },
+      "rust/linkedspec-runtime/tests/emptiness_result_guard_composition.rs": {
+        "bytes": 5941,
+        "mode": 420,
+        "sha256": "0821cb8ddaf21732c00a10b046246663f861b19b37e42fb837c65995520e9eaa"
+      },
+      "rust/linkedspec-runtime/tests/emptiness_result_receivers.rs": {
+        "bytes": 1816,
+        "mode": 420,
+        "sha256": "7193eef625b6485379209f8ebad5ea993c0d45a92dacf03e023ecce784836c23"
+      },
+      "rust/linkedspec-runtime/tests/entry_match_number_results.rs": {
+        "bytes": 3569,
+        "mode": 420,
+        "sha256": "ecb704f3fce62b2a70ecba11da54dfeb606a3b73889484a213443c6d016b1097"
+      },
+      "rust/linkedspec-runtime/tests/fixtures/blind_repetition_collection.json": {
+        "bytes": 5427,
+        "mode": 420,
+        "sha256": "a7a0a226a39f380d69fa6cb9214bc277a8f020040f05012bd09f61115f6ff31b"
+      },
+      "rust/linkedspec-runtime/tests/free_default_result_composition.rs": {
+        "bytes": 6126,
+        "mode": 420,
+        "sha256": "46e7a4bda84e07f1add7eb96d54b6d617ce3a7e41d97690eaf8fad386be89c81"
+      },
+      "rust/linkedspec-runtime/tests/free_numeric_comparison_result_composition.rs": {
+        "bytes": 5630,
+        "mode": 420,
+        "sha256": "f96c335a1aaaa789807b3d1779b8c4a84b50a8a9e61841f869cd7338818afc9d"
+      },
+      "rust/linkedspec-runtime/tests/free_numeric_result_composition.rs": {
+        "bytes": 5343,
+        "mode": 420,
+        "sha256": "4bb4c25158b226e3dc2291038bf3a325b08708884b9d7993c8d128064c50a466"
+      },
+      "rust/linkedspec-runtime/tests/free_string_result_composition.rs": {
+        "bytes": 5820,
+        "mode": 420,
+        "sha256": "a148a1155ed0e0b12b11db38d305153fdd143257ead277b2042855c47900b9c2"
+      },
+      "rust/linkedspec-runtime/tests/gap_slot_record_selection.rs": {
+        "bytes": 7437,
+        "mode": 420,
+        "sha256": "7efa2347a532cb346f2446fdb611672b9252f7104956ef0def23db400b348b59"
+      },
+      "rust/linkedspec-runtime/tests/gap_string_result.rs": {
+        "bytes": 9206,
+        "mode": 420,
+        "sha256": "709e25885f63e54778ad292351ae62fd84f043232f0cfa5aaa20dbaedbe72726"
+      },
+      "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs": {
+        "bytes": 17204,
+        "mode": 420,
+        "sha256": "ab98322c264929f828512a5cbd43200c78eb6564f9856c9750055ad751e09e74"
+      },
+      "rust/linkedspec-runtime/tests/has_key_result_guard_composition.rs": {
+        "bytes": 6345,
+        "mode": 420,
+        "sha256": "55f0e3244775f8214c7d9889b49f5446b5204c9718266fa1a1db08e2e72b07e3"
+      },
+      "rust/linkedspec-runtime/tests/has_key_result_receivers.rs": {
+        "bytes": 1806,
+        "mode": 420,
+        "sha256": "51e93d157da8ab03a1fe50b4820d6f5b792311a14850090fbeb45f11c2061d3a"
+      },
+      "rust/linkedspec-runtime/tests/hash_key_separator.rs": {
+        "bytes": 4308,
+        "mode": 420,
+        "sha256": "fbc113282c428516339daa20587c817f5d23829398d1a0cf92fe0777326b9df3"
+      },
+      "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs": {
+        "bytes": 7118,
+        "mode": 420,
+        "sha256": "5f2c9b6546142591957277327966ed76db8fa3cb0fd402dd8286473007771ade"
+      },
+      "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs": {
+        "bytes": 4817,
+        "mode": 420,
+        "sha256": "96e130c1a3d3ef006e7bb2599e4c8c4e801673b3e55fca0852230b9b306856dd"
+      },
+      "rust/linkedspec-runtime/tests/index_null_prefix_with_preservation.rs": {
+        "bytes": 2872,
+        "mode": 420,
+        "sha256": "8ac5be7f60ce915b203a08680491075971c925d5c17239f655dae216eabec664"
+      },
+      "rust/linkedspec-runtime/tests/index_result_guard_composition.rs": {
+        "bytes": 5698,
+        "mode": 420,
+        "sha256": "a471579098d35faaa272f420a0677f61bcf75fae62e52c4ca77bbeb4df3da911"
+      },
+      "rust/linkedspec-runtime/tests/index_result_receivers.rs": {
+        "bytes": 1834,
+        "mode": 420,
+        "sha256": "7231468e77d0ea0280f5b570cdbb54c78e4cac58e32f9134344622d3af080037"
+      },
+      "rust/linkedspec-runtime/tests/indexed_value_reads.rs": {
+        "bytes": 4717,
+        "mode": 420,
+        "sha256": "54830bc8031c500417b0c818c25149094bca6cfd5892afc408a53c6a09a8c3a3"
+      },
+      "rust/linkedspec-runtime/tests/input_cursor_results.rs": {
+        "bytes": 4290,
+        "mode": 420,
+        "sha256": "1a95c872f3436aeb441a39e7e2afc432f65890f7206a0747f6e26220c968e7f5"
+      },
+      "rust/linkedspec-runtime/tests/integration_test.rs": {
+        "bytes": 155323,
+        "mode": 420,
+        "sha256": "3d2fc4916bef38e4a897ec5752bfa6023daa438175b288c08daa5b0b18803eef"
+      },
+      "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs": {
+        "bytes": 46007,
+        "mode": 420,
+        "sha256": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d"
+      },
+      "rust/linkedspec-runtime/tests/joined_string_receivers.rs": {
+        "bytes": 3445,
+        "mode": 420,
+        "sha256": "689d9ded2d4e2a2812642c8b01f304a85df05ba59e4e28498b97d02522a5b55c"
+      },
+      "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs": {
+        "bytes": 4365,
+        "mode": 420,
+        "sha256": "d2bbbd8c617f0916f3b70aaa5b8ccb330d53d7190a72904b5127e818254533a8"
+      },
+      "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs": {
+        "bytes": 4335,
+        "mode": 420,
+        "sha256": "c0f9085197d4bc6ce564155d98da777a0a595b26b1d388f4e1327cd2071f8822"
+      },
+      "rust/linkedspec-runtime/tests/leading_input_trivia.rs": {
+        "bytes": 3863,
+        "mode": 420,
+        "sha256": "f7a4d3ae5fee24fa368e22dff47d1bbb15e50635c3f60d843bfcf30044dc89e8"
+      },
+      "rust/linkedspec-runtime/tests/length_result_guard_composition.rs": {
+        "bytes": 4319,
+        "mode": 420,
+        "sha256": "4a6f79ca51f5c1db23cf76acedd5bb740750597c1f31437104e62206d47f937f"
+      },
+      "rust/linkedspec-runtime/tests/lexical_result_guard_composition.rs": {
+        "bytes": 6145,
+        "mode": 420,
+        "sha256": "ddcc45e63a544a589e7b58ec74711c737aa35f91ad96eb2fd23f5dbf34d2cb08"
+      },
+      "rust/linkedspec-runtime/tests/logical_helper_contract.rs": {
+        "bytes": 18335,
+        "mode": 420,
+        "sha256": "6fa1cbc9b357a1378b2202053b17cd2ba2fe232217e3dd2d6d69eeddd5cde0d3"
+      },
+      "rust/linkedspec-runtime/tests/logical_receiver_methods.rs": {
+        "bytes": 5944,
+        "mode": 420,
+        "sha256": "f9a6958eb3c0346fdabca10b65f2e817aa1914496a4d71d1712d6edb5e248e64"
+      },
+      "rust/linkedspec-runtime/tests/logical_result_guard_composition.rs": {
+        "bytes": 6246,
+        "mode": 420,
+        "sha256": "2b0e862c4df9c06105dc79fa04a1a12ce8fa9283c53110904611f64e66a01fee"
+      },
+      "rust/linkedspec-runtime/tests/logical_result_receivers.rs": {
+        "bytes": 5423,
+        "mode": 420,
+        "sha256": "18dd283e5d14b5369e9b51463ba1f6a04480f167e49ac556cb653860996394fc"
+      },
+      "rust/linkedspec-runtime/tests/map_leaves_mutation_contract.rs": {
+        "bytes": 36439,
+        "mode": 420,
+        "sha256": "f398e9978eb26fb37fe40823f1d306ba0600cd1b9ab75bd0e180fe469dd97c5b"
+      },
+      "rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs": {
+        "bytes": 39585,
+        "mode": 420,
+        "sha256": "c9534ad46534ed4a2a7c9bb56f1753ced6494b9e727bf8c8f80d017b8bd01dbb"
+      },
+      "rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs": {
+        "bytes": 10691,
+        "mode": 420,
+        "sha256": "28263eb5e525ee7f5afcd66beecc94313741238697c57b4a6f571f91f0b43677"
+      },
+      "rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs": {
+        "bytes": 13955,
+        "mode": 420,
+        "sha256": "20a16a29610ca25efecc3c5496207770209c0dc00e3bf3dc9c0c5b2beb6bbf5d"
+      },
+      "rust/linkedspec-runtime/tests/minimum_miss_routes.rs": {
+        "bytes": 9351,
+        "mode": 420,
+        "sha256": "3e9000a62e5a034682bced39c0a263febf2874e12a976c5a18607adb33be7bb6"
+      },
+      "rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs": {
+        "bytes": 3090,
+        "mode": 420,
+        "sha256": "489f7717c50bd318d023351051c66e508367deb771e12c60ff37bd5b344d2ae6"
+      },
+      "rust/linkedspec-runtime/tests/named_default_container_guards.rs": {
+        "bytes": 7534,
+        "mode": 420,
+        "sha256": "7b5473362302bdbb0cca5d3a5337af0e8d51d70bb9df611977c9dadc3941ef8c"
+      },
+      "rust/linkedspec-runtime/tests/named_mark_number_results.rs": {
+        "bytes": 20130,
+        "mode": 420,
+        "sha256": "95771d26e875925e82c312d966a4130c794787ffafffd35acc4e66ac3dfd8f03"
+      },
+      "rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs": {
+        "bytes": 3048,
+        "mode": 420,
+        "sha256": "883131c21d0d6125400849ea1069aa96c7aff64e68f03bebbab93ee0c2a8cdc7"
+      },
+      "rust/linkedspec-runtime/tests/nested_tree_readiness.rs": {
+        "bytes": 12964,
+        "mode": 420,
+        "sha256": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c"
+      },
+      "rust/linkedspec-runtime/tests/null_array_keys.rs": {
+        "bytes": 1870,
+        "mode": 420,
+        "sha256": "b56d5ae8d5a177b34c8b5b844c65aa9202b730422a92bd0d2bf1eea71e7a2785"
+      },
+      "rust/linkedspec-runtime/tests/numeric_bridge_contract.rs": {
+        "bytes": 4584,
+        "mode": 420,
+        "sha256": "caaf7e8bfc828ef8d6d226c3632ef0e913a95c8c1d65ef0ff45e4bdac849c1f1"
+      },
+      "rust/linkedspec-runtime/tests/numeric_comparison_results.rs": {
+        "bytes": 3415,
+        "mode": 420,
+        "sha256": "47aeff8771baeb5c74306765ec64f486061da1aec43e62e974f4f7651d239e74"
+      },
+      "rust/linkedspec-runtime/tests/numeric_conversion_contract.rs": {
+        "bytes": 8107,
+        "mode": 420,
+        "sha256": "1527467abba578dab9e57551edfca9b966fe99fecad3d0f1dc2a14ba7b51645a"
+      },
+      "rust/linkedspec-runtime/tests/progressive_span_dispatch_authority.rs": {
+        "bytes": 28115,
+        "mode": 420,
+        "sha256": "f6b63065c85378a30cc897daf4adf69b08dce492fcc24b2af03826088488f8b7"
+      },
+      "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs": {
+        "bytes": 22204,
+        "mode": 420,
+        "sha256": "d42ccfbe4c8a6307b568db3637cea1cc83868aeac8b6ec17b5ee06958db6e9b9"
+      },
+      "rust/linkedspec-runtime/tests/punctuation_light_zero_arg_contract.rs": {
+        "bytes": 7990,
+        "mode": 420,
+        "sha256": "abd7247ab24f651eeeb53910e32a0ee3b2908ecead4784e5c862adeaf105517a"
+      },
+      "rust/linkedspec-runtime/tests/push_result_composition.rs": {
+        "bytes": 7003,
+        "mode": 420,
+        "sha256": "d8d9c6282eba8dd51645c52682e341e691c8ab63effee285b5c5039cc0b4a806"
+      },
+      "rust/linkedspec-runtime/tests/receiver_copy_arity.rs": {
+        "bytes": 2192,
+        "mode": 420,
+        "sha256": "35f1325161d57cb6170aca1399f88320a4ed22235c2937f154b83a558ce0a744"
+      },
+      "rust/linkedspec-runtime/tests/receiver_string_bridge_guards.rs": {
+        "bytes": 4991,
+        "mode": 420,
+        "sha256": "f1058f412a04bd516b36a58adda15edfd97fbc308e0d426d25feb7e08eb03526"
+      },
+      "rust/linkedspec-runtime/tests/recognition_repetition_progress.rs": {
+        "bytes": 8123,
+        "mode": 420,
+        "sha256": "fd804725df505daf178ff53ea50e3ebbc598a87e509642717024d19ce5e529f9"
+      },
+      "rust/linkedspec-runtime/tests/recognition_transaction_contract.rs": {
+        "bytes": 31881,
+        "mode": 420,
+        "sha256": "ed7d28d4d380db7c44a786b1dfd778445b5b3199c3f9b2af48a216590b7534c2"
+      },
+      "rust/linkedspec-runtime/tests/recursive_observation_contract.rs": {
+        "bytes": 14106,
+        "mode": 420,
+        "sha256": "57caf58049aca5008ad8d03676b101c6a4704b4abe8eadeb24a976869d529b71"
+      },
+      "rust/linkedspec-runtime/tests/reduction_result_receivers.rs": {
+        "bytes": 4719,
+        "mode": 420,
+        "sha256": "34371c57467c818227196a7ddf5f1215e067deeee140f790cef85c659041f288"
+      },
+      "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs": {
+        "bytes": 1733,
+        "mode": 420,
+        "sha256": "f4f642ef77b1ca156e80d83c14451beac3415e30cdbe49158e0fa44a67e04948"
+      },
+      "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs": {
+        "bytes": 4772,
+        "mode": 420,
+        "sha256": "98d809ac0fb947c23d87c7585ad0fac839f5c541baf0fba942e4cdb66f81cd8c"
+      },
+      "rust/linkedspec-runtime/tests/regex_statement_boundaries.rs": {
+        "bytes": 4286,
+        "mode": 420,
+        "sha256": "4cd7ff236a007f87dd3dee2640d703ea6dd0b731c5cf2ad9f0630cdb37cddf75"
+      },
+      "rust/linkedspec-runtime/tests/repeated_action_result_contract.rs": {
+        "bytes": 18217,
+        "mode": 420,
+        "sha256": "11e9066bb99b0c8d0ef5e6567d345e3e92e5a312fdf7c79948b58c215b9dd592"
+      },
+      "rust/linkedspec-runtime/tests/repository_root_relocation.rs": {
+        "bytes": 3343,
+        "mode": 420,
+        "sha256": "da66057f03f5733ceff2df682ffa7306af1d5612310e4b55328046cc169f4228"
+      },
+      "rust/linkedspec-runtime/tests/root_rule_selection_admission.rs": {
+        "bytes": 20637,
+        "mode": 420,
+        "sha256": "a431ce8ce4bda864e6d8ecb35dada9aee2d99870e9e920055aec5c32b09db3ee"
+      },
+      "rust/linkedspec-runtime/tests/root_rule_selection_core.rs": {
+        "bytes": 9690,
+        "mode": 420,
+        "sha256": "15d36954600ba3179aa850c41a7e0d50bb77a8f25d6236d0fee55650d3804822"
+      },
+      "rust/linkedspec-runtime/tests/root_rule_selection_routes.rs": {
+        "bytes": 14913,
+        "mode": 420,
+        "sha256": "f245595d20792b0c15587d9386a05783a95b9ffd7a5e6aa0dc6ad0e6099ba737"
+      },
+      "rust/linkedspec-runtime/tests/rule_call_result_selection.rs": {
+        "bytes": 4915,
+        "mode": 420,
+        "sha256": "cd605f7505d66fa6407d562efe1054532608a7fd351fadc7d2df7c2c0e5a9c91"
+      },
+      "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs": {
+        "bytes": 3798,
+        "mode": 420,
+        "sha256": "6431e37e9b0cb61b0bbe006b6cc850b77fca9b1ea8ee09115bceff6caa375278"
+      },
+      "rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs": {
+        "bytes": 19443,
+        "mode": 420,
+        "sha256": "9fbffebef5abdfcc63593c6ab2e5d5c7cc9243cbec4479bb604b0819c8f253e7"
+      },
+      "rust/linkedspec-runtime/tests/rule_local_cursor_execution.rs": {
+        "bytes": 15216,
+        "mode": 420,
+        "sha256": "0d474fd51affa2358f4eb99eb011133ba6aa47d446f8e39f81909e7724b945a1"
+      },
+      "rust/linkedspec-runtime/tests/rule_local_cursor_normalization.rs": {
+        "bytes": 1632,
+        "mode": 420,
+        "sha256": "e705a891fcce1c8ba21e64215dad0fdf560a2e3057a9135bb9962d2aa5267fda"
+      },
+      "rust/linkedspec-runtime/tests/runtime_diagnostics.rs": {
+        "bytes": 5409,
+        "mode": 420,
+        "sha256": "0c1ed91f0908f2d318f62c097d27963688d77c3517cb13d30c2001c76e3d24a8"
+      },
+      "rust/linkedspec-runtime/tests/scalar_arithmetic_results.rs": {
+        "bytes": 3829,
+        "mode": 420,
+        "sha256": "8e584fc0ab5bed9f23c68f83b8e5b2c0d541700c90e7aa55b4ce7c46bccc4d61"
+      },
+      "rust/linkedspec-runtime/tests/scalar_null_propagation.rs": {
+        "bytes": 2815,
+        "mode": 420,
+        "sha256": "57e2876be6c8a122efa9f5b802ad04dd2a7aff05d7f345613319cf7ed0500595"
+      },
+      "rust/linkedspec-runtime/tests/scalar_numeric_contract.rs": {
+        "bytes": 1196,
+        "mode": 420,
+        "sha256": "6b01aef416884233928c83c25deea013e6ec953c177d4fa771a6ce5a5064e241"
+      },
+      "rust/linkedspec-runtime/tests/scalar_predicate_boundaries.rs": {
+        "bytes": 1926,
+        "mode": 420,
+        "sha256": "f07ed927e32bc3cad38d3d1b6c9cf6bec2050b08a9ee0317c098f419f5e4bd6a"
+      },
+      "rust/linkedspec-runtime/tests/scalar_string_results.rs": {
+        "bytes": 3822,
+        "mode": 420,
+        "sha256": "3233caedc3d0997f6dbf2214240502e32d5a57da22ca64d7bb3196f98b8e8713"
+      },
+      "rust/linkedspec-runtime/tests/selected_value_receivers.rs": {
+        "bytes": 2892,
+        "mode": 420,
+        "sha256": "3f5917506e32fa80a84628b56f7ac13cd71c520b065d8a071ad4e23872c05f85"
+      },
+      "rust/linkedspec-runtime/tests/semantic_index_foundation.rs": {
+        "bytes": 9403,
+        "mode": 420,
+        "sha256": "ebfc27233c2f121fdcda2b31c0435db8e196fcd74ff978c12ee4d6cedd456a4a"
+      },
+      "rust/linkedspec-runtime/tests/semantic_index_query.rs": {
+        "bytes": 15657,
+        "mode": 420,
+        "sha256": "b2df2489ceafb251d214d77457fc20c819faba5f6d9d8d97daf3748f042e1dd0"
+      },
+      "rust/linkedspec-runtime/tests/semantic_index_runtime_observation.rs": {
+        "bytes": 23616,
+        "mode": 420,
+        "sha256": "0d85a2655d1a53524826f08f5607bee8ebaaa2a128b7d5143c686f739d693fff"
+      },
+      "rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs": {
+        "bytes": 22217,
+        "mode": 420,
+        "sha256": "8309f23c07cdc8f65c3058c6811085270a193d878e2f49b71470bcdf91f2ddb6"
+      },
+      "rust/linkedspec-runtime/tests/set_result_composition.rs": {
+        "bytes": 7682,
+        "mode": 420,
+        "sha256": "7ffa97ea6a84e3068d7884d74339e162806a5343087270e20f811713465b888f"
+      },
+      "rust/linkedspec-runtime/tests/sexpr_document_v1.rs": {
+        "bytes": 3342,
+        "mode": 420,
+        "sha256": "630adb072687f5447ee9214a4c00ee68209b9b24099ed223c48d25be1a1e24ba"
+      },
+      "rust/linkedspec-runtime/tests/signed_array_selector_contract.rs": {
+        "bytes": 17563,
+        "mode": 420,
+        "sha256": "3c0f6a1a175ad9dec33b6bed66a7d23b28da0efb16683ccbb1f9597569d5c199"
+      },
+      "rust/linkedspec-runtime/tests/source_boundary_compatibility_aliases.rs": {
+        "bytes": 7255,
+        "mode": 420,
+        "sha256": "0dd933db84e51163cfe895b47dadfb8cf6199906947af51f62c700340b3e86da"
+      },
+      "rust/linkedspec-runtime/tests/source_emitter.rs": {
+        "bytes": 53254,
+        "mode": 420,
+        "sha256": "1d4b6938e7817dfda5b638a8c8f0a4833d6b9f09cff96df2046779ae31ae72fa"
+      },
+      "rust/linkedspec-runtime/tests/sparse_and_structural_sequence.rs": {
+        "bytes": 17930,
+        "mode": 420,
+        "sha256": "4c2ba175ccd9b120154195266001f70262f6297be28a4663cfad57702bb70fe0"
+      },
+      "rust/linkedspec-runtime/tests/spec_loader.rs": {
+        "bytes": 9942,
+        "mode": 420,
+        "sha256": "64fdda7503a6c8c30d8df6c7cae839acbea4924141fda1c0f747b6eb364ae3ed"
+      },
+      "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs": {
+        "bytes": 85781,
+        "mode": 420,
+        "sha256": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90"
+      },
+      "rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs": {
+        "bytes": 16863,
+        "mode": 420,
+        "sha256": "5bfff4c393bcf607be0f62fa834a8294d4e8a0aae67eaa01ad2d7a1218e402e8"
+      },
+      "rust/linkedspec-runtime/tests/string_comparison_result_receivers.rs": {
+        "bytes": 3138,
+        "mode": 420,
+        "sha256": "8ff053631ccf7636b5a963437881a36e1fcdc3bc5eef4b46cf9729f65f3de2d8"
+      },
+      "rust/linkedspec-runtime/tests/string_predicate_result_guard_composition.rs": {
+        "bytes": 6063,
+        "mode": 420,
+        "sha256": "02e0e9956cd3a3cd946736123eb499ba46ebb761ecfd119dd7b97b1420fc1617"
+      },
+      "rust/linkedspec-runtime/tests/string_predicate_result_receivers.rs": {
+        "bytes": 4026,
+        "mode": 420,
+        "sha256": "0cda8653e56daccbd93bd5fb02632602f48d2d32b41c408c41d92b1f6c690d8c"
+      },
+      "rust/linkedspec-runtime/tests/substring_optional_arguments.rs": {
+        "bytes": 1922,
+        "mode": 420,
+        "sha256": "abd6ae78d21dfa9411c93fa079cbdd1dad85f2cdac1a4624922735e4b48fe4f8"
+      },
+      "rust/linkedspec-runtime/tests/symbol_statement_boundaries.rs": {
+        "bytes": 6377,
+        "mode": 420,
+        "sha256": "cfc791bda1e395d3a91c5a7fb0fe8d8a6ece8f86d3db5513ba8d3a46855248fc"
+      },
+      "rust/linkedspec-runtime/tests/tagged_record_receivers.rs": {
+        "bytes": 3580,
+        "mode": 420,
+        "sha256": "5dc40c987edb8b792f736f7bdb20e4fbd5631e75af9163c3ec4ce4bf63eee134"
+      },
+      "rust/linkedspec-runtime/tests/trace_controls.rs": {
+        "bytes": 16001,
+        "mode": 420,
+        "sha256": "b75d50973db0027f6d0a3dec7674c64e9ba2fc5e163e23d97edbd3fbf97b76af"
+      },
+      "rust/linkedspec-runtime/tests/typed_source_location_contract.rs": {
+        "bytes": 18065,
+        "mode": 420,
+        "sha256": "15df79dba072f82fecd0cf02f47edb9b31da850baaa1fdfe20334b7706773cfc"
+      },
+      "rust/linkedspec-runtime/tests/unicode_case_mapping.rs": {
+        "bytes": 3000,
+        "mode": 420,
+        "sha256": "faf4f8ffdc622c24141272cf7d750f9ee789aa6a1fbe1c88f7ba6d7db5b9d999"
+      },
+      "rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs": {
+        "bytes": 6554,
+        "mode": 420,
+        "sha256": "9564de0f2157cfd9235933c2df060cdc043805925f6228001f8e55b68bc7a13e"
+      },
+      "rust/linkedspec-runtime/tests/uniform_binding_contract.rs": {
+        "bytes": 15299,
+        "mode": 420,
+        "sha256": "e1a8538b9f3bed0eb40c2cc3764cb3f9213e83ff24c38f4e8a0f90f4ee11eebc"
+      },
+      "rust/linkedspec-runtime/tests/user_function_parser_context_boundary.rs": {
+        "bytes": 4339,
+        "mode": 420,
+        "sha256": "aa538da13e94ead636ad56cf46c104a3676c879b0853104987a6927272e54c78"
+      },
+      "rust/linkedspec-runtime/tests/user_function_parser_state_boundary.rs": {
+        "bytes": 4254,
+        "mode": 420,
+        "sha256": "e49db671389d7d03424d2aa2d9a3eb1253785e0cbe0d0ca4205bc9dfe1bfb1d6"
+      },
+      "rust/linkedspec-runtime/tests/value_copy.rs": {
+        "bytes": 4530,
+        "mode": 420,
+        "sha256": "2c7f7e8360a2a274982c4ceccbeebe53b5591a9e98a326c9b089179479e805ab"
+      },
+      "rust/linkedspec-runtime/tests/variadic_user_function_contract.rs": {
+        "bytes": 7430,
+        "mode": 420,
+        "sha256": "caef7dcb0425fd6b50e74bb9bafcb2d6ef8d75bd58d62967d52753c02d271455"
+      },
+      "rust/linkedspec-runtime/tests/with_callback_snapshot.rs": {
+        "bytes": 3829,
+        "mode": 420,
+        "sha256": "970e5c4bcfa1a1a4ebe71308f5d40ca8c1e68e715cc9868cdaf8d4d7964afe1b"
+      },
+      "rust/linkedspec-runtime/tests/with_hash_results.rs": {
+        "bytes": 4615,
+        "mode": 420,
+        "sha256": "cbf3db7e546c00bf09a10de6a4a7783720f8f80898b40fa8e1d6ff4eba2a4b8b"
+      },
+      "rust/linkedspec-runtime/tests/with_result_selection.rs": {
+        "bytes": 5813,
+        "mode": 420,
+        "sha256": "bb30cfe0176e6dcc3b46c2a9020a6842931caebb40b89d497788844d5d8983e9"
+      },
+      "rust/linkedspec-runtime/tests/write_vivification_contract.rs": {
+        "bytes": 20914,
+        "mode": 420,
+        "sha256": "31113eedaf03ecab56966eb8a710e7ca8c524cb8fa8a684318f3d372ccad9c8d"
+      },
+      "specs/pplugin.spec": {
+        "bytes": 650,
+        "mode": 420,
+        "sha256": "5f165a65b8fac5e1bb55997eb2dfa0be2bc264d7b3e8017eb759764202c1b31c"
+      },
+      "specs/spec.spec": {
+        "bytes": 83434,
+        "mode": 420,
+        "sha256": "d752521e6de8a91e450d75176504f1afe168a06f458c8a542179e2d5eb46f2ee"
+      },
+      "specs/user_function_definition.spec": {
+        "bytes": 12679,
+        "mode": 420,
+        "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+      },
+      "tests/fixtures/aggregate_operand_snapshot_values.rust.json": {
+        "bytes": 740,
+        "mode": 420,
+        "sha256": "18fe023b5036ec5747266d4ab5e672954a22f7928e199a4b9ad3e994c641e2e5"
+      },
+      "tests/fixtures/array_transform_result_guard_cases.json": {
+        "bytes": 15994,
+        "mode": 420,
+        "sha256": "5be0d5ca5336aabe77b373ab59f5a1bd05310c569030a0a78fbd1690143d575e"
+      },
+      "tests/fixtures/array_transform_result_guard_perl_prefix_profiles.json": {
+        "bytes": 48432,
+        "mode": 420,
+        "sha256": "f7b68f481951fc5f81f2b68ecfef03e930ab9842420cdf71a1a6bc40a1a3e351"
+      },
+      "tests/fixtures/array_transform_result_guard_perl_profiles.json": {
+        "bytes": 122384,
+        "mode": 420,
+        "sha256": "d4c8897ceddeed4447cddd5c5971180478e1c358abf6543aca79baac119b0f3f"
+      },
+      "tests/fixtures/array_transform_result_guard_rust_profiles.json": {
+        "bytes": 70462,
+        "mode": 420,
+        "sha256": "78590c413540ae1d09a55be3903b277eae5d1e77e958d48ff7ad456ba8955786"
+      },
+      "tests/fixtures/array_transform_source_isolation_perl_cases.json": {
+        "bytes": 18364,
+        "mode": 420,
+        "sha256": "e30eb9940c18617d4add4cafc5c3f1969fb4e6bab01cdba2eb32bb1b076d7039"
+      },
+      "tests/fixtures/blind_fluent_return_values.json": {
+        "bytes": 3117,
+        "mode": 420,
+        "sha256": "a5c0f8a63c48852d7def8edc6c9f3c2496408bc3d33c6841d90b8cee710f11e5"
+      },
+      "tests/fixtures/blind_implicit_zero_progress.json": {
+        "bytes": 736,
+        "mode": 420,
+        "sha256": "991ebc43c6b4a332a94fb3a3beff8233609fbe46d4828a45e4cdd771695ae3aa"
+      },
+      "tests/fixtures/blind_implicit_zero_progress_qualified.json": {
+        "bytes": 766,
+        "mode": 420,
+        "sha256": "993414a91e2f276bd3137715ec5baa859fdef17464e762eb67a94713205e3d6b"
+      },
+      "tests/fixtures/blind_parent_push.json": {
+        "bytes": 1950,
+        "mode": 420,
+        "sha256": "58b574f66d2bbc24578720cd718aee9c5c9994bd15fa02d0d6181f3a23542e05"
+      },
+      "tests/fixtures/blind_parent_push_repeated.json": {
+        "bytes": 1252,
+        "mode": 420,
+        "sha256": "4dd84491e8e77097a642937c2f585552d827fdce59f642a498c13586f487034d"
+      },
+      "tests/fixtures/blind_postcall_results.json": {
+        "bytes": 7982,
+        "mode": 420,
+        "sha256": "99fe20f3f82b1141dfd5208405d0ddb668b509b27f2efddb233a15e2fa9d7586"
+      },
+      "tests/fixtures/boundary_capture_fluent_values.json": {
+        "bytes": 63,
+        "mode": 420,
+        "sha256": "6202c6004622195e1014de7c160094bd3df168584a077c1c37bdb57b2a237df9"
+      },
+      "tests/fixtures/boundary_capture_fluent_values.spec": {
+        "bytes": 719,
+        "mode": 420,
+        "sha256": "acb6834a5fe92c457963eb97c0c8163890e3a97a3d0d9f81af2ccae4e0ca94f0"
+      },
+      "tests/fixtures/capture_advance_number_values.json": {
+        "bytes": 53,
+        "mode": 420,
+        "sha256": "5d9aab8f57a4b93b9cecfddf04920123bd689d5451639b0c3544e49273af34f9"
+      },
+      "tests/fixtures/capture_advance_number_values.spec": {
+        "bytes": 951,
+        "mode": 420,
+        "sha256": "fc41d3d40c3b792ea3f2251bde59bba5e9ee407b672021c0899d8338b11c6fa6"
+      },
+      "tests/fixtures/capture_advance_text_values.json": {
+        "bytes": 60,
+        "mode": 420,
+        "sha256": "27c3e609398a0d042b4639491cc220bb1a58eb7ce2d8e2255dfdaac7018bef69"
+      },
+      "tests/fixtures/capture_advance_text_values.spec": {
+        "bytes": 814,
+        "mode": 420,
+        "sha256": "d74dc3ef75146615e5de62b179befa48edd3401b7caf9421c8ba10392ff7fd63"
+      },
+      "tests/fixtures/capture_boundary_number_values.json": {
+        "bytes": 52,
+        "mode": 420,
+        "sha256": "94feb90ab13719ce71e99868f0d6a3379312cf665d30e829406ee0428706bc19"
+      },
+      "tests/fixtures/capture_boundary_number_values.spec": {
+        "bytes": 838,
+        "mode": 420,
+        "sha256": "513e78c4d7131ce8f3f67b89cfebe6180bb290585cdeacf30f6d4c00a86440d0"
+      },
+      "tests/fixtures/capture_boundary_text_values.json": {
+        "bytes": 45,
+        "mode": 420,
+        "sha256": "5930e47d786acff4b94d7fa6c7c5814385517f767b5e775551b4ce0fb8a4df1a"
+      },
+      "tests/fixtures/capture_boundary_text_values.spec": {
+        "bytes": 630,
+        "mode": 420,
+        "sha256": "98d7598b0701b892339647de314d7c3a7fc54a069e793e425f072aad32de8da3"
+      },
+      "tests/fixtures/capture_collection_selection_values.json": {
+        "bytes": 235,
+        "mode": 420,
+        "sha256": "af2f1590875ade58fe9f41be8d28860ca418f2c0e86cb0f6981fd8dbcf8628df"
+      },
+      "tests/fixtures/capture_collection_selection_values.spec": {
+        "bytes": 1017,
+        "mode": 420,
+        "sha256": "0406864309421adb229eed5814d66dcc9e516ead39ba5623c3086de8e1b593de"
+      },
+      "tests/fixtures/capture_endpoint_absence.json": {
+        "bytes": 12684,
+        "mode": 420,
+        "sha256": "70c07aebb6182555ed9ca5123b8751d1ffe55799777115b39b87e6f5fba8e091"
+      },
+      "tests/fixtures/capture_reset_value_block_values.json": {
+        "bytes": 18,
+        "mode": 420,
+        "sha256": "332980ffd443518cf7b00cae264284532859d3ca90521047bc74df230f6cd53c"
+      },
+      "tests/fixtures/capture_reset_value_block_values.spec": {
+        "bytes": 285,
+        "mode": 420,
+        "sha256": "edc65b79ee14abe018d58e763c28713ac59dbb2ac19193beb76d1c3b31147c2c"
+      },
+      "tests/fixtures/coalesce_defined_values.spec": {
+        "bytes": 583,
+        "mode": 420,
+        "sha256": "eae5cafd34468f451fd562a71d6163144fccff9a3f17dc732d6462d30014908a"
+      },
+      "tests/fixtures/coalesce_nonempty_values.spec": {
+        "bytes": 707,
+        "mode": 420,
+        "sha256": "44c52f010418ebffd0d1d58229bdea114f942d96bc0ab2a3435bded9461abe1c"
+      },
+      "tests/fixtures/coalesce_receiver_values.spec": {
+        "bytes": 876,
+        "mode": 420,
+        "sha256": "903874364aec006c9c64c3356577567ecc5e24b5a163dbede9838590c873753d"
+      },
+      "tests/fixtures/computed_selection_noncall_values.json": {
+        "bytes": 323,
+        "mode": 420,
+        "sha256": "5b82eba5798c8fb47c9bf24af8b206448d818f7fc79527a3cb04bbd310242136"
+      },
+      "tests/fixtures/computed_selection_noncall_values.spec": {
+        "bytes": 1144,
+        "mode": 420,
+        "sha256": "63655c8301f3ffb18f7780f7414d18e0cfd0ea2690efe90a6d4d7db95ed3fe68"
+      },
+      "tests/fixtures/computed_selection_values.json": {
+        "bytes": 341,
+        "mode": 420,
+        "sha256": "b6c2863f826fbb96af46abf88d565ef8ff380fea45a07433691374a0d1f84255"
+      },
+      "tests/fixtures/computed_selection_values.spec": {
+        "bytes": 1281,
+        "mode": 420,
+        "sha256": "ed5271d74d0e76dd2f8c81890761733d883358d3f593d590b1f91beb788914d3"
+      },
+      "tests/fixtures/conditional_selection_values.json": {
+        "bytes": 159,
+        "mode": 420,
+        "sha256": "70d598385be7b5f25a00d4b69a414050020a3b8059d3465572c20d12545133e0"
+      },
+      "tests/fixtures/conditional_selection_values.spec": {
+        "bytes": 1180,
+        "mode": 420,
+        "sha256": "382c5a9182bff36560e4d6bdd69da27d4fc0abe25b2b79d55aa0be1d123ceb08"
+      },
+      "tests/fixtures/constructor_result_cases.json": {
+        "bytes": 8047,
+        "mode": 420,
+        "sha256": "54c92038070c1e6111b3cd97116280152e4dbd421cb719ca0a3a850780bf5897"
+      },
+      "tests/fixtures/contains_block_operand_cases.json": {
+        "bytes": 6082,
+        "mode": 420,
+        "sha256": "15cec5a4f4b44f681e79312487a074490b55e9706dbe2d21f30e130fa79f38e2"
+      },
+      "tests/fixtures/contains_copy_guard_intake_cases.json": {
+        "bytes": 2111,
+        "mode": 420,
+        "sha256": "9b9a0e1e0cba8989888b7acec7d4888accde12595f4f143e2bf3a0547f8e4897"
+      },
+      "tests/fixtures/contains_null_prefix_guard_cases.json": {
+        "bytes": 1414,
+        "mode": 420,
+        "sha256": "6bca4d782dcc3371b9f54afc710c040c8855ad687721d125eb59754f2eb6228b"
+      },
+      "tests/fixtures/contains_null_with_guard_cases.json": {
+        "bytes": 894,
+        "mode": 420,
+        "sha256": "cb3368f254c5c753af265479701ac903114033f8a08b2967b88d2e7a38961f14"
+      },
+      "tests/fixtures/contains_result_guard_cases.json": {
+        "bytes": 16352,
+        "mode": 420,
+        "sha256": "08a761a2e319c0f6879137a8ff42f65a8af0f74fc58af7fd2aba2aff630c8747"
+      },
+      "tests/fixtures/contains_result_guard_excluded_ast.json": {
+        "bytes": 72860,
+        "mode": 420,
+        "sha256": "cfe270bbed0b12a777578fc37284dc136733feab7fe11f6b379bbb1769d68e73"
+      },
+      "tests/fixtures/contains_result_receiver_values.perl.json": {
+        "bytes": 794,
+        "mode": 420,
+        "sha256": "abecc6f33650c09fcfd39eb1f5f7a74eb8955d2182bff66975c47607d2acd257"
+      },
+      "tests/fixtures/contains_result_receiver_values.spec": {
+        "bytes": 2597,
+        "mode": 420,
+        "sha256": "2e0c471f0c1933d45170099e3a7e39adb4c90178a5f5b593b17144ab591fa05d"
+      },
+      "tests/fixtures/contains_result_receiver_values.text.json": {
+        "bytes": 794,
+        "mode": 420,
+        "sha256": "714e91259e876ab568b61e8ebe33143fa28bfae7b1ef313400edc342a77c18cd"
+      },
+      "tests/fixtures/copied_null_contains_cases.json": {
+        "bytes": 6293,
+        "mode": 420,
+        "sha256": "32c14556b809bb6555bfe681d9bcab0fbd3367d4bc34244bb4e25673d0ffbe99"
+      },
+      "tests/fixtures/copied_null_index_cases.json": {
+        "bytes": 7036,
+        "mode": 420,
+        "sha256": "4d88f89d82c9429a87799ab6c22306b2df60432e0a043720ccf3f7077d383fd9"
+      },
+      "tests/fixtures/copied_null_presence_cases.json": {
+        "bytes": 5597,
+        "mode": 420,
+        "sha256": "82fb5733956277f311c3c98459ea09fe2615ea40a410470c9627c24c16d77292"
+      },
+      "tests/fixtures/copy_result_guard_cases.json": {
+        "bytes": 2562,
+        "mode": 420,
+        "sha256": "169ee8fb3ef5f50fda4bf8d5fdbd4043e12438282d0abb4c9ccd31b9a3f2a3d9"
+      },
+      "tests/fixtures/copy_result_guard_perl_preservation_cases.json": {
+        "bytes": 2551,
+        "mode": 420,
+        "sha256": "6fa04c04f3060257addf5cde9c04e805087ae9deb89aa460b23457f25622c897"
+      },
+      "tests/fixtures/count_block_source_cases.json": {
+        "bytes": 6352,
+        "mode": 420,
+        "sha256": "071deeac9784bfe0a5ccb8a350117e0b26dc8f189093deb032f8ba509e408f09"
+      },
+      "tests/fixtures/count_boolean_source_cases.json": {
+        "bytes": 7961,
+        "mode": 420,
+        "sha256": "17399d6601da61b23c3c800ef396edea35f3cd5fbf8d1df8326c597292430f7e"
+      },
+      "tests/fixtures/count_copy_source_cases.json": {
+        "bytes": 6529,
+        "mode": 420,
+        "sha256": "1afc33b0bbefa96c378aa5c492c0a56ed3c18e46174c7c23e318913b6df324fe"
+      },
+      "tests/fixtures/count_logical_source_cases.json": {
+        "bytes": 4541,
+        "mode": 420,
+        "sha256": "87f11a7698af2774afe7f7531031cf6051fcf356a3b816e45aa2d836b9630b8c"
+      },
+      "tests/fixtures/count_result_guard_cases.json": {
+        "bytes": 8973,
+        "mode": 420,
+        "sha256": "0a41b080e30cc990322d98c82bbfbcfb5db88ff61ba9d4a27bb0f07f27296b93"
+      },
+      "tests/fixtures/count_result_guard_dart_ast.json": {
+        "bytes": 61136,
+        "mode": 420,
+        "sha256": "1890d4b9264da6db03ea24077c4410e38593f21c5f27af54676c1a6eaf3def8c"
+      },
+      "tests/fixtures/count_result_guard_dart_domain.json": {
+        "bytes": 25,
+        "mode": 420,
+        "sha256": "f3685ee8ad711c2b2af1ef0f6e739e7c94ad5c1e0e018d27612b9a6946829cdb"
+      },
+      "tests/fixtures/count_result_guard_excluded_ast.json": {
+        "bytes": 70073,
+        "mode": 420,
+        "sha256": "32a3a4177712c71ce887e437346b1d4e0a79016ee6995374021bac39764d2e0e"
+      },
+      "tests/fixtures/count_result_guard_julia_ast.json": {
+        "bytes": 54072,
+        "mode": 420,
+        "sha256": "4c21a27794fbc26b91359648639779f14119f8c3cb95142511648ad9d849044e"
+      },
+      "tests/fixtures/count_result_guard_julia_domain.json": {
+        "bytes": 41,
+        "mode": 420,
+        "sha256": "cb8b1fddc7da1f66c67b3cf6347eafea15e1ef7c5cab061b321e383618edef11"
+      },
+      "tests/fixtures/count_result_guard_julia_errors.json": {
+        "bytes": 1127,
+        "mode": 420,
+        "sha256": "f770b9b15fe18038cd72d10f9302a35ec6ecc7b5a68a22c59a0cffc624631622"
+      },
+      "tests/fixtures/count_result_guard_lua_ast.json": {
+        "bytes": 51834,
+        "mode": 420,
+        "sha256": "767e00210a2b503cf458ce24206c42aa0f4a6f1f78f5115b87e1e2f0eed1a49c"
+      },
+      "tests/fixtures/count_result_guard_lua_domain.json": {
+        "bytes": 41,
+        "mode": 420,
+        "sha256": "cb8b1fddc7da1f66c67b3cf6347eafea15e1ef7c5cab061b321e383618edef11"
+      },
+      "tests/fixtures/count_result_guard_lua_errors.json": {
+        "bytes": 931,
+        "mode": 420,
+        "sha256": "533a839bd5071e8455d709d7f6e9ba1fdb34f20ca9c7cfd2936801af632ef73e"
+      },
+      "tests/fixtures/count_result_guard_rust_ast.json": {
+        "bytes": 25871,
+        "mode": 420,
+        "sha256": "6b82a6356d8ec992549ea6afb34d2d7ee91fadc1a6ae8779e9ead6ec8362239e"
+      },
+      "tests/fixtures/count_result_guard_rust_domain.json": {
+        "bytes": 25,
+        "mode": 420,
+        "sha256": "835680865f4761234cc65f71ac1ec3211643cfb8ec3c82b616da23e04400a286"
+      },
+      "tests/fixtures/count_result_guard_source_owner_cases.json": {
+        "bytes": 290,
+        "mode": 420,
+        "sha256": "63a085f734fb34738ace168c8d36c6a9b086def53b1c87b4214639725f0a93dc"
+      },
+      "tests/fixtures/count_source_fallback_cases.json": {
+        "bytes": 6374,
+        "mode": 420,
+        "sha256": "65bdee1e2592dff11a63aec90858d16f1b9bd938b3654b31c77925eb6e356659"
+      },
+      "tests/fixtures/cursor_rewind_result_values.json": {
+        "bytes": 50,
+        "mode": 420,
+        "sha256": "19d15ba4f569fc6bb23c37b3bfae94a5eb22d9966c4ba5da22c22072873df4c7"
+      },
+      "tests/fixtures/cursor_rewind_result_values.spec": {
+        "bytes": 889,
+        "mode": 420,
+        "sha256": "db2a7fe4d1dd0b94100b4176d315ff695d6db8dc87aacff5689c7b52d886a8a7"
+      },
+      "tests/fixtures/default_hash_projection_values.json": {
+        "bytes": 463,
+        "mode": 420,
+        "sha256": "1a15d46e43bb700394c846050288bf39bddc7dd64cb19e17b9cd9ac0af26b5a6"
+      },
+      "tests/fixtures/default_hash_projection_values.spec": {
+        "bytes": 2178,
+        "mode": 420,
+        "sha256": "e873fa3caebb95c6ac9296c6a9e2c5b544cc0c0e91a69fbf12fa341240a831c5"
+      },
+      "tests/fixtures/default_selected_receiver_values.spec": {
+        "bytes": 1775,
+        "mode": 420,
+        "sha256": "0131c6a6197a6daa00192e65838540808e11233bd33735d7c45cb6903a5cad85"
+      },
+      "tests/fixtures/defined_default_receiver_values.json": {
+        "bytes": 1296,
+        "mode": 420,
+        "sha256": "d60869f34a670362891300ccf34402ce9bf3de4867b58305581ebcdc5cc180e7"
+      },
+      "tests/fixtures/defined_default_receiver_values.spec": {
+        "bytes": 3919,
+        "mode": 420,
+        "sha256": "1cafb4a5da7145dab77b7f0465194f920a9728aca9a81df2e5d3ba0a4bbd1b0e"
+      },
+      "tests/fixtures/definedness_result_guard_cases.json": {
+        "bytes": 13915,
+        "mode": 420,
+        "sha256": "17f9f95a379874273abce0e3c098f86277867b4826b8b9ae2065fea245e1f93a"
+      },
+      "tests/fixtures/definedness_result_guard_excluded_ast.json": {
+        "bytes": 77921,
+        "mode": 420,
+        "sha256": "33eb99e69b34638f9efd7fba065248eca6523a1850af4033dbf1fb48ea4b409a"
+      },
+      "tests/fixtures/definedness_result_receiver_values.json": {
+        "bytes": 714,
+        "mode": 420,
+        "sha256": "ecd2703ef781e94fba27dab7c4e855c9be67e91ad3f334a31aae55ffc2861f66"
+      },
+      "tests/fixtures/definedness_result_receiver_values.perl.json": {
+        "bytes": 714,
+        "mode": 420,
+        "sha256": "e18e5d1087428ce7bec5641f7e07b169618f0040295df306c6102fd4fd70068d"
+      },
+      "tests/fixtures/definedness_result_receiver_values.spec": {
+        "bytes": 2392,
+        "mode": 420,
+        "sha256": "f0ea82967096705bdbe08c51dd18e33c51c31dcb158720670dadb162bcb4ad1a"
+      },
+      "tests/fixtures/emitted_boundary_catalog.json": {
+        "bytes": 4518,
+        "mode": 420,
+        "sha256": "6745b07a53d3ba980bda1240f8614fcc0bff9d00468ac6650db60fe17b0108dd"
+      },
+      "tests/fixtures/emptiness_result_guard_cases.json": {
+        "bytes": 14543,
+        "mode": 420,
+        "sha256": "c9c9d903e2b921dde7e9e0d09bab0ea1aba4ddaac6846959f49cb011b6db1d8e"
+      },
+      "tests/fixtures/emptiness_result_guard_excluded_ast.json": {
+        "bytes": 78831,
+        "mode": 420,
+        "sha256": "36affdbaf76db41cd0e07962ab97ff95278fd67109ec319cf2ec972c056a4846"
+      },
+      "tests/fixtures/emptiness_result_receiver_values.json": {
+        "bytes": 639,
+        "mode": 420,
+        "sha256": "ef2307b5e0e78faaae4f6a5ac1a6210c7c56464eb8d29e8496618811f7df6cd0"
+      },
+      "tests/fixtures/emptiness_result_receiver_values.spec": {
+        "bytes": 2221,
+        "mode": 420,
+        "sha256": "5e262a4e92de85fbea76b8247c8eb9f9d7324f836bcc2d4600eaf5889f769531"
+      },
+      "tests/fixtures/entry_match_number_result_values.json": {
+        "bytes": 98,
+        "mode": 420,
+        "sha256": "dda174659aedcf7cc9e1f5f558b7bce476917b4afce3c3d9f2c190c672268711"
+      },
+      "tests/fixtures/entry_match_number_result_values.spec": {
+        "bytes": 1835,
+        "mode": 420,
+        "sha256": "593f488f5764e0ef747d65feeef7c98b984a93006c0cfa3b240c2477cc13f38e"
+      },
+      "tests/fixtures/free_default_excluded_source_ast.json": {
+        "bytes": 16447,
+        "mode": 420,
+        "sha256": "97787e137deb9f5eb0ed6d04da7703fd5ea7e05ebb2e6bc1c5deae42a9352183"
+      },
+      "tests/fixtures/free_default_result_cases.json": {
+        "bytes": 8126,
+        "mode": 420,
+        "sha256": "f6a2291d2437e9c8b121e44e4e820babdd4d975dd12af6c066472e5a7083abb8"
+      },
+      "tests/fixtures/free_numeric_comparison_excluded_source_ast.json": {
+        "bytes": 58243,
+        "mode": 420,
+        "sha256": "e42e44ca0464d477883aa269f9c4388ea0e7cfaba8348fb7a3a7118b638940b7"
+      },
+      "tests/fixtures/free_numeric_comparison_result_cases.json": {
+        "bytes": 13953,
+        "mode": 420,
+        "sha256": "1659cbbe9e1ea07580b4c4cd5265e59c48f3bacc4f41d7209d3686f527bef5fd"
+      },
+      "tests/fixtures/free_numeric_excluded_source_ast.json": {
+        "bytes": 58120,
+        "mode": 420,
+        "sha256": "bb1f63e6c5da4a9734536e00a065ea948879da064076f4f0d1dcf725fef6a5c4"
+      },
+      "tests/fixtures/free_numeric_result_cases.json": {
+        "bytes": 12548,
+        "mode": 420,
+        "sha256": "3ddc88e4ec10ddbd7719a91f35b61a5c86d4363e1aa37038aac0e53896d0c1ea"
+      },
+      "tests/fixtures/free_string_excluded_source_ast.json": {
+        "bytes": 26326,
+        "mode": 420,
+        "sha256": "37449befe01863dc4808e29f1640ee7bbbff5e0bb345cce95d0f57d7a1aa6fe7"
+      },
+      "tests/fixtures/free_string_result_cases.json": {
+        "bytes": 9331,
+        "mode": 420,
+        "sha256": "f477ec42ef99db8c23fb29c53a00daed29dd1e541719284721d7435d8ce160fd"
+      },
+      "tests/fixtures/gap_slot_record_selection_values.json": {
+        "bytes": 141,
+        "mode": 420,
+        "sha256": "b06f6dff686483876c61b39ece90b803ba933b2e29c91424989ff6267ef8303b"
+      },
+      "tests/fixtures/gap_slot_record_selection_values.spec": {
+        "bytes": 976,
+        "mode": 420,
+        "sha256": "e7c50f66e3434a7e1c063f6c524b6fdd8cba9a8fd29e4be645199a74fe3747f2"
+      },
+      "tests/fixtures/gap_string_result_values.json": {
+        "bytes": 251,
+        "mode": 420,
+        "sha256": "ab878d87d69058a44219b8de4d09bec630b4417c2dbddd12147592f4412dce9d"
+      },
+      "tests/fixtures/gap_string_result_values.spec": {
+        "bytes": 696,
+        "mode": 420,
+        "sha256": "c09701282d477d8619b2694763a0d8003f6dab31c8fdd734bd25eba58084842d"
+      },
+      "tests/fixtures/has_key_null_source_operand_values.perl.json": {
+        "bytes": 408,
+        "mode": 420,
+        "sha256": "716c79ed4a9e9fa130dfcfa27df8f6de57c2401354795d845962f0243625f8d9"
+      },
+      "tests/fixtures/has_key_null_source_operand_values.spec": {
+        "bytes": 1467,
+        "mode": 420,
+        "sha256": "8956d6245819b5df5c3a3f5e9a5f32f6f973ac58ae52c8f6bcdd5e2a0d692ee9"
+      },
+      "tests/fixtures/has_key_result_guard_cases.json": {
+        "bytes": 13824,
+        "mode": 420,
+        "sha256": "d5ddcce098106b55e82414410060a56373ae6c132ca9ef4b0d1970643723bb69"
+      },
+      "tests/fixtures/has_key_result_guard_excluded_ast.json": {
+        "bytes": 82265,
+        "mode": 420,
+        "sha256": "51ab3e1f8bce4e38e023436167ecc933ad0e6dd5f30ea1db2246f9170bc3ff87"
+      },
+      "tests/fixtures/has_key_result_receiver_values.json": {
+        "bytes": 756,
+        "mode": 420,
+        "sha256": "74f3e5bd84a43e018cb26230566a1eda4befa8c06b509ba016bc7cd93b6ee901"
+      },
+      "tests/fixtures/has_key_result_receiver_values.spec": {
+        "bytes": 2205,
+        "mode": 420,
+        "sha256": "f5db8df6f6e169c508297e4a1e4b18d54021500fc98b409ed46e0ad4da2e7a09"
+      },
+      "tests/fixtures/hash_helper_source_isolation_perl_cases.json": {
+        "bytes": 2523,
+        "mode": 420,
+        "sha256": "ca1510b143e8210cdf02f56457ae32783e05a45f682dc955e834d9718230cf7f"
+      },
+      "tests/fixtures/hash_helper_source_isolation_perl_extra_cases.json": {
+        "bytes": 2106,
+        "mode": 420,
+        "sha256": "265457dad69b9858b4e2549fdafa6b594492192d0b169b3be90e551744c45b4c"
+      },
+      "tests/fixtures/hash_value_result_guard_cases.json": {
+        "bytes": 11916,
+        "mode": 420,
+        "sha256": "355777a30a33c1054274dbe7f27e0eeca9a7a8648f4bcc0890f2982d86646a7c"
+      },
+      "tests/fixtures/hash_value_result_guard_dart_profiles.json": {
+        "bytes": 34684,
+        "mode": 420,
+        "sha256": "dbcd105794049f7baed4534e7cec48138a2fe908eeccb42ea77fd06579c25186"
+      },
+      "tests/fixtures/hash_value_result_guard_julia_cases.json": {
+        "bytes": 32230,
+        "mode": 420,
+        "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+      },
+      "tests/fixtures/hash_value_result_guard_julia_profiles.json": {
+        "bytes": 30678,
+        "mode": 420,
+        "sha256": "3263b369188a3867844072631e313282d6f5064e643f0b3a5dc050479a223294"
+      },
+      "tests/fixtures/hash_value_result_guard_lua_cases.json": {
+        "bytes": 32230,
+        "mode": 420,
+        "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+      },
+      "tests/fixtures/hash_value_result_guard_lua_profiles.json": {
+        "bytes": 66074,
+        "mode": 420,
+        "sha256": "66ea7c19bc14d18d379ed78a2be6eda454de728f9d3c40cb7b6b949579a39512"
+      },
+      "tests/fixtures/hash_value_result_guard_perl_cases.json": {
+        "bytes": 17314,
+        "mode": 420,
+        "sha256": "90586f6d4a58afea3f786a91092a0583b2e56f9ee0a5ca6af62c79d606ac59a8"
+      },
+      "tests/fixtures/hash_value_result_guard_perl_profiles.json": {
+        "bytes": 53152,
+        "mode": 420,
+        "sha256": "612c145d4ae334f2d4c33b9c11ac9d8f8a7a566e37674ba3ad639b4c3a87e25d"
+      },
+      "tests/fixtures/hash_value_result_guard_rust_profiles.json": {
+        "bytes": 30204,
+        "mode": 420,
+        "sha256": "cadbf7936a0d04e1834e2008e0ef2770a038d41c3599472ba2e520bc28227374"
+      },
+      "tests/fixtures/hash_view_numeric_source_perl_cases.json": {
+        "bytes": 902,
+        "mode": 420,
+        "sha256": "47fdea6dd17675c8deaad422ac252d95d9b96cf482239ee96eb635fce04f791a"
+      },
+      "tests/fixtures/hash_view_receiver_policy_perl_cases.json": {
+        "bytes": 5225,
+        "mode": 420,
+        "sha256": "4635af7affd0dad476d98d00fb82a1ffad73aca45ad938ae42722dd6bfd95645"
+      },
+      "tests/fixtures/hash_view_result_guard_cases.json": {
+        "bytes": 6929,
+        "mode": 420,
+        "sha256": "ba26e8caef9ec0700192d6605ab5632042c17be5accdcd1cbf3a97c1159e0d8f"
+      },
+      "tests/fixtures/hash_view_result_guard_dart_profiles.json": {
+        "bytes": 8634,
+        "mode": 420,
+        "sha256": "6a74480ee21c4774cd7048a4a9bc8ef2c49098b2b77668ff0825e86a0a9384b7"
+      },
+      "tests/fixtures/hash_view_result_guard_julia_cases.json": {
+        "bytes": 10328,
+        "mode": 420,
+        "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+      },
+      "tests/fixtures/hash_view_result_guard_julia_profiles.json": {
+        "bytes": 8060,
+        "mode": 420,
+        "sha256": "7fc26690c58019d5c7a729b011bf1e09ab8f3a0cf07c41a440cd08922295ba13"
+      },
+      "tests/fixtures/hash_view_result_guard_lua_cases.json": {
+        "bytes": 10328,
+        "mode": 420,
+        "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+      },
+      "tests/fixtures/hash_view_result_guard_lua_profiles.json": {
+        "bytes": 17446,
+        "mode": 420,
+        "sha256": "608c8c66f9e0f6164aa3d678c5606bec6a991d09f77a55c8033396e072af73ce"
+      },
+      "tests/fixtures/hash_view_result_guard_rust_profiles.json": {
+        "bytes": 4602,
+        "mode": 420,
+        "sha256": "6ce4f538e3b93a6d4ab24e0f0a79990adc7e7cffe878d6e92aba13c6df48fa93"
+      },
+      "tests/fixtures/index_block_operand_cases.json": {
+        "bytes": 6960,
+        "mode": 420,
+        "sha256": "2259b29354d744654a4f4970734892190ad14db5c84b3b866568bf7590f76b99"
+      },
+      "tests/fixtures/index_null_prefix_guard_cases.json": {
+        "bytes": 1327,
+        "mode": 420,
+        "sha256": "6e3e937bb9d26befc71a631b467eee4fcb70cdd9f273fb3e7c8e169919e033a6"
+      },
+      "tests/fixtures/index_null_with_guard_cases.json": {
+        "bytes": 900,
+        "mode": 420,
+        "sha256": "262b8885b30a6a6f298cba733494b688cad97e2f2ac6e9cec10c5e3bab5cb1b2"
+      },
+      "tests/fixtures/index_result_guard_cases.json": {
+        "bytes": 9814,
+        "mode": 420,
+        "sha256": "e2a8ec5fb7185a3d4ee924b2e91cf057214b0b353a57a02f76a98c83dfa0ad18"
+      },
+      "tests/fixtures/index_result_guard_excluded_ast.json": {
+        "bytes": 73444,
+        "mode": 420,
+        "sha256": "4e0e2781757b29bd45266e2c3e438ee0e4a1478fde13b046bb29d0d3712fbd9e"
+      },
+      "tests/fixtures/index_result_receiver_values.spec": {
+        "bytes": 2120,
+        "mode": 420,
+        "sha256": "c233e4d1669c4703e3e27fd66078f620f243a1d8063e5e0a65d55e9ad27e8f35"
+      },
+      "tests/fixtures/input_cursor_result_values.json": {
+        "bytes": 92,
+        "mode": 420,
+        "sha256": "95c2c8aa24843aad2709a093ed9e5fab6372c34608a10b7da08c9a16e970d479"
+      },
+      "tests/fixtures/input_cursor_result_values.spec": {
+        "bytes": 875,
+        "mode": 420,
+        "sha256": "79ae888bb81a33ad4ca84c60f4715c466a6bb79accc7f159f3e1b5e868261ee3"
+      },
+      "tests/fixtures/key_count_block_source_cases.json": {
+        "bytes": 3568,
+        "mode": 420,
+        "sha256": "52e1372973340cd7c7c80d5ac86b83a66261336a23439137dec421a9bda01621"
+      },
+      "tests/fixtures/key_count_callable_dart_profiles.json": {
+        "bytes": 3028,
+        "mode": 420,
+        "sha256": "3e104a2f1d1b93c97b05178a9b4f45ac21c7a0b57124c323af32e6d02ef24dc7"
+      },
+      "tests/fixtures/key_count_callable_julia_profiles.json": {
+        "bytes": 2450,
+        "mode": 420,
+        "sha256": "f7752b3c5405420787ede78e7b13590d1e6eb21c70abc30ee086e5786f23c381"
+      },
+      "tests/fixtures/key_count_callable_lua_profiles.json": {
+        "bytes": 4882,
+        "mode": 420,
+        "sha256": "e411632c992628d76f0713d439e9fa5e013b57e11c88906411fdd94769660a71"
+      },
+      "tests/fixtures/key_count_callable_perl_profiles.json": {
+        "bytes": 1678,
+        "mode": 420,
+        "sha256": "ad5a9a1b5d9fe348363d8ac3b1c1a53ce29611f3ff0921e7ea28550bc6ee3368"
+      },
+      "tests/fixtures/key_count_callable_result_cases.json": {
+        "bytes": 5443,
+        "mode": 420,
+        "sha256": "245181e02ad12ced3f8eb44dfe3ce0e29edf2724248920471dc84641967b906e"
+      },
+      "tests/fixtures/key_count_callable_rust_profiles.json": {
+        "bytes": 1884,
+        "mode": 420,
+        "sha256": "0cd619afec313151fe0169fa810e74c43527ff7e9a75c2551fb7fcabe924199d"
+      },
+      "tests/fixtures/key_count_count_source_ownership_cases.json": {
+        "bytes": 748,
+        "mode": 420,
+        "sha256": "ba87550bba0d551ad152ac11cf79d967c134a0840da1f118addd7e331f578a11"
+      },
+      "tests/fixtures/key_count_count_source_ownership_julia_cases.json": {
+        "bytes": 779,
+        "mode": 420,
+        "sha256": "98f959b555f813854288a8ba0c629dae9ee30df10f355d758cdbd6b1372168e0"
+      },
+      "tests/fixtures/key_count_perl_source_owner_cases.json": {
+        "bytes": 1792,
+        "mode": 420,
+        "sha256": "fc18217a003b230cd7a7d211a6f5872aa03f61cad97e29370f185fc41e0b7b6f"
+      },
+      "tests/fixtures/key_count_perl_source_profiles.json": {
+        "bytes": 238,
+        "mode": 420,
+        "sha256": "a6914d9837871ba2f00ff026c8a60d1c095d2005cf55418eee49f52a75395eda"
+      },
+      "tests/fixtures/key_count_result_guard_cases.json": {
+        "bytes": 6880,
+        "mode": 420,
+        "sha256": "a02dcfea784b87c50a948337597b330ace9d037d8088feb6b4c4bce88fcd3075"
+      },
+      "tests/fixtures/key_count_result_guard_dart_domain.json": {
+        "bytes": 455,
+        "mode": 420,
+        "sha256": "1f997ea5676993ca1f7abeef75a83ca1d2fa299d346f4e815f00ad67b7b5f315"
+      },
+      "tests/fixtures/key_count_result_guard_julia_domain.json": {
+        "bytes": 594,
+        "mode": 420,
+        "sha256": "44b557b84c0361de4fcc2a347ae286b15dce24ff6b573cd7636a6d12619ba58b"
+      },
+      "tests/fixtures/key_count_result_guard_julia_errors.json": {
+        "bytes": 1127,
+        "mode": 420,
+        "sha256": "f770b9b15fe18038cd72d10f9302a35ec6ecc7b5a68a22c59a0cffc624631622"
+      },
+      "tests/fixtures/key_count_result_guard_lua_domain.json": {
+        "bytes": 734,
+        "mode": 420,
+        "sha256": "22ecaed90f921b912f2fa5022aee6eb7261bb788475058b0efa789ab3c5d5e3b"
+      },
+      "tests/fixtures/key_count_result_guard_lua_errors.json": {
+        "bytes": 931,
+        "mode": 420,
+        "sha256": "533a839bd5071e8455d709d7f6e9ba1fdb34f20ca9c7cfd2936801af632ef73e"
+      },
+      "tests/fixtures/key_count_result_guard_rust_domain.json": {
+        "bytes": 452,
+        "mode": 420,
+        "sha256": "b865aadba9b9ae482ceab2b6f1e855c3c720d1ab542dcc0d4165737076a080ff"
+      },
+      "tests/fixtures/key_count_source_domain_cases.json": {
+        "bytes": 5408,
+        "mode": 420,
+        "sha256": "8058c217bb6f031606d978f30f3c5fb4ed341a08ef21fdbc5f33a190114a228d"
+      },
+      "tests/fixtures/length_count_source_ownership_cases.json": {
+        "bytes": 2007,
+        "mode": 420,
+        "sha256": "a5c15c64cd3e27025e24a9fafa4ec52a0c21feeb7d41946550907d716f9a3e71"
+      },
+      "tests/fixtures/length_result_guard_cases.json": {
+        "bytes": 5098,
+        "mode": 420,
+        "sha256": "e16fd3efe2c2f0edaed3b5ef119a4c09414610d6ad0588e64f01ebe18a35768d"
+      },
+      "tests/fixtures/length_result_guard_dart_domain.json": {
+        "bytes": 356,
+        "mode": 420,
+        "sha256": "744a8e8e4776844c61f92fa5dd2499f1e489188ed3535b58ce20e1baa7c6fc8d"
+      },
+      "tests/fixtures/length_result_guard_julia_domain.json": {
+        "bytes": 220,
+        "mode": 420,
+        "sha256": "7dc7a4949cb836d067456a151a019e2c903afac04a340fe9aa91831cc6b621c3"
+      },
+      "tests/fixtures/length_result_guard_julia_errors.json": {
+        "bytes": 2258,
+        "mode": 420,
+        "sha256": "69e27982f260e42155a73b396c33715ffb6c3409d410042616f0a2b295487b7d"
+      },
+      "tests/fixtures/length_result_guard_lua_domain.json": {
+        "bytes": 220,
+        "mode": 420,
+        "sha256": "7dc7a4949cb836d067456a151a019e2c903afac04a340fe9aa91831cc6b621c3"
+      },
+      "tests/fixtures/length_result_guard_lua_errors.json": {
+        "bytes": 1866,
+        "mode": 420,
+        "sha256": "3eb3e8674e40919d02d9b074c27edb147f64da582627b4b66f8426ec3c71b189"
+      },
+      "tests/fixtures/length_result_guard_rust_domain.json": {
+        "bytes": 390,
+        "mode": 420,
+        "sha256": "2e1510a420ef18a6f291d31cc3ce3c851ada9037a6632ddb2788a2ee4ffaed9b"
+      },
+      "tests/fixtures/lexical_result_guard_cases.json": {
+        "bytes": 18808,
+        "mode": 420,
+        "sha256": "8d19a71e620e3e884930210abeec853945a2f50c939ed912870f50763901cd0b"
+      },
+      "tests/fixtures/lexical_result_guard_excluded_ast.json": {
+        "bytes": 82738,
+        "mode": 420,
+        "sha256": "4e21f242b9f1f91c231c039db56e367ab0b8fb24243c8b226da078267496954a"
+      },
+      "tests/fixtures/logical_receiver_method_values.json": {
+        "bytes": 367,
+        "mode": 420,
+        "sha256": "77a28a4eaf20275a2710cee36f6f16fae4a3e4cb1920fd20e4171eaadf19b4b6"
+      },
+      "tests/fixtures/logical_receiver_method_values.spec": {
+        "bytes": 1219,
+        "mode": 420,
+        "sha256": "2fc31ac8680eabdbaf9b59f5e446353661ebb82c28443785b8d6d1ea69f9c4c7"
+      },
+      "tests/fixtures/logical_rejected_consumer_effects.json": {
+        "bytes": 112,
+        "mode": 420,
+        "sha256": "a274bf26773ee90c83e9fa38abf370f4faed69676bf50bf66050e5258ecc236a"
+      },
+      "tests/fixtures/logical_rejected_consumer_effects.spec": {
+        "bytes": 592,
+        "mode": 420,
+        "sha256": "fe7e6115ed62103d3b34df2642723aef5568900821549c8a4a32f9d16c959b89"
+      },
+      "tests/fixtures/logical_result_guard_cases.json": {
+        "bytes": 14378,
+        "mode": 420,
+        "sha256": "380fa34fe0576f1ed9c995b0dae0cacfb21f2b407736cb046eec8fb2bae74f96"
+      },
+      "tests/fixtures/logical_result_guard_excluded_ast.json": {
+        "bytes": 68401,
+        "mode": 420,
+        "sha256": "bf06fd382231fbabe75aa08d959879d1cc5d79785bd02672df51322c34fab7bc"
+      },
+      "tests/fixtures/logical_result_receiver_values.json": {
+        "bytes": 915,
+        "mode": 420,
+        "sha256": "904e09626e811e704ad70bc27f1070c4909d8fb5db04d463602ad8b84c23717c"
+      },
+      "tests/fixtures/logical_result_receiver_values.spec": {
+        "bytes": 2623,
+        "mode": 420,
+        "sha256": "27c41c348ec129076ef1279ec16a14708bde387bac56b82b6856330d4c147470"
+      },
+      "tests/fixtures/named_capture_endpoint_absence.json": {
+        "bytes": 10543,
+        "mode": 420,
+        "sha256": "0f2da9455b16dd9501285ea8f6c3f1362128f29fb6755466b1c5aa1b85319c47"
+      },
+      "tests/fixtures/named_mark_number_values.json": {
+        "bytes": 26,
+        "mode": 420,
+        "sha256": "2c07c322e2f9f788855c3935cb7ea96f8fd0b61351c0b453866e95bf9cd3569c"
+      },
+      "tests/fixtures/named_mark_number_values.spec": {
+        "bytes": 498,
+        "mode": 420,
+        "sha256": "ca6be38d2f860fe6e28b0149cd47a4c931011ed06a7468338126b3ce0b563b42"
+      },
+      "tests/fixtures/named_writer_endpoint_absence.json": {
+        "bytes": 7784,
+        "mode": 420,
+        "sha256": "f043f118976651b00928ef6bd570b3001d26a71380b7185ecbc0b1a550b21b09"
+      },
+      "tests/fixtures/nested_handler_error.json": {
+        "bytes": 4247,
+        "mode": 420,
+        "sha256": "c553ef8bfbe2be84d6ad99cf3614405fc42bacc8e7466f460c811b87fc29fb50"
+      },
+      "tests/fixtures/null_array_key_values.json": {
+        "bytes": 566,
+        "mode": 420,
+        "sha256": "30071900bcf527b5363de35edfe66e3b4fd721de4674c02c3fdef5d5ce1e5b8b"
+      },
+      "tests/fixtures/null_array_key_values.spec": {
+        "bytes": 1342,
+        "mode": 420,
+        "sha256": "da66d8f08f0c948ba133dc00167ac1f42a20578f090ff47556c6523ae5df251d"
+      },
+      "tests/fixtures/numeric_comparison_result_receiver_values.json": {
+        "bytes": 1243,
+        "mode": 420,
+        "sha256": "9dc19c005fd94e35ee8b1735df55340d52e3c0a09f1d1089b483c67c6071e9ed"
+      },
+      "tests/fixtures/numeric_comparison_result_receiver_values.spec": {
+        "bytes": 4374,
+        "mode": 420,
+        "sha256": "d08e737d14570fc1a45599e2e4a1b8ac1675285b27eb200484cfc0838ea5ee32"
+      },
+      "tests/fixtures/perl_blind_scalar_declarations.json": {
+        "bytes": 19682,
+        "mode": 420,
+        "sha256": "a5b917c0509cb70cbaf39dabd8fd07cf2116342bb4208df8f1423d5bb0963feb"
+      },
+      "tests/fixtures/perl_match_local_declarations.json": {
+        "bytes": 6771,
+        "mode": 420,
+        "sha256": "b0ff3e5aff8c1e6536407e44877783af4b56673daf80b40ec49293cc678f973f"
+      },
+      "tests/fixtures/perl_or_match_local_declarations.json": {
+        "bytes": 6734,
+        "mode": 420,
+        "sha256": "e8c5df32da63cd09d5b94b210359fb20587d30ee307b3aeba0b57920e9620a57"
+      },
+      "tests/fixtures/perl_sort_scope_cases.json": {
+        "bytes": 4299,
+        "mode": 420,
+        "sha256": "6cb84ebc458363f448ec046113e5e170095368fd981c5b500402bf2a19fb30f3"
+      },
+      "tests/fixtures/pick_keys_operand_isolation.json": {
+        "bytes": 2722,
+        "mode": 420,
+        "sha256": "290473495d948f020aad69dfc8c6d78dd8de504fbc4458fe28fd14027b302619"
+      },
+      "tests/fixtures/pure_blind_targets.json": {
+        "bytes": 1942,
+        "mode": 420,
+        "sha256": "de8f340d3b9d2244d7508969f8a422db0f4836bdd496d817310c8daee9a30336"
+      },
+      "tests/fixtures/push_result_excluded_source_ast.json": {
+        "bytes": 5007,
+        "mode": 420,
+        "sha256": "1cfed2fcd01e23b06b119033d9810214f0f1678f0ab59c4cab0a8bd32bb23cac"
+      },
+      "tests/fixtures/push_result_selection_read_values.json": {
+        "bytes": 59,
+        "mode": 420,
+        "sha256": "413205333e36ed2778d0d96d9505ebf914a256f3c897f30adbbe32a3a0296cbc"
+      },
+      "tests/fixtures/push_result_selection_read_values.spec": {
+        "bytes": 748,
+        "mode": 420,
+        "sha256": "ae5985d250ccbf618276ec50ef8f626dd9db719a3d153e5bd76caad264837f1d"
+      },
+      "tests/fixtures/push_result_selection_values.json": {
+        "bytes": 75,
+        "mode": 420,
+        "sha256": "e4f5acafd358e170aa8fc07079d2035b20240fdf203e1c71c83e6e4cabc2c86e"
+      },
+      "tests/fixtures/push_result_selection_values.spec": {
+        "bytes": 841,
+        "mode": 420,
+        "sha256": "fdd6823e31494a8c79a2d82bea906f2c6b4e6e3ea1c60c442ffb8e40d31a6a7c"
+      },
+      "tests/fixtures/receiver_string_bridge_cases.json": {
+        "bytes": 8784,
+        "mode": 420,
+        "sha256": "5072f2951aff50d0bf37a2990565119e5ed83b3eff028edc2be80b5e821d339c"
+      },
+      "tests/fixtures/receiver_string_bridge_excluded_ast.json": {
+        "bytes": 45246,
+        "mode": 420,
+        "sha256": "d619e2d6fda338ed626a315d5b13c60f188469a85ac616dd62b50116849491b3"
+      },
+      "tests/fixtures/reduction_result_receiver_values.json": {
+        "bytes": 428,
+        "mode": 420,
+        "sha256": "d95850a2ef8097e2efc49ae79871ebda74c87cdba9a2a63d2dbbabc44699ec8f"
+      },
+      "tests/fixtures/reduction_result_receiver_values.spec": {
+        "bytes": 3037,
+        "mode": 420,
+        "sha256": "42dbee057d84e53390602c005c145acd050848f92074573e59ba90d4ae198318"
+      },
+      "tests/fixtures/referenced_blind_intermediate.json": {
+        "bytes": 4411,
+        "mode": 420,
+        "sha256": "2c1afd2b5ae129bbfea47d9b18f300cc0557da65e129c6532cfd3fd43f7cb305"
+      },
+      "tests/fixtures/referenced_blind_intermediate_negatives.json": {
+        "bytes": 403,
+        "mode": 420,
+        "sha256": "7eb2a07a35b63bc6e38270025c1fb6448398f272bd992c9fd53c2a5dd631562d"
+      },
+      "tests/fixtures/referenced_blind_intermediate_qualified.json": {
+        "bytes": 4339,
+        "mode": 420,
+        "sha256": "b6085759ffdd009924387382431be7c80ae2790287feba12071d44a537753746"
+      },
+      "tests/fixtures/rule_call_selection_values.json": {
+        "bytes": 73,
+        "mode": 420,
+        "sha256": "b8a7e336af2b4fe038f555678e151303db5e235f7f45403a466d7d4bdb6131fe"
+      },
+      "tests/fixtures/rule_call_selection_values.spec": {
+        "bytes": 903,
+        "mode": 420,
+        "sha256": "42bab9bc7e654ee58913a789f5a1df53c012d8ce194bd07f5699a3318d14de48"
+      },
+      "tests/fixtures/rule_invocation_accumulators.json": {
+        "bytes": 848,
+        "mode": 420,
+        "sha256": "6f5a66598dab032c2b741f00d55537953aeb53fc57b16108416978120a3ba27a"
+      },
+      "tests/fixtures/rule_invocation_binding_scope.json": {
+        "bytes": 1103,
+        "mode": 420,
+        "sha256": "65cc0738c0855b289bcf07d75bb982304c4cae9a3fb9faa7ea34be312a9b1fe4"
+      },
+      "tests/fixtures/scalar_arithmetic_result_receiver_values.json": {
+        "bytes": 1496,
+        "mode": 420,
+        "sha256": "ee3a80c2a47dc668341ced0d0532772710d8c7184a8375b60d74c03a4230ffba"
+      },
+      "tests/fixtures/scalar_arithmetic_result_receiver_values.spec": {
+        "bytes": 5194,
+        "mode": 420,
+        "sha256": "5cfd61170a1981ba0cf86dd69c4f4023d7d99c2ca44594ecff71c5a82a3072c4"
+      },
+      "tests/fixtures/scalar_predicate_boundaries.spec": {
+        "bytes": 1030,
+        "mode": 420,
+        "sha256": "4873f9ddce4d704d3a9c699ae61c3c09aa4669f152c2af9417dcc3a3a45e892a"
+      },
+      "tests/fixtures/scalar_string_result_receiver_values.json": {
+        "bytes": 1669,
+        "mode": 420,
+        "sha256": "e5305e948e52bcec885001abf5851145aca108b70e4050639e33a3bf1d1e44c8"
+      },
+      "tests/fixtures/scalar_string_result_receiver_values.spec": {
+        "bytes": 5321,
+        "mode": 420,
+        "sha256": "693987c9da8ae526a393134a4a118df29099f3594d0ee65be0a836fcde78aa01"
+      },
+      "tests/fixtures/set_result_excluded_source_ast.json": {
+        "bytes": 5018,
+        "mode": 420,
+        "sha256": "76fca682880576d615d9c5cd00e787d3e15c3287db7e8825db0311f0f2577142"
+      },
+      "tests/fixtures/set_result_selection_values.json": {
+        "bytes": 143,
+        "mode": 420,
+        "sha256": "78385d269bea5c7c9b1a3e4643c174f55f705c37c6be9161a9bf78288aab900d"
+      },
+      "tests/fixtures/set_result_selection_values.spec": {
+        "bytes": 762,
+        "mode": 420,
+        "sha256": "8390c2bc89d5ac2af27900b378c2da95ab207e17f8ef5c4a00a0eef2e5824e5d"
+      },
+      "tests/fixtures/sorted_values_scalar_isolation.json": {
+        "bytes": 2528,
+        "mode": 420,
+        "sha256": "4f350af9d7d1da293b0eb7de302c1b52cead11cdf8f9b0ecc8e24f0fab1e4bfe"
+      },
+      "tests/fixtures/string_comparison_result_receiver_values.json": {
+        "bytes": 1145,
+        "mode": 420,
+        "sha256": "ae3dcfed2faaa1f40493d5585e3d8042ae0e2a3a93a05f57f44bba0140aa1993"
+      },
+      "tests/fixtures/string_comparison_result_receiver_values.null.json": {
+        "bytes": 1145,
+        "mode": 420,
+        "sha256": "65d20cde77487b19f7185a60c0a4ed6058463a891329865757bb386ca33205f4"
+      },
+      "tests/fixtures/string_comparison_result_receiver_values.perl.json": {
+        "bytes": 1103,
+        "mode": 420,
+        "sha256": "e9621e1372e2e9a4ed6fd759b61fc6e59f3ceb72feeb687794922c52e2d3e5b0"
+      },
+      "tests/fixtures/string_comparison_result_receiver_values.spec": {
+        "bytes": 4407,
+        "mode": 420,
+        "sha256": "9ea63dcca748695d4cd93bf9592de6a8ba1fa759ce1c60ae5cb2591f0286df8c"
+      },
+      "tests/fixtures/string_predicate_result_guard_cases.json": {
+        "bytes": 15649,
+        "mode": 420,
+        "sha256": "74d9490d71e22e850528a4b1833a680133e9e018073757f70c4eed624099fc01"
+      },
+      "tests/fixtures/string_predicate_result_guard_excluded_ast.json": {
+        "bytes": 63289,
+        "mode": 420,
+        "sha256": "c9e4b37a08547cdf16b9b7437956964616c421fde4ec58b9f0d3359396b8ce1c"
+      },
+      "tests/fixtures/string_predicate_result_receiver_values.json": {
+        "bytes": 904,
+        "mode": 420,
+        "sha256": "9b857351efa70c74f851a5b5627732467b7d4bb22970d2e6f3819611b6625f1a"
+      },
+      "tests/fixtures/string_predicate_result_receiver_values.spec": {
+        "bytes": 3503,
+        "mode": 420,
+        "sha256": "516138b4f67eed6a7a756c3057ed964bbfc9ebf0be3ebd24cf65c184c8a4f894"
+      },
+      "tests/fixtures/substring_optional_argument_values.json": {
+        "bytes": 330,
+        "mode": 420,
+        "sha256": "a388fc04f0deb986349b037bbbd5551080e33384ad80227cd81645a71797def8"
+      },
+      "tests/fixtures/substring_optional_argument_values.spec": {
+        "bytes": 1299,
+        "mode": 420,
+        "sha256": "5b114282ad0c06d7642ff417996bbe5e30eab69e4000cfc03d0915a8ffa29425"
+      },
+      "tests/fixtures/tagged_record_receiver_values.json": {
+        "bytes": 161,
+        "mode": 420,
+        "sha256": "13dba424e961d950c65a3a108b9bbb9d1f8d52c0c033c90475e4185a15138d93"
+      },
+      "tests/fixtures/tagged_record_receiver_values.spec": {
+        "bytes": 1494,
+        "mode": 420,
+        "sha256": "22ba0fafe4f458f4aeec99ec9b8f52a59cc8892aab0815326381009c58e54208"
+      },
+      "tests/fixtures/value_copy_values.json": {
+        "bytes": 271,
+        "mode": 420,
+        "sha256": "e6b9812c7d962504aedad2334ec65bea3445dbb46bed07f14f77c548f2a91570"
+      },
+      "tests/fixtures/value_copy_values.spec": {
+        "bytes": 1334,
+        "mode": 420,
+        "sha256": "70ce01b0d532b2a91bf550b7f86b4cebab8148469331ba8c606395b498493691"
+      },
+      "tests/fixtures/with_hash_result_values.json": {
+        "bytes": 44,
+        "mode": 420,
+        "sha256": "08fa100171b6136807acbca04bce880c8bc618f7136115f4ee1487028390745d"
+      },
+      "tests/fixtures/with_hash_result_values.spec": {
+        "bytes": 723,
+        "mode": 420,
+        "sha256": "a66a4ac58c211532d013315918c0748fbf96b7484d95a74430337c296a07d9a2"
+      },
+      "tests/fixtures/with_result_selection_values.json": {
+        "bytes": 98,
+        "mode": 420,
+        "sha256": "31736ae8ce8febdd9b5f6d5cc91652261957c965ff6ab3c45bf1a2d53581d492"
+      },
+      "tests/fixtures/with_result_selection_values.spec": {
+        "bytes": 1100,
+        "mode": 420,
+        "sha256": "3f40b1421a01e214077e760c9403a1e125a59d4977003d9c0c7e29767c032b89"
+      },
+      "tools/project_data_env.sh": {
+        "bytes": 9311,
+        "mode": 493,
+        "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+      },
+      "tools/project_data_run.sh": {
+        "bytes": 11043,
+        "mode": 493,
+        "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+      },
+      "tools/run_cargo_local.sh": {
+        "bytes": 494,
+        "mode": 493,
+        "sha256": "d96a53c04e84a1af85652844b2d42caeac542c52a392a7f8b95ca35620485011"
+      },
+      "tools/run_python_project_data.sh": {
+        "bytes": 1486,
+        "mode": 493,
+        "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+      }
+    }
+  }
+]

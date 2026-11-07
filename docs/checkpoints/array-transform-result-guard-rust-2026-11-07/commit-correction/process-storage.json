@@ -1,0 +1,10 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.2",
+  "logical_path": "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/commit-correction/processes-before-termination.json",
+  "physical_path": "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/commit-correction/processes-before-termination.json.gz",
+  "sha256": "5607583dcef3578f25e03484eec60d33431521653b082d939eac45305a1f7b82",
+  "bytes": 1488,
+  "original_mode": 420,
+  "carrier_sha256": "e09fef449d703a8c660a285fa40a2ab04ac88f3780a93a0970ed55e8397e54fe",
+  "role": "Inert historical process observation only; never a repository locator or executable command source."
+}

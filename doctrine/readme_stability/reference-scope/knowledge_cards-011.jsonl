@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2503,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-capture-endpoint-presence-repair.md","sha256":"34a0b23938788a4f8650dbb735a44bbe6c4fd6f54d81ddd960f7e5a5802adf8d","type":"member"}
 {"bytes":4271,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-default-container-guard-gap.md","sha256":"4aab311893b0d226b31148befbb705fd67e2a87fa38cbb606af3e856588992e7","type":"member"}
 {"bytes":5692,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-direct-value-execution.md","sha256":"005d0ad1f04d06b98fe9635963bafb5b964e5221111878c886b6838cfebdf900","type":"member"}
 {"bytes":12968,"lines":164,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-mcp-server-plan.md","sha256":"e22d1c6e896cf33d4c37a12b065a8f48d6455332ff9da72b8f78fdd021993d4a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4623,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-brainstorm-rounds-1-3.md","sha256":"9fccb7d2181ddd3cd857e44e5981e213a05e3bda2f7d5cba83358d53476e03b8","type":"member"}
 {"bytes":1640,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-terse-tree-closed.md","sha256":"dd4c41d06d718979f658dfac5898342d4eee0c1ec67f92eb71a637d6bfbd652e","type":"member"}
 {"bytes":2463,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-import-composition-contract.md","sha256":"f8147faa264c711c2f874643f37a99af5da08ac437c7d9f81f5b1f61f7bb5fb5","type":"member"}
-{"bytes":5361,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-closure-contract-plan.md","sha256":"6fd65365caef9990d682c37aa0f9e256282e8b2a54877f62fc83019d0faee543","type":"member"}

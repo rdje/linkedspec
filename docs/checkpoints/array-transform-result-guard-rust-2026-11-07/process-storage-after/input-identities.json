@@ -1,0 +1,52 @@
+{
+  "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/capture_process_storage.py": {
+    "bytes": 2238,
+    "mode": 420,
+    "sha256": "a121ead0273a76ea98909a94e922b1ac7c7ffa80202f47e1b25be988e978a3c5"
+  },
+  "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/commit-correction/process-storage.json": {
+    "bytes": 647,
+    "mode": 420,
+    "sha256": "91d1f796901a78b9ca10f441d0a758f0f648c57bc8bbf0f9011f75dd95d694d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/commit-correction/processes-before-termination.json.gz": {
+    "bytes": 476,
+    "mode": 420,
+    "sha256": "e09fef449d703a8c660a285fa40a2ab04ac88f3780a93a0970ed55e8397e54fe"
+  },
+  "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/package_process_storage.py": {
+    "bytes": 1403,
+    "mode": 420,
+    "sha256": "3345936d1f98dc6b7776f8595ac86b4f893678be29210e7c9cfc6277a0d1671d"
+  },
+  "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/record.py": {
+    "bytes": 882,
+    "mode": 420,
+    "sha256": "231da065bc97eebec48df3bc953cf41c210191939b952ef586edb3f5fcb6abb7"
+  },
+  "docs/checkpoints/array-transform-result-guard-rust-2026-11-07/review_process_storage.py": {
+    "bytes": 3471,
+    "mode": 420,
+    "sha256": "2e75ec12c187e5410e701197177053cf1ad33419b44571c3e5c5973ab9133e97"
+  },
+  "scripts/check_repo_root_path_portability.sh": {
+    "bytes": 6594,
+    "mode": 493,
+    "sha256": "c1aec097c7a7f86bce666644a1e67d9f74e8fe89648b0a5f94b120e9fb9a89ad"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

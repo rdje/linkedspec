@@ -943,14 +943,15 @@ sorted([2,"10",1])               # [1,"10",2] (lexicographic)
 
 The ordinary Array results of `take`, `take_last`, `drop_front`, `drop_back`,
 `slice`, `sorted`, `reversed` and canonical `concat_arrays` now retain actual-kind
-and rejection guards on bounded Perl routes. Incompatible Hash consumers return
+and rejection guards on bounded Perl and Rust routes. Incompatible Hash consumers return
 null before operands; later copy/logical/with work is skipped. Compatible Array
 consumers and selected String/Hash bridges, valid empty `with`, source snapshots
 and needed errors remain intact. Existing optional counts and slice arities stay;
-guarded concat forms are free-two/receiver-one. Source-isolation78.0's Number-AST
-fences remain. Other backends, variadic concat continuations and full admission
-are independently owned. Regenerate affected emitted Perl. See the
-[worked guarded results](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-perl-results).
+guarded concat forms are free-two/receiver-one. Source-isolation78.0's Perl Number-AST
+fences remain; Rust retains its own Number/null/Hash source policy, including scalar
+concat elements. Dart/Julia/Lua, variadic concat continuations and full admission
+are independently owned. Regenerate affected emitted Perl; rebuild Rust applications/runtime. See the
+[worked guarded results](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-results).
 
 ### `array(e1, e2, ...)`
 - **Signature**: `array(values: expr...)`

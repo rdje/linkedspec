@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-Current Array frontier: bounded Perl78.1.1 is focused-checked with212PASS/direct490/private inverse/readonly/seven controls. Independent Rust78.2 next under own source/arity/error acquisition; peers/full23.4 remain separate.
+Current Array frontier: bounded Perl78.1.1 and independent Rust78.2 are focused-checked. Rust195PASS/direct290/private21RED-restored195PASS/readonly/eight controls preserve own policies. Knowledge Map capacity23.4.18 precedes independent Dart78.3; peers/full23.4 remain separate. PNT stops here at the director request; activate the next leaf only when instructed to resume.
 
 November5 frontier: Count P1/compiler73.7/Dart formatting73.8 are committed with focused proof. Growth assessment23.4.8 and the outgoing-scope correction are focused-checked; the fixed pre-landing range has15 commits and the director reports about11.5MB outgoing. The whole local store includes published history and the warned blob already exists at the origin base. Director authorizes RAM-window retry; normal hooks govern landing before selection23.1.35. Prospective input reuse4.12 remains separate. Canonical4683555e is the last published checkpoint.
 

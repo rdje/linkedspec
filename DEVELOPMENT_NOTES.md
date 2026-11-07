@@ -10,6 +10,16 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.2 — Guard Rust ordinary Array transform results
+
+Independent Rust Array-transform78.2 acquires unchanged37 plus148 own policy controls and10 optional-result targets. The unchanged195 normal has21RED/174 healthy before repair and195PASS afterward on native/restored/generated-plan/fresh routes. Private exact old/current images reproduce21RED/195PASS; direct Array/Hash/copy normals pass290. All174 healthy projections,152 profiles and195 compiled/module pairs stay exact; scoped format and first readonly0/empty stderr/eight corruption controls pass.
+
+Original producer source/arity/error policies remain separate from result guards. Needed errors, compatible bridges, nested kinds, snapshots and valid empty with stay intact. First ordinary before has a retained untracked optional include-input gap; separate qualified-before and all later acquisitions explicitly capture that actual fixture before build. Original writer failed before writes and the non-fail-fast shell started an old-source after epoch; both are retained without GREEN credit. A separate anchored writer passes construction rehearsal and produces repaired-after. No retroactive original-normal custody credit, peer policy import, variadic/deferred/function-receiver promotion or full domain/context/native-custody/admission claim. Rebuild Rust runtime/applications. Evidence: docs/checkpoints/array-transform-result-guard-rust-2026-11-07/REVIEW.md.
+
+Final checkpoint metadata corrects the trailing-with function citation and retains two superseded143 commit attempts. Raw process argv contains observed checkout identity: exact gzip/mode preservation plus relative mapping changes the unchanged portability oracle1RED to0GREEN, with first readonly/two corruption controls passing. This remains historical data, never an executable/root locator; sealed runtime/proof inputs stay exact.
+
+README-STABILITY then exposes the derived map at22501/22500 lines. Two pairs of new overlapping lookup aliases are consolidated without changing fact bodies or prior published questions; generator and limits stay unchanged. P1 capacity23.4.18 is first on resumption before further backend fact growth, with actual preservation/limit controls under map-capacity/.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1 — Guard Perl ordinary Array transform results
 
 Perl Array result guards repair all19 original targets under unchanged37. The normal reaches212PASS from19RED/193 healthy; original123 plus52 own prefix/host/arity profiles stay exact. Direct composition/source/Hash normals pass490 groups. Exact old/current private images reproduce19RED/212PASS with matching212 module-handler pairs; first readonly0/empty stderr/seven effective corruptions passes. Source78.0 and first producer permission remain intact; independent Rust78.2 is next.

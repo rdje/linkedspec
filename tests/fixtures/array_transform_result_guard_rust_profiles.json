@@ -1,0 +1,3866 @@
+{
+  "extra_concat_arrays_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"b\",\"a\"]},[\"z\"],{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_concat_arrays_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.concat_arrays([\"z\"],{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_drop_back_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_back({order=cat(order,\"S\");[\"b\",\"a\"]},1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_drop_back_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.drop_back(1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_drop_front_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_front({order=cat(order,\"S\");[\"b\",\"a\"]},1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_drop_front_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.drop_front(1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_reversed_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=reversed({order=cat(order,\"S\");[\"b\",\"a\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_reversed_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.reversed({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_slice_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=slice({order=cat(order,\"S\");[\"b\",\"a\"]},1,1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_slice_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.slice(1,1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_sorted_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted({order=cat(order,\"S\");[\"b\",\"a\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_sorted_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.sorted({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_take_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take({order=cat(order,\"S\");[\"b\",\"a\"]},1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_take_last_free": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take_last({order=cat(order,\"S\");[\"b\",\"a\"]},1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_take_last_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.take_last(1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_take_receiver": {
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.take(1,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "initial_hash_concat_arrays_free": {
+    "fresh": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "plan": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "source": "Value:: I {return(concat_arrays({\"k\":1},[\"z\"]))}\n"
+  },
+  "initial_hash_concat_arrays_free_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=concat_arrays({\"k\":1},[\"z\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_concat_arrays_receiver": {
+    "fresh": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "plan": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        {
+          "k": 1
+        },
+        "z"
+      ]
+    },
+    "source": "Value:: I {return({\"k\":1}.concat_arrays([\"z\"]))}\n"
+  },
+  "initial_hash_concat_arrays_receiver_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.concat_arrays([\"z\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_drop_back_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(drop_back({\"k\":1},1))}\n"
+  },
+  "initial_hash_drop_back_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_back({\"k\":1},1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_drop_back_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.drop_back(1))}\n"
+  },
+  "initial_hash_drop_back_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_drop_front_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(drop_front({\"k\":1},1))}\n"
+  },
+  "initial_hash_drop_front_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_front({\"k\":1},1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_drop_front_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.drop_front(1))}\n"
+  },
+  "initial_hash_drop_front_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_reversed_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(reversed({\"k\":1}))}\n"
+  },
+  "initial_hash_reversed_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=reversed({\"k\":1}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_reversed_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.reversed())}\n"
+  },
+  "initial_hash_reversed_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_slice_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(slice({\"k\":1},1,1))}\n"
+  },
+  "initial_hash_slice_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=slice({\"k\":1},1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_slice_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.slice(1,1))}\n"
+  },
+  "initial_hash_slice_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_sorted_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(sorted({\"k\":1}))}\n"
+  },
+  "initial_hash_sorted_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted({\"k\":1}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_sorted_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.sorted())}\n"
+  },
+  "initial_hash_sorted_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_take_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(take({\"k\":1},1))}\n"
+  },
+  "initial_hash_take_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take({\"k\":1},1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_take_last_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(take_last({\"k\":1},1))}\n"
+  },
+  "initial_hash_take_last_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take_last({\"k\":1},1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_take_last_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.take_last(1))}\n"
+  },
+  "initial_hash_take_last_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_take_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return({\"k\":1}.take(1))}\n"
+  },
+  "initial_hash_take_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"k\":1}.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_concat_arrays_free": {
+    "fresh": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "source": "Value:: I {return(concat_arrays(undef,[\"z\"]))}\n"
+  },
+  "initial_null_concat_arrays_free_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=concat_arrays(undef,[\"z\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_concat_arrays_receiver": {
+    "fresh": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        "z"
+      ]
+    },
+    "source": "Value:: I {return(undef.concat_arrays([\"z\"]))}\n"
+  },
+  "initial_null_concat_arrays_receiver_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.concat_arrays([\"z\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_drop_back_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(drop_back(undef,1))}\n"
+  },
+  "initial_null_drop_back_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_back(undef,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_drop_back_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.drop_back(1))}\n"
+  },
+  "initial_null_drop_back_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_drop_front_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(drop_front(undef,1))}\n"
+  },
+  "initial_null_drop_front_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_front(undef,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_drop_front_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.drop_front(1))}\n"
+  },
+  "initial_null_drop_front_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_reversed_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(reversed(undef))}\n"
+  },
+  "initial_null_reversed_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=reversed(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_reversed_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.reversed())}\n"
+  },
+  "initial_null_reversed_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_slice_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(slice(undef,1,1))}\n"
+  },
+  "initial_null_slice_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=slice(undef,1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_slice_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.slice(1,1))}\n"
+  },
+  "initial_null_slice_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_sorted_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(sorted(undef))}\n"
+  },
+  "initial_null_sorted_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_sorted_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.sorted())}\n"
+  },
+  "initial_null_sorted_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_take_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(take(undef,1))}\n"
+  },
+  "initial_null_take_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take(undef,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_take_last_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(take_last(undef,1))}\n"
+  },
+  "initial_null_take_last_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take_last(undef,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_take_last_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.take_last(1))}\n"
+  },
+  "initial_null_take_last_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_take_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(undef.take(1))}\n"
+  },
+  "initial_null_take_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=undef.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_concat_arrays_free": {
+    "fresh": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "plan": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "source": "Value:: I {return(concat_arrays(3,[\"z\"]))}\n"
+  },
+  "initial_number_concat_arrays_free_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=concat_arrays(3,[\"z\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_concat_arrays_receiver": {
+    "fresh": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "plan": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        3,
+        "z"
+      ]
+    },
+    "source": "Value:: I {return(3.concat_arrays([\"z\"]))}\n"
+  },
+  "initial_number_concat_arrays_receiver_with": {
+    "fresh": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        2,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.concat_arrays([\"z\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_drop_back_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(drop_back(3,1))}\n"
+  },
+  "initial_number_drop_back_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_back(3,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_drop_back_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.drop_back(1))}\n"
+  },
+  "initial_number_drop_back_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_drop_front_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(drop_front(3,1))}\n"
+  },
+  "initial_number_drop_front_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_front(3,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_drop_front_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.drop_front(1))}\n"
+  },
+  "initial_number_drop_front_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_reversed_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(reversed(3))}\n"
+  },
+  "initial_number_reversed_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=reversed(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_reversed_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.reversed())}\n"
+  },
+  "initial_number_reversed_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_slice_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(slice(3,1,1))}\n"
+  },
+  "initial_number_slice_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=slice(3,1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_slice_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.slice(1,1))}\n"
+  },
+  "initial_number_slice_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_sorted_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(sorted(3))}\n"
+  },
+  "initial_number_sorted_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_sorted_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.sorted())}\n"
+  },
+  "initial_number_sorted_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_take_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(take(3,1))}\n"
+  },
+  "initial_number_take_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take(3,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_take_last_free": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(take_last(3,1))}\n"
+  },
+  "initial_number_take_last_free_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take_last(3,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_take_last_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.take_last(1))}\n"
+  },
+  "initial_number_take_last_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_take_receiver": {
+    "fresh": {
+      "value": []
+    },
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "restored": {
+      "value": []
+    },
+    "source": "Value:: I {return(3.take(1))}\n"
+  },
+  "initial_number_take_receiver_with": {
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=3.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "missing_concat_arrays_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=concat_arrays().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_concat_arrays_receiver": {
+    "fresh": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].concat_arrays().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_drop_back_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_back().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_drop_front_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_front().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_reversed_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=reversed().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_slice_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=slice().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_slice_receiver": {
+    "fresh": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [
+          "b",
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].slice().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_sorted_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_take_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_take_last_free": {
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take_last().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "needed_count_error_composed": {
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "input": "x",
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": false,
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "source": "Value:: I {order=\"\";return(take([\"tail\"],{items=\"bad\";items+=1;1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+  },
+  "needed_count_error_terminal": {
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "input": "x",
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": false,
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "source": "Value:: I {return(take([\"tail\"],{items=\"bad\";items+=1;1}))}\n"
+  },
+  "needed_source_error_composed": {
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "input": "x",
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": false,
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "source": "Value:: I {order=\"\";return(take({items=\"bad\";items+=1;[\"tail\"]},1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_error_terminal": {
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "input": "x",
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": false,
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "source": "Value:: I {return(take({items=\"bad\";items+=1;[\"tail\"]},1))}\n"
+  },
+  "optional_drop_back_free": {
+    "fresh": {
+      "value": [
+        "b"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "b"
+      ]
+    },
+    "plan": {
+      "value": [
+        "b"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "b"
+      ]
+    },
+    "source": "Value:: I {return(drop_back([\"b\",\"a\"]))}\n"
+  },
+  "optional_drop_back_free_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_back([\"b\",\"a\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_drop_back_receiver": {
+    "fresh": {
+      "value": [
+        "b"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "b"
+      ]
+    },
+    "plan": {
+      "value": [
+        "b"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "b"
+      ]
+    },
+    "source": "Value:: I {return([\"b\",\"a\"].drop_back())}\n"
+  },
+  "optional_drop_back_receiver_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].drop_back().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_drop_front_free": {
+    "fresh": {
+      "value": [
+        "a"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "a"
+      ]
+    },
+    "plan": {
+      "value": [
+        "a"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "a"
+      ]
+    },
+    "source": "Value:: I {return(drop_front([\"b\",\"a\"]))}\n"
+  },
+  "optional_drop_front_free_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=drop_front([\"b\",\"a\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_drop_front_receiver": {
+    "fresh": {
+      "value": [
+        "a"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "a"
+      ]
+    },
+    "plan": {
+      "value": [
+        "a"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "a"
+      ]
+    },
+    "source": "Value:: I {return([\"b\",\"a\"].drop_front())}\n"
+  },
+  "optional_drop_front_receiver_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].drop_front().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_slice_free": {
+    "fresh": {
+      "value": [
+        "a"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "a"
+      ]
+    },
+    "plan": {
+      "value": [
+        "a"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "a"
+      ]
+    },
+    "source": "Value:: I {return(slice([\"b\",\"a\"],1))}\n"
+  },
+  "optional_slice_free_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=slice([\"b\",\"a\"],1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_slice_receiver": {
+    "fresh": {
+      "value": [
+        "a"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "a"
+      ]
+    },
+    "plan": {
+      "value": [
+        "a"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "a"
+      ]
+    },
+    "source": "Value:: I {return([\"b\",\"a\"].slice(1))}\n"
+  },
+  "optional_slice_receiver_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].slice(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_take_free": {
+    "fresh": {
+      "value": [
+        "b"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "b"
+      ]
+    },
+    "plan": {
+      "value": [
+        "b"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "b"
+      ]
+    },
+    "source": "Value:: I {return(take([\"b\",\"a\"]))}\n"
+  },
+  "optional_take_free_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take([\"b\",\"a\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_take_last_free": {
+    "fresh": {
+      "value": [
+        "a"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "a"
+      ]
+    },
+    "plan": {
+      "value": [
+        "a"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "a"
+      ]
+    },
+    "source": "Value:: I {return(take_last([\"b\",\"a\"]))}\n"
+  },
+  "optional_take_last_free_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=take_last([\"b\",\"a\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_take_last_receiver": {
+    "fresh": {
+      "value": [
+        "a"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "a"
+      ]
+    },
+    "plan": {
+      "value": [
+        "a"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "a"
+      ]
+    },
+    "source": "Value:: I {return([\"b\",\"a\"].take_last())}\n"
+  },
+  "optional_take_last_receiver_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].take_last().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "optional_take_receiver": {
+    "fresh": {
+      "value": [
+        "b"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        "b"
+      ]
+    },
+    "plan": {
+      "value": [
+        "b"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        "b"
+      ]
+    },
+    "source": "Value:: I {return([\"b\",\"a\"].take())}\n"
+  },
+  "optional_take_receiver_with": {
+    "fresh": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        1,
+        "W"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[\"b\",\"a\"].take().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "prior_copy": {
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=copy(3).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_count": {
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=[1].count().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_hash": {
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=set_key({},\"a\",1).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_key_count": {
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source": "Value:: I {order=\"\";out={\"a\":1}.count_keys().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_length": {
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=\"abc\".length().take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_view": {
+    "fresh": {
+      "value": [
+        [
+          "a"
+        ],
+        "AW"
+      ]
+    },
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "a"
+        ],
+        "AW"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "a"
+        ],
+        "AW"
+      ]
+    },
+    "profile_only": true,
+    "restored": {
+      "value": [
+        [
+          "a"
+        ],
+        "AW"
+      ]
+    },
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).take({order=cat(order,\"A\");1}).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  }
+}

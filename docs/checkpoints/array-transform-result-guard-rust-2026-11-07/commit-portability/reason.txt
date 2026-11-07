@@ -1,0 +1,1 @@
+Known REPO-ROOT-PATHS RED: new raw process-census JSON contains observed absolute checkout argv. Stop only this own failed commit tree; preserve exact original bytes in inert gzip and keep all active project locators relative. Do not weaken the gate. No unfinished hook result receives PASS credit. Runtime/test/fixture inputs stay unchanged.

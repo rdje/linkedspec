@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "bash",
+    "knowledge-map/scripts/gen_knowledge_map.sh"
+  ],
+  "cwd": "."
+}

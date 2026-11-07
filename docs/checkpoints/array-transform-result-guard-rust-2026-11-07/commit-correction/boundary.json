@@ -1,0 +1,17 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.2",
+  "kind": "deliberately superseded own commit attempt",
+  "source": "Final API poll result; not a complete raw process-channel capture",
+  "session_id": 31085,
+  "verified_commit_pid": 52817,
+  "final_tool_poll": {
+    "chunk_id": "1d4581",
+    "wall_time_seconds": 0.0000055,
+    "exit_code": 143,
+    "original_token_count": 0,
+    "output": ""
+  },
+  "head_before_and_after": "b0376420ba6258420b146981b848d4646fb3ff55",
+  "unfinished_hook_credit": "none",
+  "reason": "Correct task diagnosis to eval_receiver_with_trailing_block_chain before landing; SDK/test/fixture bytes stay unchanged."
+}

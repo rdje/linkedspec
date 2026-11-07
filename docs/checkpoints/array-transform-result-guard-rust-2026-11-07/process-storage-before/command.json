@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_repo_root_path_portability.sh"
+  ],
+  "cwd": "."
+}

@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_task_tree_metadata.sh"
+  ],
+  "cwd": "."
+}

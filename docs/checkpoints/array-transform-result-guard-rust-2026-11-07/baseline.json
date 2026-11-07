@@ -1,0 +1,28 @@
+{
+  "red": [
+    "take_free_hash_guard",
+    "take_last_free_hash_guard",
+    "drop_front_free_hash_guard",
+    "drop_back_free_hash_guard",
+    "slice_free_hash_guard",
+    "sorted_free_hash_guard",
+    "reversed_free_hash_guard",
+    "concat_arrays_free_hash_guard",
+    "take_later_with",
+    "reverse_copy_later_with",
+    "sort_logical_later_with",
+    "optional_take_free_guard",
+    "optional_take_receiver_guard",
+    "optional_take_last_free_guard",
+    "optional_take_last_receiver_guard",
+    "optional_drop_front_free_guard",
+    "optional_drop_front_receiver_guard",
+    "optional_drop_back_free_guard",
+    "optional_drop_back_receiver_guard",
+    "optional_slice_free_guard",
+    "optional_slice_receiver_guard"
+  ],
+  "healthy": 174,
+  "profiles": 152,
+  "cases": 195
+}

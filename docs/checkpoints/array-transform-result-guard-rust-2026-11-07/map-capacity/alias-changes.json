@@ -1,0 +1,12 @@
+{
+  "docs/knowledge/repository-root-path-portability.md": [
+    "  - why does a raw process argv snapshot fail repository root portability\n",
+    "  - how can exact observed argv bytes survive portable evidence storage\n",
+    "  - why do raw process argv snapshots need compressed evidence for root portability\n"
+  ],
+  "docs/knowledge/rust-array-transform-result-guards.md": [
+    "  - \"which Rust guard paths own ordinary Array transform results\"\n",
+    "  - \"why did the first Rust Array repair writer fail before changing source\"\n",
+    "  - \"where are the Rust Array transform guard paths and original writer failure recorded\"\n"
+  ]
+}

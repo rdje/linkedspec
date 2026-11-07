@@ -6541,6 +6541,25 @@ impl Engine {
                     || Self::is_ordinary_length_result_chain(receiver, calls)
                     || Self::is_input_cursor_value_source(receiver)
                     || matches!(receiver.as_ref(), Expr::Call { name, .. } if matches!(name.as_str(), "copy" | "with"));
+                let array_transform_chain =
+                    self.is_ordinary_array_transform_result_chain(receiver, calls);
+                let array_transform_source_prefix = array_transform_chain
+                    && !kind_guarded_source
+                    && !Self::is_ordinary_count_result_chain(receiver, &[])
+                    && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+                    && !self.is_ordinary_hash_view_result_chain(receiver, &[])
+                    && !self.is_ordinary_hash_value_result_chain(receiver, &[])
+                    && !self.is_ordinary_array_transform_result_chain(receiver, &[])
+                    && calls.first().is_some_and(|first| {
+                        Self::is_ordinary_array_transform_result_call(
+                            &first.method,
+                            &first.args,
+                            true,
+                        )
+                    });
+                // Preserve only the initial producer's source policy; its actual Array
+                // then owns consumers, before another helper can claim source permission.
+                kind_guarded_source |= array_transform_chain;
                 let hash_value_chain = self.is_ordinary_hash_value_result_chain(receiver, calls);
                 let hash_value_source_prefix = hash_value_chain
                     && !kind_guarded_source
@@ -6583,7 +6602,8 @@ impl Engine {
                     let mut remaining = calls.as_slice();
                     // Initial size sources retain their existing zero fallback.
                     // Already produced/selected/copied results keep their kind guard.
-                    if hash_value_source_prefix
+                    if array_transform_source_prefix
+                        || hash_value_source_prefix
                         || hash_view_source_prefix
                         || key_count_source_prefix
                         || (count_chain
@@ -7256,6 +7276,20 @@ impl Engine {
             || Self::is_ordinary_logical_result_chain(receiver, calls)
             || Self::is_input_cursor_value_source(receiver)
             || matches!(receiver, Expr::Call { name, .. } if name == "copy");
+        let array_transform_chain = self.is_ordinary_array_transform_result_chain(receiver, calls);
+        let array_transform_source_prefix = array_transform_chain
+            && !kind_guarded_value
+            && !Self::is_ordinary_count_result_chain(receiver, &[])
+            && !Self::is_ordinary_key_count_result_chain(receiver, &[])
+            && !self.is_ordinary_hash_view_result_chain(receiver, &[])
+            && !self.is_ordinary_hash_value_result_chain(receiver, &[])
+            && !self.is_ordinary_array_transform_result_chain(receiver, &[])
+            && calls.first().is_some_and(|first| {
+                Self::is_ordinary_array_transform_result_call(&first.method, &first.args, true)
+            });
+        // Preserve only the initial producer's source policy; its actual Array
+        // then owns consumers, before another helper can claim source permission.
+        kind_guarded_value |= array_transform_chain;
         let hash_value_chain = self.is_ordinary_hash_value_result_chain(receiver, calls);
         let hash_value_source_prefix = hash_value_chain
             && !kind_guarded_value
@@ -7315,7 +7349,8 @@ impl Engine {
                     && (count_source_prefix
                         || key_count_source_prefix
                         || hash_view_source_prefix
-                        || hash_value_source_prefix))
+                        || hash_value_source_prefix
+                        || array_transform_source_prefix))
                 && call.method != "copy"
                 && !Self::is_generic_receiver_value_method(&call.method)
             {
@@ -9092,6 +9127,72 @@ impl Engine {
                 | Expr::AssignHashIndex { .. }
                 | Expr::AssignNestedAccess { .. }
         )
+    }
+
+    fn is_ordinary_array_transform_result_call(
+        name: &str,
+        args: &[linkedspec_core::expr::Arg],
+        receiver: bool,
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        let count = args.len() + usize::from(receiver);
+        let canonical_arity = match name {
+            "take" | "take_last" | "drop_front" | "drop_back" => (1..=2).contains(&count),
+            "slice" => (2..=3).contains(&count),
+            "sorted" | "reversed" => count == 1,
+            "concat_arrays" => count == 2,
+            _ => false,
+        };
+        canonical_arity
+            && args.iter().all(|arg| {
+                matches!(arg, Arg::Positional(value)
+                    if Self::is_ordinary_hash_value_operand(value)
+                        && !matches!(value, Expr::Call { name, .. }
+                            if matches!(name.as_str(), "flat" | "flat_array" | "flat_hash")))
+            })
+    }
+
+    // Ordinary eager Array transforms share the existing typed value operand
+    // boundary. Deferred/callback, traversal and unassessed function receivers
+    // retain their original routes; variadic concat gains no new authority.
+    fn is_ordinary_array_transform_result_chain(
+        &self,
+        receiver: &Expr,
+        calls: &[linkedspec_core::expr::FluentCall],
+    ) -> bool {
+        use linkedspec_core::expr::Arg;
+
+        if calls.iter().any(|call| {
+            Self::is_tree_traversal_receiver_method(&call.method)
+                || call.args.iter().any(|arg| match arg {
+                    Arg::Keyword { .. } => true,
+                    Arg::Positional(value) => {
+                        call.method != "with" && !Self::is_ordinary_hash_value_operand(value)
+                    }
+                })
+                || !(Self::is_generic_receiver_value_method(&call.method)
+                    || Self::is_array_receiver_value_chain_method(&call.method)
+                    || Self::is_hash_receiver_value_chain_method(&call.method)
+                    || Self::is_string_receiver_value_chain_method(&call.method)
+                    || Self::is_number_receiver_value_chain_method(&call.method)
+                    || Self::is_receiver_with_trailing_block_call(call))
+        }) {
+            return false;
+        }
+        if let Expr::Call { name, args } = receiver {
+            if self.spec.find_function(name).is_some() {
+                return false;
+            }
+            if Self::is_ordinary_array_transform_result_call(name, args, false) {
+                return true;
+            }
+        }
+        Self::is_ordinary_hash_value_operand(receiver)
+            && calls.len() > 1
+            && calls.first().is_some_and(|first| {
+                Self::is_ordinary_array_transform_result_call(&first.method, &first.args, true)
+            })
     }
 
     fn is_ordinary_hash_value_result_call(
