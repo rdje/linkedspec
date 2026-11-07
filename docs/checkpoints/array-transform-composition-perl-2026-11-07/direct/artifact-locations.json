@@ -1,0 +1,5 @@
+{
+  "composition": "docs/checkpoints/array-transform-composition-perl-2026-11-07/direct",
+  "source": "docs/checkpoints/array-transform-source-perl-2026-11-07/direct_array_composition",
+  "hash": "docs/checkpoints/hash-value-composition-perl-2026-11-07/direct_array_composition"
+}

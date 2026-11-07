@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT resumes bounded Perl Array result composition78.1.1 after source-isolation78.0. Other backend78 assessments and full23.4 remain separate.
+PNT proceeds to independent Rust Array-transform78.2 after bounded Perl78.1.1; remaining peers and full23.4 stay separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.0. Perl source78.0 reuses the existing Number-AST predicate at exactly eight named-Array shortcuts. The actual normal changes16 main-only host RED/173 healthy to189PASS; own123 policies and every healthy public projection remain exact. Exact private old/current images reproduce16RED/189PASS with matching module/handler pairs. Two readonly recoveries and six specific corruptions pass. Separate unchanged37 result projections and all37 artifact pairs still retain19 selected failures/18 healthy; composition78.1.1 is next.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1. Perl Array result guards repair all19 original targets under unchanged37. The normal reaches212PASS from19RED/193 healthy; original123 plus52 own prefix/host/arity profiles stay exact. Direct composition/source/Hash normals pass490 groups. Exact old/current private images reproduce19RED/212PASS with matching212 module-handler pairs; first readonly0/empty stderr/seven effective corruptions passes. Source78.0 and first producer permission remain intact; independent Rust78.2 is next.
 
 ## Next Action
 
-From clean source78.0 landing activate TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1. Reacquire unchanged37/own123/source-isolation controls, then retain selected canonical Array result ownership through consumer/copy/logical/with links without changing producer permission, arities or earlier guarded owners. Own smallest new/direct/inverse/recovery/book/Knowledge/continuity commit.
+From clean Perl78.1.1 landing activate TYPE-REFERENCE-BOOK.1.2.23.3.78.2. Independently acquire unchanged37 on native/restored/generated-plan/full emitted-fresh routes and own initial Number/null/Hash, optional/excluded-arity, needed-error and earlier-owner fences before edits. Retain actual first SDK/grammar/instrument/artifact inputs/full channels; assess without importing Perl source policy. Smallest new/direct/inverse/recovery/book/Knowledge/commit; full verification after agreed feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1 —212PASS/direct490/private19RED-restored212PASS/seven controls;175 profiles/193 healthy exact; independent Rust78.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.0 — eight Number fences/189PASS, private16RED/restored189PASS/two readonly/six controls; original37 unchanged; composition78.1.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 — own37/123 profiles and16 main-only host reads; source78.0 before composition78.1.1; no production repair.
 - TYPE-REFERENCE-BOOK.1.2.23.4.16 — qualified157 IDs/149 contracts/eight short bodies/exact tail,115343 bytes renewed/readonly/seven denials; first tail RED retained,4.17 owned; Perl78.1 next.
@@ -29,7 +30,6 @@ From clean source78.0 landing activate TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1. Reac
 - TYPE-REFERENCE-BOOK.1.2.23.1.37 — Hash-valued28 targets/15 failures/13 healthy; four unready profiles/eight controls; independent77 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.5 — each installed host33/184PASS/direct300 plus copy/arity controls/eight corruptions; next selection37 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.4 — Julia33/four routes184PASS/direct315/eight controls; own profiles preserved; installed Lua76.5 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.76.3 — Dart33PASS/four routes; final direct62/eight controls; own initial/arity profiles retained; Julia76.4 next.
 
 ## History
 

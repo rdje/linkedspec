@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE=docs/checkpoints/array-transform-composition-perl-2026-11-07/direct",
+    "LINKEDSPEC_ARRAY_TRANSFORM_SOURCE_CAPTURE=docs/checkpoints/array-transform-source-perl-2026-11-07/direct_array_composition",
+    "LINKEDSPEC_HASH_VALUE_COMPOSITION_CAPTURE=docs/checkpoints/hash-value-composition-perl-2026-11-07/direct_array_composition",
+    "prove",
+    "-v",
+    "-j1",
+    "-Iperl",
+    "t/array_transform_result_guard_composition.t",
+    "t/array_transform_source_isolation.t",
+    "t/hash_value_result_guard_composition.t"
+  ],
+  "cwd": "."
+}

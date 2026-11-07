@@ -2537,19 +2537,19 @@
 
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78`
-  Status: `pending` / selected existing-contract ordinary Array transform result guards
+  Status: `active` / bounded Perl complete; independent peers remain
   Children: `.78.0`, `.78.1`, `.78.2`, `.78.3`, `.78.4`, `.78.5`.
   Goal: Preserve selected ordinary Array-valued slice/order/concat results through current actual-kind consumers and rejection continuations.
   Dependencies: Completed selection23.1.38, frozen array_transform_result_guard_cases.json and array-transform-result-guard-composition.md; existing constructor/view/Hash-result guards and initial-source lesson76.6/77.
   Reproduction/impact: Original Perl37 all ready1/raw0/fallback0/unresolved0 have19 failures: eleven free/later programs raise Not a HASH reference, eight literal receiver programs retain raw DSL and fail handler/module compilation. Eighteen healthy controls and all actual original artifacts retained. No peer defect inferred.
   Acceptance: Only take/take_last/drop_front/drop_back (existing source[,n]/[n]), slice source/start[,n], sorted/reversed free-one/zero-extra and concat_arrays free-two/receiver-one. Each backend independently acquires unchanged37 and own initial Number/null/Hash, optional/excluded-arity and needed-error fences before production. Preserve first producer source/errors and earlier produced/selected/copied guards separately; source once/snapshots/order/count/start coercion/sort/copy depth/splices and statement/operator/end mutation stay. Compatible Array/selected String/Hash bridges and valid empty with retain semantics; incompatible Hash consumers reject before operands, skipping later copy/logical/with. No other transforms/list-splice/alias/keyword/unknown/traversal/non-with trailing/deferred/callback/unassessed function-receiver promotion. Full23.4 remains separate.
-  Frontier: Bounded Perl source78.0 is repaired/focused-checked. Composition78.1.1 is next from unchanged37/own123/current source-isolation fences; qualified capacity4.16 retains the exact current task tail. Subsequent peers assess independently, one coherent focused-checked commit each.
+  Frontier: Bounded Perl source78.0/result78.1.1 are repaired/focused-checked. Independent Rust78.2 is next under unchanged37 and own source/arity/error acquisition; full23.4 remains separate. Subsequent peers assess independently, one coherent focused-checked commit each.
 
   Backend proof contract: Before production acquire unchanged37 on each leaf's named public routes and each affected producer's own initial Number/null/Hash, existing optional operand, excluded-arity/needed-error and earlier-owner fences. Preserve all healthy semantics and actual producer/input policies; repair only demonstrated canonical result guard gaps under frozen78. Retain actual first SDK/grammar/instrument/artifact inputs/full channels, unchanged-target RED/GREEN and distinguishing inverse/readonly recovery where a repair is needed. If already healthy, retain that outcome without speculative edits. Update smallest new/direct-dependent normal and public book. No broad source/domain/context/depth/coercion/mutation/native custody or admission claim.
   Focused execution: Smallest finite new targets and directly affected producer/source normals; owned syntax/format or precise local runner include, inverse/recovery/book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.1`
-  Status: `active` / independently acquired; source prerequisite first
+  Status: `completed` / bounded Perl source and result implementation focused-checked; full admission separate
   Goal: Independently assess and repair Perl ordinary Array transform result composition.
   Children: `.78.1.0`, `.78.1.1`.
   Dependencies: Frozen78/selection38 unchanged37 and bounded source prerequisite78.0.
@@ -2616,13 +2616,36 @@
   Evidence packaging qualification: First staged diff check exits2 before any commit hook because original unified-diff blank context lines contain spaces. Preserve exact raw diff in gzip with a logical-input mapping; both original review input records/hashes/scripts/results remain unchanged. Copy/decompress/verify before removing exactly the text artifact; readonly storage recovery validates every original declared input and rejects altered logical paths/hashes. No whitespace exemption, source or observation rewrite. Fresh staged diff/memory/reference checks and normal hooks govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1`
-  Status: `pending`
+  Status: `completed` / bounded canonical Perl Array results focused-checked
   Goal: Repair Perl ordinary Array result guards after source78.0.
   Dependencies: Committed own preflight78.1.0 and source isolation78.0; unchanged frozen37/parent78 contract.
   Acceptance: Reacquire current unchanged37/own123 policy projections and source-isolation controls before composition edits. Preserve source78.0, earlier produced/selected/copied guards and first producer permission independently. Only selected free/receiver arities gain result-kind/rejection ownership; no variadic concat or other transform/context promotion. Own unchanged-target RED/GREEN, exact private inverse, smallest direct normals, readonly recovery and book/Knowledge/continuity commit.
   Planned verification: Parent78 focused execution plus source78.0 regression; no broad suite.
   Planned canonical trigger: Full23.4/final clean push after feature coverage.
   Planned claim verification: none: Finite authored result-composition and preservation controls; no population/performance/admission measurement.
+
+  Activation: Clean4bfe17f75c20851bc9a634c151071b6d196de57d after source78.0 all10/post-pointer/brief0/clean Git. Frozen78/37, own123 policies, source0 input/artifact qualification, actual first-producer and retained/copy/logical/with dispatch paths and current book/Knowledge are read. Source78.0 remains intact. Cleanup November7 05:37UTC remains within24h; serial Perl uses modest RAM.
+  Verification tier: `focused`
+  Focused checks: Current unchanged37/own123 plus minimal literal-prefix/host/arity acquisition before production; new composition normal, direct source78.0 and Hash-result normals, exact private old/current inverse and readonly recovery/corruptions, syntax/book/Knowledge/history/task/memory/diff and mandatory hooks. No broad suite.
+  Canonical trigger: Full23.4/final clean push after feature coverage; no new arity, format, public authority or infrastructure.
+  Claim verification: none: Finite authored feature and preservation controls, no population/performance/full-source/context admission measurement.
+
+  First acquisition: Current unchanged37/original123 plus independent52 literal Number/null/Hash-with, empty/main/outer host and missing/excluded-arity observations precede production. All24 Number3 host prefixes stay isolated. New212 normal reaches19 selected target RED/193 healthy; no policy or failure verdict is imported from a peer.
+  Mechanism/fix: MethodLowering.pm omitted the selected Array result/source-prefix role from actual-kind and rejection dispatch. Canonical optional count/slice and exact concat2/1 forms now retain those roles through copy/logical/with. First receiver producer uses its original terminal lowering; prior constructor/copy/view/size/Hash owners retain their guard, and free Array results block initial Hash-helper permission. Direct flat roles, noncanonical concat, unknown/traversal/non-with trailing and unassessed receivers gain no role. All13 existing Number predicates stay intact.
+  Result: Actual212 normal PASS; all193 before-healthy public projections/175 policy profiles exact with only eval serials normalized. Needed errors, source once/snapshots/order/nested kinds, valid empty with and earlier guards survive. Exact private old/current images at one controlled path reproduce19RED/212PASS; all212 corresponding module/handler pairs match public before/after. Direct three files490 PASS and every direct artifact/input is retained; source/Hash output folders are new and explicitly owned here, with previous proof files unchanged.
+  Recovery: First readonly0/empty stderr validates all own activation Perl/three grammars, frozen inputs, material channels, exact private images, healthy/profile equality and seven specific corruptions. Tested physical candidate bytes are bound before review. Shared process/runtime and full native/cache/transitive/toolchain/mutation-command outer channels remain4.2/SESSION5; no full context/portable/registration/admission or peer-policy credit.
+  Writer qualification: Original Python edit producer warns on embedded regex literal escapes but emits the tested correct Perl. Preserve original repair.py/source epochs and first observations. Separate repair_qualified.py adds only a raw-string prefix; actual compiler replay records old warnings, new zero warnings and identical Python AST. A changed helper constant distinguishes the oracle. No mutation rerun or original outer-channel completeness claim.
+  Evidence: docs/checkpoints/array-transform-composition-perl-2026-11-07/REVIEW.md and default readonly review.py. Modules precede fresh load; native handlers follow public Get before invocation. Source78.0 proof and all frozen37 targets/contract remain unchanged.
+  Next: Normal hooks/post-pointer/brief0/clean Git, then independently activate Rust78.2. Acquire own unchanged37/source/optional/excluded-arity/needed-error and prior-owner fences before production; retain first actual inputs/artifacts/channels and assess without importing Perl fallback policy. Full23.4 remains deferred after agreed feature coverage.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1 — guard Perl ordinary Array transform results.
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source/native/full emitted-fresh212 normal exposes19 original targets before production, with193 healthy controls.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — MethodLowering.pm's result/prefix/retained/copy/logical/with roles omit these eight Array producers; actual handlers show unguarded Hash copying and literal DSL despite ready metadata.
+  - [x] **FIX** — retain selected canonical Array results with existing actual-kind/rejection dispatch and original first-producer permission, preserving prior guarded owners and source78.0.
+  - [x] **ADDRESSED (verified)** — actual19RED to212PASS, direct490, exact old/current private inverse, first readonly0/seven corruptions and matching212 artifact pairs pass.
+  - [x] **NO REGRESSION** — all193 healthy projections/175 profiles remain exact; needed errors, Number host isolation, optional/excluded arities, nested kinds, snapshots and earlier guards survive focused source/Hash normals.
+  - [x] **LOCKSTEP** — book/worked examples/Knowledge, helper spine/task/index/frontier and change/engineering/live/MEMORY distinguish bounded Perl completion from independent Rust/full admission.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.2`
   Status: `pending`

@@ -1,0 +1,21 @@
+{
+  "result": "PASS",
+  "original_sha256": "62c50c2b8300d48a1733ffd9184e14e1489bdef5488bee1f38f32a1e2b4aee51",
+  "qualified_sha256": "b5f099152d688fee4e8d8d25b0e5d7ec7c81cd30fb67bd61cdd399d722694ef3",
+  "observed_warning_replay": [
+    {
+      "category": "SyntaxWarning",
+      "message": "\"\\A\" is an invalid escape sequence. Such sequences will not work in the future. Did you mean \"\\\\A\"? A raw string is also an option.",
+      "line": 27
+    },
+    {
+      "category": "SyntaxWarning",
+      "message": "\"\\A\" is an invalid escape sequence. Such sequences will not work in the future. Did you mean \"\\\\A\"? A raw string is also an option.",
+      "line": 27
+    }
+  ],
+  "qualified_warnings": [],
+  "python_ast_identical": true,
+  "control": "changed Perl helper constant yields different AST",
+  "limit": "Compiler replay only; original writer/first SDK epochs untouched; no mutation-command outer-channel completeness credit"
+}

@@ -1,0 +1,1766 @@
+[
+  {
+    "case": {
+      "body": "return(3.take(1).with(){return(value)})",
+      "id": "prefix_number_take_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take(1).with(){return(value)})",
+      "id": "prefix_number_take_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take(1).with(){return(value)})",
+      "id": "prefix_number_take_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.take(1).with(){return(value)})",
+      "id": "prefix_null_take_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.take(1).with(){return(value)})",
+      "id": "prefix_hash_take_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(take().with(){return(value)})",
+      "id": "missing_free_take",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(take().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take_last(1).with(){return(value)})",
+      "id": "prefix_number_take_last_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take_last(1).with(){return(value)})",
+      "id": "prefix_number_take_last_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take_last(1).with(){return(value)})",
+      "id": "prefix_number_take_last_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.take_last(1).with(){return(value)})",
+      "id": "prefix_null_take_last_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.take_last(1).with(){return(value)})",
+      "id": "prefix_hash_take_last_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(take_last().with(){return(value)})",
+      "id": "missing_free_take_last",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(take_last().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take_last"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_front(1).with(){return(value)})",
+      "id": "prefix_number_drop_front_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_front(1).with(){return(value)})",
+      "id": "prefix_number_drop_front_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_front(1).with(){return(value)})",
+      "id": "prefix_number_drop_front_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.drop_front(1).with(){return(value)})",
+      "id": "prefix_null_drop_front_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.drop_front(1).with(){return(value)})",
+      "id": "prefix_hash_drop_front_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(drop_front().with(){return(value)})",
+      "id": "missing_free_drop_front",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(drop_front().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_front"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_back(1).with(){return(value)})",
+      "id": "prefix_number_drop_back_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_back(1).with(){return(value)})",
+      "id": "prefix_number_drop_back_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_back(1).with(){return(value)})",
+      "id": "prefix_number_drop_back_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.drop_back(1).with(){return(value)})",
+      "id": "prefix_null_drop_back_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.drop_back(1).with(){return(value)})",
+      "id": "prefix_hash_drop_back_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(drop_back().with(){return(value)})",
+      "id": "missing_free_drop_back",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(drop_back().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_back"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.slice(1,1).with(){return(value)})",
+      "id": "prefix_number_slice_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.slice(1,1).with(){return(value)})",
+      "id": "prefix_number_slice_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.slice(1,1).with(){return(value)})",
+      "id": "prefix_number_slice_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.slice(1,1).with(){return(value)})",
+      "id": "prefix_null_slice_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.slice(1,1).with(){return(value)})",
+      "id": "prefix_hash_slice_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(slice().with(){return(value)})",
+      "id": "missing_free_slice",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(slice().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.sorted().with(){return(value)})",
+      "id": "prefix_number_sorted_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.sorted().with(){return(value)})",
+      "id": "prefix_number_sorted_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.sorted().with(){return(value)})",
+      "id": "prefix_number_sorted_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.sorted().with(){return(value)})",
+      "id": "prefix_null_sorted_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.sorted().with(){return(value)})",
+      "id": "prefix_hash_sorted_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(sorted().with(){return(value)})",
+      "id": "missing_free_sorted",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "sorted"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.reversed().with(){return(value)})",
+      "id": "prefix_number_reversed_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.reversed().with(){return(value)})",
+      "id": "prefix_number_reversed_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.reversed().with(){return(value)})",
+      "id": "prefix_number_reversed_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.reversed().with(){return(value)})",
+      "id": "prefix_null_reversed_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.reversed().with(){return(value)})",
+      "id": "prefix_hash_reversed_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(reversed().with(){return(value)})",
+      "id": "missing_free_reversed",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "reversed"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "prefix_number_concat_arrays_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(3.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "prefix_number_concat_arrays_main",
+      "input": "x",
+      "rule": "Value",
+      "seed": "main",
+      "source": "Value:: I {return(3.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "prefix_number_concat_arrays_outer",
+      "input": "x",
+      "rule": "Value",
+      "seed": "outer",
+      "source": "Value:: I {return(3.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(undef.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "prefix_null_concat_arrays_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(undef.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return({\"k\":\"tail\"}.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "prefix_hash_concat_arrays_empty",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return({\"k\":\"tail\"}.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(concat_arrays().with(){return(value)})",
+      "id": "missing_free_concat_arrays",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(concat_arrays().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "concat_arrays"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(slice([\"head\",\"tail\"]).with(){return(value)})",
+      "id": "missing_slice_start_free",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(slice([\"head\",\"tail\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return([\"head\",\"tail\"].slice().with(){return(value)})",
+      "id": "missing_slice_start_receiver",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return([\"head\",\"tail\"].slice().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(concat_arrays([\"head\"]).with(){return(value)})",
+      "id": "excluded_single_concat_free",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return(concat_arrays([\"head\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "head"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "head"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return([\"head\"].concat_arrays().with(){return(value)})",
+      "id": "excluded_single_concat_receiver",
+      "input": "x",
+      "rule": "Value",
+      "seed": "empty",
+      "source": "Value:: I {return([\"head\"].concat_arrays().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "head"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "head"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  }
+]

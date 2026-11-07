@@ -1,4 +1,5 @@
-{"member_count":45,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":46,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-backend-parity-split.md","sha256":"dc11575830d8bcb1175b9856abc93dcdf31ffb62e38d7a97fa005f84791df340","type":"member"}
 {"bytes":3520,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-cli-control.md","sha256":"221646ffa91fdd1e025bc83efffcba0dcc7441d474026804cc81635ecf61059c","type":"member"}
 {"bytes":2586,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-compile-actionir-coverage-closed.md","sha256":"79a38215343e15dfc52ad5eec0c4b877d69f3accfb9e4d224b88a4ddd85b43d8","type":"member"}
 {"bytes":1913,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-compile-actionir-coverage-split.md","sha256":"942033687b3292e9c90170521d060fcb3b3cf609e752addf04676f7b1975978b","type":"member"}

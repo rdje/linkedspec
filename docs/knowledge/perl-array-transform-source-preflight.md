@@ -7,7 +7,7 @@ answers:
   - "which task owns Array transform Number source isolation before result guards"
   - "where are Perl Array transform initial source and optional arity profiles frozen"
 date: 2026-11-07
-status: source78.0 repaired and focused-checked; result78.1.1 remains pending
+status: source78.0 and result78.1.1 bounded repairs focused-checked; independent peers/full admission separate
 tags: [perl, array, transforms, numeric, isolation, source, guards]
 evidence: "Preflight78.1.0 retains the original source defect. Source78.0 at docs/checkpoints/array-transform-source-perl-2026-11-07/REVIEW.md retains16RED to189PASS, exact old/current private-image inverse and two readonly0 recoveries/six corruptions. Own123 policies and173 healthy projections stay exact; all37 current result projections/artifact pairs retain their original19 failures/18 healthy."
 reverify:
@@ -30,7 +30,8 @@ source path. Native/fresh Number3 empty/main/outer controls now pass independent
 of host data. Own123 policies and173 before-healthy observations remain exact.
 Old/current images at one controlled private load path reproduce16RED/189PASS;
 all matching module/handler pairs survive. Original37 result outputs, errors and
-artifact identities remain unchanged, so composition78.1.1 is still pending.
+artifact identities remained unchanged at source78.0. Subsequent composition78.1.1
+owns the bounded result guards; see `docs/knowledge/perl-array-transform-result-guards.md`.
 
 Do not
 normalize initial sources to an Array-result guard, change global extractors or

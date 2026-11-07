@@ -1,0 +1,418 @@
+[
+  {
+    "id": "prefix_number_take_empty",
+    "body": "return(3.take(1).with(){return(value)})",
+    "source": "Value:: I {return(3.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_take_main",
+    "body": "return(3.take(1).with(){return(value)})",
+    "source": "Value:: I {return(3.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_take_outer",
+    "body": "return(3.take(1).with(){return(value)})",
+    "source": "Value:: I {return(3.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_take_empty",
+    "body": "return(undef.take(1).with(){return(value)})",
+    "source": "Value:: I {return(undef.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_take_empty",
+    "body": "return({\"k\":\"tail\"}.take(1).with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_take",
+    "body": "return(take().with(){return(value)})",
+    "source": "Value:: I {return(take().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_take_last_empty",
+    "body": "return(3.take_last(1).with(){return(value)})",
+    "source": "Value:: I {return(3.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_take_last_main",
+    "body": "return(3.take_last(1).with(){return(value)})",
+    "source": "Value:: I {return(3.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_take_last_outer",
+    "body": "return(3.take_last(1).with(){return(value)})",
+    "source": "Value:: I {return(3.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_take_last_empty",
+    "body": "return(undef.take_last(1).with(){return(value)})",
+    "source": "Value:: I {return(undef.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_take_last_empty",
+    "body": "return({\"k\":\"tail\"}.take_last(1).with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_take_last",
+    "body": "return(take_last().with(){return(value)})",
+    "source": "Value:: I {return(take_last().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_drop_front_empty",
+    "body": "return(3.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {return(3.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_drop_front_main",
+    "body": "return(3.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {return(3.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_drop_front_outer",
+    "body": "return(3.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {return(3.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_drop_front_empty",
+    "body": "return(undef.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {return(undef.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_drop_front_empty",
+    "body": "return({\"k\":\"tail\"}.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_drop_front",
+    "body": "return(drop_front().with(){return(value)})",
+    "source": "Value:: I {return(drop_front().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_drop_back_empty",
+    "body": "return(3.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {return(3.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_drop_back_main",
+    "body": "return(3.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {return(3.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_drop_back_outer",
+    "body": "return(3.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {return(3.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_drop_back_empty",
+    "body": "return(undef.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {return(undef.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_drop_back_empty",
+    "body": "return({\"k\":\"tail\"}.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_drop_back",
+    "body": "return(drop_back().with(){return(value)})",
+    "source": "Value:: I {return(drop_back().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_slice_empty",
+    "body": "return(3.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {return(3.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_slice_main",
+    "body": "return(3.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {return(3.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_slice_outer",
+    "body": "return(3.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {return(3.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_slice_empty",
+    "body": "return(undef.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {return(undef.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_slice_empty",
+    "body": "return({\"k\":\"tail\"}.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_slice",
+    "body": "return(slice().with(){return(value)})",
+    "source": "Value:: I {return(slice().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_sorted_empty",
+    "body": "return(3.sorted().with(){return(value)})",
+    "source": "Value:: I {return(3.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_sorted_main",
+    "body": "return(3.sorted().with(){return(value)})",
+    "source": "Value:: I {return(3.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_sorted_outer",
+    "body": "return(3.sorted().with(){return(value)})",
+    "source": "Value:: I {return(3.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_sorted_empty",
+    "body": "return(undef.sorted().with(){return(value)})",
+    "source": "Value:: I {return(undef.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_sorted_empty",
+    "body": "return({\"k\":\"tail\"}.sorted().with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_sorted",
+    "body": "return(sorted().with(){return(value)})",
+    "source": "Value:: I {return(sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_reversed_empty",
+    "body": "return(3.reversed().with(){return(value)})",
+    "source": "Value:: I {return(3.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_reversed_main",
+    "body": "return(3.reversed().with(){return(value)})",
+    "source": "Value:: I {return(3.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_reversed_outer",
+    "body": "return(3.reversed().with(){return(value)})",
+    "source": "Value:: I {return(3.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_reversed_empty",
+    "body": "return(undef.reversed().with(){return(value)})",
+    "source": "Value:: I {return(undef.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_reversed_empty",
+    "body": "return({\"k\":\"tail\"}.reversed().with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_reversed",
+    "body": "return(reversed().with(){return(value)})",
+    "source": "Value:: I {return(reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_concat_arrays_empty",
+    "body": "return(3.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_number_concat_arrays_main",
+    "body": "return(3.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main"
+  },
+  {
+    "id": "prefix_number_concat_arrays_outer",
+    "body": "return(3.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "outer"
+  },
+  {
+    "id": "prefix_null_concat_arrays_empty",
+    "body": "return(undef.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {return(undef.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "prefix_hash_concat_arrays_empty",
+    "body": "return({\"k\":\"tail\"}.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {return({\"k\":\"tail\"}.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_free_concat_arrays",
+    "body": "return(concat_arrays().with(){return(value)})",
+    "source": "Value:: I {return(concat_arrays().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_slice_start_free",
+    "body": "return(slice([\"head\",\"tail\"]).with(){return(value)})",
+    "source": "Value:: I {return(slice([\"head\",\"tail\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "missing_slice_start_receiver",
+    "body": "return([\"head\",\"tail\"].slice().with(){return(value)})",
+    "source": "Value:: I {return([\"head\",\"tail\"].slice().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "excluded_single_concat_free",
+    "body": "return(concat_arrays([\"head\"]).with(){return(value)})",
+    "source": "Value:: I {return(concat_arrays([\"head\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  },
+  {
+    "id": "excluded_single_concat_receiver",
+    "body": "return([\"head\"].concat_arrays().with(){return(value)})",
+    "source": "Value:: I {return([\"head\"].concat_arrays().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "empty"
+  }
+]

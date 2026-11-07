@@ -10,7 +10,7 @@ use LinkedSpec ();
 my $json = JSON::PP->new->canonical->ascii->allow_nonref;
 my $capture = $ENV{LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE};
 die 'capture requires an owned relative phase directory' if defined($capture)
-    && ($capture !~ m{\Adocs/checkpoints/array-transform-result-perl-2026-11-07/[a-z_]+\z}
+    && ($capture !~ m{\Adocs/checkpoints/array-transform-composition-perl-2026-11-07/[a-z_]+\z}
         || !-d $capture || -l $capture);
 
 sub read_json {
@@ -26,7 +26,7 @@ sub error_value {
     return undef unless defined($error) && (ref($error) || length($error));
     return "$error" unless (reftype($error) // '') eq 'HASH';
     my %result = map { $_ => ref($error->{$_}) ? error_value($error->{$_}) : $error->{$_} }
-        grep { exists $error->{$_} } qw(type code stage detail summary helper_name phase rule_label actual_arity expected_arity arguments_evaluated);
+        grep { exists $error->{$_} } qw(type code stage detail summary helper_name name phase rule_label actual_arity expected_arity arguments_evaluated);
     $result{class} = ref($error) if ref($error) ne 'HASH';
     return \%result;
 }
@@ -64,14 +64,18 @@ sub observe {
     if (defined($ENV{LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE})) {
         diag('ARRAY_TRANSFORM_COMPOSITION_INPUT ' . $identifier . ' ' . $json->encode({ source => $source, emitted => $emitted, handler => $handler }));
     }
+    (my $public_identifier = $identifier) =~ s/^(?:target_|policy_)//;
+    my $package = 'LinkedSpec::ArrayTransformSelectionProbe::' . $public_identifier;
+    no strict 'refs';
+    local @{'main::3'} = ($case->{seed} // '') eq 'main' ? ('MAIN', 'TAIL', 'END') : ();
+    local @{$package . '::3'} = ($case->{seed} // '') eq 'outer' ? ('OUTER', 'TAIL', 'END') : ();
+    $result{host_before} = { main => [@{'main::3'}], outer => [@{$package . '::3'}] };
     if ($result{native_callable}) {
         my $input = $case->{input};
         $result{native} = eval { $native->(\$input) };
         $result{native_error} = error_value($@ || $context{last_error});
         $result{native_cursor} = pos($input);
     }
-    (my $public_identifier = $identifier) =~ s/^(?:target_|policy_)//;
-    my $package = 'LinkedSpec::ArrayTransformSelectionProbe::' . $public_identifier;
     my $loaded = defined($emitted) && eval "package $package; $emitted; 1";
     $result{loaded} = $loaded ? 1 : 0;
     $result{load_error} = error_value($@);
@@ -81,6 +85,7 @@ sub observe {
         $result{fresh_error} = error_value($@);
         $result{fresh_cursor} = pos($input);
     }
+    $result{host_after} = { main => [@{'main::3'}], outer => [@{$package . '::3'}] };
     $result{warnings} = \@warnings;
     return \%result;
 }
@@ -110,6 +115,7 @@ for my $case (@cases) {
         ok($actual->{native_callable} && !$actual->{build_error}, 'native parser builds');
         ok($actual->{loaded} && !$actual->{emission_error} && !$actual->{load_error}, 'fresh module loads');
         ok(!$actual->{descriptor_error}, 'descriptor resolves');
+        is_deeply($actual->{host_after}, $actual->{host_before}, 'localized host Arrays remain unchanged');
         is_deeply($actual->{warnings}, [], 'build/load/execute remain warning-free');
         my $metadata = $actual->{metadata};
         ok($metadata->{language_agnostic_action_ir_ready}, 'canonical source ready');
@@ -131,12 +137,13 @@ for my $case (@cases) {
         }
     };
 }
-for my $profile (@{read_json('tests/fixtures/array_transform_result_guard_perl_profiles.json')}) {
+for my $profile (map { @{read_json($_)} } qw(tests/fixtures/array_transform_result_guard_perl_profiles.json tests/fixtures/array_transform_result_guard_perl_prefix_profiles.json)) {
     my $case = $profile->{case};
     my $identifier = 'policy_' . $case->{id};
     subtest $identifier => sub {
         my $actual = observe({%$case, id => $identifier});
         diag('ARRAY_TRANSFORM_COMPOSITION_PERL ' . $identifier . ' ' . $json->encode($actual));
+        is_deeply($actual->{host_after}, $actual->{host_before}, 'localized host Arrays remain unchanged');
         is($json->encode(projection($actual)), $json->encode($profile->{expected_observation}),
             'original source/arity/error policy retained; only eval serials normalized');
     };

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5234,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-dormant-red.md","sha256":"dd2afb41a0cec2b455201c25509e1ee6fee078b6313cc3c1639160dc5c2b4ff2","type":"member"}
 {"bytes":4899,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-project-data-ssd-storage.md","sha256":"095cd14dd2ed6781230bb9ed1c1f575327b1e393b71d260ce859e73385228285","type":"member"}
 {"bytes":3057,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-push-aggregate-value-abi.md","sha256":"3b235fa484cf52e285d5a2d440f6fef8fc013a3453d431e794a60f0699f12527","type":"member"}
 {"bytes":5057,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-quoted-action-source-ownership.md","sha256":"b7ba189b07c3438919593688514a05112eea8f1778eefd68452c5a90cd06c15b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4285,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/receiver-string-bridge-guard-gap.md","sha256":"22fd3ab9478011c2bca9aeddcee469567a148fd95bb5fec5bce090f002a9f626","type":"member"}
 {"bytes":4979,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-book-sequence-drift.md","sha256":"d868f14d8c568572580742edb8a07bb82922f260feb237811c77aa198c06448c","type":"member"}
 {"bytes":1651,"lines":23,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-bound-commit-authoring.md","sha256":"ba0f6b3d69125fbf2148ccc5c27b673185579711263cf70a89a04b5ff1d911b4","type":"member"}
-{"bytes":4796,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-capability-guide-drift.md","sha256":"619d55d7064ee65959a14bedbaf8f4cb7999b0d2568bd0616837fb926a9d4bc8","type":"member"}

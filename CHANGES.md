@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1 — Guard Perl ordinary Array transform results
+
+Perl Array result guards repair all19 original targets under unchanged37. The normal reaches212PASS from19RED/193 healthy; original123 plus52 own prefix/host/arity profiles stay exact. Direct composition/source/Hash normals pass490 groups. Exact old/current private images reproduce19RED/212PASS with matching212 module-handler pairs; first readonly0/empty stderr/seven effective corruptions passes. Source78.0 and first producer permission remain intact; independent Rust78.2 is next.
+
+Compatible Array and selected String/Hash bridges, nested kinds, valid empty with and needed errors remain. Incompatible Hash consumers reject before operands and skip later copy/logical/with work. Canonical result arities and original input policies remain separate; no variadic/callback/public-format promotion. Original Python writer warning is preserved; separate raw-string spelling has identical AST and zero compile warnings. Regenerate affected emitted Perl. Evidence: docs/checkpoints/array-transform-composition-perl-2026-11-07/REVIEW.md.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.0 — Isolate Perl Array-transform Number sources
 
 Perl source78.0 reuses the existing Number-AST predicate at exactly eight named-Array shortcuts. The actual normal changes16 main-only host RED/173 healthy to189PASS; own123 policies and every healthy public projection remain exact. Exact private old/current images reproduce16RED/189PASS with matching module/handler pairs. Two readonly recoveries and six specific corruptions pass. Separate unchanged37 result projections and all37 artifact pairs still retain19 selected failures/18 healthy; composition78.1.1 is next.

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5836,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-readiness-grammar-foundations.md","sha256":"01774c66e4a9ba8c9660afa59a26bdbe241e1bff189e29455ba325dce352317d","type":"member"}
 {"bytes":4989,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-self-containment-and-ebnf-profile.md","sha256":"e5e5e47426c0861c2b542ef6cfb7735bf54736e0fdaf3bd914f215f29b24ce72","type":"member"}
 {"bytes":2127,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-lifecycle-retv-order.md","sha256":"ec0d1002c353f9fb120c52ae6dbeab3d6a8b11b835f19ba63d0ae21e057ede21","type":"member"}
 {"bytes":2057,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-output-return-shape-contract.md","sha256":"1615b468a898c6224139ded36bc784133e687a543a41f61b13f81b0b316ce80e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5970,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-compact-lowerers.md","sha256":"d4dbbca6b8fa7cd77732a38b1747a72a8bc446abab3196b8ddc645061f2b8274","type":"member"}
 {"bytes":2426,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-method-lowering.md","sha256":"d7718467a2ee9b9b563d0d3468ac5cd3434f5fd3c9fa5321ad88aede1cd53311","type":"member"}
 {"bytes":4558,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-pipeline-decisions.md","sha256":"4d919f441f9032e2ca09828a064e5539794bcc239e6137054fd9de6b6e9dd377","type":"member"}
-{"bytes":2696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-backend-parity-split.md","sha256":"dc11575830d8bcb1175b9856abc93dcdf31ffb62e38d7a97fa005f84791df340","type":"member"}

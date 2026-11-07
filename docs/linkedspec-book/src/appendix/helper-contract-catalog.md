@@ -942,15 +942,15 @@ sorted([2,"10",1])               # [1,"10",2] (lexicographic)
 - **Behavior**: Returns a new array in reverse order. Does not mutate the input.
 
 The ordinary Array results of `take`, `take_last`, `drop_front`, `drop_back`,
-`slice`, `sorted`, `reversed` and `concat_arrays` have a selected open continuation
-repair. Original Perl controls preserve compatible Array/selected String/Hash
-bridges, but incompatible `set_key` tails can raise a Hash-reference error or
-retain literal DSL that fails compilation. Ready metadata does not certify these
-programs. Bounded Perl source-isolation78.0 now excludes Number literals from the
-eight named-Array shortcuts, preserving their computed-source fallback; result
-repair78.1.1 remains open. Family78 independently assesses each backend, preserving
-existing source/optional-arity/coercion/depth/mutation behavior. See the
-[worked current/target boundary](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-selected-open-repair).
+`slice`, `sorted`, `reversed` and canonical `concat_arrays` now retain actual-kind
+and rejection guards on bounded Perl routes. Incompatible Hash consumers return
+null before operands; later copy/logical/with work is skipped. Compatible Array
+consumers and selected String/Hash bridges, valid empty `with`, source snapshots
+and needed errors remain intact. Existing optional counts and slice arities stay;
+guarded concat forms are free-two/receiver-one. Source-isolation78.0's Number-AST
+fences remain. Other backends, variadic concat continuations and full admission
+are independently owned. Regenerate affected emitted Perl. See the
+[worked guarded results](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-perl-results).
 
 ### `array(e1, e2, ...)`
 - **Signature**: `array(values: expr...)`

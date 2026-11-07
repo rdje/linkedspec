@@ -9,7 +9,7 @@ answers:
   - "does an unloaded public Perl selection module have fresh_error fields"
   - "why did the Array transform selection recovery readers fail"
 date: 2026-11-07
-status: original selection frozen; independent family78 assessment and implementation remain
+status: original selection frozen; bounded Perl78.1.1 focused-checked; independent peer assessments remain
 tags: [array, transforms, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.38; docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md retains original37 ready1/raw0/fallback0/unresolved0,19 failures/18 healthy and37 actual module/handler pairs. Final strict readonly recovery0/empty stderr/nine controls passes; two prior reader failures stay explicit."
 reverify:
@@ -50,4 +50,6 @@ and complete gzip-first channels survive. Native handler compilation occurs
 inside Get. Fresh modules share runtime/process; full native/cache/transitive/
 toolchain custody4.2/SESSION5, general isolation/context/portable/registration/
 full23.4 admission remain separate. Historical recovery is not a latest-runtime
-or peer verdict. Next clean activation: independent Perl78.1.
+or peer verdict. Perl source78.0 and result78.1.1 now have bounded focused proof;
+see `docs/knowledge/perl-array-transform-result-guards.md`. Current selection
+belongs to MEMORY.md; independent Rust78.2 is next.

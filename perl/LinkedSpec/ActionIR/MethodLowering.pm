@@ -1877,6 +1877,31 @@ sub _ordinary_hash_value_result_call {
  return 1
 }
 
+# Ordinary Array transforms retain their existing producers and optional arities.
+# Only these canonical value forms gain result guards; list-splice roles stay out.
+sub _ordinary_array_transform_result_call {
+ my ($call, $is_receiver) = @_;
+ return 0 unless ref($call) eq 'HASH'
+  && ($is_receiver || ($call->{kind} // '') eq 'call');
+ my $method = $is_receiver ? ($call->{method} // '') : ($call->{name} // '');
+ return 0 unless $method =~ /\A(?:take|take_last|drop_front|drop_back|slice|sorted|reversed|concat_arrays)\z/o
+  && ($call->{source_method} // $method) eq $method
+  && !$call->{trailing_block_arg} && !$call->{receiver_trailing_block_arg}
+  && ($is_receiver || (defined($call->{source}) && length($call->{source})))
+  && ref($call->{args}) eq 'ARRAY';
+ my $count = @{$call->{args}} + ($is_receiver ? 1 : 0);
+ my $minimum = ($method eq 'slice' || $method eq 'concat_arrays') ? 2 : 1;
+ my $maximum = $method eq 'slice' ? 3 : ($method eq 'sorted' || $method eq 'reversed') ? 1 : 2;
+ return 0 if $count < $minimum || $count > $maximum;
+ foreach my $value (@{$call->{args}}) {
+  return 0 unless ref($value) eq 'HASH'
+   && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;
+  return 0 if ($value->{kind} // '') eq 'call'
+   && ($value->{name} // '') =~ /\A(?:flat|flat_array|flat_hash)\z/o;
+ }
+ return 1
+}
+
 # Count keeps its numeric result and existing non-array zero source policy.
 # Only canonical ordinary one-value calls join result-kind dispatch.
 sub _ordinary_free_count_result_source {
@@ -5694,9 +5719,17 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  my $ordinary_array_transform_result_chain = (_ordinary_array_transform_result_call($receiver, 0)
+    || (@$calls > 1 && ($receiver->{kind} // '') ne 'raw_perl'
+     && !(($receiver->{kind} // '') eq 'call'
+       && _user_function_definition_for_name($deps, $receiver->{name}))
+     && _ordinary_array_transform_result_call($calls->[0], 1)))
+   && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
+   && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
+     || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   # Copy and collection results stay together; other source roles retain copy
   # links here so folding cannot turn an earlier rejection into ordinary null.
-  my $guarded_copy_chain = $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain
+  my $guarded_copy_chain = $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain || $ordinary_array_transform_result_chain
    || (($ordinary_has_key_result_chain || $ordinary_contains_result_chain
     || $ordinary_index_result_chain || $ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain)
    && (grep { ($_->{method} // '') eq 'copy' } @$calls)
@@ -5704,7 +5737,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   # A logical producer must not turn a rejected size/copy/view prefix into valid null.
   # Keep these canonical chains together, including any ordinary copy links.
   my $guarded_result_logical_chain = ($ordinary_count_result_chain || $ordinary_length_result_chain || $ordinary_key_count_result_chain
-    || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain)
+    || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain || $ordinary_array_transform_result_chain)
    && (grep { ($_->{method} // '') =~ /\A(?:and|or|not)\z/o } @$calls);
 
   # Logical and copy receivers consume generic typed values. Fold prefixes
@@ -5880,7 +5913,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
   my $guarded_result_with_chain = (_ordinary_free_default_result_source($receiver)
-    || $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain
+    || $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain || $ordinary_array_transform_result_chain
     || $free_string_result_source || $ordinary_string_receiver_prefix
     || $free_numeric_result_source || $ordinary_number_receiver_prefix
     || $ordinary_logical_result_source || $ordinary_lexical_result_chain
@@ -6330,21 +6363,28 @@ my $lower_numeric_array_reducer_source_expr = sub {
    || $ordinary_contains_result_chain || $ordinary_index_result_chain
    || $ordinary_length_result_chain
    || (($receiver->{kind} // '') eq 'call' && ($receiver->{name} // '') eq 'copy');
-  # An initial view owns its source fallback/errors before its Array result is
-  # guarded. Existing produced/selected/copy/size owners retain their kind guard.
+  # An initial collection helper owns its source fallback/errors before its result
+  # is guarded. Existing produced/selected/copy/size owners retain their kind guard.
   my $initial_hash_value_prefix = $ordinary_hash_value_result_chain
    && !_ordinary_hash_value_result_call($receiver, 0)
-   && !$retained_result_source && !$logical_receiver && !$ordinary_hash_view_result_chain
+   && !$retained_result_source && !$logical_receiver && !$ordinary_hash_view_result_chain && !$ordinary_array_transform_result_chain
    && !$ordinary_count_result_chain && !$ordinary_key_count_result_chain
    && _ordinary_hash_value_result_call($calls->[0], 1);
   my $initial_hash_view_prefix = $ordinary_hash_view_result_chain
    && !_ordinary_free_hash_view_result_source($receiver)
-   && !$retained_result_source && !$logical_receiver && !$ordinary_hash_value_result_chain
+   && !$retained_result_source && !$logical_receiver && !$ordinary_hash_value_result_chain && !$ordinary_array_transform_result_chain
    && !$ordinary_count_result_chain && !$ordinary_key_count_result_chain
    && ($calls->[0]{method} // '') =~ /\A(?:sorted_keys|sorted_values)\z/o
    && ref($calls->[0]{args}) eq 'ARRAY' && !@{$calls->[0]{args}};
-  my $initial_hash_prefix = $initial_hash_view_prefix || $initial_hash_value_prefix;
-  $retained_result_source ||= $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain;
+  my $initial_array_transform_prefix = $ordinary_array_transform_result_chain
+   && !_ordinary_array_transform_result_call($receiver, 0)
+   && !$retained_result_source && !$logical_receiver
+   && !$ordinary_hash_view_result_chain && !$ordinary_hash_value_result_chain
+   && !$ordinary_count_result_chain && !$ordinary_key_count_result_chain
+   && _ordinary_array_transform_result_call($calls->[0], 1);
+  my $initial_collection_prefix = $initial_hash_view_prefix || $initial_hash_value_prefix
+   || $initial_array_transform_prefix;
+  $retained_result_source ||= $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain || $ordinary_array_transform_result_chain;
   my $emitted_result_chain = $defined_default_chain || $scalar_string_chain || $retained_result_source;
   $key_count_source_zero_fallback = $ordinary_key_count_result_chain && !$retained_result_source
    && !_ordinary_free_count_result_source($receiver)
@@ -6360,7 +6400,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    # The compatibility callable-result path was already lowered above.
    # Re-reading its raw AST source would emit invalid Perl such as pick()[0].
    my $current_expr;
-   if ($initial_hash_prefix) {
+   if ($initial_collection_prefix) {
     # Lower exactly the first receiver step through its original producer.
     # Its terminal fragment cannot readmit this result-guard prefix recursively.
     $current_expr = $lower_ast_fluent_chain_node->({
@@ -6391,11 +6431,11 @@ my $lower_numeric_array_reducer_source_expr = sub {
     $current_expr = '$__ls_free_default_value';
    }
    foreach my $call (@$calls) {
-    next if $initial_hash_prefix && $call == $calls->[0];
+    next if $initial_collection_prefix && $call == $calls->[0];
     # Retained result sources and scalar prefixes may cross kinds at any link.
     # Reuse actual-kind dispatch after intermediate results as well as at the source.
     $current_family = 'default_result'
-     if $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain
+     if $constructor_result_source || $ordinary_copy_result_chain || $ordinary_hash_view_result_chain || $ordinary_hash_value_result_chain || $ordinary_array_transform_result_chain
       || $free_string_result_source || $ordinary_string_receiver_prefix
       || $free_numeric_result_source || $ordinary_number_receiver_prefix
       || $ordinary_logical_result_source || $ordinary_lexical_result_chain

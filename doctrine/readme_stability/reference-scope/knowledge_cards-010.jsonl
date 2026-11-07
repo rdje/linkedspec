@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4796,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-capability-guide-drift.md","sha256":"619d55d7064ee65959a14bedbaf8f4cb7999b0d2568bd0616837fb926a9d4bc8","type":"member"}
 {"bytes":2869,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-current-boundary-policy-drift.md","sha256":"7354fe7e55c10ecccbab67201a19263a439ff8c96344fd3423e1d23d873cfb70","type":"member"}
 {"bytes":12544,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-neutral-contract.md","sha256":"baf1548b3f68a79816318e97be4aad95c5c87ee09272e97775323866cad7f077","type":"member"}
 {"bytes":3248,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-public-closeout.md","sha256":"c33d9b19f0960f33d1ff44e101c0a2e3ae71bd8b25c6706ecf81353cabf6ff4e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5146,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-minimum-miss-and-live-progress.md","sha256":"aff85c4c14ea7f3d0776b0601345fd5cc61a131e8e612fe51440698ce31fd9a9","type":"member"}
 {"bytes":2974,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mutation-testing-policy.md","sha256":"25bfa6619dc5c97a61c0871e4e5b1b2d2fe813d28d500b9aaea37e6a00622ec4","type":"member"}
 {"bytes":2503,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-capture-endpoint-presence-repair.md","sha256":"34a0b23938788a4f8650dbb735a44bbe6c4fd6f54d81ddd960f7e5a5802adf8d","type":"member"}
-{"bytes":4271,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-default-container-guard-gap.md","sha256":"4aab311893b0d226b31148befbb705fd67e2a87fa38cbb606af3e856588992e7","type":"member"}

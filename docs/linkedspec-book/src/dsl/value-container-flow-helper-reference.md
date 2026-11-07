@@ -1232,21 +1232,26 @@ Perl callable bodies also support `sorted` and `take`, including their receiver 
 Sorting also preserves numeric and string scalar kinds through codeblock copies; see the [typed copy examples](values-containers-and-flow-helpers.md#scalar-kinds-after-sorting).
 For Perl callable `count`/`first`, see the [worked selection, terminal and effect examples](values-containers-and-flow-helpers.md#counting-and-selecting-first-inside-perl-codeblocks).
 
-### Array transform continuations: selected open repair
+### Array transform continuations: guarded Perl results
 
 `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed` and
-`concat_arrays` return Arrays. Their compatible ordinary Perl continuations are
-already working in the selected controls:
+`concat_arrays` return Arrays. Their ordinary Perl results now retain actual-kind
+guards through later consumers, `copy`, logical helpers and immediate `with`:
 
 ```text
 take(["head","tail"],1).last().uppercase()             # "HEAD"
+take_last(["head","tail"],1).last().uppercase()        # "TAIL"
+drop_front(["head","tail"],1).count()                 # 1
+drop_back(["head","tail"],1).first()                   # "head"
+slice(["head","tail","end"],1,1).join_values(",")     # "tail"
 reversed([{"k":"tail"}]).last().pick_keys("k").count_keys() # 1
 sorted(["b","a"]).join_values(",")                   # "a,b"
+concat_arrays(["head"],["tail"]).last().uppercase()    # "TAIL"
 take(["tail"],0).with(){return(value.count())}          # 0; body runs
 ```
 
-The selected Hash-consumer boundary still needs repair. This target should return
-`[null, ""]`, rejecting before either consumer operand:
+An incompatible Hash consumer returns null before either operand runs. This
+action returns `[null, ""]`:
 
 ```text
 order="";
@@ -1256,17 +1261,28 @@ out=take(["head","tail"],1).set_key(
 return([out,order]);
 ```
 
-The original Perl source currently raises `Not a HASH reference`; literal receiver
-versions such as `["head","tail"].take(1).set_key(...)` can retain DSL and fail
-compilation. The finite selection reports ready metadata for these programs, so
-readiness alone does not prove execution or emitted compilation. Family78 owns
-independent backend repairs; no peer defect or completed implementation is implied.
-Later copy/logical/with work must retain rejection rather than turn it into a
-legitimate null. Current compatible values, nested false/null/Number kinds, source
-once/snapshot order, valid empty Array bodies and needed producer errors are
-preservation controls. Initial source behavior, optional/excluded arities, count/
-start coercion, sort/copy depth, list splices and mutation keep their existing
-contracts. Other Array transforms and full context/portable admission remain open.
+The rejection survives later links. For example, this also returns `[null, ""]`:
+
+```text
+order="";
+out=reversed(["tail"]).set_key(
+  {order=cat(order,"K");"k"}, {order=cat(order,"V");1})
+  .copy().with(){order=cat(order,"W");return("ran")};
+return([out,order]);
+```
+
+The same rule skips later logical operands and `with` bodies after rejection.
+Legitimate empty Arrays still enter `with`, as the zero-count example shows.
+Producer operands run once, source snapshots and nested Bool/null/Number values
+are preserved, and needed producer errors still propagate.
+
+The bounded Perl forms retain their existing arities: four take/drop helpers
+accept an optional count, `slice` requires a start and permits an omitted count,
+and `sorted`/`reversed` take no extra receiver operands. Guarded `concat_arrays`
+forms are free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
+mutation keep their existing contracts. Variadic concat continuations and broader
+context/portable admission remain separate. Other backends are assessed
+independently; descriptor readiness alone does not establish execution behavior.
 
 Perl source-isolation78.0 keeps Number literals out of the eight legacy named-Array
 shortcuts. The bounded native/emitted controls now ignore unrelated Perl host Arrays,
@@ -1280,8 +1296,9 @@ take(3,1)                    # []; never reads an unrelated host Array named 3
 concat_arrays(3,["tail"])    # ["tail"]; later Array operands still contribute
 ```
 
-The unchanged37 result controls still have their original19 selected failures;
-source isolation is focused-checked and continuation repair78.1.1 remains open.
+Perl composition78.1.1 is focused-checked on native and full emitted-fresh routes;
+regenerate previously emitted Perl to receive these guards. Independent Rust78.2
+assessment and full source/context/admission remain open.
 
 ## Hash helpers
 

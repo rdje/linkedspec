@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE=docs/checkpoints/array-transform-composition-perl-2026-11-07/private_restored",
+    "prove",
+    "-v",
+    "-j1",
+    "--exec",
+    "perl -Iperl docs/checkpoints/array-transform-composition-perl-2026-11-07/private_runner.pl docs/checkpoints/array-transform-composition-perl-2026-11-07/control-owner.pm",
+    "t/array_transform_result_guard_composition.t"
+  ],
+  "cwd": "."
+}
