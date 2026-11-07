@@ -4680,3 +4680,41 @@ rejection of an actual compiler failure as semantic RED. All76 healthy observati
 and89 actual serialized/module pairs remain exact across original and qualified
 epochs. Independent Dart77.3 follows the clean boundary/daily artifact check;
 full verification/admission remains separate.
+
+
+### Dart pure Hash-helper result guards
+
+Dart77.3 independently acquires shared28 plus61 own source/shape/prior-owner
+controls before interpreter edits. Native/restored SpecFile/generated-plan/fresh
+execution shows13 failures/76 healthy observations; unchanged89 ordinary tests
+are76PASS/13FAIL. Both free and receiver wrong take forms return[] with A, and
+later bodies run AW/ADW. Required source/value errors already propagate. Actual
+parsed/module inputs retain canonical sources; ActionFluentChain's source-role
+list omits Hash-helper results before the existing value dispatcher kind guard.
+
+Canonical positional source/first-prefix roles now retain that actual-kind and
+rejection guard. A single first-helper source permission excludes earlier
+retained/view/size/copy/constructor owners and keeps the scalar Boolean boundary.
+Producers/source/arity/keys/splices/depth/collision/mutation are unchanged; no
+unknown/keyword/traversal/non-with trailing/deferred/callback or unassessed
+registered-function receiver expansion. Own merge ignores Number/null/Array and
+yields overlay Hash; set/rename/drop retain original Number/Array/null; pick
+returns null. Initial with W/count0 (merge1), six malformed SATW, four zero-key AW
+and six earlier-owner guards remain exact. These are independent compatibility
+fences, not new portable source/signature authority.
+
+Unchanged89 and all four public routes PASS; all76 healthy observations/65 own
+profiles and89 actual parsed/module pairs stay exact. Required errors retain full
+native/restored RuntimeInterpreterException diagnostics and generated framing.
+Exact old/current images at one private own-Dart SDK path give13RED/89PASS with
+actual89 frames/counts and resolved private routing checked before use; checkout
+owner never swapped. Direct five files151, fatal scoped analysis, zero-change
+format, candidate identity and first readonly0/empty stderr/eight effective
+corruptions PASS. Actual grammar bytes precede SDK compilation/calls and are
+passed explicitly; actual emitted/parsed inputs precede fresh loading.
+
+Rebuild Dart applications; emission and serialized format stay unchanged. Full
+source/context, native/cache/transitive/toolchain custody4.2/SESSION5, general
+isolation, registration prerequisites, declared-host coverage and full23.4 remain
+separate. Evidence: docs/checkpoints/hash-value-result-guard-dart-2026-11-07/REVIEW.md.
+Independent Julia77.4 follows clean landing, then installed Lua77.5.

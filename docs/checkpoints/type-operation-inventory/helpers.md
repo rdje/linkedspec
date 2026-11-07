@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: Perl source77.0/composition77.1.1 and independent Rust77.2 have bounded focused outcomes. Rust unchanged89/13RED becomes89PASS/four routes; qualified exact old/current images13RED/89PASS, direct141 and first qualified readonly/nine controls PASS. All76 healthy observations/65 own profiles/matching89 artifact pairs exact. Original zero-frame private compiler failures and omitted first-use help edge stay explicit; qualified help capture repairs prospective proof, historical custody4.2 remains separate. At clean landing check daily artifacts, then independently assess Dart77.3/Julia4/installed Lua5; full23.4 remains separate.
+Current finite frontier: bounded Perl source77.0/composition77.1.1, Rust77.2 and Dart77.3 have focused outcomes. Dart independent89/13RED becomes89PASS/four routes; exact private old/current13RED/89PASS, direct151 and first readonly/eight controls PASS. All76 healthy observations/65 own profiles/matching89 parsed-module pairs exact; required diagnostics/source policies retained. Artifact4.15 daily review complete1157 rows/zero removals. Independently assess Julia77.4/installed Lua5 next; full23.4 remains separate.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6250,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-outward-compiled-descriptor-projection.md","sha256":"0ffc6df9ef8c9dc4db91e6a079dc9695ac065bb0e85ebd7dadfd2145766916d9","type":"member"}
 {"bytes":2323,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-action-edge-fluent-closure.md","sha256":"f78eb66c375a8e699b8b708e95e1df2e9baf74fa84297a7e065d66f631f9b1e1","type":"member"}
 {"bytes":7524,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-batch2-oracle-split.md","sha256":"c8bc660ab5a783fc0de12dc9a3f54c16d6c21f3b16f4fb5f45fae309ad5d39bc","type":"member"}
 {"bytes":2668,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-followon-closed.md","sha256":"6b1a96e8dd6996828d7396992f2f8ca094127a9357806ab732c1b97107ec42a2","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3148,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-regex-feature-contract.md","sha256":"4c1b8d0e984119f88e31592f53313e8c11dd506475122549a9fa80af14c8bfad","type":"member"}
 {"bytes":3377,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-rule-mode-semantics-map.md","sha256":"d6f068858022ddb38e405a3338f4a5dae046ade43a675715906e030f7f6bd200","type":"member"}
 {"bytes":10458,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-spec-self-hosted-grammar.md","sha256":"727c710695b3a82d1544f2ecef49d3da958d94a01ed95d996b97880adc8074d6","type":"member"}
-{"bytes":3833,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-top-rule-no-regex-two-rule-minimum.md","sha256":"e569ab56048c6d7e4a8b44f56e4a61904964df3c63e47dcc1ddaa023d533e220","type":"member"}

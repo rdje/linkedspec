@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2453,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/marker-switch-outside-branch-statement-drift.md","sha256":"1aa77da022269fca92cdece89863ebd8b3297bc4664db5e4289f3b26ef25a55f","type":"member"}
 {"bytes":12624,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-2026-07-28-stdio-contract.md","sha256":"976ae983653173a1be0eef61af9cdcdbb8c68303a9181b82dc6c6ef20204840e","type":"member"}
 {"bytes":6596,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-all-twenty-transport-blocker.md","sha256":"699dd12b4f09c72e604fbf0d7320dd4c3184b5bbc1097d5d2c59472ba97ffccb","type":"member"}
 {"bytes":11960,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-implementation-admission-ledger.md","sha256":"9a61cc031621ba05e0e4f28b7bb8439bdc305b24ccec5646808e9aeee78a094b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3054,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-direct-read-selector-lifetime.md","sha256":"cfcc7fffbaac7dfa1eb68991e5cecdcf2e376826e409f28bf56da65d15d64bdb","type":"member"}
 {"bytes":2871,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-duplicate-regex-slot-identity-admission.md","sha256":"878804ad80f33b833853f8148a4f16acdb5e271e37f07e02a3090d2ffd710efa","type":"member"}
 {"bytes":3373,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dynamic-codeblock-receiver-guard-gap.md","sha256":"9768d54b3bdd38669e3a122dd4bfd27c859fa20810b972a7b2d192dd02ed0008","type":"member"}
-{"bytes":4769,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitcontext-callback-capture.md","sha256":"1e6dd57d3a8499859aa8e28a7912a4220f2704d694d7db27f8b575e9d6372c52","type":"member"}

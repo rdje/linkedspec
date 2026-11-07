@@ -1,0 +1,12 @@
+{
+  "cwd": "docs/checkpoints/hash-value-result-guard-dart-2026-11-07/control-owner/dart",
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "--version"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3923,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-process-conformance.md","sha256":"d9d61ee182bf839dcaeb7e8d3a69df4c97e85b6dba1e0bfbb7d7dd8c078ea14c","type":"member"}
 {"bytes":10056,"lines":155,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-authority-boundary-gaps.md","sha256":"e9f2a4c751308cafde8b17214a621bffd580ca3f66a22faa4b33530d61bcd2d4","type":"member"}
 {"bytes":4441,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-parent-state-test-gap.md","sha256":"b456785271b5f20565ca825ba1d4335d0eaa7720b833948456a21c70f2a0e423","type":"member"}
 {"bytes":7377,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-progressive-span-dispatch-admission.md","sha256":"f6f0bf4bad7e01a40b6e099f519d8a029435e0d628a383c853efd3ffef55c032","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1654,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-array-split-mutation.md","sha256":"7441fd6d84185128e0994ef3d653f1cc2cba51e1846765a214bfb284a1274e4c","type":"member"}
 {"bytes":16127,"lines":284,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md","sha256":"1d2a8f87ba97959cf3ef112a5120f1fe09725a27a47926a11485bc82ab783487","type":"member"}
 {"bytes":14294,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-backend-full-parity-plan.md","sha256":"7e3fbffed6633dcb0907065ae4816fca609056a334bb952eac8a240aec2e4b34","type":"member"}
-{"bytes":3583,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-blind-postcall-return-scope-gap.md","sha256":"c0c8c94f09cff020a7b65ec787ac96bb876b65f507eeecf368d0b7720bf1d154","type":"member"}

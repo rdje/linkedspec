@@ -1,0 +1,10 @@
+{
+  "basis": "Tool-result transcription; diagnostic path normalized to repository-relative form",
+  "command": "staged owner/acceptance/cadence/diff/clean-envelope checks",
+  "exit_code": 0,
+  "diagnostic": "tools/project_data_run.sh: child setpgid (96183 to 96183): Operation not permitted",
+  "acceptance": "PASS",
+  "cadence": "focused PASS",
+  "owner": "SESSION-STARTUP-READING.7",
+  "limits": "Final PGID was not captured; no failed-group, established-group or lifecycle-safety inference. No recover/purge or liveness/deletion probe ran."
+}

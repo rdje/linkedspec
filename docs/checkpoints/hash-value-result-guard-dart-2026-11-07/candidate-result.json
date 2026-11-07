@@ -1,0 +1,11 @@
+{
+  "candidate": "PASS",
+  "actual_direct_inputs": [
+    "dart/lib/src/runtime/interpreter.dart",
+    "dart/test/hash_value_result_guard_composition_test.dart",
+    "dart/tool/probe_hash_value_results.dart",
+    "tests/fixtures/hash_value_result_guard_cases.json",
+    "tests/fixtures/hash_value_result_guard_dart_profiles.json",
+    "specs/user_function_definition.spec"
+  ]
+}

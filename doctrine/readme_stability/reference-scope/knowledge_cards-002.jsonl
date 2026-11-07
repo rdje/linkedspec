@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8526,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-effect-integration-gap.md","sha256":"6c550d60366c2e9abcd71396f62daa7e27fb345a03bdc318b95ea94bb8242196","type":"member"}
 {"bytes":8247,"lines":112,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-transaction-dormant-red.md","sha256":"217dff2ad4ac4301d77cc9e6c783ea0dccc6ee24f6099a65f806a8f2af540c0a","type":"member"}
 {"bytes":3263,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-dispatch-rule-local-scope.md","sha256":"80be721fa2902cdcc4252869e6994f1225cf5719ea6c7cc254254459819ee73d","type":"member"}
 {"bytes":7624,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recursive-observation-admission.md","sha256":"0cff0553e4a2a234f90c8496df4c2e90d40426faaf644b7313871d78d0160c50","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8749,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/guarded-ast-change-history-capacity.md","sha256":"4bb8cc5c47862a4ba3f035bf18fd06879452dcf705c8dd7dca37528d6b4ecd38","type":"member"}
 {"bytes":12531,"lines":253,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/handler-ir-design.md","sha256":"d1138cc4b8873598140f23dbd1cba6f2456f5322ed72d4a733af675b2150d294","type":"member"}
 {"bytes":2364,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-helper-odd-arity-current-behavior.md","sha256":"f98964865a50e8378b37cff64a042c209d0053d1193fad1c687f82380180cc73","type":"member"}
-{"bytes":2551,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-methodlowering-source-fallback.md","sha256":"9a9899938788f9cab88149d783fbc172d8975908c634c0e1973c3ffb52c5bf89","type":"member"}

@@ -1338,8 +1338,8 @@ On Perl, evaluated scalar inputs to `sorted_values` keep the existing empty Arra
 ### Hash-valued helper continuations: selected open repair
 
 `merge_hash`, pure `set_key`, `rename_key`, `drop_keys` and `pick_keys` return
-Hashes. Bounded Perl77.1.1 and Rust77.2 now retain actual-kind and rejection guards
-for their ordinary results; remaining peer assessment/full admission stays open.
+Hashes. Bounded Perl77.1.1, Rust77.2 and Dart77.3 now retain actual-kind and rejection
+guards for their ordinary results; remaining peer assessment/full admission stays open.
 Compatible examples:
 
 ```text
@@ -1349,7 +1349,7 @@ pick_keys({"b":"tail","a":"head"},"b").sorted_values().last().uppercase() # "TAI
 pick_keys({"a":1},"missing").with(){return(value.count_keys())} # 0; body runs
 ```
 
-The selected Perl and Rust program now returns `[null, ""]`. Its incompatible Array
+The selected Perl, Rust and Dart program now returns `[null, ""]`. Its incompatible Array
 consumer rejects before evaluating the `A` operand:
 
 ```text
@@ -1358,11 +1358,11 @@ out=pick_keys({"a":1,"b":2},"b").take({order=cat(order,"A");1});
 return([out,order]);
 ```
 
-Literal receiver forms now compile through the same guards. Rejection skips
+Perl literal receiver forms now compile through the same guards. Rejection skips
 later `.copy()`, logical and `.with()` operands/bodies, rather than becoming a
 legitimate null that runs them. Required source/value producer errors propagate
 through composed `.take()`/`.coalesce()` exactly as in their terminal controls.
-All original48 own source/arity/error profiles remain: initial Number3 helper-with
+All original48 Perl source/arity/error profiles remain: initial Number3 helper-with
 keeps its Hash/count/W behavior, initial Array helper-with keeps its error, and
 an earlier view/copy/Array-constructor result still rejects a Hash consumer before
 its operands. Nested false/null values, source snapshots and valid empty Hash
@@ -1379,6 +1379,17 @@ results retain their guards. Required source/value errors already propagated on
 Rust and remain exact. Rebuild Rust applications/runtime; emitted source and
 serialized format are unchanged. Use actual Hash inputs under the published
 signatures; these preservation controls do not define portable fallback behavior.
+
+Dart77.3 independently repairs thirteen guard gaps and preserves65 own source/
+error profiles. Both original free and receiver wrong take forms returned `[]`
+after running A; they now return null before that operand. Its own source controls
+retain overlay Hashes for merge, original Number/Array/null for set/rename/drop,
+and null for pick; initial with bodies still run. Required errors already
+propagated and keep full native/restored diagnostics and generated framing.
+Malformed extra/zero-key profiles and earlier result guards remain unchanged.
+Rebuild Dart applications against the updated interpreter; actual emitted modules
+and parsed inputs are unchanged. These finite controls establish no portable
+wrong-kind policy or complete context admission.
 
 Use at least one key for `drop_keys`/`pick_keys`; the four selected Perl zero-key
 forms are unready profiles. Keep rename destinations absent for portable collision

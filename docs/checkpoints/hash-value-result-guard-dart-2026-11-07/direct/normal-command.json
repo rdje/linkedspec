@@ -1,0 +1,20 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "test",
+    "--reporter",
+    "expanded",
+    "--concurrency=1",
+    "test/hash_value_result_guard_composition_test.dart",
+    "test/hash_view_result_guard_composition_test.dart",
+    "test/constructor_result_composition_test.dart",
+    "test/value_copy_test.dart",
+    "test/receiver_copy_arity_test.dart"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

@@ -1,11 +1,12 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2551,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-methodlowering-source-fallback.md","sha256":"9a9899938788f9cab88149d783fbc172d8975908c634c0e1973c3ffb52c5bf89","type":"member"}
 {"bytes":3328,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-migration-split.md","sha256":"15f75e26ad0b1d92d05488e25f001e182cd470ee9edb9bbf24cb2f7cf7baaac0","type":"member"}
 {"bytes":3027,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-perl-reference.md","sha256":"b6eacb40894b7d2aff342211e6f92481e3570268d8d48389161a3e2806ea8f8e","type":"member"}
 {"bytes":4744,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-rust-parity.md","sha256":"662c96fba4fe1201273f5b2394734b062a28b51fd6e18aaff46b5f9fd00d1520","type":"member"}
 {"bytes":3422,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-dynamic-key-contract.md","sha256":"895c816bb757adf4a0864feabd32d6a5c4edb2118c36fe6b2aa37f8400f301d5","type":"member"}
 {"bytes":3222,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-fat-arrow-retired.md","sha256":"bce637878b8c14a2069d976f50078fde943bf8519ea4fdfbcaa145f406fcc0da","type":"member"}
 {"bytes":3348,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-tree-callback-append-scope-collision.md","sha256":"9aa20738281b035557f49decdc312d714b7106ff395afa26898cc52637238cb9","type":"member"}
-{"bytes":3259,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/hash-value-result-guard-selection.md","sha256":"063c8f1701e7bdfb93fe99f652ccef131e00a016ee68aefa4151a883a302a71a","type":"member"}
+{"bytes":3658,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.3","path":"docs/knowledge/hash-value-result-guard-selection.md","sha256":"8193305057da94ce015b1cb686a12dfbce9cf55dfa6a21472186ebe7f1d19fb9","type":"member"}
 {"bytes":6744,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/hash-view-array-result-guard-gaps.md","sha256":"069041fd6ac15893ee7215bdc53918862a8de167e5300b94371cd419dbf1b194","type":"member"}
 {"bytes":8469,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-objective-audit-input-recovery.md","sha256":"0056baa6fcce07fdbd38cd70d0f1832001636aa51ac307efdc030f54cf5dc830","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4625,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-failure-trace-routing.md","sha256":"1f2d9fcf5e3258057447ed137cd2cacceadea04636c45385f92fd83d2c88cc90","type":"member"}
 {"bytes":3333,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-mechanism-audit.md","sha256":"736e8d25757f9ff8de076aa2488fedc523fb8c65aace179d4dbd6b3763207351","type":"member"}
 {"bytes":6735,"lines":93,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-native-execution-canonical-json.md","sha256":"e58b9e31ec6aacfe4107ee8e90f20c29f46ef3b8f99e6fffbbbb1adbe702f048","type":"member"}
-{"bytes":3923,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-process-conformance.md","sha256":"d9d61ee182bf839dcaeb7e8d3a69df4c97e85b6dba1e0bfbb7d7dd8c078ea14c","type":"member"}

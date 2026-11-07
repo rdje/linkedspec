@@ -4088,6 +4088,18 @@ final class LinkedSpecRuntimeEngine {
             (receiver is ActionCallExpr &&
                 (canonicalActionHelperName(receiver.name) == 'copy' ||
                     canonicalActionHelperName(receiver.name) == 'with'));
+        final hashValueChain = _isOrdinaryHashValueResultChain(receiver, calls);
+        final preserveInitialHashValueSource =
+            hashValueChain &&
+            !kindGuardedSource &&
+            !_isOrdinaryCountResultChain(receiver, const []) &&
+            !_isOrdinaryKeyCountResultChain(receiver, const []) &&
+            !_isOrdinaryHashViewResultChain(receiver, const []) &&
+            !_isOrdinaryHashValueResultChain(receiver, const []) &&
+            _isOrdinaryHashValueReceiverCall(calls.first);
+        // Keep the first producer's source policy; its actual result owns later
+        // guards without overriding an earlier retained or produced value.
+        kindGuardedSource = kindGuardedSource || hashValueChain;
         final hashViewChain = _isOrdinaryHashViewResultChain(receiver, calls);
         final preserveInitialHashViewSource =
             hashViewChain &&
@@ -4129,6 +4141,7 @@ final class LinkedSpecRuntimeEngine {
               calls.first.args.isEmpty,
           preserveInitialKeyCountSource: preserveInitialKeyCountSource,
           preserveInitialHashViewSource: preserveInitialHashViewSource,
+          preserveInitialHashValueSource: preserveInitialHashValueSource,
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -6434,6 +6447,100 @@ final class LinkedSpecRuntimeEngine {
         first.args.isEmpty;
   }
 
+  bool _isOrdinaryHashValueOperand(ActionExpr expression) =>
+      switch (expression) {
+        ActionVariableExpr() ||
+        ActionNumberLiteralExpr() ||
+        ActionStringLiteralExpr() ||
+        ActionBooleanLiteralExpr() ||
+        ActionUndefExpr() ||
+        ActionArrayLiteralExpr() ||
+        ActionHashLiteralExpr() ||
+        ActionBlockValueExpr() ||
+        ActionCallExpr() ||
+        ActionFluentChainExpr() ||
+        ActionReceiverMutationChainExpr() ||
+        ActionIndexedVarExpr() ||
+        ActionNestedAccessExpr() ||
+        ActionValueAccessExpr() ||
+        ActionAssignScalarExpr() ||
+        ActionAssignArrayAppendExpr() ||
+        ActionAssignHashIndexExpr() ||
+        ActionAssignNestedAccessExpr() => true,
+        _ => false,
+      };
+
+  bool _isOrdinaryHashValueResultArguments(
+    String helper,
+    List<ActionArgument> args, {
+    required bool receiver,
+  }) {
+    final count = args.length + (receiver ? 1 : 0);
+    final canonicalArity = switch (helper) {
+      'merge_hash' => count == 2,
+      'set_key' || 'rename_key' => count == 3,
+      'drop_keys' || 'pick_keys' => count >= 2,
+      _ => false,
+    };
+    return canonicalArity &&
+        args.every(
+          (argument) =>
+              argument is ActionPositionalArgument &&
+              _isOrdinaryHashValueOperand(argument.value),
+        );
+  }
+
+  bool _isOrdinaryHashValueReceiverCall(ActionFluentCall call) =>
+      (call.sourceMethod ?? call.method) == call.method &&
+      !call.trailingBlockArg &&
+      !call.receiverTrailingBlockArg &&
+      _isOrdinaryHashValueResultArguments(
+        call.method,
+        call.args,
+        receiver: true,
+      );
+
+  // Pure Hash helpers retain producer/source policies. Canonical ordinary
+  // results and first receiver prefixes join the existing persistent guards.
+  bool _isOrdinaryHashValueResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    if (calls.any((call) {
+      final helper = canonicalActionHelperName(call.method);
+      return _treeTraversalHelperNames.contains(helper) ||
+          call.args.any(
+            (argument) =>
+                argument is! ActionPositionalArgument ||
+                (helper != 'with' &&
+                    !_isOrdinaryHashValueOperand(argument.value)),
+          ) ||
+          ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+              helper != 'with') ||
+          !(_runtimeReceiverHelperNames.contains(helper) ||
+              const {'copy', 'with', 'and', 'or', 'not'}.contains(helper));
+    })) {
+      return false;
+    }
+    if (receiver is ActionCallExpr) {
+      if (compiledSpec.functionRegistry.hasName(receiver.name)) {
+        return false;
+      }
+      if ((receiver.sourceMethod ?? receiver.name) == receiver.name &&
+          !receiver.trailingBlockArg &&
+          _isOrdinaryHashValueResultArguments(
+            receiver.name,
+            receiver.args,
+            receiver: false,
+          )) {
+        return true;
+      }
+    }
+    return _isOrdinaryHashValueOperand(receiver) &&
+        calls.length > 1 &&
+        _isOrdinaryHashValueReceiverCall(calls.first);
+  }
+
   // Ordered Hash-view producers keep their input policy. Only ordinary free-one
   // and zero-extra receiver forms gain result-kind ownership.
   bool _isOrdinaryHashViewResultChain(
@@ -6741,12 +6848,14 @@ final class LinkedSpecRuntimeEngine {
     bool preserveInitialCountSource = false,
     bool preserveInitialKeyCountSource = false,
     bool preserveInitialHashViewSource = false,
+    bool preserveInitialHashValueSource = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
     var countSourcePending = preserveInitialCountSource;
     var keyCountSourcePending = preserveInitialKeyCountSource;
     var hashViewSourcePending = preserveInitialHashViewSource;
+    var hashValueSourcePending = preserveInitialHashValueSource;
     for (final call in calls) {
       final initialCountSource = countSourcePending;
       countSourcePending = false;
@@ -6754,6 +6863,8 @@ final class LinkedSpecRuntimeEngine {
       keyCountSourcePending = false;
       final initialHashViewSource = hashViewSourcePending;
       hashViewSourcePending = false;
+      final initialHashValueSource = hashValueSourcePending;
+      hashValueSourcePending = false;
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
       // Earlier incompatible consumers return before this step.
@@ -6781,6 +6892,7 @@ final class LinkedSpecRuntimeEngine {
           !initialCountSource &&
           !initialKeyCountSource &&
           !initialHashViewSource &&
+          !initialHashValueSource &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&

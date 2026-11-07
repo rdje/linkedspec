@@ -9,7 +9,7 @@ answers:
   - "are zero-key drop_keys and pick_keys admitted canonical forms"
   - "must Hash-valued guard repairs preserve initial source policies"
 date: 2026-11-07
-status: original selection frozen; bounded Perl/Rust results focused-checked, remaining peers pending
+status: original selection frozen; bounded Perl/Rust/Dart results focused-checked, remaining peers pending
 tags: [hash, helpers, guards, perl, selection, source]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.37; hash-value-result-selection-2026-11-07/REVIEW.md retains original32, exact shared28 with15 failures/13 healthy controls, four separate unready zero-key profiles,32 actual artifact pairs and eight effective evidence corruptions. No SDK production change or peer verdict."
 reverify:
@@ -47,3 +47,9 @@ then89PASS/four routes/direct141 and qualified exact old/current images13RED/89P
 See [[rust-hash-value-result-guards]] and [[rust-runtime-embedded-help-input]]:
 original private compiler failures and the missing first-use help edge remain
 explicit; qualified epochs repair prospective input capture, not historical4.2.
+
+Dart77.3 independently acquires89/shared28 plus61 own fences,13 original failures/
+76 healthy, then unchanged89/four routes/direct151 PASS. Exact private old/current
+images reproduce13RED/89PASS with actual frames and resolved SDK routing. See
+[[dart-hash-value-result-guards]]; original source/arity/error policies and89
+parsed/module pairs remain exact. Julia/Lua assess independently next.
