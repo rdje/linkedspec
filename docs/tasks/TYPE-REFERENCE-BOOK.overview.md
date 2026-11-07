@@ -1091,7 +1091,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`, `.23.1.11`, `.23.1.12`, `.23.1.13`, `.23.1.14`, `.23.1.15`, `.23.1.16`, `.23.1.17`, `.23.1.18`, `.23.1.19`, `.23.1.20`, `.23.1.21`, `.23.1.22`, `.23.1.23`, `.23.1.24`, `.23.1.25`, `.23.1.26`, `.23.1.27`, `.23.1.28`, `.23.1.29`, `.23.1.30`, `.23.1.31`, `.23.1.32`, `.23.1.33`, `.23.1.34`, `.23.1.35`, `.23.1.36`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`, `.23.1.11`, `.23.1.12`, `.23.1.13`, `.23.1.14`, `.23.1.15`, `.23.1.16`, `.23.1.17`, `.23.1.18`, `.23.1.19`, `.23.1.20`, `.23.1.21`, `.23.1.22`, `.23.1.23`, `.23.1.24`, `.23.1.25`, `.23.1.26`, `.23.1.27`, `.23.1.28`, `.23.1.29`, `.23.1.30`, `.23.1.31`, `.23.1.32`, `.23.1.33`, `.23.1.34`, `.23.1.35`, `.23.1.36`, `.23.1.37`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -2282,6 +2282,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Verification: Actual public Get/descriptor/substitution/full modules/handlers/native-fresh, exact activation source/input byte identities, original16/copy6/source-preserving fixture projection, eight corruptions and observer syntax; book/map/history/memory/diff and mandatory normal hooks govern landing. Actual evidence/limits: docs/checkpoints/hash-view-selection-2026-11-06/REVIEW.md. Original runtime errors/ready0 arity profile remain intact; no complete source/context/host isolation or native/transitive closure.
   Commit: `TYPE-REFERENCE-BOOK.1.2.23.1.36 - freeze Hash-view guards and own copy rejection prerequisite`.
   Next: Commit selection36, then P1 Perl76.0 before view76.1 and independent peers; full verification after feature coverage.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.37`
+  Status: `pending`
+  Goal: Select and freeze the next actually open roadmap-required fluent source/consumer family after bounded Hash-view76 coverage.
+  Dependencies: Focused76.0-.6/backend and initial-source outcomes; current23.1 inventory/gap matrix/contracts/Knowledge. Full23.4 remains separate.
+  Acceptance: Recover actual remaining requirements and canonical source roles before probing. Select at most one finite existing-contract gap with minimal full-source public Get/descriptor/substitution/emitted native-fresh controls. Preserve source domains/signatures/actual kinds/ordered effects/errors/copy/alias and excluded contexts. Retain actual first inputs/producers/modules/full channels, distinguish healthy preservation from demonstrated defects, independently assess peers and create bounded backend leaves before production. No broad census/suite/admission, unsupported-context promotion, invented population claim or dependency-internal inspection.
+  Planned verification: Small public selection/direct-preservation controls, syntax/book/Knowledge/history/memory/diff and normal hooks; full verification after feature coverage.
+  Planned claim verification: none: Finite authored selection controls; separately own any population/performance measurement.
+  Frontier: Activate only from clean Git after installed Lua76.5 normal-hook landing/brief0. No next family or defect is inferred merely from method names; use current requirements and canonical contracts.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.9`
   Status: `completed` / director-requested clean pause

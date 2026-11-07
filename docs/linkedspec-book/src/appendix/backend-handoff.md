@@ -4314,7 +4314,7 @@ Evidence, actual source/instrument/input archives, modules and full channels:
 docs/checkpoints/hash-view-result-guard-perl-2026-11-06/REVIEW.md. This is focused
 Perl proof. New standalone normal `t/hash_view_result_guard_composition.t` needs
 canonical registration23.4.1; full native/cache/transitive custody, process isolation,
-source/callable context closure, independent peers and full23.4 admission remain
+source/callable context closure, complete cross-backend admission and full23.4 remain
 separate. Independent Rust76.2 and Perl follow-up76.6 outcomes follow below. The
 later Perl comparison identifies and corrects initial-input regressions that this
 first fifteen-source result-guard proof did not cover.
@@ -4352,9 +4352,10 @@ inputs/modules and complete raw channels survive under
 docs/checkpoints/hash-view-result-guard-rust-2026-11-06/REVIEW.md. Earlier grammar
 omissions and full native/cache/transitive/toolchain custody remain4.2/SESSION5-owned.
 New normal registration23.4.1, isolation, source/registered-function contexts,
-independent peers and full23.4 admission remain separate. Independent Perl76.6
+complete peer admission and full23.4 remain separate. Independent Perl76.6
 closes its initial-receiver gap below using actual Perl evidence; Rust observations
-do not establish its policy. Dart76.3 follows with its own source fences.
+do not establish its policy. Dart76.3, Julia76.4 and installed Lua76.5 below retain
+their own independently acquired source fences.
 
 ## Perl first-view policy restoration and numeric source boundary
 
@@ -4393,8 +4394,8 @@ at docs/checkpoints/hash-view-receiver-policy-perl-2026-11-06/REVIEW.md.
 Regenerate affected emitted Perl, including modules emitted with76.1. The schema
 and generated format stay unchanged. Full native/cache/transitive custody, source/
 registered-function contexts, general isolation, normal registration23.4.1 and
-full23.4 admission remain separate. Independent Dart76.3 must establish its own
-initial-source and error/arity profiles before any runtime repair.
+full23.4 admission remain separate. Dart76.3, Julia76.4 and installed Lua76.5
+independently retain their own initial-source and error/arity profiles below.
 
 ## Dart ordinary Hash-view result guards
 
@@ -4428,8 +4429,8 @@ docs/checkpoints/hash-view-result-guard-dart-2026-11-07/REVIEW.md.
 Rebuild Dart applications against the updated runtime; emitted module bytes and
 format stay unchanged. Source/registered-function contexts, general isolation,
 normal registration23.4.1, full native/cache/transitive custody4.2/SESSION5 and
-full23.4 remain separate. Independent Julia76.4 then installed Lua76.5 must acquire
-their own source/arity/error profiles and actual grammar inputs before edits.
+full23.4 remain separate. Independent Julia76.4 and installed Lua76.5 outcomes
+below retain their own source/arity/error profiles and actual grammar inputs.
 
 ## Julia ordinary Hash-view result guards
 
@@ -4462,5 +4463,41 @@ docs/checkpoints/hash-view-result-guard-julia-2026-11-07/REVIEW.md.
 Rebuild Julia applications/runtime; emitted module bytes and format stay unchanged.
 Fresh Modules share runtime/process. Full native/cache/transitive custody4.2/
 SESSION5, source/registered-function contexts, general isolation, canonical
-registration23.4.1 and full23.4 remain separate. Installed Lua76.5 requires its own
-host profiles and actual grammar before SDK use; declared Lua5.4 remains separate.
+registration23.4.1 and full23.4 remain separate. Installed Lua76.5 below retains its
+own host profiles and actual grammar before SDK use; declared Lua5.4 remains separate.
+
+## Installed Lua ordinary Hash-view result guards
+
+PUC5.5.1 and LuaJIT2.1.1788460057 independently support canonical ordinary free-one
+sorted_keys/sorted_values and zero-extra first-view Array-result guards.
+`sorted_keys({"a":1}).set_key("k",1)` returns null and skips the consumer operands;
+later copy/logical/with retains rejection. Ordered compatible Arrays, nested
+selected kinds, explicit bridges, source-once snapshots and needed errors stay.
+
+Each host preserves initial Number/null/Array views[];
+`undef.sorted_values().with(){return(value.count())}` returns0 with its body run.
+Produced Count/CountKeys/Length Numbers still reject Hash views and stay null.
+Valid Hash/empty-view bodies run. Both own malformed extra-operand profiles remain
+ran/AW, independently of Dart's free W; these are preservation observations, not
+new signatures. Use the existing namespace with no added interpreter chunk locals;
+scalar_result boundaries, loop-index Array-end mutation rights and producers stay.
+Registered-function receiver, unknown, keyword, traversal and non-with trailing
+forms gain no new view role.
+
+Each original33/four routes exposes26 healthy/seven guard failures. Same normal33
+completes184 checks28failures before and184checks0failures after. Direct new184/
+constructor116 give300 counted checks per host, plus12 actual value-copy rows
+and passing receiver-arity controls. Each19 own profiles/33 actual emitted-parsed
+pairs remain exact across four phases; direct stderr is empty. First readonly
+recovery/eight effective corruptions pass with empty decoded own stderr. The
+actual grammar is retained before SDK use and supplied through the public explicit
+parser constructor. One safe runner group and loadfile checks; the full runner
+is not executed. Exact input/source patches/modules/full channels survive at
+docs/checkpoints/hash-view-result-guard-lua-2026-11-07/REVIEW.md.
+
+Load the updated runtime in Lua applications; emitted bytes and format stay
+unchanged per host. Fresh modules share runtime/process. Full native/cache/
+transitive custody4.2/SESSION5, source/registered-function contexts, general
+isolation, canonical registration23.4.1, declared Lua5.4 and full23.4 remain
+separate. All bounded76 backend/source-policy children have focused outcomes;
+remaining-family selection23.1.37 follows clean landing before another acquisition.

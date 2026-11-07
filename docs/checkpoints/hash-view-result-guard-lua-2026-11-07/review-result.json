@@ -1,0 +1,30 @@
+{
+  "hosts": [
+    "puc",
+    "luajit"
+  ],
+  "per_installed_host": {
+    "RED_groups": 7,
+    "actual_module_and_parsed_pairs_unchanged": 33,
+    "direct_counted_checks": 300,
+    "healthy": 26,
+    "independent_profiles": 19,
+    "normal_checks": 184,
+    "normal_failures_after": 0,
+    "normal_failures_before": 28,
+    "original_programs": 33,
+    "receiver_arity_controls_PASS": true,
+    "value_copy_observation_rows": 12
+  },
+  "recovery_corruptions": [
+    "PUC compatible result drift",
+    "LuaJIT initial Array policy lost",
+    "PUC free arity Dart normalization",
+    "LuaJIT needed error masked",
+    "PUC missing fresh route",
+    "LuaJIT profile source drift",
+    "PUC actual module drift",
+    "LuaJIT original RED already green"
+  ],
+  "scope": "finite actual installed-host direct inputs/grammar/artifacts; fresh modules share runtime/process; full native/cache/transitive custody4.2/SESSION5, contexts, isolation, registration, declared5.4 and23.4 remain separate"
+}

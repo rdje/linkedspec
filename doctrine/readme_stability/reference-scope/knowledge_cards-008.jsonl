@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3957,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-public-entry-trivia.md","sha256":"32af7029b704df9bcb38d4a643d83645c645b1b0e474a98f95e0aff4e3063b54","type":"member"}
 {"bytes":2826,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emptiness-expression-and-host-slot-drift.md","sha256":"948ca767331de981d57b83af79b1396279cdcb7105bad63d42e22d591eef62d7","type":"member"}
 {"bytes":4203,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-ast-trim-span.md","sha256":"5caf35bf2b0711bc066433a04d260a61cc6aedfbd426ccedf76e554cfc6e0efd","type":"member"}
 {"bytes":4938,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-empty-blind-return-duplicate-scalar.md","sha256":"83199b9e2639fd0573b3a301818de24935bba81de15b4ec8c37531689f7dbcf0","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6240,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/perl-receiver-copy-canonical-selection.md","sha256":"785a6cbbb0c4c2ae5d2914dc01e4252559d66613d04228c99b1961e87acd7139","type":"member"}
 {"bytes":2852,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-receiver-string-bridge-guards.md","sha256":"5bdc5c177a45f7b27df2daa1d167359eb4903b2ef77ac007cb4cd920e85f77a6","type":"member"}
 {"bytes":5237,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-annotation-statement-origins.md","sha256":"7fd9517f356552827599db0e266a7f64525cbfc1d123fa1f5e8e850de6cd7694","type":"member"}
-{"bytes":3127,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-recognition-commit-boolean-kind-drift.md","sha256":"6b81991c66eaca18b08f150d928651db3c6ccb918b4e7d64b989546b7cd178f2","type":"member"}

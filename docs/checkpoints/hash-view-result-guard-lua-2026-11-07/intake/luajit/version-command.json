@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "luajit",
+    "-v"
+  ],
+  "environment": {
+    "LINKEDSPEC_HASH_VIEW_CAPTURE": "docs/checkpoints/hash-view-result-guard-lua-2026-11-07/intake/luajit"
+  }
+}

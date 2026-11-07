@@ -7,7 +7,7 @@ answers:
   - "which task owns ordinary Hash-view result guards"
   - "what sources are frozen for Hash-view76"
 date: 2026-11-06
-status: Perl76.1+76.6/Rust76.2/Dart76.3/Julia76.4 focused-checked; installed Lua and full admission remain
+status: all bounded76 backend/source-policy children focused-checked; full admission remains
 tags: [perl, copy, hash, arrays, guards, with, selection]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.76.1; hash-view-result-guard-perl-2026-11-06/REVIEW.md retains actual shared15=8healthy7RED to15PASS, five independent profiles, four-file67 qualified proof, actual source inverse/restoration and eight recovery controls. Original selection36 remains unchanged."
 reverify:
@@ -93,3 +93,14 @@ pairs remain exact across four phases. Both malformed extra forms stayAW, own
 initial[]/null-with0W/prior size-null/scalar_result/call_index stay. Actual grammar
 precedes SDK use. See [[julia-hash-view-result-guards]]; installed Lua76.5 remains
 independent before full admission.
+
+## November7 installed Lua outcome and next frontier
+
+Installed Lua76.5 independently qualifies PUC5.5.1/LuaJIT33/four routes each:
+26 healthy/seven RED, same184 checks28FAIL to184PASS; direct300 counted checks
+plus copy/arity controls and first recovery/eight corruptions pass. Each19 own
+profiles/33 actual module-parsed pairs remain exact. No chunk locals or scalar/
+loop-index mutation policy change. See [[lua-hash-view-result-guards]]. All bounded
+76 children have focused outcomes; pending selection23.1.37 owns the next clean
+remaining-family acquisition. Full custody/context/isolation/canonical admission
+and declared Lua5.4 remain separate.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT Hash-view76: Perl copy76.0/views76.1+76.6, Rust76.2, Dart76.3 and Julia76.4 have focused proof. Independent installed Lua76.5 is next; full verification stays deferred until feature coverage.
+PNT Hash-view76: all bounded Perl/Rust/Dart/Julia/installed Lua backend and source-policy children have focused outcomes. Remaining-family selection23.1.37 is pending; full23.4 verification/admission remains separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.76.4 adds Julia canonical Hash-view result guards with first-source permission preserved. Own33/four routes26healthy7RED; same normal156PASS28FAIL to184PASS, direct315/first recovery eight controls PASS. All19 own profiles and33 actual emitted-parsed pairs remain exact. Both malformed profilesAW; initial[]/null-with0W/prior size-null/scalar_result/call_index survive. Actual grammar precedes SDK use; rebuild runtime/apps, emitted bytes unchanged. Full custody/context/isolation/registration/admission separate.
+TYPE-REFERENCE-BOOK.1.2.23.3.76.5 guards installed Lua view Arrays in the existing namespace. Each PUC5.5.1/LuaJIT33/four routes26healthy7RED becomes184 checks0failures; direct300 counted checks plus copy/arity controls and first recovery eight corruptions PASS. Each19 own profiles/33 actual artifact pairs exact; no added chunk locals/scalar_result/loop-index/producer change. Actual grammar precedes SDK use; emitted bytes/format unchanged. Full custody/context/isolation/registration/declared5.4/admission separate.
 
 ## Next Action
 
-Activate installed Lua76.5 from clean Git. Acquire each host's own shared15/free/initial-source/with/arity/error/prior-owner profiles and actual explicit grammar before SDK use. Preserve own policies, small direct proof/docs/commit before next selection; declared5.4 and full verification stay separate.
+Activate pending remaining-family selection23.1.37 from clean Git. Recover requirements/current inventory/contracts/Knowledge, select one actually open finite source/consumer gap and acquire public controls before any implementation or peer verdict. No broad suite/admission or guessed defect.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.76.5 — each installed host33/184PASS/direct300 plus copy/arity controls/eight corruptions; next selection37 owned.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.4 — Julia33/four routes184PASS/direct315/eight controls; own profiles preserved; installed Lua76.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.3 — Dart33PASS/four routes; final direct62/eight controls; own initial/arity profiles retained; Julia76.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.6 — Perl original13 restored; numeric seeds isolated;17PASS/direct59/eight controls; Dart76.3 next.
@@ -29,7 +30,6 @@ Activate installed Lua76.5 from clean Git. Acquire each host's own shared15/free
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — installed Lua25PASS/four routes;13 healthy/Count/scalar/index exact; callable75.6 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — peers Count ownership3PASS/four routes; both25 normals; runtimes unchanged; installed Lua75.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — Julia CountKeys25PASS/final346; Count-owned source preserved; independent peer75.7 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — Dart key-count22PASS/final67; Boolean null/ten healthy exact; independent Julia75.4 next.
 
 ## History
 

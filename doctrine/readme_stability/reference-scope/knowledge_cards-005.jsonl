@@ -63,6 +63,7 @@
 {"bytes":5130,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-generated-source-v2-rule-local-cursor.md","sha256":"62a14672d1a7b313b2691e1cfb521351d2cd0aa315200fec5663e405fe9ebe70","type":"member"}
 {"bytes":4439,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-global-cursor-option-removal.md","sha256":"ae3f9106ceca3214133b1948a4eb61861b65fe1e2910f355ad8c49411d38ff4e","type":"member"}
 {"bytes":5531,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-governed-named-span-parity.md","sha256":"63626dbf32bc05fd3a8c75a92b0fb233c5818dbec838015ba716bfb8d453d949","type":"member"}
+{"bytes":3504,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/lua-hash-view-result-guards.md","sha256":"ad0f3fc85c9b28b4b7bf3b8f520a69694cc04e2aaaf9cfce94bcd77304925a76","type":"member"}
 {"bytes":1781,"lines":21,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-helper-regex-matches.md","sha256":"19d52bae24fa88d6c3c73a7ea97009f3fabb6f42c398c7fa8ab9fef2a4a6e6ec","type":"member"}
 {"bytes":3013,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-helper-regex-split-mutation-preflight.md","sha256":"5dae604624b04e716dcfa431d3129d62dda6c878416b715d256ea6c9e9c059f6","type":"member"}
 {"bytes":4368,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-implicit-blind-iteration-collections.md","sha256":"fa7299fbe3c011e57f07ef6c159497aebdea4b2c4a679a76dad116e99810e391","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":22449,"lines":329,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-commit-closeout-audit.md","sha256":"4633a10b9ecec33c6d3e2e456d0fb9db7759ecfa5abe8ac6f88f162b9fb0b9fc","type":"member"}
 {"bytes":22719,"lines":327,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-admission.md","sha256":"8b8dc415fc24706b140128b851752676a68dbf169840649871d78701692b4b9c","type":"member"}
 {"bytes":21407,"lines":321,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-proposal.md","sha256":"8d353b371b219816af3aa64432c7d5233bd369dd76661febeead7b26ab5686d9","type":"member"}
-{"bytes":9646,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-readme-reading-and-status-drift.md","sha256":"381b6273d6505bff2fb0ad6d9c084341175a139cd40843adc8279c30653a116e","type":"member"}

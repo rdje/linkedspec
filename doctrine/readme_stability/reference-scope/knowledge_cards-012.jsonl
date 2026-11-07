@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5427,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-consumer-current-projection-lockstep.md","sha256":"c7034874cee3a92d5dbfd598f8b6973a3591c6c32cf444992b14b8448b4d3b80","type":"member"}
 {"bytes":5477,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-linked-parsing-architecture.md","sha256":"961e5cdb6fa30ea6aa8fc5bae978eeebdb12759988455846faca76a4e1bb9898","type":"member"}
 {"bytes":3486,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parse-job-annotation-contract.md","sha256":"cd524d2b1db839467ed5651898c87c22e9f16ec5e05453d2634b4006a507286a","type":"member"}
 {"bytes":4123,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parser-registry-dispatch-contract.md","sha256":"7c61df97f1e2e036948f56f102f3f8f05c532c32ebd9c15da6f05102a7fe7a34","type":"member"}
@@ -125,5 +126,4 @@
 {"bytes":2519,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-parity-proof-closed.md","sha256":"ea435b5bed05d513bc4d91e1680baae077125f6eb01fa15352fbf9166751a87a","type":"member"}
 {"bytes":1962,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-ruleir-planning-decisions.md","sha256":"ebbdabf6e76a7215fc01d7db39b67c18bfd485d3433920317338f1491f6823ce","type":"member"}
 {"bytes":3927,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-verbosity-and-formatting.md","sha256":"ddd83c81841a7c6b3c89fbb7bfb2045a47771aa546ba4c62dd8015b6a6449210","type":"member"}
-{"bytes":2899,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-authoring-model-public-no-drift.md","sha256":"b5b374f8060bf88116ce1883a2042cfacf94eaa88fc346929cfce2b29303319e","type":"member"}
-{"bytes":4491,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/typed-lossless-gap-composition.md","sha256":"2c2cb42c2e31e12179a735bb78b35074f2e43b56dd5b96d1947c556d5172dd3a","type":"member"}
+{"bytes":1836,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.5","path":"docs/knowledge/type-task-selection-lookup.md","sha256":"e41aeb2fa2a2db382c6fe2cab9d83204e641fe6d45e226e3274d2f151eb0a7fc","type":"member"}

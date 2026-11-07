@@ -4098,6 +4098,48 @@ function typed_source.receiver_mutation.is_ordinary_key_count_result_chain(expr,
     #(first.args or {}) == 0
 end
 
+-- Ordered Hash-view producers retain their input policy. Use the existing
+-- namespace so canonical result ownership adds no interpreter chunk locals.
+function typed_source.receiver_mutation.is_ordinary_hash_view_result_chain(engine, expr, calls)
+  for _, call in ipairs(calls or {}) do
+    local method = action_contracts.canonical_action_helper_name(call.method)
+    if method == "walk_leaves" or method == "map_leaves" or method == "reduce_leaves" or
+      ((call.trailing_block_arg or call.receiver_trailing_block_arg) and method ~= "with") or
+      not (is_pure_string_helper(method) or PURE_ARRAY_HELPERS[method] or PURE_HASH_HELPERS[method] or
+        LOGICAL_HELPERS[method] or scalar_numeric.supports(method) or scalar_numeric.supports_reducer(method) or
+        method == "copy" or method == "with" or method == "coalesce" or method == "coalesce_nonempty") then
+      return false
+    end
+    for _, argument in ipairs(call.args or {}) do
+      if argument.argument_kind ~= "positional" then return false end
+    end
+  end
+  if expr ~= nil and expr.kind == "call" then
+    if engine.compiled_spec.function_registry:has_name(expr.name) then return false end
+    local args = expr.args or {}
+    if (expr.name == "sorted_keys" or expr.name == "sorted_values") and
+      (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg and
+      #args == 1 and args[1].argument_kind == "positional" then
+      local value = argument_expr(args[1])
+      local kind = value and value.kind
+      if kind == "variable" or kind == "number" or kind == "string" or kind == "boolean" or kind == "undef" or
+        kind == "array_literal" or kind == "hash_literal" or kind == "block_value" or
+        kind == "call" or kind == "fluent_chain" or kind == "receiver_mutation_chain" or
+        kind == "indexed_var" or kind == "nested_access" or kind == "value_access" or
+        kind == "assign_scalar" or kind == "assign_array_append" or kind == "assign_hash_index" or
+        kind == "assign_nested_access" or kind == "codeblock_literal" then
+        return true
+      end
+    end
+  end
+  local first = calls and calls[1]
+  if first == nil then return false end
+  local name = first.method
+  return (name == "sorted_keys" or name == "sorted_values") and
+    (first.source_method or name) == name and not first.trailing_block_arg and
+    not first.receiver_trailing_block_arg and #(first.args or {}) == 0
+end
+
 -- Canonical index sources retain numeric zero, null and source snapshots.
 -- Use the existing namespace; no additional interpreter chunk locals.
 function typed_source.receiver_mutation.is_ordinary_index_result_chain(expr, calls)
@@ -4289,6 +4331,15 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     (target_receiver ~= nil and target_receiver.kind == "call" and
       (action_contracts.canonical_action_helper_name(target_receiver.name) == "copy" or
         action_contracts.canonical_action_helper_name(target_receiver.name) == "with"))
+  local hash_view_chain = typed_source.receiver_mutation.is_ordinary_hash_view_result_chain(engine, target_receiver, calls)
+  local preserve_initial_hash_view_source = hash_view_chain and not kind_guarded_result and
+    not typed_source.receiver_mutation.is_ordinary_count_result_chain(target_receiver, {}) and
+    not typed_source.receiver_mutation.is_ordinary_key_count_result_chain(target_receiver, {}) and
+    not typed_source.receiver_mutation.is_ordinary_hash_view_result_chain(engine, target_receiver, {}) and
+    (calls[1].method == "sorted_keys" or calls[1].method == "sorted_values") and #(calls[1].args or {}) == 0
+  -- Initial views keep producer fallback; Array results own later links before
+  -- Count/CountKeys initial-source permissions are considered.
+  kind_guarded_result = kind_guarded_result or hash_view_chain
   local key_count_chain = typed_source.receiver_mutation.is_ordinary_key_count_result_chain(target_receiver, calls)
   local preserve_initial_key_count_source = key_count_chain and not kind_guarded_result and
     not typed_source.receiver_mutation.is_ordinary_count_result_chain(target_receiver, {}) and
@@ -4330,7 +4381,8 @@ function typed_source.receiver_mutation.evaluate_fluent_calls(
     -- Check container-only consumers before evaluating their operands.
     if (reduction_result or kind_guarded_result) and
       not (preserve_initial_count_source and index == 1) and
-      not (preserve_initial_key_count_source and index == 1) then
+      not (preserve_initial_key_count_source and index == 1) and
+      not (preserve_initial_hash_view_source and index == 1) then
       local kind = json.kind(value)
       if (array_only and kind ~= "array" and not nullable_membership and not nullable_index) or
         (PURE_HASH_HELPERS[canonical_name] and kind ~= "harray" and not nullable_presence) then

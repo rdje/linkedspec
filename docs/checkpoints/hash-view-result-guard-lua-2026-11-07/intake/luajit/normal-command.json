@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_lua_project_data.sh",
+    "luajit",
+    "docs/checkpoints/hash-view-result-guard-lua-2026-11-07/observer.lua",
+    "docs/checkpoints/hash-view-result-guard-lua-2026-11-07/intake/cases.json",
+    "docs/checkpoints/hash-view-result-guard-lua-2026-11-07/intake/luajit"
+  ],
+  "environment": {
+    "LINKEDSPEC_HASH_VIEW_CAPTURE": "docs/checkpoints/hash-view-result-guard-lua-2026-11-07/intake/luajit"
+  }
+}

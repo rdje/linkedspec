@@ -1276,7 +1276,8 @@ Perl's existing first-collection-method fallback remains: `n=5; n.set_key("k",1)
 Sorted Hash views produce Arrays and already support compatible continuations:
 `sorted_keys({"b":2,"a":1}).join_values(",")` is `"a,b"`, and
 `sorted_values({"b":"tail","a":"head"}).last().uppercase()` is `"TAIL"`.
-Perl, Rust, Dart and Julia canonical ordinary free-one calls and zero-extra receiver prefixes guard
+On the Perl, Rust, Dart, Julia and installed Lua (PUC5.5.1/LuaJIT) routes
+covered by focused checks, canonical ordinary free-one calls and zero-extra receiver prefixes guard
 their Array results before incompatible Hash consumers. For example,
 `sorted_keys({"a":1}).set_key("k",1)` and
 `{"a":1}.sorted_values().set_key("k",1)` return null. Consumer operands are
@@ -1287,24 +1288,26 @@ The backend handoff records focused
 [Perl](../appendix/backend-handoff.md#perl-ordinary-hash-view-result-guards) and
 [Rust](../appendix/backend-handoff.md#rust-ordinary-hash-view-result-guards) and
 [Dart](../appendix/backend-handoff.md#dart-ordinary-hash-view-result-guards) and
-[Julia](../appendix/backend-handoff.md#julia-ordinary-hash-view-result-guards) proof
+[Julia](../appendix/backend-handoff.md#julia-ordinary-hash-view-result-guards) and
+[installed Lua](../appendix/backend-handoff.md#installed-lua-ordinary-hash-view-result-guards) proof
 and remaining independent backend work. Ordering and copy depth are retained;
 backend initial-source policies and remaining contexts are listed there.
 
 Initial-source permissions are separate from guards on already produced results.
 These focused input examples preserve each backend's existing policy:
 
-| Initial receiver example | Perl | Rust | Dart | Julia |
-| --- | --- | --- | --- | --- |
-| `3.sorted_values()` or `undef.sorted_keys()` | `[]` | `[]` | `[]` | `[]` |
-| `[1].sorted_keys()` or `[1].sorted_values()` | initial source error (`Not a HASH reference`) | `[]` | `[]` | `[]` |
-| `undef.sorted_values().with(){return(value.count())}` | `0`; body runs | `0`; body runs | `0`; body runs | `0`; body runs |
+| Initial receiver example | Perl | Rust | Dart | Julia | Lua (installed) |
+| --- | --- | --- | --- | --- | --- |
+| `3.sorted_values()` or `undef.sorted_keys()` | `[]` | `[]` | `[]` | `[]` | `[]` |
+| `[1].sorted_keys()` or `[1].sorted_values()` | initial source error (`Not a HASH reference`) | `[]` | `[]` | `[]` | `[]` |
+| `undef.sorted_values().with(){return(value.count())}` | `0`; body runs | `0`; body runs | `0`; body runs | `0`; body runs | `0`; body runs |
 
 Perl76.6 restores these initial-input behaviors after the earlier guard change.
 Numeric `sorted_keys` sources also keep[] independently of unrelated numeric host
 Hashes: `sorted_keys(3)`, `3.sorted_keys()` and `sorted_keys(length("abc"))` use
 the evaluated DSL data. Actual Hashes still project ordered keys. Regenerate
-affected emitted Perl. Rebuild Rust, Dart and Julia applications against their updated runtimes.
+affected emitted Perl. Rebuild Rust, Dart and Julia applications against their updated runtimes. Load the
+updated Lua runtime in applications; emitted Lua module bytes remain unchanged.
 
 Registered Hash-function results also compose on the focused-checked Perl, Rust,
 Dart, Julia and installed PUC5.5.1/LuaJIT routes. With `fn make_hash(){return({"k":1})}`,

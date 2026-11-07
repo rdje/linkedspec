@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":11960,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-implementation-admission-ledger.md","sha256":"9a61cc031621ba05e0e4f28b7bb8439bdc305b24ccec5646808e9aeee78a094b","type":"member"}
 {"bytes":10304,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-native-server-topology.md","sha256":"86e2f60d46cedd12ba08067196a65629d8dda942c60a6e505451e020d6dbf772","type":"member"}
 {"bytes":7683,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mcp-recurring-six-runtime-plan.md","sha256":"88859667d7a40f600c8e81ec6fabd198a5a81fa3c7ac8f2cfb19fda08c0bb355","type":"member"}
 {"bytes":2288,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/mdbook-mechanical-migration-contrast-drift.md","sha256":"70e98e2994e18f010ba8e8af077d41753c1d6aeba4a599d2be01a5bc81de3f78","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4769,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitcontext-callback-capture.md","sha256":"1e6dd57d3a8499859aa8e28a7912a4220f2704d694d7db27f8b575e9d6372c52","type":"member"}
 {"bytes":3698,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-boundary-regex-catalog-gap.md","sha256":"5e428ef766467f7c4b140889546ff248a4ab1a80cd1766dce33198ba25b298bf","type":"member"}
 {"bytes":3484,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-ordinary-recursion-guard-gap.md","sha256":"ee8e8db329ae8a585acdc81b9d7d8a797f292cd1782056ac101aa73d0c1d61b1","type":"member"}
-{"bytes":3957,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-emitted-public-entry-trivia.md","sha256":"32af7029b704df9bcb38d4a643d83645c645b1b0e474a98f95e0aff4e3063b54","type":"member"}
