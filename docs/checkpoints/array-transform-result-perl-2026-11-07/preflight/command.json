@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-transform-result-perl-2026-11-07/observer.pl",
+    "docs/checkpoints/array-transform-result-perl-2026-11-07/cases.json",
+    "docs/checkpoints/array-transform-result-perl-2026-11-07/preflight"
+  ],
+  "cwd": "."
+}

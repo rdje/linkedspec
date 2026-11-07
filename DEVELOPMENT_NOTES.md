@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 — Freeze Perl Array-source policies and host-read prerequisite
+
+Perl Array preflight retains unchanged37/19 result failures and own123 source/arity/error profiles. Localized empty/main/outer controls expose literal Number3 lowered to @3 in eight producers, with16 main-only free/receiver host reads. No production edit. Source78.0 is immediate before composition78.1.1; full admission remains separate.
+
+Actual SDK/three grammar/instrument inputs and all emitted modules/native handlers/full gzip-first channels survive. Readonly preflight recovery and six distinguishing altered-evidence controls pass. The initial missing-observer capture remains failed and separate; corrected intake is the first actual SDK run. Source isolation is scheduled before result guards; earlier owners, frozen37 and other backends are unchanged.
+
+First normal retains24RED:19 target defects plus five generated-package harness mismatches. Exact public-namespace qualification yields19 expected target RED/141 healthy with all123 policies exact; readonly normal recovery passes. Original test/output/profile bytes remain retained.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.4.16 — Metadata does not establish task section preservation
 
 Both nodes()/migrate_epoch() recognize exact Current Frontier while Lua uses Current frontier. Actual first migration removes232154 bytes of current/trailing sections yet narrative/Unicode/capability/language-closure checks pass; their ID/status/CORE reads miss this boundary. Preserve the unsafe first image and233688-byte chronology-bearing node query. Separate restoration plus independent line-state projection proves all157 CORE/149 contracts/eight short bodies/exact full source/tail, renewing115343 current-text bytes. Seven reason-sensitive denials include actual first loss and altered contract/body/source/query controls; first readonly0/empty stderr. No tool/infrastructure change here; generic repair4.17 must qualify historical framework consumers under its canonical boundary. Current tail stays browsable; dated acceptance/runtime unchanged. Evidence: docs/checkpoints/task-headroom-lua-2026-11-07/README.md.

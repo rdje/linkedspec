@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT resumes ordinary Array-transform78 after qualified task-capacity4.16. Independent Perl78.1 source/arity/error acquisition is next; full23.4 remains separate.
+PNT owns immediate Perl Array source-isolation78.0, then result composition78.1.1. Other backend78 assessments/full23.4 remain separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.16 retains157 IDs/149 closed contracts/eight short bodies and the exact232154-byte current/trailing Lua tail, renewing115343 current-text bytes. First generic migration is semantic RED despite metadata passes; separate restoration/qualified public and three owner checks/first readonly0 with seven denials pass. Original producer/results stay unchanged. Advisory4.8 mode/revision-only qualification verifies64 inputs/six controls/actual bound validator RED-GREEN; no measured value/hash refresh. Generic boundary/query repair4.17 remains P2; no runtime/Lua5.4 admission change.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 freezes own Perl preflight. Perl Array preflight retains unchanged37/19 result failures and own123 source/arity/error profiles. Localized empty/main/outer controls expose literal Number3 lowered to @3 in eight producers, with16 main-only free/receiver host reads. No production edit. Source78.0 is immediate before composition78.1.1; full admission remains separate.
 
 ## Next Action
 
-From clean4.16 landing independently activate TYPE-REFERENCE-BOOK.1.2.23.3.78.1. Acquire unchanged37 plus own Number/null/Hash, optional/excluded-arity, needed-error and prior-owner fences before production. Preserve producer policies and repair demonstrated bounded results only; retain actual inputs/artifacts/full channels and new/direct/inverse/recovery/book/Knowledge/live/commit. Split an unsafe demonstrated prerequisite first.
+From clean preflight landing activate TYPE-REFERENCE-BOOK.1.2.23.3.78.0. Retain all first observations, add the smallest localized host normal, fence only the eight Number-AST shortcuts, preserve own source policies/required errors and existing result failures, then focused direct/inverse/recovery/book/Knowledge/commit.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 — own37/123 profiles and16 main-only host reads; source78.0 before composition78.1.1; no production repair.
 - TYPE-REFERENCE-BOOK.1.2.23.4.16 — qualified157 IDs/149 contracts/eight short bodies/exact tail,115343 bytes renewed/readonly/seven denials; first tail RED retained,4.17 owned; Perl78.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.38 — Array-transform37/19 failures18 healthy, qualified nine-control recovery, shared37/family78 owned; no production/peer verdict; capacity4.16 before Perl78.1.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.5 — each installed Lua89/four routes510 checks0 failures/direct810 plus copy/arity; exact private13RED/89PASS/first recovery/eight controls; selection38 next.
@@ -29,7 +30,6 @@ From clean4.16 landing independently activate TYPE-REFERENCE-BOOK.1.2.23.3.78.1.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.4 — Julia33/four routes184PASS/direct315/eight controls; own profiles preserved; installed Lua76.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.3 — Dart33PASS/four routes; final direct62/eight controls; own initial/arity profiles retained; Julia76.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.76.6 — Perl original13 restored; numeric seeds isolated;17PASS/direct59/eight controls; Dart76.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.76.2 — Rust22PASS/four routes, direct30/total52; initial-source policies preserved; P1 Perl coverage76.6 next.
 
 ## History
 

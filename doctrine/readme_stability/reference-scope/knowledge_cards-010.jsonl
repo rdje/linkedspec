@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2869,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-current-boundary-policy-drift.md","sha256":"7354fe7e55c10ecccbab67201a19263a439ff8c96344fd3423e1d23d873cfb70","type":"member"}
 {"bytes":12544,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-neutral-contract.md","sha256":"baf1548b3f68a79816318e97be4aad95c5c87ee09272e97775323866cad7f077","type":"member"}
 {"bytes":3248,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-public-closeout.md","sha256":"c33d9b19f0960f33d1ff44e101c0a2e3ae71bd8b25c6706ecf81353cabf6ff4e","type":"member"}
 {"bytes":4996,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-recurring-gate.md","sha256":"0212c054c78496690fa9da45cb30ae5dc753863226573bc8dbee716dae22b23f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2503,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-capture-endpoint-presence-repair.md","sha256":"34a0b23938788a4f8650dbb735a44bbe6c4fd6f54d81ddd960f7e5a5802adf8d","type":"member"}
 {"bytes":4271,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-default-container-guard-gap.md","sha256":"4aab311893b0d226b31148befbb705fd67e2a87fa38cbb606af3e856588992e7","type":"member"}
 {"bytes":5692,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-direct-value-execution.md","sha256":"005d0ad1f04d06b98fe9635963bafb5b964e5221111878c886b6838cfebdf900","type":"member"}
-{"bytes":12968,"lines":164,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-mcp-server-plan.md","sha256":"e22d1c6e896cf33d4c37a12b065a8f48d6455332ff9da72b8f78fdd021993d4a","type":"member"}

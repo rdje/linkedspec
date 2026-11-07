@@ -1,0 +1,4382 @@
+[
+  {
+    "case": {
+      "body": "source=3;return(take(source,1))",
+      "id": "initial_number_take_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(take(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.take(1))",
+      "id": "initial_number_take_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.take(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(take(source,1))",
+      "id": "initial_null_take_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(take(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.take(1))",
+      "id": "initial_null_take_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.take(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(take(source,1))",
+      "id": "initial_hash_take_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(take(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.take(1))",
+      "id": "initial_hash_take_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.take(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(take(source))",
+      "id": "optional_take_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(take(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "head"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "head"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=take(source,1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_take_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=take(source,1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(source.take())",
+      "id": "optional_take_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(source.take())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "head"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "head"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.take(1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_take_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.take(1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(take_last(source,1))",
+      "id": "initial_number_take_last_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(take_last(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.take_last(1))",
+      "id": "initial_number_take_last_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.take_last(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(take_last(source,1))",
+      "id": "initial_null_take_last_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(take_last(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.take_last(1))",
+      "id": "initial_null_take_last_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.take_last(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(take_last(source,1))",
+      "id": "initial_hash_take_last_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(take_last(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.take_last(1))",
+      "id": "initial_hash_take_last_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.take_last(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(take_last(source))",
+      "id": "optional_take_last_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(take_last(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "end"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "end"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=take_last(source,1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_take_last_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=take_last(source,1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take_last"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(source.take_last())",
+      "id": "optional_take_last_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(source.take_last())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "end"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "end"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.take_last(1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_take_last_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.take_last(1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take_last"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(drop_front(source,1))",
+      "id": "initial_number_drop_front_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(drop_front(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.drop_front(1))",
+      "id": "initial_number_drop_front_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.drop_front(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(drop_front(source,1))",
+      "id": "initial_null_drop_front_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(drop_front(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.drop_front(1))",
+      "id": "initial_null_drop_front_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.drop_front(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(drop_front(source,1))",
+      "id": "initial_hash_drop_front_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(drop_front(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.drop_front(1))",
+      "id": "initial_hash_drop_front_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.drop_front(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(drop_front(source))",
+      "id": "optional_drop_front_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(drop_front(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "tail",
+        "end"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "tail",
+        "end"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=drop_front(source,1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_drop_front_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=drop_front(source,1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_front"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(source.drop_front())",
+      "id": "optional_drop_front_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(source.drop_front())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "tail",
+        "end"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "tail",
+        "end"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.drop_front(1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_drop_front_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.drop_front(1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_front"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(drop_back(source,1))",
+      "id": "initial_number_drop_back_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(drop_back(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.drop_back(1))",
+      "id": "initial_number_drop_back_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.drop_back(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(drop_back(source,1))",
+      "id": "initial_null_drop_back_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(drop_back(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.drop_back(1))",
+      "id": "initial_null_drop_back_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.drop_back(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(drop_back(source,1))",
+      "id": "initial_hash_drop_back_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(drop_back(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.drop_back(1))",
+      "id": "initial_hash_drop_back_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.drop_back(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(drop_back(source))",
+      "id": "optional_drop_back_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(drop_back(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "head",
+        "tail"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "head",
+        "tail"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=drop_back(source,1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_drop_back_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=drop_back(source,1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_back"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(source.drop_back())",
+      "id": "optional_drop_back_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(source.drop_back())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "head",
+        "tail"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "head",
+        "tail"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.drop_back(1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_drop_back_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.drop_back(1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_back"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(slice(source,1,1))",
+      "id": "initial_number_slice_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(slice(source,1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.slice(1,1))",
+      "id": "initial_number_slice_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.slice(1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(slice(source,1,1))",
+      "id": "initial_null_slice_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(slice(source,1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.slice(1,1))",
+      "id": "initial_null_slice_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.slice(1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(slice(source,1,1))",
+      "id": "initial_hash_slice_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(slice(source,1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.slice(1,1))",
+      "id": "initial_hash_slice_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.slice(1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(slice(source,1))",
+      "id": "optional_slice_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(slice(source,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "tail",
+        "end"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "tail",
+        "end"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=slice(source,1,1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_slice_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=slice(source,1,1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=[\"head\",\"tail\",\"end\"];return(source.slice(1))",
+      "id": "optional_slice_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=[\"head\",\"tail\",\"end\"];return(source.slice(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "tail",
+        "end"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "tail",
+        "end"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.slice(1,1,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_slice_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.slice(1,1,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(sorted(source))",
+      "id": "initial_number_sorted_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(sorted(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.sorted())",
+      "id": "initial_number_sorted_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.sorted())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(sorted(source))",
+      "id": "initial_null_sorted_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(sorted(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.sorted())",
+      "id": "initial_null_sorted_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.sorted())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(sorted(source))",
+      "id": "initial_hash_sorted_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(sorted(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.sorted())",
+      "id": "initial_hash_sorted_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.sorted())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=sorted(source,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_sorted_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=sorted(source,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "sorted"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.sorted({order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_sorted_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.sorted({order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(reversed(source))",
+      "id": "initial_number_reversed_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(reversed(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.reversed())",
+      "id": "initial_number_reversed_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.reversed())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(reversed(source))",
+      "id": "initial_null_reversed_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(reversed(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.reversed())",
+      "id": "initial_null_reversed_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.reversed())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(reversed(source))",
+      "id": "initial_hash_reversed_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(reversed(source))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.reversed())",
+      "id": "initial_hash_reversed_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.reversed())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=reversed(source,{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_reversed_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=reversed(source,{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "reversed"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.reversed({order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_reversed_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.reversed({order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "reversed"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(concat_arrays(source,[\"extra\"]))",
+      "id": "initial_number_concat_arrays_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(concat_arrays(source,[\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.concat_arrays([\"extra\"]))",
+      "id": "initial_number_concat_arrays_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.concat_arrays([\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(concat_arrays(source,[\"extra\"]))",
+      "id": "initial_null_concat_arrays_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(concat_arrays(source,[\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.concat_arrays([\"extra\"]))",
+      "id": "initial_null_concat_arrays_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.concat_arrays([\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(concat_arrays(source,[\"extra\"]))",
+      "id": "initial_hash_concat_arrays_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(concat_arrays(source,[\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.concat_arrays([\"extra\"]))",
+      "id": "initial_hash_concat_arrays_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.concat_arrays([\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=concat_arrays(source,[\"extra\"],{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_concat_arrays_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=concat_arrays(source,[\"extra\"],{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail",
+          "extra"
+        ],
+        "E"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail",
+          "extra"
+        ],
+        "E"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";source=[\"head\",\"tail\"];out=source.concat_arrays([\"extra\"],{order=cat(order,\"E\");2});return([out,order])",
+      "id": "extra_concat_arrays_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";source=[\"head\",\"tail\"];out=source.concat_arrays([\"extra\"],{order=cat(order,\"E\");2});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail",
+          "extra"
+        ],
+        "E"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail",
+          "extra"
+        ],
+        "E"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";out=array(\"tail\").set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])",
+      "id": "prior_constructor",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";out=array(\"tail\").set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";out=sorted_values({\"k\":\"tail\"}).set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])",
+      "id": "prior_view",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";out=sorted_values({\"k\":\"tail\"}).set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";out=copy([\"tail\"]).set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])",
+      "id": "prior_copy",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";out=copy([\"tail\"]).set_key({order=cat(order,\"K\");\"k\"},1);return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "order=\"\";out=set_key({\"k\":\"tail\"},\"n\",1).take({order=cat(order,\"N\");1});return([out,order])",
+      "id": "prior_hash",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {order=\"\";out=set_key({\"k\":\"tail\"},\"n\",1).take({order=cat(order,\"N\");1});return([out,order])}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(take({return(num_clamp(1,2))}).with(){return(\"masked\")})",
+      "id": "optional_error_take",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(take({return(num_clamp(1,2))}).with(){return(\"masked\")})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Undefined subroutine &LinkedSpec::ArrayTransformSelectionProbe::optional_error_take::num_clamp called at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Undefined subroutine &LinkedSpec::SpecEntry::num_clamp called at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(take_last({return(num_clamp(1,2))}).with(){return(\"masked\")})",
+      "id": "optional_error_take_last",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(take_last({return(num_clamp(1,2))}).with(){return(\"masked\")})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Undefined subroutine &LinkedSpec::ArrayTransformSelectionProbe::optional_error_take_last::num_clamp called at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Undefined subroutine &LinkedSpec::SpecEntry::num_clamp called at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(drop_front({return(num_clamp(1,2))}).with(){return(\"masked\")})",
+      "id": "optional_error_drop_front",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(drop_front({return(num_clamp(1,2))}).with(){return(\"masked\")})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Undefined subroutine &LinkedSpec::ArrayTransformSelectionProbe::optional_error_drop_front::num_clamp called at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Undefined subroutine &LinkedSpec::SpecEntry::num_clamp called at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(drop_back({return(num_clamp(1,2))}).with(){return(\"masked\")})",
+      "id": "optional_error_drop_back",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(drop_back({return(num_clamp(1,2))}).with(){return(\"masked\")})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Undefined subroutine &LinkedSpec::ArrayTransformSelectionProbe::optional_error_drop_back::num_clamp called at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Undefined subroutine &LinkedSpec::SpecEntry::num_clamp called at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(slice({return(num_clamp(1,2))},1).with(){return(\"masked\")})",
+      "id": "optional_error_slice",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(slice({return(num_clamp(1,2))},1).with(){return(\"masked\")})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "Undefined subroutine &LinkedSpec::ArrayTransformSelectionProbe::optional_error_slice::num_clamp called at (eval SERIAL) line 52.\n",
+        "rule_label": "Value",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Undefined subroutine &LinkedSpec::SpecEntry::num_clamp called at LinkedSpec::generated_handler:Value:<none> line 25.\n",
+        "rule_label": "Value",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "type": "runtime_handler"
+      },
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.take(1).with(){return(value)})",
+      "id": "initial_with_number_take",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.take(1).with(){return(value)})",
+      "id": "initial_with_null_take",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.take(1).with(){return(value)})",
+      "id": "initial_with_hash_take",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.take(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(take(3,1))",
+      "id": "literal_number_take_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(take(3,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take(1))",
+      "id": "literal_number_take_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.take(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.take_last(1).with(){return(value)})",
+      "id": "initial_with_number_take_last",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.take_last(1).with(){return(value)})",
+      "id": "initial_with_null_take_last",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.take_last(1).with(){return(value)})",
+      "id": "initial_with_hash_take_last",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.take_last(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(take_last(3,1))",
+      "id": "literal_number_take_last_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(take_last(3,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.take_last(1))",
+      "id": "literal_number_take_last_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.take_last(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.drop_front(1).with(){return(value)})",
+      "id": "initial_with_number_drop_front",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.drop_front(1).with(){return(value)})",
+      "id": "initial_with_null_drop_front",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.drop_front(1).with(){return(value)})",
+      "id": "initial_with_hash_drop_front",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.drop_front(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(drop_front(3,1))",
+      "id": "literal_number_drop_front_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(drop_front(3,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_front(1))",
+      "id": "literal_number_drop_front_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.drop_front(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.drop_back(1).with(){return(value)})",
+      "id": "initial_with_number_drop_back",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.drop_back(1).with(){return(value)})",
+      "id": "initial_with_null_drop_back",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.drop_back(1).with(){return(value)})",
+      "id": "initial_with_hash_drop_back",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.drop_back(1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(drop_back(3,1))",
+      "id": "literal_number_drop_back_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(drop_back(3,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.drop_back(1))",
+      "id": "literal_number_drop_back_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.drop_back(1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.slice(1,1).with(){return(value)})",
+      "id": "initial_with_number_slice",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.slice(1,1).with(){return(value)})",
+      "id": "initial_with_null_slice",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.slice(1,1).with(){return(value)})",
+      "id": "initial_with_hash_slice",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.slice(1,1).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(slice(3,1,1))",
+      "id": "literal_number_slice_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(slice(3,1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.slice(1,1))",
+      "id": "literal_number_slice_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.slice(1,1))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.sorted().with(){return(value)})",
+      "id": "initial_with_number_sorted",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.sorted().with(){return(value)})",
+      "id": "initial_with_null_sorted",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.sorted().with(){return(value)})",
+      "id": "initial_with_hash_sorted",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.sorted().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(sorted(3))",
+      "id": "literal_number_sorted_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(sorted(3))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.sorted())",
+      "id": "literal_number_sorted_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.sorted())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.reversed().with(){return(value)})",
+      "id": "initial_with_number_reversed",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.reversed().with(){return(value)})",
+      "id": "initial_with_null_reversed",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.reversed().with(){return(value)})",
+      "id": "initial_with_hash_reversed",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.reversed().with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(reversed(3))",
+      "id": "literal_number_reversed_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(reversed(3))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.reversed())",
+      "id": "literal_number_reversed_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.reversed())}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=3;return(source.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "initial_with_number_concat_arrays",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=3;return(source.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source=undef;return(source.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "initial_with_null_concat_arrays",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source=undef;return(source.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "source={\"k\":\"tail\"};return(source.concat_arrays([\"extra\"]).with(){return(value)})",
+      "id": "initial_with_hash_concat_arrays",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {source={\"k\":\"tail\"};return(source.concat_arrays([\"extra\"]).with(){return(value)})}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(concat_arrays(3,[\"extra\"]))",
+      "id": "literal_number_concat_arrays_free",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(concat_arrays(3,[\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  {
+    "case": {
+      "body": "return(3.concat_arrays([\"extra\"]))",
+      "id": "literal_number_concat_arrays_receiver",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "Value:: I {return(3.concat_arrays([\"extra\"]))}\n"
+    },
+    "expected_observation": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "extra"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        "extra"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution_error": null,
+      "warnings": []
+    }
+  }
+]

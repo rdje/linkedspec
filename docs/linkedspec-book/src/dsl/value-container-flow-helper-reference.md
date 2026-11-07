@@ -1268,6 +1268,14 @@ preservation controls. Initial source behavior, optional/excluded arities, count
 start coercion, sort/copy depth, list splices and mutation keep their existing
 contracts. Other Array transforms and full context/portable admission remain open.
 
+Perl source qualification: literal Number inputs currently reach legacy named-Array
+shortcuts. For example, `take(3,1)` can read an unrelated Perl host Array named `3`;
+the same issue affects the other seven selected producers and receiver forms.
+Number inputs are outside the published Array signature. Source-isolation repair
+78.0 precedes continuation repair; a correct result guard cannot establish input
+isolation. Native and emitted modules share this observed defect, so previously
+emitted parsers will require regeneration after its repair.
+
 ## Hash helpers
 
 Hash helpers return scalar information about an object or a new hash/array value derived from it.

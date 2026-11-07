@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 — Freeze Perl Array-source policies and host-read prerequisite
+
+Perl Array preflight retains unchanged37/19 result failures and own123 source/arity/error profiles. Localized empty/main/outer controls expose literal Number3 lowered to @3 in eight producers, with16 main-only free/receiver host reads. No production edit. Source78.0 is immediate before composition78.1.1; full admission remains separate.
+
+Actual SDK/three grammar/instrument inputs and all emitted modules/native handlers/full gzip-first channels survive. Readonly preflight recovery and six distinguishing altered-evidence controls pass. The initial missing-observer capture remains failed and separate; corrected intake is the first actual SDK run. Source isolation is scheduled before result guards; earlier owners, frozen37 and other backends are unchanged.
+
+First normal retains24RED:19 target defects plus five generated-package harness mismatches. Exact public-namespace qualification yields19 expected target RED/141 healthy with all123 policies exact; readonly normal recovery passes. Original test/output/profile bytes remain retained.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.4.16 — Preserve Lua task tail while renewing headroom
 
 Existing data-only epoch keeps157 IDs/149 closed contracts/eight short bodies and the complete accepted source. First migration/metadata passes hide lowercase Current frontier loss; preserve actual semantic RED, original producer/inputs/outputs, then separately restore exact232154-byte tail. Qualified current-text renewal115343, all public/narrative/three owner checks and first readonly0/empty stderr/seven specific denials pass. Generic boundary/query defect4.17 owned after feature coverage, earlier on capacity block. Tools/limits/runtime/Lua5.4 acceptance unchanged. Book/Knowledge/claim/tasks/live resume independent Perl78.1 under frozen37. Evidence: docs/checkpoints/task-headroom-lua-2026-11-07/README.md.

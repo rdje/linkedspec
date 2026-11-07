@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":12968,"lines":164,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-mcp-server-plan.md","sha256":"e22d1c6e896cf33d4c37a12b065a8f48d6455332ff9da72b8f78fdd021993d4a","type":"member"}
 {"bytes":4962,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-spec-resolution.md","sha256":"596ca5802f894ee4ca501e09e70dec268daf4dbc2655ac3f5ecba6e2c7b0bf47","type":"member"}
 {"bytes":3538,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-null-output-oracle-fixture-boundary.md","sha256":"ab8bee86d07f0b08e8ec4d55c94f6c18a81ca6182f9b38e178a4cb7cce3deeef","type":"member"}
 {"bytes":2609,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-numeric-comparison-source-guards.md","sha256":"4e93b75ec5c5a3fbc34ed6483756c8931e8c6722e5fb06f002168183d0140f8e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5361,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-closure-contract-plan.md","sha256":"6fd65365caef9990d682c37aa0f9e256282e8b2a54877f62fc83019d0faee543","type":"member"}
 {"bytes":5836,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-readiness-grammar-foundations.md","sha256":"01774c66e4a9ba8c9660afa59a26bdbe241e1bff189e29455ba325dce352317d","type":"member"}
 {"bytes":4989,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-self-containment-and-ebnf-profile.md","sha256":"e5e5e47426c0861c2b542ef6cfb7735bf54736e0fdaf3bd914f215f29b24ce72","type":"member"}
-{"bytes":2127,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-lifecycle-retv-order.md","sha256":"ec0d1002c353f9fb120c52ae6dbeab3d6a8b11b835f19ba63d0ae21e057ede21","type":"member"}

@@ -2538,24 +2538,69 @@
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78`
   Status: `pending` / selected existing-contract ordinary Array transform result guards
-  Children: `.78.1`, `.78.2`, `.78.3`, `.78.4`, `.78.5`.
+  Children: `.78.0`, `.78.1`, `.78.2`, `.78.3`, `.78.4`, `.78.5`.
   Goal: Preserve selected ordinary Array-valued slice/order/concat results through current actual-kind consumers and rejection continuations.
   Dependencies: Completed selection23.1.38, frozen array_transform_result_guard_cases.json and array-transform-result-guard-composition.md; existing constructor/view/Hash-result guards and initial-source lesson76.6/77.
   Reproduction/impact: Original Perl37 all ready1/raw0/fallback0/unresolved0 have19 failures: eleven free/later programs raise Not a HASH reference, eight literal receiver programs retain raw DSL and fail handler/module compilation. Eighteen healthy controls and all actual original artifacts retained. No peer defect inferred.
   Acceptance: Only take/take_last/drop_front/drop_back (existing source[,n]/[n]), slice source/start[,n], sorted/reversed free-one/zero-extra and concat_arrays free-two/receiver-one. Each backend independently acquires unchanged37 and own initial Number/null/Hash, optional/excluded-arity and needed-error fences before production. Preserve first producer source/errors and earlier produced/selected/copied guards separately; source once/snapshots/order/count/start coercion/sort/copy depth/splices and statement/operator/end mutation stay. Compatible Array/selected String/Hash bridges and valid empty with retain semantics; incompatible Hash consumers reject before operands, skipping later copy/logical/with. No other transforms/list-splice/alias/keyword/unknown/traversal/non-with trailing/deferred/callback/unassessed function-receiver promotion. Full23.4 remains separate.
-  Frontier: Qualified capacity4.16 preserves the exact current tail; independent Perl78.1 next after clean landing. Acquire own source/arity/errors before any producer edit; split a newly demonstrated unsafe prerequisite before changes. Subsequent peers assess independently, one coherent focused-checked commit each.
+  Frontier: Own Perl preflight78.1.0 demonstrates literal Number-to-host-Array reads. Source78.0 is immediate, then composition78.1.1; qualified capacity4.16 retains the exact current task tail. Subsequent peers assess independently, one coherent focused-checked commit each.
 
   Backend proof contract: Before production acquire unchanged37 on each leaf's named public routes and each affected producer's own initial Number/null/Hash, existing optional operand, excluded-arity/needed-error and earlier-owner fences. Preserve all healthy semantics and actual producer/input policies; repair only demonstrated canonical result guard gaps under frozen78. Retain actual first SDK/grammar/instrument/artifact inputs/full channels, unchanged-target RED/GREEN and distinguishing inverse/readonly recovery where a repair is needed. If already healthy, retain that outcome without speculative edits. Update smallest new/direct-dependent normal and public book. No broad source/domain/context/depth/coercion/mutation/native custody or admission claim.
   Focused execution: Smallest finite new targets and directly affected producer/source normals; owned syntax/format or precise local runner include, inverse/recovery/book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.1`
-  Status: `pending`
+  Status: `active` / independently acquired; source prerequisite first
   Goal: Independently assess and repair Perl ordinary Array transform result composition.
-  Dependencies: Frozen78/selection38 unchanged37 and actual preceding bounded backend landing; no imported defect verdict or source policy.
-  Acceptance: Apply parent78 Acceptance and Backend proof contract in full on public Get/descriptor/substitution/native and full emitted fresh routes; independently acquire own policies before production.
-  Planned verification: Parent78 Focused execution, with own syntax/format or local runner include.
-  Planned canonical trigger: Parent78 full23.4/final clean push after feature coverage.
-  Planned claim verification: none: Finite authored controls, no population/performance measurement.
+  Children: `.78.1.0`, `.78.1.1`.
+  Dependencies: Frozen78/selection38 unchanged37 and bounded source prerequisite78.0.
+  Acceptance: Apply parent78 Acceptance and Backend proof contract on public Get/descriptor/substitution/native/full emitted fresh routes. Own preflight is retained; no imported defect verdict or source policy. Source repair precedes composition; full23.4 stays separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0`
+  Status: `completed` / preflight frozen; source and composition repairs pending
+  Goal: Acquire own unchanged37 and initial-source/optional/excluded-arity/error/prior-owner fences before any Array-result edit.
+  Acceptance: Preserve actual first SDK/grammar/instrument/artifact/channel inputs; distinguish producer policies and required errors from result defects. Split any unsafe source prerequisite before production.
+  Activation: Clean4f31a7ea604098bbec159cfe2a1d6462722f113d. Relevant roadmap/frozen78/37/toolbox/book/earlier source guards reviewed. Policy donor hashes match canonical startup record; latest cleanup remains within24h. Other repositories/submodules are read-only.
+  Verification tier: `focused`
+  Focused checks: Actual public original37 plus own123 policies and48 localized host controls; readonly recovery/six reason-sensitive corruptions; new normal syntax and expected unchanged-target RED; book/Knowledge/history/task/memory/diff and mandatory hooks. No production edit or broad suite.
+  Canonical trigger: Full23.4/final clean push after feature coverage; infrastructure/authority separately owned.
+  Claim verification: none: Finite authored feature and source-isolation demonstrations; no population/performance, full source/context/native/transitive or admission measurement.
+  Preparation failure: Wrong stdin wrapper invocation prevented observer preparation. Original capture.py/before retains observer exit2 and outer assertion1, with no SDK observation. Separate capture_qualified.py/preflight is the first actual SDK intake; no original capsule or failed producer was overwritten.
+  Result: Own actual original37 reproduces19 result failures/18 healthy controls. Separate123 profiles retain initial Number/null/Hash, initial receiver-with, literal Number, optional/excluded arity, five needed optional errors and four earlier owners. Optional count defaults remain1; omitted slice count retains the tail. Extra concat operands remain variadic/eager and outside selected result authority.
+  Prerequisite: Literal Number3 emits @3 through eight legacy named-Array shortcuts. Localized empty/main/outer controls demonstrate16 free/receiver main-only reads across48 authored cases: take yields MAIN, sorted yields END/MAIN/TAIL, concat includes all host members. Native and independently loaded emitted modules agree; host values remain unchanged. This is a source-isolation defect, not accepted Number policy. Own78.0 is P1 before composition78.1.1.
+  Normal qualification: First160-group normal has24RED:19 selected result defects plus five fresh-error package mismatches introduced by its different generated namespace. Actual observation diagnoses exact package paths, not a runtime change. Preserve first test/outputs; separate qualifier uses the original public namespace and original ID. No source/profile/expected-error rewrite. Qualified normal requires exactly19 target RED/141 healthy, all123 profiles exact.
+  Recovery: review_preflight.py validates every retained source/archive/module/handler/channel identity and source bytes at activation Git, original errors/healthy values, exact123 profile projections and16 main-only host reads. Six specific altered-evidence controls reject. Source remains activation-exact. Initial reader0/empty stderr; normal's separately captured TAP is preserved with its actual outcome.
+  Evidence: docs/checkpoints/array-transform-result-perl-2026-11-07/PREFLIGHT.md and review_preflight.py. Actual modules are captured before fresh loading; handlers after public Get builds them and before execution. Shared process/runtime and native/cache/transitive custody4.2/SESSION5 remain qualified.
+  Next: Normal hooks/post-pointer/brief0/clean Git, then source78.0; reacquire current focused normal before source edits. Composition remains pending with unchanged targets.
+  Commit: TYPE-REFERENCE-BOOK.1.2.23.3.78.1.0 — freeze Perl Array-source policies and host-read prerequisite.
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — LinkedSpec::Get/return_descriptor/call_spec_handler_subst/dump_parser_source/native/fresh original37 and own source controls precede production.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — actual substitutions/handlers show @3 under eight named-Array shortcuts; localized main-only seeded results distinguish ambient data from literal Number3.
+  - [x] **FIX** — freeze own profiles and split immediate source78.0 before result78.1.1; no runtime repair claimed here.
+  - [x] **ADDRESSED (verified)** — readonly recovery/six specific denials validate finite observations, all actual module/handler pairs and unchanged own source inputs.
+  - [x] **NO REGRESSION** — no production, grammar, frozen shared37/contract or peer policy changes; needed errors and earlier guards remain retained controls.
+  - [x] **LOCKSTEP** — book/Knowledge/tasks/frontier/live/MEMORY distinguish source isolation from result guard repair and full admission.
+
+  Commit preparation correction: First hook rejects maintained references because the required reference-scope refresh was omitted. Preserve full staged candidate/process boundary under failed_reference_hook. Verified own commit/hooks are deliberately TERM-stopped; actual commit143 and unfinished claim check are not PASS. HEAD remains activation-exact. Refresh the existing derived ledger under completed owner78.1.0, check it, stage only this correction and rerun all ordinary hooks; no verifier/policy/budget bypass.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.0`
+  Status: `pending`
+  Priority: P1 immediate after preflight78.1.0 and before composition78.1.1.
+  Goal: Isolate literal Number sources from host Arrays in the eight selected ordinary Array producers.
+  Reproduction/impact: Public take(3,1) and 3.take(1) return MAIN when unrelated localized @main::3 contains MAIN/TAIL/END. Seven other selected producers likewise read that host slot. Generated source has @3; empty/outer controls do not reproduce. This can silently return unrelated host data.
+  Acceptance: Exclude Number ASTs only at the eight demonstrated named-Array shortcuts; retain original computed-source fallback, genuine Arrays, optional/count/start/coercion/order/snapshot/error and excluded variadic concat policies. Never fix this by a broad extractor or result guard. Add smallest host normal with empty/main/outer controls, exact private old/current-image RED/GREEN, own policies/direct normals and readonly recovery. Preserve historical preflight and all37 result failures until composition78.1.1. Book/Knowledge/continuity commit first.
+  Planned verification: Smallest source-isolation normal, own policy/producer normals and source/test syntax, exact inverse/recovery/book/Knowledge/history/memory/diff and normal hooks. No broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; no global extractor/authority change.
+  Planned claim verification: none: Finite authored source-isolation regression and preservation controls; no full domain/context/portable or performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1`
+  Status: `pending`
+  Goal: Repair Perl ordinary Array result guards after source78.0.
+  Dependencies: Committed own preflight78.1.0 and source isolation78.0; unchanged frozen37/parent78 contract.
+  Acceptance: Reacquire current unchanged37/own123 policy projections and source-isolation controls before composition edits. Preserve source78.0, earlier produced/selected/copied guards and first producer permission independently. Only selected free/receiver arities gain result-kind/rejection ownership; no variadic concat or other transform/context promotion. Own unchanged-target RED/GREEN, exact private inverse, smallest direct normals, readonly recovery and book/Knowledge/continuity commit.
+  Planned verification: Parent78 focused execution plus source78.0 regression; no broad suite.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored result-composition and preservation controls; no population/performance/admission measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.2`
   Status: `pending`

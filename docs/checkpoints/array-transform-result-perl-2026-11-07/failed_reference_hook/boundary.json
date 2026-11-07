@@ -1,0 +1,13 @@
+{
+  "head": "4f31a7ea604098bbec159cfe2a1d6462722f113d",
+  "staged_sha256": "6f281a8f6680ad24df29e9b6c37e2693cd1eee34de4eb5b13990823b921510fb",
+  "reason": "README reference ledger refresh omitted; known failed candidate. Stop unfinished claim checker; not PASS.",
+  "pids": [
+    3995,
+    4150,
+    5026,
+    6581,
+    6583,
+    12673
+  ]
+}

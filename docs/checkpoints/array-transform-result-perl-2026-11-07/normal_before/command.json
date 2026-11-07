@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE=docs/checkpoints/array-transform-result-perl-2026-11-07/normal_before",
+    "prove",
+    "-v",
+    "-j1",
+    "-Iperl",
+    "t/array_transform_result_guard_composition.t"
+  ],
+  "cwd": "."
+}

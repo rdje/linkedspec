@@ -1,0 +1,322 @@
+[
+  {
+    "id": "initial_with_number_take",
+    "body": "source=3;return(source.take(1).with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_take",
+    "body": "source=undef;return(source.take(1).with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_take",
+    "body": "source={\"k\":\"tail\"};return(source.take(1).with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.take(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_take_free",
+    "body": "return(take(3,1))",
+    "source": "Value:: I {return(take(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_take_receiver",
+    "body": "return(3.take(1))",
+    "source": "Value:: I {return(3.take(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_take_last",
+    "body": "source=3;return(source.take_last(1).with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_take_last",
+    "body": "source=undef;return(source.take_last(1).with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_take_last",
+    "body": "source={\"k\":\"tail\"};return(source.take_last(1).with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.take_last(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_take_last_free",
+    "body": "return(take_last(3,1))",
+    "source": "Value:: I {return(take_last(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_take_last_receiver",
+    "body": "return(3.take_last(1))",
+    "source": "Value:: I {return(3.take_last(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_drop_front",
+    "body": "source=3;return(source.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_drop_front",
+    "body": "source=undef;return(source.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_drop_front",
+    "body": "source={\"k\":\"tail\"};return(source.drop_front(1).with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.drop_front(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_drop_front_free",
+    "body": "return(drop_front(3,1))",
+    "source": "Value:: I {return(drop_front(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_drop_front_receiver",
+    "body": "return(3.drop_front(1))",
+    "source": "Value:: I {return(3.drop_front(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_drop_back",
+    "body": "source=3;return(source.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_drop_back",
+    "body": "source=undef;return(source.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_drop_back",
+    "body": "source={\"k\":\"tail\"};return(source.drop_back(1).with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.drop_back(1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_drop_back_free",
+    "body": "return(drop_back(3,1))",
+    "source": "Value:: I {return(drop_back(3,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_drop_back_receiver",
+    "body": "return(3.drop_back(1))",
+    "source": "Value:: I {return(3.drop_back(1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_slice",
+    "body": "source=3;return(source.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_slice",
+    "body": "source=undef;return(source.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_slice",
+    "body": "source={\"k\":\"tail\"};return(source.slice(1,1).with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.slice(1,1).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_slice_free",
+    "body": "return(slice(3,1,1))",
+    "source": "Value:: I {return(slice(3,1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_slice_receiver",
+    "body": "return(3.slice(1,1))",
+    "source": "Value:: I {return(3.slice(1,1))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_sorted",
+    "body": "source=3;return(source.sorted().with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_sorted",
+    "body": "source=undef;return(source.sorted().with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_sorted",
+    "body": "source={\"k\":\"tail\"};return(source.sorted().with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.sorted().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_sorted_free",
+    "body": "return(sorted(3))",
+    "source": "Value:: I {return(sorted(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_sorted_receiver",
+    "body": "return(3.sorted())",
+    "source": "Value:: I {return(3.sorted())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_reversed",
+    "body": "source=3;return(source.reversed().with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_reversed",
+    "body": "source=undef;return(source.reversed().with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_reversed",
+    "body": "source={\"k\":\"tail\"};return(source.reversed().with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.reversed().with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_reversed_free",
+    "body": "return(reversed(3))",
+    "source": "Value:: I {return(reversed(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_reversed_receiver",
+    "body": "return(3.reversed())",
+    "source": "Value:: I {return(3.reversed())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_number_concat_arrays",
+    "body": "source=3;return(source.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {source=3;return(source.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_null_concat_arrays",
+    "body": "source=undef;return(source.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {source=undef;return(source.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "initial_with_hash_concat_arrays",
+    "body": "source={\"k\":\"tail\"};return(source.concat_arrays([\"extra\"]).with(){return(value)})",
+    "source": "Value:: I {source={\"k\":\"tail\"};return(source.concat_arrays([\"extra\"]).with(){return(value)})}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_concat_arrays_free",
+    "body": "return(concat_arrays(3,[\"extra\"]))",
+    "source": "Value:: I {return(concat_arrays(3,[\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  },
+  {
+    "id": "literal_number_concat_arrays_receiver",
+    "body": "return(3.concat_arrays([\"extra\"]))",
+    "source": "Value:: I {return(3.concat_arrays([\"extra\"]))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true
+  }
+]
