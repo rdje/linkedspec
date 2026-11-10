@@ -2745,3 +2745,58 @@
   Outcome: Namespace classifiers and initial-source permission add canonical eight-transform ownership before existing persistent actual-kind guards. Source diff75 insertions/one deletion and runner three-line group preserve producer bodies, scalar_result and loop/index mutation policy; no new chunk locals/contextual exception/formats. Each installed Lua5.5.1/LuaJIT2.1.1788460057 independently moves903 checks76FAIL to903PASS across156/four routes; selected direct1713 counted checks plus12 with observations/3 fences passes with empty stderr. Same-path old/current SDKs and actual loaded-owner routing reproduce19RED/156PASS/full frames. All137 healthy cases/123 profiles/156 actual parsed-emitted pairs per host remain exact across six epochs. First readonly0/empty stderr/nine corruptions and every current declared direct input identity pass. Actual source/fixture/grammar/instruments precede documented native build/use; three native products per host/epoch precede SDK loading. Full channels/files/modes survive. Evidence: docs/checkpoints/array-transform-result-guard-lua-2026-11-10/REVIEW.md. Declared5.4/full native-cache-transitive-toolchain custody4.2/SESSION5/isolation/source/context/registration/full23.4 remain separate.
   Continuity correction: The bounded root frontier still lists Rust78.2/capacity18.1/Dart78.3 as next despite accepted commits. Correct those current rows and the duplicate current sentence against committed outcomes within this leaf; preserve historical contracts/evidence and broader18.2. Own pending selection23.1.39 before future work; no dirty pivot or aggregate completeness claim.
   Final focused integrity: Book render/actual HTML, Knowledge regeneration/sync, task index/reference scope, memory/handoff, both chronology pressure checks and whitespace accompany normal landing. All ten doctrines/post-pointer remain mandatory. No broad suite or push.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79`
+  Status: `pending` / independent ordinary pure-pipeline result guards
+  Children: `.79.1`, `.79.2`, `.79.3`, `.79.4`, `.79.5`.
+  Goal: Preserve seven ordinary pure-pipeline Array results through actual-kind consumers.
+  Dependencies: Completed selection23.1.39; unchanged tests/fixtures/array_pipeline_result_guard_cases.json.
+  Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-result-guard-composition.md in full; its signatures, preservation, acquisition, exclusions and admission limits are normative. Original Perl36 has17 defects/19 healthy; no peer verdict. Own any observed source prerequisite before result repair.
+  Backend proof contract: Independently acquire unchanged36 plus own initial Number/null/Hash, arities/source-delimiter-pattern errors/earlier-owner fences before production. Retain actual first source/grammar/instrument/artifact/full channels, every healthy observation and exact old/current loaded-owner SDK inverse/readonly recovery/corruptions when repaired. Keep producers, pure-versus-standalone semantics and all canonical exclusions unchanged. Healthy assessments need no speculative edit. Installed Lua: actual native products before load, no new chunk locals/unsafe full runner/declared5.4 inference. Full custody4.2/SESSION5/context/isolation/registration/23.4 separate.
+  Focused execution: Smallest new/direct-dependent producer-pipeline-Array normals and changed syntax/format/exact runner include; book/Knowledge/history/task/memory/diff/normal hooks. No broad suite/matrix.
+  Frontier: Capacity4.21 after clean selection, then independent Perl/Rust/Dart/Julia/installed Lua; each normal commit/brief0/clean handoff precedes the next.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1`
+  Status: `pending`
+  Goal: Independently assess/repair Perl ordinary pure-pipeline result guards.
+  Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79 contract in full on native/full emitted-fresh plus descriptor/substitution/handler diagnostics; own policies acquired before production.
+  Planned verification: Parent79 focused execution.
+  Planned canonical trigger: Parent79 full23.4/final push after coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.2`
+  Status: `pending`
+  Goal: Independently assess/repair Rust ordinary pure-pipeline result guards.
+  Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79 contract in full on native/restored CompiledSpec/generated-plan/compiled emitted-fresh; own policies acquired before production.
+  Planned verification: Parent79 focused execution.
+  Planned canonical trigger: Parent79 full23.4/final push after coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.3`
+  Status: `pending`
+  Goal: Independently assess/repair Dart ordinary pure-pipeline result guards.
+  Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79 contract in full on native/restored SpecFile/generated-plan/full emitted-fresh; own policies acquired before production.
+  Planned verification: Parent79 focused execution.
+  Planned canonical trigger: Parent79 full23.4/final push after coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.4`
+  Status: `pending`
+  Goal: Independently assess/repair Julia ordinary pure-pipeline result guards.
+  Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79 contract in full on native/restored SpecFile/generated-plan/full emitted-fresh; own policies acquired before production.
+  Planned verification: Parent79 focused execution.
+  Planned canonical trigger: Parent79 full23.4/final push after coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.5`
+  Status: `pending`
+  Goal: Independently assess/repair installed Lua ordinary pure-pipeline result guards.
+  Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79 contract in full on each actual PUC/LuaJIT native/restored SpecFile/generated-plan/full emitted-fresh; own policies acquired before production.
+  Planned verification: Parent79 focused execution.
+  Planned canonical trigger: Parent79 full23.4/final push after coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.

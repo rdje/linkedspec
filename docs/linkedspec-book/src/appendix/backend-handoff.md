@@ -4956,3 +4956,32 @@ transitive/toolchain custody4.2/SESSION5, isolation, broader source/context/
 registration and full23.4 remain separate. All bounded family78 backend outcomes
 have focused proof; this does not close whole-feature admission. Evidence:
 `docs/checkpoints/array-transform-result-guard-lua-2026-11-10/REVIEW.md`.
+
+## Selected pure Array-pipeline result guards
+
+Selection23.1.39 freezes36 ordinary existing-contract programs for split_each,
+trim_each, filter_nonempty, lowercase_each, uppercase_each, uniq and filter_match.
+Original public Perl native/full emitted-fresh observations expose17 failures:
+ten free/later Arrays reach set_key's unguarded Hash copy; seven literal receiver
+chains retain DSL and fail handler/module compilation. Those seven descriptors
+are ready0/unresolved1 naming their pipeline helper; the other29 are ready1 with
+zero raw/fallback/unresolved counts. Metadata is preserved rather than normalized.
+
+Nineteen healthy controls preserve compatible free/receiver results, selected
+String/Number kinds, once/snapshot source order, valid empty with, pure-value
+source preservation, standalone writeback and all four needed source/delimiter
+errors. Actual substitutions contrast the pipeline's unguarded Hash copy with
+constructor HASH-kind rejection. Ordinary MethodLowering result-role/retained/
+copy/logical/with classifications omit these seven pipeline families.
+
+First readonly recovery returns0/empty stderr and rejects eleven effective
+corruptions. Actual source/three grammars/instruments precede SDK use; modules
+precede fresh loading, and handlers constructed inside public Get are captured
+before execution. All36 module/handler pairs, full channels, exact source/Git/modes,
+metadata/values/errors/warnings and missing fresh fields after failed load survive.
+The unchanged36 shared targets and scoped contract now belong to family79, with
+five independent backend leaves starting Perl79.1 after clean selection landing.
+No production or peer repair is claimed. Full native/cache/transitive/toolchain
+custody4.2/SESSION5, isolation, complete source/context/registration/declared5.4 and
+full23.4 remain separate. Evidence:
+`docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md`.

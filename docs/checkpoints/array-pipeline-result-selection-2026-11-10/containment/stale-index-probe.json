@@ -1,0 +1,4 @@
+{
+  "actual_exit": 143,
+  "reason": "Direct checker selects staged result; rejected candidate remained staged while compaction was unstaged. Cancelled diagnostic, no PASS credit. Stage compacted candidate before focused rerun."
+}

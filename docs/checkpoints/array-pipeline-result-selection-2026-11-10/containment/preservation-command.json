@@ -1,0 +1,10 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/array-pipeline-result-selection-2026-11-10/containment/review_containment.py",
+    "--check"
+  ],
+  "producer_sha256": "9ba8f2fe002e6ece527a7e7a48b596cff03d6f07385c1344abea5f2597f2c0b8"
+}

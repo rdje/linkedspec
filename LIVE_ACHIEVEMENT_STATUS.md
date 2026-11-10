@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded ordinary Array-transform78 backend outcomes are independently repaired/focused-checked. Dart additional-direct qualification4.20 retains a separate bound292 epoch. Full feature/source/context/admission remains open.
+Ordinary pure Array-pipeline result composition: selection36 is frozen and family79 owns independent backend acquisition/repairs. All bounded Array-transform78 outcomes are independently focused-checked; complete feature/source/context/admission remains open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.5. Each installed Lua5.5.1/LuaJIT2.1.1788460057 passes156/four routes903 checks, preserving137 healthy cases/123 full profiles/156 byte-equal parsed-emitted pairs. Selected direct1713 counted checks plus12 with observations/3 fences, same-path old/current19RED/156PASS, first readonly0/empty stderr/nine corruptions and current direct-input identities pass. No producer/scalar_result/loop-index/new chunk locals/formats change. Normal focused hooks govern landing; declared5.4/full custody/admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.1.39. Public Perl native/full emitted-fresh36 retains17 failures/19 healthy: ten free/later Hash-copy runtime errors/seven literal receiver compile failures. Actual metadata29 ready/seven unresolved is preserved. All four needed errors already propagate; first readonly0/empty stderr/eleven corruptions recovers source/Git/modes/metadata/values/errors/warnings/field absence and36 module-handler pairs. Freeze exact targets/contract/five independent owners, correct stale current spine/catalog advice; no production or peer verdict. Normal focused hooks govern landing.
 
 ## Next Action
 
-Activate pending TYPE-REFERENCE-BOOK.1.2.23.1.39 from clean Git after normal hooks/post-pointer/brief0. Reconcile canonical inventory and roadmap for the next finite existing-contract requirement, or identify an eligible already-owned prerequisite if coverage is exhausted. No broad verification between feature slices. Full23.4/final push requires fresh exact proof after feature coverage.
+After clean selection/normal hooks/post-pointer/brief0, activate capacity TYPE-REFERENCE-BOOK.1.2.23.4.21 to renew task headroom through existing lossless containment, then Perl79.1. The first selection commit exceeded the unchanged task-evidence ceiling by4021 bytes; exact failed candidate/log survives and new-prose compaction preserves all requirements. Independently acquire Perl initial source/arity/error/earlier-owner fences before production; split any source prerequisite and repair only demonstrated canonical pure-pipeline result gaps. Preserve every original36 target and78 outcome. Complete focused normal/docs/commit before peers; full23.4/native custody/registration/declared5.4 remain separate.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.1.39 — pure-pipeline36/17 failures19 healthy,29 ready/seven unresolved receivers,36 module-handler pairs/first readonly eleven controls; family79/Perl79.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.5 — each installed host156/four routes903PASS/direct1713 plus with controls/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine corruptions; selection39 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.20 — qualified unchanged292, original missing-six binding RED/new PASS, all11 streams/source preservation/first readonly eight controls; Lua78.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.4 —156/four routes903PASS/direct1728/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine controls; P1 Dart4.20 next.
@@ -29,7 +30,6 @@ Activate pending TYPE-REFERENCE-BOOK.1.2.23.1.39 from clean Git after normal hoo
 - TYPE-REFERENCE-BOOK.1.2.23.4.16 — qualified157 IDs/149 contracts/eight short bodies/exact tail,115343 bytes renewed/readonly/seven denials; first tail RED retained,4.17 owned; Perl78.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.38 — Array-transform37/19 failures18 healthy, qualified nine-control recovery, shared37/family78 owned; no production/peer verdict; capacity4.16 before Perl78.1.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.5 — each installed Lua89/four routes510 checks0 failures/direct810 plus copy/arity; exact private13RED/89PASS/first recovery/eight controls; selection38 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.77.4 — Julia89/four routes510PASS/direct825, exact private13RED/89PASS, qualified readonly/eight controls; partial/version correction explicit; Lua77.5 next.
 
 ## History
 

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2470,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-switch-scalar-comparison-drift.md","sha256":"6027353d70f8e3775b741cc3ceaa901a6a824866254b469da814cb8e61abb055","type":"member"}
 {"bytes":4211,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-call-name-inventory-does-not-prove-runtime-semantics.md","sha256":"498824476e6e67bf0446f0ec2efc63f020c0eefbf753137bb81ff653a7757828","type":"member"}
 {"bytes":13120,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-supporting-grammar-dependencies.md","sha256":"68e6722ff6b12554ca482ef2ac014591e33778e24d1d7ec4d1e98aeebc284468","type":"member"}
 {"bytes":2249,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-task-id-uniqueness.md","sha256":"d2cda9342bfc14877ad40dd319ce1c1e991d7f746fccbdc31045b6f860b60d08","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2207,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-push-snapshot-result-guards.md","sha256":"629530536819d9b9b8b5e11acd9bc6932ecda9afe9b71462a9edc55198ea1b01","type":"member"}
 {"bytes":17532,"lines":278,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-capacity-controls.md","sha256":"fcb6a11637b2843958c0fd319f918440ca284735c83d2d652cded6e652cccb9b","type":"member"}
 {"bytes":10498,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-commit-closeout-audit.md","sha256":"f4f3987e9f522b3497143c21919e0363c9d5e16b8ab8edb7e19f91c56b7bf260","type":"member"}
-{"bytes":19250,"lines":308,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-engineering-history-capacity-blocker.md","sha256":"23f844e476bf18ba67ae08075cd578be62ec86d56df38dbc53709bf42ded9840","type":"member"}

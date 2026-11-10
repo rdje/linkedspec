@@ -1,0 +1,26 @@
+{
+  "programs": 36,
+  "eligible_ready": 29,
+  "unresolved_receivers": 7,
+  "original_failures": 17,
+  "free_or_later_runtime_errors": 10,
+  "receiver_compile_errors": 7,
+  "healthy_controls": 19,
+  "needed_errors": 4,
+  "actual_module_handler_pairs": 36,
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "hidden original runtime error",
+    "receiver eligibility normalized",
+    "invented fresh execution after failed load",
+    "masked needed delimiter error",
+    "source evaluated twice",
+    "selected Number converted to String",
+    "standalone conflated with pure value",
+    "constructor consumer effects",
+    "healthy member omitted",
+    "authored target changed",
+    "actual handler byte drift"
+  ],
+  "scope": "Finite original public Perl selection; no production/peer verdict, portable-domain/full source-context/native-cache-transitive custody/isolation/registration/full23.4 admission."
+}

@@ -1,0 +1,13 @@
+{
+  "actual_commit_exit": 143,
+  "head_unchanged": "2a0a4b4ad7a51f2aa7e7a8e511020a5a6768902c",
+  "terminated_owned_pids": [
+    71882,
+    71881,
+    94396,
+    91828,
+    91470,
+    91469
+  ],
+  "reason": "Known task pressure failure; interrupted claim check has no PASS credit"
+}

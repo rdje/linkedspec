@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4846,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-parent-state-test-gap.md","sha256":"0d5fc62013975ef8e25665de44fa20db3a704bbf92de194cf7609d28812ab29a","type":"member"}
 {"bytes":5795,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-resource-ceiling-enforcement-gap.md","sha256":"418cbf6b780b9842d8815b437d4a8e5f15212227284982e4c65f72148727b7a6","type":"member"}
 {"bytes":6230,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-admission.md","sha256":"60d77e87aba773486bb2099ce8d04d503bfcd6edca469003544e5a7f22339adb","type":"member"}
 {"bytes":7669,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-authority.md","sha256":"2c24ae7365be1670d3d38801b69497706c8ef98f3fcead40a22691450a9ae0a3","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2492,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-debt-retirement-governance.md","sha256":"67471ef06a4c068ffc8e8abec7b24a9b6242caf16cf93b80206bfb15d20ca85d","type":"member"}
 {"bytes":2408,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-debt-transition-owner-commit-boundary.md","sha256":"26296ae450141130f06200238e38379365a9ae63c2a2764b2e793519ea34a633","type":"member"}
 {"bytes":7684,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.1","path":"docs/knowledge/readme-routing-pressure-closure-plan.md","sha256":"12dd8286f4258ecd0e2d8ae8ab0da6be13fb5983fd2328557545b163d299b908","type":"member"}
-{"bytes":7520,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-stability-policy.md","sha256":"d67a87ef72fd688122bf97bf902d344bdd09af4590fbbfbde24803b9c37a11b9","type":"member"}

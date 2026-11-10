@@ -1,0 +1,26 @@
+{
+  "head": "2a0a4b4ad7a51f2aa7e7a8e511020a5a6768902c",
+  "sources": {
+    "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+      "sha256": "4dd1674ce1533d70402ef9d42ff26f733c14103281acb3dad1560243cda0cdfa",
+      "bytes": 461485,
+      "capture": "docs/checkpoints/array-pipeline-result-selection-2026-11-10/containment/TYPE-REFERENCE-BOOK.overview.md.before.gz"
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+      "sha256": "5e9dbf1e2e3d73a882d6edf8eb24ff1d4cbba633cea15b976cf80772ab4fd624",
+      "bytes": 554770,
+      "capture": "docs/checkpoints/array-pipeline-result-selection-2026-11-10/containment/TYPE-REFERENCE-BOOK.helpers-60plus.md.before.gz"
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+      "sha256": "1238fafe3ab3497b86ac9d2b87e949eced6b2a55924e9409774240f4ee66323b",
+      "bytes": 18064,
+      "capture": "docs/checkpoints/array-pipeline-result-selection-2026-11-10/containment/TYPE-REFERENCE-BOOK.md.before.gz"
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl": {
+      "sha256": "3f2d3004b42223302c12b2eac33cd7e3f8694ab09bb85bbf6495cc87305c0a77",
+      "bytes": 1294,
+      "capture": "docs/checkpoints/array-pipeline-result-selection-2026-11-10/containment/TYPE-REFERENCE-BOOK.index.jsonl.before.gz"
+    }
+  },
+  "failure": "task_evidence aggregate bytes12586933/12582912;4021 over; no landed commit; remaining claim check not passing"
+}

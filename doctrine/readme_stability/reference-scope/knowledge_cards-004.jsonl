@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6181,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-package-readme-reading.md","sha256":"cffc90ce92d2c40bc5e6cf07311194b69f15585f9eb84bd09ab2b018b5534fbd","type":"member"}
 {"bytes":9364,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-parser-member-suffix-loss.md","sha256":"5ded33c3a4f4b8b3f6c969a35e76f39dc488f5d0b617b55510eacc87f1b71fc5","type":"member"}
 {"bytes":3392,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-presence-result-source-guards.md","sha256":"0048d94e7d9083c54d88514516350159ebd80e0dad391b7501c69dc892026888","type":"member"}
 {"bytes":4097,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-arguments-resolution-loading.md","sha256":"b0d040014759ebcce88d73756af81443714a62f9d46062c93b88f2ca4350c83e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3377,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-actionir-ast-parser.md","sha256":"c0aa3fe802fd0cb71b140b1c6cc62715d21f68b063e9a02884d2f05075f082bb","type":"member"}
 {"bytes":2709,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-actionir-contract-resolver.md","sha256":"f280c66ffeb7312bfcf4468416cbbf38fdc830b80956e057e23cebc76bf8d044","type":"member"}
 {"bytes":2205,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-active-edge-body-candidate-ownership.md","sha256":"a11e133e77da550edc2e5f0462263646578c660f1183aa5faaf49c6a8eb80476","type":"member"}
-{"bytes":5586,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-advanced-corpus-residual-split.md","sha256":"49875387eeb7c620f44a57613d6b1360feec914e5afa586d72c36b01af061655","type":"member"}

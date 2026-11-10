@@ -1858,6 +1858,32 @@ The scalar receiver equivalent is `"a,b".split_tagged_records(",", "?item:").cou
 Perl, Rust, Dart, Julia and Lua support the scalar bridge and retain their pure splitters’ trailing items: `" a,b ".trim().split_tagged_records(",","row").last().last().uppercase()` gives `"B"`. Carried Number/Bool/null/Array/Hash values retain their kinds and can feed compatible selected-value methods; malformed receiver calls with fewer than delimiter/tag reject before effects.
 The bounded eager helper/scalar bridge is targeted-checked on all five runtimes (Lua on safe PUC5.5.1/LuaJIT; declared5.4 remains separately owned). Complete cross-backend empty-source/empty-delimiter/zero-width/variable-regex and contextual admission remain separate; do not infer a universal split policy from this example.
 
+### Pipeline continuations: selected repair
+
+The seven pure pipeline helpers above already return transformed Arrays while
+preserving source bindings. For example, these ordinary Perl values work:
+
+```text
+trim_each([" tail "]).last().uppercase()       # "TAIL"
+split_each(["head:tail"],":").join_values(",")  # "head,tail"
+filter_nonempty([""]).with(){return(value.count())} # 0; body runs
+```
+
+Their incompatible Hash-consumer continuations still have an open Perl defect.
+`trim_each([" tail "]).set_key("k",1)` currently raises a host Hash-reference
+error; a literal receiver chain such as `[" tail "].trim_each().set_key(...)`
+can retain DSL and fail compilation. The required result is null before consumer
+operands, with later `copy`, logical operands and `with` bodies skipped. The
+constructor result already provides that rejection behavior.
+
+Family79 owns this repair for `split_each`, `trim_each`, `filter_nonempty`,
+`lowercase_each`, `uppercase_each`, `uniq` and `filter_match`. Each backend is
+assessed independently before changes. Existing source/arity, regex/Unicode,
+copy/mutation and standalone-writeback policies stay separate from result guards.
+This selected gap does not withdraw the healthy producer and selected-value
+examples above or establish a peer defect. Full source/context/portable admission
+remains open.
+
 ## Boolean composition
 
 Boolean helpers make branch conditions portable and analyzable. Perl, Rust, Dart, Julia and safe Lua hosts (PUC5.5.1/LuaJIT) support `value.and(rhs,...)` and `value.or(rhs,...)` with at least one RHS, plus `value.not()` with none, using the same eager typed truth and real Boolean results: `false.or(true).not().coalesce("late").cat("!")` gives `"0!"`. Full method/domain/context admission and declared Lua5.4 proof remain separate; the free helper forms below retain their existing contracts. Ordinary scalar/null copying now preserves the actual value on those bounded routes; see [Copying values](#copying-a-container-stored-in-a-scalar-on-perl). Existing container-copy depths and separate full-admission qualifications remain.

@@ -1,0 +1,11 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/array-pipeline-result-selection-2026-11-10/check_current.py",
+    "--check"
+  ],
+  "producer_sha256": "db24c5ca2e156b5c2419706abf6fb3cc48bbcfa2179ca4e34ee296d0fab43b76",
+  "input_metadata_sha256": "731f9d708add23685c6cb6fcb69c1e906e36818baa8e0375e071e193726052b6"
+}

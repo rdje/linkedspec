@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4809,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-edge-syntax-contract.md","sha256":"02780474bf1e8aa8584678af534de73c2b3eccfd197968fafcfa1f355b7c484e","type":"member"}
 {"bytes":6243,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-facing-aggregate-selector-retirement-inventory.md","sha256":"20a99d90c74e2cca2b6f9c120a568b374f42e07cbbdabf317af117c95837f824","type":"member"}
 {"bytes":4623,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-brainstorm-rounds-1-3.md","sha256":"9fccb7d2181ddd3cd857e44e5981e213a05e3bda2f7d5cba83358d53476e03b8","type":"member"}
 {"bytes":1640,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-terse-tree-closed.md","sha256":"dd4c41d06d718979f658dfac5898342d4eee0c1ec67f92eb71a637d6bfbd652e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1803,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/text-to-ast-backend-doctrine.md","sha256":"d1d926ca9b4c5bfa2422d1562f27cef0e6c0b57f60c136f6e4ee40857685a6ad","type":"member"}
 {"bytes":12337,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/three-objective-language-readiness.md","sha256":"17d0d1fcb145afaada0e1ca908cffd0fb828ce40951db0f69d7b8f67f78418ca","type":"member"}
 {"bytes":10368,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tool-project-data-ssd-storage.md","sha256":"8518f92aadefdb8ab0788021f242ea78d8fdbcc75ec6869f2dc4b7bd310cbf60","type":"member"}
-{"bytes":15320,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-is-ordinary-rule-entered-first.md","sha256":"cad47d04617a6b2f5ed747fa107369312b61ee4f644a33ba0a786c3010b84e43","type":"member"}

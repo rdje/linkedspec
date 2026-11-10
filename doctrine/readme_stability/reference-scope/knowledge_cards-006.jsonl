@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4266,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-admission.md","sha256":"9e033935069880cce48c4c4f540be20a1ef0598f9dddea1e62247d7a1ab7a16d","type":"member"}
 {"bytes":5776,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-carriers.md","sha256":"870ab8c577ab85fd92f6ea67b808c22a98b627603e4143c942918f62acb1545e","type":"member"}
 {"bytes":6033,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-dormant-red.md","sha256":"b49ab06c3323b938064c2ab8e51a6d35795f87f660148a545633198f8d014976","type":"member"}
 {"bytes":5839,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-private-authority.md","sha256":"37b907f52b32486379de7e7f2c49edc6da50e428a52d1ef11a0dae2288f9105e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":18985,"lines":168,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md","sha256":"e81a1c91ef7ef1c74cb518f2f5bc223fa61963d0a43e695f39b5ca697ffa24af","type":"member"}
 {"bytes":5049,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-user-function-routing.md","sha256":"e7cde3d34dc46d859dce81d2dd75646d03ea63f7d48ca122e38301b4146114da","type":"member"}
 {"bytes":2363,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-runtime.md","sha256":"1db329da698a67f771604465b2f4b6d291a90b25543972954a247190848cdc6b","type":"member"}
-{"bytes":2236,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-signature-state.md","sha256":"88d085c7938815dd9b8726a11a21066151a6941bbdfac0a15e3e3605f1d087cf","type":"member"}

@@ -1,4 +1,5 @@
-{"member_count":51,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":52,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":15320,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-is-ordinary-rule-entered-first.md","sha256":"cad47d04617a6b2f5ed747fa107369312b61ee4f644a33ba0a786c3010b84e43","type":"member"}
 {"bytes":6056,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-reads-own-match-with-match-family.md","sha256":"9a9e654f58396a79a69f9950ac0063bd4fd0b8207c20a1ff9246ae765a190d5c","type":"member"}
 {"bytes":15167,"lines":161,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-recursion-forward-progress-guard.md","sha256":"be10e1b9716f40ba3012728c6f76095e54ba72bfb5b81a448e56f127e762cd6c","type":"member"}
 {"bytes":5970,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-compact-lowerers.md","sha256":"d4dbbca6b8fa7cd77732a38b1747a72a8bc446abab3196b8ddc645061f2b8274","type":"member"}

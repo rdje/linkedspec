@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5360,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-family-source-acceptance.md","sha256":"be227aced36e67445a65bd97f1391b1d532d1ebc39d0bf31ac4f4bf9660adc99","type":"member"}
 {"bytes":5142,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-producer-source-diagnosis.md","sha256":"4627df3cb92a47d44fe28e84ba89b7df2790fc7dedf67cfe9e1bbe7a49ecce08","type":"member"}
 {"bytes":8369,"lines":117,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-deferred-control-and-metadata-prerequisites.md","sha256":"81e533f411750236414f36c4ff6ed1e7bb96c415c760ba43406498dc5d9bfd08","type":"member"}
 {"bytes":6173,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-deferred-function-bridge-design.md","sha256":"16fe30c7154b4aba7584e8817c4e1cdc01508322b70fd3577485f9967cb20052","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4281,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-original-occurrence-handoff.md","sha256":"5b08e2d1bd4540ef369939c9753907c925efc4d6aea63c7782c9195254a2c3f9","type":"member"}
 {"bytes":5345,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-statement-frame-channel.md","sha256":"d5bc489aab17f14439b2aee725cb2347e34066bb77f0b806c2c47898a36333be","type":"member"}
 {"bytes":4879,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-annotation-statement-origins.md","sha256":"91f94ded0b4f9d9a1dc8d457fb1c98fe72122e0d7d265e839acac3c4dd7cd812","type":"member"}
-{"bytes":4846,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-parent-state-test-gap.md","sha256":"0d5fc62013975ef8e25665de44fa20db3a704bbf92de194cf7609d28812ab29a","type":"member"}

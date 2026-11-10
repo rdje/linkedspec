@@ -656,11 +656,11 @@ Complete text/regex domains, contextual use and portable admission remain separa
 > **Current Perl caveats.** For `split(value, delim)`, prefer receiver form
 > `value.split(delim)` or block form `I { return(split(value, delim)) }`. Compact
 > lifecycle shorthand `I.return(split(...))` currently routes through an older tagged
-> shorthand shape on the Perl reference. For array pipeline helpers (`split_each`,
-> `trim_each`, `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq`, and
-> `filter_match`), return a receiver chain (`items.trim_each()`) or assign/copy the
-> named target as shown above; a direct `return(split_each(items, ":"))` is
-> shape-sensitive on current Perl and does not document the portable array value.
+> shorthand shape on the Perl reference. Ordinary array-pipeline value expressions
+> and receiver chains return transformed Arrays and preserve their input bindings.
+> Standalone named-target calls write the transformed items back. These forms are
+> distinct from the compact lifecycle shorthand caveat. Incompatible Hash-consumer
+> continuations remain an open repair; see the [pipeline continuation boundary](../dsl/value-container-flow-helper-reference.md#pipeline-continuations-selected-repair).
 
 ### `array(e1, e2, ...)`
 - **Signature**: `array(elements: expr...)`
