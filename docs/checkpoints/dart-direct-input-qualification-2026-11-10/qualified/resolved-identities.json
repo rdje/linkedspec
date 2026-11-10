@@ -1,0 +1,22 @@
+{
+  "dart/.dart_tool/package_config.json": {
+    "bytes": 11261,
+    "mode": 420,
+    "sha256": "c29dbc1818523c70cdc790512a7c319b3bb42a96560e3e9eb2732c6cddb0a769"
+  },
+  "dart/.dart_tool/package_graph.json": {
+    "bytes": 8000,
+    "mode": 420,
+    "sha256": "eab2762a77d059678401a8c67c4c96d995300d4770901c8754c0705500f469da"
+  },
+  "dart/pubspec.lock": {
+    "bytes": 10958,
+    "mode": 420,
+    "sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0"
+  },
+  "dart/pubspec.yaml": {
+    "bytes": 190,
+    "mode": 420,
+    "sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6"
+  }
+}

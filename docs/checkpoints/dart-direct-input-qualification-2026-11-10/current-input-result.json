@@ -1,0 +1,8 @@
+{
+  "current_inputs": "PASS",
+  "metadata": [
+    "qualified/source-identities.json",
+    "qualified/resolved-identities.json"
+  ],
+  "producer_sha256": "953f77676dd510081ce9fb6cdc34989abafd4025e65615e9a16fa6cf8c70f676"
+}

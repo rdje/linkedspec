@@ -11,7 +11,7 @@ answers:
   - "why does the Dart Array-transform direct292 packet need external fixture input qualification"
   - "which task owns missing Dart additional direct-test fixture bindings"
 date: 2026-11-10
-status: Dart78.3 bounded guards focused-checked; additional direct-input qualification4.20 pending
+status: Dart78.3 bounded guards focused-checked; additional direct-input qualification4.20 complete
 tags: [dart, array, transform, results, guards, source, arity]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.78.3; docs/checkpoints/array-transform-result-guard-dart-2026-11-10/REVIEW.md retains unchanged37 plus104 own controls,19 original failures/122 healthy,141/four routes PASS, private19RED/141PASS, direct292,108 exact profiles/141 parsed-module pairs, first readonly0/empty stderr/eight corruptions PASS."
 reverify:
@@ -66,3 +66,10 @@ the exact original-input investigation/qualification or fresh finite direct292
 acquisition after Julia78.4, before Lua78.5. Existing Git fixtures do not by
 themselves establish actual first-use identity; do not rewrite original evidence
 or infer a Dart runtime defect. Source-policy and bounded own141 outcomes stand.
+
+Later November10 qualification:4.20 supplies a separate unchanged direct292 run
+with complete selected fixture/grammar/source bindings before SDK use. Original
+missing-six RED/qualified PASS, all11 result/grammar streams, packet/source
+preservation, first readonly/eight controls and current input identity pass.
+Original missing first-use identities stay unknown; no hashes or streams are
+rewritten. See [[dart-direct-test-fixture-inputs]] for the canonical closure.

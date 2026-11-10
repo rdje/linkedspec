@@ -1,0 +1,12 @@
+{
+  "current_inputs": "PASS",
+  "original_explanation": "append-only",
+  "base_revision": "daa081db0de3ce0d761f1ee389f7d9a4500bbccb",
+  "input_metadata": [
+    "docs/checkpoints/dart-direct-input-qualification-2026-11-10/qualified/source-identities.json",
+    "docs/checkpoints/dart-direct-input-qualification-2026-11-10/qualified/resolved-identities.json"
+  ],
+  "original_explanation_path": "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/REVIEW.md",
+  "explanation_sha256": "c58e2a65e13074863db310fa2bc3d7afe76753cfe3ebae70c6e597511a70fdc0",
+  "producer_sha256": "c0986095ea7b140068b817d9644a9ec416dfba244696a8174ff4203e4cc8630c"
+}

@@ -12,6 +12,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.20 — Qualify Dart direct-test fixture inputs
+
+Preserve the original accepted packet/source and expose its six missing external
+with/Hash fixture bindings without inventing old first-use identities. A separate
+before-SDK source/fixture/grammar/instrument snapshot and actual resolved routing
+bind the exact unchanged five-file/concurrency1 command:292PASS/empty stderr.
+All11 printed result/grammar stream families agree. Actual original missing-six
+binding RED/qualified PASS, first readonly/eight corruptions and every current
+acquired input identity pass. Runtime and test source stay unchanged. Book and
+canonical input-closure/default-grammar facts distinguish the qualified new epoch
+from the original omission; append-only old explanation preserves raw proof.
+Full native/cache/transitive/toolchain custody4.2 remains separate. Independent
+Lua78.5 follows the clean normal handoff. Evidence:
+`docs/checkpoints/dart-direct-input-qualification-2026-11-10/REVIEW.md`.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.4 — Guard ordinary Julia Array-transform results
 
 Add canonical eight-transform result ownership with one initial-source permission

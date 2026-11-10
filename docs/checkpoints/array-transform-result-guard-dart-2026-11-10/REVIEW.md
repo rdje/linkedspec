@@ -73,3 +73,15 @@ investigation/qualification or fresh unchanged direct292 acquisition after clean
 Julia78.4 and before Lua78.5. Preserve every original input/archive/stream/reader;
 do not refresh historical hashes or infer a runtime failure. This appended
 explanation qualifies custody of the additional tests, without rewriting proof.
+
+## Qualified new direct run
+
+Task23.4.20 now retains a separate unchanged direct292 run with all selected
+fixture/grammar/owned source inputs captured before SDK use. Exact original command,
+typed result/grammar streams and original packet/source preservation pass; original
+missing-six binding RED/qualified PASS, first readonly/eight controls and current
+input identities pass. See
+`docs/checkpoints/dart-direct-input-qualification-2026-11-10/REVIEW.md`.
+The six omitted original first-use identities remain unknown. This appended
+qualification supplies binding assurance for the new epoch and preserves every
+original archive/stream/reader/hash. Full native/cache/transitive custody stays4.2.

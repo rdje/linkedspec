@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":12763,"lines":198,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-history-capacity-blocker.md","sha256":"5be25e9b4c91f23046632009cdb7ce917aec011209906beec3b7f8f1e4cac0ad","type":"member"}
 {"bytes":20499,"lines":313,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-next-engineering-history-capacity.md","sha256":"802349c8350496c962556fe83e282308c76335a40708a83f0a8130949c4576ee","type":"member"}
 {"bytes":14648,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-second-history-capacity-blocker.md","sha256":"764e4c01f60556957ead97d2f32655bd2f133ec0a7099a707d0faf653925f327","type":"member"}
 {"bytes":2603,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-receiver-string-bridge-guards.md","sha256":"6f08847af48c871ed82f525d210922c472d61ab4e726cda82b119945716e9291","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4517,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generic-trailing-codeblock-argument-correction.md","sha256":"aaee5c296afee746b7a3d41fadf993cd1d2fc0ba2745255559dee48b577ad874","type":"member"}
 {"bytes":5702,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.16","path":"docs/knowledge/github-size-safe-publication.md","sha256":"0ef25efa8f29ff99fef6e205609891dc8e0682047f2c9f22306d08eb4ddea7e8","type":"member"}
 {"bytes":2087,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/governed-capture-helpers-missing-shared-inventory.md","sha256":"a86b37bcce7c3c5cf95e1d5a9f8f027fdeecebd3266b4a30914340b3ade7c69c","type":"member"}
-{"bytes":3427,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/grouped-edge-book-child-return-drift.md","sha256":"39f7b54a953ced79a47722da0a27002d1690d79b0711008b9fbdfec28450aebc","type":"member"}

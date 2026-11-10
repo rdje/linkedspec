@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6033,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-dormant-red.md","sha256":"b49ab06c3323b938064c2ab8e51a6d35795f87f660148a545633198f8d014976","type":"member"}
 {"bytes":5839,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-private-authority.md","sha256":"37b907f52b32486379de7e7f2c49edc6da50e428a52d1ef11a0dae2288f9105e","type":"member"}
 {"bytes":4829,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-recomposition.md","sha256":"6f6e49084d307df63c4d92ce4451dea6083368749f22a14c9c6b7cafba24920b","type":"member"}
 {"bytes":9090,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-project-data-ssd-storage.md","sha256":"69cf477446d686e1d865d5f51586ca64df4417f5eb8ad53106e232fa7aa06889","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2363,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-runtime.md","sha256":"1db329da698a67f771604465b2f4b6d291a90b25543972954a247190848cdc6b","type":"member"}
 {"bytes":2236,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-signature-state.md","sha256":"88d085c7938815dd9b8726a11a21066151a6941bbdfac0a15e3e3605f1d087cf","type":"member"}
 {"bytes":17157,"lines":204,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md","sha256":"472f314e7daa83f3c4cfc6f284a06ec87492c21c0b1010332ebba4ae886a6179","type":"member"}
-{"bytes":29326,"lines":388,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/macos-rust-first-launch-validation-latency.md","sha256":"55f3498086fb5cfa9884329a6306837c309985bf4a634bbf7230e0bbbaba8986","type":"member"}

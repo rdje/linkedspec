@@ -10,6 +10,22 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.20 — Test completion and input custody are separate assertions
+
+The original direct292 capture binds owned dart sources but misses older with/
+Hash fixture reads outside that directory. A passing stream does not close that
+input leg. Keep the original packet untouched, identify the actual six omissions,
+and qualify a new unchanged run with fixture/grammar/source inputs before the
+first SDK call. Actual old binding RED/new PASS and typed result/grammar stream
+agreement distinguish stronger current evidence from retrospective first-use
+claims. All original owned Dart source bytes/modes stay exact; no code or tests
+change. Default constructor/with parsing uses the repository grammar lookup,
+which searches upward from cwd/script and caches per process; retain the real
+root grammar and check the nearer candidate is absent. Complete current routing,
+channels and input identities are retained. Eight binding/channel/semantic/byte
+corruptions reject in the first readonly recovery. Old unrecorded first-use bytes
+stay unknown; full native/cache/transitive/OS custody remains4.2/SESSION5.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.4 — Bind result ownership and all selected test inputs separately
 
 Julia's own19 failures retain Arrays through set_key with KV/later KVW/KVDW.

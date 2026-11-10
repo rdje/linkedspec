@@ -16,7 +16,7 @@
 {"bytes":2912,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-and-required-dependency-steps.md","sha256":"e3cc04f4af97ad532e1470bad6125aedf60ce4f5e1c791b84fe0e2f8b47e5b77","type":"member"}
 {"bytes":3000,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-arithmetic-result-source-guards.md","sha256":"a479ff90047b785a54b0214bf47b717b2f045bc5e61ab503ec8b3e9c6c26628c","type":"member"}
 {"bytes":1918,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-array-flat-list-context-splice.md","sha256":"f868d869789367d8b3b21edc933ac503678e9841f12b6219d6155d7854436151","type":"member"}
-{"bytes":5140,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.4","path":"docs/knowledge/dart-array-transform-result-guards.md","sha256":"a4abb0440fb3d3d5f6efd13d4135b4bd52767a42cf728ed9265ef588aaa5b3a8","type":"member"}
+{"bytes":5610,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.20","path":"docs/knowledge/dart-array-transform-result-guards.md","sha256":"604ad9b9da573168dc017fe9f399e7b921dace79d858f4cd1eece222b4b25f68","type":"member"}
 {"bytes":5840,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-attached-switch-body-omission.md","sha256":"b76e880b383867a58f7fd741064510c55263a70d4e1e8e2f560a8b45f4b6081b","type":"member"}
 {"bytes":2075,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-backend-interpreter-first-plan.md","sha256":"22d152c75a9c8ad7151dc4f838bec6308155edef5d831582a9b6e27f60d4174c","type":"member"}
 {"bytes":5120,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-backend-scaffold-package.md","sha256":"82cf8c480260395f3ed2ec7e53f72a6caed2db81ff4f43afd84ac423614f3f03","type":"member"}
@@ -46,6 +46,7 @@
 {"bytes":3562,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-definedness-result-source-guards.md","sha256":"7609b73971bafac712cfa6a8cdb081cf5852b79511cfbaf7d58176b0ad50cce4","type":"member"}
 {"bytes":5678,"lines":85,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-diagnostic-output-events.md","sha256":"ab3270b1dedc460bc2947232b90000bc62e46d76cb24a2bb9f1910a402bd8c85","type":"member"}
 {"bytes":2008,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-diagnostics-trace-boundary.md","sha256":"ee00b3013cd9b00142d5452fca692fdaed07b8fe999040c3063d577a9f525a4d","type":"member"}
+{"bytes":3697,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.20","path":"docs/knowledge/dart-direct-test-fixture-inputs.md","sha256":"3d47316cedd4bd028e6f483214045a5ef746db18cc0d46e372abd7d7c8663aee","type":"member"}
 {"bytes":4493,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-duplicate-regex-slot-identity-admission.md","sha256":"a7999187cabf27b90ac36dda0e4002a8fd78f3d7962ebd66f109e9bce9b6b131","type":"member"}
 {"bytes":2613,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-emptiness-result-source-guards.md","sha256":"657e2ead97a0f7e7dc6ce74fe8ffe28fafb1cfa01596bda6ec76d17060832ff5","type":"member"}
 {"bytes":2327,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-free-default-result-guards.md","sha256":"3775e0939f04c87795acf8e6ffd9d24f072c2283df7cd0eae65804bdaab04cb5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":17532,"lines":278,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-capacity-controls.md","sha256":"fcb6a11637b2843958c0fd319f918440ca284735c83d2d652cded6e652cccb9b","type":"member"}
 {"bytes":10498,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-commit-closeout-audit.md","sha256":"f4f3987e9f522b3497143c21919e0363c9d5e16b8ab8edb7e19f91c56b7bf260","type":"member"}
 {"bytes":19250,"lines":308,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-engineering-history-capacity-blocker.md","sha256":"23f844e476bf18ba67ae08075cd578be62ec86d56df38dbc53709bf42ded9840","type":"member"}
-{"bytes":12763,"lines":198,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-history-capacity-blocker.md","sha256":"5be25e9b4c91f23046632009cdb7ce917aec011209906beec3b7f8f1e4cac0ad","type":"member"}

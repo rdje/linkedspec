@@ -9,7 +9,7 @@ answers:
   - "does an unloaded public Perl selection module have fresh_error fields"
   - "why did the Array transform selection recovery readers fail"
 date: 2026-11-07
-status: original selection frozen; bounded Perl/Rust/Dart/Julia focused-checked; Dart input qualification4.20 then Lua remain
+status: original selection frozen; bounded Perl/Rust/Dart/Julia and qualified Dart direct inputs focused-checked; Lua remains
 tags: [array, transforms, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.38; docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md retains original37 ready1/raw0/fallback0/unresolved0,19 failures/18 healthy and37 actual module/handler pairs. Final strict readonly recovery0/empty stderr/nine controls passes; two prior reader failures stay explicit."
 reverify:
@@ -68,3 +68,10 @@ closure review also identifies the prior Dart additional-direct explicit fixture
 binding gap, owned by P1 task23.4.20 after clean Julia landing and before Lua78.5.
 Own Dart141/four-route/inverse inputs remain bound; do not infer a runtime failure
 or retrospective first-use credit. Current selection remains in MEMORY.md.
+
+Later qualification4.20 supplies a separate unchanged direct292 epoch with complete
+selected fixture/grammar/source bindings before SDK use. Exact command/all11
+result/grammar streams, original preservation, original missing-six RED/qualified
+PASS and first readonly/eight controls pass. Original omitted first-use identities
+remain unknown. See [[dart-direct-test-fixture-inputs]]; independent Lua78.5 is next
+after the clean normal handoff. Whole-feature/full23.4 admission remains open.

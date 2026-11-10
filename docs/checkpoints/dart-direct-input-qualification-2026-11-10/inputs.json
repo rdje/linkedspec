@@ -1,0 +1,33 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.20",
+  "original_revision": "0c4738c4efd575a4c348181c56b5d343b4e3d235",
+  "original_packet": "docs/checkpoints/array-transform-result-guard-dart-2026-11-10",
+  "grammar": "specs/user_function_definition.spec",
+  "consumers": {
+    "dart/test/array_transform_result_guard_composition_test.dart": [
+      "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/cases.json",
+      "tests/fixtures/array_transform_result_guard_dart_profiles.json"
+    ],
+    "dart/test/with_hash_results_test.dart": [
+      "tests/fixtures/with_hash_result_values.spec",
+      "tests/fixtures/with_hash_result_values.json"
+    ],
+    "dart/test/hash_value_result_guard_composition_test.dart": [
+      "docs/checkpoints/hash-value-result-guard-dart-2026-11-07/cases.json",
+      "tests/fixtures/hash_value_result_guard_dart_profiles.json"
+    ],
+    "dart/test/hash_view_result_guard_composition_test.dart": [
+      "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json",
+      "tests/fixtures/hash_view_result_guard_dart_profiles.json"
+    ],
+    "dart/test/constructor_result_composition_test.dart": []
+  },
+  "additional_original_omissions": [
+    "tests/fixtures/with_hash_result_values.spec",
+    "tests/fixtures/with_hash_result_values.json",
+    "docs/checkpoints/hash-value-result-guard-dart-2026-11-07/cases.json",
+    "tests/fixtures/hash_value_result_guard_dart_profiles.json",
+    "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json",
+    "tests/fixtures/hash_view_result_guard_dart_profiles.json"
+  ]
+}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Ordinary Array-transform composition: bounded Perl/Rust/Dart/Julia are repaired/focused-checked. P1 Dart additional-direct input qualification23.4.20 is next, then independent Lua78.5. Broader routing18.2 and full feature verification23.4 remain separately owned.
+Ordinary Array-transform composition: bounded Perl/Rust/Dart/Julia are repaired/focused-checked. Dart additional-direct fixture qualification23.4.20 now supplies its separate bound292 epoch. Independent Lua78.5 is next. Broader routing18.2 and full feature verification23.4 remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.4. Independent Julia156/four-route observations find19 guard failures; canonical result ownership preserves all137 healthy observations/123 profiles and156 byte-equal parsed/module pairs. Normal827PASS76FAIL to903PASS; direct1728, exact same-path uncached19RED/156PASS, first readonly0/empty stderr/nine corruptions and every actual current direct-input identity pass. All nineteen needed errors, source/arity/earlier-owner policies and producer/scalar/mutation bodies stay exact. Book and canonical facts reflect bounded behavior; focused integrity/normal hooks govern landing.
+TYPE-REFERENCE-BOOK.1.2.23.4.20. Original accepted packet/source is preserved; exactly six older external fixture bindings are absent in its actual inventory. Qualified new source/fixture/grammar/instrument and resolved routing precede the exact unchanged five-file/concurrency1 direct292 run, which passes/empty stderr. All11 printed result/grammar stream families agree. Original missing-six RED/qualified PASS, first readonly0/empty stderr/eight controls and every acquired current input identity pass. No runtime/test changes or retrospective original first-use identity; focused integrity/normal hooks govern landing.
 
 ## Next Action
 
-Activate P1 TYPE-REFERENCE-BOOK.1.2.23.4.20 after this clean Julia handoff. Qualify/reacquire the exact additional Dart direct292 external fixture closure; preserve original proof and distinguish its missing explicit bindings from any qualified new epoch. Own Dart141/four-route/inverse remains bound; no runtime failure is inferred. Then independently assess Lua78.5. Full23.4/final clean push require fresh exact proof after feature coverage.
+Activate independent Lua TYPE-REFERENCE-BOOK.1.2.23.3.78.5 after the clean qualification handoff. Read frozen37/four-route contract and independently acquire installed-host source/arity/error/earlier-owner observations before deciding a repair; do not import peer verdicts or policies. Preserve scoped installed-host/declared5.4 distinctions and full native custody/admission limits. Full23.4/final clean push require fresh exact proof after feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.20 — qualified unchanged292, original missing-six binding RED/new PASS, all11 streams/source preservation/first readonly eight controls; Lua78.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.4 —156/four routes903PASS/direct1728/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine controls; P1 Dart4.20 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
@@ -29,7 +30,6 @@ Activate P1 TYPE-REFERENCE-BOOK.1.2.23.4.20 after this clean Julia handoff. Qual
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.5 — each installed Lua89/four routes510 checks0 failures/direct810 plus copy/arity; exact private13RED/89PASS/first recovery/eight controls; selection38 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.4 — Julia89/four routes510PASS/direct825, exact private13RED/89PASS, qualified readonly/eight controls; partial/version correction explicit; Lua77.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.3 — Dart89/four routes/direct151; exact private13RED/89PASS,65 own profiles/89 artifact pairs/eight controls; Julia77.4 next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.15 — bounded1157-row daily review/five controls/readonly replay; zero removals, protected artifacts retained; Dart77.3 next.
 
 ## History
 

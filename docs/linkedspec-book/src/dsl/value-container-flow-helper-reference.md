@@ -1347,8 +1347,10 @@ focused-checked on native, restored SpecFile, generated-plan and full emitted-fr
 routes; rebuild Dart applications with the updated package. Emitted and serialized
 formats are unchanged. Julia78.4 is independently focused-checked on the same four
 routes; rebuild Julia applications/runtime. Lua assessment and full source/context/
-admission remain open. The separate Dart additional-direct-test input qualification
-is tracked under23.4.20; its own Array-transform cases and inverse remain bound.
+admission remain open. Dart's additional direct tests now have a separate qualified
+292-test run with complete selected fixture/grammar bindings under23.4.20. The
+original six omitted first-use identities stay unknown; its own Array-transform
+cases and inverse remain bound.
 
 ## Hash helpers
 

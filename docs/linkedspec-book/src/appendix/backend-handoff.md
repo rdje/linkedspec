@@ -4867,11 +4867,17 @@ healthy.
 Julia's prospective fixture review identifies one limit in that Dart packet:
 the additional direct292 test stream is retained, but its root inventory omits
 explicit bindings for older with/Hash test fixtures outside dart. Own141 inputs,
-four-route artifacts and the private inverse remain bound. P1 task23.4.20 owns
-the finite original-input investigation/qualification or fresh reacquisition;
-older Git fixtures do not automatically establish actual first-use identity.
-No Dart runtime failure follows. Original proof remains unchanged apart from
-this explicit explanatory qualification.
+four-route artifacts and the private inverse remain bound. Task23.4.20 supplies a
+separate qualified unchanged292 run with those fixture/grammar/owned source inputs
+captured before SDK use. The exact original command and all eleven printed result/
+grammar stream families agree. Actual original missing-six binding RED/qualified
+PASS, original packet/source preservation, first readonly/eight corruptions and
+current input identities pass. No runtime/test code changes. Older Git fixtures
+do not establish the omitted original first-use identities, which remain unknown.
+Original archives, streams, readers and hashes stay unchanged; append-only
+explanation points to
+`docs/checkpoints/dart-direct-input-qualification-2026-11-10/REVIEW.md`.
+Full native/cache/transitive/toolchain custody4.2/SESSION5 remains separate.
 
 ### Julia Array-transform result assessment
 
@@ -4908,8 +4914,8 @@ The source adds70 guard/classifier lines and one normal-runner include; producer
 bodies, scalar_result and enumerate/call_index mutation policy remain unchanged.
 Rebuild Julia applications/runtime; emitted/parsed format stays unchanged. Full
 native/cache/transitive/toolchain custody4.2/SESSION5, isolation, source/context/
-registration and full23.4 remain separate. Next: Dart input qualification23.4.20,
-then independent Lua78.5. Evidence:
+registration and full23.4 remain separate. Dart input qualification23.4.20 now
+supplies its separate new bound epoch; independent Lua78.5 is next. Evidence:
 `docs/checkpoints/array-transform-result-guard-julia-2026-11-10/REVIEW.md`; its readonly
 reader recovers this historical finite result rather than declaring a future
 runtime or peer healthy.

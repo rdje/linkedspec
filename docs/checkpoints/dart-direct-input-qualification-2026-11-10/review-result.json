@@ -1,0 +1,30 @@
+{
+  "original_fixture_binding": "RED: six actual original bindings absent",
+  "qualified_fixture_binding": "PASS",
+  "original_packet_preserved": "PASS",
+  "runtime_source": "unchanged",
+  "direct_tests": 292,
+  "command": "exact original five-file concurrency1",
+  "semantic_streams": "all11 exact",
+  "old_missing_fixture_paths": [
+    "docs/checkpoints/hash-value-result-guard-dart-2026-11-07/cases.json",
+    "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json",
+    "tests/fixtures/hash_value_result_guard_dart_profiles.json",
+    "tests/fixtures/hash_view_result_guard_dart_profiles.json",
+    "tests/fixtures/with_hash_result_values.json",
+    "tests/fixtures/with_hash_result_values.spec"
+  ],
+  "qualified_epoch": "docs/checkpoints/dart-direct-input-qualification-2026-11-10/qualified",
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "missing older fixture binding",
+    "missing grammar binding",
+    "selected consumer omitted",
+    "wrong exit",
+    "unexpected stderr",
+    "missing actual stdout",
+    "changed actual semantic stream",
+    "changed fixture bytes"
+  ],
+  "limits": "No retrospective first-use identity; full native/cache/transitive/toolchain custody remains4.2/SESSION5."
+}
