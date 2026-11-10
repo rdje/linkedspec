@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT is stopped at the director-requested handoff-ready checkpoint after bounded Rust78.2. Knowledge Map capacity23.4.18 is the next eligible leaf when instructed to resume, before independent Dart78.3; peers/full23.4 remain separately owned.
+Director resumed full PNT on November10. Knowledge Map capacity planning23.4.18.0 is focused-checked; canonical implementation18.1 is next, then daily artifact review4.19 before independent Dart78.3. Peers/full23.4 remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.2. Independent Rust Array-transform78.2 acquires unchanged37 plus148 own policy controls and10 optional-result targets. The unchanged195 normal has21RED/174 healthy before repair and195PASS afterward on native/restored/generated-plan/fresh routes. Private exact old/current images reproduce21RED/195PASS; direct Array/Hash/copy normals pass290. All174 healthy projections,152 profiles and195 compiled/module pairs stay exact; scoped format and first readonly0/empty stderr/eight corruption controls pass.
+TYPE-REFERENCE-BOOK.1.2.23.4.18.0. Frozen1710 facts/12237 keys/22499 lines/7872229 bytes; prospective duplicate-display compaction20789 lines/7125905 bytes preserves exact question prefix/other records. Seven actual corruption controls and separate readonly review pass. Original map/policy/generator/reader bytes and affected reader inventory are retained. No production capacity or canonical-admission claim follows from this plan.
 
 ## Next Action
 
-Await director instruction to resume PNT. First eligible: TYPE-REFERENCE-BOOK.1.2.23.4.18, a bounded Knowledge Map capacity preflight preserving published facts/lookup keys and requiring accepted authority for any cap increase. Independent Dart78.3 follows that prerequisite and still requires its own unchanged37/four-route and source/arity/error acquisition before production. Full verification follows feature coverage.
+Implement TYPE-REFERENCE-BOOK.1.2.23.4.18.1 with exact preservation/direct-reader proof and staged canonical verification, retaining all current limits. Then refresh the overdue daily artifact review4.19 and continue independent Dart78.3 with its own unchanged37/four-route and source/arity/error acquisition. Full feature verification remains separately scheduled.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — lossless duplicate-display plan, frozen source/reader inputs, seven controls/readonly replay; canonical18.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.2 —195PASS/direct290/private21RED-restored195PASS/eight controls;152 profiles/174 healthy exact; capture qualification explicit.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1 —212PASS/direct490/private19RED-restored212PASS/seven controls;175 profiles/193 healthy exact; independent Rust78.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.0 — eight Number fences/189PASS, private16RED/restored189PASS/two readonly/six controls; original37 unchanged; composition78.1.1 next.
@@ -29,7 +30,6 @@ Await director instruction to resume PNT. First eligible: TYPE-REFERENCE-BOOK.1.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.0 — source64PASS/direct93; private inverse14RED/restored64PASS; first recovery/eight controls; composition1.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — Perl76/own48; ten main-only host reads; first recovery/eight controls PASS; source77.0 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.37 — Hash-valued28 targets/15 failures/13 healthy; four unready profiles/eight controls; independent77 owned.
-- TYPE-REFERENCE-BOOK.1.2.23.3.76.5 — each installed host33/184PASS/direct300 plus copy/arity controls/eight corruptions; next selection37 owned.
 
 ## History
 

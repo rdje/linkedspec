@@ -2491,7 +2491,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: Declare exact repair proof or scoped no-measurement rationale at activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.18`
-  Status: `pending`
+  Status: `active` / bounded planning then canonical implementation
   Priority: P1 first on PNT resumption, before independent Dart78.3 or further fact growth.
   Goal: Recover bounded Knowledge Map growth capacity while preserving published facts and lookup keys.
   Reproduction/impact: Rust78.2 normal hooks expose knowledge_map22501 lines against max22500 in doctrine/readme_stability/routes.jsonl. Current Rust closure consolidates only overlapping unpublished lookup aliases within its own additions; factual bodies and activation-owned questions remain. Qualified containment reaches22499/22500 with generator/control unchanged and prior question text/fact bodies preserved. It leaves one line before the hard bound for the next backend fact, so capacity recovery is a prerequisite rather than an unowned warning.
@@ -2500,4 +2500,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned verification: Focused planning and preservation/reader-contract proof; source-bound canonical receipt if implementation changes generator/registry/infrastructure.
   Planned canonical trigger: Actual infrastructure/control movement, milestone and final clean push; declare at activation.
   Planned claim verification: none: Planning only; declare exact scoped proof or no-measurement explanation at activation.
-  Next: Remain pending while PNT is stopped; first eligible task on explicit resumption, before Dart78.3.
+  Activation: Director resumes full PNT on November10 at clean6cd8e78437df8693c31a9af64c2e242977c84786. Supplied policy hashes still match the canonical startup provenance. No cap increase is proposed.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.18.0`, `TYPE-REFERENCE-BOOK.1.2.23.4.18.1`.
+  Next: Commit the preservation/reader plan18.0 before generator implementation18.1; daily artifact review follows capacity repair, before Dart78.3.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.18.0`
+  Status: `completed` / focused planning proof
+  Goal: Freeze current Knowledge projection and select bounded duplicate-display compaction before infrastructure changes.
+  Verification tier: `focused`
+  Focused checks: Readonly exact baseline census, prospective projection preservation and distinguishing corruption controls; source/reader inventory; unchanged generator/checker, task metadata, memory, histories and normal doctrines/hooks.
+  Canonical trigger: none: Planning and retained evidence only; generator/control implementation is18.1.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.18.0.json`
+  Acceptance: Preserve complete question index and all fact/source/metadata bytes, identify every production reader and directly affected test, freeze actual instrument/input identities, and own implementation before changing the generator. No recovered production capacity claim at this planning boundary.
+  Verification: Actual capture and separate readonly review.py agree:1710 facts/12237 keys/22499 lines/7872229 bytes; prospective20789 lines/7125905 bytes, seven actual corruptions rejected. PLAN.md inventories production readers/direct tests and requires canonical18.1; original map/generator/control/reader bytes retained. All existing card keys and map bytes unchanged. Normal doctrines/hooks govern landing.
+  Commit subject: `TYPE-REFERENCE-BOOK.1.2.23.4.18.0 - plan lossless Knowledge Map compaction`.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.18.1`
+  Status: `pending`
+  Goal: Omit only the redundant per-fact answers display while retaining the complete question index and all canonical cards.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.4.18.0`
+  Planned verification: Canonical infrastructure leaf; actual old/new generator output, exact question routing and all retained metadata/anchors, original card bytes, meaningful omission/metadata controls, direct header/list/atomic/storage consumers, normal doctrines, rendered book and exact staged canonical receipt.
+  Planned claim verification: Declare exact scoped compaction/preservation proof at activation.
+  Acceptance: Keep current line/byte ceilings and freshness/locality/atomic publication unchanged. Update the whole-projection oracle to compare both formats without overlooking legacy answers corruption; preserve original instrument for historical users. Add a durable retrieval pointer by updating the existing canonical routing-pressure card without removing its keys. Admit changed maintained references with the scope ledger. Close only after exact staged canonical proof and normal hooks.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.19`
+  Status: `pending`
+  Goal: Refresh the latest-only daily artifact review after the November7 record exceeds24h.
+  Dependencies: `TYPE-REFERENCE-BOOK.1.2.23.4.18.1`
+  Planned verification: Focused named-scope metadata census/independent walk, protected-cache classification, readonly replay and mandatory integrity checks. No broad audit or unsafe deletion.
+  Planned claim verification: Declare the dated bounded review at activation.
+  Acceptance: Reuse canonical artifact conventions without traversing black-box repositories; remove only data with complete disposal authority, otherwise retain it. Overwrite docs/ARTIFACT_CLEANUP.md and commit before Dart78.3.

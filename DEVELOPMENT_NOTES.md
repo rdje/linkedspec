@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — Preserve lookup identity before compacting its display
+
+The complete Questions section already contains every projected question/key/path/date/
+reverify route. Per-fact answers are a second display; canonical cards retain authored
+answer order and repeats. The prospective trim preserves all other bytes and stable
+fact anchors, with a separate line-walk oracle and seven distinguishing corruptions.
+Generator, recurring reader and atomic/locality/freshness contracts remain unchanged
+until canonical implementation18.1. The baseline package retains exact original tools
+for historical reader claims. Supplied policy source hashes still match the indexed
+startup comparison; wider adoption remains SESSION5. Daily artifact review4.19 is
+owned after capacity recovery. Planning creates no user-facing runtime/book change.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.2 — Guard Rust ordinary Array transform results
 
 Independent Rust Array-transform78.2 acquires unchanged37 plus148 own policy controls and10 optional-result targets. The unchanged195 normal has21RED/174 healthy before repair and195PASS afterward on native/restored/generated-plan/fresh routes. Private exact old/current images reproduce21RED/195PASS; direct Array/Hash/copy normals pass290. All174 healthy projections,152 profiles and195 compiled/module pairs stay exact; scoped format and first readonly0/empty stderr/eight corruption controls pass.

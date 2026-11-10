@@ -12,6 +12,17 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — Plan lossless Knowledge Map compaction
+
+Resumed PNT at clean6cd8e784 and committed the capacity plan before generator changes.
+Frozen1710 facts/12237 keys use22499 lines/7872229 bytes; omitting only the duplicate
+per-fact answer display projects20789 lines/7125905 bytes. Independent exact retained
+record/question-prefix checks and seven actual corruption controls pass, with separate
+readonly replay. Original inputs/instruments and reader inventory are retained in
+docs/checkpoints/knowledge-map-capacity-2026-11-10/. Canonical implementation18.1,
+then overdue artifact review4.19, precede Dart78.3. No production capacity/cap change
+or whole-feature verification is claimed; no public book behavior changes in this plan.
+
 ## 2026-11-07 — TYPE-REFERENCE-BOOK.1.2.23.3.78.2 — Guard Rust ordinary Array transform results
 
 Independent Rust Array-transform78.2 acquires unchanged37 plus148 own policy controls and10 optional-result targets. The unchanged195 normal has21RED/174 healthy before repair and195PASS afterward on native/restored/generated-plan/fresh routes. Private exact old/current images reproduce21RED/195PASS; direct Array/Hash/copy normals pass290. All174 healthy projections,152 profiles and195 compiled/module pairs stay exact; scoped format and first readonly0/empty stderr/eight corruption controls pass.

@@ -28,6 +28,14 @@ reverify:
 
 # Current routing-pressure contract
 
+Knowledge Map capacity planning under TYPE23.4.18.0 freezes the complete lookup
+projection before any generator change. Its bounded implementation18.1 removes
+only the repeated per-fact answers display, preserving the complete question
+index, canonical card paths, fact anchors and all other metadata. Exact plan,
+retained original reader bytes and readonly proof:
+`docs/checkpoints/knowledge-map-capacity-2026-11-10/PLAN.md`. No cap increase or
+implemented capacity claim follows from the plan alone.
+
 Accepted ADR `0139` implements the director-approved archive/reference choice. The two author histories are
 exact query archives with bounded hot roots, immutable segments and paged catalogs. Decisions, Knowledge cards
 (including their README) and public references retain canonical browsing and original per-file limits;

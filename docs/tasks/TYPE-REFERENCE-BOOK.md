@@ -21,7 +21,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
 | 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.78.2` | `completed` | Rust195PASS/direct290/private21RED-restored195PASS/readonly/eight controls; policies and source permission preserved. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `pending` | P1 on resumption: recover bounded Knowledge Map capacity before further fact growth/Dart78.3. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Planning18.0 focused-checked; implement lossless duplicate-display compaction18.1 with canonical proof, then daily artifact review4.19 before Dart78.3. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.3.78.3` | `pending` | Independently assess Dart unchanged37/own source/arity/errors before edits; full23.4 remains separate. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 5 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |

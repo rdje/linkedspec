@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.0",
+  "claims": [
+    {
+      "name": "frozen-knowledge-projection-capacity-plan",
+      "statement": "The frozen 1710-fact/12237-key map uses22499 lines/7872229 bytes; removing only redundant per-fact answer displays projects20789 lines/7125905 bytes with exact remaining content.",
+      "scope": "Exact activation6cd8e784 map and prospective display only. No production generator change, source-card mutation, recovered production capacity, canonical receipt or whole-feature admission.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/review.py",
+        "granularity": "Whole frozen map bytes, every question row and fact identity; header counts independently compared with parsed rows.",
+        "result": "{\"base\": \"6cd8e78437df8693c31a9af64c2e242977c84786\", \"before_bytes\": 7872229, \"before_lines\": 22499, \"facts\": 1710, \"original_sha256\": \"ceb5c2e28f98e10dc40029196fef6f87fa366dddebbf270bfc4f3deaa2b4b5a7\", \"proposed_bytes\": 7125905, \"proposed_lines\": 20789, \"proposed_sha256\": \"b35cad57160bda890af41e2a64d1f6bec5b4486c94c9623b94cee9c502961b4d\", \"question_keys\": 12237, \"rejected_controls\": [\"question\", \"anchor\", \"title\", \"date\", \"source\", \"evidence\", \"reverify\"], \"result\": \"PASS\", \"scope\": \"Frozen-map prospective display only; no production generator or capacity admission.\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A missing question, anchor or retained metadata value can pass a prospective duplicate-display trim.",
+        "oracle": "Independent original-line walk permits deletion only of the duplicate answers field; exact full question prefix and retained record sequence remain the oracle.",
+        "red_control": "Seven actual question/anchor/title/date/source/evidence/reverify deletions raise the preservation error; healthy prospective projection and separate readonly replay pass."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/review.py",
+            "sha256": "26834b9394d71f1b95c3b9b32c1c16e46c43c9d9106fdbfe15f9da809266616f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish.py",
+            "sha256": "2b1368f95f519ef2220885f88ec7d8353a913fd5ba320808a0abd456df650d15",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/baseline.json.gz",
+            "sha256": "2dbcc1041913481b476b543dbd032b94e5a6591983d9faa29ef3b1926b031bf6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/result.json",
+            "sha256": "c02fefdf546dd5c58d3798c4ae0bab519501d8e28a92f89bf7446a75b85a4f6c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/PLAN.md",
+            "sha256": "2ad8d2b554678136eadb771151b8f54fd14f0e342476f3156dc89cf9ac0778b6",
+            "role": "input"
+          }
+        ]
+      }
+    }
+  ]
+}
