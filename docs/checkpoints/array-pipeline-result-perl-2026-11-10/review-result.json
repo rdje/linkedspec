@@ -1,0 +1,27 @@
+{
+  "programs": 184,
+  "original_common": 36,
+  "common_failures": 17,
+  "common_preserved": 19,
+  "acquired_profiles": 148,
+  "source_reads": 14,
+  "additional_error_target": 1,
+  "actual_artifact_pairs": {
+    "preflight": 172,
+    "delimiter_controls": 8
+  },
+  "effective_corruptions": [
+    "hidden literal host read",
+    "host mutation concealed",
+    "computed source normalized into host read",
+    "public error provenance omitted",
+    "needed error masked",
+    "missing receiver error reblessed",
+    "excluded arity effects normalized",
+    "Bool converted to Number",
+    "invented fresh error after failed load",
+    "actual artifact drift"
+  ],
+  "recovery": "PASS",
+  "scope": "Original acquisition only; source79.0 precedes result79.1.1. Exclusions are not new authority; older whitelist fields stay an explicit projection. Full native/cache/transitive/toolchain/context/isolation/registration/23.4 remain separate."
+}

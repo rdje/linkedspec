@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3354,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-receiver-compilation.md","sha256":"9ff84cf949601d675a474d06c11f4d5e9c0c154944afecf3241a042ccbd87384","type":"member"}
 {"bytes":5109,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-count-result-source-guards.md","sha256":"7888997ed6c95e20c8ab76986adb371a370805b015877fa811a8357192d6ed58","type":"member"}
 {"bytes":5360,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-family-source-acceptance.md","sha256":"be227aced36e67445a65bd97f1391b1d532d1ebc39d0bf31ac4f4bf9660adc99","type":"member"}
 {"bytes":5142,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-producer-source-diagnosis.md","sha256":"4627df3cb92a47d44fe28e84ba89b7df2790fc7dedf67cfe9e1bbe7a49ecce08","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5119,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-argument-authority.md","sha256":"808b229a506659f115d2d39ae2388a7841f32ca32390433aeaa37f4441f2057f","type":"member"}
 {"bytes":4497,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-input-captures.md","sha256":"54de0be495b33b34ae572c7101e880c79ddd2cef409de14eb753eb4dde86a81b","type":"member"}
 {"bytes":4281,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-original-occurrence-handoff.md","sha256":"5b08e2d1bd4540ef369939c9753907c925efc4d6aea63c7782c9195254a2c3f9","type":"member"}
-{"bytes":5345,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-statement-frame-channel.md","sha256":"d5bc489aab17f14439b2aee725cb2347e34066bb77f0b806c2c47898a36333be","type":"member"}

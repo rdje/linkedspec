@@ -1816,7 +1816,7 @@ fields = ["a", "b", "a"]; out = uniq(uppercase_each(fields));
 return([out, fields]);
 ```
 
-This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds in both value/receiver and standalone writeback forms: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. String transforms produce their contracted string values. Deferred codeblocks retain their separately qualified helper vocabulary.
+This returns `[["A","B"],["a","b","a"]]`. Filtering and deduplication preserve selected value kinds in both value/receiver and standalone writeback forms: `uniq([2,"2"])` yields `[2]`, whose entry remains a numeric array selector. Element kinds follow the existing producer policy. In the observed Perl compatibility control, trimming an unchanged numeric entry preserves Number3; portable token-normalization examples here supply Strings. Deferred codeblocks retain their separately qualified helper vocabulary.
 
 Ordinary selection on Perl, Rust, Dart, Julia and Lua can bridge back to scalar methods: `parts=[" A "," B "]; return(parts.last().trim().lowercase())` returns `"b"` and preserves `parts`. Similarly, `return([2,3].last().mul(4).sub(1))` returns `11`. Function parameters and computed sources use the same boundary, evaluated once; `[].first().trim()` returns `undef`. Selected containers continue too: `[[3,1],[2]].first().copy().sorted().last().add(4)` returns `7`; `[{"b":2,"a":1}].first().copy().sorted_keys().last().uppercase()` returns `"B"`. Copy and pure transforms preserve their source containers. Lua checks use available PUC5.5.1/LuaJIT; the declared PUC5.4 proof and complete fluent-family admission remain tracked separately. Bounded Rust source/null-operand repairs are implemented; complete scalar-helper domain/context admission remains separate. Use statement style when each step deserves a readable line. Use nested style when the operation is compact and local.
 
@@ -1883,6 +1883,19 @@ copy/mutation and standalone-writeback policies stay separate from result guards
 This selected gap does not withdraw the healthy producer and selected-value
 examples above or establish a peer defect. Full source/context/portable admission
 remains open.
+
+The independent Perl acquisition also finds a source-isolation prerequisite:
+`trim_each(3)` and its receiver counterpart can read an unrelated host Array
+instead of treating the Number as a computed non-Array source. The same defect
+is observed in the seven pipelines above; a computed `{3}` source remains empty
+under the identical host data. Source79.0 owns that repair before result guards.
+Portable programs supply Arrays. This does not change their current value or
+standalone-writeback behavior.
+
+A receiver `split_each` already propagates a needed delimiter error, but composing
+it with an incompatible Hash consumer can leave DSL unlowered and fail compilation
+instead. Result79.1.1 owns that forwarding case too. Earlier guards, real empty
+Arrays, excluded extra arities and existing regex error policies stay separate.
 
 ## Boolean composition
 

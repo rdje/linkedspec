@@ -1,0 +1,4590 @@
+{
+  "actual_programs": 176,
+  "original_common": [
+    {
+      "id": "split_each_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "split_each_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 14045) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "split_each_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 14595) line 55, at EOF\nsyntax error at (eval 14595) line 55, near \";\"k\"\"\nsyntax error at (eval 14595) line 55, near \";1\"\nsyntax error at (eval 14595) line 55, near \") }\"\nsyntax error at (eval 14595) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "split_each"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 14595) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "trim_each_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "trim_each_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 15677) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "trim_each_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 16227) line 55, at EOF\nsyntax error at (eval 16227) line 55, near \";\"k\"\"\nsyntax error at (eval 16227) line 55, near \";1\"\nsyntax error at (eval 16227) line 55, near \") }\"\nsyntax error at (eval 16227) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "trim_each"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 16227) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "filter_nonempty_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "filter_nonempty_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 17318) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "filter_nonempty_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 17871) line 55, at EOF\nsyntax error at (eval 17871) line 55, near \";\"k\"\"\nsyntax error at (eval 17871) line 55, near \";1\"\nsyntax error at (eval 17871) line 55, near \") }\"\nsyntax error at (eval 17871) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "filter_nonempty"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 17871) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 17871) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 17871) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 17871) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "lowercase_each_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "lowercase_each_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 18953) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "lowercase_each_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 19503) line 55, at EOF\nsyntax error at (eval 19503) line 55, near \";\"k\"\"\nsyntax error at (eval 19503) line 55, near \";1\"\nsyntax error at (eval 19503) line 55, near \") }\"\nsyntax error at (eval 19503) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "lowercase_each"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 19503) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 19503) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 19503) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 19503) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "uppercase_each_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          [
+            "HEAD",
+            "TAIL"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          [
+            "HEAD",
+            "TAIL"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "uppercase_each_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 20585) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "uppercase_each_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 21135) line 55, at EOF\nsyntax error at (eval 21135) line 55, near \";\"k\"\"\nsyntax error at (eval 21135) line 55, near \";1\"\nsyntax error at (eval 21135) line 55, near \") }\"\nsyntax error at (eval 21135) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "uppercase_each"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 21135) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 21135) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 21135) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 21135) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "uniq_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "uniq_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 22226) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "uniq_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 22779) line 55, at EOF\nsyntax error at (eval 22779) line 55, near \";\"k\"\"\nsyntax error at (eval 22779) line 55, near \";1\"\nsyntax error at (eval 22779) line 55, near \") }\"\nsyntax error at (eval 22779) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "uniq"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 22779) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 22779) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 22779) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 22779) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "filter_match_compatible",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head"
+          ],
+          [
+            "head"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head"
+          ],
+          [
+            "head"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "filter_match_free_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 23861) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "filter_match_receiver_hash_guard",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_compile",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_compile",
+          "summary": "Rule handler compilation failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "loaded": 0,
+        "load_error": "Can't modify constant item in scalar assignment at (eval 24411) line 55, at EOF\nsyntax error at (eval 24411) line 55, near \";\"k\"\"\nsyntax error at (eval 24411) line 55, near \";1\"\nsyntax error at (eval 24411) line 55, near \") }\"\nsyntax error at (eval 24411) line 56, near \";\n }\"\n",
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "filter_match"
+          ]
+        },
+        "build_error": null,
+        "warnings": [
+          "Unquoted string \"order\" may clash with future reserved word at (eval 24411) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 24411) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 24411) line 55.\n",
+          "Unquoted string \"order\" may clash with future reserved word at (eval 24411) line 55.\n"
+        ]
+      }
+    },
+    {
+      "id": "trim_later_with",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 24970) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "uniq_copy_later_with",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 25532) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "lower_logical_later_with",
+      "passing": false,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "Not a HASH reference at LinkedSpec::generated_handler:Value:<none> line 28.\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "Not a HASH reference at (eval 26100) line 55.\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "selected_string_bridge",
+      "passing": true,
+      "observation": {
+        "native": [
+          "TAIL",
+          "head"
+        ],
+        "native_error": null,
+        "fresh": [
+          "TAIL",
+          "head"
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "selected_numeric_kind",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            2,
+            "x"
+          ],
+          [
+            2,
+            "2",
+            "x"
+          ],
+          [
+            "zero",
+            "one",
+            "selected"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            2,
+            "x"
+          ],
+          [
+            2,
+            "2",
+            "x"
+          ],
+          [
+            "zero",
+            "one",
+            "selected"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "source_once",
+      "passing": true,
+      "observation": {
+        "native": [
+          "TAIL",
+          "S"
+        ],
+        "native_error": null,
+        "fresh": [
+          "TAIL",
+          "S"
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "source_snapshot",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "changed"
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "changed"
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "valid_empty_with",
+      "passing": true,
+      "observation": {
+        "native": [
+          0,
+          "W"
+        ],
+        "native_error": null,
+        "fresh": [
+          0,
+          "W"
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "needed_source_error_terminal",
+      "passing": true,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "needed_source_error_composed",
+      "passing": true,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "needed_delimiter_error_terminal",
+      "passing": true,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "needed_delimiter_error_composed",
+      "passing": true,
+      "observation": {
+        "native": null,
+        "native_error": {
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+          "handler_variant": "<none>",
+          "owner_stage": "runtime_handler:rule_handler_eval",
+          "rule_label": "Value",
+          "spec_name": "",
+          "spec_path": "",
+          "stage": "rule_handler_eval",
+          "summary": "Rule handler execution failed",
+          "top_rule": "Value",
+          "type": "runtime_handler"
+        },
+        "fresh": null,
+        "fresh_error": {
+          "code": "generated_execution_failed",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "array-pipeline-selection.spec",
+          "stage": "execute_generated",
+          "summary": "Generated parser execution failed",
+          "type": "generated_source_error"
+        },
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "constructor_array_guard",
+      "passing": true,
+      "observation": {
+        "native": [
+          null,
+          ""
+        ],
+        "native_error": null,
+        "fresh": [
+          null,
+          ""
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "value_source_preserved",
+      "passing": true,
+      "observation": {
+        "native": [
+          [
+            "a",
+            "a"
+          ],
+          [
+            " a ",
+            " a "
+          ]
+        ],
+        "native_error": null,
+        "fresh": [
+          [
+            "a",
+            "a"
+          ],
+          [
+            " a ",
+            " a "
+          ]
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    },
+    {
+      "id": "standalone_writeback",
+      "passing": true,
+      "observation": {
+        "native": [
+          "a",
+          "a"
+        ],
+        "native_error": null,
+        "fresh": [
+          "a",
+          "a"
+        ],
+        "fresh_error": null,
+        "loaded": 1,
+        "load_error": null,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 1,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 0,
+          "unresolved_helpers": []
+        },
+        "build_error": null,
+        "warnings": []
+      }
+    }
+  ],
+  "initial": {
+    "initial_number_split_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_split_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_split_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_split_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_split_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_split_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_split_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_split_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_split_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_trim_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_trim_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_trim_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_trim_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_trim_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_trim_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_filter_nonempty_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_filter_nonempty_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_filter_nonempty_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_filter_nonempty_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_filter_nonempty_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_filter_nonempty_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_lowercase_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_lowercase_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_lowercase_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_lowercase_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_lowercase_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_lowercase_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_uppercase_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_uppercase_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_uppercase_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_uppercase_each_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_uppercase_each_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_uppercase_each_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_uniq_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_uniq_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_uniq_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_uniq_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_uniq_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_uniq_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_filter_match_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_filter_match_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_null_filter_match_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_filter_match_free": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_filter_match_receiver": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_hash_filter_match_with": {
+      "native": [
+        0,
+        "W"
+      ],
+      "native_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    }
+  },
+  "extra_arity": {
+    "extra_split_each_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "split_each"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_split_each_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_trim_each_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "trim_each"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_trim_each_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_filter_nonempty_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_nonempty"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_filter_nonempty_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_lowercase_each_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "lowercase_each"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_lowercase_each_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_uppercase_each_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "uppercase_each"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_uppercase_each_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_uniq_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "uniq"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_uniq_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_filter_match_free": {
+      "native": [
+        "ran",
+        "KW"
+      ],
+      "native_error": null,
+      "fresh": [
+        "ran",
+        "KW"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_match"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "extra_filter_match_receiver": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "build_error": null,
+      "warnings": []
+    }
+  },
+  "prior": {
+    "prior_count": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "prior_key_count": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "prior_length": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "prior_view": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "prior_copy": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "prior_array": {
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    }
+  },
+  "needed_and_patterns": {
+    "needed_source_error_terminal": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_source_error_composed": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_delimiter_error_terminal": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_delimiter_error_composed": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_split_each_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_trim_each_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_filter_nonempty_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_lowercase_each_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_uppercase_each_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_uniq_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_filter_match_source": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "needed_split_delimiter_free": {
+      "native": null,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "fresh": null,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "invalid_pattern_free_terminal": {
+      "loaded": 0,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": null,
+        "language_agnostic_action_ir_ready": null,
+        "raw_perl_dependency_count": null,
+        "unresolved_helper_count": null,
+        "unresolved_helpers": null
+      },
+      "build_error": null,
+      "build_context_error": {
+        "detail": "DSL Error at line 1:\n  Unclosed rule block before end of file\n  Line: Value:: I {order=\"\";return(filter_match([\"head\"],/(/))}\n  Suggestion: Close the still-open '{', '(', or '[' construct before the end of the spec\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value",
+        "owner_stage": "compiler_pipeline:validate_dsl_syntax",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "validate_dsl_syntax",
+        "summary": "Unclosed rule block before end of file",
+        "top_rule": "",
+        "type": "compiler_pipeline"
+      },
+      "warnings": []
+    },
+    "invalid_pattern_free_composed": {
+      "loaded": 0,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": null,
+        "language_agnostic_action_ir_ready": null,
+        "raw_perl_dependency_count": null,
+        "unresolved_helper_count": null,
+        "unresolved_helpers": null
+      },
+      "build_error": null,
+      "build_context_error": {
+        "detail": "DSL Error at line 1:\n  Unclosed rule block before end of file\n  Line: Value:: I {order=\"\";return(filter_match([\"head\"],/(/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n  Suggestion: Close the still-open '{', '(', or '[' construct before the end of the spec\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value",
+        "owner_stage": "compiler_pipeline:validate_dsl_syntax",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "validate_dsl_syntax",
+        "summary": "Unclosed rule block before end of file",
+        "top_rule": "",
+        "type": "compiler_pipeline"
+      },
+      "warnings": []
+    },
+    "needed_split_delimiter_receiver": {
+      "native": null,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";items\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"})\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"k\"}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "loaded": 0,
+      "load_error": "Can't modify constant item in scalar assignment at (eval 82061) line 55, at EOF\nsyntax error at (eval 82061) line 55, near \";items\"\nsyntax error at (eval 82061) line 55, near \"})\"\nsyntax error at (eval 82061) line 55, near \"\"k\"}\"\n",
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "split_each"
+        ]
+      },
+      "build_error": null,
+      "warnings": [
+        "Unquoted string \"items\" may clash with future reserved word at (eval 82061) line 55.\n",
+        "Unquoted string \"items\" may clash with future reserved word at (eval 82061) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 82061) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 82061) line 55.\n"
+      ]
+    },
+    "invalid_pattern_receiver_terminal": {
+      "loaded": 0,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": null,
+        "language_agnostic_action_ir_ready": null,
+        "raw_perl_dependency_count": null,
+        "unresolved_helper_count": null,
+        "unresolved_helpers": null
+      },
+      "build_error": null,
+      "build_context_error": {
+        "detail": "DSL Error at line 1:\n  Unclosed rule block before end of file\n  Line: Value:: I {order=\"\";return([\"head\"].filter_match(/(/))}\n  Suggestion: Close the still-open '{', '(', or '[' construct before the end of the spec\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value",
+        "owner_stage": "compiler_pipeline:validate_dsl_syntax",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "validate_dsl_syntax",
+        "summary": "Unclosed rule block before end of file",
+        "top_rule": "",
+        "type": "compiler_pipeline"
+      },
+      "warnings": []
+    },
+    "invalid_pattern_receiver_composed": {
+      "loaded": 0,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": null,
+        "language_agnostic_action_ir_ready": null,
+        "raw_perl_dependency_count": null,
+        "unresolved_helper_count": null,
+        "unresolved_helpers": null
+      },
+      "build_error": null,
+      "build_context_error": {
+        "detail": "DSL Error at line 1:\n  Unclosed rule block before end of file\n  Line: Value:: I {order=\"\";return([\"head\"].filter_match(/(/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n  Suggestion: Close the still-open '{', '(', or '[' construct before the end of the spec\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value",
+        "owner_stage": "compiler_pipeline:validate_dsl_syntax",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "validate_dsl_syntax",
+        "summary": "Unclosed rule block before end of file",
+        "top_rule": "",
+        "type": "compiler_pipeline"
+      },
+      "warnings": []
+    }
+  },
+  "host": {
+    "initial_number_split_each_free_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_split_each_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_split_each_receiver_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_split_each_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_free_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_receiver_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_trim_each_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_free_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_receiver_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_nonempty_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_free_host_main": {
+      "native": [
+        "main",
+        "tail",
+        "end"
+      ],
+      "native_error": null,
+      "fresh": [
+        "main",
+        "tail",
+        "end"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_receiver_host_main": {
+      "native": [
+        "main",
+        "tail",
+        "end"
+      ],
+      "native_error": null,
+      "fresh": [
+        "main",
+        "tail",
+        "end"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_lowercase_each_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_free_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_receiver_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uppercase_each_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_free_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_receiver_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_uniq_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_free_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_free_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_receiver_host_main": {
+      "native": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "native_error": null,
+      "fresh": [
+        "MAIN",
+        "TAIL",
+        "END"
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "initial_number_filter_match_receiver_host_outer": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_split_each_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_split_each_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_trim_each_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_trim_each_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_filter_nonempty_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_filter_nonempty_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_lowercase_each_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_lowercase_each_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_uppercase_each_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_uppercase_each_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_uniq_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_uniq_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_filter_match_free_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "computed_number_filter_match_receiver_host_main": {
+      "native": [],
+      "native_error": null,
+      "fresh": [],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    }
+  },
+  "kinds": {
+    "nested_scalar_kinds": {
+      "native": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ],
+      "native_error": null,
+      "fresh": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    },
+    "numeric_array_source": {
+      "native": [
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      "native_error": null,
+      "fresh": [
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ],
+      "fresh_error": null,
+      "loaded": 1,
+      "load_error": null,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "build_error": null,
+      "warnings": []
+    }
+  },
+  "actual_stdout_sha256": "0cf307c0097dc77cf5833151f50c388963488fd185d7d206fb7677b6f0a2a900"
+}

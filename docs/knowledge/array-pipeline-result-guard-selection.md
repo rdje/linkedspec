@@ -44,3 +44,13 @@ handlers internally, captured before execution. Every peer must independently
 acquire own source/arity/errors/earlier-owner policies before production. Full
 native/cache/transitive/toolchain custody4.2/SESSION5, general isolation/source/
 context/registration/declared5.4/full23.4 admission remain separate.
+
+Independent Perl79.1.0 later acquires184 programs/148 full profiles/180 actual
+artifact pairs and reproduces the shared17 failures. Fourteen literal Number3
+free/receiver cases additionally read localized main::3; computed {3} under the
+same seed stays empty. P1 source79.0 precedes result79.1.1. A composed receiver
+needed-delimiter error also fails compilation while its terminal producer works;
+that eighteenth composition target stays separate from source isolation. First
+readonly0/ten controls passes. See [[perl-array-pipeline-source-preflight]]. This
+original selection's error whitelist is an explicit projection; omitted older
+public fields remain unknown rather than receiving retrospective credit.

@@ -2748,16 +2748,17 @@
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79`
   Status: `pending` / independent ordinary pure-pipeline result guards
-  Children: `.79.1`, `.79.2`, `.79.3`, `.79.4`, `.79.5`.
+  Children: `.79.0`, `.79.1`, `.79.2`, `.79.3`, `.79.4`, `.79.5`.
   Goal: Preserve seven ordinary pure-pipeline Array results through actual-kind consumers.
   Dependencies: Completed selection23.1.39; unchanged tests/fixtures/array_pipeline_result_guard_cases.json.
   Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-result-guard-composition.md in full; its signatures, preservation, acquisition, exclusions and admission limits are normative. Original Perl36 has17 defects/19 healthy; no peer verdict. Own any observed source prerequisite before result repair.
   Backend proof contract: Independently acquire unchanged36 plus own initial Number/null/Hash, arities/source-delimiter-pattern errors/earlier-owner fences before production. Retain actual first source/grammar/instrument/artifact/full channels, every healthy observation and exact old/current loaded-owner SDK inverse/readonly recovery/corruptions when repaired. Keep producers, pure-versus-standalone semantics and all canonical exclusions unchanged. Healthy assessments need no speculative edit. Installed Lua: actual native products before load, no new chunk locals/unsafe full runner/declared5.4 inference. Full custody4.2/SESSION5/context/isolation/registration/23.4 separate.
   Focused execution: Smallest new/direct-dependent producer-pipeline-Array normals and changed syntax/format/exact runner include; book/Knowledge/history/task/memory/diff/normal hooks. No broad suite/matrix.
-  Frontier: Capacity4.21 is focused-checked; after its clean landing, independent Perl/Rust/Dart/Julia/installed Lua; each normal commit/brief0/clean handoff precedes the next.
+  Frontier: Preflight79.1.0 is focused-checked; after clean landing, P1 source79.0 then result79.1.1, Rust/Dart/Julia/installed Lua; each normal commit/brief0/clean handoff precedes the next.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1`
-  Status: `pending`
+  Status: `active` / source acquisition precedes production
+  Children: `.79.1.0`, `.79.1.1`; an observed source prerequisite is split before result repair.
   Goal: Independently assess/repair Perl ordinary pure-pipeline result guards.
   Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79 contract in full on native/full emitted-fresh plus descriptor/substitution/handler diagnostics; own policies acquired before production.
@@ -2800,3 +2801,39 @@
   Planned verification: Parent79 focused execution.
   Planned canonical trigger: Parent79 full23.4/final push after coverage.
   Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1.0`
+  Status: `completed` / independent acquisition; source79.0 prerequisite owned
+  Goal: Acquire Perl unchanged36 and independent pure-pipeline producer policies before result edits.
+  Dependencies: Clean capacity4.21; frozen79/36; parent79.1/source-result contract.
+  Acceptance: Apply parent79 acquisition/preservation boundaries. Independently retain initial Number/null/Hash, canonical/excluded arities, source/delimiter/pattern errors and earlier owners, plus localized numeric-host controls where actual lowering needs distinction. Do not bless ambient data reads or import peer policy; split observed source prerequisites before production. Preserve actual first inputs/artifacts/full channels and every healthy observation. No production change in this preflight leaf.
+  Activation: Cleane6f5a7fae1e6ad23ef4a4a1a4cefb991c0a58f75 after capacity4.21/all10/post-pointer/brief0/clean Git. Read parent79/frozen36/selection39 actual17 failures19 healthy and29-ready/seven-unresolved distinction; ordinary pipeline book/canonical pure-value-versus-standalone contract, action-regex/scalar-kind and numeric-host preflight cards, public observer/normal/project-data interfaces. Actual source/grammar/instruments/fixture closure precede public SDK use; emitted modules precede fresh loading and Get-built handlers precede execution. Initial producer policies/errors remain separate from result guards. Acquire current source/arity before deciding the repair; no source verdict from names or peer outcomes.
+  Verification tier: `focused`
+  Focused checks: Finite public native/fresh/descriptor/substitution/handler-source acquisition and localized source controls, independent readonly input/artifact/observation recovery/corruptions, source syntax if a normal is added, book/Knowledge/history/task/index/scope/memory/diff and normal hooks. No broad suite.
+  Canonical trigger: Full23.4/final push after feature coverage; new infrastructure/public authority separately owned.
+  Claim verification: none: Finite authored semantic/source/error preservation and causal controls; no operation-population/performance measurement.
+
+  Preflight discovery79.1.0: Actual176 first-source questions retain original36/17 failures19 healthy,63 initial source profiles,14 excluded arities,six earlier owners,nine additional binding-error requests,four syntactically rejected pattern profiles,two kind controls and42 extra host distinctions. Fourteen literal Number3 free/receiver cases read MAIN/TAIL/END only under localized main::3 on native/fresh; lowercasing transforms that unrelated data. Initial empty-host, outer-package and same-kind computed {3} controls remain empty; all host snapshots unchanged. Public substitutions show the shared pipeline source shortcut emitting [@3], whereas computed Number uses the existing actual-Array fallback. P1 source79.0 owns repair before result79.1.1; no global extractor or producer-policy normalization. One composed receiver dynamic-delimiter error request retains DSL and fails compile rather than forwarding binding_kind_mismatch; supplement terminal/compatible controls distinguish producer support from composition before classifying it. Four /(/ profiles stop at DSL validation and establish no needed-regex runtime policy; balanced invalid-range controls are acquired separately. Current observer retains every public error Hash field; earlier selection39's whitelist is only a projection, and omitted old field values are not retrospectively known. Original packet/source/observations stay unchanged.
+  Outcome: Original176 plus separate eight-program supplement completes184 public native/full emitted-fresh observations with actual first source/grammar/instrument/template/fixture inputs. Unchanged36 retains17 composition failures19 preserved; source79.0 owns14 main-only numeric host reads, and result79.1.1 owns one extra composed receiver needed-error target.148 acquired profiles explicitly mark defects/exclusions rather than blessing them.63 initial empty-host forms retain []/count0W;14 extras retain KW/unresolved free or null/no effects/unresolved with; six earlier owners skip; Bool/null/text and numeric Array kinds stay exact. Terminal receiver delimiter errors/computed-variable/count forms already work. Four /(/ inputs stop at DSL syntax validation; four balanced invalid-range controls already reach regex compile failures, with no invented fresh execution after failed load. Actual180 module/parser-source pairs exist (172 primary/eight supplement); four syntax rejections have none. First readonly0/empty stderr/ten effective corruptions recovers all bytes/modes/Git/metadata/full public error Hashes/field absence/host distinctions/commands/channels. Full detail: docs/checkpoints/array-pipeline-result-perl-2026-11-10/REVIEW.md.
+  Qualification: Earlier selection39 error_value whitelists selected fields. Preserve its exact source/archive/observations and append only a scope clarification; unknown omitted original values gain no retrospective first-use credit. This preflight supplies a separately captured full-record epoch with provenance fields and a missing-provenance corruption. The source-only preservation/native-custody distinction remains4.2/SESSION5. No production/grammar/arity/format/peer changes; the first seal's inherited migration console label is only identity-sealing boilerplate, explicitly qualified in REVIEW.
+  Preparation: Scope updater rejected the new handoff summary at5023 lines; compacted only this leaf's appended section to a short linked summary, preserving the exact accepted HEAD prefix and unchanged bounds. Original appended text survives in book-summary-before-containment.md.gz; no accepted narrative was removed.
+  Documentation/next: Public pipeline section/handoff and canonical source card distinguish14 source defects from18 composition/error-forwarding targets, healthy/excluded policies and unsupported syntax. Preserve existing coercion: the observed Perl numeric Array trim result remains Number3; no blanket String conversion rule. Normal focused book/Knowledge/index/scope/history/memory/diff/hooks commit precedes P1 source79.0, then result79.1.1 and Rust79.2. Full source/context/isolation/native-cache-transitive/toolchain/registration/declared5.4/full23.4 remain separate.
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1`
+  Status: `pending`
+  Goal: Repair only demonstrated Perl canonical ordinary pure-pipeline result guards after acquisition/source prerequisites.
+  Dependencies: Preflight79.1.0 and P1 source79.0; frozen79/unchanged36 and own acquired policies.
+  Acceptance: Parent79 contract in full; preserve every source/error/arity/earlier-owner/pure-versus-standalone fence. Retain exact old/current loaded-owner inverse, focused normals/readonly corruption proof, public book and normal commit before Rust79.2.
+  Planned verification: Parent79 focused execution plus exact unchanged-target RED/GREEN and direct-dependent normals.
+  Planned canonical trigger: Parent79 full23.4/final push after coverage.
+  Planned claim verification: none: Finite authored repair/preservation controls, no population/performance measurement.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.0`
+  Status: `pending`
+  Priority: P1 after clean preflight79.1.0, before result79.1.1.
+  Goal: Isolate literal Number pipeline sources from unrelated ambient numeric Array slots.
+  Reproduction/impact: trim_each(3) and 3.trim_each() return MAIN/TAIL/END when unrelated localized main::3 is populated; computed {3} remains empty. Fourteen free/receiver observations across seven helpers reproduce native/fresh reads; outer-package seeds do not. Source substitutions emit [@3] at the shared pipeline source shortcut before computed actual-kind fallback. This silently returns unrelated host data, not a mutation or accepted producer policy.
+  Acceptance: Repair only this demonstrated literal-Number source shortcut in MethodLowering.pm. Preserve genuine/typed/computed sources, existing fallback, all source/arity/error/kind/earlier-owner/pure-versus-standalone observations and original36 composition failures/artifacts. Do not change global extractors, Unicode/regex/coercion/copy/mutation or result guards. Retain direct Number-host RED/GREEN, exact old/current loaded-owner inverse, readonly recovery/corruptions and book/Knowledge/live/normal commit before composition.
+  Planned verification: Focused localized source normal/own policies/original36 result preservation and direct pipeline/source normals, syntax/readonly/inverse/book/history/task/index/scope/memory/diff/normal hooks; no broad suite.
+  Planned canonical trigger: Full23.4/final push after coverage; infrastructure/public authority separately owned.
+  Planned claim verification: none: Finite authored source-isolation and preservation controls, no complete domain/native-custody/population/performance measurement.

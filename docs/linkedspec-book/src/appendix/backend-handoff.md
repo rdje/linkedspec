@@ -4985,3 +4985,14 @@ No production or peer repair is claimed. Full native/cache/transitive/toolchain
 custody4.2/SESSION5, isolation, complete source/context/registration/declared5.4 and
 full23.4 remain separate. Evidence:
 `docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md`.
+
+### Perl pure-pipeline source acquisition
+
+Perl79.1.0 preserves the original36 targets and independently acquires source policies.
+Fourteen literal Number forms read unrelated main::3 data; P1 source79.0 precedes result79.1.1.
+Result repair also owns the extra composed receiver delimiter-error forwarding failure.
+The [pipeline reference](../dsl/value-container-flow-helper-reference.md) explains these boundaries.
+The184 programs retain180 actual source pairs; four syntax rejections have none.
+First readonly recovery passes ten corruptions. Full public error fields are captured;
+older selection39 omitted fields remain unknown. Production and wider admission remain unchanged.
+Evidence: `docs/checkpoints/array-pipeline-result-perl-2026-11-10/REVIEW.md`.

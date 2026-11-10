@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/array-pipeline-result-selection-2026-11-10/observer.pl": {
+    "sha256": "dad511c23a72229e7642f9f44b6022a920cae5653953676a10fec115a2087d32",
+    "bytes": 3374,
+    "retained": "docs/checkpoints/array-pipeline-result-perl-2026-11-10/template-inputs/observer.pl.gz"
+  },
+  "docs/checkpoints/array-pipeline-result-selection-2026-11-10/capture.py": {
+    "sha256": "5584f5c9800aa97f7c22564b65e9e03b63e5ddbbc9d434abfdac8e96ac157335",
+    "bytes": 3283,
+    "retained": "docs/checkpoints/array-pipeline-result-perl-2026-11-10/template-inputs/capture.py.gz"
+  }
+}

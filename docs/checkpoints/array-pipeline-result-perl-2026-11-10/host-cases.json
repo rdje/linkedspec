@@ -1,0 +1,422 @@
+[
+  {
+    "id": "initial_number_split_each_free_host_main",
+    "body": "return(split_each(3,\":\"))",
+    "source": "Value:: I {return(split_each(3,\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_split_each_free_host_outer",
+    "body": "return(split_each(3,\":\"))",
+    "source": "Value:: I {return(split_each(3,\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_split_each_receiver_host_main",
+    "body": "return(3.split_each(\":\"))",
+    "source": "Value:: I {return(3.split_each(\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_split_each_receiver_host_outer",
+    "body": "return(3.split_each(\":\"))",
+    "source": "Value:: I {return(3.split_each(\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_trim_each_free_host_main",
+    "body": "return(trim_each(3))",
+    "source": "Value:: I {return(trim_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_trim_each_free_host_outer",
+    "body": "return(trim_each(3))",
+    "source": "Value:: I {return(trim_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_trim_each_receiver_host_main",
+    "body": "return(3.trim_each())",
+    "source": "Value:: I {return(3.trim_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_trim_each_receiver_host_outer",
+    "body": "return(3.trim_each())",
+    "source": "Value:: I {return(3.trim_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_nonempty_free_host_main",
+    "body": "return(filter_nonempty(3))",
+    "source": "Value:: I {return(filter_nonempty(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_nonempty_free_host_outer",
+    "body": "return(filter_nonempty(3))",
+    "source": "Value:: I {return(filter_nonempty(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_nonempty_receiver_host_main",
+    "body": "return(3.filter_nonempty())",
+    "source": "Value:: I {return(3.filter_nonempty())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_nonempty_receiver_host_outer",
+    "body": "return(3.filter_nonempty())",
+    "source": "Value:: I {return(3.filter_nonempty())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_lowercase_each_free_host_main",
+    "body": "return(lowercase_each(3))",
+    "source": "Value:: I {return(lowercase_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_lowercase_each_free_host_outer",
+    "body": "return(lowercase_each(3))",
+    "source": "Value:: I {return(lowercase_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_lowercase_each_receiver_host_main",
+    "body": "return(3.lowercase_each())",
+    "source": "Value:: I {return(3.lowercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_lowercase_each_receiver_host_outer",
+    "body": "return(3.lowercase_each())",
+    "source": "Value:: I {return(3.lowercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uppercase_each_free_host_main",
+    "body": "return(uppercase_each(3))",
+    "source": "Value:: I {return(uppercase_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uppercase_each_free_host_outer",
+    "body": "return(uppercase_each(3))",
+    "source": "Value:: I {return(uppercase_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uppercase_each_receiver_host_main",
+    "body": "return(3.uppercase_each())",
+    "source": "Value:: I {return(3.uppercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uppercase_each_receiver_host_outer",
+    "body": "return(3.uppercase_each())",
+    "source": "Value:: I {return(3.uppercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uniq_free_host_main",
+    "body": "return(uniq(3))",
+    "source": "Value:: I {return(uniq(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uniq_free_host_outer",
+    "body": "return(uniq(3))",
+    "source": "Value:: I {return(uniq(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uniq_receiver_host_main",
+    "body": "return(3.uniq())",
+    "source": "Value:: I {return(3.uniq())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_uniq_receiver_host_outer",
+    "body": "return(3.uniq())",
+    "source": "Value:: I {return(3.uniq())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_match_free_host_main",
+    "body": "return(filter_match(3,/./))",
+    "source": "Value:: I {return(filter_match(3,/./))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_match_free_host_outer",
+    "body": "return(filter_match(3,/./))",
+    "source": "Value:: I {return(filter_match(3,/./))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_match_receiver_host_main",
+    "body": "return(3.filter_match(/./))",
+    "source": "Value:: I {return(3.filter_match(/./))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "main",
+    "host_literal": true
+  },
+  {
+    "id": "initial_number_filter_match_receiver_host_outer",
+    "body": "return(3.filter_match(/./))",
+    "source": "Value:: I {return(3.filter_match(/./))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "seed": "outer",
+    "host_literal": true
+  },
+  {
+    "id": "computed_number_split_each_free_host_main",
+    "body": "return(split_each({3},\":\"))",
+    "source": "Value:: I {return(split_each({3},\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_split_each_receiver_host_main",
+    "body": "return({3}.split_each(\":\"))",
+    "source": "Value:: I {return({3}.split_each(\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_trim_each_free_host_main",
+    "body": "return(trim_each({3}))",
+    "source": "Value:: I {return(trim_each({3}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_trim_each_receiver_host_main",
+    "body": "return({3}.trim_each())",
+    "source": "Value:: I {return({3}.trim_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_filter_nonempty_free_host_main",
+    "body": "return(filter_nonempty({3}))",
+    "source": "Value:: I {return(filter_nonempty({3}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_filter_nonempty_receiver_host_main",
+    "body": "return({3}.filter_nonempty())",
+    "source": "Value:: I {return({3}.filter_nonempty())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_lowercase_each_free_host_main",
+    "body": "return(lowercase_each({3}))",
+    "source": "Value:: I {return(lowercase_each({3}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_lowercase_each_receiver_host_main",
+    "body": "return({3}.lowercase_each())",
+    "source": "Value:: I {return({3}.lowercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_uppercase_each_free_host_main",
+    "body": "return(uppercase_each({3}))",
+    "source": "Value:: I {return(uppercase_each({3}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_uppercase_each_receiver_host_main",
+    "body": "return({3}.uppercase_each())",
+    "source": "Value:: I {return({3}.uppercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_uniq_free_host_main",
+    "body": "return(uniq({3}))",
+    "source": "Value:: I {return(uniq({3}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_uniq_receiver_host_main",
+    "body": "return({3}.uniq())",
+    "source": "Value:: I {return({3}.uniq())}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_filter_match_free_host_main",
+    "body": "return(filter_match({3},/./))",
+    "source": "Value:: I {return(filter_match({3},/./))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  },
+  {
+    "id": "computed_number_filter_match_receiver_host_main",
+    "body": "return({3}.filter_match(/./))",
+    "source": "Value:: I {return({3}.filter_match(/./))}\n",
+    "input": "x",
+    "rule": "Value",
+    "seed": "main",
+    "host_computed": true,
+    "expected": []
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-pipeline-result-perl-2026-11-10/observer.pl",
+    "docs/checkpoints/array-pipeline-result-perl-2026-11-10/cases.json",
+    "docs/checkpoints/array-pipeline-result-perl-2026-11-10/preflight"
+  ],
+  "cwd": "."
+}

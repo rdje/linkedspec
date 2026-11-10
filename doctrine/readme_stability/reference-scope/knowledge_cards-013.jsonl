@@ -1,4 +1,5 @@
-{"member_count":53,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":54,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":12337,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/three-objective-language-readiness.md","sha256":"17d0d1fcb145afaada0e1ca908cffd0fb828ce40951db0f69d7b8f67f78418ca","type":"member"}
 {"bytes":10368,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tool-project-data-ssd-storage.md","sha256":"8518f92aadefdb8ab0788021f242ea78d8fdbcc75ec6869f2dc4b7bd310cbf60","type":"member"}
 {"bytes":15320,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-is-ordinary-rule-entered-first.md","sha256":"cad47d04617a6b2f5ed747fa107369312b61ee4f644a33ba0a786c3010b84e43","type":"member"}
 {"bytes":6056,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-reads-own-match-with-match-family.md","sha256":"9a9e654f58396a79a69f9950ac0063bd4fd0b8207c20a1ff9246ae765a190d5c","type":"member"}

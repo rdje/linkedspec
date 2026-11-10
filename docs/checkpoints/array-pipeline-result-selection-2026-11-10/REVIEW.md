@@ -82,3 +82,12 @@ rejected result and was cancelled143 without PASS credit. The scope updater and
 memory gate then reject the mixed staged/unstaged state. Unstaging preserves all
 working files; fresh pre-stage scope and memory checks pass before restaging.
 These are retained preparation diagnostics, not runtime proof or completed gates.
+
+Error-field scope clarification after independent Perl79.1.0: this original
+observer whitelists named error fields. Its retained framing is that explicit
+projection, not every original public error-Hash field. Omitted original values
+remain unknown. The separately acquired unchanged-SDK preflight retains complete
+observed public Hash fields/provenance under
+`docs/checkpoints/array-pipeline-result-perl-2026-11-10/REVIEW.md`. Original producer,
+archives, channels, artifacts and field values stay unchanged; later records do
+not supply retrospective original first-use identity.

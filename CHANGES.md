@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — Freeze Perl pipeline source policies and isolation prerequisite (79.1.0)
+
+Actual184 programs/148 profiles/180 source-artifact pairs retain original17 composition failures19 preserved. Fourteen literal Number3 free/receiver forms read localized main::3 through [@3]; computed/empty/outer controls remain empty and host snapshots unchanged. P1 source79.0 precedes result79.1.1, including one newly distinguished receiver needed-error forwarding target. Preserve63 initial forms/14 excluded arities/six earlier owners/kinds/errors. Four invalid-pattern inputs stop at DSL validation; four balanced invalid ranges already reach regex compile errors. First readonly0/ten corruptions/full public error provenance passes. Qualify selection39 error whitelist as a projection, without rewriting old data or granting omitted values retroactive identity. Book/task/Knowledge/live pointers schedule source repair after normal preflight landing; no production, signature, grammar, format or peer change.
+
 ## 2026-11-10 — Renew task headroom with closed Dart narrative recovery (4.21)
 
 Existing ADR0139 data migration preserves68 IDs/statuses/contracts,58 closed pointers, ten unchanged short bodies and exact metadata/prefix/full54718-byte current tail. Original171451 bytes become106515, renewing64936 under unchanged limits. Actual inputs precede migration/output bytes precede reader use; public --all/all68 ID queries match original bytes/exit0/empty stderr. First independent readonly0/ten corruptions and actual modes/commands/channels pass. No tools/registries/runtime/SDK changes or new Dart parity/reading/native-custody claim. Book/facts/task/live pointers resume independent Perl79.1 after normal focused landing.

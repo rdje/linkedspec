@@ -1,0 +1,12 @@
+{
+  "programs": 184,
+  "original_common": 36,
+  "own_questions": 98,
+  "additional_host_cases": 42,
+  "supplement": 8,
+  "full_profiles": 148,
+  "source_defects": 14,
+  "extra_error_target": 1,
+  "producer_sha256": "e0fda29cfe43297bde152440bf129e3a8fe256fd714603f0dc9c60a2193b8995",
+  "limit": "Historical observations and explicit roles; source-defect/required-error-defect outputs are not accepted producer policies."
+}
