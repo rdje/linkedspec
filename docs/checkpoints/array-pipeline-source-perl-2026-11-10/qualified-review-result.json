@@ -1,0 +1,61 @@
+{
+  "scope": "Historical bounded source repair; full native/cache/transitive/toolchain and general admission remain separate.",
+  "source": "PASS",
+  "normal_groups": 166,
+  "original_failures": 14,
+  "preserved_groups": 152,
+  "preservation_programs": 184,
+  "unchanged_composition_targets": 18,
+  "direct_groups": 195,
+  "private_inverse": "14 RED / 166 restored PASS",
+  "controls": [
+    {
+      "name": "hidden-original-read",
+      "reason": "source-original"
+    },
+    {
+      "name": "restored-host-read",
+      "reason": "source-repaired"
+    },
+    {
+      "name": "host-mutation",
+      "reason": "host-state"
+    },
+    {
+      "name": "omitted-error-provenance",
+      "reason": "healthy-profile"
+    },
+    {
+      "name": "Bool-became-Number",
+      "reason": "healthy-profile"
+    },
+    {
+      "name": "masked-composition-error",
+      "reason": "composition-profile"
+    },
+    {
+      "name": "wrong-loaded-owner",
+      "reason": "private-owner"
+    },
+    {
+      "name": "broader-source-change",
+      "reason": "source-scope"
+    },
+    {
+      "name": "changed-actual-artifact",
+      "reason": "artifact-identity"
+    },
+    {
+      "name": "missing-direct-fixture",
+      "reason": "direct-input"
+    },
+    {
+      "name": "captured-mode-drift",
+      "reason": "source-mode"
+    },
+    {
+      "name": "Git-executable-drift",
+      "reason": "activation-source"
+    }
+  ]
+}

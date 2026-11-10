@@ -1,6 +1,6 @@
 ---
 id: perl-array-pipeline-source-preflight
-title: Perl numeric pipeline sources read ambient Array slots before result repair
+title: Perl pipeline Number source fence preserves acquired policies before result repair
 answers:
   - "why does Perl trim_each 3 read an unrelated host Array"
   - "which task owns split_each trim_each filter_nonempty lowercase_each uppercase_each uniq filter_match Number source isolation"
@@ -8,22 +8,30 @@ answers:
   - "does a receiver split_each delimiter error work before an incompatible consumer"
   - "which pipeline pattern controls reach regex compilation rather than DSL validation"
   - "did the original Perl pipeline selection retain every public error Hash field"
+  - "why does the pipeline value contract need a TAP plan when loaded by a wrapper"
+  - "why are captured Unix permissions different from Git modes in the pipeline proof"
 date: 2026-11-10
-status: preflight79.1.0 acquired; P1 source79.0 before result79.1.1; no production repair yet
+status: source79.0 bounded repair focused-checked; result79.1.1 and broader admission separate
 tags: [perl, array, pipeline, source, isolation, arity, errors, guards]
-evidence: "docs/checkpoints/array-pipeline-result-perl-2026-11-10/REVIEW.md retains184 programs/148 acquired profiles/180 actual artifact pairs,original17 composition failures19 preserved,14 main-only numeric host reads and one additional receiver-error target. First readonly0/empty stderr/ten corruptions passes; no production or peer verdict."
+evidence: "Historical preflight retains184 programs/148 profiles/180 pairs and14 host reads. Source79.0 at docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md now retains166PASS/private14RED-qualified166PASS/direct195, original36 records/artifacts and18 composition targets unchanged. Four preparation failures stay explicit; qualified readonly0/empty stderr/twelve controls and scoped current inputs pass."
 reverify:
+  - "bash tools/run_python_project_data.sh docs/checkpoints/array-pipeline-source-perl-2026-11-10/review_qualified.py"
   - "bash tools/run_python_project_data.sh docs/checkpoints/array-pipeline-result-perl-2026-11-10/review_preflight.py"
 ---
 
-Actual public Get/descriptor/substitution/parser-source/native/full emitted-fresh
-probes show literal Number3 becoming [@3] at MethodLowering.pm's shared
+Historical public Get/descriptor/substitution/parser-source/native/full emitted-fresh
+probes showed literal Number3 becoming [@3] at MethodLowering.pm's shared
 lower_array_value_source_expr shortcut. Fourteen free/receiver cases across the
 seven pipelines read MAIN/TAIL/END only from localized main::3; lowercasing
 transforms those unrelated strings. Empty-host/outer-package and computed {3}
 under the same main seed stay empty. Every host snapshot remains unchanged.
-P1 source79.0 owns this isolation repair before canonical result guards; do not
-bless ambient reads, change global extractors or normalize initial producer policy.
+Source79.0 now fences the shared shortcut with the existing numeric predicate.
+Literal Numbers take the original actual-Array fallback; genuine bindings retain
+their shortcut. New166 groups move14RED to166PASS; private14RED/qualified166PASS,
+direct195 and first qualified readonly0/empty stderr/twelve corruptions pass.
+All original36 result records/artifact pairs and the extra receiver-error target
+remain exact. Evidence: docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md.
+Do not change global extractors or normalize initial producer policy.
 
 Before production, unchanged36 retains17 composition failures/19 controls. Own98
 questions acquire63 initial forms,14 excluded arities,six earlier owners,nine
@@ -52,3 +60,11 @@ Full native/cache/transitive/toolchain custody4.2/SESSION5, source/context/isola
 registration/declared5.4/full23.4 remain separate. No current-runtime verdict follows
 from historical recovery. Related: [[array-pipeline-result-guard-selection]],
 [[perl-array-transform-source-preflight]], [[action-regex-operands-and-runtime-kinds]].
+
+Source proof preserves four original preparation failures: capture-input drift,
+a missing caller-suppressed TAP plan, an incorrect Git/full-permission equality,
+and an overbroad current SDK selector. The selected wrapper supplies a missing
+plan without editing tests. Five0640/one0750 observed modes retain exact capture
+gates, separately from Git0644/0755 executable-state checks; all Perl bytes match
+activation Git. Original readonly1 remains distinct from qualified readonly0.
+Readonly producers and actual SDK instruments have separate before-use packets.

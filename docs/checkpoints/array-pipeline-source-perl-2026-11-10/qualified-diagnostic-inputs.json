@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/mode-diagnostic-command.json": {
+    "bytes": 169,
+    "mode": 420,
+    "sha256": "e599667eb5e201f922eac8d984e2e2d05266af5bf9edf052e51b476f2c6861f3"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/mode-diagnostic-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/mode-diagnostic-stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/mode-diagnostic-stdout.log.gz": {
+    "bytes": 437,
+    "mode": 420,
+    "sha256": "4ee8de8504e54a6e69a1d78b23155f8fa8ea4d4fcc654f2c990b11f390a2ffb5"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/mode-diagnostic.json": {
+    "bytes": 1171,
+    "mode": 420,
+    "sha256": "ec3ef6370135c6063a53fcc34da40898d245830d994aacf717d756b34b0f507e"
+  }
+}

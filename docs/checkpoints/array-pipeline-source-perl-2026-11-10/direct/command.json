@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_PIPELINE_SOURCE_CAPTURE=docs/checkpoints/array-pipeline-source-perl-2026-11-10/direct",
+    "prove",
+    "-v",
+    "-j1",
+    "--exec",
+    "perl -Iperl docs/checkpoints/array-pipeline-source-perl-2026-11-10/direct_runner.pl",
+    "t/array_pipeline_value_contract.t",
+    "t/array_transform_source_isolation.t"
+  ],
+  "cwd": "."
+}

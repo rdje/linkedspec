@@ -1,0 +1,7 @@
+{
+  "exit": 143,
+  "failed_gate": "DOCUMENT-HISTORY",
+  "reason": "Python replacement concatenation interpreted backreference2 as control byte02, removing Next Action heading; later replacement silently had no match.",
+  "resolution": "Rebuild fixed current sections explicitly, preserve History and recent rows, run focused document-history gate, unstage only owned candidate before scope refresh, then restage and retry hooks.",
+  "limits": "Known document-history failure; remaining checks interrupted, no PASS credit."
+}

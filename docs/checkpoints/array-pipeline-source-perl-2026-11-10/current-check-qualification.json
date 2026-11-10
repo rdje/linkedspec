@@ -1,0 +1,7 @@
+{
+  "original_checker": "check_current.py",
+  "original_exit": 1,
+  "failure": "Overbroad BASE selector includes review.py, which was correctly revised after SDK capture and before its first readonly use.",
+  "selected_checker": "check_current_scoped.py",
+  "resolution": "Retain original script/command/channels; gate actual runtime/grammar/fixture/direct-test/wrapper/SDK instruments and templates explicitly. Historical readonly producers remain separately gated by their own before-use input packets."
+}

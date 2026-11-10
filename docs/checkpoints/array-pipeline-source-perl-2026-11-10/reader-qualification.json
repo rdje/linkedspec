@@ -1,0 +1,7 @@
+{
+  "original_reader": "review.py",
+  "original_exit": 1,
+  "original_failure": "activation-source: full Unix mode incorrectly equated to normalized Git mode",
+  "selected_reader": "review_qualified.py",
+  "correction": "Compare Git source bytes and executable state; preserve and gate all observed full permissions independently. Add full-mode and executable-state corruption controls; no source, SDK observation or original reader rewrite."
+}

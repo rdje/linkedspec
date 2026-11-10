@@ -1,0 +1,32 @@
+{
+  "docs/checkpoints/array-pipeline-result-perl-2026-11-10/observer.pl": {
+    "bytes": 3861,
+    "sha256": "abaa27303ecb92a2d4963e1bfe3d4a78372a22fa162242776e6b3dd60b09c72c",
+    "retained": "docs/checkpoints/array-pipeline-source-perl-2026-11-10/templates/observer.pl.gz"
+  },
+  "docs/checkpoints/array-pipeline-result-perl-2026-11-10/cases.json": {
+    "bytes": 61532,
+    "sha256": "b0af7e05adef279022b80593382a7eec26a6e355355d1659015fd0c1a0335e57",
+    "retained": "docs/checkpoints/array-pipeline-source-perl-2026-11-10/templates/cases.json.gz"
+  },
+  "docs/checkpoints/array-pipeline-result-perl-2026-11-10/delimiter-cases.json": {
+    "bytes": 2737,
+    "sha256": "c18403b11e4c88c18cd96e26ff02407d954c3cbc1295c58d29b962b06c944d25",
+    "retained": "docs/checkpoints/array-pipeline-source-perl-2026-11-10/templates/delimiter-cases.json.gz"
+  },
+  "docs/checkpoints/array-pipeline-result-perl-2026-11-10/acquired-profiles.json": {
+    "bytes": 173130,
+    "sha256": "130651535cc3138df99afdf32cc2a64eaaa6b15545a2bc2b0e61263782b376b3",
+    "retained": "docs/checkpoints/array-pipeline-source-perl-2026-11-10/templates/acquired-profiles.json.gz"
+  },
+  "docs/checkpoints/array-pipeline-result-perl-2026-11-10/preflight/stdout.log.gz": {
+    "bytes": 86573,
+    "sha256": "73aa9517a6b24098e29e03aada0fd057c4b5f535e240649a1a3e8e416b56927a",
+    "retained": "docs/checkpoints/array-pipeline-source-perl-2026-11-10/templates/preflight-stdout.log.gz.gz"
+  },
+  "docs/checkpoints/array-pipeline-result-perl-2026-11-10/delimiter_controls/stdout.log.gz": {
+    "bytes": 7340,
+    "sha256": "03b87f1112e4dfdba95cf0562233ee6c3387fe0f2720ea3dfc6bad56616a358d",
+    "retained": "docs/checkpoints/array-pipeline-source-perl-2026-11-10/templates/delimiter_controls-stdout.log.gz.gz"
+  }
+}

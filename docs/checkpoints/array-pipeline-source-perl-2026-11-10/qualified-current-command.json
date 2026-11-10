@@ -1,0 +1,11 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/array-pipeline-source-perl-2026-11-10/check_current.py",
+    "--check"
+  ],
+  "producer_sha256": "779ac3f96ebb5aeef92ee9cda2a876e5c5a75e20b0e2716b7a277ed1adb07e70",
+  "input_metadata_sha256": "10b6c24e73be57fed469329dfc0ef839601e4c07df9264d21d56d00cb9f10479"
+}

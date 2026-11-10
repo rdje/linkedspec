@@ -1884,13 +1884,13 @@ This selected gap does not withdraw the healthy producer and selected-value
 examples above or establish a peer defect. Full source/context/portable admission
 remains open.
 
-The independent Perl acquisition also finds a source-isolation prerequisite:
-`trim_each(3)` and its receiver counterpart can read an unrelated host Array
-instead of treating the Number as a computed non-Array source. The same defect
-is observed in the seven pipelines above; a computed `{3}` source remains empty
-under the identical host data. Source79.0 owns that repair before result guards.
-Portable programs supply Arrays. This does not change their current value or
-standalone-writeback behavior.
+The bounded Perl source79.0 repair now sends literal Number sources through the
+existing computed actual-Array fallback. `trim_each(3)` and its receiver counterpart
+therefore yield an empty Array rather than reading unrelated host Array data.
+The same source fence covers the seven pipelines above; genuine Array sources,
+computed values and standalone writeback retain their existing behavior. Portable
+programs supply Arrays. Regenerate older emitted Perl to obtain the source fence.
+Focused source/preservation checks pass; full source/context admission remains open.
 
 A receiver `split_each` already propagates a needed delimiter error, but composing
 it with an incompatible Hash consumer can leave DSL unlowered and fail compilation

@@ -1,0 +1,8 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/array-pipeline-source-perl-2026-11-10/review.py"
+  ]
+}

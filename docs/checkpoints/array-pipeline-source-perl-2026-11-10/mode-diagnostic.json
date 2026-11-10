@@ -1,0 +1,44 @@
+[
+  {
+    "path": "perl/LinkedRE.pm",
+    "bytes_equal": true,
+    "observed_mode": 416,
+    "git_mode": 420,
+    "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12"
+  },
+  {
+    "path": "perl/PathSearch.pm",
+    "bytes_equal": true,
+    "observed_mode": 416,
+    "git_mode": 420,
+    "sha256": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255"
+  },
+  {
+    "path": "perl/env.conf",
+    "bytes_equal": true,
+    "observed_mode": 416,
+    "git_mode": 420,
+    "sha256": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591"
+  },
+  {
+    "path": "perl/gdcheck.pl",
+    "bytes_equal": true,
+    "observed_mode": 416,
+    "git_mode": 420,
+    "sha256": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5"
+  },
+  {
+    "path": "perl/htmlcss_driver.pl",
+    "bytes_equal": true,
+    "observed_mode": 416,
+    "git_mode": 420,
+    "sha256": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c"
+  },
+  {
+    "path": "perl/ptchange.pl",
+    "bytes_equal": true,
+    "observed_mode": 488,
+    "git_mode": 493,
+    "sha256": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062"
+  }
+]

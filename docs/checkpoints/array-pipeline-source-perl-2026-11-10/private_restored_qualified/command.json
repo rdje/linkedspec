@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_PIPELINE_SOURCE_CAPTURE=docs/checkpoints/array-pipeline-source-perl-2026-11-10/private_restored_qualified",
+    "prove",
+    "-v",
+    "-j1",
+    "--exec",
+    "perl -Iperl docs/checkpoints/array-pipeline-source-perl-2026-11-10/private_runner.pl .linkedspec-data/scratch/array-pipeline-source-perl/owner.pm",
+    "t/array_pipeline_source_isolation.t"
+  ],
+  "cwd": "."
+}

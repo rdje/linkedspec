@@ -4986,13 +4986,13 @@ custody4.2/SESSION5, isolation, complete source/context/registration/declared5.4
 full23.4 remain separate. Evidence:
 `docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md`.
 
-### Perl pure-pipeline source acquisition
+### Perl pure-pipeline source isolation
 
-Perl79.1.0 preserves the original36 targets and independently acquires source policies.
-Fourteen literal Number forms read unrelated main::3 data; P1 source79.0 precedes result79.1.1.
-Result repair also owns the extra composed receiver delimiter-error forwarding failure.
-The [pipeline reference](../dsl/value-container-flow-helper-reference.md) explains these boundaries.
-The184 programs retain180 actual source pairs; four syntax rejections have none.
-First readonly recovery passes ten corruptions. Full public error fields are captured;
-older selection39 omitted fields remain unknown. Production and wider admission remain unchanged.
-Evidence: `docs/checkpoints/array-pipeline-result-perl-2026-11-10/REVIEW.md`.
+Perl source79.0 isolates literal Number sources across all seven pure pipeline helpers.
+They use the existing actual-Array fallback; regenerate older emitted Perl for the fence.
+The [pipeline reference](../dsl/value-container-flow-helper-reference.md) explains the boundaries.
+Source166/direct195 pass; qualified readonly0 rejects twelve corruptions, with failed attempts retained.
+Original36 result records and18 composition/error-forwarding targets remain for result79.1.1.
+Preflight184 retains180 source pairs; four syntax rejections have none.
+Older selection39 omitted error fields remain unknown. Full source/context/native admission stays open.
+Evidence: `docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md`.

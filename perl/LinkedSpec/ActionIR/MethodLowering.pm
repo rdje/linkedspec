@@ -4004,7 +4004,8 @@ sub _lower_method_value_expr {
   return undef unless defined($target_expr) && length($target_expr);
 
   my $array_symbol = $extract_array_symbol_name->($target_expr);
-  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re) {
+  if (defined($array_symbol) && length($array_symbol) && $target_expr =~ $array_symbol_expr_re
+    && !_method_value_is_numeric_literal($target_expr, $deps)) {
    return '[@'.$array_symbol.']';
   }
 

@@ -1,0 +1,47 @@
+{
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/diagnose_git_modes.py": {
+    "bytes": 1217,
+    "mode": 420,
+    "sha256": "fb4b5e520a94041419f8c94267bd68b8186890661e3c150c1dec362440ec49ac"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/reader-qualification.json": {
+    "bytes": 445,
+    "mode": 420,
+    "sha256": "6ebfe97f6ee21e60e12a330e05d74f324d7be83a23daafbefec06460799ff2c2"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/review-command.json": {
+    "bytes": 157,
+    "mode": 420,
+    "sha256": "994500665148e57f4cab7529b293f96f72ff5917debc8c04ffc7d005069a7b6a"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/review-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/review-stderr.log.gz": {
+    "bytes": 290,
+    "mode": 420,
+    "sha256": "e6f4aaae1e53702d91a3995acc52eeaef3320a5b24029919a3dcd473b1967938"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/review-stdout.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/review_qualified.py": {
+    "bytes": 20369,
+    "mode": 420,
+    "sha256": "5b3ac94394607ed5f7ca2995933dc8c6d73e374d37570ec755a38fa2d105f82b"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/run_qualified_review.py": {
+    "bytes": 2785,
+    "mode": 420,
+    "sha256": "4eff876ff66d60c4d0c18b89b5560c542e93f5ba59ba1456e3af95513c73a009"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/sealed-identities.json": {
+    "bytes": 910016,
+    "mode": 420,
+    "sha256": "8670697b6caee10d32e954d8d4426a1660ddd77f7547a8ffa7a188d7a7107f24"
+  }
+}

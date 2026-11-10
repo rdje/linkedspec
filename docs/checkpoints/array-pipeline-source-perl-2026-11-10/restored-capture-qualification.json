@@ -1,0 +1,9 @@
+{
+  "original_phase": "private_restored",
+  "sdk_exit": 0,
+  "outer_exit": 1,
+  "reason": "capture.py edited while its own input fence was running; original epoch not granted complete input-stability credit",
+  "original_producer_sha256": "ca0b70ea929ca8253e18f0bb3a992ecaf9e9ee5df9cd468ea647c366ecc621ba",
+  "selected_phase": "private_restored_qualified",
+  "resolution": "preserve original epoch and rerun with stable inputs before claiming qualified restoration"
+}

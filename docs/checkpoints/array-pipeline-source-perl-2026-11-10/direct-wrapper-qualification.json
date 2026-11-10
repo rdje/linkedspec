@@ -1,0 +1,8 @@
+{
+  "original_phase": "direct",
+  "sdk_exit": 1,
+  "outer_exit": 1,
+  "reason": "Selected value contract uses done_testing unless caller; loading through the artifact wrapper suppresses its plan. All195 assertions pass, but six-test file has no plan.",
+  "selected_phase": "direct_qualified",
+  "resolution": "Keep tests and production unchanged; wrapper supplies done_testing only when the loaded test has no plan, and writes only the new owned output namespace."
+}
