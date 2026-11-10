@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/capture.py": {
+    "bytes": 3852,
+    "retained": "runner-template-capture.py.gz",
+    "sha256": "01c191344883653d516c890ec4303a8f321742a26e24dd4c7537998e0432d019"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/direct_runner.pl": {
+    "bytes": 1979,
+    "retained": "runner-template-direct_runner.pl.gz",
+    "sha256": "9e76156811ccd9d0db11c0642cc098e917068af07d95cb90cf4728d6306f630f"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/private_runner.pl": {
+    "bytes": 873,
+    "retained": "runner-template-private_runner.pl.gz",
+    "sha256": "8b41b9819363b3fc369a90967c36a72dca3c49df455aca8899f39292985fafe9"
+  },
+  "docs/checkpoints/array-pipeline-source-perl-2026-11-10/set_private_image.py": {
+    "bytes": 1705,
+    "retained": "runner-template-set_private_image.py.gz",
+    "sha256": "445fc066c94c809b46d0dd4ea70e36ac3f6c0fb9a7b5d504c79a79a54f5d5c2b"
+  }
+}

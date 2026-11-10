@@ -1,0 +1,66 @@
+{
+  "scope": "Historical finite result/preservation proof; native/cache/transitive/toolchain and full admission remain separate.",
+  "result": "PASS",
+  "groups": 244,
+  "repaired_targets": 18,
+  "preservation_controls": 226,
+  "exact_preservation_projections": 225,
+  "declared_descriptor_advances": 1,
+  "actual_module_handler_pairs_per_normal": 240,
+  "direct_groups": 384,
+  "private_inverse": "18 RED / 244 restored PASS",
+  "controls": [
+    {
+      "name": "restored-result-error",
+      "reason": "target-error"
+    },
+    {
+      "name": "later-work-ran",
+      "reason": "target-values"
+    },
+    {
+      "name": "masked-needed-error",
+      "reason": "needed-error"
+    },
+    {
+      "name": "Bool-became-Number",
+      "reason": "preservation"
+    },
+    {
+      "name": "prefix-policy-changed",
+      "reason": "preservation"
+    },
+    {
+      "name": "host-mutated",
+      "reason": "host-state"
+    },
+    {
+      "name": "omitted-error-provenance",
+      "reason": "needed-error"
+    },
+    {
+      "name": "invented-fresh-after-failed-load",
+      "reason": "load-absence"
+    },
+    {
+      "name": "hidden-regex-error",
+      "reason": "regex-error"
+    },
+    {
+      "name": "changed-actual-artifact",
+      "reason": "artifact-identity"
+    },
+    {
+      "name": "wrong-loaded-owner",
+      "reason": "private-owner"
+    },
+    {
+      "name": "broader-source-change",
+      "reason": "source-scope"
+    },
+    {
+      "name": "missing-direct-fixture",
+      "reason": "fixture-scope"
+    }
+  ]
+}

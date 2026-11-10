@@ -1860,42 +1860,47 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 
 ### Pipeline continuations: selected repair
 
-The seven pure pipeline helpers above already return transformed Arrays while
-preserving source bindings. For example, these ordinary Perl values work:
+The seven pure pipeline helpers above return transformed Arrays while preserving
+source bindings. Ordinary Perl results now retain their actual kind through
+subsequent methods, copy, logical operations and immediate `with`:
 
 ```text
 trim_each([" tail "]).last().uppercase()       # "TAIL"
 split_each(["head:tail"],":").join_values(",")  # "head,tail"
 filter_nonempty([""]).with(){return(value.count())} # 0; body runs
+uniq(["head","head"]).set_key("k",1)           # null
+[" tail "].trim_each().set_key("k",1)          # null; compiles cleanly
 ```
 
-Their incompatible Hash-consumer continuations still have an open Perl defect.
-`trim_each([" tail "]).set_key("k",1)` currently raises a host Hash-reference
-error; a literal receiver chain such as `[" tail "].trim_each().set_key(...)`
-can retain DSL and fail compilation. The required result is null before consumer
-operands, with later `copy`, logical operands and `with` bodies skipped. The
-constructor result already provides that rejection behavior.
+An incompatible Hash consumer returns null before evaluating its operands.
+Rejection persists through later copy, logical operands and `with` bodies. For
+example, this ordinary Perl program returns `[null,""]`:
 
-Family79 owns this repair for `split_each`, `trim_each`, `filter_nonempty`,
-`lowercase_each`, `uppercase_each`, `uniq` and `filter_match`. Each backend is
-assessed independently before changes. Existing source/arity, regex/Unicode,
-copy/mutation and standalone-writeback policies stay separate from result guards.
-This selected gap does not withdraw the healthy producer and selected-value
-examples above or establish a peer defect. Full source/context/portable admission
-remains open.
+```text
+order="";
+out=uniq(["tail","tail"]).set_key(
+  {order=cat(order,"K");"k"}, {order=cat(order,"V");1}
+).copy().with(){order=cat(order,"W");return("ran")};
+return([out,order]);
+```
 
-The bounded Perl source79.0 repair now sends literal Number sources through the
-existing computed actual-Array fallback. `trim_each(3)` and its receiver counterpart
-therefore yield an empty Array rather than reading unrelated host Array data.
-The same source fence covers the seven pipelines above; genuine Array sources,
-computed values and standalone writeback retain their existing behavior. Portable
-programs supply Arrays. Regenerate older emitted Perl to obtain the source fence.
-Focused source/preservation checks pass; full source/context admission remains open.
+The producer runs first, preserving required source and delimiter errors. A
+receiver `split_each` with an erroring computed delimiter now forwards that
+original error through its consumer chain. Balanced invalid regexes still fail
+at regex compilation before consumer execution. Earlier guarded prefixes retain
+their rejection, and valid empty Arrays enter `with` normally.
 
-A receiver `split_each` already propagates a needed delimiter error, but composing
-it with an incompatible Hash consumer can leave DSL unlowered and fail compilation
-instead. Result79.1.1 owns that forwarding case too. Earlier guards, real empty
-Arrays, excluded extra arities and existing regex error policies stay separate.
+This bounded Perl repair covers canonical `split_each`, `trim_each`,
+`filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq` and `filter_match`.
+Initial producer fallback, excluded arities, regex/Unicode, copy/mutation and
+standalone writeback keep their existing policies. Rust, Dart, Julia and Lua are
+assessed independently; full source/context/portable admission remains open.
+
+Perl source79.0 also sends literal Number sources through the existing computed
+actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
+Array rather than reading unrelated host Array data. Genuine Array sources and
+computed values retain their existing behavior. Portable programs supply Arrays.
+Regenerate older emitted Perl to obtain the source and result fences.
 
 ## Boolean composition
 

@@ -10,8 +10,9 @@ answers:
   - "did the original Perl pipeline selection retain every public error Hash field"
   - "why does the pipeline value contract need a TAP plan when loaded by a wrapper"
   - "why are captured Unix permissions different from Git modes in the pipeline proof"
+  - "does Perl trim_each undef use an ambient named Array shortcut"
 date: 2026-11-10
-status: source79.0 bounded repair focused-checked; result79.1.1 and broader admission separate
+status: source79.0/result79.1.1 bounded repairs focused-checked; independent peers/broader admission separate
 tags: [perl, array, pipeline, source, isolation, arity, errors, guards]
 evidence: "Historical preflight retains184 programs/148 profiles/180 pairs and14 host reads. Source79.0 at docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md now retains166PASS/private14RED-qualified166PASS/direct195, original36 records/artifacts and18 composition targets unchanged. Four preparation failures stay explicit; qualified readonly0/empty stderr/twelve controls and scoped current inputs pass."
 reverify:
@@ -42,9 +43,10 @@ Free extras retain ran/KW/unresolved helper; receiver extras retain null/no effe
 unresolved with. Prior owners keep their skips. Bool/null/text and numeric Array
 entries retain actual kinds. These are finite observations, not portable domains.
 
-Terminal receiver split_each forwards binding_kind_mismatch and supports computed/
-variable delimiters/count. Adding the incompatible consumer retains DSL and
-fails compilation instead. That extra needed-error target belongs to result79.1.1.
+Before result79.1.1, terminal receiver split_each already forwarded binding_kind_mismatch
+and supported computed/variable delimiters/count; adding an incompatible consumer
+retained DSL and failed compilation. Result79.1.1 now forwards that same needed
+error through the consumer chain.
 Four /(/ inputs stop at DSL validation, not a producer error. Four balanced
 invalid-range inputs reach actual regex compilation and fail before consumers;
 unloaded modules have load_error and no fresh invocation fields.
@@ -68,3 +70,13 @@ plan without editing tests. Five0640/one0750 observed modes retain exact capture
 gates, separately from Git0644/0755 executable-state checks; all Perl bytes match
 activation Git. Original readonly1 remains distinct from qualified readonly0.
 Readonly producers and actual SDK instruments have separate before-use packets.
+
+The retained preflight substitution for trim_each(undef) uses the literal undef
+in the computed actual-Array fallback. That observed form does not use a named
+Array shortcut; this does not extend the finite Number-host test population.
+
+Result79.1.1 subsequently repairs18 composition targets with244PASS/direct384
+and independent recovery. Source values/errors/kinds remain; only the invalid-range
+receiver descriptor expectation in current source166 advances to canonical
+eligibility. The complete original fixture and historical source0 proof remain
+unchanged. See [[perl-array-pipeline-result-guards]].

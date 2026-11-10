@@ -8424,12 +8424,10 @@
       "loaded": 0,
       "metadata": {
         "canonical_action_ir_fallback_count": 0,
-        "language_agnostic_action_ir_ready": 0,
+        "language_agnostic_action_ir_ready": 1,
         "raw_perl_dependency_count": 0,
-        "unresolved_helper_count": 1,
-        "unresolved_helpers": [
-          "filter_match"
-        ]
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
       },
       "native": null,
       "native_callable": 1,

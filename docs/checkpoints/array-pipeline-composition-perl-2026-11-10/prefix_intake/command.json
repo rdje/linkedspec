@@ -1,0 +1,14 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/observer_prefix.pl",
+    "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/prefix-cases.json",
+    "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/prefix_intake"
+  ]
+}

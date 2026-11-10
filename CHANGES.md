@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Guard Perl pure-pipeline results (79.1.1)
+
+Canonical seven-helper results retain actual-kind guards through consumer/copy/logical/immediate-with links, with original first-producer permission and the source79.0 fence intact. New244 moves18RED to244PASS; same-path private18RED/restored244PASS, direct384 and first readonly0/empty stderr/thirteen corruptions pass. Of226 preservation controls,225 full projections remain exact; one invalid-range receiver descriptor advances canonically while its complete regex error remains unchanged. Align only that metadata in current source166, retaining its original fixture. All240 actual module/handler pairs per normal and before-use inputs/mutation channels survive; current SDK identities pass. Book/Knowledge/task/live pointers route to independent Rust79.2 after normal landing; full admission remains separate.
+
 ## 2026-11-10 — Isolate Perl pure-pipeline Number sources (79.0)
 
 Fence only the shared named-Array shortcut with the existing Number predicate; two insertions/one deletion route literals through the original actual-Array fallback. New166 groups move14RED/152PASS to166PASS; the exact private path reproduces14RED/qualified166PASS. All184 original source records retain their policies; original36/17 failures19 preserved and the extra receiver-error target remain unchanged, including artifacts. Selected direct195 passes with captured public API inputs. Preserve four preparation failures and their separate qualifications; first qualified readonly0/empty stderr/twelve corruptions and scoped current SDK-input identities pass. Book, Knowledge, tasks and live pointers route to result79.1.1 after normal landing; full source/native/context/admission remains separate.

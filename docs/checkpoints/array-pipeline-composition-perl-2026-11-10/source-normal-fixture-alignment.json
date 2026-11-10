@@ -1,0 +1,5 @@
+{
+  "path": "tests/fixtures/array_pipeline_source_isolation_perl_cases.json",
+  "case": "invalid_range_receiver_composed",
+  "change": "Only canonical eligibility metadata advances; complete original source fixture retained. Values, errors, field absence, modes and remaining165 source profiles unchanged."
+}

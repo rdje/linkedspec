@@ -1,0 +1,12 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/inspect_ast.pl"
+  ]
+}

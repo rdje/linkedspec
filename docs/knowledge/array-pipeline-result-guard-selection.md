@@ -8,7 +8,7 @@ answers:
   - "do needed Array pipeline source and delimiter errors already propagate on Perl"
   - "are direct pure pipeline values and standalone named writeback already implemented"
 date: 2026-11-10
-status: original36 frozen; Perl source79.0 focused-checked; result79.1.1 next and peers independent
+status: original36 frozen; Perl source79.0/result79.1.1 focused-checked; independent Rust79.2 next
 tags: [array, pipelines, results, guards, perl, selection, recovery]
 evidence: "Historical selection TYPE-REFERENCE-BOOK.1.2.23.1.39; docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md retains original36/17 failures/19 healthy,29 ready and7 unresolved receivers,36 module-handler pairs, first readonly0/empty stderr/eleven effective controls. No production or peer verdict."
 reverify:
@@ -56,3 +56,5 @@ original selection's error whitelist is an explicit projection; omitted older
 public fields remain unknown rather than receiving retrospective credit.
 
 Source79.0 is now bounded/focused-checked: shared Number fence,166PASS/private14RED-qualified166PASS/direct195 and first qualified readonly0/twelve controls. All original36 records/artifacts and the extra receiver-error target remain unchanged; result79.1.1 is next. Four original preparation failures stay preserved and receive no passing credit. See docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md.
+
+Perl result79.1.1 now repairs18 targets with244PASS/private18RED-restored244PASS/direct384 and first readonly0/thirteen controls.225 full preservation projections remain exact; one invalid-range receiver descriptor advances while its complete needed error remains. Source79.0/earlier owners/arity policies stay intact. See [[perl-array-pipeline-result-guards]]; independent peers/full admission remain separate.

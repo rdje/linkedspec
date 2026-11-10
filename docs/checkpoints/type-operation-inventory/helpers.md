@@ -108,7 +108,7 @@ The reverse Perl-contract check excludes these diagnostics from ordinary generic
 
 ## Remaining semantic work
 
-Current finite frontier: All bounded78 and headroom4.21 are committed. Perl preflight79.1.0 independently acquires source policies; source79.0 now fences14 literal Number host reads with166PASS/private14RED-qualified166PASS/direct195 and qualified readonly0/twelve controls. All original36 records/artifacts and18 composition targets remain unchanged; result79.1.1 follows, then independent peers. Original failed preparation epochs remain explicit. Full source/context/native-cache-transitive custody/registration/declared5.4/full23.4/routing18.2 stay separate. Evidence: docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md.
+Current finite frontier: Perl79.1.1 is focused-checked with244PASS/private18RED-restored244PASS/direct384 and first readonly0/thirteen controls.225 full projections remain exact; one invalid-range descriptor advances with its complete needed error unchanged. Source79.0/earlier owners/arity policies persist. Independent Rust79.2 follows normal clean landing. Full source/context/native-cache-transitive custody/registration/declared5.4/full23.4/routing18.2 stay separate. Evidence: docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md.
 
 - Map each primary spelling/overload to actual signature/arity, input/result kind, mutation/copy, callback scope, error/empty behavior and backend limits; never infer these from resolver families.
 - Reconcile book/reference compatibility names such as array_copy, hash_copy and regex_subst with actual owners before treating them as shared generic helpers. User-function/codeblock invocation is a separate callable role.

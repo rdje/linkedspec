@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-11 — Pure pipelines retain results after their original producer
+
+A separate canonical pipeline classifier admits exact arities and regex only at the split/filter operand position. Existing retained/copy/logical/with roles then guard the produced Array; initial receiver permission evaluates its original terminal producer first. This preserves49 acquired source/empty-with prefixes, nine missing-free exclusions and two missing-receiver errors. Earlier owners and source79.0 remain intact. All18 targets now pass without producer rewrites; needed delimiter errors match their independent terminal oracle. One invalid-range receiver descriptor becomes canonical without changing its actual error. Preserve the original source166 fixture and align only that eligibility expectation. Evidence: docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md.
+
+This slice freezes SDK instruments through each complete producer, uses plan-aware direct capture, compares Git bytes/executable state separately from exact observed modes and selects actual SDK inputs separately from later reviewers. Before244/after244/private images/direct384 and first readonly/thirteen corruptions all complete on their original attempts. Full native/cache/transitive/toolchain custody and general source/context admission remain separate.
+
 ## 2026-11-10 — Pipeline source kinds and proof-input phases
 
 The shared pure-pipeline source getter needs the existing numeric-literal fence before its named-Array shortcut. Literal3 now reaches the same actual-kind fallback as computed values, rather than reading main::3; no global extractor or producer policy changes. Original14 host reads disappear while152 source/policy groups and all18 outstanding composition records remain exact. The same private load path and actual module/handler identities distinguish source repair from result-role work. Evidence: docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md.

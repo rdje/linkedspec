@@ -4986,13 +4986,13 @@ custody4.2/SESSION5, isolation, complete source/context/registration/declared5.4
 full23.4 remain separate. Evidence:
 `docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md`.
 
-### Perl pure-pipeline source isolation
+### Perl pure-pipeline result guards
 
-Perl source79.0 isolates literal Number sources across all seven pure pipeline helpers.
-They use the existing actual-Array fallback; regenerate older emitted Perl for the fence.
-The [pipeline reference](../dsl/value-container-flow-helper-reference.md) explains the boundaries.
-Source166/direct195 pass; qualified readonly0 rejects twelve corruptions, with failed attempts retained.
-Original36 result records and18 composition/error-forwarding targets remain for result79.1.1.
-Preflight184 retains180 source pairs; four syntax rejections have none.
-Older selection39 omitted error fields remain unknown. Full source/context/native admission stays open.
-Evidence: `docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md`.
+Perl79.1.1 guards canonical results of all seven pure pipeline helpers before incompatible consumers.
+Initial producers, source79.0's Number fence and earlier owners retain their original policies.
+The [pipeline reference](../dsl/value-container-flow-helper-reference.md) gives tested value/effect examples.
+New244/private18RED-restored244/direct384 and first readonly0/thirteen corruptions pass.
+Of226 preservation controls,225 full projections stay exact; one descriptor advances canonically.
+Its complete regex error stays unchanged; each normal retains240 actual source pairs, with four syntax exclusions.
+Regenerate older emitted Perl. Independent Rust79.2 follows; full source/context/native admission stays open.
+Evidence: `docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md`.

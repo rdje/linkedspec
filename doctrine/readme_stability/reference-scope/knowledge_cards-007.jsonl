@@ -79,7 +79,8 @@
 {"bytes":6090,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-all-producer-source-composition.md","sha256":"2f17ffd2bc1ad9e0092b0344abbec284b3ebdeca5765340bf2426c0c2505471e","type":"member"}
 {"bytes":5796,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-and-icode-literal-and-state-corruption.md","sha256":"33d7af99226692382f37aa21824fb2c97759512cf0fb347a58894646fdac0b8a","type":"member"}
 {"bytes":4398,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-and-single-acode-duplicate-match-locals.md","sha256":"c8c4dd110ec850a29f4d321c39b188ed84f25db137d2a0b7e762e2c4cf7c0539","type":"member"}
-{"bytes":5323,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.0","path":"docs/knowledge/perl-array-pipeline-source-preflight.md","sha256":"e2af0daebd38846b13f3f10e1a91248f6eed7798617a78b8553ba3c7b60ed8b0","type":"member"}
+{"bytes":3974,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1","path":"docs/knowledge/perl-array-pipeline-result-guards.md","sha256":"d3d35228ba58c034b6cf7caa5917e2a335c13ad7c0c08eed318fba037cc8f57c","type":"member"}
+{"bytes":6058,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1","path":"docs/knowledge/perl-array-pipeline-source-preflight.md","sha256":"43270f1e69e9f8c3496962892c2766d4713a40b5cf1730aaab179ee53af2e594","type":"member"}
 {"bytes":13508,"lines":191,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-array-receiver-required-capture.md","sha256":"516bd46d0d8cd978bbea6008b6f7541a4f327c1aeaabc5b1297e80e1d46dba2b","type":"member"}
 {"bytes":2963,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1","path":"docs/knowledge/perl-array-transform-result-guards.md","sha256":"3c3fc90df829e36dcc9995376f17ccf151ef957ca3ecd9eb208a5136e9db5f35","type":"member"}
 {"bytes":3511,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1","path":"docs/knowledge/perl-array-transform-source-preflight.md","sha256":"8722fe880af713e539e390d0ee1d057f80fa053b023cec47b368069e947b4159","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3088,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-presence-rejection.md","sha256":"18e7d7b67c3089d746a0c5987fc59f1047dbad3ba51f17eba5a7f3601dbd1e87","type":"member"}
 {"bytes":4154,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.0","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"710cfa713e3c12d734e5ec6ef64adbaf7a6440094d3e862c8f36a53e4ada0dd1","type":"member"}
 {"bytes":3479,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-copy-rejection.md","sha256":"8d15d6301567d79d1b9c037486154e8f23b35d99c9ca999272274de545752aab","type":"member"}
-{"bytes":2236,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6","path":"docs/knowledge/perl-count-logical-rejection.md","sha256":"ee128e316e65f603a8f4549d456ee48a45747fe8304b313b869690d0a68c0be3","type":"member"}

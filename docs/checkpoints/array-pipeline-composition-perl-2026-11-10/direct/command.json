@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_ARRAY_PIPELINE_COMPOSITION_CAPTURE=docs/checkpoints/array-pipeline-composition-perl-2026-11-10/direct",
+    "prove",
+    "-v",
+    "-j1",
+    "--exec",
+    "perl -Iperl docs/checkpoints/array-pipeline-composition-perl-2026-11-10/direct_runner.pl",
+    "t/array_pipeline_value_contract.t",
+    "t/array_pipeline_source_isolation.t",
+    "t/array_transform_result_guard_composition.t"
+  ],
+  "cwd": "."
+}

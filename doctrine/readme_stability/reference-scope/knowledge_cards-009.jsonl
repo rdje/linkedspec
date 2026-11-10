@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4281,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-original-occurrence-handoff.md","sha256":"5b08e2d1bd4540ef369939c9753907c925efc4d6aea63c7782c9195254a2c3f9","type":"member"}
 {"bytes":5345,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-statement-frame-channel.md","sha256":"d5bc489aab17f14439b2aee725cb2347e34066bb77f0b806c2c47898a36333be","type":"member"}
 {"bytes":4879,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-annotation-statement-origins.md","sha256":"91f94ded0b4f9d9a1dc8d457fb1c98fe72122e0d7d265e839acac3c4dd7cd812","type":"member"}
 {"bytes":4846,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-parent-state-test-gap.md","sha256":"0d5fc62013975ef8e25665de44fa20db3a704bbf92de194cf7609d28812ab29a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4897,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-receiver-arity-calibration.md","sha256":"c62783ddfdccafe6935c879271faabce5e538ec45783a1a7a45b77f598e2fc9e","type":"member"}
 {"bytes":6715,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-zero-argument-calls.md","sha256":"cc241c8e5bf87d06eb4eed62cf235c72206988169c105afbd0a8bb6c430270b0","type":"member"}
 {"bytes":2723,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/python-replay-traceback-source-binding.md","sha256":"7fd6e4a7cc6d1ac2c147eca0d7126f0008da2d2b7067dd9d12b4289fdaecbed7","type":"member"}
-{"bytes":2492,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-debt-retirement-governance.md","sha256":"67471ef06a4c068ffc8e8abec7b24a9b6242caf16cf93b80206bfb15d20ca85d","type":"member"}

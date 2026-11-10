@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/before/input-identities.json": {
+    "bytes": 65063,
+    "mode": 420,
+    "sha256": "f65bac70db16de65d7ac34d9b0d67a3a361707e35527b0bc5e0ce95df0ff93e5"
+  },
+  "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/repair.py": {
+    "bytes": 4497,
+    "mode": 420,
+    "sha256": "e7808ad34f60c864449848d0734717bf9d816e8b4ab99fd7f5d0f8cd5f445bf6"
+  },
+  "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/run_repair.py": {
+    "bytes": 1653,
+    "mode": 420,
+    "sha256": "c3d901ab38f84850430564a1cc935986ea799da1967ef0754984cd78d466d894"
+  },
+  "perl/LinkedSpec/ActionIR/MethodLowering.pm": {
+    "bytes": 509142,
+    "mode": 420,
+    "sha256": "bdb76d72d5622fa7c87bcdba9b9994006b3cbad6ce7d003ad25409009fd80c08"
+  }
+}

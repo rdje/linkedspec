@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2553,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-capture-mark-family-taxonomy.md","sha256":"2badbab9f11120683f51796a853b7b34c918232888a73f08121f62f5bbc742fe","type":"member"}
 {"bytes":13674,"lines":186,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-defined-user-function-definition-parser.md","sha256":"ba26432baeb821e2927cf479062e7c7daddf01c9337026428ba12718b793c48d","type":"member"}
 {"bytes":1836,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-derived-roundtrip-future-lane.md","sha256":"e46fc5677d8fa5ee5363718aa3fbc4c5f847a8a439a2db0de2d135776a402d82","type":"member"}
 {"bytes":4809,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-edge-syntax-contract.md","sha256":"02780474bf1e8aa8584678af534de73c2b3eccfd197968fafcfa1f355b7c484e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2972,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-standalone-discard-hardening.md","sha256":"68a4a873a1d5437a710d4c1db5b7993d1eb2045893fae878d1d15946ee884fef","type":"member"}
 {"bytes":3795,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-value-call-execution.md","sha256":"cc8a88ed6b5767bf748a6d971e1ff7ffb921273708c0914c0f72c996492a7a34","type":"member"}
 {"bytes":3682,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-when-otherwise-alias-seams.md","sha256":"07586f525c8d1df85adfe51e0f78271a7e09981f0b65d9f080ccfe50417f47a1","type":"member"}
-{"bytes":1803,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/text-to-ast-backend-doctrine.md","sha256":"d1d926ca9b4c5bfa2422d1562f27cef0e6c0b57f60c136f6e4ee40857685a6ad","type":"member"}
