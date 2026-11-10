@@ -4915,7 +4915,44 @@ bodies, scalar_result and enumerate/call_index mutation policy remain unchanged.
 Rebuild Julia applications/runtime; emitted/parsed format stays unchanged. Full
 native/cache/transitive/toolchain custody4.2/SESSION5, isolation, source/context/
 registration and full23.4 remain separate. Dart input qualification23.4.20 now
-supplies its separate new bound epoch; independent Lua78.5 is next. Evidence:
+supplies its separate new bound epoch; installed Lua78.5 has its own outcome below. Evidence:
 `docs/checkpoints/array-transform-result-guard-julia-2026-11-10/REVIEW.md`; its readonly
 reader recovers this historical finite result rather than declaring a future
 runtime or peer healthy.
+
+### Installed Lua Array-transform result assessment
+
+Installed Lua78.5 independently acquires unchanged37 plus119 own controls on
+Lua5.5.1 and LuaJIT2.1.1788460057, each through native, restored SpecFile,
+generated-plan and full emitted-fresh routes. Each original interpreter exposes
+nineteen guard gaps: Arrays reach incompatible Hash consumers with KV, and later
+tails run KVW/KVDW. Constructor rejection already works. Canonical result ownership
+now joins the existing persistent guard, with one initial-transform permission
+that excludes earlier result owners. Producers and scalar_result remain unchanged;
+namespace fields avoid additional interpreter chunk locals. Public compiled with
+operands are block_value, so no contextual-node exception is needed.
+
+Each host's unchanged156 moves903 checks/76 failures to903 checks/zero failures,
+preserving137 healthy cases/123 full profiles. Seven initial Number/null/Hash source
+families yield empty Array/count0W; concat_arrays preserves its source element/
+count2W. Optional defaults, all sixteen excluded extra-arity effects, earlier owners
+and all nineteen needed-error records remain exact. These compatibility fences
+define no portable wrong-kind or arity policy.
+
+Selected direct checks pass1713 counted checks plus twelve with observations and
+three fences per host, with empty stderr. Exact old/current interpreters at one
+private SDK path reproduce19RED/156PASS and full original/repaired observations;
+actual loaded owner paths are checked. All156 parsed/emitted pairs per host stay
+byte equal across six epochs. First readonly recovery returns0/empty stderr and
+rejects nine corruptions, including an omitted direct fixture binding. Every
+current declared direct input matches its captured bytes/modes.
+
+Own source/fixture/grammar/instrument inputs precede documented native build/use;
+three real native products per host/epoch precede SDK loading. Actual emitted/
+parsed inputs precede execution. Full channels, exact executable versions and
+recoverable files/modes survive. Reload applications with the updated Lua runtime;
+emitted/serialized formats stay unchanged. Declared Lua5.4, full native/cache/
+transitive/toolchain custody4.2/SESSION5, isolation, broader source/context/
+registration and full23.4 remain separate. All bounded family78 backend outcomes
+have focused proof; this does not close whole-feature admission. Evidence:
+`docs/checkpoints/array-transform-result-guard-lua-2026-11-10/REVIEW.md`.

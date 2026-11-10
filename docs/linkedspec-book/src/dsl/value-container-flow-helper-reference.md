@@ -1237,7 +1237,7 @@ For Perl callable `count`/`first`, see the [worked selection, terminal and effec
 ### Array transform continuations: guarded results
 
 `take`, `take_last`, `drop_front`, `drop_back`, `slice`, `sorted`, `reversed` and
-`concat_arrays` return Arrays. Their ordinary Perl, Rust, Dart and Julia results now retain actual-kind
+`concat_arrays` return Arrays. Their ordinary Perl, Rust, Dart, Julia and installed Lua results now retain actual-kind
 guards through later consumers, `copy`, logical helpers and immediate `with`:
 
 ```text
@@ -1278,7 +1278,7 @@ Legitimate empty Arrays still enter `with`, as the zero-count example shows.
 Producer operands run once, source snapshots and nested Bool/null/Number values
 are preserved, and needed producer errors still propagate.
 
-The bounded Perl, Rust, Dart and Julia forms retain their existing arities: four take/drop helpers
+The bounded Perl, Rust, Dart, Julia and installed Lua forms retain their existing arities: four take/drop helpers
 accept an optional count, `slice` requires a start and permits an omitted count,
 and `sorted`/`reversed` take no extra receiver operands. Guarded `concat_arrays`
 forms are free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
@@ -1314,7 +1314,7 @@ Omitted take/drop counts retain the default of one, and `slice` with an omitted
 count keeps the remaining tail. Malformed or variadic calls retain their existing
 backend behavior and gain no new guarded-result authority.
 
-Dart and Julia independently retain their initial source behavior too. Seven transforms
+Dart, Julia and installed Lua independently retain their initial source behavior too. Seven transforms
 return an empty Array for the observed Number/null/Hash sources; `concat_arrays`
 keeps that source as one element before adding the second Array. These are backend
 compatibility examples; portable programs supply Arrays:
@@ -1331,7 +1331,7 @@ An initial empty result remains a valid `with` receiver:
 ```text
 order="";
 out=3.take(1).with(){order=cat(order,"W");return(value.count())};
-return([out,order]);              # [0,"W"] on Dart and Julia
+return([out,order]);              # [0,"W"] on Dart, Julia and installed Lua
 ```
 
 An earlier produced or copied value keeps its existing guard instead of gaining
@@ -1346,7 +1346,9 @@ emitted-fresh routes; rebuild Rust applications/runtime. Dart78.3 is independent
 focused-checked on native, restored SpecFile, generated-plan and full emitted-fresh
 routes; rebuild Dart applications with the updated package. Emitted and serialized
 formats are unchanged. Julia78.4 is independently focused-checked on the same four
-routes; rebuild Julia applications/runtime. Lua assessment and full source/context/
+routes; rebuild Julia applications/runtime. Installed Lua78.5 is independently
+focused-checked on Lua5.5.1 and LuaJIT2.1.1788460057 across those four routes; reload
+applications with the updated runtime. Declared Lua5.4 and full source/context/
 admission remain open. Dart's additional direct tests now have a separate qualified
 292-test run with complete selected fixture/grammar bindings under23.4.20. The
 original six omitted first-use identities stay unknown; its own Array-transform

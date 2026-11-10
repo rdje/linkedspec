@@ -9,7 +9,7 @@ answers:
   - "does an unloaded public Perl selection module have fresh_error fields"
   - "why did the Array transform selection recovery readers fail"
 date: 2026-11-07
-status: original selection frozen; bounded Perl/Rust/Dart/Julia and qualified Dart direct inputs focused-checked; Lua remains
+status: original selection frozen; all bounded family78 backend outcomes and qualified Dart direct inputs focused-checked; full admission open
 tags: [array, transforms, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.38; docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md retains original37 ready1/raw0/fallback0/unresolved0,19 failures/18 healthy and37 actual module/handler pairs. Final strict readonly recovery0/empty stderr/nine controls passes; two prior reader failures stay explicit."
 reverify:
@@ -75,3 +75,12 @@ result/grammar streams, original preservation, original missing-six RED/qualifie
 PASS and first readonly/eight controls pass. Original omitted first-use identities
 remain unknown. See [[dart-direct-test-fixture-inputs]]; independent Lua78.5 is next
 after the clean normal handoff. Whole-feature/full23.4 admission remains open.
+
+Installed Lua78.5 later independently reproduces19 original failures per host and
+repairs canonical result ownership. Each156/four routes passes903 checks; selected
+direct1713 plus12 with observations/3 fences, exact private19RED/156PASS and first
+readonly/nine corruptions pass. All137 healthy cases/123 profiles/156 artifact
+pairs per host stay exact. Actual source/fixture/grammar/native inputs are retained;
+no new chunk locals or contextual with exception. See [[lua-array-transform-result-guards]].
+All bounded78 backend outcomes are focused-checked; next selection23.1.39 must
+reconcile the next requirement without implying full admission or declared5.4.

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/build_lua_native.sh",
+    "puc",
+    "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/restored/puc/native"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/control-owner/lua/src/?.lua;docs/checkpoints/array-transform-result-guard-lua-2026-11-10/control-owner/lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/restored/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_ARRAY_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/restored/puc",
+    "LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT": "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/control-owner/"
+  }
+}

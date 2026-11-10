@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "luajit",
+    "-e",
+    "dofile(\"lua/test/array_transform_result_guard_composition_test.lua\")"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/after/luajit/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit",
+    "LINKEDSPEC_ARRAY_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/after/luajit",
+    "LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT": ""
+  }
+}

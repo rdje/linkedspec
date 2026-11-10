@@ -1,0 +1,6400 @@
+{
+  "luajit": {
+    "extra_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"head\",\"tail\"]},[\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.concat_arrays([\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_back_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_back({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_back_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.drop_back(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_front_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_front({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_front_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.drop_front(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_reversed_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=reversed({order=cat(order,\"S\");[\"head\",\"tail\"]},{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_reversed_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.reversed({order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_slice_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=slice({order=cat(order,\"S\");[\"head\",\"tail\"]},1,1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_slice_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.slice(1,1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_sorted_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=sorted({order=cat(order,\"S\");[\"head\",\"tail\"]},{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_sorted_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.sorted({order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_last_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take_last({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_last_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.take_last(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.take(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "initial_hash_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(concat_arrays({\"k\":1},[\"second\"]))}\n"
+    },
+    "initial_hash_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "source": "Value:: I {return({\"k\":1}.concat_arrays([\"second\"]))}\n"
+    },
+    "initial_hash_concat_arrays_with": {
+      "fresh": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.concat_arrays([\"second\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_drop_back_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_back({\"k\":1},1))}\n"
+    },
+    "initial_hash_drop_back_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.drop_back(1))}\n"
+    },
+    "initial_hash_drop_back_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_drop_front_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_front({\"k\":1},1))}\n"
+    },
+    "initial_hash_drop_front_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.drop_front(1))}\n"
+    },
+    "initial_hash_drop_front_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_reversed_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(reversed({\"k\":1}))}\n"
+    },
+    "initial_hash_reversed_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.reversed())}\n"
+    },
+    "initial_hash_reversed_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_slice_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(slice({\"k\":1},1,1))}\n"
+    },
+    "initial_hash_slice_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.slice(1,1))}\n"
+    },
+    "initial_hash_slice_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_sorted_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(sorted({\"k\":1}))}\n"
+    },
+    "initial_hash_sorted_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.sorted())}\n"
+    },
+    "initial_hash_sorted_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_take_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take({\"k\":1},1))}\n"
+    },
+    "initial_hash_take_last_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take_last({\"k\":1},1))}\n"
+    },
+    "initial_hash_take_last_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.take_last(1))}\n"
+    },
+    "initial_hash_take_last_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_take_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.take(1))}\n"
+    },
+    "initial_hash_take_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(concat_arrays(undef,[\"second\"]))}\n"
+    },
+    "initial_null_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(undef.concat_arrays([\"second\"]))}\n"
+    },
+    "initial_null_concat_arrays_with": {
+      "fresh": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.concat_arrays([\"second\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_drop_back_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_back(undef,1))}\n"
+    },
+    "initial_null_drop_back_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.drop_back(1))}\n"
+    },
+    "initial_null_drop_back_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_drop_front_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_front(undef,1))}\n"
+    },
+    "initial_null_drop_front_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.drop_front(1))}\n"
+    },
+    "initial_null_drop_front_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_reversed_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(reversed(undef))}\n"
+    },
+    "initial_null_reversed_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.reversed())}\n"
+    },
+    "initial_null_reversed_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_slice_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(slice(undef,1,1))}\n"
+    },
+    "initial_null_slice_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.slice(1,1))}\n"
+    },
+    "initial_null_slice_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_sorted_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(sorted(undef))}\n"
+    },
+    "initial_null_sorted_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.sorted())}\n"
+    },
+    "initial_null_sorted_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_take_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take(undef,1))}\n"
+    },
+    "initial_null_take_last_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take_last(undef,1))}\n"
+    },
+    "initial_null_take_last_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.take_last(1))}\n"
+    },
+    "initial_null_take_last_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_take_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.take(1))}\n"
+    },
+    "initial_null_take_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(concat_arrays(3,[\"second\"]))}\n"
+    },
+    "initial_number_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(3.concat_arrays([\"second\"]))}\n"
+    },
+    "initial_number_concat_arrays_with": {
+      "fresh": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.concat_arrays([\"second\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_drop_back_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_back(3,1))}\n"
+    },
+    "initial_number_drop_back_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.drop_back(1))}\n"
+    },
+    "initial_number_drop_back_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_drop_front_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_front(3,1))}\n"
+    },
+    "initial_number_drop_front_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.drop_front(1))}\n"
+    },
+    "initial_number_drop_front_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_reversed_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(reversed(3))}\n"
+    },
+    "initial_number_reversed_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.reversed())}\n"
+    },
+    "initial_number_reversed_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_slice_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(slice(3,1,1))}\n"
+    },
+    "initial_number_slice_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.slice(1,1))}\n"
+    },
+    "initial_number_slice_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_sorted_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(sorted(3))}\n"
+    },
+    "initial_number_sorted_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.sorted())}\n"
+    },
+    "initial_number_sorted_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_take_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take(3,1))}\n"
+    },
+    "initial_number_take_last_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take_last(3,1))}\n"
+    },
+    "initial_number_take_last_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.take_last(1))}\n"
+    },
+    "initial_number_take_last_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_take_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.take(1))}\n"
+    },
+    "initial_number_take_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "needed_concat_arrays_second_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(concat_arrays([\"head\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_concat_arrays_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(concat_arrays({items=\"bad\";items+=1;[\"head\",\"tail\"]},[\"second\"]).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_count_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {order=\"\";return(take([\"tail\"],{items=\"bad\";items+=1;1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+    },
+    "needed_count_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take([\"tail\"],{items=\"bad\";items+=1;1}))}\n"
+    },
+    "needed_drop_back_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_back([\"head\",\"tail\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_drop_back_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_back({items=\"bad\";items+=1;[\"head\",\"tail\"]},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_drop_front_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_front([\"head\",\"tail\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_drop_front_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_front({items=\"bad\";items+=1;[\"head\",\"tail\"]},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_reversed_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(reversed({items=\"bad\";items+=1;[\"head\",\"tail\"]}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_reversed_source_receiver": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return({items=\"bad\";items+=1;[\"head\"]}.reversed().set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(slice([\"head\",\"tail\"],1,{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_count_receiver": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return([\"head\",\"tail\"].slice(1,{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(slice({items=\"bad\";items+=1;[\"head\",\"tail\"]},1,1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_start_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(slice([\"head\",\"tail\"],{items=\"bad\";items+=1;1},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_sorted_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(sorted({items=\"bad\";items+=1;[\"head\",\"tail\"]}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_source_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {order=\"\";return(take({items=\"bad\";items+=1;[\"tail\"]},1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+    },
+    "needed_source_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take({items=\"bad\";items+=1;[\"tail\"]},1))}\n"
+    },
+    "needed_take_last_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take_last([\"head\",\"tail\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_take_last_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take_last({items=\"bad\";items+=1;[\"head\",\"tail\"]},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "optional_drop_back_free": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_back([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_drop_back_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].drop_back().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_drop_front_free": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_front([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_drop_front_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].drop_front().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_slice_free": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=slice([\"head\",\"tail\"],1).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_slice_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].slice(1).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_free": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_last_free": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take_last([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_last_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].take_last().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].take().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "prior_array": {
+      "fresh": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=array(1).take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_copy": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=copy(3).take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].count().take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_key_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.count_keys().take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_length": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=\"abc\".length().take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_view": {
+      "fresh": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=sorted_keys({\"k\":1}).take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    }
+  },
+  "puc": {
+    "extra_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"head\",\"tail\"]},[\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.concat_arrays([\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_back_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_back({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_back_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.drop_back(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_front_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_front({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_drop_front_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.drop_front(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_reversed_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=reversed({order=cat(order,\"S\");[\"head\",\"tail\"]},{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_reversed_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.reversed({order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_slice_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=slice({order=cat(order,\"S\");[\"head\",\"tail\"]},1,1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_slice_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.slice(1,1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_sorted_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=sorted({order=cat(order,\"S\");[\"head\",\"tail\"]},{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_sorted_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.sorted({order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_last_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take_last({order=cat(order,\"S\");[\"head\",\"tail\"]},1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_last_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.take_last(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "extra_take_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          "ran",
+          "SAKW"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.take(1,{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "initial_hash_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(concat_arrays({\"k\":1},[\"second\"]))}\n"
+    },
+    "initial_hash_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          {
+            "k": 1
+          },
+          "second"
+        ]
+      },
+      "source": "Value:: I {return({\"k\":1}.concat_arrays([\"second\"]))}\n"
+    },
+    "initial_hash_concat_arrays_with": {
+      "fresh": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.concat_arrays([\"second\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_drop_back_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_back({\"k\":1},1))}\n"
+    },
+    "initial_hash_drop_back_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.drop_back(1))}\n"
+    },
+    "initial_hash_drop_back_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_drop_front_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_front({\"k\":1},1))}\n"
+    },
+    "initial_hash_drop_front_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.drop_front(1))}\n"
+    },
+    "initial_hash_drop_front_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_reversed_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(reversed({\"k\":1}))}\n"
+    },
+    "initial_hash_reversed_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.reversed())}\n"
+    },
+    "initial_hash_reversed_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_slice_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(slice({\"k\":1},1,1))}\n"
+    },
+    "initial_hash_slice_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.slice(1,1))}\n"
+    },
+    "initial_hash_slice_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_sorted_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(sorted({\"k\":1}))}\n"
+    },
+    "initial_hash_sorted_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.sorted())}\n"
+    },
+    "initial_hash_sorted_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_take_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take({\"k\":1},1))}\n"
+    },
+    "initial_hash_take_last_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take_last({\"k\":1},1))}\n"
+    },
+    "initial_hash_take_last_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.take_last(1))}\n"
+    },
+    "initial_hash_take_last_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_hash_take_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return({\"k\":1}.take(1))}\n"
+    },
+    "initial_hash_take_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(concat_arrays(undef,[\"second\"]))}\n"
+    },
+    "initial_null_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(undef.concat_arrays([\"second\"]))}\n"
+    },
+    "initial_null_concat_arrays_with": {
+      "fresh": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.concat_arrays([\"second\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_drop_back_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_back(undef,1))}\n"
+    },
+    "initial_null_drop_back_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.drop_back(1))}\n"
+    },
+    "initial_null_drop_back_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_drop_front_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_front(undef,1))}\n"
+    },
+    "initial_null_drop_front_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.drop_front(1))}\n"
+    },
+    "initial_null_drop_front_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_reversed_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(reversed(undef))}\n"
+    },
+    "initial_null_reversed_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.reversed())}\n"
+    },
+    "initial_null_reversed_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_slice_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(slice(undef,1,1))}\n"
+    },
+    "initial_null_slice_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.slice(1,1))}\n"
+    },
+    "initial_null_slice_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_sorted_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(sorted(undef))}\n"
+    },
+    "initial_null_sorted_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.sorted())}\n"
+    },
+    "initial_null_sorted_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_take_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take(undef,1))}\n"
+    },
+    "initial_null_take_last_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take_last(undef,1))}\n"
+    },
+    "initial_null_take_last_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.take_last(1))}\n"
+    },
+    "initial_null_take_last_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_null_take_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(undef.take(1))}\n"
+    },
+    "initial_null_take_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=undef.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_concat_arrays_free": {
+      "fresh": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(concat_arrays(3,[\"second\"]))}\n"
+    },
+    "initial_number_concat_arrays_receiver": {
+      "fresh": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "plan": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          3,
+          "second"
+        ]
+      },
+      "source": "Value:: I {return(3.concat_arrays([\"second\"]))}\n"
+    },
+    "initial_number_concat_arrays_with": {
+      "fresh": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          2,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.concat_arrays([\"second\"]).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_drop_back_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_back(3,1))}\n"
+    },
+    "initial_number_drop_back_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.drop_back(1))}\n"
+    },
+    "initial_number_drop_back_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.drop_back(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_drop_front_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(drop_front(3,1))}\n"
+    },
+    "initial_number_drop_front_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.drop_front(1))}\n"
+    },
+    "initial_number_drop_front_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.drop_front(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_reversed_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(reversed(3))}\n"
+    },
+    "initial_number_reversed_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.reversed())}\n"
+    },
+    "initial_number_reversed_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.reversed().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_slice_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(slice(3,1,1))}\n"
+    },
+    "initial_number_slice_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.slice(1,1))}\n"
+    },
+    "initial_number_slice_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.slice(1,1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_sorted_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(sorted(3))}\n"
+    },
+    "initial_number_sorted_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.sorted())}\n"
+    },
+    "initial_number_sorted_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.sorted().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_take_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take(3,1))}\n"
+    },
+    "initial_number_take_last_free": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(take_last(3,1))}\n"
+    },
+    "initial_number_take_last_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.take_last(1))}\n"
+    },
+    "initial_number_take_last_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.take_last(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "initial_number_take_receiver": {
+      "fresh": {
+        "value": []
+      },
+      "input": "x",
+      "native": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      },
+      "profile_only": true,
+      "restored": {
+        "value": []
+      },
+      "source": "Value:: I {return(3.take(1))}\n"
+    },
+    "initial_number_take_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=3.take(1).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "needed_concat_arrays_second_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(concat_arrays([\"head\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_concat_arrays_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(concat_arrays({items=\"bad\";items+=1;[\"head\",\"tail\"]},[\"second\"]).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_count_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {order=\"\";return(take([\"tail\"],{items=\"bad\";items+=1;1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+    },
+    "needed_count_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take([\"tail\"],{items=\"bad\";items+=1;1}))}\n"
+    },
+    "needed_drop_back_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_back([\"head\",\"tail\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_drop_back_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_back({items=\"bad\";items+=1;[\"head\",\"tail\"]},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_drop_front_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_front([\"head\",\"tail\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_drop_front_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(drop_front({items=\"bad\";items+=1;[\"head\",\"tail\"]},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_reversed_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(reversed({items=\"bad\";items+=1;[\"head\",\"tail\"]}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_reversed_source_receiver": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return({items=\"bad\";items+=1;[\"head\"]}.reversed().set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(slice([\"head\",\"tail\"],1,{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_count_receiver": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return([\"head\",\"tail\"].slice(1,{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(slice({items=\"bad\";items+=1;[\"head\",\"tail\"]},1,1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_slice_start_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(slice([\"head\",\"tail\"],{items=\"bad\";items+=1;1},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_sorted_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(sorted({items=\"bad\";items+=1;[\"head\",\"tail\"]}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_source_error_composed": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {order=\"\";return(take({items=\"bad\";items+=1;[\"tail\"]},1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+    },
+    "needed_source_error_terminal": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": false,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take({items=\"bad\";items+=1;[\"tail\"]},1))}\n"
+    },
+    "needed_take_last_count_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take_last([\"head\",\"tail\"],{items=\"bad\";items+=1;1}).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "needed_take_last_source_free": {
+      "fresh": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "input": "x",
+      "native": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "plan": {
+        "code": "generated_execution_failed",
+        "error": "Generated Lua parser execution failed: RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": true,
+        "runtime": false
+      },
+      "profile_only": true,
+      "restored": {
+        "code": "binding_kind_mismatch",
+        "diagnostic_stage": "runtime_execution",
+        "error": "RuntimeInterpreterException: binding_kind_mismatch",
+        "generated": false,
+        "runtime": true
+      },
+      "source": "Value:: I {return(take_last({items=\"bad\";items+=1;[\"head\",\"tail\"]},1).set_key(\"k\",1).coalesce(\"masked\"))}\n"
+    },
+    "optional_drop_back_free": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_back([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_drop_back_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].drop_back().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_drop_front_free": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=drop_front([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_drop_front_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].drop_front().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_slice_free": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=slice([\"head\",\"tail\"],1).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_slice_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].slice(1).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_free": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_last_free": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=take_last([\"head\",\"tail\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_last_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "tail"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].take_last().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "optional_take_receiver": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "W"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[\"head\",\"tail\"].take().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "prior_array": {
+      "fresh": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=array(1).take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_copy": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=copy(3).take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=[1].count().take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_key_count": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out={\"k\":1}.count_keys().take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_length": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=\"abc\".length().take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "prior_view": {
+      "fresh": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "input": "x",
+      "native": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "profile_only": true,
+      "restored": {
+        "value": [
+          null,
+          "A"
+        ]
+      },
+      "source": "Value:: I {order=\"\";out=sorted_keys({\"k\":1}).take({order=cat(order,\"A\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    }
+  }
+}

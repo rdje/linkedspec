@@ -1,0 +1,81 @@
+{
+  "per_host": {
+    "puc": {
+      "version": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio",
+      "programs": 156,
+      "shared": 37,
+      "own_controls": 119,
+      "profiles": 123,
+      "original_failures": 19,
+      "preserved": 137,
+      "needed_errors": 19,
+      "normal_checks": 903,
+      "before_failures": 76,
+      "after_failures": 0,
+      "direct_counted_checks": 1713,
+      "with_observations": 12,
+      "with_fences": 3,
+      "private_inverse": 19,
+      "private_restored": 156,
+      "artifact_pairs": 156
+    },
+    "luajit": {
+      "version": "LuaJIT 2.1.1788460057 -- Copyright (C) 2005-2026 Mike Pall. https://luajit.org/",
+      "programs": 156,
+      "shared": 37,
+      "own_controls": 119,
+      "profiles": 123,
+      "original_failures": 19,
+      "preserved": 137,
+      "needed_errors": 19,
+      "normal_checks": 903,
+      "before_failures": 76,
+      "after_failures": 0,
+      "direct_counted_checks": 1713,
+      "with_observations": 12,
+      "with_fences": 3,
+      "private_inverse": 19,
+      "private_restored": 156,
+      "artifact_pairs": 156
+    }
+  },
+  "actual_native_products": {
+    "intake": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "before": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "after": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "direct": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "inverse": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "restored": {
+      "puc": 3,
+      "luajit": 3
+    }
+  },
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "hidden PUC original failure",
+    "LuaJIT consumer effects",
+    "PUC later body",
+    "LuaJIT needed error masked",
+    "PUC initial source normalized",
+    "LuaJIT Bool to Number",
+    "PUC excluded profile omitted",
+    "actual LuaJIT module drift",
+    "direct fixture binding omitted"
+  ],
+  "limits": "Installed hosts only; fresh modules share runtime/process. Full native/cache/transitive/toolchain custody4.2/SESSION5, declared5.4, registration/context/isolation/full23.4 remain separate."
+}

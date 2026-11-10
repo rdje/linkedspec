@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":17157,"lines":204,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md","sha256":"472f314e7daa83f3c4cfc6f284a06ec87492c21c0b1010332ebba4ae886a6179","type":"member"}
 {"bytes":29326,"lines":388,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/macos-rust-first-launch-validation-latency.md","sha256":"55f3498086fb5cfa9884329a6306837c309985bf4a634bbf7230e0bbbaba8986","type":"member"}
 {"bytes":3219,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-function-scope-contract-conflict.md","sha256":"1b41fe3f2a65a449335d468f05392f620f49fa7b47548c6f657e9d7c8e7e5a5e","type":"member"}
 {"bytes":6317,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-dart-runtime.md","sha256":"48c56718870d18c96ec81417c2bccab88b9e83e9ef6a9f5f6e5c6cf2a74ce76c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3354,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-receiver-compilation.md","sha256":"9ff84cf949601d675a474d06c11f4d5e9c0c154944afecf3241a042ccbd87384","type":"member"}
 {"bytes":5109,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-count-result-source-guards.md","sha256":"7888997ed6c95e20c8ab76986adb371a370805b015877fa811a8357192d6ed58","type":"member"}
 {"bytes":5360,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-family-source-acceptance.md","sha256":"be227aced36e67445a65bd97f1391b1d532d1ebc39d0bf31ac4f4bf9660adc99","type":"member"}
-{"bytes":5142,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-producer-source-diagnosis.md","sha256":"4627df3cb92a47d44fe28e84ba89b7df2790fc7dedf67cfe9e1bbe7a49ecce08","type":"member"}

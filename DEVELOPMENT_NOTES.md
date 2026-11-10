@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — Installed Lua Array results own continuations
+
+Keep the initial producer fallback separate from result kind ownership: one initial-transform permission excludes earlier retained/copy/constructor/size/view/Hash/Array owners. Add classifiers under typed_source.receiver_mutation to avoid interpreter chunk locals. Actual public compiled with operands remain block_value, requiring no Julia contextual exception. Source diff75 insertions/one deletion, exact three-line runner group, byte-exact producer/scalar/loop regions. Each host independently freezes119 own questions/123 profiles before production and retains all19 needed-error records. Six actual source/native/artifact epochs, same-path inverse/restored routing and first readonly0/nine corruptions establish bounded behavior; complete sources/selected fixtures/grammar/instruments precede native build/use and three actual products precede loading. Direct1713 counted checks plus12 observations/3 fences is not1728 counted checks. Evidence: docs/checkpoints/array-transform-result-guard-lua-2026-11-10/REVIEW.md. Broader custody/declared5.4/full23.4 remain separately owned.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.20 — Test completion and input custody are separate assertions
 
 The original direct292 capture binds owned dart sources but misses older with/

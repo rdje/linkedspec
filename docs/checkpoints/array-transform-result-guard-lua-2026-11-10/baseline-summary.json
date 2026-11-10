@@ -1,0 +1,52 @@
+{
+  "luajit": {
+    "actual_host_line": "HOST Lua 5.1 LuaJIT 2.1.1788460057",
+    "original_failures": [
+      "take_free_hash_guard",
+      "take_receiver_hash_guard",
+      "take_last_free_hash_guard",
+      "take_last_receiver_hash_guard",
+      "drop_front_free_hash_guard",
+      "drop_front_receiver_hash_guard",
+      "drop_back_free_hash_guard",
+      "drop_back_receiver_hash_guard",
+      "slice_free_hash_guard",
+      "slice_receiver_hash_guard",
+      "sorted_free_hash_guard",
+      "sorted_receiver_hash_guard",
+      "reversed_free_hash_guard",
+      "reversed_receiver_hash_guard",
+      "concat_arrays_free_hash_guard",
+      "concat_arrays_receiver_hash_guard",
+      "take_later_with",
+      "reverse_copy_later_with",
+      "sort_logical_later_with"
+    ],
+    "profiles": 123
+  },
+  "puc": {
+    "actual_host_line": "HOST Lua 5.5 ",
+    "original_failures": [
+      "take_free_hash_guard",
+      "take_receiver_hash_guard",
+      "take_last_free_hash_guard",
+      "take_last_receiver_hash_guard",
+      "drop_front_free_hash_guard",
+      "drop_front_receiver_hash_guard",
+      "drop_back_free_hash_guard",
+      "drop_back_receiver_hash_guard",
+      "slice_free_hash_guard",
+      "slice_receiver_hash_guard",
+      "sorted_free_hash_guard",
+      "sorted_receiver_hash_guard",
+      "reversed_free_hash_guard",
+      "reversed_receiver_hash_guard",
+      "concat_arrays_free_hash_guard",
+      "concat_arrays_receiver_hash_guard",
+      "take_later_with",
+      "reverse_copy_later_with",
+      "sort_logical_later_with"
+    ],
+    "profiles": 123
+  }
+}

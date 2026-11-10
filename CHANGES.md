@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — Installed Lua Array-transform result guards (78.5)
+
+Each installed Lua5.5.1/LuaJIT2.1.1788460057 independently finds19 ordinary Array-result guard gaps. Canonical result ownership now rejects wrong-kind consumers before effects, while preserving initial source/arity/error policies and earlier owners. No new chunk locals, producer/scalar_result/loop-index or emitted-format changes. Each156/four routes passes903 checks; selected direct1713 plus12 with observations/3 fences, private19RED/156PASS and first readonly/nine corruptions pass. All137 healthy cases/123 profiles/156 artifact pairs per host stay exact; current direct-input identities pass. Book/facts/live/task/roadmap route to owned selection23.1.39 after normal landing. Correct stale current frontier rows; full custody4.2/SESSION5/declared5.4/admission remain separate.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.20 — Qualify Dart direct-test fixture inputs
 
 Preserve the original accepted packet/source and expose its six missing external

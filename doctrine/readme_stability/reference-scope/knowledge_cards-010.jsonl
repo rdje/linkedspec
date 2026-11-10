@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1823,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-test-input-layout-drift.md","sha256":"b3edb04f4921ff80b108e4ef9427c8c44a9649b192c5b9ab8bc0326f95197836","type":"member"}
 {"bytes":4285,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/receiver-string-bridge-guard-gap.md","sha256":"22fd3ab9478011c2bca9aeddcee469567a148fd95bb5fec5bce090f002a9f626","type":"member"}
 {"bytes":4979,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-book-sequence-drift.md","sha256":"d868f14d8c568572580742edb8a07bb82922f260feb237811c77aa198c06448c","type":"member"}
 {"bytes":1651,"lines":23,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-bound-commit-authoring.md","sha256":"ba0f6b3d69125fbf2148ccc5c27b673185579711263cf70a89a04b5ff1d911b4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6904,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mark-based-capture-family.md","sha256":"edc8c6de8b613146c7216c05ee3c698d3f6cb97253a736bb9825b60c89601d12","type":"member"}
 {"bytes":1776,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-marker-short-alias-control.md","sha256":"6130642bccb787992dbaa80fa420d72b24e16c2781e2ab8545852478e4a8ffa1","type":"member"}
 {"bytes":3217,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-match-presence-is-not-an-offset-sentinel.md","sha256":"5ce44e19ac7981f547b513e7355a79cedb72e794065ebb8d3bd891fa951a1e37","type":"member"}
-{"bytes":4912,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mcp-caught-panic-stderr-gap.md","sha256":"c603bf531cdc179978c0d84f712d6058fb297e7164ee1fbb426f805c3a1733b1","type":"member"}
